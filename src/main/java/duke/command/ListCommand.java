@@ -24,6 +24,7 @@ public class ListCommand extends Command {
 
         for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i);
+            assert task != null : "Task is null";
             contents += String.format("\n\t%d.%s", i, task.toString());
         }
 
