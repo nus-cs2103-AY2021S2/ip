@@ -4,9 +4,14 @@ import duke.DukeException;
 import duke.TaskList;
 
 public class ByeCommand extends Command {
+
+    /**
+     * Instantiates a new ByeCommand object.
+     * @param commandSplit user command split by spaces.
+     */
     public ByeCommand(String[] commandSplit) {
         super(commandSplit);
-        assert commandSplit.length == 1 && commandSplit[0].equals("bye"): "Bye command should be \"bye\"";
+        assert commandSplit.length == 1 && commandSplit[0].equals("bye") : "Bye command should be \"bye\"";
     }
 
     /**

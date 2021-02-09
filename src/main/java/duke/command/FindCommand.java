@@ -10,9 +10,13 @@ import duke.task.Task;
 
 public class FindCommand extends Command {
 
+    /**
+     * Instantiates a new FindCommand object.
+     * @param commandSplit user command split by spaces.
+     */
     public FindCommand(String[] commandSplit) {
         super(commandSplit);
-        assert commandSplit.length >= 1 && commandSplit[0].equals("find"): "Must have find keyword.";
+        assert commandSplit.length >= 1 && commandSplit[0].equals("find") : "Must have find keyword.";
     }
 
     /**

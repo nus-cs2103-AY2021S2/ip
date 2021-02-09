@@ -38,7 +38,13 @@ public class Helper {
         return join(arr, start, arr.length - 1);
     }
 
-
+    /**
+     * Gets the index of a given value in a given array.
+     * @param arr array to be searched.
+     * @param value value to look for.
+     * @param <T> type of the value and the type which the array contains.
+     * @return the index of the value within the array.
+     */
     public static <T> int arrayIndexOf(T[] arr, T value) {
         IntStream myStream = IntStream.range(0, arr.length);
         //Filters the stream to get indices of array which has elements equal to value that we are looking for.

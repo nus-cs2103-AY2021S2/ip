@@ -14,9 +14,13 @@ import duke.task.Task;
 
 public class ListCommand extends Command {
 
+    /**
+     * Instantiates a new ListCommand object.
+     * @param commandSplit user command split by spaces.
+     */
     public ListCommand(String[] commandSplit) {
         super(commandSplit);
-        assert commandSplit.length >= 1 && commandSplit[0].equals("list"): "Must have list keyword";
+        assert commandSplit.length >= 1 && commandSplit[0].equals("list") : "Must have list keyword";
     }
 
     private LocalDate parseDate(String date) throws DukeException {

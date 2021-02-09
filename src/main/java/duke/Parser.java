@@ -93,7 +93,7 @@ public class Parser {
 
         boolean matchDeadline = deadlinePattern.matcher(input).find();
         boolean matchEvent = eventPattern.matcher(input).find();
-        boolean matchTodo =  toDoPattern.matcher(input).find();
+        boolean matchTodo = toDoPattern.matcher(input).find();
 
         //If it is not deadline, todo or event, it is invalid task entry.
         if (!matchDeadline && !matchEvent && !matchTodo) {

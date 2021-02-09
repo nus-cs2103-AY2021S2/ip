@@ -14,14 +14,18 @@ import duke.task.ToDo;
 
 public class AddCommand extends Command {
 
+    /**
+     * Instantiates a new AddCommand object.
+     * @param commandSplit user command split by spaces.
+     */
+    public AddCommand(String[] commandSplit) {
+        super(commandSplit);
+        assert commandSplit.length > 1 && isValidAddKeyword(commandSplit[0]) : "Add command should have valid keyword.";
+    }
+
     private static boolean isValidAddKeyword(String keyword) {
         Set<String> validKeywords = new HashSet<>(Arrays.asList("deadline", "event", "todo"));
         return validKeywords.contains(keyword);
-    }
-
-    public AddCommand(String[] commandSplit) {
-        super(commandSplit);
-        assert commandSplit.length > 1 && isValidAddKeyword(commandSplit[0]): "Add command should have valid keyword.";
     }
 
     /**

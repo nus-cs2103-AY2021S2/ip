@@ -4,6 +4,11 @@ import duke.DukeException;
 import duke.TaskList;
 
 public class DeleteCommand extends Command {
+
+    /**
+     * Instantiates a new DeleteCommand object.
+     * @param commandSplit user command split by spaces.
+     */
     public DeleteCommand(String[] commandSplit) {
         super(commandSplit);
         assert commandSplit.length > 1 && commandSplit[0].equals("delete")
