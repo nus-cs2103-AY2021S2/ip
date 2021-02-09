@@ -63,7 +63,6 @@ public class TaskList {
      *
      * @param task The task to be added to the list of tasks.
      */
-
     public void addTask(Task task) {
         tasks.add(task);
     }
@@ -73,7 +72,6 @@ public class TaskList {
      *
      * @param taskIndex The index of the task to be removed.
      */
-
     public Task deleteTask(int taskIndex) {
         Task toRemove = tasks.get(taskIndex);
         toRemove.setNotDone();

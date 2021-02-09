@@ -13,6 +13,7 @@ import duke.exception.DukeDateTimeException;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,14 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final String EVENT = "event";
+    private static final String DEADLINE = "deadline";
+    private static final String TODO = "todo";
+    private static final String FIND = "find";
+    private static final String LIST = "list";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String EXIT = "bye";
 
     /**
      * Parses user input and returns a Command corresponding to user input.
@@ -38,53 +47,69 @@ public class Parser {
         Command res;
         try {
             switch (command) {
-            case "todo":
-                checkStringArgument(split, command);
-                String description = userInput.substring(5);
-                res = new AddCommand(new ToDo(description));
+            case TODO:
+                res = handleToDo(split, userInput);
                 break;
-            case "deadline":
-                checkStringArgument(split, command);
-                String[] deadlineDetails = userInput.substring(9).split(" /by ");
-                checkDateTime(deadlineDetails);
-                String deadlineDescription = deadlineDetails[0];
-                LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlineDetails[1].trim(), formatter);
-                res = new AddCommand(new Deadline(deadlineDescription, deadlineDateTime));
+            case DEADLINE:
+                res = handleDateTimeTasks(split, userInput, DEADLINE);
                 break;
-            case "event":
-                checkStringArgument(split, command);
-                String[] eventDetails = userInput.substring(6).split(" /at ");
-                checkDateTime(eventDetails);
-                String eventDescription = eventDetails[0];
-                LocalDateTime eventDateTime = LocalDateTime.parse(eventDetails[1].trim(), formatter);
-                res = new AddCommand(new Event(eventDescription, eventDateTime));
+            case EVENT:
+                res = handleDateTimeTasks(split, userInput, EVENT);
                 break;
-            case "list":
+            case LIST:
                 res = new ListCommand();
                 break;
-            case "done":
-                int completedTaskIdx = checkNumericalArgument(split, tasks);
-                res = new DoneCommand(completedTaskIdx);
+            case DONE:
+                res = handleTaskOps(split, tasks, DONE);
                 break;
-            case "delete":
-                int taskToDelete = checkNumericalArgument(split, tasks);
-                res = new DeleteCommand(taskToDelete);
+            case DELETE:
+                res = handleTaskOps(split, tasks, DELETE);
                 break;
-            case "find":
-                checkStringArgument(split, command);
-                String keyword = userInput.substring(5);
-                res = new FindCommand(keyword);
+            case FIND:
+                res = handleFind(split, userInput);
                 break;
-            case "bye":
+            case EXIT:
                 res = new ExitCommand();
                 break;
             default:
                 res = new InvalidCommand("No such command!");
             }
         } catch (DukeException e) {
-            res = new InvalidCommand(e.getMessage());
+            return new InvalidCommand(e.getMessage());
         }
         return res;
+    }
+
+    private static AddCommand handleToDo(String[] split, String userInput) throws DukeArgumentException {
+        checkStringArgument(split, TODO);
+        String description = userInput.substring(5);
+        return new AddCommand(new ToDo(description));
+    }
+
+    private static AddCommand handleDateTimeTasks(String[] split, String userInput, String command)
+            throws DukeArgumentException, DukeDateTimeException {
+        int detailsIdx = command.equals(DEADLINE) ? 9 : 6;
+        String regex = command.equals(DEADLINE) ? " /by " : " /at ";
+        checkStringArgument(split, command);
+        String[] taskDetails = userInput.substring(detailsIdx).split(regex);
+        checkDateTime(taskDetails);
+        String description = taskDetails[0];
+        LocalDateTime dateTime = LocalDateTime.parse(taskDetails[1].trim(), formatter);
+        Task toAdd = command.equals(DEADLINE) ? new Deadline(description, dateTime)
+                                         : new Event(description, dateTime);
+        return new AddCommand(toAdd);
+    }
+
+    private static FindCommand handleFind(String[] split, String userInput) throws DukeArgumentException {
+        checkStringArgument(split, FIND);
+        String keyword = userInput.substring(5);
+        return new FindCommand(keyword);
+    }
+
+    private static Command handleTaskOps(String[] split, TaskList tasks, String command) throws DukeArgumentException {
+        int taskIdx = checkNumericalArgument(split, tasks);
+        return command.equals(DONE) ? new DoneCommand(taskIdx)
+                                    : new DeleteCommand(taskIdx);
     }
 
     /**
@@ -95,11 +120,13 @@ public class Parser {
      * @throws DukeArgumentException when user did not enter a keyword or description.
      */
     private static void checkStringArgument(String[] split, String command) throws DukeArgumentException {
-        if (split.length == 1 && command.equals("find")) {
+        if (split.length == 1 && command.equals(FIND)) {
             throw new DukeArgumentException("You have not entered a keyword!");
-        } else if (split.length == 1) {
+        } else if (split.length == 1 && command.equals(TODO)) {
             throw new DukeArgumentException("You have not entered a task description!");
-        } else {}
+        } else {
+            // Do nothing if a keyword or task description is provided.
+        }
     }
 
     /**

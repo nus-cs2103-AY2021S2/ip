@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
             Task completedTask = tasks.getTask(completedTaskIdx);
             completedTask.setDone();
             storage.storeData(tasks);
-            return messageFormatter.formatDoneCmdMsg(completedTask);
+            return messageFormatter.formatDoneMsg(completedTask);
         } catch (DukeStorageException e) {
             return e.getMessage();
         }

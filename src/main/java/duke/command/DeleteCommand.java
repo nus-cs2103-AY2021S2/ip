@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
         try {
             Task taskRemoved = tasks.deleteTask(indexToDelete);
             storage.storeData(tasks);
-            return messageFormatter.formatRemoveCmdMsg(taskRemoved, tasks);
+            return messageFormatter.formatRemoveMsg(taskRemoved, tasks);
         } catch (DukeStorageException e) {
             return e.getMessage();
         }

@@ -44,6 +44,6 @@ public class FindCommand extends Command {
                 matchingTasks.add(task);
             }
         }
-        return messageFormatter.formatFindCmdMsg(new TaskList(matchingTasks));
+        return messageFormatter.formatFindMsg(new TaskList(matchingTasks));
     }
 }

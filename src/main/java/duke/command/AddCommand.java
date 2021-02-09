@@ -36,7 +36,7 @@ public class AddCommand extends Command {
         try {
             tasks.addTask(toAdd);
             storage.storeData(tasks);
-            return messageFormatter.formatAddCmdMsg(toAdd, tasks);
+            return messageFormatter.formatAddMsg(toAdd, tasks);
         } catch (DukeStorageException e) {
             return e.getMessage();
         }
