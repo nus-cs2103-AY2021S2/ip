@@ -50,7 +50,7 @@ public class Duke {
                 Files.createDirectory(Paths.get(FOLDER_PATH));
                 TaskList.setList(new ArrayList<Task>());
             } catch (IOException e1) {
-                System.out.println(Ui.lineGetter() + " Cannot create new directory\n" + Ui.lineGetter());
+                assert false : "Ui.lineGetter() + \" Cannot create new directory\\n\" + Ui.lineGetter()";
             }
             //shld just be ioexception, shldnt come to this catch block
             //File f = new File(relPath); //no need to create file here will get auto created when writing
@@ -115,7 +115,7 @@ public class Duke {
                 try {
                     FileAccessor.writeToTasks(FOLDER_PATH + FILE_NAME, TaskList.getList());
                 } catch (IOException e) {
-                    System.out.println(Ui.informUnableSave());
+                    assert false : Ui.informUnableSave();
                 }
             } catch (IllegalArgumentException e) {
                 response += Ui.informIllegalArgExc();
