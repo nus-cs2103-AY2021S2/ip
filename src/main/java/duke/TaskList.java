@@ -22,6 +22,7 @@ public class TaskList {
      * @return Task at the specified index.
      */
     public Task get(int index) {
+        assert index >= 0;
         return taskList.get(index);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      * @return the Task that was removed.
      */
     public Task remove(int index) {
+        assert index >= 0;
         return taskList.remove(index);
     }
 

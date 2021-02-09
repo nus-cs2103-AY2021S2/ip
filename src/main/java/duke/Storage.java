@@ -26,6 +26,7 @@ public class Storage {
      * @param task the Task to be added.
      */
     public void addToFile(Task task) {
+        assert !this.filePath.isEmpty();
         File save = new File(this.filePath);
         try {
             FileWriter fw = new FileWriter(save, true);
@@ -41,6 +42,7 @@ public class Storage {
      * @param index the index of the Task to be deleted.
      */
     public void deleteFromFile(int index) {
+        assert !this.filePath.isEmpty();
         File save = new File(this.filePath);
         File temp = new File("./data/temp.txt");
         int ctr = 0;
@@ -76,6 +78,7 @@ public class Storage {
      * @param index the index of the Task to be marked as done.
      */
     public void markDoneInFile(int index) {
+        assert !this.filePath.isEmpty();
         File save = new File(this.filePath);
         File temp = new File("./data/temp.txt");
         int ctr = 0;
@@ -113,6 +116,7 @@ public class Storage {
      * @throws IOException
      */
     public void loadData(TaskList taskList) throws IOException {
+        assert !this.filePath.isEmpty();
         File save = new File(this.filePath);
         if (save.getParentFile() != null) {
             save.getParentFile().mkdirs();

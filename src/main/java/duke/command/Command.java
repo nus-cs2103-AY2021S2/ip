@@ -17,8 +17,8 @@ public abstract class Command {
         this.isExit = false;
     }
 
-    public void setExit(boolean exit) {
-        this.isExit = exit;
+    public void setIsExit(boolean isExit) {
+        this.isExit = isExit;
     }
 
     public String getArguments() {
