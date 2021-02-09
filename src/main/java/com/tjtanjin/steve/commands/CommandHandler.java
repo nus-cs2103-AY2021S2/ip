@@ -19,6 +19,7 @@ public class CommandHandler {
     private final HelpCommand HELP_COMMAND;
     private final ListCommand LIST_COMMAND;
     private final TodoCommand TODO_COMMAND;
+    private final UndoCommand UNDO_COMMAND;
 
     /**
      * Constructor for CommandHandler.
@@ -42,6 +43,7 @@ public class CommandHandler {
         cmdInfo.put("DELETE", "delete <task index> | Description: deletes by index a given task");
         cmdInfo.put("HELP", "help | Description: lists this help menu");
         cmdInfo.put("FIND", "find <name> | Description: finds task by name");
+        cmdInfo.put("UNDO", "undo | Description: undo the last task modification");
 
         //initialize commands
         this.BYE_COMMAND = new ByeCommand(cmdInfo.get("BYE"));
@@ -53,6 +55,7 @@ public class CommandHandler {
         this.HELP_COMMAND = new HelpCommand(cmdInfo.get("HELP"), cmdInfo);
         this.LIST_COMMAND = new ListCommand(cmdInfo.get("LIST"), taskHandler);
         this.TODO_COMMAND = new TodoCommand(cmdInfo.get("TODO"), taskHandler);
+        this.UNDO_COMMAND = new UndoCommand(cmdInfo.get("UNDO"), taskHandler);
     }
 
     /**
@@ -134,5 +137,14 @@ public class CommandHandler {
      */
     public TodoCommand getTodoCommand() {
         return this.TODO_COMMAND;
+    }
+
+    /**
+     * Gets the undo command object.
+     *
+     * @return undo command object
+     */
+    public UndoCommand getUndoCommand() {
+        return this.UNDO_COMMAND;
     }
 }

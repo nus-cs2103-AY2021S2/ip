@@ -25,7 +25,7 @@ import com.tjtanjin.steve.ui.UiHandler;
  */
 public class StorageHandler {
 
-    private final ArrayList<Task> TASKS = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
     private final String PATH;
     private JSONArray taskList = new JSONArray();
 
@@ -71,7 +71,7 @@ public class StorageHandler {
         } catch (IOException | ParseException e) {
             //do nothing, empty file is ok just means nothing to load
         }
-        return TASKS;
+        return tasks;
     }
 
     /**
@@ -93,19 +93,19 @@ public class StorageHandler {
         assert type != null;
 
         if (type.equals("TODO")) {
-            TASKS.add(new ToDo(taskName, status));
+            tasks.add(new ToDo(taskName, status));
         } else if (type.equals("DEADLINE")) {
             String endDate = (String) taskDetails.get("endDate");
             LocalDate[] taskDates = new LocalDate[1];
             taskDates[0] = LocalDate.parse(endDate);
-            TASKS.add(new Deadline(taskName, status, taskDates));
+            tasks.add(new Deadline(taskName, status, taskDates));
         } else {
             String startDate = (String) taskDetails.get("startDate");
             String endDate = (String) taskDetails.get("endDate");
             LocalDate[] taskDates = new LocalDate[2];
             taskDates[0] = LocalDate.parse(startDate);
             taskDates[1] = LocalDate.parse(endDate);
-            TASKS.add(new Event(taskName, status, taskDates));
+            tasks.add(new Event(taskName, status, taskDates));
         }
     }
 
@@ -125,6 +125,46 @@ public class StorageHandler {
     public boolean saveTask(int index, String saveType, String taskName,
             String status, String type, LocalDate[] taskDates) {
 
+        JSONObject taskDetails = arrayListToJson(taskName, status, type, taskDates);
+
+        JSONObject taskGroup = new JSONObject();
+        taskGroup.put("task", taskDetails);
+
+        //add or update or delete task
+        if (saveType.equals("NEW")) {
+            taskList.add(taskGroup);
+        } else if (saveType.equals("DONE")) {
+            taskList.set(index, taskGroup);
+        } else {
+            taskList.remove(index);
+        }
+
+        return writeToFile();
+    }
+
+    /**
+     * Reverts task list by one modification.
+     */
+    public boolean revertTask(ArrayList<Task> REVERTED_TASKS) {
+        System.out.println(REVERTED_TASKS.size());
+        this.tasks = REVERTED_TASKS;
+        JSONArray taskList = new JSONArray();
+
+        this.tasks.forEach(task -> {
+            String taskName = task.getTaskName();
+            String status = task.getStatus();
+            String type = task.getType();
+            LocalDate[] taskDates = task.getDates();
+            JSONObject taskDetails = arrayListToJson(taskName, status, type, taskDates);
+            JSONObject taskGroup = new JSONObject();
+            taskGroup.put("task", taskDetails);
+            taskList.add(taskGroup);
+        });
+        this.taskList = taskList;
+        return writeToFile();
+    }
+
+    public JSONObject arrayListToJson(String taskName, String status, String type, LocalDate[] taskDates) {
         JSONObject taskDetails = new JSONObject();
         taskDetails.put("taskName", taskName);
         taskDetails.put("status", status);
@@ -142,19 +182,10 @@ public class StorageHandler {
                 taskDetails.put("endDate", endDateStr);
             }
         }
+        return taskDetails;
+    }
 
-        JSONObject taskGroup = new JSONObject();
-        taskGroup.put("task", taskDetails);
-
-        //add or update or delete task
-        if (saveType.equals("NEW")) {
-            taskList.add(taskGroup);
-        } else if (saveType.equals("DONE")) {
-            taskList.set(index, taskGroup);
-        } else {
-            taskList.remove(index);
-        }
-
+    public boolean writeToFile() {
         //write JSON file
         try (FileWriter file = new FileWriter(this.PATH)) {
 
