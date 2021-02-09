@@ -18,7 +18,7 @@ public class ExitCommand implements Command {
         final List<String> data = tasks.encode();
         storage.saveFile(data);
 
-        return "\tBye. Hope to see you again soon!\n";
+        return ui.getExitMessage();
     }
 
 }

@@ -45,8 +45,8 @@ public class AddCommand implements Command {
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         boolean isInsert = false;
         if (tasks.size() >= 100) {
-            return "\tSorry. The database is full!";
-        } 
+            return ui.getfullDatabaseMessage();
+        }
 
         switch (type) {
         case TODO:
@@ -87,10 +87,8 @@ public class AddCommand implements Command {
 
 
         if (isInsert) {
-            String headerText = "\tGot it. I've added this task: \n";
-            String addedTaskText = String.format("\tTask added: %s\n", tasks.getTaskDescription(tasks.size() - 1));
-            String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", tasks.size(), tasks.size() == 1 ? "" : "s");
-            return headerText + addedTaskText + currentTasksText;
+            boolean hasOnlyOneTask = tasks.size() == 1;
+            return ui.getAddTaskSuccessfulMessage(tasks.getTaskDescription(tasks.size() - 1), hasOnlyOneTask);
         }
 
         return "";

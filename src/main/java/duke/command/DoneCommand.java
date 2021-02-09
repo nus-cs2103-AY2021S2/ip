@@ -20,11 +20,9 @@ public class DoneCommand implements Command {
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         if (0 <= index && index < tasks.size()) {
             tasks.markAsDone(index);
-            String headerText = "\tNice! I've marked this task as done:\n";
-            String taskMarkedText = String.format("\t%s\n", tasks.getTaskDescription(index));
-            return headerText + taskMarkedText;
+            return ui.getMarkTaskAsDoneMessage(tasks.getTaskDescription(index));
         } else {
-            return "\tOops! The index is out of bound.\n";
+            return ui.getIndexOutOfBoundMessage();
         }
     }
 
