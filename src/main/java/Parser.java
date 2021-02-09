@@ -12,7 +12,6 @@ public class Parser {
         userInterface.welcomeUser();
     }
 
-
     private String removeExtraLinesAndSpacesFromInput(String input) {
         String cleanedInput = input.replaceAll("\n", "");
         cleanedInput = cleanedInput.toLowerCase();
@@ -32,7 +31,10 @@ public class Parser {
         if (inputDoesNotContainBye()) {
             return analyseInput(list);
         } else {
-            storage.saveHistory(list);
+            assert input.contains("bye") : "Oh no! You keyed in something I couldn't read :(";
+            if (list.size() != 0){
+                storage.saveHistory(list);
+            }
             return userInterface.userLeaving();
         }
     }
@@ -81,7 +83,9 @@ public class Parser {
      * @return int val index in the list that user wants to mark as completed.
      */
     public int inputDoneAtIndex() throws ArrayIndexOutOfBoundsException {
-        String value = input.split(" ")[1];
+        String[] stringArray = input.split(" ");
+        assert stringArray.length == 2: "Oh no! I don't understand what you want to be marked as done :(";
+        String value = stringArray[1];
         int val = Integer.parseInt(value) - 1;
         return val;
     }
@@ -91,6 +95,7 @@ public class Parser {
      */
     public String markDoneAtIndex(TaskList list) {
         int index = inputDoneAtIndex();
+        assert index < list.size() && index >= 0: "The number you want marked done is not in the list!";
         list.markDone(index);
         return userInterface.userDoneTask(list.getTaskAtIndex(index).toString());
     }
@@ -140,6 +145,9 @@ public class Parser {
      */
     static LocalDateTime inputDateAndTime(String inputDate) {
         String[] dataArray = inputDate.split(" ");
+        assert dataArray.length == 3: "hmmm, I can't compprehend the date and time you keyed in.\n" +
+                                        "Try again in this format 'dd/mm/yyyy tttt' \n" +
+                                        "Eg deadline return book /by 2/12/2019 1800";
         LocalDate formatDate = inputDate(dataArray[1]);
         LocalTime formatTime = inputTime(dataArray[2]);
         return LocalDateTime.of(formatDate, formatTime);
