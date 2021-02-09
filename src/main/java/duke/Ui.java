@@ -113,7 +113,7 @@ public class Ui {
 
     public String showAddDeadLine(Deadline deadline) {
         LocalDateTime time = deadline.getEndTime();
-        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s (by: %s %s %s %s:%s)\n",
+        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s (by: %s %s %s %02d:%02d)\n",
                 deadline.getTaskType(), deadline.getStatusIcon(), deadline.getTaskDescription(),
                 time.getMonth(), time.getDayOfMonth(), time.getYear(), time.getHour(),
                 time.getMinute());
@@ -121,7 +121,7 @@ public class Ui {
 
     public String showAddEvent(Event event) {
         LocalDateTime time = event.getEventTime();
-        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s (at: %s %s %s %s:%s)\n",
+        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s (at: %s %s %s %02d:%02d)\n",
                 event.getTaskType(), event.getStatusIcon(), event.getTaskDescription(),
                 time.getMonth(), time.getDayOfMonth(), time.getYear(), time.getHour(),
                 time.getMinute());

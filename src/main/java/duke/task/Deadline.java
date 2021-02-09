@@ -26,7 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] [%s] %s (by: %s %s %s %s:%s)",
+        return String.format("[%s] [%s] %s (by: %s %s %s %02d:%02d)",
                 this.getTaskType(), this.getStatusIcon(),
                 this.getTaskDescription(), endTime.getMonth(),
                 endTime.getDayOfMonth(), endTime.getYear(),
