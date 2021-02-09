@@ -88,7 +88,7 @@ public class Storage {
         String typeOfTask;
         String taskStatus;
         String taskDescription;
-        Boolean isTaskDone;
+        boolean isTaskDone;
         Task task;
         LocalDate date;
 
@@ -162,29 +162,49 @@ public class Storage {
      */
     private String formatTask(Task task) throws DukeException {
         String line;
-        LocalDate date;
         String description = task.getDescription();
         int isDone;
 
         if (task.getIsDone()) {
             isDone = 1;
-        } else if (task.getIsDone() == false) {
+        } else if (!task.getIsDone()) {
             isDone = 0;
         } else {
             throw new DukeException("Failed to get if Task isDone!");
         }
 
-        if (task.getTaskType().equals("Todo")) {
+        line = returnTaskFormatString(task, isDone, description);
+
+        return line;
+    }
+
+    /**
+     * Returns a Task formatted as a String.
+     * @param task Task to be formatted.
+     * @param isDone Whether the Task isDone.
+     * @param description Description of the Task.
+     * @return String of the Task.
+     * @throws DukeException Occurs when the Task's type is unknown.
+     */
+    private String returnTaskFormatString(Task task, int isDone, String description) throws DukeException {
+        String line;
+        LocalDate date;
+
+        switch (task.getTaskType()) {
+        case "Todo":
             line = String.format("T | %d | %s", isDone, description);
-        } else if (task.getTaskType().equals("Deadline")) {
+            break;
+        case "Deadline":
             date = ((Deadline) task).getBy();
             String by = DateFormatter.decodeDateForStorage(date);
             line = String.format("D | %d | %s | %s", isDone, description, by);
-        } else if (task.getTaskType().equals("Event")) {
+            break;
+        case "Event":
             date = ((Event) task).getAt();
             String at = DateFormatter.decodeDateForStorage(date);
             line = String.format("E | %d | %s | %s", isDone, description, at);
-        } else {
+            break;
+        default:
             throw new DukeException("Task type unknown, could not write to file!");
         }
 

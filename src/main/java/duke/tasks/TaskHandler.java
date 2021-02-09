@@ -26,51 +26,82 @@ public class TaskHandler {
         assert command != null: "command should not be null!";
         assert input != null: "input should not be null!";
         int numberOfTasks = taskList.size();
-        LocalDate date;
 
         switch (command) {
         case TODO:
-            Task todo = new Todo(input);
-            taskList.add(todo);
-            numberOfTasks += 1;
-            Ui.showTaskAddedText(todo.toString(), numberOfTasks);
+            addTodo(input, taskList, numberOfTasks);
             break;
         case DEADLINE:
-            int indexOfBy = input.trim().indexOf("/by");
-
-            if (indexOfBy == 0) {
-                throw new InvalidOptionException("DEADLINE");
-            }
-
-            String deadlineMessage = input.substring(0, indexOfBy);
-            String by = input.substring(indexOfBy + 4);
-
-            date = DateFormatter.encodeDate(by);
-
-            Task deadline = new Deadline(deadlineMessage, date);
-            taskList.add(deadline);
-            numberOfTasks += 1;
-            Ui.showTaskAddedText(deadline.toString(), numberOfTasks);
+            addDeadline(input, taskList, numberOfTasks);
             break;
         case EVENT:
-            int indexOfAt = input.trim().indexOf("/at");
-
-            if (indexOfAt == 0) {
-                throw new InvalidOptionException("EVENT");
-            }
-
-            String eventMessage = input.substring(0, indexOfAt);
-            String at = input.substring(indexOfAt + 4);
-
-            date = DateFormatter.encodeDate(at);
-
-            Task event = new Event(eventMessage, date);
-            taskList.add(event);
-            numberOfTasks += 1;
-            Ui.showTaskAddedText(event.toString(), numberOfTasks);
+            addEvent(input, taskList, numberOfTasks);
             break;
         default:
         }
+    }
+
+    /**
+     * Adds a Todo to the TaskList.
+     * @param input String representing the options related to the Command.
+     * @param taskList ArrayList of Tasks.
+     * @param numberOfTasks Number of tasks currently in TaskList.
+     */
+    private static void addTodo(String input, ArrayList<Task> taskList, int numberOfTasks) {
+        Task todo = new Todo(input);
+        addTaskToTaskList(todo, taskList, numberOfTasks);
+    }
+
+    /**
+     * Adds a Deadline to the TaskList.
+     * @param input String representing the options related to the Command.
+     * @param taskList ArrayList of Tasks.
+     * @param numberOfTasks Number of tasks currently in TaskList.
+     * @throws DukeException When an invalid option is passed together with a command.
+     */
+    private static void addDeadline(String input, ArrayList<Task> taskList, int numberOfTasks) throws DukeException {
+        int indexOfBy = input.trim().indexOf("/by");
+
+        if (indexOfBy == 0) {
+            throw new InvalidOptionException("DEADLINE");
+        }
+
+        String deadlineMessage = input.substring(0, indexOfBy);
+        String by = input.substring(indexOfBy + 4);
+
+        LocalDate date = DateFormatter.encodeDate(by);
+
+        Task deadline = new Deadline(deadlineMessage, date);
+        addTaskToTaskList(deadline, taskList, numberOfTasks);
+    }
+
+    /**
+     * Adds a Event to the TaskList.
+     * @param input String representing the options related to the Command.
+     * @param taskList ArrayList of Tasks.
+     * @param numberOfTasks Number of tasks currently in TaskList.
+     * @throws DukeException When an invalid option is passed together with a command.
+     */
+    private static void addEvent(String input, ArrayList<Task> taskList, int numberOfTasks) throws DukeException {
+        int indexOfAt = input.trim().indexOf("/at");
+
+        if (indexOfAt == 0) {
+            throw new InvalidOptionException("EVENT");
+        }
+
+        String eventMessage = input.substring(0, indexOfAt);
+        String at = input.substring(indexOfAt + 4);
+
+        LocalDate date = DateFormatter.encodeDate(at);
+
+        Task event = new Event(eventMessage, date);
+        addTaskToTaskList(event, taskList, numberOfTasks);
+    }
+
+    private static void addTaskToTaskList(Task task, ArrayList<Task> taskList, int numberOfTasks) {
+        taskList.add(task);
+        numberOfTasks += 1;
+        Ui.showTaskAddedText(task.toString(), numberOfTasks);
     }
 
     /**
@@ -160,6 +191,5 @@ public class TaskHandler {
         } else {
             Ui.showMessageBetweenLines("There are no matching tasks in your list.");
         }
-
     }
 }

@@ -48,54 +48,94 @@ public class Parser {
             TaskHandler.listTasks(taskList);
             break;
         case DONE:
-            try {
-                TaskHandler.doneTask(inputArr[1], taskList);
-                break;
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                throw new InvalidOptionException(command.name());
-            }
+            handleDone(command, inputArr[1], taskList);
+            break;
         case DELETE:
-            try {
-                TaskHandler.deleteTask(inputArr[1], taskList);
-                break;
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                throw new InvalidOptionException(command.name());
-            }
+            handleDelete(command, inputArr[1], taskList);
+            break;
         case BYE:
-            apollo.saveData();
-            Ui.displayGoodbyeText();
-            System.exit(0);
+            handleBye(apollo);
             break;
         case TODO:
-            try {
-                TaskHandler.addTask(command, inputArr[1], taskList);
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidOptionException(command.name());
-            }
-            break;
         case DEADLINE:
-            try {
-                TaskHandler.addTask(command, inputArr[1], taskList);
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidOptionException(command.name());
-            }
-            break;
         case EVENT:
-            try {
-                TaskHandler.addTask(command, inputArr[1], taskList);
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidOptionException(command.name());
-            }
+            handleTask(command, inputArr[1], taskList);
             break;
         case FIND:
-            try {
-                TaskHandler.findTasks(inputArr[1], taskList);
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidOptionException(command.name());
-            }
+            handleFind(command, inputArr[1], taskList);
             break;
         default:
             Ui.showErrorMessage("Invalid command, please try again!");
+        }
+    }
+
+    /**
+     * Saves data & then shutdown Apollo.
+     * @param apollo Instance of Apollo.
+     */
+    private static void handleBye(Duke apollo) {
+        apollo.saveData();
+        Ui.displayGoodbyeText();
+        System.exit(0);
+    }
+
+    /**
+     * Calls TaskHandler for Done command.
+     * @param command Command that has been called.
+     * @param input Input from user command.
+     * @param taskList TaskList containing tasks.
+     * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
+     */
+    private static void handleDone(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
+        try {
+            TaskHandler.doneTask(input, taskList);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new InvalidOptionException(command.name());
+        }
+    }
+
+    /**
+     * Calls TaskHandler for Delete command.
+     * @param command Command that has been called.
+     * @param input Input from user command.
+     * @param taskList TaskList containing tasks.
+     * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
+     */
+    private static void handleDelete(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
+        try {
+            TaskHandler.deleteTask(input, taskList);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new InvalidOptionException(command.name());
+        }
+    }
+
+    /**
+     * Calls TaskHandler for Find command.
+     * @param command Command that has been called.
+     * @param input Input from user command.
+     * @param taskList TaskList containing tasks.
+     * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
+     */
+    private static void handleFind(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
+        try {
+            TaskHandler.findTasks(input, taskList);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidOptionException(command.name());
+        }
+    }
+
+    /**
+     * Calls TaskHandler for Task command.
+     * @param command Command that has been called.
+     * @param input Input from user command.
+     * @param taskList TaskList containing tasks.
+     * @throws DukeException Occurs when a command has been passed in with the wrong format.
+     */
+    private static void handleTask(Commands command, String input, ArrayList<Task> taskList) throws DukeException {
+        try {
+            TaskHandler.addTask(command, input, taskList);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidOptionException(command.name());
         }
     }
 }

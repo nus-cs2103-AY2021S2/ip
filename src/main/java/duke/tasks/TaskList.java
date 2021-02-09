@@ -25,43 +25,6 @@ public class TaskList {
     }
 
     /**
-     * Adds a Task to the TaskList.
-     * @param task A Task.
-     */
-    public void addTask(Task task) {
-        assert taskList != null: "taskList should not be null!";
-        taskList.add(task);
-    }
-
-    /**
-     * Removes a Task from the TaskList.
-     * @param task A task.
-     */
-    public void removeTask(Task task) {
-        assert taskList != null: "taskList should not be null!";
-        taskList.remove(task);
-    }
-
-    /**
-     * Removes a Task from the TaskList.
-     * @param i Integer representing index of Task.
-     */
-    public void removeTask(Integer i) {
-        assert taskList != null: "taskList should not be null!";
-        taskList.remove(i);
-    }
-
-    /**
-     * Returns a Task at index i.
-     * @param i Integer representing index of Task..
-     * @return A task at index i.
-     */
-    public Task getTask(Integer i) {
-        assert taskList != null: "taskList should not be null!";
-        return taskList.get(i);
-    }
-
-    /**
      * Returns the ArrayList of Tasks.
      * @return ArrayList of Tasks.
      */
