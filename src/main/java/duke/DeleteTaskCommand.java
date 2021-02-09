@@ -16,12 +16,12 @@ public class DeleteTaskCommand extends Command {
             if (parser.canParseIndexCommand(input, taskList.getSize())) {
                 int index = parser.parseIndex(input);
                 Task deleted = taskList.deleteTask(index);
-                return ui.printDeleteTask(deleted);
+                return ui.getDeleteTask(deleted);
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 

@@ -8,12 +8,12 @@ public class ByeCommand extends Command {
     private String bye() {
         try {
             if (input.equals("bye")) {
-                return ui.printBye();
+                return ui.getFarewell();
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 

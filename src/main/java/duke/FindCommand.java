@@ -25,13 +25,13 @@ public class FindCommand extends Command {
                 if (tempTaskList.getSize() == 0) {
                     throw new NoSuchKeywordException(keyword);
                 } else {
-                    return ui.printFoundTaskList(tempTaskList);
+                    return ui.getFoundTaskList(tempTaskList);
                 }
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 

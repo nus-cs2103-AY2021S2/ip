@@ -14,12 +14,12 @@ public class HelpCommand extends Command {
     private String help() {
         try {
             if (parser.canParseHelpCommand(input)) {
-                return ui.printHelp();
+                return ui.getHelp();
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 

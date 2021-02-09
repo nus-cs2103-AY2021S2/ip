@@ -16,12 +16,12 @@ public class DoneTaskCommand extends Command {
             if (parser.canParseIndexCommand(input, taskList.getSize())) {
                 int index = parser.parseIndex(input);
                 taskList.doneTask(index);
-                return ui.printDoneTask(taskList.getTask(index));
+                return ui.getDoneTask(taskList.getTask(index));
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 

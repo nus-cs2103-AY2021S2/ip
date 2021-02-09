@@ -20,12 +20,12 @@ public class AddTaskCommand extends Command {
                 String description = parser.parseTodoDescription(input);
                 Task task = new Todo(description);
                 taskList.addTask(task);
-                return ui.printAddTask(task, taskList.getSize());
+                return ui.getAddTask(task, taskList.getSize());
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 
@@ -42,15 +42,15 @@ public class AddTaskCommand extends Command {
                     String description = parser.parseDeadlineDescription(input);
                     Deadline task = new Deadline(dateTime, description);
                     taskList.addTask(task);
-                    return ui.printAddTask(task, taskList.getSize());
+                    return ui.getAddTask(task, taskList.getSize());
                 } catch (DateTimeParseException e) {
-                    return ui.printError(new WrongFormatDukeException(command));
+                    return ui.getError(new WrongFormatDukeException(command));
                 }
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 
@@ -68,15 +68,15 @@ public class AddTaskCommand extends Command {
                     String description = parser.parseEventDescription(input);
                     Event task = new Event(startDateTime, endDateTime, description);
                     taskList.addTask(task);
-                    return ui.printAddTask(task, taskList.getSize());
+                    return ui.getAddTask(task, taskList.getSize());
                 } catch (DateTimeParseException e) {
-                    return ui.printError(new WrongFormatDukeException(command));
+                    return ui.getError(new WrongFormatDukeException(command));
                 }
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 

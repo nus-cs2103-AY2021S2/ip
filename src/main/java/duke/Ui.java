@@ -1,16 +1,17 @@
 package duke;
 
-public class Ui {
-    private final String SPACER = "----------------------------------------------------";
+/**
+ * Class to give all Strings to the GUI.
+ */
 
-    private void printSpacer() {
-        System.out.println(SPACER);
-    }
+public class Ui {
 
     /**
-     * Prints the greeting when Duke is started.
+     * Gets the greeting message.
+     *
+     * @return String greeting message.
      */
-    public String printGreeting() {
+    public String getGreeting() {
         String str = "Hello my name is Mr. C!" +
                 "\nYou may type the command 'help' to see my list of commands." +
                 "\nHow may I assist you?";
@@ -18,60 +19,72 @@ public class Ui {
     }
 
     /**
-     * Prints the goodbye message when Duke is exited.
+     * Gets the goodbye message when Duke is exited.
+     *
+     * @return String goodbye message.
      */
-    public String printBye() {
+    public String getFarewell() {
         String str = "Farewell sir/ma'am. I hope to see you again soon.";
         return str;
     }
 
-    private String printTask(Task task) {
+    /**
+     * Gets the string of a task.
+     *
+     * @param task Task wanted.
+     * @return String of a task.
+     */
+    private String getTask(Task task) {
         return task.toString();
     }
 
     /**
-     * Prints a message for when a task is added to the list.
+     * Gets the message for when a task is added to the list.
      *
      * @param task Task to be added.
      * @param size Number of tasks currently in the list.
+     * @return String of add task message.
      */
-    public String printAddTask(Task task, int size) {
+    public String getAddTask(Task task, int size) {
         String str = "I have added the following task to your list:\n" +
-                printTask(task) +
+                getTask(task) +
                 String.format("\nThere are %d tasks in your list. I hope this pleases you.", size);
         return str;
     }
 
     /**
-     * Prints a message for when a task is marked as done.
+     * Gets the done message for when a task is marked as done.
      *
      * @param task Task to be marked as done.
+     * @return String of done task message.
      */
-    public String printDoneTask(Task task) {
+    public String getDoneTask(Task task) {
         String str = "Congratulations on conquering this task:\n" +
-                printTask(task) +
+                getTask(task) +
                 "\nYou are one step closer to victory";
         return str;
     }
 
     /**
-     * Prints a message for when a task is being removed from the list.
+     * Gets the message for when a task is being removed from the list.
      *
      * @param task Task to be removed.
+     * @return String of remove task message.
      */
-    public String printDeleteTask(Task task) {
+    public String getDeleteTask(Task task) {
         String str = "I have removed the following task from your list:\n" +
-                printTask(task) +
+                getTask(task) +
                 "\nDoes this bring you the satisfaction you so crave?";
         return str;
     }
 
     /**
-     * Prints all the tasks in the list.
+     * Gets the message for when a task list is to be listed.
      *
-     * @param taskList List of tasks.
+     * @param taskList Task list to be listed.
+     * @return String of task list.
      */
-    public String printTaskList(TaskList taskList) {
+    public String getTaskList(TaskList taskList) {
         String str = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.getSize(); i++) {
             str += String.format("%d. ", i) +
@@ -83,18 +96,21 @@ public class Ui {
     }
 
     /**
-     * Prints the error message.
+     * Gets the error message.
      *
      * @param e Exception that has occurred.
+     * @return String of error message.
      */
-    public String printError(Exception e) {
+    public String getError(Exception e) {
         return e.toString();
     }
 
     /**
-     * Prints the help message.
+     * Gets the help message.
+     *
+     * @return String of help message.
      */
-    public String printHelp() {
+    public String getHelp() {
         String str = "These are the following commands that I understand:" +
                 "\n'help' (shows the list of commands)" +
                 "\n'list' (shows the list of tasks you have on your list)" +
@@ -111,11 +127,12 @@ public class Ui {
     }
 
     /**
-     * Prints the tasks that have been found.
+     * Returns string of the tasks that have been found to be given to GUI.
      *
      * @param taskList Task list that only contains found tasks.
+     * @return String of found tasks to be given to GUI.
      */
-    public String printFoundTaskList(TaskList taskList) {
+    public String getFoundTaskList(TaskList taskList) {
         String str = "Here are the tasks that fit your search criteria:\n";
         for (int i = 1; i <= taskList.getSize(); i++) {
             str += String.format("%d. ", i) +

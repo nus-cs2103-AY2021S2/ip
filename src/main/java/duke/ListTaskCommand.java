@@ -14,12 +14,12 @@ public class ListTaskCommand extends Command {
     private String listTask() {
         try {
             if (parser.canParseListCommand(input)) {
-                return ui.printTaskList(taskList);
+                return ui.getTaskList(taskList);
             } else {
                 throw new WrongFormatDukeException(command);
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 

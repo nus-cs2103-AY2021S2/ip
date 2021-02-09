@@ -2,5 +2,5 @@ T | X | book report
 E | X | level outing | from: 02-2-2021 1900 | to: 02-2-2021 2100
 E | O | team meeting | from: 02-2-2021 2100 | to: 02-2-2021 2359
 D | X | op1 slides | by: 07-2-2021 2300
-T | O | work 
+T | X | work 
 E | O | party | from: 23-2-2021 2000 | to: 24-2-2021 0200

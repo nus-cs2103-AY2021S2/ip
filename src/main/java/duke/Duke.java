@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Duke {
     private Storage storage;
     private Ui ui;
@@ -47,7 +45,7 @@ public class Duke {
                 throw new WrongCommandDukeException();
             }
         } catch (DukeException e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
         String str = "";
         if (cmd != null) {
@@ -70,18 +68,18 @@ public class Duke {
     }
 
     public static String greeting() {
-        return new Ui().printGreeting();
+        return new Ui().getGreeting();
     }
 
     public static String help() {
-        return new Ui().printHelp();
+        return new Ui().getHelp();
     }
 
     public String getResponse(String input) {
         try {
             return executeCommand(input);
         } catch (Exception e) {
-            return ui.printError(e);
+            return ui.getError(e);
         }
     }
 }

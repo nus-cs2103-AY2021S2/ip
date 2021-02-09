@@ -181,15 +181,19 @@ public class Parser {
         String[] command = input.split(" ");
         if (input.equals("done") || input.equals("done ")) {
             return false;
-        } else if (command.length != 2) {
+        }
+        if (command.length != 2) {
             return false;
-        } else {
+        }
+        try {
             int index = Integer.valueOf(command[1]) - 1;
             if (index < 0 || index >= size) {
                 return false;
             } else {
                 return true;
             }
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
