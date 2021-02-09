@@ -7,11 +7,7 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description, "Event");
-        try {
-            this.at = LocalDate.parse(at);
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date entered!");
-        }
+        this.at = LocalDate.parse(at);
     }
 
     public String getAt() {

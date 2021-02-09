@@ -7,11 +7,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description, "Deadline");
-        try {
-            this.by = LocalDate.parse(by);
-        } catch (DateTimeParseException e) {
-            System.out.println("Invalid date entered!");
-        }
+        this.by = LocalDate.parse(by);
     }
 
     public String getBy() {

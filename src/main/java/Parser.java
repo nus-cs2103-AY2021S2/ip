@@ -1,5 +1,5 @@
 public class Parser {
-    public static Command parseCommand(String userInput) {
+    public static Command parseCommand(String userInput) throws DukeException {
         String[] commandArr = userInput.split(" ", 2);
         String commandType = commandArr[0];
 
@@ -15,8 +15,7 @@ public class Parser {
             return new DeleteCommand(taskIndex);
         } else if (commandType.equals("deadline")) {
             if (commandArr.length == 1) {
-                System.out.println("Oops! The description of deadline cannot be empty!");
-                return new InvalidTaskCommand();
+                throw new DukeException("Oops! The description of deadline cannot be empty!");
             } else {
                 String commandDescription = commandArr[1];
                 String[] descriptionArr = commandDescription.split("/by ");
@@ -24,8 +23,7 @@ public class Parser {
             }
         } else if (commandType.equals("event")) {
             if (commandArr.length == 1) {
-                System.out.println("Oops! The description of event cannot be empty!");
-                return new InvalidTaskCommand();
+                throw new DukeException("Oops! The description of event cannot be empty!");
             } else {
                 String commandDescription = commandArr[1];
                 String[] descriptionArr = commandDescription.split("/at ");
@@ -33,8 +31,7 @@ public class Parser {
             }
         } else if (commandType.equals("todo")) {
             if (commandArr.length == 1) {
-                System.out.println("Oops! The description of todo cannot be empty!");
-                return new InvalidTaskCommand();
+                throw new DukeException("Oops! The description of todo cannot be empty!");
             } else {
                 String commandDescription = commandArr[1];
                 return new TodoCommand(commandDescription);

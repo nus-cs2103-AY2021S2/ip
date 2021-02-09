@@ -19,8 +19,12 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         while (scan.hasNextLine()) {
             String userInput = scan.nextLine();
-            Command command = Parser.parseCommand(userInput);
-            command.execute(duke.taskList, duke.ui, duke.storage);
+            try {
+                Command command = Parser.parseCommand(userInput);
+                command.execute(duke.taskList, duke.ui, duke.storage);
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
         }
     }
 }
