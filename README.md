@@ -6,6 +6,8 @@
 
 Elaina is the ultimate personal assistant chatbot.
 
+![Elaina screenshot](docs/_media/hero.png)
+
 ## Setting up in IntelliJ
 
 Prerequisites: JDK 11, update IntelliJ to the most recent version.
