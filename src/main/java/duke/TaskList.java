@@ -24,10 +24,25 @@ public class TaskList {
         this.store = store;
     }
 
+    /**
+     * Get Raw data for extraction of File ready data from Task directly
+     * TODO: Push the preparation of data to TaskList
+     *
+     * @return Underlying data structure
+     */
     public List<Task> getRawData(){
         return this.store;
     }
 
+    /**
+     * Runs command on TaskList and returns command specific output.
+     * Side effects are present on some commands
+     *
+     * @param c Command to be run
+     * @return Output meant for Ui Class
+     * @throws EmptyArgumentException At least one argument is missing
+     * @throws BadDateArgumentException An argument that is expected to be a date is ill formatted
+     */
     public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
         String[] args = c.run();
         String results;
@@ -56,9 +71,19 @@ public class TaskList {
         }
         return results;
     }
+
+    /**
+     * Mark the changes in the TaskList as saved to disk.
+     */
     public void markSaved(){
         edited = false;
     }
+
+    /**
+     * Check whether TaskList has been edited from when it has been last saved to disk
+     *
+     * @return Whether the TaskList has changed
+     */
     public boolean isEdited(){
         return this.edited;
     }
@@ -90,6 +115,12 @@ public class TaskList {
         store.remove(deleteIndex);
         return returnValue;
     }
+
+    /**
+     * Gets a user friendly list of all the task in TaskList
+     *
+     * @return User friendly state of TaskList
+     */
     public String getList(){
         StringBuilder builder = new StringBuilder();
         for (int i = 0 ; i < store.size(); i++) {
@@ -99,7 +130,7 @@ public class TaskList {
         return builder.toString();
     }
 
-    public String getFilteredList(String searchTerm){
+    private String getFilteredList(String searchTerm){
         StringBuilder builder = new StringBuilder();
         for (int i = 0 ; i < store.size(); i++) {
             if(store.get(i).containsSearch(searchTerm)) {

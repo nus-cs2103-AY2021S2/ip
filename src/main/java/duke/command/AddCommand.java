@@ -6,6 +6,10 @@ import duke.TaskList.Action;
 public class AddCommand extends Command{
     String[] args;
 
+    /**
+     * Create new Add command
+     * @param args Parameters describing what to add
+     */
     public AddCommand(String[] args){
         this.args = args;
     }

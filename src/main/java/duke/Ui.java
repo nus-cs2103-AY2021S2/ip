@@ -40,6 +40,13 @@ public class Ui {
         System.out.print(store.getList());
         System.out.println("Continuing Normal operation");
     }
+
+    /**
+     * Generate and print message based on command and results from that command
+     *
+     * @param command The command that has been issued
+     * @param data The results of that command, in a pre-processed format
+     */
     public void commandMessage(Command command, String data){
         switch(command.getType()){
         case LIST:

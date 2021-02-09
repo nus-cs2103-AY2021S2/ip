@@ -5,6 +5,11 @@ import duke.TaskList;
 public class SearchCommand extends Command{
     private String searchTerm;
 
+    /**
+     * Create command to search for Task with a particular substring.
+     *
+     * @param searchTerm Case and whitespace sensitive search input
+     */
     public SearchCommand(String searchTerm){
         this.searchTerm = searchTerm;
     }
