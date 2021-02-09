@@ -15,6 +15,7 @@ import duke.task.ToDo;
 public class Storage {
     /** The path of the file storing all tasks */
     private String filePath;
+    final String DATA_PATH  = "data/duke.txt";
 
     /**
      * Class constructor.
@@ -33,7 +34,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException, IOException {
         ArrayList<Task> tasks = new ArrayList<>();
-        File myObj = new File("data/duke.txt");
+        File myObj = new File(DATA_PATH);
         if (myObj.exists()) {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {

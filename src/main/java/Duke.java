@@ -66,21 +66,16 @@ public class Duke extends Application {
      */
     public String run(String fullCommand) {
         String output = "";
-        //output += ui.showWelcome();
         boolean isExit = false;
-        //while (!isExit) {
         try {
-            //String fullCommand = ui.readCommand();
-            output += ui.showLine(); // show the divider line ("_______")
+            output += ui.showLine();
             Command c = Parser.parse(fullCommand);
             output += c.execute(tasks);
-            //isExit = c.isExit();
         } catch (IOException | DukeException e) {
             output += ui.showError(e.getMessage());
         } finally {
             output += ui.showLine();
         }
-        //}
         return output;
     }
 
