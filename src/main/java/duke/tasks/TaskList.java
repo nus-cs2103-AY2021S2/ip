@@ -10,7 +10,7 @@ public class TaskList {
     private final List<Task> lst;
 
     /**
-     * Creates a {@code Tasklist} object with an empty task list component.
+     * Creates a {@code TaskList} object with an empty task list component.
      */
     public TaskList() {
         lst = new ArrayList<>();
@@ -55,11 +55,7 @@ public class TaskList {
      */
     public List<Task> tasksContainingKeyword(String keyword) {
         List<Task> tasksWithKeyword = new ArrayList<>();
-        for (Task task : lst) {
-            if (task.contains(keyword)) {
-                tasksWithKeyword.add(task);
-            }
-        }
+        lst.stream().filter(task -> task.contains(keyword)).forEach(task -> tasksWithKeyword.add(task));
         return tasksWithKeyword;
     }
 
