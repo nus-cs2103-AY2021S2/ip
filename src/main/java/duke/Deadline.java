@@ -35,6 +35,7 @@ public class Deadline extends Task {
     }
 
     private void buildInfo() {
+        assert !taskLine.equals("");
         String[] parsedTask = taskLine.split("deadline");
         parsedTask = parsedTask[1].split("/by");
         this.name = parsedTask[0].strip();

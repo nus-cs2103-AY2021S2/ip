@@ -23,7 +23,7 @@ public class Todo extends Task {
     }
 
     private void buildInfo() {
-
+        assert !taskLine.equals("");
         String[] taskParsed = taskLine.split("todo");
         this.dateTime = "";
         this.name = taskParsed[1].strip(); // taskParsed[0] == ""
