@@ -19,7 +19,6 @@ public class Parser {
         functions = new Hashtable<String, Function<String, String>>();
         this.initialize();
         this.history = Ui.welcome();
-        //Ui.welcome();
     }
 
     private void initialize() {
@@ -42,6 +41,7 @@ public class Parser {
      * @param s user input
      */
     public String parser(String s) {
+        assert(this.functions != null);
         Scanner sc = new Scanner(s);
         String inputs = sc.next();
         if (inputs.equals("bye")) {

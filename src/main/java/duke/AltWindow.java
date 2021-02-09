@@ -16,22 +16,7 @@ import java.io.IOException;
 
 public class AltWindow extends VBox {
 
-    @FXML
-    private VBox console;
-    @FXML
-    private MenuBar menu;
-    @FXML
-    private Menu change;
-    @FXML
-    private Menu createTodo;
-    @FXML
-    private Label todoButton;
-    @FXML
-    private Menu createDeadline;
-    @FXML
-    private Menu createEvent;
-    @FXML
-    private Menu guiDelete;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -72,11 +57,13 @@ public class AltWindow extends VBox {
     }
 
     public void setParser(Parser p) {
+        assert(p != null);
         this.parser = p;
         display.setText(this.parser.parser("list"));
     }
 
     public void setStage(Stage s) {
+        assert(s != null);
         this.stage = s;
     }
 

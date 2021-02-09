@@ -1,19 +1,13 @@
 package duke;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class TasksonWindow {
 
     @FXML
     private AnchorPane window;
-    @FXML
-    private Button cancel;
-    @FXML
-    private Button confirm;
     @FXML
     private DatePicker userDate;
 
@@ -26,7 +20,6 @@ public class TasksonWindow {
     @FXML
     private void submit() {
         String command = "taskson " + userDate.getValue();
-        //text.setText(parser.chat(command));
         parser.chat(command);
         window.getScene().getWindow().hide();
     }
