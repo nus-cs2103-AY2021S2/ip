@@ -6,22 +6,22 @@ import duke.dukeException.DukeException;
 
 public class Deadline extends Task {
     /** Date of the deadline */
-    protected LocalDate by;
+    protected LocalDate done_by;
 
     /**
      * Class constructor specifying deadline name and due date.
      */
-    public Deadline(String name, LocalDate by) {
+    public Deadline(String name, LocalDate done_by) {
         super(name);
-        this.by = by;
+        this.done_by = done_by;
     }
 
     /**
      * Class constructor specifying deadline name, due date and status.
      */
-    public Deadline(String name, LocalDate by, boolean isDone) {
+    public Deadline(String name, LocalDate done_by, boolean isDone) {
         super(name);
-        this.by = by;
+        this.done_by = done_by;
         this.isDone = isDone;
     }
 
@@ -48,8 +48,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.getMonth() + " "
-                + by.getDayOfMonth() + " " + by.getYear() + ")";
+        return "[D]" + super.toString() + " (by: " + done_by.getMonth() + " "
+                + done_by.getDayOfMonth() + " " + done_by.getYear() + ")";
     }
 }
 

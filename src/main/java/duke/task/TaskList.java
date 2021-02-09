@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class TaskList {
     /** An arraylist of tasks */
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
 
     /**
@@ -17,6 +17,7 @@ public class TaskList {
      * Class constructor.
      */
     public TaskList() {
+        this.tasks = new ArrayList<>();
     }
 
 
