@@ -16,6 +16,7 @@ public class TaskList {
         LIST,
         DONE,
         DELETE,
+        SEARCH,
     }
     private boolean edited = false;
     private List<Task> store;
@@ -45,6 +46,9 @@ public class TaskList {
             break;
         case LIST:
             results = getList();
+            break;
+        case SEARCH:
+            results = getFilteredList(args[0]);
             break;
         default:
             results = "";
@@ -91,6 +95,17 @@ public class TaskList {
         for (int i = 0 ; i < store.size(); i++) {
             builder.append(formatOrderedPrint(i));
             builder.append('\n');
+        }
+        return builder.toString();
+    }
+
+    public String getFilteredList(String searchTerm){
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0 ; i < store.size(); i++) {
+            if(store.get(i).containsSearch(searchTerm)) {
+                builder.append(formatOrderedPrint(i));
+                builder.append('\n');
+            }
         }
         return builder.toString();
     }
