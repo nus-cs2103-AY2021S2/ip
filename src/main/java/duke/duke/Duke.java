@@ -55,7 +55,7 @@ public class Duke {
         default:
             System.out.println("No task added");
         }
-
+        assert task != null;
         list.addItem(task);
         return Ui.showAddTaskMessage(task, list.getLst());
     }
