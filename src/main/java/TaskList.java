@@ -61,12 +61,9 @@ public class TaskList {
      */
     public static Task doneTask(int number) {
         if (tasks.size() == 0) {
-            throw new IndexOutOfBoundsException(Ui.lineGetter()
-                    + "  No tasks to complete!\n" + Ui.lineGetter());
+            throw new IndexOutOfBoundsException(Ui.noTasksToBeDone());
         } else if (number < 0 || number >= tasks.size()) {
-            throw new IndexOutOfBoundsException(Ui.lineGetter()
-                    + " Enter 'done' followed by a number between "
-                    + "1 and " + tasks.size() + "\n" + Ui.lineGetter());
+            throw new IndexOutOfBoundsException(Ui.doneTaskOutOfRange());
         }
         tasks.get(number).setDone();
         return tasks.get(number);
@@ -81,12 +78,9 @@ public class TaskList {
      */
     public static Task deleteTask(int number) {
         if (tasks.size() == 0) {
-            throw new IndexOutOfBoundsException(Ui.lineGetter()
-                    + "  No tasks to delete!\n" + Ui.lineGetter());
+            throw new IndexOutOfBoundsException(Ui.noTasksToBeDelete());
         } else if (number < 0 || number >= tasks.size()) {
-            throw new IndexOutOfBoundsException(Ui.lineGetter()
-                    + " Enter 'delete' followed by a number between "
-                    + "1 and " + tasks.size() + "\n" + Ui.lineGetter());
+            throw new IndexOutOfBoundsException(Ui.deleteTaskOutOfRange());
         }
         return tasks.remove(number);
     }
@@ -104,9 +98,7 @@ public class TaskList {
         keyword = keyword.trim();
         String[] split = keyword.split(" ");
         if (split.length > 1 || keyword.equals("")) {
-            throw new IllegalArgumentException(Ui.lineGetter()
-                    + " Please enter 'find' followed by only 1 word to search\n"
-                    + Ui.lineGetter());
+            throw new IllegalArgumentException(Ui.findFormat());
         }
         String result = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -120,11 +112,10 @@ public class TaskList {
             }
         }
         if (result.equals("")) {
-            return Ui.lineGetter() + " Sorry, there are no matching tasks :(\n"
-                    + Ui.lineGetter();
+            return Ui.foundMatchingTasks();
         } else {
-            return Ui.lineGetter() + " Here are your matching tasks: \n"
-                    + result + Ui.lineGetter();
+            return Ui.foundMatchingTasks() + result + Ui.lineGetter();
+            //can try make this better
         }
     }
 }

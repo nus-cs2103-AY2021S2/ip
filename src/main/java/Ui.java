@@ -132,4 +132,44 @@ public class Ui {
         return LINE + " Good job on completing this task!\n" + " "
                 + task + "\n" + LINE;
     }
+
+    public static String eventFormat() {
+        return LINE + " Enter 'event (your event)/(date and time)' with date and time in this format yyyy-mm-dd " +
+                "hh:mm\n" + LINE;
+    }
+
+    public static String deadlineFormat() {
+        return LINE + " Enter 'deadline (your deadline)/(date and time)' with date and time in this format yyyy-mm-dd" +
+                " hh:mm\n" + LINE;
+    }
+
+    public static String noTasksToBeDone() {
+        return LINE + "  No tasks to complete!\n" + LINE;
+    }
+
+    public static String noTasksToBeDelete() {
+        return LINE + "  No tasks to delete!\n" + LINE;
+    }
+
+    public static String doneTaskOutOfRange() {
+        return LINE + " Enter 'done' followed by a number between "
+                + "1 and " + TaskList.getListSize() + "\n" + LINE;
+    }
+
+    public static String deleteTaskOutOfRange() {
+        return LINE + " Enter 'delete' followed by a number between "
+                + "1 and " + TaskList.getListSize() + "\n" + LINE;
+    }
+
+    public static String findFormat() {
+        return LINE + " Please enter 'find' followed by only 1 word to search\n" + LINE;
+    }
+
+    public static String foundNoMatchingTasks() {
+        return LINE + " Sorry, there are no matching tasks :(\n" + LINE;
+    }
+
+    public static String foundMatchingTasks() {
+        return LINE + " Sorry, there are no matching tasks :(\n";
+    }
 }

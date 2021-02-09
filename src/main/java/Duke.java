@@ -29,7 +29,6 @@ import java.util.Scanner;
 public class Duke {
 
     public String getResponse(String input) {
-
         try {
             ArrayList<Task> prevTasks = FileAccessor.readFromTasks(new ArrayList<Task>());
             TaskList.setList(prevTasks);
@@ -62,72 +61,6 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException e) {
             response += e.getMessage();
         }
-        /*
-        if (input.equals("bye")) {
-            response += Ui.exit();
-        } else if (input.length() == 0) {
-            //if just enter spaces
-            response += Ui.informOnlySpaces();
-        } else if (input.equals("list")) {
-            try {
-                response += TaskList.printList();
-            } catch (IllegalArgumentException e) {
-                response += e.getMessage();
-            }
-        } else {
-            try {
-                String[] split = Parser.splitFirstAndRest(input);
-                if (split[0].equals("done")) {
-                    try {
-                        int num = Parser.makeToInt(split[1]);
-                        Task done = TaskList.doneTask(num - 1);
-                        response += Ui.doneTask(done);
-                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                        response += e.getMessage();
-                    }
-                } else if (split[0].equals("delete")) {
-                    try {
-                        int num = Parser.makeToInt(split[1]);
-                        Task del = TaskList.deleteTask(num - 1);
-                        response += Ui.deleteTask(del, TaskList.getListSize());
-                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                        response += e.getMessage();
-                    }
-                } else if (split[0].equals("find")) {
-                    try {
-                        response += TaskList.findTask(split[1]);
-                    } catch (IllegalArgumentException e) {
-                        response += e.getMessage();
-                    }
-                } else if (split[0].equals("todo") || split[0].equals("deadline")
-                        || split[0].equals("event")) {
-                    Task task;
-                    if (split[0].equals("todo")) {
-                        task = new Todo(split[1]);
-                    } else if (split[0].equals("deadline")) {
-                        task = new Deadline(split[1]);
-                    } else {
-                        task = new Event(split[1]);
-                    }
-                    TaskList.addTask(task);
-                    response += Ui.addTask(task, TaskList.getListSize());
-                } else {
-                    throw new IllegalArgumentException();
-                }
-
-                try {
-                    FileAccessor.writeToFile(TaskList.getList());
-                } catch (IOException e) {
-                    System.out.println(Ui.informUnableSave());
-                }
-            } catch (IllegalArgumentException e) {
-                response += Ui.informIllegalArgExc();
-            } catch (DateTimeParseException e) {
-                response += Ui.informDateTimeParseExc();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                response += e.getMessage();
-            }
-        }*/
         return response;
     }
 }

@@ -53,6 +53,8 @@ public class Parser {
         String[] split = Parser.splitFirstAndRest(input);
         String firstPartOfCommand = split[0];
         String secondPartOfCommand = split[1];
+        boolean isWritingToFile = firstPartOfCommand.equals("todo") || firstPartOfCommand.equals("deadline")
+                || firstPartOfCommand.equals("event");
 
         if (firstPartOfCommand.equals("done")) {
             return new DoneCommand(secondPartOfCommand);
@@ -60,8 +62,7 @@ public class Parser {
             return new DeleteCommand(secondPartOfCommand);
         } else if (firstPartOfCommand.equals("find")) {
             return new FindCommand(secondPartOfCommand);
-        } else if (firstPartOfCommand.equals("todo") || firstPartOfCommand.equals("deadline")
-                || firstPartOfCommand.equals("event")) {
+        } else if (isWritingToFile) {
             return new WriteCommand(firstPartOfCommand, secondPartOfCommand);
         } else {
             throw new IllegalArgumentException();

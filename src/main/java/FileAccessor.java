@@ -23,7 +23,6 @@ public class FileAccessor {
         return FILE_NAME;
     }
 
-
     /**
      * Returns a ArrayList which has the tasks in the hard drive file specified by path appended to it.
      *
@@ -84,16 +83,17 @@ public class FileAccessor {
                 taskToWrite =
                         taskToWrite + "D|" + done + "|" + deadline.task + "|" + deadline.getDeadline()
                                 + System.lineSeparator();
-            } else {
+            } else if (task instanceof Event){
                 Event event = (Event) task;
                 taskToWrite =
                         taskToWrite + "E|" + done + "|" + event.task + "|" + event.getEvent() + System.lineSeparator();
+            } else {
+                assert false : "Wrong part of writeToFile code";
             }
         }
         fileWriter.write(taskToWrite);
         //write all as one string outside or else will keep writing for each task, but somehow give
         // ioexception when put inside for loop?
         fileWriter.close();
-        //rmb to close
     }
 }
