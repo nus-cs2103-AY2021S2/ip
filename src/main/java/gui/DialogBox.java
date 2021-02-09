@@ -15,6 +15,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates the user dialog box.
+     * 
      * @param l  The text
      * @param iv The profile pictures
      */
@@ -43,7 +44,8 @@ public class DialogBox extends HBox {
 
     /**
      * Gets Duke Dialog.
-     * @param l The text
+     * 
+     * @param l  The text
      * @param iv The profile picture
      * @return a DialogBox UI
      */
