@@ -65,128 +65,165 @@ public class Parser {
             DukeException.EmptyEventDate,
             DukeException.InvalidEventEnd {
         Scanner scanner = new Scanner(input);
-        String[] tokens;
-        String[] dates;
-        LocalDateTime startDate;
-        LocalDateTime endDate;
 
         if (!scanner.hasNext()) {
             throw new DukeException.InvalidCommand();
         }
         switch (scanner.next().toLowerCase()) {
         case DukeString.COMMAND_BYE:
-            this.isBye = true;
-            return new ExitCommand();
+            return getExitCommand();
         case DukeString.COMMAND_LIST:
-            return new ListCommand();
+            return getListCommand();
         case DukeString.COMMAND_DONE:
-            if (!scanner.hasNextInt()) {
-                throw new DukeException.InvalidTask();
-            }
-            return new DoneCommand(scanner.nextInt());
+            return getDoneCommand(scanner);
         case DukeString.COMMAND_DELETE:
-            if (!scanner.hasNextInt()) {
-                throw new DukeException.InvalidTask();
-            }
-            return new DeleteCommand(scanner.nextInt());
+            return getDeleteCommand(scanner);
         case DukeString.COMMAND_DEADLINE:
-            if (!scanner.hasNext()) {
-                throw new DukeException.EmptyDescription(DukeString.COMMAND_DEADLINE);
-            }
-
-            tokens = scanner.nextLine().split(DukeString.COMMAND_DEADLINE_SEP);
-
-            if (tokens.length < 2 || tokens[1].isBlank()) {
-                throw new DukeException.EmptyDeadlineDate();
-            }
-
-            try {
-                startDate = LocalDateTime.parse(tokens[1].trim(), formatter);
-            } catch (DateTimeParseException e) {
-                throw new DukeException.InvalidDateFormat();
-            }
-
-            return new DeadlineCommand(tokens[0].trim(), startDate);
-
+            return getDeadlineCommand(scanner);
         case DukeString.COMMAND_EVENT:
-            if (!scanner.hasNext()) {
-                throw new DukeException.EmptyDescription(DukeString.COMMAND_EVENT);
-            }
-
-            tokens = scanner.nextLine().split(DukeString.COMMAND_EVENT_SEP);
-
-            if (tokens.length < 2 || tokens[1].isBlank()) {
-                throw new DukeException.EmptyEventDate();
-            }
-
-            dates = tokens[1].split(DukeString.COMMAND_EVENT_TO);
-
-            if (dates.length < 2 || dates[0].isBlank() || dates[1].isBlank()) {
-                throw new DukeException.EmptyEventDate();
-            }
-            try {
-                startDate = LocalDateTime.parse(dates[0].trim(), formatter);
-                endDate = LocalDateTime.parse(dates[1].trim(), formatter);
-            } catch (DateTimeParseException e) {
-                throw new DukeException.InvalidDateFormat();
-            }
-
-            if (startDate.compareTo(endDate) >= 0) {
-                throw new DukeException.InvalidEventEnd();
-            }
-
-            return new EventCommand(tokens[0].trim(), startDate, endDate);
+            return getEventCommand(scanner);
         case DukeString.COMMAND_TODO:
-            if (!scanner.hasNext()) {
-                throw new DukeException.EmptyDescription(DukeString.COMMAND_TODO);
-            }
-            return new TodoCommand(scanner.nextLine().trim());
+            return getTodoCommand(scanner);
         case DukeString.COMMAND_FIND:
-            if (!scanner.hasNext()) {
-                throw new DukeException.EmptyDescription(DukeString.COMMAND_FIND);
-            }
-            return new FindCommand(scanner.next());
+            return getFindCommand(scanner);
         case DukeString.COMMAND_SNOOZE:
-            if (!scanner.hasNext()) {
-                throw new DukeException.InvalidTask();
-            }
-
-            tokens = scanner.nextLine().split(DukeString.COMMAND_SNOOZE_REGEX);
-
-            if (tokens.length < 2 || tokens[1].isBlank()) {
-                throw new DukeException.EmptyDeadlineDate();
-            }
-            //Check if first token is a valid digit
-            if (!tokens[0].trim().matches("\\d+")) {
-                throw new DukeException.InvalidTask();
-            }
-
-            dates = tokens[1].split(DukeString.COMMAND_EVENT_TO);
-
-            try {
-                startDate = LocalDateTime.parse(dates[0].trim(), formatter);
-            } catch (DateTimeParseException e) {
-                throw new DukeException.InvalidDateFormat();
-            }
-
-            if (dates.length < 2 || !tokens[1].contains("/to")) {
-                return new SnoozeCommand(Integer.parseInt(tokens[0].trim()), startDate);
-            }
-
-            try {
-                endDate = LocalDateTime.parse(dates[1].trim(), formatter);
-            } catch (DateTimeParseException e) {
-                throw new DukeException.InvalidDateFormat();
-            }
-
-            if (startDate.compareTo(endDate) >= 0) {
-                throw new DukeException.InvalidEventEnd();
-            }
-
-            return new SnoozeCommand(Integer.parseInt(tokens[0].trim()), startDate, endDate);
+            return getSnoozeCommand(scanner);
         default:
             throw new DukeException.InvalidCommand();
-
         }
     }
+    private ExitCommand getExitCommand() {
+        this.isBye = true;
+        return new ExitCommand();
+    }
+
+    private ListCommand getListCommand() {
+        return new ListCommand();
+    }
+
+    private DoneCommand getDoneCommand(Scanner scanner) {
+        if (!scanner.hasNextInt()) {
+            throw new DukeException.InvalidTask();
+        }
+        return new DoneCommand(scanner.nextInt());
+    }
+
+    private DeleteCommand getDeleteCommand(Scanner scanner) {
+        if (!scanner.hasNextInt()) {
+            throw new DukeException.InvalidTask();
+        }
+        return new DeleteCommand(scanner.nextInt());
+    }
+
+    private DeadlineCommand getDeadlineCommand(Scanner scanner) {
+        if (!scanner.hasNext()) {
+            throw new DukeException.EmptyDescription(DukeString.COMMAND_DEADLINE);
+        }
+
+        String[] tokens = scanner.nextLine().split(DukeString.COMMAND_DEADLINE_SEP);
+
+        if (tokens.length < 2 || tokens[1].isBlank()) {
+            throw new DukeException.EmptyDeadlineDate();
+        }
+
+        LocalDateTime startDate;
+        try {
+            startDate = LocalDateTime.parse(tokens[1].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException.InvalidDateFormat();
+        }
+
+        return new DeadlineCommand(tokens[0].trim(), startDate);
+    }
+
+    private EventCommand getEventCommand(Scanner scanner) {
+        if (!scanner.hasNext()) {
+            throw new DukeException.EmptyDescription(DukeString.COMMAND_EVENT);
+        }
+
+        String[] tokens = scanner.nextLine().split(DukeString.COMMAND_EVENT_SEP);
+
+        if (tokens.length < 2 || tokens[1].isBlank()) {
+            throw new DukeException.EmptyEventDate();
+        }
+
+        String[] dates = tokens[1].split(DukeString.COMMAND_EVENT_TO);
+
+        if (dates.length < 2 || dates[0].isBlank() || dates[1].isBlank()) {
+            throw new DukeException.EmptyEventDate();
+        }
+
+        LocalDateTime startDate;
+        LocalDateTime endDate;
+        try {
+            startDate = LocalDateTime.parse(dates[0].trim(), formatter);
+            endDate = LocalDateTime.parse(dates[1].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException.InvalidDateFormat();
+        }
+
+        if (startDate.compareTo(endDate) >= 0) {
+            throw new DukeException.InvalidEventEnd();
+        }
+
+        return new EventCommand(tokens[0].trim(), startDate, endDate);
+    }
+
+    private TodoCommand getTodoCommand(Scanner scanner) {
+        if (!scanner.hasNext()) {
+            throw new DukeException.EmptyDescription(DukeString.COMMAND_TODO);
+        }
+        return new TodoCommand(scanner.nextLine().trim());
+    }
+
+    private FindCommand getFindCommand(Scanner scanner) {
+        if (!scanner.hasNext()) {
+            throw new DukeException.EmptyDescription(DukeString.COMMAND_FIND);
+        }
+        return new FindCommand(scanner.next());
+    }
+
+
+    private SnoozeCommand getSnoozeCommand(Scanner scanner) {
+        if (!scanner.hasNext()) {
+            throw new DukeException.InvalidTask();
+        }
+
+        String[] tokens = scanner.nextLine().split(DukeString.COMMAND_SNOOZE_REGEX);
+
+        if (tokens.length < 2 || tokens[1].isBlank()) {
+            throw new DukeException.EmptyDeadlineDate();
+        }
+        //Check if first token is a valid digit
+        if (!tokens[0].trim().matches("\\d+")) {
+            throw new DukeException.InvalidTask();
+        }
+
+        String[] dates = tokens[1].split(DukeString.COMMAND_EVENT_TO);
+
+        LocalDateTime startDate;
+        try {
+            startDate = LocalDateTime.parse(dates[0].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException.InvalidDateFormat();
+        }
+
+        if (dates.length < 2 || !tokens[1].contains("/to")) {
+            return new SnoozeCommand(Integer.parseInt(tokens[0].trim()), startDate);
+        }
+
+        LocalDateTime endDate;
+        try {
+            endDate = LocalDateTime.parse(dates[1].trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeException.InvalidDateFormat();
+        }
+
+        if (startDate.compareTo(endDate) >= 0) {
+            throw new DukeException.InvalidEventEnd();
+        }
+
+        return new SnoozeCommand(Integer.parseInt(tokens[0].trim()), startDate, endDate);
+    }
+
 }
