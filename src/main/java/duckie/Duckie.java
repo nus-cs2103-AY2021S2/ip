@@ -1,4 +1,4 @@
-package main.java;
+package duckie;
 
 import main.java.classes.DuckieException;
 import main.java.classes.Parser;
