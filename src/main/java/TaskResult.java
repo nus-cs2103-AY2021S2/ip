@@ -8,11 +8,13 @@ public class TaskResult {
     public TaskResult() { }
 
     public TaskResult(TaskList taskList, String feedbackToUser) {
+        assert taskList != null;
         this.taskList = taskList;
         this.feedbackToUser = feedbackToUser;
     }
 
     public TaskResult(Task task, String feedbackToUser) {
+        assert task != null;
         this.task = task;
         this.feedbackToUser = feedbackToUser;
     }

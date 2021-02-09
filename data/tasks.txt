@@ -5,3 +5,4 @@ D | ✓ | notes | Jan 1 2021 10:00 am
 D | ✓ | homework | Jan 10 2021 10:00 am
 E | ✘ | meeting | Oct 11 2021 11:00 am
 E | ✓ | meeting | Jan 1 2021 01:00 am
+D | ✘ | hw1 | Feb 4 2021 12:00 pm

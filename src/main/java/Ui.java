@@ -6,21 +6,7 @@ public class Ui {
     private final Scanner in = new Scanner(System.in);
     private final String separator = "---------------------------------------------";
 
-    public Ui(){
-        startDuke();
-    }
-
-    public static void startDuke() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("---------------------------------------------");
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        System.out.println("---------------------------------------------");
-    }
+    public Ui(){ }
 
     public String showResultToUser(TaskList tasks, TaskResult taskResult) {
         String feedbackToUser = taskResult.getFeedbackToUser();
@@ -62,7 +48,6 @@ public class Ui {
         ArrayList<Task> tasks = taskList.getTaskList();
         for (int i = 1; i < len + 1; i++) {
             Task curTask = tasks.get(i - 1);
-            System.out.println(i + ". " + curTask);
             String toAdd = "\n" + i + ". " + curTask.toString();
             responseToUser +=  toAdd;
         }
@@ -81,7 +66,6 @@ public class Ui {
         ArrayList<Task> tasks = matchingTask.getTaskList();
         for (int i = 1; i < len + 1; i++) {
             Task curTask = tasks.get(i - 1);
-            System.out.println(i + ". " + curTask);
             String toAdd = "\n" + i + ". " + curTask.toString();
             responseToUser +=  toAdd;
         }

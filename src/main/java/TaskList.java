@@ -32,10 +32,12 @@ public class TaskList {
         int relatedTaskNumber = taskAction.getRelatedTaskNumber();
         String keyword = taskAction.getKeyword();
         String actionType = taskAction.getActionType();
-
         TaskResult taskResult = new TaskResult();
+
+        assert actionType != "";
         switch (actionType) {
         case "add":
+            assert relatedTask != null;
             addTask(relatedTask);
             taskResult = new TaskResult(relatedTask, "add");
             break;
@@ -51,6 +53,7 @@ public class TaskList {
             taskResult = new TaskResult(new TaskList(this.taskList, this.totalTask), "display");
             break;
         case "find":
+            assert keyword != null;
             TaskList matchingTaskList = findMatchingTask(keyword);
             taskResult = new TaskResult(matchingTaskList, "find");
             break;
@@ -70,6 +73,7 @@ public class TaskList {
         ArrayList<Task> taskList = new ArrayList<>();
 
         // loop through every task in the list
+
         for (String s : myTasks) {
             String[] taskByParts = s.split(" \\| ", 3);
             String type = taskByParts[0];
@@ -150,9 +154,7 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    private void addTask(Task task) {
-        this.taskList.add(task);
-    }
+    private void addTask(Task task) { this.taskList.add(task); }
 
     /**
      * Delete task by its order number from a TaskList.
