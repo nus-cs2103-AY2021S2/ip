@@ -78,8 +78,12 @@ public class Parser {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
 
+                int taskListCount = taskList.count();
+
                 Task task = new Task(split[1]);
                 taskList.add(task);
+
+                assert taskList.count() == taskListCount + 1 : "Unable to add task!";
 
                 result = "Got it. I've added this task:\n";
                 result += task + "\n";
@@ -108,8 +112,12 @@ public class Parser {
                     throw new DukeException("OOPS!!! The date format should be in YYYY-MM-DD");
                 }
 
+                int taskListCount = taskList.count();
+
                 Task task = new Task(split[0], 'D', dt);
                 taskList.add(task);
+
+                assert taskList.count() == taskListCount + 1 : "Unable to add task!";
 
                 result = "Got it. I've added this task:\n";
                 result += task + "\n";
@@ -138,8 +146,12 @@ public class Parser {
                     throw new DukeException("OOPS!!! The date format should be in YYYY-MM-DD");
                 }
 
+                int taskListCount = taskList.count();
+
                 Task task = new Task(split[0], 'E', dtt);
                 taskList.add(task);
+
+                assert taskList.count() == taskListCount + 1 : "Unable to add task!";
 
                 result = "Got it. I've added this task:\n";
                 result += task + "\n";
@@ -151,7 +163,11 @@ public class Parser {
                 }
 
                 try {
+                    int taskListCount = taskList.count();
+
                     Task task = taskList.remove(Integer.parseInt(split[1]));
+
+                    assert taskList.count() == taskListCount - 1 : "Unable to remove task!";
 
                     result = "Noted. I've removed this task\n";
                     result += task + "\n";
