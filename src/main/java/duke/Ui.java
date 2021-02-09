@@ -9,8 +9,8 @@ import java.util.Scanner;
  * Ui has 2 main functions: read input and return output with print.
  */
 class Ui {
+    public static final String WELCOME_MESSAGE = "Hello! I'm Park Chaeyoung\nWhat can I do for you, Lalisa Manoban?\n";
     private final Scanner input;
-
     /**
      * Returns an Ui with integrated Scanner.
      */
@@ -45,20 +45,12 @@ class Ui {
     }
 
     /**
-     * Say Hi!
-     */
-    public String echoHi() {
-        String ans = " Hello! I'm Danh's Duke\nWhat can I do for you, Mr Danh?\n";
-        return ans;
-    }
-
-    /**
      * Print all the tasks in taskList.
      *
      * @param taskList TaskList related.
      */
     public String echoPrintList(ArrayList<Task> taskList) {
-        String ans = "Here are the tasks in your list:\n";
+        String ans = "Here are the tasks in your list, Lisa:\n";
         int index = 1;
         for (Task task : taskList) {
             ans += String.format(" %d. " + task.printTask() + "\n", index);
@@ -74,7 +66,7 @@ class Ui {
      * @param noOfTasks Number of tasks in taskList after adding.
      */
     public String echoAddToList(Task task, int noOfTasks) {
-        String ans = "Got it. I've added this task: \n" + " ";
+        String ans = "Got it. I've added this task for you, Lisa: \n" + " ";
         ans += task.printTask() + "\n" + String.format("Now you have %d tasks in the list.\n", noOfTasks);
         return ans;
     }
@@ -85,7 +77,7 @@ class Ui {
      * @param task Task done.
      */
     public String echoMarkTaskDone(Task task) {
-        String ans = "Nice! I've marked this task as done: \n" + " " + task.printTask() + "\n";
+        String ans = "Nice! I've marked this task as done for you, Lisa: \n" + " " + task.printTask() + "\n";
         return ans;
     }
 
@@ -95,7 +87,7 @@ class Ui {
      * @param task Task deleted.
      */
     public String echoDeleteTask(Task task) {
-        String ans = "Noted. I've removed this task: \n" + " " + task.printTask() + "\n";
+        String ans = "Noted. I've removed this task for you, Lisa: \n" + " " + task.printTask() + "\n";
         return ans;
     }
 
@@ -135,7 +127,7 @@ class Ui {
      * @param taskList The tasklist related.
      */
     public String echoTaskToday(ArrayList<Task> taskList) {
-        String ans = "Here are the tasks today:\n";
+        String ans = "Here are the tasks today, Lisa:\n";
         int index = 1;
         for (Task task : taskList) {
             if ((task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), LocalDateTime.now()))
@@ -154,7 +146,7 @@ class Ui {
      * @param pattern  The String pattern given by find command.
      */
     public String echoPrintFindResult(ArrayList<Task> taskList, String pattern) {
-        String ans = "Here are the matching tasks:\n";
+        String ans = "Here are the matching tasks, Lisa:\n";
         int index = 1;
         for (Task task : taskList) {
             if (task.getTaskName().contains(pattern)) {

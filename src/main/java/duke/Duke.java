@@ -1,10 +1,10 @@
 package duke;
 
-import javafx.application.Platform;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import javafx.application.Platform;
 
 /**
  * Class Duke represents Danh's Duke, a powerful assistant that can take note of your task everyday and
@@ -42,7 +42,6 @@ class Duke {
      */
     public static void main(String[] args) throws IOException {
         Duke myDuke = new Duke();
-        myDuke.ui.echoHi();
         boolean signalToExit = false;
         while (!signalToExit && myDuke.ui.stillHaveCommand()) {
             String commandLine = myDuke.ui.readCommand();
@@ -102,25 +101,25 @@ class Duke {
      */
     public static void executeFalseCommand(String command) throws DukeException {
         if (command.startsWith("list")) {
-            throw new DukeException("     list command should not have body, Sir!");
+            throw new DukeException("List command should not have body, Lisa!");
         } else if (command.startsWith("bye")) {
-            throw new DukeException("     bye command should not have body, Sir!");
+            throw new DukeException("Bye command should not have body, Lisa!");
         } else if (command.startsWith("done")) {
-            throw new DukeException("     No body or wrong body format or invalid number for done command, Sir!");
+            throw new DukeException("No body or wrong body format or invalid number for done command, Lisa!");
         } else if (command.startsWith("delete")) {
-            throw new DukeException("     No body or wrong body format or invalid number for delete command, Sir!");
+            throw new DukeException("No body or wrong body format or invalid number for delete command, Lisa!");
         } else if (command.startsWith("todo")) {
-            throw new DukeException("     No body detected for todo command, Sir!");
+            throw new DukeException("No body detected for todo command, Lisa!");
         } else if (command.startsWith("deadline")) {
-            throw new DukeException("     no body detected or no dlTime detected for deadline command, Sir!");
+            throw new DukeException("No body detected or no dlTime detected for deadline command, Lisa!");
         } else if (command.startsWith("event")) {
-            throw new DukeException("     no body detected or no eTime detected for Event command, Sir!");
+            throw new DukeException("No body detected or no eTime detected for Event command, Lisa!");
         } else if (command.startsWith("myTaskToday")) {
-            throw new DukeException("     myTaskToday command should not have body, Sir!");
+            throw new DukeException("myTaskToday command should not have body, Lisa!");
         } else if (command.startsWith("myTaskOn")) {
-            throw new DukeException("     No body or wrong body format for myTaskOn command, Sir!");
+            throw new DukeException("No body or wrong body format for myTaskOn command, Lisa!");
         } else {
-            throw new DukeException("     Invalid command format");
+            throw new DukeException("Invalid command format, Lisa!");
         }
     }
 

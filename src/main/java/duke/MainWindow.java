@@ -22,12 +22,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Me.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DanhDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Lisa.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Rose.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.WELCOME_MESSAGE, dukeImage));
     }
 
     public void setDuke(Duke d) {
