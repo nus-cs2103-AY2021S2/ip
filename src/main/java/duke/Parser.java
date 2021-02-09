@@ -8,12 +8,12 @@ public class Parser {
     }
 
     /**
-     * Only constructor for parser. Catches cases where the user inputs an invalid command.
+     * Only constructor for parser. Gets all the parameters from dukeCatches cases where the user inputs an invalid command.
      *
-     * @param duke
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param duke the current duke instance
+     * @param taskList manager of the list of tasks
+     * @param ui user interface
+     * @param storage storage manager of the duke. Persists even when duke instance is closed
      */
     protected String activate(String input, Duke duke, TaskList taskList, Ui ui, Storage storage) {
         try {
@@ -30,16 +30,16 @@ public class Parser {
      * Hanldes commands:
      * "list", "save", "bye", "delete", "done", "todo" , "deadline", "event".
      *
-     * @param duke
+     * @param duke the current duke instance
      * @param currLine the current input from the user
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param taskList manager of the list of tasks
+     * @param ui user interface
+     * @param storage storage manager of the duke. Persists even when duke instance is closed
      * @throws Exception when an invalid command is made. i.e. the first word in the input is
      *                   invalid
      * @return
      */
-    protected String handleCommand(Duke duke, String currLine, TaskList taskList, Ui ui, Storage storage) throws Exception {
+    private String handleCommand(Duke duke, String currLine, TaskList taskList, Ui ui, Storage storage) throws Exception {
         // basic commands
         currLine = currLine.toLowerCase();
         String[] parsedLine = currLine.split(" ");

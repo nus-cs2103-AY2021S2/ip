@@ -8,12 +8,12 @@ public class Todo extends Task {
      * Constructs Todo instance
      *
      * @param taskLine untouched input from the user
-     * @throws ArrayIndexOutOfBoundsException
+     * @throws ArrayIndexOutOfBoundsException if the body of the todo is missing
      */
     public Todo(String taskLine) throws ArrayIndexOutOfBoundsException {
         super(taskLine);
         checkTask();
-        buildInfo();
+        setVar();
     }
 
     private void checkTask() throws ArrayIndexOutOfBoundsException {
@@ -22,11 +22,14 @@ public class Todo extends Task {
         }
     }
 
-    private void buildInfo() {
-
-        String[] taskParsed = taskLine.split("todo");
+    private void setVar(){
+        String[] taskParsed = buildInfo();
         this.dateTime = "";
         this.name = taskParsed[1].strip(); // taskParsed[0] == ""
+    }
+
+    private String[] buildInfo() {
+        return taskLine.split("todo");
     }
 
     protected String printNew() {

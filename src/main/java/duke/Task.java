@@ -48,6 +48,7 @@ public class Task {
             this.date = LocalDate.parse(time);
             this.dateTime = date.getMonth().name() + " " + date.getDayOfMonth() + " " + date.getYear();
         } catch (Exception e) {
+            System.out.println(  "Please note that this date cannot be neatly parsed by our program. " );
         }
     }
 }

@@ -1,10 +1,11 @@
 package duke;
 
 /**
- * DukeException is an exception made specially for Duke
+ * DukeException is an exception made specially for Duke.
  */
-public class DukeException extends Exception {
-    public DukeException(String message) {
+@SuppressWarnings("checkstyle:SummaryJavadoc")
+class DukeException extends Exception {
+    DukeException(String message) {
         super(message);
     }
 }
