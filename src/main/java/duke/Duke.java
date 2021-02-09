@@ -11,18 +11,18 @@ Credit of light reuse: James Lee
  **/
 public class Duke {
     private boolean isJustOn;
-    public boolean isOn = false;
+    boolean isOn = false;
     private Ui ui;
     private Parser parser;
     private TaskList taskList;
     private Storage storage;
-    public static String line = "___________________________";
+    static String line = "___________________________";
 
     /**
      * Duke's only constructor that sets in place its components. Namely: the ui,
      * parser, taskList and storage.
      *
-     * @param filePath
+     * @param filePath relative path of the file
      */
     public Duke(String filePath) {
         this.isOn = true;
@@ -45,8 +45,8 @@ public class Duke {
     /**
      * Starts the Duke instance. Retreives data from the text file of past tasks.
      */
-    public String getResponse(String input){
-        if(isJustOn) {
+    public String getResponse(String input) {
+        if (isJustOn) {
             storage.getLastSave(taskList);
         }
         isJustOn = false;

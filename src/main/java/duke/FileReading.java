@@ -9,7 +9,7 @@ Taken from 2103T file access demo
  */
 
 /**
- * A class that is used to read files and catch checked exceptions
+ * A class that is used to read files and catch checked exceptions.
  */
 public class FileReading {
 
@@ -28,7 +28,7 @@ public class FileReading {
      * Catches FileNotFoundExceptions.
      *
      * @param filePath
-     * @return
+     * @return the printed out file contentes
      */
     protected static String readFile(String filePath) {
         String output = "";

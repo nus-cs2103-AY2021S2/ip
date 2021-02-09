@@ -10,13 +10,12 @@ public class Deadline extends Task {
      * Only deadline constructor that checks it's validity and sets the info instance variable.
      *
      * @param taskLine the entire scanned line from the input
-     * @throws ArrayIndexOutOfBoundsException
-     * @throws IllegalArgumentException
+     * @throws ArrayIndexOutOfBoundsException if there is no '/by' indicator
      */
-    protected Deadline(String taskLine) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
+    Deadline(String taskLine) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         super(taskLine);
         checkTask(taskLine);
-        buildInfo();
+        setVar();
     }
 
     /**
@@ -26,22 +25,28 @@ public class Deadline extends Task {
      * @throws ArrayIndexOutOfBoundsException if there is no body to the deadline task
      * @throws IllegalArgumentException       if there is no '/by' indicator
      */
-    protected void checkTask(String taskLine) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
+    private void checkTask(String taskLine) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         if (taskLine.length() < 2) {
-            throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Deadline cannot be empty.");
+            throw new ArrayIndexOutOfBoundsException("☹The description of a Deadline cannot be empty.");
         } else if (!taskLine.contains("/by")) {
             throw new IllegalArgumentException("☹ OOPS!!! The Deadline needs an '/by' time.");
         }
     }
 
-    private void buildInfo() {
+    private void setVar() {
+        String[] parsedTask = buildInfo();
+        this.name = parsedTask[0].strip();
+        this.dateTime = parsedTask[1].strip();
+        this.info = name + " by: " + dateTime;
+        setDateTimeLD(dateTime);
+    }
+
+    private String[] buildInfo() {
         assert !taskLine.equals("");
         String[] parsedTask = taskLine.split("deadline");
         parsedTask = parsedTask[1].split("/by");
-        this.name = parsedTask[0].strip();
-        this.dateTime = parsedTask[1].strip();
-        setDateTimeLD(dateTime);
-        this.info = name + " by: " + dateTime;
+        return parsedTask;
+
     }
 
 
