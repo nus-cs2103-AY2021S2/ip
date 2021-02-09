@@ -35,6 +35,7 @@ public class CommandParser implements Parser {
             throw new DescriptionMissingException("Please enter something!");
         }
 
+        assert(potentialCommand.length() > 0);
         if (potentialCommand.equalsIgnoreCase("LIST")) {
             command = new ListCommand();
         } else if (potentialCommand.equalsIgnoreCase("BYE")) {

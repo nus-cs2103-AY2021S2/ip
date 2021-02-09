@@ -46,6 +46,7 @@ public class Storage {
             if (!f.exists()) {
                 createFileNotExists(f);
             }
+            assert(f.exists());
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
                 String line = sc.nextLine();
