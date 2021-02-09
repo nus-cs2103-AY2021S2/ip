@@ -28,26 +28,15 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private static final String FOLDER_PATH = "./src/main/java/data/";
-    private static final String FILE_NAME = "All Tasks.txt";
-
-
     public String getResponse(String input) {
-        //Scanner scanner = new Scanner(System.in);
-        //scanner.useDelimiter("\n");
-        //only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
-        //String relPath = "./src/main/java/data/All Tasks.txt";//for runtest.sh put .. coz the path for that is diff
-        // compared to this
 
         try {
-            //File f = new File("./");
-            //System.out.println(f.getAbsolutePath());//to get the path to see which path java is looking
-            ArrayList<Task> prevTasks = FileAccessor.readFromTasks(FOLDER_PATH + FILE_NAME, new ArrayList<Task>());
+            ArrayList<Task> prevTasks = FileAccessor.readFromTasks(new ArrayList<Task>());
             TaskList.setList(prevTasks);
         } catch (FileNotFoundException | IllegalArgumentException e) {
             //System.out.println("EXCEPTION");
             try {
-                Files.createDirectory(Paths.get(FOLDER_PATH));
+                Files.createDirectory(Paths.get(FileAccessor.getFolderPath()));
                 TaskList.setList(new ArrayList<Task>());
             } catch (IOException e1) {
                 System.out.println(Ui.lineGetter() + " Cannot create new directory\n" + Ui.lineGetter());
@@ -113,7 +102,7 @@ public class Duke {
                 }
 
                 try {
-                    FileAccessor.writeToTasks(FOLDER_PATH + FILE_NAME, TaskList.getList());
+                    FileAccessor.writeToFile(TaskList.getList());
                 } catch (IOException e) {
                     System.out.println(Ui.informUnableSave());
                 }
