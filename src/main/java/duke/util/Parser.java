@@ -25,6 +25,9 @@ public class Parser {
      * @throws DukeException Occurs when a command is unrecognised or options are invalid.
      */
     public static void handleInput(String s, ArrayList<Task> taskList, Duke apollo) throws DukeException {
+        assert apollo != null: "apollo should not be null!";
+        assert taskList != null: "taskList should not be null!";
+
         String input = s.trim();
         Commands command;
 

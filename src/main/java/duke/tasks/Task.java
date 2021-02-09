@@ -35,6 +35,7 @@ public abstract class Task {
      * @return A string representing the Task's status.
      */
     public String getStatusIcon() {
+        assert isDone != null;
         return (isDone ? "[X]" : "[ ]");
     }
 
@@ -43,6 +44,7 @@ public abstract class Task {
      * @return A String representing the Task description.
      */
     public String getDescription() {
+        assert this.description != null;
         return this.description;
     }
 
@@ -51,6 +53,7 @@ public abstract class Task {
      * @return A Boolean representing the Task's status.
      */
     public Boolean getIsDone() {
+        assert this.isDone != null;
         return this.isDone;
     }
 
@@ -59,6 +62,7 @@ public abstract class Task {
      * @return A String representing the type of Task.
      */
     public String getTaskType() {
+        assert this.taskType != null;
         return this.taskType;
     }
 
