@@ -1,7 +1,8 @@
 package duke.task;
 import java.time.LocalDate;
 
-import duke.dukeexception.DukeException;
+import duke.dukeException.DukeException;
+
 
 public class Deadline extends Task {
     /** Date of the deadline */

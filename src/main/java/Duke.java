@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 import duke.command.Command;
-import duke.dukeexception.DukeException;
+import duke.dukeException.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -75,7 +75,7 @@ public class Duke extends Application {
             Command c = Parser.parse(fullCommand);
             output += c.execute(tasks);
             //isExit = c.isExit();
-        } catch (DukeException | IOException e) {
+        } catch (IOException | DukeException e) {
             output += ui.showError(e.getMessage());
         } finally {
             output += ui.showLine();
@@ -159,7 +159,6 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 

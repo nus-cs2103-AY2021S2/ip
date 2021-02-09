@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.dukeexception.DukeException;
+import duke.dukeException.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -35,7 +35,6 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         File myObj = new File("data/duke.txt");
         if (myObj.exists()) {
-
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -47,7 +46,7 @@ public class Storage {
                 data = data.substring(8);
                 int mid = data.indexOf("|");
                 String name;
-                String date = null;
+                String date;
                 int year = -999;
                 int mon = -999;
                 int day = -999;
@@ -65,7 +64,8 @@ public class Storage {
                 } else if (type == 'D') {
                     LocalDate d = LocalDate.of(year, mon, day);
                     tasks.add(new Deadline(name, d, isDone));
-                } else if (type == 'E') {
+                } else {
+                    assert type == 'E';
                     LocalDate d = LocalDate.of(year, mon, day);
                     tasks.add(new Event(name, d, isDone));
                 }
