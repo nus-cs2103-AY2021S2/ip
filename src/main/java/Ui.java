@@ -36,26 +36,26 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void printList(ArrayList<Task> tasks, int numTasks) {
+    public String printList(ArrayList<Task> tasks, int numTasks) {
+        StringBuilder response;
         if (numTasks == 0) {
-            System.out.println(TAB + "Yay! There are no tasks in your list.");
+            response = new StringBuilder("Yay! There are no tasks in your list.");
         } else if (numTasks < 0) {  // print filtered tasks
-            System.out.println(TAB + "Here are the matching tasks in your list:");
+            response = new StringBuilder("Here are the matching tasks in your list:\n");
             int num = 1;
             for (Task t : tasks) {
-                System.out.println(
-                        TAB + num + "." + t.toString());
+                response.append(num).append(".").append(t.toString()).append("\n");
                 num++;
             }
         } else {
-            System.out.println(TAB + "Here are the tasks in your list:");
+            response = new StringBuilder("Here are the tasks in your list:\n");
             for (int i = 0; i < numTasks; i++) {
                 int num = i + 1;
                 Task task = tasks.get(i);
-                System.out.println(
-                        TAB + num + "." + task.toString());
+                response.append(num).append(".").append(task.toString()).append("\n");
             }
         }
+        return response.toString();
     }
 
     /**
@@ -64,18 +64,16 @@ public class Ui {
      * @param tasks arraylist of tasks.
      * @param index task index.
      */
-    public void printDone(ArrayList<Task> tasks, int index) {
-        System.out.println(TAB + "Nice! I've marked this task as done:");
-        System.out.println(TAB + tasks.get(index).toString());
+    public String printDone(ArrayList<Task> tasks, int index) {
+        return "Nice! I've marked this task as done:\n" + tasks.get(index).toString() + "\n";
     }
 
     /**
      * Prints to notify user which task is deleted.
-     * @param string String format of deleted task
+     * @param taskString String format of deleted task
      */
-    public void printDelete(String string) {
-        System.out.println(TAB + "Noted. I've removed this task:");
-        System.out.println(TAB + string);
+    public String printDelete(String taskString) {
+        return "Noted. I've removed this task:\n" + taskString + "\n";
     }
 
     /**
@@ -84,46 +82,44 @@ public class Ui {
      * @param tasks arraylist of tasks.
      * @param index task index.
      */
-    public void printAdd(ArrayList<Task> tasks, int index) {
-        System.out.println(TAB + "Got it. I've added this task:");
-        System.out.println(TAB + tasks.get(index).toString());
+    public String printAdd(ArrayList<Task> tasks, int index) {
+        return "Got it. I've added this task:\n" + tasks.get(index).toString() + "\n";
     }
 
     /**
      * Prints number of tasks in list.
      * @param numTasks number of tasks.
      */
-    public void printNumTasks(int numTasks) {
-        System.out.println(TAB + "Now you have " + numTasks + " tasks in the list.");
+    public String printNumTasks(int numTasks) {
+        return "Now you have " + numTasks + (numTasks == 1 ? " task" : " tasks") + " in your list.";
     }
 
     /**
      * Prints goodbye message followed by a line.
      */
-    public void printBye() {
-        System.out.println(TAB + "Goodbye, can't wait to see you again!");
-        System.out.println(LINE);
+    public String printBye() {
+        return "Goodbye, can't wait till our next adventure together!";
     }
 
     /**
      * Prints error message that description cannot be empty.
      * @param task task type.
      */
-    public void printEmptyDescError(String task) {
-        System.out.println(TAB + "Oops! Description of " + task + " cannot be empty.");
+    public String printEmptyDescError(String task) {
+        return "Oops! Description of " + task + " cannot be empty.";
     }
 
     /**
      * Prints error message that command cannot be identified.
      */
-    public void printIdkError() {
-        System.out.println(TAB + "I'm sorry, I'm not sure what that means.");
+    public String printIdkError() {
+        return "I'm sorry, I'm not sure what that means.";
     }
 
     /**
      * Prints to notify user of formatting requirement for date.
      */
-    public void printDateError() {
-        System.out.println(TAB + "Oops! Date should be in YYYY-MM-DD format.");
+    public String printDateError() {
+        return "Oops! Date should be in YYYY-MM-DD format.";
     }
 }

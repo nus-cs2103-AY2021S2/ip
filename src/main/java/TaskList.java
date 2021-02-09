@@ -23,8 +23,8 @@ public class TaskList {
     /**
      * Prints list of tasks saved in file.
      */
-    public void listTask() {
-        ui.printList(tasks, storage.numTasks);
+    public String listTask() {
+        return ui.printList(tasks, storage.numTasks);
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskList {
      * @param taskIndex arraylist index of the selected task.
      * @throws IOException for modifying data.
      */
-    public void doneTask(int taskIndex) throws IOException {
+    public String doneTask(int taskIndex) throws IOException {
         String before = tasks.get(taskIndex).formatData();
 
         tasks.get(taskIndex).markAsDone();
@@ -41,7 +41,7 @@ public class TaskList {
 
         storage.modifyFile(before, after);
 
-        ui.printDone(tasks, taskIndex);
+        return ui.printDone(tasks, taskIndex);
     }
 
     /**
@@ -51,16 +51,20 @@ public class TaskList {
      * @param taskIndex arraylist index of the selected task.
      * @throws IOException for deleting from file.
      */
-    public void deleteTask(int taskIndex) throws IOException {
+    public String deleteTask(int taskIndex) throws IOException {
+        String response;
+
         Task deletedTask = tasks.get(taskIndex);
 
         storage.deleteFromFile(deletedTask.formatData());
 
         tasks.remove(taskIndex);
-        ui.printDelete(deletedTask.toString());
+        response = ui.printDelete(deletedTask.toString());
 
         storage.numTasks--;
-        ui.printNumTasks(storage.numTasks);
+        response += ui.printNumTasks(storage.numTasks);
+
+        return response;
     }
 
     /**
@@ -71,18 +75,21 @@ public class TaskList {
      * @param description description of todo.
      * @throws IOException for adding to file.
      */
-    public void addTodo(String description) throws IOException {
+    public String addTodo(String description) throws IOException {
+        String response;
+
         if (description.equals("emptyDescError")) {
-            ui.printEmptyDescError("todo");
+            response = ui.printEmptyDescError("todo");
         } else {
             ToDos todo = new ToDos(description);
             tasks.add(todo);
-            ui.printAdd(tasks, storage.numTasks);
+            response = ui.printAdd(tasks, storage.numTasks);
             storage.addToFile(todo.formatData());
 
             storage.numTasks++;
-            ui.printNumTasks(storage.numTasks);
+            response += ui.printNumTasks(storage.numTasks);
         }
+        return response;
     }
 
     /**
@@ -95,9 +102,11 @@ public class TaskList {
      * @param date in YYYY-MM-DD format.
      * @throws IOException for adding to file.
      */
-    public void addDeadline(String description, String date) throws IOException {
+    public String addDeadline(String description, String date) throws IOException {
+        String response;
+
         if (description.equals("emptyDescError")) {
-            ui.printEmptyDescError("deadline");
+            response = ui.printEmptyDescError("deadline");
         } else {
             LocalDate localDate;
             try {
@@ -105,15 +114,16 @@ public class TaskList {
                 Deadlines deadline = new Deadlines(description, localDate);
 
                 tasks.add(deadline);
-                ui.printAdd(tasks, storage.numTasks);
+                response = ui.printAdd(tasks, storage.numTasks);
                 storage.addToFile(deadline.formatData());
 
                 storage.numTasks++;
-                ui.printNumTasks(storage.numTasks);
+                response += ui.printNumTasks(storage.numTasks);
             } catch (DateTimeParseException e) {
-                ui.printDateError();
+                response = ui.printDateError();
             }
         }
+        return response;
     }
 
     /**
@@ -126,24 +136,27 @@ public class TaskList {
      * @param date in YYYY-MM-DD format.
      * @throws IOException for adding to file.
      */
-    public void addEvent(String description, String date) throws IOException {
+    public String addEvent(String description, String date) throws IOException {
+        String response;
+
         if (description.equals("emptyDescError")) {
-            ui.printEmptyDescError("event");
+            response = ui.printEmptyDescError("event");
         } else {
             try {
                 LocalDate localDate = LocalDate.parse(date);
                 Events event = new Events(description, localDate);
 
                 tasks.add(event);
-                ui.printAdd(tasks, storage.numTasks);
+                response = ui.printAdd(tasks, storage.numTasks);
                 storage.addToFile(event.formatData());
 
                 storage.numTasks++;
-                ui.printNumTasks(storage.numTasks);
+                response += ui.printNumTasks(storage.numTasks);
             } catch (DateTimeParseException e) {
-                ui.printDateError();
+                response = ui.printDateError();
             }
         }
+        return response;
     }
 
     /**
@@ -153,13 +166,13 @@ public class TaskList {
      *
      * @param description keyword
      */
-    public void findTasks(String description) {
+    public String findTasks(String description) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task t : tasks) {
             if (t.description.contains(description)) {
                 filteredTasks.add(t);
             }
         }
-        ui.printList(filteredTasks, -1);
+        return ui.printList(filteredTasks, -1);
     }
 }
