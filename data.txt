@@ -1,4 +1,9 @@
 <<<<<<< HEAD
+1.[T][✘] read book
+2.[D][✘] som (by: Feb 2 2019)
+3.[T][ ] homework
+=======
+<<<<<<< HEAD
 1.[D][ ] some(by: Feb 2 2019)
 2.[E][ ] (at: Feb 2 2019)
 3.[T][ ] homework
@@ -12,4 +17,5 @@
 5.[E][ ] (at: Feb 2 2019)
 6.[T][ ] homework
 7.[D][ ] something (by: Mar 3 2019)
+>>>>>>> master
 >>>>>>> master

@@ -27,4 +27,13 @@ public class Events extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(at: " + duration.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
+    //this is an example of a functional interface
+    //to execute this,
+    //a lamda expression would then be called using
+    //MultiMethodInterface method = parameter -> parameter + "from lamda"
+    //String result = Events.add("message", method);
+    public String add(String arg, MultiMethodInterface method) {
+        return method.method(arg);
+    }
 }
