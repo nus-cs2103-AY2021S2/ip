@@ -50,6 +50,7 @@ public class Duke {
         }
         if (input.equalsIgnoreCase("bye")) {
             isRunning = false;
+            storage.storeFile(tasks);
             return "Bye. Hope to see you again soon!";
         }
 

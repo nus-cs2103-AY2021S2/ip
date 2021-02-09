@@ -38,6 +38,10 @@ public class Task {
      *
      * @return String formatting.
      */
+    public boolean isComplete() {
+        return isComplete;
+    }
+
     public String toFormattedString() {
         return "T | " + (isComplete ? 1 : 0) + " | " + task;
     }

@@ -30,11 +30,6 @@ public class Parser {
     }
 
     public String delete(int index) throws DukeException {
-        // Check if in tasks
-        if (index > tasks.size() - 1) {
-            throw new DukeException("Unable to remove item!");
-        }
-
         // Mark complete
         Task task = tasks.remove(index);
 
@@ -45,14 +40,11 @@ public class Parser {
     }
 
     public String markDone(int index) throws DukeException {
-        // Check if in tasks
-        if (index > tasks.size() - 1) {
-            throw new DukeException("Unable to remove item!");
-        }
-
         // Mark complete
         Task task = tasks.get(index);
         task.markComplete();
+
+        assert task.isComplete() : "Failed to mark done";
 
         String message = "Nice, I've marked the task as done!";
         message += "\n" + task;
@@ -60,9 +52,11 @@ public class Parser {
         return message;
     }
 
-    public String createToDo(String description) throws DukeException {
+    public String createToDo(String description) {
         Task task = new Task(description);
         tasks.add(task);
+
+        assert tasks.contains(task) : "Failed to add task";
 
         String message = "Got it! I've added this task.";
         message += "\n" + task;
@@ -74,6 +68,8 @@ public class Parser {
         Task task = new Deadline(description, time);
         tasks.add(task);
 
+        assert tasks.contains(task) : "Failed to add deadline";
+
         String message = "Got it! I've added this task.";
         message += "\n" + task;
         message += "\n" + "Now you have " + tasks.size() + " tasks in the list.";
@@ -83,6 +79,8 @@ public class Parser {
     public String createEvent(String description, String time) throws DukeException {
         Task task = new Event(description, time);
         tasks.add(task);
+
+        assert tasks.contains(task) : "Failed to add event";
 
         String message = "Got it! I've added this task.";
         message += "\n" + task;
@@ -104,4 +102,5 @@ public class Parser {
         }
         return message;
     }
+
 }

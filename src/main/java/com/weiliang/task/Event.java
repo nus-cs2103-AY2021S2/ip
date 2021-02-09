@@ -1,15 +1,22 @@
 package com.weiliang.task;
 
+import com.weiliang.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    private LocalDateTime timing;
+    private final LocalDateTime timing;
 
-    public Event(String task, String timing) {
+    public Event(String task, String timing) throws DukeException {
         super(task);
-        this.timing = LocalDateTime.parse(timing);
+        try {
+            this.timing = LocalDateTime.parse(timing);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Unable to parse date!");
+        }
     }
 
     @Override
@@ -20,7 +27,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E][" + (isComplete ? "X" : " ") + "] " + task + " (at: "
-                + timing.format(DateTimeFormatter.ofPattern("dd MMMM YYYY, hh:mma")) + ")";
+                + timing.format(DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mma")) + ")";
     }
 
 }

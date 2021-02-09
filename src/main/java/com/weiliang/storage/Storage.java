@@ -82,8 +82,9 @@ public class Storage {
      * 
      * @param content Raw string content.
      * @return The parsed task.
+     * @throws DukeException If file fails to load.
      */
-    private Task parseTask(String content) {
+    private Task parseTask(String content) throws DukeException {
         // Format -> D | 1 | details | timing
         String[] parts = content.split(" \\| ");
         Task task;
