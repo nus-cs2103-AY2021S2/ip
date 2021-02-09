@@ -1,7 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
+/**
+ * represents a task to be completed by a certain time or the deadline of the task
+ */
 public class Deadline extends Task {
 
     LocalDate localDate;
@@ -10,6 +12,12 @@ public class Deadline extends Task {
 
     String dateString;
 
+    /**
+     *
+     * @param description the description of the deadline tasl
+     * @throws EmptyArgumentException empty argument exception
+     * @throws BadDateException bad date exception
+     */
     Deadline(String description) throws EmptyArgumentException, BadDateException {
         super(description);
         int indexOfDate = description.indexOf("/") + 4;
@@ -25,6 +33,11 @@ public class Deadline extends Task {
     public String getDateString() {
         return dateString;
     }
+
+    /**
+     *
+     * @return the string representation of a deadline object
+     */
     @Override
     public String toString() {
         return "[D]" +  "[" + (isCompleted ? "X" : " ") + "] " + formattedDescription;

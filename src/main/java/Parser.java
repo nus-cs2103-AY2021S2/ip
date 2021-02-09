@@ -1,4 +1,13 @@
+/**
+ * Parser class to parse user input
+ */
 public class Parser {
+    /**
+     *
+     * @param line the command
+     * @return a command
+     * @throws InvalidCommandException when the command is not recognized
+     */
     public Command parseCommand(String line) throws InvalidCommandException {
         String[] inputs = line.split(" ");
         if(inputs[0].equals("list")) {

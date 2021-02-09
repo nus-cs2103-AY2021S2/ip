@@ -2,18 +2,45 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Task list class stores user tasks
+ */
 public class TaskList {
     List<Task> tasks;
+
+    /**
+     * creates a task list object
+     */
     TaskList() {
         tasks = new ArrayList<>();
     }
+
+    /**
+     *
+     * @param tasks the user tasks
+     */
     TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
+
+    /**
+     *
+     * @return num of items in the task
+     */
     public int numOfItems() {
         return tasks.size();
     }
 
+    /**
+     *
+     * @param command the type of command needed to be executed according to user input
+     * @param ui the ui object
+     * @param storage the storage object
+     * @throws EmptyArgumentException empty argument exception
+     * @throws BadDateException bad date exception
+     * @throws InvalidCommandException invalid command exception
+     * @throws IOException ioexception
+     */
     public void run(Command command, Ui ui,Storage storage) throws EmptyArgumentException, BadDateException, InvalidCommandException, IOException {
         switch(command.getType()) {
             case "deadline":

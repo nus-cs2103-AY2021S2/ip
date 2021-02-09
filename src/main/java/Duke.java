@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * class for duke
+ */
 public class Duke {
 
     private Storage storage;
@@ -11,6 +14,10 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     *
+     * @param filePath file path which contains the app data
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +31,13 @@ public class Duke {
         }
     }
 
+    /**
+     *
+     * @throws EmptyArgumentException empty argument exception
+     * @throws BadDateException bad date exception
+     * @throws InvalidCommandException invalid command exception
+     * @throws IOException ioexception
+     */
     public void run() throws EmptyArgumentException, BadDateException, InvalidCommandException, IOException {
         ui.sendWelcomeMessage();
         while(true) {
@@ -35,6 +49,14 @@ public class Duke {
         ui.byeUser();
     }
 
+    /**
+     *
+     * @param args args
+     * @throws EmptyArgumentException empty argument exception
+     * @throws BadDateException bad date exception
+     * @throws InvalidCommandException invalid command exception
+     * @throws IOException ioexception
+     */
     public static void main(String[] args) throws EmptyArgumentException, BadDateException, InvalidCommandException, IOException {
         new Duke(System.getProperty("user.dir") + "/data/duke.txt").run();
     }

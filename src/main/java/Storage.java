@@ -7,11 +7,25 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Storage class stores user data
+ */
 public class Storage {
     String filePath;
+
+    /**
+     *
+     * @param filePath the file path to user data
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     *
+     * @param tasks the user tasks
+     * @throws IOException ioexception
+     */
     public void save(List<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath);
         for(Task task : tasks) {
@@ -19,6 +33,14 @@ public class Storage {
         }
         writer.close();
     }
+
+    /**
+     *
+     * @param line the string representation of the file
+     * @return the task
+     * @throws EmptyArgumentException if the file has not enough lines
+     * @throws BadDateException if the file writes in the date wrongly
+     */
     private Task convertToTaskFormat(String line) throws EmptyArgumentException, BadDateException {
         String[] arr = line.split(Pattern.quote(" | "));
         Task task;
@@ -29,6 +51,12 @@ public class Storage {
         else task.isCompleted = false;
         return task;
     }
+
+    /**
+     *
+     * @param task the task information to be encoded into the file
+     * @return a line in the file
+     */
     private String convertToFileFormat(Task task) {
         String fileString = "";
         if(task instanceof ToDos) fileString += "T | ";
@@ -39,6 +67,13 @@ public class Storage {
         fileString += task.description;
         return fileString;
     }
+
+    /**
+     *
+     * @return all the user tasks
+     * @throws IOException ioexception
+     * @throws EmptyArgumentException empty argument exception
+     */
     public List<Task> load() throws IOException, EmptyArgumentException {
         List<Task> tasks = new ArrayList<>();
         try {
