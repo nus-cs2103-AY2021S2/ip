@@ -32,18 +32,12 @@ public class Ui {
 
     /**
      * Constructor to set standard input and output for Ui
-     * @param in
-     * @param out
+     * @param in InputStream
+     * @param out PrintStream
      */
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
-    }
-
-    public String getUserCommand() {
-        out.print(LINE_PREFIX);
-        String rawInput = in.nextLine();
-        return rawInput;
     }
 
     public String showWelcome() {

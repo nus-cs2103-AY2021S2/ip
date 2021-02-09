@@ -3,23 +3,12 @@ import java.io.IOException;
 import duke.*;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeToDoException;
-
 import duke.command.Command;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
 
 public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Constructor for Duke object with default filepath for storage

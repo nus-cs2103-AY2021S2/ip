@@ -5,7 +5,6 @@ import duke.Storage;
 import duke.TaskList;
 import duke.exception.DukeCommandException;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.Ui;
@@ -15,8 +14,8 @@ import java.time.LocalDateTime;
 
 public class TaskCommand extends Command {
     private LocalDateTime time = null;
-    private String description;
-    private String taskType;
+    private final String description;
+    private final String taskType;
 
     public TaskCommand(String taskType, String description) {
         this.taskType = taskType;

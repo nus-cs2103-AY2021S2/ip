@@ -44,7 +44,7 @@ public class Storage {
     /**
      * Method to save TaskList to hard disk.
      *
-     * @param taskList
+     * @param taskList List of Tasks
      * @throws IOException
      */
     public void saveData(List<Task> taskList) throws IOException {
@@ -84,7 +84,7 @@ public class Storage {
     /**
      * Wrapper method to accept TaskList instead of a List.
      *
-     * @param taskList
+     * @param taskList TaskList containing List of Tasks
      * @throws IOException
      */
     public void saveData(TaskList taskList) throws IOException {
@@ -102,7 +102,7 @@ public class Storage {
             String taskType = storedTask[0];
             boolean isDone = storedTask[1].equals("true");
             String taskDescription = storedTask[2];
-            Task taskToBeAdded = null;
+            Task taskToBeAdded;
             switch (taskType) {
                 case "DEADLINE":
                     taskToBeAdded = new Deadline(taskDescription, LocalDateTime.parse(storedTask[3]), isDone);

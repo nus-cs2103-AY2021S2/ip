@@ -39,16 +39,6 @@ public class FindCommand extends Command{
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage){
-        // Stream<Task> fullTaskStream = new ArrayList<Task>(taskList.getTaskList()).stream();
-        // BiFunction<Task, String, Boolean> hasKeyword = (task, keyword) -> {
-        //     // return tasks that contains keyword
-        //     return task.getTaskDescription().contains(keyword);
-        // };
-        //
-        // List<Task> findResults = fullTaskStream.filter(task -> {
-        //         return hasKeyword.apply(task, this.keyword);
-        //         }).collect(Collectors.toList());
-
         TaskList findResults = findMatchingTasks(taskList);
         return ui.showFoundTasks(findResults);
 

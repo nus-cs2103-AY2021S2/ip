@@ -8,7 +8,7 @@ import duke.task.Task;
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
 
     public DeleteCommand(int index) {
         this.index = index;
@@ -18,8 +18,6 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task deletedTask = taskList.getTask(index);
         taskList.deleteTask(index);
-        // System.out.printf(">>> Nice! I've marked this task as done:\n  [%s] [%s] %s\n",
-        //         taskList..getTaskType(), newTask.getStatusIcon(), newTask.getTaskDescription());
         storage.saveData(taskList);
         return ui.showTaskDeleted(deletedTask);
     }

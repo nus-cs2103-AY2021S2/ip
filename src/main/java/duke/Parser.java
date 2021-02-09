@@ -13,7 +13,7 @@ public class Parser {
 
     /**
      * Parses a userInput and outputs a command for execution
-     * @param userInput
+     * @param userInput user's input
      * @return Different Command depending on input
      */
     public static Command parseCommand(String userInput) throws DukeToDoException, DukeCommandException {
@@ -44,7 +44,7 @@ public class Parser {
 
     /**
      * Parse the command args in the context of Done
-     * @param arg
+     * @param arg user's input without the command part
      * @return DoneCommand
      */
     public static Command parseDone(String arg) {
@@ -54,7 +54,7 @@ public class Parser {
 
     /**
      * Parse the command args in the context of Delete
-     * @param arg
+     * @param arg user's input without the command part
      * @return DeleteCommand
      */
     public static Command parseDelete(String arg) {
@@ -64,18 +64,17 @@ public class Parser {
 
     /**
      * Parse the command args in the context of Find
-     * @param arg
+     * @param keyword keyword to search the task description for
      * @return FindCommand
      */
-    public static Command parseFind(String arg) {
-        String keyword = arg;
+    public static Command parseFind(String keyword) {
         return new FindCommand(keyword);
     }
 
 
     /**
      * Parse the command in the context of Task
-     * @param input
+     * @param input user's input
      * @return TaskCommand
      */
     public static Command parseTask(String input) throws DukeToDoException, DukeCommandException {
