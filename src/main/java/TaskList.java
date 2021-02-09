@@ -34,6 +34,7 @@ public class TaskList {
      * @param task a Task object to be added into the TaskList
      */
     Task addTask(Task task) {
+        assert list != null : "List has not been instantiated";
         list.add(task);
         listSize++;
 
@@ -48,6 +49,8 @@ public class TaskList {
      * @param index the 1-based index of the Task object to be removed.
      */
     Task removeTask(int index) {
+        assert list != null : "List has not been instantiated";
+
         Task temp = list.get(index - 1);
         list.remove(index - 1);
         listSize--;
@@ -62,6 +65,9 @@ public class TaskList {
      * @param index the 1-based index of the Task object to be removed.
      */
     Task markTaskAsDone(int index) {
+        assert list != null : "List has not been instantiated";
+        assert !list.isEmpty() : "List has no tasks";
+
         Task temp = list.get(index - 1);
         temp.markAsDone();
         return temp;
@@ -85,10 +91,12 @@ public class TaskList {
     }
 
     List<Task> getList() {
+        assert list != null : "List has not been instantiated";
         return this.list;
     }
 
     int getListSize() {
+        assert list != null : "List has not been instantiated";
         return this.listSize;
     }
 }
