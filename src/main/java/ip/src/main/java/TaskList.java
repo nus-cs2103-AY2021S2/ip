@@ -1,12 +1,11 @@
 package ip.src.main.java;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TaskList stores and manipulate the tasks in a List.
  *
  */
-
 public class TaskList {
     protected List<Task> list;
 
@@ -30,7 +29,7 @@ public class TaskList {
      * @return Boolean to indicate if list is empty.
      */
 
-    public boolean Empty() {
+    public boolean isEmpty() {
         return this.list.isEmpty();
     }
 
@@ -38,13 +37,14 @@ public class TaskList {
      * Prints the tasks in the list in order.
      *
      */
-
-    public void printTasks() {
+    public String printTasks() {
         int counter = 1;
+        String output = "";
         for (Task element : this.list) {
-            System.out.println(String.valueOf(counter) + ". " + element);
+            output += String.valueOf(counter) + ". " + element + "\n";
             counter++;
         }
+        return output;
     }
 
     /**
@@ -53,7 +53,6 @@ public class TaskList {
      * @param id The position of the task to be retrieved in the list.
      * @return A task in the list.
      */
-
     public Task getTask(int id) {
         return this.list.get(id);
     }
@@ -63,7 +62,6 @@ public class TaskList {
      *
      * @param id The position of the task to be removed from the list.
      */
-
     public void remove(int id) {
         this.list.remove(id);
     }
@@ -73,20 +71,18 @@ public class TaskList {
      *
      * @return The number of tasks in the list.
      */
-
-    public int size(){
+    public int size() {
         return this.list.size();
     }
 
-    public TaskList findTasks(String keyword){
+    public TaskList findTasks(String keyword) {
         TaskList taskListWithMatches = new TaskList();
 
-        for(Task task: this.list){
-            if(task.isMatch(keyword)){
+        for (Task task: this.list) {
+            if (task.isMatch(keyword)) {
                 taskListWithMatches.addTask(task);
             }
         }
-
         return taskListWithMatches;
     }
 }

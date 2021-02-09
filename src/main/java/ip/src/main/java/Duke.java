@@ -7,17 +7,18 @@ public class Duke {
     /** Tasks stored in this task list object */
     TaskList list;
 
-    public Duke(){
-
+    public Duke() {
         this.list = new TaskList();
     }
 
     /**
      * Sends a greeting to the user.
      */
-    public void greet(){
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    public String greet() {
+        String output = "";
+        output += "Hello! I'm Duke! :)" + "\n";
+        output += "What can I do for you?";
+        return output;
     }
 
     /**
@@ -37,11 +38,13 @@ public class Duke {
      * @param task Task object created from user input.
      */
 
-    public void addToList(Task task){
+    public String addToList(Task task){
         this.list.addTask(task);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + String.valueOf(this.list.size()) + " tasks in the list.");
+        String output = "";
+        output += "Got it. I've added this task: " + "\n";
+        output += "    " + task;
+        output += "Now you have " + String.valueOf(this.list.size()) + " tasks in the list.";
+        return output;
     }
 
     /**
@@ -51,19 +54,21 @@ public class Duke {
      */
 
     public void addToBot(Task task){
-
         this.list.addTask(task);
     }
 
     /**
      * Prints the tasks in the bot list.
      */
-    public void printList(){
+    public String printList(){
+        String output = "";
 
-        if(this.list.Empty()){
-            System.out.println("There are no tasks!");
+        if(this.list.isEmpty()){
+            output += "There are no tasks!";
+        } else {
+            output += this.list.printTasks();
         }
-        this.list.printTasks();
+        return output;
     }
 
     /**
@@ -71,11 +76,13 @@ public class Duke {
      *
      * @param id The position ,1-th based, of the task to be marked done in the bot list.
      */
-    public void markTaskAsDone(int id){
+    public String markTaskAsDone(int id){
         Task task = this.list.getTask(id-1);
         task.markDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  [X] "+ task.content);
+        String output = "";
+        output += "Nice! I've marked this task as done:";
+        output += "  [X] "+ task.content;
+        return output;
     }
 
     /**
@@ -83,12 +90,14 @@ public class Duke {
      *
      * @param id The position ,1-th based, of the task to be marked done in the bot list.
      */
-    public void deleteTask(int id){
+    public String deleteTask(int id){
         Task task = this.list.getTask(id-1);
         this.list.remove(id-1);
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println("    " + task);
-        System.out.println("Now you have " + String.valueOf(this.list.size()) + " tasks in the list.");
+        String output = "";
+        output += "Noted. I've removed this task: ";
+        output += "    " + task + "\n";
+        output += "Now you have " + String.valueOf(this.list.size()) + " tasks in the list.";
+        return output;
 
     }
 
@@ -97,9 +106,9 @@ public class Duke {
      *
      * @param keyword The keyword given by the user.
      */
-    public void findMatchingTasks(String keyword){
+    public String findMatchingTasks(String keyword){
         TaskList matchingTasks = this.list.findTasks(keyword);
-        matchingTasks.printTasks();
+        return matchingTasks.printTasks();
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package view;
+package ip.src.main.java;
 
 import java.io.IOException;
 import java.util.Collections;

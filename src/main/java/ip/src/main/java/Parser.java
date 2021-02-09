@@ -1,5 +1,7 @@
 package ip.src.main.java;
 
+import java.util.Locale;
+
 /**
  * Parser is a class that parsers user input to retrieve user commands, information to create Task objects etc.
  *
@@ -7,7 +9,7 @@ package ip.src.main.java;
 
 public class Parser {
 
-    Parser(){
+    Parser() {
     }
 
     /**
@@ -16,9 +18,22 @@ public class Parser {
      * @param input Input entered by user.
      * @return Returns the first word that represents the command given by the user.
      */
-    public String getCommand(String input) {
-        String command = input.split(" ")[0];
-        return command;
+    public Command getCommand(String input) throws DukeException {
+        String commandType = "";
+        if (input.equals("bye")) {
+            commandType = "bye";
+        } else if (input.equals("list")) {
+            commandType = "list";
+        } else {
+            commandType = input.split(" ")[0];
+        }
+        try {
+            Command command = Command.valueOf(commandType.toUpperCase(Locale.ENGLISH));
+            return command;
+
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("OOPS! I don't know what this means! :(");
+        }
     }
 
     /**
@@ -92,7 +107,7 @@ public class Parser {
      * @return Integer ID that represents the position (1-th based) of the task in the TaskList.
      */
 
-    public int getId(String input){
+    public int getId(String input) {
         int id = Integer.valueOf(input.split(" ")[1]);
         return id;
     }
@@ -104,11 +119,8 @@ public class Parser {
      * @return The keyword used to find the matching tasks in the Task list.
      */
 
-    public String getKeyword(String input){
+    public String getKeyword(String input) {
         String keyword = input.split(" ", 2)[1];
         return keyword;
     }
-
-
-
 }

@@ -1,4 +1,6 @@
-package ip.src.main.java;
+package ip.src.main;
+
+import ip.src.main.java.*;
 
 import java.io.IOException;
 import java.io.File;

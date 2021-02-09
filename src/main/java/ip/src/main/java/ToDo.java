@@ -5,9 +5,9 @@ package ip.src.main.java;
  *
  */
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
-    public ToDo(String content){
+    public ToDo(String content) {
         super(content);
     }
 
@@ -19,9 +19,9 @@ public class ToDo extends Task{
 
     @Override
     public String toString() {
-        if(!this.done){
+        if (!this.done) {
             return "T | 0 | " + super.toString();
-        }else {
+        } else {
             return "T | 1 | " + super.toString();
         }
     }

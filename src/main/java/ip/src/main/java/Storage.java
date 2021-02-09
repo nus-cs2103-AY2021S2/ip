@@ -14,7 +14,7 @@ public class Storage {
     protected String filePath;
     protected Duke bot;
 
-    Storage(String filePath, Duke bot){
+    Storage (String filePath, Duke bot) {
         this.filePath = filePath;
         this.bot = bot;
     }
@@ -22,51 +22,68 @@ public class Storage {
     /**
      * Updates the Duke bot with the tasks by loading the tasks in the file.
      *
-     * @param TaskData The task from the file.
+     * @param taskData The task from the file.
      * @throws FileNotFoundException
      */
 
-    public void loadTask(String TaskData) throws FileNotFoundException {
+    public void loadTask(String taskData) throws FileNotFoundException {
         File f = new File(this.filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         Task newTask = new Task("");
 
-        String[] taskData = TaskData.split(" \\| ");
-            String type = taskData[0];
-            String doneStatus = taskData[1];
-            if (type.equals("T")) {
-                String details = taskData[2];
-                newTask = new ToDo(details);
-                bot.addToBot(newTask);
+        String[] taskDataArr = taskData.split(" \\| ");
+        String type = taskDataArr[0];
+        String doneStatus = taskDataArr[1];
+        if (type.equals("T")) {
+            String details = taskDataArr[2];
+            newTask = new ToDo(details);
+            bot.addToBot(newTask);
 
-            } else if (type.equals("E")) {
-                String content = taskData[2];
-                String at = taskData[3];
-                newTask = new Event(content, at);
-                bot.addToBot(newTask);
+        } else if (type.equals("E")) {
+            String content = taskDataArr[2];
+            String at = taskDataArr[3];
+            newTask = new Event(content, at);
+            bot.addToBot(newTask);
 
-            } else {
-                String content = taskData[2];
-                String by = taskData[3];
-                newTask = new Deadline(content, by);
-                bot.addToBot(newTask);
-            }
-
-            if (doneStatus == " 1 ") {
-                newTask.markDone();
-            }
-
+        } else {
+            String content = taskDataArr[2];
+            String by = taskDataArr[3];
+            newTask = new Deadline(content, by);
+            bot.addToBot(newTask);
         }
+
+        if (doneStatus == " 1 ") {
+            newTask.markDone();
+        }
+
+    }
+
+    /**
+     * Updates the Duke bot with the tasks stored in the file by calling the loadTask method.
+     *
+     * @param filePath The file with the tasks.
+     * @param bot The duke bot.
+     * @throws FileNotFoundException
+     */
+    public void createBot(String filePath, Duke bot) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        Storage storage = new Storage(filePath, bot);
+
+        while (s.hasNext()) {
+            storage.loadTask(s.nextLine());
+        }
+
+    }
 
     /**
      * Updates the file with the bot current TaskList.
      *
      * @throws IOException
      */
-
     public void updateFile() throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
-        for(Task element:this.bot.list.list) {
+        for (Task element:this.bot.list.list) {
             fw.write(element.toString() + "\n");
 
         }

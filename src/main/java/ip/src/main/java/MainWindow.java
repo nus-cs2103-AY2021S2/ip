@@ -1,5 +1,8 @@
-package view;
+package ip.src.main.java;
 
+import ip.src.main.java.DialogBox;
+import ip.src.main.java.Duke;
+import ip.src.main.java.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

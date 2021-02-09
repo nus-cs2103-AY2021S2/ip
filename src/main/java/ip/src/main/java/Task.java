@@ -7,8 +7,9 @@ package ip.src.main.java;
 
 public class Task {
     //int id;
-    String content;
-    public boolean done = false;
+    protected String content;
+    protected boolean done = false;
+
     public Task(String content) {
         //this.id = id;
         this.content = content;
@@ -19,10 +20,8 @@ public class Task {
      * Updates the Task Status to completed.
      *
      */
-
-    public void markDone(){
+    public void markDone() {
         this.done = true;
-
     }
 
     /**
@@ -30,12 +29,11 @@ public class Task {
      *
      * @return Returns True if task content has keyword.
      */
-
-    public boolean isMatch(String keyword){
+    public boolean isMatch(String keyword) {
         return this.content.contains(keyword);
     }
 
-    public String toString(){
+    public String toString() {
         return this.content;
     }
 

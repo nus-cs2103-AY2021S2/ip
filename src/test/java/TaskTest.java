@@ -1,22 +1,20 @@
-import ip.src.main.java.Duke;
-import ip.src.main.java.Task;
-import ip.src.main.java.ToDo;
-import org.junit.jupiter.api.Test;
-import java.util.List;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import ip.src.main.java.Task;
+
 
 public class TaskTest {
     @Test
-    /**
-     * Tests if the markdone() method in the Task class behaves as expected.
+
+    /*
+      Tests if the markDone() method in the Task class behaves as expected.
      */
-    public void taskDoneTest(){
+    public void taskDoneTest() {
         Task task = new Task("Test");
         task.markDone();
-        assertTrue(task.done == true);
+        assertEquals(true , task.done);
 
     }
 }
