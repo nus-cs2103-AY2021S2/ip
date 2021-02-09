@@ -121,6 +121,7 @@ class Ui {
      * print all the tasks of Today.
      *
      * @param taskList The tasklist related.
+     * @return output of this scho
      */
     public String echoTaskToday(ArrayList<Task> taskList) {
         String ans = "Here are the tasks today, Lisa:\n";
@@ -151,6 +152,43 @@ class Ui {
             }
         }
         return ans;
+    }
+    /**
+     * Print all the deadlines coming up..
+     *
+     * @param taskList The taskList related.
+     * @return output of this scho
+     */
+    public String echoReminder(ArrayList<Task> taskList) {
+        String ans = "Here are the upcoming deadlines, Lisa:\n";
+        ArrayList<Deadline> deadlineList = new ArrayList<>();
+        for (Task task : taskList) {
+            if ((task instanceof Deadline) && !task.isTaskDone()) {
+                addDeadline(deadlineList, (Deadline) task);
+            }
+        }
+        for (Deadline deadline : deadlineList) {
+            ans += String.format(" %d. " + deadline.printTask() + "\n", deadlineList.indexOf(deadline) + 1);
+        }
+        return ans;
+    }
+
+    /**
+     * (Helper function) Adds a deadline to a deadline list in the correct chronological order.
+     *
+     * @param deadlineList the deadline list related.
+     * @param deadline the deadline to add.
+     */
+    private void addDeadline(ArrayList<Deadline> deadlineList, Deadline deadline) {
+        int insertIndex = 0;
+        for (Deadline dl : deadlineList) {
+            if (dl.getDlTime().isBefore(deadline.getDlTime())) {
+                insertIndex++;
+            } else {
+                break;
+            }
+        }
+        deadlineList.add(insertIndex, deadline);
     }
 
     /**

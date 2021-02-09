@@ -38,6 +38,8 @@ class Parser {
             return getMyTaskOnCommand(commandLine);
         } else if (commandLine.startsWith("find ")) {
             return getFindCommand(commandLine);
+        } else if (commandLine.startsWith("reminder")) {
+            return getReminderCommand(commandLine);
         } else {
             return new Command("executeFalseCommand", "");
         }
@@ -208,6 +210,13 @@ class Parser {
             return new Command("executeFalseCommand", "find");
         }
         return new Command("find", commandLine.substring(5));
+    }
+
+    private static Command getReminderCommand(String commandLine) {
+        if (commandLine.length() != 8) {
+            return new Command("executeFalseCommand", "reminder");
+        }
+        return new Command("reminder", "");
     }
 
     /**

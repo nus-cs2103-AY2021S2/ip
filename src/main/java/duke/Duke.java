@@ -115,6 +115,8 @@ class Duke {
             throw new DukeException("myTaskToday command should not have body, Lisa!");
         } else if (command.startsWith("myTaskOn")) {
             throw new DukeException("No body or wrong body format for myTaskOn command, Lisa!");
+        } else if (command.startsWith("reminder")) {
+            throw new DukeException("Reminder command should not have body, Lisa!");
         } else {
             //This is not the last case but everything else.
             throw new DukeException("Invalid command format, Lisa!");
@@ -159,6 +161,9 @@ class Duke {
             break;
         case "find":
             ans = myDuke.ui.echoPrintFindResult(myDuke.getTaskList().getListUsed(), command.getCommandContent());
+            break;
+        case "reminder":
+            ans = myDuke.ui.echoReminder(myDuke.getTaskList().getListUsed());
             break;
         default:
             try {
