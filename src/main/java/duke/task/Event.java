@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 public class Event extends Task {
     private static final String TASK_TYPE = "EVENT";
-//    private String startTime;
-//    private String endTime;
     private LocalDateTime eventTime;
 
     public Event(String description, LocalDateTime eventTime) {

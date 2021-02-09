@@ -23,11 +23,6 @@ public class Task {
         return TASK_TYPE;
     }
 
-    // public Task setIsDone(boolean done) {
-    //
-    //     return new Task(this.taskDescription, done);
-    // }
-
     public void setIsDone(boolean done) {
         this.isDone = done;
     }

@@ -3,17 +3,14 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.DukeCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -50,14 +47,13 @@ public class RemindCommand extends Command{
             }
             LocalDateTime now = LocalDateTime.now();
             Duration timeDiff = Duration.between(now, taskTime);
-            boolean inBounds = (timeDiff.toDays() < this.numDays) && (timeDiff.toDays() > 0);
-            return  inBounds && validTaskType;
+            return (timeDiff.toDays() < this.numDays) && (timeDiff.toDays() > 0);
         } else {
             return false;
         }
 
 
-    };
+    }
 
     private TaskList findUpcomingTasks(TaskList taskList) throws IllegalStateException{
         Stream<Task> fullTaskStream = new ArrayList<>(taskList.getTaskList()).stream();
@@ -70,7 +66,7 @@ public class RemindCommand extends Command{
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeCommandException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList upcomingTasks = findUpcomingTasks(taskList);
         return ui.showUpcomingTasks(upcomingTasks);
     }

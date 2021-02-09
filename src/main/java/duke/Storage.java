@@ -33,7 +33,7 @@ public class Storage {
         File file = new File(filePathStr);
         if (Files.notExists(this.filePath)) {
             try {
-                System.out.println("created new file");
+                System.out.println("created new file:" + this.filePathStr);
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
