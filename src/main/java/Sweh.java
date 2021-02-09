@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import nodes.DialogBox;
+import task.Deadline;
+import task.Event;
+import task.ToDo;
 import util.Formatter;
 import util.Ui;
 

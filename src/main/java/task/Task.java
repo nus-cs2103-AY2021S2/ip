@@ -1,6 +1,8 @@
+package task;
+
 import java.util.HashMap;
 
-public abstract class Task {
+public abstract class Task implements Storable<Task> {
     protected static final char saveDelimiter = '|';
     private final String description;
     private boolean isDone;

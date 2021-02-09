@@ -17,13 +17,13 @@ public interface Storage {
         return file;
     }
 
-    static void writeSave(String lines) throws IOException {
+    static void writeToFile(String lines) throws IOException {
         FileWriter fw = new FileWriter(getFile());
         fw.write(lines);
         fw.close();
     }
 
-    static String readSave() throws IOException {
+    static String readFromFile() throws IOException {
         File file = getFile();
         Scanner sc = new Scanner(file);
         StringBuilder output = new StringBuilder();
