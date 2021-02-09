@@ -45,4 +45,16 @@ public class Ui {
             }
         }
     }
+
+    public void showMatchingTasks(ArrayList<Task> matchingTasks) {
+        if (matchingTasks.size() == 0) {
+            System.out.println("Looks like there were no tasks matching your search, try again?");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                Task item = matchingTasks.get(i);
+                System.out.println((i + 1) + "." + item.toString());
+            }
+        }
+    }
 }
