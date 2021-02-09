@@ -22,9 +22,9 @@ public class Duke {
 
     /**
      * Generates a relevant response to the user input.
-     * @param input
-     * @return
-     * @throws DukeException
+     * @param input Input from the user, as a String.
+     * @return Relevant response from Duke, as a String.
+     * @throws DukeException If an Exception occurs while processing the response.
      */
     public String getResponse(String input) throws DukeException {
         String response = commandParser.parseCommand(input);

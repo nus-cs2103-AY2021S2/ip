@@ -52,8 +52,8 @@ public class Ui {
 
     /**
      * Returns the contents of a TaskList in a neat format.
-     * @param tasks
-     * @return
+     * @param tasks TaskList containing the tasks to be displayed.
+     * @return String summarizing all the tasks in the TaskList.
      */
     public String displayList(TaskList tasks) {
         String output;
