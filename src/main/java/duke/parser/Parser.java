@@ -47,6 +47,8 @@ public class Parser {
         String type = userInputArray[0];
         String userInput = input.replace(type, " ");
 
+        assert commandArray[0]!= null: "Command cannot be null";
+
         if (commandArray[0].equals("find")) {
             if (userInput.isBlank()) {
                 throw new DukeException("Please input task description to be searched.");

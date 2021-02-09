@@ -67,23 +67,24 @@ public class Task {
     }
 
     /** Return the string version of task from data file to task objects
-     * @param stringTask
+     * @param input
      * @return
      */
-    public Task changeToTaskFormat(String stringTask) {
+    public Task changeToTaskFormat(String input) {
 
-        if (stringTask.charAt(0) == 'T') {
-            String[] tasks = stringTask.split(",");
+        assert input!= null:"Task identifier from data file should be specified";
+        if (input.charAt(0) == 'T') {
+            String[] tasks = input.split(",");
             return new ToDo(tasks[2], Boolean.parseBoolean(tasks[1]));
-        } else if (stringTask.charAt(0) == 'D') {
-            String[] tasks = stringTask.split(",");
+        } else if (input.charAt(0) == 'D') {
+            String[] tasks = input.split(",");
 
             LocalDate date = LocalDate.parse(tasks[3], dateFormatter);
             LocalTime startTime = LocalTime.parse(tasks[4], timeFormatter);
 
             return new Deadline(tasks[2], Boolean.parseBoolean(tasks[1]), date, startTime);
-        } else if (stringTask.charAt(0) == 'E') {
-            String[] tasks = stringTask.split(",");
+        } else if (input.charAt(0) == 'E') {
+            String[] tasks = input.split(",");
 
             LocalDate date = LocalDate.parse(tasks[3], dateFormatter);
             LocalTime startTime = LocalTime.parse(tasks[4], timeFormatter);

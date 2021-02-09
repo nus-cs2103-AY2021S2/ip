@@ -31,7 +31,6 @@ public class Duke extends Application {
     }
 
     public String displayStartMsg(){
-
         return ui.displayStartMessage();
     }
 
