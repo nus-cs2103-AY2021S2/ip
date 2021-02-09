@@ -117,6 +117,9 @@ public class Ui {
 
     }
 
+    /**
+     * Prints error if unable to parse user command.
+     */
     public String printUnknowInputError() {
         return DIVIDER + SPACE + "Sorry! I do not understand what you just said. Try again pwease?"
                 + DIVIDER;

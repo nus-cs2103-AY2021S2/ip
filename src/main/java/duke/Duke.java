@@ -21,23 +21,6 @@ public class Duke {
         taskList = new TaskList(storage.getTasks());
     }
 
-    private void run() {
-        ui.printWelcomeText();
-        boolean isBye = false;
-
-        if (ui.hasNextCommand()) {
-            while (!isBye) {
-                String command = ui.getNextCommand();
-                Parser parser = new Parser();
-                Command c = parser.parse(command);
-                c.execute(taskList);
-                storage.writeFile(taskList);
-                if (c instanceof ByeCommand) {
-                    isBye = true;
-                }
-            }
-        }
-    }
 
     public String getResponse(String input) {
         Parser parser = new Parser();
