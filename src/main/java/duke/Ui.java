@@ -11,29 +11,30 @@ public class Ui {
      * @param taskList the list of tasks that information may be needed from
      * @param status   the status of the newly added task
      */
-    public static void execute(Command command, TaskList taskList, String status) {
+    public static String execute(Command command, TaskList taskList, String status) {
+        String output = "";
         switch (command) {
         case BYE:
-            System.out.println("    Bye bye, catch you soon.");
+            output += "    Bye bye, catch you soon.";
             break;
         case EVENT:
         case TODO:
         case DEADLINE:
-            System.out.println("    Got it. I've added this task: ");
+            output += "    Got it. I've added this task: \n";
             break;
         case DELETE:
-            System.out.println("    Noted. I've removed this task:");
+            output += "    Noted. I've removed this task:\n";
             break;
         case DONE:
-            System.out.println("    Nice! I've marked this task as done:");
+            output += "    Nice! I've marked this task as done:\n";
             break;
         case LIST:
-            System.out.println("    Here are the tasks in your list:");
-            taskList.print();
+            output += "    Here are the tasks in your list:\n";
+            output += taskList.listOutTasks();
             break;
         case FIND:
-            System.out.println("    Here are the matching tasks in your list:");
-            taskList.printContains(status);
+            output += "    Here are the matching tasks in your list:";
+            output += taskList.findContains(status);
             break;
         case NONE:
             break;
@@ -41,10 +42,10 @@ public class Ui {
 
         }
         if (!(command.equals(Command.LIST) || command.equals(Command.BYE) || command.equals(Command.FIND))) {
-            System.out.println("      " + status);
-            System.out.println("    Now you have " + taskList.numberOfTasks() + " tasks in the list.\n");
+            output += "      " + status + "\n";
+            output += "    Now you have " + taskList.numberOfTasks() + " tasks in the list.\n";
         }
-
+        return output;
     }
 
     public static void greeting() {
