@@ -64,7 +64,7 @@ public class TaskList {
      * @param index the index of the task to be marked as done.
      * @return Task object that was marked as done.
      */
-    public Task taskDone(int index) {
+    public Task markTaskDone(int index) {
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
