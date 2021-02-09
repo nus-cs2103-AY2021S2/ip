@@ -9,6 +9,7 @@ public class TaskList {
      * initialize  the Task list object
      *
      * @param dataArray use data to form task list
+
      */
     public TaskList(String[] dataArray) {
         for (int i = 0; dataArray[i] != null; i++) {
@@ -71,10 +72,10 @@ public class TaskList {
     }
 
     /**
-     * use keyword to find task from task list
+     * Using keyword to find task from task list
      *
      * @param description the keyword
-     * @return found task array
+     * @return a string array includes the found task
      */
     public String[] findTask(String description) {
         int numberOfFinding = 0;
@@ -85,6 +86,7 @@ public class TaskList {
                 numberOfFinding++;
             }
         }
+        assert (numberOfFinding < 100);
         return findTask;
     }
 }
