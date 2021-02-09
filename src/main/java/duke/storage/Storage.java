@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -5,10 +13,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileManager {
+public class Storage {
     private String filePath;
 
-    public FileManager(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -21,7 +29,7 @@ public class FileManager {
 
             while (sc.hasNextLine()) {
                 String savedTask = sc.nextLine();
-                String[] savedTaskDetails = savedTask.split(" | ");
+                String[] savedTaskDetails = savedTask.split(" \\| ");
                 String savedTaskType = savedTaskDetails[0];
                 String savedTaskDescription = savedTaskDetails[2];
                 boolean isTaskDone = (Integer.parseInt(savedTaskDetails[1]) == 1);
@@ -54,13 +62,13 @@ public class FileManager {
         }
     }
 
-    public void saveFile(ArrayList<Task> tasksList) throws DukeException {
+    public void saveFile(ArrayList<Task> tasks) throws DukeException {
         try {
             File tasksListFile = new File(filePath);
             FileWriter fw = new FileWriter(tasksListFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for (Task task : tasksList) {
+            for (Task task : tasks) {
                 bw.write(task.saveFormat());
                 bw.newLine();
             }
