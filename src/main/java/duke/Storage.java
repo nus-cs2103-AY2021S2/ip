@@ -96,7 +96,7 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(file, false);
             assert fileWriter != null : "FileWriter not initialized";
-            for (int i = 1; i <= tasks.size(); i++) {
+            for (int i = 1; i <= tasks.getSize(); i++) {
                 Task task = tasks.get(i);
                 assert task != null : "Task is null";
                 fileWriter.write(task.writeContentFormat() + System.lineSeparator());
