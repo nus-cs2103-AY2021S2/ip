@@ -1,6 +1,8 @@
 package com.lirc572.ip;
 
 import java.util.Scanner;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -118,19 +120,22 @@ public class Elaina extends Application {
 
     private void sendCommand() {
         String userText = userInput.getText();
-        if (userText.equals("")) {
+        if (userText.trim().equals("")) {
             return;
         }
         String elainaText = this.getResponse(userInput.getText());
-        if (elainaText.startsWith("Error: ")) {
-            this.dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialogBox(userText, this.userImageSrc),
-                DialogBox.getElainaDialogBox(elainaText, this.elainaImage2Src));
-        } else {
-            this.dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialogBox(userText, this.userImageSrc),
-                DialogBox.getElainaDialogBox(elainaText, this.elainaImageSrc));
-        }
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialogBox(
+                        userText,
+                        this.userImageSrc
+                ),
+                DialogBox.getElainaDialogBox(
+                        elainaText,
+                        elainaText.startsWith("Error: ")
+                                ? this.elainaImage2Src
+                                : this.elainaImageSrc
+                )
+        );
         this.userInput.clear();
         if (elainaText.equals("Bye. Hope to see you again soon!\n")) {
             Platform.exit();
