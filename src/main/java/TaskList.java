@@ -25,7 +25,7 @@ class TaskList {
      *
      * @return An Integer representing the length of the tasks list.
      */
-    public int size() {
+    public int listSize() {
         return this.tasks.size();
     }
 
@@ -38,7 +38,7 @@ class TaskList {
         String output = "";
         output += ui.getLine() + "\n";
         output += "You have the following task(s) in your list.\n";
-        for (int i = 0; i < this.tasks.size(); i++) {
+        for (int i = 0; i < this.listSize(); i++) {
             Task task = this.tasks.get(i);
             output += i + 1 + "." + task.toString() + "\n";
 
@@ -55,6 +55,7 @@ class TaskList {
      */
     public void addTask(Task task) {
         this.tasks.add(task);
+
 
     }
 

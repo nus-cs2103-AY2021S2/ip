@@ -22,7 +22,7 @@ public class Parser {
                 output = tasks.listTasks();
             } else if (input.startsWith("done")) {
                 int index = Integer.parseInt(input.replaceAll("[^-0-9]", ""));
-                if (index > tasks.size() || index <= 0) {
+                if (index > tasks.listSize() || index <= 0) {
                     throw new DukeException("The list item number provided is invalid");
                 }
                 output = tasks.markAsDone(index - 1);
@@ -74,7 +74,7 @@ public class Parser {
 
             } else if (input.startsWith("delete")) {
                 int index = Integer.parseInt(input.replaceAll("[^-0-9]", ""));
-                if (index > tasks.size() || index <= 0) {
+                if (index > tasks.listSize() || index <= 0) {
                     throw new DukeException("The list item number provided is invalid");
                 }
                 output = tasks.deleteTask(index - 1);
