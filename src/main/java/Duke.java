@@ -1,9 +1,79 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
+
 
 public class Duke {
+
+    private static void SaveTasks(ArrayList<Task> list, File f) throws IOException {
+        FileWriter fw = new FileWriter(f);
+        for (Task temp : list) {
+            if (temp instanceof Deadline) {
+                fw.write("D|" + temp.getStatusIcon() + temp.getDescription() + "|"+ ((Deadline) temp).getBy() + "\n");
+            } else if (temp instanceof Event) {
+                fw.write("E|" + temp.getStatusIcon() + "|" + temp.getDescription() + "|" +((Event) temp).getDatetime() + "\n");
+            } else {
+                fw.write("T|" + temp.getStatusIcon() + "|" + temp.getDescription());
+            }
+        }
+        fw.close();
+    }
+
+    private static void LoadTasks(ArrayList<Task> list, File f) throws IOException {
+        Scanner sc = new Scanner(f);
+        while (sc.hasNextLine()) {
+            String s = sc.nextLine();
+            s = s.trim();
+
+            String[] sArr = s.split("\\|", 4);
+
+            if (sArr[0].trim().equals("D")) {
+                Deadline tempD = new Deadline(sArr[2].trim(), sArr[3].trim());
+                if (sArr[1].trim().equals("done")) {
+                    tempD.isDone = true;
+                } else if (sArr[1].trim().equals("not done")){
+                    tempD.isDone = false;
+                }
+                list.add(tempD);
+            } else if (sArr[0].trim().equals("E")) {
+                Event tempE = new Event(sArr[2].trim(), sArr[3].trim());
+                if (sArr[1].trim().equals("done")) {
+                    tempE.isDone = true;
+                } else if (sArr[1].trim().equals("not done")) {
+                    tempE.isDone = false;
+                }
+                list.add(tempE);
+            } else {
+                ToDo tempT = new ToDo(sArr[2].trim());
+                if (sArr[1].trim().equals("done")) {
+                    tempT.isDone = true;
+                } else if (sArr[1].trim().equals("not done")) {
+                    tempT.isDone = false;
+                }
+                list.add(tempT);
+            }
+        }
+    }
+
     public static void main(String[] args) throws DukeException{
+        File file = new File("src/main/data/DukeData.txt");
+        Path path = Paths.get("src/main/data/DukeData.txt");
+        ArrayList<Task> list = new ArrayList<>();
+
+        try {
+            Files.createDirectories(path.getParent());
+            Files.createFile(path);
+            LoadTasks(list, file);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,7 +81,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
 
         while(sc.hasNext()) {
             String word = sc.nextLine();
@@ -25,14 +94,14 @@ public class Duke {
                     System.out.println(i + ". " + list.get(i - 1).toString());
                 }
             } else if (word.contains("done")) {
-                String strArray[] = word.split(" ");
+                String[] strArray = word.split(" ");
                 int value = Integer.parseInt(strArray[1]);
                 Task complete = list.get(value - 1);
                 complete.markAsDone();
                 System.out.println(" Nice! I've marked this task as done: ");
                 System.out.println(complete.toString());
             } else if (word.contains("delete")) {
-                String arr[] = word.split(" ");
+                String[] arr = word.split(" ");
                 int value = Integer.parseInt(arr[1]);
                 Task remove = list.get(value - 1);
                 list.remove(value - 1);
@@ -70,6 +139,11 @@ public class Duke {
                 Thread.setDefaultUncaughtExceptionHandler((u, e) -> System.err.println(e.getMessage()));
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+        }
+        try {
+            SaveTasks(list, file);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

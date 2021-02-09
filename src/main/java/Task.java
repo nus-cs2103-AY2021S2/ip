@@ -9,11 +9,15 @@ public class Task {
 
     public String getStatusIcon() {
         if (isDone) {
-            return "Done";
+            return "[Done]";
         } else {
-            return "Incompleted";// unsure why tick and cross did not show as intended
+            return "[Incompleted]";// unsure why tick and cross did not show as intended
             // hence the change to Done and Incompleted.
         }
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public void markAsDone() {
@@ -21,6 +25,6 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return this.getStatusIcon()  + this.description;
     }
 }
