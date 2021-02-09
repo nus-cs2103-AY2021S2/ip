@@ -1,3 +1,5 @@
+package task;
+
 import java.util.HashMap;
 
 public abstract class Task {
