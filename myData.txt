@@ -1,4 +1,5 @@
 [E][X] work (at: home)
 [T][X] sleep
-[T][ ] clean home
-[D][ ] hw (by: 2021-02-15)
+[T][X] clean home
+[D][X] hw (by: 2021-02-15)
+[D][ ] project (by: 2021-11-11)
