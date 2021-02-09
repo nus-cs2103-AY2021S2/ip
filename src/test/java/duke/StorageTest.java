@@ -28,7 +28,7 @@ public class StorageTest {
         }
 
         try {
-            new Storage(System.getProperty("user.dir") + "/data/Duke.txt").load();
+            new Storage(System.getProperty("user.dir") + "/data/duke.txt").load();
         } catch (DukeException ex) {
             fail();
             assertEquals("☹ OOPS!!! The contents of the loaded file is corrupted, a new file will be created.",
@@ -42,21 +42,21 @@ public class StorageTest {
             new Storage(System.getProperty("user.dir") + "/data/xD.txt").save(new TaskList());
             fail();
         } catch (DukeException ex) {
-            assertEquals("☹ OOPS!!! Unable to write to Duke.Duke.txt, please try again.", ex.toString());
+            assertEquals("☹ OOPS!!! Unable to write to duke.txt, please try again.", ex.toString());
         }
 
         try {
             new Storage(System.getProperty("user.dir") + "/data/").save(new TaskList());
             fail();
         } catch (DukeException ex) {
-            assertEquals("☹ OOPS!!! Unable to write to Duke.Duke.txt, please try again.", ex.toString());
+            assertEquals("☹ OOPS!!! Unable to write to duke.txt, please try again.", ex.toString());
         }
 
         try {
-            new Storage(System.getProperty("user.dir") + "/data/Duke.txt").save(new TaskList());
+            new Storage(System.getProperty("user.dir") + "/data/duke.txt").save(new TaskList());
         } catch (DukeException ex) {
             fail();
-            assertEquals("☹ OOPS!!! Unable to write to Duke.Duke.txt, please try again.", ex.toString());
+            assertEquals("☹ OOPS!!! Unable to write to duke.txt, please try again.", ex.toString());
         }
     }
 }

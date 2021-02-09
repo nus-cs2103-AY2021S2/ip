@@ -65,7 +65,7 @@ public class DukeException extends Exception {
             errMsg = "☹ OOPS!!! The contents of the loaded file is corrupted, a new file will be created.";
             break;
         case SAVE_ERROR:
-            errMsg = "☹ OOPS!!! Unable to write to Duke.Duke.txt, please try again.";
+            errMsg = "☹ OOPS!!! Unable to write to duke.txt, please try again.";
             break;
         case FILE_CREATION_ERROR:
             errMsg = "☹ OOPS!!! Unable to create file, please restart the program.";
