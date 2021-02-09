@@ -3,7 +3,6 @@ package tlylt.haha;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Utility class to parse user input.

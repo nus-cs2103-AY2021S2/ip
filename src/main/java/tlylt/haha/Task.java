@@ -106,12 +106,18 @@ public abstract class Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
         Task task = (Task) o;
-        return isDone == task.isDone &&
-                description.equals(task.description) &&
-                type.equals(task.type) &&
-                Objects.equals(date, task.date) &&
+        return isDone == task.isDone
+                &&
+                description.equals(task.description)
+                &&
+                type.equals(task.type)
+                &&
+                Objects.equals(date, task.date)
+                &&
                 Objects.equals(time, task.time);
     }
 
