@@ -12,14 +12,14 @@ public class Ui {
         String output = Duke.line + "\n" + " Got it. I've added this task: \n"
                 + task.printNew() + "\n Now you have " + size
                 + " tasks in the list" + "\n" + Duke.line;
-        Duke.print(output);
+        System.out.println(output);
         return output; // for testing
     }
 
     protected String doTask(Task task) {
-        return String.format(Duke.line + "\n Nice! I've marked this task as done: " +
-                "\n [%s] [%s] %s" +
-                "\n" + Duke.line, task.type(), task.status(), task.toString());
+        return String.format(Duke.line + "\n Nice! I've marked this task as done: "
+                + "\n [%s] [%s] %s"
+                + "\n" + Duke.line, task.type(), task.status(), task.toString());
     }
 
     protected String delete(Task task, int size) {

@@ -7,7 +7,7 @@ Taken from 2103T file access demo
  */
 
 /**
- * A class that is used to write files and catch checked exceptions
+ * A class that is used to write files and catch checked exceptions.
  */
 public class FileWriting {
 
