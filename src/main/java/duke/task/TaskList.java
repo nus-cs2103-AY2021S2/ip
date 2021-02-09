@@ -23,16 +23,16 @@ public class TaskList {
      * @param i index labelling of the task in list.
      */
     public static String markDone(int i) {
+        String response = "";
         try {
             Task t = tasks.get(i - 1);
             tasks.get(i - 1).markDone();
-            assert t.getDoneStatus() == "X" : "Task is not marked as done successfully";
-            String result = Ui.doneTask(t);
-            return result;
+            assert t.getDoneStatus().equals("X") : "Task is not marked as done successfully";
+            response = Ui.doneTask(t);
         } catch (IndexOutOfBoundsException e) {
-            ErrorBox.display(e.getMessage());
+            ErrorBox.display(Ui.TASK_ERROR);
         }
-        return "";
+        return response;
     }
 
     /**
@@ -43,7 +43,7 @@ public class TaskList {
      */
     public static String findTasks(String keyword) {
         int index = 1;
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         for (Task task : tasks) {
             String taskName = task.getTaskName();
             if (taskName.contains(keyword)) {
@@ -52,7 +52,8 @@ public class TaskList {
                 index++;
             }
         }
-        if (sb.equals("")) {
+        boolean hasMatchTask = sb.capacity() > 0;
+        if (!hasMatchTask) {
             sb.append("~~~~~Sorry ah, no match.~~~~~");
         } else {
             sb.insert(0, "Here are the matches for your search: \n");
@@ -67,7 +68,7 @@ public class TaskList {
      * Display all the tasks in the list.
      */
     public static String listTasks() {
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
 
         for (Task task : tasks) {
             if (task == null) {
@@ -97,7 +98,7 @@ public class TaskList {
             }
             return Ui.deleteTask(t);
         } catch (IndexOutOfBoundsException e) {
-            ErrorBox.display(e.getMessage());
+            ErrorBox.display(Ui.TASK_ERROR);
             return "";
         }
     }

@@ -57,7 +57,7 @@ public class TaskStorage {
      * @return the String display of a successful load.
      */
     public static String loadFiles() {
-        StringBuilder loadContent = new StringBuilder("");
+        StringBuilder loadContent = new StringBuilder();
 
         try {
             File directory = new File(DIRECTORY);
@@ -67,9 +67,7 @@ public class TaskStorage {
                 directory.mkdir();
             }
 
-
             assert directory.exists() : "Directory does not exist";
-            
 
             if (!file.exists()) {
                 file.createNewFile();

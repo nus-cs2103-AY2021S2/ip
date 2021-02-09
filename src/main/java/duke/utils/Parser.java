@@ -99,11 +99,17 @@ public class Parser {
     static String extractTask(String input, String command) throws DukeException {
         String taskInput = input.replaceAll(command, "").trim();
         String noTask = "";
-
+        boolean isEmptyTask = taskInput.equals(noTask);
         switch (command) {
         case "todo": case "find": case "done": case "delete":
+            if (isEmptyTask) {
+                throw new DukeException(Ui.EMPTY_TASK);
+            }
             return taskInput;
         case "deadline": case "event":
+            if (isEmptyTask) {
+                throw new DukeException(Ui.EMPTY_TASK);
+            }
             return taskInput.split("/")[0];
         case "bye": case "list":
             if (taskInput.length() > 0) {
