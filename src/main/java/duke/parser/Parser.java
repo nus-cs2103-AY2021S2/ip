@@ -10,6 +10,7 @@ import static duke.common.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
 import static duke.common.Messages.MESSAGE_INVALID_TASK_FORMAT;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import duke.commands.AddCommand;
 import duke.commands.Command;
@@ -78,8 +79,9 @@ public class Parser {
     private static Command parseDoneAndDeleteCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         checkInputsLength(inputs);
         String input = inputs[1];
-
-        if (!Utils.checkIsNumeric(input) && !input.equals(ALL)) {
+        Predicate<String> isNumeric = str -> !Utils.checkIsNumeric(str);
+        Predicate<String> isAll = str -> !str.equals(ALL);
+        if (isNumeric.and(isAll).test(input)) {
             throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
