@@ -17,35 +17,35 @@ public class SwitchBlade {
         String command = input.split("\\s+")[0];
 
         switch (command.toLowerCase(Locale.ROOT)) {
-            case "list":
-                return Ui.printList(taskList);
-            case "done":
-                if (input.split("\\s+").length == 2) {
-                    int index = Integer.parseInt(input.split("\\s+")[1]);
-                    return taskList.markCompleted(index - 1);
-                } else {
-                    return Ui.argumentError();
-                }
-            case "todo":
-                return addTask(input,taskList);
-            case "deadline":
-                return addDeadline(input, taskList);
-            case "event":
-                return addEvent(input, taskList);
-            case "delete":
-                if (input.split("\\s+").length == 2) {
-                    int index = Integer.parseInt(input.split("\\s+")[1]);
-                    return taskList.delete(index - 1);
-                } else {
-                    return Ui.argumentError();
-                }
-            case "find":
-                ArrayList<Task> foundTasks = taskList.findTasks(Parser.findDescription(input));
-                return Ui.printFoundTasks(foundTasks);
-            case "bye":
-                return Ui.shutdown();
-            default:
-                return Ui.unknownCommand();
+        case "list":
+            return Ui.printList(taskList);
+        case "done":
+            if (input.split("\\s+").length == 2) {
+                int index = Integer.parseInt(input.split("\\s+")[1]);
+                return taskList.markCompleted(index - 1);
+            } else {
+                return Ui.argumentError();
+            }
+        case "todo":
+            return addTask(input,taskList);
+        case "deadline":
+            return addDeadline(input, taskList);
+        case "event":
+            return addEvent(input, taskList);
+        case "delete":
+            if (input.split("\\s+").length == 2) {
+                int index = Integer.parseInt(input.split("\\s+")[1]);
+                return taskList.delete(index - 1);
+            } else {
+                return Ui.argumentError();
+            }
+        case "find":
+            ArrayList<Task> foundTasks = taskList.findTasks(Parser.findDescription(input));
+            return Ui.printFoundTasks(foundTasks);
+        case "bye":
+            return Ui.shutdown();
+        default:
+            return Ui.unknownCommand();
         }
     }
 

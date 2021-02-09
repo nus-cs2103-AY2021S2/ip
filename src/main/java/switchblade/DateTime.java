@@ -17,7 +17,7 @@ public class DateTime {
     LocalDateTime localDateTime;
 
     /**
-     * Used when user does not specify time
+     * Returns DateTime object with null datetime when user does not specify time
      *
      * @param date User specified date
      */
@@ -28,7 +28,7 @@ public class DateTime {
     }
 
     /**
-     * Used when user specifies time
+     * Returns DateTime object with specified datetime when user specifies time
      *
      * @param date User specified date
      * @param time User specified time

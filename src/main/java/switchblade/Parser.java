@@ -27,6 +27,7 @@ public class Parser {
     }
 
     /**
+     * Returns the datetime for deadline-type objects
      *
      * @param input String to be manipulated
      * @return Datetime String for switchblade.Deadline type Tasks
@@ -37,6 +38,7 @@ public class Parser {
     }
 
     /**
+     * Returns the datetimes for event-type objects
      *
      * @param input String to be manipulated
      * @return String[] containing start datetime and end datetime

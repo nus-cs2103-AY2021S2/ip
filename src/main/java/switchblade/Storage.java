@@ -27,7 +27,7 @@ public class Storage {
     public static ArrayList<Task> retrieve(String directory) throws FileNotFoundException {
         String filepath = directory + "/switchblade.SwitchBlade.txt";
         File file = new File(filepath);
-        ArrayList<Task> output = new ArrayList<>();
+        ArrayList<Task> eventsList = new ArrayList<>();
 
         if (Files.exists(Path.of(filepath))) {
             Scanner sc = new Scanner(file);
@@ -36,20 +36,20 @@ public class Storage {
                 String[] stringArr = sc.nextLine().split(" \\| ");
 
                 switch (stringArr[0]) {
-                    case "D":
-                        Deadline d = new Deadline(stringArr[2], stringArr[1], stringArr[3].equals("T"));
-                        output.add(d);
-                        break;
-                    case "E":
-                        if (Parser.findEventDatetime(stringArr[1]) != null) {
-                            myEvent e = new myEvent(stringArr[2], Parser.findEventDatetime(stringArr[1]), stringArr[3].equals("T"));
-                            output.add(e);
-                        }
-                        break;
-                    case "T":
-                        Task t = new Task(stringArr[1], stringArr[2].equals("T"));
-                        output.add(t);
-                        break;
+                case "D":
+                    Deadline d = new Deadline(stringArr[2], stringArr[1], stringArr[3].equals("T"));
+                    eventsList.add(d);
+                    break;
+                case "E":
+                    if (Parser.findEventDatetime(stringArr[1]) != null) {
+                        myEvent e = new myEvent(stringArr[2], Parser.findEventDatetime(stringArr[1]), stringArr[3].equals("T"));
+                        eventsList.add(e);
+                    }
+                    break;
+                case "T":
+                    Task t = new Task(stringArr[1], stringArr[2].equals("T"));
+                    eventsList.add(t);
+                    break;
                 }
             }
 
@@ -57,7 +57,7 @@ public class Storage {
             throw new FileNotFoundException();
         }
 
-        return output;
+        return eventsList;
     }
 
     /**
