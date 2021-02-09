@@ -1,8 +1,8 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class CommandTest  {
+import org.junit.jupiter.api.Test;
+
+public class CommandTest {
     @Test
     public void createCommandNoArgs_incompleteInstruction_exceptionThrown() {
         assertThrows(EmptyDescriptionException.class, () -> {
