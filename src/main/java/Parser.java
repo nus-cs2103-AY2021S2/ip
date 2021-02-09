@@ -27,6 +27,7 @@ public class Parser {
             return tasks.getTasks();
 
         } else if (description.equalsIgnoreCase(exitCommand)) {
+            assert Duke.canExit == false : "Duke canExit should be false";
             Duke.canExit = true;
             return ui.sayBye();
 

@@ -10,6 +10,7 @@ public class Ui {
 
     public String sayBye() {
         String exit = "Bye bye. Hope to see you again soon <3\n" + "Wish you all the best for CS2103T\n";
+        assert Duke.canExit == false : "Duke has unexpectedly exited";
         Duke.canExit = true;
         return exit;
     }
