@@ -104,7 +104,7 @@ public class Parser {
                     }
                 }
                 if (noOfHits == 0) {
-                    return ui.print("Looks like no tasks were found :(");
+                    return ui.print("Looks like no tasks were found :-(");
                 } else {
                     String[] output = new String[noOfHits + 1];
                     output[0] = "Here are the matching tasks in your list:";

@@ -29,9 +29,9 @@ public class Storage {
             try {
                 data.getParentFile().mkdirs();
                 data.createNewFile();
-                ui.print("It appears you are using Duke for the first time. Welcome!");
+                //ui.print("It appears you are using Duke for the first time. Welcome!");
             } catch (IOException e) {
-                ui.ioException();
+                System.err.println(e);
             }
         }
     }
@@ -43,7 +43,7 @@ public class Storage {
     public Label importData() throws FileNotFoundException {
         Scanner sc = new Scanner(data);
         if (!sc.hasNext()) {
-            return ui.print("Looks like you have no tasks! :)");
+            return ui.print("Looks like you have no tasks! :-)");
         }
         while (sc.hasNext()) {
             String line = sc.nextLine();

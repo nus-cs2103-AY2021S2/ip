@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
  */
 
 public class Ui {
-    private final String LINES = "____________________________________________________";
+    private final String LINES = "______________________________________________________";
     private final String INDENTATION = "     ";
 
     private final String TOP_LINE = LINES + "\n" + INDENTATION;
@@ -40,7 +40,7 @@ public class Ui {
      * @return Label with associated error message.
      */
     public Label printErr(String err) {
-        return new Label(TOP_LINE + "☹ OOPS!!! " + err + END_LINE);
+        return new Label(TOP_LINE + ":0 OOPS!!! " + err + END_LINE);
     }
 
     /**
@@ -48,10 +48,10 @@ public class Ui {
      * @return Label with welcome message.
      */
     public Label welcome() {
-        String logo = " __          _        \n"
-                + "|  _ \\ _  _| |  _ _ \n"
-                + "| |  | | | | | |  |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
+        String logo = " __          __\n"
+                + "|  _ \\ _  _ |  |  ___\n"
+                + "| |  | | | |  |  |/ / _ \\\n"
+                + "| |_| | |_|  |  <  __/\n"
                 + "|___/ \\_,_|_|\\_\\___|\n";
         String full = "Hello from\n" + logo + LINES + "\n     Hello! I'm Duke.\n"
                 + "     What can I do for you?\n" + LINES;
