@@ -23,6 +23,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getTime() {
+        return "Error, todo has no time";
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

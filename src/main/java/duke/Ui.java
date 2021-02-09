@@ -10,7 +10,7 @@ import duke.tasks.TaskList;
  */
 public class Ui {
     private static final String SPACE = "     ";
-    private static final String DIVIDER = "    -------------------------------------------->>>>>\n";
+    private static final String DIVIDER = "    -------------------------------------------->>>>\n";
     private final Scanner sc;
 
     /**
@@ -118,6 +118,17 @@ public class Ui {
         }
         return resultString;
 
+    }
+    public String printNameEdit(Task task, int index) {
+        String resultString = DIVIDER + SPACE + "Done! Name of task number "
+                + index + " has been changed to " + task.getName() + "\n" + DIVIDER;
+        return resultString;
+    }
+
+    public String printTimeEdit(Task task, int index) {
+        String resultString = DIVIDER + SPACE + "Done! Time of task number "
+                + index + " has been changed to " + task.getTime() + "\n" + DIVIDER;
+        return resultString;
     }
 
     /**

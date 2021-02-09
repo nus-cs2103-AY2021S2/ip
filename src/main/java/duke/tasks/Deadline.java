@@ -22,6 +22,13 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    public void editTime(String newTime) {
+        this.by = LocalDate.parse(newTime);
+    }
+    public String getTime() {
+        return this.by.format(OUTPUT_FORMATTER);
+    }
+
     /**
      * Generates string to be stored in local disk
      * @return String with specific format

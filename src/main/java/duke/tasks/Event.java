@@ -22,6 +22,13 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
+    public void editTime(String newTime) {
+        this.at = LocalDate.parse(newTime);
+    }
+    public String getTime() {
+        return this.at.format(OUTPUT_FORMATTER);
+    }
+
     /**
      * Generates string to be stored in local disk
      * @return String with specific format

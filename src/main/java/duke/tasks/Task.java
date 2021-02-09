@@ -45,6 +45,11 @@ public abstract class Task {
      * Abstract method for generating string to be stored in local disk
      */
     public abstract String toStorageString();
+    public abstract String getTime();
+    public void editTime(String newTime) {};
+    public void editName(String newName) {
+        this.taskName = newName;
+    }
 
     @Override
     public String toString() {

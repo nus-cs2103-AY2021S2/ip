@@ -1,6 +1,15 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EditNameCommand;
+import duke.commands.EditTimeCommand;
+import duke.commands.ErrorCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
@@ -30,8 +39,10 @@ public class Parser {
         } else if (str.startsWith("find")) {
             String text = str.substring(5);
             return new FindCommand(text);
+        } else if (str.startsWith("edit")) {
+            return editTask(str);
         } else {
-            return addTasks(str);
+            return addTask(str);
         }
     }
 
@@ -41,7 +52,7 @@ public class Parser {
      * @param str User input
      * @return Corresponding command for Duke to execute
      */
-    public Command addTasks(String str) {
+    public Command addTask(String str) {
         if (str.startsWith("todo ")) {
             Todo curr = new Todo(str.substring(5), false);
             return new AddCommand(curr);
@@ -53,6 +64,28 @@ public class Parser {
             int cut = str.indexOf("/at");
             Event curr = new Event(str.substring(6, cut - 1), false, str.substring(cut + 4));
             return new AddCommand(curr);
+        } else {
+            return new ErrorCommand();
+        }
+    }
+
+    /**
+     * Parses user input for editing tasks and returns the corresponding command
+     *
+     * @param str User input
+     * @return Corresponding command for Duke to execute
+     */
+    public Command editTask(String str) {
+        if (str.contains("/name")) {
+            int cut = str.indexOf("/name");
+            int index = Integer.parseInt(str.substring(5, cut - 1));
+            String newName = str.substring(cut + 6);
+            return new EditNameCommand(index, newName);
+        } else if (str.contains("/time")) {
+            int cut = str.indexOf("/time");
+            int index = Integer.parseInt(str.substring(5, cut - 1));
+            String newTime = str.substring(cut + 6);
+            return new EditTimeCommand(index, newTime);
         } else {
             return new ErrorCommand();
         }
