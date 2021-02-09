@@ -5,8 +5,6 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -26,7 +24,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Duke, Tasklist Extraordinaire");
             stage.show();
-            fxmlLoader.<MainWindow>getController().showWelcome();
+            fxmlLoader.<MainWindow>getController().displayWelcome();
         } catch (IOException e) {
             e.printStackTrace();
         }
