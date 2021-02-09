@@ -116,7 +116,7 @@ public class TaskList {
         }
 
         try {
-            Storage.writeSave(saveLines.toString());
+            Storage.writeToFile(saveLines.toString());
         } catch (IOException e) {
             return false;
         }

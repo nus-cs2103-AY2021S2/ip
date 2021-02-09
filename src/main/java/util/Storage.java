@@ -7,19 +7,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public interface Storage {
-    Path SAVE_PATH = Paths.get("data", "sweh.txt");
+public class Storage {
+    private final File saveFile;
 
-    static File getFile() throws IOException {
-        File file = new File(SAVE_PATH.toString());
-        (new File(SAVE_PATH.getParent().toString())).mkdir();
-        file.createNewFile();
-        return file;
+    public Storage(String first, String... more) throws IOException {
+        Path savePath = Path.of(first, more);
+        saveFile = new File(savePath.toString());
+        (new File(savePath.getParent().toString())).mkdir();
+        saveFile.createNewFile();
     }
 
-    static void writeSave(String lines) throws IOException {
-        FileWriter fw = new FileWriter(getFile());
-        fw.write(lines);
+    public void writeToFile(String saveString) throws IOException {
+        FileWriter fw = new FileWriter(saveFile);
+        fw.write(saveString);
         fw.close();
     }
 
