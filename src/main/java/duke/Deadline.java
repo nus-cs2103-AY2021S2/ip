@@ -30,6 +30,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String datetimeString = deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        assert datetimeString.length() > 0 : " Datetime string not successfully initialized";
         return String.format("[D][%s] %s (by: %s)", getStatus(), description, datetimeString);
     }
 }
