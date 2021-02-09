@@ -21,9 +21,6 @@ public class Ui {
     public static final String SUCCESSFUL_SAVE = "~File Saved Successfully!~";
     public static final String FAREWELL = " I Zao Liao. Don't Miss Meeeeeee.";
     public static final String GREETING = "** Awww, need help ah? **";
-
-    public static final String LOAD_FILE = "*Wait ah~ Loading file for you *";
-    public static final String NO_FILE = "* File also don't have ah, nvm I make one for you *";
     public static final String EMPTY_FILE = "*Awwww~ You don't have any history of tasks *";
     public static final String SUCESSFUL_LOAD = "*Sir, here is your past history: *\n";
 

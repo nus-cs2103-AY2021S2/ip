@@ -29,7 +29,6 @@ public class DateAndTime {
                 return Ui.WRONG_DATE_FORMAT;
             }
         } else {
-            ErrorBox.display(Ui.WRONG_DATE_FORMAT);
             return Ui.WRONG_DATE_FORMAT;
         }
     }
@@ -46,13 +45,9 @@ public class DateAndTime {
     }
 
     private static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
         try {
             Double.parseDouble(strNum);
         } catch (NumberFormatException nfe) {
-            ErrorBox.display(nfe.getMessage());
             return false;
         }
         return true;

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exceptions.DukeException;
+
 import duke.task.TaskList;
 import duke.ui.ErrorBox;
 import duke.ui.Ui;
@@ -24,17 +24,15 @@ public class DoneCommand extends Command {
      * @param task name of the user task.
      */
     private static String handleDone(String task) {
-        if (task.length() > 0) {
-            try {
-                int num = Integer.parseInt(task);
-                String result = TaskList.markDone(num);
-                return result;
-            } catch (NumberFormatException e) {
-                DukeException.numberFormatException();
-                ErrorBox.display(Ui.KEY_IN_NUMBER);
-            }
+        String response = "";
+        try {
+            int num = Integer.parseInt(task);
+            response = TaskList.markDone(num);
+        } catch (NumberFormatException e) {
+            ErrorBox.display(Ui.KEY_IN_NUMBER);
         }
-        return "";
+
+        return response;
     }
 
 

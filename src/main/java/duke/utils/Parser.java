@@ -12,7 +12,7 @@ import duke.exceptions.DukeException;
 import duke.type.CommandType;
 import duke.ui.ErrorBox;
 import duke.ui.Ui;
-import javafx.application.Platform;
+
 
 /**
  * This class extract and process the user input and produce the right command to be executed after parsing.
@@ -30,35 +30,15 @@ public class Parser {
      * @return the respective command to be executed.
      */
     public final Command parse() {
-        String instruction;
-        String taskName;
-        String date;
+        String[] validInputs = extractValidInput();
+        if (validInputs[0].equals("")) {
+            return new ErrorCommand();
+        }
+
+        String instruction = validInputs[0];
+        String taskName = validInputs[1];
+        String date = validInputs[2];
         Command command;
-
-        try {
-            instruction = extractInstruction(input);
-        } catch (DukeException e) {
-            ErrorBox.display(e.getMessage());
-            command = new ErrorCommand(e.getMessage());
-            return command;
-        }
-
-        try {
-            taskName = extractTask(input, instruction);
-        } catch (DukeException e) {
-            ErrorBox.display(e.getMessage());
-            command = new ErrorCommand(e.getMessage());
-            return command;
-        }
-
-        try {
-            date = extractDate(input, instruction);
-        } catch (DukeException e) {
-            ErrorBox.display(e.getMessage());
-            command = new ErrorCommand(e.getMessage());
-            return command;
-        }
-
         switch (instruction) {
         case "bye":
             command = new ExitCommand(taskName, date);
@@ -70,9 +50,7 @@ public class Parser {
         case "done":
             command = new DoneCommand(taskName, date);
             break;
-        case "todo":
-        case "deadline":
-        case "event":
+        case "todo": case "deadline": case "event":
             command = new AddCommand(instruction, taskName, date);
             break;
         case "delete":
@@ -82,7 +60,7 @@ public class Parser {
             command = new FindCommand(taskName, date);
             break;
         default:
-            command = new ErrorCommand("");
+            command = new ErrorCommand();
             break;
         }
         return command;
@@ -119,35 +97,21 @@ public class Parser {
      * @return the task name if there is one and return empty string if task name empty.
      */
     static String extractTask(String input, String command) throws DukeException {
-        String body = input.replaceAll(command, "").trim();
+        String taskInput = input.replaceAll(command, "").trim();
+        String noTask = "";
+
         switch (command) {
-        case "todo":
-        case "find":
-            if (body.equals("")) {
-                throw new DukeException(Ui.EMPTY_TASK);
-            } else {
-                return body;
-            }
-        case "done":
-        case "delete":
-            String hasLetter = body.replaceAll("[0-9]", "");
-            if (hasLetter.length() > 0) {
-                throw new DukeException(Ui.KEY_IN_NUMBER);
-            } else {
-                return body.replaceAll("[^0-9]", "");
-            }
-        case "deadline":
-        case "event":
-            if (body.equals("")) {
-                throw new DukeException(Ui.EMPTY_TASK);
-            } else {
-                return body.split("/")[0];
-            }
-        default:
-            if (body.length() > 0) {
+        case "todo": case "find": case "done": case "delete":
+            return taskInput;
+        case "deadline": case "event":
+            return taskInput.split("/")[0];
+        case "bye": case "list":
+            if (taskInput.length() > 0) {
                 throw new DukeException(Ui.COMMAND_ERROR);
             }
-            return "";
+            return noTask;
+        default:
+            return noTask;
         }
     }
 
@@ -159,23 +123,44 @@ public class Parser {
      * @return the task date in String and return empty if there is no date.
      */
     static String extractDate(String input, String instruction) throws DukeException {
-        String body = input.replaceAll(instruction, "").trim();
-        String[] parts = body.split("/", 2);
-        if (parts.length == 2) {
-            assert parts[1].length() >= 15 : "Time Format is too long";
-            String date = DateAndTime.converter(parts[1]);
-            if (date.equals(Ui.WRONG_DATE_FORMAT)) {
-                throw new DukeException(Ui.WRONG_DATE_FORMAT);
-            }
-            return date;
-        } else {
+        String taskInput = input.replaceAll(instruction, "").trim();
+        String[] splitParts = taskInput.split("/", 2);
+        boolean hasDate = splitParts.length == 2;
+        if (!hasDate) {
+            String noDate = "";
             if (instruction.equals("deadline")
-                || instruction.equals("event")) {
+                    || instruction.equals("event")) {
                 throw new DukeException(Ui.MISSING_DATE);
             }
-            return "";
+            return noDate;
         }
+
+        String date = DateAndTime.converter(splitParts[1]);
+        if (date.equals(Ui.WRONG_DATE_FORMAT)) {
+            throw new DukeException(Ui.WRONG_DATE_FORMAT);
+        }
+        return date;
     }
 
+
+    private String[] extractValidInput() {
+        String instruction;
+        String taskName;
+        String date;
+        String[] validInputs = new String[3];
+        try {
+            instruction = extractInstruction(input);
+            taskName = extractTask(input, instruction);
+            date = extractDate(input, instruction);
+            validInputs[0] = instruction;
+            validInputs[1] = taskName;
+            validInputs[2] = date;
+        } catch (DukeException e) {
+            ErrorBox.display(e.getMessage());
+
+        }
+
+        return validInputs;
+    }
 
 }
