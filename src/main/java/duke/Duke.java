@@ -3,6 +3,8 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.history.RedoHistory;
+import duke.history.UndoHistory;
 import duke.task.Task;
 import duke.task.TaskManager;
 
@@ -16,6 +18,8 @@ public class Duke {
     public static final String LINE = (char) 9
             + "--------------------------------------------------------------------";
     protected static ArrayList<Task> tasks = new ArrayList<>();
+    protected UndoHistory undoHistory = new UndoHistory();
+    protected RedoHistory redoHistory = new RedoHistory();
 
     /**
      * Takes user inputted tasks and passes them to the TaskManager.
@@ -34,17 +38,18 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         tasks = new ArrayList<>();
+        TaskManager taskManager = new TaskManager();
 
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
-            TaskManager taskManager = new TaskManager();
+//            TaskManager taskManager = new TaskManager(tasks, undoHistory, redoHistory);
 
             if (input.equals("bye")) {
                 System.out.println(LINE + "\n" + (char) 9 + (char) 9 + "Bye! See you soon :)\n" + LINE);
                 scanner.close();
                 break;
             } else {
-                taskManager.takeEvent(input, tasks);
+                System.out.println(taskManager.takeEvent(input, tasks));
             }
 
         }

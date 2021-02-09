@@ -22,6 +22,8 @@ public class ErrorChecker {
     private boolean isDone;
     private boolean isDelete;
     private boolean isFind;
+    private boolean isUndo;
+    private boolean isRedo;
     private boolean isTodo;
     private boolean isDeadline;
     private boolean isEvent;
@@ -46,11 +48,14 @@ public class ErrorChecker {
         isDone = input.startsWith("done");
         isDelete = input.startsWith("delete");
         isFind = input.startsWith("find");
+        isUndo = input.equals("undo");
+        isRedo = input.equals("redo");
         isTodo = input.startsWith("todo");
         isDeadline = input.startsWith("deadline");
         isEvent = input.startsWith("event");
         isNewTask = isTodo || isDeadline || isEvent;
-        isValidType = isBye || isHelp || isList || isDone || isDelete || isFind || isNewTask;
+        isValidType = isBye || isHelp || isList || isDone || isDelete
+                || isFind || isUndo || isRedo || isNewTask;
     }
 
     /**

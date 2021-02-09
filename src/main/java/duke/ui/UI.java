@@ -15,6 +15,7 @@ import javafx.stage.Stage;
  */
 public class UI extends Application {
     protected static ArrayList<Task> tasks = new ArrayList<>();
+    protected TaskManager taskManager = new TaskManager();
 
     @Override
     public void start(Stage stage) {
@@ -26,7 +27,6 @@ public class UI extends Application {
      * @param input Input taken in through GUI.
      */
     public String getResponse(String input) {
-        TaskManager taskManager = new TaskManager();
         return taskManager.takeEvent(input, tasks);
     }
 }
