@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Completes the init of duke object by loading UI and storage
+     * Completes the init of duke object by loading Ui and storage
      * This can be improved to follow OOP better
      * @param d duke object created from Main class
      */
