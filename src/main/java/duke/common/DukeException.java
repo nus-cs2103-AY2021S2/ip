@@ -22,6 +22,12 @@ public class DukeException {
         }
     }
 
+    public static class InvalidDateFormat extends IllegalArgumentException {
+        public InvalidDateFormat() {
+            super(DukeString.EXCEPTION_INVALID_DATE);
+        }
+    }
+
     public static class EmptyDeadlineDate extends IllegalArgumentException {
         public EmptyDeadlineDate() {
             super(DukeString.EXCEPTION_EMPTY_DEADLINE_DATE);
@@ -37,6 +43,12 @@ public class DukeException {
     public static class InvalidEventEnd extends IllegalArgumentException {
         public InvalidEventEnd() {
             super(DukeString.EXCEPTION_INVALID_EVENT_END);
+        }
+    }
+
+    public static class InvalidDateForTask extends UnsupportedOperationException {
+        public InvalidDateForTask(String task) {
+            super(String.format(DukeString.EXCEPTION_INVALID_DATE_FOR_TASK, task));
         }
     }
 

@@ -22,7 +22,14 @@ public class DeadlineTask extends Task {
         this.deadline = date;
     }
 
-    private DeadlineTask(boolean isDone, String desc, LocalDateTime date) {
+    /**
+     * Constructs a new deadline task with the given status, description, and date.
+     *
+     * @param isDone the done status of the task.
+     * @param desc the description of the task.
+     * @param date the date of the deadline.
+     */
+    DeadlineTask(boolean isDone, String desc, LocalDateTime date) {
         super(desc);
         super.isDone = isDone;
         this.deadline = date;
@@ -53,9 +60,9 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return String.format(
-                "[D]%s (by: %s)",
+                DukeString.FORMAT_DEADLINE,
                 super.toString(),
-                deadline.format(DateTimeFormatter.ofPattern("dd LLL uu hhmma"))
+                deadline.format(DateTimeFormatter.ofPattern(DukeString.FORMAT_DATE_OUTPUT))
         );
     }
 }
