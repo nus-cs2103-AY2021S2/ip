@@ -34,7 +34,6 @@ public class Duke {
             ArrayList<Task> prevTasks = FileAccessor.readFromTasks(new ArrayList<Task>());
             TaskList.setList(prevTasks);
         } catch (FileNotFoundException | IllegalArgumentException e) {
-            //System.out.println("EXCEPTION");
             try {
                 Files.createDirectory(Paths.get(FileAccessor.getFolderPath()));
                 TaskList.setList(new ArrayList<Task>());
