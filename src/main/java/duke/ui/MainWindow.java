@@ -57,6 +57,7 @@ public class MainWindow extends VBox {
     @FXML
     public void showWelcomeMessage() {
         String welcomeMessage = getResponse(Ui.showWelcomeMessage(bot));
+        assert welcomeMessage != null : "Welcome message should not be empty!";
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage)
         );
     }
@@ -87,6 +88,7 @@ public class MainWindow extends VBox {
         Command userCommand;
         try {
             userCommand = Parser.processInput(input, bot);
+            assert userCommand != null : "User command should not be empty at this point!";
             response = Main.runUserCommand(userCommand, bot);
             if (userCommand instanceof ByeCommand) {
                 exit();
@@ -108,6 +110,7 @@ public class MainWindow extends VBox {
 
     private void exit() {
         String exitMessage = getResponse(Ui.showExitMessage());
+        assert exitMessage != null : "Exit message should not be empty!";
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(exitMessage, dukeImage)
         );
         Platform.exit();
