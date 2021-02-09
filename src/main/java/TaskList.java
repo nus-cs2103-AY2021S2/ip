@@ -39,6 +39,18 @@ public class TaskList {
         return task;
     }
 
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            String taskDescription = task.getDescription();
+            if (taskDescription.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     public int getListSize() {
         return taskList.size();
     }
