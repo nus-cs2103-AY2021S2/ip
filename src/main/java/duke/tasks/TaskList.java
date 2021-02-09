@@ -83,8 +83,8 @@ public class TaskList {
      */
     public TaskList find(String text) {
         TaskList result = new TaskList();
-        for(Task curr : this.list) {
-            if(curr.getName().contains(text)) {
+        for (Task curr : this.list) {
+            if (curr.getName().contains(text)) {
                 result.addTask(curr);
             }
         }

@@ -54,6 +54,7 @@ public class Storage {
             while (sc.hasNext()) {
                 String nextLine = sc.nextLine();
                 String[] spiltString = nextLine.split(" \\|\\| ");
+
                 String taskType = spiltString[0];
                 boolean isCompleted = spiltString[1].equals("1");
                 String taskName = spiltString[2];
