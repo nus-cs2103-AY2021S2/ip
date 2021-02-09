@@ -32,9 +32,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return String.format("[X][%s] %s", priority, name);
+            return String.format("[%s][X] %s", priority, name);
         } else {
-            return String.format("[ ][%s] %s", priority, name);
+            return String.format("[%s][  ] %s", priority, name);
         }
     }
 
