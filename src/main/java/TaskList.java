@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 /**
@@ -10,14 +9,14 @@ import java.util.stream.Collectors;
  */
 public class TaskList {
     private List<Task> tasks;
-    private LinkedList<List<Task>> histories;
+    private History<List<Task>> histories;
 
     /**
      * Constructor of TaskList object
      */
     TaskList() {
         this.tasks = new ArrayList<>();
-        this.histories = new LinkedList<>();
+        this.histories = new History<>();
     }
 
     /**
@@ -26,7 +25,7 @@ public class TaskList {
      */
     TaskList(List<Task> tasks) {
         this.tasks = tasks.stream().collect(Collectors.toList()); //deep-copy
-        this.histories = new LinkedList<>();
+        this.histories = new History<>();
     }
 
     /**
@@ -54,7 +53,11 @@ public class TaskList {
             this.histories.add(this.tasks.stream().collect(Collectors.toList()));
             this.tasks.set(index, this.tasks.get(index).finishTask());
             return Ui.finishTaskMessage(this.tasks.get(index).toString());
-        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        catch(NumberFormatException e) {
+            throw new DukeException("OOPS!!! The index must be an integer");
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The index of done cannot be empty.");
         }
         catch(IndexOutOfBoundsException e) {
@@ -74,6 +77,9 @@ public class TaskList {
             this.histories.add(this.tasks.stream().collect(Collectors.toList()));
             this.tasks.remove(index);
             return Ui.deleteTaskMessage(deleted.toString(), this.tasks.size());
+        }
+        catch(NumberFormatException e) {
+            throw new DukeException("OOPS!!! The index must be an integer");
         }
         catch(ArrayIndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The index of delete cannot be empty.");
@@ -120,7 +126,7 @@ public class TaskList {
             throw new DukeException("Sorry, the history of TaskList is empty!!!");
         }
         if (description.equals("") || description.equals("1")) {
-            this.tasks = this.histories.pollLast();
+            this.tasks = this.histories.getLast();
             return "Successfully undo to the previous state!";
         }
         int numberOfUndo;
@@ -129,13 +135,12 @@ public class TaskList {
         } catch (NumberFormatException e) {
             throw new DukeException("Sorry!!! Undo takes an integer as an argument");
         }
-        int totalReset = 0;
-        while (numberOfUndo > 0 && this.histories.size() > 0) {
-            this.tasks = this.histories.pollLast();
-            totalReset++;
-            numberOfUndo--;
-        }
-        return "Succesfully undo to " + totalReset + " previous states!";
+        int totalReset = this.histories.compareNumberOfHistoriesWithInput(numberOfUndo);
+        this.tasks = this.histories.getMultipleItems(numberOfUndo);
+        return totalReset >= numberOfUndo
+                ? "Successfully undo " + totalReset + " previous states!"
+                : "only Successfully undo " + totalReset + " previous states!";
+
     }
 
     public String sort() throws DukeException{
@@ -154,6 +159,62 @@ public class TaskList {
         int doneTasks = this.tasks.stream().filter(task -> task.hasDone()).
                 collect(Collectors.toList()).size();
         return "Task done: " + doneTasks * 100 / this.tasks.size() + "% from " + this.tasks.size();
+    }
+
+    public String getContact(String description) throws DukeException {
+        try {
+            int index = Integer.parseInt(description) - 1;
+            return Ui.showMessage("Task " + description +": " + this.tasks.get(index).getContactDetails());
+        }
+        catch(NumberFormatException e) {
+            throw new DukeException("The command 'contact' must have first argument an index");
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The index of contact cannot be empty.");
+        }
+        catch(IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The index of contact exceed the tasks' list.");
+        }
+    }
+
+    public String addContactDetails(String description) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("No contact details given!!");
+        }
+        String[] inputs = description.split(" ");
+        int index;
+        try {
+            index = Integer.parseInt(inputs[0]) - 1;
+            this.histories.add(this.tasks.stream().collect(Collectors.toList()));
+            this.tasks.get(index).addContactDetails(inputs[1], inputs[2]);
+            return Ui.showMessage("Succesfully add contacts to task number " + (index + 1));
+        }
+        catch(NumberFormatException e) {
+            throw new DukeException("contact must have first argument an index");
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The arguments of addContact cannot be empty.");
+        }
+        catch(IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The index of addContact exceed the tasks' list.");
+        }
+    }
+
+    public String getAllContactDetails() throws DukeException {
+        if (this.tasks.isEmpty()) {
+            throw new DukeException("Sorry, the TaskList is empty");
+        }
+        if (this.tasks.stream().filter(task -> task.hasContactDetails())
+                .collect(Collectors.toList()).isEmpty()) {
+            return Ui.showMessage("No contact details for all tasks");
+        }
+        String output = Ui.showMessage("Here are the contact details available in your list:");
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.tasks.get(i).hasContactDetails()) {
+                output += Ui.showMessage("Task " + (i + 1) + ": " + this.tasks.get(i).getContactDetails());
+            }
+        }
+        return output;
     }
 
     /**

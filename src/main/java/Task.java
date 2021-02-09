@@ -6,6 +6,7 @@
 public class Task {
     protected final String task;
     protected final boolean isDone;
+    private ContactDetail contactDetail;
 
     /**
      * Constructor of a Task object
@@ -14,11 +15,13 @@ public class Task {
     Task(String task) {
         this.task = task;
         this.isDone = false;
+        this.contactDetail = new ContactDetail();
     }
 
     Task(String task, boolean isDone) {
         this.task = task;
         this.isDone = isDone;
+        this.contactDetail = new ContactDetail();
     }
 
     /**
@@ -45,6 +48,23 @@ public class Task {
             return "1|" + this.task;
         }
         return "0|" + this.task;
+    }
+
+    public boolean hasContactDetails() {
+        return this.contactDetail.hasContactDetails();
+    }
+
+    public void addContactDetails(String contactName, String contactNumber)
+            throws DukeException {
+        try {
+            this.contactDetail.addContactDetails(contactName, Integer.parseInt(contactNumber));
+        } catch (NumberFormatException e) {
+            throw new DukeException("Contact Number is not a number");
+        }
+    }
+
+    public String getContactDetails() {
+        return this.contactDetail.getContactDetails();
     }
 
     /**

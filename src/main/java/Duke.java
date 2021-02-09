@@ -88,6 +88,12 @@ public class Duke {
             return taskList.statistics();
         case "help":
             return Ui.showHelpMessage();
+        case "contact":
+            return taskList.getContact(description);
+        case "addContact":
+            return taskList.addContactDetails(description);
+        case "allContacts":
+            return taskList.getAllContactDetails();
         }
         return "";
     }

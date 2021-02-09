@@ -47,10 +47,20 @@ public class Parser {
                     throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
                 }
                 return "";
+            case "statistics":
+                if (this.description.length() != "statistics".length()) {
+                    throw new DukeException("OOPS!!! I'm sorry, but statistics shouldn't have any additional arguments");
+                }
+                return "";
+            case "contact":
+                return this.description.substring(8);
+            case "allContacts":
+                if (this.description.length() != "allContacts".length()) {
+                    throw new DukeException("OOPS!!! I'm sorry, but allContacts shouldn't have any additional arguments");
+                }
+                return "";
             case "undo":
                 return this.description.length() > 4 ? this.description.substring(5) : "";
-            case "statistics":
-                return this.description.length() > 10 ? this.description.substring(11) : "";
             case "done":
                 return this.description.substring(5);
             case "delete":
@@ -59,6 +69,8 @@ public class Parser {
                 return this.description.substring(5);
             case "find":
                 return this.description.substring(5);
+            case "addContact":
+                return this.description.substring(11);
             case "deadline":
                 String[] phrasesFromDeadline = this.description.split(" /by ");
                 return phrasesFromDeadline[0].substring(this.command.length() + 1);
@@ -97,9 +109,15 @@ public class Parser {
                 return "";
             case "find":
                 return "";
+            case "addContact":
+                return "";
+            case "allContacts":
+                return "";
             case "undo":
                 return "";
             case "statistics":
+                return "";
+            case "contact":
                 return "";
             case "deadline":
                 String[] phrasesFromDeadline = this.description.split(" /by ");

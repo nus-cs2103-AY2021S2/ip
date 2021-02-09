@@ -16,11 +16,11 @@ public class Ui {
      */
 
     public static String getWelcomeMessage() {
-        String logo = "00_____00___0000000_____00______________0_______\n"
+        String logo = "00_____00___0000000_____00______________0_____\n"
                     + "_00___00____00____00_____00_____________0_0____\n"
                     + "__00_00_____00____00_____00____________0000___\n"
-                    + "____00_______00____00_____00__________0_____0___\n"
-                    + "____00_______0000000_____0000000__0_______0__";
+                    + "____00_______00____00_____00__________0_____0__\n"
+                    + "____00_______0000000_____0000000__0________0_";
         return "Hello from\n" + logo + "\nHello! I'm Fayola\n" +
                 "What can I do for you?\n";
     }
@@ -63,7 +63,8 @@ public class Ui {
 
     public static String showHelpMessage() {
         String[] argumentsAvailable = {"list", "sort", "done", "delete", "todo"
-                , "find", "undo", "statistics","deadline","event"};
+                , "find", "undo", "statistics","deadline","event", "help", "contact"
+                ,"addContact","allContacts"};
         String ans = "Here are the available arguments :";
         for (String arg: argumentsAvailable) {
             ans += arg + "\n";

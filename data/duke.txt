@@ -1,6 +1,4 @@
-
 E|1|minum|2020
 T|1|minuman
-T|0|ayah
+T|1|ayah
 T|0|abcde
-T|1|ppq
