@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 
 /**
  * Represents a list of tasks
@@ -61,23 +60,6 @@ public class TaskList {
      */
     public int size() {
         return this.tasks.size();
-    }
-
-    /**
-     * Filters tasks that are associated with a specified date
-     * 
-     * @param date Date to filter for
-     * @return Filtered task list
-     */
-    public TaskList getTasksOnDate(LocalDate date) {
-        TaskList tasksOnDate = new TaskList();
-        for (int i = 1; i <= this.size(); i++) {
-            Task currTask = this.get(i);
-            if (date.equals(currTask.getDate())) {
-                tasksOnDate.add(currTask);
-            }
-        }
-        return tasksOnDate;
     }
 
     @Override

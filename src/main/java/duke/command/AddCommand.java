@@ -21,10 +21,12 @@ public class AddCommand implements Command {
         this.taskToAdd = task;
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.taskToAdd);
         String numOfTasks = tasks.size() + (tasks.size() > 1 ? " tasks" : " task");
