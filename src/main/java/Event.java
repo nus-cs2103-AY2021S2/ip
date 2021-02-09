@@ -13,9 +13,10 @@ public class Event extends Task {
      * @param name the description of the Event task.
      * @param time LocalDate object that represents
      *            the time this Event is happening.
+     * @param priority a String representing the priority of the task.
      */
-    public Event(String name, String time) {
-        super(name);
+    public Event(String name, String time, String priority) {
+        super(name, priority);
         this.time = LocalDate.parse(time);
     }
 
@@ -28,9 +29,10 @@ public class Event extends Task {
      * @param isDone the status of the Event task.
      * @param time LocalDate object that represents
      *            the time this Event is happening.
+     * @param priority a String representing the priority of the task.
      */
-    public Event(String name, boolean isDone, String time) {
-        super(name, isDone);
+    public Event(String name, boolean isDone, String time, String priority) {
+        super(name, isDone, priority);
         this.time = LocalDate.parse(time);
     }
 
