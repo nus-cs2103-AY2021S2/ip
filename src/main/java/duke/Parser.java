@@ -8,7 +8,7 @@ public class Parser {
 
     private final TaskList mem;
     private final Hashtable<String, Function<String, String>> functions;
-    private boolean isExited;
+    private String history;
 
     /**
      * loads the txt file into mem and displays the welcome message
@@ -18,7 +18,7 @@ public class Parser {
         this.mem = new TaskList(storage.load(), storage);
         functions = new Hashtable<String, Function<String, String>>();
         this.initialize();
-        this.isExited = false;
+        this.history = Ui.welcome();
         //Ui.welcome();
     }
 
@@ -45,7 +45,6 @@ public class Parser {
         Scanner sc = new Scanner(s);
         String inputs = sc.next();
         if (inputs.equals("bye")) {
-            this.isExited = true;
             return Ui.bye();
         } else if (inputs.equals("list")) {
             return this.list();
@@ -62,8 +61,12 @@ public class Parser {
         }
     }
 
-    boolean getIsExited() {
-        return this.isExited;
+    String prevChat() {
+        return this.history;
+    }
+
+    void chat(String s) {
+        this.history = this.parser(s);
     }
 
     private String store(Task t) {
@@ -110,17 +113,16 @@ public class Parser {
         return Ui.tasksOnDay(this.mem, s);
     }
 
-    String find(String s) {
+    private String find(String s) {
         return Ui.find(this.mem, s);
     }
 
-    String clear() {
+    private String clear() {
         this.mem.clear();
         return Ui.clear();
     }
 
-
-    boolean checkValid(String s) {
+    private boolean checkValid(String s) {
         return this.functions.containsKey(s);
     }
 }
