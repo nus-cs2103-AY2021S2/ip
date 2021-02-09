@@ -1,46 +1,9 @@
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * A class which contains list of user interfaces.
  */
 public class Ui {
-    /**
-     * Finds task and print out the details of the tasks that is related to the keyword provided.
-     *
-     * @param keyword Parts of the description of the task that a user wants to find.
-     */
-    public void find(String keyword) {
-        String print = "";
-        int num = 1;
-        for (int i = 0; i < TaskList.tasks.size(); i++) {
-            Task task = TaskList.tasks.get(i);
-            String taskDescription = task.description;
-            String word = "";
-            for (int j = 0; j < taskDescription.length(); j++) {
-                if (taskDescription.charAt(j) == ' ') {
-                    if (word.equals(keyword)) {
-                        print += num + "." + task + "\n";
-                        num++;
-                    }
-                    word = "";
-                } else {
-                    word += taskDescription.charAt(j);
-                    if (j == taskDescription.length() - 1) {
-                        if (word.equals(keyword)) {
-                            print += num + "." + task + "\n";
-                            num++;
-                        }
-                    }
-                }
-            }
-        }
-        print = "Task(s) related to the keyword :\n" + print;
-        System.out.println(print);
-        Duke.respond = print;
-    }
-
     /**
      * Say bye when the user logouts.
      *

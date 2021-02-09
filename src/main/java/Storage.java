@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,23 +35,19 @@ public class Storage {
             directory.mkdirs();
             file.createNewFile();
             System.out.println("     Welcome! New user :)");
-            System.out.println("     What can I do for you?");
-            System.out.println("    ____________________________________________________________");
             Duke.respond = "Welcome! New user :)\n" + "What can I do for you?";
-        } else {
+        } else if (file.exists()) {
             scanFile();
             if (TaskList.tasks.size() == 0) {
                 System.out.println("     You have no saved task!");
-                System.out.println("     What can I do for you?");
-                System.out.println("    ____________________________________________________________");
                 Duke.respond = "You have no saved task!\n" + "What can I do for you?";
             } else {
                 System.out.println("     You have " + TaskList.tasks.size() + " saved tasks!");
-                System.out.println("     What can I do for you?");
-                System.out.println("    ____________________________________________________________");
                 Duke.respond = "You have " + TaskList.tasks.size() + " saved tasks!\n" + "What can I do for you?";
             }
         }
+        System.out.println("     What can I do for you?");
+        System.out.println("    ____________________________________________________________");
         return TaskList.tasks;
     }
 
@@ -97,7 +92,7 @@ public class Storage {
         if (type.equals("D")) {
             TaskList.tasks.add(new Deadline(description, LocalDate.parse(fileScanner.next()),
                     LocalTime.parse(fileScanner.next())));
-        } else {
+        } else if (type.equals("E")) {
             String at = fileScanner.next();
             String time = fileScanner.next();
             TaskList.tasks.add(new Event(description, LocalDate.parse(at), LocalTime.parse(time.substring(0, 5)),
@@ -109,7 +104,7 @@ public class Storage {
     }
 
     /**
-     * Save current tasks in the tasklist to the file after the user logout so that it can be retrieve in the
+     * Save current tasks in the taskList to the file after the user logout so that it can be retrieve in the
      * next login.
      *
      * @throws IOException If the named file exists but is a rather than a regular file, does not exist but
@@ -128,7 +123,7 @@ public class Storage {
             } else if (task instanceof Event) {
                 fw.write("E | " + isDone + " | " + task.description + " | " + ((Event) task).at + " "
                         + ((Event) task).start + "-" + ((Event) task).end);
-            } else {
+            } else if (task instanceof Deadline) {
                 fw.write("D | " + isDone + " | " + task.description + " | " + ((Deadline) task).by + " "
                         + ((Deadline) task).time);
             }

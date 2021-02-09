@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,29 +19,93 @@ public class Parser {
      */
     public static void parse(String command) throws DukeException, IOException {
         Ui ui = new Ui();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         if (command.equals("bye")) {
             ui.bye();
         } else if (command.equals("list")) {
-            TaskList.list();
-        } else if (command.substring(0, 4).equals("done")) {
-            TaskList.done(Integer.parseInt(command.substring(5)));
-        } else if (command.substring(0, 4).equals("find")) {
-            ui.find(command.substring(5));
-        } else if (command.substring(0, 4).equals("todo")) {
-            TaskList.addTask(new ToDo(Parser.getDescription(command, "T")));
-        } else if (command.substring(0, 5).equals("event")) {
+            list();
+        } else if (command.startsWith("done")) {
+            done(command);
+        } else if (command.startsWith("find")) {
+            find(command);
+        } else if (command.startsWith("todo")) {
+            addToDo(command);
+        } else if (command.startsWith("event")) {
             addEvent(command);
-        } else if (command.substring(0, 6).equals("delete")) {
-            TaskList.delete(Integer.parseInt(command.substring(7)));
-        } else if (command.substring(0, 8).equals("deadline")) {
+        } else if (command.startsWith("delete")) {
+            delete(command);
+        } else if (command.startsWith("deadline")) {
             addDeadline(command);
         } else {
-            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "Our program has terminated, please restart to continue using our service";
             throw (new DukeException("\n    ____________________________________________________________\n"
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + "    ____________________________________________________________"));
         }
+    }
+
+    /**
+     * List all the tasks in TaskList.
+     */
+    public static void list() {
+        TaskList.list();
+    }
+
+    /**
+     * Initiates find in TaskList.
+     *
+     * @param command User command.
+     * @throws DukeException If an invalid command is given by the user. It also happens when index of task
+     *                       to be deleted is not provided.
+     */
+    public static void find(String command) throws DukeException {
+        if (command.length() == 4) {
+            throw new DukeException("Keyword for search is missing!");
+        }
+        TaskList.find(command.substring(5));
+    }
+
+    /**
+     * Initiates done in TaskList.
+     *
+     * @param command User command.
+     * @throws DukeException If an invalid command is given by the user. It also happens when index of task
+     *                       to be deleted is not provided.
+     */
+    public static void done(String command) throws DukeException {
+        if (command.length() == 4) {
+            throw new DukeException("Index for task done is missing!");
+        }
+        TaskList.done(Integer.parseInt(command.substring(5)));
+    }
+
+    /**
+     * Initiates delete in TaskList.
+     *
+     * @param command User command.
+     * @throws DukeException If an invalid command is given by the user. It also happens when index of task
+     *                       to be deleted is not provided.
+     */
+    public static void delete(String command) throws DukeException {
+        if (command.length() == 7) {
+            throw new DukeException("Index for task to be deleted is missing!");
+        }
+        TaskList.delete(Integer.parseInt(command.substring(7)));
+    }
+
+    /**
+     * Add toDo into TaskList.
+     *
+     * @param command User command.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description.
+     */
+    public static void addToDo(String command) throws DukeException {
+        ToDo todo = new ToDo(getDescription(command, "T"));
+        if (TaskList.isDuplicate(todo)) {
+            throw new DukeException("This task is duplicated!");
+        }
+        TaskList.addTask(todo);
     }
 
     /**
@@ -66,8 +129,12 @@ public class Parser {
         String endTime = command.substring(currentIndexOfString + 17, currentIndexOfString + 21);
         String localStart = startTime.substring(0, 2) + ":" + startTime.substring(2, 4);
         String localEnd = endTime.substring(0, 2) + ":" + endTime.substring(2, 4);
-        TaskList.addTask(new Event(eventDescription, LocalDate.parse(format(date), formatter),
-                LocalTime.parse(localStart), LocalTime.parse(localEnd)));
+        Event event = new Event(eventDescription, LocalDate.parse(format(date), formatter),
+                LocalTime.parse(localStart), LocalTime.parse(localEnd));
+        if (TaskList.isDuplicate(event)) {
+            throw new DukeException("This task is duplicated!");
+        }
+        TaskList.addTask(event);
     }
 
     /**
@@ -87,7 +154,12 @@ public class Parser {
         }
         String time = command.substring(currentIndexOfString + 15);
         String localTime = time.substring(0, 2) + ":" + time.substring(2, 4);
-        TaskList.addTask(new Deadline(deadlineDescription, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime)));
+        Deadline deadline = new Deadline(deadlineDescription,
+                LocalDate.parse(format(date), formatter), LocalTime.parse(localTime));
+        if (TaskList.isDuplicate(deadline)) {
+            throw new DukeException("This task is duplicated!");
+        }
+        TaskList.addTask(deadline);
     }
 
     /**
@@ -104,17 +176,15 @@ public class Parser {
             for (int i = start; i < command.length(); i++) {
                 if (command.charAt(i) == ' ') {
                     break;
-                } else {
-                    date += command.charAt(i);
                 }
+                date += command.charAt(i);
             }
         } else if (type.equals("D")) {
             for (int i = start; i < command.length(); i++) {
                 if (command.charAt(i) == ' ') {
                     break;
-                } else {
-                    date += command.charAt(i);
                 }
+                date += command.charAt(i);
             }
         }
         if (date.length() == 0) {
@@ -132,27 +202,35 @@ public class Parser {
      */
     public static String getDescription(String command, String type) throws DukeException {
         String description = "";
-        if (type.equals("T")) {
-            description = command.substring(5);
-        } else if (type.equals("E")) {
-            for (int i = 6; i < command.length(); i++) {
-                if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
-                    break;
-                } else {
+        switch (type) {
+            case "T":
+                if (command.length() == 4) {
+                    throw new DukeException("Description cannot be empty");
+                }
+                description = command.substring(5);
+                break;
+            case "E":
+                if (command.length() == 5) {
+                    throw new DukeException("Description cannot be empty");
+                }
+                for (int i = 6; i < command.length(); i++) {
+                    if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
+                        break;
+                    }
                     description += command.charAt(i);
                 }
-            }
-        } else if (type.equals("D")) {
-            for (int i = 9; i < command.length(); i++) {
-                if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
-                    break;
-                } else {
+                break;
+            case "D":
+                if (command.length() == 8) {
+                    throw new DukeException("Description cannot be empty");
+                }
+                for (int i = 9; i < command.length(); i++) {
+                    if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
+                        break;
+                    }
                     description += command.charAt(i);
                 }
-            }
-        }
-        if (description.length() == 0) {
-            throw new DukeException("Description cannot be empty");
+                break;
         }
         return description;
     }
