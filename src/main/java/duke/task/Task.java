@@ -64,6 +64,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format("[%s] %s\n", getStatusIcon(), description);
     }
 }

@@ -11,15 +11,19 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int numberOfTasks = tasks.size();
+        String dukeResponse;
         if (numberOfTasks == 0) {
-            ui.showNewLine("You currently have no tasks added!");
+            dukeResponse = "You currently have no tasks added!\n";
         } else {
+            StringBuilder tmp = new StringBuilder();
             for (int i = 0; i < numberOfTasks; i++) {
                 String message = String.format("%d.%s", i, tasks.get(i));
-                ui.showNewLine(message);
+                tmp.append(message);
             }
+            dukeResponse = tmp.toString();
         }
+        return dukeResponse;
     }
 }

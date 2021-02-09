@@ -12,9 +12,9 @@ public class DeadlineCommand extends AddTaskCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] argumentsArr = this.arguments.split(" /by ", 2);
         tasks.add(new Deadline(argumentsArr[0], argumentsArr[1]));
-        super.execute(tasks, ui, storage);
+        return super.execute(tasks, ui, storage);
     }
 }

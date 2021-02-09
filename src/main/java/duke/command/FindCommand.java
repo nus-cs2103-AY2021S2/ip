@@ -11,9 +11,10 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder message = new StringBuilder();
         int numberOfTasks = tasks.size();
+        String dukeResponse;
         for (int i = 0; i < numberOfTasks; i++) {
             Task task = tasks.get(i);
             if (task.getDescription().contains(arguments)) {
@@ -22,11 +23,11 @@ public class FindCommand extends Command {
             }
         }
         if (message.length() != 0) {
-            ui.showNewLine("Here are the matching tasks in your list:");
-            ui.show(message.toString());
+            dukeResponse = "Here are the matching tasks in your list: \n"
+                    + message.toString();
         } else {
-            ui.showNewLine("No found tasks matching your query.");
-        };
-
+            dukeResponse = "No found tasks matching your query.\n";
+        }
+        return dukeResponse;
     }
 }
