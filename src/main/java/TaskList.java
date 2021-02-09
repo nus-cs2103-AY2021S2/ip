@@ -52,7 +52,6 @@ class TaskList {
      * @param task An instance of Task representing the newly added task.
      */
     public void addTask(Task task) {
-        assert false;
         this.tasks.add(task);
 
 
