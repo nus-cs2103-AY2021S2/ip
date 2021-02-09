@@ -55,13 +55,14 @@ public class TaskList {
      * @throws DukeException if fail to rewrite tasks.
      */
     public String remove(int taskNumber) throws DukeException {
+        String descriptionOfTaskToRemove =  this.list.get(taskNumber - 1).toString();
         this.list.remove(taskNumber - 1);
         //Rewrite all tasks
         rewriteTasks();
         return Helper.formatStrings(
             "Noted. I've removed this task:",
             System.lineSeparator(),
-            this.list.get(taskNumber - 1).toString(),
+            descriptionOfTaskToRemove,
             "Now you have " + (this.list.size() - 1) + " tasks in the list."
         );
     }
