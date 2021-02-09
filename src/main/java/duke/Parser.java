@@ -10,6 +10,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 import duke.exception.ExceptionType;
 
@@ -59,6 +60,9 @@ public class Parser {
         case "find":
             commandType = new FindCommand(taskCommand, taskDetail);
             break;
+        case "sort":
+            commandType = new SortCommand(taskCommand);
+            break;
         default:
             break;
         }
@@ -67,10 +71,14 @@ public class Parser {
 
     private static String formatInput(String taskCommand, String input) throws DukeException {
         String taskDetail = "";
-        boolean haveDescription = !taskCommand.equals("bye") && !taskCommand.equals("list");
+        HashSet<String> noDescriptionCommands = new HashSet<>();
+
+        Collections.addAll(noDescriptionCommands, "bye", "list", "sort");
+
+        boolean haveDescription = !noDescriptionCommands.contains(taskCommand);
 
         if (haveDescription) {
-            checkValidInput(taskCommand);
+            checkValidInput(taskCommand, input);
             taskDetail = formatTaskDetail(taskCommand, input);
             checkBlankDescription(taskCommand, taskDetail);
         }
@@ -82,15 +90,32 @@ public class Parser {
         return taskDetail;
     }
 
-    private static void checkValidInput(String taskCommand) throws DukeException {
-        HashSet<String> validInputSet = new HashSet<>();
+    private static void checkValidInput(String taskCommand, String input) throws DukeException {
+        HashSet<String> validInputCommands = new HashSet<>();
 
-        Collections.addAll(validInputSet, "bye", "list", "done",
-                "delete", "todo", "event", "deadline", "find");
+        Collections.addAll(validInputCommands, "bye", "list", "done",
+                "delete", "todo", "event", "deadline", "find", "sort");
 
-        boolean isInvalidCommand = !validInputSet.contains(taskCommand);
+        boolean isInvalidCommand = !validInputCommands.contains(taskCommand);
+        checkValidFormat(taskCommand, input);
         if (isInvalidCommand) {
             throw new DukeException(ExceptionType.INVALID_INPUT, taskCommand);
+        }
+    }
+
+    private static void checkValidFormat(String taskCommand, String input) throws DukeException {
+        if (taskCommand.equals("event")) { // guard clause
+            boolean isValidEventFormat = !input.contains("/at");
+            if (isValidEventFormat) {
+                throw new DukeException(ExceptionType.INVALID_FORMAT, taskCommand);
+            }
+        }
+
+        if (taskCommand.equals("deadline")) { // guard clause
+            boolean isValidDeadlineFormat = !input.contains("/by");
+            if (isValidDeadlineFormat) {
+                throw new DukeException(ExceptionType.INVALID_FORMAT, taskCommand);
+            }
         }
     }
 

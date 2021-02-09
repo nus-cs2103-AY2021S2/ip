@@ -32,12 +32,16 @@ public class DukeException extends Exception {
         case INVALID_INPUT:
             errorMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             break;
+        case INVALID_FORMAT:
+            errorMsg = "☹ OOPS!!! Invalid format detected :-( \n\n Pls enter your event/deadline commands followed by "
+                    + "description then /at with date (for event) or \n/by with date (for deadline)";
+            break;
         case INVALID_INTEGER:
             errorMsg = "☹ OOPS!!! The integer value is invalid (negative, 0 or out of task list range) :-(";
             break;
         case INVALID_DATETIME:
             errorMsg = "☹ OOPS!!! Invalid date has been detected :-( "
-                    + "Pls key in a valid date in MMM dd yyyy format (i.e. Oct 15 2019) !!!";
+                    + "\n Pls key in a valid date in MMM dd yyyy format (i.e. Oct 15 2019) !!!";
             break;
         case BLANK_DESCRIPTION:
             errorMsg = "☹ OOPS!!! The description of a " + this.taskType + " cannot be empty :-(";
