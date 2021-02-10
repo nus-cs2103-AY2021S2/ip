@@ -6,7 +6,7 @@
 
 Elaina is the ultimate personal assistant chatbot.
 
-![Elaina screenshot](docs/images/screenshot1.png)
+![Elaina screenshot](docs/Ui.png)
 
 ## Setting up in IntelliJ
 

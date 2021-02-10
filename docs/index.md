@@ -2,4 +2,4 @@
 
 > Elaina is the ultimate personal assistant chatbot.
 
-![Hero](/images/screenshot1.png)
+![Hero](/Ui.png)
