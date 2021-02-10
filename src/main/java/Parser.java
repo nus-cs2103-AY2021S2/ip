@@ -18,7 +18,11 @@ public class Parser {
         case ("bye"):
             return new ExitCommand();
         case ("list"):
-            return new ListCommand();
+            if (first.length == 1) {
+                return new ListCommand();
+            } else {
+                return new ListCommand(first[1]);
+            }
         case ("todo"):
             return new AddCommand(new Todo(first[1]));
         case ("event"): {
@@ -35,6 +39,8 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(first[1]));
         case ("find"):
             return new FindCommand(first[1].split(" "));
+        case ("snooze"):
+            return new SnoozeCommand(Integer.parseInt(first[1]));
         default:
             throw new DukeException("Unknown command received. " +
                     "Please use \"not implemented\" to view the available commands.");

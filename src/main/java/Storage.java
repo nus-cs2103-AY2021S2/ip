@@ -43,9 +43,57 @@ public class Storage {
      * @throws FileNotFoundException If the saved file cannot be found.
      * @throws DukeException If the saved file contains data that cannot be read.
      */
-    public ArrayList<Task> load() throws FileNotFoundException, DukeException {
+    public ArrayList<Task> loadNormalTasks() throws FileNotFoundException, DukeException {
         Scanner sc = new Scanner(this.file);
         ArrayList<Task> tasks = new ArrayList<>();
+        while (sc.hasNext()) {
+            String current = sc.nextLine();
+            if (current.equals("snooze")) {
+                break;
+            }
+            String[] splits = current.split(" ", 3);
+            switch (splits[0]) {
+            case "T": {
+                Task toAdd = new Todo(splits[2], (splits[1].equals("1")));
+                tasks.add(toAdd);
+                break;
+            }
+            case "E": {
+                Task toAdd = new Event(splits[2], LocalDate.parse(sc.nextLine()), splits[1].equals("1"));
+                tasks.add(toAdd);
+                break;
+            }
+            case "D": {
+                Task toAdd = new Deadline(splits[2], LocalDate.parse(sc.nextLine()), splits[1].equals("1"));
+                tasks.add(toAdd);
+                break;
+            }
+            default: {
+                throw new DukeException("Error occurred when reading data from storage file.\n"
+                        + "Therefore, creating a new task list.");
+            }
+            }
+        }
+        return tasks;
+    }
+
+    /**
+     * Loads in the data from the saved file.
+     * @return An ArrayList of Snoozed Tasks retrieved from the saved file.
+     * @throws FileNotFoundException If the saved file cannot be found.
+     * @throws DukeException If the saved file contains data that cannot be read.
+     */
+    public ArrayList<Task> loadSnoozedTasks() throws FileNotFoundException, DukeException {
+        Scanner sc = new Scanner(this.file);
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (sc.hasNext()) {
+            String current = sc.nextLine();
+            if (!current.equals("snooze")) {
+                continue;
+            } else {
+                break;
+            }
+        }
         while (sc.hasNext()) {
             String current = sc.nextLine();
             String[] splits = current.split(" ", 3);
@@ -82,7 +130,30 @@ public class Storage {
     public void update(TaskList taskList) throws IOException {
         StringBuilder textToAdd = new StringBuilder();
         FileWriter fw = new FileWriter(this.file);
-        for (Task curr : taskList.getTasks()) {
+        for (Task curr : taskList.getNormalTasks()) {
+            if (curr instanceof Todo) {
+                textToAdd.append("T ")
+                        .append(curr.isDone() ? "1 " : "0 ")
+                        .append(curr.getName())
+                        .append(System.lineSeparator());
+            } else if (curr instanceof Deadline) {
+                textToAdd.append("D ")
+                        .append(curr.isDone() ? "1 " : "0 ")
+                        .append(curr.getName())
+                        .append(System.lineSeparator())
+                        .append(((Deadline) curr).getBy())
+                        .append(System.lineSeparator());
+            } else if (curr instanceof Event) {
+                textToAdd.append("E ")
+                        .append(curr.isDone() ? "1 " : "0 ")
+                        .append(curr.getName())
+                        .append(System.lineSeparator())
+                        .append(((Event) curr).getAt())
+                        .append(System.lineSeparator());
+            }
+        }
+        textToAdd.append("snooze\n");
+        for (Task curr : taskList.getSnoozedTasks()) {
             if (curr instanceof Todo) {
                 textToAdd.append(caseTodo((Todo) curr));
             } else if (curr instanceof Deadline) {

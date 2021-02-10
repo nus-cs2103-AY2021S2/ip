@@ -24,9 +24,9 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         assert this.taskNum > 0 : "Input task number cannot be less than 1";
-        assert this.taskNum <= taskList.getTasks().size()
+        assert this.taskNum <= taskList.getNormalTasks().size()
                 : "Input Task number cannot be more than total number of Tasks.";
-        Task toDelete = taskList.getTasks().get(this.taskNum - 1);
+        Task toDelete = taskList.getNormalTasks().get(this.taskNum - 1);
         taskList.deleteTask(this.taskNum - 1);
         storage.update(taskList);
         return ui.printDeleteTask(toDelete, taskList);

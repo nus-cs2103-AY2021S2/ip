@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks the task as done and updates the file in hard drive accordingly.
+     * Snooze the task and updates the file in hard drive accordingly.
      * @param taskList TaskList that contains all tasks at hand.
      * @param ui Ui that deals with interaction with the user.
      * @param storage Storage that deals with storing TaskList into hard drive.
@@ -24,10 +24,10 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         assert this.taskNum > 0 : "Input task number cannot be less than 1";
-        assert this.taskNum <= taskList.getTasks().size()
+        assert this.taskNum <= taskList.getNormalTasks().size()
                 : "Input Task number cannot be more than total number of Tasks.";
         taskList.markDone(this.taskNum - 1);
         storage.update(taskList);
-        return ui.printMarkDone(taskList.getTasks().get(this.taskNum - 1));
+        return ui.printMarkDone(taskList.getNormalTasks().get(this.taskNum - 1));
     }
 }
