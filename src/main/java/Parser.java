@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
    * Parser only has one method parse
    *
@@ -6,7 +8,7 @@
    */
 public class Parser {
 
-    public static Command parse(String command) throws DukeException {
+    public static Command parse(String command, ArrayList<Command> pastCommands) throws DukeException {
         String[] lineSplit = command.split(" ", 2);
         switch (lineSplit[0]) {
         case ("bye"):
@@ -61,6 +63,10 @@ public class Parser {
                 throw new DukeException(
                         "\u00a9 OOPS!!! The description of a deadline cannot be empty.");
             }
+        case ("undo"):
+
+            Command undo = new UndoCommand("undo", "", "", pastCommands);
+            return undo;
         default:
             return null;
         }
