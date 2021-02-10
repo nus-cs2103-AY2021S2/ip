@@ -18,4 +18,6 @@ public enum Commands {
     DEL, // DELETE
     FIND,
     F, // FIND
+    SORT,
+    S, // SORT
 }
