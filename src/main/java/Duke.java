@@ -11,7 +11,7 @@ import java.nio.file.Files;
 
 public class Duke {
 
-    private static void SaveTasks(ArrayList<Task> list, File f) throws IOException {
+    private static void saveTasks(ArrayList<Task> list, File f) throws IOException {
         FileWriter fw = new FileWriter(f);
         for (Task temp : list) {
             if (temp instanceof Deadline) {
@@ -25,51 +25,55 @@ public class Duke {
         fw.close();
     }
 
-    private static void LoadTasks(ArrayList<Task> list, File f) throws IOException {
+    private static void loadTasks(ArrayList<Task> list, File f) throws IOException {
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
             s = s.trim();
 
-            String[] sArr = s.split("\\|", 4);
+            String[] strArray = s.split("\\|", 4);
 
-            if (sArr[0].trim().equals("D")) {
-                Deadline tempD = new Deadline(sArr[2].trim(), sArr[3].trim());
-                if (sArr[1].trim().equals("done")) {
-                    tempD.isDone = true;
-                } else if (sArr[1].trim().equals("not done")){
-                    tempD.isDone = false;
+            if (strArray[0].trim().equals("D")) {
+                Deadline deadline = new Deadline(strArray[2].trim(), strArray[3].trim());
+                if (strArray[1].trim().equals("done")) {
+                    deadline.isDone = true;
+                } else if (strArray[1].trim().equals("not done")){
+                    deadline.isDone = false;
                 }
-                list.add(tempD);
-            } else if (sArr[0].trim().equals("E")) {
-                Event tempE = new Event(sArr[2].trim(), sArr[3].trim());
-                if (sArr[1].trim().equals("done")) {
-                    tempE.isDone = true;
-                } else if (sArr[1].trim().equals("not done")) {
-                    tempE.isDone = false;
+                list.add(deadline);
+            } else if (strArray[0].trim().equals("E")) {
+                Event event = new Event(strArray[2].trim(), strArray[3].trim());
+                if (strArray[1].trim().equals("done")) {
+                    event.isDone = true;
+                } else if (strArray[1].trim().equals("not done")) {
+                    event.isDone = false;
                 }
-                list.add(tempE);
+                list.add(event);
             } else {
-                ToDo tempT = new ToDo(sArr[2].trim());
-                if (sArr[1].trim().equals("done")) {
-                    tempT.isDone = true;
-                } else if (sArr[1].trim().equals("not done")) {
-                    tempT.isDone = false;
+                ToDo todo = new ToDo(strArray[2].trim());
+                if (strArray[1].trim().equals("done")) {
+                    todo.isDone = true;
+                } else if (strArray[1].trim().equals("not done")) {
+                    todo.isDone = false;
                 }
-                list.add(tempT);
+                list.add(todo);
             }
         }
     }
 
     public static void main(String[] args) throws DukeException{
-        File file = new File("src/main/data/DukeData.txt");
-        Path path = Paths.get("src/main/data/DukeData.txt");
+        File file = new File("data/DukeData.txt");
+        File dir = new File("data/");
         ArrayList<Task> list = new ArrayList<>();
 
         try {
-            Files.createDirectories(path.getParent());
-            Files.createFile(path);
-            LoadTasks(list, file);
+            if(!dir.exists()) {
+                dir.mkdirs();
+            }
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+            loadTasks(list, file);
         } catch (Exception e) {
             e.getStackTrace();
         }
@@ -141,7 +145,7 @@ public class Duke {
             }
         }
         try {
-            SaveTasks(list, file);
+            saveTasks(list, file);
         } catch (IOException e) {
             e.printStackTrace();
         }
