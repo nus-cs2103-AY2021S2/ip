@@ -51,6 +51,7 @@ public class TaskStorage {
             while (iterator.hasNext()) {
                 task = iterator.next();
                 char taskType = task.toString().charAt(1);
+                assert(taskType == 'T' || taskType == 'D' || taskType == 'E');
                 int done = task.isDone() ? 1 : 0;
                 String description = task.getDescription();
                 String details = "";
@@ -90,19 +91,24 @@ public class TaskStorage {
                 String line = sc.nextLine();
                 String[] taskInfo = line.split(" \\| ");
                 String taskType = taskInfo[0];
+                assert(taskType.equals("T") || taskType.equals("D") || taskType.equals("D"));
                 String isDone = taskInfo[1];
+                assert(isDone.equals("1") || isDone.equals("0")) : "Save file has been corrupted!";
                 String description = taskInfo[2];
+                assert(!description.isBlank()) : "Save file has been corrupted!";
                 switch (taskType) {
                 case "T":
                     retrievedTasks.add(new ToDo(description, isDone));
                     break;
                 case "D":
                     String deadlineDetails = taskInfo[3];
+                    assert(!deadlineDetails.isBlank()) : "Save file has been corrupted!";
                     LocalDateTime deadline = LocalDateTime.parse(deadlineDetails, formatter);
                     retrievedTasks.add(new Deadline(description, isDone, deadline));
                     break;
                 case "E":
                     String eventDetails = taskInfo[3];
+                    assert(!eventDetails.isBlank()) : "Save file has been corrupted!";
                     LocalDateTime eventTime = LocalDateTime.parse(eventDetails, formatter);
                     retrievedTasks.add(new Event(description, isDone, eventTime));
                     break;

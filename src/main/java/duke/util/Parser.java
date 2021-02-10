@@ -36,6 +36,7 @@ public class Parser {
      */
     public static Command parse(String userInput, TaskList tasks) {
         String[] split = userInput.split("\\s+");
+        assert(split.length >= 1);
         String command = split[0];
         Command res;
         try {
@@ -69,6 +70,7 @@ public class Parser {
                 break;
             default:
                 res = new InvalidCommand("No such command!");
+                break;
             }
         } catch (DukeException e) {
             return new InvalidCommand(e.getMessage());
@@ -79,6 +81,7 @@ public class Parser {
     private static AddCommand handleToDo(String[] split, String userInput, TaskList tasks) throws DukeArgumentException {
         checkStringArgument(split, COMMAND.TODO);
         String description = userInput.substring(5);
+        assert(!description.isBlank());
         Task toAdd = new ToDo(description);
         Cache.cache(toAdd, tasks.getSize(), COMMAND.TODO);
         return new AddCommand(toAdd);
@@ -91,7 +94,9 @@ public class Parser {
         checkStringArgument(split, command);
         String[] taskDetails = userInput.substring(detailsIdx).split(regex);
         checkDateTime(taskDetails);
+        assert(deadlineDetails.length == 2);
         String description = taskDetails[0];
+        assert(!description.isBlank());
         LocalDateTime dateTime = LocalDateTime.parse(taskDetails[1].trim(), formatter);
         Task toAdd = command.equals(COMMAND.DEADLINE) ? new Deadline(description, dateTime)
                                                       : new Event(description, dateTime);
@@ -107,6 +112,7 @@ public class Parser {
 
     private static Command handleTaskOps(String[] split, TaskList tasks, String command) throws DukeArgumentException {
         int taskIdx = checkNumericalArgument(split, tasks);
+        assert(taskIdx >= 0 && (taskIdx < tasks.getSize()));
         Cache.cache(tasks.getTask(taskIdx), taskIdx, command);
         return command.equals(COMMAND.DONE) ? new DoneCommand(taskIdx)
                                             : new DeleteCommand(taskIdx);
