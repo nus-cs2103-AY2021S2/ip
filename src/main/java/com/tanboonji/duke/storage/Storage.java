@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.TaskList;
 
+/**
+ * The Storage class manages the loading and saving of data from the local disk.
+ */
 public class Storage {
 
     private static final String LOAD_ERROR_MESSAGE =
@@ -19,16 +22,21 @@ public class Storage {
 
     private final String fileDir;
 
+    /**
+     * Class constructor specifying directory of saved data.
+     *
+     * @param fileDir directory of saved data.
+     */
     public Storage(String fileDir) {
         this.fileDir = fileDir;
     }
 
     /**
-     * Loads TaskList saved on disk.
+     * Loads TaskList saved on local disk.
      * If TaskList does not exist, initialise an empty TaskList.
      *
-     * @return TaskList saved on disk, if it does not exist, an empty TaskList is returned instead.
-     * @throws DukeException If any error occurs while loading TaskList from disk.
+     * @return TaskList returns task list saved on disk, if it does not exist, an empty task list is returned instead.
+     * @throws DukeException If any error occurs while loading task list from disk.
      */
     public TaskList load() throws DukeException {
         try {

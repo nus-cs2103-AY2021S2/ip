@@ -10,6 +10,9 @@ import com.tanboonji.duke.parser.CommandParser;
 import com.tanboonji.duke.storage.Storage;
 import com.tanboonji.duke.ui.Ui;
 
+/**
+ * The Duke class manages the task list and data storage, executes commands and return command responses.
+ */
 public class Duke {
 
     private static final String FILE_DIR = "duke.txt";
@@ -39,6 +42,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Initialises Duke by loading task list from storage.
+     */
     public void initialise() {
         storage = new Storage(FILE_DIR);
         ui = new Ui();
@@ -77,6 +83,12 @@ public class Duke {
         return true;
     }
 
+    /**
+     * Executes user command and returns response from command.
+     *
+     * @param input user command.
+     * @return String response from executing user command.
+     */
     public String getResponse(String input) {
         Command command;
         try {
