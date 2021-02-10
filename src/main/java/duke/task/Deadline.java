@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private static final int DATE_LENGTH = 10;
+    private static final String DATE_FORMAT = "d MMM yyyy";
     protected LocalDate date;
     protected String time;
 
@@ -34,7 +35,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (By: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
+        return "[D]" + super.toString() + " (By: " + this.date.format(DateTimeFormatter.ofPattern(DATE_FORMAT)) + " "
                 + this.time + ")";
     }
 }

@@ -12,7 +12,7 @@ public class ByeCommand extends Command {
 
     public ByeCommand(String arguments) {
         super(arguments);
-        setExit(true);
+        setIsExit(true);
     }
 
     @Override
