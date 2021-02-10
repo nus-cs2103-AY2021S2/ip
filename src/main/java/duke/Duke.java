@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -79,29 +80,5 @@ public class Duke extends Application {
         stage.setScene(scene1);
         textField.requestFocus();
         stage.show();
-    }
-
-    /**
-     * Spins up the bot and allow execution from users
-     */
-    public void run() {
-    //        Scanner sc = new Scanner(System.in);
-    //        ui.speak("Hey! Welcome to the chatbot. What can I do for you today?");
-    //
-    //        boolean isExit = false;
-    //        while (!isExit) {
-    //            String input = ui.readCommand();
-    //            try {
-    //                Command c = this.parser.parse(input);
-    //                c.execute(tasks, ui, storage);
-    //                isExit = c.isExit();
-    //            } catch (DukeException dukeEx) {
-    //                dukeEx.printStackTrace();
-    //            }
-    //        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/task.txt").run();
     }
 }
