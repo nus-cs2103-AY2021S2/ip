@@ -33,11 +33,7 @@ public class Duke extends Application {
      * Constructor for this Duke object.
      */
     public Duke() throws IOException {
-        try {
-            this.storage = new Storage("./myData.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.storage = new Storage("./myData.txt");
         this.tasks = new TaskList();
         this.ui = new Ui();
         storage.initialise(tasks);
@@ -174,7 +170,6 @@ public class Duke extends Application {
      * Returns a string representation of the customer.
      */
     public static void main(String[] args) throws DukeException, IOException {
-        //new Duke("./myData.txt").run();
         new Duke().run();
     }
 }

@@ -9,13 +9,13 @@ import java.util.Scanner;
 public class Storage {
     protected String filePath;
     protected File saveFile;
-    protected FileWriter filewriter;
 
     /**
      * Constructor for this Storage object.
+     *
      * @param   filePath  File path to save task to hard disk.
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.filePath = filePath;
         this.saveFile = new File(filePath);
     }
@@ -23,6 +23,7 @@ public class Storage {
     /**
      * Reads and adds saved tasks from the hard disk.
      * Creates a new save file if it does not exist.
+     *
      * @param  tasks The TaskList object containing all tasks.
      */
     public void initialise(TaskList tasks) throws IOException {
@@ -39,15 +40,12 @@ public class Storage {
                 int len = taskStr.length();
                 if (taskType == 'T') {
                     tasks.addTodo(taskStr.substring(7));
-
                 } else if (taskType == 'D'){
                     int ind = taskStr.indexOf(" (by: ");
                     tasks.addDeadline(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
-
                 } else if (taskType == 'E'){
                     int ind = taskStr.indexOf(" (at: ");
                     tasks.addEvent(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
-
                 }
                 if (taskStr.charAt(4) == 'X') {
                     tasks.getAtInd(tasks.getNumItems() - 1).markAsDone();
@@ -57,7 +55,8 @@ public class Storage {
     }
 
     /**
-     * Saves all tasks in the TaskList to the harddrive.
+     * Saves all tasks in the TaskList to the hard drive.
+     *
      * @param  tasks The TaskList object containing all tasks.
      */
     public void finalise(TaskList tasks) throws IOException {
@@ -67,5 +66,4 @@ public class Storage {
         }
         fw.close();
     }
-
 }
