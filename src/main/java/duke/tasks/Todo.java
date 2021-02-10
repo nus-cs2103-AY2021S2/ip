@@ -1,16 +1,20 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+
 /**
  * Represents Todo subclass of Task that contains description of Task.
  */
 public class Todo extends Task {
+
+    public static final String TODO_DATE = "0000-01-01";
 
     /**
      * Constructs Todo subclass of Task containing the description of the Task.
      * @param description description of the Todo.
      */
     public Todo(String description) {
-        super(description);
+        super(description, LocalDate.parse(TODO_DATE));
     }
 
     /**

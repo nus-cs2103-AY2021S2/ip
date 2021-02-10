@@ -9,7 +9,6 @@ import duke.Parser;
  * represents the deadline of the Task.
  */
 public class Deadline extends Task {
-    private final LocalDate deadline;
 
     /**
      * Constructs a Deadline Task that contains the description of the task and its deadline.
@@ -18,8 +17,7 @@ public class Deadline extends Task {
      * @param deadline deadline for the task.
      */
     public Deadline(String description, LocalDate deadline) {
-        super(description);
-        this.deadline = deadline;
+        super(description, deadline);
     }
 
     /**
@@ -28,7 +26,7 @@ public class Deadline extends Task {
      */
     @Override
     public String data() {
-        return String.format("D | %s | %s", super.data(), deadline);
+        return String.format("D | %s | %s", super.data(), date);
     }
 
     /**
@@ -37,6 +35,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), Parser.localDateToString(deadline));
+        return String.format("[D]%s (by: %s)", super.toString(), Parser.localDateToString(date));
     }
 }

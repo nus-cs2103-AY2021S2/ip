@@ -9,7 +9,6 @@ import duke.Parser;
  * event.
  */
 public class Event extends Task {
-    private final LocalDate eventTime;
 
     /**
      * Constructs a Event class that contains the description of the task and the date of the event.
@@ -17,8 +16,7 @@ public class Event extends Task {
      * @param eventTime date when the Event occurs.
      */
     public Event(String description, LocalDate eventTime) {
-        super(description);
-        this.eventTime = eventTime;
+        super(description, eventTime);
     }
 
     /**
@@ -27,7 +25,7 @@ public class Event extends Task {
      */
     @Override
     public String data() {
-        return String.format("E | %s | %s", super.data(), eventTime);
+        return String.format("E | %s | %s", super.data(), date);
     }
 
     /**
@@ -36,6 +34,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), Parser.localDateToString(eventTime));
+        return String.format("[E]%s (at: %s)", super.toString(), Parser.localDateToString(date));
     }
 }

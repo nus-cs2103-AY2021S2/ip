@@ -3,6 +3,7 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.Parser;
 import duke.commands.SpecificCommandType;
@@ -171,6 +172,7 @@ public class TaskList {
      * Prints String representation of the TaskList for the user.
      */
     public String print() {
+        sort(tasks);
         return this.print(tasks);
     }
 
@@ -196,5 +198,10 @@ public class TaskList {
             }
         }
         return Message.getFindMsg(selectedTask);
+    }
+
+    private void sort(ArrayList<Task> tasks) {
+        System.out.println(tasks);
+        Collections.sort(tasks);
     }
 }
