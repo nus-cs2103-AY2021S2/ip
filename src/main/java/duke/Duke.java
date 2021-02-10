@@ -66,6 +66,43 @@ public class Duke {
         storage.save(taskList.getTasks());
     }
 
+    private String handleDone(Command command, String[] tokens) throws DukeException {
+        try {
+            Task task = taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
+            return Messages.getSuccessfullyDoneMessage(task);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new IncompleteInputException(command);
+        }
+    }
+
+    private String handleDelete(Command command, String[] tokens) throws DukeException {
+        try {
+            Task task = taskList.delete(Integer.parseInt(tokens[1]) - 1);
+            return Messages.getSuccessfullyDeletedMessage(taskList.getSize(), task);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new IncompleteInputException(command);
+        }
+    }
+
+    private String handleFind(String[] tokens) {
+        String[] searchParameters = tokens[1].toLowerCase().split(" ");
+        return Messages.getFilteredTasksMessage(taskList.getFilteredTaskList(searchParameters));
+    }
+
+    private String handleHelp(String[] tokens) {
+        boolean isDescriptionEmpty = tokens.length < 2;
+        return isDescriptionEmpty ? HelpMessages.getMessage("") : HelpMessages.getMessage(tokens[1]);
+    }
+
+    private String handleTask(Command command, String[] tokens) throws DukeException {
+        try {
+            Task task = taskList.addTask(command, tokens[1].trim());
+            return Messages.getSuccessfullyAddedTaskMessage(taskList.getSize(), task);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IncompleteInputException(command);
+        }
+    }
+
     /**
      * Processes input after it is parsed by the parser.
      *
@@ -81,41 +118,24 @@ public class Duke {
             System.exit(0);
             break;
         case DONE:
-            try {
-                Task task = taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
-                message = Messages.getSuccessfullyDoneMessage(task);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new IncompleteInputException(command);
-            }
+            message = handleDone(command, tokens);
             break;
         case DELETE:
-            try {
-                Task task = taskList.delete(Integer.parseInt(tokens[1]) - 1);
-                message = Messages.getSuccessfullyDeletedMessage(taskList.getSize(), task);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new IncompleteInputException(command);
-            }
+            message = handleDelete(command, tokens);
             break;
         case FIND:
-            String[] searchParameters = tokens[1].toLowerCase().split(" ");
-            message = Messages.getFilteredTasksMessage(taskList.getFilteredTaskList(searchParameters));
+            message = handleFind(tokens);
             break;
         case LIST:
             message = Messages.getAllTasksMessage(taskList.getTasks());
             break;
         case HELP:
-            boolean isDescriptionEmpty = tokens.length < 2;
-            message = isDescriptionEmpty ? HelpMessages.getMessage("") : HelpMessages.getMessage(tokens[1]);
+            handleHelp(tokens);
             break;
-        case TODO:
-        case DEADLINE:
+        case TODO: // Fall through
+        case DEADLINE: // Fall through
         case EVENT:
-            try {
-                Task task = taskList.addTask(command, tokens[1].trim());
-                message = Messages.getSuccessfullyAddedTaskMessage(taskList.getSize(), task);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new IncompleteInputException(command);
-            }
+            handleTask(command, tokens);
             break;
         default:
             assert false : "command not recognised";
