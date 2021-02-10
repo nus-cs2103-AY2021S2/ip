@@ -47,14 +47,14 @@ public class Parser {
         case LIST:
             TaskHandler.listTasks(taskList);
             break;
+        case BYE:
+            handleBye(apollo);
+            break;
         case DONE:
             handleDone(command, inputArr[1], taskList);
             break;
         case DELETE:
             handleDelete(command, inputArr[1], taskList);
-            break;
-        case BYE:
-            handleBye(apollo);
             break;
         case TODO:
         case DEADLINE:
