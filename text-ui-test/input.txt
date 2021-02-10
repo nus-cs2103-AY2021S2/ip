@@ -1,0 +1,12 @@
+todo buy milk
+list
+deadline submit homework /by sunday 9pm
+done 1
+list
+event attend class /at monday 10am
+done 2
+list
+delete 3
+delete 3
+list
+bye
