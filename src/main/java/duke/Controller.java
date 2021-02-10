@@ -1,7 +1,12 @@
 package duke;
 
 import duke.commands.BasicCommandType;
-import duke.exceptions.*;
+import duke.exceptions.DukeCorruptedStorageException;
+import duke.exceptions.DukeCreateDirectoryException;
+import duke.exceptions.DukeCreateFileException;
+import duke.exceptions.DukeEmptyListException;
+import duke.exceptions.DukeSaveFileException;
+import duke.exceptions.DukeUnknownArgumentsException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Message;
@@ -38,7 +43,7 @@ public class Controller {
      * Starts the program and accepting user inputs.
      */
     public String run(String input) {
-        if (input.equals("bye")) {
+        if (input.equals(END_COMMAND)) {
             return Message.getByeMsg();
         }
 
