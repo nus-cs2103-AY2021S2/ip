@@ -61,7 +61,7 @@ public class Snomio extends PrintWriter {
      *
      * @return String welcome message
      */
-    public String showWelcomeMsg(){
+    public String getWelcomeMsg(){
         return "Bonjour! I'm Snom! *squish*\n"
                 + "Try giving me some commands, I might be able to do something!\n"
                 + "[type 'bye' to exit program]";
@@ -73,35 +73,36 @@ public class Snomio extends PrintWriter {
      * @return String        string of entire task List
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
-    public String showTaskList(TaskList taskList) throws SnomException{
-        if(taskList.getSize() > 0){
-            String message = "Here are the tasks in your list:\n";
-            for(int i = 0; i < taskList.getSize(); i++){
-                message += (i+1) + ". " + taskList.getTask(i).toString() + "\n";
-            }
-            return message;
-        }else{
+    public String getTaskList(TaskList taskList) throws SnomException{
+        if(taskList.getSize() <= 0){
             throw new SnomException("You have no task in your list right now, try adding some and try again :D");
         }
+
+        String message = "Here are the tasks in your list:\n";
+        for(int i = 0; i < taskList.getSize(); i++){
+            message += (i+1) + ". " + taskList.getTask(i).toString() + "\n";
+        }
+
+        return message;
     }
 
     /**
-     * Prints out the list from searching the keyword.
+     * Returns out the list from searching the keyword.
      *
+     * @return String        string of matching task list
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
-    public void showMatchingTaskList(TaskList taskList) throws SnomException{
-        showLine();
-        if(taskList.getSize() > 0){
-            println("Here are the matching tasks in your list:");
-            for(int i = 0; i < taskList.getSize(); i++){
-                println((i+1) + ". " + taskList.getTask(i).toString());
-            }
-        }else{
+    public String getMatchingTaskList(TaskList taskList) throws SnomException{
+        if(taskList.getSize() <= 0){
             throw new SnomException("No matching task found.");
         }
-        showLine();
-        flush();
+
+        String message = "Here are the matching tasks in your list:\n";
+        for(int i = 0; i < taskList.getSize(); i++){
+            message += (i+1) + ". " + taskList.getTask(i).toString() + "\n";
+        }
+
+        return message;
     }
 
     /**
@@ -111,7 +112,7 @@ public class Snomio extends PrintWriter {
      * @param listSize task list size
      * @return String  task added into taskList
      */
-    public String showTaskAdded(Task task, int listSize){
+    public String getTaskAdded(Task task, int listSize){
         return "Got it. I've added this task:\n"
                 + "\t" + task.toString() + "\n"
                 + "Now you have " + listSize + " tasks in the list.";
@@ -123,7 +124,7 @@ public class Snomio extends PrintWriter {
      * @param finishedTasks list of finished tasks
      * @return String       recent finished tasks
      */
-    public String showFinishedTasks(Task[] finishedTasks) {
+    public String getFinishedTasks(Task[] finishedTasks) {
         String message = "Great Job! I've marked this task(s) as finish:\n";
         for(Task task: finishedTasks){
             message += "\t" + task.toString() + "\n";
@@ -137,7 +138,7 @@ public class Snomio extends PrintWriter {
      * @param deletedTasks list of deleted tasks
      * @return String      recent deleted tasks
      */
-    public String showDeletedTasks(Task[] deletedTasks) {
+    public String getDeletedTasks(Task[] deletedTasks) {
         String message = "Noted, I've removed this task(s)\n";
         for(Task task: deletedTasks){
             message += "\t" + task.toString() + "\n";
@@ -150,7 +151,7 @@ public class Snomio extends PrintWriter {
      *
      * @return String exit message
      */
-    public String showExitMessage(){
+    public String getExitMessage(){
         return "Ciao! Hope to see you again soon!";
     }
 
@@ -180,66 +181,12 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * This method is exclusive to read the content of the commands (todo, deadline, event)
-     *
-     * @param command        command to be executed
-     * @return               the content of a task
-     * @throws SnomException throws exception if the content is empty
-     */
-    public String readContent(String command) throws SnomException {
-        if(tokenizer.hasMoreTokens()){
-            return tokenizer.nextToken("");
-        }else{
-            throw new SnomException("OOPS!!! The description of a " + command + " cannot be empty.");
-        }
-    }
-
-    /**
-     * This method is exclusive to read the content of the commands with Delimiters (deadline, event)
-     *
-     * @param command        command to be executed
-     * @param delim          delimiter to split the date from content
-     * @return               the content of a task
-     * @throws SnomException throws exception if the content is empty
-     */
-    public String[] readContentWithDate(String command, String delim) throws SnomException {
-        String content = this.readContent(command);
-        String[] array = content.split(delim);
-        if(array.length == 2){
-            return array;
-        }else if(array.length < 2){
-            throw new SnomException("Please enter at least one date for your " + command + "!");
-        }else{
-            throw new SnomException("Oops! You have entered more than ONE date, please try again!");
-        }
-    }
-
-    /**
-     * This method is exclusive to read the content of the commands with number list (finish, delete)
-     *
-     * @param command        command to be executed
-     * @return               a number list for command to be executed
-     * @throws SnomException throws exception if the number is invalid
-     */
-    public int[] readContentWithNumbers(String command) throws SnomException{
-        int[] nums = new int[tokenizer.countTokens()];
-        if(nums.length > 0){
-            for(int i = 0; i < nums.length; i++){
-                nums[i] = this.readInt();
-            }
-            return nums;
-        }else{
-            throw new SnomException("Oops! Please at least give one task number to " + command + " a task");
-        }
-    }
-
-    /**
      * This method is similar to BufferedReader.readLine() except it will read from the tokenizer
      * if there are remaining tokens in it. It will return everything in the tokenizer as a whole sentence.
      *
      * @return the whole line of input or the rest of the sentence from the previous read line
      */
-    public String readLine(){
+    public String readRemainingLine(){
         String line = "";
 
         if(tokenizer == null || !tokenizer.hasMoreTokens()){

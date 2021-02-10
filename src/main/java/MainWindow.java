@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getSnomDialog(snomio.showWelcomeMsg(), snomImage)
+                DialogBox.getSnomDialog(snomio.getWelcomeMsg(), snomImage)
         );
     }
 
