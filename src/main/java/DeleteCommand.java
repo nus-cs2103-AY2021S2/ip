@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
      * @throws IOException If there is an error while updating the file in hard drive.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        Task toDelete = taskList.getTasks().get(this.taskNum - 1);
+        Task toDelete = taskList.getNormalTasks().get(this.taskNum - 1);
         taskList.deleteTask(this.taskNum - 1);
         storage.update(taskList);
         return ui.printDeleteTask(toDelete, taskList);

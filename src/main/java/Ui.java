@@ -41,11 +41,46 @@ public class Ui {
      * Returns the list of tasks.
      * @param tasks Tasks at hand.
      */
-    public String printTasks(TaskList tasks) {
-        ArrayList<Task> taskList = tasks.getTasks();
+    public String printTasksNormal(TaskList tasks) {
+        ArrayList<Task> taskList = tasks.getNormalTasks();
         StringBuilder toReturn = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
-            toReturn.append(i).append(". ").append(taskList.get(i - 1).getStatus()).append(System.lineSeparator());
+            Task ref = taskList.get(i - 1);
+            toReturn.append(i).append(". ").append(ref.getStatus()).append(System.lineSeparator());
+        }
+        return toReturn.toString();
+    }
+
+    /**
+     * Returns the list of snoozed tasks.
+     * @param tasks Tasks at hand.
+     */
+    public String printTasksSnoozed(TaskList tasks) {
+        ArrayList<Task> taskList = tasks.getSnoozedTasks();
+        StringBuilder toReturn = new StringBuilder();
+        for (int i = 1; i <= taskList.size(); i++) {
+            Task ref = taskList.get(i - 1);
+            toReturn.append(i).append(". ").append(ref.getStatus()).append(System.lineSeparator());
+        }
+        return toReturn.toString();
+    }
+
+    /**
+     * Returns the list of all tasks.
+     * @param tasks Tasks at hand.
+     */
+    public String printTasksAll(TaskList tasks) {
+        ArrayList<Task> taskList1 = tasks.getNormalTasks();
+        ArrayList<Task> taskList2 = tasks.getSnoozedTasks();
+        StringBuilder toReturn = new StringBuilder();
+        for (int i = 1; i <= taskList1.size(); i++) {
+            Task ref = taskList1.get(i - 1);
+            toReturn.append(i).append(". ").append(ref.getStatus()).append(System.lineSeparator());
+        }
+        toReturn.append("\nSnoozed:\n");
+        for (int i = 1; i <= taskList2.size(); i++) {
+            Task ref = taskList2.get(i - 1);
+            toReturn.append(i).append(". ").append(ref.getStatus()).append(System.lineSeparator());
         }
         return toReturn.toString();
     }
@@ -57,7 +92,10 @@ public class Ui {
     public String printSomeTasks(ArrayList<Task> tasks) {
         StringBuilder toReturn = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
-            toReturn.append(i).append(". ").append(tasks.get(i - 1).getStatus()).append(System.lineSeparator());
+            Task ref = tasks.get(i - 1);
+            if (!ref.isOnSnooze()) {
+                toReturn.append(i).append(". ").append(ref.getStatus()).append(System.lineSeparator());
+            }
         }
         return toReturn.toString();
     }
@@ -67,7 +105,7 @@ public class Ui {
      * @param taskList The TaskList that is being kept tracked of.
      */
     public String printNumTasks(TaskList taskList) {
-        return "Now you have " + taskList.getTasks().size() + " tasks in the list.";
+        return "Now you have " + taskList.getNormalTasks().size() + " tasks in the list.";
     }
 
     /**
@@ -85,6 +123,14 @@ public class Ui {
      */
     public String printMarkDone(Task marked) {
         return "This task is marked as done:\n" + marked.getStatus();
+    }
+
+    /**
+     * Returns the message when a task is snoozed.
+     * @param snoozed Task to be snoozed.
+     */
+    public String printSnoozedTask(Task snoozed) {
+        return "This task has been snoozed:\n" + snoozed.getStatus();
     }
 
     /**

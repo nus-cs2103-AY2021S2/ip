@@ -19,7 +19,7 @@ public class Duke {
         ui = new Ui();
         try {
             storage = new Storage(path);
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadNormalTasks(), storage.loadSnoozedTasks());
         } catch (IOException ie) {
             System.exit(0);
         } catch (DukeException de) {

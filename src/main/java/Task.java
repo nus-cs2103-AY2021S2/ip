@@ -4,6 +4,7 @@
 public class Task {
     private final String name;
     private boolean isDone;
+    private boolean onSnooze;
 
     /**
      * Constructor to be used by subclasses.
@@ -12,6 +13,7 @@ public class Task {
     public Task(String name) {
         this.name = name;
         this.isDone = false;
+        this.onSnooze = false;
     }
 
     /**
@@ -30,6 +32,21 @@ public class Task {
      */
     public boolean isDone() {
         return this.isDone;
+    }
+
+    /**
+     * Getter for boolean onSnooze.
+     * @return Return true if the Task is on snooze.
+     */
+    public boolean isOnSnooze() {
+        return this.onSnooze;
+    }
+
+    /**
+     * Method to toggle Snooze state of Task.
+     */
+    public void toggleSnooze() {
+        this.onSnooze = !this.onSnooze;
     }
 
     /**
