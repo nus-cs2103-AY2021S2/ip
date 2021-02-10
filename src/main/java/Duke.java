@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class Duke {
     private static TaskList taskList;
     private boolean hasExitCommandBeenSent;
-    private Parser parser;
     private NewParser newParser;
     // storage location should be here
 
@@ -21,7 +20,6 @@ public class Duke {
     }
 
     private void setParser() {
-        this.parser = new Parser(taskList);
         this.newParser = new NewParser(taskList);
     }
 
