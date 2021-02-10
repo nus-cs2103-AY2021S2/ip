@@ -28,8 +28,8 @@ public class Storage {
     }
 
     /**
-     * gets the home location of the OS using this code
-     * @return file path of the home location
+     * gets the home location of the OS using this code.
+     * @return file path of the home location.
      */
 
     public static String getHome() {
@@ -38,8 +38,8 @@ public class Storage {
 
     /**
      * saves a default file path that will help to locate the specific path
-     * or create a new path id this path does not exist
-     * @return file path in the form of a string
+     * or create a new path id this path does not exist.
+     * @return file path in the form of a string.
      */
 
     public static String getDefaultFilePath() {
@@ -49,10 +49,10 @@ public class Storage {
     /**
      * initialises the process by either
      * printing the contents of the task in the existing documents or
-     * creating the specific text file in the user's OS
+     * creating the specific text file in the user's OS.
      * @param filePath the location which the code will look for such that either
      *                 the contents in this file will be printed or
-     *                 the code creates the file based on the provided pth
+     *                 the code creates the file based on the provided path.
      */
 
     public static void initialise(String filePath) {
