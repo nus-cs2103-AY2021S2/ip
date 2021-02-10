@@ -17,16 +17,15 @@ public class FindCommand {
      * Method that searches through the list of tasks and returns
      * tasks that have similar descriptions.
      *
-     * @param tasks the current tasklist
+     * @param tasks   the current tasklist
      * @param keyword the keyword used for searching
-     *
      */
     public String find(TaskList tasks, String keyword) {
 
-        String output = "";
-        output += "--------------------------" + "\n";
-        output += "Here are the matching tasks in your list:" + "\n";
         ArrayList<Task> storage = tasks.getStorage();
+        String output = "";
+        output += "--------------------------" + "\n"
+                + "Here are the matching tasks in your list:" + "\n";
 
         for (int i = 0; i < storage.size(); i++) {
 
