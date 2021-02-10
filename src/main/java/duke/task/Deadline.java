@@ -31,11 +31,6 @@ public class Deadline extends Task {
         } catch (Exception e) {
             throw new TaskException("deadline must be of the format date-month-year, in numbers.");
         }
-        /*
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/M/uuuu HHmm");
-        dateBy = LocalDateTime.parse(deadlineBy, format);
-        System.out.println(dateBy.format(DateTimeFormatter.ofPattern("MMM d uuuu HH:mm")));
-        */
     }
 
     /**

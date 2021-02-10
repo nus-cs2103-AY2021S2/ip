@@ -67,6 +67,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns a string representation of a taskArray
+     * @param taskArray arrayList of tasks
+     * @return string representation of the taskArray given
+     */
     public String returnTaskList(ArrayList<Task> taskArray) {
         if (taskArray.size() > 0) {
             StringBuilder sb = new StringBuilder();
@@ -111,6 +116,11 @@ public class Ui {
                 + padSpaces(doneTask.toString(), 7)));
     }
 
+    /**
+     * Returns a string representation that tells the user that a specific task has been marked as done
+     * @param doneTask Task that has been marked as done
+     * @return string representation that tells the user that a specific task has been marked as done
+     */
     public String returnTaskDone(Task doneTask) {
         return "Nice! I've marked this task as done:\n"
                 + padSpaces(doneTask.toString(), paddingGui);
@@ -128,11 +138,15 @@ public class Ui {
         System.out.println(defaultFormatting(a));
     }
 
+    /**
+     * Returns a string representation that tells the user a specific task has been deleted
+     * @param deletedTask Task that has been deleted
+     * @param numberOfTasks Number of remaining tasks
+     * @return string representation that tells the user a specific task has been deleted
+     */
     public String returnTaskDeleted(Task deletedTask, int numberOfTasks) {
-        String temp = "Noted. I've removed this task:\n" + padSpaces(deletedTask.toString(), paddingGui)
+        return "Noted. I've removed this task:\n" + padSpaces(deletedTask.toString(), paddingGui)
                 + "\n" + numberOfTasksLineGui(numberOfTasks);
-
-        return temp;
     }
 
     /**
@@ -147,6 +161,12 @@ public class Ui {
         System.out.println(defaultFormatting(temp));
     }
 
+    /**
+     * Returns a string represention that tells the user a ask that has been added to duke
+     * @param addedTask Task that has been added
+     * @param numberOfTasks Number of tasks
+     * @return string represention that tells the user a ask that has been added to duke
+     */
     public String returnAddedTask(Task addedTask, int numberOfTasks) {
         String temp = "Got it. I've added this task:\n" + padSpaces(addedTask.toString(), paddingGui)
                 + "\n" + numberOfTasksLineGui(numberOfTasks);
@@ -155,8 +175,8 @@ public class Ui {
     }
 
     /**
-     * Shows task that are related to a string specificed by the user
-     * @param taskArray Array list of tasks that are related to a string specificed by the user
+     * Shows tasks that are related to a string specificed by the user
+     * @param taskArray arrayList of tasks that are related to a string specificed by the user
      */
     public void showFoundTaskList(ArrayList<Task> taskArray) {
         StringBuilder sb = new StringBuilder();
@@ -176,6 +196,12 @@ public class Ui {
         System.out.println(sb.toString());
     }
 
+    /**
+     * Returns a string represention that tells the user the tasks that
+     * are related to a string specificed by the user
+     * @param taskArray arrayList of tasks that are related to a string specificed by the user
+     * @return a string represention that tells the user the tasks that are related to a string specificed by the user
+     */
     public String returnFoundTaskList(ArrayList<Task> taskArray) {
         StringBuilder sb = new StringBuilder();
 
