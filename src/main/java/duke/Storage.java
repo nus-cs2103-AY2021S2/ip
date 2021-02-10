@@ -33,6 +33,20 @@ public class Storage {
     }
 
     /**
+     * Archives the current TaskList into a file.
+     * @param taskList    The TaskList to be saved.
+     * @param archivePath The archive file path
+     * @throws IOException If file does not exist.
+     */
+    public void archive(TaskList taskList, String archivePath) throws IOException {
+        FileWriter fw = new FileWriter(archivePath);
+        for (Task t : taskList) {
+            fw.write(t.storeString() + "\n");
+        }
+        fw.close();
+    }
+
+    /**
      * Loads Tasks from a file and stores them in a List.
      * @return A List containing all the tasks.
      * @throws FileNotFoundException If the file does not exist.

@@ -86,6 +86,18 @@ public class Ui {
         return textWrapper(out);
     }
 
+    /**
+     * Prints out confirmation for deleting a task from the TaskList.
+     * @param archivePath The archive path.
+     * @param tasks       The TaskList which the item is removed from.
+     */
+    public static String showArchiveTasks(TaskList tasks, String archivePath) {
+        String out = String.format(
+                "Noted. The following tasks have been archived to this file %s: %n  ", archivePath);
+        out += printList(tasks);
+        return textWrapper(out);
+    }
+
     public static String showDukeTaskError() {
         return textWrapper("The description of a task cannot be empty.");
     }

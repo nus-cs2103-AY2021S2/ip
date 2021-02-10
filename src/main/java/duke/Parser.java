@@ -31,12 +31,14 @@ public class Parser {
             return duke.Ui.showDukeTaskError();
         } catch (IndexOutOfBoundsException e2) {
             return duke.Ui.showDukeEmptyListError();
-        } catch (Exception e3) {
+        } catch (IOException e3) {
+            return duke.Ui.showLoadingError();
+        } catch (Exception e4) {
             return duke.Ui.showDukeGeneralError();
         }
     }
 
-    private String identifyInput(String input) throws DukeGeneralException, DukeTaskException {
+    private String identifyInput(String input) throws DukeGeneralException, DukeTaskException, IOException {
         Task temp;
         String output;
         switch (getCommand(input)) {
@@ -82,6 +84,11 @@ public class Parser {
             break;
         case " ":
             output = duke.Ui.showEmptyError();
+            break;
+        case "archive":
+            String archivePath = getMessage(input).trim();
+            output = duke.Ui.showArchiveTasks(tasks, archivePath);
+            storage.archive(tasks, archivePath);
             break;
         default:
             throw new DukeGeneralException("");
