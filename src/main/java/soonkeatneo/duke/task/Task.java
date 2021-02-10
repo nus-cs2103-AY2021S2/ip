@@ -10,6 +10,11 @@ public class Task {
     protected String type;
     protected boolean isDone;
 
+    /**
+     * Creates a new Task object with the given parameters.
+     * @param description Description of the Task object
+     * @param type Type of object to be made
+     */
     public Task(String description, String type) {
         this.description = description;
         this.isDone = false;

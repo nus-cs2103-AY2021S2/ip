@@ -25,9 +25,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     private Duke dukeBot;
-    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream
+    private final Image userImage = new Image(this.getClass().getResourceAsStream
             ("/images/user.jpg"));
-    private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream
             ("/images/dukenukem.jpg"));
 
     /**
@@ -62,7 +62,7 @@ public class MainWindow extends AnchorPane {
      * @param msg message to be printed
      */
     private void printMessage(String msg) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(msg, DUKE_IMAGE));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(msg, dukeImage));
     }
 
     /**
@@ -72,7 +72,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String inputString = userInput.getText().strip();
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(inputString, USER_IMAGE)
+                DialogBox.getUserDialog(inputString, userImage)
         );
         userInput.clear();
         printMessage(dukeBot.handleInput(inputString));

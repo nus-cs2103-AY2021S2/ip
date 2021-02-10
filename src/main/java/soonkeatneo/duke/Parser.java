@@ -1,10 +1,5 @@
 package soonkeatneo.duke;
 
-import java.time.format.DateTimeParseException;
-
-import soonkeatneo.duke.task.Deadline;
-import soonkeatneo.duke.task.Event;
-import soonkeatneo.duke.task.Todo;
 import static soonkeatneo.duke.AddTask.addTask;
 
 /**
@@ -19,6 +14,7 @@ public class Parser {
      * @param inputString User input string to be handled
      * @param tasks Task List to be manipulated
      * @param storage {@Storage} object to be used
+     * @return String confirmation of success/failure
      */
     public static String parse(String inputString, TaskList tasks, Storage storage) {
         assert inputString != null;

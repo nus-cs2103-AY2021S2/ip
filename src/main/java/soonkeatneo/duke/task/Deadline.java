@@ -11,6 +11,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private final LocalDate lastDate;
+
+    /**
+     * Creates a new Deadline object with the given parameters.
+     * @param taskName Description of the Deadline object
+     * @param lastDate Actual deadline of the object
+     */
     public Deadline(String taskName, String lastDate) {
         super(taskName, "D");
         this.lastDate = LocalDate.parse(lastDate);

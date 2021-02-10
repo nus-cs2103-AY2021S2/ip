@@ -12,7 +12,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDate startAndEnd;
 
-
+    /**
+     * Creates a new Event object with the given parameters.
+     * @param taskName Description of the Event object
+     * @param startAndEnd Actual date of the object
+     */
     public Event(String taskName, String startAndEnd) {
         super(taskName, "E");
         this.startAndEnd = LocalDate.parse(startAndEnd);

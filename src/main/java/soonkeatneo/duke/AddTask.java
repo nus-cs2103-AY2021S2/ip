@@ -1,10 +1,10 @@
 package soonkeatneo.duke;
 
+import java.time.format.DateTimeParseException;
+
 import soonkeatneo.duke.task.Deadline;
 import soonkeatneo.duke.task.Event;
 import soonkeatneo.duke.task.Todo;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Implementation for the adding of tasks to the TaskList.
@@ -13,6 +13,14 @@ import java.time.format.DateTimeParseException;
  */
 
 public class AddTask {
+    /**
+     * Handles addition of tasks into the TaskList and returns confirmation message.
+     * @param type type of task to be added
+     * @param inputString string containing description of the task
+     * @param tasks {@TaskList} to be manipulated
+     * @param storage {@Storage} to be manipulated
+     * @return String confirmation of success/failure
+     */
     public static String addTask(String type, String inputString, TaskList tasks, Storage storage) {
         if (type.equals("T")) {
             try {
