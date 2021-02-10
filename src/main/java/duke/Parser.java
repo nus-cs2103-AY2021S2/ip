@@ -55,6 +55,7 @@ public class Parser {
 
              if (isNumber(index)) {
                  result[0] = "DON";
+                 assert (result[1] == null) : "Empty event";
                  result[1] = index;
              } else {
                  throw new DukeException("Please enter a numerical task number.");
@@ -65,6 +66,7 @@ public class Parser {
             } else {
                 String todoDesc = inputLine.substring(5);
                 result[0] = "TDO";
+                assert (result[1] == null) : "Empty event";
                 result[1] = todoDesc;
             }
         } else if (inputLine.startsWith("deadline")) {
@@ -81,6 +83,7 @@ public class Parser {
                     String by = temp[1];
 
                     result[0] = "DDL";
+                    assert (result[1] == null) : "Empty event";
                     result[1] = dlDesc;
                     result[2] = by;
                 }
@@ -99,6 +102,7 @@ public class Parser {
                     String at = temp[1];
 
                     result[0] = "ENT";
+                    assert (result[1] == null) : "Empty event";
                     result[1] = evDesc;
                     result[2] = at;
                 }
@@ -111,6 +115,7 @@ public class Parser {
 
                 if (isNumber(temp)) {
                     result[0] = "DLT";
+                    assert (result[1] == null) : "Empty event";
                     result[1] = temp;
                 } else {
                     throw new DukeException("Please enter a numerical task number.");
@@ -123,6 +128,7 @@ public class Parser {
             } else {
                 String temp = inputLine.substring(5);
                 result[0] = "FND";
+                assert (result[1] == null) : "Empty event";
                 result[1] = temp;
             }
         } else {

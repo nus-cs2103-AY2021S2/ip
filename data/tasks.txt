@@ -7,3 +7,4 @@ T | 0 | haha
 T | 0 | haha
 T | 0 | haha
 T | 0 | joking
+T | 0 | reading
