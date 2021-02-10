@@ -28,7 +28,9 @@ public class AddTaskCommand extends Command {
     @Override
     public ArrayList<String> execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<String> returnMsg = new ArrayList<>();
+        int currentTasksSize = tasks.size();
         tasks.add(task);
+        assert(tasks.size() == currentTasksSize + 1) : "New task has not been added, count not updated";
         returnMsg.add(ui.speak(task.getAddMessage() + (task.getAddMessage() == null ? "" : " ")
                 + "I've added: " + task));
         returnMsg.add(ui.speak("You now have " + tasks.size() + " tasks at hand."));

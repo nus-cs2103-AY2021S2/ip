@@ -6,7 +6,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
-import duke.command.*;
+import duke.command.AddTaskCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteTaskCommand;
+import duke.command.DoneTaskCommand;
+import duke.command.FindCommand;
+import duke.command.ShowTaskCommand;
+import duke.command.UpdateCommand;
+import duke.exception.DukeException;
+import duke.exception.DukeValidationException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -49,7 +58,9 @@ public class Parser {
             return new AddTaskCommand(todo);
         case "deadline":
             String[] deadlineDetails = validateTwoFieldWithDivider(" /by ",
-                        "There\'s no date specified!",
+                        "Task name",
+                        "There\'s no task name specified!",
+                        "Date",
                         "\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
 
             try {
@@ -60,7 +71,9 @@ public class Parser {
             }
         case "event":
             String[] eventDetails = validateTwoFieldWithDivider(" /at ",
-                    "There\'s no date specified!",
+                    "Event name",
+                    "There\'s no event name specified!",
+                    "Date",
                     "Your date/time must be in the yyyy-mm-dd format. Please try again!");
 
             try {
@@ -107,6 +120,13 @@ public class Parser {
         }
     }
 
+    /**
+     * This method was abstracted out to perform validation for commands requiring one input.
+     * For example, /todo &lt; task name &gt;
+     * @param exceptionDesc Exception description to throw upon validation failure
+     * @return First argument for the command, in the example given above, it'll be &lt;task name&gt;
+     * @throws DukeException exception thrown for invalid input
+     */
     private String validateOneField(String exceptionDesc) throws DukeException {
         String[] params = this.input.split(this.command + " ");
         if (params.length == 2) {
@@ -116,18 +136,29 @@ public class Parser {
         }
     }
 
-    private String[] validateTwoFieldWithDivider(String divider, String exceptionOneDesc, String exceptionTwoDesc)
-            throws DukeException {
+    /**
+     * Similar to validateOneField method, this method was abstracted out to perform validation for commands
+     * requiring two inputs.
+     * For example, /deadline &lt;task name&gt; &lt;date&gt; or /event &lt;task name&gt;
+     * @param divider String that divides the first input and the second input, for example: /at or /by
+     * @param exceptionOneDesc Exception description that is thrown when first input is missing
+     * @param exceptionTwoDesc Exception description that is thrown when second input is missing
+     * @return Array of argument for the command, in the example given above, it returns task name and date
+     * @throws DukeValidationException exception thrown for invalid input
+     */
+    private String[] validateTwoFieldWithDivider(String divider, String exceptionOneField, String exceptionOneDesc,
+                                                 String exceptionTwoField, String exceptionTwoDesc)
+            throws DukeValidationException {
         String[] params = input.split(this.command + " ");
         if (params.length == 2) {
             String[] details = params[1].split(divider);
             if (details.length == 2) {
                 return details;
             } else {
-                throw new DukeException(exceptionTwoDesc);
+                throw new DukeValidationException(exceptionTwoField, exceptionTwoDesc);
             }
         } else {
-            throw new DukeException(exceptionOneDesc);
+            throw new DukeValidationException(exceptionOneField, exceptionOneDesc);
         }
     }
 }
