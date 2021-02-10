@@ -1,10 +1,10 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.tasks.TaskList;
 
-import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
 
 /**
  * Command to find a task.
@@ -35,8 +35,8 @@ public class FindCommand extends Command {
         ui.printFoundTasks();
         String[] strArr = input.split(" ");
         int count = 1;
-        for(int i = 0; i < tasks.getSize(); i++) {
-            if(tasks.getTask(i).getDescription().contains(strArr[1])) {
+        for (int i = 0; i < tasks.getSize(); i++) {
+            if (tasks.getTask(i).getDescription().contains(strArr[1])) {
                 String toPrint = "    " + count + ". " + tasks.getTask(i).toString();
                 count++;
                 ui.print(toPrint);

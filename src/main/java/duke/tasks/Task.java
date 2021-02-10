@@ -34,11 +34,11 @@ public abstract class Task {
         this.isDone = true;
         return true;
     }
-    
+
     public String getType() {
-        if(this instanceof ToDo) {
+        if (this instanceof ToDo) {
             return "T";
-        } else if(this instanceof Deadline) {
+        } else if (this instanceof Deadline) {
             return "D";
         } else {
             return "E";

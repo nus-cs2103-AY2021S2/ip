@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] strArr = input.split(" ");
-        if(strArr.length == 1) {
+        if (strArr.length == 1) {
             throw new DukeException("☹ OOPS!!! I don't know which task to delete.");
         }
         int idx = Integer.parseInt(strArr[1]) - 1;

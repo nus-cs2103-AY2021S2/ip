@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
 
@@ -31,7 +31,7 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(input.length() <= 6 || !input.contains("/at")) {
+        if (input.length() <= 6 || !input.contains("/at")) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
         }
         String[] strArr = input.split("/at ");

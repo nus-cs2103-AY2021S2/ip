@@ -1,20 +1,18 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.ToDo;
-
-import java.io.FileWriter;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 /**
  * Storage class responsible for loading and saving data into the hard drive.
@@ -26,7 +24,7 @@ public class Storage {
      * Constructor method for storage class.
      * @param filePath The pathfile to access text file.
      */
-    public Storage(String filePath)  {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -39,9 +37,9 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
 
-        if(file.exists() && !file.isDirectory()) {
+        if (file.exists() && !file.isDirectory()) {
             try {
-                for(String line :  Files.readAllLines(Paths.get(filePath))) {
+                for (String line : Files.readAllLines(Paths.get(filePath))) {
                     String[] dataArr = line.split(" \\| ");
                     String typeTask = dataArr[0];
 
@@ -74,7 +72,7 @@ public class Storage {
                         taskList.add(e);
                         break;
                     default:
-                        throw new DukeException("Line cannot be read");
+                        throw new DukeException("Line cannot be read.");
                     }
                 }
                 System.out.println("Successfully loaded all tasks");
@@ -102,7 +100,8 @@ public class Storage {
      * @param description The description of the task.
      * @param deadline The time of the task.
      */
-    public void addNewDataToFile(String taskType, String done, String description, String deadline) {
+    public void addNewDataToFile(String taskType, String done,
+                                  String description, String deadline) throws DukeException {
         try {
             FileWriter mw = new FileWriter(filePath, true);
             switch (taskType) {
@@ -114,6 +113,9 @@ public class Storage {
             case "E":
                 mw.write(taskType + " | " + done + " | " + description + " | " + deadline + "\n");
                 mw.close();
+                break;
+            default:
+                throw new DukeException("Task type cannot be read");
             }
         } catch (IOException e) {
             System.out.println("Encountered problem writing to file" + e);
@@ -175,8 +177,7 @@ public class Storage {
             //Write entire string buffer into the file
             fw.write(sb.toString());
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Error editing file: " + e.getMessage());
         }
     }
@@ -214,8 +215,7 @@ public class Storage {
             //Write entire string buffer into the file
             fw.write(sb.toString());
             fw.close();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Error deleting line: " + ex.getMessage());
         }
     }

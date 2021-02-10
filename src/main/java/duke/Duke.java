@@ -1,9 +1,10 @@
 package duke;
 
-import duke.tasks.TaskList;
-import duke.command.Command;
-
 import java.io.File;
+
+import duke.command.Command;
+import duke.tasks.TaskList;
+
 
 /**
  *  Juke is a chatbot that helps users keep track of tasks.
@@ -22,52 +23,56 @@ import java.io.File;
  */
 public class Duke {
 
-        private Storage storage;
-        private TaskList tasks;
-        private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
     /**
      * Constructor method to create a Duke object.
      * @param filePath the path file to duke text file in the hard drive.
      */
     public Duke(String filePath) {
-            ui = new Ui();
-            storage = new Storage(filePath);
-            try {
-                tasks = new TaskList(storage.loadAllTasks());
-            } catch (DukeException e) {
-                System.out.println(tasks);
-                ui.showLoadingError();
-                tasks = new TaskList();
-            }
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadAllTasks());
+        } catch (DukeException e) {
+            System.out.println(tasks);
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
+    }
 
     /**
      * Runs the Duke AI bot.
      */
     public void run() {
-            ui.showWelcome();
-            boolean isExit = false;
-            while (!isExit) {
-                try {
-                    String command = ui.readCommand();
-                    ui.printHorizontalLine();
-                    Command c = Parser.parse(command);
-                    c.execute(tasks, ui, storage);
-                    isExit = c.isExit();
-                } catch (DukeException e) {
-                    ui.showError(e.getMessage());
-                } finally {
-                    ui.printHorizontalLine();
-                }
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String command = ui.readCommand();
+                ui.printHorizontalLine();
+                Command c = Parser.parse(command);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.printHorizontalLine();
             }
         }
+    }
 
-        public static void main(String[] args) {
-            String currentDir = System.getProperty("user.dir");
-            String filePath = currentDir + File.separator + "data" + File.separator + "duke.txt";
+    /**
+     * Runs Juke  and waits for user input to interact with Juke.
+     * @param args user input from the command line.
+     */
+    public static void main(String[] args) {
+        String currentDir = System.getProperty("user.dir");
+        String filePath = currentDir + File.separator + "data" + File.separator + "duke.txt";
 
-            new Duke(filePath).run();
-        }
+        new Duke(filePath).run();
+    }
 
 }

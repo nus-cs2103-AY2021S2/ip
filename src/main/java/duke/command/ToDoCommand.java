@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
-import duke.tasks.ToDo;
+import duke.Storage;
+import duke.Ui;
 import duke.tasks.TaskList;
+import duke.tasks.ToDo;
 
 /**
  * Command to create a ToDo task.
@@ -31,7 +31,7 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(input.length() <= 5) {
+        if (input.length() <= 5) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty");
         }
         String s = input.substring(5);
