@@ -13,7 +13,7 @@ class TaskList {
     }
 
     /**
-     * creates a TaskList from a given Task ArrayList.
+     * Creates a TaskList from a given Task ArrayList.
      *
      * @param a ArrayList of Task
      */
@@ -23,7 +23,7 @@ class TaskList {
     }
 
     /**
-     * get the entire Task ArrayList.
+     * Get the entire Task ArrayList.
      *
      * @return Task ArrayList
      */
@@ -32,7 +32,7 @@ class TaskList {
     }
 
     /**
-     * get the task at the given index with 1-based indexing.
+     * Get the task at the given index with 1-based indexing.
      *
      * @param n index of task
      * @return task at index n (1-based indexing)
@@ -64,7 +64,7 @@ class TaskList {
     }
 
     /**
-     * resets the list into an empty list.
+     * Resets the list into an empty list.
      */
     void clear() {
         assert(this.storage != null);
@@ -73,7 +73,7 @@ class TaskList {
     }
 
     /**
-     * returns the number of items in the list
+     * Returns the number of items in the list
      * @return the number of items in the list
      */
     int size() {

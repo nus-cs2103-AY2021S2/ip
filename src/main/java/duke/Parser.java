@@ -11,7 +11,7 @@ public class Parser {
     private String history;
 
     /**
-     * loads the txt file into mem and displays the welcome message
+     * Loads the txt file into mem and displays the welcome message
      */
     public Parser() {
         Storage storage = new Storage();
@@ -37,7 +37,7 @@ public class Parser {
     }
 
     /**
-     * reads the string and determines which function to call.
+     * Reads the string and determines which function to call.
      *
      * @param userInput user input
      * @return string of the output after executing the command

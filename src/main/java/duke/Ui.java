@@ -5,7 +5,7 @@ import java.time.LocalDate;
 class Ui {
 
     /**
-     * displays the welcome message
+     * Displays the welcome message
      */
     static String welcome() {
         return "    ____________________________________________________________\n\n"
@@ -17,7 +17,7 @@ class Ui {
     }
 
     /**
-     * displays the message when an invalid input is given.
+     * Displays the message when an invalid input is given.
      */
     static String invalidInput() {
         return "    ____________________________________________________________\n"
@@ -28,7 +28,7 @@ class Ui {
     }
 
     /**
-     * displays the message when the task has an empty description.
+     * Displays the message when the task has an empty description.
      *
      * @param s name of task
      */
@@ -41,7 +41,7 @@ class Ui {
     }
 
     /**
-     * displays the message when the task is stored.
+     * Displays the message when the task is stored.
      *
      * @param t task that was stored
      * @param n the number of tasks in the list
@@ -57,7 +57,7 @@ class Ui {
     }
 
     /**
-     * displays the message when the tasks are listed.
+     * Displays the message when the tasks are listed.
      *
      * @param t the given TaskList
      */
@@ -72,7 +72,7 @@ class Ui {
     }
 
     /**
-     * displays the message when the task is marked as done.
+     * Displays the message when the task is marked as done.
      *
      * @param t the Task to be marked as done
      */
@@ -87,7 +87,7 @@ class Ui {
     }
 
     /**
-     * displays the message when the task is to be deleted.
+     * Displays the message when the task is to be deleted.
      *
      * @param t the Task to be deleted
      * @param n the size of TaskList after deletion
@@ -104,7 +104,7 @@ class Ui {
     }
 
     /**
-     * displays the message showing the Tasks on the given day.
+     * Displays the message showing the Tasks on the given day.
      *
      * @param t the given TaskList
      * @param s the day that is given in yyy-mm-dd format (e.g. 2021-01-31)

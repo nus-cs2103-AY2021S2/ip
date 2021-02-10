@@ -33,7 +33,7 @@ class Task {
     }
 
     /**
-     * returns the name of the task.
+     * Returns the name of the task.
      *
      * @return name of task
      */
@@ -42,7 +42,7 @@ class Task {
     }
 
     /**
-     * returns the isDone.
+     * Returns the isDone.
      *
      * @return isDone
      */

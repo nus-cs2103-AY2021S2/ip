@@ -37,7 +37,8 @@ public class AltWindow extends VBox {
         userInput.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
             @Override
-            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            public void changed(ObservableValue<? extends Boolean> arg0,
+                                Boolean oldPropertyValue, Boolean newPropertyValue)
             {
                 if (newPropertyValue)
                 {
@@ -68,8 +69,9 @@ public class AltWindow extends VBox {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply
+     * and then appends them to the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void parseCommand() {
@@ -90,7 +92,8 @@ public class AltWindow extends VBox {
     @FXML
     private void createTodo() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/TodoWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Duke.class.getResource("/view/TodoWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
@@ -106,7 +109,8 @@ public class AltWindow extends VBox {
     @FXML
     private void createDelete() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/DeleteWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Duke.class.getResource("/view/DeleteWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
@@ -122,7 +126,8 @@ public class AltWindow extends VBox {
     @FXML
     private void createDeadline() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/DeadlineWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Duke.class.getResource("/view/DeadlineWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
@@ -138,7 +143,8 @@ public class AltWindow extends VBox {
     @FXML
     private void createEvent() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/EventWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Duke.class.getResource("/view/EventWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
@@ -154,7 +160,8 @@ public class AltWindow extends VBox {
     @FXML
     private void createFind() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/FindWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Duke.class.getResource("/view/FindWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
@@ -170,7 +177,8 @@ public class AltWindow extends VBox {
     @FXML
     private void createTaskson() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/TasksonWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Duke.class.getResource("/view/TasksonWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
@@ -187,7 +195,8 @@ public class AltWindow extends VBox {
     private void switchScene() {
         try {
             System.out.println("test");
-            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    Duke.class.getResource("/view/MainWindow.fxml"));
             VBox ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             this.stage.setScene(scene);
