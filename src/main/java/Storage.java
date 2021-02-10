@@ -41,7 +41,7 @@ public class Storage {
                 } else if (taskData.startsWith(Event.EVENT_DATA_ICON)) {
                     readEventDataFromFile(taskList, taskData);
                 } else {
-                    //
+                    assert false;
                 }
             }
         } catch (FileNotFoundException e) {
