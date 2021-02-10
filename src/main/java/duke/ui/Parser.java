@@ -43,6 +43,10 @@ public class Parser {
     private static final ArrayList<String> validActions =
             new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, TODO, DEADLINE, EVENT));
 
+    public static ArrayList<String> getValidActions() {
+        return validActions;
+    }
+
     /**
      * Parses a line of raw user input, converting it into a <code>Command</code> object that
      * handles all of the application's logic. Accordingly, the output <code>Command</code> object

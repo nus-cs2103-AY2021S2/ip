@@ -18,14 +18,14 @@ public class Duke {
      * state of the application, and a <code>Storage</code> property, which handles the loading and saving
      * of tasks when the application starts and shuts down respectively.
      *
-     * @param filepath Path to text file from which tasks are loaded when the app starts, and to
+     * @param fileName Name of text file in directory data/ from which tasks are loaded when the app starts, and to
      *                 which tasks are saved when the app terminates.
-     *                 If a text file does not already exist at the given path, then the app starts
+     *                 If the text file does not already exist in the directory data/, then the app starts
      *                 with an empty <code>TaskList</code>. When the app terminates, a new text file
-     *                 corresponding to the input path will be created, to which existing tasks are saved.
+     *                 with the input file name will be created, to which existing tasks are saved.
      */
-    public Duke(String filepath) {
-        this.storage = new Storage(filepath);
+    public Duke(String fileName) {
+        this.storage = new Storage(fileName);
         this.tasks = this.storage.loadTasks();
     }
 
