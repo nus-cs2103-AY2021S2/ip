@@ -28,18 +28,23 @@ public class AddEventCommand extends Command {
      * it will raise the DukeException.
      */
     public String execute(TaskList taskList) throws DukeException {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Got it! I've added this task:\n");
         int spaceIndex = userMessage.indexOf(" ");
-        int dateIndex = userMessage.indexOf('/');
-        if (dateIndex == -1) {
+        int dateTimeIndex = userMessage.indexOf('/');
+        boolean noDateTime = dateTimeIndex == -1;
+        boolean noEventName = spaceIndex == -1;
+
+
+        if (noDateTime) {
             throw new DukeException("OOPS!!! I can't find your event time.");
         }
-        if (spaceIndex == -1 || dateIndex - spaceIndex == 1) {
+        if (noEventName) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
-        String eventName = userMessage.substring(spaceIndex + 1, dateIndex - 1);
-        String at = userMessage.substring(dateIndex + 4);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("Got it! I've added this task:\n");
+        String eventName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
+        String at = userMessage.substring(dateTimeIndex + 4);
         Event event;
 
         try {
@@ -51,7 +56,7 @@ public class AddEventCommand extends Command {
         taskList.addTask(event);
 
         builder.append("[" + event.getStatusIcon() + "] " + event.toString());
-        builder.append("\nNow you have " + Integer.toString(taskList.getNumOfTasks()) + " tasks in the list.");
+        builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");
         String botMessage = builder.toString();
         return botMessage;
     }

@@ -72,6 +72,7 @@ public class SearchByTimeCommand extends Command {
                 }
             }
         }
+
         if (numOfTasksFound == 0) {
             throw new DukeException("OOPS! There is no task that matches the time.");
         }
