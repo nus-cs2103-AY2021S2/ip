@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class that handles the backend of the program,
@@ -10,17 +12,28 @@ import java.util.List;
 public class TaskList {
 
     private ArrayList<Task> storage;
+    private Set<Task> duplicateChecker;
 
     public TaskList() {
         this.storage = new ArrayList<Task>();
+        this.duplicateChecker = new HashSet<Task>();
+        duplicateChecker.addAll(storage);
     }
 
     String add(Task task) throws DukeException {
         String output = "";
-        storage.add(task);
-        output += "ALRIGHT. I HAVE ALREADY ADDED THE TASK!!!\n"
-                + task.toString() + "Now you have \n" + storage.size()
-                + " tasks in the list.";
+        boolean hasDuplicate = checkForDuplicate(duplicateChecker, task);
+        if (!hasDuplicate) {
+            storage.add(task);
+            output += "ALRIGHT. I HAVE ALREADY ADDED THE TASK!!!\n"
+                    + task.toString()
+                    + "\n"
+                    + "Now you have " + storage.size()
+                    + " tasks in the list.";
+        } else {
+            output += "Item is a duplicate and has already been added.\n"
+                    + "Please check again.";
+        }
         assert output != "" : "output should not be empty.";
         return output;
     }
@@ -49,6 +62,7 @@ public class TaskList {
      */
     String delete(int value) throws DukeException {
         String output = "";
+        int sizeAfterDelete = storage.size() - 1;
         if (value <= 0 || value > storage.size()) {
             throw new DukeException("No such list item.");
         }
@@ -56,9 +70,13 @@ public class TaskList {
                 + storage.get(value - 1)
                 + "\n"
                 + "Now you have "
-                + storage.size()
+                + sizeAfterDelete
                 + " tasks in the list.";
+
+        duplicateChecker.remove(storage.get(value - 1));
         storage.remove(value - 1);
+
+        assert sizeAfterDelete >= 0 : "size cannot be negative.";
         assert output != "" : "output should not be empty.";
         return output;
     }
@@ -84,5 +102,18 @@ public class TaskList {
 
     ArrayList<Task> getStorage() {
         return this.storage;
+    }
+
+    boolean checkForDuplicate(Set<Task> tasks, Task task) {
+        int originalCount = tasks.size();
+        tasks.add(task);
+        int postCount = tasks.size();
+        return originalCount == postCount;
+    }
+
+    String clearList() {
+        storage.clear();
+        duplicateChecker.clear();
+        return "List has been cleared.";
     }
 }
