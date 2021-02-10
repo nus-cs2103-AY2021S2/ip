@@ -39,7 +39,7 @@ public class Parser {
      * @return an array of processes strings
      * @throws DukeException If user input is in invalid formats
      */
-    public String[] processInput(String inputLine) throws DukeException{
+    public String[] processInput(String inputLine) throws DukeException {
 
         String[] results = new String[5];
 
@@ -56,7 +56,7 @@ public class Parser {
         } else if (inputLine.startsWith("deadline")) {
             results = processDl(inputLine, results);
         } else if (inputLine.startsWith("event")) {
-            results =processEv(inputLine, results);
+            results = processEv(inputLine, results);
         } else if (inputLine.startsWith("delete")) {
             results = processDelete(inputLine, results);
         } else if (inputLine.startsWith("find")) {
@@ -77,7 +77,6 @@ public class Parser {
      */
     public String[] processDone(String input, String[] results) throws DukeException {
         String index = input.substring(5);
-
         if (isNumber(index)) {
             results[0] = "DON";
             results[1] = index;
@@ -120,13 +119,11 @@ public class Parser {
         } else {
             String dlMsg = input.substring(9);
             String[] temp = dlMsg.split(" /by ");
-
             if (temp.length == 1) {
                 throw new DukeException("Please enter a deadline completion time.");
             } else {
                 String dlDesc = temp[0];
                 String by = temp[1];
-
                 results[0] = "DDL";
                 results[1] = dlDesc;
                 results[2] = by;
@@ -149,13 +146,11 @@ public class Parser {
         } else {
             String dlMsg = input.substring(6);
             String[] temp = dlMsg.split(" /at ");
-
             if (temp.length == 1) {
                 throw new DukeException("Please enter an event time.");
             } else {
                 String evDesc = temp[0];
                 String at = temp[1];
-
                 results[0] = "ENT";
                 results[1] = evDesc;
                 results[2] = at;
@@ -177,7 +172,6 @@ public class Parser {
             throw new DukeException("Please tell me which task you'd like to delete.");
         } else {
             String temp = input.substring(7);
-
             if (isNumber(temp)) {
                 results[0] = "DLT";
                 results[1] = temp;
@@ -203,9 +197,7 @@ public class Parser {
             String temp = input.substring(5);
             results[0] = "FND";
             results[1] = temp;
+            return results;
         }
-        return results;
     }
-
-
 }

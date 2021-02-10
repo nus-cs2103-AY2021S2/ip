@@ -44,7 +44,8 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    //mainClassName = "seedu.duke.Duke"
+    mainClassName = "seedu.ui.Launcher"
 }
 
 shadowJar {
@@ -58,4 +59,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

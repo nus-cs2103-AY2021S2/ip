@@ -101,6 +101,7 @@ public class TaskList {
 
         for (Task t : this.taskList) {
             String taskDesc = t.getDescription();
+            assert (taskDesc == null || taskDesc.trim().isEmpty()) : "Empty task description";
 
             if (taskDesc.contains(keyword)) {
                 foundTasks.add(t);
