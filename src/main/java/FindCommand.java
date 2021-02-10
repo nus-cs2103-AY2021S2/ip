@@ -11,13 +11,4 @@ public class FindCommand extends Command {
             DukeWrongInputException {
         return ui.showFoundListItems(taskList, command);
     }
-
-    /**
-     * Indicates whether command is an exit command.
-     * @return boolean value for whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

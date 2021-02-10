@@ -3,8 +3,7 @@
  */
 public abstract class Command {
     /**
-     * Abstract execute method.
-     * Each command has a execute method that when called, executes that particular command.
+     * Executes the command.
      *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
@@ -14,11 +13,4 @@ public abstract class Command {
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException;
-
-    /**
-     * Abstract method that indicates if particular method is an exit command.
-     *
-     * @return boolean value for whether the task is an exit command.
-     */
-    public abstract boolean isExit();
 }

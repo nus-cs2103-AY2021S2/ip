@@ -79,7 +79,7 @@ public class Storage {
                     fw.write(String.format("T / %s / %s%n", t.getIsDone(), t.getDescription()));
                 } else if (t instanceof Event) {
                     fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(), (
-                            (Event) t).getTimeslot()));
+                            (Event) t).getEventTime()));
                 } else if (t instanceof Deadline) {
                     fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(), (
                             (Deadline) t).getDeadline().toString()));
@@ -89,20 +89,5 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeWrongInputException("File Error: wrong data format in hard drive.");
         }
-    }
-
-    /**
-     * Returns the number of lines in the file.
-     * @return returns the number of lines in the text file
-     * @throws IOException if there is an error with the file.
-     */
-    public int getFileLinesCount() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(this.hardDrive));
-        int lines = 0;
-        while (reader.readLine() != null) {
-            lines++;
-        }
-        reader.close();
-        return lines;
     }
 }

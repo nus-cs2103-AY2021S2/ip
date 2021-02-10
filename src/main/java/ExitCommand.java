@@ -6,7 +6,8 @@ public class ExitCommand extends Command {
     private String command;
 
     /**
-     * Constructor method
+     * Constructs exit command.
+     *
      * @param command user input command
      */
     public ExitCommand(String command) {
@@ -14,7 +15,8 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Dummy Execute method for Exit Command
+     * Executes the exit command.
+     *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
@@ -25,14 +27,5 @@ public class ExitCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException {
         return ui.showBye();
-    }
-
-    /**
-     * Indicates whether command is an exit command.
-     * @return boolean value for whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
     }
 }

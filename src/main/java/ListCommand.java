@@ -26,13 +26,4 @@ public class ListCommand extends Command {
             DukeWrongInputException {
         return ui.showListItems(taskList) + "\n" + ui.showNumberOfItems(taskList.getTaskListLength());
     }
-
-    /**
-     * Indicates whether command is an exit command.
-     * @return boolean value for whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -14,7 +14,7 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Constructor method.
+     * Constructs a Duke object.
      */
     public Duke() {
         try {
@@ -27,16 +27,16 @@ public class Duke {
     }
 
     /**
-     * Duke's response based on user input.
+     * Gets Duke's response based on user input.
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(taskList, ui, storage);
         } catch (DukeWrongInputException e) {
-            return e.getMessage();
+            return ui.showLoadingError(e);
         } catch (DukeMissingInputException e) {
-            return e.getMessage();
+            return ui.showLoadingError(e);
         }
     }
 }

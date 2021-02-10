@@ -10,7 +10,7 @@ public class DeadlineCommand extends Command {
     private String command;
 
     /**
-     * Constructor method.
+     * Constructs a deadline command.
      *
      * @param command input command from user.
      */
@@ -19,7 +19,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Execute method for deadline.
+     * Executes the deadline command.
      *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
@@ -62,7 +62,7 @@ public class DeadlineCommand extends Command {
         }
     }
 
-    /** Method to check if a certain string is of date format.
+    /** Checks if a certain string is of date format.
      *
      * @param str - input string to be checked if it is in the format of a string.
      * @return boolean value telling us whether the string is a date or just simple text.
@@ -75,15 +75,5 @@ public class DeadlineCommand extends Command {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Indicates whether command is an exit command.
-     *
-     * @return boolean value for whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

@@ -10,7 +10,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Overriding execute method.
+     * Executes the done command.
      *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
@@ -31,15 +31,5 @@ public class DoneCommand extends Command {
         } else {
             throw new DukeWrongInputException("Oops! Item number to be marked done is out of bounds.");
         }
-    }
-
-    /**
-     * Indicates whether command is an exit command.
-     *
-     * @return boolean value for whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

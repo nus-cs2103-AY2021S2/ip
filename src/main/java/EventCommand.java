@@ -14,7 +14,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Execute command for event command.
+     * Executes event command.
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
@@ -49,14 +49,5 @@ public class EventCommand extends Command {
         taskList.add(newEvent);
         storage.save(taskList.getTaskList());
         return ui.showTaskAdded(newEvent);
-    }
-
-    /**
-     * Indicates whether command is an exit command.
-     * @return boolean value for whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

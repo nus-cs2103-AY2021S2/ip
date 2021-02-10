@@ -10,13 +10,13 @@ public class EventTest {
     }
 
     @Test
-    public void testGetTimeSlot(){
+    public void testGetEventTime(){
         Event event = new Event("Attend seminar", "Sunday");
-        assertEquals("Sunday", event.getTimeslot());
+        assertEquals("Sunday", event.getEventTime());
     }
 
-    @Test public void testChangeTimeSlot(){
+    @Test public void testSetEventTime(){
         Event event = new Event("Attend seminar", "Sunday");
-        assertEquals("Monday", event.changeTimeslot("Monday"));
+        assertEquals("Monday", event.setEventTime("Monday"));
     }
 }

@@ -41,14 +41,5 @@ public class TodoCommand extends Command {
         storage.save(taskList.getTaskList());
         return ui.showTaskAdded(newTodo);
     }
-
-    /**
-     * Indicates whether command is an exit command.
-     * @return boolean value for whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
 

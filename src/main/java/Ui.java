@@ -4,14 +4,14 @@
 public class Ui {
 
     /**
-     * Show Duke's welcome text.
+     * Shows Duke's welcome text.
      */
     public String showWelcome() {
         return "Hello, I am Duke, your personal Assistant. How may I help you today?";
     }
 
     /**
-     * Show number of items in the task list.
+     * Shows number of items in the task list.
      *
      * @param numOfItems
      */
@@ -29,7 +29,7 @@ public class Ui {
     }
 
     /**
-     * Show the task being marked as done.
+     * Shows the task being marked as done.
      *
      * @param task
      */
@@ -38,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * Show the list of tasks.
+     * Shows the list of tasks.
      */
     public String showListItems(TaskList taskList) {
         StringBuilder sb = new StringBuilder("Here are the tasks on your list: \n");
@@ -58,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Show good bye to user.
+     * Shows good bye to user.
      */
     public String showBye() {
         return "Bye. Hope to see you again soon!\nTo exit, click [X] at the top left.";

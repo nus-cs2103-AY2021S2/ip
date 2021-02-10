@@ -6,7 +6,7 @@ public class DeleteCommand extends Command {
     private String command;
 
     /**
-     * Constructor method.
+     * Constructs a delete command.
      *
      * @param command command input from user.
      */
@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Execute command for delete command.
+     * Executes the delete command.
      *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
@@ -36,15 +36,5 @@ public class DeleteCommand extends Command {
         } else {
             throw new DukeWrongInputException("Oops! Item number to be deleted out of bounds");
         }
-    }
-
-    /**
-     * Indicates whether command is an exit command.
-     *
-     * @return boolean value for whether command is an exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

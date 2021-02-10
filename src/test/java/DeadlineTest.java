@@ -25,7 +25,7 @@ public class DeadlineTest {
     public void testChangeDeadline () {
         LocalDate dateDeadline = LocalDate.parse("2021-01-25", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         Deadline deadline = new Deadline("Buy Birthday Cake", dateDeadline);
-        assertEquals(dateDeadline, deadline.changeDeadline(dateDeadline));
+        assertEquals(dateDeadline, deadline.setDeadline(dateDeadline));
     }
 
 }
