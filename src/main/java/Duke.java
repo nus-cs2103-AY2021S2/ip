@@ -38,54 +38,14 @@ public class Duke {
     }
 
 
-    /**
-     * The driver of the duke object
-     * @param sc Scanner passed in from main function to read user input
-     */
-    public void runDuke(Scanner sc) {
-        Ui.intro();
 
-        // variables to reuse
-        String userInput;
-        boolean hasUserTypedBye = false;
-
-        while (hasUserTypedBye) {
-            userInput = sc.nextLine().trim();
-            hasUserTypedBye = !parser.parseInputLine(userInput);
-            // todo find a new name that follows boolean conventions OR not the return values of parseInputLine
-        }
-
-        sc.close();
-    }
 
     /**
      * Entry point of the duke programme if run from terminal.
      * @param args Irrelevant argument
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        try {
-            taskList = Storage.setupTaskList();
-        } catch (IOException e) {
-            Ui.print(new String[]{"Something went wrong in loading the task file and parsing",
-                    e.getMessage()});
-        }
-
-        Ui.intro();
-
-        // variables to reuse
-        String userInput;
-        Parser parser = new Parser(taskList);
-        boolean hasUserTypedBye = false;
-
-        while (hasUserTypedBye) {
-            userInput = sc.nextLine().trim();
-            hasUserTypedBye = !parser.parseInputLine(userInput);
-            // todo find a new name that follows boolean conventions OR not the return values of parseInputLine
-        }
-
-        sc.close();
     }
 
     // javafx code adapted/taken from https://se-education.org/guides/tutorials/javaFxPart3.html
@@ -129,6 +89,6 @@ public class Duke {
         }
 
         // c.debug();
-        return "Duke heard: " + c.getCommandOutputMsg();
+        return c.getCommandOutputMsg();
     }
 }
