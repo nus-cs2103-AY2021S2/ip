@@ -1,0 +1,39 @@
+todo buy milo
+todo buy milk
+todo
+todo
+todo          a
+deadline drink milo /by Thursday
+deadline drink milo /by 2021-11-01
+deadline
+deadline
+deadline   asd
+deadline homework /by
+event milo party /at 2pm - 6pm
+event
+event
+event birthday
+event birthday /at
+delete 10
+list
+done 3
+list
+done 1
+delete
+delete 1
+delete -1
+list
+done 5
+list
+done 2
+list
+done
+done 10
+todo something
+done 10
+done asd
+done         1
+list
+list
+list e80righj
+bye

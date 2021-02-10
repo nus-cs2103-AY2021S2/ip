@@ -1,7 +1,113 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hi there. I am
+███      ███                             ███                      
+ ███    ███   ██                         ███                      
+  ███ ███        ███ ███    █████        ███     ███     ███ ███  
+    ███      ███  ███  ███ ███  ███      ███   ██   ███   ███  ███
+    ███      ███  ███  ███ ██   ███      ███  █████████   ███  ███
+    ███      ███  ███  ███ ████ ███ ██   ███  ██          ███  ███
+    ███      ███ ████  ███     ███   █████      █████    ████  ███
+                             ████                                 
 
+How may I help you?
+Type Command> Got it. I've added this task:
+[T][ ] buy milo
+Now you have 1 task(s) in the list.
+Type Command> Got it. I've added this task:
+[T][ ] buy milk
+Now you have 2 task(s) in the list.
+Type Command> The description of a todo cannot be empty!
+Expected format: todo <DESCRIPTION>
+Type Command> The description of a todo cannot be empty!
+Expected format: todo <DESCRIPTION>
+Type Command> Got it. I've added this task:
+[T][ ] a
+Now you have 3 task(s) in the list.
+Type Command> Sorry, I don't recognize this date: 'Thursday'
+Use this format please: yyyy-MM-dd
+Type Command> Got it. I've added this task:
+[D][ ] drink milo (by: Nov 1 2021)
+Now you have 4 task(s) in the list.
+Type Command> The description of a deadline cannot be empty!
+Expected format: deadline <DESCRIPTION> /by <DATE>
+Type Command> The description of a deadline cannot be empty!
+Expected format: deadline <DESCRIPTION> /by <DATE>
+Type Command> A deadline must have a date!
+Expected format: deadline <DESCRIPTION> /by <DATE>
+Type Command> A deadline must have a date!
+Expected format: deadline <DESCRIPTION> /by <DATE>
+Type Command> Got it. I've added this task:
+[E][ ] milo party (at: 2pm - 6pm)
+Now you have 5 task(s) in the list.
+Type Command> The description of an event cannot be empty!
+Expected format: event <DESCRIPTION> /at <PERIOD>
+Type Command> The description of an event cannot be empty!
+Expected format: event <DESCRIPTION> /at <PERIOD>
+Type Command> An event must have a period!
+Expected format: event <DESCRIPTION> /at <PERIOD>
+Type Command> An event must have a period!
+Expected format: event <DESCRIPTION> /at <PERIOD>
+Type Command> Task 10 does not exist!
+Valid task numbers are 1 to 5.
+Type Command> 1.[T][ ] buy milo
+2.[T][ ] buy milk
+3.[T][ ] a
+4.[D][ ] drink milo (by: Nov 1 2021)
+5.[E][ ] milo party (at: 2pm - 6pm)
+Type Command> Nice! I've marked this task as done:
+[T][✓] a
+Type Command> 1.[T][ ] buy milo
+2.[T][ ] buy milk
+3.[T][✓] a
+4.[D][ ] drink milo (by: Nov 1 2021)
+5.[E][ ] milo party (at: 2pm - 6pm)
+Type Command> Nice! I've marked this task as done:
+[T][✓] buy milo
+Type Command> A delete command must specify a task number.
+Expected format: delete <TASK NUMBER>
+Type Command> Noted. I've removed this task:
+[T][✓] buy milo
+Now you have 4 task(s) in the list.
+Type Command> A delete command must specify a task number.
+Expected format: delete <TASK NUMBER>
+Type Command> 1.[T][ ] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Nov 1 2021)
+4.[E][ ] milo party (at: 2pm - 6pm)
+Type Command> Task 5 does not exist!
+Valid task numbers are 1 to 4.
+Type Command> 1.[T][ ] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Nov 1 2021)
+4.[E][ ] milo party (at: 2pm - 6pm)
+Type Command> Nice! I've marked this task as done:
+[T][✓] a
+Type Command> 1.[T][ ] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Nov 1 2021)
+4.[E][ ] milo party (at: 2pm - 6pm)
+Type Command> A done command must specify a task number.
+Expected format: done <TASK NUMBER>
+Type Command> Task 10 does not exist!
+Valid task numbers are 1 to 4.
+Type Command> Got it. I've added this task:
+[T][ ] something
+Now you have 5 task(s) in the list.
+Type Command> Task 10 does not exist!
+Valid task numbers are 1 to 5.
+Type Command> A done command must specify a task number.
+Expected format: done <TASK NUMBER>
+Type Command> Nice! I've marked this task as done:
+[T][✓] buy milk
+Type Command> 1.[T][✓] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Nov 1 2021)
+4.[E][ ] milo party (at: 2pm - 6pm)
+5.[T][ ] something
+Type Command> 1.[T][✓] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Nov 1 2021)
+4.[E][ ] milo party (at: 2pm - 6pm)
+5.[T][ ] something
+Type Command> Please do not include any arguments after the list command.
+Expected format: list
+Type Command> Goodbye, cruel world!
