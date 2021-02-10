@@ -87,6 +87,9 @@ public class Duke {
             String searchField = input.substring(5);
             return parser.search(searchField);
         }
+        if (input.equals("undo")) {
+            return parser.undo();
+        }
 
         // Default
         // Don't actually need to throw bot exception

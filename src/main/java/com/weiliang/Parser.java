@@ -98,4 +98,8 @@ public class Parser {
         return message;
     }
 
+    public String undo() throws DukeException {
+        tasks.undo();
+        return "Successfully undone previous action!";
+    }
 }

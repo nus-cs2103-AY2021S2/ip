@@ -8,7 +8,8 @@ import com.weiliang.DukeException;
 
 public class TaskList implements Iterable<Task> {
 
-    private final List<Task> tasks;
+    private List<Task> tasks;
+    private List<Task> history;
 
     public TaskList() {
         this(new ArrayList<>());
@@ -31,6 +32,7 @@ public class TaskList implements Iterable<Task> {
     }
 
     public Task remove(int taskNum) throws DukeException {
+        history = new ArrayList<>(tasks);
         if (taskNum >= 0 && taskNum < tasks.size()) {
             return tasks.remove(taskNum);
         } else {
@@ -39,11 +41,21 @@ public class TaskList implements Iterable<Task> {
     }
 
     public void add(Task task) {
+        history = new ArrayList<>(tasks);
         tasks.add(task);
     }
 
     public boolean contains(Task task) {
         return tasks.contains(task);
+    }
+
+    public void undo() throws DukeException {
+        if (history == null) {
+            throw new DukeException("Unable to undo action!");
+        }
+
+        tasks = history;
+        history = null;
     }
 
     @Override
