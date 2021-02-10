@@ -3,24 +3,27 @@ package duke;
 class ToDo extends Task {
 
     /**
-     * ToDo constructor where the boolean isDone is set to false
-     * @param s name of ToDo
+     * ToDo constructor where the boolean isDone is set to false.
+     *
+     * @param name name of ToDo
      */
-    ToDo(String s) {
-        super(s);
+    ToDo(String name) {
+        super(name);
     }
 
     /**
-     * ToDo constructor where the boolean isDone is given
-     * @param s name of ToDo
-     * @param c value that boolean isDone will be set to
+     * ToDo constructor where the boolean isDone is given.
+     *
+     * @param name name of ToDo
+     * @param isDone value that boolean isDone will be set to
      */
-    ToDo(String s, boolean c) {
-        super(s, c);
+    ToDo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     /**
-     * Provides the format for which the ToDo will be saved in the txt file
+     * Provides the format for which the ToDo will be saved in the txt file.
+     *
      * @return a string in the format to be saved in the txt file
      */
     @Override
@@ -29,12 +32,13 @@ class ToDo extends Task {
     }
 
     /**
-     * Checks if the ToDo is to be done on the day
-     * @param s the day that is given in yyy-mm-dd format (e.g. 2021-01-31)
+     * Checks if the ToDo is to be done on the day.
+     *
+     * @param date the day that is given in yyy-mm-dd format (e.g. 2021-01-31)
      * @return true if !isDone
      */
     @Override
-    boolean onDay(String s) {
+    boolean isOnDay(String date) {
         return !super.getIsDone();
     }
 

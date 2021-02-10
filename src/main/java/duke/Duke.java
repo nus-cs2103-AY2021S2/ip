@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The class that sets up the first scene
+ */
 public class Duke extends Application {
 
     private final Parser parser = new Parser();

@@ -13,7 +13,8 @@ class TaskList {
     }
 
     /**
-     * creates a TaskList from a given Task ArrayList
+     * creates a TaskList from a given Task ArrayList.
+     *
      * @param a ArrayList of Task
      */
     TaskList(ArrayList<Task> a, Storage s) {
@@ -22,7 +23,8 @@ class TaskList {
     }
 
     /**
-     * get the entire Task ArrayList
+     * get the entire Task ArrayList.
+     *
      * @return Task ArrayList
      */
     ArrayList<Task> get() {
@@ -30,7 +32,8 @@ class TaskList {
     }
 
     /**
-     * get the task at the given index with 1-based indexing
+     * get the task at the given index with 1-based indexing.
+     *
      * @param n index of task
      * @return task at index n (1-based indexing)
      */
@@ -39,7 +42,8 @@ class TaskList {
     }
 
     /**
-     * Appends the task at the end of the list
+     * Appends the task at the end of the list.
+     *
      * @param t Task to be appended
      */
     void store(Task t) {
@@ -49,7 +53,8 @@ class TaskList {
     }
 
     /**
-     * Deletes the given task in the list
+     * Deletes the given task in the list.
+     *
      * @param t the task to be removed from the list
      */
     void delete(Task t) {
@@ -59,7 +64,7 @@ class TaskList {
     }
 
     /**
-     * resets the list into an empty list
+     * resets the list into an empty list.
      */
     void clear() {
         assert(this.storage != null);
@@ -76,16 +81,17 @@ class TaskList {
     }
 
     /**
-     * Provides a string containing the Tasks in the that return true for onDay
-     * @param day the given day
+     * Provides a string containing the Tasks in the that return true for onDay.
+     *
+     * @param date the given day
      * @return string in the form of a list of the tasks to be done on that day
      */
-    String tasksOnDay(String day) {
+    String findTasksOnDay(String date) {
         String output = "";
         int count = 1;
         for (int i = 1; i <= this.size(); i += 1) {
             Task t = this.list.get(i - 1);
-            if (t.onDay(day)) {
+            if (t.isOnDay(date)) {
                 output += String.format("      %d.  %s\n", count, t);
                 count += 1;
             }

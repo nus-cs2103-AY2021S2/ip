@@ -21,7 +21,7 @@ public class TodoWindow {
     @FXML
     private void submit() {
         String command = userInput.getText();
-        parser.parser("todo " + command);
+        parser.parse("todo " + command);
         window.getScene().getWindow().hide();
     }
 }
