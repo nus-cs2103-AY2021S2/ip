@@ -22,12 +22,15 @@ public class Storage {
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             count++;
-            String[] spl = s.nextLine().split("@@@", 5);
+            String[] spl = s.nextLine().split("@@@", 6);
             assert spl.length > 0 : "Impossible input. Error uploading to/from hardDrive.";
             Task toAdd;
             switch(spl[0]) {
             case "T":
                 toAdd = new Todo(spl[2]);
+                if (spl.length == 4 && !spl[3].equals("")) {
+                    toAdd.addTag(spl[3]);
+                }
                 break;
             case "D":
                 toAdd = new Deadline(spl[2], LocalDate.parse(spl[3]), LocalTime.parse(spl[4]));
@@ -42,6 +45,10 @@ public class Storage {
 
             if (spl[1].equals("1")) {
                 toAdd.finished();
+            }
+
+            if (spl.length == 6 && !spl[5].equals("")) {
+                toAdd.addTag(spl[5]);
             }
 
             TaskList.getStorage().add(toAdd);
@@ -59,15 +66,22 @@ public class Storage {
             FileWriter fw = new FileWriter(file);
             String between = "@@@";
             for (Task t : TaskList.getStorage()) {
-                String zero = t.getInitial();
-                String one = t.getDone();
-                String two = t.getDescription();
-                if (zero.equals("T")) {
-                    fw.write(zero + between + one + between + two + "\n");
+                String initial = t.getInitial();
+                String done = t.getDone();
+                String description = t.getDescription();
+                String tag = "";
+                if (t.getIsTagged()) {
+                    System.out.println("yes");
+                    tag = t.getTag();
+                }
+
+                if (initial.equals("T")) {
+                    fw.write(initial + between + done + between + description + between + tag + "\n");
                 } else {
-                    LocalDate three = t.getDate();
-                    LocalTime four = t.getTime();
-                    fw.write(zero + between + one + between + two + between + three + between + four + "\n");
+                    LocalDate date = t.getDate();
+                    LocalTime time = t.getTime();
+                    fw.write(initial + between + done + between + description
+                            + between + date + between + time + between + tag + "\n");
                 }
             }
             fw.close();

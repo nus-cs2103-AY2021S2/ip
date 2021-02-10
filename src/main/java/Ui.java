@@ -30,7 +30,7 @@ public class Ui {
      */
     public static String invalidKeywordExceptionMessage() {
         return LINE + SPACE + "ERROR! D: The supported keywords are: "
-                + "todo, deadline, event, done, list, delete, bye only.\n" + LINE;
+                + "todo, deadline, event, done, list, delete, bye, tag only.\n" + LINE;
     }
 
     /**
@@ -56,6 +56,16 @@ public class Ui {
             return "deadline *description of task* /by *date and time*";
         case "event":
             return "event *description of task* /at *date and time*";
+        case "done":
+            return "done *index of task according to the list*";
+        case "list":
+            return "list";
+        case "delete":
+            return "delete *index of task according to the list*";
+        case "tag":
+            return "tag *index number of task according to the list* *description of the tag*";
+        case "bye":
+            return "bye";
         default:
             return "Impossible output. Error in code.";
         }
@@ -115,6 +125,23 @@ public class Ui {
             }
         }
         return output + LINE;
+    }
+
+    public static String outputMessageTagged(ArrayList<Task> storage, String description) {
+        String output = LINE;
+        int index = 1;
+        for (Task task : storage) {
+            if (task.getTag().equals(description)) {
+                output += SPACE + index + ". " + task + "\n";
+                index++;
+            }
+        }
+        return output + LINE;
+    }
+
+    public static String outputMessageTag(Task toTag, String description) {
+        return LINE + SPACE + "The following tag: (" + description + ") has been added to the follwing task:"
+                + toTag + LINE;
     }
 
     /**

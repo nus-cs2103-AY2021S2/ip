@@ -45,16 +45,21 @@ public class TaskList {
         }
     }
 
-    static String processTaskOutput(String task, String description, LocalDate date, LocalTime time) {
+    static String processTaskOutput(String task, String description, LocalDate date, LocalTime time, String tag) {
+        Task toAdd;
         if (task.equals("todo")) {
-            storage.add(new Todo(description));
+            toAdd = new Todo(description);
         } else if (task.equals("deadline")) {
-            storage.add(new Deadline(description, date, time));
+            toAdd = new Deadline(description, date, time);
         } else if (task.equals("event")) {
-            storage.add(new Event(description, date, time));
+            toAdd = new Event(description, date, time);
         } else {
             return "Error in Task processing.";
         }
+        if (tag != null) {
+            toAdd.addTag(tag);
+        }
+        storage.add(toAdd);
         count++;
         return Ui.outputMessageTask(task, storage.get(count - 1));
     }
@@ -74,8 +79,7 @@ public class TaskList {
      * Prints the output message for a list of all the tasks which contain the keyword.
      * @param spl Contains the keyword and the word that is being searched in the array.
      */
-    static String processFindOutput(String[] spl) {
-        String description = spl[1];
+    static String processFindOutput(String description) {
         return Ui.outputMessageFind(storage, description);
     }
 
@@ -84,6 +88,10 @@ public class TaskList {
      */
     static String processListOutput() {
         return Ui.outputMessageList(storage, count);
+    }
+
+    static String processTaggedOutput(String description) {
+        return Ui.outputMessageTagged(storage, description);
     }
 
     /**
@@ -95,6 +103,12 @@ public class TaskList {
         storage.remove(deleteThisIndexNumber - 1);
         count--;
         return Ui.outputMessageDelete(toDelete);
+    }
+
+    static String processTagOutput(int index, String description) {
+        Task toTag = storage.get(index - 1);
+        toTag.addTag(description);
+        return Ui.outputMessageTag(toTag, description);
     }
 
     /**

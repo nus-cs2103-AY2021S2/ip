@@ -11,7 +11,7 @@ public class Parser {
      */
     static String parse(String inp) {
 
-        String[] splitArray = inp.split(" ", 2);
+        splitArray = inp.split(" ", 2);
         assert splitArray.length > 0 : "Impossible input";
 
         String output;
@@ -32,14 +32,20 @@ public class Parser {
             case "list":
                 output = processList();
                 break;
+            case "tagged":
+                output = processTagged();
+                break;
+            case "find":
+                output = processFind();
+                break;
+            case "tag":
+                output = processTag();
+                break;
             case "delete":
                 output = processDelete();
                 break;
             case "bye":
                 output = processBye();
-                break;
-            case "find":
-                output = processFind();
                 break;
             default:
                 throw new InvalidKeywordException(Ui.invalidKeywordExceptionMessage());
@@ -87,25 +93,36 @@ public class Parser {
     static String processTodo() throws InvalidTaskFormatException {
         checkSplLength(splitArray, 2, "todo");
         String task = splitArray[0];
-        String description = splitArray[1];
-        return TaskList.processTaskOutput(task, description, null, null);
+        String[] splitDescriptionAndTag = splitArray[1].split(" /tag ", 2);
+        String description = splitDescriptionAndTag[0];
+        String tag = null;
+        if (splitDescriptionAndTag.length == 2) {
+            tag = splitDescriptionAndTag[1];
+        }
+        return TaskList.processTaskOutput(task, description, null, null, tag);
     }
 
     static String processDeadlineAndEvent(String regex) throws InvalidTaskFormatException {
         String task = splitArray[0];
         checkSplLength(splitArray, 2, task);
 
-        String[] splitDescriptionAndTime = splitArray[1].split(regex, 2);
-        checkSplLength(splitDescriptionAndTime, 2, task);
+        String[] splitDescriptionAndTimeDateTag = splitArray[1].split(regex, 2);
+        checkSplLength(splitDescriptionAndTimeDateTag, 2, task);
 
-        String[] splitDateAndTime = splitDescriptionAndTime[1].split(" ", 2);
+        String[] splitTimeDateAndTag = splitDescriptionAndTimeDateTag[1].split(" /tag ", 2);
+
+        String[] splitDateAndTime = splitTimeDateAndTag[0].split(" ", 2);
         checkSplLength(splitDateAndTime, 2, task);
 
-        String description = splitDescriptionAndTime[0];
+        String description = splitDescriptionAndTimeDateTag[0];
+        String tag = null;
+        if (splitTimeDateAndTag.length == 2) {
+            tag = splitTimeDateAndTag[1];
+        }
         LocalDate date = LocalDate.parse(splitDateAndTime[0]);
         LocalTime time = LocalTime.parse(splitDateAndTime[1]);
 
-        return TaskList.processTaskOutput(task, description, date, time);
+        return TaskList.processTaskOutput(task, description, date, time, tag);
     }
 
     static String processDone() throws InvalidTaskFormatException, InvalidNumberException {
@@ -120,6 +137,27 @@ public class Parser {
         return TaskList.processListOutput();
     }
 
+    static String processFind() throws InvalidTaskFormatException {
+        checkSplLength(splitArray, 2, "find");
+        String description = splitArray[1];
+        return TaskList.processFindOutput(description);
+    }
+
+    static String processTagged() throws InvalidTaskFormatException {
+        checkSplLength(splitArray, 2, "tagged");
+        String description = splitArray[1];
+        return TaskList.processTaggedOutput(description);
+    }
+
+    static String processTag() throws InvalidTaskFormatException {
+        checkSplLength(splitArray, 2, "tag");
+        String[] splitIndexAndDescription = splitArray[1].split(" ");
+        checkSplLength(splitIndexAndDescription, 2, "tag");
+        int index = Integer.parseInt(splitIndexAndDescription[0]);
+        String description = splitIndexAndDescription[1];
+        return TaskList.processTagOutput(index, description);
+    }
+
     static String processDelete() throws InvalidTaskFormatException, InvalidNumberException {
         checkSplLength(splitArray, 2, "delete");
         isInt(splitArray[1]);
@@ -130,10 +168,5 @@ public class Parser {
     static String processBye() throws InvalidTaskFormatException {
         checkSplLength(splitArray, 1, "bye");
         return TaskList.processBye();
-    }
-
-    static String processFind() throws InvalidTaskFormatException {
-        checkSplLength(splitArray, 2, "find");
-        return TaskList.processFindOutput(splitArray);
     }
 }

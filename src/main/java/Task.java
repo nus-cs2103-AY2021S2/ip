@@ -12,11 +12,15 @@ public abstract class Task {
     /** Shows whether the task is completed or not. */
     protected boolean isDone = false;
 
+    protected boolean isTagged = false;
+
     /** The date when the Task is expected to occur. */
     protected LocalDate date;
 
     /** The time when the Task is expected to occur. */
     protected LocalTime time;
+
+    protected String tag = null;
 
     /**
      * Formats the output date for the String representation of some Task objects.
@@ -68,11 +72,20 @@ public abstract class Task {
         return description;
     }
 
+    public boolean getIsTagged() { return isTagged; }
+
+    public String getTag() { return tag; }
+
     /**
      * Setter that sets the value of isDone to indicate that the task has been completed.
      */
     public void finished() {
         isDone = true;
+    }
+
+    public void addTag(String description) {
+        isTagged = true;
+        tag = description;
     }
 
     /**
@@ -103,7 +116,11 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getInitial() + "]" + this.statusIcon() + description;
+        String outputLine =  "[" + this.getInitial() + "]" + this.statusIcon() + description;
+        if (this.getIsTagged()) {
+            outputLine += " (Tag: " + this.tag + ")";
+        }
+        return outputLine;
     }
 
 }
