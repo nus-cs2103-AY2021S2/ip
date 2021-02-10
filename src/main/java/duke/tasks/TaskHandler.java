@@ -2,12 +2,14 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.enums.Commands;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOptionException;
 import duke.ui.Ui;
 import duke.util.DateFormatter;
+import duke.util.SortByTaskType;
 
 /**
  * TaskHandler that executes tasks related to a TaskList or Task.
@@ -143,6 +145,20 @@ public class TaskHandler {
         }
 
         Ui.showLine();
+    }
+
+    /**
+     * Sorts tasks in a TaskList
+     * @param taskList TaskList that is to be sorted.
+     */
+    public static void sortTasks(ArrayList<Task> taskList) {
+        try {
+            Collections.sort(taskList, new SortByTaskType().reversed());
+        } catch (Exception e) {
+            Ui.showErrorMessage("Could not sort the list of tasks!");
+        }
+
+        Ui.showMessageBetweenLines("Sorted tasks in the list!");
     }
 
     /**

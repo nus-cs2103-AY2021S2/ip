@@ -52,6 +52,10 @@ public class Parser {
         case B:
             handleBye(apollo);
             break;
+        case SORT:
+        case S:
+            TaskHandler.sortTasks(taskList);
+            break;
         case DONE:
         case DO:
             handleDone(command, inputArr[1], taskList);
