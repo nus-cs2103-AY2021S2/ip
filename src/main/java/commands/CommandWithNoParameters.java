@@ -12,9 +12,7 @@ public abstract class CommandWithNoParameters extends Command {
     }
 
     protected void handleTooManyArgs() {
-        this.commandOutputMsg = Ui.formatException(
-                new InvalidArgumentException(tooManyArgumentsErrMsg).getMessage()
-        );
+        handleException(new InvalidArgumentException(tooManyArgumentsErrMsg));
     }
 
 }

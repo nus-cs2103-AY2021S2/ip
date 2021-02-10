@@ -1,6 +1,5 @@
 package commands;
 
-import datetime.ParseDateTime;
 import tasklist.TaskList;
 import tasks.Event;
 
@@ -11,15 +10,16 @@ public class EventCommand extends AddTaskWithTimeCommand {
         // todo this hardcoded string...
         // actually why do we need it, why not put it in toString or something
         this.timeArgDelimiter = "/at";
+        this.missingThirdArgErrMsg = "missing date/time argument";
     }
 
     @Override
     public void run(TaskList taskList) {
+        // w6 fix indenting + what to do with thirdArg
         try {
-            this.handleSplittingArgs();
-            this.commandOutputMsg =
-                    taskList.addTask(new Event(
-                            secondArg, parseInputStringToDateTime(thirdArg)));
+            this.parseCommandBody();
+            this.commandOutputMsg = taskList.addTask(
+                    new Event(secondArg, parseArgToDateTime(thirdArg)));
         } catch (Exception e) {
             handleException(e);
         }
