@@ -1,4 +1,5 @@
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 public class Parser {
@@ -37,9 +38,10 @@ public class Parser {
         return false;
     }
 
-    public String execute(String input, TaskList tasks, Storage storage) {
+    public String execute(String input, TaskList tasks, Storage storage) throws IOException {
         if (input.equals(EXIT_COMMAND)) {
             // close program
+            storage.storeTasks(tasks);
             return Ui.sayGoodbye();
         } else if (input.equals("list")) {
             // show everything in the list

@@ -41,7 +41,6 @@ public class Storage {
      * retrieving the tasks in TaskList.
      *
      * @param lst list of tasks.
-     * @throws IOException if file path is invalid.
      */
     public void storeTasks(TaskList lst) throws IOException {
         File data = new File(filePath);
@@ -50,9 +49,15 @@ public class Storage {
         FileWriter fw = new FileWriter(data, false);
         List<Task> taskList = lst.fetchTasks();
 
-        for (Task item : taskList) {
-            fw.write(item.getDescription() + "\n");
-        }
+
+        taskList.stream().forEach(item -> {
+            try {
+                fw.write(item.getDescription() + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         fw.close();
     }
 

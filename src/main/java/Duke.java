@@ -50,7 +50,7 @@ public class Duke {
     /**
      * Generates a response to user input.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws IOException {
             parser = new Parser();
             storage = new Storage("duke.txt");
             return parser.execute(input, taskList, storage);
