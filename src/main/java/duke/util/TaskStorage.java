@@ -65,6 +65,7 @@ public class TaskStorage {
                     details = event.getDateTime();
                     break;
                 default:
+                    break;
                 }
                 writer.write(taskType + " | " + done + " | " +  description +
                         (details.isBlank() ? "" : " | " + details));

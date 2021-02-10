@@ -8,11 +8,13 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.DeleteCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeArgumentException;
 import duke.exception.DukeDateTimeException;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 
 import java.time.LocalDateTime;
@@ -29,7 +31,7 @@ public class Parser {
      * Parses user input and returns a Command corresponding to user input.
      *
      * @param userInput The input of the user.
-     * @param tasks List of tasks.
+     * @param tasks     List of tasks.
      * @return An executable command.
      */
     public static Command parse(String userInput, TaskList tasks) {
@@ -39,60 +41,81 @@ public class Parser {
         Command res;
         try {
             switch (command) {
-            case "todo":
-                checkStringArgument(split, command);
-                String description = userInput.substring(5);
-                assert(!description.isBlank());
-                res = new AddCommand(new ToDo(description));
+            case COMMAND.TODO:
+                res = handleToDo(split, userInput, tasks);
                 break;
-            case "deadline":
-                checkStringArgument(split, command);
-                String[] deadlineDetails = userInput.substring(9).split(" /by ");
-                checkDateTime(deadlineDetails);
-                String deadlineDescription = deadlineDetails[0];
-                assert(!deadlineDescription.isBlank());
-                assert(deadlineDetails.length == 2);
-                LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlineDetails[1].trim(), formatter);
-                res = new AddCommand(new Deadline(deadlineDescription, deadlineDateTime));
+            case COMMAND.DEADLINE:
+                res = handleDateTimeTasks(split, userInput, COMMAND.DEADLINE, tasks);
                 break;
-            case "event":
-                checkStringArgument(split, command);
-                String[] eventDetails = userInput.substring(6).split(" /at ");
-                checkDateTime(eventDetails);
-                String eventDescription = eventDetails[0];
-                assert(!eventDescription.isBlank());
-                assert(eventDetails.length == 2);
-                LocalDateTime eventDateTime = LocalDateTime.parse(eventDetails[1].trim(), formatter);
-                res = new AddCommand(new Event(eventDescription, eventDateTime));
+            case COMMAND.EVENT:
+                res = handleDateTimeTasks(split, userInput, COMMAND.EVENT, tasks);
                 break;
-            case "list":
+            case COMMAND.LIST:
                 res = new ListCommand();
                 break;
-            case "done":
-                int completedTaskIdx = checkNumericalArgument(split, tasks);
-                assert(completedTaskIdx >= 0 && completedTaskIdx < tasks.getSize());
-                res = new DoneCommand(completedTaskIdx);
+            case COMMAND.DONE:
+                res = handleTaskOps(split, tasks, COMMAND.DONE);
                 break;
-            case "delete":
-                int taskToDelete = checkNumericalArgument(split, tasks);
-                assert(taskToDelete >= 0 && taskToDelete < tasks.getSize());
-                res = new DeleteCommand(taskToDelete);
+            case COMMAND.DELETE:
+                res = handleTaskOps(split, tasks, COMMAND.DELETE);
                 break;
-            case "find":
-                checkStringArgument(split, command);
-                String keyword = userInput.substring(5);
-                res = new FindCommand(keyword);
+            case COMMAND.FIND:
+                res = handleFind(split, userInput);
                 break;
-            case "bye":
+            case COMMAND.UNDO:
+                res = new UndoCommand();
+                break;
+            case COMMAND.EXIT:
                 res = new ExitCommand();
                 break;
             default:
                 res = new InvalidCommand("No such command!");
+                break;
             }
         } catch (DukeException e) {
-            res = new InvalidCommand(e.getMessage());
+            return new InvalidCommand(e.getMessage());
         }
         return res;
+    }
+
+    private static AddCommand handleToDo(String[] split, String userInput, TaskList tasks) throws DukeArgumentException {
+        checkStringArgument(split, COMMAND.TODO);
+        String description = userInput.substring(5);
+        assert(!description.isBlank());
+        Task toAdd = new ToDo(description);
+        Cache.cache(toAdd, tasks.getSize(), COMMAND.TODO);
+        return new AddCommand(toAdd);
+    }
+
+    private static AddCommand handleDateTimeTasks(String[] split, String userInput, String command, TaskList tasks)
+            throws DukeArgumentException, DukeDateTimeException {
+        int detailsIdx = command.equals(COMMAND.DEADLINE) ? 9 : 6;
+        String regex = command.equals(COMMAND.DEADLINE) ? " /by " : " /at ";
+        checkStringArgument(split, command);
+        String[] taskDetails = userInput.substring(detailsIdx).split(regex);
+        checkDateTime(taskDetails);
+        assert(deadlineDetails.length == 2);
+        String description = taskDetails[0];
+        assert(!description.isBlank());
+        LocalDateTime dateTime = LocalDateTime.parse(taskDetails[1].trim(), formatter);
+        Task toAdd = command.equals(COMMAND.DEADLINE) ? new Deadline(description, dateTime)
+                                                      : new Event(description, dateTime);
+        Cache.cache(toAdd, tasks.getSize(), command);
+        return new AddCommand(toAdd);
+    }
+
+    private static FindCommand handleFind(String[] split, String userInput) throws DukeArgumentException {
+        checkStringArgument(split, COMMAND.FIND);
+        String keyword = userInput.substring(5);
+        return new FindCommand(keyword);
+    }
+
+    private static Command handleTaskOps(String[] split, TaskList tasks, String command) throws DukeArgumentException {
+        int taskIdx = checkNumericalArgument(split, tasks);
+        assert(taskIdx >= 0 && (taskIdx < tasks.getSize()));
+        Cache.cache(tasks.getTask(taskIdx), taskIdx, command);
+        return command.equals(COMMAND.DONE) ? new DoneCommand(taskIdx)
+                                            : new DeleteCommand(taskIdx);
     }
 
     /**
@@ -103,11 +126,13 @@ public class Parser {
      * @throws DukeArgumentException when user did not enter a keyword or description.
      */
     private static void checkStringArgument(String[] split, String command) throws DukeArgumentException {
-        if (split.length == 1 && command.equals("find")) {
+        if (split.length == 1 && command.equals(COMMAND.FIND)) {
             throw new DukeArgumentException("You have not entered a keyword!");
-        } else if (split.length == 1) {
+        } else if (split.length == 1 && command.equals(COMMAND.TODO)) {
             throw new DukeArgumentException("You have not entered a task description!");
-        } else {}
+        } else {
+            // Do nothing if a keyword or task description is provided.
+        }
     }
 
     /**
@@ -135,7 +160,7 @@ public class Parser {
      * @param tasks List of tasks.
      * @return Task index entered by user if it is valid.
      * @throws DukeArgumentException When user enters a non-integer, an out of bounds index or if user
-     * did not enter any index.
+     *                               did not enter any index.
      */
     private static int checkNumericalArgument(String[] split, TaskList tasks) throws DukeArgumentException {
         if (split.length > 2) {

@@ -18,6 +18,6 @@ public class ListCommand extends Command {
      * @return All current tasks.
      */
     public String execute(TaskList tasks, MessageFormatter messageFormatter, TaskStorage storage) {
-        return messageFormatter.formatListCmdMsg(tasks);
+        return messageFormatter.formatListMsg(tasks);
     }
 }
