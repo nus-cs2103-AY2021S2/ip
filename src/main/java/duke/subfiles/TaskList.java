@@ -3,6 +3,7 @@ package duke.subfiles;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.exceptions.DateFormatException;
 import duke.exceptions.EmptyDateException;
@@ -13,6 +14,7 @@ import duke.exceptions.LoadFailureException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskComparator;
 import duke.task.ToDo;
 
 /**
@@ -422,6 +424,66 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    /**
+     * Function which helps to separate the list of tasks into three separate lists, based on their type.
+     *
+     * @param todos The list which will be containing the to-dos.
+     * @param deadlines The list which will be containing the deadlines.
+     * @param events The list which will be containing the events.
+     */
+    private void separateTasksByType(ArrayList<ToDo> todos, ArrayList<Deadline> deadlines, ArrayList<Event> events) {
+        while (!tasks.isEmpty()) {
+            Task t = tasks.remove(0);
+            if (t instanceof ToDo) {
+                todos.add((ToDo) t);
+            } else if (t instanceof Deadline) {
+                deadlines.add((Deadline) t);
+            } else if (t instanceof Event) {
+                events.add((Event) t);
+            }
+        }
+    }
+
+    /**
+     * Sorts the list of tasks first based on their type, followed by their date.
+     */
+    public void sortTasksByTypeAndDate() {
+        ArrayList<ToDo> todos = new ArrayList<>();
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        ArrayList<Event> events = new ArrayList<>();
+
+        separateTasksByType(todos, deadlines, events);
+
+        Collections.sort(deadlines);
+        Collections.sort(events);
+
+        tasks.addAll(todos);
+        tasks.addAll(deadlines);
+        tasks.addAll(events);
+    }
+
+    /**
+     * Sorts the list of tasks based on their type.
+     */
+    public void sortTasksByType() {
+        ArrayList<ToDo> todos = new ArrayList<>();
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        ArrayList<Event> events = new ArrayList<>();
+
+        separateTasksByType(todos, deadlines, events);
+
+        tasks.addAll(todos);
+        tasks.addAll(deadlines);
+        tasks.addAll(events);
+    }
+
+    /**
+     * Sorts the list of tasks based on their name, in alphabetical ordering.
+     */
+    public void sortTasksByName() {
+        Collections.sort(tasks, new TaskComparator());
     }
 
 }

@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  * @version 1.2
  * @since   2021-02-08
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Event> {
     /** Date which the event is held on. */
     private final LocalDate date;
 
@@ -59,4 +59,14 @@ public class Event extends Task {
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * Compares this event with another event, by comparing the dates they are held on.
+     *
+     * @param other The event that is being compared to.
+     * @return The difference between this event and the event that is being compared to, in terms of days.
+     */
+    @Override
+    public int compareTo(Event other) {
+        return date.compareTo(other.getDateAsLocalDate());
+    }
 }
