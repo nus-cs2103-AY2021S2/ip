@@ -1,0 +1,11 @@
+todo Workout
+event Meeting
+Monday 2-4pm
+list
+deadline Homework
+Saturday
+done 1
+list
+delete 2
+list
+bye
