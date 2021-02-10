@@ -3,8 +3,12 @@ package com.tanboonji.duke.command;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.Task;
 
+/**
+ * The DoneCommand class contains information to execute the "done" command.
+ */
 public class DoneCommand extends Command {
 
+    /** String to execute this command */
     public static final String COMMAND = "done";
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number.\n"
             + "\tCommand: done [task number]";
@@ -32,6 +36,13 @@ public class DoneCommand extends Command {
     }
 
     public static DoneCommand parseArguments(String input) throws DukeException {
+    /**
+     * Returns new done command after parsing command argument.
+     *
+     * @param argument Command argument.
+     * @return New done command.
+     * @throws DukeException If user input is not an integer.
+     */
         int taskIndex;
         try {
             taskIndex = Integer.parseInt(input) - 1;

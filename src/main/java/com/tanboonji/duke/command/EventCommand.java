@@ -9,8 +9,12 @@ import com.tanboonji.duke.model.Event;
 import com.tanboonji.duke.model.Task;
 import com.tanboonji.duke.parser.DateParser;
 
+/**
+ * The EventCommand class contains information to execute the "event" command.
+ */
 public class EventCommand extends Command {
 
+    /** String input to execute this command */
     public static final String COMMAND = "event";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=\\/at)\\/at\\W(.*)");
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid  and datetime for the event.\n"
@@ -49,6 +53,13 @@ public class EventCommand extends Command {
 
     public static EventCommand parseArguments(String input) throws DukeException {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
+    /**
+     * Returns new event command after parsing command argument.
+     *
+     * @param argument Command argument.
+     * @return New event command.
+     * @throws DukeException If user input does not match event command format.
+     */
 
         if (!matcher.matches()) {
             throw new DukeException(ERROR_MESSAGE);

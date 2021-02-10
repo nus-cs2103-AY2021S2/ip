@@ -3,8 +3,12 @@ package com.tanboonji.duke.command;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.Task;
 
+/**
+ * The FindCommand class contains information to execute the "find" command.
+ */
 public class FindCommand extends Command {
 
+    /** String input to execute this command */
     public static final String COMMAND = "find";
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a keyword to search for.\n"
             + "\tCommand: find [keyword]";
@@ -43,6 +47,13 @@ public class FindCommand extends Command {
 
     public static FindCommand parseArguments(String input) throws DukeException {
         if (input.trim().equals("")) {
+    /**
+     * Returns new find command after parsing command argument.
+     *
+     * @param argument Command argument.
+     * @return New find command.
+     * @throws DukeException If user input does not match find command format.
+     */
             throw new DukeException(ERROR_MESSAGE);
         }
         return new FindCommand(input);

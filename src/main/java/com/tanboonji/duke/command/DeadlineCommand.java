@@ -9,8 +9,12 @@ import com.tanboonji.duke.model.Deadline;
 import com.tanboonji.duke.model.Task;
 import com.tanboonji.duke.parser.DateParser;
 
+/**
+ * The DeadlineCommand class contains information to execute the "deadline" command.
+ */
 public class DeadlineCommand extends Command {
 
+    /** String input to execute this command */
     public static final String COMMAND = "deadline";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/by)/by\\W(.*)");
     private static final String ERROR_MESSAGE =
@@ -50,6 +54,13 @@ public class DeadlineCommand extends Command {
 
     public static DeadlineCommand parseArguments(String input) throws DukeException {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
+    /**
+     * Returns new deadline command after parsing command argument.
+     *
+     * @param argument Command argument.
+     * @return New deadline command.
+     * @throws DukeException If user input does not match deadline command format.
+     */
 
         if (!matcher.matches()) {
             throw new DukeException(ERROR_MESSAGE);
