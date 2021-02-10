@@ -11,8 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import ui.Snomio;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -58,7 +56,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if(response.isExit()){
-            Platform.exit();
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished(event -> {
+                Platform.exit();
+            });
+            delay.play();
         }
     }
 }
