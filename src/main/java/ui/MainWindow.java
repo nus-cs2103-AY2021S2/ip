@@ -1,5 +1,8 @@
 package ui;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,15 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 
 
 /**
  * Controller for ui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private long EXIT_DELAY = 1000;
+    private static final long EXIT_DELAY = 1000;
     @FXML
     private ScrollPane scrollPane;
     @FXML

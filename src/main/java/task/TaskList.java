@@ -25,6 +25,7 @@ public class TaskList {
 
     /**
      * Lists tasks to the standard output.
+     * @param ui Ui object to write a response to
      */
     public void listTasks(Ui ui) {
         StringBuilder builder = new StringBuilder();
@@ -37,6 +38,7 @@ public class TaskList {
     /**
      * Lists tasks to the standard input with a custom list.
      * @param customTaskList custom list of tasks to print.
+     * @param ui Ui object to write a response to
      */
     public static void listTasks(List<Task> customTaskList, Ui ui) {
         StringBuilder builder = new StringBuilder();
@@ -46,6 +48,10 @@ public class TaskList {
         ui.setResponse(builder.toString().trim());
     }
 
+    /**
+     * Lists sorted tasks to the Ui object provided
+     * @param ui Ui object to write a response to
+     */
     public void listTasksSorted(Ui ui) {
         List<Task> sortedList = new ArrayList<Task>(tasks);
         Collections.sort(sortedList);
@@ -55,6 +61,7 @@ public class TaskList {
     /**
      * Adds a Todo.
      * @param commands Commands parsed by the parser.
+     * @param ui Ui object to write a response to
      * @throws DukeException If todo is not formatted properly.
      */
     public void addTodo(HashMap<String, String> commands, Ui ui) throws DukeException {
@@ -66,12 +73,14 @@ public class TaskList {
         Task todoTask = new Todo(taskName);
         tasks.add(todoTask);
 
-        ui.setResponse(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
+        ui.setResponse(String.format("Added a deadline for you:\n%s\n%s",
+                todoTask.toString(), getNumberOfTasksString(tasks)));
     }
 
     /**
      * Adds an Event.
      * @param commands Commands parsed by the parser.
+     * @param ui Ui object to write a response to
      * @throws DukeException If Event is not formatted properly.
      */
     public void addEvent(HashMap<String, String> commands, Ui ui) throws DukeException {
@@ -92,6 +101,7 @@ public class TaskList {
     /**
      * Adds an Deadline.
      * @param commands Commands parsed by the parser.
+     * @param ui Ui object to write a response to
      * @throws DukeException If Deadline is not formatted properly.
      */
     public void addDeadline(HashMap<String, String> commands, Ui ui) throws DukeException {
@@ -114,6 +124,7 @@ public class TaskList {
     /**
      * Deletes a task
      * @param commands Commands parsed by the parser.
+     * @param ui Ui object to write a response to
      * @throws DukeException If Delete command is not formatted properly.
      */
     public void deleteTask(HashMap<String, String> commands, Ui ui) throws DukeException {
