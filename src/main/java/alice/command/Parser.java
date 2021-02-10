@@ -10,10 +10,14 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-	/** Mapping from command to it's format **/
+	/**
+	 * Mapping from command to it's format
+	 **/
 	public static final Map<String, Pattern> regexMap = new HashMap<>();
 
-	/** Mapping from command to it's constructor **/
+	/**
+	 * Mapping from command to it's constructor
+	 **/
 	public static final Map<String, Function<String[], Command>> functionMap = new HashMap<>();
 
 	static {

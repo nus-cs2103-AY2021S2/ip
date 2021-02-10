@@ -6,13 +6,14 @@ import alice.task.Task;
 import alice.task.TaskList;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CommandDone extends Command {
 
 	private static final String SUCCESS_MESSAGE = "Nice! I've marked this task as done:\n%s";
 
-	/** Usage details. **/
+	/**
+	 * Usage details.
+	 **/
 	private static final String USAGE = "done Usage: done [index]";
 
 	/**
@@ -34,7 +35,7 @@ public class CommandDone extends Command {
 				throw new AliceException(String.format("Index %d out of bounds for schedule of size %d.",
 						index, agent.getData().count()));
 			}
-			List<Task> dataList = agent.getData().getTasks().stream().map(Task::clone).collect(Collectors.toList());
+			List<Task> dataList = agent.getData().getTasks();
 			dataList.set(index - 1, dataList.get(index - 1).setDone(true));
 			String response = String.format(SUCCESS_MESSAGE, dataList.get(index - 1));
 			newAgent = new Alice(response, new TaskList(dataList), agent.getIsDone(), true, agent);

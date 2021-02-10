@@ -22,7 +22,7 @@ public class Alice {
 	 * Constructs a new agent specifying tasks and if it's done.
 	 *
 	 * @param newData The tasks to be specified.
-	 * @param isDone If the agent is done operating.
+	 * @param isDone  If the agent is done operating.
 	 */
 	public Alice(TaskList newData, boolean isDone) {
 		this.currentMessage = String.format("%s\nInitialized with %d tasks",
@@ -38,9 +38,9 @@ public class Alice {
 	 * it has changed from some previous state.
 	 *
 	 * @param currentMessage The agent's response.
-	 * @param newData The tasks to be specified.
-	 * @param isDone If the agent is done operating.
-	 * @param hasDelta If the data in the agent has changed from some other instance.
+	 * @param newData        The tasks to be specified.
+	 * @param isDone         If the agent is done operating.
+	 * @param hasDelta       If the data in the agent has changed from some other instance.
 	 */
 	public Alice(String currentMessage, TaskList newData, boolean isDone, boolean hasDelta, Alice previous) {
 		this.currentMessage = currentMessage;

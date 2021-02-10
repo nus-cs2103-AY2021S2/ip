@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 public abstract class Command {
 
-	/** Tokens in the command **/
+	/**
+	 * Tokens in the command
+	 **/
 	protected String[] tokens;
 
 	/**

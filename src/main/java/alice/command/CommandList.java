@@ -20,7 +20,7 @@ public class CommandList extends Command {
 	@Override
 	public Alice execute(Alice agent) {
 		String response;
-		if (agent.getData().getTasks().size() <= 0) {
+		if (agent.getData().count() <= 0) {
 			response = "Your schedule is empty";
 		} else {
 			response = IntStream.range(0, agent.getData().count())

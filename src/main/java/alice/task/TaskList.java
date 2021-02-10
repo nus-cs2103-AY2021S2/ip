@@ -1,6 +1,7 @@
 package alice.task;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList implements java.io.Serializable {
 
@@ -13,7 +14,7 @@ public class TaskList implements java.io.Serializable {
 	}
 
 	public List<Task> getTasks() {
-		return tasks;
+		return tasks.stream().map(Task::clone).collect(Collectors.toList());
 	}
 
 	public int count() {

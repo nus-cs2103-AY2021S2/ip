@@ -29,13 +29,8 @@ public class MainWindow extends AnchorPane {
 
 	private Alice alice;
 
-	private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-	private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-	@FXML
-	public void initialize() {
-		scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-	}
+	private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+	private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 	private static String getDataPath() {
 		if (Storage.OS.contains("win")) {
@@ -58,6 +53,11 @@ public class MainWindow extends AnchorPane {
 	private static boolean saveTasks(TaskList taskList) {
 		byte[] data = Storage.serialize(taskList);
 		return Storage.saveBytes(getDataPath(), data);
+	}
+
+	@FXML
+	public void initialize() {
+		scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 	}
 
 	/**
