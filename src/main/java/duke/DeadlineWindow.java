@@ -24,7 +24,7 @@ public class DeadlineWindow {
     @FXML
     private void submit() {
         String command = userInput.getText() + " /by " + userDate.getValue();
-        parser.parser("deadline " + command);
+        parser.parse("deadline " + command);
         window.getScene().getWindow().hide();
     }
 }

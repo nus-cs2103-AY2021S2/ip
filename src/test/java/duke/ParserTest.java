@@ -44,8 +44,8 @@ public class ParserTest {
 
         duke.Parser p = new duke.Parser();
         String actual = Ui.welcome();
-        actual += p.parser("clear");
-        actual += p.parser("todo read a book");
+        actual += p.parse("clear");
+        actual += p.parse("todo read a book");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -76,8 +76,8 @@ public class ParserTest {
 
         duke.Parser p = new duke.Parser();
         String actual = Ui.welcome();
-        actual += p.parser("clear");
-        actual += p.parser("deadline read a book /by 2021-01-31");
+        actual += p.parse("clear");
+        actual += p.parse("deadline read a book /by 2021-01-31");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -108,8 +108,8 @@ public class ParserTest {
 
         duke.Parser p = new duke.Parser();
         String actual = Ui.welcome();
-        actual += p.parser("clear");
-        actual += p.parser("event read a book /at 2021-01-31");
+        actual += p.parse("clear");
+        actual += p.parse("event read a book /at 2021-01-31");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -140,11 +140,11 @@ public class ParserTest {
 
         duke.Parser p = new duke.Parser();
         String actual = Ui.welcome();
-        actual += p.parser("clear");
-        actual += p.parser("todo read a book");
-        actual += p.parser("deadline read a book /by 2021-01-31");
-        actual += p.parser("event read a book /at 2021-01-31");
-        actual += p.parser("list");
+        actual += p.parse("clear");
+        actual += p.parse("todo read a book");
+        actual += p.parse("deadline read a book /by 2021-01-31");
+        actual += p.parse("event read a book /at 2021-01-31");
+        actual += p.parse("list");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -197,15 +197,15 @@ public class ParserTest {
 
         duke.Parser p = new duke.Parser();
         String actual = Ui.welcome();
-        actual += p.parser("clear");
-        actual += p.parser("todo read a book");
-        actual += p.parser("deadline read a book /by 2021-01-31");
-        actual += p.parser("event read a book /at 2021-01-31");
-        actual += p.parser("list");
-        actual += p.parser("done 1");
-        actual += p.parser("done 2");
-        actual += p.parser("done 3");
-        actual += p.parser("list");
+        actual += p.parse("clear");
+        actual += p.parse("todo read a book");
+        actual += p.parse("deadline read a book /by 2021-01-31");
+        actual += p.parse("event read a book /at 2021-01-31");
+        actual += p.parse("list");
+        actual += p.parse("done 1");
+        actual += p.parse("done 2");
+        actual += p.parse("done 3");
+        actual += p.parse("list");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -285,13 +285,13 @@ public class ParserTest {
 
         duke.Parser p = new duke.Parser();
         String actual = Ui.welcome();
-        actual += p.parser("clear");
-        actual += p.parser("todo read a book");
-        actual += p.parser("deadline read a book /by 2021-01-31");
-        actual += p.parser("event read a book /at 2021-01-31");
-        actual += p.parser("list");
-        actual += p.parser("delete 2");
-        actual += p.parser("list");
+        actual += p.parse("clear");
+        actual += p.parse("todo read a book");
+        actual += p.parse("deadline read a book /by 2021-01-31");
+        actual += p.parse("event read a book /at 2021-01-31");
+        actual += p.parse("list");
+        actual += p.parse("delete 2");
+        actual += p.parse("list");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"
@@ -358,19 +358,19 @@ public class ParserTest {
 
         duke.Parser p = new duke.Parser();
         String actual = Ui.welcome();
-        actual += p.parser("clear");
-        actual += p.parser("todo read a book");
-        actual += p.parser("deadline read a book /by 2021-01-31");
-        actual += p.parser("event read a book /at 2021-01-31");
-        actual += p.parser("todo study");
-        actual += p.parser("deadline study /by 2021-01-31");
-        actual += p.parser("event study /at 2021-01-31");
-        actual += p.parser("done 1");
-        actual += p.parser("done 3");
-        actual += p.parser("done 5");
-        actual += p.parser("list");
-        actual += p.parser("taskson 2021-01-30");
-        actual += p.parser("taskson 2021-01-31");
+        actual += p.parse("clear");
+        actual += p.parse("todo read a book");
+        actual += p.parse("deadline read a book /by 2021-01-31");
+        actual += p.parse("event read a book /at 2021-01-31");
+        actual += p.parse("todo study");
+        actual += p.parse("deadline study /by 2021-01-31");
+        actual += p.parse("event study /at 2021-01-31");
+        actual += p.parse("done 1");
+        actual += p.parse("done 3");
+        actual += p.parse("done 5");
+        actual += p.parse("list");
+        actual += p.parse("taskson 2021-01-30");
+        actual += p.parse("taskson 2021-01-31");
 
         String check = "    ____________________________________________________________\n"
                 + "\n"

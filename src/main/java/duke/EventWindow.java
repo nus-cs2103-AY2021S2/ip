@@ -24,7 +24,7 @@ public class EventWindow {
     @FXML
     private void submit() {
         String command = userInput.getText() + " /at " + userDate.getValue();
-        parser.parser("event " + command);
+        parser.parse("event " + command);
         window.getScene().getWindow().hide();
     }
 }
