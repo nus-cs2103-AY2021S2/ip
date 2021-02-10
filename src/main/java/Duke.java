@@ -33,6 +33,8 @@ public class Duke {
             String command = tokens[0];
             String argument = tokens.length == 2 ? tokens[1] : null;
 
+        assert input.length() > 0 : "input string cannot not be empty";
+
             if (command.equals("bye")) {
                 response = executeByeCommand();
 
@@ -106,9 +108,7 @@ public class Duke {
      */
     private String executeDoneCommand(String argument) {
         // check for correct number of arguments
-        if (argument == null) {
-            return "OOPS!!! The description of a done cannot be empty.";
-        }
+        assert argument != null : "OOPS!!! The description of a done cannot be empty.";
 
         // check if argument is an integer
         int taskId;
@@ -142,9 +142,8 @@ public class Duke {
      * @return String to represent termination of the program
      */
     private String executeTodoCommand(String argument) {
-        if (argument == null) {
-            return "OOPS!!! The description of a todo cannot be empty.";
-        }
+
+        assert argument != null : "OOPS!!! The description of a done cannot be empty.";
 
         Task task = new Todo(argument);
         taskList.add(task);
@@ -165,9 +164,8 @@ public class Duke {
      * @return String to represent termination of the program
      */
     private String executeDeadlineCommand(String argument) {
-        if (argument == null) {
-            return "OOPS!!! The description of a deadline cannot be empty.";
-        }
+
+        assert argument != null : "OOPS!!! The description of a deadline cannot be empty.";
 
         StringBuilder sb = new StringBuilder();
 
@@ -191,9 +189,8 @@ public class Duke {
      * @return String to represent termination of the program
      */
     private String executeEventCommand(String argument) {
-        if (argument == null) {
-            return "OOPS!!! The description of an event cannot be empty.";
-        }
+
+        assert argument != null : "OOPS!!! The description of an event cannot be empty.";
 
         String[] split = argument.split("/at", 2);
         String description = split[0];
@@ -218,9 +215,8 @@ public class Duke {
      * @return String to represent termination of the program
      */
     private String executeDeleteCommand(String argument) {
-        if (argument == null) {
-            return "OOPS!!! The description of a delete cannot be empty.";
-        }
+
+        assert argument != null : "OOPS!!! The description of a delete cannot be empty.";
 
         int taskId;
         try {
@@ -251,9 +247,8 @@ public class Duke {
      * @return String to represent termination of the program
      */
     private String executeFindCommand(String argument) {
-        if (argument == null) {
-            return "OOPS!!! The description of a find cannot be empty.";
-        }
+        
+        assert argument != null : "OOPS!!! The description of a find cannot be empty.";
 
         TaskList subList = new TaskList();
         for (Task task: taskList.getList()) {
