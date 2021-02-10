@@ -1,7 +1,5 @@
 package com.lirc572.ip;
 
-import java.util.Scanner;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -122,7 +120,7 @@ public class Elaina extends Application {
             return;
         }
         String elainaText = this.getResponse(userInput.getText());
-        if (elainaText.length() > 0) {
+        if (!elainaText.equals("clear")) {
             this.dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialogBox(
                             userText,
@@ -135,6 +133,8 @@ public class Elaina extends Application {
                                     : this.elainaImageSrc
                     )
             );
+        } else {
+            this.dialogContainer.getChildren().clear();
         }
         this.userInput.clear();
         if (elainaText.equals("Bye. Hope to see you again soon!\n")) {
@@ -169,38 +169,11 @@ public class Elaina extends Application {
     }
 
     /**
-     * Starts the REPL.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print(Ui.printHorizontalLine() + Ui.printEmptyLine() + this.getWelcomeText(true)
-                + Ui.printHorizontalLine() + Ui.printEmptyLine());
-        for (;;) {
-            try {
-                String response = Parser.processCommand(sc.nextLine(), this.tasks);
-                if (response.equals("")) {
-                    break;
-                }
-                System.out.print(response);
-            } catch (Exception e) {
-                String errorText = "";
-                errorText += Ui.printError(e);
-                errorText += Ui.printEmptyLine();
-                System.out.print(errorText);
-            }
-        }
-        sc.close();
-    }
-
-    /**
      * Constructs an Elaina object and run it.
      *
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        // Start in CLI mode
-        // new Elaina().run();
-
         // Start in GUI mode
         launch();
     }

@@ -79,7 +79,7 @@ public class Parser {
             response += Ui.printLine("Bye. Hope to see you again soon!");
         } else {
             if (tokens[0].equals("clear")) {
-                dialogContainer.getChildren().clear();
+                response += "clear";
             } else if (tokens[0].equals("help")) {
                 response += Ui.printLine(
                         "For a detailed user guide, "
