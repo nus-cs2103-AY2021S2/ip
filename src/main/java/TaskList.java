@@ -4,13 +4,13 @@ import java.util.ArrayList;
  * Duke's TaskList. Contains the task list and has operations to modify the list.
  */
 public class TaskList {
-    ArrayList<Task> taskList;
+    ArrayList<Task> tasks;
 
     /**
      * Class constructor. Creates the TaskList and an empty ArrayList of Tasks to store future tasks.
      */
     public TaskList() {
-        taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -18,7 +18,7 @@ public class TaskList {
      * @param nextTask The specified next Task.
      */
     public void add(Task nextTask) {
-        this.taskList.add(nextTask);
+        this.tasks.add(nextTask);
     }
 
     /**
@@ -27,7 +27,7 @@ public class TaskList {
      * @return The Task in the taskList at the specified index.
      */
     public Task get(int index) {
-        return this.taskList.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -36,7 +36,7 @@ public class TaskList {
      * @return The Task that was removed from the taskList at the specified index.
      */
     public Task remove(int index) {
-        return this.taskList.remove(index);
+        return this.tasks.remove(index);
     }
 
     /**
@@ -44,6 +44,6 @@ public class TaskList {
      * @return Size of the taskList as an integer.
      */
     public int size() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 }

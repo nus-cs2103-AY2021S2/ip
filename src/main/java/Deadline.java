@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Representation of a Deadline task. Inherits from Task.
  */
 public class Deadline extends Task {
-    String deadLine;
+    String deadLineString;
     LocalDate localDate;
     LocalTime localTime;
 
@@ -19,18 +19,18 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, String deadLine) {
         super(taskName);
-        this.deadLine = deadLine;
+        this.deadLineString = deadLine;
 
-        String[] deadLineSplit = deadLine.split(" ");
+        String[] descriptions = deadLine.split(" ");
 
-        localDate = LocalDate.parse(deadLineSplit[0]);
+        localDate = LocalDate.parse(descriptions[0]);
 
-        if (deadLineSplit.length > 1) {
-            int time = Integer.parseInt(deadLineSplit[1]);
+        if (descriptions.length > 1) {
+            int time = Integer.parseInt(descriptions[1]);
             localTime = LocalTime.of(time/100, time % 100);
         } else {
             localTime = LocalTime.MIDNIGHT;
-            this.deadLine += " 0000";
+            this.deadLineString += " 0000";
         }
     }
 
@@ -50,6 +50,6 @@ public class Deadline extends Task {
      */
     @Override
     public String generateDataString() {
-        return "deadline " + deadLine + (done ? " done " : " notDone ") + taskName;
+        return "deadline " + deadLineString + (done ? " done " : " notDone ") + taskName;
     }
 }

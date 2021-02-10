@@ -4,7 +4,7 @@
  * and methods to generate data strings for storage.
  */
 public abstract class Task {
-    String taskName;
+    final String taskName;
     boolean done;
 
     /**

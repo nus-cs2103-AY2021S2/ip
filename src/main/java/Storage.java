@@ -53,7 +53,7 @@ public class Storage {
                     if (taskArgs[0].equals("done")) {
                         newToDo.markAsDone();
                     }
-                    taskList.taskList.add(newToDo);
+                    taskList.add(newToDo);
                     break;
 
                 case "deadline":
@@ -62,7 +62,7 @@ public class Storage {
                     if (taskArgs[2].equals("done")) {
                         newDeadline.markAsDone();
                     }
-                    taskList.taskList.add(newDeadline);
+                    taskList.add(newDeadline);
                     break;
 
                 case "event":
@@ -71,7 +71,7 @@ public class Storage {
                     if (taskArgs[2].equals("done")) {
                         newEvent.markAsDone();
                     }
-                    taskList.taskList.add(newEvent);
+                    taskList.add(newEvent);
                     break;
 
                 default:
@@ -90,7 +90,7 @@ public class Storage {
      */
     public void writeToStorage(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(dukeDataFile);
-        taskList.taskList.forEach(task -> {
+        taskList.tasks.forEach(task -> {
             try {
                 fw.write(task.generateDataString() + System.lineSeparator());
             } catch (IOException e) {

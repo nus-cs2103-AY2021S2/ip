@@ -19,9 +19,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
-
     private Stage stage;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -43,11 +41,11 @@ public class MainWindow extends AnchorPane {
                 + " __|    |  /   ___   \\ |   |___|   |  |    |___.\n"
                 + "|_____//__/      \\__\\\\______/  |_______|\n";
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(sageFormattedSpacing +
-                        "    ________________________________________________________\n" +
-                        "     Unique Skill: Sage\n" +
-                        "     >Acquired\n" +
-                        "    ________________________________________________________\n", dukeImage));
+                DialogBox.getDukeDialog(sageFormattedSpacing
+                        + "    ________________________________________________________\n"
+                        + "     Unique Skill: Sage\n"
+                        + "     >Acquired\n"
+                        + "    ________________________________________________________\n", dukeImage));
     }
 
     public void setDuke(Duke d) {
