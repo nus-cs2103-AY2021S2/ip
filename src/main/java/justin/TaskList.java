@@ -1,10 +1,5 @@
 package justin;
 
-import justin.Deadline;
-import justin.Event;
-import justin.JustinException;
-import justin.Task;
-
 import java.util.ArrayList;
 
 /**
@@ -38,38 +33,43 @@ public class TaskList {
 
     public String addDeadline(String description, String date) {
 
-        boolean ifExist = false; // checking if there is an instance of a default tasks
+        try {
+            boolean ifExist = false; // checking if there is an instance of a default tasks
+            String holder = "";
+            checkDuplicates(description, list);
 
-        String holder = "";
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).description.equals(description)) { // meaning this is the task we want to change
+                    Deadline dl = new Deadline(description, date);
+                    if (list.get(i).isDone) {
+                        dl.markAsDone();
+                    }
 
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).description.equals(description)) { // meaning this is the task we want to change
-                Deadline dl = new Deadline(description, date);
-                if (list.get(i).isDone) {
-                    dl.markAsDone();
+                    //printLineBreaker();
+                    holder += "Got it. I've added this task:\n";
+                    list.set(i, dl);// insert into the list
+                    holder += " " + dl.toString() + "\n";
+                    holder += "Now you have " + list.size() + " tasks in the list\n";
+                    //printLineBreaker();
+
+                    ifExist = true;
                 }
+            }
 
-                //printLineBreaker();
+            if (!ifExist) {
+                Deadline dl = new Deadline(description, date);
+                printLineBreaker();
                 holder += "Got it. I've added this task:\n";
-                list.set(i, dl);// insert into the list
+                list.add(dl);
                 holder += " " + dl.toString() + "\n";
                 holder += "Now you have " + list.size() + " tasks in the list\n";
-                //printLineBreaker();
-
-                ifExist = true;
             }
+
+            return holder;
+        } catch (JustinException e) {
+            return e.getMessage();
         }
 
-        if (!ifExist) {
-            Deadline dl = new Deadline(description, date);
-            printLineBreaker();
-            holder += "Got it. I've added this task:\n";
-            list.add(dl);
-            holder += " " + dl.toString() + "\n";
-            holder += "Now you have " + list.size() + " tasks in the list\n";
-        }
-
-        return holder;
     }
 
     /**
@@ -80,42 +80,48 @@ public class TaskList {
      */
 
     public String addToDo(String description) {
-        boolean ifExist = false; // checking if there is an instance of a default tasks
 
-        String holder = "";
+        try {
+            boolean ifExist = false; // checking if there is an instance of a default tasks
+            checkDuplicates(description, list);
 
-        for (int i = 0; i < list.size(); i++) { // there is an instance of the item in list
-            if (list.get(i).description.equals(description)) {
-                Todo td = new Todo(description);
-                // bringing over information from superclass
-                if (list.get(i).isDone) {
-                    td.markAsDone();
+            String holder = "";
+
+            for (int i = 0; i < list.size(); i++) { // there is an instance of the item in list
+                if (list.get(i).description.equals(description)) {
+                    Todo td = new Todo(description);
+                    // bringing over information from superclass
+                    if (list.get(i).isDone) {
+                        td.markAsDone();
+                    }
+                    list.set(i, td); // insert into list
+                    // formatting
+                    //printLineBreaker();
+                    holder += "Got it. I've added this task:\n";
+                    holder += " " + td.toString() + "\n";
+                    holder += "Now you have " + list.size() + " tasks in the list\n";
+                    //printLineBreaker();
+                    ifExist = true;
                 }
-                list.set(i, td); // insert into list
+            }
+
+            if (!ifExist) {
+                // no instance of new task in exisiting list, must create new one
+                Todo td = new Todo(description);
+                list.add(td);
                 // formatting
                 //printLineBreaker();
                 holder += "Got it. I've added this task:\n";
                 holder += " " + td.toString() + "\n";
                 holder += "Now you have " + list.size() + " tasks in the list\n";
                 //printLineBreaker();
-                ifExist = true;
             }
+
+            return holder;
+
+        } catch (JustinException e) {
+            return e.getMessage();
         }
-
-        if (!ifExist) {
-            // no instance of new task in exisiting list, must create new one
-            Todo td = new Todo(description);
-            list.add(td);
-            // formatting
-            //printLineBreaker();
-            holder += "Got it. I've added this task:\n";
-            holder += " " + td.toString() + "\n";
-            holder += "Now you have " + list.size() + " tasks in the list\n";
-            //printLineBreaker();
-        }
-
-        return holder;
-
     }
 
     /**
@@ -129,42 +135,49 @@ public class TaskList {
 
     public String addEvent(String description, String date) {
 
-        boolean ifExist = false;
+        try {
+            boolean ifExist = false;
+            checkDuplicates(description, list);
 
-        String holder = "";
+            String holder = "";
 
-        for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).description.equals(description)) {
-                Event e = new Event(description, date);
-                // bringing over info from superclass
-                if (list.get(i).isDone) {
-                    e.markAsDone();
+            for (int i = 0; i < list.size(); i++) {
+                if(list.get(i).description.equals(description)) {
+                    Event e = new Event(description, date);
+                    // bringing over info from superclass
+                    if (list.get(i).isDone) {
+                        e.markAsDone();
+                    }
+
+                    list.set(i, e); // insert into list
+
+                    //formatting
+                    //printLineBreaker();
+                    holder += "Got it. I've added this task:\n";
+                    holder += " " + e.toString() + "\n";
+                    holder += "Now you have " + list.size() + " tasks in the list\n";
+                    //printLineBreaker();
+                    ifExist = true;
                 }
+            }
 
-                list.set(i, e); // insert into list
-
+            if (!ifExist) {
+                Event e = new Event(description, date);
+                list.add(e);
                 //formatting
                 //printLineBreaker();
                 holder += "Got it. I've added this task:\n";
                 holder += " " + e.toString() + "\n";
                 holder += "Now you have " + list.size() + " tasks in the list\n";
                 //printLineBreaker();
-                ifExist = true;
             }
+
+            return holder;
+
+        } catch (JustinException e) {
+            return e.getMessage();
         }
 
-        if (!ifExist) {
-            Event e = new Event(description, date);
-            list.add(e);
-            //formatting
-            //printLineBreaker();
-            holder += "Got it. I've added this task:\n";
-            holder += " " + e.toString() + "\n";
-            holder += "Now you have " + list.size() + " tasks in the list\n";
-            //printLineBreaker();
-        }
-
-        return holder;
     }
 
 
@@ -219,6 +232,15 @@ public class TaskList {
             System.out.print("-");
         }
         System.out.println();
+    }
+
+    static void checkDuplicates(String description, ArrayList<Task> tasks) throws JustinException  {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (description.equals(tasks.get(i).getDescription())) {
+                throw new JustinException("OOPS!!! You cannot add duplicate Tasks!!!!");
+            }
+
+        }
     }
 
 }

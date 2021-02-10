@@ -2,6 +2,7 @@ package justin;
 
 import justin.JustinException;
 
+
 /**
  * This class creates a Parser class
  * that takes in a String input
@@ -15,6 +16,7 @@ import justin.JustinException;
 public class Parser {
 
     private String fullText;
+
 
     /**
      * This method creates a Parser class
@@ -73,9 +75,11 @@ public class Parser {
 
                 return "FIND";
 
-            }
+            } else if (fullText.contains("help")) {
 
-            else {
+                return "HELP";
+
+            } else {
 
                 return "ADD";
 

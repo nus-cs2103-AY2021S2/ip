@@ -52,15 +52,18 @@ public class Ui {
      *
      */
 
-    public void showHelpMessage() {
-        System.out.println("Hello I'm Justin");
-        System.out.println("What can I do for you?");
-        printSpace();
-        System.out.println("To add a todo: use command todo<space>taskName");
-        System.out.println("To add a deadline: use command deadline<space>taskName<space>/by<space>YYYY-MM-DD");
-        System.out.println("To add a event: use command event<space>taskName<space>/at<space>YYYY-MM-DD<space>HH:MM");
-        printSpace();
-        printLine();
+    public String showHelpMessage() {
+        String textHolder = "";
+
+        textHolder += "To add a todo, use command: \n" +
+                "todo<space>taskName\n";
+        textHolder += "To add a deadline, use command: \n" +
+                "deadline<space>taskName<space>/by<space>YYYY-MM-DD\n";
+        textHolder += "To add a event, use command: \n" +
+                "event<space>taskName<space>/at<space>YYYY-MM-DD<space>HH:MM\n";
+        textHolder += "To find similar tasks, use find<space>task name\n";
+
+        return textHolder;
     }
 
     public void showEndMessage() {
@@ -72,13 +75,11 @@ public class Ui {
 
     // Level 10 GUI edited
     public String showListMessage() {
-        //printLine();
         return "Here are the tasks in your list:\n";
-        //printSpace();
     }
 
     public String showDoneMessage(TaskList tasks, int listNum) {
-        //printLine();
+
 
         String holder = "";
 
@@ -86,10 +87,6 @@ public class Ui {
         holder += tasks.getList().get(listNum-1).toString() + "\n";
 
         return holder;
-
-        //System.out.println("Nice! I've marked this task as done:");
-        //System.out.println(tasks.getList().get(listNum-1).toString());
-        //printLine();
 
     }
 
@@ -108,7 +105,6 @@ public class Ui {
         for (int i = 0; i < tasks.getList().size(); i++) {
             holder += (i+1) + ". " + tasks.getList().get(i).toString() + "\n";
         }
-        //printLine();
 
         return holder;
     }
