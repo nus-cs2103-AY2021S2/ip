@@ -5,7 +5,7 @@ package duke.task;
  *
  * @author  Nicole Ang
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -33,6 +33,13 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    /**
+     * Marks task as not done.
+     */
+    public void unmarkAsDone() {
+        isDone = false;
     }
 
     /**

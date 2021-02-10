@@ -3,8 +3,10 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.history.RedoHistory;
+import duke.history.UndoHistory;
+import duke.task.CommandManager;
 import duke.task.Task;
-import duke.task.TaskManager;
 
 /**
  * Duke manages command line inputs.
@@ -16,9 +18,11 @@ public class Duke {
     public static final String LINE = (char) 9
             + "--------------------------------------------------------------------";
     protected static ArrayList<Task> tasks = new ArrayList<>();
+    protected UndoHistory undoHistory = new UndoHistory();
+    protected RedoHistory redoHistory = new RedoHistory();
 
     /**
-     * Takes user inputted tasks and passes them to the TaskManager.
+     * Takes user inputted tasks and passes them to the CommandManager.
      *
      * @param args  Java command line inputs.
      */
@@ -34,17 +38,17 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         tasks = new ArrayList<>();
+        CommandManager taskManager = new CommandManager();
 
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
-            TaskManager taskManager = new TaskManager();
 
             if (input.equals("bye")) {
                 System.out.println(LINE + "\n" + (char) 9 + (char) 9 + "Bye! See you soon :)\n" + LINE);
                 scanner.close();
                 break;
             } else {
-                taskManager.takeEvent(input, tasks);
+                System.out.println(taskManager.takeCommand(input, tasks));
             }
 
         }

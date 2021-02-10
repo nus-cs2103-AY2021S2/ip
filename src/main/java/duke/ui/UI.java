@@ -1,10 +1,9 @@
 package duke.ui;
 
 import java.util.ArrayList;
-//import java.util.Scanner;
 
+import duke.task.CommandManager;
 import duke.task.Task;
-import duke.task.TaskManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,6 +14,7 @@ import javafx.stage.Stage;
  */
 public class UI extends Application {
     protected static ArrayList<Task> tasks = new ArrayList<>();
+    protected CommandManager taskManager = new CommandManager();
 
     @Override
     public void start(Stage stage) {
@@ -26,8 +26,7 @@ public class UI extends Application {
      * @param input Input taken in through GUI.
      */
     public String getResponse(String input) {
-        TaskManager taskManager = new TaskManager();
-        return taskManager.takeEvent(input, tasks);
+        return taskManager.takeCommand(input, tasks);
     }
 }
 
