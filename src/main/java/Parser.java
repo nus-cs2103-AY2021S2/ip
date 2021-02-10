@@ -38,6 +38,10 @@ public class Parser {
         return false;
     }
 
+    public boolean isExit(String input) {
+        return input.equals(EXIT_COMMAND);
+    }
+
     public String execute(String input, TaskList tasks, Storage storage) throws IOException {
         if (input.equals(EXIT_COMMAND)) {
             // close program

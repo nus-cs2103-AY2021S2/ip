@@ -33,8 +33,6 @@ public class Duke {
         }
     }
 
-
-
     /**
      * Constructor for Duke class.
      *
@@ -54,6 +52,7 @@ public class Duke {
     public String getResponse(String input) throws IOException {
             parser = new Parser();
             storage = new Storage("duke.txt");
+            this.shouldExit = parser.isExit(input);
             return parser.execute(input, taskList, storage);
     }
 

@@ -25,10 +25,8 @@ public class TaskList {
      */
     public String iterateList() {
         String s = "Here are the items in your list:\n";
-        System.out.println("Here are the items in your list:");
         int i = 1;
         for (Task item : lst) {
-            System.out.println(i + ". " + item.toString());
             s += i + ". " + item.toString() + "\n";
             i++;
         }
@@ -50,16 +48,10 @@ public class TaskList {
             Task task = lst.get(index);
             task.markAsDone();
 
-            Ui.formatText();
-            System.out.println("Sweet! I have marked the following task as done:\n"
-                    + task.toString());
-            Ui.formatText();
             return "Sweet! I have marked the following task as done:\n" + task.toString();
         } catch (final NumberFormatException e) {
-            System.err.println("Oof, did you type a valid number or not?");
             return "Oof, did you type a valid number or not?";
         } catch (IndexOutOfBoundsException exception) {
-            System.err.println("You don't have so many items, dumbass!");
             return "You don't have so many items, dumbass!";
         }
     }
@@ -73,13 +65,11 @@ public class TaskList {
             String[] split = input.split(" ", 2);
             String command = split[0];
 
-            Ui.formatText();
 
             boolean isValidCommand = command.equals(ADD_TODO_COMMAND) || command.equals(ADD_DEADLINE_COMMAND)
                     || command.equals(ADD_EVENT_COMMAND);
 
             if (!isValidCommand || split.length < 2) {
-                System.out.println(WRONG_COMMAND_RESPONSE);
                 return WRONG_COMMAND_RESPONSE;
             } else if (command.equals("todo")) {
                 return addTodo(split[1]);
@@ -98,7 +88,6 @@ public class TaskList {
                 }
             }
         } catch (DateTimeParseException e) {
-            System.err.println("Your date formatting is invalid, use YYYY-MM-DD please...");
             return "Your date formatting is invalid, use YYYY-MM-DD please...";
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Did you format your request properly?";
@@ -114,9 +103,6 @@ public class TaskList {
     public String addTodo(String description) {
         Todo todo = new Todo(description);
         lst.add(todo);
-        System.out.println(ADD_TASK_RESPONSE
-                + todo.toString());
-        countTasks();
         return ADD_TASK_RESPONSE
                 + todo.toString() + "\n"
                 + countTasks();
@@ -133,8 +119,6 @@ public class TaskList {
         Deadline deadline = new Deadline(description, localDate);
 
         lst.add(deadline);
-        System.out.println(ADD_DEADLINE_RESPONSE
-                + deadline.toString());
         return ADD_DEADLINE_RESPONSE
                 + deadline.toString() + "\n" + countTasks();
     }
@@ -149,8 +133,6 @@ public class TaskList {
     public String addEvent(String description, LocalDate localDate) {
         Event event = new Event(description, localDate);
         lst.add(event);
-        System.out.println(ADD_EVENT_RESPONSE
-                + event.toString());
         return ADD_EVENT_RESPONSE
                 + event.toString() + "\n" + countTasks();
     }
@@ -166,27 +148,19 @@ public class TaskList {
             Task task = lst.get(index);
             lst.remove(index);
 
-            Ui.formatText();
-            System.out.println(DELETE_TASK_RESPONSE + task.toString());
-            countTasks();
-            Ui.formatText();
             return DELETE_TASK_RESPONSE + task.toString() + "\n" + countTasks();
         } catch (final NumberFormatException e) {
-            System.err.println("Oof, did you type a valid number or not?");
             return "Oof, did you type a valid number or not?";
         } catch (IndexOutOfBoundsException exception) {
-            System.err.println("You don't have so many items, dumbass!");
             return "You don't have so many items, dumbass!";
         }
     }
 
     public String searchTask(String str) {
-        System.out.println("Here are the items that match your search:");
         String s = "Here are the items that match your search:";
         int i = 1;
         for (Task item : lst) {
             if (item.description.toLowerCase().contains(str.toLowerCase())) {
-                System.out.println(i + ". " + item.toString());
                 s += i + ". " + item.toString() + "\n";
                 i++;
             }
@@ -224,7 +198,6 @@ public class TaskList {
      * Outputs current number of active tasks in the TaskList.
      */
     public String countTasks() {
-        System.out.println("Now you have " + lst.size() + " tasks.");
         return "Now you have " + lst.size() + " tasks.";
     }
 }

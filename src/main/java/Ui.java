@@ -24,7 +24,6 @@ public class Ui {
      * the exit command.
      */
     public static String sayGoodbye() {
-        System.out.println("Bye, see you soon! Don't miss me too much.");
         return "Bye, see you soon! Don't miss me too much.";
     }
 
