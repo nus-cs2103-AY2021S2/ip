@@ -62,7 +62,6 @@ public class Duke {
      */
     String getResponse(String input) {
         ui.handleInput(this, input);
-        String message = ui.getMessages();
-        return message;
+        return ui.getMessages();
     }
 }

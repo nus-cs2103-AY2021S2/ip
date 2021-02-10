@@ -29,6 +29,7 @@ public class TaskHandler {
 
         switch (command) {
         case TODO:
+        case T:
             addTodo(input, taskList, numberOfTasks);
             break;
         case DEADLINE:

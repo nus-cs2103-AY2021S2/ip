@@ -45,23 +45,29 @@ public class Parser {
 
         switch (command) {
         case LIST:
+        case L:
             TaskHandler.listTasks(taskList);
             break;
         case BYE:
+        case B:
             handleBye(apollo);
             break;
         case DONE:
+        case DO:
             handleDone(command, inputArr[1], taskList);
             break;
         case DELETE:
+        case DEL:
             handleDelete(command, inputArr[1], taskList);
             break;
         case TODO:
+        case T:
         case DEADLINE:
         case EVENT:
             handleTask(command, inputArr[1], taskList);
             break;
         case FIND:
+        case F:
             handleFind(command, inputArr[1], taskList);
             break;
         default:
