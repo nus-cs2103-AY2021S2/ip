@@ -1,16 +1,10 @@
-import task.*;
+import task.Deadlines;
+import task.Events;
+import task.TaskList;
+import task.Task;
+import task.Todo;
 import storage.Storage;
 import ui.Ui;
-
-import java.util.*;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
-import javax.print.DocFlavor;
-
 
 public class Duke {
 
@@ -21,7 +15,7 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(System.getProperty("user.dir") + "/data/", "duke.txt");
-        this.taskList = storage.load();
+        this.taskList = storage.loadFromHardisk();
     }
 
     public String getResponse(String input) {
@@ -33,34 +27,35 @@ public class Duke {
             String command = tokens[0];
             String argument = tokens.length == 2 ? tokens[1] : null;
 
-            if (command.equals("bye")) {
-                response = executeByeCommand();
-
-            } else if (command.equals("list")) {
-                response = executeListCommand();
-
-            } else if(command.equals("done")) {
-                response = executeDoneCommand(argument);
-
-            } else if (command.equals("todo")) {
-                response = executeTodoCommand(argument);
-
-            } else if (command.equals("deadline")) {
-                response = executeDeadlineCommand(argument);
-
-            } else if (command.equals("event")) {
-                response = executeEventCommand(argument);
-
-            } else if (command.equals("delete")) {
-                response = executeDeleteCommand(argument);
-
-            } else if (command.equals("find")) {
-                response = executeFindCommand(argument);
-
-            } else {
-                response = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            switch(command) {
+                case "bye":
+                    response = executeByeCommand();
+                    System.exit(0);
+                case "list":
+                    response = executeListCommand();
+                    break;
+                case "done":
+                    response = executeDoneCommand(argument);
+                    break;
+                case "todo":
+                    response = executeTodoCommand(argument);
+                    break;
+                case "deadline":
+                    response = executeDeadlineCommand(argument);
+                    break;
+                case "event":
+                    response = executeEventCommand(argument);
+                    break;
+                case "delete":
+                    response = executeDeleteCommand(argument);
+                    break;
+                case "find":
+                    response = executeFindCommand(argument);
+                    break;
+                default:
+                    response = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+                    break;
             }
-
         return response;
     }
 
@@ -70,7 +65,7 @@ public class Duke {
      * @return String to represent termination of the program
      */
     private String executeByeCommand() {
-        storage.save(taskList);
+        storage.saveToHardisk(taskList);
         return "bye";
     }
 
