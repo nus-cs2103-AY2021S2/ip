@@ -18,5 +18,7 @@ public class DeadlineCommand extends AddTaskWithTimeCommand {
         } catch (Exception e) {
             handleException(e);
         }
+        
+        assert !this.commandOutputMsg.isEmpty() : "empty command output in " + this.commandName;
     }
 }
