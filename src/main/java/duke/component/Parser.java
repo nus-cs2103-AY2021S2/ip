@@ -1,12 +1,6 @@
 package duke.component;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.UnknownCommandException;
 import duke.exception.WrongFormatException;
@@ -34,23 +28,13 @@ public class Parser {
             return new ListCommand();
         }
         case "done": {
-            if (command.length() <= 5) {
-                throw new WrongFormatException();
-            }
-            return new DoneCommand(Integer.parseInt(parameters[1]) - 1);
+            return parseDone(command);
         }
         case "delete": {
-            if (command.length() <= 7) {
-                throw new WrongFormatException();
-            }
-            return new DeleteCommand(Integer.parseInt(parameters[1]) - 1);
+            return parseDelete(command);
         }
         case "todo": {
-            if (command.trim().length() <= 4) {
-                throw new EmptyDescriptionException("todo");
-            }
-            ToDo td = new ToDo(command.substring(5, command.length()));
-            return new AddCommand(td);
+            return parseToDo(command);
         }
         case "deadline": {
             return parseDeadline(command);
@@ -59,11 +43,7 @@ public class Parser {
             return parseEvent(command);
         }
         case "find": {
-            if (command.length() <= 5) {
-                throw new WrongFormatException();
-            }
-            String keyWord = command.substring(5, command.length());
-            return new FindCommand(keyWord);
+            return parseFind(command);
         }
         default: {
             throw new UnknownCommandException();
@@ -86,7 +66,7 @@ public class Parser {
             throw new EmptyDescriptionException("deadline");
         }
         String name = command.substring(9, slash - 1);
-        String date = command.substring(slash + 4, command.length());
+        String date = command.substring(slash + 4);
 
         Deadline dl = new Deadline(name, date);
         return new AddCommand(dl);
@@ -107,9 +87,41 @@ public class Parser {
             throw new EmptyDescriptionException("event");
         }
         String name = command.substring(6, slash - 1);
-        String date = command.substring(slash + 4, command.length());
+        String date = command.substring(slash + 4);
 
         Event e = new Event(name, date);
         return new AddCommand(e);
     }
+
+    public static AddCommand parseToDo(String command) throws EmptyDescriptionException {
+        if (command.trim().length() <= 4) {
+            throw new EmptyDescriptionException("todo");
+        }
+        ToDo td = new ToDo(command.substring(5));
+        return new AddCommand(td);
+    }
+
+    public static DeleteCommand parseDelete(String command) throws WrongFormatException {
+        if (command.length() <= 7) {
+            throw new WrongFormatException();
+        }
+        return new DeleteCommand(Integer.parseInt(command.split(" ")[1]) - 1);
+    }
+
+    public static DoneCommand parseDone(String command) throws WrongFormatException {
+        if (command.length() <= 5) {
+            throw new WrongFormatException();
+        }
+        return new DoneCommand(Integer.parseInt(command.split(" ")[1]) - 1);
+    }
+
+    public static FindCommand parseFind(String command) throws WrongFormatException {
+        if (command.length() <= 5) {
+            throw new WrongFormatException();
+        }
+        String keyWord = command.substring(5);
+        return new FindCommand(keyWord);
+    }
+
+
 }
