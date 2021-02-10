@@ -1,3 +1,4 @@
+package command;
 
 import commands.ListCommand;
 import org.junit.jupiter.api.Test;

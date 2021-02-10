@@ -1,3 +1,5 @@
+package command;
+
 import commands.ByeCommand;
 import org.junit.jupiter.api.Test;
 import tasklist.TaskList;

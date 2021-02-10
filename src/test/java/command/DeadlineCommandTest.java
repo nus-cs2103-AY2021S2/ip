@@ -1,3 +1,5 @@
+package command;
+
 import commands.Command;
 import commands.DeadlineCommand;
 import org.junit.jupiter.api.Test;
