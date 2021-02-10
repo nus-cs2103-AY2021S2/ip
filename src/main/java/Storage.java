@@ -48,6 +48,8 @@ public class Storage {
             String line = sc.nextLine();
             int type = Integer.parseInt(String.valueOf(line.charAt(0)));
             char done = line.charAt(2);
+            assert type < 3 && type > -1;
+            assert done == '0' || done == '1';
             String task = line.substring(3);
             Task newTask = new Task(task, type);
             if (done == '1') {

@@ -16,10 +16,11 @@ public class Task {
     /**
      * Creates a Task object.
      * @param task Description of task.
-     * @param type Type of task: 0 is todo, 1 is deadline, 2 is event
+     * @param type Type of task: 0 is todo, 1 is deadline, 2 is event.
      */
 
     public Task(String task, int type) {
+        assert type < 3 && type > -1;
         if (type == 0) {
             this.task = task;
             this.date = null;
