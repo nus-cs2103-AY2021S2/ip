@@ -29,9 +29,9 @@ public class Parser {
             return identifyInput(input);
         } catch (DukeTaskException e1) {
             return duke.Ui.showDukeTaskError();
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e2) {
             return duke.Ui.showDukeEmptyListError();
-        } catch (Exception e) {
+        } catch (Exception e3) {
             return duke.Ui.showDukeGeneralError();
         }
     }
@@ -80,20 +80,19 @@ public class Parser {
             output = duke.Ui.showDeleteTask(input, tasks);
             tasks.remove(duke.Ui.getIndex(input));
             break;
-        case "":
         case " ":
             output = duke.Ui.showEmptyError();
             break;
         default:
-            throw new DukeGeneralException("I'm sorry, but I don't know what that means");
+            throw new DukeGeneralException("");
         }
         return output;
     }
 
     private String getCommand(String input) throws DukeTaskException {
         try {
-            String[] arr = input.split(" ", 2);
-            return arr[0].toLowerCase();
+            String[] inputArray = input.split(" ", 2);
+            return inputArray[0].toLowerCase();
         } catch (Exception e) {
             throw new DukeTaskException("");
         }
@@ -101,8 +100,8 @@ public class Parser {
 
     private String getMessage(String input) throws DukeTaskException {
         try {
-            String[] arr = input.split(" ", 2);
-            return arr[1];
+            String[] inputArray = input.split(" ", 2);
+            return inputArray[1];
         } catch (Exception e) {
             throw new DukeTaskException("");
         }

@@ -6,8 +6,8 @@ public class Event extends Task {
         super("E", input);
     }
 
-    public Event(String[] array) {
-        super("E", array);
+    public Event(String[] inputArray) {
+        super("E", inputArray);
     }
 
     @Override

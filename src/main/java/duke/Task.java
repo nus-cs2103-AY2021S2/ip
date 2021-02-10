@@ -11,9 +11,15 @@ public class Task {
     private boolean isCompleted;
     private String date;
 
+    /**
+     * To initialize abd format tasks.
+     * @param identity the identity of the task
+     * @param name     rest of the task
+     */
     protected Task(String identity, String name) {
         this.identity = identity;
         this.isCompleted = false;
+        //Sees if input has a due date and formats it.
         if (name.contains("/")) {
             String[] nameArr = name.split("/...");
             this.name = nameArr[0];
@@ -24,6 +30,11 @@ public class Task {
         }
     }
 
+    /**
+     * To load in tasks form storage.
+     * @param identity the identity of the task
+     * @param strArr   the rest of the task
+     */
     protected Task(String identity, String[] strArr) {
         this.identity = identity;
         this.isCompleted = Integer.parseInt(strArr[1]) == 1 ? true : false;
@@ -33,12 +44,12 @@ public class Task {
 
     /**
      * Looks for inputs with the format yyyy-mm-dd and changes them to the MMM dd
-     * yyyy format.
+     * yyyy format, if no date is found, return original string.
      * @param date The date to be changed.
      * @return The newly formatted date.
      */
     protected String formatDate(String date) {
-        //
+        //Regex to scan for date
         String regex = "(19|20)\\d\\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])";
         Matcher m = Pattern.compile(regex).matcher(date);
         if (m.find()) {
@@ -81,16 +92,12 @@ public class Task {
         return identity;
     }
 
-    public void setCompleted() {
-        this.isCompleted = true;
-    }
-
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCompleted() {
+        this.isCompleted = true;
     }
 
     @Override
