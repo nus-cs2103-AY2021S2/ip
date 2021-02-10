@@ -55,7 +55,9 @@ public class TaskList {
         output += "OK. TASK REMOVED.\n"
                 + storage.get(value - 1)
                 + "\n"
-                + "Now you have " + storage.size() + " tasks in the list.";
+                + "Now you have "
+                + storage.size()
+                + " tasks in the list.";
         storage.remove(value - 1);
         assert output != "" : "output should not be empty.";
         return output;
@@ -71,8 +73,9 @@ public class TaskList {
         } else {
             output += "Here are the tasks.\n";
             for (int j = 0; j < storage.size(); j++) {
-                System.out.println((j + 1) + ". " + storage.get(j));
-                output += (j + 1) + ". " + storage.get(j) + "\n";
+                output += (j + 1) + ". "
+                        + storage.get(j)
+                        + "\n";
             }
         }
         assert output != "" : "output should not be empty.";

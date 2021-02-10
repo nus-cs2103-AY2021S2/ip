@@ -23,6 +23,7 @@ public class Parser {
         String[] commands = input.split(" ", 2);
         String command = commands[0];
         String output = "";
+
             try {
                 switch (command) {
                 case "bye":
