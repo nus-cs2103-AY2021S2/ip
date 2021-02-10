@@ -16,6 +16,7 @@ public class Event extends Task {
      */
     public Event(String taskInfo, LocalDate startDateInfo, LocalDate endDateInfo) {
         super(taskInfo);
+        assert !endDateInfo.isBefore(startDateInfo);
         this.startDateInfo = startDateInfo;
         this.endDateInfo = endDateInfo;
     }

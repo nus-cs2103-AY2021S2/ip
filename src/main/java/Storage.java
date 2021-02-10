@@ -59,7 +59,7 @@ public class Storage {
                     }
                     taskList.addTask(newEvent);
                 } else {
-                    //
+                    assert false;
                 }
             }
         } catch (FileNotFoundException e) {
