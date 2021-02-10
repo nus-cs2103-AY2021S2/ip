@@ -35,8 +35,6 @@ public class DukeUi extends Application {
 
         initializeDuke("duke.txt");
 
-        // Step 1. Formatting the window to look as expected.
-
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -52,7 +50,6 @@ public class DukeUi extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -79,7 +76,7 @@ public class DukeUi extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        // Step 3. Add functionality to handle user input.
+        // Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -105,12 +102,10 @@ public class DukeUi extends Application {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
     private void handleUserInput() {
-
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)),
