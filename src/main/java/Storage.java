@@ -118,6 +118,8 @@ public class Storage {
      * @throws IOException for FileWriter.
      */
     public void modifyFile(String before, String after) throws IOException {
+        assert(stringBufferOfData.length() > 0);
+
         int startIndex = stringBufferOfData.indexOf(before);
         int endIndex = startIndex + before.length();
         stringBufferOfData.replace(startIndex, endIndex, after);
@@ -135,6 +137,8 @@ public class Storage {
      * @throws IOException for FileWriter.
      */
     public void deleteFromFile(String data) throws IOException {
+        assert(stringBufferOfData.length() > 0);
+
         int startIndex = stringBufferOfData.indexOf(data);
         int endIndex = startIndex + data.length() + 1;
         stringBufferOfData.delete(startIndex, endIndex);
