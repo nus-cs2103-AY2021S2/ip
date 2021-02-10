@@ -1,16 +1,15 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Handles the logic for when the users input invalid commands
  */
-public class DoNothingCommand extends Command {
-    private final String exceptionMessage;
+public class InvalidInputCommand extends Command {
+    private final String message;
 
-    public DoNothingCommand(String exceptionMessage) {
-        this.exceptionMessage = exceptionMessage;
+    public InvalidInputCommand(String message) {
+        this.message = message;
     }
 
     /**
@@ -28,7 +27,7 @@ public class DoNothingCommand extends Command {
      * @return Error message
      */
     public String getResponse(TaskList tasks) {
-        return this.exceptionMessage;
+        return this.message;
     }
 
     /**

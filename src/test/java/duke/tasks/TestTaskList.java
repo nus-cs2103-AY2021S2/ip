@@ -28,6 +28,8 @@ public class TestTaskList {
         this.deadline = new Deadline("CS2103 Quiz 2", dateTime);
         this.event = new Event("CS2103 Quiz 3", dateTime);
 
+        this.deadline.markAsDone();
+
         this.tasks.addTask(this.toDo);
         this.tasks.addTask(this.deadline);
         this.tasks.addTask(this.event);
@@ -43,6 +45,18 @@ public class TestTaskList {
         assertEquals(this.toDo, listOfTasks.get(0));
         assertEquals(this.deadline, listOfTasks.get(1));
         assertEquals(this.event, listOfTasks.get(2));
+    }
+
+    /**
+     * Test whether the <code>String</code> of <code>Task</code> objects are generated correctly.
+     */
+    @Test
+    public void testTaskListString() {
+        String taskListString = this.tasks.getTaskListAsString();
+        String expected = "1.[T][ ] CS2103 Quiz 1\n"
+                + "2.[D][X] CS2103 Quiz 2 (by: 2021-02-06 23:30)\n"
+                + "3.[E][ ] CS2103 Quiz 3 (at: 2021-02-06 23:30)\n";
+        assertEquals(expected, taskListString);
     }
 
     /**

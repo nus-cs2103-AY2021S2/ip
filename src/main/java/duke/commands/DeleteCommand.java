@@ -1,8 +1,8 @@
 package duke.commands;
 
+import duke.exceptions.TaskNumberNotExistException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Handles the logic of deleting a task from the to-do list.
@@ -48,6 +48,14 @@ public class DeleteCommand extends Command {
      * @return A <code>String</code> to respond to the deletion of a <code>Task</code> (if any).
      */
     public String getResponse(TaskList tasks) {
-        return Ui.getDeleteResponse(this.deletedTask, this.index);
+        try {
+            if (null == this.deletedTask) {
+                throw new TaskNumberNotExistException(this.index);
+            }
+        } catch (TaskNumberNotExistException e) {
+            return e.getMessage();
+        }
+
+        return "Noted. I've removed this task:\n" + this.deletedTask.getStatusString();
     }
 }

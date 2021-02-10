@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Handles the logic of searching the to-do list for tasks that matches certain keywords.
@@ -57,6 +56,10 @@ public class FindCommand extends Command {
             }
         }
 
-        return Ui.getFindResponse(matchingTasks, this.keywords);
+        if (matchingTasks.getSize() == 0) {
+            return "There are no tasks matching the '" + this.keywords + "' in your list :O";
+        } else {
+            return "Here are the matching tasks in your list:\n" + matchingTasks.getTaskListAsString();
+        }
     }
 }

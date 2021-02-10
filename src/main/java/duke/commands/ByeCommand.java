@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Handles the logic of terminating the application.
@@ -32,6 +31,6 @@ public class ByeCommand extends Command {
      * @return A <code>String</code> to respond to the closing of the application.
      */
     public String getResponse(TaskList tasks) {
-        return Ui.getByeResponse();
+        return "Bye. Hope to see you again soon!";
     }
 }

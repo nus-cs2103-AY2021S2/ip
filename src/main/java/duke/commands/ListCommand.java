@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Handles the logic of listing the tasks in the to-do list.
@@ -34,6 +33,10 @@ public class ListCommand extends Command {
      * @return A <code>String</code> displaying the existing tasks.
      */
     public String getResponse(TaskList tasks) {
-        return Ui.getListResponse(tasks);
+        if (tasks.getSize() == 0) {
+            return "You have no tasks in your list yet :)";
+        } else {
+            return "Here are the task(s) in your list:\n" + tasks.getTaskListAsString();
+        }
     }
 }

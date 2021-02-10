@@ -11,14 +11,12 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddToDoCommand;
+import duke.commands.AddTaskCommand;
 import duke.commands.ByeCommand;
 import duke.commands.DeleteCommand;
-import duke.commands.DoNothingCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
+import duke.commands.InvalidInputCommand;
 import duke.commands.ListCommand;
 
 
@@ -35,11 +33,11 @@ public class TestParser {
         assertTrue(Parser.parse("done 1") instanceof DoneCommand);
         assertTrue(Parser.parse("delete 1") instanceof DeleteCommand);
         assertTrue(Parser.parse("find CS") instanceof FindCommand);
-        assertTrue(Parser.parse("todo CS2103 Quiz") instanceof AddToDoCommand);
-        assertTrue(Parser.parse("deadline CS2103 Quiz /by 2021-02-06 23:30") instanceof AddDeadlineCommand);
-        assertTrue(Parser.parse("deadline CS2103 Quiz /by 2021-02-06") instanceof AddDeadlineCommand);
-        assertTrue(Parser.parse("event CS2103 Quiz /at 2021-02-06 23:30") instanceof AddEventCommand);
-        assertTrue(Parser.parse("event CS2103 Quiz /at 2021-02-06") instanceof AddEventCommand);
+        assertTrue(Parser.parse("todo CS2103 Quiz") instanceof AddTaskCommand);
+        assertTrue(Parser.parse("deadline CS2103 Quiz /by 2021-02-06 23:30") instanceof AddTaskCommand);
+        assertTrue(Parser.parse("deadline CS2103 Quiz /by 2021-02-06") instanceof AddTaskCommand);
+        assertTrue(Parser.parse("event CS2103 Quiz /at 2021-02-06 23:30") instanceof AddTaskCommand);
+        assertTrue(Parser.parse("event CS2103 Quiz /at 2021-02-06") instanceof AddTaskCommand);
 
         // Test that parsing invalid input would return the DoNothingCommand, which does nothing (obviously)
         for (String input : Arrays.asList(
@@ -59,28 +57,31 @@ public class TestParser {
                 "event something /at",
                 "event something /at invalid datetime string"
         )) {
-            assertTrue(Parser.parse(input) instanceof DoNothingCommand);
+            assertTrue(Parser.parse(input) instanceof InvalidInputCommand);
         }
     }
 
     /**
-     * Test that the parser converts the datetime strings in our raw input (if any) to
+     * Test that <code>Parser</code> converts the datetime strings in our raw input (if any) to
      * <code>LocalDateTime</code> objects correctly.
      */
     @Test
     public void testDateTimeParser() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
 
+        // Converting datetime strings to LocalDateTime objects
         String dateTimeString = "2021-02-06 23:30";
         LocalDateTime dateTime = Parser.convertToDateTime(dateTimeString);
         assertNotNull(dateTime);
         assertEquals(dateTimeString, dateTime.format(formatter));
 
+        // Converting date strings to LocalDateTime objects, with time set to 00:00
         String dateString = "2021-02-06";
         LocalDateTime date = Parser.convertToDateTime(dateString);
         assertNotNull(date);
         assertEquals(dateString + " 00:00", date.format(formatter));
 
+        // Handling invalid date or datetime strings
         String nonDateTimeString = "not a valid datetime string";
         LocalDateTime nonDateTime = Parser.convertToDateTime(nonDateTimeString);
         assertNull(nonDateTime);

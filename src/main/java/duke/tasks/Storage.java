@@ -70,7 +70,6 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -91,15 +90,21 @@ public class Storage {
         LocalDateTime dateTime = Parser.convertToDateTime(dateTimeString);
 
         Task newTask;
-        if (taskType.equals("T")) {
+        switch (taskType) {
+        case "T":
             newTask = new ToDo(description);
-        } else if (taskType.equals("D")) {
+            break;
+        case "D":
             newTask = new Deadline(description, dateTime);
-        } else {
+            break;
+        case "E":
             newTask = new Event(description, dateTime);
+            break;
+        default:
+            newTask = null;
         }
 
-        if (done.equals("1")) {
+        if (done.equals("1") && newTask != null) {
             newTask.markAsDone();
         }
 
@@ -125,8 +130,10 @@ public class Storage {
         } else if (task instanceof Event) {
             taskType = "E";
             dateTimeString = ((Event) task).getAtDateTimeString();
-        } else {
+        } else if (task instanceof ToDo) {
             taskType = "T";
+        } else {
+            return "";
         }
 
         String done = task.isDone() ? "1" : "0";

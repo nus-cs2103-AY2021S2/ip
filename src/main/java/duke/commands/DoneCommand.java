@@ -1,8 +1,8 @@
 package duke.commands;
 
+import duke.exceptions.TaskNumberNotExistException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Handles the logic of marking a task in the to-do as done.
@@ -50,6 +50,14 @@ public class DoneCommand extends Command {
      * @return A <code>String</code> to respond to marking a <code>Task</code> as done.
      */
     public String getResponse(TaskList tasks) {
-        return Ui.getDoneResponse(this.doneTask, this.index);
+        try {
+            if (null == this.doneTask) {
+                throw new TaskNumberNotExistException(this.index);
+            }
+        } catch (TaskNumberNotExistException e) {
+            return e.getMessage();
+        }
+
+        return "Nice! I've marked this task as done:\n" + this.doneTask.getStatusString();
     }
 }

@@ -8,15 +8,13 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddToDoCommand;
+import duke.commands.AddTaskCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
-import duke.commands.DoNothingCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
+import duke.commands.InvalidInputCommand;
 import duke.commands.ListCommand;
 import duke.exceptions.DateTimeFormatException;
 import duke.exceptions.InvalidActionException;
@@ -24,6 +22,9 @@ import duke.exceptions.MissingDeadlineException;
 import duke.exceptions.MissingDescriptionException;
 import duke.exceptions.MissingEventTimeException;
 import duke.exceptions.TaskNumberNotIntException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
 
 
 /**
@@ -52,9 +53,9 @@ public class Parser {
      * @return Returns a <code>Command</code> object which will be used to execute the desired responses.
      */
     public static Command parse(String input) {
-        String errorMessage = getErrorMessage(input);
-        if (!errorMessage.equals("")) {
-            return new DoNothingCommand(errorMessage);
+        String exceptionMessage = getExceptionMessage(input);
+        if (!exceptionMessage.equals("")) {
+            return new InvalidInputCommand(exceptionMessage);
         }
 
         String action = getAction(input);
@@ -74,13 +75,13 @@ public class Parser {
         case FIND:
             return new FindCommand(description);
         case TODO:
-            return new AddToDoCommand(description);
+            return new AddTaskCommand(new ToDo(description));
         case DEADLINE:
-            return new AddDeadlineCommand(description, deadlineDateTime);
+            return new AddTaskCommand(new Deadline(description, deadlineDateTime));
         case EVENT:
-            return new AddEventCommand(description, eventDateTime);
+            return new AddTaskCommand(new Event(description, eventDateTime));
         default:
-            return new DoNothingCommand("I do not understand your message :(");
+            return new InvalidInputCommand("I do not understand your input :O");
         }
     }
 
@@ -209,12 +210,12 @@ public class Parser {
     }
 
     /**
-     * Determines if a line of raw input can be legitimately converted into a <code>Command</code>.
+     * Given a line of user input, obtains the exception message if the input was invalid.
      *
      * @param input A line of raw user input.
-     * @return True if the input can be converted into a <code>Command</code>, and false otherwise.
+     * @return An exception message (if applicable), or an empty string if the input was valid.
      */
-    private static String getErrorMessage(String input) {
+    private static String getExceptionMessage(String input) {
         String action = getAction(input);
         String description = getDescription(input);
         String byDateTimeString = getByDateTimeString(input);
