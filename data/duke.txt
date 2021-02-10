@@ -1,3 +1,2 @@
-0|[T]go tos chosd
-1|[T]set
-0|[E]go to sleep (at: Oct 10 2020 19:00)
+0|[T]go to school1
+1|[T]set the car3

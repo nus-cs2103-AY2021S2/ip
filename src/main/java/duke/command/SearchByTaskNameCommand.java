@@ -52,7 +52,7 @@ public class SearchByTaskNameCommand extends Command {
         for (Task task : tasks) {
             String singleName = task.getTaskName();
             if (singleName.contains(name)) {
-                builder.append("[" + task.getStatusIcon() + "]" + task.toString() + "\n");
+                builder.append("[" + task.getStatusIcon() + "]" + task.toString() + " " + task.getPriorityIcon() + "\n");
                 numOfTasksFound++;
             }
         }

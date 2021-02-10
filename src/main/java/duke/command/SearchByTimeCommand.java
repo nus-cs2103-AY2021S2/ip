@@ -61,13 +61,13 @@ public class SearchByTimeCommand extends Command {
             } else if (single instanceof Event) {
                 LocalDateTime eventTime = ((Event) single).getAt();
                 if (eventTime.isEqual(time)) {
-                    builder.append("[" + single.getStatusIcon() + "]" + single.toString() + "\n");
+                    builder.append("[" + single.getStatusIcon() + "]" + single.toString() + " " + single.getPriorityIcon() + "\n");
                     numOfTasksFound++;
                 }
             } else if (single instanceof Deadline) {
                 LocalDateTime deadlineTime = ((Deadline) single).getBy();
                 if (deadlineTime.isEqual(time)) {
-                    builder.append("[" + single.getStatusIcon() + "]" + single.toString() + "\n");
+                    builder.append("[" + single.getStatusIcon() + "]" + single.toString() + " " + single.getPriorityIcon() + "\n");
                     numOfTasksFound++;
                 }
             }

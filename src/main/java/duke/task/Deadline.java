@@ -20,11 +20,25 @@ public class Deadline extends Task {
      * Constructor for Deadline object
      *
      * @param description The name of the deadline task.
+     * @param by The deadline time of the deadline task in LocalDateTime type.
+     * @param status The done-status of the deadline task.
+     * @param priority The priority of the deadline task.
+     */
+    public Deadline(String description, LocalDateTime by, boolean status, int priority) {
+        super(description, status, priority);
+        this.by = by;
+    }
+
+    /**
+     * Constructor for Deadline object
+     *
+     * @param description The name of the deadline task.
      * @param by The deadline time of the deadline task in String type.
      * @param status The done-status of the deadline task.
+     * @param priority The priority of the deadline task.
      */
-    public Deadline(String description, String by, boolean status) {
-        super(description, status);
+    public Deadline(String description, String by, boolean status, int priority) {
+        super(description, status, priority);
         this.by = stringToDatetime(by);
     }
 

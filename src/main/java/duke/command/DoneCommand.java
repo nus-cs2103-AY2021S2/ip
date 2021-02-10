@@ -46,7 +46,7 @@ public class DoneCommand extends Command {
 
             StringBuilder builder = new StringBuilder();
             builder.append("Nice! I've marked this as done!\n");
-            builder.append("[" + task.getStatusIcon() + "]" + task.toString());
+            builder.append("[" + task.getStatusIcon() + "]" + task.toString() + " " + task.getPriorityIcon());
             String botMessage = builder.toString();
             return botMessage;
 

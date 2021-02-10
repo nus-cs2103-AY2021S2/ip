@@ -1,6 +1,7 @@
 package duke.command;
 import duke.exception.DukeException;
 import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.TaskList;
 /**
  * It is a command object extends from Command for the Duke program.
@@ -32,6 +33,7 @@ public class AddDeadlineCommand extends Command {
         int dateTimeIndex = userMessage.indexOf('/');
         boolean noDateTime = dateTimeIndex == -1;
         boolean noEventName = spaceIndex == -1;
+        boolean hasPriority = userMessage.substring(userMessage.length() - 4, userMessage.length() - 2).equals("-p");
 
         if (noDateTime) {
             throw new DukeException("OOPS!!! I can't find your deadline time.");
@@ -43,18 +45,29 @@ public class AddDeadlineCommand extends Command {
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
 
-        String deadlineName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
-        String by = userMessage.substring(dateTimeIndex + 4);
         Deadline deadline;
 
-        try {
-            deadline = new Deadline(deadlineName, by);
-        } catch (Exception e) {
-            throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
+        if (hasPriority) {
+            try {
+                String deadlineName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
+                String by = userMessage.substring(dateTimeIndex + 4, userMessage.length() - 5);
+                int priority = Integer.parseInt(userMessage.substring(userMessage.length() - 1));
+                deadline = new Deadline(deadlineName, by, false, priority);
+            } catch (Exception e) {
+                throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
+            }
+        } else {
+            try {
+                String deadlineName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
+                String by = userMessage.substring(dateTimeIndex + 4);
+                deadline = new Deadline(deadlineName, by);
+            } catch (Exception e) {
+                throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
+            }
         }
         taskList.addTask(deadline);
 
-        builder.append("[" + deadline.getStatusIcon() + "] " + deadline.toString());
+        builder.append("[" + deadline.getStatusIcon() + "] " + deadline.toString() + " " + deadline.getPriorityIcon());
         builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");
         String botMessage = builder.toString();
         return botMessage;

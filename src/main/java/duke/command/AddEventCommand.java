@@ -2,6 +2,8 @@ package duke.command;
 import duke.task.Event;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.task.ToDo;
+
 /**
  * It is a command object extends from Command for the Duke program.
  * When the parser calls it, it will receive the requests from the users
@@ -32,6 +34,7 @@ public class AddEventCommand extends Command {
         int dateTimeIndex = userMessage.indexOf('/');
         boolean noDateTime = dateTimeIndex == -1;
         boolean noEventName = spaceIndex == -1;
+        boolean hasPriority = userMessage.substring(userMessage.length() - 4, userMessage.length() - 2).equals("-p");
 
 
         if (noDateTime) {
@@ -43,19 +46,31 @@ public class AddEventCommand extends Command {
 
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
-        String eventName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
-        String at = userMessage.substring(dateTimeIndex + 4);
         Event event;
 
-        try {
-            event = new Event(eventName, at);
-        } catch (Exception e) {
-            throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
+        if (hasPriority) {
+            try {
+                String eventName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
+                String at = userMessage.substring(dateTimeIndex + 4, userMessage.length() - 5);
+                int priority = Integer.parseInt(userMessage.substring(userMessage.length() - 1));
+                event = new Event(eventName, at, false, priority);
+            } catch (Exception e) {
+                throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
+            }
+        } else {
+            try {
+                String eventName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
+                String at = userMessage.substring(dateTimeIndex + 4);
+                event = new Event(eventName, at);
+            } catch (Exception e) {
+                throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
+            }
         }
+
 
         taskList.addTask(event);
 
-        builder.append("[" + event.getStatusIcon() + "] " + event.toString());
+        builder.append("[" + event.getStatusIcon() + "] " + event.toString() + " " + event.getPriorityIcon());
         builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");
         String botMessage = builder.toString();
         return botMessage;

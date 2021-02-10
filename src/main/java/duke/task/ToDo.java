@@ -19,11 +19,11 @@ public class ToDo extends Task {
      *
      * @param description The name of the todo task.
      * @param status The done-status of the todo task.
+     * @param priority The priority of the todo task.
      */
-    public ToDo(String description, boolean status) {
-        super(description, status);
+    public ToDo(String description, boolean status, int priority) {
+        super(description, status, priority);
     }
-
 
     /**
      * Get the task name for a todo object.

@@ -26,10 +26,24 @@ public class Event extends Task {
      * @param description The name of the event task.
      * @param at The deadline time of the event task in String type.
      * @param status The done-status of the event task.
+     * @param priority The priority of the event task.
      */
-    public Event(String description, String at, boolean status) {
-        super(description, status);
+    public Event(String description, String at, boolean status, int priority) {
+        super(description, status, priority);
         this.at = stringToDatetime(at);
+    }
+
+    /**
+     * Constructor for event object
+     *
+     * @param description The name of the event task.
+     * @param at The deadline time of the event task in LocalDateTime type.
+     * @param status The done-status of the event task.
+     * @param priority The priority of the event task.
+     */
+    public Event(String description, LocalDateTime at, boolean status, int priority) {
+        super(description, status, priority);
+        this.at = at;
     }
 
 

@@ -30,16 +30,27 @@ public class AddToDoCommand extends Command {
     public String execute(TaskList taskList) throws DukeException {
         int spaceIndex = userMessage.indexOf(" ");
         boolean noName = spaceIndex == -1;
+        boolean hasPriority = userMessage.substring(userMessage.length() - 4, userMessage.length() - 2).equals("-p");
+
         if (noName) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
 
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
-        String todoName = userMessage.substring(spaceIndex + 1);
-        ToDo todo = new ToDo(todoName);
+        ToDo todo;
+        if (!hasPriority) {
+            String todoName = userMessage.substring(spaceIndex + 1);
+            todo = new ToDo(todoName);
+        } else {
+            // input example: todo go to school -p 4
+            String todoName = userMessage.substring(spaceIndex + 1, userMessage.length() - 5);
+            int priority = Integer.parseInt(userMessage.substring(userMessage.length() - 1));
+            todo = new ToDo(todoName, false, priority);
+        }
+
         taskList.addTask(todo);
-        builder.append("[" + todo.getStatusIcon() + "] " + todo.toString());
+        builder.append("[" + todo.getStatusIcon() + "] " + todo.toString() + " " + todo.getPriorityIcon());
         builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");
 
         String botMessage = builder.toString();

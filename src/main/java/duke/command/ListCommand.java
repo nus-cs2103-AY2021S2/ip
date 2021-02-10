@@ -40,8 +40,9 @@ public class ListCommand extends Command {
             String taskName = task.toString();
             String icon = task.getStatusIcon();
             String index = Integer.toString(i + 1);
+            String priorityIcon = task.getPriorityIcon();
             builder.append(index + ". " + "[" + icon + "]");
-            builder.append(taskName + "\n");
+            builder.append(taskName + " " + priorityIcon + "\n");
         }
         String botMessage = builder.toString();
         return botMessage;

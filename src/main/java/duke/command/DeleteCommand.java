@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
 
             StringBuilder builder = new StringBuilder();
             builder.append("Noted. I've removed this task:\n");
-            builder.append("[" + task.getStatusIcon() + "]" + task.toString());
+            builder.append("[" + task.getStatusIcon() + "]" + task.toString() + " " + task.getPriorityIcon());
             taskList.delete(task);
             builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");
             String botMessage = builder.toString();
