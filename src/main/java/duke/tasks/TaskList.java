@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -104,9 +105,7 @@ public class TaskList {
      * Sets all the tasks in the task list to done.
      */
     public void setAllDone() {
-        tasks.forEach(task -> {
-            task.setDone();
-        });
+        tasks.forEach(Task::setDone);
     }
 
     /**
@@ -127,10 +126,8 @@ public class TaskList {
     public TaskList filterByDate(String date) {
         LocalDate queryDate = LocalDate.parse(date);
         List<Task> printTasks = tasks.stream().filter(task -> {
-            if (task instanceof Deadline) {
-                return ((Deadline) task).getDeadlineDate().isEqual(queryDate);
-            } else if (task instanceof Event) {
-                return ((Event) task).getEventDate().isEqual(queryDate);
+            if (task instanceof TimedTask) {
+                return ((TimedTask) task).getTaskDate().isEqual(queryDate);
             } else {
                 return false;
             }
@@ -139,11 +136,37 @@ public class TaskList {
     }
 
     /**
+     * Returns true if there is a timing clash with the input date.
+     *
+     * @param addedDate date to be checked
+     * @return true if there is a timing clash
+     */
+    public boolean checkForAnomalies(LocalDateTime addedDate) {
+        return tasks.stream().anyMatch(task -> {
+            if (task instanceof TimedTask) {
+                return ((TimedTask) task).getTaskDateTime().equals(addedDate);
+            } else {
+                return false;
+            }
+        });
+    }
+
+    /**
+     * Returns true if the task exists in the task list.
+     *
+     * @param taskToBeChecked task to be checked
+     * @return true if the task exists in the task list
+     */
+    public boolean checkForDuplicates(Task taskToBeChecked) {
+        return tasks.stream().anyMatch(task -> task.equals(taskToBeChecked));
+    }
+
+    /**
      * Formats all the {@code Task}'s information into a formatted string that is suitable for storing.
      *
      * @return formatted string that is suitable for storing
      */
     public String toStorageString() {
-        return tasks.stream().map(e -> e.toStorageString()).collect(Collectors.joining("\n"));
+        return tasks.stream().map(Task::toStorageString).collect(Collectors.joining("\n"));
     }
 }
