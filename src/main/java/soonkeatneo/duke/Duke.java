@@ -25,10 +25,6 @@ public class Duke {
         }
     }
 
-    /*public static void main(String[] args) {
-        new Duke("data/data.txt").run();
-    }*/
-
     /**
      * Listens to the user's input, and passes it to the input handler.
      */
