@@ -1,6 +1,5 @@
 package commands;
 
-import datetime.ParseDateTime;
 import tasklist.TaskList;
 import tasks.Event;
 
@@ -16,7 +15,7 @@ public class EventCommand extends AddTaskWithTimeCommand {
     @Override
     public void run(TaskList taskList) {
         try {
-            this.handleSplittingArgs();
+            this.parseCommandBody();
             this.commandOutputMsg =
                     taskList.addTask(new Event(
                             secondArg, parseInputStringToDateTime(thirdArg)));

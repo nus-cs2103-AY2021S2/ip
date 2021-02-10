@@ -13,7 +13,7 @@ public class DeadlineCommand extends AddTaskWithTimeCommand {
     @Override
     public void run(TaskList taskList) {
         try {
-            handleSplittingArgs();
+            parseCommandBody();
             this.commandOutputMsg = taskList.addTask(new Deadline(secondArg, thirdArg));
         } catch (Exception e) {
             handleException(e);
