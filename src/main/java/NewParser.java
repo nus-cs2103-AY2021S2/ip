@@ -44,8 +44,11 @@ public class NewParser {
     }
 
     private Command parseIntoCommand(String firstWord, String commandBody) throws UnsupportedCommandException {
+        // w6 multiple cases --> abstract out all possible strings that correspond to one command later.
+        // also allow users to define own aliases
         switch (firstWord) {
         case "list":
+        case "ls":
             System.out.println("helloo");
             System.out.println(commandBody);
             return new ListCommand(commandBody);
@@ -54,12 +57,14 @@ public class NewParser {
         case "todo":
             return new TodoCommand(commandBody);
         case "event":
+        case "e":
             return new EventCommand(commandBody);
         case "deadline":
             return new DeadlineCommand(commandBody);
         case "done":
             return new DoneCommand(commandBody);
         case "delete":
+        case "del":
             return new DeleteCommand(commandBody);
         case "find":
             return new FindCommand(commandBody);
