@@ -13,7 +13,7 @@ public class Deadline extends Task {
     /**
      * Indicates the end date/time of the deadline.
      */
-    protected LocalDateTime by;
+    protected final LocalDateTime by;
 
     public Deadline(String description, LocalDateTime by) {
         super(description);

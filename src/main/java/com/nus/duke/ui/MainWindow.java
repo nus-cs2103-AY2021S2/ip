@@ -9,7 +9,6 @@ import com.nus.duke.command.ExitCommand;
 import com.nus.duke.common.Logic;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
@@ -21,11 +20,12 @@ import javafx.stage.Stage;
 public class MainWindow {
 
     private static final String FXML = "/views/MainWindow.fxml";
-    private final FXMLLoader fxmlLoader = new FXMLLoader();
     private final Logic logic;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
-    private Image botImage = new Image(this.getClass().getResourceAsStream("/images/woman.jpg"));
+    private final Image userImage = new Image(
+            this.getClass().getResourceAsStream("/images/cat.jpg"));
+    private final Image botImage = new Image(
+            this.getClass().getResourceAsStream("/images/woman.jpg"));
 
     @FXML
     private TextField commandTextField;
@@ -39,6 +39,7 @@ public class MainWindow {
     public MainWindow(Stage primaryStage, Logic logic) {
         this.logic = logic;
         URL fileUrl = Main.class.getResource(FXML);
+        FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(fileUrl);
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(primaryStage);
@@ -62,7 +63,7 @@ public class MainWindow {
     }
 
     @FXML
-    private void handleCommandText(ActionEvent event) {
+    private void handleCommandText() {
         Command command = this.logic.parseInputForCommand(this.commandTextField.getText());
         assert command != null : "Command should not be null";
         String result = this.logic.executeCommand(command);
