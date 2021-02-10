@@ -9,7 +9,7 @@ public class Task {
     protected final static DateTimeFormatter DF1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected final static DateTimeFormatter DF2 = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    // Initializer
+    // Initializer (This is a test merge request)
     public Task(){
         taskName = "";
         isDone = false;
