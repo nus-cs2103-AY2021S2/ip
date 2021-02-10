@@ -17,6 +17,7 @@ public class Duke {
     private Ui ui;
     private Parser parser;
     private Scanner sc;
+    private boolean shouldExit = false;
 
     /**
      * Main method for Duke class.
@@ -62,6 +63,7 @@ public class Duke {
      *
      * @throws IOException if filePath or system input is invalid.
      */
+
     public void run() throws IOException {
         ui.printHello();
         sc = new Scanner(System.in);
@@ -80,12 +82,10 @@ public class Duke {
      * @param parser parser to deconstruct user commands
      */
     public void respond(Scanner sc, Parser parser) {
-        while (true) {
+        ui.printHello();
+        while (!this.shouldExit) {
             String input = sc.nextLine();
-            boolean shouldExit = parser.parse(input, taskList);
-            if (shouldExit) {
-                break;
-            }
+            this.shouldExit =  parser.parse(input, taskList);
         }
     }
 
