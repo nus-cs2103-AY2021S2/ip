@@ -46,7 +46,9 @@ public class Ui {
     public String showDelete(Task t, TaskList tl) {
         return "Noted. I've removed this task: \n"
                 + t.toString() + "\n"
-                + "Now you have " + tl.getTasks().size() + " tasks in the list.";
+                + "Now you have "
+                + tl.getTasks().size()
+                + " tasks in the list.";
     }
 
     /**
@@ -57,7 +59,9 @@ public class Ui {
     public String showAdd(Task t, TaskList tl) {
         return "Got it. I've added this task: \n"
                 + t.toString() + "\n"
-                + "Now you have " + tl.getTasks().size() + " tasks in the list.";
+                + "Now you have "
+                + tl.getTasks().size()
+                + " tasks in the list.";
     }
 
     /**
