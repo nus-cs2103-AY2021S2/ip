@@ -18,13 +18,14 @@ public class Storage {
         this.directory = directory;
         this.fileName = fileName;
     }
+
     /**
      * Saves the tasklist.
      * Converts a tasklist into its string representation then saves it in a file
      *
      * @param taskList  the tasklist to be saved
      */
-    public void save(TaskList taskList) {
+    public void saveToHardisk(TaskList taskList) {
 
         try {
             PrintWriter writer = new PrintWriter(this.directory + this.fileName, "UTF-8");
@@ -40,12 +41,13 @@ public class Storage {
         }
 
     }
+
     /**
      * Loads a text file and parses it into a tasklist
      *
      * @return
      */
-    public TaskList load() {
+    public TaskList loadFromHardisk() {
 
         try {
             File file = new File(this.directory + this.fileName);
@@ -61,15 +63,14 @@ public class Storage {
                     taskList.add(task);
                 }
             }
-
             return taskList;
 
         } catch (FileNotFoundException e) {
             createNewFile();
             return new TaskList();
         }
-
     }
+
     /**
      * parses a string representation of a task into a Task object
      *
@@ -92,6 +93,7 @@ public class Storage {
                 return null;
         }
     }
+
     /**
      * Creates an Event object from the Task details
      *
@@ -112,7 +114,6 @@ public class Storage {
             details = tokens[1];
             at = null;
         }
-
         return new Events(isDone, details, at);
     }
 
@@ -136,9 +137,7 @@ public class Storage {
             details = tokens[1];
             by = null;
         }
-
         return new Events(isDone, details, by);
-
     }
     /**
      * Creates a Todo object from the Task details
@@ -174,5 +173,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 }
