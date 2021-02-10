@@ -22,5 +22,7 @@ public class ByeCommand extends CommandWithNoParameters {
         this.hasSentExitDukeSignal = true;
         this.hasRunSuccessfully = true;
         this.commandOutputMsg = Ui.getExitMessage();
+
+        assert !this.commandOutputMsg.isEmpty() : "empty command output in " + this.commandName;
     }
 }

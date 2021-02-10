@@ -30,6 +30,7 @@ public class Duke {
             Ui.print(new String[]{"Something went wrong in loading the task file and parsing",
                     e.getMessage()});
         }
+        // todo ensure a tasklist is always created?
     }
 
 
@@ -72,7 +73,7 @@ public class Duke {
             }
         }
 
-        c.debug();
+        // c.debug();
         return c.getCommandOutputMsg();
     }
 }

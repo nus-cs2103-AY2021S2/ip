@@ -13,6 +13,7 @@ public class NewParser {
 
     public NewParser(TaskList taskListToWriteInto) {
         this.taskList = taskListToWriteInto;
+//        assert false==true : "ha!";
     }
 
     /**

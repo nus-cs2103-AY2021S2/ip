@@ -19,5 +19,9 @@ public class TodoCommand extends CommandWithParameters {
         } catch (MissingArgumentException e) {
             handleException(e);
         }
+
+        System.out.println(this.commandOutputMsg);
+        System.out.println(this.commandOutputMsg.isEmpty());
+        assert !this.commandOutputMsg.isEmpty() : "empty command output in " + this.commandName;
     }
 }

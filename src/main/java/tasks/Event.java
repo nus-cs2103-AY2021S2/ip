@@ -61,7 +61,7 @@ public class Event extends Task {
     public static Event parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
         // another assumption: there's no line separator (storage scanner removes line separator that unparse adds)
-        assert oneLine.startsWith("T" + delimiter);
+        assert oneLine.startsWith("E" + delimiter);
 
         // todo init num args per command
         // fixme realise how the order of args here depend on order of args in unparse function
