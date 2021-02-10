@@ -17,6 +17,7 @@ public class DoneCommand implements Command {
      * @param i index of task to mark as done
      */
     public DoneCommand(int i) {
+        assert i >= 0 : " i has to be greater or equal to 0 as there are no negative indexes";
         taskDoneInt = i;
     }
 
