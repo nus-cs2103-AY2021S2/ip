@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     Deadline(String deadlineDateString, String deadlineDetail) {
         super(deadlineDetail);
+
         try {
             this.deadlineDate = Task.dateStringToDate(deadlineDateString);
             this.deadlineDateString = String.format("%s %d %d",
@@ -18,10 +19,6 @@ public class Deadline extends Task {
         } catch (DateTimeException e) {
             System.err.println("Please input date in yyyy-MM-dd format.");
         }
-    }
-
-    public String getDeadline() {
-        return this.deadlineDateString;
     }
 
     @Override

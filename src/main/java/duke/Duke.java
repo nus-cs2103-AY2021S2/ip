@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Duke represents a (CLI) task list application.
@@ -9,29 +8,13 @@ import java.util.Scanner;
  * It processes these commands too: list, delete, done, bye
  * Task lists of individual users are saved locally and retrieved by running this class.
  */
-// extends application
+
 public class Duke {
     private final Ui ui;
     private TaskList tasks;
     private Storage storage;
     private final Parser parser;
 
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String LIST_COMMAND = "list";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String DONE_COMMAND = "done";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String DELETE_COMMAND = "delete";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String ADD_TODO_COMMAND = "todo";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String ADD_DEADLINE_COMMAND = "deadline";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String ADD_EVENT_COMMAND = "event";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String FIND_COMMAND = "find";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-    private final String EXIT_COMMAND = "bye";
 
     /**
      * Constructor for Duke class.
@@ -53,138 +36,63 @@ public class Duke {
     }
 
     /**
-     * entry point for the Duke program.
-     * Initializes new Duke object with filePath: "data/tasks.txt" and calls run method.
-     *
-     * @param args arguments for main method
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-    /**
-     * Processes the user input and print out messages and Ui accordingly.
-     *
-     * @throws DukeException If invalid command. Valid commands: todo, event, deadline, delete, done, list, bye
-     * @throws DukeException If there is no message after the todo command.
-     * @see Scanner
-     * @see Ui
-     * @see Parser
-     */
-    public void run() {
-        ui.printWelcomeGreeting();
-        Scanner sc = new Scanner(System.in);
-        boolean isBye = false;
-        while (!isBye) {
-            String command = sc.nextLine();
-            String[] commandArr = command.split(" ");
-            Task newTask;
-            ui.printHorizontalRule();
-            try {
-                switch (commandArr[0]) {
-                case EXIT_COMMAND:
-                    ui.printExitMessage();
-                    sc.close();
-                    storage.writeData(tasks.getTaskList());
-                    isBye = true;
-                    break;
-                case LIST_COMMAND:
-                    ui.printTaskList(tasks);
-                    break;
-                case DONE_COMMAND:
-                    int taskNumber = Integer.parseInt(commandArr[1]);
-                    ui.printDoneTask(tasks, taskNumber);
-                    break;
-                case ADD_TODO_COMMAND:
-                    if (commandArr.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                    } else {
-                        newTask = parser.parseAddTodo(command);
-                        ui.printAddedTask(tasks, newTask);
-                    }
-                    break;
-                case ADD_DEADLINE_COMMAND:
-                    newTask = parser.parseAddDeadline(command);
-                    ui.printAddedTask(tasks, newTask);
-                    break;
-                case ADD_EVENT_COMMAND:
-                    newTask = parser.parseAddEvent(command);
-                    ui.printAddedTask(tasks, newTask);
-                    break;
-                case DELETE_COMMAND:
-                    int taskNumToBeDeleted = parser.parseDeleteCommand(command);
-                    ui.printDeletedTask(tasks, taskNumToBeDeleted);
-                    break;
-                case FIND_COMMAND:
-                    TaskList tasksFound = parser.parseFindCommand(command, tasks);
-                    ui.printFoundTasks(tasksFound);
-                    break;
-                default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (DukeException ex) {
-                System.err.println(ex.getMessage());
-            }
-        }
-    }
-
-    /**
      * Gets the response from Duke after an input by the user in the GUI.
-     *
-     * @throws DukeException when key word is not a valid word.
      * Valid words: list, done, delete, todo, deadline, event, find
+     *
      * @param command input of the user that requires a response.
+     * @throws DukeException when key word is not a valid word.
      */
     public String getResponse(String command) {
         String response = "";
         String[] commandArr = command.split(" ");
+        String keyWord = commandArr[0];
+        String keyWordToCompare = keyWord.toUpperCase();
         Task newTask;
-        ui.printHorizontalRule();
         try {
-            switch (commandArr[0]) {
-            case EXIT_COMMAND:
+            switch (Commands.valueOf(keyWordToCompare)) {
+            case BYE:
                 storage.writeData(tasks.getTaskList());
                 response += ui.getExitMessageString();
                 break;
-            case LIST_COMMAND:
+            case LIST:
                 response += ui.getPrintTaskListString(tasks);
                 break;
-            case DONE_COMMAND:
-                int taskNumber = Integer.parseInt(commandArr[1]);
+            case DONE:
+                int taskNumber = Integer.parseInt(keyWord);
                 response += ui.getPrintDoneTaskString(tasks, taskNumber);
                 break;
-            case ADD_TODO_COMMAND:
-                if (commandArr.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                } else {
-                    newTask = parser.parseAddTodo(command);
-                    response += ui.getPrintAddedTaskString(tasks, newTask);
-                }
+            case TODO:
+                newTask = parser.parseAddTodo(command);
+                response += ui.getPrintAddedTaskString(tasks, newTask);
                 break;
-            case ADD_DEADLINE_COMMAND:
+            case DEADLINE:
                 newTask = parser.parseAddDeadline(command);
                 response += ui.getPrintAddedTaskString(tasks, newTask);
                 break;
-            case ADD_EVENT_COMMAND:
+            case EVENT:
                 newTask = parser.parseAddEvent(command);
                 response += ui.getPrintAddedTaskString(tasks, newTask);
                 break;
-            case DELETE_COMMAND:
+            case DELETE:
                 int taskNumToBeDeleted = parser.parseDeleteCommand(command);
                 response += ui.getPrintDeletedTaskString(tasks, taskNumToBeDeleted);
                 break;
-            case FIND_COMMAND:
+            case FIND:
                 TaskList tasksFound = parser.parseFindCommand(command, tasks);
                 response += ui.getPrintFoundTasksString(tasksFound);
                 break;
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                //do nothing
             }
-        } catch (DukeException ex) {
-            response += ex.getMessage();
+        } catch (Exception ex) {
+            if (ex instanceof IllegalArgumentException) {
+                response += "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            } else {
+                response += ex.getMessage();
+            }
         }
         return response;
     }
 
-
 }
+

@@ -50,7 +50,7 @@ public class Storage {
      * @see Paths
      */
     public ArrayList<Task> getTaskList() throws IOException {
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         List<String> fileLines = Files.readAllLines(Paths.get(filePath));
         for (String line : fileLines) {
             String[] userTask = line.split(" \\| ");
@@ -60,19 +60,19 @@ public class Storage {
                 switch (eventType) {
                 case ("[T]"):
                     taskInList = new ToDo(userTask[2]);
-                    taskList.add(taskInList);
+                    tasks.add(taskInList);
                     break;
                 case ("[E]"):
                     String eventDuration = parser.parseDate(userTask[3].split("at: ")[1]);
                     String eventDetail = userTask[2];
                     taskInList = new Event(eventDuration, eventDetail);
-                    taskList.add(taskInList);
+                    tasks.add(taskInList);
                     break;
                 case ("[D]"):
                     String deadline = parser.parseDate(userTask[3].split("by: ")[1]);
                     String deadlineDetail = userTask[2];
                     taskInList = new Deadline(deadline, deadlineDetail);
-                    taskList.add(taskInList);
+                    tasks.add(taskInList);
                     break;
                 default:
                     // do nothing
@@ -81,7 +81,7 @@ public class Storage {
                 System.err.println(e.getMessage());
             }
         }
-        return taskList;
+        return tasks;
     }
 
     /**
