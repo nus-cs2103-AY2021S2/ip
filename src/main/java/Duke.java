@@ -31,7 +31,7 @@ public class Duke {
         try {
             dukeStorage = new Storage(filePath, folderName);
             dukeTaskList = new TaskList(dukeStorage.load());
-            dukeUi.showLoadingSucess();
+            //dukeUi.showLoadingSucess();
         } catch (DukeException e) {
             dukeUi.showErrorMsg(e.getMessage());
             dukeTaskList = new TaskList();
@@ -93,6 +93,7 @@ public class Duke {
             return getGoodbyeLine();
         }
     }
+
     public boolean getIsCurrentError() {
         return isCurrentError;
     }
