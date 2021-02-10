@@ -4,8 +4,9 @@ import duke.task.Task;
 
 import java.util.Stack;
 
-public class TaskArchive extends Stack<Task> {
+public class TaskArchive extends Stack<ArchivedTask> {
     public TaskArchive() {
         super();
     }
 }
+

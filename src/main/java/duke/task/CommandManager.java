@@ -1,5 +1,7 @@
 package duke.task;
 
+import static duke.task.CommandManager.CommandType.*;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,20 +9,18 @@ import java.util.ArrayList;
 
 import duke.datetime.DateTimeConverter;
 import duke.error.ErrorChecker;
-import duke.error.IllegalTaskException;
 import duke.file.FileSaver;
+import duke.history.ArchivedTask;
 import duke.history.RedoHistory;
 import duke.history.TaskArchive;
 import duke.history.UndoHistory;
-
-import static duke.task.TaskManager.CommandType.*;
 
 /**
  * Task manager decides what type of action to take based on the user input.
  *
  * @author  Nicole Ang
  */
-public class TaskManager {
+public class CommandManager {
     public enum CommandType { BYE, HELP, LIST, DONE, DELETE, FIND, UNDO,
         REDO, TODO, DEADLINE, EVENT, INVALID };
     protected ArrayList<Task> tasks;
@@ -29,19 +29,6 @@ public class TaskManager {
     protected RedoHistory redoHistory;
     protected TaskArchive archive;
 
-//    private boolean isBye;
-//    private boolean isHelp;
-//    private boolean isList;
-//    private boolean isDone;
-//    private boolean isDelete;
-//    private boolean isFind;
-//    private boolean isUndo;
-//    private boolean isRedo;
-//    private boolean isTodo;
-//    private boolean isDeadline;
-//    private boolean isEvent;
-//    private boolean isNewTask;
-
     private final String BYE_RESPONSE = "Bye! See you soon :)";
     private final String HELP_RESPONSE = "list: list all tasks\ndone {i}: mark task at position {i} as done\n"
             + "delete {i}: delete task at position {i}\nfind {keyword}: find and list all tasks containing {keyword}\n"
@@ -49,9 +36,9 @@ public class TaskManager {
             + "event {description} /on {date} /from {time} /to {time}: creates a new event";
 
     /**
-     * Constructs a new TaskManager object to process tasks.
+     * Constructs a new CommandManager object to process tasks.
      */
-    public TaskManager() {
+    public CommandManager() {
         tasks = new ArrayList<>();
         fileSaver = new FileSaver();
         undoHistory = new UndoHistory();
@@ -67,12 +54,13 @@ public class TaskManager {
      * @param tasks Current task list.
      * @return Feedback message.
      */
-    public String takeEvent(String input, ArrayList<Task> tasks) {
+    public String takeCommand(String input, ArrayList<Task> tasks) {
         this.tasks = tasks;
         assert input != null : "input should not be null";
         assert tasks != null : "tasks should not be null";
         ErrorChecker e = new ErrorChecker(input, tasks);
-        CommandType type = categoriseTask(input);
+        CommandType type = categoriseCommand(input);
+        assert type != null : "task type should not be null";
 
         if (!e.isValid()) {
             return e.getMessage();
@@ -80,61 +68,18 @@ public class TaskManager {
 
         switch (type) {
         case UNDO:
-            return undoInput();
+            return undoCommand();
         case REDO:
-            return redoInput();
+            return redoCommand();
         case BYE:
         case LIST:
         case FIND:
             return executeCommand(input, type);
-//        case TODO:
-//        case DEADLINE:
-//        case EVENT:
-//            undoHistory.push(input);
-//            System.out.println("push onto undoHistory");
-//            System.out.println("undo history: " + undoHistory);
-//            redoHistory.clear();
-//            return executeCommand(input, type);
         default:
             undoHistory.push(input);
-            System.out.println("push onto undoHistory");
-            System.out.println("undo history: " + undoHistory);
             redoHistory.clear();
             return executeCommand(input, type);
         }
-
-
-//        if (isUndo) {
-//            return undoInput();
-//        } else if (isRedo) {
-//            return redoInput();
-//        } else {
-//            undoHistory.push(input);
-//            System.out.println("push onto undoHistory");
-//            System.out.println("undo history: " + undoHistory);
-//            redoHistory.clear();
-//            return executeCommand(input, type);
-//        }
-
-//        if (isBye) {
-//            return BYE_RESPONSE;
-//        } else if (isHelp) {
-//            return HELP_RESPONSE;
-//        } else if (isList) {
-//            return listEvents();
-//        } else if (isDone) {
-//            return markDone(input);
-//        } else if (isDelete) {
-//            return deleteTask(input);
-//        } else if (isFind) {
-//            return findTasks(input);
-//        } else if (isNewTask) {
-//            return addNewTask(input);
-//        } else {
-//            return e.getMessage();
-//        }
-//        return "";
-
     }
 
     private String executeCommand(String input, CommandType type) {
@@ -144,11 +89,9 @@ public class TaskManager {
         case HELP:
             return HELP_RESPONSE;
         case LIST:
-            return listEvents();
+            return listTasks();
         case DONE:
             return markDone(input);
-//        case UNDONE:
-//            return unmarkDone();
         case DELETE:
             return deleteTask(input);
         case FIND:
@@ -168,20 +111,7 @@ public class TaskManager {
      *
      * @param input User input.
      */
-    private CommandType categoriseTask(String input) {
-//        isBye = input.equals("bye");
-//        isHelp = input.equals("help");
-//        isList = input.equals("list");
-//        isDone = input.startsWith("done");
-//        isDelete = input.startsWith("delete");
-//        isFind = input.startsWith("find");
-//        isUndo = input.equals("undo");
-//        isRedo = input.equals("redo");
-//        isTodo = input.startsWith("todo");
-//        isDeadline = input.startsWith("deadline");
-//        isEvent = input.startsWith("event");
-//        isNewTask = isTodo || isDeadline || isEvent;
-
+    private CommandType categoriseCommand(String input) {
         if (input.equals("bye")) {
             return BYE;
         } else if (input.equals("help")) {
@@ -227,11 +157,9 @@ public class TaskManager {
      * @param input User input.
      * @return Feedback message letting user know task was successfully marked as done.
      */
-    private String unmarkDone(String input) {
+    private void unmarkDone(String input) {
         Task task = tasks.get(Integer.parseInt(input.substring(5)) - 1);
         task.unmarkAsDone();
-//        return "Good job! You got " + task.description + " done!";
-        return "";
     }
 
     /**
@@ -244,27 +172,6 @@ public class TaskManager {
     private String addNewTask(String input, CommandType type) {
         Task newTask;
         String[] inputSplit = input.split("/");
-
-//        if (isTodo) {
-//            newTask = new TodoTask(input.substring(5));
-//        } else if (isDeadline) {
-//            String description = inputSplit[0].substring(9, inputSplit[0].length() - 1);
-//            DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
-//            LocalDate by = dateTimeConverter.convertDate();
-//
-//            newTask = new DeadlineTask(description, by);
-//        } else if (isEvent) {
-//            String description = inputSplit[0].substring(6, inputSplit[0].length() - 1);
-//
-//            DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
-//            LocalDate on = dateTimeConverter.convertDate();
-//            LocalTime from = dateTimeConverter.convertTime("from");
-//            LocalTime to = dateTimeConverter.convertTime("to");
-//
-//            newTask = new EventTask(description, on, from, to);
-//        } else {
-//            throw(new IllegalTaskException("", ""));
-//        }
 
         switch (type) {
         case TODO:
@@ -293,10 +200,8 @@ public class TaskManager {
 
         tasks.add(newTask);
 
-        try {
-            fileSaver.saveToFile("DukeList.txt", tasks);
-        } catch (IOException ex) {
-            return "File path not found: " + ex.getMessage();
+        if (saveToFile() != "") {
+            return saveToFile();
         }
 
         return "Added: " + newTask.toString();
@@ -310,18 +215,26 @@ public class TaskManager {
      * @return Feedback message letting user know task was successfully deleted from task list.
      */
     private String deleteTask(String input) {
-        Task task = tasks.get(Integer.parseInt(input.substring(7)) - 1);
-        archive.push(task);
+        int inputIndex = Integer.parseInt(input.substring(7));
+        Task task = tasks.get(inputIndex - 1);
+        archive.push(new ArchivedTask(inputIndex, task));
         System.out.println("archive: " + archive);
         tasks.remove(Integer.parseInt(input.substring(7)) - 1);
 
+        if (saveToFile() != "") {
+            return saveToFile();
+        }
+
+        return "Deleted: " + task.toString();
+    }
+
+    private String saveToFile() {
         try {
             fileSaver.saveToFile("DukeList.txt", tasks);
         } catch (IOException ex) {
             return "File path not found: " + ex.getMessage();
         }
-
-        return "Deleted: " + task.toString();
+        return "";
     }
 
     /**
@@ -349,7 +262,7 @@ public class TaskManager {
      *
      * @return Task list.
      */
-    private String listEvents() {
+    private String listTasks() {
         String output = "Here is a list of your tasks:";
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -359,25 +272,19 @@ public class TaskManager {
         return output;
     }
 
-    private String undoInput() {
+    private String undoCommand() {
         if (!undoHistory.empty()) {
             String previousInput = undoHistory.undo();
             redoHistory.push(previousInput);
-            System.out.println("push onto redoHistory");
-            System.out.println("redohist: " + redoHistory);
-
-            CommandType type = categoriseTask(previousInput);
-
-//            public enum CommandType { BYE, HELP, LIST, DONE, DELETE, FIND, UNDO,
-//                REDO, TODO, DEADLINE, EVENT, INVALID };
+            CommandType type = categoriseCommand(previousInput);
 
             switch (type) {
             case DONE:
                 unmarkDone(previousInput);
                 break;
             case DELETE:
-                System.out.println(archive);
-                tasks.add(archive.pop());
+                ArchivedTask archivedTask = archive.pop();
+                tasks.add(archivedTask.getIndex() - 1, archivedTask.getTask());
                 break;
             case TODO:
             case DEADLINE:
@@ -388,19 +295,19 @@ public class TaskManager {
                 break;
             }
 
-//            executeCommand(previousInput);
-            return "Undid " + previousInput;
+            return "Undid " + previousInput + ".";
         } else {
             return "No task to undo!";
         }
     }
 
-    private String redoInput() {
+    private String redoCommand() {
         if (!redoHistory.empty()) {
             String nextInput = redoHistory.redo();
-            CommandType type = categoriseTask(nextInput);
+            CommandType type = categoriseCommand(nextInput);
             executeCommand(nextInput, type);
-            return "Redid " + nextInput;
+            undoHistory.push(nextInput);
+            return "Redid " + nextInput + ".";
         } else {
             return "No task to redo!";
         }

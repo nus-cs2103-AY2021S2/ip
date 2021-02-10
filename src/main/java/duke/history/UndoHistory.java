@@ -1,8 +1,5 @@
 package duke.history;
 
-import duke.task.Task;
-import duke.task.TaskManager;
-
 public class UndoHistory extends History {
     public UndoHistory() {
         super();
