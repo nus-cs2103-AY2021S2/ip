@@ -24,6 +24,7 @@ public class FindCommand {
     public String find(TaskList tasks, String keyword) {
 
         String output = "";
+        boolean isEmpty = true;
         output += "--------------------------" + "\n";
         output += "Here are the matching tasks in your list:" + "\n";
         ArrayList<Task> storage = tasks.getStorage();
@@ -32,11 +33,16 @@ public class FindCommand {
 
             Task task = storage.get(i);
             String description = task.getDescription();
+            assert description != null : "description should not be empty";
 
             if (description.contains(keyword)) {
                 output += (i + 1) + " " + task + "\n";
+                isEmpty = false;
+            } else {
+                output += "No similar descriptions found. \n";
             }
         }
+        assert output != "" : "output should not be empty.";
         return output;
     }
 }
