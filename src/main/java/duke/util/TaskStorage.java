@@ -21,7 +21,7 @@ import java.util.Scanner;
  * Class representing a storage for the user's tasks.
  */
 public class TaskStorage {
-    private File file;
+    private final File file;
 
     /**
      * Constructor of TaskStorage.
@@ -91,7 +91,7 @@ public class TaskStorage {
                 String line = sc.nextLine();
                 String[] taskInfo = line.split(" \\| ");
                 String taskType = taskInfo[0];
-                assert(taskType.equals("T") || taskType.equals("D") || taskType.equals("D"));
+                assert(taskType.equals("T") || taskType.equals("D") || taskType.equals("E"));
                 String isDone = taskInfo[1];
                 assert(isDone.equals("1") || isDone.equals("0")) : "Save file has been corrupted!";
                 String description = taskInfo[2];
@@ -113,11 +113,12 @@ public class TaskStorage {
                     retrievedTasks.add(new Event(description, isDone, eventTime));
                     break;
                 default:
+                    break;
                 }
             }
+            return new TaskList(retrievedTasks);
         } catch (FileNotFoundException e){
             throw new DukeStorageException("Save file is missing/corrupted!");
         }
-        return new TaskList(retrievedTasks);
     }
 }
