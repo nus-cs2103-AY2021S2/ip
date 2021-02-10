@@ -19,7 +19,6 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(int index) {
         this.index = index;
-        this.doneTask = null;
     }
 
     /**
@@ -37,6 +36,7 @@ public class DoneCommand extends Command {
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
      */
     public void execute(TaskList tasks) {
+        // Set this.doneTask to the task to be marked as done (if any), or else null.
         this.doneTask = tasks.getTaskByIndex(this.index);
         if (null != this.doneTask) {
             this.doneTask.markAsDone();
@@ -51,6 +51,9 @@ public class DoneCommand extends Command {
      */
     public String getResponse(TaskList tasks) {
         try {
+            // Note that this getResponse method MUST be called after the execute method. Following
+            // this condition, iff this.doneTask is equal to null here, then no task was marked as
+            // done earlier. That can only mean that the index input into this command does not exist.
             if (null == this.doneTask) {
                 throw new TaskNumberNotExistException(this.index);
             }

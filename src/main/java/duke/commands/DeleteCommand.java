@@ -20,7 +20,6 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int index) {
         this.index = index;
-        this.deletedTask = null;
     }
 
     /**
@@ -38,6 +37,7 @@ public class DeleteCommand extends Command {
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
      */
     public void execute(TaskList tasks) {
+        // Set this.deletedTask to the popped Task (if any), or else null.
         this.deletedTask = tasks.popTaskByIndex(this.index);
     }
 
@@ -49,6 +49,9 @@ public class DeleteCommand extends Command {
      */
     public String getResponse(TaskList tasks) {
         try {
+            // Note that this getResponse method MUST be called after the execute method. Following
+            // this condition, if this.deletedTask is equal to null here, then no task was popped
+            // earlier. That can only mean that the index input into this command does not exist.
             if (null == this.deletedTask) {
                 throw new TaskNumberNotExistException(this.index);
             }

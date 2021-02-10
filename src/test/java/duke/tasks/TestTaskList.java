@@ -25,7 +25,7 @@ public class TestTaskList {
 
         this.tasks = new TaskList();
         this.toDo = new ToDo("CS2103 Quiz 1");
-        this.deadline = new Deadline("CS2103 Quiz 2", dateTime);
+        this.deadline = new Deadline("BT4013 Quiz 2", dateTime);
         this.event = new Event("CS2103 Quiz 3", dateTime);
 
         this.deadline.markAsDone();
@@ -54,7 +54,7 @@ public class TestTaskList {
     public void testTaskListString() {
         String taskListString = this.tasks.getTaskListAsString();
         String expected = "1.[T][ ] CS2103 Quiz 1\n"
-                + "2.[D][X] CS2103 Quiz 2 (by: 2021-02-06 23:30)\n"
+                + "2.[D][X] BT4013 Quiz 2 (by: 2021-02-06 23:30)\n"
                 + "3.[E][ ] CS2103 Quiz 3 (at: 2021-02-06 23:30)\n";
         assertEquals(expected, taskListString);
     }
@@ -85,10 +85,6 @@ public class TestTaskList {
         assertEquals(this.event, this.tasks.popTaskByIndex(3));
         assertEquals(this.deadline, this.tasks.popTaskByIndex(2));
         assertEquals(this.toDo, this.tasks.popTaskByIndex(1));
-
-        this.tasks.addTask(this.toDo);
-        this.tasks.addTask(this.deadline);
-        this.tasks.addTask(this.event);
     }
 
     /**

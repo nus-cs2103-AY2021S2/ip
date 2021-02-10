@@ -16,8 +16,8 @@ import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.InvalidInputCommand;
 import duke.commands.ListCommand;
-import duke.exceptions.DateTimeFormatException;
 import duke.exceptions.InvalidActionException;
+import duke.exceptions.InvalidDateTimeFormatException;
 import duke.exceptions.MissingDeadlineException;
 import duke.exceptions.MissingDescriptionException;
 import duke.exceptions.MissingEventTimeException;
@@ -243,11 +243,11 @@ public class Parser {
             }
 
             if (action.equals(DEADLINE) && null == convertToDateTime(byDateTimeString)) {
-                throw new DateTimeFormatException(byDateTimeString);
+                throw new InvalidDateTimeFormatException(byDateTimeString);
             }
 
             if (action.equals(EVENT) && null == convertToDateTime(atDateTimeString)) {
-                throw new DateTimeFormatException(atDateTimeString);
+                throw new InvalidDateTimeFormatException(atDateTimeString);
             }
 
         } catch (MissingDescriptionException
@@ -255,7 +255,7 @@ public class Parser {
                 | TaskNumberNotIntException
                 | MissingDeadlineException
                 | MissingEventTimeException
-                | DateTimeFormatException e) {
+                | InvalidDateTimeFormatException e) {
             return e.getMessage();
         }
 

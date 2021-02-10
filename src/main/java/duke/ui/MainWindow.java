@@ -55,8 +55,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = this.userInput.getText();
-
-        this.duke.execute(input);
         String response = this.duke.getResponse(input);
 
         this.dialogContainer.getChildren().addAll(

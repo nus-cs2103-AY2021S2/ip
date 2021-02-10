@@ -25,27 +25,20 @@ public class Duke {
     }
 
     /**
-     * Executes the command w.r.t. the users' input.
-     *
-     * @param input A line of raw user input.
-     */
-    public void execute(String input) {
-        Command command = this.getCommand(input);
-        command.execute(this.tasks);
-
-        if (command instanceof ByeCommand) {
-            this.storage.saveTasks(this.tasks);
-        }
-    }
-
-    /**
-     * Computes a response to display to the users w.r.t. the users' input.
+     * Executes the command and computes a response to display to the users w.r.t.
+     * the users' input.
      *
      * @param input A line of raw user input.
      * @return A <code>String</code> of response.
      */
     public String getResponse(String input) {
         Command command = this.getCommand(input);
+        command.execute(this.tasks);
+
+        if (command instanceof ByeCommand) {
+            this.storage.saveTasks(this.tasks);
+        }
+
         return command.getResponse(this.tasks);
     }
 
