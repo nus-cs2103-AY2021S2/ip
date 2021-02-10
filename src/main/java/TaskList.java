@@ -23,20 +23,20 @@ public class TaskList {
      *           and will thus be used to obtain the remaining lines.
      */
 
-    public static void createTask(String input, Scanner sc, ArrayList<Task> lst) {
+    public static void createTask(String input, Scanner sc, ArrayList<Task> list) {
         Storage store = new Storage();
         String home = store.getHome();
         String file = store.getDefaultFilePath();
         if (input.equals("list")) {
             System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < lst.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 int count = i + 1;
-                Task a = lst.get(i);
+                Task a = list.get(i);
                 System.out.println(count + ". " + a);
             }
         } else if (input.equals("done")) {
             int tag = sc.nextInt() - 1;
-            Task d = lst.get(tag);
+            Task d = list.get(tag);
             d.markAsDone();
             System.out.println("Nice! I've marked this task as done: ");
             System.out.println(d + "\n");
@@ -62,8 +62,8 @@ public class TaskList {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            for (int i = 0; i < lst.size(); i++) {
-                Task t = lst.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                Task t = list.get(i);
                 if (i != tag) {
                     try {
                         store.appendToFile(file, sf.nextLine() + "\n");
@@ -87,9 +87,9 @@ public class TaskList {
             }
         } else if (input.equals("delete")) {
             int tag = sc.nextInt() - 1;
-            int len = lst.size() - 1;
+            int len = list.size() - 1;
             System.out.println("Noted. I've removed this task:");
-            System.out.println("\t" + lst.get(tag));
+            System.out.println("\t" + list.get(tag));
             System.out.println("Now you have " + len + " tasks in the list.\n");
 
             String temp = home + File.separator + "temp.txt";
@@ -128,13 +128,13 @@ public class TaskList {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            lst.remove(tag);
+            list.remove(tag);
         } else if (input.equals("todo")) {
             String task = sc.nextLine();
             try {
                 Todo td = Todo.makeTodo(task);
-                lst.add(td);
-                int len = lst.size();
+                list.add(td);
+                int len = list.size();
                 System.out.println("Got it. I've added this task:");
                 System.out.println("\t" + td);
                 System.out.println("Now you have " + len + " tasks in the list.\n");
@@ -151,8 +151,8 @@ public class TaskList {
             String line = sc.nextLine();
             try {
                 Deadline dl = Deadline.makeDeadline(line);
-                lst.add(dl);
-                int len = lst.size();
+                list.add(dl);
+                int len = list.size();
                 System.out.println("Got it. I've added this task:");
                 System.out.println("\t" + dl);
                 System.out.println("Now you have " + len + " tasks in the list.");
@@ -168,8 +168,8 @@ public class TaskList {
             String line = sc.nextLine();
             try {
                 Event event = Event.makeEvent(line);
-                lst.add(event);
-                int len = lst.size();
+                list.add(event);
+                int len = list.size();
                 System.out.println("Got it. I've added this task:");
                 System.out.println("\t" + event);
                 System.out.println("Now you have " + len + " tasks in the list.");
@@ -185,8 +185,8 @@ public class TaskList {
             String keyword = sc.next();
             int matchCount = 0;
             ArrayList<Integer> num = new ArrayList<>();
-            for (int i = 0; i < lst.size(); i++) {
-                String taskDes = lst.get(i).des;
+            for (int i = 0; i < list.size(); i++) {
+                String taskDes = list.get(i).des;
                 if (taskDes.toLowerCase().indexOf(keyword.toLowerCase()) != -1) {
                     num.add(i);
                     matchCount++;
@@ -195,7 +195,7 @@ public class TaskList {
             if (matchCount != 0) {
                 System.out.println("Here are the matching tasks in your list:");
                 for (int j = 0; j < num.size(); j++) {
-                    System.out.println(lst.get(num.get(j)));
+                    System.out.println(list.get(num.get(j)));
                 }
             } else {
                 System.out.println("There are no tasks matching this keyword :-(");
@@ -205,21 +205,21 @@ public class TaskList {
         }
     }
 
-    public static String guiTask(String[] input, ArrayList<Task> lst) {
+    public static String guiTask(String[] input, ArrayList<Task> list) {
         Storage store = new Storage();
         String home = store.getHome();
         String file = store.getDefaultFilePath();
         if (input[0].equals("list")) {
             String output = "Here are the tasks in your list\n";
-            for (int i = 0; i < lst.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 int count = i + 1;
-                Task a = lst.get(i);
+                Task a = list.get(i);
                 output = output + count + ". " + a + "\n";
             }
             return output;
         } else if (input[0].equals("done")) {
             int tag = Integer.parseInt(input[1]) - 1;
-            Task d = lst.get(tag);
+            Task d = list.get(tag);
             d.markAsDone();
             String output = "Nice! I've marked this task as done: \n";
             output = output + d + "\n";
@@ -245,8 +245,8 @@ public class TaskList {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            for (int i = 0; i < lst.size(); i++) {
-                Task t = lst.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                Task t = list.get(i);
                 if (i != tag) {
                     try {
                         store.appendToFile(file, sf.nextLine() + "\n");
@@ -271,11 +271,11 @@ public class TaskList {
             return output;
         } else if (input[0].equals("delete")) {
             int tag = Integer.parseInt(input[1]) - 1;
-            int len = lst.size() - 1;
+            int len = list.size() - 1;
             String output = "Noted. I've removed this task:\n";
-            output = output + "\t" + lst.get(tag) + "\n";
+            output = output + "\t" + list.get(tag) + "\n";
             output = output + "Now you have " + len + "tasks in the list. \n";
-            lst.remove(tag);
+            list.remove(tag);
 
             String temp = home + File.separator + "temp.txt";
             //create temp file
@@ -325,8 +325,8 @@ public class TaskList {
             }
             try {
                 Todo td = Todo.makeTodo(task);
-                lst.add(td);
-                int len = lst.size();
+                list.add(td);
+                int len = list.size();
                 String output = "Got it. I've added this task: \n";
                 output = output + "\t" + td + "\n";
                 output = output + "Now you have " + len + " tasks in the list.\n";
@@ -350,8 +350,8 @@ public class TaskList {
             }
             try {
                 Deadline dl = Deadline.makeDeadline(line);
-                lst.add(dl);
-                int len = lst.size();
+                list.add(dl);
+                int len = list.size();
                 String output = "Got it. I've added this task:\n";
                 output = output + "\t" + dl + "\n";
                 output = output+ "Now you have " + len + " tasks in the list.\n";
@@ -375,8 +375,8 @@ public class TaskList {
             }
             try {
                 Event event = Event.makeEvent(line);
-                lst.add(event);
-                int len = lst.size();
+                list.add(event);
+                int len = list.size();
                 String output = "Got it. I've added this task:\n";
                 output = output + "\t" + event + "\n";
                 output = output+ "Now you have " + len + " tasks in the list.\n";
@@ -393,8 +393,8 @@ public class TaskList {
             String keyword = input[1];
             int matchCount = 0;
             ArrayList<Integer> num = new ArrayList<>();
-            for (int i = 0; i < lst.size(); i++) {
-                String taskDes = lst.get(i).des;
+            for (int i = 0; i < list.size(); i++) {
+                String taskDes = list.get(i).des;
                 if (taskDes.toLowerCase().indexOf(keyword.toLowerCase()) != -1) {
                     num.add(i);
                     matchCount++;
@@ -403,7 +403,7 @@ public class TaskList {
             if (matchCount != 0) {
                 String output = "Here are the matching tasks in your list:\n";
                 for (int j = 0; j < num.size(); j++) {
-                    output = output + lst.get(num.get(j)) + "\n";
+                    output = output + list.get(num.get(j)) + "\n";
                 }
                 return output;
             } else {
