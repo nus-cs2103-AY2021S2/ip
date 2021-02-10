@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Calls the task manager to delete a specified task from  the list upon receiving a user input that attempts
+     * Calls the task manager to delete a specified task from the list upon receiving a user input that attempts
      * to delete a task from the list.
      *
      * @param taskList A TaskList object containing the list of tasks which the program currently has.

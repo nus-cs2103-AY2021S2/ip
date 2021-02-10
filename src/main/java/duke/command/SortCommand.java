@@ -25,8 +25,8 @@ public class SortCommand extends Command {
     }
 
     /**
-     * Calls the task manager to delete a specified task from  the list upon receiving a user input that attempts
-     * to delete a task from the list.
+     * Calls the task manager to sort the task ist upon receiving a user input that attempts to sort the list.
+     * The default mode of sorting is by alphabetical ordering of the tasks.
      *
      * @param taskList A TaskList object containing the list of tasks which the program currently has.
      * @param ui A Ui object which the current program is using to manage interactions with the user.
@@ -34,7 +34,13 @@ public class SortCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
-        taskList.sortTasksByTypeAndDate();
+        if (command.contains("date")) {
+            taskList.sortTasksByTypeAndDate();
+        } else if (command.contains("type")) {
+            taskList.sortTasksByType();
+        } else {
+            taskList.sortTasksByName();
+        }
 
         String output = "Tasks sorted!";
         System.out.println(output);
@@ -50,4 +56,5 @@ public class SortCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }
