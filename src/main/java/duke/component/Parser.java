@@ -54,7 +54,7 @@ public class Parser {
     /**
      * Creates a new AddCommand for Deadline.
      * @param command
-     * @return corresponding AddComand
+     * @return corresponding AddCommand
      * @throws WrongFormatException
      * @throws EmptyDescriptionException
      */

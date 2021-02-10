@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -11,7 +12,7 @@ public class ExitCommand extends Command {
      * @param ui
      * @param storage
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.showBye();
+    public DukeResponse execute(TaskList taskList, Ui ui, Storage storage) {
+        return new DukeResponse(ui.showBye(), true);
     }
 }

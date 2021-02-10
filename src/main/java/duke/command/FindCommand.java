@@ -2,6 +2,7 @@ package duke.command;
 
 import java.util.ArrayList;
 
+import duke.DukeResponse;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -24,13 +25,13 @@ public class FindCommand extends Command {
      * @param ui
      * @param storage
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public DukeResponse execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<Task>();
         for (Task t : taskList.getTasks()) {
             if (t.getName().contains(this.keyword)) {
                 tasks.add(t);
             }
         }
-        return ui.showFound(tasks);
+        return new DukeResponse(ui.showFound(tasks));
     }
 }

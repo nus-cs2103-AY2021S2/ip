@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeResponse;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
@@ -22,8 +23,8 @@ public class AddCommand extends Command {
      * @param ui
      * @param storage
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public DukeResponse execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.getTasks().add(this.task);
-        return ui.showAdd(this.task, taskList);
+        return new DukeResponse(ui.showAdd(this.task, taskList));
     }
 }

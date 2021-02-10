@@ -17,17 +17,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke() {
-        this.ui = new Ui();
-        this.storage = new Storage("data/duke.txt");
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException | IOException e) {
-            ui.showLoadingError(e);
-            tasks = new TaskList();
-        }
-    }
-
     /**
      * Creates a new Duke instance.
      * @param filePath file path
@@ -38,16 +27,24 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
-            ui.showLoadingError(e);
             tasks = new TaskList();
+            e.printStackTrace();
         }
     }
 
-    public String getResponse(String input)
-            throws UnknownCommandException, WrongFormatException, EmptyDescriptionException, IOException {
-        Command c = Parser.parse(input);
-        String msg = c.execute(tasks, ui, storage);
-        storage.save(tasks);
-        return msg;
+    public DukeResponse getResponse(String input) {
+        Command c;
+        try {
+            c = Parser.parse(input);
+        } catch (UnknownCommandException | EmptyDescriptionException | WrongFormatException e) {
+            return new DukeResponse(e.getMessage());
+        }
+        DukeResponse response = c.execute(tasks, ui, storage);
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            return new DukeResponse(e.getMessage());
+        }
+        return response;
     }
 }

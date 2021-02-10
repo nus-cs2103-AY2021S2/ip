@@ -1,5 +1,6 @@
 package duke.controller;
 
+import duke.DukeResponse;
 import duke.component.Ui;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.UnknownCommandException;
@@ -35,9 +36,9 @@ public class MainWindow extends AnchorPane {
     private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
-    public void initialize() throws UnknownCommandException, WrongFormatException, EmptyDescriptionException, IOException {
+    public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Welcome", DUKE_IMAGE));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Ui().showWelcome(), DUKE_IMAGE));
     }
 
     public void setDuke(Duke d) {
@@ -51,11 +52,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws UnknownCommandException, WrongFormatException, EmptyDescriptionException, IOException {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        DukeResponse response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, USER_IMAGE),
-                DialogBox.getDukeDialog(response, DUKE_IMAGE)
+                DialogBox.getDukeDialog(response.getResponse(), DUKE_IMAGE)
         );
         userInput.clear();
+        if (response.getIsExit()) {
+            System.exit(0);
+        }
     }
 }

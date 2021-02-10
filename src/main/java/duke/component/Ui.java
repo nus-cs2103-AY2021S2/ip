@@ -1,7 +1,6 @@
 package duke.component;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.task.Task;
 
@@ -85,20 +84,5 @@ public class Ui {
             result += i + "." + tasks.get(i - 1).toString() + "\n";
         }
         return result;
-    }
-
-    /**
-     * Prints loading error message.
-     */
-    public String showLoadingError(Exception e) {
-        return e.getMessage();
-    }
-
-    /**
-     * Prints error message.
-     * @param msg
-     */
-    public String showError(String msg) {
-        return msg;
     }
 }
