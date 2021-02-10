@@ -1,7 +1,6 @@
 package jaryl.duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Output handles I/O, interactions with user
@@ -104,7 +103,7 @@ public class Output {
 
         for(int i = 1; i <= tasksList.size(); i++) {
             Task task = tasksList.get(i - 1);
-            sb.append(i + ". " + task + "\n");
+            sb.append(i).append(". ").append(task).append("\n");
         }
 
         return sb.toString();
