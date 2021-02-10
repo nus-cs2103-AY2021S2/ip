@@ -1,7 +1,5 @@
 package task;
 
-import misc.Color;
-
 /**
  * task.Task object.
  */
