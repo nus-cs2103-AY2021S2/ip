@@ -1,0 +1,90 @@
+package kobe;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+public class KobeN{
+    private Storage storage;
+    private TaskList tasks; //ArrayList<Tasks> tasks
+    private Ui ui;
+    private static final String HOME = System.getProperty("user.home");
+
+    public KobeN() {}
+
+    /**
+     * Initialises Kobe.
+     */
+    public KobeN(String filePath) {
+        ui = new Ui();
+        tasks = new TaskList();
+        storage = new Storage(filePath, tasks, ui);
+    }
+
+    /**
+     * Main method. Allows Kobe to run.
+     */
+    public static void main(String[] args) {
+        Path path = Paths.get(HOME + "/ip/src/main/data/kobe.txt");
+        String pathName = HOME + "/ip/src/main/data/kobe.txt";
+        new KobeN(pathName).run();
+    }
+
+    /**
+     * Runs Kobe, ready to accept commands typed into the command line.
+     */
+    public void run() {
+        //Scanner things
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            while (sc.hasNext()) {
+                //Read the whole line, dissect each command word, including the condition after "/"
+                String command = sc.nextLine();
+
+                //---Parser---
+                Parser.readInput(command, tasks, storage, ui);
+            }
+        } catch (CustomExceptions.IncompleteDecriptionException e) {
+            System.out.println(e);
+        } catch (CustomExceptions.IncorrectDecriptionException e) {
+            System.out.println(e);
+        }
+        sc.close();
+    }
+
+    /**
+     * The user input is a command that is processed, and the corresponding line that
+     * Kobe is suppose to respond with is obtained in this method.
+     *
+     * @param input
+     * @return
+     */
+    public String getResponse(String input) {
+        try {
+            Parser.readInput(input, tasks, storage, ui);
+        } catch (CustomExceptions.IncompleteDecriptionException e) {
+//            System.out.println(e);
+            e.printStackTrace(); //Unwraps cause within InvocationTargetException
+            //Since the reflection layer will wrap any exception in an InvocationTargetException
+        } catch (CustomExceptions.IncorrectDecriptionException e) {
+//            System.out.println(e);
+            e.printStackTrace();
+        } finally {
+            return "Kobe heard: " + input;
+        }
+    }
+}
