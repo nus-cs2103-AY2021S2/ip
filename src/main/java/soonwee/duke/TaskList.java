@@ -1,6 +1,7 @@
 package soonwee.duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents a TaskList instance. A TaskList instance will contain a list of
@@ -111,10 +112,19 @@ public class TaskList {
 
     public String displayTasks() {
         String result = new String();
+        if (tasksList.size() == 0) {
+            result = "There is no tasks found. Please add a task!";
+            return result;
+        }
         result = result + "Here are the tasks in your list: \n";
         for (int i = 0; i < tasksList.size(); i++) {
             result = result + String.valueOf(i + 1) + ". " + tasksList.get(i) + "\n";
 	    }
         return result;
+    }
+
+    public String sortTaskListByDateTime() {
+        Collections.sort(tasksList, new DateTimeComparator());
+        return displayTasks();
     }
 }

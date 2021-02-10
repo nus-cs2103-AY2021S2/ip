@@ -35,6 +35,8 @@ public class Duke {
                 return text;
             }
             result = storage.taskList.searchRelatedText(text) + "\n";
+        } else if (input.equals("sort")) { //Sort by date
+            result = storage.taskList.sortTaskListByDateTime();
         } else {
             result = performTaskCheck(storage.taskList, input);
             storage.writeFile();

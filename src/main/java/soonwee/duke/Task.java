@@ -1,5 +1,7 @@
 package soonwee.duke;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a Task instance.
  */
@@ -23,6 +25,10 @@ public class Task {
      */
     public void setCompleted(){
         this.isCompleted = true;
+    }
+
+    public LocalDateTime getDateTime() {
+        return null;
     }
 
     @Override
