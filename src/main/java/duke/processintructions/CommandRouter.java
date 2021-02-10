@@ -9,6 +9,9 @@ import duke.ui.Ui;
 public class CommandRouter {
     private boolean isExit;
 
+    private static final String ERROR_WITH_USER_INPUT = "Oops, that is not a command I support.";
+    private static final String ERROR_WITH_DEV_CODE = "Internal error in code.";
+
     public CommandRouter() {
         isExit = false;
     }
@@ -28,34 +31,34 @@ public class CommandRouter {
         switch (command) {
         case LIST:
             return logic.list(tasks.getList());
-            // break intentionally omitted
+        // break intentionally omitted
         case DONE:
             return logic.done(input, tasks.getList());
-            // break intentionally omitted
+        // break intentionally omitted
         case TODO:
             return logic.todo(input, tasks.getList());
-            // break intentionally omitted
+        // break intentionally omitted
         case DEADLINE:
             return logic.deadline(input, tasks.getList());
-            // break intentionally omitted
+        // break intentionally omitted
         case EVENT:
             return logic.event(input, tasks.getList());
-            // break intentionally omitted
+        // break intentionally omitted
         case DELETE:
             return logic.delete(input, tasks.getList());
-            // break intentionally omitted
+        // break intentionally omitted
         case FIND:
             return logic.find(input, tasks.getList());
-            // break intentionally omitted
+        // break intentionally omitted
         case ERROR:
-            return ("Oops, that is not a command I support.");
-            // break intentionally omitted
+            return ERROR_WITH_USER_INPUT;
+        // break intentionally omitted
         case BYE:
             isExit = true;
             return ui.exitMessage();
-            // break intentionally omitted
+        // break intentionally omitted
         default:
-            return ("Internal error in code.");
+            return ERROR_WITH_DEV_CODE;
         }
     }
 

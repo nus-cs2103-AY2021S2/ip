@@ -13,9 +13,7 @@ public class Ui {
      * @return The welcome message to be printed at the start.
      */
     public String greetingMessage() {
-        return "Welcome back Max"
-                + "\n"
-                + "What can I do for you?\n";
+        return "Welcome back Max!\nWhat can I do for you?\n";
     }
 
     /**

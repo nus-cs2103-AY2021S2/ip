@@ -28,7 +28,16 @@ public class Event extends Task {
      * @return String of Event when saving.
      */
     public String saveString() {
-        return isDone ? "E --- 1 --- " + description + " --- " + at : "E --- 0 --- " + description + " --- " + at;
+        String separatorFormatString = " --- ";
+        String eventDetails = description + separatorFormatString + at;
+
+        String eventDoneRepresentation = "E --- 1 --- ";
+        String eventDoneString = eventDoneRepresentation + eventDetails;
+
+        String eventNotDoneRepresentation = "E --- 0 --- ";
+        String eventNotDoneString = eventNotDoneRepresentation + eventDetails;
+
+        return isDone ? eventDoneString : eventNotDoneString;
     }
 
     /**

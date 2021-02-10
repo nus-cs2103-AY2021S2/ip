@@ -28,10 +28,7 @@ public class Storage {
             Scanner sc = new Scanner(f);
 
             if (!f.exists()) {
-                if (f.createNewFile())
-                    System.out.println("File created");
-                else
-                    System.out.println("File already exists");
+                f.createNewFile();
                 return "";
             } else {
                 String s = "";

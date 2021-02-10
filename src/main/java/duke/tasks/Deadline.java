@@ -27,7 +27,16 @@ public class Deadline extends Task {
      * @return String of Deadline when saving.
      */
     public String saveString() {
-        return isDone ? "D --- 1 --- " + description + " --- " + by : "D --- 0 --- " + description + " --- " + by;
+        String separatorFormatString = " --- ";
+        String deadlineDetails = description + separatorFormatString + by;
+
+        String deadlineDoneRepresentation = "D --- 1 --- ";
+        String deadlineDoneString = deadlineDoneRepresentation + deadlineDetails;
+
+        String deadlineNotDoneRepresentation = "D --- 0 --- ";
+        String deadlineNotDoneString = deadlineNotDoneRepresentation + deadlineDetails;
+
+        return isDone ? deadlineDoneString : deadlineNotDoneString;
     }
 
     /**

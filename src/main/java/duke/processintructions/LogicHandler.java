@@ -18,29 +18,35 @@ public class LogicHandler {
      * @param list List of tasks.
      */
     public String list(List<Task> list) {
-        // Check if the command is list and display the list of duke.tasks.
-        String temp = "";
+        // If the command is list, display the list of tasks.
+        int indexOfLastItem = list.size() - 1;
+
+        String listOfTasksAsString = "";
 
         for (int i = 0; i < list.size(); i++) {
-            temp += String.format("%d. %s", i + 1, list.get(i));
-            if (i != list.size() - 1) {
-                temp += "\n";
+            String numberedTask = String.format("%d. %s", i + 1, list.get(i));
+            listOfTasksAsString += numberedTask;
+
+            if (i == indexOfLastItem) {
+                continue;
             }
+
+            listOfTasksAsString += "\n";
         }
-        return temp;
+        return listOfTasksAsString;
     }
 
     /**
      * Updates the isDone status of a task of a specified index to true.
+     *
      * @param input String input of user.
      * @param list List of tasks.
      */
     public String done(String input, List<Task> list) {
         try {
-            int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
-
+            int itemNumber = getItemIndex(input);
             list.get(itemNumber).setIsDone();
-            return "Nice! I've marked this task as done:\n" + list.get(itemNumber);
+            return successMessage(itemNumber, list);
         } catch (ArrayIndexOutOfBoundsException e) {
             return ("Oops, your done command should have a task number behind.");
         } catch (NumberFormatException e) {
@@ -48,6 +54,14 @@ public class LogicHandler {
         } catch (IndexOutOfBoundsException e) {
             return ("Oops, your done command included an invalid index in the task list.");
         }
+    }
+
+    private String successMessage(int itemNumber, List<Task> list) {
+        return "Nice! I've marked this task as done:\n" + list.get(itemNumber);
+    }
+
+    private int getItemIndex(String input) {
+        return Integer.valueOf(input.split(" ")[1]) - 1;
     }
 
     /**

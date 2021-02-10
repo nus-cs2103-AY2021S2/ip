@@ -5,6 +5,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -13,6 +14,9 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private List<Task> list;
+    private List<String> listOfTaskInString = new ArrayList<>();
+
+    private static final String STRING_SEPARATOR = "\\s*---\\s*";
 
     public TaskList() {
         this.list = new ArrayList<Task>();
@@ -25,27 +29,77 @@ public class TaskList {
      * @param data String of user's input.
      */
     public void dataInput(String data) {
-        String[] ArrayOfTasksFromLoad = data.split("\n");
+        convertDataIntoStringsOfTask(data);
+        updateListWithConvertedData();
+    }
 
-        for (String taskInStringForm : ArrayOfTasksFromLoad) {
-            String[] currValues = taskInStringForm.split("\\s*---\\s*");
-            switch (currValues[0]) {
+    private void convertDataIntoStringsOfTask(String data) {
+        String[] ArrayOfTasksFromLoad = data.split("\n");
+        listOfTaskInString = Arrays.asList(ArrayOfTasksFromLoad);
+    }
+
+    private void updateListWithConvertedData() {
+        for (String taskInStringForm : listOfTaskInString) {
+            String[] taskValues = separateTaskIntoIndividualValues(taskInStringForm);
+
+            String typeOfTask = getTypeOfTask(taskValues);
+            String taskDescription = getTaskDescription(taskValues);
+            boolean taskIsDone = getTaskIsDoneState(taskValues);
+            String taskDate = getTaskDate(taskValues);
+
+            switch (typeOfTask) {
             case "T":
-                Todo t = new Todo(currValues[2], currValues[1].equals("1"));
-                list.add(t);
+                addTodoToList(taskDescription, taskIsDone);
                 break;
             case "D":
-                Deadline d = new Deadline(currValues[2], currValues[1].equals("1"), currValues[3]);
-                list.add(d);
+                addDeadlineToList(taskDescription, taskIsDone, taskDate);
                 break;
             case "E":
-                Event e = new Event(currValues[2], currValues[1].equals("1"), currValues[3]);
-                list.add(e);
+                addEventToList(taskDescription, taskIsDone, taskDate);
                 break;
             default:
-                System.out.println("Error with the written file.");
+                printErrorMessage();
             }
         }
+    }
+
+    private void printErrorMessage() {
+        System.out.println("Error with the written file.");
+    }
+
+    private void addEventToList(String taskDescription, boolean taskIsDone, String taskDate) {
+        Event e = new Event(taskDescription, taskIsDone, taskDate);
+        list.add(e);
+    }
+
+    private void addDeadlineToList(String taskDescription, boolean taskIsDone, String taskDate) {
+        Deadline d = new Deadline(taskDescription, taskIsDone, taskDate);
+        list.add(d);
+    }
+
+    private void addTodoToList(String taskDescription, boolean taskIsDone) {
+        Todo t = new Todo(taskDescription, taskIsDone);
+        list.add(t);
+    }
+
+    private String[] separateTaskIntoIndividualValues(String taskInStringForm) {
+        return taskInStringForm.split(STRING_SEPARATOR);
+    }
+
+    private String getTaskDate(String[] taskValues) {
+        return taskValues[3];
+    }
+
+    private boolean getTaskIsDoneState(String[] taskValues) {
+        return taskValues[1].equals("1");
+    }
+
+    private String getTypeOfTask(String[] taskValues) {
+        return taskValues[0];
+    }
+
+    private String getTaskDescription(String[] taskValues) {
+        return taskValues[2];
     }
 
     /**
