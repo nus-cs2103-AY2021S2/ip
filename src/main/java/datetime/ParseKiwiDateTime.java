@@ -42,6 +42,8 @@ class ParseKiwiDateTime {
     how about no whitespace? how to know time string or date string? - contain date-delimiters or time-delimiters2 "/"
     haa
     hhaa
+    hh aa
+    hh:mm aa
      */
 
     // entry function
