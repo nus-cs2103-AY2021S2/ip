@@ -5,8 +5,10 @@ import java.time.format.DateTimeFormatter;
  * Class that can create a event task object.
  */
 public class Event extends Task {
-    private LocalDate startDateInfo;
-    private LocalDate endDateInfo;
+    private static final String EVENT_DISPLAY_ICON = "[E]";
+    public static final String EVENT_DATA_ICON = "E";
+    private final LocalDate startDateInfo;
+    private final LocalDate endDateInfo;
 
     /**
      * Constructor that creates a event task.
@@ -23,16 +25,18 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " ("
+        return EVENT_DISPLAY_ICON + super.toString() + " ("
                 + startDateInfo.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " to "
                 + endDateInfo.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 
     public String getData() {
-        if (isDone == true) {
-            return "E!@#1!@#" + taskInfo + "!@#" + startDateInfo + "!@#" + endDateInfo;
+        if (isDone) {
+            return EVENT_DATA_ICON + DELIMITER + IS_DONE_TRUE_DATA_ICON + DELIMITER + taskInfo
+                    + DELIMITER + startDateInfo + DELIMITER + endDateInfo;
         } else {
-            return "E!@#0!@#" + taskInfo + "!@#" + startDateInfo + "!@#" + endDateInfo;
+            return EVENT_DATA_ICON + DELIMITER + IS_DONE_FALSE_DATA_ICON + DELIMITER + taskInfo
+                    + DELIMITER + startDateInfo + DELIMITER + endDateInfo;
         }
     }
 }

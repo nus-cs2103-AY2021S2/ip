@@ -11,8 +11,8 @@ import javafx.scene.layout.HBox;
  * user interface.
  */
 public class DialogBox extends HBox {
-    private Label text;
-    private ImageView displayPicture;
+    private final Label text;
+    private final ImageView displayPicture;
 
     /**
      * Constructor that creates a DialogBox object.

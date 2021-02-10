@@ -3,8 +3,13 @@
  * object.
  */
 public abstract class Task {
+    public static final String DELIMITER = "!@#";
+    private static final String IS_DONE_TRUE_DISPLAY_ICON = "[X]";
+    private static final String IS_DONE_FALSE_DISPLAY_ICON = "[ ]";
+    public static final String IS_DONE_TRUE_DATA_ICON = "1";
+    protected static final String IS_DONE_FALSE_DATA_ICON = "0";
     protected Boolean isDone;
-    protected String taskInfo;
+    protected final String taskInfo;
 
     /**
      * Constructor that creates a task object.
@@ -17,13 +22,11 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        String s = "";
         if (isDone) {
-            s = "[X] ";
+            return IS_DONE_TRUE_DISPLAY_ICON + " " + taskInfo;
         } else {
-            s = "[ ] ";
+            return IS_DONE_FALSE_DISPLAY_ICON + " " + taskInfo;
         }
-        return s + taskInfo;
     }
 
     /**
