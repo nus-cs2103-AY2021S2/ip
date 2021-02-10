@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TaskList {
 
-    public ArrayList<Task> storage;
+    private ArrayList<Task> storage;
 
     public TaskList() {
         this.storage = new ArrayList<Task>();
@@ -50,14 +50,11 @@ public class TaskList {
         if (value <= 0 || value > storage.size()) {
             throw new DukeException("No such list item.");
         }
-        System.out.println("OK. TASK REMOVED.");
-        System.out.println(storage.get(value - 1));
-        storage.remove(value - 1);
-        System.out.println("Now you have " + storage.size() + " tasks in the list.");
-        System.out.println();
         output += "OK. TASK REMOVED.\n"
                 + storage.get(value - 1)
+                + "\n"
                 + "Now you have " + storage.size() + " tasks in the list.";
+        storage.remove(value - 1);
         return output;
     }
 
@@ -76,5 +73,9 @@ public class TaskList {
             }
         }
         return output;
+    }
+
+    ArrayList<Task> getStorage() {
+        return this.storage;
     }
 }

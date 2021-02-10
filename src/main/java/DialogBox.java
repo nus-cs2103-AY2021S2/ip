@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -54,6 +55,20 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        return db;
+    }
+
+    private void setWelcomeSettings() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
+        this.setStyle("-fx-background-color: #121212;");
+    }
+
+    public static DialogBox welcomeMessage(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.setWelcomeSettings();
         return db;
     }
 }

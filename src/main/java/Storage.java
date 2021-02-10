@@ -3,8 +3,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.List;
 /**
  * Class that sets up the save/load system in project Duke.
  */
@@ -33,17 +34,13 @@ public class Storage {
      * @param store the current tasklist of the user
      */
     public void saveFile(TaskList store) {
+        ArrayList<Task> storage = store.getStorage();
         try {
             String save = "";
-            for (int i = 0; i < store.storage.size(); i++) {
-                save += store.storage.get(i).getData() + "\n";
+            for (int i = 0; i < storage.size(); i++) {
+                save += storage.get(i).getData() + "\n";
             }
-            save = save.replaceAll("\u2713", "1");
-            save = save.replaceAll("\u2718", "0");
-            save = save.replaceAll("\\[", "");
-            save = save.replaceAll("]", "");
-            save = save.replaceAll("\\(", "");
-            save = save.replaceAll("\\)", "");
+            save = reformatString(save);
             Files.writeString(Paths.get("data/saveFile.txt"), save);
         } catch (IOException E) {
             System.out.println(E.getMessage() + "IO Exception.");
@@ -54,26 +51,27 @@ public class Storage {
      * Function that loads the file from previous usages of the chatbot Duke.
      */
     public void loadFile(TaskList store) {
+        ArrayList<Task> storage = store.getStorage();
         try {
             List<String> contents = Files.readAllLines(Paths.get("data/saveFile.txt"));
-            store.storage.clear();
+            storage.clear();
             for (int i = 0; i < contents.size(); i++) {
                 char type = contents.get(i).charAt(0);
-                char isDone = contents.get(i).charAt(1);
-                boolean status = isDone == '1';
+                char status = contents.get(i).charAt(1);
+                boolean isDone = status == '1';
                 String rest = contents.get(i).substring(2);
                 rest = rest.replaceFirst("^\\s*", " ");
                 switch (type) {
                 case 'T':
-                    store.storage.add(new ToDo(rest, status));
+                    storage.add(new ToDo(rest, isDone));
                     break;
                 case 'D':
                     String[] restD1 = rest.split("by:");
-                    store.storage.add(new Deadline(restD1[0], status, restD1[1]));
+                    storage.add(new Deadline(restD1[0], isDone, restD1[1]));
                     break;
                 case 'E':
                     String[] restE1 = rest.split("at:");
-                    store.storage.add(new Event(restE1[0], status, restE1[1]));
+                    storage.add(new Event(restE1[0], isDone, restE1[1]));
                     break;
                 default:
                     break;
@@ -82,5 +80,16 @@ public class Storage {
         } catch (IOException E) {
             System.out.println(E.getMessage() + "IO Exception.");
         }
+    }
+
+    public String reformatString(String string) {
+        String save = string;
+        save = save.replaceAll("\u2713", "1");
+        save = save.replaceAll("\u2718", "0");
+        save = save.replaceAll("\\[", "");
+        save = save.replaceAll("]", "");
+        save = save.replaceAll("\\(", "");
+        save = save.replaceAll("\\)", "");
+        return save;
     }
 }

@@ -4,8 +4,8 @@ import java.time.temporal.ChronoUnit;
 
 public class Event extends Task {
 
-    protected char type;
-    public LocalDate at;
+    private char type;
+    private LocalDate at;
 
     public Event(String task, String at) {
         super(task);

@@ -35,6 +35,6 @@ public class Skeleton {
 
     public String getResponse(String input) {
         String output = parser.readCommands(tasks, storage, input);
-        return "COMMAND RECEIVED! + \n" + output;
+        return "COMMAND RECEIVED!" + "\n" + output;
     }
 }

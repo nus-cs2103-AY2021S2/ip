@@ -6,9 +6,9 @@
 
 public class Task {
 
-    protected String description;
-    protected boolean isDone;
-    protected char type;
+    private String description;
+    private boolean isDone;
+    private char type;
 
     public Task(String description, boolean isDone) {
         this.description = description;

@@ -1,5 +1,7 @@
 public class ToDo extends Task{
+
     protected char type;
+
     public ToDo(String task) {
         super(task);
         this.type = 'T';

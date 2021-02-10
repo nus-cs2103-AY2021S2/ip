@@ -1,5 +1,6 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -20,12 +21,16 @@ public class MainWindow extends AnchorPane {
 
     private Skeleton skeleton;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DiamondHands.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image welcomeImage = new Image(this.getClass().getResourceAsStream("/images/CrazyDiamond.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        // welcome message
+        DialogBox welcomeMessage = DialogBox.welcomeMessage("Welcome Ape. How can I help you?", welcomeImage);
+        dialogContainer.getChildren().addAll(welcomeMessage);
     }
 
     public void setSkeleton(Skeleton s) {

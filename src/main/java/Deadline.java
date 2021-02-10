@@ -4,8 +4,8 @@ import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task {
 
-    public LocalDate by;
-    protected char type;
+    private LocalDate by;
+    private char type;
 
     public Deadline(String task, String by) {
         super(task);
