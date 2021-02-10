@@ -17,10 +17,12 @@ public class MessageFormatter {
      * @return A String that lets the user know which task was added, as well as the
      *          current size of the list of tasks.
      */
-    public String formatAddCmdMsg(Task taskAdded, TaskList tasks) {
+    public String formatAddMsg(Task taskAdded, TaskList tasks) {
         return ("Got it. I've added this task:\n" + taskAdded +
                 "\nYou have " +
-                tasks.getSize() + (tasks.getSize() == 1 ? " task" : " tasks") + " in your list");
+                tasks.getSize() +
+                (tasks.getSize() == 1 ? " task" : " tasks") +
+                " in your list");
     }
 
     /**
@@ -31,10 +33,12 @@ public class MessageFormatter {
      * @return A String that lets the user know which task was deleted, as well as the
      *          current size of the list of tasks.
      */
-    public String formatRemoveCmdMsg(Task taskRemoved, TaskList tasks) {
-        return ("I've removed this task:\n" + taskRemoved +
+    public String formatRemoveMsg(Task taskRemoved, TaskList tasks) {
+        return ("I've removed this task:\n" +
+                taskRemoved +
                 "\nYou have " +
-                tasks.getSize() + (tasks.getSize() == 1 ? " task" : " tasks") + " in your list");
+                tasks.getSize() + (tasks.getSize() == 1 ? " task" : " tasks") +
+                " in your list");
     }
 
     /**
@@ -43,8 +47,9 @@ public class MessageFormatter {
      * @param taskDone The task that was set as completed.
      * @return A String that lets the user know which task was set as completed.
      */
-    public String formatDoneCmdMsg(Task taskDone) {
-        return ("Nice! I have marked this task as done:\n" + taskDone);
+    public String formatDoneMsg(Task taskDone) {
+        return ("Nice! I have marked this task as done:\n" +
+                taskDone);
     }
 
     /**
@@ -54,7 +59,7 @@ public class MessageFormatter {
      * @param matchingTasks A list of tasks that matches the keyword provided by the user.
      * @return A String that displays all the tasks that matches the keyword provided.
      */
-    public String formatFindCmdMsg(TaskList matchingTasks) {
+    public String formatFindMsg(TaskList matchingTasks) {
         if (matchingTasks.getSize() == 0) {
             return "There are no tasks with such keyword!";
         }
@@ -73,7 +78,7 @@ public class MessageFormatter {
      * @param allTasks All tasks of the user.
      * @return A String that displays all tasks of the user.
      */
-    public String formatListCmdMsg(TaskList allTasks) {
+    public String formatListMsg(TaskList allTasks) {
         if (allTasks.getSize() == 0) {
             return "There are no tasks to display!";
         }
@@ -82,8 +87,9 @@ public class MessageFormatter {
         int count = 1;
         while (iterator.hasNext()) {
             Task task = iterator.next();
-            msg += (count + "\t" + count + "." +  task
-                    + (iterator.hasNext() ? "\n" : ""));
+            msg += ("\t" + count + "." +
+                    task +
+                    (iterator.hasNext() ? "\n" : ""));
             count++;
         }
         return msg;
