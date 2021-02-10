@@ -168,4 +168,7 @@ public class Ui {
         response += "Here are the matching tasks in your list:\n";
     }
 
+    public void showTaskUpdated() {
+        response += "The task is updated!\n";
+    }
 }

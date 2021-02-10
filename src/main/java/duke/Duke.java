@@ -134,6 +134,12 @@ public class Duke {
                     ui.showLine();
                 }
 
+            } else if (parsedInput[0].equals("UPD")) {
+                tasks.updateTask(parsedInput);
+
+                Task updatedTask = tasks.getTask(Integer.parseInt(parsedInput[1]));
+                ui.showTaskUpdated();
+                ui.appendResponse(updatedTask.toString());
             } else {
                 ui.showError("Something went wrong!");
             }

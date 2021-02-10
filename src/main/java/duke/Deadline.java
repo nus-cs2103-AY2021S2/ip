@@ -24,8 +24,16 @@ public class Deadline extends Task {
      */
     public String extractDateTime(String by) {
         String[] temp = by.split(" ");
+        for (String str : temp) {
+            System.out.println(str);
+        }
         LocalDate date = LocalDate.parse(temp[0]);
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + temp[1];
+    }
+
+    @Override
+    public void updateTime(String time) {
+        this.by = time;
     }
 
     /**

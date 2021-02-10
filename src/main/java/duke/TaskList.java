@@ -64,6 +64,20 @@ public class TaskList {
         this.taskList.remove(taskIndex-1);
     }
 
+    public void updateTask(String[] updateInfo) throws DukeException{
+        int taskIndex = Integer.parseInt(updateInfo[1]);
+        String type = updateInfo[2];
+        String info = updateInfo[3];
+        Task targetTask = this.taskList.get(taskIndex - 1);
+        if (type.equals("time")) {
+            targetTask.updateTime(info);
+        } else if (type.equals("desc")) {
+            targetTask.updateDesc(info);
+        } else {
+            throw new DukeException("Please enter your input in the correct format");
+        }
+    }
+
     /**
      * Returns a boolean value of whether the requested task exists in the task list
      *
