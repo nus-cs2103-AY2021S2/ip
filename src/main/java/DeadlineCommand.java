@@ -64,6 +64,7 @@ public class DeadlineCommand extends Command {
         String[] commandArr = command.split(" ");
         String description = "";
         String deadline = "";
+        assert commandArr.length == 1;
         boolean hasFoundBy = false;
         for (int i = 1; i < commandArr.length; i++) {
             if (commandArr[i].equals("/by")) {

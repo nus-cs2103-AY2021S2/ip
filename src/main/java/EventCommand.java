@@ -34,7 +34,6 @@ public class EventCommand extends Command {
             if (command.equals("event")) {
                 throw new DukeMissingInputException("OOPS! The description of an event cannot be empty.");
             }
-
             Event newEvent = new Event(description, eventTime);
             taskList.add(newEvent);
             storage.save(taskList.getTaskList());
