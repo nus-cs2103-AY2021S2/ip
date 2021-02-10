@@ -78,6 +78,7 @@ public class Parser {
         }
 
         try{
+            // This is just to indicate stream was used previously, this comment will be deleted after tagging
             int[] taskNumbers = Arrays.stream(taskNumString.split(" "))
                     .mapToInt(Integer::parseInt)
                     .toArray();
