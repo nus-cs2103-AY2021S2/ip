@@ -8,6 +8,9 @@ public class Task {
     protected String addMessage;
     protected LocalDate date;
 
+    private final static String SYMBOL_TICK = "\u2713";
+    private final static String SYMBOL_CROSS = "\u2718";
+
     /**
      * Creates a new task based on the given name
      * @param name name of task
@@ -64,7 +67,7 @@ public class Task {
     @Override
     public String toString() {
         String statusText;
-        statusText = status ? "\u2713" : "\u2718";
+        statusText = status ? SYMBOL_TICK : SYMBOL_CROSS;
         return statusText + " " + name;
     }
 }
