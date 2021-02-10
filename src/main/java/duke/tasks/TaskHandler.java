@@ -179,9 +179,8 @@ public class TaskHandler {
         int size = taskList.size();
         ArrayList<Task> itemsFound = new ArrayList<>();
 
-        for (int i = 0; i < size; i++) {
-            if (taskList.get(i).description.contains(query)) {
-                Task task = taskList.get(i);
+        for (Task task: taskList) {
+            if (task.description.contains(query)) {
                 itemsFound.add(task);
             }
         }
