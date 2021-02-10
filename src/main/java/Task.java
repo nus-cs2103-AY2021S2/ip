@@ -38,16 +38,38 @@ public class Task {
         return this.type;
     }
 
-    @Override
-    public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
-    }
-
     public String getData() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        Task task = (Task) obj;
+        return task.description.equals(this.description)
+                && task.type == this.type
+                && task.isDone == this.isDone;
+    }
+
+    @Override
+    public int hashCode() {
+        // prime number 17 is used.
+        int result = 17;
+        result = 31 * result + description.hashCode();
+        return result;
     }
 }

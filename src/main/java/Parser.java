@@ -60,6 +60,9 @@ public class Parser {
                     String keyword = commands[1];
                     output += fc.find(tasks, keyword);
                     break;
+                case "clear":
+                    output += tasks.clearList();
+                    break;
                 default:
                     assert false : "invalid command!";
                     break;
