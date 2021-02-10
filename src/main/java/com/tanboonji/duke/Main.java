@@ -10,10 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * The Main class creates the Duke application and launches the JavaFX UI.
+ */
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private static final String APPLICATION_NAME = "Duke";
 
+    /**
+     * Launches MainWindow scene and links the scene to Duke application.
+     *
+     * @param stage root JavaFX stage.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -22,6 +31,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle(APPLICATION_NAME);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
