@@ -14,13 +14,13 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Constructs a Duke object.
+     * Constructor method.
      */
     public Duke() {
         try {
             this.storage = new Storage();
             taskList = new TaskList(storage.load());
-        } catch (DukeWrongInputException e) {
+        } catch (DukeIOException e) {
             ui.showLoadingError(e);
             taskList = new TaskList();
         }
@@ -36,6 +36,8 @@ public class Duke {
         } catch (DukeWrongInputException e) {
             return ui.showLoadingError(e);
         } catch (DukeMissingInputException e) {
+            return ui.showLoadingError(e);
+        } catch (DukeIOException e) {
             return ui.showLoadingError(e);
         }
     }

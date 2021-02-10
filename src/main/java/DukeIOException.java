@@ -1,12 +1,12 @@
 /**
- * Exception when there is a missing input from user.
+ * Exception when there is an IO Exception.
  */
-public class DukeMissingInputException extends Exception {
+public class DukeIOException extends Exception {
     /**
      * Constructor method for Duke's Missing Input Exception.
      * @param message Takes in a String message.
      */
-    public DukeMissingInputException(String message) {
+    public DukeIOException(String message) {
         super(message);
     }
 

@@ -21,7 +21,7 @@ public class Parser {
     }
 
     /**
-     * Parse method takes in command in the form of a string and returns a class.
+     * Takes in command in the form of a string and returns a class.
      *
      * @param command user command input
      * @return respective command object based on user input

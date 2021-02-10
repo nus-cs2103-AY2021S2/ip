@@ -3,7 +3,7 @@
  */
 public abstract class Command {
     /**
-     * Executes the command.
+     * Executes the respective commands.
      *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
@@ -12,5 +12,5 @@ public abstract class Command {
      * @throws DukeWrongInputException If user input is not any of the commands available.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException;
+            DukeWrongInputException, DukeIOException;
 }

@@ -31,7 +31,7 @@ public class Ui {
     /**
      * Shows the task being marked as done.
      *
-     * @param task
+     * @param task task to be marked as done
      */
     public String showTaskDone(Task task) {
         return "Nice! I've marked this task as done: \n" + task.toString();
@@ -58,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Shows good bye to user.
+     * Shows good bye message to user.
      */
     public String showBye() {
         return "Bye. Hope to see you again soon!\nTo exit, click [X] at the top left.";

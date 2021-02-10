@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,7 +11,7 @@ public class DeadlineCommand extends Command {
     private String command;
 
     /**
-     * Constructs a deadline command.
+     * Constructor method.
      *
      * @param command input command from user.
      */
@@ -19,7 +20,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the deadline command.
+     * Executes the Deadline command by creating a Deadline event.
      *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
@@ -29,38 +30,56 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException {
-        String description = "";
-        String deadline = "";
-        boolean hasFoundBy = false;
-        String[] commandArr = command.trim().split(" ");
+            DukeWrongInputException, DukeIOException {
+        String[] descriptionDeadlinePair = descriptionBuilder(command);
+        String description = descriptionDeadlinePair[0];
+        String deadline = descriptionDeadlinePair[1];
         if (command.equals("deadline")) {
-            assert commandArr.length == 1;
             throw new DukeMissingInputException("OOPS! The description of a deadline cannot be empty.");
-        } else {
-            for (int i = 1; i < commandArr.length; i++) {
-                if (commandArr[i].equals("/by")) {
-                    hasFoundBy = true;
-                    continue;
-                }
-                if (hasFoundBy) {
-                    deadline += (commandArr[i] + " ");
-                } else {
-                    description += (commandArr[i] + " ");
-                }
-            }
         }
-        deadline = deadline.trim();
-        if (isDate(deadline)) {
+        if (!isDate(deadline)) {
+            throw new DukeWrongInputException(
+                    "OOPS! Please enter your deadline in the valid format: deadline /by yyyy-mm-dd");
+        }
+        try {
             LocalDate dateDeadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             Deadline newDeadline = new Deadline(description, dateDeadline);
             taskList.add(newDeadline);
             storage.save(taskList.getTaskList());
             return ui.showTaskAdded(newDeadline);
-        } else {
-            throw new DukeWrongInputException(
-                    "OOPS! Please enter your deadline in the format: deadline /by yyyy-mm-dd");
+        } catch (DateTimeParseException e) {
+            throw new DukeWrongInputException("OOPS! Please enter a valid yyyy-mm-dd.");
+        } catch (IOException e) {
+            throw new DukeIOException("File error: Could not save.");
         }
+    }
+
+    /**
+     * Builds the description and deadline from user's deadline command.
+     *
+     * @param command user command.
+     * @return a String array with task description at pos 0 and task deadline at pos 1.
+     */
+    public String[] descriptionBuilder(String command) {
+        String[] commandArr = command.split(" ");
+        String description = "";
+        String deadline = "";
+        assert commandArr.length == 1;
+        boolean hasFoundBy = false;
+        for (int i = 1; i < commandArr.length; i++) {
+            if (commandArr[i].equals("/by")) {
+                hasFoundBy = true;
+                continue;
+            }
+            if (hasFoundBy) {
+                deadline += (commandArr[i] + " ");
+            } else {
+                description += (commandArr[i] + " ");
+            }
+        }
+        description = description.trim();
+        deadline = deadline.trim();
+        return new String[] {description, deadline};
     }
 
     /** Checks if a certain string is of date format.
