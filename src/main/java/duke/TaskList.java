@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TaskList {
     public ArrayList<Task> listOfTasks;
@@ -30,6 +31,7 @@ public class TaskList {
         return addStatus;
     }
 
+    //TODO create a function to check if the task number is valid
     public String deleteTask(int index) throws DukeException {
         String deleteStatus;
         if (index < 1 || index > getNoOfTasks()) {
@@ -38,6 +40,17 @@ public class TaskList {
         Task task = this.listOfTasks.get(index - 1);
         this.listOfTasks.remove(index - 1);
         deleteStatus = "Okay, I've I have removed this task: \n" + task + "\n" + echoNoOfTask();
+        return deleteStatus;
+    }
+
+    public String deleteMultipleTasks(ArrayList<Integer> tasksToDelete) throws DukeException {
+        //sort in descending order to prevent mixing up task number when deleting tasks
+        Collections.sort(tasksToDelete, Collections.reverseOrder());
+        String deleteStatus;
+        for (Integer taskNumber : tasksToDelete) {
+            deleteTask(taskNumber);
+        }
+        deleteStatus = "Successfully deleted tasks";
         return deleteStatus;
     }
 
