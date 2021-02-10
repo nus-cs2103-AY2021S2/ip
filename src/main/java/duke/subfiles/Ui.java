@@ -69,4 +69,28 @@ public class Ui {
         System.out.println(s);
     }
 
+    /**
+     * Returns a help page formatted as a String.
+     *
+     * @return A help page formatted as a String.
+     */
+    public String getHelp() {
+        String helpPage = "Welcome to Memeland!\n"
+                + "- Enter \"help\" to access this help page again.\n"
+                + "- Enter \"list\" to display the list of tasks you currently have.\n"
+                + "- Enter \"find <keyword>\" to find tasks containing the specified keyword.\n"
+                + "- Enter \"done <index>\" to mark a task at the specified index as done.\n"
+                + "- Enter \"delete <index>\" to delete a task at the specified index.\n"
+                + "- Enter \"sort\" to sort your list of tasks into alphabetical ordering.\n"
+                + "- Enter \"sort by type\" to sort your list of tasks by their type.\n"
+                + "- Enter \"sort by date\" to sort your list of tasks first by their type, then by their date.\n"
+                + "- Enter \"todo <description>\" to add a todo with the description into your list of tasks.\n"
+                + "- Enter \"deadline <description> /by <date>\" to add a deadline with the specified description"
+                + " and date into your list of tasks.\n"
+                + "- Enter \"event <description> /at <date>\" to add an event with the specified description"
+                + " and date into your list of tasks.\n"
+                + "- Enter \"bye\" to terminate the program.\n";
+        return helpPage;
+    }
+
 }
