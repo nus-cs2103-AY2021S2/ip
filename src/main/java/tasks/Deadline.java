@@ -22,6 +22,11 @@ public class Deadline extends Task {
         this.deadlineDateTime = ParseDateTime.parse(deadlineDateTime);
     }
 
+    public Deadline(String desc, LocalDateTime deadlineDateTime) {
+        super(desc);
+        this.deadlineDateTime = deadlineDateTime;
+    }
+
     private Deadline(String desc, String deadlineDateTime, boolean isDone) {
         super(desc, isDone);
         this.deadlineDateTime = ParseDateTime.parse(deadlineDateTime);

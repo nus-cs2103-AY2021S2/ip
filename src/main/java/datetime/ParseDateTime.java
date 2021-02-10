@@ -87,4 +87,25 @@ public class ParseDateTime {
         LocalDateTime d2 = LocalDateTime.parse(test2 + " " + yyyy2, f2);
         System.out.println(d2);
     }
+
+
+
+    public static boolean isOnlyTimeString(String input) {
+        if (input.contains(" ")) {
+            int spaceIdx = input.indexOf(" ");
+            if (spaceIdx == input.length() - 3) {
+                // there is only an AM/PM after the space
+                // so before the space there is only time value
+                // the entire string is a time value
+                return true;
+            }
+        } else if (true){ // check if got AM/PM
+
+        } else if (true) { // check if got time delimiters i.e. they might have used 24 hour formatters
+
+        }
+
+        return false;
+    }
+
 }

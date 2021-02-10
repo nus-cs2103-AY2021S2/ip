@@ -12,6 +12,8 @@ public class ByeCommand extends CommandWithNoParameters {
     @Override
     public void run(TaskList taskList) {
         // make sure that parser always sends trimmed strings?
+        assert commandBody.trim().equals(commandBody) : "parser is not sending trimmed strings to commands";
+
         if (commandBody.isEmpty()) {
             this.hasSentExitDukeSignal = true;
             this.commandOutputMsg = Ui.getExitMessage();
