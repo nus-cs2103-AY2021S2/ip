@@ -1,5 +1,6 @@
 package duke.controller;
 
+import duke.component.Ui;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.UnknownCommandException;
 import duke.exception.WrongFormatException;
@@ -34,7 +35,7 @@ public class MainWindow extends AnchorPane {
     private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
-    public void initialize() {
+    public void initialize() throws UnknownCommandException, WrongFormatException, EmptyDescriptionException, IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog("Welcome", DUKE_IMAGE));
     }

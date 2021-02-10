@@ -7,15 +7,6 @@ import duke.task.Task;
 
 public class Ui {
     /**
-     * Reads user's input command.
-     * @return
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
      * Prints welcome message.
      */
     public String showWelcome() {

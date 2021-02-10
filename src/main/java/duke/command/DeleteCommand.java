@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
         if (index > taskList.getTasks().size() - 1 || index < 0) {
             return ui.showNotFound();
         }
+        assert index >= 0 && index < taskList.getTasks().size() - 1 : "index should be in valid range";
         Task t = taskList.getTasks().remove(index);
         return ui.showDelete(t, taskList);
     }
