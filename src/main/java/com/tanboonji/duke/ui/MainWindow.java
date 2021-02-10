@@ -1,9 +1,9 @@
 package com.tanboonji.duke.ui;
 
-import com.tanboonji.duke.Duke;
-
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.tanboonji.duke.Duke;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -65,7 +65,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     Platform.exit();
                 }
-            },2000);
+            }, 2000);
         }
     }
 }
