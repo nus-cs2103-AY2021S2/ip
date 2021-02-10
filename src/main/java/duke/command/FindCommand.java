@@ -1,12 +1,13 @@
 package duke.command;
 
-import java.util.ArrayList;
-
 import duke.DukeResponse;
 import duke.component.Storage;
 import duke.component.TaskList;
 import duke.component.Ui;
 import duke.task.Task;
+import org.apache.commons.text.similarity.LevenshteinDistance;
+
+import java.util.ArrayList;
 
 public class FindCommand extends Command {
     private String keyword;
@@ -26,10 +27,15 @@ public class FindCommand extends Command {
      * @param storage
      */
     public DukeResponse execute(TaskList taskList, Ui ui, Storage storage) {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<>();
+        LevenshteinDistance ld = new LevenshteinDistance();
         for (Task t : taskList.getTasks()) {
-            if (t.getName().contains(this.keyword)) {
-                tasks.add(t);
+            String[] words = t.getName().split(" ");
+            for (String word : words) {
+                if (ld.apply(word, this.keyword) < 2) {
+                    tasks.add(t);
+                    break;
+                }
             }
         }
         return new DukeResponse(ui.showFound(tasks));
