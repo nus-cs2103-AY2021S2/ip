@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @since   2021-02-06
  */
 public class Storage {
-    String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -29,15 +29,15 @@ public class Storage {
      * This method loads data from file path and
      * store into an ArrayList of tasks.
      *
-     * @return ArrayList<Task> This returns an ArrayList of tasks
+     * @return ArrayList This returns an ArrayList of tasks
      * @throws DukeException On file not found error
      */
     public ArrayList<Task> load() throws DukeException {
-//        fetchTasks()
+        // fetchTasks()
         ArrayList<Task> result = new ArrayList<>();
         String currDir = System.getProperty("user.dir");
         String expectedDir = currDir + this.filePath;
-//        Hardcoded to: "/data/modoc_tm.txt";
+        // Hardcoded to: "/data/modoc_tm.txt";
 
         BufferedReader reader;
         try {
@@ -73,14 +73,14 @@ public class Storage {
      * @param tasks This is the task to be saved
      */
     public void save(TaskList tasks) {
-        //    Currently hard-coded into position
+        // Currently hard-coded into position
         String currDir = System.getProperty("user.dir");
         String expectedDir = currDir + "/data";
 
         try {
-//            Creates directory if doesn't exist
+            // Creates directory if doesn't exist
             Files.createDirectories(Paths.get(expectedDir));
-//            Automatically creates file if it doesn't exist
+            // Automatically creates file if it does not exist
             FileWriter writer = new FileWriter(expectedDir + "/modoc_tm.txt");
 
             ArrayList<Task> listTask = tasks.getTasks();
@@ -90,7 +90,7 @@ public class Storage {
 
                 Class taskType = task.getClass();
                 boolean taskStatus = task.isDone;
-                String description = task.name;
+                String description = task.getName();
 
                 if (taskType.equals(Event.class)) {
                     result = "E" + "/" +  (taskStatus ? "1" : "0") + "/" + description + "/" + ((Event) task).at;
