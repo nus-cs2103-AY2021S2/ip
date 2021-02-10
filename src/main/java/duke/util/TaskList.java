@@ -10,7 +10,7 @@ import java.util.List;
  * Class representing A List of Tasks.
  */
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     /**
      * Constructor for TaskList.
@@ -65,6 +65,10 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    public void addTask(Task task, int taskIdx) {
+        tasks.add(taskIdx, task);
     }
 
     /**

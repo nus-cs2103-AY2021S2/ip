@@ -1,7 +1,6 @@
 package duke.util;
 
 import duke.task.Task;
-import duke.util.TaskList;
 
 import java.util.ListIterator;
 
@@ -52,6 +51,11 @@ public class MessageFormatter {
                 taskDone);
     }
 
+    public String formatUndoDone(Task taskUndone) {
+        return ("I have marked this task as not done:\n" +
+                taskUndone);
+    }
+
     /**
      * Formats Duke's message to the user after searching for tasks that matches
      * the keyword provided by the user.
@@ -93,5 +97,23 @@ public class MessageFormatter {
             count++;
         }
         return msg;
+    }
+
+    public String formatUndoAdd(Task removedTask, TaskList tasks) {
+        return ("The add command is undone, the following task is removed:\n" +
+                removedTask +
+                "\nYou have " +
+                tasks.getSize() +
+                (tasks.getSize() == 1 ? " task" : " tasks") +
+                " in your list");
+    }
+
+    public String formatUndoDelete(Task addedTask, TaskList tasks) {
+        return ("The delete command is undone, the following task is added:\n" +
+                addedTask +
+                "\nYou have " +
+                tasks.getSize() +
+                (tasks.getSize() == 1 ? " task" : " tasks") +
+                " in your list");
     }
 }
