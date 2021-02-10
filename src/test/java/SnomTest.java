@@ -18,7 +18,7 @@ public class SnomTest {
 
     @Test
     public void storageTest() throws SnomException {
-        Storage storage = new Storage("./src/main/data", "snom.txt");
+        Storage storage = new Storage("./src/main/data/snom.txt");
         TaskList taskList = new TaskList(storage.importTask());
 
         assertEquals(storage.readFile().size(), taskList.getSize());
