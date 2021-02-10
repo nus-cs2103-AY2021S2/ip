@@ -58,3 +58,7 @@ text-ui-test/.gradle/configuration-cache/gc.properties
 text-ui-test/.gradle/vcs-1/gc.properties
 text-ui-test/gradle/wrapper/gradle-wrapper.jar
 text-ui-test/gradle/wrapper/gradle-wrapper.properties
+src/.idea/.gitignore
+src/.idea/misc.xml
+src/.idea/modules.xml
+src/.idea/vcs.xml

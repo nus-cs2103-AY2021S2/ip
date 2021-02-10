@@ -31,10 +31,6 @@ public class Parser {
                 return new DukeCommand(Command.DELETE, params[1]);
 
             } else if (input.equals("list")) {
-                if (params.length == 1) {
-                    throw new DukeException("list is missing 1 argument");
-                }
-
                 return new DukeCommand(Command.LIST, "");
 
             } else if (params[0].equals("done")) {
