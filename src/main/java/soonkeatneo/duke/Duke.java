@@ -11,6 +11,7 @@ public class Duke {
     protected static final String BOT_NAME = "DukeNukem";
     private TaskList tasks;
     private Storage storage;
+    private boolean isFirstLaunch;
 
     /**
      * Creates a new Duke object with the given file-path for {@Storage}.
@@ -18,11 +19,18 @@ public class Duke {
      */
     public Duke(String filePath) {
         storage = new Storage(filePath).load();
-        try {
-            tasks = new TaskList(storage);
-        } catch (DukeException e) {
-            tasks = new TaskList();
+        isFirstLaunch = false;
+        if (storage.isSampleDataLoaded()) {
+            isFirstLaunch = true;
         }
+    }
+
+    /**
+     * Returns True if this is the first launch, else False.
+     * @return boolean representing if this is the first launch
+     */
+    public boolean isFirstLaunch() {
+        return this.isFirstLaunch;
     }
 
     /**

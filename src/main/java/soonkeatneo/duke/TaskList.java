@@ -117,7 +117,7 @@ public class TaskList {
             String typeOfTask = deletedTask.getType();
             String completionOfTask = (deletedTask.getDone() ? "1" : "0");
             String descriptionOfTask = deletedTask.getDescription().strip();
-            String oldString = typeOfTask + " | " + completionOfTask + " | " + descriptionOfTask;
+            String oldString = typeOfTask + " | " + completionOfTask + " | " + descriptionOfTask + "\n";
             storage.deleteReplaceTaskFromDisk(oldString, "");
             message += "Okie! I've deleted the task from your list:\n";
             message += deletedTask.toString();
