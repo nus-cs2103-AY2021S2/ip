@@ -13,10 +13,9 @@ public class Deadline extends Task {
     String dateString;
 
     /**
-     *
      * @param description the description of the deadline tasl
      * @throws EmptyArgumentException empty argument exception
-     * @throws BadDateException bad date exception
+     * @throws BadDateException       bad date exception
      */
     Deadline(String description) throws EmptyArgumentException, BadDateException {
         super(description);
@@ -25,21 +24,12 @@ public class Deadline extends Task {
             localDate = LocalDate.parse(description.substring(indexOfDate));
             dateString = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             formattedDescription = description.substring(0, indexOfDate) + dateString;
-        }
-        catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new BadDateException();
         }
     }
+
     public String getDateString() {
         return dateString;
-    }
-
-    /**
-     *
-     * @return the string representation of a deadline object
-     */
-    @Override
-    public String toString() {
-        return "[D]" +  "[" + (isCompleted ? "X" : " ") + "] " + formattedDescription;
     }
 }
