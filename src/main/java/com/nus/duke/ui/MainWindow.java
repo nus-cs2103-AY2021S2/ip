@@ -12,8 +12,10 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainWindow {
@@ -22,11 +24,17 @@ public class MainWindow {
     private final FXMLLoader fxmlLoader = new FXMLLoader();
     private final Logic logic;
 
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cat.jpg"));
+    private Image botImage = new Image(this.getClass().getResourceAsStream("/images/woman.jpg"));
+
     @FXML
     private TextField commandTextField;
 
     @FXML
-    private TextArea resultTextArea;
+    private VBox dialogContainer;
+
+    @FXML
+    private ScrollPane scrollPane;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         this.logic = logic;
@@ -44,11 +52,26 @@ public class MainWindow {
     }
 
     @FXML
+    public void initialize() {
+        this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(
+                        "Hello! I am Duke. What can I do for you my dude?",
+                        botImage)
+        );
+    }
+
+    @FXML
     private void handleCommandText(ActionEvent event) {
         Command command = this.logic.parseInputForCommand(this.commandTextField.getText());
         String result = this.logic.executeCommand(command);
+
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(this.commandTextField.getText(), userImage),
+                DialogBox.getDukeDialog(result, botImage)
+        );
+
         this.commandTextField.clear();
-        this.resultTextArea.setText(result);
 
         if (command instanceof ExitCommand) {
             Platform.exit();
