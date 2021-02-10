@@ -84,27 +84,40 @@ public class Storage {
         FileWriter fw = new FileWriter(this.file);
         for (Task curr : taskList.getTasks()) {
             if (curr instanceof Todo) {
-                textToAdd.append("T ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append(curr.getName())
-                        .append(System.lineSeparator());
+                textToAdd.append(caseTodo((Todo) curr));
             } else if (curr instanceof Deadline) {
-                textToAdd.append("D ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append(curr.getName())
-                        .append(System.lineSeparator())
-                        .append(((Deadline) curr).getBy())
-                        .append(System.lineSeparator());
+                textToAdd.append(caseDeadline((Deadline) curr));
             } else if (curr instanceof Event) {
-                textToAdd.append("E ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append(curr.getName())
-                        .append(System.lineSeparator())
-                        .append(((Event) curr).getAt())
-                        .append(System.lineSeparator());
+                textToAdd.append(caseEvent((Event) curr));
             }
         }
         fw.write(textToAdd.toString());
         fw.close();
+    }
+
+    public String caseTodo(Todo todo) {
+        String toReturn = "";
+        toReturn += "T ";
+        toReturn += todo.isDone() ? "1 " : "0 ";
+        toReturn += todo.getName() + "\n";
+        return toReturn;
+    }
+
+    public String caseDeadline(Deadline deadline) {
+        String toReturn = "";
+        toReturn += "D ";
+        toReturn += deadline.isDone() ? "1 " : "0 ";
+        toReturn += deadline.getName() + "\n";
+        toReturn += deadline.getBy() + "\n";
+        return toReturn;
+    }
+
+    public String caseEvent(Event event) {
+        String toReturn = "";
+        toReturn += "E ";
+        toReturn += event.isDone() ? "1 " : "0 ";
+        toReturn += event.getName() + "\n";
+        toReturn += event.getAt() + "\n";
+        return toReturn;
     }
 }

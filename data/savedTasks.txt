@@ -1,4 +1,3 @@
-T 1 sdac
 T 0 asdca
 D 1 asdc
 2020-12-12
