@@ -35,20 +35,20 @@ public class Parser {
 
             try {
                 switch (parsedCommand[0]) {
-                    case "done", "delete":
-                        int taskId = Integer.parseInt(parsedCommand[1]) - 1;
-                        if (parsedCommand[0].equals("done")) {
-                            return new DoneCommand(fullCommand, taskId);
-                        } else {
-                            return new DeleteCommand(fullCommand, taskId);
-                        }
-                    case "find":
-                        return new FindCommand(fullCommand, fullCommand.replaceFirst("find ", ""));
-                    case "todo", "deadline", "event":
-                        Task task = parseTask(parsedCommand[0], fullCommand.replaceFirst(parsedCommand[0] + " ", ""));
-                        return new AddCommand(fullCommand, task);
-                    default:
-                        throw new UnknownCommandException();
+                case "done", "delete":
+                    int taskId = Integer.parseInt(parsedCommand[1]) - 1;
+                    if (parsedCommand[0].equals("done")) {
+                        return new DoneCommand(fullCommand, taskId);
+                    } else {
+                        return new DeleteCommand(fullCommand, taskId);
+                    }
+                case "find":
+                    return new FindCommand(fullCommand, fullCommand.replaceFirst("find ", ""));
+                case "todo", "deadline", "event":
+                    Task task = parseTask(parsedCommand[0], fullCommand.replaceFirst(parsedCommand[0] + " ", ""));
+                    return new AddCommand(fullCommand, task);
+                default:
+                    throw new UnknownCommandException();
                 }
             } catch (DukeException e) {
                 throw e;
@@ -80,24 +80,24 @@ public class Parser {
 
         try {
             switch (taskType) {
-                case "todo":
-                    return new ToDo(taskStr);
-                case "deadline":
-                    pattern = "(.*) /by (.*)$";
-                    r = Pattern.compile(pattern);
-                    m = r.matcher(taskStr);
-                    if (m.find()) {
-                        return new Deadline(m.group(1), LocalDate.parse(m.group(2)));
-                    }
-                case "event":
-                    pattern = "(.*) /at (.*)$";
-                    r = Pattern.compile(pattern);
-                    m = r.matcher(taskStr);
-                    if (m.find()) {
-                        return new Event(m.group(1), LocalDate.parse(m.group(2)));
-                    }
-                default:
-                    throw new UnknownCommandException();
+            case "todo":
+                return new ToDo(taskStr);
+            case "deadline":
+                pattern = "(.*) /by (.*)$";
+                r = Pattern.compile(pattern);
+                m = r.matcher(taskStr);
+                if (m.find()) {
+                    return new Deadline(m.group(1), LocalDate.parse(m.group(2)));
+                }
+            case "event":
+                pattern = "(.*) /at (.*)$";
+                r = Pattern.compile(pattern);
+                m = r.matcher(taskStr);
+                if (m.find()) {
+                    return new Event(m.group(1), LocalDate.parse(m.group(2)));
+                }
+            default:
+                throw new UnknownCommandException();
             }
         } catch (DukeException e) {
             throw e;
