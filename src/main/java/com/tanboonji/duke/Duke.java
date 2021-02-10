@@ -50,6 +50,8 @@ public class Duke {
             ui.print(e.getMessage());
         }
 
+        assert(taskList != null);
+
         ui.greet();
     }
 
