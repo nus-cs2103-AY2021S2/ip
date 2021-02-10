@@ -22,6 +22,7 @@ public class Storage {
      * @param tasks The task list to be stored.
      */
     public static void saveToFile(TaskList tasks) {
+        assert FILE_NAME.length() > 0 : "FILE_NAME cannot be empty";
         try {
             File fileObj = new File(FILE_NAME);
             fileObj.createNewFile();
@@ -37,6 +38,7 @@ public class Storage {
      * Reads the task list from file.
      */
     public static void readFromFile(TaskList tasks) {
+        assert FILE_NAME.length() > 0 : "FILE_NAME cannot be empty";
         try {
             File fileObj = new File(FILE_NAME);
             fileObj.createNewFile();

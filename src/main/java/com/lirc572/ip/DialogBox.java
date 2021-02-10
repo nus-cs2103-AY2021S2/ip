@@ -65,6 +65,7 @@ public class DialogBox extends HBox {
      * @return a new DialogBox object.
      */
     public static DialogBox getUserDialogBox(String labelString, String imageSrc) {
+        assert labelString.length() > 0 : "Dialogbox's text should not be empty";
         return new DialogBox(convertStringToTextflow(labelString), imageSrc);
     }
 
@@ -85,6 +86,7 @@ public class DialogBox extends HBox {
      * @return a new DialogBox object.
      */
     public static DialogBox getElainaDialogBox(String labelString, String imageSrc) {
+        assert labelString.length() > 0 : "Dialogbox's text should not be empty";
         var dialogBox = new DialogBox(convertStringToTextflow(labelString), imageSrc);
         dialogBox.flip();
         return dialogBox;
@@ -115,6 +117,7 @@ public class DialogBox extends HBox {
      * @return The converted TextFlow.
      */
     private static TextFlow convertStringToTextflow(String str) {
+        assert str.length() > 0 : "Dialogbox's text should not be empty";
         TextFlow result = new TextFlow();
         String[] matches = Pattern.compile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\."
                 + "[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)")
