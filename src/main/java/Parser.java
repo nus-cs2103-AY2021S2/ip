@@ -1,13 +1,13 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class Parser {
     private static final String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
     private static final String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! I`m sorry. but i don`t know what that means :-(";
 
-    //TODO refactor code for SLAP
     /**
      * Returns a Command object based on the fullCommand given
      * @param fullCommand (command entered by the user)
@@ -16,82 +16,186 @@ public class Parser {
      * @throws DukeDeadlineException
      */
     public static Command parse(String fullCommand) throws DukeException , DukeDeadlineException {
-        fullCommand = fullCommand.trim();
-        int firstSpace = fullCommand.indexOf(" ");
-        String keyword = firstSpace == -1 ? fullCommand : fullCommand.substring(0, firstSpace).toLowerCase();
+        String[] commandParts = getKeyword(fullCommand);
+        checkKeyword(commandParts);
+        return createCommand(commandParts);
+    }
 
-        if (fullCommand.isEmpty()) {
-            throw new DukeException("Please enter a command");
+    private static String[] getKeyword(String command) {
+        ArrayList<String> commandParts = new ArrayList<>();
+        String trimCommand = command.trim();
+        int firstSpace = trimCommand.indexOf(" ");
+        if (firstSpace == -1) {
+            commandParts.add(trimCommand);
+        } else {
+            String keyword = trimCommand.substring(0, firstSpace);
+            commandParts.add(keyword);
+            commandParts.add(trimCommand.substring(firstSpace));
         }
 
-        //Commands that does not need a description
+        return commandParts.toArray(new String[commandParts.size()]);
+    }
+
+    private static void checkKeyword (String[] commandParts) throws DukeException {
+        if (commandParts.length == 0) {
+            throw new DukeException("Please enter a command");
+        }
+        switch (commandParts[0].toLowerCase()) {
+        case"bye":
+        case"list":
+        case"done":
+        case"delete":
+        case "find":
+        case"todo":
+        case"deadline":
+        case"event":
+            break;
+        default:
+            throw new DukeException("Invalid command");
+        }
+    }
+
+    private static Command createCommand(String[] commandParts) throws DukeException , DukeDeadlineException {
+        String keyword = commandParts[0].toLowerCase();
+        boolean requireDesc = checkRequireDescription(keyword);
+        boolean requireOption = checkRequireOption(keyword);
+        boolean requireDeadline = checkRequireDeadline(keyword);
+        if (!requireDesc) {
+            return createWithoutDescCommand(commandParts);
+        }
+
+        if (requireOption) {
+            checkOption(commandParts);
+            return createWithOptionCommand(commandParts);
+        }
+
+        if (!requireDeadline) {
+            return createWithoutDeadlineCommand(commandParts);
+        }
+
+        checkDescription(commandParts, ERROR_DESCRIPTION);
+        return createAddCommand(commandParts);
+    }
+
+    private static boolean checkRequireDescription(String keyword) {
+        switch (keyword) {
+        case"bye":
+        case"list":
+            return false;
+        default:
+            return true;
+        }
+    }
+
+    private static boolean checkRequireOption(String keyword) {
+        switch (keyword) {
+        case"done":
+        case"delete":
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    private static boolean checkRequireDeadline(String keyword) {
+        switch(keyword) {
+        case "find":
+        case "todo":
+            return false;
+        default:
+            return true;
+        }
+    }
+
+    private static Command createWithoutDescCommand(String[] commandParts) throws DukeException {
+        String keyword = commandParts[0];
         if (keyword.equalsIgnoreCase("bye")) {
             return new SaveCommand(keyword);
         } else if (keyword.equalsIgnoreCase("list")) {
             return new ListCommand();
-        } else if (keyword.equalsIgnoreCase("done") || keyword.equalsIgnoreCase("delete")) {
-            int option = Integer.parseInt(fullCommand.substring(firstSpace + 1)) - 1;
+        } else {
+            throw new DukeException("Invalid Command");
+        }
+    }
+
+    private static void checkOption(String[] commandParts) throws DukeException {
+        checkDescription(commandParts, "Command is without any option");
+    }
+
+    private static Command createWithOptionCommand(String[] commandParts) throws DukeException {
+        String keyword = commandParts[0];
+
+        try {
+            String remainderCommand = commandParts[1].trim();
+            int option = Integer.parseInt(remainderCommand) - 1;
             switch (keyword) {
             case "done" :
                 return new DoneCommand(option);
             case "delete":
                 return new DeleteCommand(option);
+            default:
+                throw new DukeException("Invalid Command");
             }
+        } catch (NumberFormatException e) {
+            throw new DukeException("A number is missing from the command");
         }
+    }
 
-        //Commands that needs a description
-        Task task = null;
+    private static Command createWithoutDeadlineCommand(String[] commandParts) throws DukeException {
+        String keyword = commandParts[0];
+        String remainderCommand = commandParts[1].trim();
+
         if (keyword.equalsIgnoreCase("find")) {
-            checkDescription(firstSpace, ERROR_SEARCH_TERM);
-            return new FindCommand(fullCommand.substring(firstSpace));
+            return new FindCommand(remainderCommand);
         } else if (keyword.equalsIgnoreCase("todo")) {
-            checkDescription(firstSpace, ERROR_DESCRIPTION);
-            task = new Todo(fullCommand.substring(firstSpace));
-        } else if (keyword.equalsIgnoreCase("deadline") || keyword.equalsIgnoreCase("event")) {
-            checkDescription(firstSpace, ERROR_DESCRIPTION);
-            task = createTaskWithDeadline(fullCommand, keyword, firstSpace);
+            return new AddCommand(new Todo(remainderCommand));
         } else {
             throw new DukeException(ERROR_INVALID_COMMAND);
         }
-
-        return new AddCommand(task);
     }
 
-    private static void checkDescription(int firstSpace, String errorMessage) throws DukeException {
-        if (firstSpace == -1) {
-            throw new DukeException(errorMessage);
-        }
+    private static Command createAddCommand(String[] commandParts) throws DukeException, DukeDeadlineException {
+        String keyword = commandParts[0];
+        String remainderCommand = commandParts[1].trim();
+        Task task = null;
     }
-
-    private static Task createTaskWithDeadline(String fullCommand, String keyword, int firstSpace)
+  
+    private static Task createTaskWithDeadline(String fullCommand, String keyword, int firstSpace) {
             throws DukeDeadlineException {
         assert !keyword.trim().isEmpty();
 
         Task t = null;
-        int firstSlash = fullCommand.indexOf("/");
+        int firstSlash = remainderCommand.indexOf("/");
 
         if (firstSlash == -1) {
             throw new DukeDeadlineException("OOPS!!! The deadline of a task cannot be empty.");
         }
 
-        int nextSpace = fullCommand.indexOf(" ", firstSlash) + 1;
-        String taskDescription = fullCommand.substring(firstSpace, firstSlash);
+        int nextSpace = remainderCommand.indexOf(" ", firstSlash) + 1;
+        String taskDescription = remainderCommand.substring(0, firstSlash);
         String errorMessage;
-        switch (keyword) {
-        case "deadline":
+
+        if (keyword.equalsIgnoreCase("deadline")) {
             errorMessage = "OOPS!!! Format of the deadline of a deadline task should be "
                     + "(Year-Month-Day time (24 hours)";
-            LocalDateTime deadline = parseDate(fullCommand.substring(nextSpace), errorMessage);
-            t = new Deadline(taskDescription, deadline);
-            break;
-        case "event":
+            LocalDateTime deadline = parseDate(remainderCommand.substring(nextSpace), errorMessage);
+            task = new Deadline(taskDescription, deadline);
+        } else if (keyword.equalsIgnoreCase("event")) {
             errorMessage = "OOPS!!! Format of the time period of a Event task should be "
                     + "(Year-Month-Day Time(24 hours)-Time(24 hours)";
-            LocalDateTime[] deadlines = parseDates(fullCommand.substring(nextSpace), errorMessage);
-            t = new Event(taskDescription, deadlines[0], deadlines[1]);
-            break;
+            LocalDateTime[] deadlines = parseDates(remainderCommand.substring(nextSpace), errorMessage);
+            task = new Event(taskDescription, deadlines[0], deadlines[1]);
+        } else {
+            throw new DukeException("Invalid Command");
         }
-        return t;
+
+        return new AddCommand(task);
+    }
+
+    private static void checkDescription(String[] commandParts, String errorMessage) throws DukeException {
+        if (commandParts.length != 2) {
+            throw new DukeException(errorMessage);
+        }
     }
 
     /**
@@ -160,6 +264,7 @@ public class Parser {
             case "D":
                 LocalDateTime deadline = Parser.parseDate(taskArr[3], errorMessage);
                 task = new Deadline(taskArr[2], deadline);
+                break;
             }
             if (taskArr[1] == "1") {
                 task.markAsDone();
