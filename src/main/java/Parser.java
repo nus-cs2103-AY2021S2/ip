@@ -61,6 +61,7 @@ public class Parser {
                     output += fc.find(tasks, keyword);
                     break;
                 default:
+                    assert false : "invalid command!";
                     break;
                 }
             } catch (DukeException E) {

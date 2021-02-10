@@ -21,6 +21,7 @@ public class TaskList {
         output += "ALRIGHT. I HAVE ALREADY ADDED THE TASK!!!\n"
                 + task.toString() + "Now you have \n" + storage.size()
                 + " tasks in the list.";
+        assert output != "" : "output should not be empty.";
         return output;
     }
 
@@ -36,6 +37,7 @@ public class TaskList {
         output += "ALRIGHT. THIS TASK HAS BEEN MARKED AS COMPLETE\n"
                 + storage.get(value - 1)
                 + "\n";
+        assert output != "" : "output should not be empty.";
         return output;
     }
 
@@ -57,6 +59,7 @@ public class TaskList {
                 + storage.size()
                 + " tasks in the list.";
         storage.remove(value - 1);
+        assert output != "" : "output should not be empty.";
         return output;
     }
 
@@ -75,6 +78,7 @@ public class TaskList {
                         + "\n";
             }
         }
+        assert output != "" : "output should not be empty.";
         return output;
     }
 
