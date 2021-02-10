@@ -61,6 +61,7 @@ public class Storage {
      * @param newString String of the new task.
      */
     public void deleteReplaceTaskFromDisk(String oldString, String newString) {
+        assert oldString != null;
         try {
             List<String> fileContents = new ArrayList<>(Files.readAllLines(this.dataFile.toPath()));
             for (int i = 0; i < fileContents.size(); i++) {
@@ -77,12 +78,13 @@ public class Storage {
 
     /**
      * Appends a given String to the file.
-     * @param string String to be appended to the file
+     * @param newString String to be appended to the file
      */
-    public void saveTaskToDisk(String string) {
+    public void saveTaskToDisk(String newString) {
+        assert newString != null;
         try {
             FileWriter writer = new FileWriter(this.dataFile, true);
-            writer.write(string + System.lineSeparator());
+            writer.write(newString + System.lineSeparator());
             writer.close();
         } catch (IOException e) {
             Ui.printMessage(e.getMessage());

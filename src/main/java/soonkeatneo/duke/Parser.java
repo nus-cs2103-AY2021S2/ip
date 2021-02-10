@@ -20,7 +20,9 @@ public class Parser {
      * @param storage {@Storage} object to be used
      */
     public static String parse(String inputString, TaskList tasks, Storage storage) {
-
+        assert inputString != null;
+        assert tasks != null;
+        assert storage != null;
         if (inputString.equals("list")) {
             return tasks.print();
         } else if (inputString.equals("bye")) {
