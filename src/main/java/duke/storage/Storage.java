@@ -48,7 +48,7 @@ public class Storage {
             isDirCreated = f.mkdir();
         }
 
-        assert isDirCreated : "The directory is not properly created!";
+        assert isDirCreated : "The directory is not properly created! Please contact the developer.";
 
         try {
             f = new File(filePath);
@@ -59,7 +59,7 @@ public class Storage {
             throw new FileNotFoundException();
         }
 
-        assert isFileCreated : "The txt file is not properly created!";
+        assert isFileCreated : "The txt file is not properly created! Please contact the developer.";
 
         Scanner s = new Scanner(f);
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
