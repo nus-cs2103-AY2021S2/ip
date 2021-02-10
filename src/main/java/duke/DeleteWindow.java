@@ -21,7 +21,7 @@ public class DeleteWindow {
     @FXML
     private void submit() {
         String command = userInput.getText();
-        parser.parser("delete " + command);
+        parser.parse("delete " + command);
         window.getScene().getWindow().hide();
     }
 }

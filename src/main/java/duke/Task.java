@@ -5,7 +5,8 @@ class Task {
     private boolean isDone;
 
     /**
-     * Task constructor where the boolean isDone is set to false
+     * Task constructor where the boolean isDone is set to false.
+     *
      * @param s name of Task
      */
     Task(String s) {
@@ -14,7 +15,8 @@ class Task {
     }
 
     /**
-     * Task constructor where the boolean isDone is given
+     * Task constructor where the boolean isDone is given.
+     *
      * @param s name of Task
      * @param c value that boolean isDone will be set to
      */
@@ -31,7 +33,8 @@ class Task {
     }
 
     /**
-     * returns the name of the task
+     * returns the name of the task.
+     *
      * @return name of task
      */
     String getName() {
@@ -39,7 +42,8 @@ class Task {
     }
 
     /**
-     * returns the isDone
+     * returns the isDone.
+     *
      * @return isDone
      */
     boolean getIsDone() {
@@ -47,7 +51,8 @@ class Task {
     }
 
     /**
-     * Provides the format for which the Task will be saved in the txt file
+     * Provides the format for which the Task will be saved in the txt file.
+     *
      * @return a string in the format to be saved in the txt file
      */
     String saveName() {
@@ -55,11 +60,12 @@ class Task {
     }
 
     /**
-     * Checks if the Task is to be done on the day
-     * @param s the day that is given in yyy-mm-dd format (e.g. 2021-01-31)
+     * Checks if the Task is to be done on the day.
+     *
+     * @param date the day that is given in yyy-mm-dd format (e.g. 2021-01-31)
      * @return true if !isDone
      */
-    boolean onDay(String s) {
+    boolean isOnDay(String date) {
         return !this.isDone;
     }
 

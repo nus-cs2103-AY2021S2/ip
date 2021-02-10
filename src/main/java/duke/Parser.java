@@ -37,12 +37,14 @@ public class Parser {
     }
 
     /**
-     * reads the string and determines which function to call
-     * @param s user input
+     * reads the string and determines which function to call.
+     *
+     * @param userInput user input
+     * @return string of the output after executing the command
      */
-    public String parser(String s) {
+    public String parse(String userInput) {
         assert(this.functions != null);
-        Scanner sc = new Scanner(s);
+        Scanner sc = new Scanner(userInput);
         String inputs = sc.next();
         if (inputs.equals("bye")) {
             return Ui.bye();
@@ -52,7 +54,7 @@ public class Parser {
             return this.tasksOnDay(sc.nextLine().stripLeading());
         } else if (inputs.equals("clear")) {
             return this.clear();
-        } else if (!this.checkValid(inputs)) {
+        } else if (!this.isValidCommand(inputs)) {
             return Ui.invalidInput();
         } else if (sc.hasNext()) {
             return functions.get(inputs).apply(sc.nextLine().stripLeading());
@@ -61,12 +63,12 @@ public class Parser {
         }
     }
 
-    String prevChat() {
+    String getPrevChat() {
         return this.history;
     }
 
     void chat(String s) {
-        this.history = this.parser(s);
+        this.history = this.parse(s);
     }
 
     private String store(Task t) {
@@ -122,7 +124,7 @@ public class Parser {
         return Ui.clear();
     }
 
-    private boolean checkValid(String s) {
+    private boolean isValidCommand(String s) {
         return this.functions.containsKey(s);
     }
 }

@@ -68,7 +68,7 @@ public class MainWindow extends VBox {
     @FXML
     private void parseCommand() {
         String command = userInput.getText();
-        consoleWindow.getChildren().addAll(new Label(command), new Label(parser.parser(command)));
+        consoleWindow.getChildren().addAll(new Label(command), new Label(parser.parse(command)));
         userInput.clear();
         if (command.equals("bye")) {
             Platform.exit();

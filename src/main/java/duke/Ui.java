@@ -17,7 +17,7 @@ class Ui {
     }
 
     /**
-     * displays the message when an invalid input is given
+     * displays the message when an invalid input is given.
      */
     static String invalidInput() {
         return "    ____________________________________________________________\n"
@@ -28,7 +28,8 @@ class Ui {
     }
 
     /**
-     * displays the message when the task has an empty description
+     * displays the message when the task has an empty description.
+     *
      * @param s name of task
      */
     static String emptyDescription(String s) {
@@ -40,7 +41,8 @@ class Ui {
     }
 
     /**
-     * displays the message when the task is stored
+     * displays the message when the task is stored.
+     *
      * @param t task that was stored
      * @param n the number of tasks in the list
      */
@@ -55,7 +57,8 @@ class Ui {
     }
 
     /**
-     * displays the message when the tasks are listed
+     * displays the message when the tasks are listed.
+     *
      * @param t the given TaskList
      */
     static String list(TaskList t) {
@@ -69,7 +72,8 @@ class Ui {
     }
 
     /**
-     * displays the message when the task is marked as done
+     * displays the message when the task is marked as done.
+     *
      * @param t the Task to be marked as done
      */
     static String done(Task t) {
@@ -83,7 +87,8 @@ class Ui {
     }
 
     /**
-     * displays the message when the task is to be deleted
+     * displays the message when the task is to be deleted.
+     *
      * @param t the Task to be deleted
      * @param n the size of TaskList after deletion
      */
@@ -99,7 +104,8 @@ class Ui {
     }
 
     /**
-     * displays the message showing the Tasks on the given day
+     * displays the message showing the Tasks on the given day.
+     *
      * @param t the given TaskList
      * @param s the day that is given in yyy-mm-dd format (e.g. 2021-01-31)
      */
@@ -109,7 +115,7 @@ class Ui {
         return "    ____________________________________________________________\n\n"
 
             + "      Here are the tasks on " + day.toString() + ":\n"
-            + t.tasksOnDay(s)
+            + t.findTasksOnDay(s)
             + "    ____________________________________________________________\n\n";
 
     }

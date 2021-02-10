@@ -37,7 +37,8 @@ class Storage {
     }
 
     /**
-     * reads the data in the file and returns a TaskList
+     * reads the data in the file and returns a TaskList.
+     *
      * @return TaskList created from the data of the file
      */
     ArrayList<Task> load() {
@@ -64,7 +65,8 @@ class Storage {
     }
 
     /**
-     * saves the given Task ArrayList into the txt file
+     * saves the given Task ArrayList into the txt file.
+     *
      * @param mem Task ArrayList
      */
     void save(ArrayList<Task> mem) {

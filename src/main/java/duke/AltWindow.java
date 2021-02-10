@@ -59,7 +59,7 @@ public class AltWindow extends VBox {
     public void setParser(Parser p) {
         assert(p != null);
         this.parser = p;
-        display.setText(this.parser.parser("list"));
+        display.setText(this.parser.parse("list"));
     }
 
     public void setStage(Stage s) {
@@ -74,8 +74,8 @@ public class AltWindow extends VBox {
     @FXML
     private void parseCommand() {
         String command = userInput.getText();
-        parser.parser(command);
-        display.setText(parser.parser("list"));
+        parser.parse(command);
+        display.setText(parser.parse("list"));
         userInput.clear();
         if (command.equals("bye")) {
             Platform.exit();
@@ -84,7 +84,7 @@ public class AltWindow extends VBox {
 
     @FXML
     private void refreshList() {
-        display.setText(parser.parser("list"));
+        display.setText(parser.parse("list"));
     }
 
     @FXML
@@ -97,7 +97,7 @@ public class AltWindow extends VBox {
             dialog.setScene(scene);
             fxmlLoader.<TodoWindow>getController().setParser(this.parser);
             dialog.showAndWait();
-            display.setText(parser.parser("list"));
+            display.setText(parser.parse("list"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -113,7 +113,7 @@ public class AltWindow extends VBox {
             dialog.setScene(scene);
             fxmlLoader.<DeleteWindow>getController().setParser(this.parser);
             dialog.showAndWait();
-            display.setText(parser.parser("list"));
+            display.setText(parser.parse("list"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,7 +129,7 @@ public class AltWindow extends VBox {
             dialog.setScene(scene);
             fxmlLoader.<DeadlineWindow>getController().setParser(this.parser);
             dialog.showAndWait();
-            display.setText(parser.parser("list"));
+            display.setText(parser.parse("list"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -145,7 +145,7 @@ public class AltWindow extends VBox {
             dialog.setScene(scene);
             fxmlLoader.<EventWindow>getController().setParser(this.parser);
             dialog.showAndWait();
-            display.setText(parser.parser("list"));
+            display.setText(parser.parse("list"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -161,7 +161,7 @@ public class AltWindow extends VBox {
             dialog.setScene(scene);
             fxmlLoader.<FindWindow>getController().setParser(this.parser);
             dialog.showAndWait();
-            display.setText(this.parser.prevChat());
+            display.setText(this.parser.getPrevChat());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -177,7 +177,7 @@ public class AltWindow extends VBox {
             dialog.setScene(scene);
             fxmlLoader.<TasksonWindow>getController().setParser(this.parser);
             dialog.showAndWait();
-            display.setText(this.parser.prevChat());
+            display.setText(this.parser.getPrevChat());
         } catch (IOException e) {
             e.printStackTrace();
         }
