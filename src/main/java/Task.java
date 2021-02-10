@@ -1,8 +1,7 @@
 /**
  * Class Task contains different task that Duke chatbot is doing.
- *
- * @version 21 Jan 2021.
  * @author Zhang Peng.
+ * @version 21 Jan 2021.
  */
 
 public class Task {
@@ -10,6 +9,9 @@ public class Task {
     protected boolean isDone;
     protected int index = 0;
 
+    /**
+     * This is a constructor for the class
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

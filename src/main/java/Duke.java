@@ -1,17 +1,13 @@
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
-
-
-
 
 /**
  * Class Duke is the main class for the execution of Duke chatbot.
- *
+ *@author Zhang Peng.
  * @version 21 Jan 2021.
- * @author Zhang Peng.
  */
 public class Duke {
 

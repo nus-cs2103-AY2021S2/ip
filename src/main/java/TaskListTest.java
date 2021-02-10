@@ -1,18 +1,18 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * TasklistTest class is a test class for TaskList
- *
- * @version 28 Jan 2021
  * @author Zhang Peng
+ * @version 28 Jan 2021
  */
 class TaskListTest {
-    ArrayList<Task> l = new ArrayList<>();
-    Task t = new Task("todo borrow book");
+    private final ArrayList<Task> l = new ArrayList<>();
+    private final Task t = new Task("todo borrow book");
 
     /**
      * This is the the test method for addToList method.
@@ -31,7 +31,7 @@ class TaskListTest {
     @Test
     void deleteFromList() {
         new TaskList().addToList(l, t);
-        new TaskList().deleteFromList(l,1);
+        new TaskList().deleteFromList(l, 1);
         assertEquals(0, l.size());
     }
 }
