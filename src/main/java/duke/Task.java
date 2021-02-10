@@ -12,10 +12,6 @@ public class Task {
         this.isDone = false;
     }
 
-    public boolean getTaskStatus() {
-        return this.isDone;
-    }
-
     public String getTaskDetail() {
         return this.taskDetail;
     }
@@ -25,11 +21,12 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        //return tick or X symbols
         return (isDone ? "\u2713" : "\u2718");
     }
 
     protected static LocalDate dateStringToDate(String inputDate) {
+        assert inputDate != null && inputDate.contains("-") : "dateString should  not be null and have -'s";
+
         String customInputDate = inputDate.replaceAll("-", " ");
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy MM dd");
         LocalDate date = LocalDate.parse(customInputDate, format);

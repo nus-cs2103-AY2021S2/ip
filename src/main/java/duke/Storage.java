@@ -24,6 +24,8 @@ public class Storage {
      * @see Paths
      */
     public Storage(String filePath) throws IOException {
+        assert filePath.contains("tasks.txt") : "file path provided should contain tasks.txt";
+
         String parentPath = filePath.split("tasks.txt")[0];
         if (!Files.exists(Paths.get(parentPath))) {
             Files.createDirectories(Paths.get(parentPath));
@@ -51,8 +53,10 @@ public class Storage {
      */
     public ArrayList<Task> getTaskList() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
-        List<String> fileLines = Files.readAllLines(Paths.get(filePath));
+        List<String> fileLines = Files.readAllLines(Paths.get(this.filePath));
         for (String line : fileLines) {
+            assert line.contains("|") : "every line in the file should contain | for splitting of information";
+
             String[] userTask = line.split(" \\| ");
             String eventType = userTask[0];
             Task taskInList;
@@ -63,12 +67,16 @@ public class Storage {
                     taskList.add(taskInList);
                     break;
                 case ("[E]"):
+                    assert line.contains("at") : "every event task should have specified event date after 'at'";
+
                     String eventDuration = parser.parseDate(userTask[3].split("at: ")[1]);
                     String eventDetail = userTask[2];
                     taskInList = new Event(eventDuration, eventDetail);
                     taskList.add(taskInList);
                     break;
                 case ("[D]"):
+                    assert line.contains("by") : "every deadline task should have deadline date after 'by'";
+
                     String deadline = parser.parseDate(userTask[3].split("by: ")[1]);
                     String deadlineDetail = userTask[2];
                     taskInList = new Deadline(deadline, deadlineDetail);
@@ -91,6 +99,8 @@ public class Storage {
      * @param data : the user's task list
      */
     public void writeData(List<Task> data) {
+        assert data != null : "List of tasks should not be empty.";
+
         String stringOfData = "";
         for (int i = 0; i < data.size(); i++) {
             if (i == data.size() - 1) {
@@ -102,7 +112,7 @@ public class Storage {
         try {
             Files.writeString(Paths.get(this.filePath), stringOfData);
         } catch (IOException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
     }
 }

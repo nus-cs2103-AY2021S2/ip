@@ -16,6 +16,8 @@ public class TaskList {
      * @see ArrayList
      */
     public TaskList(ArrayList<Task> userList) {
+        assert userList != null : "null arraylist shouldn't be passed in as parameter";
+
         this.userList = userList;
     }
 
@@ -61,17 +63,21 @@ public class TaskList {
      * @param task task to be added into the list.
      */
     public void addTask(Task task) {
+        assert task != null : "empty tasks should not be added to TaskList.";
+
         this.userList.add(task);
     }
 
     /**
      * Removes a task at the particular index of the task list.
      *
-     * @param taskNumber index of the task to be deleted in the task list.
+     * @param taskIndex index of the task to be deleted in the task list.
      * @return The task that got removed.
      */
-    public Task removeTask(int taskNumber) {
-        return this.userList.remove(taskNumber);
+    public Task removeTask(int taskIndex) {
+        assert taskIndex < userList.size() && taskIndex >= 0 : "index of task should be > 0 and < list size";
+        
+        return this.userList.remove(taskIndex);
     }
 
 }

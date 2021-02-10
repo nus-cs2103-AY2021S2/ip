@@ -72,6 +72,10 @@ public class Duke {
      * @see Parser
      */
     public void run() {
+        assert ui != null : "ui object should not be null";
+        assert storage != null : "storage object should not be null";
+        assert parser != null : "parser object should not be null";
+
         ui.printWelcomeGreeting();
         Scanner sc = new Scanner(System.in);
         boolean isBye = false;
@@ -136,10 +140,17 @@ public class Duke {
      * @param command input of the user that requires a response.
      */
     public String getResponse(String command) {
+        assert ui != null : "ui object should not be null";
+        assert storage != null : "storage object should not be null";
+        assert parser != null : "parser object should not be null";
+        assert command.length() > 0 : "user should not enter an empty command";
+
         String response = "";
+
         String[] commandArr = command.split(" ");
+
         Task newTask;
-        ui.printHorizontalRule();
+
         try {
             switch (commandArr[0]) {
             case EXIT_COMMAND:

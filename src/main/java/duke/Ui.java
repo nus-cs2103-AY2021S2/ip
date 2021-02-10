@@ -48,11 +48,15 @@ public class Ui {
     }
 
     public String getPrintTaskListString(TaskList userList) {
+        assert userList != null || userList.getTaskListSize() >= 0: "TaskList passed in as parameter should not be null";
+
         String stringToBeReturned = "";
         for (int i = 0; i < userList.getTaskListSize(); i++) {
             stringToBeReturned += (i + 1) + "." + userList.getTask(i).toString() + "\n";
         }
-        return stringToBeReturned.length() == 0 ? "Your list is empty.\n" : stringToBeReturned + "\n";
+        return stringToBeReturned.length() == 0
+                ? "Your list is empty.\n"
+                : stringToBeReturned + "\nYou have " + userList.getTaskListSize() + " tasks in your list.\n";
     }
 
     /**
@@ -71,8 +75,10 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
-    @SuppressWarnings("checkstyle:OperatorWrap")
     public String getPrintDoneTaskString(TaskList userTaskList, int taskNumber) {
+        assert taskNumber < userTaskList.getTaskListSize() && taskNumber > 0
+                : "taskNumber should be within size of task List";
+
         Task doneTask = userTaskList.getTask(taskNumber - 1);
         doneTask.markAsDone();
         String doneTaskString = String.format("Nice! I've marked this task as done:\n[%s] \n%s\n",
@@ -122,6 +128,9 @@ public class Ui {
     }
 
     public String getPrintDeletedTaskString(TaskList userTaskList, int taskNumber) {
+        assert taskNumber < userTaskList.getTaskListSize() && taskNumber > 0
+                : "taskNumber should be within size of task List";
+
         Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
         String deletedTaskString = "";
         deletedTaskString += "Noted. I've removed this task\n";
