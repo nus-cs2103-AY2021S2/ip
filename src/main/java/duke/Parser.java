@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -11,6 +13,7 @@ import duke.command.DeleteTaskCommand;
 import duke.command.DoneTaskCommand;
 import duke.command.FindCommand;
 import duke.command.ShowTaskCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.exception.DukeValidationException;
 import duke.task.Deadline;
@@ -57,21 +60,21 @@ public class Parser {
             String[] deadlineDetails = validateTwoFieldWithDivider(" /by ",
                         "Task name",
                         "There\'s no task name specified!",
-                                        "Date",
+                        "Date",
                         "\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
 
             try {
                 Deadline deadline = new Deadline(deadlineDetails[0], LocalDate.parse(deadlineDetails[1]));
                 return new AddTaskCommand(deadline);
             } catch (DateTimeParseException dtEx) {
-                throw new DukeException("\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
+                throw new DukeException("Your date/time must be in the yyyy-mm-dd format. Please try again!");
             }
         case "event":
             String[] eventDetails = validateTwoFieldWithDivider(" /at ",
                     "Event name",
                     "There\'s no event name specified!",
                     "Date",
-                    "\"Your date/time must be in the yyyy-mm-dd format. Please try again!");
+                    "Your date/time must be in the yyyy-mm-dd format. Please try again!");
 
             try {
                 Event event = new Event(eventDetails[0], LocalDate.parse(eventDetails[1]));
@@ -90,6 +93,28 @@ public class Parser {
             return new DeleteTaskCommand(Integer.parseInt(deleteIndex));
         case "bye":
             return new ByeCommand();
+        case "update": // update <index> <type> <value>
+            Pattern namePattern = Pattern.compile("update (\\d) name (.+)");
+            Matcher nameMatcher = namePattern.matcher(this.input);
+
+            Pattern datePattern = Pattern.compile("update (\\d) date (.+)");
+            Matcher dateMatcher = datePattern.matcher(this.input);
+            try {
+                if (nameMatcher.matches()) {
+                    int index = Integer.parseInt(nameMatcher.group(1));
+                    String newName =nameMatcher.group(2);
+                    return new UpdateCommand(index, newName);
+                } else if (dateMatcher.matches()) {
+                    int index = Integer.parseInt(dateMatcher.group(1));
+                    LocalDate newDate = LocalDate.parse(dateMatcher.group(2));
+                    return new UpdateCommand(index, newDate);
+                } else {
+                    throw new DukeException("Your update command is invalid! Make sure it's in this format:" +
+                            "update <index> <type (name|date)> <value>");
+                }
+            } catch (DateTimeParseException dtEx) {
+                throw new DukeException("Your date/time must be in the yyyy-mm-dd format. Please try again!");
+            }
         default:
             throw new DukeException("There\'s no such command! Try todo?");
         }
