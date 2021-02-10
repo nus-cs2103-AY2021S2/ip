@@ -29,11 +29,13 @@ public class DeleteTaskCommand extends Command {
     @Override
     public ArrayList<String> execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<String> returnMsg = new ArrayList<>();
+        int currentTasksSize = tasks.size();
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("The task number does not work, try again?");
         }
         Task deleteTask = tasks.find(index);
         tasks.delete(deleteTask);
+        assert(tasks.size() == currentTasksSize - 1) : "Task has not been deleted, count is not updated";
         returnMsg.add(ui.speak("Aww yes! I've removed this task: " + deleteTask));
         returnMsg.add(ui.speak("Now you have " + tasks.size() + " tasks left."));
         storage.writeToFile(tasks);
