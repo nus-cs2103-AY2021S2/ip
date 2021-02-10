@@ -89,9 +89,9 @@ public class Parser {
 
     private static AddCommand handleDateTimeTasks(String[] split, String userInput, String command, TaskList tasks)
             throws DukeArgumentException, DukeDateTimeException {
+        checkStringArgument(split, command);
         int detailsIdx = command.equals(COMMAND.DEADLINE) ? 9 : 6;
         String regex = command.equals(COMMAND.DEADLINE) ? " /by " : " /at ";
-        checkStringArgument(split, command);
         String[] taskDetails = userInput.substring(detailsIdx).split(regex);
         checkDateTime(taskDetails);
         assert(taskDetails.length == 2);
@@ -128,7 +128,7 @@ public class Parser {
     private static void checkStringArgument(String[] split, String command) throws DukeArgumentException {
         if (split.length == 1 && command.equals(COMMAND.FIND)) {
             throw new DukeArgumentException("You have not entered a keyword!");
-        } else if (split.length == 1 && command.equals(COMMAND.TODO)) {
+        } else if (split.length == 1) {
             throw new DukeArgumentException("You have not entered a task description!");
         } else {
             // Do nothing if a keyword or task description is provided.
