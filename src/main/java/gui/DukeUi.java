@@ -3,6 +3,7 @@ package gui;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -97,6 +98,7 @@ public class DukeUi extends Application {
             handleUserInput();
         });
 
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(Ui.showWelcome()), new ImageView(duke)));
     }
 
     private Label getDialogLabel(String text) {
