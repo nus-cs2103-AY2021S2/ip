@@ -143,13 +143,10 @@ public class Storage {
      */
     public static void saveTasksList(TaskList taskList) throws IOException {
         File f = new File(Storage.TASK_LIST_FILE_PATH.toString());
-        // doesn't actually create a new file i think, converts an existing file
 
         FileWriter fw = new FileWriter(f);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        // maybe taskList should include something that takes in lambda that you can run on each method...
-        // for (Task task : this.taskArrayList) {
         for (int i = 0; i < taskList.size(); i++) {
             bw.write(taskList.get(i).unparse());
         }

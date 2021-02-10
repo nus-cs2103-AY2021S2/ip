@@ -59,7 +59,7 @@ public class Event extends Task {
      */
     public static Event parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
-        assert oneLine.startsWith("T" + delimiter);
+        assert oneLine.startsWith("E" + delimiter);
 
         int descStartIdx = oneLine.indexOf(delimiter);
         int descEndIdx = oneLine.indexOf(delimiter, descStartIdx + 1);
