@@ -1,15 +1,11 @@
+import java.time.LocalDate;
+
 public class Task {
 
-    protected String description;
-    protected String eventDate;
+    protected final String description;
+    protected final String eventDate;
     protected boolean isDone;
-
-    enum Level {
-        low,
-        average,
-        high
-    }
-
+    protected LocalDate date;
 
     /**
      * Main constructor that accepts a description of the task, and by default
@@ -20,6 +16,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.eventDate = "";
+        this.date = null;
     }
 
     /**
@@ -30,6 +27,8 @@ public class Task {
     public Task(String description, String eventDate) {
         this.description = description;
         this.eventDate = eventDate;
+        this.isDone = false;
+        this.date = null;
     }
 
     public String getTaskType() {

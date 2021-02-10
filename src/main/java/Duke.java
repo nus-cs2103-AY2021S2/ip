@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Driver class that takes in input and performs certain functions based on input.
@@ -14,11 +17,12 @@ public class Duke {
 
     /**
      * Main class to take in user input.
-     * @param args Filler
+     * @param params Standard user input params
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] params) throws IOException {
         Scanner sc = new Scanner(System.in);
 
+        // Starting string to prime the program
         String command = "Hello";
 
         // Creating directory if it does not exist
@@ -35,11 +39,11 @@ public class Duke {
             if (command.equals("Hello")) {
                 System.out.println("Hello! I'm Duke");
                 System.out.println("What can I do for you?");
-            } else if (command.equals("list")) {
+            } else if (command.startsWith("list")) {
                 enumerateTasks();
             } else if (command.startsWith("done")) {
-                String[] delString = command.split("\\s+");
-                markAsDone(Integer.parseInt(delString[1]));
+                String[] taskToDelete = command.split("\\s+");
+                markAsDone(Integer.parseInt(taskToDelete[1]));
             } else if (command.startsWith("todo")) {
                 try {
                     Todo currentTask = new Todo(command.substring(5));
@@ -65,6 +69,8 @@ public class Duke {
                     String[] splitString = command.split("/by");
                     String eventDesc = splitString[0];
                     String eventDate = splitString[1];
+                    String[] dateAndTime = eventDate.split("\\s+");
+
                     Deadline currentTask = new Deadline(eventDesc.substring(9), eventDate);
                     addToTasks(currentTask);
                     logTask(currentTask);

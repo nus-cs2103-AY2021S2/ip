@@ -1,4 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM" +
+            "/yyyy HHmm");
+
+    private LocalDateTime time;
 
     Deadline(String description) {
         super(description);
@@ -6,6 +14,13 @@ public class Deadline extends Task {
 
     Deadline(String description, String eventDate) {
         super(description, eventDate);
+
+        try {
+            time = LocalDateTime.parse(eventDate, formatter);
+        } catch (Exception e) {
+            time = null;
+        }
+
     }
 
     @Override

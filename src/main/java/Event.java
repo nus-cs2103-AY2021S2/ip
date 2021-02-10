@@ -1,4 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM" +
+            "/yyyy HHmm");
+
+    private LocalDateTime time;
 
     /**
      * Main Constructor.
@@ -15,6 +23,12 @@ public class Event extends Task {
      */
     Event(String description, String eventDate) {
         super(description, eventDate);
+
+        try {
+            time = LocalDateTime.parse(eventDate, formatter);
+        } catch (Exception e) {
+            time = null;
+        }
     }
 
     /**
