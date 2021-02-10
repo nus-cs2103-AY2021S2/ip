@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Representation of the UI of Duke
  */
@@ -12,16 +10,6 @@ public class Ui {
             + "What can I assist you with?";
     private static final String ERROR_HEADER = "Error: ";
     public Ui() {
-    }
-
-    /**
-     * Reads the next user given command.
-     *
-     * @return Command entered by the user.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
     }
 
     /**
@@ -44,6 +32,7 @@ public class Ui {
     public void showExit() {
         System.out.println(EXIT_MESSAGE);
     }
+
     /**
      * Returns the error as a string.
      *
