@@ -37,7 +37,7 @@ public class Duke {
      * @return A <code>String</code> of response.
      */
     public String getResponse(String input) {
-        Command command = this.getCommand(input);
+        Command command = Parser.parse(input);
         command.execute(this.tasks);
 
         if (command instanceof ByeCommand) {
@@ -54,17 +54,7 @@ public class Duke {
      * @return true if the application should be terminated, and false otherwise.
      */
     public boolean isExit(String input) {
-        Command command = this.getCommand(input);
+        Command command = Parser.parse(input);
         return command.isExit();
-    }
-
-    /**
-     * Gets the <code>Command</code> object w.r.t the users' input.
-     *
-     * @param input A line or raw user input.
-     * @return A <code>Command</code> object corresponding to the input.
-     */
-    private Command getCommand(String input) {
-        return Parser.parse(input);
     }
 }

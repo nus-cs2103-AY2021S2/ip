@@ -24,7 +24,7 @@ public class TestListCommand {
     private final ListCommand command;
 
     /**
-     * Initialize a <code>ListCommand</code> instance and a <code>TaskList</code> instance for testing.
+     * Initializes a <code>ListCommand</code> instance and a <code>TaskList</code> instance for testing.
      */
     public TestListCommand() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
@@ -45,7 +45,7 @@ public class TestListCommand {
     }
 
     /**
-     * Test that <code>ListCommand</code> correctly determines whether to exit the application.
+     * Tests that <code>ListCommand</code> correctly determines whether to exit the application.
      */
     @Test
     public void testIsExit() {
@@ -53,7 +53,7 @@ public class TestListCommand {
     }
 
     /**
-     * Test that <code>ListCommand</code> (correctly) does not change the input <code>TaskList</code>.
+     * Tests that <code>ListCommand</code> (correctly) does not change the input <code>TaskList</code>.
      */
     @Test
     public void testExecute() {
@@ -71,7 +71,7 @@ public class TestListCommand {
     }
 
     /**
-     * Test that <code>ListCommand</code> computes the response message correctly.
+     * Tests that <code>ListCommand</code> computes the response message correctly.
      */
     @Test
     public void testResponse() {

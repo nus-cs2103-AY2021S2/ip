@@ -24,7 +24,7 @@ public class TestFindCommand {
     private final FindCommand command;
 
     /**
-     * Initialize a <code>FindCommand</code> instance and a <code>TaskList</code> instance for testing.
+     * Initializes a <code>FindCommand</code> instance and a <code>TaskList</code> instance for testing.
      */
     public TestFindCommand() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
@@ -45,7 +45,7 @@ public class TestFindCommand {
     }
 
     /**
-     * Test that <code>FindCommand</code> correctly determines whether to exit the application.
+     * Tests that <code>FindCommand</code> correctly determines whether to exit the application.
      */
     @Test
     public void testIsExit() {
@@ -53,7 +53,7 @@ public class TestFindCommand {
     }
 
     /**
-     * Test that <code>FindCommand</code> (correctly) does not change the input <code>TaskList</code>.
+     * Tests that <code>FindCommand</code> (correctly) does not change the input <code>TaskList</code>.
      */
     @Test
     public void testExecute() {
@@ -71,7 +71,7 @@ public class TestFindCommand {
     }
 
     /**
-     * Test that <code>FindCommand</code> computes the response message correctly.
+     * Tests that <code>FindCommand</code> computes the response message correctly.
      */
     @Test
     public void testResponse() {

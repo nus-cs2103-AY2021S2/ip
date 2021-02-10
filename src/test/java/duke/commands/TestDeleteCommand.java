@@ -24,7 +24,7 @@ public class TestDeleteCommand {
     private final DeleteCommand command;
 
     /**
-     * Initialize a <code>DeleteCommand</code> instance and a <code>TaskList</code> instance for testing.
+     * Initializes a <code>DeleteCommand</code> instance and a <code>TaskList</code> instance for testing.
      */
     public TestDeleteCommand() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
@@ -45,7 +45,7 @@ public class TestDeleteCommand {
     }
 
     /**
-     * Test that <code>DeleteCommand</code> correctly determines whether to exit the application.
+     * Tests that <code>DeleteCommand</code> correctly determines whether to exit the application.
      */
     @Test
     public void testIsExit() {
@@ -53,7 +53,7 @@ public class TestDeleteCommand {
     }
 
     /**
-     * Test that <code>DeleteCommand</code> alters the input <code>TaskList</code> correctly.
+     * Tests that <code>DeleteCommand</code> alters the input <code>TaskList</code> correctly.
      */
     @Test
     public void testExecute() {
@@ -70,7 +70,7 @@ public class TestDeleteCommand {
     }
 
     /**
-     * Test that <code>DeleteCommand</code> computes the response message correctly.
+     * Tests that <code>DeleteCommand</code> computes the response message correctly.
      */
     @Test
     public void testResponse() {

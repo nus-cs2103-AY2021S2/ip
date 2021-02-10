@@ -54,7 +54,7 @@ public class Storage {
     }
 
     /**
-     * Save the tasks in the input <code>TaskList</code> into a text file at the specified path.
+     * Saves the tasks in the input <code>TaskList</code> into a text file at the specified path.
      * If such a text file already exists, it will be overwritten.
      * If such a text file does not exist, one will be created.
      *

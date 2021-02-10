@@ -38,7 +38,7 @@ public class TestTaskList {
     }
 
     /**
-     * Test whether the <code>TaskList</code> class collects and orders its tasks correctly.
+     * Tests whether the <code>TaskList</code> class collects and orders its tasks correctly.
      */
     @Test
     public void testGetListOfTasks() {
@@ -50,7 +50,7 @@ public class TestTaskList {
     }
 
     /**
-     * Test whether the <code>String</code> of <code>Task</code> objects are generated correctly.
+     * Tests whether the <code>String</code> of <code>Task</code> objects are generated correctly.
      */
     @Test
     public void testTaskListString() {
@@ -62,7 +62,7 @@ public class TestTaskList {
     }
 
     /**
-     * Test whether the correct task can be retrieved, by index, from the <code>TaskList</code> collection.
+     * Tests whether the correct task can be retrieved, by index, from the <code>TaskList</code> collection.
      */
     @Test
     public void testGetTask() {
@@ -76,7 +76,7 @@ public class TestTaskList {
     }
 
     /**
-     * Test whether the correct task can be popped, by index, from the <code>TaskList</code> collection.
+     * Tests whether the correct task can be popped, by index, from the <code>TaskList</code> collection.
      */
     @Test
     public void testPopTask() {
@@ -90,7 +90,7 @@ public class TestTaskList {
     }
 
     /**
-     * Test whether the <code>TaskList</code> class outputs the size of its collection correctly.
+     * Tests whether the <code>TaskList</code> class outputs the size of its collection correctly.
      */
     @Test
     public void testGetSize() {

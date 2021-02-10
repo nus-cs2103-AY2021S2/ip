@@ -17,7 +17,7 @@ public class TestByeCommand {
     private final ByeCommand command;
 
     /**
-     * Initialize a <code>ByeCommand</code> instance for testing.
+     * Initializes a <code>ByeCommand</code> instance for testing.
      */
     public TestByeCommand() {
         this.command = new ByeCommand();
@@ -28,7 +28,7 @@ public class TestByeCommand {
     }
 
     /**
-     * Test that <code>ByeCommand</code> correctly determines whether to exit the application.
+     * Tests that <code>ByeCommand</code> correctly determines whether to exit the application.
      */
     @Test
     public void testIsExit() {
@@ -36,7 +36,7 @@ public class TestByeCommand {
     }
 
     /**
-     * Test that <code>ByeCommand</code> (correctly) does not change the input <code>TaskList</code>.
+     * Tests that <code>ByeCommand</code> (correctly) does not change the input <code>TaskList</code>.
      */
     @Test
     public void testExecute() {
@@ -50,7 +50,7 @@ public class TestByeCommand {
     }
 
     /**
-     * Test that <code>ByeCommand</code> computes the response message correctly.
+     * Tests that <code>ByeCommand</code> computes the response message correctly.
      */
     @Test
     public void testResponse() {

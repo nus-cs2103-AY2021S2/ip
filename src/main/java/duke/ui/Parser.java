@@ -101,7 +101,7 @@ public class Parser {
     }
 
     /**
-     * Remove the first token, i.e. the action's type, from the input string.
+     * Removes the first token, i.e. the action's type, from the input string and returns the remainder.
      *
      * @param input A line of raw user input.
      * @return The input with the action's type substring/token removed.

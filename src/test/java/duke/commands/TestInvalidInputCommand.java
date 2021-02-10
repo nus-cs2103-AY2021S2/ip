@@ -20,7 +20,7 @@ public class TestInvalidInputCommand {
     private final TaskList tasks;
 
     /**
-     * Initialize a <code>InvalidInputCommand</code> instance for testing.
+     * Initializes a <code>InvalidInputCommand</code> instance for testing.
      */
     public TestInvalidInputCommand() {
         this.tasks = new TaskList();
@@ -29,7 +29,7 @@ public class TestInvalidInputCommand {
     }
 
     /**
-     * Test that <code>InvalidInputCommand</code> correctly determines whether to exit the application.
+     * Tests that <code>InvalidInputCommand</code> correctly determines whether to exit the application.
      */
     @Test
     public void testIsExit() {
@@ -37,7 +37,7 @@ public class TestInvalidInputCommand {
     }
 
     /**
-     * Test that <code>InvalidInputCommand</code> (correctly) does not change the input <code>TaskList</code>.
+     * Tests that <code>InvalidInputCommand</code> (correctly) does not change the input <code>TaskList</code>.
      */
     @Test
     public void testExecute() {
@@ -51,7 +51,7 @@ public class TestInvalidInputCommand {
     }
 
     /**
-     * Test that <code>InvalidInputCommand</code> correctly respond to the exception when
+     * Tests that <code>InvalidInputCommand</code> correctly respond to the exception when
      * no valid action could be inferred from the input.
      */
     @Test
@@ -63,7 +63,7 @@ public class TestInvalidInputCommand {
     }
 
     /**
-     * Test that <code>InvalidInputCommand</code> correctly respond to the exception when a task
+     * Tests that <code>InvalidInputCommand</code> correctly respond to the exception when a task
      * description is missing when required.
      */
     @Test
@@ -84,7 +84,7 @@ public class TestInvalidInputCommand {
     }
 
     /**
-     * Test that <code>InvalidInputCommand</code> correctly respond to the exception when, for a DONE
+     * Tests that <code>InvalidInputCommand</code> correctly respond to the exception when, for a DONE
      * or DELETE command, the accompanying description is not an integer.
      */
     @Test
@@ -101,7 +101,7 @@ public class TestInvalidInputCommand {
     }
 
     /**
-     * Test that <code>InvalidInputCommand</code> correctly respond to the exception when, for a DEADLINE
+     * Tests that <code>InvalidInputCommand</code> correctly respond to the exception when, for a DEADLINE
      * command, a datetime is not specified in the input.
      */
     @Test
@@ -118,7 +118,7 @@ public class TestInvalidInputCommand {
     }
 
     /**
-     * Test that <code>InvalidInputCommand</code> correctly respond to the exception when, for an EVENT
+     * Tests that <code>InvalidInputCommand</code> correctly respond to the exception when, for an EVENT
      * command, an datetime is not specified in the input.
      */
     @Test
@@ -135,7 +135,7 @@ public class TestInvalidInputCommand {
     }
 
     /**
-     * Test that <code>InvalidInputCommand</code> correctly respond to the exception when, for a DEADLINE
+     * Tests that <code>InvalidInputCommand</code> correctly respond to the exception when, for a DEADLINE
      * or an EVENT command, the datetime specified in the input is not in a valid format.
      */
     @Test

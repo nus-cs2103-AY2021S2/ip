@@ -25,7 +25,7 @@ public class TestDoneCommand {
     private final DoneCommand command;
 
     /**
-     * Initialize a <code>DoneCommand</code> instance and a <code>TaskList</code> instance for testing.
+     * Initializes a <code>DoneCommand</code> instance and a <code>TaskList</code> instance for testing.
      */
     public TestDoneCommand() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
@@ -46,7 +46,7 @@ public class TestDoneCommand {
     }
 
     /**
-     * Test that <code>DoneCommand</code> correctly determines whether to exit the application.
+     * Tests that <code>DoneCommand</code> correctly determines whether to exit the application.
      */
     @Test
     public void testIsExit() {
@@ -54,7 +54,7 @@ public class TestDoneCommand {
     }
 
     /**
-     * Test that <code>DoneCommand</code> alters the input <code>TaskList</code> correctly.
+     * Tests that <code>DoneCommand</code> alters the input <code>TaskList</code> correctly.
      */
     @Test
     public void testExecute() {
@@ -80,7 +80,7 @@ public class TestDoneCommand {
     }
 
     /**
-     * Test that <code>DoneCommand</code> computes the response message correctly.
+     * Tests that <code>DoneCommand</code> computes the response message correctly.
      */
     @Test
     public void testResponse() {
