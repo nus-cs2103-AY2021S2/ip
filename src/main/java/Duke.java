@@ -21,48 +21,25 @@ public class Duke {
             storage = new Storage(path);
             tasks = new TaskList(storage.load());
         } catch (IOException ie) {
-            ui.printStorageIoError();
             System.exit(0);
         } catch (DukeException de) {
-            ui.printDukeException(de);
             tasks = new TaskList();
         }
     }
 
     /**
-     * Driver method for the Duke bot.
+     * Get response from Duke according to the input.
+     * @param input Input from the user.
+     * @return A String response from Duke.
      */
-    public void run() {
-        ui.printIntroduction();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String stringCommand = ui.readCommand();
-                Command command = Parser.parseCommand(stringCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException de) {
-                ui.printDukeException(de);
-            } catch (IOException ie) {
-                ui.printUpdateIoError(ie);
-            }
-        }
-
-        ui.closeScanner();
-        ui.printExitMessage();
-    }
-
     public String getResponse(String input) {
         try {
-            //String stringCommand = ui.readCommand();
             Command command = Parser.parseCommand(input);
             return command.execute(tasks, ui, storage);
         } catch (DukeException de) {
-            ui.printDukeException(de);
+            return ui.printDukeException(de);
         } catch (IOException ie) {
-            ui.printUpdateIoError(ie);
+            return ui.printUpdateIoError(ie);
         }
-        return "Failed?";
     }
 }

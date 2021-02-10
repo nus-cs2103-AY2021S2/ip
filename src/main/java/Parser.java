@@ -36,7 +36,8 @@ public class Parser {
         case ("find"):
             return new FindCommand(first[1].split(" "));
         default:
-            throw new DukeException("Unknown command received.");
+            throw new DukeException("Unknown command received. " +
+                    "Please use \"not implemented\" to view the available commands.");
         }
     }
 }
