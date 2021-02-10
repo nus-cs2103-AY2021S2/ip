@@ -24,7 +24,7 @@ public class Storage {
     /**
      * Class constructor specifying directory of saved data.
      *
-     * @param fileDir directory of saved data.
+     * @param fileDir Directory of saved data.
      */
     public Storage(String fileDir) {
         this.fileDir = fileDir;
@@ -34,7 +34,7 @@ public class Storage {
      * Loads task list saved on local disk.
      * If task list does not exist, initialise an empty task list.
      *
-     * @return TaskList returns task list saved on disk, if it does not exist, an empty task list is returned instead.
+     * @return Task list saved on disk, if it does not exist, an empty task list is returned instead.
      * @throws DukeException If any error occurs while loading task list from disk.
      */
     public TaskList load() throws DukeException {
@@ -55,7 +55,7 @@ public class Storage {
     /**
      * Saves task list saved to disk.
      *
-     * @param taskList task list to be stored to disk.
+     * @param taskList Task list to be stored to disk.
      * @throws DukeException If any error occurs while saving task list to disk.
      */
     public void save(TaskList taskList) throws DukeException {

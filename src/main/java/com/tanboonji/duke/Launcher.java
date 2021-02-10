@@ -10,7 +10,7 @@ public class Launcher {
     /**
      * Launches the Main class.
      *
-     * @param args command line arguments.
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);

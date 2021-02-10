@@ -21,7 +21,7 @@ public class Main extends Application {
     /**
      * Launches MainWindow scene and links the scene to Duke application.
      *
-     * @param stage root JavaFX stage.
+     * @param stage Root JavaFX stage.
      */
     @Override
     public void start(Stage stage) {

@@ -38,7 +38,7 @@ public class Duke {
     /**
      * Executes user command and returns response from command.
      *
-     * @param input user command.
+     * @param input User input command.
      * @return String response from executing user command.
      */
     public String getResponse(String input) {
