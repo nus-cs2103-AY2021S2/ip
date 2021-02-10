@@ -117,8 +117,13 @@ public class Ui {
         return printStr.toString();
     }
 
-    private static String textWrapper(String a) {
-        return a;
+    /**
+     * Used to format text in a unique way.
+     * @param input the string input
+     * @return the formatted string
+     */
+    private static String textWrapper(String input) {
+        return input;
     }
 
 }

@@ -6,8 +6,8 @@ public class Deadline extends Task {
         super("D", input);
     }
 
-    public Deadline(String[] arr) {
-        super("D", arr);
+    public Deadline(String[] inputArray) {
+        super("D", inputArray);
     }
 
     @Override
