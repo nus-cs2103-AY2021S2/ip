@@ -47,10 +47,9 @@ public class DoneCommand extends Command {
      * Computes a response to notify the users if a <code>Task</code> is marked as done.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui    A handler to manage the application's user-interface layer.
      * @return A <code>String</code> to respond to marking a <code>Task</code> as done.
      */
-    public String getResponse(TaskList tasks, Ui ui) {
-        return ui.handleDone(this.doneTask, this.index);
+    public String getResponse(TaskList tasks) {
+        return Ui.getDoneResponse(this.doneTask, this.index);
     }
 }

@@ -31,10 +31,9 @@ public class ListCommand extends Command {
      * index, description and status.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui    A handler to manage the application's user-interface layer.
      * @return A <code>String</code> displaying the existing tasks.
      */
-    public String getResponse(TaskList tasks, Ui ui) {
-        return ui.handleList(tasks);
+    public String getResponse(TaskList tasks) {
+        return Ui.getListResponse(tasks);
     }
 }

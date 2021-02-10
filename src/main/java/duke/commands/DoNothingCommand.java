@@ -25,10 +25,9 @@ public class DoNothingCommand extends Command {
      * Computes a feedback or response to the users' input.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui    A handler to manage the application's user-interface layer.
      * @return Error message
      */
-    public String getResponse(TaskList tasks, Ui ui) {
+    public String getResponse(TaskList tasks) {
         return this.exceptionMessage;
     }
 

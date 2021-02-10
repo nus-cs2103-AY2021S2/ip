@@ -27,8 +27,7 @@ import duke.exceptions.TaskNumberNotIntException;
 
 
 /**
- * Handles all the interpretation and conversion of users' raw input into logic that
- * runs the application.
+ * Handles the conversion of raw users' input into logic that runs the application.
  */
 public class Parser {
     private static final String BYE = "BYE";
@@ -46,7 +45,7 @@ public class Parser {
     /**
      * Parses a line of raw user input, converting it into a <code>Command</code> object that
      * handles all of the application's logic. Accordingly, the output <code>Command</code> object
-     * will be used to (1) alter the application's state, (2) display responses to the users, and
+     * will be used to (1) alter the application's state, (2) computes responses to the users, and
      * (3) determine whether to terminate the application.
      *
      * @param input A line of raw user input.

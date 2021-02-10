@@ -44,10 +44,9 @@ public class AddEventCommand extends Command {
      * Computes a response to notify the users the adding of the <code>Event</code>.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui    A handler to manage the application's user-interface layer.
      * @return A <code>String</code> to respond to the adding of the <code>Event</code>.
      */
-    public String getResponse(TaskList tasks, Ui ui) {
-        return ui.handleAddTask(tasks, this.event);
+    public String getResponse(TaskList tasks) {
+        return Ui.getAddTaskResponse(tasks, this.event);
     }
 }

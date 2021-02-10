@@ -43,10 +43,9 @@ public class FindCommand extends Command {
      * index, description and status.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui    A handler to manage the application's user-interface layer.
      * @return A <code>String</code> displaying the search results.
      */
-    public String getResponse(TaskList tasks, Ui ui) {
+    public String getResponse(TaskList tasks) {
         TaskList matchingTasks = new TaskList();
 
         for (Task task : tasks.getListOfTasks()) {
@@ -58,6 +57,6 @@ public class FindCommand extends Command {
             }
         }
 
-        return ui.handleFind(matchingTasks, this.keywords);
+        return Ui.getFindResponse(matchingTasks, this.keywords);
     }
 }

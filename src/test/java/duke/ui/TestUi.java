@@ -17,12 +17,12 @@ public class TestUi {
     public void testPrinter() {
         Ui ui = new Ui();
 
-        ui.showWelcome();
-        ui.handleBye();
-        ui.handleList(this.tasks);
-        ui.handleDone(this.dummyTask, 2);
-        ui.handleDelete(this.dummyTask, 2);
-        ui.handleFind(this.tasks, "dummy keyword");
-        ui.handleAddTask(this.tasks, this.dummyTask);
+        ui.getWelcomeResponse();
+        ui.getByeResponse();
+        ui.getListResponse(this.tasks);
+        ui.getDoneResponse(this.dummyTask, 2);
+        ui.getDeleteResponse(this.dummyTask, 2);
+        ui.getFindResponse(this.tasks, "dummy keyword");
+        ui.getAddTaskResponse(this.tasks, this.dummyTask);
     }
 }

@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.commands.ByeCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,30 +28,43 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the user-interface and displays the welcome message.
+     */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
+
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.getWelcomeResponse(), this.dukeImage)
+        );
+        this.userInput.clear();
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Receives a <code>String</code> of user input. Then, does the following:
+     * (1) Executes the actions w.r.t. to the input.
+     * (2) Computes a response and display it in a dialog container.
+     * (3) Determines if the application should exit. Then, exit if so.
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+        String input = this.userInput.getText();
 
-        if (Parser.parse(input) instanceof ByeCommand) {
+        this.duke.execute(input);
+        String response = this.duke.getResponse(input);
+
+        this.dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, this.userImage),
+                DialogBox.getDukeDialog(response, this.dukeImage)
+        );
+        this.userInput.clear();
+
+        if (this.duke.isExit(input)) {
             Platform.exit();
             System.exit(0);
         }

@@ -5,26 +5,26 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 /**
- * Handles all messages displayed to the app's users. Note that this class DOES NOT handle
- * any logic regarding the creation, adding, modifying or deletion of tasks.
+ * Handles the generation of all responses to be displayed to the app's users.
  */
 public class Ui {
 
     /**
-     * Prints message for when the app starts.
+     * Returns the message to be shown right when the application is started.
+     *
+     * @return A <code>String</code> to respond to the starting up of the application.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke.Duke");
-        System.out.println("What can I do for you?");
+    public static String getWelcomeResponse() {
+        return "Hello! I'm Duke!" + "\n" + "What can I do for you?";
     }
 
     /**
-     * Computes and returns the message to be shown when the app is shutting down.
+     * Returns the message to be shown when the app is shutting down.
      * That is, when the ByeCommand is executed.
      *
      * @return A <code>String</code> to respond to the shutting down of the application.
      */
-    public String handleBye() {
+    public static String getByeResponse() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -35,7 +35,7 @@ public class Ui {
      * @param tasks A <code>TaskList</code> object, representing a collection of <Task>Task</Task>
      *              objects to be displayed.
      */
-    public String handleList(TaskList tasks) {
+    public static String getListResponse(TaskList tasks) {
         if (tasks.getSize() == 0) {
             return "You have no tasks in your list yet :)";
         } else {
@@ -51,7 +51,7 @@ public class Ui {
      * @param index    Index of the <code>Task</code> (if any) that was marked as done.
      * @return A <code>String</code> to respond to the marking of a <code>Task</code> as done.
      */
-    public String handleDone(Task doneTask, int index) {
+    public static String getDoneResponse(Task doneTask, int index) {
         try {
             if (null == doneTask) {
                 throw new TaskNumberNotExistException(index);
@@ -71,7 +71,7 @@ public class Ui {
      * @param index       Index of the <code>Task</code> (if any) that was deleted.
      * @return A <code>String</code> to respond to the deletion of a <code>Task</code>.
      */
-    public String handleDelete(Task deletedTask, int index) {
+    public static String getDeleteResponse(Task deletedTask, int index) {
         try {
             if (null == deletedTask) {
                 throw new TaskNumberNotExistException(index);
@@ -91,7 +91,7 @@ public class Ui {
      *                that match the keyword(s) used for the search.
      * @param keyword Keyword(s) used for the search
      */
-    public String handleFind(TaskList tasks, String keyword) {
+    public static String getFindResponse(TaskList tasks, String keyword) {
         if (tasks.getSize() == 0) {
             return "There are no tasks matching the '" + keyword + "' in your list :O";
         } else {
@@ -108,7 +108,7 @@ public class Ui {
      * @param newTask The added <code>Task</code> object.
      * @return A <code>String</code> to respond to the adding of a new <code>Task</code>.
      */
-    public String handleAddTask(TaskList tasks, Task newTask) {
+    public static String getAddTaskResponse(TaskList tasks, Task newTask) {
         return "Got it. I've added this task:" + "\n"
                 + newTask.getStatusString() + "\n"
                 + "Now you have " + tasks.getSize() + " task(s) in the list.";

@@ -45,10 +45,9 @@ public class DeleteCommand extends Command {
      * Computes a response to notify the users if a <code>Task</code> is deleted.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
-     * @param ui    A handler to manage the application's user-interface layer.
      * @return A <code>String</code> to respond to the deletion of a <code>Task</code> (if any).
      */
-    public String getResponse(TaskList tasks, Ui ui) {
-        return ui.handleDelete(this.deletedTask, this.index);
+    public String getResponse(TaskList tasks) {
+        return Ui.getDeleteResponse(this.deletedTask, this.index);
     }
 }
