@@ -14,7 +14,7 @@ public class TestTask {
     private final Task task = new Task(this.description);
 
     /**
-     * Test that the <code>Task</code> class processes the task's description correctly.
+     * Tests that the <code>Task</code> class processes the task's description correctly.
      */
     @Test
     public void testDescription() {
@@ -22,7 +22,7 @@ public class TestTask {
     }
 
     /**
-     * Test that the <code>Task</code> class processes the task's status correctly.
+     * Tests that the <code>Task</code> class processes the task's status correctly.
      */
     @Test
     public void testStatus() {

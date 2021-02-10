@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Mark a <code>Task</code> in the input <code>TaskList</code>, identified by its index, as done.
+     * Marks a <code>Task</code> in the input <code>TaskList</code>, identified by its index, as done.
      *
      * @param tasks A collection of <code>Task</code> objects representing the application's state.
      */

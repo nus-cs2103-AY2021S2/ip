@@ -28,7 +28,7 @@ public class TestEvent {
     }
 
     /**
-     * Test that the <code>Event</code> class processes the event's time correctly.
+     * Tests that the <code>Event</code> class processes the event's time correctly.
      */
     @Test
     public void testDateTime() {
@@ -36,7 +36,7 @@ public class TestEvent {
     }
 
     /**
-     * Test that the <code>Event</code> class processes the task's status correctly.
+     * Tests that the <code>Event</code> class processes the task's status correctly.
      */
     @Test
     public void testStatus() {

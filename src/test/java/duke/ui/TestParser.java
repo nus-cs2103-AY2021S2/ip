@@ -25,7 +25,7 @@ import duke.commands.ListCommand;
 public class TestParser {
 
     /**
-     * Test that the parser interprets our raw input correctly.
+     * Tests that the parser interprets our raw input correctly.
      */
     @Test
     public void testParser() {
@@ -64,7 +64,7 @@ public class TestParser {
     }
 
     /**
-     * Test that <code>Parser</code> converts the datetime strings in our raw input (if any) to
+     * Tests that <code>Parser</code> converts the datetime strings in our raw input (if any) to
      * <code>LocalDateTime</code> objects correctly.
      */
     @Test

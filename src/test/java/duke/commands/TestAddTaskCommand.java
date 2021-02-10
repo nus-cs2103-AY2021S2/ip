@@ -26,7 +26,7 @@ public class TestAddTaskCommand {
 
 
     /**
-     * Initialize a <code>AddTaskCommand</code> instance for testing.
+     * Initializes a <code>AddTaskCommand</code> instance for testing.
      */
     public TestAddTaskCommand() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
@@ -42,7 +42,7 @@ public class TestAddTaskCommand {
     }
 
     /**
-     * Test that <code>AddTaskCommand</code> correctly determines whether to exit the application.
+     * Tests that <code>AddTaskCommand</code> correctly determines whether to exit the application.
      */
     @Test
     public void testIsExit() {
@@ -52,7 +52,7 @@ public class TestAddTaskCommand {
     }
 
     /**
-     * Test that <code>AddTaskCommand</code> alters the input <code>TaskList</code> correctly.
+     * Tests that <code>AddTaskCommand</code> alters the input <code>TaskList</code> correctly.
      */
     @Test
     public void testExecute() {
@@ -75,7 +75,7 @@ public class TestAddTaskCommand {
     }
 
     /**
-     * Test that <code>AddTaskCommand</code> computes the response message correctly.
+     * Tests that <code>AddTaskCommand</code> computes the response message correctly.
      */
     @Test
     public void testResponse() {

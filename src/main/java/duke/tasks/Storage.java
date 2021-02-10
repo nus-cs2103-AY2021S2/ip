@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -15,15 +17,16 @@ import duke.ui.Parser;
  * the app terminates.
  */
 public class Storage {
-    private final String path;
+    private final String filePath;
 
     /**
      * Initializes a storage/loader with a file path.
      *
-     * @param filePath Path to text file from which tasks are loaded, and to which tasks are saved.
+     * @param fileName Name of text file in directory data/ from which tasks are loaded, and to which tasks are saved.
      */
-    public Storage(String filePath) {
-        this.path = filePath;
+    public Storage(String fileName) {
+        assert Files.isDirectory(Path.of("data"));
+        this.filePath = "data/" + fileName;
     }
 
     /**
@@ -35,7 +38,7 @@ public class Storage {
      */
     public TaskList loadTasks() {
         TaskList tasks = new TaskList();
-        File file = new File(this.path);
+        File file = new File(this.filePath);
 
         try {
             Scanner sc = new Scanner(file);
@@ -51,7 +54,7 @@ public class Storage {
     }
 
     /**
-     * Save the tasks in the input <code>TaskList</code> into a text file at the specified path.
+     * Saves the tasks in the input <code>TaskList</code> into a text file at the specified path.
      * If such a text file already exists, it will be overwritten.
      * If such a text file does not exist, one will be created.
      *
@@ -59,7 +62,7 @@ public class Storage {
      */
     public void saveTasks(TaskList tasks) {
         try {
-            FileWriter writer = new FileWriter(this.path);
+            FileWriter writer = new FileWriter(this.filePath);
 
             for (Task task : tasks.getListOfTasks()) {
                 writer.write(convertTaskToSavableString(task));
@@ -82,12 +85,26 @@ public class Storage {
      * @return The corresponding <code>Task</code> object.
      */
     private Task createTaskFromSavedString(String taskDetails) {
+        // Number of sections refer to the substrings separated by the character "|"
+        int numberOfSections = taskDetails.length() - taskDetails.replace("|", "").length() + 1;
+        assert numberOfSections == 4;
+
         String[] taskDetailsArray = taskDetails.split("\\|", 4);
+
         String taskType = taskDetailsArray[0].trim();
+        assert (taskType.equals("T") || taskType.equals("D") || taskType.equals("E"));
+
         String done = taskDetailsArray[1].trim();
+        assert (done.equals("1") || done.equals("0"));
+
         String description = taskDetailsArray[2].trim();
+        assert description.length() > 0;
+
+        // If the task to create is a deadline or an event, the LocalDateTime obtained must not be null.
+        // That means, the datetime string must be in a valid format, i.e. YYYY-MM-DD HH:mm or YYYY-MM-DD.
         String dateTimeString = taskDetailsArray[3].trim();
         LocalDateTime dateTime = Parser.convertToDateTime(dateTimeString);
+        assert taskType.equals("T") || dateTime != null;
 
         Task newTask;
         switch (taskType) {
@@ -104,7 +121,7 @@ public class Storage {
             newTask = null;
         }
 
-        if (done.equals("1") && newTask != null) {
+        if (done.equals("1")) {
             newTask.markAsDone();
         }
 
