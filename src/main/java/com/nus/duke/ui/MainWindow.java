@@ -64,6 +64,7 @@ public class MainWindow {
     @FXML
     private void handleCommandText(ActionEvent event) {
         Command command = this.logic.parseInputForCommand(this.commandTextField.getText());
+        assert command != null : "Command should not be null";
         String result = this.logic.executeCommand(command);
 
         this.dialogContainer.getChildren().addAll(
