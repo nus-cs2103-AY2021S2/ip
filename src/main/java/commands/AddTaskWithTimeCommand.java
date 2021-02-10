@@ -11,57 +11,42 @@ public abstract class AddTaskWithTimeCommand extends CommandWithParameters {
     protected String secondArg;
     protected String thirdArg;
     protected String missingThirdArgErrMsg = "Missing third argument";
-    protected String missingDelimiter = "Please ensure you've used the right delimiter " + timeArgDelimiter;
+    protected String missingDelimiterErrMsg =
+            "Missing delimiter / time argument. Please use this command this way: " + this.methodUsage;
     
     protected AddTaskWithTimeCommand(String commandName, String commandBody) {
         super(commandName, commandBody);
     }
 
-//    @Override
-//    public void run(TaskList taskList) {
-    protected void handleSplittingArgs() throws Exception {
-        // actually don't need init here; use class vars for catch block
-        int thirdArgIdx = 0;
-        String desc = "";
-        String thirdArg = "";
-        try {
-            assert this.timeArgDelimiter != null : "arg delimiter hasn't been initialised in child subclass";
+    private void handleMissingDelimiter() throws MissingArgumentException {
+        if (!this.commandBody.contains(this.timeArgDelimiter)) {
+            throw new MissingArgumentException(missingDelimiterErrMsg);
+        }
+    }
 
+    private void splitArgs() {
+        int thirdArgIdx = this.commandBody.indexOf(this.timeArgDelimiter);
+        this.secondArg = this.commandBody.substring(0, thirdArgIdx).trim();
+        this.thirdArg = this.commandBody.substring(thirdArgIdx + this.timeArgDelimiter.length()).trim();
+    }
 
-            thirdArgIdx = this.commandBody.indexOf(this.timeArgDelimiter); // assuming valid
-            desc = this.commandBody.substring(0, thirdArgIdx).trim();
-            thirdArg = this.commandBody.substring(thirdArgIdx + this.timeArgDelimiter.length()).trim();
-
-            this.secondArg = desc;
-            this.thirdArg = thirdArg;
-
-        } catch (StringIndexOutOfBoundsException e) {
-
-            System.out.println("=========");
-            System.out.println(desc);
-            System.out.println(thirdArgIdx);
-            System.out.println(thirdArg);
-            System.out.println("___________");
-
-            if (thirdArgIdx == -1) {
-                throw new MissingArgumentException(missingDelimiter + "'" + timeArgDelimiter + "'");
-            }
-
-            if (desc.isEmpty()) {
-                throw new MissingArgumentException("Missing description");
-            }
-
-            if (thirdArg.isEmpty()) {
-                throw new MissingArgumentException(missingThirdArgErrMsg);
-            }
-
-
-        } catch (Exception e) {
-            // make this exception more specific
-            // this.commandOutputMsg = e.getMessage();
-            throw e;
+    private void handleEmptyArgs() throws MissingArgumentException {
+        if (this.secondArg.isEmpty()) {
+            throw new MissingArgumentException("Missing description");
         }
 
-        // handleEmptyArgs();
+        if (this.thirdArg.isEmpty()) {
+            throw new MissingArgumentException(missingThirdArgErrMsg);
+        }
+    }
+
+    protected void parseCommandBody() throws MissingArgumentException {
+        handleMissingDelimiter();
+
+        splitArgs();
+
+        handleEmptyArgs();
+
+        this.hasRunSuccessfully = true;
     }
 }

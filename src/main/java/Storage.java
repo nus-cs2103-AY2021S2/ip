@@ -20,6 +20,9 @@ import java.util.Scanner;
 // have a final hashmap of where each object to store is stored
 // todo seems like storage object might be associated with the duke object? not sure
 
+// w5 / w6 storage parsing cases --> methods too long
+
+ */
 /**
  * This class handles setting up the file to save Duke data to.
  */
@@ -59,7 +62,7 @@ public class Storage {
      * Sets up the tasks file in the hardcoded path, if the task file doesn't exist yet
      * @throws IOException
      */
-    public static void setupTasksFile() throws IOException {
+    private static void createTasksFile() throws IOException {
         if (doesTaskFileExist()) {
             // probably not gonna be used due to tasklist.TaskList.java impl
             return;
@@ -122,13 +125,14 @@ public class Storage {
             }
         } else {
             // probably not gonna be used due to tasklist.TaskList.java impl
-            setupTasksFile();
+            createTasksFile();
         }
         return isAnyTaskFound;
     }
 
 
     // setup at default location
+    // how to recover from the IOException
     public static TaskList setupTaskList() throws IOException {
         if (Storage.doesTaskFileExist()) {
             TaskList t = new TaskList();

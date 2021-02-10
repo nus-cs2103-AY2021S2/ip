@@ -3,7 +3,7 @@ package tasks;
 import static java.lang.Boolean.parseBoolean;
 
 import datetime.ParseDateTime;
-import java.time.LocalDateTime; // todo wrap localdate time in parsedatetime
+import java.time.LocalDateTime;
 
 /**
  * This class implements a type of task that users can add to their tasklist on this app.
@@ -18,7 +18,7 @@ public class Event extends Task {
      * @param desc
      * @param eventTiming
      */
-    public Event(String desc, String eventTiming) {
+    public Event(String desc, String eventTiming) { // todo make obsolete
         super(desc);
         this.eventTiming = ParseDateTime.parse(eventTiming);
     }
@@ -47,31 +47,31 @@ public class Event extends Task {
     @Override
     public String unparse() {
         // should abstract e here away
+        // todo use join instead for all tasks, can standardize
         return "E" + delimiter + description + delimiter + isDone
                 + delimiter + ParseDateTime.unparse(eventTiming) + System.lineSeparator();
     }
 
     /**
-     * Creates a deadline object based on the string stored in the hard disk.
+     * Creates an event object based on the string stored in the hard disk.
      * Example stored string for this class: "//E;;desc;;true;;timing".
      * @param oneLine One line of stored input to be parsed into a deadline
-     * @return tasks.Deadline Object
+     * @return tasks.Event Object
      */
     public static Event parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
+        // another assumption: there's no line separator (storage scanner removes line separator that unparse adds)
         assert oneLine.startsWith("E" + delimiter);
 
-        int descStartIdx = oneLine.indexOf(delimiter);
-        int descEndIdx = oneLine.indexOf(delimiter, descStartIdx + 1);
-        String desc = oneLine.substring(descStartIdx + delimiter.length(), descEndIdx);
+        // todo init num args per command
+        // fixme realise how the order of args here depend on order of args in unparse function
+        String[] args = oneLine.split(delimiter);
+        assert args.length == 3 + 1 : // 3 + 1 bc command name, desc, done, time - much hardcoding
+                "storage parser detecting fewer than needed event arguments";
 
-        int doneEndIdx = oneLine.indexOf(delimiter, descEndIdx + 1);
-        String doneStr = oneLine.substring(descEndIdx + delimiter.length(), doneEndIdx);
-        Boolean isDone = parseBoolean(doneStr);
+        Boolean isDone = parseBoolean(args[2]);
 
-        String eventTiming = oneLine.substring(doneEndIdx + delimiter.length());
-
-        return new Event(desc, eventTiming, isDone);
+        return new Event(args[1], args[3], isDone);
     }
 
     /**
@@ -79,12 +79,13 @@ public class Event extends Task {
      * @param args
      */
     public static void main(String[] args) {
-        Event t = new Event("hello world", "8pm");
+        Event t = new Event("hello world", "30-01 8PM");
         System.out.println(t);
         t.markAsDone();
         System.out.println(t);
         System.out.println(t.unparse());
-        System.out.println(parse(t.unparse()));
+        System.out.println(System.lineSeparator().getBytes());
+        System.out.println(parse("E;;parsing;;false;;03-03 6PM")); // lineSeperator needs to be removed from unparse
         // test with other cases without relying on t
     }
 }

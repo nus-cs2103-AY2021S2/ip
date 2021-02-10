@@ -13,7 +13,7 @@ public class TaskListTest {
         t.add(new Todo("test todo 1"));
         t.add(new Todo("test todo 2"));
         t.add(new Event("finish ip level 9", "27-01 6AM"));
-        t.remove(2);
+        t.deleteTask(2);
         assertEquals(t.size(), 2);
     }
 

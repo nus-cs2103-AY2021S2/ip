@@ -57,21 +57,18 @@ public class Deadline extends Task {
      * @return tasks.Deadline Object
      */
     public static Deadline parse(String oneLine) {
+
         // some repetition in this function across all types of tasks but abstracting them might be costly
         assert oneLine.startsWith("D" + delimiter);
 
-        int descStartIdx = oneLine.indexOf(delimiter);
-        int descEndIdx = oneLine.indexOf(delimiter, descStartIdx + 1);
-        String desc = oneLine.substring(descStartIdx + delimiter.length(), descEndIdx);
+        // fixme - refer to event method equivalent to fix this portion
 
-        int doneEndIdx = oneLine.indexOf(delimiter, descEndIdx + 1);
-        String doneStr = oneLine.substring(descEndIdx + delimiter.length(), doneEndIdx);
-        boolean isDone = parseBoolean(doneStr);
+        String[] args = oneLine.split(delimiter);
+        assert args.length == 3 + 1 : "storage parser detecting fewer than needed event arguments";
 
+        Boolean isDone = parseBoolean(args[2]);
 
-        String deadline = oneLine.substring(doneEndIdx + delimiter.length());
-
-        return new Deadline(desc, deadline, isDone);
+        return new Deadline(args[1], args[3], isDone);
     }
 
     /**

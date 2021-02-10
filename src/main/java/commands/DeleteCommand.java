@@ -1,6 +1,7 @@
 package commands;
 
 import exceptions.InvalidArgumentException;
+import exceptions.MissingArgumentException;
 import tasklist.TaskList;
 
 public class DeleteCommand extends CommandWithParameters {
@@ -11,8 +12,20 @@ public class DeleteCommand extends CommandWithParameters {
     @Override
     public void run(TaskList taskList) {
         try {
-            this.commandOutputMsg = taskList.deleteTask(Integer.parseInt(this.commandBody));
-        } catch (InvalidArgumentException e) {
+
+            handleNoArgs();
+
+            handleInvalidOnEmptyList(taskList.isEmpty());
+
+            int userInputIdx = Integer.parseInt(this.commandBody);
+
+            handleInvalidListIdx(taskList.size(), userInputIdx);
+
+            this.commandOutputMsg = taskList.deleteTask(userInputIdx);
+
+        } catch (NumberFormatException e) {
+            handleException(new InvalidArgumentException("Please enter a valid task number to delete."));
+        } catch (InvalidArgumentException | MissingArgumentException e) {
             handleException(e);
         }
 

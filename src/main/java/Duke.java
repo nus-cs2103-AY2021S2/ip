@@ -1,17 +1,14 @@
 import commands.Command;
-import commands.ListCommand;
 import exceptions.UnsupportedCommandException;
 import format.Ui;
 import tasklist.TaskList;
 
 import java.io.IOException;
-import java.util.Scanner;
 
+// w6 - think about how to improve code quality here
 public class Duke {
-    // todo should duke be instantiated?
     private static TaskList taskList;
     private boolean hasExitCommandBeenSent;
-    private Parser parser;
     private NewParser newParser;
     // storage location should be here
 
@@ -22,7 +19,6 @@ public class Duke {
     }
 
     private void setParser() {
-        this.parser = new Parser(taskList);
         this.newParser = new NewParser(taskList);
     }
 
@@ -38,30 +34,19 @@ public class Duke {
     }
 
 
-
-
-    /**
-     * Entry point of the duke programme if run from terminal.
-     * @param args Irrelevant argument
-     */
-    public static void main(String[] args) {
-
-    }
-
     // javafx code adapted/taken from https://se-education.org/guides/tutorials/javaFxPart3.html
 
+
     /**
-     * gui version of getting response based on userinput, instead of CLI scanner.
-     * technically this getResponse method can be used within runDuke
-     * todo this description
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * This is the main function that generates a response to user inputted commands and strings.
+     * Todo has only been tested with gui, not with cli.
+     * @param input User input
+     * @return Response after processing the command(s) and argument(s) from the user input
      */
     String getResponse(String input) {
-        // parse command
-        Command c = null;
-        c = new ListCommand("");
+        Command c;
 
+        // parse command
         try {
             c = newParser.parseInputLine(input);
         } catch (UnsupportedCommandException e) {
