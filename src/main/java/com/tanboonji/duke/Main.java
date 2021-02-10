@@ -15,8 +15,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
     private static final String APPLICATION_NAME = "Duke";
+    private final Duke duke = new Duke();
 
     /**
      * Launches MainWindow scene and links the scene to Duke application.
@@ -37,10 +37,5 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void stop() throws Exception {
-        super.stop();
     }
 }
