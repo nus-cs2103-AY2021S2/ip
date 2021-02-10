@@ -125,6 +125,7 @@ public class Duke extends Application {
         );
         userInput.clear();
         if (input.equals("bye")) {
+            // lambda is here
             Thread t = new Thread(() -> {
                 try {
                     ine.exportData();
