@@ -17,6 +17,7 @@ public class TaskList {
      * @param task takes in the a task to add
      */
     public void addToList(ArrayList<Task> arrayList, Task task) {
+        assert task.description != null;
         task.index = arrayList.size() + 1;
         arrayList.add(task);
         System.out.println(task);
@@ -28,6 +29,7 @@ public class TaskList {
      * @param deletedNumber specifies which element to be deleted.
      */
     public void deleteFromList(ArrayList<Task> arrayList, int deletedNumber) {
+        assert arrayList.size() != 0;
         int moved = deletedNumber - 1;
         System.out.println(arrayList.get(moved));
         arrayList.remove(arrayList.get(moved));

@@ -20,6 +20,8 @@ public class Parser {
      */
     public String makingSenseOfUserCommand(ArrayList<Task> arrayList, String path, String input) {
         String holder;
+        assert path != null;
+        assert input != null;
         if (input.contains("bye")) {
             holder = "Bye. Hope to see you again soon!" + "\n";
         } else if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
@@ -116,6 +118,7 @@ public class Parser {
             holder = "Here are the matching tasks in your list: \n";
             ArrayList<Task> tt = new ArrayList<>();
             int counterOne = 1;
+            assert arrayList.size() != 0;
             for (Task ttt :arrayList) {
                 if (ttt.description.contains(input.substring(5))) {
                     ttt.index = counterOne;
@@ -123,6 +126,7 @@ public class Parser {
                     counterOne++;
                 }
             }
+            assert tt.size() != 0;
             for (Task m : tt) {
                 holder = holder.concat(m.index + ". " + m);
                 holder = holder.concat("\n");
@@ -131,10 +135,13 @@ public class Parser {
             holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n";
         }
         int counterTwo = 1;
+        assert arrayList.size() != 0;
         for (Task s : arrayList) {
             s.index = counterTwo;
             counterTwo++;
         }
+        assert path != null;
+        assert arrayList.size() != 0;
         new Storage().savingFile(arrayList, path);
         return holder + "\n";
     }

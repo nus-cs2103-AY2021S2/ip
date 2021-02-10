@@ -13,6 +13,7 @@ public class Task {
      * This is a constructor for the class
      */
     public Task(String description) {
+        assert description != null;
         this.description = description;
         this.isDone = false;
     }
