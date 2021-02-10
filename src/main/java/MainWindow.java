@@ -5,6 +5,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,18 +22,25 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private Stage stage;
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private DialogBox introduce = DialogBox.getDukeDialog(Ui.introduce(), dukeImage);
+    private DialogBox introduce = DialogBox.getDialog(Ui.introduce(), dukeImage, false);
     //dialogContainer.getChildren().add(introduce);
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(introduce);
     }
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    public void setStage(Stage s) {
+        stage = s;
     }
 
     /**
@@ -42,11 +51,23 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        //dialogContainer.getChildren().add(introduce);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDialog(input, userImage, true),
+                DialogBox.getDialog(response, dukeImage, false)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            exitWindow();
+        }
+    }
+
+    private void exitWindow() {
+        int secondsToSleep = 1;
+        try {
+            Thread.sleep(secondsToSleep * 1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        stage.close();
     }
 }
