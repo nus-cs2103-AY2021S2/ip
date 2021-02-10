@@ -50,13 +50,13 @@ public abstract class Task {
         return description;
     }
 
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
-    }
-
     /**
      * Formats the task's information into a formatted string that is suitable for storing.
      */
     public abstract String toStorageString();
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", getStatusIcon(), description);
+    }
 }

@@ -25,12 +25,26 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toString() {
-        return String.format("[T]%s", super.toString());
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj instanceof ToDo) {
+            ToDo toDo = (ToDo) obj;
+            return toDo.description.equalsIgnoreCase(this.description);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public String toStorageString() {
         return String.format("T | %d | %s", isDone ? 1 : 0, description);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[T]%s", super.toString());
     }
 }

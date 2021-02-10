@@ -1,55 +1,54 @@
 package duke.tasks;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import duke.common.Utils;
 
 /**
- * Represents a Deadline {@code Task}.
+ * Represents a Deadline {@code TimedTask}.
  */
-public class Deadline extends Task {
-
-    private final LocalDateTime deadlineDateTime;
-
+public class Deadline extends TimedTask {
     /**
-     * Constructor for Deadline {@code Task}, specifying the description and due date.
+     * Constructor for Deadline {@code TimedTask}, specifying the description and due date.
      *
      * @param description description of the deadline
-     * @param deadlineDateTime due date of the deadline
+     * @param taskDateTime due date of the deadline
      */
-    public Deadline(String description, String deadlineDateTime) {
-        super(description);
-        this.deadlineDateTime = LocalDateTime.parse(deadlineDateTime);
+    public Deadline(String description, String taskDateTime) {
+        super(description, taskDateTime);
     }
 
     /**
-     * Constructor for Deadline {@code Task}, specifying the task's status, description and due date.
+     * Constructor for Deadline {@code TimedTask}, specifying the task's status, description and due date.
      *
      * @param done integer value to indicate the deadline's status
      * @param description description of the deadline
-     * @param deadlineDateTime due date of the deadline
+     * @param taskDateTime due date of the deadline
      */
-    public Deadline(int done, String description, String deadlineDateTime) {
-        super(done, description);
-        this.deadlineDateTime = LocalDateTime.parse(deadlineDateTime);
+    public Deadline(int done, String description, String taskDateTime) {
+        super(done, description, taskDateTime);
     }
 
-    public LocalDateTime getDeadlineDateTime() {
-        return deadlineDateTime;
-    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
 
-    public LocalDate getDeadlineDate() {
-        return deadlineDateTime.toLocalDate();
+        if (obj instanceof Deadline) {
+            TimedTask timedTask = (TimedTask) obj;
+            return timedTask.description.equalsIgnoreCase(this.description)
+                    && timedTask.taskDateTime.equals(this.taskDateTime);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), Utils.formatDate(deadlineDateTime));
+        return String.format("[D]%s (by: %s)", super.toString(), Utils.formatDate(super.taskDateTime));
     }
 
     @Override
     public String toStorageString() {
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, deadlineDateTime);
+        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, super.taskDateTime);
     }
 }

@@ -25,4 +25,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_TASK_DESCRIPTION = "The description of %1$s cannot be empty.";
     public static final String MESSAGE_EMPTY_DATETIME_DESCRIPTION = "The date and time of %1$s cannot be empty.";
     public static final String MESSAGE_EMPTY_DESCRIPTION = "The description cannot be empty.";
+    public static final String MESSAGE_TASK_DUPLICATE = "You have already inserted this task.";
+    public static final String MESSAGE_TASK_ANOMALIES = "There is a timing clash with existing tasks.";
+
 }
