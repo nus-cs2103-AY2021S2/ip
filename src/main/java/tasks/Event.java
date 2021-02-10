@@ -18,7 +18,7 @@ public class Event extends Task {
      * @param desc
      * @param eventTiming
      */
-    public Event(String desc, String eventTiming) {
+    public Event(String desc, String eventTiming) { // todo make obsolute
         super(desc);
         this.eventTiming = ParseDateTime.parse(eventTiming);
     }

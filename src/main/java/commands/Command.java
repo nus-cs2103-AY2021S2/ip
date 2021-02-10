@@ -28,7 +28,6 @@ public abstract class Command {
         this.commandBody = commandBody;
     }
 
-    // think all commands should have a general run method?
     /**
      * Runs a command and stores output and status in instance variables.
      * @param
@@ -38,26 +37,34 @@ public abstract class Command {
 
     @Override
     public String toString() {
-        return "Command{" +
-                "commandName='" + commandName + '\'' +
-                '}';
+        return String.format("Command: %s, hasRunSuccessfully: %s, body: %s",
+                this.commandName, this.hasRunSuccessfully, this.commandBody);
     }
 
     public String getCommandOutputMsg() {
-        return commandOutputMsg;
+        return this.commandOutputMsg;
     }
 
     public boolean hasRunSuccessfully() {
-        return hasRunSuccessfully;
+        return this.hasRunSuccessfully;
     }
 
     public boolean hasSentExitDukeSignal() {
-        return hasSentExitDukeSignal;
+        return this.hasSentExitDukeSignal;
     }
 
-    protected void handleInvalidOnEmptyList() {
-        this.commandOutputMsg =
-                new InvalidArgumentException("This command cannot be done on an empty task list.").getMessage();
+    // maybe "handle" isn't descriptive enough
+
+    /**
+     * Called by commands that can't be used on empty lists, and throws an error
+     * after checking if the list is empty.
+     * @param isEmpty
+     * @throws InvalidArgumentException
+     */
+    protected void handleInvalidOnEmptyList(boolean isEmpty) throws InvalidArgumentException {
+        if (isEmpty) {
+            throw new InvalidArgumentException("This command cannot be done on an empty task list.");
+        }
     }
 
     /**
@@ -74,7 +81,7 @@ public abstract class Command {
     }
 
     // used by event, deadline subclasses
-    protected LocalDateTime parseInputStringToDateTime(String s) {
+    protected LocalDateTime parseArgToDateTime(String s) {
         return ParseDateTime.parse(s);
     }
 }

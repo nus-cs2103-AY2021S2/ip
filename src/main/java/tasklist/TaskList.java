@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+// w5 error checking probably shouldn't be in tasklist
 public class TaskList {
     private final ArrayList<Task> taskArrayList;
 
@@ -109,6 +109,7 @@ public class TaskList {
         );
     }
 
+    // w5 rm
     /**
      * Formats error message if invalid list index provided
      * @param i provided list index

@@ -12,10 +12,7 @@ public class TodoCommand extends CommandWithParameters {
     @Override
     public void run(TaskList taskList) {
         try {
-            // ERROR CHECKING
-            if (commandBody.isEmpty()) {
-                handleNoArgs();
-            }
+            handleNoArgs();
 
             this.commandOutputMsg = taskList.addTask(new Todo(commandBody));
 

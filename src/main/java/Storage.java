@@ -20,6 +20,9 @@ import java.util.Scanner;
 // have a final hashmap of where each object to store is stored
 // todo seems like storage object might be associated with the duke object? not sure
 
+// w5 / w6 storage parsing cases --> methods too long
+
+ */
 /**
  * This class handles setting up the file to save Duke data to.
  */

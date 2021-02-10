@@ -7,6 +7,7 @@ import tasklist.TaskList;
 import java.io.IOException;
 import java.util.Scanner;
 
+// w5 cleanup
 public class Duke {
     private static TaskList taskList;
     private boolean hasExitCommandBeenSent;

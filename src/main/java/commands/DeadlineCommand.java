@@ -8,6 +8,7 @@ public class DeadlineCommand extends AddTaskWithTimeCommand {
     public DeadlineCommand(String commandBody) {
         super("done", commandBody);
         this.timeArgDelimiter = "/by";
+        this.missingThirdArgErrMsg = "missing date/time argument";
     }
 
     @Override

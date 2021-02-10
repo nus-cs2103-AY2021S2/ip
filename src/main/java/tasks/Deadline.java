@@ -58,6 +58,7 @@ public class Deadline extends Task {
      */
     public static Deadline parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
+        // w5 use split(regex)
         assert oneLine.startsWith("T" + delimiter);
 
         int descStartIdx = oneLine.indexOf(delimiter);
