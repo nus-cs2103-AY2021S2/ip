@@ -30,7 +30,7 @@ public class DeleteTaskCommand extends Command {
     public ArrayList<String> execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<String> returnMsg = new ArrayList<>();
         if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("The task number does not work, try again?");
+            throw new DukeException("The task number does not exist, try again?");
         }
         Task deleteTask = tasks.find(index);
         tasks.delete(deleteTask);

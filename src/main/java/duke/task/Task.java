@@ -61,6 +61,14 @@ public class Task {
         return "";
     }
 
+    public void updateName(String newName) {
+        this.name = newName;
+    }
+
+    public void updateDate(LocalDate newDate) {
+        this.date = newDate;
+    }
+
     @Override
     public String toString() {
         String statusText;
