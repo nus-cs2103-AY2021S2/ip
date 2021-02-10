@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  * @version 1.2
  * @since   2021-02-08
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
     /** Date which the deadline is due. */
     private final LocalDate date;
 
@@ -57,6 +57,17 @@ public class Deadline extends Task {
     public String toString() {
         return "[D][" + (isDone ? "X" : " ") + "] " + name + " (by: "
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+    }
+
+    /**
+     * Compares this deadline with another deadline, by comparing their due dates.
+     *
+     * @param other The deadline that is being compared to.
+     * @return The difference between this deadline and the deadline that is being compared to, in terms of days.
+     */
+    @Override
+    public int compareTo(Deadline other) {
+        return date.compareTo(other.getDateAsLocalDate());
     }
 
 }

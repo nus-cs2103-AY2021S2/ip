@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.PrintCommand;
+import duke.command.SortCommand;
 
 /**
  * The Parser class parses the user input as a Command.
@@ -19,7 +20,7 @@ public class Parser {
 
     /**
      * Parses the user input as either an ExitCommand, PrintCommand, FindCommand, DoneCommand,
-     * DeleteCommand, or AddCommand, based on the user input.
+     * DeleteCommand, SortCommand, or AddCommand, based on the user input.
      *
      * @param s The user input.
      * @return A Command, whose type is based on the user input.
@@ -39,6 +40,8 @@ public class Parser {
             return new DoneCommand(s);
         case "delete":
             return new DeleteCommand(s);
+        case "sort":
+            return new SortCommand(s);
         default:
             return new AddCommand(s);
         }

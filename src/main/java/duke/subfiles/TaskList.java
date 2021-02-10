@@ -3,6 +3,7 @@ package duke.subfiles;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.exceptions.DateFormatException;
 import duke.exceptions.EmptyDateException;
@@ -422,6 +423,33 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    /**
+     *
+     */
+    public void sortTasksByTypeAndDate() {
+        ArrayList<ToDo> todos = new ArrayList<>();
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        ArrayList<Event> events = new ArrayList<>();
+
+        while (!tasks.isEmpty()) {
+            Task t = tasks.remove(0);
+            if (t instanceof ToDo) {
+                todos.add((ToDo) t);
+            } else if (t instanceof Deadline) {
+                deadlines.add((Deadline) t);
+            } else if (t instanceof Event) {
+                events.add((Event) t);
+            }
+        }
+
+        Collections.sort(deadlines);
+        Collections.sort(events);
+
+        tasks.addAll(todos);
+        tasks.addAll(deadlines);
+        tasks.addAll(events);
     }
 
 }
