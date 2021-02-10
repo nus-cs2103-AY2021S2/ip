@@ -86,12 +86,7 @@ public class Duke {
             case "update":
                 int taskToUpdate = Integer.parseInt(parsedUserInput[1]) - 1;
                 String detailToUpdate = parsedUserInput[2];
-                String newDetail = parsedUserInput[3];
-
-                if (detailToUpdate.equals("date/time")) {
-                    newDetail = newDetail + " " + parsedUserInput[4];
-                }
-
+                String newDetail = parser.parseUpdateInput(parsedUserInput).trim();
                 tasks.updateTask(taskToUpdate, detailToUpdate, newDetail);
                 response.append(ui.printUpdatePrompt(tasks.list, taskToUpdate));
                 break;

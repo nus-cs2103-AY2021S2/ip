@@ -50,7 +50,7 @@ public class Ui {
 
             for (int i = 0; i < list.size(); i++) {
                 int number = 1 + i;
-                stringBuilder.append("     ").append(number).append(". ").append(list.get(i)).append("\n");
+                stringBuilder.append("     " + number + ". " + list.get(i) + "\n");
             }
             stringBuilder.insert(0, firstReply);
             return stringBuilder.toString();
@@ -102,14 +102,18 @@ public class Ui {
      * @return String message of the tasks containing the keyword.
      */
     public String printFindKeyword(List<Task> tempList) {
-        String firstReply = "Here are the matching tasks in you list:\n";
+        String firstReply = "Here are the matching tasks in your list:\n";
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(firstReply);
+
+        if (tempList.size() == 0) {
+            return "There are no matching tasks in your list!!";
+        }
 
         for (int i = 0; i < tempList.size(); i++) {
             int number = i + 1;
-            stringBuilder.append("     ").append(number).append(". ").append(tempList.get(i)).append("\n");
+            stringBuilder.append("     " + number + ". " + tempList.get(i) + "\n");
         }
-        stringBuilder.append(firstReply);
         return stringBuilder.toString();
     }
 

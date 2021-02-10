@@ -108,16 +108,17 @@ public class TaskList {
         List<Task> tempList = new ArrayList<>();
 
         for (Task task : list) {
-            String taskDescription = task.getDescription();
-            String[] taskDescriptionArr = taskDescription.split(" ");
+            String taskString = task.toString();
+            String[] taskStringArr = taskString.split(" ");
 
-            for (String currentWord : taskDescriptionArr) {
+            for (String currentWord : taskStringArr) {
                 if (currentWord.equals(keyword)) {
                     tempList.add(task);
                     break;
                 }
             }
         }
+
         return tempList;
     }
 

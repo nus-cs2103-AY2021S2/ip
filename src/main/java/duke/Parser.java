@@ -29,6 +29,16 @@ public class Parser {
         return userInput.split(" ");
     }
 
+    public String parseUpdateInput(String[] parsedUserInput) {
+        StringBuilder newDetail = new StringBuilder();
+
+        for (int i = 3; i < parsedUserInput.length; i++) {
+            newDetail.append(parsedUserInput[i] + " ");
+        }
+
+        return newDetail.toString();
+    }
+
     /**
      * Checks the user input and ensures that it makes sense.
      *
@@ -56,7 +66,7 @@ public class Parser {
         case "todo":
         case "deadline":
         case "event":
-        case "update":
+        case "find":
             if (userInputArr.length == 1) {
                 throw new EmptyDescriptionException(task);
             }
@@ -72,6 +82,12 @@ public class Parser {
 
             if (taskNumber < 0 || taskNumber > list.size() - 1) {
                 throw new InvalidTaskNumberException();
+            }
+            break;
+
+        case "update":
+            if (userInputArr.length < 4) {
+                throw new EmptyDescriptionException(task);
             }
             break;
 
