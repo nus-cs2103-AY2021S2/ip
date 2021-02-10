@@ -5,11 +5,17 @@ package duke.enums;
  */
 public enum Commands {
     LIST,
+    L, // LIST
     DONE,
+    DO, // DONE
     BYE,
+    B, // BYE
     TODO,
+    T, // TODO
     DEADLINE,
     EVENT,
     DELETE,
-    FIND
+    DEL, // DELETE
+    FIND,
+    F, // FIND
 }
