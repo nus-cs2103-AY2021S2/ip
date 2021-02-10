@@ -122,18 +122,20 @@ public class Elaina extends Application {
             return;
         }
         String elainaText = this.getResponse(userInput.getText());
-        this.dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialogBox(
-                        userText,
-                        this.userImageSrc
-                ),
-                DialogBox.getElainaDialogBox(
-                        elainaText,
-                        elainaText.startsWith("Error: ")
-                                ? this.elainaImage2Src
-                                : this.elainaImageSrc
-                )
-        );
+        if (elainaText.length() > 0) {
+            this.dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialogBox(
+                            userText,
+                            this.userImageSrc
+                    ),
+                    DialogBox.getElainaDialogBox(
+                            elainaText,
+                            elainaText.startsWith("Error: ")
+                                    ? this.elainaImage2Src
+                                    : this.elainaImageSrc
+                    )
+            );
+        }
         this.userInput.clear();
         if (elainaText.equals("Bye. Hope to see you again soon!\n")) {
             Platform.exit();
@@ -144,7 +146,7 @@ public class Elaina extends Application {
     private String getResponse(String input) {
         String response = null;
         try {
-            response = Parser.processCommand(input, this.tasks);
+            response = Parser.processCommand(input, this.tasks, this.dialogContainer);
         } catch (Exception e) {
             String errorText = "";
             errorText += Ui.printError(e);

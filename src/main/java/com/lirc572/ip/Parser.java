@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.scene.layout.VBox;
+
 /**
  * Contains static methods for parsing commands.
  */
@@ -69,14 +71,16 @@ public class Parser {
      * @param command The command to process.
      * @return The response.
      */
-    public static String processCommand(String command, TaskList tasks) throws Exception {
+    public static String processCommand(String command, TaskList tasks, VBox dialogContainer) throws Exception {
         String[] tokens = tokenizeCommand(command);
         String response = "";
         // response += Ui.printHorizontalLine();
         if (EXIT_COMMANDS.contains(command)) {
             response += Ui.printLine("Bye. Hope to see you again soon!");
         } else {
-            if (tokens[0].equals("help")) {
+            if (tokens[0].equals("clear")) {
+                dialogContainer.getChildren().clear();
+            } else if (tokens[0].equals("help")) {
                 response += Ui.printLine(
                         "For a detailed user guide, "
                         + "please refer to https://elaina.lirc572.com/#/user_guide"
