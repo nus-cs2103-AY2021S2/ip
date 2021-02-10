@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Ui {
 
@@ -18,6 +19,7 @@ public class Ui {
 
     /**
      * Prints out the TaskList in a nice format.
+     * 
      * @param tasks the TaskList to be printed.
      */
     public static String showList(TaskList tasks) {
@@ -29,17 +31,14 @@ public class Ui {
     /**
      * Searches the TaskList and prints out the items that matches the user
      * specifications.
+     * 
      * @param tasks  the TaskList to be searched.
      * @param toFind the String that the user is looking for.
      */
     public static String showFind(TaskList tasks, String toFind) {
         String out;
         List<Task> tempTasks = new ArrayList<>();
-        for (Task t : tasks) {
-            if (t.getName().contains(toFind)) {
-                tempTasks.add(t);
-            }
-        }
+        tasks.stream().filter(t -> t.getName().contains(toFind)).forEach(x -> tempTasks.add(x));
         if (!tempTasks.isEmpty()) {
             out = "Here are the matching tasks in your list: \n";
             out += printList(new TaskList(tempTasks));
@@ -51,6 +50,7 @@ public class Ui {
 
     /**
      * Prints out confirmation after marking an item as done.
+     * 
      * @param input The string input by the user.
      * @param tasks The TaskList to be checked.
      */
@@ -62,6 +62,7 @@ public class Ui {
 
     /**
      * Prints out confirmations that the Task was added to the TaskList.
+     * 
      * @param tasks The TaskList to be added to.
      * @param task  The Task to be added.
      */
@@ -74,6 +75,7 @@ public class Ui {
 
     /**
      * Prints out confirmation for deleting a task from the TaskList.
+     * 
      * @param input The input string.
      * @param tasks The TaskList which the item is removed from.
      */
@@ -119,6 +121,7 @@ public class Ui {
 
     /**
      * Used to format text in a unique way.
+     * 
      * @param input the string input
      * @return the formatted string
      */
