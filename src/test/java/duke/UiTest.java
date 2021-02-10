@@ -21,15 +21,15 @@ public class UiTest {
     @Test
     public void greetingsTest() {
         ui.greetings();
-        assertEquals("____________________________________________________________\n" +
-                "Hello! I'm your personal assistant Duke\n" +
-                "How can I assist you?\n" +
-                "____________________________________________________________", outputStreamCaptor.toString().trim());
+        assertEquals("____________________________________________________________\n"
+                + "Hello! I'm your personal assistant Duke\n"
+                + "How can I assist you?\n"
+                + "____________________________________________________________", outputStreamCaptor.toString().trim());
     }
 
     @Test
     public void exitTest() {
         ui.exit();
-        assertEquals("Bye. Till next time!"+System.lineSeparator()+Ui.HORIZONTAL_RULE, outputStreamCaptor.toString().trim());
+        assertEquals("Bye. Till next time!" + System.lineSeparator() + Ui.HORIZONTAL_RULE, outputStreamCaptor.toString().trim());
     }
 }
