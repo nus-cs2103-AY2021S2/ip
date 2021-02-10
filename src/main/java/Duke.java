@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    // todo should duke be instantiated?
     private static TaskList taskList;
     private boolean hasExitCommandBeenSent;
     private Parser parser;

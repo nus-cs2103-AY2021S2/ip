@@ -11,15 +11,16 @@ public abstract class AddTaskWithTimeCommand extends CommandWithParameters {
     protected String secondArg;
     protected String thirdArg;
     protected String missingThirdArgErrMsg = "Missing third argument";
-    protected String missingDelimiter = "Please ensure you've used the right delimiter " + timeArgDelimiter;
+    protected String missingDelimiterErrMsg =
+            "Missing delimiter / time argument. Please use this command this way: " + this.methodUsage;
     
     protected AddTaskWithTimeCommand(String commandName, String commandBody) {
         super(commandName, commandBody);
     }
 
-    private void handleMissingDelimiter() throws Exception {
+    private void handleMissingDelimiter() throws MissingArgumentException {
         if (!this.commandBody.contains(this.timeArgDelimiter)) {
-            throw new MissingArgumentException("Missing delimiter / time argument. Please use this command this way: ");
+            throw new MissingArgumentException(missingDelimiterErrMsg);
         }
     }
 
@@ -39,8 +40,7 @@ public abstract class AddTaskWithTimeCommand extends CommandWithParameters {
         }
     }
 
-    protected void parseCommandBody() throws Exception {
-
+    protected void parseCommandBody() throws MissingArgumentException {
         handleMissingDelimiter();
 
         splitArgs();

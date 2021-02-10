@@ -10,11 +10,13 @@ public class ListCommand extends CommandWithNoParameters {
 
     @Override
     public void run(TaskList taskList) {
-        if (commandBody.isEmpty()) {
-            this.commandOutputMsg = Ui.stringifyTaskList(taskList);
-        } else {
+        if (!commandBody.isEmpty()) {
             handleTooManyArgs();
+            assert this.commandOutputMsg != null : "list command doesn't need arguments";
+            return;
         }
-        assert this.commandOutputMsg != null;
+
+        this.commandOutputMsg = Ui.stringifyTaskList(taskList);
+        this.hasRunSuccessfully = true;
     }
 }

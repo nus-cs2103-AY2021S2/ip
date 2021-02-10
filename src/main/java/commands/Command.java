@@ -60,6 +60,11 @@ public abstract class Command {
                 new InvalidArgumentException("This command cannot be done on an empty task list.").getMessage();
     }
 
+    /**
+     * Adds a formatted exception message to this command's output message.
+     * All exception handlers in command classes should use this abstraction.
+     * @param e
+     */
     protected void handleException(Exception e) {
         this.commandOutputMsg = Ui.formatException(e.getMessage());
     }
