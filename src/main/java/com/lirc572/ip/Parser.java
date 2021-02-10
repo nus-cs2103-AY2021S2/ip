@@ -27,6 +27,7 @@ public class Parser {
      * @return The tokenized command as a String array.
      */
     public static String[] tokenizeCommand(String command) {
+        assert command.length() > 0 : "Command should not be empty";
         ArrayList<String> tokens = new ArrayList<>();
         boolean isNewToken = true;
         boolean unmatchedQuote = false;
@@ -72,6 +73,7 @@ public class Parser {
      * @return The response.
      */
     public static String processCommand(String command, TaskList tasks, VBox dialogContainer) throws Exception {
+        assert command.length() > 0 : "Command should not be empty";
         String[] tokens = tokenizeCommand(command);
         String response = "";
         // response += Ui.printHorizontalLine();
