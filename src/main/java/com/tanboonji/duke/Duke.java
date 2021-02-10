@@ -13,8 +13,8 @@ import com.tanboonji.duke.storage.Storage;
 public class Duke {
 
     private static final String FILE_DIR = "duke.data";
-    private TaskList taskList;
     private Storage storage;
+    private TaskList taskList;
 
     /**
      * Initialises Duke by loading task list from storage.
