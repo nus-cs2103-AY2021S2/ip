@@ -36,7 +36,7 @@ public class AddToDoCommand extends Command {
         }
         String todoName = userMessage.substring(spaceIndex+1);
         ToDo todo = new ToDo(todoName);
-        taskList.addTasks(todo);
+        taskList.addTask(todo);
 
         builder.append("[" + todo.getStatusIcon() + "] " + todo.toString());
         builder.append("\nNow you have " + Integer.toString(taskList.getNumOfTasks()) + " tasks in the list.");

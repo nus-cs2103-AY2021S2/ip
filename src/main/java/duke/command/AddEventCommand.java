@@ -48,7 +48,7 @@ public class AddEventCommand extends Command {
             throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
         }
 
-        taskList.addTasks(event);
+        taskList.addTask(event);
 
         builder.append("[" + event.getStatusIcon() + "] " + event.toString());
         builder.append("\nNow you have " + Integer.toString(taskList.getNumOfTasks()) + " tasks in the list.");

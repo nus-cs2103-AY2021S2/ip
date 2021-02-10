@@ -50,7 +50,7 @@ public class TaskList {
      *
      * @param task the task you want to add.
      */
-    public void addTasks(Task task) {
+    public void addTask(Task task) {
         Tasks.add(task);
         numOfTasks++;
     }

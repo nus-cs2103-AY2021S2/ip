@@ -48,7 +48,7 @@ public class AddDeadlineCommand extends Command {
         } catch (Exception e) {
             throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
         }
-        taskList.addTasks(deadline);
+        taskList.addTask(deadline);
 
         builder.append("[" + deadline.getStatusIcon() + "] " + deadline.toString());
         builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");

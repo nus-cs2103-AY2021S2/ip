@@ -1,7 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
+
 
 import java.util.LinkedList;
 
@@ -48,10 +50,10 @@ public class SearchByTaskNameCommand extends Command {
         int numOfTasksFound = 0;
 
         // Search by loop
-        for (Task single : tasks) {
-            String singleName = single.getTaskName();
+        for (Task task : tasks) {
+            String singleName = task.getTaskName();
             if (singleName.contains(name)) {
-                builder.append("[" + single.getStatusIcon() + "]" + single.toString() + "\n");
+                builder.append("[" + task.getStatusIcon() + "]" + task.toString() + "\n");
                 numOfTasksFound++;
             }
         }
