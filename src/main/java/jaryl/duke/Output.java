@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Output {
     /**
      * Prints welcome message
+     * @return the welcome message
      */
     public String printWelcomeMsg() {
         return "Hello! I'm Duke, your friendly chatbot. What can I do for you today? Type help for more information.";
@@ -18,6 +19,7 @@ public class Output {
      * Prints message upon successfully adding task
      * @param task      the task to be added
      * @param numTasks  total number of existing tasks
+     * @return          the added task message
      */
     public String printAddedTask(Task task, int numTasks) {
         return "Got it. I've added this task:\n\t" + task + "\nNow you have " + numTasks + " tasks in the list.";
@@ -25,6 +27,7 @@ public class Output {
 
     /**
      * Handles help command
+     * @return the help message
      */
     public String sendHelp() {
         return ("Duke has sent help! Here are a list of commands you can use:\n1. list\n2. done\n" +
@@ -33,7 +36,7 @@ public class Output {
 
     /**
      * Prints message upon successfully marking a task done
-     * @param task  the task to be marked done
+     * @param task the task to be marked done
      */
     public String printDoneMsg(Task task) {
         if(task.getStatusIcon().equals("\u2713")) {
@@ -44,6 +47,11 @@ public class Output {
         }
     }
 
+    /**
+     * Prints message upon successfully updating a task
+     * @param   task the task to be updated
+     * @return  the updated task message
+     */
     public String printUpdateMsg(Task task) {
         return "Great! Here is your newly edited task: \n\t" + task;
     }
@@ -52,6 +60,7 @@ public class Output {
      * Prints message upon successfully deleting a task
      * @param task      the task to be deleted
      * @param numTasks  total number of existing tasks
+     * @return
      */
     public String printDeleteMsg(Task task, int numTasks) {
         return "Noted. I've removed this task: \n\t" + task + "\nNow you have " + numTasks + " tasks in the list.";
@@ -59,6 +68,9 @@ public class Output {
 
     /**
      * Prints message for user query
+     * @param foundTasks the tasks that match the user query input
+     * @param query      the user query input
+     * @return           the query result
      */
     public String printFind(ArrayList<Task> foundTasks, String query) {
         StringBuilder sb = new StringBuilder();
@@ -73,6 +85,7 @@ public class Output {
 
     /**
      * Prints message when user inputs an illegal argument
+     * @return the error message
      */
     public String printIllegalArgumentError() {
         return "☹ OOPS! I'm sorry, but I don't know what that means :(";
@@ -80,7 +93,8 @@ public class Output {
 
     /**
      * Handles list command
-     * @param tasksList list of tasks
+     * @param tasksList the list of tasks
+     * @return the list of tasks
      */
     public String listAction(ArrayList<Task> tasksList) throws DukeException {
         StringBuilder sb = new StringBuilder();
@@ -101,6 +115,7 @@ public class Output {
      * @param tasksList     list of tasks
      * @param input         user input
      * @param dataManager   data manager which handles reading/writing data
+     * @return              the done command message
      */
     public String doneAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String[] params = input.split(" ");
@@ -117,6 +132,13 @@ public class Output {
         return(printDoneMsg(done));
     }
 
+    /**
+     * Handles update command
+     * @param tasksList     list of tasks
+     * @param input         user input
+     * @param dataManager   data manager which handles reading/writing data
+     * @return              the update command message
+     */
     public String updateAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String[] params = input.split(" ");
 
@@ -159,6 +181,7 @@ public class Output {
      * @param tasksList     list of tasks
      * @param input         user input
      * @param dataManager   data manager which handles reading/writing data
+     * @return              the add command message
      */
     public String addAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String taskDesc = "", dateTime = "";
@@ -209,6 +232,7 @@ public class Output {
      * @param tasksList     list of tasks
      * @param input         user input
      * @param dataManager   data manager which handles reading/writing data
+     * @return              the delete command message
      */
     public String deleteAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String[] params = input.split(" ");
@@ -228,6 +252,7 @@ public class Output {
      * Handles find command
      * @param tasksList     list of tasks
      * @param input         user input
+     * @return              the find command message
      */
     public String findAction(ArrayList<Task> tasksList, String input) throws DukeException {
         String[] params = input.split(" ");

@@ -47,6 +47,10 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Entry point into Duke chatbot
+     * @param stage the primary stage for Duke
+     */
     @Override
     public void start(Stage stage) {
         vBox = new VBox();
@@ -100,6 +104,9 @@ public class Duke extends Application {
         vBox.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Handles the user input
+     */
     private void userInputHandler() {
         Label dukeResponse = new Label(getResponse(userInput.getText()));
         Label userResponse = new Label(userInput.getText());
@@ -110,13 +117,20 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+    /**
+     * Retrieves the response of Duke according to user input
+     * @param input user input
+     * @return application response
+     */
     protected String getResponse(String input) {
         assert !input.isEmpty() : "Please enter a valid input";
         return this.run(input);
     }
 
     /**
-     * Entry point into Duke chatbot
+     * Parser for user input
+     * @param input user input
+     * @return application response
      */
     public String run(String input) {
         String resp = output.printWelcomeMsg();

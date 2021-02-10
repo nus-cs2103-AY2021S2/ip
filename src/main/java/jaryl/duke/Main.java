@@ -10,6 +10,10 @@ import java.io.IOException;
 public class Main extends Application {
     private Duke duke = new Duke();
 
+    /**
+     * Entry point into Duke chatbot
+     * @param s the primary stage for Duke
+     */
     @Override
     public void start(Stage s) {
         try {

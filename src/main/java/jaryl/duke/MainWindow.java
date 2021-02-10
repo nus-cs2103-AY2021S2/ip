@@ -7,6 +7,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
+/**
+ * Controller that provides the layout for other controls
+ */
 public class MainWindow {
     private Duke duke;
 
@@ -22,6 +25,10 @@ public class MainWindow {
     private Image userImg = new Image(this.getClass().getResourceAsStream("/images/ash.png"));
     private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/pikachu.png"));
 
+    /**
+     * Sets duke
+     * @param duke the Duke chat bot
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
         Output output = new Output();
@@ -33,6 +40,10 @@ public class MainWindow {
         scroller.vvalueProperty().bind(dialogBox.heightProperty());
     }
 
+    /**
+     * Handles text updates
+     * Enables/disables send button depending on text field content
+     */
     public void textUpdateHandler() {
         if (sendButton.isDisabled() && !userInput.getText().isBlank()) {
             sendButton.setDisable(false);
@@ -42,6 +53,10 @@ public class MainWindow {
         }
     }
 
+    /**
+     * Handles user input. Creates 2 dialog boxes containing Duke's response and user input.
+     * User input is flushed after the dialog boxes are processed
+     */
     @FXML
     private void userInputHandler() {
         String input = userInput.getText();
