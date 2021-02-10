@@ -22,6 +22,8 @@ public class Elaina extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
+    private AnchorPane mainLayout;
+    private Button sendButton;
     private String userImageSrc;
     private String elainaImageSrc;
     private String elainaImage2Src;
@@ -40,39 +42,27 @@ public class Elaina extends Application {
         Storage.readFromFile(this.tasks);
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        // Step 1. Setting up required components
-
+    private void initializeImageSources() {
         this.userImageSrc = "/images/dialogPic/User/majo_saya2.jpg";
         this.elainaImageSrc = "/images/dialogPic/Elaina/majo_elaina1.jpg";
         this.elainaImage2Src = "/images/dialogPic/Elaina/majo_elaina0.jpg";
         this.elainaIconSrc = "/images/dialogPic/Elaina/majo_elaina2.jpg";
+    }
 
+    private void initializeComponents() {
         this.scrollPane = new ScrollPane();
         this.dialogContainer = new VBox();
         this.scrollPane.setContent(dialogContainer);
 
         this.userInput = new TextField();
-        Button sendButton = new Button("Send");
+        this.sendButton = new Button("Send");
 
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(this.scrollPane, this.userInput, sendButton);
+        this.mainLayout = new AnchorPane();
+        this.mainLayout.getChildren().addAll(this.scrollPane, this.userInput, this.sendButton);
+    }
 
-        Scene scene = new Scene(mainLayout); // Setting the scene to be our Label
-
-        primaryStage.setScene(scene); // Setting the stage to show our screen
-        primaryStage.show(); // Render the stage.
-
-        // Step 2. Formatting the window to look as expected
-
-        primaryStage.setTitle("Elaina");
-        primaryStage.setResizable(false);
-        primaryStage.setMinHeight(600.0);
-        primaryStage.setMinWidth(400.0);
-        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream(this.elainaIconSrc)));
-
-        mainLayout.setPrefSize(400.0, 600.0);
+    private void initializeComponentProperties() {
+        this.mainLayout.setPrefSize(400.0, 600.0);
 
         this.scrollPane.setPrefSize(385.0, 535.0);
         this.scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -86,17 +76,17 @@ public class Elaina extends Application {
 
         this.userInput.setPrefWidth(325.0);
 
-        sendButton.setPrefWidth(55.0);
+        this.sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(this.scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(this.sendButton, 1.0);
+        AnchorPane.setRightAnchor(this.sendButton, 1.0);
         AnchorPane.setLeftAnchor(this.userInput, 1.0);
         AnchorPane.setBottomAnchor(this.userInput, 1.0);
+    }
 
-        // Step 3. Add functionality to handle user input.
-
-        sendButton.setOnMouseClicked((event) -> {
+    private void initializeEventListeners() {
+        this.sendButton.setOnMouseClicked((event) -> {
             this.sendCommand();
         });
 
@@ -107,6 +97,28 @@ public class Elaina extends Application {
         });
 
         this.dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Step 1. Setting up required components
+        this.initializeImageSources();
+        this.initializeComponents();
+        Scene scene = new Scene(this.mainLayout); // Setting the scene to be our Label
+        primaryStage.setScene(scene); // Setting the stage to show our screen
+        primaryStage.show(); // Render the stage.
+
+        // Step 2. Formatting the window to look as expected
+        primaryStage.setTitle("Elaina");
+        primaryStage.setResizable(false);
+        primaryStage.setMinHeight(600.0);
+        primaryStage.setMinWidth(400.0);
+        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream(this.elainaIconSrc)));
+
+        this.initializeComponentProperties();
+
+        // Step 3. Add functionality to handle user input.
+        this.initializeEventListeners();
 
         // Step 4. Print welcome message.
         for (String line : this.getWelcomeText(false).split("\n")) {
