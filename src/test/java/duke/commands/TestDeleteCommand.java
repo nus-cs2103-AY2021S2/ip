@@ -13,6 +13,9 @@ import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
+/**
+ * JUnit test for the <code>DeleteCommand</code> class in duke.commands
+ */
 public class TestDeleteCommand {
     private final ToDo toDo;
     private final Deadline deadline;

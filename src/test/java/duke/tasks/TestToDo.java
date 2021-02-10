@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * JUnit test for the <code>ToDo</code> class in duke.tasks
+ */
 public class TestToDo {
     private final String description = "CS2103 Quiz";
     private final ToDo toDo = new ToDo(this.description);

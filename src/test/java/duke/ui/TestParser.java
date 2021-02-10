@@ -19,7 +19,9 @@ import duke.commands.FindCommand;
 import duke.commands.InvalidInputCommand;
 import duke.commands.ListCommand;
 
-
+/**
+ * JUnit test for the <code>Parser</code> class in duke.ui
+ */
 public class TestParser {
 
     /**

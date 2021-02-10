@@ -6,12 +6,17 @@ import duke.tasks.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Parser;
 
+/**
+ * The chatbot/to-do list application.
+ */
 public class Duke {
     private final TaskList tasks;
     private final Storage storage;
 
     /**
-     * Initializes an instance of Duke to handle ALL the logic of the application.
+     * Initializes an instance of Duke with a <code>TaskList</code> property, which is essentially the
+     * state of the application, and a <code>Storage</code> property, which handles the loading and saving
+     * of tasks when the application starts and shuts down respectively.
      *
      * @param filepath Path to text file from which tasks are loaded when the app starts, and to
      *                 which tasks are saved when the app terminates.

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * JUnit test for the <code>TaskList</code> class in duke.tasks
+ */
 public class TestTaskList {
     private final TaskList tasks;
     private final ToDo toDo;

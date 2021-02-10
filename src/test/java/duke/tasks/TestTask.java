@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * JUnit test for the <code>Task</code> class in duke.tasks
+ */
 public class TestTask {
     private final String description = "CS2103 Quiz";
     private final Task task = new Task(this.description);
