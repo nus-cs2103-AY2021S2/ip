@@ -208,4 +208,28 @@ public class TaskList {
         return reply;
     }
 
+    /**
+     * Performs undo operation for specified number of times.
+     *
+     * @param command Command input by user.
+     * @param tasks List of tasks.
+     * @return Acknowledgement message that the undo operation has been performed.
+     */
+    public static String undoTask(String command, List<Task> tasks) {
+        String reply = "";
+        int undoNumber = Integer.parseInt(command.split(" ")[1]);
+        for(int i = 0; i < undoNumber; i++) {
+            tasks.remove(tasks.size() - 1);
+        }
+        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        reply += "Undo operation successful";
+        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        try {
+            Storage.saveDataToFile(tasks);
+        } catch (UnableToSaveDataException e) {
+            reply += "\n" + "Sorry, unable to save data to the hard disk.";
+        }
+        return reply;
+    }
+
 }

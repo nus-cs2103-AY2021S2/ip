@@ -43,6 +43,8 @@ public class Duke {
             reply = TaskList.deleteTask(command, tasks);
         } else if (parsedCommand.equals("find")) {
             reply = TaskList.findTask(command, tasks);
+        } else if (parsedCommand.equals("undo")) {
+            reply = TaskList.undoTask(command, tasks);
         } else if (command.equals("bye")) {
             reply = Ui.printExitMessage();
             System.exit(0);
