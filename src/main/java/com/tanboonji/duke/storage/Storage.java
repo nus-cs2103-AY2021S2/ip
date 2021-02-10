@@ -19,7 +19,6 @@ public class Storage {
     private static final String LOAD_ERROR_MESSAGE =
             "☹ Sorry, something went wrong while I was loading saved data from file.";
     private static final String SAVE_ERROR_MESSAGE = "☹ Sorry, something went wrong while I was saving data to file.";
-
     private final String fileDir;
 
     /**
@@ -32,8 +31,8 @@ public class Storage {
     }
 
     /**
-     * Loads TaskList saved on local disk.
-     * If TaskList does not exist, initialise an empty TaskList.
+     * Loads task list saved on local disk.
+     * If task list does not exist, initialise an empty task list.
      *
      * @return TaskList returns task list saved on disk, if it does not exist, an empty task list is returned instead.
      * @throws DukeException If any error occurs while loading task list from disk.
@@ -47,7 +46,6 @@ public class Storage {
             fileIn.close();
             return taskList;
         } catch (FileNotFoundException e) {
-            // expected exception: file not found therefore no tasks loaded
             return new TaskList(new ArrayList<>());
         } catch (IOException | ClassNotFoundException e) {
             throw new DukeException(LOAD_ERROR_MESSAGE);
@@ -55,10 +53,10 @@ public class Storage {
     }
 
     /**
-     * Saves TaskList saved to disk.
+     * Saves task list saved to disk.
      *
-     * @param taskList TaskList to be stored to disk.
-     * @throws DukeException If any error occurs while saving TaskList to disk.
+     * @param taskList task list to be stored to disk.
+     * @throws DukeException If any error occurs while saving task list to disk.
      */
     public void save(TaskList taskList) throws DukeException {
         try {
