@@ -1,7 +1,5 @@
-
 T;;hello;;false
 E;;parsing;;false;;03-03 6PM
-T;;description;;false
 E;;testing;;false;;03-08 1AM
 D;;testing;;false;;03-09 1AM
 T;;interesting;;false
