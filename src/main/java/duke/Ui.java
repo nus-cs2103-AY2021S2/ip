@@ -48,8 +48,6 @@ public class Ui {
     }
 
     public String getPrintTaskListString(TaskList userList) {
-        assert userList != null || userList.getTaskListSize() >= 0: "TaskList passed in as parameter should not be null";
-
         String stringToBeReturned = "";
         for (int i = 0; i < userList.getTaskListSize(); i++) {
             stringToBeReturned += (i + 1) + "." + userList.getTask(i).toString() + "\n";
@@ -76,9 +74,6 @@ public class Ui {
     }
 
     public String getPrintDoneTaskString(TaskList userTaskList, int taskNumber) {
-        assert taskNumber < userTaskList.getTaskListSize() && taskNumber > 0
-                : "taskNumber should be within size of task List";
-
         Task doneTask = userTaskList.getTask(taskNumber - 1);
         doneTask.markAsDone();
         String doneTaskString = String.format("Nice! I've marked this task as done:\n[%s] \n%s\n",
@@ -117,21 +112,16 @@ public class Ui {
      * Prints the message when task is deleted from Task List.
      *
      * @param userTaskList Task list of the user.
-     * @param taskNumber Task to be added to the Task list.
+     * @param taskToBeDeleted Task to be deleted from the Task list.
      */
-    public void printDeletedTask(TaskList userTaskList, int taskNumber) {
-        Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
+    public void printDeletedTask(Task taskToBeDeleted, TaskList userTaskList) {
         System.out.println("Noted. I've removed this task");
         System.out.println(taskToBeDeleted);
         System.out.println("Now you have " + (userTaskList.getTaskListSize()) + " tasks in the list.");
         System.out.println(HORIZONTAL_RULE);
     }
 
-    public String getPrintDeletedTaskString(TaskList userTaskList, int taskNumber) {
-        assert taskNumber < userTaskList.getTaskListSize() && taskNumber > 0
-                : "taskNumber should be within size of task List";
-
-        Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
+    public String getPrintDeletedTaskString(Task taskToBeDeleted, TaskList userTaskList) {
         String deletedTaskString = "";
         deletedTaskString += "Noted. I've removed this task\n";
         deletedTaskString += taskToBeDeleted.toString() + "\n";

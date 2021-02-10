@@ -16,8 +16,6 @@ public class Parser {
      * @return formatted date in "yyyy-MM-DD" format.
      */
     public String parseDate(String unformattedDate) {
-        assert unformattedDate != null : "unformattedDate should not be null String";
-
         String[] dateArr = unformattedDate.split(" ");
         assert dateArr.length == 3 : "date should have only year, month and day when split on blank space";
 
@@ -49,9 +47,8 @@ public class Parser {
      * @see Deadline
      */
     public Deadline parseAddDeadline(String command) {
-        assert command.contains("/by ") : "command should have '/by ' for deadline Task";
-
         String[] deadlineAndTask = command.split(" /by ");
+        assert deadlineAndTask.length == 2 : "length should be 2 when splitting on /by";
         return new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(9));
     }
 
@@ -63,9 +60,9 @@ public class Parser {
      * @see Event
      */
     public Event parseAddEvent(String command) {
-        assert command.contains("/at ") : "command should have '/at ' for deadline Task";
-
         String[] eventTimeAndTask = command.split(" /at ");
+        assert eventTimeAndTask.length == 2 : "length of String array with event time and task split on /at is 2";
+
         //offset of 6 to remove "event " frm statement
         return new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
     }
@@ -76,9 +73,11 @@ public class Parser {
      * @param command command passed in by the user.
      * @return Index of Task to be deleted.
      */
-    public int parseDeleteCommand(String command) {
-        assert command.length() > 0 && command.contains(" ") : "delete command should have 2 words";
-        return Integer.parseInt(command.split(" ")[1]);
+    public Task parseDeleteCommand(String command, TaskList userList) {
+        int taskNumToBeDeleted = Integer.parseInt(command.split(" ")[1]);
+        Task deletedTask = userList.removeTask(taskNumToBeDeleted - 1);
+        deletedTask.markAsDone();
+        return deletedTask;
     }
 
     /**
@@ -89,9 +88,6 @@ public class Parser {
      * @return TaskList containing tasks for which the keywords are matched.
      */
     public TaskList parseFindCommand(String command, TaskList userList) {
-        assert command.length() > 4 : "find command should have at least 5 characters";
-        assert userList != null : "user's Task List used to find tasks with keywords should not be empty";
-
         String keywords = command.substring(5);
         ArrayList<Task> results = new ArrayList<>();
         for (Task task : userList.getTaskList()) {

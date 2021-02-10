@@ -24,8 +24,6 @@ public class Storage {
      * @see Paths
      */
     public Storage(String filePath) throws IOException {
-        assert filePath.contains("tasks.txt") : "file path provided should contain tasks.txt";
-
         String parentPath = filePath.split("tasks.txt")[0];
         if (!Files.exists(Paths.get(parentPath))) {
             Files.createDirectories(Paths.get(parentPath));
@@ -84,6 +82,7 @@ public class Storage {
                     break;
                 default:
                     // do nothing
+                    assert false : "invalid event type";
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -99,8 +98,6 @@ public class Storage {
      * @param data : the user's task list
      */
     public void writeData(List<Task> data) {
-        assert data != null : "List of tasks should not be empty.";
-
         String stringOfData = "";
         for (int i = 0; i < data.size(); i++) {
             if (i == data.size() - 1) {
