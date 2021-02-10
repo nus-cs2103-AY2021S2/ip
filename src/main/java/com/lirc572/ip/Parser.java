@@ -6,8 +6,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javafx.scene.layout.VBox;
-
 /**
  * Contains static methods for parsing commands.
  */
@@ -71,7 +69,7 @@ public class Parser {
      * @param command The command to process.
      * @return The response.
      */
-    public static String processCommand(String command, TaskList tasks, VBox dialogContainer) throws Exception {
+    public static String processCommand(String command, TaskList tasks) throws Exception {
         assert command.length() > 0 : "Command should not be empty";
         String[] tokens = tokenizeCommand(command);
         String response = "";

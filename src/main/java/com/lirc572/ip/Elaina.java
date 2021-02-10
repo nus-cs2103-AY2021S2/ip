@@ -120,7 +120,9 @@ public class Elaina extends Application {
             return;
         }
         String elainaText = this.getResponse(userInput.getText());
-        if (!elainaText.equals("clear")) {
+        if (elainaText.equals("clear")) {
+            this.dialogContainer.getChildren().clear();
+        } else {
             this.dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialogBox(
                             userText,
@@ -133,8 +135,6 @@ public class Elaina extends Application {
                                     : this.elainaImageSrc
                     )
             );
-        } else {
-            this.dialogContainer.getChildren().clear();
         }
         this.userInput.clear();
         if (elainaText.equals("Bye. Hope to see you again soon!\n")) {
@@ -146,7 +146,7 @@ public class Elaina extends Application {
     private String getResponse(String input) {
         String response = null;
         try {
-            response = Parser.processCommand(input, this.tasks, this.dialogContainer);
+            response = Parser.processCommand(input, this.tasks);
         } catch (Exception e) {
             String errorText = "";
             errorText += Ui.printError(e);
