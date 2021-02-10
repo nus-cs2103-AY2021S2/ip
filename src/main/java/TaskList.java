@@ -72,9 +72,8 @@ public class TaskList {
                 }
             }
         }
-        for (int taskToAdd : toAdd) {
-            relatedTasks.add(this.tasks.get(taskToAdd));
-        }
+
+        toAdd.forEach(taskToAdd -> relatedTasks.add(this.tasks.get(taskToAdd)));
         return relatedTasks;
     }
 }
