@@ -1,6 +1,8 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 public class Duke {
     public static void main(String[] args) throws DukeException{
@@ -25,14 +27,14 @@ public class Duke {
                     System.out.println(i + ". " + list.get(i - 1).toString());
                 }
             } else if (word.contains("done")) {
-                String strArray[] = word.split(" ");
+                String[] strArray = word.split(" ");
                 int value = Integer.parseInt(strArray[1]);
                 Task complete = list.get(value - 1);
                 complete.markAsDone();
                 System.out.println(" Nice! I've marked this task as done: ");
                 System.out.println(complete.toString());
             } else if (word.contains("delete")) {
-                String arr[] = word.split(" ");
+                String[] arr = word.split(" ");
                 int value = Integer.parseInt(arr[1]);
                 Task remove = list.get(value - 1);
                 list.remove(value - 1);
@@ -58,9 +60,10 @@ public class Duke {
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(e.toString());
                 } else if (word.contains("deadline")) {
-                    String[] input = word.split("/by");
+                    String[] input = word.split("/by ");
                     input[0] = input[0].replaceAll("deadline", "");
-                    Deadline d = new Deadline(input[0], input[1]);
+                    LocalDate date =LocalDate.parse(input[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    Deadline d = new Deadline(input[0], date);
                     list.add(d);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(d.toString());
