@@ -47,6 +47,7 @@ public class TaskWithDate extends Task{
     public LocalDateTime convertDateTime(String dateTime) throws SnomException {
         dateTime = dateTime.replaceFirst(" ", "");
         try{
+            // This is just to indicate stream was used previously, this comment will be deleted after tagging
             DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                     .appendPattern("yyyy-MM-dd[ HH:mm]")
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
@@ -61,6 +62,7 @@ public class TaskWithDate extends Task{
 
     @Override
     public String toSaveString(){
+        // This is just to indicate stream was used previously, this comment will be deleted after tagging
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendPattern("yyyy-MM-dd[ HH:mm]")
                 .toFormatter();
