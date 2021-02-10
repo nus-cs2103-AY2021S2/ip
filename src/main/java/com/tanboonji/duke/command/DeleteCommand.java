@@ -21,6 +21,16 @@ public class DeleteCommand extends Command {
     }
 
     @Override
+    public boolean shouldSaveData() {
+        return true;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
+        return false;
+    }
+
+    @Override
     public String execute() throws DukeException {
         try {
             Task task = taskList.deleteTask(taskIndex);
@@ -30,12 +40,6 @@ public class DeleteCommand extends Command {
         }
     }
 
-    @Override
-    public boolean shouldSave() {
-        return true;
-    }
-
-    public static DeleteCommand parseArguments(String input) throws DukeException {
     /**
      * Returns new delete command after parsing command argument.
      *
@@ -43,9 +47,10 @@ public class DeleteCommand extends Command {
      * @return New delete command.
      * @throws DukeException If user input is not an integer.
      */
+    public static DeleteCommand parseArguments(String argument) throws DukeException {
         int taskIndex;
         try {
-            taskIndex = Integer.parseInt(input) - 1;
+            taskIndex = Integer.parseInt(argument) - 1;
             return new DeleteCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(ERROR_MESSAGE);

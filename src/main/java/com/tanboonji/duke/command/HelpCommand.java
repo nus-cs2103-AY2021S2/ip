@@ -20,7 +20,6 @@ public class HelpCommand extends Command {
             + "\t\t- delete [task number]\n"
             + "\t\t- help\n"
             + "\t\t- bye\n";
-
     private final boolean showError;
 
     /**
@@ -33,7 +32,12 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public boolean shouldSave() {
+    public boolean shouldSaveData() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
         return false;
     }
 

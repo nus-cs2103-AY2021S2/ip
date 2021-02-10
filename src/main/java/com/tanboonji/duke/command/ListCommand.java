@@ -14,7 +14,12 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean shouldSave() {
+    public boolean shouldSaveData() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
         return false;
     }
 

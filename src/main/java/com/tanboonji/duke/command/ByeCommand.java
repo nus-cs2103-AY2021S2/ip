@@ -16,12 +16,12 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public boolean shouldExit() {
+    public boolean shouldSaveData() {
         return true;
     }
 
     @Override
-    public boolean shouldSave() {
+    public boolean shouldExitDuke() {
         return true;
     }
 

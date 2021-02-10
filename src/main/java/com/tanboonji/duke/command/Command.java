@@ -30,16 +30,14 @@ public abstract class Command {
      *
      * @return True if tasks are updated, else false.
      */
-    public boolean shouldExit() {
-        return false;
-    }
+    public abstract boolean shouldSaveData();
 
     /**
      * Returns boolean value indicating if the command causes Duke to exit.
      *
      * @return True if Duke exits, else false.
      */
-    public abstract boolean shouldSave();
+    public abstract boolean shouldExitDuke();
 
     /**
      * Executes the command and returns response of command after execution.

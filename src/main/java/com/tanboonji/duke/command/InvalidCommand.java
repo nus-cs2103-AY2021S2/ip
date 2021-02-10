@@ -17,12 +17,12 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public boolean shouldExit() {
+    public boolean shouldSaveData() {
         return false;
     }
 
     @Override
-    public boolean shouldSave() {
+    public boolean shouldExitDuke() {
         return false;
     }
 

@@ -13,11 +13,20 @@ public class DoneCommand extends Command {
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number.\n"
             + "\tCommand: done [task number]";
     private static final String HEADER = "Nice! I've marked this task as done:\n\t";
-
     private final int taskIndex;
 
     private DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
+    }
+
+    @Override
+    public boolean shouldSaveData() {
+        return true;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
+        return false;
     }
 
     @Override
@@ -30,12 +39,6 @@ public class DoneCommand extends Command {
         }
     }
 
-    @Override
-    public boolean shouldSave() {
-        return true;
-    }
-
-    public static DoneCommand parseArguments(String input) throws DukeException {
     /**
      * Returns new done command after parsing command argument.
      *
@@ -43,9 +46,10 @@ public class DoneCommand extends Command {
      * @return New done command.
      * @throws DukeException If user input is not an integer.
      */
+    public static DoneCommand parseArguments(String argument) throws DukeException {
         int taskIndex;
         try {
-            taskIndex = Integer.parseInt(input) - 1;
+            taskIndex = Integer.parseInt(argument) - 1;
             return new DoneCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(ERROR_MESSAGE);

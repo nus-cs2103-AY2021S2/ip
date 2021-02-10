@@ -12,7 +12,6 @@ public class FindCommand extends Command {
     public static final String COMMAND = "find";
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a keyword to search for.\n"
             + "\tCommand: find [keyword]";
-
     private final String keyword;
 
     private FindCommand(String keyword) {
@@ -20,7 +19,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean shouldSave() {
+    public boolean shouldSaveData() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
         return false;
     }
 
@@ -45,8 +49,6 @@ public class FindCommand extends Command {
         return builder.toString().trim();
     }
 
-    public static FindCommand parseArguments(String input) throws DukeException {
-        if (input.trim().equals("")) {
     /**
      * Returns new find command after parsing command argument.
      *
@@ -54,8 +56,10 @@ public class FindCommand extends Command {
      * @return New find command.
      * @throws DukeException If user input does not match find command format.
      */
+    public static FindCommand parseArguments(String argument) throws DukeException {
+        if (argument.trim().equals("")) {
             throw new DukeException(ERROR_MESSAGE);
         }
-        return new FindCommand(input);
+        return new FindCommand(argument);
     }
 }
