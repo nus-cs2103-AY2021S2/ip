@@ -1,12 +1,11 @@
 package duke;
 
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
-import java.io.IOException;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a task manager that allows users to add, delete and mark tasks as done.
@@ -56,6 +55,11 @@ public class Duke {
     }
 
 
+    /**
+     * Runs Duke for the given file path
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         String filePath = "data/duke.txt";
         new Duke(filePath).run();

@@ -2,10 +2,10 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.exception.DukeException;
-import duke.task.TaskList;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
 import duke.task.TaskType;
 
 /**
