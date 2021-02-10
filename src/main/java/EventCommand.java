@@ -30,6 +30,7 @@ public class EventCommand extends Command {
         String [] commandArr = command.trim().split(" ");
 
         if (command.equals("event")) {
+            assert commandArr.length == 1;
             throw new DukeMissingInputException("OOPS! The description of an event cannot be empty.");
         } else {
             for (int i = 1; i < commandArr.length; i++) {

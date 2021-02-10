@@ -32,17 +32,18 @@ public class DeadlineCommand extends Command {
             DukeWrongInputException {
         String description = "";
         String deadline = "";
-        boolean foundBy = false;
+        boolean hasFoundBy = false;
         String[] commandArr = command.trim().split(" ");
         if (command.equals("deadline")) {
+            assert commandArr.length == 1;
             throw new DukeMissingInputException("OOPS! The description of a deadline cannot be empty.");
         } else {
             for (int i = 1; i < commandArr.length; i++) {
                 if (commandArr[i].equals("/by")) {
-                    foundBy = true;
+                    hasFoundBy = true;
                     continue;
                 }
-                if (foundBy) {
+                if (hasFoundBy) {
                     deadline += (commandArr[i] + " ");
                 } else {
                     description += (commandArr[i] + " ");
