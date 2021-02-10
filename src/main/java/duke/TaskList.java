@@ -17,7 +17,9 @@ public class TaskList {
     }
 
     private String echoNoOfTask() {
-        String noOfTasksText = "Now you have " + getNoOfTasks() + " tasks in the list\n";
+        int numOfTasks = getNoOfTasks();
+        assert numOfTasks >=0 : "Number of tasks cannot be a negative integer";
+        String noOfTasksText = "Now you have " + numOfTasks + " tasks in the list\n";
         return noOfTasksText;
     }
 
@@ -87,6 +89,7 @@ public class TaskList {
 
     public String markAsDone(int num) throws DukeException{
         //TODO consider adding assertion/exception here(to prevent indexing issues)
+        assert num < 0 : "Excepted a positive value for task number, to mark it as done";
         String markStatus;
         if (getNoOfTasks() == 0) {
             markStatus = "There are no tasks in the list to be marked as done!";

@@ -1,5 +1,0 @@
-D, 0, play soccer, Friday 6pm
-T, 0, help 
-D, 0, submit ip, Wednesday 2359
-E, 0, finish ip, tmr 1pm
-T, 1, 
