@@ -2,7 +2,7 @@ import commands.Command;
 import commands.CommandResponse;
 import exceptions.SnomException;
 import parser.Parser;
-import storage.Storage;
+import files.Storage;
 import tasks.TaskList;
 import ui.Snomio;
 
@@ -10,18 +10,18 @@ import ui.Snomio;
  * Snom is a Personal Assistant Chatbot that helps
  * a person to keep track of various things.
  *
- * @author: Sharptail
+ * @author Sharptail
  */
 public class Snom {
     private Storage storage;
     private TaskList taskList;
     private Snomio snomio;
 
-    public Snom(String dirPath, String filePath){
-        snomio = new Snomio(System.in, System.out);
-        storage = new Storage(dirPath, filePath);
+    public Snom(String filePath){
+        snomio = new Snomio();
+        storage = new Storage(filePath);
         try{
-            taskList = new TaskList(storage.readFile());
+            taskList = new TaskList(storage.importTask());
         }catch(SnomException e){
             snomio.showLoadingError();
         }

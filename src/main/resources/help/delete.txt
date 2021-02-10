@@ -1,0 +1,11 @@
+DELETE Help Page
+
+Description:
+    Remove task(s) from task list
+
+Usage:
+    delete [task numbers]
+
+Example:
+    delete 2
+    delete 2 3 4

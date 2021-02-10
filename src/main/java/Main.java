@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Snom snom = new Snom("data", "snom.txt");
+    private Snom snom = new Snom("data/snom.txt");
 
     @Override
     public void start(Stage stage) {

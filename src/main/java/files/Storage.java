@@ -1,75 +1,34 @@
-package storage; /**
- * This class handles any files related process for Snom
- * Eg. Create, Write, Delete save files.
- *
- * @author Sharptail
- */
+package files;
 
 import exceptions.SnomException;
 import tasks.*;
-
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Storage {
-    private Path path;
+/**
+ * Manages storage related process for Snom
+ * Eg. Import task, save task
+ *
+ * @author Sharptail
+ */
 
-    public Storage(String directory, String filename){
-        this.path = Paths.get(directory, filename);
-        createFolder();
-        createFile();
-    }
-
-    /**
-     * Creates directory with the given path
-     */
-    public void createFolder(){
-        try{
-            Files.createDirectories(path.getParent());
-        }catch(FileAlreadyExistsException e){
-            System.out.println("File exist. Nothing needs to be done here");
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Creates file with the given path
-     */
-    public void createFile(){
-        try{
-            Files.createFile(path);
-        }catch(FileAlreadyExistsException e){
-            System.out.println("File exist. Nothing needs to be done here");
-        }catch(IOException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Returns an array list of tasks after reading from a save file.
-     *
-     * @return array list of tasks
-     */
-    public ArrayList<Task> readFile() throws SnomException {
-        try {
-            List<String> lines = Files.readAllLines(path);
-            return importTask(lines);
-        } catch (IOException e) {
-            throw new SnomException(e.getMessage());
-        }
+public class Storage extends FileManager{
+    public Storage(String filename){
+        super(filename);
+        super.createFolder();
+        super.createFile();
     }
 
     /**
      * Returns an array list of task from given list of strings
      *
-     * @param lines          list of strings
      * @return               array list of tasks
      * @throws SnomException if invalid date for deadline or event
      */
-    public ArrayList<Task> importTask(List<String> lines) throws SnomException{
+    public ArrayList<Task> importTask() throws SnomException{
+        List<String> lines = super.readFile();
         ArrayList<Task> taskList = new ArrayList<>();
         for(String line: lines) {
             String attr[] = line.split(",");

@@ -1,0 +1,11 @@
+FINISH Help Page
+
+Description:
+    Mark task(s) as finished
+
+Usage:
+    finish [task numbers]
+
+Example:
+    finish 2
+    finish 2 3 4

@@ -1,0 +1,13 @@
+These are common Snom commands used in various situations:
+
+todo            Add a todo task to task list
+deadline        Add a task with deadline to task list
+event           Add a event task to task list
+list            List all the tasks added to task list
+finish          Mark task(s) as finished
+delete          Remove task(s) from task list
+find            Search for task(s) with given key word
+help            Display help page
+
+See 'help <command> for more info on specific command'.
+

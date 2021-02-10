@@ -2,7 +2,7 @@ package commands;
 
 import exceptions.SnomException;
 import parser.Parser;
-import storage.Storage;
+import files.Storage;
 import tasks.Task;
 import tasks.TaskList;
 import ui.Snomio;

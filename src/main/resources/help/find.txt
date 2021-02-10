@@ -1,0 +1,10 @@
+FIND Help Page
+
+Description:
+    Search for task(s) with given key word
+
+Usage:
+    find [keyword]
+
+Example:
+    find book
