@@ -38,6 +38,12 @@ public class Task {
         this.isDone = true;
     }
 
+    public void updateTime(String time) {};
+
+    public void updateDesc(String desc) {
+        this.description = desc;
+    };
+
     /**
      * Returns a segment of text representing the current task, this text is in the format
      * which is to be saved to file

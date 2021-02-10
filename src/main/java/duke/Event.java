@@ -38,6 +38,11 @@ public class Event extends Task {
         return "E" + super.toString() + " | " + at;
     }
 
+    @Override
+    public void updateTime(String time) {
+        this.at = time;
+    }
+
     /**
      * Returns a string of the format of task to be printed to console
      * e.g. E | 1 | running | DEC 21 2020 Sunday

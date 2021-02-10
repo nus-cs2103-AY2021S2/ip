@@ -125,9 +125,41 @@ public class Parser {
                 result[0] = "FND";
                 result[1] = temp;
             }
+        } else if (inputLine.startsWith("update")) {
+            result = processUpdate(inputLine, result);
         } else {
             throw new DukeException("I'm sorry, I don't understand what that means.");
         }
         return result;
+    }
+
+    public String[] processUpdate(String input, String[] results) throws DukeException {
+        if (input.equals("update")) {
+            throw new DukeException("Please tell me what you like to update.");
+        } else {
+            String updateMsg = input.substring(7);
+            String[] temp = updateMsg.split(" ", 3);
+            for (String str : temp) {
+                System.out.println("input: " + str);
+            }
+
+            if (temp.length < 3) {
+                throw new DukeException("Please follow the correct input format: update <task index> <TYPE> <details>");
+            } else {
+                String taskIndex = temp[0];
+                String type = temp[1];
+                String details = temp[2];
+
+                if (type.equals("time") || type.equals("desc")) {
+                    results[0] = "UPD";
+                    results[1] = taskIndex;
+                    results[2] = type;
+                    results[3] = details;
+                } else {
+                    throw new DukeException("Please tell me which attribute you want to update");
+                }
+            }
+        }
+        return results;
     }
 }

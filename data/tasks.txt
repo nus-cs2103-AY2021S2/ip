@@ -1,5 +1,5 @@
 D | 1 | jooing | 2019-10-12 Monday
-T | 0 | 99
+T | 1 | running around cinnamon
 T | 0 | read book
 T | 0 | haha
 T | 0 | return book
@@ -7,3 +7,4 @@ T | 0 | haha
 T | 0 | haha
 T | 0 | haha
 T | 0 | joking
+D | 0 | running | 2020-12-12 9pm
