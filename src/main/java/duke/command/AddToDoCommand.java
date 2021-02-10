@@ -28,18 +28,19 @@ public class AddToDoCommand extends Command {
      * it will raise the DukeException.
      */
     public String execute(TaskList taskList) throws DukeException {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Got it! I've added this task:\n");
         int spaceIndex = userMessage.indexOf(" ");
-        if (spaceIndex == -1) {
+        boolean noName = spaceIndex == -1;
+        if (noName) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
-        String todoName = userMessage.substring(spaceIndex+1);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("Got it! I've added this task:\n");
+        String todoName = userMessage.substring(spaceIndex + 1);
         ToDo todo = new ToDo(todoName);
         taskList.addTask(todo);
-
         builder.append("[" + todo.getStatusIcon() + "] " + todo.toString());
-        builder.append("\nNow you have " + Integer.toString(taskList.getNumOfTasks()) + " tasks in the list.");
+        builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");
 
         String botMessage = builder.toString();
         return botMessage;

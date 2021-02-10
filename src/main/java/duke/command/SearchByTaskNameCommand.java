@@ -35,7 +35,6 @@ public class SearchByTaskNameCommand extends Command {
         String[] info;
         String name;
 
-        // prevent input mistakes.
         try {
             info = userMessage.split(" ", 2);
             name = info[1];

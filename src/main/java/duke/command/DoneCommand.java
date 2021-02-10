@@ -32,7 +32,8 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList taskList) throws DukeException {
         String [] arr = userMessage.split("\\s+");
-        //Exception: If the input is like done 1 2 3:
+
+        //Raises Exception if the input is like "done 1 2 3".
         if (arr.length > 2) throw new DukeException("OOPS!!! The description of a done is wrong.");
 
         try {

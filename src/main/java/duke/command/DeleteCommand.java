@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList taskList) throws DukeException {
         String[] arr = userMessage.split("\\s+");
-        //Exception: If the input is like delete 1 2 3:
+        //raises exception if the input is like "delete 1 2 3".
         if (arr.length > 2) {
             throw new DukeException("OOPS!!! The description of a delete is wrong.");
         }

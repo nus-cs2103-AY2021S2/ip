@@ -28,21 +28,25 @@ public class AddDeadlineCommand extends Command {
      * it will raise the DukeException.
      */
     public String execute(TaskList taskList) throws DukeException {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Got it! I've added this task:\n");
-
         int spaceIndex = userMessage.indexOf(" ");
-        int dateIndex = userMessage.indexOf('/');
-        if (dateIndex == -1) {
+        int dateTimeIndex = userMessage.indexOf('/');
+        boolean noDateTime = dateTimeIndex == -1;
+        boolean noEventName = spaceIndex == -1;
+
+        if (noDateTime) {
             throw new DukeException("OOPS!!! I can't find your deadline time.");
         }
-        if (spaceIndex == -1 || dateIndex - spaceIndex == 1) {
+        if (noEventName) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
 
-        String deadlineName = userMessage.substring(spaceIndex + 1, dateIndex - 1);
-        String by = userMessage.substring(dateIndex + 4);
+        StringBuilder builder = new StringBuilder();
+        builder.append("Got it! I've added this task:\n");
+
+        String deadlineName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
+        String by = userMessage.substring(dateTimeIndex + 4);
         Deadline deadline;
+
         try {
             deadline = new Deadline(deadlineName, by);
         } catch (Exception e) {
