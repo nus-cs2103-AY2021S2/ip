@@ -10,7 +10,7 @@ import java.util.Scanner;
  * read and write data to a file.
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Constructor that creates a new Storage object.
@@ -34,32 +34,14 @@ public class Storage {
             Scanner readFile = new Scanner(file);
             while (readFile.hasNextLine()) {
                 String taskData = readFile.nextLine();
-                if (taskData.startsWith("T")) {
-                    String[] listOfData = taskData.split("!@#", 3);
-                    Task newTodo = new ToDo(listOfData[2]);
-                    if (listOfData[1].equals("1")) {
-                        newTodo.completeTask();
-                    }
-                    taskList.addTask(newTodo);
-                } else if (taskData.startsWith("D")) {
-                    String[] listOfData = taskData.split("!@#", 4);
-                    LocalDate localDate = LocalDate.parse(listOfData[3]);
-                    Task newDeadline = new Deadline(listOfData[2], localDate);
-                    if (listOfData[1].equals("1")) {
-                        newDeadline.completeTask();
-                    }
-                    taskList.addTask(newDeadline);
-                } else if (taskData.startsWith("E")) {
-                    String[] listOfData = taskData.split("!@#", 5);
-                    LocalDate startDate = LocalDate.parse(listOfData[3]);
-                    LocalDate endDate = LocalDate.parse(listOfData[4]);
-                    Task newEvent = new Event(listOfData[2], startDate, endDate);
-                    if (listOfData[1].equals("1")) {
-                        newEvent.completeTask();
-                    }
-                    taskList.addTask(newEvent);
+                if (taskData.startsWith(ToDo.TODO_DATA_ICON)) {
+                    readToDoDataFromFile(taskList, taskData);
+                } else if (taskData.startsWith(Deadline.DEADLINE_DATA_ICON)) {
+                    readDeadlineDataFromFile(taskList, taskData);
+                } else if (taskData.startsWith(Event.EVENT_DATA_ICON)) {
+                    readEventDataFromFile(taskList, taskData);
                 } else {
-                    //
+                    assert false;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -72,6 +54,54 @@ public class Storage {
             }
         }
         return taskList;
+    }
+
+    /**
+     * Method that reads the provided to-do task data and adds it to the task list.
+     *
+     * @param taskList the task list to add the to-do task into.
+     * @param taskData the task data to read from the file.
+     */
+    public void readToDoDataFromFile(TaskList taskList, String taskData) {
+        String[] listOfData = taskData.split(Task.DELIMITER, 3);
+        Task newTodo = new ToDo(listOfData[2]);
+        if (listOfData[1].equals(Task.IS_DONE_TRUE_DATA_ICON)) {
+            newTodo.completeTask();
+        }
+        taskList.addTask(newTodo);
+    }
+
+    /**
+     * Method that reads the provided deadline task data and adds it to the task list.
+     *
+     * @param taskList the task list to add the deadline task into.
+     * @param taskData the task data to read from the file.
+     */
+    public void readDeadlineDataFromFile(TaskList taskList, String taskData) {
+        String[] listOfData = taskData.split(Task.DELIMITER, 4);
+        LocalDate localDate = LocalDate.parse(listOfData[3]);
+        Task newDeadline = new Deadline(listOfData[2], localDate);
+        if (listOfData[1].equals(Task.IS_DONE_TRUE_DATA_ICON)) {
+            newDeadline.completeTask();
+        }
+        taskList.addTask(newDeadline);
+    }
+
+    /**
+     * Method that reads the provided event task data and adds it to the task list.
+     *
+     * @param taskList the task list to add the event task into.
+     * @param taskData the task data to read from the file.
+     */
+    public void readEventDataFromFile(TaskList taskList, String taskData) {
+        String[] listOfData = taskData.split(Task.DELIMITER, 5);
+        LocalDate startDate = LocalDate.parse(listOfData[3]);
+        LocalDate endDate = LocalDate.parse(listOfData[4]);
+        Task newEvent = new Event(listOfData[2], startDate, endDate);
+        if (listOfData[1].equals(Task.IS_DONE_TRUE_DATA_ICON)) {
+            newEvent.completeTask();
+        }
+        taskList.addTask(newEvent);
     }
 
     /**

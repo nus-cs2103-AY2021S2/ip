@@ -2,6 +2,9 @@
  * Class that can create a todo task object.
  */
 public class ToDo extends Task {
+    private static final String TODO_DISPLAY_ICON = "[T]";
+    public static final String TODO_DATA_ICON = "T";
+
     /**
      * Constructor that creates the todo task.
      * @param taskInfo the description of the todo task.
@@ -12,14 +15,14 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return TODO_DISPLAY_ICON + super.toString();
     }
 
     public String getData() {
-        if (isDone == true) {
-            return "T!@#1!@#" + taskInfo;
+        if (isDone) {
+            return TODO_DATA_ICON + DELIMITER + IS_DONE_TRUE_DATA_ICON + DELIMITER + taskInfo;
         } else {
-            return "T!@#0!@#" + taskInfo;
+            return TODO_DATA_ICON + DELIMITER + IS_DONE_FALSE_DATA_ICON + DELIMITER + taskInfo;
         }
     }
 }

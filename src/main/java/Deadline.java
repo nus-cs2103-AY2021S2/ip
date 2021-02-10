@@ -5,7 +5,9 @@ import java.time.format.DateTimeFormatter;
  * Class that can create a deadline task object.
  */
 public class Deadline extends Task {
-    private LocalDate dateInfo;
+    private static final String DEADLINE_DISPLAY_ICON = "[D]";
+    public static final String DEADLINE_DATA_ICON = "D";
+    private final LocalDate dateInfo;
 
     /**
      * Constructor that creates a deadline task.
@@ -19,14 +21,16 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (" + dateInfo.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
+        return DEADLINE_DISPLAY_ICON + super.toString() + " (" + dateInfo.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 
     public String getData() {
-        if (isDone == true) {
-            return "D!@#1!@#" + taskInfo + "!@#" + dateInfo;
+        if (isDone) {
+            return DEADLINE_DATA_ICON + DELIMITER + IS_DONE_TRUE_DATA_ICON + DELIMITER + taskInfo
+                    + DELIMITER + dateInfo;
         } else {
-            return "D!@#0!@#" + taskInfo + "!@#" + dateInfo;
+            return DEADLINE_DATA_ICON + DELIMITER + IS_DONE_FALSE_DATA_ICON + DELIMITER + taskInfo
+                    + DELIMITER + dateInfo;
         }
     }
 }
