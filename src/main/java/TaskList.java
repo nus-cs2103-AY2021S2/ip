@@ -64,4 +64,14 @@ public class TaskList {
     public Task getTaskAtIndex(int index) {
         return this.tasks.get(index);
     }
+
+    /**
+     * Sorts the task list based on lexicographic ordering.
+     *
+     * @return sorted task list
+     */
+    public TaskList sort() {
+        tasks.sort(new TaskComparator());
+        return new TaskList(tasks);
+    }
 }

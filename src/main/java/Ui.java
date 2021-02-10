@@ -90,4 +90,15 @@ public class Ui {
         }
         return sb.toString();
     }
+
+    /**
+     * Shows the list of tasks after sorting.
+     */
+    public String showTaskListSorted(TaskList taskList) {
+        StringBuilder sb = new StringBuilder("Sorted! Here is your new list: \n");
+        for (int i = 1; i <= taskList.getTaskListLength(); i++) {
+            sb.append(String.format("%s. %s", i, taskList.getTaskAtIndex(i - 1).toString()) + "\n");
+        }
+        return sb.toString();
+    }
 }

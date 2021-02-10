@@ -49,6 +49,8 @@ public class Parser {
             return new FindCommand(command);
         case "bye":
             return new ExitCommand(command);
+        case "sort":
+            return new SortCommand();
         default:
             throw new DukeWrongInputException("OOPS! I'm sorry, I don't understand.");
         }

@@ -54,7 +54,7 @@ public class Storage {
                     tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
                     break;
                 default:
-                    throw new DukeIoException("File Error: wrong data format in hard drive.");
+                    throw new DukeIoException("File Error: data corrupted in hard drive.");
                 }
             }
             sc.close();
