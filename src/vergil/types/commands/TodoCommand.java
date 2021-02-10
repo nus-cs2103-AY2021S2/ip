@@ -4,7 +4,6 @@ import vergil.components.Storage;
 import vergil.components.TaskList;
 import vergil.components.Ui;
 import vergil.types.Todo;
-import vergil.types.exceptions.VergilException;
 
 public class TodoCommand extends Command {
     private String desc;
@@ -14,7 +13,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) throws VergilException {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         desc = getArgument(0);
 
         taskList.add(new Todo(desc));

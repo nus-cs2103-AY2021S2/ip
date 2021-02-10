@@ -11,7 +11,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) throws VergilException {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         return ui.getFarewellMessage();
     }
 }

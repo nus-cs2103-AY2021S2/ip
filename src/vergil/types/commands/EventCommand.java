@@ -23,6 +23,7 @@ public class EventCommand extends Command {
         dateTime = LocalDateTime.parse(getArgument(1), DateTimeFormatter.ofPattern("d/M/y HHmm"));
 
         taskList.add(new Event(desc, dateTime));
+        storage.save(taskList);
 
         return ui.getSuccessMessage("'" + "' has been added as an event task.");
     }

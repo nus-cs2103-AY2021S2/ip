@@ -19,6 +19,9 @@ import java.util.Scanner;
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructs an empty TaskList.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
@@ -28,11 +31,26 @@ public class TaskList {
      * @param save the save file containing the info needed to create the TaskList.
      * @throws VergilException if the save file is not found.
      */
-    public TaskList(File save) throws VergilException {
+    public TaskList(File save) throws VergilFileException {
         this();
-
         try {
-            Scanner saveEntries = new Scanner(save);
+            loadFromFile(save);
+        } catch (VergilFileException e) {
+            throw new VergilFileException(
+                    "No save file was found.\n"
+                    + "Creating an empty task list...done."
+            );
+        }
+    }
+
+    /**
+     * Fills the TaskList with tasks from the given file.
+     * @param f the file object containing the tasks to load.
+     * @throws VergilFileException if the file is not found.
+     */
+    public void loadFromFile(File f) throws VergilFileException {
+        try {
+            Scanner saveEntries = new Scanner(f);
 
             while (saveEntries.hasNextLine()) {
                 String[] taskDetails = saveEntries.nextLine().split("::");
@@ -60,7 +78,7 @@ public class TaskList {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new VergilFileException("Unable to find the save file.");
+            throw new VergilFileException("Unable to find file.");
         }
     }
 
@@ -73,12 +91,12 @@ public class TaskList {
         tasks.add(t);
     }
 
-    public String getAsString(int index) throws VergilException {
+    public String getAsString(int listNum) throws VergilException {
         try {
-            return tasks.get(index)
+            return tasks.get(listNum - 1)
                     .toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new VergilIndexException();
+            throw new VergilIndexException("I cannot find a task with the given list number.");
         }
     }
 

@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
             taskAsString = taskList.getAsString(taskIndex);
 
             taskList.delete(taskIndex);
+            storage.save(taskList);
 
             return "Acknowledged. The following task has been deleted:\n"
                     + taskAsString;

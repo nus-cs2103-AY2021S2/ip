@@ -15,7 +15,7 @@ public class FindCommand extends Command {
 
 
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) throws VergilException {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         keywords = getArgument(0);
 
         resultList = taskList.find(keywords);
