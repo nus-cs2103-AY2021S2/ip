@@ -10,6 +10,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ShowListCommand;
 import duke.command.ToDoCommand;
+import duke.command.UpdateCommand;
 import duke.exceptions.DukeException;
 
 
@@ -181,6 +182,149 @@ public class Parser {
         }
     }
 
+    private boolean equalsToUpdate(String userInput) {
+        return checkStringStartingEquals(userInput, "update");
+    }
+    private ArrayList<String> parseUpdateCommand(String userInput) throws DukeException {
+        int length = "update".length();
+        if (checkStringEquals(userInput, "update")) {
+            throw new DukeException("Error! The description of what you wish to find cannot be empty!");
+        } else if (!checkStringEquals(userInput.substring(length, length + 1), " ")) {
+            throw new DukeException("Error! Please include a space after the string you wish to find.");
+        } else {
+            ArrayList<String> descriptionArr = new ArrayList<>();
+            if (userInput.contains("/de") && userInput.contains("/by")) {
+                int deFrom = userInput.indexOf("/de");
+                int byFrom = userInput.indexOf("/by");
+
+                if (deFrom > byFrom) {
+                    int deStart = deFrom + 3;
+                    int deEnd = userInput.length();
+                    int byStart = byFrom + 3;
+                    int byEnd = deFrom - 1;
+                    if (deStart == deEnd) {
+                        throw new DukeException("/de cannot be empty!");
+                    }
+                    if (byStart == byEnd) {
+                        throw new DukeException("/by cannot be empty!");
+                    }
+
+                    descriptionArr.add("/de");
+                    descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+                    descriptionArr.add("/by");
+                    descriptionArr.add(userInput.substring(byStart, byEnd).trim());
+                } else {
+                    int deStart = deFrom + 3;
+                    int deEnd = byFrom - 1;
+                    int byStart = byFrom + 3;
+                    int byEnd = userInput.length();
+
+                    if (deStart == deEnd) {
+                        throw new DukeException("/de cannot be empty!");
+                    }
+                    if (byStart == byEnd) {
+                        throw new DukeException("/by cannot be empty!");
+                    }
+
+                    descriptionArr.add("/de");
+                    descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+                    descriptionArr.add("/by");
+                    descriptionArr.add(userInput.substring(byStart, byEnd).trim());
+                }
+            } else if (userInput.contains("/de") && userInput.contains("/at")) {
+                int deFrom = userInput.indexOf("/de");
+                int atFrom = userInput.indexOf("/at");
+
+                if (deFrom > atFrom) {
+                    int deStart = deFrom + 3;
+                    int deEnd = userInput.length();
+                    int atStart = atFrom + 3;
+                    int atEnd = deFrom - 1;
+
+                    if (deStart == deEnd) {
+                        throw new DukeException("/de cannot be empty!");
+                    }
+                    if (atStart == atEnd) {
+                        throw new DukeException("/at cannot be empty!");
+                    }
+
+                    descriptionArr.add("/de");
+                    descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+                    descriptionArr.add("/at");
+                    descriptionArr.add(userInput.substring(atStart, atEnd).trim());
+                } else {
+                    int deStart = deFrom + 3;
+                    int deEnd = atFrom - 1;
+                    int atStart = atFrom + 3;
+                    int atEnd = userInput.length();
+
+                    if (deStart == deEnd) {
+                        throw new DukeException("/de cannot be empty!");
+                    }
+                    if (atStart == atEnd) {
+                        throw new DukeException("/at cannot be empty!");
+                    }
+
+                    descriptionArr.add("/de");
+                    descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+                    descriptionArr.add("/at");
+                    descriptionArr.add(userInput.substring(atStart, atEnd).trim());
+                }
+            } else if (userInput.contains("/de")) {
+                int deFrom = userInput.indexOf("/de");
+                int deStart = deFrom + 3;
+                int deEnd = userInput.length();
+
+                if (deStart == deEnd) {
+                    throw new DukeException("/de cannot be empty!");
+                }
+                descriptionArr.add("/de");
+                descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+            } else if (userInput.contains("/at")) {
+                int atFrom = userInput.indexOf("/at");
+                int atStart = atFrom + 3;
+                int atEnd = userInput.length();
+
+                if (atStart == atEnd) {
+                    throw new DukeException("/at cannot be empty!");
+                }
+                descriptionArr.add("/at");
+                descriptionArr.add(userInput.substring(atStart, atEnd).trim());
+            } else if (userInput.contains("/by")) {
+                int byFrom = userInput.indexOf("/by");
+                int byStart = byFrom + 3;
+                int byEnd = userInput.length();
+
+                if (byStart == byEnd) {
+                    throw new DukeException("/by cannot be empty!");
+                }
+                descriptionArr.add("/by");
+                descriptionArr.add(userInput.substring(byStart, byEnd).trim());
+            } else {
+                throw new DukeException("Error! Please use the correct tags!\n"
+                    + "/de for the general description of all tasks\n"
+                    + "/by for deadline tasks of the format year-month-data in numbers\n"
+                    + "/at for event tasks");
+            }
+            return descriptionArr;
+        }
+    }
+    private int getUpdateTaskIndex(String userInput) throws DukeException {
+        int length = "update".length();
+        if (checkStringEquals(userInput, "update")) {
+            throw new DukeException("Error! Please indicate the task which want to update by its number on the list");
+        } else if (!checkStringEquals(userInput.substring(length, length + 1), " ")) {
+            throw new DukeException("Error! Please include a space after update.");
+        } else {
+            try {
+                int taskInt = Integer.parseInt(userInput.split(" ")[1]);
+                return taskInt;
+            } catch (NumberFormatException e) {
+                throw new DukeException("Error! You must give a number corresponding to a task on the list to update");
+            }
+        }
+    }
+
     public boolean checkIfExit(String userInput) {
         return userInput.equals("bye");
     }
@@ -213,6 +357,10 @@ public class Parser {
             } else if (this.equalsToFind(userInput)) {
                 String stringToFind = this.parseFindCommand(userInput);
                 return new FindCommand(stringToFind);
+            } else if (this.equalsToUpdate(userInput)) {
+                int taskUpdateInt = this.getUpdateTaskIndex(userInput);
+                ArrayList<String> arrOfDescriptionToChange = this.parseUpdateCommand(userInput);
+                return new UpdateCommand(taskUpdateInt, arrOfDescriptionToChange);
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means");
             }

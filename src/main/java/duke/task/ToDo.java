@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.exceptions.TaskException;
+
+import java.util.ArrayList;
+
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);
@@ -17,5 +21,9 @@ public class ToDo extends Task {
     @Override
     public String toSaveFormat() {
         return "T|" + super.toSaveFormat();
+    }
+
+    public void changeDescription(ArrayList<String> arrOfDescriptionToChange) throws TaskException {
+        super.changeDescription(arrOfDescriptionToChange);
     }
 }

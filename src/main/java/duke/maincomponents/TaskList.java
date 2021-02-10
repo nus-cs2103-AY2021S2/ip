@@ -129,4 +129,15 @@ public class TaskList {
             throw new DukeException(e.getMessage());
         }
     }
+
+    public Task getTask(int taskInt) throws DukeException {
+        if (taskInt >= 1 && taskInt <= tasks.size()) {
+            Task task = tasks.get(taskInt - 1);
+            return task;
+        } else {
+            throw new DukeException("Error! Please make sure the number given has a corresponding task!");
+        }
+
+
+    }
 }

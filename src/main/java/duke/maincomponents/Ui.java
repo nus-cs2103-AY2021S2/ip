@@ -243,4 +243,13 @@ public class Ui {
 
         return toreturn.toString() + input;
     }
+
+    public void showChangedTask(Task task) {
+        System.out.println(defaultFormatting("Alright! I've update the task as follows:\n"
+                + padSpaces(task.toString(), 7)));
+    }
+
+    public String returnChangedTask(Task task) {
+        return "Alright! I've update the task as follows:\n" + padSpaces(task.toString(), paddingGui);
+    }
 }
