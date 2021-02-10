@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Class containing the task list along with its associated functions.
@@ -74,8 +76,6 @@ class TaskList {
         output += ui.getLine();
 
         return output;
-
-
     }
 
     /**
@@ -142,6 +142,27 @@ class TaskList {
             }
             output += "\n" + ui.getLine();
         }
+        return output;
+    }
+
+    /**
+     * Sorts the task list alphabetically based on description.
+     *
+     * @return String indicating successful sorting of the list.
+     */
+    public String sortAlphabetically() {
+        Collections.sort(tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task t1, Task t2) {
+                String description1 = t1.getDescription().toLowerCase();
+                String description2 = t2.getDescription().toLowerCase();
+                System.out.println(description1);
+                System.out.println(description2);
+                return description1.compareTo(description2);
+            }
+        });
+        String output = "Your tasks have been sorted alphabetically.\n";
+        output = output + "Use the 'list' command to view them.";
         return output;
     }
 }

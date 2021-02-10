@@ -1,12 +1,4 @@
-<<<<<<< HEAD
-T | 1 | Finish project
-E | 1 | career fair | 2020-02-03
-D | 0 | presentation submission | 2021-09-09
-D | 0 | return book | 2021-03-04
-=======
-T | 1 | Finishproject
-T | 0 | readbook
-E | 1 | careerfair | 2020-02-03
-D | 0 | presentationsubmission | 2021-09-09
-D | 0 | retiurnbook | 2021-03-04
->>>>>>> master
+D | 0 |  assignment  | 2021-09-08
+E | 0 |  carrer fair  | 2020-09-09
+T | 1 |  read book
+T | 0 |  study
