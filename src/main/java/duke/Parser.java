@@ -39,101 +39,165 @@ public class Parser {
      * @return an array of processes strings
      * @throws DukeException If user input is in invalid formats
      */
-    public String[] processInput(String inputLine) throws DukeException{
+    public String[] processInput(String inputLine) throws DukeException {
 
-        String[] result = new String[5];
+        String[] results = new String[5];
 
         if (inputLine.equals("list")) {
-            result[0] = "LST";
+            results[0] = "LST";
         } else if (inputLine.equals("bye")) {
-            result[0] = "BYE";
+            results[0] = "BYE";
         } else if (inputLine.equals("done")) {
             throw new DukeException("The task number of a done cannot be empty. Please try again.");
         } else if (inputLine.startsWith("done")) {
-
-            String index = inputLine.substring(5);
-
-             if (isNumber(index)) {
-                 result[0] = "DON";
-                 assert (result[1] == null) : "Empty event";
-                 result[1] = index;
-             } else {
-                 throw new DukeException("Please enter a numerical task number.");
-             }
+            results = processDone(inputLine, results);
         } else if (inputLine.startsWith("todo")) {
-            if (inputLine.equals("todo")) {
-                throw new DukeException("Please enter a todo description.");
-            } else {
-                String todoDesc = inputLine.substring(5);
-                result[0] = "TDO";
-                assert (result[1] == null) : "Empty event";
-                result[1] = todoDesc;
-            }
+            results = processTodo(inputLine, results);
         } else if (inputLine.startsWith("deadline")) {
-            if (inputLine.equals("deadline")) {
-                throw new DukeException("Please enter a deadline description.");
-            } else {
-                String dlMsg = inputLine.substring(9);
-                String[] temp = dlMsg.split(" /by ");
-
-                if (temp.length == 1) {
-                    throw new DukeException("Please enter a deadline completion time.");
-                } else {
-                    String dlDesc = temp[0];
-                    String by = temp[1];
-
-                    result[0] = "DDL";
-                    assert (result[1] == null) : "Empty event";
-                    result[1] = dlDesc;
-                    result[2] = by;
-                }
-            }
+            results = processDl(inputLine, results);
         } else if (inputLine.startsWith("event")) {
-            if (inputLine.equals("event")) {
-                throw new DukeException("Please enter an event description.");
-            } else {
-                String dlMsg = inputLine.substring(6);
-                String[] temp = dlMsg.split(" /at ");
-
-                if (temp.length == 1) {
-                    throw new DukeException("Please enter an event time.");
-                } else {
-                    String evDesc = temp[0];
-                    String at = temp[1];
-
-                    result[0] = "ENT";
-                    assert (result[1] == null) : "Empty event";
-                    result[1] = evDesc;
-                    result[2] = at;
-                }
-            }
+            results = processEv(inputLine, results);
         } else if (inputLine.startsWith("delete")) {
-            if (inputLine.equals("delete")) {
-                throw new DukeException("Please tell me which task you'd like to delete.");
-            } else {
-                String temp = inputLine.substring(7);
-
-                if (isNumber(temp)) {
-                    result[0] = "DLT";
-                    assert (result[1] == null) : "Empty event";
-                    result[1] = temp;
-                } else {
-                    throw new DukeException("Please enter a numerical task number.");
-                }
-            }
-
+            results = processDelete(inputLine, results);
         } else if (inputLine.startsWith("find")) {
-            if (inputLine.equals("find")) {
-                throw new DukeException("Please tell me which task you'd like to find.");
-            } else {
-                String temp = inputLine.substring(5);
-                result[0] = "FND";
-                assert (result[1] == null) : "Empty event";
-                result[1] = temp;
-            }
+            results = processFind(inputLine, results);
         } else {
             throw new DukeException("I'm sorry, I don't understand what that means.");
         }
-        return result;
+        return results;
+    }
+
+    /**
+     * Returns an array of strings with processed text inputs for Done
+     * the returned array will then be passed to other functions in Duke.java for further processing
+     *
+     * @param inputLine input by user
+     * @return an array of processes strings
+     * @throws DukeException If user input is in invalid formats
+     */
+    public String[] processDone(String input, String[] results) throws DukeException {
+        String index = input.substring(5);
+        if (isNumber(index)) {
+            results[0] = "DON";
+            results[1] = index;
+        } else {
+            throw new DukeException("Please enter a numerical task number.");
+        }
+        return results;
+    }
+
+    /**
+     * Returns an array of strings with processed text inputs for Todo
+     * the returned array will then be passed to other functions in Duke.java for further processing
+     *
+     * @param inputLine input by user
+     * @return an array of processes strings
+     * @throws DukeException If user input is in invalid formats
+     */
+    public String[] processTodo(String input, String[] results) throws DukeException {
+        if (input.equals("todo")) {
+            throw new DukeException("Please enter a todo description.");
+        } else {
+            String todoDesc = input.substring(5);
+            results[0] = "TDO";
+            results[1] = todoDesc;
+        }
+        return results;
+    }
+
+    /**
+     * Returns an array of strings with processed text inputs for Deadline
+     * the returned array will then be passed to other functions in Duke.java for further processing
+     *
+     * @param inputLine input by user
+     * @return an array of processes strings
+     * @throws DukeException If user input is in invalid formats
+     */
+    public String[] processDl(String input, String[] results) throws DukeException {
+        if (input.equals("deadline")) {
+            throw new DukeException("Please enter a deadline description.");
+        } else {
+            String dlMsg = input.substring(9);
+            String[] temp = dlMsg.split(" /by ");
+            if (temp.length == 1) {
+                throw new DukeException("Please enter a deadline completion time.");
+            } else {
+                String dlDesc = temp[0];
+                String by = temp[1];
+                results[0] = "DDL";
+                results[1] = dlDesc;
+                results[2] = by;
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Returns an array of strings with processed text inputs for Event
+     * the returned array will then be passed to other functions in Duke.java for further processing
+     *
+     * @param inputLine input by user
+     * @return an array of processes strings
+     * @throws DukeException If user input is in invalid formats
+     */
+    public String[] processEv(String input, String[] results) throws DukeException {
+        if (input.equals("event")) {
+            throw new DukeException("Please enter an event description.");
+        } else {
+            String dlMsg = input.substring(6);
+            String[] temp = dlMsg.split(" /at ");
+            if (temp.length == 1) {
+                throw new DukeException("Please enter an event time.");
+            } else {
+                String evDesc = temp[0];
+                String at = temp[1];
+                results[0] = "ENT";
+                results[1] = evDesc;
+                results[2] = at;
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Returns an array of strings with processed text inputs for Delete
+     * the returned array will then be passed to other functions in Duke.java for further processing
+     *
+     * @param inputLine input by user
+     * @return an array of processes strings
+     * @throws DukeException If user input is in invalid formats
+     */
+    public String[] processDelete(String input, String[] results) throws DukeException {
+        if (input.equals("delete")) {
+            throw new DukeException("Please tell me which task you'd like to delete.");
+        } else {
+            String temp = input.substring(7);
+            if (isNumber(temp)) {
+                results[0] = "DLT";
+                results[1] = temp;
+            } else {
+                throw new DukeException("Please enter a numerical task number.");
+            }
+        }
+        return results;
+    }
+
+    /**
+     * Returns an array of strings with processed text inputs for Find
+     * the returned array will then be passed to other functions in Duke.java for further processing
+     *
+     * @param inputLine input by user
+     * @return an array of processes strings
+     * @throws DukeException If user input is in invalid formats
+     */
+    public String[] processFind(String input, String[] results) throws DukeException {
+        if (input.equals("find")) {
+            throw new DukeException("Please tell me which task you'd like to find.");
+        } else {
+            String temp = input.substring(5);
+            results[0] = "FND";
+            results[1] = temp;
+            return results;
+        }
     }
 }
