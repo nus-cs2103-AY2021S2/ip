@@ -5,7 +5,10 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" style="-fx-border-radius: 30; -fx-border-width: 2; -fx-border-color: white; -fx-background-color: darkslategray; -fx-background-radius: 30;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         style="-fx-border-radius: 30; -fx-border-width: 2; -fx-border-color: white;
+         -fx-background-color: darkslategray; -fx-background-radius: 30;" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <Text fx:id="dialog" fill="WHITE" text="Label" wrappingWidth="288.0" HBox.hgrow="NEVER" />
     <Circle fx:id="displayClip" fill="DODGERBLUE" radius="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
