@@ -1,19 +1,20 @@
 package fakebot.ui;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
+import fakebot.MainWindow;
 
 //Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
 
@@ -21,75 +22,62 @@ import javafx.scene.shape.Circle;
  * Dialog Box for respond and user input
  */
 public class DialogBox extends HBox {
-
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
     /**
      * Constructors for DialogBox specifying label and image view
      *
-     * @param l  text to be display
-     * @param iv user profile image to be display
+     * @param text  text to be display
+     * @param img user profile image to be display
      */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        Circle clip = new Circle(50, 50, 50);
-        displayPicture.setClip(clip);
-
-        this.setAlignment(Pos.CENTER_RIGHT);
-
-        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTGREEN,
-                CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(backgroundFill);
-        this.setBackground(background);
-
-        this.setPadding(new Insets(10, 10, 10, 10));
-        this.getChildren().addAll(text, displayPicture);
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.CENTER_LEFT);
-
-        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTGREY,
-                CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(backgroundFill);
-        this.setBackground(background);
-
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
     /**
      * Returns dialog box for user
      *
-     * @param l  text of user
-     * @param iv imageView of user
+     * @param text  text of user
+     * @param img image of user
      * @return Returns dialog box of the user
      */
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
 
     /**
      * Returns dialog box for fakebot
      *
-     * @param l  text of fakebot
-     * @param iv imageView of fakebot
+     * @param text  text of fakebot
+     * @param img image of fakebot
      * @return Returns dialog box of the fakebot
      */
-    public static DialogBox getFakebotDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getFakebotDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
