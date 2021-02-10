@@ -1,7 +1,7 @@
 package commands;
 
 import exceptions.SnomException;
-import storage.Storage;
+import files.Storage;
 import tasks.*;
 import ui.Snomio;
 

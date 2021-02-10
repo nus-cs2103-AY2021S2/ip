@@ -9,10 +9,12 @@ package ui; /**
  * @author: Sharptail
  */
 import exceptions.SnomException;
+import files.FileManager;
 import tasks.Task;
 import tasks.TaskList;
 
 import java.io.*;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Snomio extends PrintWriter {
@@ -22,11 +24,6 @@ public class Snomio extends PrintWriter {
     public Snomio(){
         super(new BufferedOutputStream(System.out));
         reader = new BufferedReader(new InputStreamReader(System.in));
-    }
-
-    public Snomio(InputStream is, OutputStream os){
-        super(new BufferedOutputStream(os));
-        reader = new BufferedReader(new InputStreamReader(is));
     }
 
     /**

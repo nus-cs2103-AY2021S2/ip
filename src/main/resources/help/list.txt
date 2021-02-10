@@ -1,0 +1,10 @@
+LIST Help Page
+
+Description:
+    List all the tasks added to task list
+
+Usage:
+    list
+
+Example:
+    list

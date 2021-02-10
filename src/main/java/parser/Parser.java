@@ -35,6 +35,8 @@ public class Parser {
             return new AddCommand(CommandEnum.EVENT, commandContent);
         case FIND:
             return new FindCommand(CommandEnum.FIND, commandContent);
+        case HELP:
+            return new HelpCommand(CommandEnum.HELP, commandContent);
         default:
             throw new SnomException("OOPS!!! I'm sorry, but I don't know what \'" + commandStr + "\' means :-(");
         }

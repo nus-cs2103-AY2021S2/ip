@@ -1,11 +1,7 @@
-import commands.AddCommand;
-import commands.Command;
 import commands.CommandEnum;
-import commands.ExitCommand;
 import exceptions.SnomException;
 import org.junit.jupiter.api.Test;
-import parser.Parser;
-import storage.Storage;
+import files.Storage;
 import tasks.TaskList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +19,7 @@ public class SnomTest {
     @Test
     public void storageTest() throws SnomException {
         Storage storage = new Storage("./src/main/data", "snom.txt");
-        TaskList taskList = new TaskList(storage.readFile());
+        TaskList taskList = new TaskList(storage.importTask());
 
         assertEquals(storage.readFile().size(), taskList.getSize());
     }

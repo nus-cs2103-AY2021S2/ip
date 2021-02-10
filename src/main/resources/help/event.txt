@@ -1,0 +1,11 @@
+EVENT Help Page
+
+Description:
+    Add a event task to task list
+
+Usage:
+    event [description] /at [YYYY-MM-DD HH:MM | YYYY-MM-DD]
+
+Example:
+    event party /at 2020-02-28
+    event meeting /at 2020-05-07 12:30

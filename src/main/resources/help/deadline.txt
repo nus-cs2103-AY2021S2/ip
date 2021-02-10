@@ -1,0 +1,11 @@
+DEADLINE Help Page
+
+Description:
+    Add a task with deadline to task list
+
+Usage:
+    deadline [description] /by [YYYY-MM-DD HH:MM | YYYY-MM-DD]
+
+Example:
+    deadline return book /by 2020-09-27
+    deadline assignment submission /by 2020-12-25 23:59

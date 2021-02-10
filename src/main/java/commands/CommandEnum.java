@@ -9,6 +9,7 @@ public enum CommandEnum {
     DEADLINE,
     EVENT,
     FIND,
+    HELP,
     NONE;
 
     /**
