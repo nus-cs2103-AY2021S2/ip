@@ -12,5 +12,5 @@ public abstract class Command {
      * @throws DukeWrongInputException If user input is not any of the commands available.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException, DukeIOException;
+            DukeWrongInputException, DukeIoException;
 }

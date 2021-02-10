@@ -27,7 +27,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException, DukeIOException {
+            DukeWrongInputException, DukeIoException {
         String description = "";
         String[] commandArr = command.split(" ");
         if (commandArr.length == 1) {
@@ -43,7 +43,7 @@ public class TodoCommand extends Command {
             storage.save(taskList.getTaskList());
             return ui.showTaskAdded(newTodo);
         } catch (IOException e) {
-            throw new DukeIOException("File error: Could not save.");
+            throw new DukeIoException("File error: Could not save.");
         }
     }
 }

@@ -20,7 +20,7 @@ public class Duke {
         try {
             this.storage = new Storage();
             taskList = new TaskList(storage.load());
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             ui.showLoadingError(e);
             taskList = new TaskList();
         }
@@ -37,7 +37,7 @@ public class Duke {
             return ui.showLoadingError(e);
         } catch (DukeMissingInputException e) {
             return ui.showLoadingError(e);
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             return ui.showLoadingError(e);
         }
     }

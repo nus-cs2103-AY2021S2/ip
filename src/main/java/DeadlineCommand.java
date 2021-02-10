@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException, DukeIOException {
+            DukeWrongInputException, DukeIoException {
         String[] descriptionDeadlinePair = descriptionBuilder(command);
         String description = descriptionDeadlinePair[0];
         String deadline = descriptionDeadlinePair[1];
@@ -50,7 +50,7 @@ public class DeadlineCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new DukeWrongInputException("OOPS! Please enter a valid yyyy-mm-dd.");
         } catch (IOException e) {
-            throw new DukeIOException("File error: Could not save.");
+            throw new DukeIoException("File error: Could not save.");
         }
     }
 

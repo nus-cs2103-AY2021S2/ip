@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException, DukeIOException {
+            DukeWrongInputException, DukeIoException {
 
         String[] commandArr = command.split(" ");
         if (commandArr.length == 1) {
@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
             storage.save(taskList.getTaskList());
             return output;
         } catch (IOException e) {
-            throw new DukeIOException("File error: Could not save.");
+            throw new DukeIoException("File error: Could not save.");
         }
     }
 

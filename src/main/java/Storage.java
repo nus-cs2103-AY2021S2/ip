@@ -19,7 +19,7 @@ public class Storage {
      * Constructor method for storage class.
      * @throws IOException - exception thrown when there is error in file path.
      */
-    public Storage() throws DukeIOException {
+    public Storage() throws DukeIoException {
         try {
             this.hardDrive = new File("duke.txt");
             if (hardDrive.createNewFile()) {
@@ -28,40 +28,40 @@ public class Storage {
                 System.out.println("Hard Disk loaded.");
             }
         } catch (IOException e) {
-            throw new DukeIOException("File not found.");
+            throw new DukeIoException("File not found.");
         }
     }
 
     /**
      * Loads hard drive from the file.
-     * @throws DukeIOException if file is not found at target location or data is corrupted.
+     * @throws DukeIoException if file is not found at target location or data is corrupted.
      */
-    public List<Task> load() throws DukeIOException {
+    public List<Task> load() throws DukeIoException {
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(this.hardDrive);
             while (sc.hasNextLine()) {
                 String[] entry = sc.nextLine().split(" / ");
                 switch (entry[0]) {
-                    case "T":
-                        tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
-                        break;
-                    case "E":
-                        tasks.add(new Event(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
-                        break;
-                    case "D":
-                        LocalDate deadline = LocalDate.parse(entry[3], DateTimeFormatter.ofPattern("yyyy-mm-DD"));
-                        tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
-                        break;
-                    default:
-                        throw new DukeIOException("File Error: wrong data format in hard drive.");
+                case "T":
+                    tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
+                    break;
+                case "E":
+                    tasks.add(new Event(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
+                    break;
+                case "D":
+                    LocalDate deadline = LocalDate.parse(entry[3], DateTimeFormatter.ofPattern("yyyy-mm-DD"));
+                    tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
+                    break;
+                default:
+                    throw new DukeIoException("File Error: wrong data format in hard drive.");
                 }
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            throw new DukeIOException("File error: File not found.");
-        } catch (DukeIOException e) {
-            throw new DukeIOException("File Error: data corrupted in hard drive");
+            throw new DukeIoException("File error: File not found.");
+        } catch (DukeIoException e) {
+            throw new DukeIoException("File Error: data corrupted in hard drive");
         }
         return tasks;
     }
@@ -69,7 +69,7 @@ public class Storage {
     /**
      * Saves the information from the current list of tasks to the hard drive (duke.txt)
      * @param tasks current list of tasks
-     * @throws DukeIOException if there is an error when writing to file
+     * @throws DukeIoException if there is an error when writing to file
      */
     public void save(List<Task> tasks) throws IOException {
 

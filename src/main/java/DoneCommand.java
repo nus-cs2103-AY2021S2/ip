@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException, DukeIOException {
+            DukeWrongInputException, DukeIoException {
         String[] commandArr = command.trim().split(" ");
         if (commandArr.length == 1) {
             throw new DukeMissingInputException("Oops! Missing arguments.");
@@ -40,7 +40,7 @@ public class DoneCommand extends Command {
             storage.save(taskList.getTaskList());
             return ui.showTaskDone(doneTask);
         } catch (IOException e) {
-            throw new DukeIOException("File error: Could not save.");
+            throw new DukeIoException("File error: Could not save.");
         }
     }
 
