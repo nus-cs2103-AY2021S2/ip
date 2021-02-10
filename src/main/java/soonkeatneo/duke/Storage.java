@@ -15,6 +15,7 @@ import java.util.List;
 public class Storage {
     private String filePath;
     private File dataFile;
+    private boolean isSampleDataLoaded;
 
     /**
      * Constructs the Storage object with the given file-path.
@@ -22,6 +23,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        this.isSampleDataLoaded = false;
     }
 
     /**
@@ -34,11 +36,21 @@ public class Storage {
         if (!dataFile.exists()) {
             try {
                 this.dataFile.createNewFile();
+                addSampleData();
+                this.isSampleDataLoaded = true;
             } catch (IOException e) {
                 throw new DukeException();
             }
         }
         return this;
+    }
+
+    /**
+     * Returns True if sample data was loaded, else False.
+     * @return boolean representing if sample data was loaded
+     */
+    public boolean isSampleDataLoaded() {
+        return this.isSampleDataLoaded;
     }
 
     /**
@@ -53,6 +65,17 @@ public class Storage {
             throw new DukeException();
         }
         return fileContents;
+    }
+
+    /**
+     * Adds sample data to newly created data file.
+     * @return String value indicating success
+     */
+    public String addSampleData() {
+        saveTaskToDisk("T | 0 | Sample ToDo");
+        saveTaskToDisk("E | 1 | Sample Christmas Event | 2021-12-25");
+        saveTaskToDisk("D | 0 | Sample Deadline | 2021-01-15");
+        return "Success";
     }
 
     /**
@@ -72,7 +95,7 @@ public class Storage {
             }
             Files.write(this.dataFile.toPath(), fileContents);
         } catch (IOException e) {
-            Ui.printMessage(e.getMessage());
+            throw new DukeException();
         }
     }
 
@@ -87,7 +110,7 @@ public class Storage {
             writer.write(newString + System.lineSeparator());
             writer.close();
         } catch (IOException e) {
-            Ui.printMessage(e.getMessage());
+            throw new DukeException();
         }
     }
 }

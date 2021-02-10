@@ -22,6 +22,8 @@ public class Parser {
         assert storage != null;
         if (inputString.equals("list")) {
             return tasks.print();
+        } else if (inputString.startsWith("help")) {
+            return Help.print();
         } else if (inputString.equals("bye")) {
             System.exit(0);
         } else if (inputString.startsWith("done")) {
