@@ -40,6 +40,7 @@ public class DukeStorage {
         if (!file.getParentFile().exists()) {
             System.out.println("Task list not found, creating one now...");
             if (file.getParentFile().mkdirs()) {
+                assert file.exists() : "Something is wrong! Unable file not found after creation.";
                 System.out.println("New task list created!");
             } else {
                 System.out.println("Task list creation failed!");
