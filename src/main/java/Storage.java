@@ -130,6 +130,7 @@ public class Storage {
 
 
     // setup at default location
+    // how to recover from the IOException
     public static TaskList setupTaskList() throws IOException {
         if (Storage.doesTaskFileExist()) {
             TaskList t = new TaskList();

@@ -15,12 +15,11 @@ public class EventCommand extends AddTaskWithTimeCommand {
 
     @Override
     public void run(TaskList taskList) {
-        // w5 fix indenting + what to do with thirdArg
+        // w6 fix indenting + what to do with thirdArg
         try {
             this.parseCommandBody();
-            this.commandOutputMsg =
-                    taskList.addTask(new Event(
-                            secondArg, parseArgToDateTime(thirdArg)));
+            this.commandOutputMsg = taskList.addTask(
+                    new Event(secondArg, parseArgToDateTime(thirdArg)));
         } catch (Exception e) {
             handleException(e);
         }

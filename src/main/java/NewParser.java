@@ -60,6 +60,8 @@ public class NewParser {
             return new DoneCommand(commandBody);
         case "delete":
             return new DeleteCommand(commandBody);
+        case "find":
+            return new FindCommand(commandBody);
         default:
             throw new UnsupportedCommandException();
         }
