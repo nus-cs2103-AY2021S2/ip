@@ -194,112 +194,15 @@ public class Parser {
         } else {
             ArrayList<String> descriptionArr = new ArrayList<>();
             if (userInput.contains("/de") && userInput.contains("/by")) {
-                int deFrom = userInput.indexOf("/de");
-                int byFrom = userInput.indexOf("/by");
-
-                if (deFrom > byFrom) {
-                    int deStart = deFrom + 3;
-                    int deEnd = userInput.length();
-                    int byStart = byFrom + 3;
-                    int byEnd = deFrom - 1;
-                    if (deStart == deEnd) {
-                        throw new DukeException("/de cannot be empty!");
-                    }
-                    if (byStart == byEnd) {
-                        throw new DukeException("/by cannot be empty!");
-                    }
-
-                    descriptionArr.add("/de");
-                    descriptionArr.add(userInput.substring(deStart, deEnd).trim());
-                    descriptionArr.add("/by");
-                    descriptionArr.add(userInput.substring(byStart, byEnd).trim());
-                } else {
-                    int deStart = deFrom + 3;
-                    int deEnd = byFrom - 1;
-                    int byStart = byFrom + 3;
-                    int byEnd = userInput.length();
-
-                    if (deStart == deEnd) {
-                        throw new DukeException("/de cannot be empty!");
-                    }
-                    if (byStart == byEnd) {
-                        throw new DukeException("/by cannot be empty!");
-                    }
-
-                    descriptionArr.add("/de");
-                    descriptionArr.add(userInput.substring(deStart, deEnd).trim());
-                    descriptionArr.add("/by");
-                    descriptionArr.add(userInput.substring(byStart, byEnd).trim());
-                }
+                parseDeAndBy(descriptionArr, userInput);
             } else if (userInput.contains("/de") && userInput.contains("/at")) {
-                int deFrom = userInput.indexOf("/de");
-                int atFrom = userInput.indexOf("/at");
-
-                if (deFrom > atFrom) {
-                    int deStart = deFrom + 3;
-                    int deEnd = userInput.length();
-                    int atStart = atFrom + 3;
-                    int atEnd = deFrom - 1;
-
-                    if (deStart == deEnd) {
-                        throw new DukeException("/de cannot be empty!");
-                    }
-                    if (atStart == atEnd) {
-                        throw new DukeException("/at cannot be empty!");
-                    }
-
-                    descriptionArr.add("/de");
-                    descriptionArr.add(userInput.substring(deStart, deEnd).trim());
-                    descriptionArr.add("/at");
-                    descriptionArr.add(userInput.substring(atStart, atEnd).trim());
-                } else {
-                    int deStart = deFrom + 3;
-                    int deEnd = atFrom - 1;
-                    int atStart = atFrom + 3;
-                    int atEnd = userInput.length();
-
-                    if (deStart == deEnd) {
-                        throw new DukeException("/de cannot be empty!");
-                    }
-                    if (atStart == atEnd) {
-                        throw new DukeException("/at cannot be empty!");
-                    }
-
-                    descriptionArr.add("/de");
-                    descriptionArr.add(userInput.substring(deStart, deEnd).trim());
-                    descriptionArr.add("/at");
-                    descriptionArr.add(userInput.substring(atStart, atEnd).trim());
-                }
+                parseDeAndAt(descriptionArr, userInput);
             } else if (userInput.contains("/de")) {
-                int deFrom = userInput.indexOf("/de");
-                int deStart = deFrom + 3;
-                int deEnd = userInput.length();
-
-                if (deStart == deEnd) {
-                    throw new DukeException("/de cannot be empty!");
-                }
-                descriptionArr.add("/de");
-                descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+                parseOnlyDe(descriptionArr, userInput);
             } else if (userInput.contains("/at")) {
-                int atFrom = userInput.indexOf("/at");
-                int atStart = atFrom + 3;
-                int atEnd = userInput.length();
-
-                if (atStart == atEnd) {
-                    throw new DukeException("/at cannot be empty!");
-                }
-                descriptionArr.add("/at");
-                descriptionArr.add(userInput.substring(atStart, atEnd).trim());
+                parseOnlyAt(descriptionArr, userInput);
             } else if (userInput.contains("/by")) {
-                int byFrom = userInput.indexOf("/by");
-                int byStart = byFrom + 3;
-                int byEnd = userInput.length();
-
-                if (byStart == byEnd) {
-                    throw new DukeException("/by cannot be empty!");
-                }
-                descriptionArr.add("/by");
-                descriptionArr.add(userInput.substring(byStart, byEnd).trim());
+                parseOnlyBy(descriptionArr, userInput);
             } else {
                 throw new DukeException("Error! Please use the correct tags!\n"
                     + "/de for the general description of all tasks\n"
@@ -309,6 +212,123 @@ public class Parser {
             return descriptionArr;
         }
     }
+    private void parseDeAndBy(ArrayList<String> descriptionArr, String userInput) throws DukeException {
+        int deFrom = userInput.indexOf("/de");
+        int byFrom = userInput.indexOf("/by");
+
+        if (deFrom > byFrom) {
+            int deStart = deFrom + 3;
+            int deEnd = userInput.length();
+            int byStart = byFrom + 3;
+            int byEnd = deFrom - 1;
+            if (deStart == deEnd) {
+                throw new DukeException("/de cannot be empty!");
+            }
+            if (byStart == byEnd) {
+                throw new DukeException("/by cannot be empty!");
+            }
+
+            descriptionArr.add("/de");
+            descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+            descriptionArr.add("/by");
+            descriptionArr.add(userInput.substring(byStart, byEnd).trim());
+        } else {
+            int deStart = deFrom + 3;
+            int deEnd = byFrom - 1;
+            int byStart = byFrom + 3;
+            int byEnd = userInput.length();
+
+            if (deStart == deEnd) {
+                throw new DukeException("/de cannot be empty!");
+            }
+            if (byStart == byEnd) {
+                throw new DukeException("/by cannot be empty!");
+            }
+
+            descriptionArr.add("/de");
+            descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+            descriptionArr.add("/by");
+            descriptionArr.add(userInput.substring(byStart, byEnd).trim());
+        }
+    }
+
+    private void parseDeAndAt(ArrayList<String> descriptionArr, String userInput) throws DukeException {
+        int deFrom = userInput.indexOf("/de");
+        int atFrom = userInput.indexOf("/at");
+
+        if (deFrom > atFrom) {
+            int deStart = deFrom + 3;
+            int deEnd = userInput.length();
+            int atStart = atFrom + 3;
+            int atEnd = deFrom - 1;
+
+            if (deStart == deEnd) {
+                throw new DukeException("/de cannot be empty!");
+            }
+            if (atStart == atEnd) {
+                throw new DukeException("/at cannot be empty!");
+            }
+
+            descriptionArr.add("/de");
+            descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+            descriptionArr.add("/at");
+            descriptionArr.add(userInput.substring(atStart, atEnd).trim());
+        } else {
+            int deStart = deFrom + 3;
+            int deEnd = atFrom - 1;
+            int atStart = atFrom + 3;
+            int atEnd = userInput.length();
+
+            if (deStart == deEnd) {
+                throw new DukeException("/de cannot be empty!");
+            }
+            if (atStart == atEnd) {
+                throw new DukeException("/at cannot be empty!");
+            }
+
+            descriptionArr.add("/de");
+            descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+            descriptionArr.add("/at");
+            descriptionArr.add(userInput.substring(atStart, atEnd).trim());
+        }
+    }
+
+    private void parseOnlyDe(ArrayList<String> descriptionArr, String userInput) throws DukeException {
+        int deFrom = userInput.indexOf("/de");
+        int deStart = deFrom + 3;
+        int deEnd = userInput.length();
+
+        if (deStart == deEnd) {
+            throw new DukeException("/de cannot be empty!");
+        }
+        descriptionArr.add("/de");
+        descriptionArr.add(userInput.substring(deStart, deEnd).trim());
+    }
+
+    private void parseOnlyAt(ArrayList<String> descriptionArr, String userInput) throws DukeException {
+        int atFrom = userInput.indexOf("/at");
+        int atStart = atFrom + 3;
+        int atEnd = userInput.length();
+
+        if (atStart == atEnd) {
+            throw new DukeException("/at cannot be empty!");
+        }
+        descriptionArr.add("/at");
+        descriptionArr.add(userInput.substring(atStart, atEnd).trim());
+    }
+
+    private void parseOnlyBy(ArrayList<String> descriptionArr, String userInput) throws DukeException {
+        int byFrom = userInput.indexOf("/by");
+        int byStart = byFrom + 3;
+        int byEnd = userInput.length();
+
+        if (byStart == byEnd) {
+            throw new DukeException("/by cannot be empty!");
+        }
+        descriptionArr.add("/by");
+        descriptionArr.add(userInput.substring(byStart, byEnd).trim());
+    }
+
     private int getUpdateTaskIndex(String userInput) throws DukeException {
         int length = "update".length();
         if (checkStringEquals(userInput, "update")) {

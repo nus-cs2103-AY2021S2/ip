@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exceptions.TaskException;
-
 import java.util.ArrayList;
+
+import duke.exceptions.TaskException;
 
 public class Event extends Task {
     private String eventAt;
@@ -46,8 +46,8 @@ public class Event extends Task {
             } else if (arrOfDescriptionToChange.get(i).equals("/at")) {
                 this.eventAt = arrOfDescriptionToChange.get(i + 1);
             } else {
-                throw new TaskException("Illegal tag detected! \nPlease tag the part of the task you wish to change using"
-                        + "/de for general description, /by for deadline by and /at for event at.");
+                throw new TaskException("Illegal tag detected! \nPlease tag the part of the task you wish to change "
+                        + "using /de for general description, /by for deadline by and /at for event at.");
             }
         }
     }
