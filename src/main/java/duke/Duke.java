@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 import duke.history.RedoHistory;
 import duke.history.UndoHistory;
-import duke.task.Task;
 import duke.task.CommandManager;
+import duke.task.Task;
 
 /**
  * Duke manages command line inputs.
@@ -42,7 +42,6 @@ public class Duke {
 
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
-//            CommandManager taskManager = new CommandManager(tasks, undoHistory, redoHistory);
 
             if (input.equals("bye")) {
                 System.out.println(LINE + "\n" + (char) 9 + (char) 9 + "Bye! See you soon :)\n" + LINE);

@@ -1,35 +1,21 @@
 package duke.history;
 
+/**
+ * Undo history stores user inputted commands that can be undone in the form of Strings.
+ *
+ * @author  Nicole Ang
+ */
 public class UndoHistory extends History {
     public UndoHistory() {
         super();
     }
 
+    /**
+     * Returns latest undoable command.
+     *
+     * @return Latest undoable command.
+     */
     public String undo() {
         return pop();
     }
-
-//    public void push(String input, TaskManager.CommandType type) {
-////        BYE, HELP, LIST, DONE, UNDONE, DELETE, RESTORE, FIND, UNDO,
-////                REDO, TODO, DEADLINE, EVENT, INVALID };
-//        HistoryBlock newBlock;
-//
-//        switch (type) {
-//            case DONE:
-//                newBlock = new HistoryBlock(input, TaskManager.CommandType.UNDONE);
-//            case TODO:
-//                newBlock = new HistoryBlock()
-//        }
-//    }
-//
-//    public void push(Task task, TaskManager.CommandType type) {
-////        BYE, HELP, LIST, DONE, UNDONE, DELETE, RESTORE, FIND, UNDO,
-////                REDO, TODO, DEADLINE, EVENT, INVALID };
-//        HistoryBlock newBlock;
-//
-//        switch (type) {
-//            case DELETE:
-//                newBlock = new HistoryBlock(task, type);
-//        }
-//    }
 }

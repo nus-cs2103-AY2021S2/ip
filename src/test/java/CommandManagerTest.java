@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-import duke.task.Task;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import duke.task.CommandManager;
+import duke.task.Task;
 
 public class CommandManagerTest {
     @Test

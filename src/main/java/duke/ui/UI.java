@@ -1,10 +1,9 @@
 package duke.ui;
 
 import java.util.ArrayList;
-//import java.util.Scanner;
 
-import duke.task.Task;
 import duke.task.CommandManager;
+import duke.task.Task;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

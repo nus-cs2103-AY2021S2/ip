@@ -16,7 +16,7 @@ import duke.history.TaskArchive;
 import duke.history.UndoHistory;
 
 /**
- * Task manager decides what type of action to take based on the user input.
+ * Command manager decides what type of action to take based on the user input.
  *
  * @author  Nicole Ang
  */
