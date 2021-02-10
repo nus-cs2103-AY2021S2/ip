@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import duke.exceptions.TaskException;
-// import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    private final DateTimeFormatter formatOne = DateTimeFormatter.ofPattern("d-M-uuuu");
-    private final DateTimeFormatter formatTwo = DateTimeFormatter.ofPattern("uuuu-M-d");
+    private final DateTimeFormatter FORMAT_ONE = DateTimeFormatter.ofPattern("d-M-uuuu");
+    private final DateTimeFormatter FORMAT_TWO = DateTimeFormatter.ofPattern("uuuu-M-d");
     private String deadlineBy;
     private LocalDate dateBy;
 
@@ -25,9 +24,9 @@ public class Deadline extends Task {
         try {
             String trimmed = deadlineBy.trim();
             if (trimmed.substring(0, 4).contains("-")) {
-                dateBy = LocalDate.parse(deadlineBy.trim(), formatOne);
+                dateBy = LocalDate.parse(deadlineBy.trim(), FORMAT_ONE);
             } else {
-                dateBy = LocalDate.parse(deadlineBy.trim(), formatTwo);
+                dateBy = LocalDate.parse(deadlineBy.trim(), FORMAT_TWO);
             }
         } catch (Exception e) {
             throw new TaskException("deadline must be of the format date-month-year, in numbers.");
@@ -53,9 +52,9 @@ public class Deadline extends Task {
         try {
             String trimmed = deadlineBy.trim();
             if (trimmed.substring(0, 4).contains("-")) {
-                dateBy = LocalDate.parse(deadlineBy.trim(), formatOne);
+                dateBy = LocalDate.parse(deadlineBy.trim(), FORMAT_ONE);
             } else {
-                dateBy = LocalDate.parse(deadlineBy.trim(), formatTwo);
+                dateBy = LocalDate.parse(deadlineBy.trim(), FORMAT_TWO);
             }
         } catch (Exception e) {
             throw new TaskException("deadline must be of the format date-month-year, in numbers.");

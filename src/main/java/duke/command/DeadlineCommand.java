@@ -15,7 +15,7 @@ public class DeadlineCommand implements Command {
     private final ArrayList<String> eventDescription;
 
     /**
-     * Constuct a DeadlineCommand object
+     * Constucts a DeadlineCommand object
      * @param a Arraylist where index 0 contains the description of the deadline and index 1
      *          is the by date of the deadline
      */
