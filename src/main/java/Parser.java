@@ -84,7 +84,9 @@ public class Parser {
                     throw new DukeException("Please enter a keyword to search for");
                 }
                 output = tasks.findTask(input.split(" ")[1]);
-
+            } else if (input.equals("sort")) {
+                output = tasks.sortAlphabetically();
+                storage.writeTasksToFile(tasks.getTaskList());
             } else if (input.startsWith("bye")) {
                 output = "Goodbye and see you soon!";
             } else {
