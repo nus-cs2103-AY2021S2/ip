@@ -26,12 +26,6 @@ public class TaskList {
         this.taskList = new ArrayList<>();
 
         for (String task: contents) {
-
-            // End when there is no task to work with
-            if (task.isEmpty()) {
-                break;
-            }
-
             char taskType = task.charAt(1);
             char isDone = task.charAt(4);
             String description;
