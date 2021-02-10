@@ -1,11 +1,15 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.tag.Tag;
 import duke.task.Deadline;
 import duke.task.Task;
+import duke.util.Tuple;
 
 /**
  * Represents a 'deadline' command.
@@ -21,11 +25,13 @@ public class DeadlineCommand extends Command {
         if (getArguments().isBlank()) {
             throw new DukeException("I apologize, please input description and time for 'deadline'.");
         } else {
-            String[] split = getArguments().split("/by");
-            if (getArguments().equals(split[0])) {
-                throw new DukeException("I apologize, please use '/by' argument to specify time for 'deadline'.");
+            Tuple<String, ArrayList<Tag>> argsAndTags = Tag.retrieveTags(getArguments());
+            String[] splitByDate = argsAndTags.getFirst().split("/by");
+            if (getArguments().equals(splitByDate[0])) {
+                throw new DukeException("I apologize, please use '/by' argument "
+                        + "to specify date (format: yyyy-MM-dd) and optionally time for 'deadline'.");
             } else {
-                Task newTask = new Deadline(split[0].strip(), split[1].strip());
+                Task newTask = new Deadline(splitByDate[0].strip(), splitByDate[1].strip(), argsAndTags.getSecond());
                 taskList.add(newTask);
                 storage.addToFile(newTask);
                 return "Added to to-do list: \n" + newTask;
