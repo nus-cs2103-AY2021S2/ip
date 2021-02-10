@@ -66,18 +66,17 @@ public class Parser {
                 throw new DukeException("Sorry description of a deadline cannot be empty");
             }
             String deadline = arr[1];
-            reply = taskList.addTask(new Deadline(getMsg(deadline, " /by "), getDateTime(deadline, " /by ")));
+            reply = taskList.addTask(new Deadline(getMessage(deadline, " /by "), getDateTime(deadline, " /by ")));
             break;
         case "event":
             if (arr.length == 1) {
                 throw new DukeException("Sorry description of an event cannot be empty");
             }
             String event = arr[1];
-            reply = taskList.addTask(new Event(getMsg(event, " /at "), getDateTime(event, " /at ")));
+            reply = taskList.addTask(new Event(getMessage(event, " /at "), getDateTime(event, " /at ")));
             break;
         default:
             taskList.complain();
-
         }
         return reply;
     }
@@ -92,7 +91,7 @@ public class Parser {
         return text.substring(index + 5);
     }
 
-    public String getMsg(String text, String search) throws DukeException {
+    public String getMessage(String text, String search) throws DukeException {
         //TODO handle case when text does not contain "/at" or "/by"
         int index = text.indexOf(search);
         if (index == -1) {

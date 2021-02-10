@@ -3,16 +3,16 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    public ArrayList<Task> list;
+    public ArrayList<Task> listOfTasks;
     public boolean isAlive;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.listOfTasks = new ArrayList<>();
         this.isAlive = true;
     }
 
     public TaskList(ArrayList<Task> taskArr) {
-        this.list = taskArr;
+        this.listOfTasks = taskArr;
         this.isAlive = true;
     }
 
@@ -25,7 +25,7 @@ public class TaskList {
 
     public String addTask(Task task) {
         String addStatus;
-        this.list.add(task);
+        this.listOfTasks.add(task);
         addStatus = "Okay I have added this task: \n" + task + "\n" + echoNoOfTask();
         return addStatus;
     }
@@ -35,19 +35,19 @@ public class TaskList {
         if (index < 1 || index > getNoOfTasks()) {
             throw new DukeException("There is no such task number!");
         }
-        Task task = list.get(index - 1);
-        this.list.remove(index - 1);
+        Task task = this.listOfTasks.get(index - 1);
+        this.listOfTasks.remove(index - 1);
         deleteStatus = "Okay, I've I have removed this task: \n" + task + "\n" + echoNoOfTask();
         return deleteStatus;
     }
 
     public int getNoOfTasks() {
-        return list.size();
+        return this.listOfTasks.size();
     }
 
     public String findTasks(String toFind) {
         ArrayList<Task> newList = new ArrayList<>();
-        for (Task t : this.list) {
+        for (Task t : this.listOfTasks) {
             if (t.taskDescription.contains(toFind)) {
                 newList.add(t);
             }
@@ -68,14 +68,14 @@ public class TaskList {
 
     public String displayTasks() {
         String text = "";
-        if (list.size() == 0) {
+        if (this.listOfTasks.size() == 0) {
             text = "There are no tasks";
         } else {
             text += "Here are the tasks in your list:\n";
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < this.listOfTasks.size(); i++) {
                 text += (i+1) +
                         ". " +
-                        list.get(i) +
+                        this.listOfTasks.get(i) +
                         "\n";
             }
         }
@@ -95,8 +95,8 @@ public class TaskList {
             markStatus = "There are no tasks in the list to be marked as done!";
         } else {
             try {
-                list.get(num - 1).markAsDone();
-                markStatus = "Okay! I've marked this task as done:\n" + list.get(num - 1);
+                this.listOfTasks.get(num - 1).markAsDone();
+                markStatus = "Okay! I've marked this task as done:\n" + this.listOfTasks.get(num - 1);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\t\tOnly Enter natural numbers (i.e. 1,2,3..) not more than " + getNoOfTasks());
             }
