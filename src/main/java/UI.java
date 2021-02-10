@@ -19,6 +19,11 @@ import javafx.scene.image.ImageView;
  * application using a GUI.
  */
 public class UI extends Application {
+    private static final String FILE_PATH = "data/duke.txt";
+    private static final String SEND_BUTTON_DISPLAY_TEXT = "Send";
+    private static final String GREETING_MESSAGE = "\t Hello! I'm Duke\n\t What can I do for you\n";
+    private static final String GOODBYE_MESSAGE = "\t Bye. Hope to see you again soon!";
+    private static final String COMMAND_BYE = "bye";
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
@@ -36,7 +41,7 @@ public class UI extends Application {
      */
     public UI() {
         parser = new Parser();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage(FILE_PATH);
         taskList = storage.readDataFromFile();
         isLastCommand = false;
     }
@@ -48,7 +53,7 @@ public class UI extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton = new Button(SEND_BUTTON_DISPLAY_TEXT);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -96,8 +101,7 @@ public class UI extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        String greetingMessage = "\t Hello! I'm Duke\n\t What can I do for you\n";
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(greetingMessage), new ImageView(duke)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(GREETING_MESSAGE), new ImageView(duke)));
     }
 
     /**
@@ -126,9 +130,9 @@ public class UI extends Application {
      * @return the output string based on the given input.
      */
     private String getResponse(String input) {
-        if (input.equals("bye")) {
+        if (input.equals(COMMAND_BYE)) {
             isLastCommand = true;
-            return "\t Bye. Hope to see you again soon!";
+            return GOODBYE_MESSAGE;
         } else {
             return parser.executeCommand(taskList, input);
         }
