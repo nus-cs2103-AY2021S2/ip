@@ -122,6 +122,4 @@ public class Parser {
         String keyWord = command.substring(5);
         return new FindCommand(keyWord);
     }
-
-
 }

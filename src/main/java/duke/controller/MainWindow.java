@@ -31,13 +31,13 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() throws UnknownCommandException, WrongFormatException, EmptyDescriptionException, IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Ui().showWelcome(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Welcome", DUKE_IMAGE));
     }
 
     public void setDuke(Duke d) {
@@ -53,8 +53,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         userInput.clear();
     }
