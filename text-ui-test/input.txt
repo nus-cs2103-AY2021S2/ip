@@ -1,0 +1,31 @@
+hi
+list
+done
+done 1
+delete
+todo hustle
+todo
+event grinding
+event grinding /at
+event
+event grinding /at all day err day
+deadline profit
+deadline profit /by 2022
+deadline profit again /by 2023-01-28 1800
+deadline
+deadline profit /by
+list
+done 2
+done 3
+done 4
+find
+find profit
+list
+done 1
+done ah
+delete
+delete ah
+delete 2
+list
+can i yolo
+bye
