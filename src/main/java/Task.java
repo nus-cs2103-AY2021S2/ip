@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Task {
     private final String task;
-    private boolean done = false;
+    private boolean isDone = false;
     private final int type;
     private final LocalDate date;
     private final LocalTime time;
@@ -45,7 +45,7 @@ public class Task {
      * When called on a task, marks the task as done.
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -53,7 +53,7 @@ public class Task {
      * @return "[ ]" for not done, "[X]" for done.
      */
     public String checkDone() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X]";
         } else {
             return "[ ]";
@@ -95,9 +95,18 @@ public class Task {
      * @return A simplified string representation of the task.
      */
     public String export() {
-        String done = this.done ? " 1" : " 0";
-        String deadline = this.type == 0 ? "" : this.type == 1 ? "/by " + this.date : "/at "
-                + this.time;
+        String done = this.isDone ? " 1" : " 0";
+        String deadline = "";
+        switch (this.type) {
+            case 0:
+                break;
+            case 1:
+                deadline += "/by " + this.date;
+                break;
+            case 2:
+                deadline += "/at " + this.time;
+                break;
+        }
         return this.type + done + this.task + deadline;
     }
 }
