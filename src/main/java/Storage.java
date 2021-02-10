@@ -1,7 +1,5 @@
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -21,7 +19,7 @@ public class Storage {
      * Constructor method for storage class.
      * @throws IOException - exception thrown when there is error in file path.
      */
-    public Storage() throws DukeWrongInputException {
+    public Storage() throws DukeIOException {
         try {
             this.hardDrive = new File("duke.txt");
             if (hardDrive.createNewFile()) {
@@ -30,38 +28,40 @@ public class Storage {
                 System.out.println("Hard Disk loaded.");
             }
         } catch (IOException e) {
-            throw new DukeWrongInputException("File not found.");
+            throw new DukeIOException("File not found.");
         }
     }
 
     /**
-     * Loads hard drive from the file
-     * @throws FileNotFoundException if file is not found at target location.
+     * Loads hard drive from the file.
+     * @throws DukeIOException if file is not found at target location or data is corrupted.
      */
-    public List<Task> load() throws DukeWrongInputException {
+    public List<Task> load() throws DukeIOException {
         List<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(this.hardDrive);
             while (sc.hasNextLine()) {
                 String[] entry = sc.nextLine().split(" / ");
                 switch (entry[0]) {
-                case "T":
-                    tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
-                    break;
-                case "E":
-                    tasks.add(new Event(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
-                    break;
-                case "D":
-                    LocalDate deadline = LocalDate.parse(entry[3], DateTimeFormatter.ofPattern("yyyy-mm-DD"));
-                    tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
-                    break;
-                default:
-                    throw new IOException("File Error: wrong data format in hard drive.");
+                    case "T":
+                        tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
+                        break;
+                    case "E":
+                        tasks.add(new Event(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
+                        break;
+                    case "D":
+                        LocalDate deadline = LocalDate.parse(entry[3], DateTimeFormatter.ofPattern("yyyy-mm-DD"));
+                        tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
+                        break;
+                    default:
+                        throw new DukeIOException("File Error: wrong data format in hard drive.");
                 }
             }
             sc.close();
-        } catch (IOException e) {
-            throw new DukeWrongInputException("File Error: wrong data format in hard drive.");
+        } catch (FileNotFoundException e) {
+            throw new DukeIOException("File error: File not found.");
+        } catch (DukeIOException e) {
+            throw new DukeIOException("File Error: data corrupted in hard drive");
         }
         return tasks;
     }
@@ -69,25 +69,22 @@ public class Storage {
     /**
      * Saves the information from the current list of tasks to the hard drive (duke.txt)
      * @param tasks current list of tasks
-     * @throws IOException if there is an error with the file.
+     * @throws DukeIOException if there is an error when writing to file
      */
-    public void save(List<Task> tasks) throws DukeWrongInputException {
-        try {
-            FileWriter fw = new FileWriter(this.hardDrive);
-            for (Task t : tasks) {
-                if (t instanceof Todo) {
-                    fw.write(String.format("T / %s / %s%n", t.getIsDone(), t.getDescription()));
-                } else if (t instanceof Event) {
-                    fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(), (
-                            (Event) t).getEventTime()));
-                } else if (t instanceof Deadline) {
-                    fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(), (
-                            (Deadline) t).getDeadline().toString()));
-                }
+    public void save(List<Task> tasks) throws IOException {
+
+        FileWriter fw = new FileWriter(this.hardDrive);
+        for (Task t : tasks) {
+            if (t instanceof Todo) {
+                fw.write(String.format("T / %s / %s%n", t.getIsDone(), t.getDescription()));
+            } else if (t instanceof Event) {
+                fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(), (
+                        (Event) t).getEventTime()));
+            } else if (t instanceof Deadline) {
+                fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(), (
+                        (Deadline) t).getDeadline().toString()));
             }
-            fw.close();
-        } catch (IOException e) {
-            throw new DukeWrongInputException("File Error: wrong data format in hard drive.");
         }
+        fw.close();
     }
 }

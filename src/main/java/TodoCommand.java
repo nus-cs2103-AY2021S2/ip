@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * To do command that creates a to do task.
  */
@@ -15,7 +17,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Execute method for To do command.
+     * Executes the Todo command by creating a new Todo task.
      *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
@@ -25,21 +27,23 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException {
+            DukeWrongInputException, DukeIOException {
         String description = "";
         String[] commandArr = command.split(" ");
-        if (command.equals("todo")) {
+        if (commandArr.length == 1) {
             throw new DukeMissingInputException("OOPS! The description of a todo cannot be empty.");
-        } else {
-            for (int i = 1; i < commandArr.length; i++) {
-                description += (commandArr[i] + " ");
-            }
         }
-        description = description.trim();
-        Todo newTodo = new Todo(description);
-        taskList.add(newTodo);
-        storage.save(taskList.getTaskList());
-        return ui.showTaskAdded(newTodo);
+        for (int i = 1; i < commandArr.length; i++) {
+            description += (commandArr[i] + " ");
+        }
+        try {
+            description = description.trim();
+            Todo newTodo = new Todo(description);
+            taskList.add(newTodo);
+            storage.save(taskList.getTaskList());
+            return ui.showTaskAdded(newTodo);
+        } catch (IOException e) {
+            throw new DukeIOException("File error: Could not save.");
+        }
     }
 }
-

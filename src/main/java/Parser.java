@@ -21,7 +21,7 @@ public class Parser {
     }
 
     /**
-     * Parse method takes in command in the form of a string and returns a class.
+     * Takes in command in the form of a string and returns a class.
      *
      * @param command user command input
      * @return respective command object based on user input
@@ -31,25 +31,26 @@ public class Parser {
         // User input
         String[] commandArr = command.trim().toLowerCase().split(" ");
         command = command.trim();
-        switch(commandArr[0]) {
-        case "list":
-            return new ListCommand(command);
-        case "done":
-            return new DoneCommand(command);
-        case "todo":
-            return new TodoCommand(command);
-        case "event":
-            return new EventCommand(command);
-        case "deadline":
-            return new DeadlineCommand(command);
-        case "delete":
-            return new DeleteCommand(command);
-        case "find":
-            return new FindCommand(command);
-        case "bye":
-            return new ExitCommand(command);
-        default:
-            throw new DukeWrongInputException("OOPS! I'm sorry, I don't understand.");
+        assert !commandArr[0].contains(" ");
+        switch (commandArr[0]) {
+            case "list":
+                return new ListCommand(command);
+            case "done":
+                return new DoneCommand(command);
+            case "todo":
+                return new TodoCommand(command);
+            case "event":
+                return new EventCommand(command);
+            case "deadline":
+                return new DeadlineCommand(command);
+            case "delete":
+                return new DeleteCommand(command);
+            case "find":
+                return new FindCommand(command);
+            case "bye":
+                return new ExitCommand(command);
+            default:
+                throw new DukeWrongInputException("OOPS! I'm sorry, I don't understand.");
         }
     }
 }

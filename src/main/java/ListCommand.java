@@ -14,7 +14,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Execute method for list command.
+     * Executes the list command to show the full list of tasks.
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
@@ -23,7 +23,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
-            DukeWrongInputException {
+            DukeWrongInputException, DukeIOException {
         return ui.showListItems(taskList) + "\n" + ui.showNumberOfItems(taskList.getTaskListLength());
     }
 }

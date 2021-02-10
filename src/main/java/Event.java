@@ -3,31 +3,35 @@
  */
 public class Event extends Task {
 
-    private String timeslot;
+    private String timeSlot;
 
     /**
-     * Constructs an event.
+     * Overloaded Constructor method
      * @param description task description
      * @param timeslot task timeslot
      */
     public Event(String description, String timeslot) {
         super(description);
-        this.timeslot = timeslot;
+        this.timeSlot = timeslot;
     }
 
     /**
-     * Constructs an event.
+     * Overloaded constructor method
      * @param description task description
      * @param timeslot task timeslot
      * @param isDone task status
      */
     public Event(String description, String timeslot, boolean isDone) {
         super(description, isDone);
-        this.timeslot = timeslot;
+        this.timeSlot = timeslot;
     }
 
+    /**
+     * Gets the Event time.
+     * @return timeslot
+     */
     public String getEventTime() {
-        return this.timeslot;
+        return this.timeSlot;
     }
 
     /**
@@ -36,8 +40,8 @@ public class Event extends Task {
      * @return new timeslot
      */
     public String setEventTime(String timeslot) {
-        this.timeslot = timeslot;
-        return this.timeslot;
+        this.timeSlot = timeslot;
+        return this.timeSlot;
     }
 
     /**
@@ -46,6 +50,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + timeslot + ")";
+        return "[E]" + super.toString() + "(at: " + timeSlot + ")";
     }
 }
