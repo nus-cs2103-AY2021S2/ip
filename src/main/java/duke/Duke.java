@@ -5,6 +5,8 @@ import java.time.format.DateTimeParseException;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.ui.DialogBox;
+import duke.ui.Ui;
 import duke.task.TaskList;
 
 /**
@@ -55,13 +57,29 @@ public class Duke {
     }
 
 
+    public String getResponse(String input) {
+        //boolean isExit = false;
+        //while (!isExit) {
+            try {
+                Command c = Parser.parse(input);
+                return c.execute(tasks, ui, storage);
+                //isExit = c.isExit();
+            } catch (DukeException | IOException | DateTimeParseException e) {
+                return e.getMessage();
+            }
+        //}
+        //return "Duke heard: " + input;
+    }
+
     /**
      * Runs Duke for the given file path
      *
      * @param args
      */
+    /*
     public static void main(String[] args) {
         String filePath = "data/duke.txt";
         new Duke(filePath).run();
     }
+     */
 }

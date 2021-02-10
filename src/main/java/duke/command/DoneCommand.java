@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -30,12 +30,12 @@ public class DoneCommand extends Command {
      * @throws DukeException If task number does not exist or is not specified.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (Integer.parseInt(this.description) > tasks.getTaskListSize()) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
         }
         int taskNo = Integer.parseInt(this.description);
-        tasks.getTask(taskNo).markAsDone();
+        return tasks.getTask(taskNo).markAsDone();
     }
 
     @Override

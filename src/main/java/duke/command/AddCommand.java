@@ -3,7 +3,7 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.TaskType;
@@ -35,8 +35,8 @@ public class AddCommand extends Command {
      * @throws DukeException If user input is not in the correct format or is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
-        tasks.addTask(TaskType.valueOf(this.type.toUpperCase()), description, false, storage);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+        return tasks.addTask(TaskType.valueOf(this.type.toUpperCase()), description, false, storage);
     }
 
     @Override

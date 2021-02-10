@@ -58,7 +58,7 @@ public class TaskList {
      * @throws DukeException If description is not given in the correct format.
      * @throws IOException If there are any input and output issues.
      */
-    public void addTask(TaskType taskType, String description, boolean isReadingFile, Storage storage)
+    public String addTask(TaskType taskType, String description, boolean isReadingFile, Storage storage)
             throws DukeException, IOException {
         Task newTask = new Task(description);
         if (taskType == TaskType.TODO) {
@@ -95,10 +95,11 @@ public class TaskList {
         this.tasks.add(newTask);
         if (!isReadingFile) {
             storage.appendToFile("data/duke.txt", newTask.toString());
-            System.out.println("Got it. I've added this task: \n"
+            return ("Got it. I've added this task: \n"
                     + "  " + newTask + "\n"
                     + "Now you have " + this.tasks.size() + " tasks in the list.");
         }
+        return "";
     }
 
     /**
@@ -108,33 +109,38 @@ public class TaskList {
      * @param storage Storage.
      * @throws DukeException If task number does not exist.
      */
-    public void deleteTask(int taskNo, Storage storage) throws DukeException, IOException {
+    public String deleteTask(int taskNo, Storage storage) throws DukeException, IOException {
         if (taskNo > this.tasks.size()) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
         }
 
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + this.tasks.get(taskNo - 1));
+        String message;
+
+        message = "Noted. I've removed this task:\n";
+        message += "  " + this.tasks.get(taskNo - 1);
         this.tasks.remove(taskNo - 1);
         String taskOrTasks = (this.tasks.size() <= 1)
                 ? " task"
                 : " tasks";
-        System.out.println("Now you have " + this.tasks.size() + taskOrTasks + " in the list.");
+        message += "Now you have " + this.tasks.size() + taskOrTasks + " in the list.";
         FileManager.deleteLine("data/duke.txt", taskNo, storage);
+
+        return message;
 
     }
 
     /**
      * Prints tasks in task list.
      */
-    public void printTaskList() {
+    public String printTaskList() {
         if (this.tasks.size() == 0) {
-            System.out.println("There are currently no tasks in your list!");
+            return "There are currently no tasks in your list!";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String listOfTasks = "Here are the tasks in your list:\n";
             for (int i = 1; i <= this.tasks.size(); i++) {
-                System.out.println(i + "." + this.tasks.get(i - 1));
+                listOfTasks += i + "." + this.tasks.get(i - 1) + "\n";
             }
+            return listOfTasks;
         }
     }
 
@@ -143,7 +149,7 @@ public class TaskList {
      *
      * @param date Date to be matched to tasks.
      */
-    public void printTasksOn(LocalDate date) {
+    public String printTasksOn(LocalDate date) {
         List<Task> list = new ArrayList();
         for (int i = 0; i < this.tasks.size(); i++) {
             if (tasks.get(i) instanceof DeadlineTask) {
@@ -160,14 +166,15 @@ public class TaskList {
         }
 
         if (list.size() == 0) {
-            System.out.println("There are no tasks with this date!");
+            return "There are no tasks with this date!";
         } else {
-            System.out.println("Here are the tasks on "
+            String listOfTasks = ("Here are the tasks on "
                     + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + " in your list:");
+                    + " in your list:\n");
             for (Task task : list) {
-                System.out.println(task);
+                listOfTasks += task + "\n";
             }
+            return listOfTasks;
         }
     }
 
@@ -176,7 +183,7 @@ public class TaskList {
      *
      * @param keyword Keyword to be matched to tasks.
      */
-    public void printTasksWith(String keyword) {
+    public String printTasksWith(String keyword) {
         List<Task> list = new ArrayList();
         for (Task task : this.tasks) {
             if (task.description.contains(keyword)) {
@@ -186,12 +193,13 @@ public class TaskList {
         }
 
         if (list.size() == 0) {
-            System.out.println("There are no matching tasks with this keyword!");
+            return "There are no matching tasks with this keyword!";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String listOfTasks = "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= list.size(); i++) {
-                System.out.println(i + "." + list.get(i - 1));
+                listOfTasks += i + "." + list.get(i - 1) + "\n";
             }
+            return listOfTasks;
         }
     }
 

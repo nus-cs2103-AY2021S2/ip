@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -35,7 +35,7 @@ public class TaskdateCommand extends Command {
      * @throws DukeException If description is in the wrong format or is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
         Matcher matcher = pattern.matcher(description);
         if (!matcher.find()) {
@@ -44,9 +44,9 @@ public class TaskdateCommand extends Command {
         }
         try {
             LocalDate date = LocalDate.parse(this.description);
-            tasks.printTasksOn(date);
+            return tasks.printTasksOn(date);
         } catch (DateTimeParseException e) {
-            ui.showError("This date is invalid!");
+            return ui.showError("This date is invalid!");
         }
     }
 

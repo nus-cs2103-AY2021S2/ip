@@ -3,7 +3,7 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -33,8 +33,8 @@ public class DeleteCommand extends Command {
      * @throws DukeException If no task number was specified or task number specified is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
-        tasks.deleteTask(Integer.parseInt(description), storage);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+        return tasks.deleteTask(Integer.parseInt(description), storage);
     }
 
     @Override

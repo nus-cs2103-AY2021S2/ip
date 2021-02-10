@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.TaskList;
 
 /**
@@ -28,8 +28,8 @@ public class FindCommand extends Command {
      * @param storage Storage.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.printTasksWith(description);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.printTasksWith(description);
     }
 
     @Override
