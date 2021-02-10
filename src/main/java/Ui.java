@@ -102,4 +102,10 @@ public class Ui {
         }
         return value;
 	}
+
+    public String addUndoString() {
+        String value;
+        value = ("Here is the command that you have undone: \n");
+        return value;
+    }
 }
