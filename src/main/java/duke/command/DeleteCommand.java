@@ -8,7 +8,13 @@ import duke.task.Task;
 
 public class DeleteCommand implements Command {
     private final int taskDeleteInt;
+
+    /**
+     * Constructor of DeleteCommand
+     * @param i index of task to delete
+     */
     public DeleteCommand(int i) {
+        assert i >= 0 : " i has to be greater or equal to 0 as there are no negative indexes";
         taskDeleteInt = i;
     }
 
