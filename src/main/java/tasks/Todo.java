@@ -37,14 +37,13 @@ public class Todo extends Task {
     public static Todo parse(String oneLine) {
         assert oneLine.startsWith("T" + delimiter);
 
-        int descStartIdx = oneLine.indexOf(delimiter);
-        int descEndIdx = oneLine.indexOf(delimiter, descStartIdx + 1);
-        String desc = oneLine.substring(descStartIdx + delimiter.length(), descEndIdx);
+        String[] args = oneLine.split(delimiter);
 
-        String doneStr = oneLine.substring(descEndIdx + delimiter.length());
-        boolean isDone = parseBoolean(doneStr);
+        boolean isDone = parseBoolean(args[2]);
 
-        return new Todo(desc, isDone);
+        return new Todo(args[1], isDone);
+
+
     }
 
     // for testing purposes
