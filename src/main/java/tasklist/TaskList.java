@@ -117,7 +117,7 @@ public class TaskList {
      * @return error message
      */
     private static String invalidNumErrMsg(int i, int min, int max) {
-        String errMsg = "Invalid list index given: " + i
+        String errMsg = "Invalid task number given: " + i
                 + ". Number needs to be between " + min + " and " + max + " (inclusive). ";
         return errMsg;
     }

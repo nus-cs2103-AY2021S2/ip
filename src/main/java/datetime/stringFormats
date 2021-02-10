@@ -1,0 +1,15 @@
+/* Formats of strings that only have time
+        hh aa
+        hh:mm aa
+        hh:mm aa
+        h:mm aa
+
+        hhaa
+        haa
+        haa
+        hhaa
+        without aa --> assume 24h timing
+        h
+        hh
+        hh:mm
+         */
