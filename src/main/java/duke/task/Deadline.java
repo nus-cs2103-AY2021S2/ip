@@ -1,7 +1,10 @@
 package duke.task;
 
+import duke.tag.Tag;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Represents a task with a specified deadline.
@@ -12,14 +15,14 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected String time;
 
-    public Deadline(String task, String by) {
-        super(task);
+    public Deadline(String task, String by, ArrayList<Tag> tags) {
+        super(task, tags);
         this.date = LocalDate.parse(by.substring(0, DATE_LENGTH));
         this.time = by.substring(DATE_LENGTH);
     }
 
-    public Deadline(boolean done, String task, String by) {
-        super(task);
+    public Deadline(boolean done, String task, String by, ArrayList<Tag> tags) {
+        super(task, tags);
         this.isDone = done;
         this.date = LocalDate.parse(by.substring(0, DATE_LENGTH));
         this.time = by.substring(DATE_LENGTH);
@@ -30,7 +33,8 @@ public class Deadline extends Task {
      * @return String representation
      */
     public String toFileString() {
-        return "D | " + this.isDone + " | " + this.task + " | " + this.date + this.time;
+        return "D | " + this.isDone + " | " + this.task + " | " + this.date + this.time
+                + " | " + Tag.tagListToString(this.tags);
     }
 
     @Override

@@ -12,6 +12,7 @@ public abstract class Command {
     private String arguments;
     private boolean isExit;
 
+
     protected Command(String arguments) {
         this.arguments = arguments;
         this.isExit = false;
@@ -24,6 +25,7 @@ public abstract class Command {
     public String getArguments() {
         return this.arguments;
     }
+
 
     /**
      * Executes the current command.

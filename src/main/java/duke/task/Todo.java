@@ -1,15 +1,19 @@
 package duke.task;
 
+import duke.tag.Tag;
+
+import java.util.ArrayList;
+
 /**
  * Representation of most basic task with just a task description
  */
 public class Todo extends Task {
-    public Todo(String task) {
-        super(task);
+    public Todo(String task, ArrayList<Tag> tags) {
+        super(task, tags);
     }
 
-    public Todo(boolean done, String task) {
-        super(task);
+    public Todo(boolean done, String task, ArrayList<Tag> tags) {
+        super(task, tags);
         this.isDone = done;
     }
 
@@ -18,7 +22,8 @@ public class Todo extends Task {
      * @return String representation
      */
     public String toFileString() {
-        return "T | " + this.isDone + " | " + this.task;
+        return "T | " + this.isDone + " | " + this.task
+                + " | " + Tag.tagListToString(this.tags);
     }
 
     @Override

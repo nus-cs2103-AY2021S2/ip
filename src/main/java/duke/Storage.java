@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import duke.tag.Tag;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -113,11 +114,14 @@ public class Storage {
     private Task fileStringToTask(String fileString) {
         String[] taskArgsArray = fileString.split(" [|] ");
         if (taskArgsArray[0].equals("T")) {
-            return new Todo(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2]);
+            return new Todo(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2],
+                    Tag.processTags(taskArgsArray[3]));
         } else if (taskArgsArray[0].equals("D")) {
-            return new Deadline(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3]);
+            return new Deadline(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3],
+                    Tag.processTags(taskArgsArray[4]));
         } else {
-            return new Event(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3]);
+            return new Event(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3],
+                    Tag.processTags(taskArgsArray[4]));
         }
     }
 
