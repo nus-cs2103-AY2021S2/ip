@@ -77,6 +77,8 @@ public class Storage {
             // create file
             Path p = Paths.get(PROJECT_DIR, "src", "data", "tasks.txt");
             boolean isCreated = new File(p.toString()).createNewFile();
+
+            assert isCreated : "task file still hasn't been created";
         }
     }
 
