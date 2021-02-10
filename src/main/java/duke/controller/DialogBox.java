@@ -10,8 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -24,9 +25,9 @@ public class DialogBox extends HBox {
     /** Text element that displays the dialog text */
     @FXML
     private Text dialog;
-    /** Image element that present the display picture for the dialog */
+    /** Image clip that present the display picture for the dialog */
     @FXML
-    private ImageView displayPicture;
+    private Circle displayClip;
 
     /**
      * Hidden constructor of a DialogBox
@@ -44,7 +45,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayClip.setFill(new ImagePattern(img));
     }
 
     /**
