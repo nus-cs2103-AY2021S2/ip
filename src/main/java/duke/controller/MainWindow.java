@@ -5,6 +5,7 @@ import duke.component.Ui;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.UnknownCommandException;
 import duke.exception.WrongFormatException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -16,6 +17,8 @@ import javafx.scene.layout.VBox;
 import duke.Duke;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,6 +37,8 @@ public class MainWindow extends AnchorPane {
 
     private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private final long EXIT_DELAY_MILLI = 2000;
 
     @FXML
     public void initialize() {
@@ -59,7 +64,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (response.getIsExit()) {
-            System.exit(0);
+            CompletableFuture.delayedExecutor(EXIT_DELAY_MILLI, TimeUnit.MILLISECONDS)
+                    .execute(() -> Platform.exit());
         }
     }
 }
