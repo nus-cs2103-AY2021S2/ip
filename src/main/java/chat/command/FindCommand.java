@@ -18,6 +18,7 @@ public class FindCommand extends Command {
      * @param inputStr Inputted command string from user to Chat the Cat.
      */
     public FindCommand(String inputStr) {
+        assert inputStr != "";
         this.inputStr = inputStr;
     }
 
@@ -30,6 +31,10 @@ public class FindCommand extends Command {
      * @throws ChatException If no tasks match keyword given by user.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
+        assert taskList != null;
+        assert ui != null;
+        assert storage != null;
+
         String keyWord = this.inputStr.replace("find","").strip();
         TaskList foundTaskList = new TaskList(new ArrayList<Task>());
         for (Task task : taskList.getTasks()) {
@@ -42,6 +47,5 @@ public class FindCommand extends Command {
         } else {
             ui.list(foundTaskList);
         }
-        
     }
 }
