@@ -21,10 +21,12 @@ public class Parser {
      * @return Output String for the associated UI object to display.
      */
     public String parse(String input) {
+        assert input != null;
+
         String[] cmdWithArgs = input.split(" ", 2);
         switch (cmdWithArgs[0]) {
         case "list":
-            return parseList(cmdWithArgs);
+            return parseList();
 
         case "todo":
             return parseTodo(cmdWithArgs);
@@ -55,7 +57,7 @@ public class Parser {
         }
     }
 
-    public String parseList(String[] cmdWithArgs) {
+    public String parseList() {
         StringBuilder outputString = new StringBuilder();
         outputString.append("Acknowledged. Listing tasks.\n");
         for (int taskNum = 0; taskNum < taskList.size(); taskNum++) {

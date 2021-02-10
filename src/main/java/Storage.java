@@ -34,6 +34,7 @@ public class Storage {
                 }
             }
         }
+        assert dukeDataFile.exists();
     }
 
     /**
@@ -42,6 +43,7 @@ public class Storage {
      * @param taskList The specified TaskList object to be written to.
      */
     public void readFromStorage(TaskList taskList) {
+        assert dukeDataFile.exists();
         try {
             Scanner fileScanner = new Scanner(dukeDataFile);
             while (fileScanner.hasNext()) {
@@ -89,6 +91,7 @@ public class Storage {
      * @throws IOException If writing to the file fails.
      */
     public void writeToStorage(TaskList taskList) throws IOException {
+        assert dukeDataFile.exists();
         FileWriter fw = new FileWriter(dukeDataFile);
         taskList.tasks.forEach(task -> {
             try {
