@@ -1,26 +1,36 @@
 package task;
 
+import tag.Tag;
+
+import java.util.ArrayList;
+
 /**
- * task.Task object.
+ * Task object.
  */
 public class Task {
     /**
-     * task.Task description.
+     * Task description.
      */
     protected String description;
     /**
-     * task.Task completion status.
+     * Task completion status.
      */
     protected boolean isDone;
 
     /**
-     * Instantiates a new task.Task.
+     * List of tag this task is tagged to.
+     */
+    protected ArrayList<Tag> tagList;
+
+    /**
+     * Instantiates a new Task.
      *
      * @param description the description
      */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tagList = new ArrayList<>();
     }
 
     /**
@@ -52,8 +62,25 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Gets task's tag list.
+     *
+     * @return the task's tag list
+     */
+    public ArrayList<Tag> getTagList() {
+        return this.tagList;
+    }
+
+    public String getTags() {
+        StringBuilder tags = new StringBuilder();
+        this.tagList.stream().forEach((tag) -> tags
+                .append(tag.tagName)
+                .append(" "));
+        return tags.toString();
+    }
+
     @Override
     public String toString() {
-        return this.description + " " + getStatusIcon();
+        return this.description + " " + getStatusIcon() + " " + getTags();
     }
 }
