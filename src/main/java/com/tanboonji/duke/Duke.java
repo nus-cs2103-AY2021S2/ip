@@ -17,6 +17,12 @@ public class Duke {
     private TaskList taskList;
 
     /**
+     * Default class constructor.
+     */
+    public Duke() {
+    }
+
+    /**
      * Initialises Duke by loading task list from storage.
      */
     public void initialise() {
