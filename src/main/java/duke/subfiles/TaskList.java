@@ -317,7 +317,7 @@ public class TaskList {
 
     /**
      * Prints the list of tasks added by the user till this point, containing the keyword specified by the user,
-     * based on the order they were added by the user.
+     * ordered based on the current ordering of the list.
      *
      * @param input User input containing the keyword.
      * @return Duke's response to the user.
