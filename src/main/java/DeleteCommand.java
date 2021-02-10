@@ -11,7 +11,6 @@ public class DeleteCommand extends Command {
                 //check whether within range
                 int numOfTasks = taskList.getTasksCount();
                 if (this.delTaskNum > 0 && this.delTaskNum <= numOfTasks) {
-
                     ui.taskDelMsg(taskList, delTaskNum);
                     taskList.delTask(delTaskNum - 1);
                     storage.save(taskList);

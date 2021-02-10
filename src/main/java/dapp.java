@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.*;
+
 public class dapp extends Application{
 
         private ScrollPane scrollPane;
@@ -23,8 +25,9 @@ public class dapp extends Application{
         private TextField userInput;
         private Button sendButton;
         private Scene scene;
-        private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-        private Image dook = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+        private Image user;
+        private Image dook;
+
 
         public dapp(){
         }
@@ -32,8 +35,16 @@ public class dapp extends Application{
         public static void main(String[] args) {
         }
 
+
         @Override
         public void start(Stage stage) {
+
+            assert (new File("/images/DaUser.png")).exists(): "image file for user does not exist";
+            assert (new File("/images/DaDuke.png")).exists(): "image file for dukebot does not exist";
+            this.user =  new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+            this.dook = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+
             //container
             scrollPane = new ScrollPane();
             dialogContainer = new VBox();
@@ -118,8 +129,7 @@ public class dapp extends Application{
             userInput.clear();
 
         }
-
-        //this is what u need to do nigga
+        
         private String getResponse(String userTest, Duke duke) {
             //return "Duke heard: " + input;
             duke.setCurrentCommand(userTest);
