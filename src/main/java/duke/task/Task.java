@@ -8,7 +8,7 @@ package duke.task;
  * @version 1.1
  * @since   2021-01-26
  */
-public class Task {
+public abstract class Task {
     /** Description of the task. */
     protected final String name;
 
@@ -48,16 +48,6 @@ public class Task {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Returns a description of the task, formatted with an "X" if it has been marked as done.
-     *
-     * @return Formatted description of the task.
-     */
-    @Override
-    public String toString() {
-        return "[ ][" + (isDone ? "X" : " ") + "] " + name;
     }
 
 }
