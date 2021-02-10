@@ -27,7 +27,6 @@ public class Parser {
      * @return The tokenized command as a String array.
      */
     public static String[] tokenizeCommand(String command) {
-        assert command.length() > 0 : "Command should not be empty";
         ArrayList<String> tokens = new ArrayList<>();
         boolean isNewToken = true;
         boolean unmatchedQuote = false;
