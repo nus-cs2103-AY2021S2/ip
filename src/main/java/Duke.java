@@ -29,6 +29,10 @@ public class Duke extends Application {
 
         storage.tasks = new ArrayList<>(100);
         storage.inputs = new ArrayList<>(100);
+
+        assert(storage.inputs != null);
+        assert(storage.tasks != null);
+
         storage.loadHistory();
 
         chatLoop(System.in, System.out);
@@ -48,6 +52,10 @@ public class Duke extends Application {
 
         storage.tasks = new ArrayList<>(100);
         storage.inputs = new ArrayList<>(100);
+
+        assert(storage.inputs != null);
+        assert(storage.tasks != null);
+
         storage.loadHistory();
 
         primaryStage.show();
