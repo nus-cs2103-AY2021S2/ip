@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Parser class is an abstraction of an object that parses and interprets text messages into commands.
  */
@@ -49,7 +51,9 @@ public class Parser {
         case "delete":
             try {
                 String num = arr[1];
-                reply = taskList.deleteTask(Integer.valueOf(num));
+//                reply = taskList.deleteTask(Integer.valueOf(num));
+                ArrayList<Integer> tasksToDelete = getTaskNumbers(num);
+                reply = taskList.deleteMultipleTasks(tasksToDelete);
             } catch (NumberFormatException e) {
                 throw new DukeException("Enter an integer only");
             }
@@ -98,5 +102,14 @@ public class Parser {
             throw new DukeException("Statement does not contain " + search);
         }
         return text.substring(0, index);
+    }
+
+    public ArrayList<Integer> getTaskNumbers(String num) {
+        String splitNum[] = num.split(" ");
+        ArrayList<Integer> listOfTaskNumbers = new ArrayList<>();
+        for (String value: splitNum) {
+            listOfTaskNumbers.add(Integer.valueOf(value));
+        }
+        return listOfTaskNumbers;
     }
 }
