@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     protected String taskName;
     protected boolean isDone;
-    protected final static DateTimeFormatter DF1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    protected final static DateTimeFormatter DF2 = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    protected final static DateTimeFormatter DF_INPUT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    protected final static DateTimeFormatter DF_OUTPUT = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
 
     /**

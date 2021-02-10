@@ -42,11 +42,11 @@ public class Deadline extends Task {
 
 
     private LocalDateTime stringToDatetime(String by) {
-        return LocalDateTime.parse(by, DF1);
+        return LocalDateTime.parse(by, DF_INPUT);
     }
 
     private String datetimeToString(LocalDateTime by) {
-        return DF2.format(by);
+        return DF_OUTPUT.format(by);
     }
 
 

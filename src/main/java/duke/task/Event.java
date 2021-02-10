@@ -46,11 +46,11 @@ public class Event extends Task {
     }
 
     private LocalDateTime stringToDatetime(String at) {
-        return LocalDateTime.parse(at, DF1);
+        return LocalDateTime.parse(at, DF_INPUT);
     }
 
     private String datetimeToString(LocalDateTime at) {
-        return DF2.format(at);
+        return DF_OUTPUT.format(at);
     }
 
 

@@ -38,7 +38,7 @@ public class AddEventCommand extends Command {
         if (spaceIndex == -1 || dateIndex - spaceIndex == 1) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
-        String eventName = userMessage.substring(spaceIndex + 1,dateIndex - 1);
+        String eventName = userMessage.substring(spaceIndex + 1, dateIndex - 1);
         String at = userMessage.substring(dateIndex + 4);
         Event event;
 

@@ -16,10 +16,10 @@ import java.util.Scanner;
  * Represents a storage object that responsible for the read and save tasks file for Duke.
  */
 public class Storage {
-    private boolean existFile;
-    private String filePath;
-    private boolean existDir;
-    private String dirPath;
+    private boolean isFileCreated = true;
+    private final String filePath;
+    private boolean isDirCreated = true;
+    private final String dirPath;
 
 
     /**
@@ -45,23 +45,27 @@ public class Storage {
     public TaskList readTasks(TaskList taskList) throws FileNotFoundException {
         File f = new File(dirPath);
         if (!f.exists()) {
-            existDir = f.mkdir();
+            isDirCreated = f.mkdir();
         }
+
+        assert isDirCreated : "The directory is not properly created!";
+
         try {
             f = new File(filePath);
             if (!f.exists()) {
-                existFile = f.createNewFile();
+                isFileCreated = f.createNewFile();
             }
         } catch (IOException e) {
             throw new FileNotFoundException();
         }
 
+        assert isFileCreated : "The txt file is not properly created!";
 
         Scanner s = new Scanner(f);
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         while (s.hasNext()) {
             String info = s.nextLine();
-            boolean status = Integer.parseInt(info.substring(0,1)) == 1;
+            boolean status = Integer.parseInt(info.substring(0, 1)) == 1;
             String type = info.substring(3, 4);
 
             if (type.equals("T")) {

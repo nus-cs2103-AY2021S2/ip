@@ -43,7 +43,7 @@ public class SearchByTimeCommand extends Command {
 
         // prevent input mistakes.
         try {
-            info = userMessage.split(" ",3);
+            info = userMessage.split(" ", 3);
             time = LocalDateTime.parse(info[2], df);
         } catch (Exception e) {
             throw new DukeException("The search input format is wrong, the format should be: \n" + "search time yyyy-MM-dd HH:mm!");

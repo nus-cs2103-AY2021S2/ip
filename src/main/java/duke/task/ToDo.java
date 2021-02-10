@@ -5,7 +5,6 @@ package duke.task;
  * Represents a Todo task as a special case of task. A <code>ToDo</code> object has two
  * fields, which are the task name and done-status. e.g., <code>go to school, false</code>
  */
-
 public class ToDo extends Task {
     /**
      * Constructor for ToDo object
