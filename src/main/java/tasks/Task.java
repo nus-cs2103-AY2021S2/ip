@@ -23,7 +23,7 @@ public class Task {
     }
 
     public String getStatusSymbol(){
-        return isFinished ? "\u2713" : " ";
+        return isFinished ? "\u2713" : "\u2007";
     }
 
     public void setDescription(String description){
