@@ -35,7 +35,7 @@ public class Duke {
      * processed to generate a response.
      * DukeExceptions are caught and handled here
      */
-    public String run2 (String input) {
+    public String run (String input) {
         String dukeResponse;
         Parser exec = new Parser(taskList);
         try {
@@ -45,7 +45,7 @@ public class Duke {
         }
         if (exec.isExit) {
             try {
-                this.storage.saveFile(this.taskList.list);
+                this.storage.saveFile(this.taskList.listOfTasks);
             } catch (DukeException e) {
                 dukeResponse = e.getMessage();
             }
@@ -55,7 +55,7 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return run2(input);
+        return run(input);
     }
 
 
