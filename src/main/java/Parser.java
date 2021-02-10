@@ -126,7 +126,7 @@ public class Parser {
             output += "\t Here are the matching tasks in your list:\n";
             int i = 1;
             for (Task task : listOfTasks) {
-                if (task.contains(textToFind)) {
+                if (isPartialMatch(task, textToFind)) {
                     output += "\t " + i + ". " + task + "\n";
                 }
                 i++;
@@ -135,6 +135,25 @@ public class Parser {
             output += "\t OOPS!!! The description of find cannot be empty.\n";
         }
         return output;
+    }
+
+    /**
+     * Method that finds if a task contains any substring from a given keyword.
+     *
+     * @param task the task to find the substring in.
+     * @param keyword the keyword with substrings to find in the task.
+     * @return true if the task matches any part of the keyword.
+     */
+    public boolean isPartialMatch(Task task, String keyword) {
+        for (int i = 3; i <= keyword.length(); i++) {
+            for (int j = 0; j <= keyword.length() - i; j++) {
+                String subString = keyword.substring(j, j + i);
+                if (task.contains(subString)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
