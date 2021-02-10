@@ -15,8 +15,7 @@ import com.tanboonji.duke.ui.Ui;
  */
 public class Duke {
 
-    private static final String FILE_DIR = "duke.txt";
-
+    private static final String FILE_DIR = "duke.data";
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
