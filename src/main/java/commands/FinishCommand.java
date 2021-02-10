@@ -26,6 +26,6 @@ public class FinishCommand extends Command{
         int[] finishList = Parser.parseTaskNumbers(this.content);
         Task[] finishedTasks = taskList.finishTask(finishList);
         storage.saveFile(taskList);
-        return new CommandResponse(snomio.showFinishedTasks(finishedTasks), false);
+        return new CommandResponse(snomio.getFinishedTasks(finishedTasks), false);
     }
 }

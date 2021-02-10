@@ -7,11 +7,11 @@ package tasks;
  */
 public class Task {
     private String description;
-    private boolean status;
+    private boolean isFinished;
 
     public Task(String description){
         this.description = description;
-        this.status = false;
+        this.isFinished = false;
     }
 
     public String getDescription(){
@@ -19,19 +19,19 @@ public class Task {
     }
 
     public boolean getStatus(){
-        return status;
+        return isFinished;
     }
 
     public String getStatusSymbol(){
-        return status ? "\u2713" : " ";
+        return isFinished ? "\u2713" : " ";
     }
 
     public void setDescription(String description){
         this.description = description;
     }
 
-    public void setStatus(boolean status){
-        this.status = status;
+    public void setStatus(boolean isFinished){
+        this.isFinished = isFinished;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Task {
      * @return formatted string
      */
     public String toSaveString(){
-        return (status ? "true" : "false") + "," + this.description;
+        return (isFinished ? "true" : "false") + "," + this.description;
     }
 
     @Override

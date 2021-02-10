@@ -29,7 +29,7 @@ public class Storage {
         try{
             Files.createDirectories(path.getParent());
         }catch(FileAlreadyExistsException e){
-            // Ignored
+            System.out.println("File exist. Nothing needs to be done here");
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
@@ -42,7 +42,7 @@ public class Storage {
         try{
             Files.createFile(path);
         }catch(FileAlreadyExistsException e){
-            // Ignored
+            System.out.println("File exist. Nothing needs to be done here");
         }catch(IOException e){
             System.out.println(e.getMessage());
         }
@@ -54,32 +54,43 @@ public class Storage {
      * @return array list of tasks
      */
     public ArrayList<Task> readFile() throws SnomException {
-        ArrayList<Task> taskList = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(path);
-            for(String line: lines){
-                String attr[] = line.split(",");
-                switch(attr[0]){
-                    case "T":
-                        Todo todo = new Todo(attr[2]);
-                        todo.setStatus(Boolean.parseBoolean(attr[1]));
-                        taskList.add(todo);
-                        break;
-                    case "D":
-                        Deadline deadline = new Deadline(attr[2], attr[3]);
-                        deadline.setStatus(Boolean.parseBoolean(attr[1]));
-                        taskList.add(deadline);
-                        break;
-                    case "E":
-                        Event event = new Event(attr[2], attr[3]);
-                        event.setStatus(Boolean.parseBoolean(attr[1]));
-                        taskList.add(event);
-                        break;
-                    default:
-                }
-            }
+            return importTask(lines);
         } catch (IOException e) {
             throw new SnomException(e.getMessage());
+        }
+    }
+
+    /**
+     * Returns an array list of task from given list of strings
+     *
+     * @param lines          list of strings
+     * @return               array list of tasks
+     * @throws SnomException if invalid date for deadline or event
+     */
+    public ArrayList<Task> importTask(List<String> lines) throws SnomException{
+        ArrayList<Task> taskList = new ArrayList<>();
+        for(String line: lines) {
+            String attr[] = line.split(",");
+            switch (attr[0]) {
+            case "T":
+                Todo todo = new Todo(attr[2]);
+                todo.setStatus(Boolean.parseBoolean(attr[1]));
+                taskList.add(todo);
+                break;
+            case "D":
+                Deadline deadline = new Deadline(attr[2], attr[3]);
+                deadline.setStatus(Boolean.parseBoolean(attr[1]));
+                taskList.add(deadline);
+                break;
+            case "E":
+                Event event = new Event(attr[2], attr[3]);
+                event.setStatus(Boolean.parseBoolean(attr[1]));
+                taskList.add(event);
+                break;
+            default:
+            }
         }
         return taskList;
     }

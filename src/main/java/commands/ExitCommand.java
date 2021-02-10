@@ -21,6 +21,6 @@ public class ExitCommand extends Command{
      */
     @Override
     public CommandResponse execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException {
-        return new CommandResponse(snomio.showExitMessage(), true);
+        return new CommandResponse(snomio.getExitMessage(), true);
     }
 }

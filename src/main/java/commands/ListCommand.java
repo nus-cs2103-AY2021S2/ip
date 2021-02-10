@@ -21,6 +21,6 @@ public class ListCommand extends Command{
      */
     @Override
     public CommandResponse execute(TaskList taskList, Snomio snomio, Storage storage) throws SnomException {
-        return new CommandResponse(snomio.showTaskList(taskList), false);
+        return new CommandResponse(snomio.getTaskList(taskList), false);
     }
 }

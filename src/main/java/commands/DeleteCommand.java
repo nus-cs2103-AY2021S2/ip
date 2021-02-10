@@ -26,6 +26,6 @@ public class DeleteCommand extends Command{
         int[] deleteList = Parser.parseTaskNumbers(this.content);
         Task[] deletedTasks = taskList.deleteTask(deleteList);
         storage.saveFile(taskList);
-        return new CommandResponse(snomio.showDeletedTasks(deletedTasks), false);
+        return new CommandResponse(snomio.getDeletedTasks(deletedTasks), false);
     }
 }

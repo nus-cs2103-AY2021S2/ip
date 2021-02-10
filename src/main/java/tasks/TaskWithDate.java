@@ -11,11 +11,6 @@ import java.time.temporal.ChronoField;
 public class TaskWithDate extends Task{
     private LocalDateTime dateTime;
 
-    public TaskWithDate(String description, LocalDateTime dateTime){
-        super(description);
-        this.dateTime = dateTime;
-    }
-
     public TaskWithDate(String description, String dateTime) throws SnomException {
         super(description);
         this.dateTime = convertDateTime(dateTime);
