@@ -31,6 +31,8 @@ public class Parser {
         } else {
             String[] parsedCommand = fullCommand.split(" ");
 
+            assert parsedCommand.length > 0;
+
             try {
                 switch (parsedCommand[0]) {
                     case "done", "delete":
@@ -67,6 +69,8 @@ public class Parser {
         String pattern;
         Pattern r;
         Matcher m;
+
+        assert args.length > 1;
         String taskType = args[0];
         String taskStr = args[1];
 

@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String fullCommand, int taskId) {
         super(fullCommand);
+        assert taskId > 0;
         this.taskId = taskId;
     }
 
