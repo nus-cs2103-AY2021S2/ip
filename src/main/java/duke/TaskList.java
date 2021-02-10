@@ -67,11 +67,15 @@ public class TaskList {
     /**
      * Removes a task at the particular index of the task list.
      *
-     * @param taskNumber index of the task to be deleted in the task list.
+     * @param taskIndex index of the task to be deleted in the task list.
      * @return The task that got removed.
      */
-    public Task removeTask(int taskNumber) {
-        return this.userList.remove(taskNumber);
+    public Task removeTask(int taskIndex) {
+        return this.userList.remove(taskIndex);
+    }
+
+    public boolean checkTaskPresent(Task task) {
+        return this.userList.contains(task);
     }
 
 }

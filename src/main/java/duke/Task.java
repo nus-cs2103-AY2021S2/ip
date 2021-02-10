@@ -12,10 +12,6 @@ public class Task {
         this.isDone = false;
     }
 
-    public boolean getTaskStatus() {
-        return this.isDone;
-    }
-
     public String getTaskDetail() {
         return this.taskDetail;
     }
@@ -24,8 +20,11 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean getTaskStatus() {
+        return isDone;
+    }
+
     public String getStatusIcon() {
-        //return tick or X symbols
         return (isDone ? "\u2713" : "\u2718");
     }
 

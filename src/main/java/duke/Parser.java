@@ -17,6 +17,8 @@ public class Parser {
      */
     public String parseDate(String unformattedDate) {
         String[] dateArr = unformattedDate.split(" ");
+        assert dateArr.length == 3 : "date should have only year, month and day when split on blank space";
+
         String monthString = String.format("%02d", Month.valueOf(dateArr[0].toUpperCase()).getValue());
         String day = String.format("%02d", Integer.parseInt(dateArr[1]));
         String year = dateArr[2];
@@ -46,6 +48,7 @@ public class Parser {
      */
     public Deadline parseAddDeadline(String command) {
         String[] deadlineAndTask = command.split(" /by ");
+        assert deadlineAndTask.length == 2 : "length should be 2 when splitting on /by";
         return new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(9));
     }
 
@@ -58,6 +61,8 @@ public class Parser {
      */
     public Event parseAddEvent(String command) {
         String[] eventTimeAndTask = command.split(" /at ");
+        assert eventTimeAndTask.length == 2 : "length of String array with event time and task split on /at is 2";
+
         //offset of 6 to remove "event " frm statement
         return new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
     }
@@ -68,8 +73,11 @@ public class Parser {
      * @param command command passed in by the user.
      * @return Index of Task to be deleted.
      */
-    public int parseDeleteCommand(String command) {
-        return Integer.parseInt(command.split(" ")[1]);
+    public Task parseDeleteCommand(String command, TaskList userList) {
+        int taskNumToBeDeleted = Integer.parseInt(command.split(" ")[1]);
+        Task deletedTask = userList.removeTask(taskNumToBeDeleted - 1);
+        deletedTask.markAsDone();
+        return deletedTask;
     }
 
     /**

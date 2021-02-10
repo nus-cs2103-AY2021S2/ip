@@ -9,28 +9,18 @@ import java.util.Scanner;
  * It processes these commands too: list, delete, done, bye
  * Task lists of individual users are saved locally and retrieved by running this class.
  */
-// extends application
 public class Duke {
     private final Ui ui;
     private TaskList tasks;
     private Storage storage;
     private final Parser parser;
-
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String LIST_COMMAND = "list";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String DONE_COMMAND = "done";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String DELETE_COMMAND = "delete";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String ADD_TODO_COMMAND = "todo";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String ADD_DEADLINE_COMMAND = "deadline";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String ADD_EVENT_COMMAND = "event";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String FIND_COMMAND = "find";
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final String EXIT_COMMAND = "bye";
 
     /**
@@ -72,6 +62,10 @@ public class Duke {
      * @see Parser
      */
     public void run() {
+        assert ui != null : "ui object should not be null";
+        assert storage != null : "storage object should not be null";
+        assert parser != null : "parser object should not be null";
+
         ui.printWelcomeGreeting();
         Scanner sc = new Scanner(System.in);
         boolean isBye = false;
@@ -112,8 +106,8 @@ public class Duke {
                     ui.printAddedTask(tasks, newTask);
                     break;
                 case DELETE_COMMAND:
-                    int taskNumToBeDeleted = parser.parseDeleteCommand(command);
-                    ui.printDeletedTask(tasks, taskNumToBeDeleted);
+                    Task taskToBeDeleted = parser.parseDeleteCommand(command, tasks);
+                    ui.printDeletedTask(taskToBeDeleted, tasks);
                     break;
                 case FIND_COMMAND:
                     TaskList tasksFound = parser.parseFindCommand(command, tasks);
@@ -130,16 +124,20 @@ public class Duke {
 
     /**
      * Gets the response from Duke after an input by the user in the GUI.
-     *
-     * @throws DukeException when key word is not a valid word.
-     * Valid words: list, done, delete, todo, deadline, event, find
+     * Valid words: list, done, delete, todo, deadline, event, find.
      * @param command input of the user that requires a response.
+     * @throws DukeException when key word is not a valid word.
      */
     public String getResponse(String command) {
+        assert ui != null : "ui object should not be null";
+        assert storage != null : "storage object should not be null";
+        assert parser != null : "parser object should not be null";
+
         String response = "";
+
         String[] commandArr = command.split(" ");
+
         Task newTask;
-        ui.printHorizontalRule();
         try {
             switch (commandArr[0]) {
             case EXIT_COMMAND:
@@ -151,27 +149,37 @@ public class Duke {
                 break;
             case DONE_COMMAND:
                 int taskNumber = Integer.parseInt(commandArr[1]);
+                Task doneTask = tasks.getTask(taskNumber);
                 response += ui.getPrintDoneTaskString(tasks, taskNumber);
+
+                assert !doneTask.getTaskStatus() : "task should be marked as done";
                 break;
             case ADD_TODO_COMMAND:
                 if (commandArr.length == 1) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 } else {
                     newTask = parser.parseAddTodo(command);
+                    assert tasks.checkTaskPresent(newTask) : "task should be added into user's task list";
+
                     response += ui.getPrintAddedTaskString(tasks, newTask);
                 }
                 break;
             case ADD_DEADLINE_COMMAND:
                 newTask = parser.parseAddDeadline(command);
+                assert tasks.checkTaskPresent(newTask) : "task should be added into user's task list";
+
                 response += ui.getPrintAddedTaskString(tasks, newTask);
                 break;
             case ADD_EVENT_COMMAND:
                 newTask = parser.parseAddEvent(command);
+                assert tasks.checkTaskPresent(newTask) : "task should be added into user's task list";
+
                 response += ui.getPrintAddedTaskString(tasks, newTask);
                 break;
             case DELETE_COMMAND:
-                int taskNumToBeDeleted = parser.parseDeleteCommand(command);
-                response += ui.getPrintDeletedTaskString(tasks, taskNumToBeDeleted);
+                Task taskToBeDeleted = parser.parseDeleteCommand(command, tasks);
+                response += ui.getPrintDeletedTaskString(taskToBeDeleted, tasks);
+                assert tasks.checkTaskPresent(taskToBeDeleted) : "task shouldn't be present in user's list";
                 break;
             case FIND_COMMAND:
                 TaskList tasksFound = parser.parseFindCommand(command, tasks);
@@ -185,6 +193,5 @@ public class Duke {
         }
         return response;
     }
-
 
 }
