@@ -28,6 +28,7 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+        assert this.isDone : "Unable to mark task as done!";
     }
 
     /**

@@ -28,6 +28,7 @@ public class DukeTaskList {
      * @param t the added task.
      */
     protected void add(Task t) {
+        assert t != null : "Invalid task!";
         taskList.add(t);
     }
 
@@ -37,6 +38,7 @@ public class DukeTaskList {
      * @param i the index of the task to be removed.
      */
     protected void remove(int i) {
+        assert i >= 0 && i < taskList.size() : "Index to be removed is invalid!";
         taskList.remove(i);
     }
 
@@ -56,6 +58,7 @@ public class DukeTaskList {
      * @return the task at the given index.
      */
     protected Task get(int i) {
+        assert i >= 0 && i < taskList.size() : "Index to be removed is invalid!";
         return taskList.get(i);
     }
 
@@ -65,6 +68,7 @@ public class DukeTaskList {
      * @return the current task list.
      */
     protected ArrayList<Task> getTaskList() {
+        assert this.taskList != null : "Error in task list!";
         return this.taskList;
     }
 
