@@ -94,7 +94,7 @@ public class Parser {
         checkStringArgument(split, command);
         String[] taskDetails = userInput.substring(detailsIdx).split(regex);
         checkDateTime(taskDetails);
-        assert(deadlineDetails.length == 2);
+        assert(taskDetails.length == 2);
         String description = taskDetails[0];
         assert(!description.isBlank());
         LocalDateTime dateTime = LocalDateTime.parse(taskDetails[1].trim(), formatter);

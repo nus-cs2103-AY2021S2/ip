@@ -11,9 +11,6 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
     private int indexToDelete;
-    private static final String EVENT = "event";
-    private static final String DEADLINE = "deadline";
-    private static final String TODO = "todo";
 
     /**
      * Constructor of DeleteCommand.
