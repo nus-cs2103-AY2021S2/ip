@@ -21,6 +21,7 @@ public class TaskList {
      * @return size of task list
      */
     public int getSize(){
+        assert list.size() >= 0 : "Task list should never be negative";
         return list.size();
     }
 
@@ -58,6 +59,7 @@ public class TaskList {
      */
     public void addTask(Task task){
         list.add(task);
+        assert list.size() > 0 : "Task list should not be empty after adding a task";
     }
 
 
@@ -76,6 +78,7 @@ public class TaskList {
             try{
                 Task task = list.get(taskNo);
                 task.setStatus(true);
+                assert task.getStatus() == true : "Task status should be set to true";
                 finishedTasks[i] = task;
             }catch(IndexOutOfBoundsException e){
                 throw new SnomException("Oops! You have entered a task number: "
