@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
+/**
+ * JUnit test for the <code>ByeCommand</code> class in duke.commands
+ */
 public class TestByeCommand {
     private final ToDo toDo;
     private final TaskList tasks;

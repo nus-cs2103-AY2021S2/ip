@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * JUnit test for the <code>Storage</code> class in duke.tasks
+ */
 public class TestStorage {
 
     /**

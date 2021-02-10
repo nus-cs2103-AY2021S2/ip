@@ -13,6 +13,9 @@ import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
+/**
+ * JUnit test for the <code>AddTaskCommand</code> class in duke.commands
+ */
 public class TestAddTaskCommand {
     private final ToDo toDo;
     private final Deadline deadline;

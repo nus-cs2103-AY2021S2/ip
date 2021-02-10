@@ -12,7 +12,9 @@ import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.ui.Parser;
 
-
+/**
+ * JUnit test for the <code>InvalidInputCommand</code> class in duke.commands
+ */
 public class TestInvalidInputCommand {
     private final ToDo toDo;
     private final TaskList tasks;

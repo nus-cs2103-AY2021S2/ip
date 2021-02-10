@@ -7,7 +7,9 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * JUnit test for the <code>Event</code> class in duke.tasks
+ */
 public class TestEvent {
     private final String description;
     private final String dateTimeString;
