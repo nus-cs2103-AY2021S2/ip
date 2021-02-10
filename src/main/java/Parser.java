@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Parser {
     private static final String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
     private static final String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
+    private static final String ERROR_INVALID_COMMAND = "OOPS!!! I`m sorry. but i don`t know what that means :-(";
 
     /**
      * Returns a Command object based on the fullCommand given
@@ -149,7 +150,7 @@ public class Parser {
         } else if (keyword.equalsIgnoreCase("todo")) {
             return new AddCommand(new Todo(remainderCommand));
         } else {
-            throw new DukeException("Invalid Command");
+            throw new DukeException(ERROR_INVALID_COMMAND);
         }
     }
 
@@ -157,7 +158,13 @@ public class Parser {
         String keyword = commandParts[0];
         String remainderCommand = commandParts[1].trim();
         Task task = null;
+    }
+  
+    private static Task createTaskWithDeadline(String fullCommand, String keyword, int firstSpace) {
+            throws DukeDeadlineException {
+        assert !keyword.trim().isEmpty();
 
+        Task t = null;
         int firstSlash = remainderCommand.indexOf("/");
 
         if (firstSlash == -1) {
@@ -200,6 +207,8 @@ public class Parser {
      */
 
     public static LocalDateTime[] parseDates(String data, String errorMessage) throws DukeDeadlineException {
+        assert !data.trim().isEmpty();
+
         int firstSpace = data.indexOf(" ");
         String date = data.substring(0, firstSpace);
         data = data.substring(firstSpace + 1);

@@ -79,7 +79,7 @@ public class Ui {
      */
     public static String showSuccessMarkDone(String task, int numTasks) {
         String message = "Got it. I`ve mark this task as done:";
-        return message + printExecuteResult(message, task, numTasks, "");
+        return printExecuteResult(message, task, numTasks, "");
     }
 
     /**
@@ -90,7 +90,7 @@ public class Ui {
      */
     public static String showSuccessDeleteTask(String task, int numTasks) {
         String message = "Noted. I`ve removed this task: \n";
-        return message + printExecuteResult(message, task, numTasks, "");
+        return printExecuteResult(message, task, numTasks, "");
     }
 
     /**
@@ -101,7 +101,7 @@ public class Ui {
      */
     public static String showSuccessAddTask(String task, int numTasks) {
         String message = "Got it. I`ve added this task: \n";
-        return message + printExecuteResult(message, task, numTasks, "");
+        return printExecuteResult(message, task, numTasks, "");
     }
 
     public static String showSuccessSearch() {
@@ -124,13 +124,13 @@ public class Ui {
     public String parseAndPrint(String fullCommand) {
         try {
             Command command = Parser.parse(fullCommand);
-            return command.excute(tasks, this);
+            //Ensure that command is not null so that execute will work
+            assert command != null;
+            return command.execute(tasks, this);
         } catch (DukeException e) {
             return showError(e.getMessage());
         } catch (DukeDeadlineException e) {
             return showError(e.getMessage());
-        } catch (NullPointerException e) {
-            return showError("OOPS!!! I`m sorry. but i don`t know what that means :-(");
         }
     }
 }
