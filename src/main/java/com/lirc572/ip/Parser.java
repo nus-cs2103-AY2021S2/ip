@@ -14,7 +14,13 @@ public class Parser {
     /**
      * All exit commands are listed here.
      */
-    private static final Set<String> EXIT_COMMANDS = Set.of("bye", "exit", "quit", "sayonara", "\u3055\u3088\u306A\u3089");
+    private static final Set<String> EXIT_COMMANDS = Set.of(
+        "bye",
+        "exit",
+        "quit",
+        "sayonara",
+        "\u3055\u3088\u306A\u3089"
+    );
 
     /**
      * Tokenizes a command.
