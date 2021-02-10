@@ -31,6 +31,7 @@ public class Parser {
         // User input
         String[] commandArr = command.trim().toLowerCase().split(" ");
         command = command.trim();
+        assert !commandArr[0].contains(" ");
         switch(commandArr[0]) {
         case "list":
             return new ListCommand(command);

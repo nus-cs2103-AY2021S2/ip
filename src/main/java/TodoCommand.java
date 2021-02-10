@@ -29,6 +29,7 @@ public class TodoCommand extends Command {
         String description = "";
         String[] commandArr = command.split(" ");
         if (command.equals("todo")) {
+            assert commandArr.length == 1;
             throw new DukeMissingInputException("OOPS! The description of a todo cannot be empty.");
         } else {
             for (int i = 1; i < commandArr.length; i++) {

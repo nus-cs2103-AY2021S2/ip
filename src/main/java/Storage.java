@@ -75,6 +75,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(this.hardDrive);
             for (Task t : tasks) {
+                assert t instanceof Todo || t instanceof Event || t instanceof Deadline;
                 if (t instanceof Todo) {
                     fw.write(String.format("T / %s / %s%n", t.getIsDone(), t.getDescription()));
                 } else if (t instanceof Event) {
