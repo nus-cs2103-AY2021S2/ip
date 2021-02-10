@@ -15,8 +15,7 @@ public class FindCommand extends Command {
      * @param ui Interface helper that decides what user sees.
      * @param storage Storage that interacts with information stored on harddrive.
      */
-    public void execute(TaskManager manager, Ui ui, Storage storage) {
-        ui.replyWith(this.message);
-        manager.find(this.keyword);
+    public String execute(TaskManager manager, Ui ui, Storage storage) {
+        return this.message + manager.find(this.keyword);
     }
 }

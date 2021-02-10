@@ -13,8 +13,8 @@ public class ListCommand extends Command {
      * @param ui Interface helper that decides what user sees.
      * @param storage Storage that interacts with information stored on harddrive.
      */
-    public void execute(TaskManager manager, Ui ui, Storage storage) {
-        manager.displayTasks();
+    public String execute(TaskManager manager, Ui ui, Storage storage) {
+        return manager.displayTasks();
     }
 
 }

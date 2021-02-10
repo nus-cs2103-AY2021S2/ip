@@ -18,9 +18,9 @@ public class DeleteCommand extends Command {
      * @param ui Interface helper that decides what user sees.
      * @param storage Storage that interacts with information stored on harddrive.
      */
-    public void execute(TaskManager manager, Ui ui, Storage storage) {
+    public String execute(TaskManager manager, Ui ui, Storage storage) {
         manager.deleteTask(this.index);
-        ui.replyWith("Task deleted.");
         storage.writeToDisk(manager.getStore());
+        return "Task deleted";
     }
 }

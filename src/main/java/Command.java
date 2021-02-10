@@ -15,5 +15,5 @@ public abstract class Command {
      * @param ui Interface helper that decides what user sees.
      * @param storage Storage that interacts with information stored on harddrive.
      */
-    public abstract void execute(TaskManager manager, Ui ui, Storage storage);
+    public abstract String execute(TaskManager manager, Ui ui, Storage storage);
 }

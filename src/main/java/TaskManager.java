@@ -47,12 +47,8 @@ public class TaskManager {
     /**
      * Prints the list of all tasks and their statuses.
      */
-    public void displayTasks() {
-        int counter = 1;
-        for (Task elem: this.store) {
-            System.out.println(counter + ". " + elem.toString());
-            counter += 1;
-        }
+    public String displayTasks() {
+        return this.toString();
     }
 
     /**
@@ -73,13 +69,26 @@ public class TaskManager {
     /**
      * Prints the line(s) that contain the element user is finding.
      */
-    public void find(String item) {
+    public String find(String item) {
         int counter = 1;
+        String tasksfound = "";
         for (Task t: this.store) {
             if (t.toString().contains(item)) {
-                System.out.println(counter + ". " + t.toString());
+                tasksfound += String.format("%s. %s\n", counter, t.toString());
             }
             counter += 1;
         }
+        return tasksfound;
+    }
+
+    @Override
+    public String toString() {
+        int counter = 1;
+        String taskrep = "";
+        for (Task elem: this.store) {
+            taskrep += String.format("%s. %s\n", counter, elem.toString());
+            counter += 1;
+        }
+        return taskrep;
     }
 }

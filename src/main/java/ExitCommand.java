@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
      * @param ui Interface helper that decides what user sees.
      * @param storage Storage that interacts with information stored on harddrive.
      */
-    public void execute(TaskManager manager, Ui ui, Storage storage) {
-        ui.sayBye();
+    public String execute(TaskManager manager, Ui ui, Storage storage) {
+        return "Byebye~ Hope to see you again soon!";
     }
 }

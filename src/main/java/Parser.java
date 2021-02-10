@@ -28,7 +28,7 @@ public class Parser {
      * @param input Text representation of task type and task info.
      * @throws DukeException if input has no keyword or if task has no description.
      */
-    public void process(String input) throws DukeException {
+    public String process(String input) throws DukeException {
         if (input.contains("todo") || input.contains("deadline") 
                 || input.contains("event") || input.contains("find")) {
             if (input.split(" ").length == 1) {
@@ -37,28 +37,28 @@ public class Parser {
         }
         if (input.equals("list")) {
             ListCommand listcommand = new ListCommand();
-            listcommand.execute(this.manager, this.ui, this.storage);
+            return listcommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("todo")) {
             TodoCommand todocommand = new TodoCommand(input);
-            todocommand.execute(this.manager, this.ui, this.storage);
+            return todocommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("deadline")) {
             DeadlineCommand deadlinecommand = new DeadlineCommand(input);
-            deadlinecommand.execute(this.manager, this.ui, this.storage);
+            return deadlinecommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("event")) {
             EventCommand eventcommand = new EventCommand(input);
-            eventcommand.execute(this.manager, this.ui, this.storage);
+            return eventcommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("find")) {
             FindCommand findcommand = new FindCommand(input);
-            findcommand.execute(this.manager, this.ui, this.storage);
+            return findcommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("done")) {
             DoneCommand donecommand = new DoneCommand(input);
-            donecommand.execute(this.manager, this.ui, this.storage);
+            return donecommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("delete")) {
             DeleteCommand deletecommand = new DeleteCommand(input);
-            deletecommand.execute(this.manager, this.ui, this.storage);
+            return deletecommand.execute(this.manager, this.ui, this.storage);
         } else if (input.equals("bye")) {
             ExitCommand exitcommand = new ExitCommand();
-            exitcommand.execute(this.manager, this.ui, this.storage);
+            return exitcommand.execute(this.manager, this.ui, this.storage);
         } else {
             throw new KeywordException();
         }
@@ -68,7 +68,7 @@ public class Parser {
      * Starts chat, reads user input and replies.
      * Exits when user says bye.
      */
-    public void chat() {
+    /*public void chat() {
         Scanner sc = new Scanner(System.in);
         String input;
 
@@ -83,5 +83,5 @@ public class Parser {
                 this.ui.separateLine();
             }   
         }
-    }
+    }*/
 }

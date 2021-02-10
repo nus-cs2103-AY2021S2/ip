@@ -14,13 +14,13 @@ public class EventCommand extends AddCommand {
      * @param ui Interface helper that decides what user sees.
      * @param storage Storage that interacts with information stored on harddrive.
      */ 
-    public void execute(TaskManager manager, Ui ui, Storage storage) {
+    public String execute(TaskManager manager, Ui ui, Storage storage) {
         String trimmed = this.description.replaceAll("event ", "");
         Task t = new Event(trimmed.split(" at ")[0], trimmed.split(" at ")[1]);
         manager.addTask(t);
         this.message += t.toString() + "\n" 
             + String.format("Now you have %s tasks in the list.", manager.taskVolume());
         storage.writeToDisk(manager.getStore());
-        ui.replyWith(this.message);
+        return this.message;
     } 
 }

@@ -18,10 +18,10 @@ public class DoneCommand extends Command {
      * @param ui Interface helper that decides what user sees.
      * @param storage Storage that interacts with information stored on harddrive.
      */
-    public void execute(TaskManager manager, Ui ui, Storage storage) {
+    public String execute(TaskManager manager, Ui ui, Storage storage) {
         manager.markTaskDone(this.index);
-        ui.replyWith(this.message);
         storage.writeToDisk(manager.getStore());
+        return this.message;
     }
 
 }
