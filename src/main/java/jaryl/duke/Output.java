@@ -142,7 +142,7 @@ public class Output {
         String[] params = input.split(" ");
 
         if (params.length < 4) {
-            throw new InvalidFormatException("Invalid event number. Please specify a valid event you would like to update");
+            throw new InvalidFormatException("Too few arguments. Valid sample input: update 2 event Carnival /at 02/02/2021 1800");
         } else if (Integer.parseInt(params[1]) <= 0 || Integer.parseInt(params[1]) > tasksList.size()) {
             throw new InvalidFormatException("Invalid event number. Please specify a valid event you would like to update");
         }
@@ -150,28 +150,35 @@ public class Output {
         String taskType = params[2];
         String taskDesc = "";
         String dateTime = "";
+
         if (taskType.equals("todo")) {
             taskDesc = input.split(" todo ")[1];
             Todo updatedTodo = new Todo(taskDesc);
             tasksList.set(Integer.parseInt(params[1]) - 1, updatedTodo);
             dataManager.writeToFile(tasksList);
-            return(printUpdateMsg(updatedTodo));
+            return (printUpdateMsg(updatedTodo));
         } else if (taskType.equals("deadline")) {
+            if (!input.contains("/by") || params.length < 7) {
+                throw new InvalidFormatException("Valid sample input: update 2 deadline Homework /by 02/02/2021 1800");
+            }
             taskDesc = input.split(" deadline ")[1].split(" /by ")[0];
             dateTime = input.split(" deadline ")[1].split(" /by ")[1];
             Deadline updatedDeadline = new Deadline(taskDesc, dateTime);
             tasksList.set(Integer.parseInt(params[1]) - 1, updatedDeadline);
             dataManager.writeToFile(tasksList);
-            return(printUpdateMsg(updatedDeadline));
+            return (printUpdateMsg(updatedDeadline));
         } else if (taskType.equals("event")) {
+            if (!input.contains("/at") || params.length < 7) {
+                throw new InvalidFormatException("Valid sample input: update 2 event Carnival /at 02/02/2021 1800");
+            }
             taskDesc = input.split(" event ")[1].split(" /at ")[0];
-            dateTime = input.split(" event ")[1].split(" /by ")[1];
+            dateTime = input.split(" event ")[1].split(" /at ")[1];
             Event updatedEvent = new Event(taskDesc, dateTime);
             tasksList.set(Integer.parseInt(params[1]) - 1, updatedEvent);
             dataManager.writeToFile(tasksList);
-            return(printUpdateMsg(updatedEvent));
+            return (printUpdateMsg(updatedEvent));
         } else {
-            throw new InvalidFormatException("Invalid command. Please specify the type of task you would like to update");
+            throw new InvalidFormatException("Error! Only todo, deadline and event are permitted.");
         }
     }
 
