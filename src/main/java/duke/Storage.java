@@ -44,10 +44,11 @@ public class Storage {
                 fileContent += type + " ; " + num + " ; " + description + "\n";
             } else if (type == 'D') {
                 Deadline deadline = (Deadline) task;
-                fileContent += type + " ; " + num + " ; " + description + " ; " + deadline.getBy() + "\n";
-            } else { //type 'E'
+                fileContent += type + " ; " + num + " ; " + description + " ; " + deadline.getDate() + "\n";
+            } else {
+                assert type == 'E' : type + ": Type should be E";
                 Event event = (Event) task;
-                fileContent += type + " ; " + num + " ; " + description + " ; " + event.getAt() + "\n";
+                fileContent += type + " ; " + num + " ; " + description + " ; " + event.getDate() + "\n";
             }
         }
         fw.write(fileContent);
@@ -92,7 +93,6 @@ public class Storage {
                     }
                     list.add(deadline);
                 } else {
-                    assert type.equals("E") : type + ": Type should be E";
                     String when = taskArr[3];
                     Event event = new Event(description, when);
                     if (num.equals("1")) {

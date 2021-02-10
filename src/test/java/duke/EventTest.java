@@ -10,7 +10,7 @@ public class EventTest {
 
     @Test
     public void getFormattedAtTest() {
-        assertEquals("Oct 15 2019", event.getFormattedAt());
+        assertEquals("Oct 15 2019", event.getFormattedDate());
     }
 
     @Test

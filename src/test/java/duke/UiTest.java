@@ -1,13 +1,12 @@
 package duke;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class UiTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -30,6 +29,7 @@ public class UiTest {
     @Test
     public void exitTest() {
         ui.exit();
-        assertEquals("Bye. Till next time!" + System.lineSeparator() + Ui.HORIZONTAL_RULE, outputStreamCaptor.toString().trim());
+        assertEquals("Bye. Till next time!" + System.lineSeparator()
+                + Ui.HORIZONTAL_RULE, outputStreamCaptor.toString().trim());
     }
 }
