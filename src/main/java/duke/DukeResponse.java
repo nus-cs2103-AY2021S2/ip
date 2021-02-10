@@ -118,11 +118,11 @@ public class DukeResponse {
 
         }
         StringBuilder strList = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            String currStr = (i + 1) + " \u00BB " + task.toString() + "\n";
-            strList.append(currStr);
-        }
+        list.taskList.stream().forEach((t) -> strList
+                .append(list.taskList.indexOf(t) + 1)
+                .append(" \u00BB ")
+                .append(t.toString())
+                .append("\n"));
         if (isFind) {
             this.currentMessage = "Found some tasks matching your find:\n" + strList.substring(0,
                     strList.toString().length() - 1);
