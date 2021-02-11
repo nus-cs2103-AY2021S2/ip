@@ -39,6 +39,8 @@ public class Parser {
             return createEvent(input);
         } else if (input.contains("find")) {
             return find(input);
+        } else if (input.contains("snooze")){
+            return snooze(input);
         } else {
             return ui.print("I'm sorry, but I don't know what that means :-(");
         }
@@ -140,6 +142,26 @@ public class Parser {
                 }
                 return ui.print(output);
             }
+        }
+    }
+
+    private Label snooze(String input) {
+        String[] terms = input.split(" ");
+        if (terms.length == 4) {
+            int index = Integer.parseInt(terms[1]);
+            int duration = Integer.parseInt(terms[2]);
+            try {
+                return list.snooze(index, duration);
+            } catch (IndexOutOfBoundsException e) {
+                return ui.printErr("No task has been stored at that index yet.");
+            } catch (NumberFormatException e) {
+                return ui.printErr("Input index was not recognised.");
+            }
+        } else {
+            String[] output = new String[2];
+            output[0] = "Please input as snooze [index] [time to snooze].";
+            output[1] = "For deadlines, time to snooze is in days while for events it is in minutes."
+            return ui.print(output);
         }
     }
 }
