@@ -20,8 +20,8 @@ import javafx.scene.layout.VBox;
  * The main content of the GUI.
  */
 public class MainWindow extends AnchorPane {
-    private final Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/bot.png"));
 
     @FXML
     private ScrollPane scrollPane;
