@@ -20,7 +20,8 @@ public class DeleteCommand extends Command{
      * 
      * @param inputStr Inputted command string from user to Chat the Cat.
      */
-    public DeleteCommand(String inputStr) { 
+    public DeleteCommand(String inputStr) {
+        assert inputStr != "";
         this.inputStr = inputStr;
     }
 
@@ -34,6 +35,10 @@ public class DeleteCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
+        assert taskList != null;
+        assert ui != null;
+        assert storage != null;
+
         Task task = checkCommandIndex(taskList, "delete", this.inputStr);
         taskList.getTasks().remove(task);
         storage.save(taskList);

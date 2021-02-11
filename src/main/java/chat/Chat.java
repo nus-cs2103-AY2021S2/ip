@@ -20,6 +20,8 @@ public class Chat {
      * @param filePath Path of the file that is read from.
      */
     public Chat(String filePath) {
+        assert filePath != "";
+        
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -64,6 +66,8 @@ public class Chat {
      * @param input
      */
     public void run(String input) {
+        assert input != "";
+        
         try {
             Command c = Parser.parse(input);
 

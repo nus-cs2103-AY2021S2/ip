@@ -25,6 +25,8 @@ public class Deadline extends Task {
      */
     private Deadline (String name, LocalDateTime end) {
         super(name);
+        
+        assert end != null;
         this.end = end;
     }
 
@@ -37,6 +39,8 @@ public class Deadline extends Task {
      */
     public Deadline (boolean isDone, String name, String end) { 
         super(isDone, name);
+        
+        assert end != null;
         this.end = LocalDateTime.parse(end, inputFormatter);
     }
 
@@ -48,6 +52,8 @@ public class Deadline extends Task {
      * @throws ChatException If format of command is wrong.
      */
     public static Deadline createDeadline (String str) throws ChatException {
+        assert str != ""; 
+
         String formatStr = "Please input with this format:\n" +
                 "deadline [name] /by [end date/time]\n" +
                 "* end date/time should be written as dd/MM/yyyy HH:mm\n" +

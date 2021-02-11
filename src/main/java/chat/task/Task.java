@@ -12,10 +12,12 @@ public abstract class Task {
     private boolean isDone = false;
     
     protected Task (String name) {
+        assert name != "";
         this.name = name;
     }
     
     protected Task (boolean isDone, String name) { 
+        assert name != "";
         this.isDone = isDone; 
         this.name = name;
     }

@@ -19,7 +19,8 @@ public class DoneCommand extends Command {
      *
      * @param inputStr Inputted command string from user to Chat the Cat.
      */
-    public DoneCommand(String inputStr) { 
+    public DoneCommand(String inputStr) {
+        assert inputStr != "";
         this.inputStr = inputStr; 
     }
 
@@ -32,6 +33,10 @@ public class DoneCommand extends Command {
      * @throws ChatException If format of command is wrong.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
+        assert taskList != null;
+        assert ui != null;
+        assert storage != null;
+
         Task task = checkCommandIndex(taskList, "done", this.inputStr);
         if (task.getIsDone()) {
             //task has already been marked as completed 

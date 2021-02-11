@@ -36,6 +36,8 @@ public class Todo extends Task {
      * @throws ChatException If format of command is wrong.
      */
     public static Todo createTodo (String str) throws ChatException {
+        assert str != "";
+
         String formatStr = "Please input with this format:\ntodo [name]";
         try {
             checkWrongCommand(str);
