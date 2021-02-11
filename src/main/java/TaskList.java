@@ -25,7 +25,7 @@ public class TaskList {
         }
 
         Task t = new Todo(name);
-        data.add(t);
+        if (!hasDuplicates(t)) data.add(t);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
         }
 
         Task t = new Deadline(name, timestamp);
-        data.add(t);
+        if (!hasDuplicates(t)) data.add(t);
     }
 
     /**
@@ -57,7 +57,15 @@ public class TaskList {
         }
 
         Task t = new Event(name, timestamp);
-        data.add(t);
+        if (!hasDuplicates(t)) data.add(t);
+    }
+
+    public boolean hasDuplicates(Task t) {
+        for (var d : data) {
+            if (d.toText().equals(t.toText())) return true;
+        }
+
+        return false;
     }
 
     /**
