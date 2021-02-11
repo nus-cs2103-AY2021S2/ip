@@ -6,8 +6,8 @@ todo store book
 list
 done 2
 list
-deadline read book /by Sunday
-event book signing /at Monday
+deadline read book /by 2020-08-05
+event book signing /at 20/06/2020
 todo buy new book
 list
 done 1
