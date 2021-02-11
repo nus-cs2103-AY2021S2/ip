@@ -89,7 +89,7 @@ public class Parser {
                 int numDays = Integer.parseInt(splitInput[1]);
                 return new RemindCommand(numDays);
             } catch (NumberFormatException e) {
-                throw new DukeCommandException("Only give numbers for argument of remind");
+                throw new DukeCommandException("Only give integers for argument of remind");
             }
         default:
             throw new DukeCommandException("Give the command in the correct format below:\nremind <number>");
