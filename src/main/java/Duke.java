@@ -39,9 +39,11 @@ public class Duke {
             if (listType == 0) {
                 result = taskParser.processInput(input, storage.tasks, ui);
                 storage.writeTaskListIntoFile();
-            } else {
+            } else if (listType == 1) {
                 result = contactParser.processInput(input, storage.contacts, ui);
                 storage.writeContactListIntoFile();
+            } else {
+                result = "Please select to go into tasks or contacts first!";
             }
             return result;
         }

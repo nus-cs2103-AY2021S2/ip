@@ -129,7 +129,7 @@ public class Storage {
     }
 
     /**
-     * Update the contacts into the file after eatch user input.
+     * Update the contacts into the file after each user input.
      *
      * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
      */
