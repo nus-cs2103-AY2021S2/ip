@@ -1,4 +1,3 @@
-deadline | done | return book  | 3/06/2021 1550
-todo | not done | 1
 todo | not done | 2
-todo | not done | 3
+todo | not done | 4
+todo | not done | 6

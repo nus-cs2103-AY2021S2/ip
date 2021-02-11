@@ -23,15 +23,9 @@ public class ConsoleUI {
     /**
      * Duke introduces itself
      */
-    public void introduction() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        String introduction = "I'm Duke!\nWhat can I do for ya?\n";
-        formatBox(introduction);
+    public String introduction() {
+        String introduction = "Hi, I'm Duke!\nWhat can I do for you?";
+        return formatBox(introduction);
     }
 
     /**

@@ -49,10 +49,6 @@ public class Parser {
         }
     }
 
-    public boolean getIsBye() {
-        return this.isBye;
-    }
-
     /**
      * Output case when user inputs "bye".
      *
@@ -101,13 +97,12 @@ public class Parser {
         try {
             String[] taskCommands = input.split("/", 2);
             String[] firstHalf = taskCommands[0].split(" ", 2);
-            // create todoTask
             if (firstHalf.length == 1) {
                 throw new Parser.MissingTodoDescriptorException("------------------------------------\n"
                         + ":( OOPS!!! The description of a todo cannot be empty\n"
                         + "------------------------------------");
             } else {
-                tasks[taskIterator] = new Task(firstHalf[1], false);
+                tasks[taskIterator] = new Task(firstHalf[1], false); // create todoTask
             }
             taskIterator = taskIterator + 1;
         } catch (Parser.MissingTodoDescriptorException e) {
@@ -218,6 +213,8 @@ public class Parser {
      * @return New number of tasks after any addition or deletion.
      */
     public Tuple2<Integer, String> parseInput(String input, Task[] tasks, int taskIterator) {
+        assert input != null : "input should not be null";
+
         String[] inputArr = input.split(" ", 2);
         String command = inputArr[0];
         Tuple2 results = new Tuple2();

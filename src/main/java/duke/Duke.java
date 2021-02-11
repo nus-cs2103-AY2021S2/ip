@@ -47,10 +47,14 @@ public class Duke {
      * @return Output in string after processing by Duke.
      */
     public String getResponse(String input) {
-        Tuple2 results = parser.parseInput(input, tasks, taskIterator);
-        taskIterator = (int) results.getInteger();
-        storage.writeTasks(tasks);
+        if (input.equals("intro")) {
+            return ui.introduction();
+        } else {
+            Tuple2 results = parser.parseInput(input, tasks, taskIterator);
+            taskIterator = (int) results.getInteger();
+            storage.writeTasks(tasks);
 
-        return (String) results.getString();
+            return (String) results.getString();
+        }
     }
 }
