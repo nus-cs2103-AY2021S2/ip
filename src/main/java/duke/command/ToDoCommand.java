@@ -30,15 +30,16 @@ public class ToDoCommand extends Command {
      * @throws DukeException if the description of command is missing or if the user input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (input.length() <= 5) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty");
         }
         String s = input.substring(5);
         ToDo td = new ToDo(s);
         tasks.addTask(td);
-        ui.printTaskAdded(td);
+        StringBuilder sb = new StringBuilder(ui.showTaskAdded(td) + "\n");
         storage.addNewDataToFile("T", "0", td.getDescription(), "");
-        ui.printNoOfItems(tasks);
+        sb.append(ui.showNoOfItems(tasks));
+        return sb.toString();
     }
 }

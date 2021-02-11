@@ -19,18 +19,11 @@ public class Ui {
 
     }
 
-    public void printHorizontalLine() {
-        System.out.println("_____________________________________");
-    }
-
     /**
      * Shows Duke's welcome message.
      */
-    public void showWelcome() {
-        printHorizontalLine();
-        System.out.println("Hello! I'm Juke");
-        System.out.println("What can I do for you?");
-        printHorizontalLine();
+    public String showWelcome() {
+        return "Hello! I'm Juke\n What can I do for you?";
     }
 
 
@@ -38,45 +31,44 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void showLoadingError() {
-        System.out.println("Error loading file");
+    public String showLoadingError(Exception e) {
+        return e.getMessage();
     }
 
     /**
      * Shows the error message from exception.
      * @param error
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
      *
      * @param message
      */
-    public void print(String message) {
-        System.out.println(message);
+    public String print(String message) {
+        return message;
     }
 
     /**
      * Prints the task added
      * @param task Task to be added.
      */
-    public void printTaskAdded(Task task) {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(task.toString());
+    public String showTaskAdded(Task task) {
+        return "Got it. I've added this task: \n" + task.toString();
     }
 
     /**
      * Prints the tasks in the list.
      * @param taskList The list of tasks.
      */
-    public void printNoOfItems(TaskList taskList) {
+    public String showNoOfItems(TaskList taskList) {
         int num = taskList.getSize();
         if (num == 1) {
-            System.out.printf("Now you have %d task in the list.%n", num);
+            return "Now you have " + num + " task in the list.\n";
         } else {
-            System.out.printf("Now you have %d tasks in the list.%n", num);
+            return "Now you have " + num + " tasks in the list.\n";
         }
     }
 
@@ -84,26 +76,25 @@ public class Ui {
      * Prints the task marked as done.
      * @param task The task to be marked as done.
      */
-    public void printTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task.toString());
+    public String showTaskDone(Task task) {
+        return "Nice! I've marked this task as done: " + task.toString();
     }
 
     /**
      * Prints the task to be removed.
      * @param task The task to be removed.
      */
-    public void printTaskRemoved(Task task) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(task.toString());
+    public String showTaskRemoved(Task task) {
+        return "Noted. I've removed this task: \n" + task.toString();
+
     }
 
-    public void printBye() {
-        System.out.println("    Bye. Hope to see you again soon!");
+    public String showBye() {
+        return "    Bye. Hope to see you again soon!";
     }
 
-    public void printFoundTasks() {
-        System.out.println("    Here are the matching tasks in your list:");
+    public String showFoundTasks() {
+        return "    Here are the matching tasks in your list:";
     }
 
     public Scanner getSc() {

@@ -4,7 +4,7 @@ import java.io.File;
 
 import duke.command.Command;
 import duke.tasks.TaskList;
-
+import javafx.application.Platform;
 
 /**
  *  Juke is a chatbot that helps users keep track of tasks.
@@ -28,6 +28,22 @@ public class Duke {
     private Ui ui;
 
     /**
+     * Creates a Duke Object.
+     */
+    public Duke() {
+        ui = new Ui();
+        String currentDir = System.getProperty("user.dir");
+        String filePath = currentDir + File.separator + "data" + File.separator + "duke.txt";
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadAllTasks());
+        } catch (DukeException e) {
+            ui.showLoadingError(e);
+            tasks = new TaskList();
+        }
+    }
+
+    /**
      * Constructor method to create a Duke object.
      * @param filePath the path file to duke text file in the hard drive.
      */
@@ -37,42 +53,29 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadAllTasks());
         } catch (DukeException e) {
-            System.out.println(tasks);
-            ui.showLoadingError();
+            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
     /**
-     * Runs the Duke AI bot.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String command = ui.readCommand();
-                ui.printHorizontalLine();
-                Command c = Parser.parse(command);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.printHorizontalLine();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            if (c.isExit()) {
+                Platform.exit();
             }
+            return c.execute(this.tasks, this.ui, this.storage);
+        } catch (DukeException e) {
+            return (e.getMessage());
         }
     }
 
-    /**
-     * Runs Juke  and waits for user input to interact with Juke.
-     * @param args user input from the command line.
-     */
-    public static void main(String[] args) {
-        String currentDir = System.getProperty("user.dir");
-        String filePath = currentDir + File.separator + "data" + File.separator + "duke.txt";
-
-        new Duke(filePath).run();
+    public String greet() {
+        return "Hello! I am Juke, your personal assistant, how can I help you today?";
     }
 
 }

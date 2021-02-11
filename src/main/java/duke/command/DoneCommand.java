@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
      * @throws DukeException is thrown if the description is missing or the input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] array = input.split(" ");
         if (array.length == 1) {
             throw new DukeException("☹ OOPS!!! I don't know which task to mark as done.");
@@ -62,6 +62,6 @@ public class DoneCommand extends Command {
                     e.getDate(), tasks.getSize());
 
         }
-        ui.printTaskDone(t);
+        return ui.showTaskDone(t);
     }
 }

@@ -31,16 +31,18 @@ public class FindCommand extends Command {
      * @throws DukeException if the user input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printFoundTasks();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String foundTasks = ui.showFoundTasks();
+        StringBuilder sb = new StringBuilder(foundTasks + " \n");
         String[] strArr = input.split(" ");
         int count = 1;
         for (int i = 0; i < tasks.getSize(); i++) {
             if (tasks.getTask(i).getDescription().contains(strArr[1])) {
                 String toPrint = "    " + count + ". " + tasks.getTask(i).toString();
                 count++;
-                ui.print(toPrint);
+                sb.append(toPrint);
             }
         }
+        return sb.toString();
     }
 }

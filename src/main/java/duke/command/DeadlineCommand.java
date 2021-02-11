@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
      * @throws DukeException if the deadline command is missing a description or the user input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (input.length() <= 9 || !input.contains("/by")) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
@@ -39,8 +39,8 @@ public class DeadlineCommand extends Command {
         String by = strArr[1];
         Deadline d = new Deadline(description, by);
         tasks.addTask(d);
-        ui.printTaskAdded(d);
         storage.addNewDataToFile("D", "0", d.getDescription(), d.getBy());
-        ui.printNoOfItems(tasks);
+        StringBuilder sb = new StringBuilder(ui.showTaskAdded(d) + ui.showNoOfItems(tasks));
+        return sb.toString();
     }
 }

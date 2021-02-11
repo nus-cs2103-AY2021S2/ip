@@ -30,7 +30,7 @@ public abstract class Command {
      * @param storage Standard storage object
      * @throws DukeException if exception is thrown.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return isExit;

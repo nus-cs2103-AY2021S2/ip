@@ -30,7 +30,7 @@ public class EventCommand extends Command {
      * @throws DukeException if the event command is missing description or the user input is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (input.length() <= 6 || !input.contains("/at")) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
         }
@@ -39,8 +39,8 @@ public class EventCommand extends Command {
         String date = strArr[1];
         Event e = new Event(description, date);
         tasks.addTask(e);
-        ui.printTaskAdded(e);
         storage.addNewDataToFile("E", "0", e.getDescription(), e.getDate());
-        ui.printNoOfItems(tasks);
+        StringBuilder sb = new StringBuilder(ui.showTaskAdded(e) + ui.showNoOfItems(tasks));
+        return sb.toString();
     }
 }

@@ -25,12 +25,14 @@ public class ListCommand extends Command {
      * @param storage Standard storage object
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("    Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder sb = new StringBuilder("    Here are the tasks in your list: \n");
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.getTask(i);
             int j = i + 1;
-            ui.print("    " + (j) + "." + task.toString());
+            String toAppend = "    " + (j) + "." + task.toString();
+            sb.append(toAppend + "\n");
         }
+        return sb.toString();
     }
 }

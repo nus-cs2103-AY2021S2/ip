@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException if delete command is missing a number/description.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] strArr = input.split(" ");
         if (strArr.length == 1) {
             throw new DukeException("☹ OOPS!!! I don't know which task to delete.");
@@ -39,8 +39,7 @@ public class DeleteCommand extends Command {
         int idx = Integer.parseInt(strArr[1]) - 1;
         Task t = tasks.removeTask(idx);
         storage.removeDataInFile(idx + 1, tasks.getSize());
-        ui.printTaskRemoved(t);
-        ui.printNoOfItems(tasks);
-
+        StringBuilder toPrint = new StringBuilder(ui.showTaskRemoved(t) + "\n" + ui.showNoOfItems(tasks));
+        return toPrint.toString();
     }
 }
