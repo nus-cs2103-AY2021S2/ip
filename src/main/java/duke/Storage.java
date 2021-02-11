@@ -34,10 +34,10 @@ public class Storage {
      * @param taskList the current list of tasks
      */
     public void writeToFile(TaskList taskList) {
-//        String home = System.getProperty("user.home");
+        //String home = System.getProperty("user.home");
 
-//        Path dirPath = Paths.get(home, "data");
-//        Path filePath = Paths.get(home,"data", "duke.txt");
+        //Path dirPath = Paths.get(home, "data");
+        //Path filePath = Paths.get(home,"data", "duke.txt");
         List<Task> myList = taskList.getTasks();
 
         try {
@@ -59,7 +59,7 @@ public class Storage {
 
             bfWriter.close();
 
-        } catch(IOException err) {
+        } catch (IOException err) {
             err.printStackTrace();
         }
     }
@@ -69,7 +69,7 @@ public class Storage {
      *
      * @return the list of Task objects stored in the file
      */
-    public List<Task> readFromFile(){
+    public List<Task> readFromFile() {
 
         List<Task> tasksList = new ArrayList<>();
         final String DELIMITER = " \\| ";
@@ -93,16 +93,16 @@ public class Storage {
 
                 try {
                     switch (inputArr[0]) {
-                        case "T":
-                            task = new Todo(inputArr[2]);
-                            break;
-                        case "D":
-                            task = new Deadline(inputArr[2], LocalDate.parse(inputArr[3]));
-                            break;
-                        case "E":
-                            String[] timeParams = inputArr[3].split(" ", 2);
-                            task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1]);
-                            break;
+                    case "T":
+                        task = new Todo(inputArr[2]);
+                        break;
+                    case "D":
+                        task = new Deadline(inputArr[2], LocalDate.parse(inputArr[3]));
+                        break;
+                    case "E":
+                        String[] timeParams = inputArr[3].split(" ", 2);
+                        task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1]);
+                        break;
                     }
 
                     if (Integer.parseInt(inputArr[1]) == 1) {

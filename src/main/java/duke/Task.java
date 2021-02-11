@@ -39,7 +39,9 @@ public class Task {
         return description;
     }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
     public boolean isDone() {
         return isDone;

@@ -36,8 +36,8 @@ public class Event extends Task {
      * @return a String representation of the Event
      */
     public String fileFormat() {
-        return "E | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | " +
-                date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + timeRange;
+        return "E | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | "
+                + date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + timeRange;
     }
 
     /**
