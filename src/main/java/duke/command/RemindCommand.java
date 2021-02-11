@@ -47,7 +47,7 @@ public class RemindCommand extends Command{
             }
             LocalDateTime now = LocalDateTime.now();
             Duration timeDiff = Duration.between(now, taskTime);
-            return (timeDiff.toDays() < this.numDays) && (timeDiff.toDays() > 0);
+            return (timeDiff.toDays() <= this.numDays) && (timeDiff.toDays() > 0);
         } else {
             return false;
         }
