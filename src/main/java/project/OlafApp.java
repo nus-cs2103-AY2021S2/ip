@@ -19,7 +19,6 @@ public class OlafApp {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
-    private boolean isActive;
 
     /**
      * Creates an instance of {@code OlafApp}.
@@ -32,7 +31,6 @@ public class OlafApp {
         this.taskList = tasks;
         this.ui = ui;
         this.storage = storage;
-        this.isActive = true;
     }
 
     /**
@@ -41,10 +39,9 @@ public class OlafApp {
      * @param command
      */
     public String run(String command) {
-        assert command != null;
 
         if (command.equalsIgnoreCase("bye")) {
-            this.stop();
+            return ui.showFormatResponse("Aww hope to see you soon, goodbye!...");
         } else if (command.equalsIgnoreCase("list")) {
             // todo: use try catch here
             if (taskList.hasTasks()) {
@@ -53,15 +50,19 @@ public class OlafApp {
                 return PrintedText.EMPTY_TASKLIST_ERROR.toString();
             }
         } else if (command.toLowerCase().startsWith("find")) {
-            String expression = Parser.parseParameter(command, " ", 1);
-            TaskList matches = taskList.findTasks(expression);
+            try {
+                String expression = Parser.parseParameter(command, " ", 1);
+                TaskList matches = taskList.findTasks(expression);
 
-            if (matches.hasTasks()) {
-                // todo: index of matches List should follow original taskList
-                String output = "Here are the tasks that match your search:\n\n" + matches.toString();
-                return ui.showFormatResponse(output);
-            } else {
-                return ui.showFormatResponse("No tasks match your search...");
+                if (matches.hasTasks()) {
+                    // todo: index of matches List should follow original taskList
+                    String output = "Here are the tasks that match your search:\n\n" + matches.toString();
+                    return ui.showFormatResponse(output);
+                } else {
+                    return ui.showFormatResponse("No tasks match your search...");
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return ui.showFormatError(PrintedText.FIND_FORMAT);
             }
         } else if (command.toLowerCase().startsWith("done")) {
             try {
@@ -150,11 +151,5 @@ public class OlafApp {
             return ui.showFormatResponse("  Hmm sorry I don't understand :(\n"
                     + "  Type 'help' to find out how you can talk to me!\n");
         }
-
-        return "";
-    }
-
-    private void stop() {
-        isActive = false;
     }
 }

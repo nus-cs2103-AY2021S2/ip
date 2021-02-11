@@ -25,8 +25,8 @@ public enum PrintedText {
     WELCOME_MESSAGE {
         @Override
         public String toString() {
-            return LOGO + "\n" + BORDER + "  Hey there, Olaf here!" +
-                    "\n  What will we be doing today?\n";
+            return BORDER + "  Hey there, Olaf here!" +
+                    "\n  What will we be doing today?\n" + BORDER;
         }
     },
 
@@ -62,6 +62,13 @@ public enum PrintedText {
         @Override
         public String toString() {
             return "  delete <task number>\n";
+        }
+    },
+
+    FIND_FORMAT {
+        @Override
+        public String toString() {
+            return "  find <search terms>\n";
         }
     },
 

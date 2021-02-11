@@ -92,17 +92,17 @@ public class Storage {
 
     private Task readTaskFromData(String line) {
         boolean taskIsDone = (line.charAt(3) == 'X');
-        Task output = null;
+        Task outputTask = null;
 
         if (line.startsWith("T]")) {
             String expression = line.split("] ", 2)[1];
-            output = new Todo(expression);
+            outputTask = new Todo(expression);
         } else if (line.startsWith("D]")) {
             String expression = line.split("] ", 2)[1];
             String[] dateTimeSplit = expression.split(" \\(by:", 2);
             LocalDateTime deadline = LocalDateTime.parse(dateTimeSplit[1].trim(),
                     DateTimeFormatter.ofPattern("d MMM yyyy HH:mm)"));
-            output = new Deadline(dateTimeSplit[0], deadline);
+            outputTask = new Deadline(dateTimeSplit[0], deadline);
         } else if (line.startsWith("E]")) {
             String expression = line.split("] ", 2)[1];
             String[] descriptionSplit = expression.split(" \\(at: ", 2);
@@ -112,12 +112,12 @@ public class Storage {
                     DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
             LocalDateTime end = LocalDateTime.parse(durationSplit[1].trim(),
                     DateTimeFormatter.ofPattern("d MMM yyyy HH:mm)"));
-            output = new Event(descriptionSplit[0], start, end);
+            outputTask = new Event(descriptionSplit[0], start, end);
         }
         if (taskIsDone) {
-            assert output != null;
-            output.markAsDone();
+            assert outputTask != null;
+            outputTask.markAsDone();
         }
-        return output;
+        return outputTask;
     }
 }

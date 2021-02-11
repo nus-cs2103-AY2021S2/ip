@@ -1,5 +1,7 @@
 package project;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+import project.common.PrintedText;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -31,8 +35,15 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets up this MainWindow Controller with the necessary {@code Olaf} object
+     * and greets the user.
+     */
     public void setOlaf(Olaf o) {
         olaf = o;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(PrintedText.WELCOME_MESSAGE.toString(), olafImage)
+        );
     }
 
     /**
@@ -48,5 +59,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, olafImage)
         );
         userInput.clear();
+
+        if (input.trim().equalsIgnoreCase("bye")) {
+            PauseTransition pause = new PauseTransition(Duration.seconds (1.5));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.play();
+        }
     }
 }

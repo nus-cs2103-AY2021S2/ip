@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import project.common.PrintedText;
 
 /**
  * Application GUI using FXML
@@ -25,9 +26,12 @@ public class MainApp extends Application {
             AnchorPane ap = fxmlLoader.load(); //breaks here cos it cant load MainWindow
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Olaf");
             fxmlLoader.<MainWindow>getController().setOlaf(olaf);
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

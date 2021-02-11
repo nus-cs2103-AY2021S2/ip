@@ -12,17 +12,9 @@ repositories {
     mavenCentral()
 }
 
-//sourceSets {
-//    main {
-//        //if you truly want to override the defaults:
-//        output.resourcesDir = file("build/classes/main/resources")
-//        // Compiled Java classes should use this directory
-//        java.outputDir = file("build/classes/main")
-//    }
-//}
-
-processResources {
-    from 'src/main/resources'
+shadowJar {
+    archiveBaseName = "Olaf"
+    archiveClassifier = null
 }
 
 application {
