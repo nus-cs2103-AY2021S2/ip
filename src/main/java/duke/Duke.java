@@ -1,6 +1,10 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Locale;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.UnknownInputException;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
@@ -31,80 +35,71 @@ public class Duke {
      * Processes user input and interacts with Ui and TaskList objects.
      */
     public String getResponse(String input) {
-        String response = "";
+        String response;
         String[] inputArr = parser.getInputArr(input);
-        String cmd = inputArr[0];
-
-        switch (cmd) {
-        case "bye":
-            response += ui.exit();
-            break;
-        case "list":
-            response += ui.listAllTasks(tasks.getList());
-            break;
-        case "done":
-            int numDone = Integer.parseInt(inputArr[1]);
-            Task task = tasks.getList().get(numDone - 1);
-            tasks.checkAsDone(task);
-            response += ui.checkAsDoneMessage(task);
-            break;
-        case "delete":
-            int numDelete = Integer.parseInt(inputArr[1]);
-            Task deletedTask = tasks.deleteTask(numDelete);
-            response += ui.deleteTaskMessage(tasks.getList(), deletedTask);
-            break;
-        case "find":
-            String keyword = inputArr[1];
-            response += ui.findTask(keyword, tasks.getList());
-            break;
-        case "todo":
-            try {
-                parser.isEmptyDescription(inputArr);
-                String details = inputArr[1];
-                Task todo = new Todo(details);
-                tasks.addTask(todo);
-                response += ui.addTaskMessage(tasks.getList(), todo);
-            } catch (DukeException e) {
-                response += "OOPS!!! The description of a todo cannot be empty.\n";
-            }
-            break;
-        case "deadline":
-            try {
-                parser.isEmptyDescription(inputArr);
-                String details = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-                String date = input.substring(input.indexOf("/") + 4);
-                Task deadline = new Deadline(details, date);
-                tasks.addTask(deadline);
-                response += ui.addTaskMessage(tasks.getList(), deadline);
-            } catch (DukeException e) {
-                response += "OOPS!!! The description of a deadline cannot be empty.\n";
-            }
-            break;
-        case "event":
-            try {
-                parser.isEmptyDescription(inputArr);
-                String details = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
-                String date = input.substring(input.indexOf("/") + 4);
-                Task event = new Event(details, date);
-                tasks.addTask(event);
-                response += ui.addTaskMessage(tasks.getList(), event);
-            } catch (DukeException e) {
-                response += "OOPS!!! The description of an event cannot be empty.\n";
-            }
-            break;
-        default:
-            try {
-                throw new DukeException();
-            } catch (DukeException e) {
-                response += "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
-            }
-        }
         try {
+            Command command = Command.valueOf(inputArr[0].toUpperCase(Locale.ROOT));
+            String description;
+            String date;
+            switch (command) {
+            case BYE:
+                response = ui.exit();
+                break;
+            case LIST:
+                response = ui.listAllTasks(tasks.getList());
+                break;
+            case DONE:
+                int numDone = Integer.parseInt(inputArr[1]);
+                Task task = tasks.getList().get(numDone - 1);
+                tasks.checkAsDone(task);
+                response = ui.checkAsDoneMessage(task);
+                break;
+            case DELETE:
+                int numDelete = Integer.parseInt(inputArr[1]);
+                Task deletedTask = tasks.deleteTask(numDelete);
+                response = ui.deleteTaskMessage(tasks.getList(), deletedTask);
+                break;
+            case FIND:
+                String keyword = inputArr[1];
+                response = ui.findTask(keyword, tasks.getList());
+                break;
+            case TODO:
+                parser.isValidDescription(inputArr);
+                description = parser.getDescription(inputArr, "todo");
+                Task todo = new Todo(description);
+                tasks.addTask(todo);
+                response = ui.addTaskMessage(tasks.getList(), todo);
+                break;
+            case DEADLINE:
+                parser.isValidDescription(inputArr);
+                description = parser.getDescription(inputArr, "deadline");
+                date = parser.getDate(inputArr, "deadline");
+                Task deadline = new Deadline(description, date);
+                tasks.addTask(deadline);
+                response = ui.addTaskMessage(tasks.getList(), deadline);
+                break;
+            case EVENT:
+                parser.isValidDescription(inputArr);
+                description = parser.getDescription(inputArr, "event");
+                date = parser.getDate(inputArr, "event");
+                Task event = new Event(description, date);
+                tasks.addTask(event);
+                response = ui.addTaskMessage(tasks.getList(), event);
+                break;
+            default:
+                throw new UnknownInputException();
+            }
             storage.saveTasks(tasks.getList());
+        } catch (IllegalArgumentException e) {
+            response = new UnknownInputException().getMessage();
+        } catch (DukeException e) {
+            response = e.getMessage();
         } catch (IOException e) {
             e.printStackTrace();
+            response = e.getMessage();
         }
         return response;
     }
+
 
 }
