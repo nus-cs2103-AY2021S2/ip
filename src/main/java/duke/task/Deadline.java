@@ -33,8 +33,8 @@ public class Deadline extends Task {
      */
     @Override
     String toFileString() {
-        return String.format("deadline %s | %s %s", description,
-                preposition, date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        String dateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("deadline %s | %s %s", description, preposition, dateStr);
     }
 
     @Override
