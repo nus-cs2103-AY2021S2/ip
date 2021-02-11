@@ -3,6 +3,7 @@
 ## Features
 
 ### Feature 1
+
 Choose to see tasks or contacts.
 
 ## Usage
@@ -15,10 +16,10 @@ Example of usage:
 
 An expected outcome:
 
-If `tasks` is entered, the task list will be used.
-If `contacts` is entered, the contact list will be used.
+If `tasks` is entered, the task list will be used. If `contacts` is entered, the contact list will be used.
 
 ### Feature 2
+
 Add a todo task.
 
 ## Usage
@@ -34,11 +35,13 @@ An expected outcome:
 A todo task is added into the task list.
 
 ### Feature 3
+
 Add a deadline task.
 
 ## Usage
 
 ### `deadline` - Key in `deadline [task description] /by [date]`
+
 Take note that date should be in yyyy-mm-dd format.
 
 Example of usage:
@@ -50,11 +53,13 @@ An expected outcome:
 A deadline task is added into the task list.
 
 ### Feature 4
+
 Add an event task.
 
 ## Usage
 
 ### `event` - Key in `event [task description] /at [date]`
+
 Take note that date should be in yyyy-mm-dd format.
 
 Example of usage:
@@ -66,6 +71,7 @@ An expected outcome:
 An event task is added into the task list.
 
 ### Feature 5
+
 See the list of tasks.
 
 ## Usage
@@ -77,6 +83,7 @@ An expected outcome:
 The task list is displayed.
 
 ### Feature 6
+
 Mark a task as done.
 
 ## Usage
@@ -92,6 +99,7 @@ An expected outcome:
 The second item in the task list will be marked as done.
 
 ### Feature 7
+
 delete a task from the task list.
 
 ## Usage
@@ -107,6 +115,7 @@ An expected outcome:
 The second item in the task list will be deleted.
 
 ### Feature 8
+
 Find tasks with specific keyword
 
 ## Usage
@@ -122,11 +131,13 @@ An expected outcome:
 The tasks with the keyword book will be displayed.
 
 ### Feature 9
+
 Add a contact into the contact list.
 
 ## Usage
 
 ### `add` - Key in `add [name] [number]`
+
 Note that name must be one single word.
 
 Example of usage:
@@ -138,6 +149,7 @@ An expected outcome:
 The contact will be added to the contact list.
 
 ### Feature 10
+
 List the contacts in the contact list.
 
 ## Usage
@@ -149,6 +161,7 @@ An expected outcome:
 The contact list will be displayed.
 
 ### Feature 11
+
 Delete a contact from the contact list.
 
 ## Usage
@@ -164,6 +177,7 @@ An expected outcome:
 The second contact in the contact list will be deleted.
 
 ### Feature 12
+
 update a contact in the contact list.
 
 ## Usage
@@ -179,6 +193,7 @@ An expected outcome:
 The second contact in the contact list will be updated with the new information.
 
 ### Feature 13
+
 Exit the program.
 
 ## Usage
