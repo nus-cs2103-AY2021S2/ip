@@ -129,14 +129,16 @@ public class DialogBox extends HBox {
             int pos = str.indexOf(match);
             Hyperlink link = new Hyperlink(match);
             link.setOnMouseClicked((event) -> {
-                try {
-                    if (Desktop.isDesktopSupported()) {
-                        Desktop.getDesktop().browse(new URL(match).toURI());
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
+                if (Desktop.isDesktopSupported()) {
+                    new Thread(() -> {
+                        try {
+                            Desktop.getDesktop().browse(new URL(match).toURI());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
                 }
             });
             result.getChildren().addAll(new Text(str.substring(0, pos)), link);
