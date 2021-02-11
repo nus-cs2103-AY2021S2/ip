@@ -2,15 +2,24 @@ package com.tanboonji.duke.command;
 
 import com.tanboonji.duke.model.Task;
 
+/**
+ * The ListCommand class contains information to execute the "list" command.
+ */
 public class ListCommand extends Command {
 
+    /** String input to execute this command */
     public static final String COMMAND = "list";
 
     public ListCommand() {
     }
 
     @Override
-    public boolean shouldSave() {
+    public boolean shouldSaveData() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
         return false;
     }
 

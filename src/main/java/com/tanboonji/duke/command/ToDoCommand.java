@@ -4,16 +4,29 @@ import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.Task;
 import com.tanboonji.duke.model.ToDo;
 
+/**
+ * The ToDoCommand class contains information to execute the "todo" command.
+ */
 public class ToDoCommand extends Command {
 
+    /** String input to execute this command */
     public static final String COMMAND = "todo";
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a description for the todo.\n"
             + "\tCommand: todo [description]";
-
     private final String description;
 
     private ToDoCommand(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean shouldSaveData() {
+        return true;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
+        return false;
     }
 
     @Override
@@ -25,24 +38,25 @@ public class ToDoCommand extends Command {
         builder.append("Got it. I've added this task:\n\t")
                 .append(newTask)
                 .append("\nNow you have ")
-                .append(taskList.getSize());
-        if (taskList.getSize() == 1) {
-            builder.append(" task");
-        } else {
-            builder.append(" tasks");
+                .append(taskList.getSize())
+                .append(" task");
+        if (taskList.getSize() > 1) {
+            builder.append("s");
         }
         return builder.toString();
     }
 
-    @Override
-    public boolean shouldSave() {
-        return true;
-    }
-
-    public static ToDoCommand parseArguments(String input) throws DukeException {
-        if (input.trim().equals("")) {
+    /**
+     * Returns new todo command after parsing command arguments.
+     *
+     * @param arguments Command arguments.
+     * @return New todo command.
+     * @throws DukeException If user input does not match todo command format.
+     */
+    public static ToDoCommand parseArguments(String arguments) throws DukeException {
+        if (arguments.trim().equals("")) {
             throw new DukeException(ERROR_MESSAGE);
         }
-        return new ToDoCommand(input);
+        return new ToDoCommand(arguments);
     }
 }

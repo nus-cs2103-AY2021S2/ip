@@ -1,9 +1,13 @@
 package com.tanboonji.duke.command;
 
+/**
+ * The HelpCommand class contains information to execute the "help" command.
+ */
 public class HelpCommand extends Command {
 
+    /** String input to execute this command */
     public static final String COMMAND = "help";
-    public static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid command.\n";
+    /** Command list for help message */
     public static final String COMMAND_LIST = "\tCommands available:\n"
             + "\t\t- list\n"
             + "\t\t- find [keyword]\n"
@@ -15,23 +19,24 @@ public class HelpCommand extends Command {
             + "\t\t- help\n"
             + "\t\t- bye\n";
 
-    private final boolean showError;
-
-    public HelpCommand(boolean showError) {
-        this.showError = showError;
+    /**
+     * Default class constructor.
+     */
+    public HelpCommand() {
     }
 
     @Override
-    public boolean shouldSave() {
+    public boolean shouldSaveData() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
         return false;
     }
 
     @Override
     public String execute() {
-        if (showError) {
-            return ERROR_MESSAGE + COMMAND_LIST;
-        } else {
-            return COMMAND_LIST;
-        }
+        return COMMAND_LIST;
     }
 }

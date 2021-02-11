@@ -3,24 +3,26 @@ package com.tanboonji.duke.command;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.TaskList;
 
+/**
+ * The Command class is an abstract class and its subclasses contain information to execute the respective commands.
+ */
 public abstract class Command {
 
     protected TaskList taskList;
 
+    /**
+     * Default class constructor.
+     */
     public Command() {
     }
 
+    /**
+     * Adds task list to command.
+     *
+     * @param taskList Task list to be added.
+     */
     public void addTaskList(TaskList taskList) {
         this.taskList = taskList;
-    }
-
-    /**
-     * Returns boolean value indicating if command causes Duke to exit.
-     *
-     * @return True if Duke exits, else false.
-     */
-    public boolean shouldExit() {
-        return false;
     }
 
     /**
@@ -28,12 +30,19 @@ public abstract class Command {
      *
      * @return True if tasks are updated, else false.
      */
-    public abstract boolean shouldSave();
+    public abstract boolean shouldSaveData();
 
     /**
-     * Executes command.
+     * Returns boolean value indicating if the command causes Duke to exit.
      *
-     * @return String result of output after command is executed.
+     * @return True if Duke exits, else false.
+     */
+    public abstract boolean shouldExitDuke();
+
+    /**
+     * Executes the command and returns response of command after execution.
+     *
+     * @return Response of command after execution.
      * @throws DukeException If any error occurs during command execution.
      */
     public abstract String execute() throws DukeException;

@@ -11,24 +11,31 @@ import java.util.ArrayList;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.TaskList;
 
+/**
+ * The Storage class manages the loading and saving of data from the local disk.
+ */
 public class Storage {
 
     private static final String LOAD_ERROR_MESSAGE =
             "☹ Sorry, something went wrong while I was loading saved data from file.";
     private static final String SAVE_ERROR_MESSAGE = "☹ Sorry, something went wrong while I was saving data to file.";
-
     private final String fileDir;
 
+    /**
+     * Class constructor specifying directory of saved data.
+     *
+     * @param fileDir Directory of saved data.
+     */
     public Storage(String fileDir) {
         this.fileDir = fileDir;
     }
 
     /**
-     * Loads TaskList saved on disk.
-     * If TaskList does not exist, initialise an empty TaskList.
+     * Loads task list saved on local disk.
+     * If task list does not exist, initialise an empty task list.
      *
-     * @return TaskList saved on disk, if it does not exist, an empty TaskList is returned instead.
-     * @throws DukeException If any error occurs while loading TaskList from disk.
+     * @return Task list saved on disk, if it does not exist, an empty task list is returned instead.
+     * @throws DukeException If any error occurs while loading task list from disk.
      */
     public TaskList load() throws DukeException {
         try {
@@ -39,7 +46,6 @@ public class Storage {
             fileIn.close();
             return taskList;
         } catch (FileNotFoundException e) {
-            // expected exception: file not found therefore no tasks loaded
             return new TaskList(new ArrayList<>());
         } catch (IOException | ClassNotFoundException e) {
             throw new DukeException(LOAD_ERROR_MESSAGE);
@@ -47,10 +53,10 @@ public class Storage {
     }
 
     /**
-     * Saves TaskList saved to disk.
+     * Saves task list saved to disk.
      *
-     * @param taskList TaskList to be stored to disk.
-     * @throws DukeException If any error occurs while saving TaskList to disk.
+     * @param taskList Task list to be stored to disk.
+     * @throws DukeException If any error occurs while saving task list to disk.
      */
     public void save(TaskList taskList) throws DukeException {
         try {

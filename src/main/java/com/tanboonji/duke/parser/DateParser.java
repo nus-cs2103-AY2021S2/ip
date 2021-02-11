@@ -9,6 +9,9 @@ import java.time.format.DateTimeParseException;
 
 import com.tanboonji.duke.exception.DukeException;
 
+/**
+ * The DateParser class helps to parse string input into date time format.
+ */
 public class DateParser {
 
     private static final String DATE_FORMAT = "[dd/MM/yyyy][dd-MM-yyyy][dd.MM.yyyy]";
@@ -28,8 +31,8 @@ public class DateParser {
     /**
      * Parses input from String class to LocalDateTime class.
      *
-     * @param input User string input
-     * @return LocalDateTime object.
+     * @param input String input.
+     * @return Date time object.
      */
     public static LocalDateTime parseDateTime(String input) throws DukeException {
         String[] tokenizedInput = input.trim().split(" ", 2);
@@ -55,6 +58,12 @@ public class DateParser {
         return LocalDateTime.of(date, time);
     }
 
+    /**
+     * Parses input from String class to LocalDate class.
+     *
+     * @param input String input.
+     * @return Date object.
+     */
     public static LocalDate parseDate(String input) throws DukeException {
         try {
             return LocalDate.parse(input, DATE_FORMATTER);
@@ -63,6 +72,12 @@ public class DateParser {
         }
     }
 
+    /**
+     * Parses input from String class to LocalTime class.
+     *
+     * @param input String input.
+     * @return Time object.
+     */
     public static LocalTime parseTime(String input) throws DukeException {
         try {
             return LocalTime.parse(input, TIME_FORMATTER);
@@ -72,10 +87,10 @@ public class DateParser {
     }
 
     /**
-     * Returns datetime in a standard format.
+     * Parses date time object to string in a specified standard format.
      *
-     * @param dateTime LocalDateTime object to be formatted.
-     * @return String of datetime in standard format.
+     * @param dateTime Date time object to be formatted.
+     * @return String of date time object in specified standard format.
      */
     public static String toString(LocalDateTime dateTime) {
         return OUTPUT_FORMATTER.format(dateTime);

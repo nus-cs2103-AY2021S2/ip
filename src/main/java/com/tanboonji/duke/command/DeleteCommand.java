@@ -3,8 +3,12 @@ package com.tanboonji.duke.command;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.Task;
 
+/**
+ * The DeleteCommand class contains information to execute the "delete" command.
+ */
 public class DeleteCommand extends Command {
 
+    /** String input to execute this command */
     public static final String COMMAND = "delete";
     private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number.\n"
             + "\tCommand: delete [task number]";
@@ -17,6 +21,16 @@ public class DeleteCommand extends Command {
     }
 
     @Override
+    public boolean shouldSaveData() {
+        return true;
+    }
+
+    @Override
+    public boolean shouldExitDuke() {
+        return false;
+    }
+
+    @Override
     public String execute() throws DukeException {
         try {
             Task task = taskList.deleteTask(taskIndex);
@@ -26,15 +40,17 @@ public class DeleteCommand extends Command {
         }
     }
 
-    @Override
-    public boolean shouldSave() {
-        return true;
-    }
-
-    public static DeleteCommand parseArguments(String input) throws DukeException {
+    /**
+     * Returns new delete command after parsing command arguments.
+     *
+     * @param arguments Command arguments.
+     * @return New delete command.
+     * @throws DukeException If user input is not an integer.
+     */
+    public static DeleteCommand parseArguments(String arguments) throws DukeException {
         int taskIndex;
         try {
-            taskIndex = Integer.parseInt(input) - 1;
+            taskIndex = Integer.parseInt(arguments) - 1;
             return new DeleteCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(ERROR_MESSAGE);
