@@ -17,10 +17,11 @@ public class Parser {
         }
     }
 
-    public static TaskList parseInput(String input, TaskList tasks) throws DukeException {
+    public static TaskList parseInput(String input, TaskList tasks) {
         String[] inputSplit = input.split(" ");
         if (inputSplit.length < 2){
-            throw new DukeException("You have entered too little arguments!");
+            ui.showInvalidCommandError();
+            return tasks;
         }
         Task task;
         switch (inputSplit[0]){
@@ -52,7 +53,7 @@ public class Parser {
             ui.printAddTask(task);
             break;
         default:
-            throw new DukeException("You have entered invalid commands, please try again!");
+            ui.showInvalidCommandError();
         }
         return tasks;
     }

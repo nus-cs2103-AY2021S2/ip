@@ -15,30 +15,26 @@ public class Duke {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            taskList = new TaskList();
+            ui.showError(e);
         }
     }
 
     public void run() {
         ui.greet();
         String input = ui.getInput();
-        try {
-            while (!input.equals("bye")) {
-                if (input.equals("list")) {
-                    if (taskList.getSize() == 0) {
-                        ui.printEmptyList();
-                    } else {
-                        ui.printList();
-                    }
+        while (!input.equals("bye")) {
+            if (input.equals("list")) {
+                if (taskList.getSize() == 0) {
+                    ui.printEmptyList();
                 } else {
-                    taskList = Parser.parseInput(input, taskList);
+                    ui.printList(taskList);
                 }
-                input = ui.getInput();
+            } else {
+                taskList = Parser.parseInput(input, taskList);
             }
-            ui.end();
-        } catch (DukeException e) {
-            ui.showError(e);
+            input = ui.getInput();
         }
+        ui.end();
 
         try {
             storage.writeToFile(taskList, "./data/duke.txt");

@@ -36,8 +36,12 @@ public class Ui {
     }
 
 
-    public void printList() {
+    public void printList(TaskList tasks) {
+        int size = tasks.getSize();
 
+        for (int i = 0; i < size; i++) {
+            printTask(tasks.getTask(i));
+        }
     }
 
     public void printEmptyList() {
@@ -57,7 +61,11 @@ public class Ui {
     }
 
     public void showWritingError() {
-        System.out.println("Error occurred while writer to file.");
+        System.out.println("Error occurred while writing to file.");
+    }
+
+    public void showInvalidCommandError() {
+        System.out.println("You have entered invalid commands, please try again!");
     }
 
     public void showError(Exception e) {
