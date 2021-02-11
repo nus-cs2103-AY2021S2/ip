@@ -37,7 +37,6 @@ public class AddCommand extends Command{
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
         
         Task task;
-        
         if (this.inputStr.startsWith("todo")) {
             task = Todo.createTodo(this.inputStr);
         } else if (this.inputStr.startsWith("deadline")) {

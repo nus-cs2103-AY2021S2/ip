@@ -30,18 +30,30 @@ public class FindCommand extends Command {
      * @throws ChatException If no tasks match keyword given by user.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
-        String keyWord = this.inputStr.replace("find","").strip();
+        String keyword = this.inputStr.replace("find","").strip();
+        TaskList foundTaskList = getFoundTaskList(keyword, taskList);
+        if (foundTaskList.getTasks().isEmpty()) {
+            throw new ChatException("Sorry! No results found.");
+        } 
+        ui.list(foundTaskList);
+    }
+
+    /**
+     * Given a particular keyword, this function returns a TaskList object containing list of tasks 
+     * that have that keyword in it's name.
+     * 
+     * @param keyword Find tasks based on this keyword.
+     * @param taskList TaskList object containing all tasks.
+     * @return TaskList object containing list of tasks that fit the keyword.
+     */
+    public TaskList getFoundTaskList(String keyword, TaskList taskList) {
         TaskList foundTaskList = new TaskList(new ArrayList<Task>());
         for (Task task : taskList.getTasks()) {
-            if (task.getName().contains(keyWord)) {
+            if (task.getName().contains(keyword)) {
                 foundTaskList.getTasks().add(task);
             }
         }
-        if (foundTaskList.getTasks().isEmpty()) {
-            throw new ChatException("Sorry! No results found.");
-        } else {
-            ui.list(foundTaskList);
-        }
-        
+        return foundTaskList;
     }
+    
 }

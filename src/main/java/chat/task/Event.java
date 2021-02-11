@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+import chat.Chat;
 import chat.ChatException;
 
 /**
@@ -59,69 +60,131 @@ public class Event extends Task {
                 "* i.e. 2019/03/19 22:00-2019/03/19 23:00\n" +
                 "* i.e. 2019/03/19 22:00 - 2019/03/19 23:00";
         
+        try {
+            checkWrongCommand(str);
+            checkAllParametersIsMissing(str);
+            checkNoSpaceBetweenEventAndName(str);
+            
+            String parameterStr = str.replace("event ", "").stripLeading();
+            checkNoName(parameterStr);
+            checkNoAt(parameterStr);
+            checkNoSpaceAroundAt(parameterStr);
+            
+            String[] parameters = parameterStr.split(" /at ");
+            checkNoStartAndEndDateTime(parameters);
+            checkDuplicateAt(parameters);
+            checkForMinusSign(parameters);
+            
+            String[] dateTimeStrings = parameters[1].strip().split("-");
+            checkForMissingStartOrEndDateTime(dateTimeStrings);
+            
+            LocalDateTime[] dateTimes = parseStartAndEndDateTime(dateTimeStrings);
+            LocalDateTime start = dateTimes[0];
+            LocalDateTime end = dateTimes[1];
+            checkEndBeforeStart(start, end);
+            
+            return new Event(parameters[0].strip(), start, end);
+            
+        } catch (ChatException e) {
+            throw new ChatException(e.getMessage() + formatStr);
+        }
+    }
+    
+    private static void checkWrongCommand(String str) throws ChatException {
         if (!str.startsWith("event")) {
-            //i.e. event(followed by one or more empty spaces)
             //i.e. list
-            throw new ChatException("wrong instruction for event\n" + formatStr);
-        } else if (str.strip().equals("event")) {
+            throw new ChatException("wrong instruction for event\n");
+        }
+    }
+    
+    private static void checkAllParametersIsMissing(String str) throws ChatException {
+        if (str.strip().equals("event")) {
             //i.e. event
             //i.e. event(followed by one or more empty spaces)
-            throw new ChatException("event name, start and end date/time missing\n" + formatStr);
-        } else if (!str.startsWith("event ")) {
-            //i.e. eventfinal exam
-            throw new ChatException("no spacing after event\n" + formatStr);
+            throw new ChatException("event name, start and end date/time missing\n");
         }
+    }
+    
+    private static void checkNoSpaceBetweenEventAndName(String str) throws ChatException {
+        if (!str.startsWith("event ")) {
+            //i.e. eventfinal exam
+            throw new ChatException("no spacing after event\n");
+        }
+    }
 
-        String tempStr = str.replace("event ", "").stripLeading();
-        if (tempStr.startsWith("/at")) {
+    private static void checkNoName(String parameterStr) throws ChatException {
+        if (parameterStr.startsWith("/at")) {
             //i.e. event /at
             //i.e. event /at tmr 5-6pm
-            throw new ChatException("event name missing\n" + formatStr);
-        } else if (!tempStr.contains("/at")) {
+            throw new ChatException("event name missing\n");
+        }
+    }
+    
+    private static void checkNoAt(String parameterStr) throws ChatException {
+        if (!parameterStr.contains("/at")) {
             //i.e. event final exam
             //i.e. event final exam 5-6pm
-            throw new ChatException("/at missing\n" + formatStr);
-        } else if (!tempStr.contains(" /at ")) {
+            throw new ChatException("/at missing\n");
+        }
+    }
+    
+    private static void checkNoSpaceAroundAt(String parameterStr) throws ChatException { 
+        if (!parameterStr.contains(" /at ")) {
             //i.e. event final exam/at
             //i.e. event final exam/at 5-6pm
             //i.e. event final exam /at5-6pm
             //i.e. event final exam/at5-6pm
-            throw new ChatException("missing spaces before or after /at\n" + formatStr);
+            throw new ChatException("missing spaces before or after /at\n");
         }
-
-        String[] tempArr = tempStr.split(" /at ");
-        if (tempArr.length < 2) {
-            //i.e. event final exam /at
-            throw new ChatException("missing start and end date/time\n" + formatStr);
-        } else if (tempArr.length > 2 || tempArr[1].contains("/at")) {
-            //i.e. event final exam /at /at 5-6pm
-            throw new ChatException("not allowed to have more than 1 ' /at '\n" + formatStr);
-        } else if (!tempArr[1].contains("-")) {
-            //i.e. event final exam /at 5pm
-            throw new ChatException("missing '-'\n" + formatStr);
-        }
-
-        String[] timeArr = tempArr[1].strip().split("-");
-        if (timeArr.length < 2) {
-            //i.e. event final exam /at 5-
-            throw new ChatException("missing start or end date/time\n" + formatStr);
-        } else {
-            try {
-                String startStr = timeArr[0].strip();
-                String endStr = timeArr[1].strip();
-                LocalDateTime startDateTime = LocalDateTime.parse(startStr, inputFormatter);
-                LocalDateTime endDateTime = LocalDateTime.parse(endStr, inputFormatter);
-                if (startDateTime.isAfter(endDateTime)) {
-                    throw new ChatException("Start date/time is after end date/time\n" + formatStr);
-                }
-                return new Event(tempArr[0].strip(), startDateTime, endDateTime);
-            } catch (DateTimeParseException e) {
-                throw new ChatException("Start or end date/time is of wrong format\n" + formatStr);
-            }
-        }
-        
     }
-
+    
+    private static void checkNoStartAndEndDateTime(String[] parameters) throws ChatException {
+        if (parameters.length < 2) {
+            //i.e. event final exam /at
+            throw new ChatException("missing start and end date/time\n");
+        }
+    }
+    
+    private static void checkDuplicateAt(String[] parameters) throws ChatException {
+        if (parameters.length > 2 || parameters[1].contains("/at")) {
+            //i.e. event final exam /at /at 5-6pm
+            throw new ChatException("not allowed to have more than 1 ' /at '\n");
+        }
+    }
+    
+    private static void checkForMinusSign(String[] parameters) throws ChatException {
+        if (!parameters[1].contains("-")) {
+            //i.e. event final exam /at 5pm
+            throw new ChatException("missing '-'\n");
+        }
+    }
+    
+    private static void checkForMissingStartOrEndDateTime(String[] parameters) throws ChatException {
+        if (parameters.length < 2) {
+            //i.e. event final exam /at 5-
+            throw new ChatException("missing start or end date/time\n");
+        }
+    }
+    
+    private static LocalDateTime[] parseStartAndEndDateTime(String[] parameters) throws ChatException {
+        try {
+            String startStr = parameters[0].strip();
+            String endStr = parameters[1].strip();
+            LocalDateTime startDateTime = LocalDateTime.parse(startStr, inputFormatter);
+            LocalDateTime endDateTime = LocalDateTime.parse(endStr, inputFormatter);
+            LocalDateTime[] dateTimes = {startDateTime, endDateTime};
+            return dateTimes;
+        } catch (DateTimeParseException e) {
+            throw new ChatException("Start or end date/time is of wrong format\n");
+        }
+    }
+    
+    private static void checkEndBeforeStart(LocalDateTime start, LocalDateTime end) throws ChatException {
+        if (start.isAfter(end)) {
+            throw new ChatException("Start date/time is after end date/time\n");
+        }
+    }
+    
     /**
      * Returns the start date and time of the task.
      * 

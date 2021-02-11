@@ -32,10 +32,9 @@ public class DoneCommand extends Command {
      * @throws ChatException If format of command is wrong.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
-        
         Task task = checkCommandIndex(taskList, "done", this.inputStr);
-        
         if (task.getIsDone()) {
+            //task has already been marked as completed 
             throw new ChatException(String.format("Task already completed\n%s", task));
         } else {
             task.completed();

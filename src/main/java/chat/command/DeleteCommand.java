@@ -34,12 +34,10 @@ public class DeleteCommand extends Command{
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ChatException {
-       
         Task task = checkCommandIndex(taskList, "delete", this.inputStr);
         taskList.getTasks().remove(task);
         storage.save(taskList);
         ui.showDeleteSuccess(task, taskList.getTasks().size());
-
     }
     
 }
