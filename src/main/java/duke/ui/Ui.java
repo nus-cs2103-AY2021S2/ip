@@ -18,36 +18,10 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome message of Duke.
-     */
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printFormatted("Hello! I'm Duke\nWhat can I do for you?");
-    }
-
-    /**
-     * Prints a formatted message.
-     * This method take in a message and print the formatted message
-     * instantly.
-     * @param msg a string to print
-     */
-    public void printFormatted(String msg) {
-        String appendMsg = "____________________________________________________________\n"
-                + msg
-                + "\n____________________________________________________________";
-        System.out.println(appendMsg);
-    }
-
-    /**
      * Prints the exit message of Duke.
      */
-    public void showBye() {
-        printFormatted("Bye. Hope to see you again soon!");
+    public String getByeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -55,7 +29,7 @@ public class Ui {
      *
      * @param tasks a <code>TaskList</code> consisting of tasks
      */
-    public void printList(TaskList tasks) {
+    public String getListMessage(TaskList tasks) {
         LinkedList<Task> lst = tasks.getList();
         String msg = "Here are the tasks in your list:\n";
         for (int i = 1; i <= lst.size(); i++) {
@@ -64,7 +38,7 @@ public class Ui {
                 msg += "\n";
             }
         }
-        printFormatted(msg);
+        return msg;
     }
 
     /**
@@ -73,11 +47,11 @@ public class Ui {
      * @param tasks the <code>TaskList</code> containing all the tasks
      * @param task the <code>Task</code> that is added
      */
-    public void printAdded(TaskList tasks, Task task) {
+    public String getAddMessage(TaskList tasks, Task task) {
         String msg = "Got it. I've added this task:\n"
                 + "  " + task
                 + "\nNow you have " + tasks.getList().size() + " tasks in the list.";
-        printFormatted(msg);
+        return msg;
     }
 
     /**
@@ -86,11 +60,11 @@ public class Ui {
      * @param tasks the <code>TaskList</code> containing all the tasks
      * @param task the <code>Task</code> that is added
      */
-    public void printRemoved(TaskList tasks, Task task) {
+    public String getRemoveMessage(TaskList tasks, Task task) {
         String msg = "Got it. I've removed this task:\n"
                 + "  " + task
                 + "\nNow you have " + tasks.getList().size() + " tasks in the list.";
-        printFormatted(msg);
+        return msg;
     }
 
     /**
@@ -98,10 +72,10 @@ public class Ui {
      *
      * @param task the <code>Task</code> that is added
      */
-    public void printMarked(Task task) {
+    public String getMarkMessage(Task task) {
         String msg = "Nice! I've marked this task as done:\n";
         msg += "  " + task;
-        printFormatted(msg);
+        return msg;
     }
 
     /**
@@ -109,7 +83,7 @@ public class Ui {
      *
      * @param tasks TaskList to be printed
      */
-    public void printFound(TaskList tasks) {
+    public String getFoundMessage(TaskList tasks) {
         LinkedList<Task> lst = tasks.getList();
         String msg = "Here are the matching tasks in your list:\n";
         for (int i = 1; i <= lst.size(); i++) {
@@ -118,15 +92,6 @@ public class Ui {
                 msg += "\n";
             }
         }
-        printFormatted(msg);
-    }
-
-    /**
-     * Reads the user input and return as a String
-     *
-     * @return String representing user input
-     */
-    public String readLine() {
-        return this.scanner.nextLine();
+        return msg;
     }
 }
