@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="426.0" styleClass="main" stylesheets="@mainwindow.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chadbot.gui.MainWindow">
   <children>
@@ -19,7 +18,7 @@
     </Group>
     <ScrollPane fx:id="scrollPane" cacheHint="QUALITY" hbarPolicy="NEVER" hvalue="1.0" layoutX="14.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="400.0" styleClass="scrollpane" stylesheets="@mainwindow.css" vvalue="1.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.0">
       <content>
-        <VBox fx:id="dialogContainer" blendMode="MULTIPLY" cache="true" prefWidth="388.0" spacing="10.0" styleClass="vbox" stylesheets="@mainwindow.css">
+        <VBox fx:id="dialogContainer" blendMode="MULTIPLY" cache="true" prefWidth="388.0" spacing="20.0" styleClass="vbox" stylesheets="@mainwindow.css">
           <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
           </padding>
