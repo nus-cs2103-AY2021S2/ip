@@ -1,6 +1,6 @@
 # User Guide for Mantaro (Chatbot)
 
-## Features :balance_scale:
+## Features
 
 ### Manages your tasks
 You can add, retrieve and delete tasks of different types:
