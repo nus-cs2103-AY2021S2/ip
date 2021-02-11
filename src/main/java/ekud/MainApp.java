@@ -15,6 +15,10 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         MainWindow mainWindow = new MainWindow();
         mainWindow.setEkud(ekud);
+
+        // basic setup for the stage
+        primaryStage.setTitle("Ekud: Your Personal Assistant");
+        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(mainWindow));
         primaryStage.show();
     }
