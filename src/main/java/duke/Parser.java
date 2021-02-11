@@ -92,7 +92,7 @@ public class Parser {
                 throw new DukeCommandException("Only give integers for argument of remind");
             }
         default:
-            throw new DukeCommandException("Give the command in the correct format below:\nremind <number>");
+            throw new DukeCommandException("Give the command in the correct format below:\nremind <integer>");
         }
     }
 
