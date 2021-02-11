@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
-    public void dummyTest() {
+    public void dummyTest(){
         assertEquals(2, 2);
     }
 
@@ -17,7 +17,7 @@ public class DukeTest {
     @Test
     public void createNewDeadlineTask() {
         Task task = new Deadline("return book", "2020-02-04", false, false);
-        assertEquals("[D][ ] return book (by: Feb 4 2020)", task.toString());
+        assertEquals("[D][ ] return book (by: Feb 4 2020)", task.toString() );
     }
 
     @Test
