@@ -27,7 +27,10 @@ public class Statement {
     public Statement(String statement) {
         this.statement = statement;
         argsTable = new Hashtable<>();
+        initializeHashTable();
+    }
 
+    private void initializeHashTable() {
         argsTable.put("list", 0);
         argsTable.put("bye", 0);
         argsTable.put("done", 1);
@@ -49,27 +52,18 @@ public class Statement {
 
         if (!argsTable.containsKey(command)) {
             //unknown command
-            throw new DukeException("Sorry, but I don't know what " + command + " means. :(");
+            String unknownCommandError = "Sorry, but I don't know what " + command + " means. :(";
+            throw new DukeException(unknownCommandError);
         }
 
         int numOfArgs = argsTable.get(command);
-
         //there are no more arguments
         if (numOfArgs == 0) {
             return result;
         }
 
         if (!sc.hasNext()) {
-            switch(command) {
-            case "done": case "delete":
-                throw new DukeException("OOPS! " + command + " requires the index of the task.");
-            case "todo":
-                throw new DukeException("OOPS! " + command + " requires a description.");
-            case "find":
-                throw new DukeException("Please provide a keyword.");
-            default:
-                throw new DukeException("OOPS! " + command + " requires a description and a time.");
-            }
+            throw getError(command);
         }
 
         String rest = sc.nextLine();
@@ -77,7 +71,8 @@ public class Statement {
 
         //missing arguments
         if (args.length != numOfArgs) {
-            throw new DukeException("OOPS! " + command + " requires a description and a time");
+            String missingDescAndDateError = "OOPS! " + command + " requires a description and a time.";
+            throw new DukeException(missingDescAndDateError);
         }
 
         for (int i = 0; i < numOfArgs; i++) {
@@ -85,6 +80,26 @@ public class Statement {
         }
 
         return result;
+    }
+
+    private DukeException getError(String command) {
+        String missingIndexError = "OOPS! " + command + " requires the index of the task.";
+        String missingDescriptionError = "OOPS! " + command + " requires a description.";
+        String missingKeywordError = "Please provide a keyword.";
+        String missingDescAndDateError = "OOPS! " + command + " requires a description and a time.";
+
+        switch(command) {
+        case "done": case "delete":
+            return new DukeException(missingIndexError);
+        case "todo":
+            return new DukeException(missingDescriptionError);
+        case "find":
+            return new DukeException(missingKeywordError);
+        case "deadline": case "event":
+            return new DukeException(missingDescAndDateError);
+        default:
+            return new DukeException("Something's wrong...");
+        }
     }
 
     /**
@@ -99,47 +114,51 @@ public class Statement {
         try {
             List<String> parsedArgs = parseStatement();
             String command = parsedArgs.get(0);
-            String first = null;
-            String second = null;
+            String description = null;
             String preposition = null;
             LocalDate date = null;
 
 
             if (parsedArgs.size() >= 2) {
-                first = parsedArgs.get(1).trim();
+                description = parsedArgs.get(1).trim();
             }
 
             if (parsedArgs.size() == 3) {
-                second = parsedArgs.get(2).trim();
+                String second = parsedArgs.get(2).trim();
                 String[] prepositionAndDate = second.split("[\\s]");
 
                 if (prepositionAndDate.length != 2) {
-                    throw new DukeException("Please provide a preposition and a date after '/'.");
+                    String missingDateError = "Please provide a preposition and a date after '/'.";
+                    throw new DukeException(missingDateError);
                 }
 
                 preposition = prepositionAndDate[0];
                 date = LocalDate.parse(prepositionAndDate[1]);
             }
+            return getTask(command, description, preposition, date);
 
-            switch (command) {
-            case "list":
-                return new ListCommand();
-            case "bye":
-                return new ExitCommand();
-            case "done":
-                return new DoneCommand(first);
-            case "delete":
-                return new DeleteCommand(first);
-            case "find":
-                return new FindCommand(first);
-            case "todo": case "deadline": case "event":
-                return new AddCommand(command, first, preposition, date);
-            default:
-                return null;
-            }
         } catch (DateTimeParseException e) {
             throw new DukeException("Date must be in the format yyyy-mm-dd.");
         }
 
+    }
+
+    private Command getTask(String command, String description, String preposition, LocalDate date) {
+        switch (command) {
+        case "list":
+            return new ListCommand();
+        case "bye":
+            return new ExitCommand();
+        case "done":
+            return new DoneCommand(description);
+        case "delete":
+            return new DeleteCommand(description);
+        case "find":
+            return new FindCommand(description);
+        case "todo": case "deadline": case "event":
+            return new AddCommand(command, description, preposition, date);
+        default:
+            return null;
+        }
     }
 }
