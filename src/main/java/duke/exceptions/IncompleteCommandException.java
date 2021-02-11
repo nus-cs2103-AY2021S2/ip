@@ -6,11 +6,11 @@ package duke.exceptions;
  */
 public class IncompleteCommandException extends DukeException {
     public IncompleteCommandException() {
-        super("\nMaster, I'm afraid you are not specific enough.");
+        super("IncompleteCommandException");
     }
 
     @Override
     public String toString() {
-        return "Error";
+        return "Master, I'm afraid you are not specific enough.";
     }
 }

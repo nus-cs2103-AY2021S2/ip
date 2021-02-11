@@ -6,12 +6,12 @@ package duke.exceptions;
  */
 
 public class NotExistingTaskException extends DukeException {
-    public NotExistingTaskException(String error) {
-        super(error);
+    public NotExistingTaskException() {
+        super("NotExistingTaskException");
     }
 
     @Override
     public String toString() {
-        return "\nI'm afraid the task number is not in the list, Master.";
+        return "I'm afraid the task number is not in the list, Master.";
     }
 }

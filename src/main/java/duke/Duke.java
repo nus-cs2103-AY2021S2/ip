@@ -57,7 +57,8 @@ public class Duke {
                     System.exit(0);
                 }
             } catch (DukeException e) {
-                e.getMessage();
+                String errorMessage = e.toString();
+                ui.formatAndPrintType1(errorMessage);
             }
         }
     }

@@ -38,7 +38,7 @@ public class FindCommand extends Command {
         }
 
         if (tempList.getSize() == 0) {
-            String message = "Master, I'm unable to find such a task."
+            String message = "Master, I'm unable to find such a task.";
             ui.formatAndPrintType1(message);
             return message;
         } else {

@@ -6,11 +6,11 @@ package duke.exceptions;
  */
 public class ExcessListKeywordException extends DukeException {
     public ExcessListKeywordException() {
-        super("\nMaster, just using the \'list\' command is enough.");
+        super("ExcessListKeywordException");
     }
 
     @Override
     public String toString() {
-        return "error";
+        return "Master, just using the \'list\' command is enough.";
     }
 }

@@ -5,11 +5,11 @@ package duke.exceptions;
  */
 public class InvalidCommandException extends DukeException{
     public InvalidCommandException() {
-        super("Master, I require you to give me a valid command.");
+        super("InvalidCommandException");
     }
 
     @Override
     public String toString() {
-        return "Error";
+        return "Master, I require you to give me a valid command.";
     }
 }

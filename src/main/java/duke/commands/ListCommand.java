@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.EmptyListException;
 import duke.exceptions.ExcessListKeywordException;
 import duke.storage.Storage;
 import duke.taskList.TaskList;
@@ -25,6 +26,8 @@ public class ListCommand extends Command {
 
         if (inputList.length > 1) {
             throw new ExcessListKeywordException();
+        } else if (taskList.getSize() == 0) {
+            throw new EmptyListException();
         }
 
         StringBuilder sb = new StringBuilder();

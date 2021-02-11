@@ -5,12 +5,12 @@ package duke.exceptions;
  * without inputting the task number.
  */
 public class MissingArgumentException extends DukeException{
-    public MissingArgumentException(String error) {
-        super("\nMaster, I'm afraid that you're missing the task number.");
+    public MissingArgumentException() {
+        super("MissingArgumentException");
     }
 
     @Override
     public String toString() {
-        return "Error";
+        return "Master, I'm afraid that you're missing the task number.";
     }
 }

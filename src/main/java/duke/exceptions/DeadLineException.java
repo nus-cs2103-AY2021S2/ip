@@ -6,12 +6,12 @@ package duke.exceptions;
  */
 public class DeadLineException extends DukeException {
     public DeadLineException() {
-       super("Sorry Master, please key in the deadline task in the following format:\n"
-             + "\'Deadline task name /by date(in YYYY-MM-DD HH:MM format)\'.");
+       super("DeadlineException");
     }
 
     @Override
     public String toString() {
-        return "Error";
+        return "Sorry Master, please key in the deadline task in the following format:\n"
+                + "\'Deadline task name /by date(in YYYY-MM-DD HH:MM format)\'.";
     }
 }

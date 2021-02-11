@@ -119,11 +119,11 @@ public class Parser {
             return new ByeCommand(input);
         } else if (isList(command)) {
             return new ListCommand(input);
-        } else if (isCompleted(input)) {
+        } else if (isCompleted(command)) {
             return new DoneCommand(input);
-        } else if (isToDo(input) | isEvent(input) | isDeadline(input)) {
+        } else if (isToDo(command) | isEvent(command) | isDeadline(command)) {
             return new AddCommand(input);
-        } else if (isDelete(input)) {
+        } else if (isDelete(command)) {
             return new DeleteCommand(input);
         } else if (isFind(command)) {
             return new FindCommand(input);

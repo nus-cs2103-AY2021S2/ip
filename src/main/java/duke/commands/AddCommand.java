@@ -22,7 +22,7 @@ public class AddCommand extends Command {
      * @throws DukeException
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task taskItem;
+        Task taskItem = new Task("placebo task", taskType.Task);
         String[] inputList = description.trim().split(" ", 2);
 
         if (inputList.length != 2) {
@@ -36,9 +36,6 @@ public class AddCommand extends Command {
         } else if (Parser.isDeadline(command)) {
             String[] taskDeadline = inputList[1].trim().split("/by", 2);
 
-            if (taskDeadline.length != 2) {
-                throw new IncompleteCommandException();
-            }
             try {
                 taskItem = new Deadline(taskDeadline[0].trim(), taskDeadline[1].trim());
             } catch (Exception e) {
@@ -47,13 +44,10 @@ public class AddCommand extends Command {
         } else if (Parser.isEvent(command)) {
             String[] taskEvent = inputList[1].trim().split("/at", 2);
 
-            if (taskEvent.length != 2) {
-                throw new IncompleteCommandException();
-            }
             try {
                 taskItem = new Event(taskEvent[0].trim(), taskEvent[1].trim());
             } catch (Exception e) {
-                throw new EventException("test event exception");
+                throw new EventException();
             }
         } else {
             throw new InvalidCommandException();
