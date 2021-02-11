@@ -13,4 +13,5 @@ done 0
 delete 3
 done 3
 list
+find lecture
 bye
