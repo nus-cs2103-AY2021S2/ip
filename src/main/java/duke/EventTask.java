@@ -29,6 +29,7 @@ public class EventTask extends Task {
         String dateOfEvent = dateTime[0];
         String timeOfEvent = dateTime[1];
         LocalDate parsedDate = LocalDate.parse(dateOfEvent);
+        assert parsedDate.isAfter(LocalDate.now()) || parsedDate.isEqual(LocalDate.now());
         return parsedDate.format(DateTimeFormatter.ofPattern("E, MMM d yyyy")) + " " + timeOfEvent;
     }
 
