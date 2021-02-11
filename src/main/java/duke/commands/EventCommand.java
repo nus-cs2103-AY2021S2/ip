@@ -2,6 +2,8 @@ package duke.commands;
 
 import java.time.LocalDateTime;
 
+import duke.DukeException;
+import duke.ParserUtils;
 import duke.models.Event;
 import duke.models.Task;
 
@@ -17,7 +19,7 @@ public class EventCommand extends AddCommand {
      * @param taskName name of the event
      * @param dateTime date and time of the event
      */
-    public EventCommand(String taskName, LocalDateTime dateTime) {
+    protected EventCommand(String taskName, LocalDateTime dateTime) {
         super(taskName);
         this.dateTime = dateTime;
     }
@@ -25,5 +27,23 @@ public class EventCommand extends AddCommand {
     @Override
     public Task getTask() {
         return new Event(getTaskName(), dateTime);
+    }
+
+    /**
+     * Creates a new instance of Event Command
+     * @param argString string with argument
+     * @return instance of Event Command
+     * @throws DukeException
+     */
+    public static EventCommand buildInstance(String argString) throws DukeException {
+        String[] cmdArgs = ParserUtils.getCommandArgs(argString, "The description of an event cannot be empty.");
+        String[] eventArgs = cmdArgs[1].split(" /at ", 2);
+        if (eventArgs.length < 2) {
+            throw new DukeException("The event needs to have a date specified with \"/at\".");
+        }
+        String taskName = eventArgs[0];
+        LocalDateTime dateTime = ParserUtils.parseDateTime(eventArgs[1],
+                "The event date needs to be specified in a valid date format.");
+        return new EventCommand(taskName, dateTime);
     }
 }

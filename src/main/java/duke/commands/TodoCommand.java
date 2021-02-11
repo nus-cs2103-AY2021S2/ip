@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.DukeException;
+import duke.ParserUtils;
 import duke.Storage;
 import duke.TaskList;
 import duke.models.Task;
@@ -14,7 +15,7 @@ import duke.ui.Ui;
 public class TodoCommand implements Command {
     private String taskName;
 
-    public TodoCommand(String taskName) {
+    protected TodoCommand(String taskName) {
         this.taskName = taskName;
     }
 
@@ -28,5 +29,17 @@ public class TodoCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Creates a new instance of Todo Command
+     * @param argString string with argument
+     * @return instance of Todo Command
+     * @throws DukeException
+     */
+    public static TodoCommand buildInstance(String argString) throws DukeException {
+        String[] cmdArgs = ParserUtils.getCommandArgs(argString, "The description of a todo cannot be empty.");
+        String taskName = cmdArgs[1];
+        return new TodoCommand(taskName);
     }
 }

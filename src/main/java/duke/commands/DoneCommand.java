@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.DukeException;
+import duke.ParserUtils;
 import duke.Storage;
 import duke.TaskList;
 import duke.models.Task;
@@ -13,7 +14,7 @@ import duke.ui.Ui;
 public class DoneCommand implements Command {
     private int index;
 
-    public DoneCommand(int index) {
+    protected DoneCommand(int index) {
         this.index = index;
     }
 
@@ -31,5 +32,17 @@ public class DoneCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Creates a new instance of Done Command
+     * @param argString string with argument
+     * @return instance of Done Command
+     * @throws DukeException
+     */
+    public static DoneCommand buildInstance(String argString) throws DukeException {
+        String[] cmdArgs = ParserUtils.getCommandArgs(argString, "I'm sorry, but done needs the index of a Task.");
+        int index = ParserUtils.parseInt(cmdArgs[1], "The index of the task needs to be an integer.");
+        return new DoneCommand(index);
     }
 }
