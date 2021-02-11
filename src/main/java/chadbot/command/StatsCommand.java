@@ -4,23 +4,24 @@ import chadbot.subfiles.TaskList;
 import chadbot.subfiles.Ui;
 
 /**
- * The HelpCommand class is a command whose execution triggers the display of a help page to users.
+ * The StatsCommand class is a command whose execution triggers the output of the current number of tasks
+ * the user has in his or her task list.
  *
  * @author  arsatis
  * @version 1.2
  * @since   2021-02-08
  */
-public class HelpCommand extends Command {
+public class StatsCommand extends Command {
 
     /**
-     * Default constructor for the HelpCommand class.
+     * Default constructor for the StatsCommand class.
      */
-    public HelpCommand() {
+    public StatsCommand() {
         super("");
     }
 
     /**
-     * Calls the task manager to display a help page containing a list of commands which the user could execute.
+     * Calls the task manager to output the number of to-dos, deadlines, and events that the user currently has.
      *
      * @param taskList A TaskList object containing the list of tasks which the program currently has.
      * @param ui A Ui object which the current program is using to manage interactions with the user.
@@ -28,7 +29,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
-        String output = ui.getHelp();
+        String output = taskList.displayStats();
         System.out.println(output);
         return output;
     }

@@ -79,6 +79,8 @@ public class Ui {
                 + "Enter \"help\" to access this help page again.\n"
                 + "--------------------------------------------------\n"
                 + "Enter \"list\" to display the list of tasks you currently have.\n"
+                + "Enter \"list <date>\" to display the list of deadlines due and events happening on your"
+                + " specified date.\n"
                 + "--------------------------------------------------\n"
                 + "Enter \"find <keyword>\" to find tasks containing the specified keyword.\n"
                 + "--------------------------------------------------\n"
@@ -95,6 +97,8 @@ public class Ui {
                 + " and date into your list of tasks.\n"
                 + "Enter \"event <description> /at <date>\" to add an event with the specified description"
                 + " and date into your list of tasks.\n"
+                + "--------------------------------------------------\n"
+                + "Enter \"stats\" to see the number of to-dos, deadlines, and events you currently have.\n"
                 + "--------------------------------------------------\n"
                 + "Enter \"bye\" to terminate the program.\n";
         return helpPage;
