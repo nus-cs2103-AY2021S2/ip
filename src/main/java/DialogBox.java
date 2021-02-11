@@ -64,6 +64,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         this.setStyle("-fx-background-color: #121212;");
+        dialog.setStyle("-fx-font-size: 16;" + "-fx-text-fill: white");
     }
 
     public static DialogBox welcomeMessage(String text, Image img) {
