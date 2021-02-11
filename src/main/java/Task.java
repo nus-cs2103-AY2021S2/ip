@@ -41,6 +41,11 @@ public abstract class Task {
         return this.getTask().contains(keyword);
     }
 
+    /**
+     * Format Task into format to be saved into storage
+     * so that user can view Task on next return
+     * @return
+     */
     public String saveInStorageAs() {
         return this.getClass().toString() + ", "
                 + this.getCompleted() + ", " + this.getTask();

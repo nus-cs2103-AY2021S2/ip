@@ -22,7 +22,7 @@ class Deadline extends Task {
      */
     public static Deadline readTaskFromStorage(String input) {
         String[] list = input.split(", ", 4);
-        assert list.length == 4: "Todo was stored from previous user visit is corrupted.";
+        assert list.length == 4 : "Todo was stored from previous user visit is corrupted.";
         return new Deadline(list[2], Boolean.parseBoolean(list[1]), LocalDateTime.parse(list[3]));
     }
 

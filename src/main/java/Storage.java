@@ -26,6 +26,7 @@ public class Storage {
             Scanner s = new Scanner(this.file);
             while (s.hasNext()) {
                 String current = s.nextLine().toLowerCase();
+                assert current != null : "current at initilise in Storage";
                 if (current.contains("todo")) {
                     Task task = Todo.readTaskFromStorage(current);
                     tasklist.add(task);
