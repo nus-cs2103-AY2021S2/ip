@@ -26,10 +26,10 @@ public class Parser {
             holder = "Bye. Hope to see you again soon!" + "\n";
         } else if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
                         || input.contains("list") || input.contains("done") || input.contains("delete")
-                        || input.contains("find"))) {
+                        || input.contains("find") || input.contains("reschedule"))) {
             holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n";
         } else if (input.equals("todo") || input.equals("event") || input.equals("deadline")
-                        || input.equals("done") || input.equals("delete") || input.equals("find")) {
+                        || input.equals("done") || input.equals("delete") || input.equals("find") || input.equals("reschedule")) {
             holder = "☹ OOPS!!! The description of a todo cannot be empty." + "\n";
         } else if (input.equals("list")) {
             holder = containsList(arrayList);
@@ -45,6 +45,8 @@ public class Parser {
             holder = containsDelete(arrayList, input);
         } else if (input.contains("find ")) {
             holder = containsFind(arrayList, input);
+        } else if (input.contains("reschedule ")) {
+            holder = containsReschedule(arrayList, input);
         } else {
             holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n";
         }
@@ -56,6 +58,34 @@ public class Parser {
         }
         new Storage().savingFile(arrayList, path);
         return holder + "\n";
+    }
+
+    private String containsReschedule(ArrayList<Task> arrayList, String input) {
+        String holder;
+        // e.g. reschedule 2 /to 02/12/2019 2-4pm
+        int index = Integer.parseInt(input.substring(11, 12));
+
+        holder = "Got it. I've rescheduled and updated this event: " + "\n";
+        String[] parts = input.split("/", 2);
+        String part2 = parts[1];
+
+        if (part2.contains("/")) {
+            String dateString = part2.substring(3, 13);
+            String timeString = part2.substring(13);
+            String temp = dateString.substring(6) + "-" + dateString.substring(3, 5) + "-"
+                    + dateString.substring(0, 2);
+            LocalDate xx = LocalDate.parse(temp);
+            String f = xx.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + timeString;
+
+            Task task = new Event(arrayList.get(index - 1).description, f);
+            holder = holder + task + "\n";
+            arrayList.set(index - 1, task);
+        } else {
+            Task task = new Event(arrayList.get(index - 1).description, part2.substring(3));
+            holder = holder + task + "\n";
+            arrayList.set(index - 1, task);
+        }
+        return holder;
     }
 
     private String containsFind(ArrayList<Task> arrayList, String input) {
