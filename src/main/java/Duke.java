@@ -55,8 +55,8 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
+        stage.setResizable(true);
+        stage.setMinHeight(500.0);
         stage.setMinWidth(400.0);
 
         mainLayout.setPrefSize(400.0, 700.0);
