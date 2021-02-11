@@ -24,8 +24,7 @@ public class Ui {
      * Greets the user upon execution of the program.
      */
     public void greet() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("Welcome to Chadbot.\nWhat can I do for you?");
         showLine();
     }
 
@@ -75,7 +74,8 @@ public class Ui {
      * @return A help page formatted as a String.
      */
     public String getHelp() {
-        String helpPage = "Welcome to Chadbot!\n"
+        String helpPage = "So you need help, eh?\n"
+                + "--------------------------------------------------\n"
                 + "Enter \"help\" to access this help page again.\n"
                 + "--------------------------------------------------\n"
                 + "Enter \"list\" to display the list of tasks you currently have.\n"

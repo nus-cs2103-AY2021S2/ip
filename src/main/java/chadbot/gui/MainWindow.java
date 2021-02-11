@@ -32,8 +32,6 @@ public class MainWindow extends AnchorPane {
     private Image chadRImage = new Image(this.getClass().getResourceAsStream("/images/DaChadR.png"));
     private Image chadLImage = new Image(this.getClass().getResourceAsStream("/images/DaChadL.png"));
     private Image soyjakCry = new Image(this.getClass().getResourceAsStream("/images/DaSoyjakCry.png"));
-
-    // this will be used in the near future
     private Image soyjakSmirk = new Image(this.getClass().getResourceAsStream("/images/DaSoyjakSmirk.png"));
 
     /**
@@ -50,7 +48,7 @@ public class MainWindow extends AnchorPane {
      * @param c The duke object in the Main class.
      */
     public void setDuke(Chadbot c) {
-        String greetingMessage = "Hello! What can I do for you?";
+        String greetingMessage = "Welcome to Chadbot.\nWhat can I do for you?";
 
         chadbot = c;
         chadbot.getStorage().loadData(chadbot.getTaskList());
@@ -69,10 +67,13 @@ public class MainWindow extends AnchorPane {
         String byeResponse = "";
         String input = userInput.getText();
         String response = chadbot.getResponse(input);
+        boolean isHelpRequest = input.toLowerCase().contains("help");
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, chadRImage),
-                DialogBox.getDukeDialog(response, response.equals(errorResponse)
+                DialogBox.getDukeDialog(response, (isHelpRequest || response.equals(byeResponse))
+                        ? soyjakSmirk
+                        : response.equals(errorResponse)
                         ? soyjakCry
                         : chadLImage
                 )
