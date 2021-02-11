@@ -52,7 +52,7 @@ public class Ui {
      * @param relevantTask the newly added Task
      */
     public static void showSuccessfulAdd(int numTasks, Task relevantTask) {
-        System.out.println(HORIZ_SEP + "\n" +  INDENT + " Got it. I've added this task: ");
+        System.out.println(HORIZ_SEP + "\n" + INDENT + " Got it. I've added this task: ");
         System.out.println(INDENT + "   " + relevantTask);
         System.out.println(INDENT + " Now you have " + numTasks + " tasks in the list.");
         System.out.println(HORIZ_SEP + "\n");
@@ -76,7 +76,7 @@ public class Ui {
      * @param relevantTask the deleted Task
      */
     public static void showSuccessfulDelete(int numTasks, Task relevantTask) {
-        System.out.println(HORIZ_SEP + "\n" +  INDENT + " Noted. I've removed this task ");
+        System.out.println(HORIZ_SEP + "\n" + INDENT + " Noted. I've removed this task ");
         System.out.println(INDENT + "   " + relevantTask);
         System.out.println(INDENT + " Now you have " + numTasks + " tasks in the list.");
         System.out.println(HORIZ_SEP + "\n");

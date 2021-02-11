@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.Scanner;
 
@@ -95,10 +93,10 @@ public class Duke {
 
 
 
-            } catch(DukeException exp) {
+            } catch (DukeException exp) {
                 Ui.showDukeException(exp);
 
-            } catch(Exception err) {
+            } catch (Exception err) {
                 err.printStackTrace();
             }
 

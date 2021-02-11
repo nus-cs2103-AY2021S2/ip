@@ -30,7 +30,9 @@ public class TaskList {
         return tasks;
     }
 
-    public Task get(int index) { return tasks.get(index); }
+    public Task get(int index) {
+        return tasks.get(index);
+    }
 
     public void add(Task task) {
         tasks.add(task);

@@ -58,7 +58,7 @@ public class ParserTest {
 
     }
     @Test
-    public void parseCommandForEVENTTest() {
+    public void parseCommandForEventTest() {
         try {
             DukeCommand c = Parser.parseCommand("event event1 /at 2020-04-13 2-4pm");
             assertEquals(c.getCommand(), Command.EVENT);

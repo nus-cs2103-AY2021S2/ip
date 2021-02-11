@@ -38,8 +38,8 @@ public class Deadline extends Task {
      * @return a String representation of the Deadline
      */
     public String fileFormat() {
-        return "D | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | " +
-                this.deadline.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        return "D | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | "
+                + this.deadline.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     /**
@@ -54,8 +54,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + description + " (by: " +
-                deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D][" + getStatusIcon() + "] " + description + " (by: "
+                + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     public LocalDate getDeadline() {

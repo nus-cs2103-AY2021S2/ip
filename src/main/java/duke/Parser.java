@@ -98,7 +98,8 @@ public class Parser {
                 Matcher mt2 = pt2.matcher(details);
 
                 if (!mt1.find() || !mt2.find()) {
-                    throw new DukeException("OOPS!!! The description of a todo should have at least one non digit word character");
+                    throw new DukeException("OOPS!!! The description of a todo should have at least "
+                            + "one non digit word character");
                 }
 
                 return new Todo(details);
@@ -153,16 +154,16 @@ public class Parser {
                 Matcher timeMt = timePt.matcher(timeParams[1]); // timeParams[1] refers to the time
 
                 if (!timeMt.find()) {
-                    throw new DukeException("OOPS!!! Please enter a valid time range in this format \"{start}-{end}\"" +
-                            " and include am/pm after");
+                    throw new DukeException("OOPS!!! Please enter a valid time range in this format \"{start}-{end}\""
+                            + " and include am/pm after");
                 }
 
                 return new Event(eventParams[0], LocalDate.parse(timeParams[0]), timeParams[1]);
             }
 
-        } catch(DukeException err) {
+        } catch (DukeException err) {
             Ui.showDukeException(err);
-        } catch(Exception err) {
+        } catch (Exception err) {
             err.printStackTrace();
         }
 
