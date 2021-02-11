@@ -52,9 +52,9 @@ public class MainWindow extends AnchorPane {
 
         chadbot = c;
         chadbot.getStorage().loadData(chadbot.getTaskList());
-        /* dialogContainer.getChildren().addAll(
+        dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greetingMessage, chadLImage)
-        ); */
+        );
     }
 
     /**

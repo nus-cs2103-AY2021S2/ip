@@ -284,10 +284,10 @@ public class TaskList {
         }
 
         if (events.size() == 0) {
-            output = new StringBuilder("You have no events due on " + date.toString() + ".");
+            output = new StringBuilder("You have no events occurring on " + date.toString() + ".");
         } else {
             int i = 1;
-            output = new StringBuilder("Here are the events due on " + date.toString() + ":");
+            output = new StringBuilder("Here are the events occurring on " + date.toString() + ":");
             for (Event e : events) {
                 output.append("\n").append(i).append(". ").append(e.toString());
                 i++;
@@ -311,7 +311,7 @@ public class TaskList {
             LocalDate date = LocalDate.parse(input);
             String upperOutput = printDeadlinesOnDate(date);
             String lowerOutput = printEventsOnDate(date);
-            return upperOutput + "\n" + lowerOutput;
+            return upperOutput + "\n\n" + lowerOutput;
         } catch (DateTimeParseException e) {
             throw new DateFormatException();
         }
@@ -479,6 +479,7 @@ public class TaskList {
             String typeDate = "/date";
             String typeDescription = "/desc";
             Task t = tasks.get(index);
+            String originalOutput = t.toString();
 
             if (sArray.length < 4) {
                 throw new InvalidInputException();
@@ -492,7 +493,9 @@ public class TaskList {
                 throw new InvalidInputException();
             }
 
-            String output = "Noted. I've edited this task:\n" + t.toString() + "\n";
+            String output = "Noted. I've edited this task:\n"
+                    + originalOutput + "\n \uD83E\uDC13 \n"
+                    + t.toString() + "\n";
             System.out.println(output);
             return output;
         } catch (IndexOutOfBoundsException e) {
