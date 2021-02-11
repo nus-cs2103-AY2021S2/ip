@@ -15,7 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * The MainWindow class is the controller for MainWindow fxml.
+ * Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
 
@@ -42,6 +43,11 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         duke.initialise();
+    /**
+     * Sets and initialises Duke to perform execution of commands.
+     *
+     * @param duke Duke to be initialised to.
+     */
     }
 
     /**
