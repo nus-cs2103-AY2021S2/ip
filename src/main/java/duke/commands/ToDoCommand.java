@@ -7,14 +7,28 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
 
+/**
+ * class ToDoCommand
+ * @author Png Zheng Jie, Sebastian
+ * Description: A class to represent an executable command that corresponds to the user input "todo"
+ */
 public class ToDoCommand extends Command{
-    private CommandWord commandWord = CommandWord.TODO;
     private String toDoDescription;
 
-    public ToDoCommand(String todoDescription) {
-        this.toDoDescription = todoDescription;
+    /**
+     * Constructor: creates a new ToDoCommand
+     * @param toDoDescription description of ToDo
+     */
+    public ToDoCommand(String toDoDescription) {
+        this.toDoDescription = toDoDescription;
     }
 
+    /**
+     * execute: executes the command
+     * @param tasks the list of tasks
+     * @param ui
+     * @param storage
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task toDo = new ToDo(toDoDescription);
@@ -26,6 +40,10 @@ public class ToDoCommand extends Command{
         }
     }
 
+    /**
+     * isExit: checks if Duke should terminate
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }

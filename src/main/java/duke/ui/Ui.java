@@ -6,22 +6,41 @@ import duke.tasks.TaskList;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * class Ui
+ * @author Png Zheng Jie, Sebastian
+ * Description: A class to represent all the messages from Duke to the user
+ */
 public class Ui {
     private static final String SEPARATOR = "____________________________________________________________________________";
     private Scanner sc;
 
+    /**
+     * Constructor: creates a new Ui that takes in user inputs
+     */
     public Ui () {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * readCommand: reads input of commands from the user
+     * @return input command from user
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * showLine: show separator line to user
+     */
     public void showLine() {
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * showToUser: encloses messages from Duke in between the separator lines
+     * @param replyMessage the string of messages from Duke
+     */
     private static void showToUser(String... replyMessage) {
         System.out.println(SEPARATOR);
         for (String m : replyMessage) {
@@ -30,18 +49,30 @@ public class Ui {
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * showWelcome: show welcome message to user
+     */
     public void showWelcome() {
         showToUser("Hello! I'm Duke", "What can I do for you?");
     }
 
+    /**
+     * showGoodbye: show goodbye message to user
+     */
     public void showGoodbye() {
         showToUser("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * showError: show error message to user
+     */
     public void showError(String errorMessage) {
         showToUser(errorMessage);
     }
 
+    /**
+     * showCommands: show list of available commands that Duke recognises to user
+     */
     public void showCommands() {
         showToUser("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                 + "List of recognised user commands:\n"
@@ -54,22 +85,41 @@ public class Ui {
                 + "  7. bye - terminates Duke ☹");
     }
 
+    /**
+     * showAddTask: show to user that task is successfully added to the TaskList
+     * @param task task to be added into the TaskList
+     * @param tasks list of Task
+     */
     public void showAddTask(Task task, TaskList tasks) {
         int numOfTasks = tasks.getSize();
         showToUser("Got it. I've added this task:\n" + "  " + task + "\n" + "Now you have " +
                     numOfTasks + (numOfTasks <= 1 ? " task" : " tasks") + " in the list.");
     }
 
+    /**
+     * showDeleteTask: show to user that task is successfully deleted from the TaskList
+     * @param task task to be deleted from the TaskList
+     * @param tasks list of Task
+     */
     public void showDeleteTask(Task task, TaskList tasks) {
         int numOfTasks = tasks.getSize();
         showToUser("Noted. I've removed this task:\n" + "  " + task + "\n" + "Now you have " + numOfTasks +
                     " tasks in the list.");
     }
 
+    /**
+     * showCompleteTask: show to user that task is successfully marked as completed in the TaskList
+     * @param task task to be marked as completed in the TaskList
+     * @param tasks list of Task
+     */
     public void showCompleteTask(Task task, TaskList tasks) {
         showToUser("Nice! I've marked this task as done:\n" + "  " + task);
     }
 
+    /**
+     * showTaskList: show to user the entire TaskList
+     * @param tasks list of Task
+     */
     public void showTaskList(TaskList tasks) {
         if (tasks.getSize() <= 0) {
             showToUser("There are no tasks at the moment.");
