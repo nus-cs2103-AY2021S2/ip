@@ -46,6 +46,7 @@ public class MainWindow extends AnchorPane {
      * @param chat Chat the Cat.
      */
     public MainWindow(Chat chat) {
+        assert chat != null;
         this.chat = chat;
     }
 
@@ -54,6 +55,11 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert userInput != null; 
+        assert chat != null; 
+        assert userImage != null; 
+        assert chat.getUi() != null; 
+        
         String input = userInput.getText();
         chat.run(input);
         dialogContainer.getChildren().addAll(

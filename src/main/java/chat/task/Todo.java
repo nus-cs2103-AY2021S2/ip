@@ -35,6 +35,8 @@ public class Todo extends Task {
      * @throws ChatException If format of command is wrong.
      */
     public static Todo createTodo (String str) throws ChatException {
+        assert str != "";
+        
         if (!str.startsWith("todo")) {
             //i.e. deadline
             throw new ChatException("wrong instruction for todo\n" +

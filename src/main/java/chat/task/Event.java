@@ -27,6 +27,9 @@ public class Event extends Task {
      */
     private Event (String name, LocalDateTime start, LocalDateTime end) {
         super(name);
+        
+        assert start != null; 
+        assert end != null;
         this.start = start;
         this.end = end;
     }
@@ -41,6 +44,9 @@ public class Event extends Task {
      */
     public Event (boolean isDone, String name, String start, String end) { 
         super(isDone, name);
+
+        assert start != null;
+        assert end != null;
         this.start = LocalDateTime.parse(start, inputFormatter);
         this.end = LocalDateTime.parse(end, inputFormatter);
     }
@@ -53,6 +59,8 @@ public class Event extends Task {
      * @throws ChatException If format of command is wrong.
      */
     public static Event createEvent (String str) throws ChatException {
+        assert str != "";
+        
         String formatStr = "Please input with this format:\n" +
                 "event [name] /at [end date/time]-[start date/time]\n" +
                 "* start and end date/time should be written as dd/MM/yyyy HH:mm\n" +
