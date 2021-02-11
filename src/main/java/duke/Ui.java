@@ -8,15 +8,9 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    /*logo for welcome message.*/
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String DIVIDER =
-            "\n_______________________________________________________\n";
+            "\n_____________________________________________________\n";
 
     private Scanner scForCommandLine = new Scanner(System.in);
 
@@ -26,7 +20,7 @@ public class Ui {
      * Returns the welcome message when first starting duke.
      */
     public String displayWelcomeMessage() {
-        return "Hello from\n" + LOGO + "Hello! I'm Duke\nWhat can I do for you?";
+        return  "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
 
