@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DoneCommand;
 import duke.command.ListCommand;
 import duke.command.DeleteCommand;
+import duke.command.SearchCommand;
 
 import duke.exception.InvalidCommandException;
 import java.text.ParseException;
