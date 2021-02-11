@@ -1,16 +1,8 @@
 package duke.parser;
 
+import duke.Duke;
+import duke.commands.*;
 import duke.exceptions.DukeException;
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.CommandWord;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.InvalidCommand;
-import duke.commands.ListCommand;
-import duke.commands.ToDoCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,6 +87,13 @@ public class Parser {
                         eventMatcher.group("eventDate"));
             }
             break;
+
+        case FIND:
+            if (!commandDescription.isEmpty()) {
+                return new FindCommand(commandDescription);
+            }
+            throw new DukeException("☹ OOPS!!! Please specify a keyword in this format:\n" +
+            "    find [keyword] (E.g. find book)");
 
         case LIST:
             if (commandDescription.isEmpty()) {

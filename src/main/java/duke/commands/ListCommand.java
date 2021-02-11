@@ -17,7 +17,7 @@ public class ListCommand extends Command {
      * @param storage
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTaskList(tasks);
+        ui.showTaskList(tasks, "");
     }
 
     /**

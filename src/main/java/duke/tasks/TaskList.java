@@ -88,4 +88,16 @@ public class TaskList {
             throw new DukeException("☹ OOPS!!! Task " + taskNum + " is not in the task list!");
         }
     }
+
+    public static TaskList findTask(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.description.matches("(.*)" + keyword + "(.*)")) {
+                filteredTasks.add(task);
+            }
+        }
+
+        return new TaskList(filteredTasks);
+    }
 }
