@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     public boolean isDone;
     public String eventName;
