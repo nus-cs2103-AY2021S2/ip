@@ -9,12 +9,14 @@ package chadbot.exceptions;
  * @since   2021-02-08
  */
 public class LoadFailureException extends Exception {
+    /** The message carried by the DateFormatException. */
+    private static final String MESSAGE = "Something went wrong during the loading of your save file.";
 
     /**
      * Default constructor for the LoadFailureException class.
      */
     public LoadFailureException() {
-        super("Something went wrong during the loading of your save file.");
+        super(MESSAGE);
     }
 
 }

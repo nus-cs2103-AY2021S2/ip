@@ -11,7 +11,7 @@ package chadbot.exceptions;
 public class EmptyDateException extends Exception {
 
     /**
-     * Default constructor for the EmptyTimeException class.
+     * Default constructor for the EmptyDateException class.
      *
      * @param s The type of task which triggered this exception.
      */

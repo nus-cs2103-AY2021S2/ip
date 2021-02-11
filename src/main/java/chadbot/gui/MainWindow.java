@@ -1,6 +1,7 @@
 package chadbot.gui;
 
 import chadbot.Chadbot;
+import chadbot.exceptions.InvalidInputException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -46,7 +47,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets the duke object in the Main class to be the duke object in the GUI.
      *
-     * @param d The duke object in the Main class.
+     * @param c The duke object in the Main class.
      */
     public void setDuke(Chadbot c) {
         String greetingMessage = "Hello! What can I do for you?";
@@ -64,7 +65,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String errorResponse = "I'm sorry, but I don't know what that means.";
+        String errorResponse = InvalidInputException.getExceptionMessage();
         String byeResponse = "";
         String input = userInput.getText();
         String response = chadbot.getResponse(input);
