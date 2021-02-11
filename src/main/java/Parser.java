@@ -21,6 +21,7 @@ public class Parser {
      * @return Output String for the associated UI object to display.
      */
     public String parse(String input) {
+        assert input != null;
         StringBuilder outputString = new StringBuilder();
         String[] cmdWithArgs = input.split(" ", 2);
         switch (cmdWithArgs[0]) {
