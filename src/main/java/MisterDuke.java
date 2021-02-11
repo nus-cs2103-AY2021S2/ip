@@ -330,6 +330,7 @@ class Parser {
         String input = command.trim();
         String[] strArray = input.split(" ", 2);
         String cmd = strArray[0].trim();
+        assert !cmd.contains(" ");
 
         if (cmd.equalsIgnoreCase("todo")) {
             return new ToDoCommand(command);
@@ -502,7 +503,7 @@ class DoneCommand extends Command {
     @Override
     public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String[] commandArray = command.trim().split(" ");
-        if (Integer.parseInt(commandArray[1]) > taskList.size()) {
+        if (Integer.parseInt(commandArray[1]) > taskList.size() || Integer.parseInt(commandArray[1]) == 0) {
             return ui.showOutOfBounds();
         } else {
             Task completedTask = taskList.get(Integer.parseInt(commandArray[1]) - 1);
@@ -531,7 +532,7 @@ class DeleteCommand extends Command {
     @Override
     public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String[] commandArray = command.trim().split(" ");
-        if (Integer.parseInt(commandArray[1]) > taskList.size()) {
+        if (Integer.parseInt(commandArray[1]) > taskList.size() || Integer.parseInt(commandArray[1]) == 0) {
             return ui.showOutOfBounds();
         } else {
             return ui.showTaskDelete(taskList, commandArray[1]);
