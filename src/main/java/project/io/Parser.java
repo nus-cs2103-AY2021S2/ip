@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Processes the user commands.
  */
 public class Parser {
-    // todo: try this https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/logic/parser/ParserUtil.java
-    // why do these methods have to be static??
+    // todo: https://github.com/se-edu/addressbook-level3/blob/master
+    //  /src/main/java/seedu/address/logic/parser/ParserUtil.java
 
     /**
      * Returns {@code int} index parameter of 'delete' and 'done' commands.

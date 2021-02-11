@@ -1,13 +1,14 @@
 package task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import project.task.TaskList;
 import project.task.Todo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class TaskListTest {
-    TaskList testTaskList = new TaskList();
+    private TaskList testTaskList = new TaskList();
 
     @Test
     public void hasTasksTest_noTask_false() {

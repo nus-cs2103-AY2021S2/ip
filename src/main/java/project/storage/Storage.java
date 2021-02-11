@@ -1,7 +1,5 @@
 package project.storage;
 
-import project.task.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,12 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import project.task.Deadline;
+import project.task.Event;
+import project.task.Task;
+import project.task.TaskList;
+import project.task.Todo;
+
 /**
  * Handles storing and loading of application data from local file.
  * All {@code Task}s are stored and read from this file.
  */
 public class Storage {
-    // source: https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
+    // source: https://stackoverflow.com/questions/28947250
+    // /create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
     // inserts correct file path separator on *nix and Windows
     private Path dataPath;
 

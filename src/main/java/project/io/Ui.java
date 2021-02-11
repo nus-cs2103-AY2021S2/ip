@@ -92,7 +92,6 @@ public class Ui {
                 + String.format("  Total %s tasks, only %s left to be done!\n",
                 totalNumberOfTasks,
                 totalNumberOfTasksUndone);
-        
         return this.formatResponse(message);
     }
 

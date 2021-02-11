@@ -25,8 +25,8 @@ public enum PrintedText {
     WELCOME_MESSAGE {
         @Override
         public String toString() {
-            return BORDER + "  Hey there, Olaf here!" +
-                    "\n  What will we be doing today?\n" + BORDER;
+            return BORDER + "  Hey there, Olaf here!\n"
+                    + "  What will we be doing today?\n" + BORDER;
         }
     },
 
@@ -90,8 +90,8 @@ public enum PrintedText {
     EMPTY_TASKLIST_ERROR {
         @Override
         public String toString() {
-            return BORDER + "  You don't have any tasks yet :)" +
-                    "\n  Type 'help' to see how you can add a task\n" + BORDER;
+            return BORDER + "  You don't have any tasks yet :)\n"
+                    + "  Type 'help' to see how you can add a task\n" + BORDER;
         }
     },
 }

@@ -1,5 +1,7 @@
 package project;
 
+import java.time.LocalDateTime;
+
 import project.common.PrintedText;
 import project.io.Parser;
 import project.io.Ui;
@@ -9,8 +11,6 @@ import project.task.Event;
 import project.task.Task;
 import project.task.TaskList;
 import project.task.Todo;
-
-import java.time.LocalDateTime;
 
 /**
  * Handles application logic.

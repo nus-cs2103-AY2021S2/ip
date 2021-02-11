@@ -1,11 +1,11 @@
 package project;
 
+import java.io.IOException;
+
 import project.common.PrintedText;
 import project.io.Ui;
 import project.storage.Storage;
 import project.task.TaskList;
-
-import java.io.IOException;
 
 // @@author: VRSoorya
 // adapted from GitHub repo nus-cs2103-AY2021S2/ip

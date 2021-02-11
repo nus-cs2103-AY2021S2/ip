@@ -1,11 +1,11 @@
 plugins {
     id 'java'
     id 'application'
-    // id 'checkstyle'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-group 'org.example'
+group 'cs2103.ay2021.sem2'
 version '0.1'
 
 repositories {
@@ -23,6 +23,10 @@ application {
 
 test {
     useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }
 
 dependencies {
