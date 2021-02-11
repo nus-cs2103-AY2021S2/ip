@@ -61,7 +61,8 @@ class FileReader {
                 }
 
                 Task t = toTask(currStr);
-
+                assert t != null : "task cannot be null";
+                
                 if (isDone) {
                     t.markAsDone();
                 }
