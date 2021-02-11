@@ -43,7 +43,7 @@ public class OlafApp {
         if (command.equalsIgnoreCase("bye")) {
             return ui.showFormatResponse("Aww hope to see you soon, goodbye!...");
         } else if (command.equalsIgnoreCase("list")) {
-            // todo: use try catch here
+            // todo: use try catch here, really is it necessary?
             if (taskList.hasTasks()) {
                 return ui.showList(taskList);
             } else {
