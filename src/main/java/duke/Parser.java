@@ -105,6 +105,7 @@ public class Parser {
     public static Command parseTask(String input) throws DukeToDoException, DukeCommandException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         String[] splitInput = input.split(" ", 2);
+        assert splitInput != null : "splitInput cannot be null";
         String command = splitInput[0];
 
         switch (command) {
@@ -116,7 +117,6 @@ public class Parser {
             return new TaskCommand(command, taskDescription);
 
         case "deadline":
-            assert splitInput[1].contains("/by") : "Missing keyword '/by'";
             String[] taskDetails = splitInput[1].split("/by");
             taskDescription = taskDetails[0].trim();
             LocalDateTime endTime =  LocalDateTime.parse(taskDetails[1].trim(),
@@ -124,7 +124,6 @@ public class Parser {
             return new TaskCommand(command, taskDescription, endTime);
 
         case "event":
-            assert splitInput[1].contains("/at") : "Missing keyword '/at'";
             taskDetails = splitInput[1].split("/at");
             taskDescription = taskDetails[0].trim();
             LocalDateTime eventTime =  LocalDateTime.parse(taskDetails[1].trim(),
