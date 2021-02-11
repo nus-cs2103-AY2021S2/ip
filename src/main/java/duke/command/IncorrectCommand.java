@@ -13,6 +13,11 @@ public class IncorrectCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return this.message;
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+        assert message != null;
+
+        return message;
     }
 }

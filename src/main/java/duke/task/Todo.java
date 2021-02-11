@@ -20,8 +20,9 @@ public class Todo extends Task {
      */
     @Override
     public String toSaveFormat() {
-        String status = super.isDone ? "1" : "0";
-        return String.format("T|%s|%s\n", status, super.description);
+        assert description != null;
+        String status = isDone ? "1" : "0";
+        return String.format("T|%s|%s\n", status, description);
     }
 
     /**
@@ -30,6 +31,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T][%s] %s\n", this.getStatusIcon(), this.description);
+        assert description != null;
+        return String.format("[T][%s] %s\n", getStatusIcon(), description);
     }
 }

@@ -39,6 +39,7 @@ public class Task {
      * @return The task description.
      */
     public String getDescription() {
+        assert description != null;
         return description;
     }
 
@@ -64,6 +65,7 @@ public class Task {
      */
     @Override
     public String toString() {
+        assert description != null;
         return String.format("[%s] %s\n", getStatusIcon(), description);
     }
 }

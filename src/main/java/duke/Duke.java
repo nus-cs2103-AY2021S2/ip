@@ -41,6 +41,9 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
         try {
             Command command = Parser.parseCommand(input);
             String dukeResponse = command.execute(tasks, ui, storage);

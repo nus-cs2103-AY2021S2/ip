@@ -32,6 +32,7 @@ public class TaskList implements Iterable<Task> {
      * @return The task at the specified index in the TaskList.
      */
     public Task get(int index) {
+        assert tasks != null;
         return this.tasks.get(index);
     }
 
@@ -40,6 +41,7 @@ public class TaskList implements Iterable<Task> {
      * @return The number of tasks.
      */
     public int size() {
+        assert tasks != null;
         return this.tasks.size();
     }
 
@@ -48,6 +50,7 @@ public class TaskList implements Iterable<Task> {
      * @param task The specified task.
      */
     public void add(Task task) {
+        assert tasks != null;
         this.tasks.add(task);
     }
 
@@ -57,6 +60,7 @@ public class TaskList implements Iterable<Task> {
      * @return The task which was removed.
      */
     public Task remove(int index) {
+        assert tasks != null;
         return this.tasks.remove(index);
     }
 
@@ -66,6 +70,7 @@ public class TaskList implements Iterable<Task> {
      */
     @Override
     public Iterator<Task> iterator() {
+        assert tasks != null;
         return tasks.iterator();
     }
 
@@ -75,6 +80,7 @@ public class TaskList implements Iterable<Task> {
      */
     @Override
     public String toString() {
+        assert tasks != null;
         StringBuilder string = new StringBuilder();
         for (Task task : tasks) {
             string.append(task.toSaveFormat());
