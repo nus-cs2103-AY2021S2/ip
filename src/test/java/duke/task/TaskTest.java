@@ -9,7 +9,7 @@ class TaskTest {
 
     @Test
     void done() {
-        TaskList.clearAllTask();
+        TaskList.clearAllTasks();
         Todo task = new Todo("Scratch back", " ");
         TaskList.addTask(task);
         TaskList.markDone(1);
@@ -18,7 +18,7 @@ class TaskTest {
 
     @Test
     void delete() {
-        TaskList.clearAllTask();
+        TaskList.clearAllTasks();
         Todo task = new Todo("Scratch back", " ");
         TaskList.addTask(task);
         TaskList.deleteTask(1);

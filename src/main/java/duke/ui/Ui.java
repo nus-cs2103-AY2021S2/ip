@@ -50,7 +50,7 @@ public class Ui {
      * @param t task to be wrapped.
      * @return the String representation of the task name wrapped in a chatBox.
      */
-    public static String biggerBox(Task t) {
+    public static String createAddResponse(Task t) {
         return "Added liao: "
             + t.toString() + Ui.LINEBREAK
             + "You have " + TaskList.getTasksSize() + " tasks in the list!";

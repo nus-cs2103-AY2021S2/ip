@@ -7,6 +7,7 @@ import duke.task.TaskList;
  */
 public class FindCommand extends Command {
     private static final String NO_DATE = "";
+
     /**
      * Constructs a find command object that finds all relevant tasks with the given task.
      * @param task task user want to search for.

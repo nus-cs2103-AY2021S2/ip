@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-import duke.task.Deadlines;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -112,7 +112,7 @@ public class TaskStorage {
                 String done = line[1];
                 String taskName = line[2];
                 String date = line[3];
-                Task t = type == 2 ? new Deadlines(taskName, date, done) : new Event(taskName, date, done);
+                Task t = type == 2 ? new Deadline(taskName, date, done) : new Event(taskName, date, done);
                 TaskList.addTask(t);
                 fileContent.append(t.toString() + "\n");
             }

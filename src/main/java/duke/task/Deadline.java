@@ -3,7 +3,7 @@ package duke.task;
 /**
  * sub-class of Task to represents a task with deadline.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
 
 
     /**
@@ -12,11 +12,11 @@ public class Deadlines extends Task {
      * @param taskName String representation of the name of the task.
      * @param date     String representation of the comments/dates.
      */
-    public Deadlines(String taskName, String date) {
+    public Deadline(String taskName, String date) {
         super(taskName, date);
     }
 
-    public Deadlines(String taskName, String date, String done) {
+    public Deadline(String taskName, String date, String done) {
         super(taskName, date, done);
     }
 

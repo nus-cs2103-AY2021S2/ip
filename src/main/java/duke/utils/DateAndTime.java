@@ -19,7 +19,7 @@ public class DateAndTime {
      * @param date the String representation of date.
      * @return MMM d yyyy format of date and return error message if the given date is in wrong format.
      */
-    public static String converter(String date) {
+    public static String convertDateFormat(String date) {
         if (isDashFormat(date)) {
             try {
                 LocalDate d1 = LocalDate.parse(date.trim());

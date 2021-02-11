@@ -154,7 +154,7 @@ public class Parser {
         }
 
         // Convert the date format.
-        String date = DateAndTime.converter(splitParts[1]);
+        String date = DateAndTime.convertDateFormat(splitParts[1]);
         if (date.equals(Ui.WRONG_DATE_FORMAT)) {
             throw new DukeException(Ui.WRONG_DATE_FORMAT);
         }

@@ -20,7 +20,6 @@ public class DoneCommand extends Command {
         super("done", task, NO_DATE, false, command -> handleDone(task));
     }
 
-
     /**
      * This method handles done instruction by marking the task as done.
      *

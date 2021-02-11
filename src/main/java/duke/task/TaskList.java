@@ -109,7 +109,7 @@ public class TaskList {
     }
 
 
-    public static void clearAllTask() {
+    public static void clearAllTasks() {
         tasks.clear();
     }
 

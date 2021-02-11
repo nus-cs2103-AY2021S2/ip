@@ -12,7 +12,6 @@ public abstract class Command {
     private boolean isExit;
     private final Function<Command, String> func;
 
-
     /**
      * Creates a command with user instruction, task, date and a function to execute the instruction.
      *
@@ -29,7 +28,6 @@ public abstract class Command {
         this.func = func;
     }
 
-
     /**
      * Executes a command and returns response String.
      *
@@ -45,7 +43,6 @@ public abstract class Command {
     public String getTask() {
         return task;
     }
-
     public String getDate() {
         return date;
     }

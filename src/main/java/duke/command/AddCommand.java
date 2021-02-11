@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.task.Deadlines;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -32,7 +32,6 @@ public class AddCommand extends Command {
         });
     }
 
-
     /**
      * This method handles todo instruction and creates a Todo task.
      *
@@ -42,7 +41,7 @@ public class AddCommand extends Command {
         Todo todo = new Todo(task);
         TaskList.addTask(todo);
         Statistics.updateStatistics(todo);
-        return Ui.biggerBox(todo);
+        return Ui.createAddResponse(todo);
     }
 
     /**
@@ -51,10 +50,10 @@ public class AddCommand extends Command {
      * @param task name of the user task.
      */
     private static String handleDeadline(String task, String date) {
-        Deadlines deadlines = new Deadlines(task, date);
+        Deadline deadlines = new Deadline(task, date);
         TaskList.addTask(deadlines);
         Statistics.updateStatistics(deadlines);
-        return Ui.biggerBox(deadlines);
+        return Ui.createAddResponse(deadlines);
     }
 
     /**
@@ -66,6 +65,6 @@ public class AddCommand extends Command {
         Event event = new Event(task, date);
         TaskList.addTask(event);
         Statistics.updateStatistics(event);
-        return Ui.biggerBox(event);
+        return Ui.createAddResponse(event);
     }
 }

@@ -14,7 +14,6 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
     private static final String NO_DATE = "";
 
-
     /**
      * Creates a DeleteCommand object with given task and date.
      * @param task index of the task to be deleted.
@@ -23,7 +22,6 @@ public class DeleteCommand extends Command {
         super("delete", task, NO_DATE, false,
             command -> handleDelete(task));
     }
-
 
     /**
      * This method handles delete instruction.
