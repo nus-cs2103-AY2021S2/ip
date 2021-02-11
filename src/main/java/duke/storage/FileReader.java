@@ -76,33 +76,37 @@ class FileReader {
     }
 
     private Task toTask(String input) {
-            Scanner sc = new Scanner(input);
-            String command = sc.next();
+        Scanner sc = new Scanner(input);
+        String command = sc.next();
 
-            String[] args = sc.nextLine().split("[|]");
+        String[] args = sc.nextLine().split("[|]");
 
-            String first = args[0].trim();
-            String second = null;
-            String preposition = null;
-            LocalDate date = null;
+        String first = args[0].trim();
+        String second = null;
+        String preposition = null;
+        LocalDate date = null;
 
-            if (args.length == 2) {
-                second = args[1].trim();
-                String[] prepositionAndDate = second.split("[\\s]");
-                preposition = prepositionAndDate[0];
-                date = LocalDate.parse(prepositionAndDate[1]);
-            }
+        if (args.length == 2) {
+            second = args[1].trim();
+            assert !second.equals("") : "Missing a date and preposition.";
 
-            switch (command) {
-            case "todo":
-                return new Todo(first);
-            case "event":
-                return new Event(first, preposition, date);
-            case "deadline":
-                return new Deadline(first, preposition, date);
-            default:
-                return null;
-            }
+            String[] prepositionAndDate = second.split("[\\s]");
+            preposition = prepositionAndDate[0];
+            date = LocalDate.parse(prepositionAndDate[1]);
+
+            assert date != null : "Missing a date here.";
+        }
+
+        switch (command) {
+        case "todo":
+            return new Todo(first);
+        case "event":
+            return new Event(first, preposition, date);
+        case "deadline":
+            return new Deadline(first, preposition, date);
+        default:
+            return null;
+        }
     }
 
 }
