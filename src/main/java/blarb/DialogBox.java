@@ -37,6 +37,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
     }
 
     /**
@@ -47,7 +48,10 @@ public class DialogBox extends HBox {
      * @return Generated DialogBox.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.getStylesheets().add("/view/DialogBox.css");
+        db.dialog.getStyleClass().add("user");
+        return db;
     }
 
     /**
@@ -57,9 +61,26 @@ public class DialogBox extends HBox {
      * @param img  Blarb picture.
      * @return Generated DialogBox.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getBlarbDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
+        db.dialog.getStylesheets().add("/view/DialogBox.css");
+        db.dialog.getStyleClass().add("bot");
+        return db;
+    }
+
+    /**
+     * Generates a DialogBox for Blarb warning output.
+     *
+     * @param text Blarb output text.
+     * @param img  Blarb picture.
+     * @return Generated DialogBox.
+     */
+    public static DialogBox getWarnDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
+        db.flip();
+        db.dialog.getStylesheets().add("/view/DialogBox.css");
+        db.dialog.getStyleClass().add("warn");
         return db;
     }
 

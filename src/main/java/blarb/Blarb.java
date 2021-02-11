@@ -77,13 +77,16 @@ public class Blarb {
      * @param input User input string.
      * @return Response string.
      */
-    public String getResponse(String input) {
+    public String[] getResponse(String input) {
         Output output = processor.execute(input, tasklist, storage);
         String normal = output.normal;
         String warn = output.warn
                 .map(x -> String.format("!!! %s\n", x))
                 .orElse("");
-        return String.format("%s%s", warn, normal);
+        String[] outputStr = new String[2];
+        outputStr[0] = String.format("%s%s", warn, normal);
+        outputStr[1] = String.valueOf(output.isNotice);
+        return outputStr;
     }
 
     /**

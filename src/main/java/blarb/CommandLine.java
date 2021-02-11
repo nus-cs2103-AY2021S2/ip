@@ -13,7 +13,7 @@ class CommandLine {
      * @param command     The main command.
      * @param description The description of the main command.
      */
-    public CommandLine(Command command, String ...description) {
+    public CommandLine(Command command, String... description) {
         this.command = command;
         assert description.length < 2;
         if (description.length > 0) {
