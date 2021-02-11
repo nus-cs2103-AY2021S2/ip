@@ -7,8 +7,6 @@ public class HelpCommand extends Command {
 
     /** String input to execute this command */
     public static final String COMMAND = "help";
-    /** Error message for invalid command help message */
-    public static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid command.\n";
     /** Command list for help message */
     public static final String COMMAND_LIST = "\tCommands available:\n"
             + "\t\t- list\n"
@@ -20,15 +18,11 @@ public class HelpCommand extends Command {
             + "\t\t- delete [task number]\n"
             + "\t\t- help\n"
             + "\t\t- bye\n";
-    private final boolean showError;
 
     /**
-     * Class constructor specifying if error message should be returned in command response after execution.
-     *
-     * @param showError Boolean value to specify if error message should be returned in command response.
+     * Default class constructor.
      */
-    public HelpCommand(boolean showError) {
-        this.showError = showError;
+    public HelpCommand() {
     }
 
     @Override
@@ -43,10 +37,6 @@ public class HelpCommand extends Command {
 
     @Override
     public String execute() {
-        if (showError) {
-            return ERROR_MESSAGE + COMMAND_LIST;
-        } else {
-            return COMMAND_LIST;
-        }
+        return COMMAND_LIST;
     }
 }

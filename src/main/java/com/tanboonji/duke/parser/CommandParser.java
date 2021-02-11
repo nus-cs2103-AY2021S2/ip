@@ -22,6 +22,7 @@ import com.tanboonji.duke.exception.DukeException;
 public class CommandParser {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("\\W*(\\S+)\\W*(.*)");
+    private static final String INVALID_COMMAND_MESSAGE = "Sorry, please enter a valid command.\n";
 
     /**
      * Parses input from String class to Command class.
@@ -33,7 +34,7 @@ public class CommandParser {
     public static Command parse(String input) {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
         if (!matcher.matches()) {
-            return new HelpCommand(true);
+            return new InvalidCommand(INVALID_COMMAND_MESSAGE);
         }
 
         String command = matcher.group(1).trim();
@@ -54,13 +55,13 @@ public class CommandParser {
             case DeleteCommand.COMMAND:
                 return DeleteCommand.parseArguments(arguments);
             case HelpCommand.COMMAND:
-                return new HelpCommand(false);
+                return new HelpCommand();
             case ByeCommand.COMMAND:
                 return new ByeCommand();
             case FindCommand.COMMAND:
                 return FindCommand.parseArguments(arguments);
             default:
-                return new HelpCommand(true);
+                return new InvalidCommand(INVALID_COMMAND_MESSAGE);
             }
         } catch (DukeException e) {
             return new InvalidCommand(e.getMessage());

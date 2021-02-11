@@ -1,7 +1,6 @@
 package com.tanboonji.duke;
 
 import com.tanboonji.duke.command.Command;
-import com.tanboonji.duke.command.HelpCommand;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.TaskList;
 import com.tanboonji.duke.parser.CommandParser;
@@ -48,13 +47,11 @@ public class Duke {
             command.addTaskList(taskList);
             String result = command.execute();
 
-            if (command.shouldSave()) {
+            if (command.shouldSaveData()) {
                 storage.save(taskList);
             }
 
             return result;
-        } catch (IllegalArgumentException e) {
-            return HelpCommand.ERROR_MESSAGE + HelpCommand.COMMAND_LIST;
         } catch (DukeException e) {
             return e.getMessage();
         }
