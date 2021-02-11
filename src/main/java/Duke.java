@@ -1,6 +1,11 @@
 import java.io.IOException;
 
-import java.util.Scanner;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
 
 /**
  * Represents the chatbot Duke.
@@ -9,11 +14,13 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
+    private Image userimg = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeimg = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
      * Constructor for Duke.
      */
-    Duke() {
+    public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
         try {
@@ -24,30 +31,39 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        Duke duke = new Duke();
-        Scanner scanner = new Scanner(System.in);
-        duke.chat(scanner, duke.tasks);
-    }
-
     /**
      * Allows user to start chatting with Duke.
-     * @param scanner For user to input commands.
+     * @param input Command from user.
      * @param tasks List of tasks user has saved.
      * @throws IOException If exception occurs when method is running.
      */
-    public void chat(Scanner scanner, TaskList tasks) throws IOException {
-        this.ui.welcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = scanner.nextLine();
-                Command command = Parser.parse(input);
-                command.execute(tasks, this.ui, this.storage);
-                isExit = command.isExit();
-            } catch (Exception e) {
-                this.ui.showError(e.getMessage());
-            }
+    public String chat(String input, TaskList tasks) throws IOException {
+        String s = "";
+        try {
+            Command command = Parser.parse(input);
+            s = command.execute(tasks, this.ui, this.storage);
+        } catch (Exception e) {
+            s = this.ui.showError(e.getMessage());
         }
+        return s;
+    }
+
+    /**
+     * Gets the appropriate response from duke.
+     * @param input Command given by user.
+     * @param duke Duke chatbot.
+     * @return Appropriate response given command.
+     * @throws IOException
+     */
+    public String getResponse(String input, Duke duke) throws IOException {
+        return duke.chat(input, duke.tasks);
+    }
+
+    /**
+     * Allows other classes to access the Ui of duke.
+     * @return Ui of duke.
+     */
+    public Ui getUi() {
+        return this.ui;
     }
 }

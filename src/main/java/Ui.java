@@ -6,33 +6,31 @@ public class Ui {
     /**
      * Welcomes the user.
      */
-    void welcome() {
-        System.out.println("Hello! I'm Duke. What can I do for you?\n");
+    String welcome() {
+        return "Hello! I'm Duke. What can I do for you?\n";
     }
 
     /**
      * Bids the user farewell.
      */
-    void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Displays the saved tasks of the user.
      * @param list Saved tasks
      */
-    void list(String list) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(list);
+    String list(String list) {
+        return "Here are the tasks in your list:\n" + list;
     }
 
     /**
      * Reminds user that a task is completed.
      * @param task Completed task.
      */
-    void done(String task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task + "\n");
+    String done(String task) {
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
@@ -40,19 +38,16 @@ public class Ui {
      * @param task Deleted task.
      * @param tasks Number of saved tasks after deleting.
      */
-    void delete(String task, int tasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println(String.format("Now you have %s tasks in the list.", tasks) + "\n");
+    String delete(String task, int tasks) {
+        return "Noted. I've removed this task:\n" + task + "\n" + String.format("Now you have %s tasks in the list.", tasks);
     }
 
     /**
      * Reminds user of saved tasks found.
      * @param string Saved tasks found.
      */
-    void find(String string) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(string);
+    String find(String string) {
+        return "Here are the matching tasks in your list:\n" + string;
     }
 
     /**
@@ -60,17 +55,15 @@ public class Ui {
      * @param task Saved task.
      * @param tasks Number of tasks after saving.
      */
-    void addTask(String task, int tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println(String.format("Now you have %s tasks in the list.", tasks) + "\n");
+    String addTask(String task, int tasks) {
+        return "Got it. I've added this task:\n" + task + "\n" + String.format("Now you have %s tasks in the list.", tasks);
     }
 
     /**
      * Reminds user to provide valid input.
      * @param errormsg Error Message.
      */
-    void showError(String errormsg) {
-        System.out.println(errormsg + "\n");
+    String showError(String errormsg) {
+        return errormsg;
     }
 }

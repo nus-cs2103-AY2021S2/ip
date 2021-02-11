@@ -16,11 +16,11 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         String task = tasks.get(this.taskNo - 1).toString();
         tasks.remove(this.taskNo - 1);
-        ui.delete(task, tasks.size());
         storage.saveTasks(tasks);
+        return ui.delete(task, tasks.size());
     }
 
     /**

@@ -7,8 +7,8 @@ public class ExitCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.bye();
+    String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.bye();
     }
 
     /**

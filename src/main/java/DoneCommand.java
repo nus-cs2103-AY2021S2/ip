@@ -16,10 +16,10 @@ public class DoneCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.set(this.taskNo - 1, tasks.get(this.taskNo - 1).done());
-        ui.done(tasks.get(this.taskNo - 1).toString());
         storage.saveTasks(tasks);
+        return ui.done(tasks.get(this.taskNo - 1).toString());
     }
 
     /**

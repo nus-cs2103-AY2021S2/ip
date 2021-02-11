@@ -16,11 +16,11 @@ public class ToDoCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new ToDo(this.todo);
         tasks.add(task);
-        ui.addTask(task.toString(), tasks.size());
         storage.saveTasks(tasks);
+        return ui.addTask(task.toString(), tasks.size());
     }
 
     /**

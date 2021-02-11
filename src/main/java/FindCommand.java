@@ -16,7 +16,7 @@ public class FindCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) {
         String string = "";
         for (int i = 0; i < tasks.size(); i++) {
             int index = tasks.get(i).toString().indexOf(this.name);
@@ -24,7 +24,7 @@ public class FindCommand extends Command {
                 string += String.valueOf(i + 1) + "." + tasks.get(i).toString() + "\n";
             }
         }
-        ui.find(string);
+        return ui.find(string);
     }
 
     /**
