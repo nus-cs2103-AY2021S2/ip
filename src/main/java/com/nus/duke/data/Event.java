@@ -13,7 +13,7 @@ public class Event extends Task {
     /**
      * Indicates the time of the event.
      */
-    protected LocalDateTime at;
+    protected final LocalDateTime at;
 
     public Event(String description, LocalDateTime at) {
         super(description);

@@ -7,8 +7,8 @@ import com.nus.duke.storage.TaskListStorage;
 
 public class Logic {
 
-    private TaskListStorage storage;
-    private CommandParser parser;
+    private final TaskListStorage storage;
+    private final CommandParser parser;
     private TaskList taskList;
 
     public Logic() {
@@ -19,6 +19,7 @@ public class Logic {
         } catch (DukeStorageException e) {
             this.taskList = new TaskList();
         }
+        assert this.taskList != null;
     }
 
     public Command parseInputForCommand(String userInput) {
