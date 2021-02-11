@@ -27,7 +27,7 @@ public class Storage {
         try {
             file.createNewFile();
         } catch (IOException e) {
-
+            System.out.println(e.getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ public class Storage {
 
             writer.close();
         } catch (FileNotFoundException e) {
-
+            System.out.println(e.getMessage());
         }
     }
 }
