@@ -4,6 +4,7 @@ import chadbot.command.AddCommand;
 import chadbot.command.Command;
 import chadbot.command.DeleteCommand;
 import chadbot.command.DoneCommand;
+import chadbot.command.EditCommand;
 import chadbot.command.ExitCommand;
 import chadbot.command.FindCommand;
 import chadbot.command.HelpCommand;
@@ -40,6 +41,8 @@ public class Parser {
             return new FindCommand(s);
         case "done":
             return new DoneCommand(s);
+        case "edit":
+            return new EditCommand(s);
         case "delete":
             return new DeleteCommand(s);
         case "sort":

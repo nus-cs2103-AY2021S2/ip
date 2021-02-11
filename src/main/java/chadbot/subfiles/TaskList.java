@@ -11,6 +11,7 @@ import chadbot.exceptions.EmptyDescriptionException;
 import chadbot.exceptions.InvalidInputException;
 import chadbot.exceptions.ListOutOfBoundsException;
 import chadbot.exceptions.LoadFailureException;
+import chadbot.exceptions.TaskTypeErrorException;
 import chadbot.task.Deadline;
 import chadbot.task.Event;
 import chadbot.task.Task;
@@ -55,8 +56,9 @@ public class TaskList {
      *
      * @param input The user input.
      * @return The date specified in the user input.
+     * @throws DateTimeParseException If the specified date is incorrectly formatted.
      */
-    private LocalDate getTaskDate(String input) {
+    private LocalDate getTaskDate(String input) throws DateTimeParseException {
         int splitLimit = 2;
         int startIndex = 3;
         String splitRegex = " /";
@@ -352,6 +354,24 @@ public class TaskList {
     }
 
     /**
+     * Returns the index specified by the user after parsing it as an int.
+     *
+     * @param input User input.
+     * @return Index specified by the user, parsed as an int.
+     * @throws InvalidInputException If the user provided a non-integer index in the user input.
+     */
+    private int getIndex(String input) throws InvalidInputException {
+        try {
+            int offset = 1;
+            String splitRegex = " ";
+            String[] sArray = input.split(splitRegex);
+            return Integer.parseInt(sArray[1]) - offset;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidInputException();
+        }
+    }
+
+    /**
      * Marks a task that is specified by the user as done. The user should specify the index of the task
      * in the list which he or she intends to mark as done.
      *
@@ -362,15 +382,7 @@ public class TaskList {
      * @throws ListOutOfBoundsException If the user provided an index which is not in the list.
      */
     public String markDone(String input) throws InvalidInputException, ListOutOfBoundsException {
-        int index;
-
-        try {
-            String splitRegex = " ";
-            String[] sArray = input.split(splitRegex);
-            index = Integer.parseInt(sArray[1]) - 1;
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidInputException();
-        }
+        int index = getIndex(input);
 
         try {
             tasks.get(index).setDone();
@@ -394,15 +406,7 @@ public class TaskList {
      * @throws ListOutOfBoundsException If the user provided an index which is not in the list.
      */
     public String deleteTask(String input) throws InvalidInputException, ListOutOfBoundsException {
-        int index;
-
-        try {
-            String splitRegex = " ";
-            String[] sArray = input.split(splitRegex);
-            index = Integer.parseInt(sArray[1]) - 1;
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidInputException();
-        }
+        int index = getIndex(input);
 
         try {
             Task t = tasks.remove(index);
@@ -410,6 +414,85 @@ public class TaskList {
             String output = "Noted. I've removed this task:\n"
                     + t.toString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list.";
+            System.out.println(output);
+            return output;
+        } catch (IndexOutOfBoundsException e) {
+            throw new ListOutOfBoundsException(tasks.size());
+        }
+    }
+
+    /**
+     * Modifies the date of a deadline or event.
+     *
+     * @param task The task which the user is trying to modify.
+     * @param date The new date of the deadline or event.
+     * @throws TaskTypeErrorException If the user attempts to modify the date of a non-deadline and non-event.
+     * @throws DateFormatException If the specified date is incorrectly formatted.
+     */
+    private void editTaskDate(Task task, String date) throws TaskTypeErrorException, DateFormatException {
+        try {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
+                d.setDate(LocalDate.parse(date));
+            } else if (task instanceof Event) {
+                Event e = (Event) task;
+                e.setDate(LocalDate.parse(date));
+            } else {
+                throw new TaskTypeErrorException();
+            }
+        } catch (DateTimeParseException e) {
+            throw new DateFormatException();
+        }
+    }
+
+    /**
+     * Modifies the description of a task.
+     *
+     * @param task The task which the user is trying to modify.
+     * @param description The new description of the task.
+     */
+    private void editTaskDescription(Task task, String description) {
+        task.setName(description);
+    }
+
+    /**
+     * Edit a task that is specified by the user from the list of tasks. The user should specify the index
+     * of the task in the list which he or she intends to edit, and the new description or date.
+     *
+     * @param input User input containing the index of the task to be edited, in String format.
+     * @return Duke's response to the user.
+     * @throws InvalidInputException If the user provided a non-integer index in the user input.
+     * @throws ListOutOfBoundsException If the user provided an index which is not in the list.
+     * @throws TaskTypeErrorException If the user attempts to modify the date of a non-deadline and non-event.
+     * @throws DateFormatException If the specified date is incorrectly formatted.
+     */
+    public String editTask(String input) throws InvalidInputException, ListOutOfBoundsException,
+            TaskTypeErrorException, DateFormatException {
+        int index = getIndex(input);
+        int splitLimit = 4;
+        String splitRegex = " ";
+        String[] sArray = input.split(splitRegex, splitLimit);
+
+        try {
+            int commandType = 2;
+            int leftover = 3;
+            String typeDate = "/date";
+            String typeDescription = "/desc";
+            Task t = tasks.get(index);
+
+            if (sArray.length < 4) {
+                throw new InvalidInputException();
+            }
+
+            if (sArray[commandType].equals(typeDate)) {
+                editTaskDate(t, sArray[leftover]);
+            } else if (sArray[commandType].equals(typeDescription)) {
+                editTaskDescription(t, sArray[leftover]);
+            } else {
+                throw new InvalidInputException();
+            }
+
+            String output = "Noted. I've edited this task:\n" + t.toString() + "\n";
             System.out.println(output);
             return output;
         } catch (IndexOutOfBoundsException e) {
@@ -483,7 +566,7 @@ public class TaskList {
      * Sorts the list of tasks based on their name, in alphabetical ordering.
      */
     public void sortTasksByName() {
-        Collections.sort(tasks, new TaskComparator());
+        tasks.sort(new TaskComparator());
     }
 
     /**

@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task implements Comparable<Event> {
     /** Date which the event is held on. */
-    private final LocalDate date;
+    private LocalDate date;
 
     /**
      * Default constructor for the Event class.
@@ -45,6 +45,13 @@ public class Event extends Task implements Comparable<Event> {
      */
     public LocalDate getDateAsLocalDate() {
         return date;
+    }
+
+    /**
+     * Modifies the date the Event is held on.
+     */
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     /**
