@@ -19,6 +19,7 @@ public class Storage {
     public void loadingFile(ArrayList<Task> arrayList, Scanner s) {
         while (s.hasNextLine()) {
             String line = s.nextLine();
+            assert line != null;
             if (line.contains("[D]")) {
                 String[] parts = line.split("by");
                 String part1 = parts[0];
@@ -57,6 +58,7 @@ public class Storage {
      * @param path specifies to file path to write to
      */
     public void savingFile(ArrayList<Task> arrayList, String path) {
+        assert path != null;
         try {
             int i = 0;
             if (arrayList.size() == 0) {
@@ -87,6 +89,8 @@ public class Storage {
      */
 
     private static void writeToFile(String path, String s) throws IOException {
+        assert path != null;
+        assert s != null;
         FileWriter fw = new FileWriter(path);
         fw.write(s);
         fw.close();
@@ -98,6 +102,8 @@ public class Storage {
      * @return Nothing.
      */
     private static void appendToFile(String path, String textToAppend) throws IOException {
+        assert path != null;
+        assert textToAppend != null;
         FileWriter fw = new FileWriter(path, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();

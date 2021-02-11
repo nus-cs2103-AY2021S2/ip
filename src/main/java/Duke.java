@@ -36,7 +36,7 @@ public class Duke {
         }
         assert s != null;
         new Storage().loadingFile(arrayList, s);
-
+        assert input != null;
         return new Parser().makingSenseOfUserCommand(arrayList, path, input);
 
 
