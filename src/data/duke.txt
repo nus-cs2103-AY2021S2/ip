@@ -7,3 +7,4 @@ T ; 0 ; didnt skate
 T ; 0 ; icecream chillin
 T ; 0 ; skate
 T ; 1 ; hibye
+T ; 0 ; nihao

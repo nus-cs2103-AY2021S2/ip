@@ -63,6 +63,9 @@ public class Duke {
                 String keyword = inputArr[1];
                 response = ui.findTask(keyword, tasks.getList());
                 break;
+            case HELP:
+                response = ui.viewHelpMessage();
+                break;
             case TODO:
                 parser.isValidDescription(inputArr);
                 description = parser.getDescription(inputArr, "todo");
