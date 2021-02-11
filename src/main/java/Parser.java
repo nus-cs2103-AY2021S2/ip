@@ -9,6 +9,7 @@ public class Parser {
      * @return The Command object to be executed
      */
     public static Command parse(String[] input) {
+        assert input.length > 0;
         String command = input[0];
         String[] args = Arrays.copyOfRange(input, 1, input.length);
 

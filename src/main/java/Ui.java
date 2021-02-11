@@ -26,6 +26,7 @@ public class Ui {
      * @param message The message to echo
      */
     public String echo(String message) {
+        assert message.length() > 0;
         return name + ": " + message;
     }
 
