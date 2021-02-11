@@ -130,7 +130,9 @@ public class DialogBox extends HBox {
             Hyperlink link = new Hyperlink(match);
             link.setOnMouseClicked((event) -> {
                 try {
-                    Desktop.getDesktop().browse(new URL(match).toURI());
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().browse(new URL(match).toURI());
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (URISyntaxException e) {
