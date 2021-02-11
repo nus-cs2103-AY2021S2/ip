@@ -7,7 +7,7 @@ public class Deadlines extends Task {
 
 
     /**
-     * create a deadline task object with given task name and given dates/comments.
+     * creates a deadline task object with given task name and given dates/comments.
      *
      * @param taskName String representation of the name of the task.
      * @param date     String representation of the comments/dates.

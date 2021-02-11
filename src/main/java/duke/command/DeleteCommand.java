@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
 
 
     /**
-     * Create a DeleteCommand object with given task and date.
+     * Creates a DeleteCommand object with given task and date.
      * @param task index of the task to be deleted.
      */
     public DeleteCommand(String task) {
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
 
 
     /**
-     * handle delete command key in by user by removing the task from the list if there is any.
+     * This method handles delete instruction.
      *
      * @param task user task in String.
      */

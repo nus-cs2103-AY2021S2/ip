@@ -6,13 +6,18 @@ import java.util.List;
 import duke.ui.ErrorBox;
 import duke.ui.Ui;
 
-
+/**
+ * This class encapsulate a list of Task.
+ */
 public class TaskList {
     private static List<Task> tasks = new ArrayList<>();
 
-
-    public static void addTask(Task t) {
-        tasks.add(t);
+    /**
+     * Add a user task to the list.
+     * @param task user task keyed in.
+     */
+    public static void addTask(Task task) {
+        tasks.add(task);
         assert tasks.size() >= 1 : "Task is not added successfully";
     }
 
@@ -65,7 +70,7 @@ public class TaskList {
 
 
     /**
-     * Display all the tasks in the list.
+     * This method displays all the tasks in the list.
      */
     public static String listTasks() {
         StringBuilder sb = new StringBuilder();
@@ -82,7 +87,7 @@ public class TaskList {
     }
 
     /**
-     * Delete a task in the task list with the given index.
+     * This method delete a task in the task list with the given index.
      *
      * @param i the index labelling of the task.
      */
@@ -102,6 +107,7 @@ public class TaskList {
             return "";
         }
     }
+
 
     public static void clearAllTask() {
         tasks.clear();

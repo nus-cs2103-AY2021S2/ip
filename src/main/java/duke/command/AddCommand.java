@@ -14,11 +14,11 @@ import duke.utils.Statistics;
 public class AddCommand extends Command {
 
     /**
-     * Create a AddCommand object for execution.
+     * Creates a AddCommand object for execution.
      *
      * @param instruction user instruction.
-     * @param task        task name of the user in String.
-     * @param date        date of the user task to be done.
+     * @param task task name of the user in String.
+     * @param date date of the user task to be done.
      */
     public AddCommand(String instruction, String task, String date) {
         super(instruction, task, date, false, command -> {
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
 
 
     /**
-     * handle todo command and create a todo task if task is not empty.
+     * This method handles todo instruction and creates a Todo task.
      *
      * @param task name of the user task.
      */
@@ -45,7 +45,11 @@ public class AddCommand extends Command {
         return Ui.biggerBox(todo);
     }
 
-
+    /**
+     * This method handles deadline instruction and creates a Deadline task.
+     *
+     * @param task name of the user task.
+     */
     private static String handleDeadline(String task, String date) {
         Deadlines deadlines = new Deadlines(task, date);
         TaskList.addTask(deadlines);
@@ -53,7 +57,11 @@ public class AddCommand extends Command {
         return Ui.biggerBox(deadlines);
     }
 
-
+    /**
+     * This method handles event instruction and creates a Event task.
+     *
+     * @param task name of the user task.
+     */
     private static String handleEvent(String task, String date) {
         Event event = new Event(task, date);
         TaskList.addTask(event);

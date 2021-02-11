@@ -34,7 +34,9 @@ public class MainMenu {
     }
 
 
-
+    /**
+     * This method transits from current window to the MainWindow.
+     */
     @FXML
     private void switchWindow() {
         try {

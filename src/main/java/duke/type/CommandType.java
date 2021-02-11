@@ -1,7 +1,7 @@
 package duke.type;
 
 /**
- * Encapsulate a CommandType enum class that represents the type of command.
+ * Encapsulates a CommandType enum class that represents the type of command.
  * The class includes seven types: todo, deadline, event, bye, list, delete, done and find.
  */
 public enum CommandType {
@@ -19,7 +19,7 @@ public enum CommandType {
 
 
     /**
-     * Construct a CommandType object with a String representation of the type.
+     * Constructs a CommandType object with a String representation of the type.
      *
      * @param type String representation of the type.
      */

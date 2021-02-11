@@ -8,7 +8,7 @@ import duke.ui.Ui;
  */
 public class ErrorCommand extends Command {
     /**
-     * Create an ErrorCommand object that return error message when executed.
+     * Creates an ErrorCommand object that return error message when executed.
      *
      */
     public ErrorCommand() {

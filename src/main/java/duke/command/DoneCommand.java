@@ -7,13 +7,13 @@ import duke.ui.Ui;
 
 
 /**
- * Sub-class of Command that represents and execute the done instruction of user.
+ * Sub-class of Command that represents and executes the done instruction of user.
  */
 public class DoneCommand extends Command {
     private static final String NO_DATE = "";
 
     /**
-     * Create a DoneCommand object with the given task.
+     * Creates a DoneCommand object with the given task.
      * @param task user task.
      */
     public DoneCommand(String task) {
@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
 
 
     /**
-     * handle done command by marking the task as done.
+     * This method handles done instruction by marking the task as done.
      *
      * @param task name of the user task.
      */

@@ -2,7 +2,7 @@ package duke.task;
 
 
 /**
- * A class that store the task that user key in.
+ * A class that stores the task that user key in.
  */
 public class Task {
     private final String taskName;
@@ -11,7 +11,7 @@ public class Task {
     private final String date;
 
     /**
-     * Construct a task object with taskName attached and its index label in the taskList.
+     * Constructs a task object with taskName attached and its index label in the taskList.
      *
      * @param taskName name of the task.
      */
@@ -49,7 +49,7 @@ public class Task {
     }
 
     /**
-     * Mark the task status as done with the notation X.
+     * Marks the task status as done with the notation X.
      */
     public void markDone() {
         this.isDone = "X";
@@ -57,7 +57,7 @@ public class Task {
 
 
     /**
-     * Get the name of the task.
+     * Gets the name of the task.
      *
      * @return a String representation of the task name.
      */
@@ -67,7 +67,7 @@ public class Task {
 
 
     /**
-     * get the isDone status of the task.
+     * Gets the isDone status of the task.
      *
      * @return a String representation of the isDone status (X for done).
      */
@@ -76,7 +76,7 @@ public class Task {
     }
 
     /**
-     * get the index label of the task.
+     * Gets the index label of the task.
      *
      * @return the int representation of the index label.
      */

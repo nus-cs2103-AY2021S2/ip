@@ -7,7 +7,7 @@ public class Event extends Task {
 
 
     /**
-     * Create a event Task with given task name and given comments/dates.
+     * Creates a event Task with given task name and given comments/dates.
      *
      * @param taskName name of the task.
      * @param date     dates or comments of the user regarding the task.

@@ -4,11 +4,16 @@ package duke.command;
 import duke.ui.Ui;
 
 /**
- * Sub-class of command that represents and execute the "bye" instruction of user.
+ * Sub-class of command that represents and executes the "bye" instruction of user.
  */
 public class ExitCommand extends Command {
-    public ExitCommand(String task, String date) {
-        super("bye", task, date, true, command -> handleBye());
+    private static final String NO_TASK = "";
+    private static final String NO_DATE = "";
+    /**
+     * Creates an ExitCommand object that exits the program when executed.
+     */
+    public ExitCommand() {
+        super("bye", NO_TASK, NO_DATE, true, command -> handleBye());
     }
 
 

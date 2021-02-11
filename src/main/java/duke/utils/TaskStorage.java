@@ -18,7 +18,7 @@ import duke.ui.Ui;
 
 
 /**
- * This class handle the saving and loading of the taskList to/from a specific FilePath.
+ * This class handles the saving and loading of the taskList to/from a specific FilePath.
  */
 public class TaskStorage {
 
@@ -27,7 +27,7 @@ public class TaskStorage {
 
 
     /**
-     * This method write the content of a taskList to data/Duke.txt.
+     * This method writes the content of a taskList to data/Duke.txt.
      *
      * @return A string display of a successful save.
      */
@@ -52,7 +52,7 @@ public class TaskStorage {
 
 
     /**
-     * This method load the file from data/Duke.txt and display in a list format when the program starts.
+     * This method loads the file from data/Duke.txt and display in a list format when the program starts.
      *
      * @return the String display of a successful load.
      */
@@ -92,6 +92,12 @@ public class TaskStorage {
         return loadContent.toString();
     }
 
+    /**
+     * This method restore the task List from Duke.txt.
+     * @param file Duke.txt that store the user past history of task list.
+     * @return the file content in String.
+     * @throws IOException thrown when file is not found.
+     */
     private static String restoreTask(File file) throws IOException {
         Scanner sc = new Scanner(file);
         StringBuilder fileContent = new StringBuilder("");

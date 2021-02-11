@@ -10,13 +10,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Encapsulates an ErrorBox class that deals with and display exceptions.
+ * Encapsulates an ErrorBox class that deals with and displays exceptions.
  */
 public class ErrorBox {
     /**
-     * Displays an alert box with the given title and the alert message.
+     * Displays an Error box with the given title and the alert message.
      *
-     * @param message the main message of the alert.
+     * @param message the main message of the Error.
      */
     public static void display(String message) {
         Stage window = new Stage();

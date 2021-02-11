@@ -3,7 +3,6 @@ package duke.utils;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.ErrorBox;
-import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -59,7 +58,7 @@ public class Statistics {
         totalTaskHistory++;
         try {
             FileWriter fw = new FileWriter(FILEPATH, true);
-            fw.write(convertTaskToHistory(task));
+            fw.write(reformatTask(task));
             fw.close();
         } catch (IOException err) {
             ErrorBox.display(err.getMessage());
@@ -67,7 +66,12 @@ public class Statistics {
 
     }
 
-    private static String convertTaskToHistory(Task task) {
+    /**
+     * Reformats the task to be written in file.
+     * @param task user task.
+     * @return a different string format of the task.
+     */
+    private static String reformatTask(Task task) {
         String taskDisplay = task.toString();
         String taskType = taskDisplay.substring(0, 3);
         String taskStatus = taskDisplay.substring(3, 6);
@@ -76,6 +80,9 @@ public class Statistics {
         return totalTaskHistory + "\n" + taskType + taskStatus + taskContent + "\n";
     }
 
+    /**
+     * Initializes the statistic file.
+     */
     public static void initialize() {
         File statisticsFile = new File(FILEPATH);
         if (!statisticsFile.exists()) {
@@ -93,6 +100,9 @@ public class Statistics {
         }
     }
 
+    /**
+     * Clear all history in the statistics file.
+     */
     public static void clear() {
         totalTaskHistory = 0;
         File file = new File(FILEPATH);

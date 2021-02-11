@@ -7,7 +7,7 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Create a Todo object with given taskName.
+     * Creates a Todo object with given taskName.
      *
      * @param taskName name of the task in String.
      */
@@ -17,7 +17,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Create a Todo object with given taskName and isDone status.
+     * Creates a Todo object with given taskName and isDone status.
      * @param taskName name of the task.
      * @param done String representation of the done status.
      */

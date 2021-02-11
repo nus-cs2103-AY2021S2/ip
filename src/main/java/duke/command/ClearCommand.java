@@ -10,7 +10,7 @@ public class ClearCommand extends Command{
     private static final String NO_DATE = "";
 
     /**
-     * Create a ClearCommand object that return a response when executed.
+     * Creates a ClearCommand object that return a response when executed.
      */
     public ClearCommand() {
         super("clear", NO_TASK, NO_DATE, false, command -> handleClearCommand());

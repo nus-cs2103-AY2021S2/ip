@@ -9,12 +9,12 @@ import duke.ui.Ui;
 
 
 /**
- * This class process the date key in by user and convert it to the right format to be use.
+ * This class processes the date key in by user and converts it to the right format.
  */
 public class DateAndTime {
 
     /**
-     * This method convert a yyyy-mm-dd format of date to MMM d yyyy format.
+     * This method converts a yyyy-mm-dd format of date to MMM d yyyy format.
      *
      * @param date the String representation of date.
      * @return MMM d yyyy format of date and return error message if the given date is in wrong format.

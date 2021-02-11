@@ -14,7 +14,7 @@ public abstract class Command {
 
 
     /**
-     * Create a command with user instruction, task, date and a function to execute the instruction.
+     * Creates a command with user instruction, task, date and a function to execute the instruction.
      *
      * @param instruction user instruction.
      * @param task user task.
@@ -31,7 +31,7 @@ public abstract class Command {
 
 
     /**
-     * Execution of a command and return a boolean whether to end the program.
+     * Executes a command and returns response String.
      *
      * @return a response String.
      */
