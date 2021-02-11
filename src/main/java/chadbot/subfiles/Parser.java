@@ -9,6 +9,7 @@ import chadbot.command.FindCommand;
 import chadbot.command.HelpCommand;
 import chadbot.command.PrintCommand;
 import chadbot.command.SortCommand;
+import chadbot.command.StatsCommand;
 
 /**
  * The Parser class parses the user input as a Command.
@@ -44,7 +45,9 @@ public class Parser {
         case "sort":
             return new SortCommand(s);
         case "help":
-            return new HelpCommand(s);
+            return new HelpCommand();
+        case "stats":
+            return new StatsCommand();
         default:
             return new AddCommand(s);
         }

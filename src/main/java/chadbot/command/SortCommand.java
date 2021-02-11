@@ -25,7 +25,7 @@ public class SortCommand extends Command {
     }
 
     /**
-     * Calls the task manager to sort the task ist upon receiving a user input that attempts to sort the list.
+     * Calls the task manager to sort the task list upon receiving a user input that attempts to sort the list.
      * The default mode of sorting is by alphabetical ordering of the tasks.
      *
      * @param taskList A TaskList object containing the list of tasks which the program currently has.

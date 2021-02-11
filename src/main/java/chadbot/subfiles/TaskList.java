@@ -486,4 +486,32 @@ public class TaskList {
         Collections.sort(tasks, new TaskComparator());
     }
 
+    /**
+     * Displays the number of to-dos, deadlines, and events that the user currently has.
+     *
+     * @return The number of to-dos, deadlines, and events that the user currently has.
+     */
+    public String displayStats() {
+        int numTodos = 0;
+        int numDeadlines = 0;
+        int numEvents = 0;
+
+        for (Task t : tasks) {
+            if (t instanceof ToDo) {
+                numTodos++;
+            } else if (t instanceof Deadline) {
+                numDeadlines++;
+            } else if (t instanceof Event) {
+                numEvents++;
+            }
+        }
+
+        String output = "Your task list currently consists of:\n"
+                + numTodos + " to-dos,\n"
+                + numDeadlines + " deadlines, and\n"
+                + numEvents + " events.";
+        System.out.println(output);
+        return output;
+    }
+
 }
