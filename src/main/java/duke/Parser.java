@@ -1,5 +1,8 @@
 package duke;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidDescriptionException;
+
 /**
  * Parser class to make sense of user input.
  */
@@ -17,9 +20,9 @@ public class Parser {
      * @param inputArr user input array.
      * @throws DukeException if input task description is missing.
      */
-    public void isEmptyDescription(String[] inputArr) throws DukeException {
-        if (inputArr.length == 1) {
-            throw new DukeException();
+    public void isValidDescription(String[] inputArr) throws InvalidDescriptionException {
+        if (inputArr.length == 1 || inputArr[1].equals("") || inputArr[1].startsWith(" ")) {
+            throw new InvalidDescriptionException();
         }
     }
 
@@ -30,5 +33,17 @@ public class Parser {
      */
     public String[] getInputArr(String input) {
         return input.split(" ", 2);
+    }
+
+    public String getDescription(String[] inputArr, String taskType) {
+        if (taskType.equals("todo")) {
+            return inputArr[1];
+        } else {
+            return inputArr[1].substring(0, inputArr[1].indexOf("/") - 1);
+        }
+    }
+
+    public String getDate(String[] inputArr, String taskType) {
+        return inputArr[1].substring(inputArr[1].indexOf("/") + 4);
     }
 }

@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected String at;
-    protected LocalDate localAt;
+    protected String date;
+    protected LocalDate formattedDate;
 
     /**
      * Constructor for event class.
@@ -17,22 +17,22 @@ public class Event extends Task {
      *
      * @param description description of the event task
      */
-    public Event(String description, String at) {
+    public Event(String description, String date) {
         super(description);
-        this.at = at;
-        this.localAt = LocalDate.parse(at);
+        this.date = date;
+        this.formattedDate = LocalDate.parse(date);
         this.type = 'E';
     }
 
-    public String getAt() {
-        return this.at;
+    public String getDate() {
+        return this.date;
     }
-    public String getFormattedAt() {
-        return localAt.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    public String getFormattedDate() {
+        return formattedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getFormattedAt() + ")";
+        return "[E]" + super.toString() + " (at: " + this.getFormattedDate() + ")";
     }
 }
