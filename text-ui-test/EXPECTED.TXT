@@ -1,7 +1,103 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+--------------------------------------
+Hello! I'm Duke
+What can I do for you?
+--------------------------------------
+--------------------------------------
+You have no tasks.
+--------------------------------------
+--------------------------------------
+Got it. I've added this task:
+	[T][X] borrow book
+Now you have 1 tasks.
+--------------------------------------
+--------------------------------------
+Got it. I've added this task:
+	[D][X] return book (by: 01 Nov 20 1015AM)
+Now you have 2 tasks.
+--------------------------------------
+--------------------------------------
+Got it. I've added this task:
+	[E][X] project meeting (from: 01 Nov 20 1015AM to 01 Nov 20 1020AM)
+Now you have 3 tasks.
+--------------------------------------
+--------------------------------------
+Nice! I've marked this as done:
+[D][?] return book (by: 01 Nov 20 1015AM)
+--------------------------------------
+--------------------------------------
+Got it. I've added this task:
+	[T][X] borrow other book
+Now you have 4 tasks.
+--------------------------------------
+--------------------------------------
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [D][?] return book (by: 01 Nov 20 1015AM)
+3. [E][X] project meeting (from: 01 Nov 20 1015AM to 01 Nov 20 1020AM)
+4. [T][X] borrow other book
+--------------------------------------
+--------------------------------------
+Got it. I've removed this task:
+	[T][X] borrow book
+Now you have 3 tasks.
+--------------------------------------
+--------------------------------------
+Here are the tasks in your list:
+1. [D][?] return book (by: 01 Nov 20 1015AM)
+2. [E][X] project meeting (from: 01 Nov 20 1015AM to 01 Nov 20 1020AM)
+3. [T][X] borrow other book
+--------------------------------------
+--------------------------------------
+Sorry, I did not understand that.
+--------------------------------------
+--------------------------------------
+Sorry, I did not understand that.
+--------------------------------------
+--------------------------------------
+Sorry, the description of a todo cannot be empty.
+--------------------------------------
+--------------------------------------
+Sorry, the description of a deadline cannot be empty.
+--------------------------------------
+--------------------------------------
+Sorry, the date of a deadline must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the description of a event cannot be empty.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the end date of an event must be after the start date.
+--------------------------------------
+--------------------------------------
+Sorry, I could not find that task.
+--------------------------------------
+--------------------------------------
+Sorry, I could not find that task.
+--------------------------------------
+--------------------------------------
+Sorry, I could not find that task.
+--------------------------------------
+--------------------------------------
+Here are the tasks in your list:
+1. [D][?] return book (by: 01 Nov 20 1015AM)
+2. [E][X] project meeting (from: 01 Nov 20 1015AM to 01 Nov 20 1020AM)
+3. [T][X] borrow other book
+--------------------------------------
+--------------------------------------
+Goodbye!
+--------------------------------------
