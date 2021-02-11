@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -20,9 +19,6 @@ import javafx.scene.layout.VBox;
  * The main content of the GUI.
  */
 public class MainWindow extends AnchorPane {
-    private final Image userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
-    private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/bot.png"));
-
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -55,7 +51,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogueContainer.heightProperty());
-        dialogueContainer.getChildren().add(DialogueBox.genEkudDialogue(Messages.WELCOME_MESSAGE, dukeImage));
+        dialogueContainer.getChildren().add(new EkudDialogueBox(Messages.WELCOME_MESSAGE));
     }
 
     /**
@@ -77,13 +73,13 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
-        dialogueContainer.getChildren().add(DialogueBox.genUserDialogue(fullCommand, userImage));
+        dialogueContainer.getChildren().add(new UserDialogueBox(fullCommand));
 
         try {
             String reply = ekud.getResponse(fullCommand).trim();
-            dialogueContainer.getChildren().add(DialogueBox.genEkudDialogue(reply, dukeImage));
+            dialogueContainer.getChildren().add(new EkudDialogueBox(reply));
         } catch (EkudException e) {
-            dialogueContainer.getChildren().add(DialogueBox.genEkudDialogue(e.toString(), dukeImage));
+            dialogueContainer.getChildren().add(new EkudDialogueBox(e.toString()));
         }
 
         if (!ekud.isOnline()) {
