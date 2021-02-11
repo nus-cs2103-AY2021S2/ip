@@ -94,22 +94,20 @@ public class Parser {
      * @return
      */
     public Tuple2 todoCase(int taskIterator, Task[] tasks, String input) {
+        String[] taskCommands = input.split("/", 2);
+        String[] firstHalf = taskCommands[0].split(" ", 2);
         try {
-            String[] taskCommands = input.split("/", 2);
-            String[] firstHalf = taskCommands[0].split(" ", 2);
             if (firstHalf.length == 1) {
                 throw new Parser.MissingTodoDescriptorException("------------------------------------\n"
                         + ":( OOPS!!! The description of a todo cannot be empty\n"
                         + "------------------------------------");
-            } else {
-                tasks[taskIterator] = new Task(firstHalf[1], false); // create todoTask
             }
-            taskIterator = taskIterator + 1;
         } catch (Parser.MissingTodoDescriptorException e) {
             System.out.println(e.getMessage());
         }
-        return new Tuple2(taskIterator,
-                ui.addTaskMessage(tasks[taskIterator - 1].toFormattedString(), taskIterator));
+
+        Task testTask = new Task(firstHalf[1], false); // create todoTask
+        return checkDuplicateTodoTask(taskIterator, tasks, testTask);
     }
 
     /**
@@ -124,20 +122,19 @@ public class Parser {
         String[] taskCommands = input.split("/", 2);
         String[] firstHalf = taskCommands[0].split(" ", 2);
         String[] secondHalf = taskCommands[1].split(" ", 2);
+
+        if (!validator.isValid(secondHalf[1])) {
+            return new Tuple2(taskIterator, "Invalid date format for timed Task");
+        }
+
+        Date date = new Date();
         try {
-            if (validator.isValid(secondHalf[1])) {
-                System.out.println("validator ok");
-                Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(secondHalf[1]);
-                tasks[taskIterator] = new EventTask(firstHalf[1], false, secondHalf[1].trim(), date);
-            } else {
-                System.out.println("Invalid date format for timed Task");
-            }
+            date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(secondHalf[1]);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
-        taskIterator = taskIterator + 1;
-        return new Tuple2(taskIterator,
-                ui.addTaskMessage(tasks[taskIterator - 1].toFormattedString(), taskIterator));
+        EventTask testTask = new EventTask(firstHalf[1], false, secondHalf[1].trim(), date);
+        return checkDuplicateEventTask(taskIterator, tasks, testTask);
     }
 
     /**
@@ -152,19 +149,115 @@ public class Parser {
         String[] taskCommands = input.split("/", 2);
         String[] firstHalf = taskCommands[0].split(" ", 2);
         String[] secondHalf = taskCommands[1].split(" ", 2);
+
+        if (!validator.isValid(secondHalf[1])) {
+            return new Tuple2(taskIterator, "Invalid date format for timed Task");
+        }
+
+        Date date = new Date();
         try {
-            if (validator.isValid(secondHalf[1])) {
-                Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(secondHalf[1]);
-                tasks[taskIterator] = new DeadlineTask(firstHalf[1], false, secondHalf[1].trim(), date);
-            } else {
-                System.out.println("Invalid date format for timed Task");
-            }
+            date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(secondHalf[1]);
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
-        taskIterator = taskIterator + 1;
-        return new Tuple2(taskIterator,
-                ui.addTaskMessage(tasks[taskIterator - 1].toFormattedString(), taskIterator));
+        DeadlineTask testTask = new DeadlineTask(firstHalf[1], false, secondHalf[1].trim(), date);
+        return checkDuplicateDeadlineTask(taskIterator, tasks, testTask);
+    }
+
+    /**
+     * Checks if the task you want to add is a duplicate. Do not add if its a duplicate.
+     *
+     * @param taskIterator Number of tasks user has, used by Duke.
+     * @param tasks        Array of available user tasks.
+     * @param testTask     Added task.
+     * @return Appropriate Tuple2 object depending on if input was duplicate or not.
+     */
+    public Tuple2 checkDuplicateTodoTask(int taskIterator, Task[] tasks, Task testTask) {
+        assert testTask != null : "Task input must not be null.\n";
+
+        boolean hasFoundDuplicateTask = false;
+        for (Task otherTask : tasks) {
+            if (otherTask == null) {
+                continue;
+            }
+
+            if (testTask.equals(otherTask)) {
+                hasFoundDuplicateTask = true;
+                break;
+            }
+        }
+        if (hasFoundDuplicateTask) {
+            return new Tuple2(taskIterator, ui.formatBox("You are adding a duplicate task! Add task failed."));
+        } else {
+            tasks[taskIterator] = testTask;
+            taskIterator = taskIterator + 1;
+            return new Tuple2(taskIterator,
+                    ui.addTaskMessage(testTask.toFormattedString(), taskIterator));
+        }
+    }
+
+    /**
+     * Checks if the task you want to add is a duplicate. Do not add if its a duplicate.
+     *
+     * @param taskIterator Number of tasks user has, used by Duke.
+     * @param tasks        Array of available user tasks.
+     * @param testTask     Added task.
+     * @return Appropriate Tuple2 object depending on if input was duplicate or not.
+     */
+    public Tuple2 checkDuplicateEventTask(int taskIterator, Task[] tasks, EventTask testTask) {
+        assert testTask != null : "Task input must not be null.\n";
+
+        boolean hasFoundDuplicateTask = false;
+        for (Task otherTask : tasks) {
+            if (otherTask == null || !(otherTask instanceof EventTask)) {
+                continue;
+            }
+
+            if (testTask.equals(otherTask)) {
+                hasFoundDuplicateTask = true;
+                break;
+            }
+        }
+        if (hasFoundDuplicateTask) {
+            return new Tuple2(taskIterator, ui.formatBox("You are adding a duplicate Event task! Add task failed."));
+        } else {
+            tasks[taskIterator] = testTask;
+            taskIterator = taskIterator + 1;
+            return new Tuple2(taskIterator,
+                    ui.addTaskMessage(testTask.toFormattedString(), taskIterator));
+        }
+    }
+
+    /**
+     * Checks if the task you want to add is a duplicate. Do not add if its a duplicate.
+     *
+     * @param taskIterator Number of tasks user has, used by Duke.
+     * @param tasks        Array of available user tasks.
+     * @param testTask     Added task.
+     * @return Appropriate Tuple2 object depending on if input was duplicate or not.
+     */
+    public Tuple2 checkDuplicateDeadlineTask(int taskIterator, Task[] tasks, DeadlineTask testTask) {
+        assert testTask != null : "Task input must not be null.\n";
+
+        boolean hasFoundDuplicateTask = false;
+        for (Task otherTask : tasks) {
+            if (otherTask == null || !(otherTask instanceof DeadlineTask)) {
+                continue;
+            }
+
+            if (testTask.equals(otherTask)) {
+                hasFoundDuplicateTask = true;
+                break;
+            }
+        }
+        if (hasFoundDuplicateTask) {
+            return new Tuple2(taskIterator, ui.formatBox("You are adding a duplicate deadline task! Add task failed."));
+        } else {
+            tasks[taskIterator] = testTask;
+            taskIterator = taskIterator + 1;
+            return new Tuple2(taskIterator,
+                    ui.addTaskMessage(testTask.toFormattedString(), taskIterator));
+        }
     }
 
     /**
