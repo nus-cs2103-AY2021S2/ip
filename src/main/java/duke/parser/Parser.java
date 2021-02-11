@@ -33,82 +33,82 @@ public class Parser {
      */
     public static Command parse(String userInput) throws DukeException {
         Matcher matcher = BASE_COMMAND_FORMAT.matcher(userInput.trim());
+        CommandWord commandWord;
+        String commandDescription;
 
         if (!matcher.matches()) {
             return new InvalidCommand();
         }
 
         try {
-            CommandWord commandWord = CommandWord.valueOf(matcher.group("commandWord").toUpperCase()); //EXCEPTION
-            String commandDescription = matcher.group("commandDescription").trim();
-
-            switch (commandWord) {
-            case BYE:
-                if (commandDescription.isEmpty()) {
-                    return new ByeCommand();
-                }
-                break;
-
-            case DEADLINE:
-                Matcher deadlineMatcher = DEADLINE_FORMAT.matcher(commandDescription.trim());
-                if (deadlineMatcher.matches()) {
-                    return new DeadlineCommand(deadlineMatcher.group("deadlineDescription"),
-                            deadlineMatcher.group("deadlineDate"));
-                }
-                break;
-
-            case DELETE:
-                try {
-                    if (!commandDescription.isEmpty()) {
-                        int index = Integer.parseInt(commandDescription);
-                        return new DeleteCommand(index);
-                    }
-                    throw new DukeException("☹ OOPS!!! Please specify a task number in this format:\n" +
-                            "    delete [task number] (E.g. delete 2)");
-                } catch (NumberFormatException e) {
-                    throw new DukeException("☹ OOPS!!! Please specify a task number in this format:\n" +
-                            "    delete [task number] (E.g. delete 2)");
-                }
-
-            case DONE:
-                try {
-                    if (!commandDescription.isEmpty()) {
-                        int index = Integer.parseInt(commandDescription);
-                        return new DoneCommand(index);
-                    }
-                    throw new DukeException("☹ OOPS!!! Please specify a task number in this format:\n" +
-                            "    done [task number] (E.g. done 2)");
-                } catch (NumberFormatException e) {
-                    throw new DukeException("☹ OOPS!!! Please specify a task number in this format:\n" +
-                            "    done [task number] (E.g. done 2)");
-                }
-
-            case EVENT:
-                Matcher eventMatcher = EVENT_FORMAT.matcher(commandDescription.trim());
-                if (eventMatcher.matches()) {
-                    return new EventCommand(eventMatcher.group("eventDescription"),
-                            eventMatcher.group("eventDate"));
-                }
-                break;
-
-            case LIST:
-                if (commandDescription.isEmpty()) {
-                    return new ListCommand();
-                }
-                break;
-
-            case TODO:
-                if (!commandDescription.isEmpty()) {
-                    return new ToDoCommand(commandDescription);
-                }
-                break;
-
-            default:
-                return new InvalidCommand();
-            }
+            commandWord = CommandWord.valueOf(matcher.group("commandWord").toUpperCase());
+            commandDescription = matcher.group("commandDescription").trim();
         } catch (IllegalArgumentException e) {
             return new InvalidCommand();
         }
+
+        switch (commandWord) {
+        case BYE:
+            if (commandDescription.isEmpty()) {
+                return new ByeCommand();
+            }
+            break;
+
+        case DEADLINE:
+            Matcher deadlineMatcher = DEADLINE_FORMAT.matcher(commandDescription.trim());
+            if (deadlineMatcher.matches()) {
+                return new DeadlineCommand(deadlineMatcher.group("deadlineDescription"),
+                        deadlineMatcher.group("deadlineDate"));
+            }
+            break;
+
+        case DELETE:
+            try {
+                if (!commandDescription.isEmpty()) {
+                    int index = Integer.parseInt(commandDescription);
+                    return new DeleteCommand(index);
+                }
+                throw new DukeException("☹ OOPS!!! Please specify a task number in this format:\n" +
+                        "    delete [task number] (E.g. delete 2)");
+            } catch (NumberFormatException e) {
+                throw new DukeException("☹ OOPS!!! Please specify a task number in this format:\n" +
+                        "    delete [task number] (E.g. delete 2)");
+            }
+
+        case DONE:
+            try {
+                if (!commandDescription.isEmpty()) {
+                    int index = Integer.parseInt(commandDescription);
+                    return new DoneCommand(index);
+                }
+                throw new DukeException("☹ OOPS!!! Please specify a task number in this format:\n" +
+                        "    done [task number] (E.g. done 2)");
+            } catch (NumberFormatException e) {
+                throw new DukeException("☹ OOPS!!! Please specify a task number in this format:\n" +
+                        "    done [task number] (E.g. done 2)");
+            }
+
+        case EVENT:
+            Matcher eventMatcher = EVENT_FORMAT.matcher(commandDescription.trim());
+            if (eventMatcher.matches()) {
+                return new EventCommand(eventMatcher.group("eventDescription"),
+                        eventMatcher.group("eventDate"));
+            }
+            break;
+
+        case LIST:
+            if (commandDescription.isEmpty()) {
+                return new ListCommand();
+            }
+            break;
+
+        case TODO:
+            if (!commandDescription.isEmpty()) {
+                return new ToDoCommand(commandDescription);
+            }
+            break;
+        }
+
         return new InvalidCommand();
     }
 }
