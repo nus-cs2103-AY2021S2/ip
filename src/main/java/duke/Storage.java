@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.LoadCommand;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,58 +45,8 @@ public class Storage {
      * @throws FileNotFoundException if the specified file does not exist
      */
     public static String loadTaskList() throws FileNotFoundException {
-        String line = null;
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/main/java/duke/duke.txt"));
-            while ((line = br.readLine()) != null) {
-                String[] spiltLine = line.split("\\s+");
-                char typeOfEvent = spiltLine[0].charAt(1);
-                String desc = "";
-                String date = "";
-                int start = 0;
-                for (int i = 1; i < spiltLine.length; ++i) {
-                    if (spiltLine[i].equals("(by:") || spiltLine[i].equals("(at:")) {
-                        start = i;
-                        break;
-                    }
-                    if (desc.equals("")) {
-                        desc += spiltLine[i];
-                    } else {
-                        desc = desc + " " + spiltLine[i];
-                    }
-                }
-                for (int i = start + 1; i < spiltLine.length - 1; ++i) {
-                    if (date.equals("")) {
-                        date += spiltLine[i];
-                    } else {
-                        date = date + " " + spiltLine[i];
-                    }
-                }
-                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("E, MMM d yyyy");
-                DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                date = LocalDate.parse(date, inputFormat).format(outputFormat);
-                String time = spiltLine[spiltLine.length - 1].substring(0, spiltLine[spiltLine.length - 1]
-                        .length() - 1);
-                date = date + " " + time;
-                switch (typeOfEvent) {
-                case 'D': {
-                    DeadlineTask task = new DeadlineTask(desc, date);
-                    Parser.getTaskList().add(task);
-                    break;
-                }
-                case 'E': {
-                    EventTask task = new EventTask(desc, date);
-                    Parser.getTaskList().add(task);
-                    break;
-                }
-                case 'T': {
-                    ToDoTask task = new ToDoTask(desc);
-                    break;
-                }
-                default:
-                    break;
-                }
-            }
+            LoadCommand.runCommand();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
