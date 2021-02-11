@@ -50,8 +50,9 @@ public class Ui {
                 + "  3. event - adds an event (E.g. event project meeting /at 2021-03-05)\n"
                 + "  4. delete - removes a task from the lists of task (E.g. delete 2)\n"
                 + "  5. done - marks a task as done in the list of tasks (E.g. done 2)\n"
-                + "  6. list - displays the list of tasks\n"
-                + "  7. bye - terminates Duke ☹");
+                + "  6. find - finds and displays tasks that matches the input keyword (E.g. find book)\n"
+                + "  7. list - displays the list of tasks\n"
+                + "  8. bye - terminates Duke ☹");
     }
 
     public void showAddTask(Task task, TaskList tasks) {
@@ -70,14 +71,14 @@ public class Ui {
         showToUser("Nice! I've marked this task as done:\n" + "  " + task);
     }
 
-    public void showTaskList(TaskList tasks) {
+    public void showTaskList(TaskList tasks, String taskType) {
         if (tasks.getSize() <= 0) {
-            showToUser("There are no tasks at the moment.");
+            showToUser("There are no " + taskType + "tasks at the moment.");
         } else {
             int counter = 1;
             ArrayList<Task> taskList = tasks.getTaskList();
             showLine();
-            System.out.println("Here are the tasks in your list:");
+            System.out.println("Here are the " + taskType + "tasks in your list:");
 
             for (Task task : taskList) {
                 System.out.println("  " + counter + ". " + task);

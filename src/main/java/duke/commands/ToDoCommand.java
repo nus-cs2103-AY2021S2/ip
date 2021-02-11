@@ -8,7 +8,6 @@ import duke.tasks.ToDo;
 import duke.ui.Ui;
 
 public class ToDoCommand extends Command{
-    private CommandWord commandWord = CommandWord.TODO;
     private String toDoDescription;
 
     public ToDoCommand(String todoDescription) {
