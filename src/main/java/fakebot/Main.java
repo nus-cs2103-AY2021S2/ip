@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-
 //Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
 
 /**

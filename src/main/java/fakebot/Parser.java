@@ -19,7 +19,7 @@ import fakebot.task.Todo;
  */
 public class Parser {
 
-    private static final String DIVIDER = "____________________________________________________________\n";
+    private static final String DIVIDER = "";
     private static final String SPLIT_REGEX = "-'@,-@,1'-";
 
     private static final String EXIT_COMMAND = "bye";
@@ -39,9 +39,9 @@ public class Parser {
             + "                   [yyyy-mm-dd] [hh:ss]\n"
             + "Delete   Command: " + DELETE_COMMAND + " [index]\n"
             + "Done     Command: " + DONE_COMMAND + " [index]\n"
-            + "Event    Command: " + EVENT_COMMAND + " [Description]" + EVENT_SPLIT_REGEX + "\n"
-            + "                   [yyyy-mm-dd] [hh:ss] [yyyy-mm-dd] [hh:ss]\n"
-            + "Find     Command: " + FIND_COMMAND + "[ description]\n"
+            + "Event    Command: " + EVENT_COMMAND + " [Description]" + EVENT_SPLIT_REGEX + "[yyyy-mm-dd]\n"
+            + "                   [hh:ss] [yyyy-mm-dd] [hh:ss]\n"
+            + "Find     Command: " + FIND_COMMAND + "[Description]\n"
             + "List     Command: " + LIST_COMMAND + "\n"
             + "Todo     Command: " + TODO_COMMAND + " [Description]\n"
             + "Exit     Command: " + EXIT_COMMAND + "\n";

@@ -1,20 +1,20 @@
 package fakebot;
 
 
+import fakebot.command.Command;
+import fakebot.command.CommandException;
+import fakebot.command.CommandType;
+import fakebot.ui.DialogBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import fakebot.command.Command;
-import fakebot.command.CommandException;
-import fakebot.ui.DialogBox;
 
 
 //Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
@@ -34,23 +34,37 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Logo.png"));
-    private Image fakeBotImage = new Image(this.getClass().getResourceAsStream("/images/wolf.png"));
+    //Image from : https://www.shareicon.net/man-user-profile-avatar-social-829459
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    //Image from : https://icon-library.com/icon/robotics-icon-2.html
+    private Image fakeBotImage = new Image(this.getClass().getResourceAsStream("/images/fakebot.png"));
+    private Image sendImage = new Image(this.getClass().getResourceAsStream("/images/send.png"));
 
     private FakeBot fakeBot;
 
+    /**
+     * Initialize MainWindow FXML
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        //Setup send button
+        ImageView imageView = new ImageView(sendImage);
+        imageView.setFitHeight(35);
+        imageView.setFitWidth(60);
+        sendButton.setGraphic(imageView);
+
     }
 
     /**
      * Set Fakebot for the application
+     *
      * @param fakeBot an Fakebot
      */
     public void setFakeBot(FakeBot fakeBot) {
         this.fakeBot = fakeBot;
-        handleUserInput("Setup Fakebot");
+        addTextToContainer(fakeBot.getHelloMessage());
     }
 
     /**
@@ -72,42 +86,30 @@ public class MainWindow extends AnchorPane {
         Command command;
         try {
             command = Parser.parseUserInputToCommand(userInput);
-            String outputText = fakeBot.processCommand(command);
 
-            if (outputText.length() > 0) {
-                addTextToContainer(userInput, outputText);
-            } else {
-                Stage stage = (Stage) this.getScene().getWindow();
+            //Exit when bye command detected
+            if (command.getCommand() == CommandType.BYE) {
+                Stage stage = (Stage) sendButton.getScene().getWindow();
                 stage.close();
             }
 
+            String outputText = fakeBot.processCommand(command);
+            addTextToContainer(userInput, outputText);
+
         } catch (CommandException e) {
-            addTextToContainer(userInput, e.getMessage());
+            addAlertTextToContainer(userInput, e.getMessage());
         }
     }
 
     /**
-     * Creates a label with the specified text and adds it to the dialog container.
+     * Add alert text to container.
      *
-     * @param text string containing text to add.
-     * @return a label with the specified text that has word wrap enabled.
+     * @param inputText inputText to be add to container.
      */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setFont(Font.font("Courier New", 12));
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-
-    /**
-     * Add text to container.
-     *
-     * @param text text to be add to container.
-     */
-    private void addTextToContainer(String text) {
-        dialogContainer.getChildren().add(DialogBox.getFakebotDialog(text, fakeBotImage));
+    private void addTextToContainer(String inputText) {
+        dialogContainer.getChildren().add(
+                DialogBox.getFakebotDialog(inputText, fakeBotImage)
+        );
     }
 
     /**
@@ -120,6 +122,19 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(inputText, userImage),
                 DialogBox.getFakebotDialog(outputText, fakeBotImage)
+        );
+    }
+
+    /**
+     * Add alert text to container.
+     *
+     * @param inputText  inputText to be add to container.
+     * @param outputText outputText to be add to container.
+     */
+    private void addAlertTextToContainer(String inputText, String outputText) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(inputText, userImage),
+                DialogBox.getAlertDialog(outputText, fakeBotImage)
         );
     }
 }

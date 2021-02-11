@@ -22,7 +22,7 @@ public class FakeBot {
             + "| |__ /  \\  | ' /| |__    | |_) | |  | | | |   \n"
             + "|  __/ /\\ \\ |  < |  __|   |  _ <| |  | | | |\n"
             + "| | / ____ \\| . \\| |____  | |_) | |__| | | |\n"
-            + "|_|/_/    \\_\\_|\\_\\______| |____/ \\____/  |_|\n";
+            + "|_|/_/    \\_\\_|\\_\\______| |____/ \\____/  |_|\n\n";
 
     private static final String SAVE_FILE_PATH = "/data/";
     private static final String SAVE_FILE_NAME = "savedHistory.txt";
@@ -152,7 +152,7 @@ public class FakeBot {
      * @param command to be process.
      * @return a string containing resulted from the process.
      */
-    private String processTodoCommand(Command command) {
+    private String processTodoCommand(Command command) throws CommandException {
         Todo todoTask = new Todo(command.getDescription());
         return addTask(todoTask);
     }
@@ -163,7 +163,7 @@ public class FakeBot {
      * @param command to be process.
      * @return a string containing resulted from the process.
      */
-    private String processDeadlineCommand(Command command) {
+    private String processDeadlineCommand(Command command) throws CommandException {
         String[] deadlineDetails = command.getDescriptions();
         String[] dates = deadlineDetails[1].split(" ");
         LocalDate date = LocalDate.parse(dates[0]);
@@ -178,7 +178,7 @@ public class FakeBot {
      * @param command to be process.
      * @return a string containing resulted from the process.
      */
-    private String processEventCommand(Command command) {
+    private String processEventCommand(Command command) throws CommandException {
         String[] eventDetails = command.getDescriptions();
         String[] eventDates = eventDetails[1].split(" ");
         LocalDate startDate = LocalDate.parse(eventDates[0]);
@@ -195,9 +195,9 @@ public class FakeBot {
      * @param task to be added to list
      * @return a string containing result of adding task
      */
-    private String addTask(Task task) {
+    private String addTask(Task task) throws CommandException {
         if (taskList.containTask(task)) {
-            return Parser.getBotMPrintMessage("Duplicate task detected! Task not added");
+            throw new CommandException("Duplicate task detected! Task not added.");
         }
         taskList.addTask(task);
         saveHistory();
