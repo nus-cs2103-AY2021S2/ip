@@ -29,7 +29,7 @@ public class RemindCommand extends Command{
         this.numDays = numDays;
     }
 
-    boolean isUpcoming(Task task){
+    private boolean isUpcoming(Task task){
         boolean validTaskType = task.getTaskType().equals("DEADLINE") ||
                 task.getTaskType().equals("EVENT");
 
