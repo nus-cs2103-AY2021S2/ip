@@ -105,4 +105,11 @@ public class TaskList {
     public void addImport(Task task) {
         list.add(task);
     }
+
+    public Label snooze(int index, long duration) {
+        Task task = list.get(index);
+        task.changeTimeTo(duration);
+        String[] output = {"Got it, this is the updated task:", task.toString()};
+        return ui.print(output);
+    }
 }

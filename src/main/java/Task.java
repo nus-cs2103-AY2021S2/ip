@@ -10,8 +10,8 @@ public class Task {
     private final String task;
     private boolean isDone = false;
     private final int type;
-    private final LocalDate date;
-    private final LocalTime time;
+    private LocalDate date;
+    private LocalTime time;
 
     /**
      * Creates a Task object.
@@ -74,6 +74,18 @@ public class Task {
         }
     }
 
+    public void changeTimeTo(long duration) {
+        switch (this.type) {
+            case 1:
+                this.date = this.date.plusDays(duration);
+                break;
+            case 2:
+                this.time = this.time.plusMinutes(duration);
+                break;
+            default:
+        }
+    }
+
     /**
      * A readable format of the Task.
      * @return A string representation of the Task.
@@ -98,14 +110,13 @@ public class Task {
         String done = this.isDone ? " 1" : " 0";
         String deadline = "";
         switch (this.type) {
-            case 0:
-                break;
             case 1:
                 deadline += "/by " + this.date;
                 break;
             case 2:
                 deadline += "/at " + this.time;
                 break;
+            default:
         }
         return this.type + done + this.task + deadline;
     }

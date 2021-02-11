@@ -147,9 +147,9 @@ public class Parser {
 
     private Label snooze(String input) {
         String[] terms = input.split(" ");
-        if (terms.length == 4) {
-            int index = Integer.parseInt(terms[1]);
-            int duration = Integer.parseInt(terms[2]);
+        if (terms.length == 3) {
+            int index = Integer.parseInt(terms[1]) - 1;
+            long duration = Long.parseLong(terms[2]);
             try {
                 return list.snooze(index, duration);
             } catch (IndexOutOfBoundsException e) {
@@ -160,7 +160,7 @@ public class Parser {
         } else {
             String[] output = new String[2];
             output[0] = "Please input as snooze [index] [time to snooze].";
-            output[1] = "For deadlines, time to snooze is in days while for events it is in minutes."
+            output[1] = "For deadlines, time to snooze is in days while for events it is in minutes.";
             return ui.print(output);
         }
     }
