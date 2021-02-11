@@ -111,6 +111,33 @@ public class Ui {
     }
 
     /**
+     * Returns a String message provides in-app
+     * guidance to users.
+     *
+     * @return String message providing in-app guidance.
+     */
+    public String getHelpMessage() {
+        return "Duke is your companion for keeping track of tasks!\n"
+                + "It helps keep track of 3 types of tasks:\n"
+                + "1. ToDos (Task with no specified date/time)\n"
+                + "2. Deadlines (Task that needs to be done by specified date/time)\n"
+                + "3. Events (Task that needs to be attended to at specified date/time)\n\n"
+                + "To add a ToDo, enter:\n"
+                + "todo {task description}\n\n"
+                + "To add a Deadline, enter:\n"
+                + "deadline {task description} /by {date/time in format dd-MM-yyyy HHmm}\n\n"
+                + "To add an Event, enter:\n"
+                + "event {task description} /at {date/time in format dd-MM-yyyy HHmm}\n\n"
+                + "To see a list of tasks you've added, enter: list\n\n"
+                + "To delete a task from the list, enter:\n"
+                + "delete {the number that corresponds to the task in your list of tasks}\n\n"
+                + "To mark a task as done, enter:\n"
+                + "done {the number that corresponds to the task in your list of tasks}\n\n"
+                + "To find a list of tasks containing a specific keyword, enter:\n"
+                + "find {keyword}";
+    }
+
+    /**
      * Returns a String message informing the user that
      * user input was invalid along with the error message.
      *

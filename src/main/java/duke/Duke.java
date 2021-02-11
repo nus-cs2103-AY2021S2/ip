@@ -1,13 +1,5 @@
 package duke;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-
 /**
  * The Duke program implements an application that
  * allows users to store Tasks in a list, which will
@@ -19,14 +11,6 @@ public class Duke {
     private final Storage storage;
     private final Parser parser;
     private final TaskList taskList;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Class constructor.
@@ -94,6 +78,9 @@ public class Duke {
                 response = ui.getByeMessage();
                 System.exit(0);
                 break;
+            case HELP:
+                response = ui.getHelpMessage();
+                break;
             default:
                 throw new AssertionError(command);
             }
@@ -102,30 +89,5 @@ public class Duke {
         }
         assert response != null;
         return response;
-    }
-
-    /**
-     * Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userInput.getText(), user),
-                DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
-        );
-        userInput.clear();
     }
 }
