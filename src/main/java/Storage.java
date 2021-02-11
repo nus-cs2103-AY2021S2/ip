@@ -54,17 +54,13 @@ public class Storage {
      */
     public void saveHistory(TaskList tasklist) throws IOException {
         FileWriter fw = new FileWriter("PreviousTaskList.txt");
-        try {
-            for (int i = 0; i < tasklist.size(); i++) {
-                if (i == 0) {
-                    fw.write(tasklist.write(i));
-                } else {
-                    fw.write(System.lineSeparator() + tasklist.write(i));
-                }
+        tasklist.forEach(x -> {
+            try {
+                fw.write(x + "/n");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        });
         fw.close();
     }
 }
