@@ -39,6 +39,9 @@ public class TodoCommand implements Command {
      */
     public static TodoCommand buildInstance(String argString) throws DukeException {
         String[] cmdArgs = ParserUtils.getCommandArgs(argString, "The description of a todo cannot be empty.");
+
+        assert(cmdArgs[0].equals("todo"));
+
         String taskName = cmdArgs[1];
         return new TodoCommand(taskName);
     }

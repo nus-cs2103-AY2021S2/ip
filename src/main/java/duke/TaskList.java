@@ -21,6 +21,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a new task into the list
+     * @param t task to be added
+     */
     public void addTask(Task t) {
         assert(t != null);
         this.tasks.add(t);

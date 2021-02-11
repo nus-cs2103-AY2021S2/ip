@@ -1,6 +1,8 @@
 package duke.ui;
 
 public class JavafxUi extends Ui {
+    public static final String INTRO_MESSAGE = "What can I do for you?";
+
     private String replyString;
 
     public JavafxUi() {
@@ -27,6 +29,6 @@ public class JavafxUi extends Ui {
 
     @Override
     public void printIntro() {
-        printIndentOutput("What can I do for you?");
+        printIndentOutput(INTRO_MESSAGE);
     }
 }

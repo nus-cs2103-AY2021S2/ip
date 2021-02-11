@@ -37,6 +37,9 @@ public class EventCommand extends AddCommand {
      */
     public static EventCommand buildInstance(String argString) throws DukeException {
         String[] cmdArgs = ParserUtils.getCommandArgs(argString, "The description of an event cannot be empty.");
+
+        assert(cmdArgs[0].equals("event"));
+
         String[] eventArgs = cmdArgs[1].split(" /at ", 2);
         if (eventArgs.length < 2) {
             throw new DukeException("The event needs to have a date specified with \"/at\".");

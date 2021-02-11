@@ -29,7 +29,7 @@ public class TaskListTest {
         l.addTask(t);
         assertEquals(t, l.getTask(0));
         l.removeTask(0);
-        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+        AssertionError error = assertThrows(AssertionError.class, () -> {
             l.getTask(0);
         });
     }
