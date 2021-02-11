@@ -13,22 +13,7 @@ public class Duke {
         storage.readFromStorage(taskList);
         parser = new Parser(taskList, storage);
     }
-
-//    /**
-//     * Runs Duke application.
-//     */
-//    public void run() {
-//        ui.runUi(taskList, storage);
-//    }
-//
-//    /**
-//     * Driver code. Creates and runs Duke.
-//     * @param args Commandline arguments. Not used.
-//     */
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
-
+    
     public String getResponse(String input) {
         return parser.parse(input);
     }
