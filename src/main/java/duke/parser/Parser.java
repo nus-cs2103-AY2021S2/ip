@@ -15,11 +15,22 @@ import duke.commands.ToDoCommand;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * class Parser
+ * @author Png Zheng Jie, Sebastian
+ * Description: Parses the user inputs into executable commands
+ */
 public class Parser {
     private static final Pattern BASE_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<commandDescription>.*)");
     private static final Pattern DEADLINE_FORMAT = Pattern.compile("(?<deadlineDescription>.*) /by (?<deadlineDate>.*)");
     private static final Pattern EVENT_FORMAT = Pattern.compile("(?<eventDescription>.*) /at (?<eventDate>.*)");
 
+    /**
+     * parse: parses the user inputs into executable commands
+     * @param userInput input string by user
+     * @return an executable command
+     * @throws DukeException
+     */
     public static Command parse(String userInput) throws DukeException {
         Matcher matcher = BASE_COMMAND_FORMAT.matcher(userInput.trim());
 

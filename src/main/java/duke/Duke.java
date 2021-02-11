@@ -7,11 +7,20 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * class Duke
+ * @author Png Zheng Jie, Sebastian
+ * Description: A class to represent chatbot program that keeps track of tasks
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor: creates a new Duke program
+     * @param filePath path where the list of tasks is saved
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * run: runs the Duke program
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -38,6 +50,10 @@ public class Duke {
         }
     }
 
+    /**
+     * main procedure
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

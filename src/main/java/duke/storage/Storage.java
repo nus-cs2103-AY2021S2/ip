@@ -13,13 +13,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * class Storage
+ * @author Png Zheng Jie, Sebastian
+ * Description: Saves and loads the list of tasks to a designated file path
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor: creates a new Storage
+     * @param filePath path where the list of tasks is saved
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * loadFile: loads the saved list of tasks
+     * @return an ArrayList of tasks
+     * @throws DukeException
+     */
     public ArrayList<Task> loadFile() throws DukeException {
         File tasksListFile = new File(filePath);
         ArrayList<Task> tasksList = new ArrayList<>();
@@ -62,6 +76,11 @@ public class Storage {
         }
     }
 
+    /**
+     * saveFile: save the list of tasks into a text file
+     * @param tasks the ArrayList of tasks
+     * @throws DukeException
+     */
     public void saveFile(ArrayList<Task> tasks) throws DukeException {
         try {
             File tasksListFile = new File(filePath);
