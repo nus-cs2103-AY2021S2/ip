@@ -1,5 +1,6 @@
 package chat.task;
 
+import chat.Chat;
 import chat.ChatException;
 
 /**
@@ -36,28 +37,58 @@ public class Todo extends Task {
      */
     public static Todo createTodo (String str) throws ChatException {
         assert str != "";
-        
-        if (!str.startsWith("todo")) {
-            //i.e. deadline
-            throw new ChatException("wrong instruction for todo\n" +
-                    "Please input with this format:\n" +
-                    "todo [name]");
-        } else if (str.strip().equals("todo")) {
-            //i.e. todo
-            //i.e. todo(followed by one or more empty spaces)
-            throw new ChatException("todo name missing\n" +
-                    "Please input with this format:\n" +
-                    "todo [name]");
-        } else if (!str.startsWith("todo ")) {
-            //i.e. todoread book
-            throw new ChatException("no spacing after todo\n" +
-                    "Please input with this format:\n" +
-                    "todo [name]");
-        } else {
+
+        String formatStr = "Please input with this format:\ntodo [name]";
+        try {
+            checkWrongCommand(str);
+            checkNoName(str);
+            checkNoSpaceBetweenTodoAndName(str);
             return new Todo(str.replace("todo ", "").strip());
+        } catch (ChatException e) {
+            throw new ChatException(e.getMessage() + formatStr);
         }
     }
 
+    /**
+     * Checks if wrong command is given by user. 
+     * 
+     * @param str User's input.
+     * @throws ChatException ChatException thrown if wrong command is given.
+     */
+    private static void checkWrongCommand(String str) throws ChatException {
+        if (!str.startsWith("todo")) {
+            //i.e. deadline
+            throw new ChatException("wrong instruction for todo\n");
+        }
+    }
+
+    /**
+     * Checks for empty name.
+     * 
+     * @param str User's input. 
+     * @throws ChatException ChatException thrown if empty name.
+     */
+    private static void checkNoName(String str) throws ChatException {
+        if (str.strip().equals("todo")) {
+            //i.e. todo
+            //i.e. todo(followed by one or more empty spaces)
+            throw new ChatException("todo name missing\n");
+        }
+    }
+
+    /**
+     * Checks for no space between todo and name.
+     * 
+     * @param str User's input.
+     * @throws ChatException ChatException thrown if no space between todo and name.
+     */
+    private static void checkNoSpaceBetweenTodoAndName(String str) throws ChatException {
+        if (!str.startsWith("todo ")) {
+            //i.e. todoread book
+            throw new ChatException("no spacing after todo\n");
+        }
+    }
+    
     /**
      * Returns a comma separated string of all parameters.
      *

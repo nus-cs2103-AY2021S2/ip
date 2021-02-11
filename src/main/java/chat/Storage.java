@@ -58,32 +58,52 @@ public class Storage {
      */
     public ArrayList<Task> load() throws ChatException {
         try {
-            ArrayList<Task> tasksFromFile = new ArrayList<>();
-            if (!Files.exists(filePath)) {
-                if (!Files.exists(filePath.getParent())) {
-                    Files.createDirectory(filePath.getParent());
-                }
-                Files.createFile(filePath);
-            } else {
-                String lines = Files.readString(filePath);
-                if (!lines.isEmpty()) {
-                    String[] strArr = lines.split("\n");
-                    for (String s : strArr) {
-                        String[] parArr = s.split(","); //parameter array
-                        if (parArr[0].equals("T")) {
-                            tasksFromFile.add(new Todo(Boolean.parseBoolean(parArr[1]), parArr[2]));
-                        } else if (parArr[0].equals("D")) {
-                            tasksFromFile.add(new Deadline(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3]));
-                        } else {
-                            //E
-                            tasksFromFile.add(new Event(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3], parArr[4]));
-                        }
-                    }
-                }
-            }
+            createFileAndOrDirectoryIfDontExist();
+            String lines = Files.readString(filePath);
+            ArrayList<Task> tasksFromFile = createTaskList(lines);
             return tasksFromFile;
         } catch (IOException e) {
             throw new ChatException("Error loading file");
+        }
+    }
+    
+    private void createFileAndOrDirectoryIfDontExist() throws IOException {
+        if (!Files.exists(filePath)) {
+            if (!Files.exists(filePath.getParent())) {
+                Files.createDirectory(filePath.getParent());
+            }
+            Files.createFile(filePath);
+        }
+    }
+    
+    private static Task convertStrToTaskObject(String str) throws ChatException {
+        String[] parameters = str.split(",");
+        String taskType = parameters[0];
+        
+        switch(taskType) {
+        case "T":
+            return new Todo(Boolean.parseBoolean(parameters[1]), parameters[2]);
+        case "D":
+            return new Deadline(Boolean.parseBoolean(parameters[1]), parameters[2], parameters[3]);
+        case "E": 
+            return new Event(Boolean.parseBoolean(parameters[1]), parameters[2], parameters[3], parameters[4]);
+        default:
+            throw new ChatException("Incorrect data format in file.");
+        }
+    }
+    
+    private static ArrayList<Task> createTaskList(String lines) throws ChatException { 
+        try {
+            ArrayList<Task> tasks = new ArrayList<>();
+            if (!lines.isEmpty()) {
+                String[] strArr = lines.split("\n");
+                for (String s : strArr) {
+                    tasks.add(convertStrToTaskObject(s));
+                }
+            }
+            return tasks;
+        } catch (ChatException e) {
+            throw e;
         }
     }
     

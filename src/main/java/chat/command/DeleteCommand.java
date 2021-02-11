@@ -38,7 +38,7 @@ public class DeleteCommand extends Command{
         assert taskList != null;
         assert ui != null;
         assert storage != null;
-        
+
         Task task = checkCommandIndex(taskList, "delete", this.inputStr);
         taskList.getTasks().remove(task);
         storage.save(taskList);

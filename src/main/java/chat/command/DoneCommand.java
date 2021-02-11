@@ -36,10 +36,10 @@ public class DoneCommand extends Command {
         assert taskList != null;
         assert ui != null;
         assert storage != null;
-        
+
         Task task = checkCommandIndex(taskList, "done", this.inputStr);
-        
         if (task.getIsDone()) {
+            //task has already been marked as completed 
             throw new ChatException(String.format("Task already completed\n%s", task));
         } else {
             task.completed();

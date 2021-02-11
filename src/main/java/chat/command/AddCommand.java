@@ -41,7 +41,6 @@ public class AddCommand extends Command{
         assert storage != null;
         
         Task task;
-        
         if (this.inputStr.startsWith("todo")) {
             task = Todo.createTodo(this.inputStr);
         } else if (this.inputStr.startsWith("deadline")) {

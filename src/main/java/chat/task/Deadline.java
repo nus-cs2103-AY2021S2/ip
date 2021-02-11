@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import chat.Chat;
 import chat.ChatException;
 
 /**
@@ -53,57 +54,102 @@ public class Deadline extends Task {
     public static Deadline createDeadline (String str) throws ChatException {
         assert str != ""; 
 
-        String formatStr = "Please input with this format:\n" + 
+        String formatStr = "Please input with this format:\n" +
                 "deadline [name] /by [end date/time]\n" +
                 "* end date/time should be written as dd/MM/yyyy HH:mm\n" +
                 "* i.e. 19/03/2019 23:55";
         
+        try {
+            checkWrongCommand(str);
+            checkAllParametersIsMissing(str);
+            checkNoSpaceBetweenDeadlineAndName(str);
+            
+            String parameterStr = str.replace("deadline ", "").stripLeading();
+            checkNoName(parameterStr);
+            checkNoBy(parameterStr);
+            checkNoSpaceAroundBy(parameterStr);
+            
+            String[] parameters = str.split(" /by ");
+            checkNoEnd(parameters);
+            checkDuplicateBy(parameters);
+            
+            LocalDateTime end = parseEndDateTime(parameters);
+            return new Deadline(parameters[0].strip(), end);
+        } catch (ChatException e) {
+            throw new ChatException(e.getMessage() + formatStr);
+        }
+    }
+    
+    private static void checkWrongCommand(String str) throws ChatException {
         if (!str.startsWith("deadline")) {
             //i.e. event
-            throw new ChatException("wrong instruction for deadline\n" + formatStr);
-        } else if (str.strip().equals("deadline")) {
+            throw new ChatException("wrong instruction for deadline\n");
+        }
+    }
+
+    private static void checkAllParametersIsMissing(String str) throws ChatException {
+        if (str.strip().equals("deadline")) {
             //i.e. deadline
             //i.e. deadline(followed by one or more empty spaces)
-            throw new ChatException("deadline name and end date/time missing\n" + formatStr);
-        } else if (!str.startsWith("deadline ")) {
-            //i.e. deadlinereturn book
-            throw new ChatException("no spacing after deadline\n" + formatStr);
+            throw new ChatException("deadline name and end date/time missing\n");
         }
+    }
 
-        String tempStr = str.replace("deadline ", "").stripLeading();
-        if (tempStr.startsWith("/by")) {
+    private static void checkNoSpaceBetweenDeadlineAndName(String str) throws ChatException {
+        if (!str.startsWith("deadline ")) {
+            //i.e. deadlinereturn book
+            throw new ChatException("no spacing after deadline\n");
+        }
+    }
+    
+    private static void checkNoName(String parameterStr) throws ChatException {
+        if (parameterStr.startsWith("/by")) {
             //i.e. deadline /by
             //i.e. deadline /by night
-            throw new ChatException("deadline name missing\n" + formatStr);
-        } else if (!tempStr.contains("/by")) {
+            throw new ChatException("deadline name missing\n");
+        }
+    }
+
+    private static void checkNoBy(String parameterStr) throws ChatException {
+        if (!parameterStr.contains("/by")) {
             //i.e. deadline return book
             //i.e. deadline return book tmr
-            throw new ChatException("/by missing\n" + formatStr);
-        } else if (!tempStr.contains(" /by ")) {
+            throw new ChatException("/by missing\n");
+        }
+    }
+    
+    private static void checkNoSpaceAroundBy(String parameterStr) throws ChatException {
+        if (!parameterStr.contains(" /by ")) {
             //i.e. deadline return book/by
             //i.e. deadline return book/by tmr
             //i.e. deadline return book /bytmr
             //i.e. deadline return book/bytmr
-            throw new ChatException("missing spaces before or after /by\n" + formatStr);
+            throw new ChatException("missing spaces before or after /by\n");
         }
-
-        String[] tempArr = tempStr.split(" /by ");
-        if (tempArr.length < 2) {
+    }
+    
+    private static void checkNoEnd(String[] parameters) throws ChatException {
+        if (parameters.length < 2) {
             //i.e. deadline return book /by
-            throw new ChatException("missing end date/time\n" + formatStr);
-        } else if (tempArr.length > 2 || tempArr[1].contains("/by")) {
-            //i.e. deadline return book /by /by night
-            throw new ChatException("not allowed to have more than 1 ' /by '\n" + formatStr);
-        } 
-        
-        try {
-            String endStr = tempArr[1].strip();
-            LocalDateTime endDateTime = LocalDateTime.parse(endStr, inputFormatter);
-            return new Deadline(tempArr[0].strip(), endDateTime);
-        } catch (DateTimeParseException e) {
-            throw new ChatException("End date/time is of wrong format\n" + formatStr);
+            throw new ChatException("missing end date/time\n");
         }
-        
+    }
+    
+    private static void checkDuplicateBy(String[] parameters) throws ChatException{
+        if (parameters.length > 2 || parameters[1].contains("/by")) {
+            //i.e. deadline return book /by /by night
+            throw new ChatException("not allowed to have more than 1 ' /by '\n");
+        }
+    }
+    
+    private static LocalDateTime parseEndDateTime(String[] parameters) throws ChatException {
+        try {
+            String endStr = parameters[1].strip();
+            LocalDateTime endDateTime = LocalDateTime.parse(endStr, inputFormatter);
+            return endDateTime;
+        } catch (DateTimeParseException e) {
+            throw new ChatException("End date/time is of wrong format\n");
+        }
     }
 
     /**

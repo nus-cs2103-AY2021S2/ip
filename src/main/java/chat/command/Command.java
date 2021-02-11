@@ -43,14 +43,13 @@ public abstract class Command {
     public Task checkCommandIndex(TaskList taskList, String commandName, String str) throws ChatException {
         //for commands with format: [command] [index]
         //returns valid index if index is correct
-
         assert taskList != null;
         assert commandName != ""; 
         assert str != ""; 
         assert str.contains(commandName);
 
-        String formatStr = String.format("Please input with this format:\n" + 
-                "%s [index]", commandName);
+        String formatStr = String.format("Please input with this format:\n%s [index]", commandName);
+
         if (str.strip().equals(commandName)) {
             throw new ChatException("Missing index\n" + formatStr);
         } else if (!str.contains(" ")) {
