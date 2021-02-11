@@ -22,12 +22,10 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public void initialise(TaskList tasklist) throws FileNotFoundException {
-        System.out.println(isSavedHistory());
         if (isSavedHistory()) {
             Scanner s = new Scanner(this.file);
             while (s.hasNext()) {
                 String current = s.nextLine().toLowerCase();
-                System.out.println(current);
                 assert current != null : "current at initialise in Storage";
                 if (current.contains("todo")) {
                     Task task = Todo.readTaskFromStorage(current);
