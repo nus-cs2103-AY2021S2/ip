@@ -81,7 +81,8 @@ class FileReader {
                 }
 
                 Task t = toTask(currStr);
-
+                assert t != null : "task cannot be null";
+                
                 if (isDone) {
                     t.markAsDone();
                 }
@@ -98,7 +99,6 @@ class FileReader {
     private Task toTask(String input) {
         Scanner sc = new Scanner(input);
         String command = sc.next();
-
         String[] args = sc.nextLine().split("[|]");
 
         String description = args[0].trim();

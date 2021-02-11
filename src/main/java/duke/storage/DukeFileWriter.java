@@ -20,6 +20,8 @@ class DukeFileWriter {
     void writeFile(String filePath, String input) throws DukeException {
 
         try {
+            assert !filePath.equals("") : "File path should not be empty.";
+
             FileWriter fw = new FileWriter(filePath);
 
             fw.write(input);
