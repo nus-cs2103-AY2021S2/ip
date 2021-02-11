@@ -97,8 +97,7 @@ public class Ui {
         }
         if (newList.size() == 0) {
             message += "No matching tasks found. :^S";
-        }
-        else {
+        } else {
             for (Task task : newList) {
                 if (task.getDescription().contains(keyword)) {
                     message += task + "\n";

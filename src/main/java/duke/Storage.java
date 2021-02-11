@@ -37,20 +37,17 @@ public class Storage {
             char type = task.getType();
             if (!task.getDoneStatus()) {
                 num = 0;
-            }
-            else {
+            } else {
                 num = 1;
             }
             if (type == 'T') {
                 fileContent += type + " ; " + num + " ; " + description + "\n";
-            }
-            else if (type == 'D') {
+            } else if (type == 'D') {
                 Deadline deadline = (Deadline) task;
-                fileContent += type + " ; " + num + " ; " + description +  " ; " + deadline.getBy() + "\n";
-            }
-            else { //type 'E'
+                fileContent += type + " ; " + num + " ; " + description + " ; " + deadline.getBy() + "\n";
+            } else { //type 'E'
                 Event event = (Event) task;
-                fileContent += type + " ; " + num + " ; " + description +  " ; " + event.getAt() + "\n";
+                fileContent += type + " ; " + num + " ; " + description + " ; " + event.getAt() + "\n";
             }
         }
         fw.write(fileContent);
@@ -76,24 +73,26 @@ public class Storage {
             Scanner s = new Scanner(savedTasksFile);
             while (s.hasNextLine()) {
                 String line = s.nextLine();
+                assert line.contains(";") : "Saved task does not contain ; but should";
                 String[] taskArr = line.split(" ; ", 4);
-                char type = taskArr[0].charAt(0);
+                String type = taskArr[0];
                 String num = taskArr[1];
                 String description = taskArr[2];
-                if (type == 'T') {
+                if (type.equals("T")) {
                     Todo todo = new Todo(description);
                     if (num.equals("1")) {
                         todo.done();
                     }
                     list.add(todo);
-                } else if (type == 'D') {
+                } else if (type.equals("D")) {
                     String when = taskArr[3];
                     Deadline deadline = new Deadline(description, when);
                     if (num.equals("1")) {
                         deadline.done();
                     }
                     list.add(deadline);
-                } else { //type 'E'
+                } else {
+                    assert type.equals("E") : type + ": Type should be E";
                     String when = taskArr[3];
                     Event event = new Event(description, when);
                     if (num.equals("1")) {
