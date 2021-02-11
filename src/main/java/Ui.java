@@ -9,7 +9,7 @@ public class Ui {
      * Prints a big Duke and greets the user. Prompts user to start input.
      */
     public String greet() {
-        return "Hello! I'm Duke :) What can I do for you?";
+        return "Hello hello ;> How can I help you?";
     }
 
     /**
@@ -23,6 +23,6 @@ public class Ui {
      * Prints a bye statement before exit.
      */
     public String sayBye() {
-        return "Byebye~ Hope to see you again soon!";
+        return "Byebye~ See you again soon!";
     }
 }

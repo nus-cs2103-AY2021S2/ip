@@ -16,7 +16,7 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.parser = new Parser();
+        this.parser = new Parser(this.storage);
     }
 
     /**
@@ -27,7 +27,7 @@ public class Duke {
         try {
             return this.parser.process(input);
         } catch (DukeException err) {
-            return err.toString();
+            return err.getMessage();
         }
     }
 }

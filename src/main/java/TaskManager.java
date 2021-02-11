@@ -48,7 +48,11 @@ public class TaskManager {
      * Prints the list of all tasks and their statuses.
      */
     public String displayTasks() {
-        return this.toString();
+        if (this.store.size() == 0) {
+            return "Congratulations, you have nothing to do!";
+        } else {
+            return this.toString();
+        }
     }
 
     /**

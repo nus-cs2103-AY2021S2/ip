@@ -6,7 +6,7 @@ public class FindCommand extends Command {
 
     /** Initialises find command with keyword. */
     public FindCommand(String description) {
-        super("Here are the matching tasks in your list: ");
+        super("These seem to match what you're looking for: ");
         this.keyword = description.replaceAll("find ", "");
     }
 
@@ -16,6 +16,6 @@ public class FindCommand extends Command {
      * @param storage Storage that interacts with information stored on harddrive.
      */
     public String execute(TaskManager manager, Ui ui, Storage storage) {
-        return this.message + manager.find(this.keyword);
+        return this.message + "\n" + manager.find(this.keyword);
     }
 }

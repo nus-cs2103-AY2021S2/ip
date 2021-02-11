@@ -49,17 +49,17 @@ public class Storage {
                 String line = sc.nextLine();
                 boolean done = false;
                 Task t;
-                if (line.split("]")[1].replace("[", "") != "") {
+                if (!line.split("\\]")[1].split("\\[")[1].equals(" ")) { 
                     done = true;
                 }
                 if (line.contains("T")) {
-                    t = new Todo(line.split(" ")[1]);
+                    t = new Todo(line.split("\\] ")[1]);
                 } else if (line.contains("D")) {
-                    String description = line.split(" ")[1];
+                    String description = line.split("\\] ")[1].split(" \\(")[0];
                     String by = line.split("\\(by: ")[1].split("\\)")[0];
                     t = new Deadline(description, by);
                 } else {
-                    String description = line.split(" ")[1];
+                    String description = line.split("\\] ")[1].split(" \\(")[0];
                     String by = line.split("\\(at: ")[1].split("\\)")[0];
                     t = new Event(description, by);
                 }

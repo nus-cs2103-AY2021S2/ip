@@ -17,8 +17,8 @@ public class Parser {
     private TaskManager manager;
 
     /** Initialises a parser in chatbot to make sense of user inputs. */
-    public Parser() {
-        this.storage = new Storage();
+    public Parser(Storage storage) {
+        this.storage = storage;
         this.ui = new Ui();
         this.manager = new TaskManager(this.storage.loadContent());
     }
@@ -63,25 +63,4 @@ public class Parser {
             throw new KeywordException();
         }
     }
-
-    /**
-     * Starts chat, reads user input and replies.
-     * Exits when user says bye.
-     */
-    /*public void chat() {
-        Scanner sc = new Scanner(System.in);
-        String input;
-
-        while (sc.hasNextLine()) {
-            input = sc.nextLine();
-            try {
-                this.process(input);
-            } catch (DukeException err) {
-                System.out.println(err.getMessage());
-            }
-            if (!input.equals("bye")) {
-                this.ui.separateLine();
-            }   
-        }
-    }*/
 }

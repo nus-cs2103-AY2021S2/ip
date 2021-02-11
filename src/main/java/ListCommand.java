@@ -5,7 +5,7 @@ public class ListCommand extends Command {
 
     /** Initialises list command. */
     public ListCommand() {
-        super("");
+        super("Here are all your tasks: ");
     }
 
     /** Executes list command to display all user's tasks.
@@ -14,7 +14,7 @@ public class ListCommand extends Command {
      * @param storage Storage that interacts with information stored on harddrive.
      */
     public String execute(TaskManager manager, Ui ui, Storage storage) {
-        return manager.displayTasks();
+        return this.message + "\n" + manager.displayTasks();
     }
 
 }

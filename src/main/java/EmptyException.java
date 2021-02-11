@@ -6,7 +6,7 @@ package duke;
  */
 public class EmptyException extends DukeException {
     /** Fixed message to remind user to include task description. */
-    static final String message = ":( OOPS! the description of a task cannot be empty.";
+    static final String message = ":( hmm I'm not sure what you want to do";
 
     /**
      * Initialises new empty description exception.

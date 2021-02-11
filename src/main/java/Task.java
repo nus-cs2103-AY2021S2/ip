@@ -32,7 +32,7 @@ public abstract class Task {
      @return an empty space for undone tasks and tick for done tasks.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "  ");
+        return (isDone ? "\u2713" : " ");
     }
 
     @Override
