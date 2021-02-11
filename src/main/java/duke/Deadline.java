@@ -28,12 +28,17 @@ public class Deadline extends Task {
         return this.date;
     }
 
-    public String getFormattedDate() {
+    @Override
+    public LocalDate getFormattedDate() {
+        return this.formattedDate;
+    }
+
+    public String getFormattedDateString() {
         return formattedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getFormattedDate() + ")";
+        return "[D]" + super.toString() + " (by: " + this.getFormattedDateString() + ")";
     }
 }

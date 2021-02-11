@@ -63,6 +63,9 @@ public class Duke {
                 String keyword = inputArr[1];
                 response = ui.findTask(keyword, tasks.getList());
                 break;
+            case HELP:
+                response = ui.viewHelpMessage();
+                break;
             case TODO:
                 parser.isValidDescription(inputArr);
                 description = parser.getDescription(inputArr, "todo");
@@ -85,6 +88,9 @@ public class Duke {
                 Task event = new Event(description, date);
                 tasks.addTask(event);
                 response = ui.addTaskMessage(tasks.getList(), event);
+                break;
+            case STATS:
+                response = ui.getStatistics(tasks.getList());
                 break;
             default:
                 throw new UnknownInputException();

@@ -27,12 +27,18 @@ public class Event extends Task {
     public String getDate() {
         return this.date;
     }
-    public String getFormattedDate() {
+
+    @Override
+    public LocalDate getFormattedDate() {
+        return this.formattedDate;
+    }
+
+    public String getFormattedDateString() {
         return formattedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getFormattedDate() + ")";
+        return "[E]" + super.toString() + " (at: " + this.getFormattedDateString() + ")";
     }
 }

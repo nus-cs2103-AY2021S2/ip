@@ -7,3 +7,7 @@ T ; 0 ; didnt skate
 T ; 0 ; icecream chillin
 T ; 0 ; skate
 T ; 1 ; hibye
+T ; 0 ; nihao
+D ; 0 ; project assignment ; 2019-10-15
+E ; 1 ; cycle at ECP ; 2021-02-15
+E ; 0 ; dig party ; 2012-09-09

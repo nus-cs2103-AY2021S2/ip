@@ -7,14 +7,14 @@ import java.util.ArrayList;
  * User interface class for Duke's interaction with users, send messages etc.
  */
 public class Ui {
+    protected Statistics stats;
 
-    protected static final String HORIZONTAL_RULE = "____________________________________________________________";
 
     /**
      * Constructor for Ui class.
      */
     public Ui() {
-
+        this.stats = new Statistics();
     }
 
     /**
@@ -22,7 +22,8 @@ public class Ui {
      */
     public static String greetings() {
         String message = "Hello! I'm your personal assistant Fluffy\n"
-                + "How can I assist you?";
+                + "How can I assist you?\n"
+                + "Type \"help\" to see what you can do here!";
         return message;
     }
 
@@ -57,7 +58,6 @@ public class Ui {
                 + "Now you have " + list.size() + " tasks in the list.";
         return message;
     }
-
 
     /**
      * Prints message when user checks a task as done
@@ -104,6 +104,31 @@ public class Ui {
                 }
             }
         }
+        return message;
+    }
+
+    public String viewHelpMessage() {
+        String message = "List of commands\n"
+                + "bye -> Exit application\n"
+                + "list -> List all the tasks you currently have\n"
+                + "done [index] -> Mark a task as completed \n"
+                + "delete [index] -> Delete a task\n"
+                + "find [keyword] -> Search for the keyword in the list of tasks\n"
+                + "todo [description] -> Add a todo\n"
+                + "deadline [description] /by [date] -> Add a deadline\n"
+                + "event [description] /at [date] -> Add an event\n"
+                + "stats -> Show overdue tasks and tasks happening soon";
+        return message;
+    }
+
+    public String getStatistics(ArrayList<Task> list) {
+        String divider = "------\n";
+        String message = "";
+        message += "Overdue Deadlines:\n";
+        message += stats.getOverdueDeadlines(list);
+        message += divider;
+        message += "Deadlines and Events due/happening in a week:\n";
+        message += stats.getTasksDueSoon(list);
         return message;
     }
 }
