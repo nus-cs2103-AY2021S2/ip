@@ -6,8 +6,8 @@ import java.util.Scanner;
  * The Ui class manages interactions with the user, based on user input.
  *
  * @author  arsatis
- * @version 1.1
- * @since   2021-01-26
+ * @version 1.2
+ * @since   2021-02-08
  */
 public class Ui {
     /** Scanner class used to read user input. */
@@ -87,6 +87,11 @@ public class Ui {
                 + "Enter \"done <index>\" to mark a task at the specified index as done.\n"
                 + "--------------------------------------------------\n"
                 + "Enter \"delete <index>\" to delete a task at the specified index.\n"
+                + "--------------------------------------------------\n"
+                + "Enter \"edit <index> /desc <description>\" to edit the description of a task at the specified"
+                + " index.\n"
+                + "Enter \"edit <index> /date <date>\" to edit the date of a deadline or event at the specified"
+                + " index.\n"
                 + "--------------------------------------------------\n"
                 + "Enter \"sort\" to sort your list of tasks into alphabetical ordering.\n"
                 + "Enter \"sort by type\" to sort your list of tasks by their type.\n"

@@ -11,7 +11,7 @@ package chadbot.exceptions;
 public class InvalidInputException extends Exception {
     /** The message carried by the InvalidInputException. */
     private static final String MESSAGE = "I'm sorry, but I don't know what that means.\n"
-            + "Enter \"help\" for more information about Chadbot's functions.";
+            + "Enter \"help\" to see a list of functions supported by Chadbot.";
 
     /**
      * Default constructor for the InvalidInputException class.

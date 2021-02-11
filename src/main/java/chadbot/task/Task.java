@@ -10,7 +10,7 @@ package chadbot.task;
  */
 public abstract class Task {
     /** Description of the task. */
-    protected final String name;
+    protected String name;
 
     /** Indicates whether the task has been done by the user. */
     protected boolean isDone;
@@ -48,6 +48,13 @@ public abstract class Task {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Modifies the description of the Task.
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

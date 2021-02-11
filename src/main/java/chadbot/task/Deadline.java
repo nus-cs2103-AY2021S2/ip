@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task implements Comparable<Deadline> {
     /** Date which the deadline is due. */
-    private final LocalDate date;
+    private LocalDate date;
 
     /**
      * Default constructor for the Deadline class.
@@ -45,6 +45,13 @@ public class Deadline extends Task implements Comparable<Deadline> {
      */
     public LocalDate getDateAsLocalDate() {
         return date;
+    }
+
+    /**
+     * Modifies the date the Deadline is due on.
+     */
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     /**
