@@ -48,6 +48,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setPannable(true);
 
         //Setup send button
         ImageView imageView = new ImageView(sendImage);
