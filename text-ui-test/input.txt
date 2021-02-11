@@ -1,0 +1,17 @@
+todo borrow book
+deadline return book /by Sunday
+deadline return book /by 2011-11-11
+deadline return book /by 2019-01-01
+deadline return book /by 2034-02-28
+event project meeting /at Mon 2-4pm
+event project meeting /at 2034-02-28
+list
+done 2
+done 4
+delete 3
+delete 3
+list
+list Mon 2-4pm
+list 1111-11-11
+list 2034-02-28
+bye

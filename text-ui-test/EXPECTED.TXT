@@ -1,7 +1,63 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 tasks in the list.
+__________
+OOPS!!! Please give your date in the format YYYY-MM-DD.
+__________
+Got it. I've added this task:
+[D][ ] return book (by: Nov 11 2011)
+Now you have 2 tasks in the list.
+__________
+Got it. I've added this task:
+[D][ ] return book (by: Jan 1 2019)
+Now you have 3 tasks in the list.
+__________
+Got it. I've added this task:
+[D][ ] return book (by: Feb 28 2034)
+Now you have 4 tasks in the list.
+__________
+OOPS!!! Please give your date in the format YYYY-MM-DD.
+__________
+Got it. I've added this task:
+[E][ ] project meeting (at: Feb 28 2034)
+Now you have 5 tasks in the list.
+__________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Nov 11 2011)
+3. [D][ ] return book (by: Jan 1 2019)
+4. [D][ ] return book (by: Feb 28 2034)
+5. [E][ ] project meeting (at: Feb 28 2034)
+__________
+Nice! I've marked this task as done:
+[D][X] return book (by: Nov 11 2011)
+__________
+Nice! I've marked this task as done:
+[D][X] return book (by: Feb 28 2034)
+__________
+Noted. I've removed this task:
+[D][ ] return book (by: Jan 1 2019)
+Now you have 4 tasks in the list.
+__________
+Noted. I've removed this task:
+[D][X] return book (by: Feb 28 2034)
+Now you have 3 tasks in the list.
+__________
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][X] return book (by: Nov 11 2011)
+3. [E][ ] project meeting (at: Feb 28 2034)
+__________
+OOPS!!! Please give your date in the format YYYY-MM-DD.
+__________
+You have no deadlines due on 1111-11-11.
+You have no events due on 1111-11-11.
+__________
+You have no deadlines due on 2034-02-28.
+Here are the events due on 2034-02-28:
+1. [E][ ] project meeting (at: Feb 28 2034)
+__________
+__________
+Bye. Hope to see you again soon!
