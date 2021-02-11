@@ -16,7 +16,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Returns false as searching for tasks should not terminate the application.
+     * Returns false as listing tasks should not terminate the application.
      *
      * @return false
      */

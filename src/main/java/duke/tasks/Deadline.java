@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -36,5 +37,34 @@ public class Deadline extends Task {
      */
     public String getStatusString() {
         return "[D]" + super.getStatusString() + " (by: " + this.getByDateTimeString() + ")";
+    }
+
+    /**
+     * Determines if the <code>Deadline</code> is overdue.
+     *
+     * @return True if the deadline is later than the current time, and false otherwise.
+     */
+    public boolean isOverdue() {
+        if (this.isDone()) {
+            return false;
+        }
+
+        return LocalDateTime.now().isAfter(this.byDateTime);
+    }
+
+    /**
+     * Determines if the <code>Deadline</code> is urgent.
+     *
+     * @param urgencyInDays Number of days to use when determining if the <code>Deadline</code>
+     *                      is urgent.
+     * @return True if the deadline is within <code>urgencyInDays</code> of the current time.
+     */
+    public boolean isUrgent(int urgencyInDays) {
+        if (this.isDone()) {
+            return false;
+        }
+
+        LocalDateTime urgencyMark = this.byDateTime.minusDays(urgencyInDays);
+        return LocalDateTime.now().isAfter(urgencyMark) && !this.isOverdue();
     }
 }
