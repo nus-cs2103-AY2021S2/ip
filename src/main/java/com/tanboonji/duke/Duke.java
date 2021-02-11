@@ -30,8 +30,10 @@ public class Duke {
         try {
             taskList = storage.load();
         } catch (DukeException e) {
-
+          
         }
+
+        assert(taskList != null);
     }
 
     /**
