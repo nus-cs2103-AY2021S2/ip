@@ -1,0 +1,17 @@
+todo math homework
+todo science homework
+hi there
+list
+deadline coding assignment /by 12.02.21
+event sumobot contest /at 19.02.21 7pm
+list
+done 3
+deadline biology experiment /by 12.03.21 5pm
+todo laundry
+list
+done 2
+done 4
+list
+go home
+done 6
+bye
