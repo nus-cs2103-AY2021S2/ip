@@ -6,10 +6,10 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import chadbot.task.Deadline;
+import chadbot.task.Event;
+import chadbot.task.Task;
+import chadbot.task.ToDo;
 
 public class TaskTest {
     @Test

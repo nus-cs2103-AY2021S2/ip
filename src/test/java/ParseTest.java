@@ -2,12 +2,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.PrintCommand;
-import duke.subfiles.Parser;
+import chadbot.command.AddCommand;
+import chadbot.command.DeleteCommand;
+import chadbot.command.DoneCommand;
+import chadbot.command.ExitCommand;
+import chadbot.command.PrintCommand;
+import chadbot.subfiles.Parser;
 
 public class ParseTest {
     @Test
