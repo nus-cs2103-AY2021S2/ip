@@ -60,8 +60,4 @@ public class Duke {
             return "OOPS!!! " + e.getMessage();
         }
     }
-
-    boolean shouldExit(){
-        return isExit;
-    }
 }

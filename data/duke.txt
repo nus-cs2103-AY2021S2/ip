@@ -4,4 +4,3 @@ T | 0 | lunch
 D | 0 | lunch | 2020-09-03
 D | 0 | something | 2020-09-10
 T | 0 | thing
-T | 0 | I need to do this else I am finished vdddddddddddddddddddddd
