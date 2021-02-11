@@ -1,0 +1,15 @@
+todo sweep the floor
+deadline having lunch /by Sunday 2pm
+event team project meeting /at Monday 2-4pm
+todo sleep early
+list
+done
+done 2
+done 1
+invalid command
+list
+deadline study for the test /by 27 April 2021
+delete 10
+deadline cook a meal
+delete 3
+bye
