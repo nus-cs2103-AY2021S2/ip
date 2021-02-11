@@ -23,6 +23,7 @@ public class DeadlineCommand extends Command {
         dateTime = LocalDateTime.parse(getArgument(1), DateTimeFormatter.ofPattern("d/M/y HHmm"));
 
         taskList.add(new Deadline(desc, dateTime));
+        storage.save(taskList);
 
         return ui.getSuccessMessage("'" + desc + "' has been added as a deadline task.");
 

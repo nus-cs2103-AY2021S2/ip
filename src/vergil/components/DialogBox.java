@@ -1,4 +1,4 @@
-package vergil.components.ui;
+package vergil.components;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

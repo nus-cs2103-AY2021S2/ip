@@ -18,6 +18,7 @@ public class TodoCommand extends Command {
         desc = getArgument(0);
 
         taskList.add(new Todo(desc));
+        storage.save(taskList);
 
         return "Success! '" + desc + "' has been added as a todo task.";
     }

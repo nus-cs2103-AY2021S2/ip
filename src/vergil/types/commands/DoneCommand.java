@@ -18,9 +18,11 @@ public class DoneCommand extends Command {
     public String execute(Ui ui, TaskList taskList, Storage storage) throws VergilException {
         try {
             taskIndex = Integer.parseInt(getArgument(0));
-            taskAsString = taskList.getAsString(taskIndex);
 
             taskList.complete(taskIndex);
+            storage.save(taskList);
+
+            taskAsString = taskList.getAsString(taskIndex);
 
             return "Success! The following task has been completed:\n"
                     + taskAsString;

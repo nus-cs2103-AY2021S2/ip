@@ -17,7 +17,7 @@ import vergil.components.Ui;
 import vergil.components.Storage;
 import vergil.components.Parser;
 import vergil.components.TaskList;
-import vergil.components.ui.DialogBox;
+import vergil.components.DialogBox;
 
 import vergil.types.exceptions.VergilException;
 
@@ -61,6 +61,8 @@ public class Vergil extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
+        Label vergilWelcomeText = new Label(ui.getWelcomeMessage());
+
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
@@ -98,6 +100,9 @@ public class Vergil extends Application {
         stage.setScene(scene);
         stage.show();
 
+        dialogContainer.getChildren()
+                .add(getVergilDialog(vergilWelcomeText, new ImageView(vergil)));
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -123,18 +128,24 @@ public class Vergil extends Application {
         try {
             return parser.parse(command).execute(ui, taskList, storage);
         } catch (VergilException e) {
-            return e.getMessage();
+            return "Sorry! " + e.getMessage();
         }
     }
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label vergilText = new Label(getResponse(userInput.getText()));
+
         dialogContainer.getChildren().addAll(
                 getUserDialog(userText, new ImageView(user)),
                 getVergilDialog(vergilText, new ImageView(vergil))
         );
+
         userInput.clear();
+
+        if (vergilText.getText().equals(ui.getFarewellMessage())) {
+            System.exit(0);
+        }
     }
 
     public static void main(String[] args) {
