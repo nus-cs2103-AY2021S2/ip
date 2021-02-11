@@ -1,3 +1,5 @@
-todo | not done | 2
-todo | not done | 4
-todo | not done | 6
+todo | done | 2
+todo | done | 4
+todo | done | 6
+event | not done | project meeting  | 2/12/2019 1800
+deadline | not done | return book  | 3/06/2021 1550

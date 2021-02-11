@@ -109,6 +109,7 @@ public class ConsoleUI {
 
     /**
      * Reads the next line of input from sys.in
+     * Currently deprecated since javafx is used
      *
      * @return line of input in String
      */
