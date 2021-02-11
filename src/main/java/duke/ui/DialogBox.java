@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -54,7 +55,7 @@ public class DialogBox extends HBox {
      * @return The resulting DialogBox.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }
@@ -68,6 +69,15 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
+    }
+
+    /**
+     * Sets the color of the DialogBox's text.
+     *
+     * @param c The color to set it to.
+     */
+    public void setTextColor(Color c) {
+        dialog.setTextFill(c);
     }
 
     /**

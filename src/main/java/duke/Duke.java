@@ -58,6 +58,10 @@ public class Duke extends Application {
         super.stop();
     }
 
+    private void exit() {
+        Platform.exit();
+    }
+
     private void handleInput(String input) {
         Command cmd = parser.parseCmd(input);
         assert cmd != null : "null command!";
@@ -75,9 +79,5 @@ public class Duke extends Application {
         if (cmdResult.isExit()) {
             exit();
         }
-    }
-
-    private void exit() {
-        Platform.exit();
     }
 }

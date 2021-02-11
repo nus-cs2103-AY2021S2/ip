@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -24,6 +25,9 @@ import javafx.stage.Stage;
  */
 public class Gui extends AnchorPane implements Ui {
     private static final String MAIN_WINDOW_FXML_PATH = "/view/MainWindow.fxml";
+    private static final Color ERROR_TEXT_COLOR = new Color(1.0, 0.0, 0.0, 1.0);
+    private static final Color NORMAL_TEXT_COLOR = new Color(0.0, 0.0, 0.0, 1.0);
+
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/YingJen.jpg"));
     private final Image appIcon = new Image(this.getClass().getResourceAsStream("/images/YingJen.jpg"));
@@ -91,7 +95,11 @@ public class Gui extends AnchorPane implements Ui {
             return;
         }
 
-        addDukeDialogBox(result.getFeedback());
+        if (result.isError()) {
+            addDukeErrorDialogBox(result.getFeedback());
+        } else {
+            addDukeDialogBox(result.getFeedback());
+        }
     }
 
     /**
@@ -101,7 +109,7 @@ public class Gui extends AnchorPane implements Ui {
      */
     @Override
     public void showError(String errMsg) {
-        addDukeDialogBox(errMsg);
+        addDukeErrorDialogBox(errMsg);
     }
 
     /**
@@ -153,15 +161,21 @@ public class Gui extends AnchorPane implements Ui {
     }
 
     private void addDukeDialogBox(String msg) {
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(msg, dukeImage)
-        );
+        DialogBox db = DialogBox.getDukeDialog(msg, dukeImage);
+        db.setTextColor(NORMAL_TEXT_COLOR);
+        dialogContainer.getChildren().add(db);
+    }
+
+    private void addDukeErrorDialogBox(String errMsg) {
+        DialogBox db = DialogBox.getDukeDialog(errMsg, dukeImage);
+        db.setTextColor(ERROR_TEXT_COLOR);
+        dialogContainer.getChildren().add(db);
     }
 
     private void addUserDialogBox(String msg) {
-        dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(msg, userImage)
-        );
+        DialogBox db = DialogBox.getUserDialog(msg, userImage);
+        db.setTextColor(NORMAL_TEXT_COLOR);
+        dialogContainer.getChildren().add(db);
     }
 
     private boolean isValid(String input) {
