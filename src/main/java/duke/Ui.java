@@ -8,8 +8,6 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    protected static final String HORIZONTAL_RULE = "____________________________________________________________";
-
     /**
      * Constructor for Ui class.
      */
