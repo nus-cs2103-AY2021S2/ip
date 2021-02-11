@@ -14,7 +14,6 @@ import duke.task.TaskList;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Constructs a new instance of a Duke object.
@@ -22,7 +21,6 @@ public class Duke {
      * @param pathname The pathname of the file for local data storage.
      */
     public Duke(String pathname) {
-        ui = new Ui();
         storage = new Storage(pathname);
         try {
             tasks = new TaskList(storage.loadTasksFromFile());
@@ -36,17 +34,13 @@ public class Duke {
         this("data/tasks.txt");
     }
 
-    public String getWelcomeMessage() {
-        return ui.getWelcomeMessage();
-    }
-
     public String getResponse(String input) {
         assert storage != null;
         assert tasks != null;
-        assert ui != null;
+
         try {
             Command command = Parser.parseCommand(input);
-            String dukeResponse = command.execute(tasks, ui, storage);
+            String dukeResponse = command.execute(tasks, storage);
             return dukeResponse;
         } catch (DukeException e) {
             return "Oops " + e.getMessage();

@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Messages;
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -16,16 +16,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         assert tasks != null;
-        assert ui != null;
         assert storage != null;
 
-        Task deletedTask = tasks.remove(index);
+        Task deletedTask = tasks.remove(index - 1);
         storage.saveTasksToFile(tasks);
-        String dukeResponse = "Noted I've removed this task: \n"
-                + deletedTask.toString()
-                + "You now have " + tasks.size() + " tasks in the list";
-        return dukeResponse;
+        return Messages.getDeleteTaskMessage(deletedTask, tasks.size());
     }
 }

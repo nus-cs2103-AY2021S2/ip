@@ -74,6 +74,16 @@ public class TaskList implements Iterable<Task> {
         return tasks.iterator();
     }
 
+    public TaskList filter(String keywords) {
+        List<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.description.contains(keywords)) {
+                foundTasks.add(task);
+            }
+        }
+        return new TaskList(foundTasks);
+    }
+
     /**
      * Returns a string representation of the tasks in the TaskList.
      * @return The string representation of the tasks in the TaskList.
@@ -81,10 +91,11 @@ public class TaskList implements Iterable<Task> {
     @Override
     public String toString() {
         assert tasks != null;
-        StringBuilder string = new StringBuilder();
+        StringBuilder tasksString = new StringBuilder();
+        int count = 1;
         for (Task task : tasks) {
-            string.append(task.toSaveFormat());
+            tasksString.append(String.format("%d.%s", count, task));
         }
-        return string.toString();
+        return tasksString.toString();
     }
 }

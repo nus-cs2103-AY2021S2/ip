@@ -1,27 +1,28 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Messages;
 import duke.Storage;
-import duke.Ui;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-public class TodoCommand extends AddTaskCommand {
+public class TodoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
     private String description;
 
     public TodoCommand(String description) {
-        super(description);
+        this.description = description;
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         assert tasks != null;
-        assert ui != null;
         assert storage != null;
         assert description != null;
 
-        tasks.add(new Todo(description));
-        return super.execute(tasks, ui, storage);
+        Task newTask = new Todo(description);
+        tasks.add(newTask);
+        return Messages.getAddTaskMessage(newTask, tasks.size());
     }
 }

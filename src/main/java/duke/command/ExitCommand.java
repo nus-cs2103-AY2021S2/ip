@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Messages;
 import duke.Storage;
-import duke.Ui;
 import duke.task.TaskList;
 
 public class ExitCommand extends Command {
@@ -13,13 +13,11 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         assert tasks != null;
-        assert ui != null;
         assert storage != null;
 
         storage.saveTasksToFile(tasks);
-        String dukeResponse = "Bye bye!";
-        return dukeResponse;
+        return Messages.MESSAGE_EXIT;
     }
 }
