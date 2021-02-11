@@ -24,19 +24,23 @@ public class FindCommand implements Command {
         if (tasks.size() <= 0) {
             ui.printIndentOutput("The current list is empty.");
         } else {
-            ArrayList<Integer> indexList = new ArrayList<>(tasks.size());
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.getTask(i).getTaskName().contains(keyword)) {
-                    indexList.add(i);
-                }
+            printList(tasks, ui);
+        }
+    }
+
+    private void printList(TaskList tasks, Ui ui) {
+        ArrayList<Integer> indexList = new ArrayList<>(tasks.size());
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.getTask(i).getTaskName().contains(keyword)) {
+                indexList.add(i);
             }
-            if (indexList.size() <= 0) {
-                ui.printIndentOutput("No tasks found with the given keyword.");
-            } else {
-                ui.printIndentOutput("Here are the matching tasks in you list:");
-                for (int i = 0; i < indexList.size(); i++) {
-                    ui.printIndentOutput((i + 1) + ". " + tasks.getTask(indexList.get(i)));
-                }
+        }
+        if (indexList.size() <= 0) {
+            ui.printIndentOutput("No tasks found with the given keyword.");
+        } else {
+            ui.printIndentOutput("Here are the matching tasks in you list:");
+            for (int i = 0; i < indexList.size(); i++) {
+                ui.printIndentOutput((i + 1) + ". " + tasks.getTask(indexList.get(i)));
             }
         }
     }
