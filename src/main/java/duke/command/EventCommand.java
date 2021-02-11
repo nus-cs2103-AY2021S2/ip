@@ -7,14 +7,18 @@ import duke.task.Event;
 import duke.task.TaskList;
 
 public class EventCommand extends AddTaskCommand {
-    public EventCommand(String arguments) {
-        super(arguments);
+    public static final String COMMAND_WORD = "event";
+    private String dateTime;
+
+
+    public EventCommand(String description, String dateTime) {
+        super(description);
+        this.dateTime = dateTime;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] argumentsArr = this.arguments.split(" /at ", 2);
-        tasks.add(new Event(argumentsArr[0], argumentsArr[1]));
+        tasks.add(new Event(description, dateTime));
         return super.execute(tasks, ui, storage);
     }
 }

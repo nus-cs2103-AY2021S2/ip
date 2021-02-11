@@ -6,8 +6,12 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class FindCommand extends Command {
-    public FindCommand(String arguments) {
-        super(arguments);
+    public static final String COMMAND_WORD = "find";
+    private String keywords;
+
+    public FindCommand(String keywords) {
+        super();
+        this.keywords = keywords;
     }
 
     @Override
@@ -17,7 +21,7 @@ public class FindCommand extends Command {
         String dukeResponse;
         for (int i = 0; i < numberOfTasks; i++) {
             Task task = tasks.get(i);
-            if (task.getDescription().contains(arguments)) {
+            if (task.getDescription().contains(keywords)) {
                 String foundTaskMessage = String.format("%d.%s\n", i, task);
                 message.append(foundTaskMessage);
             }

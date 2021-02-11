@@ -6,8 +6,11 @@ import duke.Ui;
 import duke.task.TaskList;
 
 public class AddTaskCommand extends Command {
-    public AddTaskCommand(String arguments) {
-        super(arguments);
+    protected String description;
+
+    public AddTaskCommand(String description) {
+        super();
+        this.description = description;
     }
 
     @Override

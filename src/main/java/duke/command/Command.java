@@ -6,11 +6,9 @@ import duke.Ui;
 import duke.task.TaskList;
 
 public abstract class Command {
-    protected String arguments;
     protected boolean isExit;
 
-    public Command(String arguments) {
-        this.arguments = arguments;
+    public Command() {
         this.isExit = false;
     }
 

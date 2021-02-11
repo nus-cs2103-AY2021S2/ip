@@ -7,14 +7,21 @@ import duke.task.Deadline;
 import duke.task.TaskList;
 
 public class DeadlineCommand extends AddTaskCommand {
-    public DeadlineCommand(String arguments) {
-        super(arguments);
+    public static final String COMMAND_WORD = "deadline";
+    private String date;
+
+    private DeadlineCommand(String description) {
+        super(description);
+    }
+
+    public DeadlineCommand(String description, String date) {
+        this(description);
+        this.date = date;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] argumentsArr = this.arguments.split(" /by ", 2);
-        tasks.add(new Deadline(argumentsArr[0], argumentsArr[1]));
+        tasks.add(new Deadline(description, date));
         return super.execute(tasks, ui, storage);
     }
 }

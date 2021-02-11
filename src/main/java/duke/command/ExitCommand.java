@@ -5,9 +5,10 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-public class ByeCommand extends Command {
-    public ByeCommand() {
-        super(null);
+public class ExitCommand extends Command {
+    public static final String COMMAND_WORD = "bye";
+
+    public ExitCommand() {
         this.isExit = true;
     }
 

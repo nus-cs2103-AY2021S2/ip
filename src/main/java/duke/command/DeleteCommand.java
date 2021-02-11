@@ -7,13 +7,16 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
-    public DeleteCommand(String arguments) {
-        super(arguments);
+    public static final String COMMAND_WORD = "delete";
+    private int index;
+
+    public DeleteCommand(int index) {
+        super();
+        this.index = index;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        int index = Integer.parseInt(this.arguments);
         Task deletedTask = tasks.remove(index);
         storage.saveTasksToFile(tasks);
         String dukeResponse = "Noted I've removed this task: \n"
