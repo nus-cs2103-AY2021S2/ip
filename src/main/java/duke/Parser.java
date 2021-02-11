@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Parser class which handles the parsing of user's input and delivers the expected action accordingly

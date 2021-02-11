@@ -25,7 +25,7 @@ public class EventTask extends Task {
      * @return The formatted date and time in the form of E, MMM d yyyy. eg Sun, March 12 2020, 4-6pm
      */
     public String convertDateTime() {
-        String[] dateTime = this.time.split("\\s+");
+        String[] dateTime = time.split("\\s+");
         String dateOfEvent = dateTime[0];
         String timeOfEvent = dateTime[1];
         LocalDate parsedDate = LocalDate.parse(dateOfEvent);

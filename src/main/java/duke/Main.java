@@ -46,12 +46,12 @@ public class Main extends Application {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
+        stage.setMinHeight(800);
         stage.setMinWidth(600.0);
 
-        mainLayout.setPrefSize(600, 600.0);
+        mainLayout.setPrefSize(600, 800);
 
-        scrollPane.setPrefSize(580, 535);
+        scrollPane.setPrefSize(580, 735);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
