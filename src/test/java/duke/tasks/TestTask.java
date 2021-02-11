@@ -10,38 +10,35 @@ import org.junit.jupiter.api.Test;
  * JUnit test for the <code>Task</code> class in duke.tasks
  */
 public class TestTask {
-    private final String description = "CS2103 Quiz";
-    private final Task task = new Task(this.description);
 
     /**
-     * Tests that the <code>Task</code> class processes the task's description correctly.
+     * Tests that the task's can be marked as done correctly.
+     */
+    @Test
+    public void testIsDone() {
+        Task task = new Task("CS2103 Quiz");
+        assertFalse(task.isDone());
+        task.markAsDone();
+        assertTrue(task.isDone());
+    }
+
+    /**
+     * Tests that the task's description is processed correctly.
      */
     @Test
     public void testDescription() {
-        assertEquals(this.description, this.task.getDescription());
+        Task task = new Task("CS2103 Quiz");
+        assertEquals("CS2103 Quiz", task.getDescription());
     }
 
     /**
-     * Tests that the <code>Task</code> class processes the task's status correctly.
+     * Tests that the task's status string is output correctly.
      */
     @Test
-    public void testStatus() {
-        assertFalse(this.task.isDone());
-        assertEquals(this.getExpectedStatusString(false), this.task.getStatusString());
-
-        this.task.markAsDone();
-        assertTrue(this.task.isDone());
-        assertEquals(this.getExpectedStatusString(true), this.task.getStatusString());
-    }
-
-    /**
-     * Builds an expected status string to be compared against the computed one.
-     *
-     * @param isDone Whether the task is done or not
-     * @return The expected status string
-     */
-    private String getExpectedStatusString(boolean isDone) {
-        String statusSymbol = isDone ? "X" : " ";
-        return "[" + statusSymbol + "] " + this.description;
+    public void testStatusString() {
+        Task task = new Task("CS2103 Quiz");
+        assertEquals("[ ] CS2103 Quiz", task.getStatusString());
+        task.markAsDone();
+        assertEquals("[X] CS2103 Quiz", task.getStatusString());
     }
 }

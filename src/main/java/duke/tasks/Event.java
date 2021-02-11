@@ -21,12 +21,21 @@ public class Event extends Task {
     }
 
     /**
+     * Retrieves the event's time.
+     *
+     * @return The event's time.
+     */
+    public LocalDateTime getAtDateTime() {
+        return this.atDateTime;
+    }
+
+    /**
      * Converts the event's time to a <code>String</code>.
      *
      * @return A formatted date string corresponding to the event's time.
      */
     public String getAtDateTimeString() {
-        return this.atDateTime.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
+        return this.getAtDateTime().format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
     }
 
     /**
@@ -48,7 +57,7 @@ public class Event extends Task {
             return false;
         }
 
-        return LocalDateTime.now().isAfter(this.atDateTime);
+        return LocalDateTime.now().isAfter(this.getAtDateTime());
     }
 
     /**
@@ -63,7 +72,7 @@ public class Event extends Task {
             return false;
         }
 
-        LocalDateTime urgencyMark = this.atDateTime.minusDays(urgencyInDays);
+        LocalDateTime urgencyMark = this.getAtDateTime().minusDays(urgencyInDays);
         return LocalDateTime.now().isAfter(urgencyMark) && !this.isOverdue();
     }
 }

@@ -1,6 +1,8 @@
 package duke.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,48 +13,83 @@ import org.junit.jupiter.api.Test;
  * JUnit test for the <code>Event</code> class in duke.tasks
  */
 public class TestEvent {
-    private final String description;
-    private final String dateTimeString;
-    private final Event event;
+    private final DateTimeFormatter formatter;
 
     /**
-     * Initializes an <code>Event</code> instance with preset properties for testing.
+     * Initializes a <code>Event</code> instance with preset properties for testing.
      */
     public TestEvent() {
-        this.description = "CS2103 Quiz";
-        this.dateTimeString = "2021-02-06 23:30";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(this.dateTimeString, formatter);
-        this.event = new Event(this.description, dateTime);
+        this.formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
     }
 
     /**
-     * Tests that the <code>Event</code> class processes the event's time correctly.
+     * Tests that the task's can be marked as done correctly.
      */
     @Test
-    public void testDateTime() {
-        assertEquals(this.dateTimeString, this.event.getAtDateTimeString());
+    public void testIsDone() {
+        Event event = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        assertFalse(event.isDone());
+        event.markAsDone();
+        assertTrue(event.isDone());
     }
 
     /**
-     * Tests that the <code>Event</code> class processes the task's status correctly.
+     * Tests that the task's description is processed correctly.
      */
     @Test
-    public void testStatus() {
-        assertEquals(this.getExpectedStatusString(false), this.event.getStatusString());
-        this.event.markAsDone();
-        assertEquals(this.getExpectedStatusString(true), this.event.getStatusString());
+    public void testDescription() {
+        Event event = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        assertEquals("CS2103 Quiz", event.getDescription());
     }
 
     /**
-     * Builds an expected status string to be compared against the computed one.
-     *
-     * @param isDone Whether the task is done or not
-     * @return The expected status string
+     * Tests that the datetime input to the <code>Event</code> is correctly converted to a datetime
+     * string of the desired format.
      */
-    private String getExpectedStatusString(boolean isDone) {
-        String statusSymbol = isDone ? "X" : " ";
-        return "[E][" + statusSymbol + "] " + this.description + " (at: " + this.dateTimeString + ")";
+    @Test
+    public void testDateTimeString() {
+        Event event = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        assertEquals("2021-02-06 23:30", event.getAtDateTimeString());
+    }
+
+    /**
+     * Tests that the task's status string is output correctly.
+     */
+    @Test
+    public void testStatusString() {
+        Event event = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        assertEquals("[E][ ] CS2103 Quiz (at: 2021-02-06 23:30)", event.getStatusString());
+        event.markAsDone();
+        assertEquals("[E][X] CS2103 Quiz (at: 2021-02-06 23:30)", event.getStatusString());
+    }
+
+    /**
+     * Tests that the task is correctly flagged out if overdue.
+     */
+    @Test
+    public void testIsOverdue() {
+        Event overdueEvent = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        assertTrue(overdueEvent.isOverdue());
+        overdueEvent.markAsDone();
+        assertFalse(overdueEvent.isOverdue());
+
+        Event onTimeEvent = new Event("CS2103 Quiz", LocalDateTime.parse("9999-12-31 23:30", this.formatter));
+        assertFalse(onTimeEvent.isOverdue());
+    }
+
+    /**
+     * Tests that the task is correctly flagged out if urgent.
+     */
+    @Test
+    public void testIsUrgent() {
+        Event urgentEvent = new Event("CS2103 Quiz", LocalDateTime.now().plusDays(2));
+        assertFalse(urgentEvent.isUrgent(1));
+
+        assertTrue(urgentEvent.isUrgent(3));
+        urgentEvent.markAsDone();
+        assertFalse(urgentEvent.isUrgent(3));
+
+        Event overdueEvent = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        assertFalse(overdueEvent.isUrgent(1));
     }
 }

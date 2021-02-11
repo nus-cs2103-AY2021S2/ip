@@ -47,7 +47,7 @@ public class ReminderCommand extends Command {
      * @return A <code>String</code> displaying the existing tasks.
      */
     public String getResponse(TaskList tasks) {
-        return this.getOverdueTasksResponse(tasks) + "\n\n" + this.getUrgentTasksResponse(tasks, this.urgencyDays);
+        return this.getOverdueTasksResponse(tasks) + "\n" + this.getUrgentTasksResponse(tasks, this.urgencyDays);
     }
 
     private String getOverdueTasksResponse(TaskList tasks) {
@@ -55,7 +55,7 @@ public class ReminderCommand extends Command {
         int numOverdue = overdueTasks.getSize();
 
         if (numOverdue == 0) {
-            return "You do not have any overdue tasks!";
+            return "You do not have any overdue tasks!\n";
         } else {
             return "Oh no... You have " + numOverdue + " overdue task(s):\n" + overdueTasks.getTaskListAsString();
         }
@@ -66,9 +66,9 @@ public class ReminderCommand extends Command {
         int numUrgent = urgentTasks.getSize();
 
         if (numUrgent == 0) {
-            return "You do not have any urgent tasks!";
+            return "You do not have any urgent tasks!\n";
         } else {
-            return "You have " + numUrgent + " task(s) that are due in less than " + urgencyDays + " days:\n"
+            return "You have " + numUrgent + " task(s) that are due in less than " + urgencyDays + " day(s):\n"
                     + urgentTasks.getTaskListAsString();
         }
     }

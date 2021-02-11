@@ -44,7 +44,7 @@ public class Parser {
     private static final String REMINDER = "REMINDER";
 
     private static final ArrayList<String> validActions =
-            new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, TODO, DEADLINE, EVENT, REMINDER));
+            new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, REMINDER, TODO, DEADLINE, EVENT));
 
     /**
      * Parses a line of raw user input, converting it into a <code>Command</code> object that
@@ -58,8 +58,10 @@ public class Parser {
      * @return Returns a <code>Command</code> object which will be used to execute the desired responses.
      */
     public static Command parse(String input) {
+        // If the input is valid, getExceptionMessage will return null.
+        // If the input is invalid, getExceptionMessage will return an appropriate message to be displayed.
         String exceptionMessage = getExceptionMessage(input);
-        if (!exceptionMessage.equals("")) {
+        if (exceptionMessage != null) {
             return new InvalidInputCommand(exceptionMessage);
         }
 
@@ -77,6 +79,8 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(description));
         case DELETE:
             return new DeleteCommand(Integer.parseInt(description));
+        case REMINDER:
+            return new ReminderCommand(Integer.parseInt(description));
         case FIND:
             return new FindCommand(description);
         case TODO:
@@ -85,8 +89,6 @@ public class Parser {
             return new AddTaskCommand(new Deadline(description, deadlineDateTime));
         case EVENT:
             return new AddTaskCommand(new Event(description, eventDateTime));
-        case REMINDER:
-            return new ReminderCommand(Integer.parseInt(description));
         default:
             return new InvalidInputCommand("I do not understand your input :O");
         }
@@ -244,8 +246,12 @@ public class Parser {
                 throw new MissingDescriptionException(action);
             }
 
-            if ((action.equals(DONE) || action.equals(DELETE)) && (isInteger(description))) {
+            if ((action.equals(DONE) || action.equals(DELETE)) && (!isInteger(description))) {
                 throw new TaskNumberNotIntException();
+            }
+
+            if (action.equals(REMINDER) && (!isPositiveInteger(description))) {
+                throw new InvalidUrgencyDaysException();
             }
 
             if (action.equals(DEADLINE) && byDateTimeString.length() == 0) {
@@ -264,10 +270,6 @@ public class Parser {
                 throw new InvalidDateTimeFormatException(atDateTimeString);
             }
 
-            if (action.equals(REMINDER) && (!isPositiveInteger(description))) {
-                throw new InvalidUrgencyDaysException();
-            }
-
         } catch (MissingDescriptionException
                 | InvalidActionException
                 | TaskNumberNotIntException
@@ -278,6 +280,6 @@ public class Parser {
             return e.getMessage();
         }
 
-        return "";
+        return null;
     }
 }

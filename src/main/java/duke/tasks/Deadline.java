@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,12 +21,21 @@ public class Deadline extends Task {
     }
 
     /**
+     * Retrieves the task's deadline time.
+     *
+     * @return The task's deadline.
+     */
+    public LocalDateTime getByDateTime() {
+        return this.byDateTime;
+    }
+
+    /**
      * Converts the task's deadline to a <code>String</code>.
      *
      * @return A formatted date string corresponding to the task's deadline.
      */
     public String getByDateTimeString() {
-        return this.byDateTime.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
+        return this.getByDateTime().format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
     }
 
     /**
@@ -49,7 +57,7 @@ public class Deadline extends Task {
             return false;
         }
 
-        return LocalDateTime.now().isAfter(this.byDateTime);
+        return LocalDateTime.now().isAfter(this.getByDateTime());
     }
 
     /**
@@ -64,7 +72,7 @@ public class Deadline extends Task {
             return false;
         }
 
-        LocalDateTime urgencyMark = this.byDateTime.minusDays(urgencyInDays);
+        LocalDateTime urgencyMark = this.getByDateTime().minusDays(urgencyInDays);
         return LocalDateTime.now().isAfter(urgencyMark) && !this.isOverdue();
     }
 }
