@@ -58,14 +58,14 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Returns new deadline command after parsing command argument.
+     * Returns new deadline command after parsing command arguments.
      *
-     * @param argument Command argument.
+     * @param arguments Command arguments.
      * @return New deadline command.
      * @throws DukeException If user input does not match deadline command format.
      */
-    public static DeadlineCommand parseArguments(String argument) throws DukeException {
-        Matcher matcher = COMMAND_FORMAT.matcher(argument);
+    public static DeadlineCommand parseArguments(String arguments) throws DukeException {
+        Matcher matcher = COMMAND_FORMAT.matcher(arguments);
 
         if (!matcher.matches()) {
             throw new DukeException(ERROR_MESSAGE);

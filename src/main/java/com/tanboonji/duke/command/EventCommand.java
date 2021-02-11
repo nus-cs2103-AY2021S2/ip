@@ -57,14 +57,14 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Returns new event command after parsing command argument.
+     * Returns new event command after parsing command arguments.
      *
-     * @param argument Command argument.
+     * @param arguments Command arguments.
      * @return New event command.
      * @throws DukeException If user input does not match event command format.
      */
-    public static EventCommand parseArguments(String argument) throws DukeException {
-        Matcher matcher = COMMAND_FORMAT.matcher(argument);
+    public static EventCommand parseArguments(String arguments) throws DukeException {
+        Matcher matcher = COMMAND_FORMAT.matcher(arguments);
 
         if (!matcher.matches()) {
             throw new DukeException(ERROR_MESSAGE);

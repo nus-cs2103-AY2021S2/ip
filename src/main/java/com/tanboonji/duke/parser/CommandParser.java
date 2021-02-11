@@ -16,15 +16,19 @@ import com.tanboonji.duke.command.ListCommand;
 import com.tanboonji.duke.command.ToDoCommand;
 import com.tanboonji.duke.exception.DukeException;
 
+/**
+ * The CommandParser class helps to parse user string input into respective intended command.
+ */
 public class CommandParser {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("\\W*(\\S+)\\W*(.*)");
 
     /**
      * Parses input from String class to Command class.
+     * Returns respective intended command if input is successfully parsed, else returns invalid command.
      *
-     * @param input User string input
-     * @return Command object with respective details.
+     * @param input User string input.
+     * @return Respective intended command with arguments or invalid command.
      */
     public static Command parse(String input) {
         Matcher matcher = COMMAND_FORMAT.matcher(input);

@@ -40,16 +40,16 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Returns new done command after parsing command argument.
+     * Returns new done command after parsing command arguments.
      *
-     * @param argument Command argument.
+     * @param arguments Command arguments.
      * @return New done command.
      * @throws DukeException If user input is not an integer.
      */
-    public static DoneCommand parseArguments(String argument) throws DukeException {
+    public static DoneCommand parseArguments(String arguments) throws DukeException {
         int taskIndex;
         try {
-            taskIndex = Integer.parseInt(argument) - 1;
+            taskIndex = Integer.parseInt(arguments) - 1;
             return new DoneCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(ERROR_MESSAGE);

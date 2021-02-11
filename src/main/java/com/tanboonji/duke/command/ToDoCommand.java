@@ -47,16 +47,16 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Returns new todo command after parsing command argument.
+     * Returns new todo command after parsing command arguments.
      *
-     * @param argument Command argument.
+     * @param arguments Command arguments.
      * @return New todo command.
      * @throws DukeException If user input does not match todo command format.
      */
-    public static ToDoCommand parseArguments(String argument) throws DukeException {
-        if (argument.trim().equals("")) {
+    public static ToDoCommand parseArguments(String arguments) throws DukeException {
+        if (arguments.trim().equals("")) {
             throw new DukeException(ERROR_MESSAGE);
         }
-        return new ToDoCommand(argument);
+        return new ToDoCommand(arguments);
     }
 }

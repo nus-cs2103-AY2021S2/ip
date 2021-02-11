@@ -50,16 +50,16 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns new find command after parsing command argument.
+     * Returns new find command after parsing command arguments.
      *
-     * @param argument Command argument.
+     * @param arguments Command arguments.
      * @return New find command.
      * @throws DukeException If user input does not match find command format.
      */
-    public static FindCommand parseArguments(String argument) throws DukeException {
-        if (argument.trim().equals("")) {
+    public static FindCommand parseArguments(String arguments) throws DukeException {
+        if (arguments.trim().equals("")) {
             throw new DukeException(ERROR_MESSAGE);
         }
-        return new FindCommand(argument);
+        return new FindCommand(arguments);
     }
 }

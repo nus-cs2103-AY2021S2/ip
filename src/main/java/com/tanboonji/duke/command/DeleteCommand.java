@@ -41,16 +41,16 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns new delete command after parsing command argument.
+     * Returns new delete command after parsing command arguments.
      *
-     * @param argument Command argument.
+     * @param arguments Command arguments.
      * @return New delete command.
      * @throws DukeException If user input is not an integer.
      */
-    public static DeleteCommand parseArguments(String argument) throws DukeException {
+    public static DeleteCommand parseArguments(String arguments) throws DukeException {
         int taskIndex;
         try {
-            taskIndex = Integer.parseInt(argument) - 1;
+            taskIndex = Integer.parseInt(arguments) - 1;
             return new DeleteCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(ERROR_MESSAGE);
