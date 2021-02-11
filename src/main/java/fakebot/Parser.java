@@ -36,11 +36,14 @@ public class Parser {
 
     private static final String HELP_STRING = "List of Command Available:\n"
             + "Deadline Command: " + DEADLINE_COMMAND + " [Description]" + DEADLINE_SPLIT_REGEX + "\n"
-            + "                   [yyyy-mm-dd] [hh:ss]\n"
+            + "                   [yyyy-mm-dd] [hh:mm]" +
+            "]\n"
             + "Delete   Command: " + DELETE_COMMAND + " [index]\n"
             + "Done     Command: " + DONE_COMMAND + " [index]\n"
             + "Event    Command: " + EVENT_COMMAND + " [Description]" + EVENT_SPLIT_REGEX + "[yyyy-mm-dd]\n"
-            + "                   [hh:ss] [yyyy-mm-dd] [hh:ss]\n"
+            + "                   [hh:mm]" +
+            "] [yyyy-mm-dd] [hh:mm]" +
+            "]\n"
             + "Find     Command: " + FIND_COMMAND + "[Description]\n"
             + "List     Command: " + LIST_COMMAND + "\n"
             + "Todo     Command: " + TODO_COMMAND + " [Description]\n"
@@ -452,7 +455,9 @@ public class Parser {
             return new Command(CommandType.EVENT, eventDetails);
         } catch (Exception e) {
             throw new CommandException("OOPS!!! The Date format of a "
-                    + EVENT_COMMAND + " must be yyyy-mm-dd hh:ss yyyy-mm-dd hh:ss.");
+                    + EVENT_COMMAND + " must be yyyy-mm-dd hh:mm" +
+                    " yyyy-mm-dd hh:mm" +
+                    ".");
         }
     }
 
@@ -477,7 +482,8 @@ public class Parser {
             return new Command(CommandType.DEADLINE, deadlineDetails);
         } catch (Exception e) {
             throw new CommandException("OOPS!!! The Date format of a "
-                    + DEADLINE_COMMAND + " must be yyyy-mm-dd hh:ss.");
+                    + DEADLINE_COMMAND + " must be yyyy-mm-dd hh:mm" +
+                    ".");
         }
     }
 }
