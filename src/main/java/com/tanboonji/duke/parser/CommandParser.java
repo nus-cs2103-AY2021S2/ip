@@ -23,6 +23,8 @@ public class CommandParser {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("\\W*(\\S+)\\W*(.*)");
     private static final String INVALID_COMMAND_MESSAGE = "Sorry, please enter a valid command.\n";
+    private static final int COMMAND_GROUP = 1;
+    private static final int ARGUMENTS_GROUP = 2;
 
     /**
      * Parses input from String class to Command class.
@@ -37,8 +39,8 @@ public class CommandParser {
             return new InvalidCommand(INVALID_COMMAND_MESSAGE);
         }
 
-        String command = matcher.group(1).trim();
-        String arguments = matcher.group(2).trim();
+        String command = matcher.group(COMMAND_GROUP).trim();
+        String arguments = matcher.group(ARGUMENTS_GROUP).trim();
 
         try {
             switch (command.toLowerCase()) {

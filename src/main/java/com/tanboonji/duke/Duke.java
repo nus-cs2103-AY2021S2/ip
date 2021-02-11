@@ -48,12 +48,16 @@ public class Duke {
             String result = command.execute();
 
             if (command.shouldSaveData()) {
-                storage.save(taskList);
+                saveData();
             }
 
             return result;
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    public void saveData() throws DukeException {
+        storage.save(taskList);
     }
 }

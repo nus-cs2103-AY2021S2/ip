@@ -20,6 +20,8 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
+    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -28,26 +30,21 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
-    private Timer timer;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
-        duke.initialise();
     /**
      * Sets and initialises Duke to perform execution of commands.
      *
      * @param duke Duke to be initialised to.
      */
+    public void setDuke(Duke duke) {
+        this.duke = duke;
+        this.duke.initialise();
     }
 
     /**
@@ -59,13 +56,13 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         userInput.clear();
 
-        if (input.toLowerCase().equals("bye")) {
-            timer = new Timer();
+        if (input.equalsIgnoreCase("bye")) {
+            Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
