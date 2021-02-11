@@ -7,12 +7,14 @@ import java.util.ArrayList;
  * User interface class for Duke's interaction with users, send messages etc.
  */
 public class Ui {
+    protected Statistics stats;
+
 
     /**
      * Constructor for Ui class.
      */
     public Ui() {
-
+        this.stats = new Statistics();
     }
 
     /**
@@ -114,7 +116,19 @@ public class Ui {
                 + "find [keyword] -> Search for the keyword in the list of tasks\n"
                 + "todo [description] -> Add a todo\n"
                 + "deadline [description] /by [date] -> Add a deadline\n"
-                + "event [description] /at [date] -> Add an event";
+                + "event [description] /at [date] -> Add an event\n"
+                + "stats -> Show overdue tasks and tasks happening soon";
+        return message;
+    }
+
+    public String getStatistics(ArrayList<Task> list) {
+        String divider = "------\n";
+        String message = "";
+        message += "Overdue Deadlines:\n";
+        message += stats.getOverdueDeadlines(list);
+        message += divider;
+        message += "Deadlines and Events due/happening in a week:\n";
+        message += stats.getTasksDueSoon(list);
         return message;
     }
 }

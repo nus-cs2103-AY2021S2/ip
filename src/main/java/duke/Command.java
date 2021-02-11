@@ -6,8 +6,9 @@ public enum Command {
     DONE,
     DELETE,
     FIND,
+    HELP,
     TODO,
     DEADLINE,
     EVENT,
-    HELP;
+    STATS;
 }

@@ -89,6 +89,9 @@ public class Duke {
                 tasks.addTask(event);
                 response = ui.addTaskMessage(tasks.getList(), event);
                 break;
+            case STATS:
+                response = ui.getStatistics(tasks.getList());
+                break;
             default:
                 throw new UnknownInputException();
             }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * Task class to represent a task, which is a todo, deadline or event.
  */
@@ -56,6 +58,10 @@ public class Task {
      */
     public boolean getDoneStatus() {
         return this.isDone;
+    }
+
+    public LocalDate getFormattedDate() {
+        return null;
     }
 
     @Override
