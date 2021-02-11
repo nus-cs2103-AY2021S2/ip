@@ -1,5 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -16,16 +18,52 @@ public class TaskList {
         this.list.add(task);
     }
 
-    public void addTodo(String task) {
-        this.list.add(new Todo(task));
+    public Todo addTodo(String task) {
+        Todo todoToAddInList = createToDo(task);
+        if (isDuplicateAbsent(todoToAddInList)) {
+            this.list.add(new Todo(task));
+        }
+        return todoToAddInList;
     }
 
-    public void addDeadline(String task, LocalDateTime date) {
-        this.list.add(new Deadline(task, date));
+    public Deadline addDeadline(String task, LocalDateTime date) {
+        Deadline deadlineToAddInList = createDeadline(task, date);
+        if(isDuplicateAbsent(deadlineToAddInList)) {
+            this.list.add(new Deadline(task, date));
+        }
+        return deadlineToAddInList;
     }
 
-    public void addEvent(String task, LocalDateTime date) {
-        this.list.add(new Event(task, date));
+    public Event addEvent(String task, LocalDateTime date) {
+        Event eventToAddInList = createEvent(task, date);
+        if (isDuplicateAbsent(eventToAddInList)) {
+            this.list.add(new Event(task, date));
+        }
+        return eventToAddInList;
+    }
+
+    public boolean isDuplicateAbsent (Task y) {
+        AtomicBoolean isDuplicateAbsent = new AtomicBoolean(true);
+        this.forEach(x ->
+                {
+                    if(x.getTask().equals(y.getTask())) {
+                        isDuplicateAbsent.set(false);
+                    }
+                }
+        );
+        return isDuplicateAbsent.get();
+    }
+
+    public Todo createToDo(String task) {
+        return new Todo(task);
+    }
+
+    public Deadline createDeadline(String task, LocalDateTime date) {
+        return new Deadline(task, date);
+    }
+
+    public Event createEvent(String task, LocalDateTime date) {
+        return new Event(task, date);
     }
 
     /**
@@ -44,7 +82,7 @@ public class TaskList {
     }
 
     public String write(int index) {
-        return this.list.get(index).toCommand();
+        return this.list.get(index).saveInStorageAs();
     }
 
     public void markDone(int index) {
@@ -62,6 +100,10 @@ public class TaskList {
 
     public Task getLastAddedTask() {
         return this.list.get(this.list.size() - 1);
+    }
+
+    public void forEach(Consumer<Task> t) {
+        list.forEach(t);
     }
 
     /**
@@ -88,12 +130,11 @@ public class TaskList {
      */
     public TaskList filterFind(String keyword) {
         TaskList filteredList = new TaskList();
-        for (int i = 0; i < list.size(); i++) {
-            Task current = list.get(i);
-            if (current.taskMatch(keyword)) {
-                filteredList.add(current);
+        this.forEach(x -> {
+            if (x.doesTaskMatchKeyword(keyword)) {
+                filteredList.add(x);
             }
-        }
+        });
         return filteredList;
     }
 }

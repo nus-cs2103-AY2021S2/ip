@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String task;
     private Boolean completed;
 
@@ -37,12 +37,18 @@ public class Task {
         }
     }
 
-    boolean taskMatch(String keyword) {
+    boolean doesTaskMatchKeyword(String keyword) {
         return this.getTask().contains(keyword);
     }
 
-    public String toCommand() {
-        return this.getClass().toString() + ", " + this.getCompleted() + ", " + this.getTask();
+    /**
+     * Format Task into format to be saved into storage
+     * so that user can view Task on next return
+     * @return
+     */
+    public String saveInStorageAs() {
+        return this.getClass().toString() + ", "
+                + this.getCompleted() + ", " + this.getTask();
     }
 
     @Override

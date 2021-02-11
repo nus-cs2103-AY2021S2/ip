@@ -12,7 +12,6 @@ public class Parser {
         userInterface.welcomeUser();
     }
 
-
     private String removeExtraLinesAndSpacesFromInput(String input) {
         String cleanedInput = input.replaceAll("\n", "");
         cleanedInput = cleanedInput.toLowerCase();
@@ -32,7 +31,11 @@ public class Parser {
         if (inputDoesNotContainBye()) {
             return analyseInput(list);
         } else {
-            storage.saveHistory(list);
+            assert input.contains("bye") : "Oh no! You keyed in something I couldn't read :(";
+            if (list.size() != 0) {
+                assert storage != null : "did not initialise storage!";
+                storage.saveHistory(list);
+            }
             return userInterface.userLeaving();
         }
     }
@@ -81,7 +84,9 @@ public class Parser {
      * @return int val index in the list that user wants to mark as completed.
      */
     public int inputDoneAtIndex() throws ArrayIndexOutOfBoundsException {
-        String value = input.split(" ")[1];
+        String[] stringArray = input.split(" ");
+        assert stringArray.length == 2 : "Oh no! I don't understand what you want to be marked as done :(";
+        String value = stringArray[1];
         int val = Integer.parseInt(value) - 1;
         return val;
     }
@@ -91,6 +96,7 @@ public class Parser {
      */
     public String markDoneAtIndex(TaskList list) {
         int index = inputDoneAtIndex();
+        assert index < list.size() && index >= 0 : "The number you want marked done is not in the list!";
         list.markDone(index);
         return userInterface.userDoneTask(list.getTaskAtIndex(index).toString());
     }
@@ -113,8 +119,8 @@ public class Parser {
      * Method adds the Todo task user indicated into a TaskList.
      */
     public String addTodoTask(TaskList list) {
-        list.addTodo(inputTaskToDoIs());
-        return userInterface.userAddTask(list);
+        Task toAddIntoList = list.addTodo(inputTaskToDoIs());
+        return userInterface.userAddTask(list, toAddIntoList);
     }
 
     /**
@@ -140,6 +146,7 @@ public class Parser {
      */
     static LocalDateTime inputDateAndTime(String inputDate) {
         String[] dataArray = inputDate.split(" ");
+        assert dataArray.length == 3 : "Invalid input for date and time taken";
         LocalDate formatDate = inputDate(dataArray[1]);
         LocalTime formatTime = inputTime(dataArray[2]);
         return LocalDateTime.of(formatDate, formatTime);
@@ -176,9 +183,16 @@ public class Parser {
      * @param list TaskList that stores user's Tasks
      */
     public String addEventTask(TaskList list) {
-        String[] taskAndDate = findTaskWithDate();
-        list.addEvent(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
-        return userInterface.userAddTask(list);
+        try {
+            String[] taskAndDate = findTaskWithDate();
+            Event eventToAdd = list.addEvent(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
+            return userInterface.userAddTask(list, eventToAdd);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "I could not understand your deadline task.\n"
+                    + "Try format it as \n"
+                    + "Eg event conference call /at 2/12/2020 0800";
+        }
+
     }
 
     /**
@@ -188,8 +202,15 @@ public class Parser {
      */
     public String addDeadlineTask(TaskList list) {
         String[] taskAndDate = findTaskWithDate();
-        list.addDeadline(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
-        return userInterface.userAddTask(list);
+        try {
+            Deadline deadlineToAdd = list.addDeadline(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
+            return userInterface.userAddTask(list, deadlineToAdd);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "I could not understand your deadline task.\n"
+                    + "Try format it as \n"
+                    + "Eg deadline return book /by 2/12/2019 1800";
+        }
+
     }
 
     /**
@@ -200,9 +221,14 @@ public class Parser {
     public String commandDelete(TaskList list) {
         String value = input.replaceFirst("delete", "");
         value = value.strip();
-        int val = Integer.parseInt(value);
-        Task delete = list.deleteTaskAtIndex(val - 1);
-        return userInterface.userDeleteTask(delete, list);
+        try {
+            int val = Integer.parseInt(value);
+            assert list != null : "List not initiliased";
+            Task delete = list.deleteTaskAtIndex(val - 1);
+            return userInterface.userDeleteTask(delete, list);
+        } catch (NumberFormatException e) {
+            return "Index Value input is not a number, try again!";
+        }
     }
 
 
@@ -217,6 +243,9 @@ public class Parser {
 
     private String displayFindList(TaskList list) {
         contentToFind();
+        if (input.equals("")) {
+            return "'Find' was entered with no content";
+        }
         TaskList filteredList = list.filterFind(input);
         String result = "";
         if (filteredList.size() == 0) {
@@ -225,6 +254,7 @@ public class Parser {
             result = result.concat(userInterface.tellUserListFound());
             result = result.concat(filteredList.listAllTasks());
         }
+        assert !result.equals("") : "Something in displayFindList went wrong for find result.";
         return result;
     }
 

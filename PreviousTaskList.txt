@@ -1,2 +1,2 @@
-class Deadline, true, return book , 2019-12-02T18:00
-class Event, false, utown dinner , 2020-02-07T18:00
+class Todo, false,  ice cream
+class Deadline, false, 2105 , 2021-02-14T23:59
