@@ -7,6 +7,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 
@@ -20,6 +21,10 @@ import java.util.ArrayList;
  * FileReader deals with reading data from the file.
  */
 class FileReader {
+    static final String DONE_HEADER = "Done tasks: ";
+    static final String PENDING_HEADER = "Pending tasks: ";
+    static final String HEADER_IN_EMPTY_LIST = DONE_HEADER + System.lineSeparator()
+            + PENDING_HEADER + System.lineSeparator();
 
     /**
      * Returns a list of tasks after reading the data inside the file.
@@ -31,20 +36,35 @@ class FileReader {
      * @throws DukeException If an I/O error occurs.
      */
     List<Task> readFile(String path) throws DukeException {
+        File f = getFile(path);
+        return getTaskList(f);
+    }
+
+    private File createNewFile(File file, String path) throws DukeException {
         try {
-            File f = new File(path);
+            file.createNewFile();
+            FileWriter fw = new FileWriter(path);
+            fw.write(HEADER_IN_EMPTY_LIST);
+            fw.close();
+            
+            return new File(path);
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
 
-            if (!f.exists()) {
-                //create a new file and write as if the list is empty
-                f.createNewFile();
-                FileWriter fw = new FileWriter(path);
-                fw.write("Done tasks: " + System.lineSeparator() + "Pending tasks: "
-                        + System.lineSeparator());
-                fw.close();
+    private File getFile(String path) throws DukeException {
+        File file = new File(path);
 
-                f = new File(path);
-            }
+        if (!file.exists()) {
+            //create a new file and write as if the list is empty
+            return createNewFile(file, path);
+        }
+        return file;
+    }
 
+    private List<Task> getTaskList(File f) throws DukeException {
+        try {
             Scanner sc = new Scanner(f);
             List<Task> tasks = new ArrayList<>();
             boolean isDone = true;
@@ -52,11 +72,11 @@ class FileReader {
             while (sc.hasNext()) {
                 String currStr = sc.nextLine();
 
-                if (currStr.equals("Done tasks: ") || currStr.equals("Pending tasks: ")) {
-                    if (currStr.equals("Pending tasks: ")) {
+                boolean isHeader = currStr.equals(DONE_HEADER) || currStr.equals(PENDING_HEADER);
+                if (isHeader) {
+                    if (currStr.equals(PENDING_HEADER)) {
                         isDone = false;
                     }
-
                     continue;
                 }
 
@@ -66,43 +86,44 @@ class FileReader {
                     t.markAsDone();
                 }
                 tasks.add(t);
+                return tasks;
             }
-
-            return tasks;
-
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException(e.getMessage());
         }
+
+        return new ArrayList<>();
     }
 
     private Task toTask(String input) {
-            Scanner sc = new Scanner(input);
-            String command = sc.next();
+        Scanner sc = new Scanner(input);
+        String command = sc.next();
 
-            String[] args = sc.nextLine().split("[|]");
+        String[] args = sc.nextLine().split("[|]");
 
-            String first = args[0].trim();
-            String second = null;
-            String preposition = null;
-            LocalDate date = null;
+        String description = args[0].trim();
+        String preposition = null;
+        LocalDate date = null;
 
-            if (args.length == 2) {
-                second = args[1].trim();
-                String[] prepositionAndDate = second.split("[\\s]");
-                preposition = prepositionAndDate[0];
-                date = LocalDate.parse(prepositionAndDate[1]);
-            }
-
-            switch (command) {
-            case "todo":
-                return new Todo(first);
-            case "event":
-                return new Event(first, preposition, date);
-            case "deadline":
-                return new Deadline(first, preposition, date);
-            default:
-                return null;
-            }
+        if (args.length == 2) {
+            String second = args[1].trim();
+            String[] prepositionAndDate = second.split("[\\s]");
+            preposition = prepositionAndDate[0];
+            date = LocalDate.parse(prepositionAndDate[1]);
+        }
+        return getTask(command, description, preposition, date);
     }
-
+    
+    private Task getTask(String command, String description, String preposition, LocalDate date) {
+        switch (command) {
+        case "todo":
+            return new Todo(description);
+        case "event":
+            return new Event(description, preposition, date);
+        case "deadline":
+            return new Deadline(description, preposition, date);
+        default:
+            return null;
+        }
+    }
 }

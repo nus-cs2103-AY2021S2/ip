@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.Duke;
 import duke.exception.DukeException;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
  * Mainly deal with the addition, deletion and manipulation of tasks in the list.
  */
 public class TaskList {
+    static final String INDEX_OUT_OF_BOUND_ERROR = "Please enter an appropriate index.";
     private final List<Task> list;
 
     /**
@@ -60,11 +62,7 @@ public class TaskList {
      */
     public Task delete(String num) throws DukeException {
         int index = Integer.valueOf(num) - 1;
-
-        if (index < 0 || index >= list.size()) {
-            throw new DukeException("Please enter an appropriate index.");
-        }
-
+        checkValidIndex(index);
         return list.remove(index);
     }
 
@@ -78,11 +76,7 @@ public class TaskList {
      */
     public Task markTaskAsDone(String num) throws DukeException {
         int index = Integer.valueOf(num) - 1;
-
-        if (index < 0 || index >= list.size()) {
-            throw new DukeException("Please enter an appropriate index.");
-        }
-
+        checkValidIndex(index);
         Task t = list.get(index);
         t.markAsDone();
 
@@ -126,7 +120,6 @@ public class TaskList {
      */
     public List<Task> findTasksWithKeyword(String keyword) {
         List<Task> resTasks = new ArrayList<>();
-
         for (Task t: list) {
             if (t.isKeywordInside(keyword)) {
                 resTasks.add(t);
@@ -134,5 +127,12 @@ public class TaskList {
         }
 
         return resTasks;
+    }
+
+    private void checkValidIndex(int index) throws DukeException {
+        boolean isIndexValid = index >= 0 && index < list.size();
+        if (!isIndexValid) {
+            throw new DukeException(INDEX_OUT_OF_BOUND_ERROR);
+        }
     }
 }
