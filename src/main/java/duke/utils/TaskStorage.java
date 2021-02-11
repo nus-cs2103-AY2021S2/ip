@@ -22,8 +22,8 @@ import duke.ui.Ui;
  */
 public class TaskStorage {
 
-    public static final String FILEPATH = "data/Duke.txt";
-    public static final String DIRECTORY = "data";
+    private static final String FILEPATH = "data/Duke.txt";
+    private static final String DIRECTORY = "data";
 
 
     /**

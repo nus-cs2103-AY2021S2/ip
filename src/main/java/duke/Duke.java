@@ -1,6 +1,7 @@
 package duke;
 
 
+import duke.utils.Statistics;
 import javafx.application.Application;
 
 /**
@@ -13,6 +14,7 @@ public class Duke {
      * @param args command line arguments key in by user.
      */
     public static void main(String[] args) {
+        Statistics.initialize();
         Application.launch(Main.class, args);
     }
 

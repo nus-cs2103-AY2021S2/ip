@@ -6,6 +6,7 @@ package duke.type;
  */
 public enum CommandType {
     BYE("bye"),
+    CLEAR("clear"),
     DEADLINE("deadline"),
     DELETE("delete"),
     DONE("done"),

@@ -8,6 +8,7 @@ import duke.command.ErrorCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.ClearCommand;
 import duke.exceptions.DukeException;
 import duke.type.CommandType;
 import duke.ui.ErrorBox;
@@ -58,6 +59,9 @@ public class Parser {
             break;
         case "find":
             command = new FindCommand(taskName, date);
+            break;
+        case "clear":
+            command = new ClearCommand();
             break;
         default:
             command = new ErrorCommand();
@@ -111,7 +115,7 @@ public class Parser {
                 throw new DukeException(Ui.EMPTY_TASK);
             }
             return taskInput.split("/")[0];
-        case "bye": case "list":
+        case "bye": case "list": case "clear":
             if (taskInput.length() > 0) {
                 throw new DukeException(Ui.COMMAND_ERROR);
             }

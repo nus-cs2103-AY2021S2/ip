@@ -3,6 +3,7 @@ package duke.ui;
 
 import duke.command.Command;
 import duke.utils.Parser;
+import duke.utils.Statistics;
 import duke.utils.TaskStorage;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -36,7 +37,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.GREETING, dukeImage),
-                DialogBox.getDukeDialog(TaskStorage.loadFiles(), dukeImage)
+                DialogBox.getDukeDialog(TaskStorage.loadFiles(), dukeImage),
+                DialogBox.getDukeDialog(Statistics.getStatistics().toString(), dukeImage)
         );
 
     }

@@ -5,6 +5,7 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
+import duke.utils.Statistics;
 
 
 /**
@@ -40,6 +41,7 @@ public class AddCommand extends Command {
     private static String handleToDo(String task) {
         Todo todo = new Todo(task);
         TaskList.addTask(todo);
+        Statistics.updateStatistics(todo);
         return Ui.biggerBox(todo);
     }
 
@@ -47,6 +49,7 @@ public class AddCommand extends Command {
     private static String handleDeadline(String task, String date) {
         Deadlines deadlines = new Deadlines(task, date);
         TaskList.addTask(deadlines);
+        Statistics.updateStatistics(deadlines);
         return Ui.biggerBox(deadlines);
     }
 
@@ -54,6 +57,7 @@ public class AddCommand extends Command {
     private static String handleEvent(String task, String date) {
         Event event = new Event(task, date);
         TaskList.addTask(event);
+        Statistics.updateStatistics(event);
         return Ui.biggerBox(event);
     }
 }
