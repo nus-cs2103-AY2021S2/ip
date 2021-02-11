@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import duke.helper.HelperFunctions;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
@@ -102,6 +102,6 @@ public class TestReminderCommand {
         assertEquals(expectedUrgent, urgentCommand.getResponse(this.tasks));
 
         String expectedEmpty = "You do not have any overdue tasks!\n" + "\n" + "You do not have any urgent tasks!\n";
-        assertEquals(expectedEmpty, urgentCommand.getResponse(new TaskList()));g
+        assertEquals(expectedEmpty, urgentCommand.getResponse(new TaskList()));
     }
 }

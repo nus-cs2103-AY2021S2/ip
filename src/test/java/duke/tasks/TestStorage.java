@@ -1,38 +1,28 @@
 package duke.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
+
+import duke.helper.HelperFunctions;
 
 /**
  * JUnit test for the <code>Storage</code> class in duke.tasks
  */
 public class TestStorage {
-    private final ToDo toDo;
-    private final Deadline deadline;
-    private final Event event;
     private final TaskList tasks;
 
     /**
      * Initializes some tasks and a <code>TaskList</code> instance for testing.
      */
     public TestStorage() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse("2021-02-06 23:30", formatter);
-
-        this.toDo = new ToDo("CS2103 Quiz 1");
-        this.deadline = new Deadline("BT4013 Quiz 2", dateTime);
-        this.event = new Event("CS2103 Quiz 3", dateTime);
-
-        this.deadline.markAsDone();
-
         this.tasks = new TaskList();
-        this.tasks.addTask(this.toDo);
-        this.tasks.addTask(this.deadline);
-        this.tasks.addTask(this.event);
+        this.tasks.addTask(new ToDo("CS2103 Quiz"));
+        this.tasks.addTask(new Deadline("CS2103 Quiz", LocalDateTime.now()));
+        this.tasks.addTask(new Event("CS2103 Quiz", LocalDateTime.now()));
     }
 
     /**
@@ -60,20 +50,6 @@ public class TestStorage {
         TaskList loadedTasks = storage.loadTasks();
 
         // Check that the loaded tasks are the same as the ones that were saved.
-        assertEquals(3, loadedTasks.getSize());
-
-        ToDo firstTask = (ToDo) loadedTasks.getTaskByIndex(1);
-        assertEquals(this.toDo.getDescription(), firstTask.getDescription());
-        assertEquals(this.toDo.isDone(), firstTask.isDone());
-
-        Deadline secondTask = (Deadline) tasks.getTaskByIndex(2);
-        assertEquals(this.deadline.getDescription(), secondTask.getDescription());
-        assertEquals(this.deadline.getByDateTimeString(), secondTask.getByDateTimeString());
-        assertEquals(this.deadline.isDone(), secondTask.isDone());
-
-        Event thirdTask = (Event) tasks.getTaskByIndex(3);
-        assertEquals(this.event.getDescription(), thirdTask.getDescription());
-        assertEquals(this.event.getAtDateTimeString(), thirdTask.getAtDateTimeString());
-        assertEquals(this.event.isDone(), thirdTask.isDone());
+        assertTrue(HelperFunctions.taskListsAreEqual(this.tasks, loadedTasks));
     }
 }

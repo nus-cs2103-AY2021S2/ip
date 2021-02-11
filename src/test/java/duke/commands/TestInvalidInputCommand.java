@@ -4,10 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import duke.helper.HelperFunctions;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.ui.Parser;
@@ -16,7 +20,6 @@ import duke.ui.Parser;
  * JUnit test for the <code>InvalidInputCommand</code> class in duke.commands
  */
 public class TestInvalidInputCommand {
-    private final ToDo toDo;
     private final TaskList tasks;
 
     /**
@@ -24,8 +27,9 @@ public class TestInvalidInputCommand {
      */
     public TestInvalidInputCommand() {
         this.tasks = new TaskList();
-        this.toDo = new ToDo("CS2103 Quiz");
-        this.tasks.addTask(this.toDo);
+        this.tasks.addTask(new ToDo("CS2103 Quiz"));
+        this.tasks.addTask(new Deadline("CS2103 Quiz", LocalDateTime.now()));
+        this.tasks.addTask(new Event("CS2103 Quiz", LocalDateTime.now()));
     }
 
     /**
@@ -41,13 +45,9 @@ public class TestInvalidInputCommand {
      */
     @Test
     public void testExecute() {
-        assertEquals(1, this.tasks.getSize());
-        assertEquals(this.toDo, this.tasks.getTaskByIndex(1));
-
+        TaskList oldTaskList = HelperFunctions.deepCopyTaskList(this.tasks);
         new InvalidInputCommand("Some exception message").execute(this.tasks);
-
-        assertEquals(1, this.tasks.getSize());
-        assertEquals(this.toDo, this.tasks.getTaskByIndex(1));
+        assertTrue(HelperFunctions.taskListsAreEqual(oldTaskList, this.tasks));
     }
 
     /**
