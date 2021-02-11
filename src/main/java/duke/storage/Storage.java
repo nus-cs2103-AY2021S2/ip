@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Storage {
-    Path relativePath;
     Path absolutePath;
     File taskText;
 
@@ -28,8 +27,12 @@ public class Storage {
      * @param absolutePath absolute path of file to be searched for.
      */
     public Storage (String absolutePath) {
-        taskText = new File(absolutePath);
+        // assert a file path so you cant generate files anywhere on the computer
+        String basePath = "D:/Repos/2103_ip1/ip/src/main/java/duke/data/";
+        assert absolutePath.contains(basePath) : "Please use a path that's within the directory.\n";
 
+        this.absolutePath = Paths.get(absolutePath);
+        taskText = new File(absolutePath);
         try {
             if (!taskText.exists()) {
                 System.out.println("new file created");
@@ -49,7 +52,7 @@ public class Storage {
     public int readTaskListToArray(Task[] taskArr, DateValidator validator) {
         int taskIterator = 0;
         try {
-            List<String> list = Files.readAllLines(Paths.get(relativePath.toString()), Charset.defaultCharset());
+            List<String> list = Files.readAllLines(Paths.get(absolutePath.toString()), Charset.defaultCharset());
             String[] taskListStr = list.toArray(new String[list.size()]);
             for (String str : taskListStr) {
                 String[] strArr = str.split(" \\| ");
