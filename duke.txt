@@ -1,1 +1,2 @@
 [D][X] return book (by: Sunday)
+[E][ ] project meeting (at: Fri 2-4pm)
