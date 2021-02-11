@@ -17,6 +17,7 @@ public class Task {
      * @param description The task description.
      */
     public Task(String description) {
+        assert description.length() > 0;
         this.description = description;
         this.isDone = false;
     }
@@ -36,18 +37,11 @@ public class Task {
     }
 
     /**
-     * Returns {@code int} representation of this task's status.
-     * Note that it returns {@code 1} if this task is "not done".
-     */
-    public int convertNotDoneStatusToOne() {
-        return isDone ? 0 : 1;
-    }
-
-    /**
      * Changes this task's status to "done".
      */
     public void markAsDone() {
         this.isDone = true;
+        assert this.getStatusIcon().equals("X");
     }
 
     /**

@@ -36,12 +36,16 @@ public class OlafApp {
     /**
      * Executes each session of the application.
      *
-     * @param command
+     * @param userInput
      */
-    public String run(String command) {
+    public String run(String userInput) {
+        assert userInput.length() > 0;
+        String command = userInput.toLowerCase().trim();
 
-        if (command.equalsIgnoreCase("bye")) {
+        if (command.equals("bye")) {
             return ui.showFormatResponse("Aww hope to see you soon, goodbye!...");
+        } else if (command.equals("help")) {
+            return ui.showFormatResponse(PrintedText.HELP);
         } else if (command.equalsIgnoreCase("list")) {
             // todo: use try catch here, really is it necessary?
             if (taskList.hasTasks()) {
@@ -49,7 +53,7 @@ public class OlafApp {
             } else {
                 return PrintedText.EMPTY_TASKLIST_ERROR.toString();
             }
-        } else if (command.toLowerCase().startsWith("find")) {
+        } else if (command.startsWith("find")) {
             try {
                 String expression = Parser.parseParameter(command, " ", 1);
                 TaskList matches = taskList.findTasks(expression);
@@ -64,12 +68,13 @@ public class OlafApp {
             } catch (ArrayIndexOutOfBoundsException e) {
                 return ui.showFormatError(PrintedText.FIND_FORMAT);
             }
-        } else if (command.toLowerCase().startsWith("done")) {
+        } else if (command.startsWith("done")) {
             try {
                 int id = Parser.parseIntParameter(command);
                 taskList.markTaskAsDone(id);
 
                 storage.saveData(taskList);
+                assert storage.isSaved();
 
                 return ui.showDoneSuccess(id, taskList.getTask(id), taskList.getTotalNumberOfTasksUndone());
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -77,12 +82,13 @@ public class OlafApp {
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 return ui.showInvalidIndexError();
             }
-        } else if (command.toLowerCase().startsWith("delete")) {
+        } else if (command.startsWith("delete")) {
             try {
                 int id = Parser.parseIntParameter(command);
                 Task deleted = taskList.deleteTask(id);
 
                 storage.saveData(taskList);
+                assert storage.isSaved();
 
                 return ui.showDeleteSuccess(id, deleted, taskList.getTotalNumberOfTasks());
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -90,31 +96,33 @@ public class OlafApp {
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 return ui.showInvalidIndexError();
             }
-        } else if (command.toLowerCase().startsWith("todo")) {
+        } else if (command.startsWith("todo")) {
             try {
                 String expression = Parser.parseParameter(command, " ", 1);
                 Todo newTodo = new Todo(expression);
                 taskList.addTask(newTodo);
 
                 storage.saveData(taskList);
+                assert storage.isSaved();
 
                 return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                         newTodo, taskList.getTotalNumberOfTasksUndone());
             } catch (IndexOutOfBoundsException e) {
                 return ui.showFormatError(PrintedText.TODO_FORMAT);
             }
-        } else if (command.toLowerCase().startsWith("deadline")) {
+        } else if (command.startsWith("deadline")) {
             try {
                 String expression = Parser.parseParameter(command, " ", 1);
                 String description = Parser.parseParameter(expression, "/by", 0);
 
                 String dateTime = Parser.parseParameter(expression, "/by", 1);
-                LocalDateTime deadline = Parser.parseDateTimeParameter(dateTime);
+                LocalDateTime deadline = Parser.parseInputDateTime(dateTime);
 
                 Deadline newDeadline = new Deadline(description, deadline);
                 taskList.addTask(newDeadline);
 
                 storage.saveData(taskList);
+                assert storage.isSaved();
 
                 return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                         newDeadline, taskList.getTotalNumberOfTasksUndone());
@@ -122,7 +130,7 @@ public class OlafApp {
                 // catches both ParseException and IndexOutOfBounds exception
                 return ui.showFormatError(PrintedText.DEADLINE_FORMAT);
             }
-        } else if (command.toLowerCase().startsWith("event")) {
+        } else if (command.startsWith("event")) {
             try {
                 String expression = Parser.parseParameter(command, " ", 1);
                 String description = Parser.parseParameter(expression, "/at", 0);
@@ -131,13 +139,14 @@ public class OlafApp {
                 String start = Parser.parseParameter(dateTime, " to ", 0);
                 String end = Parser.parseParameter(dateTime, " to ", 1);
 
-                LocalDateTime startDateTime = Parser.parseDateTimeParameter(start);
-                LocalDateTime endDateTime = Parser.parseDateTimeParameter(end);
+                LocalDateTime startDateTime = Parser.parseInputDateTime(start);
+                LocalDateTime endDateTime = Parser.parseInputDateTime(end);
 
                 Event newEvent = new Event(description, startDateTime, endDateTime);
                 taskList.addTask(newEvent);
 
                 storage.saveData(taskList);
+                assert storage.isSaved();
 
                 return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                         newEvent, taskList.getTotalNumberOfTasksUndone());
@@ -145,8 +154,6 @@ public class OlafApp {
                 // catches both ParseException and IndexOutOfBounds exception
                 return ui.showFormatError(PrintedText.EVENT_FORMAT);
             }
-        } else if (command.equalsIgnoreCase("help")) {
-            return ui.showFormatResponse(PrintedText.HELP);
         } else {
             return ui.showFormatResponse("  Hmm sorry I don't understand :(\n"
                     + "  Type 'help' to find out how you can talk to me!\n");

@@ -30,9 +30,7 @@ public class Olaf {
 
         try {
             tasks = new TaskList(storage.load());
-            ui.showFormatResponse(PrintedText.WELCOME_MESSAGE);
         } catch (IOException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
 
