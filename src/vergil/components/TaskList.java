@@ -1,9 +1,7 @@
 package vergil.components;
 
-import vergil.types.Task;
-import vergil.types.Todo;
-import vergil.types.Deadline;
-import vergil.types.Event;
+import vergil.types.*;
+import vergil.types.exceptions.VergilAnomalyException;
 import vergil.types.exceptions.VergilException;
 import vergil.types.exceptions.VergilFileException;
 import vergil.types.exceptions.VergilIndexException;
@@ -11,19 +9,23 @@ import vergil.types.exceptions.VergilIndexException;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    private HashMap<LocalDateTime, Task> dateTimeTaskPairs;
 
     /**
      * Constructs an empty TaskList.
      */
     public TaskList() {
         tasks = new ArrayList<>();
+        dateTimeTaskPairs = new HashMap<>();
     }
 
     /**
@@ -31,7 +33,7 @@ public class TaskList {
      * @param save the save file containing the info needed to create the TaskList.
      * @throws VergilException if the save file is not found.
      */
-    public TaskList(File save) throws VergilFileException {
+    public TaskList(File save) throws VergilException {
         this();
         try {
             loadFromFile(save);
@@ -48,7 +50,7 @@ public class TaskList {
      * @param f the file object containing the tasks to load.
      * @throws VergilFileException if the file is not found.
      */
-    public void loadFromFile(File f) throws VergilFileException {
+    public void loadFromFile(File f) throws VergilException {
         try {
             Scanner saveEntries = new Scanner(f);
 
@@ -57,20 +59,20 @@ public class TaskList {
 
                 switch (taskDetails[0]) {
                 case "t":
-                    tasks.add(new Todo(
+                    add(new Todo(
                             taskDetails[1],
                             Boolean.parseBoolean(taskDetails[2])));
                     break;
 
                 case "d":
-                    tasks.add(new Deadline(
+                    add(new Deadline(
                             taskDetails[1],
                             LocalDateTime.parse(taskDetails[3]),
                             Boolean.parseBoolean(taskDetails[2])));
                     break;
 
                 case "e":
-                    tasks.add(new Event(
+                    add(new Event(
                             taskDetails[1],
                             LocalDateTime.parse(taskDetails[3]),
                             Boolean.parseBoolean(taskDetails[2])));
@@ -86,9 +88,22 @@ public class TaskList {
      * Adds a task to the list.
      * @param t the task to be added.
      */
-    public void add(Task t) {
-        assert t != null : "Task should not be null.";
+    public void add(Task t) throws VergilAnomalyException {
+        if (t instanceof TimedTask) {
+            checkAnomaly((TimedTask) t);
+            dateTimeTaskPairs.put(((TimedTask) t).getTime(), t);
+        }
+
         tasks.add(t);
+    }
+
+    public void checkAnomaly(TimedTask tt) throws VergilAnomalyException {
+        if (dateTimeTaskPairs.containsKey(tt.getTime())) {
+            throw new VergilAnomalyException(
+                    "This task clashes with another task:\n"
+                            + dateTimeTaskPairs.get(tt.getTime()).toString()
+            );
+        }
     }
 
     public String getAsString(int listNum) throws VergilException {
@@ -122,7 +137,10 @@ public class TaskList {
      */
     public void delete(int listNum) throws VergilException {
         try {
-            tasks.remove(listNum - 1);
+            Task deletedTask = tasks.remove(listNum - 1);
+            if (deletedTask instanceof TimedTask) {
+                dateTimeTaskPairs.remove(((TimedTask) deletedTask).getTime());
+            }
         } catch (IndexOutOfBoundsException e) {
             throw new VergilIndexException("Unable to find task.");
         }
@@ -132,7 +150,7 @@ public class TaskList {
         return tasks.size();
     }
 
-    public TaskList find(String keyword) {
+    public TaskList find(String keyword) throws VergilAnomalyException {
         TaskList subList = new TaskList();
 
         for (Task t:tasks) {

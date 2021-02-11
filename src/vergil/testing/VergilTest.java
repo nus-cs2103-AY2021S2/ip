@@ -11,7 +11,7 @@ public class VergilTest {
     TaskList taskList = new TaskList();
 
     @Test
-    public void addTodo_emptyTaskList_taskListWithAnIncompleteTodoTask() {
+    public void addTodo_emptyTaskList_taskListWithAnIncompleteTodoTask() throws VergilException {
         taskList.add(new Todo("A to-do task"));
 
         assertEquals(
@@ -20,7 +20,7 @@ public class VergilTest {
     }
 
     @Test
-    public void completeTodo_emptyTaskList_taskListWithACompletedTodoTask() {
+    public void completeTodo_emptyTaskList_taskListWithACompletedTodoTask() throws VergilException {
         taskList.add(new Todo("A to-do task"));
 
         try {
