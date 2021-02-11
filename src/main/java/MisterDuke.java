@@ -331,23 +331,24 @@ class Parser {
         String[] strArray = input.split(" ", 2);
         String cmd = strArray[0].trim();
 
-        if (cmd.equalsIgnoreCase("todo")) {
+        switch (cmd) {
+        case "todo":
             return new ToDoCommand(command);
-        } else if (cmd.equalsIgnoreCase("deadline")) {
+        case "deadline":
             return new DeadlineCommand(command);
-        } else if (cmd.equalsIgnoreCase("event")) {
+        case "event":
             return new EventCommand(command);
-        } else if (input.equalsIgnoreCase("list")) {
+        case "list":
             return new ListCommand(command);
-        } else if (cmd.equalsIgnoreCase("done")) {
+        case "done":
             return new DoneCommand(command);
-        } else if (cmd.equalsIgnoreCase("delete")) {
+        case "delete":
             return new DeleteCommand(command);
-        } else if (cmd.equalsIgnoreCase("bye")) {
+        case "bye":
             return new ExitCommand(command);
-        } else if (cmd.equalsIgnoreCase("find")) {
+        case "find":
             return new FindCommand(command);
-        } else {
+        default:
             throw new DukeException("Oops! I'm sorry but I don't know what you mean by that :(");
         }
     }
