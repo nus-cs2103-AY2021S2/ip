@@ -48,7 +48,7 @@ public class Parser {
         case "sort":
             return new SortCommand(s);
         case "help":
-            return new HelpCommand();
+            return new HelpCommand(s);
         case "stats":
             return new StatsCommand();
         default:

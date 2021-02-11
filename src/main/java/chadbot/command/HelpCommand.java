@@ -15,8 +15,10 @@ public class HelpCommand extends Command {
     /**
      * Default constructor for the HelpCommand class.
      */
-    public HelpCommand() {
-        super("");
+    public HelpCommand(String command) {
+        super(command);
+
+        assert(command != null && !command.equals(""));
     }
 
     /**
@@ -28,7 +30,9 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
-        String output = ui.getHelp();
+        String output = command.toLowerCase().contains("/more")
+                ? ui.getMoreHelp()
+                : ui.getHelp();
         System.out.println(output);
         return output;
     }

@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String errorResponse = InvalidInputException.getExceptionMessage();
-        String byeResponse = "";
+        String byeResponse = ":)";
         String input = userInput.getText();
         String response = chadbot.getResponse(input);
         boolean isHelpRequest = input.toLowerCase().contains("help");
