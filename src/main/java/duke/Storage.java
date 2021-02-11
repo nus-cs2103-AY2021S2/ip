@@ -93,6 +93,7 @@ public class Storage {
                     }
                     list.add(deadline);
                 } else {
+                    assert type.equals("E") : type + ": Type should be E";
                     String when = taskArr[3];
                     Event event = new Event(description, when);
                     if (num.equals("1")) {
