@@ -119,8 +119,8 @@ public class Parser {
      * Method adds the Todo task user indicated into a TaskList.
      */
     public String addTodoTask(TaskList list) {
-        list.addTodo(inputTaskToDoIs());
-        return userInterface.userAddTask(list);
+        Task toAddIntoList = list.addTodo(inputTaskToDoIs());
+        return userInterface.userAddTask(list, toAddIntoList);
     }
 
     /**
@@ -185,8 +185,8 @@ public class Parser {
     public String addEventTask(TaskList list) {
         try {
             String[] taskAndDate = findTaskWithDate();
-            list.addEvent(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
-            return userInterface.userAddTask(list);
+            Event eventToAdd = list.addEvent(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
+            return userInterface.userAddTask(list, eventToAdd);
         } catch (ArrayIndexOutOfBoundsException e) {
             return "I could not understand your deadline task.\n"
                     + "Try format it as \n"
@@ -203,8 +203,8 @@ public class Parser {
     public String addDeadlineTask(TaskList list) {
         String[] taskAndDate = findTaskWithDate();
         try {
-            list.addDeadline(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
-            return userInterface.userAddTask(list);
+            Deadline deadlineToAdd = list.addDeadline(taskAndDate[0], inputDateAndTime(taskAndDate[1]));
+            return userInterface.userAddTask(list, deadlineToAdd);
         } catch (ArrayIndexOutOfBoundsException e) {
             return "I could not understand your deadline task.\n"
                     + "Try format it as \n"

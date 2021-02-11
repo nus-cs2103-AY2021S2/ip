@@ -8,7 +8,7 @@ public class Storage {
     private File file;
 
     public Storage() {
-        this.file = new File("PreviousTaskList.txt");
+        this.file = new File("/Users/sidneychong/Desktop/CS2103/iP/PreviousTaskList.txt");
     }
 
     public boolean isSavedHistory() {
@@ -22,11 +22,13 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public void initialise(TaskList tasklist) throws FileNotFoundException {
+        System.out.println(isSavedHistory());
         if (isSavedHistory()) {
             Scanner s = new Scanner(this.file);
             while (s.hasNext()) {
                 String current = s.nextLine().toLowerCase();
-                assert current != null : "current at initilise in Storage";
+                System.out.println(current);
+                assert current != null : "current at initialise in Storage";
                 if (current.contains("todo")) {
                     Task task = Todo.readTaskFromStorage(current);
                     tasklist.add(task);
@@ -35,7 +37,7 @@ public class Storage {
                 } else if (current.contains("event")) {
                     tasklist.add(Event.readTaskFromStorage(current));
                 } else {
-                    if (s.hasNext()) {
+                    if (s.hasNext()) { System.out.println("reached");
                         current = s.nextLine();
                     } else {
                         throw new FileNotFoundException("History saved corrupted");
@@ -56,7 +58,7 @@ public class Storage {
         FileWriter fw = new FileWriter("PreviousTaskList.txt");
         tasklist.forEach(x -> {
             try {
-                fw.write(x + "/n");
+                fw.write(x.saveInStorageAs() + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }

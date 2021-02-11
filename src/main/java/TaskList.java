@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 public class TaskList {
@@ -17,16 +18,52 @@ public class TaskList {
         this.list.add(task);
     }
 
-    public void addTodo(String task) {
-        this.list.add(new Todo(task));
+    public Todo addTodo(String task) {
+        Todo todoToAddInList = createToDo(task);
+        if (isDuplicateAbsent(todoToAddInList)) {
+            this.list.add(new Todo(task));
+        }
+        return todoToAddInList;
     }
 
-    public void addDeadline(String task, LocalDateTime date) {
-        this.list.add(new Deadline(task, date));
+    public Deadline addDeadline(String task, LocalDateTime date) {
+        Deadline deadlineToAddInList = createDeadline(task, date);
+        if(isDuplicateAbsent(deadlineToAddInList)) {
+            this.list.add(new Deadline(task, date));
+        }
+        return deadlineToAddInList;
     }
 
-    public void addEvent(String task, LocalDateTime date) {
-        this.list.add(new Event(task, date));
+    public Event addEvent(String task, LocalDateTime date) {
+        Event eventToAddInList = createEvent(task, date);
+        if (isDuplicateAbsent(eventToAddInList)) {
+            this.list.add(new Event(task, date));
+        }
+        return eventToAddInList;
+    }
+
+    public boolean isDuplicateAbsent (Task y) {
+        AtomicBoolean isDuplicateAbsent = new AtomicBoolean(true);
+        this.forEach(x ->
+                {
+                    if(x.getTask().equals(y.getTask())) {
+                        isDuplicateAbsent.set(false);
+                    }
+                }
+        );
+        return isDuplicateAbsent.get();
+    }
+
+    public Todo createToDo(String task) {
+        return new Todo(task);
+    }
+
+    public Deadline createDeadline(String task, LocalDateTime date) {
+        return new Deadline(task, date);
+    }
+
+    public Event createEvent(String task, LocalDateTime date) {
+        return new Event(task, date);
     }
 
     /**

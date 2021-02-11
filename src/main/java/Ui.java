@@ -32,10 +32,10 @@ public class Ui {
      * String to print when a user adds a new Task to the list.
      * @param list
      */
-    public String userAddTask(TaskList list) {
+    public String userAddTask(TaskList list, Task task) {
         return "Got it. I've added this task: \n  "
-                            + list.getLastAddedTask().toString()
-                            + "\nNow you have " + String.valueOf(list.size())
+                            + task
+                            + "\now you have " + String.valueOf(list.size())
                             + " tasks in the list.";
     }
 

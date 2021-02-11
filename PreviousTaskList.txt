@@ -1,1 +1,2 @@
-[E][ ] utown dinner (at: Feb 07 2020 06:00 pm)/n[E][ ] conference (at: Feb 07 2020 10:00 pm)/n[D][ ] 2105 assignment (by: Feb 24 2020 11:59 pm)/n
+class Todo, false,  ice cream
+class Deadline, false, 2105 , 2021-02-14T23:59
