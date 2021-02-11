@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -44,7 +45,7 @@ public class TaskList {
     }
 
     public String write(int index) {
-        return this.list.get(index).toCommand();
+        return this.list.get(index).saveInStorageAs();
     }
 
     public void markDone(int index) {
@@ -62,6 +63,10 @@ public class TaskList {
 
     public Task getLastAddedTask() {
         return this.list.get(this.list.size() - 1);
+    }
+
+    public void forEach(Consumer<Task> t) {
+        list.forEach(t);
     }
 
     /**
@@ -88,12 +93,11 @@ public class TaskList {
      */
     public TaskList filterFind(String keyword) {
         TaskList filteredList = new TaskList();
-        for (int i = 0; i < list.size(); i++) {
-            Task current = list.get(i);
-            if (current.taskMatch(keyword)) {
-                filteredList.add(current);
+        this.forEach(x -> {
+            if (x.doesTaskMatchKeyword(keyword)) {
+                filteredList.add(x);
             }
-        }
+        });
         return filteredList;
     }
 }

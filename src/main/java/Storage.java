@@ -26,13 +26,14 @@ public class Storage {
             Scanner s = new Scanner(this.file);
             while (s.hasNext()) {
                 String current = s.nextLine().toLowerCase();
+                assert current != null : "current at initilise in Storage";
                 if (current.contains("todo")) {
-                    Task task = Todo.readTask(current);
+                    Task task = Todo.readTaskFromStorage(current);
                     tasklist.add(task);
                 } else if (current.contains("deadline")) {
-                    tasklist.add(Deadline.readTask(current));
+                    tasklist.add(Deadline.readTaskFromStorage(current));
                 } else if (current.contains("event")) {
-                    tasklist.add(Event.readTask(current));
+                    tasklist.add(Event.readTaskFromStorage(current));
                 } else {
                     if (s.hasNext()) {
                         current = s.nextLine();
@@ -53,17 +54,13 @@ public class Storage {
      */
     public void saveHistory(TaskList tasklist) throws IOException {
         FileWriter fw = new FileWriter("PreviousTaskList.txt");
-        try {
-            for (int i = 0; i < tasklist.size(); i++) {
-                if (i == 0) {
-                    fw.write(tasklist.write(i));
-                } else {
-                    fw.write(System.lineSeparator() + tasklist.write(i));
-                }
+        tasklist.forEach(x -> {
+            try {
+                fw.write(x + "/n");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        });
         fw.close();
     }
 }
