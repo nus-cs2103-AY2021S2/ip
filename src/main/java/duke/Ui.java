@@ -37,6 +37,7 @@ public class Ui {
 
     /**
      * Prints message when user adds a task to list
+     *
      * @param list list of tasks
      * @param addedTask task that is added
      */
@@ -49,6 +50,7 @@ public class Ui {
 
     /**
      * Prints message when user deletes a task from list
+     *
      * @param list list of tasks
      * @param deletedTask task that is deleted
      */
@@ -61,6 +63,7 @@ public class Ui {
 
     /**
      * Prints message when user checks a task as done
+     *
      * @param task task that is checked as done
      */
     public String checkAsDoneMessage(Task task) {
@@ -70,6 +73,7 @@ public class Ui {
 
     /**
      * Prints message when user requests for tasks in list
+     *
      * @param list list of tasks
      */
     public String listAllTasks(ArrayList<Task> list) {
@@ -84,6 +88,7 @@ public class Ui {
 
     /**
      * Prints matching tasks in list
+     *
      * @param keyword keyword to search for in list
      * @param list list of tasks
      */
@@ -107,6 +112,11 @@ public class Ui {
         return message;
     }
 
+    /**
+     * Prints the help message
+     *
+     * @return help message as a String
+     */
     public String viewHelpMessage() {
         String message = "List of commands\n"
                 + "bye -> Exit application\n"
@@ -121,6 +131,12 @@ public class Ui {
         return message;
     }
 
+    /**
+     * Prints statistics for the task list
+     *
+     * @param list task list
+     * @return statistics as a String
+     */
     public String getStatistics(ArrayList<Task> list) {
         String divider = "------\n";
         String message = "";

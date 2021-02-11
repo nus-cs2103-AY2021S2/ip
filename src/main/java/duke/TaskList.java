@@ -15,6 +15,7 @@ public class TaskList {
     /**
      * Constructor for TaskList class
      * Initializes a TaskList object with list of tasks specified
+     *
      * @param list list of tasks
      */
     public TaskList(ArrayList<Task> list) {
@@ -23,6 +24,7 @@ public class TaskList {
 
     /**
      * Adds a task to list
+     *
      * @param task task to be added
      */
     public void addTask(Task task) {
@@ -31,6 +33,7 @@ public class TaskList {
 
     /**
      * Deletes a task from list
+     *
      * @param num number of task to be deleted
      */
     public Task deleteTask(int num) {
@@ -39,6 +42,7 @@ public class TaskList {
 
     /**
      * Checks a task as done
+     *
      * @param task task to be checked as done
      */
     public void checkAsDone(Task task) {
