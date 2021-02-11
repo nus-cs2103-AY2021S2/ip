@@ -31,12 +31,24 @@ public class Parser {
     }
 
     /**
-     * Returns a {@code LocalDateTime} parameter from 'deadline' and 'event' commands.
+     * Returns a {@code LocalDateTime} parameter from 'deadline' and 'event' userInput.
+     * This reads the date and time in the expected user input format.
      *
      * @param dateTime The user command specifying the date and time.
      */
-    public static LocalDateTime parseDateTimeParameter(String dateTime) {
+    public static LocalDateTime parseInputDateTime(String dateTime) {
         return LocalDateTime.parse(dateTime.trim(),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+    }
+
+    /**
+     * Returns a {@code LocalDateTime} parameter from saved deadlines and events.
+     * This reads the date and time in the output and saved format .
+     *
+     * @param dateTime The user command specifying the date and time.
+     */
+    public static LocalDateTime parseOutputDateTime(String dateTime) {
+        return LocalDateTime.parse(dateTime.trim(),
+                DateTimeFormatter.ofPattern("d MMM yyyy HH:mm)"));
     }
 }

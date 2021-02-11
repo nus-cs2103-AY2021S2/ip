@@ -50,7 +50,9 @@ public class TaskList {
      * @param task any {@code Task} to be added.
      */
     public void addTask(Task task) {
+        int totalBefore = tasks.size();
         tasks.add(task);
+        assert totalBefore + 1 == tasks.size();
     }
 
     /**
@@ -94,9 +96,11 @@ public class TaskList {
      * Returns total number of {@code Task}s that are not completed in the application.
      */
     public int getTotalNumberOfTasksUndone() {
-        return tasks.stream()
-                .mapToInt(Task::convertNotDoneStatusToOne)
-                .reduce(0, Integer::sum);
+        int count = (int) tasks.stream()
+                .filter(x -> x.getStatusIcon().equals("X"))
+                .count(); // returns long
+        assert count <= this.getTotalNumberOfTasks();
+        return count;
     }
 
     /**
@@ -113,6 +117,7 @@ public class TaskList {
                     .reduce((a, b) -> a + b)
                     .get();
         }
+        assert !this.hasTasks();
         return "";
     }
 }

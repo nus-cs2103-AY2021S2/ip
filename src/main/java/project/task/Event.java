@@ -20,6 +20,9 @@ public class Event extends Task {
      */
     public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
+
+        // todo: create new Exception("End time should be after start time for an Event")
+        assert start.isBefore(end);
         this.start = start;
         this.end = end;
     }

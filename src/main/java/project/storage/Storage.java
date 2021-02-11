@@ -8,11 +8,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import project.Olaf;
+import project.io.Parser;
 import project.task.Deadline;
 import project.task.Event;
 import project.task.Task;
@@ -28,6 +29,7 @@ public class Storage {
     // /create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
     // inserts correct file path separator on *nix and Windows
     private Path dataPath;
+    private boolean isSaveSuccessful = false;
 
     /**
      * Creates an instance of {@code Storage}.
@@ -35,16 +37,16 @@ public class Storage {
      * @param filePath The path to the file where all the tasks are to be stored.
      */
     public Storage(String filePath) {
+        assert filePath.equals(Olaf.FILE_PATH);
 
         String[] filePathSplit = filePath.split("(?:.(?!/))+$", 2);
-        // take file path with respect to OlafApp directory
         String fileDirectory = filePathSplit[0];
-
         File directory = new File(fileDirectory);
         if (!directory.exists()) {
             directory.mkdir();
         }
 
+        assert directory.exists();
         this.dataPath = Paths.get(filePath);
     }
 
@@ -56,7 +58,7 @@ public class Storage {
      */
     public void saveData(TaskList taskList) {
         try {
-            // save all tasks again if task.TaskList has tasks
+            // save all tasks again if taskList has tasks
             if (taskList.hasTasks()) {
                 String taskListToString = taskList.toString();
                 // splitting by "  %d. [" in case the task description uses periods and digits as well
@@ -73,13 +75,20 @@ public class Storage {
                         StandardCharsets.UTF_8,
                         StandardOpenOption.CREATE,
                         StandardOpenOption.TRUNCATE_EXISTING);
+                this.isSaveSuccessful = true;
             } else {
                 Files.deleteIfExists(dataPath);
             }
-        } catch (IOException ignore) {
-            // program is safe to continue
-            // StandardOpenOption.CREATE handles the case when file does not exist
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * Returns if last {@code saveData} call was successful.
+     */
+    public boolean isSaved() {
+        return this.isSaveSuccessful;
     }
 
     /**
@@ -100,24 +109,28 @@ public class Storage {
         Task outputTask = null;
 
         if (line.startsWith("T]")) {
-            String expression = line.split("] ", 2)[1];
+            String expression = Parser.parseParameter(line, "] ", 1);
             outputTask = new Todo(expression);
         } else if (line.startsWith("D]")) {
-            String expression = line.split("] ", 2)[1];
-            String[] dateTimeSplit = expression.split(" \\(by:", 2);
-            LocalDateTime deadline = LocalDateTime.parse(dateTimeSplit[1].trim(),
-                    DateTimeFormatter.ofPattern("d MMM yyyy HH:mm)"));
-            outputTask = new Deadline(dateTimeSplit[0], deadline);
-        } else if (line.startsWith("E]")) {
-            String expression = line.split("] ", 2)[1];
-            String[] descriptionSplit = expression.split(" \\(at: ", 2);
-            String[] durationSplit = descriptionSplit[1].split(" to ");
+            String expression = Parser.parseParameter(line, "] ", 1);
+            String description = Parser.parseParameter(expression, "\\(by", 0);
 
-            LocalDateTime start = LocalDateTime.parse(durationSplit[0].trim(),
-                    DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
-            LocalDateTime end = LocalDateTime.parse(durationSplit[1].trim(),
-                    DateTimeFormatter.ofPattern("d MMM yyyy HH:mm)"));
-            outputTask = new Event(descriptionSplit[0], start, end);
+            String dateTime = Parser.parseParameter(expression, "\\(by", 1);
+            LocalDateTime deadline = Parser.parseOutputDateTime(dateTime);
+
+            outputTask = new Deadline(description, deadline);
+        } else if (line.startsWith("E]")) {
+            String expression = Parser.parseParameter(line, "] ", 1);
+            String description = Parser.parseParameter(expression, "\\(at", 0);
+
+            String dateTime = Parser.parseParameter(expression, "\\(at", 1);
+            String start = Parser.parseParameter(dateTime, " to ", 0);
+            String end = Parser.parseParameter(dateTime, " to ", 1);
+
+            LocalDateTime startDateTime = Parser.parseOutputDateTime(start);
+            LocalDateTime endDateTime = Parser.parseOutputDateTime(end);
+
+            outputTask = new Event(description, startDateTime, endDateTime);
         }
         if (taskIsDone) {
             assert outputTask != null;

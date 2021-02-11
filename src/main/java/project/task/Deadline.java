@@ -18,6 +18,9 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDateTime deadline) {
         super(description);
+
+        // todo: create new Exception
+        assert deadline.isAfter(LocalDateTime.now());
         this.deadline = deadline;
     }
 
