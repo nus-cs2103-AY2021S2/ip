@@ -46,6 +46,8 @@ following types of tasks:
 1. **Arrange:** sorts the list of tasks into the specified ordering.
     ```
    sort
+   sort /by type
+   sort /by date
    ```
 1. **Stats:** shows the tally of to-dos, deadlines, and events in the task list.
     ```
@@ -59,45 +61,39 @@ following types of tasks:
 
 ## Usage
 
-1. Create
+1. ### Create
 
-    * `todo` - Describe action
+    * `todo <description>` - Adds a _to-do_ to the task list.
 
-        Describe action and its outcome.
+        **Example of usage:** `todo cs2103t ip`
+        
+        Adds a simple _to-do_ with description "cs2103t ip" to the task list.
 
-        Example of usage: 
+        **Expected outcome:**
+        
+        ![todo](images/todo.png)
 
-        `keyword (optional arguments)`
+    * `deadline <description> /by <date>` - Adds a _deadline_ to the task list.
 
-        Expected outcome:
+        **Example of usage:** `deadline cs2104 tutorial /by 2021-02-12`
+        
+        Adds a _deadline_ with description "cs2104 tutorial" and due date "2021-02-12" to the task list.
 
-        `outcome`
+        **Expected outcome:**
 
-    * `deadline` - Describe action
+        ![deadline](images/deadline.png)
 
-        Describe action and its outcome.
+    * `event <description> /at <date>` - Adds an _event_ to the task list.
 
-        Example of usage: 
+        **Example of usage:** `event cs2105 exam /at 2021-03-21`
+        
+        Adds an _event_ with description "cs2105 exam" and date "2021-03-21" to the task list.
 
-        `keyword (optional arguments)`
+        **Expected outcome:**
 
-        Expected outcome:
+        ![event](images/event.png)
 
-        `outcome`
-
-    * `event` - Describe action
-
-        Describe action and its outcome.
-
-        Example of usage: 
-
-        `keyword (optional arguments)`
-
-        Expected outcome:
-
-        `outcome`
-
-1. Read
+1. ### Read
  
     * `list` - Describe action
 
@@ -111,7 +107,7 @@ following types of tasks:
 
         `outcome`
 
-1. Update
+1. ### Update
 
     * `edit` - Describe action
 
@@ -125,7 +121,7 @@ following types of tasks:
 
         `outcome`
 
-1. Delete
+1. ### Delete
 
     * `delete` - Describe action
 
@@ -139,7 +135,7 @@ following types of tasks:
 
         `outcome`
 
-1. Exit
+1. ### Exit
 
     * `bye` - Describe action
 
@@ -153,7 +149,7 @@ following types of tasks:
 
         `outcome`
 
-1. Search
+1. ### Search
 
     * `find` - Describe action
 
@@ -167,7 +163,7 @@ following types of tasks:
 
         `outcome`
 
-1. Mark
+1. ### Mark
 
     * `done` - Describe action
 
@@ -181,7 +177,7 @@ following types of tasks:
 
         `outcome`
         
-1. Arrange
+1. ### Arrange
 
     * `sort` - Describe action
 
@@ -195,7 +191,7 @@ following types of tasks:
 
         `outcome`
         
-1. Stats
+1. ### Stats
 
     * `stats` - Describe action
 
@@ -209,7 +205,7 @@ following types of tasks:
 
         `outcome`
         
-1. Help
+1. ### Help
 
     * `help` - Describe action
 

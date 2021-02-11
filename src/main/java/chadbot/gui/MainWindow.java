@@ -52,9 +52,9 @@ public class MainWindow extends AnchorPane {
 
         chadbot = c;
         chadbot.getStorage().loadData(chadbot.getTaskList());
-        dialogContainer.getChildren().addAll(
+        /* dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greetingMessage, chadLImage)
-        );
+        ); */
     }
 
     /**
@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String errorResponse = InvalidInputException.getExceptionMessage();
-        String byeResponse = ":)";
+        String byeResponse = "Bye :)";
         String input = userInput.getText();
         String response = chadbot.getResponse(input);
         boolean isHelpRequest = input.toLowerCase().contains("help");
