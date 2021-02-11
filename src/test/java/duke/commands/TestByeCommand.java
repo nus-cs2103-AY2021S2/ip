@@ -3,8 +3,13 @@ package duke.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 
+import duke.helper.HelperFunctions;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
@@ -12,7 +17,6 @@ import duke.tasks.ToDo;
  * JUnit test for the <code>ByeCommand</code> class in duke.commands
  */
 public class TestByeCommand {
-    private final ToDo toDo;
     private final TaskList tasks;
     private final ByeCommand command;
 
@@ -22,9 +26,9 @@ public class TestByeCommand {
     public TestByeCommand() {
         this.command = new ByeCommand();
         this.tasks = new TaskList();
-
-        this.toDo = new ToDo("CS2103 Quiz");
-        this.tasks.addTask(this.toDo);
+        this.tasks.addTask(new ToDo("CS2103 Quiz"));
+        this.tasks.addTask(new Deadline("CS2103 Quiz", LocalDateTime.now()));
+        this.tasks.addTask(new Event("CS2103 Quiz", LocalDateTime.now()));
     }
 
     /**
@@ -40,13 +44,9 @@ public class TestByeCommand {
      */
     @Test
     public void testExecute() {
-        assertEquals(1, this.tasks.getSize());
-        assertEquals(this.toDo, this.tasks.getTaskByIndex(1));
-
+        TaskList oldTaskList = HelperFunctions.deepCopyTaskList(this.tasks);
         this.command.execute(this.tasks);
-
-        assertEquals(1, this.tasks.getSize());
-        assertEquals(this.toDo, this.tasks.getTaskByIndex(1));
+        assertTrue(HelperFunctions.taskListsAreEqual(oldTaskList, this.tasks));
     }
 
     /**

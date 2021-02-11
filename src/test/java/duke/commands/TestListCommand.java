@@ -2,12 +2,14 @@ package duke.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import duke.helper.HelperFunctions;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
@@ -17,9 +19,6 @@ import duke.tasks.ToDo;
  * JUnit test for the <code>ListCommand</code> class in duke.commands
  */
 public class TestListCommand {
-    private final ToDo toDo;
-    private final Deadline deadline;
-    private final Event event;
     private final TaskList tasks;
     private final ListCommand command;
 
@@ -31,15 +30,15 @@ public class TestListCommand {
         LocalDateTime dateTime = LocalDateTime.parse("2021-02-06 23:30", formatter);
 
         this.tasks = new TaskList();
-        this.toDo = new ToDo("CS2103 Quiz 1");
-        this.deadline = new Deadline("BT4013 Quiz 2", dateTime);
-        this.event = new Event("CS2103 Quiz 3", dateTime);
+        ToDo toDo = new ToDo("CS2103 Quiz 1");
+        Deadline deadline = new Deadline("BT4013 Quiz 2", dateTime);
+        Event event = new Event("CS2103 Quiz 3", dateTime);
 
-        this.deadline.markAsDone();
+        deadline.markAsDone();
 
-        this.tasks.addTask(this.toDo);
-        this.tasks.addTask(this.deadline);
-        this.tasks.addTask(this.event);
+        this.tasks.addTask(toDo);
+        this.tasks.addTask(deadline);
+        this.tasks.addTask(event);
 
         this.command = new ListCommand();
     }
@@ -57,17 +56,9 @@ public class TestListCommand {
      */
     @Test
     public void testExecute() {
-        assertEquals(3, this.tasks.getSize());
-        assertEquals(this.toDo, this.tasks.getTaskByIndex(1));
-        assertEquals(this.deadline, this.tasks.getTaskByIndex(2));
-        assertEquals(this.event, this.tasks.getTaskByIndex(3));
-
+        TaskList oldTaskList = HelperFunctions.deepCopyTaskList(this.tasks);
         this.command.execute(this.tasks);
-
-        assertEquals(3, this.tasks.getSize());
-        assertEquals(this.toDo, this.tasks.getTaskByIndex(1));
-        assertEquals(this.deadline, this.tasks.getTaskByIndex(2));
-        assertEquals(this.event, this.tasks.getTaskByIndex(3));
+        assertTrue(HelperFunctions.taskListsAreEqual(oldTaskList, this.tasks));
     }
 
     /**

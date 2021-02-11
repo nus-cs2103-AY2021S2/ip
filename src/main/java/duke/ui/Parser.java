@@ -16,8 +16,10 @@ import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.InvalidInputCommand;
 import duke.commands.ListCommand;
+import duke.commands.ReminderCommand;
 import duke.exceptions.InvalidActionException;
 import duke.exceptions.InvalidDateTimeFormatException;
+import duke.exceptions.InvalidUrgencyDaysException;
 import duke.exceptions.MissingDeadlineException;
 import duke.exceptions.MissingDescriptionException;
 import duke.exceptions.MissingEventTimeException;
@@ -39,26 +41,27 @@ public class Parser {
     private static final String TODO = "TODO";
     private static final String DEADLINE = "DEADLINE";
     private static final String EVENT = "EVENT";
+    private static final String REMINDER = "REMINDER";
 
     private static final ArrayList<String> validActions =
-            new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, TODO, DEADLINE, EVENT));
-
-    public static ArrayList<String> getValidActions() {
-        return validActions;
-    }
+            new ArrayList<>(Arrays.asList(BYE, LIST, DONE, DELETE, FIND, REMINDER, TODO, DEADLINE, EVENT));
 
     /**
      * Parses a line of raw user input, converting it into a <code>Command</code> object that
      * handles all of the application's logic. Accordingly, the output <code>Command</code> object
-     * will be used to (1) alter the application's state, (2) computes responses to the users, and
-     * (3) determine whether to terminate the application.
+     * will be used to:
+     * (1) alter the application's state
+     * (2) computes responses to the users
+     * (3) determine whether to terminate the application
      *
      * @param input A line of raw user input.
      * @return Returns a <code>Command</code> object which will be used to execute the desired responses.
      */
     public static Command parse(String input) {
+        // If the input is valid, getExceptionMessage will return null.
+        // If the input is invalid, getExceptionMessage will return an appropriate message to be displayed.
         String exceptionMessage = getExceptionMessage(input);
-        if (!exceptionMessage.equals("")) {
+        if (exceptionMessage != null) {
             return new InvalidInputCommand(exceptionMessage);
         }
 
@@ -76,6 +79,8 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(description));
         case DELETE:
             return new DeleteCommand(Integer.parseInt(description));
+        case REMINDER:
+            return new ReminderCommand(Integer.parseInt(description));
         case FIND:
             return new FindCommand(description);
         case TODO:
@@ -184,6 +189,13 @@ public class Parser {
         return true;
     }
 
+    private static boolean isPositiveInteger(String str) {
+        if (!isInteger(str)) {
+            return false;
+        }
+        return Integer.parseInt(str) > 0;
+    }
+
     /**
      * Converts an input date or datetime string into a <code>LocalDateTime</code> object.
      *
@@ -238,6 +250,10 @@ public class Parser {
                 throw new TaskNumberNotIntException();
             }
 
+            if (action.equals(REMINDER) && (!isPositiveInteger(description))) {
+                throw new InvalidUrgencyDaysException();
+            }
+
             if (action.equals(DEADLINE) && byDateTimeString.length() == 0) {
                 throw new MissingDeadlineException();
             }
@@ -259,10 +275,11 @@ public class Parser {
                 | TaskNumberNotIntException
                 | MissingDeadlineException
                 | MissingEventTimeException
-                | InvalidDateTimeFormatException e) {
+                | InvalidDateTimeFormatException
+                | InvalidUrgencyDaysException e) {
             return e.getMessage();
         }
 
-        return "";
+        return null;
     }
 }

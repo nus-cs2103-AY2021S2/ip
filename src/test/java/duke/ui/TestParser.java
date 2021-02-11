@@ -18,6 +18,7 @@ import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.InvalidInputCommand;
 import duke.commands.ListCommand;
+import duke.commands.ReminderCommand;
 
 /**
  * JUnit test for the <code>Parser</code> class in duke.ui
@@ -35,13 +36,14 @@ public class TestParser {
         assertTrue(Parser.parse("done 1") instanceof DoneCommand);
         assertTrue(Parser.parse("delete 1") instanceof DeleteCommand);
         assertTrue(Parser.parse("find CS") instanceof FindCommand);
+        assertTrue(Parser.parse("reminder 1") instanceof ReminderCommand);
         assertTrue(Parser.parse("todo CS2103 Quiz") instanceof AddTaskCommand);
         assertTrue(Parser.parse("deadline CS2103 Quiz /by 2021-02-06 23:30") instanceof AddTaskCommand);
         assertTrue(Parser.parse("deadline CS2103 Quiz /by 2021-02-06") instanceof AddTaskCommand);
         assertTrue(Parser.parse("event CS2103 Quiz /at 2021-02-06 23:30") instanceof AddTaskCommand);
         assertTrue(Parser.parse("event CS2103 Quiz /at 2021-02-06") instanceof AddTaskCommand);
 
-        // Test that parsing invalid input would return the DoNothingCommand, which does nothing (obviously)
+        // Test that parsing invalid input would return the InvalidInputCommand, which does nothing.
         for (String input : Arrays.asList(
                 "something invalid",
                 "done",
@@ -49,6 +51,10 @@ public class TestParser {
                 "delete",
                 "delete something",
                 "find",
+                "remind",
+                "remind something",
+                "remind 0",
+                "remind -1",
                 "todo",
                 "deadline",
                 "deadline something",

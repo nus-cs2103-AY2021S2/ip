@@ -1,6 +1,8 @@
 package duke.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,27 +10,35 @@ import org.junit.jupiter.api.Test;
  * JUnit test for the <code>ToDo</code> class in duke.tasks
  */
 public class TestToDo {
-    private final String description = "CS2103 Quiz";
-    private final ToDo toDo = new ToDo(this.description);
 
     /**
-     * Initializes a <code>ToDo</code> instance with preset properties for testing.
+     * Tests that the task's can be marked as done correctly.
      */
     @Test
-    public void testStatus() {
-        assertEquals(this.getExpectedStatusString(false), this.toDo.getStatusString());
-        this.toDo.markAsDone();
-        assertEquals(this.getExpectedStatusString(true), this.toDo.getStatusString());
+    public void testIsDone() {
+        ToDo toDo = new ToDo("CS2103 Quiz");
+        assertFalse(toDo.isDone());
+        toDo.markAsDone();
+        assertTrue(toDo.isDone());
     }
 
     /**
-     * Builds an expected status string to be compared against the computed one.
-     *
-     * @param isDone Whether the task is done or not
-     * @return The expected status string
+     * Tests that the task's description is processed correctly.
      */
-    private String getExpectedStatusString(boolean isDone) {
-        String statusSymbol = isDone ? "X" : " ";
-        return "[T][" + statusSymbol + "] " + this.description;
+    @Test
+    public void testDescription() {
+        ToDo toDo = new ToDo("CS2103 Quiz");
+        assertEquals("CS2103 Quiz", toDo.getDescription());
+    }
+
+    /**
+     * Tests that the task's status string is output correctly.
+     */
+    @Test
+    public void testStatusString() {
+        ToDo toDo = new ToDo("CS2103 Quiz");
+        assertEquals("[T][ ] CS2103 Quiz", toDo.getStatusString());
+        toDo.markAsDone();
+        assertEquals("[T][X] CS2103 Quiz", toDo.getStatusString());
     }
 }

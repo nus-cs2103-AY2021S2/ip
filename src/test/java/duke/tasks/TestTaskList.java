@@ -84,9 +84,22 @@ public class TestTaskList {
         assertNull(this.tasks.popTaskByIndex(0));
         assertNull(this.tasks.popTaskByIndex(4));
 
-        assertEquals(this.event, this.tasks.popTaskByIndex(3));
-        assertEquals(this.deadline, this.tasks.popTaskByIndex(2));
+        assertEquals(3, this.tasks.getSize());
+        assertEquals(this.toDo, this.tasks.getTaskByIndex(1));
+        assertEquals(this.deadline, this.tasks.getTaskByIndex(2));
+        assertEquals(this.event, this.tasks.getTaskByIndex(3));
+
         assertEquals(this.toDo, this.tasks.popTaskByIndex(1));
+        assertEquals(2, this.tasks.getSize());
+        assertEquals(this.deadline, this.tasks.getTaskByIndex(1));
+        assertEquals(this.event, this.tasks.getTaskByIndex(2));
+
+        assertEquals(this.deadline, this.tasks.popTaskByIndex(1));
+        assertEquals(1, this.tasks.getSize());
+        assertEquals(this.event, this.tasks.getTaskByIndex(1));
+
+        assertEquals(this.event, this.tasks.popTaskByIndex(1));
+        assertEquals(0, this.tasks.getSize());
     }
 
     /**
