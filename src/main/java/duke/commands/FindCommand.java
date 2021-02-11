@@ -58,6 +58,9 @@ public class FindCommand implements Command {
      */
     public static FindCommand buildInstance(String argString) throws DukeException {
         String[] cmdArgs = ParserUtils.getCommandArgs(argString, "I'm sorry, but find needs a keyword specified.");
+
+        assert(cmdArgs[0].equals("find"));
+
         String keyword = cmdArgs[1];
         return new FindCommand(keyword);
     }

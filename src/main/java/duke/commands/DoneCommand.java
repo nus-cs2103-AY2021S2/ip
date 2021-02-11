@@ -45,6 +45,9 @@ public class DoneCommand implements Command {
      */
     public static DoneCommand buildInstance(String argString) throws DukeException {
         String[] cmdArgs = ParserUtils.getCommandArgs(argString, "I'm sorry, but done needs the index of a Task.");
+
+        assert(cmdArgs[0].equals("done"));
+
         int index = ParserUtils.parseInt(cmdArgs[1], "The index of the task needs to be an integer.");
         return new DoneCommand(index);
     }

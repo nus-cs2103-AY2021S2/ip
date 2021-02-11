@@ -37,6 +37,9 @@ public class DeadlineCommand extends AddCommand {
      */
     public static DeadlineCommand buildInstance(String argString) throws DukeException {
         String[] cmdArgs = ParserUtils.getCommandArgs(argString, "The description of a todo cannot be empty.");
+
+        assert(cmdArgs[0].equals("deadline"));
+
         String[] deadlineArgs = cmdArgs[1].split(" /by ", 2);
         if (deadlineArgs.length < 2) {
             throw new DukeException("The deadline needs to have a date specified with \"/by\".");
