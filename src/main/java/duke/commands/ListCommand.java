@@ -9,6 +9,10 @@ import duke.ui.Ui;
  * Format of command: "list".
  */
 public class ListCommand implements Command {
+    protected ListCommand() {
+
+    }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() <= 0) {
@@ -24,5 +28,9 @@ public class ListCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    public static ListCommand buildInstance() {
+        return new ListCommand();
     }
 }
