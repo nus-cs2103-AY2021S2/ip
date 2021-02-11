@@ -28,10 +28,10 @@ public class Duke {
      * @throws FileNotFoundException Exception thrown when the file does not exist, should not happen.
      */
     String getResponse(String input) throws FileNotFoundException {
-        if (input.equals("tasks")) {
+        if (input.equalsIgnoreCase("tasks")) {
             listType = 0;
             return "I got you!";
-        } else if (input.equals("contacts")) {
+        } else if (input.equalsIgnoreCase("contacts")) {
             listType = 1;
             return "I got you!";
         } else {

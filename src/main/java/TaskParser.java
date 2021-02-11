@@ -13,7 +13,7 @@ public class TaskParser {
     public String processInput(String nextInput, TaskList tasks, Ui ui) {
         String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
         try {
-            switch (command) {
+            switch (command.toLowerCase()) {
             case "todo":
                 return todo(nextInput, tasks, ui);
             case "deadline":

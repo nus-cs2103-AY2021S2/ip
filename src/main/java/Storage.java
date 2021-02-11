@@ -18,7 +18,7 @@ public class Storage {
     /**
      * Default path to store the user contacts.
      */
-    public static final String DEFAULT_CONTACTS_STORAGE_FILEPATH = "notes.txt";
+    public static final String DEFAULT_CONTACTS_STORAGE_FILEPATH = "contacts.txt";
 
     public TaskList tasks;
     public ContactList contacts;

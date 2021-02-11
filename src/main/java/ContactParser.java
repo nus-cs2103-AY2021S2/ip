@@ -13,7 +13,7 @@ public class ContactParser {
     public String processInput(String nextInput, ContactList contacts, Ui ui) {
         String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
         try {
-            switch (command) {
+            switch (command.toLowerCase()) {
             case "add":
                 return addContact(nextInput, contacts, ui);
             case "delete":
