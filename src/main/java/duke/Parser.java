@@ -36,12 +36,13 @@ public class Parser {
      * @throws InvalidToDoCommandException if todo command used incorrectly.
      * @see Deadline
      */
-    public ToDo parseAddTodo(String command) throws InvalidToDoCommandException {
+    public ToDo parseAddTodo(String command, TaskList userList) throws InvalidToDoCommandException {
         String toDoTaskDetail = command.substring(5);
         if (toDoTaskDetail.length() == 0 || toDoTaskDetail.startsWith(" ")) {
             throw new InvalidToDoCommandException();
         } else {
             ToDo newTodo = new ToDo(toDoTaskDetail);
+            userList.addTask(newTodo);
             return newTodo;
         }
     }
@@ -54,13 +55,16 @@ public class Parser {
      * @throws InvalidDeadlineCommandException if deadline command used incorrectly.
      * @see Deadline
      */
-    public Deadline parseAddDeadline(String command) throws InvalidDeadlineCommandException {
-        if (!command.contains("  /by ")) {
+    public Deadline parseAddDeadline(String command, TaskList userList) throws InvalidDeadlineCommandException {
+        if (!command.contains(" /by ")) {
             throw new InvalidDeadlineCommandException();
         } else {
             String[] deadlineAndTask = command.split(" /by ");
             int deadlineDetailStartIndexOffset = 9;
-            return new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
+            Deadline newDeadline = new Deadline(deadlineAndTask[1],
+                    deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
+            userList.addTask(newDeadline);
+            return newDeadline;
         }
     }
 
@@ -72,13 +76,15 @@ public class Parser {
      * @throws InvalidEventCommandException if event command used incorrectly.
      * @see Event
      */
-    public Event parseAddEvent(String command) throws InvalidEventCommandException {
+    public Event parseAddEvent(String command, TaskList userList) throws InvalidEventCommandException {
         if (!command.contains(" /at ")) {
             throw new InvalidEventCommandException();
         } else {
             String[] eventTimeAndTask = command.split(" /at ");
             int eventDetailStartIndexOffset = 6;
-            return new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(eventDetailStartIndexOffset));
+            Event newEvent = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(eventDetailStartIndexOffset));
+            userList.addTask(newEvent);
+            return newEvent;
         }
     }
 
@@ -88,8 +94,11 @@ public class Parser {
      * @param command command passed in by the user.
      * @return Index of Task to be deleted.
      */
-    public int parseDeleteCommand(String command) {
-        return Integer.parseInt(command.split(" ")[1]);
+    public Task parseDeleteCommand(String command, TaskList userList) {
+        int taskNumToBeDeleted = Integer.parseInt(command.split(" ")[1]);
+        Task deletedTask = userList.removeTask(taskNumToBeDeleted - 1);
+        deletedTask.markAsDone();
+        return deletedTask;
     }
 
     /**

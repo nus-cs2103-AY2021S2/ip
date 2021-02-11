@@ -12,16 +12,16 @@ public class Task {
         this.isDone = false;
     }
 
-    public boolean getTaskStatus() {
-        return this.isDone;
-    }
-
     public String getTaskDetail() {
         return this.taskDetail;
     }
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public boolean getTaskStatus() {
+        return isDone;
     }
 
     public String getStatusIcon() {

@@ -34,7 +34,9 @@ public class Ui {
         for (int i = 0; i < userList.getTaskListSize(); i++) {
             stringToBeReturned += (i + 1) + "." + userList.getTask(i).toString() + "\n";
         }
-        return stringToBeReturned.length() == 0 ? "Your list is empty.\n" : stringToBeReturned + "\n";
+        return stringToBeReturned.length() == 0
+                ? "Your list is empty.\n"
+                : stringToBeReturned + "\nYou have " + userList.getTaskListSize() + " tasks in your list.\n";
     }
 
     /**
@@ -68,7 +70,6 @@ public class Ui {
         String addedTaskString = "";
         addedTaskString += "Got it. I've added this task:\n";
         addedTaskString += task.toString() + "\n";
-        userTaskList.addTask(task);
         addedTaskString += "Now you have " + (userTaskList.getTaskListSize()) + " tasks in the list.\n";
         return addedTaskString;
     }
@@ -77,11 +78,9 @@ public class Ui {
      * Gets the message when task is deleted from Task List.
      *
      * @param userTaskList Task list of the user.
-     * @param taskNumber Task to be added to the Task list.
-     * @return message when task is deleted as String.
+     * @param taskToBeDeleted Task to be deleted from the Task list.
      */
-    public String getPrintDeletedTaskString(TaskList userTaskList, int taskNumber) {
-        Task taskToBeDeleted = userTaskList.removeTask(taskNumber - 1);
+    public String getPrintDeletedTaskString(Task taskToBeDeleted, TaskList userTaskList) {
         String deletedTaskString = "";
         deletedTaskString += "Noted. I've removed this task\n";
         deletedTaskString += taskToBeDeleted.toString() + "\n";
