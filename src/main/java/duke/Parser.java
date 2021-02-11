@@ -1,6 +1,10 @@
 package duke;
 
 import java.util.ArrayList;
+import duke.command.CreateCommand;
+import duke.command.DeleteCommand;
+import duke.command.ReadCommand;
+import duke.command.UpdateCommand;
 
 /**
  * Parser class which handles the parsing of user's input and delivers the expected action accordingly
@@ -80,79 +84,15 @@ public class Parser {
             throw new EmptyArgument("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         if (input.startsWith("done")) {
-            String[] spiltInput = input.split("\\s+");
-            int taskNumber = Integer.parseInt(spiltInput[1]);
-            return markDone(taskNumber);
+            return UpdateCommand.runCommand(input);
         } else if (input.startsWith("delete")) {
-            String[] spiltInput = input.split("\\s+");
-            int taskNumber = Integer.parseInt(spiltInput[1]);
-            return deleteTask(taskNumber);
-        } else if (input.startsWith("event")) {
-            String[] spiltInput = input.split("\\s+");
-            String time = "";
-            String desc = "";
-            int start = 0;
-            for (int i = 1; i < spiltInput.length; ++i) {
-                if (spiltInput[i].equals("/at")) {
-                    start = i;
-                    break;
-                }
-                if (desc.equals("")) {
-                    desc += spiltInput[i];
-                } else {
-                    desc = desc + " " + spiltInput[i];
-                }
-            }
-            for (int i = start + 1; i < spiltInput.length; ++i) {
-                if (time.equals("")) {
-                    time += spiltInput[i];
-                } else {
-                    time = time + " " + spiltInput[i];
-                }
-            }
-            EventTask task = new EventTask(desc, time);
-            return addTask(task);
-        } else if (input.startsWith("deadline")) {
-            String[] spiltInput = input.split("\\s+");
-            String time = "";
-            String desc = "";
-            int start = 0;
-            for (int i = 1; i < spiltInput.length; ++i) {
-                if (spiltInput[i].equals("/by")) {
-                    start = i;
-                    break;
-                }
-                if (desc.equals("")) {
-                    desc += spiltInput[i];
-                } else {
-                    desc = desc + " " + spiltInput[i];
-                }
-            }
-            for (int i = start + 1; i < spiltInput.length; ++i) {
-                if (time.equals("")) {
-                    time += spiltInput[i];
-                } else {
-                    time = time + " " + spiltInput[i];
-                }
-            }
-            DeadlineTask task = new DeadlineTask(desc, time);
-            return addTask(task);
-        } else if (input.startsWith("todo")) {
-            String[] spiltInput = input.split("\\s+");
-            String desc = "";
-            for (int i = 1; i < spiltInput.length; ++i) {
-                if (desc.equals("")) {
-                    desc += spiltInput[i];
-                } else {
-                    desc = desc + " " + spiltInput[i];
-                }
-            }
-            ToDoTask task = new ToDoTask(desc);
-            return addTask(task);
+            return DeleteCommand.runCommand(input);
+        } else if (input.startsWith("event") || input.startsWith("deadline") || input.startsWith("todo")) {
+            return CreateCommand.runCommand(input);
         } else if (input.equals("bye")) {
             return Ui.exit();
         } else if (input.equals("list")) {
-            return listTask();
+            return ReadCommand.runCommand();
         } else if (input.equals("save")) {
             return Storage.saveTaskList();
         } else if (input.equals("load")) {
