@@ -8,6 +8,7 @@ package duke.commands;
 public class CommandResult {
     protected String feedback;
     protected boolean isExit;
+    protected boolean isError;
 
     /**
      * Constructs a CommandResult with the given feedback message and a signal to Duke not to exit.
@@ -25,8 +26,21 @@ public class CommandResult {
      * @param isExit   True if Duke should exit after the current command. False otherwise.
      */
     public CommandResult(String feedback, boolean isExit) {
+        this(feedback, isExit, false);
+    }
+
+    /**
+     * Constructs a CommandResult with the given feedback message, signal to Duke to exit or not, and
+     * flag indicating whether the command terminated with an error or not.
+     *
+     * @param feedback The feedback message for the user.
+     * @param isExit   True if Duke should exit after the current command. False otherwise.
+     * @param isError  True if this command did not complete successfully. False otherwise.
+     */
+    public CommandResult(String feedback, boolean isExit, boolean isError) {
         this.feedback = feedback;
         this.isExit = isExit;
+        this.isError = isError;
     }
 
     /**
@@ -45,6 +59,15 @@ public class CommandResult {
      */
     public boolean hasFeedback() {
         return feedback != null;
+    }
+
+    /**
+     * Returns true if this command terminated with failure. False otherwise.
+     *
+     * @return True if this command terminated with failure. False otherwise.
+     */
+    public boolean isError() {
+        return isError;
     }
 
     /**

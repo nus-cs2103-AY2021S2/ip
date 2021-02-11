@@ -29,6 +29,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
-        return new CommandResult(feedbackMsg);
+        return new CommandResult(feedbackMsg, false, true);
     }
 }

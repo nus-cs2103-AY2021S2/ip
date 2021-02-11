@@ -69,7 +69,7 @@ public class DeleteCommand extends Command {
 
         if (tasks.taskCount() == 0) {
             feedback = "There are no tasks to delete.";
-            return new CommandResult(feedback);
+            return new CommandResult(feedback, false, true);
         }
 
         int arg;
@@ -79,14 +79,14 @@ public class DeleteCommand extends Command {
             // Argument of wrong type
             feedback = String.format("Illegal argument: '%s'. Expected integer.\n"
                     + "Valid task numbers are 1 to %d.", argStr, tasks.taskCount());
-            return new CommandResult(feedback);
+            return new CommandResult(feedback, false, true);
         }
 
         if (arg < 1 || arg > tasks.taskCount()) {
             // Argument out of range
             feedback = String.format("Task %d does not exist!\n"
                     + "Valid task numbers are 1 to %d.", arg, tasks.taskCount());
-            return new CommandResult(feedback);
+            return new CommandResult(feedback, false, true);
         }
 
         int index = arg - 1;
