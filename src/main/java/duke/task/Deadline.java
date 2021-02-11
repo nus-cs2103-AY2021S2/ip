@@ -27,6 +27,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toSaveFormat() {
+        assert description != null;
+        assert time != null;
         String status = super.isDone ? "1" : "0";
         return String.format("D|%s|%s|%s\n", status, super.description, this.time);
     }
@@ -37,6 +39,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert description != null;
+        assert time != null;
         return String.format("[D][%s] %s (by: %s)\n",
                 this.getStatusIcon(),
                 this.description,

@@ -27,8 +27,10 @@ public class Event extends Task {
      */
     @Override
     public String toSaveFormat() {
+        assert description != null;
+        assert time != null;
         String status = super.isDone ? "1" : "0";
-        return String.format("E|%s|%s|%s\n", status, super.description, this.time);
+        return String.format("E|%s|%s|%s\n", status, description, time);
     }
 
     /**
@@ -37,9 +39,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        assert description != null;
+        assert time != null;
         return String.format("[E][%s] %s (at: %s)\n",
-                this.getStatusIcon(),
-                this.description,
-                this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+                getStatusIcon(),
+                description,
+                time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }

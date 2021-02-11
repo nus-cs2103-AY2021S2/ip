@@ -13,7 +13,7 @@ public abstract class Command {
     }
 
     public boolean isExit() {
-        return this.isExit;
+        return isExit;
     }
 
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
