@@ -54,4 +54,32 @@ public class EventTask extends Task {
         }
         return "event | not done | " + taskName + " | " + inputDate;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object other) {
+        final EventTask task = (EventTask) other;
+        if (task == this) {
+            return true;
+        }
+        if (this.taskName.equals(task.taskName)) {
+            if (this.deadline.compareTo(task.deadline) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (this.taskName != null ? this.taskName.hashCode() : 0);
+        hash = 53 * hash + (this.deadline != null ? this.deadline.hashCode() : 0);
+        return hash;
+    }
 }

@@ -60,4 +60,29 @@ public class Task {
     public String toOutputFileString() {
         return this.toString();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object other) {
+        final Task task = (Task) other;
+        if (task == this) {
+            return true;
+        }
+        if (this.taskName.equals(task.taskName)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (this.taskName != null ? this.taskName.hashCode() : 0);
+        return hash;
+    }
 }
