@@ -2,7 +2,9 @@ package blarb;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -24,7 +26,6 @@ public class Gui extends AnchorPane {
     @FXML
     private Button sendButton;
     private Blarb blarb;
-    private boolean canTerminate = false;
 
     /**
      * Initializes the GUI.
@@ -33,7 +34,7 @@ public class Gui extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("You are now in the presence of Blarb. Speak.", bot)
+                DialogBox.getBlarbDialog("You are now in the presence of Blarb. Speak.", bot)
         );
     }
 
@@ -52,20 +53,36 @@ public class Gui extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = blarb.getResponse(userInput.getText());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, bot)
-        );
+        String[] blarbText = blarb.getResponse(userInput.getText());
+        boolean isNotice = Boolean.parseBoolean(blarbText[1]);
+        DialogBox userBox = DialogBox.getUserDialog(userText, user);
+        DialogBox blarbBox = isNotice
+                ? DialogBox.getWarnDialog(blarbText[0], bot)
+                : DialogBox.getBlarbDialog(blarbText[0], bot);
+        dialogContainer.getChildren().addAll(userBox, blarbBox);
         userInput.clear();
-        canTerminate = blarb.willTerminate(userText) || canTerminate;
+        if (blarb.willTerminate(userText)) {
+            terminate();
+        }
     }
 
+    /**
+     * Terminates the application
+     */
     @FXML
-    private void exit() throws InterruptedException {
-        if (canTerminate)  {
-            Thread.sleep(1000);
-            Platform.exit();
-        }
+    private void terminate() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to exit?");
+        alert.showAndWait()
+                .filter(x -> x.equals(ButtonType.OK))
+                .map(x -> (Runnable) Platform::exit)
+                .orElse(() -> {
+                })
+                .run();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBlarbDialog("Or maybe not.", bot)
+        );
     }
 }

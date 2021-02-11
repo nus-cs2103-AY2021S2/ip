@@ -1,0 +1,17 @@
+.dialogbox {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-padding: 10 10 10 10;
+}
+
+.bot {
+    -fx-background-color: lightgrey;
+}
+
+.user {
+    -fx-background-color: lightskyblue;
+}
+
+.warn {
+    -fx-background-color: lightpink;
+}
