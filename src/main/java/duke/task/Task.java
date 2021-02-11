@@ -9,6 +9,8 @@ public class Task {
     private static int numOfTasks;
     private String taskName;
     private boolean isTaskCompleted;
+    private final String FILE_WRITER_IDENTIFIER = "";
+    protected final String COMPLETED_TEXT = "X";
 
     public Task(String input) throws EmptyTaskDukeException {
         if (input.replaceAll("\\s+","").equals("")) {
@@ -50,6 +52,10 @@ public class Task {
      */
     public static void decrementNumOfTask() {
         numOfTasks--;
+    }
+
+    public String getFileWriterIdentifier() {
+        return FILE_WRITER_IDENTIFIER;
     }
 
     public static String getNumOfTasksString() {

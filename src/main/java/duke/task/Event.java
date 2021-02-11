@@ -14,6 +14,8 @@ public class Event extends Task {
     private LocalDate dueAt;
 
     private final static String DUE_COMMAND = "/at";
+    private final String EVENT_IDENTIFIER = "[E]";
+    private final String FILE_WRITER_IDENTIFIER = "E|";
 
     public Event(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
@@ -54,8 +56,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
-        return "[E]"
+        String taskStringCheck = super.getIsTaskCompleted() ? super.COMPLETED_TEXT : " ";
+        return EVENT_IDENTIFIER
                 + "[" + taskStringCheck + "] "
                 + super.getTaskName()
                 + " (at: " + formatDate(dueAt)

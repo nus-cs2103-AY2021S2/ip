@@ -46,6 +46,11 @@ public class TaskList {
         Task.decrementNumOfTask();
     }
 
+    /**
+     * Returns a filtered task list that only contains keywords from searchString
+     * @param searchString string passed in from user input
+     * @return a filtered task list that contains keywords from searchString
+     */
     public List<Task> filterTasks(String searchString) {
         List<Task> filteredTaskList = new ArrayList<>();
         for (Task task : this.taskList) {
