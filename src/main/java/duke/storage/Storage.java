@@ -45,6 +45,62 @@ public class Storage {
     }
 
     /**
+     * Load a _TODO_ task from the disc.
+     * @param taskName Name of the task.
+     * @param isDone Whether or not task is done.
+     * @return The loaded task.
+     */
+    public Task createTodoTask(String taskName, boolean isDone) {
+        return new Task(taskName, isDone);
+    }
+
+    /**
+     * Load an EVENT task from the disk.
+     * @param validator Validator to check if date input is appropriate.
+     * @param strArr User input, only strArr[3] is used here to get user date input.
+     * @param taskName Name of the task.
+     * @param isDone Whether or not task is done.
+     * @return The loaded task.
+     */
+    public Task createEventTask(DateValidator validator, String[] strArr, String taskName, boolean isDone) {
+        if (!validator.isValid(strArr[3].trim())) {
+            System.out.println("Invalid date format for timed Task");
+            return null;
+        }
+        try {
+            Date eventDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(strArr[3].trim());
+            return new EventTask(taskName, isDone, strArr[3].trim(), eventDate);
+        } catch (ParseException e) {
+            System.out.println("ParseException has occurred");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Load a DEADLINE task from the disk.
+     * @param validator Validator to check if date input is appropriate.
+     * @param strArr User input, only strArr[3] is used here to get user date input.
+     * @param taskName Name of the task.
+     * @param isDone Whether or not task is done.
+     * @return The loaded task.
+     */
+    public Task createDeadlineTask(DateValidator validator, String[] strArr, String taskName, boolean isDone) {
+        if (!validator.isValid(strArr[3].trim())) {
+            System.out.println("Invalid date format for timed Task");
+            return null;
+        }
+        try {
+            Date eventDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(strArr[3].trim());
+            return new DeadlineTask(taskName, isDone, strArr[3].trim(), eventDate);
+        } catch (ParseException e) {
+            System.out.println("ParseException has occurred");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * Reads a file into the program and parses each line into a Task and puts it into taskArr.
      * @param taskArr array of Task objects.
      * @return number of tasks currently available in list (1 index).
@@ -60,33 +116,18 @@ public class Storage {
                 String isDoneStr = strArr[1];
                 String taskName = strArr[2];
 
-                if (taskType.equals("todo")) {
-                    taskArr[taskIterator] = new Task(taskName, isDoneStr.equals("done"));
+                if (taskType.equals("todo")) {;
+                    taskArr[taskIterator] = createTodoTask(taskName, isDoneStr.equals("done"));
                 } else if (taskType.equals("event")) {
-                    if (validator.isValid(strArr[3].trim())) {
-                        Date eventDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(strArr[3].trim());
-                        taskArr[taskIterator] = new EventTask(taskName,
-                                isDoneStr.equals("done"), strArr[3].trim(), eventDate);
-                    } else {
-                        System.out.println("Invalid date format for timed Task");
-                    }
+                    taskArr[taskIterator] = createEventTask(validator, strArr, taskName, isDoneStr.equals("done"));
                 } else if (taskType.equals("deadline")) {
-                    if (validator.isValid(strArr[3].trim())) {
-                        Date deadlineDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(strArr[3].trim());
-                        taskArr[taskIterator] = new DeadlineTask(taskName,
-                                isDoneStr.equals("done"), strArr[3].trim(), deadlineDate);
-                    } else {
-                        System.out.println("Invalid date format for timed Task");
-                    }
+                    taskArr[taskIterator] = createDeadlineTask(validator, strArr, taskName, isDoneStr.equals("done"));
                 }
                 taskIterator++;
             }
             return taskIterator;
         } catch (IOException e) {
             System.out.println("IOException has occurred");
-            e.printStackTrace();
-        } catch (ParseException e) {
-            System.out.println("ParseException has occurred");
             e.printStackTrace();
         }
         return taskIterator;
@@ -100,7 +141,9 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(absolutePath.toString());
             for (Task t : taskArr) {
-                if (t != null) {
+                if (t == null) {
+                    continue;
+                } else {
                     fw.write(t.toOutputFileString() + "\n");
                     fw.flush();
                 }

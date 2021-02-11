@@ -196,10 +196,11 @@ public class Parser {
     public Tuple2 findCase(int taskIterator, Task[] tasks, String toFind) {
         String output = "Here are the matching tasks in your list:\n";
         for (Task t : tasks) {
-            if (t != null) {
-                if (t.getTaskName().contains(toFind)) {
-                    output = output + t.toFormattedString() + "\n";
-                }
+            if (t == null) {
+                continue;
+            }
+            if (t.getTaskName().contains(toFind)) {
+                output = output + t.toFormattedString() + "\n";
             }
         }
         return new Tuple2(taskIterator, output);
