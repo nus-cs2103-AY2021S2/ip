@@ -38,6 +38,9 @@ public class Ui {
                 output += "    Here are the matching tasks in your list:";
                 output += taskList.findContains(status);
                 break;
+            case SNOOZE:
+                output += "    Task successfully snoozed, this is the new status:\n";
+                break;
             case NONE:
                 break;
             default:

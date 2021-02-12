@@ -1,11 +1,13 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * This Task class is responsible for handling and manipulating task
  * information.
  *
  */
-public class Task {
+public abstract class Task {
     protected final String description;
     protected boolean isDone;
 
@@ -64,4 +66,6 @@ public class Task {
     public boolean getDone() {
         return this.isDone;
     }
+
+    public abstract void changeEventTime(LocalDate newTime);
 }

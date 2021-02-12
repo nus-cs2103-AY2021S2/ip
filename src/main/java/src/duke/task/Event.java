@@ -41,4 +41,9 @@ public class Event extends Task {
     public String currentStatus() {
         return "E" + super.currentStatus();
     }
+
+    @Override
+    public void changeEventTime(LocalDate newEventTime) {
+        this.eventTime = newEventTime;
+    }
 }
