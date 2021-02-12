@@ -98,6 +98,9 @@ public class Duke {
                     case HELP:
                         ui.showHelpMessage();
                         break;
+                    default:
+                        assert false : command;
+                        break;
                 }
             } catch(DukeException error) {
                 ui.showInputError();
@@ -170,7 +173,7 @@ public class Duke {
                     response += Gui.getHelpMessageString();
                     break;
                 default:
-                    response += Gui.getMessageString("sorry");
+                    assert false : command;
                     break;
             }
         } catch(DukeException error) {
