@@ -16,7 +16,7 @@ public abstract class Command {
      * The process is determined by the user input.
      *
      * @return A string representation of task.
-     * @throws InsufficientArgumentsException
+     * @throws InsufficientArgumentsException If no arguments are provided.
      */
     public abstract String execute() throws InsufficientArgumentsException;
 }

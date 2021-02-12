@@ -8,12 +8,12 @@ public class DeleteCommand extends Command {
      * Returns a string representation of the Task after it is deleted from the list.
      *
      * @return A string representation of the Task deleted.
-     * @throws InsufficientArgumentsException If more than one argument is provided.
+     * @throws InsufficientArgumentsException If no arguments are provided.
      */
     @Override
     public String execute() throws InsufficientArgumentsException {
-        if (parts.length > 2) {
-            throw new InsufficientArgumentsException("Wrong arguments");
+        if (parts.length == 1) {
+            throw new InsufficientArgumentsException("Insufficient Arguments Provided");
         }
         int index = Integer.parseInt(parts[1]);
         assert index >= 1 : "Value must be at least 1";

@@ -41,7 +41,7 @@ public class Duke extends Application {
 
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -124,8 +124,7 @@ public class Duke extends Application {
      * @throws InsufficientArgumentsException
      * @throws FileNotFoundException
      */
-    String getResponse(String input, String[] parts) throws InsufficientArgumentsException,
-            FileNotFoundException {
+    String getResponse(String input, String[] parts) throws InsufficientArgumentsException, FileNotFoundException, IllegalKeywordException {
         int listCounter = 1;
         switch (input) {
         case "done":
@@ -151,7 +150,7 @@ public class Duke extends Application {
             storage.save();
             return findString;
         default:
-            return "duke says hello";
+            throw new IllegalKeywordException("Unable to match any command");
         }
     }
 }
