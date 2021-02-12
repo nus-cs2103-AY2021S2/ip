@@ -16,14 +16,16 @@ public class Parser {
      * @return formatted date in "yyyy-MM-DD" format.
      */
     public String parseDate(String unformattedDate) {
-        String[] dateArr = unformattedDate.split(" ");
-        assert dateArr.length == 3 : "date should have only year, month and day when split on blank space";
-
-        String monthString = String.format("%02d", Month.valueOf(dateArr[0].toUpperCase()).getValue());
-        String day = String.format("%02d", Integer.parseInt(dateArr[1]));
-        String year = dateArr[2];
-        String formattedDate = year + "-" + monthString + "-" + day;
-        return formattedDate;
+        try {
+            String[] dateArr = unformattedDate.split(" ");
+            String monthString = String.format("%02d", Month.valueOf(dateArr[0].toUpperCase()).getValue());
+            String day = String.format("%02d", Integer.parseInt(dateArr[1]));
+            String year = dateArr[2];
+            String formattedDate = year + "-" + monthString + "-" + day;
+            return formattedDate;
+        } catch (IllegalArgumentException e) {
+            return e.getMessage() + " date input as 'month day year' format ";
+        }
     }
 
     /**
@@ -31,12 +33,18 @@ public class Parser {
      *
      * @param command command passed in by the user.
      * @return ToDo object.
+     * @throws InvalidToDoCommandException if todo command used incorrectly.
      * @see Deadline
      */
-    public ToDo parseAddTodo(String command) {
-        System.out.println(command.substring(5));
-        ToDo newTodo = new ToDo(command.substring(5));
-        return newTodo;
+    public ToDo parseAddTodo(String command, TaskList userList) throws InvalidToDoCommandException {
+        String toDoTaskDetail = command.substring(5);
+        if (toDoTaskDetail.length() == 0 || toDoTaskDetail.startsWith(" ")) {
+            throw new InvalidToDoCommandException();
+        } else {
+            ToDo newTodo = new ToDo(toDoTaskDetail);
+            userList.addTask(newTodo);
+            return newTodo;
+        }
     }
 
     /**
@@ -44,12 +52,20 @@ public class Parser {
      *
      * @param command command passed in by the user.
      * @return Deadline object.
+     * @throws InvalidDeadlineCommandException if deadline command used incorrectly.
      * @see Deadline
      */
-    public Deadline parseAddDeadline(String command) {
-        String[] deadlineAndTask = command.split(" /by ");
-        assert deadlineAndTask.length == 2 : "length should be 2 when splitting on /by";
-        return new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(9));
+    public Deadline parseAddDeadline(String command, TaskList userList) throws InvalidDeadlineCommandException {
+        if (!command.contains(" /by ")) {
+            throw new InvalidDeadlineCommandException();
+        } else {
+            String[] deadlineAndTask = command.split(" /by ");
+            int deadlineDetailStartIndexOffset = 9;
+            Deadline newDeadline = new Deadline(deadlineAndTask[1],
+                    deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
+            userList.addTask(newDeadline);
+            return newDeadline;
+        }
     }
 
     /**
@@ -57,14 +73,19 @@ public class Parser {
      *
      * @param command command passed in by the user.
      * @return Event object.
+     * @throws InvalidEventCommandException if event command used incorrectly.
      * @see Event
      */
-    public Event parseAddEvent(String command) {
-        String[] eventTimeAndTask = command.split(" /at ");
-        assert eventTimeAndTask.length == 2 : "length of String array with event time and task split on /at is 2";
-
-        //offset of 6 to remove "event " frm statement
-        return new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
+    public Event parseAddEvent(String command, TaskList userList) throws InvalidEventCommandException {
+        if (!command.contains(" /at ")) {
+            throw new InvalidEventCommandException();
+        } else {
+            String[] eventTimeAndTask = command.split(" /at ");
+            int eventDetailStartIndexOffset = 6;
+            Event newEvent = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(eventDetailStartIndexOffset));
+            userList.addTask(newEvent);
+            return newEvent;
+        }
     }
 
     /**
@@ -86,18 +107,20 @@ public class Parser {
      * @param command  command passed in by the user.
      * @param userList TaskList of the user.
      * @return TaskList containing tasks for which the keywords are matched.
+     * @throws InvalidFindCommandException if find command in incorrect format.
      */
-    public TaskList parseFindCommand(String command, TaskList userList) {
-        String keywords = command.substring(5);
-        ArrayList<Task> results = new ArrayList<>();
-        for (Task task : userList.getTaskList()) {
-            if (task.getTaskDetail().contains(keywords)) {
-                results.add(task);
+    public TaskList parseFindCommand(String command, TaskList userList) throws InvalidFindCommandException {
+        if (command.length() < 5) {
+            throw new InvalidFindCommandException();
+        } else {
+            String keywords = command.substring(5);
+            ArrayList<Task> results = new ArrayList<>();
+            for (Task task : userList.getTaskList()) {
+                if (task.getTaskDetail().contains(keywords)) {
+                    results.add(task);
+                }
             }
+            return new TaskList(results);
         }
-        return new TaskList(results);
-
     }
-
 }
-

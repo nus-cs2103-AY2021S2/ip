@@ -50,8 +50,8 @@ public class Storage {
      * @see Paths
      */
     public ArrayList<Task> getTaskList() throws IOException {
-        ArrayList<Task> taskList = new ArrayList<>();
-        List<String> fileLines = Files.readAllLines(Paths.get(this.filePath));
+        ArrayList<Task> tasks = new ArrayList<>();
+        List<String> fileLines = Files.readAllLines(Paths.get(filePath));
         for (String line : fileLines) {
             assert line.contains("|") : "every line in the file should contain | for splitting of information";
 
@@ -62,7 +62,7 @@ public class Storage {
                 switch (eventType) {
                 case ("[T]"):
                     taskInList = new ToDo(userTask[2]);
-                    taskList.add(taskInList);
+                    tasks.add(taskInList);
                     break;
                 case ("[E]"):
                     assert line.contains("at") : "every event task should have specified event date after 'at'";
@@ -70,7 +70,7 @@ public class Storage {
                     String eventDuration = parser.parseDate(userTask[3].split("at: ")[1]);
                     String eventDetail = userTask[2];
                     taskInList = new Event(eventDuration, eventDetail);
-                    taskList.add(taskInList);
+                    tasks.add(taskInList);
                     break;
                 case ("[D]"):
                     assert line.contains("by") : "every deadline task should have deadline date after 'by'";
@@ -78,7 +78,7 @@ public class Storage {
                     String deadline = parser.parseDate(userTask[3].split("by: ")[1]);
                     String deadlineDetail = userTask[2];
                     taskInList = new Deadline(deadline, deadlineDetail);
-                    taskList.add(taskInList);
+                    tasks.add(taskInList);
                     break;
                 default:
                     // do nothing
@@ -88,7 +88,7 @@ public class Storage {
                 System.err.println(e.getMessage());
             }
         }
-        return taskList;
+        return tasks;
     }
 
     /**
