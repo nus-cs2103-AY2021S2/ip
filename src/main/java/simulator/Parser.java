@@ -21,39 +21,57 @@ public class Parser {
         try {
             String[] contents = input.split("\\s+");
             String command = contents[0];
+
             parsedOutput.add(command);
-            StringBuilder sb = new StringBuilder();
-            // Initialise a pointer
-            int pointer = 0;
-            // Appends the date into the string builder
-            for (int i = 1; i < contents.length; i++) {
-                // Checks whether the input is an event or deadline
-                if (contents[i].equals("/by") || contents[i].equals("/at")) {
-                    pointer = i;
-                    break;
-                } else {
-                    if (i != contents.length - 1) {
-                        sb.append(contents[i]);
-                        sb.append(" ");
-                    } else {
-                        sb.append(contents[i]);
-                    }
-                }
-            }
-            parsedOutput.add(sb.toString());
-            // Reset the string builder to append the date.
-            sb = new StringBuilder();
-            if (command.equals("deadline") || command.equals("event")) {
-                for (int i = pointer + 1; i < contents.length; i++) {
-                    sb.append(contents[i]);
-                    sb.append(" ");
-                }
-                parsedOutput.add(sb.toString());
+            parsedOutput.add(getDescription(contents));
+            if (command.equals("event") || command.equals("deadline")) {
+                parsedOutput.add(getDateAndTime(contents));
             }
         } catch (Exception err) {
             Ui.printBox("☹ OOPS!!! Incorrect input, please check!");
         }
         return parsedOutput;
+    }
+
+    /**
+     * Gets the task description from the specified <code>content</code>.
+     * @param contents input from user.
+     * @return String of task description.
+     */
+    public String getDescription(String[] contents) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < contents.length; i++) {
+            if (contents[i].equals("/by") || contents[i].equals("/at")) {
+                break;
+            } else {
+                if (i != contents.length - 1) {
+                    sb.append(contents[i]);
+                    sb.append(" ");
+                } else {
+                    sb.append(contents[i]);
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Gets the task date and time from the specified <code>content</code>.
+     * @param contents input from user.
+     * @return String of task date and time.
+     */
+    public String getDateAndTime(String[] contents) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = contents.length - 1; i >= 0; i--) {
+            if (contents[i - 1].equals("/by") || contents[i - 1].equals("/at")) {
+                sb.insert(0, contents[i]);
+                break;
+            } else {
+                sb.insert(0, contents[i]);
+                sb.insert(0, " ");
+            }
+        }
+        return sb.toString();
     }
 
 }
