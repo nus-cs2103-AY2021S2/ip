@@ -29,6 +29,8 @@ public class TaskList {
 
         for (String taskInStringForm : ArrayOfTasksFromLoad) {
             String[] currValues = taskInStringForm.split("\\s*---\\s*");
+            assert(currValues[0] == "T" || currValues[0] == "D" || currValues[0] == "e");
+
             switch (currValues[0]) {
             case "T":
                 Todo t = new Todo(currValues[2], currValues[1].equals("1"));
