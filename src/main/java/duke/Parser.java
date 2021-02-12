@@ -97,7 +97,9 @@ public class Parser {
      * @throws DukeParseException when the input String does not match any of the known command formats.
      */
 
+
     public Command parseCommand() throws DukeParseException {
+        assert !inputCommand.equals("");
         String command = getKeyWord();
         String arguments = getArguments();
         switch (command) {
