@@ -1,12 +1,5 @@
 package duke;
 
-import duke.exception.BadDateArgumentException;
-import duke.exception.EmptyArgumentException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDos;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,13 +11,24 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.exception.BadDateArgumentException;
+import duke.exception.EmptyArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDos;
+
 public class Storage {
     public static final String FILE_DIR = "data";
     public static final String FILE_NAME = "duke.txt";
-    static int badLines = 0;//Last call bad lines
 
-    public static TaskList LoadTaskList() throws IOException {
-        badLines = 0;
+    /**
+     * Loads data from a fixed constant, location relative to the program locatoin
+     *
+     * @return TaskList that corresponds to the loaded data
+     * @throws IOException Uncontrollable IO Error
+     */
+    public static TaskList loadTaskList() throws IOException {
         List<Task> store = new ArrayList<>();
         File file = getOrCreateFile();
         Scanner s = new Scanner(file);
@@ -36,13 +40,12 @@ public class Storage {
             Pattern r = Pattern.compile(pattern);
             Matcher m = r.matcher(line);
             if (!m.find()) {
-                badLines++;
                 break;
             }
             String type = m.group(1);
             boolean isDone = m.group(2).equals("1");
             int taskLength = Integer.parseInt(m.group(3));
-            String task = m.group(4).substring(0,taskLength);
+            String task = m.group(4).substring(0, taskLength);
             String leftover = m.group(4).substring(taskLength);
             try {
                 if (type.equals("E") || type.equals("D")) {
@@ -51,7 +54,6 @@ public class Storage {
                     r = Pattern.compile(pattern);
                     m = r.matcher(line);
                     if (!m.find()) {
-                        badLines++;
                         break;
                     }
                     int timeLength = Integer.parseInt(m.group(1));
@@ -65,17 +67,12 @@ public class Storage {
                         t = new Deadline(task, timeData);
                         break;
                     default:
-                        badLines++;
                         break generateLines;
                     }
                 } else {
                     t = new ToDos(task);
                 }
-            }catch(EmptyArgumentException e) {
-                badLines++;
-                break;
-            } catch(BadDateArgumentException e) {
-                badLines++;
+            } catch (EmptyArgumentException | BadDateArgumentException e) {
                 break;
             }
             if (isDone) {

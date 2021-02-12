@@ -2,7 +2,7 @@ package duke.task;
 
 import duke.exception.EmptyArgumentException;
 
-public class ToDos extends Task{
+public class ToDos extends Task {
     /**
      * Creates a To Do object that is essentially a wrapper on task.
      *

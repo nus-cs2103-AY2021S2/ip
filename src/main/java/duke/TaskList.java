@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.List;
+
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
 import duke.exception.EmptyArgumentException;
@@ -7,8 +9,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDos;
-
-import java.util.List;
 
 public class TaskList {
     public enum Action {
@@ -19,7 +19,7 @@ public class TaskList {
         SEARCH,
     }
     private boolean edited = false;
-    private List<Task> store;
+    private final List<Task> store;
     public TaskList(List<Task> store) {
         this.store = store;
     }
@@ -30,7 +30,7 @@ public class TaskList {
      *
      * @return Underlying data structure
      */
-    public List<Task> getRawData(){
+    public List<Task> getRawData() {
         return this.store;
     }
 
@@ -142,12 +142,12 @@ public class TaskList {
     }
     private String formatOrderedPrint(int i) {
         final int size = store.size();
-        while (i < 0){
+        while (i < 0) {
             i += size;
         }
-        while (i >= size){
+        while (i >= size) {
             i -= size;
         }
-        return "Entry " + (i+1) + "|" + store.get(i).toString();
+        return "Entry " + (i + 1) + "|" + store.get(i).toString();
     }
 }

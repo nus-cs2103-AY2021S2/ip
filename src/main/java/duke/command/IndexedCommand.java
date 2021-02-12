@@ -1,6 +1,6 @@
 package duke.command;
 
-abstract class IndexedCommand extends Command{
+abstract class IndexedCommand extends Command {
     private final int index;
 
     /**
@@ -8,7 +8,7 @@ abstract class IndexedCommand extends Command{
      *
      * @param position One index position in TaskList of Task to manipulate
      */
-    public IndexedCommand(int position){
+    public IndexedCommand(int position) {
         this.index = position - 1;
     }
 

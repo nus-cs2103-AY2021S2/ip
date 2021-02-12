@@ -1,22 +1,29 @@
 package duke;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
 import duke.exception.EmptyArgumentException;
 import duke.exception.InvalidCommandException;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Scanner;
 
 public class Duke {
+
+    /**
+     * Main application code
+     *
+     * @param args Unused arguments
+     */
     public static void main(String[] args) {
         Ui ui = new Ui();
         ui.startUpMessage();
         TaskList store;
         try {
             ui.loadStart();
-            store = Storage.LoadTaskList();
+            store = Storage.loadTaskList();
             ui.loadSuccess();
         } catch (IOException e) {
             ui.loadFail();
@@ -29,11 +36,11 @@ public class Duke {
             line = in.nextLine();
             try {
                 Command c = Parser.parse(line);
-                if (c==null) { //Bye command
+                if (c == null) { //Bye command
                     break;
                 }
                 String data = store.run(c);
-                ui.commandMessage(c,data);
+                ui.commandMessage(c, data);
             } catch (ParseException e) {
                 ui.handleException(e);
             } catch (InvalidCommandException e) {
