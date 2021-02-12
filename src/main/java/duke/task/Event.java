@@ -77,6 +77,10 @@ public class Event extends Task {
         return dateString;
     }
 
+    public String getFileWriterIdentifier() {
+        return FILE_WRITER_IDENTIFIER;
+    }
+
     private String getDayString(DayOfWeek day) {
         switch (day) {
         case MONDAY:

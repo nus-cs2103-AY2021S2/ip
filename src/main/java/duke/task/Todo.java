@@ -8,9 +8,14 @@ import duke.exceptions.EmptyTaskDukeException;
 public class Todo extends Task {
 
     private final String TODO_IDENTIFIER = "[T]";
+    private final String FILE_WRITER_IDENTIFIER = "T|";
 
     public Todo(String input) throws EmptyTaskDukeException {
         super(input);
+    }
+
+    public String getFileWriterIdentifier() {
+        return FILE_WRITER_IDENTIFIER;
     }
 
     @Override

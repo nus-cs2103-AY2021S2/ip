@@ -17,50 +17,16 @@ import java.util.Scanner;
  */
 public class DukeFileReader {
 
-    private static TaskList readTaskListFromInternalStorage(String filePath) throws FileNotFoundException {
-        TaskList taskList = new TaskList();
-        FileDirectoryChecker.prepareFile(filePath);
-        File f = new File(filePath);
-        Scanner sc = new Scanner(f);
-        while (sc.hasNextLine()) {
-            String taskString = sc.nextLine();
-            String[] taskBreakdown = taskString.split("\\|");
-            boolean isTaskDone = taskBreakdown[1].equals("1") ? true : false;
-            String taskName = taskBreakdown[2];
-            if (taskBreakdown[0].equals("T")) {
-                try {
-                    Task task = new Todo(taskName);
-                    if (isTaskDone) {
-                        task.setDone();
-                    }
-                    taskList.addTask(task);
-                } catch (EmptyTaskDukeException e) {
-                    Ui.printError(e.getMessage());
-                }
-            } else if (taskBreakdown[0].equals("D")) {
-                try {
-                    Task task = new Deadline(taskName, taskBreakdown[3]);
-                    if (isTaskDone) {
-                        task.setDone();
-                    }
-                    taskList.addTask(task);
-                } catch (EmptyTaskDukeException e) {
-                    Ui.printError(e.getMessage());
-                }
-            } else if (taskBreakdown[0].equals("E")) {
-                try {
-                    Task task = new Event(taskName, taskBreakdown[3]);
-                    if (isTaskDone) {
-                        task.setDone();
-                    }
-                    taskList.addTask(task);
-                } catch (EmptyTaskDukeException e) {
-                    Ui.printError(e.getMessage());
-                }
-            }
-        }
-        return taskList;
-    }
+    private static final String TODO_IDENTIFIER = "T";
+    private static final String DEADLINE_IDENTIFIER = "D";
+    private static final String EVENT_IDENTIFIER = "E";
+
+    private static final String TASK_COMPLETED_NUM = "1";
+
+    private static final int TASK_TYPE_INDEX = 0;
+    private static final int TASK_COMPLETION_INDEX = 1;
+    private static final int TASK_DESCRIPTION_INDEX = 2;
+    private static final int TASK_DATE_INDEX = 3;
 
     /**
      * loads tasks from internal storage
@@ -74,5 +40,47 @@ public class DukeFileReader {
             Ui.printError(e.getMessage());
         }
         return new TaskList();
+    }
+
+    private static TaskList readTaskListFromInternalStorage(String filePath) throws FileNotFoundException {
+        TaskList taskList = new TaskList();
+        FileDirectoryChecker.prepareFile(filePath);
+        File f = new File(filePath);
+        Scanner sc = new Scanner(f);
+        while (sc.hasNextLine()) {
+            String taskString = sc.nextLine();
+            String[] taskBreakdown = getTaskBreakdownInArray(taskString);
+            boolean isTaskDone = taskBreakdown[TASK_COMPLETION_INDEX].equals(TASK_COMPLETED_NUM);
+            String taskDescription = taskBreakdown[TASK_DESCRIPTION_INDEX];
+
+            try {
+                // An empty task that will be override later
+                Task task = new Task("dummy task");
+
+                if (isTaskTypeOf(TODO_IDENTIFIER, taskBreakdown)) {
+                    task = new Todo(taskDescription);
+                } else if (isTaskTypeOf(DEADLINE_IDENTIFIER, taskBreakdown)) {
+                    task = new Deadline(taskDescription, taskBreakdown[TASK_DATE_INDEX]);
+                } else if (isTaskTypeOf(EVENT_IDENTIFIER, taskBreakdown)) {
+                    task = new Event(taskDescription, taskBreakdown[TASK_DATE_INDEX]);
+                }
+                if (isTaskDone) {
+                    task.setDone();
+                }
+                taskList.addTask(task);
+            } catch (EmptyTaskDukeException e) {
+                Ui.printError(e.getMessage());
+            }
+        }
+        sc.close();
+        return taskList;
+    }
+
+    private static String[] getTaskBreakdownInArray(String taskString) {
+        return taskString.split("\\|");
+    }
+
+    private static boolean isTaskTypeOf(String t, String[] taskBreakdown) {
+        return taskBreakdown[TASK_TYPE_INDEX].equals(t);
     }
 }
