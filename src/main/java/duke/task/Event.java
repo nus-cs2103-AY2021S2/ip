@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     @Override
     String toFileString() {
-        String dateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String dateStr = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return String.format("event %s | %s | %s %s", description, getPriority(), preposition, dateStr);
     }
 

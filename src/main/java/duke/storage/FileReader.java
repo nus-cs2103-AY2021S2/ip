@@ -89,13 +89,12 @@ class FileReader {
                     t.markAsDone();
                 }
                 tasks.add(t);
-                return tasks;
             }
+
+            return tasks;
         } catch (FileNotFoundException e) {
             throw new DukeException(e.getMessage());
         }
-
-        return new ArrayList<>();
     }
 
     private Task toTask(String input) throws DukeException {
