@@ -25,6 +25,15 @@ public class Event extends Task {
         assert start.isBefore(end);
         this.start = start;
         this.end = end;
+        this.hasSchedule = true;
+    }
+
+    /**
+     * Returns the start date and time of occurrence.
+     */
+    @Override
+    public LocalDateTime getOccurrence() {
+        return start;
     }
 
     /**

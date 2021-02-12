@@ -22,6 +22,15 @@ public class Deadline extends Task {
         // todo: create new Exception
         assert deadline.isAfter(LocalDateTime.now());
         this.deadline = deadline;
+        this.hasSchedule = true;
+    }
+
+    /**
+     * Returns the date and time of occurrence.
+     */
+    @Override
+    public LocalDateTime getOccurrence() {
+        return deadline;
     }
 
     /**

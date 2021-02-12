@@ -47,6 +47,20 @@ public class Ui {
     }
 
     /**
+     * Prints a formatted message after successfully executing a 'remind' command.
+     *
+     * @param taskList The {@code TaskList} with all the upcoming deadlines and events.
+     */
+    public String showReminder(TaskList taskList) {
+        String message = "  Upcoming deadlines and events for the next 7 days:\n\n"
+                + taskList.toString() + "\n"
+                + String.format("  Only %s tasks left to be done!\n",
+                taskList.getTotalNumberOfTasksUndone());
+
+        return this.formatResponse(message);
+    }
+
+    /**
      * Prints a formatted message after successfully executing a 'done' command.
      *
      * @param id The list index of the task marked as "done".
