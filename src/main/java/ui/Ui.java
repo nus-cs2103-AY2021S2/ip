@@ -34,7 +34,8 @@ public class Ui {
     public final static String SAVE_EXIT_MSG = "Task List Saved Successfully!\n"
             + EXIT_MSG;
     public final static String EMPTY_LIST_MSG = "OOPPS! Your Current Task List Is Empty!";
-    public final static String TASK_CLASH_MSG = "OOPPS! Task added clashes with another task in list!";
+    public final static String TASK_CLASH_MSG = "OOPPS! Sorry :( \n"
+            + "Task added clashes with another task in list!";
 
     /**
      * Surrounds the specified <code>input</code> with a asterisk border.

@@ -1,5 +1,9 @@
 package task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 import ui.Ui;
@@ -93,6 +97,88 @@ public class TaskList {
      */
     public Task get(int index) {
         return tasks.get(index);
+    }
+
+
+    /**
+     * Detects whether the added todo task of specified <code>description</code>
+     * clashes with another todo task in the list.
+     * @param description description of the task
+     * @return true if another similar todo task is found in the task list, otherwise false.
+     */
+    public boolean compareTodo(String description) {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            boolean compareDetails = task.getDetails().equals(description);
+            boolean compareType = task.getType().equals("T");
+            if (compareType && compareDetails) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Detects whether the added Deadline task of specified <code> description</code> and <code>dateAndTime</code>
+     * clashes with another Deadline task in the list.
+     * @param description description of task.
+     * @param dateAndTime date and time of task.
+     * @return true if another similar Deadline task is found in the task list, otherwise false.
+     */
+    public boolean compareDeadline(String description, String[] dateAndTime) {
+        boolean isSame = false;
+        for (int i = 0; i < tasks.size() && !isSame; i++) {
+            Task task = tasks.get(i);
+            boolean compareDetails = task.getDetails().equals(description);
+            boolean isDeadline = task.getType().equals("D");
+            String time, date;
+            if (compareDetails && isDeadline) {
+                time = ((Deadline) task).getTime();
+                date = ((Deadline) task).getDate();
+                try {
+                    String inputDate = LocalDate.parse(dateAndTime[0])
+                            .format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+                    String inputTime = LocalTime.parse(dateAndTime[1])
+                            .format(DateTimeFormatter.ofPattern("hh:mm a"));
+                    isSame = (inputTime.equals(time) && date.equals(inputDate));
+
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    isSame = (time == null);
+                }
+            }
+        }
+        return isSame;
+    }
+
+    /**
+     * Detects whether the added Event task of specified <code> description</code> and <code>dateAndTime</code>
+     * clashes with another Event task in the list.
+     * @param description description of task.
+     * @param dateAndTime date and time of task.
+     * @return true if another similar Event task is found in the task list, otherwise false.
+     */
+    public boolean compareEvent(String description, String[] dateAndTime) {
+        boolean isSame = false;
+        for (int i = 0; i < tasks.size() && !isSame; i++) {
+            Task task = tasks.get(i);
+            boolean compareDetails = task.getDetails().equals(description);
+            boolean isEvent = task.getType().equals("E");
+            String time, date;
+            if (compareDetails && isEvent) {
+                time = ((Event) task).getTime();
+                date = ((Event) task).getDate();
+                try {
+                    String inputDate = LocalDate.parse(dateAndTime[0])
+                            .format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+                    String inputTime = LocalTime.parse(dateAndTime[1])
+                            .format(DateTimeFormatter.ofPattern("hh:mm a"));
+                    isSame = (inputTime.equals(time) && date.equals(inputDate));
+                } catch (Exception ex) {
+                    isSame = (time == null);
+                }
+            }
+        }
+        return isSame;
     }
 
     @Override
