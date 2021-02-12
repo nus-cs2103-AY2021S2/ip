@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.function.ToDoubleFunction;
 
 public class TaskList {
     protected ArrayList<Task> taskList;
@@ -165,7 +166,11 @@ public class TaskList {
         if (taskList.size() == 0) {
             return ui.noTask();
         } else {
-            taskList.forEach((t) -> { if (t.getDescription().contains(keyword)) { searchResults.add(t); } });
+            taskList.forEach((t) -> {
+                if (t.getDescription().contains(keyword)) {
+                    searchResults.add(t);
+                }
+            });
         }
 
         if (searchResults.size() == 0) {

@@ -20,8 +20,18 @@ public class Ui {
         return errorMessage;
     }
 
-    public String missingIndex() {
+    public String contactNotExist() {
+        String errorMessage = "\u2639 OOPS!!! the contact you are referring to does not seem to exist :-(";
+        return errorMessage;
+    }
+
+    public String taskMissingIndex() {
         String errorMessage = "\u2639 OOPS!!! you need to enter the index of the task :-(";
+        return errorMessage;
+    }
+
+    public String contactMissingIndex() {
+        String errorMessage = "\u2639 OOPS!!! you need to enter the index of the contact :-(";
         return errorMessage;
     }
 
@@ -74,5 +84,42 @@ public class Ui {
         }
         return mytasks;
     }
+
+   public String addContactConfirmMessage(String addedContact) {
+        return "Got it. I've added this contact: \n" + addedContact;
+   }
+
+   public String noContact() {
+        return "\u2639 OOPS!!! your phone book is empty now...";
+   }
+
+    public String listingContactsTitle(int numOfContacts) {
+        return numOfContacts == 1 ? "Here is the contact in your phone book:"
+                : "Here are the contacts in your phone book:";
+    }
+
+    public String printContacts(ArrayList<Contact> contacts) {
+        int i = 1;
+        String myContacts = "\n";
+        for (Contact c : contacts) {
+            myContacts += i + ". " + c.toString() + "\n";
+            i++;
+        }
+        return myContacts;
+    }
+
+    public String removeContactConfirmMessage(String removedContact) {
+        return "Noted. I've removed this contact: \n" + removedContact;
+    }
+
+    public String noMatchingContactMessage() {
+        return "you have no matching contact in the phonebook";
+    }
+
+    public String matchingContactsTitle(int numOfContact) {
+        return (numOfContact == 1 ? "Here is the matching contact in your phone book:"
+                : "Here are the matching contacts in your phone book:");
+    }
+
 
 }
