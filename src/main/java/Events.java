@@ -19,4 +19,13 @@ public class Events extends Task {
     public String toString() {
         return "[E]" + (this.done ? "[X] " : "[ ] ") + this.getTaskName() + " (at: " + this.by + ")";
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Events){
+            Events e = (Events) obj;
+            return this.getTaskName().equals(e.getTaskName()) && this.by.equals(e.by);
+        }
+        return false;
+    }
 }
