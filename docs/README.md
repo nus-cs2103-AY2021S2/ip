@@ -70,6 +70,9 @@ You can key in "done" along with a task number and Meme Man will cross that task
 ### Find tasks
 You can key in a single keyword and get a narrowed list of tasks. 
 
+### Sort tasks
+You can now sort tasks based on certain criteria.
+
 ### Surreal Memes easter eggs
 Keep scrolling to find them.
 
@@ -288,8 +291,9 @@ Format: `sort CRITERIA`
 
 Key this command in along with sorting criteria to sort the tasks.
 Currently supported criteria are:
-1) Priority Level - `priority`
-2) Task done status - `done`
+1) Priority Level - `priority` - Higher priority appear first.
+2) Task done status - `done` - Not done appear first.
+3) Task description - `description` - Sort in ascending alphabetical order.
 
 Example usage:
 `sort priority`
