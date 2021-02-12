@@ -188,7 +188,7 @@ public class TaskManagement {
             throw new NoSuchElementException("Empty todo task description. Not stonks!\n");
         }
 
-        ToDoTask newTask = ToDoTask.loadToDoTaskFromFile(taskDescription.trim(), isDone, taskPriority);
+        ToDoTask newTask = ToDoTask.loadToDoTaskFromFile(isDone, taskDescription.trim(), taskPriority);
         addTask(newTask);
         return newTask;
     }
@@ -212,8 +212,8 @@ public class TaskManagement {
             LocalDateTime deadlineDateTime = parseDate(descriptionSplitArray[1].trim());
 
             //Create Deadline task
-            DeadlineTask newTask = DeadlineTask.loadDeadlineTaskFromFile(descriptionSplitArray[0].trim(),
-                    deadlineDateTime, isDone, taskPriority);
+            DeadlineTask newTask = DeadlineTask.loadDeadlineTaskFromFile(isDone, descriptionSplitArray[0].trim(),
+                    taskPriority, deadlineDateTime);
             addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -232,8 +232,8 @@ public class TaskManagement {
             LocalDateTime eventDateTime = parseDate(descriptionSplitArray[1].trim());
 
             //Create Event task
-            EventTask newTask = EventTask.loadEventTaskFromFile(descriptionSplitArray[0].trim(),
-                    eventDateTime, isDone, taskPriority);
+            EventTask newTask = EventTask.loadEventTaskFromFile(isDone, descriptionSplitArray[0].trim(),
+                    taskPriority, eventDateTime);
             addTask(newTask);
             return newTask;
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur

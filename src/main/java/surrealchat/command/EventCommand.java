@@ -40,12 +40,12 @@ public class EventCommand extends Command {
         //Split the description into description, event and priority
         String[] descriptionSplitArray = taskDescription.split(";");
         try {
-            LocalDateTime eventDateTime = parseDate(descriptionSplitArray[1].trim());
-            int intPriority = Integer.valueOf(descriptionSplitArray[2].trim());
+            int intPriority = Integer.valueOf(descriptionSplitArray[1].trim());
+            LocalDateTime eventDateTime = parseDate(descriptionSplitArray[2].trim());
             TaskPriority taskPriority = TaskPriority.getPriorityType(intPriority);
             //Create Deadline task
             return EventTask.createNewEventTask(descriptionSplitArray[0].trim(),
-                    eventDateTime, taskPriority);
+                    taskPriority, eventDateTime);
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
             throw new SurrealException("Wrong formatting. Did you forget to put ';'? Not stonks!\n");
         } catch (NumberFormatException e) { //Happens if correct int is not passed in for priority
@@ -80,7 +80,7 @@ public class EventCommand extends Command {
      */
     public static String displayHelp() {
         String outputString = "Given a description and event date, stores event task.\n";
-        outputString += "Format of arguments: event [description] ; [event date and time] ; [priority]\n";
+        outputString += "Format of arguments: event [description] ; [priority] ; [event date and time]\n";
         outputString += "[event date and time] must be of the form {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock\n";
         return outputString;
     }

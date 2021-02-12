@@ -12,7 +12,7 @@ public class EventTaskTest {
     private static final LocalDateTime TEST_EDIT_EVENT = LocalDateTime.parse("2020-11-11T20:20:20");
     private static final TaskPriority TASK_PRIORITY = TaskPriority.MEDIUM;
     private static final EventTask STARTING_TASK = EventTask.createNewEventTask(
-            EventTaskTest.TEST_DESCRIPTION, TEST_EVENT, TASK_PRIORITY);
+            EventTaskTest.TEST_DESCRIPTION, TASK_PRIORITY, TEST_EVENT);
 
     /**
      * Tests the functionality of toString() method in EventTask class.
@@ -83,7 +83,7 @@ public class EventTaskTest {
     @Test
     public void testEditTask() {
         assertEquals(EventTaskTest.STARTING_TASK.editTask(
-                "Eat biscuits", EventTaskTest.TEST_EDIT_EVENT, TaskPriority.LOW).toString(),
+                "Eat biscuits", TaskPriority.LOW, EventTaskTest.TEST_EDIT_EVENT).toString(),
                 "[E][\u2718] Eat biscuits | Priority: 1 (at: 2020-11-11, 20:20:20)");
     }
 

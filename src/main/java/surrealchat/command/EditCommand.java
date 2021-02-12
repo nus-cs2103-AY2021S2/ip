@@ -126,7 +126,7 @@ public class EditCommand extends Command {
             } else {
                 TaskPriority newPriority = TaskPriority.getPriorityType(Integer.valueOf(newPriorityString));
                 LocalDateTime newDeadline = parseDate(newDeadlineString);
-                DeadlineTask editedTask = task.editTask(newDescription, newDeadline, newPriority);
+                DeadlineTask editedTask = task.editTask(newDescription, newPriority, newDeadline);
                 return editedTask;
             }
         } catch (NumberFormatException e) {
@@ -178,7 +178,7 @@ public class EditCommand extends Command {
             } else {
                 TaskPriority newPriority = TaskPriority.getPriorityType(Integer.valueOf(newPriorityString));
                 LocalDateTime newEventDate = parseDate(newEventDatetimeString);
-                EventTask editedTask = task.editTask(newDescription, newEventDate, newPriority);
+                EventTask editedTask = task.editTask(newDescription, newPriority, newEventDate);
                 return editedTask;
             }
         } catch (NumberFormatException e) {

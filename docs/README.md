@@ -96,17 +96,17 @@ Total number of tasks: 1
 ```
 
 ### Add Deadline task - `deadline`
-Format: `deadline DESCRIPTION ; DATE ; PRIORITY`
+Format: `deadline DESCRIPTION ; PRIORITY; DATETIME`
 
-Key this command in along with task description, deadline datetime and priority number to cause Meme Man to add a Deadline task.
+Key this command in along with task description, priority number and deadline datetime to cause Meme Man to add a Deadline task.
 Deadline datetime must be in this format: {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
 ```
-deadline Do CS2103T lecture quiz ; 2021-01-12T10:10:10 ; 3
-deadline Do CS2103T ip ; 2021-01-13T10:10:10 ; 3
+deadline Do CS2103T lecture quiz ; 3 ; 2021-01-12T10:10:10
+deadline Do CS2103T ip ; 3 ; 2021-01-13T10:10:10
 ```
 
 Expected Outcome:
@@ -119,15 +119,15 @@ Total number of tasks: 3
 ```
 
 ### Add Event task - `event`
-Format: `event DESCRIPTION ; DATETIME ; PRIORITY`
+Format: `event DESCRIPTION ; PRIORITY ; DATETIME`
 
-Key this command in along with task description, event datetime and priority number to cause Meme Man to add a Event task.
+Key this command in along with task description, priority number and event datetime to cause Meme Man to add an Event task.
 Event date must be in this format: {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
-`event Attend CS2101 class ; 2021-01-14T10:10:10 ; 2`
+`event Attend CS2101 class ; 2 ; 2021-01-14T10:10:10`
 
 Expected Outcome:
 

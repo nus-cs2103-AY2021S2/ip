@@ -8,43 +8,45 @@ import java.time.LocalDateTime;
 public class DeadlineTask extends Task {
     private LocalDateTime deadline;
 
-    private DeadlineTask(String taskDescription, LocalDateTime deadline, boolean isDone, TaskPriority taskPriority) {
-        super(taskDescription, "D", isDone, taskPriority);
+    private DeadlineTask(boolean isDone, String taskDescription, TaskPriority taskPriority, LocalDateTime deadline) {
+        super("D", isDone, taskDescription, taskPriority);
         this.deadline = deadline;
     }
 
     /**
      * Creates new instance of DeadlineTask object.
      * @param taskDescription The description of task.
+     * @param taskPriority Priority of task.
      * @param deadline LocalDate object of the date and time by which task should be completed.
      * @return New DeadlineTask that is not done.
      */
     public static DeadlineTask createNewDeadlineTask(
-            String taskDescription, LocalDateTime deadline, TaskPriority taskPriority) {
-        return new DeadlineTask(taskDescription, deadline, false, taskPriority);
+            String taskDescription, TaskPriority taskPriority, LocalDateTime deadline) {
+        return new DeadlineTask(false, taskDescription, taskPriority, deadline);
     }
 
     /**
      * Creates instance of DeadlineTask based on what was loaded from file.
-     * @param taskDescription The description of new task.
-     * @param deadline The deadline of the task.
      * @param isDone Whether task was previously marked as done.
+     * @param deadline The deadline of the task.
+     * @param taskDescription The description of new task.
+     * @param taskPriority Priority of task.
      * @return DeadlineTask as loaded from file.
      */
     public static DeadlineTask loadDeadlineTaskFromFile(
-            String taskDescription, LocalDateTime deadline, boolean isDone, TaskPriority taskPriority) {
-        return new DeadlineTask(taskDescription, deadline, isDone, taskPriority);
+            boolean isDone, String taskDescription, TaskPriority taskPriority, LocalDateTime deadline) {
+        return new DeadlineTask(isDone, taskDescription, taskPriority, deadline);
     }
 
     /**
-     * Changes the description, deadline and priority of the ToDoTask.
+     * Changes the description, deadline and priority of the DeadlineTask.
      * @param newDescription New description of the task.
-     * @param newDeadline New deadline of the task.
      * @param newPriority New task priority.
+     * @param newDeadline New deadline of the task.
      * @return New ToDoTask with edited description, deadline and priority.
      */
-    public DeadlineTask editTask(String newDescription, LocalDateTime newDeadline, TaskPriority newPriority) {
-        return new DeadlineTask(newDescription, newDeadline, isDone, newPriority);
+    public DeadlineTask editTask(String newDescription, TaskPriority newPriority, LocalDateTime newDeadline) {
+        return new DeadlineTask(isDone, newDescription, newPriority, newDeadline);
     }
 
     /**
@@ -53,7 +55,7 @@ public class DeadlineTask extends Task {
      * @return New DeadlineTask with edited description.
      */
     public DeadlineTask editDescription(String newDescription) {
-        return editTask(newDescription, deadline, taskPriority);
+        return editTask(newDescription, taskPriority, deadline);
     }
 
     /**
@@ -62,7 +64,7 @@ public class DeadlineTask extends Task {
      * @return New DeadlineTask with edited deadline.
      */
     public DeadlineTask editDeadline(LocalDateTime newDeadline) {
-        return editTask(description, newDeadline, taskPriority);
+        return editTask(description, taskPriority, newDeadline);
     }
 
     /**
@@ -71,7 +73,7 @@ public class DeadlineTask extends Task {
      * @return New DeadlineTask with edited priority.
      */
     public DeadlineTask editPriority(TaskPriority newPriority) {
-        return editTask(description, deadline, newPriority);
+        return editTask(description, newPriority, deadline);
     }
 
     /**
@@ -79,7 +81,7 @@ public class DeadlineTask extends Task {
      * @return Deadline that is marked as done/undone.
      */
     public DeadlineTask markAsDone() {
-        return new DeadlineTask(getDescription(), deadline, !isDone, taskPriority);
+        return new DeadlineTask(!isDone, getDescription(), taskPriority, deadline);
     }
 
 

@@ -8,43 +8,45 @@ import java.time.LocalDateTime;
 public class EventTask extends Task {
     private LocalDateTime event;
 
-    private EventTask(String taskDescription, LocalDateTime event, boolean isDone, TaskPriority taskPriority) {
-        super(taskDescription, "E", isDone, taskPriority);
+    private EventTask(boolean isDone, String taskDescription, TaskPriority taskPriority, LocalDateTime event) {
+        super("E", isDone, taskDescription, taskPriority);
         this.event = event;
     }
 
     /**
      * Creates new instance of EventTask object.
      * @param taskDescription The description of task.
+     * @param taskPriority Priority of task.
      * @param event LocalDateTime object of the date and time at which task should happen.
      * @return New EventTask that is not done.
      */
     public static EventTask createNewEventTask(
-            String taskDescription, LocalDateTime event, TaskPriority taskPriority) {
-        return new EventTask(taskDescription, event, false, taskPriority);
+            String taskDescription, TaskPriority taskPriority, LocalDateTime event) {
+        return new EventTask(false, taskDescription, taskPriority, event);
     }
 
     /**
      * Creates instance of EventTask based on what was loaded from file.
-     * @param taskDescription The description of new task.
-     * @param event The event date and time of the task.
      * @param isDone Whether task was previously marked as done.
+     * @param taskDescription The description of new task.
+     * @param taskPriority Priority of task.
+     * @param event The event date and time of the task.
      * @return EventTask as loaded from file.
      */
     public static EventTask loadEventTaskFromFile(
-            String taskDescription, LocalDateTime event, boolean isDone, TaskPriority taskPriority) {
-        return new EventTask(taskDescription, event, isDone, taskPriority);
+            boolean isDone, String taskDescription, TaskPriority taskPriority, LocalDateTime event) {
+        return new EventTask(isDone, taskDescription, taskPriority, event);
     }
 
     /**
      * Changes the description, event datetime and priority of the EventTask.
      * @param newDescription New description of the task.
-     * @param newEventDate New event datetime of the task.
      * @param newPriority New task priority.
+     * @param newEventDate New event datetime of the task.
      * @return New ToDoTask with edited description, event datetime and priority.
      */
-    public EventTask editTask(String newDescription, LocalDateTime newEventDate, TaskPriority newPriority) {
-        return new EventTask(newDescription, newEventDate, isDone, newPriority);
+    public EventTask editTask(String newDescription, TaskPriority newPriority, LocalDateTime newEventDate) {
+        return new EventTask(isDone, newDescription, newPriority, newEventDate);
     }
 
     /**
@@ -53,7 +55,7 @@ public class EventTask extends Task {
      * @return New EventTask with edited description.
      */
     public EventTask editDescription(String newDescription) {
-        return editTask(newDescription, event, taskPriority);
+        return editTask(newDescription, taskPriority, event);
     }
 
     /**
@@ -62,7 +64,7 @@ public class EventTask extends Task {
      * @return New EventTask with edited event datetime.
      */
     public EventTask editEventDate(LocalDateTime newEventDate) {
-        return editTask(description, newEventDate, taskPriority);
+        return editTask(description, taskPriority, newEventDate);
     }
 
     /**
@@ -71,7 +73,7 @@ public class EventTask extends Task {
      * @return New EventTask with edited priority.
      */
     public EventTask editPriority(TaskPriority newPriority) {
-        return editTask(description, event, newPriority);
+        return editTask(description, newPriority, event);
     }
 
     /**
@@ -79,7 +81,7 @@ public class EventTask extends Task {
      * @return EventTask that is marked as done/undone.
      */
     public EventTask markAsDone() {
-        return new EventTask(getDescription(), event, !isDone, taskPriority);
+        return new EventTask(!isDone, getDescription(), taskPriority, event);
     }
 
     /**

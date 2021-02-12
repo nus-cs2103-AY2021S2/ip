@@ -40,12 +40,12 @@ public class DeadlineCommand extends Command {
         //Split the description into description, deadline and priority
         String[] descriptionSplitArray = taskDescription.split(";");
         try {
-            LocalDateTime deadlineDateTime = parseDate(descriptionSplitArray[1].trim());
-            int intPriority = Integer.valueOf(descriptionSplitArray[2].trim());
+            int intPriority = Integer.valueOf(descriptionSplitArray[1].trim());
+            LocalDateTime deadlineDateTime = parseDate(descriptionSplitArray[2].trim());
             TaskPriority taskPriority = TaskPriority.getPriorityType(intPriority);
             //Create Deadline task
             return DeadlineTask.createNewDeadlineTask(descriptionSplitArray[0].trim(),
-                    deadlineDateTime, taskPriority);
+                    taskPriority, deadlineDateTime);
         } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
             throw new SurrealException("Wrong formatting. Did you forget to put ';'? Not stonks!\n");
         } catch (NumberFormatException e) { //Happens if correct int is not passed in for priority
@@ -80,7 +80,7 @@ public class DeadlineCommand extends Command {
      */
     public static String displayHelp() {
         String outputString = "Given a description and deadline, stores deadline task.\n";
-        outputString += "Format of arguments: deadline [description] ; [deadline] ; [priority]\n";
+        outputString += "Format of arguments: deadline [description] ; [priority] ; [deadline]\n";
         outputString += "[deadline] must be of the form {YYYY-MM-DD}T{HH:MM:SS} in 24 hour clock\n";
         return outputString;
     }

@@ -6,21 +6,22 @@ package surrealchat.task;
  * Represents an abstract task, which task subclasses inherit from.
  */
 public abstract class Task {
-    protected final String description;
     protected final String type;
     protected final boolean isDone;
+    protected final String description;
     protected final TaskPriority taskPriority;
 
     /**
      * Creates instance of Task object.
-     * @param description Description of task.
      * @param type Type in terms of todo (denoted "T"), deadline (denoted "D"), event (denoted "E").
      * @param isDone Boolean flag of whether task is done or not.
+     * @param description Description of task.
+     * @param taskPriority The priority of the task.
      */
-    public Task(String description, String type, boolean isDone, TaskPriority taskPriority) {
-        this.description = description;
+    public Task(String type, boolean isDone, String description, TaskPriority taskPriority) {
         this.type = type;
         this.isDone = isDone;
+        this.description = description;
         this.taskPriority = taskPriority;
     }
 

@@ -12,7 +12,7 @@ public class DeadlineTaskTest {
     private static final LocalDateTime TEST_EDIT_DEADLINE = LocalDateTime.parse("2020-11-11T20:20:20");
     private static final TaskPriority TASK_PRIORITY = TaskPriority.HIGH;
     private static final DeadlineTask STARTING_TASK = DeadlineTask.createNewDeadlineTask(
-            TEST_DESCRIPTION, TEST_DEADLINE, TASK_PRIORITY);
+            TEST_DESCRIPTION, TASK_PRIORITY, TEST_DEADLINE);
 
     /**
      * Tests the functionality of toString() method in DeadlineTask class.
@@ -83,7 +83,7 @@ public class DeadlineTaskTest {
     @Test
     public void testEditTask() {
         assertEquals(DeadlineTaskTest.STARTING_TASK.editTask(
-                "Eat biscuits", DeadlineTaskTest.TEST_EDIT_DEADLINE, TaskPriority.LOW).toString(),
+                "Eat biscuits", TaskPriority.LOW, DeadlineTaskTest.TEST_EDIT_DEADLINE).toString(),
                 "[D][\u2718] Eat biscuits | Priority: 1 (by: 2020-11-11, 20:20:20)");
     }
 
