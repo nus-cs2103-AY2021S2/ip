@@ -13,10 +13,30 @@ import duke.ui.Ui;
  * Format of command: "find [keyword]".
  */
 public class FindCommand implements Command {
-    private String keyword;
+    public static final String TODO_KEYWORD = "todo";
+    public static final String EVENT_KEYWORD = "event";
+    public static final String DEADLINE_KEYWORD = "deadline";
+
+    private final String keyword;
 
     protected FindCommand(String keyword) {
         this.keyword = keyword;
+    }
+
+    /**
+     * Creates a new instance of Find Command
+     *
+     * @param argString string with argument
+     * @return instance of Find Command
+     * @throws DukeException
+     */
+    public static FindCommand buildInstance(String argString) throws DukeException {
+        String[] cmdArgs = ParserUtils.getCommandArgs(argString, "I'm sorry, but find needs a keyword specified.");
+
+        assert (cmdArgs[0].equals("find"));
+
+        String keyword = cmdArgs[1];
+        return new FindCommand(keyword);
     }
 
     @Override
@@ -48,17 +68,5 @@ public class FindCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
-    }
-
-    /**
-     * Creates a new instance of Find Command
-     * @param argString string with argument
-     * @return instance of Find Command
-     * @throws DukeException
-     */
-    public static FindCommand buildInstance(String argString) throws DukeException {
-        String[] cmdArgs = ParserUtils.getCommandArgs(argString, "I'm sorry, but find needs a keyword specified.");
-        String keyword = cmdArgs[1];
-        return new FindCommand(keyword);
     }
 }

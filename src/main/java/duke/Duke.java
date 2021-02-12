@@ -13,8 +13,8 @@ import duke.ui.Ui;
  * Main Duke class.
  */
 public class Duke {
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList tasks;
 
     public Duke(boolean isCli) {
@@ -23,8 +23,9 @@ public class Duke {
 
     /**
      * Creates new duke instance
+     *
      * @param directoryPath path to store data
-     * @param isCli specify whether the duke instance is a command line interface
+     * @param isCli         specify whether the duke instance is a command line interface
      */
     public Duke(String directoryPath, boolean isCli) {
         if (isCli) {
@@ -57,19 +58,34 @@ public class Duke {
 
         Scanner stdin = new Scanner(System.in);
         String line;
-        boolean end = false;
 
         while (stdin.hasNextLine()) {
             line = stdin.nextLine();
             ui.printHorizontalLine();
 
-            getResponse(line);
+            Response response = getResponse(line);
 
             ui.printHorizontalLine();
 
-            if (end) {
+            if (response.isExit) {
                 break;
             }
+        }
+    }
+
+    public static class Response {
+        public final String response;
+        public final boolean isExit;
+
+        /**
+         * Create a response object
+         *
+         * @param response response string
+         * @param isExit   whether response should exit
+         */
+        public Response(String response, boolean isExit) {
+            this.response = response;
+            this.isExit = isExit;
         }
     }
 
@@ -77,11 +93,13 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
+    public Response getResponse(String input) {
+        boolean isExit = false;
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
             storage.writeTasks(tasks);
+            isExit = c.isExit();
         } catch (DukeException e) {
             ui.printError(e.getMessage());
         } catch (IOException e) {
@@ -89,7 +107,7 @@ public class Duke {
         }
         String replyString = ui.getReplyString();
         ui.resetReplyString();
-        return replyString;
+        return new Response(replyString, isExit);
     }
 
     public static void main(String[] args) {

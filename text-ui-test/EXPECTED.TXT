@@ -22,7 +22,7 @@ Hello from
 	Now you have 2 task(s) in the list.
 	_____________________________________________________________________
 	_____________________________________________________________________
-	Here are the tasks in you list:
+	Here are the tasks in your list:
 	1. [T][ ] add book
 	2. [T][ ] throw book
 	_____________________________________________________________________
@@ -32,7 +32,7 @@ Hello from
 	Now you have 3 task(s) in the list.
 	_____________________________________________________________________
 	_____________________________________________________________________
-	Here are the tasks in you list:
+	Here are the tasks in your list:
 	1. [T][ ] add book
 	2. [T][ ] throw book
 	3. [T][ ] store book
@@ -42,7 +42,7 @@ Hello from
 	   [T][X] throw book
 	_____________________________________________________________________
 	_____________________________________________________________________
-	Here are the tasks in you list:
+	Here are the tasks in your list:
 	1. [T][ ] add book
 	2. [T][X] throw book
 	3. [T][ ] store book
@@ -63,7 +63,7 @@ Hello from
 	Now you have 6 task(s) in the list.
 	_____________________________________________________________________
 	_____________________________________________________________________
-	Here are the tasks in you list:
+	Here are the tasks in your list:
 	1. [T][ ] add book
 	2. [T][X] throw book
 	3. [T][ ] store book
@@ -80,7 +80,7 @@ Hello from
 	   [E][X] book signing (at: Jun 20 2020 00:00)
 	_____________________________________________________________________
 	_____________________________________________________________________
-	Here are the tasks in you list:
+	Here are the tasks in your list:
 	1. [T][X] add book
 	2. [T][X] throw book
 	3. [T][ ] store book
@@ -94,7 +94,7 @@ Hello from
 	Now you have 5 task(s) in the list.
 	_____________________________________________________________________
 	_____________________________________________________________________
-	Here are the tasks in you list:
+	Here are the tasks in your list:
 	1. [T][X] add book
 	2. [T][X] throw book
 	3. [D][ ] read book (by: Aug 5 2020 00:00)

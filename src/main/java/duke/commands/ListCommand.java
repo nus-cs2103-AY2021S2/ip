@@ -18,7 +18,7 @@ public class ListCommand implements Command {
         if (tasks.size() <= 0) {
             ui.printIndentOutput("The current list is empty.");
         } else {
-            ui.printIndentOutput("Here are the tasks in you list:");
+            ui.printIndentOutput("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
                 ui.printIndentOutput((i + 1) + ". " + tasks.getTask(i));
             }

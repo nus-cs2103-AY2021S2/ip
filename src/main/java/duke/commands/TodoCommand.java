@@ -13,7 +13,7 @@ import duke.ui.Ui;
  * Format of command: "todo [todo_name]".
  */
 public class TodoCommand implements Command {
-    private String taskName;
+    private final String taskName;
 
     protected TodoCommand(String taskName) {
         this.taskName = taskName;
@@ -33,12 +33,16 @@ public class TodoCommand implements Command {
 
     /**
      * Creates a new instance of Todo Command
+     *
      * @param argString string with argument
      * @return instance of Todo Command
      * @throws DukeException
      */
     public static TodoCommand buildInstance(String argString) throws DukeException {
         String[] cmdArgs = ParserUtils.getCommandArgs(argString, "The description of a todo cannot be empty.");
+
+        assert (cmdArgs[0].equals("todo"));
+
         String taskName = cmdArgs[1];
         return new TodoCommand(taskName);
     }

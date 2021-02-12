@@ -9,19 +9,22 @@ import duke.ui.Ui;
  * Abstract class for commands adding new tasks to the list.
  */
 public abstract class AddCommand implements Command {
-    private String taskName;
+    private final String taskName;
+
     protected AddCommand(String taskName) {
         this.taskName = taskName;
     }
 
     /**
      * Gets the task to be added to the list.
+     *
      * @return task to be added to the list
      */
     public abstract Task getTask();
 
     /**
      * Returns the name of the task.
+     *
      * @return name of the task
      */
     public String getTaskName() {
@@ -31,6 +34,7 @@ public abstract class AddCommand implements Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task curTask = getTask();
+        assert (curTask != null);
         tasks.addTask(curTask);
         ui.printTaskListStatus(tasks, curTask);
     }

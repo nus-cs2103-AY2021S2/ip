@@ -12,7 +12,7 @@ import duke.ui.Ui;
  * Format of command: "delete [task_index]".
  */
 public class DeleteCommand implements Command {
-    private int index;
+    private final int index;
 
     protected DeleteCommand(int index) {
         this.index = index;
@@ -20,6 +20,8 @@ public class DeleteCommand implements Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert (index - 1 < tasks.size());
+
         Task curTask = tasks.getTask(index - 1);
         tasks.removeTask(index - 1);
         ui.printIndentOutput("Nice! I've removed this task:");
@@ -35,12 +37,16 @@ public class DeleteCommand implements Command {
 
     /**
      * Creates a new instance of Delete Command
+     *
      * @param argString string with argument
      * @return instance of Delete Command
      * @throws DukeException
      */
     public static DeleteCommand buildInstance(String argString) throws DukeException {
         String[] cmdArgs = ParserUtils.getCommandArgs(argString, "I'm sorry, but delete needs the index of a Task.");
+
+        assert (cmdArgs[0].equals("delete"));
+
         int index = ParserUtils.parseInt(cmdArgs[1], "The index of the task needs to be an integer.");
         return new DeleteCommand(index);
     }

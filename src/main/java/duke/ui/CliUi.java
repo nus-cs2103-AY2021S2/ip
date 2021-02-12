@@ -2,10 +2,10 @@ package duke.ui;
 
 public class CliUi extends Ui {
     public static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+        + "|  _ \\ _   _| | _____ \n"
+        + "| | | | | | | |/ / _ \\\n"
+        + "| |_| | |_| |   <  __/\n"
+        + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String HORIZONTAL_LINE = "____________________________________"
         + "_________________________________";
 
@@ -21,6 +21,7 @@ public class CliUi extends Ui {
 
     /**
      * Prints the output with an indent.
+     *
      * @param output output to be printed
      */
     @Override

@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import duke.models.Deadline;
 import duke.models.Event;
@@ -15,30 +16,15 @@ import duke.models.Todo;
 public class TaskList {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public void addTask(Task t) {
-        this.tasks.add(t);
-    }
-
-    public Task getTask(int index) {
-        return this.tasks.get(index);
-    }
-
-    public int size() {
-        return this.tasks.size();
-    }
-
-    public void removeTask(int index) {
-        this.tasks.remove(index);
-    }
-
     /**
      * Converts the tasks to string (to be used by Storage for file saving).
+     *
      * @param task task
      * @return string representation of task
      */
@@ -71,6 +57,7 @@ public class TaskList {
 
     /**
      * Parses the given string (from file) into the correct task object.
+     *
      * @param taskString task string (from file)
      * @return task object
      */
@@ -92,5 +79,33 @@ public class TaskList {
         }
 
         return task;
+    }
+
+    /**
+     * Adds a new task into the list
+     *
+     * @param t task to be added
+     */
+    public void addTask(Task t) {
+        assert (t != null);
+        this.tasks.add(t);
+    }
+
+    public Task getTask(int index) {
+        assert (index < this.tasks.size());
+        assert (index >= 0);
+        return this.tasks.get(index);
+    }
+
+    public int size() {
+        return this.tasks.size();
+    }
+
+    public void removeTask(int index) {
+        this.tasks.remove(index);
+    }
+
+    public Stream<Task> toStream() {
+        return tasks.stream();
     }
 }

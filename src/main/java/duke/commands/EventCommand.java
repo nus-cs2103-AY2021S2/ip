@@ -12,10 +12,11 @@ import duke.models.Task;
  * Format of command: "event [event_name] /at [datetime]".
  */
 public class EventCommand extends AddCommand {
-    private LocalDateTime dateTime;
+    private final LocalDateTime dateTime;
 
     /**
      * Command relating to creating a new Event
+     *
      * @param taskName name of the event
      * @param dateTime date and time of the event
      */
@@ -31,19 +32,23 @@ public class EventCommand extends AddCommand {
 
     /**
      * Creates a new instance of Event Command
+     *
      * @param argString string with argument
      * @return instance of Event Command
      * @throws DukeException
      */
     public static EventCommand buildInstance(String argString) throws DukeException {
         String[] cmdArgs = ParserUtils.getCommandArgs(argString, "The description of an event cannot be empty.");
+
+        assert (cmdArgs[0].equals("event"));
+
         String[] eventArgs = cmdArgs[1].split(" /at ", 2);
         if (eventArgs.length < 2) {
             throw new DukeException("The event needs to have a date specified with \"/at\".");
         }
         String taskName = eventArgs[0];
         LocalDateTime dateTime = ParserUtils.parseDateTime(eventArgs[1],
-                "The event date needs to be specified in a valid date format.");
+            "The event date needs to be specified in a valid date format.");
         return new EventCommand(taskName, dateTime);
     }
 }
