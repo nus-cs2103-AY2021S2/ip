@@ -15,4 +15,12 @@ public class ToDo extends Task {
     public ToDo(String taskName, String status) {
         super(taskName, status, "TODO");
     }
+
+    /**
+     * Marks todo task as completed.
+     */
+    @Override
+    public Task markCompleted() {
+        return new ToDo(super.getTaskName(), "complete");
+    }
 }

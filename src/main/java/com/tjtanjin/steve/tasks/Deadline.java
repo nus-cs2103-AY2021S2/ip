@@ -35,6 +35,14 @@ public class Deadline extends Task {
     }
 
     /**
+     * Marks deadline task as completed.
+     */
+    @Override
+    public Task markCompleted() {
+        return new Deadline(super.getTaskName(), "complete", super.getDates());
+    }
+
+    /**
      * Gets the string describing deadline.
      *
      * @return String describing deadline

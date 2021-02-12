@@ -125,7 +125,7 @@ public class StorageHandler {
     public boolean saveTask(int index, String saveType, String taskName,
             String status, String type, LocalDate[] taskDates) {
 
-        JSONObject taskDetails = arrayListToJson(taskName, status, type, taskDates);
+        JSONObject taskDetails = parseTaskToJson(taskName, status, type, taskDates);
 
         JSONObject taskGroup = new JSONObject();
         taskGroup.put("task", taskDetails);
@@ -155,7 +155,7 @@ public class StorageHandler {
             String status = task.getStatus();
             String type = task.getType();
             LocalDate[] taskDates = task.getDates();
-            JSONObject taskDetails = arrayListToJson(taskName, status, type, taskDates);
+            JSONObject taskDetails = parseTaskToJson(taskName, status, type, taskDates);
             JSONObject taskGroup = new JSONObject();
             taskGroup.put("task", taskDetails);
             taskList.add(taskGroup);
@@ -164,7 +164,16 @@ public class StorageHandler {
         return writeToFile();
     }
 
-    public JSONObject arrayListToJson(String taskName, String status, String type, LocalDate[] taskDates) {
+    /**
+     * Groups task information into a json object.
+     *
+     * @param taskName name of task
+     * @param status status of task
+     * @param type type of task
+     * @param taskDates due dates of task
+     * @return json object containing task information
+     */
+    public JSONObject parseTaskToJson(String taskName, String status, String type, LocalDate[] taskDates) {
         JSONObject taskDetails = new JSONObject();
         taskDetails.put("taskName", taskName);
         taskDetails.put("status", status);
@@ -185,6 +194,11 @@ public class StorageHandler {
         return taskDetails;
     }
 
+    /**
+     * Writes task information into json file.
+     *
+     * @return true or false to indicate if file was written to successfully
+     */
     public boolean writeToFile() {
         //write JSON file
         try (FileWriter file = new FileWriter(this.PATH)) {

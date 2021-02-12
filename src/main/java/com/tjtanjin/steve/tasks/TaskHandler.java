@@ -77,7 +77,8 @@ public class TaskHandler {
             }
 
             TASKS_TRACKER.add((ArrayList<Task>) tasks.clone());
-            task.markCompleted();
+            Task completedTask = task.markCompleted();
+            tasks.set(index, completedTask);
             String taskName = task.getTaskName();
             String taskType = task.getType().toUpperCase();
             LocalDate[] taskDates = task.getDates();

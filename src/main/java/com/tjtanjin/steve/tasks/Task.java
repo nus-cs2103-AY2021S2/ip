@@ -65,8 +65,8 @@ public class Task {
     /**
      * Marks the task as completed.
      */
-    public void markCompleted() {
-        this.status = "complete";
+    public Task markCompleted() {
+        return null;
     }
 
     /**

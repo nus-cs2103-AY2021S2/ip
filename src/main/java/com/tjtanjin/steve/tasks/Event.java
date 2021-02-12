@@ -38,6 +38,14 @@ public class Event extends Task {
     }
 
     /**
+     * Marks event task as completed.
+     */
+    @Override
+    public Task markCompleted() {
+        return new Event(super.getTaskName(), "complete", super.getDates());
+    }
+
+    /**
      * Gets the string describing event.
      *
      * @return String describing event
