@@ -3,3 +3,5 @@ T | 1 | read book
 D | 0 | feed dog | 2015-08-31 1500
 T | 1 | dog expo
 T | 0 | vaccinate dog
+D | 0 | visit expo | 2014-08-25 0811
+E | 1 | pet expo | 2015-08-26 1000
