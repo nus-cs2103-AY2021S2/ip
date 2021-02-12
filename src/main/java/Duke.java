@@ -102,8 +102,8 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -116,8 +116,13 @@ public class Duke extends Application {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the appropriate response based on the user input.
+     *
+     * @param input The command selected by the user.
+     * @param parts The array of strings in the user input, including the arguments for the command selected.
+     * @return A string that is determined by the user input command.
+     * @throws InsufficientArgumentsException
+     * @throws FileNotFoundException
      */
     String getResponse(String input, String[] parts) throws InsufficientArgumentsException,
             FileNotFoundException {

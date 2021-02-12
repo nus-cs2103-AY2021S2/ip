@@ -6,8 +6,13 @@ public class ListCommand extends Command {
         this.listCounter = listCounter;
     }
 
+    /**
+     * Returns a string representation of one or more Tasks that are stored in the list.
+     *
+     * @return A string representation of all the Tasks currently stored in the list.
+     */
     @Override
-    public String execute() throws InsufficientArgumentsException {
+    public String execute() {
         StringBuilder listStringBuilder = new StringBuilder();
         for (Task t : TaskList.getTasklist()) {
             listStringBuilder.append(listCounter).append(".").append(t.toString());

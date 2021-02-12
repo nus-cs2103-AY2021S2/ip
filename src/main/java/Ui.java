@@ -12,6 +12,7 @@ public class Ui {
 
     /**
      * Reads the next line as a string in the scanner input.
+     *
      * @return a string that is in the scanner input.
      */
     public String read() {
@@ -20,6 +21,7 @@ public class Ui {
 
     /**
      * Checks if the next line is available. Usually used before read().
+     *
      * @return whether the scanner contains the next line.
      */
     public boolean canRead() {
@@ -28,6 +30,7 @@ public class Ui {
 
     /**
      * Prints the input string to the console.
+     *
      * @param str The string to be printed to the console.
      */
     public void println(String str) {

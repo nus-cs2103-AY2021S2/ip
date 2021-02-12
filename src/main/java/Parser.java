@@ -6,6 +6,7 @@ public class Parser {
 
     /**
      * Takes in a line from the txt file and outputs the description of a Todo object.
+     *
      * @param str The line read in from the txt file.
      * @return a string that is the description of the Todo object.
      */
@@ -16,6 +17,7 @@ public class Parser {
     /**
      * Takes in a line from the txt file and outputs the description of
      * a Event or Deadline object.
+     *
      * @param str The line read in from the txt file.
      * @return a string that is the description of a Event or Deadline object.
      */
@@ -26,6 +28,7 @@ public class Parser {
     /**
      * Takes in a line from the txt file and outputs the date of a Deadline object
      * as a string.
+     *
      * @param str The line read in from the txt file.
      * @return a string that is the date of a Deadline object.
      */
@@ -36,6 +39,7 @@ public class Parser {
     /**
      * Takes in a line from the txt file and outputs the date of a Event object
      * as a string.
+     *
      * @param str The line read in from the txt file.
      * @return a string that is the date of an Event object.
      */

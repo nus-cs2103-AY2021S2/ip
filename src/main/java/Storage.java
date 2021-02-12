@@ -24,6 +24,7 @@ public class Storage {
     /**
      * Reads the existing txt file and stores the text into Task objects.
      * If the file does not exist, it creates a new file.
+     *
      * @return the list of tasks that contains the task objects.
      */
     public ArrayList<Task> load() {
@@ -76,7 +77,8 @@ public class Storage {
 
     /**
      * Saves the current information into a txt file.
-     * @throws FileNotFoundException
+     *
+     * @throws FileNotFoundException If a file duke.txt is not found.
      */
     public void save() throws FileNotFoundException {
         PrintWriter myWriter = new PrintWriter("duke.txt");

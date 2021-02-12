@@ -4,6 +4,11 @@ public class DoneCommand extends Command {
         super(input, parts, tasks);
     }
 
+    /**
+     * Returns a string representation of the Task after it is marked a task as done.
+     *
+     * @return A string representation of the Task that is marked as done.
+     */
     @Override
     public String execute() {
         int index = Integer.parseInt(parts[1]);

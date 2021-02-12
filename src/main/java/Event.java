@@ -18,6 +18,7 @@ public class Event extends Task implements EventDeadline {
 
     /**
      * Creates a string representation of the Event object.
+     *
      * @return a string representation of the Event.
      */
     @Override
@@ -25,6 +26,11 @@ public class Event extends Task implements EventDeadline {
         return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
     }
 
+    /**
+     * Retuens the date of the Event object.
+     *
+     * @return The LocalDate of the Event object.
+     */
     @Override
     public LocalDate getDateInfo() {
         return this.time;

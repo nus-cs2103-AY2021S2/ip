@@ -4,6 +4,13 @@ public class FindCommand extends Command {
         super(input, parts, tasks);
     }
 
+    /**
+     * Returns a string representation of the Tasks after they have been found and
+     * matched with the given criteria.
+     *
+     * @return A string representation of one or more tasks that matches the user's requirements.
+     * @throws InsufficientArgumentsException If no arguments are provided.
+     */
     @Override
     public String execute() throws InsufficientArgumentsException {
         if (parts.length == 1) {

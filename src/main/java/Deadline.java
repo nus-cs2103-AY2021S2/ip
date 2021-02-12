@@ -19,8 +19,9 @@ public class Deadline extends Task implements EventDeadline {
     }
 
     /**
-     * Creates a string representation of the Event object.
-     * @return a string representation of the Event.
+     * Creates A string representation of the Deadline object.
+     *
+     * @return A string representation of the Deadline.
      */
     @Override
     public String toString() {

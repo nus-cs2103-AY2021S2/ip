@@ -11,5 +11,12 @@ public abstract class Command {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns a string representation of the Task after the execution of a process.
+     * The process is determined by the user input.
+     *
+     * @return A string representation of task.
+     * @throws InsufficientArgumentsException
+     */
     public abstract String execute() throws InsufficientArgumentsException;
 }

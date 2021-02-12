@@ -5,6 +5,13 @@ public class AddCommand extends Command {
     AddCommand(String input, String[] parts, TaskList tasks) {
         super(input, parts, tasks);
     }
+
+    /**
+     * Returns a string representation of the Task after it has been added to the list.
+     *
+     * @return A string representation of the Task added to the list.
+     * @throws InsufficientArgumentsException If no arguments are provided.
+     */
     @Override
     public String execute() throws InsufficientArgumentsException {
         if (parts.length == 1) {

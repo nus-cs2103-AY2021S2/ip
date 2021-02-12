@@ -35,6 +35,7 @@ public class TaskList {
 
     /**
      * Adds a task object to the data structure.
+     *
      * @param task A task object.
      */
     public void add(Task task) {
@@ -52,6 +53,7 @@ public class TaskList {
 
     /**
      * Find out the number of items in the data structure.
+     *
      * @return the number of task objects in the ArrayList.
      */
     public int size() {
@@ -60,6 +62,7 @@ public class TaskList {
 
     /**
      * Obtain an item at a specific index in the data structure.
+     *
      * @param index Index where the item is to be retrieved.
      * @return the task object at the specific index in the ArrayList.
      */
@@ -69,6 +72,7 @@ public class TaskList {
 
     /**
      * Deletes an item at a specific index in the data structure.
+     *
      * @param index Index where the task object is to be deleted.
      */
     public void remove(int index) {
@@ -109,6 +113,7 @@ public class TaskList {
 
     /**
      * Sorts the Events and Deadlines in the list according to date in ascending order.
+     *
      * @param list The list used to store Events and Deadlines
      */
     public static void sortByDate(ArrayList<? extends EventDeadline> list) {

@@ -4,6 +4,12 @@ public class DeleteCommand extends Command {
         super(input, parts, tasks);
     }
 
+    /**
+     * Returns a string representation of the Task after it is deleted from the list.
+     *
+     * @return A string representation of the Task deleted.
+     * @throws InsufficientArgumentsException If more than one argument is provided.
+     */
     @Override
     public String execute() throws InsufficientArgumentsException {
         if (parts.length > 2) {

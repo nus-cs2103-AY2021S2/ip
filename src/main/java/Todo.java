@@ -10,6 +10,7 @@ public class Todo extends Task {
 
     /**
      * Creates a string representation of the Todo object.
+     *
      * @return a string representation of the Todo object.
      */
     @Override

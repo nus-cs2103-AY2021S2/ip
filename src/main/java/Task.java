@@ -22,6 +22,7 @@ public class Task {
 
     /**
      * Indicates whether a task is completed. If that is the case, a tick will be displayed.
+     *
      * @return a tick if isDone is true. Else, it will return an empty space.
      */
     public String getStatusIcon() {
@@ -37,6 +38,7 @@ public class Task {
 
     /**
      * Gets the type of task.
+     *
      * @return an integer representing the type of task.
      */
     public int getTaskType() {
@@ -45,6 +47,7 @@ public class Task {
 
     /**
      * Creates a string representation of the Task object.
+     *
      * @return a string representation of the Task object.
      */
     @Override
