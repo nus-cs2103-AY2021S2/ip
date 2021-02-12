@@ -124,7 +124,8 @@ public class Duke extends Application {
      * @throws InsufficientArgumentsException
      * @throws FileNotFoundException
      */
-    String getResponse(String input, String[] parts) throws InsufficientArgumentsException, FileNotFoundException, IllegalKeywordException {
+    String getResponse(String input, String[] parts) throws InsufficientArgumentsException,
+            FileNotFoundException, IllegalKeywordException {
         int listCounter = 1;
         switch (input) {
         case "done":
