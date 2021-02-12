@@ -39,4 +39,13 @@ public class Deadline extends Task {
         return "[D]" + (this.done ? "[X] " : "[ ] ") + this.getTaskName() + " (by: "
                 + (isSavedBefore ? this.by : parseDate()) + ")";
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Deadline){
+            Deadline e = (Deadline) obj;
+            return this.getTaskName().equals(e.getTaskName()) && this.by.equals(e.by);
+        }
+        return false;
+    }
 }

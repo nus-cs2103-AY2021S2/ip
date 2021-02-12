@@ -34,12 +34,26 @@ public class TaskList {
         return this.ls;
     }
 
+    public boolean detectDuplicates(Task task){
+        for(Task t : this.ls){
+            if(t.equals(task)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 
     /**
      * Adds a given task to the list.
      * @param task given task
      */
     public String addTask(Task task) {
+        if (detectDuplicates(task)) {
+            return "\t" + "\n\tThis task is a duplicate";
+        }
         String res = "\t" + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";
         Stream.of(task).collect(Collectors.toCollection(() -> this.ls));
         int numOfTasks = ls.size();
