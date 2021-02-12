@@ -31,6 +31,7 @@ public class Task {
      */
     public Task markAsDone() {
         isDone = true;
+        assert isDone : "Task is not marked as done yet";
         return this;
     }
 

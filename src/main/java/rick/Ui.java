@@ -36,9 +36,9 @@ public class Ui {
      * This method is used to output the welcome message.
      */
     public void showWelcome() {
-        showMessage(logo + "\nHello! I'm Duke!\n" +
-                "What can I do for you?\n" +
-                "Type \"help\" to view the list of available commands.");
+        showMessage(logo + "\nHello! I'm Duke!\n"
+                + "What can I do for you?\n"
+                + "Type \"help\" to view the list of available commands.");
     }
 
     /**
@@ -53,14 +53,14 @@ public class Ui {
      * on the application.
      */
     public void showHelpMessage() {
-        showMessage("List of Available Commands:\n" +
-                "bye -> To exit application\n" +
-                "list -> To list tasks\n" +
-                "done [index] -> To mark task as done \n" +
-                "delete [index] -> To delete task\n" +
-                "todo [description] -> To create todo\n" +
-                "deadline [description] /by [date] -> To create deadline\n" +
-                "event [description] /on [date] -> To create event");
+        showMessage("List of Available Commands:\n"
+                + "bye -> To exit application\n"
+                + "list -> To list tasks\n"
+                + "done [index] -> To mark task as done \n"
+                + "delete [index] -> To delete task\n"
+                + "todo [description] -> To create todo\n"
+                + "deadline [description] /by [date] -> To create deadline\n"
+                + "event [description] /on [date] -> To create event");
     }
 
     /**

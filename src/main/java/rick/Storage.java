@@ -82,6 +82,9 @@ public class Storage {
                         }
                         data.add(currentTask);
                         break;
+                    default:
+                        assert false : taskInfo[0];
+                        break;
                 }
             }
         } catch(IOException | DateTimeParseException error) {

@@ -35,7 +35,9 @@ public class TaskList {
      * @return The deleted <code>Task</code> object.
      */
     public Task deleteTask(int index) {
-        return tasks.remove(index);
+        Task deletedTask = tasks.remove(index);
+        assert !tasks.contains(deletedTask) : "Task is not deleted from list";
+        return deletedTask;
     }
 
     /**
