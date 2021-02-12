@@ -21,6 +21,11 @@ public class Duke {
         this(null, isCli);
     }
 
+    /**
+     * Creates new duke instance
+     * @param directoryPath path to store data
+     * @param isCli specify whether the duke instance is a command line interface
+     */
     public Duke(String directoryPath, boolean isCli) {
         if (isCli) {
             ui = new CliUi();
@@ -51,10 +56,11 @@ public class Duke {
         ui.printIntro();
 
         Scanner stdin = new Scanner(System.in);
-        String line = stdin.nextLine();
+        String line;
         boolean end = false;
 
-        while (line != null) {
+        while (stdin.hasNextLine()) {
+            line = stdin.nextLine();
             ui.printHorizontalLine();
 
             getResponse(line);
@@ -64,8 +70,6 @@ public class Duke {
             if (end) {
                 break;
             }
-
-            line = stdin.nextLine();
         }
     }
 

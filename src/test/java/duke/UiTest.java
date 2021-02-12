@@ -30,18 +30,28 @@ public class UiTest {
         System.setErr(originalErr);
     }
 
+    public String getFilteredContent() {
+        String content = outContent.toString();
+        // ref: https://stackoverflow.com/a/41676677
+        return replaceNewLine(content);
+    }
+
+    public String replaceNewLine(String s) {
+        return s.replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
+    }
+
     @Test
     public void testHorizontalLine() {
         Ui ui = new CliUi();
         ui.printHorizontalLine();
-        assertEquals("\t" + CliUi.HORIZONTAL_LINE + "\n", outContent.toString());
+        assertEquals(replaceNewLine("\t" + CliUi.HORIZONTAL_LINE + "\n"), getFilteredContent());
     }
 
     @Test
     public void testIntro() {
         Ui ui = new CliUi();
         ui.printIntro();
-        assertEquals("Hello from\n" + CliUi.LOGO + "\n\t" + CliUi.HORIZONTAL_LINE
-                + "\n\tWhat can I do for you?\n\t" + CliUi.HORIZONTAL_LINE + '\n', outContent.toString());
+        assertEquals(replaceNewLine("Hello from\n" + CliUi.LOGO + "\n\t" + CliUi.HORIZONTAL_LINE
+                + "\n\tWhat can I do for you?\n\t" + CliUi.HORIZONTAL_LINE + "\n"), getFilteredContent());
     }
 }
