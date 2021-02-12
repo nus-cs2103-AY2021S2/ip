@@ -4,10 +4,7 @@ import java.util.List;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownInputException;
-import duke.tasks.DeadlineTask;
-import duke.tasks.EventTask;
 import duke.tasks.Task;
-import duke.tasks.ToDoTask;
 
 /**
  * Duke class that simulates the running of the Duke Program
@@ -57,123 +54,202 @@ public class Duke {
         switch (parsedInput[0]) {
 
         case "todo":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing of todo!";
 
-            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
-
-            response += ui.addPrint();
-
-            ToDoTask todo = tasks.handleToDoTask(input);
-
-            response += ui.printTask(todo);
-            response += ui.countTasks(tasks);
-
+            response = handleAddTask(parsedInput[0], response, input);
             break;
 
         case "deadline":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing of deadline!";;
 
-            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
-
-            response += ui.addPrint();
-
-            DeadlineTask deadlineTask = tasks.handleDeadlineTask(input);
-
-            response += ui.printTask(deadlineTask);
-            response += ui.countTasks(tasks);
-
+            response = handleAddTask(parsedInput[0], response, input);
             break;
 
         case "event":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing of event!";
 
-            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
-
-            response += ui.addPrint();
-
-            EventTask eventTask = tasks.handleEventTask(input);
-
-            response += ui.printTask(eventTask);
-            response += ui.countTasks(tasks);
-
+            response = handleAddTask(parsedInput[0], response, input);
             break;
 
         case "list":
 
-            response += ui.printStored(tasks);
-
+            response = handleList(response);
             break;
 
         case "done":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing done";
 
-            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
-
-            int number = Integer.valueOf(parsedInput[1]);
-
-            response += ui.printMarked();
-
-            Task completed = tasks.handleDone(number);
-
-            response += ui.printTask(completed);
-
+            response = handleDone(parsedInput, response);
             break;
 
         case "check":
-            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
+            assert parsedInput.length > 1 : "Something went wrong with the parsing check!";
 
-            String result = tasks.findOnDateTasks((parsedInput[1]));
-
-            response += ui.print(result);
-
+            response = handleCheck(parsedInput, response);
             break;
 
         case "bye":
             response += Ui.getByeMessage();
-
             break;
 
         case "delete":
+            assert parsedInput.length > 1 : "Something went wrong with the parsing delete!";
 
-            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
-
-            int index = Integer.valueOf(parsedInput[1]);
-
-            response += ui.printRemoved();
-
-            Task task = tasks.handleDelete(index);
-
-            response += ui.printTask(task);
-            response += ui.countTasks(tasks);
-
+            response = handleDelete(parsedInput, response);
             break;
 
         case "find":
-            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
+            assert parsedInput.length > 1 : "Something went wrong with the parsing find!";
 
-            String keyword = parsedInput[1];
-
-            response += ui.printMatching();
-
-            List<Task> matches = tasks.getMatch(keyword);
-
-            response += ui.printList(matches);
-
+            response = handleFind(parsedInput, response);
             break;
 
         case "priority":
-            assert parsedInput.length > 1 : "Something went wrong with the parsing!";
+            assert parsedInput.length > 1 : "Something went wrong with the parsing priority!";
 
-            int taskNum = Integer.valueOf(parsedInput[1]);
-            String priority = parsedInput[2];
-
-            response += ui.getSetPriorityMessage();
-
-            Task taskChanged = tasks.handleSetPriority(taskNum, priority);
-
-            response += ui.printTask(taskChanged);
-
+            response = handlePriority(parsedInput, response);
             break;
 
         default:
             throw new UnknownInputException();
         }
+
+        return response;
+    }
+
+    /**
+     * Runs the logic for the adding of tasks to the list
+     * and builiding the response
+     *
+     * @param type the type of task to add
+     * @param response the current response string of Duke
+     * @param input the original Input to aid in the action to take
+     * @return A string representing the response of Duke
+     */
+    private String handleAddTask(String type, String response, String input) {
+        Task task = new Task();
+
+        if (type.equals("todo")) {
+            task = tasks.handleToDoTask(input);
+
+        } else if (type.equals("deadline")) {
+            task = tasks.handleDeadlineTask(input);
+
+        } else if (type.equals("event")) {
+            task = tasks.handleEventTask(input);
+        }
+
+        response += ui.addPrint();
+        response += ui.printTask(task);
+        response += ui.countTasks(tasks);
+
+        return response;
+    }
+
+    /**
+     * Runs the logic for the marking of task to be done and
+     * building the response
+     *
+     * @param parsedInput the input that has been parsed by the parser object
+     * @param response the current response string of Duke
+     * @return A string representing the response of Duke
+     */
+    private String handleDone(String[] parsedInput, String response) {
+        int number = Integer.valueOf(parsedInput[1]);
+
+        response += ui.printMarked();
+
+        Task completed = tasks.handleDone(number);
+
+        response += ui.printTask(completed);
+
+        return response;
+    }
+
+    /**
+     * Runs the logic for the get the current list tasks
+     * building the response
+     *
+     * @param response the current response string of Duke
+     * @return A string representing the response of Duke
+     */
+    private String handleList (String response) {
+        response += ui.printStored(tasks);
+        return response;
+    }
+
+    /**
+     * Runs the logic for the checking of tasks on a particular
+     * date and building the response
+     *
+     * @param parsedInput the input that has been parsed by the parser object
+     * @param response the current response string of Duke
+     * @return A string representing the response of Duke
+     */
+    private String handleCheck (String[] parsedInput, String response) {
+        String result = tasks.findOnDateTasks((parsedInput[1]));
+        response += ui.print(result);
+
+        return response;
+    }
+
+    /**
+     * Runs the logic for the deletion of task
+     * and building the response
+     *
+     * @param parsedInput the input that has been parsed by the parser object
+     * @param response the current response string of Duke
+     * @return A string representing the response of Duke
+     */
+    private String handleDelete (String[] parsedInput, String response) {
+        int index = Integer.valueOf(parsedInput[1]);
+
+        response += ui.printRemoved();
+
+        Task task = tasks.handleDelete(index);
+
+        response += ui.printTask(task);
+        response += ui.countTasks(tasks);
+
+        return response;
+    }
+
+    /**
+     * Runs the logic for finding a task containing the keyword and
+     * building the response
+     *
+     * @param parsedInput the input that has been parsed by the parser object
+     * @param response the current response string of Duke
+     * @return A string representing the response of Duke
+     */
+    private String handleFind (String[] parsedInput, String response) {
+        String keyword = parsedInput[1];
+
+        response += ui.printMatching();
+
+        List<Task> matches = tasks.getMatch(keyword);
+
+        response += ui.printList(matches);
+        return response;
+    }
+
+    /**
+     * Runs the logic for assigning a priority to a task and
+     * building the response
+     *
+     * @param parsedInput the input that has been parsed by the parser object
+     * @param response the current response string of Duke
+     * @return A string representing the response of Duke
+     */
+    private String handlePriority (String[] parsedInput, String response) {
+        int taskNum = Integer.valueOf(parsedInput[1]);
+        String priority = parsedInput[2];
+
+        response += ui.getSetPriorityMessage();
+
+        Task taskChanged = tasks.handleSetPriority(taskNum, priority);
+
+        response += ui.printTask(taskChanged);
 
         return response;
     }

@@ -1,3 +1,6 @@
+//@@author Jeffry Lum-reused
+//Reuse from JavaFX Tutorial
+
 package duke;
 
 import java.io.IOException;
@@ -65,3 +68,4 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+//@@author

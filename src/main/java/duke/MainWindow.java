@@ -1,3 +1,6 @@
+//@@author Jeffry Lum-reused
+//Reuse from JavaFX Tutorial
+
 package duke;
 
 import javafx.application.Platform;
@@ -66,3 +69,5 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 }
+
+//@@author

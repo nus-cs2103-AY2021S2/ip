@@ -19,6 +19,10 @@ public class Task {
     /** Priority of the Task, will be initialized to Unassigned */
     protected Priority priority;
 
+    /** empty constructor for Task */
+    public Task() {
+    }
+
     /**
      * @param description the description of the task
      * @param  type the task type

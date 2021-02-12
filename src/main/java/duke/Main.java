@@ -1,3 +1,6 @@
+//@@author Jeffry Lum-reused
+//Reuse from JavaFX Tutorial
+
 package duke;
 
 import java.io.IOException;
@@ -30,3 +33,5 @@ public class Main extends Application {
         }
     }
 }
+
+//@@author

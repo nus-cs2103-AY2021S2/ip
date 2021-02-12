@@ -36,6 +36,7 @@ public class TaskList {
             String[] arr = taskStr.split("\\|");
 
             assert arr.length > 1 : "TaskList tasks not loaded properly or has issue";
+
             for (int i = 0; i < arr.length; i++) {
                 arr[i] = arr[i].trim();
             }
@@ -255,19 +256,26 @@ public class TaskList {
         String result = "Here are the tasks due on the date: \n";
 
         for (Task task: inputList) {
-            if (task.getType() == 'D') {
+            boolean isDeadlineTask = task.getType() == 'D';
+            boolean isEventTask = task.getType() == 'E';
+
+            if (isDeadlineTask) {
 
                 DeadlineTask deadlineTask = (DeadlineTask) task;
 
-                if (deadlineTask.getDeadlineAsLocalDate().equals(toSearch)) {
+                boolean matchDate = deadlineTask.getDeadlineAsLocalDate().equals(toSearch);
+
+                if (matchDate) {
                     result += deadlineTask + "\n";
                 }
 
-            } else if (task.getType() == 'E') {
+            } else if (isEventTask) {
 
                 EventTask eventTask = (EventTask) task;
 
-                if (eventTask.getTimingAsLocalDate().equals(toSearch)) {
+                boolean matchDate = eventTask.getTimingAsLocalDate().equals(toSearch);
+
+                if (matchDate) {
                     result += eventTask + "\n";
                 }
             }
