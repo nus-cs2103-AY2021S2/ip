@@ -11,6 +11,6 @@ public class MissingArgumentException extends DukeException{
 
     @Override
     public String toString() {
-        return "Master, I'm afraid that you're missing the task number.";
+        return "I'm afraid that you're missing the task number, Master.";
     }
 }

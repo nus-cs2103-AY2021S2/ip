@@ -11,6 +11,6 @@ public class ExcessListKeywordException extends DukeException {
 
     @Override
     public String toString() {
-        return "Master, just using the \'list\' command is enough.";
+        return "Using just the \'list\' command is enough, Master.";
     }
 }

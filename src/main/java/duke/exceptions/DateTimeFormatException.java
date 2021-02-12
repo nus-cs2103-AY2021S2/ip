@@ -11,6 +11,6 @@ public class DateTimeFormatException extends DukeException {
 
     @Override
     public String toString() {
-        return "Master, please input the date and time as such: \"YYYY-MM-DD HH:MM\"";
+        return "Master, I need you to input the date and time as such: \"YYYY-MM-DD HH:MM\"";
     }
 }

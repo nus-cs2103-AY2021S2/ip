@@ -10,6 +10,6 @@ public class InvalidCommandException extends DukeException{
 
     @Override
     public String toString() {
-        return "Master, I require you to give me a valid command.";
+        return "I require you to give me a valid command, Master.";
     }
 }

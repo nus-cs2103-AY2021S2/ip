@@ -11,7 +11,7 @@ public class EventException extends DukeException {
 
     @Override
     public String toString() {
-        return "Sorry Master, please key in the deadline task in the following format:\n"
+        return "Sorry Master, please key in the Event task in the following format:\n"
                 + "\'Event task name /at location date(in YYYY-MM-DD HH:MM format)\'.";
 
     }

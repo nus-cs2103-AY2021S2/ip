@@ -11,6 +11,6 @@ public class IncompleteCommandException extends DukeException {
 
     @Override
     public String toString() {
-        return "Master, I'm afraid you are not specific enough.";
+        return "I'm afraid you are not specific enough, Master.";
     }
 }
