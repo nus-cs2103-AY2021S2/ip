@@ -1,12 +1,12 @@
 package project.command;
 
+import java.util.Arrays;
+
 import project.common.PrintedText;
 import project.io.Parser;
 import project.io.Ui;
 import project.storage.Storage;
 import project.task.TaskList;
-
-import java.util.Arrays;
 
 public class DoneCommand extends Command {
     public DoneCommand(String userInput) {

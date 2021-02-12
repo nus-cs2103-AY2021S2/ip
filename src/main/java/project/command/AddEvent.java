@@ -1,7 +1,6 @@
 package project.command;
 
 import java.time.LocalDateTime;
-
 import java.util.Arrays;
 
 import project.common.PrintedText;
