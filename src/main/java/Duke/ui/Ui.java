@@ -1,14 +1,11 @@
 package duke.ui;
-
 import java.util.Scanner;
-
+import duke.common.Command;
 import duke.common.Response;
 import duke.exception.EmptyDescription;
 import duke.exception.InvalidTypeOfTask;
 import duke.parser.Parser;
 import duke.task.TaskList;
-
-
 
 public class Ui {
     private Boolean shouldExit = false;
@@ -20,45 +17,44 @@ public class Ui {
     /**
      * Reads command user input.
      *
-     * @param taskList1
+     * @param taskList
      * @param s
      * @return TaskList
      * @throws InvalidTypeOfTask
      * @throws EmptyDescription
      */
-    public TaskList readCommand(TaskList taskList1, Scanner s) throws InvalidTypeOfTask, EmptyDescription {
+    public TaskList readCommand(TaskList taskList, Scanner s) throws InvalidTypeOfTask, EmptyDescription {
         String input = s.nextLine();
         Parser p = new Parser();
         p = p.parse(input);
-        String typeofTask = p.getTypeOfTask();
-        TaskList taskList = taskList1;
+        Command command = p.getCommand();
+        TaskList newTaskList = taskList;
 
-        switch (typeofTask) {
-        case "bye":
+        switch (command) {
+        case BYE:
             shouldExit = true;
             break;
-        case "list":
+        case LIST:
             taskList.list();
             break;
-        case "find":
-            ////////////////
+        case FIND:
             taskList.find(p);
             break;
-        case "done":
+        case DONE:
             taskList.markAsDone(p);
             break;
-        case "delete":
+        case DELETE:
             taskList.delete(p);
             break;
-        case "todo":
-        case "deadline":
-        case "event":
+        case TODO:
+        case DEADLINE:
+        case EVENT:
             taskList.add(p);
             break;
         default:
             throw new InvalidTypeOfTask();
         }
-        return taskList;
+        return newTaskList;
     }
 
 

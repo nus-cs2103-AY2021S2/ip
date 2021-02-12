@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 import java.util.Scanner;
-
 import duke.exception.EmptyDescription;
 import duke.exception.InvalidTypeOfTask;
 import duke.storage.Storage;
@@ -19,6 +18,7 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
+    private Boolean shouldExit = false;
 
     /**
      * Initialise Duke chatbot.
@@ -26,11 +26,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage();
-        try {
-            taskList = storage.load();
-        } catch (IOException e) {
-            System.out.println("file not found");
-        }
+        taskList = storage.load();
     }
 
     /**
@@ -38,23 +34,20 @@ public class Duke {
      */
     public void execute() {
         ui.greet();
-        Boolean shouldExit = false;
         Scanner s = new Scanner(System.in);
 
         while (!shouldExit && s.hasNextLine()) {
             try {
-                taskList = storage.load();
                 taskList = ui.readCommand(taskList, s);
-                shouldExit = ui.getExit();
                 storage.save(taskList.getTasks());
+                shouldExit = ui.getExit();
             } catch (EmptyDescription e) {
                 ui.enclose(e.toString());
             } catch (InvalidTypeOfTask e) {
                 ui.enclose(e.toString());
-            } catch (IOException e) {
-                System.out.println("exception");
             }
         }
+        assert shouldExit == true : "shouldExit boolean still false";
         ui.exit();
     }
 
