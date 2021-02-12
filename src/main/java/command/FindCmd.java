@@ -10,7 +10,7 @@ public class FindCmd extends Command {
     }
 
     @Override
-    public void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         String[] cmdArr = cmd.trim().split(" ");
         //System.out.println(line);
         ui.findMessage();
@@ -24,6 +24,7 @@ public class FindCmd extends Command {
             //System.out.println(line);
         }
         ui.customLine();
+        return null;
     }
 
     @Override

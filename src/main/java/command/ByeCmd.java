@@ -23,10 +23,11 @@ public class ByeCmd extends Command {
      * @param ui a Ui object.
      * @param storage a storage object.
      * @throws DuckieException if user enters commands besides accepted ones.
+     * @return
      */
     @Override
-    public void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        return;
+    public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
+        return null;
     }
 
     /**

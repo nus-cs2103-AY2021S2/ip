@@ -24,9 +24,10 @@ public class DoneCmd extends Command {
      * @param ui a Ui object.
      * @param storage a storage object.
      * @throws DuckieException if user enters commands besides accepted ones.
+     * @return
      */
     @Override
-    public void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         String[] cmdArr = cmd.trim().split(" ");
         //System.out.println(line);
         ui.customLine();
@@ -38,6 +39,7 @@ public class DoneCmd extends Command {
         //System.out.println(line);
         ui.customLine();
 
+        return null;
     }
 
     /**

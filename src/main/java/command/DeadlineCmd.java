@@ -26,9 +26,10 @@ public class DeadlineCmd extends Command {
      * @param ui a Ui object.
      * @param storage a storage object.
      * @throws DuckieException if user enters commands besides accepted ones.
+     * @return
      */
     @Override
-    public void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
+    public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         //String[] cmdArr = cmd.trim().split(" ");
         if (!cmd.contains("/by")) {
             throw new DuckieException("oops! please specify deadline using '/by'");
@@ -60,6 +61,7 @@ public class DeadlineCmd extends Command {
         }
         //ui.customLine();
        // System.out.println(line);
+        return inputDate;
     }
 
     /**

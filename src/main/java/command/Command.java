@@ -16,8 +16,9 @@ public abstract class Command {
      * @param ui a Ui object.
      * @param storage a storage object.
      * @throws DuckieException if user enters commands besides accepted ones.
+     * @return
      */
-    public abstract void execute(TaskList lst, Ui ui, Storage storage) throws DuckieException;
+    public abstract String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException;
 
     /**
      * Method to determine whether to exit program.

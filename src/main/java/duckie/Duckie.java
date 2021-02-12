@@ -20,6 +20,17 @@ public class Duckie {
     private TaskList lst;
     private Ui ui;
 
+    public Duckie() throws IOException {
+        ui = new Ui();
+        storage = new Storage("duckie.txt");
+        try {
+            lst = new TaskList(storage.loadTasks());
+        } catch (IOException e) {
+            //ui.showLoadingError();
+            lst = new TaskList();
+        }
+    }
+
     /**
      * Constructor method.
      * @param filePath to the saved file
@@ -36,16 +47,20 @@ public class Duckie {
         }
     }
 
-    public Duckie() throws IOException {
-        ui = new Ui();
-        storage = new Storage("duckie.txt");
+    public String getResponse(String input) {
         try {
-            lst = new TaskList(storage.loadTasks());
-        } catch (IOException e) {
-            //ui.showLoadingError();
-            lst = new TaskList();
+            Command cmd = null;
+            try {
+                cmd = Parser.parse(input);
+            } catch (DuckieException e) {
+                e.printStackTrace();
+            }
+            return cmd.execute(lst, ui, storage);
+        } catch (DuckieException e) {
+            return e.getMessage();
         }
     }
+
 
     /**
      * Run method to run Duckie.
