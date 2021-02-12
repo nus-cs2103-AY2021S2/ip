@@ -9,6 +9,10 @@ public abstract class Command {
         this.tasks = tasks;
     }
 
+    public Command() {
+
+    }
+
     /**
      * Returns a string representation of the Task after the execution of a process.
      * The process is determined by the user input.
