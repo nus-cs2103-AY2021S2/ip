@@ -53,7 +53,7 @@ public class Event extends Task {
             LocalDate date = LocalDate.parse(input);
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (DateTimeException e) {
-            return "Error: " + e;
+            return input;
         }
     }
 

@@ -130,9 +130,10 @@ public class LogicHandler {
     public String delete(String input, List<Task> list) {
         try {
             int index = Integer.valueOf(input.split(" ", 2)[1]);
-            list.remove(index - 1);
-            return ("Noted. I've removed the task:\n" + list.get(index - 1)
-                    + "\nNow you have " + (list.size() - 1) + " tasks in the list.");
+            Task taskToBeRemoved = list.get(index - 1);
+            list.remove(taskToBeRemoved);
+            return ("Noted. I've removed the task:\n" + taskToBeRemoved
+                    + "\nNow you have " + (list.size()) + " tasks in the list.");
         } catch (ArrayIndexOutOfBoundsException e) {
             return ("Delete requires a number");
         } catch (IndexOutOfBoundsException e) {
