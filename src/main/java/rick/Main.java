@@ -1,4 +1,4 @@
-package duke;
+package rick;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
     public static final String filePath = "data/duke.txt";
-    private Duke duke = new Duke(filePath);
+    private Rick rick = new Rick(filePath);
 
     @Override
     public void start(Stage stage) {
@@ -22,7 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(rick);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

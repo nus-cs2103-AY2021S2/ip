@@ -1,4 +1,4 @@
-package duke;
+package rick;
 
 /**
  * Commands recognised by the application

@@ -1,10 +1,10 @@
-package duke;
+package rick;
 
 /**
  * Handles interactions with the user using a <code>Ui</code> object.
  */
-public class Gui {
-    public static final String logo= " ____        _\n"
+public class Ui {
+    public static final String logo = " ____        _\n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -14,66 +14,68 @@ public class Gui {
     /**
      * This method is used to output an input error message.
      */
-    public static String getInputErrorString() {
-        return "Rick's sorry, but Rick don't know what that means.";
+    public void showInputError() {
+        showMessage("I'm sorry, but I don't know what that means.");
     }
 
     /**
      * This method is used to output a loading file error message.
      */
-    public static String getLoadingErrorString() {
-        return "Rick failed to load file. Rick failure. Exiting...";
+    public void showLoadingError() {
+        showMessage("Failed to load file. Exiting...");
     }
 
     /**
      * This method is used to output a saving file error message.
      */
-    public static String getSavingErrorString() {
-        return "Rick failed to save file. Rick failure. Exiting...";
+    public void showSavingError() {
+        showMessage("Failed to save file. Exiting...");
     }
 
     /**
      * This method is used to output the welcome message.
      */
-    public static String getWelcomeString() {
-        return "Hello Morty! It's me, Rick!\n" +
+    public void showWelcome() {
+        showMessage(logo + "\nHello! I'm Duke!\n" +
                 "What can I do for you?\n" +
-                "Type \"help\" to view the list of available commands.";
+                "Type \"help\" to view the list of available commands.");
     }
 
     /**
      * This method is used to output the goodbye message.
      */
-    public static String getGoodbyeString() {
-        return "Goodbye Morty. It's been fun while it lasted!";
+    public void showGoodbye() {
+        showMessage("Bye. Hope to see you again soon!");
     }
 
     /**
      * This method is used to output the list of commands available
      * on the application.
      */
-    public static String getHelpMessageString() {
-        return "Here you go Morty! This is the list of available commands:\n" +
+    public void showHelpMessage() {
+        showMessage("List of Available Commands:\n" +
                 "bye -> To exit application\n" +
                 "list -> To list tasks\n" +
                 "done [index] -> To mark task as done \n" +
                 "delete [index] -> To delete task\n" +
                 "todo [description] -> To create todo\n" +
                 "deadline [description] /by [date] -> To create deadline\n" +
-                "event [description] /on [date] -> To create event";
+                "event [description] /on [date] -> To create event");
     }
 
     /**
-     * This method is used to output the list of tasks in the <code>TaskList</code> object.
+     * This method is used to output the list of tasks in
+     * the <code>TaskList</code> object.
+     *
      * @param tasks The <code>TaskList</code> object.
      * @see TaskList
      */
-    public static String getTasksString(TaskList tasks) {
+    public void showTasks(TaskList tasks) {
         StringBuilder message = new StringBuilder();
         if(tasks.isEmpty()) {
-            message.append("List is empty Morty!");
+            message.append("List is empty.");
         } else {
-            message.append("Okay Morty. Here are your list of tasks:\n");
+            message.append("Here are your list of tasks:\n");
             for(int i = 1; i <= tasks.getSize(); i++) {
                 message.append("  " + i + ". " + tasks.getTask(i - 1));
                 if(i < tasks.getSize()) {
@@ -81,20 +83,22 @@ public class Gui {
                 }
             }
         }
-        return message.toString();
+        showMessage(message.toString());
     }
 
     /**
-     * This method is used to output the list of found tasks in the <code>TaskList</code> object.
+     * This method is used to output the list of found tasks
+     * in the <code>TaskList</code> object.
+     *
      * @param tasks The <code>TaskList</code> object.
      * @see TaskList
      */
-    public static String getFoundTasksString(TaskList tasks) {
+    public void showFoundTasks(TaskList tasks) {
         StringBuilder message = new StringBuilder();
         if(tasks.isEmpty()) {
-            message.append("Sorry Morty. Task not found. Rick failure.");
+            message.append("Sorry! Task not found.");
         } else {
-            message.append("Okay Morty. Here are the matching tasks in your list:\n");
+            message.append("Here are the matching tasks in your list:\n");
             for(int i = 1; i <= tasks.getSize(); i++) {
                 message.append("  " + i + ". " + tasks.getTask(i - 1));
                 if(i < tasks.getSize()) {
@@ -102,23 +106,25 @@ public class Gui {
                 }
             }
         }
-        return message.toString();
+        showMessage(message.toString());
     }
 
     /**
      * This method is used to output the message provided in a standardized
      * styling with a divider before and after the message.
+     *
      * @param message The message to display within the dividers.
      */
-    public static String getMessageString(String message) {
-        return message;
+    public void showMessage(String message) {
+        System.out.println(divider + message + "\n" + divider);
     }
 
     /**
      * This method is used to output the generic error message.
+     * 
      * @param errorMessage The error message to display.
      */
-    public static String getErrorMessageString(String errorMessage) {
-        return "Error, Morty! Error! " + errorMessage;
+    public void showErrorMessage(String errorMessage) {
+        showMessage("Error! " + errorMessage);
     }
 }

@@ -1,4 +1,4 @@
-package duke;
+package rick;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A child of <code>Task</code> object, corresponds to an event task with
  * description supplied by the user. eg., <code>alan's birthday /at 6 Aug 6-8pm</code>
+ *
  * @see Task
  */
 public class Event extends Task {

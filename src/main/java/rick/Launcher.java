@@ -1,4 +1,4 @@
-package duke;
+package rick;
 
 import javafx.application.Application;
 

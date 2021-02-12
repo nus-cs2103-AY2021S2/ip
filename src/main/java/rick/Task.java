@@ -1,8 +1,8 @@
-package duke;
+package rick;
 
 /**
- * Represents a task. A <code>Task</code> object corresponds to a task
- * description supplied by the user. eg., <code>running</code>
+ * Represents a task. A <code>Task</code> object corresponds
+ * to a task description supplied by the user. eg., <code>running</code>
  */
 public class Task {
     private String description;
@@ -16,6 +16,7 @@ public class Task {
     /**
      * This method is used to return the status icon of the task.
      * If the task is done, ✓ is returned. Else, ✘ is returned.
+     *
      * @return String representation for the status icon.
      */
     public String getStatusIcon() {
@@ -23,7 +24,9 @@ public class Task {
     }
 
     /**
-     * This method is used to return the <code>Task</code> object after setting isDone to true.
+     * This method is used to return the <code>Task</code> object
+     * after setting isDone to true.
+     *
      * @return Current instance of <code>Task</code> object.
      */
     public Task markAsDone() {
@@ -32,8 +35,11 @@ public class Task {
     }
 
     /**
-     * This method is used to return the description of the <code>Task</code>.
-     * @return Description of the current instance of <code>Task</code> object.
+     * This method is used to return the description of
+     * the <code>Task</code>.
+     *
+     * @return Description of the current instance of
+     * <code>Task</code> object.
      */
     public String getDescription() {
         return description;

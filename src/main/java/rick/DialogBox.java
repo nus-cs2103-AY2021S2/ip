@@ -1,4 +1,4 @@
-package duke;
+package rick;
 
 import java.io.IOException;
 
