@@ -81,6 +81,7 @@ public class TaskList {
     public void delete(Parser p) {
         int i = Integer.parseInt(p.getDescription()) - 1;
         Task task = tasks.get(i);
+        assert task != null : "task should not be empty";
         tasks.remove(i);
 
         String instructions = Response.DELETE.toString() + task + "\n" + this.status();

@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 import java.util.Scanner;
-
 import duke.exception.EmptyDescription;
 import duke.exception.InvalidTypeOfTask;
 import duke.storage.Storage;
@@ -43,18 +42,17 @@ public class Duke {
 
         while (!shouldExit && s.hasNextLine()) {
             try {
-                taskList = storage.load();
                 taskList = ui.readCommand(taskList, s);
-                shouldExit = ui.getExit();
                 storage.save(taskList.getTasks());
+                shouldExit = ui.getExit();
+
             } catch (EmptyDescription e) {
                 ui.enclose(e.toString());
             } catch (InvalidTypeOfTask e) {
                 ui.enclose(e.toString());
-            } catch (IOException e) {
-                System.out.println("exception");
             }
         }
+        assert shouldExit == true : "shouldExit boolean still false";
         ui.exit();
     }
 

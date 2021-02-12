@@ -33,7 +33,7 @@ public class ListParser {
      * @param description
      * @param time
      */
-    ListParser(String typeOfTask, Boolean isDone, String description, LocalDateTime time) {
+    public ListParser(String typeOfTask, Boolean isDone, String description, LocalDateTime time) {
         this.typeOfTask = typeOfTask;
         this.isDone = isDone;
         this.description = description;
