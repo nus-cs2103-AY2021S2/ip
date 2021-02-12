@@ -10,7 +10,7 @@ import duke.ui.Ui;
  */
 public abstract class AddCommand implements Command {
     private String taskName;
-    public AddCommand(String taskName) {
+    protected AddCommand(String taskName) {
         this.taskName = taskName;
     }
 

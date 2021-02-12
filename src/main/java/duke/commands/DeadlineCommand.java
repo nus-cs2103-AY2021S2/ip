@@ -2,6 +2,8 @@ package duke.commands;
 
 import java.time.LocalDateTime;
 
+import duke.DukeException;
+import duke.ParserUtils;
 import duke.models.Deadline;
 import duke.models.Task;
 
@@ -17,7 +19,7 @@ public class DeadlineCommand extends AddCommand {
      * @param taskName name of the deadline
      * @param deadline deadline of the specified task
      */
-    public DeadlineCommand(String taskName, LocalDateTime deadline) {
+    protected DeadlineCommand(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.deadline = deadline;
     }
@@ -25,5 +27,23 @@ public class DeadlineCommand extends AddCommand {
     @Override
     public Task getTask() {
         return new Deadline(getTaskName(), deadline);
+    }
+
+    /**
+     * Creates a new instance of Deadline Command
+     * @param argString string with argument
+     * @return instance of Deadline Command
+     * @throws DukeException
+     */
+    public static DeadlineCommand buildInstance(String argString) throws DukeException {
+        String[] cmdArgs = ParserUtils.getCommandArgs(argString, "The description of a todo cannot be empty.");
+        String[] deadlineArgs = cmdArgs[1].split(" /by ", 2);
+        if (deadlineArgs.length < 2) {
+            throw new DukeException("The deadline needs to have a date specified with \"/by\".");
+        }
+        String taskName = deadlineArgs[0];
+        LocalDateTime deadline = ParserUtils.parseDateTime(deadlineArgs[1],
+                "The deadline needs to be specified in a valid date format.");
+        return new DeadlineCommand(taskName, deadline);
     }
 }

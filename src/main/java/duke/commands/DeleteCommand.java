@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.DukeException;
+import duke.ParserUtils;
 import duke.Storage;
 import duke.TaskList;
 import duke.models.Task;
@@ -12,7 +13,8 @@ import duke.ui.Ui;
  */
 public class DeleteCommand implements Command {
     private int index;
-    public DeleteCommand(int index) {
+
+    protected DeleteCommand(int index) {
         this.index = index;
     }
 
@@ -28,5 +30,18 @@ public class DeleteCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+
+    /**
+     * Creates a new instance of Delete Command
+     * @param argString string with argument
+     * @return instance of Delete Command
+     * @throws DukeException
+     */
+    public static DeleteCommand buildInstance(String argString) throws DukeException {
+        String[] cmdArgs = ParserUtils.getCommandArgs(argString, "I'm sorry, but delete needs the index of a Task.");
+        int index = ParserUtils.parseInt(cmdArgs[1], "The index of the task needs to be an integer.");
+        return new DeleteCommand(index);
     }
 }

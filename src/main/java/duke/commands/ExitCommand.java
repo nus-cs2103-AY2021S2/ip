@@ -9,6 +9,10 @@ import duke.ui.Ui;
  * Format of command: "bye".
  */
 public class ExitCommand implements Command {
+    protected ExitCommand() {
+
+    }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printIndentOutput("Bye. Hope to see you again soon!");
@@ -17,5 +21,9 @@ public class ExitCommand implements Command {
     @Override
     public boolean isExit() {
         return true;
+    }
+
+    public static ExitCommand buildInstance() {
+        return new ExitCommand();
     }
 }
