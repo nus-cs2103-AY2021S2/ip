@@ -16,7 +16,8 @@ public class Validation {
      * @throws DukeException On invalid input.
      */
     public static void checkValidCommand(String command) throws DukeException {
-        String[] validCommands = new String[]{"todo", "deadline", "event", "list", "bye", "done", "delete", "find"};
+        String[] validCommands = new String[]{"todo", "deadline", "event", "list",
+                "bye", "done", "delete", "find", "tag"};
         List<String> commands = Arrays.asList(validCommands);
 
         int index = command.indexOf(' ');
@@ -30,32 +31,39 @@ public class Validation {
         if (!commands.contains(first.toLowerCase())) {
             throw new DukeException(":( OOPS! I'm sorry, but I don't know what that means!!!");
         } else {
-            String[] secondValidation = new String[] {"todo", "deadline", "event", "done", "delete", "find"};
+            String[] secondValidation = new String[] {"todo", "deadline", "event", "done", "delete", "find", "tag"};
             List<String> secondListOfCommands = Arrays.asList(secondValidation);
             boolean isCommandInSecondList = secondListOfCommands.contains(first.toLowerCase());
 
             if (isCommandInSecondList
                     && (index <= VALID_INDEX_BOUND || command.substring(index).isBlank())) {
-                throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete/find "
+                throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete/find/tag "
                         + "cannot be empty!!");
             }
         }
     }
 
     /**
-     * Checks if the time/date input with Events/Deadlines are valid.
+     * Checks if the tag/deadline/event commands are valid.
      *
      * @param command User's command input.
      * @param findSlash Position of slash in the input.
-     * @throws DukeException On invalid time/date input.
+     * @throws DukeException On invalid input.
      */
-    public static void checkForSchedule(String command, int findSlash) throws DukeException {
+    public static void checkForContentAfterSlash(String command, int findSlash) throws DukeException {
         boolean isSlashAbsent = (findSlash == VALID_INDEX_BOUND);
         boolean isDescriptionNotComplete = command.endsWith("/");
         boolean isDescriptionNotValid = command.substring(findSlash + INDEX_OFFSET).isBlank();
 
+        int index = command.indexOf(' ');
+        String commandType = command.substring(0, index);
+
         if (isSlashAbsent || isDescriptionNotComplete || isDescriptionNotValid) {
-            throw new DukeException(":( OOPS! Please input a valid time/date");
+            if (commandType.equals("tag")) {
+                throw new DukeException(":( OOPS! Please input a valid tag");
+            } else {
+                throw new DukeException(":( OOPS! Please input a valid time/date");
+            }
         }
     }
 

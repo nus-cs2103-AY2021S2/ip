@@ -46,7 +46,7 @@ public class Parser {
      * @return New Deadline created.
      */
     public Deadline createDeadline() throws DukeException {
-        Validation.checkForSchedule(command, findSlash);
+        Validation.checkForContentAfterSlash(command, findSlash);
         String descriptionDeadline = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
         LocalDate date = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
         Deadline newDeadline = new Deadline(descriptionDeadline, date);
@@ -58,7 +58,7 @@ public class Parser {
      * @return New Event created.
      */
     public Event createEvent() throws DukeException {
-        Validation.checkForSchedule(command, findSlash);
+        Validation.checkForContentAfterSlash(command, findSlash);
         String descriptionEvent = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
         String time = command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA);
         Event newEvent = new Event(descriptionEvent, time);
@@ -70,7 +70,11 @@ public class Parser {
      * @return Task needed.
      */
     public Task findTask() throws DukeException {
-        taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
+        if (command.substring(0, index).equals("tag")) {
+            taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET));
+        } else {
+            taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
+        }
         Validation.checkValidRange(tasks.getSize(), taskIdentifier);
         Task task = tasks.find(taskIdentifier - INDEX_OFFSET);
         return task;
@@ -162,8 +166,34 @@ public class Parser {
     }
 
     /**
+     * Extracts the tag from the command.
+     * @return A string representing the tag.
+     */
+    public String extractTag() {
+        return command.substring(findSlash + INDEX_OFFSET);
+    }
+
+    /**
+     * Handles the Tag command.
+     * @return A string with the response to the command.
+     */
+    public String handleTag() {
+        try {
+            Validation.checkForContentAfterSlash(command, findSlash);
+            String tag = extractTag();
+            Task selected = findTask();
+            storage.addTag(selected);
+            selected.setTag(tag);
+            return ui.respondToTag(selected);
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
      * Main method to make sense of the user command and to determine
      * which command it is.
+     *
      * @param command User's command input.
      * @return A string with the response to the command.
      */
@@ -189,6 +219,8 @@ public class Parser {
                     return handleDelete();
                 case "find":
                     return handleFind();
+                case "tag":
+                    return handleTag();
                 default:
                     return null;
                 }

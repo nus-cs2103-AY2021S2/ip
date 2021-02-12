@@ -7,6 +7,8 @@ public class Task {
 
     protected String name;
     protected boolean isDone;
+    protected boolean isThereTag;
+    protected String tag;
 
     /**
      * Creates a new instance of a Task.
@@ -16,6 +18,7 @@ public class Task {
     public Task(String name) {
         this.name = name;
         this.isDone = false;
+        this.isThereTag = false;
     }
 
     public String toString() {
@@ -24,6 +27,19 @@ public class Task {
 
     public void setDone() {
         this.isDone = true;
+    }
+
+    public void setTag(String tag) {
+        this.isThereTag = true;
+        this.tag = tag;
+    }
+
+    public String getTag() {
+        return "#" + this.tag;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
 }
