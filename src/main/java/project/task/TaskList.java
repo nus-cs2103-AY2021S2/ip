@@ -1,5 +1,6 @@
 package project.task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -87,6 +88,19 @@ public class TaskList {
                 .filter(task -> Arrays.stream(search).map(term -> term.trim())
                         .filter(term -> term.length() > 0)
                         .anyMatch(task.getDescription()::contains))
+                .collect(Collectors.toCollection(ArrayList::new));
+        return new TaskList(matches);
+    }
+
+    /**
+     * Returns a {@code TaskList} of the {@code Task}s that are upcoming in the next 7 days.
+     * Outputs the result in chronological order.
+     */
+    public TaskList getUpcomingTasks() {
+        ArrayList<Task> matches = tasks.stream()
+                .filter(task -> task.getIfScheduled()
+                        && task.getOccurrence().isBefore(LocalDateTime.now().plusDays(7)))
+                .sorted()
                 .collect(Collectors.toCollection(ArrayList::new));
         return new TaskList(matches);
     }

@@ -9,6 +9,7 @@ import project.command.ExitCommand;
 import project.command.FindCommand;
 import project.command.HelpCommand;
 import project.command.ListCommand;
+import project.command.RemindCommand;
 import project.common.UserCommands;
 import project.io.Ui;
 import project.storage.Storage;
@@ -49,6 +50,8 @@ public class OlafApp implements UserCommands {
             return new HelpCommand().execute(taskList, ui);
         } else if (command.equals(UserCommands.LIST)) {
             return new ListCommand().execute(taskList, ui);
+        } else if (command.equals(UserCommands.REMIND)) {
+            return new RemindCommand(command).execute(taskList, ui);
         } else if (command.startsWith(UserCommands.FIND)) {
             return new FindCommand(command).execute(taskList, ui);
         } else if (command.startsWith(UserCommands.DONE)) {
