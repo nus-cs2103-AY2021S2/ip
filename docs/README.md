@@ -36,7 +36,7 @@ For this guide, we will assume that the task list is empty and these 4 tasks are
 ## Features
 
 ### GUI Now Available!
-Now comes with a GUI, so you get to see who you are chatting to. Very Stonks!
+Now comes with a GUI, so you get to see who you are chatting with. Very Stonks!
 
 ### Add tasks of different types
 You can add 3 types of tasks:
@@ -45,7 +45,7 @@ You can add 3 types of tasks:
 3. Event tasks (Used to reserve certain timings like a calendar app)
 
 ### Prioritise tasks
-You can prioritise tasks with numbers 1, 2 and 3 in increasing order of priority.
+You can prioritise tasks with numbers 1, 2 and 3 in increasing order of priority. Useful for sorting too!
 
 ### Delete tasks
 If you feel that keeping them on the list is not necessary, Meme Man will delete them for you.
