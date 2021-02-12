@@ -18,7 +18,13 @@ public class TaskList {
         this.list.add(task);
     }
 
-    public Todo addTodo(String task) {
+    /**
+     * Adds Todo into TaskList when it is given a string that is the Todo task attribute
+     * returns the added Todo
+     * @param task
+     * @return Todo that is added into TaskList
+     */
+    protected Todo addTodo(String task) {
         Todo todoToAddInList = createToDo(task);
         if (isDuplicateAbsent(todoToAddInList)) {
             this.list.add(new Todo(task));
@@ -26,14 +32,28 @@ public class TaskList {
         return todoToAddInList;
     }
 
+    /**
+     * Adds Deadline into TaskList when it is given a string that is the Deadline task attribute
+     * returns the added Deadline
+     * @param task of Deadline
+     * @param date of Deadline
+     * @return Deadline that is added into TaskList
+     */
     public Deadline addDeadline(String task, LocalDateTime date) {
         Deadline deadlineToAddInList = createDeadline(task, date);
-        if(isDuplicateAbsent(deadlineToAddInList)) {
+        if (isDuplicateAbsent(deadlineToAddInList)) {
             this.list.add(new Deadline(task, date));
         }
         return deadlineToAddInList;
     }
 
+    /**
+     * Adds Event into TaskList when it is given a string that is the Event task attribute
+     * returns the added Event
+     * @param task of Event
+     * @param date of Event
+     * @return Event that is added into TaskList
+     */
     public Event addEvent(String task, LocalDateTime date) {
         Event eventToAddInList = createEvent(task, date);
         if (isDuplicateAbsent(eventToAddInList)) {
@@ -42,15 +62,18 @@ public class TaskList {
         return eventToAddInList;
     }
 
+    /**
+     * Check if TaskList has a duplicate of Task y
+     * @param y task to check
+     * @return boolean
+     */
     public boolean isDuplicateAbsent (Task y) {
         AtomicBoolean isDuplicateAbsent = new AtomicBoolean(true);
-        this.forEach(x ->
-                {
-                    if(x.getTask().equals(y.getTask())) {
-                        isDuplicateAbsent.set(false);
-                    }
-                }
-        );
+        this.forEach(x -> {
+            if (x.getTask().equals(y.getTask())) {
+                isDuplicateAbsent.set(false);
+            }
+        });
         return isDuplicateAbsent.get();
     }
 

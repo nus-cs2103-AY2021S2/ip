@@ -35,7 +35,7 @@ public class Storage {
                 } else if (current.contains("event")) {
                     tasklist.add(Event.readTaskFromStorage(current));
                 } else {
-                    if (s.hasNext()) { System.out.println("reached");
+                    if (s.hasNext()) {
                         current = s.nextLine();
                     } else {
                         throw new FileNotFoundException("History saved corrupted");
