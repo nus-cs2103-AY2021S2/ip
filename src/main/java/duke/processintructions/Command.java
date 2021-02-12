@@ -8,6 +8,7 @@ public enum Command {
     LIST,
     DONE,
     FIND,
+    EXPENSE,
     BYE,
     ERROR;
 }

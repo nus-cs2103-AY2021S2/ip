@@ -43,6 +43,6 @@ public class Expense extends Task {
      */
     @Override
     public String toString() {
-        return "[Ex]" + super.toString() + " amount: " + amt;
+        return "[Ex]" + super.toString() + " -> amount spent: " + amt;
     }
 }
