@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -13,6 +14,7 @@ import java.io.FileWriter;
 
 import java.time.LocalDate;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -96,34 +98,44 @@ class FileReader {
         return new ArrayList<>();
     }
 
-    private Task toTask(String input) {
+    private Task toTask(String input) throws DukeException {
         Scanner sc = new Scanner(input);
         String command = sc.next();
         String[] args = sc.nextLine().split("[|]");
+        System.out.println(Arrays.toString(args));
 
         String description = args[0].trim();
+        String[] priorityAndDate = args[1].trim().split("|");
+        String priority = priorityAndDate[0].trim();
         String preposition = null;
         LocalDate date = null;
 
         if (args.length == 2) {
-            String second = args[1].trim();
+            String second = priorityAndDate[1].trim();
             String[] prepositionAndDate = second.split("[\\s]");
             preposition = prepositionAndDate[0];
             date = LocalDate.parse(prepositionAndDate[1]);
         }
-        return getTask(command, description, preposition, date);
+        return getTask(command, description, preposition, date, priority);
     }
     
-    private Task getTask(String command, String description, String preposition, LocalDate date) {
+    private Task getTask(String command, String description, String preposition
+            , LocalDate date, String priority) throws DukeException {
+        Task t = null;
         switch (command) {
         case "todo":
-            return new Todo(description);
+            t = new Todo(description);
+            break;
         case "event":
-            return new Event(description, preposition, date);
+            t = new Event(description, preposition, date);
+            break;
         case "deadline":
-            return new Deadline(description, preposition, date);
+            t = new Deadline(description, preposition, date);
+            break;
         default:
-            return null;
+            return t;
         }
+        t.setPriority(priority);
+        return t;
     }
 }

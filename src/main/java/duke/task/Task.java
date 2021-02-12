@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 /**
  * Task is a parent class of three subclasses: Todo, Event and Deadline.
  * Task has a description of the task and a boolean
@@ -8,14 +10,29 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.LOW;
     }
 
     public boolean getIsDone() {
         return isDone;
+    }
+
+    String getPriority() {
+        switch (priority) {
+        case HIGH:
+            return "high";
+        case MEDIUM:
+            return "medium";
+        case LOW:
+            return "low";
+        default:
+            return "error";
+        }
     }
 
     String getStatusIcon() {
@@ -27,6 +44,10 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public void setPriority(String prior) throws DukeException {
+        this.priority = getPriority(prior);
     }
 
     /**
@@ -51,9 +72,34 @@ public class Task {
         return description.contains(keyword);
     }
 
+    private Priority getPriority(String p) throws DukeException {
+        switch (p) {
+        case "high":
+            return Priority.HIGH;
+        case "medium":
+            return Priority.MEDIUM;
+        case "low":
+            return Priority.LOW;
+        default:
+            throw new DukeException("Priority can only be high, medium or low.");
+        }
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
 
+    public int compareValue() {
+        switch (priority) {
+        case HIGH:
+            return 1;
+        case MEDIUM:
+            return 2;
+        case LOW:
+            return 3;
+        default:
+            return 0;
+        }
+    }
 }
