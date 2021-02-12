@@ -16,6 +16,7 @@ You can add tasks to Duke to keep track of the tasks that you have to complete.
 
 #### Command Syntax:
 To add a todo task, type the command in the following format:
+<br>
 todo *task_description*
 
 To add a deadline task, type the command in the following format:
