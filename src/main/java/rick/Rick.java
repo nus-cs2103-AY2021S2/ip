@@ -88,7 +88,7 @@ public class Rick {
                     response += Gui.getHelpMessageString();
                     break;
                 default:
-                    response += Gui.getMessageString("sorry");
+                    assert false : command;
                     break;
             }
         } catch(RickException error) {
