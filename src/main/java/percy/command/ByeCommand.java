@@ -4,8 +4,14 @@ import percy.storage.Storage;
 import percy.task.TaskList;
 import percy.ui.Ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ByeCommand extends Command {
     public static final String COMMAND = "bye";
+    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
+            "bye: Closes the chat bot.",
+            "Example: bye"));
 
     /**
      * Constructs a ByeCommand with isExit as true.

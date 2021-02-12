@@ -23,10 +23,8 @@ public class Percy {
 
     /**
      * Runs the chat bot which accepts commands and replies accordingly.
-     *
      * @throws IOException
      */
-
     private String run(String command) throws IOException, PercyException {
         Parser parser = new Parser(command);
         Command cmd = parser.getCommand();

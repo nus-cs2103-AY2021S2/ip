@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import percy.exception.ParsingException;
 import percy.storage.Storage;
 import percy.task.Deadline;
 import percy.task.Task;
@@ -26,11 +25,9 @@ public class DeadlineCommand extends Command {
             "deadline: Adds a task that needs to be done before a specific date and time.",
             "Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) TIME(HHmm)",
             "Example: deadline return book /by 2021-01-27"));
-
     private final String deadlineDescription;
     private final LocalDate date;
     private final LocalTime time;
-
     /**
      * Constructor for Deadline Command.
      * @param deadlineDescription the description of the deadline.

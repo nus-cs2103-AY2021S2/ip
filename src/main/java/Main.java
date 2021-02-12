@@ -1,11 +1,9 @@
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -27,6 +25,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setPercy(percy);
             stage.show();
             stage.setTitle("Percy");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/percy.png")));
             stage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();

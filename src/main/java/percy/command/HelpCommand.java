@@ -43,6 +43,8 @@ public class HelpCommand extends Command {
                 return Ui.makeMsg(DoneCommand.USAGE_GUIDE);
             case ListCommand.COMMAND:
                 return Ui.makeMsg(ListCommand.USAGE_GUIDE);
+            case ByeCommand.COMMAND:
+                return Ui.makeMsg(ByeCommand.USAGE_GUIDE);
             default:
                 return Ui.makeHelpMsg();
             }

@@ -125,7 +125,7 @@ public class Ui {
      * Make output message for added any task.
      * @param t task added.
      * @param list the updated list after adding task.
-     * @return message for adding task
+     * @return message for adding task.
      */
     public static String makeAddMsg(Task t, TaskList list) {
         return "Got it. I've added this task:\n"
@@ -188,7 +188,8 @@ public class Ui {
                 + INDENT + "4. list: e.g. \"list\"\n"
                 + INDENT + "5. delete: e.g. \"delete 1\"\n"
                 + INDENT + "6. done: e.g. \"done 1\"\n"
-                + INDENT + "7. find: e.g. \"find pet\"\n\n"
+                + INDENT + "7. find: e.g. \"find pet\"\n"
+                + INDENT + "8. bye: e.g. \"bye\"\n\n"
                 + "For more command-specific help, type \"help <COMMAND>\"";
     }
 }
