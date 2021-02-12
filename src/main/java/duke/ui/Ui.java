@@ -13,7 +13,7 @@ public class Ui {
      * @return Duke greeting message.
      */
     public String getGreeting() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return "Hello! I'm Dook.\nWhat can I do for you?";
     }
 
     /**
