@@ -11,22 +11,25 @@ public class Deadline extends duke.Task {
     private LocalDate dateOfDeadline;
 
     /**
-     * Constructor.
+     * Constructor. Note that it parses the first occurrence of the string "yyyy-M-d" that occurs
+     * into a LocalDate Object and ignores any other dates inside.
      *
      * @param description description of the task
-     * @param by the string containing a date of the deadline.
+     * @param by the string containing a date of the deadline in the format "yyyy-M-d"
      */
+    private static final String DEADLINE_FORMAT_ERROR_MESSAGE =
+            "Sorry Unable to Parse date for Deadline. "
+            + "Did you put your date in yyyy-mm-dd format?";
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeParseException {
         super(description, "D");
-        String dateString = Parser.extractDate(by);
+        String dateString = DateParser.extractDate(by);
         if (!dateString.equals("")) {
-            this.dateOfDeadline = Parser.parseDate(dateString);
-            this.by = by;
+            this.dateOfDeadline = DateParser.parseDate(dateString);
         } else {
-            throw new IllegalArgumentException("Sorry Unable to Parse date for Deadline. "
-                    + "Did you try to do it in yyyy-mm-dd format?");
+            throw new DukeParseException(DEADLINE_FORMAT_ERROR_MESSAGE);
         }
+        this.by = by;
     }
 
     /**
@@ -37,7 +40,7 @@ public class Deadline extends duke.Task {
 
     @Override
     public String toString() {
-        String dateString = Parser.extractDate(by);
+        String dateString = DateParser.extractDate(by);
         String convertedDateString = dateOfDeadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String modifiedBy = by.replaceAll(dateString, convertedDateString);
         return super.toString() + " (by: " + modifiedBy + ")";

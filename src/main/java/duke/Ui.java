@@ -8,10 +8,6 @@ import java.util.Scanner;
  */
 public class Ui {
 
-
-    private static final String DIVIDER =
-            "\n_____________________________________________________\n";
-
     private Scanner scForCommandLine = new Scanner(System.in);
 
     private String messageToDisplay = "";

@@ -8,6 +8,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
+    private static final String EVENT_FORMAT_ERROR_MESSAGE =
+            "Sorry Unable to Parse Date for Event. "
+            + "Did you put in yyyy-mm-dd format?";
+
     protected String at;
     protected LocalDate dateOfEvent;
 
@@ -17,22 +21,21 @@ public class Event extends Task {
      * @param at
      */
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeParseException {
         super(description, "E");
 
-        String dateString = Parser.extractDate(at);
+        String dateString = DateParser.extractDate(at);
         if (!dateString.equals("")) {
-            this.dateOfEvent = Parser.parseDate(dateString);
+            this.dateOfEvent = DateParser.parseDate(dateString);
             this.at = at;
         } else {
-            throw new IllegalArgumentException("Sorry Unable to Parse Date for Event. "
-                    + "Did you put in yyyy-mm-dd format?");
+            throw new DukeParseException(EVENT_FORMAT_ERROR_MESSAGE);
         }
     }
 
     @Override
     public String toString() {
-        String dateString = Parser.extractDate(at);
+        String dateString = DateParser.extractDate(at);
         String convertedDateString = dateOfEvent.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String modifiedAt = at.replaceAll(dateString, convertedDateString);
         return super.toString() + " (at: " + modifiedAt + ")";
