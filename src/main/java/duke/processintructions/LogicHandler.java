@@ -4,6 +4,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+import duke.tasks.Expense;
 
 import java.util.List;
 
@@ -168,6 +169,20 @@ public class LogicHandler {
             return temp;
         } catch (ArrayIndexOutOfBoundsException e) {
             return ("Oops, your find requires a string description to find a match.");
+        }
+    }
+
+    public String expense(String input, List<Task> list) {
+        try {
+            String descriptionAndAmount = input.split(" ", 2)[1];
+            String description = descriptionAndAmount.split(" /amt ")[0];
+            String amount = descriptionAndAmount.split(" /amt ")[1];
+            Expense expense = new Expense(description, amount);
+            list.add(expense);
+            return "added: " + expense + "\n"
+                    + "Now you have " + list.size() + " tasks in the list.";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Oops, your Expense requires both a description an amount";
         }
     }
 }

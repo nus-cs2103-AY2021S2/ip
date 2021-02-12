@@ -4,6 +4,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+import duke.tasks.Expense;
 
 import java.util.Arrays;
 import java.util.List;
@@ -56,6 +57,8 @@ public class TaskList {
             case "E":
                 addEventToList(taskDescription, taskIsDone, getTaskDate(taskValues));
                 break;
+            case "Ex":
+                addExpenseToList(taskDescription, taskIsDone, getExpenseAmount(taskValues));
             default:
                 printErrorMessage();
             }
@@ -81,11 +84,20 @@ public class TaskList {
         list.add(t);
     }
 
+    private void addExpenseToList(String taskDescription, boolean taskIsDone, String amount) {
+        Expense ex = new Expense(taskDescription, taskIsDone, amount);
+        list.add(ex);
+    }
+
     private String[] separateTaskIntoIndividualValues(String taskInStringForm) {
         return taskInStringForm.split(STRING_SEPARATOR);
     }
 
     private String getTaskDate(String[] taskValues) {
+        return taskValues[3];
+    }
+
+    private String getExpenseAmount(String[] taskValues) {
         return taskValues[3];
     }
 

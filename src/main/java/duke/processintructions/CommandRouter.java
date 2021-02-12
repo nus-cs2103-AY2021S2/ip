@@ -52,6 +52,8 @@ public class CommandRouter {
         case FIND:
             return logic.find(input, tasks.getList());
         // break intentionally omitted
+        case EXPENSE:
+            return logic.expense(input, tasks.getList());
         case ERROR:
             return ERROR_WITH_USER_INPUT;
         // break intentionally omitted
