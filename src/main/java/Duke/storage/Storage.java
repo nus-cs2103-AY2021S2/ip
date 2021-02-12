@@ -34,7 +34,7 @@ public class Storage {
             }
             filePath = file;
         } catch (IOException e) {
-            System.out.println("directory/file is already created.");
+            System.out.println("directory or file is already created.");
         }
     }
 
@@ -46,7 +46,6 @@ public class Storage {
     public void save(ArrayList<Task> taskList) {
         try {
             String data = "";
-
             for (int i = 0; i < taskList.size(); i++) {
                 data = data + taskList.get(i).encode() + "\n";
             }
@@ -54,7 +53,6 @@ public class Storage {
 
         } catch (IOException e) {
             System.out.println("save error");
-
         }
     }
 
@@ -64,15 +62,19 @@ public class Storage {
      * @return TaskList
      * @throws IOException
      */
-    public TaskList load() throws IOException {
+    public TaskList load() {
         TaskList taskList = new TaskList();
-        retrieveFilePath();
-        List<String> s = Files.readAllLines(filePath);
+        try {
+            retrieveFilePath();
+            List<String> s = Files.readAllLines(filePath);
 
-        for (int i = 0; i < s.size(); i++) {
-            ListParser p = new ListParser();
-            p = p.parse(s.get(i));
-            taskList.populate(p);
+            for (int i = 0; i < s.size(); i++) {
+                ListParser p = new ListParser();
+                p = p.parse(s.get(i));
+                taskList.populate(p);
+            }
+        } catch (IOException e) {
+            System.out.println("Cannot load file");
         }
         return taskList;
     }

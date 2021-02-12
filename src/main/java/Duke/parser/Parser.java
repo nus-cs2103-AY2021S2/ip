@@ -2,6 +2,7 @@ package duke.parser;
 
 import java.time.LocalDateTime;
 
+import duke.common.Command;
 /**
  * Parses user input into typeOfTask, description, time.
  *
@@ -38,7 +39,6 @@ public class Parser {
         this.time = time;
     }
 
-
     /**
      * Returns a Parser that represent the parsed user input.
      * Parses user input into typeOfTask, description, time.
@@ -47,29 +47,26 @@ public class Parser {
      * @return Parser
      */
     public Parser parse(String input) {
-        String[] inputSplit = input.split(" ", 2);
+        String[] inputSplit = input.split("/");
         typeOfTask = inputSplit[0];
-        if (inputSplit.length >= 2) {
-            if (inputSplit[1].equals("")) {
-            } else {
-                TimeParser timeParser = new TimeParser();
-                if (inputSplit[1].split("/by").length == 2) {
-                    String[] descSplit = inputSplit[1].split("/by ");
-                    description = descSplit[0];
-                    time = timeParser.parse(descSplit[1]);
-
-                } else if (inputSplit[1].split("/at").length == 2) {
-                    String[] descSplit = inputSplit[1].split("/at ");
-                    description = descSplit[0];
-                    time = timeParser.parse(descSplit[1]);
-                } else {
-                    description = inputSplit[1];
-                }
-            }
+        if (inputSplit.length == 2) {
+            description = inputSplit[1];
+        } else if (inputSplit.length == 3) {
+            description = inputSplit[1];
+            TimeParser timeParser = new TimeParser();
+            time = timeParser.parse(inputSplit[2]);
+        } else {
         }
         return new Parser(typeOfTask, description, time);
     }
-
+    /**
+     * Convert typeOfTask string into command.
+     *
+     * @return Command
+     */
+    public Command getCommand() {
+        return Command.valueOf(typeOfTask.toUpperCase());
+    }
     /**
      * Returns typeOfTask attribute.
      *
@@ -78,7 +75,6 @@ public class Parser {
     public String getTypeOfTask() {
         return typeOfTask;
     }
-
     /**
      * Returns description attribute.
      *

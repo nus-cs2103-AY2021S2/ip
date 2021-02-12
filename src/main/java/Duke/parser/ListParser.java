@@ -65,7 +65,7 @@ public class ListParser {
         } else {
             time = null;
         }
-        // T|DONE|MSG|TIME
+
         return new ListParser(typeOfTask, isDone, description, time);
     }
 

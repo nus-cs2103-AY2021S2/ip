@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import duke.common.Response;
 
-
-
 public class SearchList {
     private ArrayList<Task> tasks;
 

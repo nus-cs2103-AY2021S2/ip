@@ -11,15 +11,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class TimeParser {
     private LocalDateTime time;
-
-    TimeParser() {
-
-    }
-
-    TimeParser(LocalDateTime time) {
-        this.time = time;
-    }
-
     /**
      * Returns LocalDateTime from String input.
      *
