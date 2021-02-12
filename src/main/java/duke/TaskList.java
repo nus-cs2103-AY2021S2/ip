@@ -75,7 +75,13 @@ public class TaskList {
     }
 
     public boolean checkTaskPresent(Task task) {
-        return this.userList.contains(task);
+        boolean isPresent = false;
+        for (Task userTask : userList) {
+            if (userTask.toString().equals(task.toString())) {
+                isPresent = true;
+            }
+        }
+        return isPresent;
     }
 
 }

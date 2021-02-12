@@ -42,15 +42,12 @@ public class Ui {
     /**
      * Gets the message when a task is assigned as "done".
      *
-     * @param userTaskList TaskList of the user.
-     * @param taskNumber   Task number in the list that was marked as done.
+     * @param doneTask task marked as done by user.
      * @return message for a task marked done as String
      * @see TaskList
      * @see Task
      */
-    public String getPrintDoneTaskString(TaskList userTaskList, int taskNumber) {
-        Task doneTask = userTaskList.getTask(taskNumber - 1);
-        doneTask.markAsDone();
+    public String getPrintDoneTaskString(Task doneTask) {
         String doneTaskString = String.format("Nice! I've marked this task as done:\n[%s] \n%s\n",
                 doneTask.getStatusIcon(),
                 doneTask.getTaskDetail());
@@ -99,5 +96,12 @@ public class Ui {
         return tasksFound.getTaskListSize() == 0
                 ? foundTasksString + "Sorry. No tasks found :-(\n"
                 : foundTasksString + getPrintTaskListString(tasksFound) + "\n";
+    }
+
+    public String getPrintUndoCommandString(boolean undoStatus) {
+        return undoStatus
+                ? "Your last command has successfully been undone\n"
+                : "Sorry. You cannot undo this command.\n"
+                    + "Commands that can be undone:\n1. done\n2. todo\n3. deadline\n4. event\n";
     }
 }

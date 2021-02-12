@@ -37,7 +37,8 @@ public class Parser {
      * @see Deadline
      */
     public ToDo parseAddTodo(String command, TaskList userList) throws InvalidToDoCommandException {
-        String toDoTaskDetail = command.substring(5);
+        int taskDetailOffset = 5;
+        String toDoTaskDetail = command.substring(taskDetailOffset);
         if (toDoTaskDetail.length() == 0 || toDoTaskDetail.startsWith(" ")) {
             throw new InvalidToDoCommandException();
         } else {
@@ -122,5 +123,85 @@ public class Parser {
             }
             return new TaskList(results);
         }
+    }
+
+    public Task parseDoneCommand(int taskNumber, TaskList userList) {
+        Task doneTask = userList.getTask(taskNumber - 1);
+        doneTask.markAsDone();
+        return doneTask;
+    }
+
+    private ToDo createTodoTask (String command) {
+        int taskDetailOffset = 5;
+        String taskDetail = command.substring(taskDetailOffset);
+        ToDo toDoTask = new ToDo(taskDetail);
+        return toDoTask;
+    }
+
+    private Event createEventTask (String command) {
+        String[] eventTimeAndTask = command.split(" /at ");
+        int eventDetailOffset = 6;
+        return new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(eventDetailOffset));
+    }
+
+    private Deadline createDeadlineTask (String command) {
+        String[] deadlineAndTask = command.split(" /by ");
+        int deadlineDetailStartIndexOffset = 9;
+        return new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
+    }
+
+    public boolean parseUndoCommand(String lastCommand, Task lastDeletedTask, TaskList userList) throws Exception {
+        String keyWord = lastCommand.split(" ")[0];
+        String keyWordToCompare = keyWord.toUpperCase();
+
+        boolean isUndoSuccessful = false;
+        int lastTaskIndex = userList.getTaskListSize() - 1;
+
+        if (keyWord.equals("")) {
+            isUndoSuccessful = false;
+        } else {
+            switch (Commands.valueOf(keyWordToCompare)) {
+            case TODO:
+                ToDo toDoTask = createTodoTask(lastCommand);
+                if (userList.checkTaskPresent(toDoTask)) {
+                    userList.removeTask(lastTaskIndex);
+                    isUndoSuccessful = true;
+                }
+                break;
+            case DEADLINE:
+                Deadline deadlineTask = createDeadlineTask(lastCommand);
+                if (userList.checkTaskPresent(deadlineTask)) {
+                    userList.removeTask(lastTaskIndex);
+                    isUndoSuccessful = true;
+                }
+                break;
+            case EVENT:
+                Event eventTask = createEventTask(lastCommand);
+                if (userList.checkTaskPresent(eventTask)) {
+                    userList.removeTask(lastTaskIndex);
+                    isUndoSuccessful = true;
+                }
+                break;
+            case DONE:
+                int taskNumber = Integer.parseInt(lastCommand.split(" ")[1]);
+                Task taskToMarkUndone = userList.getTask(taskNumber - 1);
+                taskToMarkUndone.markAsUndone();
+                isUndoSuccessful = true;
+                break;
+            case DELETE:
+                if (lastDeletedTask instanceof ToDo) {
+                    this.parseAddTodo(lastCommand, userList);
+                } else if (lastDeletedTask instanceof Event) {
+                    this.parseAddEvent(lastCommand, userList);
+                } else if (lastDeletedTask instanceof Deadline) {
+                    this.parseAddDeadline(lastCommand, userList);
+                }
+                isUndoSuccessful = true;
+                break;
+            default:
+                //do nothing
+            }
+        }
+        return isUndoSuccessful;
     }
 }

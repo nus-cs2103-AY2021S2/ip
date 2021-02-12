@@ -9,4 +9,5 @@ public enum Commands {
     DELETE ,
     DONE ,
     LIST,
+    UNDO,
 }
