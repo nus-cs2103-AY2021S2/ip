@@ -61,7 +61,7 @@ public class Storage {
                 if (cat.equals("E")) {
                     String date = arr[3];
                     Event event = new Event(des, date);
-                    if (completed == "1") {
+                    if (completed.equals("1")) {
                         event.checkTask();
                     }
                     tasks.storeTask(event);

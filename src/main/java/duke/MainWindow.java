@@ -23,8 +23,8 @@ public class MainWindow {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Little_Green_Men.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/princess.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duchess.png"));
 
     /** Initializes a window and displays welcome message */
     @FXML

@@ -49,12 +49,17 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String msg, Image picture) {
-        return new DialogBox(msg, picture);
+        var userDialog = new DialogBox(msg, picture);
+        userDialog.dialog.setStyle("-fx-background-color: rgb(247, 247, 134); " + "-fx-background-radius: 15;"
+                + "-fx-padding: 7.5;" + "-fx-border-color: rgb(237, 237, 119);" + "-fx-border-radius: 15;");
+        return userDialog;
     }
 
     public static DialogBox getDukeDialog(String msg, Image picture) {
-        var db = new DialogBox(msg, picture);
-        db.flip();
-        return db;
+        var dukeDialog = new DialogBox(msg, picture);
+        dukeDialog.dialog.setStyle("-fx-background-color: rgb(247, 213, 235); " + "-fx-background-radius: 15;"
+               + "-fx-padding: 7.5;" + "-fx-border-color: rgb(235, 188, 218);" + "-fx-border-radius: 15;");
+        dukeDialog.flip();
+        return dukeDialog;
     }
 }
