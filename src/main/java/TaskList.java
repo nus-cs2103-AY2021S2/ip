@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Manager to manage a list of tasks
@@ -40,7 +41,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         String res = "\t" + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";
-        this.ls.add(task);
+        Stream.of(task).collect(Collectors.toCollection(() -> this.ls));
         int numOfTasks = ls.size();
         res += "\tNow you have " + numOfTasks + " tasks in the list\n\t";
         return res;
@@ -76,6 +77,7 @@ public class TaskList {
      */
 
     public String finishTask(int index) {
+
         Task task = this.ls.get(index - 1);
         task.markAsDone();
         String res = "\t" + "\n\t" + "Nice! I've marked this task as done: \n\t\t" + task + "\n\t";
