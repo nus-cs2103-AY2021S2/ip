@@ -17,6 +17,9 @@ public class Deadline extends duke.Task {
      * @param description description of the task
      * @param by the string containing a date of the deadline in the format "yyyy-M-d"
      */
+    private static final String DEADLINE_FORMAT_ERROR_MESSAGE =
+            "Sorry Unable to Parse date for Deadline. "
+            + "Did you put your date in yyyy-mm-dd format?";
 
     public Deadline(String description, String by) throws DukeParseException {
         super(description, "D");
@@ -24,8 +27,7 @@ public class Deadline extends duke.Task {
         if (!dateString.equals("")) {
             this.dateOfDeadline = DateParser.parseDate(dateString);
         } else {
-            throw new DukeParseException("Sorry Unable to Parse date for Deadline. "
-                    + "Did you put your date in yyyy-mm-dd format?");
+            throw new DukeParseException(DEADLINE_FORMAT_ERROR_MESSAGE);
         }
         this.by = by;
     }
