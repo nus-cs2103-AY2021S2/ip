@@ -1,7 +1,6 @@
-package duke;
+package rick;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -20,7 +19,7 @@ public class ParserTest {
         try {
             assertEquals(2, parser.parseCommand("gg"));
             fail();
-        } catch (DukeException error) {
+        } catch (RickException error) {
             assertEquals(null, error.getMessage());
         }
     }
@@ -35,7 +34,7 @@ public class ParserTest {
         try {
             assertEquals(2, parser.parseDoneCommand("done"));
             fail();
-        } catch (DukeException error) {
+        } catch (RickException error) {
             assertEquals(null, error.getMessage());
         }
     }

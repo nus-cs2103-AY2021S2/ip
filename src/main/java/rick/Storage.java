@@ -1,6 +1,7 @@
-package duke;
+package rick;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -12,14 +13,28 @@ import java.util.Scanner;
 
 public class Storage {
     private String filePath;
+    private File file;
     private Ui ui;
 
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
         this.ui = ui;
+        try {
+            file = new File(this.filePath);
+            if(!file.exists()) {
+                File parentDirectory = file.getParentFile();
+                if(!parentDirectory.exists()) {
+                    parentDirectory.mkdir();
+                }
+                file.createNewFile();
+            }
+        } catch(IOException error) {
+            System.err.println(error.getMessage());
+        }
+
     }
 
-    public void save(TaskList taskList) {
+    public void save(TaskList taskList) throws RickException {
         StringBuilder data = new StringBuilder();
         try {
             FileWriter writer = new FileWriter(filePath);
@@ -32,21 +47,13 @@ public class Storage {
             writer.write(data.toString());
             writer.close();
         } catch(IOException error) {
-            ui.showSavingError();
+            ui.showLoadingError();
         }
     }
 
-    public List<Task> load() throws DukeException {
+    public List<Task> load() throws RickException {
         List<Task> data = new ArrayList<>();
         try {
-            File file = new File(this.filePath);
-            if(!file.exists()) {
-                File parentDirectory = file.getParentFile();
-                if(!parentDirectory.exists()) {
-                    parentDirectory.mkdir();
-                }
-                file.createNewFile();
-            }
             Scanner fileReader = new Scanner(file);
             while(fileReader.hasNextLine()) {
                 String[] taskInfo = fileReader.nextLine().split(" \\| ");

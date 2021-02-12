@@ -1,21 +1,16 @@
-package duke;
+package rick;
 
 /**
- * Handles interactions with the user using a <code>Ui</code> object.
+ * Handles interactions with the user on a graphical interface
+ * using a <code>Gui</code> object.
  */
 public class Gui {
-    public static final String logo= " ____        _\n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String divider = "____________________________________________________________\n";
-
     /**
      * This method is used to output an input error message.
      */
     public static String getInputErrorString() {
-        return "Rick's sorry, but Rick don't know what that means.";
+        return "Rick's sorry, but Rick don't know what that means.\n"
+                + "Type \"help\" to view the list of available commands.";
     }
 
     /**
@@ -49,8 +44,8 @@ public class Gui {
     }
 
     /**
-     * This method is used to output the list of commands available
-     * on the application.
+     * This method is used to output the list of commands
+     * available on the application.
      */
     public static String getHelpMessageString() {
         return "Here you go Morty! This is the list of available commands:\n"
@@ -64,7 +59,9 @@ public class Gui {
     }
 
     /**
-     * This method is used to output the list of tasks in the <code>TaskList</code> object.
+     * This method is used to output the list of tasks
+     * in the <code>TaskList</code> object.
+     *
      * @param tasks The <code>TaskList</code> object.
      * @see TaskList
      */
@@ -85,7 +82,9 @@ public class Gui {
     }
 
     /**
-     * This method is used to output the list of found tasks in the <code>TaskList</code> object.
+     * This method is used to output the list of found tasks
+     * in the <code>TaskList</code> object.
+     *
      * @param tasks The <code>TaskList</code> object.
      * @see TaskList
      */
@@ -108,6 +107,7 @@ public class Gui {
     /**
      * This method is used to output the message provided in a standardized
      * styling with a divider before and after the message.
+     *
      * @param message The message to display within the dividers.
      */
     public static String getMessageString(String message) {
@@ -116,6 +116,7 @@ public class Gui {
 
     /**
      * This method is used to output the generic error message.
+     *
      * @param errorMessage The error message to display.
      */
     public static String getErrorMessageString(String errorMessage) {

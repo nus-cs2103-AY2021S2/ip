@@ -1,4 +1,4 @@
-package duke;
+package rick;
 
 /**
  * Handles interactions with the user using a <code>Ui</code> object.
@@ -64,7 +64,9 @@ public class Ui {
     }
 
     /**
-     * This method is used to output the list of tasks in the <code>TaskList</code> object.
+     * This method is used to output the list of tasks in
+     * the <code>TaskList</code> object.
+     *
      * @param tasks The <code>TaskList</code> object.
      * @see TaskList
      */
@@ -85,7 +87,9 @@ public class Ui {
     }
 
     /**
-     * This method is used to output the list of found tasks in the <code>TaskList</code> object.
+     * This method is used to output the list of found tasks
+     * in the <code>TaskList</code> object.
+     *
      * @param tasks The <code>TaskList</code> object.
      * @see TaskList
      */
@@ -108,6 +112,7 @@ public class Ui {
     /**
      * This method is used to output the message provided in a standardized
      * styling with a divider before and after the message.
+     *
      * @param message The message to display within the dividers.
      */
     public void showMessage(String message) {
@@ -116,6 +121,7 @@ public class Ui {
 
     /**
      * This method is used to output the generic error message.
+     * 
      * @param errorMessage The error message to display.
      */
     public void showErrorMessage(String errorMessage) {
