@@ -61,6 +61,14 @@ public class Duke {
                     doneTask.setDone(true);
                     output = Ui.execute(Command.DONE, taskList, doneTask.getStatus());
                     break;
+                case SNOOZE:
+                    Task changeTask = taskList.get(parser.getTaskIndex() - 1);
+                    taskList.delete(parser.getTaskIndex());
+                    changeTask.changeEventTime(
+                            LocalDate.parse(parser.getDate(), DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")));
+                    taskList.update(changeTask, parser.getTaskIndex() - 1);
+                    output = Ui.execute(Command.SNOOZE, taskList, changeTask.getStatus());
+                    break;
                 case DEADLINE:
                 case EVENT:
                 case TODO:

@@ -20,6 +20,9 @@ public class Parser {
             String[] information = input.split(" ", 2);
             assert information.length > 0;
             this.command = Command.valueOf(information[0].toUpperCase());
+            System.out.println(command.toString());
+            for (int i = 0; i < information.length; i++)
+                System.out.println(information[i]);
             switch (this.command) {
                 case FIND:
                     this.description = information[1];
@@ -34,6 +37,13 @@ public class Parser {
                     ParseTaskHandler handleTaskInfo = new ParseTaskHandler(information);
                     this.description = handleTaskInfo.getDescription();
                     this.date = handleTaskInfo.getDate();
+
+                    break;
+                case SNOOZE:
+                    this.taskIndex = Integer.parseInt(information[1].split(" ", 2)[0]);
+                    this.date = information[1].split(" ", 3)[2];
+                    System.out.println(this.taskIndex);
+                    System.out.println(this.date);
 
                     break;
                 case BYE:

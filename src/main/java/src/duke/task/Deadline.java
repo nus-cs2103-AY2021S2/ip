@@ -43,4 +43,9 @@ public class Deadline extends Task {
     public String currentStatus() {
         return "D" + super.currentStatus();
     }
+
+    @Override
+    public void changeEventTime(LocalDate newEventTime) {
+        this.deadlineTime = newEventTime;
+    }
 }

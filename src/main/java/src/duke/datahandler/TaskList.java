@@ -77,4 +77,8 @@ public class TaskList {
         }
         return output;
     }
+
+    public void update(Task task, int taskIndex) {
+        this.listOfTasks.add(taskIndex, task);
+    }
 }
