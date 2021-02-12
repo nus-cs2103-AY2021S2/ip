@@ -76,6 +76,7 @@ To view what tasks need to be done
 
 #### Command Syntax:
 To list tasks, type the command in the following format:
+<br>
 list
 
 list command will return a list of tasks stored in Duke
@@ -85,7 +86,9 @@ list
 
 #### Expected outcome:
 Here are the tasks in your list:
+  <br>
   1.[D][] ip (by: 19-02-2021) 
+  <br>
   Priority:Unassigned
 
 ### Feature 3
@@ -96,6 +99,7 @@ Used to check if there are any event tasks on a particular date or any deadline 
 
 #### Command Syntax:
 To check tasks with a certain date, type the command in the following format:
+<br>
 check *date*
 
 It will return a list of tasks which contain that date
@@ -105,7 +109,9 @@ check 2020-02-19
 
 #### Expected outcome:
 Here are the tasks due on the date:
+   <br>
    [D][] ip (by: 19-02-2021) 
+   <br>
    Priority:Unassigned
 
 
@@ -117,6 +123,7 @@ Delete a task from duke
 
 #### Command Syntax:
 To delete a task, type the command in the following format:
+<br>
 delete *task_number*
 
 This will delete the task from duke
@@ -126,7 +133,9 @@ delete 1
 
 #### Expected outcome:
 Noted. I've removed this task:
+   <br>
    [D][] ip (by: 19-02-2021) 
+   <br>
    Priority:Unassigned
 
 
@@ -138,6 +147,7 @@ To mark a task as done so that user can keep track of tasks easier
 
 #### Command Syntax:
 To mark a task as done, type the command in the following format:
+<br>
 done *task_number*
 
 This will mark the task in duke with a cross to indicate it is done.
@@ -147,7 +157,9 @@ done 1
 
 #### Expected outcome:
 Nice! I've marked this task as done:
+   <br>
    [D][X] ip (by: 19-02-2021) 
+   <br>
    Priority:Unassigned
 
 
@@ -159,6 +171,7 @@ To find a task that contains a particular keyword
 
 #### Command Syntax:
 To find a task, type the command in the following format:
+<br>
 find *word*
 
 It will return a list of tasks which contain that date.
@@ -168,7 +181,9 @@ find ip
 
 #### Expected outcome:
 Here are the matching tasks in your list:
+   <br>
    1.[D][X] ip (by: 19-02-2021) 
+   <br>
    Priority:Unassigned
 
 
@@ -180,6 +195,7 @@ User can assign priority to tasks to see what should be completed first
 
 #### Command Syntax:
 To assign a priority to a task, type the command in the following format:
+<br>
 priority *task number* *priority level*
 
 It assigns the task with a priority
@@ -189,7 +205,9 @@ priority 2 high
 
 #### Expected outcome:
 The following task priority has been changed!
+   <br>
    [D][X] ip (by: 19-02-2021) 
+   <br>
    Priority: High
 
 
