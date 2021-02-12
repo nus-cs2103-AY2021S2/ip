@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
      * Sends a greeting dialog.
      */
     public void greet() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greet(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.greet(), dukeImage, false));
     }
 
     /**
@@ -64,9 +64,10 @@ public class MainWindow extends AnchorPane {
             System.exit(0);
         }
         String responseString = response.getValue();
+        boolean isError = response.getKey() == DukeStatusCode.ERROR;
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(responseString, dukeImage)
+                DialogBox.getDukeDialog(responseString, dukeImage, isError)
         );
         userInput.clear();
     }
