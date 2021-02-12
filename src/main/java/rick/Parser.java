@@ -47,7 +47,7 @@ public class Parser {
 
     public String parseFindCommand(String input) throws RickException {
         checkEmptyInput(input);
-        String keywords = input.substring(5);
+        String keywords = input.substring(5).toUpperCase();
         return keywords;
     }
 

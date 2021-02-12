@@ -2,6 +2,7 @@ package rick;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Represents a list of <code>Task</code> objects.
@@ -71,7 +72,7 @@ public class TaskList {
     public TaskList findTasks(String keywords) {
         TaskList foundTasks = new TaskList();
         for(Task task : tasks) {
-            if(task.getDescription().contains(keywords)) {
+            if(task.getDescription().toUpperCase().contains(keywords) || task.getClass().getName().toUpperCase().contains(keywords)) {
                 foundTasks.addTask(task);
             }
         }
