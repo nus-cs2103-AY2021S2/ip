@@ -63,7 +63,9 @@ public class Deadline extends ListItem {
     public String toString() {
         return "[D]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask()
                 + " (by: "
-                + (parsedDate == null ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";
+                + (parsedDate == null
+                ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")"
+                + super.printTags();
     }
 
     /**
