@@ -5,7 +5,7 @@ import duke.TaskList.Action;
 public class ListCommand extends Command {
 
     @Override
-    public String[] run() {
+    public String[] getCommandParameters() {
         return new String[0];
     }
 

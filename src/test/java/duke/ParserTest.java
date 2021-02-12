@@ -32,9 +32,9 @@ public class ParserTest {
         try {
             Command c = Parser.parse("TODO blow up the moon");
             Assertions.assertTrue(c instanceof AddCommand);
-            Assertions.assertEquals(2, c.run().length);
-            Assertions.assertEquals("T", c.run()[0]);
-            Assertions.assertEquals("blow up the moon", c.run()[1]);
+            Assertions.assertEquals(2, c.getCommandParameters().length);
+            Assertions.assertEquals("T", c.getCommandParameters()[0]);
+            Assertions.assertEquals("blow up the moon", c.getCommandParameters()[1]);
         } catch (Exception e) {
             fail("Should not throw Exception");
         }

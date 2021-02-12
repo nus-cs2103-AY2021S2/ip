@@ -8,7 +8,7 @@ import duke.exception.BadDateArgumentException;
 import duke.exception.EmptyArgumentException;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDate deadline;
 
     /**
      * Creates a Task with a description and a deadline date that it needs
@@ -23,7 +23,7 @@ public class Deadline extends Task {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
         try {
-            this.by = LocalDate.parse(by, formatter);
+            this.deadline = LocalDate.parse(by, formatter);
         } catch (DateTimeParseException e) {
             throw new BadDateArgumentException();
         }
@@ -32,13 +32,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
-        return "[D]" + super.toString() + " (Deadline: " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (Deadline: " + deadline.format(formatter) + ")";
     }
 
     @Override
     public String toFileString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
-        String date = by.format(formatter);
+        String date = deadline.format(formatter);
         return "D," + super.toBaseFileString() + "," + date.length() + "," + date;
     }
 }

@@ -44,32 +44,32 @@ public class TaskList {
      * @throws BadDateArgumentException An argument that is expected to be a date is ill formatted
      */
     public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
-        String[] args = c.run();
-        String results;
+        String[] args = c.getCommandParameters();
+        String result;
         switch (c.getType()) {
         case ADD:
-            results = addTask(args);
+            result = addTask(args);
             edited = true;
             break;
         case DONE:
-            results = setDone(Integer.parseInt(args[0]));
+            result = setDone(Integer.parseInt(args[0]));
             edited = true;
             break;
         case DELETE:
-            results = delete(Integer.parseInt(args[0]));
+            result = delete(Integer.parseInt(args[0]));
             edited = true;
             break;
         case LIST:
-            results = getList();
+            result = getList();
             break;
         case SEARCH:
-            results = getFilteredList(args[0]);
+            result = getFilteredList(args[0]);
             break;
         default:
-            results = "";
+            result = "";
             break;
         }
-        return results;
+        return result;
     }
 
     /**

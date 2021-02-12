@@ -19,28 +19,28 @@ public class Duke {
      */
     public static void main(String[] args) {
         Ui ui = new Ui();
-        ui.startUpMessage();
-        TaskList store;
+        ui.printStartUp();
+        TaskList taskList;
         try {
-            ui.loadStart();
-            store = Storage.loadTaskList();
-            ui.loadSuccess();
+            ui.printLoadStart();
+            taskList = Storage.loadTaskList();
+            ui.printLoadSuccess();
         } catch (IOException e) {
-            ui.loadFail();
+            ui.printLoadFail();
             return;
         }
         Scanner in = new Scanner(System.in);
         String line;
         do {
-            ui.prompt();
+            ui.printPrompt();
             line = in.nextLine();
             try {
                 Command c = Parser.parse(line);
                 if (c == null) { //Bye command
                     break;
                 }
-                String data = store.run(c);
-                ui.commandMessage(c, data);
+                String data = taskList.run(c);
+                ui.printCommandMessage(c, data);
             } catch (ParseException e) {
                 ui.handleException(e);
             } catch (InvalidCommandException e) {
@@ -50,17 +50,17 @@ public class Duke {
             } catch (BadDateArgumentException e) {
                 ui.handleException(e);
             } finally {
-                if (store.isEdited()) {
+                if (taskList.isEdited()) {
                     try {
-                        Storage.saveTaskList(store);
-                        store.markSaved();
+                        Storage.saveTaskList(taskList);
+                        taskList.markSaved();
                     } catch (IOException e) {
-                        ui.dumpState(store);
+                        ui.dumpState(taskList);
                     }
                 }
             }
         } while (true);
-        ui.goodByeMessage();
+        ui.printShutDown();
         in.close();
     }
 }

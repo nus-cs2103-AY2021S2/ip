@@ -13,7 +13,7 @@ abstract class IndexedCommand extends Command {
     }
 
     @Override
-    public String[] run() {
+    public String[] getCommandParameters() {
         return new String[]{String.valueOf(index)};
     }
 }

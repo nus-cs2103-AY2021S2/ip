@@ -17,45 +17,45 @@ public class Ui {
     private static final String SEPARATOR = "------------------\n";
 
     /**
-     * Prints a startUpMessage for when the program starts.
+     * Prints a start up message for when the program starts.
      */
-    public void startUpMessage() {
+    public void printStartUp() {
         System.out.println("Hello from\n" + LOGO);
         System.out.println("No unicode allowed");
     }
 
     /**
-     * Prints a goodByeMessage for when the program ends.
+     * Prints a shutdown message for when the program ends.
      */
-    public void goodByeMessage() {
+    public void printShutDown() {
         System.out.println(SEPARATOR + "Goodbye from\n" + LOGO);
     }
 
     /**
      * Prints a prompt to indicate that we are expecting input.
      */
-    public void prompt() {
+    public void printPrompt() {
         System.out.print(SEPARATOR + "Listening to your input: ");
     }
 
     /**
      * Indicate to the user that we are loading a file.
      */
-    public void loadStart() {
+    public void printLoadStart() {
         System.out.println("Loading From File...");
     }
 
     /**
      * Indicate to the user that we successfully loaded a file.
      */
-    public void loadSuccess() {
+    public void printLoadSuccess() {
         System.out.println("Loaded");
     }
 
     /**
      * Indicates to the user that the file could not be loaded and that we cannot continue.
      */
-    public void loadFail() {
+    public void printLoadFail() {
         System.out.println("Failed to Load file. Aborting.");
     }
 
@@ -77,7 +77,7 @@ public class Ui {
      * @param command The command that has been issued
      * @param data The results of that command, in a pre-processed format
      */
-    public void commandMessage(Command command, String data) {
+    public void printCommandMessage(Command command, String data) {
         switch (command.getType()) {
         case LIST:
             System.out.print(data);

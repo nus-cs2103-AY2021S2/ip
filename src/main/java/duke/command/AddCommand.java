@@ -14,7 +14,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String[] run() {
+    public String[] getCommandParameters() {
         return args;
     }
 

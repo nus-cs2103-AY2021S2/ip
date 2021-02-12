@@ -15,7 +15,7 @@ public class SearchCommand extends Command {
     }
 
     @Override
-    public String[] run() {
+    public String[] getCommandParameters() {
         String[] searchTerm = {this.searchTerm};
         return searchTerm;
     }
