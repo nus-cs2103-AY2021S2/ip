@@ -6,7 +6,7 @@ package duke;
 public class Parser {
 
     /**
-     * Returns a 2 element String array delimited by a spacebar, regardless of imput
+     * Returns a 2 element String array delimited by a spacebar, regardless of input.
      * If input is 1 word, the second element is an empty string.
      * If input is 0 words, both elements are empty strings.
      *

@@ -8,6 +8,9 @@ import java.util.List;
  * operations on the List.
  */
 public class TaskList {
+    private static final String NO_TASK_IN_LIST = "You have no tasks in your list.";
+    private static final String NO_TASK_FOUND = "No tasks have been found matching your search terms.";
+
     private List<Task> tasks;
 
     /**
@@ -89,10 +92,13 @@ public class TaskList {
     /**
      * Returns the tasks that are in the TaskList.
      *
-     * @return String representing the tasks in the TaskList.
+     * @return String representing the tasks in the TaskList that match the search terms.
      */
     public String findTask(String wordString) {
-        String str = "Here are the matching tasks in your list:\n      ";
+        if (this.tasks.size() == 0) {
+            return NO_TASK_IN_LIST;
+        }
+        String startingString = "Here are the matching tasks in your list:\n      ";
         String[] words = wordString.split(" ");
         String taskString = this.tasks.stream().filter(task -> {
             for (String word: words) {
@@ -103,18 +109,22 @@ public class TaskList {
             return false;
         }).map(task -> {
             return task.toString() + "\n      ";
-        }).reduce(str, String::concat);
+        }).reduce("", String::concat);
+        if (taskString.length() == 0) {
+            return NO_TASK_FOUND;
+        }
+        taskString = startingString + taskString;
         return taskString.substring(0, taskString.length() - 7);
     }
 
     /**
      * Returns the string representation of the TaskList
      *
-     * @return the lists of tasks
+     * @return String representation of the taskList.
      */
     public String listTasks() {
         if (this.tasks.size() == 0) {
-            return "You have no tasks in your list.";
+            return NO_TASK_IN_LIST;
         }
         return "Here are the tasks in your list:\n    " + this.toString();
     }
@@ -122,7 +132,8 @@ public class TaskList {
     /**
      * Returns the save String representation of a TaskList.
      *
-     * @return a String representing a TaskList.
+     * @return a String representing a TaskList, in a format that
+     * is conducive for saving to a text file.
      */
     public String saveTaskListString() {
         return this.tasks.stream()
