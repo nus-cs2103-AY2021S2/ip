@@ -1,5 +1,5 @@
 # User Guide
-<img src="Ui.PNG" width="400px" alt="YingJen">
+<img src="Ui.png" width="400px" alt="YingJen">
 
 YingJen is a chatbot-style personal task manager. He can help track your to-dos, events and deadline. He has a 
 Graphical User Interface (v0.2 onwards), and short aliases for commands.
