@@ -1,4 +1,7 @@
 package duke;
 
-public class DukeStorageException {
+public class DukeStorageException extends Exception {
+    DukeStorageException(String message) {
+        super(message);
+    }
 }

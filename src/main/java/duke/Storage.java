@@ -30,23 +30,25 @@ public class Storage {
      * loads all the tasks from a file into a List.
      *
      * @return List of all tasks stored in a file
-     * @throws DukeException when unable find the file
+     * @throws DukeStorageException when unable find the file
      */
 
-    public List<Task> loadStorage() throws DukeException {
+    public List<Task> loadStorage() throws DukeStorageException, DukeParseException{
         List<Task> savedListOfTasks = new ArrayList<>();
+        File fileSource;
+        Scanner scanner;
         try {
-            File fileSource = new File(filePath);
-            Scanner scanner = new Scanner(fileSource);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                Task t = Parser.parseTaskFromStoredFormat(line);
-                savedListOfTasks.add(t);
-            }
-            return savedListOfTasks;
+            fileSource = new File(filePath);
+            scanner = new Scanner(fileSource);
         } catch (FileNotFoundException err) {
-            throw new DukeException("Error fetching data from Storage in the desired format.");
+            throw new DukeStorageException("Cannot find data.txt file to load from.");
         }
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            Task t = Parser.parseTaskFromStoredFormat(line);
+            savedListOfTasks.add(t);
+        }
+        return savedListOfTasks;
     }
 
     /**

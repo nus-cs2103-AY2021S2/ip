@@ -8,7 +8,6 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(Ui ui, TaskList tasks, Storage storage) {
-        ui.setDisplayMessage(ui.getDisplayOfAllTasks(tasks))
-        ;
+        ui.setDisplayMessage(ui.getDisplayOfAllTasks(tasks));
     }
 }

@@ -20,7 +20,7 @@ public class AddCommand extends Command {
         try {
             storage.saveTasks(tasks);
         } catch (IOException err) {
-            System.out.println("Error in loading storage from addCommand.execute...Check data/duke.txt");
+            System.out.println("Error in accessing storage from addCommand.execute...Check data/duke.txt");
             this.isExit = true;
         }
         String displayMessage = "Got it. I've added this task:\n\t" + taskToBeAdded + "\n"

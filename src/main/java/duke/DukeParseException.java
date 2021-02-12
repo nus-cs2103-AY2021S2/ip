@@ -1,7 +1,7 @@
 package duke;
 
-public class DukeException extends Exception {
-    public DukeException(String errorMessage) {
+public class DukeParseException extends Exception {
+    public DukeParseException(String errorMessage) {
         super(errorMessage);
     }
 }
