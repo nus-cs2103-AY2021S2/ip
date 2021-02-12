@@ -69,6 +69,12 @@ public class Elaina extends Application {
         this.scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         this.scrollPane.setVvalue(1.0);
         this.scrollPane.setFitToWidth(true);
+        // this.scrollPane.setStyle("-fx-background: #90EE90;");
+        this.scrollPane.lookup(".viewport").setStyle(
+            "-fx-background-image: url('/images/background/bg2.jpg');"
+            + "-fx-background-size: 800 600;"
+            + "-fx-background-position: center;"
+        );
 
         this.dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         this.dialogContainer.setPadding(new Insets(10.0, 10.0, 10.0, 10.0));
