@@ -44,8 +44,6 @@ public class TaskList {
     }
 
 
-
-
     /**
      * Adds a given task to the list.
      * @param task given task

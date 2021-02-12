@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.IOException;
 
 import javafx.application.Platform;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 
 /**
@@ -35,7 +37,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.greeting(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.greeting(), dukeImage, Color.BEIGE));
     }
 
     public void setDuke(Duke d) throws IOException {
@@ -58,8 +60,8 @@ public class MainWindow extends AnchorPane {
             try {
                 String response = duke.getResponse(input);
                 dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(response, dukeImage)
+                        DialogBox.getUserDialog(input, userImage, Color.ALICEBLUE),
+                        DialogBox.getDukeDialog(response, dukeImage, Color.BEIGE)
                 );
                 userInput.clear();
             } catch (DukeException | IOException e) {
