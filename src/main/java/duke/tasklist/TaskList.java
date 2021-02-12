@@ -45,17 +45,16 @@ public class TaskList {
             String typeOfTask = getTypeOfTask(taskValues);
             String taskDescription = getTaskDescription(taskValues);
             boolean taskIsDone = getTaskIsDoneState(taskValues);
-            String taskDate = getTaskDate(taskValues);
 
             switch (typeOfTask) {
             case "T":
                 addTodoToList(taskDescription, taskIsDone);
                 break;
             case "D":
-                addDeadlineToList(taskDescription, taskIsDone, taskDate);
+                addDeadlineToList(taskDescription, taskIsDone, getTaskDate(taskValues));
                 break;
             case "E":
-                addEventToList(taskDescription, taskIsDone, taskDate);
+                addEventToList(taskDescription, taskIsDone, getTaskDate(taskValues));
                 break;
             default:
                 printErrorMessage();
