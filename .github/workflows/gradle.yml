@@ -1,5 +1,3 @@
-//@@author damithc-reused
-//CS2103T Y2021S2 ip Repository sample code
 name: Java CI
 
 on: [push, pull_request]
@@ -34,5 +32,3 @@ jobs:
 
       - name: Build and check with Gradle
         run: ./gradlew check
-
-//@author
