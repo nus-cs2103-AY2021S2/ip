@@ -2,7 +2,6 @@ package project;
 
 import java.io.IOException;
 
-import project.common.PrintedText;
 import project.io.Ui;
 import project.storage.Storage;
 import project.task.TaskList;

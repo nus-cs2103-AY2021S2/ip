@@ -32,6 +32,6 @@ public class TaskListTest {
         testTaskList.markTaskAsDone(1);
 
         assertEquals(0, testTaskList.getTotalNumberOfTasksUndone());
-        assertEquals(testTaskList.getTask(1).convertNotDoneStatusToOne(), 0);
+        assertEquals("X", testTaskList.getTask(1).getStatusIcon());
     }
 }

@@ -7,18 +7,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import project.Olaf;
-import project.io.Parser;
-import project.task.Deadline;
-import project.task.Event;
+import project.command.AddDeadline;
+import project.command.AddEvent;
+import project.command.AddTodo;
 import project.task.Task;
 import project.task.TaskList;
-import project.task.Todo;
 
 /**
  * Handles storing and loading of application data from local file.
@@ -75,17 +73,18 @@ public class Storage {
                         StandardCharsets.UTF_8,
                         StandardOpenOption.CREATE,
                         StandardOpenOption.TRUNCATE_EXISTING);
-                this.isSaveSuccessful = true;
             } else {
                 Files.deleteIfExists(dataPath);
             }
+            this.isSaveSuccessful = true;
         } catch (IOException e) {
+            this.isSaveSuccessful = false;
             e.printStackTrace();
         }
     }
 
     /**
-     * Returns if last {@code saveData} call was successful.
+     * Returns if last {@code saveData()} call was successful.
      */
     public boolean isSaved() {
         return this.isSaveSuccessful;
@@ -109,31 +108,14 @@ public class Storage {
         Task outputTask = null;
 
         if (line.startsWith("T]")) {
-            String expression = Parser.parseParameter(line, "] ", 1);
-            outputTask = new Todo(expression);
+            outputTask = new AddTodo().loadFromStorage(line);
         } else if (line.startsWith("D]")) {
-            String expression = Parser.parseParameter(line, "] ", 1);
-            String description = Parser.parseParameter(expression, "\\(by", 0);
-
-            String dateTime = Parser.parseParameter(expression, "\\(by", 1);
-            LocalDateTime deadline = Parser.parseOutputDateTime(dateTime);
-
-            outputTask = new Deadline(description, deadline);
+            outputTask = new AddDeadline().loadFromStorage(line);
         } else if (line.startsWith("E]")) {
-            String expression = Parser.parseParameter(line, "] ", 1);
-            String description = Parser.parseParameter(expression, "\\(at", 0);
-
-            String dateTime = Parser.parseParameter(expression, "\\(at", 1);
-            String start = Parser.parseParameter(dateTime, " to ", 0);
-            String end = Parser.parseParameter(dateTime, " to ", 1);
-
-            LocalDateTime startDateTime = Parser.parseOutputDateTime(start);
-            LocalDateTime endDateTime = Parser.parseOutputDateTime(end);
-
-            outputTask = new Event(description, startDateTime, endDateTime);
+            outputTask = new AddEvent().loadFromStorage(line);
         }
+        assert outputTask != null;
         if (taskIsDone) {
-            assert outputTask != null;
             outputTask.markAsDone();
         }
         return outputTask;

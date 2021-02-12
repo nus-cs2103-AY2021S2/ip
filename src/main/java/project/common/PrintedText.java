@@ -68,7 +68,7 @@ public enum PrintedText {
     FIND_FORMAT {
         @Override
         public String toString() {
-            return "  find <search terms>\n";
+            return "  find <search terms>\n\n  *! separate the search terms with a ','";
         }
     },
 

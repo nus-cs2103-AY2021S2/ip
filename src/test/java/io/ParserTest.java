@@ -25,6 +25,6 @@ public class ParserTest {
         String testDateTime = " 9090-01-01 00:00";
         LocalDateTime resultExpected = LocalDateTime.parse(testDateTime.trim(),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        assertEquals(Parser.parseDateTimeParameter(testDateTime), resultExpected);
+        assertEquals(Parser.parseInputDateTime(testDateTime), resultExpected);
     }
 }

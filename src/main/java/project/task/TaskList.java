@@ -1,6 +1,7 @@
 package project.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -75,12 +76,17 @@ public class TaskList {
 
     /**
      * Returns a {@code TaskList} of the {@code Task}s that match the search.
+     * Checks if any of the words in the search are present in the task descriptions.
      *
      * @param search The search expression.
      */
-    public TaskList findTasks(String search) {
+    public TaskList findTasks(String[] search) {
         ArrayList<Task> matches = tasks.stream()
-                .filter(task -> task.getDescription().contains(search))
+                // adapted from: https://stackoverflow.com/questions/8992100/
+                // test-if-a-string-contains-any-of-the-strings-from-an-array
+                .filter(task -> Arrays.stream(search).map(term -> term.trim())
+                        .filter(term -> term.length() > 0)
+                        .anyMatch(task.getDescription()::contains))
                 .collect(Collectors.toCollection(ArrayList::new));
         return new TaskList(matches);
     }
@@ -97,7 +103,7 @@ public class TaskList {
      */
     public int getTotalNumberOfTasksUndone() {
         int count = (int) tasks.stream()
-                .filter(x -> x.getStatusIcon().equals("X"))
+                .filter(x -> x.getStatusIcon().equals(" "))
                 .count(); // returns long
         assert count <= this.getTotalNumberOfTasks();
         return count;
@@ -112,8 +118,7 @@ public class TaskList {
         if (this.hasTasks()) {
             // adapted from: https://stackoverflow.com/questions/49080255/get-index-while-iterating-list-with-stream
             return IntStream.range(0, tasks.size())
-                    .mapToObj(index -> String.format("  %s. %s\n",
-                            index + 1, tasks.get(index).toString()))
+                    .mapToObj(index -> String.format("  %s. %s\n", index + 1, tasks.get(index).toString()))
                     .reduce((a, b) -> a + b)
                     .get();
         }

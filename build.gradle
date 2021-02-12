@@ -13,8 +13,9 @@ repositories {
 }
 
 shadowJar {
-    archiveBaseName = "Olaf"
-    archiveClassifier = null
+    manifest {
+        attributes "Main-Class": 'project.Launcher'
+    }
 }
 
 application {

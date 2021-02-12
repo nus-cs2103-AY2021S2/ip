@@ -5,7 +5,7 @@ import project.task.Task;
 import project.task.TaskList;
 
 /**
- * Handles UI responses.
+ * Handles UI responses for both success and error messages.
  */
 public class Ui {
 
@@ -117,10 +117,10 @@ public class Ui {
     }
 
     /**
-     * Prints a formatted error message when starting the application with an empty tasklist.
+     * Prints a formatted error message when starting the application with an empty task list.
      */
     public String showLoadingError() {
-        String message = "  No existing data found. Starting with empty task.Task list.\n";
+        String message = "  No existing data found. Starting with empty task list.\n";
         return this.formatResponse(message);
     }
 }
