@@ -60,6 +60,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
+        // if user says 'bye', wait for 1.5 seconds after displaying message from above before closing application
         if (input.trim().equalsIgnoreCase("bye")) {
             PauseTransition pause = new PauseTransition(Duration.seconds (1.5));
             pause.setOnFinished(event -> Platform.exit());
