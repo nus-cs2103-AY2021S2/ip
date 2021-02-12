@@ -1,11 +1,12 @@
 package duke.handler;
 
+import java.time.LocalDateTime;
+
 import duke.Storage;
 import duke.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
 
-import java.time.LocalDateTime;
 
 public class DeadlineHandler implements CommandHandler {
     private Deadline toAdd;
@@ -33,7 +34,7 @@ public class DeadlineHandler implements CommandHandler {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof  DeadlineHandler) {
+        } else if (obj instanceof DeadlineHandler) {
             return toAdd.equals(((DeadlineHandler) obj).getDeadlineTask());
         } else {
             return false;

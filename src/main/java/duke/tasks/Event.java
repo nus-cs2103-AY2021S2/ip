@@ -28,7 +28,7 @@ public class Event extends Task {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof  Event) {
+        } else if (obj instanceof Event) {
             Event eTask = (Event) obj;
             return this.description.equals(eTask.getDescription())
                     && this.at.equals(eTask.getAt());

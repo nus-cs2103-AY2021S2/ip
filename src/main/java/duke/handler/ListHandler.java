@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.tasks.TaskList;
 
 public class ListHandler implements CommandHandler {
-    private String response ="";
+    private String response = "";
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {

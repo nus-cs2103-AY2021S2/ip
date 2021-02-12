@@ -1,11 +1,12 @@
 package duke.handler;
 
+import java.time.LocalDateTime;
+
 import duke.Storage;
 import duke.Ui;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
 
-import java.time.LocalDateTime;
 
 public class EventHandler implements CommandHandler {
     private Event toAdd;
@@ -32,7 +33,7 @@ public class EventHandler implements CommandHandler {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof  EventHandler) {
+        } else if (obj instanceof EventHandler) {
             return toAdd.equals(((EventHandler) obj).getEventTask());
         } else {
             return false;

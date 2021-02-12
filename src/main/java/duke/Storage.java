@@ -1,11 +1,5 @@
 package duke;
 
-import duke.handler.Parser;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +9,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.handler.Parser;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 
 /**
  * Storage class that handles the loading of data from data file
@@ -39,7 +40,7 @@ public class Storage {
     public TaskList load() {
         TaskList tasks = new TaskList();
         Scanner dataReader = null;
-        try{
+        try {
             File file = new File(storagePath);
             file.getParentFile().mkdirs();
             file.createNewFile();
@@ -62,10 +63,10 @@ public class Storage {
      * Writes new tasks into the storage file.
      * @param task task to be added to the storage file.
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         try {
             FileWriter fw = new FileWriter(storagePath, true);
-            String toWrite ="";
+            String toWrite = "";
             switch(task.getType()) {
             case "TODO":
                 toWrite = String.format("%c|%c|%s",
@@ -77,16 +78,18 @@ public class Storage {
                 toWrite = String.format("%c|%c|%s|%s",
                         'D',
                         task.isDone() ? 'X' : ' ',
-                        task.getDescription(),
-                        ((Deadline) task).getBy().toString());
+                        task.getDescription(), (
+                                (Deadline) task).getBy().toString());
                 break;
             case "EVENT":
                 toWrite = String.format("%c|%c|%s|%s",
                         'E',
                         task.isDone() ? 'X' : ' ',
-                        task.getDescription(),
-                        ((Event) task).getAt().toString());
+                        task.getDescription(), (
+                                (Event) task).getAt().toString());
                 break;
+            default:
+                System.out.println("Unknown task requested to add to Storage");
             }
             fw.write(toWrite + "\n");
             fw.close();

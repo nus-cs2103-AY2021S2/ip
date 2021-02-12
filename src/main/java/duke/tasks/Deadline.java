@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * Deadline class that represents tasks with a deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private static final String TYPE = "DEADLINE";
     protected LocalDateTime by;
 
@@ -31,7 +31,7 @@ public class Deadline extends Task{
     public boolean equals (Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof  Deadline) {
+        } else if (obj instanceof Deadline) {
             Deadline dTask = (Deadline) obj;
             return this.description.equals(dTask.getDescription())
                     && this.by.equals(((Deadline) dTask).getBy());
@@ -45,4 +45,4 @@ public class Deadline extends Task{
         return "[D]" + super.toString()
                 + "(by:" + by.format(super.DATE_TIME_FORMATTER) + ")";
     }
- }
+}

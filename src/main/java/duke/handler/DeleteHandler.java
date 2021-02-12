@@ -31,8 +31,8 @@ public class DeleteHandler implements CommandHandler {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof  DeleteHandler) {
-            return taskNum == ((DeleteHandler)obj).getTaskNum();
+        } else if (obj instanceof DeleteHandler) {
+            return taskNum == ((DeleteHandler) obj).getTaskNum();
         } else {
             return false;
         }

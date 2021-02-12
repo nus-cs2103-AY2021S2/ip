@@ -1,19 +1,18 @@
 package duke.handler;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeDateTimeException;
-import duke.exceptions.DukeMissingDesException;
-import duke.exceptions.DukeInvalidDesException;
-import duke.exceptions.DukeIdkException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import duke.exceptions.DukeDateTimeException;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeIdkException;
+import duke.exceptions.DukeInvalidDesException;
+import duke.exceptions.DukeMissingDesException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parser class that parses inputs and throws errors for commands that cannot be comprehended.
@@ -21,6 +20,11 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(" d.MMM.yyyy HH:mm");
 
+    /**
+     * Parses data into respective task.
+     * @param dataInput Input in data file.
+     * @return Task represented by data.
+     */
     public static Task parseFromData(String dataInput) {
         String[] splitInputs = dataInput.split("\\|", -1);
         Task task;
@@ -42,12 +46,18 @@ public class Parser {
                 : task;
     }
 
+    /**
+     * Parses input from user.
+     * @param userInput Input from user.
+     * @return CommandHandler to handle command.
+     * @throws DukeException
+     */
     public static CommandHandler parseFromInput(String userInput) throws DukeException {
-        String keyword_UC = userInput.toUpperCase().split(" ", -1)[0];
+        String keywordUppCaps = userInput.toUpperCase().split(" ", -1)[0];
         Queries query;
         CommandHandler commandHandler = null;
-        if (Queries.containsValue(keyword_UC)) {
-            query = Queries.valueOf(keyword_UC);
+        if (Queries.containsValue(keywordUppCaps)) {
+            query = Queries.valueOf(keywordUppCaps);
         } else {
             throw new DukeIdkException();
         }
@@ -66,7 +76,7 @@ public class Parser {
                 if (dInfo[1].contains("/by")) {
                     dInfo = dInfo[1].split("/by");
                 } else {
-                    throw new DukeInvalidDesException(keyword_UC);
+                    throw new DukeInvalidDesException(keywordUppCaps);
                 }
                 LocalDateTime dateTimeBy = LocalDateTime.parse(dInfo[1], DATE_TIME_FORMATTER);
                 String deadlineDes = dInfo[0];
@@ -77,7 +87,7 @@ public class Parser {
                 if (eInfo[1].contains("/at")) {
                     eInfo = eInfo[1].split(("/at"));
                 } else {
-                    throw new DukeInvalidDesException(keyword_UC);
+                    throw new DukeInvalidDesException(keywordUppCaps);
                 }
                 LocalDateTime dateTimeAt = LocalDateTime.parse(eInfo[1], DATE_TIME_FORMATTER);
                 String eventDes = eInfo[0];
@@ -98,10 +108,12 @@ public class Parser {
             case LIST:
                 commandHandler = new ListHandler();
                 break;
+            default:
+                System.out.println("Unknown query in parser.");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeMissingDesException(query.toString());
-        } catch (IndexOutOfBoundsException | NumberFormatException e){
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeInvalidDesException(query.toString());
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeException();

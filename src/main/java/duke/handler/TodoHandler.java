@@ -6,8 +6,8 @@ import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
 public class TodoHandler implements CommandHandler {
-    Todo toAdd;
-    String response;
+    private Todo toAdd;
+    private String response;
 
     public TodoHandler(String todoDes) {
         toAdd = new Todo(todoDes);
@@ -31,7 +31,7 @@ public class TodoHandler implements CommandHandler {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof  TodoHandler) {
+        } else if (obj instanceof TodoHandler) {
             return toAdd.equals(((TodoHandler) obj).getTodoTask());
         } else {
             return false;

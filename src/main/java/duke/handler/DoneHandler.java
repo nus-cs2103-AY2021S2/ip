@@ -2,7 +2,6 @@ package duke.handler;
 
 import duke.Storage;
 import duke.Ui;
-import duke.exceptions.DukeInvalidDesException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -23,7 +22,7 @@ public class DoneHandler implements CommandHandler {
         taskList.markDone(taskNum);
         Task updatedTask = taskList.getTask(taskNum);
         response = "Nice! I've marked this task as done: \n"
-                + " " + updatedTask+ "\n";
+                + " " + updatedTask + "\n";
         ui.respond(response);
         storage.markDoneInStorage(updatedTask, taskNum);
     }
@@ -32,8 +31,8 @@ public class DoneHandler implements CommandHandler {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof  DoneHandler) {
-            return taskNum == ((DoneHandler)obj).getTaskNum();
+        } else if (obj instanceof DoneHandler) {
+            return taskNum == ((DoneHandler) obj).getTaskNum();
         } else {
             return false;
         }

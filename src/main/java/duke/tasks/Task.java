@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
  * Abstract class to be extended from, for all tasks.
  */
 public abstract class Task {
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(" d.MMM.yyyy HH:mm");
     protected String description;
     protected boolean isDone;
     protected String type;
-    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(" d.MMM.yyyy HH:mm");
 
     /**
      * Constructor to be shared by extending classes.

@@ -68,8 +68,13 @@ public class TaskList {
         return tasks.get(taskIndex - 1);
     }
 
-    public String findTaskWith(String findWord) {
-        String s ="";
+    /**
+     * Returns the task containing given string.
+     * @param findWord The string searched for.
+     * @return The string of the task.
+     */
+    public String findTaskStringWith(String findWord) {
+        String s = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             if (t.toString().contains(findWord)) {

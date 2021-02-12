@@ -3,7 +3,7 @@ package duke.tasks;
 /**
  * Class representing tasks with only descriptions.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     private static final String TYPE = "TODO";
 
     /**
@@ -18,7 +18,7 @@ public class Todo extends Task{
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof  Todo) {
+        } else if (obj instanceof Todo) {
             return this.description.equals(((Todo) obj).getDescription());
         } else {
             return false;

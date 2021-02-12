@@ -1,10 +1,20 @@
-import duke.exceptions.DukeException;
-import duke.handler.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
+import duke.handler.ByeHandler;
+import duke.handler.CommandHandler;
+import duke.handler.DeadlineHandler;
+import duke.handler.DeleteHandler;
+import duke.handler.DoneHandler;
+import duke.handler.EventHandler;
+import duke.handler.ListHandler;
+import duke.handler.Parser;
+import duke.handler.TodoHandler;
+
 
 public class ParserTest {
     @Test

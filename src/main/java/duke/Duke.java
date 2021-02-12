@@ -1,28 +1,28 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeInvalidDesException;
-import duke.handler.CommandHandler;
-import duke.handler.Parser;
-import duke.handler.ByeHandler;
-import duke.handler.DeleteHandler;
-import duke.handler.DoneHandler;
-import duke.tasks.TaskList;
-
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeInvalidDesException;
+import duke.handler.ByeHandler;
+import duke.handler.CommandHandler;
+import duke.handler.DeleteHandler;
+import duke.handler.DoneHandler;
+import duke.handler.Parser;
+import duke.tasks.TaskList;
 
 
 /**
  * Main class for Duke.
  */
 public class Duke {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(" d.MMM.yyyy HH:mm");
+
     private boolean willExit = false;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(" d.MMM.yyyy HH:mm");
 
     /**
      * Class constructor taking in String storagePath.
