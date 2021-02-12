@@ -15,6 +15,11 @@ public class Storage {
     private ArrayList<Task> tasks;
     private Parser parser;
 
+    /**
+     * Create and initialize a Storage object.
+     *
+     * @param filepath The path of the file to be written to and read from.
+     */
     Storage(String filepath) {
         this.filepath = filepath;
         tasks = new ArrayList<>();
@@ -68,6 +73,11 @@ public class Storage {
         myWriter.close();
     }
 
+    /**
+     * Loads a Todo object from the file.
+     *
+     * @param type A String that determines what type of Task is read.
+     */
     private void loadTodo(String type) {
         String description = parser.parseTodoDescription(type);
         Task toAdd = new Todo(description);
@@ -77,6 +87,11 @@ public class Storage {
         tasks.add(toAdd);
     }
 
+    /**
+     * Loads a Deadline object from the file.
+     *
+     * @param type A String that determines what type of Task is read.
+     */
     private void loadDeadline(String type) {
         String description = parser.parseDeadlineEventDescription(type);
         String dateString = parser.parseDateTimeDeadline(type);
@@ -89,6 +104,11 @@ public class Storage {
         tasks.add(toAdd);
     }
 
+    /**
+     * Loads an Event object from the file.
+     *
+     * @param type A String that determines what type of Task is read.
+     */
     private void loadEvent(String type) {
         String description = parser.parseDeadlineEventDescription(type);
         String timeString = parser.parseDateTimeEvent(type);

@@ -1,3 +1,6 @@
+/**
+ * An abstract class which provides the template for all commands the user can make.
+ */
 public abstract class Command {
     protected String input;
     protected String[] parts;

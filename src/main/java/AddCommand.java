@@ -1,7 +1,17 @@
 import java.time.LocalDate;
 
+/**
+ * Handles commands that adds Tasks to the list
+ */
 public class AddCommand extends Command {
 
+    /**
+     * Creates and initializes an AddCommand object.
+     *
+     * @param input The command that the user wishes to use.
+     * @param parts The entire array of strings passed in by user.
+     * @param tasks The list of tasks currently used.
+     */
     AddCommand(String input, String[] parts, TaskList tasks) {
         super(input, parts, tasks);
     }
@@ -36,6 +46,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Returns the description of the task entered by the user.
+     *
+     * @param slashIndex The position where the slash is located.
+     * @return A string that describes the task entered by the user.
+     */
     public String getTaskString(int slashIndex) {
         StringBuilder str = new StringBuilder();
         for (int j = 1; j < slashIndex; j++) {
@@ -45,6 +61,11 @@ public class AddCommand extends Command {
         return str.toString();
     }
 
+    /**
+     * Calculates the position of the slash in the command entered.
+     *
+     * @return Integer which represents the index of the slash.
+     */
     public int getSlashIndex() {
         int slashIndex = 0;
         for (int i = 0; i < parts.length; i++) {
@@ -55,6 +76,12 @@ public class AddCommand extends Command {
         return slashIndex;
     }
 
+    /**
+     * Returns the date entered by the user.
+     *
+     * @param slashIndex The position where the slash is located.
+     * @return A string that describes the date entered by the user.
+     */
     public String getDateString(int slashIndex) {
         StringBuilder byStringBuilder = new StringBuilder();
         for (int k = slashIndex + 1; k < parts.length; k++) {

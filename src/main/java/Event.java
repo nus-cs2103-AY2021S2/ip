@@ -6,11 +6,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task implements EventDeadline {
 
-    protected LocalDate time;
+    protected LocalDate date;
 
-    Event(String description, LocalDate time) {
+    /**
+     * Creates and initializes an Event object.
+     *
+     * @param description The description of the Event.
+     * @param date The date which the Event takes place.
+     */
+    Event(String description, LocalDate date) {
         super(description);
-        this.time = time;
+        this.date = date;
         super.taskType = EVENT_NUMBER;
     }
 
@@ -23,16 +29,16 @@ public class Event extends Task implements EventDeadline {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
     }
 
     /**
-     * Retuens the date of the Event object.
+     * Returns the date of the Event object.
      *
      * @return The LocalDate of the Event object.
      */
     @Override
     public LocalDate getDateInfo() {
-        return this.time;
+        return this.date;
     }
 }

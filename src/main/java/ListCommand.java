@@ -1,3 +1,6 @@
+/**
+ * Handles the list command, where the user wants to display all the tasks currently in the list.
+ */
 public class ListCommand extends Command {
     private int listCounter;
 

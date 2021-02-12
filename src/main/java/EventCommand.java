@@ -1,5 +1,8 @@
 import java.time.LocalDate;
 
+/**
+ * Handles the addition of Events by the user.
+ */
 public class EventCommand extends AddCommand {
     private String taskString;
     private LocalDate date;
@@ -10,6 +13,11 @@ public class EventCommand extends AddCommand {
         this.date = date;
     }
 
+    /**
+     * Returns a string representation of the Event object just added.
+     *
+     * @return A string which represents the Event just added.
+     */
     public String getString() {
         Event event = new Event(taskString, date);
         tasks.add(event);

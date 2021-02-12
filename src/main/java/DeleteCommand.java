@@ -1,3 +1,6 @@
+/**
+ * Handles the delete command, where the user removes an item from the list.
+ */
 public class DeleteCommand extends Command {
 
     DeleteCommand(String input, String[] parts, TaskList tasks) {

@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
-import javafx.scene.image.Image;
 
+/**
+ * Encapsulates the behaviour of the Duke application
+ */
 public class Duke {
 
     private Storage storage;
@@ -9,12 +11,13 @@ public class Duke {
 
     private Ui ui;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
-
-
     private String name;
 
+    /**
+     * Creates and initializes a new Duke object.
+     *
+     * @param filepath The path containing the file which stores app data.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -62,6 +65,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the app welcome message when the app is first opened.
+     *
+     * @return String that displays the Duke welcome message
+     */
     public String getWelcomeMessage() {
         return "Welcome user! What can I do for you today?";
     }

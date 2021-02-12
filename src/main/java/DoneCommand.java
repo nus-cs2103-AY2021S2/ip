@@ -1,3 +1,6 @@
+/**
+ * Handles the command where the user indicates completion of a task.
+ */
 public class DoneCommand extends Command {
 
     DoneCommand(String input, String[] parts, TaskList tasks) {

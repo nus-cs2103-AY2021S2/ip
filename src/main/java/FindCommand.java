@@ -1,3 +1,6 @@
+/**
+ * Handles the find command, where the user searches for tasks based on provided keywords.
+ */
 public class FindCommand extends Command {
 
     FindCommand(String input, String[] parts, TaskList tasks) {
