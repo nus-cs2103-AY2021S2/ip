@@ -3,7 +3,7 @@ package duke;
 import java.io.IOException;
 
 /**
- * Duke represents a (CLI) task list application.
+ * Duke represents a task list application.
  * It takes in the following types of tasks: todo, deadline, event.
  * It processes these commands too: list, delete, done, bye
  * Task lists of individual users are saved locally and retrieved by running this class.
@@ -13,6 +13,8 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
     private final Parser parser;
+    private String lastCommand;
+    private Task lastDeletedTask;
 
     /**
      * Constructor for Duke class.
@@ -28,6 +30,8 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.getTaskList());
+            lastCommand = storage.getLastCommand();
+            lastDeletedTask = storage.getLastDeletedTask();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -56,7 +60,7 @@ public class Duke {
         try {
             switch (Commands.valueOf(keyWordToCompare)) {
             case BYE:
-                storage.writeData(tasks.getTaskList());
+                storage.writeAllData(tasks, lastCommand, lastDeletedTask);
                 response += ui.getExitMessageString();
                 break;
             case LIST:
@@ -64,37 +68,48 @@ public class Duke {
                 break;
             case DONE:
                 int taskNumber = Integer.parseInt(commandArr[1]);
-                Task doneTask = tasks.getTask(taskNumber - 1);
-                response += ui.getPrintDoneTaskString(tasks, taskNumber);
+                Task doneTask = parser.parseDoneCommand(taskNumber, tasks);
                 assert doneTask.getTaskStatus() : "task should be marked as done";
+
+                response += ui.getPrintDoneTaskString(doneTask);
+                lastCommand = command;
                 break;
             case TODO:
                 newTask = parser.parseAddTodo(command, tasks);
                 assert tasks.checkTaskPresent(newTask) : "task should be added into user's task list";
 
                 response += ui.getPrintAddedTaskString(tasks, newTask);
+                lastCommand = command;
                 break;
             case DEADLINE:
                 newTask = parser.parseAddDeadline(command, tasks);
                 assert tasks.checkTaskPresent(newTask) : "task should be added into user's task list";
 
                 response += ui.getPrintAddedTaskString(tasks, newTask);
+                lastCommand = command;
                 break;
             case EVENT:
                 newTask = parser.parseAddEvent(command, tasks);
                 assert tasks.checkTaskPresent(newTask) : "task should be added into user's task list";
 
                 response += ui.getPrintAddedTaskString(tasks, newTask);
+                lastCommand = command;
                 break;
             case DELETE:
                 Task taskToBeDeleted = parser.parseDeleteCommand(command, tasks);
+                lastDeletedTask = taskToBeDeleted;
                 assert !tasks.checkTaskPresent(taskToBeDeleted) : "task shouldn't be present in user's list";
 
                 response += ui.getPrintDeletedTaskString(taskToBeDeleted, tasks);
+                lastCommand = command;
                 break;
             case FIND:
                 TaskList tasksFound = parser.parseFindCommand(command, tasks);
                 response += ui.getPrintFoundTasksString(tasksFound);
+                break;
+            case UNDO:
+                boolean undoStatus = parser.parseUndoCommand(lastCommand, lastDeletedTask, tasks);
+                response += ui.getPrintUndoCommandString(undoStatus);
                 break;
             default:
                 //do nothing

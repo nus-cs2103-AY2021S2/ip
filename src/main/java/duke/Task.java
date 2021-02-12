@@ -20,6 +20,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
     public boolean getTaskStatus() {
         return isDone;
     }

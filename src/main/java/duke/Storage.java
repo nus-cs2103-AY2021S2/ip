@@ -80,8 +80,13 @@ public class Storage {
                     taskInList = new Deadline(deadline, deadlineDetail);
                     tasks.add(taskInList);
                     break;
+                case ("[LC]"):
+                    //do nothing
+                    break;
+                case ("[LDT]"):
+                    //do nothing
+                    break;
                 default:
-                    // do nothing
                     assert false : "invalid event type";
                 }
             } catch (Exception e) {
@@ -91,13 +96,59 @@ public class Storage {
         return tasks;
     }
 
+    public String getLastCommand() throws IOException {
+        List<String> fileLines = Files.readAllLines(Paths.get(filePath));
+        String lastCommand = "";
+        for (String line : fileLines) {
+            String type = line.split(" \\| ")[0];
+            if (type.equals("[LC]")) {
+                lastCommand = line.split(" \\| ")[1];
+            }
+        }
+        return lastCommand;
+    }
+
+    public Task getLastDeletedTask() throws IOException {
+        List<String> fileLines = Files.readAllLines(Paths.get(filePath));
+        Task lastDeletedTask = null;
+        for (String line : fileLines) {
+            String type = line.split(" \\| ")[0];
+            if (!type.equals("[LDT]")) {
+                continue;
+            }
+            int taskSubStringOffset = 8;
+            String taskSubString = line.substring(taskSubStringOffset);
+            String[] taskSubStringArr = taskSubString.split(" \\| ");
+
+            String eventType = taskSubStringArr[0];
+            switch (eventType) {
+            case ("[T]"):
+                lastDeletedTask = new ToDo(taskSubStringArr[2]);
+                break;
+            case ("[E]"):
+                String eventDuration = parser.parseDate(taskSubStringArr[3].split("at: ")[1]);
+                String eventDetail = taskSubStringArr[2];
+                lastDeletedTask = new Event(eventDuration, eventDetail);
+                break;
+            case ("[D]"):
+                String deadline = parser.parseDate(taskSubStringArr[3].split("by: ")[1]);
+                String deadlineDetail = taskSubStringArr[2];
+                lastDeletedTask = new Deadline(deadline, deadlineDetail);
+                break;
+            default:
+                //do nothing
+            }
+        }
+        return lastDeletedTask;
+    }
+
     /**
      * Writes user's task list into tasks.txt local file.
      * If the task list isn't been able to be written into filePath, IOException thrown.
      *
      * @param data : the user's task list
      */
-    public void writeData(List<Task> data) {
+    public String writeTaskList(List<Task> data) {
         String stringOfData = "";
         for (int i = 0; i < data.size(); i++) {
             if (i == data.size() - 1) {
@@ -106,10 +157,33 @@ public class Storage {
                 stringOfData += data.get(i).toString() + "\n";
             }
         }
+        return stringOfData;
+    }
+
+    public String writeLastCommand(String lastCommand) {
+        if (lastCommand == null) {
+            lastCommand = "";
+        }
+        String formattedCommand = "[LC] | " + lastCommand + "\n";
+        return formattedCommand;
+    }
+
+    public String writeLastDeletedTask (Task deletedTask) {
+        String deletedTaskString = "";
+        if (deletedTask != null) {
+            deletedTaskString = deletedTask.toString();
+        }
+        String lastDeletedTaskString = "[LDT] | " + deletedTaskString + "\n";
+        return lastDeletedTaskString;
+    }
+
+    public void writeAllData (TaskList listOfTasks, String lastCommand, Task deletedTask) {
         try {
-            Files.writeString(Paths.get(this.filePath), stringOfData);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+            String allData = writeLastCommand(lastCommand) + writeLastDeletedTask(deletedTask)
+                    + writeTaskList(listOfTasks.getTaskList());
+            Files.writeString(Paths.get(this.filePath), allData);
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 }
