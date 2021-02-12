@@ -44,21 +44,9 @@ public class Kelbot {
             String taskName = parser.getTaskName();
             String tagName = parser.getTagName();
             LocalDate date = parser.getDate();
+            response = processCommand(command, taskNumber, keyword, taskName, tagName, date);
             if (command == Command.BYE) {
-                response = ui.sayGoodbye();
                 Platform.exit();
-            } else if (command == Command.LIST) {
-                response = ui.printList(taskList);
-            } else if (command == Command.TAG) {
-                response = tag(taskList, tagName, taskNumber);
-            } else if (command == Command.DONE || command == Command.DELETE) {
-                response = doneOrDelete(command, taskList, taskNumber);
-            } else if (command == Command.FIND) {
-                response = find(taskList, keyword);
-            } else if (command == Command.SNOOZE) {
-                response = snooze(taskList, taskNumber, date);
-            } else {
-                response = add(command, taskList, taskName, date);
             }
         } catch (DateTimeParseException e) {
             response = "Date format is wrong!";
@@ -74,6 +62,34 @@ public class Kelbot {
      */
     public TaskList getTaskList() {
         return taskList;
+    }
+    
+    /**
+     * Process the command given by the user
+     * @param command The command the user inputs
+     * @param taskNumber The task number the user inputs, if needed
+     * @param keyword The keyword the user inputs, if needed
+     * @param taskName The task name the user inputs, if needed
+     * @param tagName The tag name the user inputs, if needed
+     * @param date The date the user inputs, if needed
+     * @return The String to be printed
+     */
+    public String processCommand(Command command, Integer taskNumber, String keyword, String taskName, String tagName, LocalDate date) {
+        if (command == Command.BYE) {
+            return ui.sayGoodbye();
+        } else if (command == Command.LIST) {
+            return ui.printList(taskList);
+        } else if (command == Command.TAG) {
+            return tag(taskList, tagName, taskNumber);
+        } else if (command == Command.DONE || command == Command.DELETE) {
+            return doneOrDelete(command, taskList, taskNumber);
+        } else if (command == Command.FIND) {
+            return find(taskList, keyword);
+        } else if (command == Command.SNOOZE) {
+            return snooze(taskList, taskNumber, date);
+        } else {
+            return add(command, taskList, taskName, date);
+        }
     }
     /**
      * Tags a task.
