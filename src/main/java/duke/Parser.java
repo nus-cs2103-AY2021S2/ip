@@ -118,6 +118,7 @@ public class Parser {
      */
 
     public Command parseCommand() throws DukeException {
+        assert !inputCommand.equals("");
         String command = getKeyWord(inputCommand).toLowerCase();
         Task t;
         switch (command) {

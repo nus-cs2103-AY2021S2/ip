@@ -45,6 +45,7 @@ public class TaskList implements Iterable<Task> {
      * @return Task that was deleted.
      */
     public Task delete(int indexToDelete) {
+        assert indexToDelete > 0;
         Task taskToReturn = listOfTasks.get(indexToDelete - 1);
         listOfTasks.remove(indexToDelete - 1);
         return taskToReturn;
@@ -58,6 +59,7 @@ public class TaskList implements Iterable<Task> {
      */
 
     public Task markTaskDone(int indexToMarkDone) {
+        assert indexToMarkDone > 0;
         Task task = listOfTasks.get(indexToMarkDone - 1);
         task.markAsDone();
         return task;
