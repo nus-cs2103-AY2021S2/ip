@@ -18,3 +18,8 @@ Example of usage:
 Expected outcome:
 
 `outcome`
+
+## Acknowledgements 
+@tjtanjin
+@Jane-Ng 
+@ zhixianggg
