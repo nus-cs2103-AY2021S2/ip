@@ -20,37 +20,50 @@ To add a todo task, type the command in the following format:
 todo *task_description*
 
 To add a deadline task, type the command in the following format:
+<br>
 deadline *task_description* /by *deadline*
 
 To add a event task, type the command in the following format:
+<br>
 event *task_description* /at *date*
 
 #### Examples of usage: 
 
 todo dishes
+<br>
 deadline ip /by 2021-02-19
+<br>
 event dinner /at 2021-02-12
 
 #### Expected outcome:
 
 For Todo Task:
 Got it. I've added this task:
+ <br>
  [T][] dishes
+ <br>
  Priority:Unassigned 
+ <br>
 Now you have 2 tasks in the list
 
 For Deadline Task:
 
 Got it. I've added this task:
+ <br>
  [D][] ip (by: 19-02-2021) 
+ <br>
  Priority:Unassigned
+ <br>
 Now you have 2 tasks in the list
 
 For Event Task:
 
 Got it. I've added this task:
+ <br>
  [E][] dinner (at: 2021-02-12)
+ <br>
  Priority:Unassigned
+ <br>
 Now you have 2 tasks in the list
 
 
