@@ -3,7 +3,7 @@ package duke.command;
 import duke.TaskList.Action;
 
 public class AddCommand extends Command {
-    String[] args;
+    private final String[] args;
 
     /**
      * Create new Add command

@@ -1,16 +1,17 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.SearchCommand;
-
-import duke.exception.InvalidCommandException;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.SearchCommand;
+import duke.exception.InvalidCommandException;
+
 
 public class Parser {
     /**
@@ -70,19 +71,20 @@ public class Parser {
         }
         return c;
     }
-    private static String[] splitTokenIntoTwo(String parseTarget,String delimiter) throws ParseException {
-        String[] tokens = parseTarget.split(delimiter,2);
+    private static String[] splitTokenIntoTwo(String parseTarget, String delimiter) throws ParseException {
+        String[] tokens = parseTarget.split(delimiter, 2);
         if (tokens.length < 2) {
-            throw new ParseException("Expected deliminter '"+ delimiter +"'", tokens[0].length());
+            throw new ParseException("Expected deliminter '" + delimiter + "'", tokens[0].length());
         }
         return tokens;
     }
 
-    private static String[] splitTokenIntoTwo(String parseTarget,String delimiter, String[] exception) throws ParseException{
+    private static String[] splitTokenIntoTwo(String parseTarget, String delimiter, String[] exception)
+            throws ParseException {
         List<String> exceptionList = Arrays.asList(exception);
-        String[] tokens = parseTarget.split(delimiter,2);
+        String[] tokens = parseTarget.split(delimiter, 2);
         if (!exceptionList.contains(tokens[0]) && tokens.length < 2) {
-            throw new ParseException("Expected deliminter '"+ delimiter +"'", tokens[0].length());
+            throw new ParseException("Expected deliminter '" + delimiter + "'", tokens[0].length());
         }
         return tokens;
     }

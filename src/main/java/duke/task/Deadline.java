@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.exception.EmptyArgumentException;
-import duke.exception.BadDateArgumentException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.BadDateArgumentException;
+import duke.exception.EmptyArgumentException;
 
 public class Deadline extends Task {
     protected LocalDate by;
@@ -23,9 +23,8 @@ public class Deadline extends Task {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
         try {
-            LocalDate date = LocalDate.parse(by, formatter);
-            this.by = date;
-        } catch(DateTimeParseException e) {
+            this.by = LocalDate.parse(by, formatter);
+        } catch (DateTimeParseException e) {
             throw new BadDateArgumentException();
         }
     }

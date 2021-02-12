@@ -1,7 +1,7 @@
 package duke.exception;
 
 public class InvalidCommandException extends Exception {
-
+    private static final long serialVersionUID = 1L;
     private String badCommand;
 
     /**
@@ -11,10 +11,7 @@ public class InvalidCommandException extends Exception {
      */
     public InvalidCommandException(String badCommand) {
         this.badCommand = badCommand;
-	}
-
-	private static final long serialVersionUID = 1L;
-    
+    }
     @Override
     public String getMessage() {
         return "Command '" + badCommand + "' is not recognized.";

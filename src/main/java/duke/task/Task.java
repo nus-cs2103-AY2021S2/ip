@@ -2,8 +2,6 @@ package duke.task;
 
 import duke.exception.EmptyArgumentException;
 
-import java.util.Locale;
-
 public abstract class Task {
     private final String description;
     private boolean isDone; //TODO: Figure out if I can restrict access
@@ -26,7 +24,7 @@ public abstract class Task {
     /**
      * Marks the task as done
      */
-    public void setDone(){
+    public void setDone() {
         this.isDone = true;
     }
 
@@ -40,7 +38,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "["+ this.getStatusIcon()+"]: " + description;
+        return "[" + this.getStatusIcon() + "]: " + description;
     }
 
     /**
@@ -50,7 +48,7 @@ public abstract class Task {
     public abstract String toFileString();
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return this.toString().hashCode();
     }
 
@@ -59,7 +57,7 @@ public abstract class Task {
      * a format suitable for file system storage.
      * @return A common partial savable string.
      */
-    String toBaseFileString(){
+    String toBaseFileString() {
         return (isDone ? "1" : "0") + "," + description.length() + "," + description;
     }
 
@@ -70,19 +68,19 @@ public abstract class Task {
      * @param search Case and whitespace sensitive search substring
      * @return
      */
-    public boolean containsSearch(String search){
+    public boolean containsSearch(String search) {
         String targetString = description;
         boolean isCaseSensitive = search.toLowerCase().contains(search);
-        if (isCaseSensitive){
+        if (isCaseSensitive) {
             targetString = targetString.toLowerCase();
         }
-        if (search.contains(" ")){//Literal multi word matching
+        if (search.contains(" ")) { //Literal multi word matching
             return targetString.contains(search);
-        } else {//Smart per word start matching
+        } else { //Smart per word start matching
             String[] words = targetString.split(" ");
-            for(String word: words){
+            for (String word: words) {
                 String subWord = word.substring(0, search.length());
-                if (subWord.equals(search)){
+                if (subWord.equals(search)) {
                     return true;
                 }
             }

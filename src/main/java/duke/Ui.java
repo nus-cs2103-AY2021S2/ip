@@ -1,40 +1,70 @@
 package duke;
 
+import java.text.ParseException;
+
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
 import duke.exception.EmptyArgumentException;
 import duke.exception.InvalidCommandException;
 
-import java.text.ParseException;
-
 public class Ui {
-    private String logo =
+    private static final String LOGO =
               " ____        _        \n" //TODO: Figure out if this is allowed by style
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private String separator = "------------------\n";
+    private static final String SEPARATOR = "------------------\n";
 
+    /**
+     * Prints a startUpMessage for when the program starts.
+     */
     public void startUpMessage() {
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         System.out.println("No unicode allowed");
     }
-    public void goodByeMessage(){
-        System.out.println(separator + "Goodbye from\n" + logo);
+
+    /**
+     * Prints a goodByeMessage for when the program ends.
+     */
+    public void goodByeMessage() {
+        System.out.println(SEPARATOR + "Goodbye from\n" + LOGO);
     }
-    public void prompt(){
-        System.out.print(separator + "Listening to your input: ");
+
+    /**
+     * Prints a prompt to indicate that we are expecting input.
+     */
+    public void prompt() {
+        System.out.print(SEPARATOR + "Listening to your input: ");
     }
+
+    /**
+     * Indicate to the user that we are loading a file.
+     */
     public void loadStart() {
         System.out.println("Loading From File...");
     }
+
+    /**
+     * Indicate to the user that we successfully loaded a file.
+     */
     public void loadSuccess() {
         System.out.println("Loaded");
     }
+
+    /**
+     * Indicates to the user that the file could not be loaded and that we cannot continue.
+     */
     public void loadFail() {
         System.out.println("Failed to Load file. Aborting.");
     }
+
+    /**
+     * Dumps the state of the task list visually in a manner suitable for the user
+     * to manually copy and save.
+     *
+     * @param store TaskList that needs to be dumped
+     */
     public void dumpState(TaskList store) {
         System.out.println("Unable to save list. Dumping ...");
         System.out.print(store.getList());
@@ -48,43 +78,66 @@ public class Ui {
      * @param data The results of that command, in a pre-processed format
      */
     public void commandMessage(Command command, String data) {
-        switch(command.getType()){
+        switch (command.getType()) {
         case LIST:
             System.out.print(data);
             break;
         case DONE:
-            System.out.println("The following task is now marked as done:\n" +
-                    data);
+            System.out.println("The following task is now marked as done:\n"
+                    + data);
             break;
         case ADD:
-            System.out.println("The following task has been added:\n" +
-                    data);
+            System.out.println("The following task has been added:\n"
+                    + data);
             break;
         case DELETE:
             System.out.println("The following Task has been deleted:");
             System.out.println(data);
             break;
         case SEARCH:
-            if (data.length() > 0){
+            if (data.length() > 0) {
                 System.out.println("Matching Task(s):");
                 System.out.println(data);
-            }else{
+            } else {
                 System.out.println("No Matching Task has been found");
             }
+            break;
+        default:
+            System.out.println("ERROR: Unhandled Case!");
         }
     }
-    //TODO: Figure out if this overloading is acceptable from a coding style perspective.
+
+    /**
+     * Generates an UI alert for some particular error.
+     *
+     * @param e Exception that requires an error message
+     */
     public void handleException(ParseException e) {
         System.out.println("Command has invalid parsing.");
         System.out.println(e.getMessage());
     }
-    public void handleException(InvalidCommandException e){
+    /**
+     * Generates an UI alert for some particular error.
+     *
+     * @param e Exception that requires an error message
+     */
+    public void handleException(InvalidCommandException e) {
         System.out.println(e.getMessage());
     }
-    public void handleException(EmptyArgumentException e){
+    /**
+     * Generates an UI alert for some particular error.
+     *
+     * @param e Exception that requires an error message
+     */
+    public void handleException(EmptyArgumentException e) {
         System.out.println("Cannot have empty argument");
         System.out.println(e.getMessage());
     }
+    /**
+     * Generates an UI alert for some particular error.
+     *
+     * @param e Exception that requires an error message
+     */ //TODO: Figure out how to do javadoc for overloaded method.
     public void handleException(BadDateArgumentException e) {
         System.out.println("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044");
         System.out.println(e.getMessage());
