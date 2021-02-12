@@ -30,13 +30,11 @@ public class DeadlineCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        //String[] cmdArr = cmd.trim().split(" ");
+
         if (!cmd.contains("/by")) {
             throw new DuckieException("oops! please specify deadline using '/by'");
         }
 
-        //ui.customLine();
-        //System.out.println(line);
         String[] strD = cmd.trim().split("/by", 2);
         String inputDate = strD[1].trim();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
@@ -49,19 +47,18 @@ public class DeadlineCmd extends Command {
         Deadline tempD = new Deadline(strD[0], date);
 
         lst.addTask(tempD);
-        System.out.println("ok! i've added this task:");
-        System.out.println(tempD.toString());
 
         if (lst.getListSize() == 0) {
-            System.out.println("there are no tasks in your list!");
+            return "there are no tasks in your list!";
         } else if (lst.getListSize() == 1) {
-            System.out.println("you have " + lst.getListSize() + " task in your list! keep working!");
+            return "ok! i've added this task:" + tempD.toString()
+                    + "\n" + "you have " + lst.getListSize() + " task in your list! keep working!"
+                    + "\n" + ui.customLine();
         } else {
-            System.out.println("you have " + lst.getListSize() + " tasks in your list! keep working!");
+            return "ok! i've added this task:" + tempD.toString()
+                    + "\n" + "you have " + lst.getListSize() + " tasks in your list! keep working!"
+                    + "\n" + ui.customLine();
         }
-        //ui.customLine();
-       // System.out.println(line);
-        return inputDate;
     }
 
     /**

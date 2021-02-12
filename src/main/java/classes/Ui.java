@@ -10,27 +10,25 @@ public class Ui {
 
     /**
      * Print welcome message when user opens Duckie.
+     * @return
      */
-    public void startMessage() {
-        System.out.println("yo im Duckie! quack quack");
-        System.out.println("what can i do for ya ;)");
-        System.out.println(line);
+    public String startMessage() {
+        return "yo im Duckie! quack quack! what can i do for ya ;)" + "\n" + line;
     }
 
     /**
      * Print end message when user enters 'bye' to stop Duckie.
      */
-    public void endMessage() {
-        System.out.println(line);
-        System.out.println("goodbye! c ya soon ;)");
-        System.out.println(line);
+    public String endMessage() {
+        return "goodbye! c ya soon ;)" + "\n" + line;
     }
 
     /**
      * Print custom line of smileys as a separator line.
+     * @return
      */
-    public void customLine() {
-        System.out.println(line);
+    public String customLine() {
+        return line;
     }
 
     /**
@@ -42,8 +40,8 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void findMessage() {
-        System.out.println("found it! here's your task(s):");
+    public String findMessage() {
+        return "found it! here's your task(s):";
     }
 
 }

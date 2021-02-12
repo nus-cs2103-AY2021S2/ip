@@ -12,19 +12,15 @@ public class FindCmd extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         String[] cmdArr = cmd.trim().split(" ");
-        //System.out.println(line);
-        ui.findMessage();
-
+        String output = "";
         int taskSize = lst.getListSize();
         for (int i = 1; i < taskSize + 1; i++) {
             if (lst.getTask(i - 1).getDescription().contains(cmdArr[1])) {
-                String output = String.format("%s. %s", i, lst.getTask(i - 1).toString());
-                System.out.println(output);
+                output = output + "\n" + String.format("%s. %s", i, lst.getTask(i - 1).toString());
+
             }
-            //System.out.println(line);
         }
-        ui.customLine();
-        return null;
+        return output + "\n" + ui.customLine();
     }
 
     @Override

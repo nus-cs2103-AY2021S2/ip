@@ -28,23 +28,18 @@ public class ToDoCmd extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         String[] cmdArr = cmd.trim().split(" ");
-        //System.out.println(line);
-        ui.customLine();
         ToDo tempT = new ToDo(cmdArr[1]);
         lst.addTask(tempT);
-        System.out.println("ok! i've added this task:");
-        System.out.println(tempT.toString());
 
         if (lst.getListSize() == 0) {
-            System.out.println("there are no tasks in your list!");
+            return "there are no tasks in your list!" + "\n" + ui.customLine();
         } else if (lst.getListSize() == 1) {
-            System.out.println("you have " + lst.getListSize() + " task in your list! keep working!");
+            return "ok! i've added this task: " + tempT.toString() + "\n" + "you have " + lst.getListSize()
+                    + " task in your list! keep working!" + "\n" + ui.customLine();
         } else {
-            System.out.println("you have " + lst.getListSize() + " tasks in your list! keep working!");
+            return "ok! i've added this task: " + tempT.toString() + "\n" + "you have " + lst.getListSize()
+                    + " tasks in your list! keep working!" + "\n" + ui.customLine();
         }
-        //System.out.println(line);
-        ui.customLine();
-        return null;
     }
 
     /**

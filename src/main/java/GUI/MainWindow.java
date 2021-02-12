@@ -1,5 +1,6 @@
 package GUI;
 
+import classes.Ui;
 import duckie.Duckie;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,6 +30,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Ui ui = new Ui();
+        String startMessage = ui.startMessage();
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(startMessage, dukeImage));
     }
 
     public void setDuke(Duckie d) {

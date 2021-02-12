@@ -82,7 +82,6 @@ public class Duckie {
             }
         }
         storage.saveTasks(lst.getTaskList());
-        ui.endMessage();
     }
 
     /**

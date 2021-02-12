@@ -26,22 +26,25 @@ public class ListCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        //System.out.println(line);
-        ui.customLine();
+        String output = "";
+
+        for (int i = 0; i < lst.getListSize(); i++) {
+            int count = i + 1;
+            String cur = count + "." + lst.getTask(i).toString();
+            output = output + "\n" + cur;
+        }
 
         if (lst.getListSize() == 0) {
-            System.out.println("there are no tasks in your list!");
+            return "there are no tasks in your list!"
+                    + "\n" + ui.customLine();
         } else if (lst.getListSize() == 1) {
-            System.out.println("get to work! this is the task in your list: ");
+            return "get to work! this is the task in your list: " + output
+                    + "\n" + ui.customLine() ;
         } else {
-            System.out.println("get to work! these are the tasks in your list: ");
+            return "get to work! these are the tasks in your list: " + output
+                    + "\n" + ui.customLine();
         }
-        for (int i = 0; i < lst.getListSize(); i++) {
-            System.out.println(i + 1 + "." + lst.getTask(i).toString());
-        }
-        
-        ui.customLine();
-        return null;
+
     }
 
     /**

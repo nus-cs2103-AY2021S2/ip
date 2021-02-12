@@ -30,14 +30,10 @@ public class EventCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        //String[] cmdArr = cmd.trim().split(" ");
         if (!cmd.contains("/at")) {
             throw new DuckieException("oops! please specify the time of your event using '/at'");
         }
 
-        //System.out.println(line);
-        //ui.customLine();
-        //String[] cmdArr = cmd.trim().split(" ");
         String[] strE = cmd.trim().split("/at", 2);
 
         String inputDate = strE[1].trim();
@@ -50,19 +46,18 @@ public class EventCmd extends Command {
         }
         Event tempE = new Event(strE[0], date);
         lst.addTask(tempE);
-        System.out.println("ok! i've added this task:");
-        System.out.println(tempE.toString());
 
         if (lst.getListSize() == 0) {
-            System.out.println("there are no tasks in your list!");
+            return "there are no tasks in your list!";
         } else if (lst.getListSize() == 1) {
-            System.out.println("you have " + lst.getListSize() + " task in your list! keep working!");
+            return "ok! i've added this task:" + tempE.toString()
+                    + "\n" + "you have " + lst.getListSize() + " task in your list! keep working!"
+                    + "\n" + ui.customLine();
         } else {
-            System.out.println("you have " + lst.getListSize() + " tasks in your list! keep working!");
+            return "ok! i've added this task:" + tempE.toString()
+                    + "\n" + "you have " + lst.getListSize() + " tasks in your list! keep working!"
+                    + "\n" + ui.customLine();
         }
-        //System.out.println(line);
-        //ui.customLine();
-        return inputDate;
     }
 
     /**

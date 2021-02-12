@@ -27,7 +27,7 @@ public class ByeCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        return null;
+        return ui.endMessage();
     }
 
     /**
