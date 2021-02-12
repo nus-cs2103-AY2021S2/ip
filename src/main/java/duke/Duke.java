@@ -287,6 +287,11 @@ public class Duke {
      * @throws DukeException if the tasks cannot be saved.
      */
     public void saveTasks() throws DukeException {
+        try {
+            this.storage.save(this.tasks);
+        } catch (DukeException e) {
+            this.storage.load();
+        }
         this.storage.save(this.tasks);
     }
 
