@@ -19,7 +19,10 @@ public class Todo extends Task {
      * @return String of Todo for saving locally.
      */
     public String saveString() {
-        return isDone ? "T --- 1 --- " + description : "T --- 0 --- " + description;
+        String todoDoneString = "T --- 1 --- " + description;
+        String todoNotDoneString = "T --- 0 --- " + description;
+
+        return isDone ? todoDoneString : todoNotDoneString;
     }
 
     /**

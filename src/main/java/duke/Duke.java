@@ -25,14 +25,6 @@ public class Duke {
         tasks.dataInput(storage.loadData());
     }
 
-    public Duke(String path) {
-        assert(path != null);
-        ui = new Ui();
-        storage = new Storage(path);
-        tasks = new TaskList();
-        tasks.dataInput(storage.loadData());
-    }
-
     /**
      * Returns the greeting message string
      */
