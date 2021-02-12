@@ -10,6 +10,6 @@ public class TriviaTask extends Task {
     }
     @Override
     public String toString() {
-        return "Trivia: " + super.getName();
+        return "Trivia: " + super.getName() + super.getStringTag();
     }
 }

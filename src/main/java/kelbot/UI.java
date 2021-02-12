@@ -18,7 +18,11 @@ public class UI {
      * @return String to be printed.
      */
     public String printList(TaskList taskList) {
-        return taskList.toString();
+        if (taskList.toString().equals("")) {
+            return "There are no tasks in your list";
+        } else {
+            return taskList.toString();
+        }
     }
     /**
      * Prints the task has been done.
@@ -34,7 +38,7 @@ public class UI {
      * @return String to be printed.
      */
     public String printDelete(Task task) {
-        return "Noted! You have deleted this task!\n" + task;
+        return "You have deleted this task!\n" + task;
     }
     /**
      * Prints the task that has been added.
@@ -55,7 +59,7 @@ public class UI {
      * @return String to be printed.
      */
     public String printRelevantTasks(TaskList taskList) {
-        return "These are the tasks that have your keyword\n" + taskList;
+        return "These are the tasks that have your keyword:\n" + taskList;
     }
     /**
      * Prints the task that has just been snoozed.
