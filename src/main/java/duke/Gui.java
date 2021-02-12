@@ -36,9 +36,9 @@ public class Gui {
      * This method is used to output the welcome message.
      */
     public static String getWelcomeString() {
-        return "Hello Morty! It's me, Rick!\n" +
-                "What can I do for you?\n" +
-                "Type \"help\" to view the list of available commands.";
+        return "Hello Morty! It's me, Rick!\n"
+                + "What can I do for you?\n"
+                + "Type \"help\" to view the list of available commands.";
     }
 
     /**
@@ -53,14 +53,14 @@ public class Gui {
      * on the application.
      */
     public static String getHelpMessageString() {
-        return "Here you go Morty! This is the list of available commands:\n" +
-                "bye -> To exit application\n" +
-                "list -> To list tasks\n" +
-                "done [index] -> To mark task as done \n" +
-                "delete [index] -> To delete task\n" +
-                "todo [description] -> To create todo\n" +
-                "deadline [description] /by [date] -> To create deadline\n" +
-                "event [description] /on [date] -> To create event";
+        return "Here you go Morty! This is the list of available commands:\n"
+                + "bye -> To exit application\n"
+                + "list -> To list tasks\n"
+                + "done [index] -> To mark task as done \n"
+                + "delete [index] -> To delete task\n"
+                + "todo [description] -> To create todo\n"
+                + "deadline [description] /by [date] -> To create deadline\n"
+                + "event [description] /on [date] -> To create event";
     }
 
     /**
