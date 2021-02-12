@@ -70,8 +70,8 @@ public abstract class Task {
      */
     public boolean containsSearch(String search) {
         String targetString = description;
-        boolean isCaseSensitive = search.toLowerCase().contains(search);
-        if (isCaseSensitive) {
+        boolean isCaseInsensitive = !search.toLowerCase().contains(search);
+        if (isCaseInsensitive) {
             targetString = targetString.toLowerCase();
         }
         if (search.contains(" ")) { //Literal multi word matching
@@ -79,6 +79,9 @@ public abstract class Task {
         } else { //Smart per word start matching
             String[] words = targetString.split(" ");
             for (String word: words) {
+                if (word.length() < search.length()) {
+                    continue;
+                }
                 String subWord = word.substring(0, search.length());
                 if (subWord.equals(search)) {
                     return true;
