@@ -78,7 +78,7 @@ public class Parser {
             String[] res = (commandFromUser.split("event ")[1]).split(" /at ");
             String description = res[0];
             String by = res[1];
-            return this.taskList.addTask(new Events(description, by));
+            return this.taskList.addTask(new Event(description, by));
         } else if (commandFromUser.split(" ")[0].equals("find")) {
             String keyword = commandFromUser.split(" ")[1];
             return this.taskList.find(keyword);

@@ -1,6 +1,6 @@
-public class Events extends Task {
+public class Event extends Task {
     private final String by;
-    Events(String name, String by) {
+    Event(String name, String by) {
         super(name);
         this.by = by;
     }
@@ -22,8 +22,8 @@ public class Events extends Task {
 
     @Override
     public boolean equals(Object obj){
-        if(obj instanceof Events){
-            Events e = (Events) obj;
+        if(obj instanceof Event){
+            Event e = (Event) obj;
             return this.getTaskName().equals(e.getTaskName()) && this.by.equals(e.by);
         }
         return false;
