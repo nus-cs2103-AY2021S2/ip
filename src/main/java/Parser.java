@@ -11,6 +11,7 @@ public class Parser {
     private final String exitCommand = "bye"; //only command that will end chat
     private final String ListContactsCommand = "phone book";
     private final String searchCommand = "search";
+    private final String helpCommand = "help";
     private final String ToDos = "todo"; //tasks without any date/time attached to it
     private final String Deadlines = "deadline"; //tasks that need to be done before a specific date/time
     private final String Events = "event"; //tasks that start at a specific time and ends at a specific time
@@ -36,6 +37,9 @@ public class Parser {
             assert Duke.canExit == false : "Duke canExit should be false";
             Duke.canExit = true;
             return ui.sayBye();
+
+        } else if (description.equalsIgnoreCase(helpCommand)) {
+            return ui.help();
 
         } else if (description.toLowerCase().contains(doneCommand)) {
             try {
