@@ -20,9 +20,12 @@ public class Duke {
         this.ui = new Ui();
         try {
             tasks = new TaskList(storage.loadStorage());
-        } catch (DukeException err) {
+        } catch (DukeStorageException err) {
             System.out.println(err.getMessage());
             tasks = new TaskList();
+        } catch (DukeParseException err) {
+            System.out.println(err.getMessage());
+            System.exit(1);
         }
     }
 
@@ -48,7 +51,7 @@ public class Duke {
         return ui.displayWelcomeMessage();
     }
 
-    public String run(String input) {
+    public String getResponse(String input) {
         try {
             Parser parser = new Parser(input);
             Command command = parser.parseCommand();
@@ -56,8 +59,12 @@ public class Duke {
             this.isExit = command.shouldExit();
             return ui.getMessageToDisplay();
 
-        } catch (DukeException e) {
+        } catch (DukeParseException e) {
             return "OOPS!!! " + e.getMessage();
         }
+    }
+
+    public boolean shouldExit() {
+        return isExit;
     }
 }

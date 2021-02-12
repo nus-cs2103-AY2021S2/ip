@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TaskList implements Iterable<Task> {
 
-    private static List<Task> listOfTasks;
+    private List<Task> listOfTasks;
 
     /**
      * Empty Constructor that wraps around an empty list.
@@ -26,7 +26,7 @@ public class TaskList implements Iterable<Task> {
      * @param listOfTasks the task of lists to wrap around
      */
     public TaskList(List<Task> listOfTasks) {
-        TaskList.listOfTasks = listOfTasks;
+        this.listOfTasks = listOfTasks;
     }
 
     /**
@@ -85,7 +85,7 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Finds all tasks whose description contains the keyword. The match is done case insensitively.
+     * Finds all tasks whose description contains the keyword string. The match is done case insensitively.
      *
      * @param keyword
      * @return
