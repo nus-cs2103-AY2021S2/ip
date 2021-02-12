@@ -48,7 +48,8 @@ public class Parser {
      * @param dateTime The user command specifying the date and time.
      */
     public static LocalDateTime parseOutputDateTime(String dateTime) {
-        return LocalDateTime.parse(dateTime.trim(),
-                DateTimeFormatter.ofPattern("d MMM yyyy HH:mm)"));
+        String[] s = dateTime.trim().split("\\)");
+        return LocalDateTime.parse(s[0],
+                DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
     }
 }
