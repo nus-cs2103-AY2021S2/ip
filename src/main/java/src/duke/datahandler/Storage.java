@@ -1,4 +1,4 @@
-package duke;
+package duke.datahandler;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,7 +23,7 @@ public class Storage {
             savedTasks.createNewFile();
             FileWriter writer = new FileWriter(path);
             for (int i = 0; i < listOfTasks.numberOfTasks(); i++) {
-                writer.write(listOfTasks.get(i).saveStatus());
+                writer.write(listOfTasks.get(i).currentStatus());
             }
             writer.close();
         } catch (IOException e) {

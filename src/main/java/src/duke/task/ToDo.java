@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Todo implementation of the super class task. Includes method to properly
@@ -16,7 +16,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String saveStatus() {
-        return "T" + super.saveStatus();
+    public String currentStatus() {
+        return "T" + super.currentStatus();
     }
 }
