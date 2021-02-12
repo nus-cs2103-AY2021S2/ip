@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * The TaskException class is used to handle exceptions that occur due to input

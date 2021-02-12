@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +38,7 @@ public class Event extends Task {
      * @return current status of event
      */
     @Override
-    public String saveStatus() {
-        return "E" + super.saveStatus();
+    public String currentStatus() {
+        return "E" + super.currentStatus();
     }
 }

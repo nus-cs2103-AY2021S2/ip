@@ -1,6 +1,8 @@
-package duke;
+package duke.datahandler;
 
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * The TaskList class ia a wrapper class around the ArrayList class with added
@@ -13,7 +15,7 @@ public class TaskList {
     /**
      * Consturcts an empty TaskList
      */
-    TaskList() {
+    public TaskList() {
         this.listOfTasks = new ArrayList<>();
     }
 

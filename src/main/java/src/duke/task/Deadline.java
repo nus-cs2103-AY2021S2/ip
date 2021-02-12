@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +40,7 @@ public class Deadline extends Task {
      * @return status of deadline
      */
     @Override
-    public String saveStatus() {
-        return "D" + super.saveStatus();
+    public String currentStatus() {
+        return "D" + super.currentStatus();
     }
 }

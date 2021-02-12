@@ -1,4 +1,4 @@
-package duke;
+package duke.enums;
 
 /**
  * Commands that can be sent to duke

@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * This Task class is responsible for handling and manipulating task
@@ -43,8 +43,12 @@ public class Task {
      *
      * @return a formwatted string based on done status
      */
-    public String saveStatus() {
-        return " | " + (this.isDone ? "1" : "0") + " | " + this.description + "\n";
+    public String currentStatus() {
+        if (this.isDone) {
+            return " | 1 | " + this.description + "\n";
+        } else {
+            return " | 0 | " + this.description + "\n";
+        }
     }
 
     /**
