@@ -18,6 +18,7 @@ public class Parser {
     public Parser(String input) {
         try {
             String[] information = input.split(" ", 2);
+            assert information.length > 0;
             this.command = Command.valueOf(information[0].toUpperCase());
             switch (this.command) {
                 case FIND:

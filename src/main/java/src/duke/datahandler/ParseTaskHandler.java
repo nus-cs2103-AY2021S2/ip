@@ -21,7 +21,7 @@ public class ParseTaskHandler {
         TaskType typeOfTask = TaskType.valueOf(information[0].toUpperCase());
         timeAndDescription.add("DESCRIPTION.ERROR DATE.ERROR");
         timeAndDescription.add("DATE.ERROR ");
-
+        assert timeAndDescription.size() >= 2;
         switch (typeOfTask) {
             case TODO:
                 this.description = timeAndDescription.get(0);

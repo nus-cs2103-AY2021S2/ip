@@ -47,10 +47,8 @@ public class Ui {
             output += "      " + status + "\n";
             output += "    Now you have " + taskList.numberOfTasks() + " tasks in the list.\n";
         }
+        assert output != "";
         return output;
     }
 
-    public static String greeting() {
-        return "    Hey yo, I'm Travis.\n    I make you work. \n";
-    }
 }
