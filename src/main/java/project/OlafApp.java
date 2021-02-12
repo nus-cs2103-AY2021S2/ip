@@ -9,6 +9,7 @@ import project.command.ExitCommand;
 import project.command.FindCommand;
 import project.command.HelpCommand;
 import project.command.ListCommand;
+import project.common.UserCommands;
 import project.io.Ui;
 import project.storage.Storage;
 import project.task.TaskList;
@@ -16,7 +17,7 @@ import project.task.TaskList;
 /**
  * Handles application logic.
  */
-public class OlafApp {
+public class OlafApp implements UserCommands {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
@@ -42,23 +43,23 @@ public class OlafApp {
     public String run(String userInput) {
         String command = userInput.toLowerCase().trim();
 
-        if (command.equals("bye")) {
+        if (command.equals(UserCommands.BYE)) {
             return new ExitCommand().execute(taskList, ui, storage);
-        } else if (command.equals("help")) {
+        } else if (command.equals(UserCommands.HELP)) {
             return new HelpCommand().execute(taskList, ui, storage);
-        } else if (command.equals("list")) {
+        } else if (command.equals(UserCommands.LIST)) {
             return new ListCommand().execute(taskList, ui, storage);
-        } else if (command.startsWith("find")) {
+        } else if (command.startsWith(UserCommands.FIND)) {
             return new FindCommand(command).execute(taskList, ui, storage);
-        } else if (command.startsWith("done")) {
+        } else if (command.startsWith(UserCommands.DONE)) {
             return new DoneCommand(command).execute(taskList, ui, storage);
-        } else if (command.startsWith("delete")) {
+        } else if (command.startsWith(UserCommands.DELETE)) {
             return new DeleteCommand(command).execute(taskList, ui, storage);
-        } else if (command.startsWith("todo")) {
+        } else if (command.startsWith(UserCommands.TODO)) {
             return new AddTodo(command).execute(taskList, ui, storage);
-        } else if (command.startsWith("deadline")) {
+        } else if (command.startsWith(UserCommands.DEADLINE)) {
             return new AddDeadline(command).execute(taskList, ui, storage);
-        } else if (command.startsWith("event")) {
+        } else if (command.startsWith(UserCommands.EVENT)) {
             return new AddEvent(command).execute(taskList, ui, storage);
         } else {
             return ui.showFormatResponse("  Hmm sorry I don't understand :(\n"
