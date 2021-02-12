@@ -102,16 +102,14 @@ class FileReader {
         Scanner sc = new Scanner(input);
         String command = sc.next();
         String[] args = sc.nextLine().split("[|]");
-        System.out.println(Arrays.toString(args));
 
         String description = args[0].trim();
-        String[] priorityAndDate = args[1].trim().split("|");
-        String priority = priorityAndDate[0].trim();
+        String priority = args[1].trim();
         String preposition = null;
         LocalDate date = null;
 
-        if (args.length == 2) {
-            String second = priorityAndDate[1].trim();
+        if (args.length == 3) {
+            String second = args[2].trim();
             String[] prepositionAndDate = second.split("[\\s]");
             preposition = prepositionAndDate[0];
             date = LocalDate.parse(prepositionAndDate[1]);

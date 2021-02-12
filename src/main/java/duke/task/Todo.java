@@ -23,7 +23,7 @@ public class Todo extends Task {
      */
     @Override
     String toFileString() {
-        return String.format("todo %s /p %s", description, getPriority());
+        return String.format("todo %s | %s", description, getPriority());
     }
 
     @Override
