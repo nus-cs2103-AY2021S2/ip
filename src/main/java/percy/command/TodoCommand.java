@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import percy.exception.ParsingException;
+import percy.exception.EmptyArgumentsException;
 import percy.storage.Storage;
 import percy.task.Task;
 import percy.task.TaskList;
@@ -43,9 +43,9 @@ public class TodoCommand extends Command {
     public String execute(TaskList taskList, Storage storage) throws IOException {
         try {
             if (todoDescription.isEmpty()) {
-                throw new ParsingException("todo");
+                throw new EmptyArgumentsException(TodoCommand.COMMAND);
             }
-        } catch (ParsingException ex) {
+        } catch (EmptyArgumentsException ex) {
             return Ui.makeMsg(ex.toString());
         }
         Task todo = new Todo(todoDescription);

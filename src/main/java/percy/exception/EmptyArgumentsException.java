@@ -2,10 +2,13 @@ package percy.exception;
 
 import java.util.ArrayList;
 
-import percy.command.*;
+import percy.command.DeadlineCommand;
+import percy.command.DeleteCommand;
+import percy.command.DoneCommand;
+import percy.command.EventCommand;
+import percy.command.FindCommand;
+import percy.command.TodoCommand;
 import percy.ui.Ui;
-
-
 
 public class EmptyArgumentsException extends PercyException {
     protected String taskType;

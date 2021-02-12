@@ -7,7 +7,7 @@ import percy.command.EventCommand;
 import percy.ui.Ui;
 
 
-public class DateTimeParsingException extends ParsingException {
+public class DateTimeParsingException extends InvalidArgumentsException {
 
     public DateTimeParsingException(String taskType) {
         super(taskType);

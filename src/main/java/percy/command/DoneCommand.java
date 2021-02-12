@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import percy.exception.InvalidArgumentsException;
-import percy.exception.ParsingException;
 import percy.storage.Storage;
 import percy.task.Task;
 import percy.task.TaskList;

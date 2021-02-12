@@ -1,11 +1,11 @@
 package percy.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import percy.storage.Storage;
 import percy.task.TaskList;
 import percy.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListCommand extends Command {
     public static final String COMMAND = "list";

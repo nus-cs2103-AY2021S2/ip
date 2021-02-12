@@ -101,7 +101,7 @@ public class Ui {
         return str;
     }
 
-    /*
+    /**
      * Formats the output message for listing of tasks.
      * @param list latest task list.
      * @return the output message for list command
