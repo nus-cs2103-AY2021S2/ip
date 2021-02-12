@@ -1,11 +1,11 @@
 # User Guide
 
 ## Features 
-1. Add task to task list.
+1. Add tasks to task list.
 1. View all tasks in task list.
 1. Mark completed tasks in task list.
 1. Delete tasks from task list.
-1. Exit the application
+1. Exit the application.
 
 ## Adding task into task list
 To add todo, deadline or event tasks into task list.
@@ -22,7 +22,7 @@ Expected outcome:
 
 Message indicating the successful addition of todo task.
 
-#### 'deadline' - To add deadline task into task list.
+#### `deadline` - To add deadline task into task list.
 
 Example of usage: 
 
@@ -32,7 +32,7 @@ Expected outcome:
 
 Message indicating the successful addition of deadline task.
 
-#### 'event' - To add event task into task list.
+#### `event` - To add event task into task list.
 
 Example of usage: 
 
@@ -46,7 +46,7 @@ Message indicating the successful addition of event task.
 
 ### Usage
 
-#### 'list' - To list and view all tasks in task list.
+#### `list` - To list and view all tasks in task list.
 
 Example of usage: 
 
@@ -60,7 +60,7 @@ All tasks with the completion status will be listed down in increasing order num
 
 ### Usage
 
-#### 'done' - To mark task as completed in task list.
+#### `done` - To mark task as completed in task list.
 
 Example of usage: 
 
@@ -74,7 +74,7 @@ Message indicating the successful marking of task.
 
 ### Usage
 
-#### 'delete' - To delete task from task list.
+#### `delete` - To delete task from task list.
 
 Example of usage: 
 
@@ -88,7 +88,7 @@ Message indicating the successful deletion of task.
 
 ### Usage
 
-#### 'bye' - To exit from the application.
+#### `bye` - To exit from the application.
 
 Example of usage: 
 
