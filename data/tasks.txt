@@ -1,2 +1,2 @@
-todo|false|thingy
+todo|true|thingy
 event|false|test on 12 feb /at 2021-02-12
