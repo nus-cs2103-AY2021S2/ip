@@ -83,6 +83,9 @@ public class Deadline extends ListItem {
      */
     public LocalDate parseDate(String input) {
         try {
+            LocalDate parsedDate = LocalDate.parse(input);
+            // check the deadline is not before the moment this is created
+            assert parsedDate.isAfter(LocalDate.now());
             return LocalDate.parse(input);
         } catch (DateTimeParseException ex) {
             return null;
