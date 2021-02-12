@@ -99,5 +99,15 @@ public class Ui {
         return "There are no matching tasks! Time to add one!";
     }
 
+    /**
+     * Creates a response after tagging a task.
+     *
+     * @param task Task that was tagged.
+     * @return A String.
+     */
+    public static String respondToTag(Task task) {
+        return task.getName() + " is now tagged as " + task.getTag();
+    }
+
 
 }
