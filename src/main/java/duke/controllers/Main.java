@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Duke duke = new Duke(false);
+    private final Duke duke = new Duke(false);
 
     @Override
     public void start(Stage stage) {

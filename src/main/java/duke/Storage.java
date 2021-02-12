@@ -38,18 +38,19 @@ public class Storage {
 
     /**
      * Reads all tasks from the given file.
+     *
      * @return task list containing all tasks in file
      * @throws IOException
      */
     public TaskList readTasks() throws IOException {
         File file = getFile();
-        assert(file.exists());
+        assert (file.exists());
 
         TaskList taskList = new TaskList();
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
 
-        assert(getFile().exists());
+        assert (getFile().exists());
 
         while ((line = reader.readLine()) != null) {
             taskList.addTask(TaskList.parseTask(line));
@@ -60,12 +61,13 @@ public class Storage {
 
     /**
      * Writes all tasks in the given task list to the file.
+     *
      * @param tasks task list
      * @throws IOException
      */
     public void writeTasks(TaskList tasks) throws IOException {
         File file = getFile();
-        assert(file.exists());
+        assert (file.exists());
 
         FileWriter writer = new FileWriter(file);
         for (int i = 0; i < tasks.size(); i++) {

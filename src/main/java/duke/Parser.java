@@ -16,13 +16,14 @@ import duke.commands.TodoCommand;
 public class Parser {
     private static boolean isCommandMatch(String line, String match) {
         return line.startsWith(match)
-                && (line.length() == match.length()
-                || line.charAt(line.indexOf(match) + match.length()) == ' ');
+            && (line.length() == match.length()
+            || line.charAt(line.indexOf(match) + match.length()) == ' ');
     }
 
     /**
      * Converts the user's input into a command object.
      * The command object would contain the code to carry out the relevant actions intended by the user.
+     *
      * @param line user's input
      * @return relevant command object
      * @throws DukeException

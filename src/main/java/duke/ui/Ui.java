@@ -8,10 +8,12 @@ import duke.models.Task;
  */
 public abstract class Ui {
     public abstract void resetReplyString();
+
     public abstract String getReplyString();
 
     /**
      * Prints the output with an indent.
+     *
      * @param output output to be printed
      */
     public abstract void printIndentOutput(String output);
@@ -23,7 +25,8 @@ public abstract class Ui {
 
     /**
      * Print the current status of tasks.
-     * @param tasks list of task
+     *
+     * @param tasks   list of task
      * @param curTask relevant task that was added / deleted
      */
     public void printTaskListStatus(TaskList tasks, Task curTask) {
@@ -39,6 +42,7 @@ public abstract class Ui {
 
     /**
      * Prints out the given error message in the application.
+     *
      * @param errorMessage error message
      */
     public void printError(String errorMessage) {

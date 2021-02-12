@@ -13,8 +13,8 @@ import duke.ui.Ui;
  * Main Duke class.
  */
 public class Duke {
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList tasks;
 
     public Duke(boolean isCli) {
@@ -23,8 +23,9 @@ public class Duke {
 
     /**
      * Creates new duke instance
+     *
      * @param directoryPath path to store data
-     * @param isCli specify whether the duke instance is a command line interface
+     * @param isCli         specify whether the duke instance is a command line interface
      */
     public Duke(String directoryPath, boolean isCli) {
         if (isCli) {
@@ -78,8 +79,9 @@ public class Duke {
 
         /**
          * Create a response object
+         *
          * @param response response string
-         * @param isExit whether response should exit
+         * @param isExit   whether response should exit
          */
         public Response(String response, boolean isExit) {
             this.response = response;

@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      * Creates a new Task object
+     *
      * @param taskName name of the task
      */
     public Task(String taskName) {
@@ -25,6 +26,7 @@ public abstract class Task {
 
     /**
      * Returns the task's name.
+     *
      * @return task name
      */
     public String getTaskName() {
@@ -33,6 +35,7 @@ public abstract class Task {
 
     /**
      * Returns whether the task has been marked done.
+     *
      * @return whether the task has been marked done
      */
     public boolean getTaskDone() {
@@ -41,6 +44,7 @@ public abstract class Task {
 
     /**
      * Return the string representation of task.
+     *
      * @return string representation of task
      */
     @Override

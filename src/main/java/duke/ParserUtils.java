@@ -25,7 +25,8 @@ public class ParserUtils {
     /**
      * Parses user-given datetime strings into DateTime objects.
      * Valid datetime formats are specified in FORMATTER.
-     * @param dateTime dateTime string
+     *
+     * @param dateTime     dateTime string
      * @param errorMessage error message to display if string could not be parsed
      * @return dateTime object
      * @throws DukeException
@@ -41,7 +42,8 @@ public class ParserUtils {
     /**
      * Parses an integer string into an integer.
      * Similar to Integer.parseInt(String s).
-     * @param integer integer string
+     *
+     * @param integer      integer string
      * @param errorMessage error message to display if string could not be parsed
      * @return integer value of string
      * @throws DukeException
@@ -56,7 +58,8 @@ public class ParserUtils {
 
     /**
      * Gets arguments for a command.
-     * @param line user command
+     *
+     * @param line         user command
      * @param errorMessage error message to display if arguments cannot be found
      * @return array containing command and its argument
      * @throws DukeException
