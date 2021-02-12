@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -50,11 +51,12 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() throws IOException, InterruptedException {
         String input = userInput.getText();
         if (input.equals("bye")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog("I am a sore loser bye!", dukeImage, Color.BEIGE));
             duke.exit();
-            Platform.exit();
             userInput.clear();
         } else {
             try {
