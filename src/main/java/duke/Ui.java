@@ -123,4 +123,9 @@ public class Ui {
 
         return res;
     }
+
+    public String showPrior(String task, String priority) {
+        String priorDoneMessage = "Noted! I have successfully set the task to " + priority + " priority: ";
+        return priorDoneMessage + System.lineSeparator() + task;
+    }
 }

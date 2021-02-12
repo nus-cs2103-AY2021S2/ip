@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.Duke;
 import duke.exception.DukeException;
 
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     static final String INDEX_OUT_OF_BOUND_ERROR = "Please enter an appropriate index.";
+    static final TaskComparator comparator = new TaskComparator();
     private final List<Task> list;
 
     /**
@@ -50,6 +50,7 @@ public class TaskList {
      */
     public void add(Task task) {
         list.add(task);
+        list.sort(comparator);
     }
 
     /**
@@ -63,6 +64,7 @@ public class TaskList {
     public Task delete(String num) throws DukeException {
         int index = Integer.valueOf(num) - 1;
         checkValidIndex(index);
+        list.sort(comparator);
         return list.remove(index);
     }
 
@@ -80,6 +82,15 @@ public class TaskList {
         Task t = list.get(index);
         t.markAsDone();
 
+        return t;
+    }
+
+    public Task setPriority(String num, String priority) throws DukeException {
+        int index = Integer.valueOf(num) - 1;
+        checkValidIndex(index);
+        Task t = list.get(index);
+        t.setPriority(priority);
+        list.sort(comparator);
         return t;
     }
 

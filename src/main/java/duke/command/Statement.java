@@ -37,6 +37,7 @@ public class Statement {
         argsTable.put("todo", 1);
         argsTable.put("find", 1);
         argsTable.put("delete", 1);
+        argsTable.put("priority", 1);
         argsTable.put("deadline", 2);
         argsTable.put("event", 2);
     }
@@ -84,6 +85,8 @@ public class Statement {
 
     private DukeException getError(String command) {
         String missingIndexError = "OOPS! " + command + " requires the index of the task.";
+        String missingIndexAndPriorError = "OOPS! " + command
+                + " requires the index and the priority of the task.";
         String missingDescriptionError = "OOPS! " + command + " requires a description.";
         String missingKeywordError = "Please provide a keyword.";
         String missingDescAndDateError = "OOPS! " + command + " requires a description and a time.";
@@ -91,6 +94,8 @@ public class Statement {
         switch(command) {
         case "done": case "delete":
             return new DukeException(missingIndexError);
+        case "priority":
+            return new DukeException(missingIndexAndPriorError);
         case "todo":
             return new DukeException(missingDescriptionError);
         case "find":
@@ -155,6 +160,8 @@ public class Statement {
             return new DeleteCommand(description);
         case "find":
             return new FindCommand(description);
+        case "priority":
+            return new PriorityCommand(description);
         case "todo": case "deadline": case "event":
             return new AddCommand(command, description, preposition, date);
         default:
