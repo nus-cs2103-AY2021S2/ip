@@ -193,6 +193,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Responds to users the most recent task in the tasklist.
+     */
     private void outputNewTask () {
         mainWindow.dukeOutput("added the task for hooman!");
         mainWindow.dukeOutput(tasks.get(tasks.size() - 1).getTaskInformation(
