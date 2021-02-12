@@ -1,5 +1,11 @@
 package duke.task;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * the abstract task class as a base for the tasks "deadline", "event" annd "todo"
  * that requires the subclass to define <code>markAsDone()</code> and <code>getDate()</code>
@@ -7,6 +13,7 @@ package duke.task;
 public abstract class ListItem {
     private final boolean isDone;
     private final String task;
+    private List<String> tagList;
 
     /**
      * Constructor for ListItem
@@ -15,6 +22,7 @@ public abstract class ListItem {
     public ListItem(String task) {
         this.task = task;
         this.isDone = false;
+        this.tagList = new ArrayList<>();
     }
 
     /**
@@ -25,6 +33,13 @@ public abstract class ListItem {
     public ListItem(String task, boolean isDone) {
         this.task = task;
         this.isDone = isDone;
+        this.tagList = new ArrayList<>();
+    }
+
+    public ListItem(String task, boolean isDone, List<String> inputTagList) {
+        this.task = task;
+        this.isDone = isDone;
+        this.tagList = inputTagList;
     }
 
     /**
@@ -40,6 +55,18 @@ public abstract class ListItem {
     }
 
     public abstract ListItem markAsDone();
+
+    public void addNewTagMutable(String tagName){
+        tagList.add(tagName);
+    }
+
+    public boolean containTag(String inputTag){
+        return tagList.contains(inputTag);
+    }
+
+    public String printTags(){
+        return tagList.stream().map((x) -> " #" + x).collect(Collectors.joining());
+    }
 
     public abstract String getDate();
 

@@ -16,7 +16,7 @@ public class Todo extends ListItem {
 
     @Override
     public String toString() {
-        return "[T]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask();
+        return "[T]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask() + super.printTags();
     }
 
     public String getDate() {

@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The list that contains and holds all the tasks imported/added by the user
@@ -47,10 +48,15 @@ public class TaskList {
      *
      * @param index the index of the item to be changed
      */
-    public void updateItemMutable(int index) {
+    public void markItemasDone(int index) {
         int correctIndex = index - 1;
         ListItem tempItem = this.listItems.get(correctIndex).markAsDone();
         this.listItems.set(correctIndex, tempItem);
+    }
+
+    public void updateItemTag(int index, String tag) {
+        int correctIndex = index - 1;
+        this.listItems.get(correctIndex).addNewTagMutable(tag);
     }
 
     /**
@@ -69,13 +75,12 @@ public class TaskList {
      * @param keyword the keyword to be searched through the TaskList, in SQL LIKE syntax
      */
     public TaskList findItem(String keyword) {
-        List<ListItem> tempList = new ArrayList<>();
-        for (ListItem item : listItems) {
-            if (item.getTask().contains(keyword)) {
-                tempList.add(item);
-            }
+        if(keyword.contains("#")){
+            System.out.println("#");
+            return new TaskList(listItems.stream().filter(x -> x.containTag(keyword.replace("#", ""))).collect(Collectors.toList()));
+        }else {
+            return new TaskList(listItems.stream().filter(x -> x.getTask().contains(keyword)).collect(Collectors.toList()));
         }
-        return new TaskList(tempList);
     }
 
     @Override
