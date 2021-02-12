@@ -1,20 +1,12 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.ToDo;
-import duke.taskList.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.parser.Parser;
 import duke.commands.Command;
-import duke.commands.AddCommand;
-import duke.commands.ByeCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ListCommand;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.taskList.TaskList;
+import duke.ui.Ui;
+
 
 
 public class Duke {
@@ -33,33 +25,20 @@ public class Duke {
         storage.loadTasks(tasks);
     }
 
-    /**
-     * Function method to be used in main to start Duke
-     *
-     * @throws DukeException
-     */
 
-    /**
-     * Function to get Duke application to start running
-     * @throws DukeException
-     */
-    public void run() throws DukeException {
-        ui.start();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                Command executable = Parser.parse(input);
-                String output = executable.execute(tasks, ui, storage);
-
-                if (executable.isEndOfProgram()) {
-                    isExit = !executable.isEndOfProgram();
-                    System.exit(0);
-                }
-            } catch (DukeException e) {
-                String errorMessage = e.toString();
-                ui.formatAndPrintType1(errorMessage);
+    public String getResponse(String input) throws DukeException{
+        try {
+            Command executableCommand = Parser.parse(input);
+            String output = executableCommand.execute(tasks, ui, storage);
+            if (executableCommand.isEndOfProgram()){
+                System.exit(0);
             }
+            return output;
+        } catch (DukeException e){
+            String message = e.toString();
+            ui.formatAndPrintType1(message);
+            return message;
         }
+
     }
 }

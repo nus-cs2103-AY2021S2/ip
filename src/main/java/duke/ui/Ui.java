@@ -40,9 +40,9 @@ public class Ui {
     /**
      * Runs when UI starts up, printing the logo and a greeting.
      */
-    public void start() {
-        System.out.println(logo + "\nHello Master. Nice to meet you, my name is Alfred.\n" +
-                "How may I be of service, Master?");
+    public static String startMessage() {
+        return "Hello Master. Nice to meet you, my name is Alfred.\n"
+                + "How may I be of service, Master?";
     }
 
     /**
