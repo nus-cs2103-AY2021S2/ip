@@ -11,7 +11,7 @@ public class UnknownInputException extends DukeException {
      * UnknownInputException constructor
      */
     public UnknownInputException () {
-        super("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        super("     OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 }

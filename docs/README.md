@@ -220,12 +220,12 @@ Used to exit the Duke program
 #### Command Syntax:
 bye
 
-Duke will reply with a goodbye message before closing
+Duke program exits
 
 #### Example of usage: 
 bye
 
 #### Expected outcome:
-Duke responds with "Bye. Hope to see you again soon!" before exiting
+Duke program exits
 
 

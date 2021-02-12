@@ -12,7 +12,7 @@ public class MissingTaskInputException extends DukeException {
      * @param action the action causing the exception to be thrown
      */
     public MissingTaskInputException(String action) {
-        super("     ☹ OOPS!!! The description of a " + action + " cannot be empty.");
+        super("     OOPS!!! The description of a " + action + " cannot be empty.");
     }
 
 }
