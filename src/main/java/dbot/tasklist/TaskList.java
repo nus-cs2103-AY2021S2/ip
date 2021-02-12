@@ -1,8 +1,9 @@
 package dbot.tasklist;
 
+import java.util.ArrayList;
+
 import dbot.task.Task;
 
-import java.util.ArrayList;
 
 /**
  * Stores a List of Tasks and manages getting, adding, removing, and encoding Tasks.

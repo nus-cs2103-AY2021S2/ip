@@ -1,9 +1,9 @@
 package dbot.command;
 
-import dbot.ui.Ui;
 import dbot.exception.DBotException;
 import dbot.storage.Storage;
 import dbot.tasklist.TaskList;
+import dbot.ui.Ui;
 
 /**
  * Command is an abstract class that is to be extended to represent any valid user commands supplied to DBot.
