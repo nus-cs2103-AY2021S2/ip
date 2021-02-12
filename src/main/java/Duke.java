@@ -61,6 +61,10 @@ public class Duke {
             throw new IllegalKeywordException("Unable to match any command");
         }
     }
+
+    public String getWelcomeMessage() {
+        return "Welcome user! What can I do for you today?";
+    }
 }
 
 
