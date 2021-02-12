@@ -37,12 +37,41 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Changes the description of the DeadlineTask
+     * Changes the description, deadline and priority of the ToDoTask.
      * @param newDescription New description of the task.
-     * @return New DeadlineTask with edited description
+     * @param newDeadline New deadline of the task.
+     * @param newPriority New task priority.
+     * @return New ToDoTask with edited description, deadline and priority.
+     */
+    public DeadlineTask editTask(String newDescription, LocalDateTime newDeadline, TaskPriority newPriority) {
+        return new DeadlineTask(newDescription, newDeadline, isDone, newPriority);
+    }
+
+    /**
+     * Changes the description of the DeadlineTask.
+     * @param newDescription The new description for the Task.
+     * @return New DeadlineTask with edited description.
      */
     public DeadlineTask editDescription(String newDescription) {
-        return new DeadlineTask(newDescription, deadline, isDone, taskPriority);
+        return editTask(newDescription, deadline, taskPriority);
+    }
+
+    /**
+     * Changes the deadline of the DeadlineTask.
+     * @param newDeadline The new deadline for the Task.
+     * @return New DeadlineTask with edited deadline.
+     */
+    public DeadlineTask editDeadline(LocalDateTime newDeadline) {
+        return editTask(description, newDeadline, taskPriority);
+    }
+
+    /**
+     * Changes the priority of the DeadlineTask.
+     * @param newPriority The new priority for the Task.
+     * @return New DeadlineTask with edited priority.
+     */
+    public DeadlineTask editPriority(TaskPriority newPriority) {
+        return editTask(description, deadline, newPriority);
     }
 
     /**

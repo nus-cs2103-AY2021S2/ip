@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 public class EventTaskTest {
     private static final String TEST_DESCRIPTION = "Do CS2103T quiz";
     private static final LocalDateTime TEST_EVENT = LocalDateTime.parse("2020-10-21T10:10:10");
+    private static final LocalDateTime TEST_EDIT_EVENT = LocalDateTime.parse("2020-11-11T20:20:20");
     private static final TaskPriority TASK_PRIORITY = TaskPriority.MEDIUM;
     private static final EventTask STARTING_TASK = EventTask.createNewEventTask(
             EventTaskTest.TEST_DESCRIPTION, TEST_EVENT, TASK_PRIORITY);
@@ -56,6 +57,34 @@ public class EventTaskTest {
     public void testEditDescription() {
         assertEquals(EventTaskTest.STARTING_TASK.editDescription("Eat biscuits").getDescription(),
                 "Eat biscuits");
+    }
+
+    /**
+     * Tests functionality of editPriority().
+     */
+    @Test
+    public void testEditPriority() {
+        assertEquals(EventTaskTest.STARTING_TASK.editPriority(TaskPriority.HIGH).toString(),
+                "[E][\u2718] Do CS2103T quiz | Priority: 3 (at: 2020-10-21, 10:10:10)");
+    }
+
+    /**
+     * Tests functionality of editEventDate().
+     */
+    @Test
+    public void testEditEventDate() {
+        assertEquals(EventTaskTest.STARTING_TASK.editEventDate(EventTaskTest.TEST_EDIT_EVENT).toString(),
+                "[E][\u2718] Do CS2103T quiz | Priority: 2 (at: 2020-11-11, 20:20:20)");
+    }
+
+    /**
+     * Tests functionality of editTask().
+     */
+    @Test
+    public void testEditTask() {
+        assertEquals(EventTaskTest.STARTING_TASK.editTask(
+                "Eat biscuits", EventTaskTest.TEST_EDIT_EVENT, TaskPriority.LOW).toString(),
+                "[E][\u2718] Eat biscuits | Priority: 1 (at: 2020-11-11, 20:20:20)");
     }
 
     /**

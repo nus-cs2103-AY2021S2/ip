@@ -53,15 +53,21 @@ public class TaskManagement {
     }
 
     /**
-     * Changes the description of a task designated by a number.
-     * @param taskNumber Position number of task (starting from 1) to be edited.
-     * @param newDescription New description of the task.
-     * @return Task that has been edited.
+     * Obtains the relevant task.
+     * @param taskNumber The number associated with task.
+     * @return The associated task.
      */
-    public Task editDescription(int taskNumber, String newDescription) {
-        Task editedTask = taskList.get(taskNumber - 1).editDescription(newDescription);
-        taskList.set(taskNumber - 1, editedTask);
-        return editedTask;
+    public Task getTask(int taskNumber) {
+        return taskList.get(taskNumber - 1);
+    }
+
+    /**
+     * Replaces the task at a certain position.
+     * @param taskNumber Position at which to replace task.
+     * @param task The replacement task.
+     */
+    public void replaceTask(int taskNumber, Task task) {
+        taskList.set(taskNumber - 1, task);
     }
 
     /**

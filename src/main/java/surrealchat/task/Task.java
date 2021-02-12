@@ -24,6 +24,10 @@ public abstract class Task {
         this.taskPriority = taskPriority;
     }
 
+    /**
+     * Obtains type of task.
+     * @return String letter denoting type of task.
+     */
     public String getType() {
         return type;
     }
@@ -55,13 +59,6 @@ public abstract class Task {
     public String getDescription() {
         return description;
     }
-
-    /**
-     * Changes the description of the Task.
-     * @param newDescription The new description for the Task.
-     * @return New Task with edited description.
-     */
-    public abstract Task editDescription(String newDescription);
 
     /**
      * Toggles the Task between done and undone.

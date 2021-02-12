@@ -37,12 +37,41 @@ public class EventTask extends Task {
     }
 
     /**
-     * Changes the description of the EventTask
+     * Changes the description, event datetime and priority of the EventTask.
      * @param newDescription New description of the task.
-     * @return New EventTask with edited description
+     * @param newEventDate New event datetime of the task.
+     * @param newPriority New task priority.
+     * @return New ToDoTask with edited description, event datetime and priority.
+     */
+    public EventTask editTask(String newDescription, LocalDateTime newEventDate, TaskPriority newPriority) {
+        return new EventTask(newDescription, newEventDate, isDone, newPriority);
+    }
+
+    /**
+     * Changes the description of the EventTask.
+     * @param newDescription The new description for the Task.
+     * @return New EventTask with edited description.
      */
     public EventTask editDescription(String newDescription) {
-        return new EventTask(newDescription, event, isDone, taskPriority);
+        return editTask(newDescription, event, taskPriority);
+    }
+
+    /**
+     * Changes the deadline of the EventTask.
+     * @param newEventDate The new event datetime for the Task.
+     * @return New EventTask with edited event datetime.
+     */
+    public EventTask editEventDate(LocalDateTime newEventDate) {
+        return editTask(description, newEventDate, taskPriority);
+    }
+
+    /**
+     * Changes the priority of the EventTask.
+     * @param newPriority The new priority for the Task.
+     * @return New EventTask with edited priority.
+     */
+    public EventTask editPriority(TaskPriority newPriority) {
+        return editTask(description, event, newPriority);
     }
 
     /**

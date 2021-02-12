@@ -28,12 +28,31 @@ public class ToDoTask extends Task {
     }
 
     /**
-     * Changes the description of the ToDoTask
+     * Changes the description and priority of the ToDoTask.
      * @param newDescription New description of the task.
-     * @return New ToDoTask with edited description
+     * @param newPriority New task priority.
+     * @return New ToDoTask with edited description and priority.
+     */
+    public ToDoTask editTask(String newDescription, TaskPriority newPriority) {
+        return new ToDoTask(newDescription, isDone, newPriority);
+    }
+
+    /**
+     * Changes the description of the ToDoTask.
+     * @param newDescription The new description for the Task.
+     * @return New ToDoTask with edited description.
      */
     public ToDoTask editDescription(String newDescription) {
-        return new ToDoTask(newDescription, isDone, taskPriority);
+        return editTask(newDescription, taskPriority);
+    }
+
+    /**
+     * Changes the priority of the ToDoTask.
+     * @param newPriority The new priority for the Task.
+     * @return New ToDoTask with edited priority.
+     */
+    public ToDoTask editPriority(TaskPriority newPriority) {
+        return editTask(description, newPriority);
     }
 
     /**

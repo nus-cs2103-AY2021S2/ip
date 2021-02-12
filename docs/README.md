@@ -25,6 +25,14 @@ Outcomes are usually indicated in the following format:
 Possible outcomes
 ```
 
+For this guide, we will assume that the task list is empty and these 4 tasks are going to be keyed in and marked as such:
+```
+1. Watch CS2103T lecture (ToDo, Done) Low priority
+2. Do CS2103T lecture quiz (Deadline of 2021-01-12, 10:10:10, Done) High priority
+3. Do CS2103T ip (Deadline of 2021-01-13, 10:10:10, Not done) High priority
+4. Attend CS2101 class (Event happens on 2021-01-14, 10:10:10, Not done) Medium priority
+```
+
 ## Features
 
 ### GUI Now Available!
@@ -42,6 +50,9 @@ You can prioritise tasks with numbers 1, 2 and 3 in increasing order of priority
 ### Delete tasks
 If you feel that keeping them on the list is not necessary, Meme Man will delete them for you.
 Even better, you can delete them all in one go!
+
+### Edit tasks
+You can edit any details for any task. Use `-keep-` to preserve details from original task.
 
 ### List tasks
 You can key in "list" and Meme Man will display the tasks in the order that you have keyed them in.
@@ -84,16 +95,6 @@ Meme Man is now adding to-do task: [T][✘] Watch CS2103T lecture | Priority: 1
 Total number of tasks: 1
 ```
 
-Outcome if ";" is missing:
-```
-Wrong formatting. Did you forget to put ';'? Not stonks!
-```
-
-Outcome for wrong priority input:
-```
-Priority argument must be integer in range 1-3! Not stonks!
-```
-
 ### Add Deadline task - `deadline`
 Format: `deadline DESCRIPTION ; DATE ; PRIORITY`
 
@@ -117,21 +118,6 @@ Meme Man is now adding deadline task: [D][✘] Do CS2103T ip | Priority: 3 (by: 
 Total number of tasks: 3
 ```
 
-Outcome if ";" is missing:
-```
-Wrong formatting. Did you forget to put ';'? Not stonks!
-```
-
-Outcome for wrong priority input:
-```
-Priority argument must be integer in range 1-3! Not stonks!
-```
-
-Outcome for incorrect date time format:
-```
-"Input date time format is incorrect. Not stonks!"
-```
-
 ### Add Event task - `event`
 Format: `event DESCRIPTION ; DATETIME ; PRIORITY`
 
@@ -149,20 +135,6 @@ Expected Outcome:
 Meme Man is now adding event task: [E][✘] Attend CS2101 class | Priority: 2 (at: 2021-01-14, 10:10:10)
 Total number of tasks: 4
 ```
-Outcome if "/at" is missing:
-```
-Wrong formatting. Did you forget to put ';'? Not stonks!
-```
-
-Outcome for wrong priority input:
-```
-Priority argument must be integer in range 1-3! Not stonks!
-```
-
-Outcome for incorrect date time format:
-```
-"Input date time format is incorrect. Not stonks!"
-```
 
 ### What happens if task description is empty?
 This applies to all 3 types of tasks:
@@ -171,40 +143,40 @@ Empty (insert task type) task description. Not stonks!
 ```
 
 ### Edit task description - `edit`
-Format: `edit TASK_NUMBER /edit NEW_DESCRIPTION`
+Format for ToDo tasks: 
 
-Key this command in along with task number, "/edit" and a new description to change that task's description.
+`edit TASK_NUMBER /edit NEW_DESCRIPTION ; NEW_PRIORITY`
+
+Format for Deadline/Event tasks: 
+
+`edit TASK_NUMBER /edit NEW_DESCRIPTION ; NEW_PRIORITY ; NEW_DATETIME`
+
+Key this command in along with task number, "/edit" and the relevant arguments to change corresponding details.
+If you want to keep any original detail, put -keep- at the original position.
 
 Example of usage:
 
-`edit 1 /edit Do CS2103T optional ip tasks`
+`edit 1 /edit Do CS2103T optional ip tasks ; 3`
 
 Expected Outcome:
 ```
-You have edited a task description to this:
-Do CS2103T optional ip tasks
+You have edited a task to this:
+[T][✓] Do CS2103T optional ip tasks | Priority: 3
 ```
 
-Outcome if you only put edit command:
+Example of usage with `-keep-`:
+
+`edit 1 /edit Do CS2103T optional ip tasks ; -keep-`
+
+Expected Outcome with `-keep-`:
 ```
-Did you forget to add the task number and new description? Not stonks!
+You have edited a task to this:
+[T][✓] Do CS2103T optional ip tasks | Priority: 1
 ```
 
-Outcomes if you forget to put /edit:
+What if I choose to `-keep-` all the details?
 ```
-Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!
-
-Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks! (Happens if you only put a number too!)
-```
-
-Outcome if you did not put a proper task number but still have /edit:
-```
-Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!
-```
-
-Outcome if your description is empty but you still put /edit:
-```
-Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!
+There is no point editing this task! Not stonks!
 ```
 
 ### Mark task as done or undone - `done`
@@ -228,40 +200,10 @@ Not stonks! This task has been marked as undone:
 [D][✘] Do CS2103T lecture quiz | Priority: 3 (by: 2021-01-12, 10:10:10)
 ```
 
-Outcome if number field is empty:
-```
-Did you forget to put a number for the command you just typed in? Not stonks!
-```
-
-Outcome if number field has anything other than number or improper number (e.g. `done meme` or `done 1b`):
-```
-Did you put something other than a number or did you put a number incorrectly? Not stonks!
-```
-
-A task number is invalid if any of the following conditions are met:
-```
-1. 0
-2. Negative number
-3. Number is greater than number of tasks Meme Man has stored
-```
-
-Outcome if task number is invalid:
-```
-Invalid task number. Not stonks!
-```
-
 ### List - `list`
 Format: `list`
 
 Key this command in to cause Meme Man to show you your tasks in order and whether you have completed the tasks.
-
-Now suppose you have 4 tasks:
-```
-1. Watch CS2103T lecture (ToDo, Done) Priority 1
-2. Do CS2103T lecture quiz (Deadline of this Saturday 10:10:10, Done)  Priority 3
-3. Do CS2103T ip (Deadline of next Monday 10:10:10, Not done) Priority 3
-4. Attend CS2101 class (Event happens next Tuesday 10:10:10, Not done) Priority 2
-```
 
 How to get Meme Man to list out above tasks:
 
@@ -297,21 +239,6 @@ Expected Outcome:
 This task has been deleted:
 [T][✓] Watch CS2103T lecture | Priority: 1
 Total number of tasks: 3
-```
-
-Outcome if number field is empty:
-```
-Did you forget to put a number for the command you just typed in? Not stonks!
-```
-
-Outcome if number field has anything other than number or improper number (e.g. `delete meme` or `delete 1b`):
-```
-Did you put something other than a number or did you put a number incorrectly? Not stonks!
-```
-
-Outcome if task number is invalid:
-```
-Invalid task number. Not stonks!
 ```
 
 ### Delete all tasks - `scronch`
@@ -351,11 +278,6 @@ Here are my search results:
 Hmmst've... Stonks
 ```
 
-Outcome if keyword field is empty:
-```
-No keyword given! Not stonks!
-```
-
 Outcome if no tasks are returned:
 ```
 My search returned nothing. Not stonks!
@@ -387,11 +309,6 @@ I print the tasks:
 Hmmst've... Stonks
 ```
 
-Outcome if there is no sorting criteria given:
-```
-No sorting criteria given! Not stonks!
-```
-
 Outcome if list is empty:
 ```
 I have nothing to sort. Not stonks!
@@ -416,15 +333,6 @@ Expected Outcome:
 Given a description, stores todo task.
 Format of arguments: todo [description] ; [priority]
 ```
-Outcome if you do not give a command:
-```
-Command not given! Not stonks!
-```
-
-Outcome for invalid commands:
-```
-Helper does not recognise command. Not Stonks!
-```
 
 ### Easter egg - `orang`
 Format: `orang`
@@ -441,19 +349,3 @@ Did someone said... NO VEGETALS?
 Format: `icandoit` or `aikendueet`
 
 You can use either command to achieve transcendence. Try it out!
-
-### Invalid commands
-If you key in an unrecognised command, this is what Meme Man has to say:
-```
-Command not recognised. Not stonks!
-```
-### Excess inputs
-If you key in additional inputs next to a no-input command such as `list`, this is what Meme Man has to say:
-```
-Excessive inputs for a no-input command. Not stonks!
-```
-### Nothing given
-If you do not key in anything but press enter anyway, this is what Meme Man has to say:
-```
-Nothing was typed in! Not stonks!
-```

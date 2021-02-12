@@ -55,6 +55,24 @@ public class ToDoTaskTest {
     }
 
     /**
+     * Tests functionality of editPriority().
+     */
+    @Test
+    public void testEditPriority() {
+        assertEquals(ToDoTaskTest.STARTING_TASK.editPriority(TaskPriority.MEDIUM).toString(),
+                "[T][\u2718] Do CS2103T quiz | Priority: 2");
+    }
+
+    /**
+     * Tests functionality of editTask().
+     */
+    @Test
+    public void testEditTask() {
+        assertEquals(ToDoTaskTest.STARTING_TASK.editTask("Eat biscuits", TaskPriority.HIGH).toString(),
+                "[T][\u2718] Eat biscuits | Priority: 3");
+    }
+
+    /**
      * Tests functionality of whether task can be marked as done.
      */
     @Test
