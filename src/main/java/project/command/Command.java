@@ -14,5 +14,5 @@ public abstract class Command {
     public Command(String userInput) {
         this.userInput = userInput;
     }
-    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage ... storage);
 }

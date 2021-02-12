@@ -1,6 +1,7 @@
 package project.command;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import project.common.PrintedText;
 import project.io.Parser;
@@ -31,7 +32,7 @@ public class AddDeadline extends AddTask {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage ... storage) {
         try {
             String expression = Parser.parseParameter(userInput, " ", 1);
             String description = Parser.parseParameter(expression, "/by", 0);
@@ -48,8 +49,11 @@ public class AddDeadline extends AddTask {
             Deadline newDeadline = new Deadline(description, deadline);
             taskList.addTask(newDeadline);
 
-            storage.saveData(taskList);
-            assert storage.isSaved();
+            // will save in every storage path provided
+            Arrays.stream(storage).forEach(s -> {
+                s.saveData(taskList);
+                assert s.isSaved();
+            });
 
             return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                     newDeadline, taskList.getTotalNumberOfTasksUndone());

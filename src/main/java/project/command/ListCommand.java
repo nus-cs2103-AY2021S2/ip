@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage ... storage) {
         if (taskList.hasTasks()) {
             return ui.showList(taskList);
         } else {

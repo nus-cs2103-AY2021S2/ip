@@ -2,6 +2,8 @@ package project.command;
 
 import java.time.LocalDateTime;
 
+import java.util.Arrays;
+
 import project.common.PrintedText;
 import project.io.Parser;
 import project.io.Ui;
@@ -35,7 +37,7 @@ public class AddEvent extends AddTask {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage ... storage) {
         try {
             String expression = Parser.parseParameter(userInput, " ", 1);
             String description = Parser.parseParameter(expression, "/at", 0);
@@ -56,8 +58,11 @@ public class AddEvent extends AddTask {
             Event newEvent = new Event(description, startDateTime, endDateTime);
             taskList.addTask(newEvent);
 
-            storage.saveData(taskList);
-            assert storage.isSaved();
+            // will save in every storage path provided
+            Arrays.stream(storage).forEach(s -> {
+                s.saveData(taskList);
+                assert s.isSaved();
+            });
 
             return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                     newEvent, taskList.getTotalNumberOfTasksUndone());

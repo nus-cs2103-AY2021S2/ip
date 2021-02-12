@@ -44,13 +44,13 @@ public class OlafApp implements UserCommands {
         String command = userInput.toLowerCase().trim();
 
         if (command.equals(UserCommands.BYE)) {
-            return new ExitCommand().execute(taskList, ui, storage);
+            return new ExitCommand().execute(taskList, ui);
         } else if (command.equals(UserCommands.HELP)) {
-            return new HelpCommand().execute(taskList, ui, storage);
+            return new HelpCommand().execute(taskList, ui);
         } else if (command.equals(UserCommands.LIST)) {
-            return new ListCommand().execute(taskList, ui, storage);
+            return new ListCommand().execute(taskList, ui);
         } else if (command.startsWith(UserCommands.FIND)) {
-            return new FindCommand(command).execute(taskList, ui, storage);
+            return new FindCommand(command).execute(taskList, ui);
         } else if (command.startsWith(UserCommands.DONE)) {
             return new DoneCommand(command).execute(taskList, ui, storage);
         } else if (command.startsWith(UserCommands.DELETE)) {

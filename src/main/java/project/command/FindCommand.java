@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage ... storage) {
         try {
             String[] searchTerms = Parser.parseParameter(userInput, " ", 1).split(",");
             TaskList matches = taskList.findTasks(searchTerms);

@@ -1,5 +1,9 @@
 package project.common;
 
+/**
+ * All the key user commands that the application responds to.
+ * Note: All fields are public, static and final.
+ */
 public interface UserCommands {
     String BYE = "bye";
     String HELP = "help";

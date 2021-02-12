@@ -1,5 +1,7 @@
 package project.command;
 
+import java.util.Arrays;
+
 import project.common.PrintedText;
 import project.io.Parser;
 import project.io.Ui;
@@ -24,7 +26,7 @@ public class AddTodo extends AddTask {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage ... storage) {
         try {
             String description = Parser.parseParameter(userInput, " ", 1);
             if (description.length() == 0) {
@@ -34,8 +36,11 @@ public class AddTodo extends AddTask {
             Todo newTodo = new Todo(description);
             taskList.addTask(newTodo);
 
-            storage.saveData(taskList);
-            assert storage.isSaved();
+            // will save in every storage path provided
+            Arrays.stream(storage).forEach(s -> {
+                s.saveData(taskList);
+                assert s.isSaved();
+            });
 
             return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                     newTodo, taskList.getTotalNumberOfTasksUndone());
