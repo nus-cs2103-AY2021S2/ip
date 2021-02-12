@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Manager to manage a list of tasks
@@ -118,11 +119,7 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String res = "";
-        for (Task task : this.ls) {
-            res += task.toString() + "\n";
-        }
-        return res;
+        return this.ls.stream().map(x -> x.toString()).collect(Collectors.joining("\n"));
     }
 }
 
