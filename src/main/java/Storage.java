@@ -38,32 +38,11 @@ public class Storage {
                 while (myReader.hasNextLine()) {
                     String type = myReader.nextLine();
                     if (type.contains("[T]")) {
-                        String description = parser.parseTodoDescription(type);
-                        Task toAdd = new Todo(description);
-                        if (type.contains("\u2713")) {
-                            toAdd.markAsDone();
-                        }
-                        tasks.add(toAdd);
+                        loadTodo(type);
                     } else if (type.contains("[D]")) {
-                        String description = parser.parseDeadlineEventDescription(type);
-                        String dateString = parser.parseDateTimeDeadline(type);
-                        LocalDate date = LocalDate.parse(dateString,
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                        Task toAdd = new Deadline(description, date);
-                        if (type.contains("\u2713")) {
-                            toAdd.markAsDone();
-                        }
-                        tasks.add(toAdd);
+                        loadDeadline(type);
                     } else if (type.contains("[E]")) {
-                        String description = parser.parseDeadlineEventDescription(type);
-                        String timeString = parser.parseDateTimeEvent(type);
-                        LocalDate time = LocalDate.parse(timeString,
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                        Task toAdd = new Event(description, time);
-                        if (type.contains("\u2713")) {
-                            toAdd.markAsDone();
-                        }
-                        tasks.add(toAdd);
+                        loadEvent(type);
                     }
                 }
                 myReader.close();
@@ -87,6 +66,38 @@ public class Storage {
         }
         myWriter.flush();
         myWriter.close();
+    }
 
+    private void loadTodo(String type) {
+        String description = parser.parseTodoDescription(type);
+        Task toAdd = new Todo(description);
+        if (type.contains("\u2713")) {
+            toAdd.markAsDone();
+        }
+        tasks.add(toAdd);
+    }
+
+    private void loadDeadline(String type) {
+        String description = parser.parseDeadlineEventDescription(type);
+        String dateString = parser.parseDateTimeDeadline(type);
+        LocalDate date = LocalDate.parse(dateString,
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        Task toAdd = new Deadline(description, date);
+        if (type.contains("\u2713")) {
+            toAdd.markAsDone();
+        }
+        tasks.add(toAdd);
+    }
+
+    private void loadEvent(String type) {
+        String description = parser.parseDeadlineEventDescription(type);
+        String timeString = parser.parseDateTimeEvent(type);
+        LocalDate time = LocalDate.parse(timeString,
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        Task toAdd = new Event(description, time);
+        if (type.contains("\u2713")) {
+            toAdd.markAsDone();
+        }
+        tasks.add(toAdd);
     }
 }
