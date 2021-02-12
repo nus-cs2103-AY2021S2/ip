@@ -1,6 +1,7 @@
 package bob.gui;
 
 import bob.processor.Bob;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -56,5 +57,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getBobDialog(response, bobImage)
         );
         userInput.clear();
+        if (response.equals("Bye! See you soon!")) {
+            Platform.exit();
+        }
     }
 }
