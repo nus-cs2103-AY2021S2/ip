@@ -51,7 +51,8 @@ public class Parser {
         try {
             int startIndex = userInput.indexOf(" ") + 1;
             int endIndex = userInput.indexOf("/");
-            String name;
+            String name = "";
+            System.out.println(userInput + " " + startIndex + " " + endIndex);
             if (startIndex == 0) {
                 throw new BobException("No name detected. Please try again.");
             }
@@ -81,6 +82,8 @@ public class Parser {
                 dateTimeIndicator = "/at: ";
             } else if (taskType.equals("deadline")) {
                 dateTimeIndicator = "/by: ";
+            } else if (taskType.equals("remind")) {
+                dateTimeIndicator = "/on: ";
             }
             String[] taskDetails = userInput.split(dateTimeIndicator, 2);
             String dateTimeString = taskDetails[1];
@@ -93,6 +96,18 @@ public class Parser {
         }
     }
 
+    public LocalDateTime parseReminderDateTime(String fileLine) {
+        String[] reminderDetails = fileLine.split("R: ", 0);
+        if (reminderDetails.length > 1) {
+            String reminderDateTimeString = reminderDetails[1];
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
+            LocalDateTime dateTime = LocalDateTime.parse(reminderDateTimeString, dateFormatter);
+            return dateTime;
+        } else {
+            return null;
+        }
+
+    }
     /**
      * Returns a Task from a file line string.
      *
@@ -104,16 +119,14 @@ public class Parser {
         String taskType = nextTaskDetails[0];
         String status = nextTaskDetails[1];
         String taskName = nextTaskDetails[2];
-
         boolean done = false;
         if (status.equals("1")) {
             done = true;
         }
-
         if (taskType.equals("T")) {
             return new Todo(taskName, done);
         } else {
-            String dateTimeString = nextTaskDetails[3];
+            String dateTimeString = nextTaskDetails[3].split(" R: ")[0];
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dateFormatter);
             LocalDate date = dateTime.toLocalDate();

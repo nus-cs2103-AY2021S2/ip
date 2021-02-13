@@ -27,6 +27,8 @@ public class Ui {
         String command = wordsInInput[0].toLowerCase();
 
         switch (command) {
+        case "remind":
+            return Command.REMIND.executeCommand(userInput, taskList, storage);
         case "bye":
             return Command.BYE.executeCommand(userInput, taskList, storage);
         case "list":
