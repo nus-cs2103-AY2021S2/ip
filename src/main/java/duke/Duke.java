@@ -49,12 +49,14 @@ public class Duke {
                 response = ui.listAllTasks(tasks.getList());
                 break;
             case DONE:
+                parser.isValidIndex(inputArr, tasks.getList());
                 int numDone = Integer.parseInt(inputArr[1]);
                 Task task = tasks.getList().get(numDone - 1);
                 tasks.checkAsDone(task);
                 response = ui.checkAsDoneMessage(task);
                 break;
             case DELETE:
+                parser.isValidIndex(inputArr, tasks.getList());
                 int numDelete = Integer.parseInt(inputArr[1]);
                 Task deletedTask = tasks.deleteTask(numDelete);
                 response = ui.deleteTaskMessage(tasks.getList(), deletedTask);
@@ -76,7 +78,7 @@ public class Duke {
             case DEADLINE:
                 parser.isValidDescription(inputArr);
                 description = parser.getDescription(inputArr, "deadline");
-                date = parser.getDate(inputArr, "deadline");
+                date = parser.getDate(inputArr);
                 Task deadline = new Deadline(description, date);
                 tasks.addTask(deadline);
                 response = ui.addTaskMessage(tasks.getList(), deadline);
@@ -84,7 +86,7 @@ public class Duke {
             case EVENT:
                 parser.isValidDescription(inputArr);
                 description = parser.getDescription(inputArr, "event");
-                date = parser.getDate(inputArr, "event");
+                date = parser.getDate(inputArr);
                 Task event = new Event(description, date);
                 tasks.addTask(event);
                 response = ui.addTaskMessage(tasks.getList(), event);

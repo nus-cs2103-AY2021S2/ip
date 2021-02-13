@@ -32,7 +32,7 @@ public class Ui {
      * Prints exit message when user inputs "bye".
      */
     public String exit() {
-        String message = "Bye. Till next time brother.";
+        String message = "Bye Eren. Till next time.";
         return message;
     }
 
@@ -102,7 +102,7 @@ public class Ui {
             }
         }
         if (newList.size() == 0) {
-            message += "No matching tasks found. :^S";
+            message += "No matching tasks found. " + new String(Character.toChars(0x1F648));
         } else {
             for (Task task : newList) {
                 if (task.getDescription().contains(keyword)) {

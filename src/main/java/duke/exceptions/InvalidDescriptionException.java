@@ -7,6 +7,6 @@ public class InvalidDescriptionException extends DukeException {
 
     @Override
     public String getMessage() {
-        return "OOPS!!! The description of the task is invalid or missing.\n";
+        return "MonkaS! The description of the task is missing or invalid.\n";
     }
 }

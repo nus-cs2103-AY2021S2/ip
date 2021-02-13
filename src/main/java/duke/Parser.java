@@ -2,6 +2,9 @@ package duke;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDescriptionException;
+import duke.exceptions.InvalidIndexException;
+
+import java.util.ArrayList;
 
 /**
  * Parser class to make sense of user input.
@@ -17,6 +20,7 @@ public class Parser {
 
     /**
      * Checks whether input task description is missing.
+     *
      * @param inputArr user input array.
      * @throws DukeException if input task description is missing.
      */
@@ -27,7 +31,21 @@ public class Parser {
     }
 
     /**
+     * Checks whether input index is out of range.
+     *
+     * @param inputArr user input array.
+     * @throws InvalidIndexException
+     */
+    public void isValidIndex(String[] inputArr, ArrayList<Task> list) throws InvalidIndexException {
+        int indexToDelete = Integer.parseInt(inputArr[1]);
+        if (indexToDelete < 1 || indexToDelete > list.size()) {
+            throw new InvalidIndexException();
+        }
+    }
+
+    /**
      * Returns an input array of String objects given an input String.
+     *
      * @param input user input.
      * @return an array of String objects.
      */
@@ -43,7 +61,7 @@ public class Parser {
         }
     }
 
-    public String getDate(String[] inputArr, String taskType) {
+    public String getDate(String[] inputArr) {
         return inputArr[1].substring(inputArr[1].indexOf("/") + 4);
     }
 }
