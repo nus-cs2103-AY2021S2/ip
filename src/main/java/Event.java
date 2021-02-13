@@ -40,4 +40,28 @@ public class Event extends Task {
         return String.format("%c,%s,%s,%s\n", SYMBOL, super.save(),
                     super.saveFormat(this.start), super.saveFormat(this.end));
     }
+
+    /**
+     * Returns result of the updating of task.
+     * @param field , field to be updated
+     * @param value , value to be updated
+     * @return String , result of the updating
+     */
+    @Override
+    public String update(String field, String value) {
+        if (field.contains("desc")) {
+            super.update(field, value);
+        }
+        try {
+            LocalDateTime dateTime = Parser.parseDate(value, Parser.ERROR_INVALID_DATE_FORMAT);
+            if (field.contains("start")) {
+                start = dateTime;
+            } else if (field.contains("end")) {
+                end = dateTime;
+            }
+        } catch (DukeDeadlineException e) {
+            return Ui.showError(e.getMessage());
+        }
+        return Ui.showFailUpdate();
+    }
 }
