@@ -1,5 +1,7 @@
 package ip.src.main.java;
 
+import java.io.IOException;
+
 /**
  * Returns a Duke bot that stores the tasks given by the user.
  */
@@ -19,6 +21,14 @@ public class Duke {
         output += "Hello! I'm Duke! :)" + "\n";
         output += "What can I do for you?";
         return output;
+    }
+
+    public void bye(Storage storage) throws DukeException {
+        try {
+            storage.updateFile();
+        } catch (IOException e) {
+            throw new DukeException("Can't save to file!");
+        }
     }
 
     /**
