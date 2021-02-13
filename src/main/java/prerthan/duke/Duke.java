@@ -1,17 +1,17 @@
-package sharadhr.duke;
+package prerthan.duke;
 
 import java.util.Optional;
 
 import javafx.application.Platform;
-import sharadhr.duke.command.Command;
-import sharadhr.duke.exception.DukeEmptyDetailException;
-import sharadhr.duke.exception.DukeInvalidArgumentException;
-import sharadhr.duke.exception.DukeInvalidCommandException;
-import sharadhr.duke.exception.DukeInvalidDateException;
-import sharadhr.duke.io.Input;
-import sharadhr.duke.io.Output;
-import sharadhr.duke.io.Storage;
-import sharadhr.duke.task.TaskList;
+import prerthan.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.exception.DukeInvalidArgumentException;
+import prerthan.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.exception.DukeInvalidDateException;
+import prerthan.duke.command.Command;
+import prerthan.duke.IO.Input;
+import prerthan.duke.IO.Output;
+import prerthan.duke.IO.Storage;
+import prerthan.duke.task.TaskList;
 
 /**
  *

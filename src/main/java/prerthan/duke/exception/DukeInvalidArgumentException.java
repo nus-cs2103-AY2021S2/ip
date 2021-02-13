@@ -1,6 +1,6 @@
-package sharadhr.duke.exception;
+package prerthan.duke.exception;
 
-import sharadhr.duke.command.Command.CommandName;
+import prerthan.duke.command.Command.CommandName;
 
 /**
  * InvalidArgumentException

@@ -1,10 +1,10 @@
-package sharadhr.duke.command;
+package prerthan.duke.command;
 
-import sharadhr.duke.exception.DukeEmptyDetailException;
-import sharadhr.duke.exception.DukeInvalidDateException;
-import sharadhr.duke.io.Output;
-import sharadhr.duke.io.Storage;
-import sharadhr.duke.task.TaskList;
+import prerthan.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.exception.DukeInvalidDateException;
+import prerthan.duke.IO.Output;
+import prerthan.duke.IO.Storage;
+import prerthan.duke.task.TaskList;
 
 /**
  * Models a possible user command to the Duke program.

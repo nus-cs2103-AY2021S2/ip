@@ -1,4 +1,4 @@
-package sharadhr.duke;
+package prerthan.duke;
 
 import javafx.application.Application;
 

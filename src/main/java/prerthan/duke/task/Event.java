@@ -1,8 +1,8 @@
-package sharadhr.duke.task;
+package prerthan.duke.task;
 
-import sharadhr.duke.exception.DukeEmptyDetailException;
-import sharadhr.duke.exception.DukeInvalidDateException;
-import sharadhr.duke.parse.DateParser;
+import prerthan.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.exception.DukeInvalidDateException;
+import prerthan.duke.parse.DateParser;
 
 import java.time.ZonedDateTime;
 
@@ -30,7 +30,6 @@ public class Event extends Task
 	 * {@link ZonedDateTime} instance variables are parsed from this string.
 	 *
 	 * @param detail     The Event detail
-	 * @param timeString the {@link String} describing the duration of the event
 	 * @throws DukeEmptyDetailException if {@code detail} is blank (as specified by
 	 *                                  {@link String#isBlank()})
 	 * @throws DukeInvalidDateException if the date cannot be parsed into a starting

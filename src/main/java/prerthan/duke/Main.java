@@ -1,4 +1,4 @@
-package sharadhr.duke;
+package prerthan.duke;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sharadhr.duke.ui.MainWindow;
+import prerthan.duke.ui.MainWindow;
 
 /**
  * Main

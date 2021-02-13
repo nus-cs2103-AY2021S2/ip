@@ -1,6 +1,6 @@
-package sharadhr.duke.task;
+package prerthan.duke.task;
 
-import sharadhr.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.exception.DukeEmptyDetailException;
 
 import java.io.IOException;
 
@@ -26,7 +26,6 @@ public abstract class Task
 	 * Initialises a {@link Task} with some specified {@code detail}, and is set as
 	 * incomplete.
 	 *
-	 * @param name the task detail
 	 * @throws DukeEmptyDetailException if {@code detail} is blank, as specified by
 	 *                                  {@link String#isBlank()}.
 	 */

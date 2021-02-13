@@ -1,6 +1,7 @@
-package sharadhr.duke.task;
+package prerthan.duke.task;
 
-import sharadhr.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.exception.DukeInvalidArgumentException;
 
 /**
  * A To-Do; effectively the same as the inherited abstract class, {@link Task}.

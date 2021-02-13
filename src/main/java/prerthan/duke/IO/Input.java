@@ -1,8 +1,9 @@
-package sharadhr.duke.io;
+package prerthan.duke.IO;
 
-import sharadhr.duke.command.*;
-import sharadhr.duke.exception.DukeInvalidArgumentException;
-import sharadhr.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.command.*;
+import prerthan.duke.exception.DukeInvalidArgumentException;
+import prerthan.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.command.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;

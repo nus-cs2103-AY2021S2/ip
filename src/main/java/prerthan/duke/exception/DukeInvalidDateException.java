@@ -1,4 +1,4 @@
-package sharadhr.duke.exception;
+package prerthan.duke.exception;
 
 /**
  * DukeInvalidDateException

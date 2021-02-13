@@ -1,4 +1,6 @@
-package sharadhr.duke.exception;
+package prerthan.duke.exception;
+
+import prerthan.duke.task.Task;
 
 /**
  * An exception thrown when the {@code detail} {@link String} passed to a

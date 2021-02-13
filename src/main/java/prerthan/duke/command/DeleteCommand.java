@@ -1,9 +1,9 @@
-package sharadhr.duke.command;
+package prerthan.duke.command;
 
-import sharadhr.duke.exception.DukeInvalidArgumentException;
-import sharadhr.duke.io.Output;
-import sharadhr.duke.io.Storage;
-import sharadhr.duke.task.TaskList;
+import prerthan.duke.exception.DukeInvalidArgumentException;
+import prerthan.duke.IO.Output;
+import prerthan.duke.IO.Storage;
+import prerthan.duke.task.TaskList;
 
 /**
  * A user
@@ -13,9 +13,9 @@ public class DeleteCommand extends Command
 	private int position;
 
 	/**
-	 * Creates a Command that deletes a {@link sharadhr.duke.task.TaskList}.
+	 * Creates a Command that deletes a {@link TaskList}.
 	 *
-	 * @param argumentTokens The arguments provided to this {@link sharadhr.duke.command.Command}
+	 * @param argumentTokens The arguments provided to this {@link Command}
 	 * @throws DukeInvalidArgumentException If more than one argument is supplied, or the
 	 * supplied argument is not strictly numerical and positive.
 	 */

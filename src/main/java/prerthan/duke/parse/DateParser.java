@@ -1,6 +1,6 @@
-package sharadhr.duke.parse;
+package prerthan.duke.parse;
 
-import sharadhr.duke.exception.DukeInvalidDateException;
+import prerthan.duke.exception.DukeInvalidDateException;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

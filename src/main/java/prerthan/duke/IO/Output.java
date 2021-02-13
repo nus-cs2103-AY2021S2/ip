@@ -1,6 +1,6 @@
-package sharadhr.duke.io;
+package prerthan.duke.IO;
 
-import sharadhr.duke.task.Task;
+import prerthan.duke.task.Task;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
@@ -50,7 +50,7 @@ public class Output
 	}
 
 	/**
-	 * Appends {@code message} to this {@link sharadhr.duke.io.Output} object
+	 * Appends {@code message} to this {@link Output} object
 	 *
 	 * @param message the {@link String} to append to this object
 	 */

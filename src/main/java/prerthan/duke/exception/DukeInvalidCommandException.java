@@ -1,9 +1,11 @@
-package sharadhr.duke.exception;
+package prerthan.duke.exception;
+
+import prerthan.duke.command.Command;
 
 /**
  * Thrown when user input is incorrect for a given correct command, or the
  * command does not exist (i.e. the user command resolves to
- * {@link CommandName#INVALID}.)
+ * {@link Command.CommandName#INVALID}.)
  */
 public class DukeInvalidCommandException extends DukeException
 {

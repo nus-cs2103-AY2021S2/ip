@@ -1,4 +1,4 @@
-package sharadhr.duke.io;
+package prerthan.duke.IO;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,14 +9,13 @@ import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import sharadhr.duke.Duke;
-import sharadhr.duke.exception.DukeEmptyDetailException;
-import sharadhr.duke.parse.DateParser;
-import sharadhr.duke.task.Deadline;
-import sharadhr.duke.task.Event;
-import sharadhr.duke.task.Task;
-import sharadhr.duke.task.TaskList;
-import sharadhr.duke.task.Todo;
+import prerthan.duke.Duke;
+import prerthan.duke.parse.DateParser;
+import prerthan.duke.task.Deadline;
+import prerthan.duke.task.Event;
+import prerthan.duke.task.Task;
+import prerthan.duke.task.TaskList;
+import prerthan.duke.task.Todo;
 
 /**
  * A class to handle file read/write operations by the Duke program.
@@ -50,7 +49,7 @@ public class Storage
 	}
 	
 	/**
-	 * Returns a possible {@link Task} after decoding {@code line} 
+	 * Returns a possible {@link Task} after decoding {@code line}
 	 * @param line A line from the file
 	 * @return A possible task; returns {@link Optional#empty()} if line cannot be decoded
 	 */
@@ -100,7 +99,7 @@ public class Storage
 	 * Returns a {@link TaskList}, parsed from the specified file associated with
 	 * this {@link Storage} object.
 	 *
-	 * @return the {@link Tasklist} after parsing the file on disk
+	 *
 	 */
 	public TaskList loadFromFile()
 	{

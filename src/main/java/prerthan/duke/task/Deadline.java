@@ -1,8 +1,8 @@
-package sharadhr.duke.task;
+package prerthan.duke.task;
 
-import sharadhr.duke.exception.DukeEmptyDetailException;
-import sharadhr.duke.exception.DukeInvalidDateException;
-import sharadhr.duke.parse.DateParser;
+import prerthan.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.exception.DukeInvalidDateException;
+import prerthan.duke.parse.DateParser;
 
 import java.time.ZonedDateTime;
 

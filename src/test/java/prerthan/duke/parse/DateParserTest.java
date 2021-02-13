@@ -1,4 +1,4 @@
-package sharadhr.duke.parse;
+package prerthan.duke.parse;
 
 import org.junit.jupiter.api.Test;
 

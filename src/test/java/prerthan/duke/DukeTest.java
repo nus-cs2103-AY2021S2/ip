@@ -1,4 +1,4 @@
-package sharadhr.duke;
+package prerthan.duke;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,10 +1,10 @@
-package sharadhr.duke.command;
+package prerthan.duke.command;
 
-import sharadhr.duke.exception.DukeInvalidArgumentException;
-import sharadhr.duke.exception.DukeInvalidCommandException;
-import sharadhr.duke.io.Output;
-import sharadhr.duke.io.Storage;
-import sharadhr.duke.task.TaskList;
+import prerthan.duke.exception.DukeInvalidArgumentException;
+import prerthan.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.IO.Output;
+import prerthan.duke.IO.Storage;
+import prerthan.duke.task.TaskList;
 
 /**
  * ListCommand

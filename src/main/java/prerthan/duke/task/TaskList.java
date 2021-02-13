@@ -1,7 +1,7 @@
-package sharadhr.duke.task;
+package prerthan.duke.task;
 
-import sharadhr.duke.Duke;
-import sharadhr.duke.io.Output;
+import prerthan.duke.Duke;
+import prerthan.duke.IO.Output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +33,6 @@ public class TaskList
 	 *
 	 * @param task A task to be added to the list.
 	 * @return {@code true} if task was successfully added (as specified by
-	 * {@link ArrayList#add})
-	 * @throws IOException
 	 */
 	public boolean addTask(Task task)
 	{
@@ -111,7 +109,7 @@ public class TaskList
 	}
 
 	/**
-	 * Returns the number of tasks in this {@link sharadhr.duke.task.TaskList}.
+	 * Returns the number of tasks in this {@link TaskList}.
 	 *
 	 * @return The number of tasks
 	 */
