@@ -182,7 +182,7 @@ public class Parser {
             Validation.checkForContentAfterSlash(command, findSlash);
             String tag = extractTag();
             Task selected = findTask();
-            storage.addTag(selected);
+            storage.addTag(selected, tag);
             selected.setTag(tag);
             return ui.respondToTag(selected);
         } catch (DukeException | IOException e) {
@@ -230,6 +230,8 @@ public class Parser {
                     return ui.respondToBye();
                 case "list":
                     return ui.respondToList(tasks.getSize()) + "\n" + tasks.list();
+                case "help":
+                    return ui.respondToHelp();
                 default:
                     return null;
                 }

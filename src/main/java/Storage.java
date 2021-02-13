@@ -195,7 +195,7 @@ public class Storage {
      * @param task Task with the new tag to be added.
      * @throws IOException On file error.
      */
-    public void addTag(Task task) throws IOException {
+    public void addTag(Task task, String tag) throws IOException {
         File temp = new File("data/temp.txt");
         temp.createNewFile();
         FileWriter tempFile = new FileWriter(temp, true);
@@ -203,11 +203,11 @@ public class Storage {
 
         while (contents.hasNext()) {
             String data = contents.nextLine();
-            if (!data.equals(task.toString())) {
-                tempFile.write(data + "\n");
-            } else {
-                tempFile.write(task.toString() + " " + task.getTag() + "\n");
+            if (data.equals(task.toString())) {
+                tempFile.write(task.toString() + "  #" + tag + "\n");
                 System.out.println(task.toString());
+            } else {
+                tempFile.write(data + "\n");
             }
         }
 

@@ -15,6 +15,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() + " " + (isThereTag ? getTag() : "");
+        return "[T]" + super.toString() + (isThereTag ? " " + getTag() : "");
     }
 }

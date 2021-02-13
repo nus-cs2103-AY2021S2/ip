@@ -17,7 +17,7 @@ public class Validation {
      */
     public static void checkValidCommand(String command) throws DukeException {
         String[] validCommands = new String[]{"todo", "deadline", "event", "list",
-                "bye", "done", "delete", "find", "tag"};
+                "bye", "done", "delete", "find", "tag", "help"};
         List<String> commands = Arrays.asList(validCommands);
 
         int index = command.indexOf(' ');

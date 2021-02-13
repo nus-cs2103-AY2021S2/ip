@@ -11,7 +11,8 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
-    static final String WELCOME_MESSAGE = "Hello I'm DUKE! What can I help you with today? :)";
+    static final String WELCOME_MESSAGE = "Hello I'm DUKE! What can I help you with today? :)\n\nType the command"
+            + " 'help' to see a list of available commands!";
 
     @FXML
     private ScrollPane scrollPane;
