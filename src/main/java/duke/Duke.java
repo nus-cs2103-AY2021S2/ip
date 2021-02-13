@@ -5,12 +5,14 @@ public class Duke {
     private Ui ui;
     private Parser parser;
     private TaskList tasks;
+    private ContactList contactList;
 
     public Duke() {
         this.storage = new Storage("C:/Users/Jeremias/Documents/GitHub/ip/data/", "data.txt");
         this.ui = new Ui();
         this.parser = new Parser();
         this.tasks = new TaskList();
+        this.contactList = new ContactList();
         storage.loadTaskList(tasks);
     }
 
@@ -42,6 +44,8 @@ public class Duke {
                 cmd = new FindCommand(command, input, tasks);
             } else if (command.equals("bye")) {
                 cmd = new ByeCommand(command, input, tasks);
+            } else if (command.equals("contact add")) {
+                cmd = new AddContactCommand(command, input, tasks, contactList);
             } else {
                 throw new WrongCommandDukeException();
             }

@@ -20,6 +20,9 @@ public class Parser {
      */
     public String parseCommand(String input) {
         String[] command = input.split(" ");
+        if (command[0].equals("contact") && command.length > 1) {
+            return command[0] + " " + command[1];
+        }
         return command[0];
     }
 
@@ -249,5 +252,56 @@ public class Parser {
         String[] command = input.split(" ");
         assert command[0].equals("find") : "Incorrect command parsing";
         return command[1];
+    }
+
+    public boolean canParseAddContactCommand(String input) {
+        String[] command = input.split(" ");
+        if (!command[0].equals("contact")) {
+            return false;
+        }
+        if (!command[1].equals("add")) {
+            return false;
+        }
+        String[] name = input.split("/name");
+        if (name.length != 2) {
+            return false;
+        }
+        String[] number = input.split("/number");
+        String[] address = input.split("/address");
+        if (number.length != 2 && address.length != 2) {
+            return false;
+        }
+        return true;
+    }
+
+    public String parseAddContactName(String input) {
+        String[] command = input.split("/name");
+        String[] details = command[1].split("/number");
+        if (details.length != 2) {
+            details = command[1].split("/address");
+        }
+        String name = details[0];
+        return name;
+    }
+
+    public int parseAddContactNumber(String input) {
+        String[] command = input.split("/number ");
+        if (command.length != 2) {
+            return 0;
+        }
+        String[] details = command[1].split("/address");
+        details = details[0].split(" ");
+        String numString = details[0];
+        int number = Integer.valueOf(numString);
+        return number;
+    }
+
+    public String parseAddContactAddress(String input) {
+        String[] command = input.split("/address");
+        if (command.length != 2) {
+            return "";
+        }
+        String address = command[1];
+        return address;
     }
 }

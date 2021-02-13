@@ -120,6 +120,10 @@ public class Ui {
                 "\n'done (valid index)' (checks a task on your list)" +
                 "\n'delete (valid index)' (removes a task from your list)" +
                 "\n'find (keyword)' (searches for all tasks in your list containing the keyword)" +
+                "\n'contact add /name (name) /number (number) /address (address)' (name or address can be omitted)" +
+                "\n'contact delete (index)' (removes contact)" +
+                "\n'contact edit (/name OR /number OR /address) (desired change)' (edits the contact)" +
+                "\n'contact list' (lists all contacts)" +
                 "\n'bye' (exits Duke)" +
                 "\nDo omit the parentheses in the actual command." +
                 "\nI pray that I will be of use to you.";
@@ -139,6 +143,17 @@ public class Ui {
                     taskList.getTask(i - 1).toString() + "\n";
         }
         str += "I can only pray that I have been of use to you.";
+        return str;
+    }
+
+    private String getContact(Contact contact) {
+        return contact.toString();
+    }
+
+    public String getAddContact(Contact contact) {
+        String str = "I have added a new companion to your list of allies:\n" +
+                getContact(contact) +
+                "\nKeep your friends close, and your enemies closer.";
         return str;
     }
 }
