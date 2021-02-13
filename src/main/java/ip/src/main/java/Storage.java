@@ -46,6 +46,7 @@ public class Storage {
             bot.addToBot(newTask);
 
         } else {
+            assert type.equals("D");
             String content = taskDataArr[2];
             String by = taskDataArr[3];
             newTask = new Deadline(content, by);

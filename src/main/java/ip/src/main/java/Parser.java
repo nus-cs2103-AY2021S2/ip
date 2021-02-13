@@ -25,6 +25,7 @@ public class Parser {
         } else if (input.equals("list")) {
             commandType = "list";
         } else {
+            assert input.length() > 1;
             commandType = input.split(" ")[0];
         }
         try {

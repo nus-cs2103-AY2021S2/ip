@@ -135,6 +135,8 @@ public class Ui {
                     output = deleteCommand(id);
                     break;
 
+                default:
+                    assert false : command;
             }
 
         } catch (DukeException e1) {
