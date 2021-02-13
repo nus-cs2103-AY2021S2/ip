@@ -30,7 +30,7 @@ public class StringParser {
      * @return Underline.
      */
     public static String generateUnderline(int length) {
-        return "_".repeat(length) + "\n";
+        return "_".repeat(length) + System.lineSeparator();
     }
 
     /**

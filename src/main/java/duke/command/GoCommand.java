@@ -61,8 +61,10 @@ public class GoCommand extends Command {
     public String executeAndPrint(TaskList listT, PlaceList listP) throws DukeException {
         Place place = convertToPlace();
         listP.addPlace(place);
-        return "Place added:\n" + place.toString()
+        return "Place added:" + System.lineSeparator() + place.toString()
                 + "Now you have " + listP.getSize()
-                + (listT.getSize() == 1 ? " place in the list.\n" : " places in the list.\n");
+                + (listT.getSize() == 1
+                    ? " place in the list." + System.lineSeparator()
+                    : " places in the list." + System.lineSeparator());
     }
 }

@@ -45,10 +45,10 @@ public class DoneCommand extends Command {
             Task currTask = listT.getJob(index);
             currTask.markAsDone();
             listT.replaceJob(index, currTask);
-            return "This task is marked as done: \n"
+            return "This task is marked as done: " + System.lineSeparator()
                     + currTask.toString();
         } else {
-            return MESSAGE_OBJECT_NOT_FOUND + "\n";
+            return MESSAGE_OBJECT_NOT_FOUND + System.lineSeparator();
         }
     }
 

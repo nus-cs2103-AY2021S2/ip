@@ -150,9 +150,11 @@ public class AddCommand extends Command {
             throw new DukeException("Unexpected value: " + this.cmdType);
         }
         listT.addJob(task);
-        return "Task added:\n" + task.toString()
+        return "Task added:" + System.lineSeparator() + task.toString()
                 + "Now you have " + listT.getSize()
-                + (listT.getSize() == 1 ? " task in the list.\n" : " tasks in the list.\n");
+                + (listT.getSize() == 1
+                        ? " task in the list." + System.lineSeparator()
+                        : " tasks in the list." + System.lineSeparator());
     }
 
     @Override

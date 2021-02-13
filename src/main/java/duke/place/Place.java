@@ -28,7 +28,7 @@ public class Place {
 
     @Override
     public String toString() {
-        return location + ": " + description + "\n";
+        return location + ": " + description + System.lineSeparator();
     }
 
 }

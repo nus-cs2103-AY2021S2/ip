@@ -10,16 +10,16 @@ import duke.command.Command;
 public class UI {
 
     // Welcome page.
-    private static final String WELCOME = " __________________________ \n"
-            + "| HI! THIS IS DUKE.          |\n"
-            + "| What can I do for you?  |\n"
-            + "|__________________________|\n";
+    private static final String WELCOME = " __________________________ " + System.lineSeparator()
+            + "| HI! THIS IS DUKE.          |" + System.lineSeparator()
+            + "| What can I do for you?  |" + System.lineSeparator()
+            + "|__________________________|" + System.lineSeparator();
 
     // Goodbye page.
-    private static final String BYE = " __________________________ \n"
-            + "|  GOOD BYE!                   |\n"
-            + "|  Duke always be with you. |\n"
-            + "|__________________________|\n";
+    private static final String BYE = " __________________________ " + System.lineSeparator()
+            + "|  GOOD BYE!                   |" + System.lineSeparator()
+            + "|  Duke always be with you. |" + System.lineSeparator()
+            + "|__________________________|" + System.lineSeparator();
 
     private static TaskList listT = new TaskList();
     private static PlaceList listP = new PlaceList();
@@ -30,7 +30,7 @@ public class UI {
      * @param e DukeException.
      */
     static String printError(DukeException e) {
-        return e.getMessage() + "\n";
+        return e.getMessage() + System.lineSeparator();
     }
 
     /**

@@ -107,7 +107,8 @@ public class Storage {
         } else {
             return task.getSaveType() + MARK_SEPARATE
                     + (task.getStatus() ? MARK_STATUS_ONE : MARK_STATUS_ZERO)
-                    + MARK_SEPARATE + task.getDescription() + " " + MARK_AT + task.getSaveTime() + "\n";
+                    + MARK_SEPARATE + task.getDescription() + " "
+                    + MARK_AT + task.getSaveTime() + System.lineSeparator();
         }
     }
 
@@ -118,7 +119,7 @@ public class Storage {
      * @return Output string that need to be written into save data.
      */
     public static String savePlaceData(Place place) {
-        return place.getDescription() + MARK_SEPARATE + place.getLocation() + "\n";
+        return place.getDescription() + MARK_SEPARATE + place.getLocation() + System.lineSeparator();
     }
 
 

@@ -18,7 +18,7 @@ public class PlaceCommand extends Command {
     @Override
     public String executeAndPrint(TaskList listT, PlaceList listP) throws DukeException {
         if (listP.getSize() == 0) {
-            return MESSAGE_LIST_EMPTY + "\n";
+            return MESSAGE_LIST_EMPTY + System.lineSeparator();
         } else {
             return listP.formatList();
         }

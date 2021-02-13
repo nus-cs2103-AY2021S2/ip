@@ -52,9 +52,9 @@ public class FindCommand extends Command {
             }
         }
         if (tempList.getSize() == 0) {
-            return MESSAGE_OBJECT_NOT_FOUND + "\n";
+            return MESSAGE_OBJECT_NOT_FOUND + System.lineSeparator();
         } else {
-            return "Here are the matching tasks in the list:\n"
+            return "Here are the matching tasks in the list:" + System.lineSeparator()
                     + tempList.formatList();
         }
     }
