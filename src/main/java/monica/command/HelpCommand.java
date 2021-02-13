@@ -10,9 +10,4 @@ public class HelpCommand extends Command{
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MonicaException {
         return ui.showHelp();
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
