@@ -33,7 +33,6 @@ public class DeadlineCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-
         if (!cmd.contains("/by")) {
             throw new DuckieException("oops! please specify deadline using '/by'");
         }

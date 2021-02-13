@@ -1,1 +1,1 @@
-D | not done | eat | Sat Dec 12 12:02:00 SGT 2020
+D | done | eat | Sat Dec 12 12:02:00 SGT 2020

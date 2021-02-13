@@ -1,11 +1,11 @@
 package command;
 
+import java.io.IOException;
+
 import classes.DuckieException;
 import classes.Storage;
 import classes.TaskList;
 import classes.Ui;
-
-import java.io.IOException;
 
 public class DeleteCmd extends Command {
 
@@ -30,6 +30,7 @@ public class DeleteCmd extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         String[] cmdArr = cmd.trim().split(" ");
+        assert !cmdArr[1].contains(" ");
         int deleteNum = Integer.parseInt(cmdArr[1]);
         String output = lst.getTask(deleteNum - 1).toString();
         lst.deleteTask(deleteNum - 1);

@@ -31,7 +31,7 @@ public class DoneCmd extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         String[] cmdArr = cmd.trim().split(" ");
-
+        assert !cmdArr[1].contains(" ");
         int taskNum = Integer.parseInt(cmdArr[1]);
         Task temp = lst.getTask(taskNum - 1);
         temp.markDone();
