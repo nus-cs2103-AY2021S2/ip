@@ -1,1 +1,3 @@
 T | 0 | return books
+T | 0 | go shopping
+T | 0 | borrow books 
