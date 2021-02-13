@@ -34,26 +34,27 @@ public class Parser {
         }
         String[] messages = commandLine.split(" ");
         String commandType = messages[0];
+        boolean isIncomplete = messages.length == 1;
 
         switch (commandType) {
         case "bye":
             return new ExitCommand();
 
         case "delete":
-            if (messages.length == 1) {
+            if (isIncomplete) {
                 throw new MonicaException("The delete index is missing.");
             }
             return new DeleteCommand(Integer.parseInt(messages[1]));
 
         case "done":
-            if (messages.length == 1) {
+            if (isIncomplete) {
                 throw new MonicaException("The done index is missing.");
             }
             int id = Integer.parseInt(messages[1]);
             return new DoneCommand(id);
 
         case "deadline":
-            if (messages.length == 1) {
+            if (isIncomplete) {
                 throw new MonicaException("The deadline description is missing.");
             }
             try {
@@ -63,7 +64,7 @@ public class Parser {
             }
 
         case "event":
-            if (messages.length == 1) {
+            if (isIncomplete) {
                 throw new MonicaException("The event description is missing.");
             }
             try {
@@ -73,7 +74,7 @@ public class Parser {
             }
 
         case "todo":
-            if (messages.length == 1) {
+            if (isIncomplete) {
                 throw new MonicaException("The todo description is missing.");
             }
             return new AddTodo(new Todo(processTask(commandLine), 0));
@@ -82,7 +83,7 @@ public class Parser {
             return new ListCommand();
 
         case "find":
-            if (messages.length == 1) {
+            if (isIncomplete) {
                 throw new MonicaException("The keyword is missing.");
             }
             return new FindCommand(processTask(commandLine));

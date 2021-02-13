@@ -13,7 +13,15 @@ public class Ui {
      * @return string
      */
     public static String showWelcome() {
-        return "Hey! I'm your best friend, Monica.\nWhat can I do for you?\n";
+        return "Hey! I'm Monica, your best friend.\nWhat can I do for you?\n";
+    }
+
+    /**
+     * Displays the number of tasks in the task list.
+     */
+    public String showNumberOfTasks(TaskList tasks) {
+        return "Now you have " + tasks.getSize() + " task"
+                + (tasks.getSize() > 1 ? "s in the list." : " in the list.\n");
     }
 
     /**
@@ -23,8 +31,7 @@ public class Ui {
      */
     public String showAdded(Task task, TaskList tasks) {
         return "Got it. I've added this task:\n  " + task
-                + "\nNow you have " + tasks.getSize() + " task"
-                + (tasks.getSize() > 1 ? "s in the list." : " in the list.\n");
+                + "\n" + showNumberOfTasks(tasks);
     }
 
     /**
@@ -34,9 +41,7 @@ public class Ui {
      */
     public String showDeleted(Task task, TaskList tasks) {
         return "Noted. I've removed this task:\n  " + task
-                + "\nNow you have " + tasks.getSize() + " task"
-                + (tasks.getSize() > 1 ? "s in the list." : " in the list.\n");
-
+                + "\n" + showNumberOfTasks(tasks);
     }
 
     /**
@@ -85,8 +90,8 @@ public class Ui {
         if (count == 1) {
             output.append("There is no matching task in the list. You can try another keyword.");
         }
-        return output.toString();
 
+        return output.toString();
     }
 
 
@@ -109,17 +114,18 @@ public class Ui {
      * Displays all correct command formats to users in alphabetical order.
      */
     public static String showHelp() {
-        final String DEADLINE_COMMAND = "deadline \n";
-        final String DELETE_COMMAND = "delete \n";
-        final String DONE_COMMAND  = "done \n";
-        final String EXIT_COMMAND = "exit \n";
-        final String EVENT_COMMAND = "event \n";
-        final String FIND_COMMAND = "find \n";
-        final String HELP_COMMAND = "help \n";
-        final String LIST_COMMAND = "list \n";
-        final String TODO_COMMAND = "todo \n";
+        final String GUIDANCE_MESSAGE = "You can enter any command from the below list:\n";
+        final String DEADLINE_COMMAND = "deadline taskName /by time in this format: yyyy-MM-dd HHmm\n";
+        final String DELETE_COMMAND = "delete taskIndex\n";
+        final String DONE_COMMAND  = "done taskIndex\n";
+        final String EXIT_COMMAND = "bye\n";
+        final String EVENT_COMMAND = "event taskName /at time in this format: yyyy-MM-dd HHmm\n";
+        final String FIND_COMMAND = "find\n";
+        final String HELP_COMMAND = "help\n";
+        final String LIST_COMMAND = "list\n";
+        final String TODO_COMMAND = "todo taskName\n";
 
-        return DEADLINE_COMMAND + DELETE_COMMAND + DONE_COMMAND
+        return GUIDANCE_MESSAGE + DEADLINE_COMMAND + DELETE_COMMAND + DONE_COMMAND
                 + EVENT_COMMAND + EXIT_COMMAND + FIND_COMMAND
                 + HELP_COMMAND + LIST_COMMAND + TODO_COMMAND;
     }
