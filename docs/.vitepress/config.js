@@ -1,7 +1,7 @@
 module.exports = {
   lang: 'en-US',
   title: 'Elaina',
-  description: 'Elaina is the ultimate personal assistant chatbot.',
+  description: 'The ultimate personal assistant chatbot.',
 
   themeConfig: {
     repo: 'lirc572/ip',
@@ -28,7 +28,7 @@ module.exports = {
         {
           text: 'Introduction',
           children: [
-            { text: 'What is Elaina?', link: '/' },
+            { text: 'What is Elaina?', link: '/pages/introduction' },
             { text: 'Getting Started', link: '/pages/getting-started' }
           ]
         },

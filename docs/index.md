@@ -1,5 +1,19 @@
-# What is Elaina
+---
+home: true
 
-> Elaina is the ultimate personal assistant chatbot.
+actionText: Get Started
+actionLink: /pages/getting-started
 
-![Hero](/Ui.png)
+altActionText: Learn More
+altActionLink: /pages/introduction
+
+features:
+  - title: 😘 Cute Bot
+    details: An all-in-one chatbot with a cute look and personality :)
+  - title: 💻 Cross Platform
+    details: Runs on all major desktop Operating Systems
+  - title: 🛠️ Productivity Features
+    details: Your powerful todo list
+
+footer: Copyright © 2021-present lirc572
+---
