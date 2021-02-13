@@ -7,7 +7,7 @@ public class ToDo extends Task {
     /**
      * Constructs a ToDo object.
      *
-     * @param name event name
+     * @param name the event name
      */
     public ToDo(String name) {
         super(name, TaskType.TODO);
@@ -16,7 +16,7 @@ public class ToDo extends Task {
     /**
      * Constructs a ToDo object with isDone status specified.
      *
-     * @param name   event name
+     * @param name   the event name
      * @param isDone the status of the event
      */
     public ToDo(String name, boolean isDone) {

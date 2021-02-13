@@ -12,9 +12,8 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline object.
      *
-     * @param name deadline name
-     * @param type type Deadline
-     * @param time deadline time
+     * @param name the deadline name
+     * @param time the deadline time
      */
     public Deadline(String name, LocalDate time) {
         super(name, TaskType.DEADLINE);
@@ -24,8 +23,8 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline object with isDone status specified.
      *
-     * @param name   deadline name
-     * @param time   deadline time
+     * @param name   the deadline name
+     * @param time   the deadline time
      * @param isDone the status of the deadline
      */
     public Deadline(String name, LocalDate time, boolean isDone) {
@@ -43,6 +42,11 @@ public class Deadline extends Task {
         return time;
     }
 
+    /**
+     * Returns the string format of the deadline.
+     *
+     * @return the string format of the deadline
+     */
     @Override
     public String toString() {
         return super.toString() + " (by: "

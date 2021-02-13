@@ -10,12 +10,25 @@ public class Task {
     protected final TaskType type;
     protected boolean isDone;
 
+    /**
+     * Constructs a task object.
+     *
+     * @param name the task name
+     * @param type the task type
+     */
     Task(String name, TaskType type) {
         this.name = name;
         this.isDone = false;
         this.type = type;
     }
 
+    /**
+     * Constructs a task object.
+     *
+     * @param name the task name
+     * @param type the task type
+     * @param isDone the status of the event
+     */
     Task(String name, TaskType type, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
@@ -65,6 +78,11 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Returns string format of the task.
+     *
+     * @return the string format of the task
+     */
     @Override
     public String toString() {
         String returnString = "[" + type.getType() + "][" + (isDone ? "X" : " ") + "] ";

@@ -6,6 +6,9 @@ package duke;
 public class Duke {
     private final Chatbot chatbot;
 
+    /**
+     * Constructs duke the bot.
+     */
     Duke() {
         chatbot = new Chatbot();
     }
