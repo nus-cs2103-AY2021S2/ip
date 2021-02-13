@@ -38,7 +38,7 @@ Here are the tasks in your list:
 Task can be inserted in the following manners:
 1. **TODO**
 
-Insert a **TODO** by simply providing a **DESCRIPTION** after the keyword 
+Insert a todo by simply providing a **DESCRIPTION** after the keyword 
 todo. The description can have spaces in between, and it can be of any length 
 
 Example of usage:
