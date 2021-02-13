@@ -31,6 +31,7 @@ public class Parser {
      */
     public boolean canParseTodo(String input) {
         String[] command = input.split(" ");
+        assert command[0].equals("todo") : "Incorrect command parsing";
         if (command.length == 1) {
             return false;
         }
@@ -63,6 +64,7 @@ public class Parser {
      */
     public boolean canParseDeadline(String input) {
         String[] command = input.split(" ");
+        assert command[0].equals("deadline") : "Incorrect command parsing";
         if (command.length == 1) {
             return false;
         }
@@ -106,6 +108,7 @@ public class Parser {
      */
     public boolean canParseEvent(String input) {
         String[] command = input.split(" ");
+        assert command[0].equals("event") : "Incorrect command parsing";
         if (command.length == 1) {
             return false;
         }
@@ -244,6 +247,7 @@ public class Parser {
      */
     public String parseKeyword(String input) {
         String[] command = input.split(" ");
+        assert command[0].equals("find") : "Incorrect command parsing";
         return command[1];
     }
 }
