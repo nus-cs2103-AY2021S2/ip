@@ -1,7 +1,9 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
 
 public class Statistics {
 
@@ -9,9 +11,9 @@ public class Statistics {
         String message = "";
         ArrayList<Task> overdueDeadlines = new ArrayList<>();
         for (Task task : list) {
-            if (task.getType() == 'D') {
+            if (task.getType() == 'D' && !task.getDoneStatus()) {
                 Deadline deadline = (Deadline) task;
-                if (deadline.getFormattedDate().compareTo(LocalDate.now()) < 0) {
+                if (deadline.getFormattedDate().isBefore(LocalDate.now())) {
                     overdueDeadlines.add(task);
                 }
             }
@@ -30,14 +32,14 @@ public class Statistics {
         for (Task task : list) {
             if (task.getType() == 'D') {
                 Deadline deadline = (Deadline) task;
-                int numberOfDaysDifference = deadline.getFormattedDate().compareTo(LocalDate.now());
-                if (numberOfDaysDifference <= 7 && numberOfDaysDifference >= 0) {
+                int numberOfDaysApart = (int) LocalDate.now().until(deadline.getFormattedDate(), ChronoUnit.DAYS);
+                if (numberOfDaysApart <= 7 && numberOfDaysApart >= 0) {
                     tasksDueSoon.add(task);
                 }
             } else if (task.getType() == 'E') {
                 Event event = (Event) task;
-                int numberOfDaysDifference = event.getFormattedDate().compareTo(LocalDate.now());
-                if (numberOfDaysDifference <= 7 && numberOfDaysDifference >= 0) {
+                int numberOfDaysApart = (int) LocalDate.now().until(event.getFormattedDate(), ChronoUnit.DAYS);
+                if (numberOfDaysApart <= 7 && numberOfDaysApart >= 0) {
                     tasksDueSoon.add(task);
                 }
             }

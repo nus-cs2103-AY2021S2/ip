@@ -1,10 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDescriptionException;
 import duke.exceptions.InvalidIndexException;
-
-import java.util.ArrayList;
 
 /**
  * Parser class to make sense of user input.
@@ -53,6 +53,13 @@ public class Parser {
         return input.split(" ", 2);
     }
 
+    /**
+     *  Gets the description of task from input array
+     *
+     * @param inputArr user input array.
+     * @param taskType type of task.
+     * @return
+     */
     public String getDescription(String[] inputArr, String taskType) {
         if (taskType.equals("todo")) {
             return inputArr[1];
@@ -61,7 +68,19 @@ public class Parser {
         }
     }
 
-    public String getDate(String[] inputArr) {
-        return inputArr[1].substring(inputArr[1].indexOf("/") + 4);
+    /**
+     *  Gets the date of task from input array
+     *
+     * @param inputArr user input array.
+     * @param taskType type of task.
+     * @return
+     */
+    public String getDate(String[] inputArr, String taskType) {
+        if (taskType.equals("deadline")) {
+            return inputArr[1].substring(inputArr[1].indexOf("/by") + 4);
+        } else {
+            assert taskType.equals("event") : "Task type should be an event";
+            return inputArr[1].substring(inputArr[1].indexOf("/at") + 4);
+        }
     }
 }

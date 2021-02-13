@@ -2,15 +2,21 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
-    Event event = new Event("football competition", "2019-10-15");
+    private Event event;
+
+    public EventTest() {
+        event = new Event("football competition", "2019-10-15");
+    }
 
     @Test
-    public void getFormattedAtTest() {
-        assertEquals("Oct 15 2019", event.getFormattedDate());
+    public void getFormattedDateTest() {
+        assertEquals(LocalDate.parse("2019-10-15"), event.getFormattedDate());
     }
 
     @Test

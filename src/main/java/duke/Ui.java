@@ -7,8 +7,8 @@ import java.util.ArrayList;
  * User interface class for Duke's interaction with users, send messages etc.
  */
 public class Ui {
-    protected Statistics stats;
 
+    protected Statistics stats;
 
     /**
      * Constructor for Ui class.
@@ -128,7 +128,8 @@ public class Ui {
                 + "todo [description] -> Add a todo\n"
                 + "deadline [description] /by [date] -> Add a deadline\n"
                 + "event [description] /at [date] -> Add an event\n"
-                + "stats -> Show overdue tasks and tasks happening soon";
+                + "stats -> Show overdue tasks and tasks happening soon\n"
+                + "-dates should be in yyyy-mm-dd format";
         return message;
     }
 

@@ -78,7 +78,7 @@ public class Duke {
             case DEADLINE:
                 parser.isValidDescription(inputArr);
                 description = parser.getDescription(inputArr, "deadline");
-                date = parser.getDate(inputArr);
+                date = parser.getDate(inputArr, "deadline");
                 Task deadline = new Deadline(description, date);
                 tasks.addTask(deadline);
                 response = ui.addTaskMessage(tasks.getList(), deadline);
@@ -86,7 +86,7 @@ public class Duke {
             case EVENT:
                 parser.isValidDescription(inputArr);
                 description = parser.getDescription(inputArr, "event");
-                date = parser.getDate(inputArr);
+                date = parser.getDate(inputArr, "event");
                 Task event = new Event(description, date);
                 tasks.addTask(event);
                 response = ui.addTaskMessage(tasks.getList(), event);

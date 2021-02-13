@@ -1,8 +1,3 @@
-T ; 0 ; dog
-E ; 0 ; project meeting ; 2019-10-15
-T ; 0 ; bath
-T ; 0 ; didnt skate
-D ; 0 ; project assignment ; 2019-10-15
-E ; 1 ; cycle at ECP ; 2021-02-20
-E ; 1 ; dig party ; 2012-09-09
-E ; 0 ; gathering ; 2019-10-15
+T ; 0 ; clean my toilet
+E ; 0 ; cycle at ECP ; 2021-02-20
+D ; 0 ; CS3230 assignment ; 2019-10-15

@@ -2,34 +2,26 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class UiTest {
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    Ui ui = new Ui();
 
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
+    private Ui ui;
+
+    public UiTest() {
+        ui = new Ui();
     }
 
     @Test
     public void greetingsTest() {
-        ui.greetings();
-        assertEquals("____________________________________________________________\n"
-                + "Hello! I'm your personal assistant Duke\n"
-                + "How can I assist you?\n"
-                + "____________________________________________________________", outputStreamCaptor.toString().trim());
+        assertEquals("Eren... I have waited to meet you for a long time.\n"
+                + "------\n"
+                + "How can Zeke assist you?\n"
+                + "Type \"help\" for the list of commands!", Ui.greetings());
     }
 
     @Test
     public void exitTest() {
-        ui.exit();
-        assertEquals("Bye. Till next time!" + System.lineSeparator()
-                + Ui.HORIZONTAL_RULE, outputStreamCaptor.toString().trim());
+        assertEquals("Bye Eren. Till next time.", ui.exit());
     }
 }
