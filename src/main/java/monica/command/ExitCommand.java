@@ -18,13 +18,4 @@ public class ExitCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.sayBye();
     }
-
-    /**
-     * Returns a boolean value to signal the chat bot to exit.
-     * @return True as the command signals the bot to exit.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

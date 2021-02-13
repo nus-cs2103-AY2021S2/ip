@@ -31,13 +31,4 @@ public class AddCommand extends Command {
         storage.updateFile();
         return ui.showAdded(task, tasks);
     }
-
-    /**
-     * Returns a boolean value to signal the chat bot to exit.
-     * @return False as the command does not signal the bot to exit.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
