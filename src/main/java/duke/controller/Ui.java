@@ -11,9 +11,9 @@ public class Ui {
      * Prints the startup message.
      */
     public String initialize() {
-        return "Hello! I'm Duke's friend, Ekud." +
-                "\nDuke's dead, so I'm here to take his job." +
-                "\nYou want to jot down some tasks?\n";
+        return "Hello! I'm Duke's friend, Ekud."
+                + "\nDuke's dead, so I'm here to take his job."
+                + "\nYou want to jot down some tasks?\n";
     }
 
     /**
@@ -24,7 +24,7 @@ public class Ui {
      * @param size Number of Tasks in the list.
      */
     public String printOnListChange(String preMessage, Task t, int size) {
-        return preMessage + "\n" + t + "\n" +
-                "Now you have " + size + " tasks in the list.\n";
+        return preMessage + "\n" + t + "\n"
+                + "Now you have " + size + " tasks in the list.\n";
     }
 }

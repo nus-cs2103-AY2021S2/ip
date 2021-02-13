@@ -25,7 +25,7 @@ public class Event extends Task {
      * Constructs an Event with a name, time and status.
      *
      * @param taskName Name of the Event.
-     * @param done Status of the Event, done or not done.
+     * @param isDone Status of the Event, done or not done.
      * @param eventTime Time of the Event.
      */
     public Event(String taskName, boolean done, LocalDate eventTime) {
@@ -49,7 +49,7 @@ public class Event extends Task {
      *
      * @return A string that complies with CSV format.
      */
-    public String parseToCSVRow() {
+    public String parseToCsvRow() {
         return "E," + super.isDone() + "," + super.getTaskName() + "," + this.eventTime;
     }
 

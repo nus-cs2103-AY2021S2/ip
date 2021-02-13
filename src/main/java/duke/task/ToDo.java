@@ -38,7 +38,7 @@ public class ToDo extends Task {
      *
      * @return A string that complies with CSV format.
      */
-    public String parseToCSVRow() {
+    public String parseToCsvRow() {
         return "T," + super.isDone() + "," + super.getTaskName();
     }
 }
