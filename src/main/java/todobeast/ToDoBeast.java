@@ -37,6 +37,7 @@ public class ToDoBeast {
 //            String fullCommand = ui.readCommand();
 //            ui.addToResponseOutput(ui.showLine());
             Command command = Parser.parse(fullCommand);
+            assert command != null : "No command produced from application!";
             command.execute(taskList, ui);
 
             if (command.isExit()) {

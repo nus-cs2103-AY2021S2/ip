@@ -32,6 +32,8 @@ public class Storage {
      * @param fileName the name of the .txt file that will be created
      */
     public Storage(String directoryPath, String fileName) {
+        assert directoryPath.length() > 0 : "Empty directory name given!";
+        assert fileName.length() > 0 : "Empty file name given!";
         File directory = new File(directoryPath);
         if (!directory.exists()) {
             directory.mkdir();
