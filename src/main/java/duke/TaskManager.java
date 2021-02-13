@@ -13,6 +13,14 @@ public class TaskManager {
     private static final String DEADLINE = "deadline";
     private ArrayList<Task> list = new ArrayList<>(100);
 
+    /**
+     * Adds a todo/event/deadline task to the list of tasks.
+     *
+     * @param type type of task to be added.
+     * @param task description of task to be added to the list.
+     * @param isCompleted boolean to indicate whether the task has been completed.
+     * @return Task task that was added to the list.
+     */
     public Task add(String type, String task, boolean isCompleted) {
         assert !task.equals("") : "Missing task description";
         if (type.equals(TODO)) {
@@ -34,6 +42,13 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Deletes a specific task from the list of tasks.
+     *
+     * @param taskId id of task to be deleted.
+     * @return Task task that was deleted from the list.
+     * @throws DukeException if the task number is invalid.
+     */
     public Task delete(int taskId) throws DukeException {
         if (taskId <= list.size() && taskId >= 1) {
             assert taskId >= 0 : "Invalid task number";
@@ -45,6 +60,13 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Marks a specific task as done.
+     *
+     * @param taskId id of task to be marked as done.
+     * @return Task task that was marked as done.
+     * @throws DukeException if the task number is invalid.
+     */
     public Task done(int taskId) throws DukeException {
         if (taskId <= list.size() && taskId >= 1) {
             assert taskId >= 0 : "Invalid task number";
@@ -56,6 +78,13 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Retrieves a list of tasks that are due on a specified date.
+     *
+     * @param date date to use and search for tasks that are due.
+     * @return ArrayList list of tasks that are due on the date.
+     * @throws DukeException if the specified date is not in YYYY-MM-DD format.
+     */
     public ArrayList<Task> getTasksOn(String date) {
         LocalDate currentDate = LocalDate.parse(date);
         assert currentDate != null : "Invalid date format";
@@ -69,6 +98,11 @@ public class TaskManager {
         return dueList;
     }
 
+    /**
+     * Uploads a given list of tasks to the task list.
+     *
+     * @param storedData list of data to be uploaded to the task list.
+     */
     public void upload(ArrayList<String> storedData) {
         for (String task : storedData) {
             String[] arr = task.split(" ", 3);
@@ -78,6 +112,11 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Retrieves the task list to store into storage.
+     *
+     * @return ArrayList list of tasks to store.
+     */
     public ArrayList<String> retrieveTasksforStorage() {
         ArrayList<String> taskList = new ArrayList<>();
         for (Task task : list) {
@@ -94,6 +133,12 @@ public class TaskManager {
         return this.list;
     }
 
+    /**
+     * Retrieves a list of tasks that have the specified keyword.
+     *
+     * @param keyword keyword to use and retrieve matching tasks.
+     * @return ArrayList list of tasks that have the keyword.
+     */
     public ArrayList<Task> retrieveMatchingTasks(String keyword) {
         ArrayList<Task> taskList = new ArrayList<>();
         for (Task task : list) {

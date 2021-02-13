@@ -160,6 +160,24 @@ Expected outcome:
 <br>
 
 ## Feature 9
+Search for tasks that are due on a specific date.
+
+### Usage
+
+###`due` - Key in `due <YYYY-MM-DD>`
+
+Example of usage:
+
+`due 2020-11-10`
+
+Expected outcome:
+
+`Here are the tasks due on 2020-11-10:`
+<br>
+1.`[D][X] run (by:Oct 10 2020 06:00PM)`
+<br>
+
+## Feature 10
 Exit the program.
 
 ### Usage
@@ -184,11 +202,12 @@ Action by user | Command to input
 ------------ | -------------
 Add Todo task | `todo <task description>`
 Add Deadline task | `deadline <task description> /by <YYYY-MM-DD> <hh:mm>`
-Add Event task | `event <task description> /at <YYYY/MM/DD> <time>`
+Add Event task | `event <task description> /at <YYYY-MM-DD> <time>`
 Delete task | `delete <task number>`
 Delete multiple tasks | `delete <task number> <task number>`
 List all tasks | `list`
 Mark task as done | `done <task number>`
 Find tasks containing keyword | `find <keyword>`
+Find tasks due on a specific date | `find <YYYY-MM-DD>`
 Close application | `bye`
 

@@ -29,12 +29,15 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/image2.jpg"));
 
-    private static final String WELCOME_MESSAGE = "Hello from Duke!\n" + "What can I do for you?";
+    private final String welcomeMessage = "Hello from Duke!\n" + "What can I do for you?";
 
+    /**
+     * Initialises the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
     public void setDuke(Duke d) {

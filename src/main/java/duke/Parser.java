@@ -13,6 +13,9 @@ import duke.command.DueCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 
+/**
+ * Class responsible for parsing of commands.
+ */
 public class Parser {
     private static final String TODO = "todo";
     private static final String DELETE = "delete";
@@ -29,7 +32,6 @@ public class Parser {
      * @param oldData list of tasks in the storage format.
      * @return ArrayList list of tasks in user input format to load into tasklist.
      */
-
     public static ArrayList<String> parseToStart(ArrayList<String> oldData) {
         ArrayList<String> parsedData = new ArrayList<>();
         for (String task : oldData) {

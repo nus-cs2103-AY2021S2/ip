@@ -12,6 +12,13 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * constructor of Deadline task.
+     *
+     * @param description description of task.
+     * @param isCompleted boolean to specify if the task has been completed.
+     * @param deadline deadline of the task.
+     */
     public Deadline(String description, boolean isCompleted, String deadline) {
         super(description, isCompleted);
         String[] dateAndTime = deadline.split(" ");

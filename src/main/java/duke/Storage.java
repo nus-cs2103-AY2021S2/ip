@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Represents a class that stores and real files stored in the hard disk.
+ * Class responsible for storing and reading files from the hard disk.
  */
 public class Storage {
 
@@ -48,10 +48,5 @@ public class Storage {
         fw.write(data);
         fw.close();
     }
-
 }
-/*
-todo
-Handling file/folder not found exception
-Handling IOException
-*/
+

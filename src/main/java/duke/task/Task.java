@@ -10,6 +10,12 @@ public class Task {
     protected String description;
     protected boolean isCompleted;
 
+    /**
+     * constructor of task.
+     *
+     * @param description description of task.
+     * @param isCompleted boolean to specify if the task has been completed.
+     */
     public Task(String description, boolean isCompleted) {
         this.description = description;
         this.isCompleted = isCompleted;

@@ -16,6 +16,9 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/image1.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/image2.jpg"));
 
+    /**
+     * Constructor to create a duke object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("./src/main/data/Data.txt");
@@ -44,8 +47,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Retrieves response for user input.
+     *
+     * @param input user input to get response for.
+     * @return String response to user input.
      */
     public String getResponse(String input) {
         return run(input);

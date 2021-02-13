@@ -10,6 +10,13 @@ public class Event extends Task {
     protected LocalDate date;
     protected String duration;
 
+    /**
+     * constructor of Event task.
+     *
+     * @param description description of task.
+     * @param isCompleted boolean to specify if the task has been completed.
+     * @param time time the task occurs.
+     */
     public Event(String description, boolean isCompleted, String time) {
         super(description, isCompleted);
         String[] dateDuration = time.split(" ");

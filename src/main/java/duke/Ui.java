@@ -57,7 +57,12 @@ public class Ui {
         return "Nice! I've marked this task as done:\n" + task + "\n";
     }
 
-
+    /**
+     * Returns a string containing all tasks in the list.
+     *
+     * @param list list of tasks.
+     * @return String containing all the task descriptions.
+     */
     public String showAllTasks(ArrayList<Task> list) {
         if (list.size() == 0) {
             return "There are no tasks in your list. \n";
@@ -70,7 +75,8 @@ public class Ui {
         }
     }
 
-    /** Returns a string containing a bye message that is to be printed to the user.
+    /**
+     * Returns a string containing a bye message that is to be printed to the user.
      *
      * @return String which is a bye message.
      */
@@ -78,6 +84,12 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
+    /** Returns a string containing the tasks that are due by the given date.
+     *
+     * @param list list of tasks that are due on the specified date.
+     * @param date deadline of tasks.
+     * @return String containing list of tasks that are due.
+     */
     public String showDueTasks(ArrayList<Task> list, String date) {
         LocalDate currentDate = LocalDate.parse(date);
         String result = "Here are the tasks due on " + String.valueOf(currentDate) + ": " + "\n";
@@ -87,6 +99,12 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Returns a string containing the tasks that have the matching keyword.
+     *
+     * @param list list of tasks that are have the keyword.
+     * @return String containing list of tasks that have the keyword.
+     */
     public String showMatchingTasks(ArrayList<Task> list) {
         if (list.size() == 0) {
             return "Sorry! There are no matching task.";
