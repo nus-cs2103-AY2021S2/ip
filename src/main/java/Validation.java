@@ -75,7 +75,7 @@ public class Validation {
      * @throws DukeException On invalid input. Task does not exist.
      */
     public static void checkValidRange(int taskSize, int chosenNumber) throws DukeException {
-        boolean isOutOfBounds = chosenNumber > taskSize;
+        boolean isOutOfBounds = chosenNumber > taskSize | chosenNumber <= 0;
         if (isOutOfBounds) {
             throw new DukeException(":( OOPS! This task does not exist! Use 'list' to check your task numbers!");
         }
