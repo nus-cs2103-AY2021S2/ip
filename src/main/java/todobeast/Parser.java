@@ -34,6 +34,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws ToDoBeastException {
 
         assert fullCommand.length() > 0 : "Empty command given!";
+        assert fullCommand.length() > 0 : "Empty command provided!";
         Command command = null;
         String[] dateAndTimeTokens = null;
         // full command will come delimited by ", "
@@ -59,14 +60,14 @@ public class Parser {
         case "done":
             checkTaskIndex(commandArgs);
             int doneIndex = Integer.parseInt(commandArgs[1]);
-            assert doneIndex >= 0 : "Negative index given!";
+            assert doneIndex >= 0 : "Index provided is a negative number";
             command = new DoneCommand(doneIndex);
             break;
         // format e.g.: delete, 1
         case "delete":
             checkTaskIndex(commandArgs);
             int deleteIndex = Integer.parseInt(commandArgs[1]);
-            assert deleteIndex >= 0 : "Negative index given!";
+            assert deleteIndex >= 0 : "Index provided is a negative number";
             command = new DeleteCommand(deleteIndex);
             break;
         case "find":
