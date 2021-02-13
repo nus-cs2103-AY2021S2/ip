@@ -9,15 +9,23 @@ import java.util.Scanner;
  * Loads and saves tasks from and into the specified file
  */
 public class Storage {
+    public static boolean hasLoadingError;
     protected static ArrayList<String> loadedTasks = new ArrayList<>();
     protected String filePath;
-
     /**
      * Initializes a Storage object
      * @param filePath the file path in which tasks are loaded from or saved into
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+    }
+
+    public static void resetLoadingError() {
+        hasLoadingError = false;
+    }
+
+    public void setLoadingError() {
+        hasLoadingError = true;
     }
 
     /**

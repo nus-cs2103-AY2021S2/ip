@@ -13,6 +13,7 @@ public class Parser {
     private static final int EVENT_DATE_INDEX = 3;
     private static final int DEADLINE_TASK_INDEX = 9;
     private static final int DEADLINE_DATE_INDEX = 3;
+    protected static boolean hasInputError;
     /**
      * Returns the response to the user's input
      * @param input input supplied by the user
@@ -38,6 +39,7 @@ public class Parser {
             return ui.showTaskMarkedDone(finishedTask);
         } else if (input.startsWith("todo ")) {
             if (hasEmptyTaskDescription(input)) {
+                setInputError();
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             String todoTask = getTodoTask(input);
@@ -72,6 +74,10 @@ public class Parser {
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private static void setInputError() {
+        hasInputError = true;
     }
 
     public static boolean hasEmptyTaskDescription(String input) {
@@ -155,5 +161,4 @@ public class Parser {
         return LocalDate.parse(input.substring(DEADLINE_TASK_INDEX).split("/", 2)[1]
                 .substring(DEADLINE_DATE_INDEX).replaceAll("/", "-"));
     }
-
 }

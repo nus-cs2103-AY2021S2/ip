@@ -17,7 +17,16 @@ public class Ui {
      * Displays a hello message to the user
      */
     public static String greetUser() {
-        return "Hello! I'm Duke!\n" + "\nHow can I help?\n";
+        String greeting = "Hello! I'm Duke!\n" + "\nHow can I help?\n";
+        if(Storage.hasLoadingError) {
+            greeting += showLoadingError();
+            Storage.resetLoadingError();
+        }
+        return greeting;
+    }
+
+    public String showErrorMessage(DukeException e) {
+        return e.toString();
     }
 
     /**
@@ -36,8 +45,8 @@ public class Ui {
     /**
      * Prints out the message that the specified file does not exist
      */
-    public void showLoadingError() {
-        System.out.println("File ./savedTasks.txt not found! Creating one...\n");
+    public static String showLoadingError() {
+        return "\n(No saved task file... Creating a new one...)";
     }
 
     public String showTaskAdded(Task task, int taskListSize) {

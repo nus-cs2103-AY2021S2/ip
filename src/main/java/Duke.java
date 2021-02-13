@@ -22,7 +22,7 @@ public class Duke {
         try {
             new TaskList(storage.load());
         } catch (IOException | DukeException e) {
-            ui.showLoadingError();
+            storage.setLoadingError();
             new TaskList();
         }
     }
@@ -32,11 +32,14 @@ public class Duke {
      * task list back to the specified file
      * @param input supplied by the user
      * @return response to the user input
-     * @throws DukeException if the user's input is invalid
      */
-    public String getResponse(String input) throws DukeException {
+    public String getResponse(String input) {
         Storage.store(FILE_PATH_SAVED_TASKS);
-        return Parser.handleUserCommand(input, ui);
+        try {
+            return Parser.handleUserCommand(input, ui);
+        } catch (DukeException e) {
+            return ui.showErrorMessage(e);
+        }
     }
 
     public String greeting() {
