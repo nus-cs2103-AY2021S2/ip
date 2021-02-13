@@ -26,6 +26,7 @@ public class App extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.setTitle("Blarb");
             fxmlLoader.<Gui>getController().setBlarb(blarb);
             stage.show();
         } catch (IOException e) {

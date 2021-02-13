@@ -50,7 +50,7 @@ application {
 shadowJar {
     archiveBaseName.set("blarb")
     archiveClassifier.set(null)
-    archiveVersion.set("0.2")
+    archiveVersion.set("0.3")
 }
 
 checkstyle {
