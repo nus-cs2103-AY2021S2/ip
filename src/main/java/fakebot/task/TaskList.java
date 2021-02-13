@@ -19,7 +19,7 @@ public class TaskList {
     /**
      * Returns task at index i.
      *
-     * @param i index of the task.
+     * @param i the index of the task.
      * @return a task.
      */
     public Task getTask(int i) {
@@ -38,7 +38,7 @@ public class TaskList {
     /**
      * Removes task index i.
      *
-     * @param i Index of task to be removed.
+     * @param i the index of task to be removed.
      */
     public void removeTask(int i) {
         tasks.remove(i);
@@ -56,7 +56,7 @@ public class TaskList {
     /**
      * Finds all task that contain search string.
      *
-     * @param search a string to be search.
+     * @param search the string to be search.
      * @return a list of task that contain search string.
      */
     public List<Task> findTasks(String search) {
@@ -68,7 +68,7 @@ public class TaskList {
     /**
      * Check if task list contain the same task.
      *
-     * @param task a task to be check.
+     * @param task the task to be check.
      * @return true if task exist
      */
     public boolean containTask(Task task) {

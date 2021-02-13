@@ -23,7 +23,7 @@ public class Deadline extends Task {
     /**
      * Returns task deadline date.
      *
-     * @return an string containing deadline time.
+     * @return a string containing deadline time.
      */
     public String getDeadlineDate() {
         return saveDateFormat.format(deadlineDate);
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     /**
      * Returns task deadline time.
      *
-     * @return an string containing deadline time.
+     * @return a containing deadline time.
      */
     public String getDeadlineTime() {
         return saveTimeFormat.format(deadlineTime);

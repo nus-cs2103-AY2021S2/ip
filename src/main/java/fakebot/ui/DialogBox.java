@@ -43,8 +43,8 @@ public class DialogBox extends HBox {
     /**
      * Constructors for DialogBox specifying label and image view
      *
-     * @param text  text to be display
-     * @param img   user profile image to be display
+     * @param text the text to be display
+     * @param img the user profile image to be display
      * @param style Dialog Box Style
      */
     private DialogBox(String text, Image img, Style style) {
@@ -57,7 +57,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        //Style Image
+        //Setup Image and text
         dialog.setText(text);
         displayPicture.setImage(img);
         Circle clip = new Circle(30, 30, 30);
@@ -76,6 +76,10 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Styles the dialog box according to style
+     * @param style the style type
+     */
     private void styleBox(Style style) {
         CornerRadii rad = new CornerRadii(10);
         Color color = Color.BLACK;
@@ -104,8 +108,8 @@ public class DialogBox extends HBox {
     /**
      * Returns dialog box for user
      *
-     * @param text text of user
-     * @param img  image of user
+     * @param text the text of user
+     * @param img the image of user
      * @return Returns dialog box of the user
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -116,8 +120,8 @@ public class DialogBox extends HBox {
     /**
      * Returns dialog box for fakebot
      *
-     * @param text text of fakebot
-     * @param img  image of fakebot
+     * @param text the text of fakebot
+     * @param img the image of fakebot
      * @return Returns dialog box of the fakebot
      */
     public static DialogBox getFakebotDialog(String text, Image img) {
@@ -127,8 +131,8 @@ public class DialogBox extends HBox {
     /**
      * Returns alert dialog box for fakebot
      *
-     * @param text text of fakebot
-     * @param img  image of fakebot
+     * @param text the text of fakebot
+     * @param img  the image of fakebot
      * @return Returns dialog box of the fakebot
      */
     public static DialogBox getAlertDialog(String text, Image img) {

@@ -81,7 +81,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Handle user input.
      *
-     * @param userInput yser input string.
+     * @param userInput the yser input string.
      */
     private void handleUserInput(String userInput) {
         Command command;
@@ -105,7 +105,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Add alert text to container.
      *
-     * @param inputText inputText to be add to container.
+     * @param inputText to be add to container.
      */
     private void addTextToContainer(String inputText) {
         dialogContainer.getChildren().add(
@@ -116,8 +116,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Add text to container.
      *
-     * @param inputText  inputText to be add to container.
-     * @param outputText outputText to be add to container.
+     * @param inputText to be add to container.
+     * @param outputText to be add to container.
      */
     private void addTextToContainer(String inputText, String outputText) {
         dialogContainer.getChildren().addAll(
@@ -129,8 +129,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Add alert text to container.
      *
-     * @param inputText  inputText to be add to container.
-     * @param outputText outputText to be add to container.
+     * @param inputText to be add to container.
+     * @param outputText to be add to container.
      */
     private void addAlertTextToContainer(String inputText, String outputText) {
         dialogContainer.getChildren().addAll(

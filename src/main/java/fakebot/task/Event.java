@@ -27,7 +27,7 @@ public class Event extends Task {
     /**
      * Returns task start date.
      *
-     * @return an string containing start date.
+     * @return a string containing start date.
      */
     public String getStartDate() {
         return saveDateFormat.format(startDate);
@@ -36,7 +36,7 @@ public class Event extends Task {
     /**
      * Returns task start time.
      *
-     * @return an string containing start time.
+     * @return a string containing start time.
      */
     public String getStartTime() {
         return saveTimeFormat.format(startTime);
@@ -45,7 +45,7 @@ public class Event extends Task {
     /**
      * Returns task end date.
      *
-     * @return an string containing end date.
+     * @return a string containing end date.
      */
     public String getEndDate() {
         return saveDateFormat.format(endDate);
@@ -54,7 +54,7 @@ public class Event extends Task {
     /**
      * Returns task end time.
      *
-     * @return an string containing end time.
+     * @return a string containing end time.
      */
     public String getEndTime() {
         return saveTimeFormat.format(endTime);

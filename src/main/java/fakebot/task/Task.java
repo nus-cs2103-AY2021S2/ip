@@ -32,7 +32,7 @@ public abstract class Task {
     /**
      * Returns task name.
      *
-     * @return task name.
+     * @return the task name.
      */
     public String getTaskName() {
         return taskName;

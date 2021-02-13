@@ -44,7 +44,7 @@ public class Parser {
             + "                   [hh:mm]" +
             "] [yyyy-mm-dd] [hh:mm]" +
             "]\n"
-            + "Find     Command: " + FIND_COMMAND + "[Description]\n"
+            + "Find     Command: " + FIND_COMMAND + " [Description]\n"
             + "List     Command: " + LIST_COMMAND + "\n"
             + "Todo     Command: " + TODO_COMMAND + " [Description]\n"
             + "Exit     Command: " + EXIT_COMMAND + "\n";
@@ -60,7 +60,7 @@ public class Parser {
     /**
      * Converts task to string.
      *
-     * @param stringList List of string to be converted to string.
+     * @param stringList the list of string to be converted to string.
      * @return a string containing string converted from string list.
      */
     public static String convertStringListToString(List<String> stringList) {
@@ -75,7 +75,7 @@ public class Parser {
     /**
      * Converts task to string.
      *
-     * @param task Task to be parsed to string.
+     * @param task to be parsed to string.
      * @return a string containing parsed task.
      */
     public static String convertTaskToString(Task task) {
@@ -97,7 +97,7 @@ public class Parser {
     /**
      * Converts Todo to string.
      *
-     * @param todo Todo to be parsed to string.
+     * @param todo to be parsed to string.
      * @return a string containing parsed todo.
      */
     private static String convertTodoToString(Todo todo) {
@@ -157,7 +157,7 @@ public class Parser {
     /**
      * Converts list of task to list of string.
      *
-     * @param taskList string of list.
+     * @param taskList the string of list.
      * @return a list of String parsed from list of task.
      */
     public static List<String> convertTasksToStrings(TaskList taskList) {
@@ -173,7 +173,7 @@ public class Parser {
     /**
      * Converts string to task.
      *
-     * @param string parsed task.
+     * @param string the parsed task.
      * @return a task parsed from string.
      */
     public static Task convertStringToTask(String string) {
@@ -205,7 +205,7 @@ public class Parser {
     /**
      * Converts list of string to list of task.
      *
-     * @param stringList string of list.
+     * @param stringList the string of list.
      * @return a list of task parsed from list of string.
      */
     public static List<Task> convertStringsToTasks(List<String> stringList) {
@@ -233,7 +233,7 @@ public class Parser {
      * Returns list of string print message.
      *
      * @param startingMessage to print before the list.
-     * @param messages        list of string to print.
+     * @param messages the list of string to print.
      * @return a string containing print message.
      */
     public static String getStringListPrintMessage(String startingMessage, List<String> messages) {
@@ -252,7 +252,7 @@ public class Parser {
     /**
      * Returns list of task print message.
      *
-     * @param taskList list of task to convert.
+     * @param taskList the list of task to be convert.
      * @return a string containing print message.
      */
     public static String getTaskListPrintMessage(TaskList taskList) {
@@ -271,7 +271,7 @@ public class Parser {
     /**
      * Parses user input to command.
      *
-     * @param command user input to be parsed.
+     * @param command the user input to be parsed.
      * @return a command.
      */
     public static Command parseUserInputToCommand(String command) throws CommandException {
@@ -305,9 +305,9 @@ public class Parser {
     }
 
     /**
-     * Check if the command need a description.
+     * Checks if the command need a description.
      *
-     * @param command a string to be checked.
+     * @param command the command to be checked.
      * @return true if the command do not need a description.
      */
     private static Boolean isCommandWithoutDescription(String command) {
@@ -317,10 +317,10 @@ public class Parser {
     }
 
     /**
-     * parse the command that do not need description to Command class.
+     * Parses the command that do not need description to Command class.
      *
-     * @param command a string that do not need description.
-     * @return a command.
+     * @param command the command that do not need description.
+     * @return a command without description.
      */
     private static Command parseCommandWithoutDescription(String command) {
         if (command.equals(EXIT_COMMAND)) {
@@ -338,7 +338,7 @@ public class Parser {
     /**
      * Check if the command need a index description.
      *
-     * @param command a string to be checked.
+     * @param command the command to be checked.
      * @return true if the command do not need a description.
      */
     private static Boolean isCommandWithIndexDescription(String command) {
@@ -349,26 +349,27 @@ public class Parser {
     /**
      * Parses the command that need a index description to command class.
      *
-     * @param command a string that need a index description.
+     * @param command the command that need a index description.
+     * @param indexString the string containing index.
      * @return a command that need a index description.
      */
-    private static Command parseCommandWithIndexDescription(String command, String description)
+    private static Command parseCommandWithIndexDescription(String command, String indexString)
             throws CommandException {
-        if (description.isEmpty()) {
+        if (indexString.isEmpty()) {
             throw new CommandException("OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
         }
 
         try {
-            int index = Integer.parseInt(description);
+            int index = Integer.parseInt(indexString);
         } catch (NumberFormatException e) {
             throw new CommandException("OOPS!!! Invalid Task Index Format.");
         }
 
         if (command.equals(DONE_COMMAND)) {
-            return new Command(CommandType.DONE, description);
+            return new Command(CommandType.DONE, indexString);
 
         } else if (command.equals(DELETE_COMMAND)) {
-            return new Command(CommandType.DELETE, description);
+            return new Command(CommandType.DELETE, indexString);
         } else {
             assert false : "Invalid calling of parse command with index description";
             return null;
@@ -378,7 +379,7 @@ public class Parser {
     /**
      * Check if the command need a description.
      *
-     * @param command a String to be checked.
+     * @param command the command to be checked.
      * @return true if the command do need a description.
      */
     private static Boolean isCommandWithDescription(String command) {
@@ -390,8 +391,8 @@ public class Parser {
     /**
      * Parses the command that need a description to command class.
      *
-     * @param command     the name.
-     * @param description the description.
+     * @param command the name of the command.
+     * @param description the description of the command.
      * @return a command that need a description.
      */
     private static Command parseCommandWithDescription(String command, String description) throws CommandException {
@@ -416,8 +417,8 @@ public class Parser {
     /**
      * Parses todo command.
      *
-     * @param description Command description.
-     * @return a Todo command.
+     * @param description the command description.
+     * @return a todo command.
      */
     private static Command parseTodoCommand(String description) {
         return new Command(CommandType.TODO, description);
@@ -426,8 +427,8 @@ public class Parser {
     /**
      * Parses find command.
      *
-     * @param description Command description.
-     * @return a Find command.
+     * @param description the command description.
+     * @return a find command.
      */
     private static Command parseFindCommand(String description) {
         return new Command(CommandType.FIND, description);
@@ -436,8 +437,8 @@ public class Parser {
     /**
      * Parses event command.
      *
-     * @param description Command description.
-     * @return an Event command.
+     * @param description the command description.
+     * @return an event command.
      */
     private static Command parseEventCommand(String description) throws CommandException {
         if (!description.contains(EVENT_SPLIT_REGEX)) {
@@ -464,8 +465,8 @@ public class Parser {
     /**
      * Parses deadline command.
      *
-     * @param description Command description.
-     * @return a Deadline command.
+     * @param description the command description.
+     * @return a deadline command.
      */
     private static Command parseDeadlineCommand(String description) throws CommandException {
         if (!description.contains(DEADLINE_SPLIT_REGEX)) {

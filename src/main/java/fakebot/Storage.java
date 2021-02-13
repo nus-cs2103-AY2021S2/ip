@@ -25,8 +25,8 @@ public class Storage {
     /**
      * Constructor of storage class.
      *
-     * @param fileName name of file.
-     * @param filePath path of file.
+     * @param fileName the name of file.
+     * @param filePath the path of file.
      */
     public Storage(String fileName, String filePath) {
         filePath = createDirectory(filePath);
@@ -36,7 +36,7 @@ public class Storage {
     /**
      * Creates directory if file path doesn't exist.
      *
-     * @param filePath path of file.
+     * @param filePath the path of the file.
      * @return a path created, return empty path if path is invalid.
      */
     private String createDirectory(String filePath) {
@@ -54,7 +54,7 @@ public class Storage {
     /**
      * Writes tasks to file.
      *
-     * @param taskList Tasks to write to file.
+     * @param taskList to write to file.
      */
     public void writeTasksToFile(TaskList taskList) {
         String textToAdd = Parser.convertStringListToString(Parser.convertTasksToStrings(taskList));
