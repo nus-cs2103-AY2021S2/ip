@@ -1,13 +1,12 @@
 
 public class Ui {
-    Ui(){}
 
     /**
      * Print greeting message to user
      */
 
     public static String greeting() {
-        return "I am Donald Trump, the Greatest American President ever\nWhat can I do for you?";
+        return "I am Donald J Trump, he Greatest American President ever!\nPlease don't impeach me?";
     }
 
     /**

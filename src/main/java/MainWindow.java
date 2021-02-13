@@ -1,6 +1,4 @@
-import java.awt.*;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -39,6 +37,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.greeting(), dukeImage, Color.BEIGE));
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     public void setDuke(Duke d) throws IOException {
@@ -51,13 +50,14 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException, InterruptedException {
+    private void handleUserInput() throws IOException {
         String input = userInput.getText();
         if (input.equals("bye")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog("I am a sore loser bye!", dukeImage, Color.BEIGE));
             duke.exit();
             userInput.clear();
+            Platform.exit();
         } else {
             try {
                 String response = duke.getResponse(input);
@@ -68,7 +68,7 @@ public class MainWindow extends AnchorPane {
                 userInput.clear();
             } catch (DukeException | IOException e) {
 
-                System.out.println(e.getMessage());
+                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(e.toString(), dukeImage, Color.BEIGE));
 
             }
 

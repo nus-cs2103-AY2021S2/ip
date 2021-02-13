@@ -57,14 +57,14 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img, Color color) {
         var userDialog = new DialogBox(text, img, color);
         userDialog.dialog.setStyle("-fx-background-color: rgb(0, 191, 255); " + "-fx-background-radius: 5;"
-                + "-fx-padding: 0;" + "-fx-border-color: rgb(237, 237, 119);" + "-fx-border-radius: 5;");
+                + "-fx-padding: 3;" + "-fx-border-color: rgb(255, 255, 255);" + "-fx-border-radius: 5;");
         return userDialog;
     }
 
     public static DialogBox getDukeDialog(String text, Image img,Color color) {
         var dukeDialog = new DialogBox(text, img, color);
         dukeDialog.dialog.setStyle("-fx-background-color: rgb(179, 153, 255); " + "-fx-background-radius: 5;"
-                + "-fx-padding: 0;" + "-fx-border-color: rgb(235, 188, 218);" + "-fx-border-radius: 5;");
+                + "-fx-padding: 3;" + "-fx-border-color: rgb(255,255,255);" + "-fx-border-radius: 5;");
         dukeDialog.flip();
         return dukeDialog;
     }
