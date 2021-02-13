@@ -11,7 +11,7 @@ public class Printer {
      *
      * @param tasks the task list
      * @return Duke's reply to list command
-     * @throws DukeException
+     * @throws DukeException no task in the list
      */
     public static String printTaskList(List<Task> tasks) throws DukeException {
         if (tasks.size() == 0) {

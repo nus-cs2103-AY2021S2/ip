@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -35,6 +36,11 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.welcome(), dukeImage));
     }
 
+    /**
+     * Sets duke.
+     *
+     * @param d the duke initialized to be set
+     */
     public void setDuke(Chatbot d) {
         duke = d;
     }
@@ -50,11 +56,11 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         if (input.toLowerCase().equals("bye")) {
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.welfare(), dukeImage));
+            userInput.setEditable(false);
+            userInput.setStyle("-fx-background-color: #A9A9A9;");
         } else {
             dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getDukeReply(input), dukeImage));
         }
         userInput.clear();
     }
-
-
 }

@@ -8,6 +8,11 @@ public enum TaskType {
 
     private final String type;
 
+    /**
+     * Constructs a task type object for a task.
+     *
+     * @param type the task type
+     */
     TaskType(String type) {
         this.type = type;
     }

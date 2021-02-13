@@ -25,7 +25,14 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    /**
+     * Creates dialog box.
+     *
+     * @param text text to be put in the dialog box
+     * @param img image to be put in the dialog box
+     * @param isUser whether the dialog box is for user
+     */
+    private DialogBox(String text, Image img, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,15 +43,35 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        if (isUser) {
+            dialog.setStyle("-fx-background-color: #8FBC8F");
+        } else {
+            dialog.setStyle("-fx-background-color: #A9A9A9");
+        }
         displayPicture.setImage(img);
     }
 
+    /**
+     * Gets user's dialog box.
+     *
+     * @param text user input
+     * @param img user image
+     * @return user's dialog box
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img, true);
+        return db;
     }
 
+    /**
+     * Gets duke's dialog box.
+     *
+     * @param text duke input
+     * @param img duke image
+     * @return duke's dialog box
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, false);
         db.flip();
         return db;
     }

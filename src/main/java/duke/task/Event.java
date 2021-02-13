@@ -10,10 +10,10 @@ public class Event extends Task {
     private final LocalDate time;
 
     /**
-     * Constructs a Event object.
+     * Constructs an Event object.
      *
-     * @param name event name
-     * @param time event time
+     * @param name the event name
+     * @param time the event time
      */
     public Event(String name, LocalDate time) {
         super(name, TaskType.EVENT);
@@ -21,10 +21,10 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs a Event object with isDone status specified.
+     * Constructs an Event object with isDone status specified.
      *
-     * @param name   event name
-     * @param time   event time
+     * @param name   the event name
+     * @param time   the event time
      * @param isDone the status of the event
      */
     public Event(String name, LocalDate time, boolean isDone) {
@@ -42,6 +42,11 @@ public class Event extends Task {
         return time;
     }
 
+    /**
+     * Returns the string format of the event.
+     *
+     * @return the string format of the event
+     */
     @Override
     public String toString() {
         return super.toString() + " (at: "

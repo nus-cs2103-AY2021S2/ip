@@ -40,31 +40,17 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filePath);
-            if (!file.createNewFile()) {
-                File myObj = new File(filePath);
-                Scanner myReader = new Scanner(myObj);
-                while (myReader.hasNextLine()) {
-                    String[] data = myReader.nextLine().split(" \\| ");
-                    if (data.length == 0) {
-                        break;
-                    }
-                    switch (data[0]) {
-                    case "TODO":
-                        tasks.add(new ToDo(data[2], data[1].equals("1")));
-                        break;
-                    case "DEADLINE":
-                        tasks.add(new Deadline(data[2], LocalDate.parse(data[3]), data[1].equals("1")));
-                        break;
-                    case "EVENT":
-                        tasks.add(new Event(data[2], LocalDate.parse(data[3]), data[1].equals("1")));
-                        break;
-                    default:
-                        return new TaskList(tasks);
-                    }
-
-                }
-                myReader.close();
+            if (file.createNewFile()) {
+                return new TaskList();
             }
+
+            File myObj = new File(filePath);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String[] taskString = myReader.nextLine().split(" \\| ");
+                addTask(taskString, tasks);
+            }
+            myReader.close();
 
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -75,7 +61,31 @@ public class Storage {
     }
 
     /**
-     * Updates the file with newest task data, write the updated tasks into the file.
+     * Formats the task String and adds it intro the task list.
+     *
+     * @param taskString the task string
+     * @param tasks the task list
+     */
+    public void addTask(String[] taskString, List<Task> tasks) {
+        if (taskString.length == 0) {
+            return;
+        }
+        switch (taskString[0]) {
+        case "TODO":
+            tasks.add(new ToDo(taskString[2], taskString[1].equals("1")));
+            break;
+        case "DEADLINE":
+            tasks.add(new Deadline(taskString[2], LocalDate.parse(taskString[3]), taskString[1].equals("1")));
+            break;
+        case "EVENT":
+            tasks.add(new Event(taskString[2], LocalDate.parse(taskString[3]), taskString[1].equals("1")));
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Updates the file with newest task String, write the updated tasks into the file.
      *
      * @param tasks the updated task list
      */

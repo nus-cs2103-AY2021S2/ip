@@ -16,6 +16,11 @@ public class Main extends Application {
 
     private final Chatbot duke = new Chatbot();
 
+    /**
+     * Starts the application.
+     *
+     * @param stage the stage of the application
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -23,6 +28,8 @@ public class Main extends Application {
             AnchorPane anchorPane = fxmlLoader.load();
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException ex) {

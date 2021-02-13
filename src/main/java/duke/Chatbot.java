@@ -13,7 +13,7 @@ import duke.task.ToDo;
 
 
 /**
- * A duke.Duke chatbot that provides todo-list function for users.
+ * A Duke chatbot that provides todo-list function for users.
  */
 public class Chatbot {
     private final Storage storage;
@@ -85,7 +85,7 @@ public class Chatbot {
     }
 
     /**
-     * Sort the tasks based on date.
+     * Sorts the tasks based on date.
      * Handles sort command and returns Duke reply message.
      *
      * @return reply message from Duke
