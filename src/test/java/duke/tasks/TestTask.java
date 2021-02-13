@@ -10,16 +10,25 @@ import org.junit.jupiter.api.Test;
  * JUnit test for the <code>Task</code> class in duke.tasks
  */
 public class TestTask {
+    private final String description;
+    private final Task task;
+
+    /**
+     * Initializes an instance of <code>ToDo</code> instance for testing.
+     */
+    public TestTask() {
+        this.description = "CS2103 Quiz";
+        this.task = new Task(this.description);
+    }
 
     /**
      * Tests that the task's can be marked as done correctly.
      */
     @Test
     public void testIsDone() {
-        Task task = new Task("CS2103 Quiz");
-        assertFalse(task.isDone());
-        task.markAsDone();
-        assertTrue(task.isDone());
+        assertFalse(this.task.isDone());
+        this.task.markAsDone();
+        assertTrue(this.task.isDone());
     }
 
     /**
@@ -27,8 +36,7 @@ public class TestTask {
      */
     @Test
     public void testDescription() {
-        Task task = new Task("CS2103 Quiz");
-        assertEquals("CS2103 Quiz", task.getDescription());
+        assertEquals(this.description, this.task.getDescription());
     }
 
     /**
@@ -36,9 +44,8 @@ public class TestTask {
      */
     @Test
     public void testStatusString() {
-        Task task = new Task("CS2103 Quiz");
-        assertEquals("[ ] CS2103 Quiz", task.getStatusString());
-        task.markAsDone();
-        assertEquals("[X] CS2103 Quiz", task.getStatusString());
+        assertEquals("[ ] " + this.description, this.task.getStatusString());
+        this.task.markAsDone();
+        assertEquals("[X] " + this.description, this.task.getStatusString());
     }
 }

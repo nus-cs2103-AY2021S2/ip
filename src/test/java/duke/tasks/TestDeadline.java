@@ -13,13 +13,19 @@ import org.junit.jupiter.api.Test;
  * JUnit test for the <code>Deadline</code> class in duke.tasks
  */
 public class TestDeadline {
-    private final DateTimeFormatter formatter;
+    private final LocalDateTime dateTime;
+    private final String dateTimeString;
+    private final String description;
+    private final Deadline deadline;
 
     /**
-     * Initializes a <code>Deadline</code> instance with preset properties for testing.
+     * Initializes an instance of <code>Deadline</code> instance for testing.
      */
     public TestDeadline() {
-        this.formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+        this.dateTime = LocalDateTime.now();
+        this.dateTimeString = this.dateTime.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
+        this.description = "CS2103 Quiz";
+        this.deadline = new Deadline(this.description, this.dateTime);
     }
 
     /**
@@ -27,10 +33,9 @@ public class TestDeadline {
      */
     @Test
     public void testIsDone() {
-        Deadline deadline = new Deadline("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
-        assertFalse(deadline.isDone());
-        deadline.markAsDone();
-        assertTrue(deadline.isDone());
+        assertFalse(this.deadline.isDone());
+        this.deadline.markAsDone();
+        assertTrue(this.deadline.isDone());
     }
 
     /**
@@ -38,8 +43,15 @@ public class TestDeadline {
      */
     @Test
     public void testDescription() {
-        Deadline deadline = new Deadline("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
-        assertEquals("CS2103 Quiz", deadline.getDescription());
+        assertEquals(this.description, this.deadline.getDescription());
+    }
+
+    /**
+     * Tests that the deadline's datetime is processed correctly.
+     */
+    @Test
+    public void testDateTime() {
+        assertEquals(this.dateTime, this.deadline.getByDateTime());
     }
 
     /**
@@ -48,8 +60,7 @@ public class TestDeadline {
      */
     @Test
     public void testDateTimeString() {
-        Deadline deadline = new Deadline("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
-        assertEquals("2021-02-06 23:30", deadline.getByDateTimeString());
+        assertEquals(this.dateTimeString, this.deadline.getByDateTimeString());
     }
 
     /**
@@ -57,10 +68,16 @@ public class TestDeadline {
      */
     @Test
     public void testStatusString() {
-        Deadline deadline = new Deadline("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
-        assertEquals("[D][ ] CS2103 Quiz (by: 2021-02-06 23:30)", deadline.getStatusString());
-        deadline.markAsDone();
-        assertEquals("[D][X] CS2103 Quiz (by: 2021-02-06 23:30)", deadline.getStatusString());
+        assertEquals(
+                "[D][ ] " + this.description + " (by: " + this.dateTimeString + ")",
+                this.deadline.getStatusString()
+        );
+
+        this.deadline.markAsDone();
+        assertEquals(
+                "[D][X] " + this.description + " (by: " + this.dateTimeString + ")",
+                this.deadline.getStatusString()
+        );
     }
 
     /**
@@ -68,12 +85,14 @@ public class TestDeadline {
      */
     @Test
     public void testIsOverdue() {
-        Deadline overdueDeadline = new Deadline("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        Deadline overdueDeadline = new Deadline(this.description, this.dateTime.minusDays(1));
         assertTrue(overdueDeadline.isOverdue());
+
+        // Done tasks should not be overdue
         overdueDeadline.markAsDone();
         assertFalse(overdueDeadline.isOverdue());
 
-        Deadline onTimeDeadline = new Deadline("CS2103 Quiz", LocalDateTime.parse("9999-12-31 23:30", this.formatter));
+        Deadline onTimeDeadline = new Deadline(this.description, this.dateTime.plusDays(1));
         assertFalse(onTimeDeadline.isOverdue());
     }
 
@@ -82,14 +101,16 @@ public class TestDeadline {
      */
     @Test
     public void testIsUrgent() {
-        Deadline urgentDeadline = new Deadline("CS2103 Quiz", LocalDateTime.now().plusDays(2));
+        Deadline urgentDeadline = new Deadline(this.description, this.dateTime.plusDays(2));
         assertFalse(urgentDeadline.isUrgent(1));
 
+        // Done tasks should not be urgent
         assertTrue(urgentDeadline.isUrgent(3));
         urgentDeadline.markAsDone();
         assertFalse(urgentDeadline.isUrgent(3));
 
-        Deadline overdueDeadline = new Deadline("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        // Overdue tasks should not be urgent
+        Deadline overdueDeadline = new Deadline(this.description, this.dateTime.minusDays(1));
         assertFalse(overdueDeadline.isUrgent(1));
     }
 }

@@ -30,15 +30,9 @@ public class TestListCommand {
         LocalDateTime dateTime = LocalDateTime.parse("2021-02-06 23:30", formatter);
 
         this.tasks = new TaskList();
-        ToDo toDo = new ToDo("CS2103 Quiz 1");
-        Deadline deadline = new Deadline("BT4013 Quiz 2", dateTime);
-        Event event = new Event("CS2103 Quiz 3", dateTime);
-
-        deadline.markAsDone();
-
-        this.tasks.addTask(toDo);
-        this.tasks.addTask(deadline);
-        this.tasks.addTask(event);
+        this.tasks.addTask(new ToDo("CS2103 Quiz 1"));
+        this.tasks.addTask(new Deadline("BT4013 Quiz 2", dateTime));
+        this.tasks.addTask(new Event("CS2103 Quiz 3", dateTime));
 
         this.command = new ListCommand();
     }
@@ -68,7 +62,7 @@ public class TestListCommand {
     public void testResponse() {
         String expectedResponse = "Here are the task(s) in your list:\n"
                 + "1.[T][ ] CS2103 Quiz 1\n"
-                + "2.[D][X] BT4013 Quiz 2 (by: 2021-02-06 23:30)\n"
+                + "2.[D][ ] BT4013 Quiz 2 (by: 2021-02-06 23:30)\n"
                 + "3.[E][ ] CS2103 Quiz 3 (at: 2021-02-06 23:30)\n";
         assertEquals(expectedResponse, this.command.getResponse(this.tasks));
 

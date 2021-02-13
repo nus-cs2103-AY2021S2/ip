@@ -13,13 +13,19 @@ import org.junit.jupiter.api.Test;
  * JUnit test for the <code>Event</code> class in duke.tasks
  */
 public class TestEvent {
-    private final DateTimeFormatter formatter;
+    private final LocalDateTime dateTime;
+    private final String dateTimeString;
+    private final String description;
+    private final Event event;
 
     /**
-     * Initializes a <code>Event</code> instance with preset properties for testing.
+     * Initializes an instance of <code>Event</code> instance for testing.
      */
     public TestEvent() {
-        this.formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+        this.dateTime = LocalDateTime.now();
+        this.dateTimeString = this.dateTime.format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"));
+        this.description = "CS2103 Quiz";
+        this.event = new Event(this.description, this.dateTime);
     }
 
     /**
@@ -27,10 +33,9 @@ public class TestEvent {
      */
     @Test
     public void testIsDone() {
-        Event event = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
-        assertFalse(event.isDone());
-        event.markAsDone();
-        assertTrue(event.isDone());
+        assertFalse(this.event.isDone());
+        this.event.markAsDone();
+        assertTrue(this.event.isDone());
     }
 
     /**
@@ -38,8 +43,15 @@ public class TestEvent {
      */
     @Test
     public void testDescription() {
-        Event event = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
-        assertEquals("CS2103 Quiz", event.getDescription());
+        assertEquals(this.description, this.event.getDescription());
+    }
+
+    /**
+     * Tests that the event's datetime is processed correctly.
+     */
+    @Test
+    public void testDateTime() {
+        assertEquals(this.dateTime, this.event.getAtDateTime());
     }
 
     /**
@@ -48,8 +60,7 @@ public class TestEvent {
      */
     @Test
     public void testDateTimeString() {
-        Event event = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
-        assertEquals("2021-02-06 23:30", event.getAtDateTimeString());
+        assertEquals(this.dateTimeString, this.event.getAtDateTimeString());
     }
 
     /**
@@ -57,10 +68,16 @@ public class TestEvent {
      */
     @Test
     public void testStatusString() {
-        Event event = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
-        assertEquals("[E][ ] CS2103 Quiz (at: 2021-02-06 23:30)", event.getStatusString());
-        event.markAsDone();
-        assertEquals("[E][X] CS2103 Quiz (at: 2021-02-06 23:30)", event.getStatusString());
+        assertEquals(
+                "[E][ ] " + this.description + " (at: " + this.dateTimeString + ")",
+                this.event.getStatusString()
+        );
+
+        this.event.markAsDone();
+        assertEquals(
+                "[E][X] " + this.description + " (at: " + this.dateTimeString + ")",
+                this.event.getStatusString()
+        );
     }
 
     /**
@@ -68,12 +85,14 @@ public class TestEvent {
      */
     @Test
     public void testIsOverdue() {
-        Event overdueEvent = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        Event overdueEvent = new Event(this.description, this.dateTime.minusDays(1));
         assertTrue(overdueEvent.isOverdue());
+
+        // Done tasks should not be overdue
         overdueEvent.markAsDone();
         assertFalse(overdueEvent.isOverdue());
 
-        Event onTimeEvent = new Event("CS2103 Quiz", LocalDateTime.parse("9999-12-31 23:30", this.formatter));
+        Event onTimeEvent = new Event(this.description, this.dateTime.plusDays(1));
         assertFalse(onTimeEvent.isOverdue());
     }
 
@@ -82,14 +101,16 @@ public class TestEvent {
      */
     @Test
     public void testIsUrgent() {
-        Event urgentEvent = new Event("CS2103 Quiz", LocalDateTime.now().plusDays(2));
+        Event urgentEvent = new Event(this.description, this.dateTime.plusDays(2));
         assertFalse(urgentEvent.isUrgent(1));
 
+        // Done tasks should not be urgent
         assertTrue(urgentEvent.isUrgent(3));
         urgentEvent.markAsDone();
         assertFalse(urgentEvent.isUrgent(3));
 
-        Event overdueEvent = new Event("CS2103 Quiz", LocalDateTime.parse("2021-02-06 23:30", this.formatter));
+        // Overdue tasks should not be urgent
+        Event overdueEvent = new Event(this.description, this.dateTime.minusDays(1));
         assertFalse(overdueEvent.isUrgent(1));
     }
 }
