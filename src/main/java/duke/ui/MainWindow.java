@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (duke.getIsTerminated()) {
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished( event ->Platform.exit() );
+            delay.setOnFinished(event -> Platform.exit());
             delay.play();
         }
     }
