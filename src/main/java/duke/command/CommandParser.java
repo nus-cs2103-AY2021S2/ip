@@ -19,6 +19,7 @@ public class CommandParser {
     private final CommandList command;
     private final String data;
     private boolean isExit;
+    private static final int SPACER = 3;
 
     /**
      * This is the constructor for ParseCommands which takes in a command from CommandList, and String of data about
@@ -68,7 +69,6 @@ public class CommandParser {
      */
     public String executeCommand(Ui ui, Storage storage) {
         String output = "";
-        String date;
         switch (this.command) {
         case TODO:
             ToDo todo = new ToDo(this.data.strip());
@@ -76,16 +76,12 @@ public class CommandParser {
             output = ui.getAddResponse(todo, storage.getArrSize());
             break;
         case DEADLINE:
-            int byDate = this.data.lastIndexOf("/by ");
-            date = this.data.substring(byDate + 4);
-            Deadline deadline = new Deadline(this.data.substring(0, byDate).strip(), date);
+            Deadline deadline = Deadline.createDeadline(this.data);
             storage.add(deadline);
             output = ui.getAddResponse(deadline, storage.getArrSize());
             break;
         case EVENT:
-            int atDate = this.data.lastIndexOf("/at ");
-            date = this.data.substring(atDate + 4);
-            Event event = new Event(this.data.substring(0, atDate).strip(), date);
+            Event event = Event.createEvent(this.data);
             storage.add(event);
             output = ui.getAddResponse(event, storage.getArrSize());
             break;
@@ -141,10 +137,10 @@ public class CommandParser {
             } else if (!input.contains("/by")) {
                 throw new DukeException(" Deadline must have a date! :(");
             } else {
-                int by = input.indexOf("/by");
-                if (input.substring(index, by).isBlank()) {
+                int indexOfBy = input.indexOf("/by");
+                if (input.substring(index, indexOfBy).isBlank()) {
                     throw new DukeException(" Deadline must have a task! :(");
-                } else if (input.substring(by + 3).isBlank()) {
+                } else if (input.substring(indexOfBy + SPACER).isBlank()) {
                     throw new DukeException(" Deadline date cannot be empty! :(");
                 }
             }
@@ -155,10 +151,10 @@ public class CommandParser {
             } else if (!input.contains("/at")) {
                 throw new DukeException(" Event must have a date! :(");
             } else {
-                int at = input.indexOf("/at");
-                if (input.substring(index, at).isBlank()) {
+                int indexOfAt = input.indexOf("/at");
+                if (input.substring(index, indexOfAt).isBlank()) {
                     throw new DukeException(" Event must have a task! :(");
-                } else if (input.substring(at + 3).isBlank()) {
+                } else if (input.substring(indexOfAt + SPACER).isBlank()) {
                     throw new DukeException(" Event date cannot be empty! :(");
                 }
             }
