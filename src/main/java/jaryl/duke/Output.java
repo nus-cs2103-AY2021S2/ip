@@ -40,8 +40,7 @@ public class Output {
     public String printDoneMsg(Task task) {
         if(task.getStatusIcon().equals("\u2713")) {
             return "Nice! I've marked this task as done: \n\t" + task;
-        }
-        else {
+        } else {
             return "Noted. I've marked this task as undone: \n\t" + task;
         }
     }
