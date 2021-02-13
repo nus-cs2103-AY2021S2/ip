@@ -142,7 +142,7 @@ public class CommandParser {
                     throw new DukeException(" Deadline must have a task! :(");
                 } else if (input.substring(indexOfBy + SPACER).isBlank()) {
                     throw new DukeException(" Deadline date cannot be empty! :(");
-                } else if (checkDatesFormat(input.substring(by + 3).trim())) {
+                } else if (checkDatesFormat(input.substring(indexOfBy + 3).trim())) {
                     throw new DukeException(" I dont understand the date! :(");
                 }
             }
@@ -158,7 +158,7 @@ public class CommandParser {
                     throw new DukeException(" Event must have a task! :(");
                 } else if (input.substring(indexOfAt + SPACER).isBlank()) {
                     throw new DukeException(" Event date cannot be empty! :(");
-                } else if (checkDatesFormat(input.substring(at + 3).trim())) {
+                } else if (checkDatesFormat(input.substring(indexOfAt + 3).trim())) {
                     throw new DukeException(" I dont understand the date! :(");
                 }
             }
