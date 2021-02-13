@@ -22,7 +22,7 @@ public class Task {
      * @return task status.
      */
     public String getStatusIcon() {
-        return isDone ? "[X] " : "[ ] ";
+        return isDone ? "[X]" : "[ ]";
     }
 
     /**
@@ -47,6 +47,10 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.getStatusIcon() + this.description;
+        if (this.moreInfo != null) {
+            return this.getStatusIcon() + "[i] " + this.description;
+        } else {
+            return this.getStatusIcon() + "[ ] " + this.description;
+        }
     }
 }

@@ -1,3 +1,6 @@
-[E][X] work (at: home)
-[T][X] clean home
-[D][X] hw (by: 2021-02-15)
+[T][ ][ ] eat
+null
+[T][X][i] sleep
+ at home la
+[D][X][ ] hw (by: 2021-01-01)
+null
