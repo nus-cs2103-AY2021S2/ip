@@ -34,6 +34,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws ToDoBeastException {
 
         assert fullCommand.length() > 0 : "Empty command given!";
+
         Command command = null;
         String[] dateAndTimeTokens = null;
         // full command will come delimited by ", "
@@ -190,6 +191,8 @@ public class Parser {
                 hasInvalidArgsLength = true;
             }
             break;
+        default:
+            throw new InvalidInputException("Invalid task type specified!");
         }
 
         if (hasInvalidArgsLength) {

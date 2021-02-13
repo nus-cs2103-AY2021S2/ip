@@ -13,7 +13,7 @@ public abstract class Command {
     /**
      * Determines whether to exit the application or not.
      */
-    protected boolean isExit;
+    protected final boolean isExit;
 
     public Command() {
         isExit = false;

@@ -22,6 +22,6 @@ public class ExitCommand extends Command {
      * @param ui the Ui that belongs to this application
      * @throws ToDoBeastException
      */
-    public void execute(TaskList taskList, Ui ui) throws ToDoBeastException {
+    public void execute(TaskList taskList, Ui ui) {
     }
 }
