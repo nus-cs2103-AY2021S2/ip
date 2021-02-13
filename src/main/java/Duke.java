@@ -163,4 +163,15 @@ public class Duke {
                 taskList.size()));
     }
 
+    protected static void retrieveByKeyword(String keyword) {
+        int counter = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task eachTask : taskList) {
+            if(eachTask.getDescription().contains(keyword)) {
+                System.out.println(String.format("%d. %s", counter, eachTask));
+                counter++;
+            }
+        }
+    }
+
 }
