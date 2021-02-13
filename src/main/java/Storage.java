@@ -36,16 +36,20 @@ public class Storage {
             Scanner fileScanner = new Scanner(saveFile);
             while (fileScanner.hasNext()) {
                 String taskStr = fileScanner.nextLine();
+                String taskInfo = fileScanner.nextLine();
                 char taskType = taskStr.charAt(1);
                 int len = taskStr.length();
                 if (taskType == 'T') {
-                    tasks.addTodo(taskStr.substring(7));
+                    tasks.addTodo(taskStr.substring(10));
                 } else if (taskType == 'D'){
                     int ind = taskStr.indexOf(" (by: ");
-                    tasks.addDeadline(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
+                    tasks.addDeadline(taskStr.substring(10, ind + 1), taskStr.substring(ind + 6, len - 1));
                 } else if (taskType == 'E'){
                     int ind = taskStr.indexOf(" (at: ");
-                    tasks.addEvent(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
+                    tasks.addEvent(taskStr.substring(10, ind + 1), taskStr.substring(ind + 6, len - 1));
+                }
+                if (taskStr.charAt(7) == 'i') {
+                    tasks.getAtInd(tasks.getNumItems() - 1).moreInfo = taskInfo;
                 }
                 if (taskStr.charAt(4) == 'X') {
                     tasks.getAtInd(tasks.getNumItems() - 1).markAsDone();
@@ -64,6 +68,7 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.getNumItems(); i++) {
             fw.write(tasks.getAtInd(i).save() + "\n");
+            fw.write(tasks.getAtInd(i).moreInfo + "\n");
         }
         fw.close();
     }
