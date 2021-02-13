@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.HashMap;
 
 import exception.DukeInvalidArgumentsException;
@@ -73,6 +74,19 @@ public class TaskList {
     protected String addTaskAndReturnMessage(Task task) {
         storage.tasks.add(task);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task.toString(),
+                storage.tasks.size());
+    }
+
+    public String executeArchive(HashMap<String, String> tokenizedInput) {
+        Task t = storage.tasks.remove(Integer.parseInt(tokenizedInput.get("info")) - 1);
+        t.setArchived(true);
+        try {
+            storage.archiveTask(t);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return String.format("Got it. I've archived this task:\n  %s\nNow you have %d tasks in the list.", t.toString(),
                 storage.tasks.size());
     }
 }
