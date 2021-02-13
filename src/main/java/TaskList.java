@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 /**
  * Represents all the tasks the user has input.
@@ -117,5 +118,34 @@ public class TaskList {
             return Ui.foundMatchingTasks() + result + Ui.lineGetter();
             //can try make this better
         }
+    }
+
+    public static String getReminders() {
+        String reminders = "";
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        LocalDateTime dateTimeOneWeekAfter = dateTimeNow.plusWeeks(1);
+
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task task = tasks.get(i - 1);
+            if (task instanceof Event) {
+                Event event = (Event)task;
+                LocalDateTime eventTime = event.getEvent();
+                boolean withinRange = eventTime.isAfter(dateTimeNow) &&
+                        eventTime.isBefore(dateTimeOneWeekAfter);
+                if (withinRange) {
+                    reminders = reminders + " " + i + "." + event + "\n";
+                }
+            } else if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                LocalDateTime deadlineTime = deadline.getDeadline();
+                boolean withinRange = deadlineTime.isAfter(dateTimeNow) &&
+                        deadlineTime.isBefore(dateTimeOneWeekAfter);
+                if (withinRange) {
+                    reminders = reminders + " " + i + "." + deadline + "\n";
+                }
+            }
+        }
+
+        return reminders;
     }
 }

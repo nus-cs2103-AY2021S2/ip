@@ -57,6 +57,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (input.equals("bye")) {
+            //how to make it show exit message
             exitWindow();
         }
     }

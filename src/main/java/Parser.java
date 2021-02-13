@@ -48,6 +48,8 @@ public class Parser {
             return new ByeCommand();
         } else if (input.equals("list")) {
             return new ListCommand();
+        } else if (input.equals("reminders")) {
+            return new RemindersCommand();
         }
 
         String[] split = Parser.splitFirstAndRest(input);

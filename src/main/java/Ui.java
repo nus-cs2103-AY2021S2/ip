@@ -172,4 +172,8 @@ public class Ui {
     public static String foundMatchingTasks() {
         return LINE + " Sorry, there are no matching tasks :(\n";
     }
+
+    public static String getReminders() {
+        return LINE + TaskList.getReminders() + LINE;
+    }
 }
