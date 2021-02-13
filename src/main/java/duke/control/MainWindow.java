@@ -29,13 +29,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/image2.jpg"));
 
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String WELCOME_MESSAGE = "Hello from\n" + LOGO + "\n" + "What can I do for you?";
+    private static final String WELCOME_MESSAGE = "Hello from Duke!\n" + "What can I do for you?";
 
     @FXML
     public void initialize() {
