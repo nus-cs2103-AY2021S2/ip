@@ -1,10 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 
 import exception.DukeException;
@@ -14,6 +8,11 @@ public class Storage {
 
     protected ArrayList<Task> tasks;
     protected ArrayList<String> inputs;
+
+    public Storage() {
+        tasks = new ArrayList<>(100);
+        inputs = new ArrayList<>(100);
+    }
 
     /**
      * Saves current session state to file
@@ -45,7 +44,12 @@ public class Storage {
         if (!new File(sessionFile).exists()) {
             return;
         }
-        InputStream fileInStream = new FileInputStream(sessionFile);
+        InputStream fileInStream = null;
+        try {
+            fileInStream = new FileInputStream(sessionFile);
+        } catch (FileNotFoundException e) {
+            return;
+        }
         BufferedReader reader = getReader(fileInStream);
 
         String line;
