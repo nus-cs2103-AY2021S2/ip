@@ -32,7 +32,7 @@ public class Parser {
             String value = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
 
             if (keyValuePairs.containsKey(key)) {
-                throw new DukeInvalidArgumentsException(command, String.format("Dupicate argument /%s", key));
+                throw new DukeInvalidArgumentsException(command, String.format("Duplicate argument /%s", key));
             }
             keyValuePairs.put(key, value);
         }

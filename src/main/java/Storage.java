@@ -12,6 +12,7 @@ import exception.DukeException;
 
 public class Storage {
     protected static String sessionFile = "./saved_session";
+    protected static String archiveFile = "./archived_tasks";
 
     protected ArrayList<Task> tasks;
     protected ArrayList<String> inputs;
@@ -51,12 +52,6 @@ public class Storage {
         if (!new File(sessionFile).exists()) {
             return;
         }
-        InputStream fileInStream = null;
-        try {
-            fileInStream = new FileInputStream(sessionFile);
-        } catch (FileNotFoundException e) {
-            return;
-        }
         InputStream fileInStream;
         try {
             fileInStream = new FileInputStream(sessionFile);
@@ -75,6 +70,16 @@ public class Storage {
                 // Old command encountered
             }
         }
+    }
+
+    public void archiveTask(Task t) throws IOException {
+        File file = new File(archiveFile);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        PrintStream out = new PrintStream(file);
+        out.println(t.toString());
+        out.close();
     }
 
     private static BufferedReader getReader(InputStream in) {

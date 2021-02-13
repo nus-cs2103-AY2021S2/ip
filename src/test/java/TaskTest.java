@@ -1,13 +1,13 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskTest {
     @Test
     public void newTaskPopulatesFields() {
         Task t = new Task("testing task");
 
-        assertEquals(false, t.getCompletionState());
+        assertFalse(t.getCompletionState());
         assertEquals("testing task", t.getTaskInfo());
         assertEquals("[✗] testing task", t.toString());
     }
@@ -17,8 +17,28 @@ public class TaskTest {
         Task t = new Task("testing task");
         t.setTaskAsDone();
 
-        assertEquals(true, t.getCompletionState());
-        assertEquals("testing task", t.getTaskInfo());
-        assertEquals("[✓] testing task", t.toString());
+        assertTrue(t.getCompletionState());
+    }
+
+    @Test
+    public void taskDefaultCompletionStateIsFalse() {
+        Task t = new Task("testing task");
+
+        assertFalse(t.getCompletionState());
+    }
+
+    @Test
+    public void taskSetArchivedSetsArchivedState() {
+        Task t = new Task("testing task");
+        t.setArchived(true);
+
+        assertTrue(t.isArchived());
+    }
+
+    @Test
+    public void taskDefaultArchivedStateIsFalse() {
+        Task t = new Task("testing task");
+
+        assertFalse(t.isArchived());
     }
 }

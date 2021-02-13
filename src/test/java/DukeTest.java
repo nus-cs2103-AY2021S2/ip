@@ -1,9 +1,12 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -13,7 +16,26 @@ import exception.DukeException;
 import exception.DukeInvalidArgumentsException;
 import exception.DukeInvalidInputException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class DukeTest {
+
+    @Test
+    public void parseInputArchiveArchivesTask() throws DukeException {
+        Duke.storage.tasks = new ArrayList<>(100);
+        Duke.storage.inputs = new ArrayList<>(100);
+
+        Duke.parseInput("todo test task 1");
+        Duke.parseInput("todo test task 2");
+        Duke.parseInput("archive 1");
+
+        assertFalse(Duke.storage.tasks.get(0).isArchived());
+        assertEquals(1, Duke.storage.tasks.size());
+    }
 
     @Test
     public void parseInputFindAbleToFindTasks() throws IOException, DukeException{
@@ -29,67 +51,6 @@ public class DukeTest {
             "2.[T][✗] test task to find 1\n" +
             "4.[T][✗] test task to find 2", 
             Duke.parseInput("find to find"));
-    }
-
-    @Test
-    public void saveSessionAbleToLoad() throws IOException{
-        File testFile = new File(Storage.sessionFile);
-        if (testFile.exists())
-            testFile.delete();
-        testFile.createNewFile();
-
-        Duke.storage.tasks = new ArrayList<>(100);
-        Duke.storage.inputs = new ArrayList<>(100);
-
-        PrintWriter out = new PrintWriter(testFile);
-        out.println("todo test history 1");
-        out.println("todo test history 2");
-        out.println("list");
-        out.println("todo test history 3");
-        out.println("todo test history 4");
-        out.println("done 2");
-        out.println("delete 3");
-        out.close();
-
-        Duke.storage.loadHistory();
-
-        assertEquals(3, Duke.storage.tasks.size());
-        assertTrue(Duke.storage.tasks.get(1).getCompletionState());
-        assertEquals("test history 4", Duke.storage.tasks.get(2).getTaskInfo());
-        assertEquals(7, Duke.storage.inputs.size());
-    }
-
-    @Test
-    public void saveSessionAbleToSave() throws IOException, FileNotFoundException{
-        File testFile = new File(Storage.sessionFile);
-        if (testFile.exists())
-            testFile.delete();
-        testFile.createNewFile();
-
-        Duke.storage.tasks = new ArrayList<>(100);
-        Duke.storage.inputs = new ArrayList<>(100);
-
-        Duke.storage.inputs.add("todo test history 1");
-        Duke.storage.inputs.add("todo test history 2");
-        Duke.storage.inputs.add("list");
-        Duke.storage.inputs.add("todo test history 3");
-        Duke.storage.inputs.add("todo test history 4");
-        Duke.storage.inputs.add("done 2");
-        Duke.storage.inputs.add("delete 3");
-
-        Duke.storage.saveHistory();
-
-        BufferedReader in = new BufferedReader(new FileReader(Storage.sessionFile));
-
-        assertEquals("todo test history 1", in.readLine());
-        assertEquals("todo test history 2", in.readLine());
-        assertEquals("list", in.readLine());
-        assertEquals("todo test history 3", in.readLine());
-        assertEquals("todo test history 4", in.readLine());
-        assertEquals("done 2", in.readLine());
-        assertEquals("delete 3", in.readLine());
-
-        in.close();
     }
 
     @Test
@@ -122,7 +83,7 @@ public class DukeTest {
         Duke.chatLoop(in, out);
 
         final String expectedOutput = "Invalid Input: invalid input\n"
-                + "Command event encountered invalid arguments: Dupicate argument /at\n";
+                + "Command event encountered invalid arguments: Duplicate argument /at\n";
         assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
@@ -172,7 +133,7 @@ public class DukeTest {
         });
 
         assertEquals("deadline", exception.getCommand());
-        assertEquals("Dupicate argument /by", exception.getError());
+        assertEquals("Duplicate argument /by", exception.getError());
     }
 
     @Test
@@ -202,7 +163,7 @@ public class DukeTest {
         });
 
         assertEquals("event", exception.getCommand());
-        assertEquals("Dupicate argument /at", exception.getError());
+        assertEquals("Duplicate argument /at", exception.getError());
     }
 
     @Test

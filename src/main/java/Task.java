@@ -1,6 +1,7 @@
 public class Task {
     private boolean done;
     private String info;
+    private boolean archived;
 
     /**
      * Constructor for Task
@@ -36,5 +37,13 @@ public class Task {
      */
     public void setTaskAsDone() {
         done = true;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }
