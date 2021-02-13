@@ -19,13 +19,4 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.showList(tasks);
     }
-
-    /**
-     * Returns a boolean value to signal the chat bot to exit.
-     * @return False as the command does not signal the bot to exit.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

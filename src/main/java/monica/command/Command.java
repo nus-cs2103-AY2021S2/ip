@@ -18,10 +18,4 @@ public abstract class Command {
      * @throws MonicaException If there is any invalid command.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws MonicaException;
-
-    /**
-     * Returns a boolean value to signal the chat bot to exit.
-     * @return False if the command does not signal the bot to exit.
-     */
-    public abstract boolean isExit();
 }
