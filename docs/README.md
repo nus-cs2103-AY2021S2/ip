@@ -1,10 +1,11 @@
 # FakeBot User Guide
 
 --------------------------------------------------------------------------------------------------------------------
-##What is Fakebot?
+## What is Fakebot?
 Fakebot is a fake bot application where it faked a bot that helps the user to set
 notes for the upcoming event, deadlines and to-do list.
 It uses CLI interfaces to ensure faster and more efficient experience.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Features
 
@@ -29,8 +30,9 @@ You can `find` your tasks using a keyword.
 ### Deleting a task
 You can delete a task from the list.
 
-###Exiting the program
+### Exiting the program
 You can easily exit the program by `bye` command.
+
 ### Saving the data
 Task data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
@@ -38,8 +40,6 @@ There is no need to save manually.
 ### Detecting duplicate tasks
 Duplicate tasks are automatically detected and ignored.
 There is no need to worry about entering the same task.
-
-##
 
 
 --------------------------------------------------------------------------------------------------------------------
