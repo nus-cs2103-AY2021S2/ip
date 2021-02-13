@@ -1,16 +1,17 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.ListCommand;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.ListCommand;
 
 public class ParserTest {
     @Test
-    public void exitTest(){
+    public void exitTest() {
         try {
             Assertions.assertNull(Parser.parse("bye"));
             Assertions.assertNull(Parser.parse("exit"));
@@ -19,7 +20,7 @@ public class ParserTest {
         }
     }
     @Test
-    public void listTest(){
+    public void listTest() {
         try {
             Assertions.assertTrue(Parser.parse("list") instanceof ListCommand);
             Assertions.assertTrue(Parser.parse(" ls ") instanceof ListCommand);
@@ -28,7 +29,7 @@ public class ParserTest {
         }
     }
     @Test
-    public void todoTest(){
+    public void todoTest() {
         try {
             Command c = Parser.parse("TODO blow up the moon");
             Assertions.assertTrue(c instanceof AddCommand);
