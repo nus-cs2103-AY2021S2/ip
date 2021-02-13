@@ -1,12 +1,14 @@
 package duke.ui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -29,6 +31,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        System.out.println(duke.startUpProcedure());
     }
 
     /**
@@ -39,6 +42,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         System.out.println(input);
+        String output = duke.processInput(input);
+        System.out.println(output);
         userInput.clear();
+        if (duke.getIsTerminated()) {
+            Platform.exit();
+        }
     }
 }

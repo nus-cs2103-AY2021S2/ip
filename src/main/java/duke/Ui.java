@@ -15,48 +15,67 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String SEPARATOR = "------------------\n";
+    private StringBuilder builder;
+
+    /**
+     * Ui constructor
+     */
+    public Ui() {
+        builder = new StringBuilder();
+    }
+
+    /**
+     * Returns all the accumulated messages while flushing the buffer.
+     *
+     * @return The message to be printed
+     */
+    public String flushMessage() {
+        String message = builder.toString();
+        builder.setLength(0);
+        return message;
+    }
 
     /**
      * Prints a start up message for when the program starts.
      */
     public void printStartUp() {
-        System.out.println("Hello from\n" + LOGO);
-        System.out.println("No unicode allowed");
+        builder.append("Hello from\n" + LOGO + "\n");
+        builder.append("No unicode allowed" + "\n");
     }
 
     /**
      * Prints a shutdown message for when the program ends.
      */
-    public void printShutDown() {
-        System.out.println(SEPARATOR + "Goodbye from\n" + LOGO);
+    public void generateShutDownMessage() {
+        builder.append(SEPARATOR + "Goodbye from\n" + LOGO + "\n");
     }
 
     /**
      * Prints a prompt to indicate that we are expecting input.
      */
     public void printPrompt() {
-        System.out.print(SEPARATOR + "Listening to your input: ");
+        builder.append(SEPARATOR + "Listening to your input: ");
     }
 
     /**
      * Indicate to the user that we are loading a file.
      */
     public void printLoadStart() {
-        System.out.println("Loading From File...");
+        builder.append("Loading From File...\n");
     }
 
     /**
      * Indicate to the user that we successfully loaded a file.
      */
     public void printLoadSuccess() {
-        System.out.println("Loaded");
+        builder.append("Loaded\n");
     }
 
     /**
      * Indicates to the user that the file could not be loaded and that we cannot continue.
      */
     public void printLoadFail() {
-        System.out.println("Failed to Load file. Aborting.");
+        builder.append("Failed to Load file. Aborting.\n");
     }
 
     /**
@@ -66,9 +85,9 @@ public class Ui {
      * @param store TaskList that needs to be dumped
      */
     public void dumpState(TaskList store) {
-        System.out.println("Unable to save list. Dumping ...");
-        System.out.print(store.getList());
-        System.out.println("Continuing Normal operation");
+        builder.append("Unable to save list. Dumping ...\n");
+        builder.append(store.getList());
+        builder.append("Continuing Normal operation\n");
     }
 
     /**
@@ -80,30 +99,30 @@ public class Ui {
     public void printCommandMessage(Command command, String data) {
         switch (command.getType()) {
         case LIST:
-            System.out.print(data);
+            builder.append(data);
             break;
         case DONE:
-            System.out.println("The following task is now marked as done:\n"
-                    + data);
+            builder.append("The following task is now marked as done:\n"
+                    + data + "\n");
             break;
         case ADD:
-            System.out.println("The following task has been added:\n"
-                    + data);
+            builder.append("The following task has been added:\n"
+                    + data + "\n");
             break;
         case DELETE:
-            System.out.println("The following Task has been deleted:");
-            System.out.println(data);
+            builder.append("The following Task has been deleted:\n");
+            builder.append(data + "\n");
             break;
         case SEARCH:
             if (data.length() > 0) {
-                System.out.println("Matching Task(s):");
-                System.out.println(data);
+                builder.append("Matching Task(s):\n");
+                builder.append(data + "\n");
             } else {
-                System.out.println("No Matching Task has been found");
+                builder.append("No Matching Task has been found\n");
             }
             break;
         default:
-            System.out.println("ERROR: Unhandled Case!");
+            builder.append("ERROR: Unhandled Case!\n");
         }
     }
 
@@ -113,8 +132,8 @@ public class Ui {
      * @param e Exception that requires an error message
      */
     public void handleException(ParseException e) {
-        System.out.println("Command has invalid parsing.");
-        System.out.println(e.getMessage());
+        builder.append("Command has invalid parsing.\n");
+        builder.append(e.getMessage() + "\n");
     }
     /**
      * Generates an UI alert for some particular error.
@@ -122,7 +141,7 @@ public class Ui {
      * @param e Exception that requires an error message
      */
     public void handleException(InvalidCommandException e) {
-        System.out.println(e.getMessage());
+        builder.append(e.getMessage() + "\n");
     }
     /**
      * Generates an UI alert for some particular error.
@@ -130,8 +149,8 @@ public class Ui {
      * @param e Exception that requires an error message
      */
     public void handleException(EmptyArgumentException e) {
-        System.out.println("Cannot have empty argument");
-        System.out.println(e.getMessage());
+        builder.append("Cannot have empty argument\n");
+        builder.append(e.getMessage() + "\n");
     }
     /**
      * Generates an UI alert for some particular error.
@@ -139,7 +158,7 @@ public class Ui {
      * @param e Exception that requires an error message
      */ //TODO: Figure out how to do javadoc for overloaded method.
     public void handleException(BadDateArgumentException e) {
-        System.out.println("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044");
-        System.out.println(e.getMessage());
+        builder.append("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044\n");
+        builder.append(e.getMessage() + "\n");
     }
 }
