@@ -16,7 +16,7 @@ Shows a list of command explaining the command available in the application.
 ### Add a task
 You can add a task to the list. There are 3 different categories of tasks: `todo`, `deadline` and `event`.
 `todo` is a task that only contains description while `deadline` contains description and deadline date
-and event contain `event`  contain description, start date, start time, end date and end time.
+and `event`  contain description, start date, start time, end date and end time.
 
 ### Mark a task as done
 You can mark a task as done.
@@ -28,7 +28,7 @@ You can `list` all your tasks.
 You can `find` your tasks using a keyword.
 
 ### Deleting a task
-You can delete a task from the list.
+You can `delete` a task from the list.
 
 ### Exiting the program
 You can easily exit the program by `bye` command.
