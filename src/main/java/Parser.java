@@ -34,7 +34,6 @@ public class Parser {
             commandParts.add(keyword);
             commandParts.add(trimCommand.substring(firstSpace));
         }
-
         return commandParts.toArray(new String[commandParts.size()]);
     }
 
@@ -69,14 +68,14 @@ public class Parser {
             return createWithoutDescCommand(commandParts);
         }
 
+        if (isUpdate) {
+            checkOption(commandParts);
+            return createUpdateCommand(commandParts);
+        }
+
         if (requireOption) {
             checkOption(commandParts);
             return createWithOptionCommand(commandParts);
-        }
-
-        if(!isUpdate) {
-            checkOption(commandParts);
-            return createUpdateCommand(commandParts);
         }
 
         if (!requireDeadline) {
@@ -101,6 +100,7 @@ public class Parser {
         switch (keyword) {
         case"done":
         case"delete":
+        case "update":
             return true;
         default:
             return false;
@@ -137,7 +137,11 @@ public class Parser {
 
         try {
             String remainderCommand = commandParts[1].trim();
-            int option = Integer.parseInt(remainderCommand) - 1;
+            int nextSpace = remainderCommand.indexOf(" ");
+            if (nextSpace == -1) {
+                nextSpace = remainderCommand.length();
+            }
+            int option = Integer.parseInt(remainderCommand.substring(0, nextSpace)) - 1;
             switch (keyword) {
             case "done" :
                 return new DoneCommand(option);
@@ -166,13 +170,14 @@ public class Parser {
 
     private static Command createUpdateCommand(String[] commandParts) throws DukeException {
         String remainderCommand = commandParts[1].trim();
-        String[] remainderCommands = remainderCommand.split(" ");
-        if (remainderCommands.length != 3) {
+        int firstSpace = remainderCommand.indexOf(" ");
+        int option = Integer.parseInt(remainderCommand.substring(0, firstSpace)) - 1;
+        int nextSpace = remainderCommand.indexOf(" ", firstSpace + 1 );
+        if (nextSpace == -1) {
             throw new DukeException(ERROR_INVALID_UPDATE_COMMAND);
         }
-        int option = Integer.parseInt(remainderCommands[0]);
-        String field = remainderCommands[1];
-        String value = remainderCommands[2];
+        String field = remainderCommand.substring(firstSpace, nextSpace);
+        String value = remainderCommand.substring(nextSpace);
         return new UpdateCommand(option, field, value);
     }
 

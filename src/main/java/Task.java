@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
  * Abstract class Task to represent a Task
  */
 public abstract class Task {
-    /** Description of a class **/
+    /** Description of a class */
     private String description;
-    /** Completion  Status of the task **/
+    /** Completion  Status of the task */
     private boolean isDone;
 
     /**
