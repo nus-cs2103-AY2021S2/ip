@@ -1,2 +1,1 @@
-T | done | eat
-E | not done | event conference | Fri Mar 12 12:00:00 SGT 2021
+D | not done | eat | Sat Dec 12 12:02:00 SGT 2020

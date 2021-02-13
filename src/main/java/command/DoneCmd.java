@@ -6,6 +6,8 @@ import classes.Task;
 import classes.TaskList;
 import classes.Ui;
 
+import java.io.IOException;
+
 public class DoneCmd extends Command {
 
     private String cmd;
@@ -33,6 +35,12 @@ public class DoneCmd extends Command {
         int taskNum = Integer.parseInt(cmdArr[1]);
         Task temp = lst.getTask(taskNum - 1);
         temp.markDone();
+
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return "cool! this task is marked as done: " + temp.toString() + ui.customLine();
     }

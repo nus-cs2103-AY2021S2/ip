@@ -5,6 +5,8 @@ import classes.Storage;
 import classes.TaskList;
 import classes.Ui;
 
+import java.io.IOException;
+
 public class DeleteCmd extends Command {
 
     private String cmd;
@@ -31,6 +33,12 @@ public class DeleteCmd extends Command {
         int deleteNum = Integer.parseInt(cmdArr[1]);
         String output = lst.getTask(deleteNum - 1).toString();
         lst.deleteTask(deleteNum - 1);
+
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (lst.getListSize() == 0) {
             return "yay! you are done!";
