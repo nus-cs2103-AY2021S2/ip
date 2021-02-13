@@ -50,7 +50,7 @@ Saves the data.
 
 Saves the data and closes the window.
 
-### 
+ 
 
 ## Usage
 
