@@ -44,14 +44,23 @@ public class Parser {
             if (isIncomplete) {
                 throw new MonicaException("The delete index is missing.");
             }
-            return new DeleteCommand(Integer.parseInt(messages[1]));
+            try{
+                int id = Integer.parseInt(messages[1]);
+                return new DeleteCommand(id);
+            } catch (NumberFormatException e) {
+                throw new MonicaException("The delete index must be an integer.");
+            }
 
         case "done":
             if (isIncomplete) {
                 throw new MonicaException("The done index is missing.");
             }
-            int id = Integer.parseInt(messages[1]);
-            return new DoneCommand(id);
+            try{
+                int id = Integer.parseInt(messages[1]);
+                return new DoneCommand(id);
+            } catch (NumberFormatException e) {
+                throw new MonicaException("The done index must be an integer.");
+            }
 
         case "deadline":
             if (isIncomplete) {

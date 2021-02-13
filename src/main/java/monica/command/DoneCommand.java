@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MonicaException {
         if (id < 1 || id > tasks.getSize()) {
-            throw new MonicaException("The done index is invalid.");
+            throw new MonicaException("The done index is out of bounds.");
         }
         tasks.getTask(id).markAsDone();
         storage.updateFile();
