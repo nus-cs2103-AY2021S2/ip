@@ -1,6 +1,7 @@
 # User Guide
 
 ##Introduction
+
 **Duke** is a desktop application that can help users track their daily tasks.
 It functions in a GUI (Graphical User Interface) to help those who type fast the freedom
 to manage their tasks quickly and efficiently.
@@ -48,7 +49,7 @@ Add a deadline task.
 
 ### Usage
 
-###`deadline` - Key in `deadline <task description> /by <yyyy-mm-dd> <hh:mm>`
+### `deadline` - Key in `deadline <task description> /by <yyyy-mm-dd> <hh:mm>`
 
 Example of usage:
 
@@ -67,7 +68,7 @@ Add an event task.
 
 ### Usage
 
-###`event` - Key in `deadline <task description> /at <yyyy-mm-dd> <time of event>`
+### `event` - Key in `deadline <task description> /at <yyyy-mm-dd> <time of event>`
 
 Example of usage:
 
@@ -86,7 +87,7 @@ Mark a specific task as done.
 
 ### Usage
 
-###`done` - Key in `done <task number>`
+### `done` - Key in `done <task number>`
 
 Example of usage:
 
@@ -104,7 +105,7 @@ Delete a task from the list.
 
 ### Usage
 
-###`delete` - Key in `delete <task number>`
+### `delete` - Key in `delete <task number>`
 
 Example of usage:
 
@@ -123,7 +124,7 @@ Delete multiple tasks from the list.
 
 ### Usage
 
-###`delete` - Key in `delete <task number> <task number> <task number>`
+### `delete` - Key in `delete <task number> <task number> <task number>`
 
 Example of usage:
 
@@ -146,7 +147,7 @@ Search for tasks containing a keyword.
 
 ### Usage
 
-###`find` - Key in `find <keyword>`
+### `find` - Key in `find <keyword>`
 
 Example of usage:
 
@@ -164,7 +165,7 @@ Search for tasks that are due on a specific date.
 
 ### Usage
 
-###`due` - Key in `due <YYYY-MM-DD>`
+### `due` - Key in `due <YYYY-MM-DD>`
 
 Example of usage:
 
@@ -182,7 +183,7 @@ Exit the program.
 
 ### Usage
 
-###`bye` - Key in `bye`
+### `bye` - Key in `bye`
 
 Example of usage:
 
