@@ -1,4 +1,4 @@
-package duke;
+package duchess;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /** Creating a custom control using FXML.
-     * DialogBox handles dialogues between the user and Duke by presenting the
+     * DialogBox handles dialogues between the user and Duchess by presenting the
      * dialogs and display pictures
      * */
     private DialogBox(String text, Image img) {
@@ -55,11 +55,11 @@ public class DialogBox extends HBox {
         return userDialog;
     }
 
-    public static DialogBox getDukeDialog(String msg, Image picture) {
-        var dukeDialog = new DialogBox(msg, picture);
-        dukeDialog.dialog.setStyle("-fx-background-color: rgb(247, 213, 235); " + "-fx-background-radius: 15;"
+    public static DialogBox getDuchessDialog(String msg, Image picture) {
+        var duchessDialog = new DialogBox(msg, picture);
+        duchessDialog.dialog.setStyle("-fx-background-color: rgb(247, 213, 235); " + "-fx-background-radius: 15;"
                + "-fx-padding: 7.5;" + "-fx-border-color: rgb(235, 188, 218);" + "-fx-border-radius: 15;");
-        dukeDialog.flip();
-        return dukeDialog;
+        duchessDialog.flip();
+        return duchessDialog;
     }
 }

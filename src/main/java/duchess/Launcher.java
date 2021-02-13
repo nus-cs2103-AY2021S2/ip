@@ -1,4 +1,4 @@
-package duke;
+package duchess;
 
 import javafx.application.Application;
 

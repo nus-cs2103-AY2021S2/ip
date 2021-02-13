@@ -1,9 +1,9 @@
-package duke;
+package duchess;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Tasks.Task;
+import duchess.Tasks.Task;
 
 
 public class Ui {

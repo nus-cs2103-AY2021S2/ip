@@ -1,5 +1,6 @@
-package duke;
+package duchess;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,6 +8,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -21,39 +24,46 @@ public class MainWindow {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duchess duchess;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duchess.png"));
+    private Image duchessImage = new Image(this.getClass().getResourceAsStream("/images/Duchess.png"));
 
     /** Initializes a window and displays welcome message */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.greetUser(), dukeImage)
+                DialogBox.getDuchessDialog(Ui.greetUser(), duchessImage)
         );
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuchess(Duchess d) {
+        duchess = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then
+     * Creates two dialog boxes, one echoing user input and the other containing Duchess's reply and then
      * appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = duchess.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDuchessDialog(response, duchessImage)
         );
         userInput.clear();
         if (response.equals(Ui.sayGoodbye())) {
-            Platform.exit();
+            Stage stage = (Stage) scrollPane.getScene().getWindow();
+            // @@author James_D
+            // Reused with minor modifications from
+            // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
+            PauseTransition delay = new PauseTransition(Duration.seconds(1.0));
+            delay.setOnFinished(event -> stage.close());
+            delay.play();
+            //@@author
         }
     }
 }

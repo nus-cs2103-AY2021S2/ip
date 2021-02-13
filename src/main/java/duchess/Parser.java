@@ -1,7 +1,7 @@
-package duke;
+package duchess;
 
-import duke.Exceptions.MissingInputException;
-import duke.Exceptions.MissingTaskException;
+import duchess.Exceptions.MissingInputException;
+import duchess.Exceptions.MissingTaskException;
 
 public class Parser {
 

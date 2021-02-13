@@ -1,9 +1,7 @@
-import duke.TaskList;
-import duke.Tasks.Task;
+import duchess.TaskList;
+import duchess.Tasks.Task;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
 
 public class TaskListTest {
     @Test

@@ -3,4 +3,6 @@ E : 1 :  Dinner : 2021-02-11
 T : 1 : Buy bananas
 E : 0 : Party : 2021-02-08
 D : 0 : Homework : 2021-02-18
-T : 0 : Bake cake
+T : 1 : Bake cake
+D : 0 : Quiz : 2021-03-05
+E : 0 : Movie night : 2021-03-08

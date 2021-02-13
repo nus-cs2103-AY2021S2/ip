@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duchess.Tasks;
 
 public class Todo extends Task {
 

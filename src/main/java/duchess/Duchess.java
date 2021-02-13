@@ -1,10 +1,10 @@
-package duke;
+package duchess;
 
-import duke.Exceptions.DukeExceptions;
-import duke.Exceptions.UnclearInputException;
-import duke.Tasks.Task;
+import duchess.Exceptions.DuchessExceptions;
+import duchess.Exceptions.UnclearInputException;
+import duchess.Tasks.Task;
 
-public class Duke {
+public class Duchess {
 
     /** TaskList instance to store and handle tasks */
     private final TaskList tasks;
@@ -19,7 +19,7 @@ public class Duke {
      *
      * @param path of file
      */
-    public Duke(String path) {
+    public Duchess(String path) {
         ui = new Ui();
         tasks = new TaskList();
         storage = new Storage(path, tasks);
@@ -78,7 +78,7 @@ public class Duke {
             default:
                 throw new UnclearInputException();
             }
-        } catch (DukeExceptions e) {
+        } catch (DuchessExceptions e) {
             return e.getMessage();
         }
         storage.write();

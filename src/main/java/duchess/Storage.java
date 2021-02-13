@@ -1,4 +1,4 @@
-package duke;
+package duchess;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.Todo;
+import duchess.Tasks.Deadline;
+import duchess.Tasks.Event;
+import duchess.Tasks.Task;
+import duchess.Tasks.Todo;
 
 
 public class Storage {
