@@ -130,7 +130,7 @@ public class Duke {
             message = Messages.getAllTasksMessage(taskList.getTasks());
             break;
         case HELP:
-            handleHelp(tokens);
+            message = handleHelp(tokens);
             break;
         case TODO: // Fall through
         case DEADLINE: // Fall through
