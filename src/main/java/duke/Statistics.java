@@ -7,6 +7,12 @@ import java.util.ArrayList;
 
 public class Statistics {
 
+    /**
+     * Returns deadlines that are overdue and not completed yet.
+     *
+     * @param list list of tasks
+     * @return list of deadlines as a String.
+     */
     public String getOverdueDeadlines(ArrayList<Task> list) {
         String message = "";
         ArrayList<Task> overdueDeadlines = new ArrayList<>();
@@ -26,6 +32,12 @@ public class Statistics {
         return message;
     }
 
+    /**
+     * Returns deadlines due or events happening in a week from now.
+     *
+     * @param list list of tasks
+     * @return list of deadlines and events as a String.
+     */
     public String getTasksDueSoon(ArrayList<Task> list) {
         String message = "";
         ArrayList<Task> tasksDueSoon = new ArrayList<>();
