@@ -10,8 +10,7 @@ public class DukeInvalidDateException extends DukeException {
         super("Invalid date format: " + dateString, thrownBy);
     }
 
-    @Override public String toString()
-    {
+    @Override public String toString() {
         return String.format("%s%nThrown by: %s", this.getMessage(), this.thrownBy);
     }
 }
