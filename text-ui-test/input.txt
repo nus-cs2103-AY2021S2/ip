@@ -1,0 +1,9 @@
+todo borrow book
+deadline project meeting /by 2019-12-01 4pm
+event project meeting /at 2019-12-01 2-4pm
+event play games /at 2019-10-05 4-8pm
+done 1
+delete 1
+list
+bye
+
