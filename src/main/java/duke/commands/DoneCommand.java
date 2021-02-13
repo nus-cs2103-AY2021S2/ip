@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.message.Messages;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -16,16 +16,13 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         assert tasks != null;
-        assert ui != null;
         assert storage != null;
 
         Task doneTask = tasks.get(index);
         doneTask.setDone(true);
-        storage.saveTasksToFile(tasks);
-        String dukeResponse = "Nice! I've marked this task as done: \n"
-                + doneTask.toString();
-        return dukeResponse;
+        storage.save(tasks);
+        return Messages.getDoneTaskMessage(doneTask);
     }
 }

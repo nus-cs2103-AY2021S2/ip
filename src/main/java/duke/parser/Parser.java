@@ -1,18 +1,20 @@
-package duke;
+package duke.parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.IncorrectCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.exception.DukeException;
+import duke.message.Messages;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.IncorrectCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodoCommand;
 
 /**
  * The Parser class handles user input, classifies the
@@ -104,7 +106,7 @@ public class Parser {
         if (!matcher.matches()) {
             throw new DukeException("Could not find index number to parse");
         }
-        return Integer.parseInt(matcher.group("index"));
+        return Integer.parseInt(matcher.group("index")) - 1;
     }
 
     private static Command prepareDone(String arguments) {

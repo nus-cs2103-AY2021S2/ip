@@ -5,6 +5,7 @@ package duke.task;
  * of a todo with a description of what is to be done.
  */
 public class Todo extends Task {
+    public static final String ENCODED_TYPE = "T";
     /**
      * Constructs a new Todo with a
      * description of what is to be done.
@@ -14,15 +15,20 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(boolean isDone, String description) {
+        this(description);
+        this.isDone = isDone;
+    }
+
     /**
      * Converts a todo to the format to be saved to a file.
      * @return The todo in save format.
      */
     @Override
-    public String toSaveFormat() {
+    public String encode() {
         assert description != null;
         String status = isDone ? "1" : "0";
-        return String.format("T|%s|%s\n", status, description);
+        return String.format("%s/%s/%s", ENCODED_TYPE, status, description);
     }
 
     /**
@@ -32,6 +38,6 @@ public class Todo extends Task {
     @Override
     public String toString() {
         assert description != null;
-        return String.format("[T][%s] %s\n", getStatusIcon(), description);
+        return String.format("[T][%s] %s", getStatusIcon(), description);
     }
 }

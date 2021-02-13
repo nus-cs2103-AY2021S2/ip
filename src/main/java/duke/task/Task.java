@@ -55,7 +55,7 @@ public class Task {
      * Converts a task to the format to be saved to a file.
      * @return The task in save format.
      */
-    public String toSaveFormat() {
+    public String encode() {
         throw new UnsupportedOperationException("Method must be implemented by child classes");
     }
 
@@ -66,6 +66,6 @@ public class Task {
     @Override
     public String toString() {
         assert description != null;
-        return String.format("[%s] %s\n", getStatusIcon(), description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 }

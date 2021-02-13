@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * The DukeException class is a wrapper for checked exceptions
