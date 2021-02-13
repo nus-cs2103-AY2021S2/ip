@@ -212,3 +212,10 @@ Command | Format, Examples
 **find** | `find [Keyword]`<br> e.g., `find egg`
 **list** | `list`
 **help** | `help`
+
+--------------------------------------------------------------------------------------------------------------------
+## Acknowledgment
+
+Bot Image found at : https://icon-library.com/icon/robotics-icon-2.html
+
+User image found at : https://www.shareicon.net/man-user-profile-avatar-social-829459
