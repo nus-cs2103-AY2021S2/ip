@@ -84,7 +84,7 @@ public class TaskList {
         TaskList tasksWithKeyword = new TaskList();
         for (Task task : lst) {
             boolean hasKey = true;
-            for(String keyword : keywords) {
+            for (String keyword : keywords) {
                 if (!task.getTask().contains(keyword)) {
                     hasKey = false;
                     break;

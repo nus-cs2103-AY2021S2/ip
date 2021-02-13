@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Handle file I/O.
@@ -28,7 +27,7 @@ public class Storage {
             Path parent = storagePath.getParent();
             Files.createDirectories(parent);
 
-            if(!Files.exists(storagePath)) {
+            if (!Files.exists(storagePath)) {
                 Files.createFile(storagePath);
             }
 
@@ -46,11 +45,12 @@ public class Storage {
      */
     public ArrayList<Task> read() {
         ArrayList<Task> lst = new ArrayList<>();
-        for(String line: this.taskLst) {
+        for (String line: this.taskLst) {
             char type = line.charAt(1);
             String desc = line.substring(7);
             int index;
-            String name, time;
+            String name;
+            String time;
             char done = line.charAt(3);
             switch (type) {
             case 'T':

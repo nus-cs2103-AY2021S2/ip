@@ -2,7 +2,3 @@
 [T][ ] imprison Joe
 [E][ ] expose Hunter(at: Jun 22 2023)
 [T][ ] MAKE AMERICA GREAT AGAIN
-[E][ ] golf match with Lindsey Graham(at: Jan 01 2024)
-[T][ ] defeat Hillary
-[E][ ] inauguration(at: Nov 07 2024)
-[T][ ] drink Coke

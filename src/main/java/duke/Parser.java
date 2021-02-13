@@ -6,7 +6,7 @@ import java.util.HashSet;
  * This class translate the user input into commands understandable by Duke.
  */
 public class Parser {
-    static HashSet<String> acceptedCommands = new HashSet<>();
+    private static HashSet<String> acceptedCommands = new HashSet<>();
     static void populateCommands() {
         acceptedCommands.add("todo");
         acceptedCommands.add("deadline");
@@ -17,6 +17,14 @@ public class Parser {
         acceptedCommands.add("list");
         acceptedCommands.add("bye");
         acceptedCommands.add("empty");
+    }
+
+    /**
+     * Returns the accepted commands
+     * @return a HashSet containing the accepted commands
+     */
+    public static HashSet<String> getAcceptedCommands() {
+        return acceptedCommands;
     }
 
     /**
@@ -32,15 +40,16 @@ public class Parser {
         } else if (command.equals("empty")) {
             return Executor.empty(taskList);
         }
-        String type, desc, time;
+        String type;
+        String desc;
+        String time;
         if (command.contains(" ")) {
             type = command.substring(0, command.indexOf(" "));
             desc = command.substring(command.indexOf(" ") + 1);
         } else {
-            if(!acceptedCommands.contains(command)) {
+            if (!acceptedCommands.contains(command)) {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
-            }
-            else {
+            } else {
                 throw new DukeException("Missing argument(s)!");
             }
         }
