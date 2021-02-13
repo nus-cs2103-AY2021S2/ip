@@ -72,7 +72,11 @@ public class Ui {
     }
 
     public String showDone(Task task) {
-        return "Good job! You've just completed this task:\n" + "\t" + task + "\n";
+        return "Good job! You've just completed this task:\n\t" + task + "\n";
+    }
+
+    public String showTaskNotesAdded(Task task) {
+        return "I've added notes to this task:\n\t" + task + "\n";
     }
 
     public String showDeleted(Task task) {
@@ -118,11 +122,13 @@ public class Ui {
                 + "3. delete, [index] - deletes the task with the corresponding [index]\n"
                 + "4. done, [index] - marks the task with the corresponding [index] as done\n"
                 + "5. find, [regex] - finds all tasks with the specified [regex]\n"
-                + "6. todo, [task description] - creates a to-do task with the specified [task description]\n"
-                + "7. deadline, [task description], by YYYY-MM-DD HH:MM "
+                + "6. note/notes, [index], taskNotes - adds specified taskNotes to the task with corresponding "
+                + "[index]\n"
+                + "7. todo, [task description] - creates a to-do task with the specified [task description]\n"
+                + "8. deadline, [task description], by YYYY-MM-DD HH:MM "
                 + "- creates a deadline task with the "
                 + "specified [task description], date and time\n"
-                + "8. event, [task description], at YYYY-MM-DD HH:MM "
+                + "9. event, [task description], at YYYY-MM-DD HH:MM "
                 + "- creates an event task with the specified "
                 + "[task description], date and time\n";
         return instructions;

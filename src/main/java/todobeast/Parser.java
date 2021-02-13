@@ -73,6 +73,14 @@ public class Parser {
         case "find":
             command = new FindCommand(commandArgs[1]);
             break;
+        // format e.g.: notes, 1, taskNotes
+        case "note":
+        case "notes":
+            checkTaskIndex(commandArgs);
+            int taskIndexToAddNotes = Integer.parseInt(commandArgs[1]);
+            assert taskIndexToAddNotes >= 0 : "Index provided is a negative number";
+            command = new AddNotesCommand(taskIndexToAddNotes, commandArgs[2]);
+            break;
         // format e.g.: todo, thing, (optional) notes
         case "todo":
             TaskType todoType = TaskType.TODO;
@@ -126,7 +134,7 @@ public class Parser {
      * an integer
      */
     public static void checkTaskIndex(String[] commandArgs) throws InvalidInputException {
-        if (commandArgs.length != 2) {
+        if (commandArgs.length < 2 || commandArgs.length > 3) {
             throw new InvalidInputException("Invalid number of arguments provided.");
         } else {
             try {
