@@ -69,18 +69,21 @@ public class Storage {
         String taskType = content[0];
         int taskStatus = Integer.parseInt(content[1]);
         String taskDescription = content[2];
+        String taskTime = content[3];
+
+        //Parse task time into correct format
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy");
+        LocalDateTime formattedTime = LocalDateTime.parse(taskTime, dateTimeFormat);
 
         switch(taskType) {
         case "D":
-            return new Deadline(taskDescription, taskStatus, LocalDateTime.parse(content[3],
-                    DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")));
+            return new Deadline(taskDescription, taskStatus, formattedTime);
         case "E":
-            return new Event(taskDescription, taskStatus, LocalDateTime.parse(content[3],
-                    DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")));
+            return new Event(taskDescription, taskStatus, formattedTime);
         case "T":
             return new Todo(taskDescription, taskStatus);
         default:
-            throw new MonicaException(taskType + " is an invalid text type. Please modify the file accordingly.");
+            throw new MonicaException(taskType + " is an invalid text type.");
         }
     }
 
