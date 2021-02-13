@@ -41,7 +41,7 @@ public class Storage {
         try {
             FileWriter csvWriter = new FileWriter(fileName);
             for (int i = 1; i <= taskList.getNumberOfTasks(); i++) {
-                csvWriter.append(taskList.getTaskAtIndex(i).parseToCSVRow());
+                csvWriter.append(taskList.getTaskAtIndex(i).parseToCsvRow());
                 csvWriter.append("\n");
             }
             csvWriter.flush();

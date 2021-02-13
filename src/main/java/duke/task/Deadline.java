@@ -24,11 +24,11 @@ public class Deadline extends Task {
      * Constructs a Deadline java.duke.controller.task with a deadline, a name and status.
      *
      * @param taskName Name of the Deadline java.duke.controller.task.
-     * @param done Status of the java.duke.controller.task, done or not done.
+     * @param isDone Status of the java.duke.controller.task, done or not done.
      * @param deadLine Deadline of the Deadline java.duke.controller.task.
      */
-    public Deadline(String taskName, boolean done, LocalDate deadLine) {
-        super(taskName, done);
+    public Deadline(String taskName, boolean isDone, LocalDate deadLine) {
+        super(taskName, isDone);
         this.deadLine = deadLine;
     }
 
@@ -47,7 +47,7 @@ public class Deadline extends Task {
      *
      * @return A string that complies with CSV format.
      */
-    public String parseToCSVRow() {
+    public String parseToCsvRow() {
         return "D," + super.isDone() + "," + super.getTaskName() + "," + this.deadLine;
     }
 

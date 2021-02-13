@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public abstract class Task {
     private final String taskName;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructs an undone Task with a name.
@@ -22,11 +22,11 @@ public abstract class Task {
      * Constructs a Task with a name and status.
      *
      * @param taskName Name of the Task.
-     * @param done Status of the Task, done or not done.
+     * @param isDone Status of the Task, done or not done.
      */
-    Task(String taskName, boolean done) {
+    Task(String taskName, boolean isDone) {
         this.taskName = taskName;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -44,16 +44,16 @@ public abstract class Task {
      * @return Status of the Task.
      */
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     /**
      * Sets status of the Task.
      *
-     * @param done Status of the Task.
+     * @param isDone Status of the Task.
      */
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class Task {
      * @return A string representation of the Task.
      */
     public String toString() {
-        String checkBox = this.done ? "[X]" : "[ ]";
+        String checkBox = this.isDone ? "[X]" : "[ ]";
         return checkBox + " " + this.taskName;
     }
 
@@ -71,7 +71,7 @@ public abstract class Task {
      *
      * @return A string that complies with CSV format.
      */
-    public abstract String parseToCSVRow();
+    public abstract String parseToCsvRow();
 
     /**
      * Returns the time of the Task.

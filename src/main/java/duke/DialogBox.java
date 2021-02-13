@@ -66,6 +66,7 @@ public class DialogBox extends HBox {
 
     /**
      * Constructs a user's dialog box.
+     *
      * @param text Text to be inserted into the dialog.
      * @return A user's dialog box.
      */
@@ -78,6 +79,7 @@ public class DialogBox extends HBox {
      * Constructs a system's dialog box. The colour of the dialog box
      * will change depending if the dialog box shows an error message
      * or not.
+     *
      * @param text Text to be inserted into the dialog.
      * @param hasError Whether the system throws an error or not.
      * @return A system's dialog box.
