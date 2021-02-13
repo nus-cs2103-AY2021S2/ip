@@ -27,6 +27,14 @@ public class Event extends Task {
         this.isDone = isDone;
     }
 
+    public boolean isSameTask(Task toCheck) {
+        if (toCheck instanceof Event) {
+            return description.equals(toCheck.description)
+                    && time.equals(((Event) toCheck).time);
+        }
+        return false;
+    }
+
     /**
      * Converts an event to the format to be saved to a file.
      * @return The event in save format.

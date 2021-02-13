@@ -51,6 +51,10 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public boolean isSameTask(Task toCheck) {
+        throw new UnsupportedOperationException("Method must be implemented by child classes");
+    }
+
     /**
      * Converts a task to the format to be saved to a file.
      * @return The task in save format.
