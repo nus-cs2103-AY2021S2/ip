@@ -88,7 +88,7 @@ public class Parser {
         try {
             if (command == Command.TODO) {
                 if (details.length() == 0) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty");
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty");
                 }
 
                 Pattern pt1 = Pattern.compile("\\w+");
@@ -106,7 +106,7 @@ public class Parser {
 
             } else if (command == Command.DEADLINE) {
                 if (details.length() == 0) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty");
+                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty");
                 }
 
                 String[] deadlineParams = details.split(" /by ");
@@ -127,7 +127,7 @@ public class Parser {
             } else {
 
                 if (details.length() == 0) {
-                    throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
+                    throw new DukeException("OOPS!!! The description of an event cannot be empty");
                 }
 
                 String[] eventParams = details.split(" /at ");
