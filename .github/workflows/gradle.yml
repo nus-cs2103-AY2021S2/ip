@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ubuntu-latest, macos-latest, windows-latest]
+        platform: [windows-latest]
     runs-on: ${{ matrix.platform }}
 
     steps:
@@ -32,9 +32,3 @@ jobs:
 
       - name: Build and check with Gradle
         run: ./gradlew check
-
-      - name: Perform IO redirection test (Windows)
-        if: always() && runner.os == 'Windows'
-        working-directory:  ${{ github.workspace }}/text-ui-test
-        shell: cmd
-        run: runtest.bat
