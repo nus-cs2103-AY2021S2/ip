@@ -31,6 +31,14 @@ public class Event extends Task {
 
     }
 
+    public Event editDate (String newDate) {
+        String content = this.content;
+        boolean doneStatus = this.done;
+        Event newEventTask = new Event (content, newDate);
+        newEventTask.done = doneStatus;
+        return newEventTask;
+    }
+
     /**
      * toString() of Event Class.
      *

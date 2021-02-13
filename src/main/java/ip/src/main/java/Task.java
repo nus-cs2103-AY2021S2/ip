@@ -45,6 +45,21 @@ public class Task {
         return inputType.equals("E");
     }
 
+    protected Task editContent (String newContent) {
+        this.content = newContent;
+        return this;
+    }
+
+    /**
+     * Dummy method for editDate in Task. Exact implementations in each child class, utilizing Polymorphism.
+     *
+     * @param newDate New date given by user.
+     */
+    protected Task editDate (String newDate) {
+        return this;
+    }
+
+
     public String toString() {
         return this.content;
     }

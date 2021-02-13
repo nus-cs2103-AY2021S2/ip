@@ -20,7 +20,7 @@ public class Deadline extends Task{
      * @param by_str Deadline date given by user, parsed into a Date object with the format dd/MM/yyyy HH:mm.
      */
 
-    public Deadline(String content,String by_str) {
+    public Deadline(String content , String by_str) {
         super(content);
         DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         try {
@@ -31,6 +31,14 @@ public class Deadline extends Task{
             e.printStackTrace();
         }
 
+    }
+
+    protected Deadline editDate (String newDate) {
+        String content = this.content;
+        boolean doneStatus = this.done;
+        Deadline newDeadlineTask = new Deadline(content, newDate);
+        newDeadlineTask.done = doneStatus;
+        return newDeadlineTask;
     }
 
     /**

@@ -31,7 +31,7 @@ public class Ui {
      * @param content Content of the ToDo object.
      */
 
-    public String toDoCommand(String content) {
+    private String toDoCommand(String content) {
         ToDo newTask = new ToDo(content);
         return this.bot.addToList(newTask);
     }
@@ -44,7 +44,7 @@ public class Ui {
      * @param at Date of the Event object.
      */
 
-    public String eventCommand(String content, String at) {
+    private String eventCommand(String content, String at) {
         Event newTask = new Event(content, at);
         return this.bot.addToList(newTask);
 
@@ -58,9 +58,32 @@ public class Ui {
      * @param by Date of the Event object.
      */
 
-    public String deadlineCommand(String content, String by) {
+    private String deadlineCommand(String content, String by) {
         Deadline newTask = new Deadline(content, by);
         return this.bot.addToList(newTask);
+    }
+
+    private String editCommand(String editDetails , int id , EditType editType) throws DukeException {
+        try {
+            Task oldTask = this.bot.getTask(id-1);
+            Task newTask = new Task("");
+
+            switch (editType) {
+                case EDIT_DATE:
+                    newTask = oldTask.editDate(editDetails);
+                    break;
+
+                case EDIT_CONTENT:
+                    newTask = oldTask.editContent(editDetails);
+                    break;
+
+                default:
+                    assert false : editType;
+            }
+            return this.bot.editTask(newTask , id);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Index is out of bounds! \n Please enter a valid task number!");
+        }
     }
 
     /**
@@ -69,8 +92,12 @@ public class Ui {
      * @param id The specified position of the task to be removed from the bot Task List.
      */
 
-    public String deleteCommand(int id) {
-        return this.bot.deleteTask(id);
+    public String deleteCommand(int id) throws DukeException {
+        try {
+            return this.bot.deleteTask(id-1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Index is out of bounds! \n Please enter a valid task number!");
+        }
     }
 
     public String handleUserInput(String input) {
@@ -117,6 +144,13 @@ public class Ui {
                     content = parser.deadlineTaskContent(input);
                     String by = parser.deadlineTaskBy(input);
                     output = deadlineCommand(content, by);
+                    break;
+
+                case EDIT:
+                    id = parser.getId(input);
+                    EditType editType = parser.getEditType(input);
+                    String editDetails = parser.getEditDetails(input);
+                    output = editCommand(editDetails , id , editType);
                     break;
 
                 case DELETE:

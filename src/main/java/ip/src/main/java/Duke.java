@@ -108,7 +108,6 @@ public class Duke {
         output += "    " + task + "\n";
         output += "Now you have " + String.valueOf(this.list.size()) + " tasks in the list.";
         return output;
-
     }
 
     /**
@@ -119,6 +118,17 @@ public class Duke {
     public String findMatchingTasks(String keyword){
         TaskList matchingTasks = this.list.findTasks(keyword);
         return matchingTasks.printTasks();
+    }
+
+    public Task getTask (int id) {
+        return this.list.getTask(id);
+    }
+
+    public String editTask(Task newTask, int id) {
+        this.list.editTask(newTask , id-1);
+        String output = "Task has been edited. \n";
+        output += printList();
+        return output;
     }
 
     public static void main(String[] args) {

@@ -10,6 +10,8 @@ import java.util.regex.PatternSyntaxException;
 
 public class Parser {
 
+    private static final String EDIT_HEADER = "EDIT_";
+
     Parser() {
     }
 
@@ -37,6 +39,29 @@ public class Parser {
             throw new DukeException("OOPS! I don't know what this means! :(");
         }
     }
+
+    protected EditType getEditType (String input) throws DukeException {
+        try {
+            String editType = input.split(" ")[2];
+            editType = EDIT_HEADER + editType;
+            EditType edit = EditType.valueOf(editType.toUpperCase(Locale.ENGLISH));
+            return edit;
+
+        } catch (Exception e) {
+            throw new DukeException("OOPS! Invalid edit type! :( \n Edit format should be: edit {index} {type of edit} {edit details}");
+        }
+    }
+
+    protected String getEditDetails (String input) throws DukeException {
+        try {
+            input = input.split(" ")[3];
+            return input;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(("OOPS!!! The edit details cannot be empty. \n Edit format should be: edit {index} {type of edit} {edit details}"));
+        }
+
+    }
+
 
     /**
      * Retrieves the information needed from the user input for a ToDo object.
@@ -115,9 +140,14 @@ public class Parser {
      * @return Integer ID that represents the position (1-th based) of the task in the TaskList.
      */
 
-    public int getId(String input) {
-        int id = Integer.valueOf(input.split(" ")[1]);
-        return id;
+    public int getId(String input) throws DukeException {
+        try {
+            int id = Integer.valueOf(input.split(" ")[1]);
+            return id;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid input! Please enter in the correct format with the task index!");
+        }
+
     }
 
     /**

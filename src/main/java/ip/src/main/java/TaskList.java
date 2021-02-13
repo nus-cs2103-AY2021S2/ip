@@ -85,4 +85,8 @@ public class TaskList {
         }
         return taskListWithMatches;
     }
+
+    protected void editTask(Task newTask , int id) {
+        this.list.set(id , newTask);
+    }
 }
