@@ -1,6 +1,8 @@
 package duke;
 
-import duke.command.Command;
+import duke.command.*;
+
+import java.time.LocalDate;
 
 /**
  * Represents the parser used by the Duke chat bot.
@@ -52,6 +54,30 @@ public class Parser {
             taskArg += inputArr[i];
         }
 
-        return new Command(taskType, new String[]{taskDesc, taskArg});
+        switch(taskType.toUpperCase()) {
+        case "TODO":
+            return new AddTodoCommand(taskDesc);
+        case "DEADLINE":
+            return new AddDeadlineCommand(taskDesc, LocalDate.parse(taskArg));
+        case "EVENT":
+            return new AddEventCommand(taskDesc, LocalDate.parse(taskArg));
+        case "DELETE":
+            return new DeleteTaskCommand(Integer.parseInt(taskDesc));
+        case "DONE":
+            return new MarkTaskAsDoneCommand(Integer.parseInt(taskDesc));
+        case "FIND":
+            return new FindTasksCommand(taskDesc);
+        case "LIST":
+            return new ListTasksCommand();
+        case "SAVE":
+            return new SaveTasksCommand();
+        case "USAGE":
+            return new UsageCommand();
+        case "BYE":
+            return new ByeCommand();
+        default:
+            return null;
+            //throws DukeException("!1!!!!!!!!!!");
+        }
     }
 }

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.CommandResponse;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -48,6 +50,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        CommandResponse response = duke.getResponse(input);
+        if (response.canExit()) {
+            Platform.exit();
+        }
+
+
         if (input.equalsIgnoreCase("stats")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
@@ -55,10 +63,9 @@ public class MainWindow extends AnchorPane {
             );
             userInput.clear();
         } else {
-            String response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getDukeDialog(response.getMsg(), dukeImage)
             );
             userInput.clear();
         }

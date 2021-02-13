@@ -41,7 +41,11 @@ public class TaskList {
      * @return Task list.
      */
     public ArrayList<Task> getList() {
-        return this.collection;
+        ArrayList<Task> temp = new ArrayList<Task>();
+        for (int i = 0; i < collection.size(); i++) {
+            temp.add(collection.get(i));
+        }
+        return temp;
     }
 
     /**
@@ -50,16 +54,17 @@ public class TaskList {
      *
      * @return Formatted output.
      */
-    public String showList() {
-        StringBuilder sb = new StringBuilder();
+//    public String showList() {
+//        StringBuilder sb = new StringBuilder();
+//
+//        sb.append("You got a total of " + this.collection.size() + " task(s).\n");
+//        for (int i = 0; i < collection.size(); i++) {
+//            sb.append(String.format("\t%d. %s\n", i + 1, collection.get(i)));
+//        }
+//
+//        return sb.toString();
+//    }
 
-        sb.append("You got a total of " + this.collection.size() + " task(s).\n");
-        for (int i = 0; i < collection.size(); i++) {
-            sb.append(String.format("\t%d. %s\n", i + 1, collection.get(i)));
-        }
-
-        return sb.toString();
-    }
 
     public Integer countTasks() {
         return this.collection.size();
@@ -84,101 +89,125 @@ public class TaskList {
      * @param keyword Keyword used to filter.
      * @return Formatted output.
      */
-    public String findTasks(String keyword) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Here are the matching tasks in your list:\n");
+//    public String findTasks(String keyword) {
+//        StringBuilder sb = new StringBuilder();
+//
+//        sb.append("Here are the matching tasks in your list:\n");
+//        for (int i = 0; i < collection.size(); i++) {
+//            Task task = this.collection.get(i);
+//            if (task.getDescription().contains(keyword)) {
+//                sb.append(String.format("\t%d. %s\n", i + 1, collection.get(i)));
+//            }
+//        }
+//        return sb.toString();
+//    }
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> temp = new ArrayList<Task>();
         for (int i = 0; i < collection.size(); i++) {
             Task task = this.collection.get(i);
             if (task.getDescription().contains(keyword)) {
-                sb.append(String.format("\t%d. %s\n", i + 1, collection.get(i)));
+                temp.add(collection.get(i));
             }
         }
-        return sb.toString();
+        return temp;
     }
 
-    /**
-     * Adds the specified task into the task list.
-     *
-     * @param type Task type.
-     * @param args Task arguments.
-     * @return Successful result of the operation.
-     * @throws DukeException If invalid task type or arguments specified.
-     */
-    public String addTask(String type, String[] args) throws DukeException {
-        // Ensure task description and argument cannot be empty
-        if (args[0].equals("")) {
-            throw new DukeException("I need a description of your task...");
-        } else if (args[1].equals("")) {
-            if (type.equals("deadline")) {
-                throw new DukeException("I need to know when your task ends...");
-            }
-            if (type.equals("event")) {
-                throw new DukeException("I need to know the time period of your event...");
-            }
-        }
+//    /**
+//     * Adds the specified task into the task list.
+//     *
+//     * @param type Task type.
+//     * @param args Task arguments.
+//     * @return Successful result of the operation.
+//     * @throws DukeException If invalid task type or arguments specified.
+//     */
+//    public String addTask(Task task) throws DukeException {
+//        // Ensure task description and argument cannot be empty
+//
+//
+//
+//        if (args[0].equals("")) {
+//            throw new DukeException("I need a description of your task...");
+//        } else if (args[1].equals("")) {
+//            if (type.equals("deadline")) {
+//                throw new DukeException("I need to know when your task ends...");
+//            }
+//            if (type.equals("event")) {
+//                throw new DukeException("I need to know the time period of your event...");
+//            }
+//        }
+//
+//        // Add to collection
+//        try {
+//            switch (type) {
+//            case "todo":
+//                this.collection.add(new Todo(args[0]));
+//                break;
+//            case "deadline":
+//                this.collection.add(new Deadline(args[0], LocalDate.parse(args[1])));
+//                break;
+//            case "event":
+//                this.collection.add(new Event(args[0], LocalDate.parse(args[1])));
+//                break;
+//            default:
+//                throw new DukeException("Invalid task type.");
+//            }
+//        } catch (DateTimeParseException e) {
+//            throw new DukeException("Please specify a proper date... (Format: YYYY-MM-DD)");
+//        }
+//        return "Got it, I have added the task '" + args[0] + "' to your collection.";
+//    }
 
-        // Add to collection
-        try {
-            switch (type) {
-            case "todo":
-                this.collection.add(new Todo(args[0]));
-                break;
-            case "deadline":
-                this.collection.add(new Deadline(args[0], LocalDate.parse(args[1])));
-                break;
-            case "event":
-                this.collection.add(new Event(args[0], LocalDate.parse(args[1])));
-                break;
-            default:
-                throw new DukeException("Invalid task type.");
-            }
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please specify a proper date... (Format: YYYY-MM-DD)");
-        }
-        return "Got it, I have added the task '" + args[0] + "' to your collection.";
+    public void addTask(Task task) {
+        this.collection.add(task);
     }
 
-    /**
-     * Marks specified task from the task list as done.
-     *
-     * @param index Index of the task from the task list.
-     * @return Successful result of the operation.
-     * @throws DukeException If invalid index specified.
-     */
-    public String markDone(String index) throws DukeException {
-        try {
-            int itemIdx = Integer.parseInt(index.split(" ")[0]) - 1;
-            boolean status = this.collection.get(itemIdx).markAsDone();
-            if (!status) {
-                throw new IllegalArgumentException();
-            }
-            return "Task '" + this.collection.get(itemIdx).getDescription() + "' is marked as done.";
-        } catch (NumberFormatException e) {
-            throw new DukeException("I need a task number...");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("I don't think there is such a task...");
-        } catch (IllegalArgumentException e) {
-            throw new DukeException("Task had already been marked as done...");
-        }
+//    /**
+//     * Marks specified task from the task list as done.
+//     *
+//     * @param index Index of the task from the task list.
+//     * @return Successful result of the operation.
+//     * @throws DukeException If invalid index specified.
+//     */
+//    public String markDone(String index) throws DukeException {
+//        try {
+//            int itemIdx = Integer.parseInt(index.split(" ")[0]) - 1;
+//            boolean status = this.collection.get(itemIdx).markAsDone();
+//            if (!status) {
+//                throw new IllegalArgumentException();
+//            }
+//            return "Task '" + this.collection.get(itemIdx).getDescription() + "' is marked as done.";
+//        } catch (NumberFormatException e) {
+//            throw new DukeException("I need a task number...");
+//        } catch (IndexOutOfBoundsException e) {
+//            throw new DukeException("I don't think there is such a task...");
+//        } catch (IllegalArgumentException e) {
+//            throw new DukeException("Task had already been marked as done...");
+//        }
+//    }
+
+    public void markDone(Integer taskIndex) {
+        this.collection.get(taskIndex).markAsDone();
     }
 
-    /**
-     * Deletes specified task from the task list
-     *
-     * @param index Index of the task from the task list.
-     * @return Successful result of the operation.
-     * @throws DukeException If invalid index specified.
-     */
-    public String deleteTask(String index) throws DukeException {
-        try {
-            int itemIdx = Integer.parseInt(index.split(" ")[0]) - 1;
-            Task task = this.collection.remove(itemIdx);
-            return "Task '" + task.getDescription() + "' has been deleted.";
-        } catch (NumberFormatException e) {
-            throw new DukeException("I need a task number...");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("I don't think there is such a task...");
-        }
+//    /**
+//     * Deletes specified task from the task list
+//     *
+//     * @param index Index of the task from the task list.
+//     * @return Successful result of the operation.
+//     * @throws DukeException If invalid index specified.
+//     */
+//    public String deleteTask(String index) throws DukeException {
+//        try {
+//            int itemIdx = Integer.parseInt(index.split(" ")[0]) - 1;
+//            Task task = this.collection.remove(itemIdx);
+//            return "Task '" + task.getDescription() + "' has been deleted.";
+//        } catch (NumberFormatException e) {
+//            throw new DukeException("I need a task number...");
+//        } catch (IndexOutOfBoundsException e) {
+//            throw new DukeException("I don't think there is such a task...");
+//        }
+//    }
+    public void deleteTask(Integer taskIndex) {
+        this.collection.remove(taskIndex);
     }
 }

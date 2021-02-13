@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResponse;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Duke {
         return tasks.getList();
     }
 
-    public String getResponse(String input) {
+    public CommandResponse getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             assert this.storage != null;
@@ -55,7 +56,7 @@ public class Duke {
             assert this.ui != null;
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return "Oh no... " + e.getMessage();
+            return new CommandResponse("Oh no... " + e.getMessage(), false);
         }
     }
 }

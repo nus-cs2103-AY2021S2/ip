@@ -1,5 +1,8 @@
 package duke;
 
+import duke.task.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -70,5 +73,16 @@ public class Ui {
      */
     public String say(String message) {
         return message;
+    }
+
+    public String getTaskList(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("You got a total of " + tasks.size() + " task(s).\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(String.format("\t%d. %s\n", i + 1, tasks.get(i)));
+        }
+
+        return sb.toString();
     }
 }
