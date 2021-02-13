@@ -1,12 +1,11 @@
 
+
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import exception.DukeException;
 import exception.DukeInvalidInputException;
 import gui.MainWindow;
-import gui.TextFieldInputStream;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -20,16 +19,15 @@ public class Duke extends Application {
      * 
      * @param args
      *                 command line arguments
-     * @throws IOException
-     *                         When file cannot be read.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         UI.greet(System.out);
-
-        storage.tasks = new ArrayList<>(100);
-        storage.inputs = new ArrayList<>(100);
-        storage.loadHistory();
+        try {
+            storage.loadHistory();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         chatLoop(System.in, System.out);
 
@@ -39,25 +37,23 @@ public class Duke extends Application {
     Thread t;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         window.createChatWindow();
         primaryStage.setScene(window.getScene());
 
         UI.greet(window.getOutputStream());
 
-        storage.tasks = new ArrayList<>(100);
-        storage.inputs = new ArrayList<>(100);
-        storage.loadHistory();
+        try {
+            storage.loadHistory();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         primaryStage.show();
 
         t = new Thread(() -> {
-            try {
-                chatLoop(window.getInputStream(), window.getOutputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            chatLoop(window.getInputStream(), window.getOutputStream());
         });
         t.start();
     }
@@ -67,7 +63,7 @@ public class Duke extends Application {
         t.stop();
     }
 
-    protected static void chatLoop(InputStream in, OutputStream out) throws IOException {
+    protected static void chatLoop(InputStream in, OutputStream out) {
 
         PrintStream writer = getWriter(out);
         String line = readLine(in);
@@ -124,11 +120,23 @@ public class Duke extends Application {
         return new BufferedReader(new InputStreamReader(in));
     }
 
-    private static String readLine(InputStream stream) throws IOException {
-        char c;
+    private static String readLine(InputStream stream) {
+        char c = 0;
         String s = "";
         do {
-            c = (char) stream.read();
+            try {
+                int temp = stream.read();
+                if (temp == -1) {
+                    if (s == "") {
+                        return null;
+                    }
+                    return s;
+                }
+                c = (char) temp;
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
             if (c == '\n')
                 break;
             s += c + "";
