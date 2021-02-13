@@ -58,6 +58,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + dateTime.getDateTimeForDisplay() + "\n";
+        return "[E]" + super.toString() + " (at: " + dateTime.getDateTimeForDisplay() + "\n";
     }
 }

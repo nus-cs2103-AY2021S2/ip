@@ -39,7 +39,7 @@ public class DateTime {
      * @return String representing DateTime of tasks.
      */
     public String getDateTimeForDisplay() {
-        return " (by: " + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")) + ")";
+        return dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm")) + ")";
     }
 
     /**
