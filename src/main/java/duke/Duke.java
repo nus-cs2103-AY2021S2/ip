@@ -1,7 +1,10 @@
 package duke;
 
 
-import duke.command.Command;
+import duke.commands.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.TaskList;
 
 
@@ -15,23 +18,13 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    /**
-     * Constructs a new instance of a Duke object.
-     * Will attempt to load previously saved tasks from a file.
-     * @param pathname The pathname of the file for local data storage.
-     */
-    public Duke(String pathname) {
-        storage = new Storage(pathname);
+    public Duke() {
         try {
-            tasks = new TaskList(storage.loadTasksFromFile());
+            storage = new Storage();
+            tasks = storage.load();
         } catch (DukeException e) {
             tasks = new TaskList();
         }
-
-    }
-
-    public Duke() {
-        this("data/tasks.txt");
     }
 
     public String getResponse(String input) {

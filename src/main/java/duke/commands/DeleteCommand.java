@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Messages;
-import duke.Storage;
+import duke.exception.DukeException;
+import duke.message.Messages;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,8 +20,8 @@ public class DeleteCommand extends Command {
         assert tasks != null;
         assert storage != null;
 
-        Task deletedTask = tasks.remove(index - 1);
-        storage.saveTasksToFile(tasks);
+        Task deletedTask = tasks.remove(index);
+        storage.save(tasks);
         return Messages.getDeleteTaskMessage(deletedTask, tasks.size());
     }
 }

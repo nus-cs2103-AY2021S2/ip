@@ -1,6 +1,6 @@
-package duke.command;
+package duke.commands;
 
-import duke.Storage;
+import duke.storage.Storage;
 import duke.task.TaskList;
 
 public class IncorrectCommand extends Command {

@@ -1,7 +1,7 @@
-package duke.command;
+package duke.commands;
 
-import duke.Messages;
-import duke.Storage;
+import duke.message.Messages;
+import duke.storage.Storage;
 import duke.task.TaskList;
 
 public class FindCommand extends Command {

@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  * abstraction of an event which occurs at a certain date.
  */
 public class Event extends Task {
+    public static final String ENCODED_TYPE = "E";
     protected LocalDate time;
 
     /**
@@ -21,16 +22,21 @@ public class Event extends Task {
         this.time = LocalDate.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
+    public Event(boolean isDone, String description, String time) {
+        this(description, time);
+        this.isDone = isDone;
+    }
+
     /**
      * Converts an event to the format to be saved to a file.
      * @return The event in save format.
      */
     @Override
-    public String toSaveFormat() {
+    public String encode() {
         assert description != null;
         assert time != null;
-        String status = super.isDone ? "1" : "0";
-        return String.format("E|%s|%s|%s\n", status, description, time);
+        String status = isDone ? "1" : "0";
+        return String.format("%s/%s/%s/%s", ENCODED_TYPE, status, description, time);
     }
 
     /**
@@ -41,7 +47,7 @@ public class Event extends Task {
     public String toString() {
         assert description != null;
         assert time != null;
-        return String.format("[E][%s] %s (at: %s)\n",
+        return String.format("[E][%s] %s (at: %s)",
                 getStatusIcon(),
                 description,
                 time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));

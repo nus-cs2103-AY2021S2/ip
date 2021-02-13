@@ -1,5 +1,5 @@
 import duke.Duke;
-import duke.Messages;
+import duke.message.Messages;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

@@ -94,7 +94,8 @@ public class TaskList implements Iterable<Task> {
         StringBuilder tasksString = new StringBuilder();
         int count = 1;
         for (Task task : tasks) {
-            tasksString.append(String.format("%d.%s", count, task));
+            tasksString.append(String.format("%d.%s\n", count, task));
+            count++;
         }
         return tasksString.toString();
     }

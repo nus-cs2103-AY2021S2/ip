@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Messages;
-import duke.Storage;
+import duke.exception.DukeException;
+import duke.message.Messages;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -27,6 +27,7 @@ public class DeadlineCommand extends Command {
 
         Task newTask = new Deadline(description, date);
         tasks.add(newTask);
+        storage.save(tasks);
         return Messages.getAddTaskMessage(newTask, tasks.size());
     }
 }

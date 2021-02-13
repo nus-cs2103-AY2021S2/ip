@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  * of a deadline which is due by a certain date and time.
  */
 public class Deadline extends Task {
+    public static final String ENCODED_TYPE = "D";
     protected LocalDateTime time;
 
     /**
@@ -21,16 +22,25 @@ public class Deadline extends Task {
         this.time = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd Hmm"));
     }
 
+    public Deadline(boolean isDone, String description, String time) {
+        this(description, time);
+        this.isDone = isDone;
+    }
+
     /**
      * Converts a deadline to the format to be saved to a file.
      * @return The deadline in save format.
      */
     @Override
-    public String toSaveFormat() {
+    public String encode() {
         assert description != null;
         assert time != null;
-        String status = super.isDone ? "1" : "0";
-        return String.format("D|%s|%s|%s\n", status, super.description, this.time);
+        String status = isDone ? "1" : "0";
+        return String.format("%s/%s/%s/%s",
+                ENCODED_TYPE,
+                status,
+                description,
+                time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd Hmm")));
     }
 
     /**
@@ -41,9 +51,9 @@ public class Deadline extends Task {
     public String toString() {
         assert description != null;
         assert time != null;
-        return String.format("[D][%s] %s (by: %s)\n",
-                this.getStatusIcon(),
-                this.description,
-                this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")));
+        return String.format("[D][%s] %s (by: %s)",
+                getStatusIcon(),
+                description,
+                time.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")));
     }
 }

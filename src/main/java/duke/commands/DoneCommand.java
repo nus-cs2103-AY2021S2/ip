@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Messages;
-import duke.Storage;
+import duke.exception.DukeException;
+import duke.message.Messages;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
 
         Task doneTask = tasks.get(index);
         doneTask.setDone(true);
-        storage.saveTasksToFile(tasks);
+        storage.save(tasks);
         return Messages.getDoneTaskMessage(doneTask);
     }
 }

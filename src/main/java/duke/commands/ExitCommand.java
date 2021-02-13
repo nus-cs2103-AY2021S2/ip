@@ -1,8 +1,8 @@
-package duke.command;
+package duke.commands;
 
-import duke.DukeException;
-import duke.Messages;
-import duke.Storage;
+import duke.exception.DukeException;
+import duke.message.Messages;
+import duke.storage.Storage;
 import duke.task.TaskList;
 
 public class ExitCommand extends Command {
@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
         assert tasks != null;
         assert storage != null;
 
-        storage.saveTasksToFile(tasks);
+        storage.save(tasks);
         return Messages.MESSAGE_EXIT;
     }
 }
