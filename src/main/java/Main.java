@@ -3,11 +3,7 @@ import java.io.IOException;
 
 import duke.Duke;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.collections.ListChangeListener;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
