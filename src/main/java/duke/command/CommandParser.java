@@ -109,6 +109,7 @@ public class CommandParser {
             output = ui.getGoodbyeResponse();
             break;
         default:
+            //check assert
              assert false : command;
         }
 
