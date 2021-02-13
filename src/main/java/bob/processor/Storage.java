@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import bob.BobException;
+import bob.gui.MainWindow;
 import bob.task.Task;
 import bob.task.TaskList;
 
@@ -30,7 +31,7 @@ public class Storage {
      * @return An ArrayList containing all the tasks saved in hard disk
      * @throws BobException if the file cannot be found in the hard disk
      */
-    public ArrayList<Task> load() throws BobException {
+    public TaskList load() throws BobException {
         File tasksFile = loadFile();
         return readFile(tasksFile);
     }
@@ -66,20 +67,26 @@ public class Storage {
      * @return An ArrayList with the tasks loaded inside.
      * @throws BobException if no such file is found.
      */
-    public ArrayList<Task> readFile(File tasksFile) throws BobException {
-        ArrayList<Task> taskList = new ArrayList<>();
+    public TaskList readFile(File tasksFile) throws BobException {
+        TaskList listOfTasks = new TaskList();
         Parser parser = new Parser();
         try {
             Scanner fileReader = new Scanner(tasksFile);
             while (fileReader.hasNextLine()) {
-                String nextTask = fileReader.nextLine();
-                Task newTask = parser.parseLine(nextTask);
-                taskList.add(newTask);
+                String nextLine = fileReader.nextLine();
+                Task nextTask = parser.parseLine(nextLine);
+                listOfTasks.getTaskList().add(nextTask);
+                LocalDateTime reminderDateTime = parser.parseReminderDateTime(nextLine);
+                if (reminderDateTime != null && reminderDateTime.isAfter(LocalDateTime.now())) {
+                    listOfTasks.addReminder(reminderDateTime, nextTask);
+                    nextTask.addReminder(reminderDateTime);
+                }
             }
+            rewrite(listOfTasks);
         } catch (FileNotFoundException e) {
             throw new BobException("No suitable file found.", e);
         }
-        return taskList;
+        return listOfTasks;
     }
 
     /**
@@ -96,14 +103,19 @@ public class Storage {
             String done = task.getDone() ? "1" : "0";
             String type = task.getType();
             String name = task.getName();
+            LocalDateTime reminderDateTime = task.getReminderDateTime();
             LocalDateTime dateTime = task.getDateTime();
             String dateTimeString = "";
+            String reminderString = "";
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
             if (dateTime != null) {
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
                 dateTimeString = " | " + dateTime.format(dateFormatter);
             }
+            if (reminderDateTime != null) {
+                reminderString = " R: " + reminderDateTime.format(dateFormatter);
+            }
             fw.write(type + " | " + done + " | " + name
-                    + dateTimeString + System.lineSeparator());
+                    + dateTimeString + reminderString + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             throw new BobException("File cannot be found.", e);

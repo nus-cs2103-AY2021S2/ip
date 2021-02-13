@@ -1,6 +1,7 @@
 package bob.task;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import bob.BobException;
 
@@ -9,12 +10,15 @@ import bob.BobException;
  */
 public class TaskList {
     private ArrayList<Task> taskList;
+    private LinkedHashMap<LocalDateTime, ArrayList<Task>> reminders;
+    private Task addedReminder;
 
     /**
      * Constructor of TaskList
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
+        this.reminders = new LinkedHashMap<>();
     }
 
     /**
@@ -24,6 +28,69 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
+        this.reminders = new LinkedHashMap<>();
+    }
+
+    public TaskList(ArrayList<Task> taskList, LinkedHashMap<LocalDateTime, ArrayList<Task>> reminders) {
+        this.taskList = taskList;
+        this.reminders = reminders;
+        sortReminders();
+    }
+
+    public void sortReminders() {
+        LinkedHashMap<LocalDateTime, ArrayList<Task>> duplicateList = new LinkedHashMap<>(this.reminders);
+        List<Map.Entry<LocalDateTime, ArrayList<Task>>> tasksToRemind = new ArrayList<>(duplicateList.entrySet());
+        this.reminders.clear();
+        tasksToRemind.sort(new Comparator<Map.Entry<LocalDateTime, ArrayList<Task>>>() {
+            @Override
+            public int compare(Map.Entry<LocalDateTime, ArrayList<Task>> t1
+                    , Map.Entry<LocalDateTime, ArrayList<Task>> t2) {
+                return t1.getKey().compareTo(t2.getKey());
+            }
+        });
+
+        for (Map.Entry<LocalDateTime, ArrayList<Task>> entry : tasksToRemind) {
+            this.reminders.put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public void addReminder(LocalDateTime remindTime, Task task) {
+        if (this.reminders.containsKey(remindTime)) {
+            this.reminders.get(remindTime).add(task);
+        } else {
+            ArrayList<Task> listOfTasks = new ArrayList<>();
+            listOfTasks.add(task);
+            this.reminders.putIfAbsent(remindTime, listOfTasks);
+        }
+        this.addedReminder = task;
+        sortReminders();
+    }
+
+    public Task getTaskWithReminder() {
+        return this.addedReminder;
+    }
+
+    public void removeReminder(Task taskToBeRemoved) {
+        for (ArrayList<Task> listOfTasks : this.reminders.values()) {
+            listOfTasks.removeIf(task -> task.equals(taskToBeRemoved));
+            if (listOfTasks.size() == 0) {
+                this.reminders.remove(taskToBeRemoved.reminderDateTime);
+                break;
+            }
+        }
+    }
+
+    public void removeReminder(LocalDateTime remindTime, Task task) {
+        if (this.reminders.containsKey(remindTime)) {
+            this.reminders.get(remindTime).remove(task);
+            if (this.reminders.get(remindTime).size() == 0) {
+                this.reminders.remove(remindTime);
+            }
+        }
+    }
+
+    public LinkedHashMap<LocalDateTime, ArrayList<Task>> getReminders() {
+        return this.reminders;
     }
 
     /**
@@ -37,6 +104,9 @@ public class TaskList {
         try {
             Task updatedTask = this.taskList.get(index);
             updatedTask.setStatus(isDone);
+            if (isDone) {
+                removeReminder(updatedTask);
+            }
             return updatedTask;
         } catch (IndexOutOfBoundsException e) {
             throw new BobException("Please try again with a valid task index!", e);
@@ -62,7 +132,7 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
-        taskList.add(task);
+        this.taskList.add(task);
     }
 
     /**
@@ -99,7 +169,9 @@ public class TaskList {
      * @return The updated Task object with the task removed
      */
     public Task removeTask(int index) {
-        return taskList.remove(index);
+        Task task = taskList.remove(index);
+        removeReminder(task);
+        return task;
     }
 
     /**
@@ -114,6 +186,13 @@ public class TaskList {
             int index = i + 1;
             tasks.append(index).append(".").append(taskList.get(i)).append("\n");
         }
+
+        tasks.append("Upcoming reminders: \n");
+
+        for (Map.Entry<LocalDateTime, ArrayList<Task>> entry : this.reminders.entrySet()) {
+            tasks.append(entry.toString()).append("\n");
+        }
+
         return tasks.toString();
     }
 }

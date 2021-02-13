@@ -1,6 +1,7 @@
 package bob.command;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import bob.BobException;
@@ -16,6 +17,29 @@ import bob.task.Todo;
  * Represents the different types of possible commands.
  */
 public enum Command {
+    REMIND {
+        @Override
+        public String executeCommand(String userInput, TaskList taskList, Storage storage) {
+            try {
+                int index = parser.parseNumber(userInput);
+                Task currentTask = taskList.getTaskList().get(index - 1);
+                LocalDateTime remindDateTime = parser.parseDateTime(userInput, "remind");
+                System.out.println(remindDateTime.toString() + " " + LocalDateTime.now().toString());
+                if (remindDateTime.isBefore(LocalDateTime.now()) || remindDateTime.isEqual(LocalDateTime.now())) {
+                    return "Please enter a valid timing!";
+                }
+                taskList.addReminder(remindDateTime, currentTask);
+                if (currentTask.getReminderDateTime() != null) {
+                    taskList.removeReminder(currentTask.getReminderDateTime(), currentTask);
+                }
+                currentTask.addReminder(remindDateTime);
+                storage.rewrite(taskList);
+                return "A new reminder is added to " + currentTask.toString() + " on: " + remindDateTime.toString();
+            } catch (BobException e) {
+                return e.getMessage();
+            }
+        }
+    },
     BYE {
         @Override
         public String executeCommand(String userInput, TaskList taskList, Storage storage) {
@@ -152,7 +176,7 @@ public enum Command {
         }
     };
 
-    private static Parser parser;
+    private static final Parser parser = new Parser();
 
     /**
      * Executes the required actions for each command.

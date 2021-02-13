@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class Task {
     protected String name;
     protected boolean isDone = false;
+    protected LocalDateTime reminderDateTime = null;
 
     /**
      * Constructor of a task
@@ -43,6 +44,18 @@ public class Task {
 
     public LocalDateTime getDateTime() {
         return null;
+    }
+
+    public LocalDateTime getReminderDateTime() {
+        return this.reminderDateTime;
+    }
+
+    public void addReminder(LocalDateTime reminderDateTime) {
+        this.reminderDateTime = reminderDateTime;
+    }
+
+    public void removeReminder() {
+        this.reminderDateTime = null;
     }
 
     /**

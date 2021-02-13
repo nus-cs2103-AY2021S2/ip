@@ -14,6 +14,14 @@ public class Bob {
     private TaskList tasks;
     private Ui ui;
 
+    public TaskList getTasks() {
+        return this.tasks;
+    }
+
+    public Storage getStorage() {
+        return this.storage;
+    }
+
     /**
      * Constructor for Bob
      *
@@ -24,7 +32,7 @@ public class Bob {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = storage.load();
         } catch (BobException e) {
             ui.showLoadingError();
             tasks = new TaskList();
