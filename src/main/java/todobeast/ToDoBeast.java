@@ -1,6 +1,7 @@
 package todobeast;
 
 import todobeast.commands.Command;
+import todobeast.exceptions.InvalidInputException;
 import todobeast.exceptions.ToDoBeastException;
 
 import java.io.FileNotFoundException;
@@ -26,7 +27,7 @@ public class ToDoBeast {
             ui.showLoading();
             taskList = new TaskList(storage.loadTasks());
             ui.showLoadingSuccess();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | InvalidInputException e) {
             ui.showLoadingError();
             taskList = new TaskList(new ArrayList<>());
         }
