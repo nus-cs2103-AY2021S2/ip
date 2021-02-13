@@ -1,5 +1,3 @@
-
-
 import java.io.*;
 import java.util.HashMap;
 
@@ -23,11 +21,16 @@ public class Duke extends Application {
     public static void main(String[] args) {
 
         UI.greet(System.out);
+
+        assert(storage.inputs != null);
+        assert(storage.tasks != null);
+
         try {
             storage.loadHistory();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         chatLoop(System.in, System.out);
 
@@ -44,6 +47,9 @@ public class Duke extends Application {
 
         UI.greet(window.getOutputStream());
 
+        assert(storage.inputs != null);
+        assert(storage.tasks != null);
+
         try {
             storage.loadHistory();
         } catch (IOException e) {
@@ -52,9 +58,7 @@ public class Duke extends Application {
 
         primaryStage.show();
 
-        t = new Thread(() -> {
-            chatLoop(window.getInputStream(), window.getOutputStream());
-        });
+        t = new Thread(() -> chatLoop(window.getInputStream(), window.getOutputStream()));
         t.start();
     }
 
@@ -123,11 +127,11 @@ public class Duke extends Application {
     private static String readLine(InputStream stream) {
         char c = 0;
         String s = "";
-        do {
+        while (true) {
             try {
                 int temp = stream.read();
                 if (temp == -1) {
-                    if (s == "") {
+                    if (s.equals("")) {
                         return null;
                     }
                     return s;
@@ -140,7 +144,7 @@ public class Duke extends Application {
             if (c == '\n')
                 break;
             s += c + "";
-        } while (c != -1);
+        }
         return s;
     }
 }

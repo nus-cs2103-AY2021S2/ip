@@ -38,13 +38,13 @@ public class Storage {
 
     /**
      * Load previous session state from file
-     * @throws IOException
+     * @throws IOException when file cannot be read
      */
     public void loadHistory() throws IOException {
         if (!new File(sessionFile).exists()) {
             return;
         }
-        InputStream fileInStream = null;
+        InputStream fileInStream;
         try {
             fileInStream = new FileInputStream(sessionFile);
         } catch (FileNotFoundException e) {
