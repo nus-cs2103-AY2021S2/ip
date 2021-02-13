@@ -13,6 +13,7 @@ public class TextAreaOutputStream extends OutputStream {
         textArea = new TextArea();
         textArea.setEditable(false);
         textArea.setMaxHeight(9999999);
+        textArea.setFont(Font.font("monospaced"));
     }
 
     @Override

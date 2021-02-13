@@ -1,4 +1,11 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import exception.DukeException;
@@ -38,13 +45,19 @@ public class Storage {
 
     /**
      * Load previous session state from file
-     * @throws IOException
+     * @throws IOException when file cannot be read
      */
     public void loadHistory() throws IOException {
         if (!new File(sessionFile).exists()) {
             return;
         }
         InputStream fileInStream = null;
+        try {
+            fileInStream = new FileInputStream(sessionFile);
+        } catch (FileNotFoundException e) {
+            return;
+        }
+        InputStream fileInStream;
         try {
             fileInStream = new FileInputStream(sessionFile);
         } catch (FileNotFoundException e) {

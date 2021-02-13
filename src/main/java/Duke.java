@@ -21,11 +21,16 @@ public class Duke extends Application {
     public static void main(String[] args) {
 
         UI.greet(System.out);
+
+        assert(storage.inputs != null);
+        assert(storage.tasks != null);
+
         try {
             storage.loadHistory();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         chatLoop(System.in, System.out);
 
@@ -41,6 +46,9 @@ public class Duke extends Application {
         primaryStage.setScene(window.getScene());
 
         UI.greet(window.getOutputStream());
+
+        assert(storage.inputs != null);
+        assert(storage.tasks != null);
 
         try {
             storage.loadHistory();
