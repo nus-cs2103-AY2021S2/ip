@@ -2,7 +2,8 @@ package duke;
 
 import duke.command.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the parser used by the Duke chat bot.
@@ -54,13 +55,15 @@ public class Parser {
             taskArg += inputArr[i];
         }
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
         switch(taskType.toUpperCase()) {
         case "TODO":
             return new AddTodoCommand(taskDesc);
         case "DEADLINE":
-            return new AddDeadlineCommand(taskDesc, LocalDate.parse(taskArg));
+            return new AddDeadlineCommand(taskDesc, LocalDateTime.parse(taskArg, formatter));
         case "EVENT":
-            return new AddEventCommand(taskDesc, LocalDate.parse(taskArg));
+            return new AddEventCommand(taskDesc, LocalDateTime.parse(taskArg, formatter));
         case "DELETE":
             return new DeleteTaskCommand(Integer.parseInt(taskDesc));
         case "DONE":

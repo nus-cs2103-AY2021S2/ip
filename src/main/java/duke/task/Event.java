@@ -1,6 +1,6 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDate at;
+    protected LocalDateTime at;
 
     /**
      * Initialises the task with a description and
@@ -17,7 +17,7 @@ public class Event extends Task {
      * @param description Description of the task.
      * @param at Task duration.
      */
-    public Event(String description, LocalDate at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
@@ -27,7 +27,7 @@ public class Event extends Task {
      *
      * @return Task duration.
      */
-    public LocalDate getAt() {
+    public LocalDateTime getAt() {
         return this.at;
     }
 
@@ -39,6 +39,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(),
-                this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+                this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
     }
 }

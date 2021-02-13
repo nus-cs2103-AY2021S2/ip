@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Event;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class AddEventCommand extends Command {
 
@@ -22,7 +22,7 @@ public class AddEventCommand extends Command {
      * @param desc Event description.
      * @param dateTime Event date time.
      */
-    public AddEventCommand(String desc, LocalDate dateTime) {
+    public AddEventCommand(String desc, LocalDateTime dateTime) {
         this.event = new Event(desc, dateTime);
     }
 

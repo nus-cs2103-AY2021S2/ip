@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import duke.task.Todo;
  * of tasks in and out of the disk.
  */
 public class Storage {
-
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected Path filePath;
 
     /**
@@ -51,9 +52,9 @@ public class Storage {
                 if (parts[0].equals("T")) {
                     task = new Todo(parts[2]);
                 } else if (parts[0].equals("D")) {
-                    task = new Deadline(parts[2], LocalDate.parse(parts[3]));
+                    task = new Deadline(parts[2], LocalDateTime.parse(parts[3], formatter));
                 } else {
-                    task = new Event(parts[2], LocalDate.parse(parts[3]));
+                    task = new Event(parts[2], LocalDateTime.parse(parts[3], formatter));
                 }
 
                 if (parts[1].equals("1")) {

@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Deadline;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class AddDeadlineCommand extends Command {
 
@@ -22,7 +22,7 @@ public class AddDeadlineCommand extends Command {
      * @param desc Deadline description.
      * @param dateTime Deadline date time.
      */
-    public AddDeadlineCommand(String desc, LocalDate dateTime) {
+    public AddDeadlineCommand(String desc, LocalDateTime dateTime) {
         this.deadline = new Deadline(desc, dateTime);
     }
 
