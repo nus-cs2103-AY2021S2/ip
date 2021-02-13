@@ -12,35 +12,53 @@ To add todo, deadline or event tasks into task list.
 
 ### Usage
 
-#### `todo` - To add todo task into task list.
+#### `todo (task name)` - To add todo task into task list.
 
 Example of usage: 
 
-`todo (task name)`
+```
+todo task1
+```
 
 Expected outcome:
 
-Message indicating the successful addition of todo task.
+```
+Got it. I've added this task:
+[T][] task1
+Now you have 1 tasks in the list.
+```
 
-#### `deadline` - To add deadline task into task list.
+#### `deadline (task name) /by (date in dd/mm/yyyy) (optional time in 24 hour format)` - To add deadline task into task list.
 
 Example of usage: 
 
-`deadline (task name) /by (date in dd/mm/yyyy) (optional time in 24 hour format)`
+```
+deadline task2 /by 20/02/2020 1400
+```
 
 Expected outcome:
 
-Message indicating the successful addition of deadline task.
+```
+Got it. I've added this task:
+[D][] task2 (by: 20 Feb 2020 02:00 PM)
+Now you have 2 tasks in the list.
+```
 
-#### `event` - To add event task into task list.
+#### `event (task name) /at (date in dd/mm/yyyy) (optional starting time in 24 hour format) (optional ending time in 24 hour format)` - To add event task into task list.
 
 Example of usage: 
 
-`event (task name) /at (date in dd/mm/yyyy) (optional starting time in 24 hour format) (optional ending time in 24 hour format)`
+```
+event task3 /at 20/02/2020 1400 1500
+```
 
 Expected outcome:
 
-Message indicating the successful addition of event task.
+```
+Got it. I've added this task:
+[E][] task3 (at: 20 Feb 2020 02:00 PM-03:00 PM)
+Now you have 3 tasks in the list.
+```
 
 ## Viewing all tasks in task list.
 
@@ -50,39 +68,57 @@ Message indicating the successful addition of event task.
 
 Example of usage: 
 
-`list`
+```
+list
+```
 
 Expected outcome:
 
-All tasks with the completion status will be listed down in increasing order number.
+```
+Here are the tasks in your list:
+1.[T][] task1
+2.[D][] task2 (at: 20 Feb 2020 02:00 PM)
+3.[E][] task3 (at: 20 Feb 2020 02:00 PM-03:00 PM)
+```
 
 ## Marking completed task in task list.
 
 ### Usage
 
-#### `done` - To mark task as completed in task list.
+#### `done (task number)` - To mark task as completed in task list.
 
 Example of usage: 
 
-`done (task number)`
+```
+done 1
+```
 
 Expected outcome:
 
-Message indicating the successful marking of task.
+```
+Nice! I've marked this task as done:
+[T][X] task1
+```
 
 ## Deleting tasks from task list.
 
 ### Usage
 
-#### `delete` - To delete task from task list.
+#### `delete (task number)` - To delete task from task list.
 
 Example of usage: 
 
-`delete (task number)`
+```
+delete 2
+```
 
 Expected outcome:
 
-Message indicating the successful deletion of task.
+```
+Noted. I've removed this task:
+[D][] task2 (at: 20 Feb 2020 02:00 PM)
+Now you have 2 tasks in the list.
+```
 
 ## Exiting from application.
 
@@ -92,8 +128,12 @@ Message indicating the successful deletion of task.
 
 Example of usage: 
 
-`bye`
+```
+bye
+```
 
 Expected outcome:
 
-Goodbye message.
+```
+Bye. Hope to see you again soon!
+```
