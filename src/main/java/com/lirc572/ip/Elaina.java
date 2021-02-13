@@ -138,7 +138,7 @@ public class Elaina extends Application {
             return;
         }
         String elainaText = this.getResponse(userInput.getText());
-        if (elainaText.equals("clear")) {
+        if (elainaText.equals("clear\n")) {
             this.dialogContainer.getChildren().clear();
         } else {
             this.dialogContainer.getChildren().addAll(
