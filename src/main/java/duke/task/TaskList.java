@@ -30,6 +30,7 @@ public class TaskList {
     }
 
     public int getSize() {
+        assert task.size() >= 0;
         return task.size();
     }
 
@@ -38,6 +39,7 @@ public class TaskList {
     }
 
     public Task get(int i) {
+        assert i >= 0 : "Getter error, pointer less than 0";
         return task.get(i);
     }
 

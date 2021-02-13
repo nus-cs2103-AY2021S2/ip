@@ -64,6 +64,7 @@ public class Ui {
         String output = "Got it, I've added this task to the list:\n" +
                 t.toString() + "\n" +
                 "You now have " + count + "task in the list.\n";
+        assert count >= 0 : "Size is less than 0";
         return printMessage(output);
     }
 

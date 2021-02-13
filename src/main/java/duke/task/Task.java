@@ -35,11 +35,14 @@ public class Task {
     }
 
     public String toString() {
+        String str = "";
         if (this.isDone) {
-            return "[X] " + this.description;
+            str = "[X] " + this.description;
         } else {
-            return "[ ] " + this.description;
+            str = "[ ] " + this.description;
         }
+        assert str.length() >= 3 : "Printing error, string less than 3 char";
+        return str;
     }
 
     public String savedFormat() {

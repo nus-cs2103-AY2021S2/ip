@@ -117,6 +117,8 @@ public class FileSaver {
             FileWriter fw = new FileWriter(file);
             for (int i = 0; i < task.getSize(); i++) {
                 Task t = task.get(i);
+                String saveFormat = t.savedFormat();
+                assert saveFormat.length() >= 0 : "Save format error, length less than 0";
                 fw.write(t.savedFormat() + System.lineSeparator());
             } 
             fw.close();
