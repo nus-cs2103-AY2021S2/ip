@@ -21,9 +21,10 @@ public class Ui {
      * Prints greetings message at the start when user runs the Duke app.
      */
     public static String greetings() {
-        String message = "Hello! I'm your personal assistant Fluffy\n"
-                + "How can I assist you?\n"
-                + "Type \"help\" to see what you can do here!";
+        String message = "Eren... I have waited to meet you for a long time.\n"
+                + "------\n"
+                + "How can Zeke assist you?\n"
+                + "Type \"help\" for the list of commands!";
         return message;
     }
 
@@ -31,7 +32,7 @@ public class Ui {
      * Prints exit message when user inputs "bye".
      */
     public String exit() {
-        String message = "Bye. Till next time!";
+        String message = "Bye. Till next time brother.";
         return message;
     }
 

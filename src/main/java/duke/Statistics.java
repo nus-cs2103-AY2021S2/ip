@@ -24,7 +24,6 @@ public class Statistics {
         return message;
     }
 
-
     public String getTasksDueSoon(ArrayList<Task> list) {
         String message = "";
         ArrayList<Task> tasksDueSoon = new ArrayList<>();

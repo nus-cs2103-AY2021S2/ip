@@ -47,7 +47,7 @@ public class TaskList {
      */
     public void checkAsDone(Task task) {
         task.done();
-        assert task.isDone == true : "Task not marked as completed yet";
+        assert task.isDone : "Task not marked as completed yet";
     }
 
     public ArrayList<Task> getList() {
