@@ -104,4 +104,23 @@ public class Ui {
     public static String sayBye() {
         return "Bye. Hope to see you again soon!\n" + "I'm leaving in 3 seconds...\n";
     }
+
+    /**
+     * Displays all correct command formats to users in alphabetical order.
+     */
+    public static String showHelp() {
+        final String DEADLINE_COMMAND = "deadline \n";
+        final String DELETE_COMMAND = "delete \n";
+        final String DONE_COMMAND  = "done \n";
+        final String EXIT_COMMAND = "exit \n";
+        final String EVENT_COMMAND = "event \n";
+        final String FIND_COMMAND = "find \n";
+        final String HELP_COMMAND = "help \n";
+        final String LIST_COMMAND = "list \n";
+        final String TODO_COMMAND = "todo \n";
+
+        return DEADLINE_COMMAND + DELETE_COMMAND + DONE_COMMAND
+                + EVENT_COMMAND + EXIT_COMMAND + FIND_COMMAND
+                + HELP_COMMAND + LIST_COMMAND + TODO_COMMAND;
+    }
 }
