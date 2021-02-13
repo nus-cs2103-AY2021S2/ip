@@ -35,6 +35,8 @@ public class TaskList {
 
     /**
      * Adds task to the tasklist.
+     *
+     * @param t Task to be added.
      */
     public void addTask(Task t) {
         lst.add(t);

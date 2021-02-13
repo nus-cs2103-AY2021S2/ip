@@ -47,7 +47,7 @@ public class Ui {
                 "load",
                 "lowpriority [int]",
                 "save",
-                "search search [keyword | date]",
+                "search [keyword | date]",
                 "sort",
                 "todo [description]");
     }

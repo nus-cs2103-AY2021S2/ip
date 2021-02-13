@@ -133,7 +133,7 @@ public class Parser {
 
     private static void checkNoArgument(String s) throws DukeInputException {
         if (!s.isEmpty()) {
-            throw new DukeInputException("Please do not input extra arugments!");
+            throw new DukeInputException(String.format("%s is not a valid argument!", s));
         }
     }
 
