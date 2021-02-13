@@ -71,7 +71,7 @@ class TaskList {
         int deleteIndex = index;
         if (this.taskList.size() >= deleteIndex) {
             dukeMessage += "Noted. I've removed this task:\n";
-            dukeMessage += "  " + this.taskList.remove(deleteIndex - 1);
+            dukeMessage += "  " + this.taskList.remove(deleteIndex - 1) + "\n";
             dukeMessage += this;
         } else {
             dukeMessage += "Task not found";

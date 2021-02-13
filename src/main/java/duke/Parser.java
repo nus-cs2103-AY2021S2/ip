@@ -76,6 +76,9 @@ public class Parser {
         }
         try {
             int index = Integer.parseInt(removeSpaces[1]);
+            if (index <= 0) {
+                throw new DukeException("Invalid index");
+            }
             parsedInput[0] = "delete";
             parsedInput[1] = String.valueOf(index);
             return parsedInput;
@@ -113,7 +116,7 @@ public class Parser {
             parsedInput[2] = removeSpaces[1].substring(1);
             return parsedInput;
         } catch (DateTimeParseException exception) {
-            throw new DukeException("Invalid date");
+            throw new DukeException("Invalid date. Input date in the format: yyyy-mm-dd");
         }
     }
 
@@ -133,7 +136,7 @@ public class Parser {
             parsedInput[2] = removeSpaces[1].substring(1);
             return parsedInput;
         } catch (DateTimeParseException exception) {
-            throw new DukeException("Invalid date");
+            throw new DukeException("Invalid date. Input date in the format: yyyy-mm-dd");
         }
     }
 
@@ -159,9 +162,9 @@ public class Parser {
             throw new DukeException(errorMessage);
         }
         String removeSpaces = input.substring(5);
-        boolean isWrong = !(removeSpaces.equals("name") || removeSpaces.equals("done")
+        boolean isWrongInput = !(removeSpaces.equals("name") || removeSpaces.equals("done")
                 || removeSpaces.equals("notdone"));
-        if (isWrong) {
+        if (isWrongInput) {
             throw new DukeException(errorMessage);
         }
         parsedInput[0] = "sort";

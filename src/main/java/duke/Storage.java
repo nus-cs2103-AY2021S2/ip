@@ -15,8 +15,9 @@ class Storage {
      * Creates a new text file on the local computer so that the list of tasks can be saved on the
      * hard disk.
      */
-    public static void createFile() throws java.io.IOException {
+    public static void createFile() throws IOException {
         File textFile = new File("./data/duke.txt");
+        // Creates the folder if it is not on the local hard disk.
         new File("./data").mkdirs();
         textFile.delete();
         textFile.createNewFile();
@@ -25,31 +26,31 @@ class Storage {
     /**
      * Updates the text file whenever the task list changes.
      *
-     * @param taskList the corresponding task list in which the text file is based on
+     * @param taskList the corresponding task list in which the text file is based on.
      */
     public static void update(ArrayList<Task> taskList) {
         File textFile = new File("./data/duke.txt");
         try {
             createFile();
             FileWriter fileWriter = new FileWriter(textFile);
-            for (Task t : taskList) {
-                if (t instanceof ToDo) {
+            for (Task task : taskList) {
+                if (task instanceof ToDo) {
                     fileWriter.write("T | ");
-                } else if (t instanceof Deadline) {
+                } else if (task instanceof Deadline) {
                     fileWriter.write("D | ");
-                } else if (t instanceof Event) {
+                } else if (task instanceof Event) {
                     fileWriter.write("E | ");
                 }
-                if (t.isComplete()) {
-                    fileWriter.write("1 | " + t.taskName);
+                if (task.isComplete()) {
+                    fileWriter.write("1 | " + task.taskName);
                 } else {
-                    fileWriter.write("0 | " + t.taskName);
+                    fileWriter.write("0 | " + task.taskName);
                 }
-                if (t instanceof Deadline) {
-                    fileWriter.write(" | " + ((Deadline) t).getDate());
+                if (task instanceof Deadline) {
+                    fileWriter.write(" | " + ((Deadline) task).getDate());
                 }
-                if (t instanceof Event) {
-                    fileWriter.write(" | " + ((Event) t).getDate());
+                if (task instanceof Event) {
+                    fileWriter.write(" | " + ((Event) task).getDate());
                 }
                 fileWriter.write("\n");
             }
@@ -63,14 +64,14 @@ class Storage {
      * Method to read an existing text file and convert it into a corresponding task list within
      * the Dukebot.
      *
-     * @param file the text file in which the task list is created from
-     * @param taskList the corresponding task list to copy the text file over
-     * @throws IOException whenever an issue with reading the file arises
+     * @param file the text file in which the task list is created from.
+     * @param taskList the corresponding task list to copy the text file over.
+     * @throws IOException whenever an issue with reading the file arises.
      */
     public static void convert(File file, ArrayList<Task> taskList) throws IOException {
-        Scanner scan = new Scanner(file);
-        while (scan.hasNext()) {
-            String[] parsed = splitter(scan.nextLine());
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            String[] parsed = removeSpaces(scanner.nextLine());
             String type = parsed[0];
             boolean isDone = parsed[1].equals("1");
             String taskName;
@@ -87,10 +88,10 @@ class Storage {
                 }
             }
         }
-        scan.close();
+        scanner.close();
     }
 
-    private static String[] splitter(String input) {
+    private static String[] removeSpaces(String input) {
         String[] result = new String[4];
         int counter = 0;
         result[0] = "";

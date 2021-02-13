@@ -29,16 +29,16 @@ public class Duke {
      */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Duke iceBear = new Duke();
-        System.out.println(iceBear.greet());
+        Duke spongebob = new Duke();
+        System.out.println(spongebob.greet());
         while (true) {
             String nextCommand = scan.nextLine();
             if (nextCommand.equals("bye")) {
-                System.out.println(iceBear.exit());
+                System.out.println(spongebob.exit());
                 break;
             }
             try {
-                System.out.println(iceBear.process(nextCommand));
+                System.out.println(spongebob.process(nextCommand));
             } catch (DukeException exception) {
                 System.out.println(exception);
             }
@@ -51,7 +51,7 @@ public class Duke {
      * @return a string representation of Duke's greeting
      */
     public String greet() {
-        String greetingMessage = "Hello! I'm IceBear\nWhat can I do for you?";
+        String greetingMessage = "Hello! I'm Spongebob!\nWhat can I do for you?";
         return greetingMessage;
     }
     private String exit() {
