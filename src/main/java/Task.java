@@ -3,6 +3,7 @@
  */
 public class Task {
     protected String description;
+    protected String moreInfo;
     protected boolean isDone;
 
     /**

@@ -36,6 +36,13 @@ public class Parser {
 
         Pattern pFind = Pattern.compile("^(find )([a-zA-Z_0-9 ]+)");
         Matcher mFind = pFind.matcher((str));
+
+        Pattern pInfo = Pattern.compile("^(info )([0-9]+)");
+        Matcher mInfo = pInfo.matcher((str));
+
+        Pattern pAddInfo = Pattern.compile("^(addinfo )([0-9]+)([a-zA-Z_0-9 ]*+)");
+        Matcher mAddInfo = pAddInfo.matcher((str));
+
         assert !str.isBlank() : "No command given!";
         if (str.equals("list")) {
             output += "Here are the tasks in your tasks!\n";
@@ -81,7 +88,15 @@ public class Parser {
             output += "Here are the matching tasks in your list!" + "\n";
             String word = mFind.group(2);
             output += tasks.matchTasks(word);
-        } else {
+        } else if (mInfo.find()) {
+            output += "Here is the additional info regarding this task!" + "\n";
+            int index = Integer.parseInt(mInfo.group(2)) - 1;
+            output += tasks.getAtInd(index).moreInfo + "\n";
+        } else if (mAddInfo.find()) {
+            output += "I have added the additional info regarding this task!" + "\n";
+            int index = Integer.parseInt(mAddInfo.group(2)) - 1;
+            tasks.getAtInd(index).moreInfo = mAddInfo.group(3);
+        }else {
             throw new DukeException("I don't know what that means!!!!");
         }
         return output;
