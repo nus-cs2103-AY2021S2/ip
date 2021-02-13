@@ -78,20 +78,14 @@ public class Ui {
         String output = "";
         try {
             Command command = parser.getCommand(input);
-
             switch (command) {
                 case HELLO:
                     output = this.bot.greet();
                     break;
 
                 case BYE:
-                    output = "Bye!";
                     Storage storage = new Storage("data/duke.txt" , this.bot);
-                    try {
-                        storage.updateFile();
-                    } catch (IOException e) {
-                        output = "Can't save to file!";
-                    }
+                    this.bot.bye(storage);
                     break;
 
                 case LIST:
@@ -109,14 +103,9 @@ public class Ui {
                     break;
 
                 case TODO:
-                    try {
-                        input = parser.toDoTask(input);
-                        output = toDoCommand(input);
-                        break;
-
-                    } catch (Exception e) {
-                        throw new DukeException(("OOPS!!! The description cannot be empty."));
-                    }
+                    input = parser.toDoTask(input);
+                    output = toDoCommand(input);
+                    break;
 
                 case EVENT:
                     String content = parser.eventTaskContent(input);

@@ -24,6 +24,10 @@ public class Task {
         this.done = true;
     }
 
+    public boolean isDone(String doneStatus) {
+        return doneStatus.equals(" 1 ");
+    }
+
     /**
      * Checks if Task content has matching keyword.
      *
@@ -31,6 +35,14 @@ public class Task {
      */
     public boolean isMatch(String keyword) {
         return this.content.contains(keyword);
+    }
+
+    protected boolean isToDoTask(String inputType) {
+        return inputType.equals("T");
+    }
+
+    protected boolean isEventTask(String inputType) {
+        return inputType.equals("E");
     }
 
     public String toString() {

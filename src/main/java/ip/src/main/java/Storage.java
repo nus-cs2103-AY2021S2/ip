@@ -19,41 +19,57 @@ public class Storage {
         this.bot = bot;
     }
 
+    private Task loadToDoTask (String[] taskDataArr) {
+        String details = taskDataArr[2];
+        Task newTask = new ToDo(details);
+        bot.addToBot(newTask);
+        return newTask;
+    }
+
+    private Task loadEventTask (String[] taskDataArr) {
+        String content = taskDataArr[2];
+        String at = taskDataArr[3];
+        Task newTask = new Event(content, at);
+        bot.addToBot(newTask);
+        return newTask;
+    }
+
+    private Task loadDeadlineTask (String[] taskDataArr) {
+        String content = taskDataArr[2];
+        String by = taskDataArr[3];
+        Task newTask = new Deadline(content, by);
+        bot.addToBot(newTask);
+        return newTask;
+    }
     /**
      * Updates the Duke bot with the tasks by loading the tasks in the file.
+     * Task is in the format {type} | {doneStatus} | {details}.
      *
      * @param taskData The task from the file.
      * @throws FileNotFoundException
      */
 
-    public void loadTask(String taskData) throws FileNotFoundException {
+    public void loadTasks(String taskData) throws FileNotFoundException {
         File f = new File(this.filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        Task newTask = new Task("");
 
         String[] taskDataArr = taskData.split(" \\| ");
         String type = taskDataArr[0];
         String doneStatus = taskDataArr[1];
-        if (type.equals("T")) {
-            String details = taskDataArr[2];
-            newTask = new ToDo(details);
-            bot.addToBot(newTask);
+        Task newTask = new Task("");
 
-        } else if (type.equals("E")) {
-            String content = taskDataArr[2];
-            String at = taskDataArr[3];
-            newTask = new Event(content, at);
-            bot.addToBot(newTask);
+        if (newTask.isToDoTask(type)) {
+            newTask = loadToDoTask(taskDataArr);
+
+        } else if (newTask.isEventTask(type)) {
+            newTask = loadEventTask(taskDataArr);
 
         } else {
             assert type.equals("D");
-            String content = taskDataArr[2];
-            String by = taskDataArr[3];
-            newTask = new Deadline(content, by);
-            bot.addToBot(newTask);
+            newTask = loadDeadlineTask(taskDataArr);
         }
 
-        if (doneStatus == " 1 ") {
+        if (newTask.isDone(doneStatus)) {
             newTask.markDone();
         }
 
@@ -72,7 +88,7 @@ public class Storage {
         Storage storage = new Storage(filePath, bot);
 
         while (s.hasNext()) {
-            storage.loadTask(s.nextLine());
+            storage.loadTasks(s.nextLine());
         }
 
     }

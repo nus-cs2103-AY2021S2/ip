@@ -1,6 +1,7 @@
 package ip.src.main.java;
 
 import java.util.Locale;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Parser is a class that parsers user input to retrieve user commands, information to create Task objects etc.
@@ -44,10 +45,16 @@ public class Parser {
      * @return String content needed to create a ToDo Object.
      */
 
-    public String toDoTask(String input){
-        input = input.split(" ", 2)[1];
-        return input;
+    public String toDoTask(String input) throws DukeException {
+        try {
+            input = input.split(" ", 2)[1];
+            return input;
+        } catch (PatternSyntaxException e) {
+            throw new DukeException(("OOPS!!! The description cannot be empty."));
+        }
+
     }
+
 
     /**
      * Retrieves the information needed from the user input for a Event object.
