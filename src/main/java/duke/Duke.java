@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.command.CommandResult;
 
 /**
  * main class containing the Duke Chatbot main logic.
@@ -48,23 +49,23 @@ public class Duke {
     }
 
     public String start(){
-        return ui.displayWelcomeMessage();
+        return ui.getWelcomeMessage();
     }
 
     public String getResponse(String input) {
         try {
             Parser parser = new Parser(input);
             Command command = parser.parseCommand();
-            command.execute(ui, tasks, storage);
-            this.isExit = command.shouldExit();
-            return ui.getMessageToDisplay();
+            CommandResult commandResult = command.execute(ui, tasks, storage);
+            this.isExit = commandResult.getIsExit();
+            return commandResult.getMessageToDisplay();
 
         } catch (DukeParseException e) {
             return "OOPS!!! " + e.getMessage();
         }
     }
 
-    public boolean shouldExit() {
+    public boolean getIsExit() {
         return isExit;
     }
 }

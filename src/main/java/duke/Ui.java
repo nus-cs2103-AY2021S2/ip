@@ -3,47 +3,15 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Handles the User interface interactions with the user. Provides various methods to read in the command
- * and print out things to display.
+ * Provides some functions which handle formatting display messages to display to the user.
  */
 public class Ui {
-
-    private Scanner scForCommandLine = new Scanner(System.in);
-
-    private String messageToDisplay = "";
 
     /**
      * Returns the welcome message when first starting duke.
      */
-    public String displayWelcomeMessage() {
+    public String getWelcomeMessage() {
         return  "Hello! I'm Duke\n" + "What can I do for you?";
-    }
-
-
-    /**
-     * gets a line of user input from Command line, trimmed.
-     *
-     * @return String containing a line input from user.
-     */
-    public String getUserCommand() {
-        String input;
-        do {
-            input = scForCommandLine.nextLine().trim();
-        } while (shouldIgnore(input));
-        return input;
-    }
-
-    /**
-     * Ignores input if string does not contain any non-space characters. ( Could have multiple spaces,tabs etc)
-     *
-     * @return true a boolean value to indicate if the string is to be ignored.
-     */
-    public boolean shouldIgnore(String input) {
-        if (input.trim().equals("")) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 
@@ -65,14 +33,25 @@ public class Ui {
         return "Now you have " + listOfTasks.size() + " tasks in the list.";
     }
 
-    public void setDisplayMessage(String messageToDisplay){
-        this.messageToDisplay = messageToDisplay;
+    public String generateAddMessage(Task taskToBeAdded, TaskList tasks) {
+        return "Got it. I've added this task:\n\t" + taskToBeAdded + "\n"
+                + Ui.getDisplayOfNumberOfTasks(tasks);
     }
 
-    public String getMessageToDisplay() {
-        return messageToDisplay;
+    public String generateDeleteMessage(Task taskToDelete, TaskList tasks) {
+        return "Noted. I've removed this task:\n\t" + taskToDelete
+                + "\n" + Ui.getDisplayOfNumberOfTasks(tasks);
     }
-
+    public String generateExitMessage() {
+        return "Bye. Hope to see you again soon!";
+    }
+    public String generateFindTaskMessage(TaskList filteredTaskList) {
+        return "Here are the matching tasks in your list:" + "\n" +
+                getDisplayOfAllTasks(filteredTaskList);
+    }
+    public String generateMarkTaskMessage(Task taskToMarkDone) {
+        return "Nice! I've marked this task as done:\n" + "\t" + taskToMarkDone;
+    }
 
 
 }

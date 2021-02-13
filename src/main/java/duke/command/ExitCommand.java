@@ -7,8 +7,8 @@ import duke.Ui;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) {
-        ui.setDisplayMessage("Bye. Hope to see you again soon!");
-        this.isExit = true;
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) {
+        String exitMessage = ui.generateExitMessage();
+        return new CommandResult( exitMessage, true);
     }
 }

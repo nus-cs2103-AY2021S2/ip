@@ -16,15 +16,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) {
-        Task task = tasks.delete(indexToDelete);
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) {
+        Task taskToDelete = tasks.delete(indexToDelete);
         try {
             storage.saveTasks(tasks);
         } catch (IOException err) {
             this.isExit = true;
         }
-        String messageToDisplay = "Noted. I've removed this task:\n\t" + task
-                + "\n" + Ui.getDisplayOfNumberOfTasks(tasks);
-        ui.setDisplayMessage(messageToDisplay);
+        String deleteMessage = ui.generateDeleteMessage(taskToDelete,tasks);
+        return new CommandResult(deleteMessage, false);
     }
 }

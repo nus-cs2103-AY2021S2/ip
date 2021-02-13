@@ -2,4 +2,5 @@ T | 0 | lunch
 D | 0 | lunch | 2020-09-03
 T | 1 | nothing
 T | 0 | gametheory assignment
-T | 0 | GAMETHEORY
+T | 1 | GAMETHEORY
+D | 0 | Financial Aid Submission | 2021-03-01 (FIRST MARCH)

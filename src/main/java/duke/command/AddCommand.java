@@ -2,10 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.Storage;
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 public class AddCommand extends Command {
     private final Task taskToBeAdded;
@@ -14,8 +11,9 @@ public class AddCommand extends Command {
         this.taskToBeAdded = tasktoBeAdded;
     }
 
+
     @Override
-    public void execute(Ui ui, TaskList tasks, Storage storage) {
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) {
         tasks.add(taskToBeAdded);
         try {
             storage.saveTasks(tasks);
@@ -23,9 +21,8 @@ public class AddCommand extends Command {
             System.out.println("Error in accessing storage from addCommand.execute...Check data/duke.txt");
             this.isExit = true;
         }
-        String displayMessage = "Got it. I've added this task:\n\t" + taskToBeAdded + "\n"
-                + Ui.getDisplayOfNumberOfTasks(tasks);
-        ui.setDisplayMessage(displayMessage);
+        String addMessage = ui.generateAddMessage(taskToBeAdded,tasks);
+        return new CommandResult(addMessage,false);
     }
 
 }
