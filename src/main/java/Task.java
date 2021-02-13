@@ -41,6 +41,20 @@ public abstract class Task {
     }
 
     /**
+     * Returns result of the updating of task.
+     * @param field , field to be updated
+     * @param value , value to be updated
+     * @return String , result of the updating
+     */
+    public String update(String field, String value) {
+        if (field.contains("desc")) {
+            description = value;
+            return Ui.showSuccessUpdate();
+        }
+        return Ui.showFailUpdate();
+    }
+
+    /**
      * Returns the representation of a task for saving.
      * @return String representation of a task for saving
      */

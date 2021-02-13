@@ -7,6 +7,8 @@ public class Parser {
     private static final String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
     private static final String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! I`m sorry. but i don`t know what that means :-(";
+    private static final String ERROR_INVALID_UPDATE_COMMAND = "OOPS!! Update command should be in this form : " +
+            "Update <field> <Value> ";
 
     /**
      * Returns a Command object based on the fullCommand given
@@ -49,6 +51,7 @@ public class Parser {
         case"todo":
         case"deadline":
         case"event":
+        case "update":
             break;
         default:
             throw new DukeException("Invalid command");
@@ -60,6 +63,8 @@ public class Parser {
         boolean requireDesc = checkRequireDescription(keyword);
         boolean requireOption = checkRequireOption(keyword);
         boolean requireDeadline = checkRequireDeadline(keyword);
+        boolean isUpdate = keyword.equalsIgnoreCase("Update");
+
         if (!requireDesc) {
             return createWithoutDescCommand(commandParts);
         }
@@ -67,6 +72,11 @@ public class Parser {
         if (requireOption) {
             checkOption(commandParts);
             return createWithOptionCommand(commandParts);
+        }
+
+        if(!isUpdate) {
+            checkOption(commandParts);
+            return createUpdateCommand(commandParts);
         }
 
         if (!requireDeadline) {
@@ -152,6 +162,18 @@ public class Parser {
         } else {
             throw new DukeException(ERROR_INVALID_COMMAND);
         }
+    }
+
+    private static Command createUpdateCommand(String[] commandParts) throws DukeException {
+        String remainderCommand = commandParts[1].trim();
+        String[] remainderCommands = remainderCommand.split(" ");
+        if (remainderCommands.length != 3) {
+            throw new DukeException(ERROR_INVALID_UPDATE_COMMAND);
+        }
+        int option = Integer.parseInt(remainderCommands[0]);
+        String field = remainderCommands[1];
+        String value = remainderCommands[2];
+        return new UpdateCommand(option, field, value);
     }
 
     private static Command createAddCommand(String[] commandParts) throws DukeException, DukeDeadlineException {
