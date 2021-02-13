@@ -2,7 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 
-import duke.command.*;
+import duke.command.ReadCommand;
+import duke.command.DetectDuplicateCommand;
+import duke.command.UpdateCommand;
+import duke.command.CreateCommand;
+import duke.command.DeleteCommand;
 
 /**
  * Parser class which handles the parsing of user's input and delivers the expected action accordingly

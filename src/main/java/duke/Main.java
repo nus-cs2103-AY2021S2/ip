@@ -2,16 +2,14 @@ package duke;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.application.Platform;
 
 public class Main extends Application {
 
@@ -35,8 +33,15 @@ public class Main extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
+        Alert instruction = new Alert(Alert.AlertType.INFORMATION);
+        instruction.setTitle("Instructions Manual");
+        instruction.setContentText(Ui.greet());
+        instruction.setHeaderText("These are the commands");
+        instruction.show();
+
+
         AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, dialogContainer);
 
         scene = new Scene(mainLayout);
 
@@ -61,6 +66,9 @@ public class Main extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
+        Label label = new Label(Ui.greet());
+        dialogContainer.getChildren().addAll(label);
+
         userInput.setPrefWidth(580.0);
 
         sendButton.setPrefWidth(55.0);
@@ -72,6 +80,7 @@ public class Main extends Application {
 
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
 
         // more code to be added here later
         sendButton.setOnMouseClicked((event) -> {
@@ -90,7 +99,13 @@ public class Main extends Application {
             try {
                 handleUserInput();
             } catch (Exception e) {
-                e.printStackTrace();
+                Platform.runLater(() -> {
+                    dialogContainer.getChildren().addAll(
+                            DialogBox.getUserDialog(new Label(userInput.getText()), new ImageView(user)),
+                            DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
+                    userInput.clear();
+                });
+
             }
         });
 
@@ -98,7 +113,12 @@ public class Main extends Application {
             try {
                 handleUserInput();
             } catch (Exception e) {
-                e.printStackTrace();
+                Platform.runLater(() -> {
+                    dialogContainer.getChildren().addAll(
+                            DialogBox.getUserDialog(new Label(userInput.getText()), new ImageView(user)),
+                            DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
+                    userInput.clear();
+                });
             }
         });
 
@@ -112,7 +132,11 @@ public class Main extends Application {
         return textToAdd;
     }
 
-    private void handleUserInput() throws DukeException, Exception {
+    private void handleUserInput() throws Exception {
+        if (userInput.getText().equals("bye")) {
+            Platform.setImplicitExit(true);
+            Platform.exit();
+        }
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -122,7 +146,7 @@ public class Main extends Application {
         userInput.clear();
     }
 
-    private String getResponse(String input) throws DukeException, Exception {
+    private String getResponse(String input) throws Exception {
         return Parser.read(input);
     }
 }

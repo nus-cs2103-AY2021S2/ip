@@ -18,16 +18,14 @@ public class Ui {
     /**
      * Greets the user when the chatbot is ran
      */
-    public static void greet() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
+    public static String greet() {
+        return "Hello from\n" + logo + "Hello! I'm Duke" + "\n" + "What can I do for you?";
     }
 
     /**
      * Displays exit message when user exits the chatbot
      */
     public static String exit() {
-        String output = "Bye. Hope to see you again soon!";
-        return output;
+        return "Bye. Hope to see you again soon!";
     }
 }
