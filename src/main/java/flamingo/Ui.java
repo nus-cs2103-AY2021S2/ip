@@ -105,4 +105,8 @@ public class Ui {
         return "Okay, I've unarchived this task:\n" + taskToUnarchiveString
                 + "\nYou now have " + numArchivedTasks + " tasks in the archive.";
     }
+
+    public static String saveData() {
+        return "Great! I've saved your data.";
+    }
 }

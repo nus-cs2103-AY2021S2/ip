@@ -22,7 +22,6 @@ public class MainWindow extends AnchorPane {
 
     private Flamingo flamingo;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/smile.png"));
     private Image botImage = new Image(this.getClass().getResourceAsStream("/images/flamingo.png"));
 
     /**
@@ -50,7 +49,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = flamingo.getResponse(input);
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
+            DialogBox.getUserDialog(input),
             DialogBox.getFlamingoDialog(response, botImage)
         );
         userInput.clear();

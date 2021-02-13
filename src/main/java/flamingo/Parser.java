@@ -1,6 +1,7 @@
 package flamingo;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -42,56 +43,107 @@ public class Parser {
      */
     public static String startResponse(String userInput) throws Exception {
         if (userInput.equals("bye")) {
-            // Save data when user says bye
-            storage.saveData(activeTasks);
-            storage.saveArchive(archivedTasks);
-            return Ui.sayBye();
+            return exitProgram();
+        } else if (userInput.equals("save")) {
+            return saveAllData();
         } else if (userInput.equals("list")) {
-            checkListValidity();
-            return activeTasks.listTasks();
+            return listTasksIfValid();
         } else if (userInput.contains("done")) {
-            int taskNumber = getTaskNumberFrom(userInput);
-            checkDoneValidity(taskNumber);
-            return activeTasks.markAsDone(taskNumber);
+            return markAsDoneIfValid(userInput);
         } else if (userInput.contains("todo")) {
-            checkTodoValidity(userInput);
-            String todoDescription = getTodoDescriptionFrom(userInput);
-            Task currentTask = new Todo(todoDescription);
-            return activeTasks.addTask(currentTask);
+            return addTodoIfValid(userInput);
         } else if (userInput.contains("deadline")) {
-            checkDeadlineValidity(userInput);
-            Task currentTask = getDeadlineTaskFrom(userInput);
-            return activeTasks.addTask(currentTask);
+            return addDeadlineIfValid(userInput);
         } else if (userInput.contains("event")) {
-            checkEventValidity(userInput);
-            Task currentTask = getEventTaskFrom(userInput);
-            return activeTasks.addTask(currentTask);
+            return addEventIfValid(userInput);
         } else if (userInput.contains("delete")) {
-            int taskNumber = getDeleteTaskNumFrom(userInput);
-            checkDeleteValidity(taskNumber);
-            return activeTasks.deleteTask(taskNumber);
+            return deleteTaskIfValid(userInput);
         } else if (userInput.contains("find")) {
-            checkFindValidity(userInput);
-            String keyword = getKeywordFrom(userInput);
-            return activeTasks.findTask(keyword);
+            return findTaskIfValid(userInput);
         } else if (userInput.equals("archive")) {
-            // View list of archived tasks
-            checkArchiveListValidity();
-            return archivedTasks.listArchivedTasks();
+            // To view all archived tasks
+            return findArchiveIfValid();
         } else if (userInput.equals("archive all")) {
             return activeTasks.archiveAllTasks();
         } else if (userInput.contains("unarchive")) {
-            int taskNumber = getUnarchiveTaskNumFrom(userInput);
-            checkUnarchiveValidity(taskNumber);
-            return archivedTasks.unarchiveTask(taskNumber);
+            return unarchiveTaskIfValid(userInput);
         } else if (userInput.contains("archive")) {
             // To archive a task
-            int taskNumber = getArchivedTaskNumFrom(userInput);
-            checkArchiveValidity(taskNumber);
-            return activeTasks.archiveTask(taskNumber);
+            return archiveTaskIfValid(userInput);
         } else {
             throw new Exception();
         }
+    }
+
+    private static String exitProgram() throws IOException {
+        saveAllData();
+        System.exit(0);
+        return Ui.sayBye();
+    }
+
+    private static String archiveTaskIfValid(String userInput) {
+        int taskNumber = getArchivedTaskNumFrom(userInput);
+        checkArchiveValidity(taskNumber);
+        return activeTasks.archiveTask(taskNumber);
+    }
+
+    private static String unarchiveTaskIfValid(String userInput) {
+        int taskNumber = getUnarchiveTaskNumFrom(userInput);
+        checkUnarchiveValidity(taskNumber);
+        return archivedTasks.unarchiveTask(taskNumber);
+    }
+
+    private static String findArchiveIfValid() {
+        checkArchiveListValidity();
+        return archivedTasks.listArchivedTasks();
+    }
+
+    private static String findTaskIfValid(String userInput) {
+        checkFindValidity(userInput);
+        String keyword = getKeywordFrom(userInput);
+        return activeTasks.findTask(keyword);
+    }
+
+    private static String deleteTaskIfValid(String userInput) {
+        int taskNumber = getDeleteTaskNumFrom(userInput);
+        checkDeleteValidity(taskNumber);
+        return activeTasks.deleteTask(taskNumber);
+    }
+
+    private static String addEventIfValid(String userInput) {
+        checkEventValidity(userInput);
+        Task currentTask = getEventTaskFrom(userInput);
+        return activeTasks.addTask(currentTask);
+    }
+
+    private static String addDeadlineIfValid(String userInput) {
+        checkDeadlineValidity(userInput);
+        Task currentTask = getDeadlineTaskFrom(userInput);
+        return activeTasks.addTask(currentTask);
+    }
+
+    private static String addTodoIfValid(String userInput) {
+        checkTodoValidity(userInput);
+        String todoDescription = getTodoDescriptionFrom(userInput);
+        Task currentTask = new Todo(todoDescription);
+        return activeTasks.addTask(currentTask);
+    }
+
+    private static String markAsDoneIfValid(String userInput) {
+        int taskNumber = getTaskNumberFrom(userInput);
+        checkDoneValidity(taskNumber);
+        return activeTasks.markAsDone(taskNumber);
+    }
+
+    private static String listTasksIfValid() {
+        checkListValidity();
+        return activeTasks.listTasks();
+    }
+
+    private static String saveAllData() throws IOException {
+        storage.saveData(activeTasks);
+        storage.saveArchive(archivedTasks);
+        return Ui.saveData();
     }
 
     private static void checkArchiveValidity(int taskNumber) {
