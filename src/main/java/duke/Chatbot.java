@@ -210,7 +210,8 @@ public class Chatbot {
         }
         String[] taskTimeSplit = input.split(" /by ");
         if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
-            throw new DukeException("The time of a deadline cannot be empty.");
+            throw new DukeException("There's something wrong with deadline time.\n"
+                    + "(deadline deadline_name /by yyyy-mm-dd)");
         }
         Task newTask = new Deadline(taskTimeSplit[0].substring(9), LocalDate.parse(taskTimeSplit[1]));
         tasks.addTask(newTask);
@@ -232,7 +233,8 @@ public class Chatbot {
         }
         String[] taskTimeSplit = input.split(" /at ");
         if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
-            throw new DukeException("The time of an event cannot be empty.");
+            throw new DukeException("There's something wrong with event time.\n"
+                    + "(event event_name /at yyyy-mm-dd)");
         }
         Task newTask = new Event(taskTimeSplit[0].substring(6), LocalDate.parse(taskTimeSplit[1]));
         tasks.addTask(newTask);
