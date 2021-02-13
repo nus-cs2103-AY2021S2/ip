@@ -39,6 +39,11 @@ public class TaskList {
         this.list.add(index, newTask);
     }
 
+    /**
+     * Deletes Task at index.
+     *
+     * @param index Target Task.
+     */
     public void deleteJob(int index) {
         assert this.list.get(index) != null : "Index not handled correctly by delete command.";
         this.list.remove(index);
