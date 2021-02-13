@@ -13,7 +13,7 @@ public class Ui {
      * @return string
      */
     public static String showWelcome() {
-        return "Hi there! I'm Monica.\nWhat can I do for you?\n";
+        return "Hey! I'm your best friend, Monica.\nWhat can I do for you?\n";
     }
 
     /**
