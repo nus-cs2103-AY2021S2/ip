@@ -69,17 +69,17 @@ public class Storage {
         String taskType = content[0];
         int taskStatus = Integer.parseInt(content[1]);
         String taskDescription = content[2];
-        String taskTime = content[3];
-
-        //Parse task time into correct format
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy");
-        LocalDateTime formattedTime = LocalDateTime.parse(taskTime, dateTimeFormat);
 
         switch(taskType) {
         case "D":
-            return new Deadline(taskDescription, taskStatus, formattedTime);
+            String deadlineTime = content[3];
+            return new Deadline(taskDescription, taskStatus,
+                    LocalDateTime.parse(deadlineTime, dateTimeFormat));
         case "E":
-            return new Event(taskDescription, taskStatus, formattedTime);
+            String eventTime = content[3];
+            return new Event(taskDescription, taskStatus,
+                    LocalDateTime.parse(eventTime, dateTimeFormat));
         case "T":
             return new Todo(taskDescription, taskStatus);
         default:
