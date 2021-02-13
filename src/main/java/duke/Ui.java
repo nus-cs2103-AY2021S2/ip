@@ -3,7 +3,6 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents the UI of the Duke chat bot.
@@ -11,78 +10,68 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    protected Scanner sc;
+    private static final String NEWLINE = "\n";
+    private static final String TAB = "\t";
+    private static final String SPACE = " ";
+    private static final String PERIOD = ".";
+
+    private static final String GREETING = "Hello there! I'm Duke, your personal chat bot."
+            + NEWLINE + "To know more about what I can do, type 'usage'."
+            + NEWLINE + "So... Is there anything I can do for you today?";
+    private static final String USAGE = "These are the commands available:"
+            + NEWLINE + TAB + "- usage"
+            + NEWLINE + TAB + "- list"
+            + NEWLINE + TAB + "- todo <task_description>"
+            + NEWLINE + TAB + "- deadline <task_description> /by <date_time>"
+            + NEWLINE + TAB + "- event <task_description> /at <date_time>"
+            + NEWLINE + TAB + "- done <task_number>"
+            + NEWLINE + TAB + "- delete <task_number>"
+            + NEWLINE + TAB + "- save"
+            + NEWLINE + TAB + "- bye";
+    private static final String NO_TASKS = "There isn't any task found in the list.";
+    private static final String LOAD_ERROR = "Unable to load file.";
 
     /**
-     * Initialises the IO objects used by the class.
+     * Retrieves greeting.
      */
-    public Ui() {
-        sc = new Scanner(System.in);
+    public String getGreeting() {
+        return Ui.GREETING;
     }
 
     /**
-     * Prints the usage menu.
+     * Retrieves usage.
      */
-    public String showUsage() {
-        String output = "Hey! These are the commands available:";
-        output += "\t- usage";
-        output += "\t- list";
-        output += "\t- todo <task_description>";
-        output += "\t- deadline <task_description> /by <date_time>";
-        output += "\t- event <task_description> /at <date_time>";
-        output += "\t- done <task_number>";
-        output += "\t- delete <task_number>";
-        output += "\t- save";
-        output += "\t- bye";
-        return output;
+    public String getUsage() {
+        return Ui.USAGE;
     }
 
     /**
-     * Prints the greetings.
+     * Retrieves file load error.
      */
-    public String showGreetings() {
-        String output = "Hey, hello there! I'm Duke, your personal chat bot.";
-        output += "To know more about what I can do, type 'usage'.";
-        output += "So... Is there anything I can do for you today?";
-        return output;
+    public String getLoadingError() {
+        return Ui.LOAD_ERROR;
     }
 
     /**
-     * Prints the file load error message.
-     */
-    public String showLoadingError() {
-        return this.say("Unable to load file.");
-    }
-
-    /**
-     * Prints specified error message.
-     * Typically messages sent from DukeExceptions.
+     * Retrieves tasks in list.
      *
-     * @param message Error message.
+     * @param tasks Task list.
+     * @return Formatted String of task list.
      */
-    public String showError(String message) {
-        return this.say(message);
-    }
-
-    /**
-     * Formats and prints output messages in a
-     * more personalised manner and
-     * 'chat bot'-like manner.
-     *
-     * @param message Message to be formatted and displayed.
-     */
-    public String say(String message) {
-        return message;
-    }
-
     public String getTaskList(ArrayList<Task> tasks) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("You got a total of " + tasks.size() + " task(s).\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            sb.append(String.format("\t%d. %s\n", i + 1, tasks.get(i)));
+        if (tasks.size() == 0) {
+            return Ui.NO_TASKS;
         }
 
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(Ui.TAB);
+            sb.append(i);
+            sb.append(Ui.PERIOD);
+            sb.append(Ui.SPACE);
+            sb.append(tasks.get(i));
+            sb.append(Ui.NEWLINE);
+        }
         return sb.toString();
     }
 }

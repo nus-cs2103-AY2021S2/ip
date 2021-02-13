@@ -19,7 +19,7 @@ public class UsageCommand extends Command {
      * @return Command execution response.
      */
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String msg = ui.showUsage();
+        String msg = ui.getUsage();
         return new CommandResponse(msg, UsageCommand.toExit);
     }
 }

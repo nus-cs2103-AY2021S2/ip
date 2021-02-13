@@ -35,13 +35,13 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.getLoadingError();
             tasks = new TaskList();
         }
     }
 
     public String welcomeUser() {
-        return ui.showGreetings();
+        return ui.getGreeting();
     }
 
     public ArrayList<Task> getTasks() {
