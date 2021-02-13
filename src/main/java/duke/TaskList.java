@@ -55,6 +55,10 @@ class TaskList {
             return dukeMessage;
         }
         Task currTask = this.taskList.get(index - 1);
+        if (currTask.isComplete()) {
+            dukeMessage += "This task is already completed.";
+            return dukeMessage;
+        }
         currTask.completeTask();
         dukeMessage += "Nice! I've marked this task as done:\n " + currTask;
         Storage.update(this.taskList);
@@ -142,6 +146,9 @@ class TaskList {
                 }
                 dukeMessage += currTask;
             }
+        }
+        if (dukeMessage.length() == 0) {
+            dukeMessage += "No task with that keyword has been found";
         }
         return dukeMessage;
     }

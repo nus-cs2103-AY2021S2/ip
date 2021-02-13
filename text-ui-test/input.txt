@@ -1,13 +1,37 @@
-todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
-todo join sports club
-todo borrow book
+todo dinner 
+todo go out and play
+todo
 list
-done 1
+list one
+list one two three four
+deadline homework /by 2021-02-20
+deadline finish personal project /by 2021-12-12
+deadline
+deadline /by 2020-04-05
+event party /at 2019-03-31
+event freshman orientation camp /at 2022-07-21
+event            
+event /at 2011-12-11
+event lunch /at 2045-13-11
 list
 done 2
 done 4
-delete 3
 list
-bye
+done -3
+done 0
+done 8
+done test
+done 4 5 3
+find ho
+find finish
+find
+find       
+find test 
+sort
+sort name
+sort done
+sort notdone
+delete 0
+delete -2
+delete 8
+delete 5

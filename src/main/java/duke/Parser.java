@@ -58,6 +58,9 @@ public class Parser {
         }
         try {
             int index = Integer.parseInt(removeSpaces[1]);
+            if (index <= 0) {
+                throw new DukeException("Invalid index");
+            }
             parsedInput[0] = "done";
             parsedInput[1] = String.valueOf(index);
             return parsedInput;
@@ -89,67 +92,96 @@ public class Parser {
 
     private String[] processToDo(String input) throws DukeException {
         String[] parsedInput = new String[2];
-        if (input.length() <= 4) {
-            throw new DukeException("Invalid input, description of todo cannot be empty");
-        } else if (input.charAt(4) != ' ') {
-            throw new DukeException("Invalid description of todo");
+        String[] removeSpaces = input.split(" ");
+        if (removeSpaces.length == 1) {
+            throw new DukeException("Description of todo cannot be empty");
         }
-        String removeSpaces = input.substring(5);
         parsedInput[0] = "todo";
-        parsedInput[1] = removeSpaces;
+        for (int i = 1; i < removeSpaces.length; i++) {
+            if (i == 1) {
+                parsedInput[1] = removeSpaces[i];
+            } else {
+                parsedInput[1] += " " + removeSpaces[i];
+            }
+        }
         return parsedInput;
     }
 
     private String[] processDeadLine(String input) throws DukeException {
         String[] parsedInput = new String[3];
         if (input.length() <= 9) {
-            throw new DukeException("Invalid input, description of deadline cannot be empty");
+            throw new DukeException("Description of deadline cannot be empty");
         }
-        String[] removeSpaces = input.substring(9).split("/by");
-        if (removeSpaces.length != 2) {
+        String[] removeKeyword = input.substring(9).split("/by");
+        if (removeKeyword.length != 2) {
             throw new DukeException("Invalid description of deadline");
         }
+        String[] deadlineName = removeKeyword[0].split(" ");
+        if (deadlineName[0].length() == 0) {
+            throw new DukeException("Name of deadline task cannot be empty");
+        }
         try {
-            LocalDate date = LocalDate.parse(removeSpaces[1].substring(1));
-            parsedInput[0] = "deadline";
-            parsedInput[1] = removeSpaces[0];
-            parsedInput[2] = removeSpaces[1].substring(1);
-            return parsedInput;
+            LocalDate date = LocalDate.parse(removeKeyword[1].substring(1));
         } catch (DateTimeParseException exception) {
             throw new DukeException("Invalid date. Input date in the format: yyyy-mm-dd");
         }
+        parsedInput[0] = "deadline";
+        parsedInput[2] = removeKeyword[1].substring(1);
+        for (int i = 0; i < deadlineName.length; i++) {
+            if (i == 0) {
+                parsedInput[1] = deadlineName[0];
+            } else {
+                parsedInput[1] += " " + deadlineName[i];
+            }
+        }
+        return parsedInput;
     }
 
     private String[] processEvent(String input) throws DukeException {
         String[] parsedInput = new String[3];
         if (input.length() <= 6) {
-            throw new DukeException("Invalid input, description of event cannot be empty");
+            throw new DukeException("Description of event cannot be empty");
         }
-        String[] removeSpaces = input.substring(6).split("/at");
-        if (removeSpaces.length != 2) {
+        String[] removeKeyword = input.substring(6).split("/at");
+        if (removeKeyword.length != 2) {
             throw new DukeException("Invalid description of event");
         }
+        String[] eventName = removeKeyword[0].split(" ");
+        if (eventName[0].length() == 0) {
+            throw new DukeException("Name of event task cannot be empty");
+        }
         try {
-            LocalDate date = LocalDate.parse(removeSpaces[1].substring(1));
-            parsedInput[0] = "event";
-            parsedInput[1] = removeSpaces[0];
-            parsedInput[2] = removeSpaces[1].substring(1);
-            return parsedInput;
+            LocalDate date = LocalDate.parse(removeKeyword[1].substring(1));
         } catch (DateTimeParseException exception) {
             throw new DukeException("Invalid date. Input date in the format: yyyy-mm-dd");
         }
+        parsedInput[0] = "event";
+        parsedInput[2] = removeKeyword[1].substring(1);
+        for (int i = 0; i < eventName.length; i++) {
+            if (i == 0) {
+                parsedInput[1] = eventName[0];
+            } else {
+                parsedInput[1] += " " + eventName[i];
+            }
+        }
+        return parsedInput;
     }
 
     private String[] processFind(String input) throws DukeException {
         String[] parsedInput = new String[2];
         if (input.length() <= 5) {
-            throw new DukeException("Invalid input, no keyword found");
-        } else {
-            String removeSpaces = input.substring(5);
-            parsedInput[0] = "find";
-            parsedInput[1] = removeSpaces;
-            return parsedInput;
+            throw new DukeException("No keyword found");
         }
+        String[] removeSpaces = input.substring(5).split(" ");
+        if (removeSpaces.length == 0) {
+            throw new DukeException("No keyword found");
+        }
+        if (removeSpaces[0].length() == 0) {
+            throw new DukeException("No keyword found");
+        }
+        parsedInput[0] = "find";
+        parsedInput[1] = input.substring(5);
+        return parsedInput;
     }
 
     private String[] processSort(String input) throws DukeException {
