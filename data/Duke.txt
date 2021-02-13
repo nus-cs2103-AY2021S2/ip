@@ -1,3 +1,6 @@
-T | 0 | read book
-T | 0 | return book
-E | 0 | project meeting| Feb 15 2021 1:00pm
+T | 1 | read book
+E | 0 | project meeting|  Feb 15 2021 1:00pm
+T | 0 | go to sleep
+D | 0 | CS2102 assignment| Feb 17 2021 6:00pm
+D | 0 | IP week 5| Feb 11 2020
+E | 0 | Lunar New Year| Feb 12 2020

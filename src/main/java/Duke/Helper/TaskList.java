@@ -60,7 +60,7 @@ public class TaskList {
         try {
             Task task = list.remove(index - 1);
             return Constants.DELETE_TASK_SUCCESS
-                    + task.toString() + "\n"
+                    + "  " + task.toString() + "\n"
                     + "Now you have " + list.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndex("Delete", list.size());

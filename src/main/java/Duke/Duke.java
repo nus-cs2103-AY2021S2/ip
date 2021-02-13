@@ -30,7 +30,7 @@ public class Duke {
     public Duke() {
         this.sc = new Scanner(System.in);
         this.storage = new Storage(Constants.FILE_PATH);
-        this.taskList = new TaskList(new ArrayList<>());
+        this.taskList = new TaskList(storage.readDataFromFile());
         this.ui = new Ui();
     }
 
@@ -41,7 +41,7 @@ public class Duke {
     public Duke(String path) {
         this.sc = new Scanner(System.in);
         this.storage = new Storage(path);
-        this.taskList = new TaskList(new ArrayList<>());
+        this.taskList = new TaskList(storage.readDataFromFile());
         this.ui = new Ui();
     }
 
@@ -61,7 +61,9 @@ public class Duke {
      */
     public String getResponse(String command) {
         command = command.trim();
-        if (command.equalsIgnoreCase(Command.LIST.getAction())) {
+        if (command.equalsIgnoreCase(Command.BYE.getAction())) {
+            return Constants.BYE;
+        } else if (command.equalsIgnoreCase(Command.LIST.getAction())) {
             return handleListCommand();
         } else if (command.equalsIgnoreCase(Command.STATISTICS.getAction())) {
             return handleStatCommand();
