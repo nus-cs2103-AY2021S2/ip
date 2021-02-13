@@ -21,31 +21,22 @@ public class AddCommand extends Command {
     private final String taskDescription;
     private final LocalDate taskDate;
     private final LocalTime taskTime;
+    private final String taskNotes;
 
     /**
-     * Constructor for tasks that do not have a date and time requirement (e.g. todo-type tasks)
-     * @param taskType enumeration representing the type of task to be created
-     * @param taskDescription the description corresponding to the current task
-     */
-    public AddCommand(TaskType taskType, String taskDescription) {
-        this.taskType = taskType;
-        this.taskDescription = taskDescription;
-        this.taskDate = null;
-        this.taskTime = null;
-    }
-
-    /**
-     * Constructor for tasks that have a date and time requirement (e.g. deadline and event-type tasks)
+     * Constructor for tasks.
      * @param taskType enumeration representing the type of task to be created
      * @param taskDescription the description corresponding to the current task
      * @param taskDate the date corresponding to the current task
      * @param taskTime the time corresponding to the current task
      */
-    public AddCommand(TaskType taskType, String taskDescription, LocalDate taskDate, LocalTime taskTime) {
+    public AddCommand(TaskType taskType, String taskDescription, LocalDate taskDate, LocalTime taskTime,
+                      String taskNotes) {
         this.taskType = taskType;
         this.taskDescription = taskDescription;
         this.taskDate = taskDate;
         this.taskTime = taskTime;
+        this.taskNotes = taskNotes;
     }
 
     /**
@@ -57,21 +48,38 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui) throws InvalidInputException {
 
         Task newTask = null;
+        boolean hasTaskNotes = taskNotes != null;
+        boolean hasDate = taskDate != null;
+        boolean hasTime = taskTime != null;
         switch (taskType) {
         case TODO:
-            newTask = new Todo(taskDescription);
+            if (hasTaskNotes) {
+                newTask = new Todo(taskDescription, false, taskNotes);
+            } else {
+                newTask = new Todo(taskDescription, false, null);
+            }
             break;
         case DEADLINE:
-            if (taskDate == null || taskTime == null) {
+            if (hasDate && hasTime) {
+                if (hasTaskNotes) {
+                    newTask = new Deadline(taskDescription, false, taskDate, taskTime, taskNotes);
+                } else {
+                    newTask = new Deadline(taskDescription, false, taskDate, taskTime, null);
+                }
+            } else {
                 throw new InvalidInputException("Task time and/or date not provided.");
             }
-            newTask = new Deadline(taskDescription, taskDate, taskTime);
             break;
         case EVENT:
-            if (taskDate == null || taskTime == null) {
+            if (hasDate && hasTime) {
+                if (hasTaskNotes) {
+                    newTask = new Event(taskDescription, false, taskDate, taskTime, taskNotes);
+                } else {
+                    newTask = new Event(taskDescription, false, taskDate, taskTime, null);
+                }
+            } else {
                 throw new InvalidInputException("Task time and/or date not provided.");
             }
-            newTask = new Event(taskDescription, taskDate, taskTime);
             break;
         }
         taskList.addTask(newTask);

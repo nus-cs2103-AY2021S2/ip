@@ -73,32 +73,48 @@ public class Parser {
         case "find":
             command = new FindCommand(commandArgs[1]);
             break;
-        // format e.g.: todo, thing
+        // format e.g.: todo, thing, (optional) notes
         case "todo":
             TaskType todoType = TaskType.TODO;
             checkTaskArgsLength(commandArgs, todoType);
-            command = new AddCommand(todoType, commandArgs[1]);
+            if (commandArgs.length == 2) {
+                command = new AddCommand(todoType, commandArgs[1], null, null, null);
+            } else {
+                command = new AddCommand(todoType, commandArgs[1], null, null, commandArgs[2]);
+            }
             break;
-        // format e.g.: deadline, thing, by YYYY-MM-DD HH:MM
+        // format e.g.: deadline, thing, by YYYY-MM-DD HH:MM, (optional) notes
         case "deadline":
             TaskType deadlineType = TaskType.DEADLINE;
             checkTaskArgsLength(commandArgs, deadlineType);
             dateAndTimeTokens = splitDateAndTime(commandArgs[2], deadlineType);
             checkValidDateAndTimeFormat(dateAndTimeTokens[0], dateAndTimeTokens[1]);
-            command = new AddCommand(deadlineType, commandArgs[1], LocalDate.parse(dateAndTimeTokens[0]), LocalTime.parse(dateAndTimeTokens[1]));
+            command = getTimeBasedCommand(dateAndTimeTokens, commandArgs, deadlineType);
             break;
-        // format e.g.: event, thing, at YYYY-MM-DD HH:MM
+        // format e.g.: event, thing, at YYYY-MM-DD HH:MM, (optional) notes
         case "event":
             TaskType eventType = TaskType.EVENT;
             checkTaskArgsLength(commandArgs, eventType);
             dateAndTimeTokens = splitDateAndTime(commandArgs[2], eventType);
             checkValidDateAndTimeFormat(dateAndTimeTokens[0], dateAndTimeTokens[1]);
-            command = new AddCommand(eventType, commandArgs[1], LocalDate.parse(dateAndTimeTokens[0]), LocalTime.parse(dateAndTimeTokens[1]));
+            command = getTimeBasedCommand(dateAndTimeTokens, commandArgs, eventType);
             break;
         default:
             throw new InvalidCommandException("Command provided is invalid.");
         }
 
+        return command;
+    }
+
+    private static Command getTimeBasedCommand(String[] dateAndTimeTokens, String[] commandArgs, TaskType deadlineType) {
+        Command command;
+        if (commandArgs.length == 3) {
+            command = new AddCommand(deadlineType, commandArgs[1], LocalDate.parse(dateAndTimeTokens[0]),
+                    LocalTime.parse(dateAndTimeTokens[1]), null);
+        } else {
+            command = new AddCommand(deadlineType, commandArgs[1], LocalDate.parse(dateAndTimeTokens[0]),
+                    LocalTime.parse(dateAndTimeTokens[1]), commandArgs[3]);
+        }
         return command;
     }
 
@@ -181,13 +197,13 @@ public class Parser {
         boolean hasInvalidArgsLength = false;
         switch (taskType) {
         case TODO:
-            if (commandArgs.length != 2) {
+            if (commandArgs.length < 2 || commandArgs.length > 3) {
                 hasInvalidArgsLength = true;
             }
             break;
         case DEADLINE:
         case EVENT:
-            if (commandArgs.length != 3) {
+            if (commandArgs.length < 3 || commandArgs.length > 4) {
                 hasInvalidArgsLength = true;
             }
             break;

@@ -82,22 +82,36 @@ public class Storage {
             // debug
             // System.out.println(Arrays.toString(taskArgs));
             boolean isTaskDone = taskArgs[1].equals("1");
-
-
+            boolean hasTaskNotes = hasTaskNotes(taskArgs);
 
             switch (taskArgs[0]) {
-            // format: TODO.1.desc
+            // format: TODO.1.desc.(optional)taskNotes
             case "TODO":
-                newTask = new Todo(taskArgs[2], isTaskDone);
+                if (hasTaskNotes) {
+                    newTask = new Todo(taskArgs[2], isTaskDone, taskArgs[3]);
+                } else {
+                    newTask = new Todo(taskArgs[2], isTaskDone, null);
+                }
                 break;
-            // format: DEADLINE.1.desc.date.time
+            // format: DEADLINE.1.desc.date.time.(optional)taskNotes
             case "DEADLINE":
-                newTask = new Deadline(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]), LocalTime.parse(taskArgs[4]));
+                if (hasTaskNotes) {
+                    newTask = new Deadline(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]),
+                            LocalTime.parse(taskArgs[4]), taskArgs[5]);
+                } else {
+                    newTask = new Deadline(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]),
+                            LocalTime.parse(taskArgs[4]), null);
+                }
                 break;
-            // format: EVENT.1.desc.date.time
+            // format: EVENT.1.desc.date.time.(optional)taskNotes
             case "EVENT":
-                newTask = new Event(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]), LocalTime.parse(taskArgs[4]));
-                break;
+                if (hasTaskNotes) {
+                    newTask = new Event(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]),
+                            LocalTime.parse(taskArgs[4]), taskArgs[5]);
+                } else {
+                    newTask = new Event(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]),
+                            LocalTime.parse(taskArgs[4]), null);
+                }                break;
             default:
                 throw new InvalidInputException("Invalid task type provided!");
             }
@@ -105,5 +119,21 @@ public class Storage {
         }
         sc.close();
         return taskList;
+    }
+
+    private boolean hasTaskNotes(String[] taskArgs) {
+        boolean hasTaskNotes;
+        switch (taskArgs[0]) {
+        case "TODO":
+            hasTaskNotes = taskArgs.length == 4;
+            break;
+        case "DEADLINE":
+        case "EVENT":
+            hasTaskNotes = taskArgs.length == 6;
+            break;
+        default:
+            hasTaskNotes = false;
+        }
+        return hasTaskNotes;
     }
 }

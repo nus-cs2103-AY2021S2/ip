@@ -1,35 +1,41 @@
 package todobeast.tasks;
 
+import todobeast.commands.TaskType;
+
 /**
  * An abstract class that represents a Task within the application.
  */
 public abstract class Task {
+
+    protected TaskType taskType;
     protected String taskDescription;
     protected boolean isDone;
+    protected String taskNotes;
     public final static String TASK_DELIMITER = " | ";
 
     /**
-     * Default constructor for new tasks.
-     * @param taskDescription the description corresponding to the current task
-     */
-    public Task(String taskDescription) {
-        this.taskDescription = taskDescription;
-        isDone = false;
-    }
-
-    /**
-     * Constructor for tasks that already have a isDone attribute. This constructor will usually be invoked when
-     * tasks are being read from storage.
+     * Constructor that allows user to add notes to the task being created.
      * @param taskDescription the description corresponding to the current task
      * @param isDone indicates whether this task has been done
+     * @param taskNotes any additional notes for the task being created
      */
-    public Task(String taskDescription, boolean isDone) {
+    public Task(TaskType taskType, String taskDescription, boolean isDone, String taskNotes) {
+        this.taskType = taskType;
         this.taskDescription = taskDescription;
         this.isDone = isDone;
+        this.taskNotes = taskNotes;
     }
 
     public void setDone() {
         isDone = true;
+    }
+
+    public void setTaskNotes(String taskNotes) {
+        this.taskNotes = taskNotes;
+    }
+
+    public boolean hasTaskNotes() {
+        return taskNotes != null;
     }
 
     /**
