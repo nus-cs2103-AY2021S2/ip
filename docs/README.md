@@ -3,8 +3,7 @@
 ## Introduction
 
 **Duke** is a desktop application that can help users track their daily tasks.
-It functions in a GUI (Graphical User Interface) to help those who type fast the freedom
-to manage their tasks quickly and efficiently.
+It functions in a GUI (Graphical User Interface) to help those who type fast manage their tasks quickly and efficiently.
 
 ## Features 
 
