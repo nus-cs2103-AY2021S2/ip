@@ -208,6 +208,6 @@ Delete multiple tasks | `delete <task number> <task number>`
 List all tasks | `list`
 Mark task as done | `done <task number>`
 Find tasks containing keyword | `find <keyword>`
-Find tasks due on a specific date | `find <YYYY-MM-DD>`
+Find tasks due on a specific date | `due <YYYY-MM-DD>`
 Close application | `bye`
 
