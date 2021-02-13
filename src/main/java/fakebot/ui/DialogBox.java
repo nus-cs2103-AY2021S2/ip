@@ -43,8 +43,8 @@ public class DialogBox extends HBox {
     /**
      * Constructors for DialogBox specifying label and image view
      *
-     * @param text the text to be display
-     * @param img the user profile image to be display
+     * @param text  the text to be display
+     * @param img   the user profile image to be display
      * @param style Dialog Box Style
      */
     private DialogBox(String text, Image img, Style style) {
@@ -78,6 +78,7 @@ public class DialogBox extends HBox {
 
     /**
      * Styles the dialog box according to style
+     *
      * @param style the style type
      */
     private void styleBox(Style style) {
@@ -109,7 +110,7 @@ public class DialogBox extends HBox {
      * Returns dialog box for user
      *
      * @param text the text of user
-     * @param img the image of user
+     * @param img  the image of user
      * @return Returns dialog box of the user
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -121,7 +122,7 @@ public class DialogBox extends HBox {
      * Returns dialog box for fakebot
      *
      * @param text the text of fakebot
-     * @param img the image of fakebot
+     * @param img  the image of fakebot
      * @return Returns dialog box of the fakebot
      */
     public static DialogBox getFakebotDialog(String text, Image img) {

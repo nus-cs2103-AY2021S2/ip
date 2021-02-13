@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-
 //Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
 
 /**
@@ -116,7 +115,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Add text to container.
      *
-     * @param inputText to be add to container.
+     * @param inputText  to be add to container.
      * @param outputText to be add to container.
      */
     private void addTextToContainer(String inputText, String outputText) {
@@ -129,7 +128,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Add alert text to container.
      *
-     * @param inputText to be add to container.
+     * @param inputText  to be add to container.
      * @param outputText to be add to container.
      */
     private void addAlertTextToContainer(String inputText, String outputText) {

@@ -36,14 +36,11 @@ public class Parser {
 
     private static final String HELP_STRING = "List of Command Available:\n"
             + "Deadline Command: " + DEADLINE_COMMAND + " [Description]" + DEADLINE_SPLIT_REGEX + "\n"
-            + "                   [yyyy-mm-dd] [hh:mm]" +
-            "]\n"
+            + "                   [yyyy-mm-dd] [hh:mm]\n"
             + "Delete   Command: " + DELETE_COMMAND + " [index]\n"
             + "Done     Command: " + DONE_COMMAND + " [index]\n"
             + "Event    Command: " + EVENT_COMMAND + " [Description]" + EVENT_SPLIT_REGEX + "[yyyy-mm-dd]\n"
-            + "                   [hh:mm]" +
-            "] [yyyy-mm-dd] [hh:mm]" +
-            "]\n"
+            + "                   [hh:mm]] [yyyy-mm-dd] [hh:mm]\n"
             + "Find     Command: " + FIND_COMMAND + " [Description]\n"
             + "List     Command: " + LIST_COMMAND + "\n"
             + "Todo     Command: " + TODO_COMMAND + " [Description]\n"
@@ -233,7 +230,7 @@ public class Parser {
      * Returns list of string print message.
      *
      * @param startingMessage to print before the list.
-     * @param messages the list of string to print.
+     * @param messages        the list of string to print.
      * @return a string containing print message.
      */
     public static String getStringListPrintMessage(String startingMessage, List<String> messages) {
@@ -349,7 +346,7 @@ public class Parser {
     /**
      * Parses the command that need a index description to command class.
      *
-     * @param command the command that need a index description.
+     * @param command     the command that need a index description.
      * @param indexString the string containing index.
      * @return a command that need a index description.
      */
@@ -391,7 +388,7 @@ public class Parser {
     /**
      * Parses the command that need a description to command class.
      *
-     * @param command the name of the command.
+     * @param command     the name of the command.
      * @param description the description of the command.
      * @return a command that need a description.
      */
@@ -456,9 +453,7 @@ public class Parser {
             return new Command(CommandType.EVENT, eventDetails);
         } catch (Exception e) {
             throw new CommandException("OOPS!!! The Date format of a "
-                    + EVENT_COMMAND + " must be yyyy-mm-dd hh:mm" +
-                    " yyyy-mm-dd hh:mm" +
-                    ".");
+                    + EVENT_COMMAND + " must be yyyy-mm-dd hh:mm yyyy-mm-dd hh:mm");
         }
     }
 
@@ -483,8 +478,7 @@ public class Parser {
             return new Command(CommandType.DEADLINE, deadlineDetails);
         } catch (Exception e) {
             throw new CommandException("OOPS!!! The Date format of a "
-                    + DEADLINE_COMMAND + " must be yyyy-mm-dd hh:mm" +
-                    ".");
+                    + DEADLINE_COMMAND + " must be yyyy-mm-dd hh:mm");
         }
     }
 }
