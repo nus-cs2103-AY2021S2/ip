@@ -63,7 +63,7 @@ public class GoCommand extends Command {
         listP.addPlace(place);
         return "Place added:" + System.lineSeparator() + place.toString()
                 + "Now you have " + listP.getSize()
-                + (listT.getSize() == 1
+                + (listP.getSize() == 1
                     ? " place in the list." + System.lineSeparator()
                     : " places in the list." + System.lineSeparator());
     }
