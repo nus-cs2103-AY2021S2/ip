@@ -27,6 +27,10 @@ public class Parser {
      * @throws MonicaException If invalid command is given.
      */
     public static Command parse(String commandLine) throws MonicaException {
+        assert commandLine != null : "Command line cannot be processed.";
+        if(commandLine.isBlank()){
+            throw new MonicaException("I didn't receive any command.");
+        }
         String[] messages = commandLine.split(" ");
         String commandType = messages[0];
 
@@ -83,7 +87,7 @@ public class Parser {
             return new FindCommand(processTask(commandLine));
 
         default:
-            throw new MonicaException("I don't know what " + commandType + " means.");
+            throw new MonicaException("I don't know what '" + commandType + "' means.");
 
         }
     }
@@ -94,6 +98,7 @@ public class Parser {
      * @return A task description.
      */
     public static String processTask(String message) {
+        assert message != null : "Task description cannot be obtained.";
         return message.substring(message.indexOf(' ') + 1);
     }
 
@@ -103,7 +108,7 @@ public class Parser {
      * @return A command that adds a Event to the task list.
      */
     public static AddEvent generateEvent(String description) {
-
+        assert description != null : "Event description cannot be obtained.";
         String name = description.substring(0, description.indexOf(" /at "));
         String time = description.substring(description.indexOf(" /at ") + 5);
 
@@ -119,6 +124,7 @@ public class Parser {
      * @return A command that adds a Deadline to the task list.
      */
     public static AddDeadline generateDeadline(String description) {
+        assert description != null : "Deadline description cannot be obtained.";
         String name = description.substring(0, description.indexOf(" /by "));
         String time = description.substring(description.indexOf(" /by ") + 5);
 
