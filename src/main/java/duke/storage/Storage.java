@@ -29,12 +29,6 @@ public class Storage {
         this.file = initiateFile();
         populateList(arr);
         this.tasks = arr;
-        try {
-            this.fio = new FileWriter(file);
-        } catch (IOException e) {
-            System.out.println("Unable to create FileWriter");
-            e.printStackTrace();
-        }
     }
 
     private File initiateFile() {
@@ -90,6 +84,7 @@ public class Storage {
                 case "E":
                     arr.add(new Event(data.substring(0, inputEnd), data.substring(inputEnd + 3),
                             Integer.parseInt(state)));
+                assert false : task;
                 }
             }
         } catch (FileNotFoundException e) {

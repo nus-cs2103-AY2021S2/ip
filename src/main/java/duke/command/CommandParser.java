@@ -2,10 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 import duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -107,6 +104,9 @@ public class CommandParser {
             storage.closeFile();
             output = ui.getGoodbyeResponse();
             break;
+        default:
+            //check assert
+             assert false : command;
         }
 
         return output;
@@ -142,6 +142,8 @@ public class CommandParser {
                     throw new DukeException(" Deadline must have a task! :(");
                 } else if (input.substring(indexOfBy + SPACER).isBlank()) {
                     throw new DukeException(" Deadline date cannot be empty! :(");
+                } else if (checkDatesFormat(input.substring(by + 3).trim())) {
+                    throw new DukeException(" I dont understand the date! :(");
                 }
             }
             break;
@@ -156,6 +158,8 @@ public class CommandParser {
                     throw new DukeException(" Event must have a task! :(");
                 } else if (input.substring(indexOfAt + SPACER).isBlank()) {
                     throw new DukeException(" Event date cannot be empty! :(");
+                } else if (checkDatesFormat(input.substring(at + 3).trim())) {
+                    throw new DukeException(" I dont understand the date! :(");
                 }
             }
             break;
@@ -171,12 +175,16 @@ public class CommandParser {
             }
             break;
         case LIST:
-            //Fallthrough
         case BYE:
-            //Fallthrough
-        default:
             break;
+        default:
+            assert false : commandList;
         }
+    }
+
+    private static boolean checkDatesFormat(String input) {
+        ParseDates parseDatesChecker = new ParseDates();
+        return !parseDatesChecker.isParsable(input);
     }
 
 
