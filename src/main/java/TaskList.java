@@ -75,6 +75,7 @@ public class TaskList {
      * @return task at the given index in the TaskList.
      */
     public Task getAtInd(int n) {
+        assert n < tasks.size();
         return tasks.get(n);
     }
 
@@ -84,6 +85,7 @@ public class TaskList {
      * @param n index of the task to be deleted.
      */
     public void deleteTask(int n) {
+        assert n < tasks.size();
         tasks.remove(n);
         numItems--;
     }
