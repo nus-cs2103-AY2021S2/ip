@@ -26,7 +26,7 @@ public class Duke {
      */
     private String executeCommand(String input) {
         String command = parser.parseCommand(input);
-        Command cmd = null;
+        Command cmd;
         try {
             if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
                 cmd = new AddTaskCommand(command, input, tasks);

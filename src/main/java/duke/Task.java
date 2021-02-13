@@ -23,6 +23,13 @@ public abstract class Task {
         return isDone;
     }
 
+    /**
+     * Marks the task as done.
+     */
+    public void checkTask() {
+        this.isDone = true;
+    }
+
     private String getDescription() {
         return this.input;
     }
@@ -50,11 +57,4 @@ public abstract class Task {
      * @return Formatted string of task.
      */
     public abstract String formatToSave();
-
-    /**
-     * Marks the task as done.
-     */
-    public void checkTask() {
-        this.isDone = true;
-    }
 }

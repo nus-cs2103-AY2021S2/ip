@@ -40,7 +40,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String str = "[D]";
-        str += getMark() + " " + description + " (by: " + date.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm")) + ")";
+        str += getMark() + " " + description + " (by: " +
+                date.format(DateTimeFormatter.ofPattern("dd-M-yyyy HHmm")) + ")";
         return str;
     }
 }
