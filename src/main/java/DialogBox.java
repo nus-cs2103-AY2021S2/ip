@@ -23,6 +23,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for this Deadline object.
+     *
+     * @param   text  Text to be displayed.
+     * @param   img   Image to be displayed.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -47,10 +53,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a new DialogBox object for the user given a text and image.
+     *
+     * @param   text  Text from the user to be displayed.
+     * @param   img   User image to be displayed.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a new DialogBox object for the Duke given a text and image.
+     *
+     * @param   text  Text from Duke to be displayed.
+     * @param   img   Duke image to be displayed.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

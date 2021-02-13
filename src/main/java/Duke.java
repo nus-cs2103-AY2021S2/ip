@@ -29,30 +29,14 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-
-//    public Duke() {
-//
-//    }
-//    /**
-//     * Constructor for this Duke object.
-//     * @param   filePath  File path to save task to hard disk.
-//     */
-
-
-    public Duke() throws IOException, DukeException {
-        try {
-            this.storage = new Storage("./myData.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    /**
+     * Constructor for this Duke object.
+     */
+    public Duke() throws IOException {
+        this.storage = new Storage("./myData.txt");
         this.tasks = new TaskList();
         this.ui = new Ui();
-
         storage.initialise(tasks);
-        //ui.initialise();
-        //ui.tasksLeft(tasks);
-
-
     }
 
     public TaskList getTaskList() {
@@ -128,12 +112,11 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-
     }
+
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -146,19 +129,9 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-//    private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
-//    }
     private void handleUserInput() {
         String input = userInput.getText();
         String response = getResponse(input);
@@ -170,12 +143,12 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Allows Duke to response with the same input text.
      */
     public String getResponse(String input) {
         return "Duke heard: " + input;
     }
+
     /**
      * Runs Duke, allowing it to start serving the user.
      */
@@ -197,7 +170,6 @@ public class Duke extends Application {
      * Returns a string representation of the customer.
      */
     public static void main(String[] args) throws DukeException, IOException {
-        //new Duke("./myData.txt").run();
         new Duke().run();
     }
 }

@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the TaskList.
+     *
      * @return the size of the TaskList.
      */
     public int getNumItems() {
@@ -24,7 +25,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a Todo Task to the TaskList
+     * Adds a Todo Task to the TaskList.
+     *
      * @param  str description of the task.
      */
     public void addTodo(String str) {
@@ -33,7 +35,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a Deadline Task to the TaskList
+     * Adds a Deadline Task to the TaskList.
+     *
      * @param  str description of the task.
      * @param  by  deadline of task.
      */
@@ -43,7 +46,8 @@ public class TaskList {
     }
 
     /**
-     * Adds an Event Task to the TaskList
+     * Adds an Event Task to the TaskList.
+     *
      * @param  str description of the task.
      * @param  at  location of Event task.
      */
@@ -53,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * Prints all tasks in the TaskList as a string
+     * Prints all tasks in the TaskList as a string.
      */
     public String printTasksToString() {
         String output = "";
@@ -66,6 +70,7 @@ public class TaskList {
 
     /**
      * Returns the task at the given index in the TaskList.
+     *
      * @param n index of the wanted task.
      * @return task at the given index in the TaskList.
      */
@@ -75,6 +80,7 @@ public class TaskList {
 
     /**
      * Deletes the task at the given index in the TaskList.
+     *
      * @param n index of the task to be deleted.
      */
     public void deleteTask(int n) {
@@ -84,6 +90,7 @@ public class TaskList {
 
     /**
      * Prints the tasks which contain the given string.
+     *
      * @param str given keyword string
      */
     public String matchTasks(String str) {
