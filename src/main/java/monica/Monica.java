@@ -30,6 +30,7 @@ public class Monica {
      * Responds to the command lines from a user.
      */
     public String getResponse(String input) {
+        assert input != null : "Command is missing.";
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
