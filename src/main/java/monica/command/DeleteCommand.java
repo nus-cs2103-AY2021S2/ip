@@ -21,16 +21,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command.
-     * @param tasks The task list used for execution of the command.
-     * @param ui Interactions with users.
-     * @param storage Data stored in the local file path.
-     * @throws MonicaException If there is any invalid command.
+     * Executes delete command.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws MonicaException {
         if (id < 1 || id > tasks.getSize()) {
-            throw new MonicaException("The delete id is invalid.");
+            throw new MonicaException("The delete index is invalid.");
         }
         Task removed = tasks.removeTask(id);
         storage.updateFile();

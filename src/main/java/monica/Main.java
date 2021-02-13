@@ -9,6 +9,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import monica.ui.MainWindow;
 
+/**
+ * A main class to start application in javafx.
+ */
 public class Main extends Application {
     private final Monica monica = new Monica();
 

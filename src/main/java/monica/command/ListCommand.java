@@ -10,10 +10,7 @@ import monica.ui.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Executes the command.
-     * @param tasks The task list used for execution of the command.
-     * @param ui Interactions with users.
-     * @param storage Data stored in the local file path.
+     * Executes list command.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -106,8 +106,10 @@ public class Ui {
     /**
      * Displays farewell message.
      */
-    public static String sayBye() {
-        return "Bye. Hope to see you again soon!\n" + "I'm leaving in 3 seconds...\n";
+    public static String showFarewell() {
+        final String BYE_MESSAGE = "Bye. Hope to see you again soon!\n";
+        final String COUNT_DOWN = "I'm leaving in 3 seconds...\n";
+        return BYE_MESSAGE + COUNT_DOWN;
     }
 
     /**
@@ -115,18 +117,18 @@ public class Ui {
      */
     public static String showHelp() {
         final String GUIDANCE_MESSAGE = "You can enter any command from the below list:\n";
-        final String DEADLINE_COMMAND = "deadline taskName /by time in this format: yyyy-MM-dd HHmm\n";
+        final String BYE_COMMAND = "bye\n";
+        final String DEADLINE_COMMAND = "deadline taskName /by yyyy-MM-dd HHmm\n";
         final String DELETE_COMMAND = "delete taskIndex\n";
         final String DONE_COMMAND  = "done taskIndex\n";
-        final String EXIT_COMMAND = "bye\n";
-        final String EVENT_COMMAND = "event taskName /at time in this format: yyyy-MM-dd HHmm\n";
+        final String EVENT_COMMAND = "event taskName /at yyyy-MM-dd HHmm\n";
         final String FIND_COMMAND = "find\n";
         final String HELP_COMMAND = "help\n";
         final String LIST_COMMAND = "list\n";
         final String TODO_COMMAND = "todo taskName\n";
 
-        return GUIDANCE_MESSAGE + DEADLINE_COMMAND + DELETE_COMMAND + DONE_COMMAND
-                + EVENT_COMMAND + EXIT_COMMAND + FIND_COMMAND
+        return GUIDANCE_MESSAGE + BYE_COMMAND + DEADLINE_COMMAND + DELETE_COMMAND
+                + DONE_COMMAND + EVENT_COMMAND + FIND_COMMAND
                 + HELP_COMMAND + LIST_COMMAND + TODO_COMMAND;
     }
 }

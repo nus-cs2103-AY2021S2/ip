@@ -50,15 +50,18 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = monica.getResponse(input);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, USER_IMAGE),
                 DialogBox.getDukeDialog(response, MONICA_IMAGE)
         );
+
         if (input.equals("bye")) {
             new Timer().schedule(new TimerTask() {
                 public void run () { System.exit(0); }
             }, 3000);
         }
+
         userInput.clear();
     }
 }

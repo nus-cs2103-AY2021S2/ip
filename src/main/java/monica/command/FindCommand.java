@@ -19,10 +19,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the command.
-     * @param tasks The task list used for execution of the command.
-     * @param ui Interactions with users.
-     * @param storage Data stored in the local file path.
+     * Executes find command.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
