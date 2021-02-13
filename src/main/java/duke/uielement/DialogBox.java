@@ -11,8 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.

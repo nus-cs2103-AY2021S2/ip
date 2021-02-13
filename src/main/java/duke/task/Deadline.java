@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Parser;
+
 public class Deadline extends Task {
     private final String deadline;
 
@@ -20,7 +22,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + String.format(" (by:%s)", this.parseDate(this.deadline.strip()));
+        return "[D]" + super.toString() + String.format(" (by:%s)", Parser.parseDate(this.deadline.strip()));
     }
 
     /**
@@ -29,17 +31,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toFileString() {
-        String done = parseDone();
         return "D|" + super.toFileString() + "|" + this.deadline;
-    }
-
-    private String parseDone() {
-        String done;
-        if (this.getDone()) {
-            done = "1";
-        } else {
-            done = "0";
-        }
-        return done;
     }
 }

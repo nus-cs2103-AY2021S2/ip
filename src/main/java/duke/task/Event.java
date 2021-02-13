@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Parser;
+
 /**
  * Class containing the relevant information about an Event.
  */
@@ -22,7 +24,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at:%s)", this.parseDate(this.timeRange.strip()));
+        return "[E]" + super.toString() + String.format(" (at:%s)", Parser.parseDate(this.timeRange.strip()));
     }
 
     /**

@@ -1,8 +1,11 @@
 package duke;
 
-import duke.task.Task;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Parser class used to parse input into appropriate formats.
@@ -24,7 +27,7 @@ public class Parser {
      * @param string String representation of deadline description and by date.
      * @return A String array length 2, inputArray[0] is description, inputArray[1] is deadline date
      */
-    public static String[] parseDeadline(String string) throws IllegalArgumentException{
+    public static String[] parseDeadline(String string) throws IllegalArgumentException {
         String[] inputArray = string.split("/by", 2);
         if (inputArray[0].isBlank()) {
             throw new IllegalArgumentException("Error: Description of deadline cannot be empty");
@@ -41,7 +44,7 @@ public class Parser {
      * @param string string representation of event description and at date.
      * @return A String array length 2, inputArray[0] is description, inputArray[1] is event date
      */
-    public static String[] parseEvent(String string) throws IllegalArgumentException{
+    public static String[] parseEvent(String string) throws IllegalArgumentException {
         String[] inputArray = string.split("/at", 2);
         if (inputArray[0].isBlank()) {
             throw new IllegalArgumentException("Error: Description of event cannot be empty");
@@ -53,8 +56,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses given string according to the the priority setting specifications.
+     * @param string string representation of task index and priority it is changing into.
+     * @return A String array length 2, inputArray[0] is the task index, inputArray[1] is the new priority.
+     * @throws IllegalArgumentException
+     */
     public static String[] parseSetPriority(String string) throws IllegalArgumentException {
-        String[] inputArray = string.trim().split(" ",2);
+        String[] inputArray = string.trim().split(" ", 2);
         if (inputArray[0].isBlank()) {
             throw new IllegalArgumentException("Error: Arguments should not be empty.");
         } else if (inputArray.length == 1) {
@@ -79,5 +88,20 @@ public class Parser {
             count++;
         }
         return content.trim();
+    }
+
+    /**
+     * Attempts to parse the given string into a defined date format if the appropriate format is found.
+     * Currently only supports the format date, "yyyy-mm-dd".
+     * @param string string representing the time of task
+     * @return properly formatted string.
+     */
+    public static String parseDate(String string) {
+        try {
+            LocalDate date = LocalDate.parse(string);
+            return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        } catch (DateTimeParseException e) {
+            return string;
+        }
     }
 }

@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.IllegalArgumentException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -29,7 +28,7 @@ public class Storage {
      * @throws IOException
      * @throws IllegalArgumentException
      */
-    public void read() throws IOException, IllegalArgumentException{
+    public void read() throws IOException, IllegalArgumentException {
         FileReader reader = new FileReader(FILE_NAME);
         BufferedReader bufferedReader = new BufferedReader(reader);
         String taskString;

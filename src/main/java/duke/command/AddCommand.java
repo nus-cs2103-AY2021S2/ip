@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Ui;
 import duke.TaskList;
+import duke.Ui;
 import duke.task.AbstractTaskFactory;
 import duke.task.Task;
 
@@ -20,7 +20,7 @@ public class AddCommand implements ICommand {
      * @param tasks the taskList the task is being added into.
      * @param taskFactory Factory object responsible for creating the task.
      */
-    public AddCommand(Ui ui,TaskList tasks, AbstractTaskFactory taskFactory) {
+    public AddCommand(Ui ui, TaskList tasks, AbstractTaskFactory taskFactory) {
         this.ui = ui;
         this.tasks = tasks;
         this.taskFactory = taskFactory;

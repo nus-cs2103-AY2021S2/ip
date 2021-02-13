@@ -1,9 +1,5 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Abstract class for tasks. Contains information about the task description and
  * whether is has been carried out.
@@ -48,22 +44,7 @@ public abstract class Task {
      * @return [X] content if done [ ] content otherwise.
      */
     public String toString() {
-        return String.format("[%s][%s]%s", isDone ? "X" : " ",this.getPriority(),this.getDesc());
-    }
-
-    /**
-     * Attempts to parse the given string into a defined date format
-     * if the appropriate format is found.
-     * @param string string representing the time of task
-     * @return properly formatted string.
-     */
-    public String parseDate(String string) {
-        try {
-            LocalDate date = LocalDate.parse(string);
-            return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        } catch (DateTimeParseException e) {
-            return string;
-        }
+        return String.format("[%s][%s]%s", isDone ? "X" : " ", this.getPriority(), this.getDesc());
     }
 
     /**

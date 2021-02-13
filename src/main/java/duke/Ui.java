@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.uielement.DialogBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
@@ -9,8 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import duke.uielement.DialogBox;
 /**
  * Handles the interaction the user and the program.
  */
@@ -23,6 +22,10 @@ public class Ui extends AnchorPane {
     private TextField userInput;
     private Duke app;
 
+    /**
+     * Constructor method for Ui object.
+     * @param app The Duke object the UI is bound to.
+     */
     public Ui(Duke app) {
         this.app = app;
         try {
@@ -32,17 +35,14 @@ public class Ui extends AnchorPane {
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
-           handleError(e);
+            handleError(e);
         }
         this.layout();
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
-     * Creates a dialog boxes, one echoing user input and then appends them to
-     * the dialog container. It then returns the user input.
-     * 
-     * @return input of the user.
+     * Handles the user input, showing in the Ui.
      */
     @FXML
     public void handleUserInput() {
@@ -52,9 +52,7 @@ public class Ui extends AnchorPane {
         app.handleInput(input);
     }
 
-    /**Creates the Duke dialogue box along with the information to be printed
-     * to the window.
-     * 
+    /**Creates the Duke dialogue box along with the information to be printed to the window.
      * @param output the string that is to be printed onto the Ui.
      */
     public void createDukeDialog(String output) {

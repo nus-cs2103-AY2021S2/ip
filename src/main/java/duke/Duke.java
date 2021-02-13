@@ -1,9 +1,18 @@
 package duke;
 
-import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.CommandWrite;
+import duke.command.DefaultCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ICommand;
+import duke.command.PrintListCommand;
+import duke.command.SetPriorityCommand;
 import duke.task.DeadlineFactory;
 import duke.task.EventFactory;
 import duke.task.ToDoFactory;
@@ -14,7 +23,7 @@ import javafx.stage.Stage;
 /**
  * Main class for Duke app.
  */
-public class Duke extends Application{
+public class Duke extends Application {
     private Storage storage;
     private CommandMap commands;
     private TaskList taskList;
@@ -78,21 +87,21 @@ public class Duke extends Application{
 
         ICommand exitCommand = new ExitCommand(ui);
 
-        ICommand eventCommand = new AddCommand(ui,taskList, new EventFactory());
+        ICommand eventCommand = new AddCommand(ui, taskList, new EventFactory());
         eventCommand = new CommandWrite(ui, storage, eventCommand);
 
-        ICommand deadlineCommand = new AddCommand(ui,taskList, new DeadlineFactory());
+        ICommand deadlineCommand = new AddCommand(ui, taskList, new DeadlineFactory());
         deadlineCommand = new CommandWrite(ui, storage, deadlineCommand);
 
-        ICommand toDoCommand = new AddCommand(ui,taskList, new ToDoFactory());
+        ICommand toDoCommand = new AddCommand(ui, taskList, new ToDoFactory());
         toDoCommand = new CommandWrite(ui, storage, toDoCommand);
 
-        ICommand deleteCommand = new DeleteCommand(ui,taskList);
+        ICommand deleteCommand = new DeleteCommand(ui, taskList);
         deleteCommand = new CommandWrite(ui, storage, deleteCommand);
 
-        ICommand findCommand = new FindCommand(ui,taskList);
+        ICommand findCommand = new FindCommand(ui, taskList);
 
-        ICommand setPriorityCommand = new SetPriorityCommand(ui,taskList);
+        ICommand setPriorityCommand = new SetPriorityCommand(ui, taskList);
 
         commands.add("done", doneCommand);
         commands.add("list", listCommand);

@@ -28,12 +28,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toFileString() {
-        String done;
-        if (this.getDone()) {
-            done = "1";
-        } else {
-            done = "0";
-        }
         String string = "T|" + super.toFileString();
         return string;
     }

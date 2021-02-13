@@ -17,7 +17,7 @@ public class DeleteCommand implements ICommand {
      * @param ui Ui to display
      * @param tasks TaskList object that the command will delete from when executed
      */
-    public DeleteCommand(Ui ui,TaskList tasks) {
+    public DeleteCommand(Ui ui, TaskList tasks) {
         this.tasks = tasks;
         this.ui = ui;
     }

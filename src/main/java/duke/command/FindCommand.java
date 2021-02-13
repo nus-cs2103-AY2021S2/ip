@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Parser;
 import duke.TaskList;
-import duke.task.Task;
 import duke.Ui;
 
 /**
@@ -17,7 +16,7 @@ public class FindCommand implements ICommand {
      * @param ui
      * @param tasks
      */
-    public FindCommand(Ui ui,TaskList tasks) {
+    public FindCommand(Ui ui, TaskList tasks) {
         this.tasks = tasks;
         this.ui = ui;
     }

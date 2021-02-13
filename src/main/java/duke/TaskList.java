@@ -1,12 +1,15 @@
 package duke;
 
-import java.lang.IllegalArgumentException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Priority;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Class handling List of Tasks.
@@ -54,16 +57,14 @@ public class TaskList {
 
         if (type.equals("T")) {
             newTask = new ToDo(desc);
-            this.addTask(newTask);
         } else if (type.equals("D")) {
             String byDate = task[3];
             newTask = new Deadline(desc, byDate);
-            this.addTask(newTask);
         } else if (type.equals("E")) {
             String atDate = task[3];
             newTask = new Event(desc, atDate);
         } else {
-            throw new IllegalArgumentException("Invalid type. Duke.txt may have been tampered.");
+            throw new IllegalArgumentException("Error: Invalid type. Duke.txt may have been tampered.");
         }
 
         if (done.equals("1")) {

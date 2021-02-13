@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Parser;
 import duke.TaskList;
+import duke.Ui;
 import duke.task.Priority;
 import duke.task.Task;
-import duke.Ui;
 
 /**
  * Command to set indicated task's priority.
@@ -33,13 +33,16 @@ public class SetPriorityCommand implements ICommand {
     @Override
     public void execute(String parameters) {
         try {
+            //Parse all inputs into its proper types
             String[] inputArray = Parser.parseSetPriority(parameters);
             int count = Integer.parseInt(inputArray[0].trim());
             int priorityInt = Integer.parseInt(inputArray[1].trim());
 
+            //Get task from TaskList and set its priority
             Priority priority = Priority.valueOf(priorityInt);
             Task selectedTask = tasks.getTasks().get(count - 1);
             selectedTask.setPriority(priority);
+
             String string = getPriorityString(selectedTask);
             ui.createDukeDialog(string);
         } catch (NumberFormatException e) {
