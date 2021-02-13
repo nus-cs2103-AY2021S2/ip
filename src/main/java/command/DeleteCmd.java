@@ -36,7 +36,7 @@ public class DeleteCmd extends Command {
             return "yay! you are done!";
         } else if (lst.getListSize() == 1) {
             return "ok! i've deleted this task: " + output
-                    + "\n" +  "yay! you have " + lst.getListSize() + " task left to do!"
+                    + "\n" + "yay! you have " + lst.getListSize() + " task left to do!"
                     + "\n" + ui.customLine();
         } else {
             return "ok! i've deleted this task: " + output

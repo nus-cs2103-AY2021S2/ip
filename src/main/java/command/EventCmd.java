@@ -1,13 +1,13 @@
 package command;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import classes.DuckieException;
 import classes.Storage;
 import classes.TaskList;
 import classes.Ui;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class EventCmd extends Command {
     private String cmd;
@@ -16,7 +16,7 @@ public class EventCmd extends Command {
      * Constructor method.
      * @param cmd User input command.
      */
-    public EventCmd(String cmd){
+    public EventCmd(String cmd) {
         this.cmd = cmd;
     }
 
@@ -44,17 +44,18 @@ public class EventCmd extends Command {
         } catch (Exception e) {
             throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
         }
-        Event tempE = new Event(strE[0], date);
+        String[] description = strE[0].split(" ", 2);
+        Event tempE = new Event(description[1], date);
         lst.addTask(tempE);
 
         if (lst.getListSize() == 0) {
             return "there are no tasks in your list!";
         } else if (lst.getListSize() == 1) {
-            return "ok! i've added this task:" + tempE.toString()
+            return "ok! i've added this task: " + tempE.toString()
                     + "\n" + "you have " + lst.getListSize() + " task in your list! keep working!"
                     + "\n" + ui.customLine();
         } else {
-            return "ok! i've added this task:" + tempE.toString()
+            return "ok! i've added this task: " + tempE.toString()
                     + "\n" + "you have " + lst.getListSize() + " tasks in your list! keep working!"
                     + "\n" + ui.customLine();
         }

@@ -11,4 +11,13 @@ public class DuckieException extends Exception {
     public DuckieException(String message) {
         super(message);
     }
+
+    /**
+     * Overriding method to obtain custom error message.
+     * @return specified error message.
+     */
+    @Override
+    public String toString() {
+        return super.getMessage();
+    }
 }

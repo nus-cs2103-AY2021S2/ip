@@ -1,8 +1,8 @@
 package command;
 
-import classes.Task;
-
 import java.util.Date;
+
+import classes.Task;
 
 /**
  * Deadline inherits from Task. It encapsulates a deadline with an additional String by.

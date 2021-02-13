@@ -1,4 +1,3 @@
-
 package duckie;
 
 import java.io.IOException;
@@ -20,76 +19,31 @@ public class Duckie {
     private TaskList lst;
     private Ui ui;
 
+    /**
+     * Constructor method.
+     * @throws IOException if user IO is incorrect
+     */
     public Duckie() throws IOException {
         ui = new Ui();
         storage = new Storage("duckie.txt");
         try {
             lst = new TaskList(storage.loadTasks());
         } catch (IOException e) {
-            //ui.showLoadingError();
             lst = new TaskList();
         }
     }
 
     /**
-     * Constructor method.
-     * @param filePath to the saved file
-     * @throws IOException if user IO is incorrect
+     * Method for systemt to respond to user input for GUI.
+     * @param input user input as a String
+     * @return either command executed or error message
      */
-    public Duckie(String filePath) throws IOException {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            lst = new TaskList(storage.loadTasks());
-        } catch (IOException e) {
-            //ui.showLoadingError();
-            lst = new TaskList();
-        }
-    }
-
     public String getResponse(String input) {
         try {
-            Command cmd = null;
-            try {
-                cmd = Parser.parse(input);
-            } catch (DuckieException e) {
-                e.printStackTrace();
-            }
+            Command cmd = Parser.parse(input);
             return cmd.execute(lst, ui, storage);
         } catch (DuckieException e) {
-            return e.getMessage();
+            return ui.showErrorMessage(e);
         }
-    }
-
-
-    /**
-     * Run method to run Duckie.
-     * @throws IOException if user IO is incorrect
-     */
-    public void run() throws IOException {
-        storage.loadTasks();
-        ui.startMessage();
-        boolean isEnd = false;
-        while (!isEnd) {
-            try {
-                String fullInput = ui.readInput();
-                ui.customLine();
-                Command cmd = Parser.parse(fullInput);
-                cmd.execute(lst, ui, storage);
-                isEnd = cmd.isEnd();
-            } catch (DuckieException e) {
-                e.printStackTrace();
-            }
-        }
-        storage.saveTasks(lst.getTaskList());
-    }
-
-    /**
-     * Main method to drive Duckie.
-     * @param args command line arguments
-     * @throws IOException if user IO is incorrect
-     */
-    public static void main(String[] args) throws IOException {
-        new Duckie("duckie.txt").run();
     }
 }

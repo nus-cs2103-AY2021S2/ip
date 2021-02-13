@@ -15,8 +15,8 @@ public abstract class Command {
      * @param lst a TaskList object containing Task Objects.
      * @param ui a Ui object.
      * @param storage a storage object.
+     * @return a String handled by the respective command.
      * @throws DuckieException if user enters commands besides accepted ones.
-     * @return
      */
     public abstract String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException;
 

@@ -1,13 +1,15 @@
 package command;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import classes.DuckieException;
 import classes.Storage;
 import classes.TaskList;
 import classes.Ui;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+
 
 public class DeadlineCmd extends Command {
     private String cmd;
@@ -16,7 +18,7 @@ public class DeadlineCmd extends Command {
      * Constructor method.
      * @param cmd User input command.
      */
-    public DeadlineCmd(String cmd){
+    public DeadlineCmd(String cmd) {
         this.cmd = cmd;
     }
 
@@ -44,18 +46,19 @@ public class DeadlineCmd extends Command {
         } catch (Exception e) {
             throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
         }
-        Deadline tempD = new Deadline(strD[0], date);
+        String[] description = strD[0].split(" ", 2);
+        Deadline tempD = new Deadline(description[1], date);
 
         lst.addTask(tempD);
 
         if (lst.getListSize() == 0) {
             return "there are no tasks in your list!";
         } else if (lst.getListSize() == 1) {
-            return "ok! i've added this task:" + tempD.toString()
+            return "ok! i've added this task: " + tempD.toString()
                     + "\n" + "you have " + lst.getListSize() + " task in your list! keep working!"
                     + "\n" + ui.customLine();
         } else {
-            return "ok! i've added this task:" + tempD.toString()
+            return "ok! i've added this task: " + tempD.toString()
                     + "\n" + "you have " + lst.getListSize() + " tasks in your list! keep working!"
                     + "\n" + ui.customLine();
         }

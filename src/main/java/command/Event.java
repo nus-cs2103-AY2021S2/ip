@@ -1,8 +1,8 @@
 package command;
 
-import classes.Task;
-
 import java.util.Date;
+
+import classes.Task;
 
 /**
  * Event inherits from Task. It encapsulates an event with an additional String at.

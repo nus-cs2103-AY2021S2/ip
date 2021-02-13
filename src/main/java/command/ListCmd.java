@@ -39,7 +39,7 @@ public class ListCmd extends Command {
                     + "\n" + ui.customLine();
         } else if (lst.getListSize() == 1) {
             return "get to work! this is the task in your list: " + output
-                    + "\n" + ui.customLine() ;
+                    + "\n" + ui.customLine();
         } else {
             return "get to work! these are the tasks in your list: " + output
                     + "\n" + ui.customLine();

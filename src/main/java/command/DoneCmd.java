@@ -34,7 +34,7 @@ public class DoneCmd extends Command {
         Task temp = lst.getTask(taskNum - 1);
         temp.markDone();
 
-        return "cool! this task is marked as done:" + temp.toString() + ui.customLine();
+        return "cool! this task is marked as done: " + temp.toString() + ui.customLine();
     }
 
     /**

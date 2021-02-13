@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Ui (User Interface) class to deal with interactions with the user.
  */
 public class Ui {
-    String line = ":) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)";
+    private String line = ":) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)";
 
     /**
      * Print welcome message when user opens Duckie.
@@ -38,6 +38,10 @@ public class Ui {
     public String readInput() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
+    }
+
+    public String showErrorMessage(Exception e) {
+        return e.getMessage();
     }
 
     public String findMessage() {

@@ -1,6 +1,9 @@
 package command;
 
-import classes.*;
+import classes.DuckieException;
+import classes.Storage;
+import classes.TaskList;
+import classes.Ui;
 
 public class FindCmd extends Command {
     private String cmd;
@@ -20,7 +23,7 @@ public class FindCmd extends Command {
 
             }
         }
-        return output + "\n" + ui.customLine();
+        return ui.findMessage() + output + "\n" + ui.customLine();
     }
 
     @Override
