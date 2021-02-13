@@ -1,10 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
-import duke.command.CreateCommand;
-import duke.command.DeleteCommand;
-import duke.command.ReadCommand;
-import duke.command.UpdateCommand;
+
+import duke.command.*;
 
 /**
  * Parser class which handles the parsing of user's input and delivers the expected action accordingly
@@ -97,6 +95,10 @@ public class Parser {
             return Storage.saveTaskList();
         } else if (input.equals("load")) {
             return Storage.loadTaskList();
+        } else if (input.equals("detect")) {
+            return DetectDuplicateCommand.runCommand();
+        } else if (input.equals("clean")) {
+            return DetectDuplicateCommand.cleanDuplicates();
         } else {
             throw new InvalidArgument("Your input is invalid, Please try again");
         }
