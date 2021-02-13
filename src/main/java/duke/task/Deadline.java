@@ -27,6 +27,14 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
 
+    public boolean isSameTask(Task toCheck) {
+        if (toCheck instanceof Deadline) {
+            return description.equals(toCheck.description)
+                    && time.equals(((Deadline) toCheck).time);
+        }
+        return false;
+    }
+
     /**
      * Converts a deadline to the format to be saved to a file.
      * @return The deadline in save format.

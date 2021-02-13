@@ -20,6 +20,13 @@ public class Todo extends Task {
         this.isDone = isDone;
     }
 
+    public boolean isSameTask(Task toCheck) {
+        if (toCheck instanceof Todo) {
+            return description.equals(toCheck.description);
+        }
+        return false;
+    }
+
     /**
      * Converts a todo to the format to be saved to a file.
      * @return The todo in save format.

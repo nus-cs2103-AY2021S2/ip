@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import duke.exception.DukeException;
+import duke.util.Utils;
+
 /**
  * The TaskList class represents the
  * abstraction of a list of tasks.
@@ -22,7 +25,10 @@ public class TaskList implements Iterable<Task> {
      * Constructs a TaskList with a certain list of tasks.
      * @param tasks The specified list of tasks.
      */
-    public TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks) throws DukeException {
+        if (!Utils.elementsAreUnique(tasks)) {
+            throw new DukeException("Tasks contains a duplicate!");
+        }
         this.tasks = tasks;
     }
 
@@ -49,8 +55,11 @@ public class TaskList implements Iterable<Task> {
      * Adds a task to the TaskList.
      * @param task The specified task.
      */
-    public void add(Task task) {
+    public void add(Task task) throws DukeException {
         assert tasks != null;
+        if (contains(task)) {
+            throw new DukeException("Cannot add duplicate task!");
+        }
         this.tasks.add(task);
     }
 
@@ -65,6 +74,21 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Reference from github.com/se-edu/addressbook-level2
+     * Checks if the list contains an equivalent person as the given argument.
+     * The {@link Task#isSameTask} method is used for this comparison, which
+     * defines a weaker notion of equality.
+     */
+    public boolean contains(Task toCheck) {
+        for (Task task : tasks) {
+            if (task.isSameTask(toCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns an iterator over the tasks in the TaskList.
      * @return The iterator over the tasks in the TaskList in proper sequence.
      */
@@ -74,7 +98,7 @@ public class TaskList implements Iterable<Task> {
         return tasks.iterator();
     }
 
-    public TaskList filter(String keywords) {
+    public TaskList filter(String keywords) throws DukeException {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.description.contains(keywords)) {
