@@ -158,10 +158,7 @@ public class Parser {
         String keyword = commandParts[0];
         String remainderCommand = commandParts[1].trim();
         Task task = null;
-    }
-  
-    private static Task createTaskWithDeadline(String fullCommand, String keyword, int firstSpace) {
-            throws DukeDeadlineException {
+
         assert !keyword.trim().isEmpty();
 
         Task t = null;
