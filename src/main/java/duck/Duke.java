@@ -119,11 +119,15 @@ public class Duke extends Application {
      */
     private void handleUserInput() throws IOException {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String response = getResponse(userInput.getText());
+        Label dukeText = new Label(response);
+        boolean isErrorReply = false;
+        if (response.startsWith("OOPS")) {
+            isErrorReply = true;
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke), isErrorReply));
         userInput.clear();
     }
 
@@ -149,15 +153,20 @@ public class Duke extends Application {
 
         scene = new Scene(mainLayout);
         setScene(stage, scene, "Duck", 800.0, 600.0);
-
         setPanePrefSize();
 
         setAnchorPane(scrollPane, sendButton, userInput);
 
-        Label helloText = new Label(gui.showWelcome());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(helloText, new ImageView(duke))
+        dialogContainer.setStyle("-fx-padding: 20 30 30 30;"
+                + "-fx-background-size : contain;"
+                + "-fx-background-image: url(/images/background.png)"
         );
+        Label helloText = new Label(gui.showWelcome());
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(helloText, new ImageView(duke), false)
+        );
+        dialogContainer.setSpacing(10);
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 

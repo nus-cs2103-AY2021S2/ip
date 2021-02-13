@@ -3,7 +3,6 @@ package duck.operation;
 import duck.task.TaskList;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Gui {
@@ -23,22 +22,12 @@ public class Gui {
     }
 
     /**
-     * read command from input
-     *
-     * @return a full command
-     */
-    public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine().trim();
-    }
-
-    /**
      * show the reply for command including hello,bye,list and so on
      *
      * @param command different kind of command
      * @param tasks
      */
-    public String showCommandReply(String command, TaskList tasks) {
+    public String getCommandReply(String command, TaskList tasks) {
         assert (!command.isBlank());
         switch (command) {
         case "hello":
@@ -66,27 +55,27 @@ public class Gui {
      *
      * @param reply the kind of error
      */
-    public String showErrorReply(String reply) {
+    public String getErrorReply(String reply) {
 
         switch (reply) {
         case "error_no_meaning":
-            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         case "error_done_empty":
         case "error_delete_empty":
         case "error_date_empty":
-            return "OOPS!!! The number cannot be empty :-(";
+            return "OOPS!!! The number cannot be empty :-(\n";
         case "error_done_no_meaning":
         case "error_delete_no_meaning":
         case "error_date_no_meaning":
-            return "OOPS!!! Please input the number of the duck.task.Task :-(";
+            return "OOPS!!! Please input the number of the duck.task.Task :-(\n";
         case "error_done_non_existed_task":
         case "error_delete_non_existed_task":
         case "error_date_non_existed_task":
-            return "OOPS!!! the duck.task.Task you choosing isn't existed :-(";
+            return "OOPS!!! the duck.task.Task you choosing isn't existed :-(\n";
         case "error_todo_empty":
         case "error_deadline_empty":
         case "error_event_empty":
-            return "OOPS!!! The description of a task cannot be empty. :-(";
+            return "OOPS!!! The description of a task cannot be empty. :-(\n";
         case "error_deadline_by":
             return "OOPS!!! The deadline of a deadline task should be meaningful. :-(\n"
                     + "Please enter according to the format eg.description /by YYYY-MM-DD\n";
@@ -94,7 +83,7 @@ public class Gui {
             return "OOPS!!! The period of a event task should be meaningful. :-(\n"
                     + "Please enter according to the format eg.description /at YYYY-MM-DD\n";
         case "find_empty":
-            return "OOPS!!! The enter the keyword of task. :-(";
+            return "OOPS!!! The enter the keyword of task. :-(\n";
         default:
             return "error";
         }
@@ -106,7 +95,7 @@ public class Gui {
      * @param number the number of task in task list
      * @param tasks  task list
      */
-    public String showDoneReply(int number, TaskList tasks) {
+    public String getDoneReply(int number, TaskList tasks) {
 
         return "Nice! I've marked this task as done:\n"
                 + (number + 1) + "." + tasks.getTask(number).getTaskInfo() + "\n";
@@ -119,7 +108,7 @@ public class Gui {
      * @param number the number of task in task list
      * @param tasks  task list
      */
-    public String showDeleteReply(int number, TaskList tasks) {
+    public String getDeleteReply(int number, TaskList tasks) {
 
         return "Noted. I've removed this task: "
                 + (number + 1) + "." + tasks.getTask(number).getTaskInfo() + "\n"
@@ -133,7 +122,7 @@ public class Gui {
      * @param number the number of task in task list
      * @param tasks  task list
      */
-    public String showDateReply(int number, TaskList tasks) {
+    public String getDateReply(int number, TaskList tasks) {
 
         return tasks.getTask(number).getPeriodDays();
 
@@ -144,7 +133,7 @@ public class Gui {
      *
      * @param result the finding result string array
      */
-    public String showFindReply(String[] result) {
+    public String getFindReply(String[] result) {
 
         if (result[0] == null) {
             return "Sorry, I don't find the task\n";
@@ -162,7 +151,7 @@ public class Gui {
      * @param scheduleTask use tasks to form schedule
      * @return schedule string
      */
-    public String showScheduleReply(
+    public String getScheduleReply(
             ArrayList<ArrayList<String>> scheduleTask) {
         String scheduleString = "Here are your schedule of tasks\n";
         scheduleString += "have not determined date:\n";
