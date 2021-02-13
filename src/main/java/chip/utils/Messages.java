@@ -1,8 +1,8 @@
-package duke.utils;
+package chip.utils;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
+import chip.task.Task;
 
 /**
  * Format messages to be send by program.

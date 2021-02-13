@@ -1,22 +1,22 @@
-package duke;
+package chip;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.IncompleteInputException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.utils.Command;
-import duke.utils.HelpMessages;
-import duke.utils.Messages;
+import chip.exceptions.ChipException;
+import chip.exceptions.IncompleteInputException;
+import chip.parser.Parser;
+import chip.storage.Storage;
+import chip.task.Task;
+import chip.task.TaskList;
+import chip.utils.Command;
+import chip.utils.HelpMessages;
+import chip.utils.Messages;
 
 /**
  * Main class of the application.
  */
-public class Duke {
+public class Chip {
     private final TaskList taskList;
     private final Storage storage;
 
@@ -25,7 +25,7 @@ public class Duke {
      *
      * @param filePath The save file path.
      */
-    public Duke(String filePath) throws DukeException {
+    public Chip(String filePath) throws ChipException {
         storage = new Storage(filePath);
         taskList = new TaskList();
         loadData();
@@ -42,7 +42,7 @@ public class Duke {
             String[] tokens = Parser.splitIntoSubstrings(input);
             Command command = Parser.parseCommand(tokens[0]);
             return runUserCommand(command, tokens);
-        } catch (DukeException e) {
+        } catch (ChipException e) {
             return e.getMessage();
         }
     }
@@ -50,23 +50,23 @@ public class Duke {
     /**
      * Loads data from save file.
      */
-    public void loadData() throws DukeException {
+    public void loadData() throws ChipException {
         try {
             ArrayList<Task> tasks = storage.load();
             taskList.setTaskList(tasks);
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new ChipException(e.getMessage());
         }
     }
 
     /**
      * Saves data to save file.
      */
-    public void saveData() throws DukeException {
+    public void saveData() throws ChipException {
         storage.save(taskList.getTasks());
     }
 
-    private String handleDone(Command command, String[] tokens) throws DukeException {
+    private String handleDone(Command command, String[] tokens) throws ChipException {
         try {
             Task task = taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
             return Messages.getSuccessfullyDoneMessage(task);
@@ -75,7 +75,7 @@ public class Duke {
         }
     }
 
-    private String handleDelete(Command command, String[] tokens) throws DukeException {
+    private String handleDelete(Command command, String[] tokens) throws ChipException {
         try {
             Task task = taskList.delete(Integer.parseInt(tokens[1]) - 1);
             return Messages.getSuccessfullyDeletedMessage(taskList.getSize(), task);
@@ -94,7 +94,7 @@ public class Duke {
         return isDescriptionEmpty ? HelpMessages.getMessage("") : HelpMessages.getMessage(tokens[1]);
     }
 
-    private String handleTask(Command command, String[] tokens) throws DukeException {
+    private String handleTask(Command command, String[] tokens) throws ChipException {
         try {
             Task task = taskList.addTask(command, tokens[1].trim());
             return Messages.getSuccessfullyAddedTaskMessage(taskList.getSize(), task);
@@ -108,9 +108,9 @@ public class Duke {
      *
      * @param command Command that is to be executed.
      * @param tokens  Input String split into tokens.
-     * @throws DukeException If command cannot be executed.
+     * @throws ChipException If command cannot be executed.
      */
-    public String runUserCommand(Command command, String[] tokens) throws DukeException {
+    public String runUserCommand(Command command, String[] tokens) throws ChipException {
         String message = null;
         switch (command) {
         case BYE:
@@ -135,7 +135,7 @@ public class Duke {
         case TODO: // Fall through
         case DEADLINE: // Fall through
         case EVENT:
-            handleTask(command, tokens);
+            message = handleTask(command, tokens);
             break;
         default:
             assert false : "command not recognised";

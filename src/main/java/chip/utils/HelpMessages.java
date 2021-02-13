@@ -1,7 +1,7 @@
-package duke.utils;
+package chip.utils;
 
-import duke.exceptions.UnknownCommandException;
-import duke.parser.Parser;
+import chip.exceptions.UnknownCommandException;
+import chip.parser.Parser;
 
 /**
  * Formats help messages.

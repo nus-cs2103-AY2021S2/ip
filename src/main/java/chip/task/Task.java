@@ -1,4 +1,4 @@
-package duke.task;
+package chip.task;
 
 /**
  * Task represents a task that is to be done.

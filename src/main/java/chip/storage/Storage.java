@@ -1,4 +1,4 @@
-package duke.storage;
+package chip.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exceptions.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.utils.Command;
+import chip.exceptions.ChipException;
+import chip.task.Deadline;
+import chip.task.Event;
+import chip.task.Task;
+import chip.task.Todo;
+import chip.utils.Command;
 
 /**
  * Manages storage information for the program.
@@ -36,9 +36,9 @@ public class Storage {
      *
      * @return List of tasks.
      * @throws IOException   If file could not be read.
-     * @throws DukeException If save file is corrupted.
+     * @throws ChipException If save file is corrupted.
      */
-    public ArrayList<Task> load() throws IOException, DukeException {
+    public ArrayList<Task> load() throws IOException, ChipException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         File dir = new File("data");
@@ -76,7 +76,7 @@ public class Storage {
                     task = new Todo(tokens[2]);
                     break;
                 default:
-                    throw new DukeException("Sorry something when wrong loading your safe file :(");
+                    throw new ChipException("Sorry something when wrong loading your safe file :(");
                 }
 
                 if (tokens[1].equals("true")) {
@@ -94,9 +94,9 @@ public class Storage {
      * Saves a list of tasks to the save file.
      *
      * @param tasks List of tasks to be saved.
-     * @throws DukeException If unable to save to file.
+     * @throws ChipException If unable to save to file.
      */
-    public void save(ArrayList<Task> tasks) throws DukeException {
+    public void save(ArrayList<Task> tasks) throws ChipException {
         try {
             File f = new File(filePath);
 
@@ -111,7 +111,7 @@ public class Storage {
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Something went wrong trying to save your data :(");
+            throw new ChipException("Something went wrong trying to save your data :(");
         }
     }
 }

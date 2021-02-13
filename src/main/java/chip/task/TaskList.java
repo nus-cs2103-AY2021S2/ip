@@ -1,13 +1,13 @@
-package duke.task;
+package chip.task;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import duke.exceptions.InvalidDateException;
-import duke.exceptions.InvalidInputException;
-import duke.exceptions.UnknownCommandException;
-import duke.utils.Command;
+import chip.exceptions.InvalidDateException;
+import chip.exceptions.InvalidInputException;
+import chip.exceptions.UnknownCommandException;
+import chip.utils.Command;
 
 /**
  * Represents list of tasks.

@@ -1,4 +1,4 @@
-package duke.task;
+package chip.task;
 
 /**
  * Todo task.

@@ -1,4 +1,4 @@
-package duke.utils;
+package chip.utils;
 
 /**
  * Commands to be executed.

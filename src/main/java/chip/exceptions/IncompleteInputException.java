@@ -1,11 +1,11 @@
-package duke.exceptions;
+package chip.exceptions;
 
-import duke.utils.Command;
+import chip.utils.Command;
 
 /**
  * Exception thrown when input is incomplete.
  */
-public class IncompleteInputException extends DukeException {
+public class IncompleteInputException extends ChipException {
     private String message;
 
     /**

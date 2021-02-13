@@ -1,4 +1,4 @@
-package duke.ui;
+package chip.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -70,7 +70,7 @@ public class DialogBox extends HBox {
      * @param img  Display image.
      * @return A dialog box.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getChipDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

@@ -1,11 +1,11 @@
-package duke.parser;
+package chip.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exceptions.UnknownCommandException;
-import duke.utils.Command;
+import chip.exceptions.UnknownCommandException;
+import chip.utils.Command;
 
 public class ParserTest {
     @Test

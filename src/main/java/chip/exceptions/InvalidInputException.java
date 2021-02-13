@@ -1,9 +1,9 @@
-package duke.exceptions;
+package chip.exceptions;
 
 /**
  * Exception thrown when input is invalid.
  */
-public class InvalidInputException extends DukeException {
+public class InvalidInputException extends ChipException {
     public InvalidInputException() {
         super("Please enter a valid index :(");
     }

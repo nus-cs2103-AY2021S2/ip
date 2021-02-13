@@ -1,7 +1,7 @@
-package duke.parser;
+package chip.parser;
 
-import duke.exceptions.UnknownCommandException;
-import duke.utils.Command;
+import chip.exceptions.UnknownCommandException;
+import chip.utils.Command;
 
 /**
  * Parse input.

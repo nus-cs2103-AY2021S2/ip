@@ -1,8 +1,8 @@
 import java.io.IOException;
 
-import duke.Duke;
-import duke.exceptions.DukeException;
-import duke.ui.MainWindow;
+import chip.Chip;
+import chip.exceptions.ChipException;
+import chip.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,15 +13,15 @@ import javafx.stage.Stage;
  * A GUI for duke.Duke using FXML.
  */
 public class Main extends Application {
-    private Duke duke;
+    private Chip chip;
 
     /**
      * Constructor for Main class
      */
     public Main() {
         try {
-            duke = new Duke("data/tasks.txt");
-        } catch (DukeException e) {
+            chip = new Chip("data/tasks.txt");
+        } catch (ChipException e) {
             e.printStackTrace();
         }
     }
@@ -35,7 +35,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("Chip the Squirrel");
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setChip(chip);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

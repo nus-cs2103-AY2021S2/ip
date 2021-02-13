@@ -1,4 +1,4 @@
-package duke.task;
+package chip.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

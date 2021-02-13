@@ -1,9 +1,9 @@
-package duke.task;
+package chip.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import duke.utils.DateTime;
+import chip.utils.DateTime;
 
 /**
  * Event task.
