@@ -64,7 +64,7 @@ public class Duke {
     }
     public String getResponse(String input) {
         if (input.equals("bye")) {
-            return "Bye. Hope to see you again soon!";
+            this.exit();
         }
         try {
             return this.process(input);

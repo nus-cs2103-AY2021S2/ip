@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 class TaskList {
     private ArrayList<Task> taskList;
+    private boolean canWriteToHardDisk;
 
     /**
      * If there is no existing data on the local hard disk, Dukebot will startup with an
@@ -22,8 +23,10 @@ class TaskList {
         try {
             if (file.exists()) {
                 Storage.convert(file, this.taskList);
+                this.canWriteToHardDisk = true;
             }
         } catch (IOException exception) {
+            this.canWriteToHardDisk = false;
             System.out.println(exception);
         }
     }
@@ -61,7 +64,9 @@ class TaskList {
         }
         currTask.completeTask();
         dukeMessage += "Nice! I've marked this task as done:\n " + currTask;
-        Storage.update(this.taskList);
+        if (canWriteToHardDisk) {
+            Storage.update(this.taskList);
+        }
         return dukeMessage;
     }
 

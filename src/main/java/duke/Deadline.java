@@ -5,39 +5,39 @@ import java.time.LocalDate;
  * This class represents a deadline task.
  */
 class Deadline extends Task {
-    private final LocalDate date;
+    private final LocalDate dateOfDeadline;
 
     /**
      * Creates a new deadline task object.
      *
-     * @param taskName The name of the deadline task
-     * @param deadline The date on which the deadline task is due
+     * @param taskName The name of the deadline task.
+     * @param dateOfDeadline The date on which the deadline task is due.
      */
-    public Deadline(String taskName, LocalDate deadline) {
+    public Deadline(String taskName, LocalDate dateOfDeadline) {
         super(taskName);
-        this.date = deadline;
+        this.dateOfDeadline = dateOfDeadline;
     }
 
     /**
      * Overloaded constructor to create a deadline task object. It accepts one extra argument
      * to determine if the task is already completed.
      *
-     * @param taskName The name of the deadline task
-     * @param isDone Whether the deadline task is already completed
-     * @param deadline The date in which the deadline task is due
+     * @param taskName The name of the deadline task.
+     * @param isDone Whether the deadline task is already completed.
+     * @param dateOfDeadline The date on which the deadline task is due.
      */
-    public Deadline(String taskName, boolean isDone, LocalDate deadline) {
+    public Deadline(String taskName, boolean isDone, LocalDate dateOfDeadline) {
         super(taskName, isDone);
-        this.date = deadline;
+        this.dateOfDeadline = dateOfDeadline;
     }
 
     /**
      * Getter method to get the date on which the deadline is due.
      *
-     * @return the date in which the deadline is due
+     * @return the date in which the deadline is due.
      */
     public String getDate() {
-        return Task.printDate(this.date);
+        return Task.printDate(this.dateOfDeadline);
     }
 
     /**
@@ -47,7 +47,7 @@ class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String type = "[D]";
+        String typeOfTask = "[D]";
         String isCompleted;
         if (this.isDone) {
             isCompleted = "[X]";
@@ -55,6 +55,8 @@ class Deadline extends Task {
             isCompleted = "[ ]";
         }
         assert (this.taskName.equals("")) : "Name of deadline cannot be empty";
-        return type + isCompleted + " " + this.taskName + " (by: " + Task.printDate(date) + ")";
+        String message = typeOfTask + isCompleted + " " + this.taskName;
+        message += " (by: " + Task.printDate(dateOfDeadline) + ")";
+        return message;
     }
 }
