@@ -3,7 +3,10 @@ public class Ui {
             + "Please enter file name to load tasks\n ";
     private static final String GOODBYE = "Thank you for using Duke , please come back again";
     private static final String FAILURE_LOAD_START = "No task is found in file, what can i do for you? ";
+    private static final String FAILURE_UPDATE = "Field to update is invalid";
     private static final String SUCCESS_LOAD_START = "File loaded, what can i do for you? ";
+    private static final String SUCCESS_UPDATE = "Task is updated successfully";
+
 
     private TaskList tasks;
     private Storage storage;
@@ -39,14 +42,6 @@ public class Ui {
         }
 
         return SUCCESS_LOAD_START;
-    }
-
-    /**
-     * Reads a file path from the user
-     * @return fileName entered by the user;
-     */
-    public static String askFilePath() {
-        return "Please enter file name : ";
     }
 
     /**
@@ -110,6 +105,14 @@ public class Ui {
 
     public static String showFailSearch(String searchTerm) {
         return "There are no matching task with " + searchTerm;
+    }
+
+    public static String showSuccessUpdate() {
+        return SUCCESS_UPDATE;
+    }
+
+    public static String showFailUpdate() {
+        return FAILURE_UPDATE;
     }
 
     public void save() {

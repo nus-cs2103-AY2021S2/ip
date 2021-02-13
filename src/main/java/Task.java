@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
  * Abstract class Task to represent a Task
  */
 public abstract class Task {
-    /** Description of a class **/
+    /** Description of a class */
     private String description;
-    /** Completion  Status of the task **/
+    /** Completion  Status of the task */
     private boolean isDone;
 
     /**
@@ -38,6 +38,20 @@ public abstract class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Returns result of the updating of task.
+     * @param field , field to be updated
+     * @param value , value to be updated
+     * @return String , result of the updating
+     */
+    public String update(String field, String value) {
+        if (field.contains("desc")) {
+            description = value;
+            return Ui.showSuccessUpdate();
+        }
+        return Ui.showFailUpdate();
     }
 
     /**

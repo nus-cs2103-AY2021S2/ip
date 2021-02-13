@@ -90,6 +90,11 @@ public class TaskList {
         return Ui.showSuccessSearch() + output;
     }
 
+    public String update(int option, String field, String value) {
+        checkValidOption(option);
+        return tasks.get(option).update(field, value);
+    }
+
     /**
      * Returns the TaskList
      * @return ArrayList of Task , taskList

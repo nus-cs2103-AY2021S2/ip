@@ -6,7 +6,12 @@ import java.util.ArrayList;
 public class Parser {
     private static final String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
     private static final String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
+    private static final String ERROR_OPTION = "OOPS!! Option is missing or at the wrong place. Keyword <Option> ....";
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! I`m sorry. but i don`t know what that means :-(";
+    private static final String ERROR_INVALID_UPDATE_COMMAND = "OOPS!! Update command should be in this form : " +
+            "Update <field> <Value> ";
+
+    public static final String ERROR_INVALID_DATE_FORMAT = "OOPS!! DateTime format is incorrect. yyyy-M-dd Hmm";
 
     /**
      * Returns a Command object based on the fullCommand given
@@ -32,7 +37,6 @@ public class Parser {
             commandParts.add(keyword);
             commandParts.add(trimCommand.substring(firstSpace));
         }
-
         return commandParts.toArray(new String[commandParts.size()]);
     }
 
@@ -49,6 +53,7 @@ public class Parser {
         case"todo":
         case"deadline":
         case"event":
+        case "update":
             break;
         default:
             throw new DukeException("Invalid command");
@@ -60,8 +65,15 @@ public class Parser {
         boolean requireDesc = checkRequireDescription(keyword);
         boolean requireOption = checkRequireOption(keyword);
         boolean requireDeadline = checkRequireDeadline(keyword);
+        boolean isUpdate = keyword.equalsIgnoreCase("Update");
+
         if (!requireDesc) {
             return createWithoutDescCommand(commandParts);
+        }
+
+        if (isUpdate) {
+            checkOption(commandParts);
+            return createUpdateCommand(commandParts);
         }
 
         if (requireOption) {
@@ -91,6 +103,7 @@ public class Parser {
         switch (keyword) {
         case"done":
         case"delete":
+        case "update":
             return true;
         default:
             return false;
@@ -119,7 +132,16 @@ public class Parser {
     }
 
     private static void checkOption(String[] commandParts) throws DukeException {
-        checkDescription(commandParts, "Command is without any option");
+        try {
+            String remainderCommand = commandParts[1].trim();
+            int nextSpace = remainderCommand.indexOf(" ");
+            if (nextSpace == -1) {
+                nextSpace = remainderCommand.length();
+            }
+            int option = Integer.parseInt(remainderCommand.substring(0, nextSpace)) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException(ERROR_OPTION);
+        }
     }
 
     private static Command createWithOptionCommand(String[] commandParts) throws DukeException {
@@ -127,7 +149,11 @@ public class Parser {
 
         try {
             String remainderCommand = commandParts[1].trim();
-            int option = Integer.parseInt(remainderCommand) - 1;
+            int nextSpace = remainderCommand.indexOf(" ");
+            if (nextSpace == -1) {
+                nextSpace = remainderCommand.length();
+            }
+            int option = Integer.parseInt(remainderCommand.substring(0, nextSpace)) - 1;
             switch (keyword) {
             case "done" :
                 return new DoneCommand(option);
@@ -152,6 +178,19 @@ public class Parser {
         } else {
             throw new DukeException(ERROR_INVALID_COMMAND);
         }
+    }
+
+    private static Command createUpdateCommand(String[] commandParts) throws DukeException {
+        String remainderCommand = commandParts[1].trim();
+        int firstSpace = remainderCommand.indexOf(" ");
+        int option = Integer.parseInt(remainderCommand.substring(0, firstSpace)) - 1;
+        int nextSpace = remainderCommand.indexOf(" ", firstSpace + 1 );
+        if (nextSpace == -1) {
+            throw new DukeException(ERROR_INVALID_UPDATE_COMMAND);
+        }
+        String field = remainderCommand.substring(firstSpace, nextSpace);
+        String value = remainderCommand.substring(nextSpace + 1);
+        return new UpdateCommand(option, field, value);
     }
 
     private static Command createAddCommand(String[] commandParts) throws DukeException, DukeDeadlineException {
@@ -229,8 +268,9 @@ public class Parser {
      */
     public static LocalDateTime parseDate(String date, String errorMessage) throws DukeDeadlineException {
         try {
-            return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
+            return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-M-dd Hmm"));
         } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
             throw new DukeDeadlineException(errorMessage);
         }
     }
@@ -242,7 +282,7 @@ public class Parser {
      */
 
     public static Task parseForText(String csvData) throws DukeDeadlineException {
-        String errorMessage = "The deadline for this task is corrupted (Required : yyyy-M-d hhmm)";
+        String errorMessage = "The deadline for this task is corrupted (Required : yyyy-M-dd Hmm)";
         String[] taskArr = csvData.split(",");
         Task task = null;
         try {
