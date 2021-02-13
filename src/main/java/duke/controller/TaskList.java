@@ -84,6 +84,9 @@ public class TaskList {
      * @return A string representation of the current list of Tasks.
      */
     public String toString() {
+        if (listOfTasks.isEmpty()) {
+            return "There are no tasks.";
+        }
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < this.listOfTasks.size(); i++) {
             result.append(i + 1).append(". ").append(listOfTasks.get(i)).append("\n");
