@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -18,7 +21,7 @@ import java.util.Collections;
  */
 public class Dialog extends HBox {
     @FXML
-    private ImageView displayPic;
+    private Circle displayPic;
     @FXML
     private Label dialog;
 
@@ -38,7 +41,8 @@ public class Dialog extends HBox {
         }
 
         dialog.setText(text);
-        displayPic.setImage(image);
+        ImagePattern ip = new ImagePattern(image);
+        displayPic.setFill(ip);
     }
     /**
      * Constructor to instantiate a new Dialog object
