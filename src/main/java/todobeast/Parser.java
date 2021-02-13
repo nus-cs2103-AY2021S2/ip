@@ -34,7 +34,6 @@ public class Parser {
     public static Command parse(String fullCommand) throws ToDoBeastException {
 
         assert fullCommand.length() > 0 : "Empty command given!";
-        assert fullCommand.length() > 0 : "Empty command provided!";
         Command command = null;
         String[] dateAndTimeTokens = null;
         // full command will come delimited by ", "
