@@ -19,6 +19,12 @@ public class Event extends Task{
         }
     }
 
+    public static Event createEvent(String input) {
+        int indexOfAt = input.lastIndexOf("/at ");
+        String date = input.substring(indexOfAt + 3).trim();
+        return new Event(input.substring(0, indexOfAt).strip(), date);
+    }
+
     @Override
     public String saveTask() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");

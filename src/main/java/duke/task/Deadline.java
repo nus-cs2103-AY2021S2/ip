@@ -19,6 +19,12 @@ public class Deadline extends Task {
         }
     }
 
+    public static Deadline createDeadline(String input) {
+        int indexOfBy = input.lastIndexOf("/by ");
+        String date = input.substring(indexOfBy + 3).trim();
+        return new Deadline(input.substring(0, indexOfBy).strip(), date);
+    }
+
     @Override
     public String saveTask() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
