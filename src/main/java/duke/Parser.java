@@ -21,7 +21,7 @@ public class Parser {
      * @return User input in a Command format.
      * @throws DukeException If command arguments are misused.
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parseCommand(String input) throws DukeException {
         String[] inputArr = input.split(" ");
         String taskType = inputArr[0].toLowerCase();
         String taskDesc = "";
@@ -79,8 +79,8 @@ public class Parser {
         case "BYE":
             return new ByeCommand();
         default:
-            return null;
-            //throws DukeException("!1!!!!!!!!!!");
+            throw new DukeException("I'm not trained with these commands yet...");
         }
     }
 }
+

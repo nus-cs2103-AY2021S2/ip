@@ -30,6 +30,7 @@ public class Ui {
             + NEWLINE + TAB + "- bye";
     private static final String NO_TASKS = "There isn't any task found in the list.";
     private static final String LOAD_ERROR = "Unable to load file.";
+    private static final String ERROR_HEAD = "Oh no... ";
 
     /**
      * Retrieves greeting.
@@ -48,8 +49,18 @@ public class Ui {
     /**
      * Retrieves file load error.
      */
+    public String getErrorMessage(String message) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Ui.ERROR_HEAD);
+        sb.append(message);
+        return sb.toString();
+    }
+
+    /**
+     * Retrieves file load error.
+     */
     public String getLoadingError() {
-        return Ui.LOAD_ERROR;
+        return this.getErrorMessage(Ui.LOAD_ERROR);
     }
 
     /**

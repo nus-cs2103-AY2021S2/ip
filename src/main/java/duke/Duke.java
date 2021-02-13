@@ -50,13 +50,14 @@ public class Duke {
 
     public CommandResponse getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parseCommand(input);
             assert this.storage != null;
             assert this.tasks != null;
             assert this.ui != null;
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return new CommandResponse("Oh no... " + e.getMessage(), false);
+            String msg = ui.getErrorMessage(e.getMessage());
+            return new CommandResponse(msg, false);
         }
     }
 }
