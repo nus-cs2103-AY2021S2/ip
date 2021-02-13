@@ -6,16 +6,18 @@ public class Event extends Task {
 
     /**
      * Constructor for this Event object.
+     *
      * @param   description  Task Description.
-     * @param   at           Location of task.
+     * @param   EventLocation           Location of task.
      */
-    public Event(String description, String at) {
+    public Event(String description, String EventLocation) {
         super(description);
-        this.at = at;
+        this.at = EventLocation;
     }
 
     /**
      * Returns a string representation of the Event Task.
+     *
      * @return the type of task, task completion status, and location.
      */
     @Override

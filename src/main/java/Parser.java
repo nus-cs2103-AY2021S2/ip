@@ -13,6 +13,7 @@ public class Parser {
 
     /**
      * Parses a given string such that Duke can understand commands.
+     *
      * @param  tasks The TaskList object containing all tasks.
      * @param  str The string to be parsed.
      */
@@ -58,7 +59,6 @@ public class Parser {
             if (mDeadline.group(2).equals("")) {
                 throw new DukeException("The description of a Deadline cannot be empty!");
             }
-            //output += mDeadline.group(4) + "\n";
             tasks.addDeadline(mDeadline.group(2), mDeadline.group(4));
             output += "Got it!. I have added the following task:" + "\n";
             output += tasks.getAtInd(tasks.getNumItems() - 1) + "\n";
@@ -73,9 +73,9 @@ public class Parser {
             output += "Now you have " + tasks.getNumItems() + " tasks in the tasks.";
         } else if (mDelete.find()) {
             output += "Okay I have removed this task!" + "\n";
-            int n = Integer.parseInt(mDelete.group(2)) - 1;
-            output += tasks.getAtInd(n) + "\n";
-            tasks.deleteTask(n);
+            int index = Integer.parseInt(mDelete.group(2)) - 1;
+            output += tasks.getAtInd(index) + "\n";
+            tasks.deleteTask(index);
             output += "Now you have " + tasks.getNumItems() + " tasks in the list.";
         } else if (mFind.find()) {
             output += "Here are the matching tasks in your list!" + "\n";

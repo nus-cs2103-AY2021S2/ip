@@ -7,6 +7,7 @@ public class Task {
 
     /**
      * Constructor for this Task object.
+     *
      * @param   description  Task Description.
      */
     public Task(String description) {
@@ -16,6 +17,7 @@ public class Task {
 
     /**
      * Checks and returns the status of the task.
+     *
      * @return task status.
      */
     public String getStatusIcon() {
@@ -31,6 +33,7 @@ public class Task {
 
     /**
      * Converts information about the task to be saved to hard disk.
+     *
      * @return string containing information about the task.
      */
     public String save() {
