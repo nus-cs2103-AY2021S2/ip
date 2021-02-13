@@ -17,6 +17,7 @@ public class Event extends Task {
      */
     public Event(String taskName, LocalDate eventTime) {
         super(taskName);
+        assert eventTime != null;
         this.eventTime = eventTime;
     }
 
@@ -29,6 +30,7 @@ public class Event extends Task {
      */
     public Event(String taskName, boolean done, LocalDate eventTime) {
         super(taskName, done);
+        assert eventTime != null;
         this.eventTime = eventTime;
     }
 

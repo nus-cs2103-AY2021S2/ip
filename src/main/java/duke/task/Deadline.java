@@ -17,6 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, LocalDate deadLine) {
         super(taskName);
+        assert deadLine != null;
         this.deadLine = deadLine;
     }
 
@@ -29,6 +30,7 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, boolean done, LocalDate deadLine) {
         super(taskName, done);
+        assert deadLine != null;
         this.deadLine = deadLine;
     }
 
