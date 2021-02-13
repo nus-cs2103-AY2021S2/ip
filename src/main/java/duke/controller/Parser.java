@@ -188,6 +188,9 @@ public class Parser {
                         + taskList.remind(7);
             }
             int numberOfDays = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
+            if (numberOfDays <= 0){
+                throw new NumberFormatException();
+            }
             return "Here are the tasks in the next " + numberOfDays + " days:\n"
                     + taskList.remind(numberOfDays);
         } catch (NumberFormatException e) {
