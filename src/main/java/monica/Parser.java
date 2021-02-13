@@ -3,15 +3,7 @@ package monica;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import monica.command.AddDeadline;
-import monica.command.AddEvent;
-import monica.command.AddTodo;
-import monica.command.Command;
-import monica.command.DeleteCommand;
-import monica.command.DoneCommand;
-import monica.command.ExitCommand;
-import monica.command.FindCommand;
-import monica.command.ListCommand;
+import monica.command.*;
 import monica.task.Deadline;
 import monica.task.Event;
 import monica.task.Todo;
@@ -86,6 +78,9 @@ public class Parser {
             }
             return new FindCommand(processTask(commandLine));
 
+        case "help":
+            return new HelpCommand();
+            
         default:
             throw new MonicaException("I don't know what '" + commandType + "' means.");
 
