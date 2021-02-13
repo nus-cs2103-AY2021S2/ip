@@ -38,7 +38,7 @@ public class Duke {
             ChatBotCommand c = Parser.parse(input);
 
             if (c.isTerminated()) {
-                return "";
+                return "Bye. Hope to see you again soon!";
             }
             output = c.runTask(th, storage);
         } catch (ChatBotException e) {

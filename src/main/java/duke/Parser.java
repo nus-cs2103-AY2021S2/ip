@@ -19,7 +19,9 @@ import duke.exceptions.ChatBotException;
 import duke.exceptions.InvalidCommandTypeException;
 import duke.exceptions.InvalidDateFormatException;
 import duke.exceptions.InvalidTimeFormatException;
+import duke.exceptions.MissingDateException;
 import duke.exceptions.MissingDescriptionException;
+
 
 
 public class Parser {
@@ -107,7 +109,11 @@ public class Parser {
                 return new FindCommand(words[1]);
             case "schedule":
                 assert words.length > 1 : "Error: please key in a date in the format of dd MMM yyyy";
-                return new ScheduleCommand(words[1]);
+                if (words.length < 2) {
+                    throw new MissingDateException();
+                } else {
+                    return new ScheduleCommand(words[1]);
+                }
             case "done":
                 return new DoneCommand(Integer.parseInt(words[1]));
             case "delete":
