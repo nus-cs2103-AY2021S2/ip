@@ -30,7 +30,7 @@ public class Duke {
     public Duke() {
         this.sc = new Scanner(System.in);
         this.storage = new Storage(Constants.FILE_PATH);
-        this.taskList = new TaskList(storage.readDataFromFile());
+        this.taskList = new TaskList(new ArrayList<>());
         this.ui = new Ui();
     }
 
@@ -41,7 +41,7 @@ public class Duke {
     public Duke(String path) {
         this.sc = new Scanner(System.in);
         this.storage = new Storage(path);
-        this.taskList = new TaskList(storage.readDataFromFile());
+        this.taskList = new TaskList(new ArrayList<>());
         this.ui = new Ui();
     }
 

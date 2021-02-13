@@ -9,12 +9,15 @@
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true">
          <HBox.margin>
-            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+            <Insets bottom="5.0" left="15.0" right="25.0" top="5.0" />
          </HBox.margin>
         </Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-radius: 50px;" />
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets bottom="10.0" right="1.0" />
+         </HBox.margin></ImageView>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets top="15.0" />
     </padding>
 </fx:root>
