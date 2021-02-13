@@ -17,6 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String taskName, LocalDate deadLine) {
         super(taskName);
+        assert deadLine != null;
         this.deadLine = deadLine;
     }
 
@@ -27,8 +28,9 @@ public class Deadline extends Task {
      * @param isDone Status of the java.duke.controller.task, done or not done.
      * @param deadLine Deadline of the Deadline java.duke.controller.task.
      */
-    public Deadline(String taskName, boolean isDone, LocalDate deadLine) {
-        super(taskName, isDone);
+    public Deadline(String taskName, boolean done, LocalDate deadLine) {
+        super(taskName, done);
+        assert deadLine != null;
         this.deadLine = deadLine;
     }
 

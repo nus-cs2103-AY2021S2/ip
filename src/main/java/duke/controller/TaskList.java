@@ -37,6 +37,7 @@ public class TaskList {
      * @param t New Task.
      */
     public void addTask(Task t) {
+        assert t != null;
         this.listOfTasks.add(t);
     }
 
@@ -47,6 +48,7 @@ public class TaskList {
      * @return The removed Task.
      */
     public Task deleteTask(int number) {
+        assert number > 1;
         return this.listOfTasks.remove(number - 1);
     }
 
@@ -56,6 +58,7 @@ public class TaskList {
      * @param number Index of the Task to be marked.
      */
     public void markAsDone(int number) {
+        assert number > 1;
         this.listOfTasks.get(number - 1).setDone(true);
     }
 
@@ -66,6 +69,7 @@ public class TaskList {
      * @return The Task at the index.
      */
     public Task getTaskAtIndex(int number) {
+        assert number > 1;
         return this.listOfTasks.get(number - 1);
     }
 
@@ -100,6 +104,7 @@ public class TaskList {
      * @return New TaskList containing filtered results.
      */
     public TaskList find(String keyword) {
+        assert keyword != null;
         return new TaskList(this.listOfTasks.stream()
                 .filter((task) -> task.getTaskName()
                         .toLowerCase().contains(keyword.toLowerCase()))
@@ -112,6 +117,7 @@ public class TaskList {
      * @return The undone tasks within the next <code>days</code> days after today.
      */
     public TaskList remind(int days) {
+        assert days > 0;
         return new TaskList(this.listOfTasks.stream()
                 .filter(task -> task instanceof Event || task instanceof Deadline)
                 .filter(task -> // filter overdue tasks

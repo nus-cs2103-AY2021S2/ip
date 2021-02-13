@@ -17,6 +17,7 @@ public class Event extends Task {
      */
     public Event(String taskName, LocalDate eventTime) {
         super(taskName);
+        assert eventTime != null;
         this.eventTime = eventTime;
     }
 
@@ -27,8 +28,9 @@ public class Event extends Task {
      * @param isDone Status of the Event, done or not done.
      * @param eventTime Time of the Event.
      */
-    public Event(String taskName, boolean isDone, LocalDate eventTime) {
-        super(taskName, isDone);
+    public Event(String taskName, boolean done, LocalDate eventTime) {
+        super(taskName, done);
+        assert eventTime != null;
         this.eventTime = eventTime;
     }
 
