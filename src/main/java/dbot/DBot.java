@@ -1,5 +1,6 @@
 package dbot;
 
+import com.sun.glass.ui.Application;
 import dbot.command.Command;
 import dbot.exception.DBotException;
 import dbot.parser.Parser;
@@ -40,31 +41,38 @@ public class DBot {
     }
 
     /**
-     * Runs the DBot program until an Exit command is given via the 'bye' User input.
+     * Initialises the application by instantiating the necessary programs.
+     * If a text file at the default filePath exists, it loads the stored tasks.
+     * The default filePath is specified in Storage.java.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInputText = ui.getUserInput();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(userInputText);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DBotException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public DBot() {
+        ui = new Ui();
+        try {
+            storage = new Storage();
+            tasks = storage.load();
+        } catch (DBotException e) {
+            ui.showLoadingError();
+            tasks = new TaskList(100);
         }
     }
 
     /**
-     * Entry point function to start the program.
-     * @param args Command line arguments that were passed when executing the java file.
+     * Runs the DBot program until an Exit command is given via the 'bye' User input.
      */
-    public static void main(String[] args) {
-        new DBot("data/tasks.txt").run();
+    public String getResponse() {
+        String response;
+        try {
+            String userInputText = ui.getUserInput();
+            ui.showLine(); // show the divider line ("_______")
+            Command c = Parser.parse(userInputText);
+            response = c.execute(tasks, ui, storage);
+        } catch (DBotException e) {
+            response = ui.showError(e.getMessage());
+        } finally {
+            response = ui.showLine();
+        }
+    }
+
+    public String getResponse(String input) {
     }
 }
