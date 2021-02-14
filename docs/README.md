@@ -5,6 +5,8 @@ Zeke is a Personal Assistant Chatbot that helps you keep track of various tasks.
 This application makes use of a Command-Line Interface (CLI) which processes commands in the form of lines of text.
 You can give commands to Zeke and it will return the relevant messages.
 
+<br>
+
 ## Get started
 1. Ensure that [JDK 11](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html) or newer versions are installed on your computer.
 2. Download zeke.jar [here]() to a path of your choice in your computer.
@@ -27,7 +29,7 @@ View help menu | `help`
 View statistics | `stats`
 Exit application | `bye`
 
-
+<br>
 
 ## Add Tasks 
 Users can add tasks of these 3 types to their task list:
@@ -49,6 +51,8 @@ Expected outcome:
 
 ![todo_image](images/todo.png)
 
+<br>
+
 ### `deadline <description> /by <date>` - Add a Deadline
 
 description: the description of the deadline you want to add <br>
@@ -62,6 +66,8 @@ Expected outcome:
 
 ![deadline_image](images/deadline.png)
 
+<br>
+
 ### `event <description> /at <date>` - Add an Event
 
 description: the description of the event you want to add <br>
@@ -74,6 +80,8 @@ Example of usage:
 Expected outcome:
 
 ![event_image](images/event.png)
+
+<br>
 
 ## Delete Tasks
 Users can delete tasks from their task list
@@ -92,6 +100,8 @@ Expected outcome:
 
 ![delete_image](images/delete.png)
 
+<br>
+
 ## List all Tasks
 Users can see all the tasks in their task list
 
@@ -106,6 +116,8 @@ Example of usage:
 Expected outcome:
 
 ![list_image](images/list.png)
+
+<br>
 
 ## Mark tasks as completed
 Users can mark tasks as completed
@@ -124,6 +136,9 @@ Expected outcome:
 
 ![done_image](images/done.png)
 
+<br>
+
+
 ## Search for tasks
 Users can search for tasks in their task list
 
@@ -141,6 +156,8 @@ Expected outcome:
 
 ![find_image](images/find.png)
 
+<br>
+
 ## Display a help menu
 Users can see the help menu for list of available commands
 
@@ -156,6 +173,8 @@ Expected outcome:
 
 ![help_image](images/help.png)
 
+<br>
+
 ## Display statistics 
 Users can see overdue deadlines and events happening soon
 
@@ -170,6 +189,8 @@ Example of usage:
 Expected outcome:
 
 ![stats_image](images/stats.png)
+
+<br>
 
 ## Exit the application
 Users can exit the Zeke app
