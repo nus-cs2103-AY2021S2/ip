@@ -1,6 +1,6 @@
 package duke.command;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import duke.task.TaskList;
 
@@ -11,17 +11,18 @@ public class HelpCmd extends Command {
     private static final String TITLE = "Usage: <command> [other arguments]\n\n"
             + "Commands:\n";
 
-    private static final HashMap<String, String> commands = new HashMap<>();
+    private static final LinkedHashMap<String, String> commands = new LinkedHashMap<>();
 
     static {
         commands.put("help", "Show this page");
         commands.put("todo <content>", "Add a todo");
-        commands.put("event <content> /at <place/other details>", "Add an event that happens at a specific place");
         commands.put("deadline <content> /by <datetime>", "Add a task with a specific deadline. Allowed datetime "
                 + "formats: [02/01/2021 1220, 02/01/2021]");
-        commands.put("delete <list index>", "Delete task with specified index from list command");
-        commands.put("done <list index>", "Mark task with specific index from list command as done");
+        commands.put("event <content> /at <place>", "Add an event that happens at a specific place");
+        commands.put("list", "List all tasks");
         commands.put("find <search string>", "List tasks with specified search string found in their details");
+        commands.put("done <list index>", "Mark task with specified list index as done");
+        commands.put("delete <list index>", "Delete task with specified list index");
         commands.put("bye", "Quit the bot");
     }
 
