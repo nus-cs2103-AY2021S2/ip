@@ -51,7 +51,7 @@ Expected outcome:
 
 ### `deadline <description> /by <date>` - Add a Deadline
 
-description: the description of the deadline you want to add
+description: the description of the deadline you want to add <br>
 date: the date of the deadline in _**yyyy-mm-dd**_ format
 
 Example of usage:
@@ -64,7 +64,7 @@ Expected outcome:
 
 ### `event <description> /at <date>` - Add an Event
 
-description: the description of the event you want to add
+description: the description of the event you want to add <br>
 date: the date of the event in _**yyyy-mm-dd**_ format
 
 Example of usage:
