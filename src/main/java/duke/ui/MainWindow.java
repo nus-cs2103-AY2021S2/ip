@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Momo momo;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Subaru.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Rem.png"));
 
     @FXML
     public void initialize() {
@@ -38,6 +38,9 @@ public class MainWindow extends AnchorPane {
 
     public void setMomo(Momo m) {
         momo = m;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(momo.getLoadingMessage(), dukeImage)
+        );
     }
 
     /**

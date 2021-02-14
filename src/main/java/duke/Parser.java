@@ -12,6 +12,10 @@ import duke.task.Period;
 
 public class Parser {
 
+    private static final int PREFIX_LENGTH = "[ ][ ] ".length();
+    private static final int INDEX_OF_IDENTIFICATION = 1;
+    private static final int INDEX_OF_COMPLETE_STATE = 4;
+
     /**
      * Returns a Command with enum type by parsing user input of single word.
      *
@@ -42,7 +46,7 @@ public class Parser {
      */
     public static String parseRestInput(String input) {
         int endOfFirstWord = input.indexOf(' ');
-        return input.substring(endOfFirstWord + 1);
+        return input.substring(endOfFirstWord + " ".length());
     }
 
     /**
@@ -81,10 +85,6 @@ public class Parser {
         if (input.isEmpty() || input.equals(" ")) {
             throw new ParseException("OOPS!!! The description of a todo cannot be empty.\n");
         }
-        if (input.charAt(0) == ' ') {
-            input = input.substring(1);
-        }
-        assert input.isEmpty() : false;
         return new ToDo(input);
     }
 
@@ -184,7 +184,7 @@ public class Parser {
      * @return a ToDo task.
      */
     public static ToDo parseForToDoInFile(String line) {
-        return new ToDo(line.substring(7));
+        return new ToDo(line.substring(PREFIX_LENGTH));
     }
 
     /**
@@ -195,8 +195,8 @@ public class Parser {
      */
     public static Task parseForDeadlineInFile(String line) {
         int endOfDescription = line.indexOf("by: ");
-        String description = line.substring(7, endOfDescription);
-        String deadline = line.substring(endOfDescription + 4, line.length() - 1);
+        String description = line.substring(PREFIX_LENGTH, endOfDescription - "(".length());
+        String deadline = line.substring(endOfDescription + "by: ".length(), line.length() - ")".length());
         LocalDate date = LocalDate.parse(deadline);
         return new Deadline(description, date);
     }
@@ -209,8 +209,8 @@ public class Parser {
      */
     public static Task parseForEventInFile(String line) {
         int endOfDescription = line.indexOf("at: ");
-        String description = line.substring(7, endOfDescription);
-        String time = line.substring(endOfDescription + 4, line.length() - 1);
+        String description = line.substring(PREFIX_LENGTH, endOfDescription - "(".length());
+        String time = line.substring(endOfDescription + "at: ".length(), line.length() - ")".length());
         LocalDate date = LocalDate.parse(time);
         return new Event(description, date);
     }
@@ -224,9 +224,9 @@ public class Parser {
     public static Task parseForPeriodInFile(String line) {
         int endOfDescription = line.indexOf("from: ");
         int endOfStartTime = line.indexOf("to: ");
-        String description = line.substring(7, endOfDescription - 2);
-        String startTime = line.substring(endOfDescription + 6, endOfStartTime - 1);
-        String endTime = line.substring(endOfStartTime + 4, line.length() - 1);
+        String description = line.substring(PREFIX_LENGTH, endOfDescription - "(".length());
+        String startTime = line.substring(endOfDescription + "from: ".length(), endOfStartTime - " ".length());
+        String endTime = line.substring(endOfStartTime + "to: ".length(), line.length() - ")".length());
         LocalDate startDate = LocalDate.parse(startTime);
         LocalDate endDate = LocalDate.parse(endTime);
         return new Period(description, startDate, endDate);
@@ -240,18 +240,18 @@ public class Parser {
      */
     public static Task parseInFile(String line) {
         Task task;
-        if (line.charAt(1) == 'T') {
+        if (line.charAt(INDEX_OF_IDENTIFICATION) == 'T') {
             task = parseForToDoInFile(line);
-        } else if (line.charAt(1) == 'D' && line.contains("by: ")) {
+        } else if (line.charAt(INDEX_OF_IDENTIFICATION) == 'D' && line.contains("by: ")) {
             task = parseForDeadlineInFile(line);
-        } else if (line.charAt(1) == 'E' && line.contains("at: ")) {
+        } else if (line.charAt(INDEX_OF_IDENTIFICATION) == 'E' && line.contains("at: ")) {
             task = parseForEventInFile(line);
-        } else if (line.charAt(1) == 'P' && line.contains("from: ") && line.contains("to: ")) {
+        } else if (line.charAt(INDEX_OF_IDENTIFICATION) == 'P' && line.contains("from: ") && line.contains("to: ")) {
             task = parseForPeriodInFile(line);
         } else {
             throw new ParseException("OOPS!!! It seems there is file corruption.\n");
         }
-        if (line.charAt(4) == 'X') {
+        if (line.charAt(INDEX_OF_COMPLETE_STATE) == 'X') {
             task.markedAsDone();
         }
         return task;

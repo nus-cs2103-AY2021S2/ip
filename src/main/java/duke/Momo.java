@@ -10,6 +10,7 @@ public class Momo {
 
     private final Storage storage;
     private TaskList tasks;
+    private String loadingMessage;
 
     /**
      * Creates a Momo with an original task list if file path exists.
@@ -17,13 +18,27 @@ public class Momo {
      *
      * @param filePath the path of the *.txt file including information of existing tasks.
      */
-    public Momo(String filePath) {
+    public Momo(String filePath) throws ParseException {
         storage = new Storage(filePath);
         try {
+            loadingMessage = TextUi.showLoadingSuccess();
             tasks = new TaskList(storage.loadTasks());
         } catch (ParseException | IOException e) {
+            if (e instanceof ParseException) {
+                loadingMessage = TextUi.showLoadingError();
+            } else {
+                loadingMessage = TextUi.showLoadingWithoutFile();
+            }
             tasks = new TaskList();
         }
+    }
+
+    /**
+     *
+     * @return the loading message.
+     */
+    public String getLoadingMessage() {
+        return this.loadingMessage;
     }
 
     /**
@@ -100,7 +115,7 @@ public class Momo {
             storage.save(tasks);
             return TextUi.showSuccessfulAdd(tasks, taskToBeAdded);
         } catch (ParseException e) {
-            return TextUi.formatInChatBox(e.getMsgDes());
+            return e.getMsgDes();
         } catch (DateTimeParseException e) {
             return TextUi.showDateParseError();
         }
