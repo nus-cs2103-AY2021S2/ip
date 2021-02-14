@@ -44,8 +44,8 @@ public class TodoCommand implements Command {
         }
         String taskName = fullCmd.substring(5); // remove "todo "
         TodoTask newTodoTask = new TodoTask(taskName);
-
         taskList.add(newTodoTask);
+
         storage.saveTaskList(taskList); // update saved task list
         return ui.returnAddToListMsg(newTodoTask, taskList);
     }

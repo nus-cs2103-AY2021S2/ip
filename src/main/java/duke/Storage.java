@@ -74,7 +74,7 @@ public class Storage {
             }
         } catch (IOException | DukeException e) { // cannot read file or contents of file do not follow format
             taskList.clear();
-            throw new DukeException(ui.corruptDataFileError());
+            throw new DukeException(ui.corruptFileDataError());
         }
     }
 
@@ -91,61 +91,116 @@ public class Storage {
         try {
             commandName = CommandName.valueOf(taskStringArr[0]);
         } catch (IllegalArgumentException e) {
-            throw new DukeException(ui.corruptDataFileError());
+            throw new DukeException(ui.corruptFileDataError());
         }
-        int taskStatus = -1;
-        LocalDateTime doneDate = null;
-        String taskName;
-        String taskDate;
-        Task taskToReturn = null;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         switch (commandName) {
         case TODO:
-            taskStatus = Integer.parseInt(taskStringArr[1]);
-            taskName = taskStringArr[2];
-            if (taskStringArr.length == 4) { // has a doneDate
-                try {
-                    doneDate = LocalDateTime.parse(taskStringArr[3], dtf);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException(ui.corruptDataFileError());
-                }
-                System.out.println("AAA");
-            }
-            taskToReturn = new TodoTask(taskName);
-            break;
+            return loadTodoFromFile(taskStringArr);
         case EVENT:
-            taskStatus = Integer.parseInt(taskStringArr[1]);
-            taskName = taskStringArr[2];
-            taskDate = taskStringArr[3];
-            try {
-                LocalDateTime ldtEvent = LocalDateTime.parse(taskDate, dtf);
-                taskToReturn = new EventTask(taskName, ldtEvent);
-                if (taskStringArr.length == 5) { // has a doneDate
-                    doneDate = LocalDateTime.parse(taskStringArr[4], dtf);
-                }
-            } catch (DateTimeParseException e) {
-                throw new DukeException(ui.corruptDataFileError());
-            }
-            break;
+            return loadEventFromFile(taskStringArr);
         case DEADLINE:
-            taskStatus = Integer.parseInt(taskStringArr[1]);
-            taskName = taskStringArr[2];
-            taskDate = taskStringArr[3];
-            try {
-                LocalDateTime ldtDeadline = LocalDateTime.parse(taskDate, dtf);
-                taskToReturn = new DeadlineTask(taskName, ldtDeadline);
-                if (taskStringArr.length == 5) { // has a doneDate
-                    doneDate = LocalDateTime.parse(taskStringArr[4], dtf);
-                }
-            } catch (DateTimeParseException e) {
-                throw new DukeException(ui.corruptDataFileError());
-            }
-            break;
+            return loadDeadlineFromFile(taskStringArr);
         default:
-            throw new DukeException(ui.corruptDataFileError());
+            throw new DukeException(ui.corruptFileDataError());
         }
-        if (taskStatus == -1 || taskToReturn == null) {
-            throw new DukeException(ui.corruptDataFileError());
+    }
+
+    private Task loadDeadlineFromFile(String[] taskStringArr) throws DukeException {
+        int taskStatus = -1;
+        LocalDateTime doneDate = null;
+        String taskName = taskStringArr[2];
+        String taskDate = taskStringArr[3];;
+        Task taskToReturn;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+        try {
+            taskStatus = Integer.parseInt(taskStringArr[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(ui.corruptFileDataError());
+        }
+
+        try {
+            LocalDateTime ldtDeadline = LocalDateTime.parse(taskDate, dtf);
+            taskToReturn = new DeadlineTask(taskName, ldtDeadline);
+            if (taskStringArr.length == 5) { // has a doneDate
+                doneDate = LocalDateTime.parse(taskStringArr[4], dtf);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException(ui.corruptFileDataError());
+        }
+
+        boolean isCommandFormatError = taskStatus == -1 || taskStatus > 1
+                || taskToReturn == null || taskStringArr.length > 5;
+        if (isCommandFormatError) {
+            throw new DukeException(ui.corruptFileDataError());
+        }
+        if (taskStatus == 1) {
+            assert doneDate != null : "Done Date cannot be null";
+            taskToReturn.markDonePast(doneDate);
+        }
+        return taskToReturn;
+    }
+
+    private Task loadEventFromFile(String[] taskStringArr) throws DukeException {
+        int taskStatus = -1;
+        LocalDateTime doneDate = null;
+        String taskName = taskStringArr[2];;
+        String taskDate = taskStringArr[3];;
+        Task taskToReturn;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
+        try {
+            taskStatus = Integer.parseInt(taskStringArr[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(ui.corruptFileDataError());
+        }
+
+        try {
+            LocalDateTime ldtEvent = LocalDateTime.parse(taskDate, dtf);
+            taskToReturn = new EventTask(taskName, ldtEvent);
+            if (taskStringArr.length == 5) { // has a doneDate
+                doneDate = LocalDateTime.parse(taskStringArr[4], dtf);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException(ui.corruptFileDataError());
+        }
+
+        boolean isCommandFormatError = taskStatus == -1 || taskStatus > 1
+                || taskToReturn == null || taskStringArr.length > 5;
+        if (isCommandFormatError) {
+            throw new DukeException(ui.corruptFileDataError());
+        }
+        if (taskStatus == 1) {
+            assert doneDate != null : "Done Date cannot be null";
+            taskToReturn.markDonePast(doneDate);
+        }
+        return taskToReturn;
+    }
+
+    private Task loadTodoFromFile(String[] taskStringArr) throws DukeException {
+        int taskStatus = -1;
+        LocalDateTime doneDate = null;
+        Task taskToReturn;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        try {
+            taskStatus = Integer.parseInt(taskStringArr[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(ui.corruptFileDataError());
+        }
+        String taskName = taskStringArr[2];
+        if (taskStringArr.length == 4) { // has a doneDate
+            try {
+                doneDate = LocalDateTime.parse(taskStringArr[3], dtf);
+            } catch (DateTimeParseException e) {
+                throw new DukeException(ui.corruptFileDataError());
+            }
+        }
+        taskToReturn = new TodoTask(taskName);
+
+        boolean isCommandFormatError = taskStatus == -1 || taskStatus > 1
+                || taskStringArr.length > 4;
+        if (isCommandFormatError) {
+            throw new DukeException(ui.corruptFileDataError());
         }
         if (taskStatus == 1) {
             assert doneDate != null : "Done Date cannot be null";

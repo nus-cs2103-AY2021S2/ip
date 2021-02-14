@@ -39,36 +39,26 @@ public class Parser {
         }
         switch(cmd) {
         case LIST:
-            toRun = new ListCommand(fullCmd, ui);
-            break;
+            return new ListCommand(fullCmd, ui);
         case DONE:
-            toRun = new DoneCommand(fullCmd, ui);
-            break;
+            return new DoneCommand(fullCmd, ui);
         case TODO:
-            toRun = new TodoCommand(fullCmd, ui);
-            break;
+            return new TodoCommand(fullCmd, ui);
         case EVENT:
-            toRun = new EventCommand(fullCmd, ui);
-            break;
+            return new EventCommand(fullCmd, ui);
         case DEADLINE:
-            toRun = new DeadlineCommand(fullCmd, ui);
-            break;
+            return new DeadlineCommand(fullCmd, ui);
         case DELETE:
-            toRun = new DeleteCommand(fullCmd, ui);
-            break;
+            return new DeleteCommand(fullCmd, ui);
         case FIND:
-            toRun = new FindCommand(fullCmd, ui);
-            break;
+            return new FindCommand(fullCmd, ui);
         case STATS:
-            toRun = new StatsCommand(fullCmd, ui);
-            break;
+            return new StatsCommand(fullCmd, ui);
         case BYE:
-            toRun = new ByeCommand(fullCmd, ui);
-            break;
+            return new ByeCommand(fullCmd, ui);
         default:
             throw new DukeException(ui.invalidCmdError());
         }
-        return toRun;
     }
 
     /**

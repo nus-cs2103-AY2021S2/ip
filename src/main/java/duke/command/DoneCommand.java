@@ -56,6 +56,7 @@ public class DoneCommand implements Command {
         }
         Task doneTask = taskList.getIndex(taskIndex);
         doneTask.markDone();
+
         storage.saveTaskList(taskList);
         return ui.returnDoneMsg(doneTask);
     }

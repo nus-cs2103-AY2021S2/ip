@@ -54,6 +54,7 @@ public class EventCommand implements Command {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime ldt = LocalDateTime.parse(eTaskDate, dtf);
             EventTask newEventTask = new EventTask(eTaskName, ldt);
+
             taskList.add(newEventTask);
             storage.saveTaskList(taskList);
             return ui.returnAddToListMsg(newEventTask, taskList);

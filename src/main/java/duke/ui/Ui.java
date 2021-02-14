@@ -35,8 +35,8 @@ public class Ui {
      *
      * @return String containing error message of reading from saved data file.
      */
-    public String corruptDataFileError() {
-        return "Save data file corrupted";
+    public String corruptFileDataError() {
+        return "Saved data file corrupted";
     }
 
     /**
@@ -95,7 +95,7 @@ public class Ui {
     public String eventFormatError() {
         return "Invalid format. Please enter as such:"
                 + "\n"
-                + "event <EVENT_NAME> /at <DATE_TIME>";
+                + "event EVENT_NAME /at YYYY-MM-DD hhmm";
     }
 
     /**
@@ -115,7 +115,7 @@ public class Ui {
     public String deadlineFormatError() {
         return "Invalid format. Please enter as such:"
                 + "\n"
-                + "deadline <TASK_NAME> /by <DATE_TIME>";
+                + "deadline TASK_NAME /by YYYY-MM-DD hhmm";
     }
 
     /**
@@ -146,7 +146,7 @@ public class Ui {
      * @return String containing error message of invalid delete command.
      */
     public String deleteCmdNoArgsError() {
-        return "Sorry human, please enter a task number to delete";
+        return "Sorry human, please enter a task number to delete.";
     }
 
     /**
@@ -235,7 +235,6 @@ public class Ui {
                 + "Now you have " + taskList.getSize()
                 + (taskList.getSize() == 1 ? " task " : " tasks ") + "in your list." + "\n";
     }
-
 
     /**
      * Returns the stats message.

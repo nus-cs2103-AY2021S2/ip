@@ -56,6 +56,7 @@ public class DeleteCommand implements Command {
         }
         Task deletedTask = taskList.getIndex(taskIndex);
         taskList.removeIndex(taskIndex);
+
         storage.saveTaskList(taskList);
         return ui.returnDeletedMsg(deletedTask, taskList);
     }
