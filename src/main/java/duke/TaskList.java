@@ -14,9 +14,9 @@ public class TaskList {
      */
     public static List<Task> find(String keyWord){
         List<Task> foundTasks = new ArrayList<>();
-        for(Task t : taskList){
-            if(t.description.contains(keyWord)){
-                foundTasks.add(t);
+        for(Task task : taskList){
+            if(task.description.contains(keyWord)){
+                foundTasks.add(task);
             }
         }
         return foundTasks;
