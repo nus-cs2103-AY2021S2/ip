@@ -1,5 +1,3 @@
-package main.java;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -21,8 +19,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private MisterDuke duke;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("images/DaUser.png")); //file
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("images/DaDuke.png")); //file
+    private Image userImage = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
 
     @FXML
     public void initialize() {

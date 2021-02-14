@@ -1,4 +1,4 @@
-# User Guide
+# User Guide to Mister Duke
 
 ## Features 
 
