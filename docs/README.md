@@ -1,5 +1,5 @@
 # User Guide
-A simple and *definitely non-sarcastic* guide to **Duwuke**, your friendly neighbourhood chatbot. :flushed:
+A simple and *definitely non-sarcastic* guide to **Duwuke**, your friendly neighbourhood chatbot.
 ## Features 
 
 ### Friendly
