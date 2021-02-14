@@ -30,11 +30,6 @@ public class Ui {
         this.printWithSpace(""); //blank space
     }
 
-    // Good bye message before duke terminates
-    public void goodByeMessage() {
-        this.printWithSpace("Bye. Hope to see you again soon!");
-    }
-
     // General error message for the user
     public void printUnreadableError() {
         this.printWithSpace("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -73,7 +68,7 @@ public class Ui {
      * @param taskIndex Index of the task this message is for.
      */
     public void printTaskSuccess(TaskList taskList, int taskIndex) {
-        this.printWithSpace("\"Nice! I've marked this task as done: "
+        this.printWithSpace("Nice! I've marked this task as done: "
             + "  \n " + taskList.getTask(taskIndex - 1).toString());
     }
 
