@@ -51,32 +51,32 @@ public class Storage {
         return tasks;
     }
 
-    public void save(TaskList tasks) {
-        ArrayList<Task> store = tasks.getList();
+    public void save(TaskList taskList) {
+        ArrayList<Task> tasks = taskList.getList();
         try {
             FileWriter fw = new FileWriter(this.filePath);
-            for (Task task : store) {
-                String rmb = "";
+            for (Task task : tasks) {
+                String taskToSave = "";
                 if (task instanceof Event) {
-                    rmb += "E";
+                    taskToSave += "E";
                 } else if (task instanceof Deadline) {
-                    rmb += "D";
+                    taskToSave += "D";
                 } else if (task instanceof Todo) {
-                    rmb += "T";
+                    taskToSave += "T";
                 }
-                rmb += " | ";
+                taskToSave += " | ";
                 if (task.isCompleted()) {
-                    rmb += "1";
+                    taskToSave += "1";
                 } else {
-                    rmb += "0";
+                    taskToSave += "0";
                 }
-                rmb += " | ";
-                rmb += task.getDescription();
+                taskToSave += " | ";
+                taskToSave += task.getDescription();
                 if (task instanceof DueDate) {
-                    rmb += " | ";
-                    rmb += ((DueDate) task).getDueDate();
+                    taskToSave += " | ";
+                    taskToSave += ((DueDate) task).getDueDate();
                 }
-                fw.write(rmb + "\n");
+                fw.write(taskToSave + "\n");
             }
             fw.close();
         } catch (IOException e) {
