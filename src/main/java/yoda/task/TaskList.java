@@ -93,6 +93,7 @@ public class TaskList implements Serializable {
      * @return TaskList containing tasks of the type requested or tasks with the
      * keyword requested.
      */
+    //Used streams and lambdas here!
     public TaskList filterByTask(String type) {
         if (type.equals("ToDo")) {
             return new TaskList(tasks
