@@ -46,6 +46,8 @@ public class Deadline extends Task {
         return by;
     }
     /**
+     * Compare Deadlines.
+     *
      * @param task
      * @return
      */

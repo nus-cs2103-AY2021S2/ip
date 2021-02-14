@@ -43,6 +43,8 @@ public class Event extends Task {
     }
 
     /**
+     * Compare Events.
+     *
      * @param task
      * @return
      */
