@@ -1,13 +1,21 @@
 package classes;
 
-import command.*;
+import command.ByeCmd;
+import command.Command;
+import command.DeadlineCmd;
+import command.DeleteCmd;
+import command.DoWithinCmd;
+import command.DoneCmd;
+import command.EventCmd;
+import command.FindCmd;
+import command.ListCmd;
+import command.ToDoCmd;
 
 
 /**
  * Parser class to deal with making sense of the user command.
  */
 public class Parser {
-    private static String[] command = {"list", "bye", "todo", "deadline", "event", "done", "delete", "find", "doWithin"};
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
