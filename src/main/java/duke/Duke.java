@@ -11,17 +11,30 @@ import duke.command.CommandResult;
  */
 
 public class Duke {
+
+    private final static String STORAGE_DIRECTORY_PATH = "data";
+    private final static String STORAGE_FILE_PATH = "data/duke.txt";
+    private final static String STORAGE_INITIALIZATION_ERROR_MESSAGE = "Cannot Crete file duke.txt";
+
     private static Storage storage;
     private TaskList tasks;
     private Ui ui;
     private boolean isExit = false;
 
+
     Duke() {
-        this.storage = initializeStorage();
         this.ui = new Ui();
+        try {
+            this.storage = initializeStorage();
+        } catch (IOException e) {
+            // cannot create the Storage
+            e.printStackTrace();
+            throw new RuntimeException(STORAGE_INITIALIZATION_ERROR_MESSAGE);
+        }
         try {
             tasks = new TaskList(storage.loadStorage());
         } catch (DukeStorageException | DukeParseException err) {
+            // resets the tracking of the number of tasks.
             err.printStackTrace();
             System.out.println(err.getMessage());
             tasks = new TaskList();
@@ -30,20 +43,24 @@ public class Duke {
 
 
 
-    private Storage initializeStorage() {
-        File directory = new File("data"); // Check if directory exists.
+    private Storage initializeStorage() throws IOException {
+        createStorageDirectoryIfNotExist();
+        createStorageFileIfNotExist();
+        return new Storage("data/duke.txt");
+    }
+
+    private void createStorageFileIfNotExist() throws IOException {
+        File f = new File(STORAGE_FILE_PATH);
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+    }
+
+    private void createStorageDirectoryIfNotExist() {
+        File directory = new File(STORAGE_DIRECTORY_PATH);
         if (!directory.exists()) {
             directory.mkdir();
         }
-        File f = new File("data/duke.txt");
-        if (!f.exists()) {
-            try {
-                f.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return new Storage("data/duke.txt");
     }
 
     public String start(){
@@ -52,8 +69,8 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            Parser parser = new Parser(input);
-            Command command = parser.parseCommand();
+            CommandParser commandParser = new CommandParser(input);
+            Command command = commandParser.parseCommand();
             CommandResult commandResult = command.execute(ui, tasks, storage);
             this.isExit = commandResult.getIsExit();
             return commandResult.getMessageToDisplay();
@@ -61,7 +78,9 @@ public class Duke {
         } catch (DukeParseException e) {
             return "OOPS!!! " + e.getMessage();
         } catch (DukeStorageException e) {
-            return  e.getMessage();
+            // error saving and loading to database.
+            e.printStackTrace();
+            throw new  RuntimeException(e.getMessage());
         }
     }
 

@@ -14,8 +14,10 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private static final String WRITE_FILE_EXCEPTION_MESSAGE = "Unable to write to file! Check duke/data.txt file.";
-    private static final String READ_FILE_EXCEPTION_MESSAGE = "Unable to read the file! Check duke/data.txt";
+    private static final String WRITE_FILE_EXCEPTION_MESSAGE =
+            "Unable to write to file! Check duke/data.txt file.";
+    private static final String READ_FILE_EXCEPTION_MESSAGE =
+            "Unable to read the duke/data.txt because it cant be found." ;
 
     private String filePath;
 
@@ -50,11 +52,11 @@ public class Storage {
      */
 
     public List<Task> loadStorage() throws DukeStorageException, DukeParseException{
-        List<Task> savedListOfTasks = new ArrayList<>();
         Scanner scanner = getScannerToReadFile();
+        List<Task> savedListOfTasks = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            Task t = Parser.parseTaskFromStoredFormat(line);
+            Task t = StorageParser.parseTaskFromStorageFormat(line);
             savedListOfTasks.add(t);
         }
         return savedListOfTasks;
@@ -85,7 +87,7 @@ public class Storage {
     public void writeTasksToFile(TaskList listOfTasks) throws DukeStorageException {
         try (FileWriter fileWriter = new FileWriter(filePath, true)) {
             for (Task t : listOfTasks) {
-                fileWriter.write(t.getSavedStringFormat() + "\n");
+                fileWriter.write(StorageParser.convertTaskToStorageFormat(t) + "\n");
             }
         } catch( IOException e) {
             e.printStackTrace();
