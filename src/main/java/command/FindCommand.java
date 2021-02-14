@@ -22,11 +22,12 @@ public class FindCommand extends Command {
 
     public static FindCommand fromCommandMap(HashMap<String, List<String>> commandMap)
             throws DukeException {
-        if (!commandMap.containsKey(COMMAND_STRING)) {
+        List<String> keywords = commandMap.get(COMMAND_STRING);
+
+        if (keywords.isEmpty()) {
             throw new DukeException("Please include at least one keyword.");
         }
 
-        List<String> keywords = commandMap.get(COMMAND_STRING);
         return new FindCommand(keywords);
     }
 
