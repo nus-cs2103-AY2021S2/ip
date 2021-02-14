@@ -82,11 +82,11 @@ public class Parser {
             if(details[0].toLowerCase().equals(Command.TODO.toString())){
                 TaskList.completeTask(new ToDo(details[1]));
                 return "Task marked complete!\n";
-            } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())){
+            } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())) {
                 String description = details[1].split("/", 2)[0];
                 TaskList.completeTask(new Deadline(description, new Date()));
                 return "Task marked complete!\n";
-            } else if (details[0].toLowerCase().equals(Command.EVENT.toString())){
+            } else if (details[0].toLowerCase().equals(Command.EVENT.toString())) {
                 String description = details[1].split("/", 2)[0];
                 TaskList.completeTask(new Event(description, new Date(), new Date()));
                 return "Task marked complete!\n";
