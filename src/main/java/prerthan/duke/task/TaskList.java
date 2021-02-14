@@ -3,7 +3,6 @@ package prerthan.duke.task;
 import prerthan.duke.Duke;
 import prerthan.duke.io.Output;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +30,7 @@ public class TaskList {
      *
      * @param task A task to be added to the list.
      * @return {@code true} if task was successfully added (as specified by
-     * )
-     * @throws IOException
+     * {@link ArrayList#add(Object)})
      */
     public boolean addTask(Task task) {
         // Was the task successfully added to the list?

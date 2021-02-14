@@ -1,8 +1,8 @@
 package prerthan.duke.task;
 
-import prerthan.duke.exception.DukeInvalidDateTimeException;
-import prerthan.duke.parse.DateParser;
 import prerthan.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.parse.DateParser;
+import prerthan.duke.exception.DukeInvalidDateTimeException;
 
 import java.time.ZonedDateTime;
 
@@ -13,6 +13,8 @@ public class Deadline extends Task {
     private ZonedDateTime by;
 
     /**
+     * Creates a new {@link Deadline} with the provided {@code detail}, {@code isComplete} and
+     *
      * @param detail
      * @param by
      * @throws DukeEmptyDetailException
@@ -21,6 +23,7 @@ public class Deadline extends Task {
         throws DukeEmptyDetailException {
         super(detail, isComplete);
         this.by = by;
+        assert this.detail != null || this.by != null || !this.isComplete;
     }
 
     /**
@@ -48,6 +51,6 @@ public class Deadline extends Task {
     @Override public String encode() {
         return String
             .format("%c,%d,%s,%s", this.getTaskTypeIcon(), this.isComplete ? 1 : 0, this.detail,
-                    DateParser.formatZonedDateTime(this.by));
+                    DateParser.encodeZonedDateTime(this.by));
     }
 }

@@ -1,10 +1,10 @@
 package prerthan.duke.command;
 
-import prerthan.duke.exception.DukeInvalidArgumentException;
 import prerthan.duke.Duke;
-import prerthan.duke.io.Output;
+import prerthan.duke.exception.DukeInvalidArgumentException;
 import prerthan.duke.io.Storage;
 import prerthan.duke.task.TaskList;
+import prerthan.duke.io.Output;
 
 /**
  * ByeCommand
@@ -21,7 +21,7 @@ public class ByeCommand extends Command {
     }
 
     @Override public void execute(TaskList tasks, Storage storage, Output output) {
-        Duke.exit();
+        Duke.output.sayGoodBye();
     }
 
     @Override public boolean willTerminate() {

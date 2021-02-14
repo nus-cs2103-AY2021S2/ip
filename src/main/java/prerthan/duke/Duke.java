@@ -1,11 +1,11 @@
 package prerthan.duke;
 
 import javafx.application.Platform;
-import prerthan.duke.exception.DukeInvalidArgumentException;
-import prerthan.duke.exception.DukeInvalidDateTimeException;
-import prerthan.duke.command.Command;
 import prerthan.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.exception.DukeInvalidArgumentException;
+import prerthan.duke.command.Command;
 import prerthan.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.exception.DukeInvalidDateTimeException;
 import prerthan.duke.io.Input;
 import prerthan.duke.io.Output;
 import prerthan.duke.io.Storage;
@@ -79,8 +79,7 @@ public class Duke {
         }
     }
 
-    public String getResponse(String input) {
-
-        return input;
+    public void getResponse(String input) {
+        
     }
 }

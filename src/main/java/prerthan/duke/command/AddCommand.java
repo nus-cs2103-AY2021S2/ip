@@ -2,18 +2,17 @@ package prerthan.duke.command;
 
 import prerthan.duke.exception.DukeEmptyDetailException;
 import prerthan.duke.exception.DukeInvalidDateTimeException;
-import prerthan.duke.io.Output;
 import prerthan.duke.io.Storage;
 import prerthan.duke.task.Deadline;
-import prerthan.duke.task.Event;
 import prerthan.duke.task.TaskList;
 import prerthan.duke.task.Todo;
+import prerthan.duke.io.Output;
+import prerthan.duke.task.Event;
 
 /**
  * AddCommand
  */
 public class AddCommand extends Command {
-    private CommandName commandName;
 
     public AddCommand(String detail, CommandName commandName) {
         super(detail);

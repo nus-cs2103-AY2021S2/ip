@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import prerthan.duke.ui.MainWindow;
 
 import java.io.IOException;
-//
+
 /**
  * Main
  */

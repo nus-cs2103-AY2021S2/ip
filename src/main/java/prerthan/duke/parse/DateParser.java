@@ -12,7 +12,8 @@ import java.util.Locale;
 import java.util.Optional;
 
 /**
- * A utility class to parse {@link String}s into {@link ZonedDateTime} objects, and format
+ * A utility class to parse {@link String}s into {@link ZonedDateTime} objects,
+ * and format
  * vice-versa, useable by the Duke program.
  */
 public final class DateParser {
@@ -39,25 +40,30 @@ public final class DateParser {
     private static final ZonedDateTime now = ZonedDateTime.now();
 
     /**
-     * Returns a {@link ZonedDateTime} after parsing {@code dateTimeString}.
+     * Returns a {@link ZonedDateTime} after parsing
+     * {@code dateTimeString}.
      *
      * @param dateTimeString the {@link String} to be parsed
      * @return the date-time object after parsing the string
-     * @throws DukeInvalidDateTimeException if {@code dateTimeString} cannot be parsed
+     * @throws DukeInvalidDateTimeException if {@code dateTimeString} cannot be
+     *                                      parsed
      */
     public static ZonedDateTime parseDateTimeString(String dateTimeString)
         throws DukeInvalidDateTimeException {
-        ZonedDateTime returnable = now;
+        Optional<ZonedDateTime> returnable = Optional.empty();
 
         for (DateTimeFormatter formatter : FORMATTERS) {
-            returnable = parseStringWithFormatter(dateTimeString, formatter);
+            returnable = parseStringWithFormatter(dateTimeString, formatter, returnable);
         }
-        return returnable;
+        return returnable.orElseThrow(
+            () -> new DukeInvalidDateTimeException(DateParser.class.getName(), dateTimeString));
     }
 
     /**
-     * Returns a {@link String} from the provided {@code dateTimeGroup}, as specified by a
-     * formatter in this class. The formatter is provided with the pattern: {@code "EEEE dd MMMM
+     * Returns a {@link String} from the provided {@code dateTimeGroup}, as
+     * specified by a
+     * formatter in this class. The formatter is provided with the pattern:
+     * {@code "EEEE dd MMMM
      * YYYY hh:mm a v"}.
      *
      * @param dateTimeGroup the {@link ZonedDateTime} to be formatted
@@ -68,33 +74,35 @@ public final class DateParser {
     }
 
     /**
-     * @param dateTimeGroup
-     * @return
+     * Returns an encoded {@link String} to be written to the data file, by
+     * formatting {@code dateTimeGroup}.
+     *
+     * @param dateTimeGroup The {@link ZonedDateTime} date-time-group to be
+     *                      formatted
+     * @return The formatted string
      */
     public static String encodeZonedDateTime(ZonedDateTime dateTimeGroup) {
         return DateTimeFormatter.ISO_INSTANT.format(dateTimeGroup);
     }
 
     /**
-     * @param encoded
-     * @return
+     * Returns a decoded {@link ZonedDateTime} from the given {@link String}
+     * {@code input}, using the {@link DateTimeFormatter#ISO_INSTANT} parser.
+     *
+     * @param encoded A previously-encoded {@link String}, usually from the data
+     *                file
+     * @return the {@link ZonedDateTime} instant corresponding to the parsed string
      */
     public static ZonedDateTime decodeString(String encoded) {
-        return DateTimeFormatter.ISO_INSTANT.parse(encoded, ZonedDateTime::from);
+        return DateTimeFormatter.ISO_ZONED_DATE_TIME.parse(encoded, ZonedDateTime::from);
     }
 
-    /**
-     * @param string
-     * @param formatter
-     * @return
-     * @throws DukeInvalidDateTimeException
-     */
-    private static ZonedDateTime parseStringWithFormatter(String string,
-                                                          DateTimeFormatter formatter)
+    private static Optional<ZonedDateTime> parseStringWithFormatter(String string,
+                                                                    DateTimeFormatter formatter,
+                                                                    Optional<ZonedDateTime> possibleZDT)
         throws DukeInvalidDateTimeException {
         Optional<TemporalAccessor> possiblyParsed;
 
-        ZonedDateTime returnable = ZonedDateTime.ofInstant(now.toInstant(), now.getZone());
         try {
             possiblyParsed = Optional.of(formatter.parse(string));
         }
@@ -102,12 +110,16 @@ public final class DateParser {
             possiblyParsed = Optional.empty();
         }
         if (possiblyParsed.isPresent()) {
+            ZonedDateTime returnable = possibleZDT.orElse(now);
             TemporalAccessor parsed = possiblyParsed.get();
             for (TemporalField field : formatter.getResolverFields()) {
                 returnable = returnable
                     .with(field, parsed.isSupported(field) ? parsed.get(field) : now.get(field));
             }
+            return Optional.of(returnable);
+        } else {
+            return possibleZDT;
         }
-        return returnable;
+
     }
 }
