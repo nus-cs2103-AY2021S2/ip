@@ -163,7 +163,15 @@ public class Parser {
         }
 
         try {
-            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd MM yyyy"));
+            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return time;
+        } catch (DateTimeParseException ignored) {
+            assert true;
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd MMM yyyy"));
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {
@@ -179,23 +187,7 @@ public class Parser {
         }
 
         try {
-            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd MM yyyy"));
-            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            return time;
-        } catch (DateTimeParseException ignored) {
-            assert true;
-        }
-
-        try {
             LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("MMM dd yyyy"));
-            time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            return time;
-        } catch (DateTimeParseException ignored) {
-            assert true;
-        }
-
-        try {
-            LocalDate date = LocalDate.parse(info, DateTimeFormatter.ofPattern("dd MMM yyyy"));
             time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             return time;
         } catch (DateTimeParseException ignored) {

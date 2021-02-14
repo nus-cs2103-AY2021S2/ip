@@ -7,10 +7,14 @@ import java.util.Scanner;
 
 public class Storage {
 
-    protected String filepath;
+    private final String filepath = "./data/Duke.txt";
+    private final File file;
 
+    /**
+     * Constructor to create a storage.
+     */
     public Storage() {
-        filepath = "Duke.txt";
+        this.file = new File(filepath);
     }
 
     /**
@@ -53,14 +57,21 @@ public class Storage {
      * @throws DukeException if file not found or corrupted.
      */
     public ArrayList<Task> load(Statistics stat) throws DukeException {
-        File file;
+        try {
+            if (!this.file.exists()) {
+                file.getParentFile().mkdir();
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            throw new DukeException("OOPS!!! There is an error in creating the file.");
+        }
+
         Scanner scan;
 
         try {
-            file = new File(filepath);
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            throw new DukeException("There is no Duke.txt file currently.");
+            throw new DukeException("OOPS!!! There is no Duke.txt file.");
         }
 
         ArrayList<Task> list = new ArrayList<>();

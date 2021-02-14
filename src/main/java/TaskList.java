@@ -100,6 +100,7 @@ public class TaskList {
                 response = response + num++ + "." + string + "\n";
             }
         }
+
         return response;
     }
 
@@ -119,6 +120,7 @@ public class TaskList {
                 response = response + num++ + "." + string + "\n";
             }
         }
+
         return response;
     }
 

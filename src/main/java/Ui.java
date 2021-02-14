@@ -73,7 +73,11 @@ public class Ui {
      * Response when user want to find tasks.
      */
     public void showFind(String list) {
-        response = "Here are the matching tasks in your list:\n" + list;
+        if (list.equals("")) {
+            response = "There are no matching task in your list";
+        } else {
+            response = "Here are the matching tasks in your list:\n" + list;
+        }
     }
 
     /**
@@ -82,7 +86,11 @@ public class Ui {
      * @param time date.
      */
     public void showDate(String time, String list) {
-        response = "Here are the tasks occurring on " + time + " in your list:\n" + list;
+        if (list.equals("")) {
+            response = "There are no matching task in your list";
+        } else {
+            response = "Here are the tasks occurring on " + time + " in your list:\n" + list;
+        }
     }
 
     /**
