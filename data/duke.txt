@@ -1,5 +1,3 @@
-T | 1 | lunch
-D | 0 | lunch | 2020-09-03
-T | 1 | gametheory assignment
-T | 1 | GAMETHEORY
 D | 0 | Financial Aid Submission | 2021-03-01 (FIRST MARCH)
+E | 1 | starbucks | NUS ( 2021-02-17)
+T | 0 | touch up on CSS for CS2103 project

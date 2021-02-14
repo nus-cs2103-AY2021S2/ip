@@ -1,16 +1,14 @@
 package duke.command;
 
-import duke.DukeStorageException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 import java.io.IOException;
 
 public abstract class Command {
     protected boolean isExitAfterExecution = false;
 
-    public abstract CommandResult execute(Ui ui, TaskList tasks, Storage storage) throws DukeStorageException;
+    public abstract CommandResult execute(Ui ui, TaskList tasks, Storage storage)
+            throws DukeStorageException, DukeOutOfBoundsException;
 
 
 }

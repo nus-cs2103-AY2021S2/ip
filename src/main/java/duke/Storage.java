@@ -44,6 +44,11 @@ public class Storage {
         return scanner;
     }
 
+    public boolean isEmpty(String line) {
+        return line.equals("");
+    }
+
+
     /**
      * loads all the tasks from a file into a List.
      *
@@ -55,7 +60,10 @@ public class Storage {
         Scanner scanner = getScannerToReadFile();
         List<Task> savedListOfTasks = new ArrayList<>();
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+            String line = scanner.nextLine().trim();
+            if (isEmpty(line)) {
+                continue; //consume empty lines
+            }
             Task t = StorageParser.parseTaskFromStorageFormat(line);
             savedListOfTasks.add(t);
         }

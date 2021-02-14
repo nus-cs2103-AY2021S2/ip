@@ -13,7 +13,8 @@ public class AddCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) throws DukeStorageException{
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage)
+            throws DukeStorageException{
         tasks.add(taskToBeAdded);
         storage.saveTasks(tasks);
         String addMessage = ui.generateAddMessage(taskToBeAdded, tasks);

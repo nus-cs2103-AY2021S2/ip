@@ -11,6 +11,10 @@ import java.util.List;
 
 public class TaskList implements Iterable<Task> {
 
+    private final static String OUT_OF_BOUNDS_ERROR_MESSAGE =
+            "Sorry, the index is out of Range ." +
+            "Try to specify a number from 1 to (the size of the list) ";
+
     private List<Task> listOfTasks;
 
     /**
@@ -44,7 +48,7 @@ public class TaskList implements Iterable<Task> {
      * @param indexToDelete ( 1 -based indexing ) the index of the Task to delete.
      * @return Task that was deleted.
      */
-    public Task pop(int indexToDelete) {
+    public Task pop(int indexToDelete) throws DukeOutOfBoundsException {
         assert indexToDelete > 0;
         Task taskToReturn = get(indexToDelete);
         listOfTasks.remove(indexToDelete - 1);
@@ -58,7 +62,11 @@ public class TaskList implements Iterable<Task> {
      * @return a task at the index specified.
      */
 
-    public Task get(int index) {
+    public Task get(int index) throws DukeOutOfBoundsException {
+        boolean isOutOfBounds = (index < 1) || (index > listOfTasks.size());
+        if (isOutOfBounds) {
+            throw new DukeOutOfBoundsException(OUT_OF_BOUNDS_ERROR_MESSAGE);
+        }
         return listOfTasks.get(index - 1);
     }
 
@@ -69,8 +77,7 @@ public class TaskList implements Iterable<Task> {
      * @return Task that is marked
      */
 
-    public void markTaskDone(int indexToMarkDone) {
-        assert indexToMarkDone > 0;
+    public void markTaskDone(int indexToMarkDone) throws DukeOutOfBoundsException {
         Task task = get(indexToMarkDone);
         task.markAsDone();
     }

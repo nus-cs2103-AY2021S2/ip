@@ -75,7 +75,7 @@ public class Duke {
             this.isExit = commandResult.getIsExit();
             return commandResult.getMessageToDisplay();
 
-        } catch (DukeParseException e) {
+        } catch (DukeParseException | DukeOutOfBoundsException e) {
             return "OOPS!!! " + e.getMessage();
         } catch (DukeStorageException e) {
             // error saving and loading to database.

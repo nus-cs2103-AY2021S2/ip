@@ -13,7 +13,8 @@ public class MarkTaskCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) throws DukeStorageException {
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage)
+            throws DukeStorageException,DukeOutOfBoundsException {
         tasks.markTaskDone(indexToMarkDone);
         Task doneTask = tasks.get(indexToMarkDone);
         storage.saveTasks(tasks);

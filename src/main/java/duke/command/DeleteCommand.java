@@ -13,7 +13,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) throws DukeStorageException {
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage)
+            throws DukeStorageException,DukeOutOfBoundsException {
         Task taskToDelete = tasks.pop(indexToDelete);
         storage.saveTasks(tasks);
         String deleteMessage = ui.generateDeleteMessage(taskToDelete,tasks);
