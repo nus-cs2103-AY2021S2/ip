@@ -9,6 +9,10 @@ import task.Event;
 import task.Todo;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 /**
  * Commands for adds (todo..., deadline..., event...)
@@ -43,7 +47,7 @@ public class AddCommand extends Command {
         case "event":
             String[] eventInfo = addString.split(" /at ");
             try {
-                LocalDate date = LocalDate.parse(eventInfo[1]);
+                Date date = parseTime(eventInfo[1]);
                 Event event = new Event(eventInfo[0], date);
                 tasks.add(event);
                 stringToReturn = ("added new event: " + event);
@@ -54,7 +58,7 @@ public class AddCommand extends Command {
         case "deadline":
             String[] deadlineInfo = addString.split(" /by ");
             try {
-                LocalDate date = LocalDate.parse(deadlineInfo[1]);
+                Date date = parseTime(deadlineInfo[1]);
                 Deadline deadline = new Deadline(deadlineInfo[0], date);
                 tasks.add(deadline);
                 stringToReturn = ("added new deadline: " + deadline);
@@ -65,6 +69,12 @@ public class AddCommand extends Command {
         }
         storage.saveFile(tasks);
         return stringToReturn;
+    }
+
+
+    private Date parseTime(String s) {
+        List<Date> dates = new PrettyTimeParser().parse(s);
+        return dates.get(0);
     }
 
 }
