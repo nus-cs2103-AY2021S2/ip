@@ -7,6 +7,7 @@ import surrealchat.exception.SurrealException;
 import surrealchat.task.DeadlineTask;
 import surrealchat.task.EventTask;
 import surrealchat.task.Task;
+import surrealchat.task.TaskCode;
 import surrealchat.task.TaskManagement;
 import surrealchat.task.TaskPriority;
 import surrealchat.task.ToDoTask;
@@ -188,7 +189,8 @@ public class EditCommand extends Command {
     }
 
     private static boolean isValidTaskType(String type) {
-        return (type == "T") || (type == "D") || (type == "E");
+        return (type == TaskCode.TODO_TYPE) || (
+                type == TaskCode.DEADLINE_TYPE) || (type == TaskCode.EVENT_TYPE);
     }
 
     private Task editTaskByType(Task task, String rawDescription) throws SurrealException {
@@ -196,11 +198,11 @@ public class EditCommand extends Command {
         assert EditCommand.isValidTaskType(taskType) : "Invalid task type. Not stonks\n";
 
         switch(taskType) {
-        case "T":
+        case TaskCode.TODO_TYPE:
             return editToDo((ToDoTask) task, rawDescription);
-        case "D":
+        case TaskCode.DEADLINE_TYPE:
             return editDeadline((DeadlineTask) task, rawDescription);
-        case "E":
+        case TaskCode.EVENT_TYPE:
             return editEvent((EventTask) task, rawDescription);
         default:
             throw new SurrealException("Somehow assert statement in editTaskByType was bypassed. Not stonks!\n");

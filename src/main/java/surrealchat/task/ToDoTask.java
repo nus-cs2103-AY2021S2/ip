@@ -5,7 +5,7 @@ package surrealchat.task;
  */
 public class ToDoTask extends Task {
     private ToDoTask(boolean isDone, String taskDescription, TaskPriority taskPriority) {
-        super("T", isDone, taskDescription, taskPriority);
+        super(TaskCode.TODO_TYPE, isDone, taskDescription, taskPriority);
     }
 
     /**

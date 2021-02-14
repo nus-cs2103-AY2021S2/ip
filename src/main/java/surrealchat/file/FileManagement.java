@@ -49,8 +49,8 @@ public class FileManagement {
         try {
             //Write the tasks to file
             FileWriter fw = new FileWriter(file);
-            for (int i = 0; i < fileTaskList.size(); i++) {
-                fw.write(String.format("%s\n", fileTaskList.get(i)));
+            for (String s : fileTaskList) {
+                fw.write(String.format("%s\n", s));
             }
             fw.close();
         } catch (IOException e) {

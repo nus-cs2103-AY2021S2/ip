@@ -9,7 +9,7 @@ public class DeadlineTask extends Task {
     private LocalDateTime deadline;
 
     private DeadlineTask(boolean isDone, String taskDescription, TaskPriority taskPriority, LocalDateTime deadline) {
-        super("D", isDone, taskDescription, taskPriority);
+        super(TaskCode.DEADLINE_TYPE, isDone, taskDescription, taskPriority);
         this.deadline = deadline;
     }
 

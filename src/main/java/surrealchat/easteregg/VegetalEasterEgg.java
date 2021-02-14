@@ -26,6 +26,6 @@ public class VegetalEasterEgg extends EasterEgg {
      * @return String describing the vegetal easteregg command.
      */
     public static String displayHelp() {
-        return "Gives a hilarious output. Try it out!.\n";
+        return "Gives a hilarious output about tasting vegetals. Try it out!.\n";
     }
 }

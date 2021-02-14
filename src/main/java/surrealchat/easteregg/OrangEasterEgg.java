@@ -27,6 +27,6 @@ public class OrangEasterEgg extends EasterEgg {
      * @return String describing the orang easteregg command.
      */
     public static String displayHelp() {
-        return "Gives a hilarious output. Try it out!.\n";
+        return "Gives a hilarious output regarding the nature of CS2103T. Try it out!.\n";
     }
 }

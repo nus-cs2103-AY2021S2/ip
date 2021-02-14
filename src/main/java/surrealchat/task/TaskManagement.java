@@ -14,9 +14,6 @@ import surrealchat.exception.SurrealException;
  * Handles storing of tasks and file loading/unloading operations.
  */
 public class TaskManagement {
-    protected static final String TODO_TYPE = "T";
-    protected static final String DEADLINE_TYPE = "D";
-    protected static final String EVENT_TYPE = "E";
     protected final List<Task> taskList; //Protect taskList from being changed to null.
 
     /**
@@ -105,11 +102,11 @@ public class TaskManagement {
     private String spellTaskType(String taskType) {
         assert taskType != null : "Somehow there was a null taskType. Not stonks!\n";
         switch(taskType) {
-        case TODO_TYPE:
+        case TaskCode.TODO_TYPE:
             return "todo";
-        case DEADLINE_TYPE:
+        case TaskCode.DEADLINE_TYPE:
             return "deadline";
-        case EVENT_TYPE:
+        case TaskCode.EVENT_TYPE:
             return "event";
         default:
             throw new InputMismatchException("The task type in task is invalid. Not Stonks!\n");
@@ -132,13 +129,13 @@ public class TaskManagement {
         assert taskType != null : "Somehow there was a null taskType. Not stonks!\n";
         assert description != null : "Somehow, description was empty. Not stonks!\n";
         switch(taskType) {
-        case TODO_TYPE:
+        case TaskCode.TODO_TYPE:
             addToDoFromFile(description, taskDone, taskPriority);
             return;
-        case DEADLINE_TYPE:
+        case TaskCode.DEADLINE_TYPE:
             addDeadlineFromFile(description, taskDone, taskPriority);
             return;
-        case EVENT_TYPE:
+        case TaskCode.EVENT_TYPE:
             addEventFromFile(description, taskDone, taskPriority);
             return;
         default:
@@ -163,9 +160,7 @@ public class TaskManagement {
      * @return String of tasks successfully loaded from files.
      */
     public String parseFileLines(List<String> fileLines) {
-        for (int i = 0; i < fileLines.size(); i++) {
-            parseTaskFromFile(fileLines.get(i));
-        }
+        fileLines.stream().forEach(t -> parseTaskFromFile(t));
         //Obtain list for printing
         List<Task> taskList = getTaskList();
         return printFileLoadOutput(taskList);

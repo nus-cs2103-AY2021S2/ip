@@ -9,7 +9,7 @@ public class EventTask extends Task {
     private LocalDateTime event;
 
     private EventTask(boolean isDone, String taskDescription, TaskPriority taskPriority, LocalDateTime event) {
-        super("E", isDone, taskDescription, taskPriority);
+        super(TaskCode.EVENT_TYPE, isDone, taskDescription, taskPriority);
         this.event = event;
     }
 

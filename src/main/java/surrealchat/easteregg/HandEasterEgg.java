@@ -24,6 +24,6 @@ public class HandEasterEgg extends EasterEgg {
      * @return String describing the icandoit or aikendueet easteregg command.
      */
     public static String displayHelp() {
-        return "Gives a hilarious output. Try it out!.\n";
+        return "Gives a hilarious output to achieve transcendence. Try it out!.\n";
     }
 }
