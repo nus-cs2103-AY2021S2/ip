@@ -1,26 +1,111 @@
-# Duke project template
+#Dude User Guide
+Dude is a simple and minimalistic todo manager that helps you organize your tasks.
+##Features
+list  
+todo  
+event  
+deadline  
+done  
+delete  
+find  
+bye
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+##List
+Display all tasks recorded
+#####Usage
+```$xslt
+list
+```
+Dude will display all tasks you have in detail(including event and deadline's timestamp, each task's done type) in a list form
+#####Tip
+This is one of the most powerful and useful command of Dude, it allows you to overview your task manager
 
-## Setting up in Intellij
+##Todo
+Add a simple task that is of Todo type, which has only task description
+#####Usage
+```$xslt
+todo <task description>
+```
+#####Example
+```$xslt
+todo grab milk from fairprice
+```  
+Dude will add todo task named ```grab milk from fairprice``` and mark it as not yet done by default
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+##Event
+Add an task that is of Event type, which contains task description and time for event
+#####Usage
+```$xslt
+event <task description> /<keyword> <time>
+```
+#####Example
+```$xslt
+event alice's birthday /on 2021-03-13
+```
+Dude will add event task named ```alice's birthday on 2021-03-13``` and mark it as not done yet by default
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+##Deadline
+Add an task that is of Deadline type, which contains task description and deadline for the task
+#####Usage
+```$xslt
+deadline <task description> /<keyword> <deadline>
+```
+#####Example
+```$xslt
+deadline submit cs2101 homework /by 2021-03-24
+```
+Dude will add deadline task named ```submit cs2101 homework by 2021-03-24``` and mark it as not done yet by default
+
+##Done
+Mark a task as done
+#####Usage
+```$xslt
+done <task id>
+```
+#####Example
+```$xslt
+done 3
+```
+Dude will mark the third task in list as done.
+#####Tip
+Done should be used in combination with list, list the tasks to view id first, then mark the particular task as done
+
+##Delete
+Delete a series of tasks
+#####Usage
+```$xslt
+delete <task ids separated by space, at least one id>
+```
+#####Example
+```$xslt
+delete 3 5 8
+```
+Dude will delete tasks which ids are 3, 5, 8 respectively from the list.
+#####Tip
+Delete should be used in combination with list as well
+
+##Find
+Search through the tasks to find tasks containing certain keyword
+#####Usage
+```$xslt
+find <keyword>
+```
+#####Example
+```$xslt
+find alice
+```
+Dude will return all tasks containing the string 'alice' in a list form
+#####Tip
+Watch out for capital letters
+
+##Bye
+Exit Dude
+#####Usage
+```$xslt
+bye
+```
+or
+```$xslt
+BYE
+```
+Dude will close with all its memory stored for the next time usage.

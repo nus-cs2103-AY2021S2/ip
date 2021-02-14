@@ -1,3 +1,7 @@
-E|1|get book|by|tmr
-E|0|create doc|by|tmr
-D|0|go home|by|tmr
+T|1|Grab boxes of milk from fairprice
+D|0|cs2102 Homework|by|2021-02-14
+E|0|alice's bd party|on|2021-03-13
+T|0|jone's room for a chat
+T|0|call parents
+D|0|CS4244 project|by|2021-03-14
+E|1|CNY celebration|on|2021-02-12

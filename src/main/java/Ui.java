@@ -18,8 +18,9 @@ public class Ui {
     static final String DISPLAY_ADDED = PREFIX + "Got it. I've added this task:";
     static final String DISPLAY_DONE = PREFIX + "Nice! I've mark this task as done:";
     static final String DISPLAY_REMOVE = PREFIX + "Noted, I've removed the following task(s):";
-    static final String GREETINGS = "Dear user, welcome to the world of duke!";
-    static final String LOGO = " ____        _        \n"
+    static final String GREETINGS = "Dear user, welcome to the world of Dude!";
+    static final String LOGO = "-_-DUDE is here-_-";
+    static final String PAST_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -37,7 +38,7 @@ public class Ui {
      * Show greetings display
      */
     public String greeting() {
-        return "This is \n" + LOGO + "\n" + GREETINGS;
+        return "\n" + LOGO + "\n" + GREETINGS;
     }
 
     /**
