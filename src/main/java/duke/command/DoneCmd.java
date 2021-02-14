@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -25,10 +24,6 @@ public class DoneCmd extends Command {
         assert lst != null : "TaskList parameter should not be null";
 
         int idx = Integer.parseInt(cmdArgs) - 1;
-        if (idx < 0 || idx >= lst.size()) {
-            throw new DukeException(String.format("Item no. %d cannot be found in list", idx + 1));
-        }
-
         Task t = lst.get(idx);
         t.markDone();
 

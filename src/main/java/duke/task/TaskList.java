@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import duke.exception.DukeException;
+
 /**
  * Represents the list where tasks are stored.
  */
@@ -18,6 +20,10 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> lst) {
         this.lst = lst;
+    }
+
+    private String getNotFoundErrorString(int index) {
+        return String.format("Item no. %d cannot be found in list", index + 1);
     }
 
     /**
@@ -45,6 +51,9 @@ public class TaskList {
      * @return the task at the specified position in this list
      */
     public Task get(int index) {
+        if (index < 0 || index >= lst.size()) {
+            throw new DukeException(getNotFoundErrorString(index));
+        }
         return lst.get(index);
     }
 
@@ -55,6 +64,9 @@ public class TaskList {
      * @return the task that was removed from this list
      */
     public Task remove(int index) {
+        if (index < 0 || index >= lst.size()) {
+            throw new DukeException(getNotFoundErrorString(index));
+        }
         return lst.remove(index);
     }
 

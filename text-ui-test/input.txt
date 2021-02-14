@@ -13,5 +13,6 @@ done 2
 done 99
 list
 delete 1
+delete 98
 list
 bye
