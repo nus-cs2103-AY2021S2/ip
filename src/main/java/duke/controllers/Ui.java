@@ -94,6 +94,24 @@ public class Ui {
                 } catch (Exception e) {
                     return Greeting.printErrorMessage(e);
                 }
+            case UPDATE:
+                // Update a task
+                try {
+                    // update the todo and get return from controller
+                    Pair<TaskList, Optional<? extends Todo>> updateTodoReturn =
+                            taskList.updateTodo(command.getCommandArgs());
+
+                    // replace taskList with new one from tasklist return
+                    taskList = updateTodoReturn.getFirst();
+
+                    // get todoUpdated to be printed
+                    Optional<? extends Todo> todoUpdated = updateTodoReturn.getSecond();
+
+                    // reply with the String output
+                    return TodosView.updateTodoReply(todoUpdated);
+                } catch (Exception e) {
+                    return Greeting.printErrorMessage(e);
+                }
             case DONE:
                 // mark a todo as done
                 try {
@@ -115,7 +133,7 @@ public class Ui {
             case DELETE:
                 // delete a todo from the list
                 try {
-                    // get responsee from tasklist for delete
+                    // get response from tasklist for delete
                     Pair<TaskList, Optional<? extends Todo>> deleteTodoReturn =
                             taskList.deleteTodo(command.getCommandArgs());
 

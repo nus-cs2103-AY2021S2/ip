@@ -68,4 +68,13 @@ public class Todo {
     public Todo markAsDone() {
         return new Todo(this.message, true);
     }
+
+    /**
+     * Update a todo with a new message, keeping it's isDone state
+     * @param newMessage String containing new message
+     * @return Todo updated with new message passed in
+     */
+    public Todo updateMessage(String newMessage) {
+        return new Todo(newMessage, isDone);
+    }
 }

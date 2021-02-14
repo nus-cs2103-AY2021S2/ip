@@ -12,10 +12,13 @@ import java.util.stream.Stream;
 import duke.exceptions.DukeBlankDetailsException;
 import duke.exceptions.DukeBlankTaskException;
 import duke.exceptions.DukeDateTimeParseException;
+import duke.exceptions.DukeInvalidFlagException;
 import duke.exceptions.DukeTaskIndexOutOfRangeException;
 import duke.models.Deadline;
 import duke.models.Event;
+import duke.models.Flags;
 import duke.models.Pair;
+import duke.models.Parser;
 import duke.models.Todo;
 
 public class TaskList {
@@ -119,6 +122,112 @@ public class TaskList {
                 IntStream.range(0, this.todos.size()).filter(idx -> idx != idxDelete)
                         .mapToObj(this.todos::get).collect(Collectors.toList())),
                 this.todos.get(idxDelete));
+    }
+
+    /**
+     * Command can contain -t flag for time and -m flag for message update, then updates task respectively,
+     * if no flag, update whole task
+     * @param updateTodoCommandArgsSplitByWhitespace params passed in from user in CLI
+     * @return pair of updated tasklist and updatedtask to be returned as user feedback
+     */
+    public Pair<TaskList, Optional<? extends Todo>> updateTodo(List<String> updateTodoCommandArgsSplitByWhitespace)
+            throws DukeBlankTaskException, DukeTaskIndexOutOfRangeException, DukeDateTimeParseException,
+                    DukeInvalidFlagException {
+        if (updateTodoCommandArgsSplitByWhitespace.size() == 0) {
+            throw new DukeBlankTaskException("The Deadline you are trying to add cannot be blank!");
+        }
+
+        // check if the command contains more than one flag
+        // flag -> means contains '-' as first char and length of 2
+        long noOfFlags = updateTodoCommandArgsSplitByWhitespace.stream()
+                .filter(arg -> arg.charAt(0) == '-'
+                        && (arg.charAt(1) == 'm' || arg.charAt(1) == 't'))
+                .count();
+
+        if (noOfFlags > 1) {
+            throw new DukeInvalidFlagException("Please only use one dash flag in your update command");
+        }
+
+        // updateTodo = [idx, flag with message OR full message with time]
+        int idxToUpdate = Integer.parseInt(updateTodoCommandArgsSplitByWhitespace.get(0)) - ONE_BASED_INDEX_OFFSET;
+
+        if (idxToUpdate < 0 || idxToUpdate >= this.todos.size()) {
+            throw new DukeTaskIndexOutOfRangeException("The index you specified for the task does not exist, "
+                    + "please try again");
+        }
+
+        // get todo to be updated if in range
+        Optional<? extends Todo> todoToUpdate = this.todos.get(idxToUpdate);
+
+        // get flag from command
+        Flags flag = Parser.getFlag(updateTodoCommandArgsSplitByWhitespace.get(1));
+
+        // if there's a flag included, the message to start iterating starts later
+        int idxToStartIterating = (flag != Flags.NONE ? 2 : 1);
+
+        ArrayList<String> todoMessageArgs = new ArrayList<>();
+        ArrayList<String> todoEventTimeArgs = new ArrayList<>();
+
+        // iterate through list to find where escape character is
+        // once found, everything after is part of the deadline
+        updateTodoCommandArgsSplitByWhitespace
+                .subList(idxToStartIterating, updateTodoCommandArgsSplitByWhitespace.size())
+                .forEach(substring -> {
+                    // catches dates as well since dates contain "/"
+                    if (substring.contains("/")) {
+                        todoEventTimeArgs.add(substring);
+                    } else if (todoEventTimeArgs.size() == 0) {
+                        todoMessageArgs.add(substring);
+                    } else {
+                        todoEventTimeArgs.add(substring);
+                    }
+        });
+
+        Optional<? extends Todo> updatedTodo;
+        // do stateful operation of returning a new object depending on what type it is and what flag was used
+        try {
+            updatedTodo = todoToUpdate.map(todo -> {
+                if (todo instanceof Event) {
+                    Event event = (Event) todo;
+                    // @formatter:off
+                    switch(flag) {
+                    case MESSAGE:
+                        return event.updateMessage(String.join(" ", todoMessageArgs));
+                    case TIME:
+                        return event.updateTime(String.join(" ", todoEventTimeArgs));
+                    case NONE:
+                        return event.update(
+                                String.join(" ", todoMessageArgs),
+                                String.join(" ", todoEventTimeArgs.subList(1, todoEventTimeArgs.size()))
+                        );
+                    }
+                } else if (todo instanceof Deadline) {
+                    Deadline deadline = (Deadline) todo;
+                    // @formatter:off
+                    switch(flag) {
+                    case MESSAGE:
+                        return deadline.updateMessage(String.join(" ", todoMessageArgs));
+                    case TIME:
+                        return deadline.updateTime(String.join(" ", todoEventTimeArgs));
+                    case NONE:
+                        return deadline.update(
+                                String.join(" ", todoMessageArgs),
+                                String.join(" ", todoEventTimeArgs.subList(1, todoEventTimeArgs.size()))
+                        );
+                    }
+                }
+                return todo.updateMessage(String.join(" ", todoMessageArgs));
+            });
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeParseException(
+                    "Please format your date to be DD/MM/YYYY HHMM");
+        }
+
+        return new Pair<>(new TaskList(IntStream.range(0, this.todos.size())
+                .mapToObj(idx -> idx == idxToUpdate
+                        ? updatedTodo
+                        : this.todos.get(idx))
+                .collect(Collectors.toList())), updatedTodo);
     }
 
     /**

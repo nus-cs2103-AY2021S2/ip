@@ -1,6 +1,7 @@
 package duke.models;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import duke.exceptions.DukeCommandNotFoundException;
@@ -39,7 +40,7 @@ public class Parser {
     public Commands getCommand() throws DukeCommandNotFoundException {
         return this.command.map(commandString -> {
             // @formatter:off
-            switch (commandString) {
+            switch (commandString.toLowerCase()) {
             case "done":
                 return Commands.DONE;
             case "list":
@@ -54,6 +55,8 @@ public class Parser {
                 return Commands.DELETE;
             case "find":
                 return Commands.FIND;
+            case "update":
+                return Commands.UPDATE;
             case "bye":
                 return Commands.BYE;
             default:
@@ -82,5 +85,21 @@ public class Parser {
     public List<String> getFullCommand() throws DukeCommandNotFoundException {
         return this.fullCommand.orElseThrow(() -> new DukeCommandNotFoundException(
                 "No command arguments were supplied from input."));
+    }
+
+    /**
+     * Get a flag from a flag String
+     * @param flagString flag String before being parsed
+     * @return Flags enums reflecting what the flag String should mean
+     */
+    public static Flags getFlag(String flagString) {
+        if (flagString.length() == 2) {
+            if (flagString.charAt(0) == '-' && flagString.charAt(1) == 'm') {
+                return Flags.MESSAGE;
+            } else if (flagString.charAt(0) == '-' && flagString.charAt(1) == 't') {
+                return Flags.TIME;
+            }
+        }
+        return Flags.NONE;
     }
 }
