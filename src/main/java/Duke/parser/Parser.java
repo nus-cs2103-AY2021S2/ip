@@ -49,6 +49,7 @@ public class Parser {
     public Parser parse(String input) {
         String[] inputSplit = input.split("/");
         typeOfTask = inputSplit[0];
+
         if (inputSplit.length == 2) {
             description = inputSplit[1];
         } else if (inputSplit.length == 3) {
