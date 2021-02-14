@@ -66,7 +66,7 @@ public class AddCommand extends Command {
                 throw new InvalidCommandFormatException("Use /at when creating an event, you must!");
             }
             assert i > 1 : "i must be pointing at date time by this point";
-            String eventDateAndTime = checkDateTimeFormat(eventDesc[i + 1], eventDesc[i + 2]);
+            String eventDateAndTime = checkDateTime(eventDesc[i + 1], eventDesc[i + 2]);
             return new Event(eventDetails.toString(), eventDateAndTime);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("The right way to create an event,\n"
@@ -87,7 +87,7 @@ public class AddCommand extends Command {
                 throw new InvalidCommandFormatException("Use /by when creating a deadline, you must!");
             }
             assert i > 1 : "i must be pointing at date time by this point";
-            String deadlineDateAndTime = checkDateTimeFormat(deadlineDesc[i + 1], deadlineDesc[i + 2]);
+            String deadlineDateAndTime = checkDateTime(deadlineDesc[i + 1], deadlineDesc[i + 2]);
             return new Deadline(deadlineDetails.toString(), deadlineDateAndTime);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("The right way to create a deadline,\n"
@@ -95,11 +95,16 @@ public class AddCommand extends Command {
         }
     }
 
-    public String checkDateTimeFormat(String date, String time) throws InvalidDateTimeFormatException {
+    public String checkDateTime(String date, String time) throws InvalidDateTimeFormatException {
         try {
             String dateTime = date + " " + time;
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime.parse(dateTime, format);
+            LocalDateTime taskTime = LocalDateTime.parse(dateTime, format);
+            LocalDateTime currTime = LocalDateTime.now();
+            if (taskTime.isBefore(currTime)) {
+                throw new InvalidDateTimeFormatException("Not possible, time travel is!\n"
+                        + "An appropriate date and time, you must input!");
+            }
             return dateTime;
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException("'YYYY-MM-DD HHmm', the right format is!\n"
