@@ -35,15 +35,15 @@ public class FindCommand extends Command {
     public void execute(TaskManager taskManager) throws DukeException {
         StringBuilder output = new StringBuilder();
 
-        // Returns true if the task contains at least one of the keywords
+        // Returns true if the task contains all of the keywords
         Predicate<Task> taskPredicate = task -> {
             String taskDescription = task.getDescription();
             for (String k: keywords) {
-                if (taskDescription.contains(k)) {
-                    return true;
+                if (!taskDescription.contains(k)) {
+                    return false;
                 }
             }
-            return false;
+            return true;
         };
 
         List<Task> tasks = taskManager.getTasks();

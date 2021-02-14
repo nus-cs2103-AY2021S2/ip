@@ -78,7 +78,7 @@ public interface Parser {
     static String commandMapToString(HashMap<String, List<String>> commandMap) {
         List<String> results = new ArrayList<>();
 
-        String command = commandMap.get(COMMAND_FLAG).get(0);
+        String command = extractCommandString(commandMap);
         List<String> descriptions = commandMap.get(command);
         String description = String.join(" ", descriptions);
 
