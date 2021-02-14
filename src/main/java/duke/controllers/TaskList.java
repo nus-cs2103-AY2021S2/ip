@@ -17,7 +17,6 @@ import duke.models.Deadline;
 import duke.models.Event;
 import duke.models.Pair;
 import duke.models.Todo;
-import duke.views.TodosView;
 
 public class TaskList {
     /** index offset constant for 1-based indexing of todos to client */

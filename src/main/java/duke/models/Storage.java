@@ -123,9 +123,6 @@ public class Storage {
                 databaseDirectory.mkdir();
             }
 
-            // at this point, databaseDirectory should exist
-            assert !databaseDirectory.exists()
-                    : "Database directory should be created but does not exist";
             // and existingDatabase should be deleted before writing a new one
             assert !existingDatabase.exists(): "Database file should be be deleted but exists";
 

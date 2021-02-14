@@ -21,7 +21,7 @@ public class Ui {
 
     /**
      * Initialises Storage and TaskList
-     * @param storage indicating intialised Storage
+     * @param storage indicating initialised Storage
      */
     public Ui(Storage storage) {
         this.storage = storage;
