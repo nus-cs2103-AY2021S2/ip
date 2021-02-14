@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Provides the static method for parsing user input.
  */

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Specifies the command for if a command type is not recognised.
  */

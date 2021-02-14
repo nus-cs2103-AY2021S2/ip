@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Provides abstract class for types of commands.
  */

@@ -1,18 +1,20 @@
+package duke;
+
 /**
- * Specifies the command for todo command type.
+ * Specifies the command for deadline command type.
  */
-public class TodoCommand extends Command {
+public class DoneCommand extends Command {
 
     /**
-     * Initialises the TodoCommand object.
-     * @param description the description of the deadline task.
+     * Initialises the DoneCommand object.
+     * @param index the index of the task to be marked as done.
      */
-    public TodoCommand(String description) {
-        super(description);
+    public DoneCommand(int index) {
+        super(index);
     }
 
     /**
-     * Executes the command by adding the todo task to the existing taskList,
+     * Executes the command by marking the task as done in the existing taskList,
      * writing the updated taskList into storage and responding with relevant message.
      * @param taskList the TaskList object that contains all tasks added by user.
      * @param ui the Ui object that provides responses to the user according to status of their input.
@@ -20,9 +22,8 @@ public class TodoCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Todo todo = new Todo(description);
-        taskList.addTodoTask(todo);
+        Task task = taskList.markTaskDone(index);
         storage.writeToFile(taskList.getList());
-        ui.showTaskAdded(todo);
+        ui.showTaskDone(task);
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Allows users to specify a todo task. The user is able to specify the description.
  */

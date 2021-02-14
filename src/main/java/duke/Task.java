@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Provides super class for types of tasks.
  */
