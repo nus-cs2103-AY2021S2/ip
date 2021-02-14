@@ -102,3 +102,5 @@ If you have any other queries, feel free to contact me on [GitHub](https://githu
 
 ## 5. Acknowledgements
 Thank you @ruilingk for letting me reference your UI.
+[Image of DaDuke](https://www.refinery29.com/images/10251619.jpg)
+[Image of DaUser](https://www.refinery29.com/en-us/2020/12/10226515/bridgerton-netflix-cast-characters-actors#slide-1)
