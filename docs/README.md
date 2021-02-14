@@ -33,7 +33,7 @@ With great usability and a simple design, it's never been easier to manage your 
 ###### Tutors suddenly bombarding you with assignments and you can't keep track of it? :no_mouth: Let `Duke` help you!
 ##### There are 3 different types of tasks you can add: `todo`, `deadline` and `event` tasks.
 ##### `todo` task: _`todo <task name>`_ 
- * _Add a task to be done with no specific timing._ \
+* _Add a task to be done with no specific timing._ \
 ![img.png](images/todo.png)
 
 ##### `deadline` task: _`deadline <task name> /by <DD/MM/YYYY HH:mm>`_
@@ -103,6 +103,6 @@ A: Please ensure that your laptop supports at least `Java 11`.
 If you have any other queries, feel free to contact me on [GitHub](https://github.com/JodyLorah)!
 
 ## 5. Acknowledgements
-Thank you @ruilingk for letting me reference your UI.
-[Image of DaDuke](https://www.refinery29.com/images/10251619.jpg)
+Thank you @ruilingk for letting me reference your UI. \
+[Image of DaDuke](https://www.refinery29.com/images/10251619.jpg) \
 [Image of DaUser](https://www.refinery29.com/en-us/2020/12/10226515/bridgerton-netflix-cast-characters-actors#slide-1)
