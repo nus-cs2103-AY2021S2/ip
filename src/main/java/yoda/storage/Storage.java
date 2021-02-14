@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import yoda.task.Task;
 import yoda.task.TaskList;
 
 /**
@@ -27,14 +26,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /**
-     * Loads the tasklist from the file specified in filepath.
-     * @return TaskList stored in the file.
-     */
     public TaskList load() {
         File tasks = new File(filePath);
-        System.out.println("1");
-        TaskList taskList = new TaskList(new ArrayList<Task>());
+        TaskList taskList = new TaskList(new ArrayList<>());
         boolean isNewFile = false;
         try {
             if (tasks.createNewFile()) {
@@ -46,7 +40,7 @@ public class Storage {
                 System.out.println("Location: " + tasks.getAbsolutePath());
             }
         } catch (IOException e) {
-            System.out.println("An error occurred when trying to create the file");
+            System.out.println("An error occurred when trying to create the file during load");
         }
         if (!isNewFile) {
             return deserialize();
@@ -55,11 +49,7 @@ public class Storage {
         }
     }
 
-    /**
-     * Writes the tasklist to the file specified in the filepath.
-     * @param taskList TaskList to be stored in the file.
-     */
-    public void write(TaskList taskList) {
+    public void serialize(TaskList taskList) {
         File tasks = new File(filePath);
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(tasks);
@@ -70,9 +60,9 @@ public class Storage {
             System.out.println("Wrote to file");
             System.out.println("Location: " + tasks.getAbsolutePath());
         } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
+            System.out.println("File not found when serializing!");
         } catch (IOException e) {
-            System.out.println("An error occurred");
+            System.out.println("An error occurred when serializing");
         }
     }
 
@@ -81,17 +71,17 @@ public class Storage {
      * @return TaskList obtained from the deserialization.
      */
     public TaskList deserialize() {
-        TaskList taskList = new TaskList(new ArrayList<Task>());
+        TaskList taskList = new TaskList(new ArrayList<>());
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
             ObjectInputStream objInputStream = new ObjectInputStream(fileInputStream);
             taskList = (TaskList) objInputStream.readObject();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
+            System.out.println("File not found when deserializing!");
         } catch (IOException e) {
-            System.out.println("An error occurred");
+            System.out.println("An error occurred when deserializing!");
         } catch (ClassNotFoundException e) {
-            System.out.println("Reinstall Duke");
+            System.out.println("Reinstall Yoda or contact the developer!");
         }
         return taskList;
     }
