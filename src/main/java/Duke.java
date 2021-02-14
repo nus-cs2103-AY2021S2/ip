@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Main Duke chatbot class.
  */
-public class Duke {
+public class Duke implements IDuke{
     /** List of Tasks */
     private ArrayList<Task> list;
     private Duke(ArrayList<Task> list){
