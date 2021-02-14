@@ -43,6 +43,16 @@ public class Duke {
     }
 
     /**
+     * Checks whether the command is a termination command.
+     *
+     * @param c Command to check
+     * @return Whether the command is a termination command
+     */
+    private boolean isCommandTerminate(Command c) {
+        return c == null;
+    }
+
+    /**
      * The main application loop
      *
      * @param line The input to be processed
@@ -51,12 +61,11 @@ public class Duke {
     public String processInput(String line) {
         try {
             Command c = Parser.parse(line);
-            if (c == null) { //Bye command
+            if (isCommandTerminate(c)) { //Bye command
                 handleTermination();
-                return ui.flushMessage();
+            } else {
+                updateAndGenerateOutput(c);
             }
-            String data = taskList.run(c);
-            ui.printCommandMessage(c, data);
         } catch (ParseException e) {
             ui.handleException(e);
         } catch (InvalidCommandException e) {
@@ -66,16 +75,27 @@ public class Duke {
         } catch (BadDateArgumentException e) {
             ui.handleException(e);
         } finally {
-            if (taskList.isEdited()) {
-                try {
-                    Storage.saveTaskList(taskList);
-                    taskList.markSaved();
-                } catch (IOException e) {
-                    ui.dumpState(taskList);
-                }
-            }
+            saveIfNeeded();
         }
         return ui.flushMessage();
+    }
+    private void updateAndGenerateOutput(Command c) throws EmptyArgumentException, BadDateArgumentException {
+        String data = taskList.run(c);
+        ui.printCommandMessage(c, data);
+    }
+
+    /**
+     * Saves the content of taskList if it has been changed by the command
+     */
+    private void saveIfNeeded() {
+        if (taskList.isEdited()) {
+            try {
+                Storage.saveTaskList(taskList);
+                taskList.markSaved();
+            } catch (IOException e) {
+                ui.dumpState(taskList);
+            }
+        }
     }
 
     /**

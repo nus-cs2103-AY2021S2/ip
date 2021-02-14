@@ -23,65 +23,76 @@ public class Storage {
     public static final String FILE_NAME = "duke.txt";
 
     /**
+     * Attempts to parse a line from a file and load a corresponding Task.
+     *
+     * @param line The line to be parsed
+     * @return A task if successful, or null otherwise
+     */
+    private static Task parseLineFromFile(String line) {
+        Task t;
+        String pattern = "([TED]),([01]),(\\d*),(.*)";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(line);
+        if (!m.find()) {
+            return null;
+        }
+        String type = m.group(1);
+        boolean isDone = m.group(2).equals("1");
+        int taskLength = Integer.parseInt(m.group(3));
+        String task = m.group(4).substring(0, taskLength);
+        String leftover = m.group(4).substring(taskLength);
+        try {
+            if (type.equals("E") || type.equals("D")) {
+                line = leftover.substring(1);
+                pattern = "(\\d*),(.*)";
+                r = Pattern.compile(pattern);
+                m = r.matcher(line);
+                if (!m.find()) {
+                    return null;
+                }
+                int timeLength = Integer.parseInt(m.group(1));
+                String timeData = m.group(2).substring(0, timeLength);
+
+                switch (type) {
+                case "E":
+                    t = new Event(task, timeData);
+                    break;
+                case "D":
+                    t = new Deadline(task, timeData);
+                    break;
+                default:
+                    return null;
+                }
+            } else {
+                t = new ToDos(task);
+            }
+        } catch (EmptyArgumentException | BadDateArgumentException e) {
+            return null;
+        }
+        if (isDone) {
+            t.setDone();
+        }
+        return t;
+    }
+
+    /**
      * Loads data from a fixed constant, location relative to the program locatoin
      *
      * @return TaskList that corresponds to the loaded data
      * @throws IOException Uncontrollable IO Error
      */
     public static TaskList loadTaskList() throws IOException {
-        List<Task> store = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
         File file = getOrCreateFile();
         Scanner s = new Scanner(file);
-        generateLines: //TODO: Whats the code style for this.
         while (s.hasNextLine()) {
-            Task t;
-            String line = s.nextLine();
-            String pattern = "([TED]),([01]),(\\d*),(.*)";
-            Pattern r = Pattern.compile(pattern);
-            Matcher m = r.matcher(line);
-            if (!m.find()) {
-                break;
+            Task t = parseLineFromFile(s.nextLine());
+            if (t != null) {
+                taskList.add(t);
             }
-            String type = m.group(1);
-            boolean isDone = m.group(2).equals("1");
-            int taskLength = Integer.parseInt(m.group(3));
-            String task = m.group(4).substring(0, taskLength);
-            String leftover = m.group(4).substring(taskLength);
-            try {
-                if (type.equals("E") || type.equals("D")) {
-                    line = leftover.substring(1);
-                    pattern = "(\\d*),(.*)";
-                    r = Pattern.compile(pattern);
-                    m = r.matcher(line);
-                    if (!m.find()) {
-                        break;
-                    }
-                    int timeLength = Integer.parseInt(m.group(1));
-                    String timeData = m.group(2).substring(0, timeLength);
-
-                    switch (type) {
-                    case "E":
-                        t = new Event(task, timeData);
-                        break;
-                    case "D":
-                        t = new Deadline(task, timeData);
-                        break;
-                    default:
-                        break generateLines;
-                    }
-                } else {
-                    t = new ToDos(task);
-                }
-            } catch (EmptyArgumentException | BadDateArgumentException e) {
-                break;
-            }
-            if (isDone) {
-                t.setDone();
-            }
-            store.add(t);
         }
         s.close();
-        return new TaskList(store);
+        return new TaskList(taskList);
     }
 
     /**

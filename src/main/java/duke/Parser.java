@@ -24,9 +24,9 @@ public class Parser {
      */
     public static Command parse(String line) throws ParseException, InvalidCommandException {
         line = line.trim();
-        Command c = null;
         String[] singleTokens = {"bye", "list", "exit", "ls"};
         String[] tokens = splitTokenIntoTwo(line, " ", singleTokens);
+        Command c = null;
         switch (tokens[0].toLowerCase()) {
         case "exit":
             //Fall-through

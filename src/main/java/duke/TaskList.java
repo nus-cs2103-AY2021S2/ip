@@ -46,7 +46,8 @@ public class TaskList {
     public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
         String[] args = c.getCommandParameters();
         String result;
-        switch (c.getType()) {
+        Action action = c.getType();
+        switch (action) {
         case ADD:
             result = addTask(args);
             edited = true;
