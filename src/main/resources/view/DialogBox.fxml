@@ -19,5 +19,5 @@
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
         </padding>
     </Label>
-    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true"/>
 </fx:root>

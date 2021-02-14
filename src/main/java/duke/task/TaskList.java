@@ -147,7 +147,7 @@ public class TaskList {
         }
         for (int j = 0; j < temp.size(); j++) {
             Task tempTask = temp.get(j);
-            String msg = "     " + (j + 1) + "." + tempTask.toString() + "\n";
+            String msg = (j + 1) + ". " + tempTask.toString() + "\n";
             sb.append(msg);
         }
         return sb.toString();
