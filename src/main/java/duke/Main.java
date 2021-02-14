@@ -14,8 +14,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    private static final String APP_NAME = "Duke";
     private final Duke duke = new Duke();
-    private final String APP_NAME = "Duke";
 
     @Override
     public void start(Stage stage) {
