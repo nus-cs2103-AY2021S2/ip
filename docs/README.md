@@ -5,11 +5,11 @@ Rem is a **desktop app for managing tasks using via a Command Line Interface(CLI
 ## Features 
 
 ### Add Task:
-Add a task to the memory of Rem. There are 4 kinds of tasks including: 
-**todo**
-**deadline**
-**event**
-**period**
+Add a task to the memory of Rem. There are 4 kinds of tasks including:\n
+**todo**\n
+**deadline**\n
+**event**\n
+**period**\n
 
 ## Usage
 
@@ -17,7 +17,7 @@ Add a task to the memory of Rem. There are 4 kinds of tasks including:
 
 Todo is a kind of task without exact date. The format should be:
 
-'todo {the description of the task}'
+`todo {the description of the task}`
 
 Example of usage: 
 
@@ -34,7 +34,7 @@ Now you have {number of existing tasks} tasks in the list.`
 
 Deadline is a kind of task which need to be finished by the exact date. The format should be:
 
-'deadline {the description of the task} /by {YYYY-MM-DD}'
+`deadline {the description of the task} /by {YYYY-MM-DD}`
 
 Example of usage: 
 
@@ -51,7 +51,7 @@ Now you have {number of existing tasks} tasks in the list.`
 
 Event is a kind of task which need to be finished at the exact date. The format should be:
 
-'deadline {the description of the task} /at {YYYY-MM-DD}'
+`deadline {the description of the task} /at {YYYY-MM-DD}`
 
 Example of usage: 
 
