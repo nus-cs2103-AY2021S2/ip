@@ -4,16 +4,17 @@ public class Events extends Task {
     private final String TYPE_ICON = "[E]";
     private final String ICON = "E";
     private final String DELIMITER = "|";
+    private final String NULL = "NULL";
 
     private String at;
 
-    public Events(String description, String at) {
-        super(description);
+    public Events(String description, String at, String tag) {
+        super(description, tag);
         this.at = at;
     }
 
-    public Events(boolean isDone, String description, String at) {
-        super(description);
+    public Events(boolean isDone, String description, String at, String tag) {
+        super(description, tag);
         this.at = at;
         this.isDone = isDone;
     }
@@ -25,11 +26,17 @@ public class Events extends Task {
 
     @Override
     public String getDescription() {
-        if (at == null) {
-            return this.description;
-        } else {
-            return String.format("%s (at: %s)", this.description, this.at);
+        String result = description;
+
+        if (at != null) {
+            result = String.format("%s (at: %s) ", result, this.at);
         }
+
+        if (tag != null) {
+            result = String.format("%s (tag: %s) ", result, this.tag);
+        }
+
+        return result;
     }
     /**
      * Converts the object into a String representation for storage
@@ -40,13 +47,20 @@ public class Events extends Task {
     public String tokenize() {
         String isDoneString = isDone ? "1" : "0";
 
-        String result;
+        String result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
 
         if (at == null) {
-            result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
+            result += DELIMITER + NULL;
         } else {
-            result = ICON + DELIMITER + isDoneString + DELIMITER + this.description + DELIMITER + this.at;
+            result += DELIMITER + this.at;
         }
+
+        if (tag == null) {
+            result += DELIMITER + NULL;
+        } else {
+            result += DELIMITER + this.tag;
+        }
+
         return result;
     }
 
