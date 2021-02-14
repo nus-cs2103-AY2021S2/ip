@@ -3,7 +3,7 @@ package duke;
 public class DukeIncompleteCommandException extends Exception {
     public String message;
     DukeIncompleteCommandException() {
-        this.message = "Oh no! Task cannot be empty. ):";
+        this.message = "Oh no! Task cannot be empty. ):\n";
     }
     DukeIncompleteCommandException(String message) {
         this.message = message;

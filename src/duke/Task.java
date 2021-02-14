@@ -27,15 +27,7 @@ class Task {
         }
         return task;
     }
-    static Task fileReader(String line) {
-        if (line.contains("TODO")) {
-            return ToDo.fileReader(line);
-        } else if (line.contains("DDLN")) {
-            return Deadline.fileReader(line);
-        } else {
-            return Event.fileReader(line);
-        }
-    }
+
 
     @Override
     public String toString() {
@@ -45,7 +37,7 @@ class Task {
             return "[ ] " + task;
         }
     }
-    public String stringToSave() {
-        return "";
+    public String toFileString() {
+        return toString();
     }
 }

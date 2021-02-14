@@ -3,7 +3,10 @@ package duke;
 import java.lang.Throwable;
 public class ToDo extends Task {
     ToDo() {
+    }
 
+    ToDo(String task) {
+        super(task);
     }
     static ToDo parseInput(String input) throws DukeIncompleteCommandException {
         ToDo todo = new ToDo();
@@ -28,9 +31,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "TODO" + super.toString();
-    }
-    public String stringToSave() {
         return "TODO" + super.toString();
     }
 }

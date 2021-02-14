@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task {
-    LocalDate by;
+public class Deadline extends TimedTask {
 
     Deadline() {
-
+        this.isDone = false;
     }
     static Deadline parseInput(String input) throws DukeIncompleteCommandException,
             DateTimeParseException {
@@ -27,7 +26,7 @@ public class Deadline extends Task {
         }
         deadline.task = inputs[0].trim();
         deadline.isDone = false;
-        deadline.by = LocalDate.parse(inputs[1].trim());
+        deadline.date = LocalDate.parse(inputs[1].trim());
 
         return deadline;
     }
@@ -42,15 +41,15 @@ public class Deadline extends Task {
         String[] lines = line.substring(7).trim().split("by: ");
         deadline.task = lines[0].substring(0, lines[0].length() - 2).trim();
         String dateString = lines[1].substring(0, lines[1].length() - 1);
-        deadline.by = LocalDate.parse(dateString.subSequence(0, dateString.length()));
+        deadline.date = LocalDate.parse(dateString.subSequence(0, dateString.length()));
         return deadline;
     }
     @Override
     public String toString() {
-        return String.format("DDLN%s (by: %s)" ,
-                super.toString(), by);
+        return String.format("DDLN%s (by: %s)" , super.toString(),
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
-    public String stringToSave() {
-        return String.format("DDLN%s (at: %s)" , super.toString(), by);
+    public String toFileString() {
+        return String.format("DDLN%s (by: %s)" , super.toString(), date);
     }
 }

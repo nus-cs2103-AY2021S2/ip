@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
-    LocalDate at;
+public class Event extends TimedTask {
 
     Event() {
-
+        this.isDone = false;
     }
 
     static Event parseInput(String input) throws DukeIncompleteCommandException,
@@ -29,7 +28,7 @@ public class Event extends Task {
 
         event.task = inputs[0].trim();
         event.isDone = false;
-        event.at = LocalDate.parse(inputs[1].trim());
+        event.date = LocalDate.parse(inputs[1].trim());
         return event;
     }
     static Event fileReader(String line) {
@@ -42,16 +41,16 @@ public class Event extends Task {
         String[] lines = line.substring(7).trim().split("at: ");
         event.task = lines[0].substring(0, lines[0].length() - 2).trim();
         String dateString = lines[1].substring(0, lines[1].length() - 1);
-        event.at = LocalDate.parse(dateString.subSequence(0, dateString.length()));
+        event.date = LocalDate.parse(dateString.subSequence(0, dateString.length()));
         return event;
     }
 
     @Override
     public String toString() {
         return String.format("EVNT%s (at: %s)" , super.toString(),
-                at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
-    public String stringToSave() {
-        return String.format("EVNT%s (at: %s)" , super.toString(), at);
+    public String toFileString() {
+        return String.format("EVNT%s (at: %s)" , super.toString(), date);
     }
 }
