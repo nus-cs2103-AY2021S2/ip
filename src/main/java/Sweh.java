@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 import nodes.DialogBox;
 import util.Storage;
 
+/**
+ * JavaFX Application used to wrap a Duke instance and provide GUI interaction
+ * for Duke.
+ */
 public class Sweh extends Application {
     private Duke duke;
     private ScrollPane scrollPane;
