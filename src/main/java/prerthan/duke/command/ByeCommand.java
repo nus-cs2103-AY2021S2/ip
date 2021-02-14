@@ -1,17 +1,17 @@
 package prerthan.duke.command;
 
-import prerthan.duke.exception.DukeEmptyDetailException;
-import prerthan.duke.task.TaskList;
 import prerthan.duke.exception.DukeInvalidArgumentException;
 import prerthan.duke.exception.DukeInvalidDateException;
+import prerthan.duke.exception.DukeEmptyDetailException;
 import prerthan.duke.io.Storage;
+import prerthan.duke.task.TaskList;
 
 /**
  * ByeCommand
  */
 public class ByeCommand extends Command {
 
-    public ByeCommand(String[] argumentTokens) throws DukeInvalidArgumentException {
+    public ByeCommand(String argumentTokens) throws DukeInvalidArgumentException {
         super(argumentTokens);
         this.commandName = CommandName.BYE;
 

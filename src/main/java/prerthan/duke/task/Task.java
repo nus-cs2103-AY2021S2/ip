@@ -1,8 +1,10 @@
 package prerthan.duke.task;
 
+import prerthan.duke.Duke;
 import prerthan.duke.exception.DukeEmptyDetailException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * A Task class that allows creating a static list of tasks, that can be added
@@ -11,91 +13,69 @@ import java.io.IOException;
  * Also allows initialising an instance of a Task, which come with appropriate
  * instance methods.
  */
-public abstract class Task
-{
-	// A list of tasks.
-	protected String detail;
-	protected boolean isComplete;
+public abstract class Task {
+    // A list of tasks.
+    protected static ArrayList<Task> tasks;
 
-	Task()
-	{
-		this.isComplete = false;
-	}
+    protected String detail;
+    protected boolean isComplete;
 
-	/**
-	 * Initialises a {@link Task} with some specified {@code detail}, and is set as
-	 * incomplete.
-	 *
-	 * @param detail the task detail
-	 * @throws DukeEmptyDetailException if {@code detail} is blank, as specified by
-	 *                                  {@link String#isBlank()}.
-	 */
-	protected Task(String detail) throws DukeEmptyDetailException
-	{
-		this();
+    Task() {
+        this.isComplete = false;
+    }
 
-		if (detail.isBlank())
-			throw new DukeEmptyDetailException(this.getClass().getName());
+    /**
+     * Initialises a {@link Task} with some specified {@code detail}, and is set as
+     * incomplete.
+     * 
+     * @param name the task detail
+     * @throws DukeEmptyDetailException if {@code detail} is blank, as specified by
+     *                                  {@link String#isBlank()}.
+     */
+    protected Task(String detail) throws DukeEmptyDetailException {
+        this();
 
-		this.detail = detail;
-	}
+        if (detail.isBlank())
+            throw new DukeEmptyDetailException(this.getClass().getName());
 
-	/**
-	 * @param detail
-	 * @param isComplete
-	 * @throws DukeEmptyDetailException
-	 */
-	protected Task(String detail, boolean isComplete) throws DukeEmptyDetailException
-	{
-		this(detail);
-		this.isComplete = isComplete;
-	}
+        this.detail = detail;
+    }
 
-	/**
-	 * Returns a character representing the completion state of this task.
-	 *
-	 * @return {@code '✔'} if complete, {@code '✘'} otherwise
-	 */
-	public char getCompleteIcon()
-	{
-		return isComplete ? '✔' : '✘';
-	}
+    /**
+     * Returns a character representing the completion state of this task.
+     * 
+     * @return {@code '✔'} if complete, {@code '✘'} otherwise
+     */
+    public char getCompleteIcon() {
+        return isComplete ? '✔' : '✘';
+    }
 
-	/**
-	 * Marks this task as complete, and returns the state of the task (must be
-	 * {@code true}).
-	 *
-	 * @return {@code true} if complete
-	 * @throws IOException
-	 */
-	public boolean markComplete()
-	{
-		this.isComplete = true;
-		return isComplete;
-	}
+    /**
+     * Marks this task as complete, and returns the state of the task (must be
+     * {@code true}).
+     * 
+     * @return {@code true} if complete
+     * @throws IOException
+     */
+    public boolean markComplete() {
+        this.isComplete = true;
+        Duke.output.sayTaskMarkedComplete(this);
 
-	public void setCompleteStatus(boolean status)
-	{
-		this.isComplete = status;
-	}
+        return isComplete;
+    }
 
-	/**
-	 * Returns a character representing the type of Task (To-Do, Deadline, or
-	 * Event).
-	 *
-	 * @return the character representing the task type
-	 */
-	public abstract char getTaskTypeIcon();
+    /**
+     * Returns a character representing the type of Task (To-Do, Deadline, or
+     * Event).
+     * 
+     * @return the character representing the task type
+     */
+    public abstract char getTaskTypeIcon();
 
-	/**
-	 * Returns this task as an encoded {@link String}, to be written to the data file.
-	 *
-	 * @return The encoded String, as a comma-separated value (for easy opening in spreadsheet files)
-	 */
-	public abstract String encode();
+    public abstract String encode();
 
-	@Override public String toString()
-	{
-		return String.format("[%c]\t %s", this.getCompleteIcon(), this.detail);
-	}
+    @Override
+    public String toString() {
+        return String.format("[%c]\t %s", this.getCompleteIcon(), this.detail);
+    }
 }

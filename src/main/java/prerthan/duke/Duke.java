@@ -1,9 +1,9 @@
 package prerthan.duke;
 
+import prerthan.duke.task.TaskList;
 import prerthan.duke.io.Input;
 import prerthan.duke.io.Output;
 import prerthan.duke.io.Storage;
-import prerthan.duke.task.TaskList;
 
 /**
  * 

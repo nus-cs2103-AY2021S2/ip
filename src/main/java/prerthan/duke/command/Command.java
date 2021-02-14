@@ -1,9 +1,9 @@
 package prerthan.duke.command;
 
-import prerthan.duke.exception.DukeEmptyDetailException;
 import prerthan.duke.exception.DukeInvalidDateException;
-import prerthan.duke.io.Storage;
 import prerthan.duke.task.TaskList;
+import prerthan.duke.exception.DukeEmptyDetailException;
+import prerthan.duke.io.Storage;
 
 /**
  * Models a possible user command to the Duke program; commands are of type
