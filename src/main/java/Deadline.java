@@ -5,27 +5,27 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Encapsulates information and state of a Deadline.
- * For tasks that must be ccompletely by a certain time.
+ * For tasks that must be ccompletely dueDate a certain time.
  */
 public class Deadline extends Task {
     /** Deadline of task. */
-    protected LocalDate by;
+    protected LocalDate dueDate;
 
     /**
      * Initialises a new Deadline with text description and date.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDate) {
         super(description);
-        if (by.contains("-")) {
-            this.by = LocalDate.parse(by);
+        if (dueDate.contains("-")) {
+            this.dueDate = LocalDate.parse(dueDate);
         } else {
-            this.by = LocalDate.parse(by, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            this.dueDate = LocalDate.parse(dueDate, DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
     }
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(), 
-                super.toString(), this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        return String.format("[D][%s] %s (dueDate: %s)", this.getStatusIcon(), 
+                super.toString(), this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }
