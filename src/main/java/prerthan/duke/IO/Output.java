@@ -1,10 +1,10 @@
 package prerthan.duke.IO;
 
-import prerthan.duke.task.Task;
-
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+
+import prerthan.duke.task.Task;
 
 /**
  * A class to neatly format and write any output from the organiser chat bot,
@@ -63,7 +63,7 @@ public class Output {
     /**
      * Writes a specified message (given as a {@link String}) to the standard
      * output.
-     * 
+     *
      * @param message The message to be written
      */
     public void say(String message) {
@@ -78,7 +78,7 @@ public class Output {
     /**
      * Writes multiple messages to the standard output. These messages are given as
      * a comma-separated list of {@link String}s.
-     * 
+     *
      * @param messages The list of messages to be written to standard output
      */
     public void say(String... messages) {
@@ -107,7 +107,7 @@ public class Output {
     /**
      * Given a task, tells the user that the task was added to the task list,
      * formatted appropriately.
-     * 
+     *
      * @param task The task that was added to the task list
      */
     public void sayTaskAdded(Task task) {
@@ -117,7 +117,7 @@ public class Output {
     /**
      * Given a task, tells the user that the task was marked complete, formatted
      * appropriately.
-     * 
+     *
      * @param task The task that was marked complete
      */
     public void sayTaskMarkedComplete(Task task) {

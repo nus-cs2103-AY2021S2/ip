@@ -28,7 +28,6 @@ public class Event extends Task {
      * {@link ZonedDateTime} instance variables are parsed from this string.
      * 
      * @param detail     The Event detail
-     * @param timeString the {@link String} describing the duration of the event
      * @throws DukeEmptyDetailException if {@code detail} is blank (as specified by
      *                                  {@link String#isBlank()})
      * @throws DukeInvalidDateException if the date cannot be parsed into a starting

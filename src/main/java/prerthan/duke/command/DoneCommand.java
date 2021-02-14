@@ -1,7 +1,7 @@
 package prerthan.duke.command;
 
-import prerthan.duke.IO.Storage;
 import prerthan.duke.exception.DukeInvalidArgumentException;
+import prerthan.duke.IO.Storage;
 import prerthan.duke.task.TaskList;
 
 /**

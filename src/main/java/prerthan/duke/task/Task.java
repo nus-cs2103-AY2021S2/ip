@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public abstract class Task {
     // A list of tasks.
-    protected static ArrayList<prerthan.duke.task.Task> tasks;
+    protected static ArrayList<Task> tasks;
 
     protected String detail;
     protected boolean isComplete;
@@ -25,10 +25,10 @@ public abstract class Task {
     }
 
     /**
-     * Initialises a {@link prerthan.duke.task.Task} with some specified {@code detail}, and is set as
+     * Initialises a {@link Task} with some specified {@code detail}, and is set as
      * incomplete.
      * 
-     * @param name the task detail
+     * @param detail the task detail
      * @throws DukeEmptyDetailException if {@code detail} is blank, as specified by
      *                                  {@link String#isBlank()}.
      */

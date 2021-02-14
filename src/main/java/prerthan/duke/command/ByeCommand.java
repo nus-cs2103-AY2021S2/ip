@@ -1,10 +1,10 @@
 package prerthan.duke.command;
 
-import prerthan.duke.IO.Storage;
 import prerthan.duke.exception.DukeEmptyDetailException;
 import prerthan.duke.exception.DukeInvalidArgumentException;
 import prerthan.duke.exception.DukeInvalidDateException;
 import prerthan.duke.task.TaskList;
+import prerthan.duke.IO.Storage;
 
 /**
  * ByeCommand
@@ -17,7 +17,7 @@ public class ByeCommand extends Command {
 
         if (argumentTokens.length() >= 1) {
             throw new DukeInvalidArgumentException("Bye command must have no arguments.",
-                    prerthan.duke.command.ByeCommand.class.getSimpleName());
+                    ByeCommand.class.getSimpleName());
         }
     }
 

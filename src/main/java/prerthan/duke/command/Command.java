@@ -1,9 +1,9 @@
 package prerthan.duke.command;
 
-import prerthan.duke.IO.Storage;
 import prerthan.duke.exception.DukeEmptyDetailException;
 import prerthan.duke.exception.DukeInvalidDateException;
 import prerthan.duke.task.TaskList;
+import prerthan.duke.IO.Storage;
 
 /**
  * Models a possible user command to the Duke program; commands are of type
@@ -30,7 +30,7 @@ public abstract class Command {
     }
 
     /**
-     * Creates a {@link prerthan.duke.command.Command}, with a {@link String}[] that contains the
+     * Creates a {@link Command}, with a {@link String}[] that contains the
      * tokenised arguments to the command, from the user input.
      * 
      * @param argumentTokens the tokenised input from the user, as arguments to the

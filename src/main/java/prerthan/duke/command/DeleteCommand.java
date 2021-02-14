@@ -1,8 +1,8 @@
 package prerthan.duke.command;
 
-import prerthan.duke.IO.Storage;
 import prerthan.duke.exception.DukeInvalidArgumentException;
 import prerthan.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.IO.Storage;
 import prerthan.duke.task.TaskList;
 
 /**
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
         if (this.argumentTokens.length != 1 || !this.argumentTokens[1].matches("\\d+")
                 || Integer.parseInt(this.argumentTokens[1]) <= 1)
             throw new DukeInvalidArgumentException("Delete command must be of the format: 'delete 12'",
-                    prerthan.duke.command.DeleteCommand.class.getSimpleName());
+                    DeleteCommand.class.getSimpleName());
     }
 
     /**

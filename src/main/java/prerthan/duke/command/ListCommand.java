@@ -1,8 +1,8 @@
 package prerthan.duke.command;
 
-import prerthan.duke.IO.Storage;
 import prerthan.duke.exception.DukeInvalidArgumentException;
 import prerthan.duke.exception.DukeInvalidCommandException;
+import prerthan.duke.IO.Storage;
 import prerthan.duke.task.TaskList;
 
 /**
@@ -19,7 +19,7 @@ public class ListCommand extends Command {
         this.commandName = CommandName.LIST;
 
         if (commandTokens.length != 1)
-            throw new DukeInvalidArgumentException(null, prerthan.duke.command.ListCommand.class.getSimpleName());
+            throw new DukeInvalidArgumentException(null, ListCommand.class.getSimpleName());
     }
 
     @Override

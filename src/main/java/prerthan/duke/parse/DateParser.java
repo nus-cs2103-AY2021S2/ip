@@ -52,7 +52,7 @@ public final class DateParser {
             possiblyParsed = Optional.of(formatter.parse(token));
         } catch (DateTimeParseException e) {
             possiblyParsed = Optional.empty();
-            throw new DukeInvalidDateException(prerthan.duke.parse.DateParser.class.getSimpleName(), token);
+            throw new DukeInvalidDateException(DateParser.class.getSimpleName(), token);
         }
         if (possiblyParsed.isPresent()) {
             TemporalAccessor parsed = possiblyParsed.get();
