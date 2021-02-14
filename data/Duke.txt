@@ -1,2 +1,4 @@
-[T][] yes way 
-[T][] no way 
+T||read book
+E||project meeting | Mon 2-4pm
+D|X|return book | Sunday
+T||summary pages
