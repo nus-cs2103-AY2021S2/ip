@@ -87,11 +87,16 @@ public class Parser {
                 "No command arguments were supplied from input."));
     }
 
-    public static Flags getFlag(String message) {
-        if (message.length() == 2) {
-            if (message.charAt(0) == '-' && message.charAt(1) == 'm') {
+    /**
+     * Get a flag from a flag String
+     * @param flagString flag String before being parsed
+     * @return Flags enums reflecting what the flag String should mean
+     */
+    public static Flags getFlag(String flagString) {
+        if (flagString.length() == 2) {
+            if (flagString.charAt(0) == '-' && flagString.charAt(1) == 'm') {
                 return Flags.MESSAGE;
-            } else if (message.charAt(0) == '-' && message.charAt(1) == 't') {
+            } else if (flagString.charAt(0) == '-' && flagString.charAt(1) == 't') {
                 return Flags.TIME;
             }
         }

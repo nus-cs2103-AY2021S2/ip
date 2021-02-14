@@ -96,16 +96,15 @@ public class Ui {
                 }
             case UPDATE:
                 // Update a task
-                // mark a todo as done
                 try {
-                    // get mark as done reply from tasklist
+                    // update the todo and get return from controller
                     Pair<TaskList, Optional<? extends Todo>> updateTodoReturn =
                             taskList.updateTodo(command.getCommandArgs());
 
                     // replace taskList with new one from tasklist return
                     taskList = updateTodoReturn.getFirst();
 
-                    // get todoMarkedAsDone to be printed
+                    // get todoUpdated to be printed
                     Optional<? extends Todo> todoUpdated = updateTodoReturn.getSecond();
 
                     // reply with the String output

@@ -113,6 +113,11 @@ public class Event extends Todo {
         return new Event(newMessage, isDone, eventStringDateTime);
     }
 
+    /**
+     * Update an Event with a new message, keeping it's isDone state
+     * @param newMessage String containing new message
+     * @return Event updated with new message passed in
+     */
     public Event update(String newMessage, String newTime) {
         return new Event(newMessage, isDone, newTime);
     }

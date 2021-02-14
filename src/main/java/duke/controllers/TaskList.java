@@ -9,8 +9,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import duke.exceptions.*;
-import duke.models.*;
+import duke.exceptions.DukeBlankDetailsException;
+import duke.exceptions.DukeBlankTaskException;
+import duke.exceptions.DukeDateTimeParseException;
+import duke.exceptions.DukeInvalidFlagException;
+import duke.exceptions.DukeTaskIndexOutOfRangeException;
+import duke.models.Deadline;
+import duke.models.Event;
+import duke.models.Flags;
+import duke.models.Pair;
+import duke.models.Parser;
+import duke.models.Todo;
 
 public class TaskList {
     /** index offset constant for 1-based indexing of todos to client */
@@ -146,8 +155,11 @@ public class TaskList {
             throw new DukeTaskIndexOutOfRangeException("The index you specified for the task does not exist, "
                     + "please try again");
         }
+
+        // get todo to be updated if in range
         Optional<? extends Todo> todoToUpdate = this.todos.get(idxToUpdate);
-        // command does not always contain a flag
+
+        // get flag from command
         Flags flag = Parser.getFlag(updateTodoCommandArgsSplitByWhitespace.get(1));
 
         // if there's a flag included, the message to start iterating starts later

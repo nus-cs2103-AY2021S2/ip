@@ -1,2 +1,2 @@
-T|0|hello world
+T|0|another world
 E|0|new message for event|01/10/2022 1900
