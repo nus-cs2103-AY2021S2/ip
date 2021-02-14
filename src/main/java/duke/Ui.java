@@ -123,18 +123,18 @@ public class Ui {
                 + "2. Deadlines (Task that needs to be done by specified date/time)\n"
                 + "3. Events (Task that needs to be attended to at specified date/time)\n\n"
                 + "To add a ToDo, enter:\n"
-                + "todo {task description}\n\n"
+                + "todo <task description>\n\n"
                 + "To add a Deadline, enter:\n"
-                + "deadline {task description} /by {date/time in format dd-MM-yyyy HHmm}\n\n"
+                + "deadline <task description> /by <date/time in format dd-MM-yyyy HHmm>\n\n"
                 + "To add an Event, enter:\n"
-                + "event {task description} /at {date/time in format dd-MM-yyyy HHmm}\n\n"
+                + "event <task description> /at <date/time in format dd-MM-yyyy HHmm>\n\n"
                 + "To see a list of tasks you've added, enter: list\n\n"
                 + "To delete a task from the list, enter:\n"
-                + "delete {the number that corresponds to the task in your list of tasks}\n\n"
+                + "delete <the number that corresponds to the task in your list of tasks>\n\n"
                 + "To mark a task as done, enter:\n"
-                + "done {the number that corresponds to the task in your list of tasks}\n\n"
+                + "done <the number that corresponds to the task in your list of tasks>\n\n"
                 + "To find a list of tasks containing a specific keyword, enter:\n"
-                + "find {keyword}";
+                + "find <keyword>";
     }
 
     /**
