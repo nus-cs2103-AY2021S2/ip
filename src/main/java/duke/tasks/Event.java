@@ -1,8 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.DueDate;
-import duke.tasks.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

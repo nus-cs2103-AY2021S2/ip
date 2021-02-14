@@ -1,8 +1,5 @@
 package duke.parser;
 
-import duke.parser.WrongArgumentException;
-import duke.parser.InsufficientArgumentsException;
-
 import java.time.LocalDate;
 
 /**
@@ -46,25 +43,26 @@ public class Parser {
     public Parser parse(String input) {
         try {
             String[] parts = input.split(" ");
-            if (parts[0].equals("bye")) {
+            String action = parts[0];
+            if (action.equals("bye")) {
                 return new Parser("bye", null, null, -1);
-            } else if (parts[0].equals("list")) {
+            } else if (action.equals("list")) {
                 return new Parser("list", null, null, -1);
-            } else if (parts[0].equals("done")) {
+            } else if (action.equals("done")) {
                 if (parts.length == 1) {
                     throw new InsufficientArgumentsException("☹ OOPS!!! The "
                             + "description of done cannot be empty.");
                 }
                 int taskDone = Integer.parseInt(parts[1]);
                 return new Parser("done", null, null, taskDone);
-            } else if (parts[0].equals("delete")) {
+            } else if (action.equals("delete")) {
                 if (parts.length == 1) {
                     throw new InsufficientArgumentsException("☹ OOPS!!! The "
                             + "description of delete cannot be empty.");
                 }
                 int taskToDelete = Integer.parseInt(parts[1]);
                 return new Parser("delete", null, null, taskToDelete);
-            } else if (parts[0].equals("find")) {
+            } else if (action.equals("find")) {
                 if (parts.length == 1) {
                     throw new InsufficientArgumentsException("☹ OOPS!!! The "
                             + "description of find cannot be empty.");
@@ -78,14 +76,14 @@ public class Parser {
                     }
                 }
                 return new Parser("find", toFind, null, -1);
-            } else if (parts[0].equals("todo")) {
+            } else if (action.equals("todo")) {
                 if (parts.length == 1) {
                     throw new InsufficientArgumentsException("☹ OOPS!!! The "
                             + "description of a todo cannot be empty.");
                 }
                 String taskDescription = this.getDescription(parts, "\n");
                 return new Parser("todo", taskDescription, null, -1);
-            } else if (parts[0].equals("deadline")) {
+            } else if (action.equals("deadline")) {
                 if (parts.length == 1) {
                     throw new InsufficientArgumentsException("☹ OOPS!!! The "
                             + "description of a deadline cannot be empty.");
@@ -93,7 +91,7 @@ public class Parser {
                 LocalDate due = this.getDueDate(parts, "/by");
                 String taskDescription = this.getDescription(parts, "/by");
                 return new Parser("deadline", taskDescription, due, -1);
-            } else if (parts[0].equals("event")) {
+            } else if (action.equals("event")) {
                 if (parts.length == 1) {
                     throw new InsufficientArgumentsException("☹ OOPS!!! The "
                             + "description of an event cannot be empty.");
@@ -190,7 +188,7 @@ public class Parser {
      * Returns the index of the task of concern within the TaskList
      * @return Index of the task of concern within the TaskList
      */
-    public int getTaskIdx() {
+    public int getTaskIndex() {
         return this.num;
     }
 }

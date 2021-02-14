@@ -1,4 +1,6 @@
-package duke.javafx;
+package duke;
+
+import duke.javafx.Main;
 
 import javafx.application.Application;
 

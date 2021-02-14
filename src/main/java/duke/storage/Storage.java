@@ -7,7 +7,6 @@ import duke.tasks.Event;
 import duke.tasks.Deadline;
 import duke.tasks.DueDate;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
