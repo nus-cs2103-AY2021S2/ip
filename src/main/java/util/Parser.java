@@ -16,6 +16,8 @@ public interface Parser {
         switch (commandFlag) {
             case ListCommand.COMMAND_STRING:
                 return ListCommand.fromCommandMap(commandMap);
+            case FindCommand.COMMAND_STRING:
+                return FindCommand.fromCommandMap(commandMap);
             case TodoCommand.COMMAND_STRING:
                 return TodoCommand.fromCommandMap(commandMap);
             case DeadlineCommand.COMMAND_STRING:
