@@ -7,7 +7,7 @@ You can give commands to Zeke and it will return the relevant messages.
 
 ## Get started
 1. Ensure that [JDK 11](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html) or newer versions are installed on your computer.
-2. Download zeke.jar here to a path of your choice in your computer.
+2. Download zeke.jar [here]() to a path of your choice in your computer.
 3. Run the zeke.jar file.
 4. You can now start using the app!
 

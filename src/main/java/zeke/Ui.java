@@ -1,10 +1,10 @@
-package duke;
+package zeke;
 
 import java.util.ArrayList;
 
 
 /**
- * User interface class for Duke's interaction with users, send messages etc.
+ * User interface class for Zeke's interaction with users, send messages etc.
  */
 public class Ui {
 
@@ -18,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Prints greetings message at the start when user runs the Duke app.
+     * Prints greetings message at the start when user runs the Zeke app.
      */
     public static String greetings() {
         String message = "Eren... I have waited to meet you for a long time.\n"

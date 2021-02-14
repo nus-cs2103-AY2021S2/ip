@@ -1,4 +1,4 @@
-package duke;
+package zeke;
 
 /**
  * Todo class for todo tasks

@@ -1,4 +1,4 @@
-package duke;
+package zeke;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,10 +24,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Zeke zeke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/AttackTitan.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/BeastTitan.jpg"));
+    private Image zekeImage = new Image(this.getClass().getResourceAsStream("/images/BeastTitan.jpg"));
 
     /**
      * Creates a window and greets user
@@ -36,25 +36,25 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Ui.greetings(), dukeImage)
+                DialogBox.getZekeDialog(Ui.greetings(), zekeImage)
         );
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setZeke(Zeke d) {
+        zeke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Zeke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = zeke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getZekeDialog(response, zekeImage)
         );
         userInput.clear();
         if (input.equals("bye")) {

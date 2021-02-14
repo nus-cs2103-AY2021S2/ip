@@ -1,17 +1,15 @@
-package duke;
+package zeke;
 
 import java.io.IOException;
 import java.util.Locale;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.UnknownInputException;
+import zeke.exceptions.UnknownInputException;
+import zeke.exceptions.ZekeException;
 
 /**
- * Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
- * The types of tasks the user can add are: todo, deadline, event.
- * The user can also delete, check as done, and list tasks.
+ * Zeke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
  */
-public class Duke {
+public class Zeke {
 
     private Storage storage;
     private TaskList tasks;
@@ -19,12 +17,12 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor for Duke class.
+     * Constructor for Zeke class.
      * Initializes Ui, Parser, Storage and TaskList objects.
      *
      * @param filePath file path to file where user wants his task list saved and loaded.
      */
-    public Duke(String filePath) {
+    public Zeke(String filePath) {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage(filePath);
@@ -100,7 +98,7 @@ public class Duke {
             storage.saveTasks(tasks.getList());
         } catch (IllegalArgumentException e) {
             response = new UnknownInputException().getMessage();
-        } catch (DukeException e) {
+        } catch (ZekeException e) {
             response = e.getMessage();
         } catch (IOException e) {
             e.printStackTrace();

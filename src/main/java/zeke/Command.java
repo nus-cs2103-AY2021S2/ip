@@ -1,4 +1,4 @@
-package duke;
+package zeke;
 
 public enum Command {
     BYE,

@@ -1,4 +1,4 @@
-package duke;
+package zeke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

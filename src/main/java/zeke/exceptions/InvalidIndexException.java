@@ -1,6 +1,6 @@
-package duke.exceptions;
+package zeke.exceptions;
 
-public class InvalidIndexException extends DukeException {
+public class InvalidIndexException extends ZekeException {
 
     public InvalidIndexException() {
     }

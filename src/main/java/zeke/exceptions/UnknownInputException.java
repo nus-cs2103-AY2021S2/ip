@@ -1,6 +1,6 @@
-package duke.exceptions;
+package zeke.exceptions;
 
-public class UnknownInputException extends DukeException {
+public class UnknownInputException extends ZekeException {
 
     public UnknownInputException() {
     }

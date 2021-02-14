@@ -1,6 +1,6 @@
-package duke.exceptions;
+package zeke.exceptions;
 
-public class InvalidDescriptionException extends DukeException {
+public class InvalidDescriptionException extends ZekeException {
 
     public InvalidDescriptionException() {
     }

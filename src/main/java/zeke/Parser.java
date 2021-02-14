@@ -1,10 +1,10 @@
-package duke;
+package zeke;
 
 import java.util.ArrayList;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidDescriptionException;
-import duke.exceptions.InvalidIndexException;
+import zeke.exceptions.ZekeException;
+import zeke.exceptions.InvalidDescriptionException;
+import zeke.exceptions.InvalidIndexException;
 
 /**
  * Parser class to make sense of user input.
@@ -22,7 +22,7 @@ public class Parser {
      * Checks whether input task description is missing.
      *
      * @param inputArr user input array.
-     * @throws DukeException if input task description is missing.
+     * @throws ZekeException if input task description is missing.
      */
     public void isValidDescription(String[] inputArr) throws InvalidDescriptionException {
         if (inputArr.length == 1 || inputArr[1].equals("") || inputArr[1].startsWith(" ")) {
