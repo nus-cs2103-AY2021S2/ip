@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.task.Task;
 import duke.task.TaskList;
@@ -38,7 +39,10 @@ public class FindCmd extends Command {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("Here are the matching tasks in your list for search '%s':\n", cmdArgs));
 
-        // Get the formatting for printing of TaskList
+        // If don't sort, search results may appear differently on different OSes. Tested with Linux and Mac.
+        Collections.sort(result);
+
+        // Use the same formatting for printing of TaskList
         sb.append(new TaskList(result).toString());
         return sb.toString();
     }

@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -93,7 +92,6 @@ public class TaskList {
     @Override
     public String toString() {
         ArrayList<Task> tmp = new ArrayList<>(lst);
-        Collections.sort(tmp);
 
         if (tmp.isEmpty()) {
             return "No tasks found.\n";
