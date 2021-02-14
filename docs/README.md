@@ -26,7 +26,9 @@ Example of usage:
 If added successfully, Rem will reply that:
 
 `Got it. I've added this task:  
+
 [T][ ] Fight the White Whale   
+
 Now you have {number of existing tasks} tasks in the list.`
 
 ### `deadline` - Add a deadline to the task list
@@ -42,7 +44,9 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:  
+
 [D][ ] Fight the White Whale (by: 2021-02-16)  
+
 Now you have {number of existing tasks} tasks in the list.`
 
 ### `event` - Add an event to the task list
@@ -58,5 +62,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:
+
 [E][ ] Fight the White Whale (at: 2021-02-16)
+
 Now you have {number of existing tasks} tasks in the list.`
