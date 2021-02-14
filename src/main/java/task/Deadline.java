@@ -3,13 +3,12 @@ package task;
 import util.Parser;
 
 import java.time.LocalDate;
-
-import static java.time.format.DateTimeFormatter.*;
-
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 
 public class Deadline extends Task {
     public static final String COMMAND_STRING = "deadline";
@@ -59,6 +58,11 @@ public class Deadline extends Task {
         commandMap.put(END_DATE_STRING, new ArrayList<>());
         commandMap.get(END_DATE_STRING).add(endDate.format(ISO_LOCAL_DATE));
 
+        // Add done flag
+        if (super.isDone()) {
+            commandMap.put("done", new ArrayList<>());
+        }
+
         return Parser.commandMapToString(commandMap);
     }
 
@@ -71,6 +75,8 @@ public class Deadline extends Task {
         String endDateString = commandMap.get(END_DATE_STRING).get(0);
         LocalDate endDate = LocalDate.parse(endDateString);
 
-        return new Deadline(description, endDate);
+        boolean isDone = commandMap.containsKey("done");
+
+        return new Deadline(description, endDate, isDone);
     }
 }

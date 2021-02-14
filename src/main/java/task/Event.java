@@ -4,12 +4,9 @@ import util.Parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 
@@ -61,6 +58,11 @@ public class Event extends Task {
         commandMap.put(EVENT_DATE_STRING, new ArrayList<>());
         commandMap.get(EVENT_DATE_STRING).add(eventDate.format(ISO_LOCAL_DATE));
 
+        // Add done flag
+        if (super.isDone()) {
+            commandMap.put("done", new ArrayList<>());
+        }
+
         return Parser.commandMapToString(commandMap);
     }
 
@@ -73,6 +75,8 @@ public class Event extends Task {
         String eventDateString = commandMap.get(EVENT_DATE_STRING).get(0);
         LocalDate eventDate = LocalDate.parse(eventDateString);
 
-        return new Event(description, eventDate);
+        boolean isDone = commandMap.containsKey("done");
+
+        return new Event(description, eventDate, isDone);
     }
 }

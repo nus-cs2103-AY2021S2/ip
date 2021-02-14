@@ -1,9 +1,5 @@
 package task;
 
-import java.lang.reflect.Array;
-import java.util.HashMap;
-import java.util.List;
-
 public abstract class Task {
     private final String description;
     private boolean isDone;
@@ -35,6 +31,10 @@ public abstract class Task {
     }
 
     public abstract TaskType getTaskType();
+
+    public boolean isDone() {
+        return isDone;
+    }
 
     public abstract String getCommandString();
 

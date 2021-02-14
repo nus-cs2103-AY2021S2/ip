@@ -5,7 +5,6 @@ import util.Parser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Todo extends Task {
     public static final String COMMAND_STRING = "todo";
@@ -45,6 +44,11 @@ public class Todo extends Task {
         commandMap.put(getCommandString(), new ArrayList<>());
         commandMap.get(getCommandString()).add(super.getDescription());
 
+        // Add done flag
+        if (super.isDone()) {
+            commandMap.put("done", new ArrayList<>());
+        }
+
         return Parser.commandMapToString(commandMap);
     }
 
@@ -52,7 +56,8 @@ public class Todo extends Task {
         HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
         List<String> descriptions = commandMap.get(COMMAND_STRING);
         String description = String.join(" ", descriptions);
-        return new Todo(description);
+        boolean isDone = commandMap.containsKey("done");
+        return new Todo(description, isDone);
     }
 
 }
