@@ -1,0 +1,9 @@
+todo eat
+todoeat and sleep
+event sleep /at 2021-01-20 1600
+deadline code /by 2021-02-10 2pm
+list
+done 2
+done 3
+list
+bye
