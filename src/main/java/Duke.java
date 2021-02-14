@@ -38,7 +38,7 @@ public class Duke {
     public Duke(Storage storage) {
         this.storage = storage;
         try {
-            this.taskManager = Storage.readTaskManager();
+            this.taskManager = storage.readTaskManager();
         } catch (IOException e) {
             this.taskManager = new TaskManager();
         }
@@ -73,7 +73,7 @@ public class Duke {
                 message = e.getMsg();
             }
             System.out.println(message);
-            Storage.writeTaskManager(taskManager);
+            storage.writeTaskManager(taskManager);
 
             if (shouldQuit) {
                 break;

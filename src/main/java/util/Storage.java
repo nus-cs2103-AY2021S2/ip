@@ -23,7 +23,7 @@ public class Storage {
         saveFile.createNewFile();
     }
 
-    public static void writeToFile(String saveString) throws IOException {
+    public void writeToFile(String saveString) throws IOException {
         Path savePath = Path.of("data", "sweh.txt");
         File file = new File(savePath.toString());
         (new File(savePath.getParent().toString())).mkdir();
@@ -33,7 +33,7 @@ public class Storage {
         fw.close();
     }
 
-    public static File getFile() throws IOException {
+    public File getFile() throws IOException {
         Path savePath = Path.of("data", "sweh.txt");
         File file = new File(savePath.toString());
         (new File(savePath.getParent().toString())).mkdir();
@@ -41,7 +41,7 @@ public class Storage {
         return file;
     }
 
-    public static TaskManager readTaskManager() throws IOException {
+    public TaskManager readTaskManager() throws IOException {
         File file = getFile();
         Scanner sc = new Scanner(file);
         TaskManager taskManager = new TaskManager();
@@ -60,7 +60,7 @@ public class Storage {
      * @param saveString SaveString representing the Task saved in disk.
      * @return Task that was represented by the saveString
      */
-    private static Task readTask(String saveString) {
+    private Task readTask(String saveString) {
         HashMap<String, List<String>> commandMap = parseCommandMap(saveString);
         String command = extractCommandString(commandMap);
         switch (command) {
@@ -76,7 +76,7 @@ public class Storage {
         }
     }
 
-    public static void writeTaskManager(TaskManager taskManager) throws IOException {
+    public void writeTaskManager(TaskManager taskManager) throws IOException {
         String saveString = taskManager.toSaveString();
         writeToFile(saveString);
     }
