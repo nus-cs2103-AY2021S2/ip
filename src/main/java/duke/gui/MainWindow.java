@@ -38,7 +38,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         // Print welcome msg
-        String welcomeMsg = "Hello! I am duke\nWhat can I do for you?";
+        String welcomeMsg = new Ui().getWelcomeMsg();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMsg, dukeImage));
     }
 

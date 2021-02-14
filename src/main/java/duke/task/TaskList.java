@@ -95,11 +95,16 @@ public class TaskList {
         ArrayList<Task> tmp = new ArrayList<>(lst);
         Collections.sort(tmp);
 
+        if (tmp.isEmpty()) {
+            return "No tasks found.\n";
+        }
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tmp.size(); i++) {
             Task task = tmp.get(i);
             sb.append(String.format("%d. %s\n", i + 1, task.toString()));
         }
+
         return sb.toString();
     }
 }

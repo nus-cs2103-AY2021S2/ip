@@ -40,7 +40,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;
 
-        ui.printWelcomeMsg();
+        ui.printWelcomeMsgWithLogo();
 
         while (!isExit) {
             try {
