@@ -1,23 +1,25 @@
+package duke;
+
 import java.time.format.DateTimeParseException;
 
 /**
- * Specifies the command for deadline command type.
+ * Specifies the command for event command type.
  */
-public class DeadlineCommand extends Command {
-    String by;
+public class EventCommand extends Command {
+    String at;
 
     /**
-     * Initialises DeadlineCommand object.
-     * @param description the description of the deadline task.
-     * @param by the due date of the deadline task.
+     * Initialises EventCommand object.
+     * @param description the description of the task.
+     * @param at the date of the task, in the format YYYY-MM-DD
      */
-    public DeadlineCommand(String description, String by) {
+    public EventCommand(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
     }
 
     /**
-     * Executes the command by adding the deadline task to the existing taskList,
+     * Executes the command by adding the event task to the existing taskList,
      * writing the updated taskList into storage and responding with relevant message.
      * @param taskList the TaskList object that contains all tasks added by user.
      * @param ui the Ui object that provides responses to the user according to status of their input.
@@ -27,10 +29,10 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
-            Deadline deadline = new Deadline(description, by);
-            taskList.addDeadlineTask(deadline);
+            Event event = new Event(description, at);
+            taskList.addEventTask(event);
             storage.writeToFile(taskList.getList());
-            ui.showTaskAdded(deadline);
+            ui.showTaskAdded(event);
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date entered! Please type in valid yyyy-mm-dd format!");
         }

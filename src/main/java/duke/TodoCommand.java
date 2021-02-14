@@ -1,18 +1,20 @@
+package duke;
+
 /**
- * Specifies the command for delete command type.
+ * Specifies the command for todo command type.
  */
-public class DeleteCommand extends Command {
+public class TodoCommand extends Command {
 
     /**
-     * Initialises DeleteCommand object.
-     * @param index the index of the task to be deleted.
+     * Initialises the TodoCommand object.
+     * @param description the description of the deadline task.
      */
-    public DeleteCommand(int index) {
-        super(index);
+    public TodoCommand(String description) {
+        super(description);
     }
 
     /**
-     * Executes the command by removing the task to the existing taskList,
+     * Executes the command by adding the todo task to the existing taskList,
      * writing the updated taskList into storage and responding with relevant message.
      * @param taskList the TaskList object that contains all tasks added by user.
      * @param ui the Ui object that provides responses to the user according to status of their input.
@@ -20,8 +22,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = taskList.deleteTask(index);
+        Todo todo = new Todo(description);
+        taskList.addTodoTask(todo);
         storage.writeToFile(taskList.getList());
-        ui.showTaskDeleted(task);
+        ui.showTaskAdded(todo);
     }
 }

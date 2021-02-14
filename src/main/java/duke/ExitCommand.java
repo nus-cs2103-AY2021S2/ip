@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Specifies the command for deadline command type.
  */
