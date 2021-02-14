@@ -1,5 +1,6 @@
 package soonwee.duke;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -24,7 +25,7 @@ public class TaskList {
         String result = new String();
         int actualIndex = index - 1;
         try {
-            if (actualIndex < this.tasksList.size()) {
+            if (actualIndex < this.tasksList.size() && actualIndex > -1) {
                 this.getTask(actualIndex).setCompleted();
                 return "Nice! I've marked this task as done: \n" + this.getTask(index - 1);
             } else {
@@ -96,7 +97,7 @@ public class TaskList {
         int actualIndex = index - 1;
         String result = new String();
         try {
-            if (actualIndex < this.tasksList.size()) {
+            if (actualIndex < this.tasksList.size() && actualIndex > -1) {
                 Task temp = this.getTask(actualIndex);
                 this.tasksList.remove(index - 1);
                 result = result + "Noted. I've removed this task: \n" + temp + "\n"
@@ -124,7 +125,20 @@ public class TaskList {
     }
 
     public String sortTaskListByDateTime() {
-        Collections.sort(tasksList, new DateTimeComparator());
+        ArrayList<Task> temporaryTimeList = new ArrayList<>(); //To Store items with dates
+        ArrayList<Task> toDoList = new ArrayList<>(); //To store temporary ToDoList
+        for (Task task : tasksList) {
+            if(task.getDateTime()!= null) {
+                temporaryTimeList.add(task);
+            } else {
+                toDoList.add(task);
+            }
+        }
+        Collections.sort(temporaryTimeList, new DateTimeComparator());
+        for (Task task : toDoList) {
+            temporaryTimeList.add(task);
+        }
+        tasksList = temporaryTimeList;
         return displayTasks();
     }
 }
