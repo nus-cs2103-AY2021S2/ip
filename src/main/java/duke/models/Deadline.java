@@ -94,4 +94,27 @@ public class Deadline extends Todo {
     public Deadline markAsDone() {
         return new Deadline(this.message, true, this.getDeadline());
     }
+
+    /**
+     * updates time for a Deadline by passing in the new String time
+     * @param newTime String containing new time in format DD/MM/YYYY HHMM
+     * @return new Deadline with the updated date time
+     */
+    public Deadline updateTime(String newTime) throws DateTimeParseException {
+        return new Deadline(message, isDone, newTime);
+    }
+
+    /**
+     * Returns a Deadline with the updated message
+     * @param newMessage String containing new message for Event to contain
+     * @return new Deadline with updated message
+     */
+    @Override
+    public Deadline updateMessage(String newMessage) {
+        return new Deadline(newMessage, isDone, deadlineString);
+    }
+
+    public Deadline update(String newMessage, String newTime) {
+        return new Deadline(newMessage, isDone, newTime);
+    }
 }

@@ -51,6 +51,16 @@ public class TodosView {
     }
 
     /**
+     * Returns "Got it, Task has been amended to:" when task is amended
+     * @param updatedTodo Optional Todo object containing a new Todo to be printed
+     * @return String showing todo that got updated
+     */
+    public static String updateTodoReply(Optional<? extends Todo> updatedTodo) {
+        return String.format("Got it! Task has been amended to:\n%s\n.",
+                renderTodoLine(updatedTodo));
+    }
+
+    /**
      * Returns "Got it, I've added this task:", followed by the message contained in the new todo
      * @param newTodo Optional Todo object containing a new Todo to be printed
      * @param listSize Integer list size taken to return the number of tasks user currently has

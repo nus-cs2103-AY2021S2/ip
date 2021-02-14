@@ -93,4 +93,27 @@ public class Event extends Todo {
     public Event markAsDone() {
         return new Event(this.message, true, this.getEventTime());
     }
+
+    /**
+     * updates time for an Event by passing in the new String time
+     * @param newTime String containing new time in format DD/MM/YYYY HHMM
+     * @return new Event with the updated date time
+     */
+    public Event updateTime(String newTime) throws DateTimeParseException {
+        return new Event(message, isDone, newTime);
+    }
+
+    /**
+     * Returns an Event with the updated message
+     * @param newMessage String containing new message for Event to contain
+     * @return new Event with updated message
+     */
+    @Override
+    public Event updateMessage(String newMessage) {
+        return new Event(newMessage, isDone, eventStringDateTime);
+    }
+
+    public Event update(String newMessage, String newTime) {
+        return new Event(newMessage, isDone, newTime);
+    }
 }

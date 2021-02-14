@@ -68,4 +68,8 @@ public class Todo {
     public Todo markAsDone() {
         return new Todo(this.message, true);
     }
+
+    public Todo updateMessage(String newMessage) {
+        return new Todo(newMessage);
+    }
 }
