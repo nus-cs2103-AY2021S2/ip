@@ -5,7 +5,6 @@ import util.DukeException;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_STRING = "done";

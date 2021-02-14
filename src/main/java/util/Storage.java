@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-import static util.Parser.*;
+import static util.Parser.extractCommandString;
+import static util.Parser.parseCommandMap;
 
 public class Storage {
     private final String first;
