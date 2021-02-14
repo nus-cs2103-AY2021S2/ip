@@ -66,7 +66,7 @@ public class DialogBox extends HBox {
         this.stackPane = new StackPane();
         this.stackPane.setAlignment(Pos.TOP_RIGHT);
         this.stackPane.getChildren().addAll(this.rectangleBox, this.textFlow);
-        
+
         this.rectangleBox.heightProperty().bind(this.stackPane.heightProperty());
 
         this.setAlignment(Pos.TOP_RIGHT);
