@@ -19,12 +19,19 @@ public class DeleteHandler implements CommandHandler {
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {
+        response = execute(ui, storage, taskList, true);
+        ui.respond(response);
+    }
+
+    @Override
+    public String execute(Ui ui, Storage storage, TaskList taskList, boolean toString) {
+        assert toString = true;
         Task task = taskList.getTask(taskNum);
         taskList.removeTask(taskNum);
         response = "Noted. I've removed this task: \n"
                 + " " + task + "\n";
-        ui.respond(response);
         storage.delete(taskNum);
+        return response;
     }
 
     @Override

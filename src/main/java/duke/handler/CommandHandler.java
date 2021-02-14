@@ -9,4 +9,5 @@ import duke.tasks.TaskList;
  */
 public interface CommandHandler {
     public void execute(Ui ui, Storage storage, TaskList taskList);
+    public String execute(Ui ui, Storage storage, TaskList taskList, boolean toString);
 }

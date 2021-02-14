@@ -14,6 +14,12 @@ public class ByeHandler implements CommandHandler {
     }
 
     @Override
+    public String execute(Ui ui, Storage storage, TaskList taskList, boolean toString) {
+        assert toString = true;
+        return response;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
