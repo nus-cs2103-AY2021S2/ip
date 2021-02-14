@@ -46,6 +46,8 @@ public class Parser {
             return exitProgram();
         } else if (userInput.equals("save")) {
             return saveAllData();
+        } else if (userInput.equals("help")) {
+            return Ui.showHelp();
         } else if (userInput.equals("list")) {
             return listTasksIfValid();
         } else if (userInput.contains("done")) {

@@ -46,7 +46,7 @@ Removes the task from the archive list and moves it back to the to-do list.
 
 Saves the data. 
 
-### Exiting the program: `exit`
+### Exiting the program: `bye`
 
 Saves the data and closes the window.
 
@@ -261,12 +261,12 @@ Great! I've saved your data.
 
 ---
 
-### `exit` - Exits the program.
+### `bye` - Exits the program.
 
 Saves the data and closes the window.
 
 Example of usage: 
 
-`exit`
+`bye`
 
 ---

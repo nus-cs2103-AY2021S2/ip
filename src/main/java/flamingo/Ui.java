@@ -7,8 +7,13 @@ import java.util.ArrayList;
  */
 public class Ui {
 
+    /**
+     * Displays introduction message for the user.
+     * @return String with introduction message.
+     */
     public static String sayHello() {
-        return "Hello! I'm Flamingo. What's on your to-do list?";
+        return "Hello! I'm Flamingo. What's on your to-do list?\n"
+                + "Type 'help' to see what commands you can use.\n";
     }
 
     public static String sayBye() {
@@ -108,5 +113,25 @@ public class Ui {
 
     public static String saveData() {
         return "Great! I've saved your data.";
+    }
+
+    /**
+     * Shows commands that the user can try.
+     * @return String of commands.
+     */
+    public static String showHelp() {
+        return "Here are some commands you can try!\n"
+                + "\nAdd a to-do: todo <description>\n"
+                + "\nAdd a deadline task: deadline <description> /by <yyyy-mm-dd>\n"
+                + "\nAdd an event: event <description> /at <yyyy-mm-dd>T<hh:mm>\n"
+                + "\nView all tasks: list\n"
+                + "\nMark a task as completed: done <index>\n"
+                + "\nDelete a task: delete <index>\n"
+                + "\nFind a task by keyword: find <keyword>\n"
+                + "\nArchive a task: archive <index> OR archive all\n"
+                + "\nView all archived tasks: archive\n"
+                + "\nUnarchive a task: unarchive <index>\n"
+                + "\nSave your data: save\n"
+                + "\nExit the program: bye\n";
     }
 }
