@@ -104,17 +104,11 @@ public class Storage {
         String[] tokens = taskDetails.split("\\|");
         boolean isDone = !tokens[0].equals("0");
 
-        String details;
-        String at;
+        String details = tokens[1];
+        String at = tokens[2].equals("NULL") ? null : tokens[2];
+        String by = tokens[3].equals("NULL") ? null : tokens[3];
 
-        if (tokens.length > 2) {
-            details = tokens[1];
-            at = tokens[2];
-        } else {
-            details = tokens[1];
-            at = null;
-        }
-        return new Events(isDone, details, at);
+        return new Events(isDone, details, by, at);
     }
 
     /**
@@ -127,17 +121,11 @@ public class Storage {
         String[] tokens = taskDetails.split("\\|");
         boolean isDone = !tokens[0].equals("0");
 
-        String details;
-        String by;
+        String details = tokens[1];
+        String by = tokens[2].equals("NULL") ? null : tokens[2];
+        String tag = tokens[3].equals("NULL") ? null : tokens[3];
 
-        if (tokens.length > 2) {
-            details = tokens[1];
-            by = tokens[2];
-        } else {
-            details = tokens[1];
-            by = null;
-        }
-        return new Events(isDone, details, by);
+        return new Events(isDone, details, tag, by);
     }
     /**
      * Creates a Todo object from the Task details
@@ -149,8 +137,9 @@ public class Storage {
         String[] tokens = taskDetails.split("\\|");
         boolean isDone = !tokens[0].equals("0");
         String details = tokens[1];
+        String tag = tokens[2].equals("NULL") ? null : tokens[2];
 
-        return new Todo(isDone, details);
+        return new Todo(isDone, details, tag);
     }
 
     /**

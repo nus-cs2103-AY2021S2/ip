@@ -3,11 +3,17 @@ package task;
 public abstract class Task {
 
     protected String description;
+    protected String tag;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, String tag) {
         this.description = description;
         this.isDone = false;
+        this.tag = tag;
+    }
+
+    public String getTag() {
+        return this.tag;
     }
 
     public String getStatusIcon() {

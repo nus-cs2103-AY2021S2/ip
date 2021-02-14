@@ -7,13 +7,14 @@ public class Deadlines extends Task {
     private final String TYPE_ICON = "[D]";
     private final String ICON = "D";
     private final String DELIMITER = "|";
+    private final String NULL = "NULL";
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
     private LocalDateTime time;
 
-    public Deadlines(String description, String by) {
-        super(description);
+    public Deadlines(String description, String by, String tag) {
+        super(description, tag);
 
         System.out.println(description);
         System.out.println(by);
@@ -36,11 +37,18 @@ public class Deadlines extends Task {
 
     @Override
     public String getDescription() {
-        if (time == null) {
-            return this.description;
-        } else {
-            return String.format("%s (by: %s)", this.description, this.time.format(formatter));
+        String result = description;
+
+        if (time != null) {
+            result = String.format("%s (by: %s)", result, this.time.format(formatter));
         }
+
+        if (tag != null) {
+            result = String.format("%s (tag: %s)", result, this.time.format(formatter));
+        }
+
+        return result;
+
     }
     /**
      * Converts the object into a String representation for storage
@@ -52,13 +60,20 @@ public class Deadlines extends Task {
 
         String isDoneString = isDone ? "1" : "0";
 
-        String result;
+        String result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
 
         if (time == null) {
-            result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
+            result += DELIMITER + NULL;
         } else {
-            result = ICON + DELIMITER + isDoneString + DELIMITER + this.description + DELIMITER + this.time.toString();
+            result += DELIMITER + time;
         }
+
+        if (tag == null) {
+            result += DELIMITER + NULL;
+        } else {
+            result += DELIMITER + tag;
+        }
+
         return result;
     }
 

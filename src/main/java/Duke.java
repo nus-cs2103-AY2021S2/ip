@@ -6,6 +6,8 @@ import task.Todo;
 import storage.Storage;
 import ui.Ui;
 
+import static java.lang.System.exit;
+
 public class Duke {
 
     private Storage storage;
@@ -15,47 +17,53 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(System.getProperty("user.dir") + "/data/", "duke.txt");
-        this.taskList = storage.loadFromHardisk();
+        try {
+            this.taskList = storage.loadFromHardisk();
+        } catch (Exception e) {
+            System.out.println("Error loading from storage, starting with new tasklist");
+            this.taskList = new TaskList();
+        }
     }
 
-    public String getResponse(String input) {
+    public Response getResponse(String input) {
 
-        String response;
+        Response response;
 
-            String[] tokens = input.split(" ", 2);
+        String[] tokens = input.split(" ", 2);
 
-            String command = tokens[0];
-            String argument = tokens.length == 2 ? tokens[1] : null;
+        String command = tokens[0];
+        String argument = tokens.length == 2 ? tokens[1] : null;
 
-            switch(command) {
-                case "bye":
-                    response = executeByeCommand();
-                    System.exit(0);
-                case "list":
-                    response = executeListCommand();
-                    break;
-                case "done":
-                    response = executeDoneCommand(argument);
-                    break;
-                case "todo":
-                    response = executeTodoCommand(argument);
-                    break;
-                case "deadline":
-                    response = executeDeadlineCommand(argument);
-                    break;
-                case "event":
-                    response = executeEventCommand(argument);
-                    break;
-                case "delete":
-                    response = executeDeleteCommand(argument);
-                    break;
-                case "find":
-                    response = executeFindCommand(argument);
-                    break;
-                default:
-                    response = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-                    break;
-            }
+        switch (command) {
+            case "bye":
+                response = executeByeCommand();
+                break;
+//                System.exit(0);
+            case "list":
+                response = executeListCommand();
+                break;
+            case "done":
+                response = executeDoneCommand(argument);
+                break;
+            case "todo":
+                response = executeTodoCommand(argument);
+                break;
+            case "deadline":
+                response = executeDeadlineCommand(argument);
+                break;
+            case "event":
+                response = executeEventCommand(argument);
+                break;
+            case "delete":
+                response = executeDeleteCommand(argument);
+                break;
+            case "find":
+                response = executeFindCommand(argument);
+                break;
+            default:
+                response = new Response("OOPS!!! I'm sorry, but I don't know what that means :-(", false);
+                break;
+        }
         return response;
     }
 
@@ -64,9 +72,9 @@ public class Duke {
      *
      * @return String to represent termination of the program
      */
-    private String executeByeCommand() {
+    private Response executeByeCommand() {
         storage.saveToHardisk(taskList);
-        return "bye";
+        return new Response("bye", true);
     }
 
     /**
@@ -74,7 +82,7 @@ public class Duke {
      *
      * @return String to represent termination of the program
      */
-    private String executeListCommand() {
+    private Response executeListCommand() {
 
         StringBuilder sb = new StringBuilder();
 
@@ -82,7 +90,7 @@ public class Duke {
             sb.append("There are no tasks in your task list\n");
         } else {
             sb.append("Here are the tasks in your task list:\n");
-            for (int i = 0; i < taskList.size() ; i++ ) {
+            for (int i = 0; i < taskList.size(); i++) {
                 sb.append(Integer.toString(i + 1) + ". "
                         + taskList.get(i).getTypeIcon()
                         + taskList.get(i).getStatusIcon() + " "
@@ -90,16 +98,17 @@ public class Duke {
                 );
             }
         }
-        return sb.toString();
+        return new Response(sb.toString(), false);
+
     }
 
     /**
      * Executes Done Command
      *
-     * @param argument  command arguments
+     * @param argument command arguments
      * @return String to represent termination of the program
      */
-    private String executeDoneCommand(String argument) {
+    private Response executeDoneCommand(String argument) {
         // check for correct number of arguments
         assert argument != null : "OOPS!!! The description of a done cannot be empty.";
 
@@ -108,12 +117,12 @@ public class Duke {
         try {
             taskId = Integer.parseInt(argument) - 1;
         } catch (NumberFormatException e) {
-            return "OOPS!!! The id of a done must be an integer.";
+            return new Response("OOPS!!! The id of a done must be an integer.", false);
         }
 
         // check if integer is within bounds
         if (taskId >= taskList.size() || taskId < 0) {
-            return "OOPS!!! That is an invalid task id.";
+            return new Response("OOPS!!! That is an invalid task id.", false);
         }
 
         Task task = taskList.get(taskId);
@@ -125,20 +134,24 @@ public class Duke {
                 + task.getDescription()
         );
 
-        return sb.toString();
+        return new Response(sb.toString(), false);
     }
 
     /**
      * Executes Todo Command
      *
-     * @param argument  command arguments
+     * @param argument command arguments
      * @return String to represent termination of the program
      */
-    private String executeTodoCommand(String argument) {
+    private Response executeTodoCommand(String argument) {
 
         assert argument != null : "OOPS!!! The description of a done cannot be empty.";
 
-        Task task = new Todo(argument);
+        String[] split = argument.split("/tag", 2);
+        String description = split[0];
+        String tag = split.length > 1 ? split[1].strip() : null;
+
+        Task task = new Todo(description, tag);
         taskList.add(task);
 
         StringBuilder sb = new StringBuilder();
@@ -147,48 +160,60 @@ public class Duke {
         sb.append("  " + task.getTypeIcon() + task.getStatusIcon() + " "
                 + task.getDescription() + "\n");
         sb.append("Now you have " + taskList.size() + " tasks in the list");
-        return sb.toString();
+
+        return new Response(sb.toString(), false);
     }
 
     /**
      * Executes Deadline Command
      *
-     * @param argument  command arguments
+     * @param argument command arguments
      * @return String to represent termination of the program
      */
-    private String executeDeadlineCommand(String argument) {
+    private Response executeDeadlineCommand(String argument) {
 
         assert argument != null : "OOPS!!! The description of a deadline cannot be empty.";
 
         StringBuilder sb = new StringBuilder();
 
-        String[] split = argument.split("/by", 2);
+        String[] split = argument.split("/tag", 2);
+        String arg1 = split[0];
+        String tag = split.length > 1 ? split[1].strip() : null;
+
+        split = arg1.split("/by", 2);
         String description = split[0];
         String by = split.length > 1 ? split[1].strip() : null;
-        Task task = new Deadlines(description, by);
+
+        Task task = new Deadlines(description, by, tag);
         taskList.add(task);
 
         sb.append("Got it. I have added this task:\n");
         sb.append("  " + task.getTypeIcon() + task.getStatusIcon() + " "
                 + task.getDescription() + "\n");
         sb.append("Now you have " + taskList.size() + " tasks in the list.");
-        return sb.toString();
+
+        return new Response(sb.toString(), false);
     }
 
     /**
      * Executes Events Command
      *
-     * @param argument  command arguments
+     * @param argument command arguments
      * @return String to represent termination of the program
      */
-    private String executeEventCommand(String argument) {
+    private Response executeEventCommand(String argument) {
 
         assert argument != null : "OOPS!!! The description of an event cannot be empty.";
 
-        String[] split = argument.split("/at", 2);
+        String[] split = argument.split("/tag", 2);
+        String arg1 = split[0];
+        String tag = split.length > 1 ? split[1].strip() : null;
+
+        split = arg1.split("/at", 2);
         String description = split[0];
-        String at = split.length > 1 ? split[1] : null;
-        Task task = new Events(description, at);
+        String at = split.length > 1 ? split[1].strip() : null;
+
+        Task task = new Events(description, at, tag);
         taskList.add(task);
 
         StringBuilder sb = new StringBuilder();
@@ -198,16 +223,16 @@ public class Duke {
                 + task.getDescription() + "\n");
         sb.append("Now you have " + taskList.size() + " tasks in the list.");
 
-        return sb.toString();
+        return new Response(sb.toString(), false);
     }
 
     /**
      * Executes Delete Command
      *
-     * @param argument  command arguments
+     * @param argument command arguments
      * @return String to represent termination of the program
      */
-    private String executeDeleteCommand(String argument) {
+    private Response executeDeleteCommand(String argument) {
 
         assert argument != null : "OOPS!!! The description of a delete cannot be empty.";
 
@@ -215,11 +240,11 @@ public class Duke {
         try {
             taskId = Integer.parseInt(argument) - 1;
         } catch (NumberFormatException e) {
-            return "OOPS!!! The id of a delete must be an integer.";
+            return new Response("OOPS!!! The id of a delete must be an integer.", false);
         }
 
         if (taskId >= taskList.size() || taskId < 0) {
-            return "OOPS!!! That is an invalid task id.";
+            return new Response("OOPS!!! That is an invalid task id.", false);
         }
 
         Task task = taskList.remove(taskId);
@@ -230,23 +255,24 @@ public class Duke {
                 + task.getDescription() + "\n");
         sb.append("Now you have " + taskList.size() + " tasks in the list.");
 
-        return sb.toString();
+        return new Response(sb.toString(), false);
     }
 
     /**
      * Executes find Command
      *
-     * @param argument  command arguments
+     * @param argument command arguments
      * @return String to represent termination of the program
      */
-    private String executeFindCommand(String argument) {
-        
+    private Response executeFindCommand(String argument) {
+
         assert argument != null : "OOPS!!! The description of a find cannot be empty.";
 
         TaskList subList = new TaskList();
-        for (Task task: taskList.getList()) {
+        for (Task task : taskList.getList()) {
             String description = task.getDescription();
-            if (description.contains(argument)) {
+            String tag = task.getTag();
+            if (description.contains(argument) || tag.contains(argument)) {
                 subList.add(task);
             }
         }
@@ -254,10 +280,11 @@ public class Duke {
         StringBuilder sb = new StringBuilder();
 
         if (subList.size() == 0) {
-            return "There are no tasks that matches your search";
+
+            return new Response("There are no tasks that matches your search", false);
         } else {
             sb.append("Here are the matching tasks in your list:");
-            for (int i = 0; i < subList.size() ; i++ ) {
+            for (int i = 0; i < subList.size(); i++) {
                 sb.append(Integer.toString(i + 1) + ". "
                         + subList.get(i).getTypeIcon()
                         + subList.get(i).getStatusIcon() + " "
@@ -266,6 +293,15 @@ public class Duke {
             }
         }
 
-        return sb.toString();
+        return new Response(sb.toString(), false);
+    }
+
+    public void shutDown() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        exit(0);
     }
 }
