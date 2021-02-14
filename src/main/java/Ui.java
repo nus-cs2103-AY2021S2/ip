@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Ui {
 
     public String greet(Storage storage) {
-        String greeting = "Hello! I'm Kitty， こんにちは～ ✿.\n"
+        String greeting = "Hello! I'm Cher， こんにちは～ ✿.\n"
                 + "What can I do for you? \nEnter help if you are lost \u263a.\n"
                 + storage.taskHistory();
         return greeting;

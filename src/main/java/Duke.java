@@ -71,7 +71,6 @@ public class Duke extends Application {
 
 
     public static void main(String[] args) {
-        launch(args);
         String taskPath = "duke.txt";
         String contactPath = "contact.txt";
         Duke duke = new Duke(taskPath, contactPath);
@@ -112,7 +111,7 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("\u2764小茜的待办事项\u2764");
+        stage.setTitle("\u2764CLUELESS\u2764");
         stage.setResizable(false);
         stage.setMinHeight(700.0);
         stage.setMinWidth(500.0);
@@ -207,7 +206,7 @@ public class Duke extends Application {
     private void handleUserInput() throws InvalidCommandException {
         String input = userInput.getText();
         String response = parser.readCommand(input);
-        Label userText = new Label("Kuromi: " + input);
+        Label userText = new Label("Horowitz: " + input);
         Label dukeText = new Label(getResponse(response));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
@@ -227,6 +226,6 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
-        return "Kitty: " + input;
+        return "Cher: " + input;
     }
 }
