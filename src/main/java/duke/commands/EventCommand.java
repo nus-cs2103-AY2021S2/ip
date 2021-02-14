@@ -1,12 +1,12 @@
 package duke.commands;
 
+import duke.parser.InsufficientArgumentsException;
 import duke.tasks.TaskList;
 import duke.tasks.Event;
 
 import java.time.LocalDate;
 
 public class EventCommand extends Command {
-    private TaskList taskList;
     private String taskDescription;
     private LocalDate eventDate;
 
@@ -14,6 +14,25 @@ public class EventCommand extends Command {
         super(taskList);
         this.taskDescription = taskDescription;
         this.eventDate = eventDate;
+    }
+    public EventCommand(String[] userInput, TaskList taskList) {
+        super(userInput, taskList);
+        this.taskDescription = "";
+        this.eventDate = null;
+    }
+
+    public Command process() {
+        try {
+            if (this.getUserInput().length == 1) {
+                throw new InsufficientArgumentsException("OOPS!!! The "
+                        + "description of an event cannot be empty.");
+            }
+            String taskDescription = this.getDescription(this.getUserInput(), "\n");
+            LocalDate dueDate = this.getDueDate(this.getUserInput(), "/by");
+            return new EventCommand(this.getTaskList(), taskDescription, dueDate);
+        } catch (InsufficientArgumentsException e) {
+            return new ErrorCommand(this.getTaskList(), e.getMessage());
+        }
     }
 
     public TaskList execute() {

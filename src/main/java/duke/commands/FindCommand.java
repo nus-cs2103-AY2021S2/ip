@@ -1,14 +1,41 @@
 package duke.commands;
 
+import duke.parser.InsufficientArgumentsException;
+import duke.parser.Parser;
+import duke.parser.WrongArgumentException;
 import duke.tasks.TaskList;
 
 public class FindCommand extends Command {
-    private TaskList taskList;
     private String taskDescription;
 
     public FindCommand(TaskList taskList, String taskDescription) {
         super(taskList);
         this.taskDescription = taskDescription;
+    }
+
+    public FindCommand(String[] userInput, TaskList taskList) {
+        super(userInput, taskList);
+        this.taskDescription = "";
+    }
+
+    public Command process() {
+        try {
+            if (getUserInput().length == 1) {
+                throw new InsufficientArgumentsException("OOPS!!! The "
+                        + "description of find cannot be empty.");
+            }
+            String toFind = "";
+            for (int i = 1; i < getUserInput().length; ++i) {
+                if (i != this.getUserInput().length - 1) {
+                    toFind += this.getUserInput()[i] + " ";
+                } else {
+                    toFind += this.getUserInput()[i];
+                }
+            }
+            return new FindCommand(this.getTaskList(), toFind);
+        } catch (InsufficientArgumentsException e) {
+            return new ErrorCommand(this.getTaskList(), e.getMessage());
+        }
     }
 
     public TaskList execute() {

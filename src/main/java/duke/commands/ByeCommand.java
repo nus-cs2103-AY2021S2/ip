@@ -8,6 +8,14 @@ public class ByeCommand extends Command {
         super(taskList);
     }
 
+    public ByeCommand(String[] userInput, TaskList taskList) {
+        super(userInput, taskList);
+    }
+
+    public Command process() {
+        return new ByeCommand(this.getTaskList());
+    }
+
     public TaskList execute() {
         return this.getTaskList();
     }

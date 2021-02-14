@@ -4,6 +4,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
+import duke.commands.Command;
 
 import java.io.FileNotFoundException;
 
@@ -33,13 +34,15 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        Parser parser = new Parser();
-        parser = parser.parse(input);
-        // message is generated before modifying the task list so that we can get the corresponding string for the deleted task
-        String message = this.ui.getOutput(this.tasks, parser);
-        this.tasks = this.ui.process(this.tasks, parser);
+        Parser parser = new Parser(this.tasks);
+        Command command = parser.parse(input);
+        command = command.process();
+        // message is generated before modifying the task list so that we can get
+        // the corresponding string for the deleted task when delete is called
+        String message = command.toString();
+        this.tasks = command.execute();
         this.storage.save(this.tasks);
-        return "Duke says:\n" + message;
+        return "Duke says:\n" + this.ui.format(message);
     }
 
     public String getGreeting() {

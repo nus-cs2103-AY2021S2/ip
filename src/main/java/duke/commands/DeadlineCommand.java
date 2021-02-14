@@ -1,12 +1,12 @@
 package duke.commands;
 
+import duke.parser.InsufficientArgumentsException;
 import duke.tasks.TaskList;
 import duke.tasks.Deadline;
 
 import java.time.LocalDate;
 
 public class DeadlineCommand extends Command {
-    private TaskList taskList;
     private String taskDescription;
     private LocalDate dueDate;
 
@@ -14,6 +14,26 @@ public class DeadlineCommand extends Command {
         super(taskList);
         this.taskDescription = taskDescription;
         this.dueDate = dueDate;
+    }
+
+    public DeadlineCommand(String[] userInput, TaskList taskList) {
+        super(userInput, taskList);
+        this.taskDescription = "";
+        this.dueDate = null;
+    }
+
+    public Command process() {
+        try {
+            if (this.getUserInput().length == 1) {
+                throw new InsufficientArgumentsException("OOPS!!! The "
+                        + "description of a deadline cannot be empty.");
+            }
+            String taskDescription = this.getDescription(this.getUserInput(), "\n");
+            LocalDate dueDate = this.getDueDate(this.getUserInput(), "/by");
+            return new DeadlineCommand(this.getTaskList(), taskDescription, dueDate);
+        } catch (InsufficientArgumentsException e) {
+            return new ErrorCommand(this.getTaskList(), e.getMessage());
+        }
     }
 
     public TaskList execute() {

@@ -1,17 +1,37 @@
 package duke.commands;
 
+import duke.parser.InsufficientArgumentsException;
+import duke.parser.WrongArgumentException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.util.ArrayList;
 
 public class DoneCommand extends Command{
-    private TaskList taskList;
     private int indexOfTaskDone;
 
+    // for executing
     public DoneCommand(TaskList taskList, int indexOfTaskDone) {
         super(taskList);
         this.indexOfTaskDone = indexOfTaskDone;
+    }
+
+    // for processing
+    public DoneCommand(String[] userInput, TaskList taskList) {
+        super(userInput, taskList);
+        this.indexOfTaskDone = -1;
+    }
+
+    public Command process() {
+        try {
+            if (this.getUserInput().length == 1) {
+                throw new InsufficientArgumentsException("OOPS!!! The "
+                        + "description of done cannot be empty.");
+            }
+            return new DoneCommand(this.getTaskList(), Integer.parseInt(this.getUserInput()[1]));
+        } catch (InsufficientArgumentsException e) {
+            return new ErrorCommand(this.getTaskList(), e.getMessage());
+        }
     }
 
     public TaskList execute() {
