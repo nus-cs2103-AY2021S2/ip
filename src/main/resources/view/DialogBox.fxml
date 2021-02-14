@@ -10,7 +10,7 @@
   <children>
     <Label fx:id="dialog" text="Label" wrapText="true">
          <font>
-            <Font name="Times New Roman" size="18.0" />
+            <Font name="Arial" size="13.0" />
          </font></Label>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
   </children>

@@ -3,16 +3,27 @@ package main.java
 plugins {
     id 'java'
     id 'application'
+    id 'base'
     id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'com.github.johnrengelman.shadow'
 }
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
     version = '11.0.2'
+}
+
+application {
+    mainClassName = 'com.gradle.tutorial.FizzBuzzProcessor'
+}
+
+run {
+    enableAssertions = true
 }
 
 dependencies {
@@ -30,4 +41,5 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
 }
