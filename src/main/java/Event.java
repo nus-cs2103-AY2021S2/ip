@@ -31,6 +31,11 @@ public class Event extends Task {
         }
     }
 
+
+    Event(String description, String eventDate, boolean isDone) {
+        super(description, eventDate, isDone);
+    }
+
     /**
      * Retrieving the given task type.
      * @return String giving the task type, in this case E.

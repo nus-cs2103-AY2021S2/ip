@@ -14,14 +14,25 @@ public class Deadline extends Task {
 
     Deadline(String description, String eventDate) {
         super(description, eventDate);
+        formatDate();
 
+    }
+
+    Deadline(String description, String eventDate, boolean isDone) {
+        super(description, eventDate, isDone);
+        formatDate();
+
+    }
+
+
+    public void formatDate() {
         try {
-            time = LocalDateTime.parse(eventDate, formatter);
+            time = LocalDateTime.parse(this.eventDate, formatter);
         } catch (Exception e) {
             time = null;
         }
-
     }
+
 
     @Override
     public String getTaskType() {

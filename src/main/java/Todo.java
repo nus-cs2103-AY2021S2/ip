@@ -8,6 +8,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     /**
      * Getter method that retrieves the type of the task.
      * @return String representing task type.

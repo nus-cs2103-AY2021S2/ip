@@ -2,10 +2,10 @@ import java.time.LocalDate;
 
 public class Task {
 
-    protected final String description;
-    protected final String eventDate;
-    protected boolean isDone;
-    protected LocalDate date;
+    public final String description;
+    public final String eventDate;
+    public boolean isDone;
+    public LocalDate date;
 
     /**
      * Main constructor that accepts a description of the task, and by default
@@ -19,8 +19,15 @@ public class Task {
         this.date = null;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+        this.eventDate = "";
+        this.date = null;
+    }
+
     /**
-     * Overriden method to mark a task as done.
+     * Overloaded method to mark a task as done.
      * @param description Description of method
      * @param eventDate Boolean flag indicating whether task is done
      */
@@ -28,6 +35,13 @@ public class Task {
         this.description = description;
         this.eventDate = eventDate;
         this.isDone = false;
+        this.date = null;
+    }
+
+    public Task(String description, String eventDate, boolean isDone) {
+        this.description = description;
+        this.eventDate = eventDate;
+        this.isDone = isDone;
         this.date = null;
     }
 

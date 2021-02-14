@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class Parser {
+public class Parser {
+
+
+    public boolean stillHaveCommands(String command) {
+        return !command.equalsIgnoreCase("bye");
+    }
+
+
 }

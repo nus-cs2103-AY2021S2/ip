@@ -43,7 +43,7 @@ public class Duke {
                     taskList.addToTasks(currentTask);
                     taskList.logTask(currentTask);
                 } catch (StringIndexOutOfBoundsException indexError) {
-                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    getInput.invalidTodo();
                 }
             } else if (command.startsWith("event")) {
                 try {
@@ -54,37 +54,36 @@ public class Duke {
                     taskList.addToTasks(currentTask);
                     taskList.logTask(currentTask);
                 } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException indexError) {
-                    System.out.println("☹ OOPS!!! The description of an event cannot " +
-                            "be empty.");
+                    getInput.invalidEvent();
                 }
             } else if (command.startsWith("deadline")) {
                 try {
                     String[] splitString = command.split("/by");
                     String eventDesc = splitString[0];
                     String eventDate = splitString[1];
-
                     Deadline currentTask = new Deadline(eventDesc.substring(9), eventDate);
                     taskList.addToTasks(currentTask);
                     taskList.logTask(currentTask);
                 } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException indexError) {
-                    System.out.println("☹ OOPS!!! The description of a deadline " +
-                            "cannot be empty.");
+                    getInput.invalidDeadline();
                 }
             } else if (command.startsWith("delete")) {
                 String[] splitString = command.split("\\s+");
                 taskList.removeTask(Integer.parseInt(splitString[1]));
+            } else if (command.startsWith("find")) {
+                String keyword = command.split("\\s+")[1];
+                taskList.retrieveByKeyword(keyword);
             } else {
                 // Command is not recognized
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                getInput.commandNotRecognized();
             }
-
+            // Getting the next command from user
             command = sc.nextLine();
-
         }
 
         storage.saveFile(taskList.logAllTasks());
 
-        System.out.println("Bye. Hope to see you again soon!");
+        getInput.printBye();
 
     }
 
