@@ -32,63 +32,65 @@ With great usability and a simple design, it's never been easier to manage your 
 ### 3.1 Adding Tasks
 ###### Tutors suddenly bombarding you with assignments and you can't keep track of it? :no_mouth: Let `Duke` help you!
 ##### There are 3 different types of tasks you can add: `todo`, `deadline` and `event` tasks.
-#####`todo` task: _`todo <task name>`_ 
- * _Add a task to be done with no specific timing._
+##### `todo` task: _`todo <task name>`_ 
+ * _Add a task to be done with no specific timing._ \
 ![img.png](images/todo.png)
 
-#####`deadline` task: _`deadline <task name> /by <DD/MM/YYYY HH:mm>`_
-* _Add a task with a deadline and time._
+##### `deadline` task: _`deadline <task name> /by <DD/MM/YYYY HH:mm>`_
+* _Add a task with a deadline and time._ \
 ![img.png](images/deadline.png)
 
-#####`event` task: _`event <task name> /at <DD/MM/YYYY HH:mm>`_
-* _Add an event with its corresponding date and time._
+##### `event` task: _`event <task name> /at <DD/MM/YYYY HH:mm>`_
+* _Add an event with its corresponding date and time._ \
 ![img.png](images/event.png)
   
 ### 3.2 Deleting Tasks
 ###### Added something wrongly? :cold_sweat: Don't worry! 
 #### Change it with the `delete` instruction.
-#####`delete`: _`delete <task number>`_
-* _Delete a task corresponding to its task number._
+##### `delete`: _`delete <task number>`_
+* _Delete a task corresponding to its task number._ \
 ![img_4.png](images/delete.png)
 
 ### 3.3 Updating Tasks
 ###### Teammates suddenly rescheduled your meeting timing? :unamused: No problem. 
 #### Just `update` the corresponding task!
-#####`update`: _`update <task number> /to [<task format>](#3.1-adding-tasks)`_
-* _Update details of a task corresponding to its task number._
+##### `update`: _`update <task number> /to [<task format>](#3.1-adding-tasks)`_
+* _Update details of a task corresponding to its task number._ \
 ![img_2.png](images/update.png)
+  
 ### 3.4 Marking Task as Done
 ###### Finally done with the task but don't want to delete it so you can see how much you accomplished? :nerd_face: 
 #### Just mark it as `done`.
-#####`done`: _`done <task number>`_
-* _Marks task with a `X` to show it's done._
+##### `done`: _`done <task number>`_ 
+* _Marks task with a `X` to show it's done._ \
 ![img_1.png](images/done.png)
   
 ### 3.5 View Tasks
 ###### So many tasks you can't even remember what you have? :exploding_head: 
 #### Just type `list` to view all the tasks you have!
-#####`list`: _`list`_
-* _Shows a list of all added tasks._
+##### `list`: _`list`_
+* _Shows a list of all added tasks._ \
 ![img.png](images/list.png)
 
 ### 3.6 Find Tasks
 ###### I swear I still had to do something from 2103 but where is it on my list? :woozy_face:
 #### Just `find` the keyword you are looking for!
-#####`find`: _`find <keyword>`_
-* _Shows a list of all the tasks with the given keyword._
+##### `find`: _`find <keyword>`_
+* _Shows a list of all the tasks with the given keyword._ \
 ![img_3.png](images/find.png)
+  
 ### 3.7 Exit
 ###### Finally done with organising my tasks. Time to start on them :sob:
 #### Just type `bye` to save the tasks added.
-#####`bye`: _`bye`_
-* _Saves all tasks added before closing the app._
+##### `bye`: _`bye`_
+* _Saves all tasks added before closing the app._ \
 ![img.png](images/bye.png)
 
 ### 3.8 In-App Help
 ###### So many instructions, so little brain! How to remember all the instructions :astonished:
 #### Just type `help` in `Duke` to see all available commands!
-#####`help`: _`help`_
-* _Shows a list of all commands._
+##### `help`: _`help`_
+* _Shows a list of all commands._ \
 ![img_1.png](images/help.png)
 
 ## 4. Additional Help
