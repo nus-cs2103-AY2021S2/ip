@@ -5,6 +5,7 @@ public class DukeWrongCommandException extends DukeException {
 
     /**
      * Constructs wrong command exception.
+     *
      * @param command String format of command which is wrong.
      */
     public DukeWrongCommandException(String command) {
@@ -13,6 +14,7 @@ public class DukeWrongCommandException extends DukeException {
 
     /**
      * Returns string message of wrong command exception.
+     *
      * @return string message of wrong command exception.
      */
     @Override

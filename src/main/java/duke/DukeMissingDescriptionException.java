@@ -5,6 +5,7 @@ public class DukeMissingDescriptionException extends DukeException {
 
     /**
      * Constructs missing description exception.
+     *
      * @param command Type of command which had the exception.
      */
     public DukeMissingDescriptionException(String command) {
@@ -13,6 +14,7 @@ public class DukeMissingDescriptionException extends DukeException {
 
     /**
      * Returns string message of missing description exception.
+     *
      * @return String message of missing description exception.
      */
     @Override

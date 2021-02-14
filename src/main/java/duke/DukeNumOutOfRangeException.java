@@ -17,3 +17,4 @@ public class DukeNumOutOfRangeException extends DukeException {
         return message;
     }
 }
+

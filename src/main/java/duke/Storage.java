@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Storage {
-    private final String PATH_NAME = "C:/users/chian/Desktop/CS2103/ip/data/";
-    private final String FILE_NAME = "data.txt";
+    private static final String PATH_NAME = "C:/users/chian/Desktop/CS2103/ip/data/";
+    private static final String FILE_NAME = "data.txt";
 
     /**
      * Writes file with tasks on list and saves.
@@ -57,7 +57,7 @@ public class Storage {
                 }
                 assert t != null : "Task should not be null!";
                 if (taskArray[1].equals("X")) {
-                        t.finishTask();
+                    t.finishTask();
                 }
                 tl.add(t);
             }

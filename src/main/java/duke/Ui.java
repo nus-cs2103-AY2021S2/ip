@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private final String HELP = "     These are the formats for Duke commands:\n"
+    private static final String HELP = "     These are the formats for Duke commands:\n"
             + "    - help\n"
             + "    - bye\n"
             + "    - list\n"
@@ -13,11 +13,14 @@ public class Ui {
             + "    - find (relevantName)\n"
             + "    - delete (taskNumber from list)\n"
             + "    - done (taskNumber from list)\n";
-    private final String ADD_MSG = "     Got it. I've added this task:\n";
-    private final String DELETE_MSG = "     Noted. I've removed this task:\n";
-    private final String DONE_MSG = "     Nice! I've marked this task as done:\n";
+    private static final String ADD_MSG = "     Got it. I've added this task:\n";
+    private static final String DELETE_MSG = "     Noted. I've removed this task:\n";
+    private static final String DONE_MSG = "     Nice! I've marked this task as done:\n";
     private Scanner sc;
 
+    /**
+     * Constructs new Ui object.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -52,15 +55,6 @@ public class Ui {
     }
 
     /**
-     * Print message to user.
-     *
-     * @param message message to user.
-     */
-    public static void printMessage(String message) {
-        System.out.println(message);
-    }
-
-    /**
      * Returns String format of error.
      *
      * @param error String format of error.
@@ -70,6 +64,39 @@ public class Ui {
         return error;
     }
 
+    /**
+     * Returns string message for commands for task.
+     *
+     * @param t Given task.
+     * @param tl Task list containing the task.
+     * @param command Type of command for task.
+     * @return String message for action on task.
+     * @throws DukeException When command is unknown.
+     */
+    public String printTaskMsg(Task t, TaskList tl, String command) throws DukeException {
+        String cmdMsg = getCommandMsg(command);
+        String taskMsg = "\t" + t.toString() + "\n";
+        String listSizeMsg = getTaskListSizeMsg(tl.size());
+        return cmdMsg + taskMsg + listSizeMsg;
+    }
+
+    /**
+     * Returns string format for found task.
+     * If no tasks found, return corresponding message.
+     *
+     * @param tl Task list containing task.
+     * @return String message for task(s) found.
+     */
+    public String printFoundTasks(TaskList tl) {
+        if (tl.size() == 0) {
+            String noMatchMsg = "     There are no matching task in your list!\n";
+            return noMatchMsg;
+        } else {
+            String findMsg = "     Here are the matching tasks in your list:\n";
+            String taskListMsg = getTaskListMsg(tl);
+            return findMsg + taskListMsg;
+        }
+    }
 
     /**
      * Returns String format of tasks.
@@ -83,16 +110,16 @@ public class Ui {
             return emptyListMsg;
         } else {
             String listMsg = "     These are the tasks in your list:\n";
-            String taskListMsg = taskListMsg(tl);
+            String taskListMsg = getTaskListMsg(tl);
             return listMsg + taskListMsg;
         }
     }
 
-    private String taskListSizeMsg(int numOfTasks) {
+    private String getTaskListSizeMsg(int numOfTasks) {
         return String.format("     You have %d task(s) in your list.\n", numOfTasks);
     }
 
-    private String taskListMsg(TaskList tl) {
+    private String getTaskListMsg(TaskList tl) {
         int index = 1;
         String msg = "";
         for (Task t : tl.getList()) {
@@ -118,39 +145,5 @@ public class Ui {
             throw new DukeWrongCommandException(command);
         }
         return cmdMsg;
-    }
-
-    /**
-     * Returns string message for commands for task.
-     *
-     * @param t Given task.
-     * @param tl Task list containing the task.
-     * @param command Type of command for task.
-     * @return String message for action on task.
-     * @throws DukeException When command is unknown.
-     */
-    public String printTaskMsg(Task t, TaskList tl, String command) throws DukeException {
-        String cmdMsg = getCommandMsg(command);
-        String taskMsg = "\t" + t.toString() + "\n";
-        String listSizeMsg = taskListSizeMsg(tl.size());
-        return cmdMsg + taskMsg + listSizeMsg;
-    }
-
-    /**
-     * Returns string format for found task.
-     * If no tasks found, return corespond message.
-     *
-     * @param tl Task list containing task.
-     * @return String message for task(s) found.
-     */
-    public String printFoundTasks(TaskList tl) {
-        if (tl.size() == 0) {
-            String noMatchMsg = "     There are no matching task in your list!\n";
-            return noMatchMsg;
-        } else {
-            String findMsg = "     Here are the matching tasks in your list:\n";
-            String taskListMsg = taskListMsg(tl);
-            return findMsg + taskListMsg;
-        }
     }
 }

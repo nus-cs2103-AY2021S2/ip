@@ -1,6 +1,5 @@
 package duke;
 
-import javafx.application.Application;
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -17,6 +16,7 @@ public class Duke {
 
     /**
      * Returns string of greeting.
+     *
      * @return Greeting message.
      */
     public static String greeting() {
@@ -25,6 +25,7 @@ public class Duke {
 
     /**
      * Returns string of help message.
+     *
      * @return Help message.
      */
     public static String help() {
@@ -37,6 +38,7 @@ public class Duke {
 
     /**
      * Returns string to print given user input.
+     *
      * @param input Input from user.
      * @return Respond from duke in string format.
      */
@@ -49,4 +51,3 @@ public class Duke {
         }
     }
 }
-

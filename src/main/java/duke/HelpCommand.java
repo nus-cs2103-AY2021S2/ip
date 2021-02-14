@@ -1,6 +1,7 @@
 package duke;
 
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
+
     /**
      * Prints help message.
      * @param tl Task list of Duke.

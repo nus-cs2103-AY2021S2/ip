@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      * Constructs new task object.
+     *
      * @param description Name of task.
      */
     public Task(String description) {
@@ -39,6 +40,7 @@ public abstract class Task {
 
     /**
      * Returns task name.
+     *
      * @return String for task name.
      */
     public String getName() {
@@ -57,6 +59,7 @@ public abstract class Task {
 
     /**
      * Returns string for task.
+     *
      * String contains type and name of task.
      * @return String message for task information.
      */

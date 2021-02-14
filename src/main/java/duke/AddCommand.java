@@ -5,7 +5,7 @@ public class AddCommand extends Command {
     private String taskInfo;
 
     /**
-     * Constructs add command.
+     * Constructs new add command.
      *
      * @param taskType Type of task to add.
      * @param taskInfo Information of task to be parsed.
@@ -47,3 +47,4 @@ public class AddCommand extends Command {
         return ui.printTaskMsg(t, tl, "add");
     }
 }
+
