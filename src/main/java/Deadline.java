@@ -31,7 +31,7 @@ public class Deadline extends Task {
     }
 
     public String parseDate() {
-        return this.parse(this.by).format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"));
+        return this.parse(this.by).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override

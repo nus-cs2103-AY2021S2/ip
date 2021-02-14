@@ -1,5 +1,3 @@
-T | 0 | haha
-T | 0 | a
-T | 0 | b
-T | 0 | c
-T | 0 | lmao
+T | 0 | Dispute Election Results
+D | 0 | Leave WH | Jan 20 2020 12:00 PM
+E | 0 | Capitol Attack | 6 Jan 2020

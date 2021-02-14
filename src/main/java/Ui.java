@@ -6,7 +6,7 @@ public class Ui {
      */
 
     public static String greeting() {
-        return "I am Donald J Trump, he Greatest American President ever!\nPlease don't impeach me?";
+        return "I am Donald J Trump, the Greatest American President ever!\nPlease don't impeach me!";
     }
 
     /**

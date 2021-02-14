@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.greeting(), dukeImage, Color.BEIGE));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.greeting(), dukeImage, Color.NAVAJOWHITE));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         if (input.equals("bye")) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog("I am a sore loser bye!", dukeImage, Color.BEIGE));
+                    DialogBox.getUserDialog("I am a sore loser bye!", dukeImage, Color.NAVAJOWHITE));
             duke.exit();
             userInput.clear();
             Platform.exit();
@@ -63,12 +63,12 @@ public class MainWindow extends AnchorPane {
                 String response = duke.getResponse(input);
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(input, userImage, Color.ALICEBLUE),
-                        DialogBox.getDukeDialog(response, dukeImage, Color.BEIGE)
+                        DialogBox.getDukeDialog(response, dukeImage, Color.NAVAJOWHITE)
                 );
                 userInput.clear();
             } catch (DukeException | IOException e) {
 
-                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(e.toString(), dukeImage, Color.BEIGE));
+                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(e.toString(), dukeImage, Color.NAVAJOWHITE));
 
             }
 
