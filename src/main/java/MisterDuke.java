@@ -154,7 +154,7 @@ class Ui {
      * @param task specified by user that has been completed
      */
     public String showTaskDone(Task task) {
-        return "Nice! I've marked this task as done:" +
+        return "Nice! I've marked this task as done: \n" +
                 "  " + task.toString();
     }
 
@@ -349,6 +349,8 @@ class Parser {
             return new ExitCommand(command);
         case "find":
             return new FindCommand(command);
+        case "note":
+            return new NoteCommand(command);
         default:
             throw new DukeException("Oops! I'm sorry but I don't know what you mean by that :(");
         }
@@ -593,6 +595,33 @@ class FindCommand extends Command {
     }
 }
 
+class NoteCommand extends Command {
+    private String command;
+
+    public NoteCommand(String command){
+        this.command = command;
+    }
+
+    @Override
+    public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+        String input = command.trim();
+        if (input.equalsIgnoreCase("note")) {
+            throw new DukeException("Could you please specify your note? :)");
+        }
+        String[] strArray = input.split(" ", 2);
+        String cmd = strArray[0];
+        String cmdTask = strArray[1];
+
+        Note tempTask = new Note(cmdTask);
+        taskList.add(tempTask);
+        return ui.showTaskAdded(tempTask);
+    }
+
+    public boolean isRunning() {
+        return true;
+    }
+}
+
 /**
  * The Task class is a parent class for ToDo, Deadline and Event
  * whereby each Task has a boolean to indicate whether it has been done
@@ -682,6 +711,23 @@ class Event extends Task {
         return "[E]" + super.toString() + "(at:" + at + ")";
     }
 }
+
+/**
+ * The Event class is a child class of the Task Class,
+ * it specifies the task as an Event using [E]
+ */
+class Note extends Task {
+
+    public Note(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[N]" + super.toString();
+    }
+}
+
 
 /**
  * The DukeException is a child class of the Java Exception class
