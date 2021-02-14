@@ -19,9 +19,13 @@ public class Parser {
      */
     public static Command parse(String input) {
         String[] splitInput = input.split(" ");
+        if (splitInput.length == 0) {
+            splitInput = new String[]{"error"};
+        }
         splitInput[0] = splitInput[0].toUpperCase();
         CommandType command = checkCommand(splitInput[0]);
         splitInput[0] = command.name();
+        assert !splitInput[0].equals("") : "The command name must be here";
         switch(command) {
         case LIST:
         case FIND:
@@ -40,11 +44,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Checks if the command referred to by the user input is of a valid type.
-     * @param command Command referred to by the user input.
-     * @return Type of command referred to by the user input.
-     */
     private static CommandType checkCommand(String command) {
         try {
             return CommandType.valueOf(command);

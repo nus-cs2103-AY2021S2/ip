@@ -36,6 +36,12 @@ public class MainWindow extends AnchorPane {
         this.yoda = yoda;
     }
 
+    public void greetUser() {
+        String greetings = yoda.greetUser();
+        DialogBox greetingDialogBox = DialogBox.getYodaDialog(greetings, yodaImage);
+        dialogContainer.getChildren().add(greetingDialogBox);
+    }
+
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

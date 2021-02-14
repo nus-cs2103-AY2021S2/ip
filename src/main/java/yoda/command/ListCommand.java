@@ -18,6 +18,7 @@ public class ListCommand extends Command {
     }
 
     public TaskList findByKeyword(String keyword, TaskList taskList) throws InvalidKeywordException {
+        assert taskList != null;
         if (keyword.length() <= 2) {
             throw new InvalidKeywordException("A valid keyword containing more than 2 characters, "
                     + "you must enter!");
@@ -31,7 +32,7 @@ public class ListCommand extends Command {
      * @param storage Storage associated with the ListCommand being executed.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        if (details[0] == "FIND") {
+        if (details[0].equals("FIND")) {
             try {
                 TaskList keywordList = findByKeyword(details[1], taskList);
                 return ui.printTasks("find", keywordList.toString(), keywordList.getTaskListSize());
