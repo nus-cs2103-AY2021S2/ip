@@ -64,7 +64,6 @@ public class Storage {
      */
     private static void createTasksFile() throws IOException {
         if (doesTaskFileExist()) {
-            // probably not gonna be used due to tasklist.TaskList.java impl
             return;
         } else {
             java.nio.file.Path dataDirPath = java.nio.file.Paths.get(PROJECT_DIR, "src", "data");
