@@ -1,9 +1,7 @@
 package command;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import classes.DuckieException;
 import classes.Storage;
@@ -26,8 +24,8 @@ public class EventCmd extends Command {
      * @param lst a TaskList object containing Task Objects.
      * @param ui a Ui object.
      * @param storage a storage object.
+     * @return System response to user input.
      * @throws DuckieException if user enters commands besides accepted ones.
-     * @return
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {

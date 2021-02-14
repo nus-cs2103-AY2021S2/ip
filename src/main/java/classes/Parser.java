@@ -36,7 +36,6 @@ public class Parser {
     /**
      * Parse method makes sense of the user input.
      * Returns a command class from user's String input.
-     *
      * @param cmd user input
      * @return command class corresponding to user input cmd
      * @throws DuckieException if commands other than the enumerated keywords are entered

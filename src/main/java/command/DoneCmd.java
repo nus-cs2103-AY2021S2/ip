@@ -1,12 +1,12 @@
 package command;
 
+import java.io.IOException;
+
 import classes.DuckieException;
 import classes.Storage;
 import classes.Task;
 import classes.TaskList;
 import classes.Ui;
-
-import java.io.IOException;
 
 public class DoneCmd extends Command {
 
@@ -25,8 +25,8 @@ public class DoneCmd extends Command {
      * @param lst a TaskList object containing Task Objects.
      * @param ui a Ui object.
      * @param storage a storage object.
+     * @return System response to user input.
      * @throws DuckieException if user enters commands besides accepted ones.
-     * @return
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
