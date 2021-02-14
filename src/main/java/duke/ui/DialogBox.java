@@ -43,6 +43,8 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
+        //@@author wongkokian-reused
+        //Reused from https://github.com/jonfoocy/ip with minor modifications
         switch (role) {
         case "mando":
             dialog.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(20.0),
@@ -58,6 +60,7 @@ public class DialogBox extends HBox {
             break;
         default:
         }
+        //@@author
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

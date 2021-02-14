@@ -57,20 +57,26 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getDukeDialog(response, dukeImage)
             );
         }
+        //@@author wongkokian-reused
+        //Reused from https://github.com/jonfoocy/ip with minor modifications
         if (input.equals("bye")) {
             Stage stage = (Stage) sendButton.getScene().getWindow();
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished((event) -> stage.close());
             delay.play();
         }
+        //@@author
         userInput.clear();
     }
 
     /**
      * Shows welcome message to the user.
      */
+    //@@author wongkokian-reused
+    //Reused from https://github.com/jonfoocy/ip with minor modifications
     public void welcome() {
         String welcomeText = "Welcome to YodaBot!\nWhat can I do for you?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeText, dukeImage));
     }
+    //@@author
 }
