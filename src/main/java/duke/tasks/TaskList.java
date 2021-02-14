@@ -22,6 +22,7 @@ public class TaskList {
             newTaskList.add(t);
         }
         newTaskList.add(task);
+        assert newTaskList.size() >= 1;
         return new TaskList(newTaskList);
     }
 

@@ -36,11 +36,13 @@ public class DoneCommand extends Command{
 
     public TaskList execute() {
         ArrayList<Task> tasks = this.getTaskList().getList();
-        for (int i = 0; i < tasks.size(); ++i) {
+        int size = tasks.size();
+        for (int i = 0; i < size; ++i) {
             if (i == this.indexOfTaskDone - 1) {
                 tasks.set(i, tasks.get(i).markAsDone());
             }
         }
+        assert (tasks.size() == size);  // check that marking a task as done does not remove the task
         return new TaskList(tasks);
     }
 

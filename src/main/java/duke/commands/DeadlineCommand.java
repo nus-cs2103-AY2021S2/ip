@@ -40,16 +40,18 @@ public class DeadlineCommand extends Command {
         LocalDate dueDate = this.dueDate;
         String taskDescription = this.taskDescription;
         Deadline deadline = new Deadline(taskDescription, dueDate);
-        TaskList tasks = this.getTaskList();
-        tasks = tasks.add(deadline);
-        return tasks;
+        TaskList taskList = this.getTaskList();
+        int initialSize = taskList.size();
+        taskList = taskList.add(deadline);
+        assert(initialSize + 1 == taskList.size()); // ensure that event is properly added
+        return taskList;
     }
 
     public String toString() {
         String message = "Got it. I've added this task:\n";
         Deadline deadline = new Deadline(this.taskDescription, this.dueDate);
         message += deadline.toString() + "\n";
-        message += "Now you have " + this.getTaskList().size() + " tasks in the list.\n";
+        message += "Now you have " + (this.getTaskList().size() + 1) + " tasks in the list.\n";
         return message;
     }
 }

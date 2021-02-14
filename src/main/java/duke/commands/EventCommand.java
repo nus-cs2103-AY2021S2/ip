@@ -37,8 +37,10 @@ public class EventCommand extends Command {
 
     public TaskList execute() {
         TaskList taskList = this.getTaskList();
+        int initialSize = taskList.size();
         Event event = new Event(this.taskDescription, this.eventDate);
         taskList = taskList.add(event);
+        assert(initialSize + 1 == taskList.size()); // ensure that event is properly added
         return taskList;
     }
 
@@ -46,7 +48,7 @@ public class EventCommand extends Command {
         String message = "Got it. I've added this task:\n";
         Event event = new Event(this.taskDescription, this.eventDate);
         message += event + "\n";
-        message += "Now you have " + this.getTaskList().size() + " tasks in the list.";
+        message += "Now you have " + (this.getTaskList().size() + 1) + " tasks in the list.";
         return message;
     }
 }
