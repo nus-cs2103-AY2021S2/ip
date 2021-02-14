@@ -78,7 +78,7 @@ public class Parser {
     private static String processHelpCommand(String[] tokens, TaskList tasks) throws Exception {
         return Ui.printLine(
             "For a detailed user guide, "
-            + "please refer to https://elaina.lirc572.com/#/user_guide"
+            + "please refer to https://elaina.lirc572.com/pages/user-guide.html"
         );
     }
 
