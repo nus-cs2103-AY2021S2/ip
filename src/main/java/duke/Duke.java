@@ -42,13 +42,9 @@ public class Duke extends Application {
         }
     }
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        assert(text != null);
-        return textToAdd;
-    }
-
+    /**
+     * Performs actions as required based on the current user input, then clears it.
+     */
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = parser.parse(taskList, userInput.getText());
@@ -61,10 +57,6 @@ public class Duke extends Application {
             stage.close();
         }
         userInput.clear();
-    }
-
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 
     /**

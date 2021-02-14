@@ -54,6 +54,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generates the Dialog Box to represent user speech.
+     *
+     * @param text The text to be displayed.
+     * @param img The image of the User.
+     * @return A DialogBox with the required specifications.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userMessage = new DialogBox(text, img);
         userMessage.setBackground(new Background(new BackgroundFill(Color.LAVENDERBLUSH,
@@ -62,6 +69,14 @@ public class DialogBox extends HBox {
         return userMessage;
     }
 
+    /**
+     * Generates the Dialog Box to represent Duwuke speech.
+     *
+     * @param text The text to be displayed.
+     * @param imgHappy The image of Duwuke.
+     * @param imgAngry The image of Duwuke with an additional angry motif.
+     * @return A DialogBox with the required specifications.
+     */
     public static DialogBox getDukeDialog(String text, Image imgHappy, Image imgAngry) {
         var db = (text.substring(0, 6).equals("GRR!!!"))
                 ? new DialogBox(text, imgAngry)
