@@ -1,5 +1,8 @@
 package duke.window;
 
+import java.io.FileNotFoundException;
+import java.util.Locale;
+
 import duke.Duke;
 import duke.commands.ByeCommand;
 import duke.dukeexceptions.DukeException;
@@ -14,9 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.FileNotFoundException;
-import java.util.Locale;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

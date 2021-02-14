@@ -1,5 +1,7 @@
 package duke.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import duke.tasks.TaskList;
@@ -20,6 +22,7 @@ public class HelpCommand extends Command {
             "help", "help",
             "unknown", "This is not a valid command. Enter 'help' to see the list of our commands!"
     );
+    private static final List<String> ALL_COMMANDS = new ArrayList<>(COMMAND_AND_DESCRIPTION.keySet());
 
     private final String command;
 
@@ -65,7 +68,11 @@ public class HelpCommand extends Command {
     private String returnAllInstructions() {
         StringBuilder stringBuilder = new StringBuilder("Here are the list of valid commands:");
 
-        for (String command : COMMAND_AND_DESCRIPTION.keySet()) {
+        for (String command : ALL_COMMANDS) {
+            if (command.equals("unknown")) {
+                continue;
+            }
+
             stringBuilder.append("\n\nCommand: ")
                     .append(command)
                     .append(", Input format: ")

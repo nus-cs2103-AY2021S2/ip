@@ -79,10 +79,10 @@ public class Parser {
             return prepareDelete(commandAndInput);
 
         case ListCommand.COMMAND_WORD:
-            return prepareList();
+            return prepareList(commandAndInput);
 
         case ByeCommand.COMMAND_WORD:
-            return prepareExit();
+            return prepareExit(commandAndInput);
 
         case HelpCommand.COMMAND_WORD:
             return prepareHelp(commandAndInput);
@@ -151,7 +151,7 @@ public class Parser {
             throw new EmptyArgumentException("Please pass a word after the 'find' command!");
         }
 
-        if (this.taskList.getList().size() == 0) {
+        if (this.taskList.isEmpty()) {
             throw new EmptyListException();
         }
 
@@ -169,7 +169,7 @@ public class Parser {
 
         int position = calcListPos(commandAndInput);
 
-        if (this.taskList.getList().size() == 0) {
+        if (this.taskList.isEmpty()) {
             throw new InvalidIndexInputException("You have already done all tasks!");
         } else if (position >= this.taskList.getList().size() || position < 0) {
             throw new InvalidIndexInputException("Please input an index from 1 to "
@@ -188,7 +188,7 @@ public class Parser {
 
         int position = calcListPos(commandAndInput);
 
-        if (this.taskList.getList().size() == 0) {
+        if (this.taskList.isEmpty()) {
             throw new InvalidIndexInputException("There are no tasks to delete!");
         } else if (position >= this.taskList.getList().size() || position < 0) {
             throw new InvalidIndexInputException("Please input an index from 1 to "
@@ -198,11 +198,19 @@ public class Parser {
         return new DeleteCommand(this.taskList, this.storage, position);
     }
 
-    private Command prepareList() {
+    private Command prepareList(String[] commandAndInput) throws InvalidCommandException {
+        if (commandAndInput.length > 1) {
+            throw new InvalidCommandException();
+        }
+
         return new ListCommand(this.taskList, this.storage);
     }
 
-    private Command prepareExit() {
+    private Command prepareExit(String[] commandAndInput) throws InvalidCommandException {
+        if (commandAndInput.length > 1) {
+            throw new InvalidCommandException();
+        }
+
         return new ByeCommand(this.taskList, this.storage);
     }
 
