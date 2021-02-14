@@ -47,7 +47,7 @@ public class Duke {
                 ui.enclose(e.toString());
             }
         }
-        assert shouldExit == true : "shouldExit boolean still false";
+        assert shouldExit == true : "shouldExit boolean false";
         ui.exit();
     }
 

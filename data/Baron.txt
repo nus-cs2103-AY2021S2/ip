@@ -8,6 +8,4 @@ T|PENDING|burn book
 T|DONE|burn book
 T|PENDING|burn book
 T|PENDING|burn book
-T|PENDING|burn book
-E|DONE|project debrief|03-04-2021 22:11
 E|PENDING|project debrief|03-04-2021 22:11
