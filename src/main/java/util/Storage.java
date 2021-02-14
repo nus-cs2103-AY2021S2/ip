@@ -13,32 +13,27 @@ import java.util.Scanner;
 import static util.Parser.*;
 
 public class Storage {
-    public static String SAVE_PATH = "data/sweh.txt";
-    private final File saveFile;
+    private final String first;
+    private final String[] more;
 
-    public Storage(String first, String... more) throws IOException {
-        Path savePath = Path.of(first, more);
-        saveFile = new File(savePath.toString());
-        (new File(savePath.getParent().toString())).mkdir();
-        saveFile.createNewFile();
-    }
-
-    public void writeToFile(String saveString) throws IOException {
-        Path savePath = Path.of("data", "sweh.txt");
-        File file = new File(savePath.toString());
-        (new File(savePath.getParent().toString())).mkdir();
-        file.createNewFile();
-        FileWriter fw = new FileWriter(file);
-        fw.write(saveString);
-        fw.close();
+    public Storage(String first, String... more) {
+        this.first = first;
+        this.more = more;
     }
 
     public File getFile() throws IOException {
-        Path savePath = Path.of("data", "sweh.txt");
+        Path savePath = Path.of(first, more);
         File file = new File(savePath.toString());
         (new File(savePath.getParent().toString())).mkdir();
         file.createNewFile();
         return file;
+    }
+
+    public void writeToFile(String saveString) throws IOException {
+        File file = getFile();
+        FileWriter fw = new FileWriter(file);
+        fw.write(saveString);
+        fw.close();
     }
 
     public TaskManager readTaskManager() throws IOException {
