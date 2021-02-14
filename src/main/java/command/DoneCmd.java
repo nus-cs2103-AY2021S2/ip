@@ -6,6 +6,8 @@ import classes.Task;
 import classes.TaskList;
 import classes.Ui;
 
+import java.io.IOException;
+
 public class DoneCmd extends Command {
 
     private String cmd;
@@ -29,10 +31,16 @@ public class DoneCmd extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         String[] cmdArr = cmd.trim().split(" ");
-
+        assert !cmdArr[1].contains(" ");
         int taskNum = Integer.parseInt(cmdArr[1]);
         Task temp = lst.getTask(taskNum - 1);
         temp.markDone();
+
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return "cool! this task is marked as done: " + temp.toString() + ui.customLine();
     }

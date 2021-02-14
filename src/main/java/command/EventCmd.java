@@ -1,5 +1,6 @@
 package command;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -41,7 +42,11 @@ public class EventCmd extends Command {
         Date date = dateParser.parse(strE[1]);
         Event tempE = new Event(description[1], date);
         lst.addTask(tempE);
-
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if (lst.getListSize() == 0) {
             return "there are no tasks in your list!";
         } else if (lst.getListSize() == 1) {

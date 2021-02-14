@@ -5,6 +5,8 @@ import classes.Storage;
 import classes.TaskList;
 import classes.Ui;
 
+import java.io.IOException;
+
 public class ListCmd extends Command {
     private String cmd;
 
@@ -32,6 +34,11 @@ public class ListCmd extends Command {
             int count = i + 1;
             String cur = count + "." + lst.getTask(i).toString();
             output = output + "\n" + cur;
+        }
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         if (lst.getListSize() == 0) {

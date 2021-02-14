@@ -1,5 +1,7 @@
 package command;
 
+import java.io.IOException;
+
 import classes.DuckieException;
 import classes.Storage;
 import classes.TaskList;
@@ -28,9 +30,16 @@ public class DeleteCmd extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
         String[] cmdArr = cmd.trim().split(" ");
+        assert !cmdArr[1].contains(" ");
         int deleteNum = Integer.parseInt(cmdArr[1]);
         String output = lst.getTask(deleteNum - 1).toString();
         lst.deleteTask(deleteNum - 1);
+
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (lst.getListSize() == 0) {
             return "yay! you are done!";

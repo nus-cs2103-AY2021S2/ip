@@ -1,5 +1,7 @@
 package command;
 
+import java.io.IOException;
+
 import classes.DuckieException;
 import classes.Storage;
 import classes.TaskList;
@@ -30,7 +32,11 @@ public class ToDoCmd extends Command {
         String[] cmdArr = cmd.trim().split(" ", 2);
         ToDo tempT = new ToDo(cmdArr[1]);
         lst.addTask(tempT);
-
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if (lst.getListSize() == 0) {
             return "there are no tasks in your list!" + "\n" + ui.customLine();
         } else if (lst.getListSize() == 1) {
