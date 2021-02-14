@@ -24,7 +24,10 @@ public class EditCommand extends Command {
 
     public TaskList accessTasksToBeEdited(TaskList taskList) throws InvalidTaskListIndexException {
         if (details.length == 1) {
-            throw new InvalidTaskListIndexException("Enter the number of task to be edited, you must!");
+            throw new InvalidTaskListIndexException("Enter the list number of task to be edited, you must!");
+        }
+        if (details[1].equals("all")) {
+            return new TaskList(taskList.getList());
         }
         try {
             List<Task> accessedTasks = new ArrayList<>();
@@ -41,17 +44,26 @@ public class EditCommand extends Command {
     }
 
     public void deleteTasks(TaskList taskList) {
-        for (int i = 1; i < details.length; i++) {
-            taskList.markTaskToBeDeleted(Integer.parseInt(details[i]));
+        if (details[1].equals("all")) {
+            taskList.deleteAllTasks();
+        } else {
+            for (int i = 1; i < details.length; i++) {
+                taskList.markTaskToBeDeleted(Integer.parseInt(details[i]));
+            }
+            taskList.deleteMarkedTasks();
         }
-        taskList.deleteMarkedTasks();
     }
 
     public void markTasksAsDone(TaskList taskList) {
-        for (int i = 1; i < details.length; i++) {
-            taskList.markTaskAsDone(Integer.parseInt(details[i]));
+        if (details[1].equals("all")) {
+            taskList.markAllTasksAsDone();
+        } else {
+            for (int i = 1; i < details.length; i++) {
+                taskList.markTaskAsDone(Integer.parseInt(details[i]));
+            }
         }
     }
+
     /**
      * Deletes a task or marks a task as done based on the command issued by user.
      * @param taskList TaskList associated with the EditCommand being executed.
