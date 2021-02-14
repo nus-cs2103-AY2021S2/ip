@@ -111,7 +111,7 @@ public class Ui {
             return ("There are no matching tasks uwu. "
                     + "(just like how whoever wrote this has no friends.)");
         } else {
-            String toReturn = ("Here are the matching tasks in your list uwu: ");
+            String toReturn = ("Here are the matching tasks in your list uwu: \n");
             int counter = 1;
             for (Task t : tl.getList()) {
                 toReturn += (counter + ". " + t + "\n");

@@ -1,5 +1,5 @@
 E | 0 | pekopeko  | 2015-04-04 04:04 | based superlit 
-E | 1 | pekopeko  | 2015-04-04 04:04 | 
-T | 1 | pee | 
-E | 0 | Eat Breakfast  | 2020-01-01 00:00 | 
-T | 0 | attend 2103 tutorial | 
+T | 1 | attend 2103 tutorial | 
+T | 0 | wheee | 
+D | 0 | whack  | 2012-12-12 12:12 | 
+E | 0 | pewpew  | 2012-12-12 12:12 | lel 
