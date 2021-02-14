@@ -10,6 +10,12 @@ import duke.tasks.TaskList;
 public class DeleteCommand extends Command {
     private final int taskNum;
 
+    /**
+     * Initialises a new DeleteCommand object.
+     *
+     * @param descriptionString description of task.
+     * @throws DukeException if there is a missing task number.
+     */
     public DeleteCommand(String descriptionString) throws DukeException {
         if (descriptionString.isBlank()) {
             throw new DukeException("Please key in a task number!");
@@ -20,6 +26,7 @@ public class DeleteCommand extends Command {
 
     }
 
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getNumOfTasks() == 0) {
             throw new DukeException("There are currently no tasks in your list.");

@@ -10,6 +10,12 @@ import duke.tasks.ToDo;
 public class AddToDoCommand extends Command {
     private final ToDo todo;
 
+    /**
+     * Initialises a new AddToDoCommand object.
+     *
+     * @param descriptionString description of task
+     * @throws DukeException if there is an empty description.
+     */
     public AddToDoCommand(String descriptionString) throws DukeException {
         if (descriptionString.isBlank()) {
             throw new UnknownInputException("todo");

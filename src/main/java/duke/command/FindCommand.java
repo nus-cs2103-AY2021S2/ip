@@ -11,6 +11,12 @@ import duke.tasks.TaskList;
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Initialises a new FindCommand object.
+     *
+     * @param descriptionString description of task.
+     * @throws DukeException if keyword is missing.
+     */
     public FindCommand(String descriptionString) throws DukeException {
         if (descriptionString.isBlank()) {
             throw new DukeException("Please enter the keywords!");

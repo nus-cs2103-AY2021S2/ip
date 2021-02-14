@@ -60,6 +60,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Prints out the welcome message whenever app is opened.
+     */
     public void welcomeMessage() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.welcomeMessage(), dukeImage)

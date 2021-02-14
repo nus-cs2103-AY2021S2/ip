@@ -9,6 +9,12 @@ import duke.tasks.TaskList;
 public class DoneCommand extends Command {
     private final int taskNum;
 
+    /**
+     * Initialises a new DoneCommand object.
+     *
+     * @param descriptionString description of task.
+     * @throws DukeException if there is a missing task number.
+     */
     public DoneCommand(String descriptionString) throws DukeException {
         if (descriptionString.isBlank()) {
             throw new DukeException("Please key in a task number!");

@@ -14,6 +14,12 @@ import duke.tasks.TaskList;
 public class AddEventCommand extends Command {
     private final Event event;
 
+    /**
+     * Initialises a new AddEventCommand object.
+     *
+     * @param descriptionString description of task
+     * @throws DukeException if there is a missing date.
+     */
     public AddEventCommand(String descriptionString) throws DukeException {
         if (descriptionString.isBlank()) {
             throw new UnknownInputException("event");
@@ -31,6 +37,15 @@ public class AddEventCommand extends Command {
     }
 
 
+    /**
+     * Executes the function below
+     *
+     * @param tasks list of tasks
+     * @param ui UI
+     * @param storage Storage
+     * @return a String
+     * @throws DukeException if any exceptions occur
+     * */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(this.event);
