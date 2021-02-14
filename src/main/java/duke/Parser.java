@@ -194,7 +194,6 @@ public class Parser {
     }
 
     public Command parseMarkDoneArguments(String arguments) throws DukeParseException {
-        //for the case when "done" in the input string is followed by variable number of space.
         Matcher m = matchToInteger(arguments);
         int indexToMarkDone = Integer.parseInt(m.group("integerArgument"));
         return new MarkTaskCommand(indexToMarkDone);

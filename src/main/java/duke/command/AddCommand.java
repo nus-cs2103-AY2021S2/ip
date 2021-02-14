@@ -13,16 +13,11 @@ public class AddCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) {
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) throws DukeStorageException{
         tasks.add(taskToBeAdded);
-        try {
-            storage.saveTasks(tasks);
-        } catch (IOException err) {
-            System.out.println("Error in accessing storage from addCommand.execute...Check data/duke.txt");
-            this.isExit = true;
-        }
-        String addMessage = ui.generateAddMessage(taskToBeAdded,tasks);
-        return new CommandResult(addMessage,false);
+        storage.saveTasks(tasks);
+        String addMessage = ui.generateAddMessage(taskToBeAdded, tasks);
+        return new CommandResult(addMessage, false);
     }
 
 }

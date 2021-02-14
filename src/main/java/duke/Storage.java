@@ -14,6 +14,9 @@ import java.util.Scanner;
 
 public class Storage {
 
+    private static final String WRITE_FILE_EXCEPTION_MESSAGE = "Unable to write to file! Check duke/data.txt file.";
+    private static final String READ_FILE_EXCEPTION_MESSAGE = "Unable to read the file! Check duke/data.txt";
+
     private String filePath;
 
     /**
@@ -26,6 +29,19 @@ public class Storage {
         this.filePath = filePath;
     }
 
+
+    private Scanner getScannerToReadFile() throws DukeStorageException {
+        File fileSource;
+        Scanner scanner;
+        try {
+            fileSource = new File(filePath);
+            scanner = new Scanner(fileSource);
+        } catch (FileNotFoundException err) {
+            throw new DukeStorageException(READ_FILE_EXCEPTION_MESSAGE);
+        }
+        return scanner;
+    }
+
     /**
      * loads all the tasks from a file into a List.
      *
@@ -35,20 +51,23 @@ public class Storage {
 
     public List<Task> loadStorage() throws DukeStorageException, DukeParseException{
         List<Task> savedListOfTasks = new ArrayList<>();
-        File fileSource;
-        Scanner scanner;
-        try {
-            fileSource = new File(filePath);
-            scanner = new Scanner(fileSource);
-        } catch (FileNotFoundException err) {
-            throw new DukeStorageException("Cannot find data.txt file to load from.");
-        }
+        Scanner scanner = getScannerToReadFile();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             Task t = Parser.parseTaskFromStoredFormat(line);
             savedListOfTasks.add(t);
         }
         return savedListOfTasks;
+    }
+
+
+    private void clearFile() throws DukeStorageException {
+        try ( FileWriter fw = new FileWriter(filePath);){
+            fw.write(""); // clear the file.
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new DukeStorageException(WRITE_FILE_EXCEPTION_MESSAGE);
+        }
     }
 
     /**
@@ -58,14 +77,23 @@ public class Storage {
      * @throws IOException when there is error reading or writing to the file.
      */
 
-    public void saveTasks(TaskList listOfTasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(""); // clear the file.
-        fw.close();
-        FileWriter fileWriterToAppend = new FileWriter(filePath, true);
-        for (Task t : listOfTasks) {
-            fileWriterToAppend.write(t.getSavedStringFormat() + "\n");
-        }
-        fileWriterToAppend.close();
+    public void saveTasks(TaskList listOfTasks) throws DukeStorageException {
+        clearFile();
+        writeTasksToFile(listOfTasks);
     }
+
+    public void writeTasksToFile(TaskList listOfTasks) throws DukeStorageException {
+        try (FileWriter fileWriter = new FileWriter(filePath, true)) {
+            for (Task t : listOfTasks) {
+                fileWriter.write(t.getSavedStringFormat() + "\n");
+            }
+        } catch( IOException e) {
+            e.printStackTrace();
+            throw new DukeStorageException(WRITE_FILE_EXCEPTION_MESSAGE);
+        }
+    }
+
+
+
+
 }

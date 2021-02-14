@@ -21,12 +21,10 @@ public class Duke {
         this.ui = new Ui();
         try {
             tasks = new TaskList(storage.loadStorage());
-        } catch (DukeStorageException err) {
+        } catch (DukeStorageException | DukeParseException err) {
+            err.printStackTrace();
             System.out.println(err.getMessage());
             tasks = new TaskList();
-        } catch (DukeParseException err) {
-            System.out.println(err.getMessage());
-            System.exit(1);
         }
     }
 
@@ -62,6 +60,8 @@ public class Duke {
 
         } catch (DukeParseException e) {
             return "OOPS!!! " + e.getMessage();
+        } catch (DukeStorageException e) {
+            return  e.getMessage();
         }
     }
 

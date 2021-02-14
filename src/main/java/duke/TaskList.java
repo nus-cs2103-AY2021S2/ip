@@ -44,25 +44,35 @@ public class TaskList implements Iterable<Task> {
      * @param indexToDelete ( 1 -based indexing ) the index of the Task to delete.
      * @return Task that was deleted.
      */
-    public Task delete(int indexToDelete) {
+    public Task pop(int indexToDelete) {
         assert indexToDelete > 0;
-        Task taskToReturn = listOfTasks.get(indexToDelete - 1);
+        Task taskToReturn = get(indexToDelete);
         listOfTasks.remove(indexToDelete - 1);
         return taskToReturn;
     }
 
     /**
-     * Marks a Task as done at certain index on the list. ( 1 -based indexing _
+     * gets a task at a certain index ( with 1- based indexing, so the first element starts from 0).
+     *
+     * @param index the index of the task to retrieve
+     * @return a task at the index specified.
+     */
+
+    public Task get(int index) {
+        return listOfTasks.get(index - 1);
+    }
+
+    /**
+     * Marks a Task as done at certain index on the list. ( 1 -based indexing ).
      *
      * @param indexToMarkDone index of Task to mark
      * @return Task that is marked
      */
 
-    public Task markTaskDone(int indexToMarkDone) {
+    public void markTaskDone(int indexToMarkDone) {
         assert indexToMarkDone > 0;
-        Task task = listOfTasks.get(indexToMarkDone - 1);
+        Task task = get(indexToMarkDone);
         task.markAsDone();
-        return task;
     }
 
     /**

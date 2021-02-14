@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
+
+import java.io.IOException;
 
 public class MarkTaskCommand extends Command {
 
@@ -14,9 +13,11 @@ public class MarkTaskCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) {
-        Task task = tasks.markTaskDone(indexToMarkDone);
-        String MarkTaskMessage = ui.generateMarkTaskMessage(task);
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) throws DukeStorageException {
+        tasks.markTaskDone(indexToMarkDone);
+        Task doneTask = tasks.get(indexToMarkDone);
+        storage.saveTasks(tasks);
+        String MarkTaskMessage = ui.generateMarkTaskMessage(doneTask);
         return new CommandResult(MarkTaskMessage,false);
     }
 }

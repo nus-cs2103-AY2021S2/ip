@@ -45,6 +45,7 @@ public class Ui {
     public String generateExitMessage() {
         return "Bye. Hope to see you again soon!";
     }
+
     public String generateFindTaskMessage(TaskList filteredTaskList) {
         return "Here are the matching tasks in your list:" + "\n" +
                 getDisplayOfAllTasks(filteredTaskList);

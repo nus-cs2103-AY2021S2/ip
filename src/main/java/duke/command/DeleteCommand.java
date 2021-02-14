@@ -2,10 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.Storage;
-import duke.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
 
 public class DeleteCommand extends Command {
 
@@ -16,13 +13,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) {
-        Task taskToDelete = tasks.delete(indexToDelete);
-        try {
-            storage.saveTasks(tasks);
-        } catch (IOException err) {
-            this.isExit = true;
-        }
+    public CommandResult execute(Ui ui, TaskList tasks, Storage storage) throws DukeStorageException {
+        Task taskToDelete = tasks.pop(indexToDelete);
+        storage.saveTasks(tasks);
         String deleteMessage = ui.generateDeleteMessage(taskToDelete,tasks);
         return new CommandResult(deleteMessage, false);
     }
