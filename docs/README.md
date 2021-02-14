@@ -13,6 +13,22 @@ You can give commands to Zeke and it will return the relevant messages.
 
 ## Features
 
+## At a glance
+Feature | Command format
+------------ | -------------
+Add todo | `todo <description>` 
+Add deadline | `deadline <description> /by <date>`
+Add event | `event <description> /at <date>`
+Delete task| `delete <index>`
+View all tasks | `list`
+Mark task as completed | `done <index>`
+Search for tasks | `find <keyword>`
+View help menu | `help`
+View statistics | `stats`
+Exit application | `bye`
+
+
+
 ## Add Tasks 
 Users can add tasks of these 3 types to their task list:
 * Todo: Something that needs to be done
@@ -109,7 +125,7 @@ Expected outcome:
 ![done_image](images/done.png)
 
 ## Search for tasks
-Users search for tasks in their task list
+Users can search for tasks in their task list
 
 ## Usage
 
