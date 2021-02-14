@@ -1,14 +1,15 @@
 package task;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
  * Event tasks
  */
 public class Event extends Task {
-    protected Date at;
+    protected LocalDate at;
 
-    public Event(String description, Date at) {
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }

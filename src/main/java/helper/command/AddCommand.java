@@ -9,6 +9,7 @@ import task.Event;
 import task.Todo;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
         case "event":
             String[] eventInfo = addString.split(" /at ");
             try {
-                Date date = parseTime(eventInfo[1]);
+                LocalDate date = parseTime(eventInfo[1]);
                 Event event = new Event(eventInfo[0], date);
                 tasks.add(event);
                 stringToReturn = ("added new event: " + event);
@@ -58,7 +59,7 @@ public class AddCommand extends Command {
         case "deadline":
             String[] deadlineInfo = addString.split(" /by ");
             try {
-                Date date = parseTime(deadlineInfo[1]);
+                LocalDate date = parseTime(deadlineInfo[1]);
                 Deadline deadline = new Deadline(deadlineInfo[0], date);
                 tasks.add(deadline);
                 stringToReturn = ("added new deadline: " + deadline);
@@ -72,9 +73,10 @@ public class AddCommand extends Command {
     }
 
 
-    private Date parseTime(String s) {
+    private LocalDate parseTime(String s) {
         List<Date> dates = new PrettyTimeParser().parse(s);
-        return dates.get(0);
+        Date date = dates.get(0);
+        return LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
 
 }

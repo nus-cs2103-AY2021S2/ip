@@ -10,18 +10,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class DeadlineTest {
 
 
-    Date localDate = new Date(0);
+    LocalDate localDate = LocalDate.of(2021,2,1);
     Deadline deadline = new Deadline("description", localDate);
 
     @Test
     void testToString() {
-        assertEquals("[D][ ] description (by: Thu Jan 01 07:30:00 SGT 1970)",deadline.toString());
+        assertEquals("[D][ ] description (by: 2021-02-01)",deadline.toString());
     }
 
     @Test
     void testDone() {
         deadline.setDone(true);
-        assertEquals("[D][X] description (by: Thu Jan 01 07:30:00 SGT 1970)",deadline.toString());
+        assertEquals("[D][X] description (by: 2021-02-01)",deadline.toString());
     }
 
 }
