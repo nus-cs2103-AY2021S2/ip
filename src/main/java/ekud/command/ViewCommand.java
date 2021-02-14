@@ -28,14 +28,12 @@ public class ViewCommand extends Command {
         tasks.stream()
                 .filter(task -> task instanceof TaskWithDateTime)
                 .filter(task -> ((TaskWithDateTime) task).getDateTime().toLocalDate().equals(date))
-                .forEach(task -> replyBuilder.append(System.lineSeparator()).append(task.toString()));
+                .forEach(task -> replyBuilder.append(System.lineSeparator()).append("  ").append(task.toString()));
 
         if (replyBuilder.length() == 0) {
             return "You're free for the day!";
         }
 
-        return replyBuilder.insert(0, System.lineSeparator())
-                .insert(0, "You have these deadlines/events:")
-                .toString();
+        return replyBuilder.insert(0, "You have these deadlines/events:").toString();
     }
 }
