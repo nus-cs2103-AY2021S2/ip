@@ -17,6 +17,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        return "Omo... I'm sorry..." + exception;
+        return "I'm sorry..." + exception;
     }
 }

@@ -187,15 +187,6 @@ public class CommandParser {
         return !parseDatesChecker.isParsable(input);
     }
 
-
-    /**
-     * This method is used to get if the command is an exit command.
-     * @return This returns a boolean that shows if the command given is to exit the system
-     */
-    public boolean canExit() {
-        return this.isExit;
-    }
-
     /**
      * This method is used to get the command stored in the ParseCommand
      * @return This returns the CommandList command.
