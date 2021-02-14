@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.Momo;
+import duke.Rem;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,7 +23,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Momo momo;
+    private Rem rem;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Subaru.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Rem.png"));
@@ -36,10 +36,10 @@ public class MainWindow extends AnchorPane {
         );
     }
 
-    public void setMomo(Momo m) {
-        momo = m;
+    public void setMomo(Rem m) {
+        rem = m;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(momo.getLoadingMessage(), dukeImage)
+                DialogBox.getDukeDialog(rem.getLoadingMessage(), dukeImage)
         );
     }
 
@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = momo.getResponse(input);
+        String response = rem.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

@@ -13,32 +13,32 @@ class ParserTest {
 
     @Test
     public void parseCommandForByeTest() {
-        Command c = Parser.parseCommand("bye");
+        Command c = Parser.parseCommandForSingleWord("bye");
         assertEquals(c, Command.BYE);
     }
     @Test
     public void parseCommandForDoneTest() {
-        Command c = Parser.parseCommand("done");
+        Command c = Parser.parseCommandForSingleWord("done");
         assertEquals(c, Command.DONE);
     }
     @Test
     public void parseCommandForToDoTest() {
-        Command c = Parser.parseCommand("todo");
+        Command c = Parser.parseCommandForMultipleWords("todo TODO");
         assertEquals(c, Command.TODO);
     }
     @Test
     public void parseCommandForDeadlineTest() {
-        Command c = Parser.parseCommand("deadline");
+        Command c = Parser.parseCommandForMultipleWords("deadline DEADLINE /by 2021-02-26");
         assertEquals(c, Command.DEADLINE);
     }
     @Test
     public void parseCommandForEventTest() {
-        Command c = Parser.parseCommand("event");
+        Command c = Parser.parseCommandForMultipleWords("event EVENT /at 2021-02-20");
         assertEquals(c, Command.EVENT);
     }
     @Test
     public void parseCommandForListTest() {
-        Command c = Parser.parseCommand("list");
+        Command c = Parser.parseCommandForSingleWord("list");
         assertEquals(c, Command.LIST);
     }
     @Test

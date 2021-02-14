@@ -15,7 +15,8 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private final Momo momo = new Momo("data/tasks.txt");
+    private final Rem rem = new Rem("data/tasks.txt");
+    private final String applicationName = "Rem";
 
     @Override
     public void start(Stage stage) {
@@ -24,7 +25,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setMomo(momo);
+            stage.setTitle(applicationName);
+            fxmlLoader.<MainWindow>getController().setMomo(rem);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

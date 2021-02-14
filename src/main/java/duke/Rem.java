@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import duke.ui.TextUi;
 import duke.task.Task;
 
-public class Momo {
+public class Rem {
 
     private final Storage storage;
     private TaskList tasks;
@@ -18,7 +18,7 @@ public class Momo {
      *
      * @param filePath the path of the *.txt file including information of existing tasks.
      */
-    public Momo(String filePath) throws ParseException {
+    public Rem(String filePath) throws ParseException {
         storage = new Storage(filePath);
         try {
             loadingMessage = TextUi.showLoadingSuccess();
