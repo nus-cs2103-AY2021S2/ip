@@ -12,6 +12,8 @@ import com.tanboonji.duke.storage.Storage;
 public class Duke {
 
     private static final String FILE_DIR = "duke.data";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke.\n"
+            + "What can I do for you today?";
     private Storage storage;
     private TaskList taskList;
 
@@ -23,17 +25,21 @@ public class Duke {
 
     /**
      * Initialises Duke by loading task list from storage.
+     *
+     * @return String response from initialisation.
      */
-    public void initialise() {
+    public String initialise() {
         storage = new Storage(FILE_DIR);
 
         try {
             taskList = storage.load();
         } catch (DukeException e) {
-          
+            return e.getMessage();
         }
 
         assert(taskList != null);
+
+        return WELCOME_MESSAGE;
     }
 
     /**
