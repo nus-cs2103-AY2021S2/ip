@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         Duke.Response response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog("Da:" + input, userImage),
+            DialogBox.getUserDialog("Da: " + input, userImage),
             DialogBox.getDukeDialog("Duke: " + response.response, dukeImage)
         );
         userInput.clear();
@@ -69,7 +69,7 @@ public class MainWindow extends AnchorPane {
      */
     public void showIntro() {
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog("Duke:" + JavafxUi.INTRO_MESSAGE, dukeImage)
+            DialogBox.getDukeDialog("Duke: " + JavafxUi.INTRO_MESSAGE, dukeImage)
         );
     }
 
