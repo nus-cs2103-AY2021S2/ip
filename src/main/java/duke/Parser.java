@@ -68,14 +68,14 @@ public class Parser {
                 return processEvent(input);
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new DukeException("\nPlease enter a valid format '/at YYYY-MM-DD XXXX-YYYY'");
+                throw new DukeException(e.getMessage() + "\nPlease enter a valid format\n'/at YYYY-MM-DD TIME-TIME'");
             }
         case DEADLINE:
             try {
                 return processDeadline(input);
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new DukeException("\nPlease enter a valid format '/by YYYY-MM-DD TIME'");
+                throw new DukeException(e.getMessage() + "\nPlease enter a valid format\n'/by YYYY-MM-DD TIME'");
             }
         case DELETE:
             if (processedInput.length == 1) {
@@ -100,6 +100,10 @@ public class Parser {
         String preProcessedData = input.split(" /by ")[1];
         String[] dateTime = preProcessedData.split(" ");
         String time = dateTime[1];
+        if (time.length() != 4) {
+            throw new IllegalArgumentException("\nYou have entered the time in a wrong format,"
+                    + " please ensure it is in 24hr format");
+        }
         LocalDate deadline = LocalDate.parse(dateTime[0]);
         String description = input.split(" /by ")[0].split("deadline ")[1];
         return new AddDeadline("deadline", description, deadline, time);
@@ -111,6 +115,14 @@ public class Parser {
         LocalDate eventDate = LocalDate.parse(dateTime[0]);
         String startTime = dateTime[1].split("-")[0];
         String endTime = dateTime[1].split("-")[1];
+        if (startTime.length() != 4) {
+            throw new IllegalArgumentException("\nYou have entered the starting time in a wrong format,"
+                    + " please ensure it is in 24hr format");
+        }
+        if (endTime.length() != 4) {
+            throw new IllegalArgumentException("\nYou have entered the ending time in a wrong format,"
+                    + " please ensure it is in 24hr format");
+        }
         String description = input.split(" /at ")[0].split("event ")[1];
         return new AddEvent("event", description, eventDate, startTime, endTime);
     }
