@@ -50,6 +50,7 @@ public class Parser {
         String[] inputSplit = input.split(" ", 2);
         typeOfTask = inputSplit[0];
         if (inputSplit.length >= 2) {
+            assert inputSplit.length >= 2;
             if (inputSplit[1].equals("")) {
             } else {
                 TimeParser timeParser = new TimeParser();
