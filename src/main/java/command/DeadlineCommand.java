@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class DeadlineCommand implements Command {
     public static final String COMMAND_STRING = Deadline.COMMAND_STRING;
-    private static final CommandType COMMAND_TYPE = CommandType.DEADLINE;
+    public static final CommandType COMMAND_TYPE = CommandType.DEADLINE;
 
     private final String description;
     private final LocalDate date;
@@ -34,8 +34,7 @@ public class DeadlineCommand implements Command {
         if (descriptionStrings.isEmpty()) {
             throw new DukeException("Deadline description cannot be empty");
         }
-        description = descriptionStrings.stream()
-                .collect(Collectors.joining(" "));
+        description = String.join(" ", descriptionStrings);
 
         // Validate date
         try {
@@ -59,10 +58,5 @@ public class DeadlineCommand implements Command {
     @Override
     public String getMessage() {
         return message;
-    }
-
-    @Override
-    public CommandType commandType() {
-        return COMMAND_TYPE;
     }
 }

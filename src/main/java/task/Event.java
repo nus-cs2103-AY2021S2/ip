@@ -69,7 +69,7 @@ public class Event extends Task {
         HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
 
         List<String> descriptions = commandMap.get(COMMAND_STRING);
-        String description = descriptions.stream().collect(Collectors.joining());
+        String description = String.join(" ", descriptions);
 
         String eventDateString = commandMap.get(EVENT_DATE_STRING).get(0);
         LocalDate eventDate = LocalDate.parse(eventDateString);

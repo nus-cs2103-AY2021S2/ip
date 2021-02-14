@@ -51,7 +51,7 @@ public class Todo extends Task {
     public static Todo fromSaveString(String saveString) {
         HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
         List<String> descriptions = commandMap.get(COMMAND_STRING);
-        String description = descriptions.stream().collect(Collectors.joining());
+        String description = String.join(" ", descriptions);
         return new Todo(description);
     }
 

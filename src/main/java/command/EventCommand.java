@@ -3,7 +3,6 @@ package command;
 import task.Event;
 import task.TaskManager;
 import util.DukeException;
-import util.Input;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,8 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EventCommand implements Command {
-    public static final String COMMAND = "event";
-    private static final CommandType COMMAND_TYPE = CommandType.DEADLINE;
+    public static final String COMMAND_STRING = "event";
+    public static final CommandType COMMAND_TYPE = CommandType.DEADLINE;
 
     private final String description;
     private final LocalDate date;
@@ -31,12 +30,11 @@ public class EventCommand implements Command {
         LocalDate date;
 
         // Validate description
-        List<String> descriptionStrings = commandMap.get(COMMAND);
+        List<String> descriptionStrings = commandMap.get(COMMAND_STRING);
         if (descriptionStrings.isEmpty()) {
             throw new DukeException("Event description cannot be empty");
         }
-        description = descriptionStrings.stream()
-                .collect(Collectors.joining(" "));
+        description = String.join(" ", descriptionStrings);
 
         // Validate date
         try {
@@ -60,10 +58,5 @@ public class EventCommand implements Command {
     @Override
     public String getMessage() {
         return message;
-    }
-
-    @Override
-    public CommandType commandType() {
-        return COMMAND_TYPE;
     }
 }

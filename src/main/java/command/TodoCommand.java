@@ -3,15 +3,14 @@ package command;
 import task.TaskManager;
 import task.Todo;
 import util.DukeException;
-import util.Input;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TodoCommand implements Command {
-    public static final String COMMAND = "todo";
-    private static final CommandType COMMAND_TYPE = CommandType.TODO;
+    public static final String COMMAND_STRING = "todo";
+    public static final CommandType COMMAND_TYPE = CommandType.TODO;
     private final String description;
     private String message;
 
@@ -21,13 +20,12 @@ public class TodoCommand implements Command {
 
     public static TodoCommand fromCommandMap(HashMap<String, List<String>> commandMap)
             throws DukeException {
-        List<String> descriptionStrings = commandMap.get(COMMAND);
+        List<String> descriptionStrings = commandMap.get(COMMAND_STRING);
         if (descriptionStrings.isEmpty()) {
             throw new DukeException("Todo description cannot be empty");
         }
 
-        String description = descriptionStrings.stream()
-                .collect(Collectors.joining(" "));
+        String description = String.join(" ", descriptionStrings);
         return new TodoCommand(description);
     }
 
@@ -39,10 +37,5 @@ public class TodoCommand implements Command {
     @Override
     public String getMessage() {
         return message;
-    }
-
-    @Override
-    public CommandType commandType() {
-        return COMMAND_TYPE;
     }
 }

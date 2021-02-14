@@ -70,7 +70,7 @@ public class Deadline extends Task {
         HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
         
         List<String> descriptions = commandMap.get(COMMAND_STRING);
-        String description = descriptions.stream().collect(Collectors.joining());
+        String description = String.join(" ", descriptions);
 
         String endDateString = commandMap.get(END_DATE_STRING).get(0);
         LocalDate endDate = LocalDate.parse(endDateString);

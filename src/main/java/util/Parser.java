@@ -14,14 +14,20 @@ public interface Parser {
         String commandFlag = commandMap.get(COMMAND_FLAG).get(0);
 
         switch (commandFlag) {
-            case ListCommand.COMMAND:
+            case ListCommand.COMMAND_STRING:
                 return ListCommand.fromCommandMap(commandMap);
-            case TodoCommand.COMMAND:
+            case TodoCommand.COMMAND_STRING:
                 return TodoCommand.fromCommandMap(commandMap);
             case DeadlineCommand.COMMAND_STRING:
                 return DeadlineCommand.fromCommandMap(commandMap);
-            case EventCommand.COMMAND:
+            case EventCommand.COMMAND_STRING:
                 return EventCommand.fromCommandMap(commandMap);
+            case DoneCommand.COMMAND_STRING:
+                return DoneCommand.fromCommandMap(commandMap);
+            case DeleteCommand.COMMAND_STRING:
+                return DeleteCommand.fromCommandMap(commandMap);
+            case QuitCommand.COMMAND_STRING:
+                return QuitCommand.fromCommandMap(commandMap);
             default:
                 throw new DukeException("Sorry I didn't understand that");
         }
@@ -72,7 +78,7 @@ public interface Parser {
 
         String command = commandMap.get(COMMAND_FLAG).get(0);
         List<String> descriptions = commandMap.get(command);
-        String description = descriptions.stream().collect(Collectors.joining(" "));
+        String description = String.join(" ", descriptions);
 
         results.add(command + " " + description);
 
@@ -84,11 +90,10 @@ public interface Parser {
             if (k.equals(command)) continue;
 
             List<String> args = commandMap.get(k);
-            String argString = args.stream().collect(Collectors.joining(" "));
+            String argString = String.join(" ", args);
             results.add(k + " " + argString);
         }
 
-        String result = results.stream().collect(Collectors.joining("/"));
-        return result;
+        return String.join("/", results);
     }
 }

@@ -1,5 +1,6 @@
 package task;
 
+import util.DukeException;
 import util.Formatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,48 +32,24 @@ public class TaskManager {
                 + taskCountMsg();
     }
 
-    public String markTaskDone(int position) throws NoSuchElementException, IndexOutOfBoundsException {
+    public String markTaskDone(int position) throws DukeException {
         try {
             taskList.get(position).markDone();
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Please include the index of the task.");
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Please enter a number within the list.");
+            throw new DukeException("Please enter a number within the list.");
         }
         return "Nice, another job well done!\n"
                 + taskList.get(position).toString();
     }
 
-    public String markTaskDone(HashMap<String, String> argMap) throws NoSuchElementException,
-            IndexOutOfBoundsException {
-        int position;
-        try {
-            position = Integer.parseInt(argMap.get("desc")) - 1;
-            taskList.get(position).markDone();
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Please include the index of the task.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Please enter a number within the list.");
-        }
-
-        return "Nice, another job well done!\n"
-                + taskList.get(position).toString();
-    }
-
-    public String deleteTask(HashMap<String, String> argMap) throws NoSuchElementException,
-            IndexOutOfBoundsException {
-        int position;
+    public String deleteTask(int position) throws DukeException {
         Task taskToRemove;
         try {
-            position = Integer.parseInt(argMap.get("desc")) - 1;
             taskToRemove = taskList.get(position);
             taskList.remove(position);
-        } catch (NoSuchElementException | NumberFormatException e) {
-            throw new NoSuchElementException("Please include the index of the task.");
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Please enter a number within the list.");
+            throw new DukeException("Please enter a number within the list.");
         }
-
         return "I've removed the task:\n"
                 + taskToRemove.toString()
                 + taskCountMsg();
@@ -101,7 +78,7 @@ public class TaskManager {
 
     public String toSaveString() {
         return taskList.stream()
-                .map(t -> t.toSaveString())
+                .map(Task::toSaveString)
                 .collect(Collectors.joining("\n"));
     }
 }

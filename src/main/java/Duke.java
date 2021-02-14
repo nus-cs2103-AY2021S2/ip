@@ -23,7 +23,6 @@ import java.util.Scanner;
 
 public class Duke {
     private final Storage storage;
-    private final Ui ui;
     private TaskManager taskManager;
 
 
@@ -36,54 +35,45 @@ public class Duke {
 //    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
-    public Duke(Storage storage, Ui ui) {
+    public Duke(Storage storage) {
         this.storage = storage;
-        this.ui = ui;
         try {
-            this.taskManager = storage.readTaskManager();
+            this.taskManager = Storage.readTaskManager();
         } catch (IOException e) {
             this.taskManager = new TaskManager();
         }
     }
 
     public static void main(String[] args) {
-        Duke duke;
         try {
-            duke = new Duke(new Storage("data", "sweh.txt"), new Ui());
+            Storage storage = new Storage("data", "sweh.txt");
+            Duke duke = new Duke(storage);
+            Ui.printGreeting();
             duke.run();
         } catch (IOException e) {
-
+            System.out.println("Unable to initialise storage for Sweh");
         }
     }
 
-    public void run() {
+    public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            Command c;
-            try {
-                c = Parser.parseCommand(userInput);
-            } catch (DukeException e) {
-                System.out.println(e.getMsg());
-                continue;
-            }
-
-            c.execute(taskManager);
-            System.out.println(c.getMessage());
+            String response = respondToInput(userInput);
+            System.out.println(response);
+            Storage.writeTaskManager(taskManager);
         }
     }
 
-    public String processInput(String input) {
-        Command c;
+    public String respondToInput(String input) {
         try {
-            c = Parser.parseCommand(input);
+            Command c = Parser.parseCommand(input);
+            c.execute(taskManager);
+            return c.getMessage();
         } catch (DukeException e) {
             return e.getMsg();
         }
-
-        c.execute(taskManager);
-        return c.getMessage();
     }
 
 //    @Override

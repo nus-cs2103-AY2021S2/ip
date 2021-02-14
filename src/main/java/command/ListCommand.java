@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListCommand implements Command {
+    public static final String COMMAND_STRING = "list";
     public static final CommandType COMMAND_TYPE = CommandType.LIST;
-    public static final String COMMAND = "list";
     private String message = "";
 
     public static ListCommand fromCommandMap(HashMap<String, List<String>> commandMap) {
@@ -34,10 +34,5 @@ public class ListCommand implements Command {
     @Override
     public String getMessage() {
         return message;
-    }
-
-    @Override
-    public CommandType commandType() {
-        return COMMAND_TYPE;
     }
 }
