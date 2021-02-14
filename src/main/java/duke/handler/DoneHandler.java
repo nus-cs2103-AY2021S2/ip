@@ -19,12 +19,19 @@ public class DoneHandler implements CommandHandler {
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {
+        response = execute(ui, storage, taskList, true);
+        ui.respond(response);
+    }
+
+    @Override
+    public String execute(Ui ui, Storage storage, TaskList taskList, boolean toString) {
+        assert toString = true;
         taskList.markDone(taskNum);
         Task updatedTask = taskList.getTask(taskNum);
         response = "Nice! I've marked this task as done: \n"
                 + " " + updatedTask + "\n";
-        ui.respond(response);
         storage.markDoneInStorage(updatedTask, taskNum);
+        return response;
     }
 
     @Override

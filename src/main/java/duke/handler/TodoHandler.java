@@ -19,12 +19,19 @@ public class TodoHandler implements CommandHandler {
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {
+        response = execute(ui, storage, taskList, true);
+        ui.respond(response);
+    }
+
+    @Override
+    public String execute(Ui ui, Storage storage, TaskList taskList, boolean toString) {
+        assert toString = true;
         taskList.addTask(toAdd);
         response = "Got it. I've added this task:\n"
                 + " " + toAdd + "\n"
                 + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.\n";
-        ui.respond(response);
         storage.addTask(toAdd);
+        return response;
     }
 
     @Override

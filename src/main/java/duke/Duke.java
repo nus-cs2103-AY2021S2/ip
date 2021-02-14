@@ -18,8 +18,9 @@ import duke.tasks.TaskList;
  */
 public class Duke {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(" d.MMM.yyyy HH:mm");
+    private static final String STORAGE_PATH = "data/tasks.txt";
 
-    private boolean willExit = false;
+    private boolean isExit = false;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -28,7 +29,7 @@ public class Duke {
      * Class constructor taking in String storagePath.
      * @param storagePath path to the storage of data.
      */
-    private Duke(String storagePath) {
+    public Duke(String storagePath) {
         storage = new Storage(storagePath);
         tasks = storage.load();
         ui = new Ui();
@@ -40,7 +41,7 @@ public class Duke {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        new Duke("data/tasks.txt").run();
+        new Duke(STORAGE_PATH).run();
     }
 
     /**
@@ -48,13 +49,13 @@ public class Duke {
      */
     public void run() {
         ui.displayIntro();
-        while (willExit == false) {
+        while (isExit == false) {
             try {
                 CommandHandler commandHandler = Parser.parseFromInput(ui.readCommand());
                 checkDeleteDonePossible(commandHandler, tasks);
                 commandHandler.execute(ui, storage, tasks);
                 if (commandHandler instanceof ByeHandler) {
-                    willExit = true;
+                    isExit = true;
                 }
             } catch (DukeException e) {
                 String output = e.getMessage();
@@ -62,6 +63,27 @@ public class Duke {
             }
         }
         ui.close();
+    }
+
+    /**
+     * Returns the response given an input.
+     * @param input The user input.
+     * @return The respective response.
+     */
+    public String getResponse(String input) {
+        boolean toString = true;
+        try {
+            CommandHandler commandHandler = Parser.parseFromInput(input);
+            checkDeleteDonePossible(commandHandler, tasks);
+            String output = commandHandler.execute(ui, storage, tasks, toString);
+            if (commandHandler instanceof ByeHandler) {
+                isExit = true;
+            }
+            return output;
+        } catch (DukeException e) {
+            String errorOutput = e.getMessage();
+            return errorOutput;
+        }
     }
 
     /**
@@ -82,5 +104,13 @@ public class Duke {
                 throw new DukeInvalidDesException("DELETE");
             }
         }
+    }
+
+    /**
+     * Returns the boolean value of whether program is to exit.
+     * @return true if ready to exit.
+     */
+    public boolean isExit() {
+        return isExit;
     }
 }

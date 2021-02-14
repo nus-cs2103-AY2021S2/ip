@@ -14,6 +14,11 @@ public class Ui {
     private static final String RES_BOX_TOP = INDENT + "_______________________________________________\n";
     private static final String RES_BOX_BOTTOM = INDENT + "|____________________________________________\n"
             + INDENT + "                                              \\|\n";
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     private static Scanner sc = new Scanner(System.in);
     private final Scanner in;
     private final PrintStream out;
@@ -51,13 +56,8 @@ public class Ui {
      * Displays the default intro message.
      */
     public void displayIntro() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         String response = "Hello from\n"
-                + logo + "\n"
+                + LOGO + "\n"
                 + "What can I do for you?\n";
         respond(response);
     }
