@@ -65,11 +65,11 @@ public class EditCommand extends Command {
             assert accessedTasks.getTaskListSize() != 0 : "There must be at least one task accessed";
             if (commandType == CommandType.DELETE) {
                 deleteTasks(taskList);
-                storage.write(taskList);
+                storage.serialize(taskList);
                 return ui.printDeletedTask(accessedTasks.toString(), taskList.getTaskListSize());
             } else if (commandType == CommandType.DONE) {
                 markTasksAsDone(taskList);
-                storage.write(taskList);
+                storage.serialize(taskList);
                 return ui.printFinishedTask(accessedTasks.toString(), taskList.getNumberOfUnfinishedTasks());
             } else {
                 return "The greatest teacher, failure is.";

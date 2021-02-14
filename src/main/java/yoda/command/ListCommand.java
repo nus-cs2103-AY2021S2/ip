@@ -25,6 +25,7 @@ public class ListCommand extends Command {
         }
         return taskList.filterByTask(keyword);
     }
+
     /**
      * Lists tasks based on the information given by the user.
      * @param taskList TaskList associated with the ListCommand being executed.
@@ -42,21 +43,21 @@ public class ListCommand extends Command {
         } else {
             if (details.length == 1) {
                 return ui.printTasks("all", taskList.toString(), taskList.getTaskListSize());
-            } else {
-                switch (details[1]) {
-                case "-d":
-                    TaskList deadlineList = taskList.filterByTask("Deadline");
-                    return ui.printTasks("deadline", deadlineList.toString(), deadlineList.getTaskListSize());
-                case "-e":
-                    TaskList eventList = taskList.filterByTask("Event");
-                    return ui.printTasks("event", eventList.toString(), eventList.getTaskListSize());
-                case "-t":
-                    TaskList todoList = taskList.filterByTask("ToDo");
-                    return ui.printTasks("todo", todoList.toString(), todoList.getTaskListSize());
-                default:
-                    return ui.printTasks("bad", "", 0);
-                }
             }
+            switch (details[1]) {
+            case "-d":
+                TaskList deadlineList = taskList.filterByTask("Deadline");
+                return ui.printTasks("deadline", deadlineList.toString(), deadlineList.getTaskListSize());
+            case "-e":
+                TaskList eventList = taskList.filterByTask("Event");
+                return ui.printTasks("event", eventList.toString(), eventList.getTaskListSize());
+            case "-t":
+                TaskList todoList = taskList.filterByTask("ToDo");
+                return ui.printTasks("todo", todoList.toString(), todoList.getTaskListSize());
+            default:
+                return ui.printTasks("bad", "", 0);
+            }
+
         }
     }
 }

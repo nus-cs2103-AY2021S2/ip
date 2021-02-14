@@ -66,8 +66,7 @@ public class AddCommand extends Command {
                 throw new InvalidCommandFormatException("Use /at when creating an event, you must!");
             }
             assert i > 1 : "i must be pointing at date time by this point";
-            String eventDateAndTime = eventDesc[i + 1] + " " + eventDesc[i + 2];
-            checkDateTimeFormat(eventDateAndTime);
+            String eventDateAndTime = checkDateTimeFormat(eventDesc[i + 1], eventDesc[i + 2]);
             return new Event(eventDetails.toString(), eventDateAndTime);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("The right way to create an event,\n"
@@ -88,8 +87,7 @@ public class AddCommand extends Command {
                 throw new InvalidCommandFormatException("Use /by when creating a deadline, you must!");
             }
             assert i > 1 : "i must be pointing at date time by this point";
-            String deadlineDateAndTime = deadlineDesc[i + 1] + " " + deadlineDesc[i + 2];
-            checkDateTimeFormat(deadlineDateAndTime);
+            String deadlineDateAndTime = checkDateTimeFormat(deadlineDesc[i + 1], deadlineDesc[i + 2]);
             return new Deadline(deadlineDetails.toString(), deadlineDateAndTime);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("The right way to create a deadline,\n"
@@ -97,10 +95,12 @@ public class AddCommand extends Command {
         }
     }
 
-    public void checkDateTimeFormat(String dateTime) throws InvalidDateTimeFormatException {
+    public String checkDateTimeFormat(String date, String time) throws InvalidDateTimeFormatException {
         try {
+            String dateTime = date + " " + time;
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime.parse(dateTime, format);
+            return dateTime;
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException("'YYYY-MM-DD HHmm', the right format is!\n"
                     + "2021-01-01 1600, an example is!");
@@ -118,7 +118,7 @@ public class AddCommand extends Command {
         try {
             Task task = makeTask();
             taskList.addTask(task);
-            storage.write(taskList);
+            storage.serialize(taskList);
             return ui.printAddedTask(task);
         } catch (InvalidCommandFormatException | InvalidDateTimeFormatException e) {
             return e.getMessage();
