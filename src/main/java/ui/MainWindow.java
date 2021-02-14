@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         Ui ui = new Ui();
         duke.getResponse(input, ui);
         dialogContainer.getChildren().addAll(
