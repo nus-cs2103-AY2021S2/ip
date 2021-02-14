@@ -5,11 +5,11 @@ Rem is a **desktop app for managing tasks using via a Command Line Interface(CLI
 ## Features 
 
 ### Add Task:
-Add a task to the memory of Rem. There are 4 kinds of tasks including:\n
-**todo**\n
-**deadline**\n
-**event**\n
-**period**\n
+Add a task to the memory of Rem. There are 4 kinds of tasks including:  
+**todo**  
+**deadline**  
+**event**  
+**period**  
 
 ## Usage
 
@@ -25,10 +25,10 @@ Example of usage:
 
 If added successfully, Rem will reply that:
 
-`Got it. I've added this task:\n
-[T][ ] Fight the White Whale\n
+`Got it. I've added this task:  
+[T][ ] Fight the White Whale   
 Now you have {number of existing tasks} tasks in the list.`
-\n
+
 ### `deadline` - Add a deadline to the task list
 
 Deadline is a kind of task which need to be finished by the exact date. The format should be:
@@ -41,10 +41,10 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:\n
-[D][ ] Fight the White Whale (by: 2021-02-16)\n
+`Got it. I've added this task:  
+[D][ ] Fight the White Whale (by: 2021-02-16)  
 Now you have {number of existing tasks} tasks in the list.`
-\n
+
 ### `event` - Add an event to the task list
 
 Event is a kind of task which need to be finished at the exact date. The format should be:
@@ -57,6 +57,6 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:\n
-[E][ ] Fight the White Whale (at: 2021-02-16)\n
+`Got it. I've added this task:
+[E][ ] Fight the White Whale (at: 2021-02-16)
 Now you have {number of existing tasks} tasks in the list.`
