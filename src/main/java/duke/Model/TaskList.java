@@ -1,4 +1,7 @@
-package duke;
+package duke.Model;
+
+import duke.Exceptions.DukeOutOfBoundsException;
+import duke.Tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;

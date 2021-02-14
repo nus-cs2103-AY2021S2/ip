@@ -1,4 +1,4 @@
-package duke;
+package duke.Exceptions;
 
 public class DukeParseException extends Exception {
     public DukeParseException(String errorMessage) {

@@ -1,8 +1,11 @@
 package duke.command;
 
-import java.io.IOException;
-
-import duke.*;
+import duke.Exceptions.DukeOutOfBoundsException;
+import duke.Exceptions.DukeStorageException;
+import duke.Model.TaskList;
+import duke.Storage.Storage;
+import duke.Tasks.Task;
+import duke.Ui.MessageGenerator;
 
 public class DeleteCommand extends Command {
 
@@ -13,11 +16,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, TaskList tasks, Storage storage)
-            throws DukeStorageException,DukeOutOfBoundsException {
+    public CommandResult execute(MessageGenerator messageGenerator, TaskList tasks, Storage storage)
+            throws DukeStorageException, DukeOutOfBoundsException {
         Task taskToDelete = tasks.pop(indexToDelete);
         storage.saveTasks(tasks);
-        String deleteMessage = ui.generateDeleteMessage(taskToDelete,tasks);
+        String deleteMessage = messageGenerator.generateDeleteMessage(taskToDelete,tasks);
         return new CommandResult(deleteMessage, false);
     }
 }

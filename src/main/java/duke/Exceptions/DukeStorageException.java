@@ -1,7 +1,7 @@
-package duke;
+package duke.Exceptions;
 
 public class DukeStorageException extends Exception {
-    DukeStorageException(String message) {
+    public DukeStorageException(String message) {
         super(message);
     }
 }

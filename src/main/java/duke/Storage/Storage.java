@@ -1,4 +1,10 @@
-package duke;
+package duke.Storage;
+
+import duke.Exceptions.DukeParseException;
+import duke.Exceptions.DukeStorageException;
+import duke.Parser.StorageParser;
+import duke.Model.TaskList;
+import duke.Tasks.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +33,7 @@ public class Storage {
      * @param filePath directory path to the file in which to save the tasks or load the tasks from
      */
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -56,7 +62,7 @@ public class Storage {
      * @throws DukeStorageException when unable find the file
      */
 
-    public List<Task> loadStorage() throws DukeStorageException, DukeParseException{
+    public List<Task> loadStorage() throws DukeStorageException, DukeParseException {
         Scanner scanner = getScannerToReadFile();
         List<Task> savedListOfTasks = new ArrayList<>();
         while (scanner.hasNextLine()) {

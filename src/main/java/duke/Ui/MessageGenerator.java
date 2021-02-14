@@ -1,11 +1,12 @@
-package duke;
+package duke.Ui;
 
-import java.util.Scanner;
+import duke.Model.TaskList;
+import duke.Tasks.Task;
 
 /**
  * Provides some functions which handle formatting display messages to display to the user.
  */
-public class Ui {
+public class MessageGenerator {
 
     /**
      * Returns the welcome message when first starting duke.
@@ -35,12 +36,12 @@ public class Ui {
 
     public String generateAddMessage(Task taskToBeAdded, TaskList tasks) {
         return "Got it. I've added this task:\n\t" + taskToBeAdded + "\n"
-                + Ui.getDisplayOfNumberOfTasks(tasks);
+                + MessageGenerator.getDisplayOfNumberOfTasks(tasks);
     }
 
     public String generateDeleteMessage(Task taskToDelete, TaskList tasks) {
         return "Noted. I've removed this task:\n\t" + taskToDelete
-                + "\n" + Ui.getDisplayOfNumberOfTasks(tasks);
+                + "\n" + MessageGenerator.getDisplayOfNumberOfTasks(tasks);
     }
     public String generateExitMessage() {
         return "Bye. Hope to see you again soon!";

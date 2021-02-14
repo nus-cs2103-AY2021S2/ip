@@ -1,4 +1,4 @@
-package duke;
+package duke.Tasks;
 
 /**
  * Represents a Task. Stores relevant information about the task like  basic description, the code letter that will

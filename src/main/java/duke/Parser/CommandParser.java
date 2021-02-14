@@ -1,8 +1,13 @@
-package duke;
+package duke.Parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.Exceptions.DukeParseException;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.ToDo;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -51,7 +56,7 @@ public class CommandParser {
      *
      * @param inputCommand String which the Parser will parse.
      */
-    CommandParser(String inputCommand) {
+    public CommandParser(String inputCommand) {
         this.inputCommand = inputCommand;
     }
 

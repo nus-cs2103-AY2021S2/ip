@@ -3,6 +3,13 @@ package duke;
 import java.io.File;
 import java.io.IOException;
 
+import duke.Exceptions.DukeOutOfBoundsException;
+import duke.Exceptions.DukeParseException;
+import duke.Exceptions.DukeStorageException;
+import duke.Model.TaskList;
+import duke.Parser.CommandParser;
+import duke.Storage.Storage;
+import duke.Ui.MessageGenerator;
 import duke.command.Command;
 import duke.command.CommandResult;
 
@@ -18,12 +25,12 @@ public class Duke {
 
     private static Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private MessageGenerator messageGenerator;
     private boolean isExit = false;
 
 
     Duke() {
-        this.ui = new Ui();
+        this.messageGenerator = new MessageGenerator();
         try {
             this.storage = initializeStorage();
         } catch (IOException e) {
@@ -64,14 +71,14 @@ public class Duke {
     }
 
     public String start(){
-        return ui.getWelcomeMessage();
+        return messageGenerator.getWelcomeMessage();
     }
 
     public String getResponse(String input) {
         try {
             CommandParser commandParser = new CommandParser(input);
             Command command = commandParser.parseCommand();
-            CommandResult commandResult = command.execute(ui, tasks, storage);
+            CommandResult commandResult = command.execute(messageGenerator, tasks, storage);
             this.isExit = commandResult.getIsExit();
             return commandResult.getMessageToDisplay();
 
