@@ -1,4 +1,4 @@
-package prerthan.duke.io;
+package prerthan.duke.IO;
 
 import prerthan.duke.task.Task;
 
@@ -11,28 +11,28 @@ import java.util.Arrays;
  * Duke, to the standard output.
  */
 public class Output {
-    static final String logo = "\n ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    BufferedWriter writer;
+    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 
-    public Output() {
-        this.writer = new BufferedWriter(new OutputStreamWriter(System.out));
+    static final String logo = "\n ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+
+    static void ioException() {
+        System.err.println("I/O Exception occurred.");
     }
 
     /////////////////////////////////////////////////////////////////////////
     // Instance
     /////////////////////////////////////////////////////////////////////////
 
-    static void ioException() {
-        System.err.println("I/O Exception occurred.");
+    public Output() {
+        ;
     }
 
     void appendWithNewline(String string) {
         try {
             this.writer.append(string);
             this.writer.newLine();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             ioException();
         }
     }
@@ -41,16 +41,10 @@ public class Output {
         Arrays.asList(strings).forEach(this::appendWithNewline);
     }
 
-    /**
-     * Appends {@code message} to this {@link Output} object
-     *
-     * @param message the {@link String} to append to this object
-     */
     public void add(String message) {
         try {
             this.writer.append(message);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             ioException();
         }
     }
@@ -61,23 +55,22 @@ public class Output {
     public void say() {
         try {
             this.writer.flush();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             ioException();
         }
     }
 
     /**
-     * Writes a {@code String}) to the standard output.
-     *
+     * Writes a specified message (given as a {@link String}) to the standard
+     * output.
+     * 
      * @param message The message to be written
      */
     public void say(String message) {
         try {
             this.appendWithNewline(message);
             this.writer.flush();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             ioException();
         }
     }
@@ -85,22 +78,16 @@ public class Output {
     /**
      * Writes multiple messages to the standard output. These messages are given as
      * a comma-separated list of {@link String}s.
-     *
+     * 
      * @param messages The list of messages to be written to standard output
      */
     public void say(String... messages) {
         try {
             this.appendWithNewline(messages);
             writer.flush();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             ioException();
         }
-    }
-
-    public void sayError(Exception e) {
-        this.say("**************************ERROR**************************", e.toString(),
-            "**************************ERROR**************************");
     }
 
     /**
@@ -120,7 +107,7 @@ public class Output {
     /**
      * Given a task, tells the user that the task was added to the task list,
      * formatted appropriately.
-     *
+     * 
      * @param task The task that was added to the task list
      */
     public void sayTaskAdded(Task task) {
@@ -130,7 +117,7 @@ public class Output {
     /**
      * Given a task, tells the user that the task was marked complete, formatted
      * appropriately.
-     *
+     * 
      * @param task The task that was marked complete
      */
     public void sayTaskMarkedComplete(Task task) {
@@ -141,14 +128,10 @@ public class Output {
         this.say("This task has been deleted:", task.toString());
     }
 
-    /**
-     * Closes this writer.
-     */
     public void close() {
         try {
             writer.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             ioException();
         }
     }

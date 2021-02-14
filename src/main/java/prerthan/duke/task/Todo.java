@@ -8,7 +8,7 @@ import prerthan.duke.exception.DukeEmptyDetailException;
 public class Todo extends Task {
     /**
      * Creates a Todo with some detail.
-     *
+     * 
      * @param detail the Todo detail
      * @throws DukeInvalidArgumentException if the detail is blank
      */
@@ -16,19 +16,18 @@ public class Todo extends Task {
         super(detail);
     }
 
-    public Todo(String detail, boolean isComplete) throws DukeEmptyDetailException {
-        super(detail, isComplete);
-    }
-
-    @Override public char getTaskTypeIcon() {
+    @Override
+    public char getTaskTypeIcon() {
         return 'T';
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return String.format("[%c]%s", this.getTaskTypeIcon(), super.toString());
     }
 
-    @Override public String encode() {
+    @Override
+    public String encode() {
         return String.format("%c,%d,%s", this.getTaskTypeIcon(), this.isComplete ? 1 : 0, this.detail);
     }
 }
