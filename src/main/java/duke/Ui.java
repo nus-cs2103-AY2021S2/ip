@@ -20,7 +20,8 @@ public class Ui {
      * @return Welcome message.
      */
     public String welcome() {
-        return "Hey there! I'm DUKE, how may I help you?";
+        return "Hey there! I'm Eeyore, your best friend!\n"
+                + "How may I help you?";
     }
 
     /**

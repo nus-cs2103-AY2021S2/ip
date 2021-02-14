@@ -29,6 +29,12 @@ public class Parser {
         return userInput.split(" ");
     }
 
+    /**
+     * Parses the String of the new detail for the update function.
+     *
+     * @param parsedUserInput String array of user input.
+     * @return String of the new details to be updated.
+     */
     public String parseUpdateInput(String[] parsedUserInput) {
         StringBuilder newDetail = new StringBuilder();
 

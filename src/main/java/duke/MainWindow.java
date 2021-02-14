@@ -27,12 +27,13 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+
     private Ui ui = new Ui();
 
     private final Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/images/User.png"));
+            .getResourceAsStream("/images/Pooh.png"));
     private final Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/images/BayMax.png"));
+            .getResourceAsStream("/images/Eeyore.png"));
 
     /**
      * Initializes dialog box.
