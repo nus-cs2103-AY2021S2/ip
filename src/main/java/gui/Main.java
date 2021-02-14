@@ -22,7 +22,9 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().addAll(this.getClass().getResource("/stylesheet/Styles.css").toExternalForm());
             stage.setScene(scene);
+            stage.setTitle("Duke Project");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException | DukeException e) {
