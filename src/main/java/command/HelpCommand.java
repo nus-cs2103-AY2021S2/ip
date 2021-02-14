@@ -49,7 +49,9 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(TaskManager taskManager) throws DukeException {
-        message = defaultHelpText();
+        message = keywordOpt.isPresent()
+                ? keywordHelpText(keywordOpt.get())
+                : defaultHelpText();
     }
 
     private String defaultHelpText() {
@@ -58,10 +60,86 @@ public class HelpCommand extends Command {
         StringBuilder result = new StringBuilder();
         result.append("Type \"help <keyword>\" to read detailed information about each command")
                 .append("\n")
-                .append("List of keywords: \n")
+                .append("List of commands: \n")
                 .append(validKeywordList);
 
         return result.toString();
+    }
+
+    private String keywordHelpText(String keyword) {
+        String preText = "Help for \"" + keyword + "\":\n";
+        String text;
+
+        switch (keyword) {
+            case ListCommand.COMMAND_STRING:
+                text = listHelpText();
+                break;
+            case FindCommand.COMMAND_STRING:
+                text = findHelpText();
+                break;
+            case TodoCommand.COMMAND_STRING:
+                text = todoHelpText();
+                break;
+            case DeadlineCommand.COMMAND_STRING:
+                text = deadlineHelpText();
+                break;
+            case EventCommand.COMMAND_STRING:
+                text = eventHelpText();
+                break;
+            case DoneCommand.COMMAND_STRING:
+                text = doneHelpText();
+                break;
+            case DeleteCommand.COMMAND_STRING:
+                text = deleteHelpText();
+                break;
+            case QuitCommand.COMMAND_STRING:
+                text = quitHelpText();
+                break;
+            default:
+                text = "";
+                assert false; //Method should not have been called with an invalid keyword.
+        }
+
+        return preText + text;
+    }
+
+    private String listHelpText() {
+        return "Usage: \"list\" - " +
+                "Shows all outstanding tasks.";
+    }
+
+    private String findHelpText() {
+        return "Usage: \"find <keyword1> <keyword2>...\" - " +
+                "Shows all tasks whose description contains all of the keywords";
+    }
+
+    private String todoHelpText() {
+        return "Usage: \"todo <description>\" - " +
+                "Creates a Todo Task with the supplied description";
+    }
+
+    private String deadlineHelpText() {
+        return "Usage: \"deadline <description> /by <YYYY-MM-DD>\" - " +
+                "Creates a Deadline with the supplied description and date";
+    }
+
+    private String eventHelpText() {
+        return "Usage: \"deadline <description> /at <YYYY-MM-DD>\" - " +
+                "Creates an Event with the supplied description and date";
+    }
+
+    private String doneHelpText() {
+        return "Usage: \"done <i>\" - " +
+                "Marks the task with index i in the list as done";
+    }
+
+    private String deleteHelpText() {
+        return "Usage: \"delete <i>\" - " +
+                "Removes the task with index i from the list";
+    }
+
+    private String quitHelpText() {
+        return "Usage: \"quit\" - Terminates the application";
     }
 
     @Override
