@@ -50,10 +50,10 @@ public class TaskList {
      * @return Output for GUI.
      */
     public String list() {
-        StringBuilder sb = new StringBuilder("     Here are the tasks in your list:\n");
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
-            String msg = "     " + (i + 1) + "." + currTask.toString() + "\n";
+            String msg = (i + 1) + ". " + currTask.toString() + "\n";
             sb.append(msg);
         }
         return sb.toString();
@@ -69,24 +69,24 @@ public class TaskList {
     public String done(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length > 2) {
-            throw new DukeException("       OOPS!!! The format should be "
+            throw new DukeException("OOPS!!! The format should be "
                     + "\"done ##\" where ## is the task number.");
         }
         if (inputArr.length == 1) {
-            throw new DukeException("       OOPS!!! The task number cannot be empty.");
+            throw new DukeException("OOPS!!! The task number cannot be empty.");
         }
         if (checkIfNotNumeric(inputArr[1])) {
-            throw new DukeException("       OOPS!!! The task number must be numeric.");
+            throw new DukeException("OOPS!!! The task number must be numeric.");
         }
         int index = Integer.parseInt(inputArr[1]) - 1;
         if (checkIfOutOfRange(index)) {
-            throw new DukeException("       OOPS!!! The task number is out of range. "
+            throw new DukeException("OOPS!!! The task number is out of range. "
                     + "Please use \"list\" to see the list of tasks.");
         } else {
             this.tasks.get(index).markAsDone();
             Task currTask = tasks.get(index);
-            return "     Nice! I've marked this task as done:\n"
-                    + "       " + currTask.toString() + "\n";
+            return "Nice! I've marked this task as done:\n"
+                    + currTask.toString() + "\n";
         }
     }
 
@@ -101,24 +101,24 @@ public class TaskList {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length > 2) {
 
-            throw new DukeException("       OOPS!!! The format should be "
+            throw new DukeException("OOPS!!! The format should be "
                     + "\"delete ##\" where ## is the task number.");
         }
         if (inputArr.length == 1) {
-            throw new DukeException("       OOPS!!! The task number cannot be empty.");
+            throw new DukeException("OOPS!!! The task number cannot be empty.");
         }
         if (checkIfNotNumeric(inputArr[1])) {
-            throw new DukeException("       OOPS!!! The task number must be numeric.");
+            throw new DukeException("OOPS!!! The task number must be numeric.");
 
         }
         int index = Integer.parseInt(inputArr[1]) - 1;
         if (checkIfOutOfRange(index)) {
-            throw new DukeException("       OOPS!!! The task number is out of range. "
+            throw new DukeException("OOPS!!! The task number is out of range. "
                     + "Please use \"list\" to see the list of tasks.");
         }
-        return "     Noted. I've removed this task:\n"
-                + "       " + this.tasks.remove(index).toString() + "\n"
-                + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
+        return "Noted. I've removed this task:\n"
+                + this.tasks.remove(index).toString() + "\n"
+                + "Now you have " + this.tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -131,13 +131,13 @@ public class TaskList {
     public String find(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length > 2) {
-            throw new DukeException("       OOPS!!! The format should be "
+            throw new DukeException("OOPS!!! The format should be "
                     + "\"find ####\" where #### is the keyword to search.");
         }
         if (inputArr.length == 1) {
-            throw new DukeException("       OOPS!!! The keyword cannot be empty.");
+            throw new DukeException("OOPS!!! The keyword cannot be empty.");
         }
-        StringBuilder sb = new StringBuilder("     Here are the matching tasks in your list:\n");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         ArrayList<Task> temp = new ArrayList<>();
         for (Task currTask : tasks) {
             String currDescription = currTask.getDescription();
@@ -168,7 +168,7 @@ public class TaskList {
         LocalDate date = LocalDate.now();
 
         if (inputArr.length == 1) {
-            throw new DukeException("       OOPS!!! The description of the task cannot be empty.");
+            throw new DukeException("OOPS!!! The description of the task cannot be empty.");
         }
 
         if (!type.equals("todo")) {
@@ -178,12 +178,12 @@ public class TaskList {
                 details = fullCommand.substring(6).split(" /at ");
             }
             if (details.length == 1) {
-                throw new DukeException("       OOPS!!! The date of a deadline/event cannot be empty.");
+                throw new DukeException("OOPS!!! The date of a deadline/event cannot be empty.");
             }
             try {
                 date = LocalDate.parse(details[1]);
             } catch (DateTimeParseException ex) {
-                throw new DukeException("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
+                throw new DukeException("OOPS!!! The date has to be in the format yyyy-mm-dd.");
             }
         }
 
@@ -200,9 +200,9 @@ public class TaskList {
         default:
         }
         assert tasks.size() == currSize + 1 : "Task has not been added properly.";
-        return "     Got it. I've added this task:\n"
-                + "       " + this.tasks.get(this.tasks.size() - 1).toString() + "\n"
-                + "     Now you have " + this.tasks.size() + " tasks in the list.\n";
+        return "Got it. I've added this task:\n"
+                + this.tasks.get(this.tasks.size() - 1).toString() + "\n"
+                + "Now you have " + this.tasks.size() + " tasks in the list.\n";
     }
 
     /**
@@ -216,14 +216,14 @@ public class TaskList {
         String[] inputArr = fullCommand.split(" ", 3);
 
         if (inputArr.length < 3) {
-            throw new DukeException("       OOPS!!! The description of the task update is not complete.");
+            throw new DukeException("OOPS!!! The description of the task update is not complete.");
         }
         if (checkIfNotNumeric(inputArr[1])) {
-            throw new DukeException("       OOPS!!! The task number must be numeric.");
+            throw new DukeException("OOPS!!! The task number must be numeric.");
         }
         int index = Integer.parseInt(inputArr[1]) - 1;
         if (checkIfOutOfRange(index)) {
-            throw new DukeException("       OOPS!!! The task number is out of range. "
+            throw new DukeException("OOPS!!! The task number is out of range. "
                     + "Please use \"list\" to see the list of tasks.");
         }
 
@@ -233,7 +233,7 @@ public class TaskList {
 
         if (type == 'D' || type == 'E') {
             if (!updateInfo[0].equals("/description") && !updateInfo[0].equals("/date")) {
-                throw new DukeException("       OOPS!!! Only the description "
+                throw new DukeException("OOPS!!! Only the description "
                         + "or date of the task can be updated.");
             }
         }
@@ -261,8 +261,8 @@ public class TaskList {
             break;
         default:
         }
-        return "     Got it. I've updated this task:\n"
-                + "       " + this.tasks.get(index).toString() + "\n";
+        return "Got it. I've updated this task:\n"
+                + this.tasks.get(index).toString() + "\n";
     }
 
     public ArrayList<Task> getTaskList() {

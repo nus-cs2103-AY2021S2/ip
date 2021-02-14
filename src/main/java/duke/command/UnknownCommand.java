@@ -23,6 +23,6 @@ public class UnknownCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return "       OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "OOPS!!! I'm sorry, but I don't know what that means...";
     }
 }
