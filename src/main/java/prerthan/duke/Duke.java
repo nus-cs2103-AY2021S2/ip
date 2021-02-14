@@ -1,8 +1,8 @@
 package prerthan.duke;
 
-import sharadhr.duke.io.Input;
-import sharadhr.duke.io.Output;
-import sharadhr.duke.io.Storage;
+import prerthan.duke.IO.Input;
+import prerthan.duke.IO.Output;
+import prerthan.duke.IO.Storage;
 import prerthan.duke.task.TaskList;
 
 /**
