@@ -92,7 +92,7 @@ public class Parser {
                 return "Task marked complete!\n";
             }
             return "Please enter a valid task.\n";
-        } else if (userInput[0].toLowerCase().equals(Command.BYE.toString())){
+        } else if (userInput[0].toLowerCase().equals(Command.BYE.toString())) {
             storage.exportTasks();
             System.exit(0);
         } else {
