@@ -73,7 +73,7 @@ public class TaskList {
      */
     public void addTodo(HashMap<String, String> commands, Ui ui) throws DukeException {
         String taskName = commands.get("info");
-        if (taskName == "") {
+        if (stringIsNullOrEmpty(taskName)) {
             throw new DukeException("Todo tasks should be formatted as such: todo [task name].");
         }
 
@@ -95,7 +95,7 @@ public class TaskList {
         String eventName = commands.get("info");
         String timeStr = commands.get("at");
 
-        if (eventName == "" || timeStr == "") {
+        if (stringIsNullOrEmpty(eventName) || stringIsNullOrEmpty(timeStr)) {
             throw new DukeException("Event tasks should be formatted as such: event [event name] /by [event time].");
         }
 
@@ -118,7 +118,7 @@ public class TaskList {
         String deadlineName = commands.get("info");
         String deadlineTimeStr = commands.get("by");
 
-        if (deadlineName == "" || deadlineTimeStr == "") {
+        if (stringIsNullOrEmpty(deadlineName) || stringIsNullOrEmpty(deadlineTimeStr)) {
             throw new DukeException("Deadline tasks should be formatted as such: deadline [task name] /by [deadline].");
         }
 
@@ -141,7 +141,7 @@ public class TaskList {
     public void deleteTask(HashMap<String, String> commands, Ui ui) throws DukeException {
         String taskToDeleteStr = commands.get("info");
 
-        if (taskToDeleteStr == "") {
+        if (stringIsNullOrEmpty(taskToDeleteStr)) {
             throw new DukeException("Deleting a task as done needs to be done like this: "
                     + "done [task number from list]. Task numbers need to be written as digits and not text.");
         }
@@ -170,7 +170,7 @@ public class TaskList {
     public void markTaskAsDone(HashMap<String, String> commands, Ui ui) throws DukeException {
         String taskToMarkAsDoneStr = commands.get("info");
 
-        if (taskToMarkAsDoneStr == "") {
+        if (stringIsNullOrEmpty(taskToMarkAsDoneStr)) {
             throw new DukeException("Marking a task as done needs to be done like this: done [task number from list].");
         }
 
@@ -197,7 +197,7 @@ public class TaskList {
     public void findTasks(HashMap<String, String> commands, Ui ui) throws DukeException {
         String searchTerm = commands.get("info");
 
-        if (searchTerm == "") {
+        if (stringIsNullOrEmpty(searchTerm)) {
             throw new DukeException("To find a task, please use enter the following: find [search term]");
         }
 
@@ -247,5 +247,8 @@ public class TaskList {
             throw new DukeException("Please format your date as such: "
                     + "15/01/2021 1845 (day/month/year time in 24H format)");
         }
+    }
+    private static boolean stringIsNullOrEmpty(String strToTest) {
+        return strToTest == null || strToTest.isEmpty() || strToTest.isBlank();
     }
 }
