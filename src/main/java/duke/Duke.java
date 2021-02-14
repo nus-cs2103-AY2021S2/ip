@@ -47,6 +47,6 @@ public class Duke {
      * @return a String containing the welcome message.
      */
     public String welcomeMessage() {
-        return "Hello from Piper!\n" + "\nWhat can I do for you?";
+        return "Hello! I'm Piper from Brawl Stars!\n" + "\nWhat can I do for you?";
     }
 }

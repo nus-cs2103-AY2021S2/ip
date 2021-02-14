@@ -17,7 +17,7 @@ public class showListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getNumOfTasks() == 0) {
-            throw new DukeException("There are currently no duke.tasks in your list.");
+            throw new DukeException("There are currently no tasks in your list.");
         }
         Comparator<Task> byDeadline = new Comparator<>() {
             public int compare(Task t1, Task t2) {
