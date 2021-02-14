@@ -16,7 +16,7 @@ public class QuitCommand extends Command {
 
     @Override
     public void execute(TaskManager taskManager) {
-
+        message = "See you again soon!";
     }
 
     @Override

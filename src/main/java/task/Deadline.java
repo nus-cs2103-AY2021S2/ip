@@ -7,12 +7,9 @@ import java.time.LocalDate;
 import static java.time.format.DateTimeFormatter.*;
 
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 public class Deadline extends Task {
     public static final String COMMAND_STRING = "deadline";
@@ -31,10 +28,9 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                (endDate != null
-                        ? "(by: " + endDate.format(DateTimeFormatter.ofPattern("E, d MMM yy")) + ")"
-                        : "");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("E, d MMM yy");
+        String dateString = endDate.format(dateTimeFormatter);
+        return "[D]" + super.toString() + " (by: " + dateString + ")";
     }
 
     @Override

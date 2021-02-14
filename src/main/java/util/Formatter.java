@@ -27,7 +27,8 @@ public interface Formatter {
     }
 
     static String formatList(List<String> strList) {
-        return formatList(strList.toArray(new String[]{}));
+        String[] strArr = strList.toArray(new String[]{});
+        return formatList(strArr);
     }
 
     static String addIndent(String string) {

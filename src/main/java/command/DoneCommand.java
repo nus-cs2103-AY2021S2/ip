@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
             String indexString = descriptions.get(0);
             int index = Integer.parseInt(indexString) - 1;
             return new DoneCommand(index);
-        } catch (NoSuchElementException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please provide an index to mark as done.");
         } catch (NumberFormatException e) {
             throw new DukeException("Index number could not be understood");
