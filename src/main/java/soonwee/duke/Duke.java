@@ -22,11 +22,11 @@ public class Duke {
         Storage storage = new Storage("data\\tasks.txt");
         if (input.equals("list")) {
             result = storage.taskList.displayTasks();
-        } else if (input.startsWith("done")) {
+        } else if (input.startsWith("done") && input.charAt(DONE_INDEX - 1) == ' ') {
             int index = Integer.parseInt(input.substring(DONE_INDEX));
             result = storage.taskList.setTaskDone(index);
             storage.writeFile();
-        } else if (input.startsWith("delete")) {
+        } else if (input.startsWith("delete") && input.charAt(DELETE_INDEX - 1) == ' ') {
             int index = Integer.parseInt(input.substring(DELETE_INDEX));
             result = storage.taskList.removeTask(index);
             storage.writeFile();
