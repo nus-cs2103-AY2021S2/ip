@@ -1,5 +1,7 @@
 package Duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,6 +53,15 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke(Constants.FILE_PATH);
+        /*
+        File f = new File(Constants.FILE_PATH);
+        Scanner sc = new Scanner(f);
+        while (sc.hasNextLine()) {
+            String currLine = sc.nextLine();
+            System.out.println(currLine);
+        }
+
+         */
         duke.run();
     }
 

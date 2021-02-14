@@ -33,29 +33,18 @@ public class DateTimeProcessor {
             }
             int hour = timeInt / 100;
             int minute = timeInt % 100;
-            assert (hour == 24 && minute == 0) || (hour < 24 && minute < 60) : "Wrong format for time";
             if (hour == 24) {
-                if (minute == 0) {
-                    return "12:00am";
-                } else {
-                    return null;
-                }
+                return (minute == 0) ? "12:00am" : null;
             } else if (hour > 24 || minute > 59) {
                 return null;
-            } else {
-                String type;
-                if (hour >= 12) {
-                    type = "pm";
-                } else {
-                    type = "am";
-                }
-                hour = hour % 12;
-                if (hour == 0) {
-                    hour = 12;
-                }
-                String padding = (minute < 10) ? "0" : "";
-                return hour + ":" + padding + minute + type;
             }
+            String type = (hour >= 12) ? "pm" : "am";
+            hour = hour % 12;
+            if (hour == 0) {
+                hour = 12;
+            }
+            String padding = (minute < 10) ? "0" : "";
+            return hour + ":" + padding + minute + type;
         } catch (NumberFormatException e) {
             return null;
         }
