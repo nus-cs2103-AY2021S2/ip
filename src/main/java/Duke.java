@@ -21,8 +21,10 @@ public class Duke extends Application {
 
 
     protected static boolean canExit = false;
-    private static final ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Contact> contactList = new ArrayList<>();
     protected final TaskList tasks;
+    protected final ContactList contacts;
     protected final Storage storage;
     protected final Ui ui;
     protected final Parser parser;
@@ -36,22 +38,28 @@ public class Duke extends Application {
     private final Image user = new Image(this.getClass().getResourceAsStream("DaUser.png"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("DaDuke.png"));
 
-    public Duke(String filePath) {
+    public Duke(String taskFilePath, String contactFilePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(taskFilePath, contactFilePath);
         tasks = new TaskList(taskList, ui);
-        parser = new Parser(taskList, tasks, ui);
+        contacts = new ContactList(contactList, ui);
+        parser = new Parser(tasks, contacts, ui);
         storage.taskRecorder();
-        storage.load(taskList);
+        storage.contactRecorder();
+        storage.loadTask(taskList);
+        storage.loadContact(contactList);
     }
 
     public Duke() {
         ui = new Ui();
-        storage = new Storage("duke.txt");
+        storage = new Storage("duke.txt", "contact.txt");
         tasks = new TaskList(taskList, ui);
-        parser = new Parser(taskList, tasks, ui);
+        contacts = new ContactList(contactList, ui);
+        parser = new Parser(tasks, contacts, ui);
         storage.taskRecorder();
-        storage.load(taskList);
+        storage.contactRecorder();
+        storage.loadTask(taskList);
+        storage.loadContact(contactList);
     }
 
 
@@ -64,9 +72,11 @@ public class Duke extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        String path = "duke.txt";
-        Duke duke = new Duke(path);
+        String taskPath = "duke.txt";
+        String contactPath = "contact.txt";
+        Duke duke = new Duke(taskPath, contactPath);
         duke.storage.taskHistory();
+        duke.storage.contactHistory();
 
         while (!canExit) {
             try {
@@ -76,7 +86,8 @@ public class Duke extends Application {
             }
         }
 
-        duke.storage.record(taskList);
+        duke.storage.recordTasks(duke.taskList);
+        duke.storage.recordContacts(duke.contactList);
     }
 
     @Override
@@ -103,12 +114,12 @@ public class Duke extends Application {
         stage.show();
         stage.setTitle("\u2764小茜的待办事项\u2764");
         stage.setResizable(false);
-        stage.setMinHeight(650.0);
-        stage.setMinWidth(450.0);
+        stage.setMinHeight(700.0);
+        stage.setMinWidth(500.0);
 
-        mainLayout.setPrefSize(450.0, 650.0);
+        mainLayout.setPrefSize(500.0, 700.0);
 
-        scrollPane.setPrefSize(435, 585);
+        scrollPane.setPrefSize(485, 635);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -165,7 +176,8 @@ public class Duke extends Application {
         });
 
         exitButton.setOnAction((event) -> {
-            storage.record(taskList);
+            storage.recordTasks(taskList);
+            storage.recordContacts(contactList);
             Platform.exit();
             System.exit(0);
         });

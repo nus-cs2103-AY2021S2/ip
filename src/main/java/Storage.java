@@ -3,20 +3,34 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    protected String filePath;
+    protected String taskFilePath;
+    protected String contactFilePath;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String taskFilePath, String contactFilePath) {
+        this.taskFilePath = taskFilePath;
+        this.contactFilePath = contactFilePath;
+
     }
 
     /**
      * Creates a new file to store tasks is the file does not exit yet.
      */
     public void taskRecorder() {
-        File taskHistory = new File(filePath);
+        File taskHistory = new File(taskFilePath);
         if (!taskHistory.exists()) {
             try {
                 taskHistory.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void contactRecorder() {
+        File contactHistory = new File(contactFilePath);
+        if (!contactHistory.exists()) {
+            try {
+                contactHistory.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -28,7 +42,7 @@ public class Storage {
      */
     public String taskHistory() {
         try {
-            File history = new File(filePath);
+            File history = new File(taskFilePath);
             Scanner s = new Scanner(history);
             String myTasks = "\nyour current tasks:\n";
             while (s.hasNext()) {
@@ -46,19 +60,55 @@ public class Storage {
         }
     }
 
+    public String contactHistory() {
+        try {
+            File history = new File(contactFilePath);
+            Scanner s = new Scanner(history);
+            String myContacts = "\nyour current contacts:\n";
+            while (s.hasNext()) {
+                String str = s.nextLine();
+                myContacts += str + "\n";
+            }
+            s.close();
+            if (myContacts == "\nyour current contacts:\n") {
+                return "";
+            } else {
+                return myContacts;
+            }
+        } catch (FileNotFoundException e) {
+            return "user history is empty";
+        }
+    }
+
     /**
      * Stores data of tasks as user history.
      *
      * @param taskList that stores tasks.
      */
-    public void record(ArrayList<Task> taskList) {
+    public void recordTasks(ArrayList<Task> taskList) {
         try {
-            new FileWriter(filePath, false).close();
+            new FileWriter(taskFilePath, false).close();
             int i = 1;
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(taskFilePath);
             for (Task t : taskList) {
                 fw.write(i + ". "
                         + t.toString() + System.lineSeparator());
+                i++;
+            }
+            fw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void recordContacts(ArrayList<Contact> contactList) {
+        try {
+            new FileWriter(contactFilePath, false).close();
+            int i = 1;
+            FileWriter fw = new FileWriter(contactFilePath);
+            for (Contact c : contactList) {
+                fw.write(c.toString() + System.lineSeparator());
                 i++;
             }
             fw.close();
@@ -73,9 +123,9 @@ public class Storage {
      *
      * @param taskList that stores tasks.
      */
-    public void load(ArrayList<Task> taskList) {
+    public void loadTask(ArrayList<Task> taskList) {
         try {
-            File history = new File(filePath);
+            File history = new File(taskFilePath);
             Scanner s = new Scanner(history);
             while (s.hasNext()) {
                 String task = s.nextLine();
@@ -97,5 +147,19 @@ public class Storage {
 
     }
 
-
+    public void loadContact(ArrayList<Contact> contactList) {
+        try {
+            File history = new File(contactFilePath);
+            Scanner s = new Scanner(history);
+            while (s.hasNext()) {
+                String contact = s.nextLine();
+                String[] contactSeg = contact.split(" ");
+                String name = contactSeg[0].replace(":", "");
+                String number = contactSeg[1];
+                contactList.add(new Contact(name, number));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
