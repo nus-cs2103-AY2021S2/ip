@@ -1,35 +1,28 @@
 package prerthan.duke.command;
 
+import prerthan.duke.exception.DukeEmptyDetailException;
 import prerthan.duke.task.TaskList;
-import prerthan.duke.Duke;
 import prerthan.duke.exception.DukeInvalidArgumentException;
-import prerthan.duke.io.Output;
+import prerthan.duke.exception.DukeInvalidDateException;
 import prerthan.duke.io.Storage;
 
 /**
  * ByeCommand
  */
-public class ByeCommand extends Command
-{
-	private final CommandName commandName = CommandName.BYE;
+public class ByeCommand extends Command {
 
-	public ByeCommand(String[] argumentTokens) throws DukeInvalidArgumentException
-	{
-		if (argumentTokens.length != 0)
-		{
-			throw new DukeInvalidArgumentException("Bye command should have no arguments.",
-					argumentTokens, this.commandName, this.getClass().getSimpleName());
-		}
-	}
+    public ByeCommand(String[] argumentTokens) throws DukeInvalidArgumentException {
+        super(argumentTokens);
+        this.commandName = CommandName.BYE;
 
-	@Override public void execute(TaskList tasks, Storage storage, Output output)
-	{
-		Duke.exit();
-	}
-	
-	@Override
-	public boolean willTerminate()
-	{
-		return true;
-	}
+        if (argumentTokens.length() >= 1) {
+            throw new DukeInvalidArgumentException("Bye command must have no arguments.",
+                    ByeCommand.class.getSimpleName());
+        }
+    }
+
+    @Override
+    public void execute(TaskList tasks, Storage storage) throws DukeEmptyDetailException, DukeInvalidDateException {
+
+    }
 }

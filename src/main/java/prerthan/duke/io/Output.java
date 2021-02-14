@@ -50,7 +50,7 @@ public class Output
 	}
 
 	/**
-	 * Appends {@code message} to this {@link prerthan.duke.io.Output} object
+	 * Appends {@code message} to this {@link Output} object
 	 *
 	 * @param message the {@link String} to append to this object
 	 */

@@ -91,9 +91,8 @@ public class TaskList
 	/**
 	 * Prints the tasks in this list.
 	 *
-	 * @param output
-	 */
-	public void listTasks(Output output)
+     */
+	public void listTasks()
 	{
 		if (!this.tasks.isEmpty())
 		{

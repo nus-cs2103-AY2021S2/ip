@@ -16,6 +16,6 @@ public class DukeEmptyDetailException extends DukeException {
 
     @Override
     public String toString() {
-        return String.format("%s%nThrown by: %s", this.getMessage(), this.thrownBy);
+        return String.format("%s%nThrown by:%n", this.getMessage(), this.thrownBy);
     }
 }
