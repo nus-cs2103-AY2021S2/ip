@@ -56,23 +56,27 @@ public class TaskList {
      * @return String message of concatenated List of Tasks, or message indicating an empty list.
      */
     public String getListInString () {
-        if (this.taskList.size() == 0) {
+        if (this.taskList.isEmpty()) {
             return getEmptyListInString();
         }
         return getNonEmptyListInString();
     }
 
     private String getEmptyListInString() {
-        assert this.taskList.size() == 0;
+        assert this.taskList.isEmpty();
 
-        String completedAllTasksMsg = "You have completed all tasks!";
+        String completedAllTasksMsg = "You have no existing tasks!";
         return completedAllTasksMsg;
     }
 
     private String getNonEmptyListInString() {
-        assert this.taskList.size() != 0;
+        assert !this.taskList.isEmpty();
 
         String allTasks = TaskStringConverter.stringTasksForProgram(this.taskList);
         return allTasks;
+    }
+
+    public boolean isEmpty() {
+        return this.taskList.size() == 0;
     }
 }

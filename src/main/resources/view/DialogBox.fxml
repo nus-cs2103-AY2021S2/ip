@@ -5,12 +5,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Circle?>
 
-<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/">
+<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true">
+        <Label fx:id="dialog" opacity="0.76" text="Label" wrapText="true">
          <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding></Label>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <HBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </HBox.margin></Label>
       <Circle fx:id="profilePic" fill="DODGERBLUE" radius="21.0" stroke="TRANSPARENT" strokeType="INSIDE" />
     </children>
     <padding>

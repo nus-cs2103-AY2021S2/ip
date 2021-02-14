@@ -17,7 +17,11 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute() {
-        String msg = "Here are the tasks you have:" + this.taskList.getListInString();
+        if (this.taskList.isEmpty()) {
+            return this.taskList.getListInString();
+        }
+
+        String msg = "Here are the tasks you have:\n" + this.taskList.getListInString();
         return msg;
     }
 }

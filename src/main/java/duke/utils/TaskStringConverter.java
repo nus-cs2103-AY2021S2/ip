@@ -23,6 +23,10 @@ public class TaskStringConverter {
      * @return String description of all Tasks.
      */
     public static String stringTasksForFile(List<Task> list) {
+        if (list.size() == 0) {
+            return "";
+        }
+
         List<String> stringTasks = listTaskToListStringFile(list);
 
         StringBuilder stringBuilder = new StringBuilder();

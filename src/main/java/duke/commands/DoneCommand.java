@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.utils.Storage;
 
@@ -21,12 +22,19 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks Task at previously specified position of tasklist as done, before printing a confirmation message.
+     * Returns message indicating whether the Task's done status is successfully changed.
      *
-     * @return message confirming that indicated task is set as done.
+     * @return message indicating the change in Task done status, if any.
      */
     @Override
     public String execute() {
+        Task currentTask = this.taskList.getList().get(this.position);
+
+        if (currentTask.isDone()) {
+            String alreadyDoneMsg = "This task is already done!";
+            return alreadyDoneMsg;
+        }
+
         this.taskList.setTaskDone(this.position);
         String markedDoneMsg = "Nice! I've marked this task as done:\n" + this.taskList.getList().get(this.position);
         return markedDoneMsg;

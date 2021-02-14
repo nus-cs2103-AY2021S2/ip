@@ -5,7 +5,6 @@ import duke.commands.ByeCommand;
 import duke.dukeexceptions.DukeException;
 import duke.dukeexceptions.InvalidFileTaskTypeException;
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -72,14 +71,15 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing. Closes window after delay if user inputs a "bye"
+     * command.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText().toLowerCase(Locale.ROOT);
 
         try {
-            String response = duke.getResponse(input);
+            String response = duke.getResponse(userInput.getText());
 
             if (input.equals(ByeCommand.COMMAND_WORD)) {
                 PauseTransition delay = new PauseTransition(Duration.seconds(5));
@@ -94,7 +94,7 @@ public class MainWindow extends AnchorPane {
         } catch (DukeException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userInput.getText(), userImage),
-                    DialogBox.getDukeDialog("Error! " + e.getMessage(), dukeImage)
+                    DialogBox.getDukeErrorDialog("Error! " + e.getMessage(), dukeImage)
             );
         } finally {
             userInput.clear();

@@ -11,9 +11,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -38,6 +40,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setTextFill(Color.WHITE);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         profilePic.setFill(new ImagePattern(img));
     }
@@ -53,12 +56,23 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.dialog.setBackground(new Background(new BackgroundFill(Color.NAVY, null, null)));
+        return dialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
+        dialogBox.dialog.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
         dialogBox.flip();
+        return dialogBox;
+    }
+
+    public static DialogBox getDukeErrorDialog(String text, Image img) {
+        var dialogBox = new DialogBox(text, img);
+        dialogBox.flip();
+        dialogBox.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, null, null)));
+        dialogBox.dialog.setTextFill(Color.BLACK);
         return dialogBox;
     }
 }
