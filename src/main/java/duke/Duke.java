@@ -137,7 +137,6 @@ public class Duke extends Application {
     public void run() throws IOException, ParseException {
         parser.storage.importTasks();
         parser.UI.logo();
-        parser.UI.greet();
         while(true) {
             String command = parser.input.readLine();
             getResponse(command);
