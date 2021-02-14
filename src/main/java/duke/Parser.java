@@ -62,7 +62,7 @@ public class Parser {
             }
             return new DoneCommand(Integer.parseInt(processedInput[1]));
         case TODO:
-            return new AddToDo("todo", description);
+            return new AddToDo("todo", description.replaceAll("todo ", ""));
         case EVENT:
             try {
                 return processEvent(input);

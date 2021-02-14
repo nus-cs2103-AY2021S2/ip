@@ -35,7 +35,7 @@ public abstract class AddCommand implements Command {
      * @return The reply message for this command.
      */
     public String getResponse() {
-        return "Got it. I've added this duke.task:\n  ";
+        return "Got it. I've added this task:\n  ";
     }
 
     /**
