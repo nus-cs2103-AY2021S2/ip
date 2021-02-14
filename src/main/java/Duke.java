@@ -1,10 +1,17 @@
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private boolean isSetUp = false;
+    private Ui ui;
+
+    private void setUp() {
+        isSetUp = true;
+        ui = new Ui();
+    }
+
+    public String getResponse(String fullCommand) {
+        if (!isSetUp) {
+            setUp();
+            return ui.load(fullCommand);
+        }
+        return ui.parseAndPrint(fullCommand);
     }
 }

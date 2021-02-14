@@ -1,0 +1,22 @@
+duke.txt
+todo read book
+deadline return book /by 2020-2-10 1800
+event project meeting /at 2020-5-10 1400-1600
+list
+done 1
+done 4
+list
+todo join sports club
+list
+done 4
+list
+todo
+blah
+deadline
+deadline buy book
+event
+event buy book
+deadline buy book /by 2020-02
+deadline buy book /by 1800
+event project meeting /at 2020-10-10 1400
+bye
