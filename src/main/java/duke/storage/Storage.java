@@ -80,6 +80,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

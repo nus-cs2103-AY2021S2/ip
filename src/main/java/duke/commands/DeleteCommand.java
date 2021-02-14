@@ -30,7 +30,9 @@ public class DeleteCommand extends Command {
 
     public TaskList execute() {
         TaskList tasks = this.getTaskList();
+        int initialSize = tasks.size();
         tasks.remove(this.indexOfTaskToDelete - 1);
+        assert (initialSize - 1 == tasks.size());   // check that task is properly deleted
         return tasks;
     }
 

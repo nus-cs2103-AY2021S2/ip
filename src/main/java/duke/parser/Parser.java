@@ -21,6 +21,7 @@ public class Parser {
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
+
     public Command parse(String userInput) {
         try {
             String[] input = userInput.split(" ");
