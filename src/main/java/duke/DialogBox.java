@@ -1,6 +1,5 @@
 package duke;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -11,9 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -21,9 +18,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-
-import javax.sound.sampled.Clip;
 
 /**
  * An example of a custom control using FXML.
@@ -68,8 +62,10 @@ public class DialogBox extends HBox {
         return userMessage;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, Image imgHappy, Image imgAngry) {
+        var db = (text.substring(0, 6).equals("GRR!!!"))
+                ? new DialogBox(text, imgAngry)
+                : new DialogBox(text, imgHappy);
         db.flip();
         db.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN,
                 CornerRadii.EMPTY,

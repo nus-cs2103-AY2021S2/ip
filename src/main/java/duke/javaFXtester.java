@@ -42,7 +42,7 @@ public class javaFXtester extends Application {
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
+                DialogBox.getDukeDialog(dukeText, duke, duke)
         );
         userInput.clear();
     }

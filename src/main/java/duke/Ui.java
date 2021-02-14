@@ -34,24 +34,24 @@ public class Ui {
     public String errorMessage(String s) {
         switch (s) {
         case "unknownInput":
-            return ("OOPS!!! Sumimasen, but I don't know what that means T^T");
+            return ("GRR!!! Could you enter a proper input, kind sir? uwu.");
         case "invalidDelete":
-            return ("OOPS!!! Please indicate a valid task to delete uwu");
+            return ("GRR!!! Please indicate a valid task to delete uwu");
         case "invalidEvent":
-            return ("OOPS!!! Please define your event properly uwu.");
+            return ("GRR!!! Please define your event properly uwu.");
         case "dateTimeError":
-            return ("OOPS!!! Please define your todo date/time in the "
+            return ("GRR!!! Please define your todo date/time in the "
                     + "YYYY-MM-DD HH:MM format uwu.");
         case "invalidDeadline":
-            return ("OOPS!!! Please define your deadline properly uwu.");
+            return ("GRR!!! Please define your deadline properly uwu.");
         case "invalidTodo":
-            return ("OOPS!!! Please define your todo properly uwu.");
+            return ("GRR!!! Please define your todo properly uwu.");
         case "invalidDone":
-            return ("OOPS!!! Please indicate a valid task to complete uwu.");
+            return ("GRR!!! Please indicate a valid task to complete uwu.");
         case "badTag":
-            return ("OOPS!!! Please provide a tag uwu.");
+            return ("GRR!!! Please provide a tag uwu.");
         default:
-            return "Something went really really wrong uwu.";
+            return "GRR!!! Something went really really wrong uwu.";
         }
     }
 

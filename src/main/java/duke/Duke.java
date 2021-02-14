@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
 public class Duke extends Application {
 
     private final Storage storage;
@@ -25,6 +26,7 @@ public class Duke extends Application {
     private Button sendButton;
     private final Image user = new Image(this.getClass().getResourceAsStream("/User.jpg"));
     private final Image duke = new Image(this.getClass().getResourceAsStream("/Duwuke.jpg"));
+    private final Image dukeAngryImage = new Image(this.getClass().getResourceAsStream("/DuwukeAngry.jpg"));
 
     /**
      * Instantiates a Duke object.
@@ -53,7 +55,7 @@ public class Duke extends Application {
         storage.saveAsFile(taskList);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
+                DialogBox.getDukeDialog(dukeText, duke, dukeAngryImage)
         );
         if (userText.equals("bye")) {
             stage.close();
@@ -112,7 +114,7 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.greet(), duke));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.greet(), duke, dukeAngryImage));
     }
 
     /**
