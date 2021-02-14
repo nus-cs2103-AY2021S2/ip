@@ -1,6 +1,6 @@
-#Dude User Guide
+# Dude User Guide
 Dude is a simple and minimalistic todo manager that helps you organize your tasks.
-##Features
+## Features
 list  
 todo  
 event  
@@ -10,97 +10,97 @@ delete
 find  
 bye
 
-##List
+## List
 Display all tasks recorded
-#####Usage
+##### Usage
 ```$xslt
 list
 ```
 Dude will display all tasks you have in detail(including event and deadline's timestamp, each task's done type) in a list form
-#####Tip
+##### Tip
 This is one of the most powerful and useful command of Dude, it allows you to overview your task manager
 
-##Todo
+## Todo
 Add a simple task that is of Todo type, which has only task description
-#####Usage
+##### Usage
 ```$xslt
 todo <task description>
 ```
-#####Example
+##### Example
 ```$xslt
 todo grab milk from fairprice
 ```  
 Dude will add todo task named ```grab milk from fairprice``` and mark it as not yet done by default
 
-##Event
+## Event
 Add an task that is of Event type, which contains task description and time for event
-#####Usage
+##### Usage
 ```$xslt
 event <task description> /<keyword> <time>
 ```
-#####Example
+##### Example
 ```$xslt
 event alice's birthday /on 2021-03-13
 ```
 Dude will add event task named ```alice's birthday on 2021-03-13``` and mark it as not done yet by default
 
-##Deadline
+## Deadline
 Add an task that is of Deadline type, which contains task description and deadline for the task
-#####Usage
+##### Usage
 ```$xslt
 deadline <task description> /<keyword> <deadline>
 ```
-#####Example
+##### Example
 ```$xslt
 deadline submit cs2101 homework /by 2021-03-24
 ```
 Dude will add deadline task named ```submit cs2101 homework by 2021-03-24``` and mark it as not done yet by default
 
-##Done
+## Done
 Mark a task as done
-#####Usage
+##### Usage
 ```$xslt
 done <task id>
 ```
-#####Example
+##### Example
 ```$xslt
 done 3
 ```
 Dude will mark the third task in list as done.
-#####Tip
+##### Tip
 Done should be used in combination with list, list the tasks to view id first, then mark the particular task as done
 
-##Delete
+## Delete
 Delete a series of tasks
-#####Usage
+##### Usage
 ```$xslt
 delete <task ids separated by space, at least one id>
 ```
-#####Example
+##### Example
 ```$xslt
 delete 3 5 8
 ```
 Dude will delete tasks which ids are 3, 5, 8 respectively from the list.
-#####Tip
+##### Tip
 Delete should be used in combination with list as well
 
-##Find
+## Find
 Search through the tasks to find tasks containing certain keyword
-#####Usage
+##### Usage
 ```$xslt
 find <keyword>
 ```
-#####Example
+##### Example
 ```$xslt
 find alice
 ```
 Dude will return all tasks containing the string 'alice' in a list form
-#####Tip
+##### Tip
 Watch out for capital letters
 
-##Bye
+## Bye
 Exit Dude
-#####Usage
+##### Usage
 ```$xslt
 bye
 ```
