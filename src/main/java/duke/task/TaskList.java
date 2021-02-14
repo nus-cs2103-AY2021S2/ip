@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -13,6 +14,10 @@ public class TaskList {
 
     public TaskList() {
         lst = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> lst) {
+        this.lst = lst;
     }
 
     /**
@@ -71,5 +76,18 @@ public class TaskList {
      */
     public List<Task> findTasksWithStr(String target) {
         return lst.stream().filter(task -> task.hasStrInProps(target)).collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        ArrayList<Task> tmp = new ArrayList<>(lst);
+        Collections.sort(tmp);
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tmp.size(); i++) {
+            Task task = tmp.get(i);
+            sb.append(String.format("%d. %s\n", i + 1, task.toString()));
+        }
+        return sb.toString();
     }
 }
