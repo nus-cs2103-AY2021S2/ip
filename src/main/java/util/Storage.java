@@ -56,7 +56,7 @@ public class Storage {
      * @param saveString SaveString representing the Task saved in disk.
      * @return Task that was represented by the saveString
      */
-    private Task readTask(String saveString) {
+    private Task readTask(String saveString) throws IOException {
         HashMap<String, List<String>> commandMap = parseCommandMap(saveString);
         String command = extractCommandString(commandMap);
         switch (command) {
@@ -67,8 +67,7 @@ public class Storage {
             case Event.COMMAND_STRING:
                 return Event.fromSaveString(saveString);
             default:
-                assert false; // Internal save and parse error in Storage
-                return null;
+                throw new IOException("Save file cannot be read");
         }
     }
 
