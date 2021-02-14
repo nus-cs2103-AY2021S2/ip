@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ClientInfoStatus;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -35,28 +36,34 @@ public class Storage {
     public ArrayList<Task> load() {
         try {
             File myFile = new File("duke.txt");
-            if (myFile.createNewFile()) {
-                System.out.println("File created: " + myFile.getName());
-            } else {
-                System.out.println("File already exists");
-                Scanner myReader = new Scanner(myFile);
-                while (myReader.hasNextLine()) {
-                    String type = myReader.nextLine();
-                    if (type.contains("[T]")) {
-                        loadTodo(type);
-                    } else if (type.contains("[D]")) {
-                        loadDeadline(type);
-                    } else if (type.contains("[E]")) {
-                        loadEvent(type);
-                    }
-                }
-                myReader.close();
-            }
+            myFile.createNewFile();
+            decideTaskType(myFile);
         } catch (IOException e) {
             System.out.println("An error occurred");
             e.printStackTrace();
         }
         return tasks;
+    }
+
+    /**
+     * Decides based on the text file, what type of Task should be stored.
+     *
+     * @param myFile The file to read.
+     * @throws FileNotFoundException If file is not found.
+     */
+    public void decideTaskType(File myFile) throws FileNotFoundException {
+        Scanner myReader = new Scanner(myFile);
+        while (myReader.hasNextLine()) {
+            String type = myReader.nextLine();
+            if (type.contains("[T]")) {
+                loadTodo(type);
+            } else if (type.contains("[D]")) {
+                loadDeadline(type);
+            } else if (type.contains("[E]")) {
+                loadEvent(type);
+            }
+        }
+        myReader.close();
     }
 
     /**
