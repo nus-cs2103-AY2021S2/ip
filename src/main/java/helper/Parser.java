@@ -1,6 +1,12 @@
 package helper;
 
-import helper.command.*;
+import helper.command.AddCommand;
+import helper.command.Command;
+import helper.command.DeleteCommand;
+import helper.command.DoneCommand;
+import helper.command.ExitCommand;
+import helper.command.FindCommand;
+import helper.command.ListCommand;
 
 /**
  * Parsing class

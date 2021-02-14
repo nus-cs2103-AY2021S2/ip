@@ -5,7 +5,7 @@ package helper;
  */
 public class DukeException extends Exception {
 
-    String error;
+    private String error;
 
     public DukeException(String errorMessage) {
         super(errorMessage);
