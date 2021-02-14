@@ -14,6 +14,8 @@ public interface Parser {
         String commandFlag = commandMap.get(COMMAND_FLAG).get(0);
 
         switch (commandFlag) {
+            case HelpCommand.COMMAND_STRING:
+                return HelpCommand.fromCommandMap(commandMap);
             case ListCommand.COMMAND_STRING:
                 return ListCommand.fromCommandMap(commandMap);
             case FindCommand.COMMAND_STRING:
