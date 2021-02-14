@@ -13,6 +13,8 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private LocalDate dueBy;
     private final static String DUE_COMMAND = "/by";
+    private final String DEADLINE_IDENTIFIER = "[D]";
+    private final String FILE_WRITER_IDENTIFIER = "D|";
 
     public Deadline(String input) throws EmptyTaskDukeException, DateTimeParseException {
         super(getTaskNameFromInput(input));
@@ -58,8 +60,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String taskStringCheck = super.getIsTaskCompleted() ? "X" : " ";
-        return "[D]" + "[" + taskStringCheck + "] " + super.getTaskName()
+        String taskStringCheck = super.getIsTaskCompleted() ? super.COMPLETED_TEXT : " ";
+        return DEADLINE_IDENTIFIER + "[" + taskStringCheck + "] " + super.getTaskName()
                 + " (by: " + formatDate(dueBy) + ")";
     }
 
@@ -70,6 +72,10 @@ public class Deadline extends Task {
         dateString = getDayString(day) + " " + getMthString(mth) + " "
                 + date.getDayOfMonth() + " " + date.getYear();
         return dateString;
+    }
+
+    public String getFileWriterIdentifier() {
+        return FILE_WRITER_IDENTIFIER;
     }
 
     private String getDayString(DayOfWeek day) {

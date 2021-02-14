@@ -26,8 +26,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
-    @FXML
     private ScrollPane reminderScrollPane;
     @FXML
     private VBox reminderContainer;
