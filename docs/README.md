@@ -16,6 +16,7 @@ You can give commands to Zeke and it will return the relevant messages.
 ## Features
 
 ## At a glance
+
 Feature | Command format
 ------------ | -------------
 Add todo | `todo <description>` 
