@@ -27,6 +27,6 @@ public class ByeCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         storage.clear();
         storage.save(tasks.getTaskList());
-        return "     Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 }

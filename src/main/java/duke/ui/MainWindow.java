@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.Duke;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,13 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Mando.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Yoda.png"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -43,10 +46,31 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.run(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (response.startsWith("OOPS")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getErrorDialog(response, dukeImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
+        if (input.equals("bye")) {
+            Stage stage = (Stage) sendButton.getScene().getWindow();
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished((event) -> stage.close());
+            delay.play();
+        }
         userInput.clear();
+    }
+
+    /**
+     * Shows welcome message to the user.
+     */
+    public void welcome() {
+        String welcomeText = "Welcome to YodaBot!\nWhat can I do for you?";
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeText, dukeImage));
     }
 }
