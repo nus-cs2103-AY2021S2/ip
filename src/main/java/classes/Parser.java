@@ -1,21 +1,13 @@
 package classes;
 
-import command.ByeCmd;
-import command.Command;
-import command.DeadlineCmd;
-import command.DeleteCmd;
-import command.DoneCmd;
-import command.EventCmd;
-import command.FindCmd;
-import command.ListCmd;
-import command.ToDoCmd;
+import command.*;
 
 
 /**
  * Parser class to deal with making sense of the user command.
  */
 public class Parser {
-    private static String[] command = {"list", "bye", "todo", "deadline", "event", "done", "delete", "find"};
+    private static String[] command = {"list", "bye", "todo", "deadline", "event", "done", "delete", "find", "doWithin"};
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
@@ -70,9 +62,12 @@ public class Parser {
         case "bye":
             return new ByeCmd(cmd);
         // Fallthrough
+        case "doWithin":
+            return new DoWithinCmd(cmd);
+        // Fallthrough
         default:
             throw new DuckieException("command not recognized! "
-                    + "please start with 'list', 'todo', 'event', deadline', 'delete', 'done' or 'bye'");
+                    + "please start with 'list', 'todo', 'event', 'doWithin', deadline', 'delete', 'done' or 'bye'");
         }
     }
 }
