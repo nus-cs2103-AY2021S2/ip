@@ -1,11 +1,13 @@
 package duke;
 
-/** Event command is used when user wants to add an event task. */
+/** 
+ * Event command is used when user wants to add an event task. 
+ */
 public class EventCommand extends AddCommand {
 
     /** Initialises event command with its description. */
     public EventCommand(String description) {
-        super(description);
+        super(description.replaceAll("event ", "")); // remove keyword used for identifying task type
     }
 
     /**
@@ -15,12 +17,12 @@ public class EventCommand extends AddCommand {
      * @param storage Storage that interacts with information stored on harddrive.
      */ 
     public String execute(TaskManager manager, Ui ui, Storage storage) {
-        String trimmed = this.description.replaceAll("event ", "");
-        Task t = new Event(trimmed.split(" at ")[0], trimmed.split(" at ")[1]);
+        Task t = new Event(this.description.split(" at ")[0], 
+                this.description.split(" at ")[1]); // split remaining line into description and datetime
         manager.addTask(t);
-        this.message += t.toString() + "\n" 
-            + String.format("Now you have %s tasks in the list.", manager.taskVolume());
-        storage.writeToDisk(manager.getStore());
+        this.message += t.toString() + "\n" + String.format("Now you have %s tasks in the list.", 
+                manager.taskVolume()); // concatenate reply string
+        storage.writeToDisk(manager.getStore()); // store task to harddrive
         return this.message;
     } 
 }

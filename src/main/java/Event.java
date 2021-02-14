@@ -9,23 +9,24 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /** Location of event. */
-    protected LocalDate at;
+    protected LocalDate eventDateTime;
 
     /**
      * Initialises a new Event with text description and date.
      */
-    public Event(String description, String at) {
+    public Event(String description, String eventDateTime) {
         super(description);
-        if (at.contains("-")) {
-            this.at = LocalDate.parse(at);
+        if (eventDateTime.contains("-")) {
+            this.eventDateTime = LocalDate.parse(eventDateTime);
         } else {
-            this.at = LocalDate.parse(at, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            this.eventDateTime = LocalDate.parse(eventDateTime, 
+                DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
     }
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), 
-                super.toString(), this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), super.toString(), 
+            this.eventDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }

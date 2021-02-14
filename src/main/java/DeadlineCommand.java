@@ -7,7 +7,7 @@ public class DeadlineCommand extends AddCommand {
 
     /** Initialises a new deadline command with the task information. */
     public DeadlineCommand(String description) {
-        super(description.replaceAll("deadline ", ""));
+        super(description.replaceAll("deadline ", "")); // remove keyword used for identifying task type
     }
 
     /** 
@@ -18,11 +18,11 @@ public class DeadlineCommand extends AddCommand {
      */
     public String execute(TaskManager manager, Ui ui, Storage storage) {
         Task t = new Deadline(this.description.split(" by ")[0], 
-                this.description.split(" by ")[1]);;
+                this.description.split(" by ")[1]); // split remaining line into description and datetime
         manager.addTask(t);
-        this.message += t.toString() + "\n" 
-            + String.format("Now you have %s tasks in the list.", manager.taskVolume());
-        storage.writeToDisk(manager.getStore());
+        this.message += t.toString() + "\n" + String.format("Now you have %s tasks in the list.", 
+                manager.taskVolume()); // concatenate reply string
+        storage.writeToDisk(manager.getStore()); // store task to harddrive
         return this.message;
     }
 }

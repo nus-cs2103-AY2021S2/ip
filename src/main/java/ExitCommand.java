@@ -15,6 +15,6 @@ public class ExitCommand extends Command {
      * @param storage Storage that interacts with information stored on harddrive.
      */
     public String execute(TaskManager manager, Ui ui, Storage storage) {
-        return "Byebye~ Hope to see you again soon!";
+        return ui.sayBye();
     }
 }
