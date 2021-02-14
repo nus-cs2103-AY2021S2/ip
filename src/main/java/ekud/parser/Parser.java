@@ -117,29 +117,28 @@ public class Parser {
             throw new InvalidCommandException();
         }
 
+        int index; // for storing indices, workaround switch case scope issue
         switch (func) {
         case LIST:
-            if (arguments.isBlank()) {
-                return new ListCommand();
-            }
-
             return new ListCommand();
 
         case DONE:
             try {
-                int index = Integer.parseInt(arguments) - 1;
-                return new DoneCommand(index);
+                index = Integer.parseInt(arguments) - 1;
             } catch (NumberFormatException e) {
                 throw new InvalidTaskIndexException();
             }
 
+            return new DoneCommand(index);
+
         case DELETE:
             try {
-                int index = Integer.parseInt(arguments) - 1;
-                return new DeleteCommand(index);
+                index = Integer.parseInt(arguments) - 1;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new InvalidTaskIndexException();
             }
+
+            return new DeleteCommand(index);
 
         case BYE:
             return new ByeCommand();
