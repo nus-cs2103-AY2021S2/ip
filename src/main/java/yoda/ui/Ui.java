@@ -8,18 +8,20 @@ import yoda.task.Task;
 public class Ui {
     /** Valid inputs that are available to the user */
     private static final String HELP_LIST = "The commands you can use, these are:\n"
-                                            + "To add a task:\n"
-                                            + "todo [description]\n"
-                                            + "event [description] /at YYYY-MM-DD HHmm\n"
-                                            + "deadline [description] /by YYYY-MM-DD HHmm\n"
-                                            + "To list tasks:\n"
-                                            + "list (-t/-e/d)\n"
-                                            + "To find all tasks related to a keyword:\n"
-                                            + "find [keyword]\n"
-                                            + "To mark a task as done:\n"
-                                            + "done [taskNumber_in_the_list]\n"
-                                            + "To delete a task:\n"
-                                            + "delete [taskNumber_in_the_list]";
+                                          + "To add a task:\n"
+                                          + "todo [description]\n"
+                                          + "event [description] /at YYYY-MM-DD HHmm\n"
+                                          + "deadline [description] /by YYYY-MM-DD HHmm\n"
+                                          + "To list tasks:\n"
+                                          + "list (-t/-e/d)\n"
+                                          + "To find all tasks related to a keyword:\n"
+                                          + "find [keyword]\n"
+                                          + "To mark a task as done:\n"
+                                          + "done [taskNumber_in_the_list]\n"
+                                          + "To delete a task:\n"
+                                          + "delete [taskNumber_in_the_list]\n"
+                                          + "To exit:\n"
+                                          + "bye";
 
     /**
      * Creates a Ui object.
@@ -29,21 +31,18 @@ public class Ui {
     /**
      * Greets the user when the Yoda chatbot is started up.
      */
-    public void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("How can I help you?");
+    public String greet() {
+        return "Greetings, young Padawan!\n"
+               + "Yoda, my name is!\n"
+               + "How may I help you, hmm?";
     }
 
     /**
      * Bids farewell to the user after user is done using the Yoda chatbot.
      */
     public String exit() {
-        return "See you soon, I will!";
+        return "May the force be with you!\n" +
+               "See you soon, I will!";
     }
 
 
@@ -63,11 +62,13 @@ public class Ui {
     }
 
     public String printDeletedTask(String deletedTasks, int numberOfTasksLeft) {
+        assert numberOfTasksLeft >= 0 : "numberOfTasksLeft cannot be negative";
         return "Deleted these task(s), I have:\n" + deletedTasks
                 + "\n" + numberOfTasksLeft + " tasks in the list, you have left!";
     }
 
     public String printFinishedTask(String finishedTasks, int numberOfTasksLeft) {
+        assert numberOfTasksLeft >= 0 : "numberOfTasksLeft cannot be negative";
         return "Well done my young Padawan!\n"
                 + "Marked these task(s) as done, I have:\n"
                 + finishedTasks
@@ -75,6 +76,7 @@ public class Ui {
     }
 
     public String printTasks(String identifier, String list, int listSize) {
+        assert listSize >= 0 : "listSize cannot be negative";
         if (listSize == 0) {
             return "No tasks in the list, there seem to be!";
         }

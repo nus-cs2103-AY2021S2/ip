@@ -28,16 +28,14 @@ public class Yoda {
         this.tasks = storage.load();
     }
 
+    public String greetUser() {
+        return ui.greet();
+    }
     /**
      * Runs the Yoda chatbot.
      */
     public String runYoda(String input) {
         Command c = Parser.parse(input);
         return c.execute(tasks, ui, storage);
-    }
-
-    public static void main(String[] args) {
-        Yoda y = new Yoda();
-        y.runYoda("deadline a /by 2021-1-1 1300");
     }
 }

@@ -65,6 +65,7 @@ public class AddCommand extends Command {
             if (!eventDesc[i].equals("/at")) {
                 throw new InvalidCommandFormatException("Use /at when creating an event, you must!");
             }
+            assert i > 1 : "i must be pointing at date time by this point";
             String eventDateAndTime = eventDesc[i + 1] + " " + eventDesc[i + 2];
             checkDateTimeFormat(eventDateAndTime);
             return new Event(eventDetails.toString(), eventDateAndTime);
@@ -86,6 +87,7 @@ public class AddCommand extends Command {
             if (!deadlineDesc[i].equals("/by")) {
                 throw new InvalidCommandFormatException("Use /by when creating a deadline, you must!");
             }
+            assert i > 1 : "i must be pointing at date time by this point";
             String deadlineDateAndTime = deadlineDesc[i + 1] + " " + deadlineDesc[i + 2];
             checkDateTimeFormat(deadlineDateAndTime);
             return new Deadline(deadlineDetails.toString(), deadlineDateAndTime);

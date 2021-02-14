@@ -62,6 +62,7 @@ public class EditCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             TaskList accessedTasks = accessTasksToBeEdited(taskList);
+            assert accessedTasks.getTaskListSize() != 0 : "There must be at least one task accessed";
             if (commandType == CommandType.DELETE) {
                 deleteTasks(taskList);
                 storage.write(taskList);

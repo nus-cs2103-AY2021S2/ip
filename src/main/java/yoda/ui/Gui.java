@@ -22,6 +22,7 @@ public class Gui extends Application {
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setYoda(yoda);
+            fxmlLoader.<MainWindow>getController().greetUser();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
