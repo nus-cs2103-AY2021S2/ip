@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Loads and saves tasks from and into the specified file
  */
 public class Storage {
-    public static boolean hasLoadingError;
+    protected static boolean hasLoadingError;
     protected static ArrayList<String> loadedTasks = new ArrayList<>();
     protected String filePath;
     /**

@@ -5,6 +5,7 @@ import java.util.ArrayList;
  * Makes sense of the user command
  */
 public class Parser {
+    protected static boolean hasInputError;
     private static final int TODO_TASK_INDEX = 5;
     private static final int KEYWORD_INDEX = 5;
     private static final int COMPLETED_TASK_INDEX = 5;
@@ -13,7 +14,7 @@ public class Parser {
     private static final int EVENT_DATE_INDEX = 3;
     private static final int DEADLINE_TASK_INDEX = 9;
     private static final int DEADLINE_DATE_INDEX = 3;
-    protected static boolean hasInputError;
+
     /**
      * Returns the response to the user's input
      * @param input input supplied by the user

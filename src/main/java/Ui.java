@@ -18,7 +18,7 @@ public class Ui {
      */
     public static String greetUser() {
         String greeting = "Hello! I'm Duke!\n" + "\nHow can I help?\n";
-        if(Storage.hasLoadingError) {
+        if (Storage.hasLoadingError) {
             greeting += showLoadingError();
             Storage.resetLoadingError();
         }
