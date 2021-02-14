@@ -17,5 +17,6 @@ public abstract class Command {
         this.content = content;
     }
 
-    public abstract CommandResponse execute(TaskList taskList, Snomio snomio, StorageManager storage) throws SnomException;
+    public abstract CommandResponse execute(TaskList taskList, Snomio snomio, StorageManager storage)
+            throws SnomException;
 }
