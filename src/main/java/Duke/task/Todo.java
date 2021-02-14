@@ -39,6 +39,10 @@ public class Todo extends Task {
         return new Todo(this.msg, true);
     }
 
+    /**
+     * Encode format for save to storage.
+     * @return
+     */
     public String encode() {
         return "T" + "|" + super.encode();
     }

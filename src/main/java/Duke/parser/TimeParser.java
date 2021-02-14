@@ -16,6 +16,10 @@ public class TimeParser {
 
     }
 
+    TimeParser(LocalDateTime time) {
+        this.time = time;
+    }
+
     /**
      * Returns LocalDateTime from String input.
      *
