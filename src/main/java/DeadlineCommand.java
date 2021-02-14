@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +40,11 @@ public class DeadlineCommand extends Command {
         }
         Deadline tempTask = new Deadline(tempStrArray[0], date);
         taskList.add(tempTask);
+        try {
+            storage.save(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ui.showTaskAdded(tempTask);
     }
 

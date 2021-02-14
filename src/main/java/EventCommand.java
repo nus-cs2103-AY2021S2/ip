@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +27,11 @@ public class EventCommand extends Command {
         String[] tempStrArray = cmdTask.split("/at", 2);
         Event tempTask = new Event(tempStrArray[0], tempStrArray[1]);
         taskList.add(tempTask);
+        try {
+            storage.save(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ui.showTaskAdded(tempTask);
     }
 

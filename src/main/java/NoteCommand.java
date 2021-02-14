@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +23,11 @@ public class NoteCommand extends Command {
 
         Note tempTask = new Note(cmdTask);
         taskList.add(tempTask);
+        try {
+            storage.save(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ui.showTaskAdded(tempTask);
     }
 
