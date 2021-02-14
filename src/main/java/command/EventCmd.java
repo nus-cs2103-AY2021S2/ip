@@ -36,16 +36,10 @@ public class EventCmd extends Command {
         }
 
         String[] strE = cmd.trim().split("/at", 2);
-
-        String inputDate = strE[1].trim();
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
-        Date date;
-        try {
-            date = format.parse(inputDate);
-        } catch (Exception e) {
-            throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
-        }
         String[] description = strE[0].split(" ", 2);
+
+        DateParser dateParser = new DateParser();
+        Date date = dateParser.parse(strE[1]);
         Event tempE = new Event(description[1], date);
         lst.addTask(tempE);
         try {

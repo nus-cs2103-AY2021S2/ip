@@ -38,17 +38,11 @@ public class DeadlineCmd extends Command {
         }
 
         String[] strD = cmd.trim().split("/by", 2);
-        String inputDate = strD[1].trim();
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
-        Date date;
-        try {
-            date = format.parse(inputDate);
-        } catch (Exception e) {
-            throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
-        }
         String[] description = strD[0].split(" ", 2);
-        Deadline tempD = new Deadline(description[1], date);
 
+        DateParser dateParser = new DateParser();
+        Date date = dateParser.parse(strD[1]);
+        Deadline tempD = new Deadline(description[1], date);
         lst.addTask(tempD);
         try {
             storage.saveTasks(lst.getTaskList());
