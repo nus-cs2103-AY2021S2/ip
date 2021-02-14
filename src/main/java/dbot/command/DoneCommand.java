@@ -23,9 +23,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
         quietExecute(tasks, storage);
-        ui.printDone(doneTask);
+        return ui.printDone(doneTask);
     }
 
     @Override

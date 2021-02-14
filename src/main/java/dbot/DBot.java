@@ -56,23 +56,14 @@ public class DBot {
         }
     }
 
-    /**
-     * Runs the DBot program until an Exit command is given via the 'bye' User input.
-     */
-    public String getResponse() {
+    public String getResponse(String input) {
         String response;
         try {
-            String userInputText = ui.getUserInput();
-            ui.showLine(); // show the divider line ("_______")
-            Command c = Parser.parse(userInputText);
+            Command c = Parser.parse(input);
             response = c.execute(tasks, ui, storage);
         } catch (DBotException e) {
-            response = ui.showError(e.getMessage());
-        } finally {
-            response = ui.showLine();
+            response = e.getMessage();
         }
-    }
-
-    public String getResponse(String input) {
+        return response;
     }
 }

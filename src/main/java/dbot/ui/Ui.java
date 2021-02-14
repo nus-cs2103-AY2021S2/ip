@@ -16,15 +16,13 @@ public class Ui {
     private final String NAME = "DougBot";
     private static final String DIVIDER = "===================================================";
     private final Scanner in;
-    private final PrintStream out;
-    private final PrintStream err;
 
     /**
      * Initializes the default Ui which uses the standard input, output, and error streams.
      * These are the streams that the DBot will use to interact with a user.
      */
     public Ui() {
-        this(System.in, System.out, System.err);
+        this(System.in);
     }
 
     /**
@@ -32,96 +30,88 @@ public class Ui {
      * These are the streams that the DBot will use to interact with a user.
      *
      * @param in The InputStream that DBot should receive user inputs from.
-     * @param out The PrintStream that DBot should print standard messages to.
-     * @param err The PrintStream that DBot should print error messages to.
      */
-    public Ui(InputStream in, PrintStream out, PrintStream err) {
+    public Ui(InputStream in) {
         this.in = new Scanner(in);
-        this.out = out;
-        this.err = err;
     }
 
     /**
      * Shows the user an error specifying that stored tasks could not be loaded into DBot.
+     *
+     * @return A String containing a loading error message.
      */
-    public void showLoadingError() {
-        out.println("ERROR: Could not load from storage.");
+    public String showLoadingError() {
+        return "ERROR: Could not load from storage.";
     }
 
     /**
      * Shows the user a welcome message.
-     */
-    public void showWelcome() {
-        out.println("Welcome to " + NAME + ".");
-    }
-
-    /**
-     * Requests for the user's input.
      *
-     * @return A String containing the users input.
+     * @return A String containing a welcome message.
      */
-    public String getUserInput() {
-        out.print("Enter command: ");
-        String fullUserInput = in.nextLine();
-        return fullUserInput.strip();
-    }
-
-    /**
-     * Shows the user a line that acts as a divider between IO interactions.
-     */
-    public void showLine() {
-        out.println(DIVIDER);
+    public String showWelcome() {
+        return "Welcome to " + NAME + ".";
     }
 
     /**
      * Shows the user the Task that was added.
      *
      * @param task The Task that was added.
+     * @return A String message that the task was successfully added.
      */
-    public void printAddTask(Task task) {
-        out.println("Added: " + task.toString());
+    public String printAddTask(Task task) {
+        return "Added: " + task.toString();
     }
 
     /**
      * Shows the user a list of all existing Tasks.
      *
      * @param tasks An iterable List storing all the users Tasks.
+     * @return A String representation of all the tasks in the TaskList.
      */
-    public void printTasks(TaskList tasks) {
+    public String printTasks(TaskList tasks) {
+        StringBuilder stringBuilder = new StringBuilder();
         for (Task task : tasks) {
-            out.println(task.toString());
+            stringBuilder.append(task.toString());
         }
+        return stringBuilder.toString();
     }
 
     /**
      * Shows the user the Task that was marked as done.
      *
      * @param doneTask The Task that was marked as done.
+     * @return A String message that the task was marked as done.
      */
-    public void printDone(Task doneTask) {
-        out.println("Completed: " + doneTask.toString());
+    public String printDone(Task doneTask) {
+        return "Completed: " + doneTask.toString();
     }
 
     /**
      * Shows the user the Task that was deleted.
      *
      * @param deleteTask The Task that was deleted.
+     * @return A String message that the task was deleted.
      */
-    public void printDelete(Task deleteTask) {
-        out.println("Deleted: " + deleteTask.toString());
+    public String printDelete(Task deleteTask) {
+        return "Deleted: " + deleteTask.toString();
     }
 
     /**
      * Shows the user an exit message.
+     *
+     * @return A String containing a goodbye message.
      */
-    public void showExitMessage() {
-        out.println("Goodbye.");
+    public String showExitMessage() {
+        return "Goodbye.";
     }
 
     /**
      * Shows the user the Help message.
+     *
+     * @return A String containing the help help message, informing the user about the available commands.
      */
-    public void showHelpMessage() {
+    public String showHelpMessage() {
         String helpMessage = "Use any of the following commands:\n" +
                 "To view all stored tasks: list\n" +
                 "To find relevant stored tasks: find TERM\n" +
@@ -132,16 +122,7 @@ public class Ui {
                 "\tDESC - Description of the task\n" +
                 "\tDATE - Date of the task in YYYY-MM-DD format\n" +
                 "\tTERM - A search term that should match a part of a Tasks description";
-        out.println(helpMessage);
-    }
-
-    /**
-     * Shows the user an error message via the appropriate PrintStream.
-     *
-     * @param message The error message to show to the user.
-     */
-    public void showError(String message) {
-        err.println(message);
+        return helpMessage;
     }
 
     /**
@@ -150,9 +131,12 @@ public class Ui {
      * This method is to be called when a user attempts to find a Task via the Find Command.
      *
      * @param relevantTasks A TaskList containing relevant Tasks.
+     * @return A String containing the representation of a TaskList containing the relevant tasks.
      */
-    public void printRelevantTasks(TaskList relevantTasks) {
-        out.println("Here are the matching tasks in your list:");
-        printTasks(relevantTasks);
+    public String printRelevantTasks(TaskList relevantTasks) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are the matching tasks in your list:");
+        stringBuilder.append(printTasks(relevantTasks));
+        return stringBuilder.toString();
     }
 }

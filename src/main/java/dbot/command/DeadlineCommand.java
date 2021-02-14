@@ -28,9 +28,9 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         quietExecute(tasks, storage);
-        ui.printAddTask(task);
+        return ui.printAddTask(task);
     }
 
     @Override

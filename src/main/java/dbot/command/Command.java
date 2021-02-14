@@ -107,9 +107,10 @@ public abstract class Command {
      * @param tasks A TaskList that this Command should be executed on.
      * @param ui A Ui object that this Task should use to send response messages to the user.
      * @param storage A Storage object that this Command should use to save the TaskList to if appropriate.
+     * @return A String containing DBot's response to the given user input.
      * @throws DBotException If the Command cannot be executed because it encounters any errors.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DBotException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DBotException;
 
     /**
      * Executes this Command appropriately without providing any response messages to the user.

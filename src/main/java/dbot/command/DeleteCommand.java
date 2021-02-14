@@ -23,9 +23,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
         quietExecute(tasks, storage);
-        ui.printDelete(deleteTask);
+        return ui.printDelete(deleteTask);
     }
 
     @Override

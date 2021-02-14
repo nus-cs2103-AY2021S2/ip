@@ -20,14 +20,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
         TaskList relevantTasks = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 relevantTasks.add(task);
             }
         }
-        ui.printRelevantTasks(relevantTasks);
+        return ui.printRelevantTasks(relevantTasks);
     }
 
     @Override

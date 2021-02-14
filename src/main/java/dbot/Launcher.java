@@ -3,6 +3,7 @@ package dbot;
 import dbot.gui.Gui;
 import javafx.application.Application;
 
+
 /**
  * A launcher class to start the DBot GUI.
  */
