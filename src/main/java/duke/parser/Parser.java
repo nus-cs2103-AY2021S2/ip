@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.UpdateCommand;
 import duke.exception.InvalidInstructionException;
@@ -44,10 +45,12 @@ public class Parser {
             command = new ByeCommand(input);
         } else if (type.equals("update")) {
             command = new UpdateCommand(input);
+        } else if (type.equals("help")) {
+            command = new HelpCommand(input);
         } else {
             throw new InvalidInstructionException();
         }
-        assert false : "All possiblilities have been handled.";
+        assert false : "All possibilities have been handled.";
 
         return command;
     }

@@ -15,6 +15,7 @@ import duke.exception.EmptyFindException;
 import duke.exception.EmptyListDeletionException;
 import duke.exception.EmptyTodoException;
 import duke.exception.EmptyUpdateException;
+import duke.exception.NoSuchIndexException;
 import duke.exception.WrongUpdateTypeException;
 import duke.storage.Storage;
 
@@ -313,16 +314,27 @@ public class TaskList {
      * @throws DukeException in case of wrong type or insufficient information
      */
     public String updateEvent(String input) throws DukeException {
+        if (input.length() < 7) {
+            throw new EmptyUpdateException();
+        }
+
         try {
             String taskNumber = input.split(" ")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyDeleteException();
+            throw new EmptyUpdateException();
         }
 
         try {
             int taskNumber = Integer.parseInt(input.split(" ")[1]);
         } catch (NumberFormatException e) {
             throw new EmptyUpdateException();
+        }
+
+        try {
+            int taskNumber = Integer.parseInt(input.split(" ")[1]);
+            this.taskList.get(taskNumber);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoSuchIndexException();
         }
 
         int taskNumber = Integer.parseInt(input.split(" ")[1]);

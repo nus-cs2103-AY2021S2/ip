@@ -10,7 +10,6 @@ public class InvalidInstructionException extends DukeException {
      */
     public InvalidInstructionException() {
         super("You have keyed in an invalid instruction.\n"
-                + "Please ensure your instruction begins with\n"
-                + "todo, deadline, event, list, delete, done or bye");
+                + "Type 'help' to get the full list of available commands.");
     }
 }

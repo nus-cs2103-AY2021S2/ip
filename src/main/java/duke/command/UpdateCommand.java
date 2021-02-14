@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidInstructionException;
+import duke.exception.EmptyUpdateException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -38,7 +38,7 @@ public class UpdateCommand extends Command {
             String taskNumber = input.split(" ") [1];
             return tasks.updateEvent(input);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidInstructionException();
+            throw new EmptyUpdateException();
         }
     }
 

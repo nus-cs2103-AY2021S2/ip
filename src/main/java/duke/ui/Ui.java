@@ -12,8 +12,14 @@ public class Ui {
      * @return welcome message
      */
     public static String showWelcome() {
-        String toPrint = "Hello! I'm Duke\n" + "What can I do for you?";
-        assert !toPrint.isEmpty() : "Something should be printed.";
+        String logo =
+                  "_____        _        \n"
+                + "|  _ \\ _  _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String toPrint = "Hello!\nWelcome to Duke!\n" + "What can I do for you?";
+        assert !toPrint.isEmpty() : "Welcome screen should be printed.";
         return toPrint;
     }
     /**
@@ -27,3 +33,4 @@ public class Ui {
         return toPrint;
     }
 }
+
