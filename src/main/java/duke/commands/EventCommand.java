@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.parser.DuplicateException;
 import duke.parser.InsufficientArgumentsException;
 import duke.tasks.TaskList;
 import duke.tasks.Event;
@@ -27,10 +28,11 @@ public class EventCommand extends Command {
                 throw new InsufficientArgumentsException("OOPS!!! The "
                         + "description of an event cannot be empty.");
             }
-            String taskDescription = this.getDescription(this.getUserInput(), "\n");
-            LocalDate dueDate = this.getDueDate(this.getUserInput(), "/by");
+            String taskDescription = this.getDescription(this.getUserInput(), "/at");
+            this.getTaskList().hasDuplicate(taskDescription);
+            LocalDate dueDate = this.getDueDate(this.getUserInput(), "/at");
             return new EventCommand(this.getTaskList(), taskDescription, dueDate);
-        } catch (InsufficientArgumentsException e) {
+        } catch (InsufficientArgumentsException | DuplicateException e) {
             return new ErrorCommand(this.getTaskList(), e.getMessage());
         }
     }

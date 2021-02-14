@@ -1,8 +1,11 @@
 package duke.commands;
 
+import duke.parser.DuplicateException;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public abstract class Command {
     private String[] userInput;
@@ -11,6 +14,7 @@ public abstract class Command {
     public Command(TaskList taskList) {
         this.taskList = taskList;
     }
+
     public Command(String[] userInput, TaskList taskList) {
         this.userInput = userInput;
         this.taskList = taskList;
@@ -64,6 +68,15 @@ public abstract class Command {
             }
         }
         return LocalDate.parse(dueDate);
+    }
+
+    public void hasDuplicate(String taskDescription) throws DuplicateException {
+        ArrayList<Task> tasks = this.getTaskList().getList();
+        for (Task t : tasks) {
+            if (t.getDescription() == taskDescription) {
+                throw new DuplicateException("The task has already been recorded!\n");
+            }
+        }
     }
 
     public abstract TaskList execute();

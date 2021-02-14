@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.parser.DuplicateException;
+
 import java.util.ArrayList;
 
 /**
@@ -42,6 +44,15 @@ public class TaskList {
 
     public int size() {
         return this.tasks.size();
+    }
+
+    public void hasDuplicate(String taskDescription) throws DuplicateException {
+        for (Task t: this.tasks) {
+            if (t.getDescription().equals(taskDescription)) {
+                throw new DuplicateException("This task has already been recorded!\n"
+                        + "Please enter another task!");
+            }
+        }
     }
 
     public String toString() {

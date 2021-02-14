@@ -1,10 +1,13 @@
 package duke.commands;
 
+import duke.parser.DuplicateException;
 import duke.parser.InsufficientArgumentsException;
 import duke.tasks.TaskList;
+import duke.tasks.Task;
 import duke.tasks.Deadline;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class DeadlineCommand extends Command {
     private String taskDescription;
@@ -28,10 +31,11 @@ public class DeadlineCommand extends Command {
                 throw new InsufficientArgumentsException("OOPS!!! The "
                         + "description of a deadline cannot be empty.");
             }
-            String taskDescription = this.getDescription(this.getUserInput(), "\n");
+            String taskDescription = this.getDescription(this.getUserInput(), "/by");
+            this.getTaskList().hasDuplicate(taskDescription);
             LocalDate dueDate = this.getDueDate(this.getUserInput(), "/by");
             return new DeadlineCommand(this.getTaskList(), taskDescription, dueDate);
-        } catch (InsufficientArgumentsException e) {
+        } catch (InsufficientArgumentsException | DuplicateException e) {
             return new ErrorCommand(this.getTaskList(), e.getMessage());
         }
     }

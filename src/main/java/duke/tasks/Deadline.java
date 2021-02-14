@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.parser.DuplicateException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

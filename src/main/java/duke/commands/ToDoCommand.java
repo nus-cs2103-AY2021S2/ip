@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.parser.DuplicateException;
 import duke.parser.InsufficientArgumentsException;
 import duke.parser.Parser;
 import duke.tasks.TaskList;
@@ -24,8 +25,9 @@ public class ToDoCommand extends Command {
                         + "description of a todo cannot be empty.");
             }
             String taskDescription = this.getDescription(this.getUserInput(), "\n");
+            this.getTaskList().hasDuplicate(taskDescription);
             return new ToDoCommand(this.getTaskList(), taskDescription);
-        } catch (InsufficientArgumentsException e) {
+        } catch (InsufficientArgumentsException | DuplicateException e) {
             return new ErrorCommand(this.getTaskList(), e.getMessage());
         }
     }
