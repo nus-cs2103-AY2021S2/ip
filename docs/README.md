@@ -54,7 +54,7 @@ With great usability and a simple design, it's never been easier to manage your 
 ### 3.3 Updating Tasks
 ###### Teammates suddenly rescheduled your meeting timing? :unamused: No problem. 
 #### Just `update` the corresponding task!
-##### `update`: _`update <task number> /to [<task format>](#3.1-adding-tasks)`_
+##### `update`: _`update <task number> /to <`[task format](#31-adding-tasks)`>`_
 * _Update details of a task corresponding to its task number._ \
 ![img_2.png](images/update.png)
   
@@ -103,6 +103,6 @@ A: Please ensure that your laptop supports at least `Java 11`.
 If you have any other queries, feel free to contact me on [GitHub](https://github.com/JodyLorah)!
 
 ## 5. Acknowledgements
-Thank you @ruilingk for letting me reference your UI. \
+Thank you [@ruilingk](https://github.com/ruilingk) for letting me reference your UI. \
 [Image of DaDuke](https://www.refinery29.com/images/10251619.jpg) \
 [Image of DaUser](https://www.refinery29.com/en-us/2020/12/10226515/bridgerton-netflix-cast-characters-actors#slide-1)
