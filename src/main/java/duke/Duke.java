@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -30,6 +33,18 @@ public class Duke {
      */
     public static String help() {
         return new Ui().printHelp();
+    }
+
+    /**
+     * Returns path of Duke.class jar directory.
+     *
+     * @return String format of path of Duke.
+     * @throws UnsupportedEncodingException When unable to create string of duke's path.
+     */
+    public static String getPath() throws UnsupportedEncodingException {
+        String path = Duke.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String decodedPath = URLDecoder.decode(path, "UTF-8");
+        return decodedPath;
     }
 
     public static void main(String[] args) {

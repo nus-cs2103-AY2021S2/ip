@@ -34,8 +34,9 @@ public class Deadline extends Task {
             throw new DukeMissingDescriptionException("deadline");
         } else {
             try {
-                LocalDateTime ldt = Parser.parseInputDate(parsedInfo[1]);
-                return new Deadline(parsedInfo[0], ldt);
+                String deadlineName = parsedInfo[0];
+                LocalDateTime deadline = Parser.parseInputDate(parsedInfo[1]);
+                return new Deadline(deadlineName, deadline);
             } catch (DateTimeParseException e) {
                 throw new DukeWrongFormatException("deadline");
             }

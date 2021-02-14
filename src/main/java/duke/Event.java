@@ -36,12 +36,22 @@ public class Event extends Task {
             throw new DukeMissingDescriptionException("event");
         } else {
             try {
+                String eventName = parsedInfo[0];
+
+                //split event string into 2 parts, first is date, second is time
                 String[] parsedDate = parsedInfo[1].split(" ");
                 String date = parsedDate[0];
+
+                //split time string into 2 parts, first is start time, second is end time
                 String[] parsedTime = parsedDate[1].split("-");
-                LocalDateTime ldtStart = Parser.parseInputDate(date + " " + parsedTime[0]);
-                LocalDateTime ldtEnd = Parser.parseInputDate(date + " " + parsedTime[1]);
-                return new Event(parsedInfo[0], ldtStart, ldtEnd);
+                String startTime = parsedTime[0];
+                String endTime = parsedTime[1];
+
+                //convert string time format to local date time format
+                LocalDateTime ldtStart = Parser.parseInputDate(date + " " + startTime);
+                LocalDateTime ldtEnd = Parser.parseInputDate(date + " " + endTime);
+
+                return new Event(eventName, ldtStart, ldtEnd);
             } catch (Exception e) {
                 throw new DukeWrongFormatException("event");
             }
