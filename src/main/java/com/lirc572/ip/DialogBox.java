@@ -16,9 +16,11 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -30,6 +32,8 @@ public class DialogBox extends HBox {
     private final double imageRadius = 20.0;
     private TextFlow textFlow;
     private Circle imageCircle;
+    private Rectangle rectangleBox;
+    private StackPane stackPane;
 
     /**
      * Constructs a new DialogBox object.
@@ -54,8 +58,21 @@ public class DialogBox extends HBox {
 
         this.textFlow.setPadding(new Insets(0.0, 10.0, 0.0, 10.0));
 
+        this.rectangleBox = new Rectangle(300.0, 20.0);
+        this.rectangleBox.setArcWidth(20.0);
+        this.rectangleBox.setArcHeight(20.0);
+        this.rectangleBox.setFill(Color.AQUA);
+
+        this.stackPane = new StackPane();
+        this.stackPane.setAlignment(Pos.TOP_RIGHT);
+        this.stackPane.getChildren().addAll(this.rectangleBox, this.textFlow);
+        
+        this.rectangleBox.heightProperty().bind(this.stackPane.heightProperty());
+
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(this.textFlow, this.imageCircle);
+        this.setSpacing(5.0);
+        // this.getChildren().addAll(this.textFlow, this.imageCircle);
+        this.getChildren().addAll(this.stackPane, this.imageCircle);
     }
 
     /**
@@ -105,6 +122,7 @@ public class DialogBox extends HBox {
     }
 
     private void flip() {
+        this.stackPane.setAlignment(Pos.TOP_LEFT);
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
