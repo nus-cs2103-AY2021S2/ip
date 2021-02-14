@@ -29,7 +29,7 @@ public class Storage {
      * Return file
      */
 
-    public File getFile() throws IOException {
+    public File getFile() {
         createFile();
         return this.file;
     }
