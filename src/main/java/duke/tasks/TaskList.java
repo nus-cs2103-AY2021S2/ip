@@ -69,7 +69,7 @@ public class TaskList {
      */
     public TaskList find(String query) {
         List<Task> queryTasks = tasks.stream().filter(task ->
-            task.getDescription().contains(query)
+             task.getDescription().contains(query)
         ).collect(Collectors.toList());
         return new TaskList(queryTasks);
     }
@@ -128,9 +128,9 @@ public class TaskList {
         List<Task> printTasks = tasks.stream().filter(task -> {
             if (task instanceof TimedTask) {
                 return ((TimedTask) task).getTaskDate().isEqual(queryDate);
-            } else {
-                return false;
             }
+
+            return false;
         }).collect(Collectors.toList());
         return new TaskList(printTasks);
     }
@@ -145,9 +145,9 @@ public class TaskList {
         return tasks.stream().anyMatch(task -> {
             if (task instanceof TimedTask) {
                 return ((TimedTask) task).getTaskDateTime().equals(addedDate);
-            } else {
-                return false;
             }
+
+            return false;
         });
     }
 

@@ -23,6 +23,10 @@ import duke.tasks.ToDo;
  * Stores and restores the user's task list.
  */
 public class Storage {
+    private static final String DELIMITER = " \\| ";
+    private static final char ITEM_EVENT = 'E';
+    private static final char ITEM_DEADLINE = 'D';
+    private static final char ITEM_TODO = 'T';
     private final File file;
 
     /**
@@ -59,22 +63,22 @@ public class Storage {
     private List<Task> populateTasksFromStorage(Scanner sc) throws DukeException {
         List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
-            String item = sc.nextLine();
-            String[] items = item.split(" \\| ");
+            String taskStorageString = sc.nextLine();
+            String[] taskString = taskStorageString.split(DELIMITER);
 
-            char type = items[0].charAt(0);
-            int done = Integer.parseInt(items[1]);
-            String desc = items[2];
+            char type = taskString[0].charAt(0);
+            int done = Integer.parseInt(taskString[1]);
+            String desc = taskString[2];
 
             switch (type) {
-            case 'T':
+            case ITEM_TODO:
                 tasks.add(new ToDo(done, desc));
                 break;
-            case 'E':
-                tasks.add(new Event(done, desc, items[3]));
+            case ITEM_EVENT:
+                tasks.add(new Event(done, desc, taskString[3]));
                 break;
-            case 'D':
-                tasks.add(new Deadline(done, desc, items[3]));
+            case ITEM_DEADLINE:
+                tasks.add(new Deadline(done, desc, taskString[3]));
                 break;
             default:
                 throw new DukeException(MESSAGE_COMMAND_NOT_FOUND);

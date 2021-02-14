@@ -1,11 +1,14 @@
 package duke.tasks;
 
-import duke.common.Utils;
+import static duke.common.Utils.formatDate;
 
 /**
- * Represents a Event {@code Task}.
+ * Represents a Event {@code TimedTask}.
  */
 public class Event extends TimedTask {
+    private static final String STRING_FORMAT = "[E]%s (at: %s)";
+    private static final String STORAGE_STRING_FORMAT = "E | %d | %s | %s";
+
     /**
      * Constructor for Event {@code TimedTask}, specifying the description and occurrence date.
      *
@@ -37,18 +40,18 @@ public class Event extends TimedTask {
             TimedTask timedTask = (TimedTask) obj;
             return timedTask.description.equalsIgnoreCase(this.description)
                     && timedTask.taskDateTime.equals(this.taskDateTime);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), Utils.formatDate(super.taskDateTime));
+        return String.format(STRING_FORMAT, super.toString(), formatDate(super.taskDateTime));
     }
 
     @Override
     public String toStorageString() {
-        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, super.taskDateTime);
+        return String.format(STORAGE_STRING_FORMAT, isDone ? 1 : 0, description, super.taskDateTime);
     }
 }

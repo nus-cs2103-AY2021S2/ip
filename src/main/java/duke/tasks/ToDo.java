@@ -4,6 +4,8 @@ package duke.tasks;
  * Represents a ToDo {@code Task}.
  */
 public class ToDo extends Task {
+    private static final String STRING_FORMAT = "[T]%s";
+    private static final String STORAGE_STRING_FORMAT = "T | %d | %s";
 
     /**
      * Constructor for ToDo, specifying the description.
@@ -40,11 +42,11 @@ public class ToDo extends Task {
 
     @Override
     public String toStorageString() {
-        return String.format("T | %d | %s", isDone ? 1 : 0, description);
+        return String.format(STORAGE_STRING_FORMAT, isDone ? 1 : 0, description);
     }
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format(STRING_FORMAT, super.toString());
     }
 }

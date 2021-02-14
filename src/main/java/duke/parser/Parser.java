@@ -8,6 +8,9 @@ import static duke.common.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
 import static duke.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static duke.common.Messages.MESSAGE_INVALID_DATETIME_FORMAT;
 import static duke.common.Messages.MESSAGE_INVALID_TASK_FORMAT;
+import static duke.common.Utils.checkIsNumeric;
+import static duke.common.Utils.checkIsValidDate;
+import static duke.common.Utils.checkIsValidDateTime;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -20,7 +23,6 @@ import duke.commands.DukeCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
-import duke.common.Utils;
 import duke.exception.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -79,9 +81,7 @@ public class Parser {
     private static Command parseDoneAndDeleteCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         checkInputsLength(inputs);
         String input = inputs[1];
-        Predicate<String> isNumeric = str -> !Utils.checkIsNumeric(str);
-        Predicate<String> isAll = str -> !str.equals(ALL);
-        if (isNumeric.and(isAll).test(input)) {
+        if (checkValidDoneAndDeleteInput().test(input)) {
             throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
@@ -94,6 +94,12 @@ public class Parser {
         }
     }
 
+    private static Predicate<String> checkValidDoneAndDeleteInput() {
+        Predicate<String> isNumeric = str -> !checkIsNumeric(str);
+        Predicate<String> isAll = str -> !str.equals(ALL);
+        return isNumeric.and(isAll);
+    }
+
     /**
      * Returns either {@code EventCommand} or {@code DeadlineCommand} depending on the user's input.
      *
@@ -104,8 +110,8 @@ public class Parser {
     private static Command parseEventAndDeadlineCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         String delimiter = dukeCommand == DukeCommand.EVENT ? EVENT_DELIMITER : DEADLINE_DELIMITER;
         int index = getDelimiterIndex(inputs, dukeCommand.toLower(), delimiter);
-        String desc = String.join(" ", Arrays.copyOfRange(inputs, 1, index));
-        String date = checkIsValidDate(inputs, index);
+        String desc = joinStringFromArray(" ", inputs, 1, index);
+        String date = checkValidDateTime(inputs, index);
 
         Task newTask;
         if (dukeCommand == DukeCommand.EVENT) {
@@ -127,7 +133,7 @@ public class Parser {
      */
     private static Command parseFindAndTodoCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         checkInputsLength(inputs);
-        String desc = String.join(" ", Arrays.copyOfRange(inputs, 1, inputs.length));
+        String desc = joinStringFromArray(" ", inputs, 1, inputs.length);
         if (dukeCommand == DukeCommand.TODO) {
             return new AddCommand(new ToDo(desc));
         } else if (dukeCommand == DukeCommand.FIND) {
@@ -147,7 +153,7 @@ public class Parser {
     private static Command parseListCmd(String[] inputs) throws DukeException {
         if (inputs.length == 2) {
             String date = inputs[1];
-            if (!Utils.checkIsValidDate(date)) {
+            if (checkIsValidDate(date)) {
                 throw new DukeException(MESSAGE_INVALID_DATETIME_FORMAT);
             }
             return new ListCommand(date);
@@ -158,12 +164,16 @@ public class Parser {
         }
     }
 
-    private static String checkIsValidDate(String[] inputs, int index) throws DukeException {
-        String date = String.join(DATETIME_DELIMITER, Arrays.copyOfRange(inputs, index + 1, inputs.length));
-        if (!Utils.checkIsValidDateTime(date)) {
+    private static String checkValidDateTime(String[] inputs, int index) throws DukeException {
+        String date = joinStringFromArray(DATETIME_DELIMITER, inputs, index + 1, inputs.length);
+        if (checkIsValidDateTime(date)) {
             throw new DukeException(MESSAGE_INVALID_DATETIME_FORMAT);
         }
         return date;
+    }
+
+    private static String joinStringFromArray(String delimiter, String[] inputs, int startIndex, int endIndex) {
+        return String.join(delimiter, Arrays.copyOfRange(inputs, startIndex, endIndex));
     }
 
     private static int getDelimiterIndex(String[] inputs, String commandType, String delimiter) throws DukeException {
