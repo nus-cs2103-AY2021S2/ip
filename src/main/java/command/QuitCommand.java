@@ -1,12 +1,11 @@
 package command;
 
 import task.TaskManager;
-import util.DukeException;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class QuitCommand implements Command {
+public class QuitCommand extends Command {
     public static final String COMMAND_STRING = "quit";
     public static final CommandType COMMAND_TYPE = CommandType.DONE;
     private String message = "";
@@ -23,5 +22,10 @@ public class QuitCommand implements Command {
     @Override
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public boolean isQuitCommand() {
+        return true;
     }
 }

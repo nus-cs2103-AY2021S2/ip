@@ -6,7 +6,7 @@ import util.DukeException;
 import java.util.HashMap;
 import java.util.List;
 
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
     public static final String COMMAND_STRING = "delete";
     public static final CommandType COMMAND_TYPE = CommandType.DONE;
     private final int position;

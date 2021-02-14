@@ -6,8 +6,12 @@ import util.DukeException;
 import java.util.HashMap;
 import java.util.List;
 
-public interface Command {
-    void execute(TaskManager taskManager) throws DukeException;
+public abstract class Command {
+    public abstract void execute(TaskManager taskManager) throws DukeException;
 
-    String getMessage();
+    public abstract String getMessage();
+
+    public boolean isQuitCommand() {
+        return false;
+    }
 }

@@ -60,9 +60,24 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            String response = respondToInput(userInput);
-            System.out.println(response);
+            String message;
+            boolean shouldQuit = false;
+            try {
+                Command c = Parser.parseCommand(userInput);
+                c.execute(taskManager);
+                message = c.getMessage();
+                if (c.isQuitCommand()) {
+                    shouldQuit = true;
+                }
+            } catch (DukeException e) {
+                message = e.getMsg();
+            }
+            System.out.println(message);
             Storage.writeTaskManager(taskManager);
+
+            if (shouldQuit) {
+                break;
+            }
         }
     }
 

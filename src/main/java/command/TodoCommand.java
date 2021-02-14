@@ -6,9 +6,8 @@ import util.DukeException;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class TodoCommand implements Command {
+public class TodoCommand extends Command {
     public static final String COMMAND_STRING = "todo";
     public static final CommandType COMMAND_TYPE = CommandType.TODO;
     private final String description;

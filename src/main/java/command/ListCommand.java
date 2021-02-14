@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ListCommand implements Command {
+public class ListCommand extends Command {
     public static final String COMMAND_STRING = "list";
     public static final CommandType COMMAND_TYPE = CommandType.LIST;
     private String message = "";

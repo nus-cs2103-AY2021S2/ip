@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class DoneCommand implements Command {
+public class DoneCommand extends Command {
     public static final String COMMAND_STRING = "done";
     public static final CommandType COMMAND_TYPE = CommandType.DONE;
     private final int position;

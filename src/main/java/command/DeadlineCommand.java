@@ -9,9 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class DeadlineCommand implements Command {
+public class DeadlineCommand extends Command {
     public static final String COMMAND_STRING = Deadline.COMMAND_STRING;
     public static final CommandType COMMAND_TYPE = CommandType.DEADLINE;
 
