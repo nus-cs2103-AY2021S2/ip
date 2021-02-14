@@ -1,13 +1,16 @@
 package snom.model.task;
 
-import snom.exceptions.SnomException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
+import snom.exceptions.SnomException;
+
+/**
+ * Stores extra date information for {@code Task}
+ */
 public class TaskWithDate extends Task{
     private LocalDateTime dateTime;
 
@@ -47,7 +50,6 @@ public class TaskWithDate extends Task{
     public LocalDateTime convertDateTime(String dateTime) throws SnomException {
         dateTime = dateTime.replaceFirst(" ", "");
         try{
-            // This is just to indicate stream was used previously, this comment will be deleted after tagging
             DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                     .appendPattern("yyyy-MM-dd[ HH:mm]")
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
@@ -61,11 +63,10 @@ public class TaskWithDate extends Task{
     }
 
     @Override
-    public String toSaveString(){
-        // This is just to indicate stream was used previously, this comment will be deleted after tagging
+    public String getSaveString(){
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendPattern("yyyy-MM-dd[ HH:mm]")
                 .toFormatter();
-        return super.toSaveString() + ", " + this.dateTime.format(formatter);
+        return super.getSaveString() + ", " + this.dateTime.format(formatter);
     }
 }

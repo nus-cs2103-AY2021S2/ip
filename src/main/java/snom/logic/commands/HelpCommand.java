@@ -6,6 +6,9 @@ import snom.storage.StorageManager;
 import snom.model.task.TaskList;
 import snom.ui.Snomio;
 
+/**
+ * Displays help page.
+ */
 public class HelpCommand extends Command{
     private FileManager helpFile;
     public HelpCommand(CommandEnum commandType, String content) {
@@ -16,9 +19,9 @@ public class HelpCommand extends Command{
      * Executes help command.
      *
      * @param taskList         list of task
-     * @param snomio           I/O of snom.model.Snom
-     * @param storage          snom.files handler of snom
-     * @return CommandResponse response after command execution
+     * @param snomio           I/O of Snom
+     * @param storage          files handler of snom
+     * @return                 {@code CommandResponse} after command execution
      * @throws SnomException   if command execution failed
      */
     @Override

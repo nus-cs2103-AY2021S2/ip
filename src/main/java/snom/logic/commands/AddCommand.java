@@ -1,10 +1,17 @@
 package snom.logic.commands;
 
 import snom.exceptions.SnomException;
+import snom.model.task.Deadline;
+import snom.model.task.Event;
+import snom.model.task.Task;
+import snom.model.task.TaskList;
+import snom.model.task.Todo;
 import snom.storage.StorageManager;
-import snom.model.task.*;
 import snom.ui.Snomio;
 
+/**
+ * Adds a {@code Task} into {@code TaskList}
+ */
 public class AddCommand extends Command{
     public AddCommand(CommandEnum commandType, String content) {
         super(commandType, content);
@@ -14,9 +21,9 @@ public class AddCommand extends Command{
      * Executes todo, deadline, event command.
      *
      * @param taskList         list of task
-     * @param snomio           I/O of snom.model.Snom
-     * @param storage          snom.files handler of snom
-     * @return CommandResponse response after command execution
+     * @param snomio           I/O of Snom
+     * @param storage          files handler of snom
+     * @return                 {@code CommandResponse} after command execution
      * @throws SnomException   if command execution failed
      */
     @Override

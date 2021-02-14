@@ -9,10 +9,8 @@ import snom.model.task.TaskList;
 import snom.ui.Snomio;
 
 /**
- * snom.model.Snom is a Personal Assistant Chatbot that helps
+ * Snom is a Personal Assistant Chatbot that helps
  * a person to keep track of various things.
- *
- * @author Sharptail
  */
 public class Snom {
     private StorageManager storage;

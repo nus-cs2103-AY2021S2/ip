@@ -1,6 +1,5 @@
 package snom.ui;
 
-import snom.logic.commands.CommandResponse;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,10 +10,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+import snom.logic.commands.CommandResponse;
 import snom.model.Snom;
 
 /**
- * Controller for snom.ui.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -28,7 +29,6 @@ public class MainWindow extends AnchorPane {
 
     private Snom snom;
     private Snomio snomio = new Snomio();
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image snomImage = new Image(this.getClass().getResourceAsStream("/images/Snom.png"));
 
@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing snom.model.Snom's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Snom's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

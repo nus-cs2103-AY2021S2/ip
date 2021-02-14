@@ -14,6 +14,9 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * Controller for DialogBox.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

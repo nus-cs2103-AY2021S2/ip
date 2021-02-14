@@ -1,13 +1,16 @@
 package snom.model.task;
 
+/**
+ * Stores todo {@code Task}'s information
+ */
 public class Todo extends Task{
     public Todo(String description){
         super(description);
     }
 
     @Override
-    public String toSaveString(){
-        return "T," + super.toSaveString();
+    public String getSaveString(){
+        return "T," + super.getSaveString();
     }
 
     @Override

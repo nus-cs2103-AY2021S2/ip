@@ -7,18 +7,21 @@ import snom.model.task.Task;
 import snom.model.task.TaskList;
 import snom.ui.Snomio;
 
+/**
+ * Deletes {@code Task} from {@code TaskList}
+ */
 public class DeleteCommand extends Command{
     public DeleteCommand(CommandEnum commandType, String content) {
         super(commandType, content);
     }
 
     /**
-     * Executes delete commmand
+     * Executes delete command.
      *
      * @param taskList         list of task
-     * @param snomio           I/O of snom.model.Snom
-     * @param storage          snom.files handler of snom
-     * @return CommandResponse response after command execution
+     * @param snomio           I/O of Snom
+     * @param storage          files handler of Snom
+     * @return                 {@code CommandResponse} after command execution
      * @throws SnomException   if command execution failed
      */
     @Override

@@ -2,16 +2,20 @@ package snom.storage;
 
 import snom.exceptions.SnomException;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Manages folder/file creation and read file for snom.model.Snom
- *
- * @author Sharptail
+ * Manages folder/file creation and read file for Snom
  */
 
 public class FileManager {
@@ -52,7 +56,7 @@ public class FileManager {
      *
      * @return array list of strings
      */
-    public List<String> readFile() throws SnomException{
+    public List<String> readFile() throws SnomException {
         try {
             List<String> lines = Files.readAllLines(path);
             return lines;

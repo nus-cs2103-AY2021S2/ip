@@ -5,6 +5,9 @@ import snom.storage.StorageManager;
 import snom.model.task.TaskList;
 import snom.ui.Snomio;
 
+/**
+ * Represents a command with the ability to be executed.
+ */
 public abstract class Command {
     CommandEnum commandType;
     String content;

@@ -2,14 +2,17 @@ package snom.model.task;
 
 import snom.exceptions.SnomException;
 
+/**
+ * Stores Event {@code TaskWithDate}'s information
+ */
 public class Event extends TaskWithDate{
     public Event(String description, String dateTime) throws SnomException {
         super(description, dateTime);
     }
 
     @Override
-    public String toSaveString(){
-        return "E," + super.toSaveString();
+    public String getSaveString(){
+        return "E," + super.getSaveString();
     }
 
     @Override

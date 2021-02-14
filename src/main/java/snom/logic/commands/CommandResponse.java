@@ -1,5 +1,8 @@
 package snom.logic.commands;
 
+/**
+ * Represents the response after {@code Command} being executed.
+ */
 public class CommandResponse {
     private String responseMsg;
     private boolean isExit;

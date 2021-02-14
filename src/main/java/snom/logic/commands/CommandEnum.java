@@ -13,7 +13,7 @@ public enum CommandEnum {
     NONE;
 
     /**
-     * Returns enum based of given string of command.
+     * Returns {@code CommandEnum} based of given string of command.
      *
      * @param command string of command
      * @return        enum of command

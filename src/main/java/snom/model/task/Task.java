@@ -1,9 +1,7 @@
 package snom.model.task;
 
 /**
- * This class is to store task's information
- *
- * @author Sharptail
+ * Stores task's information.
  */
 public class Task {
     private String description;
@@ -39,7 +37,7 @@ public class Task {
      *
      * @return formatted string
      */
-    public String toSaveString(){
+    public String getSaveString(){
         return (isFinished ? "true" : "false") + "," + this.description;
     }
 

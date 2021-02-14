@@ -1,20 +1,24 @@
-package snom.ui; /**
+package snom.ui;
+
+import snom.exceptions.SnomException;
+import snom.model.task.Task;
+import snom.model.task.TaskList;
+
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
+
+/**
  * Deals with interactions with the user.
  * This snom.ui.Snomio simply compile both BufferedReader and BufferedWriter
  * for easier I/O usages. For eg. read snom.logic.commands, contents, numbers
  * from user's input.
  *
  * Solution below adapted from https://github.com/Kattis/kattio/blob/master/Kattio.java
- *
- * @author: Sharptail
  */
-import snom.exceptions.SnomException;
-import snom.model.task.Task;
-import snom.model.task.TaskList;
-
-import java.io.*;
-import java.util.StringTokenizer;
-
 public class Snomio extends PrintWriter {
     private BufferedReader reader;
     private StringTokenizer tokenizer;
@@ -68,7 +72,7 @@ public class Snomio extends PrintWriter {
      * @return String        string of entire task List
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
-    public String getTaskList(TaskList taskList) throws SnomException{
+    public String getTaskList(TaskList taskList) throws SnomException {
         if(taskList.getSize() <= 0){
             throw new SnomException("You have no task in your list right now, try adding some and try again :D");
         }
@@ -151,9 +155,7 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * This method will read in the whole line and split each word into tokens.
-     * Then it will extract out the first token and return it.
-     *
+     * Returns the first word from next input line.
      * If there are already words/tokens in the tokenizer, it will return the next first token instead.
      *
      * @return  the first word that extracted from the tokenizer
@@ -176,10 +178,9 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * This method is similar to BufferedReader.readLine() except it will read from the tokenizer
-     * if there are remaining tokens in it. It will return everything in the tokenizer as a whole sentence.
+     * Returns remaining words/tokens in the tokenizer as a string.
      *
-     * @return the whole line of input or the rest of the sentence from the previous read line
+     *  @return the whole line of input or the rest of the sentence from the previous read line
      */
     public String readRemainingLine(){
         String line = "";
@@ -198,7 +199,7 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * This method only reads the first integer input and returns it.
+     * Returns the first integer input.
      *
      * @return  single integer input
      */
@@ -211,7 +212,7 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * This method only reads the first double input and returns it.
+     * Returns first double input.
      *
      * @return  single double input
      */

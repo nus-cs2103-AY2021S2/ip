@@ -1,19 +1,21 @@
 package snom.storage;
 
-import snom.exceptions.SnomException;
-import snom.model.task.*;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Manages storage related process for snom.model.Snom
- * Eg. Import task, save task
- *
- * @author Sharptail
- */
+import snom.exceptions.SnomException;
+import snom.model.task.Deadline;
+import snom.model.task.Event;
+import snom.model.task.Task;
+import snom.model.task.TaskList;
+import snom.model.task.Todo;
 
+/**
+ * Manages storage related process for Snom
+ * Eg. Import task, save task
+ */
 public class StorageManager extends FileManager{
     public StorageManager(String filename){
         super(filename);
@@ -22,9 +24,9 @@ public class StorageManager extends FileManager{
     }
 
     /**
-     * Returns an array list of task from given list of strings
+     * Returns an array list of {@code Task} from input list of strings
      *
-     * @return               array list of snom.tasks
+     * @return               array list of {@code Task}
      * @throws SnomException if invalid date for deadline or event
      */
     public ArrayList<Task> importTask() throws SnomException{
@@ -55,15 +57,15 @@ public class StorageManager extends FileManager{
     }
 
     /**
-     * Writes the given task list into the save file
+     * Writes the given {@code TaskList} into the save file
      *
-     * @param taskList list of snom.tasks
+     * @param taskList list of {@code Task}
      */
     public void saveFile(TaskList taskList){
         try {
             Files.writeString(path, "");
             for(Task task: taskList.getList()){
-                Files.writeString(path, task.toSaveString() + "\n", StandardOpenOption.APPEND);
+                Files.writeString(path, task.getSaveString() + "\n", StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

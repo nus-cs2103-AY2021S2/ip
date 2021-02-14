@@ -5,19 +5,22 @@ import snom.storage.StorageManager;
 import snom.model.task.TaskList;
 import snom.ui.Snomio;
 
+/**
+ * Closes Application.
+ */
 public class ExitCommand extends Command{
     public ExitCommand(CommandEnum commandType, String content) {
         super(commandType, content);
     }
 
     /**
-     * Executes exit command
+     * Executes exit command.
      *
      * @param taskList         list of task
-     * @param snomio           I/O of snom.model.Snom
-     * @param storage          snom.files handler of snom
+     * @param snomio           I/O of Snom
+     * @param storage          files handler of snom
+     * @return                 {@code CommandResponse} after command execution
      * @throws SnomException   if command execution failed
-     * @return CommandResponse response after command execution
      */
     @Override
     public CommandResponse execute(TaskList taskList, Snomio snomio, StorageManager storage) throws SnomException {

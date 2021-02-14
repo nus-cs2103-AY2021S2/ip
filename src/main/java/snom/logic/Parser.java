@@ -1,14 +1,25 @@
 package snom.logic;
 
-import snom.logic.commands.*;
 import snom.exceptions.SnomException;
+import snom.logic.commands.AddCommand;
+import snom.logic.commands.Command;
+import snom.logic.commands.CommandEnum;
+import snom.logic.commands.DeleteCommand;
+import snom.logic.commands.ExitCommand;
+import snom.logic.commands.FindCommand;
+import snom.logic.commands.FinishCommand;
+import snom.logic.commands.HelpCommand;
+import snom.logic.commands.ListCommand;
 
 import java.util.Arrays;
 
+/**
+ * Represents a Parser to parse user input into {@code Command}
+ */
 public class Parser {
 
     /**
-     * Returns a command child class based on the given string of command.
+     * Returns a {@code Command} child object based on the given string of command.
      *
      * @param userInput     string of user input
      * @return               Command child classes
@@ -80,7 +91,6 @@ public class Parser {
         }
 
         try{
-            // This is just to indicate stream was used previously, this comment will be deleted after tagging
             int[] taskNumbers = Arrays.stream(taskNumString.split(" "))
                     .mapToInt(Integer::parseInt)
                     .toArray();
