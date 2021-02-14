@@ -42,8 +42,10 @@ public class Parser {
      * @throws DuckieException if commands other than the enumerated keywords are entered
      */
     public static Command parse(String cmd) throws DuckieException {
+        assert(cmd != null);
         String[] commandArr = cmd.trim().split(" ");
         cmd = cmd.trim();
+        assert commandArr[0].length() == 1;
         switch (commandArr[0]) {
         case "list":
             return new ListCmd(cmd);

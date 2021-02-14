@@ -1,5 +1,6 @@
 package command;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -32,7 +33,6 @@ public class DeadlineCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-
         if (!cmd.contains("/by")) {
             throw new DuckieException("oops! please specify deadline using '/by'");
         }
@@ -50,6 +50,11 @@ public class DeadlineCmd extends Command {
         Deadline tempD = new Deadline(description[1], date);
 
         lst.addTask(tempD);
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (lst.getListSize() == 0) {
             return "there are no tasks in your list!";

@@ -5,6 +5,8 @@ import classes.Storage;
 import classes.TaskList;
 import classes.Ui;
 
+import java.io.IOException;
+
 public class ByeCmd extends Command {
 
     private String cmd;
@@ -27,6 +29,11 @@ public class ByeCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
+        try {
+            storage.saveTasks(lst.getTaskList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ui.endMessage();
     }
 
