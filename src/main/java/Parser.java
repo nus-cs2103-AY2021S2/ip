@@ -35,7 +35,7 @@ public class Parser {
         case "E":
             String descriptionEvents = split[2];
             String byEvents = split[3];
-            Deadline taskE = new Deadline(descriptionEvents, byEvents, true);
+            Event taskE = new Event(descriptionEvents, byEvents);
             if (isDone.equals("X")) {
                 taskE.markAsDone();
             }
