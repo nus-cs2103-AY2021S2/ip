@@ -73,7 +73,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String outputMessage = duke.run(input);
+        String outputMessage = duke.runEachInput(input);
 
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(input, userImage)
@@ -85,8 +85,5 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             System.exit(0);
         }
-
-
-
     }
 }
