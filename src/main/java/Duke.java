@@ -35,17 +35,13 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        try {
-            Storage storage = new Storage("data", "sweh.txt");
-            Duke duke = new Duke(storage);
-            Ui.printGreeting();
-            duke.run();
-        } catch (IOException e) {
-            System.out.println("Unable to initialise storage for Sweh");
-        }
+        Storage storage = new Storage("data", "sweh.txt");
+        Duke duke = new Duke(storage);
+        Ui.printGreeting();
+        duke.run();
     }
 
-    public void run() throws IOException {
+    public void run() {
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -62,8 +58,13 @@ public class Duke {
             } catch (DukeException e) {
                 message = e.getMsg();
             }
-            System.out.println(message);
-            storage.writeTaskManager(taskManager);
+            Ui.printOutput(message);
+
+            try {
+                storage.writeTaskManager(taskManager);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
 
             if (shouldQuit) {
                 break;

@@ -9,14 +9,7 @@ public interface Formatter {
         String opening = "\"----------------------------------------\n";
         String closing = "----------------------------------------\"\n";
         String combined = opening + output + "\n" + closing;
-
-        String[] strArray = combined.split("\n");
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String s : strArray) {
-            stringBuilder.append("\t").append(s).append("\n");
-        }
-
-        return stringBuilder.toString();
+        return addIndent(combined);
     }
 
     static String formatList(String[] strArray) {
@@ -33,8 +26,8 @@ public interface Formatter {
 
     static String addIndent(String string) {
         String[] strings = string.split("\n");
-        return Arrays.asList(strings).stream()
+        return Arrays.stream(strings)
                 .map(s -> '\t' + s)
-                .collect(Collectors.joining());
+                .collect(Collectors.joining("\n"));
     }
 }

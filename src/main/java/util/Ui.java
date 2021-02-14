@@ -22,4 +22,8 @@ public interface Ui {
     static void printGreeting() {
         System.out.println(greeting());
     }
+
+    static void printOutput(String output) {
+        System.out.println(Formatter.formatOut(output));
+    }
 }
