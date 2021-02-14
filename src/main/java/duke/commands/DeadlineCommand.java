@@ -1,9 +1,12 @@
 package duke.commands;
 
+import static duke.commands.CommandUtils.checkDateTimeConflicts;
+
 import java.time.LocalDateTime;
 
 import duke.DukeException;
 import duke.ParserUtils;
+import duke.TaskList;
 import duke.models.Deadline;
 import duke.models.Task;
 
@@ -28,6 +31,16 @@ public class DeadlineCommand extends AddCommand {
     @Override
     public Task getTask() {
         return new Deadline(getTaskName(), deadline);
+    }
+
+    @Override
+    public boolean isTaskValid(Task task, TaskList tasks) throws DukeException {
+        assert (task instanceof Deadline);
+        boolean isConflict = checkDateTimeConflicts(((Deadline) task).getDeadline(), tasks);
+        if (isConflict) {
+            throw new DukeException("You have another deadline / event ongoing at the given datetime.");
+        }
+        return true;
     }
 
     /**

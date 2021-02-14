@@ -2,33 +2,27 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.ParserUtils;
-import duke.Storage;
 import duke.TaskList;
 import duke.models.Task;
 import duke.models.Todo;
-import duke.ui.Ui;
 
 /**
  * Handles the Todo command of the user to create new todos in the list.
  * Format of command: "todo [todo_name]".
  */
-public class TodoCommand implements Command {
-    private final String taskName;
-
+public class TodoCommand extends AddCommand {
     protected TodoCommand(String taskName) {
-        this.taskName = taskName;
+        super(taskName);
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task curTask = new Todo(taskName);
-        tasks.addTask(curTask);
-        ui.printTaskListStatus(tasks, curTask);
+    public Task getTask() {
+        return new Todo(getTaskName());
     }
 
     @Override
-    public boolean isExit() {
-        return false;
+    public boolean isTaskValid(Task task, TaskList tasks) {
+        return true;
     }
 
     /**

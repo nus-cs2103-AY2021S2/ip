@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.models.Task;
@@ -23,6 +24,13 @@ public abstract class AddCommand implements Command {
     public abstract Task getTask();
 
     /**
+     * Returns whether the given task can be added into the tasklist.
+     *
+     * @return whether task can added into the tasklist
+     */
+    public abstract boolean isTaskValid(Task task, TaskList tasks) throws DukeException;
+
+    /**
      * Returns the name of the task.
      *
      * @return name of the task
@@ -32,9 +40,13 @@ public abstract class AddCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task curTask = getTask();
         assert (curTask != null);
+        if (!isTaskValid(curTask, tasks)) {
+            ui.printError("Unable to add invalid task");
+            return;
+        }
         tasks.addTask(curTask);
         ui.printTaskListStatus(tasks, curTask);
     }
