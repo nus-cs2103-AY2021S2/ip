@@ -27,6 +27,10 @@ public class Duke {
         this.taskList = storage.load();
     }
 
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
+
     /**
      * Runs the entire logic for Duke
      */
