@@ -30,7 +30,9 @@ public class Duke {
     /**
      * Runs the entire logic for Duke
      */
-    public String run(String fullInput) {
+    public String runEachInput(String fullInput) {
+        assert storage != null : "Storage not valid";
+        assert taskList != null : "Task List is not instantiated";
         // do something
         try {
             Command c = Parser.parseCommand(fullInput);
