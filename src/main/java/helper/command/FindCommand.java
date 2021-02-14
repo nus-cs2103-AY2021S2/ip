@@ -18,8 +18,8 @@ public class FindCommand extends Command {
     }
 
     private List<Task> filterTasks(List<Task> listTask) {
-        return listTask.stream().filter(t -> t.getDescription().contains(toFind)).
-                collect(Collectors.toList());
+        return listTask.stream().filter(t -> t.getDescription().contains(toFind))
+                .collect(Collectors.toList());
     }
 
     @Override
