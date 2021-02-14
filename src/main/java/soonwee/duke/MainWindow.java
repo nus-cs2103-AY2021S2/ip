@@ -23,11 +23,14 @@ public class MainWindow extends AnchorPane {
 	@FXML
 	private Button sendButton;
 
-	private Duke duke;
+	private Duke dukeBot;
 
 	private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
 	private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+	/**
+	 * Initializes the main window and greets the user.
+	 */
 	@FXML
 	public void initialize() {
 		scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -35,10 +38,20 @@ public class MainWindow extends AnchorPane {
 		dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(printGreeting(), dukeImage));
 	}
 
-	public void setDuke(Duke d) {
-		duke = d;
+	/**
+	 * Sets the instance of a Duke bot.
+	 *
+	 * @param duke the Duke bot instance
+	 */
+	public void setDuke(Duke duke) {
+		dukeBot = duke;
 	}
 
+	/**
+	 * Prints greeting message.
+	 *
+	 * @return greeting message
+	 */
 	public String printGreeting() {
 		String text = new String();
 		String greet = "Hello! I'm Duke\nWhat can I do for you?\n";
@@ -46,10 +59,20 @@ public class MainWindow extends AnchorPane {
 		return text;
 	}
 
+	/**
+	 * Prints line.
+	 *
+	 * @return prined lines
+	 */
 	public String printLine() {
 		return "---------------------------";
 	}
 
+	/**
+	 * Prints bye message.
+	 *
+	 * @return bye message
+	 */
 	public String printBye() {
 		String text = "Bye. Hope to see you again soon!\n";
 		return text;
@@ -68,7 +91,7 @@ public class MainWindow extends AnchorPane {
 					DialogBox.getDukeDialog(printBye(), dukeImage)
 			);
 		} else {
-			String response = duke.getResponse(input);
+			String response = dukeBot.getResponse(input);
 			dialogContainer.getChildren().addAll(
 					DialogBox.getUserDialog(input, userImage),
 					DialogBox.getDukeDialog(response, dukeImage)

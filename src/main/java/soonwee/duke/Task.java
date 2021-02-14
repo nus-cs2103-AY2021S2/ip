@@ -27,6 +27,11 @@ public class Task {
         this.isCompleted = true;
     }
 
+    /**
+     * Gets datetime from task.
+     *
+     * @return datetime of task
+     */
     public LocalDateTime getDateTime() {
         return null;
     }

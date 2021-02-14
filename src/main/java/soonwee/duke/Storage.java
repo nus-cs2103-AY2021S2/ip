@@ -58,6 +58,9 @@ public class Storage {
         return fileObject;
     }
 
+    /**
+     * Reads data from the file.
+     */
     public void readFile() {
         try {
             File fileObject = new File("data\\tasks.txt");
@@ -74,7 +77,7 @@ public class Storage {
     }
 
     /**
-     * Process data in file and add them into memory task list.
+     * Processes data in file and add them into memory task list.
      *
      * @param data input data taken from command
      */
@@ -106,7 +109,7 @@ public class Storage {
     }
 
     /**
-     * Write tasks in TaskList into file.
+     * Writes tasks in TaskList into file.
      */
     public void writeFile() {
         try {

@@ -3,6 +3,10 @@ package soonwee.duke;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
+/**
+ * Represents a DateTimeComparator instance. It compares the time of a task
+ * with one another.
+ */
 public class DateTimeComparator implements Comparator<Task> {
 
 	@Override

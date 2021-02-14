@@ -1,7 +1,6 @@
 package soonwee.duke;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class TimedTask extends Task {
 	protected LocalDateTime dateTime;

@@ -1,6 +1,5 @@
 package soonwee.duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,12 +11,15 @@ public class TaskList {
 
     public ArrayList<Task> tasksList;
 
+    /**
+     * Instantiates a TaskList instance.
+     */
     public TaskList(){
         this.tasksList = new ArrayList<>();
     }
 
     /**
-     * Set a certain task to be done.
+     * Sets a certain task to be done.
      *
      * @param index task number
      */
@@ -37,15 +39,31 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Adds a new Task to the task List.
+     *
+     * @param newTask new Task
+     */
     public void addTask(Task newTask){
         tasksList.add(newTask);
     }
 
+    /**
+     * Gets size of task list.
+     *
+     * @return size of task list
+     */
     public int getSize() {
         return this.tasksList.size();
     }
 
 
+    /**
+     * Gets task at the certain index.
+     *
+     * @param index index of task
+     * @return task at that index
+     */
     public Task getTask(int index){
         return tasksList.get(index);
     }
@@ -111,6 +129,12 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Displays tasks from the task List.
+     *
+     * @return output from tasklist.
+     */
+
     public String displayTasks() {
         String result = new String();
         if (tasksList.size() == 0) {
@@ -124,6 +148,12 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Sorts the task list by its datetime. Task with earliest time will be displayed first, tasks with no time
+     * will be displayed after all tasks with time.
+     *
+     * @return sorted output of tasks
+     */
     public String sortTaskListByDateTime() {
         ArrayList<Task> temporaryTimeList = new ArrayList<>(); //To Store items with dates
         ArrayList<Task> toDoList = new ArrayList<>(); //To store temporary ToDoList

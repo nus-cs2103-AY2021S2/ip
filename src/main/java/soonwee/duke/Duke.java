@@ -9,6 +9,7 @@ public class Duke {
 
     static final int DONE_INDEX = 5; //Read from index 5 of string.
     static final int DELETE_INDEX = 7; //Read from index 7 of string.
+
     /**
      * Initializes the input by checking the front command and performing
      * their required actions.
@@ -21,17 +22,17 @@ public class Duke {
         Storage storage = new Storage("data\\tasks.txt");
         if (input.equals("list")) {
             result = storage.taskList.displayTasks();
-        } else if (input.contains("done")) {
+        } else if (input.startsWith("done")) {
             int index = Integer.parseInt(input.substring(DONE_INDEX));
             result = storage.taskList.setTaskDone(index);
             storage.writeFile();
-        } else if (input.contains("delete")) {
+        } else if (input.startsWith("delete")) {
             int index = Integer.parseInt(input.substring(DELETE_INDEX));
             result = storage.taskList.removeTask(index);
             storage.writeFile();
-        } else if (input.contains("find")) {
+        } else if (input.startsWith("find")) {
             String text = new Parser().getSearchWord(input);
-            if(text.contains("Invalid:")) {
+            if(text.startsWith("Invalid:")) {
                 return text;
             }
             result = storage.taskList.searchRelatedText(text) + "\n";
