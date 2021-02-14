@@ -32,8 +32,10 @@ public class ToDoCommand extends Command {
 
     public TaskList execute() {
         TaskList taskList = this.getTaskList();
+        int initialSize = taskList.size();
         Todo todo = new Todo(this.taskDescription);
         taskList = taskList.add(todo);
+        assert(initialSize + 1 == taskList.size()); // ensure that todo is properly added
         return taskList;
     }
 
@@ -41,7 +43,7 @@ public class ToDoCommand extends Command {
         String message = "Got it. I've added this task:\n";
         Todo todo = new Todo(this.taskDescription);
         message += todo.toString() + "\n";
-        message += "Now you have " + this.getTaskList().size() + " tasks in the list.";
+        message += "Now you have " + (this.getTaskList().size() + 1) + " tasks in the list.";
         return message;
     }
 }
