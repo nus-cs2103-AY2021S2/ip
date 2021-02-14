@@ -3,6 +3,7 @@ package duke.utils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -92,7 +93,11 @@ public class Parser {
         }
     }
 
-    private Command prepareToDo(String[] commandAndInput) {
+    private Command prepareToDo(String[] commandAndInput) throws EmptyArgumentException {
+        if (commandAndInput.length == 1) {
+            throw new EmptyArgumentException(INVALID_TASK_MSG);
+        }
+
         assert commandAndInput.length == 2;
 
         return new ToDoCommand(this.taskList, this.storage, commandAndInput[1]);

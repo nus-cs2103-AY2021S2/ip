@@ -1,6 +1,11 @@
 package duke.window;
 
 import duke.Duke;
+import duke.commands.ByeCommand;
+import duke.dukeexceptions.DukeException;
+import duke.dukeexceptions.InvalidFileTaskTypeException;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.FileNotFoundException;
+import java.util.Locale;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -22,6 +33,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Stage stage;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -31,17 +43,31 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke duke) {
+    public void setDuke(Duke duke, Stage stage) {
         this.duke = duke;
+        this.stage = stage;
     }
 
     /**
      * Creates and displays a DialogBox with introduction message from Duke.
      */
     public void displayDukeIntroduction() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.introduction(), dukeImage)
-        );
+        try {
+            String introductionMessage = duke.introduction();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(introductionMessage, dukeImage)
+            );
+        } catch (FileNotFoundException e) {
+            String cannotAccessFileMsg = "Cannot access file at specified location.\n" + e.getMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog("Error! " + cannotAccessFileMsg, dukeImage)
+            );
+        } catch (InvalidFileTaskTypeException e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog("Error! " + e.getMessage(), dukeImage)
+            );
+        }
+
     }
 
     /**
@@ -50,12 +76,28 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+        String input = userInput.getText().toLowerCase(Locale.ROOT);
+
+        try {
+            String response = duke.getResponse(input);
+
+            if (input.equals(ByeCommand.COMMAND_WORD)) {
+                PauseTransition delay = new PauseTransition(Duration.seconds(5));
+                delay.setOnFinished(event -> stage.close());
+                delay.play();
+            }
+
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userInput.getText(), userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        } catch (DukeException e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userInput.getText(), userImage),
+                    DialogBox.getDukeDialog("Error! " + e.getMessage(), dukeImage)
+            );
+        } finally {
+            userInput.clear();
+        }
     }
 }

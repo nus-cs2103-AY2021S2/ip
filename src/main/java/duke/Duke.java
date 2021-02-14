@@ -18,40 +18,28 @@ public class Duke {
     /**
      * Gets input from the user via the GUI and processes it.
      */
-    public String getResponse(String input) {
-        try {
-            Parser parser = new Parser(taskList, STORAGE);
-            Command command = parser.parse(input);
-            String response = command.execute();
-            return response;
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
+    public String getResponse(String input) throws DukeException {
+        Parser parser = new Parser(taskList, STORAGE);
+        Command command = parser.parse(input);
+        String response = command.execute();
+        return response;
     }
 
     /**
      * Initialises Duke by populating taskList with Tasks stored in local storage file.
-     *
      * @return message indicating status of file load.
+     * @throws FileNotFoundException when file does not exist.
+     * @throws InvalidFileTaskTypeException when an entry in the file has errors.
      */
-    public String introduction() {
-        try {
-            String msg = "Hello! I'm Duke.\n";
-            taskList = STORAGE.loadFromFile();
+    public String introduction() throws FileNotFoundException, InvalidFileTaskTypeException {
+        String msg = "Hello! I'm Duke.\n";
+        taskList = STORAGE.loadFromFile();
 
-            if (taskList.getList().size() == 0) {
-                msg += "You have no existing tasks!";
-            } else {
-                msg += "You have existing tasks! \nEnter 'list' to see your list of tasks!";
-            }
-            return msg;
-        } catch (FileNotFoundException e) {
-            taskList = new TaskList();
-            String cannotAccessFileMsg = "Cannot access file at specified location.\n" + e.getMessage();
-            return cannotAccessFileMsg;
-        } catch (InvalidFileTaskTypeException e) {
-            String errMsg = e.getMessage();
-            return errMsg;
+        if (taskList.getList().size() == 0) {
+            msg += "You have no existing tasks!";
+        } else {
+            msg += "You have existing tasks! \nEnter 'list' to see your list of tasks!";
         }
+        return msg;
     }
 }
