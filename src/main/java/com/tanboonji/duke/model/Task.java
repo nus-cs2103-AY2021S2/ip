@@ -17,11 +17,11 @@ public class Task implements Serializable {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : " ");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**

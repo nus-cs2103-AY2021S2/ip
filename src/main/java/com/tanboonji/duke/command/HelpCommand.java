@@ -8,16 +8,16 @@ public class HelpCommand extends Command {
     /** String input to execute this command */
     public static final String COMMAND = "help";
     /** Command list for help message */
-    public static final String COMMAND_LIST = "\tCommands available:\n"
-            + "\t\t- list\n"
-            + "\t\t- find [keyword]\n"
-            + "\t\t- todo [description]\n"
-            + "\t\t- deadline [description] /by [deadline]\n"
-            + "\t\t- event [description] /at [datetime]\n"
-            + "\t\t- done [task number]\n"
-            + "\t\t- delete [task number]\n"
-            + "\t\t- help\n"
-            + "\t\t- bye\n";
+    public static final String COMMAND_LIST = "Commands available:\n"
+            + "\t- list\n"
+            + "\t- find [keyword]\n"
+            + "\t- todo [description]\n"
+            + "\t- deadline [description] /by [deadline]\n"
+            + "\t- event [description] /at [datetime]\n"
+            + "\t- done [task number]\n"
+            + "\t- delete [task number]\n"
+            + "\t- help\n"
+            + "\t- bye\n";
 
     /**
      * Default class constructor.

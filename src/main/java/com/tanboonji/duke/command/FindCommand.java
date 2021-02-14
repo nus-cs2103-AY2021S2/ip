@@ -10,8 +10,9 @@ public class FindCommand extends Command {
 
     /** String input to execute this command */
     public static final String COMMAND = "find";
-    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a keyword to search for.\n"
+    private static final String ERROR_MESSAGE = "Sorry, please enter a keyword to search for.\n"
             + "\tCommand: find [keyword]";
+
     private final String keyword;
 
     private FindCommand(String keyword) {

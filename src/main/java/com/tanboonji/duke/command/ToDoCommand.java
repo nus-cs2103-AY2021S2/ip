@@ -11,7 +11,7 @@ public class ToDoCommand extends Command {
 
     /** String input to execute this command */
     public static final String COMMAND = "todo";
-    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a description for the todo.\n"
+    private static final String ERROR_MESSAGE = "Sorry, please enter a description for the todo.\n"
             + "\tCommand: todo [description]";
     private final String description;
 
