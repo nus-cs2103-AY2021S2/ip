@@ -29,7 +29,7 @@ public class TaskList implements Serializable {
             return tasks.get(taskNumber - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskListIndexException("Exist in the task list, "
-                    + "this task does not!");
+                    + "one of the task numbers does not!");
         }
     }
 
@@ -51,6 +51,12 @@ public class TaskList implements Serializable {
         }
     }
 
+    public void markAllTasksAsDone() {
+        for (Task t : tasks) {
+            t.markAsDone();
+        }
+    }
+
     /**
      * Deletes a task from the list.
      * @param taskNumber Position of task in list.
@@ -67,6 +73,10 @@ public class TaskList implements Serializable {
                 tasks.remove(i);
             }
         }
+    }
+
+    public void deleteAllTasks() {
+        tasks.clear();
     }
 
     /**
@@ -93,7 +103,6 @@ public class TaskList implements Serializable {
      * @return TaskList containing tasks of the type requested or tasks with the
      * keyword requested.
      */
-    //Used streams and lambdas here!
     public TaskList filterByTask(String type) {
         if (type.equals("ToDo")) {
             return new TaskList(tasks
@@ -117,6 +126,10 @@ public class TaskList implements Serializable {
                     .filter(p -> p.toString().toLowerCase().contains(formattedType))
                     .collect(Collectors.toList()));
         }
+    }
+
+    public List<Task> getList() {
+        return tasks;
     }
 
     /**

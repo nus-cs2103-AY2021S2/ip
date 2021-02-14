@@ -23,6 +23,9 @@ public class ListCommand extends Command {
             throw new InvalidKeywordException("A valid keyword containing more than 2 characters, "
                     + "you must enter!");
         }
+        if (details.length != 2) {
+            throw new InvalidKeywordException("Only one KEYWORD, you must enter!");
+        }
         return taskList.filterByTask(keyword);
     }
 
