@@ -7,17 +7,14 @@ import prerthan.duke.command.Command;
  * command does not exist (i.e. the user command resolves to
  * {@link Command.CommandName#INVALID}.)
  */
-public class DukeInvalidCommandException extends DukeException
-{
-	private static final long serialVersionUID = 5862830938541195307L;
+public class DukeInvalidCommandException extends DukeException {
+    private static final long serialVersionUID = 5862830938541195307L;
 
-	public DukeInvalidCommandException(String command, String thrownBy)
-	{
-		super("Invalid command: " + command, thrownBy);
-	}
+    public DukeInvalidCommandException(String command, String thrownBy) {
+        super("Invalid command: " + command, thrownBy);
+    }
 
-	@Override public String toString()
-	{
-		return String.format("%s%nThrown by: %s", this.getMessage(), this.thrownBy);
-	}
+    @Override public String toString() {
+        return String.format("%s%nThrown by: %s", this.getMessage(), this.thrownBy);
+    }
 }

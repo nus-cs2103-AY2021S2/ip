@@ -12,15 +12,11 @@ import java.io.IOException;
 /**
  * Main
  */
-public class Main extends Application
-{
+public class Main extends Application {
     private Duke duke = new Duke();
-    
-    @Override
-    public void start(Stage stage)
-    {
-        try
-        {
+
+    @Override public void start(Stage stage) {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
@@ -28,8 +24,7 @@ public class Main extends Application
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
