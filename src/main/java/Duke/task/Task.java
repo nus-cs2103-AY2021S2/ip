@@ -9,7 +9,6 @@ package duke.task;
 public class Task {
     protected String msg;
     protected Boolean isDone;
-
     /**
      * Returns a Task.
      *
@@ -34,11 +33,22 @@ public class Task {
     }
 
     /**
+     * @param task
+     * @return boolean
+     */
+    public boolean equals(Task task) {
+        boolean a = this.isDone.equals(task.getDone());
+        boolean b = this.msg.equals(task.getMsg());
+        return a && b;
+    }
+
+    /**
      * Returns a Task that set boolean isDone as true.
      *
      * @return Task Marks Task as done.
      */
     public Task setDone() {
+        System.out.println("task set done");
         return new Task(this.msg, true);
     }
 
@@ -46,6 +56,9 @@ public class Task {
         return msg;
     }
 
+    public Boolean getDone() {
+        return isDone;
+    }
     /**
      * Encodes Task to string format for storage.
      *

@@ -74,10 +74,31 @@ public class TaskList {
             default:
                 throw new InvalidTypeOfTask();
             }
-            tasks.add(newTask);
-            String instructions = Response.ADD.toString() + newTask + "\n" + this.status();
-            enclose(instructions);
+            // check for duplicate task input
+            if (!detectDuplicates(newTask)) {
+                tasks.add(newTask);
+                String instructions = Response.ADD.toString() + newTask + "\n" + this.status();
+                enclose(instructions);
+            }
         }
+    }
+
+    /**
+     * Checks for duplicate task input.
+     *
+     * @param newTask
+     * @return isDuplicate
+     */
+    public Boolean detectDuplicates(Task newTask) {
+        Boolean isDuplicate = false;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).equals(newTask)) {
+                isDuplicate = true;
+                System.out.println("Input already exists. Please try again");
+                break;
+            }
+        }
+        return isDuplicate;
     }
 
     /**
@@ -101,7 +122,7 @@ public class TaskList {
      * @param p
      * @throws EmptyDescription
      */
-    public void markAsDone(Parser p) throws EmptyDescription {
+    public void markAsDone(Parser p) {
         try {
             if (p.getDescription().equals("")) {
                 throw new EmptyDescription(p.getTypeOfTask());
