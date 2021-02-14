@@ -1,17 +1,4 @@
 import command.Command;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import nodes.DialogBox;
 import task.TaskManager;
 import util.DukeException;
 import util.Parser;
@@ -46,29 +33,23 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            String message;
-            boolean shouldQuit = false;
-            try {
-                Command c = Parser.parseCommand(userInput);
-                c.execute(taskManager);
-                message = c.getMessage();
-                if (c.isQuitCommand()) {
-                    shouldQuit = true;
-                }
-            } catch (DukeException e) {
-                message = e.getMsg();
-            }
+            String message = respondToInput(userInput);
             Ui.printOutput(message);
 
-            try {
-                storage.writeTaskManager(taskManager);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+            boolean shouldQuit = decideToQuit(userInput);
 
             if (shouldQuit) {
                 break;
             }
+        }
+    }
+
+    public boolean decideToQuit(String input) {
+        try {
+            Command c = Parser.parseCommand(input);
+            return c.isQuitCommand();
+        } catch (DukeException e) {
+            return false; // Parser did not successfully detect a QuitCommand;
         }
     }
 

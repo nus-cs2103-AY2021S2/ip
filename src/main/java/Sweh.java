@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,7 +23,6 @@ public class Sweh extends Application {
     private Scene scene;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
 
     @Override
     public void start(Stage stage) {
@@ -107,6 +107,11 @@ public class Sweh extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        boolean shouldQuit = duke.decideToQuit(userInput.getText());
+        if (shouldQuit) {
+            Platform.exit();
+        }
+
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
