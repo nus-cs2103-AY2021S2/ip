@@ -38,6 +38,28 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    /**
+     * @param task
+     * @return
+     */
+    @Override
+    public boolean equals(Task task) {
+        if (task instanceof Event) {
+            Event event = (Event) task;
+            boolean a = this.isDone.equals(event.getDone());
+            boolean b = this.msg.equals(event.getMsg());
+            boolean c = this.getTime().equals(event.getTime());
+            return a && b && c;
+        } else {
+            return false;
+        }
+    }
+
+
     /**
      * Returns an Event that set boolean isDone as true.
      *
@@ -45,6 +67,7 @@ public class Event extends Task {
      */
     @Override
     public Event setDone() {
+        System.out.println("event set done");
         return new Event(this.msg, true, this.time);
     }
 
@@ -53,6 +76,7 @@ public class Event extends Task {
      *
      * @return String
      */
+    @Override
     public String encode() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return "E" + "|" + super.encode() + "|" + time.format(formatter);

@@ -36,13 +36,29 @@ public class Todo extends Task {
      */
     @Override
     public Todo setDone() {
+        System.out.println("Todo set done");
         return new Todo(this.msg, true);
     }
 
+    @Override
     public String encode() {
         return "T" + "|" + super.encode();
     }
-
+    /**
+     * @param task
+     * @return
+     */
+    @Override
+    public boolean equals(Task task) {
+        if (task instanceof Todo) {
+            Todo todo = (Todo) task;
+            boolean a = this.isDone.equals(todo.getDone());
+            boolean b = this.msg.equals(todo.getMsg());
+            return a && b;
+        } else {
+            return false;
+        }
+    }
     /**
      * Returns a String that describes Todo.
      *

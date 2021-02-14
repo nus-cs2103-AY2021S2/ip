@@ -38,12 +38,38 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns time deadline of Deadline.
+     *
+     * @return
+     */
+    public LocalDateTime getTime() {
+        return by;
+    }
+    /**
+     * @param task
+     * @return
+     */
+    @Override
+    public boolean equals(Task task) {
+        if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            boolean a = this.isDone.equals(deadline.getDone());
+            boolean b = this.msg.equals(deadline.getMsg());
+            boolean c = this.getTime().equals(deadline.getTime());
+            return a && b && c;
+        } else {
+            return false;
+        }
+    }
+    /**
      * Returns a Deadline that set boolean isDone as true.
      *
      * @return Deadline marked as done.
      */
     @Override
     public Deadline setDone() {
+        System.out.println("deadline set done");
+
         return new Deadline(this.msg, true, this.by);
     }
 
@@ -52,6 +78,7 @@ public class Deadline extends Task {
      *
      * @return String
      */
+    @Override
     public String encode() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return "D" + "|" + super.encode() + "|" + by.format(formatter);
