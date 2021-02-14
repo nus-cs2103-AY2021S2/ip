@@ -1,0 +1,6 @@
+#textOutput{
+    -fx-control-inner-background: black;
+    -fx-font-family: Consolas;
+    -fx-text-fill: #00ff00;
+    -fx-font-size: 14;
+}
