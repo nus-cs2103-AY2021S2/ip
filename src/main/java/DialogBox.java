@@ -1,3 +1,7 @@
+package duke.javafx;
+
+import duke.javafx.MainWindow;
+
 import java.io.IOException;
 import java.util.Collections;
 

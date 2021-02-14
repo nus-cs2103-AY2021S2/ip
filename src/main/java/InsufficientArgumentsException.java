@@ -1,3 +1,5 @@
+package duke.parser;
+
 /**
  * InsufficientArgumentsException is raised when the user gives less command than required
  */

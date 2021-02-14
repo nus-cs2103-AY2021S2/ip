@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.tasks.Task;
+
 /**
  * Todo is a Task object that does not have a due date
  */

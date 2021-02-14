@@ -1,3 +1,5 @@
+package duke.tasks;
+
 /**
  * Task is a parent class for inheriting by specific tasks
  */

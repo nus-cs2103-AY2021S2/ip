@@ -1,3 +1,5 @@
+package duke.parser;
+
 /**
  * WrongArgumentsException is raised when the user gives invalid commands
  */

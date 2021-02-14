@@ -1,5 +1,4 @@
 E | 1 | play | 2021-05-17
-T | 0 | read books
-D | 1 | project submission | 2021-03-09
-E | 1 | project meeting | 2021-02-01
-T | 0 | return books
+T | 1 | read books
+D | 0 | submit homework | 2021-03-15
+T | 0 | study

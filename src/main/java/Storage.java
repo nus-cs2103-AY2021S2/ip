@@ -1,3 +1,13 @@
+package duke.storage;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+import duke.tasks.DueDate;
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -23,8 +33,8 @@ public class Storage {
         File file = new File(this.filePath);
         Scanner fileScanner = new Scanner(file);
         while (fileScanner.hasNext()) {
-            String curRecTask = fileScanner.nextLine();
-            String[] items = curRecTask.split(" \\| ");
+            String currentTask = fileScanner.nextLine();
+            String[] items = currentTask.split(" \\| ");
             boolean done = (items[1].equals("1") ? true : false);
             Task temp = new Todo(items[2]);
             if (items[0].equals("E")) {
@@ -46,26 +56,26 @@ public class Storage {
         ArrayList<Task> store = tasks.getList();
         try {
             FileWriter fw = new FileWriter(this.filePath);
-            for (Task t : store) {
+            for (Task task : store) {
                 String rmb = "";
-                if (t instanceof Event) {
+                if (task instanceof Event) {
                     rmb += "E";
-                } else if (t instanceof Deadline) {
+                } else if (task instanceof Deadline) {
                     rmb += "D";
-                } else if (t instanceof Todo) {
+                } else if (task instanceof Todo) {
                     rmb += "T";
                 }
                 rmb += " | ";
-                if (t.isCompleted()) {
+                if (task.isCompleted()) {
                     rmb += "1";
                 } else {
                     rmb += "0";
                 }
                 rmb += " | ";
-                rmb += t.getDescription();
-                if (t instanceof DueDate) {
+                rmb += task.getDescription();
+                if (task instanceof DueDate) {
                     rmb += " | ";
-                    rmb += ((DueDate) t).getDueDate();
+                    rmb += ((DueDate) task).getDueDate();
                 }
                 fw.write(rmb + "\n");
             }
