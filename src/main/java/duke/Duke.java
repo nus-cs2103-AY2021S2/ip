@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-import duke.controller.MainWindow;
 import duke.exceptions.EmptyTaskDukeException;
 import duke.parser.Parser;
 import duke.task.Task;
@@ -26,14 +25,6 @@ public class Duke {
         this.ui = new Ui(new Scanner(System.in));
         // loads the internal storage tasks into task list of program
         this.taskList = storage.load();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 
     /**

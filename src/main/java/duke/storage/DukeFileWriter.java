@@ -3,7 +3,6 @@ package duke.storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
 import duke.ui.Ui;
 
 import java.io.FileWriter;
@@ -26,33 +25,35 @@ public class DukeFileWriter {
             for (int i = 0; i < taskList.size(); i++) {
                 String currentLine = "";
                 Task task = taskList.get(i);
-                if (task instanceof Event) {
-                    currentLine += "E|";
-                } else if (task instanceof Todo) {
-                    currentLine += "T|";
-                } else if (task instanceof Deadline) {
-                    currentLine += "D|";
-                }
-                if (task.getIsTaskCompleted()) {
-                    currentLine += "1|";
-                } else {
-                    currentLine += "0|";
-                }
-                currentLine += task.getTaskName();
-                if (task instanceof Event) {
-                    currentLine += "|" + ((Event) task).getDueAt();
-                } else if (task instanceof Deadline) {
-                    currentLine += "|" + ((Deadline) task).getDueBy();
-                }
-                if (i < taskList.size() - 1) {
-                    toBeSavedTaskListString += currentLine + "\n";
-                } else {
-                    toBeSavedTaskListString += currentLine;
-                }
+                currentLine += task.getFileWriterIdentifier()
+                        + getTaskCompletedStringIndicator(task)
+                        + task.getTaskName()
+                        + getTaskDate(task);
+                toBeSavedTaskListString = (i < taskList.size() - 1)
+                        ? toBeSavedTaskListString + currentLine + "\n"
+                        : toBeSavedTaskListString + currentLine;
             }
             writeToFile(toBeSavedTaskListString, filePath);
         } catch (IOException e) {
             Ui.printError(e.getMessage());
+        }
+    }
+
+    private static String getTaskDate(Task task) {
+        if (task instanceof Event) {
+            return "|" + ((Event) task).getDueAt();
+        } else if (task instanceof Deadline) {
+            return "|" + ((Deadline) task).getDueBy();
+        } else {
+            return "";
+        }
+    }
+
+    private static String getTaskCompletedStringIndicator(Task task) {
+        if (task.getIsTaskCompleted()) {
+            return "1|";
+        } else {
+            return "0|";
         }
     }
 
