@@ -1,9 +1,12 @@
 package duke.controller;
 
+import java.time.LocalDate;
+
 import duke.Duke;
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.task.Task;
+import duke.tasklist.TaskList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,6 +27,10 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private ScrollPane reminderScrollPane;
+    @FXML
+    private VBox reminderContainer;
 
     private Duke duke;
 
@@ -33,15 +40,30 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        reminderScrollPane.vvalueProperty().bind(reminderContainer.heightProperty());
         showMessage("Welcome to Duke! What can I do for you today?");
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        TaskList taskList = duke.getTaskList();
+        showReminder("Reminders:");
+        showAllReminder(taskList);
     }
 
-    public void showMessage(String message) {
+    private void showMessage(String message) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
+    }
+
+    private void showReminder(String message) {
+        reminderContainer.getChildren().add(ReminderBox.getReminder(message));
+    }
+
+    private void showAllReminder(TaskList taskList) {
+        LocalDate currentDate = LocalDate.now();
+        for (Task task : taskList.getTaskList()) {
+            showReminder(task.toString());
+        }
     }
 
     /**

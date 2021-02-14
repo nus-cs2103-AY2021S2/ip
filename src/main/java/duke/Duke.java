@@ -28,6 +28,10 @@ public class Duke {
         this.taskList = storage.load();
     }
 
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
