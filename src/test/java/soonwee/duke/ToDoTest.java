@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ToDoTest {
 	@Test
-	public void createToDo() {
+	public void createToDo_success() {
 		ToDo result = new ToDo("Sleep");
 		assertEquals("[T][ ] Sleep", result.toString());
 	}
