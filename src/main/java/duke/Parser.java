@@ -23,7 +23,7 @@ public class Parser {
      * Process the user input provided by the UI.
      *
      * @throws IOException
-     * @throws InvalidCommandException for unrecognised commands.
+     * @throws InvalidCommandException for unrecognised/invalid commands.
      * @throws ParseException for invalid date input.
      */
     public String process(String command) throws IOException {
