@@ -21,15 +21,3 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
-   
-## Message regarding the ordering of tags
-
-Hi Prof, TAs and friends,
-
-If you happen to be wandering why are the ordering of tags for the first 10 tags (speciafically level-2, level-4, A-textUI-test) messy and not at an incremental way, please let me explain.
-
-I did develop the levels at an incremental way and commited accordingly as reflected in the commit history. However, I made some mistakes by tagging the commit on the respective branches where I developed level-2 and level-4 and A-textUI-test. Thus, after I merged these branches and deleted them, some of the tags are not captured by the plugin to capture iP progress.
-
-As such, I decided to remove the old and incorrect tags and retagged those commits. A side effect is that the tags are now showing in a messy ordering.
-
-Hope you can understand and have a nice day:)
