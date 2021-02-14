@@ -63,11 +63,11 @@ deadline <deadline_name> /by <time>
 #### `event` &mdash; Add an Event
 Add an event. The `time` parameter should follow the format specified at `Guide format and input restrictions`.
 ```
-event <event)name> /at <time>
+event <event_name> /at <time>
 ```
 
 #### `bye` &mdash; Exit app
 Exits the app. Duke will save your tasks so you do not need to re-enter them when you next launch Duke
 ```
-$ bye
+bye
 ```
