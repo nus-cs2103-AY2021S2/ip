@@ -1,30 +1,30 @@
 --------------------------------
-Bonjour! I'm Snom! *squish*
-Try giving me some commands, I might be able to do something!
+Bonjour! I'm snom.model.Snom! *squish*
+Try giving me some snom.logic.commands, I might be able to do something!
 [type 'bye' to exit program]
 --------------------------------
 --------------------------------
 Got it. I've added this task:
 	[T][ ] borrow book
-Now you have 1 tasks in the list.
+Now you have 1 snom.model.task in the list.
 --------------------------------
 --------------------------------
 Got it. I've added this task:
 	[T][ ] read book
-Now you have 2 tasks in the list.
+Now you have 2 snom.model.task in the list.
 --------------------------------
 --------------------------------
 Got it. I've added this task:
 	[D][ ] return book (by: Mon 25 Jan 2021 12:00am)
-Now you have 3 tasks in the list.
+Now you have 3 snom.model.task in the list.
 --------------------------------
 --------------------------------
 Got it. I've added this task:
 	[E][ ] meeting (at: Sat 30 Jan 2021 07:00pm)
-Now you have 4 tasks in the list.
+Now you have 4 snom.model.task in the list.
 --------------------------------
 --------------------------------
-Here are the tasks in your list:
+Here are the snom.model.task in your list:
 1. [T][ ] borrow book
 2. [T][ ] read book
 3. [D][ ] return book (by: Mon 25 Jan 2021 12:00am)
@@ -55,7 +55,7 @@ Great Job! I've marked this task(s) as finish:
 	[E][✓] meeting (at: Sat 30 Jan 2021 07:00pm)
 --------------------------------
 --------------------------------
-Here are the tasks in your list:
+Here are the snom.model.task in your list:
 1. [T][✓] borrow book
 2. [T][ ] read book
 3. [D][✓] return book (by: Mon 25 Jan 2021 12:00am)
@@ -69,7 +69,7 @@ Noted, I've removed this task(s)
 	[D][✓] return book (by: Mon 25 Jan 2021 12:00am)
 --------------------------------
 --------------------------------
-Here are the tasks in your list:
+Here are the snom.model.task in your list:
 1. [T][✓] borrow book
 2. [T][ ] read book
 3. [E][✓] meeting (at: Sat 30 Jan 2021 07:00pm)
@@ -80,7 +80,7 @@ Noted, I've removed this task(s)
 	[E][✓] meeting (at: Sat 30 Jan 2021 07:00pm)
 --------------------------------
 --------------------------------
-Here are the tasks in your list:
+Here are the snom.model.task in your list:
 1. [T][ ] read book
 --------------------------------
 --------------------------------
