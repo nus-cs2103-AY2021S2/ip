@@ -16,6 +16,6 @@ public class DukeException extends Exception {
 
     @Override public String toString()
     {
-        return String.format("Message: %s%nStack trace: %s%n", this.getMessage(), getStackTrace());
+        return String.format("Message: %s%nStack trace: %s", this.getMessage(), getStackTrace());
     }
 }

@@ -12,6 +12,6 @@ public class DukeInvalidDateException extends DukeException {
 
     @Override public String toString()
     {
-        return String.format("%s%nThrown by: %s%n", this.getMessage(), this.thrownBy);
+        return String.format("%s%nThrown by: %s", this.getMessage(), this.thrownBy);
     }
 }

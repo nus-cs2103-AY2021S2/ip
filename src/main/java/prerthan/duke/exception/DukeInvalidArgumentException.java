@@ -12,8 +12,8 @@ public class DukeInvalidArgumentException extends DukeException
 	private CommandName cmdName;
 	private String argumentString;
 
-	public DukeInvalidArgumentException(String message,
-										String thrownBy)
+	public DukeInvalidArgumentException(String message, String[] arguments, CommandName command,
+			String thrownBy)
 	{
 		super(message, thrownBy);
 		this.argumentString = String.join(" ", arguments);
@@ -22,7 +22,7 @@ public class DukeInvalidArgumentException extends DukeException
 
 	@Override public String toString()
 	{
-		return String.format("%s%nCommand: %s%nArguments: %s%nThrown by: %s%n", this.getMessage(),
+		return String.format("%s%nCommand: %s%nArguments: %s%nThrown by: %s", this.getMessage(),
 				this.cmdName, this.argumentString, this.thrownBy);
 	}
 }
