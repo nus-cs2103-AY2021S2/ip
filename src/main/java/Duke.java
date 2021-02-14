@@ -25,7 +25,10 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return this.parser.process(input);
+            String reply;
+            reply = this.parser.process(input);
+            assert reply.length() != 0 : "Bot should always reply to every user input";
+            return reply;
         } catch (DukeException err) {
             return err.getMessage();
         }
