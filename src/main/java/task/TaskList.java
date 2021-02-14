@@ -17,30 +17,35 @@ public class TaskList {
 
     /**
      * Constructs a TaskList wrapper object.
+     *
      * @param tasks Array of tasks to wrap around.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+
     /**
      * Lists tasks to the standard output.
+     *
      * @param ui Ui object to write a response to
      */
     public void listTasks(Ui ui) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            builder.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
-        }
-        ui.setResponse(builder.toString().trim());
+        listTasks(tasks, ui);
     }
 
     /**
      * Lists tasks to the standard input with a custom list.
+     *
      * @param customTaskList custom list of tasks to print.
-     * @param ui Ui object to write a response to
+     * @param ui             Ui object to write a response to
      */
     public static void listTasks(List<Task> customTaskList, Ui ui) {
+        if (customTaskList.size() < 1) {
+            ui.setResponse("You have no tasks in your list. Try adding one!");
+            return;
+        }
+
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < customTaskList.size(); i++) {
             builder.append(String.format("%d. %s\n", i + 1, customTaskList.get(i).toString()));
@@ -50,6 +55,7 @@ public class TaskList {
 
     /**
      * Lists sorted tasks to the Ui object provided
+     *
      * @param ui Ui object to write a response to
      */
     public void listTasksSorted(Ui ui) {
@@ -60,8 +66,9 @@ public class TaskList {
 
     /**
      * Adds a Todo.
+     *
      * @param commands Commands parsed by the parser.
-     * @param ui Ui object to write a response to
+     * @param ui       Ui object to write a response to
      * @throws DukeException If todo is not formatted properly.
      */
     public void addTodo(HashMap<String, String> commands, Ui ui) throws DukeException {
@@ -79,8 +86,9 @@ public class TaskList {
 
     /**
      * Adds an Event.
+     *
      * @param commands Commands parsed by the parser.
-     * @param ui Ui object to write a response to
+     * @param ui       Ui object to write a response to
      * @throws DukeException If Event is not formatted properly.
      */
     public void addEvent(HashMap<String, String> commands, Ui ui) throws DukeException {
@@ -98,10 +106,12 @@ public class TaskList {
         ui.setResponse(String.format("Added a deadline for you:\n%s\n%s",
                 eventTask.toString(), getNumberOfTasksString(tasks)));
     }
+
     /**
      * Adds an Deadline.
+     *
      * @param commands Commands parsed by the parser.
-     * @param ui Ui object to write a response to
+     * @param ui       Ui object to write a response to
      * @throws DukeException If Deadline is not formatted properly.
      */
     public void addDeadline(HashMap<String, String> commands, Ui ui) throws DukeException {
@@ -123,8 +133,9 @@ public class TaskList {
 
     /**
      * Deletes a task
+     *
      * @param commands Commands parsed by the parser.
-     * @param ui Ui object to write a response to
+     * @param ui       Ui object to write a response to
      * @throws DukeException If Delete command is not formatted properly.
      */
     public void deleteTask(HashMap<String, String> commands, Ui ui) throws DukeException {
@@ -152,6 +163,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
+     *
      * @param commands Commands parsed by the parser.
      * @throws DukeException If "mark as done" command is not formatted properly.
      */
@@ -178,6 +190,7 @@ public class TaskList {
 
     /**
      * Finds tasks that match a given string
+     *
      * @param commands Commands parsed by the parser.
      * @throws DukeException If find command is not formatted properly.
      */
@@ -200,6 +213,7 @@ public class TaskList {
 
     /**
      * Returns a formatted string indicating how many tasks are in the list.
+     *
      * @param tasks List of tasks to count.
      * @return A string formatted to indicated how many tasks are in the list.
      */
@@ -209,6 +223,7 @@ public class TaskList {
 
     /**
      * Writes tasks to the given datastorage object.
+     *
      * @param storage DataStorage object to persist the tasks to.
      */
     public void persist(DataStorage storage) {
