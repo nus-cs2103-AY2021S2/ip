@@ -1,21 +1,13 @@
-import util.Formatter;
-import util.Storage;
+package task;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import util.Formatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static util.Parser.getArgMap;
-import static util.Parser.getCommand;
-
-public class TaskList {
+public class TaskManager {
     private final ArrayList<Task> taskList;
 
-    public TaskList() {
+    public TaskManager() {
         this.taskList = new ArrayList<>();
     }
 
@@ -23,16 +15,18 @@ public class TaskList {
         return "\nNow you have " + taskList.size() + " task(s) in your list";
     }
 
-    public ArrayList<Task> getTaskList() {
+    public List<Task> getTasks() {
         return this.taskList;
+    }
+
+    public int size() {
+        return this.taskList.size();
     }
 
     public String addTask(Task task) {
         taskList.add(task);
 
-        saveToDisk();
-
-        return "Gotcha. I've added the task: \n    "
+        return "Gotcha. I've added the task: \n"
                 + task
                 + taskCountMsg();
     }
@@ -61,8 +55,6 @@ public class TaskList {
             throw new IndexOutOfBoundsException("Please enter a number within the list.");
         }
 
-        saveToDisk();
-
         return "Nice, another job well done!\n"
                 + taskList.get(position).toString();
     }
@@ -80,8 +72,6 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Please enter a number within the list.");
         }
-
-        saveToDisk();
 
         return "I've removed the task:\n"
                 + taskToRemove.toString()
@@ -109,52 +99,9 @@ public class TaskList {
         );
     }
 
-    public boolean saveToDisk() {
-        StringBuilder saveLines = new StringBuilder();
-        for (Task t : taskList) {
-            saveLines.append(t.toSaveFormat()).append('\n');
-        }
-
-        try {
-            Storage.writeToFile(saveLines.toString());
-        } catch (IOException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public boolean readFromDisk() {
-        File file;
-        Scanner sc;
-        try {
-            file = Storage.getFile();
-            sc = new Scanner(file);
-        } catch (IOException e) {
-            return false;
-        }
-
-        while (sc.hasNextLine()) {
-            String saveLine = sc.nextLine();
-            String command = getCommand(saveLine);
-            HashMap<String, String> argMap = getArgMap(saveLine);
-            Task newTask;
-
-            switch (command) {
-                case ToDo.COMMAND_STRING:
-                    newTask = ToDo.newInstance(argMap);
-                    break;
-                case Deadline.COMMAND_STRING:
-                    newTask = Deadline.newInstance(argMap);
-                    break;
-                default:
-                    newTask = Event.newInstance(argMap);
-                    break;
-            }
-
-            taskList.add(newTask);
-        }
-
-        return true;
+    public String toSaveString() {
+        return taskList.stream()
+                .map(t -> t.toSaveString())
+                .collect(Collectors.joining("\n"));
     }
 }

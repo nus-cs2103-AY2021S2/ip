@@ -1,11 +1,16 @@
 package util;
 
+import task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+
+import static util.Parser.*;
 
 public class Storage {
     public static String SAVE_PATH = "data/sweh.txt";
@@ -36,4 +41,43 @@ public class Storage {
         return file;
     }
 
+    public static TaskManager readTaskManager() throws IOException {
+        File file = getFile();
+        Scanner sc = new Scanner(file);
+        TaskManager taskManager = new TaskManager();
+
+        while (sc.hasNextLine()) {
+            String saveLine = sc.nextLine();
+            Task newTask = readTask(saveLine);
+            taskManager.addTask(newTask);
+        }
+
+        return taskManager;
+    }
+
+    /**
+     * Supporting method for readTaskManager. Converts a saveString into a Task
+     * @param saveString SaveString representing the Task saved in disk.
+     * @return Task that was represented by the saveString
+     */
+    private static Task readTask(String saveString) {
+        HashMap<String, List<String>> commandMap = parseCommandMap(saveString);
+        String command = extractCommandString(commandMap);
+        switch (command) {
+            case Todo.COMMAND_STRING:
+                return Todo.fromSaveString(saveString);
+            case Deadline.COMMAND_STRING:
+                return Deadline.fromSaveString(saveString);
+            case Event.COMMAND_STRING:
+                return Event.fromSaveString(saveString);
+            default:
+                assert false; // Internal save and parse error in Storage
+                return null;
+        }
+    }
+
+    public static void writeTaskManager(TaskManager taskManager) throws IOException {
+        String saveString = taskManager.toSaveString();
+        writeToFile(saveString);
+    }
 }

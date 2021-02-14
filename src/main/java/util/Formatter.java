@@ -1,6 +1,8 @@
 package util;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface Formatter {
     static String formatOut(String output) {
@@ -26,5 +28,12 @@ public interface Formatter {
 
     static String formatList(List<String> strList) {
         return formatList(strList.toArray(new String[]{}));
+    }
+
+    static String addIndent(String string) {
+        String[] strings = string.split("\n");
+        return Arrays.asList(strings).stream()
+                .map(s -> '\t' + s)
+                .collect(Collectors.joining());
     }
 }

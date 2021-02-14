@@ -1,7 +1,10 @@
+package task;
+
+import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class Task {
-    protected static final char saveDelimiter = '|';
     private final String description;
     private boolean isDone;
 
@@ -13,6 +16,10 @@ public abstract class Task {
     public Task(String desc, boolean isDone) {
         this.description = desc;
         this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void markDone() {
@@ -27,19 +34,9 @@ public abstract class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String toSaveFormat() {
-        StringBuilder savedString = new StringBuilder();
-        savedString.append(commandString());
-        savedString.append(" ");
-        savedString.append(description);
-        savedString.append((isDone ? "/done " : ""));
+    public abstract TaskType getTaskType();
 
-        saveArgs().forEach((k, v) -> savedString.append("/").append(k).append(" ").append(v));
+    public abstract String getCommandString();
 
-        return savedString.toString();
-    }
-
-    protected abstract HashMap<String, String> saveArgs();
-
-    public abstract String commandString();
+    public abstract String toSaveString();
 }

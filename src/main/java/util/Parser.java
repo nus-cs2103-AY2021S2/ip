@@ -1,18 +1,39 @@
 package util;
 
+import command.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public interface Parser {
-    String COMMAND = "COMMAND_FLAG_IDENTIFIER";
+    String COMMAND_FLAG = "COMMAND_FLAG_IDENTIFIER";
 
-    static HashMap<String, List<String>> parseCommand(String input) {
+    static Command parseCommand(String input) throws DukeException {
+        HashMap<String, List<String>> commandMap = parseCommandMap(input);
+
+        String commandFlag = commandMap.get(COMMAND_FLAG).get(0);
+
+        switch (commandFlag) {
+            case ListCommand.COMMAND:
+                return ListCommand.fromCommandMap(commandMap);
+            case TodoCommand.COMMAND:
+                return TodoCommand.fromCommandMap(commandMap);
+            case DeadlineCommand.COMMAND_STRING:
+                return DeadlineCommand.fromCommandMap(commandMap);
+            case EventCommand.COMMAND:
+                return EventCommand.fromCommandMap(commandMap);
+            default:
+                throw new DukeException("Sorry I didn't understand that");
+        }
+    }
+
+    static HashMap<String, List<String>> parseCommandMap(String input) {
         HashMap<String, List<String>> commandMap = new HashMap<>();
 
         // Insert COMMAND flag
         String command = input.split(" ", 2)[0];
-        commandMap.put(COMMAND, new ArrayList<>());
-        commandMap.get(COMMAND).add(command);
+        commandMap.put(COMMAND_FLAG, new ArrayList<>());
+        commandMap.get(COMMAND_FLAG).add(command);
 
         // Insert other flags
         String[] flagInputs = input.split("/");
@@ -42,36 +63,32 @@ public interface Parser {
         return commandMap;
     }
 
-    static String getCommand(String input) {
-        return input.split(" ", 2)[0];
+    static String extractCommandString(HashMap<String, List<String>> commandMap) {
+        return commandMap.get(COMMAND_FLAG).get(0);
     }
 
-    static HashMap<String, String> getArgMap(String input) throws InputMismatchException {
-        HashMap<String, String> argMap = new HashMap<>();
+    static String commandMapToString(HashMap<String, List<String>> commandMap) {
+        List<String> results = new ArrayList<>();
 
-        if (input.split(" ").length < 2) {
-            return argMap;
+        String command = commandMap.get(COMMAND_FLAG).get(0);
+        List<String> descriptions = commandMap.get(command);
+        String description = descriptions.stream().collect(Collectors.joining(" "));
+
+        results.add(command + " " + description);
+
+        for (String k: commandMap.keySet()) {
+
+            // Skip adding the command flag
+            if (k.equals(COMMAND_FLAG)) continue;
+            // Skip the first command + description
+            if (k.equals(command)) continue;
+
+            List<String> args = commandMap.get(k);
+            String argString = args.stream().collect(Collectors.joining(" "));
+            results.add(k + " " + argString);
         }
 
-        String[] argArr = input.split("/");
-        for (int i = 0; i < argArr.length; i++) {
-            String flag;
-            String param;
-
-            if (i == 0) {
-                flag = "desc";
-            } else {
-                flag = argArr[i].split(" ", 2)[0];
-            }
-
-            try {
-                param = argArr[i].split(" ", 2)[1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InputMismatchException("Parameter for \"" + flag + "\" cannot be empty");
-            }
-            argMap.put(flag, param);
-        }
-        return argMap;
+        String result = results.stream().collect(Collectors.joining("/"));
+        return result;
     }
-
 }

@@ -1,6 +1,6 @@
 package util;
 
-public interface Ui {
+public class Ui {
     static String greeting() {
         String logo = " _____  _    _ _____ _   _ \n" +
                 "/  ___|| |  | |  ___| | | | \n" +
