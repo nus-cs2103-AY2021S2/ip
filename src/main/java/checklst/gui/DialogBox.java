@@ -15,13 +15,13 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(Label l, ImageView iv) {
-        text = l;
-        text.setFont(new Font("Arial", 14));
-        displayPicture = iv;
+        this.text = l;
+        this.text.setFont(new Font("Arial", 14));
+        this.displayPicture = iv;
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        this.text.setWrapText(true);
+        this.displayPicture.setFitWidth(100.0);
+        this.displayPicture.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
