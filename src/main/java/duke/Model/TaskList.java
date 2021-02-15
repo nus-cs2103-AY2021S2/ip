@@ -4,6 +4,7 @@ import duke.Exceptions.DukeOutOfBoundsException;
 import duke.Tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class TaskList implements Iterable<Task> {
      */
     public TaskList(List<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
+        Collections.sort(listOfTasks);
     }
 
     /**
@@ -43,6 +45,7 @@ public class TaskList implements Iterable<Task> {
      */
     public void add(Task t) {
         listOfTasks.add(t);
+        sort();
     }
 
     /**
@@ -123,5 +126,9 @@ public class TaskList implements Iterable<Task> {
             }
         }
         return new TaskList(filteredListOfTasks);
+    }
+
+    public void sort() {
+        Collections.sort(listOfTasks);
     }
 }

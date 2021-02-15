@@ -1,14 +1,17 @@
 package duke.Tasks;
 
+import java.time.LocalDate;
+
 /**
  * Represents a Task. Stores relevant information about the task like  basic description, the code letter that will
  * be displayed when the Task is printed, as well as the state of whether or not the Task is done.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task>{
 
     protected String description;
     protected boolean isDone;
     protected String letterCode;
+    protected LocalDate localDate = LocalDate.MAX;
 
     /**
      * Constructor.
@@ -76,4 +79,8 @@ public abstract class Task {
         return this.description;
     }
 
+    @Override
+    public int compareTo(Task o) {
+        return this.localDate.compareTo(o.localDate);
+    }
 }
