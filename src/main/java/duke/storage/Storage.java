@@ -43,6 +43,7 @@ public class Storage {
      * @param tasks The TaskList used to update the save file.
      */
     public void update(ArrayList<Task> tasks) throws DukeSaveFileException {
+        assert(!tasks.isEmpty());
         try {
             FileWriter fw = new FileWriter(saveFile);
             fw.write(StorageEncoder.encodeTasks(tasks));
