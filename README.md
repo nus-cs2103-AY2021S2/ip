@@ -1,26 +1,13 @@
-# Duke project template
+# IP Project: Lihua
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+**Lihua** is a friendly **task management bot** residing in a **desktop application**.
+The bot is optimized for use via a **Command Line Interface** (CLI) while still having the benefit of
+a Graphical User Interface (GUI). If you can type fast, Lihua can get your daily task management job done
+faster than traditional GUI apps.
 
-## Setting up in Intellij
+## Documentation
+The User Guide of the project can be found [here](https://cheng20010201.github.io/ip).
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
 ## Acknowledgement
-#### External Library:
+### External Library:
 - [json-simple-1.1.1.jar](https://code.google.com/archive/p/json-simple/)
