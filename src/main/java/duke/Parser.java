@@ -35,7 +35,7 @@ public class Parser {
 
             try {
                 switch (parsedCommand[0]) {
-                case "done", "delete":
+                    case "done": case "delete":
                     int taskId = Integer.parseInt(parsedCommand[1]) - 1;
                     if (parsedCommand[0].equals("done")) {
                         return new DoneCommand(fullCommand, taskId);
@@ -44,7 +44,7 @@ public class Parser {
                     }
                 case "find":
                     return new FindCommand(fullCommand, fullCommand.replaceFirst("find ", ""));
-                case "todo", "deadline", "event":
+                case "todo": case "deadline": case "event":
                     Task task = parseTask(parsedCommand[0], fullCommand.replaceFirst(parsedCommand[0] + " ", ""));
                     return new AddCommand(fullCommand, task);
                 default:
