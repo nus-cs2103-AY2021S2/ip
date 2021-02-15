@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Parser handles the user commands.
@@ -48,7 +48,8 @@ public class Parser {
     public Deadline createDeadline() throws DukeException {
         Validation.checkForContentAfterSlash(command, findSlash);
         String descriptionDeadline = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
-        LocalDate date = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
+        LocalDateTime date = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
+        System.out.println(date);
         Deadline newDeadline = new Deadline(descriptionDeadline, date);
         return newDeadline;
     }

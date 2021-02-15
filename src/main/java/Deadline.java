@@ -1,37 +1,37 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task of type Deadline.
  * A Deadline is represented by a name in the form of a String,
- * and the date by which the task should be completed, in the form
- * of a LocalDate.
+ * and the date and time by which the task should be completed, in the form
+ * of a LocalDateTime.
  */
 
 public class Deadline extends Task {
 
-    static final String DATE_FORMAT = "MMM dd yyyy";
-    protected LocalDate by;
+    static final String DATE_FORMAT = "MMM dd yyyy h:mm a";
+    protected LocalDateTime by;
 
 
     /**
-     * Creates a Deadline with the description and date by which the task should be completed.
+     * Creates a Deadline with the description and date and time by which the task should be completed.
      *
      * @param name Description of the Deadline.
-     * @param by The date by which the task should be completed.
+     * @param by The date and time by which the task should be completed.
      */
-    public Deadline(String name, LocalDate by) {
+    public Deadline(String name, LocalDateTime by) {
         super(name);
         this.by = by;
     }
 
     /**
-     * Parses the date in the format of "MMM dd yyyy".
+     * Parses the date and time in the format of "MMM dd yyyy h:mm a".
      *
-     * @param date Date to be parsed.
-     * @return A String representing the date in the new format.
+     * @param date Date and time to be parsed.
+     * @return A String representing the date and time in the new format.
      */
-    public String parseDate(LocalDate date) {
+    public String parseDate(LocalDateTime date) {
         return date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
 
     }
