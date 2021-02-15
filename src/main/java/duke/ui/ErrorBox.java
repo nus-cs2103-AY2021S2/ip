@@ -26,15 +26,15 @@ public class ErrorBox {
         window.setTitle("");
         window.setMinWidth(250);
 
-        Label alertContent = new Label();
-        alertContent.setText(message);
-        alertContent.setWrapText(true);
+        Label errorContent = new Label();
+        errorContent.setText(message);
+        errorContent.setWrapText(true);
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e -> window.close());
         closeButton.setDefaultButton(true);
 
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(alertContent, closeButton);
+        layout.getChildren().addAll(errorContent, closeButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout, 300, 300);
