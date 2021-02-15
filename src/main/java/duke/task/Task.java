@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import duke.exceptions.TaskException;
 
 /**
- * Parent Class of all task
+ * Parent Class of all tasks
  */
 public class Task {
     protected String description;
@@ -14,6 +14,7 @@ public class Task {
 
     /**
      * Default Constructor of a task
+     *
      * @param description string description of a task
      */
     public Task(String description) {
@@ -24,6 +25,7 @@ public class Task {
 
     /**
      * Constructor of a task
+     *
      * @param description string description of a task
      * @param doneInt 1 indicates that the task is done, 0 indicates that the task is not done
      */
@@ -63,6 +65,12 @@ public class Task {
         return isDoneInt + "|" + description;
     }
 
+    /**
+     * Changes the descriptions within a task
+     *
+     * @param arrOfDescriptionToChange arrayList of String descriptions to change
+     * @throws TaskException Throws a task exception if there is some error in the array
+     */
     public void changeDescription(ArrayList<String> arrOfDescriptionToChange) throws TaskException {
         for (int i = 0; i < arrOfDescriptionToChange.size(); i = i + 2) {
             if (arrOfDescriptionToChange.get(i).equals("/de")) {

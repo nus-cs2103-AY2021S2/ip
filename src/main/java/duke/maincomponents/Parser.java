@@ -13,7 +13,9 @@ import duke.command.ToDoCommand;
 import duke.command.UpdateCommand;
 import duke.exceptions.DukeException;
 
-
+/**
+ * Parser class, which Parser all the user inputs to create a Command that can be executed
+ */
 public class Parser {
 
     private static boolean checkStringStartingEquals(String userInput, String stringToCheck) {
@@ -351,6 +353,7 @@ public class Parser {
 
     /**
      * Parses user input and return a command that can be executed
+     *
      * @param userInput userInput to parse
      * @return Command that can be executed
      * @throws DukeException an execption
@@ -384,7 +387,6 @@ public class Parser {
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means");
             }
-
         } catch (DukeException e) {
             throw e;
         }

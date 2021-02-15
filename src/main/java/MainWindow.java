@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image dukeNormalImage = new Image(this.getClass().getResourceAsStream("/images/cat3_png.png"));
     private Image dukeErrorImage = new Image(this.getClass().getResourceAsStream("/images/cat1_png.png"));
 
+    /**
+     * Initializes the javafx frame
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

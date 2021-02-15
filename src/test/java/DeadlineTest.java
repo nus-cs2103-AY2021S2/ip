@@ -1,10 +1,10 @@
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exceptions.TaskException;
 import duke.task.Deadline;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
 

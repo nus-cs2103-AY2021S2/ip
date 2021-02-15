@@ -9,11 +9,20 @@ import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
 import duke.task.Task;
 
+/**
+ * Update Command, which updates the descriptions of a given task when executed
+ */
+
 public class UpdateCommand implements Command {
     private final ArrayList<String> arrOfDescriptionToChange;
     private final int taskToEdit;
 
-
+    /**
+     * Default Constructor of Update Command
+     *
+     * @param taskToEdit Task object which is to be edited
+     * @param descriptionToChange ArrayList of descriptions to change
+     */
     public UpdateCommand(int taskToEdit, ArrayList<String> descriptionToChange) {
         this.arrOfDescriptionToChange = descriptionToChange;
         this.taskToEdit = taskToEdit;

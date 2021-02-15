@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import duke.exceptions.TaskException;
 
+/**
+ * Event task class
+ */
 public class Event extends Task {
     private String eventAt;
 

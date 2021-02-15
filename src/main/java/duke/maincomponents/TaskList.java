@@ -13,6 +13,7 @@ import duke.task.ToDo;
 /**
  * TaskList class, which stores all the Tasks in the list
  */
+
 public class TaskList {
     private ArrayList<Task> tasks;
     private int numberOfTasks;
@@ -26,7 +27,8 @@ public class TaskList {
     }
 
     /**
-     * Constructor for TaskList which returns a Tasklist that contains the tasks in taskArrayToLoad
+     * Alternative Constructor for TaskList which returns a Tasklist that contains the tasks in taskArrayToLoad
+     *
      * @param taskArrayToLoad ArrayList which contains tasks to put inside TaskList
      */
     public TaskList(ArrayList<Task> taskArrayToLoad) {
@@ -49,10 +51,11 @@ public class TaskList {
     }
 
     /**
-     * Checks a given index's task as done
-     * @param number index of task to mark as done
-     * @return returns tasks that has been marked as done
-     * @throws DukeException error thrown if the index given has no corresponding task
+     * Marks a given index's task as done
+     *
+     * @param number Index of task to mark as done
+     * @return Returns tasks that has been marked as done
+     * @throws DukeException Error thrown if the index given has no corresponding task
      */
     public Task checkTaskAsDone(int number) throws DukeException {
         if (number >= 1 && number <= tasks.size()) {
@@ -68,9 +71,10 @@ public class TaskList {
 
     /**
      * Deletes a given index's task from the TaskList
-     * @param taskInt index of task to delete
-     * @return the delete task
-     * @throws DukeException error thrown if the index given has no corresponding task
+     *
+     * @param taskInt Index of task to delete
+     * @return Deleted task
+     * @throws DukeException Error thrown if the index given has no corresponding task
      */
     public Task deleteTask(int taskInt) throws DukeException {
         if (taskInt >= 1 && taskInt <= tasks.size()) {
@@ -85,9 +89,10 @@ public class TaskList {
     }
 
     /**
-     * Add a to do task to the tasklist
-     * @param description description of the to do task
-     * @return returns the to do task that has been added
+     * Adds a to do task to the Task List
+     *
+     * @param description Description of the to do task
+     * @return Returns the to do task that has been added
      */
     public Task addToDoTask(String description) {
         ToDo newToDo = new ToDo(description);
@@ -98,10 +103,11 @@ public class TaskList {
     }
 
     /**
-     * Add a event task to the tasklist
-     * @param description arraylist of description of the event task, index 0 has the description and
+     * Adds a event task to the tasklist
+     *
+     * @param description Array List of description of the event task, index 0 has the description and
      *                    index 1 has the event at description
-     * @return returns the event task that has been added
+     * @return Returns the event task that has been added
      */
     public Task addEventTask(ArrayList<String> description) {
         Event newEvent = new Event(description.get(0), description.get(1));
@@ -113,11 +119,12 @@ public class TaskList {
 
 
     /**
-     * Add a deadline task to the tasklist
-     * @param description arraylist of description of the event task, index 0 has the description and
+     * Adds a deadline task to the tasklist
+     *
+     * @param description Array List of description of the event task, index 0 has the description and
      *                    index 1 has the event by description
-     * @return returns the deadline task that has been added
-     * @throws DukeException
+     * @return Returns the deadline task that has been added
+     * @throws DukeException Throws an exception if an error occured when creating the deadline task
      */
     public Task addDeadlineTask(ArrayList<String> description) throws DukeException {
         try {
@@ -130,6 +137,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a task of a specfic index
+     *
+     * @param taskInt Index of the task to return
+     * @return A task object
+     * @throws DukeException Throws an exception if an error occured when creating the task
+     */
     public Task getTask(int taskInt) throws DukeException {
         if (taskInt >= 1 && taskInt <= tasks.size()) {
             Task task = tasks.get(taskInt - 1);
@@ -137,7 +151,5 @@ public class TaskList {
         } else {
             throw new DukeException("Error! Please make sure the number given has a corresponding task!");
         }
-
-
     }
 }

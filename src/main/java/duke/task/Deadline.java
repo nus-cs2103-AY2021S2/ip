@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import duke.exceptions.TaskException;
 
+/**
+ * Deadline task class
+ */
 public class Deadline extends Task {
     private static final DateTimeFormatter FORMAT_ONE = DateTimeFormatter.ofPattern("d-M-uuuu");
     private static final DateTimeFormatter FORMAT_TWO = DateTimeFormatter.ofPattern("uuuu-M-d");

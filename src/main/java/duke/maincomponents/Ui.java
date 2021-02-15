@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 import duke.task.Task;
 
+/**
+ * Ui class, which creates all the string that are to be shown to the user
+ */
 public class Ui {
     private Scanner scanner;
     private int paddingGui = 4;
@@ -43,7 +46,8 @@ public class Ui {
 
     /**
      * Shows a task list to the user in the appropriate format
-     * @param taskArray task array list to show to the viewer
+     *
+     * @param taskArray Task array list to show to the viewer
      */
     public void showTaskList(ArrayList<Task> taskArray) {
         if (taskArray.size() > 0) {
@@ -69,8 +73,9 @@ public class Ui {
 
     /**
      * Returns a string representation of a taskArray
-     * @param taskArray arrayList of tasks
-     * @return string representation of the taskArray given
+     *
+     * @param taskArray Array List of tasks
+     * @return String representation of the taskArray given
      */
     public String returnTaskList(ArrayList<Task> taskArray) {
         if (taskArray.size() > 0) {
@@ -97,7 +102,8 @@ public class Ui {
 
     /**
      * Shows a specificed error message
-     * @param errorMsg error message to show to the user
+     *
+     * @param errorMsg Error message to show to the user
      */
     public void showErrorMsg(String errorMsg) {
         System.out.println(defaultFormatting(errorMsg));
@@ -118,8 +124,9 @@ public class Ui {
 
     /**
      * Returns a string representation that tells the user that a specific task has been marked as done
+     *
      * @param doneTask Task that has been marked as done
-     * @return string representation that tells the user that a specific task has been marked as done
+     * @return String representation that tells the user that a specific task has been marked as done
      */
     public String returnTaskDone(Task doneTask) {
         return "Nice! I've marked this task as done:\n"
@@ -128,6 +135,7 @@ public class Ui {
 
     /**
      * Show the user that a specific task has been deleted
+     *
      * @param deletedTask Task that has been deleted
      * @param numberOfTasks Number of remaining tasks
      */
@@ -140,9 +148,10 @@ public class Ui {
 
     /**
      * Returns a string representation that tells the user a specific task has been deleted
+     *
      * @param deletedTask Task that has been deleted
      * @param numberOfTasks Number of remaining tasks
-     * @return string representation that tells the user a specific task has been deleted
+     * @return String representation that tells the user a specific task has been deleted
      */
     public String returnTaskDeleted(Task deletedTask, int numberOfTasks) {
         return "Noted. I've removed this task:\n" + padSpaces(deletedTask.toString(), paddingGui)
@@ -151,6 +160,7 @@ public class Ui {
 
     /**
      * Shows the user the task that has been added to duke
+     *
      * @param addedTask Task that has been added
      * @param numberOfTasks Number of tasks
      */
@@ -163,9 +173,10 @@ public class Ui {
 
     /**
      * Returns a string represention that tells the user a ask that has been added to duke
+     *
      * @param addedTask Task that has been added
      * @param numberOfTasks Number of tasks
-     * @return string represention that tells the user a ask that has been added to duke
+     * @return String represention that tells the user a ask that has been added to duke
      */
     public String returnAddedTask(Task addedTask, int numberOfTasks) {
         String temp = "Got it. I've added this task:\n" + padSpaces(addedTask.toString(), paddingGui)
@@ -176,7 +187,8 @@ public class Ui {
 
     /**
      * Shows tasks that are related to a string specificed by the user
-     * @param taskArray arrayList of tasks that are related to a string specificed by the user
+     *
+     * @param taskArray Array List of tasks that are related to a string specificed by the user
      */
     public void showFoundTaskList(ArrayList<Task> taskArray) {
         StringBuilder sb = new StringBuilder();
@@ -199,8 +211,9 @@ public class Ui {
     /**
      * Returns a string represention that tells the user the tasks that
      * are related to a string specificed by the user
-     * @param taskArray arrayList of tasks that are related to a string specificed by the user
-     * @return a string represention that tells the user the tasks that are related to a string specificed by the user
+     *
+     * @param taskArray Array List of tasks that are related to a string specificed by the user
+     * @return A string represention that tells the user the tasks that are related to a string specificed by the user
      */
     public String returnFoundTaskList(ArrayList<Task> taskArray) {
         StringBuilder sb = new StringBuilder();
@@ -231,10 +244,11 @@ public class Ui {
     }
 
     /**
-     * pad a string with spaces at its front
-     * @param input input string
-     * @param numOfSpacesToPad number of spaces to add in front of a string
-     * @return string padded with spaces
+     * Pads a string with spaces at its front
+     *
+     * @param input Input string
+     * @param numOfSpacesToPad Number of spaces to add in front of a string
+     * @return String padded with spaces
      */
     private static String padSpaces(String input, int numOfSpacesToPad) {
         StringBuilder toreturn = new StringBuilder();
@@ -244,6 +258,11 @@ public class Ui {
         return toreturn.toString() + input;
     }
 
+    /**
+     * Shows tasks that have been updated
+     *
+     * @param task Updated taks to print out
+     */
     public void showChangedTask(Task task) {
         System.out.println(defaultFormatting("Alright! I've update the task as follows:\n"
                 + padSpaces(task.toString(), 7)));

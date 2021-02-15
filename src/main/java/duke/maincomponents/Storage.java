@@ -15,12 +15,15 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-
+/**
+ * Storage class, which stores all the Tasks to memory
+ */
 public class Storage {
     private String pathOfDataFile;
 
     /**
      * Default constructor for Storage
+     *
      * @param filePath path of file to load and store
      * @param folderName foldername of where the file resides
      * @throws DukeException
@@ -40,8 +43,9 @@ public class Storage {
     }
 
     /**
-     * loads memory into duke
-     * @return arraylist of tasks
+     * Loads memory into duke
+     *
+     * @return Array List of tasks
      * @throws DukeException IO exception if file cannot be read
      */
     public ArrayList<Task> load() throws DukeException {
@@ -83,8 +87,9 @@ public class Storage {
     }
 
     /**
-     * saves current task list to file at every iteration of user input
-     * @param taskArray task array to save to memory
+     * Saves current task list to file at every iteration of user input
+     *
+     * @param taskArray Task array to save to memory
      * @throws DukeException IO exception if an error occurs with the file
      */
     public void saveToFile(ArrayList<Task> taskArray) throws DukeException {

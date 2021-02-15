@@ -9,24 +9,19 @@ import duke.task.Task;
 /**
  * DoneCommand, which marks a task as done when executed
  */
+
 public class DoneCommand implements Command {
     private final int taskDoneInt;
 
     /**
      * Constructor of DoneCommand
+     *
      * @param i index of task to mark as done
      */
     public DoneCommand(int i) {
         assert i >= 0 : " i has to be greater or equal to 0 as there are no negative indexes";
         taskDoneInt = i;
     }
-
-    /**
-     * Executes the Done command, which marks given task as done
-     * @param dukeTaskList give dukeTaskList
-     * @param dukeUi give dukeUi
-     * @param dukeStorage give dukeStorage
-     */
     @Override
     public void execute(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException {
         try {
@@ -36,7 +31,6 @@ public class DoneCommand implements Command {
             throw e;
         }
     }
-
     @Override
     public String executeGui(TaskList dukeTaskList, Ui dukeUi, Storage dukeStorage) throws DukeException {
         try {

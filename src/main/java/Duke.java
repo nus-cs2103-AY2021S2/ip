@@ -21,6 +21,7 @@ public class Duke {
 
     /**
      * Default Constructor for Duke
+     *
      * @param filePath path where the datafile storing the session is
      * @param folderName path of the folder storing the datafile
      */
@@ -31,7 +32,6 @@ public class Duke {
         try {
             dukeStorage = new Storage(filePath, folderName);
             dukeTaskList = new TaskList(dukeStorage.load());
-            //dukeUi.showLoadingSucess();
         } catch (DukeException e) {
             dukeUi.showErrorMsg(e.getMessage());
             dukeTaskList = new TaskList();
@@ -69,6 +69,12 @@ public class Duke {
         dukeUi.showGoodbyeLine();
     }
 
+    /**
+     * Get Duke's Response for the GUI
+     *
+     * @param userInput String of the user's input
+     * @return String of duke's output
+     */
     public String getResponse(String userInput) {
         String toReturnString;
         boolean isExit = stringParser.checkIfExit(userInput);
@@ -96,10 +102,6 @@ public class Duke {
 
     public boolean getIsCurrentError() {
         return isCurrentError;
-    }
-
-    public String getWelcomeLine() {
-        return dukeUi.returnWelcomeLine();
     }
 
     public String getGoodbyeLine() {

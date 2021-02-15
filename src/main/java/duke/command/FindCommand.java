@@ -7,9 +7,18 @@ import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
 import duke.task.Task;
 
+/**
+ * FindCommand, which find all the tasks that are similiar to a given string
+ */
+
 public class FindCommand implements Command {
     private final String stringToFind;
 
+    /**
+     * Default Constructor for the find command
+     *
+     * @param s search string
+     */
     public FindCommand(String s) {
         stringToFind = s;
     }

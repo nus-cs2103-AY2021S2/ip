@@ -7,8 +7,18 @@ import duke.maincomponents.TaskList;
 import duke.maincomponents.Ui;
 import duke.task.Task;
 
+/**
+ * EventCommand, which adds a deadline task to Duke's TaskList when executed
+ */
+
 public class EventCommand implements Command {
     private final ArrayList<String> eventDescription;
+
+    /**
+     * Default constructor for Event Comamnd
+     *
+     * @param a arrayList of descriptions for the event task
+     */
     public EventCommand(ArrayList<String> a) {
         eventDescription = a;
     }
