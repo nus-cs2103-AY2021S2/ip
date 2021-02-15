@@ -12,8 +12,10 @@ public class TaskList {
      * @param storage Storage object that TaskList writes to.
      */
     public TaskList(Storage storage) {
+        assert storage != null: "storage passed to TaskList cannot be null. ";
         this.storage = storage;
         this.tasks = new ArrayList<>();
+        assert this.tasks != null: "ArrayList for TaskList not successfully created. ";
 
         ArrayList<String> storageStrings = this.storage.readStorage();
         for (String s : storageStrings) {
@@ -55,6 +57,8 @@ public class TaskList {
      * @param index Index of task wanted
      */
     public void remove(int index) {
+        assert index > 0: "Index passed to remove must be greater than 1. ";
+        assert index <= this.tasks.size(): "Index passed to remove cannot be greater than length of task list. ";
         this.storage.remove(index);
         this.tasks.remove(index - 1);
         this.count--;
@@ -66,6 +70,9 @@ public class TaskList {
      * @param task New task that will replace previous task
      */
     public void set(int index, Task task) {
+        assert index > 0: "Index passed to set must be greater than 1. ";
+        assert index <= this.tasks.size(): "Index passed to set cannot be greater than length of task list. ";
+        assert task != null: "Task passed to set must not be null. ";
         this.storage.set(index, task);
         this.tasks.set(index - 1, task);
     }
@@ -75,6 +82,7 @@ public class TaskList {
      * @param task Task to be added
      */
     public void add(Task task) {
+        assert task != null: "Task to be added must not be null. ";
         this.storage.add(task);
         this.tasks.add(task);
         this.count++;

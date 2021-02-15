@@ -20,6 +20,7 @@ public class Storage {
      */
     public Storage (String path) {
         File logFile = new File(path);
+        assert logFile != null: "logFile not created properly. ";
         try {
             if (logFile.isFile()) {
                 Scanner logs = new Scanner(logFile);
@@ -44,6 +45,7 @@ public class Storage {
      * @param task Task to be added
      */
     public void add(Task task) {
+        assert task != null: "Task should not be null. ";
         this.itemList.add(task.toStorageString());
         this.update();
     }
@@ -54,6 +56,9 @@ public class Storage {
      * @param newTask New task
      */
     public void set(int index, Task newTask) {
+        assert index > 0: "Index passed to set must be greater than 1. ";
+        assert index <= this.itemList.size(): "Index passed to set cannot be greater than length of task list. ";
+        assert newTask != null: "newTask cannot be null. ";
         this.itemList.set(index - 1, newTask.toStorageString());
         this.update();
     }
@@ -63,6 +68,8 @@ public class Storage {
      * @param index Index of line to be removed
      */
     public void remove(int index) {
+        assert index > 0: "Index passed to remove must be greater than 1. ";
+        assert index <= this.itemList.size(): "Index passed to remove cannot be greater than length of task list. ";
         this.itemList.remove(index - 1);
         this.update();
     }
