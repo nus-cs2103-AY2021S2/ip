@@ -81,7 +81,7 @@ public class TaskList {
         int numberOfFinding = 0;
         String[] findTask = new String[100];
         for (int i = 0; i < this.getSizeOfTasks(); i++) {
-            if (this.getTask(i).description.contains(description)) {
+            if (this.getTask(i).description.toLowerCase().contains(description.toLowerCase())) {
                 findTask[numberOfFinding] = i + 1 + "." + this.getTask(i).getTaskInfo();
                 numberOfFinding++;
             }

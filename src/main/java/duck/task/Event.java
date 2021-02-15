@@ -23,7 +23,7 @@ public class Event extends TaskWithDate {
     @Override
     public String getTaskInfo() {
         return "[E]" + super.getTaskInfo() + " (at: "
-                + date.getDayOfWeek() + "," + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + date.getDayOfWeek() + ", " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -34,7 +34,7 @@ public class Event extends TaskWithDate {
     @Override
     public String getPeriodDays() {
         LocalDate now = LocalDate.parse(LocalDate.now().toString());
-        return "There are " + now.until(date, ChronoUnit.DAYS) + "day(s) before the event starting";
+        return "There are " + now.until(date, ChronoUnit.DAYS) + " day(s) before the event starting";
     }
 
     /**

@@ -1,8 +1,16 @@
 package duck.operation;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
 import duck.task.TaskList;
 
-import java.io.*;
+
 
 
 public class Storage {
@@ -13,13 +21,19 @@ public class Storage {
      * if it does not exist, generate a new one
      *
      * @param filePath the path of file
-     * @throws IOException
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.fileOfData = new File(filePath);
-        if (!fileOfData.isFile()) {
-            fileOfData.createNewFile();
+        File directory = this.fileOfData.getParentFile();
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
+        try {
+            fileOfData.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

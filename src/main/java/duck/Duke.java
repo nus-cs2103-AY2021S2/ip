@@ -1,5 +1,7 @@
 package duck;
 
+import java.io.IOException;
+
 import duck.operation.CommandGui;
 import duck.operation.Gui;
 import duck.operation.Parser;
@@ -18,7 +20,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+
 
 
 public class Duke extends Application {

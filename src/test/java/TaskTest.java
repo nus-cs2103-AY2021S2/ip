@@ -1,15 +1,16 @@
-import duck.task.Deadline;
-import duck.task.Task;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import duck.task.Task;
+
 public class TaskTest {
-    Task task = new Task("return book");
+    private Task task = new Task("return book");
+
     @Test
-    public void dummyTest(){
-        assertEquals("[✘]return book",task.getTaskInfo());
-        assertEquals("[✘]",task.getStatusIcon());
-       assertEquals("",task.getPeriodDays());
+    public void dummyTest() {
+        assertEquals("[\u2718]return book", task.getTaskInfo());
+        assertEquals("[\u2718]", task.getStatusIcon());
+        assertEquals("", task.getPeriodDays());
     }
 }

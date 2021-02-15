@@ -26,8 +26,8 @@ public class DialogBox extends HBox {
         displayPicture = iv;
         Label textSpace = new Label(indentation);
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(60.0);
+        displayPicture.setFitHeight(60.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, textSpace, displayPicture);
@@ -52,16 +52,17 @@ public class DialogBox extends HBox {
      * @return dialog box
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        DialogBox UserDialog = new DialogBox(l, iv);
-        UserDialog.setStyle("-fx-padding: 10;"
+        DialogBox userDialog = new DialogBox(l, iv);
+        userDialog.setStyle("-fx-padding: 10;"
                 + "-fx-border-style: dashed;"
                 + "-fx-border-width: 4;"
                 + "-fx-border-radius: 5;"
                 + "-fx-border-color: #87409c;"
                 + "-fx-background-color: #FAF0E6;"
                 + "-fx-font-size: 14px;"
+                + "-fx-font-weight:bold"
         );
-        return UserDialog;
+        return userDialog;
     }
 
     /**
@@ -84,7 +85,7 @@ public class DialogBox extends HBox {
                 + "-fx-border-radius: 5;"
                 + "-fx-border-color: #4d70a3;"
                 + "-fx-background-color: #cadcf6;"
-                + "-fx-font-size: 13px;"
+                + "-fx-font-size: 14px;"
         );
         return duckDialog;
     }

@@ -1,17 +1,17 @@
 package duck.operation;
 
-import duck.task.TaskList;
-
 import java.util.ArrayList;
 
+import duck.task.TaskList;
 
 public class Gui {
 
-    private static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String logo =
+            " ____           _        \n"
+                    + "|  _   \\ _   __|  | _____ \n"
+                    + "|  | |  |  |  |  |   |/  / _ \\\n"
+                    + "|  |_|  |  |_ |  |    <  __/\n"
+                    + "|____/\\___,_|__|\\_\\___|\n";
 
     /**
      * show a welcome logo and ask for command
@@ -83,7 +83,9 @@ public class Gui {
             return "OOPS!!! The period of a event task should be meaningful. :-(\n"
                     + "Please enter according to the format eg.description /at YYYY-MM-DD\n";
         case "find_empty":
-            return "OOPS!!! The enter the keyword of task. :-(\n";
+            return "OOPS!!! Please enter the keyword of task. :-(\n";
+        case "error_IO":
+            return "OOPS!!! Something wrong happens in IO. :-(\n";
         default:
             return "error";
         }
@@ -96,7 +98,6 @@ public class Gui {
      * @param tasks  task list
      */
     public String getDoneReply(int number, TaskList tasks) {
-
         return "Nice! I've marked this task as done:\n"
                 + (number + 1) + "." + tasks.getTask(number).getTaskInfo() + "\n";
 
@@ -110,7 +111,7 @@ public class Gui {
      */
     public String getDeleteReply(int number, TaskList tasks) {
 
-        return "Noted. I've removed this task: "
+        return "Noted. I've removed this task:\n "
                 + (number + 1) + "." + tasks.getTask(number).getTaskInfo() + "\n"
                 + "Now you have " + (tasks.getSizeOfTasks() - 1) + " tasks in the list.\n";
 
@@ -148,6 +149,7 @@ public class Gui {
 
     /**
      * show the reply for schedule command
+     *
      * @param scheduleTask use tasks to form schedule
      * @return schedule string
      */

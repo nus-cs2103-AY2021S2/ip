@@ -23,7 +23,7 @@ public class Deadline extends TaskWithDate {
     @Override
     public String getTaskInfo() {
         return "[D]" + super.getTaskInfo() + " (by: "
-                + date.getDayOfWeek() + "," + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + date.getDayOfWeek() + ", " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -34,7 +34,7 @@ public class Deadline extends TaskWithDate {
     @Override
     public String getPeriodDays() {
         LocalDate now = LocalDate.parse(LocalDate.now().toString());
-        return "There are " + now.until(date, ChronoUnit.DAYS) + "day(s) before the deadline";
+        return "There are " + now.until(date, ChronoUnit.DAYS) + " day(s) before the deadline";
     }
 
     /**
