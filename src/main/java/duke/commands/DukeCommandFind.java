@@ -8,11 +8,11 @@ import java.util.Optional;
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.DatetimeParser;
 import duke.parser.UserInputTokenSet;
+import duke.responses.Response;
 import duke.storage.FileLoader;
 import duke.tasks.DateTask;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Find command.
@@ -23,7 +23,7 @@ public class DukeCommandFind extends DukeCommand {
 
     protected Optional<LocalDateTime> from;
     protected Optional<LocalDateTime> to;
-    protected String search;
+    protected String searchTerms;
 
     /**
      * Constructor to record date range and search query.
@@ -34,7 +34,7 @@ public class DukeCommandFind extends DukeCommand {
     public DukeCommandFind(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
         from = Optional.empty(); // datetime lower bound
         to = Optional.empty(); // datetime upper bound
-        search = tokenSet.get("/text"); // keyword search
+        searchTerms = tokenSet.get("/text"); // keyword search
         if (tokenSet.contains("from")) {
             from = Optional.of(DatetimeParser.parseDate(tokenSet.get("from")));
         }
@@ -51,73 +51,71 @@ public class DukeCommandFind extends DukeCommand {
      * Prints tasks from tasklist according to search query, writes to file and displays success
      *
      * @param tasks tasklist
-     * @param ui user interface
      * @param loader storage
-     * @throws DukeExceptionIllegalArgument when task fails to be parsed
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, FileLoader loader) throws DukeExceptionIllegalArgument {
-        boolean datedSearch = (from.isPresent() || to.isPresent());
-        ArrayList<Task> view = new ArrayList<>();
-        ArrayList<Integer> viewIndex = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.getTask(i);
+    public Response execute(TaskList tasks, FileLoader loader) {
+        List<Integer> validTaskIndices = getTaskIndicesMatchingDateCriteria(tasks);
 
-            if (datedSearch) {
-                if (!(task instanceof DateTask)) {
-                    continue;
-                }
-                DateTask datetask = (DateTask) task;
-                if (from.isPresent() && from.get().isAfter(datetask.getDatetime())) {
-                    continue;
-                }
-                if (to.isPresent() && to.get().isBefore(datetask.getDatetime())) {
-                    continue;
-                }
-            }
-            if (!task.getDescription().contains(search)) {
+        /* Prepare response */
+        List<String> lines = new ArrayList<>();
+        if (validTaskIndices.isEmpty()) {
+            lines.add("No tasks matching search term / date range");
+            addToResponseSearchParameters(lines);
+            return Response.createResponseOk(lines.toArray(new String[0]));
+        }
+
+        /* Prepare non-empty response */
+        lines.add("Found " + validTaskIndices.size() + " task(s) matching search term / date range");
+        addToResponseSearchParameters(lines);
+        addToResponseFoundTasks(lines, validTaskIndices, tasks);
+        return Response.createResponseOk(lines.toArray(new String[0]));
+    }
+
+    private List<Integer> getTaskIndicesMatchingDateCriteria(TaskList tasks) {
+        boolean datedSearch = (from.isPresent() || to.isPresent());
+        ArrayList<Integer> validTaskIndices = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.getTaskUnsafe(i);
+
+            /* If date enabled, must sort by DateTasks only. */
+            if (datedSearch && isNotWithinDateRange(task)) {
                 continue;
             }
-            // If date enabled, must sort by DateTasks only.
-
-            view.add(task);
-            viewIndex.add(i + 1);
-        }
-
-        // Empty task view list
-        if (view.isEmpty()) {
-            List<String> lines = new ArrayList<>();
-            lines.add("No tasks matching search term / date range");
-            if (from.isPresent()) {
-                lines.add(" from:  " + DatetimeParser.formatDateFull(from.get()));
+            if (!task.getDescription().contains(searchTerms)) {
+                continue;
             }
-            if (to.isPresent()) {
-                lines.add(" till:  " + DatetimeParser.formatDateFull(to.get()));
-            }
-            if (!search.isBlank()) {
-                lines.add(" query: '" + search + "'");
-            }
-            ui.showResponse(lines);
-            return;
+            validTaskIndices.add(i);
         }
+        return validTaskIndices;
+    }
 
-        // Get output
-        List<String> lines = new ArrayList<>();
-        lines.add("Found " + view.size() + " task(s) matching search term / date range");
-        if (from.isPresent()) {
-            lines.add(" from:  " + DatetimeParser.formatDateFull(from.get()));
+    private boolean isNotWithinDateRange(Task task) {
+        /* Not a date in the first place */
+        if (!(task instanceof DateTask)) {
+            return true;
         }
-        if (to.isPresent()) {
-            lines.add(" till:  " + DatetimeParser.formatDateFull(to.get()));
+        /* Checks if within date range */
+        DateTask datetask = (DateTask) task;
+        if (from.isPresent() && from.get().isAfter(datetask.getDatetime())) {
+            return true;
         }
-        if (!search.isBlank()) {
-            lines.add(" query: '" + search + "'");
+        return to.isPresent() && to.get().isBefore(datetask.getDatetime());
+    }
+
+    private void addToResponseSearchParameters(List<String> lines) {
+        from.ifPresent(localDateTime -> lines.add(" from:  " + DatetimeParser.formatDateFull(localDateTime)));
+        to.ifPresent(localDateTime -> lines.add(" till:  " + DatetimeParser.formatDateFull(localDateTime)));
+        if (!searchTerms.isBlank()) {
+            lines.add(" query: '" + searchTerms + "'");
         }
-        lines.add("");
-        for (int i = 0; i < view.size(); i++) {
-            String s = "" + viewIndex.get(i) + ". " + view.get(i).toString();
+    }
+
+    private void addToResponseFoundTasks(List<String> lines, List<Integer> validTaskIndices, TaskList tasks) {
+        lines.add(""); // blank line
+        for (int taskIndex : validTaskIndices) {
+            String s = "" + taskIndex + ". " + tasks.getTaskUnsafe(taskIndex).toString();
             lines.add(s);
         }
-        ui.showResponse(lines);
     }
 }

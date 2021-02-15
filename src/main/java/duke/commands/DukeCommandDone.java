@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.UserInputTokenSet;
+import duke.responses.Response;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Done command.
@@ -39,20 +39,27 @@ public class DukeCommandDone extends DukeCommand {
      * Marks tasks as done in tasklist, writes to file and displays success
      *
      * @param tasks tasklist
-     * @param ui user interface
      * @param loader storage
-     * @throws DukeExceptionFileNotWritable when loader fails to write to file
-     * @throws DukeExceptionIllegalArgument when task fails to be parsed
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, FileLoader loader)
-            throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument {
-        ArrayList<String> taskStrings = new ArrayList<>();
-        for (int index : indices) {
-            tasks.setDone(index);
-            taskStrings.add("  " + tasks.getTask(index));
+    public Response execute(TaskList tasks, FileLoader loader) {
+        ArrayList<String> responseMessageArray = new ArrayList<>();
+        responseMessageArray.add("Nice! I've marked these tasks as done:");
+        try {
+            for (int index : indices) {
+                tasks.setDone(index);
+                responseMessageArray.add("  " + tasks.getTask(index));
+            }
+        } catch (DukeExceptionIllegalArgument e) {
+            return Response.createResponseBad(e.getMessage());
         }
-        loader.write(tasks);
-        ui.showResponse("Nice! I've marked these tasks as done:", taskStrings);
+
+        /* Attempt to write to file */
+        try {
+            loader.write(tasks);
+        } catch (DukeExceptionFileNotWritable e) {
+            return Response.createResponseOk(e.getMessage());
+        }
+        return Response.createResponseOk(responseMessageArray.toArray(new String[0]));
     }
 }

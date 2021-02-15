@@ -1,8 +1,8 @@
 package duke.commands;
 
+import duke.responses.Response;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Exit command.
@@ -11,24 +11,14 @@ import duke.ui.Ui;
  */
 public class DukeCommandBye extends DukeCommand {
 
-    /** Passes instruction to main loop to terminate program.
-     *
-     * @return true
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
-
     /**
      * Prints exit message.
      *
      * @param tasks tasklist
-     * @param ui user interface
      * @param loader loader
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, FileLoader loader) {
-        ui.showResponse("Bye. Hope to see you again soon!");
+    public Response execute(TaskList tasks, FileLoader loader) {
+        return Response.createResponseExit();
     }
 }

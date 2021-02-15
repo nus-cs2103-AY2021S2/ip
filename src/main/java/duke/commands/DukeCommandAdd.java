@@ -1,10 +1,10 @@
 package duke.commands;
 
 import duke.exceptions.DukeExceptionFileNotWritable;
+import duke.responses.Response;
 import duke.storage.FileLoader;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 /**
  * Add command.
@@ -24,17 +24,25 @@ public class DukeCommandAdd extends DukeCommand {
      * Adds task to tasklist, writes to file and displays success
      *
      * @param tasks tasklist
-     * @param ui user interface
      * @param loader storage
-     * @throws DukeExceptionFileNotWritable when loader fails to write to file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, FileLoader loader) throws DukeExceptionFileNotWritable {
+    public Response execute(TaskList tasks, FileLoader loader) {
         tasks.addTask(task);
-        loader.write(tasks);
-        ui.showResponse(
+
+        /* Attempt to write to file */
+        try {
+            loader.write(tasks);
+        } catch (DukeExceptionFileNotWritable e) {
+            return Response.createResponseOk(e.getMessage());
+        }
+
+        /* Successful execution */
+        String[] responseMessageLines = {
                 "Got it. I've added this task:",
                 "  " + task,
-                "Now you have " + tasks.size() + " tasks in the list.");
+                "Now you have " + tasks.size() + " tasks in the list."
+        };
+        return Response.createResponseOk(responseMessageLines);
     }
 }

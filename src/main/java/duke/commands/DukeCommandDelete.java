@@ -2,13 +2,12 @@ package duke.commands;
 
 import java.util.ArrayList;
 
-import duke.exceptions.DukeException;
 import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.parser.UserInputTokenSet;
+import duke.responses.Response;
 import duke.storage.FileLoader;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 
 /**
@@ -31,15 +30,17 @@ public class DukeCommandDelete extends DukeCommand {
     public DukeCommandDelete(UserInputTokenSet tokenSet) throws DukeExceptionIllegalArgument {
         if (tokenSet.contains("all")) {
             isDeleteAll = true;
-        } else {
-            try {
-                String indices = tokenSet.get("/text");
-                for (String s : indices.split("\\s+")) {
-                    this.indices.add(Integer.parseInt(s) - 1);
-                }
-            } catch (Exception e) {
-                throw new DukeExceptionIllegalArgument("Need to specify task number to delete.");
+            return;
+        }
+
+        /* Parse task numbers */
+        try {
+            String indices = tokenSet.get("/text");
+            for (String s : indices.split("\\s+")) {
+                this.indices.add(Integer.parseInt(s) - 1);
             }
+        } catch (Exception e) {
+            throw new DukeExceptionIllegalArgument("Need to specify task number to delete.");
         }
     }
 
@@ -47,36 +48,48 @@ public class DukeCommandDelete extends DukeCommand {
      * Deletes tasks from tasklist, writes to file and displays success
      *
      * @param tasks tasklist
-     * @param ui user interface
      * @param loader storage
-     * @throws DukeExceptionFileNotWritable when loader fails to write to file
-     * @throws DukeExceptionIllegalArgument when task fails to be parsed
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, FileLoader loader)
-            throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument, DukeException {
+    public Response execute(TaskList tasks, FileLoader loader) {
         if (isDeleteAll) {
-            boolean isConfirmedDelete = ui.getUserConfirmation("Confirm deletion of all tasks? ");
-            if (isConfirmedDelete) {
-                tasks.deleteAll();
-                loader.write(tasks);
-                ui.showResponse("All tasks successfully deleted.");
-            } else {
-                ui.showResponse("No tasks deleted.");
-            }
-
+            return executeDeleteAll(tasks, loader);
         } else {
-            ArrayList<String> taskStrings = new ArrayList<>();
-            for (int index : indices) {
-                taskStrings.add("  " + tasks.getTask(index));
-                tasks.deleteTask(index);
-                tasks.setDone(index);
-            }
-            loader.write(tasks);
-            ui.showResponse(
-                    "Noted. I've removed these tasks:",
-                    taskStrings,
-                    "Now you have " + tasks.size() + " tasks in the list.");
+            return executeDeleteSelected(tasks, loader);
         }
+    }
+
+    private Response executeDeleteSelected(TaskList tasks, FileLoader loader) {
+        /* Attempt deletion */
+        ArrayList<String> responseMessageArray = new ArrayList<>();
+        responseMessageArray.add("Noted. I've removed these tasks:");
+        try {
+            for (int index : indices) {
+                responseMessageArray.add("  " + tasks.getTask(index));
+                tasks.deleteTask(index);
+            }
+            responseMessageArray.add("Now you have " + tasks.size() + " tasks in the list.");
+        } catch (DukeExceptionIllegalArgument e) {
+            return Response.createResponseBad(e.getMessage());
+        }
+
+        /* Attempt to write to file */
+        try {
+            loader.write(tasks);
+        } catch (DukeExceptionFileNotWritable e) {
+            return Response.createResponseOk(e.getMessage());
+        }
+        return Response.createResponseOk(responseMessageArray.toArray(new String[0]));
+    }
+
+    private Response executeDeleteAll(TaskList tasks, FileLoader loader) {
+        tasks.deleteAll();
+        /* Attempt to write to file */
+        try {
+            loader.write(tasks);
+        } catch (DukeExceptionFileNotWritable e) {
+            return Response.createResponseOk(e.getMessage());
+        }
+        return Response.createResponseOk("All tasks successfully deleted.");
     }
 }

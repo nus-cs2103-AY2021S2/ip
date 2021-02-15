@@ -65,6 +65,18 @@ public class TaskList {
     }
 
     /**
+     * Gets a task from the list using the index, in an unsafe manner.
+     *
+     * Uses 1-based indexing. Input index must already be validated.
+     *
+     * @param taskIndex Index of task in list.
+     * @return Task.
+     */
+    public Task getTaskUnsafe(int taskIndex) {
+        return tasks.get(taskIndex);
+    }
+
+    /**
      * Removes a task from the list using the index.
      *
      * Uses 1-based indexing.
