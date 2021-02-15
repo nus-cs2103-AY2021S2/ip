@@ -68,14 +68,16 @@ public class Parser {
                 return processEvent(input);
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new AntonioException(e.getMessage() + "\nPlease enter a valid format\n'/at YYYY-MM-DD TIME-TIME'");
+                throw new AntonioException(e.getMessage() + "\nPlease enter a valid format\n'/at "
+                        + "YYYY-MM-DD TIME-TIME'");
             }
         case DEADLINE:
             try {
                 return processDeadline(input);
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new AntonioException(e.getMessage() + "\nPlease enter a valid format\n'/by YYYY-MM-DD TIME'");
+                throw new AntonioException(e.getMessage() + "\nPlease enter a valid format\n'/by "
+                        + "YYYY-MM-DD TIME'");
             }
         case DELETE:
             if (processedInput.length == 1) {
@@ -156,7 +158,8 @@ public class Parser {
         case "find":
             return CommandType.FIND;
         default:
-            throw new AntonioException("Invalid command. Please enter a valid one");
+            throw new AntonioException("There is no such command, enter a correcto one per favore?"
+                    + "\nIf you need help, enter 'help'.");
         }
     }
 

@@ -33,8 +33,8 @@ public class DeleteCommand implements Command {
      * @return The reply message for this command.
      */
     public String getResponse() {
-        return "Noted. I've removed this duke.task:\n  " + deletedTask
-            + "\nNow you have " + numTasks + " tasks in the list.\n";
+        return "Cosa certa! I've removed this task:\n  " + deletedTask
+            + "\nNow you have " + numTasks + " tasks in the list.\nPrego";
     }
 
     /**

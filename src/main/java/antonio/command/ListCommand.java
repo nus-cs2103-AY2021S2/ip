@@ -27,7 +27,8 @@ public class ListCommand implements Command {
         sb.append(currentList.toString());
         sb.append("\n\n");
         if (isAnomalyPresent) {
-            sb.append("Attenzione! There are tasks in your list that have clashing deadlines, please check the list above. Capisci?");
+            sb.append("Attenzione! There are tasks in your list that have clashing deadlines,"
+                    + " please check the list above. Capisci?");
         }
         return sb.toString();
     }

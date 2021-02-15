@@ -133,7 +133,7 @@ public class Storage {
             String eventDateTime = ((EventTask) task).serializeEvent();
             format = String.format("E | %d | %s | %s", status, description, eventDateTime);
         } else {
-            throw new AntonioException("Error in file writing: Unknown task type");
+            throw new AntonioException("There is an error in file writing: Unknown task type");
         }
         return format;
     }
@@ -164,7 +164,7 @@ public class Storage {
             String endTime = lineContents[5];
             return new EventTask(description, taskID, status, eventDate, startTime, endTime);
         default:
-            throw new AntonioException("Error in file reading: Unknown task type");
+            throw new AntonioException("There is an error in file reading: Unknown task type");
         }
     }
 
