@@ -159,19 +159,18 @@ public class TaskList {
      * @param keyword  the String input by the user
      * @param ui  the user interface to inform the user of the outcome
      */
-    public void findTask(String keyword, Ui ui) {
-        ui.showLine();
-        System.out.print(ui.ind() + "Kobe has found these tasks in your list:\n");
+    public void findTask(String keyword) {
         String currentTaskName = "";
+        String allMatchingTasks = "";
         int counter = 1;
         for (int i = 0; i < tasks.size(); i++) {
             currentTaskName = tasks.get(i).getTaskName();
             if (currentTaskName.indexOf(keyword) != -1) {
-                System.out.println(ui.ind() + counter + ": " + tasks.get(i).toString());
+                allMatchingTasks += Ui.ind + counter + ": " + tasks.get(i).toString() + "\n";
                 counter++;
             }
         }
-        ui.showLine();
+        Ui.addFindTaskResponse(allMatchingTasks);
     }
 
 }

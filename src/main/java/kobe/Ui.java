@@ -78,9 +78,13 @@ public class Ui {
 
     public static void addShowTaskListResponse(TaskList tasks){
         String fullResponse = "";
-        fullResponse += "Here are the tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            fullResponse += ind + (i + 1) + ". " + tasks.get(i).toString() + "\n";
+        if (tasks.size() == 0) {
+            fullResponse += "Kobe does not see any tasks currently in your list! \n";
+        } else {
+            fullResponse += "Here are the tasks in your list:\n";
+            for (int i = 0; i < tasks.size(); i++) {
+                fullResponse += ind + (i + 1) + ". " + tasks.get(i).toString() + "\n";
+            }
         }
         responses.add(fullResponse);
         System.out.println(line + fullResponse + line);
@@ -148,6 +152,16 @@ public class Ui {
         if (currentTaskListSize == 0) { //If it's now empty, inform them.
             System.out.print(ind + "Your list is now empty!\n" + line);
         }
+    }
+
+    public static void addFindTaskResponse(String allMatchingTasks) {
+        String fullResponse = "";
+        fullResponse += ind + "Kobe has found these tasks in your list:\n";
+        fullResponse += allMatchingTasks;
+        responses.add(fullResponse);
+
+        System.out.print(line + "Kobe has found these tasks in your list:\n");
+        System.out.print(allMatchingTasks);
     }
 
 

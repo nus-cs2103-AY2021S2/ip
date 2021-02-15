@@ -31,7 +31,7 @@ public class Parser {
                 tasks.deleteTask(taskNumber);
             } else if (text.equals("find")) {
                 String keyword = commandArr[1];
-                tasks.findTask(keyword, ui);
+                tasks.findTask(keyword);
             } else {
                 String taskName = "";
                 String type = text;
