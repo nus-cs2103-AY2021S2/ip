@@ -14,9 +14,12 @@ public class Duke {
 
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke.\n"
             + "What can I do for you today?";
+    private static final String EXIT_MESSAGE = "Sorry, command cannot be executed.\n"
+            + "I am currently shutting down...";
     private Storage storage;
     private TaskList taskList;
     private AliasMap aliasMap;
+    private boolean isShuttingDown = false;
 
     /**
      * Default class constructor.
@@ -51,6 +54,10 @@ public class Duke {
      * @return String response from executing user command.
      */
     public String getResponse(String input) {
+        if (isShuttingDown) {
+            return EXIT_MESSAGE;
+        }
+
         Command command;
         try {
             input = CommandParser.parseAlias(input, aliasMap);
@@ -61,6 +68,10 @@ public class Duke {
 
             if (command.shouldSaveData()) {
                 saveData();
+            }
+
+            if (command.shouldExitDuke()) {
+                isShuttingDown = true;
             }
 
             return result;
@@ -77,5 +88,14 @@ public class Duke {
     public void saveData() throws DukeException {
         storage.saveTask(taskList);
         storage.saveAlias(aliasMap);
+    }
+
+    /**
+     * Returns boolean variable stating if Duke is shutting down.
+     *
+     * @return True if Duke is shutting down, else false.
+     */
+    public boolean isShuttingDown() {
+        return isShuttingDown;
     }
 }

@@ -64,7 +64,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (input.equalsIgnoreCase("bye")) {
+        if (duke.isShuttingDown()) {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
