@@ -24,8 +24,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task`</br>
-`[T][X]Fix this code`</br>
+`Got it. I've added this task`
+`[T][X]Fix this code`
 `Now you have {number of tasks} tasks in the list.`
 
 
@@ -42,8 +42,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task`</br>
-`[E][X]Fix this code (at: Feb 01 2021)`</br>
+`Got it. I've added this task`
+`[E][X]Fix this code (at: Feb 01 2021)`
 `Now you have {number of tasks} tasks in the list.`
 
 #### deadline - Add an deadline task to Mike's storage
@@ -59,8 +59,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task`</br>
-`[D][X]Fix this code (by: Feb 01 2021)`</br>
+`Got it. I've added this task`
+`[D][X]Fix this code (by: Feb 01 2021)`
 `Now you have {number of tasks} tasks in the list.`
 
 #### fixed duration task - Add an fixed duration task to Mike's storage
@@ -76,8 +76,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task`</br>
-`[F][X]Fix this code (needs: 30 hours)`</br>
+`Got it. I've added this task`
+`[F][X]Fix this code (needs: 30 hours)`
 `Now you have {number of tasks} tasks in the list.`
 
 ### Mark a completed task as done:
@@ -93,7 +93,7 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`</br>
+`Nice! I've marked this task as done:`
 `[T][X] Fix this code`
 
 ### Delete a task:
@@ -109,8 +109,8 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:`</br>
-`[T][X] Fix this code`</br>
+`Noted. I've removed this task:`
+`[T][X] Fix this code`
 `Now you have {number of tasks} tasks in the list.`
 
 ### List the tasks:
@@ -126,7 +126,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:`</br>
+`Here are the tasks in your list:`
 `1.[T][X] Fix this code`
 
 ### Find tasks:
@@ -142,8 +142,8 @@ Example of usage:
 
 Expected outcome:
 
-  `Here are the matching tasks in your list:`</br>
-`[T][X] Fix this code` </br>
-`[E][X]Fix this code (at: Feb 01 2021)`</br>
-`[D][X]Fix this code (by: Feb 01 2021)`</br>
+  `Here are the matching tasks in your list:`
+`[T][X] Fix this code` 
+`[E][X]Fix this code (at: Feb 01 2021)`
+`[D][X]Fix this code (by: Feb 01 2021)`
 `[F][X]Fix this code (needs: 30 hours)`
