@@ -15,8 +15,10 @@ public class DeleteAliasCommand extends Command {
     public static final String COMMAND = "deletealias";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("^\\W*(\\S+)\\W*$");
     private static final String ERROR_MESSAGE = "Sorry, please enter a valid alias.\n"
-            + "\tCommand: deletealias [alias]";
-    private static final String HEADER = "Noted! I've removed this alias:\n\t";
+            + "Command: deletealias [alias]";
+    private static final String SUCCESS_MESSAGE = "Noted! I've removed this alias:\n"
+            + "%s";
+    private static final String SUCCESS_NO_MATCH_MESSAGE = "Sorry, I couldn't find the alias '%s' to delete.";
 
     private final String alias;
 
@@ -36,8 +38,12 @@ public class DeleteAliasCommand extends Command {
 
     @Override
     public String execute() {
+        if (!aliasMap.containsAlias(alias)) {
+            return String.format(SUCCESS_NO_MATCH_MESSAGE, alias);
+        }
+
         String deletedAlias = aliasMap.deleteAlias(alias);
-        return HEADER + deletedAlias;
+        return String.format(SUCCESS_MESSAGE, deletedAlias);
     }
 
     /**

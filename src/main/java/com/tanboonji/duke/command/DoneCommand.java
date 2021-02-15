@@ -12,8 +12,9 @@ public class DoneCommand extends Command {
     /** String to execute this command */
     public static final String COMMAND = "done";
     private static final String ERROR_MESSAGE = "Sorry, please enter a valid task number.\n"
-            + "\tCommand: done [task number]";
-    private static final String HEADER = "Nice! I've marked this task as done:\n\t";
+            + "Command: done [task number]";
+    private static final String SUCCESS_MESSAGE = "Nice! I've marked this task as done:\n"
+            + "%s";
 
     private final int taskIndex;
 
@@ -35,7 +36,7 @@ public class DoneCommand extends Command {
     public String execute() throws DukeException {
         try {
             Task task = taskList.markAsDone(taskIndex);
-            return HEADER + task;
+            return String.format(SUCCESS_MESSAGE, task);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidCommandArgumentException(ERROR_MESSAGE);
         }

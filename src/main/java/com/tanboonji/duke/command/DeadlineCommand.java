@@ -19,8 +19,8 @@ public class DeadlineCommand extends Command {
     public static final String COMMAND = "deadline";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/by)/by\\W(.*)");
     private static final String ERROR_MESSAGE =
-            "Sorry, please enter a valid description and datetime for the deadline\n"
-            + "\tCommand: deadline [description] /by [deadline]";
+            "Sorry, please enter a valid description and datetime for the deadline.\n"
+            + "Command: deadline [description] /by [deadline]";
     private static final int DESCRIPTION_GROUP = 1;
     private static final int DATE_GROUP = 2;
 

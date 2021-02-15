@@ -12,8 +12,9 @@ public class DeleteCommand extends Command {
     /** String input to execute this command */
     public static final String COMMAND = "delete";
     private static final String ERROR_MESSAGE = "Sorry, please enter a valid task number.\n"
-            + "\tCommand: delete [task number]";
-    private static final String HEADER = "Noted! I've removed this task:\n\t";
+            + "Command: delete [task number]";
+    private static final String SUCCESS_MESSAGE = "Noted! I've removed this task:\n"
+            + "%s";
 
     private final int taskIndex;
 
@@ -35,7 +36,7 @@ public class DeleteCommand extends Command {
     public String execute() throws DukeException {
         try {
             Task task = taskList.deleteTask(taskIndex);
-            return HEADER + task;
+            return String.format(SUCCESS_MESSAGE, task);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidCommandArgumentException(ERROR_MESSAGE);
         }

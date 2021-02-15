@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public class AliasMap implements Serializable {
 
-    private static final String aliasFormat = "%s -> %s";
+    private static final String aliasFormat = "%s --> %s";
     private final HashMap<String, String> aliasMap;
 
     /**

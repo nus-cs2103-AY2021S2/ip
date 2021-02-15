@@ -16,8 +16,8 @@ public class AliasCommand extends Command {
     private static final Pattern COMMAND_FORMAT = Pattern.compile("^\\W*(\\S+)\\W*(\\S+)$");
     private static final String ERROR_MESSAGE =
             "Sorry, please enter a valid command and alias\n"
-                    + "\tCommand: alias [command] [alias]";
-    private static final String SUCCESS_MESSAGE = "You have aliased \"%s\" with \"%s\"\n";
+                    + "Command: alias [command] [alias]";
+    private static final String SUCCESS_MESSAGE = "You have aliased '%s' with '%s'\n";
     private static final int COMMAND_GROUP = 1;
     private static final int ALIAS_GROUP = 2;
 

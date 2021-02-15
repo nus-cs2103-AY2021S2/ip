@@ -9,18 +9,18 @@ public class HelpCommand extends Command {
     public static final String COMMAND = "help";
     /** Command list for help message */
     public static final String COMMAND_LIST = "Commands available:\n"
-            + "\t- list\n"
-            + "\t- find [keyword]\n"
-            + "\t- todo [description]\n"
-            + "\t- deadline [description] /by [deadline]\n"
-            + "\t- event [description] /at [datetime]\n"
-            + "\t- done [task number]\n"
-            + "\t- delete [task number]\n"
-            + "\t- alias [command] [alias]\n"
-            + "\t- listalias\n"
-            + "\t- deletealias [alias]\n"
-            + "\t- help\n"
-            + "\t- bye\n";
+            + "- list\n"
+            + "- find [keyword]\n"
+            + "- todo [description]\n"
+            + "- deadline [description] /by [deadline]\n"
+            + "- event [description] /at [datetime]\n"
+            + "- done [task number]\n"
+            + "- delete [task number]\n"
+            + "- alias [command] [alias]\n"
+            + "- listalias\n"
+            + "- deletealias [alias]\n"
+            + "- help\n"
+            + "- bye\n";
 
     /**
      * Default class constructor.
