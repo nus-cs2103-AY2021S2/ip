@@ -6,12 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -51,7 +51,7 @@ public class Duke extends Application {
         Circle c = new Circle(200, 200, 40);
         c.setFill(new ImagePattern(duke));
 
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, c));//new ImageView(duke)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greeting, c));
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         Scene scene = new Scene(mainLayout);
@@ -114,6 +114,10 @@ public class Duke extends Application {
 
         Circle c2 = new Circle(200, 200, 40);
         c2.setFill(new ImagePattern(user));
+
+        Rectangle r = new Rectangle(200, 200, 80, 80);
+        r.setArcWidth(30.0);
+        r.setArcHeight(20.0);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, c2),
