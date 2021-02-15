@@ -1,26 +1,24 @@
-# snom.model.Snom project template
+# Snom User Guide
+Snom is a Personal Assistant Chatbot that helps a person to keep track of various things.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Quick Start
+1. Ensure you have Java 11 or above installed on your Computer
+2. Download the latest Snom.jar from [here](https://github.com/se-edu/addressbook-level3/releases).
+3. Copy Snom.jar to the folder you want to use as home folder for your Snom.
+4. Double-click on Snom.jar to start the application. <br>
 
-## Setting up in Intellij
+   ![Ui](docs/Ui.png)
+5. Type in the command in the command box and press Enter to execute it.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Command summary
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/snom.model.Snom.java` file, right-click it, and choose `Run snom.model.Snom.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Action | Format
+--------|------------------
+**todo** | `todo DESCRIPTION`
+**deadline** | `deadline DESCRIPTION /by DATE [TIME]`
+**event** | `event DESCRIPTION /at DATE [TIME[`
+**list** | `list`
+**find** | `find KEYWORD`
+**finish** | `finish ...`
+**delete** | `delete ...`
+**bye** | `bye`
