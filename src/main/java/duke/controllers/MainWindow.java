@@ -1,3 +1,6 @@
+package duke.controllers;
+
+import duke.main.Duke;
 import duke.responses.Response;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
