@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 public class Ui {
     private final static String CHATBOT_NAME = "Rawrz";
-    private final static String BORDER = "___";
 
     /**
      * Constructor for Ui. Creates a Scanner with System.in
