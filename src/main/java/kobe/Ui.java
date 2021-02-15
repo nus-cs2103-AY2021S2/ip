@@ -71,6 +71,10 @@ public class Ui {
                 "Type help for more info");
     }
 
+    public static void addGoodbyeResponse(){
+        responses.add("Goodbye! Kobe has saved your list.\n" +
+                "Kobe hopes to see you soon!");
+    }
 
 
     /**

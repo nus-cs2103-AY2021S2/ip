@@ -2,6 +2,7 @@ package kobe;
 
 import java.lang.System;
 
+
 public class Commands {
     public static String ind = "    ";
     public static String line = ind + "____________________________________________________________\n" + ind;
@@ -13,10 +14,11 @@ public class Commands {
      *                 text file where the task list will be saved at
      */
     public static void goodbye(Storage storage) {
-        storage.saveFile();
+        Ui.addGoodbyeResponse();
+        Storage.saveFile(storage);
         System.out.println(line + "Bye. Kobe saved your list.\n" + ind
                 + "Kobe hopes to see you again soon!\n" + line);
-        System.exit(0);
+//      System.exit(0);
     }
 
     /**
