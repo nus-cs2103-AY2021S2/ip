@@ -20,12 +20,6 @@ public class TaskUtilTest {
     }
 
     @Test
-    public void dateTimeOutputFormat() {
-        String outputDateTime = inputDateTime.format(TaskUtil.DATE_TIME_OUTPUT_FORMAT);
-        assertEquals(outputDateTime, "Mon 27 Sep 2021 03:00pm");
-    }
-
-    @Test
     public void dateTimeSaveFormat() {
         String saveDateTime = inputDateTime.format(TaskUtil.DATE_TIME_SAVE_FORMAT);
         assertEquals(saveDateTime, "2021-09-27 15:00");
