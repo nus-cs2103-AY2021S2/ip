@@ -26,32 +26,26 @@ public class Parser {
                 output = taskList.toString();
                 break;
             case "done":
-                assert input.length > 0 : "No Done Input";
                 int doneIndex = Integer.parseInt(input[1]);
                 output = "Nice! I've marked this task as done!\n" + taskList.completeTask(doneIndex);
                 break;
             case "delete":
-                assert input.length > 0 : "No Delete Input";
                 int deleteIndex = Integer.parseInt(input[1]);
                 output = "Alright! I've deleted this task!\n" + taskList.deleteTask(deleteIndex);
                 break;
             case "todo":
-                assert input.length > 0 : "No Todo Input";
                 Task newTodo = Todo.makeTodo(input[1]);
                 output = taskList.add(newTodo);
                 break;
             case "event":
-                assert input.length > 0 : "No Event Input";
                 Task newEvent = Event.makeEvent(input[1]);
                 output = taskList.add(newEvent);
                 break;
             case "deadline":
-                assert input.length > 0 : "No Deadline Input";
                 Task newDeadline = Deadline.makeDeadline(input[1]);
                 output = taskList.add(newDeadline);
                 break;
             case "find":
-                assert input.length > 0 : "No Find Input";
                 output = "Here are the matching tasks in your list!\n" + taskList.findTask(input[1]);
                 break;
             default:
