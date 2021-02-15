@@ -51,7 +51,7 @@ public class Duke {
         return response;
     }
 
-    public String getTasklist() {
+    public String getTasklistString() {
         return "notnull";
     }
 

@@ -4,6 +4,7 @@ import duke.main.Duke;
 import duke.responses.Response;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -18,12 +19,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
+import java.util.List;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
 
-    private static final Font FONT = new Font("Consolas", 11);
+    private static final Font MONOSPACED_FONT = new Font("Consolas", 11);
     private static final Border THIN_BORDER = new Border(new BorderStroke(
             Paint.valueOf("0x000000"),
             BorderStrokeStyle.SOLID,
@@ -54,7 +57,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        responseContainer.setText(duke.getStartupResponse());
+        updateResponseContainer(duke.getStartupResponse()); // initialize Duke
     }
 
     /**
@@ -75,8 +78,8 @@ public class MainWindow extends AnchorPane {
         case OK:
             String responseText = response.getMessage();
             updateInputHistoryContainer(input, isBadInput);
-            responseContainer.setText(responseText);
-            tasklistContainer.setText(duke.getTasklist());
+            updateResponseContainer(responseText);
+            updateTasklistContainer(duke.getTasklistString());
             userInput.clear();
             break;
         default:
@@ -88,10 +91,10 @@ public class MainWindow extends AnchorPane {
     private void updateInputHistoryContainer(String inputText, boolean isBadInput) {
 
         /* Update last text box to neutral color */
-        int containerSize = inputHistoryContainer.getChildrenUnmodifiable().size();
-        if (containerSize > 0) {
-            InputHistoryBox lastChild = (InputHistoryBox) inputHistoryContainer.getChildren().get(containerSize - 1);
-            lastChild.setInputFaded();
+        List<Node> nodes = inputHistoryContainer.getChildren();
+        if (!nodes.isEmpty()) {
+            InputHistoryBox previousChild = (InputHistoryBox) nodes.get(0);
+            previousChild.setInputFaded();
         }
 
         /* Create individual input text box */
@@ -99,21 +102,23 @@ public class MainWindow extends AnchorPane {
         textBox.setOnMouseClicked(event -> {
             focusOnTextField();
             userInput.setText(inputText);
+            userInput.setFont(MONOSPACED_FONT);
             userInput.positionCaret(inputText.length());
         });
 
         /* Add text box to container */
-        inputHistoryContainer.getChildren().add(textBox);
+        inputHistoryContainer.getChildren().add(0, textBox);
     }
 
-    private InputHistoryBox getInputBox(String text, boolean isBadInput) {
-        InputHistoryBox textBox = new InputHistoryBox(text, isBadInput);
-        textBox.setOnMouseClicked(event -> {
-            focusOnTextField();
-            userInput.setText(text);
-            userInput.positionCaret(text.length());
-        });
-        return textBox;
+    private void updateResponseContainer(String responseText) {
+        responseContainer.setText(responseText);
+        responseContainer.setFont(MONOSPACED_FONT);
+    }
+
+    private void updateTasklistContainer(String tasklistString) {
+        tasklistContainer.setText(tasklistString);
+        tasklistContainer.setFont(MONOSPACED_FONT);
+
     }
 
     @FXML

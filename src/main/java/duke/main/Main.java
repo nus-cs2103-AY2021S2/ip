@@ -23,6 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            // scene.getStylesheets().add(getClass().getResource("/fontstyle.css").toExternalForm());
             fxmlLoader.<duke.controllers.MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
