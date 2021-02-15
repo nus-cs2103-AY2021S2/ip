@@ -133,16 +133,17 @@ Nice! I've marked this task as done:
 
 ### 6. `delete` - Delete a task
 
-Deletes the task with the given task number from
+Deletes the task with the given (1 or more) task numbers from
 Duke.
 
 **Example of usage**:
 
-`delete (task number)`
+`delete (task number) ([optional] task number) ...`
 
 **Expected outcome**:
 
-Duke responses to confirm that the task has been deleted successfully. 
+Duke responses to confirm that the tasks with the task numbers that you
+have entered have been deleted successfully. 
 
 ```
 Noted. I've removed this task:
