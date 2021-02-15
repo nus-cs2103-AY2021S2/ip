@@ -24,6 +24,7 @@ Steve runs locally on your computer and offers support for the following task ty
 2) Deadline (specifies a due date)
 3) Event (specifies start date and end date)
 ```
+For more details on the features and their usage, please refer to the [user guide](https://tjtanjin.github.io/ip).
 
 ### Technologies
 Technologies used by Steve are as below:
