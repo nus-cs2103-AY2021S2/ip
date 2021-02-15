@@ -116,6 +116,17 @@ public class Ui {
                 size + " task(s) in the list.\n" + line);
     }
 
+    public static void addCompleteTaskResponse(int taskNumber, Task currentTask) {
+        String fullResponse = "";
+        fullResponse += "Nice work! Kobe will mark your task as done!\n";
+        fullResponse += ind + currentTask;
+        responses.add(fullResponse);
+
+        System.out.print(line + "Nice work! Kobe will mark your task as done!\n" + ind);
+        System.out.println(ind + currentTask + "\n" + line);
+
+    }
+
     /**
      * To display an error message in the context of Kobe
      */

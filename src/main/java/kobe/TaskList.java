@@ -129,11 +129,11 @@ public class TaskList {
      * @param taskNumber  the task number associated to the task that has been completed
      * @param ui  the user interface to inform the user of the outcome
      */
-    public void completeTask(int taskNumber, Ui ui) {
+    public void completeTask(int taskNumber) {
         this.tasks.get(taskNumber).markAsDone();
-        System.out.print(line + "Nice work! Kobe will mark your task as done!\n" + ind);
-        System.out.println(ind + tasks.get(taskNumber));
-        ui.showLine();
+        Task currentTask = this.tasks.get(taskNumber);
+        Ui.addCompleteTaskResponse(taskNumber, currentTask);
+
     }
 
     /**

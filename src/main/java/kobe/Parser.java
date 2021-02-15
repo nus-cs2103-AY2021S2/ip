@@ -25,7 +25,7 @@ public class Parser {
                 Commands.showList(tasks);
             } else if (text.equals("done")) {
                 int taskNumber = Integer.parseInt(commandArr[1]) - 1;
-                tasks.completeTask(taskNumber, ui);
+                tasks.completeTask(taskNumber);
             } else if (text.equals("delete")) {
                 int taskNumber = Integer.parseInt(commandArr[1]) - 1;
                 tasks.deleteTask(taskNumber, ui);
@@ -56,11 +56,7 @@ public class Parser {
                     //Check if the second word is just whitespace
                     //If it is, count it as an error as well
                     String secondWord = commandArrFirst2Parts[1];
-//                    Pattern pattern = Pattern.compile("\\s");
-//                    Matcher matcher = pattern.matcher(secondWord);
-//                    boolean isWhitespacePresent = matcher.find() || secondWord.equals("");
                     boolean isWhitespacePresent = secondWord.isBlank() || secondWord.equals("");
-//                    boolean isWhitespacePresent = s.matches("^\\s*$");
                     if (isWhitespacePresent) {
                         Ui.addWhitespaceResponse();
                         String errMessage = "Incorrect Command Format: Extra whitespace detected. See help for more information";
