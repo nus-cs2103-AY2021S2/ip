@@ -1,13 +1,13 @@
 package com.tjtanjin.steve.tasks;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
-    LocalDate[] taskDate = new LocalDate[] {LocalDate.parse("2020-04-05")};
+    private final LocalDate[] taskDate = new LocalDate[] {LocalDate.parse("2020-04-05")};
     private final Task TASK = new Deadline("Test Deadline", "incomplete", taskDate);
 
     @Test

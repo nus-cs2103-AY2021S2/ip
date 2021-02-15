@@ -1,13 +1,14 @@
 package com.tjtanjin.steve.tasks;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
-    LocalDate[] taskDates = new LocalDate[] {LocalDate.parse("2020-04-05"), LocalDate.parse("2020-04-06")};
+    private final LocalDate[] taskDates =
+            new LocalDate[] {LocalDate.parse("2020-04-05"), LocalDate.parse("2020-04-06")};
     private final Task TASK = new Event("Test Event", "incomplete", taskDates);
 
     @Test
