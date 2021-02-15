@@ -1,7 +1,7 @@
 package duke.dukeexceptions;
 
 /**
- * Custom Exception class to specify invalid Task stored in local file.
+ * Models the exception to be thrown when there is a wrong task in the local storage file.
  */
 public class InvalidFileTaskTypeException extends DukeException {
     public InvalidFileTaskTypeException() {

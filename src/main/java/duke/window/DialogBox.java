@@ -55,12 +55,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Creates a DialogBox to display a message sent by the user.
+     * @param text input from the user.
+     * @param img user's profile picture.
+     * @return a DialogBox representing a message sent by the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
         dialogBox.dialog.setBackground(new Background(new BackgroundFill(Color.NAVY, null, null)));
         return dialogBox;
     }
 
+    /**
+     * Creates a DialogBox to display a message from the chatbot.
+     * @param text response from the chatbot.
+     * @param img chatbot's profile picture.
+     * @return a DialogBox representing a message sent by the chatbot.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
         dialogBox.dialog.setBackground(new Background(new BackgroundFill(Color.DARKGREEN, null, null)));
@@ -68,6 +80,12 @@ public class DialogBox extends HBox {
         return dialogBox;
     }
 
+    /**
+     * Creates a DialogBox to display an error message from the chatbot.
+     * @param text error message from the chatbot.
+     * @param img chatbot's profile picture.
+     * @return a DialogBox representing an error message from the chatbot.
+     */
     public static DialogBox getDukeErrorDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
         dialogBox.flip();

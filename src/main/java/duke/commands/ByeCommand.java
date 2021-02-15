@@ -5,6 +5,9 @@ import java.io.IOException;
 import duke.tasks.TaskList;
 import duke.utils.Storage;
 
+/**
+ * Represents a bye command which writes to local storage and terminates the program.
+ */
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 

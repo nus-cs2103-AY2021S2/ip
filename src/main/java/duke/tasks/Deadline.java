@@ -3,11 +3,14 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Models a task with a deadline.
+ */
 public class Deadline extends Task {
-    private final LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
-     * Constructs a Deadline task object.
+     * Constructs a Deadline task object. Overloaded constructor to take in a String dateTime parameter.
      *
      * @param description the description of the Deadline task.
      * @param dateTime the date and time this task is due, in String representation.
@@ -18,7 +21,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs a Deadline task object.
+     * Constructs a Deadline task object. Overloaded constructor to take in a LocalDateTime dateTime parameter.
      *
      * @param description the description of the Deadline task.
      * @param dateTime the date and time this task is due, as a LocalDateTime.

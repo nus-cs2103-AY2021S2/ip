@@ -3,11 +3,14 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Models an event task with a date and time.
+ */
 public class Event extends Task {
-    private final LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
-     * Constructs a Event task object.
+     * Constructs a Event task object. Overloaded constructor to take in a String dateTime parameter.
      *
      * @param description the description of the Event task.
      * @param dateTime the date and time this task is due, in String representation.
@@ -18,7 +21,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs a Event task object.
+     * Constructs a Event task object. Overloaded constructor to take in a LocalDateTime dateTime parameter.
      *
      * @param description the description of the Event task.
      * @param dateTime the date and time this task is due, as a LocalDateTime.

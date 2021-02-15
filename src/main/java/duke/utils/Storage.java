@@ -12,8 +12,11 @@ import duke.dukeexceptions.InvalidFileTaskTypeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+/**
+ * Models a utility which reads from local storage and writes to local storage.
+ */
 public class Storage {
-    private final String filepath;
+    private String filepath;
 
     /**
      * Constructs a Storage object responsible for reading and writing to the local storage file.

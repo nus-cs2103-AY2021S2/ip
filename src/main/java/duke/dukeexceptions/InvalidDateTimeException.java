@@ -1,7 +1,7 @@
 package duke.dukeexceptions;
 
 /**
- * Custom Exception class to specify invalid date format input by the user.
+ * Models the exception to be thrown when there is an invalid date and time format input.
  */
 public class InvalidDateTimeException extends DukeException {
     /**

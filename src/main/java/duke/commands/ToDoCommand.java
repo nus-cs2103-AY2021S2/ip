@@ -4,6 +4,9 @@ import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.utils.Storage;
 
+/**
+ * Represents a todo command which adds a todo task to the task list.
+ */
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 
@@ -14,7 +17,7 @@ public class ToDoCommand extends Command {
      *
      * @param taskList the current list of Tasks.
      * @param storage the object in charge of writing to the local storage file.
-     * @param todo the task input by the user.
+     * @param todo the String task input by the user.
      */
     public ToDoCommand(TaskList taskList, Storage storage, String todo) {
         super(taskList, storage);

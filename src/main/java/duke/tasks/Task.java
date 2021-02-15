@@ -2,6 +2,10 @@ package duke.tasks;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Models a task with a description and a boolean indicating if task is completed. Parent class of Deadline, Event
+ * and ToDo classes.
+ */
 public abstract class Task {
     protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
             + "[dd-MM-yy HHmm]");

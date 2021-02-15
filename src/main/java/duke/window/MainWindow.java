@@ -48,7 +48,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates and displays a DialogBox with introduction message from Duke.
+     * Creates and displays a DialogBox with introduction message from Duke. If initialising fails, the appropriate
+     * error message will be displayed.
      */
     public void displayDukeIntroduction() {
         try {
@@ -59,14 +60,13 @@ public class MainWindow extends AnchorPane {
         } catch (FileNotFoundException e) {
             String cannotAccessFileMsg = "Cannot access file at specified location.\n" + e.getMessage();
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("Error! " + cannotAccessFileMsg, dukeImage)
+                    DialogBox.getDukeErrorDialog("Error! " + cannotAccessFileMsg, dukeImage)
             );
         } catch (InvalidFileTaskTypeException e) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("Error! " + e.getMessage(), dukeImage)
+                    DialogBox.getDukeErrorDialog("Error! " + e.getMessage(), dukeImage)
             );
         }
-
     }
 
     /**
@@ -82,7 +82,7 @@ public class MainWindow extends AnchorPane {
             String response = duke.getResponse(userInput.getText());
 
             if (input.equals(ByeCommand.COMMAND_WORD)) {
-                PauseTransition delay = new PauseTransition(Duration.seconds(30));
+                PauseTransition delay = new PauseTransition(Duration.seconds(5));
                 delay.setOnFinished(event -> stage.close());
                 delay.play();
             }

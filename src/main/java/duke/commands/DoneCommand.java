@@ -4,10 +4,13 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.utils.Storage;
 
+/**
+ * Represents a done command which marks a task at the specified index in the task list as done.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
 
-    private final int position;
+    private int position;
 
     /**
      * Creates a DoneCommand object to store the done command input from the user.

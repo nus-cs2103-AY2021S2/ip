@@ -7,6 +7,9 @@ import java.util.Map;
 import duke.tasks.TaskList;
 import duke.utils.Storage;
 
+/**
+ * Represents a help command which displays information about the commands.
+ */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     private static final String UNKNOWN_COMMAND = "unknown";
@@ -24,11 +27,21 @@ public class HelpCommand extends Command {
     );
     private static final List<String> ALL_COMMANDS = new ArrayList<>(COMMAND_AND_DESCRIPTION.keySet());
 
-    private final String command;
+    private String command;
 
     /**
-     * Creates a HelpCommand object to display instructions of the commands available in this chatbot.
-     * If a non-null command is passed in, only instructions of that particular command will be returned.
+     * Creates a HelpCommand object to display instructions of all the commands available in this chatbot.
+     *
+     * @param taskList the current list of Tasks.
+     * @param storage the object in charge of writing to the local storage file.
+     */
+    public HelpCommand(TaskList taskList, Storage storage) {
+        super(taskList, storage);
+        this.command = null;
+    }
+
+    /**
+     * Creates a HelpCommand object to display instructions of the specified commands available in this chatbot.
      *
      * @param taskList the current list of Tasks.
      * @param storage the object in charge of writing to the local storage file.
@@ -44,7 +57,6 @@ public class HelpCommand extends Command {
         if (this.command != null) {
             return returnOneInstruction();
         }
-
 
         return returnAllInstructions();
     }

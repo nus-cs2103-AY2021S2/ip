@@ -5,9 +5,12 @@ import java.util.List;
 
 import duke.utils.TaskStringConverter;
 
-
+/**
+ * Models a list of tasks, with operations to add, delete, set task as done and return a string
+ * representation of all the tasks in the list.
+ */
 public class TaskList {
-    private final List<Task> taskList;
+    private List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();

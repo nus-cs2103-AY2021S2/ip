@@ -10,9 +10,13 @@ import duke.tasks.TaskList;
 import duke.utils.Storage;
 import duke.utils.TaskStringConverter;
 
+/**
+ * Represents a find command which finds tasks with a specified phrase in the task description.
+ */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-    private final String toFind;
+
+    private String toFind;
 
     /**
      * Creates a FindCommand object to store the find command input from the user.

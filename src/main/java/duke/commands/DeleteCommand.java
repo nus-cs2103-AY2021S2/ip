@@ -3,10 +3,13 @@ package duke.commands;
 import duke.tasks.TaskList;
 import duke.utils.Storage;
 
+/**
+ * Represents a delete command which deletes a task at the specified index in the task list.
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
-    private final int position;
+    private int position;
 
     /**
      * Creates a DeleteCommand object to store the delete command input from the user.

@@ -23,14 +23,17 @@ import duke.dukeexceptions.InvalidDateTimeException;
 import duke.dukeexceptions.InvalidIndexInputException;
 import duke.tasks.TaskList;
 
+/**
+ * Models a parser which parses input from the user into commands.
+ */
 public class Parser {
     protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
             + "[dd-MM-yy HHmm]");
     private static final Pattern REGEX_CHECK_NUMBER = Pattern.compile("^[0-9]$");
     private static final String INVALID_TASK_MSG = "Please input a valid task description!";
 
-    private final TaskList taskList;
-    private final Storage storage;
+    private TaskList taskList;
+    private Storage storage;
 
     /**
      * Constructors a Parser object, responsible for parsing input from the user.
@@ -53,6 +56,7 @@ public class Parser {
      * @throws InvalidIndexInputException when index entered by user is not a number or not within range of 1 to
      *     the size of the TaskList.
      * @throws EmptyListException when trying to find by keyword but TaskList is empty.
+     * @throws InvalidCommandException when no valid command is passed.
      */
     public Command parse(String input) throws EmptyArgumentException, InvalidDateTimeException,
             InvalidIndexInputException, EmptyListException, InvalidCommandException {
@@ -218,7 +222,7 @@ public class Parser {
         assert commandAndInput.length >= 1 && commandAndInput.length <= 2;
 
         if (commandAndInput.length == 1) {
-            return new HelpCommand(this.taskList, this.storage, null);
+            return new HelpCommand(this.taskList, this.storage);
         }
 
         return new HelpCommand(this.taskList, this.storage, commandAndInput[1]);

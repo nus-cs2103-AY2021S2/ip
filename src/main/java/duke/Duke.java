@@ -11,7 +11,7 @@ import duke.utils.Storage;
 
 
 public class Duke {
-    private static final String FILE_PATH = "./src/main/java/duke/tasks.txt";
+    private static final String FILE_PATH = "./tasks.txt";
     private static final Storage STORAGE = new Storage(FILE_PATH);
     private static TaskList taskList;
 
