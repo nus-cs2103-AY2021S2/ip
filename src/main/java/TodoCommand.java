@@ -21,6 +21,6 @@ public class TodoCommand extends AddCommand {
         String taskString = str.toString();
         Todo todo = new Todo(taskString);
         tasks.add(todo);
-        return todo.toString();
+        return Ui.showAddText() + todo.toString();
     }
 }

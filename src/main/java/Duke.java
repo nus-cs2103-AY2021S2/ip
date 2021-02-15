@@ -64,15 +64,6 @@ public class Duke {
             throw new IllegalKeywordException("Unable to match any command");
         }
     }
-
-    /**
-     * Returns the app welcome message when the app is first opened.
-     *
-     * @return String that displays the Duke welcome message
-     */
-    public String getWelcomeMessage() {
-        return "Welcome user! What can I do for you today?";
-    }
 }
 
 

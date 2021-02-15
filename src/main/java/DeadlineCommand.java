@@ -27,6 +27,6 @@ public class DeadlineCommand extends AddCommand {
     public String getString() {
         Deadline deadline = new Deadline(taskString, date);
         tasks.add(deadline);
-        return deadline.toString();
+        return Ui.showAddText() + deadline.toString();
     }
 }

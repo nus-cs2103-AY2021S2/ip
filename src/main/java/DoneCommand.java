@@ -23,6 +23,6 @@ public class DoneCommand extends Command {
         Task toMark = TaskList.getTasklist().get(index - 1);
         toMark.markAsDone();
         TaskList.getTasklist().get(index - 1).markAsDone();
-        return toMark.toString();
+        return Ui.showDoneText() + toMark.toString();
     }
 }

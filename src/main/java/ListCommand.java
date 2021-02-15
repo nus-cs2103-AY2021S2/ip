@@ -22,6 +22,6 @@ public class ListCommand extends Command {
             listStringBuilder.append("\n");
             listCounter++;
         }
-        return listStringBuilder.toString();
+        return Ui.showListText() + listStringBuilder.toString();
     }
 }

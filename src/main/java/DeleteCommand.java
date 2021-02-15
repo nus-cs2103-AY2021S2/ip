@@ -22,6 +22,6 @@ public class DeleteCommand extends Command {
         assert index >= 1 : "Value must be at least 1";
         Task toBeRemoved = tasks.get(index - 1);
         tasks.remove(index - 1);
-        return "Noted. I've removed this task:\n" + toBeRemoved.toString();
+        return Ui.showDeleteText() + toBeRemoved.toString();
     }
 }
