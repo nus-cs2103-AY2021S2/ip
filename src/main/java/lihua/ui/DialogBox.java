@@ -127,23 +127,23 @@ public class DialogBox extends HBox {
 
     //@@author
     private static Background getUserBackground() {
-        BackgroundFill background_fill = new BackgroundFill(Color.SKYBLUE,
+        BackgroundFill backgroundFill = new BackgroundFill(Color.SKYBLUE,
                 CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(background_fill);
+        Background background = new Background(backgroundFill);
         return background;
     }
 
     private static Background getLihuaBackground() {
-        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTPINK,
+        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTPINK,
                 CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(background_fill);
+        Background background = new Background(backgroundFill);
         return background;
     }
 
     private static Background getLihuaBackgroundError() {
-        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTCORAL,
+        BackgroundFill backgroundFill = new BackgroundFill(Color.LIGHTCORAL,
                 CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(background_fill);
+        Background background = new Background(backgroundFill);
         return background;
     }
 }
