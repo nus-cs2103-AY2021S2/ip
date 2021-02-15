@@ -12,7 +12,7 @@ Duke requires the download of [Java SE 11](https://www.oracle.com/java/technolog
 ## Feature `help`
 View the commands for Duke.
 
-###Usage - Enter in `help`
+### Usage - Enter in `help`
 
 Example of usage:
 
@@ -59,7 +59,7 @@ Expected outcome:
 `These are the tasks in your list:`<br>
 `1. [T][] read book`
 
-##Features to add a task in your list: 
+## Features to add a task in your list: 
 
 ## Feature `todo`
 Add a to-do task in your list.
@@ -106,7 +106,7 @@ Expected outcome:
 `[E][] team meeting (at: Dec 31 2021 1200 - Dec 31 2021 1400)` <br>
 `You have 1 task(s) in your list.`
 
-##Features regarding tasks:
+## Features regarding tasks:
 
 ## Feature `delete`
 Delete a task from your task list.
@@ -154,9 +154,9 @@ Expected outcome:
 `You have 1 task(s) in your list.` <br>
 
 Notice that 'X' appears at the second box of the task. <br>
-That 'X' signifies that the task is done.
+That 'X' signifies that the task is done. <br>
 
-#Summary of Duke Commands
+# Summary of Duke Commands
 
 Action | Command
 ------ | --------
