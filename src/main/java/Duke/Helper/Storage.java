@@ -1,11 +1,12 @@
 package Duke.Helper;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 import Duke.Task.Deadline;
 import Duke.Task.Event;
@@ -17,6 +18,7 @@ import Duke.Task.Todo;
  */
 public class Storage {
     private final String path;
+    private List<String> taskFile;
 
     /**
      * This class constructor has 1 parameter: a string path to the destination file for reading and writing the data.
@@ -24,6 +26,17 @@ public class Storage {
      */
     public Storage(String path) {
         this.path = path;
+        Path p = Path.of(path);
+        Path parent = p.getParent();
+        try {
+            Files.createDirectories(parent);
+            if (!Files.exists(p)) {
+                Files.createFile(p);
+            }
+            taskFile = Files.readAllLines(p);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -31,37 +44,30 @@ public class Storage {
      * @return A list containing all the tasks stored in the file.
      */
     public ArrayList<Task> readDataFromFile() {
-        try {
-            File f = new File(path);
-            Scanner sc = new Scanner(f);
-            ArrayList<Task> tasks = new ArrayList<>();
-            while (sc.hasNextLine()) {
-                String currLine = sc.nextLine();
-                String[] information = currLine.split("\\|");
-                if (information[0].charAt(0) == 'T') {
-                    Task newTask = new Todo(information[2]);
-                    if (information[1].trim().equals("1")) {
-                        newTask.markAsDone();
-                    }
-                    tasks.add(newTask);
-                } else if (information[0].charAt(0) == 'D') {
-                    Task newTask = new Deadline(information[2], information[3]);
-                    if (information[1].trim().equals("1")) {
-                        newTask.markAsDone();
-                    }
-                    tasks.add(newTask);
-                } else if (information[0].charAt(0) == 'E') {
-                    Task newTask = new Event(information[2], information[3]);
-                    if (information[1].trim().equals("1")) {
-                        newTask.markAsDone();
-                    }
-                    tasks.add(newTask);
+        ArrayList<Task> tasks = new ArrayList<>();
+        for (String currLine : taskFile) {
+            String[] information = currLine.split("\\|");
+            if (information[0].charAt(0) == 'T') {
+                Task newTask = new Todo(information[2]);
+                if (information[1].trim().equals("1")) {
+                    newTask.markAsDone();
                 }
+                tasks.add(newTask);
+            } else if (information[0].charAt(0) == 'D') {
+                Task newTask = new Deadline(information[2], information[3]);
+                if (information[1].trim().equals("1")) {
+                    newTask.markAsDone();
+                }
+                tasks.add(newTask);
+            } else if (information[0].charAt(0) == 'E') {
+                Task newTask = new Event(information[2], information[3]);
+                if (information[1].trim().equals("1")) {
+                    newTask.markAsDone();
+                }
+                tasks.add(newTask);
             }
-            return tasks;
-        } catch (FileNotFoundException e) {
-            return new ArrayList<>();
         }
+        return tasks;
     }
 
     /**
