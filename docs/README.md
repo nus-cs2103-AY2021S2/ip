@@ -6,12 +6,12 @@ readability.
 - [Quick start](#quick-start)
 - [Task Types](#task-types)
 - [Features](#features)
-    - [Adding a task](#adding-tasks--event/deadline/todo)
-    - [Listing all tasks](#listing-all-tasks--list)
-    - [Deleting a task](#deleting-a-task--delete)
-    - [Completing a task](#completing-a-task--done)
-    - [Setting a task priority](#setting-a-task-priority--priority)
-    - [Exiting the application](#exiting-the-application--bye)
+    - [Adding a task](#adding-tasks-eventdeadlinetodo)
+    - [Listing all tasks](#listing-all-tasks-list)
+    - [Deleting a task](#deleting-a-task-delete)
+    - [Completing a task](#completing-a-task-done)
+    - [Setting a task priority](#setting-a-task-priority-priority)
+    - [Exiting the application](#exiting-the-application-bye)
 
   
 ## Quick start
