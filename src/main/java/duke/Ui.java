@@ -14,80 +14,85 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome message to be shown when the user starts up Duke.
+     * Returns string of the welcome message to be shown when the user starts up Duke.
      */
-    public void showWelcomeMessage() {
-        System.out.println("Hey, I'm Duke!\n" + "How can I help you?");
+    public String showWelcomeMessage() {
+        return "Hey, I'm Duke!\n" + "How can I help you?";
     }
 
     /**
-     * Prints the goodbye message to be shown when the user types 'bye' command.
+     * Returns string of the goodbye message to be shown when the user types 'bye' command.
      */
-    public void showGoodbyeMessage() {
-        System.out.println("Aw. It was nice chatting with you! Don't forget me! :)");
+    public String showGoodbyeMessage() {
+        return "Aw. It was nice chatting with you! Don't forget me! :)";
     }
 
     /**
-     * Prints a response to an unrecognised command.
+     * Returns string of a response to an unrecognised command.
      */
-    public void showInvalidTaskMessage() {
-        System.out.println("Oops! I don't know what this means! :(");
+    public String showInvalidTaskMessage() {
+        return "Oops! I don't know what this means! :(";
     }
 
     /**
-     * Prints the task the user just added and the current size of the task list.
+     * Returns string of the task the user just added and the current size of the task list.
      * @param task the task the user added.
      */
-    public void showTaskAdded(Task task) {
-        System.out.println("Got it. I've added this task:\n"
-                + task.toString()
-                + "\nNow you have " + TaskList.taskListSize + " task(s) in the list.");
+    public String showTaskAdded(Task task) {
+        return "Got it. I've added this task:\n"
+                + task.toString() + "\nNow you have "
+                + TaskList.taskListSize + " task(s) in the list.";
     }
 
     /**
-     * Prints the task the user just deleted and the current size of the task list.
+     * Returns string of the task the user just deleted and the current size of the task list.
      * @param task the task the user deleted.
      */
-    public void showTaskDeleted(Task task) {
-        System.out.println("Gotcha. I've removed this task:\n"
-                + task.toString()
-                + "\nNow you have " + TaskList.taskListSize + " task(s) in the list.");
+    public String showTaskDeleted(Task task) {
+        return "Gotcha. I've removed this task:\n"
+                + task.toString() + "\nNow you have "
+                + TaskList.taskListSize + " task(s) in the list.";
     }
 
     /**
-     * Prints the task marked as done.
+     * Returns string of the task marked as done.
      * @param task the task the user marked as done.
      */
-    public void showTaskDone(Task task) {
-        System.out.println("Nice job! I've marked this task as done:\n"
-                + task.toString());
+    public String showTaskDone(Task task) {
+        return "Nice job! I've marked this task as done:\n" + task.toString();
     }
 
     /**
-     * Prints the current list of tasks. If there are no tasks, Ui will provide a different prompt.
+     * Returns string of the current list of tasks. If there are no tasks, Ui will provide a different prompt.
      * @param taskList the current list of tasks.
      */
-    public void showTaskList(ArrayList<Task> taskList) {
+    public String showTaskList(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            System.out.println("Looks like you have no tasks currently. Add some tasks!");
+            return "Looks like you have no tasks currently. Add some tasks!";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String message = "Here are the tasks in your list:\n";
             for (int i = 0; i < taskList.size(); i++) {
                 Task item = taskList.get(i);
-                System.out.println((i + 1) + "." + item.toString());
+                message += (i + 1) + "." + item.toString() + "\n";
             }
+            return message;
         }
     }
 
-    public void showMatchingTasks(ArrayList<Task> matchingTasks) {
+    /**
+     * Returns string of matching tasks. If there are no tasks, Ui will provide a different prompt.
+     * @param matchingTasks the list of tasks that has matching keyword.
+     */
+    public String showMatchingTasks(ArrayList<Task> matchingTasks) {
         if (matchingTasks.size() == 0) {
-            System.out.println("Looks like there were no tasks matching your search, try again?");
+            return "Looks like there were no tasks matching your search, try again?";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String message = "Here are the matching tasks in your list:";
             for (int i = 0; i < matchingTasks.size(); i++) {
                 Task item = matchingTasks.get(i);
-                System.out.println((i + 1) + "." + item.toString());
+                message += (i + 1) + "." + item.toString() + "\n";
             }
+            return message;
         }
     }
 }

@@ -1,6 +1,7 @@
 package duke;
 
-import java.util.Scanner;
+import javafx.fxml.FXML;
+
 
 /**
  * Contains the main method to be run.
@@ -12,6 +13,7 @@ public class Duke {
 
     /**
      * Initialises the Duke object and loads hard disk data to current taskList.
+     *
      * @param filePath the file path that specifies location in hard disk for storage.
      */
     public Duke(String filePath) {
@@ -20,24 +22,26 @@ public class Duke {
         taskList = new TaskList(storage.loadData());
     }
 
+    public Ui getUi() {
+        return ui;
+    }
+
     /**
      * Reads user input and provides the logic for handling each user input.
-     * @param args takes in user input.
+     *
+     * @param userInput refers to user input from text field.
      */
-    public static void main(String[] args) {
-        final String PATH = "./data/duke.txt";
-        Duke duke = new Duke(PATH);
-        duke.ui.showWelcomeMessage();
-
-        Scanner scan = new Scanner(System.in);
-        while (scan.hasNextLine()) {
-            String userInput = scan.nextLine();
-            try {
-                Command command = Parser.parseCommand(userInput);
-                command.execute(duke.taskList, duke.ui, duke.storage);
-            } catch (DukeException e) {
-                System.out.println(e);
+    @FXML
+    public String getResponse(Duke duke, String userInput) {
+        try {
+            Command command = Parser.parseCommand(userInput);
+            String message = command.execute(duke.taskList, duke.ui, duke.storage);
+            if (message.equals(duke.ui.showGoodbyeMessage())) {
+                System.exit(0);
             }
+            return message;
+        } catch (DukeException e) {
+            return e.toString();
         }
     }
 }

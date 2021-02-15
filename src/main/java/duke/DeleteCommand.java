@@ -19,11 +19,12 @@ public class DeleteCommand extends Command {
      * @param taskList the TaskList object that contains all tasks added by user.
      * @param ui the Ui object that provides responses to the user according to status of their input.
      * @param storage the Storage object that contains the tasks saved in computer's hard disk.
+     * @return Ui of response to user request.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.deleteTask(index);
         storage.writeToFile(taskList.getList());
-        ui.showTaskDeleted(task);
+        return ui.showTaskDeleted(task);
     }
 }
