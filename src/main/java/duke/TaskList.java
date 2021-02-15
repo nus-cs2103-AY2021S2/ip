@@ -33,6 +33,19 @@ public class TaskList {
     }
 
     /**
+     * Gets the task given the provided index number.
+     * @param count the index of the task
+     * @return Task at the given index
+     */
+    public Task getTask(int count) {
+        if (count > list.size() || count <= 0) {
+            throw new IllegalArgumentException("Error: Task number out of range.");
+        } else {
+            return list.get(count - 1);
+        }
+    }
+
+    /**
      * Adds task into the ArrayList of Tasks
      * @param content task to be added
      */

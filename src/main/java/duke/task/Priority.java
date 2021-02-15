@@ -24,7 +24,7 @@ public enum Priority {
         } else if (priorityInt == 2) {
             return Priority.HIGH;
         } else {
-            throw new IllegalArgumentException("Error: First argument out of range. Accepts only 0-2.");
+            throw new IllegalArgumentException("Error: Second argument out of range. Accepts only 0-2.");
         }
     }
 

@@ -40,7 +40,7 @@ public class SetPriorityCommand implements ICommand {
 
             //Get task from TaskList and set its priority
             Priority priority = Priority.valueOf(priorityInt);
-            Task selectedTask = tasks.getTasks().get(count - 1);
+            Task selectedTask = tasks.getTask(count);
             selectedTask.setPriority(priority);
 
             String string = getPriorityString(selectedTask);

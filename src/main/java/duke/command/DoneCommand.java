@@ -39,7 +39,7 @@ public class DoneCommand implements ICommand {
     private String getDoneString(Integer count) {
         String string = "";
         string += "Nice! I've marked this task as done:";
-        string += tasks.getTasks().get(count - 1);
+        string += tasks.getTask(count);
         return string;
     }
 }
