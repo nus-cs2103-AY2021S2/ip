@@ -82,9 +82,7 @@ public class Duke  extends Application{
 
     private static String findTasks(TaskList tasks, String s) {
         TaskList query = tasks.find(s);
-        String response = "Here are the matching tasks in your list:\n";
-        response = response + Duke.printTasks(query);
-        return response;
+        return  Duke.printTasks(query);
     }
 
     /**
@@ -329,9 +327,6 @@ public class Duke  extends Application{
 
         return textToAdd;
     }
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
 
     public String doCommand(String word){
         String[] pre = word.split(REGEX_SPACE);
@@ -339,41 +334,41 @@ public class Duke  extends Application{
         switch (pre[0]) {
             case "bye":
                 return "Good Bye~~";
-                case "list" :
-                    response = Duke.printTasks(tasklist);
-                    storage.writeTasks(tasklist);
-                    break;
-                case "done" :
-                    int n = parseInt(pre[1]) - 1;
-                    response = doneTask(tasklist, n);
-                    storage.writeTasks(tasklist);
-                    break;
-                case "delete" :
-                    n = parseInt(pre[1]) - 1;
-                    response = deleteTask(tasklist, n);
-                    storage.writeTasks(tasklist);
-                    break;
-                case "deadline" :
-                    response = addDeadline(tasklist, word);
-                    storage.writeTasks(tasklist);
-                    break;
-                case "event" :
-                    response = addEvent(tasklist, word);
-                    storage.writeTasks(tasklist);
-                    break;
-                case "todo" :
-                    response = addToDo(tasklist, pre);
-                    storage.writeTasks(tasklist);
-                    break;
-                case "find" :
-                    response = findTasks(tasklist,pre[1]);
-                    break;
-                case "sort":
-                    response = sort(tasklist);
-                    storage.writeTasks(tasklist);
-                    break;
-                default :
-                    response = addError();
+            case "list" :
+                response = Duke.printTasks(tasklist);
+                storage.writeTasks(tasklist);
+                break;
+            case "done" :
+                int n = parseInt(pre[1]) - 1;
+                response = doneTask(tasklist, n);
+                storage.writeTasks(tasklist);
+                break;
+            case "delete" :
+                n = parseInt(pre[1]) - 1;
+                response = deleteTask(tasklist, n);
+                storage.writeTasks(tasklist);
+                break;
+            case "deadline" :
+                response = addDeadline(tasklist, word);
+                storage.writeTasks(tasklist);
+                break;
+            case "event" :
+                response = addEvent(tasklist, word);
+                storage.writeTasks(tasklist);
+                break;
+            case "todo" :
+                response = addToDo(tasklist, pre);
+                storage.writeTasks(tasklist);
+                break;
+            case "find" :
+                response = findTasks(tasklist,pre[1]);
+                break;
+            case "sort":
+                response = sort(tasklist);
+                storage.writeTasks(tasklist);
+                break;
+            default :
+                 response = addError();
             }
             return response;
     }
