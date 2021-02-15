@@ -72,7 +72,7 @@ public class Tag {
         String result = "";
         Iterator<Tag> iterator = tags.iterator();
         while (iterator.hasNext()) {
-            result = result + "#" + iterator.next().getTitle();
+            result = result + "#" + iterator.next().getTitle() + " ";
         }
         return result;
     }

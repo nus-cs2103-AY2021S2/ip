@@ -2,3 +2,9 @@
     -fx-base: rgb(58, 58, 58);
     -fx-background: rgb(50, 52, 58);
 }
+
+.hbox {
+    -fx-background: rgb(102, 153, 255);
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10
+}
