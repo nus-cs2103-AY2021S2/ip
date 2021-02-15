@@ -11,11 +11,14 @@ public class Event extends Task{
         this.localDate = new ParseDates().parseString(date);
     }
 
-    public Event(String input, String date, int done) {
+    public Event(String input, String date, int done, String reminderDate) {
         super(input);
         this.localDate = new ParseDates().parseString(date);
         if (done == 1) {
             this.doTask();
+        }
+        if (!reminderDate.equals("0")) {
+            this.addReminder(new ParseDates().parseString(reminderDate));
         }
     }
 

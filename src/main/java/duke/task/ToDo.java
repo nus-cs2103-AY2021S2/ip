@@ -5,10 +5,13 @@ public class ToDo extends Task {
         super(input);
     }
 
-    public ToDo(String input, int done) {
+    public ToDo(String input, int done, String reminderDate) {
         super(input);
         if (done == 1) {
             this.doTask();
+        }
+        if (!reminderDate.equals("0")) {
+            this.addReminder(new ParseDates().parseString(reminderDate));
         }
     }
 

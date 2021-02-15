@@ -1,15 +1,15 @@
 package duke.task;
 
-public enum taskState {
+public enum TaskState {
     NOTDONE {
         @Override
         public String toString() {
-            return " ";
+            return "\u2718";
         }
     }, DONE {
         @Override
         public String toString() {
-            return "x";
+            return "\u2713";
         }
     }
 }

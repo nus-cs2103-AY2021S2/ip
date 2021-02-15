@@ -11,11 +11,14 @@ public class Deadline extends Task {
         this.localDate = new ParseDates().parseString(date);
     }
 
-    public Deadline(String input, String date, int done) {
+    public Deadline(String input, String date, int done, String reminderDate) {
         super(input);
         this.localDate = new ParseDates().parseString(date);
         if (done == 1) {
             this.doTask();
+        }
+        if (!reminderDate.equals("0")) {
+            this.addReminder(new ParseDates().parseString(reminderDate));
         }
     }
 
@@ -32,7 +35,6 @@ public class Deadline extends Task {
     }
 
     @Override
-
     public String toString(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return "[D]" + super.toString() + " (by: " + localDate.format(dateTimeFormatter) + ")";
