@@ -1,6 +1,7 @@
 package com.tanboonji.duke.command;
 
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.model.AliasMap;
 import com.tanboonji.duke.model.TaskList;
 
 /**
@@ -9,6 +10,7 @@ import com.tanboonji.duke.model.TaskList;
 public abstract class Command {
 
     protected TaskList taskList;
+    protected AliasMap aliasMap;
 
     /**
      * Default class constructor.
@@ -23,6 +25,15 @@ public abstract class Command {
      */
     public void addTaskList(TaskList taskList) {
         this.taskList = taskList;
+    }
+
+    /**
+     * Adds alias map to command.
+     *
+     * @param aliasMap Alias map to be added.
+     */
+    public void addAlias(AliasMap aliasMap) {
+        this.aliasMap = aliasMap;
     }
 
     /**

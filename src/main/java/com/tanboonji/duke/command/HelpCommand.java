@@ -16,6 +16,9 @@ public class HelpCommand extends Command {
             + "\t- event [description] /at [datetime]\n"
             + "\t- done [task number]\n"
             + "\t- delete [task number]\n"
+            + "\t- alias [command] [alias]\n"
+            + "\t- listalias\n"
+            + "\t- deletealias [alias]\n"
             + "\t- help\n"
             + "\t- bye\n";
 

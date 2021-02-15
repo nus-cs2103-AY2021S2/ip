@@ -1,17 +1,17 @@
 package com.tanboonji.duke.command;
 
 /**
- * The ListCommand class contains information to execute the "list" command.
+ * The ListAliasCommand class contains information to execute the "list" command.
  */
-public class ListCommand extends Command {
+public class ListAliasCommand extends Command {
 
     /** String input to execute this command */
-    public static final String COMMAND = "list";
+    public static final String COMMAND = "listalias";
 
     /**
      * Default class constructor.
      */
-    public ListCommand() {
+    public ListAliasCommand() {
     }
 
     @Override
@@ -27,8 +27,8 @@ public class ListCommand extends Command {
     @Override
     public String execute() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Here are the tasks in your list:\n");
-        builder.append(taskList);
+        builder.append("Here are the list of your alias:\n");
+        builder.append(aliasMap);
         return builder.toString().trim();
     }
 }

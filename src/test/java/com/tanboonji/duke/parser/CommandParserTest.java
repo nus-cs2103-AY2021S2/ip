@@ -18,7 +18,7 @@ class CommandParserTest {
         String[] inputs = {"todo read book", " todo  read another book", "todo  more books "};
         for (String input: inputs) {
             try {
-                assertTrue(CommandParser.parse(input).getClass().isAssignableFrom(ToDoCommand.class));
+                assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(ToDoCommand.class));
             } catch (DukeException e) {
                 fail();
             }
@@ -31,7 +31,7 @@ class CommandParserTest {
             "event  book reading /at 01.02.2021 2359 "};
         for (String input: inputs) {
             try {
-                assertTrue(CommandParser.parse(input).getClass().isAssignableFrom(EventCommand.class));
+                assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(EventCommand.class));
             } catch (DukeException e) {
                 fail();
             }
@@ -43,7 +43,7 @@ class CommandParserTest {
         String[] inputs = {"list", " list  all", "list  everything "};
         for (String input: inputs) {
             try {
-                assertTrue(CommandParser.parse(input).getClass().isAssignableFrom(ListCommand.class));
+                assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(ListCommand.class));
             } catch (DukeException e) {
                 fail();
             }
@@ -55,7 +55,7 @@ class CommandParserTest {
         String[] inputs = {"done 0", " done  1", "done  2 "};
         for (String input: inputs) {
             try {
-                assertTrue(CommandParser.parse(input).getClass().isAssignableFrom(DoneCommand.class));
+                assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(DoneCommand.class));
             } catch (DukeException e) {
                 fail();
             }
@@ -67,7 +67,7 @@ class CommandParserTest {
         String[] inputs = {"blah", "  unknown", "invalid  "};
         for (String input: inputs) {
             try {
-                CommandParser.parse(input);
+                CommandParser.parseCommand(input);
                 fail();
             } catch (DukeException e) {
                 // Exception caught, pass test case.
@@ -80,7 +80,7 @@ class CommandParserTest {
         String[] inputs = {"todo", "  todo", "todo  "};
         for (String input: inputs) {
             try {
-                CommandParser.parse(input);
+                CommandParser.parseCommand(input);
                 fail();
             } catch (DukeException e) {
                 // Exception caught, pass test case.
@@ -93,7 +93,7 @@ class CommandParserTest {
         String[] inputs = {"event", " event  book reading", "event  book reading /by 01.01.2021 0000 "};
         for (String input: inputs) {
             try {
-                CommandParser.parse(input);
+                CommandParser.parseCommand(input);
                 fail();
             } catch (DukeException e) {
                 // Exception caught, pass test case.
@@ -106,7 +106,7 @@ class CommandParserTest {
         String[] inputs = {"done", " done  one", "done  two "};
         for (String input: inputs) {
             try {
-                CommandParser.parse(input);
+                CommandParser.parseCommand(input);
                 fail();
             } catch (DukeException e) {
                 // Exception caught, pass test case.

@@ -3,18 +3,22 @@ package com.tanboonji.duke.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.tanboonji.duke.command.AliasCommand;
 import com.tanboonji.duke.command.ByeCommand;
 import com.tanboonji.duke.command.Command;
 import com.tanboonji.duke.command.DeadlineCommand;
+import com.tanboonji.duke.command.DeleteAliasCommand;
 import com.tanboonji.duke.command.DeleteCommand;
 import com.tanboonji.duke.command.DoneCommand;
 import com.tanboonji.duke.command.EventCommand;
 import com.tanboonji.duke.command.FindCommand;
 import com.tanboonji.duke.command.HelpCommand;
+import com.tanboonji.duke.command.ListAliasCommand;
 import com.tanboonji.duke.command.ListCommand;
 import com.tanboonji.duke.command.ToDoCommand;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.exception.InvalidCommandException;
+import com.tanboonji.duke.model.AliasMap;
 
 /**
  * The CommandParser class helps to parse user string input into respective intended command.
@@ -27,13 +31,37 @@ public class CommandParser {
     private static final int ARGUMENTS_GROUP = 2;
 
     /**
+     * Parses input from alias to full actual command.
+     * Replace alias with full actual command if alias is found, else return input as it is.
+     *
+     * @param input User string input.
+     * @param aliasMap Alias hash map.
+     * @return Full actual command.
+     */
+    public static String parseAlias(String input, AliasMap aliasMap) {
+        Matcher matcher = COMMAND_FORMAT.matcher(input);
+        if (!matcher.matches()) {
+            return input;
+        }
+
+        String command = matcher.group(COMMAND_GROUP).trim();
+        String arguments = matcher.group(ARGUMENTS_GROUP).trim();
+
+        if (aliasMap.containsAlias(command)) {
+            command = aliasMap.getAlias(command);
+        }
+
+        return command + " " + arguments;
+    }
+
+    /**
      * Parses input from String class to Command class.
      * Returns respective intended command if input is successfully parsed, else returns invalid command.
      *
      * @param input User string input.
      * @return Respective intended command with arguments or invalid command.
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parseCommand(String input) throws DukeException {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
         if (!matcher.matches()) {
             throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
@@ -61,6 +89,12 @@ public class CommandParser {
             return new ByeCommand();
         case FindCommand.COMMAND:
             return FindCommand.parseArguments(arguments);
+        case AliasCommand.COMMAND:
+            return AliasCommand.parseArguments(arguments);
+        case DeleteAliasCommand.COMMAND:
+            return DeleteAliasCommand.parseArguments(arguments);
+        case ListAliasCommand.COMMAND:
+            return new ListAliasCommand();
         default:
             throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
         }
