@@ -6,33 +6,48 @@ Graphical User Interface (GUI).
 If you can type fast and need a personal assistant to keep track of lots of tasks,
 Popo task manager is here to help you!
 
+- Types of Tasks
+- Features
+- FAQ
+- Command Summary
 
 ## Types of Tasks
 ### Todo 
 A normal task with only a name
 
+![todo.png](images/todo.png)
+
 ### Deadline
 A task with a name and a deadline date component \
 (and an optional deadline time component)
 
+![deadline.png](images/deadline.png)
+
 ### Event
 A task with a name and a location description
+
+![event.png](images/event.png)
 
 ### Duration
 A task with a name and a time period
 
+![duration.png](images/duration.png)
+
 ### Period
 A task with a name and a starting and ending date
 
+![period.png](images/period.png)
 
 ## Features
 **Notes about the command format:**
 - Words in between `<>` are the parameters to be supplied by the user. \
   E.g. In `todo <task_description`, `<task_description>` is a parameter which can
-  be used as `todo read book`.
+  be used as \
+  `todo read book`.
 - Items in square brackets are optional. \
   E.g. `deadline <task_description> /by dd/mm/yyyy [HHMM]` can be
-  used as `deadline assignment /by 1/3/2021 2359` or simply as 
+  used as \
+  `deadline assignment /by 1/3/2021 2359` or simply as 
   `deadline assignment /by 1/3/2021`.
 - Extraneous parameters for commands will be ignored. \
   E.g. `list 123` will be interpreted as `list`.
@@ -113,7 +128,22 @@ Exits the program. \
 Format: `bye`
 
 
-## Command summary
+## FAQ
+**Q**: What is the default data source file? \
+**A**: `./data/popo.txt`
+
+**Q**: Is it possible to specify my own data source file? How do I specify my own data source file? \
+**A**: Yes. Run the jar file with an additional flag indicating the file path of your own data
+source file. \
+Format: `java -jar .../path/to/jar/file/popo.jar datasource.txt` \
+E.g. `java -jar C:\Users\user1\Desktop\ip\build\libs\popo.jar ./a/b/c/test.txt`
+
+**Q**: Do I have to pass in a specific date format? Which date formats are acceptable? \
+**A**: Yes. We only accept the date format `dd/mm/yyyy` currently.
+
+
+
+## Command Summary
 
 Action | Format, Examples
 --------|------------------
