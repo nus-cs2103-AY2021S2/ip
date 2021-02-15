@@ -8,9 +8,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Parser is a utility interface that specifies the convention for the CommandMap
+ * HashMap structure. Parser is also responsible for converting user input into
+ * valid CommandMaps and existing Tasks into saveStrings for storage in the save file.
+ */
 public interface Parser {
     String COMMAND_FLAG = "COMMAND_FLAG_IDENTIFIER";
 
+    /**
+     *
+     * @param input
+     * @return
+     * @throws DukeException
+     */
     static Command parseCommand(String input) throws DukeException {
         HashMap<String, List<String>> commandMap = parseCommandMap(input);
 
