@@ -24,7 +24,7 @@ faster than traditional GUI apps.
     
 ## Quick start
 1. Ensure you have `Java 11` or above installed in your computer.
-2. Download the latest `Lihua.jar` from [here](https://github.com/Cheng20010201/ip/releases/tag/v0.2).
+2. Download the latest `Lihua.jar` from [here](https://github.com/Cheng20010201/ip/releases/tag/A-Release).
 3. Copy the file you downloaded in step 2 to the folder you want to use as the *home folder* for Lihua. 
    E.g. `~/Desktop/Lihua/Lihua.jar`
 4. Open the terminal window, make sure your present working directory is the *home folder* you created in step 3.
