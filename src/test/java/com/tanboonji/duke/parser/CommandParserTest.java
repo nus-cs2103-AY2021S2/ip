@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import com.tanboonji.duke.command.DoneCommand;
 import com.tanboonji.duke.command.EventCommand;
-import com.tanboonji.duke.command.InvalidCommand;
 import com.tanboonji.duke.command.ListCommand;
 import com.tanboonji.duke.command.ToDoCommand;
 import com.tanboonji.duke.exception.DukeException;
