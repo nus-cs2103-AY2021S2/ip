@@ -3,8 +3,16 @@ Duke is a **desktop application for task management through a
 Command Line Interface** with minor graphic user interface for better
 readability.
 
-* Table of Contents
-  {:toc}
+- [Quick start](#quick-start)
+- [Task Types](#task-types)
+- [Features](#features)
+    - [Adding a task](#adding-tasks)
+    - [Listing all tasks](#listing-all-tasks)
+    - [Deleting a task](#deleting-a-task)
+    - [Completing a task](#completing-a-task)
+    - [Setting a task priority](#setting-a-task-priority)
+    - [Exiting the application](#exiting-the-application)
+- [Command summary](#command-summary)
   
 ## Quick start
 1. Ensure you have Java `11` installed.
@@ -35,8 +43,8 @@ Format:
 2. Deadline: `deadline NAME /by DATE`
 3. To Do: `todo NAME`
 
-**Tip**: You can type in the format `YYYY-MM-DD` for the `DATE` field and the application will parse it
-into its proper date.
+**Tip**: You can type in the format `YYYY-MM-DD` for the `DATE` field, and the application will parse it
+into its proper date. Otherwise, it will just show what you just typed in the `DATE` field.
 
 ![Date Format](dateformat.png)
 
