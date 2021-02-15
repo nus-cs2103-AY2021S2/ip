@@ -26,4 +26,8 @@ public class CommandResult {
         assert feedbackToUser != null;
         return feedbackToUser;
     }
+
+    public boolean isUserCommandError() {
+        return true;
+    }
 }

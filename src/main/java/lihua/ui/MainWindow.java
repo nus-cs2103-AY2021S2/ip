@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+import lihua.commands.feedback.CommandResult;
 import lihua.commons.Messages;
 import lihua.main.Lihua;
 
@@ -68,11 +69,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = lihua.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getLihuaDialog(response, lihuaImage)
-        );
+        CommandResult result = lihua.getResponse(input);
+        String response = result.getFeedBack();
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        if (result.isUserCommandError()) {
+            dialogContainer.getChildren().add(DialogBox.getLihuaDialogError(response, lihuaImage));
+        } else {
+            dialogContainer.getChildren().add(DialogBox.getLihuaDialog(response, lihuaImage));
+        }
         userInput.clear();
     }
 }

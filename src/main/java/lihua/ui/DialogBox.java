@@ -36,7 +36,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img, Background bg) {
+    private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -92,7 +92,7 @@ public class DialogBox extends HBox {
      * @return A new DialogBox containing the input information.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox dBox = new DialogBox(text, img, getUserBackground());
+        DialogBox dBox = new DialogBox(text, img);
         dBox.setBackground(getUserBackground());
         return dBox;
     }
@@ -104,8 +104,22 @@ public class DialogBox extends HBox {
      * @param img Human message content.
      * @return A new DialogBox containing the input information.
      */
+    public static DialogBox getLihuaDialogError(String text, Image img) {
+        DialogBox dBox = new DialogBox(text, img);
+        dBox.flip();
+        dBox.setBackground(getLihuaBackgroundError());
+        return dBox;
+    }
+
+    /**
+     * Gets a flipped dialog box object containing the human message.
+     *
+     * @param text Human input.
+     * @param img Human message content.
+     * @return A new DialogBox containing the input information.
+     */
     public static DialogBox getLihuaDialog(String text, Image img) {
-        DialogBox dBox = new DialogBox(text, img, getLihuaBackground());
+        DialogBox dBox = new DialogBox(text, img);
         dBox.flip();
         dBox.setBackground(getLihuaBackground());
         return dBox;
@@ -121,6 +135,13 @@ public class DialogBox extends HBox {
 
     private static Background getLihuaBackground() {
         BackgroundFill background_fill = new BackgroundFill(Color.LIGHTPINK,
+                CornerRadii.EMPTY, Insets.EMPTY);
+        Background background = new Background(background_fill);
+        return background;
+    }
+
+    private static Background getLihuaBackgroundError() {
+        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTCORAL,
                 CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(background_fill);
         return background;
