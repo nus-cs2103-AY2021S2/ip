@@ -3,10 +3,8 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class Duke {
@@ -34,7 +32,8 @@ public class Duke {
             String[] strArray = s.split("\\|", 4);
 
             if (strArray[0].trim().equals("D")) {
-                Deadline deadline = new Deadline(strArray[2].trim(), strArray[3].trim());
+                LocalDate date =LocalDate.parse(strArray[3].trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                Deadline deadline = new Deadline(strArray[2].trim(), date);
                 if (strArray[1].trim().equals("done")) {
                     deadline.isDone = true;
                 } else if (strArray[1].trim().equals("not done")){
@@ -60,6 +59,8 @@ public class Duke {
             }
         }
     }
+
+
 
     public static void main(String[] args) throws DukeException{
         File file = new File("data/DukeData.txt");
@@ -131,9 +132,10 @@ public class Duke {
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(e.toString());
                 } else if (word.contains("deadline")) {
-                    String[] input = word.split("/by");
+                    String[] input = word.split("/by ");
                     input[0] = input[0].replaceAll("deadline", "");
-                    Deadline d = new Deadline(input[0], input[1]);
+                    LocalDate date =LocalDate.parse(input[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    Deadline d = new Deadline(input[0], date);
                     list.add(d);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(d.toString());
