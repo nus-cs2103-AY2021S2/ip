@@ -1,7 +1,6 @@
 package lihua.tasks;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 import org.json.simple.JSONObject;
 
