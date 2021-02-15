@@ -1,6 +1,8 @@
 package duke.commands;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 
 import duke.exceptions.DukeExceptionFileNotWritable;
 import duke.exceptions.DukeExceptionIllegalArgument;
@@ -18,7 +20,7 @@ import duke.tasks.TaskList;
  */
 public class DukeCommandDelete extends DukeCommand {
 
-    private final ArrayList<Integer> indices = new ArrayList<>();
+    private ArrayList<Integer> indices = new ArrayList<>();
     private boolean isDeleteAll = false;
 
     /**
@@ -35,11 +37,21 @@ public class DukeCommandDelete extends DukeCommand {
 
         /* Parse task numbers */
         try {
-            String indices = tokenSet.get("/text");
-            for (String s : indices.split("\\s+")) {
-                this.indices.add(Integer.parseInt(s) - 1);
+            String indicesString = tokenSet.get("/text");
+            for (String s : indicesString.split("\\s+")) {
+                int index = Integer.parseInt(s) - 1;
+                if (index < 0) {
+                    throw new DukeExceptionIllegalArgument("Task number must be positive.");
+                }
+                indices.add(index);
             }
-        } catch (Exception e) {
+
+            // Reverse + Unique terms to avoid duplicate deletions
+            // Has added benefit of doing bounds checking.
+            indices.sort(Collections.reverseOrder()); // Need to remove in reverse order
+            indices = new ArrayList<>(new LinkedHashSet<>(indices));
+
+        } catch (NumberFormatException e) {
             throw new DukeExceptionIllegalArgument("Need to specify task number to delete.");
         }
     }
