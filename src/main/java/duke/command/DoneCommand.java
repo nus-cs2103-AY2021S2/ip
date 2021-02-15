@@ -48,18 +48,26 @@ public class DoneCommand extends Command {
         int idx = Integer.parseInt(array[1]) - 1;
         Task t = tasks.getTask(idx);
         t.markAsDone();
-        if (t.getType().equals("D")) {
+        String taskType = t.getType();
+
+        switch(taskType) {
+        case "D":
             Deadline d = (Deadline) t;
             storage.editDataInFile(idx + 1, t.getType(), "1", t.getDescription(),
                     d.getBy(), tasks.getSize());
-        } else if (t.getType().equals("T")) {
+            break;
+        case "T":
             storage.editDataInFile(idx + 1, t.getType(), "1", t.getDescription(),
                     "", tasks.getSize());
+            break;
 
-        } else {
+        case "E":
             Event e = (Event) t;
             storage.editDataInFile(idx + 1, t.getType(), "1", t.getDescription(),
                     e.getDate(), tasks.getSize());
+            break;
+        default:
+            throw new DukeException("Type cannot be determined");
 
         }
         return ui.showTaskDone(t);
