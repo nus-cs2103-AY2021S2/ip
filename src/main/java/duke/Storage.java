@@ -36,10 +36,11 @@ public class Storage {
     /**
      * Reads the saved task list in the file and adds the task into the task list.
      *
-     * @param taskList Task list to load the tasks from the file to.
+     *  Task list to load the tasks from the file to.
      */
-    public void loadTaskList(TaskList taskList) {
+    public TaskList loadTaskList() {
         try {
+            TaskList taskList = new TaskList();
             File f = new File(filePath + fileName);
             f.createNewFile();
             Scanner sc = new Scanner(f);
@@ -67,11 +68,47 @@ public class Storage {
                 }
                 if (task != null && taskArr[1].equals("X ")) {
                     task.checkTask();
-                    taskList.addTask(task);
                 }
+                taskList.addTask(task);
             }
+            return taskList;
         } catch (IOException e) {
             System.out.println("This file cannot be loaded... My apologies");
+            return new TaskList();
+        }
+    }
+
+    public void saveContactList(String contacts) {
+        try {
+            FileWriter fw = new FileWriter(filePath + fileName);
+            fw.write(contacts);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("This file cannot be saved... much like you!");
+        }
+    }
+
+    public ContactList loadContactList() {
+        try {
+            File f = new File(filePath + fileName);
+            f.createNewFile();
+            Scanner sc = new Scanner(f);
+            ContactList contactList = new ContactList();
+            while (sc.hasNext()) {
+                String contactString = sc.nextLine();
+                String[] details = contactString.split("/name ");
+                String[] nameInfo = details[1].split(" /number ");
+                String[] numInfo = nameInfo[1].split(" /address ");
+                String name = nameInfo[0];
+                String numString = numInfo[0];
+                int number = Integer.valueOf(numString);
+                String address = numInfo[1];
+                Contact contact = new Contact(name, number, address);
+                contactList.addContact(contact);
+            }
+            return contactList;
+        } catch (IOException e) {
+            return new ContactList();
         }
     }
 }

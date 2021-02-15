@@ -1,19 +1,20 @@
 package duke;
 
 public class Duke {
-    private Storage storage;
+    private Storage taskStorage;
+    private Storage contactStorage;
     private Ui ui;
     private Parser parser;
     private TaskList tasks;
     private ContactList contactList;
 
     public Duke() {
-        this.storage = new Storage("C:/Users/Jeremias/Documents/GitHub/ip/data/", "data.txt");
+        this.taskStorage = new Storage("C:/Users/Jeremias/Documents/GitHub/ip/data/", "task.txt");
+        this.contactStorage = new Storage("C:/Users/Jeremias/Documents/GitHub/ip/data/", "contact.txt");
         this.ui = new Ui();
         this.parser = new Parser();
-        this.tasks = new TaskList();
-        this.contactList = new ContactList();
-        storage.loadTaskList(tasks);
+        this.tasks = taskStorage.loadTaskList();
+        this.contactList = contactStorage.loadContactList();
     }
 
     public static void main(String[] args) {
@@ -46,6 +47,8 @@ public class Duke {
                 cmd = new ByeCommand(command, input, tasks);
             } else if (command.equals("contact add")) {
                 cmd = new AddContactCommand(command, input, tasks, contactList);
+            } else if (command.equals("contact list")) {
+                cmd = new ListContactCommand(command, input, tasks, contactList);
             } else {
                 throw new WrongCommandDukeException();
             }
@@ -65,11 +68,16 @@ public class Duke {
      * Saves the task list into the storage file.
      */
     private void save() {
-        String str = "";
+        String taskStr = "";
         for (int i = 0; i < tasks.getSize(); i++) {
-            str += tasks.getTask(i).formatToSave() + "\n";
+            taskStr += tasks.getTask(i).formatToSave() + "\n";
         }
-        storage.saveTaskList(str);
+        taskStorage.saveTaskList(taskStr);
+        String contactStr = "";
+        for (int i = 0; i < contactList.getSize(); i++) {
+            contactStr += contactList.getContact(i).formatToSave() + "\n";
+        }
+        contactStorage.saveContactList(contactStr);
     }
 
     /**

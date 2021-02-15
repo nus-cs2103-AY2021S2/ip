@@ -22,4 +22,12 @@ public class ContactList {
         contactList.add(index, contact);
         contactList.remove(index + 1);
     }
+
+    public int getSize() {
+        return contactList.size();
+    }
+
+    public Contact getContact(int index) {
+        return contactList.get(index);
+    }
 }

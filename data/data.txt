@@ -1,5 +1,0 @@
-T | X | book report 
-E | X | level outing | from: 02-2-2021 1900 | to: 02-2-2021 2100
-D | X | op1 slides | by: 07-2-2021 2300
-T | X | work 
-D | X | post gui | by: 10-2-2021 1600

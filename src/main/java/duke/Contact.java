@@ -35,6 +35,10 @@ public class Contact {
         return new Contact(name, number, newAddress);
     }
 
+    public String formatToSave() {
+        return String.format("/name %s /number %d /address %s", name, number, address);
+    }
+
     @Override
     public String toString() {
         if (number == 0) {

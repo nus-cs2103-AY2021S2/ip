@@ -311,9 +311,9 @@ public class Parser {
 
     public String parseAddContactName(String input) {
         String[] command = input.split("/name ");
-        String[] details = command[1].split("/number ");
+        String[] details = command[1].split(" /number ");
         if (details.length != 2) {
-            details = command[1].split("/address ");
+            details = command[1].split(" /address ");
         }
         String name = details[0];
         return name;
@@ -339,4 +339,9 @@ public class Parser {
         String address = command[1];
         return address;
     }
+
+    public boolean canParseListContactCommand(String input) {
+        return input.equals("contact list");
+    }
+
 }

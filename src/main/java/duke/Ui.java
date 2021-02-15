@@ -156,4 +156,15 @@ public class Ui {
                 "\nKeep your friends close, and your enemies closer.";
         return str;
     }
+
+    public String getContactList(ContactList contactList) {
+        String str = "Here are your reliable comrades:\n";
+        for (int i = 1; i <= contactList.getSize(); i++) {
+            str += String.format("%d. ", i) +
+                    contactList.getContact(i - 1).toString() +
+                    "\n";
+        }
+        str += "Do not fear to call upon their friendship.";
+        return str;
+    }
 }
