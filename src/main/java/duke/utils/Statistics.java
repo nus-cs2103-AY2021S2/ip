@@ -13,6 +13,7 @@ import java.util.List;
  * Statistics class that keep track of the number of done tasks;
  */
 public class Statistics {
+    private static final String DIRECTORY = "data";
     private static final String FILEPATH = "data/Statistics.txt";
 
     private static int totalTaskHistory = 0;
@@ -84,6 +85,10 @@ public class Statistics {
      * Initializes the statistic file.
      */
     public static void initialize() {
+        File directory = new File(DIRECTORY);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }        
         File statisticsFile = new File(FILEPATH);
         if (!statisticsFile.exists()) {
             try {
