@@ -8,8 +8,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Todo;
+
 /**
  * A class for handling saving and loading of data.
  */
@@ -78,9 +82,11 @@ public class Storage {
                     String[] token = line.split(" \\| ");
                     Task task;
                     if (token[0].equals("T")) {
-                        task = new Task(token[0], token[2]);
-                    } else if (token[0].equals("E") || token[0].equals("D")) {
-                        task = new Task(token[0], token[2], token[3], token[4]);
+                        task = new Todo(token[2]);
+                    } else if (token[0].equals("E")) {
+                        task = new Event(token[2], token[3], token[4]);
+                    } else if (token[0].equals("D")) {
+                        task = new Deadline(token[2], token[3], token[4]);
                     } else {
                         throw new DukeException("Save file is corrupted ): Will be creating a new file");
                     }

@@ -1,6 +1,19 @@
 package duke.parser;
 
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.PrintCommand;
 import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * A parser for reading user input
@@ -65,6 +78,54 @@ public class Parser {
             return formattedArr;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The format you have entered is wrong.");
+        }
+    }
+
+    /**
+     * Parse msg and return the requested command
+     *
+     * @return a command for executing
+     */
+    public Command parse() {
+        UserRequest request;
+        try {
+            request = UserRequest.valueOf(getRequest().trim().toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            request = UserRequest.INVALID;
+        } catch (NullPointerException ex) {
+            request = UserRequest.INVALID;
+        }
+        switch (request) {
+        case BYE:
+            return new ByeCommand();
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            return new DoneCommand(getArgs());
+        case DELETE:
+            return new DeleteCommand(getArgs());
+        case TODO:
+            return new AddTodoCommand(new Todo(getArgs()));
+        case DEADLINE:
+            try {
+                String[] deadlineStr = getFormattedCommand();
+                return new AddDeadlineCommand(
+                        new Deadline(deadlineStr[0], deadlineStr[1], deadlineStr[2]));
+            } catch (DukeException ex) {
+                return new PrintCommand(ex.getMessage());
+            }
+        case EVENT:
+            try {
+                String[] eventStr = getFormattedCommand();
+                return new AddEventCommand(
+                        new Event(eventStr[0], eventStr[1], eventStr[2]));
+            } catch (DukeException ex) {
+                return new PrintCommand(ex.getMessage());
+            }
+        case FIND:
+            return new FindCommand(getArgs());
+        default:
+            return new PrintCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
