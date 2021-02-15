@@ -74,7 +74,18 @@ public class Ui extends AnchorPane {
      * @param e exception that was thrown
      */
     public void handleError(Exception e) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(e.getMessage()));
+        DialogBox db = DialogBox.getErrorDialog(e.getMessage());
+        dialogContainer.getChildren().add(db);
+    }
+
+    /**
+     * Overloaded method for {@link Ui#handleError(Exception)}.
+     * Passes the string representation of the error message.
+     * @param e string representation of the error message.
+     */
+    public void handleError(String e) {
+        DialogBox db = DialogBox.getErrorDialog(e);
+        dialogContainer.getChildren().add(db);
     }
 
     /**

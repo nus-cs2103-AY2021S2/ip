@@ -8,10 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -20,6 +23,7 @@ import javafx.scene.text.Text;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private final static ColorPicker ERROR_COLOR_PICKER = new ColorPicker(Color.RED);
     @FXML
     private Label dialog;
     @FXML
@@ -57,7 +61,8 @@ public class DialogBox extends HBox {
      * @return the DialogBox representation of the User input.
      */
     public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text, "User");
+        DialogBox db = new DialogBox(text, "User");
+        return db;
     }
 
     /**
@@ -66,8 +71,20 @@ public class DialogBox extends HBox {
      * @return the DialogBox representation of Duke output.
      */
     public static DialogBox getDukeDialog(String text) {
-        var db = new DialogBox(text, "Duke");
+        DialogBox db = new DialogBox(text, "Duke");
         db.flip();
         return db;
     }
+
+    /**
+     * Creates the dialogue box object for Error output.
+     * @param text String representation of Error output.
+     * @return the DialogBox representation of Error output.
+     */
+    public static DialogBox getErrorDialog(String text) {
+        DialogBox db = DialogBox.getDukeDialog(text);
+        db.dialog.textFillProperty().bind(ERROR_COLOR_PICKER.valueProperty());
+        return db;
+    }
+
 }

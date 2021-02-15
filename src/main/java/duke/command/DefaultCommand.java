@@ -18,6 +18,6 @@ public class DefaultCommand implements ICommand {
      */
     @Override
     public void execute(String parameters) {
-        ui.createDukeDialog("Error: Unknown command word. Please try again.");
+        ui.handleError("Error: Unknown command word. Please try again.");
     }
 }
