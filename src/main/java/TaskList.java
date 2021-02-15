@@ -13,11 +13,11 @@ public class TaskList {
      * Prints the statements showing this task has been added to list.
      * @param currentTask Current task.
      */
-    protected void logTask(Task currentTask) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(currentTask);
-        System.out.println(String.format("Now you have %d tasks in the list"
-                , taskList.size()));
+    protected String logTask(Task currentTask) {
+
+        return String.format("Got it. I've added this task:" + currentTask +
+                String.format("\nNow you have %d tasks in the list", taskList.size()));
+
     }
 
 
@@ -50,50 +50,60 @@ public class TaskList {
     /**
      * Enumerates all tasks in the list using 1-based indexing.
      */
-    protected void enumerateTasks() {
-        System.out.println("Here are the tasks in your list:");
+    protected String enumerateTasks() {
+
+        String res = "Here are the tasks in your list:";
+
         int counter = 1;
         for (Task eachTask : taskList) {
-            System.out.println(String.format("%d. %s", counter, eachTask));
+            res += String.format("\n%d. %s", counter, eachTask);
             counter++;
         }
+        return res;
     }
 
     /**
      * Marks task as done based on 1-based indexing.
      * @param index Given index of task
      */
-    protected void markAsDone(int index) {
+    protected String markAsDone(int index) {
         // Retrieving task
         Task givenTask = taskList.get(index - 1);
         givenTask.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(String.format("  [%s][%s] %s",
+        String res = "Nice! I've marked this task as done:";
+
+        res += String.format("\n  [%s][%s] %s",
                 givenTask.getTaskType(), givenTask.getStatusIcon(),
-                givenTask.getDescription()));
+                givenTask.getDescription());
+        return res;
     }
 
     /**
      * Removes respective task in the list (1-based indexing).
      * @param index Index of task to remove
      */
-    protected void removeTask(int index) {
+    protected String removeTask(int index) {
         Task removedTask = taskList.remove(index - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + removedTask);
-        System.out.println(String.format("Now you have %d tasks in your list.",
-                taskList.size()));
+
+        String res = "Noted. I've removed this task:" + "  " + removedTask;
+
+        res += String.format("Now you have %d tasks in your list.",
+                taskList.size());
+        return res;
     }
 
-    protected void retrieveByKeyword(String keyword) {
+    protected String retrieveByKeyword(String keyword) {
         int counter = 1;
-        System.out.println("Here are the matching tasks in your list:");
+
+        String res = "Here are the matching tasks in your list:";
+
         for (Task eachTask : taskList) {
             if(eachTask.getDescription().contains(keyword)) {
-                System.out.println(String.format("%d. %s", counter, eachTask));
+                res += String.format("\n%d. %s", counter, eachTask);
                 counter++;
             }
         }
+        return res;
     }
 
 }

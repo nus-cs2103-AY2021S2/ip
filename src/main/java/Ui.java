@@ -9,6 +9,31 @@ public class Ui {
         System.out.println("What can I do for you?");
     }
 
+    public String printStart() {
+        return String.format("Hello! I'm Duke" + "\n" + "What can I do for you?");
+    }
+
+    public String outBye() {
+        return "Bye. Hope to see you again soon!";
+    }
+
+    public String outNotRecognized() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    }
+
+    public String outInvalidDeadline() {
+        return "☹ OOPS!!! The description of a deadline " +
+                "cannot be empty.";
+    }
+
+    public String outInvalidEvent() {
+        return "☹ OOPS!!! The description of an event cannot be empty.";
+    }
+
+    public String outInvalidTodo() {
+        return "☹ OOPS!!! The description of a todo cannot be empty.";
+    }
+
     public void printBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
