@@ -14,6 +14,7 @@ public class TaskList {
 
     /**
      * Creates a taskList from a list of Task Objects
+     *
      * @param tasks
      */
     public TaskList(List<Task> tasks) {
@@ -61,6 +62,7 @@ public class TaskList {
 
     /**
      * Search the taskList for tasks containing the keyword
+     *
      * @param keyword the String used to locate tasks in the taskList
      * @return a TaskList of Tasks corresponding to the keyword
      */
