@@ -1,5 +1,7 @@
 package duke.main;
 
+import java.util.ArrayList;
+
 import duke.commands.DukeCommand;
 import duke.commands.factory.DukeCommandFactory;
 import duke.exceptions.DukeException;
@@ -14,7 +16,6 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.PreformattedMessages;
 
-import java.util.ArrayList;
 
 /**
  * Main logic class for tasklist management.
