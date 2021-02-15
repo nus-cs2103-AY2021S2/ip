@@ -35,7 +35,7 @@ public class Storage {
      */
     public void readOrCreateFile() throws IOException {
         File tasksObj = new File(DEFAULT_TASKS_STORAGE_FILEPATH);
-        File notesObj = new File(DEFAULT_CONTACTS_STORAGE_FILEPATH);
+        File contactsObj = new File(DEFAULT_CONTACTS_STORAGE_FILEPATH);
 
         if (tasksObj.exists()) {
             readTaskFileIntoList(tasks);
@@ -44,11 +44,11 @@ public class Storage {
             tasksObj.createNewFile();
         }
 
-        if (notesObj.exists()) {
+        if (contactsObj.exists()) {
             readContactsFileIntoList(contacts);
         } else {
             //noinspection ResultOfMethodCallIgnored
-            notesObj.createNewFile();
+            contactsObj.createNewFile();
         }
     }
 
