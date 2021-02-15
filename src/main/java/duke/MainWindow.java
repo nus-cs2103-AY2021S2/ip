@@ -5,8 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,13 +28,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         setDuke(new Duke());
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(duke.displayStartMsg(), userImage)
         );
-
-
-
     }
 
     public void setDuke(Duke d) {
