@@ -3,6 +3,7 @@ package kobe;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.lang.Thread;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -34,14 +35,15 @@ public class KobeN{
         storage = new Storage(filePath, tasks, ui);
     }
 
-    /**
-     * Main method. Allows Kobe to run.
-     */
-    public static void main(String[] args) {
-        Path path = Paths.get(HOME + "/ip/src/main/data/kobe.txt");
-        String pathName = HOME + "/ip/src/main/data/kobe.txt";
-        new KobeN(pathName).run();
-    }
+//    /**
+//     * Main method. Allows Kobe to run.
+//     */
+//    public static void main(String[] args) {
+////        Application.launch(kobe.Main.class, args);
+//        Path path = Paths.get(HOME + "/ip/src/main/data/kobe.txt");
+//        String pathName = HOME + "/ip/src/main/data/kobe.txt";
+//        new KobeN(pathName).run();
+//    }
 
     /**
      * Runs Kobe, ready to accept commands typed into the command line.
@@ -71,20 +73,14 @@ public class KobeN{
      * Kobe is suppose to respond with is obtained in this method.
      *
      * @param input
-     * @return
+     * @return  Kobe's response
      */
     public String getResponse(String input) {
-        try {
-            Parser.readInput(input, tasks, storage, ui);
-        } catch (CustomExceptions.IncompleteDecriptionException e) {
-//            System.out.println(e);
-            e.printStackTrace(); //Unwraps cause within InvocationTargetException
-            //Since the reflection layer will wrap any exception in an InvocationTargetException
-        } catch (CustomExceptions.IncorrectDecriptionException e) {
-//            System.out.println(e);
-            e.printStackTrace();
-        } finally {
-            return "Kobe heard: " + input;
-        }
+        String kobesResponse = "";
+        boolean isGoodbye = false;
+        Parser.readInput(input, tasks, storage, ui);
+        kobesResponse = Ui.getMostRecentResponse();
+        return kobesResponse;
     }
 }
+

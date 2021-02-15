@@ -56,16 +56,13 @@ public class TaskList {
             LocalDate d1 = LocalDate.parse(condition);
             currentTask = new Task(false, echoedText, type, d1);
             this.tasks.add(currentTask);
-            System.out.print(line + "Got it! Kobe marked down this date!\n");
-            System.out.println(ind + "Kobe added this task:\n" + ind + ind +
-                    currentTask);
+            Ui.addAddDateTaskResponse(currentTask, this.tasks.size());
+
         } catch (ParseException | NullPointerException e) { //not in the format
             currentTask = new Task(echoedText, type, condition);
             this.tasks.add(currentTask);
-            System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
-                    currentTask);
+            Ui.addAddNormalTaskResponse(currentTask, this.tasks.size());
         }
-        System.out.println(ind + "Kobe sees that you have " + this.tasks.size() + " task(s) in the list.\n" + line);
     }
 
     /**
@@ -121,7 +118,6 @@ public class TaskList {
             df1.parse(condition);
             LocalDate d1 = LocalDate.parse(condition);
             this.tasks.add(new Task(isItDoneBoolean, taskName, type, d1));
-//            System.out.print(ind + "Kobe marked down this date!\n");
         } catch (ParseException | NullPointerException e) { //not in the format
             this.tasks.add(new Task(isItDoneBoolean, taskName, type, condition));
         }
@@ -133,11 +129,11 @@ public class TaskList {
      * @param taskNumber  the task number associated to the task that has been completed
      * @param ui  the user interface to inform the user of the outcome
      */
-    public void completeTask(int taskNumber, Ui ui) {
+    public void completeTask(int taskNumber) {
         this.tasks.get(taskNumber).markAsDone();
-        System.out.print(line + "Nice work! Kobe will mark your task as done!\n" + ind);
-        System.out.println(ind + tasks.get(taskNumber));
-        ui.showLine();
+        Task currentTask = this.tasks.get(taskNumber);
+        Ui.addCompleteTaskResponse(taskNumber, currentTask);
+
     }
 
     /**
@@ -146,18 +142,14 @@ public class TaskList {
      * @param taskNumber  the task number associated to the task that has been completed
      * @param ui  the user interface to inform the user of the outcome
      */
-    public void deleteTask(int taskNumber, Ui ui) {
+    public void deleteTask(int taskNumber) {
         if (this.tasks.isEmpty()) { //Managing empty lists from the start
-            System.out.print(ui.line() + "Kobe sees no more tasks from the list!\n" + line + "\n");
+            Ui.addEmptyTaskListResponse();
         } else {
-            System.out.print(line + "Okay! Kobe will remove your task from the list!\n" + ind);
-            System.out.println(ind + tasks.get(taskNumber));
+            Task currentTask = this.tasks.get(taskNumber);
             this.tasks.remove(taskNumber);
-            System.out.println(ind + "Kobe sees that you now have " + tasks.size() + " task(s) in the list.");
-            if (tasks.isEmpty()) { //If it's now empty, inform them.
-                System.out.print(ind + "Your list is now empty!\n");
-            }
-            ui.showLine();
+            int currentTaskListSize = this.tasks.size();
+            Ui.addRemoveTaskResponse(currentTask, currentTaskListSize);
         }
     }
 
@@ -167,19 +159,18 @@ public class TaskList {
      * @param keyword  the String input by the user
      * @param ui  the user interface to inform the user of the outcome
      */
-    public void findTask(String keyword, Ui ui) {
-        ui.showLine();
-        System.out.print(ui.ind() + "Kobe has found these tasks in your list:\n");
+    public void findTask(String keyword) {
         String currentTaskName = "";
+        String allMatchingTasks = "";
         int counter = 1;
         for (int i = 0; i < tasks.size(); i++) {
             currentTaskName = tasks.get(i).getTaskName();
             if (currentTaskName.indexOf(keyword) != -1) {
-                System.out.println(ui.ind() + counter + ": " + tasks.get(i).toString());
+                allMatchingTasks += Ui.ind + counter + ": " + tasks.get(i).toString() + "\n";
                 counter++;
             }
         }
-        ui.showLine();
+        Ui.addFindTaskResponse(allMatchingTasks);
     }
 
 }
