@@ -1,3 +1,4 @@
+import duke.DukeException;
 import duke.Task;
 import duke.TaskList;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,12 @@ class TaskListTest {
 
         TaskList tl = new TaskList();
         tl.addTask(dummyTask);
-        tl.deleteTask(0);
+        try {
+            tl.deleteTask(0);
+        } catch (DukeException e) {
+            assertEquals("delete error", e.printError("delete error"));
+        }
+
         assertEquals(taskArrayList.size(), tl.getSize());
     }
 
