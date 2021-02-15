@@ -10,8 +10,11 @@ import duke.parser.UserInputTokenSet;
 import duke.parser.UserInputTokenizer;
 import duke.responses.Response;
 import duke.storage.FileLoader;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.PreformattedMessages;
+
+import java.util.ArrayList;
 
 // Trigger another push for workflow
 public class Duke {
@@ -52,7 +55,12 @@ public class Duke {
     }
 
     public String getTasklistString() {
-        return "notnull";
+        ArrayList<String> lines = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.getTaskUnsafe(i);
+            lines.add((i + 1) + ". " + task.toString());
+        }
+        return String.join("\n", lines.toArray(new String[0]));
     }
 
     public Response getResponse(String input) {
