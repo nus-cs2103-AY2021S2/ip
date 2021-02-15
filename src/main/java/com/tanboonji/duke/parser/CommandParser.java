@@ -1,8 +1,10 @@
 package com.tanboonji.duke.parser;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.tanboonji.duke.command.AliasCommand;
 import com.tanboonji.duke.command.ByeCommand;
 import com.tanboonji.duke.command.Command;
 import com.tanboonji.duke.command.DeadlineCommand;
@@ -27,13 +29,37 @@ public class CommandParser {
     private static final int ARGUMENTS_GROUP = 2;
 
     /**
+     * Parses input from alias to full actual command.
+     * Replace alias with full actual command if alias is found, else return input as it is.
+     *
+     * @param input User string input.
+     * @param aliasMap Alias hash map.
+     * @return Full actual command.
+     */
+    public static String parseAlias(String input, HashMap<String, String> aliasMap) {
+        Matcher matcher = COMMAND_FORMAT.matcher(input);
+        if (!matcher.matches()) {
+            return input;
+        }
+
+        String command = matcher.group(COMMAND_GROUP).trim();
+        String arguments = matcher.group(ARGUMENTS_GROUP).trim();
+
+        if (aliasMap.containsKey(command)) {
+            command = aliasMap.get(command);
+        }
+
+        return command + " " + arguments;
+    }
+
+    /**
      * Parses input from String class to Command class.
      * Returns respective intended command if input is successfully parsed, else returns invalid command.
      *
      * @param input User string input.
      * @return Respective intended command with arguments or invalid command.
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parseCommand(String input) throws DukeException {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
         if (!matcher.matches()) {
             throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
@@ -61,6 +87,8 @@ public class CommandParser {
             return new ByeCommand();
         case FindCommand.COMMAND:
             return FindCommand.parseArguments(arguments);
+        case AliasCommand.COMMAND:
+            return AliasCommand.parseArguments(arguments);
         default:
             throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
         }

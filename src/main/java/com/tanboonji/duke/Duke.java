@@ -1,5 +1,7 @@
 package com.tanboonji.duke;
 
+import java.util.HashMap;
+
 import com.tanboonji.duke.command.Command;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.model.TaskList;
@@ -11,11 +13,11 @@ import com.tanboonji.duke.storage.Storage;
  */
 public class Duke {
 
-    private static final String FILE_DIR = "duke.data";
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke.\n"
             + "What can I do for you today?";
     private Storage storage;
     private TaskList taskList;
+    private HashMap<String, String> aliasMap;
 
     /**
      * Default class constructor.
@@ -29,10 +31,11 @@ public class Duke {
      * @return String response from initialisation.
      */
     public String initialise() {
-        storage = new Storage(FILE_DIR);
+        storage = new Storage();
 
         try {
-            taskList = storage.load();
+            taskList = storage.loadTask();
+            aliasMap = storage.loadAlias();
         } catch (DukeException e) {
             return e.getMessage();
         }
@@ -51,8 +54,10 @@ public class Duke {
     public String getResponse(String input) {
         Command command;
         try {
-            command = CommandParser.parse(input);
+            input = CommandParser.parseAlias(input, aliasMap);
+            command = CommandParser.parseCommand(input);
             command.addTaskList(taskList);
+            command.addAlias(aliasMap);
             String result = command.execute();
 
             if (command.shouldSaveData()) {
@@ -65,7 +70,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves task list and alias map data to local disk.
+     *
+     * @throws DukeException If an error occurs while saving data to local disk.
+     */
     public void saveData() throws DukeException {
-        storage.save(taskList);
+        storage.saveTask(taskList);
+        storage.saveAlias(aliasMap);
     }
 }
