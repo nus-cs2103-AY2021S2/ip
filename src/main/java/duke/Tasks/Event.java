@@ -16,7 +16,6 @@ public class Event extends Task {
             + "Did you put in yyyy-mm-dd format?";
 
     protected String at;
-    protected LocalDate dateOfEvent;
 
     /**
      * Constructor.
@@ -29,7 +28,7 @@ public class Event extends Task {
 
         String dateString = DateParser.extractDate(at);
         if (!dateString.equals("")) {
-            this.dateOfEvent = DateParser.parseDate(dateString);
+            this.localDate = DateParser.parseDate(dateString);
             this.at = at;
         } else {
             throw new DukeParseException(EVENT_FORMAT_ERROR_MESSAGE);
@@ -39,7 +38,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String dateString = DateParser.extractDate(at);
-        String convertedDateString = dateOfEvent.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String convertedDateString = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String modifiedAt = at.replaceAll(dateString, convertedDateString);
         return super.toString() + " (at: " + modifiedAt + ")";
     }

@@ -10,8 +10,8 @@ import java.time.format.DateTimeFormatter;
  * A Task with a deadline to complete.
  */
 public class Deadline extends Task {
+
     private String by;
-    private LocalDate dateOfDeadline;
 
     /**
      * Constructor. Note that it parses the first occurrence of the string "yyyy-M-d" that occurs
@@ -28,7 +28,7 @@ public class Deadline extends Task {
         super(description, "D");
         String dateString = DateParser.extractDate(by);
         if (!dateString.equals("")) {
-            this.dateOfDeadline = DateParser.parseDate(dateString);
+            this.localDate = DateParser.parseDate(dateString);
         } else {
             throw new DukeParseException(DEADLINE_FORMAT_ERROR_MESSAGE);
         }
@@ -44,7 +44,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String dateString = DateParser.extractDate(by);
-        String convertedDateString = dateOfDeadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String convertedDateString = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String modifiedBy = by.replaceAll(dateString, convertedDateString);
         return super.toString() + " (by: " + modifiedBy + ")";
     }
