@@ -22,12 +22,14 @@ ChaeLisa is a **task management application** made for people who like command l
 ### Adding a ToDo: `todo`
 
 Adds a ToDo to the list.
+
 Format: `todo [TASKNAME]`
 
 Examples:
 * `todo homework`
 
 Expected outcome:
+
 The returns will be like this:
 
 ![return of todo command](todoCommandOutput.png)
@@ -36,12 +38,14 @@ The returns will be like this:
 ### Adding a Deadline: `deadline`
 
 Adds a deadline to the list.
+
 Format: `deadline [TASKNAME] /by YYYY-MM-DD HH:MM`
 
 Examples:
 * `deadline ip /by 2021-02-18 23:59`
 
 Expected outcome:
+
 The returns will be like this:
 
 ![return of deadline command](deadlineCommandOutput.png)
@@ -50,12 +54,14 @@ The returns will be like this:
 ### Adding an Event: `event`
 
 Adds an event to the list.
+
 Format: `event [TASKNAME] /at YYYY-MM-DD HH:MM`
 
 Examples:
 * `event birthday /at 2021-02-18 00:00`
 
 Expected outcome:
+
 The returns will be like this:
 
 ![return of event command](eventCommandOutput.png)
@@ -68,7 +74,9 @@ Shows a list of all the task in the list.
 Format: `list`
 
 Expected outcome:
+
 `Here are the task in your list, Lisa:`
+
 Then come with all tasks in the list.
 
 
@@ -79,10 +87,12 @@ Finds all tasks that matches the given keywords.
 Format: `find [KEYWORD]`
 
 Examples:
-*`find ip`
+* `find ip`
 
 Expected outcome:
+
 `Here are the matching tasks, Lisa`
+
 Then come with all tasks that contains the phrase **ip**.
 
 
@@ -94,10 +104,12 @@ Format: `done [INDEX]`
 * The index is based on the list when you command [list] (#Listing all task: `list`)
 
 Examples:
-*`done 1` Marks the first task in the list as done. 
+* `done 1` Marks the first task in the list as done. 
 
 Expected Outcome:  
+
 `Nice! I've marked this task as done for you, Lisa:`  
+
 Then come with the task that is marked as done.
 
 
@@ -112,7 +124,9 @@ Examples:
 * `delete 1` Deletes the first task on the list.
 
 Expected Outcome:
-`Noted. I've removed this task for you, Lisa:`  
+
+`Noted. I've removed this task for you, Lisa:`
+
 Then come with the task deleted.
 
 
@@ -123,7 +137,9 @@ Prints all tasks (Todo, Deadline, Event) you got in your list today.
 Format: `myTaskToday`
 
 Expected outcome:
+
 `Here are the tasks today, Lisa:`
+
 Then come with all the tasks today.
 
 
@@ -134,10 +150,12 @@ Prints all tasks (Deadline, Event) you got in your list on that day.
 Format: `myTaskOn YYYY-MM-DD`
 
 Examples:
-*`myTaskOn 2021-02-18`
+* `myTaskOn 2021-02-18`
 
 Expected outcome:
+
 `Here are the tasks on 2021-02-18:`
+
 Then come with all the tasks on that day.
 
 
@@ -148,6 +166,7 @@ Prints all deadlines that is upcoming and unfinished.
 Format `reminder`
 
 Expected outcome:
+
 `Here are the upcoming deadlines, Lisa:`
 
 
