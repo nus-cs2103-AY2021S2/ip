@@ -42,9 +42,12 @@ public class Storage {
                 for (String line : Files.readAllLines(Paths.get(filePath))) {
                     String[] dataArr = line.split(" \\| ");
                     String typeTask = dataArr[0];
+                    assert (typeTask.equals("T") || typeTask.equals("D") || typeTask.equals("E")) : "Tasks are being "
+                       + "saved wrongly";
 
                     switch (typeTask) {
                     case "T":
+                        assert (dataArr.length > 3) : "Tasks are being saved incorrectly";
                         ToDo td = new ToDo(dataArr[2]);
                         if (dataArr[1].equals("1")) {
                             td.markAsDone();
@@ -54,6 +57,7 @@ public class Storage {
                         break;
 
                     case "D":
+                        assert (dataArr.length > 4) : "Deadlines are being saved incorrectly";
                         Deadline d = new Deadline(dataArr[2], dataArr[3]);
 
                         if (dataArr[1].equals("1")) {
@@ -64,6 +68,7 @@ public class Storage {
                         break;
 
                     case "E":
+                        assert (dataArr.length > 4) : "Events are being saved incorrectly";
                         Event e = new Event(dataArr[2], dataArr[3]);
 
                         if (dataArr[1].equals("1")) {
