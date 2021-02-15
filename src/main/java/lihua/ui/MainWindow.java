@@ -6,6 +6,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import lihua.commons.Messages;
 import lihua.main.Lihua;
@@ -30,9 +35,6 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/geisha-2-concrete.jpg"));
     private Image lihuaImage = new Image(this.getClass().getResourceAsStream("/images/geisha-concrete.jpg"));
 
-    private Image backgroundImage = new Image(this.getClass()
-            .getResourceAsStream("/images/pikachu-background-2.jpg"));
-
     /**
      * Initializes the main window.
      */
@@ -48,13 +50,13 @@ public class MainWindow extends AnchorPane {
      */
     public void setLihua(Lihua lihua) {
         this.lihua = lihua;
-        sendWelcomMessage();
+        sendWelcomeMessage();
     }
 
     /**
      * Sends a welcome message to the user.
      */
-    public void sendWelcomMessage() {
+    public void sendWelcomeMessage() {
         dialogContainer.getChildren().addAll(DialogBox.getLihuaDialog(Messages.MESSAGE_HELLO, lihuaImage));
     }
 
