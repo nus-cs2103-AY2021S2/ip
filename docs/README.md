@@ -20,7 +20,7 @@ A packaged jar file has been attached in the latest release. Feel free to downlo
 To run the jar file, simply type in the command `java -jar Duke.jar` 
 
 
-### `todo` - Add a todo task
+### 1. `todo` - Add a todo task
 
 Add a todo task with your given task content to Duke.
 
@@ -36,7 +36,7 @@ Expected Outcome:
 Added liao: [T][ ] 1. a 2103 individual project
 You have 1 task in the list!
 ```
-### `deadline` - Add a deadline task
+### 2. `deadline` - Add a deadline task
 
 Add a deadline task with your given task content and deadline(YYYY-MM-DD) to Duke.
 
@@ -53,7 +53,7 @@ Added liao: [D][ ] 2. team meeting (Jan 22 2021)
 You have 2 tasks in the list!
 ```
 
-### `event` - Add an event
+### 3. `event` - Add an event
 
 Add an event with the event content and deadline(YYYY-MM-DD) to Duke.
 
@@ -70,7 +70,7 @@ Added liao: [E][ ] 3. Chinese New Year (Feb 11 2021)
 You have 3 tasks in the list!
 ```
 
-### `list` - List all the current tasks
+### 4. `list` - List all the current tasks
 
 List all the tasks that you have added to Duke.
 
@@ -88,7 +88,7 @@ Expected Outcome:
 [E][ ] 3. Chinese New Year (Feb 11 2021)
 ```
 
-### `done` - Mark a current task as done.
+### 5. `done` - Mark a current task as done.
 
 Mark a current task with the given index as done in Duke.
 
@@ -110,7 +110,7 @@ Wah~ You done the task: [T][X] 1. a 2103 indivual project
 [E][ ] 3. Chinese New Year (Feb 11 2021)
 ```
 
-### `delete` - Delete a current task from Duke.
+### 6. `delete` - Delete a current task from Duke.
 
 Delete a task with the given index in Duke.
 
@@ -130,7 +130,7 @@ Awww~ You've deleted the task: [T][X] 1. a 2103 indiviual project
 [E][ ] 2. Chinese New Year (Feb 11 2021)
 ```
 
-### `find` - Find all relevant tasks.
+### 7. `find` - Find all relevant tasks.
 
 Find all relevent tasks with your given keyword in Duke.
 
@@ -147,7 +147,7 @@ Here are the matches for your search:
 [D][ ] 1. team meeting (Jan 22 2021)
 ```
 
-### `clear` - Clear statistics and history.
+### 8. `clear` - Clear statistics and history.
 
 Delete user history file.
 
@@ -164,7 +164,7 @@ Successfully clear statistics
 (Statistics.txt removed)
 ```
 
-### `bye` - exit Duke
+### 9. `bye` - exit Duke
 
 Exit Duke and save your task history.
 
