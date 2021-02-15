@@ -1,6 +1,7 @@
 package todobeast;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import todobeast.tasks.Task;
@@ -108,9 +109,21 @@ public class Ui {
 
     public String printTaskList(List<Task> taskList) {
         StringBuilder output = new StringBuilder();
-        int count = 1;
+//        int count = 1;
         for (Task task : taskList) {
-            output.append(count++).append(". ").append(task).append("\n");
+            int listIndex = taskList.indexOf(task) + 1;
+            output.append(listIndex).append(". ").append(task).append("\n");
+        }
+        return output.toString();
+    }
+
+    public String printFilteredMap(Map<Integer, Task> filteredMap) {
+        StringBuilder output = new StringBuilder();
+//        int count = 1;
+        for (Map.Entry<Integer, Task> entry : filteredMap.entrySet()) {
+            int taskIndex = entry.getKey() + 1;
+            Task task = entry.getValue();
+            output.append("Task #").append(taskIndex).append(". ").append(task).append("\n");
         }
         return output.toString();
     }

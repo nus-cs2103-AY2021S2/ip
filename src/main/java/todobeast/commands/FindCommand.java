@@ -1,6 +1,7 @@
 package todobeast.commands;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import todobeast.TaskList;
@@ -21,10 +22,13 @@ public class FindCommand extends Command {
             throw new ToDoBeastException("Task list cannot be found.");
         }
         List<Task> tasks = taskList.getTaskList();
-        List<Task> filteredList = tasks.stream()
+//        List<Task> filteredList = tasks.stream()
+//                .filter(task -> task.containsStringInDesc(regex))
+//                .collect(Collectors.toList());
+        Map<Integer, Task> filteredMap = tasks.stream()
                 .filter(task -> task.containsStringInDesc(regex))
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(task -> taskList.getTaskList().indexOf(task), task -> task));
         ui.addToResponseOutput(ui.findTasks());
-        ui.addToResponseOutput(ui.printTaskList(filteredList));
+        ui.addToResponseOutput(ui.printFilteredMap(filteredMap));
     }
 }
