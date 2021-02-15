@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +13,11 @@ public class ExitCommand extends Command {
 
     @Override
     public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
+        try {
+            storage.save(taskList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ui.showGoodbye();
     }
 

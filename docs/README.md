@@ -1,7 +1,10 @@
 # User Guide to Mister Duke
 
-## Introduction
+Welcome to the Mister Duke's user guide! This is a comprehensive platform for you to understand how Mister Duke functions.
+
 Mister Duke is an interactive chatbot that will help you to keep track of your tasks.
+
+
 
 ## Features
 
@@ -9,7 +12,7 @@ Mister Duke is an interactive chatbot that will help you to keep track of your t
 Mister Duke can identify four different types of tasks: To-do, Deadlines, Events and Notes. Identify which type of task you are adding and Mister Duke will keep track of them for you.
 
 ### Marking a task as done
-After you have complete a task, Mister Duke is able to tick its checkbox for you. This way, you are able to stay on top of things and have a quick overview of what has not been done.
+After you have completed a task, Mister Duke is able to tick its checkbox for you. This way, you are able to stay on top of things and have a quick overview of what has not been done.
 
 ### Deleting a task
 Added a wrong task by mistake? Fret not as Mister Duke can delete the task from your list.
@@ -31,7 +34,10 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task: [T][ ] buy bread`
+```
+Got it. I've added this task: 
+  [T][ ] buy bread
+```
 
 ### `deadline (task) /by (date)` - Adds a Deadline Task into your task list.
 
@@ -43,7 +49,10 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task: [D][ ] write essay (by: Fri Feb 19 23:59:00 SGT 2021)`
+```
+Got it. I've added this task:
+  [D][ ] write essay (by: Fri Feb 19 23:59:00 SGT 2021)
+```
 
 ### `event (task) /at (timing)` - Adds an Event Task into your task list.
 
@@ -55,7 +64,10 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task: [E][ ] project meeting (at: 2pm)`
+```
+Got it. I've added this task: 
+  [E][ ] project meeting (at: 2pm)
+```
 
 ### `note (text)` - Adds a Note Task into your task list.
 
@@ -67,7 +79,10 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task: [N][ ] rmb to call mom`
+```
+Got it. I've added this task: 
+  [N][ ] rmb to call mom
+```
 
 ### `list` - Lists all tasks in your task list.
 
@@ -79,7 +94,13 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list: 1. [T][ ] todo buy bread 2. [D][ ] write essay (by: Fri Feb 19 23:59:00 SGT 2021) 3. [E][ ] project meeting (at: 2pm) 4. [N][ ] rmb to call mom`
+```
+Here are the tasks in your list: 
+1. [T][ ] todo buy bread 
+2. [D][ ] write essay (by: Fri Feb 19 23:59:00 SGT 2021) 
+3. [E][ ] project meeting (at: 2pm) 
+4. [N][ ] rmb to call mom
+```
 
 ### `done (task number)` - Marks a task as done.
 
@@ -91,7 +112,10 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done: [N][ ] rmb to call mom`
+```
+Nice! I've marked this task as done: 
+  [N][✓] rmb to call mom
+```
 
 ### `delete (task number)` - Deletes a task from the task list. 
 
@@ -103,7 +127,10 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task: [T][ ] buy bread`
+```
+Noted. I've removed this task:
+  [T][ ] buy bread
+```
 
 ### `find (keyword)` - Finds a task with the specified keyword
 
@@ -115,4 +142,19 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list: 1. [E][ ] project meeting (at: 2pm)`
+```
+Here are the matching tasks in your list: 
+1. [E][ ] project meeting (at: 2pm)
+```
+
+### `bye` - Bid Mister Duke goodbye
+
+Mister Duke will bid you goodbye after you no longer require him. He will retain the information in the task list from the previous usage.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+`Bye. Hope to see you again soon! :)`
