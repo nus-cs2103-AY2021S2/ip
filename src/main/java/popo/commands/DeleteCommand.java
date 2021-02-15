@@ -1,7 +1,6 @@
 package popo.commands;
 
 import static popo.utils.Messages.MESSAGE_DELETED_TASK;
-import static popo.utils.Messages.MESSAGE_INVALID_INDEX;
 import static popo.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
 
 import popo.tasks.Task;
@@ -29,16 +28,12 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        try {
-            assert taskList != null;
-            Task task = taskList.getTask(index);
-            taskList.deleteTask(index);
-            return new CommandResult(taskList, false,
-                    MESSAGE_DELETED_TASK + "\n",
-                    task.toString() + "\n",
-                    String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()));
-        } catch (IndexOutOfBoundsException ex) {
-            return new CommandResult(false, MESSAGE_INVALID_INDEX);
-        }
+        assert taskList != null;
+        Task task = taskList.getTask(index);
+        taskList.deleteTask(index);
+        return new CommandResult(taskList, false,
+                MESSAGE_DELETED_TASK + "\n",
+                task.toString() + "\n",
+                String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()));
     }
 }

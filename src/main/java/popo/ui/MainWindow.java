@@ -1,5 +1,7 @@
 package popo.ui;
 
+import static popo.utils.Messages.MESSAGE_INVALID_INDEX;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -122,9 +124,13 @@ public class MainWindow extends VBox {
      * @param command User command.
      * @return Result command.
      */
-    private CommandResult executeCommand(Command command) {
-        command.setTaskList(taskList);
-        return command.execute();
+    private CommandResult executeCommand(Command command) throws InvalidDescriptionException {
+        try {
+            command.setTaskList(taskList);
+            return command.execute();
+        } catch (IndexOutOfBoundsException ex) {
+            throw new InvalidDescriptionException(MESSAGE_INVALID_INDEX);
+        }
     }
 
     /**

@@ -21,6 +21,8 @@ public class HelpCommand extends Command {
                 ToDoCommand.MESSAGE_USAGE + "\n\n",
                 DeadlineCommand.MESSAGE_USAGE + "\n\n",
                 EventCommand.MESSAGE_USAGE + "\n\n",
+                DurationCommand.MESSAGE_USAGE + "\n\n",
+                PeriodCommand.MESSAGE_USAGE + "\n\n",
                 DoneCommand.MESSAGE_USAGE + "\n\n",
                 DeleteCommand.MESSAGE_USAGE + "\n\n",
                 FindCommand.MESSAGE_USAGE);

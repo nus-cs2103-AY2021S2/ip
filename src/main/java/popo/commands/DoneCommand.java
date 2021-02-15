@@ -1,7 +1,6 @@
 package popo.commands;
 
 import static popo.utils.Messages.MESSAGE_DONE_TASK;
-import static popo.utils.Messages.MESSAGE_INVALID_INDEX;
 
 /**
  * Completes a task.
@@ -26,14 +25,10 @@ public class DoneCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        try {
-            assert taskList != null;
-            taskList.completeTask(index);
-            return new CommandResult(taskList, false,
-                    MESSAGE_DONE_TASK + "\n",
-                    taskList.getTask(index).toString());
-        } catch (IndexOutOfBoundsException ex) {
-            return new CommandResult(false, MESSAGE_INVALID_INDEX);
-        }
+        assert taskList != null;
+        taskList.completeTask(index);
+        return new CommandResult(taskList, false,
+                MESSAGE_DONE_TASK + "\n",
+                taskList.getTask(index).toString());
     }
 }
