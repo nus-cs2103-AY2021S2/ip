@@ -1,3 +1,3 @@
-1 todo hi
-0 event asdca /at vsva
-0 deadline hihi /by 190e3
+0 todo betterGUI
+0 deadline UserGuide /by 17/02/2021
+1 event tP meeting /at 10-11pm
