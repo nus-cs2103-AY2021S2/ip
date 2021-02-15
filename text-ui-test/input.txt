@@ -1,0 +1,8 @@
+todo watch anime
+deadline finish CS2103 project /by Thursday
+event Usada Pekora livestream /at Mon 2-4pm JST
+list
+done 1
+list
+bye
+
