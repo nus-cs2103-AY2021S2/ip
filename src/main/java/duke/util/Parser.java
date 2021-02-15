@@ -36,6 +36,9 @@ public class Parser {
         case BYE:
             checkNoArgument(args);
             break;
+        case CLEAR:
+            checkNoArgument(args);
+            break;
         case DEADLINE:
             checkValidDeadline(args);
             break;
@@ -62,6 +65,9 @@ public class Parser {
             break;
         case LOWPRIORITY:
             checkValidNumber(args);
+            break;
+        case SAMPLE:
+            checkNoArgument(args);
             break;
         case SAVE:
             checkNoArgument(args);
