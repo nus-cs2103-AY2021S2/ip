@@ -9,11 +9,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
 public class ErrorDialog extends DialogBox {
-    
-    private final static Label NAME_LABEL = new Label("Checklst - Error");
 
     public ErrorDialog(Label l, ImageView iv) {
-        super(NAME_LABEL, l, iv);
+        // Should use a static Label here but for some reason static variables don't work with JavaFx.
+        super(new Label("Checklst - Error"), l, iv);
 
         Color dialogColor = new Color(1, 0, 0, 1);
         this.text.setBackground(
