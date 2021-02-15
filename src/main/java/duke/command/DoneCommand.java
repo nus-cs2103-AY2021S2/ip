@@ -22,17 +22,11 @@ public class DoneCommand extends Command {
         this.taskId = taskId;
     }
 
-    /**
-     * Executes the user command to mark a task as done.
-     * @param tasks A TaskList object which encapsulates the data and operations on a task list.
-     * @param ui A duke.Ui object which deals with interactions with the user.
-     * @param storage A duke.Storage object which deals with loading tasks from the file and saving tasks in the file.
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task task = tasks.doneTask(taskId);
-        ui.printMsg("Nice! I've marked this task as done: ");
-        ui.printMsg("  " + task);
+        String resp = "Nice! I've marked this task as done: \n" + "  " + task;
         storage.save(tasks);
+        return resp;
     }
 
     public boolean isExit() {

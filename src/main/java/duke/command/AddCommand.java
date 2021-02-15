@@ -21,18 +21,12 @@ public class AddCommand extends Command {
         this.newTask = newTask;
     }
 
-    /**
-     * Executes the user command to add a new task.
-     * @param tasks A TaskList object which encapsulates the data and operations on a task list.
-     * @param ui A duke.Ui object which deals with interactions with the user.
-     * @param storage A duke.Storage object which deals with loading tasks from the file and saving tasks in the file.
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(newTask);
-        ui.printMsg("Got it. I've added this task: ");
-        ui.printMsg("  " + newTask);
-        ui.printMsg("Now you have " + tasks.getNumOfTasks() + " tasks in the list.");
+        String resp = "Got it. I've added this task: \n" +  "  " + newTask +
+                "Now you have " + tasks.getNumOfTasks() + " tasks in the list.";
         storage.save(tasks);
+        return resp;
     }
 
     public boolean isExit() {

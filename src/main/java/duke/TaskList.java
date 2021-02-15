@@ -54,14 +54,12 @@ public class TaskList {
         }
     }
 
-    /**
-     * Prints the task list using ui.
-     * @param ui An duke.Ui object which deals with interactions with the user.
-     */
-    public void printTasks(Ui ui) {
+    public String toStringWithIndex() {
+        String str = "";
         for (int i = 0; i < getNumOfTasks(); i++) {
-            ui.printMsg((i + 1) + "." + tasks.get(i).toString());
+            str = str + (i + 1) + "." + tasks.get(i).toString() + "\n";
         }
+        return str;
     }
 
     public ArrayList<Task> find(String keyword) {
