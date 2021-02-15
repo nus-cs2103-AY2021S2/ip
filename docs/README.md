@@ -13,6 +13,8 @@ You can give commands to Zeke and it will return the relevant messages.
 3. Run the zeke.jar file.
 4. You can now start using the app!
 
+<br>
+
 ## Features
 
 ## At a glance
