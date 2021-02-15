@@ -27,9 +27,6 @@ import popo.tasks.TaskList;
  * The Main Window. Provides the basic application layout.
  */
 public class MainWindow extends VBox {
-    private Storage storage;
-    private TaskList taskList;
-    private Stage primaryStage;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -41,6 +38,9 @@ public class MainWindow extends VBox {
     @FXML
     private HBox bottomContainer;
 
+    private Storage storage;
+    private TaskList taskList;
+    private Stage primaryStage;
     private Image userImage;
     private Image popoImage;
 
@@ -87,44 +87,33 @@ public class MainWindow extends VBox {
      */
     public void addWelcomeMessage() {
         String welcomeMsg = "Hello! I'm Popo, a personal assistant for managing task.\nWhat can I do for you?";
-        DialogBox greetingDialog = DialogBox.getPopoDialog(welcomeMsg, popoImage);
+        DialogBox greetingDialog = DialogBox.getPopoDialog(welcomeMsg, popoImage, false);
         dialogContainer.getChildren().add(greetingDialog);
     }
 
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getPopoDialog(response, popoImage)
-        );
-        userInput.clear();
-    }
-
-    private String getResponse(String input) {
+        String response;
+        boolean isErrorMsg = false;
         try {
-            // Parse the user input into an executable command
             Command command = new Parser().parseCommand(input);
-
-            // Execute the command
             CommandResult commandResult = executeCommand(command);
-
-            // If the command is to exit the program
             if (commandResult.isExitingProgram()) {
-                handleExit();
+                exit();
             }
-
-            // Update the cached task list and save it to file
             storage.saveTasksIfPresent(commandResult.getUpdatedTaskList());
             updateTaskListIfPresent(commandResult.getUpdatedTaskList());
-
-            // Return the message for the user
-            return commandResult.getMessageForUser();
+            response = commandResult.getMessageForUser();
         } catch (InvalidCommandException | StorageException | InvalidDescriptionException
                 | NoDescriptionException ex) {
-            return ex.getMessage();
+            response = ex.getMessage();
+            isErrorMsg = true;
         }
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox popoDialog = DialogBox.getPopoDialog(response, popoImage, isErrorMsg);
+        dialogContainer.getChildren().addAll(userDialog, popoDialog);
+        userInput.clear();
     }
 
     /**
@@ -149,7 +138,7 @@ public class MainWindow extends VBox {
         }
     }
 
-    private void handleExit() {
+    private void exit() {
         primaryStage.hide();
         System.exit(0);
     }
