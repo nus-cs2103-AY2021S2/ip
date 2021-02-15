@@ -15,6 +15,9 @@ public class FindCommand extends Command {
     @Override
     public String executeCommand(Ui ui, Storage storage, ArrayList<Task> taskList) throws DukeException {
         String input = command.trim();
+        if (input.equalsIgnoreCase("find")) {
+            throw new DukeException("Could you please specify a keyword? :)");
+        }
         String[] strArray = input.split(" ", 2);
         String cmd = strArray[0];
         String keyword = strArray[1];

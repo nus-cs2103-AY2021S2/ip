@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +20,11 @@ public class DoneCommand extends Command {
         } else {
             Task completedTask = taskList.get(Integer.parseInt(commandArray[1]) - 1);
             completedTask.markAsDone();
+            try {
+                storage.save(taskList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return ui.showTaskDone(completedTask);
         }
     }

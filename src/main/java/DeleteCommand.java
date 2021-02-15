@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +18,11 @@ public class DeleteCommand extends Command {
         if (Integer.parseInt(commandArray[1]) > taskList.size() || Integer.parseInt(commandArray[1]) == 0) {
             return ui.showOutOfBounds();
         } else {
+            try {
+                storage.save(taskList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return ui.showTaskDelete(taskList, commandArray[1]);
         }
     }
