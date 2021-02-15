@@ -46,7 +46,7 @@ public class Parser {
         } else if (keyword.equals("sort")) {
             return new SortCommand(splitBySpaces);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
