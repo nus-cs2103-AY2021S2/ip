@@ -2,7 +2,7 @@ package duke;
 
 public class CallbackFunction implements Runnable {
 
-    Runnable callback;
+    private final Runnable callback;
 
     /**
      * Initializes a CallbackFunction with a Runnable.
