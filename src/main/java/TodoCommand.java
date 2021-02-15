@@ -8,9 +8,9 @@ public class TodoCommand extends Command {
     private String command;
 
     /**
-     * Constructor method.
+     * Constructs a todo command.
      *
-     * @param command
+     * @param command user command.
      */
     public TodoCommand(String command) {
         this.command = command;

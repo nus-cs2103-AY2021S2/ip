@@ -7,6 +7,11 @@ public class DoneCommand extends Command {
 
     private String command;
 
+    /**
+     * Constructs a done command.
+     *
+     * @param command user command.
+     */
     public DoneCommand(String command) {
         this.command = command;
     }
@@ -47,7 +52,7 @@ public class DoneCommand extends Command {
     /**
      * Checks if a string is numeric.
      *
-     * @param string input string
+     * @param string input string.
      * @return false if a string is not numeric. True otherwise.
      */
     public boolean isNumeric(String string) {

@@ -8,7 +8,7 @@ public class DeleteCommand extends Command {
     private String command;
 
     /**
-     * Constructor method.
+     * Constructs a delete command.
      *
      * @param command command input from user.
      */
@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
     /**
      * Checks if a string is numeric.
      *
-     * @param string input string
+     * @param string input string.
      * @return false if a string is not numeric. True otherwise.
      */
     public boolean isNumeric(String string) {

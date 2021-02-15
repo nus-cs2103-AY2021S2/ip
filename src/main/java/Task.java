@@ -7,7 +7,8 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Overloaded constructor method.
+     * Constructs a task.
+     *
      * @param description String to describe task.
      */
     protected Task(String description) {
@@ -16,7 +17,8 @@ public abstract class Task {
     }
 
     /**
-     * Overloaded constructor method.
+     * Constructs a task.
+     *
      * @param description String to describe task.
      * @param isDone Boolean for the done status for task.
      */
@@ -26,8 +28,9 @@ public abstract class Task {
     }
 
     /**
-     * Status icon for the task based on whether it is done or not.
-     * @return String output.
+     * Gets the status icon for a task based on whether it is done or not.
+     *
+     * @return String icon.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -35,14 +38,15 @@ public abstract class Task {
 
 
     /**
-     * To mark the task as done.
+     * Marks a task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Getter for checking if Task is done.
+     * Gets the done status of the task.
+     *
      * @return boolean for whether the task is done.
      */
     public boolean getIsDone() {

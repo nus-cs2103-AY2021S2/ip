@@ -16,7 +16,8 @@ public class Storage {
     private File hardDrive;
 
     /**
-     * Constructor method for storage class.
+     * Constructs a storage object.
+     *
      * @throws IOException - exception thrown when there is error in file path.
      */
     public Storage() throws DukeIoException {
@@ -34,6 +35,7 @@ public class Storage {
 
     /**
      * Loads hard drive from the file.
+     *
      * @throws DukeIoException if file is not found at target location or data is corrupted.
      */
     public List<Task> load() throws DukeIoException {
@@ -68,8 +70,9 @@ public class Storage {
 
     /**
      * Saves the information from the current list of tasks to the hard drive (duke.txt)
-     * @param tasks current list of tasks
-     * @throws DukeIoException if there is an error when writing to file
+     *
+     * @param tasks current list of tasks.
+     * @throws DukeIoException if there is an error when writing to file.
      */
     public void save(List<Task> tasks) throws IOException {
 

@@ -6,8 +6,9 @@ public class ListCommand extends Command {
     private String command;
 
     /**
-     * Constructor method
-     * @param command user command input
+     * Constructs a list command.
+     *
+     * @param command user command input.
      */
     public ListCommand(String command) {
         this.command = command;
@@ -15,6 +16,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes the list command to show the full list of tasks.
+     *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.

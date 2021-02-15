@@ -10,10 +10,10 @@ public class Deadline extends Task {
     private LocalDate deadline;
 
     /**
-     * Overloaded constructor method.
+     * Constructs a deadline object.
      *
      * @param description task description.
-     * @param deadline LocalDate object that describes the deadline.
+     * @param deadline LocalDate object that describes the deadline date.
      */
     public Deadline(String description, LocalDate deadline) {
         super(description);
@@ -21,7 +21,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overloaded constructor method.
+     * Constructs a deadline object.
      *
      * @param description task description.
      * @param deadline LocalDate object that describes the deadline.
@@ -35,7 +35,7 @@ public class Deadline extends Task {
     /**
      * Gets the task deadline.
      *
-     * @return string of task deadline
+     * @return string of task deadline.
      */
     public LocalDate getDeadline() {
         assert(this.deadline instanceof LocalDate);
@@ -43,10 +43,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Allows user to change the deadline of task
+     * Allows user to change the deadline of task.
      *
-     * @param deadline new deadline to be changed to
-     * @return the new deadline
+     * @param deadline new deadline to be changed to.
+     * @return the new deadline.
      */
     public LocalDate setDeadline(LocalDate deadline) {
         this.deadline = deadline;

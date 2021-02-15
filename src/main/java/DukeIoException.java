@@ -3,8 +3,8 @@
  */
 public class DukeIoException extends Exception {
     /**
-     * Constructor method for Duke's Missing Input Exception.
-     * @param message Takes in a String message.
+     * Constructs a Duke IO Exception.
+     * @param message Takes in a String error message.
      */
     public DukeIoException(String message) {
         super(message);

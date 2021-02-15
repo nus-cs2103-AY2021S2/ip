@@ -3,29 +3,31 @@ import java.util.List;
 
 /**
  * List that keeps track of all the tasks currently stored in hard drive.
- * Supports
+ * Includes functions such as deleting, adding, getting tasks.
  */
 public class TaskList {
 
     private List<Task> tasks;
 
     /**
-     * Overloaded constructor method.
+     * Constructs a task list object.
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * Overloaded constructor method
-     * @param tasks takes in a list of tasks
+     * Constructs a task list object.
+     *
+     * @param tasks takes in a list of tasks.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Adds in task to the task list
+     * Adds in task to the task list.
+     *
      * @param task takes in the task to be added.
      */
     public void add(Task task) {
@@ -33,8 +35,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes task at the specified index
-     * @param index
+     * Deletes task at the specified index.
+     *
+     * @param index position of the task of interest.
      */
     public void delete(int index) {
         tasks.remove(index);
@@ -42,6 +45,7 @@ public class TaskList {
 
     /**
      * Gets the task list in arraylist form.
+     *
      * @return task list in arraylist form.
      */
     public List<Task> getTaskList() {
@@ -49,7 +53,8 @@ public class TaskList {
     }
 
     /**
-     * Gets the total number of tasks in the list
+     * Gets the total number of tasks in the list.
+     *
      * @return total tasks in the list
      */
     public int getTaskListLength() {
@@ -57,9 +62,10 @@ public class TaskList {
     }
 
     /**
-     * Gets the task at a particular index
-     * @param index
-     * @return
+     * Gets the task at a particular index.
+     *
+     * @param index position of the task of interest.
+     * @return the task at the specified index.
      */
     public Task getTaskAtIndex(int index) {
         return this.tasks.get(index);

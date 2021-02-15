@@ -5,7 +5,7 @@ Welcome to Duke's user guide. This is a comprehensive user guide to teach you ho
 Duke is a command-line based Task Manager app. To instruct Duke, a user will type a series of commands.
 
 
-## Summary
+## Summary 
 
 Here is an overview of the commands that a user can use in Duke. 
 

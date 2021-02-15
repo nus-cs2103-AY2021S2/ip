@@ -8,7 +8,8 @@ public class EventCommand extends Command {
     private String command;
 
     /**
-     * Constructor method.
+     * Constructs an event command.
+     *
      * @param command user command for creating event.
      */
     public EventCommand(String command) {
@@ -17,6 +18,7 @@ public class EventCommand extends Command {
 
     /**
      * Executes the event command by creating a new event.
+     *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
@@ -44,7 +46,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Builds the description and event time from user's deadline command.
+     * Builds the description and event time from user's event command.
      *
      * @param command user command.
      * @return a String array with task description at pos 0 and event time at pos 1.

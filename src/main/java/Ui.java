@@ -13,7 +13,7 @@ public class Ui {
     /**
      * Shows number of items in the task list.
      *
-     * @param numOfItems
+     * @param numOfItems number of items in the task list.
      */
     public String showNumberOfItems(int numOfItems) {
         return "Now you have " + numOfItems + " tasks in the list.";
@@ -22,7 +22,7 @@ public class Ui {
     /**
      * Shows the task that was added to the list.
      *
-     * @param task
+     * @param task task added to the task list.
      */
     public String showTaskAdded(Task task) {
         return "Got it. I've added this task: \n" + task.toString();
@@ -31,7 +31,7 @@ public class Ui {
     /**
      * Shows the task being marked as done.
      *
-     * @param task task to be marked as done
+     * @param task task to be marked as done.
      */
     public String showTaskDone(Task task) {
         return "Nice! I've marked this task as done: \n" + task.toString();
@@ -51,7 +51,7 @@ public class Ui {
     /**
      * Shows the task deleted.
      *
-     * @param task task to be deleted
+     * @param task task to be deleted.
      */
     public String showTaskDeleted(Task task) {
         return "Noted. I've removed this task: \n" + task.toString();
@@ -76,9 +76,9 @@ public class Ui {
     /**
      * Shows the list of items found according to user keyword.
      *
-     * @param taskList list of tasks
-     * @param command user command
-     * @return a list of the items found according to user keyword
+     * @param taskList list of tasks.
+     * @param command user command.
+     * @return a list of the items found according to user keyword.
      */
     public String showFoundListItems(TaskList taskList, String command) {
         String[] commandArr = command.split(" ");

@@ -3,7 +3,7 @@
  */
 public class DukeMissingInputException extends Exception {
     /**
-     * Constructor method for Duke's Missing Input Exception.
+     * Constructs Duke's Missing Input Exception.
      * @param message Takes in a String message.
      */
     public DukeMissingInputException(String message) {

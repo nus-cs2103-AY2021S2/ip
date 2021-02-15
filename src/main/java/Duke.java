@@ -1,10 +1,13 @@
 /**
- * Duke is a AI assistant program that allows users to take note of their tasks.
+ * Duke is a AI task manager assistant program that allows users to take note of their tasks.
  * Functions supported include:
  * - Creating tasks: todos, events, deadlines
  * - Marking tasks as done
  * - Deleting tasks
  * - Showing the whole list of tasks
+ * - Sorting tasks
+ * - Finding tasks by keyword
+ * - Saying hello and goodbye
  * - Error checking for IO
  */
 public class Duke {
@@ -14,7 +17,7 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Constructor method.
+     * Constructs a Duke simulation object.
      */
     public Duke() {
         try {

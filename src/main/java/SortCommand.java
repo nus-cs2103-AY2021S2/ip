@@ -7,6 +7,7 @@ public class SortCommand extends Command {
 
     /**
      * Executes the sort command and shows the list after it is sorted.
+     *
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.

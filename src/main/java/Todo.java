@@ -4,7 +4,8 @@
 public class Todo extends Task {
 
     /**
-     * Constructor method.
+     * Constructs a todo task.
+     *
      * @param description String that describes the task.
      */
     public Todo(String description) {
@@ -12,9 +13,10 @@ public class Todo extends Task {
     }
 
     /**
-     * Overloaded constructor method
-     * @param description description of the task
-     * @param isDone status of task
+     * Constructs a todo task.
+     *
+     * @param description description of the task.
+     * @param isDone status of task.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);

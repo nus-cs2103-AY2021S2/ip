@@ -8,11 +8,11 @@ public class Parser {
     private Storage storage;
 
     /**
-     * Constructor method.
+     * Constructs a parser object.
      *
-     * @param taskList list of tasks
-     * @param ui standard ui object
-     * @param storage standard storage object
+     * @param taskList list of tasks.
+     * @param ui standard ui object.
+     * @param storage standard storage object.
      */
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
@@ -23,9 +23,9 @@ public class Parser {
     /**
      * Takes in command in the form of a string and returns a class.
      *
-     * @param command user command input
-     * @return respective command object based on user input
-     * @throws DukeWrongInputException if system does not understand user input
+     * @param command user command input.
+     * @return respective command object based on user input.
+     * @throws DukeWrongInputException if system does not understand user input.
      */
     public static Command parse(String command) throws DukeWrongInputException {
         // User input

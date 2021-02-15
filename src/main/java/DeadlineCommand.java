@@ -11,7 +11,7 @@ public class DeadlineCommand extends Command {
     private String command;
 
     /**
-     * Constructor method.
+     * Constructs a deadline command.
      *
      * @param command input command from user.
      */
@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command {
      * @param ui Standard UI object.
      * @param storage Standard storage object.
      * @throws DukeMissingInputException If deadline command is missing description.
-     * @throws DukeWrongInputException If user input is not any of the commands available.
+     * @throws DukeWrongInputException If user input is of the wrong format.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
