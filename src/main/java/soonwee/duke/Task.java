@@ -11,7 +11,7 @@ public class Task {
     public boolean isCompleted;
 
     /**
-     * Instantiate a task with its description.
+     * Instantiates a task with its description.
      *
      * @param taskDesc task description.
      */
@@ -21,7 +21,7 @@ public class Task {
     }
 
     /**
-     * Set a task as completed.
+     * Sets a task as completed.
      */
     public void setCompleted(){
         this.isCompleted = true;

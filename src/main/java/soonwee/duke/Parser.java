@@ -1,7 +1,10 @@
 package soonwee.duke;
 
+import javafx.css.CssParser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Parser instance. A Parser instance will validate input at
@@ -12,6 +15,8 @@ public class Parser {
     static final int MIN_LENGTH_FIND = 4; //Min string length for find.
     static final int MIN_LENGTH_TODO = 4; //Min string length for todo.
     static final int MIN_LENGTH_EVENT = 5; //Min string length for event.
+    static final int MIN_LENGTH_DELETE = 7; //Min string length for delete including space.
+    static final int MIN_LENGTH_DONE = 5; //Min string length for done including space.
     static final int MIN_LENGTH_DEADLINE = 8; //Min string length for deadline.
     static final int START_READ_FIND = 5; //Index to start reading for other details.
     static final int START_READ_TODO = 5; //Index to start reading for other details.
@@ -26,6 +31,35 @@ public class Parser {
     }
 
     /**
+     * Checks if the delete and done input are valid
+     *
+     * @param input input string
+     * @return validity of the string
+     */
+    public boolean isValidDeleteAndDoneInput(String input) {
+        if (input.startsWith("delete") && input.length() > MIN_LENGTH_DELETE) {
+            if (input.charAt(MIN_LENGTH_DELETE - 1) == ' ' && Character.isDigit(input.charAt(MIN_LENGTH_DELETE))) {
+                try {
+                    int index = Integer.parseInt(input.substring(MIN_LENGTH_DELETE));
+                    return true;
+                } catch (NumberFormatException ne) {
+                    ne.getMessage();
+                }
+            }
+        } else if (input.startsWith("done") && input.length() > MIN_LENGTH_DONE) {
+            if (input.charAt(MIN_LENGTH_DONE - 1) == ' ' && Character.isDigit(input.charAt(MIN_LENGTH_DONE))) {
+                try {
+                    int index = Integer.parseInt(input.substring(MIN_LENGTH_DONE));
+                    return true;
+                } catch (NumberFormatException ne) {
+                    ne.getMessage();
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns an integer that represent the type of task that is being passed
      * in.
      *
@@ -33,11 +67,13 @@ public class Parser {
      * @return integer determining the task type
      */
     public TaskType checkTaskType(String data) {
-        if (data.indexOf("todo") == 0 && data.contains("todo")) {
+        if (data.startsWith("todo") && data.charAt(START_READ_TODO - 1) == ' ') {
             return TaskType.TODO;
-        } else if (data.indexOf("deadline") == 0 && data.contains("deadline")) {
+        } else if (data.indexOf("deadline") == 0 && data.startsWith("deadline") &&
+                data.charAt(START_READ_DEADLINE - 1) == ' ') {
             return TaskType.DEADLINE;
-        } else if (data.indexOf("event") == 0 && data.contains("event")) {
+        } else if (data.indexOf("event") == 0 && data.startsWith("event") &&
+                data.charAt(START_READ_EVENT - 1) == ' ') {
             return TaskType.EVENT;
         } else {
             return TaskType.UNKNOWN;
@@ -121,14 +157,30 @@ public class Parser {
         assert cmd != null : "Input command is null";
         int nextChar = -1; //Set by default to not able to find.
         int nextWord = 4; //Template number to find the next text in String.
-        if (cmd.indexOf("/by") != -1) {
-            nextChar = cmd.indexOf("/by");
-        } else if (cmd.indexOf("/at") != -1) {
-            nextChar = cmd.indexOf("/at");
+        int nextSpace = 3; //Template number to find the next space in String.
+        if (cmd.indexOf("/by") != -1 && cmd.length() > cmd.indexOf("/by") + nextSpace) {
+            if (cmd.charAt(cmd.indexOf("/by") + 3) == ' ') {
+                nextChar = cmd.indexOf("/by");
+            } else {
+                return null;
+            }
+        } else if (cmd.indexOf("/at") != -1 && cmd.length() > cmd.indexOf("/at") + nextSpace) {
+            if (cmd.charAt(cmd.indexOf("/at") + 3) == ' ') {
+                nextChar = cmd.indexOf("/at");
+            } else {
+                return null;
+            }
+        } else {
+            return null;
         }
-        String date = cmd.substring(nextChar + nextWord);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
-        LocalDateTime formatDate = LocalDateTime.parse(date, formatter);
-        return formatDate;
+        try {
+            String date = cmd.substring(nextChar + nextWord);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+            LocalDateTime formatDate = LocalDateTime.parse(date, formatter);
+            return formatDate;
+        } catch (DateTimeParseException de) {
+            de.getMessage();
+        }
+        return null;
     }
 }

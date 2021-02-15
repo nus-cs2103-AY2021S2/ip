@@ -20,13 +20,14 @@ public class Duke {
         assert input != null : "Input is null.";
         String result;
         Storage storage = new Storage("data\\tasks.txt");
+        boolean isValidForDoneOrDelete = new Parser().isValidDeleteAndDoneInput(input);
         if (input.equals("list")) {
             result = storage.taskList.displayTasks();
-        } else if (input.startsWith("done") && input.charAt(DONE_INDEX - 1) == ' ') {
+        } else if (input.startsWith("done") && isValidForDoneOrDelete) {
             int index = Integer.parseInt(input.substring(DONE_INDEX));
             result = storage.taskList.setTaskDone(index);
             storage.writeFile();
-        } else if (input.startsWith("delete") && input.charAt(DELETE_INDEX - 1) == ' ') {
+        } else if (input.startsWith("delete") && isValidForDoneOrDelete) {
             int index = Integer.parseInt(input.substring(DELETE_INDEX));
             result = storage.taskList.removeTask(index);
             storage.writeFile();
@@ -92,7 +93,9 @@ public class Duke {
             result = performAddTask(taskList, newToDo);
         } else {
             LocalDateTime date = checker.dateFormatter(fullInput);
-            if (taskType == TaskType.DEADLINE) {
+            if (date == null) {
+                return ("Invalid Input. Please check input again");
+            } else if (taskType == TaskType.DEADLINE) {
                 Deadline newDeadLine = new Deadline(filteredInput, date);
                 result = performAddTask(taskList, newDeadLine);
             } else {
