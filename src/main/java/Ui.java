@@ -24,7 +24,8 @@ public class Ui {
      * Displays the greeting message.
      */
     public void showGreeting() {
-        this.showPasonChat("Hello! Welcome back! I'm feeling bored again... Give me something to do!", CommandResultType.CHAT_PASON);
+        this.showPasonChat("Hello! Welcome back! I'm feeling bored again... "
+                + "Give me something to do!", CommandResultType.CHAT_PASON);
     }
 
     /**

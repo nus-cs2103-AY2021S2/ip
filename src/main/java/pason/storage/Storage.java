@@ -50,7 +50,7 @@ public class Storage {
                 throw new PasonException(e.getMessage());
             }
         }
-        assert !file.exists() : "File should be readable.";
+        assert file.exists() : "File should be readable.";
         List<Task> tasks = new ArrayList<>();
         Scanner s = new Scanner(file);
         Task task;

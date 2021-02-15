@@ -13,10 +13,12 @@ public class PharserTest {
     @Test
     public void validateDeadline_missingDate_exceptionThrown() throws Exception {
         try {
-            assertEquals("Please enter a by date for 'Complete lab'", Parser.validateDeadline("deadline Complete lab"));
+            assertEquals("You've entered an invalid format. Please use: deadline <description> /by <when>",
+                    Parser.validateDeadline("deadline Complete lab"));
             fail(); // the test should not reach this line
         } catch (PasonException e) {
-            assertEquals("Please enter a by date for 'Complete lab'", e.getMessage());
+            assertEquals("You've entered an invalid format. Please use: deadline <description> /by <when>",
+                    e.getMessage());
         }
     }
 
