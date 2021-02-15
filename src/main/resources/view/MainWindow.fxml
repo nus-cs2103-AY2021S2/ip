@@ -17,8 +17,8 @@
             onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send"/>
     <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0"
                 prefWidth="400.0" vvalue="1.0">
-        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0">
-            <Label text="Eeyore Helper" style="-fx-background-color: #A8E0FF; -fx-padding: 8,5,5,5">
+        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0"  alignment="TOP_CENTER" >
+            <Label fx:id="header" text="Eeyore Helper" style="-fx-background-color: #A8E0FF; -fx-padding: 8,5,5,5; -fx-font-weight: bold">
                 <font>
                     <Font name="Georgia" size="18.0"/>
                 </font>
