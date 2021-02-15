@@ -1,5 +1,7 @@
 package todobeast.tasks;
 
+import todobeast.commands.TaskType;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -7,31 +9,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * A Task that represents a deadline-type task. Deadlines have a time and date component.
  */
-public class Deadline extends Task {
-    private LocalDate date;
-    private LocalTime time;
+public class Deadline extends TimeBasedTask {
 
-    public Deadline(String taskDescription, LocalDate date, LocalTime time) {
-        super(taskDescription);
-        this.date = date;
-        this.time = time;
-    }
-
-    public Deadline(String taskDescription, boolean isDone, LocalDate date, LocalTime time) {
-        super(taskDescription, isDone);
-        this.date = date;
-        this.time = time;
-    }
-
-    public String formatForStorage(String delimiter) {
-        return "DEADLINE" + delimiter + (isDone ? "1" : "0") + delimiter
-                + taskDescription + delimiter + date.toString() + delimiter + time.toString();
-    }
-
-    @Override
-    public String toString() {
-        return "DEADLINE" + Task.TASK_DELIMITER + (isDone ? "✓" : " ") + Task.TASK_DELIMITER
-                + taskDescription + Task.TASK_DELIMITER
-                + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ", " + time;
+    public Deadline(String taskDescription, boolean isDone, LocalDate date, LocalTime time, String taskNotes) {
+        super(TaskType.DEADLINE, taskDescription, isDone, date, time, taskNotes, "by ");
     }
 }
