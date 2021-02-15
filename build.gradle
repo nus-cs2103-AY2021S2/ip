@@ -50,7 +50,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'ip.jar'
 }
 
 defaultTasks 'clean', 'test'
