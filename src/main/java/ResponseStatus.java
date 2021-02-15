@@ -1,4 +1,5 @@
 public enum ResponseStatus {
     OK,
-    ERROR
+    ERROR,
+    EXIT
 }
