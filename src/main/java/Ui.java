@@ -34,6 +34,17 @@ public class Ui {
         return "☹ OOPS!!! The description of a todo cannot be empty.";
     }
 
+    public String outInvalidDelete() {
+        return "OOPS!!! Please ensure that you have correctly indicated the index of " +
+                "the item " +
+                "you want to find.";
+    }
+
+    public String outInvalidFind() {
+        return "OOPS!!! Please ensure that you have correctly indicated the keyword " +
+                "of the task(s) you want to search for.";
+    }
+
     public void printBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }

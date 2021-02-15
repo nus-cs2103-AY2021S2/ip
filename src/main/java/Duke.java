@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,13 +38,14 @@ public class Duke extends Application {
         //Step 1. Formatting the window to look as expected.
         Ui ui = new Ui();
         Storage storage = new Storage();
-
         // Creating directory if it does not exist
         storage.createDirectory();
 
         // Loading file from directory if it exists
         List<Task> tempList = storage.loadFile();
+        assert tempList != null;
         TaskList taskList = new TaskList(tempList);
+        assert taskList.taskList != null;
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -143,14 +145,14 @@ public class Duke extends Application {
 
         String output = "";
 
-        if (command.equals("Hello")) {
+        if (parser.isStart(command)) {
             output = getInput.printStart();
-        } else if (command.startsWith("list")) {
+        } else if (parser.isList(command)) {
             output = taskList.enumerateTasks();
-        } else if (command.startsWith("done")) {
+        } else if (parser.isDone(command)) {
             String[] taskToDelete = command.split("\\s+");
             output = taskList.markAsDone(Integer.parseInt(taskToDelete[1]));
-        } else if (command.startsWith("todo")) {
+        } else if (parser.isTodo(command)) {
             try {
                 Todo currentTask = new Todo(command.substring(5));
                 taskList.addToTasks(currentTask);
@@ -158,7 +160,7 @@ public class Duke extends Application {
             } catch (StringIndexOutOfBoundsException indexError) {
                 output = getInput.outInvalidTodo();
             }
-        } else if (command.startsWith("event")) {
+        } else if (parser.isEvent(command)) {
             try {
                 String[] splitString = command.split("/at");
                 String eventDesc = splitString[0];
@@ -169,7 +171,7 @@ public class Duke extends Application {
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException indexError) {
                 output = getInput.outInvalidEvent();
             }
-        } else if (command.startsWith("deadline")) {
+        } else if (parser.isDeadline(command)) {
             try {
                 String[] splitString = command.split("/by");
                 String eventDesc = splitString[0];
@@ -180,13 +182,21 @@ public class Duke extends Application {
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException indexError) {
                 output = getInput.outInvalidDeadline();
             }
-        } else if (command.startsWith("delete")) {
-            String[] splitString = command.split("\\s+");
-            output = taskList.removeTask(Integer.parseInt(splitString[1]));
-        } else if (command.startsWith("find")) {
-            String keyword = command.split("\\s+")[1];
-            output = taskList.retrieveByKeyword(keyword);
-        } else if (command.startsWith("bye")) {
+        } else if (parser.isDelete(command)) {
+            try {
+                String[] splitString = command.split("\\s+");
+                output = taskList.removeTask(Integer.parseInt(splitString[1]));
+            } catch (ArrayIndexOutOfBoundsException indexError) {
+                output = getInput.outInvalidDelete();
+            }
+        } else if (parser.isFind(command)) {
+            try {
+                String keyword = command.split("\\s+")[1];
+                output = taskList.retrieveByKeyword(keyword);
+            } catch (ArrayIndexOutOfBoundsException indexError) {
+                output  = getInput.outInvalidFind();
+            }
+        } else if (parser.isBye(command)) {
             output = getInput.outBye();
         } else {
             // Command is not recognized

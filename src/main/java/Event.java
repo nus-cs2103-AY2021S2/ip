@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
+
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM" +
             "/yyyy HHmm");
 
@@ -31,7 +32,12 @@ public class Event extends Task {
         }
     }
 
-
+    /**
+     * Overloaded constructor to set is done to a specified boolean value.
+     * @param description Description of given task.
+     * @param eventDate Date of task.
+     * @param isDone Boolean whether task has been completed.
+     */
     Event(String description, String eventDate, boolean isDone) {
         super(description, eventDate, isDone);
     }

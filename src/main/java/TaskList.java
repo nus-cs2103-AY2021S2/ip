@@ -21,6 +21,11 @@ public class TaskList {
     }
 
 
+    /**
+     * Method that logs all existing tasks and returns a string that can be logged
+     * into the local disk in data/Duke.txt.
+     * @return A string containing all existing tasks.
+     */
     protected String logAllTasks() {
         StringBuilder out = new StringBuilder();
         for (Task eachTask : taskList) {
@@ -49,17 +54,19 @@ public class TaskList {
 
     /**
      * Enumerates all tasks in the list using 1-based indexing.
+     * @return String representing all existing tasks with 1-based indexing
      */
     protected String enumerateTasks() {
 
-        String res = "Here are the tasks in your list:";
+        StringBuilder res = new StringBuilder("Here are the tasks in your list:");
 
         int counter = 1;
         for (Task eachTask : taskList) {
-            res += String.format("\n%d. %s", counter, eachTask);
+            res.append(String.format("\n%d. %s", counter, eachTask));
             counter++;
         }
-        return res;
+        assert counter == taskList.size();
+        return res.toString();
     }
 
     /**
@@ -92,6 +99,11 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Retrieve task(s) by keyword match so long as description contains the word
+     * @param keyword Keyword to match
+     * @return A string line-spaced by each task that has the keyword
+     */
     protected String retrieveByKeyword(String keyword) {
         int counter = 1;
 

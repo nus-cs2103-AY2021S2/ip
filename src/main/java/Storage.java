@@ -15,11 +15,6 @@ public class Storage {
     private final static String sourceFile = "/Duke.txt";
 
 
-    public static void main(String[] args) throws IOException {
-        Storage s = new Storage();
-        s.loadFile();
-    }
-
     /**
      * Creating directory if it does not exist.
      */
@@ -51,18 +46,22 @@ public class Storage {
             BufferedReader br =
                     new BufferedReader(new FileReader(sourceFolder + sourceFile));
             String line;
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
 
                 String[] eachTask = line.split("[|]");
                 String taskType = eachTask[0];
+                assert eachTask.length >= 2;
                 boolean isDone = eachTask[1].contains("X");
+                assert eachTask.length >= 3;
                 String description = eachTask[2];
 
                 if (taskType.equals("T")) {
                     taskList.add(new Todo(description, isDone));
                 } else if (taskType.equals("E")) {
+                    assert eachTask.length >=4;
                     taskList.add(new Event(description, eachTask[3], isDone));
                 } else {
+                    assert eachTask.length >=4;
                     taskList.add(new Deadline(description, eachTask[3], isDone));
                 }
             }
