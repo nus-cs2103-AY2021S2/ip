@@ -28,6 +28,8 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return parser.parse(input);
+        String response = parser.parse(input);
+        storage.saveTasks(taskList.getList());
+        return response;
     }
 }
