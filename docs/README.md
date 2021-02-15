@@ -3,6 +3,8 @@
 Duke is a CLI (Command Line Interface) application to help its users to record various kinds of tasks, with deadlines and timeframes. 
 
 
+![](Ui.png)
+
 ## Features
 
 ### Add task
