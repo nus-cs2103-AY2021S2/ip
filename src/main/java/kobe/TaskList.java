@@ -117,6 +117,7 @@ public class TaskList {
         try {
             df1.parse(condition);
             LocalDate d1 = LocalDate.parse(condition);
+            assert condition != null : "condition should not be null";
             this.tasks.add(new Task(isItDoneBoolean, taskName, type, d1));
         } catch (ParseException | NullPointerException e) { //not in the format
             this.tasks.add(new Task(isItDoneBoolean, taskName, type, condition));
@@ -146,6 +147,7 @@ public class TaskList {
         if (this.tasks.isEmpty()) { //Managing empty lists from the start
             Ui.addEmptyTaskListResponse();
         } else {
+            assert !this.tasks.isEmpty() : "TaskList should not be empty";
             Task currentTask = this.tasks.get(taskNumber);
             this.tasks.remove(taskNumber);
             int currentTaskListSize = this.tasks.size();
