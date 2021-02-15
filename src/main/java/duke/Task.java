@@ -2,8 +2,8 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * The class in which Deadline, Event and ToDo inherits from.
- * It contains several common methods shared by all subclasses.
+ * The class in which Deadline, Event and ToDo inherits from. It contains
+ * several common methods shared by all subclasses.
  */
 abstract class Task {
     // The name of the task.
@@ -12,9 +12,10 @@ abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor to initialise the name of the task as well as set the task to not completed
+     * Constructor to initialise the name of the task. Also sets the task to
+     * not done by default.
      *
-     * @param taskName the name of the task
+     * @param taskName The name of the task.
      */
     public Task(String taskName) {
         this.taskName = taskName;
@@ -22,39 +23,21 @@ abstract class Task {
     }
 
     /**
-     * Overloaded constructor that includes an additional argument to set the task to completed
+     * Overloaded constructor to create a task object. It accepts one extra
+     * argument to determine if the task is completed.
      *
-     * @param taskName the name of the task
-     * @param isDone that indicates whether the task has already been completed
+     * @param taskName The name of the task.
+     * @param isDone Whether is task is already completed.
      */
     public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
     }
 
-    protected void completeTask() {
-        this.isDone = true;
-    }
-
-    /**
-     * Takes in a LocalDate object and returns the date of the object in a special format.
-     *
-     * @param date the LocalDate object to print the date of.
-     * @return the string representation of the date of the object in the special format.
-     */
-    public static String printDate(LocalDate date) {
-        String month = date.getMonth().toString().substring(0, 3);
-        String monthInLowerCase = month.substring(0, 1) + month.substring(1, 3).toLowerCase();
-        String[] parsedDate = date.toString().split("-");
-        String year = parsedDate[0];
-        String day = parsedDate[2];
-        return monthInLowerCase + " " + day + " " + year;
-    }
-
     /**
      * Getter method that returns true if the task has been completed, and false otherwise.
      *
-     * @return a boolean value that indicates if the task has been completed
+     * @return A boolean value that indicates if the task has been completed.
      */
     public boolean isComplete() {
         return this.isDone;
@@ -63,9 +46,33 @@ abstract class Task {
     /**
      * Getter method that returns the name of the task.
      *
-     * @return a string representation of the name of the task
+     * @return A string representation of the name of the task.
      */
     public String getTaskName() {
         return this.taskName;
+    }
+
+    /**
+     * Setter method to set a task as completed.
+     */
+    public void completeTask() {
+        this.isDone = true;
+    }
+
+    /**
+     * Takes in a LocalDate object and returns the date of the object in a
+     * specific format.
+     *
+     * @param date The LocalDate object to print the date of.
+     * @return A string representation of the date in the specified format.
+     */
+    public static String printDate(LocalDate date) {
+        String monthOfDate = date.getMonth().toString().substring(0, 3);
+        String monthInLowerCase = monthOfDate.substring(0, 1);
+        monthInLowerCase += monthOfDate.substring(1, 3).toLowerCase();
+        String[] parsedDate = date.toString().split("-");
+        String yearOfDate = parsedDate[0];
+        String dayOfDate = parsedDate[2];
+        return monthInLowerCase + " " + dayOfDate + " " + yearOfDate;
     }
 }

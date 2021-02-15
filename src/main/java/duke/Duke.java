@@ -23,53 +23,67 @@ public class Duke {
     }
 
     /**
-     * The main driver method to test our program. The method terminates with the "bye" command.
+     * The main driver method to test our program. The method terminates with
+     * the "bye" command.
      *
-     * @param args the user input
+     * @param args The system input.
      */
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Duke spongebob = new Duke();
         System.out.println(spongebob.greet());
         while (true) {
-            String nextCommand = scan.nextLine();
+            String nextCommand = scanner.nextLine();
             if (nextCommand.equals("bye")) {
                 System.out.println(spongebob.exit());
                 break;
             }
-            try {
-                System.out.println(spongebob.process(nextCommand));
-            } catch (DukeException exception) {
-                System.out.println(exception);
-            }
+            System.out.println(spongebob.process(nextCommand));
         }
     }
 
     /**
      * This method will return a message greeting the user.
      *
-     * @return a string representation of Duke's greeting
+     * @return A string representation of the message greeting the user.
      */
     public String greet() {
-        String greetingMessage = "Hello! I'm Spongebob!\nWhat can I do for you?";
+        String greetingMessage = "Hello! I'm Spongebob!\n";
+        greetingMessage += "What can I do for you?";
         return greetingMessage;
     }
-    private String exit() {
+
+    /**
+     * This method will return a message bidding farewell to the user.
+     *
+     * @return A string representation of the message bidding farewell to the
+     * user.
+     */
+    public String exit() {
         String farewellMessage = "Bye. Hope to see you again soon!";
         return farewellMessage;
     }
-    private String process(String input) throws DukeException {
-        String[] parsedCommand = this.parser.parseCommand(input);
-        return this.ui.processCommand(parsedCommand, this.taskList);
-    }
+
+    /**
+     * The main driver method to be used with our graphical interface.
+     *
+     * @param input The text input from the user.
+     * @return A string representation of the corresponding message
+     * representing Duke's response.
+     */
     public String getResponse(String input) {
         if (input.equals("bye")) {
             this.exit();
         }
+        return this.process(input);
+    }
+
+    private String process(String input) {
         try {
-            return this.process(input);
-        } catch (DukeException exception) {
-            return exception.toString();
+            String[] parsedCommand = this.parser.parseCommand(input);
+            return this.ui.processParsedCommand(parsedCommand, this.taskList);
+        } catch (DukeException dukeException) {
+            return dukeException.toString();
         }
     }
 }

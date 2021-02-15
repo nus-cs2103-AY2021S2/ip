@@ -21,10 +21,10 @@ Now you have 4 tasks in the list
 Description of deadline cannot be empty
 Name of deadline task cannot be empty
 Got it. I've added this task:
-  [E][ ] party (by: Mar 31 2019)
+  [E][ ] party (at: Mar 31 2019)
 Now you have 5 tasks in the list
 Got it. I've added this task:
-  [E][ ] freshman orientation camp (by: Jul 21 2022)
+  [E][ ] freshman orientation camp (at: Jul 21 2022)
 Now you have 6 tasks in the list
 Invalid description of event
 Name of event task cannot be empty
@@ -34,8 +34,8 @@ Here are the tasks in your list:
 2.[T][ ] go out and play
 3.[D][ ] homework (by: Feb 20 2021)
 4.[D][ ] finish personal project (by: Dec 12 2021)
-5.[E][ ] party (by: Mar 31 2019)
-6.[E][ ] freshman orientation camp (by: Jul 21 2022)
+5.[E][ ] party (at: Mar 31 2019)
+6.[E][ ] freshman orientation camp (at: Jul 21 2022)
 Nice! I've marked this task as done:
  [T][X] go out and play
 Nice! I've marked this task as done:
@@ -45,11 +45,11 @@ Here are the tasks in your list:
 2.[T][X] go out and play
 3.[D][ ] homework (by: Feb 20 2021)
 4.[D][X] finish personal project (by: Dec 12 2021)
-5.[E][ ] party (by: Mar 31 2019)
-6.[E][ ] freshman orientation camp (by: Jul 21 2022)
+5.[E][ ] party (at: Mar 31 2019)
+6.[E][ ] freshman orientation camp (at: Jul 21 2022)
 Invalid index
 Invalid index
-Task not found
+Invalid index
 Invalid input, index must be an integer
 Invalid input
 [D][ ] homework (by: Feb 20 2021)
@@ -65,29 +65,29 @@ The list is now sorted by name
 Here are the tasks in your list:
 1.[T][ ] dinner
 2.[D][X] finish personal project (by: Dec 12 2021)
-3.[E][ ] freshman orientation camp (by: Jul 21 2022)
+3.[E][ ] freshman orientation camp (at: Jul 21 2022)
 4.[T][X] go out and play
 5.[D][ ] homework (by: Feb 20 2021)
-6.[E][ ] party (by: Mar 31 2019)
+6.[E][ ] party (at: Mar 31 2019)
 The list is now sorted with the completed tasks being listed first
 Here are the tasks in your list:
 1.[D][X] finish personal project (by: Dec 12 2021)
 2.[T][X] go out and play
 3.[T][ ] dinner
-4.[E][ ] freshman orientation camp (by: Jul 21 2022)
+4.[E][ ] freshman orientation camp (at: Jul 21 2022)
 5.[D][ ] homework (by: Feb 20 2021)
-6.[E][ ] party (by: Mar 31 2019)
+6.[E][ ] party (at: Mar 31 2019)
 The list is now sorted with the incomplete tasks being listed first
 Here are the tasks in your list:
 1.[T][ ] dinner
-2.[E][ ] freshman orientation camp (by: Jul 21 2022)
+2.[E][ ] freshman orientation camp (at: Jul 21 2022)
 3.[D][ ] homework (by: Feb 20 2021)
-4.[E][ ] party (by: Mar 31 2019)
+4.[E][ ] party (at: Mar 31 2019)
 5.[D][X] finish personal project (by: Dec 12 2021)
 6.[T][X] go out and play
 Invalid index
 Invalid index
-Task not found
+Invalid index
 Noted. I've removed this task:
   [D][X] finish personal project (by: Dec 12 2021)
 Now you have 5 tasks in the list

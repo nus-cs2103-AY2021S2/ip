@@ -10,30 +10,29 @@ public class Parser {
     /**
      * The main method that reads the input from the user.
      *
-     * @param input the input from the user
-     * @return a String[] data type that the other methods can process
-     * @throws DukeException together with the error message
+     * @param userInput The input from the user.
+     * @return A String[] data type that the other methods can process.
+     * @throws DukeException If the format of the user input is incorrect.
      */
-    public String[] parseCommand (String input) throws DukeException {
-        String command = input.split(" ")[0];
-        if (command.equals("list")) {
-            return this.processList(input);
-        } else if (command.equals("done")) {
-            return this.processDone(input);
-        } else if (command.equals("delete")) {
-            return this.processDelete(input);
-        } else if (command.equals("todo")) {
-            return this.processToDo(input);
-        } else if (command.equals("deadline")) {
-            return this.processDeadLine(input);
-        } else if (command.equals("event")) {
-            return this.processEvent(input);
-        } else if (command.equals("find")) {
-            return this.processFind(input);
-        } else if (command.equals("sort")) {
-            return this.processSort(input);
-        }
-        else {
+    public String[] parseCommand (String userInput) throws DukeException {
+        String typeOfCommand = userInput.split(" ")[0];
+        if (typeOfCommand.equals("list")) {
+            return this.processList(userInput);
+        } else if (typeOfCommand.equals("done")) {
+            return this.processDone(userInput);
+        } else if (typeOfCommand.equals("delete")) {
+            return this.processDelete(userInput);
+        } else if (typeOfCommand.equals("todo")) {
+            return this.processToDo(userInput);
+        } else if (typeOfCommand.equals("deadline")) {
+            return this.processDeadLine(userInput);
+        } else if (typeOfCommand.equals("event")) {
+            return this.processEvent(userInput);
+        } else if (typeOfCommand.equals("find")) {
+            return this.processFind(userInput);
+        } else if (typeOfCommand.equals("sort")) {
+            return this.processSort(userInput);
+        } else {
             throw new DukeException("Invalid command");
         }
     }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 class TaskList {
     private ArrayList<Task> taskList;
-    private boolean canWriteToHardDisk;
+    private boolean canWriteToHardDisk = true;
 
     /**
      * If there is no existing data on the local hard disk, Dukebot will startup with an
@@ -19,80 +19,81 @@ class TaskList {
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
-        File file = new File("./data/duke.txt");
         try {
-            if (file.exists()) {
-                Storage.convert(file, this.taskList);
-                this.canWriteToHardDisk = true;
-            }
-        } catch (IOException exception) {
+            File storageTextFile = Storage.initialiseFile();
+            Storage.convert(storageTextFile, this.taskList);
+        } catch (IOException | ArrayIndexOutOfBoundsException exception) {
             this.canWriteToHardDisk = false;
-            System.out.println(exception);
         }
     }
 
     /**
      * Iterates over the task list and prints out all the tasks.
+     *
+     * @return A string representation of all the tasks in the list.
      */
     public String listTask() {
-        String dukeMessage = "";
-        dukeMessage += "Here are the tasks in your list:";
+        String stringRepresentation = "";
+        stringRepresentation += "Here are the tasks in your list:";
         for (int i = 0; i < taskList.size(); i++) {
-            dukeMessage += "\n";
-            Task currTask = taskList.get(i);
-            dukeMessage += (i + 1) + "." + currTask;
+            stringRepresentation += "\n";
+            Task currentTask = taskList.get(i);
+            stringRepresentation += (i + 1) + "." + currentTask;
         }
-        return dukeMessage;
+        return stringRepresentation;
     }
 
     /**
-     * Set the task at the particular index as done.
+     * Set the task at a particular index as done.
      *
-     * @param index the index of the task which is completed
-     * @throws DukeException is thrown when the index given is invalid
+     * @param index The index of the completed task.
+     * @return A string representation of the corresponding message when a task
+     * is completed.
      */
-    protected String doneTask(int index) throws DukeException {
+    protected String doneTask(int index) {
         String dukeMessage = "";
         if (this.taskList.size() < index) {
-            dukeMessage += "Task not found";
+            dukeMessage += "Invalid index";
             return dukeMessage;
         }
-        Task currTask = this.taskList.get(index - 1);
-        if (currTask.isComplete()) {
+        Task completedTask = this.taskList.get(index - 1);
+        if (completedTask.isComplete()) {
             dukeMessage += "This task is already completed.";
             return dukeMessage;
         }
-        currTask.completeTask();
-        dukeMessage += "Nice! I've marked this task as done:\n " + currTask;
-        if (canWriteToHardDisk) {
-            Storage.update(this.taskList);
-        }
+        completedTask.completeTask();
+        dukeMessage += "Nice! I've marked this task as done:\n " + completedTask;
+        writeToHardDisk();
         return dukeMessage;
     }
 
     /**
-     * Deletes the task at the particular index.
+     * Deletes the task at a particular index.
      *
-     * @param index the index of the task to be deleted
+     * @param index The index of the task to be deleted.
+     * @return A string representation of the corresponding message when a
+     * task is deleted.
      */
     public String delete(int index) {
         String dukeMessage = "";
-        int deleteIndex = index;
-        if (this.taskList.size() >= deleteIndex) {
-            dukeMessage += "Noted. I've removed this task:\n";
-            dukeMessage += "  " + this.taskList.remove(deleteIndex - 1) + "\n";
-            dukeMessage += this;
-        } else {
-            dukeMessage += "Task not found";
+        int indexToDelete = index;
+        if (this.taskList.size() < indexToDelete) {
+            dukeMessage += "Invalid index";
+            return dukeMessage;
         }
-        Storage.update(this.taskList);
+        dukeMessage += "Noted. I've removed this task:\n";
+        dukeMessage += "  " + this.taskList.remove(indexToDelete - 1) + "\n";
+        dukeMessage += this;
+        writeToHardDisk();
         return dukeMessage;
     }
 
     /**
-     * Adds a new todo task to the task list.
+     * Adds a new ToDo task to the task list.
      *
-     * @param taskName the name of the todo task
+     * @param taskName The name of the ToDo task.
+     * @return A string representation of the corresponding message when a
+     * Dodo task is created.
      */
     public String addToDo(String taskName) {
         String dukeMessage = "";
@@ -101,15 +102,16 @@ class TaskList {
         dukeMessage += "Got it. I've added this task:\n";
         dukeMessage += "  " + newTask + "\n";
         dukeMessage += this;
-        Storage.update(this.taskList);
+        writeToHardDisk();
         return dukeMessage;
     }
-
     /**
      * Adds a new event task to the task list.
      *
-     * @param taskName the name of the event task
-     * @param date the date on which the event takes place
+     * @param taskName The name of the event task.
+     * @param date The date on which the event takes place.
+     * @return A string representation of the corresponding message when an
+     * event task is created.
      */
     public String addEvent(String taskName, LocalDate date) {
         String dukeMessage = "";
@@ -118,15 +120,16 @@ class TaskList {
         dukeMessage += "Got it. I've added this task:\n";
         dukeMessage += "  " + newTask + "\n";
         dukeMessage += this;
-        Storage.update(this.taskList);
+        writeToHardDisk();
         return dukeMessage;
     }
-
     /**
      * Adds a new deadline task to the task list.
      *
-     * @param taskName the name of the deadline task
-     * @param date the date on which the deadline is due
+     * @param taskName The name of the deadline task.
+     * @param date The date on which the deadline is due.
+     * @return A string representation of the corresponding message when a
+     * deadline task is created.
      */
     public String addDeadline(String taskName, LocalDate date) {
         String dukeMessage = "";
@@ -135,21 +138,29 @@ class TaskList {
         dukeMessage += "Got it. I've added this task:\n";
         dukeMessage += "  " + newTask + "\n";
         dukeMessage += this;
-        Storage.update(this.taskList);
+        writeToHardDisk();
         return dukeMessage;
     }
 
-    public String find(String keyWord) {
+    /**
+     * Returns a string representing a list of tasks that contains the
+     * specified input keyword.
+     *
+     * @param keyword The keyword to filter the tasks.
+     * @return A string representation of the corresponding list of tasks that
+     * contain the specified keyword.
+     */
+    public String find(String keyword) {
         String dukeMessage = "";
         boolean isFirst = true;
-        for (Task currTask : taskList) {
-            if (currTask.getTaskName().contains(keyWord)) {
+        for (Task currentTask : taskList) {
+            if (currentTask.getTaskName().contains(keyword)) {
                 if (isFirst) {
                     isFirst = false;
                 } else {
                     dukeMessage += "\n";
                 }
-                dukeMessage += currTask;
+                dukeMessage += currentTask;
             }
         }
         if (dukeMessage.length() == 0) {
@@ -157,46 +168,29 @@ class TaskList {
         }
         return dukeMessage;
     }
-    public String sort(String sortType) {
-        if (sortType.equals("name")) {
+
+    /**
+     * Sorts the list of tasks according to the criteria specified by the input
+     * @param sortCriteria The criteria to sort the tasks by.
+     * @return A string representation of the list of tasks after being sorted.
+     */
+    public String sort(String sortCriteria) {
+        if (sortCriteria.equals("name")) {
             return sortByName();
-        } else if (sortType.equals("done")) {
+        } else if (sortCriteria.equals("done")) {
             return sortByDone();
-        } else if (sortType.equals("notdone")) {
+        } else if (sortCriteria.equals("notdone")) {
             return sortByNotDone();
         } else {
-            return null;
+            return "Invalid sorting criteria.";
         }
-    }
-
-    public String sortByName() {
-        String message = "The list is now sorted by name\n";
-        taskList.sort(new NameComparator());
-        Storage.update(this.taskList);
-        message += this.listTask();
-        return message;
-    }
-
-    public String sortByDone() {
-        String message = "The list is now sorted with the completed tasks being listed first\n";
-        taskList.sort(new DoneComparator());
-        Storage.update(this.taskList);
-        message += this.listTask();
-        return message;
-    }
-
-    public String sortByNotDone() {
-        String message = "The list is now sorted with the incomplete tasks being listed first\n";
-        taskList.sort(new NotDoneComparator());
-        Storage.update(this.taskList);
-        message += this.listTask();
-        return message;
     }
 
     /**
      * Displays the number of tasks in the list in a special format.
      *
-     * @return a string that shows the number of tasks in the list
+     * @return A string representation that shows the number of tasks in the
+     * list.
      */
     @Override
     public String toString() {
@@ -208,5 +202,40 @@ class TaskList {
         }
         return "Now you have " + this.taskList.size() + " "
                 + taskSingularOrPlural + " in the list";
+    }
+
+    private String sortByName() {
+        String dukeMessage = "The list is now sorted by name\n";
+        taskList.sort(new NameComparator());
+        writeToHardDisk();
+        dukeMessage += this.listTask();
+        return dukeMessage;
+    }
+
+    private String sortByDone() {
+        String dukeMessage = "The list is now sorted with the completed tasks "
+                + "being listed first\n";
+        taskList.sort(new DoneComparator());
+        writeToHardDisk();
+        dukeMessage += this.listTask();
+        return dukeMessage;
+    }
+
+    private String sortByNotDone() {
+        String dukeMessage = "The list is now sorted with the incomplete tasks"
+                + " being listed first\n";
+        taskList.sort(new NotDoneComparator());
+        writeToHardDisk();
+        dukeMessage += this.listTask();
+        return dukeMessage;
+    }
+    private void writeToHardDisk () {
+        if (canWriteToHardDisk) {
+            try {
+                Storage.update(this.taskList);
+            } catch (IOException exception) {
+                canWriteToHardDisk = false;
+            }
+        }
     }
 }

@@ -1,22 +1,22 @@
 package duke;
 
 /**
- * This class represents a todo task.
+ * This class represents a Todo task.
  */
 class ToDo extends Task {
 
     /**
-     * Creates a new todo task object.
+     * Creates a new Todo task object.
      *
-     * @param taskName The name of the todo task
+     * @param taskName The name of the Todo task.
      */
     public ToDo(String taskName) {
         super(taskName);
     }
 
     /**
-     * Overloaded constructor to create a todo task object. It accepts one extra argument
-     * to determine if the task is already done.
+     * Overloaded constructor to create a Todo task object. It accepts one extra
+     * argument to determine if the task is already done.
      *
      * @param taskName The name of the task.
      * @param isDone Whether the task is already done.
@@ -26,20 +26,21 @@ class ToDo extends Task {
     }
 
     /**
-     * Prints the details of the task in a special format.
+     * Prints the details of the task in a specific format.
      *
-     * @return the details of the task, such as the type, whether it is done and its date.
+     * @return A string representation of the details of the Todo task.
      */
     @Override
     public String toString() {
-        String type = "[T]";
+        assert (this.taskName.equals("")) : "Name of todo cannot be empty";
+        String typeOfTask = "[T]";
         String isCompleted;
         if (this.isDone) {
-            isCompleted = "[X]";
+            isCompleted = "[X] ";
         } else {
-            isCompleted = "[ ]";
+            isCompleted = "[ ] ";
         }
-        assert (this.taskName.equals("")) : "Name of todo cannot be empty";
-        return type + isCompleted + " " + this.taskName;
+        String message = typeOfTask + isCompleted + this.taskName;
+        return message;
     }
 }

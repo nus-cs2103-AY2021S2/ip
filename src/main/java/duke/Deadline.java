@@ -19,8 +19,8 @@ class Deadline extends Task {
     }
 
     /**
-     * Overloaded constructor to create a deadline task object. It accepts one extra argument
-     * to determine if the task is already completed.
+     * Overloaded constructor to create a deadline task object. It accepts one extra
+     * argument to determine if the task is already completed.
      *
      * @param taskName The name of the deadline task.
      * @param isDone Whether the deadline task is already completed.
@@ -34,7 +34,7 @@ class Deadline extends Task {
     /**
      * Getter method to get the date on which the deadline is due.
      *
-     * @return the date in which the deadline is due.
+     * @return The date in which the deadline is due.
      */
     public String getDate() {
         return Task.printDate(this.dateOfDeadline);
@@ -43,10 +43,11 @@ class Deadline extends Task {
     /**
      * Prints the details of the deadline task in a special format.
      *
-     * @return the details of the deadline task as a String.
+     * @return A string representation of the details of the deadline task.
      */
     @Override
     public String toString() {
+        assert (this.taskName.equals("")) : "Name of deadline cannot be empty";
         String typeOfTask = "[D]";
         String isCompleted;
         if (this.isDone) {
@@ -54,7 +55,6 @@ class Deadline extends Task {
         } else {
             isCompleted = "[ ]";
         }
-        assert (this.taskName.equals("")) : "Name of deadline cannot be empty";
         String message = typeOfTask + isCompleted + " " + this.taskName;
         message += " (by: " + Task.printDate(dateOfDeadline) + ")";
         return message;
