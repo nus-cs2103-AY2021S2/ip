@@ -6,11 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import bob.BobException;
-import bob.gui.MainWindow;
 import bob.task.Task;
 import bob.task.TaskList;
 

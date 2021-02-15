@@ -96,6 +96,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse a line and returns the LocalDateTime of the reminder.
+     *
+     * @param fileLine a String from the hard disk.
+     * @return a LocalDateTime object representing the time of reminder.
+     */
     public LocalDateTime parseReminderDateTime(String fileLine) {
         String[] reminderDetails = fileLine.split("R: ", 0);
         if (reminderDetails.length > 1) {

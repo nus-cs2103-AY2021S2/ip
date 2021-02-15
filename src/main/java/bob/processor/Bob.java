@@ -14,14 +14,6 @@ public class Bob {
     private TaskList tasks;
     private Ui ui;
 
-    public TaskList getTasks() {
-        return this.tasks;
-    }
-
-    public Storage getStorage() {
-        return this.storage;
-    }
-
     /**
      * Constructor for Bob
      *
@@ -37,6 +29,15 @@ public class Bob {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+
+    public TaskList getTasks() {
+        return this.tasks;
+    }
+
+    public Storage getStorage() {
+        return this.storage;
     }
 
     public String getResponse(String input) {

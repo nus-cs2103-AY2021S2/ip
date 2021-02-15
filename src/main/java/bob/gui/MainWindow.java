@@ -1,10 +1,14 @@
 package bob.gui;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import bob.BobException;
 import bob.processor.Bob;
-import bob.processor.Storage;
 import bob.task.Task;
-import bob.task.TaskList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,13 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.lang.reflect.Array;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.*;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
