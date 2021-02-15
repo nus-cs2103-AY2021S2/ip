@@ -30,6 +30,7 @@ Hello Human! Welcome to Chandler's User Guide. Chandler is a friendly chatbot, h
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g. in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used as `todo Laundry`.
 
+<br/>
 
 ### Adding a Todo task: `todo`
 Adds a todo task to the task list.
@@ -65,6 +66,8 @@ Lists all tasks in the task list.
 
 Format: `list`
 
+<br/>
+
 ### Marking a task as done: `done`
 Marks the specified task in the task list as done.
 
@@ -78,6 +81,8 @@ Example of usage:
 Deletes the specified task in the task list.
 
 Format: `delete TASK_NUMBER`
+
+<br/>
 
 ### Finding a task: `find`
 Finds and lists all tasks containing a given keyword.
@@ -101,6 +106,8 @@ Example of usage:
 Exits the program after a short delay.
 
 Format: `bye`
+
+<br/>
 
 ## Command Summary
 
