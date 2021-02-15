@@ -43,7 +43,7 @@ public class Storage {
             }
 
         } catch (IOException e) {
-            //do nothing
+            System.out.println("IOException: " + e);
         } finally {
             this.tasks = tasks;
         }
@@ -53,16 +53,22 @@ public class Storage {
      * To save the TaskList into the text file
      */
     //UPDATE THE KOBE.TXT FILE
-    public void saveFile() {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(this.pathName,
+    public static void saveFile(Storage storage) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(storage.pathName,
                 StandardCharsets.US_ASCII))) {
 
-            for (int i = 0; i < this.tasks.size(); i++) {
-                bw.write(ind + (i + 1) + ". " + this.tasks.get(i) + "\n");
+            if (storage.tasks.size() == 0) {
+                //Nothing happens
+            } else {
+                for (int i = 0; i < storage.tasks.size(); i++) {
+                    bw.write(ind + (i + 1) + ". " + storage.tasks.get(i) + "\n");
+                }
             }
 
         } catch (IOException e) {
             System.out.println("IOException: " + e);
+        } catch (NullPointerException e) {
+            System.out.println("NullPointerException: " + e);
         }
     }
 
