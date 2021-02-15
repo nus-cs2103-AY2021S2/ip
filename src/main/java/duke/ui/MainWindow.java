@@ -25,6 +25,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final String greetingMessage = "Hi, I am Duke\nHow can I help you?\n";
 
     public MainWindow() {}
 
@@ -35,6 +36,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingMessage, dukeImage));
     }
 
     /**
