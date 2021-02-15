@@ -49,7 +49,6 @@ public class NewParser {
         switch (firstWord) {
         case "list":
         case "ls":
-            System.out.println("helloo");
             System.out.println(commandBody);
             return new ListCommand(commandBody);
         case "bye":

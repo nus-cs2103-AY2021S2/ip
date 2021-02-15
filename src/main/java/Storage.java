@@ -28,10 +28,10 @@ import java.util.Scanner;
  */
 public class Storage {
     // fixme this is wrong when run by bat file or jar file
-    public static final String PROJECT_DIR = System.getProperty("user.dir");
-
-    public static final java.nio.file.Path TASK_LIST_FILE_PATH = java.nio.file.Paths.get(
-            PROJECT_DIR, "src", "data", "tasks.txt");
+    private static final String PROJECT_DIR = System.getProperty("user.dir");
+    private static final Path TASK_LIST_FILE_DIR =  Paths.get(PROJECT_DIR,  "data");
+    private static final Path TASK_LIST_FILE_PATH = Paths.get(
+            TASK_LIST_FILE_DIR.toString(), "tasks.txt");
 
 
     /**
@@ -39,7 +39,7 @@ public class Storage {
      * @param path Path to check for file or directory
      * @return True if it exists, false if it doesn't or any other error occured
      */
-    public static boolean doesFileOrDirectoryExist(Path path) {
+    private static boolean doesFileOrDirectoryExist(Path path) {
         if (java.nio.file.Files.exists(path)) {
             return true;
         } else if (java.nio.file.Files.notExists(path)) {
@@ -54,7 +54,7 @@ public class Storage {
      * Checks if task file exists at hardcoded path
      * @return if task file exists
      */
-    public static boolean doesTaskFileExist() {
+    private static boolean doesTaskFileExist() {
         return doesFileOrDirectoryExist(TASK_LIST_FILE_PATH);
     }
 
@@ -67,19 +67,18 @@ public class Storage {
             // probably not gonna be used due to tasklist.TaskList.java impl
             return;
         } else {
-            java.nio.file.Path dataDirPath = java.nio.file.Paths.get(PROJECT_DIR, "src", "data");
-            boolean doesDataDirExist = doesFileOrDirectoryExist(dataDirPath);
+            boolean doesDataDirExist = doesFileOrDirectoryExist(TASK_LIST_FILE_DIR);
 
             // create directory if it doesn't exist
             if (!doesDataDirExist) {
-                Path p = Paths.get(PROJECT_DIR, "src", "data");
-                boolean hasCreated = new File(p.toString()).mkdir();
+                boolean hasCreated = new File(TASK_LIST_FILE_DIR.toString()).mkdir();
                 System.out.println("done 2 " + hasCreated);
             }
 
             // create file
-            Path p = Paths.get(PROJECT_DIR, "src", "data", "tasks.txt");
-            boolean isCreated = new File(p.toString()).createNewFile();
+            // Path p = Paths.get(PROJECT_DIR, "src", "data", "tasks.txt");
+
+            boolean isCreated = new File(TASK_LIST_FILE_PATH.toString()).createNewFile();
 
             assert isCreated : "task file still hasn't been created";
         }
@@ -92,7 +91,7 @@ public class Storage {
      * @return if any tasks have been found and loaded from hard disk
      * @throws IOException
      */
-    public static boolean loadFromHardDisk(TaskList taskList) throws IOException {
+    private static boolean loadFromHardDisk(TaskList taskList) throws IOException {
         boolean isAnyTaskFound = false;
 
         if (doesTaskFileExist()) {
@@ -139,6 +138,7 @@ public class Storage {
             Storage.loadFromHardDisk(t);
             return t;
         } else {
+            createTasksFile();
             return new TaskList();
         }
     }
