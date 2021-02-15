@@ -168,14 +168,14 @@ Advanced users are welcome to update data directly by editing that data file.
 it creates with the file that contains the data of your previous Lihua *home folder*.
 
 ## Command Summary
-Command | Format | Example / Explanation
-------- | ------ | ---------------------
-**bye** | `bye` | application exits
-**deadline** | `deadline TASKNAME /by YYYY-MM-DD` | `deadline homework /by 2021-01-01` 
-**delete** | `delete TASKINDEX` | `delete 1`
-**done** | `done TASKINDEX` | `done 1`
-**event** | `event TASKNAME /at YYYY-MM-DD` | `event party /at 2020-01-01`
-**find** | `find abc` | tasks containing `abc` will be listed 
-**help** | `help` | help message for commands will be printed
-**list** | `list [-time]` | tasks \[with date\] will be listed
-**todo** | `todo TASKNAME` | `todo Eat`
+| Command | Format | Example / Explanation |
+| ------- | ------ | --------------------- |
+| **bye** | `bye` | application exits |
+| **deadline** | `deadline TASKNAME /by YYYY-MM-DD` | `deadline homework /by 2021-01-01` | 
+| **delete** | `delete TASKINDEX` | `delete 1` |
+| **done** | `done TASKINDEX` | `done 1` |
+| **event** | `event TASKNAME /at YYYY-MM-DD` | `event party /at 2020-01-01` |
+| **find** | `find abc` | tasks containing `abc` will be listed |
+| **help** | `help` | help message for commands will be printed |
+| **list** | `list [-time]` | tasks \[with date\] will be listed |
+| **todo** | `todo TASKNAME` | `todo Eat` |
