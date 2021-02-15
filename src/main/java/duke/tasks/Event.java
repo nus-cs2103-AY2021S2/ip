@@ -23,7 +23,7 @@ public class Event extends Task {
         try {
             this.period = LocalDate.parse(period);
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! Please specify the date in this format:\n"
+            throw new DukeException("OOPS!!! Please specify the date in this format:\n"
                                         + "  event [task description] /at [yyyy-mm-dd]");
         }
     }

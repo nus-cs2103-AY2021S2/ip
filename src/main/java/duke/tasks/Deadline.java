@@ -23,7 +23,7 @@ public class Deadline extends Task {
         try {
             this.period = LocalDate.parse(period);
         } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! Please specify the date in this format:\n"
+            throw new DukeException("OOPS!!! Please specify the date in this format:\n"
                                         + "  deadline [task description] /at [yyyy-mm-dd]");
         }
     }
