@@ -1,3 +1,1 @@
-[T] [ ] eat poop
-[D] [ ] eat poop (by: Nov 30 2020)
-[E] [ ] Bruh (at: Nov 29 2020)
+[T] [ ] buy food
