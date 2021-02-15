@@ -53,7 +53,7 @@ $ git clone https://github.com/tjtanjin/ip.git
 * Next, open Intellij and select the project directory. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 * Finally, locate the `src/main/java/com/tjtanjin/steve/Launcher.java` file, right-click it, and choose `Run Launcher.main()`. If the setup is correct, you should see something like the below:
 <p align="center">
-  <img height="740" width="512" src="https://i.imgur.com/bQJ2SqO.png"/>
+  <img height="740" width="512" src="https://raw.githubusercontent.com/tjtanjin/ip/master/docs/images/welcome_screen.png">
 </p>
 
 ### Team
