@@ -165,6 +165,11 @@ public class TaskList {
      */
     @Override
     public String toString() {
+        //Empty list
+        if (this.list.size() == 0) {
+            return "Your list is empty!";
+        }
+
         String[] printedArray = new String[this.list.size() + 1];
         printedArray[0] = "Here are the tasks in your list:" + System.lineSeparator();
         for (int i = 0; i < this.list.size(); i++) {
