@@ -15,29 +15,37 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * Represents a single entry of past user inputs, displayed in associated container.
  */
 public class InputHistoryBox extends HBox {
 
-    private static final Background BG_LIGHT = new Background(new BackgroundFill(
-            Color.valueOf("#e0e0e0"), new CornerRadii(20), Insets.EMPTY));
-    private static final Background BG_DARK = new Background(new BackgroundFill(
-            Color.valueOf("#d9d9d9"), new CornerRadii(20), Insets.EMPTY));
+    private static final CornerRadii CORNER_DEFAULT = new CornerRadii(20);
+    private static final Background BG_FADED = new Background(new BackgroundFill(
+            Color.valueOf("#e9e9e9"), CORNER_DEFAULT, Insets.EMPTY));
+    private static final Background BG_OK = new Background(new BackgroundFill(
+            Color.valueOf("#e1f1e1"), CORNER_DEFAULT, Insets.EMPTY));
+    private static final Background BG_BAD = new Background(new BackgroundFill(
+            Color.valueOf("#f1e1e1"), CORNER_DEFAULT, Insets.EMPTY));
     private static final Border BORDER_TRANSPARENT = new Border(new BorderStroke(
             Color.valueOf("#f4f4f4"),
             BorderStrokeStyle.SOLID,
             CornerRadii.EMPTY,
             new BorderWidths(2, 4, 2, 4)
     ));
-
-    private static int numBoxes = 0;
+    private static final Color TEXT_BAD = Color.valueOf("#bbbbbb");
 
     @FXML
     private Label dialog;
 
-    private InputHistoryBox(String text) {
+    private final boolean isBadInput;
+
+    /**
+     * Default constructor for inputHistoryBox.
+     *
+     * @param text Text to be displayed
+     * @param isBadInput Tweaks final formatting of text box
+     */
+    public InputHistoryBox(String text, boolean isBadInput) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/InputHistoryBox.fxml"));
             fxmlLoader.setController(this);
@@ -46,25 +54,18 @@ public class InputHistoryBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.isBadInput = isBadInput;
+
+        /* Update text and set display formatting */
         dialog.setText(text);
-        setTransparentBorder();
-        setAlternatingBgColor();
-        numBoxes++;
+        setBorder(BORDER_TRANSPARENT);
+        setBackground((isBadInput) ? BG_BAD : BG_OK);
     }
 
-    public static InputHistoryBox getBox(String text) {
-        return new InputHistoryBox(text);
-    }
-
-    private void setAlternatingBgColor() {
-        if (numBoxes % 2 == 0) {
-            this.setBackground(BG_DARK);
-        } else {
-            this.setBackground(BG_LIGHT);
+    public void setInputFaded() {
+        setBackground(BG_FADED);
+        if (isBadInput) {
+            dialog.setTextFill(TEXT_BAD);
         }
-    }
-
-    private void setTransparentBorder() {
-        this.setBorder(BORDER_TRANSPARENT);
     }
 }

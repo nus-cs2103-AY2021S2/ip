@@ -1,6 +1,7 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -65,16 +66,16 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Response response = duke.getResponse(input);
-        boolean isGoodInput = true;
+        boolean isBadInput = false;
         switch (response.getStatus()) {
         case EXIT:
             Platform.exit();
             break; // program termination, no fall-through
         case BAD:
-            isGoodInput = false; // fallthrough
+            isBadInput = true; // fallthrough
         case OK:
             String responseText = response.getMessage();
-            inputHistoryContainer.getChildren().add(getInputBox(input));
+            updateInputHistoryContainer(input, isBadInput);
             responseContainer.setText(responseText);
             tasklistContainer.setText(duke.getTasklist());
             userInput.clear();
@@ -85,8 +86,29 @@ public class MainWindow extends AnchorPane {
         }
     }
 
-    private InputHistoryBox getInputBox(String text) {
-        InputHistoryBox textBox = InputHistoryBox.getBox(text);
+    private void updateInputHistoryContainer(String inputText, boolean isBadInput) {
+
+        /* Update last text box to neutral color */
+        int containerSize = inputHistoryContainer.getChildrenUnmodifiable().size();
+        if (containerSize > 0) {
+            InputHistoryBox lastChild = (InputHistoryBox) inputHistoryContainer.getChildren().get(containerSize - 1);
+            lastChild.setInputFaded();
+        }
+
+        /* Create individual input text box */
+        InputHistoryBox textBox = new InputHistoryBox(inputText, isBadInput);
+        textBox.setOnMouseClicked(event -> {
+            focusOnTextField();
+            userInput.setText(inputText);
+            userInput.positionCaret(inputText.length());
+        });
+
+        /* Add text box to container */
+        inputHistoryContainer.getChildren().add(textBox);
+    }
+
+    private InputHistoryBox getInputBox(String text, boolean isBadInput) {
+        InputHistoryBox textBox = new InputHistoryBox(text, isBadInput);
         textBox.setOnMouseClicked(event -> {
             focusOnTextField();
             userInput.setText(text);
