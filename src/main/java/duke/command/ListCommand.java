@@ -47,13 +47,17 @@ public class ListCommand extends Command {
         if (hasDate) {
             String enteredDate = Helper.join(this.commandSplit, 1, this.commandSplit.length - 1);
             LocalDate queryDate = parseDate(enteredDate);
+
             //Filter Tasks from TaskList against the date provided
             ArrayList<Task> matchedTasks = list.filter(x -> !x.getDate().equals(LocalDate.MIN)
                     && x.getDate().equals(queryDate));
+
             //Map each filtered Task with Task.toString()
             List<String> taskStrings = matchedTasks.stream().map(Task::toString).collect(Collectors.toList());
+
             String response = "Found the following tasks on " + queryDate.toString() + ":"
                     + System.lineSeparator() + System.lineSeparator() + Helper.formatStrings(taskStrings);
+
             return new Pair<>(response, CallbackFunction.empty());
 
         } else {
