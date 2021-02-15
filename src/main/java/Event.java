@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Event extends Task {
     private LocalDate at;
@@ -49,6 +51,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + getStatusIcon() + " " + desc + " (at: " + at + ")";
+        String formattedDate = at.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return "[E]" + getStatusIcon() + " " + desc + " (at: " + formattedDate + ")";
     }
 }

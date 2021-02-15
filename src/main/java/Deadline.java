@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
     private LocalDate by;
@@ -49,6 +51,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + getStatusIcon() + " " + desc + " (by: " + by + ")";
+        String formattedDate = by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        return "[D]" + getStatusIcon() + " " + desc + " (by: " + formattedDate + ")";
     }
 }
