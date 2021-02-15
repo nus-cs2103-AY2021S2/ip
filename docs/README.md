@@ -1,6 +1,6 @@
 # User Guide
 
-##Introduction
+## Introduction
 
 Irene is an application to help users keep track of 
 all their tasks. Using Command Line Interface (CLI), Irene is able to help users see, add 
