@@ -1,4 +1,6 @@
 # ToDoBeast
+
+---
 ```
 Welcome to the ToDo
  _                    _   
@@ -11,7 +13,10 @@ Welcome to the ToDo
 your greatest productivity tool!
 ```
 ToDoBeast is a task-tracking chatbot that allows you to keep track of upcoming to-dos, deadlines and events. 📚
-## Features 
+
+## Features
+
+---
 
 ### Tracking tasks 📑
 Three types of tasks can be added: To-Dos, Deadlines, and Events. Once a task is added, ToDoBeast will keep track of the task and its completion progress.
@@ -29,6 +34,8 @@ You can search for a task by specific keywords, and ToDoBeast will return the ta
 <br/>
 
 ## Usage
+
+---
 _** All command parameters are delimited by `, ` **_
 
 ### 1. `instructions` - Lists instructions
