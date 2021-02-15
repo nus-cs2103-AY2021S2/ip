@@ -14,6 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**This control represents a dialog box consisting of an ImageView to represent the speaker's face, a label
  * containing the speaker's name and a label containing text from the speaker.
@@ -23,6 +25,8 @@ public class DialogBox extends HBox {
     private VBox vbox;
     @FXML
     private Label messageContent;
+    @FXML
+    private Text messageContent2;
     @FXML
     private Label senderName;
     @FXML
@@ -39,7 +43,7 @@ public class DialogBox extends HBox {
         }
 
         senderName.setText(name);
-        messageContent.setText(text);
+        messageContent2.setText(text);
         displayPicture.setImage(img);
     }
 
@@ -78,6 +82,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox("tabby", text, img);
         db.senderName.setId("tabbyName");
+        db.messageContent2.setTextAlignment(TextAlignment.RIGHT);
         return db;
     }
 }

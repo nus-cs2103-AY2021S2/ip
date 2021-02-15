@@ -2,6 +2,7 @@
     -fx-background-color: #ffffff;
     -fx-border-color: derive(gray,80%);
     -fx-border-width: 0px 0px 0px 1px;
+    -fx-font-size: 5px;
 }
 
 .scrollPane .scroll-bar:vertical .thumb {

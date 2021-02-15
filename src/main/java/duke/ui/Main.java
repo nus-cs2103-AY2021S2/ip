@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -29,6 +30,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setUI(ui);
             stage.setTitle("Tabby the Task Bot");
+            stage.getIcons().add(new Image("/images/tabby icon.png"));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
