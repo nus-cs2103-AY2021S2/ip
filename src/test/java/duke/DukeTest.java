@@ -30,22 +30,30 @@ public class DukeTest {
 
     @Test
     public void eventTest() {
-        Event event = new Event("Eat a book", "2019-09-16", "by");
-        LocalDate date = LocalDate.parse("2019-09-16");
-        assertEquals("Eat a book", event.getName());
-        assertEquals(date.toString(), event.getDate().toString());
-        assertEquals("[E][ ] Eat a book (by: Sep 16 2019)", event.toString());
-        assertEquals("E | 0 | Eat a book | 2019-09-16 | by", event.toSaveFormat());
+        try {
+            Event event = new Event("Eat a book", "2019-09-16", "by");
+            LocalDate date = LocalDate.parse("2019-09-16");
+            assertEquals("Eat a book", event.getName());
+            assertEquals(date.toString(), event.getDate().toString());
+            assertEquals("[E][ ] Eat a book (by: Sep 16 2019)", event.toString());
+            assertEquals("E | 0 | Eat a book | 2019-09-16 | by", event.toSaveFormat());
+        } catch (DukeException ex) {
+            assertEquals(1, 0);
+        }
     }
 
     @Test
     public void deadlineTest() {
-        Deadline deadline = new Deadline("Cook a book", "2010-05-12", "in");
-        LocalDate date = LocalDate.parse("2010-05-12");
-        assertEquals("Cook a book", deadline.getName());
-        assertEquals(date.toString(), deadline.getDate().toString());
-        assertEquals("[D][ ] Cook a book (in: May 12 2010)", deadline.toString());
-        assertEquals("D | 0 | Cook a book | 2010-05-12 | in", deadline.toSaveFormat());
+        try {
+            Deadline deadline = new Deadline("Cook a book", "2010-05-12", "in");
+            LocalDate date = LocalDate.parse("2010-05-12");
+            assertEquals("Cook a book", deadline.getName());
+            assertEquals(date.toString(), deadline.getDate().toString());
+            assertEquals("[D][ ] Cook a book (in: May 12 2010)", deadline.toString());
+            assertEquals("D | 0 | Cook a book | 2010-05-12 | in", deadline.toSaveFormat());
+        } catch (DukeException ex) {
+            assertEquals(1, 0);
+        }
     }
 
     @Test
