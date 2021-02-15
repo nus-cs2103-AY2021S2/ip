@@ -9,9 +9,11 @@ import static java.lang.System.exit;
 public class Parser {
 
     Scanner sc;
+    static boolean warning;
 
     public Parser() {
         this.sc = new Scanner(System.in);
+        this.warning = false;
     }
 
     /**
@@ -76,7 +78,7 @@ public class Parser {
                     break;
                 default:
                     result = new Result("Invalid command!");
-                    assert false : new Result("invalid command!");
+                    warning = true;
                     break;
                 }
             } catch (DukeException | InterruptedException E) {

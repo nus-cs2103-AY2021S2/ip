@@ -32,6 +32,10 @@ public class MainWindow extends AnchorPane {
         // welcome message
         DialogBox welcomeMessage = DialogBox.welcomeMessage("Welcome. How can I help you?", welcomeImage);
         dialogContainer.getChildren().addAll(welcomeMessage);
+
+        // set background image.
+        dialogContainer.setStyle("-fx-background-image: url('images/Diamonds.png');"
+                + "-fx-background-repeat: repeat-y");
     }
 
     public void setSkeleton(Skeleton s) {

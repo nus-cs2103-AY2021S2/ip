@@ -48,12 +48,22 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setDesign();
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+
+        // if invalid command, set background to pink.
+        if (Parser.warning) {
+            db.setWarning();
+        } else {
+            db.setReplyDesign();
+        }
+
         return db;
     }
 
@@ -62,13 +72,50 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        this.setStyle("-fx-background-color: #121212;");
-        dialog.setStyle("-fx-font-size: 16;" + "-fx-text-fill: white");
+        this.setStyle("-fx-background-color: #EEC5A9;"
+                + "-fx-background-radius: 10.0");
+        dialog.setStyle("-fx-font-size: 16;"
+                + "-fx-text-fill: white;"
+                + "-fx-alignment: baseline-right;");
     }
 
     public static DialogBox welcomeMessage(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setWelcomeSettings();
         return db;
+    }
+
+    private void setDesign() {
+        this.dialog.setStyle("-fx-background-color: #121212;"
+                + "-fx-text-fill: white;"
+                + "-fx-min-width: 150px;"
+                + "-fx-font-size: 14;"
+                + "-fx-alignment: baseline-center;"
+                + "-fx-border-width: 10;"
+                + "-fx-background-radius: 15.0;"
+                + "-fx-padding: 10.0");
+    }
+
+    private void setWarning() {
+        this.dialog.setStyle("-fx-background-color: hotpink;"
+                + "-fx-text-fill: white;"
+                + "-fx-min-width: 150px;"
+                + "-fx-font-size: 14;"
+                + "-fx-alignment: baseline-center;"
+                + "-fx-border-width: 10;"
+                + "-fx-background-radius: 15.0;"
+                + "-fx-padding: 10.0");
+        Parser.warning = false;
+    }
+
+    private void setReplyDesign() {
+        this.dialog.setStyle("-fx-background-color: #696969;"
+                + "-fx-text-fill: white;"
+                + "-fx-min-width: 150px;"
+                + "-fx-font-size: 14;"
+                + "-fx-alignment: baseline-center;"
+                + "-fx-border-width: 10;"
+                + "-fx-background-radius: 15.0;"
+                + "-fx-padding: 10.0");
     }
 }
