@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "com.tanboonji.duke.Launcher"
+    mainClassName = "com.tanboonji.jhin.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "jhin"
     archiveClassifier = null
 }
 

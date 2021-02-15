@@ -13,7 +13,10 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Test output files
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Data output files
 task.data
 alias.data
