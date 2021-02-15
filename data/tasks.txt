@@ -10,3 +10,4 @@ T | 0 | x
 E | 0 | lol | 2021-02-22
 D | 0 | deadline | 2020-09-24T12:00
 E | 0 | event with time | 2020-09-24 1200
+T | 0 | last todo
