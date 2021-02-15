@@ -26,6 +26,9 @@ public class Storage {
     public void saveToFile(TaskList taskList) throws ChecklstException {
         File history = new File("./data/checklst.txt");
         history.getParentFile().mkdirs();
+
+        assert history.canWrite() : "Can't Write to file!";
+
         try {
             history.createNewFile();
         } catch (IOException | SecurityException e) {
