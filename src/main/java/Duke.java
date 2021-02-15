@@ -141,6 +141,34 @@ public class Duke extends Application {
         }
     }
 
+    public String getResponse(String input) {
+        return "hello";
+//        try {
+//            UserInputTokenSet tokenSet = UserInputTokenizer.parse(input);
+//            ui.printCallback(input);
+//            DukeCommand cmd = DukeCommandFactory.getDukeCommand(tokenSet);
+//            cmd.execute(tasks, ui, loader);
+//            if (cmd.isExit()) {
+//                Platform.exit();
+//            }
+//        } catch (DukeExceptionFileNotWritable e) {
+//            if (!isLocalTaskList) {
+//                try {
+//                    ui.printError(e);
+//                } catch (DukeException ee) {
+//                    Platform.exit(); // unexpected error
+//                }
+//            }
+//        } catch (DukeException e) {
+//            try {
+//                ui.printError(e);
+//            } catch (DukeException ee) {
+//                Platform.exit(); // unexpected error
+//            }
+//        }
+//        return "";
+    }
+
     private void handleUserInput() {
         try {
             String input = ui.getUserInput(">>> ", "");
