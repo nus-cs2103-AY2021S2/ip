@@ -38,6 +38,7 @@ public class Duke {
      * @return a response from Duke
      */
     public String getResponse(String userInput) {
+        assert userInput != null : "user input should not be null";
         try {
             Command c = Parser.parse(userInput);
             return c.execute(tasks, dukeResponses, storage);
