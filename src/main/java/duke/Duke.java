@@ -74,8 +74,4 @@ public class Duke {
         }
     }
 
-    public String greet() {
-        return "Hello! I am Juke, your personal assistant, how can I help you today?";
-    }
-
 }
