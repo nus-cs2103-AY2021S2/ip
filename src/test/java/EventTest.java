@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,6 @@ public class EventTest {
         tokenSet.set("done", "");
         Event event = Event.parse(tokenSet);
         assertEquals("event name2", event.getDescription());
-        assertFalse(event.getDone());
+        assertTrue(event.getDone());
     }
 }
