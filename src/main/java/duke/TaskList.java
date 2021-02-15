@@ -90,17 +90,20 @@ public class TaskList {
     }
     private String addTask(String[] tokens) throws EmptyArgumentException, BadDateArgumentException {
         Task t;
-        switch (tokens[0]) {
+        String type = tokens[0];
+        String task = tokens[1];
+        String additional = tokens.length >= 3 ? tokens[2] : null;
+        switch (type) {
         case "D":
-            t = new Deadline(tokens[1], tokens[2]);
+            t = new Deadline(task, additional);
             break;
         case "E":
-            t = new Event(tokens[1], tokens[2]);
+            t = new Event(task, additional);
             break;
         case "T":
             //Fall through
         default: //More fault tolerant
-            t = new ToDos(tokens[1]);
+            t = new ToDos(task);
             break;
         }
         store.add(t);
