@@ -9,6 +9,7 @@ import duke.util.DukeException;
 import duke.util.DukeInputException;
 import duke.util.Event;
 import duke.util.Parser;
+import duke.util.SampleData;
 import duke.util.Storage;
 import duke.util.Task;
 import duke.util.TaskList;
@@ -36,6 +37,10 @@ import javafx.collections.ObservableList;
  * <br>  - List out all tasks
  * <br>load
  * <br>  - Load tasklist from saved file
+ * <br>new
+ * <br>  - Clear all current tasks and start a new tasklist
+ * <br>sample
+ * <br>  - Load some sample data
  * <br>save
  * <br>  - save tasklist to "data/dukeData.txt"
  * <br>search [keyword | date]
@@ -58,6 +63,7 @@ public class Duke {
 
     private boolean isWaitingSaveFileResponse = false;
     private boolean isWaitingDeleteTaskResponse = false;
+    private boolean isWaitingDeleteAllResponse = false;
     private int[] tasksToBeDeleted;
 
     /**
@@ -91,6 +97,10 @@ public class Duke {
 
         if (isWaitingDeleteTaskResponse) {
             return confirmDelete(input);
+        }
+
+        if (isWaitingDeleteAllResponse) {
+            return confirmClear(input);
         }
 
         try {
@@ -218,6 +228,38 @@ public class Duke {
         return ui.displaySetPriority(false, task);
     }
 
+    private String loadSampleData() {
+        try {
+            tasks.load(SampleData.loadSampleData());
+        } catch (DukeInputException e) {
+            // Should not reach here.
+            assert false : "Fix SampleData tasks creation";
+        }
+
+        return ui.displayLoadSampleMessage();
+    }
+
+    private String clearAllTasks() {
+        isWaitingDeleteAllResponse = true;
+        return ui.displayDeleteAllPrompt();
+    }
+
+    private String confirmClear(String s) {
+        try {
+            Parser.parseYesNo(s);
+        } catch (DukeInputException e) {
+            return ui.displayError(e);
+        }
+        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
+
+        isWaitingDeleteAllResponse = false;
+        if (s.equals("y")) {
+            tasks.clear();
+            return ui.displayTasksClearedMessage();
+        }
+        return ui.abortDelete();
+    }
+
     private String processCommand(Command command, String args) {
         if (args.equals("-h")) {
             return command.getHelp();
@@ -227,6 +269,8 @@ public class Duke {
             switch(command) {
             case BYE:
                 return exit();
+            case CLEAR:
+                return clearAllTasks();
             case DEADLINE:
                 return addTask(Deadline.createDeadline(args));
             case DELETE:
@@ -245,6 +289,8 @@ public class Duke {
                 return load();
             case LOWPRIORITY:
                 return setLowPriority(args);
+            case SAMPLE:
+                return loadSampleData();
             case SAVE:
                 return save();
             case SEARCH:

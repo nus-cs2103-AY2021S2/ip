@@ -37,6 +37,7 @@ public class Ui {
         return echo("Use \"command -h\" to find out more about the command!\n",
                 "List of commands:",
                 "bye",
+                "clear",
                 "deadline [description] /by [due date]",
                 "delete [int (int int...)]",
                 "done [int (int int...)]",
@@ -46,6 +47,7 @@ public class Ui {
                 "list",
                 "load",
                 "lowpriority [int]",
+                "sample",
                 "save",
                 "search [keyword | date]",
                 "sort",
@@ -188,5 +190,32 @@ public class Ui {
      */
     public String displaySetPriority(boolean isHigh, String task) {
         return echo(String.format("Got it! I've set this task as a %s PRIORITY", isHigh ? "HIGH" : "LOW"), task);
+    }
+
+    /**
+     * Displays sample data loaded message.
+     *
+     * @return Sample data loaded message.
+     */
+    public String displayLoadSampleMessage() {
+        return "Sample data have been loaded!";
+    }
+
+    /**
+     * Prompt for confirmation to delete all tasks.
+     *
+     * @return Delete all tasks prompt.
+     */
+    public String displayDeleteAllPrompt() {
+        return "This command will delete ALL tasks. Are you sure? y/n";
+    }
+
+    /**
+     * Display clear all message.
+     *
+     * @return Clear all message.
+     */
+    public String displayTasksClearedMessage() {
+        return "All tasks cleared";
     }
 }

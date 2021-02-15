@@ -169,7 +169,7 @@ public class TaskList {
         List<String> results = new ArrayList<>();
 
         for (int i = 0; i < lst.size(); i++) {
-            if (lst.get(i).getDescription().contains(keyword)) {
+            if (lst.get(i).getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 results.add(String.format("%d. %s", i + 1, lst.get(i)));
             }
         }
@@ -205,5 +205,12 @@ public class TaskList {
 
         lst.set(taskNum, t);
         return t.toString();
+    }
+
+    /**
+     * Clears tasklist.
+     */
+    public void clear() {
+        lst.clear();
     }
 }

@@ -1,7 +1,11 @@
 package duke.util;
 
+/**
+ * Enum for all commands of duke.
+ */
 public enum Command {
     BYE,
+    CLEAR,
     DEADLINE,
     DELETE,
     DONE,
@@ -11,6 +15,7 @@ public enum Command {
     LIST,
     LOAD,
     LOWPRIORITY,
+    SAMPLE,
     SAVE,
     SEARCH,
     SORT,
@@ -20,6 +25,8 @@ public enum Command {
         switch(this) {
         case BYE:
             return "bye\n\t- Close Duke";
+        case CLEAR:
+            return "clear\n\t- Clear all current tasks and start a new tasklist";
         case DEADLINE:
             return "deadline [description] /by [date]\n\t- Add a deadline task with a due date (YYYY-MM-DD)";
         case DELETE:
@@ -38,6 +45,8 @@ public enum Command {
             return "load\n\t- Load tasklist from saved file";
         case LOWPRIORITY:
             return "lowpriority [int]\n\t- Set this task as low priority";
+        case SAMPLE:
+            return "sample\n\t- Load some sample data\n\t- use \"new\" command to clear all data";
         case SAVE:
             return "save\n\t- save tasklist to \"data/dukeData.txt\"";
         case SEARCH:
