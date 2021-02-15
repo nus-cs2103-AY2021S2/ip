@@ -21,3 +21,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Ignore Gradle build output directory
 build
+
+# Data Storage File
+data/checklst.txt
