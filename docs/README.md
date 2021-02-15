@@ -6,13 +6,14 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-	1. Add a Task 
+	1. Add a task 
 		* To-dos
 		* Deadlines
 		* Events
-	2. List all Tasks
-	3. Delete a Task
+	2. List all tasks
+	3. Delete a task
 	4. Mark Task as done
+	5. Find a task
 	5. Exit Program
 * Command Summary
 * Acknowledgement 
@@ -30,23 +31,84 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 ![Ui](images/Ui.png)
 
 
---------------------------------------------------------------------------------------------------------------------
-
 ## Features
 
-## Add a task 
+### Add a task :  `todo`, `deadline`, `event`
 
-There are three different tasks and commands to add tasks into Duke as seen below. 
+There are three different tasks, namely todo, event and deadline. 
+Different commands are used to faciliate the adding of different tasks to Duke as seen below.
+Commands are case insenstive so do ensure that commands are keyed in correctly without additional space and in lower alphabets. 
 
-### `to do`
-Format: `to do` [description] `
+#### `todo`
+Todo command add a todo task which requires task description and no other field as input.
+Format: `todo` description`
 
-### Listing all persons : `list`
+Examples:
+* `todo CNY visiting`
+* `todo ST2334 tutorial`
 
-Shows a list of all persons in the address book.
+![Ui](images/addTodoTask.png)
+
+#### `deadline`
+Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
+Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
+
+Examples:
+* `deadline return pen /by 03/05/2021 1800`
+
+![Ui](images/addTodoTask.png)
+
+#### `event`
+Event command add a event task which requires task description, date as well as start and end time of the task. 
+Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
+
+Examples:
+* `event attend internship meeting /at 17/02/2021 1000-1100`
+
+![Ui](images/addTodoTask.png)
+
+
+### Listing all tasks : `list`
+
+Shows a list of all the task in duke.
 
 Format: `list`
 
+### Delete a task : `delete`
+
+Delete a task using its task index in list.
+
+Format: `delete index_of_task`
+
+Assume that we still have 4 task, 
+* `delete3`: will remove the third task on the list
+
+
+### Mark task as done : `done`
+
+Mark the given task as completed which will add a tick beside the task when list command is executed. 
+By default, all tasks added are uncompleted. 
+
+Format: `done index_of_task'
+
+Example:
+
+Assume that we still have 3 task, 
+* `done 1`: will mark the first task on the list as completed 
+
+
+Example:
+* `find CS2105`
+
+
+### Find specific task : `find`
+
+Show all tasks that matches or contain keywords. 
+
+Format: `find keywords`
+
+Examples:
+* `find CS2105`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -54,13 +116,13 @@ Format: `list`
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add todo** |  `todo description`e.g, `add todo watch netflix `
+**Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
+**Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
 **List** | `list`
-**Help** | `help`
+**Delete** |`delete INDEX`<br> e.g., `delete 3`
+**Find** |  `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find cs2103 quiz`
+**Mark as done** | `help`
 
 
 
