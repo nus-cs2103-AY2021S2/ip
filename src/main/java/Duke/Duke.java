@@ -1,7 +1,5 @@
 package Duke;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -161,7 +159,9 @@ public class Duke {
         } else {
             try {
                 int doneIndex = Integer.parseInt(command.substring(5));
-                return taskList.finishTask(doneIndex);
+                String output = taskList.finishTask(doneIndex);
+                storage.writeDataToFile(taskList.getList());
+                return output;
             } catch (NumberFormatException | InvalidIndex e) {
                 return e.getMessage();
             }
@@ -177,7 +177,9 @@ public class Duke {
         } else {
             try {
                 int deleteIndex = Integer.parseInt(command.substring(7));
-                return taskList.deleteTask(deleteIndex);
+                String output = taskList.deleteTask(deleteIndex);
+                storage.writeDataToFile(taskList.getList());
+                return output;
             } catch (NumberFormatException | InvalidIndex e) {
                 return e.getMessage();
             }
