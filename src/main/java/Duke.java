@@ -10,6 +10,7 @@ public class Duke {
 
     /**
      * Initialises the Duke object and loads hard disk data to current taskList.
+     *
      * @param filePath the file path that specifies location in hard disk for storage.
      */
     public Duke(String filePath) {
@@ -20,6 +21,7 @@ public class Duke {
 
     /**
      * Reads user input and provides the logic for handling each user input.
+     *
      * @param args takes in user input.
      */
     public static void main(String[] args) {

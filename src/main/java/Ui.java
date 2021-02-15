@@ -34,6 +34,7 @@ public class Ui {
 
     /**
      * Prints the task the user just added and the current size of the task list.
+     *
      * @param task the task the user added.
      */
     public void showTaskAdded(Task task) {
@@ -44,6 +45,7 @@ public class Ui {
 
     /**
      * Prints the task the user just deleted and the current size of the task list.
+     *
      * @param task the task the user deleted.
      */
     public void showTaskDeleted(Task task) {
@@ -54,6 +56,7 @@ public class Ui {
 
     /**
      * Prints the task marked as done.
+     *
      * @param task the task the user marked as done.
      */
     public void showTaskDone(Task task) {
@@ -63,6 +66,7 @@ public class Ui {
 
     /**
      * Prints the current list of tasks. If there are no tasks, Ui will provide a different prompt.
+     *
      * @param taskList the current list of tasks.
      */
     public void showTaskList(ArrayList<Task> taskList) {

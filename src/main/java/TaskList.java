@@ -16,6 +16,7 @@ public class TaskList {
 
     /**
      * Adds todo task to the current taskList and updates taskListSize.
+     *
      * @param task todo task to be added into taskList.
      * @return Todo task object of the added task.
      */
@@ -27,6 +28,7 @@ public class TaskList {
 
     /**
      * Adds deadline task to the current taskList and updates taskListSize.
+     *
      * @param task deadline task to be added into taskList.
      * @return Deadline task object of the added task.
      */
@@ -38,6 +40,7 @@ public class TaskList {
 
     /**
      * Adds event task to the current taskList and updates taskListSize.
+     *
      * @param task event task to be added into taskList.
      * @return Event task object of the added task.
      */
@@ -49,6 +52,7 @@ public class TaskList {
 
     /**
      * Deletes task at specified index from the current taskList and updates taskListSize.
+     *
      * @param index the index of the task to be removed.
      * @return Task object that was deleted.
      */
@@ -61,6 +65,7 @@ public class TaskList {
 
     /**
      * Marks task as done at the specified index from the current taskList.
+     *
      * @param index the index of the task to be marked as done.
      * @return Task object that was marked as done.
      */
@@ -72,6 +77,7 @@ public class TaskList {
 
     /**
      * Finds a list of tasks from the current taskList that contains the specified keyword.
+     *
      * @param keyword the keyword provided by the user to search for specific tasks.
      * @return an array list of tasks that contains the keyword.
      */
@@ -89,6 +95,7 @@ public class TaskList {
 
     /**
      * Returns the current taskList as an array list object.
+     *
      * @return Array list object of all current tasks in the task list.
      */
     public ArrayList<Task> getList() {
