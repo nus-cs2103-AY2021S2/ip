@@ -28,7 +28,7 @@ public class Parser {
                 tasks.completeTask(taskNumber);
             } else if (text.equals("delete")) {
                 int taskNumber = Integer.parseInt(commandArr[1]) - 1;
-                tasks.deleteTask(taskNumber, ui);
+                tasks.deleteTask(taskNumber);
             } else if (text.equals("find")) {
                 String keyword = commandArr[1];
                 tasks.findTask(keyword, ui);

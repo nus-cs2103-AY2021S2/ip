@@ -127,6 +127,30 @@ public class Ui {
 
     }
 
+    public static void addEmptyTaskListResponse() {
+        responses.add("Kobe sees no more tasks from the list!\n");
+        System.out.print(line + "Kobe sees no more tasks from the list!\n" + line + "\n");
+    }
+
+    public static void addRemoveTaskResponse(Task currentTask, int currentTaskListSize) {
+        String fullResponse = "";
+        fullResponse += "Okay! Kobe will remove this task from the list:\n";
+        fullResponse += ind + currentTask + "\n";
+        fullResponse += "Kobe sees that you now have " + currentTaskListSize + " task(s) in the list.";
+        if (currentTaskListSize == 0) { //If it's now empty, inform them.
+            fullResponse += ind + "Your list is now empty!\n";
+        }
+        responses.add(fullResponse);
+
+        System.out.print(line + "Okay! Kobe will remove your task from the list:\n" + ind);
+        System.out.println(ind + currentTask + "\n");
+        System.out.println(ind + "Kobe sees that you now have " + currentTaskListSize + " task(s) in the list.");
+        if (currentTaskListSize == 0) { //If it's now empty, inform them.
+            System.out.print(ind + "Your list is now empty!\n" + line);
+        }
+    }
+
+
     /**
      * To display an error message in the context of Kobe
      */

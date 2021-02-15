@@ -142,18 +142,14 @@ public class TaskList {
      * @param taskNumber  the task number associated to the task that has been completed
      * @param ui  the user interface to inform the user of the outcome
      */
-    public void deleteTask(int taskNumber, Ui ui) {
+    public void deleteTask(int taskNumber) {
         if (this.tasks.isEmpty()) { //Managing empty lists from the start
-            System.out.print(ui.line() + "Kobe sees no more tasks from the list!\n" + line + "\n");
+            Ui.addEmptyTaskListResponse();
         } else {
-            System.out.print(line + "Okay! Kobe will remove your task from the list!\n" + ind);
-            System.out.println(ind + tasks.get(taskNumber));
+            Task currentTask = this.tasks.get(taskNumber);
             this.tasks.remove(taskNumber);
-            System.out.println(ind + "Kobe sees that you now have " + tasks.size() + " task(s) in the list.");
-            if (tasks.isEmpty()) { //If it's now empty, inform them.
-                System.out.print(ind + "Your list is now empty!\n");
-            }
-            ui.showLine();
+            int currentTaskListSize = this.tasks.size();
+            Ui.addRemoveTaskResponse(currentTask, currentTaskListSize);
         }
     }
 
