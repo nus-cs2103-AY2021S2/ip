@@ -19,7 +19,7 @@ public class DukeWrongCommandException extends DukeException {
      */
     @Override
     public String toString() {
-        String wrongFormatMsg = String.format("     Sorry, '%s' is not a proper command for Duke!\n",
+        String wrongFormatMsg = String.format("Sorry, '%s' is not a proper command for Duke!\n",
                 command);
         return wrongFormatMsg + HELP_MSG;
     }

@@ -19,7 +19,7 @@ public class DukeWrongFormatException extends DukeException {
      */
     @Override
     public String toString() {
-        String formatMsg = String.format("      '%s' command has wrong format!\n", command);
+        String formatMsg = String.format("'%s' command has wrong format!\n", command);
         return formatMsg + HELP_MSG;
     }
 }

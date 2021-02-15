@@ -8,6 +8,7 @@ Duke requires the download of [Java SE 11](https://www.oracle.com/java/technolog
 # Features 
 
 ## General features:
+<br>
 
 ## Feature `help`
 View the commands for Duke.
@@ -59,7 +60,8 @@ Expected outcome:
 `These are the tasks in your list:`<br>
 `1. [T][] read book`
 
-## Features to add a task in your list: 
+## Features to add a task in your list:
+<br>
 
 ## Feature `todo`
 Add a to-do task in your list.
@@ -106,7 +108,8 @@ Expected outcome:
 `[E][] team meeting (at: Dec 31 2021 1200 - Dec 31 2021 1400)` <br>
 `You have 1 task(s) in your list.`
 
-## Features regarding tasks:
+## Features regarding tasks
+<br>
 
 ## Feature `delete`
 Delete a task from your task list.

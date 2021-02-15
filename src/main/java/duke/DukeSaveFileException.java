@@ -9,6 +9,6 @@ public class DukeSaveFileException extends DukeException {
      */
     @Override
     public String toString() {
-        return "     Sorry the file could not be saved in drive!\n";
+        return "Sorry the file could not be saved in drive!\n";
     }
 }

@@ -3,19 +3,19 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String HELP = "     These are the formats for Duke commands:\n"
-            + "    - help\n"
-            + "    - bye\n"
-            + "    - list\n"
-            + "    - todo (taskName)\n"
-            + "    - deadline (taskName) /by (YYYY-M-D TIME)\n"
-            + "    - event (taskName) /at (YYYY-M-D TIME-TIME)\n"
-            + "    - find (relevantName)\n"
-            + "    - delete (taskNumber from list)\n"
-            + "    - done (taskNumber from list)\n";
-    private static final String ADD_MSG = "     Got it. I've added this task:\n";
-    private static final String DELETE_MSG = "     Noted. I've removed this task:\n";
-    private static final String DONE_MSG = "     Nice! I've marked this task as done:\n";
+    private static final String HELP = "These are the formats for Duke commands:\n"
+            + "- help\n"
+            + "- bye\n"
+            + "- list\n"
+            + "- todo (taskName)\n"
+            + "- deadline (taskName) /by (YYYY-M-D TIME)\n"
+            + "- event (taskName) /at (YYYY-M-D TIME-TIME)\n"
+            + "- find (relevantName)\n"
+            + "- delete (taskNumber from list)\n"
+            + "- done (taskNumber from list)\n";
+    private static final String ADD_MSG = "Got it. I've added this task:\n";
+    private static final String DELETE_MSG = "Noted. I've removed this task:\n";
+    private static final String DONE_MSG = "Nice! I've marked this task as done:\n";
     private Scanner sc;
 
     /**
@@ -31,7 +31,7 @@ public class Ui {
      * @return String format of greeting.
      */
     public String printGreeting() {
-        String greeting = "     Hello! I'm Duke\n" + "     What can I do for you?\n";
+        String greeting = "Hello! I'm Duke\n" + "What can I do for you?\n";
         return greeting;
     }
 
@@ -50,7 +50,7 @@ public class Ui {
      * @return String format of bye message.
      */
     public String printBye() {
-        String byeMessage = "     Bye. Hope to see you again soon!\n";
+        String byeMessage = "Bye. Hope to see you again soon!\n";
         return byeMessage;
     }
 
@@ -89,10 +89,10 @@ public class Ui {
      */
     public String printFoundTasks(TaskList tl) {
         if (tl.getSize() == 0) {
-            String noMatchMsg = "     There are no matching task in your list!\n";
+            String noMatchMsg = "There are no matching task in your list!\n";
             return noMatchMsg;
         } else {
-            String findMsg = "     Here are the matching tasks in your list:\n";
+            String findMsg = "Here are the matching tasks in your list:\n";
             String taskListMsg = getTaskListMsg(tl);
             return findMsg + taskListMsg;
         }
@@ -106,24 +106,24 @@ public class Ui {
      */
     public String printTasks(TaskList tl) {
         if (tl.getSize() == 0) {
-            String emptyListMsg = "     There are no tasks in your list!\n";
+            String emptyListMsg = "There are no tasks in your list!\n";
             return emptyListMsg;
         } else {
-            String listMsg = "     These are the tasks in your list:\n";
+            String listMsg = "These are the tasks in your list:\n";
             String taskListMsg = getTaskListMsg(tl);
             return listMsg + taskListMsg;
         }
     }
 
     private String getTaskListSizeMsg(int numOfTasks) {
-        return String.format("     You have %d task(s) in your list.\n", numOfTasks);
+        return String.format("You have %d task(s) in your list.\n", numOfTasks);
     }
 
     private String getTaskListMsg(TaskList tl) {
         int index = 1;
         String msg = "";
         for (Task t : tl.getList()) {
-            msg += String.format("     %d. %s\n",
+            msg += String.format("%d. %s\n",
                     index++, t.toString());
         }
         return msg;
