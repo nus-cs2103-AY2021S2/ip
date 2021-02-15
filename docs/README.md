@@ -24,9 +24,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task\
-[T][X]Fix this code\
-Now you have {number of tasks} tasks in the list.`
+`Got it. I've added this task`
+`[T][X]Fix this code`
+`Now you have {number of tasks} tasks in the list.`
 
 
 #### event - Add an event task to Mike's storage
@@ -42,9 +42,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task\
-[E][X]Fix this code (at: Feb 01 2021)\
-Now you have {number of tasks} tasks in the list.`
+`Got it. I've added this task`
+`[E][X]Fix this code (at: Feb 01 2021)`
+`Now you have {number of tasks} tasks in the list.`
 
 #### deadline - Add an deadline task to Mike's storage
 
@@ -59,9 +59,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task\
-[D][X]Fix this code (by: Feb 01 2021)\
-Now you have {number of tasks} tasks in the list.`
+`Got it. I've added this task`
+`[D][X]Fix this code (by: Feb 01 2021)`
+`Now you have {number of tasks} tasks in the list.`
 
 #### fixed duration task - Add an fixed duration task to Mike's storage
 
@@ -76,9 +76,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task\
-[F][X]Fix this code (needs: 30 hours)\
-Now you have {number of tasks} tasks in the list.`
+`Got it. I've added this task`
+`[F][X]Fix this code (needs: 30 hours)`
+`Now you have {number of tasks} tasks in the list.`
 
 ### Mark a completed task as done:
 Once a task has been completed, the user can instruct Mike to mark the corresponding task.
@@ -93,8 +93,8 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:\
-[T][X] Fix this code`
+`Nice! I've marked this task as done:`
+`[T][X] Fix this code`
 
 ### Delete a task:
 Delete the task at the index specified.
@@ -109,9 +109,9 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:\
-[T][X] Fix this code\
-Now you have {number of tasks} tasks in the list.`
+`Noted. I've removed this task:`
+`[T][X] Fix this code`
+`Now you have {number of tasks} tasks in the list.`
 
 ### List the tasks:
 List all the tasks in Mike's storage.
@@ -126,8 +126,8 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:\
-1.[T][X] Fix this code`
+`Here are the tasks in your list:`
+`1.[T][X] Fix this code`
 
 ### Find tasks:
 Find tasks in Mike's storage corresponding to the keyword.
@@ -142,8 +142,8 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:\
-[T][X] Fix this code\
-[E][X]Fix this code (at: Feb 01 2021)\
-[D][X]Fix this code (by: Feb 01 2021)\
-[F][X]Fix this code (needs: 30 hours)`
+`Here are the matching tasks in your list:`
+`[T][X] Fix this code`
+`[E][X]Fix this code (at: Feb 01 2021)`
+`[D][X]Fix this code (by: Feb 01 2021)`
+`[F][X]Fix this code (needs: 30 hours)`
