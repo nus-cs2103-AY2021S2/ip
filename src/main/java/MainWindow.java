@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private VBox dialogContainer;
+    private VBox inputHistoryContainer;
     @FXML
     private TextField userInput;
     @FXML
@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.vvalueProperty().bind(inputHistoryContainer.heightProperty());
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
 
@@ -64,21 +64,28 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-//        if (response.status == ResponseStatus.EXIT) {
-//            Platform.exit();
-//        }
-
-        dialogContainer.getChildren().addAll(
-                getDialogLabel(input)
-        );
-        responseContainer.setText(input);
-//        responseFlow.getChildren().add(new Text(input));'
-        tasklistContainer.setText(duke.getTasklist());
-        userInput.clear();
+        Response response = duke.getResponse(input);
+        boolean isGoodInput = true;
+        switch (response.getStatus()) {
+        case EXIT:
+            Platform.exit();
+            break; // program termination, no fall-through
+        case BAD:
+            isGoodInput = false; // fallthrough
+        case OK:
+            String responseText = response.getMessage();
+            inputHistoryContainer.getChildren().add(getInputBox(input));
+            responseContainer.setText(responseText);
+            tasklistContainer.setText(duke.getTasklist());
+            userInput.clear();
+            break;
+        default:
+            assert false; // will not enter here if all branches listed
+            break;
+        }
     }
 
-    private InputHistoryBox getDialogLabel(String text) {
+    private InputHistoryBox getInputBox(String text) {
         InputHistoryBox textBox = InputHistoryBox.getBox(text);
         textBox.setOnMouseClicked(event -> {
             focusOnTextField();

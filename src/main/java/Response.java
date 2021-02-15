@@ -1,10 +1,18 @@
 public class Response {
 
-    public ResponseStatus status;
-    public String message;
+    private final ResponseStatus status;
+    private final String message;
 
-    Response(ResponseStatus status, String message) {
+    public Response(ResponseStatus status, String message) {
         this.status = status;
         this.message = message;
+    }
+
+    public ResponseStatus getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

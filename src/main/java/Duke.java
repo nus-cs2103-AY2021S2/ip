@@ -143,39 +143,23 @@ public class Duke extends Application {
 
     public String getTasklist() {
         return "notnull";
-//        try {
-//            return "notnull";
-//        } catch (DukeException e) {
-//            ;
-//        }
     }
 
-    public String getResponse(String input) {
-        return "hello";
+    public Response getResponse(String input) {
+        return new Response(ResponseStatus.OK, "gotcha!");
 //        try {
 //            UserInputTokenSet tokenSet = UserInputTokenizer.parse(input);
 //            ui.printCallback(input);
 //            DukeCommand cmd = DukeCommandFactory.getDukeCommand(tokenSet);
-//            cmd.execute(tasks, ui, loader);
-//            if (cmd.isExit()) {
-//                Platform.exit();
-//            }
-//        } catch (DukeExceptionFileNotWritable e) {
-//            if (!isLocalTaskList) {
-//                try {
-//                    ui.printError(e);
-//                } catch (DukeException ee) {
-//                    Platform.exit(); // unexpected error
-//                }
-//            }
+//            Response r = cmd.execute(tasks, ui, loader);
+//            return r;
+////            if (cmd.isExit()) {
+////                Platform.exit();
+////            }
 //        } catch (DukeException e) {
-//            try {
-//                ui.printError(e);
-//            } catch (DukeException ee) {
-//                Platform.exit(); // unexpected error
-//            }
+//            ;
 //        }
-//        return "";
+//        return Response("hi", "hey");
     }
 
     private void handleUserInput() {
