@@ -3,4 +3,8 @@
 [E][?]drink (at: Feb 01 2021)
 [T][?]join sports club
 [T][?]go home
-[F][?]running(needs: 1 hour)
+[T][?]celebrate cny
+[F][?]running (needs: 1 hour)
+[T][?]Fix this code
+[E][?]Fix this code  (at: Feb 01 2021)
+[D][?]Fix this code  (by: Feb 01 2021)

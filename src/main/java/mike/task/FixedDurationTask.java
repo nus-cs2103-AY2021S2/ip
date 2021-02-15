@@ -1,5 +1,8 @@
 package mike.task;
 
+/**
+ * A Task with a fixed time duration.
+ */
 public class FixedDurationTask extends Task {
     protected final String time;
 
