@@ -45,13 +45,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setupDialog(text, bg);
         setupDisplayPicture(img);
-    }
-
-    private void setupDialog(String text, Background bg) {
         dialog.setText(text);
-        dialog.setBackground(bg);
     }
 
     // @author Cheng20010201-reused
@@ -74,7 +69,7 @@ public class DialogBox extends HBox {
         displayPicture.setClip(null);
 
         // apply a shadow effect.
-        displayPicture.setEffect(new DropShadow(15, Color.YELLOWGREEN));
+        displayPicture.setEffect(new DropShadow(20, Color.YELLOWGREEN));
         displayPicture.setImage(img);
     }
     // @author
@@ -98,6 +93,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dBox = new DialogBox(text, img, getUserBackground());
+        dBox.setBackground(getUserBackground());
         return dBox;
     }
 
@@ -111,19 +107,20 @@ public class DialogBox extends HBox {
     public static DialogBox getLihuaDialog(String text, Image img) {
         DialogBox dBox = new DialogBox(text, img, getLihuaBackground());
         dBox.flip();
+        dBox.setBackground(getLihuaBackground());
         return dBox;
     }
 
     //@@author
     private static Background getUserBackground() {
-        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTPINK,
+        BackgroundFill background_fill = new BackgroundFill(Color.SKYBLUE,
                 CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(background_fill);
         return background;
     }
 
     private static Background getLihuaBackground() {
-        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTSKYBLUE,
+        BackgroundFill background_fill = new BackgroundFill(Color.LIGHTPINK,
                 CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(background_fill);
         return background;
