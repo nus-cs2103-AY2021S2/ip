@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Ui {
     /** Constants that help in the formatting of the printed messages. */
     private static final String SPACE = "     ";
-    private static final String LINE = "     <<>><<>><<>><<>><<>><<>><<>><<>>\n";
+    private static final String LINE = "     <<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n";
 
     /**
      * Message to be printed when the program starts.
@@ -41,6 +41,14 @@ public class Ui {
     public static String invalidTaskFormatExceptionMessage(String task) {
         return LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task
                 + "\n" + SPACE + "The expected format for the task is: " + Ui.correctTaskFormat(task) + "\n" + LINE;
+    }
+
+    /**
+     * To return part of the common part of the error message for easy identification of response.
+     * @return String with the first part of the invalidTaskFormatExceptionMessage() method.
+     */
+    public static String invalidTaskFormatBasicExceptionMessage() {
+        return LINE + SPACE + "ERROR! D: The format for the following task is wrong: ";
     }
 
     /**
