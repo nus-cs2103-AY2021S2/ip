@@ -74,17 +74,9 @@ public class KobeN{
      * @return
      */
     public String getResponse(String input) {
-        try {
-            Parser.readInput(input, tasks, storage, ui);
-        } catch (CustomExceptions.IncompleteDecriptionException e) {
-//            System.out.println(e);
-            e.printStackTrace(); //Unwraps cause within InvocationTargetException
-            //Since the reflection layer will wrap any exception in an InvocationTargetException
-        } catch (CustomExceptions.IncorrectDecriptionException e) {
-//            System.out.println(e);
-            e.printStackTrace();
-        } finally {
-            return "Kobe heard: " + input;
-        }
+        String kobesResponse = "";
+        Parser.readInput(input, tasks, storage, ui);
+        kobesResponse = Ui.getMostRecentResponse();
+        return kobesResponse;
     }
 }

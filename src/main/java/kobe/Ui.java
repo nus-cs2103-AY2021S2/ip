@@ -1,15 +1,20 @@
 package kobe;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.*;
+
 public class Ui {
     public static String ind = "    ";
     public static String line = ind + "____________________________________________________________\n" + ind;
     public static String line2 = ind + "____________________________________________________________\n";
+    public static ArrayList<String> responses = new ArrayList<>();;
 
     /**
      * Constructor for the Ui object.
      */
-    Ui() {
-        System.out.println(line + "Hello! I'm Kobe\n" + ind + "What can I do for you?\n" + line);
+    public Ui() {
+//        System.out.println(line + "Hello! I'm Kobe\n" + ind + "What can I do for you?\n" + line);
     }
 
     /**
@@ -37,6 +42,29 @@ public class Ui {
         return ind;
     }
 
+    public static String getMostRecentResponse(){
+        return responses.get(responses.size() - 1);
+
+    }
+
+    public static void addIncompleteDescriptionResponse() {
+        responses.add("Oh no! Kobe doesn't understand what you mean.\n" +
+                "It looks like you have yet to complete your request.\n" +
+                "Type help for more info");
+    }
+
+//    public void addResponse(String response) {
+//        this.responses.add(response);
+//    }
+
+    public static void addIncorrectDescriptionResponse(){
+        responses.add("Oh no! Kobe doesn't understand what you mean.\n" +
+                "It looks like your command is incorrect.\n" +
+                "Type help for more info");
+    }
+
+
+
     /**
      * To display an error message in the context of Kobe
      */
@@ -44,4 +72,5 @@ public class Ui {
         //"No prior saved data!"
         System.out.println(line + "Kobe detected no prior saved data!\n" + line);
     }
+
 }
