@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import snom.common.core.Style;
 
 /**
@@ -36,7 +35,7 @@ public class DialogBox extends HBox {
         }
 
         displayPicture.setImage(img);
-        if(isError){
+        if (isError) {
             dialog.setStyle(Style.STYLE_DIALOG_ERROR);
         }
         dialog.setText(text);
