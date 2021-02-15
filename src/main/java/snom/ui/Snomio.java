@@ -7,14 +7,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-import snom.exceptions.SnomException;
+import snom.common.core.Messages;
+import snom.common.exceptions.SnomException;
 import snom.model.task.Task;
 import snom.model.task.TaskList;
 
 /**
  * Deals with interactions with the user.
- * This snom.ui.Snomio simply compile both BufferedReader and BufferedWriter
- * for easier I/O usages. For eg. read snom.logic.commands, contents, numbers
+ * Snomio simply compile both BufferedReader and BufferedWriter
+ * for easier I/O usages. For eg. read commands, contents, numbers
  * from user's input.
  *
  * Solution below adapted from https://github.com/Kattis/kattio/blob/master/Kattio.java
@@ -32,55 +33,26 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * Prints a horizontal line.
-     * Note that the output is not flushed. Remember to flush after calling the method.
-     */
-    public void showLine() {
-        println("--------------------------------");
-    }
-
-    /**
-     * Prints given message as an error
+     * Returns the welcome message of Snom on startup.
      *
-     * @param errMsg error message
-     */
-    public void showError(String errMsg) {
-        showLine();
-        println("Error: " + errMsg);
-        showLine();
-        flush();
-    }
-
-    /**
-     * Prints an error of unable to load save file and prompt user a new save file will be created.
-     */
-    public void showLoadingError() {
-        showError("Failed to load file. A new save file will be created.");
-    }
-
-    /**
-     * Returns the welcome message of snom.model.Snom on startup.
-     *
-     * @return String welcome message
+     * @return welcome message
      */
     public String getWelcomeMsg() {
-        return "Bonjour! I'm snom.model.Snom! *squish*\n"
-                + "Try giving me some snom.logic.commands, I might be able to do something!\n"
-                + "[type 'bye' to exit program]";
+        return Messages.MESSAGE_WELCOME;
     }
 
     /**
-     * Returns a message containing the entire task list.
+     * Returns a message containing the entire {@code TaskList}.
      *
-     * @return String        string of entire task List
+     * @return               string of entire task List
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
     public String getTaskList(TaskList taskList) throws SnomException {
         if (taskList.getSize() <= 0) {
-            throw new SnomException("You have no task in your list right now, try adding some and try again :D");
+            throw new SnomException(Messages.MESSAGE_EMPTY_TASK_LIST);
         }
 
-        String message = "Here are the snom.tasks in your list:\n";
+        String message = Messages.MESSAGE_TASK_LIST;
         for (int i = 0; i < taskList.getSize(); i++) {
             message += (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
         }
@@ -91,15 +63,15 @@ public class Snomio extends PrintWriter {
     /**
      * Returns out the list from searching the keyword.
      *
-     * @return String        string of matching task list
+     * @return               string of matching task list
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
     public String getMatchingTaskList(TaskList taskList) throws SnomException {
         if (taskList.getSize() <= 0) {
-            throw new SnomException("No matching task found.");
+            throw new SnomException(Messages.MESSAGE_NO_MATCHING_TASK);
         }
 
-        String message = "Here are the matching snom.tasks in your list:\n";
+        String message = Messages.MESSAGE_MATCHING_TASK_LIST;
         for (int i = 0; i < taskList.getSize(); i++) {
             message += (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
         }
@@ -108,26 +80,24 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * Returns the task added into the taskList and size of current taskList.
+     * Returns the {@code Task} added into the {@code TaskList} and size of current taskList.
      *
      * @param task     task added
      * @param listSize task list size
-     * @return String  task added into taskList
+     * @return         task added into taskList
      */
     public String getTaskAdded(Task task, int listSize) {
-        return "Got it. I've added this task:\n"
-                + "\t" + task.toString() + "\n"
-                + "Now you have " + listSize + " snom.tasks in the list.";
+        return String.format(Messages.MESSAGE_TASK_ADDED, task.toString(), listSize);
     }
 
     /**
-     * Returns the list of recent finished snom.tasks.
+     * Returns the list of recent finished {@code Task}.
      *
-     * @param finishedTasks list of finished snom.tasks
-     * @return String       recent finished snom.tasks
+     * @param finishedTasks list of finished {@code Task}
+     * @return              recent finished {@code Task}
      */
     public String getFinishedTasks(Task[] finishedTasks) {
-        String message = "Great Job! I've marked this task(s) as finish:\n";
+        String message = Messages.MESSAGE_TASK_FINISHED;
         for (Task task: finishedTasks) {
             message += "\t" + task.toString() + "\n";
         }
@@ -135,13 +105,13 @@ public class Snomio extends PrintWriter {
     }
 
     /**
-     * Returns the list of recently deleted snom.tasks.
+     * Returns the list of recently deleted {@code Task}.
      *
-     * @param deletedTasks list of deleted snom.tasks
-     * @return String      recent deleted snom.tasks
+     * @param deletedTasks list of deleted {@code Task}
+     * @return             recent deleted {@code Task}
      */
     public String getDeletedTasks(Task[] deletedTasks) {
-        String message = "Noted, I've removed this task(s)\n";
+        String message = Messages.MESSAGE_TASK_DELETED;
         for (Task task: deletedTasks) {
             message += "\t" + task.toString() + "\n";
         }
@@ -154,7 +124,7 @@ public class Snomio extends PrintWriter {
      * @return String exit message
      */
     public String getExitMessage() {
-        return "Ciao! Hope to see you again soon!";
+        return Messages.MESSAGE_EXIT;
     }
 
     /**
@@ -206,13 +176,13 @@ public class Snomio extends PrintWriter {
      *
      * @return  single integer input
      */
-    public int readInt() throws SnomException {
-        try {
-            return Integer.parseInt(readWord());
-        } catch (NumberFormatException e) {
-            throw new SnomException("Oops! You have entered invalid task numbers, please try again!");
-        }
-    }
+//    public int readInt() {
+//        try {
+//            return Integer.parseInt(readWord());
+//        } catch (NumberFormatException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * Returns first double input.

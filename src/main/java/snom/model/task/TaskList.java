@@ -2,7 +2,8 @@ package snom.model.task;
 
 import java.util.ArrayList;
 
-import snom.exceptions.SnomException;
+import snom.common.core.Messages;
+import snom.common.exceptions.SnomException;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -81,8 +82,7 @@ public class TaskList {
                 assert task.getStatus() == true : "Task status should be set to true";
                 finishedTasks[i] = task;
             } catch (IndexOutOfBoundsException e) {
-                throw new SnomException("Oops! You have entered a task number: "
-                        + taskNums[i] + " which is invalid! Please try again!");
+                throw new SnomException(String.format(Messages.MESSAGE_INVALID_TASK_NUM, taskNums[i]));
             }
         }
         return finishedTasks;
@@ -105,8 +105,7 @@ public class TaskList {
                 list.remove(task);
                 deletedTasks[i] = task;
             } catch (IndexOutOfBoundsException e) {
-                throw new SnomException("Oops! You have entered a task number: "
-                        + taskNums[i] + " which is invalid! Please try again!");
+                throw new SnomException(String.format(Messages.MESSAGE_INVALID_TASK_NUM, taskNums[i]));
             }
         }
         return deletedTasks;

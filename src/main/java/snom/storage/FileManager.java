@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import snom.exceptions.SnomException;
+import snom.common.exceptions.SnomException;
 
 /**
  * Manages folder/file creation and read file for Snom

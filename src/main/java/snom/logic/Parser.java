@@ -2,7 +2,8 @@ package snom.logic;
 
 import java.util.Arrays;
 
-import snom.exceptions.SnomException;
+import snom.common.core.Messages;
+import snom.common.exceptions.SnomException;
 import snom.logic.commands.AddCommand;
 import snom.logic.commands.Command;
 import snom.logic.commands.CommandEnum;
@@ -49,7 +50,7 @@ public class Parser {
         case HELP:
             return new HelpCommand(CommandEnum.HELP, commandContent);
         default:
-            throw new SnomException("OOPS!!! I'm sorry, but I don't know what \'" + commandStr + "\' means :-(");
+            throw new SnomException(String.format(Messages.MESSAGE_INVALID_COMMAND, commandStr));
         }
     }
 
@@ -70,9 +71,9 @@ public class Parser {
      * @return          content of the command
      */
     public static String parseCommandContent(String userInput) {
-        String[] splittedInputs = userInput.split(" ", 2);
-        if (splittedInputs.length >= 2) {
-            return splittedInputs[1];
+        String[] splitInputs = userInput.split(" ", 2);
+        if (splitInputs.length >= 2) {
+            return splitInputs[1];
         } else {
             return "";
         }
@@ -87,7 +88,7 @@ public class Parser {
      */
     public static int[] parseTaskNumbers(String taskNumString) throws SnomException {
         if (taskNumString.isBlank()) {
-            throw new SnomException("Oops! Please at least give one task number");
+            throw new SnomException(Messages.MESSAGE_INVALID_MIN_TASK_NUM);
         }
 
         try {
@@ -96,7 +97,7 @@ public class Parser {
                     .toArray();
             return taskNumbers;
         } catch (NumberFormatException e) {
-            throw new SnomException("Oops! Only integers are valid task numbers!");
+            throw new SnomException(Messages.MESSAGE_INVALID_MIN_TASK_NUM_TYPE);
         }
     }
 }

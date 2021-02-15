@@ -6,7 +6,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-import snom.exceptions.SnomException;
+import snom.common.exceptions.SnomException;
 import snom.model.task.Deadline;
 import snom.model.task.Event;
 import snom.model.task.Task;

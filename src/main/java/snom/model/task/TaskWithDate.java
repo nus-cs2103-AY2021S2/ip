@@ -6,7 +6,8 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
-import snom.exceptions.SnomException;
+import snom.common.core.Messages;
+import snom.common.exceptions.SnomException;
 
 /**
  * Stores extra date information for {@code Task}
@@ -65,7 +66,7 @@ public class TaskWithDate extends Task {
             LocalDateTime formattedDateTime = LocalDateTime.parse(dateTime, formatter);
             return formattedDateTime;
         } catch (DateTimeParseException e) {
-            throw new SnomException("Oops! Please enter a valid date time format [YYYY-MM-DD HH:MM]");
+            throw new SnomException(Messages.MESSAGE_INVALID_DATE_TIME);
         }
     }
 

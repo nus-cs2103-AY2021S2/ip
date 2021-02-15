@@ -1,5 +1,7 @@
 package snom.model.task;
 
+import snom.common.core.Messages;
+
 /**
  * Stores task's information.
  */
@@ -26,7 +28,7 @@ public class Task {
     }
 
     public String getStatusSymbol() {
-        return isFinished ? "\u2713" : "\u2007";
+        return isFinished ? Messages.SYMBOL_TICK : Messages.SYMBOL_BLANK;
     }
 
     public void setDescription(String description) {
@@ -48,6 +50,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusSymbol() + "]" + this.description;
+        return "[" + this.getStatusSymbol() + "] " + this.description;
     }
 }

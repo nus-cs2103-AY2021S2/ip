@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import snom.exceptions.SnomException;
+import snom.common.exceptions.SnomException;
 import snom.logic.commands.CommandEnum;
 import snom.model.task.TaskList;
 import snom.storage.StorageManager;
