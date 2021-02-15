@@ -254,31 +254,66 @@ public class Parser {
         return command[1];
     }
 
-    public boolean canParseAddContactCommand(String input) {
+    private boolean canParseContactCommand(String input) {
         String[] command = input.split(" ");
-        if (!command[0].equals("contact")) {
+        if (command.length < 2) {
             return false;
         }
-        if (!command[1].equals("add")) {
-            return false;
+        boolean isAdd = command[1].equals("add");
+        boolean isDelete = command[1].equals("delete");
+        boolean isEdit = command[1].equals("edit");
+        boolean isList = command[1].equals("list");
+        if (command[0].equals("contact")) {
+            return isAdd || isDelete || isEdit || isList;
         }
-        String[] name = input.split("/name");
-        if (name.length != 2) {
-            return false;
-        }
-        String[] number = input.split("/number");
-        String[] address = input.split("/address");
-        if (number.length != 2 && address.length != 2) {
+        return false;
+    }
+
+    private boolean canParseAddName(String input) {
+        String[] command = input.split("/name");
+        if (command.length != 2) {
             return false;
         }
         return true;
     }
 
+    private boolean canParseAddNumber(String input) {
+        String[] command = input.split("/number ");
+        if (command.length != 2) {
+            return false;
+        }
+        try {
+            String[] details = command[1].split("/address ");
+            details = details[0].split(" ");
+            Integer.valueOf(details[0]);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean canParseAddAddress(String input) {
+        String[] command = input.split("/address ");
+        if (command.length != 2) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean canParseAddContactCommand(String input) {
+        boolean isContactCommand = canParseContactCommand(input);
+        boolean hasValidName = canParseAddName(input);
+        boolean hasValidNumber = canParseAddNumber(input);
+        boolean hasValidAddress = canParseAddAddress(input);
+        boolean hasEitherNumberOrAddress = hasValidNumber || hasValidAddress;
+        return isContactCommand && hasValidName && hasEitherNumberOrAddress;
+    }
+
     public String parseAddContactName(String input) {
-        String[] command = input.split("/name");
-        String[] details = command[1].split("/number");
+        String[] command = input.split("/name ");
+        String[] details = command[1].split("/number ");
         if (details.length != 2) {
-            details = command[1].split("/address");
+            details = command[1].split("/address ");
         }
         String name = details[0];
         return name;
@@ -289,7 +324,7 @@ public class Parser {
         if (command.length != 2) {
             return 0;
         }
-        String[] details = command[1].split("/address");
+        String[] details = command[1].split("/address ");
         details = details[0].split(" ");
         String numString = details[0];
         int number = Integer.valueOf(numString);
@@ -297,7 +332,7 @@ public class Parser {
     }
 
     public String parseAddContactAddress(String input) {
-        String[] command = input.split("/address");
+        String[] command = input.split("/address ");
         if (command.length != 2) {
             return "";
         }
