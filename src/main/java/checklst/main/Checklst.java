@@ -1,12 +1,10 @@
 package checklst.main;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Paths;
-
 import checklst.exception.ChecklstException;
+import checklst.gui.ChecklstDialog;
 import checklst.gui.DialogBox;
+import checklst.gui.ErrorDialog;
+import checklst.gui.UserDialog;
 import checklst.parser.Parser;
 import checklst.storage.Storage;
 import checklst.task.TaskList;
@@ -22,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -45,8 +42,8 @@ public class Checklst extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userIcon = new Image(this.getClass().getResourceAsStream("/images/UserIcon.png"));
+    private Image checklstIcon = new Image(this.getClass().getResourceAsStream("/images/ChecklstIcon.png"));
 
     @Override
     public void start(Stage stage) {
@@ -88,8 +85,9 @@ public class Checklst extends Application {
         this.dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         this.userInput.setPrefWidth(325.0);
-
-        this.sendButton.setPrefWidth(55.0);
+        this.userInput.setPrefHeight(32.0);
+        this.sendButton.setPrefWidth(70.0);
+        this.sendButton.setPrefHeight(32.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
@@ -112,18 +110,13 @@ public class Checklst extends Application {
 
         // Get History
         try {
-            String[] history = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
-            for (String task: history) {
-                this.parser.parseHistory(task, this.taskList);
-            }
-            this.addDukeMessage("History successfully parsed");
-        } catch (InvalidPathException | IOException e) {
-            this.addDukeMessage("No history found... Initializing from blank state!");
+            this.storage.parseHistory(this.taskList);
+            this.addChecklstMessage("History successfully parsed!");
         } catch (ChecklstException e) {
-            this.addDukeMessage(e.getMessage());
+            this.addErrorMessage(e.getMessage());
         }
 
-        this.addDukeMessage(this.ui.sendWelcome());
+        this.addChecklstMessage(this.ui.sendWelcome());
     }
 
     /**
@@ -141,31 +134,36 @@ public class Checklst extends Application {
         }
 
         this.addUserMessage(userInput.getText());
-        this.addDukeMessage(getResponse(userInput.getText()));
+
+        String response = "";
+        try {
+            response = this.parser.parse(userInput.getText().split(" ", 2), this.taskList);
+            this.addChecklstMessage(response);
+        } catch (ChecklstException e) {
+            this.addErrorMessage(e.getMessage());
+        }
 
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return this.parser.parse(input.split(" ", 2), this.taskList);
-    }
-
-    private void addDukeMessage(String input) {
-        HBox newDialogBox = DialogBox.getDukeDialog(new Label("Duke\n" + input), new ImageView(duke));
+    private void addChecklstMessage(String input) {
+        DialogBox newDialogBox = new ChecklstDialog(new Label(input), new ImageView(checklstIcon));
         this.dialogContainer.getChildren().add(newDialogBox);
         VBox.setMargin(newDialogBox, new Insets(3));
     }
 
     private void addUserMessage(String input) {
-        HBox newDialogBox = DialogBox.getUserDialog(new Label("You\n" + input), new ImageView(user));
+        DialogBox newDialogBox = new UserDialog(new Label(input), new ImageView(userIcon));
         this.dialogContainer.getChildren().add(newDialogBox);
         VBox.setMargin(newDialogBox, new Insets(3));
     }
 
+    private void addErrorMessage(String input) {
+        DialogBox newDialogBox = new ErrorDialog(new Label(input), new ImageView(checklstIcon));
+        this.dialogContainer.getChildren().add(newDialogBox);
+        VBox.setMargin(newDialogBox, new Insets(3));
+    }
+    
     @Override
     public void stop() throws Exception {
         this.storage.saveToFile(this.taskList);
