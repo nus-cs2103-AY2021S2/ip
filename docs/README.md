@@ -6,17 +6,17 @@ readability.
 - [Quick start](#quick-start)
 - [Task Types](#task-types)
 - [Features](#features)
-    - [Adding a task](#adding-tasks)
-    - [Listing all tasks](#listing-all-tasks)
-    - [Deleting a task](#deleting-a-task)
-    - [Completing a task](#completing-a-task)
-    - [Setting a task priority](#setting-a-task-priority)
-    - [Exiting the application](#exiting-the-application)
+    - [Adding a task](#adding-tasks--event/deadline/todo)
+    - [Listing all tasks](#listing-all-tasks--list)
+    - [Deleting a task](#deleting-a-task--delete)
+    - [Completing a task](#completing-a-task--done)
+    - [Setting a task priority](#setting-a-task-priority--priority)
+    - [Exiting the application](#exiting-the-application--bye)
 
   
 ## Quick start
 1. Ensure you have Java `11` installed.
-2. Download the latest `duke.jar` [here]()
+2. Download the latest `duke.jar`.
 3. Place the file to the folder you want to use the as the _home folder_ 
 4. Double click the `duke.jar` file.
     - If you had not associated jar files with java, ensure you open the file using your java executable.
