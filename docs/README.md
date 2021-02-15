@@ -17,9 +17,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task: 
-       [T][ ] buy bread
-     Now you have 5 tasks in the list.`
+```
+Got it. I've added this task: 
+	[T][ ] buy bread
+Now you have 5 tasks in the list.
+```
 
 Example of usage: 
 
@@ -27,9 +29,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task: 
-       [D][ ] complete assignment (05 Jan 2021)
-     Now you have 6 tasks in the list.`
+```
+Got it. I've added this task: 
+	[D][ ] complete assignment (05 Jan 2021)
+Now you have 6 tasks in the list.
+```
 	 
 Example of usage: 
 
@@ -37,9 +41,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task: 
-       [E][ ] attend meeting (05 Jan 2021 to 06 Jan 2021)
-     Now you have 7 tasks in the list.`
+```
+Got it. I've added this task: 
+	[E][ ] attend meeting (05 Jan 2021 to 06 Jan 2021)
+Now you have 7 tasks in the list.
+```
 
 ### Feature 2 - View list
 Enables the user to view all the tasks in the list
@@ -56,8 +62,10 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:
-     1.[T][X] read book`
+```
+Here are the tasks in your list:
+1.[T][X] read book
+```
 
 ### Feature 3 - Mark Task as Done
 Enables the user to mark a task as done
@@ -74,8 +82,10 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done: 
-       [T][X] Second Task`
+```
+Nice! I've marked this task as done: 
+	[T][X] Second Task
+```
 	   
 ### Feature 4 - Delete Task from list
 Enables the user to remove a task from the task list
@@ -92,9 +102,11 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task: 
-       [T][X] Second Task
-     Now you have 4 tasks in the list.`
+```
+Noted. I've removed this task: 
+	[T][X] Second Task
+Now you have 4 tasks in the list.
+```
 	 
 ### Feature 5 - Find Task from list
 Enables the user to find for tasks from the task list
@@ -111,6 +123,8 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:
-	 2. [D][X] prepare for meeting (05 Jan 2021)
-	 5. [E][ ] attend meeting (05 Jan 2021 to 08 Jan 2021)`
+```
+Here are the matching tasks in your list:
+2. [D][X] prepare for meeting (05 Jan 2021)
+5. [E][ ] attend meeting (05 Jan 2021 to 08 Jan 2021)
+```
