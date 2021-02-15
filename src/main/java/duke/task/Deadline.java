@@ -7,6 +7,7 @@ import duke.dukeException.DukeException;
 public class Deadline extends Task {
     /** Date of the deadline */
     protected LocalDate done_by;
+    public final String category = "Deadline";
 
     /**
      * Class constructor specifying deadline name and due date.
@@ -48,7 +49,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + done_by.getMonth() + " "
+        return "      [D]" + super.toString() + " (by: " + done_by.getMonth() + " "
                 + done_by.getDayOfMonth() + " " + done_by.getYear() + ")";
     }
 }

@@ -2,6 +2,7 @@ package duke.task;
 import duke.dukeException.DukeException;
 
 public class ToDo extends Task {
+    public final String category = "ToDo";
     /**
      * Class constructor specifying name.
      */
@@ -40,6 +41,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "      [T]" + super.toString();
     }
 }
