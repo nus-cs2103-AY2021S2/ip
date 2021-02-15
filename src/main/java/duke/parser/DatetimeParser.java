@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
 
@@ -19,24 +20,24 @@ public class DatetimeParser {
      * List of supported datetime formats for parsing,
      * partially inspired by { @link https://balusc.omnifaces.org/2007/09/dateutil.html }.
      */
-    private static final DateTimeFormatter[] DATE_FORMATS = new DateTimeFormatter[]{
-            // Time
-            // "hh a", "hh.mm a", // Same/Next day, 12-hour format, 00 minute
-            DateTimeFormatter.ofPattern("H:mm"), // Same/Next day, 24-hour format
-
-            // Date
+    private static final DateTimeFormatter[] DATE_FORMATS_NO_DATES = new DateTimeFormatter[]{
+            DateTimeFormatter.ofPattern("H:mm") // Same/Next day, 24-hour format
+    };
+    private static final DateTimeFormatter[] DATE_FORMATS_DATE_NO_TIME = new DateTimeFormatter[]{
             DateTimeFormatter.ofPattern("d/M/yyyy"), // Full date
             DateTimeFormatter.ofPattern("d MMM yyyy"),
             DateTimeFormatter.ofPattern("d MMMM yyyy"),
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("yyyyMMdd"), // Shortcut
-            DateTimeFormatter.ofPattern("d/M_yyyy"), // Year required to parse datetime
+            DateTimeFormatter.ofPattern("yyyyMMdd") // Shortcut
+    };
+    private static final DateTimeFormatter[] DATE_FORMATS_DATE_NO_TIME_AND_YEAR = new DateTimeFormatter[]{
+            DateTimeFormatter.ofPattern("d/M_yyyy"), // Manually add year, since required to parse datetime
             DateTimeFormatter.ofPattern("d MMM_yyyy"),
             DateTimeFormatter.ofPattern("d MMMM_yyyy"),
             DateTimeFormatter.ofPattern("MMM d_yyyy"),
-            DateTimeFormatter.ofPattern("MMMM d_yyyy"),
-
-            // Datetime
+            DateTimeFormatter.ofPattern("MMMM d_yyyy")
+    };
+    private static final DateTimeFormatter[] DATE_FORMATS_DATETIME = new DateTimeFormatter[]{
             DateTimeFormatter.ofPattern("H:mm d/M/yyyy"),
             DateTimeFormatter.ofPattern("H:mm d MMM yyyy"),
             DateTimeFormatter.ofPattern("H:mm d MMMM yyyy"),
@@ -44,8 +45,10 @@ public class DatetimeParser {
             DateTimeFormatter.ofPattern("d/M/yyyy H:mm"),
             DateTimeFormatter.ofPattern("d MMM yyyy H:mm"),
             DateTimeFormatter.ofPattern("d MMMM yyyy H:mm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm"),
-            DateTimeFormatter.ofPattern("H:mm d/M_yyyy"), // Year required to parse datetime
+            DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm")
+    };
+    private static final DateTimeFormatter[] DATE_FORMATS_DATETIME_NO_YEAR = new DateTimeFormatter[]{
+            DateTimeFormatter.ofPattern("H:mm d/M_yyyy"), // Manually add year, since required to parse datetime
             DateTimeFormatter.ofPattern("H:mm d MMM_yyyy"),
             DateTimeFormatter.ofPattern("H:mm d MMMM_yyyy"),
             DateTimeFormatter.ofPattern("H:mm MMM d_yyyy"),
@@ -54,9 +57,8 @@ public class DatetimeParser {
             DateTimeFormatter.ofPattern("d MMM H:mm_yyyy"),
             DateTimeFormatter.ofPattern("d MMMM H:mm_yyyy"),
             DateTimeFormatter.ofPattern("MMM d H:mm_yyyy"),
-            DateTimeFormatter.ofPattern("MMMM d H:mm_yyyy"),
+            DateTimeFormatter.ofPattern("MMMM d H:mm_yyyy")
     };
-
     private static final DateTimeFormatter ISO_DATETIME_FORMAT =
             DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
     private static final DateTimeFormatter READABLE_DATE_FORMAT =
@@ -126,76 +128,123 @@ public class DatetimeParser {
         input = input.strip();
         now = now.withSecond(0).withNano(0);
         String inputAddYear = input + "_" + now.getYear();
+        Optional<LocalDateTime> result;
 
-        for (int i = 0; i < DATE_FORMATS.length; i++) {
-            LocalDateTime date;
-            DateTimeFormatter fmt = DATE_FORMATS[i];
-
-            if (i == 0) {
-                // No date supplied
-                LocalTime readout;
-                try {
-                    readout = LocalTime.parse(input, fmt);
-                } catch (DateTimeParseException e) {
-                    continue;
-                }
-                date = now.withHour(readout.getHour()).withMinute(readout.getMinute());
-                if (date.isBefore(now)) {
-                    date = date.plusDays(1);
-                }
-
-            } else if (i <= 5) {
-                // No time supplied, assume midnight
-                LocalDate readout;
-                try {
-                    readout = LocalDate.parse(input, fmt);
-                } catch (DateTimeParseException e) {
-                    continue;
-                }
-                date = readout.atTime(0, 0);
-
-            } else if (i <= 10) {
-                // No time and year supplied, manually added
-                LocalDate readout;
-                try {
-                    readout = LocalDate.parse(inputAddYear, fmt);
-                } catch (DateTimeParseException e) {
-                    continue;
-                }
-                date = readout.atTime(0, 0);
-                if (date.isBefore(now)) {
-                    date = date.plusYears(1);
-                }
-
-            } else if (i <= 18) {
-                // All parameters supplied
-                try {
-                    date = LocalDateTime.parse(input, fmt);
-                } catch (DateTimeParseException e) {
-                    continue;
-                }
-
-            } else {
-                // No year supplied
-                try {
-                    date = LocalDateTime.parse(inputAddYear, fmt);
-                } catch (DateTimeParseException e) {
-                    continue;
-                }
-                if (date.isBefore(now)) {
-                    date = date.plusYears(1);
-                }
-            }
-
-            // Otherwise fully-supplied
-            return date;
+        result = DatetimeParser.parseDateWithNoDates(input, now);
+        if (result.isPresent()) {
+            return result.get();
         }
 
+        result = DatetimeParser.parseDateWithDateAndNoTime(input, now);
+        if (result.isPresent()) {
+            return result.get();
+        }
+
+        result = DatetimeParser.parseDateWithDateAndNoTimeYear(inputAddYear, now);
+        if (result.isPresent()) {
+            return result.get();
+        }
+
+        result = DatetimeParser.parseDateWithDateTime(input, now);
+        if (result.isPresent()) {
+            return result.get();
+        }
+
+        result = DatetimeParser.parseDateWithDateTimeAndNoYear(inputAddYear, now);
+        if (result.isPresent()) {
+            return result.get();
+        }
         // None of the date formats parsed
         throw new DukeExceptionIllegalArgument("Datetime format should adhere to the following format:"
                 + "\n- Time delimited by ':', e.g. 9:30"
                 + "\n- Date delimited by '/' or ' ', e.g. 9/1, 9 Jan"
                 + "\n- Date and time separated by a single space ' '");
+    }
+
+    private static Optional<LocalDateTime> parseDateWithNoDates(String input, LocalDateTime now) {
+        for (DateTimeFormatter dateFormat : DATE_FORMATS_NO_DATES) {
+            LocalDateTime date;
+            LocalTime readout;
+            try {
+                readout = LocalTime.parse(input, dateFormat); // parsing attempt
+            } catch (DateTimeParseException e) {
+                continue;
+            }
+
+            /* Replace current datetime with date values */
+            date = now.withHour(readout.getHour()).withMinute(readout.getMinute());
+            if (date.isBefore(now)) {
+                date = date.plusDays(1); // time is within next 24-hour period
+            }
+            return Optional.of(date);
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<LocalDateTime> parseDateWithDateAndNoTime(String input, LocalDateTime now) {
+        for (DateTimeFormatter dateFormat : DATE_FORMATS_DATE_NO_TIME) {
+            LocalDateTime date;
+            LocalDate readout;
+            try {
+                readout = LocalDate.parse(input, dateFormat); // parsing attempt
+            } catch (DateTimeParseException e) {
+                continue;
+            }
+
+            /* Set time to midnight */
+            date = readout.atTime(0, 0);
+            return Optional.of(date);
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<LocalDateTime> parseDateWithDateAndNoTimeYear(String input, LocalDateTime now) {
+        for (DateTimeFormatter dateFormat : DATE_FORMATS_DATE_NO_TIME_AND_YEAR) {
+            LocalDateTime date;
+            LocalDate readout;
+            try {
+                readout = LocalDate.parse(input, dateFormat); // parsing attempt
+            } catch (DateTimeParseException e) {
+                continue;
+            }
+
+            /* Set time to midnight */
+            date = readout.atTime(0, 0);
+            if (date.isBefore(now)) {
+                date = date.plusYears(1);
+            }
+            return Optional.of(date);
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<LocalDateTime> parseDateWithDateTime(String input, LocalDateTime now) {
+        for (DateTimeFormatter dateFormat : DATE_FORMATS_DATETIME) {
+            LocalDateTime date;
+            try {
+                date = LocalDateTime.parse(input, dateFormat); // parsing attempt
+            } catch (DateTimeParseException e) {
+                continue;
+            }
+            return Optional.of(date);
+        }
+        return Optional.empty();
+    }
+
+    private static Optional<LocalDateTime> parseDateWithDateTimeAndNoYear(String input, LocalDateTime now) {
+        for (DateTimeFormatter dateFormat : DATE_FORMATS_DATETIME_NO_YEAR) {
+            LocalDateTime date;
+            try {
+                date = LocalDateTime.parse(input, dateFormat); // parsing attempt
+            } catch (DateTimeParseException e) {
+                continue;
+            }
+            if (date.isBefore(now)) {
+                date = date.plusYears(1);
+            }
+            return Optional.of(date);
+        }
+        return Optional.empty();
     }
 
     /**

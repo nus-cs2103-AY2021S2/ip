@@ -51,13 +51,13 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(inputHistoryContainer.heightProperty());
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
 
     public void setDuke(Duke d) {
         duke = d;
         updateResponseContainer(duke.getStartupResponse()); // initialize Duke
+        updateTasklistContainer(duke.getTasklistString());
     }
 
     /**
