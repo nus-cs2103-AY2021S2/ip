@@ -38,7 +38,7 @@ public class TaskList extends ArrayList<Task> {
             try {
                 Task task = this.get(taskNo);
                 task.setStatus(true);
-                assert task.getStatus() == true : "Task status should be set to true";
+                assert task.hasFinished() == true : "Task status should be set to true";
                 finishedTasks[i] = task;
             } catch (IndexOutOfBoundsException e) {
                 throw new SnomException(String.format(Messages.ERROR_INVALID_TASK_NUM, taskNums[i]));
