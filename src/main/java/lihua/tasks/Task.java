@@ -1,6 +1,7 @@
 package lihua.tasks;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import org.json.simple.JSONObject;
 
@@ -30,7 +31,7 @@ public class Task implements Comparable<Task> {
      */
     @Override
     public int compareTo(Task o) {
-        return name.compareTo(o.name);
+        return name.toLowerCase().compareTo(o.name.toLowerCase());
     }
 
     /**

@@ -92,7 +92,7 @@ public class Tasks {
      */
     public String listTasks(LocalDate date, ListTagCode code) {
         assert tasks != null;
-        List<? extends Task> validTasks = getValidTasks(date); // only sorted by name, by default
+        List<? extends Task> validTasks = getValidTasks(date);
         List<? extends Task> sortedTasks = sortTasksAccordingToCodeIfAppicable(validTasks, code);
 
         String message = constructMessage(sortedTasks);
