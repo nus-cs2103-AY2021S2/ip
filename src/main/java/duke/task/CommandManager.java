@@ -33,7 +33,8 @@ public class CommandManager {
     private final String HELP_RESPONSE = "list: list all tasks\ndone {i}: mark task at position {i} as done\n"
             + "delete {i}: delete task at position {i}\nfind {keyword}: find and list all tasks containing {keyword}\n"
             + "todo {description}: creates a new todo\ndeadline {description} /by {date}: creates a new deadline\n"
-            + "event {description} /on {date} /from {time} /to {time}: creates a new event";
+            + "event {description} /on {date} /from {time} /to {time}: creates a new event\n"
+            + "undo: undo previous action\nredo: redo previously undone action\nbye: exit bot";
 
     /**
      * Constructs a new CommandManager object to process tasks.
