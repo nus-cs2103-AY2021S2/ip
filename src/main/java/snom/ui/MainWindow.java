@@ -38,7 +38,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getSnomDialog(snomio.getWelcomeMsg(), snomImage)
+                DialogBox.getSnomDialog(snomio.getWelcomeMsg(), snomImage, false)
         );
     }
 
@@ -54,11 +54,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         CommandResponse response = snom.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getSnomDialog(response.getResponseMsg(), snomImage)
-        );
-        userInput.clear();
+
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox snomDialog = DialogBox.getSnomDialog(response.getResponseMsg(), snomImage, response.isError());
+
+        dialogContainer.getChildren().addAll(userDialog, snomDialog);
+
         if (response.isExit()) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished(event -> {
@@ -66,5 +67,6 @@ public class MainWindow extends AnchorPane {
             });
             delay.play();
         }
+        userInput.clear();
     }
 }
