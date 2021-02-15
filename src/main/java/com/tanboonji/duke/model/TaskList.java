@@ -56,4 +56,22 @@ public class TaskList implements Serializable {
     public Task deleteTask(int index) {
         return taskList.remove(index);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        int numbering = 1;
+        for (Task task: taskList) {
+            builder.append("\t")
+                    .append(numbering++)
+                    .append(". ")
+                    .append(task)
+                    .append("\n");
+        }
+
+        if (numbering == 1) {
+            builder.append("\tYou currently have 0 tasks.");
+        }
+        return builder.toString();
+    }
 }

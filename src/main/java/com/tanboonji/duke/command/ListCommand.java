@@ -1,7 +1,5 @@
 package com.tanboonji.duke.command;
 
-import com.tanboonji.duke.model.Task;
-
 /**
  * The ListCommand class contains information to execute the "list" command.
  */
@@ -10,6 +8,9 @@ public class ListCommand extends Command {
     /** String input to execute this command */
     public static final String COMMAND = "list";
 
+    /**
+     * Default class constructor.
+     */
     public ListCommand() {
     }
 
@@ -27,18 +28,7 @@ public class ListCommand extends Command {
     public String execute() {
         StringBuilder builder = new StringBuilder();
         builder.append("Here are the tasks in your list:\n");
-        int numbering = 1;
-        for (Task task: taskList.getList()) {
-            builder.append("\t")
-                    .append(numbering++)
-                    .append(".")
-                    .append(task)
-                    .append("\n");
-        }
-
-        if (numbering == 1) {
-            builder.append("\tYou currently have 0 tasks.");
-        }
+        builder.append(taskList);
         return builder.toString().trim();
     }
 }
