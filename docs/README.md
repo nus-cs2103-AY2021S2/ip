@@ -28,7 +28,8 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 	** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
 	
 4. After starting the application, you should see the GUI as shown below:
-![Ui](images/Ui.png)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Ui.PNG)
+
 
 
 ## Features
@@ -120,10 +121,6 @@ Action | Format, Examples
 **Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
 **Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
 **List** | `list`
-**Delete** |`delete INDEX`<br> e.g., `delete 3`
+**Delete** |`delete INDEX`e.g., `delete 3`
 **Find** |  `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find cs2103 quiz`
-**Mark as done** | `help`
-
-
-
-`outcome`
+**Mark as done** | `done INDEX` e.g., 'done 4'
