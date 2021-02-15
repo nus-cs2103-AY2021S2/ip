@@ -1,6 +1,6 @@
 # Getting Started
 
-Lorum ipsum
+Lorem ipsum
 
 ## Next Steps
 

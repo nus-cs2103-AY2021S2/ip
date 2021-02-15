@@ -6,11 +6,11 @@ If you are new to Elaina, it is advised to read [Getting Started](/pages/getting
 
 ## Usage
 
-Lorum ipsum
+Lorem ipsum
 
 ## Features
 
-Lorum ipsum
+Lorem ipsum
 
 ## Appendix A: List of Commands
 

@@ -1,3 +1,3 @@
 # Troubleshooting
 
-Lorum ipsum
+Lorem ipsum

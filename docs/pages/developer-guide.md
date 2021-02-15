@@ -82,4 +82,4 @@ yarn clean
 
 ### DevOps
 
-Lorum ipsum
+Lorem ipsum
