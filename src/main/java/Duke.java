@@ -14,21 +14,35 @@ public class Duke implements IDuke{
 
     }
 
+    /**
+     * Returns a new Duke chatbot object.
+     *
+     * @return New Duke chatbot object.
+     */
     public static Duke getDuke(){
         return new Duke(new ArrayList<>());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void greeting(){
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void bye(){
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public IDuke processInput(String input) {
         try {
@@ -90,6 +104,9 @@ public class Duke implements IDuke{
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public IDuke addTask(ITask task) {
         ArrayList<ITask> newList = new ArrayList<>(this.list);
@@ -97,6 +114,9 @@ public class Duke implements IDuke{
         return new Duke(newList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ITask getTask(int id) {
         if (id - 1 > list.size() || id < 0) {
@@ -121,6 +141,9 @@ public class Duke implements IDuke{
 //
 //        }
 //    }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void display(){
         System.out.println("Here are the tasks in your list:");
@@ -134,12 +157,21 @@ public class Duke implements IDuke{
 
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int numOfTasks() {
         return list.size();
     }
 
 
+    /**
+     *
+     * @param id task index
+     * @return IDuke object with task deleted
+     * @throws DukeIllegalArgumentException
+     */
 
     private IDuke delete(int id) throws DukeIllegalArgumentException {
         if (id - 1 > list.size() || id < 0) {
