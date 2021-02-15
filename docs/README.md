@@ -6,6 +6,7 @@ Duke is a command-line based Task Manager app. To instruct Duke, a user will typ
 
 
 ## Summary
+
 Here is an overview of the commands that a user can use in Duke. 
 
 `list` - Shows the full list of tasks. 
