@@ -12,7 +12,8 @@ import checklst.exception.ChecklstException;
  */
 public class TaskList {
 
-    private List<Task> taskList;
+    private final List<Task> taskList;
+
     /**
      * Creates a new TaskList object.
      */
@@ -28,9 +29,21 @@ public class TaskList {
      * Adds a Task to the TaskList.
      * @param task The Task to be added.
      * @return A String indicating the number of items in the TaskList.
+     * @throws CheckLstException Exception when duplicate unfinished Task.
      */
-    public String add(Task task) {
+    public String add(Task task) throws ChecklstException {
+        List<String> listNames = this.taskList.stream()
+            .filter(x -> !x.isCompleted)
+            .filter(x -> x.getClass().equals(task.getClass()))
+            .map(x -> x.name)
+            .collect(Collectors.toList());
+
+        if (listNames.contains(task.name)) {
+            throw new ChecklstException("You have an uncompleted Task of a similar name and type already!");
+        }
+
         this.taskList.add(task);
+
         return String.format("Added: %s\n\tYou now have %d task(s) in the list!", task, this.taskList.size());
     }
 
