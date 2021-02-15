@@ -13,9 +13,7 @@ and let me help you keep track of your `todo`, `deadline` and `event`. :partying
 * Copy the file to the folder you want to use as the home folder for your Address Book.
 * Double-click the file to start the app. The GUI should appear in a few seconds.
 
-![image](./Ui.png)
-
-<img src="./Ui.png" width="200"/>
+<img src="./Ui.png" width="800"/>
 
 ## Feature List
 
