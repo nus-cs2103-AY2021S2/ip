@@ -91,14 +91,18 @@ public class TaskList {
         Task t;
         switch (tokens[0]) {
         case "D":
+            assert tokens.length == 3;
             t = new Deadline(tokens[1], tokens[2]);
             break;
         case "E":
+            assert tokens.length == 3;
             t = new Event(tokens[1], tokens[2]);
             break;
         case "T":
             //Fall through
         default: //More fault tolerant
+            //TODO: Make this fail explicitly I think.
+            assert tokens.length == 2;
             t = new ToDos(tokens[1]);
             break;
         }
@@ -106,11 +110,13 @@ public class TaskList {
         return formatOrderedPrint(-1);
     }
     private String setDone(int doneIndex) {
+        assert doneIndex >= 0 && doneIndex < store.size();
         Task t = store.get(doneIndex);
         t.setDone();
         return formatOrderedPrint(doneIndex);
     }
     private String delete(int deleteIndex) {
+        assert deleteIndex >= 0 && deleteIndex < store.size();
         String returnValue = formatOrderedPrint(deleteIndex);
         store.remove(deleteIndex);
         return returnValue;
@@ -141,6 +147,7 @@ public class TaskList {
         return builder.toString();
     }
     private String formatOrderedPrint(int i) {
+        assert i >= 0 && i < store.size();
         final int size = store.size();
         while (i < 0) {
             i += size;
