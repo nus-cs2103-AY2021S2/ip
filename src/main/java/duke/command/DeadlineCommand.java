@@ -40,7 +40,7 @@ public class DeadlineCommand extends Command {
         Deadline d = new Deadline(description, by);
         tasks.addTask(d);
         storage.addNewDataToFile("D", "0", d.getDescription(), d.getBy());
-        StringBuilder sb = new StringBuilder(ui.showTaskAdded(d) + "\n" + ui.showNoOfItems(tasks));
+        StringBuilder sb = new StringBuilder(ui.showTaskAdded(d) + ui.showNoOfItems(tasks));
         return sb.toString();
     }
 }

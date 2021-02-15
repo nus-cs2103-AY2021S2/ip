@@ -1,4 +1,2 @@
 T | 0 | borrow book
 T | 0 | hello
-D | 0 | meet john | 2010-10-10 1800
-D | 0 | meet boss | 2020-10-10 1830

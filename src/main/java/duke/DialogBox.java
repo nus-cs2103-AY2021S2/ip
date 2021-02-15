@@ -12,10 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -53,14 +50,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
-        return db;
+        return new DialogBox(text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, null, null)));
         db.flip();
         return db;
     }
