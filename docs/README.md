@@ -23,8 +23,13 @@ you may view or delete them using Duke.
 ### Search for tasks
 You can search for tasks containing your given keyword.
 
+![Find](./find.png)
 
+### Sort tasks
+You can sort your tasks based on the date or the task description,
+in ascending or descending order.
 
+![Sort](./sort.png)
 ## Usage
 
 ### 1. `todo` - Add to do task
