@@ -22,7 +22,7 @@ public class Parser {
             if (text.equals("bye")) {
                 Commands.goodbye(storage);
             } else if (text.equals("list")) {
-                Commands.showList(tasks, ui);
+                Commands.showList(tasks);
             } else if (text.equals("done")) {
                 int taskNumber = Integer.parseInt(commandArr[1]) - 1;
                 tasks.completeTask(taskNumber, ui);

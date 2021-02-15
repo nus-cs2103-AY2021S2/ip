@@ -27,12 +27,8 @@ public class Commands {
      * @param tasks  the TaskList object that stores the current task list
      * @param ui  the user interface to inform the user of the outcome
      */
-    public static void showList(TaskList tasks, Ui ui) {
-        System.out.print(line + "Here are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.print(ind + (i + 1) + ". " + tasks.get(i).toString() + "\n");
-        }
-        ui.showLine();
+    public static void showList(TaskList tasks) {
+        Ui.addTaskListResponse(tasks);
     }
 
 

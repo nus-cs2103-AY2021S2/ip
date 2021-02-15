@@ -76,6 +76,15 @@ public class Ui {
                 "Kobe hopes to see you soon!");
     }
 
+    public static void addTaskListResponse(TaskList tasks){
+        String fullResponse = "";
+        fullResponse += "Here are the tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            fullResponse += ind + (i + 1) + ". " + tasks.get(i).toString() + "\n";
+        }
+        responses.add(fullResponse);
+        System.out.println(line + fullResponse + line);
+    }
 
     /**
      * To display an error message in the context of Kobe
