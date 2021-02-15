@@ -1,4 +1,8 @@
-# Steve User Guide
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tjtanjin/ip/master/docs/images/steve.png">
+  <h1 align="center">Steve User Guide</h1>
+</p>
+
 ## Introduction
 Steve is a simple task tracker done as part of the CS2103T module in NUS. The latest releases for download are available [here](https://github.com/tjtanjin/ip/releases/).
 

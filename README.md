@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/3omWZeG.png" />
+  <img src="https://raw.githubusercontent.com/tjtanjin/ip/master/docs/images/steve.png" />
   <h1 align="center">Steve</h1>
 </p>
 
