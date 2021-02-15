@@ -20,7 +20,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -61,12 +60,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * gets the dialog box for users
+     * @param text the text input by the user
+     * @param img input user image, predetermined by the program
+     * @return a Hbox containing an ImageView and a Label
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
         userDialog.setBackground(new Background(BACKGROUND_FILL_USER));
         return userDialog;
     }
 
+    /**
+     * gets the dialog box for duke
+     * @param text the text output by duke
+     * @param img duke image, predetermined by the program
+     * @return a Hbox containing an ImageView and a Label
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

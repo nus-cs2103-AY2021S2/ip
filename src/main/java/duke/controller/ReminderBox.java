@@ -7,6 +7,9 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
+/**
+ * Represents the reminder box at the top of the duke GUI to remind users of their latest tasks added to the list
+ */
 public class ReminderBox extends HBox {
     @FXML
     private Label reminder;
@@ -23,6 +26,10 @@ public class ReminderBox extends HBox {
         reminder.setText(taskDescription);
     }
 
+    /**
+     * @param taskDescription description of task
+     * @return a Hbox object to store reminders
+     */
     public static ReminderBox getReminder(String taskDescription) {
         return new ReminderBox(taskDescription);
     }
