@@ -27,6 +27,9 @@ public class Parser {
         try {
             if (input.equals("list")) {
                 return taskList.toString();
+            } else if (input.equals("sort")) {
+                taskList.sort();
+                return "List sorted in alphabetical order";
             } else if (input.startsWith("find")) {
                 String searchTerm = input.split(" ")[1];
                 TaskList findResult = taskList.findTasks(searchTerm);
