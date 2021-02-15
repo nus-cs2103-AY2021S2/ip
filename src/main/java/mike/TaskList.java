@@ -59,6 +59,11 @@ public class TaskList {
         return taskToMark;
     }
 
+    /**
+     * Search the taskList for tasks containing the keyword
+     * @param keyword the String used to locate tasks in the taskList
+     * @return a TaskList of Tasks corresponding to the keyword
+     */
     public TaskList find(String keyword) {
         TaskList matchingResults = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {

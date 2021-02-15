@@ -205,7 +205,7 @@ public class Parser {
 
     private static FixedDurationTask parseForFixedDurationTaskInFile(String line) {
         int endIndexOfDescription = line.indexOf("needs: ");
-        String fixedDurationTaskDescription = line.substring(6, endIndexOfDescription - 2);
+        String fixedDurationTaskDescription = line.substring(6, endIndexOfDescription - 1);
         String fixedDurationTaskTime = line.substring(endIndexOfDescription + 7, line.length() - 1);
         return new FixedDurationTask(fixedDurationTaskDescription, fixedDurationTaskTime);
     }
