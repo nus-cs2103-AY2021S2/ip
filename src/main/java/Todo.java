@@ -15,7 +15,7 @@ public class Todo extends Task {
      * @return Todo object
      * @throws DukeException If parsing input fails
      */
-    static public Todo parse(String input) throws DukeException {
+    public static Todo parse(String input) throws DukeException {
         String[] arr = input.split("todo");
         if (arr.length < 2) {
             throw new DukeException("Todo description cannot be empty");

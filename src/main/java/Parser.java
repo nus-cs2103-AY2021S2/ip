@@ -1,14 +1,12 @@
 import javafx.application.Platform;
 
-import java.util.List;
-
 /**
  * Parses commands and executes them.
  */
 public class Parser {
 
-    TaskList taskList;
-    Ui ui;
+    private TaskList taskList;
+    private Ui ui;
 
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
