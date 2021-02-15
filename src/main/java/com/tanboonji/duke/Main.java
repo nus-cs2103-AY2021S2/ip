@@ -7,6 +7,7 @@ import com.tanboonji.duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private static final String APPLICATION_NAME = "Duke";
+    private final Image applicationImage = new Image(this.getClass().getResourceAsStream("/images/LeagueIcon.png"));
     private final Duke duke = new Duke();
 
     /**
@@ -33,6 +35,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle(APPLICATION_NAME);
             stage.setResizable(false);
+            stage.getIcons().add(applicationImage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
