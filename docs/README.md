@@ -21,7 +21,9 @@ To cherry-pick, how about a `find` utility to sieve matching descriptions across
 all tasks? Even supports partial searching and date range based searches.
 
 Once tasks are done (or dusted, even), feel free to swipe them off the list using `delete`,
-or  go the non-destructive route by simply marking as `done`. How cool is that?
+or go the non-destructive route by simply marking as `done`. If you're super productive checking
+items off even before having them on the list, you can mark tasks as `/done` immediately
+as well. How cool is that?
 
 You can leave the app by clicking on the close button, but of course, a `bye` command
 with the exact same functionality is supplied for those lazy to use a mouse.
@@ -30,9 +32,9 @@ with the exact same functionality is supplied for those lazy to use a mouse.
 
 | Command | Example |
 |---|---|
-| `todo TASK_NAME` | `todo eat food` |
-| `event TASK_NAME /at TIME` | `event nom /at 14:30`, `event nom /at 16 Jan`, etc. |
-| `deadline TASK_NAME /by TIME` | `deadline chew this /by 2021-02-16 14:30`, etc. |
+| `todo TASK_NAME [/done]` | `todo eat food`, `todo drink fish /done` |
+| `event TASK_NAME /at TIME [/done]` | `event nom /at 14:30`, `event nom /at 16 Jan`, etc. |
+| `deadline TASK_NAME /by TIME [/done]` | `deadline chew this /by 2021-02-16 14:30`, etc. |
 | `list [/sort]` | `list`, `list /sort` |
 | `find [QUERY] [/from TIME] [/to TIME]` | `find books /from Jan 19`, etc. |
 | `done INDEX [INDEX ...]` | `done 1 7 8 3` |
@@ -123,4 +125,4 @@ Expected outcome:
    including `2021-01-13 13:40` (ISO-like format), `Jan 13` (American-style),
    `13 Jan` (British-style), `13/1/2021` (old school), etc.
    Description of exact parsing rules is in the Java documentation.
-   
+1. Options are prefixed with the `/` symbol. But this program also knows to parse dates containing `/`.
