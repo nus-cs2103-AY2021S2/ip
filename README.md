@@ -1,4 +1,4 @@
-# Moomin User Guide
+# Moomin
 
 By: `eksinyue`      Since: `Feb 2020` 
 
@@ -6,6 +6,8 @@ Hi there! I am your good friend Moomin :zany_face:
 
 I am very good at managing tasks. Tell me what you have on your plate 
 and let me help you keep track of your `todo`, `deadline` and `event`. :partying_face:
+
+Learn about how to interact with me [here](https://eksinyue.github.io/ip/).
 
 ## Quick Start
 * Ensure you have Java `11` or above installed in your computer.
