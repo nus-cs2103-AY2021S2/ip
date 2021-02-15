@@ -26,7 +26,7 @@ public class Snom {
         snomio = new Snomio();
         storage = new StorageManager(filePath);
         try {
-            taskList = new TaskList(storage.importTask());
+            taskList = storage.importTask();
         } catch (SnomException e) {
             e.printStackTrace();
         }

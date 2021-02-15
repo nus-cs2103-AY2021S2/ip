@@ -20,8 +20,8 @@ public class SnomTest {
     @Test
     public void storageTest() throws SnomException {
         StorageManager storage = new StorageManager("./src/main/data/snom.txt");
-        TaskList taskList = new TaskList(storage.importTask());
+        TaskList taskList = storage.importTask();
 
-        assertEquals(storage.readFile().size(), taskList.getSize());
+        assertEquals(storage.readFile().size(), taskList.size());
     }
 }

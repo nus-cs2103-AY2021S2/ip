@@ -1,5 +1,6 @@
 package snom.logic.commands;
 
+import snom.common.core.Messages;
 import snom.common.exceptions.SnomException;
 import snom.model.task.Deadline;
 import snom.model.task.Event;
@@ -38,11 +39,11 @@ public class AddCommand extends Command {
             String[] dlArr = splitContentWithDate("/at");
             task = new Event(dlArr[0], dlArr[1]);
         } else {
-            throw new SnomException("Error: Something magical happened while snom.model.Snom trying to create a task!");
+            throw new SnomException(Messages.ERROR_INVALID_ADD_COMMAND);
         }
-        taskList.addTask(task);
+        taskList.add(task);
         storage.saveFile(taskList);
-        return new CommandResponse(snomio.getTaskAdded(task, taskList.getSize()), false);
+        return new CommandResponse(snomio.getTaskAdded(task, taskList.size()), false);
     }
 
     /**
@@ -58,11 +59,11 @@ public class AddCommand extends Command {
         String[] splitContent = this.content.split(delim);
 
         if (splitContent.length < 2) {
-            throw new SnomException("Please enter at least one date!");
+            throw new SnomException(Messages.ERROR_INVALID_MIN_DATE_TIME);
         }
 
         if (splitContent.length > 2) {
-            throw new SnomException("Oops! You have entered more than ONE date, please try again!");
+            throw new SnomException(Messages.ERROR_INVALID_MAX_DATE_TIME);
         }
 
         return splitContent;

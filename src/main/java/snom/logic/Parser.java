@@ -50,7 +50,7 @@ public class Parser {
         case HELP:
             return new HelpCommand(CommandEnum.HELP, commandContent);
         default:
-            throw new SnomException(String.format(Messages.MESSAGE_INVALID_COMMAND, commandStr));
+            throw new SnomException(String.format(Messages.ERROR_INVALID_COMMAND, commandStr));
         }
     }
 
@@ -88,7 +88,7 @@ public class Parser {
      */
     public static int[] parseTaskNumbers(String taskNumString) throws SnomException {
         if (taskNumString.isBlank()) {
-            throw new SnomException(Messages.MESSAGE_INVALID_MIN_TASK_NUM);
+            throw new SnomException(Messages.ERROR_INVALID_MIN_TASK_NUM);
         }
 
         try {
@@ -97,7 +97,7 @@ public class Parser {
                     .toArray();
             return taskNumbers;
         } catch (NumberFormatException e) {
-            throw new SnomException(Messages.MESSAGE_INVALID_MIN_TASK_NUM_TYPE);
+            throw new SnomException(Messages.ERROR_INVALID_MIN_TASK_NUM_TYPE);
         }
     }
 }

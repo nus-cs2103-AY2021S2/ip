@@ -5,36 +5,7 @@ import java.util.ArrayList;
 import snom.common.core.Messages;
 import snom.common.exceptions.SnomException;
 
-public class TaskList {
-    private ArrayList<Task> list;
-
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
-    }
-
-    public ArrayList<Task> getList() {
-        return this.list;
-    }
-
-    /**
-     * Returns the size of the task list
-     *
-     * @return size of task list
-     */
-    public int getSize() {
-        assert list.size() >= 0 : "Task list should never be negative";
-        return list.size();
-    }
-
-    /**
-     * Returns a single task [todo, deadline, event] with the given index
-     *
-     * @param i index
-     * @return  task
-     */
-    public Task getTask(int i) {
-        return list.get(i);
-    }
+public class TaskList extends ArrayList<Task> {
 
     /**
      * Returns a new task list with task description containing the given keyword
@@ -42,27 +13,15 @@ public class TaskList {
      * @param keyword keyword to be searched
      * @return        new task list
      */
-    public ArrayList<Task> findTask(String keyword) {
-        ArrayList<Task> newList = new ArrayList<>();
-        for (Task task: list) {
+    public TaskList findTask(String keyword) {
+        TaskList newList = new TaskList();
+        for (Task task: this) {
             if (task.getDescription().contains(keyword)) {
                 newList.add(task);
             }
         }
         return newList;
     }
-
-    /**
-     * Adds the given task to task list, can be a todo, deadline or event task.
-     * Then prints out respective messages.
-     *
-     * @param task either snom.tasks.Todo, snom.tasks.Deadline, snom.tasks.Event
-     */
-    public void addTask(Task task) {
-        list.add(task);
-        assert list.size() > 0 : "Task list should not be empty after adding a task";
-    }
-
 
     /**
      * Set the task status by the given task numbers as finished.
@@ -77,12 +36,12 @@ public class TaskList {
         for (int i = 0; i < taskNums.length; i++) {
             int taskNo = taskNums[i] - 1;
             try {
-                Task task = list.get(taskNo);
+                Task task = this.get(taskNo);
                 task.setStatus(true);
                 assert task.getStatus() == true : "Task status should be set to true";
                 finishedTasks[i] = task;
             } catch (IndexOutOfBoundsException e) {
-                throw new SnomException(String.format(Messages.MESSAGE_INVALID_TASK_NUM, taskNums[i]));
+                throw new SnomException(String.format(Messages.ERROR_INVALID_TASK_NUM, taskNums[i]));
             }
         }
         return finishedTasks;
@@ -101,11 +60,11 @@ public class TaskList {
         for (int i = 0; i < taskNums.length; i++) {
             int taskNo = taskNums[i] - 1 - i;
             try {
-                Task task = list.get(taskNo);
-                list.remove(task);
+                Task task = this.get(taskNo);
+                this.remove(task);
                 deletedTasks[i] = task;
             } catch (IndexOutOfBoundsException e) {
-                throw new SnomException(String.format(Messages.MESSAGE_INVALID_TASK_NUM, taskNums[i]));
+                throw new SnomException(String.format(Messages.ERROR_INVALID_TASK_NUM, taskNums[i]));
             }
         }
         return deletedTasks;

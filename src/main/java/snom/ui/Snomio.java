@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 
 import snom.common.core.Messages;
 import snom.common.exceptions.SnomException;
+import snom.common.util.SnomioUtil;
 import snom.model.task.Task;
 import snom.model.task.TaskList;
 
@@ -48,13 +49,13 @@ public class Snomio extends PrintWriter {
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
     public String getTaskList(TaskList taskList) throws SnomException {
-        if (taskList.getSize() <= 0) {
+        if (taskList.isEmpty()) {
             throw new SnomException(Messages.MESSAGE_EMPTY_TASK_LIST);
         }
 
         String message = Messages.MESSAGE_TASK_LIST;
-        for (int i = 0; i < taskList.getSize(); i++) {
-            message += (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            message += (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
 
         return message;
@@ -67,13 +68,13 @@ public class Snomio extends PrintWriter {
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
     public String getMatchingTaskList(TaskList taskList) throws SnomException {
-        if (taskList.getSize() <= 0) {
+        if (taskList.isEmpty()) {
             throw new SnomException(Messages.MESSAGE_NO_MATCHING_TASK);
         }
 
         String message = Messages.MESSAGE_MATCHING_TASK_LIST;
-        for (int i = 0; i < taskList.getSize(); i++) {
-            message += (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            message += (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
 
         return message;
@@ -137,7 +138,7 @@ public class Snomio extends PrintWriter {
         String input = null;
         String token;
 
-        while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+        while (SnomioUtil.hasNoTokens(tokenizer)) {
             try {
                 input = reader.readLine();
             } catch (IOException e) {
@@ -158,7 +159,7 @@ public class Snomio extends PrintWriter {
     public String readRemainingLine() {
         String line = "";
 
-        if (tokenizer == null || !tokenizer.hasMoreTokens()) {
+        if (SnomioUtil.hasNoTokens(tokenizer)) {
             try {
                 line = reader.readLine();
             } catch (IOException e) {
@@ -176,20 +177,26 @@ public class Snomio extends PrintWriter {
      *
      * @return  single integer input
      */
-//    public int readInt() {
-//        try {
-//            return Integer.parseInt(readWord());
-//        } catch (NumberFormatException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public int readInt() throws SnomException {
+        String nextWord = readWord();
+        if (SnomioUtil.isValidInteger(nextWord)) {
+            return Integer.parseInt(nextWord);
+        } else {
+            throw new SnomException(Messages.ERROR_INVALID_INT_INPUT);
+        }
+    }
 
     /**
      * Returns first double input.
      *
      * @return  single double input
      */
-    public double readDouble() {
-        return Double.parseDouble(readWord());
+    public double readDouble() throws SnomException {
+        String nextWord = readWord();
+        if (SnomioUtil.isValidDouble(nextWord)) {
+            return Double.parseDouble(nextWord);
+        } else {
+            throw new SnomException(Messages.ERROR_INVALID_INT_INPUT);
+        }
     }
 }
