@@ -2,7 +2,7 @@
 
 A very basic todo manager that's a wee bit utilitarian, without pretending you're talking to a bot.
 
-![](Ui.png)
+![](images/sampleRun.gif)
 
 This task manager allows you to add three types of tasks:
 

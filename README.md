@@ -25,4 +25,4 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ## GUI
 
-![](docs/images/SampleRun.gif)
+![](docs/images/sampleRun.gif)
