@@ -1,5 +1,5 @@
-todo | X | yuck | asdfasd fa f
-deadline |   | help | something | 10/10/2021 0000
-event | X | nope ok | new thingo | park
-todo | X |   | okokokok
-event | X |   | ererqe | here
+todo |   |   | buy eggs
+deadline | X |   | submit assignment | 21/02/2021 0600
+event |   |   | dinner party | Botanic Gardens
+todo | X |   | buy coffee beans
+deadline |   |   | reply karen's email | 21/02/2021 0000
