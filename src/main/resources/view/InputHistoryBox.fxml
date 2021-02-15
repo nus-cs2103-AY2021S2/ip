@@ -5,9 +5,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" prefWidth="286.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-    <Label fx:id="dialog" text="Label" wrapText="true" />
+<?import javafx.scene.layout.VBox?>
+<fx:root prefWidth="286.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <Label fx:id="dialog" wrapText="true" >
+    </Label>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets top="7.0" bottom="7.0" left="7.0" right="7.0" />
     </padding>
 </fx:root>

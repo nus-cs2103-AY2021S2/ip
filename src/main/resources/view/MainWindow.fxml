@@ -19,11 +19,11 @@
 
     <Label layoutX="10.0" layoutY="377.0" text="HISTORY" />
     <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutY="400.0" prefHeight="200.0" prefWidth="300.0" vvalue="1.0">
-        <VBox fx:id="dialogContainer" layoutY="400.0" prefHeight="200.0" prefWidth="286.0" />
+        <VBox fx:id="dialogContainer" />
     </ScrollPane>
 
     <Label layoutX="310.0" layoutY="47.0" text="TASKS" />
     <AnchorPane layoutX="300.0" layoutY="70.0" prefHeight="531.0" prefWidth="300.0">
-        <TextArea fx:id="tasklistContainer" prefHeight="531.0" prefWidth="300.0" editable="false" focusTraversable="false" onMouseClicked="#focusOnTextField" />
+        <TextArea fx:id="tasklistContainer" prefHeight="531.0" prefWidth="300.0" editable="false" focusTraversable="false" />
     </AnchorPane>
 </AnchorPane>

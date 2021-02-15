@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.setBorder(THIN_BORDER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
 
     public void setDuke(Duke d) {
@@ -78,14 +78,14 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setPadding(new Insets(5, 10, 5, 10));
-        //textToAdd.setBorder(THIN_BORDER);
-        textToAdd.setFont(FONT);
-        textToAdd.setWrapText(true);
-        textToAdd.setOnMouseClicked(event -> { userInput.setText(text); });
-        return textToAdd;
+    private InputHistoryBox getDialogLabel(String text) {
+        InputHistoryBox textBox = InputHistoryBox.getBox(text);
+        textBox.setOnMouseClicked(event -> {
+            focusOnTextField();
+            userInput.setText(text);
+            userInput.positionCaret(text.length());
+        });
+        return textBox;
     }
 
     @FXML
