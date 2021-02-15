@@ -61,13 +61,13 @@ public class DukeCommandFind extends DukeCommand {
         /* Prepare response */
         List<String> lines = new ArrayList<>();
         if (validTaskIndices.isEmpty()) {
-            lines.add("No tasks matching search term / date range");
+            lines.add("No tasks matching query / date range");
             addToResponseSearchParameters(lines);
             return Response.createResponseOk(lines.toArray(new String[0]));
         }
 
         /* Prepare non-empty response */
-        lines.add("Found " + validTaskIndices.size() + " task(s) matching search term / date range");
+        lines.add("Found " + validTaskIndices.size() + " task(s) matching query / date range");
         addToResponseSearchParameters(lines);
         addToResponseFoundTasks(lines, validTaskIndices, tasks);
         return Response.createResponseOk(lines.toArray(new String[0]));
