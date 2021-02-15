@@ -9,6 +9,7 @@ import duke.dukeException.DukeException;
 public class Event extends Task {
     /** Event time */
     protected LocalDate at;
+    public final String category = "Event";
 
     /**
      * Class constructor specifying event name and duration.
@@ -50,7 +51,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.getMonth()
+        return "      [E]" + super.toString() + " (at: " + at.getMonth()
                 + " " + at.getDayOfMonth() + " " + at.getYear() + ")";
     }
 }

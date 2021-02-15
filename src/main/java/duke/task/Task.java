@@ -6,6 +6,7 @@ public class Task {
     protected boolean isDone;
     /** Name of the task */
     protected String name;
+    public String category;
 
     /**
      * Class constructor.
@@ -17,6 +18,10 @@ public class Task {
 
     public String getName() {
         return name;
+    }
+
+    public boolean getStatus() {
+        return isDone;
     }
 
     /**

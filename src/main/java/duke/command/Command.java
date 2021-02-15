@@ -44,19 +44,19 @@ public class Command {
         ArrayList<Task> tList = tasks.getTasks();
         String output = "";
         if (commandName.equals("list")) {
-            output = executeList (tList);
+            output = executeList(tList);
         } else if (commandName.split(" ")[0].equals("done")) {
-            output = executeDone (tList, tasks);
+            output = executeDone(tList, tasks);
         } else if (commandName.split(" ")[0].equals("delete")) {
-            output = executeDelete (tList, tasks);
+            output = executeDelete(tList, tasks);
         } else if (commandName.split(" ")[0].equals("todo")) {
-            output = executeToDo (tList, tasks);
+            output = executeToDo(tList, tasks);
         } else if (commandName.split(" ")[0].equals("deadline")) {
-            output = executeDeadline (tList, tasks);
+            output = executeDeadline(tList, tasks);
         } else if (commandName.split(" ")[0].equals("event")) {
-            output = executeEvent (tList, tasks);
+            output = executeEvent(tList, tasks);
         } else if (commandName.split(" ")[0].equals("find")) {
-            output  = executeFind (tasks);
+            output  = executeFind(tasks);
         } else if (commandName.equals("bye")) {
             output = "     Bye. Hope to see you again soon!\n";
         } else if(commandName.equals("")) {
@@ -165,25 +165,40 @@ public class Command {
         return output;
     }
 
+    public Task findExact (ArrayList<Task> tList, Task task) {
+        for (Task t : tList) {
+            if (t.getName().equals(task.getName()) && t.getStatus() == task.getStatus()) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+
     public String executeToDo (ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
         if (commandName.length() < todoLength) {
             ToDo todo = new ToDo(commandName);
             output = todo.addTask(0);
-        } else {
-            int end = commandName.indexOf(" ");
-            String name = commandName.substring(end + 1);
-            try {
-                tList.add(new ToDo(name));
-                output = tList.get(tList.size() - 1).addTask(tList.size());
-                BufferedWriter writer = new BufferedWriter(
-                        new FileWriter(DATA_PATH, true));
-                writer.write("T | 0 | " + name + "\n");
-                writer.close();
-                tasks.setTasks(tList);
-            } catch (DukeException | IOException e) {
-                output += e.getMessage();
+            return output;
+        }
+        int end = commandName.indexOf(" ");
+        String name = commandName.substring(end + 1);
+        try {
+            Task newTask = new ToDo(name);
+            tList.add(newTask);
+            if (findExact(tList, newTask) != null) {
+                output = "      Sorry:( This Task has already existed. \n";
+                return output + findExact(tList, newTask).toString();
             }
+            output = tList.get(tList.size() - 1).addTask(tList.size());
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(DATA_PATH, true));
+            writer.write("T | 0 | " + name + "\n");
+            writer.close();
+            tasks.setTasks(tList);
+        } catch (DukeException | IOException e) {
+            output += e.getMessage();
         }
         return output;
     }
@@ -202,7 +217,12 @@ public class Command {
                 int year = Integer.valueOf(subString2.substring(0, 4));
                 int mon = Integer.valueOf(subString2.substring(5, 7));
                 int day = Integer.valueOf(subString2.substring(8));
-                tList.add(new Deadline(subString1, LocalDate.of(year, mon, day)));
+                Task newTask = new Deadline(subString1, LocalDate.of(year, mon, day));
+                tList.add(newTask);
+                if (findExact(tList, newTask) != null) {
+                    output = "      Sorry:( This Task has already existed. \n";
+                    return output + findExact(tList, newTask).toString();
+                }
                 output = tList.get(tList.size() - 1).addTask(tList.size());
                 BufferedWriter writer = new BufferedWriter(
                         new FileWriter(DATA_PATH, true));
@@ -233,7 +253,12 @@ public class Command {
                 int year = Integer.valueOf(subString2.substring(0, 4));
                 int mon = Integer.valueOf(subString2.substring(5, 7));
                 int day = Integer.valueOf(subString2.substring(8));
-                tList.add(new Event(subString1, LocalDate.of(year, mon, day)));
+                Task newTask = new Event(subString1, LocalDate.of(year, mon, day));
+                tList.add(newTask);
+                if (findExact(tList, newTask) != null) {
+                    output = "      Sorry:( This Task has already existed. \n";
+                    return output + findExact(tList, newTask).toString();
+                }
                 output = tList.get(tList.size() - 1).addTask(tList.size());
                 BufferedWriter writer = new BufferedWriter(
                         new FileWriter(DATA_PATH, true));
