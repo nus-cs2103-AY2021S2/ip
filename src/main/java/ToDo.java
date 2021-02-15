@@ -5,14 +5,13 @@ public class ToDo extends Task {
     }
 
     /**
-     * converts the object to a string
+     * Converts the object to a string.
      *
-     * @return String containing details about the Task
+     * @return String containing details about the Task.
      */
     @Override
     public String toString() {
         String result = "[T]" + super.toString();
-        System.out.println(priority);
         return priority != null
                 ? result + " " + "[" + priority.toString() + "]"
                 : result;

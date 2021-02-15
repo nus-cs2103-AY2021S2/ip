@@ -14,12 +14,12 @@ public class Storage {
 
 
     /**
-     * stores the tasks in the TaskList object into a file.
-     * tasks will be stored in a specific string format,
+     * Stores the tasks in the TaskList object into a file.
+     * Tasks will be stored in a specific string format,
      * each task occupying one line.
      *
-     * @param list TaskList containing all the tasks of the user
-     * @throws IOException if filepath is wrong
+     * @param list TaskList containing all the tasks of the user.
+     * @throws IOException If a file cannot be created with the given path.
      */
     void store(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -27,7 +27,8 @@ public class Storage {
         for (Task task : tasks) {
             String s = "";
             if (task.type.equals("T")) {
-                s = task.isDone ? "T" + " , " + "1" + " , " + task.description
+                s = task.isDone
+                        ? "T" + " , " + "1" + " , " + task.description
                         : "T" + " , " + "0" + " , " + task.description;
             } else if (task.type.equals("E")) {
                 Event myTask = (Event) task;
@@ -37,8 +38,9 @@ public class Storage {
 
             } else if (task.type.equals("D")) {
                 Deadline myTask = (Deadline) task;
-                s = task.isDone ? "D" + " , " + "1" + " , " + task.description + " , " + myTask.by
-                        : "D" + " , " + "0" + " , " + task.description + " , " + myTask.by;
+                s = task.isDone
+                        ? "D" + " , " + "1" + " , " + task.description + " , " + myTask.by + " , " + myTask.time
+                        : "D" + " , " + "0" + " , " + task.description + " , " + myTask.by + " , " + myTask.time;
 
             }
             if (task.priority != null) {
@@ -50,11 +52,11 @@ public class Storage {
     }
 
     /**
-     * loads the tasks stored in the file into a ArrayList of Tasks.
-     * if file is empty, empty list is returned
+     * Loads the tasks stored in the file into a ArrayList of Tasks.
+     * If file is empty, empty list is returned.
      *
-     * @return ArrayList of Tasks given by the user previously
-     * @throws IOException if the file is misread or file cannot be found
+     * @return ArrayList of Tasks given by the user previously.
+     * @throws IOException If the file is misread or file cannot be found.
      */
     ArrayList<Task> load() throws IOException {
         ArrayList<Task> list = new ArrayList<>();
@@ -71,9 +73,12 @@ public class Storage {
             } else if (taskInfo[0].equals("E")) {
                 Date date = new Date(taskInfo[3]);
                 taskObject = new Event(taskInfo[2], date, taskInfo[4], "E");
-            } else if (taskInfo[0].equals("D")) {
+            } else if (taskInfo[0].equals("D") && taskInfo[4].equals("null")) {
                 Date date = new Date(taskInfo[3]);
                 taskObject = new Deadline(taskInfo[2], date, "D");
+            } else if (taskInfo[0].equals("D") && !taskInfo[4].equals("null")) {
+                Date date = new Date(taskInfo[3]);
+                taskObject = new Deadline(taskInfo[2], date, taskInfo[4], "D");
             }
             if (taskInfo[1].equals("1")) {
                 taskObject.completed();

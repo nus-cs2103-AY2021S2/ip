@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("text-ui-test/data.txt");
+    private Duke duke = new Duke("data.txt");
 
     @Override
     public void start(Stage stage) {
@@ -21,6 +21,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Irene");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

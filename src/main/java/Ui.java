@@ -15,10 +15,6 @@ public class Ui {
         return "Hey there! This is Einstein" + "\n" + "How can I help?";
     }
 
-    void showLine() {
-        System.out.println("---------------------------------------");
-    }
-
     String showError(String message) {
         return message;
     }
@@ -37,9 +33,10 @@ public class Ui {
 
 
     /**
-     * Prints lines to show the user what task has been added.
+     * Returns a string to notify the user a task has been added.
      *
-     * @param tasks TaskList of all the tasks
+     * @param tasks TaskList containing all the user's tasks.
+     * @return A string stating that the given task has been added to the list.
      */
     String addedTask(TaskList tasks) {
         int numberOfTasks = tasks.getListLength();
@@ -47,71 +44,72 @@ public class Ui {
         String result = "Got it. I've added this task:" + "\n" + "    " + task.toString() + "\n"
                 + "Now you have " + (numberOfTasks) + " tasks in the list.";
         return result;
-        //System.out.println("Got it. I've added this task:");
-        //System.out.println("    " + task);
-        //System.out.println("Now you have " + (numberOfTasks) + " tasks in the list.");
     }
 
 
     /**
-     * prints all the task in the list
+     * Prints all the task in the list.
      *
      * @param tasks TaskList containing all the user's tasks
      */
     String printList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
         String result = "Here are the tasks in your list:";
-        //System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            result = result + "\n" + (i + 1) + task.toString();
-            //System.out.println((i + 1) + "." + list.get(i));
+            result = result + "\n" + (i + 1) + ") " + task.toString();
         }
         return result;
     }
 
 
     /**
-     * notifies the user that a specific task has been removed from the TaskList.
+     * Returns a string to notify the user a task has been deleted.
      *
-     * @param task Task that has been removed
-     * @param listLength number of tasks left in the list
+     * @param task Task that has been removed.
+     * @param listLength Number of tasks left in the list.
      */
     String deletedTask(Task task, int listLength) {
         String result = "Noted. I've removed this task:" + "\n" + task.toString() + "\n" + "Now you have "
                 + listLength + " tasks in the list.";
         return result;
-        //System.out.println("Noted. I've removed this task:");
-        //System.out.println(task);
-        //System.out.println("Now you have " + listLength + " tasks in the list.");
     }
 
 
     /**
-     * notifies the user that a specific task has been completed.
+     * Returns a string to notify the user that a specific task has been completed.
      *
-     * @param task Task that has just been completed
+     * @param task Task that has just been completed.
      */
     String didTask(Task task) {
         String result = "Nice! I've marked this task as done:" + "\n" + "    " + task.toString();
         return result;
-        //System.out.println("Nice! I've marked this task as done:");
-        //System.out.println("    " + task);
     }
 
+    /**
+     * Prints a filtered list based a phrase given by the user.
+     *
+     * @param tasks TaskList containing all the user's tasks.
+     * @return A string containing the filtered list.
+     */
     String printFilteredList(TaskList tasks) {
         ArrayList<Task> list = tasks.getList();
         int listLength = tasks.getListLength();
         String result = "Here are the matching tasks in your list:";
-        //System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < listLength; i++) {
             Task task = list.get(i);
-            result = result + "\n" + (i + 1) + task.toString();
-            //System.out.println((i + 1) + "." + list.get(i));
+            result = result + "\n" + (i + 1) + ") " + task.toString();
         }
         return result;
     }
 
+    /**
+     * Returns a string to notify the user that
+     * a priority has been added to a certain task.
+     *
+     * @param task Task to which the priority has been added to.
+     * @return String to inform the user the priority has been added.
+     */
     public String addedPriority(Task task) {
         String result = "Nice! I've marked this task's priority as " + task.priority
                 + "\n" + "    " + task.toString();

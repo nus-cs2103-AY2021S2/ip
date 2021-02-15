@@ -14,16 +14,17 @@ public class DoneCommand extends Command {
 
 
     /**
-     * changes the state of a task to completed.
+     * Changes the state of a task to completed.
      *
-     * @param tasks a TaskList object that contains the tasks of the user
-     * @param ui helps to print statement to let user know what has been done
-     * @param storage contains the filepath of the file to store the given tasks into
-     * @throws DukeException if the information given is invalid
+     * @param tasks A TaskList object that contains the tasks of the user.
+     * @param ui Helps to print statement to let user know what has been done.
+     * @param storage Contains the filepath of the file to store the given tasks into.
+     * @return String containing the response to send back to the user.
+     * @throws DukeException If the information given is invalid.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        Task task = tasks.done(info);
+        Task task = tasks.doneTask(info);
         storage.store(tasks);
         return ui.didTask(task);
     }

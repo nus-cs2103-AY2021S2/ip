@@ -12,12 +12,13 @@ public class PrintCommand extends Command {
 
 
     /**
-     * prints the tasks stored in the TaskList object.
+     * Prints the tasks stored in the TaskList object.
      *
-     * @param tasks a TaskList object that contains the tasks of the user
-     * @param ui helps to print statement to let user know what has been done
-     * @param storage contains the filepath to the file to store the given tasks into
-     * @throws DukeException if the provided inormation is invalid
+     * @param tasks A TaskList object that contains the tasks of the user.
+     * @param ui Helps to print statement to let user know what has been done.
+     * @param storage Contains the filepath to the file to store the given tasks into.
+     * @return String containing the response to send back to the user.
+     * @throws DukeException If the provided information is invalid.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

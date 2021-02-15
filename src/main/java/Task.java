@@ -4,6 +4,12 @@ public class Task {
     protected String type;
     protected Priority priority;
 
+    /**
+     * Creates a Task object.
+     *
+     * @param description String containing description of the task.
+     * @param type type of task it is.
+     */
     public Task(String description, String type) {
         this.description = description;
         this.isDone = false;
@@ -15,9 +21,9 @@ public class Task {
     }
 
     /**
-     * converts the task object into a string
+     * Converts the task object into a string.
      *
-     * @return string containing information about the task object
+     * @return String containing information about the task object.
      */
     @Override
     public String toString() {

@@ -11,7 +11,7 @@ public class Date {
     /**
      * Returns the date object in a MMM dd yyyy format.
      *
-     * @return a string representing the date in the object
+     * @return A string representing the date in the object.
      */
     public String toFormattedString() {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

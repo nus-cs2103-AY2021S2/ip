@@ -10,8 +10,17 @@ public class FindCommand extends Command {
         return false;
     }
 
+    /**
+     * Finds the tasks in the list that matches the keyword provided.
+     *
+     * @param tasks TaskList object that contains the tasks of the user.
+     * @param ui Helps to print statement to let user know what has been done.
+     * @param storage Contains filepath of the file to store the given tasks into.
+     * @return String containing the response to send back to the user.
+     * @throws DukeException If no such file exist in the directory the filepath directs to.
+     */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder keyword = new StringBuilder();
         for (int i = 1; i < info.length; i++) {
             keyword.append(info[i]);
