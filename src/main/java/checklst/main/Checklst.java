@@ -148,7 +148,7 @@ public class Checklst extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return parser.parse(input.split(" ", 2), this.taskList);
+        return this.parser.parse(input.split(" ", 2), this.taskList);
     }
 
     private void addDukeMessage(String input) {
