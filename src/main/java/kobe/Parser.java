@@ -50,6 +50,9 @@ public class Parser {
                         throw new CustomExceptions.IncompleteDecriptionException(errMessage);
                     } else {
                         //For gibberish commands
+                        assert !firstWord.equals("todo") : "Command word should be gibberish and not be todo";
+                        assert !firstWord.equals("deadline") : "Command word should be gibberish and not be deadline";
+                        assert !firstWord.equals("event") : "Command word should be gibberish and not be event";
                         Ui.addIncorrectDescriptionResponse();
                         String errMessage = "Incorrect Command Format. See help for more information";
                         throw new CustomExceptions.IncorrectDecriptionException(errMessage);
