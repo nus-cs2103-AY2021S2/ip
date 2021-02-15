@@ -17,6 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane anchorPane = fxmlLoader.load();
