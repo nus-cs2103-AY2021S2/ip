@@ -18,9 +18,9 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public Task(String description, String dateTime, boolean isDone) {
+    public Task(String description, String time, boolean isDone) {
         this.description = description;
-        this.dateTime = convertToTime(dateTime);
+        this.dateTime = formatToDateTime(time);
         this.isDone = isDone;
     }
 
@@ -36,15 +36,11 @@ public class Task {
         this.isDone = true;
     }
 
-    public LocalDateTime getDateTime() {
-        return this.dateTime;
-    }
-
     public boolean isSameDay(LocalDate targetDate) {
             return this.dateTime.toLocalDate().isEqual(targetDate);
     }
 
-    private LocalDateTime convertToTime(String time) {
+    private LocalDateTime formatToDateTime(String time) {
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
         LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
         return dateTime;

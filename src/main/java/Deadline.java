@@ -1,17 +1,15 @@
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Deadline extends Task {
-
-//    private LocalDateTime by;
     private String type = "D";
 
-    public Deadline(String description, String time) {
-        this(description, time, false);
+    public Deadline(String description, String by) {
+        this(description, by, false);
     }
 
     public Deadline(String description, String by, boolean isDone) {
         super(description, by, isDone);
-//        setTime(by);
     }
 
     /**
@@ -19,21 +17,14 @@ public class Deadline extends Task {
      *
      * @return Due time in String.
      */
-    public String getTime() {
+    private String getTime() {
+        // convert dateTime from "yyyy-m-d hh:mm" to "MMM d yyyy hh:mm a"
         String time = this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
         return time;
     }
-//
-//    private LocalDateTime setTime(String time) {
-//        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
-//        LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
-//        this.by = dateTime;
-//        return dateTime;
-//    }
 
     @Override
     public String toString() {
-        String time = this.getTime();
-        return type + separator + super.toString() + separator + time;
+        return type + separator + super.toString() + separator + this.getTime();
     }
 }
