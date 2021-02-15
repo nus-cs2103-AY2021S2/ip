@@ -62,8 +62,8 @@ public enum Command {
                 TaskList findTask = new TaskList();
                 ArrayList<Task> currTaskList = taskList.getTaskList();
                 for (Task task : currTaskList) {
-                    String taskName = task.getName();
-                    if (taskName.contains(name)) {
+                    String taskName = task.getName().toLowerCase();
+                    if (taskName.contains(name.toLowerCase())) {
                         findTask.addTask(task);
                     }
                 }
