@@ -68,8 +68,8 @@ public class Ui {
         System.out.println(String.format("Searching for %s...", searchString));
         System.out.println("Here you go!" );
         out = out + "Here's what i found for " + searchString + ": \n";
+        tasks.forEach(x -> System.out.println(x));
         for (Task t : tasks) {
-            System.out.println(t);
             out = out + t.toString() + "\n";
         }
         return out;
