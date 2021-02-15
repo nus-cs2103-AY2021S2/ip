@@ -4,7 +4,8 @@ Welcome to Duke's user guide. This is a comprehensive user guide to teach you ho
 
 Duke is a command-line based Task Manager app. To instruct Duke, a user will type a series of commands.
 
-##Summary
+
+## Summary
 Here is an overview of the commands that a user can use in Duke. 
 
 `list` - Shows the full list of tasks. 
@@ -65,7 +66,7 @@ Example of usage:
 
 `delete 1` 
 
-Deletes the first task in the list. `delete` expects `1 digit parameter` after the command to tell it 
+Deletes the first task in the list. `delete` expects `1 number parameter` after the command to tell it 
 which task to delete. 
 
 Expected outcome:
@@ -86,7 +87,7 @@ Example of usage:
 
 `done 1` 
 
-Marks the 1st task as done. `done` expects `1 digit parameter` after the command to tell it which 
+Marks the first task as done. `done` expects `1 number parameter` after the command to tell it which 
 task to mark as done. 
 
 Expected outcome:
@@ -150,7 +151,7 @@ Example of usage:
 
 `deadline Return book /by 2020-01-21 ` 
 
-Creates a deadline called `Return book` that will be happening on 2020-01-21. 
+Creates a deadline called `Return book` that will be happening on `2020-01-21`. 
 `deadline `expects 2 parameters - a `deadline description` and an `deadline date` separated by a `/by` keyword.
 
 Note: `deadline date` has to be in the `yyyy-mm-dd` format or else an exception will be thrown. 
@@ -187,7 +188,7 @@ Here are the matching tasks in your list.
 
 ### Feature 8: Sort
 
-Sorts all the task by lexicographical ordering. 
+Sorts all the task in the task list by lexicographical ordering. 
 
 ### Usage
 
@@ -209,7 +210,7 @@ Sorted! Here is your new list:
 
 ### Feature 9: Bye
 
-Says goodbye to Duke and closes the program. 
+Says goodbye to Duke and tells user to close the program. 
 
 ### Usage
 
@@ -225,8 +226,3 @@ Expected outcome:
 Bye. Hope to see you again soon! 
 To exit, click[X] at the top left. 
 ```
-
-
-
-
-

@@ -1,5 +1,3 @@
-E / false / Attend Wedding / Sunday
-D / false / Return book / 2020-01-01
 T / true / walk dog
-T / false / walk dog
-T / false / walk fish
+E / false / Attend wedding / Sunday
+D / false / return book / 2021-01-22
