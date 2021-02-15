@@ -1,7 +1,9 @@
 package duke.command;
 
+import duke.CallbackFunction;
 import duke.DukeException;
 import duke.TaskList;
+import javafx.util.Pair;
 
 public class DoneCommand extends Command {
 
@@ -22,10 +24,10 @@ public class DoneCommand extends Command {
      * @throws DukeException if failed to mark task as done.
      */
     @Override
-    public String execute(TaskList list) throws DukeException {
+    public Pair<String, CallbackFunction> execute(TaskList list) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(commandSplit[1]);
-            return list.done(taskNumber);
+            return new Pair<>(list.done(taskNumber), CallbackFunction.empty());
         } catch (Exception e) {
             throw new DukeException("Please enter a valid task number to mark a task as done.");
         }

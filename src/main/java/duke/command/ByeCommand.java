@@ -1,7 +1,10 @@
 package duke.command;
 
+import duke.CallbackFunction;
 import duke.DukeException;
 import duke.TaskList;
+import duke.ui.Main;
+import javafx.util.Pair;
 
 public class ByeCommand extends Command {
 
@@ -19,8 +22,22 @@ public class ByeCommand extends Command {
      * @param list the task list.
      * @throws DukeException if failed to rewrite tasks.
      */
-    public String execute(TaskList list) throws DukeException {
+    public Pair<String, CallbackFunction> execute(TaskList list) throws DukeException {
         list.rewriteTasks();
-        return ("Bye. Hope to see you again soon!");
+        return new Pair<>("Bye. Hope to see you again soon!", new CallbackFunction(() -> {
+            /*
+             * Uses a separate thread to stop the program so that the "bye" message will be updated
+             * on user's screen.
+             */
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Main.exit();
+            });
+            thread.start();
+        }));
     }
 }

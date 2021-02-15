@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import duke.CallbackFunction;
 import duke.DukeException;
 import duke.Helper;
 import duke.TaskList;
@@ -11,6 +12,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskException;
 import duke.task.ToDo;
+import javafx.util.Pair;
 
 public class AddCommand extends Command {
 
@@ -36,19 +38,19 @@ public class AddCommand extends Command {
      * @throws DukeException if adding a task failed.
      */
     @Override
-    public String execute(TaskList list) throws DukeException {
+    public Pair<String, CallbackFunction> execute(TaskList list) throws DukeException {
         String keyword = commandSplit[0];
         if (keyword.equals("deadline")) {
             try {
-                return addDeadline(list);
+                return new Pair<>(addDeadline(list), CallbackFunction.empty());
             } catch (TaskException e) {
                 throw new DukeException("Failed to add deadline to tasks. " + e.getMessage());
             }
         } else if (keyword.equals("todo")) {
-            return addToDo(list);
+            return new Pair<>(addToDo(list), CallbackFunction.empty());
         } else {
             try {
-                return addEvent(list);
+                return new Pair<>(addEvent(list), CallbackFunction.empty());
             } catch (TaskException e) {
                 throw new DukeException("Failed to add event to tasks. " + e.getMessage());
             }

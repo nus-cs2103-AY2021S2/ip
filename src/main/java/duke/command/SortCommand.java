@@ -1,7 +1,9 @@
 package duke.command;
 
+import duke.CallbackFunction;
 import duke.DukeException;
 import duke.TaskList;
+import javafx.util.Pair;
 
 public class SortCommand extends Command {
 
@@ -22,7 +24,7 @@ public class SortCommand extends Command {
      * @throws DukeException if parameter provided by user is incorrect.
      */
     @Override
-    public String execute(TaskList list) throws DukeException {
+    public Pair<String, CallbackFunction> execute(TaskList list) throws DukeException {
         //What parameter to sort by, e.g. date, task (description)
         String sortParameter = commandSplit[1];
         //Ascending or descending
@@ -32,7 +34,7 @@ public class SortCommand extends Command {
 
             if (sortDirection.equals("asc") || sortDirection.equals("desc")) {
                 boolean isAscending = sortDirection.equals("asc");
-                return list.sortByDate(isAscending);
+                return new Pair<>(list.sortByDate(isAscending), CallbackFunction.empty());
             }
 
             //Neither asc nor desc
@@ -43,7 +45,7 @@ public class SortCommand extends Command {
 
             if (sortDirection.equals("asc") || sortDirection.equals("desc")) {
                 boolean isAscending = sortDirection.equals("asc");
-                return list.sortByDescription(isAscending);
+                return new Pair<>(list.sortByDescription(isAscending), CallbackFunction.empty());
             }
 
             //Neither asc nor desc

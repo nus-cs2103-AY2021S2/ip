@@ -3,9 +3,11 @@ package duke.command;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
+import duke.CallbackFunction;
 import duke.DukeException;
 import duke.Helper;
 import duke.TaskList;
+import javafx.util.Pair;
 
 public class DeleteCommand extends Command {
 
@@ -33,7 +35,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException if failed to remove task from task list.
      */
     @Override
-    public String execute(TaskList list) throws DukeException {
+    public Pair<String, CallbackFunction> execute(TaskList list) throws DukeException {
         if (commandSplit.length == 1) {
             throw new DukeException("Please enter the task number of the task to delete.");
         }
@@ -53,7 +55,7 @@ public class DeleteCommand extends Command {
             taskNumbersToDelete.add(taskNumber);
         }
 
-        return list.remove(taskNumbersToDelete);
+        return new Pair<>(list.remove(taskNumbersToDelete), CallbackFunction.empty());
 
     }
 }

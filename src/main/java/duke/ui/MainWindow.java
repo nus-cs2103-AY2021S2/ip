@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.CallbackFunction;
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -56,11 +58,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        Pair<String, CallbackFunction> response = duke.getResponse(input);
+        String stringResponse = response.getKey();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(stringResponse, dukeImage)
         );
+
         userInput.clear();
+
+        //Execute callback function
+        CallbackFunction callback = response.getValue();
+        callback.run();
     }
 }

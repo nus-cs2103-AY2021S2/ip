@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.CallbackFunction;
 import duke.DukeException;
 import duke.Helper;
 import duke.TaskList;
 import duke.task.Task;
+import javafx.util.Pair;
 
 public class ListCommand extends Command {
 
@@ -39,7 +41,7 @@ public class ListCommand extends Command {
      * @throws DukeException if an incorrect date format is provided.
      */
     @Override
-    public String execute(TaskList list) throws DukeException {
+    public Pair<String, CallbackFunction> execute(TaskList list) throws DukeException {
         //Check if command includes an optional date argument
         boolean hasDate = commandSplit.length > 1;
         if (hasDate) {
@@ -50,11 +52,12 @@ public class ListCommand extends Command {
                     && x.getDate().equals(queryDate));
             //Map each filtered Task with Task.toString()
             List<String> taskStrings = matchedTasks.stream().map(Task::toString).collect(Collectors.toList());
-            return "Found the following tasks on " + queryDate.toString() + ":" + System.lineSeparator()
-                    + System.lineSeparator() + Helper.formatStrings(taskStrings);
+            String response =  "Found the following tasks on " + queryDate.toString() + ":"
+                    + System.lineSeparator() + System.lineSeparator() + Helper.formatStrings(taskStrings);
+            return new Pair<>(response,CallbackFunction.empty());
 
         } else {
-            return list.toString();
+            return new Pair<>(list.toString(), CallbackFunction.empty());
         }
     }
 }

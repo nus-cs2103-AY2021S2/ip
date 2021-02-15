@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.CallbackFunction;
 import duke.Helper;
 import duke.TaskList;
 import duke.task.Task;
+import javafx.util.Pair;
 
 public class FindCommand extends Command {
 
@@ -24,11 +26,11 @@ public class FindCommand extends Command {
      * @param list the task list.
      */
     @Override
-    public String execute(TaskList list) {
+    public Pair<String, CallbackFunction> execute(TaskList list) {
         String keyword = Helper.join(this.commandSplit, 1);
         ArrayList<Task> filteredList = list.filter(task -> task.isDescriptionContainsString(keyword));
         List<String> tasksAsString = filteredList.stream().map(Task::toString).collect(Collectors.toList());
         tasksAsString.add(0, "Found " + tasksAsString.size() + " matching task(s):");
-        return Helper.formatStrings(tasksAsString.toArray(new String[0]));
+        return new Pair<>(Helper.formatStrings(tasksAsString.toArray(new String[0])), CallbackFunction.empty());
     }
 }
