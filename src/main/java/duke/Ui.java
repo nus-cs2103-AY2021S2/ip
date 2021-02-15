@@ -48,7 +48,7 @@ public class Ui {
         if (command.length() > 0) {
             throw new IllegalArgumentException("That is not a valid command!\n"
                     + "These are the possible commands:\n"
-                    + "\"list\" \"done\" \"delete\" \"todo\" \"deadline\" \"event\" \"bye\"");
+                    + "\"list\" \"done\" \"delete\" \"todo\" \"deadline\" \"event\" \"reminders\" \"find\" \"bye\" ");
         } else {
             throw new IllegalArgumentException("What are you trying to say?\n"
                     + "Please enter something ...");
