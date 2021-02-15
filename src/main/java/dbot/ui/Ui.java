@@ -4,7 +4,6 @@ import dbot.task.Task;
 import dbot.tasklist.TaskList;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 
@@ -70,10 +69,14 @@ public class Ui {
      * @param tasks An iterable List storing all the users Tasks.
      * @return A String representation of all the tasks in the TaskList.
      */
-    public String printTasks(TaskList tasks) {
+    public String listTasks(TaskList tasks) {
+        int listIndex = 1;
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task : tasks) {
-            stringBuilder.append(task.toString());
+            String indexString = String.valueOf(listIndex);
+            String singleTaskLine = indexString + ". " + task.toString() + "\n";
+            stringBuilder.append(singleTaskLine);
+            listIndex++;
         }
         return stringBuilder.toString();
     }
@@ -137,7 +140,7 @@ public class Ui {
     public String printRelevantTasks(TaskList relevantTasks) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the matching tasks in your list:");
-        stringBuilder.append(printTasks(relevantTasks));
+        stringBuilder.append(listTasks(relevantTasks));
         return stringBuilder.toString();
     }
 }
