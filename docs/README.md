@@ -71,7 +71,7 @@ Expected outcome:
 
 <br/>
 
-### 'list' - List tasks
+### `list` - List tasks
 
 Tabby will reply with a full list of all the tasks entered so far.
 
@@ -85,7 +85,7 @@ Expected outcome:
 
 <br/>
 
-### 'done' - Mark task as done
+### `done` - Mark task as done
 
 Task specified will be marked as done. Tasks are identified by their position in the task list.
 
@@ -101,7 +101,7 @@ Expected outcome:
 
 <br/>
 
-### 'delete' - Delete task
+### `delete` - Delete task
 
 Task specified will be deleted from the task list. Tasks are identified by their position in the task list.
 
@@ -117,7 +117,7 @@ Expected outcome:
 
 <br/>
 
-### 'find' - Find tasks
+### `find` - Find tasks
 
 Tabby will reply with a list of all tasks that contain the specified keyword in their task description. The number on the left of the task indicates its position in the task list.
 
@@ -133,7 +133,7 @@ Expected outcome:
 
 <br/>
 
-### 'todo' - Add new todo task
+### `todo` - Add new todo task
 
 A new todo task will be added to the task list. Todo tasks do not have specific start/end dates/times.
 
@@ -149,7 +149,7 @@ Expected outcome:
 
 <br/>
 
-### 'deadline' - Add new deadline task
+### `deadline` - Add new deadline task
 
 A new deadline task will be added to the task list. Deadline tasks have to be completed by the specified date.
 
@@ -165,7 +165,7 @@ Expected outcome:
 
 <br/>
 
-### 'event' - Add new event task
+### `event` - Add new event task
 
 A new event task will be added to the task list. Event tasks occur on a specific date during a specific duration.
 
@@ -181,7 +181,7 @@ Expected outcome:
 
 <br/>
 
-### 'undo' - Undo previous action
+### `undo` - Undo previous action
 
 Previous action will be undone, starting from most recent action first.
 
@@ -195,7 +195,7 @@ Expected outcome:
 
 <br/>
 
-### 'redo' - Redo previously undone action
+### `redo` - Redo previously undone action
 
 Previously undone action will be done again, starting from most recently undone action first.
 
@@ -209,7 +209,7 @@ Expected outcome:
 
 <br/>
 
-### 'bye' - Exit bot
+### `bye` - Exit bot
 
 Bot closes.
 
