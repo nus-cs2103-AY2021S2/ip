@@ -13,6 +13,7 @@ import java.util.Scanner;
  * getting user input and printing responses.
  */
 public class Ui {
+    public static final String WELCOME_MESSAGE = "Welcome to DBot";
     private final String NAME = "DougBot";
     private static final String DIVIDER = "===================================================";
     private final Scanner in;

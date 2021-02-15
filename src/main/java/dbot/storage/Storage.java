@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class Storage {
     /** Default file path used if the user does not provide a file name. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
+    public static final String DEFAULT_STORAGE_FILEPATH = "data/addressbook.txt";
     public final Path path;
 
     /**
