@@ -48,7 +48,7 @@ public class DukeCommandDelete extends DukeCommand {
 
             // Reverse + Unique terms to avoid duplicate deletions
             // Has added benefit of doing bounds checking.
-            indices.sort(Collections.reverseOrder()); // Need to remove in reverse order
+            indices.sort(Collections.reverseOrder());
             indices = new ArrayList<>(new LinkedHashSet<>(indices));
 
         } catch (NumberFormatException e) {
@@ -82,14 +82,14 @@ public class DukeCommandDelete extends DukeCommand {
             }
             responseMessageArray.add("Now you have " + tasks.size() + " tasks in the list.");
         } catch (DukeExceptionIllegalArgument e) {
-            return Response.createResponseBad(e.getMessage());
+            return Response.createResponseBad(e.toString());
         }
 
         /* Attempt to write to file */
         try {
             loader.write(tasks);
         } catch (DukeExceptionFileNotWritable e) {
-            return Response.createResponseOk(e.getMessage());
+            return Response.createResponseOk(e.toString());
         }
         return Response.createResponseOk(responseMessageArray.toArray(new String[0]));
     }
@@ -100,7 +100,7 @@ public class DukeCommandDelete extends DukeCommand {
         try {
             loader.write(tasks);
         } catch (DukeExceptionFileNotWritable e) {
-            return Response.createResponseOk(e.getMessage());
+            return Response.createResponseOk(e.toString());
         }
         return Response.createResponseOk("All tasks successfully deleted.");
     }

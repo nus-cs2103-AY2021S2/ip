@@ -23,15 +23,9 @@ public class Response {
     public static Response createResponseBad(String message) {
         return new Response(ResponseStatus.BAD, message);
     }
-    public static Response createResponseBad(String ... messages) {
-        return new Response(ResponseStatus.BAD, messages);
-    }
 
-    public static Response createResponseExit(String message) {
-        return new Response(ResponseStatus.EXIT, message);
-    }
-    public static Response createResponseExit(String ... messages) {
-        return new Response(ResponseStatus.EXIT, messages);
+    public static Response createResponseExit() {
+        return new Response(ResponseStatus.EXIT, "");
     }
 
     public ResponseStatus getStatus() {

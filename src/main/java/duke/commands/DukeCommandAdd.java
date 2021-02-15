@@ -34,7 +34,7 @@ public class DukeCommandAdd extends DukeCommand {
         try {
             loader.write(tasks);
         } catch (DukeExceptionFileNotWritable e) {
-            return Response.createResponseOk(e.getMessage());
+            return Response.createResponseOk(e.toString());
         }
 
         /* Successful execution */

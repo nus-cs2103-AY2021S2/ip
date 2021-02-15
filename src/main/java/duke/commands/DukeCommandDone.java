@@ -51,14 +51,14 @@ public class DukeCommandDone extends DukeCommand {
                 responseMessageArray.add("  " + tasks.getTask(index));
             }
         } catch (DukeExceptionIllegalArgument e) {
-            return Response.createResponseBad(e.getMessage());
+            return Response.createResponseBad(e.toString());
         }
 
         /* Attempt to write to file */
         try {
             loader.write(tasks);
         } catch (DukeExceptionFileNotWritable e) {
-            return Response.createResponseOk(e.getMessage());
+            return Response.createResponseOk(e.toString());
         }
         return Response.createResponseOk(responseMessageArray.toArray(new String[0]));
     }
