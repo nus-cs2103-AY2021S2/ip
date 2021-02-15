@@ -42,6 +42,12 @@ public class Ui {
         return ind;
     }
 
+    /**
+     * To get the most recent response for Kobe, in order to reply
+     * to the user's most recent input.
+     *
+     * @return  Kobe's response
+     */
     public static String getMostRecentResponse(){
         return responses.get(responses.size() - 1);
 
@@ -53,13 +59,15 @@ public class Ui {
                 "Type help for more info");
     }
 
-//    public void addResponse(String response) {
-//        this.responses.add(response);
-//    }
-
     public static void addIncorrectDescriptionResponse(){
         responses.add("Oh no! Kobe doesn't understand what you mean.\n" +
                 "It looks like your command is incorrect.\n" +
+                "Type help for more info");
+    }
+
+    public static void addWhitespaceResponse(){
+        responses.add("Oh no! Kobe doesn't understand what you mean.\n" +
+                "It looks like your command has too much empty spacing.\n" +
                 "Type help for more info");
     }
 

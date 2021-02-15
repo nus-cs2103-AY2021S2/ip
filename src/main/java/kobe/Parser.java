@@ -1,5 +1,8 @@
 package kobe;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Parser {
 
     /**
@@ -37,14 +40,29 @@ public class Parser {
                 String[] commandArrFirst2Parts = command.split(" ", 2);
                 String firstWord = commandArrFirst2Parts[0];
 
+                //Error Handling for wrong commands
                 if (commandArrFirst2Parts.length == 1) {
                     if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
                         Ui.addIncompleteDescriptionResponse();
-                        String errMessage = "Oh no! Kobe doesn't want your " + firstWord + " to be empty!";
+                        String errMessage = "Incomplete Description: Command " + firstWord + " does not have any name";
                         throw new CustomExceptions.IncompleteDecriptionException(errMessage);
                     } else {
+                        //For gibberish commands
                         Ui.addIncorrectDescriptionResponse();
-                        String errMessage = "Oh no! Kobe doesn't know what you mean!";
+                        String errMessage = "Incorrect Command Format. See help for more information";
+                        throw new CustomExceptions.IncorrectDecriptionException(errMessage);
+                    }
+                } else if (commandArrFirst2Parts.length == 2) {
+                    //Check if the second word is just whitespace
+                    //If it is, count it as an error as well
+                    String secondWord = commandArrFirst2Parts[1];
+                    Pattern pattern = Pattern.compile("\\s");
+                    Matcher matcher = pattern.matcher(secondWord);
+                    boolean isWhitespacePresent = matcher.find() || secondWord.equals("");
+//                    boolean isWhitespacePresent = s.matches("^\\s*$");
+                    if (isWhitespacePresent) {
+                        Ui.addWhitespaceResponse();
+                        String errMessage = "Incorrect Command Format: Extra whitespace detected. See help for more information";
                         throw new CustomExceptions.IncorrectDecriptionException(errMessage);
                     }
                 }
