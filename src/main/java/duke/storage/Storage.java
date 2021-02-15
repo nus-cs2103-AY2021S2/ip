@@ -60,7 +60,7 @@ public class Storage {
                     taskToLoad = new Event(savedTaskDescription, savedTaskDetails[3]);
                     break;
                 default:
-                    throw new DukeException("☹ OOPS!!! There are issues in loading the saved file of the tasks list.");
+                    throw new DukeException("OOPS!!! There are issues in loading the saved file of the tasks list.");
                 }
 
                 if (isTaskDone) {
@@ -72,7 +72,7 @@ public class Storage {
 
             return tasksList;
         } catch (IOException e){
-            throw new DukeException("☹ OOPS!!! There is no saved file of the tasks list in this directory.");
+            throw new DukeException("OOPS!!! There is no saved file of the tasks list in this directory.");
         }
     }
 
@@ -95,7 +95,7 @@ public class Storage {
             bw.close();
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS!!! Tasks list cannot be saved.");
+            throw new DukeException("OOPS!!! Tasks list cannot be saved.");
         }
     }
 }

@@ -52,7 +52,7 @@ public class TaskList {
         if (taskNum > 0 && taskNum <= tasks.size()) {
             return tasks.get(taskNum - 1);
         } else {
-            throw new DukeException("☹ OOPS!!! Task " + taskNum + " is not in the task list!");
+            throw new DukeException("OOPS!!! Task " + taskNum + " is not in the task list!");
         }
     }
 
@@ -72,7 +72,7 @@ public class TaskList {
         if (taskNum > 0 && taskNum <= tasks.size()) {
             tasks.remove(taskNum - 1);
         } else {
-            throw new DukeException("☹ OOPS!!! Task " + taskNum + " is not in the task list!");
+            throw new DukeException("OOPS!!! Task " + taskNum + " is not in the task list!");
         }
     }
 
@@ -85,7 +85,7 @@ public class TaskList {
             Task taskToComplete = getTask(taskNum);
             taskToComplete.markAsDone();
         } else {
-            throw new DukeException("☹ OOPS!!! Task " + taskNum + " is not in the task list!");
+            throw new DukeException("OOPS!!! Task " + taskNum + " is not in the task list!");
         }
     }
 
