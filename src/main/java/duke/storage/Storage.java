@@ -59,14 +59,16 @@ public class Storage {
     public ArrayList<Task> load() throws DukeCreateFileException, DukeCorruptedStorageException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            if (!saveFile.createNewFile()) {
-                Scanner sc = new Scanner(saveFile);
-                ArrayList<String> inputs = new ArrayList<>();
-                while (sc.hasNext()) {
-                    inputs.add(sc.nextLine());
-                }
-                tasks = StorageDecoder.decodeSave(inputs);
+            if (saveFile.createNewFile()) {
+                return tasks;
             }
+
+            Scanner sc = new Scanner(saveFile);
+            ArrayList<String> inputs = new ArrayList<>();
+            while (sc.hasNext()) {
+                inputs.add(sc.nextLine());
+            }
+            tasks = StorageDecoder.decodeSave(inputs);
         } catch (IOException e) {
             throw new DukeCreateFileException();
         }

@@ -13,7 +13,6 @@ import javafx.stage.Stage;
  * A GUI for duke.gui.Duke using FXML.
  */
 public class Duke extends Application {
-
     private static Stage stage;
     private final Controller controller = new Controller();
 
