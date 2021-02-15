@@ -38,7 +38,7 @@ public class Duke extends Application {
         //Step 1. Formatting the window to look as expected.
         Ui ui = new Ui();
         Storage storage = new Storage();
-        // Creating directory if it does not exist
+        // Creating directory for Duke.txt if it does not exist
         storage.createDirectory();
 
         // Loading file from directory if it exists
@@ -187,8 +187,7 @@ public class Duke extends Application {
             }
         } else if (parser.isFind(command)) {
             try {
-                String keyword = command.split("\\s+")[1];
-                output = taskList.retrieveByKeyword(keyword);
+                output = taskList.retrieveByKeyword(command);
             } catch (ArrayIndexOutOfBoundsException indexError) {
                 output  = getInput.outInvalidFind();
             }

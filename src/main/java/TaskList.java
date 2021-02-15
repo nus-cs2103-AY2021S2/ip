@@ -101,19 +101,45 @@ public class TaskList {
 
     /**
      * Retrieve task(s) by keyword match so long as description contains the word
-     * @param keyword Keyword to match
+     * @param command Keyword to match
      * @return A string line-spaced by each task that has the keyword
      */
-    protected String retrieveByKeyword(String keyword) {
+    protected String retrieveByKeyword(String command) {
         int counter = 1;
-
+        String[] keywordSearch = command.split("\\s+");
+        assert keywordSearch.length >=2;
+        String keyword = keywordSearch[1];
         String res = "Here are the matching tasks in your list:";
-
+        int lenSearch = keywordSearch.length;
         for (Task eachTask : taskList) {
-            if(eachTask.getDescription().contains(keyword)) {
-                res += String.format("\n%d. %s", counter, eachTask);
-                counter++;
+            if (lenSearch == 2) {
+                // default partial search case sensitive
+                if (eachTask.getDescription().contains(keyword)) {
+                    res += String.format("\n%d. %s", counter, eachTask);
+                    counter++;
+                }
+            } else if (lenSearch == 3) {
+                String searchType = keywordSearch[2];
+                if (searchType.equalsIgnoreCase("p")) {
+                    if (eachTask.getDescription().contains(keyword)) {
+                        res += String.format("\n%d. %s", counter, eachTask);
+                        counter++;
+                    }
+                } else if (searchType.equalsIgnoreCase("pi")) {
+                    // Case insensitive partial search
+                    if (eachTask.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                        res += String.format("\n%d. %s", counter, eachTask);
+                        counter++;
+                    }
+                } else if (searchType.equalsIgnoreCase("f")) {
+                    // full search must be exactly as the task description
+                    if (eachTask.getDescription().equals(keyword)) {
+                        res += String.format("\n%d. %s", counter, eachTask);
+                        counter++;
+                    }
+                }
             }
+
         }
         return res;
     }
