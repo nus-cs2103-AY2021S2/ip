@@ -50,6 +50,8 @@ Adds a new deadline to the list of tasks.
 
 `deadline (deadline description) /by (date)`
 
+**note:** Date must be in ``dd/MM/yyyy]``, ``yyyy-MM-dd`` or `MMM dd yyyy` format.
+
 **Expected outcome**:
 
 Duke responses to confirm that the deadline has
@@ -68,6 +70,8 @@ Adds a new event to the list of tasks.
 **Example of usage**:
 
 `event (event description) /at (date)`
+
+**note:** Date must be in ``dd/MM/yyyy]``, ``yyyy-MM-dd`` or `MMM dd yyyy` format.
 
 **Expected outcome**:
 
@@ -90,6 +94,8 @@ Lists all tasks that you have asked Duke to remember.
 `list`
 
 `list (date)`
+
+**note:** Date must be in ``dd/MM/yyyy]``, ``yyyy-MM-dd`` or `MMM dd yyyy` format.
 
 **Expected outcome**:
 
