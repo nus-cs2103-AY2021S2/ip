@@ -13,11 +13,11 @@ public class Duke {
         FileWriter fw = new FileWriter(f);
         for (Task temp : list) {
             if (temp instanceof Deadline) {
-                fw.write("D|" + temp.getStatusIcon() + temp.getDescription() + "|"+ ((Deadline) temp).getBy() + "\n");
+                fw.write("D|" + temp.getStatusIcon() + "|" + temp.getDescription().trim() + "|"+ ((Deadline) temp).getDateString() + "\n");
             } else if (temp instanceof Event) {
                 fw.write("E|" + temp.getStatusIcon() + "|" + temp.getDescription() + "|" +((Event) temp).getDatetime() + "\n");
             } else {
-                fw.write("T|" + temp.getStatusIcon() + "|" + temp.getDescription());
+                fw.write("T|" + temp.getStatusIcon() + "|" + temp.getDescription() + "\n");
             }
         }
         fw.close();
@@ -27,32 +27,33 @@ public class Duke {
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
-            s = s.trim();
+            s =     s.trim();
 
             String[] strArray = s.split("\\|", 4);
 
             if (strArray[0].trim().equals("D")) {
-                LocalDate date =LocalDate.parse(strArray[3].trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date = LocalDate.parse(strArray[3],formatter);
                 Deadline deadline = new Deadline(strArray[2].trim(), date);
-                if (strArray[1].trim().equals("done")) {
+                if (strArray[1].trim().equals("[Done]")) {
                     deadline.isDone = true;
-                } else if (strArray[1].trim().equals("not done")){
+                } else if (strArray[1].trim().equals("[Incompleted]")){
                     deadline.isDone = false;
                 }
                 list.add(deadline);
             } else if (strArray[0].trim().equals("E")) {
                 Event event = new Event(strArray[2].trim(), strArray[3].trim());
-                if (strArray[1].trim().equals("done")) {
+                if (strArray[1].trim().equals("[Done]")) {
                     event.isDone = true;
-                } else if (strArray[1].trim().equals("not done")) {
+                } else if (strArray[1].trim().equals("[Incompleted]")) {
                     event.isDone = false;
                 }
                 list.add(event);
             } else {
                 ToDo todo = new ToDo(strArray[2].trim());
-                if (strArray[1].trim().equals("done")) {
+                if (strArray[1].trim().equals("[Done]")) {
                     todo.isDone = true;
-                } else if (strArray[1].trim().equals("not done")) {
+                } else if (strArray[1].trim().equals("[Incompleted]")) {
                     todo.isDone = false;
                 }
                 list.add(todo);

@@ -1,1 +1,5 @@
-T|[Incompleted]| run
+D|[Done]|return|2000-10-20
+T|[Done]|run
+T|[Incompleted]|run
+E|[Done]|project meeting|Mon 2-4pm
+E|[Incompleted]|project meeting|Mon 2-5pm
