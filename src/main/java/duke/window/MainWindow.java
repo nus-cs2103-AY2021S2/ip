@@ -82,7 +82,7 @@ public class MainWindow extends AnchorPane {
             String response = duke.getResponse(userInput.getText());
 
             if (input.equals(ByeCommand.COMMAND_WORD)) {
-                PauseTransition delay = new PauseTransition(Duration.seconds(5));
+                PauseTransition delay = new PauseTransition(Duration.seconds(30));
                 delay.setOnFinished(event -> stage.close());
                 delay.play();
             }

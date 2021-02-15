@@ -156,7 +156,7 @@ Displays all possible commands and their formats.
 ![img.png](help_2.png)
 
 
-### FAQ
+## FAQ
 
 **Q**: What are the acceptable date formats?
 
