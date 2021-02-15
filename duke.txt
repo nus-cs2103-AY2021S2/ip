@@ -1,3 +1,5 @@
-T / true / fly
-T / true / run
-T / true / walk
+E / false / Attend Wedding / Sunday
+D / false / Return book / 2020-01-01
+T / true / walk dog
+T / false / walk dog
+T / false / walk fish

@@ -48,7 +48,7 @@ public class Deadline extends Task {
      * @param deadline new deadline to be changed to
      * @return the new deadline
      */
-    public LocalDate changeDeadline(LocalDate deadline) {
+    public LocalDate setDeadline(LocalDate deadline) {
         this.deadline = deadline;
         return this.deadline;
     }
