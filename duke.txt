@@ -1,3 +1,4 @@
-todo|Homework|T
-event|Homeschooling |2021-01-26|T
-deadline|lab report |2021-01-28|T
+todo|Homework|F
+event|CS2103 Lecture |2021-02-16|F
+deadline|Lab Report |2021-02-19|F
+todo|Buy flowers|T
