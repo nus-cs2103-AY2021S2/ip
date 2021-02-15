@@ -21,6 +21,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setPason(pason);
+            stage.setTitle("PAson: Jason's Personal Assistant");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
