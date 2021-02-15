@@ -4,7 +4,8 @@
 
 ### Interactive GUI
 The textbox has green background and unique user image for the Duke to increase UI/UX of the application.
-<img src = "Ui.png", width = 200>
+
+<img src = "Ui.png", width = "200">
 ## Usage
 
 ### `list` - List all tasks in the TaskList
