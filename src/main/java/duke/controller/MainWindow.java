@@ -1,14 +1,9 @@
 package duke.controller;
 
-import java.time.LocalDate;
-
 import duke.Duke;
-import duke.command.Command;
-import duke.parser.Parser;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -58,7 +53,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private void showAllReminder(TaskList taskList) {
-        LocalDate currentDate = LocalDate.now();
         for (Task task : taskList.getTaskList()) {
             showReminder(task.toString());
         }
