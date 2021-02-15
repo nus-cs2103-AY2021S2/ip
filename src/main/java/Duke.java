@@ -163,9 +163,7 @@ public class Duke extends Application {
         } else if (parser.isEvent(command)) {
             try {
                 String[] splitString = command.split("/at");
-                String eventDesc = splitString[0];
-                String eventDate = splitString[1];
-                Event currentTask = new Event(eventDesc.substring(6), eventDate);
+                Event currentTask = new Event(splitString);
                 taskList.addToTasks(currentTask);
                 output = taskList.logTask(currentTask);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException indexError) {
@@ -174,9 +172,7 @@ public class Duke extends Application {
         } else if (parser.isDeadline(command)) {
             try {
                 String[] splitString = command.split("/by");
-                String eventDesc = splitString[0];
-                String eventDate = splitString[1];
-                Deadline currentTask = new Deadline(eventDesc.substring(9), eventDate);
+                Deadline currentTask = new Deadline(splitString);
                 taskList.addToTasks(currentTask);
                 output = taskList.logTask(currentTask);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException indexError) {

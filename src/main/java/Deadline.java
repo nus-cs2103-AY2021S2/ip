@@ -18,12 +18,15 @@ public class Deadline extends Task {
 
     }
 
+    Deadline(String[] description) {
+        super(description[0].substring(9), description[1]);
+    }
+
     Deadline(String description, String eventDate, boolean isDone) {
         super(description, eventDate, isDone);
         formatDate();
 
     }
-
 
     public void formatDate() {
         try {

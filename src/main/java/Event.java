@@ -17,6 +17,10 @@ public class Event extends Task {
         super(description);
     }
 
+    Event(String[] description) {
+        super(description[0].substring(6), description[1]);
+    }
+
     /**
      * Overloaded constructor to account for deadline and events that have timestamps.
      * @param description Description of given task.
