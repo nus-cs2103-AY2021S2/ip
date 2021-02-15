@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -26,6 +27,11 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            // set a clip to apply rounded border to the original image.
+            Circle clip = new Circle(displayPicture.getFitHeight() / 2,
+                displayPicture.getFitHeight() / 2,
+                displayPicture.getFitHeight() / 2);
+            displayPicture.setClip(clip);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,16 +47,16 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_RIGHT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
+    }
+
+    public static DialogBox getDukeDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 }
