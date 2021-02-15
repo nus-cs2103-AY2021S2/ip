@@ -67,7 +67,7 @@ public class Storage {
     private Task parseLine(String line) throws DukeException {
         String[] parts = line.split("\\|");
         String type = parts[0];
-        boolean isDone = Boolean.valueOf(parts[1]);
+        boolean isDone = Boolean.parseBoolean(parts[1]);
         String desc = parts[2];
         switch (type) {
         case "T":
