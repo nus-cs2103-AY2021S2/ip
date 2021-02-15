@@ -42,7 +42,7 @@ public class AddCommand extends Command {
                             + "Now you have %d %s in total. Good luck.", toAdd.toString(), tasks.getSize(), noun);
             return new CommandResult(message);
         } catch (Exception e) {
-            return new CommandResult(Messages.MESSAGE_REPORTING_ADDING_FAILURE);
+            return new CommandResult(Messages.MESSAGE_REPORTING_ADDING_FAILURE, true);
         }
     }
 }

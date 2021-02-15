@@ -6,6 +6,7 @@ package lihua.commands.feedback;
 public class CommandResult {
     /** The feedback to user */
     private final String feedbackToUser;
+    private boolean isUserCommandError = false;
 
     /**
      * Initializes a CommandResult object with a feedback.
@@ -15,6 +16,17 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         assert feedbackToUser != null;
         this.feedbackToUser = feedbackToUser;
+    }
+
+    /**
+     * Initializes a CommandResult object with a feedback.
+     *
+     * @param feedbackToUser The feedback to user.
+     */
+    public CommandResult(String feedbackToUser, boolean isUserCommandError) {
+        assert feedbackToUser != null;
+        this.feedbackToUser = feedbackToUser;
+        this.isUserCommandError = isUserCommandError;
     }
 
     /**
@@ -28,6 +40,6 @@ public class CommandResult {
     }
 
     public boolean isUserCommandError() {
-        return true;
+        return isUserCommandError;
     }
 }

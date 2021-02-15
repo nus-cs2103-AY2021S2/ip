@@ -30,9 +30,9 @@ public class DoneCommand extends Command {
             String message = String.format("Got it. I have mark this task as done:\n---- %s", done.toString());
             return new CommandResult(message);
         } catch (IndexOutOfBoundsException e) {
-            return new CommandResult(Messages.MESSAGE_REPORTING_INVALID_INDEX);
+            return new CommandResult(Messages.MESSAGE_REPORTING_INVALID_INDEX, true);
         } catch (Exception e) {
-            return new CommandResult(Messages.MESSAGE_REPORTING_ADDING_FAILURE);
+            return new CommandResult(Messages.MESSAGE_REPORTING_ADDING_FAILURE, true);
         }
     }
 }
