@@ -5,18 +5,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private HBox hbox;
 
     private DialogBox(String text, Image img) {
         try {
@@ -28,7 +32,11 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(5, 5, 5, 5, false),
+                new Insets(5, 5, 5, 30))));
+        hbox.setPadding(new Insets(5,5,5,30));
         dialog.setText(text);
+        dialog.setPadding(new Insets(15,0,15,15));
         displayPicture.setImage(img);
     }
 
@@ -40,6 +48,11 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(5, 5, 5, 5, false),
+                new Insets(5, 30, 5, 5))));
+        hbox.setPadding(new Insets(5,30,5,5));
+        dialog.setPadding(new Insets(15,15,15,0));
+
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

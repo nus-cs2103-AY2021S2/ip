@@ -2,14 +2,15 @@ import duke.Duke;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -39,6 +40,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setSpacing(5);
+        dialogContainer.setPadding(new Insets(5,5,5,5));
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY,
+                Insets.EMPTY)));
     }
 
     public void setDuke(Duke d) {
