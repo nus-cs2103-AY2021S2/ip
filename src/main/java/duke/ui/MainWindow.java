@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private final String greetingMessage = "Hi, I am Duke\nHow can I help you?\n";
+    private final String greetingMessage = "Hallo. Ich bin Duke\nHow can I help you?\n";
 
     public MainWindow() {}
 

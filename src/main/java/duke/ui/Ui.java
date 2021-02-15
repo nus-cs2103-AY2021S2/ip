@@ -152,7 +152,7 @@ public class Ui {
      * @return The message of farewell.
      */
     public String exitResponse() {
-        return "See you.";
+        return "Goodbye until we meet again.";
     }
 
     /**
