@@ -55,6 +55,10 @@ public class Parser {
                 status = ResponseStatus.OK;
                 break;
             case LIST:
+                if (tasks.size() == 0) {
+                    text.append("There are no tasks recorded!");
+                    break;
+                }
                 text.append("Here are the tasks in your list:\n");
                 for (int i = 0; i < tasks.size(); i++) {
                     task = tasks.get(i);
@@ -119,6 +123,10 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! Please tell me which task to delete :-(");
                 }
                 break;
+            case CLEAR:
+                tasks.clear();
+                text.append("The entire task list has been cleared!");
+                break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -137,8 +145,10 @@ public class Parser {
         patterns.put(CommandType.LIST, Pattern.compile("^l(ist)?$"));
         patterns.put(CommandType.DELETE, Pattern.compile("^del(ete)?(?=\\s)+"));
         patterns.put(CommandType.BYE, Pattern.compile("^bye"));
+        patterns.put(CommandType.FIND, Pattern.compile("^f(ind)?(?=\\s)+"));
+        patterns.put(CommandType.CLEAR, Pattern.compile("^clear$"));
         for (CommandType type : patterns.keySet()) {
-            if (patterns.get(type).matcher(userCommand).find()) {
+            if (patterns.get(type).matcher(userCommand.toLowerCase()).find()) {
                 return type;
             }
         }
