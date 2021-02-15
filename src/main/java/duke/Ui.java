@@ -19,7 +19,7 @@ class Ui {
     }
 
     /**
-     * Read a command line entered by user and return it.
+     * Reads a command line entered by user and return it.
      *
      * @return the command line entered by user.
      */
@@ -28,7 +28,7 @@ class Ui {
     }
 
     /**
-     * Check if user still enter command line or not.
+     * Checks if user still enter command line or not.
      *
      * @return answer in form of boolean
      */
@@ -37,29 +37,29 @@ class Ui {
     }
 
     /**
-     * Say Bye
+     * Says Bye
      */
     public String echoBye() {
         return "Bye. Hope to see you again soon!\n";
     }
 
     /**
-     * Print all the tasks in taskList.
+     * Prints all the tasks in taskList.
      *
      * @param taskList TaskList related.
      */
     public String echoPrintList(ArrayList<Task> taskList) {
-        String ans = "Here are the tasks in your list, Lisa:\n";
+        StringBuilder ans = new StringBuilder("Here are the tasks in your list, Lisa:\n");
         int index = 1;
         for (Task task : taskList) {
-            ans += String.format(" %d. " + task.printTask() + "\n", index);
+            ans.append(String.format(" %d. " + task.printTask() + "\n", index));
             index++;
         }
-        return ans;
+        return ans.toString();
     }
 
     /**
-     * Print the results of adding a task to taskList.
+     * Prints the results of adding a task to taskList.
      *
      * @param task      The task added
      * @param noOfTasks Number of tasks in taskList after adding.
@@ -71,7 +71,7 @@ class Ui {
     }
 
     /**
-     * Print the results of marking a Task as done.
+     * Prints the results of marking a Task as done.
      *
      * @param task Task done.
      */
@@ -80,7 +80,7 @@ class Ui {
     }
 
     /**
-     * Print the results of deleting a Task.
+     * Prints the results of deleting a Task.
      *
      * @param task Task deleted.
      */
@@ -89,7 +89,7 @@ class Ui {
     }
 
     /**
-     * Print the error message of a DukeException.
+     * Prints the error message of a DukeException.
      *
      * @param err DukeException object related.
      */
@@ -99,78 +99,85 @@ class Ui {
     }
 
     /**
-     * Print all the tasks of a specific day.
+     * Prints all the tasks of a specific day.
      *
      * @param taskList The tasklist related.
      * @param dateTime The day that we want to search for.
      */
     public String echoTaskThisDay(ArrayList<Task> taskList, LocalDateTime dateTime) {
-        String ans = "Here are the tasks on " + dateTime.toString().substring(0, 10) + ":\n";
+        StringBuilder ans = new StringBuilder("Here are the tasks on " + dateTime.toString().substring(0, 10) + ":\n");
         int index = 1;
         for (Task task : taskList) {
-            if ((task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), dateTime))
-                    || (task instanceof Event && sameDay(((Event) task).geteTime(), dateTime))) {
-                ans += String.format(" %d. " + task.printTask() + "\n", index);
+            boolean isDeadlineThatDay = task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), dateTime);
+            boolean isEventThatDay = task instanceof Event && sameDay(((Event) task).geteTime(), dateTime);
+            if (isDeadlineThatDay || isEventThatDay) {
+                ans.append(String.format(" %d. " + task.printTask() + "\n", index));
                 index++;
             }
         }
-        return ans;
+        return ans.toString();
     }
 
     /**
-     * print all the tasks of Today.
+     * Prints all the tasks of Today.
      *
      * @param taskList The tasklist related.
      * @return output of this scho
      */
     public String echoTaskToday(ArrayList<Task> taskList) {
-        String ans = "Here are the tasks today, Lisa:\n";
+        StringBuilder ans = new StringBuilder("Here are the tasks today, Lisa:\n");
         int index = 1;
         for (Task task : taskList) {
-            if ((task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), LocalDateTime.now()))
-                    || (task instanceof Event && sameDay(((Event) task).geteTime(), LocalDateTime.now()))) {
-                ans += String.format(" %d. " + task.printTask() + "\n", index);
+            boolean isDeadlineToday = task instanceof Deadline && sameDay
+                    (((Deadline) task).getDlTime(), LocalDateTime.now());
+            boolean isEventToday = task instanceof Event && sameDay(((Event) task).geteTime(), LocalDateTime.now());
+            boolean isToDo = task instanceof ToDo;
+            if (isDeadlineToday || isEventToday || isToDo) {
+                ans.append(String.format(" %d. " + task.printTask() + "\n", index));
                 index++;
             }
         }
-        return ans;
+        return ans.toString();
     }
 
     /**
-     * Print all the tasks that match the pattern of a find command.
+     * Prints all the tasks that match the pattern of a find command.
      *
      * @param taskList The taskList related.
      * @param pattern  The String pattern given by find command.
      */
     public String echoPrintFindResult(ArrayList<Task> taskList, String pattern) {
-        String ans = "Here are the matching tasks, Lisa:\n";
+        StringBuilder ans = new StringBuilder("Here are the matching tasks, Lisa:\n");
         int index = 1;
         for (Task task : taskList) {
             if (task.getTaskName().contains(pattern)) {
-                ans += String.format(" %d. " + task.printTask() + "\n", index);
+                ans.append(String.format(" %d. " + task.printTask() + "\n", index));
                 index++;
             }
         }
-        return ans;
+        return ans.toString();
     }
+
     /**
-     * Print all the deadlines coming up..
+     * Prints all the deadlines coming up..
      *
      * @param taskList The taskList related.
      * @return output of this scho
      */
     public String echoReminder(ArrayList<Task> taskList) {
-        String ans = "Here are the upcoming deadlines, Lisa:\n";
+        StringBuilder ans = new StringBuilder("Here are the upcoming deadlines, Lisa:\n");
         ArrayList<Deadline> deadlineList = new ArrayList<>();
         for (Task task : taskList) {
-            if ((task instanceof Deadline) && !task.isTaskDone()) {
+            boolean isDeadlineAvailable = (task instanceof Deadline)
+                    && ((Deadline) task).getDlTime().isAfter(LocalDateTime.now());
+            if (isDeadlineAvailable && !task.isTaskDone()) {
                 addDeadline(deadlineList, (Deadline) task);
             }
         }
         for (Deadline deadline : deadlineList) {
-            ans += String.format(" %d. " + deadline.printTask() + "\n", deadlineList.indexOf(deadline) + 1);
+            ans.append(String.format(" %d. " + deadline.printTask() + "\n", deadlineList.indexOf(deadline) + 1));
         }
-        return ans;
+        return ans.toString();
     }
 
     /**
@@ -192,7 +199,7 @@ class Ui {
     }
 
     /**
-     * Helper function that checks if 2 dateTime refers to the same day or not.
+     * (Helper function) Checks if 2 dateTime refers to the same day or not.
      *
      * @param dateTime1 First dateTime input
      * @param dateTime2 Second dateTime input

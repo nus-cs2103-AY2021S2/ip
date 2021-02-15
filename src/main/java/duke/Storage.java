@@ -44,7 +44,7 @@ class Storage {
     }
 
     /**
-     * Load the data written in txt file back to Danh's Duke memory when it wakes up.
+     * Loads the data written in txt file back to Danh's Duke memory when it wakes up.
      *
      * @param taskList The taskList of Duke to load data to.
      * @throws IOException Exception related to open and access txt file.
@@ -121,18 +121,18 @@ class Storage {
     }
 
     /**
-     * Update the taask file (txt file) correspondingly when there are changes to taskList.
+     * Updates the task file (txt file) correspondingly when there are changes to taskList.
      *
      * @param taskList the TaskList that have been changed.
      */
     public void updateFile(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(this.taskFile);
-            String toWrite = "";
+            StringBuilder toWrite = new StringBuilder();
             for (Task task : taskList) {
-                toWrite += task.printTask() + "\n";
+                toWrite.append(task.printTask()).append("\n");
             }
-            fw.write(toWrite);
+            fw.write(toWrite.toString());
             fw.close();
         } catch (IOException ie) {
             System.out.println("Something went wrong" + ie.getMessage());

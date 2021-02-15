@@ -7,8 +7,8 @@ package duke;
  */
 @SuppressWarnings("checkstyle:Regexp")
 class Command {
-    private String commandTitle;
-    private String commandContent;
+    private final String commandTitle;
+    private final String commandContent;
 
     /**
      * Returns a command with the specified name and body

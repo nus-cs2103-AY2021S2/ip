@@ -6,16 +6,16 @@ package duke;
  */
 class Task {
     private final String taskName;
-    private boolean taskDone;
+    private boolean isTaskDone;
 
     /**
-     * return a Task with specified taskName, this task is not done yet.
+     * Returns a Task with specified taskName, this task is not done yet.
      *
      * @param taskName The name of the Task.
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.taskDone = false;
+        this.isTaskDone = false;
     }
 
     /**
@@ -25,7 +25,7 @@ class Task {
      */
     public String printTask() {
         String ans;
-        if (taskDone) {
+        if (isTaskDone) {
             ans = "[X] " + this.taskName;
         } else {
             ans = "[ ] " + this.taskName;
@@ -34,10 +34,10 @@ class Task {
     }
 
     /**
-     * Mark a task as (Done).
+     * Marks a task as (Done).
      */
     public void markAsDone() {
-        this.taskDone = true;
+        this.isTaskDone = true;
     }
 
     /**
@@ -45,7 +45,7 @@ class Task {
      * @return a boolean containing this information.
      */
     public boolean isTaskDone() {
-        return taskDone;
+        return isTaskDone;
     }
 
     public String getTaskName() {

@@ -19,7 +19,7 @@ class TaskList {
     }
 
     /**
-     * Add a task with specified description to TaskList.
+     * Adds a task with specified description to TaskList.
      *
      * @param taskDescription The description of task.
      * @return The task that have been added.
@@ -47,7 +47,7 @@ class TaskList {
     }
 
     /**
-     * Mark a task in TaskList as (Done).
+     * Marks a task in TaskList as (Done).
      *
      * @param index Index of the done task in TaskList.
      * @return the Task that marked as (Done).
@@ -59,7 +59,7 @@ class TaskList {
     }
 
     /**
-     * Delete a task from TaskList.
+     * Deletes a task from TaskList.
      *
      * @param index Index of the deleted task in TaskList.
      */

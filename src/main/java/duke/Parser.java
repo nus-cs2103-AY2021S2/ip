@@ -10,7 +10,7 @@ import java.util.ArrayList;
 class Parser {
 
     /**
-     * This method is the main method of Parser, which takes in a command line
+     * Is the main method of Parser, which takes in a command line
      * ans returns appropriate Command (object).
      *
      * @param commandLine The command line aentered by user.
@@ -46,7 +46,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable list command.
+     * Returns the suitable list command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -59,7 +59,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable bye command.
+     * Returns the suitable bye command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -72,7 +72,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable done command.
+     * Returns the suitable done command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -90,7 +90,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable delete command.
+     * Returns the suitable delete command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -108,7 +108,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable todo command.
+     * Returns the suitable todo command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -121,7 +121,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable deadline command.
+     * Returns the suitable deadline command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -145,7 +145,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable event command.
+     * Returns the suitable event command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -168,7 +168,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable myTaskToday command.
+     * Returns the suitable myTaskToday command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -181,7 +181,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable myTaskOn command.
+     * Returns the suitable myTaskOn command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -200,7 +200,7 @@ class Parser {
     }
 
     /**
-     * This method returns the suitable find command.
+     * Returns the suitable find command.
      *
      * @param commandLine the commandLine to read
      * @return the suitable Command Object
@@ -220,7 +220,7 @@ class Parser {
     }
 
     /**
-     * This is helper function to help Parser checks if the index number format given by command line is correct or not.
+     * (Helper function) Checks if the index number format given by command line is correct or not.
      *
      * @param strNum the String that we want to check contains number or not.
      * @return the answer in form of boolean.

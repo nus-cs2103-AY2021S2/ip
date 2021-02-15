@@ -35,7 +35,7 @@ class Duke {
     }
 
     /**
-     * The main method illustrates full usage of Danh's Duke before shutting it down
+     * Illustrates full usage of Danh's Duke before shutting it down
      *
      * @param args by default
      * @throws IOException exception regarding open and access taskFile
@@ -50,7 +50,7 @@ class Duke {
     }
 
     /**
-     * Perform 3 actions: mark a task in taskList as Done, show results with user and
+     * Performs 3 actions: mark a task in taskList as Done, show results with user and
      * change taskFile content correspondingly.
      *
      * @param duke  The duke instance related to this action
@@ -63,7 +63,7 @@ class Duke {
     }
 
     /**
-     * Perform 3 actions: add new task to taskList, show results with user and change taskFile content correspondingly.
+     * Performs 3 actions: add new task to taskList, show results with user and change taskFile content correspondingly.
      *
      * @param duke            The duke instance related to this action
      * @param taskDescription The desciption of the task that we want to add
@@ -75,7 +75,7 @@ class Duke {
     }
 
     /**
-     * Perform 3 actions: delete a task in taskList, show results with user and
+     * Performs 3 actions: delete a task in taskList, show results with user and
      * change taskFile content correspondingly.
      *
      * @param duke  The duke instance related to this action
@@ -90,8 +90,8 @@ class Duke {
     }
 
     /**
-     * Tell Duke that this command format is wrong,
-     * let it execute the action of throwing an exception to catch and handle.
+     * Tells Duke that this command format is wrong,
+     * lets it execute the action of throwing an exception to catch and handle.
      *
      * @param command The short syntax of the wrong format command
      * @throws DukeException Special exception related to wrong format of command entered into Danh's Duke
@@ -125,7 +125,7 @@ class Duke {
 
 
     /**
-     * Let Duke execute the command and produce the output of that command.
+     * Executes the command and produce the output of that command.
      *
      * @param myDuke Duke carrying out this command.
      * @param command The Command to be executed.
