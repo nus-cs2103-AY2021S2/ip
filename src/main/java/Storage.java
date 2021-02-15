@@ -48,8 +48,8 @@ public class Storage {
      */
     public void saveTasks(List<Task> list) {
         List<String> lines = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            lines.add(list.get(i).toFileString());
+        for (Task task : list) {
+            lines.add(task.toFileString());
         }
         writeLines(lines);
     }
