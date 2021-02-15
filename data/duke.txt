@@ -1,3 +1,2 @@
-[T][ ] test
+[D][X] return book  (by: 10 Mar 2020 - 1800)
 [E][ ] project meeting  (at: 28 Jan 2020 - 0800)
-[T][ ] buy item

@@ -32,7 +32,6 @@ public class Parser {
     public boolean parseUserInput(String userInput, Ui ui, Storage storage, TaskList taskList, ContactList contacts) {
         if (userInput.equals("bye")) {
             // Exit when the user inputs "bye"
-            ui.goodByeMessage();
             return false;
         } else if (userInput.equals("list")) {
             ui.printTaskList(taskList);
