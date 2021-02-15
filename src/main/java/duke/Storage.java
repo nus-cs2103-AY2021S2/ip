@@ -26,6 +26,11 @@ public class Storage {
         Path path = Paths.get(LIST_FILE_PATH);
         try {
             Files.createDirectories(path);
+            //Create file if not already exist.
+            File file = new File(LIST_FILE);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
         } catch (IOException e) {
             throw new DukeException("Failed to create storage directory. " + e.getMessage());
         }
@@ -76,6 +81,7 @@ public class Storage {
             s.close();
             return newList;
         } catch (TaskException | FileNotFoundException e) {
+            System.out.println("Bruh");
             throw new DukeException(e.getMessage());
         }
     }
