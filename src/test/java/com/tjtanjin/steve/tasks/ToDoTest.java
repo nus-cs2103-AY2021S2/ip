@@ -6,12 +6,12 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-public class TaskTest {
-    private final Task TASK = new Task("Test Task", "incomplete", "TODO");
+public class ToDoTest {
+    private final Task TASK = new ToDo("Test Todo", "incomplete");
 
     @Test
     void getTaskName_whenInvoke_thenOutputTaskName() {
-        String expected = "Test Task";
+        String expected = "Test Todo";
         String taskName = TASK.getTaskName();
         assertEquals(expected, taskName);
     }
@@ -38,10 +38,10 @@ public class TaskTest {
     }
 
     @Test
-    void markCompleted() {
+    void markCompleted_whenInvoke_thenMarkTaskComplete() {
         String expected = "complete";
-        TASK.markCompleted();
-        String taskStatus = TASK.getStatus();
+        Task task = TASK.markCompleted();
+        String taskStatus = task.getStatus();
         assertEquals(expected, taskStatus);
     }
 }
