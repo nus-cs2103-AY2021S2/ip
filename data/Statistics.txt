@@ -13,3 +13,11 @@ Task history:
 [T][ ] book
 2
 [T][ ] fight
+1
+[T][ ] study
+1
+[T][ ] readboo
+2
+[T][ ] readbook
+3
+[T][ ] reabook
