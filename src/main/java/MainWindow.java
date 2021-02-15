@@ -1,5 +1,5 @@
-import duke.Duke;
-import duke.ui.Ui;
+import moomin.Moomin;
+import moomin.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -21,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Moomin moomin;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/LittleMyUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Moomin.png"));
@@ -31,8 +31,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Moomin d) {
+        moomin = d;
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(d.getGreetingMessage(), dukeImage)
         );
@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = moomin.getResponse(input);
         if (response == Ui.FAREWELL_MESSAGE) {
             sendButton.setDisable(true);
         } else if (response == null) {
