@@ -29,6 +29,7 @@ public class UiHandler extends AnchorPane {
 
     private Steve steve;
 
+    //application theme and characters used are from minecraft and is strictly for learning purposes
     private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private final Image STEVE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/steve.png"));
 
