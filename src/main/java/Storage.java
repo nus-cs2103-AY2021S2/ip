@@ -72,7 +72,6 @@ public class Storage {
                 file.createNewFile();
             } catch(IOException error) {
                 new File(this.filePath).mkdir();
-                throw new DukeExceptionFolder("Created new directory for storing data");
             }
         }
         return new TaskList();
