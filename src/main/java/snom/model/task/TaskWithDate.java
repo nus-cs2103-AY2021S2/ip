@@ -1,12 +1,11 @@
 package snom.model.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoField;
 
-import snom.exceptions.SnomException;
+import snom.common.core.Messages;
+import snom.common.exceptions.SnomException;
+import snom.common.util.TaskUtil;
 
 /**
  * Stores extra date information for {@code Task}
@@ -26,10 +25,6 @@ public class TaskWithDate extends Task {
         this.dateTime = convertDateTime(dateTime);
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
     /**
      * Returns a formatted date time.
      * Eg. Tue 26 Jan 2021 03:33pm
@@ -37,10 +32,7 @@ public class TaskWithDate extends Task {
      * @return formatted date time
      */
     public String getDateTimeString() {
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("E dd MMM yyyy hh:mma")
-                .toFormatter();
-        return this.dateTime.format(formatter);
+        return this.dateTime.format(TaskUtil.DATE_TIME_OUTPUT_FORMAT);
     }
 
     public void setDateTime(LocalDateTime dateTime) {
@@ -57,23 +49,15 @@ public class TaskWithDate extends Task {
     public LocalDateTime convertDateTime(String dateTime) throws SnomException {
         dateTime = dateTime.replaceFirst(" ", "");
         try {
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                    .appendPattern("yyyy-MM-dd[ HH:mm]")
-                    .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-                    .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-                    .toFormatter();
-            LocalDateTime formattedDateTime = LocalDateTime.parse(dateTime, formatter);
+            LocalDateTime formattedDateTime = LocalDateTime.parse(dateTime, TaskUtil.DATE_TIME_INPUT_FORMAT);
             return formattedDateTime;
         } catch (DateTimeParseException e) {
-            throw new SnomException("Oops! Please enter a valid date time format [YYYY-MM-DD HH:MM]");
+            throw new SnomException(Messages.ERROR_INVALID_DATE_TIME);
         }
     }
 
     @Override
     public String getSaveString() {
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .appendPattern("yyyy-MM-dd[ HH:mm]")
-                .toFormatter();
-        return super.getSaveString() + ", " + this.dateTime.format(formatter);
+        return super.getSaveString() + ", " + this.dateTime.format(TaskUtil.DATE_TIME_SAVE_FORMAT);
     }
 }

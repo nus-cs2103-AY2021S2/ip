@@ -1,6 +1,6 @@
 package snom.model.task;
 
-import snom.exceptions.SnomException;
+import snom.common.exceptions.SnomException;
 
 /**
  * Stores Event {@code TaskWithDate}'s information

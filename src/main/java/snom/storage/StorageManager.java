@@ -3,10 +3,9 @@ package snom.storage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.List;
 
-import snom.exceptions.SnomException;
+import snom.common.exceptions.SnomException;
 import snom.model.task.Deadline;
 import snom.model.task.Event;
 import snom.model.task.Task;
@@ -36,9 +35,9 @@ public class StorageManager extends FileManager {
      * @return               array list of {@code Task}
      * @throws SnomException if invalid date for deadline or event
      */
-    public ArrayList<Task> importTask() throws SnomException {
+    public TaskList importTask() throws SnomException {
         List<String> lines = super.readFile();
-        ArrayList<Task> taskList = new ArrayList<>();
+        TaskList taskList = new TaskList();
         for (String line: lines) {
             String[] attr = line.split(",");
             switch (attr[0]) {
@@ -71,7 +70,7 @@ public class StorageManager extends FileManager {
     public void saveFile(TaskList taskList) {
         try {
             Files.writeString(path, "");
-            for (Task task: taskList.getList()) {
+            for (Task task: taskList) {
                 Files.writeString(path, task.getSaveString() + "\n", StandardOpenOption.APPEND);
             }
         } catch (IOException e) {

@@ -1,6 +1,6 @@
 package snom.logic.commands;
 
-import snom.exceptions.SnomException;
+import snom.common.exceptions.SnomException;
 import snom.logic.Parser;
 import snom.model.task.Task;
 import snom.model.task.TaskList;

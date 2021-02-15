@@ -1,6 +1,6 @@
 package snom.model;
 
-import snom.exceptions.SnomException;
+import snom.common.exceptions.SnomException;
 import snom.logic.Parser;
 import snom.logic.commands.Command;
 import snom.logic.commands.CommandResponse;
@@ -26,9 +26,9 @@ public class Snom {
         snomio = new Snomio();
         storage = new StorageManager(filePath);
         try {
-            taskList = new TaskList(storage.importTask());
+            taskList = storage.importTask();
         } catch (SnomException e) {
-            snomio.showLoadingError();
+            e.printStackTrace();
         }
     }
 
