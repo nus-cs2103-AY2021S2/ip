@@ -135,7 +135,7 @@ error message which is red.
 
 ![error](images/error.png)
 
-##data transfer 
+## data transfer 
 
 If wanting to install the app in the other computer and transfer the data,
 master can overwrite the empty data file (data/duck.txt). It creates with 
