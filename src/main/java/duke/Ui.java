@@ -127,6 +127,6 @@ public class Ui {
      */
     public String printUpdatePrompt(List<Task> list, int taskNumber) {
         return "Noted. I've updated the following task to:\n"
-                + "        " + list.get(taskNumber);
+                + list.get(taskNumber);
     }
 }
