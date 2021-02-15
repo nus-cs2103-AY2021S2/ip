@@ -32,10 +32,10 @@ public class FindCommand {
     /**
      * Forwards the find task operation to TaskHandler.
      *
-     * @param taskName name of task
+     * @param searchTerms search terms for finding task
      * @return string response after operation is done
      */
-    public String execute(String taskName) {
-        return TASK_HANDLER.findTask(taskName.split(" "));
+    public String execute(String searchTerms) {
+        return TASK_HANDLER.findTask(searchTerms.split(" "));
     }
 }

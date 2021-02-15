@@ -21,7 +21,7 @@ public class ListCommand {
     }
 
     /**
-     * Gets the description of list command, currently unused.
+     * Gets the description of list command.
      *
      * @return description of list command
      */

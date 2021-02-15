@@ -19,7 +19,7 @@ public class HelpCommand {
     }
 
     /**
-     * Gets the description of help command, currently unused.
+     * Gets the description of help command.
      *
      * @return description of help command
      */

@@ -27,8 +27,6 @@ public class CommandHandler {
      * @param taskHandler task handler to pass to commands that modify tasks
      */
     public CommandHandler(TaskHandler taskHandler) {
-
-        //load command descriptions
         //list storing commands/descriptions, ideally store in json file
         HashMap<String, String> cmdInfo = new HashMap<>();
         cmdInfo.put("BYE", "bye | Description: exits the program");

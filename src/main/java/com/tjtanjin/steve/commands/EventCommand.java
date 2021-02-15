@@ -36,7 +36,7 @@ public class EventCommand {
      *
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
-     * @param taskDates array of dates
+     * @param taskDates array of dates containing start and end dates of event task
      * @return string response after operation is done
      */
     public String execute(String taskType, String taskName, LocalDate[] taskDates) {

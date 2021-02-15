@@ -97,8 +97,8 @@ public class Parser {
                 LocalDate[] eventTaskDates = parseTaskDates(input);
                 return EVENT_COMMAND.execute(command, eventTaskName, eventTaskDates);
             case FIND:
-                String searchTerm = parseTaskName(input);
-                return FIND_COMMAND.execute(searchTerm);
+                String searchTerms = parseTaskName(input);
+                return FIND_COMMAND.execute(searchTerms);
             case HELP:
                 return HELP_COMMAND.execute();
             case LIST:

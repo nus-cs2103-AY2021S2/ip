@@ -145,9 +145,9 @@ public class StorageHandler {
     /**
      * Reverts task list by one modification.
      */
-    public boolean revertTask(ArrayList<Task> REVERTED_TASKS) {
-        System.out.println(REVERTED_TASKS.size());
-        this.tasks = REVERTED_TASKS;
+    public boolean revertTask(ArrayList<Task> revertedTasks) {
+        System.out.println(revertedTasks.size());
+        this.tasks = revertedTasks;
         JSONArray taskList = new JSONArray();
 
         this.tasks.forEach(task -> {
@@ -200,7 +200,6 @@ public class StorageHandler {
      * @return true or false to indicate if file was written to successfully
      */
     public boolean writeToFile() {
-        //write JSON file
         try (FileWriter file = new FileWriter(this.PATH)) {
 
             file.write(taskList.toJSONString());

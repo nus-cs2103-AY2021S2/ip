@@ -15,7 +15,7 @@ public class ByeCommand {
     }
 
     /**
-     * Gets the description of bye command, currently unused.
+     * Gets the description of bye command.
      *
      * @return description of bye command
      */

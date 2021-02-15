@@ -36,7 +36,7 @@ public class DeadlineCommand {
      *
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
-     * @param taskDates array of dates
+     * @param taskDates array of dates containing due date of deadline task
      * @return string response after operation is done
      */
     public String execute(String taskType, String taskName, LocalDate[] taskDates) {

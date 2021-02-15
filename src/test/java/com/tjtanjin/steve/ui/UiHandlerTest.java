@@ -36,7 +36,7 @@ public class UiHandlerTest extends AnchorPane {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String expectedMsg = "Hello from\n" + logo + "\nWhat can I do for you?";
-        UI_HANDLER.showWelcome();
+        UI_HANDLER.showWelcomeMsg();
         assertEquals(expectedMsg, OUTPUT_STREAM_CAPTOR.toString().trim());
     }
 
