@@ -19,12 +19,20 @@ public class TaskList implements Serializable {
         this.taskList = taskList;
     }
 
-    public ArrayList<Task> getList() {
-        return taskList;
-    }
-
     public int getSize() {
         return taskList.size();
+    }
+
+    public TaskList find(String keyword) {
+        ArrayList<Task> matchingList = new ArrayList<>();
+
+        for (Task task: taskList) {
+            if (task.containsText(keyword)) {
+                matchingList.add(task);
+            }
+        }
+
+        return new TaskList(matchingList);
     }
 
     /**
@@ -62,16 +70,12 @@ public class TaskList implements Serializable {
         StringBuilder builder = new StringBuilder();
         int numbering = 1;
         for (Task task: taskList) {
-            builder.append("\t")
-                    .append(numbering++)
+            builder.append(numbering++)
                     .append(". ")
                     .append(task)
                     .append("\n");
         }
 
-        if (numbering == 1) {
-            builder.append("\tYou currently have 0 tasks.");
-        }
         return builder.toString();
     }
 }

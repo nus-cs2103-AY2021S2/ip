@@ -3,6 +3,7 @@ package com.tanboonji.duke.command;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.exception.InvalidCommandArgumentException;
 import com.tanboonji.duke.model.Task;
+import com.tanboonji.duke.model.TaskList;
 
 /**
  * The FindCommand class contains information to execute the "find" command.
@@ -13,6 +14,9 @@ public class FindCommand extends Command {
     public static final String COMMAND = "find";
     private static final String ERROR_MESSAGE = "Sorry, please enter a keyword to search for.\n"
             + "Command: find [keyword]";
+    private static final String SUCCESS_MATCH_MESSAGE = "Here are the matching tasks in your list:\n"
+            + "%s";
+    private static final String SUCCESS_NO_MATCH_MESSAGE = "Sorry, I couldn't find any tasks matching '%s' in your list.";
 
     private final String keyword;
 
@@ -32,23 +36,12 @@ public class FindCommand extends Command {
 
     @Override
     public String execute() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Here are the matching tasks in your list:\n");
-        int numbering = 1;
-        for (Task task: taskList.getList()) {
-            if (task.containsText(keyword)) {
-                builder.append("\t")
-                        .append(numbering++)
-                        .append(".")
-                        .append(task)
-                        .append("\n");
-            }
-        }
+        TaskList matchingTask = taskList.find(keyword);
 
-        if (numbering == 1) {
-            builder.append("\tYou currently have 0 tasks.");
+        if (matchingTask.getSize() == 0) {
+            return String.format(SUCCESS_NO_MATCH_MESSAGE, keyword);
         }
-        return builder.toString().trim();
+        return String.format(SUCCESS_MATCH_MESSAGE, matchingTask);
     }
 
     /**

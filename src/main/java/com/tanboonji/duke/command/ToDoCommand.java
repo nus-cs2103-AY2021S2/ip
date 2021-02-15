@@ -14,6 +14,11 @@ public class ToDoCommand extends Command {
     public static final String COMMAND = "todo";
     private static final String ERROR_MESSAGE = "Sorry, please enter a description for the todo.\n"
             + "\tCommand: todo [description]";
+    private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n"
+            + "%s\n"
+            +"Now you have %d %s.";
+    private static final String TASK_SINGULAR = "task";
+    private static final String TASK_PLURAL = "tasks";
     private final String description;
 
     private ToDoCommand(String description) {
@@ -35,16 +40,8 @@ public class ToDoCommand extends Command {
         Task newTask = new ToDo(description);
         taskList.addTask(newTask);
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("Got it. I've added this task:\n\t")
-                .append(newTask)
-                .append("\nNow you have ")
-                .append(taskList.getSize())
-                .append(" task");
-        if (taskList.getSize() > 1) {
-            builder.append("s");
-        }
-        return builder.toString();
+        String taskSingularPlural = (taskList.getSize() > 1) ? TASK_PLURAL : TASK_SINGULAR;
+        return String.format(SUCCESS_MESSAGE, newTask, taskList.getSize(), taskSingularPlural);
     }
 
     /**

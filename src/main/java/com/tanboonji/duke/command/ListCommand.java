@@ -7,6 +7,9 @@ public class ListCommand extends Command {
 
     /** String input to execute this command */
     public static final String COMMAND = "list";
+    private static final String SUCCESS_MESSAGE = "Here are the tasks in your list:\n"
+            + "%s";
+    private static final String SUCCESS_EMPTY_ALIAS_MESSAGE = "You currently have 0 tasks.";
 
     /**
      * Default class constructor.
@@ -26,9 +29,10 @@ public class ListCommand extends Command {
 
     @Override
     public String execute() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Here are the tasks in your list:\n");
-        builder.append(taskList);
-        return builder.toString().trim();
+        if (taskList.getSize() == 0) {
+            return SUCCESS_EMPTY_ALIAS_MESSAGE;
+        }
+
+        return String.format(SUCCESS_MESSAGE, taskList);
     }
 }

@@ -7,6 +7,9 @@ public class ListAliasCommand extends Command {
 
     /** String input to execute this command */
     public static final String COMMAND = "listalias";
+    private static final String SUCCESS_MESSAGE = "Here are the your aliases:\n"
+            + "%s";
+    private static final String SUCCESS_EMPTY_ALIAS_MESSAGE = "You currently have 0 aliases.";
 
     /**
      * Default class constructor.
@@ -26,9 +29,10 @@ public class ListAliasCommand extends Command {
 
     @Override
     public String execute() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Here are the list of your alias:\n");
-        builder.append(aliasMap);
-        return builder.toString().trim();
+        if (aliasMap.getSize() == 0) {
+            return SUCCESS_EMPTY_ALIAS_MESSAGE;
+        }
+
+        return String.format(SUCCESS_MESSAGE, aliasMap);
     }
 }

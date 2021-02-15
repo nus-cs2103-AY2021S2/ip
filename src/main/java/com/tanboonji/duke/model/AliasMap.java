@@ -20,6 +20,10 @@ public class AliasMap implements Serializable {
         this.aliasMap = aliasMap;
     }
 
+    public int getSize() {
+        return aliasMap.size();
+    }
+
     /**
      * Adds a new command alias.
      *
@@ -57,18 +61,11 @@ public class AliasMap implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        int numbering = 1;
         for (String alias: aliasMap.keySet()) {
-            builder.append("\t")
-                    .append(numbering++)
-                    .append(". ")
-                    .append(String.format(aliasFormat, alias, aliasMap.get(alias)))
+            builder.append(String.format(aliasFormat, alias, aliasMap.get(alias)))
                     .append("\n");
         }
 
-        if (numbering == 1) {
-            builder.append("\tYou currently have 0 aliases.");
-        }
         return builder.toString();
     }
 }

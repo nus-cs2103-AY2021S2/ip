@@ -20,6 +20,11 @@ public class EventCommand extends Command {
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=\\/at)\\/at\\W(.*)");
     private static final String ERROR_MESSAGE = "Sorry, please enter a valid description and datetime for the event.\n"
             + "Command: event [description] /at [datetime]";
+    private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n"
+            + "%s\n"
+            +"Now you have %d %s.";
+    private static final String TASK_SINGULAR = "task";
+    private static final String TASK_PLURAL = "tasks";
     private static final int DESCRIPTION_GROUP = 1;
     private static final int DATE_GROUP = 2;
 
@@ -46,16 +51,8 @@ public class EventCommand extends Command {
         Task newTask = new Event(description, at);
         taskList.addTask(newTask);
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("Got it. I've added this task:\n\t")
-                .append(newTask)
-                .append("\nNow you have ")
-                .append(taskList.getSize())
-                .append(" task");
-        if (taskList.getSize() > 1) {
-            builder.append("s");
-        }
-        return builder.toString();
+        String taskSingularPlural = (taskList.getSize() > 1) ? TASK_PLURAL : TASK_SINGULAR;
+        return String.format(SUCCESS_MESSAGE, newTask, taskList.getSize(), taskSingularPlural);
     }
 
     /**
