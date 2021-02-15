@@ -13,7 +13,9 @@ readability.
 4. Double click the `duke.jar` file.
     - If you had not associated jar files with java, ensure you open the file using your java executable.
 5. The GUI will now be shown below.
+   
    ![First Launch](start.png)
+
 ## Task Types
 The app supports the following task types, which will be printed as,
 
@@ -38,9 +40,8 @@ into its proper date.
 
 ![Date Format](dateformat.png)
 
-### Listing all persons: `list`
+### Listing all tasks: `list`
 Shows a list of all the tasks.  
-Each item is in the form:
 
 Format: `list`
 
