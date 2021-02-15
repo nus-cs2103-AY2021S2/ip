@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
+import duke.ui.DukeResponses;
 
 /**
  * class Command
@@ -13,14 +13,9 @@ public abstract class Command {
     /**
      * execute: executes the command
      * @param tasks the list of tasks
-     * @param ui
+     * @param dukeResponses
      * @param storage
+     * @return execution message
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
-     * isExit: checks if Duke should terminate
-     * @return true if ByeCommand is executed
-     */
-    public abstract boolean isExit();
+    public abstract String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage);
 }

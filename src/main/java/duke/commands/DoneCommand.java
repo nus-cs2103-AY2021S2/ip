@@ -4,7 +4,7 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
+import duke.ui.DukeResponses;
 
 /**
  * class DoneCommand
@@ -25,25 +25,19 @@ public class DoneCommand extends Command {
     /**
      * execute: executes the command
      * @param tasks the list of tasks
-     * @param ui
+     * @param dukeResponses
      * @param storage
+     * @return complete task success message, or
+     *         an error message
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
         try {
             Task taskToComplete = tasks.getTask(index);
             tasks.completeTask(index);
-            ui.showCompleteTask(taskToComplete, tasks);
             storage.saveFile(tasks.getTaskList());
+            return dukeResponses.showCompleteTask(taskToComplete, tasks);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return dukeResponses.showError(e);
         }
-    }
-
-    /**
-     * isExit: checks if Duke should terminate
-     * @return false
-     */
-    public boolean isExit() {
-        return false;
     }
 }

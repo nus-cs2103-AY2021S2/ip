@@ -4,7 +4,7 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
+import duke.ui.DukeResponses;
 
 /**
  * class DeleteCommand
@@ -25,25 +25,19 @@ public class DeleteCommand extends Command {
     /**
      * execute: executes the command
      * @param tasks the list of tasks
-     * @param ui
+     * @param dukeResponses
      * @param storage
+     * @return delete task success message, or
+     *         an error message
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
         try {
             Task taskToDelete = tasks.getTask(index);
             tasks.deleteTask(index);
-            ui.showDeleteTask(taskToDelete, tasks);
             storage.saveFile(tasks.getTaskList());
+            return dukeResponses.showDeleteTask(taskToDelete, tasks);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return dukeResponses.showError(e);
         }
-    }
-
-    /**
-     * isExit: checks if Duke should terminate
-     * @return false
-     */
-    public boolean isExit() {
-        return false;
     }
 }

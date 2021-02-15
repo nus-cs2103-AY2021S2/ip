@@ -5,7 +5,7 @@ import duke.storage.Storage;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.Task;
-import duke.ui.Ui;
+import duke.ui.DukeResponses;
 
 /**
  * class EventCommand
@@ -29,25 +29,19 @@ public class EventCommand extends Command{
     /**
      * execute: executes the command
      * @param tasks the list of tasks
-     * @param ui
+     * @param dukeResponses
      * @param storage
+     * @return add event success message, or
+     *         an error message
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
         try {
             Task event = new Event(eventDescription, period);
             tasks.addTask(event);
-            ui.showAddTask(event, tasks);
             storage.saveFile(tasks.getTaskList());
+            return dukeResponses.showAddTask(event, tasks);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            return dukeResponses.showError(e);
         }
-    }
-
-    /**
-     * isExit: checks if Duke should terminate
-     * @return false
-     */
-    public boolean isExit() {
-        return false;
     }
 }

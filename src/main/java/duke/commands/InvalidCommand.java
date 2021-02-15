@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
+import duke.ui.DukeResponses;
 
 /**
  * class InvalidCommand
@@ -13,18 +13,11 @@ public class InvalidCommand extends Command {
     /**
      * execute: executes the command
      * @param tasks the list of tasks
-     * @param ui
+     * @param dukeResponses
      * @param storage
+     * @return list of commands recognised by Duke
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showCommands();
-    }
-
-    /**
-     * isExit: checks if Duke should terminate
-     * @return false
-     */
-    public boolean isExit() {
-        return false;
+    public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
+        return dukeResponses.showCommands();
     }
 }

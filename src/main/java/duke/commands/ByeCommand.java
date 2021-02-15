@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
+import duke.ui.DukeResponses;
 
 /**
  * class ByeCommand
@@ -13,18 +13,11 @@ public class ByeCommand extends Command {
     /**
      * execute: executes the command
      * @param tasks the list of tasks
-     * @param ui
+     * @param dukeResponses
      * @param storage
+     * @return goodbye message
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showGoodbye();
-    }
-
-    /**
-     * isExit: checks if Duke should terminate
-     * @return true
-     */
-    public boolean isExit() {
-        return true;
+    public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
+        return dukeResponses.showGoodbye();
     }
 }

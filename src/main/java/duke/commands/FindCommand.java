@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
+import duke.ui.DukeResponses;
 
 /**
  * class FindCommand
@@ -23,19 +23,12 @@ public class FindCommand extends Command {
     /**
      * execute: executes the command
      * @param tasks the list of tasks
-     * @param ui
+     * @param dukeResponses
      * @param storage
+     * @return result of find task message
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
         TaskList filteredTasks = tasks.findTask(keyword);
-        ui.showTaskList(filteredTasks, "matching ");
-    }
-
-    /**
-     * isExit: checks if Duke should terminate
-     * @return false
-     */
-    public boolean isExit() {
-        return false;
+        return dukeResponses.showTaskList(filteredTasks, "matching ");
     }
 }
