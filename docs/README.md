@@ -6,7 +6,7 @@ users who can type fast will find it to be a better alternative than a GUI-only
 task manager.
 
 ## Features
-
+  
 No. | Features | Command Syntax 
 :---: | :-------:| :------------: 
 1. | todo | todo [task_description]
