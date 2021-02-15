@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 public class Deadline extends Task {
     private LocalDate date;
@@ -13,9 +16,13 @@ public class Deadline extends Task {
      * @param date
      * @param preposition
      */
-    public Deadline(String taskName, String date, String preposition) {
+    public Deadline(String taskName, String date, String preposition) throws DukeException {
         super(taskName);
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Please enter a valid date format! YYYY-MM-DD");
+        }
         this.preposition = preposition;
     }
 
@@ -39,8 +46,11 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveFormat() {
-        String line = "D" + " | " + (super.isDone() ? "1" : "0") + " | " + super.getName();
-        line += " | " + date + " | " + preposition;
-        return line;
+        return String.format("%s | %s | %s | %s | %s",
+                "D",
+                super.isDone() ? "1" : 0,
+                super.getName(),
+                this.date,
+                this.preposition);
     }
 }

@@ -75,7 +75,9 @@ public class Task {
      * @return a string that is formatted for writing
      */
     public String toSaveFormat() {
-        String line = "T" + " | " + (isDone ? "1" : "0") + " | " + name;
-        return line;
+        return String.format("%s | %s | %s",
+                "T",
+                isDone ? "1" : 0,
+                this.name);
     }
 }

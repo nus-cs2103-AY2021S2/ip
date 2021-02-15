@@ -75,27 +75,27 @@ public class Storage {
     public LinkedList<Task> load() throws DukeException {
         try {
             LinkedList<Task> list = new LinkedList<>();
-            if (saveFile.exists()) {
-                Scanner reader = new Scanner(saveFile);
-                while (reader.hasNextLine()) {
-                    String line = reader.nextLine();
-                    String[] token = line.split(" \\| ");
-                    assert(token.length >= 2);
-                    Task task;
-                    if (token[0].equals("T")) {
-                        task = new Todo(token[2]);
-                    } else if (token[0].equals("E")) {
-                        task = new Event(token[2], token[3], token[4]);
-                    } else if (token[0].equals("D")) {
-                        task = new Deadline(token[2], token[3], token[4]);
-                    } else {
-                        throw new DukeException("Save file is corrupted ): Will be creating a new file");
-                    }
-                    if (token[1].equals("1")) {
-                        task.setDone();
-                    }
-                    list.add(task);
+            if (!saveFile.exists()) {
+                return list;
+            }
+            Scanner reader = new Scanner(saveFile);
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] token = line.split(" \\| ");
+                Task task;
+                if (token[0].equals("T")) {
+                    task = new Todo(token[2]);
+                } else if (token[0].equals("E")) {
+                    task = new Event(token[2], token[3], token[4]);
+                } else if (token[0].equals("D")) {
+                    task = new Deadline(token[2], token[3], token[4]);
+                } else {
+                    throw new DukeException("Save file is corrupted ): Will be creating a new file");
                 }
+                if (token[1].equals("1")) {
+                    task.setDone();
+                }
+                list.add(task);
             }
             return list;
         } catch (IOException ex) {
