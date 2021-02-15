@@ -66,52 +66,52 @@ public class Duke extends Application {
 
     private void readParse(ParserOutput parserOutput) {
         switch (parserOutput.getAction()) {
-            case 1: //remove
-                this.taskList.remove(parserOutput.getIndex());
-                ui.printRemoved(parserOutput.getIndex());
-                break;
-            case 2: //done
-                Task doneTask = this.taskList.get(parserOutput.getIndex());
-                doneTask.markDone();
-                this.taskList.set(parserOutput.getIndex(), doneTask);
-                ui.printDone(doneTask);
-                break;
-            case 3: //add
-                this.taskList.add(parserOutput.getTask());
-                ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
-                break;
-            case 4: //find
-                List<Task> results = this.taskList.find(parserOutput.getSearchString());
-                ui.printSearch(results, parserOutput.getSearchString());
-                break;
-            case 5: //list
-                ui.printList(this.taskList);
-                break;
-            default:
-                //TODO: add exception for this
+        case 1: //remove
+            this.taskList.remove(parserOutput.getIndex());
+            ui.printRemoved(parserOutput.getIndex());
+            break;
+        case 2: //done
+            Task doneTask = this.taskList.get(parserOutput.getIndex());
+            doneTask.markDone();
+            this.taskList.set(parserOutput.getIndex(), doneTask);
+            ui.printDone(doneTask);
+            break;
+        case 3: //add
+            this.taskList.add(parserOutput.getTask());
+            ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
+            break;
+        case 4: //find
+            List<Task> results = this.taskList.find(parserOutput.getSearchString());
+            ui.printSearch(results, parserOutput.getSearchString());
+            break;
+        case 5: //list
+            ui.printList(this.taskList);
+            break;
+        default:
+            //TODO: add exception for this
         }
     }
 
     private String readParseGui(ParserOutput parserOutput) {
         switch (parserOutput.getAction()) {
-            case 1: //remove
-                this.taskList.remove(parserOutput.getIndex());
-                return ui.printRemoved(parserOutput.getIndex());
-            case 2: //done
-                Task doneTask = this.taskList.get(parserOutput.getIndex());
-                doneTask.markDone();
-                this.taskList.set(parserOutput.getIndex(), doneTask);
-                return ui.printDone(doneTask);
-            case 3: //add
-                this.taskList.add(parserOutput.getTask());
-                return ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
-            case 4: //find
-                List<Task> results = this.taskList.find(parserOutput.getSearchString());
-                return ui.printSearch(results, parserOutput.getSearchString());
-            case 5: //list
-                return Ui.printList(this.taskList);
-            default:
-                return "Sorry, could you repeat please? ";
+        case 1: //remove
+            this.taskList.remove(parserOutput.getIndex());
+            return ui.printRemoved(parserOutput.getIndex());
+        case 2: //done
+            Task doneTask = this.taskList.get(parserOutput.getIndex());
+            doneTask.markDone();
+            this.taskList.set(parserOutput.getIndex(), doneTask);
+            return ui.printDone(doneTask);
+        case 3: //add
+            this.taskList.add(parserOutput.getTask());
+            return ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
+        case 4: //find
+            List<Task> results = this.taskList.find(parserOutput.getSearchString());
+            return ui.printSearch(results, parserOutput.getSearchString());
+        case 5: //list
+            return Ui.printList(this.taskList);
+        default:
+            return "Sorry, could you repeat please? ";
         }
     }
 
