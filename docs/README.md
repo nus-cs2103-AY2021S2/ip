@@ -1,6 +1,6 @@
 # Duke User Guide 
 
-<p align="centre">
+<p align="center">
     <img src="./Ui.png" width="400" heigh = "600">
 </p>
 
