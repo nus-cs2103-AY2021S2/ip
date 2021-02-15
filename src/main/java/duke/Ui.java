@@ -31,7 +31,8 @@ public class Ui {
      * @return Goodbye message.
      */
     public String exit() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye, this was Eeyore serving you!\n"
+                + "Hope to see you again, take care! ";
     }
 
     /**
