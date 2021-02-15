@@ -16,7 +16,9 @@ import duke.ui.PreformattedMessages;
 
 import java.util.ArrayList;
 
-// Trigger another push for workflow
+/**
+ * Main logic class for tasklist management.
+ */
 public class Duke {
     private static final String DATAFILE_PATH = "./dukeData/tasks.txt";
 
@@ -54,6 +56,11 @@ public class Duke {
         return response;
     }
 
+    /**
+     * Retrieves tasklist as a string for immediate printing in GUI.
+     *
+     * @return String
+     */
     public String getTasklistString() {
         ArrayList<String> lines = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -63,6 +70,12 @@ public class Duke {
         return String.join("\n", lines.toArray(new String[0]));
     }
 
+    /**
+     * Retrieves result of parsing and processing of user input.
+     *
+     * @param input User input text
+     * @return Response from Duke
+     */
     public Response getResponse(String input) {
         try {
             UserInputTokenSet tokenSet = UserInputTokenizer.parse(input);

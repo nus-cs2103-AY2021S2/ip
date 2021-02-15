@@ -12,10 +12,11 @@ import duke.tasks.TaskList;
 public class DukeCommandBye extends DukeCommand {
 
     /**
-     * Prints exit message.
+     * Returns exit response.
      *
      * @param tasks tasklist
      * @param loader loader
+     * @return Response
      */
     @Override
     public Response execute(TaskList tasks, FileLoader loader) {

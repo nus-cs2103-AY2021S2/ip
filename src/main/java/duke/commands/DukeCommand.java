@@ -9,5 +9,6 @@ import duke.tasks.TaskList;
  */
 public abstract class DukeCommand {
 
+    /** Must be overridden by commands performing action. */
     public abstract Response execute(TaskList tasks, FileLoader loader);
 }

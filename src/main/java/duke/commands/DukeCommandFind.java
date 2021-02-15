@@ -48,10 +48,11 @@ public class DukeCommandFind extends DukeCommand {
     }
 
     /**
-     * Prints tasks from tasklist according to search query, writes to file and displays success
+     * Returns Response listing tasks from tasklist according to search query, writes to file and displays success
      *
      * @param tasks tasklist
      * @param loader storage
+     * @return Response
      */
     @Override
     public Response execute(TaskList tasks, FileLoader loader) {

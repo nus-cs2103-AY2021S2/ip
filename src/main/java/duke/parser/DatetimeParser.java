@@ -127,7 +127,7 @@ public class DatetimeParser {
     public static LocalDateTime parseDate(String input, LocalDateTime now) throws DukeExceptionIllegalArgument {
         input = input.strip();
         now = now.withSecond(0).withNano(0);
-        String inputAddYear = input + "_" + now.getYear();
+        String inputAddYear = input + "_" + now.getYear(); // to bypass no year parsing, see constants above.
         Optional<LocalDateTime> result;
 
         result = DatetimeParser.parseDateWithNoDates(input, now);

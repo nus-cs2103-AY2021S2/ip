@@ -64,6 +64,11 @@ public class InputHistoryBox extends HBox {
         setBackground((isBadInput) ? BG_BAD : BG_OK);
     }
 
+    /**
+     * Changes color of font to a faded version.
+     *
+     * Visual indication of historical user input.
+     */
     public void setInputFaded() {
         setBackground(BG_FADED);
         if (isBadInput) {

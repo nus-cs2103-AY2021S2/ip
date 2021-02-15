@@ -12,7 +12,6 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
-
 /**
  * List command.
  *
@@ -23,10 +22,18 @@ public class DukeCommandList extends DukeCommand {
 
     protected boolean toSort;
 
+    /** Single constructor */
     public DukeCommandList(UserInputTokenSet tokenSet) {
         toSort = tokenSet.contains("sort");
     }
 
+    /**
+     * Returns Response containing formatted string representing the list.
+     *
+     * @param tasks tasklist
+     * @param loader loader
+     * @return Response
+     */
     @Override
     public Response execute(TaskList tasks, FileLoader loader) {
         if (tasks.size() == 0) {
@@ -59,6 +66,7 @@ public class DukeCommandList extends DukeCommand {
 }
 
 class TaskComparator implements Comparator<Task> {
+    // See List above.
     @Override
     public int compare(Task t1, Task t2) {
         if (t1 instanceof Todo) {

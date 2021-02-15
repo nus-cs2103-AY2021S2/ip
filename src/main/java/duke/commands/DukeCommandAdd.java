@@ -21,10 +21,11 @@ public class DukeCommandAdd extends DukeCommand {
     }
 
     /**
-     * Adds task to tasklist, writes to file and displays success
+     * Returns Response after adding task to tasklist, writes to file and displays success
      *
      * @param tasks tasklist
      * @param loader storage
+     * @return Response
      */
     @Override
     public Response execute(TaskList tasks, FileLoader loader) {
@@ -38,11 +39,9 @@ public class DukeCommandAdd extends DukeCommand {
         }
 
         /* Successful execution */
-        String[] responseMessageLines = {
-                "Got it. I've added this task:",
-                "  " + task,
-                "Now you have " + tasks.size() + " tasks in the list."
-        };
-        return Response.createResponseOk(responseMessageLines);
+        String respondMessage = "Got it. I've added this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.";
+        return Response.createResponseOk(respondMessage);
     }
 }

@@ -1,5 +1,7 @@
 package duke.controllers;
 
+import java.util.List;
+
 import duke.main.Duke;
 import duke.responses.Response;
 import javafx.application.Platform;
@@ -19,7 +21,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-import java.util.List;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -54,15 +55,15 @@ public class MainWindow extends AnchorPane {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
 
+    /** Initialize Duke and queries initial setup information */
     public void setDuke(Duke d) {
         duke = d;
-        updateResponseContainer(duke.getStartupResponse()); // initialize Duke
+        updateResponseContainer(duke.getStartupResponse());
         updateTasklistContainer(duke.getTasklistString());
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Updates response, tasklist and input history containers upon receiving user input.
      */
     @FXML
     private void handleUserInput() {
@@ -89,7 +90,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private void updateInputHistoryContainer(String inputText, boolean isBadInput) {
-
         /* Update last text box to neutral color */
         List<Node> nodes = inputHistoryContainer.getChildren();
         if (!nodes.isEmpty()) {

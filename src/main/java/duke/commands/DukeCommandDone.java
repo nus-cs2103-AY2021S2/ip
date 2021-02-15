@@ -36,10 +36,11 @@ public class DukeCommandDone extends DukeCommand {
     }
 
     /**
-     * Marks tasks as done in tasklist, writes to file and displays success
+     * Returns Response indicating tasks marked as done in tasklist, writes to file and displays success
      *
      * @param tasks tasklist
      * @param loader storage
+     * @return Response
      */
     @Override
     public Response execute(TaskList tasks, FileLoader loader) {

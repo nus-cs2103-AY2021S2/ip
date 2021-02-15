@@ -57,10 +57,11 @@ public class DukeCommandDelete extends DukeCommand {
     }
 
     /**
-     * Deletes tasks from tasklist, writes to file and displays success
+     * Returns Response after deleting tasks from tasklist, writes to file and displays success
      *
      * @param tasks tasklist
      * @param loader storage
+     * @return Response
      */
     @Override
     public Response execute(TaskList tasks, FileLoader loader) {
