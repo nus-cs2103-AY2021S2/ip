@@ -116,7 +116,7 @@ public class Parser {
             return constructDeadlineCommand(input);
         } catch (DateTimeParseException e) {
             throw new PasonException("Oops! You've entered an invalid date and time format.\n"
-                    + "Please use: dd/mm/yyyy hh:mm");
+                    + "Please use: dd/mm/yyyy hhmm");
         } catch (Exception e) {
             throw new PasonException(e.getMessage());
         }
