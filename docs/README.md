@@ -1,12 +1,12 @@
 # User Guide
-***
+
 ##Introduction
-***
+
 Irene is an application to help users keep track of 
 all their tasks. Using Command Line Interface (CLI), Irene is able to help users see, add 
 and delete their tasks quickly and seamlessly with the benefits of GUI (Graphical User Interface).
 ## Features 
-***
+
 ### Feature 1 
 ***
 ### `todo` - Adds a todo task to the list.
@@ -195,7 +195,7 @@ Expected outcome:
 
 Summary of Commands
 ---
-***
+
 Feature     | Format , Example
 ------------|------------------
 Add Todo task | `todo <task description>` , `todo refill water bottle`
