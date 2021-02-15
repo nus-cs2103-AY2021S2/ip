@@ -15,7 +15,7 @@ public class UnknownCommand extends Command {
      * Executes the command..
      */
     public CommandResult execute(TaskList tasks, Storage storage) {
-        return new CommandResult("I can't help you with this command yet. Sorry!", CommandResultType.CHAT_PASON);
+        return new CommandResult("I can't help you with this command yet. Sorry!", CommandResultType.ERROR);
     }
 
     public boolean isExit() {
