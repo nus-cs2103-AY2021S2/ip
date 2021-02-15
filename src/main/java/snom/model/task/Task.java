@@ -23,7 +23,7 @@ public class Task {
         return this.description;
     }
 
-    public boolean getStatus() {
+    public boolean hasFinished() {
         return isFinished;
     }
 
