@@ -54,6 +54,9 @@ public class Parser {
                 assert input.length >= 1 : "No Find Input";
                 output = "Here are the matching tasks in your list!\n" + taskList.findTask(input[1]);
                 break;
+            case "sort":
+                output = taskList.sort();
+                break;
             default:
                 throw new ChecklstException("Sorry I didn't understand that command!!");
             }

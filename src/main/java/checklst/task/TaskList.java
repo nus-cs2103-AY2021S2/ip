@@ -2,6 +2,7 @@ package checklst.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import checklst.exception.ChecklstException;
@@ -11,8 +12,7 @@ import checklst.exception.ChecklstException;
  */
 public class TaskList {
 
-    private final List<Task> taskList;
-
+    private List<Task> taskList;
     /**
      * Creates a new TaskList object.
      */
@@ -88,6 +88,25 @@ public class TaskList {
         }
 
         return new TaskList(filteredList);
+    }
+
+    /**
+     * Sorts the TaskList by completed and Task Type
+     * @return String of new Sorted List
+     */
+    public String sort() {
+        Map<Class<? extends Task>, Integer> sortMap = 
+            Map.of(Todo.class, 0, Deadline.class, 1, Event.class, 2);
+
+        this.taskList.sort((x, y) -> {
+            if (x.isCompleted && y.isCompleted) {
+                return sortMap.get(x.getClass()).compareTo(sortMap.get(y.getClass()));
+            } 
+
+            return x.isCompleted ? 1 : -1;
+        });
+
+        return "Your list is now sorted!\nYour new list is:\n" + this;
     }
 
     @Override
