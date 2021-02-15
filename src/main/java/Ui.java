@@ -44,7 +44,7 @@ public class Ui {
      */
     public void showAddMessage(Task t, int size) {
         response = "Got it. I've added this task:\n"
-                + "  " + t + "\nNow you have "
+                + t + "\nNow you have "
                 + size + " tasks in the list.";
     }
 
@@ -54,7 +54,7 @@ public class Ui {
      * @param t task.
      */
     public void showDone(Task t) {
-        response = "Nice! I've marked this task as done:\n  " + t;
+        response = "Nice! I've marked this task as done:\n" + t;
     }
 
     /**
@@ -64,7 +64,7 @@ public class Ui {
      * @param size number of task.
      */
     public void showDelete(Task t, int size) {
-        response = "Noted. I've removed this task:\n  "
+        response = "Noted. I've removed this task:\n"
                 + t + "\nNow you have "
                 + size + " tasks in the list.";
     }

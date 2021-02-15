@@ -33,7 +33,7 @@ public class Main extends Application {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-            System.err.print(e.getMessage());
+            e.printStackTrace();
         }
     }
 

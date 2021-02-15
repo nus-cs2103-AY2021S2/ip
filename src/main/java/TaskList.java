@@ -75,53 +75,53 @@ public class TaskList {
 
     /**
      * Show all the tasks in the list.
+     *
+     * @return listed.
      */
     public String listTask() {
-        String response = "";
+        String listed = "";
         for (int i = 0; i < size; i++) {
-            response = response + (i + 1) + "." + list.get(i) + "\n";
+            listed  = listed + (i + 1) + "." + list.get(i) + "\n";
         }
-        return response;
+        return listed ;
     }
 
     /**
-     * Find the tasks which has similar name to the string.
+     * Find tasks with name containing the given keyword.
      *
-     * @param task string
-     * @return task found
+     * @param task keyword.
+     * @return task found.
      */
     public String findTask(String task) {
-        int num = 1;
-        String response = "";
+        String found = "";
 
         for (int i = 0; i < size; i++) {
             String string = list.get(i).toString();
             if (string.contains(task)) {
-                response = response + num++ + "." + string + "\n";
+                found = found + (i + 1) + "." + string + "\n";
             }
         }
 
-        return response;
+        return found;
     }
 
     /**
-     * Search for tasks which take place at that timing.
+     * Search for tasks which occur at the given date.
      *
      * @param time date
      * @return task found
      */
     public String searchDateTask(String time) {
-        int num = 1;
-        String response = "";
+        String found = "";
 
         for (int i = 0; i < size; i++) {
             String string = list.get(i).toString();
             if (string.contains(time)) {
-                response = response + num++ + "." + string + "\n";
+                found = found + (i + 1) + "." + string + "\n";
             }
         }
 
-        return response;
+        return found;
     }
 
 }
