@@ -41,6 +41,7 @@ public class Alice {
 	 * @param newData        The tasks to be specified.
 	 * @param isDone         If the agent is done operating.
 	 * @param hasDelta       If the data in the agent has changed from some other instance.
+	 * @param previous		 The previous state of the agent
 	 */
 	public Alice(String currentMessage, TaskList newData, boolean isDone, boolean hasDelta, Alice previous) {
 		this.currentMessage = currentMessage;

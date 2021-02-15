@@ -58,6 +58,10 @@ public class MainWindow extends AnchorPane {
 	@FXML
 	public void initialize() {
 		scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+		alice = new Alice(loadTasks(), false);
+		dialogContainer.getChildren().addAll(
+				DialogBox.getDukeDialog(alice.getCurrentMessage(), dukeImage)
+		);
 	}
 
 	/**
@@ -67,14 +71,10 @@ public class MainWindow extends AnchorPane {
 	@FXML
 	private void handleUserInput() {
 		String input = userInput.getText();
-		TaskList tasks = loadTasks();
-		if (this.alice == null) {
-			alice = new Alice(loadTasks(), false);
-		}
 		alice = Parser.parse(input.trim()).execute(alice);
 		String response = alice.getCurrentMessage();
 		if (alice.hasDelta() && !saveTasks(alice.getData())) {
-			System.out.println("Error saving tasks to " + getDataPath());
+			DialogBox.getDukeDialog("Error saving tasks to " + getDataPath(), dukeImage);
 		}
 		if (alice.getIsDone()) {
 			System.exit(0);
