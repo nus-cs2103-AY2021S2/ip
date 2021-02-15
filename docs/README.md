@@ -22,7 +22,7 @@ you may view or delete them using Duke.
 
 ## Usage
 
-###1. `todo` - Add to do task
+### 1. `todo` - Add to do task
 
 Adds a new to do task to the list of tasks.
 
@@ -42,7 +42,7 @@ Got it: I've added this task:
 Now you have (number of tasks) in the list.
 ```
 
-###2. `deadline` - Add new deadline
+### 2. `deadline` - Add new deadline
 
 Adds a new deadline to the list of tasks.
 
@@ -61,7 +61,7 @@ Got it: I've added this task:
    [D][ ] (deadline description) (by:(date))
 Now you have (number of tasks) in the list.
 ```
-###3. `event` - Add new event
+### 3. `event` - Add new event
 
 Adds a new event to the list of tasks.
 
@@ -81,7 +81,7 @@ Got it: I've added this task:
 Now you have (number of tasks) in the list.
 ```
 
-###4. `list` - List tasks
+### 4. `list` - List tasks
 
 Lists all tasks that you have asked Duke to remember.
 
@@ -106,7 +106,7 @@ Found the following tasks on 2021-11-30:
 1. (Task)
 ```
 
-###5. `done` - Mark task as done
+### 5. `done` - Mark task as done
 
 Marks the task with the given task number as done.
 
@@ -125,7 +125,7 @@ Nice! I've marked this task as done:
 (Task)
 ```
 
-###6. `delete` - Delete a task
+### 6. `delete` - Delete a task
 
 Deletes the task with the given task number from
 Duke.
@@ -144,7 +144,7 @@ Noted. I've removed this task:
 Now you have (number of tasks) in the list.
 ```
 
-###7. `find` - Find a task
+### 7. `find` - Find a task
 
 Filters through all tasks in Duke to find tasks which contain
 the keywords that you provide.
@@ -162,7 +162,7 @@ Found (number of matches) matching tasks(s):
 (Task)
 ```
 
-###8. `sort` - Find a task
+### 8. `sort` - Find a task
 
 Sorts the list of tasks remembered by Duke based on your input.
 
