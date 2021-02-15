@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import duke.exceptions.DukeException;
+import duke.response.Response;
+import duke.response.ResponseStatus;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -33,85 +35,108 @@ public class Parser {
      * @param fullCommand raw command provided as a String
      * @return true if the user enters "bye", a sign to terminate the program
      */
-    public String parse(String fullCommand) {
+    public Response parse(String fullCommand) {
         try {
-            StringBuilder response = new StringBuilder();
+            StringBuilder text = new StringBuilder();
+            ResponseStatus status = null;
             CommandType commandType = Parser.getCommandType(fullCommand);
             Task task;
             switch (commandType) {
             case DEADLINE:
             case TODO:
             case EVENT:
-                task = Task.parseTask(fullCommand);
+                task = Task.parseTask(commandType, fullCommand);
                 tasks.add(task);
-                response.append("Got it. I've added this task:\n  added: ");
-                response.append(task);
-                response.append("\nNow you have ");
-                response.append(tasks.size());
-                response.append(" tasks in the list.");
+                text.append("Got it. I've added this task:\n  added: ");
+                text.append(task);
+                text.append("\nNow you have ");
+                text.append(tasks.size());
+                text.append(" tasks in the list.");
+                status = ResponseStatus.OK;
                 break;
             case LIST:
-                response.append("Here are the tasks in your list:\n");
+                text.append("Here are the tasks in your list:\n");
                 for (int i = 0; i < tasks.size(); i++) {
                     task = tasks.get(i);
-                    response.append(i + 1);
-                    response.append(".");
-                    response.append(task);
+                    text.append(i + 1);
+                    text.append(".");
+                    text.append(task);
                     if (i != tasks.size() - 1) {
-                        response.append("\n");
+                        text.append("\n");
                     }
                 }
+                status = ResponseStatus.OK;
                 break;
             case DELETE:
-                int userChoice = Integer.parseInt(fullCommand.split(" ")[1]);
-                if (userChoice > tasks.size()) {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but there is no such task :-(");
+                try {
+                    int deletionChoice = Integer.parseInt(fullCommand.split(" ")[1]);
+                    if (deletionChoice > tasks.size()) {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but there is no such task :-(");
+                    }
+                    task = tasks.remove(deletionChoice - 1);
+                    text.append("Noted. I've removed this task:\n  ");
+                    text.append(task);
+                    text.append("\nNow you have ");
+                    text.append(tasks.size());
+                    text.append(" tasks in the list.");
+                    status = ResponseStatus.OK;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException("☹ OOPS!!! Please tell me which task to delete :-(");
                 }
-                task = tasks.remove(userChoice - 1);
-                response.append("Noted. I've removed this task:\n  ");
-                response.append(task);
-                response.append("\nNow you have ");
-                response.append(tasks.size());
-                response.append(" tasks in the list.");
                 break;
             case BYE:
                 Platform.exit();
                 System.exit(0);
+                status = ResponseStatus.EXIT;
                 break;
             case FIND:
                 String query = fullCommand.split(" ", 2)[1];
-                response.append("Here are the matching tasks in your list:\n");
+                text.append("Here are the matching tasks in your list:\n");
                 for (int i = 0; i < tasks.size(); i++) {
                     task = tasks.get(i);
                     if (task.contains(query)) {
-                        response.append(i + 1);
-                        response.append(".");
-                        response.append(task);
+                        text.append(i + 1);
+                        text.append(".");
+                        text.append(task);
                         if (i != tasks.size() - 1) {
-                            response.append("\n");
+                            text.append("\n");
                         }
                     }
                 }
+                status = ResponseStatus.OK;
                 break;
-            case UNRECOGNIZED:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            case DONE:
+                try {
+                    int doneChoice = Integer.parseInt(fullCommand.split(" ")[1]);
+                    if (doneChoice > tasks.size()) {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but there is no such task :-(");
+                    }
+                    Task taskDone = tasks.get(doneChoice - 1);
+                    taskDone.markComplete();
+                    text.append("Nice! I've marked this task as done:\n");
+                    text.append(taskDone);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException("☹ OOPS!!! Please tell me which task to delete :-(");
+                }
+                break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            return Ui.displayMessage(response.toString());
+            return new Response(Ui.displayMessage(text.toString()), status);
         } catch (DukeException e) {
-            return Ui.displayMessage(e.getMessage());
+            return new Response(Ui.displayMessage(e.getMessage()), ResponseStatus.ERROR);
         }
     }
 
     public static CommandType getCommandType(String userCommand) {
         Map<CommandType, Pattern> patterns = new HashMap<>();
-        patterns.put(CommandType.DONE, Pattern.compile("^d(one)(?=\\s)?"));
-        patterns.put(CommandType.TODO, Pattern.compile("^t(odo)(?=\\s)?"));
-        patterns.put(CommandType.EVENT, Pattern.compile("^e(vent)(?=\\s)?"));
-        patterns.put(CommandType.DEADLINE, Pattern.compile("^d(l|eadline)(?=\\s)?"));
-        patterns.put(CommandType.LIST, Pattern.compile("^l(ist)(?=\\s)?"));
-        patterns.put(CommandType.DELETE, Pattern.compile("^del(ete)(?=\\s)?"));
+        patterns.put(CommandType.DONE, Pattern.compile("^d(one)?(?=\\s)+"));
+        patterns.put(CommandType.TODO, Pattern.compile("^t(odo)?(?=\\s)+"));
+        patterns.put(CommandType.EVENT, Pattern.compile("^e(vent)?(?=\\s)+"));
+        patterns.put(CommandType.DEADLINE, Pattern.compile("^(deadline|dl)(?=\\s)+"));
+        patterns.put(CommandType.LIST, Pattern.compile("^l(ist)?$"));
+        patterns.put(CommandType.DELETE, Pattern.compile("^del(ete)?(?=\\s)+"));
+        patterns.put(CommandType.BYE, Pattern.compile("^bye"));
         for (CommandType type : patterns.keySet()) {
             if (patterns.get(type).matcher(userCommand).find()) {
                 return type;

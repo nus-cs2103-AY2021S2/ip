@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.io.IOException;
 
+import duke.response.ResponseStatus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -35,7 +37,14 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+
+        Circle clip = new Circle(displayPicture.getFitHeight() / 2,
+                displayPicture.getFitHeight() / 2, displayPicture.getFitHeight() / 2);
+        displayPicture.setClip(clip);
         displayPicture.setImage(img);
+
+        setHeight(dialog.getHeight());
+
     }
 
     /**
@@ -46,16 +55,23 @@ public class DialogBox extends HBox {
         FXCollections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        this.setStyle("-fx-background-color: #d2cecd");
+        this.setStyle("-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #6A82FB, #FC5C7D); -fx-background-radius: 20px;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, ResponseStatus status) {
         var db = new DialogBox(text, img);
         db.flip();
+        if (status == ResponseStatus.ERROR) {
+            db.setStyle("-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #833ab4, #fd1d1d); -fx-background-radius: 20px;");
+        }
         return db;
+    }
+
+    public static DialogBox getDukeDialog(String text, Image img) {
+        return DialogBox.getDukeDialog(text, img, ResponseStatus.OK);
     }
 }

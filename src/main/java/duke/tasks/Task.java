@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import duke.exceptions.DukeException;
+import duke.parser.CommandType;
 
 /**
  * Base Task class which provides shared functionality such as description, task type and status
@@ -47,17 +48,16 @@ public class Task {
      * @return Respective Task object based on command issued
      * @throws DukeException if incomplete or unrecognizable command issued
      */
-    public static Task parseTask(String command) throws DukeException {
+    public static Task parseTask(CommandType type, String command) throws DukeException {
         try {
             String[] inputSplit = command.split(" ", 2);
-            String entryType = inputSplit[0];
             String description = inputSplit[1].strip();
-            switch (entryType) {
-            case "todo":
+            switch (type) {
+            case TODO:
                 return Todo.parseTodo(description);
-            case "event":
+            case EVENT:
                 return Event.parseEvent(description);
-            case "deadline":
+            case DEADLINE:
                 return Deadline.parseDeadline(description);
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

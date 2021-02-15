@@ -2,6 +2,8 @@ package duke;
 
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
+import duke.response.Response;
+import duke.response.ResponseStatus;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -43,14 +45,14 @@ public class Duke extends Application {
         return ui.displayWelcomeMessage();
     }
 
-    public String getResponse(String inputCommand) {
-        String response = this.parser.parse(inputCommand);
+    public Response getResponse(String inputCommand) {
+        Response response = this.parser.parse(inputCommand);
         try {
             this.storage.save(this.tasks.getTaskList());
         } catch (DukeException e) {
             ui.showSavingError();
         }
-        if (response.isEmpty()) {
+        if (response.getStatus() == ResponseStatus.EXIT) {
             Platform.exit();
         }
         return response;
