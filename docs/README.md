@@ -2,14 +2,14 @@
 
 By: `eksinyue`      Since: `Feb 2020` 
 
-Hi there! I am your good friend Moomin :zany_face:
+Hi there! I am your good friend Moomin :)
 
 I am very good at managing tasks. Tell me what you have on your plate 
-and let me help you keep track of your `todo`, `deadline` and `event`. :partying_face:
+and let me help you keep track of your `todo`, `deadline` and `event`!!!
 
 ## Quick Start
 * Ensure you have Java `11` or above installed in your Computer.
-* Download the latest `moomin.jar`.
+* Download the latest `moomin.jar` [here](https://github.com/eksinyue/ip/releases) .
 * Copy the file to the folder you want to use as the home folder for your Address Book.
 * Double-click the file to start the app. The GUI should appear in a few seconds.
 
