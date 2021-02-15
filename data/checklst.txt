@@ -1,8 +1,7 @@
-T ; O ; concert
-T ; O ; hello
-T ; O ; hello3
-T ; O ; 3
-E ; O ; concert ; 2020-04-12
 E ; O ; concert2 ; 2020-12-04
+E ; O ; concert ; 2020-04-12
+T ; O ; 3
+T ; O ; hello3
+T ; O ; hello
+T ; O ; concert
 T ; X ; hello2
-D ; X ; assignment ; 2020-04-02

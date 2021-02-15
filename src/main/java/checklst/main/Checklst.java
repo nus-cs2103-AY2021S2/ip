@@ -13,6 +13,7 @@ import checklst.task.TaskList;
 import checklst.ui.Ui;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -81,6 +83,7 @@ public class Checklst extends Application {
 
         this.scrollPane.setVvalue(1.0);
         this.scrollPane.setFitToWidth(true);
+        this.scrollPane.setStyle("-fx-background-color: transparent; -fx-background: rgb(207, 232, 243);");
 
         this.dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
@@ -152,13 +155,15 @@ public class Checklst extends Application {
     }
 
     private void addDukeMessage(String input) {
-        this.dialogContainer.getChildren()
-            .add(DialogBox.getDukeDialog(new Label(input), new ImageView(duke)));
+        HBox newDialogBox = DialogBox.getDukeDialog(new Label("Duke\n" + input), new ImageView(duke));
+        this.dialogContainer.getChildren().add(newDialogBox);
+        VBox.setMargin(newDialogBox, new Insets(3));
     }
 
     private void addUserMessage(String input) {
-        this.dialogContainer.getChildren()
-            .add(DialogBox.getUserDialog(new Label(input), new ImageView(user)));
+        HBox newDialogBox = DialogBox.getUserDialog(new Label("You\n" + input), new ImageView(user));
+        this.dialogContainer.getChildren().add(newDialogBox);
+        VBox.setMargin(newDialogBox, new Insets(3));
     }
 
     @Override
