@@ -56,16 +56,13 @@ public class TaskList {
             LocalDate d1 = LocalDate.parse(condition);
             currentTask = new Task(false, echoedText, type, d1);
             this.tasks.add(currentTask);
-            System.out.print(line + "Got it! Kobe marked down this date!\n");
-            System.out.println(ind + "Kobe added this task:\n" + ind + ind +
-                    currentTask);
+            Ui.addAddDateTaskResponse(currentTask, this.tasks.size());
+
         } catch (ParseException | NullPointerException e) { //not in the format
             currentTask = new Task(echoedText, type, condition);
             this.tasks.add(currentTask);
-            System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
-                    currentTask);
+            Ui.addAddNormalTaskResponse(currentTask, this.tasks.size());
         }
-        System.out.println(ind + "Kobe sees that you have " + this.tasks.size() + " task(s) in the list.\n" + line);
     }
 
     /**
@@ -121,7 +118,6 @@ public class TaskList {
             df1.parse(condition);
             LocalDate d1 = LocalDate.parse(condition);
             this.tasks.add(new Task(isItDoneBoolean, taskName, type, d1));
-//            System.out.print(ind + "Kobe marked down this date!\n");
         } catch (ParseException | NullPointerException e) { //not in the format
             this.tasks.add(new Task(isItDoneBoolean, taskName, type, condition));
         }

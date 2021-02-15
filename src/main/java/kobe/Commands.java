@@ -28,7 +28,7 @@ public class Commands {
      * @param ui  the user interface to inform the user of the outcome
      */
     public static void showList(TaskList tasks) {
-        Ui.addTaskListResponse(tasks);
+        Ui.addShowTaskListResponse(tasks);
     }
 
 

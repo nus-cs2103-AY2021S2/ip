@@ -76,7 +76,7 @@ public class Ui {
                 "Kobe hopes to see you soon!");
     }
 
-    public static void addTaskListResponse(TaskList tasks){
+    public static void addShowTaskListResponse(TaskList tasks){
         String fullResponse = "";
         fullResponse += "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
@@ -84,6 +84,36 @@ public class Ui {
         }
         responses.add(fullResponse);
         System.out.println(line + fullResponse + line);
+    }
+
+    public static void addAddDateTaskResponse(Task currentTask, int size){
+        String fullResponse = "";
+        fullResponse += "Got it! Kobe marked down this date!\n";
+        fullResponse += ind + "Kobe added this task:\n" + ind + ind +
+                currentTask + "\n";
+        fullResponse += ind + "Kobe sees that you have " +
+                size + " task(s) in the list.\n";
+        responses.add(fullResponse);
+
+        System.out.print(line + "Got it! Kobe marked down this date!\n");
+        System.out.println(ind + "Kobe added this task:\n" + ind + ind +
+                currentTask);
+        System.out.println(ind + "Kobe sees that you have " +
+                size + " task(s) in the list.\n" + line);
+    }
+
+    public static void addAddNormalTaskResponse(Task currentTask, int size){
+        String fullResponse = "";
+        fullResponse += ind + "Got it! Kobe added this task:\n" + ind + ind +
+                currentTask +"\n";
+        fullResponse += ind + "Kobe sees that you have " +
+                size + " task(s) in the list.\n";
+        responses.add(fullResponse);
+
+        System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
+                currentTask);
+        System.out.println(ind + "Kobe sees that you have " +
+                size + " task(s) in the list.\n" + line);
     }
 
     /**
