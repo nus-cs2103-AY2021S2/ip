@@ -80,6 +80,7 @@ public class Storage {
                 while (reader.hasNextLine()) {
                     String line = reader.nextLine();
                     String[] token = line.split(" \\| ");
+                    assert(token.length >= 2);
                     Task task;
                     if (token[0].equals("T")) {
                         task = new Todo(token[2]);
@@ -99,6 +100,8 @@ public class Storage {
             return list;
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            throw new DukeException("Save file is corrupted ): Will be creating a new file");
         }
         return new LinkedList<>();
     }
