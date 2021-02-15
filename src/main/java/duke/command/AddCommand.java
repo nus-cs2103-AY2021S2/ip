@@ -9,10 +9,9 @@ import duke.Ui.MessageGenerator;
 public class AddCommand extends Command {
     private final Task taskToBeAdded;
 
-    public AddCommand(Task tasktoBeAdded) {
-        this.taskToBeAdded = tasktoBeAdded;
+    public AddCommand(Task taskToBeAdded) {
+        this.taskToBeAdded = taskToBeAdded;
     }
-
 
     @Override
     public CommandResult execute(MessageGenerator messageGenerator, TaskList tasks, Storage storage)

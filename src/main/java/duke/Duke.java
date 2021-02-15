@@ -32,7 +32,7 @@ public class Duke {
     Duke() {
         this.messageGenerator = new MessageGenerator();
         try {
-            this.storage = initializeStorage();
+            Duke.storage = initializeStorage();
         } catch (IOException e) {
             // cannot create the Storage
             e.printStackTrace();
@@ -48,14 +48,6 @@ public class Duke {
         }
     }
 
-
-
-    private Storage initializeStorage() throws IOException {
-        createStorageDirectoryIfNotExist();
-        createStorageFileIfNotExist();
-        return new Storage("data/duke.txt");
-    }
-
     private void createStorageFileIfNotExist() throws IOException {
         File f = new File(STORAGE_FILE_PATH);
         if (!f.exists()) {
@@ -69,6 +61,13 @@ public class Duke {
             directory.mkdir();
         }
     }
+    private Storage initializeStorage() throws IOException {
+        createStorageDirectoryIfNotExist();
+        createStorageFileIfNotExist();
+        return new Storage("data/duke.txt");
+    }
+
+
 
     public String start(){
         return messageGenerator.getWelcomeMessage();
