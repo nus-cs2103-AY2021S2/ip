@@ -18,9 +18,9 @@ public enum CommandEnum {
      * @param command string of command
      * @return        enum of command
      */
-    public static CommandEnum getCommand(String command){
-        for(CommandEnum cEnum: CommandEnum.values()){
-            if(command.equalsIgnoreCase(String.valueOf(cEnum))){
+    public static CommandEnum getCommand(String command) {
+        for (CommandEnum cEnum: CommandEnum.values()) {
+            if (command.equalsIgnoreCase(String.valueOf(cEnum))) {
                 return cEnum;
             }
         }

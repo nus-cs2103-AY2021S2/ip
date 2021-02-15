@@ -11,9 +11,16 @@ import snom.exceptions.SnomException;
 /**
  * Stores extra date information for {@code Task}
  */
-public class TaskWithDate extends Task{
+public class TaskWithDate extends Task {
     private LocalDateTime dateTime;
 
+    /**
+     * Constructs a {@code TaskWithDate}
+     *
+     * @param description    description of task
+     * @param dateTime       date time of task
+     * @throws SnomException if invalid date time is given
+     */
     public TaskWithDate(String description, String dateTime) throws SnomException {
         super(description);
         this.dateTime = convertDateTime(dateTime);
@@ -29,7 +36,7 @@ public class TaskWithDate extends Task{
      *
      * @return formatted date time
      */
-    public String getDateTimeString(){
+    public String getDateTimeString() {
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendPattern("E dd MMM yyyy hh:mma")
                 .toFormatter();
@@ -49,7 +56,7 @@ public class TaskWithDate extends Task{
      */
     public LocalDateTime convertDateTime(String dateTime) throws SnomException {
         dateTime = dateTime.replaceFirst(" ", "");
-        try{
+        try {
             DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                     .appendPattern("yyyy-MM-dd[ HH:mm]")
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
@@ -57,13 +64,13 @@ public class TaskWithDate extends Task{
                     .toFormatter();
             LocalDateTime formattedDateTime = LocalDateTime.parse(dateTime, formatter);
             return formattedDateTime;
-        }catch(DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new SnomException("Oops! Please enter a valid date time format [YYYY-MM-DD HH:MM]");
         }
     }
 
     @Override
-    public String getSaveString(){
+    public String getSaveString() {
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendPattern("yyyy-MM-dd[ HH:mm]")
                 .toFormatter();

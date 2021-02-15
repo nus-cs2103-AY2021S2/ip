@@ -1,14 +1,15 @@
-import snom.logic.commands.CommandEnum;
-import snom.exceptions.SnomException;
-import org.junit.jupiter.api.Test;
-import snom.storage.StorageManager;
-import snom.model.task.TaskList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import snom.exceptions.SnomException;
+import snom.logic.commands.CommandEnum;
+import snom.model.task.TaskList;
+import snom.storage.StorageManager;
 
 public class SnomTest {
     @Test
-    public void getCommandTest(){
+    public void getCommandTest() {
         CommandEnum expectedCommand = CommandEnum.TODO;
         assertEquals(CommandEnum.getCommand("TODO"), expectedCommand);
 

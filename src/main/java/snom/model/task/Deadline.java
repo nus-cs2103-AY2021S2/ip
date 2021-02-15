@@ -11,12 +11,12 @@ public class Deadline extends TaskWithDate {
     }
 
     @Override
-    public String getSaveString(){
+    public String getSaveString() {
         return "D," + super.getSaveString();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + "(by: " + getDateTimeString() + ")";
     }
 }

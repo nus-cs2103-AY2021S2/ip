@@ -1,14 +1,14 @@
 package snom.logic.commands;
 
 import snom.exceptions.SnomException;
-import snom.storage.StorageManager;
 import snom.model.task.TaskList;
+import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
 /**
  * Display {@code Task} in the {@code TaskList}
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public ListCommand(CommandEnum commandType, String content) {
         super(commandType, content);
     }

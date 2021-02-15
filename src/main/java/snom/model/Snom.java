@@ -1,11 +1,11 @@
 package snom.model;
 
-import snom.logic.commands.Command;
-import snom.logic.commands.CommandResponse;
 import snom.exceptions.SnomException;
 import snom.logic.Parser;
-import snom.storage.StorageManager;
+import snom.logic.commands.Command;
+import snom.logic.commands.CommandResponse;
 import snom.model.task.TaskList;
+import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
 /**
@@ -17,12 +17,17 @@ public class Snom {
     private TaskList taskList;
     private Snomio snomio;
 
-    public Snom(String filePath){
+    /**
+     * Constructs a {@code Snom}
+     *
+     * @param filePath file path to store task list
+     */
+    public Snom(String filePath) {
         snomio = new Snomio();
         storage = new StorageManager(filePath);
-        try{
+        try {
             taskList = new TaskList(storage.importTask());
-        }catch(SnomException e){
+        } catch (SnomException e) {
             snomio.showLoadingError();
         }
     }

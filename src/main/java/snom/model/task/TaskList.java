@@ -1,17 +1,17 @@
 package snom.model.task;
 
-import snom.exceptions.SnomException;
-
 import java.util.ArrayList;
+
+import snom.exceptions.SnomException;
 
 public class TaskList {
     private ArrayList<Task> list;
 
-    public TaskList(ArrayList<Task> list){
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
-    public ArrayList<Task> getList(){
+    public ArrayList<Task> getList() {
         return this.list;
     }
 
@@ -20,7 +20,7 @@ public class TaskList {
      *
      * @return size of task list
      */
-    public int getSize(){
+    public int getSize() {
         assert list.size() >= 0 : "Task list should never be negative";
         return list.size();
     }
@@ -31,7 +31,7 @@ public class TaskList {
      * @param i index
      * @return  task
      */
-    public Task getTask(int i){
+    public Task getTask(int i) {
         return list.get(i);
     }
 
@@ -41,10 +41,10 @@ public class TaskList {
      * @param keyword keyword to be searched
      * @return        new task list
      */
-    public ArrayList<Task> findTask(String keyword){
+    public ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> newList = new ArrayList<>();
-        for(Task task: list){
-            if(task.getDescription().contains(keyword)){
+        for (Task task: list) {
+            if (task.getDescription().contains(keyword)) {
                 newList.add(task);
             }
         }
@@ -57,7 +57,7 @@ public class TaskList {
      *
      * @param task either snom.tasks.Todo, snom.tasks.Deadline, snom.tasks.Event
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         list.add(task);
         assert list.size() > 0 : "Task list should not be empty after adding a task";
     }
@@ -71,16 +71,16 @@ public class TaskList {
      * @return               a list of finished snom.tasks
      * @throws SnomException If the task number is not available in the task list.
      */
-    public Task[] finishTask(int[] taskNums) throws SnomException{
+    public Task[] finishTask(int[] taskNums) throws SnomException {
         Task[] finishedTasks = new Task[taskNums.length];
-        for(int i = 0; i < taskNums.length; i++){
+        for (int i = 0; i < taskNums.length; i++) {
             int taskNo = taskNums[i] - 1;
-            try{
+            try {
                 Task task = list.get(taskNo);
                 task.setStatus(true);
                 assert task.getStatus() == true : "Task status should be set to true";
                 finishedTasks[i] = task;
-            }catch(IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 throw new SnomException("Oops! You have entered a task number: "
                         + taskNums[i] + " which is invalid! Please try again!");
             }
@@ -96,15 +96,15 @@ public class TaskList {
      * @return               a list of deleted snom.tasks
      * @throws SnomException If the task number is not available in the task list.
      */
-    public Task[] deleteTask(int[] taskNums) throws SnomException{
+    public Task[] deleteTask(int[] taskNums) throws SnomException {
         Task[] deletedTasks = new Task[taskNums.length];
-        for(int i = 0; i < taskNums.length; i++){
+        for (int i = 0; i < taskNums.length; i++) {
             int taskNo = taskNums[i] - 1 - i;
-            try{
+            try {
                 Task task = list.get(taskNo);
                 list.remove(task);
                 deletedTasks[i] = task;
-            }catch(IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 throw new SnomException("Oops! You have entered a task number: "
                         + taskNums[i] + " which is invalid! Please try again!");
             }

@@ -2,15 +2,15 @@ package snom.logic.commands;
 
 import snom.exceptions.SnomException;
 import snom.logic.Parser;
-import snom.storage.StorageManager;
 import snom.model.task.Task;
 import snom.model.task.TaskList;
+import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
 /**
  * Marks specific {@code Task} as finished
  */
-public class FinishCommand extends Command{
+public class FinishCommand extends Command {
     public FinishCommand(CommandEnum commandType, String content) {
         super(commandType, content);
     }

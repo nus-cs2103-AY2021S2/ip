@@ -1,14 +1,14 @@
 package snom.logic.commands;
 
 import snom.exceptions.SnomException;
-import snom.storage.StorageManager;
 import snom.model.task.TaskList;
+import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
 /**
  * Searches for specific {@code Task} in the {@code TaskList}
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     public FindCommand(CommandEnum commandType, String content) {
         super(commandType, content);
     }

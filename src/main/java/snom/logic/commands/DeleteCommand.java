@@ -2,15 +2,15 @@ package snom.logic.commands;
 
 import snom.exceptions.SnomException;
 import snom.logic.Parser;
-import snom.storage.StorageManager;
 import snom.model.task.Task;
 import snom.model.task.TaskList;
+import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
 /**
  * Deletes {@code Task} from {@code TaskList}
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     public DeleteCommand(CommandEnum commandType, String content) {
         super(commandType, content);
     }

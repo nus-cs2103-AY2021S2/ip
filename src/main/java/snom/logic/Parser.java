@@ -1,5 +1,7 @@
 package snom.logic;
 
+import java.util.Arrays;
+
 import snom.exceptions.SnomException;
 import snom.logic.commands.AddCommand;
 import snom.logic.commands.Command;
@@ -10,8 +12,6 @@ import snom.logic.commands.FindCommand;
 import snom.logic.commands.FinishCommand;
 import snom.logic.commands.HelpCommand;
 import snom.logic.commands.ListCommand;
-
-import java.util.Arrays;
 
 /**
  * Represents a Parser to parse user input into {@code Command}
@@ -29,7 +29,7 @@ public class Parser {
         String commandStr = parseCommandStr(userInput);
         String commandContent = parseCommandContent(userInput);
         CommandEnum commandEnum = CommandEnum.getCommand(commandStr);
-        switch(commandEnum){
+        switch(commandEnum) {
         case LIST:
             return new ListCommand(CommandEnum.LIST, commandContent);
         case FINISH:
@@ -59,7 +59,7 @@ public class Parser {
      * @param userInput user input
      * @return          command as string
      */
-    public static String parseCommandStr(String userInput){
+    public static String parseCommandStr(String userInput) {
         return userInput.split(" ")[0];
     }
 
@@ -71,9 +71,9 @@ public class Parser {
      */
     public static String parseCommandContent(String userInput) {
         String[] splittedInputs = userInput.split(" ", 2);
-        if(splittedInputs.length >= 2){
+        if (splittedInputs.length >= 2) {
             return splittedInputs[1];
-        }else{
+        } else {
             return "";
         }
     }
@@ -86,16 +86,16 @@ public class Parser {
      * @throws SnomException if no numbers was given
      */
     public static int[] parseTaskNumbers(String taskNumString) throws SnomException {
-        if(taskNumString.isBlank()){
+        if (taskNumString.isBlank()) {
             throw new SnomException("Oops! Please at least give one task number");
         }
 
-        try{
+        try {
             int[] taskNumbers = Arrays.stream(taskNumString.split(" "))
                     .mapToInt(Integer::parseInt)
                     .toArray();
             return taskNumbers;
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new SnomException("Oops! Only integers are valid task numbers!");
         }
     }

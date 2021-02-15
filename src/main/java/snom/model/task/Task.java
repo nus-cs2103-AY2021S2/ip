@@ -7,28 +7,33 @@ public class Task {
     private String description;
     private boolean isFinished;
 
-    public Task(String description){
+    /**
+     * Constructs a {@code Task}
+     *
+     * @param description description of task
+     */
+    public Task(String description) {
         this.description = description;
         this.isFinished = false;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return isFinished;
     }
 
-    public String getStatusSymbol(){
+    public String getStatusSymbol() {
         return isFinished ? "\u2713" : "\u2007";
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setStatus(boolean isFinished){
+    public void setStatus(boolean isFinished) {
         this.isFinished = isFinished;
     }
 
@@ -37,12 +42,12 @@ public class Task {
      *
      * @return formatted string
      */
-    public String getSaveString(){
+    public String getSaveString() {
         return (isFinished ? "true" : "false") + "," + this.description;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + this.getStatusSymbol() + "]" + this.description;
     }
 }

@@ -1,7 +1,8 @@
 package snom.storage;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,14 @@ import snom.model.task.Todo;
  * Manages storage related process for Snom
  * Eg. Import task, save task
  */
-public class StorageManager extends FileManager{
-    public StorageManager(String filename){
+public class StorageManager extends FileManager {
+
+    /**
+     * Constructs a {@code StorageManager}
+     *
+     * @param filename file name to save task list
+     */
+    public StorageManager(String filename) {
         super(filename);
         super.createFolder();
         super.createFile();
@@ -29,11 +36,11 @@ public class StorageManager extends FileManager{
      * @return               array list of {@code Task}
      * @throws SnomException if invalid date for deadline or event
      */
-    public ArrayList<Task> importTask() throws SnomException{
+    public ArrayList<Task> importTask() throws SnomException {
         List<String> lines = super.readFile();
         ArrayList<Task> taskList = new ArrayList<>();
-        for(String line: lines) {
-            String attr[] = line.split(",");
+        for (String line: lines) {
+            String[] attr = line.split(",");
             switch (attr[0]) {
             case "T":
                 Todo todo = new Todo(attr[2]);
@@ -61,10 +68,10 @@ public class StorageManager extends FileManager{
      *
      * @param taskList list of {@code Task}
      */
-    public void saveFile(TaskList taskList){
+    public void saveFile(TaskList taskList) {
         try {
             Files.writeString(path, "");
-            for(Task task: taskList.getList()){
+            for (Task task: taskList.getList()) {
                 Files.writeString(path, task.getSaveString() + "\n", StandardOpenOption.APPEND);
             }
         } catch (IOException e) {

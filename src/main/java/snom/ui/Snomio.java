@@ -1,15 +1,15 @@
 package snom.ui;
 
-import snom.exceptions.SnomException;
-import snom.model.task.Task;
-import snom.model.task.TaskList;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
+
+import snom.exceptions.SnomException;
+import snom.model.task.Task;
+import snom.model.task.TaskList;
 
 /**
  * Deals with interactions with the user.
@@ -23,7 +23,10 @@ public class Snomio extends PrintWriter {
     private BufferedReader reader;
     private StringTokenizer tokenizer;
 
-    public Snomio(){
+    /**
+     * Constructs a {@code Snomio}
+     */
+    public Snomio() {
         super(new BufferedOutputStream(System.out));
         reader = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -32,7 +35,7 @@ public class Snomio extends PrintWriter {
      * Prints a horizontal line.
      * Note that the output is not flushed. Remember to flush after calling the method.
      */
-    public void showLine(){
+    public void showLine() {
         println("--------------------------------");
     }
 
@@ -41,7 +44,7 @@ public class Snomio extends PrintWriter {
      *
      * @param errMsg error message
      */
-    public void showError(String errMsg){
+    public void showError(String errMsg) {
         showLine();
         println("Error: " + errMsg);
         showLine();
@@ -51,7 +54,7 @@ public class Snomio extends PrintWriter {
     /**
      * Prints an error of unable to load save file and prompt user a new save file will be created.
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         showError("Failed to load file. A new save file will be created.");
     }
 
@@ -60,7 +63,7 @@ public class Snomio extends PrintWriter {
      *
      * @return String welcome message
      */
-    public String getWelcomeMsg(){
+    public String getWelcomeMsg() {
         return "Bonjour! I'm snom.model.Snom! *squish*\n"
                 + "Try giving me some snom.logic.commands, I might be able to do something!\n"
                 + "[type 'bye' to exit program]";
@@ -73,13 +76,13 @@ public class Snomio extends PrintWriter {
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
     public String getTaskList(TaskList taskList) throws SnomException {
-        if(taskList.getSize() <= 0){
+        if (taskList.getSize() <= 0) {
             throw new SnomException("You have no task in your list right now, try adding some and try again :D");
         }
 
         String message = "Here are the snom.tasks in your list:\n";
-        for(int i = 0; i < taskList.getSize(); i++){
-            message += (i+1) + ". " + taskList.getTask(i).toString() + "\n";
+        for (int i = 0; i < taskList.getSize(); i++) {
+            message += (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
         }
 
         return message;
@@ -91,14 +94,14 @@ public class Snomio extends PrintWriter {
      * @return String        string of matching task list
      * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
-    public String getMatchingTaskList(TaskList taskList) throws SnomException{
-        if(taskList.getSize() <= 0){
+    public String getMatchingTaskList(TaskList taskList) throws SnomException {
+        if (taskList.getSize() <= 0) {
             throw new SnomException("No matching task found.");
         }
 
         String message = "Here are the matching snom.tasks in your list:\n";
-        for(int i = 0; i < taskList.getSize(); i++){
-            message += (i+1) + ". " + taskList.getTask(i).toString() + "\n";
+        for (int i = 0; i < taskList.getSize(); i++) {
+            message += (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
         }
 
         return message;
@@ -111,7 +114,7 @@ public class Snomio extends PrintWriter {
      * @param listSize task list size
      * @return String  task added into taskList
      */
-    public String getTaskAdded(Task task, int listSize){
+    public String getTaskAdded(Task task, int listSize) {
         return "Got it. I've added this task:\n"
                 + "\t" + task.toString() + "\n"
                 + "Now you have " + listSize + " snom.tasks in the list.";
@@ -125,7 +128,7 @@ public class Snomio extends PrintWriter {
      */
     public String getFinishedTasks(Task[] finishedTasks) {
         String message = "Great Job! I've marked this task(s) as finish:\n";
-        for(Task task: finishedTasks){
+        for (Task task: finishedTasks) {
             message += "\t" + task.toString() + "\n";
         }
         return message;
@@ -139,7 +142,7 @@ public class Snomio extends PrintWriter {
      */
     public String getDeletedTasks(Task[] deletedTasks) {
         String message = "Noted, I've removed this task(s)\n";
-        for(Task task: deletedTasks){
+        for (Task task: deletedTasks) {
             message += "\t" + task.toString() + "\n";
         }
         return message;
@@ -150,7 +153,7 @@ public class Snomio extends PrintWriter {
      *
      * @return String exit message
      */
-    public String getExitMessage(){
+    public String getExitMessage() {
         return "Ciao! Hope to see you again soon!";
     }
 
@@ -164,7 +167,7 @@ public class Snomio extends PrintWriter {
         String input = null;
         String token;
 
-        while(tokenizer == null || !tokenizer.hasMoreTokens()){
+        while (tokenizer == null || !tokenizer.hasMoreTokens()) {
             try {
                 input = reader.readLine();
             } catch (IOException e) {
@@ -182,16 +185,16 @@ public class Snomio extends PrintWriter {
      *
      *  @return the whole line of input or the rest of the sentence from the previous read line
      */
-    public String readRemainingLine(){
+    public String readRemainingLine() {
         String line = "";
 
-        if(tokenizer == null || !tokenizer.hasMoreTokens()){
+        if (tokenizer == null || !tokenizer.hasMoreTokens()) {
             try {
                 line = reader.readLine();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             line += tokenizer.nextToken("");
         }
 
@@ -203,10 +206,10 @@ public class Snomio extends PrintWriter {
      *
      * @return  single integer input
      */
-    public int readInt() throws SnomException{
-        try{
+    public int readInt() throws SnomException {
+        try {
             return Integer.parseInt(readWord());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new SnomException("Oops! You have entered invalid task numbers, please try again!");
         }
     }
@@ -216,7 +219,7 @@ public class Snomio extends PrintWriter {
      *
      * @return  single double input
      */
-    public double readDouble(){
+    public double readDouble() {
         return Double.parseDouble(readWord());
     }
 }

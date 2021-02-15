@@ -1,15 +1,15 @@
 package snom.logic.commands;
 
 import snom.exceptions.SnomException;
+import snom.model.task.TaskList;
 import snom.storage.FileManager;
 import snom.storage.StorageManager;
-import snom.model.task.TaskList;
 import snom.ui.Snomio;
 
 /**
  * Displays help page.
  */
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
     private FileManager helpFile;
     public HelpCommand(CommandEnum commandType, String content) {
         super(commandType, content);
@@ -27,7 +27,7 @@ public class HelpCommand extends Command{
     @Override
     public CommandResponse execute(TaskList taskList, Snomio snomio, StorageManager storage) throws SnomException {
         String helpText = "";
-        switch(this.content){
+        switch(this.content) {
         case "todo":
             helpFile = new FileManager("/help/todo.txt");
             helpText = helpFile.readResourcesText();

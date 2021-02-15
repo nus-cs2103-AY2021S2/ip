@@ -12,7 +12,7 @@ import snom.ui.Snomio;
 /**
  * Adds a {@code Task} into {@code TaskList}
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     public AddCommand(CommandEnum commandType, String content) {
         super(commandType, content);
     }
@@ -29,15 +29,15 @@ public class AddCommand extends Command{
     @Override
     public CommandResponse execute(TaskList taskList, Snomio snomio, StorageManager storage) throws SnomException {
         Task task = null;
-        if(commandType == CommandEnum.TODO){
+        if (commandType == CommandEnum.TODO) {
             task = new Todo(this.content);
-        }else if(commandType == CommandEnum.DEADLINE){
+        } else if (commandType == CommandEnum.DEADLINE) {
             String[] dlArr = splitContentWithDate("/by");
             task = new Deadline(dlArr[0], dlArr[1]);
-        }else if(commandType == CommandEnum.EVENT){
+        } else if (commandType == CommandEnum.EVENT) {
             String[] dlArr = splitContentWithDate("/at");
             task = new Event(dlArr[0], dlArr[1]);
-        }else{
+        } else {
             throw new SnomException("Error: Something magical happened while snom.model.Snom trying to create a task!");
         }
         taskList.addTask(task);
@@ -57,11 +57,11 @@ public class AddCommand extends Command{
     private String[] splitContentWithDate(String delim) throws SnomException {
         String[] splitContent = this.content.split(delim);
 
-        if(splitContent.length < 2){
+        if (splitContent.length < 2) {
             throw new SnomException("Please enter at least one date!");
         }
 
-        if(splitContent.length > 2){
+        if (splitContent.length > 2) {
             throw new SnomException("Oops! You have entered more than ONE date, please try again!");
         }
 

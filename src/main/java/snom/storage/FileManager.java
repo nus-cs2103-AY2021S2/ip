@@ -1,7 +1,5 @@
 package snom.storage;
 
-import snom.exceptions.SnomException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +12,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import snom.exceptions.SnomException;
+
 /**
  * Manages folder/file creation and read file for Snom
  */
@@ -21,19 +21,19 @@ import java.util.stream.Collectors;
 public class FileManager {
     protected Path path;
 
-    public FileManager(String filename){
+    public FileManager(String filename) {
         this.path = Paths.get(filename);
     }
 
     /**
      * Creates directory with the given path
      */
-    public void createFolder(){
-        try{
+    public void createFolder() {
+        try {
             Files.createDirectories(path.getParent());
-        }catch(FileAlreadyExistsException e){
+        } catch (FileAlreadyExistsException e) {
             System.out.println("File exist. Nothing needs to be done here");
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -41,12 +41,12 @@ public class FileManager {
     /**
      * Creates file with the given path
      */
-    public void createFile(){
-        try{
+    public void createFile() {
+        try {
             Files.createFile(path);
-        }catch(FileAlreadyExistsException e){
+        } catch (FileAlreadyExistsException e) {
             System.out.println("File exist. Nothing needs to be done here");
-        }catch(IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -70,7 +70,7 @@ public class FileManager {
      *
      * @return
      */
-    public String readResourcesText(){
+    public String readResourcesText() {
         InputStream is = this.getClass().getResourceAsStream(path.getParent() + "/" + path.getFileName());
         String text = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))
                 .lines()

@@ -1,14 +1,14 @@
 package snom.logic.commands;
 
 import snom.exceptions.SnomException;
-import snom.storage.StorageManager;
 import snom.model.task.TaskList;
+import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
 /**
  * Closes Application.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     public ExitCommand(CommandEnum commandType, String content) {
         super(commandType, content);
     }
