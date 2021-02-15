@@ -23,7 +23,7 @@ public class Ui {
      * Shows Duke's welcome message.
      */
     public String showWelcome() {
-        return "Hello! I'm Juke\n What can I do for you?";
+        return "Hello! I am Juke, your personal assistant, how can I help you today?";
     }
 
 
