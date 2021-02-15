@@ -8,16 +8,19 @@
 <?import javafx.scene.text.Font?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E450" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <Label fx:id="dialog" alignment="CENTER" prefHeight="133.0" prefWidth="286.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: pink; -fx-border-width: 5; -fx-padding: 5;" text="Label" textFill="#970404" wrapText="true">
-         <effect>
-            <Bloom />
-         </effect>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
-    </children>
+    <!-- The solution to resize the dialog box when the text excesses is from https://github.com/xinweit/ip.-->
+    <HBox maxHeight="-Infinity">
+        <children>
+            <Label fx:id="dialog" minHeight="-Infinity" alignment="CENTER" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: pink; -fx-border-width: 5; -fx-padding: 5;" text="Label" textFill="#970404" wrapText="true">
+             <effect>
+                <Bloom />
+             </effect>
+             <font>
+                <Font name="System Bold" size="12.0" />
+             </font></Label>
+        </children>
+    </HBox>
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>

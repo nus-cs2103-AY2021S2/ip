@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import static com.sun.javafx.application.PlatformImpl.exit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -48,7 +50,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         String response = rem.getResponse(input);
         dialogContainer.getChildren().addAll(

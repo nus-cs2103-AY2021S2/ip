@@ -13,7 +13,7 @@ public class TextUi {
 
     /**
      * Displays when the Momo inits and starts to run.
-     * @return
+     * @return the greeting.
      */
     public static String showInitUi() {
         String greeting = "Hello! I'm Rem\nWhat can I do for you?";
@@ -83,7 +83,7 @@ public class TextUi {
      * @param task the task that is done.
      */
     public static String showSuccessfulMark(Task task) {
-        return "Nice! I've marked this duke.task as done:\n" + task + "\n";
+        return "Nice! I've marked this task as done:\n" + task + "\n";
     }
 
     /**
@@ -93,7 +93,7 @@ public class TextUi {
      * @param task the task that is deleted.
      */
     public static String showSuccessfulDelete(TaskList taskList, Task task) {
-        return "Got it. I've removed this duke.task:" + '\n'
+        return "Got it. I've removed this task:" + '\n'
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size() + " tasks in the list.\n";
     }
