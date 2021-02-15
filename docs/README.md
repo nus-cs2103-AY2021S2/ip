@@ -48,7 +48,7 @@ Examples:
 * `todo CNY visiting`
 * `todo ST2334 tutorial`
 
-![Ui](images/addTodoTask.png)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/addTodoTask.PNG)
 
 #### `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
@@ -57,7 +57,7 @@ Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
 Examples:
 * `deadline return pen /by 03/05/2021 1800`
 
-![Ui](images/addTodoTask.png)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/addDeadlineTask.PNG)
 
 #### `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
@@ -66,7 +66,7 @@ Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
 
-![Ui](images/addTodoTask.png)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/addEventTask.PNG)
 
 
 ### Listing all tasks : `list`
@@ -74,6 +74,9 @@ Examples:
 Shows a list of all the task in duke.
 
 Format: `list`
+
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/listTask.PNG)
+
 
 ### Delete a task : `delete`
 
@@ -84,6 +87,7 @@ Format: `delete index_of_task`
 Assume that we still have 4 task, 
 * `delete3`: will remove the third task on the list
 
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/deleteTask.PNG)
 
 ### Mark task as done : `done`
 
@@ -97,10 +101,7 @@ Example:
 Assume that we still have 3 task, 
 * `done 1`: will mark the first task on the list as completed 
 
-
-Example:
-* `find CS2105`
-
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/markAsDone.PNG)
 
 ### Find specific task : `find`
 
@@ -108,10 +109,10 @@ Show all tasks that matches or contain keywords.
 
 Format: `find keywords`
 
-Examples:
+Example:
 * `find CS2105`
 
---------------------------------------------------------------------------------------------------------------------
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/findTask.PNG)
 
 ## Command summary
 
