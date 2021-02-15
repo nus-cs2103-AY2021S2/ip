@@ -26,8 +26,4 @@ public class ExitCommand extends Command {
         throw new IllegalArgumentException("The EXIT command cannot be used quietly.");
     }
 
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

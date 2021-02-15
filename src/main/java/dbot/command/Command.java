@@ -75,15 +75,6 @@ public abstract class Command {
     }
 
     /**
-     * Returns true if this Command is an Exit Command and false otherwise.
-     *
-     * @return True if this is an Exit Command and false otherwise.
-     */
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Returns true if the Task corresponding to this Command is done and false otherwise.
      *
      * @return True if this Command's corresponding Task is done and false otherwise.
