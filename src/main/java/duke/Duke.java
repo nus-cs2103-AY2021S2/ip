@@ -5,7 +5,7 @@ import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
+import duke.ui.DukeResponses;
 
 /**
  * class Duke
@@ -15,46 +15,42 @@ import duke.ui.Ui;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private DukeResponses dukeResponses;
 
     /**
      * Constructor: creates a new Duke program
      * @param filePath path where the list of tasks is saved
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        dukeResponses = new DukeResponses();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            dukeResponses.showError(e);
             tasks = new TaskList();
         }
     }
 
     /**
-     * run: runs the Duke program
+     * getResponse: Generates a response from Duke
+     * @param userInput
+     * @return a response from Duke
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = ui.readCommand();
-                Command c = Parser.parse(userInput);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    public String getResponse(String userInput) {
+        try {
+            Command c = Parser.parse(userInput);
+            return c.execute(tasks, dukeResponses, storage);
+        } catch (DukeException e) {
+            return dukeResponses.showError(e);
         }
     }
 
     /**
-     * main procedure
-     * @param args
+     * getDukeResponses: Retrieves DukeResponses
+     * @return DukeResponses
      */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public DukeResponses getDukeResponses() {
+        return dukeResponses;
     }
 }
