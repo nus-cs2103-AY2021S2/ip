@@ -68,8 +68,8 @@ public class DialogBox extends HBox {
      * @return Dialog box created to represent Duke's response.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        DialogBox dialogBox = new DialogBox(text, img);
+        dialogBox.flip();
+        return dialogBox;
     }
 }
