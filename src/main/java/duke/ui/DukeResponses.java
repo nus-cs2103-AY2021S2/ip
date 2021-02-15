@@ -99,15 +99,17 @@ public class DukeResponses {
             return "There are no " + taskType + "tasks at the moment.";
         } else {
             int counter = 1;
-            String output = "";
             ArrayList<Task> taskList = tasks.getTaskList();
-            output.concat("Here are the " + taskType + "tasks in your list:\n");
+            String listHeader = "Here are the " + taskType + "tasks in your list:\n";
+            StringBuilder outputList = new StringBuilder();
+            outputList.append(listHeader);
 
             for (Task task : taskList) {
-                output.concat("  " + counter + ". " + task + "\n");
+                String t = "  " + counter + ". " + task + "\n";
+                outputList.append(t);
                 counter++;
             }
-            return output;
+            return outputList.toString();
         }
     }
 }
