@@ -126,21 +126,6 @@ public class Duke implements IDuke{
     }
 
 
-//    public void add(String input) throws DukeEmptyCommandException{
-//        if(input.equals("todo")){
-//            throw new DukeEmptyCommandException("OOPS!!! The description of a todo cannot be empty.");
-//        } else if (input.equals("deadline")){
-//            throw new DukeEmptyCommandException("OOPS!!! The description of a deadline cannot be empty.");
-//        } else if (input.equals("event")){
-//            throw new DukeEmptyCommandException("OOPS!!! The description of an event cannot be empty.");
-//        } else {
-//            Task t = new Task(input);
-//            this.list.add(t);
-//            System.out.println("Got it. I've added this task: ");
-//            System.out.println(t.toString());
-//
-//        }
-//    }
     /**
      * {@inheritDoc}
      */

@@ -7,7 +7,6 @@ public class Todo extends Task {
 
     }
 
-
     public static Todo getTodo(String description) {
         return new Todo(description, false);
     }

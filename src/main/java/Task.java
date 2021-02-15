@@ -23,15 +23,10 @@ public class Task implements ITask{
     public ITask markDone(){
         return new Task(this.description,true);
     }
-
-    public String getStatusIcon() {
-        return (isDone ? "V" : "X"); //return tick or X symbols
-    }
-
-
+    
     @Override
     public String toString(){
-        return "[" + this.getStatusIcon() + "]" + this.description;
+        return "[" + (isDone ? "V" : "X") + "]" + this.description;
     }
 
 }
