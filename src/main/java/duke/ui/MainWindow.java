@@ -1,12 +1,15 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.response.Response;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -21,14 +24,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/v.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cpu.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setSpacing(5.0);
+        HBox.setHgrow(userInput, Priority.ALWAYS);
     }
 
     public void setDuke(Duke d) {
@@ -46,10 +52,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        Response response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response.getText(), dukeImage, response.getStatus())
         );
         userInput.clear();
     }
