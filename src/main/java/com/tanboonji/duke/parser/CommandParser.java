@@ -7,11 +7,13 @@ import com.tanboonji.duke.command.AliasCommand;
 import com.tanboonji.duke.command.ByeCommand;
 import com.tanboonji.duke.command.Command;
 import com.tanboonji.duke.command.DeadlineCommand;
+import com.tanboonji.duke.command.DeleteAliasCommand;
 import com.tanboonji.duke.command.DeleteCommand;
 import com.tanboonji.duke.command.DoneCommand;
 import com.tanboonji.duke.command.EventCommand;
 import com.tanboonji.duke.command.FindCommand;
 import com.tanboonji.duke.command.HelpCommand;
+import com.tanboonji.duke.command.ListAliasCommand;
 import com.tanboonji.duke.command.ListCommand;
 import com.tanboonji.duke.command.ToDoCommand;
 import com.tanboonji.duke.exception.DukeException;
@@ -89,6 +91,10 @@ public class CommandParser {
             return FindCommand.parseArguments(arguments);
         case AliasCommand.COMMAND:
             return AliasCommand.parseArguments(arguments);
+        case DeleteAliasCommand.COMMAND:
+            return DeleteAliasCommand.parseArguments(arguments);
+        case ListAliasCommand.COMMAND:
+            return new ListAliasCommand();
         default:
             throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
         }

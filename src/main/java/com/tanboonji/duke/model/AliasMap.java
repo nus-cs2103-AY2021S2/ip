@@ -8,6 +8,7 @@ import java.util.HashMap;
  */
 public class AliasMap implements Serializable {
 
+    private static final String aliasFormat = "%s -> %s";
     private final HashMap<String, String> aliasMap;
 
     /**
@@ -34,8 +35,10 @@ public class AliasMap implements Serializable {
      *
      * @param alias Alias to be deleted.
      */
-    public void deleteAlias(String alias) {
+    public String deleteAlias(String alias) {
+        String command = aliasMap.get(alias);
         aliasMap.remove(alias);
+        return String.format(aliasFormat, alias, command);
     }
 
     /**
@@ -48,7 +51,24 @@ public class AliasMap implements Serializable {
     }
 
     public String getAlias(String alias) {
-        System.out.println(aliasMap.get(alias));
         return aliasMap.get(alias);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        int numbering = 1;
+        for (String alias: aliasMap.keySet()) {
+            builder.append("\t")
+                    .append(numbering++)
+                    .append(". ")
+                    .append(String.format(aliasFormat, alias, aliasMap.get(alias)))
+                    .append("\n");
+        }
+
+        if (numbering == 1) {
+            builder.append("\tYou currently have 0 aliases.");
+        }
+        return builder.toString();
     }
 }
