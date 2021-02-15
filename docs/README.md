@@ -7,7 +7,7 @@ Duke Project is an **to do list application** made for busy people to keep track
 
 1. Ensure you have Java `11`  or above installed in your Computer.
 
-1. Download the latest `dukeproject.jar`.
+1. Download the latest `duke.jar`.
 
 1. Double-click the file to start the app.
 
@@ -145,7 +145,7 @@ Expected Outcome:
 `The contact has been successfully added.`
   
 ---
-### Listing all contacts: `contact add`
+### Listing all contacts: `contact list`
 
 Adds a to do task to the application.
 

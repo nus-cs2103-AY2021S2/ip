@@ -40,9 +40,14 @@ public class Ui {
         this.printWithSpace("OOPS!!! The description cannot be empty");
     }
 
-    // Error message when file could not be found
+    //
+
+    /**
+     * Prints error message when file could not be found.
+     */
     public void printFileError() {
-        this.printWithSpace("OOPS!!! The file could not be found");
+        this.printWithSpace("OOPS!!! The file could not be found! "
+            + "Please restart the application again.");
     }
 
     // Error message when date format is wrong
