@@ -12,7 +12,7 @@ readability.
     - [Completing a task](#completing-a-task)
     - [Setting a task priority](#setting-a-task-priority)
     - [Exiting the application](#exiting-the-application)
-- [Command summary](#command-summary)
+
   
 ## Quick start
 1. Ensure you have Java `11` installed.
