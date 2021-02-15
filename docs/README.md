@@ -4,8 +4,7 @@
 
 ### Interactive GUI
 The textbox has green background and unique user image for the Duke to increase UI/UX of the application.
-![Image of UI](https://github.com/austenjs/ip/docs/Ui.png)
-
+<img src = "Ui.png", width = 200>
 ## Usage
 
 ### `list` - List all tasks in the TaskList
