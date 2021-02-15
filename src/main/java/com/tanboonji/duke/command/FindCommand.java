@@ -2,7 +2,6 @@ package com.tanboonji.duke.command;
 
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.exception.InvalidCommandArgumentException;
-import com.tanboonji.duke.model.Task;
 import com.tanboonji.duke.model.TaskList;
 
 /**
@@ -16,7 +15,8 @@ public class FindCommand extends Command {
             + "Command: find [keyword]";
     private static final String SUCCESS_MATCH_MESSAGE = "Here are the matching tasks in your list:\n"
             + "%s";
-    private static final String SUCCESS_NO_MATCH_MESSAGE = "Sorry, I couldn't find any tasks matching '%s' in your list.";
+    private static final String SUCCESS_NO_MATCH_MESSAGE =
+            "Sorry, I couldn't find any tasks matching '%s' in your list.";
 
     private final String keyword;
 

@@ -22,7 +22,7 @@ public class EventCommand extends Command {
             + "Command: event [description] /at [datetime]";
     private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n"
             + "%s\n"
-            +"Now you have %d %s.";
+            + "Now you have %d %s.";
     private static final String TASK_SINGULAR = "task";
     private static final String TASK_PLURAL = "tasks";
     private static final int DESCRIPTION_GROUP = 1;

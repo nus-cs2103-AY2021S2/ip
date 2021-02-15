@@ -16,7 +16,7 @@ public class ToDoCommand extends Command {
             + "\tCommand: todo [description]";
     private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n"
             + "%s\n"
-            +"Now you have %d %s.";
+            + "Now you have %d %s.";
     private static final String TASK_SINGULAR = "task";
     private static final String TASK_PLURAL = "tasks";
     private final String description;

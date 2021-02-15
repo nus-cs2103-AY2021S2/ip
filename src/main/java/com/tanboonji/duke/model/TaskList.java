@@ -23,6 +23,12 @@ public class TaskList implements Serializable {
         return taskList.size();
     }
 
+    /**
+     * Returns a TaskList of tasks which contains the keyword in its description.
+     *
+     * @param keyword Keyword to search for in task description.
+     * @return TaskList of tasks containing keyword in its description.
+     */
     public TaskList find(String keyword) {
         ArrayList<Task> matchingList = new ArrayList<>();
 
