@@ -1,19 +1,19 @@
 public class Command {
     protected final int targetIndex;
-    protected final Duke duke;
+    protected final IDuke duke;
 
-    protected Command(int targetIndex, Duke duke) {
+    protected Command(int targetIndex, IDuke duke) {
         this.targetIndex = targetIndex;
         this.duke = duke;
     }
 
-    public Duke execute() {
+    public IDuke execute() {
         throw new UnsupportedOperationException("This method is to"
                 + " be implemented by child classes.");
     }
 
 
-    public Command setDuke(Duke duke) {
+        Command setDuke(Duke duke) {
         return new Command(targetIndex, duke);
     }
 
