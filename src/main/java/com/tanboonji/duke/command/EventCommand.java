@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.exception.InvalidCommandArgumentException;
 import com.tanboonji.duke.model.Event;
 import com.tanboonji.duke.model.Task;
 import com.tanboonji.duke.parser.DateParser;
@@ -41,7 +42,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public String execute() throws DukeException {
+    public String execute() {
         Task newTask = new Event(description, at);
         taskList.addTask(newTask);
 
@@ -68,7 +69,7 @@ public class EventCommand extends Command {
         Matcher matcher = COMMAND_FORMAT.matcher(arguments);
 
         if (!matcher.matches()) {
-            throw new DukeException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
         }
 
         String description = matcher.group(DESCRIPTION_GROUP);

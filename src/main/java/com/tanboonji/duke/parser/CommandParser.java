@@ -11,10 +11,10 @@ import com.tanboonji.duke.command.DoneCommand;
 import com.tanboonji.duke.command.EventCommand;
 import com.tanboonji.duke.command.FindCommand;
 import com.tanboonji.duke.command.HelpCommand;
-import com.tanboonji.duke.command.InvalidCommand;
 import com.tanboonji.duke.command.ListCommand;
 import com.tanboonji.duke.command.ToDoCommand;
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.exception.InvalidCommandException;
 
 /**
  * The CommandParser class helps to parse user string input into respective intended command.
@@ -33,40 +33,36 @@ public class CommandParser {
      * @param input User string input.
      * @return Respective intended command with arguments or invalid command.
      */
-    public static Command parse(String input) {
+    public static Command parse(String input) throws DukeException {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
         if (!matcher.matches()) {
-            return new InvalidCommand(INVALID_COMMAND_MESSAGE);
+            throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
         }
 
         String command = matcher.group(COMMAND_GROUP).trim();
         String arguments = matcher.group(ARGUMENTS_GROUP).trim();
 
-        try {
-            switch (command.toLowerCase()) {
-            case ToDoCommand.COMMAND:
-                return ToDoCommand.parseArguments(arguments);
-            case EventCommand.COMMAND:
-                return EventCommand.parseArguments(arguments);
-            case DeadlineCommand.COMMAND:
-                return DeadlineCommand.parseArguments(arguments);
-            case ListCommand.COMMAND:
-                return new ListCommand();
-            case DoneCommand.COMMAND:
-                return DoneCommand.parseArguments(arguments);
-            case DeleteCommand.COMMAND:
-                return DeleteCommand.parseArguments(arguments);
-            case HelpCommand.COMMAND:
-                return new HelpCommand();
-            case ByeCommand.COMMAND:
-                return new ByeCommand();
-            case FindCommand.COMMAND:
-                return FindCommand.parseArguments(arguments);
-            default:
-                return new InvalidCommand(INVALID_COMMAND_MESSAGE);
-            }
-        } catch (DukeException e) {
-            return new InvalidCommand(e.getMessage());
+        switch (command.toLowerCase()) {
+        case ToDoCommand.COMMAND:
+            return ToDoCommand.parseArguments(arguments);
+        case EventCommand.COMMAND:
+            return EventCommand.parseArguments(arguments);
+        case DeadlineCommand.COMMAND:
+            return DeadlineCommand.parseArguments(arguments);
+        case ListCommand.COMMAND:
+            return new ListCommand();
+        case DoneCommand.COMMAND:
+            return DoneCommand.parseArguments(arguments);
+        case DeleteCommand.COMMAND:
+            return DeleteCommand.parseArguments(arguments);
+        case HelpCommand.COMMAND:
+            return new HelpCommand();
+        case ByeCommand.COMMAND:
+            return new ByeCommand();
+        case FindCommand.COMMAND:
+            return FindCommand.parseArguments(arguments);
+        default:
+            throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
         }
     }
 }

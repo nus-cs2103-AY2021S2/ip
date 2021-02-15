@@ -20,7 +20,7 @@ public class TaskList implements Serializable {
     }
 
     public ArrayList<Task> getList() {
-        return this.taskList;
+        return taskList;
     }
 
     public int getSize() {
@@ -43,7 +43,7 @@ public class TaskList implements Serializable {
      * @return Task that is marked as done.
      */
     public Task markAsDone(int index) {
-        Task task = this.taskList.get(index);
+        Task task = taskList.get(index);
         return task.markAsDone();
     }
 
@@ -54,6 +54,6 @@ public class TaskList implements Serializable {
      * @return Task that is deleted.
      */
     public Task deleteTask(int index) {
-        return this.taskList.remove(index);
+        return taskList.remove(index);
     }
 }

@@ -1,6 +1,7 @@
 package com.tanboonji.duke.command;
 
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.exception.InvalidCommandArgumentException;
 import com.tanboonji.duke.model.Task;
 import com.tanboonji.duke.model.ToDo;
 
@@ -30,7 +31,7 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public String execute() throws DukeException {
+    public String execute() {
         Task newTask = new ToDo(description);
         taskList.addTask(newTask);
 
@@ -55,7 +56,7 @@ public class ToDoCommand extends Command {
      */
     public static ToDoCommand parseArguments(String arguments) throws DukeException {
         if (arguments.trim().equals("")) {
-            throw new DukeException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
         }
         return new ToDoCommand(arguments);
     }

@@ -1,6 +1,7 @@
 package com.tanboonji.duke.command;
 
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.exception.InvalidCommandArgumentException;
 import com.tanboonji.duke.model.Task;
 
 /**
@@ -59,7 +60,7 @@ public class FindCommand extends Command {
      */
     public static FindCommand parseArguments(String arguments) throws DukeException {
         if (arguments.trim().equals("")) {
-            throw new DukeException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
         }
         return new FindCommand(arguments);
     }

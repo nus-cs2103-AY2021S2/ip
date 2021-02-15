@@ -1,6 +1,7 @@
 package com.tanboonji.duke.command;
 
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.exception.InvalidCommandArgumentException;
 import com.tanboonji.duke.model.Task;
 
 /**
@@ -36,7 +37,7 @@ public class DeleteCommand extends Command {
             Task task = taskList.deleteTask(taskIndex);
             return HEADER + task;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
         }
     }
 
@@ -53,7 +54,7 @@ public class DeleteCommand extends Command {
             taskIndex = Integer.parseInt(arguments) - 1;
             return new DeleteCommand(taskIndex);
         } catch (NumberFormatException e) {
-            throw new DukeException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
         }
     }
 }

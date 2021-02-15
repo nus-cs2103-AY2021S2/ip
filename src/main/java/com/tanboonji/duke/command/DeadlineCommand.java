@@ -42,7 +42,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public String execute() throws DukeException {
+    public String execute() {
         Task newTask = new Deadline(description, by);
         taskList.addTask(newTask);
 

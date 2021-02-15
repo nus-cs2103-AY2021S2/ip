@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.exception.InvalidDateTimeException;
 
 /**
  * The DateParser class helps to parse string input into date time format.
@@ -39,20 +40,12 @@ public class DateParser {
         LocalDate date;
         LocalTime time;
 
-        try {
-            date = parseDate(tokenizedInput[0].trim());
-        } catch (DukeException e) {
-            throw e;
-        }
+        date = parseDate(tokenizedInput[0].trim());
 
         if (tokenizedInput.length == 1) {
             time = LocalTime.MAX;
         } else {
-            try {
-                time = parseTime(tokenizedInput[1].trim());
-            } catch (DukeException e) {
-                throw e;
-            }
+            time = parseTime(tokenizedInput[1].trim());
         }
 
         return LocalDateTime.of(date, time);
@@ -68,7 +61,7 @@ public class DateParser {
         try {
             return LocalDate.parse(input, DATE_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new DukeException(ERROR_MESSAGE);
+            throw new InvalidDateTimeException(ERROR_MESSAGE);
         }
     }
 
@@ -82,7 +75,7 @@ public class DateParser {
         try {
             return LocalTime.parse(input, TIME_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new DukeException(ERROR_MESSAGE);
+            throw new InvalidDateTimeException(ERROR_MESSAGE);
         }
     }
 
