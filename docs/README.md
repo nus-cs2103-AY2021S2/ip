@@ -7,17 +7,17 @@ task manager.
 
 ## Features
   
-No. | Features | Command Syntax 
-:---: | :-------:| :------------: 
-1. | todo | todo [task_description]
-2. | deadline | deadline [task_description] /by [yyyy-MM-dd HHmm]
-3. | event | event [task_description] /at [yyyy-MM-dd HHmm]
-4. | list | list
-5. | delete | delete [task_index] 
-6. | done | done [task_index]
-7. | find | find [keyword] 
-8. | update |  update [task_index] description [new_description] <br> OR <br> update [task_index] date/time [new_dateTime, format: yyyy-MM-dd HHmm]
-9. | bye | bye
+| No. | Features | Command Syntax |  
+| :---: | :--------: | :--------------: |  
+| 1. | todo | todo [task_description] |  
+| 2. | deadline | deadline [task_description] /by [yyyy-MM-dd HHmm] |  
+| 3. | event | event [task_description] /at [yyyy-MM-dd HHmm] |  
+| 4. | list | list |  
+| 5. | delete | delete [task_index] |  
+| 6. | done | done [task_index] |  
+| 7. | find | find [keyword] |  
+| 8. | update |  update [task_index] description [new_description] <br> OR <br> update [task_index] date/time [new_dateTime, format: yyyy-MM-dd HHmm] |   
+| 9. | bye | bye |  
 
 ### 1. **`todo`**
 Add a todo task into the list.  
