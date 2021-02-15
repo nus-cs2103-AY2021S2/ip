@@ -1,9 +1,8 @@
 package com.tanboonji.duke;
 
-import java.util.HashMap;
-
 import com.tanboonji.duke.command.Command;
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.model.AliasMap;
 import com.tanboonji.duke.model.TaskList;
 import com.tanboonji.duke.parser.CommandParser;
 import com.tanboonji.duke.storage.Storage;
@@ -17,7 +16,7 @@ public class Duke {
             + "What can I do for you today?";
     private Storage storage;
     private TaskList taskList;
-    private HashMap<String, String> aliasMap;
+    private AliasMap aliasMap;
 
     /**
      * Default class constructor.

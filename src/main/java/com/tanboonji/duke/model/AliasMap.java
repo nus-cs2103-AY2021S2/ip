@@ -1,0 +1,54 @@
+package com.tanboonji.duke.model;
+
+import java.io.Serializable;
+import java.util.HashMap;
+
+/**
+ * The AliasMap class contains the hash map of alias.
+ */
+public class AliasMap implements Serializable {
+
+    private final HashMap<String, String> aliasMap;
+
+    /**
+     * Class constructor specifying a hash map of alias to be initialised to.
+     *
+     * @param aliasMap Hash map of alias.
+     */
+    public AliasMap(HashMap<String, String> aliasMap) {
+        this.aliasMap = aliasMap;
+    }
+
+    /**
+     * Adds a new command alias.
+     *
+     * @param command Command to be aliased.
+     * @param alias Alias to be aliased to command.
+     */
+    public void addAlias(String command, String alias) {
+        aliasMap.put(alias, command);
+    }
+
+    /**
+     * Deletes an alias by command alias.
+     *
+     * @param alias Alias to be deleted.
+     */
+    public void deleteAlias(String alias) {
+        aliasMap.remove(alias);
+    }
+
+    /**
+     * Checks if user alias input exist in alias hash map.
+     *
+     * @param alias User alias input.
+     */
+    public boolean containsAlias(String alias) {
+        return aliasMap.containsKey(alias);
+    }
+
+    public String getAlias(String alias) {
+        System.out.println(aliasMap.get(alias));
+        return aliasMap.get(alias);
+    }
+}

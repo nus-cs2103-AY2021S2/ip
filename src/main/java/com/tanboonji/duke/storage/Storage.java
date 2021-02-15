@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.tanboonji.duke.exception.DukeException;
+import com.tanboonji.duke.model.AliasMap;
 import com.tanboonji.duke.model.TaskList;
 
 /**
@@ -76,17 +77,16 @@ public class Storage {
      * @return Alias saved on disk, if it does not exist, an empty alias hash map is returned instead.
      * @throws DukeException If any error occurs while loading alias from disk.
      */
-    @SuppressWarnings("unchecked")
-    public HashMap<String, String> loadAlias() throws DukeException {
+    public AliasMap loadAlias() throws DukeException {
         try {
             FileInputStream fileIn = new FileInputStream(ALIAS_DIR);
             ObjectInputStream input = new ObjectInputStream(fileIn);
-            HashMap<String, String> alias = (HashMap<String, String>) input.readObject();
+            AliasMap alias = (AliasMap) input.readObject();
             input.close();
             fileIn.close();
             return alias;
         } catch (FileNotFoundException e) {
-            return new HashMap<>();
+            return new AliasMap(new HashMap<>());
         } catch (IOException | ClassNotFoundException e) {
             throw new DukeException(LOAD_ERROR_MESSAGE);
         }
@@ -98,7 +98,7 @@ public class Storage {
      * @param alias Alias to be stored to disk.
      * @throws DukeException If any error occurs while saving alias to disk.
      */
-    public void saveAlias(HashMap<String, String> alias) throws DukeException {
+    public void saveAlias(AliasMap alias) throws DukeException {
         try {
             FileOutputStream fileOut = new FileOutputStream(ALIAS_DIR);
             ObjectOutputStream output = new ObjectOutputStream(fileOut);

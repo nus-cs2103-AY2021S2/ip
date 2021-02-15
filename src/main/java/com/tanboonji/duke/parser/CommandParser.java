@@ -1,6 +1,5 @@
 package com.tanboonji.duke.parser;
 
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +16,7 @@ import com.tanboonji.duke.command.ListCommand;
 import com.tanboonji.duke.command.ToDoCommand;
 import com.tanboonji.duke.exception.DukeException;
 import com.tanboonji.duke.exception.InvalidCommandException;
+import com.tanboonji.duke.model.AliasMap;
 
 /**
  * The CommandParser class helps to parse user string input into respective intended command.
@@ -36,7 +36,7 @@ public class CommandParser {
      * @param aliasMap Alias hash map.
      * @return Full actual command.
      */
-    public static String parseAlias(String input, HashMap<String, String> aliasMap) {
+    public static String parseAlias(String input, AliasMap aliasMap) {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
         if (!matcher.matches()) {
             return input;
@@ -45,8 +45,8 @@ public class CommandParser {
         String command = matcher.group(COMMAND_GROUP).trim();
         String arguments = matcher.group(ARGUMENTS_GROUP).trim();
 
-        if (aliasMap.containsKey(command)) {
-            command = aliasMap.get(command);
+        if (aliasMap.containsAlias(command)) {
+            command = aliasMap.getAlias(command);
         }
 
         return command + " " + arguments;

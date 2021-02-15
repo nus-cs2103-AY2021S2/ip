@@ -44,7 +44,7 @@ public class AliasCommand extends Command {
 
     @Override
     public String execute() {
-        aliasMap.put(alias, command);
+        aliasMap.addAlias(command, alias);
         return String.format(SUCCESS_MESSAGE, command, alias);
     }
 
