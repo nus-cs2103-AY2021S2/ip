@@ -1,5 +1,5 @@
 T|1|minuman
 T|1|ayah
 T|0|abcde
-T|0|meki
+T|1|meki
 T|0|ayam

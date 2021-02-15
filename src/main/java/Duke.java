@@ -42,8 +42,8 @@ public class Duke {
      * @throws DukeExceptionFolder The 'data' folder doesn't exist
      * @throws DukeExceptionCorruptedData The txt file format is corrupted
      */
-    public Duke(String filepath) throws DukeExceptionFolder, DukeExceptionCorruptedData {
-        this.storage = new Storage(filepath);
+    public Duke(String filepath, String fileName) throws DukeExceptionFolder, DukeExceptionCorruptedData {
+        this.storage = new Storage(filepath, fileName);
         this.taskList = this.storage.load();
     }
 

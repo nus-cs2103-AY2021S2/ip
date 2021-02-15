@@ -12,13 +12,15 @@ import java.io.IOException;
  */
 public class Storage {
     private final String filePath;
+    private final String fileName;
 
     /**
      * Constructor for Storage object
      * @param filePath String representing relative path of the txt file
      */
-    Storage(String filePath) {
+    Storage(String filePath, String fileName) {
         this.filePath = filePath;
+        this.fileName = fileName;
     }
 
     /**
@@ -56,7 +58,7 @@ public class Storage {
      */
     public TaskList load() throws DukeExceptionFolder,DukeExceptionCorruptedData {
         List<Task> tasks = new ArrayList<>();
-        File file = new File(this.filePath);
+        File file = new File(this.filePath + this.fileName);
         try {
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()) {
@@ -69,7 +71,8 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch(IOException error) {
-                throw new DukeExceptionFolder("No 'data' folder in this directory");
+                new File(this.filePath).mkdir();
+                throw new DukeExceptionFolder("Created new directory for storing data");
             }
         }
         return new TaskList();
@@ -82,7 +85,7 @@ public class Storage {
      */
     public void writeFile(TaskList tasks) throws DukeException {
         try {
-            FileWriter file = new FileWriter(this.filePath, false);
+            FileWriter file = new FileWriter(this.filePath + this.fileName, false);
             for (Task task: tasks.getTasks()) {
                 file.write(String.format(task.saveString() + "%n"));
             }
