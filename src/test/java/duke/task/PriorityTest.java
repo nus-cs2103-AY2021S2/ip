@@ -19,7 +19,7 @@ public class PriorityTest {
             assertEquals("", Priority.valueOf(3).getValue());
             fail();
         } catch (IllegalArgumentException e) {
-            assertEquals("Error: First argument out of range. Accepts only 0-2.", e.getMessage());
+            assertEquals("Error: Second argument out of range. Accepts only 0-2.", e.getMessage());
         }
     }
 

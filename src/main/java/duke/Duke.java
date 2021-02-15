@@ -46,6 +46,7 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         Scene scene = new Scene(ui);
+        stage.setTitle("Duke");
         stage.setScene(scene);
         initialiseCommandMap();
         this.run();
@@ -54,15 +55,15 @@ public class Duke extends Application {
 
     private void run() {
         try {
-            ui.handleIntro();
             this.storage.read();
         } catch (FileNotFoundException e) {
-            ui.createDukeDialog("Creating duke.txt");
+            ui.createDukeDialog("duke.txt not found.\nFile will be created when a task is added.");
         } catch (IOException e) {
             ui.handleError(e);
         } catch (IllegalArgumentException e) {
             ui.handleError(e);
         }
+        ui.handleIntro();
     }
 
     /**

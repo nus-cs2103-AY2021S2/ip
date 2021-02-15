@@ -71,10 +71,10 @@ public class TaskList {
         if (type.equals("T")) {
             newTask = new ToDo(desc);
         } else if (type.equals("D")) {
-            String byDate = task[3];
+            String byDate = task[4];
             newTask = new Deadline(desc, byDate);
         } else if (type.equals("E")) {
-            String atDate = task[3];
+            String atDate = task[4];
             newTask = new Event(desc, atDate);
         } else {
             throw new IllegalArgumentException("Error: Invalid type. Duke.txt may have been tampered.");
@@ -92,13 +92,17 @@ public class TaskList {
      * Sets the task at index to be done.
      *
      * @param count the index of Task to be set as Done
-     * @throws IllegalArgumentException count is out of range
+     * @throws IllegalArgumentException count is out of range or task is already done.
      */
     public void setTaskDone(int count) throws IllegalArgumentException {
         if (count > list.size() || count <= 0) {
             throw new IllegalArgumentException("Error: Task number out of range.");
         } else {
-            list.get(count - 1).setDone();
+            if (!list.get(count - 1).getDone()) {
+                list.get(count - 1).setDone();
+            } else {
+                throw new IllegalArgumentException("Error: Task is already done");
+            }
         }
     }
 
