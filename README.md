@@ -3,12 +3,18 @@
 
 A personal task list manager that keeps track of multiple types of task.
 
+### Types of Tasks
+1. Todo (only description)
+2. Deadline (with additional deadline date and time)
+3. Event (with additional string describing the location)
+4. Duration (with additional duration of task)
+5. Period (with additional starting and ending date)
 
 ## Example
-![example.png](readme_example_img.png)
+![ui.png](./docs/Ui.png)
 
 
-## Notes
+## Remarks
 A Java greenfield project for NUS software engineering students
 
 ## Credits
