@@ -141,6 +141,15 @@ public class Duke extends Application {
         }
     }
 
+    public String getTasklist() {
+        return "notnull";
+//        try {
+//            return "notnull";
+//        } catch (DukeException e) {
+//            ;
+//        }
+    }
+
     public String getResponse(String input) {
         return "hello";
 //        try {
