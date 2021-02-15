@@ -1,31 +1,27 @@
-public class Task {
+public class Task implements ITask{
 
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
 
     public Task(String description, boolean isDone){
         this.description = description;
         this.isDone = isDone;
     }
 
-    public boolean getIsDone(){
+    public static Task getTask(String description){
+        return new Task(description, false);
+    }
+
+
+    @Override
+    public boolean isDone() {
         return this.isDone;
     }
 
-    public String getDescription(){
-        return this.description;
-    }
-
-    public Task markAsDone(){
-
-        String description = this.getDescription();
-
-        return new Task(description,true);
+    @Override
+    public ITask markDone(){
+        return new Task(this.description,true);
     }
 
     public String getStatusIcon() {
@@ -33,8 +29,9 @@ public class Task {
     }
 
 
+    @Override
     public String toString(){
-        return "[" + this.getStatusIcon() + "]" + this.getDescription();
+        return "[" + this.getStatusIcon() + "]" + this.description;
     }
 
 }

@@ -21,7 +21,7 @@ public class Ui {
         } else if (input.equals("event")){
             throw new DukeEmptyCommandException("OOPS!!! The description of an event cannot be empty.");
         } else {
-            Task t = new Task(input);
+            Task t = new Task(input,false);
             list.add(t);
             System.out.println("Got it. I've added this task: ");
             System.out.println(t.toString());
