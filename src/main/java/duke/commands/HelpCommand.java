@@ -11,15 +11,15 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     private static final String UNKNOWN_COMMAND = "unknown";
     private static final Map<String, String> COMMAND_AND_DESCRIPTION = Map.of(
-            "todo", "todo task description",
-            "deadline", "deadline task description /by d MMM yy HHmm",
-            "event", "event task description /at d MMM yy HHmm",
-            "find", "find word",
-            "done", "done index",
-            "delete", "delete index",
+            "todo", "todo DESCRIPTION",
+            "deadline", "deadline DESCRIPTION /by DATE",
+            "event", "event DESCRIPTION /at DATE",
+            "find", "find PHRASE",
+            "done", "done INDEX",
+            "delete", "delete INDEX",
             "list", "list",
             "bye", "bye",
-            "help", "help",
+            "help", "help (COMMAND)",
             "unknown", "This is not a valid command. Enter 'help' to see the list of our commands!"
     );
     private static final List<String> ALL_COMMANDS = new ArrayList<>(COMMAND_AND_DESCRIPTION.keySet());
@@ -41,26 +41,31 @@ public class HelpCommand extends Command {
 
     @Override
     public String execute() {
-        if (command != null) {
+        if (this.command != null) {
             return returnOneInstruction();
         }
+
 
         return returnAllInstructions();
     }
 
     private String returnOneInstruction() {
-        if (COMMAND_AND_DESCRIPTION.get(command) == null) {
+        if (COMMAND_AND_DESCRIPTION.get(this.command) == null) {
             return COMMAND_AND_DESCRIPTION.get(UNKNOWN_COMMAND);
         }
 
         StringBuilder stringBuilder = new StringBuilder("Here is the format for ")
-                                            .append(command)
+                                            .append(this.command)
                                             .append(":");
 
         stringBuilder.append("\n\nCommand: ")
-                .append(command)
+                .append(this.command)
                 .append(", Input format: ")
-                .append(COMMAND_AND_DESCRIPTION.get(command));
+                .append(COMMAND_AND_DESCRIPTION.get(this.command));
+
+        if (this.command.equals(DeadlineCommand.COMMAND_WORD) || this.command.equals(EventCommand.COMMAND_WORD)) {
+            stringBuilder.append("\n\nAcceptable date formats: d/M/yyyy HHmm, d MMM yy HHmm, dd-MM-yy HHmm");
+        }
 
         return stringBuilder.toString();
     }
@@ -75,9 +80,11 @@ public class HelpCommand extends Command {
 
             stringBuilder.append("\n\nCommand: ")
                     .append(command)
-                    .append(", Input format: ")
+                    .append(", Format: ")
                     .append(COMMAND_AND_DESCRIPTION.get(command));
         }
+
+        stringBuilder.append("\n\nAcceptable date formats: d/M/yyyy HHmm, d MMM yy HHmm, dd-MM-yy HHmm");
 
         return stringBuilder.toString();
     }
