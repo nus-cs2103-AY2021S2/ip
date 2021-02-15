@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (duke.isExit()) {
-            Thread.sleep(2000); // show goodbye message before exiting
+            // HOW TO PAUSE??
             Platform.exit();
         }
     }
