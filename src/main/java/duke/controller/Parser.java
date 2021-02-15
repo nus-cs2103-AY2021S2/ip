@@ -77,6 +77,10 @@ public class Parser {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         String task = input.substring(input.indexOf(" ") + 1);
+        if (findComma(task)) {
+            throw new DukeException("Your task name should not include commas. "
+                    + "Are you trying to confuse me when I load your data?");
+        }
         Task temp = new ToDo(task);
         taskList.addTask(temp);
         return this.ui.printOnListChange(
@@ -102,6 +106,10 @@ public class Parser {
         assert taskList != null;
         try {
             String taskName = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
+            if (findComma(taskName)) {
+                throw new DukeException("Your task name should not include commas. "
+                        + "Are you trying to confuse me when I load your data?");
+            }
             Task temp;
             String timing = input.substring(input.indexOf("/") + 4);
             LocalDate date = LocalDate.parse(timing);
@@ -188,7 +196,7 @@ public class Parser {
                         + taskList.remind(7);
             }
             int numberOfDays = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
-            if (numberOfDays <= 0){
+            if (numberOfDays <= 0) {
                 throw new NumberFormatException();
             }
             return "Here are the tasks in the next " + numberOfDays + " days:\n"
@@ -198,5 +206,9 @@ public class Parser {
                     "so that I know how many days after today I should look into " +
                     "and remind your tasks, you forgetful :P.");
         }
+    }
+
+    private boolean findComma(String task) {
+        return task.contains(",");
     }
 }
