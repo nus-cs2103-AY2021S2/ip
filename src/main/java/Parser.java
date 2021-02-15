@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 /**
  * Class that deals with the user input and pushes out the appropriate command
  */
@@ -18,66 +20,68 @@ public class Parser {
      * @param tasks the TaskList obj that contains the current list
      * @param fm    the data.txt save file of the current user
      */
-    String readCommands(TaskList tasks, Storage fm, String input) {
+    Result readCommands(TaskList tasks, Storage fm, String input) {
         // splits the input string into 2 parts, separating the command and the info of the command.
         String[] commands = input.split(" ", 2);
         String command = commands[0];
-        String output = "";
-
+        Result result = null;
             try {
                 switch (command) {
                 case "bye":
                     fm.saveFile(tasks);
-                    output += terminate();
+                    ByeCommand byeCommand = new ByeCommand(sc);
+                    result = byeCommand.execute();
+                    Thread.sleep(500);
+                    exit(0);
                     break;
                 case "list":
-                    output += tasks.listItems();
+                    ListCommand lstCmd = new ListCommand(tasks);
+                    result = lstCmd.execute();
                     break;
                 case "todo":
                     String info = commands[1];
-                    output += tasks.add(new ToDo(info));
+                    AddCommand todo = new AddCommand(tasks, new ToDo(info));
+                    result = todo.execute();
                     break;
                 case "deadline":
                     String rest = commands[1];
                     String[] parts = rest.split("/by");
-                    output += tasks.add(new Deadline(parts[0], parts[1]));
+                    AddCommand deadline = new AddCommand(tasks, new Deadline(parts[0], parts[1]));
+                    result = deadline.execute();
                     break;
                 case "event":
                     String rest1 = commands[1];
                     String[] parts1 = rest1.split("/at");
-                    output += tasks.add(new Event(parts1[0], parts1[1]));
+                    AddCommand event = new AddCommand(tasks, new Event(parts1[0], parts1[1]));
+                    result = event.execute();
                     break;
                 case "done":
                     int number = Integer.valueOf(commands[1]);
-                    output += tasks.done(number);
+                    DoneCommand dneCmd = new DoneCommand(tasks, number);
+                    result = dneCmd.execute();
                     break;
                 case "delete":
                     int no = Integer.valueOf(commands[1]);
-                    output += tasks.delete(no);
+                    DeleteCommand delCmd = new DeleteCommand(tasks, no);
+                    result = delCmd.execute();
                     break;
                 case "find":
-                    FindCommand fc = new FindCommand();
                     String keyword = commands[1];
-                    output += fc.find(tasks, keyword);
+                    FindCommand fc = new FindCommand(tasks, keyword);
+                    result = fc.execute();
                     break;
                 case "clear":
-                    output += tasks.clearList();
+                    ClearCommand clrCmd = new ClearCommand(tasks);
+                    result = clrCmd.execute();
                     break;
                 default:
-                    assert false : "invalid command!";
+                    result = new Result("Invalid command!");
+                    assert false : new Result("invalid command!");
                     break;
                 }
-            } catch (DukeException E) {
-                return E.getMessage();
+            } catch (DukeException | InterruptedException E) {
+                return new Result(E.getMessage());
             }
-            return output;
-    }
-
-    /**
-     * Method that exits the program.
-     */
-    String terminate() {
-        sc.close();
-        return "Goodbye. See you again!";
+            return result;
     }
 }

@@ -19,7 +19,7 @@ public class TaskList {
         this.duplicateChecker = new HashSet<Task>();
         duplicateChecker.addAll(storage);
     }
-
+/*
     String add(Task task) throws DukeException {
         String output = "";
         boolean hasDuplicate = checkForDuplicate(duplicateChecker, task);
@@ -37,16 +37,13 @@ public class TaskList {
         assert output != "" : "output should not be empty.";
         return output;
     }
-
+*/
     String done(int value) throws DukeException {
         String output = "";
         if (value <= 0 || value > storage.size()) {
             throw new DukeException("No such list item.");
         }
         storage.get(value - 1).setDone();
-        System.out.println("ALRIGHT. THIS TASK HAS BEEN MARKED AS COMPLETE");
-        System.out.println(storage.get(value - 1));
-        System.out.println();
         output += "ALRIGHT. THIS TASK HAS BEEN MARKED AS COMPLETE\n"
                 + storage.get(value - 1)
                 + "\n";
@@ -109,6 +106,10 @@ public class TaskList {
         tasks.add(task);
         int postCount = tasks.size();
         return originalCount == postCount;
+    }
+
+    Set<Task> getDuplicateChecker() {
+        return this.duplicateChecker;
     }
 
     String clearList() {

@@ -7,20 +7,21 @@ import java.util.ArrayList;
  * them in the find list.
  */
 
-public class FindCommand {
+public class FindCommand extends Command{
 
+    private TaskList tasks;
+    private String keyword;
 
-    public FindCommand() {
+    public FindCommand(TaskList tasks, String keyword) {
+        this.tasks = tasks;
+        this.keyword = keyword;
     }
 
     /**
      * Method that searches through the list of tasks and returns
-     * tasks that have similar descriptions.
-     *
-     * @param tasks   the current tasklist
-     * @param keyword the keyword used for searching
+     * the result of tasks that have similar descriptions.
      */
-    public String find(TaskList tasks, String keyword) {
+    public Result execute() {
 
         String output = "";
         boolean isEmpty = true;
@@ -28,8 +29,6 @@ public class FindCommand {
         output += "Here are the matching tasks in your list:" + "\n";
 
         ArrayList<Task> storage = tasks.getStorage();
-        output += "--------------------------" + "\n"
-                + "Here are the matching tasks in your list:" + "\n";
 
         for (int i = 0; i < storage.size(); i++) {
 
@@ -38,14 +37,15 @@ public class FindCommand {
             assert description != null : "description should not be empty";
 
             if (description.contains(keyword)) {
-                output += (i + 1) + " " + task + "\n";
+                output += (i + 1) + ". " + task + "\n";
                 isEmpty = false;
             }
         }
-        if (!isEmpty) {
+        if (isEmpty) {
             output += "No similar descriptions found. \n";
         }
         assert output != "" : "output should not be empty.";
-        return output;
+        Result result = new Result(output);
+        return result;
     }
 }
