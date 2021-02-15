@@ -53,31 +53,25 @@ public class Duke {
      * @param input User input command.
      * @return String response from executing user command.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         if (isShuttingDown) {
             return EXIT_MESSAGE;
         }
 
-        Command command;
-        try {
-            input = CommandParser.parseAlias(input, aliasMap);
-            command = CommandParser.parseCommand(input);
-            command.addTaskList(taskList);
-            command.addAlias(aliasMap);
-            String result = command.execute();
+        input = CommandParser.parseAlias(input, aliasMap);
+        Command command = CommandParser.parseCommand(input);
+        command.addTaskList(taskList);
+        command.addAlias(aliasMap);
+        String result = command.execute();
 
-            if (command.shouldSaveData()) {
-                saveData();
-            }
-
-            if (command.shouldExitDuke()) {
-                isShuttingDown = true;
-            }
-
-            return result;
-        } catch (DukeException e) {
-            return e.getMessage();
+        if (command.shouldSaveData()) {
+            saveData();
         }
+        if (command.shouldExitDuke()) {
+            isShuttingDown = true;
+        }
+
+        return result;
     }
 
     /**

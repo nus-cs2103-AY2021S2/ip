@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.tanboonji.duke.Duke;
+import com.tanboonji.duke.exception.DukeException;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -20,8 +21,9 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/HeimerdingerIcon.jpg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/JhinIcon.jpg"));
+    private final Image errorImage = new Image(this.getClass().getResourceAsStream("/images/ErrorIcon.jpg"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -54,11 +56,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+
+        String response;
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        try {
+            response = duke.getResponse(input);
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
+        } catch (DukeException e) {
+            response = e.getMessage();
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, errorImage));
+        }
         userInput.clear();
 
         scrollPane.applyCss();
