@@ -52,7 +52,7 @@ public abstract class Command {
      *
      * @param targetIndex A integer specifying the new target index for the 0-indexed TaskList.
      */
-    protected void setTargetIndex(int targetIndex) {
+    public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -61,7 +61,7 @@ public abstract class Command {
      *
      * @return An integer specifying the target index for the 0-indexed TaskList.
      */
-    protected int getTargetIndex() {
+    public int getTargetIndex() {
         return targetIndex;
     }
 

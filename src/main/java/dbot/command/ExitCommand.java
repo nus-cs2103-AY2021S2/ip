@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws Storage.StorageOperationException {
-        storage.save(tasks);
+        storage.saveTasks(tasks);
         return ui.showExitMessage();
     }
 

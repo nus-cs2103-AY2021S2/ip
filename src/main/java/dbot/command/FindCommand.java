@@ -31,7 +31,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void quietExecute(TaskList tasks, Storage storage) throws DBotException {
+    public void quietExecute(TaskList tasks, Storage storage) {
         throw new IllegalArgumentException("The 'find' command cannot be used quietly.");
     }
 }

@@ -50,7 +50,7 @@ public class Storage {
      * @param tasks The TaskList to be saved.
      * @throws StorageOperationException If the file cannot be written to.
      */
-    public void save(TaskList tasks) throws StorageOperationException {
+    public void saveTasks(TaskList tasks) throws StorageOperationException {
         try {
             if (Files.notExists(path)) {
                 Files.createDirectories(path.getParent());
