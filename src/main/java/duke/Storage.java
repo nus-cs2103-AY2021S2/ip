@@ -47,6 +47,11 @@ public class Storage {
     }
 
     private Task loadTask(String taskInfo) throws DukeWrongFormatException {
+        /* Split task info into 3 - 4 parts (array)
+        *  first part is task type
+        *  second part is if task is finished
+        *  third part is task name
+        *  fourth part (if applicable) is time */
         String[] taskArray = taskInfo.split(" \\| ");
         String taskName = taskArray[2];
         Task t = null;
@@ -73,7 +78,4 @@ public class Storage {
         }
         return t;
     }
-
-
-
 }

@@ -17,7 +17,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-
     /**
      * Returns string logo for task's completion.
      * 'X' is done. ' ' is not done.
@@ -34,7 +33,7 @@ public abstract class Task {
      * @param dateTime date and timing of task.
      * @return String for task date and timing.
      */
-    public String timeFormat(LocalDateTime dateTime) {
+    public String formatTime(LocalDateTime dateTime) {
         return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
     }
 
@@ -55,7 +54,6 @@ public abstract class Task {
     }
 
     public abstract String saveTask();
-
 
     /**
      * Returns string for task.

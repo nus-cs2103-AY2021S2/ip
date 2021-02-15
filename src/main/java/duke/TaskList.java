@@ -84,7 +84,12 @@ public class TaskList {
         return new ArrayList<Task>(taskList);
     }
 
-    public int size() {
+    /**
+     * Returns size of task list.
+     *
+     * @return Integer size of task list.
+     */
+    public int getSize() {
         return taskList.size();
     }
 

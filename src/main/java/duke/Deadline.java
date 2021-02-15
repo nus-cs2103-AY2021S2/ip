@@ -52,7 +52,7 @@ public class Deadline extends Task {
     @Override
     public String saveTask() {
         return String.format("D | %s | %s | %s\n", super.getStatusIcon(),
-                description, super.timeFormat(deadline));
+                description, super.formatTime(deadline));
     }
 
     /**
@@ -64,7 +64,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + super.timeFormat(deadline) + ")";
+                + super.formatTime(deadline) + ")";
     }
 }
 

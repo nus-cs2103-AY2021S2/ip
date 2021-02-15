@@ -67,7 +67,7 @@ public class Event extends Task {
     @Override
     public String saveTask() {
         return String.format("E | %s | %s | %s-%s\n", super.getStatusIcon(),
-                description, super.timeFormat(start), super.timeFormat(end));
+                description, super.formatTime(start), super.formatTime(end));
     }
 
     /**
@@ -79,6 +79,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s - %s)", super.toString(),
-                super.timeFormat(start), super.timeFormat(end));
+                super.formatTime(start), super.formatTime(end));
     }
 }

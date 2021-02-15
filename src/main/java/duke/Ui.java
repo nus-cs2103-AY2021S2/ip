@@ -76,7 +76,7 @@ public class Ui {
     public String printTaskMsg(Task t, TaskList tl, String command) throws DukeException {
         String cmdMsg = getCommandMsg(command);
         String taskMsg = "\t" + t.toString() + "\n";
-        String listSizeMsg = getTaskListSizeMsg(tl.size());
+        String listSizeMsg = getTaskListSizeMsg(tl.getSize());
         return cmdMsg + taskMsg + listSizeMsg;
     }
 
@@ -88,7 +88,7 @@ public class Ui {
      * @return String message for task(s) found.
      */
     public String printFoundTasks(TaskList tl) {
-        if (tl.size() == 0) {
+        if (tl.getSize() == 0) {
             String noMatchMsg = "     There are no matching task in your list!\n";
             return noMatchMsg;
         } else {
@@ -105,7 +105,7 @@ public class Ui {
      * @return String format of tasks.
      */
     public String printTasks(TaskList tl) {
-        if (tl.size() == 0) {
+        if (tl.getSize() == 0) {
             String emptyListMsg = "     There are no tasks in your list!\n";
             return emptyListMsg;
         } else {
