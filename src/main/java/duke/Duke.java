@@ -21,7 +21,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("./src/main/data/Data.txt");
+        storage = new Storage("Data.txt");
         taskManager = new TaskManager();
         try {
             ArrayList<String> oldData = storage.load();
@@ -29,6 +29,8 @@ public class Duke {
             taskManager.upload(parsedData);
         } catch (FileNotFoundException e) {
             ui.showError("Storage file not found!");
+        } catch (IOException e) {
+            ui.showError("Storage file in incorrect format!");
         }
     }
 

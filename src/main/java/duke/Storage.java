@@ -23,8 +23,12 @@ public class Storage {
      * @return ArrayList List containing all previously stored tasks.
      * @throws FileNotFoundException If the file cannot be found at the specified file url.
      */
-    public ArrayList<String> load() throws FileNotFoundException {
+    public ArrayList<String> load() throws FileNotFoundException, IOException {
         File storageFile = new File(fileUrl);
+        if (!storageFile.exists()) {
+            storageFile.createNewFile();
+
+        }
         Scanner sc = new Scanner(storageFile);
         ArrayList<String> data = new ArrayList<>();
         while (sc.hasNextLine()) {
