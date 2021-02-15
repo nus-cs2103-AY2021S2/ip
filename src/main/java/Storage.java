@@ -20,9 +20,12 @@ public class Storage {
      */
     public static final String DEFAULT_CONTACTS_STORAGE_FILEPATH = "contacts.txt";
 
-    public TaskList tasks;
-    public ContactList contacts;
+    private TaskList tasks;
+    private ContactList contacts;
 
+    /**
+     * Constructor for Storage.
+     */
     public Storage() {
         tasks = new TaskList();
         contacts = new ContactList();
@@ -140,5 +143,13 @@ public class Storage {
             writer.println(item.toString());
         }
         writer.close();
+    }
+
+    public TaskList getTaskList() {
+        return this.tasks;
+    }
+
+    public ContactList getContactList() {
+        return this.contacts;
     }
 }

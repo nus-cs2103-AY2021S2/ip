@@ -11,6 +11,14 @@ public class Event extends Task {
      */
     protected String eventDate;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description The description of the task.
+     * @param eventDate   Date of the task.
+     * @param isDone      Indicator for whether the task has been completed.
+     * @param taskExists  Indicator for whether the task is already in the task list.
+     */
     public Event(String description, String eventDate, boolean isDone, boolean taskExists) {
         super(description, isDone);
         if (taskExists) {

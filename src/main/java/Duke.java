@@ -12,6 +12,11 @@ public class Duke {
     private final ContactParser contactParser;
     private int listType = 3;
 
+    /**
+     * Constructor for Duke
+     *
+     * @throws IOException Throw exception.
+     */
     public Duke() throws IOException {
         ui = new Ui();
         storage = new Storage();
@@ -37,10 +42,10 @@ public class Duke {
         } else {
             String result;
             if (listType == 0) {
-                result = taskParser.processInput(input, storage.tasks, ui);
+                result = taskParser.processInput(input, storage.getTaskList(), ui);
                 storage.writeTaskListIntoFile();
             } else if (listType == 1) {
-                result = contactParser.processInput(input, storage.contacts, ui);
+                result = contactParser.processInput(input, storage.getContactList(), ui);
                 storage.writeContactListIntoFile();
             } else {
                 result = "Please select to go into tasks or contacts first!";

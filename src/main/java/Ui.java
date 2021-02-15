@@ -19,8 +19,8 @@ public class Ui {
      */
     public String showTodoMsg(TaskList tasks) {
         assert tasks.getSize() >= 0 : tasks.getSize();
-        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString() + "\n"
-                + "Now you have " + tasks.getSize() + " tasks in the list.";
+        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString()
+                + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
@@ -30,8 +30,8 @@ public class Ui {
      * @return A string showing correct GUI output.
      */
     public String showDeadlineMsg(TaskList tasks) {
-        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString() + "\n"
-                + "Now you have " + tasks.getSize() + " tasks in the list.";
+        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString()
+                + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
@@ -41,8 +41,8 @@ public class Ui {
      * @return A string showing correct GUI output.
      */
     public String showEventMsg(TaskList tasks) {
-        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString() + "\n"
-                + "Now you have " + tasks.getSize() + " tasks in the list.";
+        return "Got it. I've added this task:\n" + "    " + tasks.getTaskList().get(tasks.getSize() - 1).toString()
+                + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**

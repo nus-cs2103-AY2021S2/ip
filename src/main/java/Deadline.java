@@ -11,6 +11,14 @@ public class Deadline extends Task {
      */
     protected String dueDate;
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description The description of the task.
+     * @param dueDate     Date for the task to be completed.
+     * @param isDone      Indicator for whether the task has been completed.
+     * @param taskExists  Indicator for whether the task is already in the task list.
+     */
     public Deadline(String description, String dueDate, boolean isDone, boolean taskExists) {
         super(description, isDone);
         if (taskExists) {
