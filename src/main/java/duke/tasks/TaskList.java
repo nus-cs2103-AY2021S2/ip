@@ -2,8 +2,6 @@ package duke.tasks;
 
 import java.util.ArrayList;
 
-import duke.exceptions.TaskNumberNotExistException;
-
 
 /**
  * Collects a list of <code>Task</code> objects. Note that the <code>Task</code> objects
@@ -47,15 +45,10 @@ public class TaskList {
      */
     public Task getTaskByIndex(int index) {
         try {
-            if (index > this.getSize() || index <= 0) {
-                throw new TaskNumberNotExistException(index);
-            }
-        } catch (TaskNumberNotExistException e) {
-            System.out.println(e.getMessage());
+            return this.tasks.get(index - 1);
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
-
-        return this.tasks.get(index - 1);
     }
 
     /**
@@ -67,15 +60,10 @@ public class TaskList {
      */
     public Task popTaskByIndex(int index) {
         try {
-            if (index > this.getSize() || index <= 0) {
-                throw new TaskNumberNotExistException(index);
-            }
-        } catch (TaskNumberNotExistException e) {
-            System.out.println(e.getMessage());
+            return this.tasks.remove(index - 1);
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
-
-        return this.tasks.remove(index - 1);
     }
 
     /**

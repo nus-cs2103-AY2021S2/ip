@@ -25,14 +25,17 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/PoliteCat.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/NeutralCat.png"));
+    private final Image dukeImageForInvalidCommand =
+            new Image(this.getClass().getResourceAsStream("/images/SkepticalCat.png"));
 
     /**
      * Initializes the user-interface and displays the welcome message.
      */
     @FXML
     public void initialize() {
+        dialogContainer.setStyle("-fx-background-color: #FFFFFF");
         scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
 
         String welcomeMessage = "Hello! I'm Duke!\n" + "What can I do for you?";
@@ -56,10 +59,13 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = this.userInput.getText();
         String response = this.duke.getResponse(input);
+        Image dukeImage = this.duke.inputIsValid(input) ? this.dukeImage : this.dukeImageForInvalidCommand;
 
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, this.userImage),
-                DialogBox.getDukeDialog(response, this.dukeImage)
+                this.duke.inputIsValid(input)
+                        ? DialogBox.getDukeDialog(response, this.dukeImage)
+                        : DialogBox.getDukeDialogForInvalid(response, this.dukeImageForInvalidCommand)
         );
         this.userInput.clear();
 

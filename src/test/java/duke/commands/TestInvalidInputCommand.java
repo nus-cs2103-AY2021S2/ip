@@ -88,14 +88,14 @@ public class TestInvalidInputCommand {
      * or DELETE command, the accompanying description is not an integer.
      */
     @Test
-    public void testTaskNumberNotIntResponse() {
+    public void testTaskNumberInvalidResponse() {
         for (String input : Arrays.asList(
                 "done a",
                 "delete b"
         )) {
             Command command = Parser.parse(input);
             assertTrue(command instanceof InvalidInputCommand);
-            String expectedResponse = "The input that follows a 'done' action should be an integer! :D";
+            String expectedResponse = "The input that follows a 'done' action should be a positive integer! :O";
             assertEquals(expectedResponse, command.getResponse(this.tasks));
         }
     }
@@ -165,6 +165,24 @@ public class TestInvalidInputCommand {
 
             assertEquals(expectedResponse, addDeadlineCommand.getResponse(this.tasks));
             assertEquals(expectedResponse, addEventCommand.getResponse(this.tasks));
+        }
+    }
+
+    /**
+     * Tests that <code>InvalidInputCommand</code> correctly respond to the exception when, for a REMINDER
+     * command, the accompanying integer is not a positive integer.
+     */
+    @Test
+    public void testInvalidUrgencyDaysResponse() {
+        for (String input : Arrays.asList(
+                "reminder a",
+                "reminder 0",
+                "reminder -1"
+        )) {
+            Command command = Parser.parse(input);
+            assertTrue(command instanceof InvalidInputCommand);
+            String expectedResponse = "You need to input a positive integer to specify the urgency level :O";
+            assertEquals(expectedResponse, command.getResponse(this.tasks));
         }
     }
 }

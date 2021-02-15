@@ -2,6 +2,7 @@ package duke;
 
 import duke.commands.ByeCommand;
 import duke.commands.Command;
+import duke.commands.InvalidInputCommand;
 import duke.tasks.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Parser;
@@ -51,10 +52,20 @@ public class Duke {
      * Determines if the application should be exited w.r.t the users' input.
      *
      * @param input A line of raw user input.
-     * @return true if the application should be terminated, and false otherwise.
+     * @return True if the application should be terminated, and false otherwise.
      */
     public boolean isExit(String input) {
         Command command = Parser.parse(input);
         return command.isExit();
+    }
+
+    /**
+     * Determines if the raw input is valid.
+     *
+     * @param input A line of raw user input.
+     * @return True if the input is valid, and false otherwise.
+     */
+    public boolean inputIsValid(String input) {
+        return !(Parser.parse(input) instanceof InvalidInputCommand);
     }
 }

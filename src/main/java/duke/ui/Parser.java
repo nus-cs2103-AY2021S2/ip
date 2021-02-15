@@ -23,7 +23,7 @@ import duke.exceptions.InvalidUrgencyDaysException;
 import duke.exceptions.MissingDeadlineException;
 import duke.exceptions.MissingDescriptionException;
 import duke.exceptions.MissingEventTimeException;
-import duke.exceptions.TaskNumberNotIntException;
+import duke.exceptions.TaskNumberInvalidException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
@@ -170,12 +170,12 @@ public class Parser {
     }
 
     /**
-     * Determines if a <code>String</code> can be converted to an integer.
+     * Determines if a <code>String</code> can be converted to a positive integer.
      *
      * @param str Any string.
-     * @return True if the input string can be converted to an integer, and false otherwise.
+     * @return True if the input string can be converted to a positive integer, and false otherwise.
      */
-    private static boolean isInteger(String str) {
+    private static boolean isPositiveInteger(String str) {
         if (str == null) {
             return false;
         }
@@ -186,13 +186,6 @@ public class Parser {
             return false;
         }
 
-        return true;
-    }
-
-    private static boolean isPositiveInteger(String str) {
-        if (!isInteger(str)) {
-            return false;
-        }
         return Integer.parseInt(str) > 0;
     }
 
@@ -246,8 +239,8 @@ public class Parser {
                 throw new MissingDescriptionException(action);
             }
 
-            if ((action.equals(DONE) || action.equals(DELETE)) && (!isInteger(description))) {
-                throw new TaskNumberNotIntException();
+            if ((action.equals(DONE) || action.equals(DELETE)) && (!isPositiveInteger(description))) {
+                throw new TaskNumberInvalidException();
             }
 
             if (action.equals(REMINDER) && (!isPositiveInteger(description))) {
@@ -272,7 +265,7 @@ public class Parser {
 
         } catch (MissingDescriptionException
                 | InvalidActionException
-                | TaskNumberNotIntException
+                | TaskNumberInvalidException
                 | MissingDeadlineException
                 | MissingEventTimeException
                 | InvalidDateTimeFormatException
