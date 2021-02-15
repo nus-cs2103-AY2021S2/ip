@@ -1,0 +1,16 @@
+todo read book
+deadline Homework /by 12am
+event picnic /at garden
+todo return book
+todo feed the cat
+todo
+water
+todo water the plants
+list
+done 2
+done 3
+list
+delete2
+delete 2
+lst
+list
