@@ -17,7 +17,7 @@ Hello Human! Welcome to Chandler's User Guide. Chandler is a friendly chatbot, h
 
 ## Quick Start
 1. Ensure that you have Java `11` or above installed in your Computer.
-2. Download the latest Chandler.jar from [here].
+2. Download the latest Chandler.jar from here.
 3. Copy the file to the folder you want to use as the *home folder* for Chandler.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
    ![startingscreen](./screenshots/starting_screen.png)
@@ -113,13 +113,13 @@ Format: `bye`
 
 **Action**  | **Format, Examples**
 --------|-----------------
-**Add todo task** | `todo TASK_DESCRIPTION` <br /> e.g.: `todo Laundry`
-**Add deadline task** | `deadline TASK_DESCRIPTION /by DATE_TIME` <br /> e.g.: `deadline Assignment /by 2021-02-21 2359`
-**Add event task** | `event EVENT_DESCRIPTION /at DATE_TIME` <br /> e.g.: `event Valentines /at 2021-02-14 1200`
+**Add todo task** | `todo TASK_DESCRIPTION` <br /> e.g., `todo Laundry`
+**Add deadline task** | `deadline TASK_DESCRIPTION /by DATE_TIME` <br /> e.g., `deadline Assignment /by 2021-02-21 2359`
+**Add event task** | `event EVENT_DESCRIPTION /at DATE_TIME` <br /> e.g., `event Valentines /at 2021-02-14 1200`
 **List** | `list`
-**Done** | `delete TASK_NUMBER` <br /> e.g.: `delete 1`
-**Delete** | `list`
-**Find** | `find KEYWORD` <br /> e.g.: `find CS2105`
+**Done** | `done`
+**Delete** | `delete TASK_NUMBER` <br /> e.g., `delete 1`
+**Find** | `find KEYWORD` <br /> e.g., `find CS2105`
 **Statistics** | `stats`
 **Exit** | `bye`
 
