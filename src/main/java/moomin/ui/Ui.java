@@ -102,7 +102,7 @@ public class Ui {
      * @return Task count info.
      */
     public String getTaskCountInfo(TaskList tasks) {
-        return "Now you have " + tasks.getTaskCount() + " in the list.";
+        return "Now you have " + tasks.getTaskCount() + " item(s) in the list.";
     }
 
     /**
@@ -223,7 +223,7 @@ public class Ui {
     public String combineTasksToString(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= tasks.getTaskCount(); ++i) {
-            sb.append(i + "." + tasks.getTask(i - 1).toString() + NEW_LINE);
+            sb.append(i + ". " + tasks.getTask(i - 1).toString() + NEW_LINE);
         }
         return sb.toString();
     }

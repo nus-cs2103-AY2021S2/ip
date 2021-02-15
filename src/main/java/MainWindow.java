@@ -46,6 +46,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = moomin.getResponse(input);
+        System.out.println(response);
         if (response == Ui.FAREWELL_MESSAGE) {
             sendButton.setDisable(true);
         } else if (response == null) {
