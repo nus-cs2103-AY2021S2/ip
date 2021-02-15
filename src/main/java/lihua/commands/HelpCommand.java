@@ -37,6 +37,9 @@ public class HelpCommand extends Command {
         String feedback = isAskingForHelp
                 ? Messages.MESSAGE_VIEW_COMMANDS
                 : Messages.MESSAGE_GET_HELP;
-        return new CommandResult(feedback);
+        if (isAskingForHelp) {
+            return new CommandResult(feedback);
+        }
+        return new CommandResult(feedback, true);
     }
 }

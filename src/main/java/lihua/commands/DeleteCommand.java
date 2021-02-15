@@ -37,9 +37,9 @@ public class DeleteCommand extends Command {
                             + "Now you have %d %s in total. Good luck.", deleted.toString(), tasks.getSize(), noun);
             return new CommandResult(message);
         } catch (IndexOutOfBoundsException e) {
-            return new CommandResult(Messages.MESSAGE_REPORTING_INVALID_INDEX);
+            return new CommandResult(Messages.MESSAGE_REPORTING_INVALID_INDEX, true);
         } catch (Exception e) {
-            return new CommandResult(Messages.MESSAGE_REPORTING_ADDING_FAILURE);
+            return new CommandResult(Messages.MESSAGE_REPORTING_ADDING_FAILURE, true);
         }
     }
 }

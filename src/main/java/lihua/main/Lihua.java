@@ -29,13 +29,13 @@ public class Lihua {
      * @return A string containing feedback for the user.
      * If user sends a terminating signal, the method returns null.
      */
-    public String getResponse(String userInput) {
+    public CommandResult getResponse(String userInput) {
         Command command = parser.parseUserInput(userInput);
         if (ExitCommand.isExit(command)) {
             System.exit(0);
         }
         CommandResult result = executeCommand(command);
-        return result.getFeedBack();
+        return result;
     }
     /**
      * Executes the command argument. If successful then saves the current task list.
