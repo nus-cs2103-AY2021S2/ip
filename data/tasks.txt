@@ -6,3 +6,7 @@ T | 0 | ahahh
 T | 0 | ahhahahahahahsh shdhsdhsh shd hsh hdsh hs dhshd hshd sh hdsh dhsh dhsh d
 T | 0 | ahahhah hsh shh sh shhs hshshshshhshshs dsdsds dshdhsd sd sdsnds d sdnsndn end
 D | 0 | deadline | 2021-09-24T12:00
+T | 0 | x
+E | 0 | lol | 2021-02-22
+D | 0 | deadline | 2020-09-24T12:00
+E | 0 | event with time | 2020-09-24 1200

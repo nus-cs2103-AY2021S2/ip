@@ -25,6 +25,10 @@ import pason.tasks.ToDo;
  * Parser class for validating commands and inputs.
  */
 public class Parser {
+    public static final int VALID_DEADLINE_FORMAT_COUNT = 2;
+    public static final int VALID_EVENT_FORMAT_COUNT = 2;
+    public static final int VALID_SCHEDULE_FORMAT_COUNT = 2;
+    public static final int OPTIONAL_TIME_COUNT = 2;
     private static final String DATE_TIME_FORMAT = "dd/MM/yyyy HHmm";
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String TODO_REGEX = "(todo) ([\\w ]*)";
@@ -129,7 +133,7 @@ public class Parser {
     public static Command constructDeadlineCommand(String input) throws Exception {
         String[] inputParts = input.substring(8).trim().split(" /by ");
 
-        if (inputParts.length != 2) {
+        if (inputParts.length != VALID_DEADLINE_FORMAT_COUNT) {
             throw new PasonException("You've entered an invalid format. "
                     + "Please use: deadline <description> /by <when>");
         }
@@ -170,7 +174,7 @@ public class Parser {
      */
     public static Command constructEventCommand(String input) throws Exception {
         String[] inputParts = input.substring(5).trim().split(" /at ");
-        if (inputParts.length != 2) {
+        if (inputParts.length != VALID_EVENT_FORMAT_COUNT) {
             throw new PasonException("You've entered an invalid format. "
                     + "Please use: event <description> /at <when>");
         }
@@ -191,7 +195,7 @@ public class Parser {
      * @return time, if exists, or null if invalid.
      */
     public static String parseOptionalEventTime(String[] dateAndTime) {
-        if (dateAndTime.length != 2) {
+        if (dateAndTime.length != OPTIONAL_TIME_COUNT) {
             return null;
         }
         return dateAndTime[1];
@@ -207,7 +211,7 @@ public class Parser {
      */
     public static Command validateListSchedule(String input) throws Exception {
         String[] inputParts = input.trim().split(" ");
-        if (inputParts.length != 2) {
+        if (inputParts.length != VALID_SCHEDULE_FORMAT_COUNT) {
             throw new PasonException("Please use the format listschedule <dd/mm/yyyy>");
         }
         String parsedDate = Parser.parseDate(inputParts[1]);
