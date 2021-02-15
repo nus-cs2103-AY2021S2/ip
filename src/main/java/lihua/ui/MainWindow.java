@@ -27,9 +27,15 @@ public class MainWindow extends AnchorPane {
 
     private Lihua lihua;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/geisha-2-concrete.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/geisha-concrete.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/geisha-2-concrete.jpg"));
+    private Image lihuaImage = new Image(this.getClass().getResourceAsStream("/images/geisha-concrete.jpg"));
 
+    private Image backgroundImage = new Image(this.getClass()
+            .getResourceAsStream("/images/pikachu-background-2.jpg"));
+
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -49,11 +55,11 @@ public class MainWindow extends AnchorPane {
      * Sends a welcome message to the user.
      */
     public void sendWelcomMessage() {
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Messages.MESSAGE_HELLO, dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getLihuaDialog(Messages.MESSAGE_HELLO, lihuaImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Lihua's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      * If the response is null, the application should exit.
      */
@@ -63,7 +69,7 @@ public class MainWindow extends AnchorPane {
         String response = lihua.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getLihuaDialog(response, lihuaImage)
         );
         userInput.clear();
     }
