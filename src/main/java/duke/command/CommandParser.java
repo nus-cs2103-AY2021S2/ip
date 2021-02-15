@@ -82,12 +82,19 @@ public class CommandParser {
             storage.add(event);
             output = ui.getAddResponse(event, storage.getArrSize());
             break;
+        case REMIND:
+            Task reminderTask = Reminder.createReminder(this.data, storage.getTasksArr());
+            output = ui.getAddReminderResponse(reminderTask);
+            break;
         case DONE:
             int task_No = Integer.parseInt(this.data);
             output = ui.getDoneResponse(storage.get(task_No - 1).doTask());
             break;
         case LIST:
-            output = ui.getListResponse(storage.getArr());
+            output = ui.getListResponse(storage.getTasksArr());
+            break;
+        case REMINDERS:
+            output = ui.getReminders(storage.getRemindersArr());
             break;
         case REMOVE:
             int remove_No = Integer.parseInt(this.data);
@@ -105,7 +112,6 @@ public class CommandParser {
             output = ui.getGoodbyeResponse();
             break;
         default:
-            //check assert
              assert false : command;
         }
 
@@ -142,7 +148,7 @@ public class CommandParser {
                     throw new DukeException(" Deadline must have a task! :(");
                 } else if (input.substring(indexOfBy + SPACER).isBlank()) {
                     throw new DukeException(" Deadline date cannot be empty! :(");
-                } else if (checkDatesFormat(input.substring(indexOfBy + 3).trim())) {
+                } else if (checkDatesFormat(input.substring(indexOfBy + SPACER).trim())) {
                     throw new DukeException(" I dont understand the date! :(");
                 }
             }
@@ -158,8 +164,29 @@ public class CommandParser {
                     throw new DukeException(" Event must have a task! :(");
                 } else if (input.substring(indexOfAt + SPACER).isBlank()) {
                     throw new DukeException(" Event date cannot be empty! :(");
-                } else if (checkDatesFormat(input.substring(indexOfAt + 3).trim())) {
+                } else if (checkDatesFormat(input.substring(indexOfAt + SPACER).trim())) {
                     throw new DukeException(" I dont understand the date! :(");
+                }
+            }
+            break;
+        case REMIND:
+            if (test) {
+                throw new DukeException(" Reminder cannot be empty! :(");
+            } else if (!input.contains("/on")) {
+                throw new DukeException(" Reminder must have a date! :(");
+            } else {
+                int indexOfOn = input.indexOf("/on");
+                if (input.substring(index, indexOfOn).isBlank()) {
+                    throw new DukeException(" Reminder must have a task! :(");
+                } else {
+                    int no = Integer.parseInt(input.substring(index + 1, index + 2));
+                    if (no > counter || no < 1) {
+                        throw new DukeException(" Reminder needs a valid task! :(");
+                    } else if (input.substring(indexOfOn + SPACER).isBlank()) {
+                        throw new DukeException(" Reminder date cannot be empty! :(");
+                    } else if (checkDatesFormat(input.substring(indexOfOn + SPACER).trim())) {
+                        throw new DukeException(" I dont understand the date! :(");
+                    }
                 }
             }
             break;
@@ -176,6 +203,7 @@ public class CommandParser {
             break;
         case LIST:
         case BYE:
+        case REMINDERS:
             break;
         default:
             assert false : commandList;

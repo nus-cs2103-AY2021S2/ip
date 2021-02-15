@@ -1,4 +1,8 @@
 import duke.Duke;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,6 +10,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -33,6 +44,11 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(d.startIntro(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(d.startReminders(), dukeImage));
+    }
+
+    public void close() {
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.beginClose(), dukeImage));
     }
 
     /**
@@ -47,6 +63,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (input.trim().equalsIgnoreCase("BYE")) {
+            Stage stage = (Stage) sendButton.getScene().getWindow();
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished( event -> stage.close() );
+            delay.play();
+        }
         userInput.clear();
     }
 }

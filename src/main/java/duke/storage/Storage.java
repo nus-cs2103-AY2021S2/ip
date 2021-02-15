@@ -1,9 +1,6 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -25,10 +23,11 @@ public class Storage {
      * This is the Constructor for Storage. Creates a new ArrayList to store Tasks, initiates File and populates list.
      */
     public Storage() {
-        ArrayList<Task> arr = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Reminder> reminders = new ArrayList<>();
         this.file = initiateFile();
-        populateList(arr);
-        this.tasks = arr;
+        populateList(tasks, reminders);
+        this.tasks = tasks;
     }
 
     private File initiateFile() {
@@ -61,7 +60,7 @@ public class Storage {
         return file;
     }
 
-    private void populateList(ArrayList<Task> arr) {
+    private void populateList(ArrayList<Task> tasks, ArrayList<Reminder> reminders) {
         try {
             Scanner reader = new Scanner(this.file);
             while (reader.hasNextLine()) {
@@ -72,19 +71,24 @@ public class Storage {
                 int stateEnd = data.indexOf(" | ");
                 String state = data.substring(0, stateEnd);
                 data = data.substring(stateEnd + 3);
+                int dateEnd = data.indexOf(" | ");
+                String reminderDate = data.substring(0, dateEnd);
+                data = data.substring(dateEnd + 3);
                 int inputEnd = data.indexOf(" | ");
                 switch (task) {
                 case "T":
-                    arr.add(new ToDo(data, Integer.parseInt(state)));
+                    tasks.add(new ToDo(data, Integer.parseInt(state), reminderDate));
                     break;
                 case "D":
-                    arr.add(new Deadline(data.substring(0, inputEnd), data.substring(inputEnd + 3),
-                            Integer.parseInt(state)));
+                    tasks.add(new Deadline(data.substring(0, inputEnd), data.substring(inputEnd + 3),
+                            Integer.parseInt(state), reminderDate));
                     break;
                 case "E":
-                    arr.add(new Event(data.substring(0, inputEnd), data.substring(inputEnd + 3),
-                            Integer.parseInt(state)));
-                assert false : task;
+                    tasks.add(new Event(data.substring(0, inputEnd), data.substring(inputEnd + 3),
+                            Integer.parseInt(state), reminderDate));
+                    break;
+                default :
+                    assert false : task;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -110,7 +114,7 @@ public class Storage {
         return temp;
     }
 
-    public void writeToFile(Task task) {
+    private void writeTaskToFile(Task task) {
         try {
             this.fio.write(task.saveTask() + "\n");
         } catch (IOException e) {
@@ -124,8 +128,8 @@ public class Storage {
      */
     public void beginClose() {
         this.initialiseFW();
-        for (Task task: this.tasks) {
-            writeToFile(task);
+        for (Task task : this.tasks) {
+            writeTaskToFile(task);
         }
     }
 
@@ -150,8 +154,27 @@ public class Storage {
         return this.tasks.remove(index);
     }
 
-    public ArrayList<Task> getArr() {
+    public ArrayList<Task> getTasksArr() {
         return this.tasks;
+    }
+
+    public ArrayList<Task> getRemindersArr() {
+        ArrayList<Task> reminders = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.getReminderDate() != null) {
+                reminders.add(task);
+            }
+        }
+        reminders.sort((o1, o2) -> {
+            if (o1.getReminderDate().isBefore(o2.getReminderDate())) {
+                return -1;
+            } else if (o1.getReminderDate().isAfter(o2.getReminderDate())) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+        return reminders;
     }
 
     public int getArrSize() {

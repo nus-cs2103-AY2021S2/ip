@@ -1,11 +1,14 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+
 /**
  * This is the Task class that a user can input to the chatbot
  */
 public class Task {
     private final String input;
-    private taskState state;
+    private TaskState state;
+    private Reminder reminder;
 
     /**
      * This is the Task constructor.
@@ -13,7 +16,8 @@ public class Task {
      */
     public Task(String input) {
         this.input = input;
-        this.state = taskState.NOTDONE;
+        this.state = TaskState.NOTDONE;
+        this.reminder = null;
     }
 
     /**
@@ -21,7 +25,7 @@ public class Task {
      * @return This returns the modified done Task.
      */
     public Task doTask() {
-        this.state = taskState.DONE;
+        this.state = TaskState.DONE;
         return this;
     }
 
@@ -37,8 +41,24 @@ public class Task {
      * This returns the current state of the Task.
      * @return This returns Task_State of the task.
      */
-    public taskState getState() {
+    public TaskState getState() {
         return state;
+    }
+
+    public void addReminder(LocalDateTime localDateTime) {
+        this.reminder = new Reminder(localDateTime);
+    }
+
+    public LocalDateTime getReminderDate() {
+        if (this.reminder == null) {
+            return null;
+        } else {
+            return this.reminder.getDate();
+        }
+    }
+
+    public Reminder getReminder() {
+        return reminder;
     }
 
     /**
@@ -47,12 +67,22 @@ public class Task {
      */
     public String saveTask() {
         String stateB;
-        if (state == taskState.DONE) {
+        String reminderDate;
+        if (state == TaskState.DONE) {
             stateB = "1";
         } else {
             stateB = "0";
         }
-        return " | " + stateB + " | " + input;
+        if (reminder == null) {
+            reminderDate = "0";
+        } else {
+            reminderDate = reminder.getReminderDateOnly();
+        }
+        return " | " + stateB + " | " + reminderDate + " | " + input;
+    }
+
+    public String printWithReminder() {
+        return this.reminder.toString() + toString();
     }
 
     @Override

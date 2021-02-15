@@ -3,7 +3,7 @@ package duke;
 import duke.command.CommandList;
 import duke.command.CommandParser;
 import duke.task.Deadline;
-import duke.task.taskState;
+import duke.task.TaskState;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +19,7 @@ public class DukeTest {
     public void taskTest() {
         Deadline deadline = new Deadline("Bake Cake", "Mar 20 2021");
         deadline.doTask();
-        assertEquals(taskState.DONE, deadline.getState());
+        assertEquals(TaskState.DONE, deadline.getState());
     }
 
     @Test
