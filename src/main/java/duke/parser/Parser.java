@@ -45,9 +45,12 @@ public class Parser {
      *
      * @return a string of arguments
      */
-    public String getArgs() {
+    public String getArgs() throws DukeException {
         String[] token = msg.split(" ");
         String args = "";
+        if (token.length <= 1) {
+            throw new DukeException("Description is empty!");
+        }
         for (int i = 1; i < token.length; i++) {
             args += token[i];
             if (i < token.length - 1) {
@@ -101,14 +104,29 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case DONE:
-            return new DoneCommand(getArgs());
+            try {
+                return new DoneCommand(getArgs());
+            } catch (DukeException ex) {
+                return new PrintCommand(ex.getMessage());
+            }
         case DELETE:
-            return new DeleteCommand(getArgs());
+            try {
+                return new DeleteCommand(getArgs());
+            } catch (DukeException ex) {
+                return new PrintCommand(ex.getMessage());
+            }
         case TODO:
-            return new AddTodoCommand(new Todo(getArgs()));
+            try {
+                return new AddTodoCommand(new Todo(getArgs()));
+            } catch (DukeException ex) {
+                return new PrintCommand(ex.getMessage());
+            }
         case DEADLINE:
             try {
                 String[] deadlineStr = getFormattedCommand();
+                assert(!deadlineStr[0].isEmpty());
+                assert(!deadlineStr[1].isEmpty());
+                assert(!deadlineStr[2].isEmpty());
                 return new AddDeadlineCommand(
                         new Deadline(deadlineStr[0], deadlineStr[1], deadlineStr[2]));
             } catch (DukeException ex) {
@@ -117,13 +135,20 @@ public class Parser {
         case EVENT:
             try {
                 String[] eventStr = getFormattedCommand();
+                assert(!eventStr[0].isEmpty());
+                assert(!eventStr[1].isEmpty());
+                assert(!eventStr[2].isEmpty());
                 return new AddEventCommand(
                         new Event(eventStr[0], eventStr[1], eventStr[2]));
             } catch (DukeException ex) {
                 return new PrintCommand(ex.getMessage());
             }
         case FIND:
-            return new FindCommand(getArgs());
+            try {
+                return new FindCommand(getArgs());
+            } catch (DukeException ex) {
+                return new PrintCommand(ex.getMessage());
+            }
         default:
             return new PrintCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

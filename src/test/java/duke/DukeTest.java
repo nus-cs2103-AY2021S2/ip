@@ -58,10 +58,10 @@ public class DukeTest {
 
     @Test
     public void parserTest() {
-        Parser parser = new Parser("event Write a book /by 2020-09-16");
-        assertEquals("event", parser.getRequest());
-        assertEquals("Write a book /by 2020-09-16", parser.getArgs());
         try {
+            Parser parser = new Parser("event Write a book /by 2020-09-16");
+            assertEquals("event", parser.getRequest());
+            assertEquals("Write a book /by 2020-09-16", parser.getArgs());
             String taskName = parser.getFormattedCommand()[0];
             String date = parser.getFormattedCommand()[1];
             String preposition = parser.getFormattedCommand()[2];

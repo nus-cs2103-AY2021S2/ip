@@ -100,6 +100,8 @@ public class Storage {
             return list;
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            throw new DukeException("Save file is corrupted ): Will be creating a new file");
         }
         return new LinkedList<>();
     }
