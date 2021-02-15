@@ -13,19 +13,20 @@ your greatest productivity tool!
 ToDoBeast is a task-tracking chatbot that allows you to keep track of upcoming to-dos, deadlines and events. 📚
 ## Features 
 
-### Tracking tasks
+### Tracking tasks 📑
 Three types of tasks can be added: To-Dos, Deadlines, and Events. Once a task is added, ToDoBeast will keep track of the task and its completion progress.
 
 Tasks can also be marked as done or deleted accordingly.
 
-### Adding notes to tasks
+### Adding notes to tasks 📝
 You can also add notes/remarks to their tasks, either to new tasks or pre-existing tasks.
 
-### Listing tasks
+### Listing tasks 📖
 ToDoBeast can list all the tasks that you have at once, so that you can keep tabs on the things that you have to do.
 
-### Finding tasks
+### Finding tasks 🔎
 You can search for a task by specific keywords, and ToDoBeast will return the tasks containing matching descriptions.
+<br/>
 
 ## Usage
 _** All command parameters are delimited by `, ` **_
@@ -33,6 +34,7 @@ _** All command parameters are delimited by `, ` **_
 ### 1. `instructions` - Lists instructions
 
 Provides a detailed description of the various commands that can be used for ToDobeast.
+<br/>
 
 ### 2. `todo, [taskDescription], [taskNotes] (optional)` - Add new To-do task
 
@@ -49,6 +51,7 @@ One more task added to the hustle:
     TODO |   | get milk from the supermarket | farmhouse brand milk
 You now have 1 tasks in total.
 ```
+<br/>
 
 ### 3. `deadline, [taskDescription], by YYYY-MM-DD HH:MM, [taskNotes] (optional)` - Add new Deadline task
 
@@ -65,6 +68,7 @@ One more task added to the hustle:
     DEADLINE |   | do CS2103 assignment | by 19 Feb 2021, 23:59
 You now have 2 tasks in total.  
 ```
+<br/>
 
 ### 4. `event, [taskDescription], at YYYY-MM-DD HH:MM, [taskNotes] (optional)` - Add new Event task
 
@@ -81,6 +85,7 @@ One more task added to the hustle:
     EVENT |   | committee meeting | at 19 Feb 2021, 23:59 | remember to prepare agenda!
 You now have 3 tasks in total.  
 ```
+<br/>
 
 ### 5. `list` - Lists all tasks
 
@@ -93,6 +98,7 @@ Here are your tasks:
 2. DEADLINE |   | do CS2103 assignment | by 19 Feb 2021, 23:59
 3. EVENT |   | committee meeting | at 19 Feb 2021, 23:59 | remember to prepare agenda!
 ```
+<br/>
 
 ### 6. `note/notes, [taskIndex], [taskNotes]` - Add notes to existing task
 
@@ -108,6 +114,7 @@ Expected outcome:
 I've added notes to this task:
     DEADLINE |   | do CS2103 assignment | by 19 Feb 2021, 23:59 | merge PR for assignment  
 ```
+<br/>
 
 ### 7. `delete, [taskIndex]` - Delete task
 
@@ -124,7 +131,8 @@ Got it! I've removed this task for you:
     TODO |   | get milk from the supermarket | farmhouse brand milk
 You now have 2 tasks in total.
 ```
-  
+<br/>
+
 ### 8. `done, [taskIndex]` - Mark task as done
 
 Marks task with `[taskIndex]` as done.
@@ -140,6 +148,7 @@ Good job! You've just completed this task:
     DEADLINE | ✔ | do CS2103 assignment | by 19 Feb 2021, 23:59 | merge PR for assignment  
 You now have 2 tasks in total.
 ```
+<br/>
 
 ### 9. `find, [regex]` - Search for tasks
 
@@ -156,6 +165,7 @@ Here are the matching tasks in your list:
    
 Task #2. EVENT |   | committee meeting | at 19 Feb 2021, 23:59 | remember to prepare agenda!
 ```
+<br/>
 
 ### 10. `bye/exit` - Exit ToDoBeast
 
