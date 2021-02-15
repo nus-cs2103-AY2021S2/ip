@@ -8,20 +8,20 @@ Popo task manager is here to help you!
 
 
 ## Types of Tasks
-###Todo 
+### Todo 
 A normal task with only a name
 
-###Deadline
+### Deadline
 A task with a name and a deadline date component \
 (and an optional deadline time component)
 
-###Event
+### Event
 A task with a name and a location description
 
-###Duration
+### Duration
 A task with a name and a time period
 
-###Period
+### Period
 A task with a name and a starting and ending date
 
 
