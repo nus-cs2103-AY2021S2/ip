@@ -42,7 +42,7 @@ public class Event extends Task {
      */
     @Override
     public Task markCompleted() {
-        return new Event(super.getTaskName(), "complete", super.getDates());
+        return new Event(getTaskName(), "complete", getDates());
     }
 
     /**

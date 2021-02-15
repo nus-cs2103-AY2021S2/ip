@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Encapsulates a task and supports operators to retrieve
  * information about the task such as taskName, status and type.
  */
-public class Task {
+public abstract class Task {
 
     //task details
     private final String TASK_NAME;
@@ -65,9 +65,7 @@ public class Task {
     /**
      * Marks the task as completed.
      */
-    public Task markCompleted() {
-        return null;
-    }
+    public abstract Task markCompleted();
 
     /**
      * Gets the string describing task.

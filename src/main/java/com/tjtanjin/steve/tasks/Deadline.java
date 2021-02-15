@@ -39,7 +39,7 @@ public class Deadline extends Task {
      */
     @Override
     public Task markCompleted() {
-        return new Deadline(super.getTaskName(), "complete", super.getDates());
+        return new Deadline(getTaskName(), "complete", getDates());
     }
 
     /**
