@@ -8,18 +8,30 @@ import java.time.LocalDateTime;
  */
 public class KiwiDate {
     private LocalDate date;
+    private boolean isEmpty;
 
     private KiwiDate(LocalDate ld) {
         this.date = ld;
     }
 
+    private KiwiDate() {
+        this.isEmpty = true;
+        this.date = null;
+    }
+
     public static KiwiDate of(int day, int month) {
+        if (day==0 && month==0) {
+            return new KiwiDate();
+        }
+
         return new KiwiDate(LocalDate.of(LocalDateTime.now().getYear(), month, day));
     }
 
     @Override
     public String toString() {
-        if (date.getYear() == LocalDate.now().getYear()) {
+        if (isEmpty) {
+            return "";
+        } else if (date.getYear() == LocalDate.now().getYear()) {
             return String.format("%d/%d",
                     date.getDayOfMonth(),
                     date.getMonth().getValue());

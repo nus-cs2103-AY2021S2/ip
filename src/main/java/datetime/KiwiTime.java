@@ -1,6 +1,9 @@
 package datetime;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Custom time class that wraps a java.time.LocalTime object. Should only be called by KiwiDateTime class.
@@ -44,13 +47,15 @@ public class KiwiTime {
             return "";
         }
 
+        DateTimeFormatter f;
+
         if (isHourOnly) {
-            return String.format("%d hrs", time.getHour());
+            f = DateTimeFormatter.ofPattern("ha");
         } else {
-            return this.time.toString(); // currently using this because getMinute doesn't guarantee two digit int
-            // return String.format("%d:%d", time.getHour(), time.getMinute());
+            f = DateTimeFormatter.ofPattern("h:ma");
         }
 
+        return this.time.format(f).toLowerCase();
     }
 
     public static void main(String[] args) {

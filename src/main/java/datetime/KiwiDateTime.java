@@ -7,15 +7,16 @@ import java.time.LocalDateTime;
  * user input strings to dateTime fields for tasks.
  */
 public class KiwiDateTime {
-//    private LocalDateTime dateTime;
-    private KiwiDate kiwiDate;
-    private KiwiTime kiwiTime;
+    private boolean hasDate; // tracked internally by kiwi date and kiwi time
+    private boolean hasTime;
+    private final KiwiDate kiwiDate;
+    private final KiwiTime kiwiTime;
 
     // todo possible inheritance: subclasses for datetimes
     // or just customize toStrings not to print minute / hour if don't have, or year if this year
     @Override
     public String toString() {
-        return kiwiDate + " " + kiwiTime;
+        return (kiwiDate + " " + kiwiTime).trim();
     }
 
     static void print(Object... objects) {
@@ -77,3 +78,4 @@ no year --> set year to this year [/]
 
 and then natural language processing
  */
+
