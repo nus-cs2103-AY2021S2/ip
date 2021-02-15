@@ -169,7 +169,7 @@ it creates with the file that contains the data of your previous Lihua *home fol
 
 ## Command Summary
 Command | Format | Example / Explanation
------- | ------|-------
+------- | ------ | ---------------------
 **bye** | `bye` | application exits
 **deadline** | `deadline TASKNAME /by YYYY-MM-DD` | `deadline homework /by 2021-01-01` 
 **delete** | `delete TASKINDEX` | `delete 1`
