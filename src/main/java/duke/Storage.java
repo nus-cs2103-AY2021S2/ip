@@ -14,6 +14,7 @@ public class Storage {
 
     /**
      * Initialises Storage object.
+     *
      * @param filePath the file path that specifies location in hard disk for storage.
      */
     public Storage(String filePath) {
@@ -22,6 +23,7 @@ public class Storage {
 
     /**
      * Loads the data in the hard disk location specified by file path.
+     *
      * @return an array list of the tasks saved in the hard disk.
      */
     public ArrayList<Task> loadData() {
@@ -46,6 +48,7 @@ public class Storage {
 
     /**
      * Converts the data being stored as strings in the hard disk into Task objects.
+     *
      * @param input each individual string task data from the file in the hard disk.
      * @return the Task object of the String description.
      */
@@ -80,6 +83,7 @@ public class Storage {
 
     /**
      * Writes the specified taskList into the specified file in the hard disk.
+     *
      * @param taskList the list of tasks to be written into file.
      */
     public void writeToFile(ArrayList<Task> taskList) {
@@ -97,6 +101,7 @@ public class Storage {
 
     /**
      * Converts the Task objects into formatted String objects.
+     *
      * @param task the individual tasks from the taskList to be converted.
      * @return a String object of the task.
      */

@@ -10,6 +10,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Initialises DeadlineCommand object.
+     *
      * @param description the description of the deadline task.
      * @param by the due date of the deadline task.
      */

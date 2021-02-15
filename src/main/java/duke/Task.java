@@ -10,6 +10,7 @@ public class Task {
 
     /**
      * Initialises Task objects.
+     *
      * @param description the description of the task.
      * @param taskType the string specifying task type.
      */
@@ -21,6 +22,7 @@ public class Task {
 
     /**
      * Returns String specifying if task is done or not.
+     *
      * @return String object in the form of a tick if the task is done.
      */
     public String getStatus() {
@@ -29,6 +31,7 @@ public class Task {
 
     /**
      * Returns boolean specifying if task is done or not.
+     *
      * @return boolean of if task is done or not.
      */
     public boolean isDone() {
@@ -44,6 +47,7 @@ public class Task {
 
     /**
      * Returns String specifying task type.
+     *
      * @return String object of task type.
      */
     public String getTaskType() {
@@ -52,6 +56,7 @@ public class Task {
 
     /**
      * Returns String specifying description of the task.
+     *
      * @return String object of task description.
      */
     public String getDescription() {
@@ -60,6 +65,7 @@ public class Task {
 
     /**
      * Returns a String of the Event task object in a standardised format.
+     *
      * @return a String object of the Task.
      */
     @Override

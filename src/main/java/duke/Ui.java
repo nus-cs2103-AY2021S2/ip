@@ -36,6 +36,7 @@ public class Ui {
 
     /**
      * Returns string of the task the user just added and the current size of the task list.
+     *
      * @param task the task the user added.
      */
     public String showTaskAdded(Task task) {
@@ -46,6 +47,7 @@ public class Ui {
 
     /**
      * Returns string of the task the user just deleted and the current size of the task list.
+     *
      * @param task the task the user deleted.
      */
     public String showTaskDeleted(Task task) {
@@ -56,6 +58,7 @@ public class Ui {
 
     /**
      * Returns string of the task marked as done.
+     *
      * @param task the task the user marked as done.
      */
     public String showTaskDone(Task task) {
@@ -64,6 +67,7 @@ public class Ui {
 
     /**
      * Returns string of the current list of tasks. If there are no tasks, Ui will provide a different prompt.
+     *
      * @param taskList the current list of tasks.
      */
     public String showTaskList(ArrayList<Task> taskList) {
@@ -81,6 +85,7 @@ public class Ui {
 
     /**
      * Returns string of matching tasks. If there are no tasks, Ui will provide a different prompt.
+     *
      * @param matchingTasks the list of tasks that has matching keyword.
      */
     public String showMatchingTasks(ArrayList<Task> matchingTasks) {

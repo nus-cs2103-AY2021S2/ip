@@ -12,6 +12,7 @@ public class Event extends Task {
 
     /**
      * Initialises Event object.
+     *
      * @param description the description of the task.
      * @param at the date of the task, in the format YYYY-MM-DD
      */
@@ -22,6 +23,7 @@ public class Event extends Task {
 
     /**
      * Returns the date of the task
+     *
      * @return a String object of the date.
      */
     public String getAt() {
@@ -30,6 +32,7 @@ public class Event extends Task {
 
     /**
      * Returns a String of the Event task object in a standardised format.
+     *
      * @return a String object of the Event task.
      */
     @Override

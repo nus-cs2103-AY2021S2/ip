@@ -10,6 +10,7 @@ public class EventCommand extends Command {
 
     /**
      * Initialises EventCommand object.
+     *
      * @param description the description of the task.
      * @param at the date of the task, in the format YYYY-MM-DD
      */
@@ -21,6 +22,7 @@ public class EventCommand extends Command {
     /**
      * Executes the command by adding the event task to the existing taskList,
      * writing the updated taskList into storage and responding with relevant message.
+     *
      * @param taskList the TaskList object that contains all tasks added by user.
      * @param ui the Ui object that provides responses to the user according to status of their input.
      * @param storage the Storage object that contains the tasks saved in computer's hard disk.

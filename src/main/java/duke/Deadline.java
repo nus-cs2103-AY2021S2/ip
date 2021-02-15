@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Initialises Deadline object.
+     *
      * @param description the description of the task.
      * @param by the due date of the task, in the format YYYY-MM-DD
      */
@@ -22,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the due date of the task.
+     *
      * @return a String object of the due date.
      */
     public String getBy() {
@@ -30,6 +32,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a String of the Deadline task object in a standardised format.
+     *
      * @return a String object of the Deadline task.
      */
     @Override

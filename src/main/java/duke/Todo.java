@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     /**
      * Initialises Todo object.
+     *
      * @param description the description of the task.
      */
     public Todo(String description) {
@@ -15,6 +16,7 @@ public class Todo extends Task {
 
     /**
      * Returns a String of the Todo task object in a standardised format.
+     *
      * @return a String object of the Todo task.
      */
     @Override
