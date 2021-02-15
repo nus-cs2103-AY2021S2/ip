@@ -2,14 +2,14 @@
 
 ## Features 
 
-*`bye` Exits the program
-*`list` Displays the current list of tasks
-*`done [num]` Marks task [num] to done
-*`delete [num]` Deletes task [num] from the list
-*`find [keyword]` Searches for tasks containing [keyword]
-*`todo [description]` Adds a todo task with a description
-*`deadline [description] /by [yyyy-mm-dd]` Adds a deadline
-*`event [description] /at [yyyy-mm-dd]` Adds an event
+* `bye` Exits the program
+* `list` Displays the current list of tasks
+* `done [num]` Marks task [num] to done
+* `delete [num]` Deletes task [num] from the list
+* `find [keyword]` Searches for tasks containing [keyword]
+* `todo [description]` Adds a todo task with a description
+* `deadline [description] /by [yyyy-mm-dd]` Adds a deadline
+* `event [description] /at [yyyy-mm-dd]` Adds an event
 
 ### `bye` 
 Exits the program
