@@ -20,6 +20,11 @@ you may view or delete them using Duke.
 
 ![View and Delete](./ViewDelete.png)
 
+### Search for tasks
+You can search for tasks containing your given keyword.
+
+
+
 ## Usage
 
 ### 1. `todo` - Add to do task
@@ -169,7 +174,7 @@ Found (number of matches) matching tasks(s):
 (Task)
 ```
 
-### 8. `sort` - Find a task
+### 8. `sort` - Sort tasks
 
 Sorts the list of tasks remembered by Duke based on your input.
 

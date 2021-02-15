@@ -24,6 +24,7 @@ public class FindCommand extends Command {
     /**
      * Filters the task list for tasks which descriptions contain the keyword provided by user.
      * @param list the task list.
+     * @return The string form of the list of tasks containing the keyword.
      */
     @Override
     public Pair<String, CallbackFunction> execute(TaskList list) {

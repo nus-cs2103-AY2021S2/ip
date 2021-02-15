@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import duke.Helper;
 
@@ -30,7 +31,7 @@ public abstract class Task {
     }
 
     public boolean isDescriptionContainsString(String input) {
-        return this.description.contains(input);
+        return this.description.toLowerCase().contains(input.toLowerCase());
     }
 
     public LocalDate getDate() {
