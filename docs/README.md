@@ -6,8 +6,9 @@ users who can type fast will find it to be a better alternative than a GUI-only
 task manager.
 
 ## Features
-No. | Features | Command Syntax  
- :---:  |  :---: | :---:
+
+No. | Features | Command Syntax 
+:---: | :-------:| :------------: 
 1. | todo | todo [task_description]
 2. | deadline | deadline [task_description] /by [yyyy-MM-dd HHmm]
 3. | event | event [task_description] /at [yyyy-MM-dd HHmm]
