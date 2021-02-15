@@ -10,6 +10,7 @@
 * `todo [description]` Adds a todo task with a description
 * `deadline [description] /by [yyyy-mm-dd]` Adds a deadline
 * `event [description] /at [yyyy-mm-dd]` Adds an event
+* `help` Displays a list of commands and their syntax
 
 ### `bye` 
 Exits the program
@@ -68,6 +69,14 @@ Adds an event
 Example of usage: `event Birthday Party /at 2021-01-20`
 
 Expected outcome: A new event is added to the list
+
+
+### `help` 
+Displays a list of commands and their syntax
+
+Example of usage: `help`
+
+Expected outcome: A list of commands and their syntax is displayed
 
 
 
