@@ -6,7 +6,7 @@ package snom.common.core;
 public class Messages {
     public static final String SYMBOL_TICK = "\u2713";
     public static final String SYMBOL_BLANK = "\u2007";
-    public static final String MESSAGE_WELCOME = "Bonjour! I'm Snom! *squish*\n "
+    public static final String MESSAGE_WELCOME = "Bonjour! I'm Snom! *squish*\n"
             + "Try giving me some commands, I might be able to do something!\n"
             + "[type 'bye' to exit program]";
     public static final String MESSAGE_EMPTY_TASK_LIST = "You have no task in your list right now, "

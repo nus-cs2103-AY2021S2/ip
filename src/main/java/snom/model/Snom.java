@@ -44,7 +44,7 @@ public class Snom {
             CommandResponse response = command.execute(taskList, snomio, storage);
             return response;
         } catch (SnomException e) {
-            return new CommandResponse(e.getMessage(), false);
+            return new CommandResponse(e.getMessage(), false, true);
         }
     }
 
