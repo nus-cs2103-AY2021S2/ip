@@ -29,38 +29,40 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye message
+     * Returns goodbye message
+     *
+     * @return This is a goodbye message
      */
-    public void printBye() {
-        System.out.println("\n---------------------------------------");
-        System.out.println("Bye. MODOC_TM Shutting Down...");
-        System.out.println("---------------------------------------");
+    public String printBye() {
+        String bye = "Bye. MODOC_TM Shutting Down...";
+        return bye;
     }
 
     /**
-     * Prints lists in the provided TaskList.
+     * Returns list in the provided TaskList.
      *
      * @param taskList This is the provided TaskList
+     * @return This is the string version of TaskList
      */
-    public void printList(TaskList taskList) {
-        System.out.println("\n---------------------------------------");
-        System.out.println("Here are the tasks in your list:");
+    public String printList(TaskList taskList) {
+        String l1 = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
-            System.out.println(String.valueOf(i + 1) + "." + taskList.getSingleTask(i).toString());
+            l1 += String.valueOf(i + 1) + "." + taskList.getSingleTask(i).toString()
+                    + "\n";
         }
-        System.out.println("---------------------------------------");
+        return l1;
     }
 
     /**
-     * Prints the done message after a task has been completed.
+     * Returns the done message after a task has been completed.
      *
      * @param task This is the task to be marked completed
+     * @return This is the done message
      */
-    public void printDone(Task task) {
-        System.out.println("\n---------------------------------------");
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[" + task.getStatusIcon() + "] " + task.getName().trim());
-        System.out.println("---------------------------------------");
+    public String printDone(Task task) {
+        String l1 = "Nice! I've marked this task as done:\n";
+        String l2 = "[" + task.getStatusIcon() + "] " + task.getName().trim();
+        return l1 + l2;
     }
 
     /**
@@ -70,12 +72,12 @@ public class Ui {
      * @param task This is the task to be added
      * @param remTask This is the number of remaining tasks
      */
-    public void printTask(Task task, int remTask) {
-        System.out.println("\n---------------------------------------");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + remTask + " tasks in the list");
-        System.out.println("---------------------------------------");
+    public String printTask(Task task, int remTask) {
+        String l1 = "Got it. I've added this task:\n";
+        String l2 = task.toString() + "\n";
+        String l3 = "Now you have " + remTask + " tasks in the list";
+
+        return l1 + l2 + l3;
     }
 
     /**
@@ -84,36 +86,38 @@ public class Ui {
      *
      * @param task This is the task to be deleted
      * @param remTask This is number of remaining tasks
+     * @return Returns a task deletion message
      */
-    public void printDelete(Task task, int remTask) {
-        System.out.println("\n---------------------------------------");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + remTask + " tasks in the list");
-        System.out.println("---------------------------------------");
+    public String printDelete(Task task, int remTask) {
+        String l1 = "Noted. I've removed this task:\n";
+        String l2 = task.toString() + "\n";
+        String l3 = "Now you have " + remTask + " tasks in the list\n";
+
+        return l1 + l2 + l3;
     }
 
     /**
-     * Prints an unknown command message.
+     * returns an unknown command message.
+     *
+     * @return This is the unknown command message
      */
-    public void printUnknownCommand() {
-        System.out.println("\n---------------------------------------");
-        System.out.println("Hol'up, I don't know what that means :-(");
-        System.out.println("---------------------------------------");
+    public String printUnknownCommand() {
+        return "Hol'up, I don't know what that means :-(";
     }
 
     /**
      * Prints the tasks given in the TaskList.
      *
      * @param taskList This is the TaskList to be printed
+     * @return This is the message
      */
-    public void printMatchingTask(TaskList taskList) {
-        System.out.println("\n---------------------------------------");
-        System.out.println("Here are the matching tasks in your list:");
+    public String printMatchingTask(TaskList taskList) {
+        String l1 = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
-            System.out.println(String.valueOf(i + 1) + "." + taskList.getSingleTask(i).toString());
+            l1 += String.valueOf(i + 1) + "." + taskList.getSingleTask(i).toString()
+                    + "\n";
         }
-        System.out.println("---------------------------------------");
+        return l1;
     }
 
     /**

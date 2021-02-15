@@ -37,7 +37,7 @@ public class Task {
     /**
      * This method marks a task as done
      */
-    public void markDone() {
+    public void markDone() throws DukeException {
         this.isDone = true;
     }
 

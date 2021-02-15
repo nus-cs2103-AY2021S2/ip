@@ -37,7 +37,7 @@ public class TaskList {
      *
      * @param index This is the index of the Task to be deleted.
      */
-    public void deleteTask(int index) {
+    public void deleteTask(int index) throws DukeException {
         this.tasks.remove(index);
     }
 

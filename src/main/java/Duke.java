@@ -10,6 +10,7 @@ import duke.Task;
 import duke.TaskList;
 import duke.Todo;
 import duke.Ui;
+import javafx.application.Platform;
 
 
 /**
@@ -41,111 +42,89 @@ public class Duke {
         }
     }
 
-    /**
-     * This method runs the programme and is
-     * kept in "busy-waiting" state after each command
-     * until the "bye" command is input.
-     */
-    public void run() {
-        ui.printIntro();
-
-        String input = " ";
-
+    public String getResponse(String input) {
         Parser parser = new Parser();
+        String trimmedInput = input.trim();
+        String command = parser.getCommand(trimmedInput);
 
-        while (!input.equals("bye")) {
-            parser.readLine();
-            input = parser.getRead();
-            String command = parser.getCommand(input);
-
-            switch (command) {
+        switch (command) {
             case "bye":
                 storage.save(taskList);
-                ui.printBye();
-                break;
+                Platform.exit();
 
             case "list":
-                ui.printList(taskList);
-                break;
+                return ui.printList(taskList);
 
             case "done":
-                // Possible Error: index provided is out of bounds (NullPointerException
-                int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                Task task = taskList.getSingleTask(index);
-                task.markDone();
+                try {
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    Task task = taskList.getSingleTask(index);
+                    task.markDone();
 
-                ui.printDone(task);
-                break;
+                    return ui.printDone(task);
+                } catch (DukeException e) {
+                    return e.printError("Please check the index!");
+                }
 
-            case "todo":
+
+            case"todo":
                 try {
                     String name = getTodoName(input);
                     Todo todo = new Todo(name);
                     taskList.addTask(todo);
-                    ui.printTask(todo, taskList.getSize());
+                    return ui.printTask(todo, taskList.getSize());
                 } catch (DukeException e) {
-                    e.printError("Come On Fella! Your ToDo description cannot be empty!");
+                    return e.printError("Come On Fella! Your ToDo description cannot be empty!");
                 }
-                break;
 
             case "deadline":
                 try {
                     String name = getEventOrDeadlineName(input);
-                    String by = getEventOrDeadlineAttribute(input);
+                    String by = getDeadlineAttribute(input);
                     LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
                     Deadline deadline = new Deadline(name, date);
                     taskList.addTask(deadline);
-                    ui.printTask(deadline, taskList.getSize());
+                    return ui.printTask(deadline, taskList.getSize());
 
                 } catch (DukeException e) {
-                    e.printError("Hmm... You are either lacking a name or /by details!");
+                    return e.printError("Hmm... You are either lacking a name or /by details!");
                 }
-                break;
 
             case "event":
                 try {
                     String name = getEventOrDeadlineName(input);
-                    String at = getEventOrDeadlineAttribute(input);
+                    String at = getEventAttribute(input);
                     Event event = new Event(name, at);
                     taskList.addTask(event);
-                    ui.printTask(event, taskList.getSize());
+                    return ui.printTask(event, taskList.getSize());
 
                 } catch (DukeException e) {
-                    e.printError("Hmm... You are either lacking a name or /at details!");
+                    return e.printError("Hmm... You are either lacking a name or /at details!");
                 }
-                break;
 
             case "delete":
-                int deleteIndex = parser.getDeleteIndex(input);
-                ui.printDelete(taskList.getSingleTask(deleteIndex), taskList.getSize() - 1);
-                taskList.deleteTask(deleteIndex);
-                break;
+                try {
+                    int deleteIndex = parser.getDeleteIndex(input);
+                    Task deletedTask = taskList.getSingleTask(deleteIndex);
+                    taskList.deleteTask(deleteIndex);
+                    return ui.printDelete(deletedTask, taskList.getSize());
+                } catch (DukeException e) {
+                    return e.printError("Please choose the correct index for deletion.");
+                }
+
 
             case "find":
                 String arguments = parser.getArguments(input);
                 TaskList output = taskList.matchTasks(arguments);
-                ui.printMatchingTask(output);
-                break;
+                return ui.printMatchingTask(output);
+
 
             default:
-                ui.printUnknownCommand();
-                break;
-            }
+                return ui.printUnknownCommand();
+
         }
-
-    }
-
-    /**
-     * This is the main method which runs the Duke
-     * programme and saves date at specified file path.
-     *
-     * @param args Unused.
-     */
-
-    public static void main(String[] args) {
-        // filePath has been hard-coded: /data/<filename>
-        new Duke("/data/modoc_tm.txt").run();
+        //return command;
     }
 
     /**
@@ -179,16 +158,31 @@ public class Duke {
     }
 
     /**
-     * This method gets the Event or Deadline attrribute
+     * This method gets the Deadline attribute
      *
      * @param byDate This is the task attribute
-     * @return String This is the Event or Deadline attribute
+     * @return String This is the Deadline attribute
      * @throws DukeException On input error.
      */
-    public static String getEventOrDeadlineAttribute(String byDate) throws DukeException {
+    public static String getDeadlineAttribute(String byDate) throws DukeException {
         try {
             //String atBy = byDate.split("/")[1].split(" ",2)[1].trim();
             return byDate.split("/by ")[1];
+        } catch (Exception e) {
+            throw new DukeException();
+        }
+    }
+
+    /**
+     * This method gets the Event attribute
+     *
+     * @param at This is the task attribute
+     * @return String This is the Event attribute
+     * @throws DukeException On input error.
+     */
+    public static String getEventAttribute(String at) throws DukeException {
+        try {
+            return at.split("/at ")[1];
         } catch (Exception e) {
             throw new DukeException();
         }

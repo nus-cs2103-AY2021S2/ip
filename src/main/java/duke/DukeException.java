@@ -11,13 +11,12 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Prints an error message
+     * Returns an error message
      *
      * @param message This is the error message
+     * @return Returns the error message as a String
      */
-    public void printError(String message) {
-        System.out.println("\n---------------------------------------");
-        System.out.println(message);
-        System.out.println("---------------------------------------");
+    public String printError(String message) {
+        return message;
     }
 }
