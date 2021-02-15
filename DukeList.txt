@@ -1,3 +1,2 @@
-[T][ ] CS2105 tut
+[T][X] CS2105 tut
 [D][ ] CS2103T iP tasks (by: 2021-02-18)
-[E][ ] CS2103T lecture (on: 2021-02-19, 14:00 - 16:00)
