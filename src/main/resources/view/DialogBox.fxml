@@ -17,7 +17,7 @@
                     <Font name="System Bold" size="12.104348182678223" />
                  </font>
               </Label>
-            <Text fx:id="messageContent2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="400.0" />
+            <Text fx:id="messageContent2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="340.0" />
 <!--                <Label fx:id="messageContent" alignment="TOP_RIGHT" contentDisplay="CENTER" maxHeight="Infinity" text="Label" textAlignment="RIGHT" wrapText="true" />-->
            </children>
          <padding>
