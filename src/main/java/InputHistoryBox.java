@@ -12,9 +12,7 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 /**
  * An example of a custom control using FXML.
@@ -27,7 +25,7 @@ public class InputHistoryBox extends HBox {
             Color.valueOf("#e0e0e0"), new CornerRadii(20), Insets.EMPTY));
     private static final Background BG_DARK = new Background(new BackgroundFill(
             Color.valueOf("#d9d9d9"), new CornerRadii(20), Insets.EMPTY));
-    private static final Border BORDER_TRANS = new Border(new BorderStroke(
+    private static final Border BORDER_TRANSPARENT = new Border(new BorderStroke(
             Color.valueOf("#f4f4f4"),
             BorderStrokeStyle.SOLID,
             CornerRadii.EMPTY,
@@ -49,8 +47,8 @@ public class InputHistoryBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
+        setTransparentBorder();
         setAlternatingBgColor();
-        this.setBorder(BORDER_TRANS);
         numBoxes++;
     }
 
@@ -64,5 +62,9 @@ public class InputHistoryBox extends HBox {
         } else {
             this.setBackground(BG_LIGHT);
         }
+    }
+
+    private void setTransparentBorder() {
+        this.setBorder(BORDER_TRANSPARENT);
     }
 }
