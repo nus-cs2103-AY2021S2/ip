@@ -17,6 +17,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Greets the user
+     * @return greeting message.
+     */
+    public String greet() {
+        return "Hello, welcome to Duke";
+    }
+
     public String executeCommand(Command command) throws DukeException {
         return command.execute(this.list);
     }
