@@ -21,6 +21,8 @@ public class Parser {
         try {
             if (text.equals("bye")) {
                 Commands.goodbye(storage);
+            } else if (text.equals("help")) {
+                Commands.getHelp();
             } else if (text.equals("list")) {
                 Commands.showList(tasks);
             } else if (text.equals("done")) {

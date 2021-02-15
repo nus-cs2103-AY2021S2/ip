@@ -11,7 +11,6 @@ public class Commands {
      * Saves the task list, and ends the program.
      *
      * @param storage  the storage object associated to the location of the
-     *                 text file where the task list will be saved at
      */
     public static void goodbye(Storage storage) {
         Ui.addGoodbyeResponse();
@@ -25,11 +24,16 @@ public class Commands {
      * Shows the current list to the user.
      *
      * @param tasks  the TaskList object that stores the current task list
-     * @param ui  the user interface to inform the user of the outcome
      */
     public static void showList(TaskList tasks) {
         Ui.addShowTaskListResponse(tasks);
     }
 
+    /**
+     * Shows the list of commands to the user
+     */
+    public static void getHelp() {
+        Ui.addHelpResponse();
+    }
 
 }
