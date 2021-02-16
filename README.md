@@ -11,7 +11,7 @@ optimised for use via the **command line interface (CLI)**. If you
 can type fast, Apollo can perform your tasks management faster than
 traditional GUI apps.
 
-![Screenshot of Apollo](Ui.png)
+![Screenshot of Apollo](docs/Ui.png)
 
 __________________________________________________________
 
