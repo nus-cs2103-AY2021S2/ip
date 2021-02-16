@@ -66,7 +66,7 @@ public class Duke {
         ArrayList<String> lines = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTaskUnsafe(i);
-            lines.add((i + 1) + ". " + task.toString());
+            lines.add(tasks.getLeftPadding(i + 1) + (i + 1) + ". " + task.toString());
         }
         return String.join("\n", lines.toArray(new String[0]));
     }

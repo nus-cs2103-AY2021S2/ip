@@ -58,7 +58,8 @@ public class DukeCommandList extends DukeCommand {
             lines.add("Here are the tasks in your list:");
             for (int i = 0; i < listOfTasks.size(); i++) {
                 Task task = listOfTasks.get(i);
-                lines.add((i + 1) + ". " + task.toString());
+                String line = tasks.getLeftPadding(i + 1) + (i + 1) + ". " + task.toString();
+                lines.add(line);
             }
         }
         return Response.createResponseOk(lines.toArray(new String[0]));

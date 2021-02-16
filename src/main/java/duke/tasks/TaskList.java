@@ -133,4 +133,16 @@ public class TaskList {
         }
         return taskStrings;
     }
+
+    /**
+     * Returns left-spaced padding required to align all tasks in tasklist, given 1-based index.
+     *
+     * @param index 1-based index
+     * @return String left padding
+     */
+    public String getLeftPadding(int index) {
+        int totalNumDigits = (int) Math.floor(Math.log10(tasks.size())) + 1;
+        int currNumDigits = (int) Math.floor(Math.log10(index)) + 1;
+        return new String(new char[totalNumDigits - currNumDigits]).replace('\0',' ');
+    }
 }
