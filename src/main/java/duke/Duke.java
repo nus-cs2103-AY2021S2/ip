@@ -21,6 +21,7 @@ public class Duke extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
             VBox ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("DUKE");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setParser(this.parser);
             fxmlLoader.<MainWindow>getController().setStage(stage);

@@ -145,4 +145,34 @@ class Ui {
             + "    ____________________________________________________________\n\n";
 
     }
+
+    static String wrongDateFormat() {
+        return "    ____________________________________________________________\n\n"
+
+                + "      Dates need to be of the form YYYY-MM-DD\n"
+                + "    ____________________________________________________________\n\n";
+    }
+
+    public static String outOfArrayRange() {
+        return "    ____________________________________________________________\n\n"
+
+                + "      Index out of list\n"
+                + "    ____________________________________________________________\n\n";
+    }
+
+    public static String missingFlag() {
+        return "    ____________________________________________________________\n\n"
+
+                + "      descriptions and dates are required for deadlines and events\n"
+                + "      /by for deadlines\n"
+                + "      /at for events\n"
+                + "    ____________________________________________________________\n\n";
+    }
+
+    public static String notAnInteger() {
+        return "    ____________________________________________________________\n\n"
+
+                + "      Input must be an integer\n"
+                + "    ____________________________________________________________\n\n";
+    }
 }

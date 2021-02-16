@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,7 +28,9 @@ public class MainWindow extends VBox {
 
     @FXML
     public void initialize() {
-        consoleWindow.getChildren().addAll(new Label(Ui.welcome()));
+        Label welcome = new Label(Ui.welcome());
+        welcome.setTextFill(Color.GREEN);
+        consoleWindow.getChildren().addAll(welcome);
         scrollPane.vvalueProperty().bind(consoleWindow.heightProperty());
         userInput.focusedProperty().addListener(new ChangeListener<Boolean>()
         {
@@ -70,7 +73,9 @@ public class MainWindow extends VBox {
     @FXML
     private void parseCommand() {
         String command = userInput.getText();
-        consoleWindow.getChildren().addAll(new Label(command), new Label(parser.parse(command)));
+        Label output = new Label(parser.parse(command));
+        output.setTextFill(Color.GREEN);
+        consoleWindow.getChildren().addAll(new Label("\n" + command), output);
         userInput.clear();
         if (command.equals("bye")) {
             Platform.exit();
@@ -85,6 +90,7 @@ public class MainWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Create Todo");
             dialog.setScene(scene);
             fxmlLoader.<TodoWindow>getController().setParser(this.parser);
             dialog.showAndWait();
@@ -101,6 +107,7 @@ public class MainWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Delete");
             dialog.setScene(scene);
             fxmlLoader.<DeleteWindow>getController().setParser(this.parser);
             dialog.showAndWait();
@@ -117,6 +124,7 @@ public class MainWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Create Deadline");
             dialog.setScene(scene);
             fxmlLoader.<DeadlineWindow>getController().setParser(this.parser);
             dialog.showAndWait();
@@ -133,6 +141,7 @@ public class MainWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Create Event");
             dialog.setScene(scene);
             fxmlLoader.<EventWindow>getController().setParser(this.parser);
             dialog.showAndWait();

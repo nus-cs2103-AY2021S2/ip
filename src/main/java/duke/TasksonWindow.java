@@ -2,7 +2,10 @@ package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+
+import java.time.LocalDate;
 
 public class TasksonWindow {
 
@@ -10,6 +13,8 @@ public class TasksonWindow {
     private AnchorPane window;
     @FXML
     private DatePicker userDate;
+    @FXML
+    private Label errorDate;
 
     private Parser parser;
 
@@ -19,8 +24,13 @@ public class TasksonWindow {
 
     @FXML
     private void submit() {
-        String command = "taskson " + userDate.getValue();
-        parser.chat(command);
-        window.getScene().getWindow().hide();
+        LocalDate date = userDate.getValue();
+        if (date == null) {
+            errorDate.setText("Date required");
+        } else {
+            String command = "taskson " + date;
+            parser.chat(command);
+            window.getScene().getWindow().hide();
+        }
     }
 }

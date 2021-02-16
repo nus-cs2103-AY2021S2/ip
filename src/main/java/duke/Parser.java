@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -34,6 +35,7 @@ public class Parser {
         functions.put("delete", this::delete);
 
         functions.put("find", this::find);
+        functions.put("taskson", this::tasksOnDay);
     }
 
     /**
@@ -50,8 +52,6 @@ public class Parser {
             return Ui.bye();
         } else if (inputs.equals("list")) {
             return this.list();
-        } else if (inputs.equals("taskson")) {
-            return this.tasksOnDay(sc.nextLine().stripLeading());
         } else if (inputs.equals("clear")) {
             return this.clear();
         } else if (!this.isValidCommand(inputs)) {
@@ -81,10 +81,14 @@ public class Parser {
     }
 
     private String done(String s) {
-        int i = Integer.parseInt(s);
-        Task t = this.mem.get(i);
-        t.finish();
-        return Ui.done(t);
+        try {
+            int i = Integer.parseInt(s);
+            Task t = this.mem.get(i);
+            t.finish();
+            return Ui.done(t);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.outOfArrayRange();
+        }
     }
 
     private String toDo(String s) {
@@ -93,26 +97,48 @@ public class Parser {
     }
 
     private String deadline(String s) {
-        String[] inputs = s.split(" /by ");
-        Deadline t = new Deadline(inputs[0], inputs[1]);
-        return this.store(t);
+        try {
+            String[] inputs = s.split(" /by ");
+            Deadline t = new Deadline(inputs[0], inputs[1]);
+            return this.store(t);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.missingFlag();
+        } catch (DateTimeParseException e) {
+            return Ui.wrongDateFormat();
+        }
     }
 
     private String event(String s) {
-        String[] inputs = s.split(" /at ");
-        Event t = new Event(inputs[0], inputs[1]);
-        return this.store(t);
+        try {
+            String[] inputs = s.split(" /at ");
+            Event t = new Event(inputs[0], inputs[1]);
+            return this.store(t);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.missingFlag();
+        } catch (DateTimeParseException e) {
+            return Ui.wrongDateFormat();
+        }
     }
 
     private String delete(String s) {
-        int i = Integer.parseInt(s);
-        Task t = this.mem.get(i);
-        this.mem.delete(t);
-        return Ui.delete(t, this.mem.size());
+        try {
+            int i = Integer.parseInt(s);
+            Task t = this.mem.get(i);
+            this.mem.delete(t);
+            return Ui.delete(t, this.mem.size());
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.outOfArrayRange();
+        } catch (NumberFormatException e) {
+            return Ui.notAnInteger();
+        }
     }
 
     private String tasksOnDay(String s) {
-        return Ui.tasksOnDay(this.mem, s);
+        try {
+            return Ui.tasksOnDay(this.mem, s);
+        } catch (DateTimeParseException e) {
+            return Ui.wrongDateFormat();
+        }
     }
 
     private String find(String s) {

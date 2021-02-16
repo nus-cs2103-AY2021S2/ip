@@ -97,6 +97,7 @@ public class AltWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Create Todo");
             dialog.setScene(scene);
             fxmlLoader.<TodoWindow>getController().setParser(this.parser);
             dialog.showAndWait();
@@ -114,6 +115,7 @@ public class AltWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Delete");
             dialog.setScene(scene);
             fxmlLoader.<DeleteWindow>getController().setParser(this.parser);
             dialog.showAndWait();
@@ -131,6 +133,7 @@ public class AltWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Create Deadline");
             dialog.setScene(scene);
             fxmlLoader.<DeadlineWindow>getController().setParser(this.parser);
             dialog.showAndWait();
@@ -148,6 +151,7 @@ public class AltWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Create Event");
             dialog.setScene(scene);
             fxmlLoader.<EventWindow>getController().setParser(this.parser);
             dialog.showAndWait();
@@ -165,6 +169,7 @@ public class AltWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Find");
             dialog.setScene(scene);
             fxmlLoader.<FindWindow>getController().setParser(this.parser);
             dialog.showAndWait();
@@ -182,6 +187,7 @@ public class AltWindow extends VBox {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             final Stage dialog = new Stage();
+            dialog.setTitle("Tasks on");
             dialog.setScene(scene);
             fxmlLoader.<TasksonWindow>getController().setParser(this.parser);
             dialog.showAndWait();
