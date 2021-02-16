@@ -1,0 +1,20 @@
+list
+todo Do CS2103T quiz
+list
+deadline Complete week 3 iP /by 27/01/2021 1300
+list
+event Birthday party /at 06/02/2021 3-6pm
+list
+done 1
+list
+done 2
+list
+done 3
+list
+fakecommand
+todo
+deadline Incomplete command
+delete 0
+delete 1
+list
+bye
