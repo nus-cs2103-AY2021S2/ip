@@ -66,7 +66,7 @@ public abstract class Task {
      * subject to special rules and behaviours based on capitalization and whitespace.
      *
      * @param search Case and whitespace sensitive search substring
-     * @return
+     * @return Whether the task matches the search query.
      */
     public boolean containsSearch(String search) {
         String targetString = description;
