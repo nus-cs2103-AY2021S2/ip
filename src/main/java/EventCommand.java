@@ -23,7 +23,7 @@ public class EventCommand extends Command {
      * @param ui Standard UI object.
      * @param storage Standard storage object.
      * @throws DukeMissingInputException If event command is missing description.
-     * @throws DukeWrongInputException If user input is not any of the inputs available.
+     * @throws DukeWrongInputException If user input is invalid.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,

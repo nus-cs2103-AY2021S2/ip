@@ -38,12 +38,11 @@ public class Deadline extends Task {
      * @return string of task deadline.
      */
     public LocalDate getDeadline() {
-        assert(this.deadline instanceof LocalDate);
         return this.deadline;
     }
 
     /**
-     * Allows user to change the deadline of task.
+     * Sets the deadline of task to new deadline.
      *
      * @param deadline new deadline to be changed to.
      * @return the new deadline.

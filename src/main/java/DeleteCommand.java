@@ -28,7 +28,6 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
             DukeWrongInputException, DukeIoException {
-
         String[] commandArr = command.split(" ");
         if (commandArr.length == 1) {
             throw new DukeMissingInputException("Oops! Missing arguments.");

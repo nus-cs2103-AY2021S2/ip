@@ -21,14 +21,13 @@ public class Parser {
     }
 
     /**
-     * Takes in command in the form of a string and returns a class.
+     * Takes in command in the form of a string and returns a command object.
      *
      * @param command user command input.
      * @return respective command object based on user input.
      * @throws DukeWrongInputException if system does not understand user input.
      */
     public static Command parse(String command) throws DukeWrongInputException {
-        // User input
         String[] commandArr = command.trim().toLowerCase().split(" ");
         command = command.trim();
         assert !commandArr[0].contains(" ");

@@ -20,8 +20,8 @@ public class ListCommand extends Command {
      * @param taskList List of Tasks.
      * @param ui Standard UI object.
      * @param storage Standard storage object.
-     * @throws DukeMissingInputException If list command is missing description.
-     * @throws DukeWrongInputException If user input is not any of the inputs available.
+     * @throws DukeMissingInputException If missing description.
+     * @throws DukeWrongInputException If user input is invalid.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,

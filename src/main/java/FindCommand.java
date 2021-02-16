@@ -1,10 +1,15 @@
 /**
- * Command to show the list of task containing the particular keyword.
+ * Command to find the list of task containing the particular keyword.
  */
 public class FindCommand extends Command {
 
     private String command;
 
+    /**
+     * Constructs the find command.
+     *
+     * @param command user input containing keyword to search for.
+     */
     public FindCommand(String command) {
         this.command = command;
     }

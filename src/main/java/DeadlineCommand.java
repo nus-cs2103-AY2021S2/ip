@@ -84,7 +84,7 @@ public class DeadlineCommand extends Command {
 
     /** Checks if a certain string is of date format.
      *
-     * @param str - input string to be checked if it is in the format of a string.
+     * @param str - input string to be checked if it is in the format of a date.
      * @return boolean value telling us whether the string is a date or just simple text.
      */
     public static boolean isDate(String str) {

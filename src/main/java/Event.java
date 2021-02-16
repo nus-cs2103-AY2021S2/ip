@@ -1,5 +1,5 @@
 /**
- * Event class that specifies an event happening at a certain time.
+ * Event task class that specifies an event happening at a certain time.
  */
 public class Event extends Task {
 

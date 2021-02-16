@@ -1,5 +1,5 @@
 /**
- * Command to create an Event.
+ * Command to Exit.
  */
 public class ExitCommand extends Command {
 
