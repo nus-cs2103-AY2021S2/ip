@@ -18,18 +18,10 @@ public class DoneHandler implements CommandHandler {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
-        response = execute(ui, storage, taskList, true);
-        ui.respond(response);
-    }
-
-    @Override
-    public String execute(Ui ui, Storage storage, TaskList taskList, boolean toString) {
-        assert toString = true;
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
         taskList.markDone(taskNum);
         Task updatedTask = taskList.getTask(taskNum);
-        response = "Nice! I've marked this task as done: \n"
-                + " " + updatedTask + "\n";
+        response = doneRespond(updatedTask);
         storage.markDoneInStorage(updatedTask, taskNum);
         return response;
     }
@@ -43,5 +35,16 @@ public class DoneHandler implements CommandHandler {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Resturns string response for done handled.
+     * @param doneTask The task to be marked done.
+     * @return String response.
+     */
+    public String doneRespond(Task doneTask) {
+        String doneResponse = "Nice! I've marked this task as done: \n"
+                + " " + doneTask + "\n";
+        return doneResponse;
     }
 }
