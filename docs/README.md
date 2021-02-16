@@ -111,7 +111,6 @@ Format: `done task_index`
 Example:
 
 Assume that we still have 3 task, 
-
 <br> `done 1`: will mark the first task on the list as completed 
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/markAsDone.png)
