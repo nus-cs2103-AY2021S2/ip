@@ -15,9 +15,9 @@ import java.util.Date;
  * If input invalid, spits error messages.
  */
 public class Parser {
-    ConsoleUI ui;
-    boolean isBye;
-    DateValidator validator;
+    private ConsoleUI ui;
+    private boolean isBye;
+    private DateValidator validator;
 
     /**
      * Constructor of the Parser.
