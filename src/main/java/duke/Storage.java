@@ -78,6 +78,8 @@ public class Storage {
             sc.close();
         }
 
+        assert(f.exists());
+
         return memList;
     }
 
@@ -87,6 +89,9 @@ public class Storage {
      * @throws IOException
      */
     public void store(TaskList tasks) throws IOException {
+        File f = new File(this.filePath);
+        assert(f.exists());
+
         FileWriter fw = new FileWriter(this.filePath);
 
         for (int i = 1; i <= tasks.size(); i++) {
@@ -98,7 +103,6 @@ public class Storage {
             fw.write(tag + " | " + isComplete + " | " + detail + " | " + date + "\n");
         }
         fw.close();
-
     }
 
 }
