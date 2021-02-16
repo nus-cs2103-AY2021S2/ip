@@ -179,7 +179,7 @@ Expected outcome:
 <br>
 
 ## Display statistics 
-Users can see overdue deadlines and events happening soon
+Users can see overdue deadlines, events happening soon and deadlines due soon
 
 ## Usage
 
