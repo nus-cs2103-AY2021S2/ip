@@ -49,7 +49,7 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         setPadding(new Insets(10));
-        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(196, 169, 196, 0.7),
+        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(255, 255, 255, 0.7),
                 new CornerRadii(7.0), new Insets(-7.0))));
 
     }

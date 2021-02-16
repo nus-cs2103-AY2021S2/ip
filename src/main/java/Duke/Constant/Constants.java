@@ -11,8 +11,8 @@ public class Constants {
     public static final String FILE_PATH = "data/duke.txt";
     public static final String FIND_SUCCESS = "Here are the matching tasks in your list:";
     public static final String FIND_FAIL = "There are no matching tasks";
-    public static final String GREETING = "Hello! I'm Duke\n"
-                                        + "What can I do for you?";
+    public static final String GREETING = "Hello! I'm Duke The Mini Crewmate\n"
+                                        + "What can I do for you today?";
     public static final String MARK_DONE_TASK = "Nice! I've marked this task as done:\n  ";
     public static final String START_LISTING = "Here are the tasks in your list:";
     public static final String INVALID_DATETIME_FORMAT = "Invalid format for date and time." + "\n"

@@ -3,6 +3,7 @@ package Duke;
 import Duke.Constant.Constants;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -31,6 +32,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Constants.GREETING, dukeImage));
+        dialogContainer.setPadding(new Insets(10));
     }
 
     public void setDuke(Duke d) {
