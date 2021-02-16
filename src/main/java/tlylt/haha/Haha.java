@@ -12,13 +12,17 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Haha extends Application {
     private final TaskList database = new TaskList();
-    private final Storage storage = new Storage();
     private final Ui ui = new Ui();
     private final ScrollPane scrollPane = new ScrollPane();
     private final VBox dialogContainer = new VBox();
@@ -33,7 +37,8 @@ public class Haha extends Application {
      * Starts the internal program logic.
      */
     public Haha() {
-        List<String> list = this.storage.getTasks();
+        Storage storage = new Storage();
+        List<String> list = storage.getTasks();
         this.database.readTasks(list);
     }
 
@@ -116,13 +121,12 @@ public class Haha extends Application {
     private void formatSmallerComponents() {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userInput.setPrefWidth(325.0);
-        sendButton.setPrefWidth(55.0);
     }
 
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     private void configureUserInteraction() {
-        sendButton.setOnMouseClicked((event) -> handleUserInput());
+        configureSendButton();
         userInput.setOnAction((event) -> handleUserInput());
 
         // Scroll down to the end every time dialogContainer's height changes

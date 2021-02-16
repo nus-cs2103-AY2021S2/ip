@@ -102,23 +102,23 @@ public class TaskList {
      * Lists out all the tasks in database.
      */
     String listFromDB() {
-        String response = "";
+        StringBuilder response = new StringBuilder();
         if (database.size() == 0) {
-            response += "You have nothing going on!\n";
+            response.append("You have nothing going on!\n");
         } else {
-            response += "Here are your list of tasks:\n";
+            response.append("Here are your list of tasks:\n");
             for (int i = 0; i < database.size(); i++) {
                 String idx = Integer.toString(i + 1) + '.';
                 String task = idx + database.get(i);
-                response += task + "\n";
+                response.append(task).append("\n");
             }
         }
-        return response;
+        return response.toString();
     }
 
     private String findFromDB(String keyword, Ui ui) {
-        String response = "";
-        response += "Here are the matching tasks in your list:\n";
+        StringBuilder response = new StringBuilder();
+        response.append("Here are the matching tasks in your list:\n");
         boolean hasRelated = false;
         for (int i = 0; i < database.size(); i++) {
             String idx = Integer.toString(i + 1) + '.';
@@ -126,14 +126,14 @@ public class TaskList {
             if (currentTask.description.contains(keyword)) {
                 String task = idx + database.get(i);
                 System.out.println(task);
-                response += task + "\n";
+                response.append(task).append("\n");
                 hasRelated = true;
             }
         }
         if (!hasRelated) {
-            response += ui.taskNotFound();
+            response.append(ui.taskNotFound());
         }
-        return response;
+        return response.toString();
     }
 
     /**

@@ -6,17 +6,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 
 public class DialogBox extends HBox {
-    private Label text;
-    private ImageView displayPicture;
+    private final Label text;
+    private final ImageView displayPicture;
 
     /**
      * Generates a DialogBox that displays the interactions between user and the program.
@@ -73,7 +76,6 @@ public class DialogBox extends HBox {
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     public static DialogBox getHahaDialog(Label label, ImageView imageView) {
-        DialogBox dialogBox = new DialogBox(label, imageView).flip();
-        return dialogBox;
+        return new DialogBox(label, imageView).flip();
     }
 }

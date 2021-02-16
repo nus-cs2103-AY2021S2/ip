@@ -105,20 +105,24 @@ public abstract class Task {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object object) {
+        if (this == object) {
             return true;
+        } else if (object instanceof Task) {
+            Task task = (Task) object;
+            return isDone == task.isDone
+                    &&
+                    description.equals(task.description)
+                    &&
+                    type.equals(task.type)
+                    &&
+                    Objects.equals(date, task.date)
+                    &&
+                    Objects.equals(time, task.time);
+        } else {
+            return false;
         }
-        Task task = (Task) o;
-        return isDone == task.isDone
-                &&
-                description.equals(task.description)
-                &&
-                type.equals(task.type)
-                &&
-                Objects.equals(date, task.date)
-                &&
-                Objects.equals(time, task.time);
+
     }
 
     @Override

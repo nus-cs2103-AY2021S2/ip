@@ -4,14 +4,6 @@ package tlylt.haha;
  * Representation of all user interaction.
  */
 public class Ui {
-    private static final String LINE_BREAK =
-            "____________________________________________________________\n";
-    private static final String LOGO = " _    _          _    _\n"
-            + "| |  | |   /\\   | |  | |   /\\\n"
-            + "| |__| |  /  \\  | |__| |  /  \\\n"
-            + "|  __  | / /\\ \\ |  __  | / /\\ \\\n"
-            + "| |  | |/ ____ \\| |  | |/ ____ \\\n"
-            + "|_|  |_/_/    \\_\\_|  |_/_/    \\_\\\n";
     private static final String STARTER = "Dude, I'm HAHA.\n"
             + "What can I do for you?\n"
             + "Hint: deadline & event to include date & time\n"
