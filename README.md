@@ -4,4 +4,4 @@ Chip the Squirrel is a personal assistant chatbot created from a greenfield Java
 ![image of chip](docs/Ui.png)
 
 ## User Guide
-Instructions on how to use the app can be found in the [User Guide](samuelfangjw.github.io/ip/)
+Instructions on how to use the app can be found in the [User Guide](http://samuelfangjw.github.io/ip/)
