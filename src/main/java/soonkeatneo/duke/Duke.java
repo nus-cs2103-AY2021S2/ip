@@ -23,6 +23,7 @@ public class Duke {
         if (storage.isSampleDataLoaded()) {
             isFirstLaunch = true;
         }
+        tasks = new TaskList(storage);
     }
 
     /**

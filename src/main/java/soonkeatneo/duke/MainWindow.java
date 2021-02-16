@@ -46,6 +46,11 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke duke) {
         this.dukeBot = duke;
+        if (this.dukeBot.isFirstLaunch()) {
+            printMessage("Looks like this is your first time here! "
+                    + "We've put some sample data in and printed the help for you:");
+            printMessage(Help.print());
+        }
     }
 
     /**

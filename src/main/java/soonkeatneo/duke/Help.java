@@ -13,8 +13,7 @@ public class Help {
      * @return A String containing the formatted help-text.
      */
     public static String print() {
-        String helpText = "Thank you for perusing the help documentation for " + Duke.BOT_NAME + "!\n"
-                + "The following are the implemented functions in the application:\n"
+        String helpText = "The following are the implemented functions in " + Duke.BOT_NAME + ":\n"
                 + "list - List all Tasks added to the bot.\n"
                 + "find - Search for a Task containing the given string.\n"
                 + "todo - Add a new ToDo Task.\n"
