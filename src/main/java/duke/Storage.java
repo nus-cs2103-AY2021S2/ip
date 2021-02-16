@@ -24,7 +24,7 @@ public class Storage {
             bw.write(output);
             bw.close();
         } catch (FileNotFoundException e) {
-            File data = new File("./src/main/data");
+            File data = new File("./src/main/DATA");
             data.mkdirs();
             File duke = new File(data, "duke.txt");
             duke.createNewFile();
@@ -35,7 +35,7 @@ public class Storage {
     }
 
     public void importTasks() throws IOException, ParseException {
-        File data = new File("./src/main/data/duke.txt");
+        File data = new File("./src/main/DATA/duke.txt");
         if(data.exists()) {
             BufferedReader input = new BufferedReader(new FileReader(this.filePath));
             SimpleDateFormat dateFormat = new SimpleDateFormat("'by' EEE MMM dd HH:mm:ss z yyyy");

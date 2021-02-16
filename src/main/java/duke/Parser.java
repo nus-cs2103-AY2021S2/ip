@@ -32,13 +32,13 @@ public class Parser {
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("'from' dd.MM.yyyy HH:mm ");
         SimpleDateFormat dateFormat3 = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         String[] userInput = command.split(" ", 2);
-        if(userInput[0].toLowerCase().equals(Command.TODO.toString())) {
+        if (userInput[0].toLowerCase().equals(Command.TODO.toString())) {
             ToDo newToDo = new ToDo(userInput[1]);
             TaskList.taskList.add(newToDo);
             return UI.addedTask();
         } else if (userInput[0].toLowerCase().equals(Command.HELLO.toString())) {
             return "Hello! Please enter a command.";
-        } else if(userInput[0].toLowerCase().equals(Command.DEADLINE.toString())) {
+        } else if (userInput[0].toLowerCase().equals(Command.DEADLINE.toString())) {
             String[] details = userInput[1].split("/", 2);
             try {
                 Date by = dateFormat.parse(details[1]);
@@ -48,7 +48,7 @@ public class Parser {
             } catch (ParseException e) {
                 System.out.println("Please type the date in the format \"by dd.mm.yyyy hh:mm\"!");
             }
-        } else if(userInput[0].toLowerCase().equals(Command.EVENT.toString())) {
+        } else if (userInput[0].toLowerCase().equals(Command.EVENT.toString())) {
             String[] details = userInput[1].split("/", 2);
             String[] timings = details[1].split("to ", 2);
             try {
@@ -60,29 +60,29 @@ public class Parser {
             } catch (ParseException e){
                 System.out.println("Please type the date in the format \"from dd.mm.yyyy hh:mm to dd.mm.yyyy hh:mm\"!");
             }
-        } else if(userInput[0].toLowerCase().equals(Command.LIST.toString())){
+        } else if (userInput[0].toLowerCase().equals(Command.LIST.toString())) {
             return UI.listTasks();
-        } else if (userInput[0].toLowerCase().equals(Command.FIND.toString())){
+        } else if (userInput[0].toLowerCase().equals(Command.FIND.toString())) {
             List<Task> foundTasks = TaskList.find(userInput[1]);
             return UI.listTasks(foundTasks);
-        } else if (userInput[0].toLowerCase().equals(Command.REMOVE.toString())){
+        } else if (userInput[0].toLowerCase().equals(Command.REMOVE.toString())) {
             String[] details = userInput[1].split(" ", 2);
-            if(details[0].toLowerCase().equals(Command.TODO.toString())){
+            if (details[0].toLowerCase().equals(Command.TODO.toString())) {
                 TaskList.removeTask(new ToDo(details[1]));
                 return "Task removed.\n";
-            } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())){
+            } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())) {
                 String description = details[1].split("/", 2)[0];
                 TaskList.removeTask(new Deadline(description, new Date()));
                 return "Task removed.\n";
-            } else if (details[0].toLowerCase().equals(Command.EVENT.toString())){
+            } else if (details[0].toLowerCase().equals(Command.EVENT.toString())) {
                 String description = details[1].split("/", 2)[0];
                 TaskList.removeTask(new Event(description, new Date(), new Date()));
                 return "Task removed.\n";
             }
             return "Please enter a valid task.\n";
-        } else if(userInput[0].toLowerCase().equals(Command.COMPLETE.toString())) {
+        } else if (userInput[0].toLowerCase().equals(Command.COMPLETE.toString())) {
             String[] details = userInput[1].split(" ", 2);
-            if(details[0].toLowerCase().equals(Command.TODO.toString())){
+            if (details[0].toLowerCase().equals(Command.TODO.toString())) {
                 TaskList.completeTask(new ToDo(details[1]));
                 return "Task marked complete!\n";
             } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())) {
@@ -102,7 +102,9 @@ public class Parser {
             try {
                 throw new InvalidCommandException("Sorry, I don't know what that means!\n" +
                         "Please enter a valid command.\n");
-            } catch (InvalidCommandException e) { e.printStackTrace(); }
+            } catch (InvalidCommandException e) {
+                e.printStackTrace();
+            }
         }
         return "Please enter a valid command.\n";
     }

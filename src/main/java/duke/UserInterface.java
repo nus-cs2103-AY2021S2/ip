@@ -8,7 +8,7 @@ import java.util.List;
 public class UserInterface {
     public BufferedWriter output;
 
-    public UserInterface(){
+    public UserInterface() {
         this.output = new BufferedWriter(new OutputStreamWriter(System.out));
     }
 
@@ -27,24 +27,10 @@ public class UserInterface {
     }
 
     /*
-     * Greets the user.
-     */
-    public String greet() {
-        return "Hello! I'm Duke\n";
-    }
-
-    /*
      * Bids the user farewell.
      */
     public String goodBye() {
         return "Goodbye\n";
-    }
-
-    /*
-     * Prompts the user to input a task.
-     */
-    public String prompt() {
-        return "What can I do for you?\n";
     }
 
     /*
@@ -62,7 +48,7 @@ public class UserInterface {
     public String listTasks() throws IOException {
         int taskNumber = 1;
         String result = "All tasks: \n";
-        for(Task t : TaskList.taskList) {
+        for (Task t : TaskList.taskList) {
             result += (taskNumber + ": " + t + "\n");
             this.output.flush();
             taskNumber++;
@@ -78,7 +64,7 @@ public class UserInterface {
     public String listTasks(List<Task> foundTasks) throws IOException {
         int taskNumber = 1;
         String result = "There were " + foundTasks.size() + " tasks containing your keyword:\n";
-        for(Task t : foundTasks){
+        for (Task t : foundTasks) {
             result += (taskNumber + ": " + t + "\n");
             taskNumber++;
         }
