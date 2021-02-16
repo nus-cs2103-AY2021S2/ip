@@ -15,6 +15,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * This code has been taken and modified from the CS2103 book/guide provided.
+ */
 public class DukeApplicationPage extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
