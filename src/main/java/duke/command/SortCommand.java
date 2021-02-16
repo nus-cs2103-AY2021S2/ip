@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import duke.Storage;
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -27,10 +29,16 @@ public class SortCommand extends Command {
         super.index = -1;
     }
 
-    private void sort(TaskList taskList) {
+    private void sort(TaskList taskList) throws DukeException {
         StringBuilder currText = new StringBuilder("Here are the events and deadline "
                 + "tasks (sorted by date) in your list:");
         TreeMap<String, String> map = new TreeMap<>();
+
+        boolean isEmptyList = taskList.getSize() == 0;
+
+        if (isEmptyList) {
+            throw new DukeException(ExceptionType.EMPTY_DATA, "");
+        }
 
         for (int num = 1; num <= taskList.getSize(); num++) {
             Task currentTask = taskList.getTask(num - 1);
@@ -76,7 +84,7 @@ public class SortCommand extends Command {
      * @param storage Instance of Storage
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         sort(tasks);
     }
 }

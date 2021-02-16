@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.Storage;
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -23,9 +25,13 @@ public class ListCommand extends Command {
         super.index = -1;
     }
 
-    private void retrieveList(TaskList taskList) {
+    private void retrieveList(TaskList taskList) throws DukeException {
         StringBuilder currText = new StringBuilder("Here are the tasks in your list:");
+        boolean isEmptyList = taskList.getSize() == 0;
 
+        if (isEmptyList) {
+            throw new DukeException(ExceptionType.EMPTY_DATA, "");
+        }
         for (int num = 1; num <= taskList.getSize(); num++) {
             Task currentTask = taskList.getTask(num - 1);
             String taskDetail = currentTask.toString();
@@ -42,7 +48,7 @@ public class ListCommand extends Command {
      * @param storage Instance of Storage
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         retrieveList(tasks);
     }
 }

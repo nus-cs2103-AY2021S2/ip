@@ -57,7 +57,6 @@ public class Storage {
         }
     }
 
-
     /**
      * Write list of tasks into the data file Duke.txt
      *
@@ -66,8 +65,7 @@ public class Storage {
      */
     public void saveData(TaskList tasks) throws DukeException {
         try {
-            File dataFile = fileConfiguration();
-            FileWriter fileWriter = new FileWriter(dataFile, false);
+            FileWriter fileWriter = new FileWriter(fileConfiguration(), false);
             assert fileWriter != null : "File writer is not initialised";
 
             for (int index = 0; index < tasks.getSize(); index++) {
@@ -95,19 +93,10 @@ public class Storage {
             assert sc != null : "Scanner for data file is null";
 
             while (sc.hasNext()) {
-                String[] taskDetail = sc.nextLine().split("[|]");
+                String[] taskDetail = sc.nextLine().split(" \\| ");
                 String taskType = taskDetail[0];
                 Task newTask = handleNewTask(taskType, taskDetail);
-
-                boolean isValidTask = taskType.equals("T") || taskType.equals("E") || taskType.equals("D");
-                if (isValidTask) {
-                    boolean isTaskCompleted = taskDetail[1].equals("1");
-
-                    if (isTaskCompleted) {
-                        newTask.markAsDone();
-                    }
-                    tasks.add(newTask);
-                }
+                tasks.add(newTask);
             }
             return tasks;
         } catch (IOException ex) {
@@ -115,7 +104,7 @@ public class Storage {
         }
     }
 
-    private static Task handleNewTask(String taskType, String[] taskDetail) {
+    private Task handleNewTask(String taskType, String[] taskDetail) {
         Task newTask = new Task();
 
         switch (taskType) {
@@ -130,6 +119,12 @@ public class Storage {
             break;
         default:
             break;
+        }
+
+        boolean isValidTask = taskType.equals("T") || taskType.equals("E") || taskType.equals("D");
+        boolean isTaskCompleted = taskDetail[1].equals("1");
+        if (isValidTask && isTaskCompleted) {
+            newTask.markAsDone();
         }
         return newTask;
     }

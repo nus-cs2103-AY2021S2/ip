@@ -44,9 +44,9 @@ public class DeleteTask extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        boolean isValidIndex = this.index <= 0 || this.index > tasks.getSize();
+        boolean isInvalidIndex = this.index <= 0 || this.index > tasks.getSize();
 
-        if (isValidIndex) {
+        if (isInvalidIndex) {
             throw new DukeException(ExceptionType.INVALID_INTEGER, "");
         }
         handleDeleteTask(tasks);

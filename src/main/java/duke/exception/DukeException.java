@@ -58,6 +58,10 @@ public class DukeException extends Exception {
             errorMsg = "☹ OOPS!!! Unfortunately, file configuration is not working at the moment :-( "
                     + "Pls restart (exit and start again) the Duke Bot !!!";
             break;
+        case EMPTY_DATA:
+            errorMsg = "☹ OOPS!!! Unfortunately, there is no data in Duke.txt at the moment :-( "
+                    + "Pls enter the tasks to be tracked by the Duke Bot !!!";
+            break;
         default:
             break;
         }

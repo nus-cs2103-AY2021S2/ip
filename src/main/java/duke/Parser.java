@@ -76,7 +76,6 @@ public class Parser {
         Collections.addAll(noDescriptionCommands, "bye", "list", "sort");
 
         boolean haveDescription = !noDescriptionCommands.contains(taskCommand);
-
         if (haveDescription) {
             checkValidInput(taskCommand, input);
             taskDetail = formatTaskDetail(taskCommand, input);
@@ -104,24 +103,19 @@ public class Parser {
     }
 
     private static void checkValidFormat(String taskCommand, String input) throws DukeException {
-        if (taskCommand.equals("event")) { // guard clause
-            boolean isValidEventFormat = !input.contains("/at");
-            if (isValidEventFormat) {
-                throw new DukeException(ExceptionType.INVALID_FORMAT, taskCommand);
-            }
+        boolean isInvalidEventFormat = !input.contains("/at");
+        if (taskCommand.equals("event") && isInvalidEventFormat) { // guard clause
+            throw new DukeException(ExceptionType.INVALID_FORMAT, taskCommand);
         }
 
-        if (taskCommand.equals("deadline")) { // guard clause
-            boolean isValidDeadlineFormat = !input.contains("/by");
-            if (isValidDeadlineFormat) {
-                throw new DukeException(ExceptionType.INVALID_FORMAT, taskCommand);
-            }
+        boolean isInvalidDeadlineFormat = !input.contains("/by");
+        if (taskCommand.equals("deadline") && isInvalidDeadlineFormat) { // guard clause
+            throw new DukeException(ExceptionType.INVALID_FORMAT, taskCommand);
         }
     }
 
     private static void checkBlankDescription(String taskCommand, String taskDetail) throws DukeException {
         boolean isBlankDescription = taskCommand.equals(taskDetail);
-
         if (isBlankDescription) {
             throw new DukeException(ExceptionType.BLANK_DESCRIPTION, taskCommand);
         }

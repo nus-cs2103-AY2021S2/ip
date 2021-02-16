@@ -34,7 +34,7 @@ public class AddTask extends Command {
         super.index = -1;
     }
 
-    private void handleNewTask(TaskList taskList) throws DukeException {
+    private void addNewTask(TaskList taskList) throws DukeException {
         Task newTask = new Task();
         this.outputMessage = "Got it. I've added this task: \n";
 
@@ -102,7 +102,7 @@ public class AddTask extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws DukeException {
-        handleNewTask(tasks);
+        addNewTask(tasks);
         storage.saveData(tasks);
     }
 }
