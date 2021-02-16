@@ -53,6 +53,17 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public TaskList findTask(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.eventName.contains(keyword)) {
+                result.add(task);
+            }
+        }
+
+        return new TaskList(result);
+    }
+
     /**
      * This function returns the number of tasks in the list
      * @return the size of the task list

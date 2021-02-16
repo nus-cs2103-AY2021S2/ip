@@ -74,6 +74,11 @@ public class Ui {
         }
     }
 
+    public void printFoundTasks(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        printList(tasks);
+    }
+
     /**
      * This function prints the message if the TaskList is empty
      */
