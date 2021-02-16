@@ -1,7 +1,5 @@
-todo | done | 4
 event | done | project meeting  | 2/12/2019 1800
 event | not done | project meeting  | 2/12/2019 1700
-deadline | not done | return book  | 3/06/2021 1550
 todo | not done | 1
-todo | not done | 2
-todo | not done | 3
+todo | not done | 4
+todo | not done | 5
