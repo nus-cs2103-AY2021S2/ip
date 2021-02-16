@@ -5,11 +5,11 @@ import java.util.Stack;
 
 import duke.command.Command;
 import duke.command.ExitCommand;
-import javafx.application.Platform;
 import duke.command.RedoCommand;
 import duke.command.UndoCommand;
 import duke.command.UndoRedoableCommand;
 import duke.task.TaskList;
+import javafx.application.Platform;
 
 public class Duke {
     private Storage storage;
