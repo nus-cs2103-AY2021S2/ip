@@ -102,14 +102,17 @@ public class Ui {
             builder.append(data);
             break;
         case DONE:
+            assert data.length() > 0;
             builder.append("The following task is now marked as done:\n"
                     + data + "\n");
             break;
         case ADD:
+            assert data.length() > 0;
             builder.append("The following task has been added:\n"
                     + data + "\n");
             break;
         case DELETE:
+            assert data.length() > 0;
             builder.append("The following Task has been deleted:\n");
             builder.append(data + "\n");
             break;
@@ -122,6 +125,7 @@ public class Ui {
             }
             break;
         default:
+            assert false : "This Really should not happen ever";
             builder.append("ERROR: Unhandled Case!\n");
         }
     }
