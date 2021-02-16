@@ -1,4 +1,4 @@
-package duke.processintructions;
+package duke.processinstructions;
 
 public class Parser {
 

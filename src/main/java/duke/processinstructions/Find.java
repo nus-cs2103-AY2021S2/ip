@@ -1,4 +1,4 @@
-package duke.processintructions;
+package duke.processinstructions;
 
 import duke.tasks.Task;
 

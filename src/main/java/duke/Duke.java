@@ -1,11 +1,11 @@
 package duke;
 
-import duke.processintructions.Command;
+import duke.processinstructions.Command;
 import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.processintructions.Parser;
-import duke.processintructions.CommandRouter;
+import duke.processinstructions.Parser;
+import duke.processinstructions.CommandRouter;
 
 /**
  * Duke is a todo list with features built incrementally.
