@@ -6,14 +6,14 @@ import java.util.HashMap;
 /**
  * Parses user-inputted date/time arguments into KiwiDateTime objects.
  */
-class ParseKiwiDateTime {
+public class ParseKiwiDateTime {
 
     // not allowed: ' '
     HashMap<String, Integer> dateDelimiters = new HashMap<>();
     HashMap<String, Integer> timeDelimiters = new HashMap<>();
 
     // can't remember what this entire class was doing before
-    
+
     private int hour;
     private int min;
     private int day;

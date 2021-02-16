@@ -67,4 +67,9 @@ public class KiwiTime {
                 t0, t1, t2, t3
         );
     }
+
+    public String unparse(String delimiter) {
+        return String.format("%d%s%d", this.time.getHour(), delimiter, this.time.getMinute());
+    }
+
 }
