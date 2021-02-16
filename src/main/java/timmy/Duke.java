@@ -44,15 +44,11 @@ public class Duke {
         }
     }
 
-    public String getLine() {
-        return ui.showLine();
-    }
-
     public String getMessage() {
         return message;
     }
 
     public String welcomeMessage() {
-        return ui.showLine() + "\n" + ui.showWelcome() + "\n" + ui.showLine();
+        return  ui.showWelcome();
     }
 }

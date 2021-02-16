@@ -164,7 +164,7 @@ public class Parser {
                 break;
             }
 
-            String[] taskInfoArr = taskInfo.split(" /by ", 2);
+            String[] taskInfoArr = nextTaskInfo[1].split(" /by ", 2);
 
             if (taskInfoArr.length < 2) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
@@ -202,7 +202,7 @@ public class Parser {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
             }
 
-            String[] taskInfoArr = taskInfo.split(" /at ", 2);
+            String[] taskInfoArr = nextTaskInfo[1].split(" /at ", 2);
 
 
             if (taskInfoArr.length < 2) {
