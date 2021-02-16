@@ -1,36 +1,38 @@
 package duke.ui;
 
 /**
- * Ui class which handles interactions with the user
+ * Ui class which formatting of texts
  */
 public class Ui {
 
     /**
-     * Displays a message properly formatted with borders
-     *
+     * Return text with formatting/decorations
      * @param message to be displayed
+     * @return formatted text
      */
     public static String displayMessage(String message) {
-        // Function is current deprecated, may include decorators in future
         return message;
     }
 
     /**
-     * Displays welcome message
+     * Return welcome text
+     * @return welcome text
      */
     public static String displayWelcomeMessage() {
         return Ui.displayMessage("Hello from Duke!\nWhat can I do for you?");
     }
 
     /**
-     * Displays message when loading error is encountered when reading from hard disk
+     * Return text when loading error is encountered when reading from hard disk
+     * @return error text
      */
     public static String showLoadingError() {
         return Ui.displayMessage("An error was encountered when loading from the provided filepath.");
     }
 
     /**
-     * Displays message when loading error is encountered when writing to hard disk
+     * Return message when loading error is encountered when writing to hard disk
+     * @return error text
      */
     public static String showSavingError() {
         return Ui.displayMessage("An error was encountered when saving to the provided filepath.");

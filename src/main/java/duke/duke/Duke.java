@@ -1,5 +1,6 @@
-package duke;
+package duke.duke;
 
+import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.response.Response;
@@ -7,16 +8,12 @@ import duke.response.ResponseStatus;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
  * Handles the main program logic of the Duke task manager program
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
@@ -41,12 +38,13 @@ public class Duke extends Application {
         parser = new Parser(tasks);
     }
 
-    public String getWelcomeMessage() {
-        return ui.displayWelcomeMessage();
+    public Response getWelcomeMessage() {
+        return new Response(ui.displayWelcomeMessage(), ResponseStatus.OK);
     }
 
     public Response getResponse(String inputCommand) {
-        Response response = this.parser.parse(inputCommand);
+        Command command = this.parser.parse(inputCommand);
+        Response response = command.execute(tasks);
         try {
             this.storage.save(this.tasks.getTaskList());
         } catch (DukeException e) {
@@ -56,14 +54,5 @@ public class Duke extends Application {
             Platform.exit();
         }
         return response;
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
     }
 }

@@ -18,7 +18,9 @@ public class TaskList {
         this.taskList.add(task);
     }
 
-    public void clear() { this.taskList.clear(); }
+    public void clear() {
+        this.taskList.clear();
+    }
 
     public Task get(int idx) {
         return this.taskList.get(idx);

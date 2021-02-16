@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.Duke;
+import duke.duke.Duke;
 import duke.response.Response;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,11 +24,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/v.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/cpu.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     @FXML
     public void initialize() {
@@ -37,12 +36,12 @@ public class MainWindow extends AnchorPane {
         HBox.setHgrow(userInput, Priority.ALWAYS);
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     public void displayWelcomeMessage() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getWelcomeMessage().getText(), dukeImage));
     }
 
     /**

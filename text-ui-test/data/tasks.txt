@@ -1,0 +1,2 @@
+E|0|dinner appointment|Jewel
+D|1|CS3244 Assignment 1|2021-03-18 08:00

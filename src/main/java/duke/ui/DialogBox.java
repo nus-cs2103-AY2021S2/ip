@@ -21,14 +21,18 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    private static final String userFxmlPath = "/view/UserDialogBox.fxml";
+    private static final String dukeFxmlPath = "/view/DukeDialogBox.fxml";
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String fxmlPath) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(fxmlPath));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -55,18 +59,18 @@ public class DialogBox extends HBox {
         FXCollections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        this.setStyle("-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #6A82FB, #FC5C7D); -fx-background-radius: 20px;");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, DialogBox.userFxmlPath);
     }
 
     public static DialogBox getDukeDialog(String text, Image img, ResponseStatus status) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, DialogBox.dukeFxmlPath);
         db.flip();
         if (status == ResponseStatus.ERROR) {
-            db.setStyle("-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #833ab4, #fd1d1d); -fx-background-radius: 20px;");
+            db.setStyle("-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #833ab4, #fd1d1d);"
+                    + "-fx-background-radius: 20px;");
         }
         return db;
     }
