@@ -10,7 +10,17 @@ public class Ui {
     }
 
     public String printStart() {
-        return String.format("Hello! I'm Duke" + "\n" + "What can I do for you?");
+        String res = String.format("Hello! I'm Duke" + "\n" + "What can I do for " +
+                        "you?\n");
+        res += String.format("Here are the list of commands: \n" +
+                "list - lists all existing tasks\n" +
+                "todo [insert task] - creates a todo task\n" +
+                "deadline [insert deadline] - creates a deadline\n" +
+                "event [insert event] - creates an event\n" +
+                "delete [insert index] - deletes event based on index\n" +
+                "find [insert keyword] [search type(optional)] - finds tasks " +
+                "corresponding to keyword");
+        return res;
     }
 
     public String outBye() {

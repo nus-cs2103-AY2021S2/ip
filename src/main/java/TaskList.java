@@ -92,9 +92,9 @@ public class TaskList {
     protected String removeTask(int index) {
         Task removedTask = taskList.remove(index - 1);
 
-        String res = "Noted. I've removed this task:" + "  " + removedTask;
+        String res = "Noted. I've removed this task:\n" + "  " + removedTask;
 
-        res += String.format("Now you have %d tasks in your list.",
+        res += String.format("\nNow you have %d tasks in your list.",
                 taskList.size());
         return res;
     }

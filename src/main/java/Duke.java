@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -69,9 +70,9 @@ public class Duke extends Application {
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(600.0, 700.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(570, 650);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -123,9 +124,21 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput(List<Task> taskList) throws IOException {
-        Label dukeText = new Label(getOutput(userInput.getText(), taskList));
-        dialogContainer.getChildren().add(dukeText);
+
+        final Image userImage = new Image(getClass().getResourceAsStream("/images" +
+                "/User.png"));
+        final Image dukeImage = new Image(getClass().getResourceAsStream("/images" +
+                "/Bot.png"));
+        String input = userInput.getText();
+        Label dukeText = new Label(getOutput(input, taskList));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(input, userImage),
+                DialogBox.getUserDialog(input, userImage)
+//                DialogBox.getDukeDialog(dukeText.getText(), dukeImage)
+        );
         userInput.clear();
+//        dialogContainer.getChildren().add(dukeText);
+//        userInput.clear();
     }
 
 
@@ -137,7 +150,7 @@ public class Duke extends Application {
      * @return String to be displayed to user in dialogue box
      * @throws IOException
      */
-    private String getOutput(String command, List<Task> taskListStored) throws IOException {
+    public String getOutput(String command, List<Task> taskListStored) throws IOException {
         Parser parser = new Parser();
         Ui getInput = new Ui();
         TaskList taskList = new TaskList(taskListStored);
