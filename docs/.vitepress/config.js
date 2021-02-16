@@ -44,10 +44,6 @@ module.exports = {
           link: '/pages/download'
         },
         {
-          text: 'About',
-          link: '/pages/about'
-        },
-        {
           text: 'Troubleshooting',
           link: '/pages/troubleshooting'
         }

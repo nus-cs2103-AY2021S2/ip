@@ -1,6 +1,6 @@
 # What is Elaina
 
-> Elaina is the ultimate personal assistant chatbot.
+Elaina is the ultimate personal assistant chatbot that can boost your productivity. It runs on all major Desktop Operating Systems.
 
 ![Hero](/Ui.png)
 
