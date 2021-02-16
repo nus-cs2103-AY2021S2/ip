@@ -1,129 +1,119 @@
-# User Guide
+# User Guide - Features 
 
-## Features 
+## `ToDo`
 
-### Feature 1 
-ToDo
-
-## Usage
+### Usage
 todo <Description of Task>
 
-## Action
+### Action
 Adds a new task of type "ToDo" to the task list.
 
-## Example of usage: 
+### Example of usage: 
 todo buy groceries
 
-## Expected outcome:
+### Expected outcome:
 Added Task!
 
-### Feature 2 
-Deadline
+## `Deadline`
 
-## Usage
+### Usage
 deadline <Description of Task>/by <DD.MM.YYYY HH:MM>
 
-## Action
+### Action
 Adds a new task of type "Deadline" to the task list.
 
-## Example of usage: 
+### Example of usage: 
 deadline return library book/by 14.02.2021 14:00
 
-## Expected outcome:
+### Expected outcome:
 Added Task!
 
-### Feature 3 
-Event
+## `Event`
 
-## Usage
+### Usage
 event <Description of Task>/from <DD.MM.YYYY HH:MM> to <DD.MM.YYYY HH:MM>
 
-## Action
+### Action
 Adds a new task of type "Event" to the task list.
 
-## Example of usage: 
+### Example of usage: 
 event Marcus's birthday party/from 14.02.2021 18:00 to to 14.02.2021 23:30
 
-## Expected outcome:
+### Expected outcome:
 Added Task!
 
-### Feature 4
-List
+## `List`
 
-## Usage
+### Usage
 list
 
-## Action
+### Action
 Lists all tasks currently in the task list.
 
-## Example of usage: 
+### Example of usage: 
 list
 
-## Expected outcome:
+### Expected outcome:
 All Tasks:
 [T][] buy groceries
 [D][] deadline return library book/by Sun Feb 14 14:00:00 SGT 2021
 [E][] Marcus's birthday party/from Sun Feb 14 18:00:00 SGT 2021 to Sun Feb 14 23:30:00 SGT 2021
 
-### Feature 5
-Complete
+## `Complete`
 
-## Usage
+### Usage
 complete <Task Type> <Task Description>
 
-## Action
+### Action
 Finds and marks the desired task complete.
 
-## Example of usage: 
+### Example of usage: 
 complete todo buy groceries
 
-## Expected outcome:
+### Expected outcome:
 Task marked complete!
 
-### Feature 6
-Remove
+## `Remove`
 
-## Usage
+### Usage
 remove <Task Type> <Task Description>
 
-## Action
+### Action
 Finds and removes the desired task from the task list.
 
-## Example of usage: 
+### Example of usage: 
 remove todo buy groceries
 
-## Expected outcome:
+### Expected outcome:
 Task removed.
 
-### Feature 7
-Find
+## `Find`
 
-## Usage
+### Usage
 find <Key Word>
 
-## Action
+### Action
 Finds and lists all tasks from the task list that contain the entered key word.
 
-## Example of usage: 
+### Example of usage: 
 find book
 
-## Expected outcome:
+### Expected outcome:
 There were 1 tasks containing your keyword:
 1: [D][] deadline return library book/by Sun Feb 14 14:00:00 SGT 2021
 
-### Feature 8
-Help
+## `Help`
 
-## Usage
+### Usage
 help
 
-## Action
+### Action
 Lists all commandss accepted by Duke
 
-## Example of usage: 
+### Example of usage: 
 help
 
-## Expected outcome:
+### Expected outcome:
 Enter one of the following commands:
 [1] Hello
 [2] Todo <Description of Task>
@@ -136,32 +126,30 @@ Enter one of the following commands:
 [9] Help
 [10] Bye
 
-### Feature 9
-Hello
+## `Hello`
 
-## Usage
+### Usage
 hello
 
-## Action
+### Action
 If entered upon launch, prompts a greeting and an instruction from Duke. Subsequently prompts an instruction from Duke only.
 
-## Example of usage: 
+### Example of usage: 
 hello
 
-## Expected outcome:
+### Expected outcome:
 Please enter a command.
 
-### Feature 10
-Bye
+## `Bye`
 
-## Usage
+### Usage
 bye
 
-## Action
+### Action
 Exits the application.
 
-## Example of usage: 
+### Example of usage: 
 bye
 
-## Expected outcome:
+### Expected outcome:
 Closure of application.
