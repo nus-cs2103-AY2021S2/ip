@@ -21,3 +21,6 @@ Note: Creates a textFile for storing tasks at ./data/taskList.txt (. is where th
 
 ### Additional Features
 1) Prevent adding a duplicated task
+
+## User Guide
+Check out the user guide at https://ssagit.github.io/ip/
