@@ -40,15 +40,14 @@ public class Parser {
      * @return
      */
     private String handleCommand(Duke duke, String currLine, TaskList taskList, Ui ui, Storage storage) throws Exception {
-
         currLine = currLine.toLowerCase();
+        String output = taskList.checkDuplicate(currLine);
         assert !currLine.equals("");
-        String output = handleRealCommand(duke, currLine, taskList, ui, storage);
-        output += taskList.checkDuplicate(currLine);
+        output += handleValidCommand(duke, currLine, taskList, ui, storage);
         return output;
     }
 
-    private String handleRealCommand(Duke duke, String currLine, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String handleValidCommand(Duke duke, String currLine, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] parsedLine = currLine.split(" ");
         if (currLine.startsWith("list")) {
             return ui.printListTasks(taskList);
