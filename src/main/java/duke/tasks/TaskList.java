@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import static duke.common.Utils.DATE_FORMAT;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -124,7 +126,7 @@ public class TaskList {
      * @return task list containing {@code Task} that is occurring on the specified date
      */
     public TaskList filterByDate(String date) {
-        LocalDate queryDate = LocalDate.parse(date);
+        LocalDate queryDate = LocalDate.parse(date, DATE_FORMAT);
         List<Task> printTasks = tasks.stream().filter(task -> {
             if (task instanceof TimedTask) {
                 return ((TimedTask) task).getTaskDate().isEqual(queryDate);

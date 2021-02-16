@@ -25,7 +25,8 @@ public enum DukeCommand {
         return Arrays.stream(values()).anyMatch(cmd -> cmd.name().equals(value));
     }
 
-    public String toLower() {
-        return this.toString().toLowerCase();
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
     }
 }

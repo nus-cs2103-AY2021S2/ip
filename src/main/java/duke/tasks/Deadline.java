@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import static duke.common.Utils.formatDate;
+import static duke.common.Utils.formatStorageDate;
 
 /**
  * Represents a Deadline {@code TimedTask}.
@@ -52,6 +53,6 @@ public class Deadline extends TimedTask {
 
     @Override
     public String toStorageString() {
-        return String.format(STORAGE_STRING_FORMAT, isDone ? 1 : 0, description, super.taskDateTime);
+        return String.format(STORAGE_STRING_FORMAT, isDone ? 1 : 0, description, formatStorageDate(super.taskDateTime));
     }
 }

@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     public static final String TEST_DESC_1 = "return books";
-    public static final String TEST_DATE_1 = "2019-11-01T18:00";
+    public static final String TEST_DATE_1 = "2019-11-01 18:00";
     public static final String TEST_DESC_2 = "pay phone bill";
-    public static final String TEST_DATE_2 = "2021-01-26T19:00";
+    public static final String TEST_DATE_2 = "2021-01-26 19:00";
 
     @Test
     public void toStorageStringTest() {

@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import static duke.common.Utils.DATETIME_FORMAT;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -18,7 +20,7 @@ public abstract class TimedTask extends Task {
      */
     public TimedTask(String description, String taskDateTime) {
         super(description);
-        this.taskDateTime = LocalDateTime.parse(taskDateTime);
+        this.taskDateTime = LocalDateTime.parse(taskDateTime, DATETIME_FORMAT);
     }
 
     /**
@@ -29,7 +31,7 @@ public abstract class TimedTask extends Task {
      */
     public TimedTask(int done, String description, String taskDateTime) {
         super(done, description);
-        this.taskDateTime = LocalDateTime.parse(taskDateTime);
+        this.taskDateTime = LocalDateTime.parse(taskDateTime, DATETIME_FORMAT);
     }
 
     public LocalDateTime getTaskDateTime() {

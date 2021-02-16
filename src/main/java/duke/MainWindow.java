@@ -6,10 +6,9 @@ import java.util.TimerTask;
 import duke.commands.CommandResponse;
 import duke.ui.Ui;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -24,12 +23,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
+    private ImageView sendButton;
 
     private Duke duke;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initialise the scrollPane and sends a welcome message.
@@ -53,8 +49,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         CommandResponse response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response.toString(), dukeImage)
+                DialogBox.getUserDialog(input),
+                DialogBox.getDukeDialog(response.toString())
         );
         userInput.clear();
 
@@ -69,7 +65,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void dukeSendMessage(String message) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message));
     }
 }
 
