@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
@@ -122,23 +123,18 @@ public class TaskList {
      * @return User friendly state of TaskList
      */
     public String getList() {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < store.size(); i++) {
-            builder.append(formatOrderedPrint(i));
-            builder.append('\n');
-        }
-        return builder.toString();
+        return IntStream.range(0, store.size())
+                        .parallel()
+                        .mapToObj(this::formatOrderedPrint)
+                        .reduce("", (a, b) -> a + b + "\n");
     }
 
     private String getFilteredList(String searchTerm) {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < store.size(); i++) {
-            if (store.get(i).containsSearch(searchTerm)) {
-                builder.append(formatOrderedPrint(i));
-                builder.append('\n');
-            }
-        }
-        return builder.toString();
+        return IntStream.range(0, store.size())
+                        .parallel()
+                        .filter(i -> store.get(i).containsSearch(searchTerm))
+                        .mapToObj(this::formatOrderedPrint)
+                        .reduce("", (a, b) -> a + b + "\n");
     }
     private String formatOrderedPrint(int i) {
         final int size = store.size();
