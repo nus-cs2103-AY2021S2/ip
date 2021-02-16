@@ -1,35 +1,44 @@
 import main.java.Task;
+import main.java.Todo;
+import main.java.Deadline;
+import main.java.Event;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String indentation = "        ";
-    private static final String horizontalLine = "____________________________________________________________";
+    private static final String INDENTATION = "        ";
+    private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String SEPARATOR = INDENTATION + HORIZONTAL_LINE;
 
     public static void main(String[] args) {
         displayWelcomeMsg();
 
-        Scanner sc = new Scanner(System.in);
-        String cmd = "";
         ArrayList<Task> tasks = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        String cmd = sc.nextLine();
         while (!cmd.equals("bye")) {
-            cmd = sc.nextLine();
             if (cmd.equals("bye")) {
                 displayExitMsg();
-                break;
             } else if (cmd.equals("list")) {
                 printTasks(tasks);
-            } else if (cmd.substring(0, 5).equals("done ")) {
-                String[] arr = cmd.split(" ");
-                int index = Integer.parseInt(arr[1]) - 1;
-                Task task = tasks.get(index);
-                task.markAsDone();
-                displayMarkTaskAsDoneMsg(task);
             } else {
-                addTask(tasks, cmd);
-                displayAddTaskMsg(cmd);
+                String[] arr = cmd.split(" ", 2);
+                if (arr[0].equals("done")) {
+                    int index = Integer.parseInt(arr[1]) - 1;
+                    Task task = tasks.get(index);
+                    task.markAsDone();
+                    displayMarkTaskAsDoneMsg(task);
+                } else if (arr[0].equals("todo") || arr[0].equals("deadline") || arr[0].equals("event")) {
+                    addTask(tasks, cmd);
+                    displayAddTaskMsg(tasks);
+                } else {
+                    System.out.println(SEPARATOR);
+                    System.out.println("Invalid command!");
+                    System.out.println(SEPARATOR);
+                }
             }
+            cmd = sc.nextLine();
         }
         sc.close();
     }
@@ -40,40 +49,60 @@ public class Duke {
             + "        | | | | | | | |/ / _ \\\n"
             + "        | |_| | |_| |   <  __/\n"
             + "        |____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(indentation + horizontalLine);
+        System.out.println(SEPARATOR);
         System.out.println(logo);
-        System.out.println(indentation + "Hello! I'm Duke\n" + indentation + "What can I do for you?");
-        System.out.println(indentation + horizontalLine);
+        System.out.println(INDENTATION + "Hello! I'm Duke\n" + INDENTATION + "What can I do for you?");
+        System.out.println(SEPARATOR);
     }
 
     public static void displayExitMsg() {
-        System.out.println(indentation + horizontalLine);
-        System.out.println(indentation + "Bye. Hope to see you again soon!");
-        System.out.println(indentation + horizontalLine);
+        System.out.println(SEPARATOR);
+        System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
+        System.out.println(SEPARATOR);
     }
 
-    public static void addTask(ArrayList<Task> tasks, String task) {
-        tasks.add(new Task(task));
+    public static void addTask(ArrayList<Task> tasks, String cmd) {
+        String[] arr = cmd.split(" ", 2);
+        String type = arr[0];
+        String rest = arr[1];
+        Task task;
+        if (type.equals("todo")) {
+            task = new Todo(rest);
+        } else if (type.equals("deadline")) {
+            String[] temp = rest.split(" /by ");
+            String description = temp[0];
+            String by = temp[1];
+            task = new Deadline(description, by);
+        } else {
+            String[] temp = rest.split(" /at ");
+            String description = temp[0];
+            String at = temp[1];
+            task = new Event(description, at);
+        }
+        tasks.add(task);
     }
 
-    public static void displayAddTaskMsg(String task) {
-        System.out.println(indentation + horizontalLine);
-        System.out.println(indentation + "added: " + task);
-        System.out.println(indentation + horizontalLine);
+    public static void displayAddTaskMsg(ArrayList<Task> tasks) {
+        int size = tasks.size();
+        System.out.println(SEPARATOR);
+        System.out.println(INDENTATION + "Got it. I've added this task:");
+        System.out.println(INDENTATION + "    " + tasks.get(size - 1));
+        System.out.println(INDENTATION + "Now you have " + size + " task" + (size > 1 ? "s" : "") + " in the list.");
+        System.out.println(SEPARATOR);
     }
 
     public static void printTasks(ArrayList<Task> tasks) {
-        System.out.println(indentation + horizontalLine);
-        System.out.println(indentation + "Here are the tasks in your list:");
+        System.out.println(SEPARATOR);
+        System.out.println(INDENTATION + "Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(indentation + "    " + i + ". " + tasks.get(i - 1));
+            System.out.println(INDENTATION + "    " + i + ". " + tasks.get(i - 1));
         }
-        System.out.println(indentation + horizontalLine);
+        System.out.println(SEPARATOR);
     }
 
     public static void displayMarkTaskAsDoneMsg(Task task) {
-        System.out.println(indentation + horizontalLine);
-        System.out.println(indentation + "Nice! I've marked this task as done:\n"+ indentation + "    " + task);
-        System.out.println(indentation + horizontalLine);
+        System.out.println(SEPARATOR);
+        System.out.println(INDENTATION + "Nice! I've marked this task as done:\n"+ INDENTATION + "    " + task);
+        System.out.println(SEPARATOR);
     }
 }
