@@ -56,7 +56,7 @@ public class Jhin {
      */
     public String getResponse(String input) throws JhinException {
         if (isShuttingDown) {
-            return EXIT_MESSAGE;
+            throw new JhinException(EXIT_MESSAGE);
         }
 
         input = CommandParser.parseAlias(input, aliasMap);

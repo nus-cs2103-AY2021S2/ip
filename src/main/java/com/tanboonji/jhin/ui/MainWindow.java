@@ -36,6 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     private Jhin jhin;
+    private boolean isShuttingDown = false;
 
     @FXML
     public void initialize() {
@@ -54,7 +55,7 @@ public class MainWindow extends AnchorPane {
         } catch (JhinException e) {
             dialogContainer.getChildren().add(DialogBox.getJhinDialog(e.getMessage(), errorImage));
             dialogContainer.getChildren().add(DialogBox.getJhinDialog(RESTART_MESSAGE, errorImage));
-            forceShutdownIn(SEVEN_SECOND);
+            forceShutdown(SEVEN_SECOND);
         }
     }
 
@@ -82,17 +83,20 @@ public class MainWindow extends AnchorPane {
         scrollPane.setVvalue(scrollPane.getVmax());
 
         if (jhin.isShuttingDown()) {
-            forceShutdownIn(TWO_SECOND);
+            forceShutdown(TWO_SECOND);
         }
     }
 
-    private void forceShutdownIn(int time) {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+    private void forceShutdown(int time) {
+        if (!isShuttingDown) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     Platform.exit();
                 }
             }, time);
+        }
+        isShuttingDown = true;
     }
 }
