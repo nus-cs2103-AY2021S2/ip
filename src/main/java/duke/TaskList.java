@@ -27,12 +27,14 @@ public class TaskList {
      *
      * @param task A task to be marked as complete.
      */
-    public static void completeTask(Task task) {
+    public static String completeTask(Task task) {
         for (Task t: taskList) {
             if(t.equals(task)) {
                 t.completeTask();
+                return "Task marked complete!\n";
             }
         }
+        return "Task not found!";
     }
 
     /*
@@ -47,5 +49,14 @@ public class TaskList {
                 break;
             }
         }
+    }
+
+    public static boolean contains(Task task) {
+        for (Task t: taskList) {
+            if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -56,6 +56,21 @@ public class UserInterface {
         return result;
     }
 
+    public String helpMenu() {
+        String help = "Enter one of the following commands:\n" +
+                "[1] Hello\n" +
+                "[2] Todo <Description of Task>\n" +
+                "[3] Deadline <Description of Task>/by <DD.MM.YYYY HH:MM>\n" +
+                "[4] Event <Description of Task>/from <DD.MM.YYYY HH:MM> to <DD.MM.YYYY HH:MM>\n" +
+                "[5] List\n" +
+                "[6] Find <Key Word>\n" +
+                "[7] Complete <Task Type> <Description>\n" +
+                "[8] Remove <Task Type> <Description>\n" +
+                "[9] Help\n" +
+                "[10] Bye";
+        return help;
+    }
+
     /*
      * Lists all the tasks found from the search query provided by the user.
      *

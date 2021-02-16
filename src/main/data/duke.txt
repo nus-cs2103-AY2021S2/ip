@@ -1,2 +1,2 @@
-[T][] go out
-[T][] go home
+[T][X] go home
+[T][X] buy groceries
