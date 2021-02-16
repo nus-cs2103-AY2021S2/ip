@@ -21,6 +21,6 @@ public class EventCommand extends AddCommand {
     public String getString() {
         Event event = new Event(taskString, date);
         tasks.add(event);
-        return Ui.showAddText() + event.toString();
+        return Ui.showAddText() + event.toString() + tasks.getSizeString();
     }
 }
