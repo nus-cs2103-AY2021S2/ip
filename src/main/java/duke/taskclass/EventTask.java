@@ -5,8 +5,8 @@ import java.util.Date;
  * Represent a task for events
  */
 public class EventTask extends Task {
-    String inputDate;
-    Date deadline;
+    private String inputDate;
+    private Date deadline;
 
     /**
      * Constructor for EventTask.
@@ -27,10 +27,10 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        if (isDone) {
-            return "event | done | " + taskName + " | " + deadline.toString();
+        if (this.getIsDone()) {
+            return "event | done | " + this.getTaskName() + " | " + deadline.toString();
         }
-        return "event | not done | " + taskName + " | " + deadline.toString();
+        return "event | not done | " + this.getTaskName() + " | " + deadline.toString();
     }
 
     /**
@@ -38,10 +38,10 @@ public class EventTask extends Task {
      * @return More human readable toString()
      */
     public String toFormattedString() {
-        if (isDone) {
-            return "[E][X] " + taskName + " (at: " + deadline.toString() + ")";
+        if (this.getIsDone()) {
+            return "[E][X] " + this.getTaskName() + " (at: " + deadline.toString() + ")";
         }
-        return "[E][ ] " + taskName + " (at: " + deadline.toString() + ")";
+        return "[E][ ] " + this.getTaskName() + " (at: " + deadline.toString() + ")";
     }
 
     /**
@@ -49,10 +49,10 @@ public class EventTask extends Task {
      * @return String format viable for use by FileWriter
      */
     public String toOutputFileString() {
-        if (isDone) {
-            return "event | done | " + taskName + " | " + inputDate;
+        if (this.getIsDone()) {
+            return "event | done | " + this.getTaskName() + " | " + inputDate;
         }
-        return "event | not done | " + taskName + " | " + inputDate;
+        return "event | not done | " + this.getTaskName() + " | " + inputDate;
     }
 
     /**
@@ -64,7 +64,7 @@ public class EventTask extends Task {
         if (task == this) {
             return true;
         }
-        if (this.taskName.equals(task.taskName)) {
+        if (this.getTaskName().equals(task.getTaskName())) {
             if (this.deadline.compareTo(task.deadline) == 0) {
                 return true;
             }
@@ -78,7 +78,7 @@ public class EventTask extends Task {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + (this.taskName != null ? this.taskName.hashCode() : 0);
+        hash = 53 * hash + (this.getTaskName() != null ? this.getTaskName().hashCode() : 0);
         hash = 53 * hash + (this.deadline != null ? this.deadline.hashCode() : 0);
         return hash;
     }

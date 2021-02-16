@@ -6,8 +6,8 @@ import java.util.Date;
  * Represent a task for deadlines
  */
 public class DeadlineTask extends Task {
-    String inputDate;
-    Date deadline;
+    private String inputDate;
+    private Date deadline;
 
     /**
      * Constructor for DeadlineTask.
@@ -28,10 +28,10 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        if (isDone) {
-            return "deadline | done | " + taskName + " | " + deadline.toString();
+        if (this.getIsDone()) {
+            return "deadline | done | " + this.getTaskName() + " | " + deadline.toString();
         }
-        return "deadline | not done | " + taskName + " | " + deadline.toString();
+        return "deadline | not done | " + this.getTaskName() + " | " + deadline.toString();
     }
 
     /**
@@ -40,10 +40,10 @@ public class DeadlineTask extends Task {
      * @return More human readable toString()
      */
     public String toFormattedString() {
-        if (isDone) {
-            return "[D][X] " + taskName + " (by: " + deadline.toString() + ")";
+        if (this.getIsDone()) {
+            return "[D][X] " + this.getTaskName() + " (by: " + deadline.toString() + ")";
         }
-        return "[D][ ] " + taskName + " (by: " + deadline.toString() + ")";
+        return "[D][ ] " + this.getTaskName() + " (by: " + deadline.toString() + ")";
     }
 
     /**
@@ -52,10 +52,10 @@ public class DeadlineTask extends Task {
      * @return String format viable for use by FileWriter
      */
     public String toOutputFileString() {
-        if (isDone) {
-            return "deadline | done | " + taskName + " | " + inputDate;
+        if (this.getIsDone()) {
+            return "deadline | done | " + this.getTaskName() + " | " + inputDate;
         }
-        return "deadline | not done | " + taskName + " | " + inputDate;
+        return "deadline | not done | " + this.getTaskName() + " | " + inputDate;
     }
 
     /**
@@ -67,7 +67,7 @@ public class DeadlineTask extends Task {
         if (task == this) {
             return true;
         }
-        if (this.taskName.equals(task.taskName)) {
+        if (this.getTaskName().equals(task.getTaskName())) {
             if (this.deadline.compareTo(task.deadline) == 0) {
                 return true;
             }
@@ -81,7 +81,7 @@ public class DeadlineTask extends Task {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 53 * hash + (this.taskName != null ? this.taskName.hashCode() : 0);
+        hash = 53 * hash + (this.getTaskName() != null ? this.getTaskName().hashCode() : 0);
         hash = 53 * hash + (this.deadline != null ? this.deadline.hashCode() : 0);
         return hash;
     }

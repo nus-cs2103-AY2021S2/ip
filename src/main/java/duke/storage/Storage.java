@@ -18,8 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Storage {
-    Path absolutePath;
-    File taskText;
+    private Path absolutePath;
+    private File taskText;
 
     /**
      * Constructor, creates a file of the searched file if it doesn't exist.
@@ -116,7 +116,7 @@ public class Storage {
                 String isDoneStr = strArr[1];
                 String taskName = strArr[2];
 
-                if (taskType.equals("todo")) {;
+                if (taskType.equals("todo")) {
                     taskArr[taskIterator] = createTodoTask(taskName, isDoneStr.equals("done"));
                 } else if (taskType.equals("event")) {
                     taskArr[taskIterator] = createEventTask(validator, strArr, taskName, isDoneStr.equals("done"));

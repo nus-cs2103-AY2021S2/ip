@@ -6,8 +6,8 @@ package duke.taskclass;
  */
 public class Task {
 
-    String taskName;
-    boolean isDone;
+    private String taskName;
+    private boolean isDone;
 
     /**
      * Task class constructor
