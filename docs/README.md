@@ -53,7 +53,7 @@ Expected outcome:
 
 #### `list` - lists all tasks in the task list
 
-Lists all taskss in the task list in numeric order.
+Lists all tasks in the task list in numeric order.
 
 Example of usage:
 
@@ -99,7 +99,7 @@ Expected outcome:
 
 #### `find` - finds tasks
 
-Finds tasks in the list given a search query.
+Finds task in the list given a search query.
 
 Example of usage:
 
