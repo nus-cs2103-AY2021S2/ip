@@ -5,6 +5,7 @@
 
 ## Introduction
 Steve is a simple task tracker done as part of the CS2103T module in NUS. The latest releases for download are available [here](https://github.com/tjtanjin/ip/releases/).
+<br/><br/>
 
 ## Content Page
 * [Create Todo Task](#create-todo-task)
@@ -17,6 +18,7 @@ Steve is a simple task tracker done as part of the CS2103T module in NUS. The la
 * [View All Tasks](#view-all-tasks)
 * [View Command Help](#view-command-help)
 * [Exit Application](#exit-application)
+<br/><br/>
 
 ## Features
 ### Create Todo Task
