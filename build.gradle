@@ -36,6 +36,12 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
 }
 
+shadowJar {
+    archiveBaseName.set('duke')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
+
 run {
     standardInput(System.in)
 }
