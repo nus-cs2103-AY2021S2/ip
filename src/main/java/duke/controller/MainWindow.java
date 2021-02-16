@@ -65,12 +65,12 @@ public class MainWindow extends AnchorPane {
             String response = duke.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog("You:\n" + input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getDukeDialog("Duke:\n" + response, dukeImage)
             );
             userInput.clear();
         } catch (DukeException dukeEx) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(dukeEx.toString(), dukeImage)
+                    DialogBox.getDukeDialog("Duke:\n" + dukeEx.toString(), dukeImage)
             );
             userInput.clear();
         }
