@@ -177,7 +177,7 @@ public class TaskHandler {
             int index = TASKS_TRACKER.size() - 1;
             this.tasks = TASKS_TRACKER.remove(index);
             if (STORAGE_HANDLER.revertTask(tasks)) {
-                return "Info: Undo was successful!";
+                return "Info: Undo successful for previous task modification!";
             } else {
                 return "Error: There was an error undo-ing your task, please check your syntax and try again.";
             }
