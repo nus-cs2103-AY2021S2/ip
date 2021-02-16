@@ -9,14 +9,16 @@
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `Duke.jar` from [here](https://github.com/garyljj/ip/releases).
+1. Download the latest `Duke.jar` [here](https://github.com/garyljj/ip/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>Note how the app contains some sample data.<br>
-   ![Ui](./Ui.png)
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+Note: the example below contains some [sample data](#sample-data-sample).<br>
+![Ui](./Ui.png)
 
-1. Type the command in the command box and press Enter to execute it.<br>Some examples to start off:
+1. Type the command in the command box and press Enter to execute it.<br>
+Some examples to start off:
    * Typing `help` will list out all available commands.
    * Typing `sample` will fill Duke with some sample data.
 
@@ -25,8 +27,6 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
-<div markdown="block" class="alert alert-info">
 
 **Notes about the command format:**<br>
 
@@ -41,8 +41,6 @@
 
 * Items in curly bracket `{}`​ are mutually exclusive.<br>
   e.g. `search {KEYWORD | DATE}` can only be used as either `search KEYWORD` or `search DATE`.
-
-</div>
 
 ### Viewing help `help`
 
@@ -60,10 +58,10 @@ Current supports 3 types of tasks.
    * A todo task is simply a task with a description.
 1. `deadline`
    * A deadline task has a description and a due date.
-   * `DATE` must be in the valid format YYYY-MM-DD.
+   * `DATE` must be in the valid format `YYYY-MM-DD`.
 1. `event`
    * An event task has a description and a date.
-   * `DATE` must be in the valid format YYYY-MM-DD.
+   * `DATE` must be in the valid format `YYYY-MM-DD`.
 
 Examples:
 * `todo buy eggs`
@@ -88,7 +86,7 @@ There are 2 ways to delete tasks
 2. `clear`
    * Clears all tasks.
 
-A prompt for delete confirmation will be given after this command.
+A prompt for delete confirmation will be given.
 
 ### Completing tasks `done`
 
@@ -106,7 +104,7 @@ Set a task to high or low priorty
 * Newly added tasks are set to low priority by default.
 * High priority tasks appear as yellow in the listviewer.
 * High priority tasks will have an extra label "IMPT!"
-* High priority tasks will be pushed to top of tasklist upon `sort`.
+* High priority tasks will be pushed to top of tasklist upon [sort](#sorting-tasklist-sort).
 
 ### Exiting the program `bye`
 
@@ -156,7 +154,7 @@ Shows a list of tasks which matches the keyword or falls on the given date.
    * It is case-insensitive. eg. `book` will match `Book`.
    * It can match partially. eg. `return b` will match `Return Book`.
 2. Search by `DATE`
-   * `DATE` must be in the valid format YYYY-MM-DD.
+   * `DATE` must be in the valid format `YYYY-MM-DD`.
    * All deadline tasks due on the given `DATE` will be matched.
    * All event tasks happening on the given `DATE` will be matched.
 
@@ -166,14 +164,16 @@ Examples:
 
 ### Listviewer
 
-Displays list of all tasks on the left of the gui.
+Has a convenient list display on the left of the gui.
+* Contains all tasks and their index number.
+* High priority task are in yellow.
 
 ### Keyboard shortcuts
 
-1. `ESC` key<br>
-Clears input.
-1. `UP`, `DOWN` arrow keys<br>
-Scroll through input history.
+1. `ESC` key
+  * Clears input.
+1. `UP`, `DOWN` arrow keys
+  * Scroll through input history.
 
 --------------------------------------------------------------------------------------------------------------------
 
