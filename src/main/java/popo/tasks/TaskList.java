@@ -61,6 +61,16 @@ public class TaskList {
     }
 
     /**
+     * Checks if the specified task is completed.
+     *
+     * @param index Index of the task.
+     * @return True if the task if completed, otherwise false.
+     */
+    public boolean isTaskDone(int index) {
+        return taskList.get(index).isDone();
+    }
+
+    /**
      * Marks a task in the list of tasks as completed.
      *
      * @param index Index of the task to be marked as completed.

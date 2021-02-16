@@ -10,6 +10,7 @@ public class Messages {
     public static final String MESSAGE_FOUND_TASKS = "Here are the matching tasks in your list:";
     public static final String MESSAGE_NO_MATCHES = "Sorry, there are no matching tasks in your list";
 
+    public static final String MESSAGE_TASK_ALREADY_COMPLETED = "This task is already completed!";
     public static final String MESSAGE_INDEX_TASK_FORMAT = "%d.%s";
     public static final String MESSAGE_TASKLIST_SIZE_FORMAT = "Now you have %d tasks in your list.";
 

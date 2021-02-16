@@ -1,6 +1,7 @@
 package popo.commands;
 
 import static popo.utils.Messages.MESSAGE_DONE_TASK;
+import static popo.utils.Messages.MESSAGE_TASK_ALREADY_COMPLETED;
 
 /**
  * Completes a task.
@@ -26,6 +27,9 @@ public class DoneCommand extends Command {
     @Override
     public CommandResult execute() {
         assert taskList != null;
+        if (taskList.isTaskDone(index)) {
+            return new CommandResult(false, MESSAGE_TASK_ALREADY_COMPLETED);
+        }
         taskList.completeTask(index);
         return new CommandResult(taskList, false,
                 MESSAGE_DONE_TASK + "\n",
