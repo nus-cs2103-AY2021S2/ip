@@ -27,6 +27,10 @@ public class Duke {
         }
     }
 
+    public String getWelcome() {
+        return this.ui.introduction();
+    }
+
     /**
      * Method to get response to an input for GUI Duke Program.
      *
