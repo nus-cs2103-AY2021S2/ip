@@ -5,6 +5,7 @@ import java.util.List;
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
 import duke.exception.EmptyArgumentException;
+import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -43,7 +44,8 @@ public class TaskList {
      * @throws EmptyArgumentException At least one argument is missing
      * @throws BadDateArgumentException An argument that is expected to be a date is ill formatted
      */
-    public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
+    public String run(Command c)
+            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
         String[] args = c.getCommandParameters();
         String result;
         Action action = c.getType();
@@ -88,11 +90,18 @@ public class TaskList {
     public boolean isEdited() {
         return this.edited;
     }
-    private String addTask(String[] tokens) throws EmptyArgumentException, BadDateArgumentException {
-        Task t;
+    private String addTask(String[] tokens)
+            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
+        generateTask(tokens);
+        int lastIndex = store.size() - 1;
+        return formatOrderedPrint(lastIndex);
+    }
+    private void generateTask(String[] tokens)
+            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
         String type = tokens[0];
         String task = tokens[1];
         String additional = tokens.length >= 3 ? tokens[2] : null;
+        Task t;
         switch (type) {
         case "D":
             t = new Deadline(task, additional);
@@ -101,13 +110,13 @@ public class TaskList {
             t = new Event(task, additional);
             break;
         case "T":
-            //Fall through
-        default: //More fault tolerant
             t = new ToDos(task);
             break;
+        default:
+            //TODO: Add assert false here later when merging
+            throw new InvalidCommandException("of type " + type);
         }
         store.add(t);
-        return formatOrderedPrint(-1);
     }
     private String setDone(int doneIndex) {
         Task t = store.get(doneIndex);
@@ -145,13 +154,6 @@ public class TaskList {
         return builder.toString();
     }
     private String formatOrderedPrint(int i) {
-        final int size = store.size();
-        while (i < 0) {
-            i += size;
-        }
-        while (i >= size) {
-            i -= size;
-        }
         return "Entry " + (i + 1) + "|" + store.get(i).toString();
     }
 }

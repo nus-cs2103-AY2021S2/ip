@@ -79,7 +79,8 @@ public class Duke {
         }
         return ui.flushMessage();
     }
-    private void updateAndGenerateOutput(Command c) throws EmptyArgumentException, BadDateArgumentException {
+    private void updateAndGenerateOutput(Command c)
+            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
         String data = taskList.run(c);
         ui.printCommandMessage(c, data);
     }
