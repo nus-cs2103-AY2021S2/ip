@@ -18,8 +18,9 @@ Popo task manager is here to help you!
 2. Download the latest `popo.jar` [here](https://github.com/w2vgd/ip/releases).
 3. Copy the file to the folder you want to use as the home folder for Popo Task Manager.
 4. Double-click the jar file to start the app. The GUI similar to the below should appear in a few seconds. \
-   (You may also specify your own data source file. Learn how to do so [here](#FAQ).)
-   ![ui.png](Ui.png)
+   (You may also specify your own data source file. Learn how to do so [here](#faq).)
+   
+![ui.png](Ui.png)
 
 
 ## Types of Tasks
