@@ -1,9 +1,9 @@
-package Duke.Commands;
+package timmy.Commands;
 
-import Duke.Exceptions.DukeException;
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
+import timmy.Exceptions.DukeException;
+import timmy.Storage;
+import timmy.TaskList;
+import timmy.Ui;
 
 import java.io.IOException;
 

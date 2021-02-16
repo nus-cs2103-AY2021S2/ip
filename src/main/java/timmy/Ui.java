@@ -1,6 +1,6 @@
-package Duke;
+package timmy;
 
-import Duke.Tasks.Task;
+import timmy.Tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,7 +22,7 @@ public class Ui {
      * @return String that consists of -
      */
     public String showLine() {
-        return "------------------------------------------------";
+        return "----------------------------------------------";
     }
 
     /**

@@ -1,4 +1,4 @@
-package Duke.Commands;
+package timmy.Commands;
 
 /**
  * A command that represents exiting the program

@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package timmy.Tasks;
 
 /**
  * A subclass of Duke.Tasks.Task that has a description and overrides the toString() method of <code>Duke.Tasks.Task</code>

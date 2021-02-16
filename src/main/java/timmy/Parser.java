@@ -1,14 +1,14 @@
-package Duke;
+package timmy;
 
-import Duke.Commands.*;
-import Duke.Exceptions.DukeException;
-import Duke.Exceptions.EmptyDescriptionException;
-import Duke.Exceptions.InvalidCommandException;
-import Duke.Exceptions.InvalidDescriptionException;
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Priority;
-import Duke.Tasks.ToDo;
+import timmy.Commands.*;
+import timmy.Exceptions.DukeException;
+import timmy.Exceptions.EmptyDescriptionException;
+import timmy.Exceptions.InvalidCommandException;
+import timmy.Exceptions.InvalidDescriptionException;
+import timmy.Tasks.Deadline;
+import timmy.Tasks.Event;
+import timmy.Tasks.Priority;
+import timmy.Tasks.ToDo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

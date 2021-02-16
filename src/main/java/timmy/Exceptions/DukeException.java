@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package timmy.Exceptions;
 
 /**
  * A subclass of Exception for exceptions related to Duke.Duke

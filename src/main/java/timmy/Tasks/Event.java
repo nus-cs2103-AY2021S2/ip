@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package timmy.Tasks;
 
 /**
  * A subclass of <code>Duke.Tasks.Task</code>that has an extra variable to keep track of date and overrides toString() method of

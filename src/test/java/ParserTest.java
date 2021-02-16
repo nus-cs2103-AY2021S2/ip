@@ -1,6 +1,6 @@
-import Duke.Commands.*;
-import Duke.Exceptions.DukeException;
-import Duke.Parser;
+import timmy.Commands.*;
+import timmy.Exceptions.DukeException;
+import timmy.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

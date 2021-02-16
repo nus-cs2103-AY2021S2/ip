@@ -1,9 +1,9 @@
-import Duke.Exceptions.DukeException;
-import Duke.Exceptions.InvalidDescriptionException;
-import Duke.TaskList;
-import Duke.Tasks.Priority;
-import Duke.Tasks.Task;
-import Duke.Tasks.ToDo;
+import timmy.Exceptions.DukeException;
+import timmy.Exceptions.InvalidDescriptionException;
+import timmy.TaskList;
+import timmy.Tasks.Priority;
+import timmy.Tasks.Task;
+import timmy.Tasks.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

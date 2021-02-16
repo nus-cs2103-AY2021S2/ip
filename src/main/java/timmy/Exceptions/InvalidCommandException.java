@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package timmy.Exceptions;
 
 /**
  * A subclass of Duke.Duke exception for an invalid command given

@@ -1,4 +1,4 @@
-package Duke;
+package timmy;
 
 import javafx.application.Application;
 

@@ -1,6 +1,6 @@
-package Duke;
+package timmy;
 
-import Duke.Tasks.*;
+import timmy.Tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

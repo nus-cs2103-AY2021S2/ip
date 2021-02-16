@@ -12,9 +12,12 @@
             <Insets />
          </opaqueInsets>
          <padding>
-            <Insets right="10.0" />
+            <Insets left="5.0" right="10.0" />
          </padding></Label>
-        <ImageView fx:id="displayPicture" fitHeight="144.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets bottom="110.0" />
+         </HBox.margin></ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

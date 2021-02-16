@@ -1,7 +1,7 @@
-package Duke;
+package timmy;
 
-import Duke.Commands.Command;
-import Duke.Exceptions.DukeException;
+import timmy.Commands.Command;
+import timmy.Exceptions.DukeException;
 
 import java.io.IOException;
 

@@ -1,8 +1,8 @@
-package Duke;
+package timmy;
 
-import Duke.Exceptions.DukeException;
-import Duke.Exceptions.InvalidDescriptionException;
-import Duke.Tasks.Task;
+import timmy.Exceptions.DukeException;
+import timmy.Exceptions.InvalidDescriptionException;
+import timmy.Tasks.Task;
 
 import java.util.ArrayList;
 

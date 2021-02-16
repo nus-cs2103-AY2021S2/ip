@@ -21,12 +21,12 @@ run {
 
 jar {
     manifest {
-        attributes "Main-Class": "Duke"
+        attributes "Main-Class": "timmy"
     }
 }
 
 application {
-    mainClassName = 'Duke.Launcher'
+    mainClassName = 'timmy.Launcher'
 }
 
 dependencies {
