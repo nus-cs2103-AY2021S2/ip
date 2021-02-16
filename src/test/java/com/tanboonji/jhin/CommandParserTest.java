@@ -71,7 +71,7 @@ class CommandParserTest {
                 CommandParser.parseCommand(input);
                 fail();
             } catch (JhinException e) {
-                // Exception caught, pass test case.
+                // pass test case, no action required
             }
         }
     }
@@ -84,7 +84,7 @@ class CommandParserTest {
                 CommandParser.parseCommand(input);
                 fail();
             } catch (JhinException e) {
-                // Exception caught, pass test case.
+                // pass test case, no action required
             }
         }
     }
@@ -97,7 +97,7 @@ class CommandParserTest {
                 CommandParser.parseCommand(input);
                 fail();
             } catch (JhinException e) {
-                // Exception caught, pass test case.
+                // pass test case, no action required
             }
         }
     }
@@ -110,7 +110,7 @@ class CommandParserTest {
                 CommandParser.parseCommand(input);
                 fail();
             } catch (JhinException e) {
-                // Exception caught, pass test case.
+                // pass test case, no action required
             }
         }
     }
