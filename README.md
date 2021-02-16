@@ -8,6 +8,6 @@ More info in the User Guide [here](https://garyljj.github.io/ip/)
 
 ## Acknowledgements
 
-* Libraries used: https://openjfx.io/[JavaFX], https://github.com/junit-team/junit5[JUnit5]
-* Profile images: Icon made by https://www.freepik.com[Freepik] from https://www.flaticon.com/[www.flaticon.com]
-* Background image: Background vector created by renata.s - https://www.freepik.com[www.freepik.com]
+* Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
+* Profile images: Icon made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com/)
+* Background image: Background vector created by renata.s - [www.freepik.com](https://www.freepik.com)

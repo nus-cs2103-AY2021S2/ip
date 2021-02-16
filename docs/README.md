@@ -1,8 +1,3 @@
----
-layout: page
-title: Duke User Guide
----
-
 Duke is a task manager.
 
 * Table of Contents
