@@ -40,10 +40,16 @@ public class Duke {
             String[] arr = cmd.split(" ", 2);
             switch (arr[0]) {
             case "done":
-                int index = Integer.parseInt(arr[1]) - 1;
-                Task task = tasks.get(index);
+                int doneIndex = Integer.parseInt(arr[1]) - 1;
+                Task task = tasks.get(doneIndex);
                 task.markAsDone();
                 displayMarkTaskAsDoneMsg(task);
+                break;
+            case "delete":
+                int deleteIndex = Integer.parseInt(arr[1]) - 1;
+                Task toDelete = tasks.get(deleteIndex);
+                deleteTask(tasks, deleteIndex);
+                displayDeleteTaskMsg(tasks.size(), toDelete);
                 break;
             case "todo":
                 // Fallthrough
@@ -128,6 +134,18 @@ public class Duke {
     public static void displayMarkTaskAsDoneMsg(Task task) {
         System.out.println(SEPARATOR);
         System.out.println(INDENTATION + "Nice! I've marked this task as done:\n"+ INDENTATION + "    " + task);
+        System.out.println(SEPARATOR);
+    }
+
+    public static void deleteTask(ArrayList<Task> tasks, int index) {
+        tasks.remove(index);
+    }
+
+    public static void displayDeleteTaskMsg(int size, Task task) {
+        System.out.println(SEPARATOR);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("    " + task);
+        System.out.println(INDENTATION + "Now you have " + size + " task" + (size > 1 ? "s" : "") + " in the list.");
         System.out.println(SEPARATOR);
     }
 }
