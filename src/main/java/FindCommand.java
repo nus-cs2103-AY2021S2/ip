@@ -12,12 +12,12 @@ public class FindCommand extends Command {
      * matched with the given criteria.
      *
      * @return A string representation of one or more tasks that matches the user's requirements.
-     * @throws InsufficientArgumentsException If no arguments are provided.
+     * @throws DukeException If no arguments are provided.
      */
     @Override
-    public String execute() throws InsufficientArgumentsException {
+    public String execute() throws DukeException {
         if (parts.length == 1) {
-            throw new InsufficientArgumentsException("Insufficient arguments provided");
+            throw new DukeException("Insufficient arguments provided");
         }
         StringBuilder keyString = new StringBuilder();
         StringBuilder findStringBuilder = new StringBuilder();

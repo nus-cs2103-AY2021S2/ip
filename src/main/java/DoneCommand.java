@@ -11,15 +11,26 @@ public class DoneCommand extends Command {
      * Returns a string representation of the Task after it is marked a task as done.
      *
      * @return A string representation of the Task that is marked as done.
-     * @exception InsufficientArgumentsException If no arguments are provided.
+     * @exception DukeException If no arguments are provided.
      */
     @Override
-    public String execute() throws InsufficientArgumentsException {
-        if (parts.length == 1) {
-            throw new InsufficientArgumentsException("Insufficient arguments provided");
+    public String execute() throws DukeException {
+        if (parts.length == 1) { //no parameter provided
+            throw new DukeException("Insufficient Arguments Provided");
+        }
+
+        if (parts.length > 2) { //too many parameters provided
+            throw new DukeException("Too many arguments provided");
+        }
+
+        if (!Parser.isNumber(parts[1])) { //if parameter is not a number
+            throw new DukeException("Parameter must be an argument");
         }
         int index = Integer.parseInt(parts[1]);
-        assert index >= 1 : "Value must be at least 1";
+        if (index > tasks.getSize() - 1 || index < 0) {
+            throw new DukeException("Task does not exist");
+        }
+//        assert index >= 1 : "Value must be at least 1";
         Task toMark = TaskList.getTasklist().get(index - 1);
         toMark.markAsDone();
         TaskList.getTasklist().get(index - 1).markAsDone();

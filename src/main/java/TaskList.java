@@ -54,6 +54,15 @@ public class TaskList {
     /**
      * Find out the number of items in the data structure.
      *
+     * @return an int of the number of tasks in the ArrayList.
+     */
+    public int getSize() {
+        return overallArray.size();
+    }
+
+    /**
+     * Find out the number of items in the data structure.
+     *
      * @return a String of the number of task objects in the ArrayList.
      */
     public String getSizeString() {

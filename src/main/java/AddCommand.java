@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Handles commands that adds Tasks to the list
@@ -24,25 +25,31 @@ public class AddCommand extends Command {
      * Returns a string representation of the Task after it has been added to the list.
      *
      * @return A string representation of the Task added to the list.
-     * @throws InsufficientArgumentsException If no arguments are provided.
+     * @throws DukeException If no arguments are provided.
      */
     @Override
-    public String execute() throws InsufficientArgumentsException {
-        if (parts.length == 1) {
-            throw new InsufficientArgumentsException("Insufficient arguments provided");
-        }
-        if (input.equals("todo")) {
-            return new TodoCommand(input, parts, tasks).getString();
-        } else {
-            int slashIndex = getSlashIndex();
-            String taskString = getTaskString(slashIndex);
-            String dateString = getDateString(slashIndex);
-            LocalDate date = LocalDate.parse(dateString);
-            if (input.equals("deadline")) {
-                return new DeadlineCommand(taskString, date, tasks).getString();
-            } else {
-                return new EventCommand(taskString, date, tasks).getString();
+    public String execute() throws DukeException {
+        try {
+            if (parts.length == 1) {
+                throw new DukeException("Insufficient arguments provided");
             }
+            if (input.equals("todo")) {
+                return new TodoCommand(input, parts, tasks).getString();
+            } else {
+                int slashIndex = getSlashIndex();
+                String taskString = getTaskString(slashIndex);
+                String dateString = getDateString(slashIndex);
+                LocalDate date = LocalDate.parse(dateString);
+                if (input.equals("deadline")) {
+                    return new DeadlineCommand(taskString, date, tasks).getString();
+                } else {
+                    return new EventCommand(taskString, date, tasks).getString();
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Input is not in the right format");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date is not in the right format");
         }
     }
 

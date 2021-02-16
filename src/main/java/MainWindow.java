@@ -47,8 +47,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InsufficientArgumentsException, FileNotFoundException,
-            IllegalKeywordException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String[] parts = input.split(" ");
         String keyword = parts[0];

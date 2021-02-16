@@ -46,4 +46,19 @@ public class Parser {
     public String parseDateTimeEvent(String str) {
         return str.substring(str.indexOf("at: ") + 4, str.indexOf(")"));
     }
+
+    /**
+     * Checks whether a string is a number in String type.
+     *
+     * @param str The string to be checked.
+     * @return True if the string is a number in String type, false otherwise.
+     */
+    public static boolean isNumber(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
 }
