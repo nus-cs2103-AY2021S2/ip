@@ -4,7 +4,7 @@ Duke, a Personal Assistant Chatbot that helps a person to keep track of various 
 1. Download the latest Duke.jar from here.
 1. Copy the file to the folder you want to use as the home folder for your Duke App.
 1. Double-click the file to start the app.<br>
-![Duke GUI](docs/UI.png)
+![Duke GUI](docs/Ui.png)
 1. Type the command in the command box and press Enter to execute it.
 Some example commands you can try:
 1. Refer to the [Features Page](https://github.com/glatiuden/ip/tree/master/docs#features) for details of each command.
