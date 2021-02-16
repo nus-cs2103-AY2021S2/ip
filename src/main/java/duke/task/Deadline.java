@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline task.
  */
 public class Deadline extends Task {
+
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     protected LocalDateTime by;
 
     /**
@@ -38,6 +41,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(),
-                this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")));
+                this.by.format(Deadline.DATETIME_FORMATTER));
     }
 }

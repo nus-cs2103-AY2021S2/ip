@@ -20,14 +20,15 @@ public class Ui {
             + NEWLINE + "So... Is there anything I can do for you today?";
     private static final String USAGE = "These are the commands available:"
             + NEWLINE + TAB + "- usage"
+            + NEWLINE + TAB + "- bye"
             + NEWLINE + TAB + "- list"
+            + NEWLINE + TAB + "- find <keyword>"
+            + NEWLINE + TAB + "- save"
             + NEWLINE + TAB + "- todo <task_description>"
             + NEWLINE + TAB + "- deadline <task_description> /by <date_time>"
             + NEWLINE + TAB + "- event <task_description> /at <date_time>"
-            + NEWLINE + TAB + "- done <task_number>"
             + NEWLINE + TAB + "- delete <task_number>"
-            + NEWLINE + TAB + "- save"
-            + NEWLINE + TAB + "- bye";
+            + NEWLINE + TAB + "- done <task_number>";
     private static final String NO_TASKS = "There isn't any task found in the list.";
     private static final String LOAD_ERROR = "Unable to load file.";
     private static final String ERROR_HEAD = "Oh no... ";

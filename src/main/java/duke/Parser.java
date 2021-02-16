@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     private static final String INVALID_COMMAND = "I'm not trained with these commands yet...";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private static final Pattern COMMAND_TYPE_PATTERN = Pattern.compile("usage|bye|list|find|save|todo|deadline|event|delete|done");
     private static final Pattern USAGE_PATTERN = Pattern.compile("usage");
@@ -99,7 +99,7 @@ public class Parser {
         }
 
         String desc = m.group(1);
-        LocalDateTime dateTime = LocalDateTime.parse(m.group(2), Parser.FORMATTER);
+        LocalDateTime dateTime = LocalDateTime.parse(m.group(2), Parser.DATETIME_FORMATTER);
         return new AddDeadlineCommand(desc, dateTime);
     }
 
@@ -110,7 +110,7 @@ public class Parser {
         }
 
         String desc = m.group(1);
-        LocalDateTime dateTime = LocalDateTime.parse(m.group(2), Parser.FORMATTER);
+        LocalDateTime dateTime = LocalDateTime.parse(m.group(2), Parser.DATETIME_FORMATTER);
         return new AddEventCommand(desc, dateTime);
     }
 
