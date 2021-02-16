@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import com.tanboonji.jhin.exception.JhinException;
 import com.tanboonji.jhin.parser.DateParser;
 
 class DateParserTest {
@@ -14,7 +15,10 @@ class DateParserTest {
     void parseDateTime_validDateTime_success() {
         String[] inputs = {"01/01/2021", " 01/01/2021  0000", "01/01/2021  0000 ",
             "01.01.2021", " 01.01.2021  0000", "01.01.2021  0000 ",
-            "01-01-2021", " 01-01-2021  0000", "01-01-2021  0000 "};
+            "01-01-2021", " 01-01-2021  0000", "01-01-2021  0000 ",
+            "01012021", "01012021  0000", "01012021  0000 ",
+            "01012021 00", "01/01/2021 00", "01-01-2021 00", "01.01.2021 00",
+            "010121", " 010121 00", " 010121  0000 "};
         for (String input: inputs) {
             try {
                 DateParser.parseDateTime(input);
@@ -35,7 +39,7 @@ class DateParserTest {
     }
 
     @Test
-    void parseDateTime_invalidDateTime_exceptionThrown() {
+    void parseDateTime_invalidDateTime_jhinExceptionThrown() {
         String[] inputs = {"01/13/2021", " 01/01/  0000", "/01/2021  0000 ",
             "01..2021", " 01.01.2021  -0000", "01.01.2021  2500 ",
             "01-01-20211", " 101-01-2021  0000", "01-101-2021  0000 "};
@@ -43,7 +47,7 @@ class DateParserTest {
             try {
                 DateParser.parseDateTime(input);
                 fail();
-            } catch (Exception e) {
+            } catch (JhinException e) {
                 // pass test case, no action required
             }
         }
