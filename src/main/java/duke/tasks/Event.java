@@ -30,8 +30,9 @@ public class Event extends Task {
             return true;
         } else if (obj instanceof Event) {
             Event eTask = (Event) obj;
-            return this.description.equals(eTask.getDescription())
-                    && this.at.equals(eTask.getAt());
+            boolean isSameDes = description.equals(eTask.getDescription());
+            boolean isSameAt = at.equals(eTask.getAt());
+            return isSameDes && isSameAt;
         } else {
             return false;
         }

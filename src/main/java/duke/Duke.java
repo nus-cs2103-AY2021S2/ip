@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 import duke.exceptions.DukeException;
@@ -36,36 +35,6 @@ public class Duke {
     }
 
     /**
-     * Main method of Duke program.
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
-        new Duke(STORAGE_PATH).run();
-    }
-
-    /**
-     * Runs the main logic of Duke program.
-     */
-    public void run() {
-        ui.displayIntro();
-        while (isExit == false) {
-            try {
-                CommandHandler commandHandler = Parser.parseFromInput(ui.readCommand());
-                checkDeleteDonePossible(commandHandler, tasks);
-                commandHandler.execute(ui, storage, tasks);
-                if (commandHandler instanceof ByeHandler) {
-                    isExit = true;
-                }
-            } catch (DukeException e) {
-                String output = e.getMessage();
-                ui.respond(output);
-            }
-        }
-        ui.close();
-    }
-
-    /**
      * Returns the response given an input.
      * @param input The user input.
      * @return The respective response.
@@ -75,7 +44,7 @@ public class Duke {
         try {
             CommandHandler commandHandler = Parser.parseFromInput(input);
             checkDeleteDonePossible(commandHandler, tasks);
-            String output = commandHandler.execute(ui, storage, tasks, toString);
+            String output = commandHandler.execute(ui, storage, tasks);
             if (commandHandler instanceof ByeHandler) {
                 isExit = true;
             }

@@ -33,8 +33,9 @@ public class Deadline extends Task {
             return true;
         } else if (obj instanceof Deadline) {
             Deadline dTask = (Deadline) obj;
-            return this.description.equals(dTask.getDescription())
-                    && this.by.equals(((Deadline) dTask).getBy());
+            boolean isSameDes = description.equals(dTask.getDescription());
+            boolean isSameBy = by.equals(dTask.getBy());
+            return isSameDes && isSameBy;
         } else {
             return false;
         }

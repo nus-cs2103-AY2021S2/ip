@@ -19,7 +19,8 @@ public class Todo extends Task {
         if (this == obj) {
             return true;
         } else if (obj instanceof Todo) {
-            return this.description.equals(((Todo) obj).getDescription());
+            boolean isSameTodo = description.equals(((Todo) obj).getDescription());
+            return isSameTodo;
         } else {
             return false;
         }
