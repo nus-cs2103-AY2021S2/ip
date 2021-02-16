@@ -39,10 +39,12 @@ public class Ui {
      * @param   taskDescription the description of the task marked as done
      * @return      the message with the description of the task marked as done
      */
-    public String getMarkTaskAsDoneMessage(String taskDescription) {
+    public String getMarkTaskAsDoneMessage(String taskDescription, int numberOfCompletedTaskLastWeek) {
         String headerText = "\tNice! I've marked this task as done:\n";
         String taskMarkedText = String.format("\t%s\n", taskDescription);
-        return headerText + taskMarkedText;
+        String completedTasksText = String.format("\tWell done! You have completed %d task(s) last week.\n", 
+                numberOfCompletedTaskLastWeek);
+        return headerText + taskMarkedText + completedTasksText;
     }
 
     /**

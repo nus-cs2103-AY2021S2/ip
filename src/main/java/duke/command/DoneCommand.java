@@ -20,7 +20,7 @@ public class DoneCommand implements Command {
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         if (0 <= index && index < tasks.size()) {
             tasks.markAsDone(index);
-            return ui.getMarkTaskAsDoneMessage(tasks.getTaskDescription(index));
+            return ui.getMarkTaskAsDoneMessage(tasks.getTaskDescription(index), tasks.getCompletedTasksCountLastWeek());
         } else {
             return ui.getIndexOutOfBoundMessage();
         }

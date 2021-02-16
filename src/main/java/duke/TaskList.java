@@ -13,6 +13,7 @@ import duke.task.Task;
  */
 public class TaskList {
     private final List<Task> tasks;
+    private final Statistics stats;
 
     /**
      * Constructor for class TaskList supplied with some Task instances.
@@ -22,6 +23,7 @@ public class TaskList {
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>();
         this.tasks.addAll(tasks);
+        this.stats = new Statistics();
     }
 
     /**
@@ -29,6 +31,7 @@ public class TaskList {
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.stats = new Statistics();
     }
 
     /**
@@ -57,7 +60,17 @@ public class TaskList {
      * @see duke.task.Task#markAsDone()
      */
     public void markAsDone(int index) {
-        tasks.get(index).markAsDone();
+        boolean wasNotAlreadyDone = tasks.get(index).markAsDone();
+        if (wasNotAlreadyDone) {
+            stats.addCompletionDatetime();
+        }
+    }
+
+    /**
+     * Returns the total number of completed tasks in the past week.
+     */
+    public int getCompletedTasksCountLastWeek() {
+        return stats.getCompletedTasksCountLastWeek();
     }
 
     /**
