@@ -12,7 +12,7 @@ public class Ui {
      * @return String greeting message.
      */
     public String getGreeting() {
-        String str = "Hello my name is Mr. C!" +
+        String str = "Hello I am LukBot!" +
                 "\nYou may type the command 'help' to see my list of commands." +
                 "\nHow may I assist you?";
         return str;
