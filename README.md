@@ -1,8 +1,7 @@
 # User Guide
 Here is the user manual! Have fun!
 
-![Image of app]
-(https://raw.githubusercontent.com/rachelljt/ip/master/docs/Ui.png)
+![Image of Ui](https://raw.githubusercontent.com/rachelljt/ip/master/docs/Ui.png)
 
 ## Features
 Commands | Usage
