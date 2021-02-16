@@ -60,6 +60,10 @@ public class Duke {
             String findString = new FindCommand(input, parts, tasks).execute();
             storage.save();
             return findString;
+        case "bye":
+            String byeString = new ByeCommand().execute();
+            storage.save();
+            return byeString;
         default:
             throw new IllegalKeywordException("Unable to match any command");
         }

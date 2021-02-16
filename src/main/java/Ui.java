@@ -85,4 +85,8 @@ public class Ui {
     public static String showDeleteText() {
         return "Here, I've deleted this task from the list: \n";
     }
+
+    public static String showGoodbyeText() {
+        return "See you next time!";
+    }
 }

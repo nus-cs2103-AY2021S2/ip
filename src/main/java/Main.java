@@ -1,10 +1,13 @@
 import java.io.IOException;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * A GUI for Duke using FXML.
@@ -12,6 +15,17 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private Duke duke = new Duke("duke.txt");
+
+    /**
+     * Pauses for 2 seconds then exits the program if no other threads are running.
+     */
+    public static void exit() {
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> {
+            Platform.exit();
+        });
+        pause.play();
+    }
 
     @Override
     public void start(Stage stage) {

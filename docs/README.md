@@ -134,7 +134,7 @@ the deleted task will no longer appear.
 
 
 
-### `find` - Search for a task
+### `find` - Searches for a task
 
 
 Searches the list for tasks that match with the keyword
@@ -147,6 +147,11 @@ Example of usage:
 Expected outcome:
 
 ![find](./screenshots/find.PNG)
+
+### `bye` - Exits the program
+Exits the program after a short delay, in which tasks are saved. 
+
+![find](./screenshots/bye.PNG)
 
 ## Command Summary
 
