@@ -21,6 +21,7 @@ Expected outcome:
 `[T][X][H] run`
 `Currently, you have 1 task(s) in the list!`
 
+
 ### Feature `event` 
 Add a event task to your list
 
@@ -35,6 +36,7 @@ Expected outcome:
 `Ok! I've added this task:`
 `[E][X][M] walk (at: Mar 12 2021 12:12 PM)`
 `Currently, you have 1 task(s) in the list!`
+
 
 ### Feature `deadline` 
 Add a deadline task to your list
@@ -51,6 +53,7 @@ Expected outcome:
 `[D][X][L] walk (by: Mar 12 2021 12:12 PM)`
 `Currently, you have 1 task(s) in the list!`
 
+
 ### Feature `list` 
 Views the list of tasks.
 
@@ -64,6 +67,7 @@ Expected outcome:
 
 `Here are the tasks in your list:`
 `1.[D][X][L] walk (by: Mar 12 2021 12:12 PM)`
+
 
 ### Feature `delete` 
 Deletes a task from your task list.
@@ -80,6 +84,7 @@ Expected outcome:
 `[E][X][M] walk (by: Mar 12 2021 12:12 PM)`
 `Currently, you have 0 task(s) in the list!`
 
+
 ### Feature `done` 
 Marks a task as done in your task list.
 
@@ -93,6 +98,7 @@ Expected outcome:
 
 `Nice! I've marked this task as done:`
 `[E][O][M] walk (by: Mar 12 2021 12:12 PM)`
+
 
 ### Feature `find` 
 finds tasks in your tasklist with the relevant keyword.
@@ -108,6 +114,7 @@ Expected outcome:
 `Here are the tasks in your list:`
 `1.[E][O][M] walk (by: Mar 12 2021 12:12 PM)`
 
+
 ##Command Summary
 Action | Format
 -------|-------
@@ -119,8 +126,8 @@ Delete task | delete <index>
 Mark task as done | done <index>
 Find task using keyword | find <keyword
 
-<priority> - takes in H, M or L characters
-<keyword>/<name> - takes in String
-<index> - takes in Integer
-<hh:mm> - takes in time in 24 hours (e.g 23:30)
-<yyyy-mm-dd> - takes in date (e.g 2021-12-12)
+priority - takes in H, M or L characters
+keyword/name - takes in String
+index - takes in Integer
+hh:mm - takes in time in 24 hours (e.g 23:30)
+yyyy-mm-dd - takes in date (e.g 2021-12-12)
