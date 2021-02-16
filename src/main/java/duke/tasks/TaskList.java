@@ -143,6 +143,6 @@ public class TaskList {
     public String getLeftPadding(int index) {
         int totalNumDigits = (int) Math.floor(Math.log10(tasks.size())) + 1;
         int currNumDigits = (int) Math.floor(Math.log10(index)) + 1;
-        return new String(new char[totalNumDigits - currNumDigits]).replace('\0',' ');
+        return new String(new char[totalNumDigits - currNumDigits]).replace('\0', ' ');
     }
 }
