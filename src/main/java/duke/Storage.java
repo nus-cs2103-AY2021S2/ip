@@ -88,7 +88,6 @@ public class Storage {
             FileWriter writer = new FileWriter(expectedDir + "/modoc_tm.txt");
 
             ArrayList<Task> listTask = tasks.getTasks();
-
             for (Task task : listTask) {
                 String result;
 

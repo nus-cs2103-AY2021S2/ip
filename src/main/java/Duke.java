@@ -47,7 +47,6 @@ public class Duke {
         Parser parser = new Parser();
         String trimmedInput = input.trim();
         String command = parser.getCommand(trimmedInput);
-
         switch (command) {
         case "bye":
             storage.save(taskList);
@@ -67,7 +66,7 @@ public class Duke {
                 return e.printError("Please check the index!");
             }
 
-        case"todo":
+        case "todo":
             try {
                 String name = getTodoName(input);
                 Todo todo = new Todo(name);
@@ -163,7 +162,6 @@ public class Duke {
      */
     public static String getDeadlineAttribute(String byDate) throws DukeException {
         try {
-            //String atBy = byDate.split("/")[1].split(" ",2)[1].trim();
             return byDate.split("/by ")[1];
         } catch (Exception e) {
             throw new DukeException();
