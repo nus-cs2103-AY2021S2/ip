@@ -17,7 +17,9 @@ public class DeadlineHandler implements CommandHandler {
     }
 
     public Deadline getDeadlineTask() {
-        return toAdd;
+        assert toAdd instanceof Deadline;
+        Deadline deadlineTask = (Deadline) toAdd;
+        return deadlineTask;
     }
 
     @Override

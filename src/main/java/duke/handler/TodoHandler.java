@@ -14,7 +14,9 @@ public class TodoHandler implements CommandHandler {
     }
 
     public Todo getTodoTask() {
-        return toAdd;
+        assert toAdd instanceof Todo;
+        Todo todoTask = (Todo) toAdd;
+        return todoTask;
     }
 
     @Override

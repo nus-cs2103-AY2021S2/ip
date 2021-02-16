@@ -17,7 +17,9 @@ public class EventHandler implements CommandHandler {
     }
 
     public Event getEventTask() {
-        return toAdd;
+        assert toAdd instanceof Event;
+        Event eventTask = (Event) toAdd;
+        return eventTask;
     }
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList) {
