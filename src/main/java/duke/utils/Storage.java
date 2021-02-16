@@ -62,10 +62,15 @@ public class Storage {
      * @throws IOException if unable to write to file completely.
      */
     public void writeToFile(TaskList taskList) throws IOException {
-        String stringToWrite = TaskStringConverter.stringTasksForFile(taskList.getList());
+        if (!taskList.getList().isEmpty()) {
+            String stringToWrite = TaskStringConverter.stringTasksForFile(taskList.getList());
 
-        FileWriter fileWriter = new FileWriter(filepath);
-        fileWriter.write(stringToWrite);
-        fileWriter.close();
+            File file = new File(filepath);
+            file.getParentFile().mkdirs();
+
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(stringToWrite);
+            fileWriter.close();
+        }
     }
 }
