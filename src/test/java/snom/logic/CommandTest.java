@@ -2,6 +2,8 @@ package snom.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Test;
 
 import snom.common.exceptions.SnomException;
@@ -12,8 +14,6 @@ import snom.logic.commands.FinishCommand;
 import snom.model.task.TaskList;
 import snom.storage.StorageManager;
 import snom.ui.Snomio;
-
-import java.nio.file.Paths;
 
 public class CommandTest {
     private TaskList taskList = new TaskList();

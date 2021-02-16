@@ -1,5 +1,7 @@
 package snom.model;
 
+import java.nio.file.Path;
+
 import snom.common.exceptions.SnomException;
 import snom.logic.Parser;
 import snom.logic.commands.Command;
@@ -7,8 +9,6 @@ import snom.logic.commands.CommandResponse;
 import snom.model.task.TaskList;
 import snom.storage.StorageManager;
 import snom.ui.Snomio;
-
-import java.nio.file.Path;
 
 /**
  * Snom is a Personal Assistant Chatbot that helps

@@ -2,14 +2,14 @@ package snom;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Test;
 
 import snom.common.exceptions.SnomException;
 import snom.logic.commands.CommandEnum;
 import snom.model.task.TaskList;
 import snom.storage.StorageManager;
-
-import java.nio.file.Paths;
 
 public class SnomTest {
     @Test

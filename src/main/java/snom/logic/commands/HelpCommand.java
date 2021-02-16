@@ -1,12 +1,12 @@
 package snom.logic.commands;
 
+import java.nio.file.Paths;
+
 import snom.common.exceptions.SnomException;
 import snom.model.task.TaskList;
 import snom.storage.FileManager;
 import snom.storage.StorageManager;
 import snom.ui.Snomio;
-
-import java.nio.file.Paths;
 
 /**
  * Displays help page.
