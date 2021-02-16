@@ -23,9 +23,7 @@ public class Duke {
             try {
                 handleInput(tasks, cmd);
             } catch (InvalidCommandException e) {
-                System.out.println(SEPARATOR);
-                System.out.println("I'm sorry, but I don't know what that means :(");
-                System.out.println(SEPARATOR);
+                System.out.println(e);
             }
             cmd = sc.nextLine();
         }
@@ -60,9 +58,7 @@ public class Duke {
                     addTask(tasks, cmd);
                     displayAddTaskMsg(tasks);
                 } catch (EmptyDescriptionException e) {
-                    System.out.println(SEPARATOR);
-                    System.out.println("The description of a task cannot be empty.");
-                    System.out.println(SEPARATOR);
+                    System.out.println(e);
                 }
                 break;
             default:
