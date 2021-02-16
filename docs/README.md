@@ -2,111 +2,99 @@
 
 Welcome to Duke Application. This program acts as a companion to remind you of the upcoming tasks that you have. It uses a command line interface which you can operate it by typing commands into the Command Box.
 
-## Command Features 
+## Feature Page (Highlight this segment to link features to their corresponding functions.
 
-### list
+### [Create a ToDo task](#create-a-todo-task)
 
-### todo
+### [Create a Deadline task](#create-a-deadline-task)
 
-### deadline
+### [Create an Event task](#create-an-event-task)
 
-### event
+### [List all tasks](#list-all-tasks)
 
-### delete
+### [Delete a task](#delete-a-task)
 
-### done
+### [Mark a task as done](#mark-a-task-as-done)
 
-### find
+### [Find keywords](#find-keywords)
 
-### sort
+### [Sort tasks by DateTime](#sort-tasks-by-datetime)
 
 ## Command Usage
 
-### `list` - Lists down all the upcoming tasks that you have.
+### Create a ToDo task
+* Description: Adds a Todo task followed by its description. 
+* Notes: Its description cannot be left empty.
+* Command: `todo`
+* Command Format: `todo <Description>`
+* Command Example: `todo Read books`
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/create_todo_task.PNG">
+</p>
 
-Example of usage: 
+### Create a Deadline task
+* Description: Adds a Deadline task followed by its description.
+* Notes: Its description cannot be left empty. /by <DateTime> format has to be adhered for command to work.
+* Command: `deadline`
+* Command Format: `deadline <Description> /by <DateTime format in YYYY-MM-DD HH:MM>`
+* Command Example: `deadline Submit work /by 2021-02-28 10:00`
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/create_deadline_task.PNG">
+</p>
+  
+### Create an Event task
+* Description: Adds an Event task followed by its description and date time.
+* Notes: Its description cannot be left empty. /at <DateTime> format has to be adhered for command to work.
+* Command: `event`
+* Command Format: `event <Description> /at <DateTime format in YYYY-MM-DD HH:MM>`
+* Command Example: `event Summer festival /at 2021-02-27 17:00`
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/create_event_task.PNG">
+</p>
 
-`list`
+### List all tasks
+* Description: Lists down all the upcoming tasks that you have.
+* Command: `list`
+* Command Format: `list`
+* Command Example: `list`
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/list_task.PNG">
+</p>
 
-Expected outcome:
+### Delete task
+* Description: Deletes the task item at the respective index.
+* Note: Index has to be within the number of tasks in order for it to function.
+* Command: `delete`
+* Command Format: `delete <index>`
+* Command Example: `delete 1`
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/delete_task.PNG">
+</p>
 
-`Attached List screenshot`
+### Mark a task as done
+* Description: Marks task as completed at the respective index.
+* Note: Index has to be within the number of tasks in order for it to function.
+* Command: `done`
+* Command Format: `done <index>`
+* Command Example: `done 2`
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/mark_task_done.PNG">
+</p>
 
-### `todo` - Adds a Todo task followed by its description.
-Its description cannot be left empty.
+### Find keywords
+* Description: Searches for any tasks that contains the defined text.
+* Command: `find`
+* Command Format: `find <text>`
+* Command Example: `find festival`
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/find_task.PNG">
+</p>
 
-Example of usage: 
-
-`todo {Description}`
-
-Expected outcome:
-
-`Attached toDo screenshot`
-
-### `deadline` - Adds a Deadline task followed by its description.
-Its description cannot be left empty. /by <DateTime> format has to be adhered for command to work.
-
-Example of usage: 
-
-`deadline {Description} /by {DateTime format in YYYY-MM-DD HH:MM}`
-
-Expected outcome:
-
-`Attached deadline screenshot`
-
-### `event` - Adds an Event task followed by its description and date time. 
-Its description cannot be left empty. /at <DateTime> format has to be adhered for command to work.
-
-Example of usage: 
-
-`event {Description} /at {DateTime format in YYYY-MM-DD HH:MM}`
-
-Expected outcome:
-
-`Attached event screenshot`
-
-### `delete` - Deletes the task item at the respective index. 
-Index has to be within the number of tasks in order for it to function.
-
-Example of usage: 
-
-`delete {index}`
-
-Expected outcome:
-
-`Attached delete screenshot`
-
-### `done` - Marks task as completed at the respective index. 
-Index has to be within the number of tasks in order for it to function.
-
-Example of usage: 
-
-`done {index}`
-
-Expected outcome:
-
-`Attached done screenshot`
-
-### `find` - Searches for any tasks that contains the defined text.
-Index has to be within the number of tasks in order for it to function.
-
-Example of usage: 
-
-`find {text}`
-
-Expected outcome:
-
-`Attached find screenshot`
-
-### `sort` - Sorts tasks according to the earliest task that is due at the top.
-
-Example of usage: 
-
-`sort`
-
-Expected outcome:
-
-`Attached sort screenshot`
-
-
-
+### Sort tasks by DateTime
+* Description: Sorts tasks according to the earliest task that is due at the top.
+* Command: `sort`
+* Command Format: `sort`
+* Command Example: `sort`
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/sort_task.PNG">
+</p>
