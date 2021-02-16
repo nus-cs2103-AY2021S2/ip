@@ -1,3 +1,10 @@
+/**
+ * This TaskList class handles the logic of adding and deleting tasks of Duke
+ * @param file Task file to remember the tasks
+ * @author WangYihe
+ * @author E0424695
+ */
+
 package duke.task;
 
 public class Deadline extends Task {
@@ -19,6 +26,9 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    /**
+     * Change to saved format
+     */
     @Override
     public String savedFormat() {
         String savedInfo;

@@ -1,26 +1,25 @@
 /**
  * This TaskList class handles the logic of adding and deleting tasks of Duke
- * 
+ *
  * @param task Task arraylist to hold the current input tasks
- * 
+ *
  * @author WangYihe
  * @author E0424695
  */
 
 package duke.task;
 
-import duke.ui.Ui;
 import duke.exception.DukeException;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 //to handle date and time
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TaskList {
     public final List<Task> task;
@@ -29,18 +28,32 @@ public class TaskList {
         task = new ArrayList<>();
     }
 
+    /**
+     * return task list size, ie, no. of tasks in the list
+     */
     public int getSize() {
+        assert task.size() >= 0;
         return task.size();
     }
 
+    /**
+     * add task to the list
+     */
     public void add(Task t) {
         task.add(t);
     }
 
+    /**
+     * get the number i task
+     */
     public Task get(int i) {
+        assert i >= 0 : "Getter error, pointer less than 0";
         return task.get(i);
     }
 
+    /**
+     * check whether is date format
+     */
     public boolean isDateFormat(String date, String pattern) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         dateFormat.setLenient(false);
@@ -56,45 +69,51 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * parser for add tasks
+     */
     public String add(String[] userInput, Ui ui) throws DukeException {
         String reportString = " ";
         switch (userInput[0]) {
-            case "todo":
-                duke.task.Todo t = new Todo(userInput[1]);
-                task.add(t);
-                reportString = ui.reportTask(t, this);
-                break;
+        case "todo":
+            duke.task.Todo t = new Todo(userInput[1]);
+            task.add(t);
+            reportString = ui.reportTask(t, this);
+            break;
 
-            case "deadline":
-                String[] deadlineArr = userInput[1].split(" /by ", 2);
-                if (deadlineArr.length != 2) {
-                    throw new DukeException("Missing component: due date");
-                }
-                String time = deadlineArr[1];
-                if (isDateFormat(time, "yyyy-mm-dd") || isDateFormat(time, "yyyy-m-dd") || isDateFormat(time, "yyyy-mm-d") || isDateFormat(time, "yyyy-m-d")) {
-                    LocalDate date = LocalDate.parse(time);
-                    time = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                }
-                duke.task.Deadline d = new Deadline(deadlineArr[0], time);
-                task.add(d);
-                reportString = ui.reportTask(d, this);
-                break;
+        case "deadline":
+            String[] deadlineArr = userInput[1].split(" /by ", 2);
+            if (deadlineArr.length != 2) {
+                throw new DukeException("Missing component: due date");
+            }
+            String time = deadlineArr[1];
+            if (isDateFormat(time, "yyyy-mm-dd") || isDateFormat(time, "yyyy-m-dd") || isDateFormat(time, "yyyy-mm-d") || isDateFormat(time, "yyyy-m-d")) {
+                LocalDate date = LocalDate.parse(time);
+                time = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            }
+            duke.task.Deadline d = new Deadline(deadlineArr[0], time);
+            task.add(d);
+            reportString = ui.reportTask(d, this);
+            break;
 
-            case "event":
-                String eventArr[] = userInput[1].split(" /at ", 2);
-                if (eventArr.length != 2) {
-                    throw new DukeException("Missing component: event date and time");
-                }
-                duke.task.Event e = new Event(eventArr);
-                task.add(e);
-                reportString = ui.reportTask(e, this);
-                break;
-            default:
-                break;
+        case "event":
+            String eventArr[] = userInput[1].split(" /at ", 2);
+            if (eventArr.length != 2) {
+                throw new DukeException("Missing component: event date and time");
+            }
+            duke.task.Event e = new Event(eventArr);
+            task.add(e);
+            reportString = ui.reportTask(e, this);
+            break;
+        default:
+            break;
         }
         return reportString;
     }
 
+    /**
+     * mark task as done
+     */
     public String doneTask(String inputIndex, Ui ui) {
         try {
             ui.printLine();
@@ -115,6 +134,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * delete task from list
+     */
     public String deleteTask(String inputIndex, Ui ui) {
         try {
             ui.printLine();
@@ -132,6 +154,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * print out task
+     */
     public String printTask(Ui ui) {
         String taskList;
         taskList = "Here is your current tasks\n";
@@ -141,6 +166,9 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * check whether a task is in the list
+     */
     public List<Task> findTask(String taskInfo) {
         List<Task> findedTasks = new ArrayList<>();
         for (Task t : task) {
