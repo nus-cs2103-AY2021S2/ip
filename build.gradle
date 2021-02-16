@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
@@ -54,6 +54,7 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
+    enableAssertions = true
     standardInput = System.in
 }
