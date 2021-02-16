@@ -167,6 +167,12 @@ E.g. `java -jar popo.jar ./mydata/mytasks.txt`
 **Q**: Do I have to pass in a specific date format? Which date formats are acceptable? \
 **A**: Yes. We only accept the date format `dd/mm/yyyy` currently.
 
+**Q**: Why is an error showing when I try to open the program? \
+**A**: If an error message box similar to the below is showing when you try to boot up
+the program, the data source file may have been corrupted and the data cannot be parsed 
+into the required format for the tasks. 
+
+![error.png](images/error.png)
 
 ## Command Summary
 
