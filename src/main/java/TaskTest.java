@@ -1,4 +1,4 @@
-/*import duke.Task;
+import duke.Task;
 import duke.Todo;
 import duke.Deadline;
 import org.junit.jupiter.api.Test;
@@ -18,4 +18,3 @@ public class TaskTest {
                 new Deadline("project", "2020-01-21").toString());
     }
 }
-*/

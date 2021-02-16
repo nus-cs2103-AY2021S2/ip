@@ -77,7 +77,7 @@ public class TaskManager {
         int counter = 1;
         String tasksfound = "";
         for (Task t: this.store) {
-            if (t.toString().contains(item)) {
+            if (t.toString().toLowerCase().contains(item.toLowerCase())) {
                 tasksfound += String.format("%s. %s\n", counter, t.toString());
             }
             counter += 1;
