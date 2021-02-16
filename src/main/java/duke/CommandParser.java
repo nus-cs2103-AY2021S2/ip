@@ -11,7 +11,7 @@ public class CommandParser {
     private static final String DONE_REGEX_MATCH = "^(do(ne)?|finish(ed)?|completed?)( \\d+)+$";
     private static final String DELETE_REGEX_MATCH = "^(delete|remove)( \\d+)+$";
     private static final String TASK_REGEX_MATCH = "^(todo|deadline|event)( .+)?$";
-    private static final String FIND_REGEX_MATCH = "^(find|search) \\d+$";
+    private static final String FIND_REGEX_MATCH = "^(find|search) .+$";
 
     private TaskList tasks;
     private Ui ui;
