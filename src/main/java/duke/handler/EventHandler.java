@@ -11,8 +11,8 @@ public class EventHandler extends TaskHandler {
     }
 
     public Event getEventTask() {
-        Event eventTask = (Event) toAdd;
-        return eventTask;
+        assert toAdd instanceof Event;
+        return (Event) toAdd;
     }
 
     @Override

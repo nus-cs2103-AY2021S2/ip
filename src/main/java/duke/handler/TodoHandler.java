@@ -9,8 +9,8 @@ public class TodoHandler extends TaskHandler {
     }
 
     public Todo getTodoTask() {
-        Todo todoTask = (Todo) toAdd;
-        return todoTask;
+        assert toAdd instanceof Todo;
+        return (Todo) toAdd;
     }
 
     @Override
