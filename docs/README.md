@@ -15,7 +15,9 @@ Kawaii Kat chat bot is a desktop app for managing daily task, categorized into t
    * [Display the current task in the list: `list`](#list---list-all-tasks)
  * [FAQ](#faq)
  * [Command summary](#command-summary)
+ 
 ---
+
 ## Quick Start
 1. Ensure that you have Java `11` or above installed in your computer.
 
@@ -56,7 +58,9 @@ Kawaii Kat chat bot is a desktop app for managing daily task, categorized into t
  
  * Extraneous parameters for commands that do not take in parameters (such as `list` and `bye`) will result in chat bot returning a incorrect input message.
    e.g `list 123`
- ---  
+ 
+ --- 
+ 
 ## Features
 
 ### `list` - List all tasks
