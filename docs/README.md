@@ -37,6 +37,7 @@ Kawaii Kat chat bot is a desktop app for managing daily task, categorized into t
    * `bye`:Exits the chat bot and saved the current list.
    
 6. Refer to the Features below for details of each command.
+
 ---
 ## Notes
 
@@ -138,10 +139,13 @@ Save the current task list into the same directory as `data.txt` and exits.
 Format:`bye`
 
 ---
+
 ## FAQ
 
 **Q**: How do i transfer my data to another Computer?
+
 **A**: Install the app in the other compuer and overwrite the empty data file it creates with the file that contains the data of your previous Chat Bot home folder.
+
 ---
 
 ## Command summary
