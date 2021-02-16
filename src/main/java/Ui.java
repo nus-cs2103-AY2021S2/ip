@@ -77,4 +77,8 @@ public class Ui {
         return output;
     }
 
+    public String displayErrorDetected(DukeException error) {
+        String output = error.getMessage();
+        return output;
+    }
 }

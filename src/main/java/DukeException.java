@@ -4,9 +4,6 @@
  */
 public class DukeException extends Exception {
 
-    /** States if the error is isUnknown */
-    private boolean isUnknown;
-
     /**
      * Creates new DukeException with a description.
      *
@@ -14,12 +11,13 @@ public class DukeException extends Exception {
      */
     public DukeException(String message) {
         super(message);
-        if (message.equals("unknown")) {
-            isUnknown = true;
-        } else {
-            isUnknown = false;
-        }
     }
+
+    /**
+     * Creates a new DukeException without a description. Used as a placeholder for
+     * another class to create a new DukeException that can describe the error better.
+     */
+    public DukeException() {}
 
     /**
      * Returns a String describing the error to the user.
@@ -27,16 +25,8 @@ public class DukeException extends Exception {
      * @return String describing the error.
      */
     public String errorMessage() {
-        if (isUnknown) {
-            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-        } else if (this.getMessage().equals("loading error")) {
-            return "☹ OOPS!!! No file found.";
-        } else if (this.getMessage().equals("delete")) {
-            return "☹ OOPS!!! You must state which task to delete.";
-        } else if (this.getMessage().equals("search")) {
-            return "☹ OOPS!!! You must give a keyword.";
-        } else {
-            return "☹ OOPS!!! The description of a " + this.getMessage() + " cannot be empty.";
-        }
+        String output = this.getMessage();
+        return output;
     }
 }
+

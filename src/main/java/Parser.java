@@ -5,7 +5,21 @@ public class Parser {
 
     /** String array of user input */
     private String[] input;
-    private final String DELETE_MESSAGE = "delete";
+
+    static private final String LIST = "list";
+    static private final String DONE = "done";
+    static private final String DELETE = "delete";
+    static private final String TODO = "todo";
+    static private final String EVENT = "event";
+    static private final String DEADLINE = "deadline";
+    static private final String FIND = "find";
+    static private final String BYE = "bye";
+    static private final String HELP = "help";
+
+    static private final String UNKNOWN_ERROR =
+            "Oops! I didn't catch your command, could you please try again?\n" +
+                    "Make sure your input is correct! (Hint: use the 'help' command to see input formats)";
+
 
     /**
      * Creates Parser object from given String input.
@@ -17,22 +31,57 @@ public class Parser {
     }
 
     /**
-     * Returns a new Parser object with the new given String input.
+     * Returns a Command object based on the user's input.
      *
-     * @param input New String input to be parsed.
-     * @return New Parser object with given String input.
+     * @return An executable command.
      */
-    public Parser newInput(String input) {
-        return new Parser(input);
-    }
+    public Command getCommand(Parser parser, Ui ui, Storage storage) throws DukeException {
 
-    /**
-     * Returns first word or letter from user input.
-     *
-     * @return The first word or letter from user input.
-     */
-    public String getCommand() {
-        return input[0];
+        String userInput = input[0].toLowerCase();
+        Command output;
+
+        switch (userInput) {
+        case LIST:
+            output = new ListCommand(parser, ui, storage);
+            break;
+
+        case DONE:
+            output = new DoneCommand(parser, ui, storage);
+            break;
+
+        case DELETE:
+            output = new DeleteCommand(parser, ui, storage);
+            break;
+
+        case TODO:
+            output = new TodoCommand(parser, ui, storage);
+            break;
+
+        case EVENT:
+            output = new EventCommand(parser, ui, storage);
+            break;
+
+        case DEADLINE:
+            output = new DeadlineCommand(parser, ui, storage);
+            break;
+
+        case FIND:
+            output = new FindCommand(parser, ui, storage);
+            break;
+
+        case BYE:
+            output = new ByeCommand(parser, ui, storage);
+            break;
+
+        case HELP:
+            output = new HelpCommand(parser, ui, storage);
+            break;
+
+        default:
+            throw new DukeException(UNKNOWN_ERROR);
+        }
+
+        return output;
     }
 
     /**
@@ -48,7 +97,7 @@ public class Parser {
         try {
             index = input[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(DELETE_MESSAGE);
+            throw new DukeException();
         }
 
         return Integer.parseInt(index) - 1;
@@ -73,16 +122,22 @@ public class Parser {
      * Returns description of the Task that user wants to add.
      *
      * @return String comprising description of the task.
+     * @throws DukeException if user input is incorrect.
      */
-    public String getTaskDescription() {
+    public String getTaskDescription() throws DukeException{
         String output = "";
 
-        for (int counter = 1; counter < input.length; counter++) {
-            if (input[counter].startsWith("/")) {
-                break;
-            } else {
-                output = output + " " + input[counter];
+        try {
+            for (int counter = 1; counter < input.length; counter++) {
+                if (input[counter].startsWith("/")) {
+                    break;
+                } else {
+                    output = output + " " + input[counter];
+                }
             }
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException();
         }
 
         return output;
@@ -92,12 +147,13 @@ public class Parser {
      * Returns String comprising date or deadline of the task.
      *
      * @return String comprising date or deadline of the task.
+     * @throws DukeException if user did not input a date.
      */
-    public String getDate() {
-        if (getCommand().equals("todo")) {
-            return "Task has no date";
-        } else {
+    public String getDate() throws DukeException {
+        try {
             return input[input.length - 2];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException();
         }
     }
 
@@ -105,12 +161,14 @@ public class Parser {
      * Returns String comprising time of the task.
      *
      * @return String comprising time of the task.
+     * @throws DukeException if user did not input a time.
      */
-    public String getTime() {
-        if (getCommand().equals("todo")) {
-            return "Task has no time";
-        } else {
+    public String getTime() throws DukeException {
+        try {
             return input[input.length - 1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException();
         }
+
     }
 }
