@@ -2,40 +2,25 @@
 
 ## Features 
 
-### Viewing tasks: list 
-list all the task that are currently in Duke
-
-### Mark task as done: done
-Marks a given task number as done
-
-### Delete a task: delete
-Deletes a given task number in Duke
-
-### find tasks: find 
-finds task that contains a certain keyword 
-
-### Add a todo task : todo
-Adds a todo task into Duke
-
-### Add a deadline task : deadline 
-Adds a deadline task into Duke 
-
-### add a Event task: event
-Adds a event task into Duke 
+### Viewing tasks: `list`
+### Complete a task: `done`
+### Delete a task: `delete`
+### find tasks: `find`
+### Add a todo task : `todo`
+### Add a deadline task : `deadline`
+### Add a Event task: `event`
+### Exit the program : `bye`
 
 ## Usage
 
-### `list` - list all the task that are currently in Duke
+### `list` - list all the task
+Shows all tasks that are currently in Duke
 
-Describe action and its outcome.
+Format: `list`
 
-Example of usage: 
-
-`list`
+Example of usage: `list`
 
 Expected outcome:
-
-Either
 
 ![Image of tasks](Ui.png)
 
@@ -43,11 +28,13 @@ Or
 
 ![Image_of_no_task](List_No_task.PNG)
 
-### `done` - Marks a given task number as done
+### `done` - Completes a task 
+Marks a given task number as done
+Format: `done INDEX`
+- INDEX is a non negative number
+- INDEX starts from 1 - number of task in Duke 
 
-Example of usage: 
-
-`done 1`
+Example of usage: `done 1`
 
 Expected outcome: 
 
@@ -57,11 +44,14 @@ Or
 
 ![Image_of_failure_done](done_failure.png)
 
-### `delete` - Deletes a given task number in Duke
+### `delete` - Deletes a task 
+Deletes a given task number in Duke
 
-Example of usage:
-
-`delete 1`
+Format: `delete INDEX`
+- INDEX is a non negative number
+- INDEX starts from 1 - number of task in Duke 
+  
+Example of usage: `delete 1`
 
 Expected outcome:
 
@@ -71,11 +61,14 @@ Or
 
 ![Image_of_failure_delete](delete_failure.png)
 
-### `find` - finds task that contains a certain keyword
+### `find` - Finding of tasks 
+finds tasks that contains a certain keyword
 
-Example of usage:
+Format: `find SeachKey`
+- The search is case-insensitive. e.g buy will match Buy
+- Only task description will be searched
 
-`find buy`
+Example of usage: `find buy`
 
 Expected outcome:
 
@@ -84,3 +77,44 @@ Expected outcome:
 Or
 
 ![Image_of_failure_find](search_failure.png)
+
+### `todo <taskName>` - Adds a todo task 
+Adds a todo task into Duke
+
+Format : `todo taskName`
+
+Example of usage: `todo buy book`
+
+Expected outcome:
+
+![Image_of_success_todo_add](add_todo_success.png)
+
+### `deadline <taskName> /by <deadline>` - Adds a deadline task 
+Adds a deadline task into Duke 
+
+Format: `deadline taskName /by yyyy-M-dd hhmm`
+- deadline has to be in the form of yyyy-M-dd hmm or yyyy-mm-dd hhmm (e.g 2021-5-03 630 or 2021-05-03 0630)
+
+Example of usage: `deadline project meeting \by 2020-2-15 1600`
+
+Expected outcome:
+
+![Image_of_success_deadline_add](add_deadline_success.png)
+
+### `event <taskName> /by <deadline>` -  Adds a event task 
+Adds a event task into Duke 
+
+Format: `event taskName /by yyyy-M-dd hhmm - hhmm`
+- deadline has to be in the form of yyyy-M-dd hmm - hmm or yyyy-mm-dd hhmm - hhmm 
+  (e.g 2021-5-03 630 - 830 or 2021-05-03 0630 - 0830)
+
+Example of usage: `event mid terms \by 2020-03-07 830 - 1000`
+
+Expected outcome:
+
+![Image_of_success_event_add](add_event_success.png)
+
+### `bye` - exits the application
+Saves the current tasks into file specificed at the start 
+
+Example of usage: `bye`
