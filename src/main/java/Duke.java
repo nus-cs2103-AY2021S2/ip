@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -67,7 +66,7 @@ public class Duke {
                 throw new DukeException("Unable to match any command");
             }
         } catch (DukeException | FileNotFoundException e) {
-            return e.toString();
+            return Ui.showErrorMessage(e.toString());
         }
     }
 }
