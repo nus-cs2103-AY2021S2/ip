@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import com.nus.duke.common.DukeStorageException;
@@ -13,7 +14,8 @@ import com.nus.duke.data.TaskList;
 
 public class TaskListStorage {
 
-    public static final String DEFAULT_STORAGE_FILEPATH = "duke-tasklist.data";
+    public static final String DEFAULT_STORAGE_FILEPATH = Paths
+            .get(System.getProperty("user.home"), "duke-tasklist.data").toString();
     public static final String SAVE_FAILURE_MESSAGE = "Unable to save to file. Your data may not be saved.";
     public static final String LOAD_FAILURE_MESSAGE = "Unable to read from file.";
 
