@@ -6,7 +6,7 @@ import core.task.TaskManager;
  * Instance of InputListener to handle all the input in the Duke class.
  */
 public class InputHandler implements InputListener {
-    private TaskManager taskManager;
+    private final TaskManager taskManager;
 
     /**
      * Creates a new InputHandler which uses the {@code TaskManager} to manage the {@code Task}s.

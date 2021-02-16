@@ -14,7 +14,8 @@ import java.util.ArrayList;
 /**
  * Implementation of a {@code TaskStorage} in a file location.
  */
-public class TaskStorageFile extends TaskStorage {
+public class
+TaskStorageFile extends TaskStorage {
 
     @Override
     public void saveTaskList(ArrayList<Task> tm, Path fileLocation) throws IOException {
