@@ -16,14 +16,6 @@ public class Parser {
     private Scanner scan = new Scanner(System.in);
 
     /**
-     * This method reads a line on the command prompt and
-     * removes any extra space at the end.
-     */
-    public void readLine() {
-        this.read = scan.nextLine().trim();
-    }
-
-    /**
      * This method extracts the command from the input
      * line that was read.
      *
@@ -36,16 +28,14 @@ public class Parser {
     }
 
     public String getArguments(String input) {
+        // Skips command and gets everything after command
         String arguments = input.split(" ", 2)[1];
         return arguments;
     }
 
-    public int getDeleteIndex(String input) {
+    public int getIndex(String input) {
+        // Minus to adjust for 0-based indexing in TaskList
         int i = Integer.parseInt(input.split(" ")[1]) - 1;
         return i;
-    }
-
-    public String getRead() {
-        return this.read;
     }
 }

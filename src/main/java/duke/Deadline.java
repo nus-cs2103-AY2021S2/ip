@@ -44,7 +44,6 @@ public class Deadline extends Task {
      * @return String This returns a String date in "MMM dd yyyy" format
      */
     public String processDate(LocalDate originalDate) {
-        // LocalDate date = LocalDate.parse(originalDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String month = originalDate.getMonth().toString();
         String threeLetteredMonth = month.substring(0, 1) + month.substring(1, 3).toLowerCase();
         String day = Integer.toString(originalDate.getDayOfMonth());
