@@ -6,7 +6,7 @@ duke is a personal task tracker that stores and records your to-dos, deadlines a
 2. Open and enter in your terminal `java -jar duke.jar`
 
 
-## Features 
+### Features 
 + [ToDo](#todo)
 + [Deadline](#deadline)
 + [Event](#event)
@@ -161,6 +161,7 @@ Here are the tasks in ur list:
       3. [E][] project meeting (at:on 2-4pm)
 
 ```
+### 'bye' - ends the application
 Format: `bye`
 
 Example of usage:
@@ -168,5 +169,5 @@ Example of usage:
 `bye`
 
 Expected outcome:
-   Application will end
+   Application will end and exit
 
