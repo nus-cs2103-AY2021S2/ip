@@ -6,10 +6,21 @@ Graphical User Interface (GUI).
 If you can type fast and need a personal assistant to keep track of lots of tasks,
 Popo task manager is here to help you!
 
+- Quick Start
 - Types of Tasks
 - Features
 - FAQ
 - Command Summary
+
+
+## Quick Start
+1. Ensure you have Java 11 or above installed.
+2. Download the latest `popo.jar` [here](https://github.com/w2vgd/ip/releases).
+3. Copy the file to the folder you want to use as the home folder for Popo Task Manager.
+4. Double-click the jar file to start the app. The GUI similar to the below should appear in a few seconds. \
+   (You may also specify your own data source file. Learn how to do so [here](#FAQ).)
+   ![ui.png](Ui.png)
+
 
 ## Types of Tasks
 ### Todo 
@@ -141,17 +152,18 @@ Exits the program.
 
 ## FAQ
 **Q**: What is the default data source file? \
-**A**: `./data/popo.txt`
+**A**: From the base folder where you store the `popo.jar` file, the
+default data source file can be found at `./data/popo.txt`.
 
 **Q**: Is it possible to specify my own data source file? How do I specify my own data source file? \
-**A**: Yes. Run the jar file with an additional flag indicating the file path of your own data
-source file. \
-Format: `java -jar .../path/to/jar/file/popo.jar datasource.txt` \
-E.g. `java -jar C:\Users\user1\Desktop\ip\build\libs\popo.jar ./a/b/c/test.txt`
+**A**: Yes. To specify your own data source file, you have to run the jar file in your terminal or
+command prompt with an additional argument indicating the file path of your own data
+source file. The easiest way is to `cd` into the base directory containing the `popo.jar` file, and
+run `java -jar popo.jar .\path\to\data\file\datasource.txt`. \
+E.g. `java -jar popo.jar .\mydata\mytasks.txt`
 
 **Q**: Do I have to pass in a specific date format? Which date formats are acceptable? \
 **A**: Yes. We only accept the date format `dd/mm/yyyy` currently.
-
 
 
 ## Command Summary
