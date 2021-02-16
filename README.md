@@ -1,6 +1,6 @@
 # Task List Helper
 
-![UI preview](https://github.com/ssagit/ip/blob/master/src/main/resources/images/2103_ip_UI.png?raw=true)
+![UI preview](https://github.com/ssagit/ip/blob/master/src/main/resources/images/front_UI.png?raw=true)
 
 A helper for managing tasks. This is a project built from SEEDU's Duke project template.
 
