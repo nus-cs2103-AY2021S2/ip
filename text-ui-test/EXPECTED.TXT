@@ -1,7 +1,12 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Olly: Hey! Welcome to the chatbot. What can I do for you today?
+Olly: Make sure you do this task! I've added:
+[T]✘ borrow book
+Olly: You now have 1 tasks at hand.
+Olly: Here you go! Your list of items:
+1. [T]✘ borrow book
+Olly: Make sure you meet this deadline! I've added:
+[D]✘ return book (by: Sunday)
+Olly: You now have 2 tasks at hand.
+Olly: Event coming right up! I've added:
+[E]✘ project meeting (at: Mon 2-4pm)
+Olly: You now have 3 tasks at hand.
