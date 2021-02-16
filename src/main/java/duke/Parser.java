@@ -16,7 +16,7 @@ public class Parser {
     public Parser() throws IOException {
         this.input = new BufferedReader(new InputStreamReader(System.in));
         this.UI = new UserInterface();
-        this.storage = new Storage("./src/main/data/duke.txt");
+        this.storage = new Storage("./src/main/DATA/duke.txt");
     }
 
     /*
@@ -40,7 +40,9 @@ public class Parser {
             TaskList.taskList.add(newToDo);
             return UI.addedTask();
         } else if (userInput[0].toLowerCase().equals(Command.HELLO.toString())) {
-            return "Hello! Please enter a command.";
+            return "Please enter a command.";
+        } else if (userInput[0].toLowerCase().equals(Command.HELP.toString())) {
+            return UI.helpMenu();
         } else if (userInput[0].toLowerCase().equals(Command.DEADLINE.toString())) {
             String[] details = userInput[1].split("/", 2);
             try {
@@ -92,20 +94,16 @@ public class Parser {
         } else if (userInput[0].toLowerCase().equals(Command.COMPLETE.toString())) {
             String[] details = userInput[1].split(" ", 2);
             if (details[0].toLowerCase().equals(Command.TODO.toString())) {
-                TaskList.completeTask(new ToDo(details[1]));
-                return "Task marked complete!\n";
+                return TaskList.completeTask(new ToDo(details[1]));
             } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())) {
                 String description = details[1].split("/", 2)[0];
-                TaskList.completeTask(new Deadline(description, new Date()));
-                return "Task marked complete!\n";
+                return TaskList.completeTask(new Deadline(description, new Date()));
             } else if (details[0].toLowerCase().equals(Command.EVENT.toString())) {
                 String description = details[1].split("/", 2)[0];
-                TaskList.completeTask(new Event(description, new Date(), new Date()));
-                return "Task marked complete!\n";
+                return TaskList.completeTask(new Event(description, new Date(), new Date()));
             }
-            return "Please enter a valid task.\n";
         } else if (userInput[0].toLowerCase().equals(Command.BYE.toString())) {
-            storage.exportTasks();
+            this.storage.exportTasks();
             System.exit(0);
         } else {
             try {

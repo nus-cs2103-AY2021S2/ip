@@ -46,18 +46,27 @@ public class Storage {
                 String[] fileInput = content.split(" ", 2);
                 if ("[T]".equals(fileInput[0].substring(0, 3))) {
                     ToDo newToDo = new ToDo(fileInput[1]);
+                    if(fileInput[0].length() > 5) {
+                        newToDo.completeTask();
+                    }
                     TaskList.taskList.add(newToDo);
                 } else if ("[D]".equals(fileInput[0].substring(0, 3))) {
                     String[] details = fileInput[1].split("/", 2);
                     Date by = dateFormat.parse(details[1]);
                     Deadline newDeadline = new Deadline(details[0], by);
+                    if(fileInput[0].length() > 5) {
+                        newDeadline.completeTask();
+                    }
                     TaskList.taskList.add(newDeadline);
-                } else if ("[E]".equals(fileInput[0].substring(0, 3))) {
+                } else if (fileInput[0].length() > 5) {
                     String[] details = fileInput[1].split("/", 2);
                     String[] timings = details[1].split("to ", 2);
                     Date start = dateFormat2.parse(timings[0]);
                     Date end = dateFormat3.parse(timings[1]);
                     Event newEvent = new Event(details[0], start, end);
+                    if (fileInput[0].length() > 5) {
+                        newEvent.completeTask();
+                    }
                     TaskList.taskList.add(newEvent);
                 }
                 content = input.readLine();

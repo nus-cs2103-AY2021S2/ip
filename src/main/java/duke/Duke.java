@@ -120,23 +120,4 @@ public class Duke extends Application {
     public Duke() throws IOException {
         this.parser = new Parser();
     }
-
-    /*
-     * Runs the program.
-     */
-    /*public void run() throws IOException, ParseException {
-        System.out.println("1");
-        this.parser.storage.importTasks();
-        System.out.println("2");
-        this.parser.UI.logo();
-        while(true) {
-            String command = parser.input.readLine();
-            getResponse(command);
-        }
-    }
-
-    public static void main(String[] args) throws IOException, ParseException {
-        Duke duke = new Duke();
-        //duke.run();
-    }*/
 }
