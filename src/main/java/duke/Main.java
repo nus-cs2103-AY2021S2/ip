@@ -15,6 +15,8 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    //@@ banchiang-reused
+    //Reused from https://github.com/banchiang/ip/blob/master/src/main/java/duke/Main.java
     @Override
     public void start(Stage stage) {
         try {
@@ -28,4 +30,5 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    //@@ banchiang
 }

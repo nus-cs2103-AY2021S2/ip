@@ -43,6 +43,8 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    //@@ banchiang-reused
+    //Reused from https://github.com/banchiang/ip/blob/master/src/main/java/duke/MainWindow.java
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -67,4 +69,5 @@ public class MainWindow extends AnchorPane {
             timer.schedule(timertask, 800);
         }
     }
+    //@@ banchiang
 }
