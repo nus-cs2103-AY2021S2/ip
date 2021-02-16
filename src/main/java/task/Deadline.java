@@ -13,7 +13,7 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 public class Deadline extends Task {
     public static final String COMMAND_STRING = "deadline";
     public static final String END_DATE_STRING = "by";
-    private LocalDate endDate;
+    private final LocalDate endDate;
 
     public Deadline(String desc, LocalDate endDate) {
         super(desc);
@@ -23,6 +23,20 @@ public class Deadline extends Task {
     public Deadline(String desc, LocalDate endDate, boolean isDone) {
         super(desc, isDone);
         this.endDate = endDate;
+    }
+
+    public static Deadline fromSaveString(String saveString) {
+        HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
+
+        List<String> descriptions = commandMap.get(COMMAND_STRING);
+        String description = String.join(" ", descriptions);
+
+        String endDateString = commandMap.get(END_DATE_STRING).get(0);
+        LocalDate endDate = LocalDate.parse(endDateString);
+
+        boolean isDone = commandMap.containsKey("done");
+
+        return new Deadline(description, endDate, isDone);
     }
 
     @Override
@@ -64,19 +78,5 @@ public class Deadline extends Task {
         }
 
         return Parser.commandMapToString(commandMap);
-    }
-
-    public static Deadline fromSaveString(String saveString) {
-        HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
-        
-        List<String> descriptions = commandMap.get(COMMAND_STRING);
-        String description = String.join(" ", descriptions);
-
-        String endDateString = commandMap.get(END_DATE_STRING).get(0);
-        LocalDate endDate = LocalDate.parse(endDateString);
-
-        boolean isDone = commandMap.containsKey("done");
-
-        return new Deadline(description, endDate, isDone);
     }
 }

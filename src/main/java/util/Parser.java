@@ -17,10 +17,11 @@ public interface Parser {
     String COMMAND_FLAG = "COMMAND_FLAG_IDENTIFIER";
 
     /**
+     * Parses the user input into an executable Command object
      *
-     * @param input
-     * @return
-     * @throws DukeException
+     * @param input String input from the user.
+     * @return Command object representing the user's instructions.
+     * @throws DukeException Whenever the user inputs an illegal instruction.
      */
     static Command parseCommand(String input) throws DukeException {
         HashMap<String, List<String>> commandMap = parseCommandMap(input);
@@ -28,26 +29,26 @@ public interface Parser {
         String commandFlag = commandMap.get(COMMAND_FLAG).get(0);
 
         switch (commandFlag) {
-            case HelpCommand.COMMAND_STRING:
-                return HelpCommand.fromCommandMap(commandMap);
-            case ListCommand.COMMAND_STRING:
-                return ListCommand.fromCommandMap(commandMap);
-            case FindCommand.COMMAND_STRING:
-                return FindCommand.fromCommandMap(commandMap);
-            case TodoCommand.COMMAND_STRING:
-                return TodoCommand.fromCommandMap(commandMap);
-            case DeadlineCommand.COMMAND_STRING:
-                return DeadlineCommand.fromCommandMap(commandMap);
-            case EventCommand.COMMAND_STRING:
-                return EventCommand.fromCommandMap(commandMap);
-            case DoneCommand.COMMAND_STRING:
-                return DoneCommand.fromCommandMap(commandMap);
-            case DeleteCommand.COMMAND_STRING:
-                return DeleteCommand.fromCommandMap(commandMap);
-            case QuitCommand.COMMAND_STRING:
-                return QuitCommand.fromCommandMap(commandMap);
-            default:
-                throw new DukeException("Sorry I didn't understand that");
+        case HelpCommand.COMMAND_STRING:
+            return HelpCommand.fromCommandMap(commandMap);
+        case ListCommand.COMMAND_STRING:
+            return ListCommand.fromCommandMap(commandMap);
+        case FindCommand.COMMAND_STRING:
+            return FindCommand.fromCommandMap(commandMap);
+        case TodoCommand.COMMAND_STRING:
+            return TodoCommand.fromCommandMap(commandMap);
+        case DeadlineCommand.COMMAND_STRING:
+            return DeadlineCommand.fromCommandMap(commandMap);
+        case EventCommand.COMMAND_STRING:
+            return EventCommand.fromCommandMap(commandMap);
+        case DoneCommand.COMMAND_STRING:
+            return DoneCommand.fromCommandMap(commandMap);
+        case DeleteCommand.COMMAND_STRING:
+            return DeleteCommand.fromCommandMap(commandMap);
+        case QuitCommand.COMMAND_STRING:
+            return QuitCommand.fromCommandMap(commandMap);
+        default:
+            throw new DukeException("Sorry I didn't understand that");
         }
     }
 
@@ -61,7 +62,7 @@ public interface Parser {
 
         // Insert other flags
         String[] flagInputs = input.split("/");
-        for (String flagInput: flagInputs) {
+        for (String flagInput : flagInputs) {
             String[] args = flagInput.split(" ");
 
             // Filter out double spaces
@@ -100,7 +101,7 @@ public interface Parser {
 
         results.add(command + " " + description);
 
-        for (String k: commandMap.keySet()) {
+        for (String k : commandMap.keySet()) {
 
             // Skip adding the command flag
             if (k.equals(COMMAND_FLAG)) continue;

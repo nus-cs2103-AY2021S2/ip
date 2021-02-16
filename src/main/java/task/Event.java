@@ -25,6 +25,20 @@ public class Event extends Task {
         this.eventDate = eventDate;
     }
 
+    public static Event fromSaveString(String saveString) {
+        HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
+
+        List<String> descriptions = commandMap.get(COMMAND_STRING);
+        String description = String.join(" ", descriptions);
+
+        String eventDateString = commandMap.get(EVENT_DATE_STRING).get(0);
+        LocalDate eventDate = LocalDate.parse(eventDateString);
+
+        boolean isDone = commandMap.containsKey("done");
+
+        return new Event(description, eventDate, isDone);
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("E, d MMM yy");
@@ -64,19 +78,5 @@ public class Event extends Task {
         }
 
         return Parser.commandMapToString(commandMap);
-    }
-
-    public static Event fromSaveString(String saveString) {
-        HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
-
-        List<String> descriptions = commandMap.get(COMMAND_STRING);
-        String description = String.join(" ", descriptions);
-
-        String eventDateString = commandMap.get(EVENT_DATE_STRING).get(0);
-        LocalDate eventDate = LocalDate.parse(eventDateString);
-
-        boolean isDone = commandMap.containsKey("done");
-
-        return new Event(description, eventDate, isDone);
     }
 }

@@ -18,7 +18,7 @@ public class DeadlineCommand extends Command {
     private final LocalDate date;
     private String message;
 
-    private DeadlineCommand(String description, LocalDate date){
+    private DeadlineCommand(String description, LocalDate date) {
         this.description = description;
         this.date = date;
     }

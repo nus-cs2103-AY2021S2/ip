@@ -38,7 +38,7 @@ public class FindCommand extends Command {
         // Returns true if the task contains all of the keywords
         Predicate<Task> taskPredicate = task -> {
             String taskDescription = task.getDescription();
-            for (String k: keywords) {
+            for (String k : keywords) {
                 if (!taskDescription.contains(k)) {
                     return false;
                 }

@@ -20,6 +20,7 @@ public class Duke {
      * Constructor to initialise a new Duke instance. Will create a brand new TaskManager
      * instance if the supplied Storage object does not point to an existing save file or
      * if the existing save file cannot be read.
+     *
      * @param storage Storage object to load persistent TaskManager information from.
      */
     public Duke(Storage storage) {
@@ -34,6 +35,7 @@ public class Duke {
 
     /**
      * Entry point for command-line interface for Duke.
+     *
      * @param args Arguments for the execution of Duke. Should be left blank.
      */
     public static void main(String[] args) {
@@ -64,6 +66,7 @@ public class Duke {
 
     /**
      * Determines if the user entered a quit command in their input.
+     *
      * @param input Text inputted by the user.
      * @return True, if the user inputted a quit command.
      */
@@ -80,6 +83,7 @@ public class Duke {
      * Responds to the user's inputs by manipulating the TaskManager instance,
      * saves the new state of the TaskManager to the save file, and returns a
      * String describing the action that was performed.
+     *
      * @param input Text inputted by the user.
      * @return String description of the actions performed by the Duke instance.
      */

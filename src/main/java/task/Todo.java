@@ -17,6 +17,14 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    public static Todo fromSaveString(String saveString) {
+        HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
+        List<String> descriptions = commandMap.get(COMMAND_STRING);
+        String description = String.join(" ", descriptions);
+        boolean isDone = commandMap.containsKey("done");
+        return new Todo(description, isDone);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
@@ -50,14 +58,6 @@ public class Todo extends Task {
         }
 
         return Parser.commandMapToString(commandMap);
-    }
-
-    public static Todo fromSaveString(String saveString) {
-        HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
-        List<String> descriptions = commandMap.get(COMMAND_STRING);
-        String description = String.join(" ", descriptions);
-        boolean isDone = commandMap.containsKey("done");
-        return new Todo(description, isDone);
     }
 
 }

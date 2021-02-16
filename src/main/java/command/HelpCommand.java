@@ -49,9 +49,7 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(TaskManager taskManager) throws DukeException {
-        message = keywordOpt.isPresent()
-                ? keywordHelpText(keywordOpt.get())
-                : defaultHelpText();
+        message = keywordOpt.orElse(defaultHelpText());
     }
 
     private String defaultHelpText() {
@@ -71,33 +69,33 @@ public class HelpCommand extends Command {
         String text;
 
         switch (keyword) {
-            case ListCommand.COMMAND_STRING:
-                text = listHelpText();
-                break;
-            case FindCommand.COMMAND_STRING:
-                text = findHelpText();
-                break;
-            case TodoCommand.COMMAND_STRING:
-                text = todoHelpText();
-                break;
-            case DeadlineCommand.COMMAND_STRING:
-                text = deadlineHelpText();
-                break;
-            case EventCommand.COMMAND_STRING:
-                text = eventHelpText();
-                break;
-            case DoneCommand.COMMAND_STRING:
-                text = doneHelpText();
-                break;
-            case DeleteCommand.COMMAND_STRING:
-                text = deleteHelpText();
-                break;
-            case QuitCommand.COMMAND_STRING:
-                text = quitHelpText();
-                break;
-            default:
-                text = "";
-                assert false; //Method should not have been called with an invalid keyword.
+        case ListCommand.COMMAND_STRING:
+            text = listHelpText();
+            break;
+        case FindCommand.COMMAND_STRING:
+            text = findHelpText();
+            break;
+        case TodoCommand.COMMAND_STRING:
+            text = todoHelpText();
+            break;
+        case DeadlineCommand.COMMAND_STRING:
+            text = deadlineHelpText();
+            break;
+        case EventCommand.COMMAND_STRING:
+            text = eventHelpText();
+            break;
+        case DoneCommand.COMMAND_STRING:
+            text = doneHelpText();
+            break;
+        case DeleteCommand.COMMAND_STRING:
+            text = deleteHelpText();
+            break;
+        case QuitCommand.COMMAND_STRING:
+            text = quitHelpText();
+            break;
+        default:
+            text = "";
+            assert false; //Method should not have been called with an invalid keyword.
         }
 
         return preText + text;

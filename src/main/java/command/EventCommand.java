@@ -18,7 +18,7 @@ public class EventCommand extends Command {
     private final LocalDate date;
     private String message;
 
-    private EventCommand(String description, LocalDate date){
+    private EventCommand(String description, LocalDate date) {
         this.description = description;
         this.date = date;
     }
