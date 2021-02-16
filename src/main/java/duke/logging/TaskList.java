@@ -28,6 +28,7 @@ public class TaskList {
 
     /**
      * Print out all the tasks in the list.
+     * @return   The entire list of tasks.
      */
     public String list() {
         String message = "     Here are the tasks in your list:";
@@ -83,7 +84,7 @@ public class TaskList {
      * Get the indicated task.
      * @param index                          The index of the task.
      * @return                               The indicated task.
-     * @throws InvalidDescriptionException   If index > tasks.size()
+     * @throws InvalidDescriptionException   If index is more than size of tasks.
      */
     public Task getTask(int index) throws InvalidDescriptionException {
         try {
@@ -151,16 +152,28 @@ public class TaskList {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /**
+     * Find task(s) with the same date specified in task description.
+     * @param taskDescription                The description of the task that includes the date time.
+     * @return                               The list of tasks matching the date.
+     * @throws InvalidDescriptionException   If the description's format is invalid.
+     */
     public ArrayList<Task> filterSchedule(String taskDescription) throws InvalidDescriptionException {
-        if (!taskDescription.contains("on")) {
-            throw new InvalidDescriptionException("Your view schedule command should be in this format:" +
-                    "schedule on (data)");
+        if (!taskDescription.contains("/on")) {
+            throw new InvalidDescriptionException("Your view schedule command should be in this format:"
+                    + " schedule /on (data)");
         }
 
-        int index = taskDescription.indexOf("on");
-        String dateTimeString = taskDescription.substring(index + 3).strip().replace("/", "-");
-        LocalDate userScheduledDate = LocalDate.parse(dateTimeString);
-        return tasks.stream().filter(task -> task.checkEqualDate(userScheduledDate))
-                .collect(Collectors.toCollection(ArrayList::new));
+        try {
+            int index = taskDescription.indexOf("/on");
+            String dateTimeString = taskDescription.substring(index + 3).strip().replace("/", "-");
+            LocalDate userScheduledDate = LocalDate.parse(dateTimeString);
+
+            return tasks.stream().filter(task -> task.checkEqualDate(userScheduledDate))
+                    .collect(Collectors.toCollection(ArrayList::new));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDescriptionException("Your view schedule command should be in this format:"
+                    + "schedule /on (data)");
+        }
     }
 }

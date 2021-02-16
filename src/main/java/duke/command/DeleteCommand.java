@@ -9,7 +9,7 @@ import duke.logging.Ui;
 import duke.model.Task;
 
 /**
- * The DeleteCommand class denotes a delete command to the Duke chat bot.
+ * The DeleteCommand class denotes a delete command to the RoboBot chat bot.
  */
 public class DeleteCommand extends Command {
     /**
@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
      * @param taskList The list of recorded tasks.
      * @param ui       The user interface.
      * @param storage  The list of recorded user inputs data.
-     * @return         The message replied by Duke chat bot.
+     * @return         The message replied by RoboBot chat bot.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

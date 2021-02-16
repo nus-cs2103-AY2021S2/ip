@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- *  An exception raised when user inputs a command that doesn't exist in Duke chat bot.
+ *  An exception raised when user inputs a command that doesn't exist in RoboBot chat bot.
  */
 public class InvalidInputException extends Exception {
     /**

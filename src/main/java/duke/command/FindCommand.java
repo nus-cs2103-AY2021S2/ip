@@ -9,7 +9,7 @@ import duke.logging.Ui;
 import duke.model.Task;
 
 /**
- * The FindCommand class denotes a find command to the Duke chat bot.
+ * The FindCommand class denotes a find command to the RoboBot chat bot.
  */
 public class FindCommand extends Command {
     /**
@@ -25,7 +25,7 @@ public class FindCommand extends Command {
      * @param taskList The list of recorded tasks.
      * @param ui       The user interface.
      * @param storage  The list of recorded user inputs data.
-     * @return         The message replied by Duke chat bot.
+     * @return         The message replied by RoboBot chat bot.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

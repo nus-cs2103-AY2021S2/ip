@@ -18,7 +18,8 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructs a Duke chat bot.
+     * Construct a RoBoBot chat bot
+     * @param filePath   The file path where the tasks will be stored.
      */
     public Duke(String filePath) {
         ui = new Ui();

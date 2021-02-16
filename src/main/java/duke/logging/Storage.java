@@ -21,10 +21,19 @@ public class Storage {
 
     /**
      * Constructs a storage
-     * @param filePath   he filepath where the data are going to be stored at.
+     * @param filePath   the filepath where the data are going to be stored at.
      */
     public Storage(String filePath) {
         this.file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                File directory = new File("data");
+                directory.mkdir();
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Something gone wrong with file creation");
+            }
+        }
     }
 
     /**

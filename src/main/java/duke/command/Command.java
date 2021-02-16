@@ -5,7 +5,7 @@ import duke.logging.TaskList;
 import duke.logging.Ui;
 
 /**
- * The Command class denotes a command to the Duke chat bot.
+ * The Command class denotes a command to the RoboBot chat bot.
  */
 public abstract class Command {
     protected final String taskDescription;
@@ -20,10 +20,10 @@ public abstract class Command {
 
     /**
      * Executing the command
-     * @param taskList A list of recorded tasks.
-     * @param ui       A user interface.
-     * @param storage  A list of recorded user inputs data.
-     * @return         The message replied by Duke chat bot.
+     * @param taskList The list of recorded tasks.
+     * @param ui       The user interface.
+     * @param storage  The list of recorded user inputs data.
+     * @return         The message replied by RoboBot chat bot.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 }

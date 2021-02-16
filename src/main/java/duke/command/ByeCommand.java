@@ -5,7 +5,7 @@ import duke.logging.TaskList;
 import duke.logging.Ui;
 
 /**
- * The ByeCommand class denotes an bye command to the Duke chat bot.
+ * The ByeCommand class denotes an bye command to the RoboBot chat bot.
  */
 public class ByeCommand extends Command {
     /**
@@ -21,7 +21,7 @@ public class ByeCommand extends Command {
      * @param taskList The list of recorded tasks.
      * @param ui       The user interface.
      * @param storage  The list of recorded user inputs data.
-     * @return         The message replied by Duke chat bot.
+     * @return         The message replied by RoboBot chat bot.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
