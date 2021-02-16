@@ -94,14 +94,17 @@ public class ConsoleUI {
      * @param taskArr array of Task objects
      */
     public String list(Task[] taskArr) {
+        int TaskNum = 1;
         String output = "++++++++++++++++++++++++++++++++++++\n"
                 + "Here are the tasks in your list: \n"
-                + "TaskType | isDone | taskName | time (if any)\n";
+                + "TaskNum > TaskType | isDone | taskName | time (if any)\n";
         for (Task t : taskArr) {
             if (t == null) {
                 break;
             }
+            output = output + TaskNum + " > ";
             output = output + t.toString() + "\n";
+            TaskNum++;
         }
         output = output + "++++++++++++++++++++++++++++++++++++\n";
         return output;
