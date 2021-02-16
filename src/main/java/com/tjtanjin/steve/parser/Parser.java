@@ -49,6 +49,8 @@ public class Parser {
 
     /**
      * Constructor for Parser class that initialises all valid commands.
+     *
+     * @param commandHandler provides access for commands to be executed
      */
     public Parser(CommandHandler commandHandler) {
         this.BYE_COMMAND = commandHandler.getByeCommand();

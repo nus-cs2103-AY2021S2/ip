@@ -144,20 +144,19 @@ public class TaskHandler {
     /**
      * Finds all tasks whose name contains input from user.
      *
-     * @param taskNames names of task to check against
+     * @param searchTerms search terms for finding tasks
      * @return string response after operation is done
      */
-    public String findTask(String ... taskNames) {
+    public String findTask(String ... searchTerms) {
         if (tasks.size() == 0) {
             return "Info: You have no task at the moment!";
         } else {
             int counter = 0;
             StringBuilder strOfTasks = new StringBuilder("Info: ");
-            for (String taskName : taskNames) {
-                System.out.println(taskName);
+            for (String searchTerm : searchTerms) {
                 for (int j = 1; j <= tasks.size(); j++) {
                     Task task = tasks.get(j - 1);
-                    if (task.getTaskName().contains(taskName)) {
+                    if (task.getTaskName().contains(searchTerm)) {
                         counter += 1;
                         strOfTasks.append(counter).append(".").append(task).append("\n");
                     }

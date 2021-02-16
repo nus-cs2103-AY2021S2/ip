@@ -39,6 +39,8 @@ public class Event extends Task {
 
     /**
      * Marks event task as completed.
+     *
+     * @return task with status marked as complete
      */
     @Override
     public Task markCompleted() {

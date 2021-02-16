@@ -18,6 +18,8 @@ public class ToDo extends Task {
 
     /**
      * Marks todo task as completed.
+     *
+     * @return task with status marked as complete
      */
     @Override
     public Task markCompleted() {

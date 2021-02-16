@@ -24,6 +24,7 @@ public class Steve {
 
     /**
      * Gets the parser.
+     *
      * @return parser
      */
     public Parser getParser() {
