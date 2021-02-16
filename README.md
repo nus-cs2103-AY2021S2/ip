@@ -3,7 +3,7 @@ Snom is a Personal Assistant Chatbot that helps a person to keep track of variou
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed on your Computer
-2. Download the latest Snom.jar from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest Snom.jar from [here](https://github.com/Sharptail/ip/releases).
 3. Copy Snom.jar to the folder you want to use as home folder for your Snom.
 4. Double-click on Snom.jar to start the application. <br>
 
