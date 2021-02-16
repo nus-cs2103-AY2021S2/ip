@@ -35,7 +35,7 @@ Display the full list of tasks.
 
 ## Usage
 
-### 'todo' - Adds a Todo task
+###  <a id="todo"></a> 'todo' - Adds a Todo task
 
 Adds a Todo task with a description of the task to the task list.
 
@@ -52,10 +52,9 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### 'deadline' - Adds a Deadline task
+### <a id="deadline"></a>  'deadline' - Adds a Deadline task
 
 Adds a Deadline task with a description of the task and the due date and time to the tasks list. 
-
 
 Date and time
 has to be in this format: "d/m/yyyy HHmm" for to be valid. Time is in 24-hour format.
@@ -74,7 +73,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### 'event' - Adds an Event task
+###  <a id="event"></a> 'event' - Adds an Event task
 Adds an Event task with a description of the task and the event time to the tasks list. 
 
 time
@@ -93,7 +92,7 @@ Got it. I've added this task:
   Now you have 1 tasks in the list.
 ```
 
-### 'done' - Marks a task as done
+### <a id="done"></a> 'done' - Marks a task as done
 Marks an existing task as done, i.e. adds a cross mark (x) to the tasks.
 
 Format: `done <task number>`
@@ -126,7 +125,7 @@ Noted! I've removed this task:
 Now u have 0 tasks in the list
 ```
 
-### 'find' - Finds a task or certain tasks from the tasks list
+### <a id="find"></a>  'find' - Finds a task or certain tasks from the tasks list
 Finds a task or certain tasks from the task list.
 
 Format: `find <keyword(s)>`
@@ -143,7 +142,7 @@ Here are the tasks in your matching list:
 ```
 
 
-### 'list' - Displays the full list of tasks
+### <a id="list"></a> 'list' - Displays the full list of tasks
 Displays the full list of tasks.
 
 Format: `list`
@@ -161,7 +160,7 @@ Here are the tasks in ur list:
       3. [E][] project meeting (at:on 2-4pm)
 
 ```
-### 'bye' - ends the application
+### <a id="bye"></a> 'bye' - ends the application
 Format: `bye`
 
 Example of usage:
