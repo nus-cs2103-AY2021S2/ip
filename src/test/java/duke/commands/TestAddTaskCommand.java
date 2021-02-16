@@ -32,7 +32,7 @@ public class TestAddTaskCommand {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse("2021-02-06 23:30", formatter);
 
-        this.toDo = new ToDo("CS2103 Quiz 1");
+        this.toDo = new ToDo("CS2103 Post-Lecture Quiz 1");
         this.deadline = new Deadline("BT4013 Quiz 2", dateTime);
         this.event = new Event("CS2103 Quiz 3", dateTime);
 
@@ -86,7 +86,7 @@ public class TestAddTaskCommand {
                 + "\n"
                 + "Status | Description          | Time            \n"
                 + "------------------------------------------------\n"
-                + "[T][ ] | CS2103 Quiz 1        | \n"
+                + "[T][ ] | CS2103 Post-Lectu... | \n"
                 + "\n"
                 + "Now you have 1 task(s) in the list.";
         assertEquals(expectedAddToDoResponse, this.addToDoCommand.getResponse(tasks));

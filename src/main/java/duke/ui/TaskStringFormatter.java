@@ -59,7 +59,13 @@ public class TaskStringFormatter {
     private static String getStatusString(Task task) {
         assert (task instanceof ToDo || task instanceof Deadline || task instanceof Event);
 
-        String description = String.format("%1$-" + targetDescLength + "s", task.getDescription());
+        String description = task.getDescription();
+        if (description.length() < targetDescLength) {
+            description = String.format("%1$-" + targetDescLength + "s", description);
+        } else if (description.length() > targetDescLength) {
+            description = description.substring(0, targetDescLength - 3) + "...";
+        }
+
         String status = "[" + (task.isDone() ? "X" : " ") + "]";
         String time = "";
         if (task instanceof ToDo) {
