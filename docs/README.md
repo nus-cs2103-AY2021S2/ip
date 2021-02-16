@@ -6,17 +6,20 @@ If you can type fast, Duke can get your tasks management done faster than tradit
 ## Features 
 
 ### Notes about the Command Format
-Words in `UPPER_CASE` are the parameters to be supplied by the user. 
+* Words in `UPPER_CASE` are the parameters to be supplied by the user. 
 e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo read a book`.
 
-The datetime format for add commands that takes in a datetime parameter (such as`deadline DESCRIPTION /by yyyy-mm-dd hh:mm`, `event DESCRIPTION /at yyyy-mm-dd hh:mm`) must strictly follow `yyyy-mm-dd hh:mm`. 
+
+* The datetime format for add commands that takes in a datetime parameter (such as`deadline DESCRIPTION /by yyyy-mm-dd hh:mm`, `event DESCRIPTION /at yyyy-mm-dd hh:mm`) must strictly follow `yyyy-mm-dd hh:mm`. 
 e.g. Duke will not understand `deadline homework /by 2021/2/28 10:00`.
 
-Similarly, the date format for command `schedule yyyy-mm-dd` must strictly follow `yyyy-mm-dd`. 
 
-Extraneous parameters for commands that do not take in parameters (such as `list`, `bye`) will cause the program to misinterpret the command.
+* Similarly, the date format for command `schedule yyyy-mm-dd` must strictly follow `yyyy-mm-dd`. 
+
+
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `bye`) will cause the program to misinterpret the command.
 e.g. if the command specifies `list 123`, Duke will NOT understand it as `list` but will return `OOPS!!! I'm sorry, but I don't know what that means :-(`.
-
+  
 ### Adding ToDo
 Adds a ToDo task to the task list.
 ### Adding Deadline
