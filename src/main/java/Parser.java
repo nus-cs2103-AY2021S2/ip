@@ -45,9 +45,15 @@ public class Parser {
             TodoCommand todocommand = new TodoCommand(input);
             return todocommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("deadline")) {
+            if (!input.contains("by")) {
+                throw new KeywordException();
+            }
             DeadlineCommand deadlinecommand = new DeadlineCommand(input);
             return deadlinecommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("event")) {
+            if (!input.contains("at")) {
+                throw new KeywordException();
+            }
             EventCommand eventcommand = new EventCommand(input);
             return eventcommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("find")) {
@@ -63,7 +69,7 @@ public class Parser {
             ExitCommand exitcommand = new ExitCommand();
             return exitcommand.execute(this.manager, this.ui, this.storage);
         } else {
-            throw new KeywordException();
+            throw new CommandException();
         }
     }
 }
