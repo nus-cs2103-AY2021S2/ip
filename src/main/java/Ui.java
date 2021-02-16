@@ -1,7 +1,8 @@
 public class Ui {
+    public static final String GOODBYE = "Thank you for using Duke , please come back again";
+
     private static final String GREETING = "Hello! I`m Duke\n"
             + "Please enter file name to load tasks\n ";
-    private static final String GOODBYE = "Thank you for using Duke , please come back again";
     private static final String FAILURE_LOAD_START = "No task is found in file, what can i do for you? ";
     private static final String FAILURE_UPDATE = "Field to update is invalid";
     private static final String FAILURE_SEARCH = "There are no matching task with ";
