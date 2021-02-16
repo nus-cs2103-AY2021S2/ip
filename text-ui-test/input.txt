@@ -1,0 +1,21 @@
+todo borrow book
+deadline return book /by 2020-03-10 1800
+event project meeting /at 2020-01-28 0800
+event project meeting /at wrongdate
+todo buy item
+list
+done 1
+done 3
+list
+todo
+blah
+list
+delete 1
+list
+delete 3
+list
+todo buy book
+list
+find book
+find test
+bye
