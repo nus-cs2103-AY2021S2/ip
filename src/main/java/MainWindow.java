@@ -34,8 +34,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Rimuru.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Ranga(3).png"));
 
     @FXML
     public void initialize() {
@@ -64,10 +64,16 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (response.contains("I'm sorry...")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeErrorDialog(response, dukeImage));
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
         if (input.trim().equalsIgnoreCase("BYE")) {
             Stage stage = (Stage) sendButton.getScene().getWindow();
             PauseTransition delay = new PauseTransition(Duration.seconds(2));

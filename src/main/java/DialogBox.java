@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -32,25 +33,40 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(5, 5, 5, 5, false),
-                new Insets(5, 5, 5, 30))));
-        hbox.setPadding(new Insets(5,5,5,30));
+        hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,
+                new CornerRadii(5, 5, 5, 5, false),
+                new Insets(5, 5, 5, 50))));
+        hbox.setPadding(new Insets(5,5,5,50));
+        hbox.setSpacing(5);
         dialog.setText(text);
-        dialog.setPadding(new Insets(15,0,15,15));
+        dialog.setPadding(new Insets(15,50,15,15));
         displayPicture.setImage(img);
+
+        Circle clip = new Circle(40);
+        clip.setCenterX(displayPicture.getFitWidth() / 2);
+        clip.setCenterY(displayPicture.getFitHeight() / 2);
+        displayPicture.setClip(clip);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    private void flip(boolean isError) {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(5, 5, 5, 5, false),
-                new Insets(5, 30, 5, 5))));
-        hbox.setPadding(new Insets(5,30,5,5));
+        if (isError) {
+            hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTSALMON,
+                    new CornerRadii(5, 5, 5, 5, false),
+                    new Insets(5, 50, 5, 5))));
+        } else {
+            hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK,
+                    new CornerRadii(5, 5, 5, 5, false),
+                    new Insets(5, 50, 5, 5))));
+        }
+        hbox.setPadding(new Insets(5,50,5,5));
         dialog.setPadding(new Insets(15,15,15,0));
 
     }
@@ -61,7 +77,13 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.flip(false);
+        return db;
+    }
+
+    public static DialogBox getDukeErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip(true);
         return db;
     }
 }

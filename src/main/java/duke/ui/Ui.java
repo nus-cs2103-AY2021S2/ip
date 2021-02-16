@@ -21,7 +21,7 @@ public class Ui {
      * Shows the introduction message to the user.
      */
     public String getIntroResponse() {
-        return "Hello there! I'm " + CHATBOT_NAME + ", always here for you!\n   How can I help you today?";
+        return "Hello there! I'm " + CHATBOT_NAME + ", always here for you!\n\nHow can I help you today?";
     }
 
     /**
@@ -100,7 +100,7 @@ public class Ui {
         } else {
             output = "You have these reminders!\n";
             for (int i = 0; i < reminders.size(); i++) {
-                output = output.concat("   " + (i + 1) + ". " + reminders.get(i).printWithReminder() + "\n");
+                output = output.concat((i + 1) + ". " + reminders.get(i).printWithReminder() + "\n");
             }
         }
         return output;

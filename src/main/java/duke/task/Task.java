@@ -82,7 +82,7 @@ public class Task {
     }
 
     public String printWithReminder() {
-        return this.reminder.toString() + toString();
+        return this.reminder.toString() + "   " + toString();
     }
 
     @Override
