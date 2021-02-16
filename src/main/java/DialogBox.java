@@ -24,6 +24,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    private static final int USER_DIALOG_HEIGHT = 100;
+    private static final int DUKE_DIALOG_HEIGHT = 200;
 
     private DialogBox(String text, Image img) {
         try {
@@ -54,11 +56,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setMinHeight(USER_DIALOG_HEIGHT);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setMinHeight(DUKE_DIALOG_HEIGHT);
         db.flip();
         db.getDialog().setEllipsisString("\n(...and more!)");
         Font dukeFont = new Font("Consolas", 11);
