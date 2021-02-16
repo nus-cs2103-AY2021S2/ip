@@ -16,7 +16,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(MessageGenerator messageGenerator, TaskList tasks, Storage storage)
             throws DukeStorageException {
-        tasks.add(taskToBeAdded);
+        tasks.insertIntoSortedPosition(taskToBeAdded);
         storage.saveTasks(tasks);
         String addMessage = messageGenerator.generateAddMessage(taskToBeAdded, tasks);
         return new CommandResult(addMessage, false);

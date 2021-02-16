@@ -1,4 +1,4 @@
-E | 1 | starbucks | NUS ( 2021-02-17)
+E | 0 | starbucks | NUS 2021-02-17
 D | 0 | Financial Aid Submission | 2021-03-01 (FIRST MARCH)
-D | 0 | submit CS2103 iP | 2021-03-19
+D | 1 | submit CS2103 iP | 2021-03-19
 T | 0 | touch up on CSS for CS2103 project

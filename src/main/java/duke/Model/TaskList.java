@@ -34,8 +34,9 @@ public class TaskList implements Iterable<Task> {
      * @param listOfTasks the task of lists to wrap around
      */
     public TaskList(List<Task> listOfTasks) {
-        this.listOfTasks = listOfTasks;
-        Collections.sort(listOfTasks);
+        List<Task> copiedListOfTasks = new ArrayList<>(listOfTasks);
+        Collections.sort(copiedListOfTasks);
+        this.listOfTasks = copiedListOfTasks;
     }
 
     /**
@@ -45,6 +46,10 @@ public class TaskList implements Iterable<Task> {
      */
     public void add(Task t) {
         listOfTasks.add(t);
+    }
+
+    public void insertIntoSortedPosition(Task t) {
+        add(t);
         sort();
     }
 
@@ -55,7 +60,6 @@ public class TaskList implements Iterable<Task> {
      * @return Task that was deleted.
      */
     public Task pop(int indexToDelete) throws DukeOutOfBoundsException {
-        assert indexToDelete > 0;
         Task taskToReturn = get(indexToDelete);
         listOfTasks.remove(indexToDelete - 1);
         return taskToReturn;
