@@ -4,7 +4,7 @@ Duke, a Personal Assistant Chatbot that helps a person to keep track of various 
 1. Download the latest Duke.jar from here.
 1. Copy the file to the folder you want to use as the home folder for your Duke App.
 1. Double-click the file to start the app.
-   ![Duke GUI](DukeGUI.png)
+   ![Duke GUI](UI.png)
 1. Type the command in the command box and press Enter to execute it.
    Some example commands you can try:
 1. Refer to the Features below for details of each command.
@@ -55,11 +55,11 @@ Example: `find Birthday Party`
 ### Deleting a task: `delete`
 Deletes the specified task or all the tasks from the task list.
 
-####Format 1: `INDEX`
+#### Format 1: `INDEX`
 Deletes the task at the specified INDEX. 
 - Example: `delete 1`
 
-####Format 2: `all`
+#### Format 2: `all`
 
 Deletes all the tasks from the task list. 
 - Example: `delete all`
