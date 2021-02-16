@@ -17,7 +17,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     private static final String APPLICATION_NAME = "Jhin";
-    private final Image applicationImage = new Image(this.getClass().getResourceAsStream("/images/LeagueIcon.png"));
+    private final Image applicationImage =
+            new Image(this.getClass().getResourceAsStream("/images/ApplicationIcon.png"));
     private final Jhin jhin = new Jhin();
 
     /**
