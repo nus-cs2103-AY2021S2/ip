@@ -12,10 +12,10 @@ public class TaskList {
      * @param keyWord A keyword provided by the user.
      * @return A list of tasks containing the keyword provided by the user.
      */
-    public static List<Task> find(String keyWord){
+    public static List<Task> find(String keyWord) {
         List<Task> foundTasks = new ArrayList<>();
-        for(Task task : taskList){
-            if(task.description.contains(keyWord)){
+        for (Task task : taskList) {
+            if (task.description.contains(keyWord)) {
                 foundTasks.add(task);
             }
         }
@@ -27,9 +27,9 @@ public class TaskList {
      *
      * @param task A task to be marked as complete.
      */
-    public static void completeTask(Task task){
-        for(Task t: taskList){
-            if(t.equals(task)){
+    public static void completeTask(Task task) {
+        for (Task t: taskList) {
+            if(t.equals(task)) {
                 t.completeTask();
             }
         }
@@ -40,9 +40,9 @@ public class TaskList {
      *
      * @param task A task to be removed.
      */
-    public static void removeTask(Task task){
-        for(Task t: taskList){
-            if(t.equals(task)){
+    public static void removeTask(Task task) {
+        for (Task t: taskList) {
+            if (t.equals(task)) {
                 taskList.remove(t);
                 break;
             }

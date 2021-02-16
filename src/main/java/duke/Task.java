@@ -14,13 +14,13 @@ public class Task {
     /*
      * Marks the task as complete by marking its checkbox with an X.
      */
-    public void completeTask(){
+    public void completeTask() {
         this.checkBox = "[X]";
     }
 
     @Override
     public boolean equals(Object o){
-        if(this == o){
+        if (this == o) {
             return true;
         } else if (!(o instanceof Task)) {
             return false;
