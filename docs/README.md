@@ -4,7 +4,7 @@ Welcome to Apollo's user guide.
                              
 __________________________________________________________
 
-##What is Apollo?
+## What is Apollo?
 
 Apollo is a desktop app for managing todos, deadlines and events, 
 optimised for use via the **command line interface (CLI)**. If you 
@@ -15,7 +15,7 @@ traditional GUI apps.
 
 __________________________________________________________
                
-##Contents
+## Contents
 - Quick Start
 - Features
 - Usage
