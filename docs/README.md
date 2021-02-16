@@ -160,8 +160,9 @@ default data source file can be found at `./data/popo.txt`.
 **A**: Yes. To specify your own data source file, you have to run the jar file in your terminal or
 command prompt with an additional argument indicating the file path of your own data
 source file. The easiest way is to `cd` into the base directory containing the `popo.jar` file, and
-run `java -jar popo.jar .\path\to\data\file\datasource.txt`. \
-E.g. `java -jar popo.jar .\mydata\mytasks.txt`
+run \
+`java -jar popo.jar ./path/to/data/file/datasource.txt`. \
+E.g. `java -jar popo.jar ./mydata/mytasks.txt`
 
 **Q**: Do I have to pass in a specific date format? Which date formats are acceptable? \
 **A**: Yes. We only accept the date format `dd/mm/yyyy` currently.
