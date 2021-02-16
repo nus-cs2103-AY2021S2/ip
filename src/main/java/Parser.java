@@ -76,6 +76,7 @@ public class Parser {
         case "schedule":
             String targetDate = parseSchedule(taskDetail);
             command = new ScheduleCommand(targetDate);
+            break;
         default:
             command = new Command();
         }
@@ -203,7 +204,7 @@ public class Parser {
         assert taskDetail.length > 0;
         if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-        } else{
+        } else {
             // split details to description and time
             String[] details = taskDetail[1].split(" /at ", 2);
             if (details.length == 1 || !isValidTime(details[1])) {

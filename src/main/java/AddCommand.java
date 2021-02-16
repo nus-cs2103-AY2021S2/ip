@@ -17,21 +17,22 @@ public class AddCommand extends Command {
         // initialise AddCommand with a specific task
         switch(operator) {
         case "todo":
-            taskType = "todo";
+            this.taskType = "todo";
             description = taskDetail[0];
             taskToAdd = new ToDo(description);
             break;
         case "deadline":
-            taskType = "deadline";
+            this.taskType = "deadline";
             description = taskDetail[0];
             time = taskDetail[1];
             taskToAdd = new Deadline(description, time);
             break;
         case "event":
-            taskType = "event";
+            this.taskType = "event";
             description = taskDetail[0];
             time = taskDetail[1];
             taskToAdd = new Event(description, time);
+            break;
         default:
             taskToAdd = new Task("");
         }
@@ -39,7 +40,7 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        tasks.addTask(this.taskToAdd);
+        super.tasks.addTask(this.taskToAdd);
         successMessage = "Got it. I've added this task:" + "\n" + this.taskToAdd.toString() + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.";
         return new CommandResult(successMessage);
