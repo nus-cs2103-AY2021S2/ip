@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ClientInfoStatus;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,6 +33,7 @@ public class Storage {
      * @return the list of tasks that contains the task objects.
      */
     public ArrayList<Task> load() {
+        assert tasks != null : "tasks cannot be null";
         try {
             File myFile = new File("duke.txt");
             myFile.createNewFile();

@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize(Duke d) {
+        assert duke != null : "Duke cannot be null";
         duke = d;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String welcomeMessage = Ui.showWelcomeText();

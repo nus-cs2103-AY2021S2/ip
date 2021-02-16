@@ -13,6 +13,7 @@ public class TodoCommand extends AddCommand {
      * @return A string which represents the Todo just added.
      */
     public String getString() {
+        assert tasks != null : "tasks cannot be null";
         StringBuilder str = new StringBuilder();
         for (int i = 1; i < parts.length; i++) {
             str.append(" ");

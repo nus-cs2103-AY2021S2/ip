@@ -20,6 +20,7 @@ public class ListCommand extends Command {
         if (parts.length > 1) {
             throw new DukeException("Too many arguments. Provide just one number");
         }
+        assert tasks != null : "tasks cannot be null";
         StringBuilder listStringBuilder = new StringBuilder();
         for (Task t : TaskList.getTasklist()) {
             listStringBuilder.append(listCounter).append(".").append(t.toString());

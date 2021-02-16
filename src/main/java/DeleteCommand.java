@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
         if (!Parser.isNumber(parts[1])) { //if parameter is not a number
             throw new DukeException("Parameter must be an argument");
         }
+        assert tasks != null : "tasks cannot be null";
         int index = Integer.parseInt(parts[1]);
         if (index > tasks.getSize() - 1 || index < 0) {
             throw new DukeException("Task does not exist");

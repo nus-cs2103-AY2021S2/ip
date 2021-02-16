@@ -27,10 +27,11 @@ public class DoneCommand extends Command {
             throw new DukeException("Parameter must be an argument");
         }
         int index = Integer.parseInt(parts[1]);
+        assert tasks != null : "tasks cannot be null";
+
         if (index > tasks.getSize() - 1 || index < 0) {
             throw new DukeException("Task does not exist");
         }
-//        assert index >= 1 : "Value must be at least 1";
         Task toMark = TaskList.getTasklist().get(index - 1);
         toMark.markAsDone();
         TaskList.getTasklist().get(index - 1).markAsDone();

@@ -29,6 +29,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
+        assert tasks != null : "tasks cannot be null";
         try {
             if (parts.length == 1) {
                 throw new DukeException("Insufficient arguments provided");

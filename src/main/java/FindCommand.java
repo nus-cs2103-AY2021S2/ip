@@ -19,6 +19,7 @@ public class FindCommand extends Command {
         if (parts.length == 1) {
             throw new DukeException("Insufficient arguments provided");
         }
+        assert tasks != null : "tasks cannot be null";
         StringBuilder keyString = new StringBuilder();
         StringBuilder findStringBuilder = new StringBuilder();
         for (int i = 1; i < parts.length; i++) {
