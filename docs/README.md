@@ -14,7 +14,7 @@ Add a Todo task into Robobot.
 - todo read book
 
 #### Expected Outcome:
-[T][ ] read book
+- [T][ ] read book
 
 ### 2. `Event` task
 Add an event task that has date and time allocated to it into Robobot.
@@ -25,7 +25,7 @@ Add an event task that has date and time allocated to it into Robobot.
 - event project 1 /at 2020-02-11
 
 #### Expected Outcome:
-[E][ ] project 1 (at: Feb 11 2020)
+- [E][ ] project 1 (at: Feb 11 2020)
 
 
 ### 3. `Deadline` task
