@@ -61,8 +61,9 @@ Examples:
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/addDeadlineTask.PNG)
 
 #### `event`
+
 Event command add a event task which requires task description, date as well as start and end time of the task. 
-Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
+<br>Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
 
@@ -77,15 +78,14 @@ Format: `list`
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/listTask.PNG)
 
-
 ### Delete a task : `delete`
 
 Delete a task using its task index in list.
 
 Format: `delete index_of_task`
 
-Assume that we still have 4 task, 
-* `delete3`: will remove the third task on the list
+Assume that we still have 4 tasks, 
+ `delete3`: will remove the third task on the list
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/deleteTask.PNG)
 
@@ -99,7 +99,7 @@ Format: `done index_of_task'
 Example:
 
 Assume that we still have 3 tasks, 
-* `done 1`: will mark the first task on the list as completed 
+ `done 1`: will mark the first task on the list as completed 
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/markAsDone.PNG)
 
