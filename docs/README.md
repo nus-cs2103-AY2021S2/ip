@@ -18,7 +18,7 @@
 ## Quick Start
 1. Ensure you have Java `11` installed in your machine.
 
-2. Download the latest release from here (link will be updated later).
+2. Download the latest release from [here](https://github.com/JQChong/ip/releases/tag/v0.4).
 
 3. (Optional) Copy the application to your desired folder.
 
