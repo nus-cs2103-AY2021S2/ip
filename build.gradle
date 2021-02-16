@@ -59,7 +59,7 @@ run{
 }
 
 shadowJar {
-    archiveBaseName = "main.java.duke"
+    archiveBaseName = "duke"
     archiveClassifier = null
 }
 
