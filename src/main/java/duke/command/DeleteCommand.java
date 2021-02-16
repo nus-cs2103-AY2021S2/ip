@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Ui;
-import duke.Storage;
+import java.io.IOException;
 
+import duke.DukeException;
+import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -28,14 +28,22 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String getResponString(TaskList tasks, Storage storage) {
         if (this.taskNum > tasks.size()) {
             throw new DukeException("No such task exists!");
         }
         Task deletedTask = tasks.get(taskNum);
         tasks.delete(taskNum);
-        ui.printMessage("Noted. I've removed this task:\n" + "  " + deletedTask + "Now you have "
-                + tasks.size() + " tasks in the list.");
+
+        try {
+            storage.store(tasks);
+        } catch (IOException e) {
+            throw new DukeException("Cannot save tasks. Save file not found");
+        }
+
+        String deleteResponse = "Noted. I've removed this task:\n" + "  " + deletedTask + "Now you have "
+                + tasks.size() + " tasks in the list.";
+        return deleteResponse;
     }
     
 }

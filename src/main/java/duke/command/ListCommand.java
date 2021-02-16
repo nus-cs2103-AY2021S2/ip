@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.Storage;
 
 import duke.task.TaskList;
@@ -16,7 +15,8 @@ public class ListCommand implements Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage(tasks.toString());
+    public String getResponString(TaskList tasks, Storage storage) {
+        String listResponse = tasks.toString();
+        return listResponse;
     }
 }

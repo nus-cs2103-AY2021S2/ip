@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.Ui;
-import duke.Storage;
+import java.io.IOException;
 
+import duke.Storage;
+import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -27,10 +28,15 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String getResponString(TaskList tasks, Storage storage) {
         tasks.add(this.taskToAdd);
+        try {
+            storage.store(tasks);
+        } catch (IOException e) {
+            throw new DukeException("Cannot save tasks. Save file not found");
+        }
         String numOfTasks = tasks.size() + (tasks.size() > 1 ? " tasks" : " task");
-        ui.printMessage(
-                "Got it. I've added this task:\n  " + this.taskToAdd + "\nNow you have " + numOfTasks + " in the list.");
+        String addResponse = "Got it. I've added this task:\n  " + this.taskToAdd + "\nNow you have " + numOfTasks + " in the list.";
+        return addResponse;
     }
 }

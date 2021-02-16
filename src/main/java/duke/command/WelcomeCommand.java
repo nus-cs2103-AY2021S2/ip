@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.Storage;
 
 import duke.task.TaskList;
@@ -14,8 +13,9 @@ public class WelcomeCommand implements Command {
         return false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showWelcome();
+    public String getResponString(TaskList tasks, Storage storage) {
+        String welcomeResponse = "Hello! I'm Duke\nWhat can I do for you?";
+        return welcomeResponse;
     }
 
 }

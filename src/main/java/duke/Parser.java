@@ -33,8 +33,8 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException{
         switch (input) {
-        case "bye":
-            return new ExitCommand();
+        // case "bye":
+        //     return new ExitCommand();
 
         case "list":
             return new ListCommand();
@@ -89,7 +89,7 @@ public class Parser {
                 return new AddCommand(event);                
 
             default:
-                throw new DukeException("I'm sorry ☹\nI don't know what that means");
+                throw new DukeException("I'm sorry :(\nI don't know what that means");
             }
         }
     }
