@@ -65,7 +65,8 @@ public class ChatBot {
             } else {
                 String description = parsedInput.get(1);
                 String duration;
-                switch (command) { case "find":
+                switch (command) {
+                case "find":
                     return tasklist.find(description);
                 case "todo":
                     if (detectAnomalies(command, description, null)) {
