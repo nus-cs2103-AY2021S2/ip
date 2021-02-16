@@ -34,8 +34,8 @@ public class Checklst extends Application {
 
     private final Ui ui = new Ui();
     private final Parser parser = new Parser();
-    private final Storage storage = new Storage();
     private final TaskList taskList = new TaskList();
+    private final Storage storage = new Storage();
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;

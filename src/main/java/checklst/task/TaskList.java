@@ -44,7 +44,7 @@ public class TaskList {
 
         this.taskList.add(task);
 
-        return String.format("Added: %s\n\tYou now have %d task(s) in the list!", task, this.taskList.size());
+        return String.format("Added: %s\nYou now have %d task(s) in the list!", task, this.taskList.size());
     }
 
     /**
