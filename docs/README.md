@@ -43,8 +43,8 @@ Kawaii Kat chat bot is a desktop app for managing daily task, categorized into t
 ---
 ## Notes
 
-|**:writing_hand: Notes about the command format:**|
-|---|
+**Notes about the command format:**
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
   e.g in `todo TASK_DESCRIPTION`, `TASK_DESCRIPTION` is a parameter which can be used to describe the todo task.
   
