@@ -13,7 +13,7 @@
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+1. Double-click the file to start the app. A GUI similar to the example below should appear in a few seconds.<br>
 Note: the example below contains some [sample data](#sample-data-sample).<br>
 ![Ui](./Ui.png)
 
@@ -30,7 +30,7 @@ Some examples to start off:
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo buy eggs`.
 
 * Items in square brackets `[]` are optional.<br>
@@ -52,8 +52,8 @@ Shows all available commands.
 
 Format: `todo DESCRIPTION`, `deadline DESCRIPTION /by DATE`, `event DESCRIPTION /at DATE`
 
-Adds a task to the tasklist.
-Current supports 3 types of tasks.
+Adds a task to the tasklist.<br>
+Current supports 3 types of tasks:
 1. `todo`
    * A todo task is simply a task with a description.
 1. `deadline`
@@ -78,7 +78,7 @@ Shows a list of all tasks.
 
 Format: `delete INDEX [INDEX...]`, `clear`
 
-There are 2 ways to delete tasks
+There are 2 ways to delete tasks:
 1. `delete`
    * Deletes the task at the given `INDEX`.
    * `INDEX` must be a valid number.
@@ -102,7 +102,7 @@ Format: `highpriority INDEX`, `lowpriorty INDEX`
 
 Set a task to high or low priorty
 * Newly added tasks are set to low priority by default.
-* High priority tasks appear as yellow in the listviewer.
+* High priority tasks appear as yellow in the [listviewer](#listviewer).
 * High priority tasks will have an extra label "IMPT!"
 * High priority tasks will be pushed to top of tasklist upon [sort](#sorting-tasklist-sort).
 
@@ -194,6 +194,6 @@ Action | Format, Examples
 **lowpriority** | `lowpriority INDEX`<br>eg. `lowpriority 1`
 **sample** | `sample`
 **save** | `save`
-**search** | `search {KEYWORD \| DATE}`<br>eg. `search abc`, `search 2021-01-01`
+**search** | `search {KEYWORD | DATE}`<br>eg. `search abc`, `search 2021-01-01`
 **sort** | `sort`
 **todo** | `todo DESCRIPTION`<br>eg. `todo read book`
