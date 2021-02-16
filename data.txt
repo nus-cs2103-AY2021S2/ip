@@ -1,5 +1,2 @@
-1.[T][ ] something\
-2.[E][ ] something (at: Feb 2 2019)
-3.[T][ ] something to be deleted
-4.[T][ ] something to be delete
-5.[T][ ] something
+1.[E][ ] something (at: Feb 2 2019)
+2.[T][✘] something to be deleted

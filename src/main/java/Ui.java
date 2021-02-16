@@ -69,20 +69,20 @@ public class Ui {
         if (date.equals("")) {
             value = ("Here are the tasks in your list\n");
             while (scanner.hasNext()) {
-                value += (scanner.nextLine());
+                value += (scanner.nextLine()) + "\n";
             }
             return value;
         } else {
             LocalDate thisDate = LocalDate.parse(date);
             value = ("Here are the tasks in your list due on "
-                    + thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                    + thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n");
             while (scanner.hasNext()) {
                 String curTask = scanner.nextLine();
                 String[] string = curTask.split(": ");
                 if (string.length > 1) {
                     String dueDate = string[1].replace(")", "");
                     if (dueDate.equals(thisDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))) {
-                        value += (curTask);
+                        value += (curTask) + "\n";
                     }
                 }
 
@@ -97,7 +97,7 @@ public class Ui {
         while (scanner.hasNext()) {
             String curTask = scanner.nextLine();
             if (curTask.contains(task)) {
-               value += (curTask);
+               value += (curTask) + "\n";
             }
         }
         return value;
@@ -105,7 +105,7 @@ public class Ui {
 
     public String addUndoString() {
         String value;
-        value = ("Here is the command that you have undone: \n");
+        value = ("Undo-ed the latest AddCommand");
         return value;
     }
 }
