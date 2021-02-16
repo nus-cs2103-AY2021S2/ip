@@ -7,7 +7,7 @@ public class PreformattedMessages {
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|____/ \\__,_|_|\\_\\___|\n\n";
     private static final String DUKE_WELCOME = "Welcome to Duke!\n\n";
 
     /**
