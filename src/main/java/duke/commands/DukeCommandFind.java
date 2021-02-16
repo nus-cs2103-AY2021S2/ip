@@ -115,7 +115,7 @@ public class DukeCommandFind extends DukeCommand {
     private void addToResponseFoundTasks(List<String> lines, List<Integer> validTaskIndices, TaskList tasks) {
         lines.add(""); // blank line
         for (int taskIndex : validTaskIndices) {
-            String s = "" + taskIndex + ". " + tasks.getTaskUnsafe(taskIndex).toString();
+            String s = "" + (taskIndex + 1) + ". " + tasks.getTaskUnsafe(taskIndex).toString();
             lines.add(s);
         }
     }
