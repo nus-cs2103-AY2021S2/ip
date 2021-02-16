@@ -86,7 +86,7 @@ public class Chadbot {
     }
 
     /**
-     * Generates a response to user input.
+     * Generates a response to the user input.
      *
      * @param input User input.
      * @return Duke's response to the user input.

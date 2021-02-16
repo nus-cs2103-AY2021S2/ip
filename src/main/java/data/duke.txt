@@ -1,3 +1,0 @@
-T | 0 | borrow book
-D | 1 | return book | 2011-11-11
-E | 0 | project meeting | 2034-02-28
