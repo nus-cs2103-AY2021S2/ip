@@ -181,7 +181,7 @@ public class Parser {
         } else {
             assert(splitDetails.length == 2);
 
-            try {                
+            try {
                 LocalDate date = LocalDate.parse(splitDetails[1]);
                 return new Event(splitDetails[0], date);
             } catch (DateTimeParseException e) {

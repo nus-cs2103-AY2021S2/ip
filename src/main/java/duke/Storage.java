@@ -22,7 +22,6 @@ public class Storage {
 
     /**
      * Construction with specified file path
-     * 
      * @param filePath the file path to load and save from
      */
     public Storage(String filePath) {
@@ -31,7 +30,6 @@ public class Storage {
 
     /**
      * Loads task list from the file path given during initialisation
-     * 
      * @return List of saved tasks
      * @throws IOException
      * @throws DateTimeParseException
@@ -59,7 +57,6 @@ public class Storage {
 
     /**
      * Stores task list into file path specified during initialisation
-     * 
      * @param tasks Task list to be saved
      * @throws IOException
      */
