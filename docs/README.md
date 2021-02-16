@@ -77,4 +77,4 @@ The sorting will be done via 2 conditions. Firstly, the tasks will be split into
 ## Errors
 Checklst is is capable of handling errors in command or keyword inputs. Whenever an error is encounted, Checklst will return the error message with a clear red indicator.
 
-![](images/UI.png)
+![](images/Ui.png)
