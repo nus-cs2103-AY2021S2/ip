@@ -28,8 +28,9 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command: `todo`
 * Command Format: `todo <Description>`
 * Command Example: `todo Read books`
-
-![Image of ToDo task](https://github.com/ssoonwee/ip/blob/master/docs/images/create_todo_task.PNG)
+<p align="center">
+  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/create_todo_task.PNG">
+</p>
 
 ### Create a Deadline task
 * Description: Adds a Deadline task followed by its description.
