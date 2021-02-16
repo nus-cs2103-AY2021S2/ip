@@ -48,13 +48,13 @@ public class AddCommand extends Command {
             break;
         }
 
-        int currentSize = tasklist.getTaskListArray().size()-1;
+        int currentSize = tasklist.getTaskListArray().size() - 1;
         DataStorage.save(tasklist.getTaskListArray());
 
-        if(executedUnsuccessfully){
-            return ui.DisplayDuplicatedMessage();
-        }else{
-           return ui.displayAddedTaskMessage(tasklist.getTask(currentSize), currentSize+1);
+        if (executedUnsuccessfully) {
+            return ui.displayDuplicatedMessage();
+        } else {
+            return ui.displayAddedTaskMessage(tasklist.getTask(currentSize), currentSize + 1);
         }
 
     }

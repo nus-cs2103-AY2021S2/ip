@@ -5,7 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/will.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bear.png"));
 
+    /**
+     * Method that gets invoked when the program run
+     */
     @FXML
     public void initialize() {
         setDuke(new Duke());
@@ -47,10 +51,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(input, dukeImage),
-                DialogBox.getUserDialog(response, userImage)
-                );
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(input, dukeImage),
+                DialogBox.getUserDialog(response, userImage));
         userInput.clear();
     }
 }

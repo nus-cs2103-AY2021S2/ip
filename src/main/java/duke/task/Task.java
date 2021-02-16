@@ -71,7 +71,7 @@ public class Task {
      */
     public Task changeToTaskFormat(String taskDescription) {
 
-        assert taskDescription!= null:"Task identifier from data file should be specified";
+        assert taskDescription != null : "Task identifier from data file should be specified";
         if (taskDescription.charAt(0) == 'T') {
             String[] tasks = taskDescription.split(",");
 
@@ -98,7 +98,7 @@ public class Task {
      * @return boolean true if task is duplicated
      */
 
-    public boolean isSameTask(Task t){
+    public boolean isSameTask(Task t) {
         return this.getTaskDescription().equals(t.getTaskDescription());
     }
 

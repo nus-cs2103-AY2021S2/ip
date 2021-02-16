@@ -10,9 +10,9 @@ public class UI {
     /**
      * Display the greeting message upon launching the application
      */
-    public static String displayWelcomeMessage(){
-        String output = "Hello! I am Will, your personal assistant." + "\n" +
-                "What can I do for you today?";
+    public static String displayWelcomeMessage() {
+        String output = "Hello! I am Will, your personal assistant." + "\n"
+                + "What can I do for you today?";
         return output;
     }
 
@@ -35,7 +35,7 @@ public class UI {
     /**
      * Display message to inform users that this is a duplicated task
      */
-    public String DisplayDuplicatedMessage() {
+    public String displayDuplicatedMessage() {
         return "Existing entries with same task description was found. " +
                 "Please add a new task.";
     }
@@ -50,14 +50,14 @@ public class UI {
     /**
      * Display header to show the tasks in the current list
      */
-    public String DisplayListHeader() {
+    public String displayListHeader() {
         return "Here are the tasks in your list:";
     }
 
     /**
      * Display header to show the tasks in the current list
      */
-    public String DisplayFindHeader() {
+    public String displayFindHeader() {
         return "Here are the matching tasks in your list:";
     }
 
@@ -84,7 +84,7 @@ public class UI {
      * @param task task
      */
     public String displayDoneTaskMessage(Task task) {
-        return  "Nice! I'll make this task as completed: \n" + task.toString() + "\n";
+        return "Nice! I'll make this task as completed: \n" + task.toString() + "\n";
     }
 
     /** Display exception messages upon encountering errors

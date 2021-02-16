@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import duke.command.Command;
 import duke.parser.Parser;
+import duke.exception.DukeException;
+import duke.data.DataStorage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
-import duke.data.DataStorage;
-import duke.exception.DukeException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

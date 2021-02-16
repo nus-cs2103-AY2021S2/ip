@@ -55,11 +55,9 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-
-
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        Color col = Color.rgb(239,216,226);
+        Color col = Color.rgb(239, 216, 226);
         CornerRadii corn = new CornerRadii(10);
         Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
         db.dialog.setBackground(background);
@@ -69,7 +67,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        Color col = Color.rgb(184,217,243);
+        Color col = Color.rgb(184, 217, 243);
         CornerRadii corn = new CornerRadii(10);
         Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
         DialogBox db = new DialogBox(text, img);

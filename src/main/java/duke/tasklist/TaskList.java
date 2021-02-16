@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import duke.ui.UI;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.UI;
 
 /**
  * Interact with task class to facilitate the creation, deletion and update of task
@@ -29,13 +29,13 @@ public class TaskList {
 
         Task toDo = new ToDo(description);
         boolean isDuplicate = false;
-        for(int i=0; i< taskArraylist.size(); i++){
+        for (int i = 0; i < taskArraylist.size(); i++) {
             isDuplicate = this.getTaskListArray().get(i).isSameTask(toDo);
-            if(isDuplicate){
+            if (isDuplicate) {
                 break;
             }
         }
-        if(!isDuplicate) {
+        if (!isDuplicate) {
             taskArraylist.add(toDo);
         }
         return isDuplicate;
@@ -51,13 +51,13 @@ public class TaskList {
     public Boolean addDeadline(String description, LocalDate dueDate, LocalTime endTime) {
         Task deadline = new Deadline(description, dueDate, endTime);
         boolean isDuplicate = false;
-        for(int i=0; i< taskArraylist.size(); i++){
+        for (int i = 0; i < taskArraylist.size(); i++) {
             isDuplicate = this.getTaskListArray().get(i).isSameTask(deadline);
-            if(isDuplicate){
+            if (isDuplicate) {
                 break;
             }
         }
-        if(!isDuplicate) {
+        if (!isDuplicate) {
             taskArraylist.add(deadline);
         }
         return isDuplicate;
@@ -74,14 +74,14 @@ public class TaskList {
     public Boolean addEvent(String description, LocalDate dueDate, LocalTime startTime, LocalTime endTime) {
         Task event = new Event(description, false , dueDate, startTime, endTime);
         boolean isDuplicate = false;
-        for(int i=0; i< taskArraylist.size(); i++){
+        for (int i = 0; i < taskArraylist.size(); i++) {
             isDuplicate = this.getTaskListArray().get(i).isSameTask(event);
-            if(isDuplicate){
+            if (isDuplicate) {
                 break;
             }
         }
 
-        if(!isDuplicate) {
+        if (!isDuplicate) {
             taskArraylist.add(event);
         }
 
@@ -103,17 +103,17 @@ public class TaskList {
             taskList = taskArraylist;
         }
 
-        if(taskList.size() >0) {
-            if(commandType.equals("find")) {
-                allTask = ui.DisplayFindHeader();
-            }else{
-                allTask = ui.DisplayListHeader();
+        if (taskList.size() > 0) {
+            if (commandType.equals("find")) {
+                allTask = ui.displayFindHeader();
+            } else {
+                allTask = ui.displayListHeader();
             }
 
             for (int i = 0; i < taskList.size(); i++) {
                 allTask = allTask + "\n" + ui.displayTask(i, taskList.get(i));
             }
-        }else{
+        }else {
             allTask = ui.DisplayNoTaskMessage();
         }
         return allTask;
@@ -152,7 +152,7 @@ public class TaskList {
     /** Change the current array list of task to given array list
      * @param TaskArrayList array list of task
      */
-    public void setTaskArraylist (ArrayList<Task> TaskArrayList) {
+    public void setTaskList(ArrayList<Task> TaskArrayList) {
         this.taskArraylist = TaskArrayList;
     }
 

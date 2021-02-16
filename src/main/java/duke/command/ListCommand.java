@@ -1,8 +1,7 @@
 package duke.command;
+import java.io.IOException;
 
 import duke.exception.DukeException;
-
-import java.io.IOException;
 
 /**
  * Command class to list task in the task list
@@ -22,13 +21,13 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute() throws DukeException, IOException {
-        tasklist.setTaskArraylist(storage.loadFile());
-        String allTaskMsg =  tasklist.showAllTask("list");
+        tasklist.setTaskList(storage.loadFile());
+        String allTaskMsg = tasklist.showAllTask("list");
         System.out.println("all list size is: " + tasklist.getTaskListArray().size());
 
-        if(allTaskMsg.isEmpty()){
+        if (allTaskMsg.isEmpty()) {
             return ui.DisplayNoTaskMessage();
-        }else{
+        } else {
             return allTaskMsg;
         }
     }

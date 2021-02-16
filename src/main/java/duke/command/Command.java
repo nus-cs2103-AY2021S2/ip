@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
-import duke.ui.UI;
+import java.io.IOException;
+
 import duke.data.DataStorage;
 import duke.exception.DukeException;
-
-import java.io.IOException;
+import duke.tasklist.TaskList;
+import duke.ui.UI;
 
 /**
  * A class that interacts with TaskList class to add, show, delete, find task as well as marking them as completed
@@ -30,7 +30,7 @@ public class Command {
      * @throws DukeException
      */
     public String execute() throws DukeException, IOException {
-        tasklist.setTaskArraylist(storage.loadFile());
+        tasklist.setTaskList(storage.loadFile());
         return null;
     }
 

@@ -1,7 +1,5 @@
 package duke.parser;
-
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -62,7 +60,7 @@ public class Parser {
             DoneCommand doneCommand = new DoneCommand(commandArray[1]);
             return doneCommand.execute();
         } else {
-            return ParseToAddCommand(type, taskDetail, input);
+            return InvokeAddCommand(type, taskDetail, input);
         }
     }
 
@@ -76,7 +74,7 @@ public class Parser {
      * @throws DukeException
      * @throws IOException
      */
-    public static String ParseToAddCommand(String type, String userInput, String taskDetail) throws DukeException {
+    public static String InvokeAddCommand(String type, String userInput, String taskDetail) throws DukeException {
         switch (type) {
             case ("todo"):
                 AddCommand ac = new AddCommand(userInput, "todo", null, null, null);

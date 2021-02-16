@@ -1,7 +1,6 @@
 package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.WeakHashMap;
 
 /**
  * The deadline class initialize and manage deadline tasks.

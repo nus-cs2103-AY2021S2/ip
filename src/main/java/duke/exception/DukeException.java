@@ -1,5 +1,4 @@
 package duke.exception;
-
 /**
  * Customized exception class to display customized exception
  */
