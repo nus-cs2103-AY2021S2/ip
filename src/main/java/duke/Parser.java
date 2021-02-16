@@ -1,14 +1,15 @@
 package duke;
 
-import duke.command.Command;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
 import duke.command.CheckCommand;
-import duke.command.FindCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
-import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
-
 import duke.task.Deadline;
 import duke.task.DeadlineException;
 import duke.task.Event;
@@ -16,25 +17,18 @@ import duke.task.EventException;
 import duke.task.ToDo;
 import duke.task.ToDoException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * Parser for Duke commands
  */
 public class Parser {
-
     /**
-     * Parses a string input to the relevent command instruction. 
-     * 
+     * Parses a string input to the relevent command instruction.
      * @param input The String to be parsed
-     * @return Command to be executed
+     * @return Duke's response to the input as a String
      * @throws DukeException
      */
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws DukeException {
         switch (input) {
-        // case "bye":
-        //     return new ExitCommand();
 
         case "list":
             return new ListCommand();
@@ -48,7 +42,7 @@ public class Parser {
                     throw new DukeException("Please enter the task to mark as finished!");
                 }
                 return getDoneCommand(splitInput[1]);
-        
+
             case "delete":
                 if (splitInput.length < 2) {
                     throw new DukeException("Please enter the task to delete!");
@@ -60,7 +54,7 @@ public class Parser {
                     throw new DukeException("Please enter the date to check!");
                 }
                 return getCheckCommand(splitInput[1]);
-            
+
             case "find":
                 if (splitInput.length < 2) {
                     throw new DukeException("Please enter the keyword(s) to find!");
@@ -86,7 +80,7 @@ public class Parser {
                     throw new EventException("Event details cannot be empty!");
                 }
                 Event event = getEvent(splitInput[1]);
-                return new AddCommand(event);                
+                return new AddCommand(event);
 
             default:
                 throw new DukeException("I'm sorry :(\nI don't know what that means");

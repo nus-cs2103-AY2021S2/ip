@@ -17,8 +17,6 @@ public class TaskList {
 
     /**
      * Adds task to list
-     * 
-
      * @param task Task to be added
      */
     public void add(Task task) {
@@ -27,7 +25,6 @@ public class TaskList {
 
     /**
      * Gets the task in the list based on its task number
-     * 
      * @param taskNum Task number of the task to be found
      * @return Task with the given task number
      */
@@ -37,7 +34,6 @@ public class TaskList {
 
     /**
      * Marks the task with the given task number as complete
-     * 
      * @param taskNum Task number of the task to be marked as complete
      */
     public void done(int taskNum) {
@@ -46,7 +42,6 @@ public class TaskList {
 
     /**
      * Removes the task with the given task number from the list
-     * 
      * @param taskNum Task number of the task to be removed
      */
     public void delete(int taskNum) {
@@ -55,7 +50,6 @@ public class TaskList {
 
     /**
      * Gets the total number of tasks currently in the list
-     * 
      * @return Number of tasks in the list
      */
     public int size() {
@@ -70,5 +64,4 @@ public class TaskList {
         }
         return taskListString.toString();
     }
-
 }
