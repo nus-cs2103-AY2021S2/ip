@@ -83,7 +83,7 @@ Duke saves your data in `[file location]/data/save.txt]`. You are welcomed to up
 ## Command Summary
 Action | Format | Examples 
 ------ | ------- | --------
-|Add|`todo DESCRIPTION` /n `deadline DESCRIPTION /by YYYY-MM-DD` /n `event DESCRIPTION /at YYYY-MM-DD`. | `todo task1` /n `deadline task2 /by 2021-03-12` /n `event task3 /at 2021-04-02`|
+|Add|`todo DESCRIPTION` <br /> `deadline DESCRIPTION /by YYYY-MM-DD` <br /> `event DESCRIPTION /at YYYY-MM-DD`. | `todo task1` <br /> `deadline task2 /by 2021-03-12` <br /> `event task3 /at 2021-04-02`|
 |List|`list`|
 |Find|`find KEYWORDS`. | `find task`|
 |Done|`done INDEX`. | `done 1`|
