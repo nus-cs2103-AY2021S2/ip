@@ -53,6 +53,6 @@ public class Duke {
      * @return       The response string.
      */
     public String getResponse(String input) {
-        return new Duke("data\\duke.txt").run(input);
+        return new Duke("data/duke.txt").run(input);
     }
 }
