@@ -2,6 +2,8 @@
 
 Duke is a **desktop application for managing tasks, optimized to be used with Command Line Interface** (CLI). It showcased your inputs and the outputs using Graphical User Interface (GUI).
 
+![Image of Duke.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Ui.png)
+
 #### Table Of Contents
 
 - Features
@@ -47,7 +49,7 @@ Format: `find KEYWORDS`
  * Partial words will be matched.
 	* Example: funfair will match with fun.
 Examples: 
- * `find CS2101` returns `CS2101 HW`, `CS2101 assgn`, and `CS2101 exam`.
+ * `find CS2101` returns `CS2101 HW`, `CS2101 assgn`, and `CS2101 exam`. \n
 ![Image of find method example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Find_method_example.png)
 
 ### Marking a task as complete: `done`
@@ -55,8 +57,8 @@ Marks a task as done.
 Format: `done INDEX`
  * Marks the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, ...
 Eamples:
- - `done 1` Marks your first task as completed.
-![Image of done example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Done_method_example.png)
+ - `done 1` Marks your first task as completed. \n
+![Image of done example.](https://github.com/markuz5116/Marcus-Ong-iP/docs/Done_method_example.png)
 
 ### Deleting a task: `delete`
 Deletes a specified task from your task list.
@@ -79,11 +81,11 @@ Duke saves your data in `[file location]/data/save.txt]`. You are welcomed to up
 	>2. E/D | 0/1 | DESCRIPTION | YYYY-MM-DD
 	
 ## Command Summary
-|Action|Format, Examples|
-|--|--|
-|Add|`todo DESCRIPTION`, `deadline DESCRIPTION /by YYYY-MM-DD`, `event DESCRIPTION /at YYYY-MM-DD`. Example: `todo task1`, `deadline task2 /by 2021-03-12`, `event task3 /at 2021-04-02`|
-|List|`list`|
-|Find|`find KEYWORDS`. Example: `find task`|
-|Done|`done INDEX`. Example: `done 1`|
-|Delete|`delete INDEX`. Example: `delete 6`
+|Action|Format, Examples| \
+|--|--|\
+|Add|`todo DESCRIPTION`, `deadline DESCRIPTION /by YYYY-MM-DD`, `event DESCRIPTION /at YYYY-MM-DD`. /n Example: `todo task1`, `deadline task2 /by 2021-03-12`, `event task3 /at 2021-04-02`|\
+|List|`list`|\
+|Find|`find KEYWORDS`. \n Example: `find task`|\
+|Done|`done INDEX`. \n Example: `done 1`|\
+|Delete|`delete INDEX`. \n Example: `delete 6`
 
