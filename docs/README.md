@@ -1,11 +1,9 @@
-Duke is a task manager.
+# Duke User Guide
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
-# User Guide
 
 ## Quick start
 
