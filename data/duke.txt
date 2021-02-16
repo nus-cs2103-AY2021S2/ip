@@ -1,5 +1,6 @@
-T | 0 | byebye
-T | 0 | ok
-T | 0 | how r u
-T | 0 | wowww
 T | 0 | hello
+E | 0 | Project meeting | 2021-03-10
+T | 1 | Buy bubbletea
+T | 0 | Borrow Book
+E | 0 | Borrow Book | 2021-02-10
+D | 0 | Borrow Book | 2021-02-10
