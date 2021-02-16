@@ -31,7 +31,8 @@ public class Parser {
         case "todo":
             String name = getDescription(command);
             if (!name.equals("")) {
-                Todo todo = new Todo(name.trim());
+                String[] split = name.split("/p", 2);
+                Todo todo = new Todo(split[0].trim(), split[1].trim());
                 Task newTask = taskList.addTask(todo);
                 storage.appendToFile(todo);
                 return ui.showAddTask(newTask, taskList.getListSize());
@@ -43,7 +44,8 @@ public class Parser {
             String desc = getDescription(command);
             if (!desc.equals("")) {
                 String[] split = desc.split("/by", 2);
-                Deadline deadline = new Deadline(split[0].trim(), split[1].trim());
+                String[] split2 = split[1].split("/p", 2);
+                Deadline deadline = new Deadline(split[0].trim(), split2[0].trim(), split2[1].trim());
                 Task newTask = taskList.addTask(deadline);
                 storage.appendToFile(deadline);
                 return ui.showAddTask(newTask, taskList.getListSize());
@@ -55,7 +57,8 @@ public class Parser {
             String description = getDescription(command);
             if (!description.equals("")) {
                 String[] split = description.split("/at", 2);
-                Event event = new Event(split[0].trim(), split[1].trim());
+                String[] split2 = split[1].split("/p", 2);
+                Event event = new Event(split[0].trim(), split2[0].trim(), split2[1].trim());
                 Task newTask = taskList.addTask(event);
                 storage.appendToFile(event);
                 return ui.showAddTask(newTask, taskList.getListSize());

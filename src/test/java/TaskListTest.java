@@ -8,7 +8,7 @@ public class TaskListTest {
     @Test
     public void testAddTask() {
         TaskList list = new TaskList();
-        Task task = new Todo("eat");
+        Task task = new Todo("eat", "high");
 
         assertEquals(task, list.addTask(task));
     }

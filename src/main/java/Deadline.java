@@ -14,8 +14,8 @@ public class Deadline extends Task {
      * @param time LocalDate object that represents
      *            the time this Deadline is happening.
      */
-    public Deadline(String name, String time) {
-        super(name);
+    public Deadline(String name, String time, String priority) {
+        super(name, priority);
         this.time = LocalDate.parse(time);
     }
 
@@ -29,8 +29,8 @@ public class Deadline extends Task {
      * @param time LocalDate object that represents
      *            the time this Deadline is happening.
      */
-    public Deadline(String name, boolean isDone, String time) {
-        super(name, isDone);
+    public Deadline(String name, boolean isDone, String time, String priority) {
+        super(name, isDone, priority);
         this.time = LocalDate.parse(time);
     }
 
