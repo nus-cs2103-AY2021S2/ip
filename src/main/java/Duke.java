@@ -20,7 +20,6 @@ public class Duke {
     storage = new Storage("duke.txt");
     try {
       tasks = new TaskList(storage.load());
-      System.out.println(tasks.getTasklist());
     } catch (FileNotFoundException e) {
       System.out.println("No existing Storage File");
     }
@@ -35,9 +34,11 @@ public class Duke {
    * Outputs the greeting and initiaties the userinput parase command to take in inputs from usher.
    */
 
-  public void run() throws IOException, DescriptionError {
-    ui.greeting();
+  public String run() throws IOException, DescriptionError {
+    return ui.greeting();
   }
+
+
 
 
   /**

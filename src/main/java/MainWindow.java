@@ -21,14 +21,14 @@ public class MainWindow extends AnchorPane {
 
   private Duke duke;
 
-  private Image userImage = new Image(this.getClass().getResourceAsStream("a.jpg"));
-  private Image dukeImage = new Image(this.getClass().getResourceAsStream("a.jpg"));
+  private Image userImage = new Image(this.getClass().getResourceAsStream("/images/B.JPG"));
+  private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/A.JPG"));
 
 
 
   @FXML
   public void initialize() {
-    scrollPane.setStyle("-fx-background: rgb(255,255,255)");
+    scrollPane.setStyle("-fx-border-color: #0000ff");
     scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
   }
 

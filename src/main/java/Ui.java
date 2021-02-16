@@ -18,16 +18,10 @@ public class Ui {
   /**
    * Outputs the customised greeting message when Duke object is instiatied.
    */
-  public void greeting() {
-    String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-    System.out.println("Hello from\n" + logo);
-    System.out.println(" ___________________________________________");
-    System.out.println("Hello! I'm Duke \n" + "What can I do for you today?");
-    System.out.println(" ___________________________________________");
+  public String greeting() {
+    String logo = "Duke\n" + "How are you today?";
+    StringBuilder output = new StringBuilder("Hello from\n" + logo);
+    return  output.toString();
   }
 
   public String readUserInput(String command, Storage storage, TaskList tasks) throws IOException {

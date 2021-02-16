@@ -230,7 +230,7 @@ public class Parser {
       }
       if (input.split(" ").length == 2 && Integer.parseInt(input.split(" ")[1])
                       / Integer.parseInt(input.split(" ")[1]) == 1) {
-        taskList.delete(Integer.parseInt(input.split(" ")[1]));
+        output = taskList.delete(Integer.parseInt(input.split(" ")[1]));
       }
     } catch (DescriptionError | UnknownInputError | NumberFormatException e) {
       if (e instanceof NumberFormatException) {
@@ -248,11 +248,9 @@ public class Parser {
    * @ param taskList  tasklist object which contains the list where all the task is stored
    */
   public Integer detectDuplicate(Task input, TaskList taskList) {
-    for (Task t : taskList.getTasklist()) {
-      if (t.toString().equals(input.toString())) {
+    for (int i = 0; i < taskList.getTasklist().size(); i++) {
+      if (taskList.getTasklist().get(i).toString().equals(input.toString())) {
         return 1;
-      } else {
-        return 0;
       }
     }
     return 0;
@@ -265,3 +263,4 @@ public class Parser {
 
 
 
+// deadline return book /by 2/12/2019 1800

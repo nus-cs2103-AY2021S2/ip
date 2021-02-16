@@ -68,6 +68,22 @@ public class TaskList {
     return output.toString();
   }
 
+  public String findDuplicate(String keyword) {
+    ArrayList<Task> list = new ArrayList<>();
+    int i = 1;
+    for (Task t : this.tasklist) {
+      if (t.getDescription().contains(keyword)) {
+        list.add(t);
+      }
+    }
+    StringBuilder output = new StringBuilder("Here are the tasks in your matching list: \n");
+    for (Task task : list) {
+      output.append(i + ". " + task);
+      i++;
+    }
+    return output.toString();
+  }
+
 
 
 }
