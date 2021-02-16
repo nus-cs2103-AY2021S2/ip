@@ -39,7 +39,7 @@ public class Deadline extends Task {
      * @return A LocalDate representing the Task Deadline.
      */
     public LocalDate getBy() {
-        assert this.by != null: "by should not be null!";
+        assert this.by != null : "by should not be null!";
         return this.by;
     }
 

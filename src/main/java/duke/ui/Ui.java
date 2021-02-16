@@ -2,7 +2,6 @@ package duke.ui;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
 
 import duke.Duke;
 import duke.util.Parser;
@@ -12,8 +11,8 @@ import duke.util.Parser;
  */
 public class Ui {
 
-    private static Queue<String> messageQueue = new LinkedList<>();
     public static final String INDENTATION = "    ";
+    private static Queue<String> messageQueue = new LinkedList<>();
 
     /**
      * Displays a message with an indentation of 4 spaces.
@@ -106,7 +105,7 @@ public class Ui {
      * @param input User input to be passed to Parser.
      */
     public void handleInput(Duke apollo, String input) {
-        assert apollo != null: "apollo should not be null!";
+        assert apollo != null : "apollo should not be null!";
 
         try {
             Parser.handleInput(input, apollo.getTasks().getTaskList(), apollo);

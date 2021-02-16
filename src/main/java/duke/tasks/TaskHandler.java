@@ -24,9 +24,9 @@ public class TaskHandler {
      * @throws DukeException When an invalid option is passed together with a command.
      */
     public static void addTask(Commands command, String input, ArrayList<Task> taskList) throws DukeException {
-        assert taskList != null: "taskList should not be null!";
-        assert command != null: "command should not be null!";
-        assert input != null: "input should not be null!";
+        assert taskList != null : "taskList should not be null!";
+        assert command != null : "command should not be null!";
+        assert input != null : "input should not be null!";
         int numberOfTasks = taskList.size();
 
         switch (command) {

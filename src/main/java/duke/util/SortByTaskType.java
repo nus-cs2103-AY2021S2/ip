@@ -5,7 +5,7 @@ import duke.tasks.Task;
 import java.util.Comparator;
 
 /**
- * Sorts tasks
+ * Sorts tasks by task type
  */
 public class SortByTaskType implements Comparator<Task> {
     public int compare(Task a, Task b) {

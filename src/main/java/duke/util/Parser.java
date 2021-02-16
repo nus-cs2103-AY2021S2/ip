@@ -25,8 +25,8 @@ public class Parser {
      * @throws DukeException Occurs when a command is unrecognised or options are invalid.
      */
     public static void handleInput(String s, ArrayList<Task> taskList, Duke apollo) throws DukeException {
-        assert apollo != null: "apollo should not be null!";
-        assert taskList != null: "taskList should not be null!";
+        assert apollo != null : "apollo should not be null!";
+        assert taskList != null : "taskList should not be null!";
 
         String input = s.trim();
         Commands command;
@@ -96,7 +96,8 @@ public class Parser {
      * @param taskList TaskList containing tasks.
      * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
      */
-    private static void handleDone(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
+    private static void handleDone(Commands command, String input, ArrayList<Task> taskList)
+            throws InvalidOptionException {
         try {
             TaskHandler.doneTask(input, taskList);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -111,7 +112,8 @@ public class Parser {
      * @param taskList TaskList containing tasks.
      * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
      */
-    private static void handleDelete(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
+    private static void handleDelete(Commands command, String input, ArrayList<Task> taskList)
+            throws InvalidOptionException {
         try {
             TaskHandler.deleteTask(input, taskList);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -126,7 +128,8 @@ public class Parser {
      * @param taskList TaskList containing tasks.
      * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
      */
-    private static void handleFind(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
+    private static void handleFind(Commands command, String input, ArrayList<Task> taskList)
+            throws InvalidOptionException {
         try {
             TaskHandler.findTasks(input, taskList);
         } catch (IndexOutOfBoundsException e) {
