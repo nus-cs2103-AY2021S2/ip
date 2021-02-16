@@ -1,6 +1,7 @@
 # User Guide
 
 Welcome to Apollo's user guide.
+                           
 
 ###What is Apollo?
 
@@ -11,6 +12,7 @@ traditional GUI apps.
                   
 ![Screenshot of Apollo](Ui.png)
                
+          
 
 ##Contents
 - Quick Start
