@@ -25,7 +25,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
     private static final int USER_DIALOG_HEIGHT = 100;
-    private static final int DUKE_DIALOG_HEIGHT = 200;
+    private static final int DUKE_DIALOG_HEIGHT = 180;
 
     private DialogBox(String text, Image img) {
         try {
