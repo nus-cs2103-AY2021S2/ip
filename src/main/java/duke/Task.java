@@ -5,12 +5,6 @@ public class Task {
     public String eventName;
     public String eventType;
 
-    public Task(boolean done, String eventName) {
-        this.isDone = done;
-        this.eventName = eventName;
-        this.eventType = "T";
-    }
-
     public Task(boolean done, String eventName, String eventType) {
         this.isDone = done;
         this.eventName = eventName;

@@ -8,10 +8,6 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    TaskList() {
-        this.tasks = new ArrayList<>();
-    }
-
     public void addTask(Task task) {
         tasks.add(task);
     }
