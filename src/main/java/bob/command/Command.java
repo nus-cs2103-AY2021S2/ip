@@ -16,6 +16,22 @@ import bob.task.Todo;
  * Represents the different types of possible commands.
  */
 public enum Command {
+    HELP {
+        @Override
+        public String executeCommand(String userInput, TaskList taskList, Storage storage) {
+            return "You can add a new task using the following commands: \n" +
+                    "todo NAME_OF_TASK\n" +
+                    "event NAME_OF_EVENT /at: YYYY-MM-DD HHMM\n" +
+                    "deadline NAME_OF_DEADLINE /by: YYYY-MM-DD HHMM\n" +
+                    "\nYou can see the whole list of tasks using: list\n" +
+                    "\nTo search for a specific task: find KEYWORDS\n" +
+                    "\nTo add a reminder for a task:\n" +
+                    "remind INDEX /on: YYYY-MM-DD HHMM\n" +
+                    "\nTo mark a task as done: done INDEX\n" +
+                    "\nTo delete a task: delete INDEX\n" +
+                    "\nTo exit the app: bye";
+        }
+    },
     REMIND {
         @Override
         public String executeCommand(String userInput, TaskList taskList, Storage storage) {

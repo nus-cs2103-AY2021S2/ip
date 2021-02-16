@@ -49,7 +49,7 @@ application {
 
 shadowJar {
     archiveBaseName = "Bob"
-    archiveClassifier = "v0.3"
+    archiveClassifier = "v1.1"
 }
 
 checkstyle {
