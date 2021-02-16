@@ -10,6 +10,7 @@ can type fast, Apollo can perform your tasks management faster than
 traditional GUI apps.
                   
 ![Screenshot of Apollo](Ui.png)
+               
 
 ##Contents
 - Quick Start
