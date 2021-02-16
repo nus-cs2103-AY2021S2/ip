@@ -31,19 +31,19 @@ public class Jhin {
      * Initialises Jhin by loading task list from storage.
      *
      * @return String response from initialisation.
+     * @throws JhinException If any error occurred while loading data from local disk.
      */
-    public String initialise() {
+    public String initialise() throws JhinException {
         storage = new Storage();
-
         try {
             taskList = storage.loadTask();
             aliasMap = storage.loadAlias();
         } catch (JhinException e) {
-            return e.getMessage();
+            isShuttingDown = true;
+            throw e;
         }
 
         assert(taskList != null);
-
         return WELCOME_MESSAGE;
     }
 
@@ -52,6 +52,7 @@ public class Jhin {
      *
      * @param input User input command.
      * @return String response from executing user command.
+     * @throws JhinException If any error occurred while executing command.
      */
     public String getResponse(String input) throws JhinException {
         if (isShuttingDown) {

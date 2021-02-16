@@ -21,6 +21,9 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
+    private static final String RESTART_MESSAGE = "Please delete data files on local disk and restart the application.";
+    private static final int TWO_SECOND = 2000;
+    private static final int SEVEN_SECOND = 7000;
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/HeimerdingerIcon.jpg"));
     private final Image jhinImage = new Image(this.getClass().getResourceAsStream("/images/JhinIcon.jpg"));
     private final Image errorImage = new Image(this.getClass().getResourceAsStream("/images/ErrorIcon.jpg"));
@@ -45,8 +48,14 @@ public class MainWindow extends AnchorPane {
      */
     public void setJhin(Jhin jhin) {
         this.jhin = jhin;
-        String response = this.jhin.initialise();
-        dialogContainer.getChildren().add(DialogBox.getJhinDialog(response, jhinImage));
+        try {
+            String response = this.jhin.initialise();
+            dialogContainer.getChildren().add(DialogBox.getJhinDialog(response, jhinImage));
+        } catch (JhinException e) {
+            dialogContainer.getChildren().add(DialogBox.getJhinDialog(e.getMessage(), errorImage));
+            dialogContainer.getChildren().add(DialogBox.getJhinDialog(RESTART_MESSAGE, errorImage));
+            forceShutdownIn(SEVEN_SECOND);
+        }
     }
 
     /**
@@ -73,13 +82,17 @@ public class MainWindow extends AnchorPane {
         scrollPane.setVvalue(scrollPane.getVmax());
 
         if (jhin.isShuttingDown()) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
+            forceShutdownIn(TWO_SECOND);
+        }
+    }
+
+    private void forceShutdownIn(int time) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     Platform.exit();
                 }
-            }, 2000);
-        }
+            }, time);
     }
 }
