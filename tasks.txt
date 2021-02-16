@@ -6,3 +6,4 @@ DEADLINE|false|watch lecture|2021-02-13T23:59
 DEADLINE|false|watch lecture|2021-02-14T12:00
 DEADLINE|false|gym|2021-02-12T08:00
 DEADLINE|false|fix car|2021-02-12T23:00
+TODO|false|lol
