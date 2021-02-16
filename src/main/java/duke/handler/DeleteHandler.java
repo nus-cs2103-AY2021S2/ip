@@ -9,27 +9,27 @@ public class DeleteHandler implements CommandHandler {
     private int taskNum;
     private String response;
 
+    /**
+     * Default constructor for delete handler.
+     * @param taskNum
+     */
     public DeleteHandler(int taskNum) {
         this.taskNum = taskNum;
     }
 
+    /**
+     * Returns the number of the task to be deleted.
+     * @return The number of the task.
+     */
     public int getTaskNum() {
         return taskNum;
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
-        response = execute(ui, storage, taskList, true);
-        ui.respond(response);
-    }
-
-    @Override
-    public String execute(Ui ui, Storage storage, TaskList taskList, boolean toString) {
-        assert toString = true;
+    public String execute(Ui ui, Storage storage, TaskList taskList) {
         Task task = taskList.getTask(taskNum);
         taskList.removeTask(taskNum);
-        response = "Noted. I've removed this task: \n"
-                + " " + task + "\n";
+        response = deleteRespond(task);
         storage.delete(taskNum);
         return response;
     }
@@ -43,5 +43,16 @@ public class DeleteHandler implements CommandHandler {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns string response for deletion.
+     * @param toDelete Task to be deleted.
+     * @return String response.
+     */
+    public String deleteRespond(Task toDelete) {
+        String deleteResponse = "Noted. I've removed this task: \n"
+                + " " + toDelete + "\n";
+        return deleteResponse;
     }
 }
