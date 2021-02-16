@@ -49,7 +49,7 @@ Format: `find KEYWORDS`
  * Partial words will be matched.
 	* Example: funfair will match with fun.
 Examples: 
- * `find CS2101` returns `CS2101 HW`, `CS2101 assgn`, and `CS2101 exam`. \
+ * `find CS2101` returns `CS2101 HW`, `CS2101 assgn`, and `CS2101 exam`.  
 ![Image of find method example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Find_method_example.png)
 
 ### Marking a task as complete: `done`
@@ -57,7 +57,7 @@ Marks a task as done.
 Format: `done INDEX`
  * Marks the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, ...
 Eamples:
- - `done 1` Marks your first task as completed. \
+ - `done 1` Marks your first task as completed.  
 ![Image of done example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Done_method_example.png)
 
 ### Deleting a task: `delete`
@@ -75,10 +75,11 @@ Duke saves your data in the hard disk automatically after each of your inputs. T
 
 ### Editing the save file
 Duke saves your data in `[file location]/data/save.txt]`. You are welcomed to update your data directly by editing the save file.
-> Caution: Make sure the save file is of the right format, else all your data will be deleted.
-> Format: 
-	>1.  T | 0/1 | DESCRIPTION
-	>2. E/D | 0/1 | DESCRIPTION | YYYY-MM-DD
+> Caution: Make sure the save file is of the right format, else all your data will be deleted.  
+> Format:  
+	>1.	T | 0/1 | DESCRIPTION  
+	>2. D | 0/1 | DESCRIPTION | YYYY-MM-DD  
+	>3. E | 0/1 | DESCRIPTION | YYYY-MM-DD
 	
 ## Command Summary
 Action | Format | Examples 
