@@ -11,7 +11,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -83,6 +82,7 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+
         sendButton.setOnMouseClicked((event) -> handleUserInput());
 
         userInput.setOnAction((event) -> handleUserInput());
@@ -95,29 +95,17 @@ public class Duke extends Application {
         String userInp = userInput.getText();
         String userInpResponse = getResponse(userInp);
 
-        Label userText = new Label("\n" + userInp);
+        Label userText = new Label(userInp);
         userText.setFont(new Font("Courier new", 18));
 
-        Label dukeText = new Label("\n" + userInpResponse + "\n");
+        Label dukeText = new Label(userInpResponse);
         dukeText.setFont(new Font("Didact Gothic", 11));
-
-        if (userInpResponse.equals(Ui.invalidKeywordExceptionMessage())) {
-            dukeText.setStyle("-fx-background-color:rgba(255, 255, 0, 0.7)");
-        }
-
-        if (userInpResponse.contains(Ui.invalidTaskFormatBasicExceptionMessage())) {
-            dukeText.setStyle("-fx-background-color:rgba(255, 105, 180, 0.7)");
-        }
 
         Circle c = new Circle(200, 200, 40);
         c.setFill(new ImagePattern(duke));
 
         Circle c2 = new Circle(200, 200, 40);
         c2.setFill(new ImagePattern(user));
-
-        Rectangle r = new Rectangle(200, 200, 80, 80);
-        r.setArcWidth(30.0);
-        r.setArcHeight(20.0);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, c2),

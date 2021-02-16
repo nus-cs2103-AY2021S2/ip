@@ -6,13 +6,13 @@ import java.util.ArrayList;
 public class Ui {
     /** Constants that help in the formatting of the printed messages. */
     private static final String SPACE = "     ";
-    private static final String LINE = "     <<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n";
+    private static final String LINE = "<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n";
 
     /**
      * Message to be printed when the program starts.
      */
     public static String greet() {
-        return LINE + SPACE + "Heyyoo!! I am Luna :D\n" + SPACE + "What can I do for you today?\n" + LINE;
+        return LINE + "Heyyoo!! I am Luna :D\n" + "What can I do for you today?\n" + LINE;
     }
 
     /**
@@ -20,8 +20,7 @@ public class Ui {
      * @return The error message string.
      */
     public static String invalidNumberExceptionMessage() {
-        return LINE + SPACE + "ERROR! D: Give a number greater than zero and smaller than the total number of tasks\n"
-                + LINE;
+        return LINE + "ERROR! D: Give a number greater than zero and smaller than the total number of tasks\n" + LINE;
     }
 
     /**
@@ -29,7 +28,7 @@ public class Ui {
      * @return The error message string.
      */
     public static String invalidKeywordExceptionMessage() {
-        return LINE + SPACE + "ERROR! D: The supported keywords are: "
+        return LINE + "ERROR! D: The supported keywords are: "
                 + "todo, deadline, event, done, list, delete, bye, tag only.\n" + LINE;
     }
 
@@ -39,8 +38,8 @@ public class Ui {
      * @return The error message string.
      */
     public static String invalidTaskFormatExceptionMessage(String task) {
-        return LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task
-                + "\n" + SPACE + "The expected format for the task is: " + Ui.correctTaskFormat(task) + "\n" + LINE;
+        return LINE + "ERROR! D: The format for the following task is wrong: " + task
+                + "\n" + "The expected format for the task is: " + Ui.correctTaskFormat(task) + "\n" + LINE;
     }
 
     /**
@@ -48,7 +47,7 @@ public class Ui {
      * @return String with the first part of the invalidTaskFormatExceptionMessage() method.
      */
     public static String invalidTaskFormatBasicExceptionMessage() {
-        return LINE + SPACE + "ERROR! D: The format for the following task is wrong: ";
+        return LINE + "ERROR! D: The format for the following task is wrong: ";
     }
 
     /**
@@ -85,7 +84,7 @@ public class Ui {
      * @param task The actual Task object that has been created with the user input.
      */
     public static String outputMessageTask(String keyword, Task task) {
-        return LINE + SPACE + "Done adding the " + keyword + " Task: " + task + "\n" + LINE;
+        return LINE + "Done adding the " + keyword + " Task: " + task + "\n" + LINE;
     }
 
     /**
@@ -93,8 +92,7 @@ public class Ui {
      * @param task The Task object that has been created with the user input.
      */
     public static String outputMessageDone(Task task) {
-        return LINE + SPACE + "Good job! Another Task completed! I have marked it as done:\n"
-                + SPACE + task + "\n" + LINE;
+        return LINE + "Good job! Another Task completed! I have marked it as done:\n" + task + "\n" + LINE;
     }
 
     /**
@@ -102,7 +100,7 @@ public class Ui {
      * @param task The task object that has been deleted according to the user input.
      */
     public static String outputMessageDelete(Task task) {
-        return LINE + SPACE + "Deleted the following task: " + task + "\n" + LINE;
+        return LINE + "Deleted the following task: " + task + "\n" + LINE;
     }
 
     /**
@@ -113,7 +111,7 @@ public class Ui {
     public static String outputMessageList(ArrayList<Task> storage, int count) {
         String output = LINE;
         for (int i = 1; i <= count; i++) {
-            output += SPACE + i + ". " + storage.get(i - 1) + "\n";
+            output += i + ". " + storage.get(i - 1) + "\n";
         }
         return output + LINE;
     }
@@ -128,7 +126,7 @@ public class Ui {
         int index = 1;
         for (Task task : storage) {
             if (task.getDescription().contains(description)) {
-                output += SPACE + index + ". " + task + "\n";
+                output += index + ". " + task + "\n";
                 index++;
             }
         }
@@ -139,8 +137,8 @@ public class Ui {
         String output = LINE;
         int index = 1;
         for (Task task : storage) {
-            if (task.getTag().equals(description)) {
-                output += SPACE + index + ". " + task + "\n";
+            if (task.getIsTagged() && task.getTag().contains(description)) {
+                output += index + ". " + task + "\n";
                 index++;
             }
         }
@@ -148,14 +146,13 @@ public class Ui {
     }
 
     public static String outputMessageTag(Task toTag, String description) {
-        return LINE + SPACE + "The following tag: (" + description + ") has been added to the follwing task:"
-                + toTag + LINE;
+        return LINE + "The following tag: (" + description + ") has been added to the follwing task:" + toTag + LINE;
     }
 
     /**
      * Message to be printed when the program ends.
      */
     public static String outputMessageBye() {
-        return LINE + SPACE + "Byee, hope to see you again soon!" + LINE;
+        return LINE + "Byee, hope to see you again soon!" + LINE;
     }
 }
