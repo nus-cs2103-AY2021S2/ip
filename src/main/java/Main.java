@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
  */
+//@@author JulietTeoh
+//Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications.
 public class Main extends Application {
     private static final String FILE_NAME = "dukedata.txt";
     private static final String FOLDER_NAME = "data";
