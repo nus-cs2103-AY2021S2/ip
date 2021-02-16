@@ -7,17 +7,16 @@
 Steve is a simple task tracker done as part of the CS2103T module in NUS. The latest releases for download are available [here](https://github.com/tjtanjin/ip/releases/).
 
 ## Content Page
-* [Features](#features)
-    * [Create Todo Task](#create-todo-task)
-    * [Create Deadline Task](#create-deadline-task)
-    * [Create Event Task](#create-event-task)
-    * [Delete Task](#delete-task)
-    * [Find Task](#find-task)
-    * [Mark Task As Complete](#mark-task-as-complete)
-    * [Undo Task Modification](#undo-task-modification)
-    * [View All Tasks](#view-all-tasks)
-    * [View Command Help](#view-command-help)
-    * [Exit Application](#exit-application)
+* [Create Todo Task](#create-todo-task)
+* [Create Deadline Task](#create-deadline-task)
+* [Create Event Task](#create-event-task)
+* [Delete Task](#delete-task)
+* [Find Task](#find-task)
+* [Mark Task As Complete](#mark-task-as-complete)
+* [Undo Task Modification](#undo-task-modification)
+* [View All Tasks](#view-all-tasks)
+* [View Command Help](#view-command-help)
+* [Exit Application](#exit-application)
 
 ## Features
 ### Create Todo Task
