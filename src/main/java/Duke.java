@@ -18,28 +18,38 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine();
         while (!cmd.equals("bye")) {
-            if (cmd.equals("bye")) {
-                displayExitMsg();
-            } else if (cmd.equals("list")) {
+            switch (cmd) {
+            case "list":
                 printTasks(tasks);
-            } else {
+                break;
+            default:
                 String[] arr = cmd.split(" ", 2);
-                if (arr[0].equals("done")) {
+                switch (arr[0]) {
+                case "done":
                     int index = Integer.parseInt(arr[1]) - 1;
                     Task task = tasks.get(index);
                     task.markAsDone();
                     displayMarkTaskAsDoneMsg(task);
-                } else if (arr[0].equals("todo") || arr[0].equals("deadline") || arr[0].equals("event")) {
+                    break;
+                case "todo":
+                    // Fallthrough
+                case "deadline":
+                    // Fallthrough
+                case "event":
                     addTask(tasks, cmd);
                     displayAddTaskMsg(tasks);
-                } else {
+                    break;
+                default:
                     System.out.println(SEPARATOR);
                     System.out.println("Invalid command!");
                     System.out.println(SEPARATOR);
+                    break;
                 }
+                break;
             }
             cmd = sc.nextLine();
         }
+        displayExitMsg();
         sc.close();
     }
 
