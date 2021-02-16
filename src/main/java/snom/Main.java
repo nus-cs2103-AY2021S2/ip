@@ -1,6 +1,7 @@
 package snom;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ import snom.ui.MainWindow;
  */
 public class Main extends Application {
 
-    private Snom snom = new Snom("data/snom.txt");
+    private Snom snom = new Snom(Paths.get("data", "snom.txt"));
 
     @Override
     public void start(Stage stage) {

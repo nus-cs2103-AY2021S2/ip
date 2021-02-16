@@ -9,6 +9,8 @@ import snom.logic.commands.CommandEnum;
 import snom.model.task.TaskList;
 import snom.storage.StorageManager;
 
+import java.nio.file.Paths;
+
 public class SnomTest {
     @Test
     public void getCommandTest() {
@@ -21,7 +23,7 @@ public class SnomTest {
 
     @Test
     public void storageTest() throws SnomException {
-        StorageManager storage = new StorageManager("./src/main/data/snom.txt");
+        StorageManager storage = new StorageManager(Paths.get("data", "snom_test.txt"));
         TaskList taskList = storage.importTask();
 
         assertEquals(storage.readFile().size(), taskList.size());

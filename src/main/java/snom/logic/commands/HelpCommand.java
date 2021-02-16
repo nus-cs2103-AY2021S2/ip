@@ -6,6 +6,8 @@ import snom.storage.FileManager;
 import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
+import java.nio.file.Paths;
+
 /**
  * Displays help page.
  */
@@ -29,35 +31,35 @@ public class HelpCommand extends Command {
         String helpText = "";
         switch(this.content) {
         case "todo":
-            helpFile = new FileManager("/help/todo.txt");
+            helpFile = new FileManager(Paths.get("/help/todo.txt"));
             helpText = helpFile.readResourcesText();
             break;
         case "deadline":
-            helpFile = new FileManager("/help/deadline.txt");
+            helpFile = new FileManager(Paths.get("/help/deadline.txt"));
             helpText = helpFile.readResourcesText();
             break;
         case "event":
-            helpFile = new FileManager("/help/event.txt");
+            helpFile = new FileManager(Paths.get("/help/event.txt"));
             helpText = helpFile.readResourcesText();
             break;
         case "list":
-            helpFile = new FileManager("/help/list.txt");
+            helpFile = new FileManager(Paths.get("/help/list.txt"));
             helpText = helpFile.readResourcesText();
             break;
         case "finish":
-            helpFile = new FileManager("/help/finish.txt");
+            helpFile = new FileManager(Paths.get("/help/finish.txt"));
             helpText = helpFile.readResourcesText();
             break;
         case "delete":
-            helpFile = new FileManager("/help/delete.txt");
+            helpFile = new FileManager(Paths.get("/help/delete.txt"));
             helpText = helpFile.readResourcesText();
             break;
         case "find":
-            helpFile = new FileManager("/help/find.txt");
+            helpFile = new FileManager(Paths.get("/help/find.txt"));
             helpText = helpFile.readResourcesText();
             break;
         default:
-            helpFile = new FileManager("/help/commands.txt");
+            helpFile = new FileManager(Paths.get("/help/commands.txt"));
             helpText = helpFile.readResourcesText();
         }
 

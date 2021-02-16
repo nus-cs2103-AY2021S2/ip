@@ -8,6 +8,8 @@ import snom.model.task.TaskList;
 import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
+import java.nio.file.Path;
+
 /**
  * Snom is a Personal Assistant Chatbot that helps
  * a person to keep track of various things.
@@ -22,7 +24,7 @@ public class Snom {
      *
      * @param filePath file path to store task list
      */
-    public Snom(String filePath) {
+    public Snom(Path filePath) {
         snomio = new Snomio();
         storage = new StorageManager(filePath);
         try {

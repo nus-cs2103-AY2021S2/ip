@@ -13,10 +13,12 @@ import snom.model.task.TaskList;
 import snom.storage.StorageManager;
 import snom.ui.Snomio;
 
+import java.nio.file.Paths;
+
 public class CommandTest {
     private TaskList taskList = new TaskList();
     private Snomio snomio = new Snomio();
-    private StorageManager storage = new StorageManager("data/snom.txt");
+    private StorageManager storage = new StorageManager(Paths.get("data", "snom_test.txt"));
 
     @Test
     public void addFinishDeleteCommand() {

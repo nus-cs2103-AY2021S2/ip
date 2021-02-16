@@ -2,6 +2,7 @@ package snom.storage;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class StorageManager extends FileManager {
     /**
      * Constructs a {@code StorageManager}
      *
-     * @param filename file name to save task list
+     * @param filePath file path to save task list
      */
-    public StorageManager(String filename) {
-        super(filename);
+    public StorageManager(Path filePath) {
+        super(filePath);
         super.createFolder();
         super.createFile();
     }

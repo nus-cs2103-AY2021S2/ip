@@ -21,8 +21,8 @@ import snom.common.exceptions.SnomException;
 public class FileManager {
     protected Path path;
 
-    public FileManager(String filename) {
-        this.path = Paths.get(filename);
+    public FileManager(Path filePath) {
+        this.path = filePath;
     }
 
     /**
