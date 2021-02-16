@@ -21,16 +21,16 @@ public class Ui {
      * Initialize and prints greeting message when a user runs programme.
      */
 
-    public static void initGreeting() {
-        System.out.println(HORIZONTAL_LINE + "\n" + greeting + HORIZONTAL_LINE + "\n");
+    public static String initGreeting() {
+        return HORIZONTAL_LINE + "\n" + greeting + HORIZONTAL_LINE + "\n";
     }
 
     /**
      * Prints error message when a user encounters exceptions.
      */
 
-    public static void showErrorMessage(String error){
-        System.out.println(HORIZONTAL_LINE + "\n"  + error + "\n" +HORIZONTAL_LINE);
+    public static String showErrorMessage(String error){
+        return HORIZONTAL_LINE + "\n"  + error + "\n" +HORIZONTAL_LINE;
     }
 
 
@@ -38,11 +38,13 @@ public class Ui {
      * Prints success message when a user successfully adds a task.
      */
 
-    public static void showSuccessfulAddedMessage(int numTask, Task task){
-        System.out.println(HORIZONTAL_LINE + "\n" + " Got it! I've added this new Task!");
-        System.out.println("  " + task.toString());
-        System.out.println(" Now you have " + numTask + " tasks in your TaskList.");
-        System.out.println(HORIZONTAL_LINE);
+    public static String showSuccessfulAddedMessage(int numTask, Task task){
+        String output = "";
+        output += (HORIZONTAL_LINE + "\n" + " Got it! I've added this new Task!\n" );
+        output += "  " + task.toString() +"\n";
+        output += " Now you have " + numTask + " tasks in your TaskList.\n";
+        output += HORIZONTAL_LINE;
+        return output;
     }
 
 
@@ -50,73 +52,76 @@ public class Ui {
      * Prints TaskList as a string
      */
 
-    public static void showListContent(TaskList taskList){
-        System.out.println(HORIZONTAL_LINE);
+    public static String showListContent(TaskList taskList){
+        String output = "";
+        output += HORIZONTAL_LINE + "\n";
         if(taskList.getSize() == 0){
-            System.out.println(" The list is empty!\n Please add tasks into the list :))");
+            output += " The list is empty!\n Please add tasks into the list :))" + "\n";
+            output += HORIZONTAL_LINE;
+            return output;
         } else {
-            System.out.println(" Here are your remaining tasks!");
-            System.out.println(BLANK_SPACE_BABY);
-            System.out.println(taskList.toString());
+            output += " Here are your remaining tasks!" + "\n";
+            output += BLANK_SPACE_BABY + '\n';
+            output += taskList.toString() + '\n';
+            output += HORIZONTAL_LINE;
+            return output;
         }
-        System.out.println(HORIZONTAL_LINE);
     }
 
-    public static void showReminderContent(ArrayList<Deadline> deadlineTasks){
-        System.out.println(HORIZONTAL_LINE);
+    public static String showReminderContent(ArrayList<Deadline> deadlineTasks){
+        String output = "";
+        output += HORIZONTAL_LINE + "\n";
         if(deadlineTasks.size() == 0){
-            System.out.println("You have no upcoming deadlines");
+            output += "You have no upcoming deadlines" + "\n";
+            output += HORIZONTAL_LINE;
         } else {
-            System.out.println(" Here are your upcoming deadline Tasks!");
-            System.out.println(BLANK_SPACE_BABY);
-            String output = "";
+            output += " Here are your upcoming deadline Tasks!" +"\n";
+            output += BLANK_SPACE_BABY + "\n";
             for(int i = 0; i< deadlineTasks.size(); i++){
-                if(i != deadlineTasks.size() - 1){
-                    long noOfDaysBetween = ChronoUnit.DAYS.between( LocalDate.now(), deadlineTasks.get(i).getLocalDate());
-                    output +=  " " + deadlineTasks.get(i).toString() + " "
-                            + noOfDaysBetween + " days left!!" +"\n";
-                } else {
-                    long noOfDaysBetween = ChronoUnit.DAYS.between( LocalDate.now(), deadlineTasks.get(i).getLocalDate());
-                    output +=  " " + deadlineTasks.get(i).toString() + " "
-                            + noOfDaysBetween + " days left!!";
-                }
+                long noOfDaysBetween = ChronoUnit.DAYS.between( LocalDate.now(), deadlineTasks.get(i).getLocalDate());
+                output +=  (i+1) + " " + deadlineTasks.get(i).toString() + " "
+                        + noOfDaysBetween + " days left!!" +"\n";
             }
-            System.out.println(output);
+            output += HORIZONTAL_LINE;
         }
-
-        System.out.println(HORIZONTAL_LINE);
-
+        return output;
     }
 
     /**
      * Prints message when a user successful marks a task as done.
      */
 
-    public static void markTaskAsDone(Task task){
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(" Nice! I've marked this task as done");
-        System.out.println(" " + task.toString());
-        System.out.println(HORIZONTAL_LINE);
+    public static String markTaskAsDone(Task task){
+        String output = "";
+        output += HORIZONTAL_LINE + "\n";
+        output += " Nice! I've marked this task as done" + '\n';
+        output += " " + task.toString() + "\n";
+        output += HORIZONTAL_LINE;
+        return output;
     }
 
     /**
      * Prints message when a user successful deletes a task.
      */
-    public static void showTaskAsDeleted(Task task){
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(" Noted! I have removed this task from the list.");
-        System.out.println(task.toString());
-        System.out.println(HORIZONTAL_LINE);
+    public static String showTaskAsDeleted(Task task){
+        String output = "";
+        output += HORIZONTAL_LINE + "\n";
+        output += " Noted! I have removed this task from the list.\n" ;
+        output += task.toString() + "\n";
+        output += HORIZONTAL_LINE;
+        return output;
     }
 
     /**
      * Prints message when a user exits programme.
      */
 
-    public static void showByeMessage(){
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(farewell);
-        System.out.println(HORIZONTAL_LINE);
+    public static String showByeMessage(){
+        String output = "";
+        output += HORIZONTAL_LINE + "\n";
+        output += farewell + "\n";
+        output += HORIZONTAL_LINE;
+        return output;
     }
 
 
@@ -124,21 +129,15 @@ public class Ui {
      *
      * @param matchingTaks
      */
-    public static void showKeyWordMessage(ArrayList<String> matchingTaks){
-
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println("Here are the relevant tasks:");
-        System.out.println(BLANK_SPACE_BABY);
+    public static String showKeyWordMessage(ArrayList<String> matchingTaks){
         String output = "";
+        output += HORIZONTAL_LINE + "\n";
+        output += "Here are the relevant tasks:\n" + BLANK_SPACE_BABY;
         for(int i=0; i< matchingTaks.size(); i++){
-            if(i == matchingTaks.size()-1){
-                output += matchingTaks.get(i);
-            } else {
-                output += matchingTaks.get(i) + "\n";
-            }
+            output += matchingTaks.get(i) + "\n";
         }
-        System.out.println(output);
-        System.out.println(HORIZONTAL_LINE);
+        output += HORIZONTAL_LINE;
+        return output;
     }
 
     /**
@@ -146,12 +145,13 @@ public class Ui {
      * Prints list of valid arguments
      */
 
-    public static void showDefaultStatement(){
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(" Please enter a valid command!");
-        System.out.println(" Valid commands include:");
-        System.out.println(" todo\n event\n deadline\n list\n done\n delete\n find\n bye");
-        System.out.println(HORIZONTAL_LINE);
+    public static String showDefaultStatement(){
+        String output = "";
+        output += HORIZONTAL_LINE + "\n";
+        output += " Please enter a valid command\n Valid commands include:\n";
+        output += " bye\n deadline\n delete\n done\n event\n find\n list\n reminder\n todo\n";
+        output += HORIZONTAL_LINE;
+        return output;
     }
 
 }

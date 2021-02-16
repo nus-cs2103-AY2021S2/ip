@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 
 /**
@@ -14,76 +13,18 @@ import java.util.Scanner;
 //
 public class Duke {
 
+    private Database database;
+    private Ui ui;
+    private Parser parser;
+    private TaskList taskList;
+    private ArrayList<Deadline> deadlineTasks;
 
-
-
-    public static void main(String[] args) throws DukeException, FileNotFoundException {
-        Ui ui = new Ui();
-        Parser parser = new Parser();
-        Database database = new Database(ui.FILE_PATH);
-        ArrayList<String> listOfTasks;
-        ArrayList<Task> myList;
-        TaskList taskList = new TaskList();
-        ArrayList<Deadline> deadlineTasks = new ArrayList<>();
-        try {
-            listOfTasks = database.readFile();
-            taskList = readInput(listOfTasks);
-            deadlineTasks = readDeadlineTasks(listOfTasks);
-        } catch (FileNotFoundException e){
-            throw new FileNotFoundException("No File Detected");
-        }
-        ui.initGreeting();
-        Scanner input = new Scanner(System.in);
-        while(input.hasNextLine()) {
-            String s = input.next();
-            switch (s){
-                case "todo":
-
-                    parser.parseTodoCommand(input,taskList,ui,database);
-                    break;
-
-                case "deadline":
-
-                    parser.parseDeadlineCommand(input,taskList,ui,database);
-                    break;
-
-                case "reminder":
-
-                    parser.parseReminderCommand(deadlineTasks,ui);
-                    break;
-
-                case "event":
-
-                    parser.parseEventCommand(input, taskList, ui, database);
-                    break;
-
-                case "list":
-
-                    parser.parseListCommand(taskList, ui);
-                    break;
-
-                case "bye":
-                    parser.parseByeCommand(ui);
-                    break;
-                case "done":
-
-                    parser.parseDoneCommand(input,taskList,ui,database);
-                    break;
-
-                case "delete":
-
-                    parser.parseDeleteCommand(input, taskList, ui, database);
-                    break;
-
-                case "find":
-                    parser.parseFindCommand(input, taskList,ui);
-                    break;
-
-                default:
-                    parser.parseDefault(input,ui);
-                    break;
-            }
-        }
+    public Duke() throws FileNotFoundException {
+        this.ui = new Ui();
+        this.database = new Database(ui.FILE_PATH);
+        this.parser = new Parser();
+        this.taskList = readInput(database.readFile());
+        this.deadlineTasks = readDeadlineTasks(database.readFile());
     }
 
     /**
@@ -126,57 +67,59 @@ public class Duke {
         return tasks;
     }
 
-//    private static String parseCommands(String input){
-//        String s = input.next();
-//        switch (s){
-//            case "todo":
-//
-//                parser.parseTodoCommand(input,taskList,ui,database);
-//                break;
-//
-//            case "deadline":
-//
-//                parser.parseDeadlineCommand(input,taskList,ui,database);
-//                break;
-//
-//            case "reminder":
-//
-//                parser.parseReminderCommand(deadlineTasks,ui);
-//                break;
-//
-//            case "event":
-//
-//                parser.parseEventCommand(input, taskList, ui, database);
-//                break;
-//
-//            case "list":
-//
-//                parser.parseListCommand(taskList, ui);
-//                break;
-//
-//            case "bye":
-//                parser.parseByeCommand(ui);
-//                break;
-//            case "done":
-//
-//                parser.parseDoneCommand(input,taskList,ui,database);
-//                break;
-//
-//            case "delete":
-//
-//                parser.parseDeleteCommand(input, taskList, ui, database);
-//                break;
-//
-//            case "find":
-//                parser.parseFindCommand(input, taskList,ui);
-//                break;
-//
-//            default:
-//                parser.parseDefault(input,ui);
-//                break;
-//
-//        }
-//    }
+    public String parseCommands(String wholeInput){
+        String str = wholeInput;
+        String[] parts = str.split(" ");
+        String s = parts[0];
+        String rest;
+        switch (s){
+            case "todo":
+                rest = str.substring(4);
+                return parser.parseTodoCommand(rest,taskList,ui,database);
+
+            case "deadline":
+                rest = str.substring(8);
+                return parser.parseDeadlineCommand(rest,taskList,ui,database);
+
+            case "reminder":
+                rest = str.substring(8);
+                if(!rest.isEmpty()){
+                    return "Please do not type other chars after reminder";
+                }
+                return parser.parseReminderCommand(deadlineTasks,ui);
+
+            case "event":
+                rest = str.substring(5);
+                return parser.parseEventCommand(rest, taskList, ui, database);
+
+            case "list":
+                rest = str.substring(4);
+                if(!rest.isEmpty()){
+                    return "Please do not type other chars after list";
+                }
+                return parser.parseListCommand(taskList, ui);
+
+            case "bye":
+                return parser.parseByeCommand(ui);
+
+            case "done":
+                rest = str.substring(4);
+
+                return parser.parseDoneCommand(rest,taskList,ui,database);
+
+            case "delete":
+                rest = str.substring(6);
+                return parser.parseDeleteCommand(rest, taskList, ui, database);
+
+            case "find":
+                rest = str.substring(4);
+                return parser.parseFindCommand(rest, taskList,ui);
+
+            default:
+                return parser.parseDefault(ui);
+
+        }
+    }
 
     private static ArrayList<Deadline> readDeadlineTasks(ArrayList<String> strings){
         ArrayList<Deadline> arrayListOfDeadlines = new ArrayList<>();
@@ -197,4 +140,5 @@ public class Duke {
         Collections.sort(arrayListOfDeadlines);
         return arrayListOfDeadlines;
     }
+
 }

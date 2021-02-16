@@ -35,13 +35,16 @@ public class Database {
         try {
             ArrayList<String> tasksStringName = new ArrayList<>();
             File f = new File(name);
+            f.createNewFile();
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 tasksStringName.add(s.nextLine());
             }
             return tasksStringName;
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found");
+            throw new FileNotFoundException("file not found");
+        } catch (IOException e){
+            return new ArrayList<String>();
         }
     }
 

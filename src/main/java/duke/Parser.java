@@ -3,7 +3,6 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 /**
@@ -21,29 +20,33 @@ public class Parser {
      * @throws DukeException if the user input a command with invalid format.
      */
 
-    public static void parseTodoCommand(Scanner input, TaskList taskList, Ui ui, Database database){
+    public static String parseTodoCommand(String input, TaskList taskList, Ui ui, Database database){
         try {
-            String s1 = input.nextLine();
+            String s1 = input;
             if (s1.equals("")) {
                 throw new DukeException(" Enter a valid todo task");
             } else {
                 char[] chars = s1.toCharArray();
-                if(chars[1] == ' '){
-                    throw new DukeException(" Enter valid todo task");
+                String ws = s1.substring(1);
+                String[] parts = ws.split(" ");
+                if(parts.length == 1){
+                    throw new DukeException(" Enter a valid todo task");
                 } else {
                     try{
                         String desc = s1.substring(1);
                         Todo newTodo = new Todo(desc);
                         taskList.addTask(newTodo);
-                        ui.showSuccessfulAddedMessage(taskList.getSize(), newTodo);
                         database.writeTaskToFile(taskList.getList());
+                        //change ui.... to return String
+                        return ui.showSuccessfulAddedMessage(taskList.getSize(), newTodo);
                     } catch (Exception e){
-                        System.out.println(" Enter a valid todo task");
+                        return " Enter a valid todo task";
                     }
                 }
             }
         } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
+            //change ui.. to return String
+            return ui.showErrorMessage(e.getMessage());
         }
     }
 
@@ -57,9 +60,9 @@ public class Parser {
      * @throws DukeException if the user input a command with invalid format.
      */
 
-    public static void parseEventCommand(Scanner input, TaskList taskList, Ui ui, Database database){
+    public static String parseEventCommand(String input, TaskList taskList, Ui ui, Database database){
         try{
-            String s1 = input.nextLine();
+            String s1 = input;
             if(s1.equals("")){
                 throw new DukeException(" Enter a valid event task.");
             } else {
@@ -68,21 +71,22 @@ public class Parser {
                     String[] parts = wholeString.split(" /at ");
                     String eventDesc = parts[0];
                     if(parts.length == 1){
-                        throw new DukeException(" Please adhere to convention:\n(event event_name /at event_details)");
+                        throw new DukeException(" Please adhere to convention:\nevent event_name /at event_details");
                     } else {
                         String eventDetails = parts[1];
                         Event newEvent = new Event(eventDesc, eventDetails);
                         taskList.addTask(newEvent);
-                        ui.showSuccessfulAddedMessage(taskList.getSize(), newEvent);
                         database.writeTaskToFile(taskList.getList());
+                        //
+                        return ui.showSuccessfulAddedMessage(taskList.getSize(), newEvent);
                     }
                 } catch(DukeException e) {
-                    ui.showErrorMessage(e.getMessage());
+                    return ui.showErrorMessage(e.getMessage());
                 }
             }
 
         } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
+            return ui.showErrorMessage(e.getMessage());
         }
 
     }
@@ -97,36 +101,38 @@ public class Parser {
      * @throws DukeException if the user input a command with invalid format.
      */
 
-    public static void parseDeadlineCommand(Scanner input, TaskList taskList, Ui ui, Database database){
+    public static String parseDeadlineCommand(String input, TaskList taskList, Ui ui, Database database){
         try{
-            String s1 = input.nextLine();
+            String s1 = input;
             if(s1.equals("")){
-                throw new DukeException(" Enter valid deadline task.");
+                throw new DukeException(" Enter valid deadline task after typing deadline.");
             } else {
                 try {
                     String wholeString = s1.substring(1);
                     String[] parts = wholeString.split(" /by ");
                     String deadlineDesc = parts[0];
                     if(parts.length == 1){
-                        throw new DukeException(" Please adhere to convention:\n(deadline task_name /by deadline date(YYYY-MM-DD))");
+                        throw new DukeException(" Please adhere to convention:\ndeadline task_name /by deadline YYYY-MM-DD");
                     } else {
                         String dl = parts[1];
                         try{
                             LocalDate deadline = LocalDate.parse(dl);
                             Deadline newDeadline = new Deadline(deadlineDesc, deadline);
                             taskList.addTask(newDeadline);
-                            ui.showSuccessfulAddedMessage(taskList.getSize(), newDeadline);
                             database.writeTaskToFile(taskList.getList());
+                            //
+                            return ui.showSuccessfulAddedMessage(taskList.getSize(), newDeadline);
+
                         } catch (DateTimeParseException e){
-                            ui.showErrorMessage(" Please enter date as follows\n YYYY-MM-DD");
+                            return ui.showErrorMessage(" Please enter date as follows\n YYYY-MM-DD");
                         }
                     }
                 } catch(DukeException e) {
-                    ui.showErrorMessage(e.getMessage());
+                    return ui.showErrorMessage(e.getMessage());
                 }
             }
         } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
+            return ui.showErrorMessage(e.getMessage());
         }
 
     }
@@ -141,9 +147,9 @@ public class Parser {
      * @throws DukeException if the user input a command with invalid format.
      */
 
-    public static void parseDoneCommand(Scanner input, TaskList taskList, Ui ui, Database database){
+    public static String parseDoneCommand(String input, TaskList taskList, Ui ui, Database database){
         try{
-            String s1 = input.nextLine();
+            String s1 = input;
             if(s1.equals("")){
                 throw new DukeException(" Please specify what task is done");
             } else {
@@ -156,16 +162,16 @@ public class Parser {
                         int index =Integer.parseInt(indexString);
                         Task t = taskList.getList().get(index - 1);
                         t.markAsDone();
-                        ui.markTaskAsDone(t);
                         database.writeTaskToFile(taskList.getList());
+                        return ui.markTaskAsDone(t);
                     } catch (Exception e){
-                        ui.showErrorMessage(" Please enter a valid index");
+                        return ui.showErrorMessage(" Please enter a valid index");
                     }
                 }
             }
 
         } catch(DukeException e){
-            ui.showErrorMessage(e.getMessage());
+            return ui.showErrorMessage(e.getMessage());
         }
     }
 
@@ -177,9 +183,9 @@ public class Parser {
      * @param ui the current ui
      * @throws DukeException if the user input a command with invalid format.
      */
-    public static void parseFindCommand(Scanner input, TaskList taskList, Ui ui){
+    public static String parseFindCommand(String input, TaskList taskList, Ui ui){
         try{
-            String s1 = input.nextLine();
+            String s1 = input;
             if(s1.equals("")){
                 throw new DukeException("Please specify a keyword you are trying to find");
             } else {
@@ -200,15 +206,16 @@ public class Parser {
                         if(!hasMatch){
                             throw new DukeException("Sorry. None of your tasks contain this keyword");
                         } else {
-                            ui.showKeyWordMessage(matchingWithKeyword);
+                            //
+                            return ui.showKeyWordMessage(matchingWithKeyword);
                         }
                     } catch (ArrayIndexOutOfBoundsException e){
-                        ui.showErrorMessage("Please specify a keyword you are trying to find");
+                        return ui.showErrorMessage("Please specify a keyword you are trying to find");
                     }
                 }
             }
         } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
+            return ui.showErrorMessage(e.getMessage());
         }
     }
 
@@ -221,9 +228,9 @@ public class Parser {
      * @param database the current database
      * @throws DukeException if the user input a command with invalid format.
      */
-    public static void parseDeleteCommand(Scanner input, TaskList taskList, Ui ui, Database database){
+    public static String parseDeleteCommand(String input, TaskList taskList, Ui ui, Database database){
         try{
-            String s1 = input.nextLine();
+            String s1 = input;
             if(s1.equals("")){
                 throw new DukeException(" Please specify which task to delete");
             } else {
@@ -236,17 +243,17 @@ public class Parser {
                         int index =Integer.parseInt(indexString);
                         Task t = taskList.getList().get(index-1);
                         taskList.removeTask(index-1);
-                        ui.showTaskAsDeleted(t);
                         database.writeTaskToFile(taskList.getList());
+                        return ui.showTaskAsDeleted(t);
 
                     } catch (Exception e){
-                        ui.showErrorMessage(" Please enter a valid index");
+                        return ui.showErrorMessage(" Please enter a valid index");
                     }
                 }
             }
 
         } catch(DukeException e){
-            ui.showErrorMessage(e.getMessage());
+            return ui.showErrorMessage(e.getMessage());
         }
     }
 
@@ -257,12 +264,12 @@ public class Parser {
      * @param ui the current ui
      */
 
-    public static void parseListCommand(TaskList taskList, Ui ui){
-        ui.showListContent(taskList);
+    public static String parseListCommand(TaskList taskList, Ui ui){
+        return ui.showListContent(taskList);
     }
 
-    public static void parseReminderCommand(ArrayList<Deadline> listOfUpComingsTasks, Ui ui){
-        ui.showReminderContent(listOfUpComingsTasks);
+    public static String parseReminderCommand(ArrayList<Deadline> listOfUpComingsTasks, Ui ui){
+        return ui.showReminderContent(listOfUpComingsTasks);
     }
 
     /**
@@ -271,20 +278,18 @@ public class Parser {
      * Empties buffer is System
      * @param ui the current ui
      */
-    public static void parseByeCommand(Ui ui){
-        ui.showByeMessage();
-        System.exit(0);
+    public static String parseByeCommand(Ui ui){
+        return ui.showByeMessage();
     }
 
     /**
      *
      * Calls ui to print default message
-     * @param input the scanner
      * @param ui the current ui
      */
-    public static void parseDefault(Scanner input, Ui ui){
-        input.nextLine();
-        ui.showDefaultStatement();
+    public static String parseDefault(Ui ui){
+
+        return ui.showDefaultStatement();
     }
 
 }
