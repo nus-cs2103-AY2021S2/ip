@@ -16,7 +16,7 @@ Action | Format
 --------|------------------
 **todo** | `todo DESCRIPTION`
 **deadline** | `deadline DESCRIPTION /by DATE [TIME]`
-**event** | `event DESCRIPTION /at DATE [TIME[`
+**event** | `event DESCRIPTION /at DATE [TIME]`
 **list** | `list`
 **find** | `find KEYWORD`
 **finish** | `finish ...`

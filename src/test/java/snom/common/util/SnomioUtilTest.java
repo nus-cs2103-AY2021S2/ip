@@ -1,4 +1,4 @@
-package common.util;
+package snom.common.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.StringTokenizer;
 
 import org.junit.jupiter.api.Test;
-
-import snom.common.util.SnomioUtil;
 
 public class SnomioUtilTest {
     @Test

@@ -38,7 +38,7 @@ test {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = "snom.Launcher"
 }
 
 shadowJar {
@@ -51,10 +51,10 @@ checkstyle {
     configFile file("config/checkstyle/checkstyle.xml")
 }
 checkstyleMain {
-    source ='src/main/java'
+    source ='src/main/java/snom'
 }
 checkstyleTest {
-    source ='src/test/java'
+    source ='src/test/java/snom'
 }
 
 run{

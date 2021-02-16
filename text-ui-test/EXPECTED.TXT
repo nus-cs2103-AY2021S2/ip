@@ -1,6 +1,6 @@
 --------------------------------
 Bonjour! I'm snom.model.Snom! *squish*
-Try giving me some snom.logic.commands, I might be able to do something!
+Try giving me some snom.snom.logic.commands, I might be able to do something!
 [type 'bye' to exit program]
 --------------------------------
 --------------------------------

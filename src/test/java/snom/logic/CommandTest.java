@@ -1,4 +1,4 @@
-package logic;
+package snom.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

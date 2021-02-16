@@ -19,7 +19,7 @@ then
     exit 1
 fi
 
-# run the program, feed snom.logic.commands from input.txt file and redirect the output to the ACTUAL.TXT
+# run the program, feed snom.snom.logic.commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ../bin Snom < input.txt > ACTUAL.TXT
 
 # compare the output to the expected output

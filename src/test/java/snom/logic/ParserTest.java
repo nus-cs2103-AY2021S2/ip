@@ -1,10 +1,8 @@
-package logic;
+package snom.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-
-import snom.logic.Parser;
 
 public class ParserTest {
     private String userInput = "deadline return book /by 2021-09-27 15:00";

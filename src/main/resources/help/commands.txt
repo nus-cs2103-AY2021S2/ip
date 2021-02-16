@@ -1,4 +1,4 @@
-These are common Snom commands used in various situations:
+These are snom.common Snom commands used in various situations:
 
 todo            Add a todo task to task list
 deadline        Add a task with deadline to task list

@@ -1,12 +1,10 @@
-package common.util;
+package snom.common.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
-
-import snom.common.util.TaskUtil;
 
 public class TaskUtilTest {
     private LocalDateTime inputDateTime = LocalDateTime.parse("2021-09-27 15:00", TaskUtil.DATE_TIME_INPUT_FORMAT);
