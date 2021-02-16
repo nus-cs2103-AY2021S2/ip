@@ -3,11 +3,16 @@ import java.time.LocalDate;
 
 import duke.dukeException.DukeException;
 
-
+/**
+ * Deadline is the main entity we'll be using to define a deadline task.
+ *
+ * Please see the {@link Task} class for true identity
+ * @author Ni Jiaying
+ *
+ */
 public class Deadline extends Task {
     /** Date of the deadline */
     protected LocalDate done_by;
-    public final String category = "Deadline";
 
     /**
      * Class constructor specifying deadline name and due date.

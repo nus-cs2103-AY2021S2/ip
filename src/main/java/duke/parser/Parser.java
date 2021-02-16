@@ -3,7 +3,6 @@ import duke.command.Command;
 import duke.dukeException.DukeException;
 
 public class Parser {
-
     /**
      * Class constructor.
      * @param fullCommand  the commands input by user.

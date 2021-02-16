@@ -1,8 +1,15 @@
 package duke.task;
+
 import duke.dukeException.DukeException;
 
+/**
+ * ToDo is the main entity we'll be using to define a todo task.
+ *
+ * Please see the {@link Task} class for true identity
+ * @author Ni Jiaying
+ *
+ */
 public class ToDo extends Task {
-    public final String category = "ToDo";
     /**
      * Class constructor specifying name.
      */

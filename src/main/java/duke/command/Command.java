@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -19,11 +18,14 @@ import duke.task.ToDo;
 public class Command {
     /** The input command by user */
     private String commandName;
+    /** The default data path of the file storing all tasks in this project */
     final String DATA_PATH  = "data/duke.txt";
+    /** The starting index of the name of a todo task */
     final int todoLength = 5;
+    /** The starting index of the name of a event task */
     final int eventLength = 6;
+    /** The starting index of the name of a deadline task */
     final int deadlineLength = 9;
-
 
     /**
      * Class constructor.
@@ -32,15 +34,15 @@ public class Command {
         this.commandName = commandName;
     }
 
-
     /**
      * Processes tasks according to the command.
      *
      * @param tasks  the tasks before execution.
+     * @return all the processed tasks.
      * @throws IOException  If an input or output
      *                      exception occurred
      */
-    public String execute(TaskList tasks) throws IOException, DukeException, DukeException {
+    public String execute(TaskList tasks) throws IOException, DukeException {
         ArrayList<Task> tList = tasks.getTasks();
         String output = "";
         if (commandName.equals("list")) {
@@ -68,6 +70,12 @@ public class Command {
         return output;
     }
 
+    /**
+     * Returns all the existing tasks in the task list.
+     *
+     * @param tList  the list of tasks stored.
+     * @return all the existing tasks in the task list.
+     */
     public String executeList(ArrayList<Task> tList) {
         String output = "     Here are the tasks in your list:\n";
         int taskCounter = 1;
@@ -82,7 +90,14 @@ public class Command {
         return output;
     }
 
-    public String executeDone(ArrayList<Task> tList, TaskList tasks) throws IOException {
+    /**
+     * Marks one specified task's status as done.
+     *
+     * @param tList  the copy of tasks before execution.
+     * @param tasks  the tasks before execution.
+     * @return all the processed tasks after marking one specified task's status as done.
+     */
+    public String executeDone(ArrayList<Task> tList, TaskList tasks) {
         String output = "";
         try {
             int index = Integer.parseInt(commandName.split(" ")[1]);
@@ -127,13 +142,16 @@ public class Command {
             output += "Please enter a valid number!";
         }
         return output;
-
-
-
-
     }
 
-    public String executeDelete(ArrayList<Task> tList, TaskList tasks) throws IOException {
+    /**
+     * Deletes one specified task.
+     *
+     * @param tList  the copy of tasks before execution.
+     * @param tasks  the tasks before execution.
+     * @return the rest of the tasks after deleting one specified task.
+     */
+    public String executeDelete(ArrayList<Task> tList, TaskList tasks) {
         String output = "";
         try {
             int index = Integer.parseInt(commandName.split(" ")[1]);
@@ -165,6 +183,13 @@ public class Command {
         return output;
     }
 
+    /**
+     * Finds one specified task from the task list.
+     *
+     * @param tList  the copy of tasks before execution.
+     * @param task   the task to look for.
+     * @return the found task if it exists.
+     */
     public Task findExact (ArrayList<Task> tList, Task task) {
         for (Task t : tList) {
             if (t.getName().equals(task.getName()) && t.getStatus() == task.getStatus()) {
@@ -174,7 +199,15 @@ public class Command {
         return null;
     }
 
-
+    /**
+     * Adds a todo task into the task list.
+     *
+     * @param tList  the copy of tasks before execution.
+     * @param tasks  the tasks before execution.
+     * @return all tasks after adding one todo task.
+     * @throws DukeException  If an input or output
+     *                       exception occurred
+     */
     public String executeToDo (ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
         if (commandName.length() < todoLength) {
@@ -203,6 +236,15 @@ public class Command {
         return output;
     }
 
+    /**
+     * Adds a deadline task into the task list.
+     *
+     * @param tList  the copy of tasks before execution.
+     * @param tasks  the tasks before execution.
+     * @return all tasks after adding one deadline task.
+     * @throws DukeException  If an input or output
+     *                       exception occurred
+     */
     public String executeDeadline (ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
         if (commandName.length() < deadlineLength) {
@@ -239,6 +281,15 @@ public class Command {
         return output;
     }
 
+    /**
+     * Adds a event task into the task list.
+     *
+     * @param tList  the copy of tasks before execution.
+     * @param tasks  the tasks before execution.
+     * @return all tasks after adding one event task.
+     * @throws DukeException  If an input or output
+     *                       exception occurred
+     */
     public String executeEvent (ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
         if (commandName.length() < eventLength) {
@@ -275,6 +326,14 @@ public class Command {
         return output;
     }
 
+    /**
+     * Finds all the tasks which partially or fully match the given task from the task list .
+     *
+     * @param tasks  the tasks to look for.
+     * @return all the found tasks if any exists.
+     * @throws IOException  If an input or output
+     *                       exception occurred
+     */
     public String executeFind (TaskList tasks) throws IOException {
         String output;
         String match = commandName.split(" ")[1];

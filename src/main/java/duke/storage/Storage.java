@@ -15,6 +15,7 @@ import duke.task.ToDo;
 public class Storage {
     /** The path of the file storing all tasks */
     private String filePath;
+    /** The default data path of the file storing all tasks in this project */
     final String DATA_PATH  = "data/duke.txt";
 
     /**

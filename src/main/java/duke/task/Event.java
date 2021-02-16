@@ -4,12 +4,16 @@ import java.time.LocalDate;
 
 import duke.dukeException.DukeException;
 
-
-
+/**
+ * Event is the main entity we'll be using to define a event task.
+ *
+ * Please see the {@link Task} class for true identity
+ * @author Ni Jiaying
+ *
+ */
 public class Event extends Task {
     /** Event time */
     protected LocalDate at;
-    public final String category = "Event";
 
     /**
      * Class constructor specifying event name and duration.

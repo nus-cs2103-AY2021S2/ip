@@ -6,7 +6,6 @@ public class Task {
     protected boolean isDone;
     /** Name of the task */
     protected String name;
-    public String category;
 
     /**
      * Class constructor.
@@ -16,10 +15,16 @@ public class Task {
         this.name = name;
     }
 
+    /**
+     * Gets the name of a task.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the status of a task.
+     */
     public boolean getStatus() {
         return isDone;
     }
@@ -50,10 +55,8 @@ public class Task {
             } else {
                 output += "     Now you have " + count + " tasks in the list.\n";
             }
-
         }
         return output;
-
     }
 
     /**

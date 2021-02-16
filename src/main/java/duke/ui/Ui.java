@@ -17,7 +17,6 @@ public class Ui {
      */
     public String showLine() {
         return "";
-        //return "    ____________________________________________________________";
     }
 
     /**
@@ -27,18 +26,6 @@ public class Ui {
      */
     public String showError(String message) {
         return message;
-    }
-
-    /**
-     * Prints welcome message.
-     */
-    public String showWelcome() {
-        String output = "";
-        output += "    ____________________________________________________________" + "\n";
-        output += "     Hello! I'm Duke" + "\n";
-        output += "     What can I do for you?" + "\n";
-        output += "    ____________________________________________________________" + "\n";
-        return output;
     }
 
 
