@@ -87,7 +87,7 @@ public class Storage {
     }
 
     /**
-     * Loads data from a fixed constant, location relative to the program locatoin
+     * Loads data from a fixed constant, location relative to the program location
      *
      * @return TaskList that corresponds to the loaded data
      * @throws IOException Uncontrollable IO Error
