@@ -44,7 +44,7 @@ public class Ui {
         String msg;
 
         if (tasks.size() > 0) {
-            msg = String.format("Congrats! The following tasks have been marked as done:\n%s"
+            msg = String.format("Congrats! The following tasks have been removed from your to-do list:\n%s"
                     + "\nYou now have %d tasks on your to-do list.",
                     displayList(tasks),
                     listSize);

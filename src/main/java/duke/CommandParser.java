@@ -71,13 +71,17 @@ public class CommandParser {
                 tasksToRemove.add(idx);
             }
 
-            Collections.sort(tasksToRemove, Collections.reverseOrder());
+            // reverse list so the tasks can be removed safely
+           Collections.reverse(tasksToRemove);
 
             for (int i = 0; i < tasksToRemove.size(); i++) {
                 int idx = tasksToRemove.get(i);
                 Task removedTask = tasks.remove(idx);
                 removedTasks.add(removedTask);
             }
+
+            // reverse removedTasks so they display in order
+            removedTasks.reverse();
 
             reply = ui.showRemovedTasks(removedTasks, tasks.size());
 

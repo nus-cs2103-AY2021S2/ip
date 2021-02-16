@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents a list of Task objects, and governs interactions between Tasks and this List.
@@ -53,6 +54,10 @@ public class TaskList {
      */
     public int size() {
         return tasks.size();
+    }
+
+    public void reverse() {
+        Collections.reverse(tasks);
     }
 
     /**
