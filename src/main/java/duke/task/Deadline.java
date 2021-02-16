@@ -85,6 +85,7 @@ public class Deadline extends Task {
                 if (arrOfDescriptionToChange.get(i).equals("/de")) {
                     this.description = arrOfDescriptionToChange.get(i + 1);
                 } else if (arrOfDescriptionToChange.get(i).equals("/by")) {
+                    this.deadlineBy = arrOfDescriptionToChange.get(i + 1);
                     this.dateBy = getDateBy(arrOfDescriptionToChange.get(i + 1));
                 } else {
                     throw new TaskException("Illegal tag detected! \nPlease tag the part of the task you wish to change"
