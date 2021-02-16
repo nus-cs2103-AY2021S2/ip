@@ -2,7 +2,7 @@
 Here is the user manual! Have fun!
 
 ![Image of app]
-(https://github.com/rachelljt/ip/blob/master/docs/Ui.png)
+(https://raw.githubusercontent.com/rachelljt/ip/master/docs/Ui.png)
 
 ## Features
 Commands | Usage
