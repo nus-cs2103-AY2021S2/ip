@@ -2,7 +2,7 @@
 
 Duke is a **desktop application for managing tasks, optimized to be used with Command Line Interface** (CLI). It showcased your inputs and the outputs using Graphical User Interface (GUI).
   
-![Image of Duke.](docs/Ui.png)
+![Image of Duke.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Ui.png)
 
 #### Table Of Contents
 
@@ -51,7 +51,7 @@ Format: `find KEYWORDS`
 Examples: 
  * `find CS2101` returns `CS2101 HW`, `CS2101 assgn`, and `CS2101 exam`.  
 
-![Image of find method example.](docs/Find_method_example.png)
+![Image of find method example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Find_method_example.png)
 
 ### Marking a task as complete: `done`
 Marks a task as done.
@@ -60,7 +60,7 @@ Format: `done INDEX`
 Eamples:
  - `done 1` Marks your first task as completed.  
 
-![Image of done example.](docs/Done_method_example.png)
+![Image of done example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Done_method_example.png)
 
 ### Deleting a task: `delete`
 Deletes a specified task from your task list.
@@ -70,7 +70,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, ...
 Examples:
  * `delete 6` deletes the 6th task in your Duke.
- * ![Image of delete method](docs/Delete_method_example.png)
+ * ![Image of delete method](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Delete_method_example.png)
 
 ### Saving the data
 Duke saves your data in the hard disk automatically after each of your inputs. There is no need to save manually :)
