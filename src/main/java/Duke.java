@@ -1,179 +1,48 @@
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-/**
- * Start point of Duke
- * Initializes DUke and starts the interaction with user
- */
-public class Duke extends Application {
+public class Duke {
 
-//    private final UI ui;
-//    private final Storage storage;
+    private final UI ui;
+    private final Storage storage;
     private DukeList list;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    public static void main(String[] args)  {
-//       new Duke("data/duke.txt").run();
-    }
-//    public Duke(String filePath)  {
-//        ui = new UI();
-//        storage = new Storage(filePath);
-//        try {
-//            list = new DukeList(storage.load());
-//        } catch (FileNotFoundException e) {
-//            list = new DukeList();
-//        }
-//    }
-
-    /**
-     * Runs the program until termination is called
-     */
-//    public void run()  {
-//        ui.WelcomeMessage();
-//        ui.showDivider();
-//        while (!ui.getIsExit()) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                ui.commandMessage(Parser.parse(fullCommand, list), list);
-//            } catch (ArrayIndexOutOfBoundsException e) {
-//                ui.showMissingArgsError();
-//            } catch (NumberFormatException | DateTimeParseException | IndexOutOfBoundsException e) {
-//                ui.showWrongArgsError();
-//            }
-//            ui.showDivider();
-//        }
-//        storage.save(list);
-//        ui.GoodByeMessage();
-//    }
-
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-
-        // more code to be added here later
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+    public Duke()  {
+        ui = new UI();
+        storage = new Storage("data/duke.txt");
+        try {
+            list = new DukeList(storage.load());
+        } catch (FileNotFoundException e) {
+            list = new DukeList();
+        }
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * Takes in a user input and output a response
+     * @param input user input
+     * @return Response String
      */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+    public String getResponse(String input) {
 
-        return textToAdd;
+        if (input.equals("bye")) {
+            storage.save(list);
+            return ui.showGoodByeMessage();
+        } else {
+            try {
+                return ui.commandMessage(Parser.parse(input, list), list);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return ui.showMissingArgsError();
+            } catch (NumberFormatException | DateTimeParseException | IndexOutOfBoundsException e) {
+                return ui.showWrongArgsError();
+            }
+        }
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Shows the welcome message on startup
+     * @return welcome message String
      */
-    private void handleUserInput() {
-        String userText = userInput.getText();
-        String dukeText = userInput.getText();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
-        );
-        userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    public static String welcomeMessage() {
+        return new UI().showWelcomeMessage();
     }
 }

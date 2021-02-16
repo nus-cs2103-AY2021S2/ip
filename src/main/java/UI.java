@@ -1,209 +1,186 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 /**
  * Deals with User interactions, reads user inputs and outputs text
  */
 public class UI {
-    private static final String DIVIDER = "____________________________________________________________";
     private static final String WELCOME_MESSAGE =  " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n"
             + "\nHello! I'm Duke\nWhat can I do for you today?";
-    private static final String GOODBYE_MESSAGE = "Good bye! Stay calm and keep coding o7";
-    private static final String LS = System.lineSeparator();
-    private final Scanner in;
-    private boolean isExit;
+    private static final String GOODBYE_MESSAGE = "Good bye and take care! This application will close in 5 seconds.";
 
     public UI() {
-        this.in = new Scanner(System.in);
-        this.isExit = false;
     }
 
     /**
-     * Output welcome message
+     * Returns a response string
+     * @param commandAndParams Parsed user input String array
+     * @param list DukeList
+     * @return Response String
      */
-    public void WelcomeMessage() {
-        showToUser(DIVIDER + LS + WELCOME_MESSAGE);
-    }
-
-    /**
-     * Output goodbye message
-     */
-    public void GoodByeMessage() {
-        showToUser(GOODBYE_MESSAGE + LS + DIVIDER);
-    }
-
-
-    /**
-     * reads parsed commands to output appropriate response to user
-     * @param commandAndParams string arr containing a string command and a string of parameter Parser
-     * @param list DukeList object
-     */
-    public void commandMessage(String[] commandAndParams, DukeList list) {
+    public String commandMessage(String[] commandAndParams, DukeList list) {
         switch(commandAndParams[0]) {
         case "done":
-            doneMessage(commandAndParams[1]);
-            showNoOfTaskLeft(list);
-            break;
+            return doneMessage(commandAndParams[1]) + noOfTaskLeft(list);
         case "delete":
-            deleteMessage(commandAndParams[1]);
-            showNoOfTaskLeft(list);
-            break;
+            return deleteMessage(commandAndParams[1]) + noOfTaskLeft(list);
         case "reset":
-            resetMessage();
-            break;
+            return resetMessage() + noOfTaskLeft(list);
         case "show":
-            showMessage(list, commandAndParams[1]);
-            break;
+            return showMessage(list, commandAndParams[1]);
         case "todo":
         case "event":
         case "deadline":
-            addTaskMessage(commandAndParams[1]);
-            showNoOfTaskLeft(list);
-            break;
+            return addTaskMessage(commandAndParams[1]) + noOfTaskLeft(list);
         case "list":
-            listMessage(list);
-            break;
+            return listMessage(list);
         case "find":
-            findMessage(list, commandAndParams[1]);
-            break;
+            return findMessage(list, commandAndParams[1]);
         case "bye":
-            isExit = true;
-            break;
+            return GOODBYE_MESSAGE;
         default:
-            unknownCommandMessage();
-            break;
+            return unknownCommandMessage();
         }
     }
 
     /**
-     * Output all tasks in DukeList object
-     * @param list DukeList object
+     * Returns a String containing all tasks with names matching the input String
+     * @param list DukeList
+     * @param keyword String of the parsed user input
+     * @return Response String
      */
-    private void findMessage(DukeList list, String keyword) {
+    private String findMessage(DukeList list, String keyword) {
         int size = list.getSize();
         int counter = 1;
-        showToUser("Here are tasks matching the keyword provided");
+        StringBuilder fullFindMessage = new StringBuilder("Here are tasks matching the keyword provided");
         for (int i = 0; i < size; i++) {
             if (list.get(i).getTaskName().contains(keyword)) {
-                showToUser((counter) + "." + list.get(i));
+                fullFindMessage.append("\n").append(counter).append(".").append(list.get(i)).append("\n");
                 counter++;
             }
         }
+        return fullFindMessage.toString();
     }
 
-    public void listMessage(DukeList list) {
+    /**
+     * Returns all tasks in the DukeList
+     * @param list list within DukeList
+     * @return String of all tasks within the list
+     */
+    public String listMessage(DukeList list) {
         int size = list.getSize();
-        showToUser("Here are your task!");
+        StringBuilder fullListMessage = new StringBuilder("Here are your task!");
         for (int i = 0; i < size; i++) {
-            showToUser((i + 1) + "." + list.get(i));
+            fullListMessage.append("\n").append(i + 1).append(".").append(list.get(i));
         }
+        return fullListMessage.toString();
     }
 
     /**
-     * Output message for "done" command
-     * @param taskName String of the task name
+     * Returns a message string after "done" command
+     * @param taskName name of the task
+     * @return String message
      */
-    public void doneMessage(String taskName) {
-        showToUser("Good job! The following task has been marked as done:\n" + taskName);
+    public String doneMessage(String taskName) {
+        return "Good job! The following task has been marked as done:\n" + taskName;
     }
 
     /**
-     * Output message for "delete" command
-     * @param taskName String of the task name
+     * Returns a message string after "delete" command
+     * @param taskName name of the task
+     * @return String message
      */
-    public void deleteMessage(String taskName) {
-        showToUser("Got it! The following task has been deleted:\n" + taskName);
-    }
-    /**
-     * Output message for "reset" command
-     */
-    public void resetMessage() {
-        showToUser("Got it! All tasks have been deleted");
+    public String deleteMessage(String taskName) {
+        return "Got it! The following task has been deleted:\n" + taskName;
     }
 
-    public void showMessage(DukeList list, String dateStr) {
+    /**
+     * Returns a message string after "reset" command
+     * @return String message
+     */
+    public String resetMessage() {
+        return "Got it! All tasks have been deleted";
+    }
+
+    /**
+     * Returns a message string of all tasks that have the same dates as the input date
+     * @param list DukeList
+     * @param dateStr String of the date
+     * @return String message
+     */
+    public String showMessage(DukeList list, String dateStr) {
         LocalDate date = LocalDate.parse(dateStr);
         int counter = 1;
-        showToUser("Here are your task on " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        StringBuilder fullShowString = new StringBuilder("Here are your task on " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         for (int i = 0; i < list.getSize(); i++) {
             Task curr = list.get(i);
-            if (curr instanceof Deadlines) {
-                if (((Deadlines) curr).getBy().equals(date)) {
-                    showToUser(counter + "." + curr);
-                    counter++;
-                }
-            } else if (curr instanceof Events) {
-                if (((Events) curr).getDuration().equals(date)) {
-                    showToUser(counter + "." + curr);
-                    counter++;
-                }
+            if (curr instanceof Deadlines && ((Deadlines) curr).getBy().equals(date)) {
+                fullShowString.append("\n").append(counter).append(".").append(curr);
+                counter++;
+            } else if (curr instanceof Events && ((Events) curr).getDuration().equals(date)) {
+                fullShowString.append("\n").append(counter).append(".").append(curr);
+                counter++;
             }
         }
+        return fullShowString.toString();
     }
 
     /**
-     * Output message after "todo" or "deadline" or "event" command
+     * Returns a message string after "add" command
+     * @param taskStr name of the task
+     * @return String message
      */
-    public void addTaskMessage(String taskStr) {
-        showToUser("Got it! The following task has been added:\n" + taskStr );
+    public String addTaskMessage(String taskStr) {
+        return "Got it! The following task has been added:\n" + taskStr;
     }
 
     /**
-     * Output message and the number of items in DukeList object
-     * @param list DukeList object
+     * Returns a the number of task left in the list
+     * @param list DukeList
+     * @return String number of tasks left message
      */
-    public void showNoOfTaskLeft(DukeList list) {
-        showToUser("\nYou have " + list.getSize() + " Task(s) left in the list");
+    public String noOfTaskLeft(DukeList list) {
+        return "\nYou have " + list.getSize() + " Task(s) left in the list";
     }
 
     /**
-     * Output message when an unknown command is received
+     * Returns the unknown command error message
+     * @return String unknown command message
      */
-    public void unknownCommandMessage() {
-        showToUser("I'm sorry, I do not know what that means");
+    public String unknownCommandMessage() {
+        return "I'm sorry, I do not know what that means";
     }
 
     /**
-     * reads the next line of user input
-     * @return String of user input
+     * Returns the missing arguments error message
+     * @return String missing argument message
      */
-    public String readCommand() {
-        return in.nextLine();
-    }
-
-    public void showDivider() {
-        showToUser(DIVIDER + LS);
+    public String showMissingArgsError() {
+        return "Error! Your command has missing argument(s)!\nTry Again!";
     }
 
     /**
-     * Output error message when ArrayIndexOutOfBoundsException is caught
+     * Returns the wrong arguments error message
+     * @return String wrong argument message
      */
-    public void showMissingArgsError() {
-        showToUser("Error! Your command has missing argument(s)!\nTry Again!");
+    public String showWrongArgsError() {
+        return "Error! Your command has invalid argument(s)!\nTry Again!";
     }
 
     /**
-     * Output error message when NumberFormatException | DateTimeParseException | IndexOutOfBoundsException is caught
+     * Returns the goodbye message
+     * @return String goodbye message
      */
-    public void showWrongArgsError() {
-        showToUser("Error! Your command has invalid argument(s)!\nTry Again!");
+    public String showGoodByeMessage() {
+        return GOODBYE_MESSAGE;
     }
 
     /**
-     * prints the string parameter
-     * @param message string of message
+     * Returns the welcome message
+     * @return String welcome message
      */
-    public void showToUser(String message) {
-        System.out.println(message);
-    }
-
-    /**
-     * signals whether "bye command has been called"
-     * @return boolean
-     */
-    public boolean getIsExit() {
-        return isExit;
+    public String showWelcomeMessage() {
+        return WELCOME_MESSAGE;
     }
 }
