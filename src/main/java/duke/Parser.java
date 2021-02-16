@@ -44,6 +44,7 @@ public class Parser {
         String output = taskList.checkDuplicate(currLine);
         assert !currLine.equals("");
         output += handleValidCommand(duke, currLine, taskList, ui, storage);
+        storage.save(ui, taskList);
         return output;
     }
 
@@ -77,5 +78,6 @@ public class Parser {
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+
     }
 }

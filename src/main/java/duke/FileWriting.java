@@ -2,6 +2,11 @@ package duke;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 /*
 Taken from 2103T file access demo
  */
@@ -12,6 +17,8 @@ Taken from 2103T file access demo
 public class FileWriting {
 
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        Path file = Paths.get(filePath);
+        Files.write(file, Collections.singleton(textToAdd), StandardCharsets.UTF_8 );
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
