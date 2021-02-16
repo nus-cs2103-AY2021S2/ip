@@ -1,5 +1,10 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import duke.Statistics;
 import duke.TaskType;
 import duke.exception.AddDeadlineCommandParseException;
 import duke.exception.AddEventCommandParseException;
@@ -155,4 +160,9 @@ public class Parser {
             throw new UnknownCommandParseException();
         }
     }
+
+	public static Statistics parseAsStats(List<String> stats) {
+        List<LocalDateTime> dateTimes = stats.stream().map(str -> LocalDateTime.parse(str)).collect(Collectors.toList());
+		return new Statistics(dateTimes);
+	}
 }

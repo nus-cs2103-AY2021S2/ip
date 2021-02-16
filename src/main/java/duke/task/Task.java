@@ -33,10 +33,15 @@ public abstract class Task {
     }
 
     /**
-     * Marked the status of this Task object as finished.
+     * Returns true if the marking of completion status of the Task object is 
+     * successful.
+     *
+     * @return true when the task was not already marked as done.
      */
-    public void markAsDone() {
+    public boolean markAsDone() {
+        boolean wasDone = this.isDone;
         this.isDone = true;
+        return !wasDone;
     }
 
     /**

@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,12 +86,28 @@ public class Storage {
         }
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-            List<Task> t = lines.stream()
+            List<String> tasks = new ArrayList<>();
+            List<String> stats = new ArrayList<>();
+            
+            int i = 0;
+            for (; i < lines.size(); i++) {
+                if (lines.get(i).equals("%")) {
+                    break;
+                }
+                tasks.add(lines.get(i));
+            }
+            for (i++; i < lines.size(); i++) {
+                stats.add(lines.get(i));
+            }
+
+
+            List<Task> t = tasks.stream()
                     .map(str -> Parser.parseAsTask(str))
                     .filter(task -> task != null)
                     .collect(Collectors.toList());
+            Statistics s = Parser.parseAsStats(stats);
             assert(!t.contains(null));
-            return new TaskList(t);
+            return new TaskList(t, s);
         } catch (IOException e) {
             System.err.println("Duke cannot read the file.");
             e.printStackTrace();

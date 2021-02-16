@@ -20,3 +20,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 .classpath
 .settings
 .project
+
+/data

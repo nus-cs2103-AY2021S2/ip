@@ -13,15 +13,18 @@ import duke.task.Task;
  */
 public class TaskList {
     private final List<Task> tasks;
+    private final Statistics stats;
 
     /**
      * Constructor for class TaskList supplied with some Task instances.
      *
      * @param tasks a list of Tasks instances
+     * @param stats a Statistics instance
      */
-    public TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks, Statistics stats) {
         this.tasks = new ArrayList<>();
         this.tasks.addAll(tasks);
+        this.stats = stats;
     }
 
     /**
@@ -29,6 +32,7 @@ public class TaskList {
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
+        this.stats = new Statistics();
     }
 
     /**
@@ -37,7 +41,11 @@ public class TaskList {
      * @return the encoded format of the list of tasks
      */
     public List<String> encode() {
-        return tasks.stream().map(task -> task.encode()).filter(str -> str != null).collect(Collectors.toList());
+        List<String> encoding = tasks.stream().map(task -> task.encode()).filter(str -> str != null).collect(Collectors.toList());
+        encoding.add("%");
+        encoding.addAll(stats.encode());
+
+        return encoding;
 
     }
 
@@ -57,7 +65,17 @@ public class TaskList {
      * @see duke.task.Task#markAsDone()
      */
     public void markAsDone(int index) {
-        tasks.get(index).markAsDone();
+        boolean wasNotAlreadyDone = tasks.get(index).markAsDone();
+        if (wasNotAlreadyDone) {
+            stats.addCompletionDatetime();
+        }
+    }
+
+    /**
+     * Returns the total number of completed tasks in the past week.
+     */
+    public int getCompletedTasksCountLastWeek() {
+        return stats.getCompletedTasksCountLastWeek();
     }
 
     /**
