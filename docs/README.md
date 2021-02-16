@@ -86,7 +86,7 @@ Add a todo and I'll remember it for you!
 ### `todo DESCRIPTION` - Add a todo
 
 Typing `todo` followed by a description adds a todo to your list of tasks.
-<DESCRIPTION> can be made out of one or many words.
+DESCRIPTION can be made out of one or many words.
 
 Example of usage:
 
@@ -103,8 +103,8 @@ Add a deadline and I'll remember it for you!
 ### `deadline DESCRIPTION /by DATE (TIME)` - Add a deadline
 
 Typing `deadline` followed by a description, date and optional time field adds a deadline to your list of tasks.
-<DESCRIPTION> can be made out of one or many words.
-<DATE> should be in yyyy-mm-dd format
+DESCRIPTION can be made out of one or many words.
+DATE should be in yyyy-mm-dd format
 (TIME) is optional and should be in hh:mm format
 
 Example of usage:
@@ -122,8 +122,8 @@ Add an event and I'll remember it for you!
 ### `event DESCRIPTION /at DATE (TIME)` - Add an  event
 
 Typing `event` followed by a description, date and optional time field adds an event to your list of tasks.
-<DESCRIPTION> can be made out of one or many words.
-<DATE> should be in yyyy-mm-dd format
+DESCRIPTION can be made out of one or many words.
+DATE should be in yyyy-mm-dd format
 (TIME) is optional and should be in hh:mm format
 
 Example of usage:
