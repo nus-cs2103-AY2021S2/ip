@@ -13,9 +13,7 @@ class ParseKiwiDateTime {
     HashMap<String, Integer> timeDelimiters = new HashMap<>();
 
     // can't remember what this entire class was doing before
-    private String timeDelimiter;
-    private String dateDelimiter;
-
+    
     private int hour;
     private int min;
     private int day;
@@ -27,7 +25,7 @@ class ParseKiwiDateTime {
         dateDelimiters.put("-", 1);
         dateDelimiters.put("/", 1);
         timeDelimiters.put(":", 1);
-        timeDelimiters.put(".", 1);
+        timeDelimiters.put(".", 1); // bugs because split(regex) interprets . as a regex symbol
     }
 
     public ParseKiwiDateTime() {
@@ -79,35 +77,48 @@ class ParseKiwiDateTime {
     }
 
     private KiwiDateTime createKiwiDateTimeObj() {
-        return KiwiDateTime.ofThisYear(this.day, this.month, this.hour, this.min);
+        return KiwiDateTime.of(this.day, this.month, this.year, this.hour, this.min);
     }
 
 
+    // two of the three spaced input strings can be connected, hence this function is created
     private void parse3InputStrs(String[] inputs) {
         if (isAmPm(inputs[1])) { // inputs are: time AM/PM date
-            parseTimeString(inputs[0], inputs[1]);
+            parse12hTimeString(inputs[0], inputs[1]);
             parseDateString(inputs[2]);
         } else if (isAmPm(inputs[2])) { // inputs are: date time AM/PM
             parseDateString(inputs[0]);
-            parseTimeString(inputs[1], inputs[2]);
+            parse12hTimeString(inputs[1], inputs[2]);
         }
     }
 
+    // the two spaced input strings can be connected, hence this function is created
     private void parse2InputStrs(String[] inputs) {
         if (isAmPm(inputs[1])) { // inputs are: time AM/PM
-            parseTimeString(inputs[0], inputs[1]);
+            parse12hTimeString(inputs[0], inputs[1]);
         }
 
-        // valid inputs are either: date 24hTime or 24hTime date
-        if (isDateString(inputs[0]) && is24hTimeString(inputs[1])) {
+        // valid inputs are either: date 24hTime or 24hTime date or date 12hUnspacedtime or reverse
+        if (false) {
+
+        } else if (isDateString(inputs[0]) && isUnspaced12hTimeString(inputs[1])) { // note 12h time string check needs to come before 24h
             parseDateString(inputs[0]);
-            parseTimeString(inputs[1]);
+            parseUnspaced12hTimeString(inputs[1]);
+
+        } else if (isDateString(inputs[0]) && is24hTimeString(inputs[1])) {
+            parseDateString(inputs[0]);
+            parse24hTimeString(inputs[1]);
         } else if (isDateString(inputs[1]) && is24hTimeString(inputs[0])) {
             parseDateString(inputs[1]);
-            parseTimeString(inputs[0]);
+            parse24hTimeString(inputs[0]);
+
         } else {
             // throw unsupported argument exception
         }
+    }
+
+    private boolean isDateAnd24hTimeString(String str1, String str2) {
+        return isDateString(str1) && isUnspaced12hTimeString(str2);
     }
 
     private boolean isAmPm(String input) {
@@ -118,7 +129,7 @@ class ParseKiwiDateTime {
      * Is only for 24h timestring
      * @param input
      */
-    private void parseTimeString(String input) {
+    private void parse24hTimeString(String input) {
         // assume input is of format hourDelimiterMinute
         String t = findTimeDelimiter(input);
         String[] parts = input.split(t);
@@ -127,8 +138,23 @@ class ParseKiwiDateTime {
         this.min = Integer.parseInt(parts[1]);
     }
 
-    private void parseTimeString(String input, String amPm) {
-        parseTimeString(input);
+    private void parseUnspaced12hTimeString(String input) {
+        int indexOfAmOrPm = Math.max(input.toLowerCase().indexOf("am"), input.toLowerCase().indexOf("pm"));
+
+        parse12hTimeString(
+                input.substring(0, indexOfAmOrPm).trim(),
+                input.substring(indexOfAmOrPm).trim()
+        );
+    }
+
+    private void parse12hTimeString(String input, String amPm) {
+        // parse24hTimeString(input); // fixme what if got no hour
+
+        if (isHourOnly(input)) {
+            this.hour = Integer.parseInt(input);
+        } else {
+            parse24hTimeString(input);
+        }
 
         assert isAmPm(amPm);
 
@@ -144,8 +170,17 @@ class ParseKiwiDateTime {
         // assumption: day comes before month
         this.day = Integer.parseInt(parts[0]);
         this.month = Integer.parseInt(parts[1]);
+
+        if (parts.length == 3) {
+            this.year = Integer.parseInt(parts[2]);
+        }
     }
 
+    // why unspaced, because parsing function already split all the spaces
+    // ha or h:ma
+    private boolean isUnspaced12hTimeString(String input) {
+        return input.toLowerCase().contains("am") || input.toLowerCase().contains("pm");
+    }
 
 
     /**
@@ -190,6 +225,11 @@ class ParseKiwiDateTime {
         return !d.isEmpty();
     }
 
+    private boolean isHourOnly(String input) {
+        String d = findTimeDelimiter(input);
+        return d.isEmpty();
+    }
+
     static void print(Object... objects) {
         for (Object o : objects) {
             System.out.println(o);
@@ -205,50 +245,36 @@ class ParseKiwiDateTime {
         // focus on the simple case first
         // todo datetime throws a lot of exceptions
         ParseKiwiDateTime p = new ParseKiwiDateTime();
-//        print(
-//                p.parse("20-05 11:44"),
-//                p.parse("30-11 15:01"),
-//                p.parse("6/4 1:22"),
-//                //p.parse("1/2 9:40PM")
-//                //p.parse("1/2 9:40 PM")
-//                //p.parse("6/4 1")
-//
-//                p.isDateString("6/4"),
-//                p.isDateString("6:40"),
-//                p.is24hTimeString("6:40"),
-//                p.is24hTimeString("06/05")
-//        );
-//
-//        p.parseTimeString("6:40");
-//        print(p.min, p.hour);
-//
-//        p.parseTimeString("11:50");
-//        print(p.min, p.hour);
-//
-//        p.parseTimeString("11:50", "PM");
-//        print(p.min, p.hour);
-//
-//        p.parseDateString("13/4");
-//
-//        p.params();
 
-//        String s1 = "13/4 6:00";
-//        KiwiDateTime k = p.parse(s1);
-//        print(k);
+         p.testParse(
+//                 "2:00 pm",
+//                 "18/11 6 pm",
+//                 "18/11 6:11 pm",
+//                 "6:11 pm 18/11",
+//                 "7 pm 18/11",
 
-//        String s1 = "13/4 13:00";
-//        KiwiDateTime k = p.parse(s1);
-//        print(k);
-//
-//        s1 = "13/4 14:10";
-//        k = p.parse(s1);
-//        print(k);
-//
-//        s1 = "2:00 pm";
-//        k = p.parse(s1);
-//        print(k);
+                 "18/11/31 6 pm",
 
-//        testParse("2.00pm", "2pm", "3 pm", "12am", "11:59pm");
+                 "6 pm",
+                 "11:59 pm",
+                 "13/4 13:00",
+                 "6:00 1/7",
+
+                 "2/3 11pm",
+                 "2/3 11:49pm",
+                 // "6:11pm 8/11", // fixme
+                 "7pm 18/1" // fixme
+                 // todo check if in creation, time and date are being set to none instead of 12am
+         );
+
+         // unsupported
+        /*
+        "4/5",
+        "14:39", // fixme
+         "2:31", // fixme
+         */
+
+//        testParse("13/4 6pm");
     }
 
     private static void testParse(String... strings) {

@@ -27,6 +27,18 @@ public class KiwiDate {
         return new KiwiDate(LocalDate.of(LocalDateTime.now().getYear(), month, day));
     }
 
+    public static KiwiDate of(int day, int month, int year) {
+        if (day==0 && month==0) {
+            return new KiwiDate();
+        }
+
+        if (year == 0) {
+            year = LocalDateTime.now().getYear();
+        }
+
+        return new KiwiDate(LocalDate.of(year, month, day));
+    }
+
     @Override
     public String toString() {
         if (isEmpty) {
