@@ -147,7 +147,6 @@ public class TaskList {
         return builder.toString();
     }
     private String formatOrderedPrint(int i) {
-        assert i >= 0 && i < store.size();
         final int size = store.size();
         while (i < 0) {
             i += size;
