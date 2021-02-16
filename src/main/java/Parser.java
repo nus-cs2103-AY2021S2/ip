@@ -319,7 +319,6 @@ public class Parser {
 
         int nextSpace = remainderCommand.indexOf(" ", firstSlash) + 1;
         String taskDescription = remainderCommand.substring(0, firstSlash);
-        String errorMessage;
 
         if (keyword.equalsIgnoreCase("deadline")) {
             LocalDateTime deadline = parseDate(remainderCommand.substring(nextSpace), ERROR_INVALID_DEADLINE_DATETIME);
@@ -368,7 +367,8 @@ public class Parser {
         }
         LocalDateTime[] deadline = new LocalDateTime[2];
         for (int i = 0; i < timePeriod.length; i++) {
-            deadline[i] = parseDate(date + " " + timePeriod[i], errorMessage);
+            String dateTime = date + " " + timePeriod[i].trim();
+            deadline[i] = parseDate(dateTime, errorMessage);
         }
         return deadline;
     }
