@@ -40,20 +40,26 @@ public class AddCommand extends Command {
     @Override
     public Pair<String, CallbackFunction> execute(TaskList list) throws DukeException {
         String keyword = commandSplit[0];
+
+        //Deadline
         if (keyword.equals("deadline")) {
             try {
                 return new Pair<>(addDeadline(list), CallbackFunction.empty());
             } catch (TaskException e) {
                 throw new DukeException("Failed to add deadline to tasks. " + e.getMessage());
             }
-        } else if (keyword.equals("todo")) {
+        }
+
+        //To do
+        if (keyword.equals("todo")) {
             return new Pair<>(addToDo(list), CallbackFunction.empty());
-        } else {
-            try {
-                return new Pair<>(addEvent(list), CallbackFunction.empty());
-            } catch (TaskException e) {
-                throw new DukeException("Failed to add event to tasks. " + e.getMessage());
-            }
+        }
+
+        //Event
+        try {
+            return new Pair<>(addEvent(list), CallbackFunction.empty());
+        } catch (TaskException e) {
+            throw new DukeException("Failed to add event to tasks. " + e.getMessage());
         }
     }
 
@@ -71,14 +77,22 @@ public class AddCommand extends Command {
         String[] userInputSplit = this.commandSplit;
         //Index of /by keyword
         int byIndex = getKeywordIndex("/by", userInputSplit);
+
+        //No by keyword.
         if (byIndex == 0) {
             throw new DukeException("Missing /by keyword for new deadline.");
-        } else if (byIndex == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
+
+        //by keyword immediately after deadline keyword
+        if (byIndex == 1) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        }
+
+        //by keyword is the last word in input
         if (byIndex == userInputSplit.length - 1) {
             throw new DukeException("Missing date of the deadline.");
         }
+
         String task = Helper.join(userInputSplit, 1, byIndex - 1);
         String date = Helper.join(userInputSplit, byIndex + 1, userInputSplit.length - 1);
         return list.add(new Deadline(task, date));
@@ -87,7 +101,7 @@ public class AddCommand extends Command {
     private String addToDo(TaskList list) throws DukeException {
         String[] userInputSplit = this.commandSplit;
         if (userInputSplit.length <= 1) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         String task = Helper.join(userInputSplit, 1, userInputSplit.length - 1);
         return list.add(new ToDo(task));
@@ -100,7 +114,7 @@ public class AddCommand extends Command {
         if (atIndex == 0) {
             throw new DukeException("Missing /at keyword for new Event.");
         } else if (atIndex == 1) {
-            throw new DukeException("☹ OOPS!!! The description of an Event cannot be empty.");
+            throw new DukeException("OOPS!!! The description of an Event cannot be empty.");
         }
         if (atIndex == userInputSplit.length - 1) {
             throw new DukeException("Missing date of the Event.");

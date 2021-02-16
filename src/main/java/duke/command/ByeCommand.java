@@ -18,7 +18,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Rewrites all Tasks in the list to the storage before saying bidding user goodbye.
+     * Rewrites all Tasks in the list to the storage before bidding user goodbye and terminating program.
      * @param list the task list.
      * @throws DukeException if failed to rewrite tasks.
      */

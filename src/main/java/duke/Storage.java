@@ -37,7 +37,7 @@ public class Storage {
     }
 
     /**
-     * Returns a FileWriter object to allow for writing to file. If clearFile is not selected, FileWriter object
+     * Returns a FileWriter object to allow for writing to file. If clearFile is not true, FileWriter object
      * will be in append mode so that file will not be overwritten.
      * @param clearFile determines whether to overwrite file.
      * @return FileWriter object to write to file.
@@ -45,10 +45,8 @@ public class Storage {
      */
     private FileWriter getFileWriter(boolean clearFile) throws DukeException {
         try {
-            File file = new File(LIST_FILE);
             FileWriter fw;
-            //If file already exists and we are not overwriting it
-            if (file.exists() && !clearFile) {
+            if (!clearFile) {
                 fw = new FileWriter(LIST_FILE, true);
             } else {
                 fw = new FileWriter(LIST_FILE);
@@ -59,6 +57,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a FileWriter object which appends to the storage file.
+     * @return FileWriter which appends to storage file.
+     * @throws DukeException if failed to access storage file.
+     */
     private FileWriter getFileWriter() throws DukeException {
         return getFileWriter(false);
     }
@@ -71,6 +74,7 @@ public class Storage {
      */
     public ArrayList<Task> readTasksFromFile() throws DukeException {
         File tasks = new File(LIST_FILE);
+        assert tasks.exists() : "Storage file must exist";
         Scanner s;
         ArrayList<Task> newList = new ArrayList<>();
         try {
@@ -81,7 +85,6 @@ public class Storage {
             s.close();
             return newList;
         } catch (TaskException | FileNotFoundException e) {
-            System.out.println("Bruh");
             throw new DukeException(e.getMessage());
         }
     }
@@ -95,6 +98,7 @@ public class Storage {
         FileWriter fw = getFileWriter();
         try {
             fw.write(task.toString());
+            //Add a newline
             fw.append(System.getProperty("line.separator"));
             fw.close();
         } catch (IOException | NullPointerException e) {

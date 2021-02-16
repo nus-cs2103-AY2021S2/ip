@@ -24,14 +24,17 @@ public class FindCommand extends Command {
     /**
      * Filters the task list for tasks which descriptions contain the keyword provided by user.
      * @param list the task list.
-     * @return The string form of the list of tasks containing the keyword.
+     * @return The list of tasks containing the keyword, in String.
      */
     @Override
     public Pair<String, CallbackFunction> execute(TaskList list) {
         String keyword = Helper.join(this.commandSplit, 1);
         ArrayList<Task> filteredList = list.filter(task -> task.isDescriptionContainsString(keyword));
+        //Convert each task to String then collect them into a List.
         List<String> tasksAsString = filteredList.stream().map(Task::toString).collect(Collectors.toList());
-        tasksAsString.add(0, "Found " + tasksAsString.size() + " matching task(s):");
-        return new Pair<>(Helper.formatStrings(tasksAsString.toArray(new String[0])), CallbackFunction.empty());
+        String header = "Found " + tasksAsString.size() + " matching task(s):";
+        //Add response header to front of tasks.
+        tasksAsString.add(0, header);
+        return new Pair<>(Helper.formatStrings(tasksAsString), CallbackFunction.empty());
     }
 }
