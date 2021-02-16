@@ -1,5 +1,5 @@
 <template>
-  <div>Please download the latest release of Elaina (`elaina.jar`) from <a :href=url>here</a>~</div>
+  <div>Please download the latest release of Elaina (<code>elaina.jar</code>) from <a :href=url>here</a>~</div>
 </template>
 
 <script>
