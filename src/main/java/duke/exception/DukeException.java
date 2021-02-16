@@ -59,8 +59,7 @@ public class DukeException extends Exception {
                     + "Pls restart (exit and start again) the Duke Bot !!!";
             break;
         case EMPTY_DATA:
-            errorMsg = "☹ OOPS!!! Unfortunately, there is no data in Duke.txt at the moment :-( "
-                    + "Pls enter the tasks to be tracked by the Duke Bot !!!";
+            errorMsg = "☹ OOPS!!! Unfortunately, there is no data on the list at the moment :-( ";
             break;
         default:
             break;

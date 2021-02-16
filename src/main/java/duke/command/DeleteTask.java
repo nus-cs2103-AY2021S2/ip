@@ -32,7 +32,7 @@ public class DeleteTask extends Command {
         int numTasks = taskList.getSize();
 
         this.outputMessage = "Noted. I've removed this task: \n" + "\t  " + taskDetail
-                + "\n\t Now you have " + numTasks + " tasks in the list.";
+                + "\n\t Now you have " + numTasks + " task(s) in the list.";
     }
 
     /**

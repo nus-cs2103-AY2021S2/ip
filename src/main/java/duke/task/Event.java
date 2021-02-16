@@ -27,7 +27,7 @@ public class Event extends Task {
      */
     @Override
     public String formatTask() {
-        return String.format("E | %s", super.formatTask());
+        return String.format("E | %s | %s", super.formatTask(), this.at);
     }
 
     /**

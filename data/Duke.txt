@@ -1,4 +1,2 @@
-T | 0 | buy book
-E | 0 | Project Meeting
-D | 1 | CS2103 IP tasks
-E | 0 | cny visit
+T | 1 | finish CS2103 tutorial
+D | 0 | CS2103 ip submission | 2021-02-19

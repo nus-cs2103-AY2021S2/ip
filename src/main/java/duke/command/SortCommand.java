@@ -30,8 +30,8 @@ public class SortCommand extends Command {
     }
 
     private void sort(TaskList taskList) throws DukeException {
-        StringBuilder currText = new StringBuilder("Here are the events and deadline "
-                + "tasks (sorted by date) in your list:");
+        StringBuilder currText = new StringBuilder("Here are the event and deadline "
+                + "task(s) (sorted by date) in your list:");
         TreeMap<String, String> map = new TreeMap<>();
 
         boolean isEmptyList = taskList.getSize() == 0;

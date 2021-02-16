@@ -59,7 +59,7 @@ public class AddTask extends Command {
 
         String taskDetail = newTask.toString();
         int numTasks = taskList.getSize();
-        this.outputMessage += "\t  " + taskDetail + "\n\t Now you have " + numTasks + " tasks in the list.";
+        this.outputMessage += "\t  " + taskDetail + "\n\t Now you have " + numTasks + " task(s) in the list.";
     }
 
     private void formatDateTime() throws DukeException {

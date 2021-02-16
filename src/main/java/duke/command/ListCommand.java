@@ -26,7 +26,7 @@ public class ListCommand extends Command {
     }
 
     private void retrieveList(TaskList taskList) throws DukeException {
-        StringBuilder currText = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder currText = new StringBuilder("Here are the task(s) in your list:");
         boolean isEmptyList = taskList.getSize() == 0;
 
         if (isEmptyList) {

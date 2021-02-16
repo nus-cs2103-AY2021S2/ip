@@ -1,6 +1,8 @@
 package duke.command;
 
 import duke.Storage;
+import duke.exception.DukeException;
+import duke.exception.ExceptionType;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -24,10 +26,15 @@ public class FindCommand extends Command {
         super.index = -1;
     }
 
-    private void retrieveMatchingTasks(TaskList taskList) {
-        StringBuilder currText = new StringBuilder("Here are the matching tasks in your list:");
+    private void retrieveMatchingTasks(TaskList taskList) throws DukeException {
+        StringBuilder currText = new StringBuilder("Here are the matching task(s) in your list:");
         int index = 0;
 
+        boolean isEmptyList = taskList.getSize() == 0;
+
+        if (isEmptyList) {
+            throw new DukeException(ExceptionType.EMPTY_DATA, "");
+        }
         for (int num = 1; num <= taskList.getSize(); num++) {
             Task currentTask = taskList.getTask(num - 1);
             String description = currentTask.getDescription();
@@ -54,7 +61,7 @@ public class FindCommand extends Command {
      * @param storage Instance of Storage
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         retrieveMatchingTasks(tasks);
     }
 }
