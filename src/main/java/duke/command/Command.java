@@ -351,14 +351,27 @@ public class Command {
         String line = reader.readLine();
         int allTaskCounter = 0;
         int matchTaskCounter = 1;
-        output = "Here are the matching tasks in your list:\n";
         while (line != null) {
             if (line.indexOf(match) != -1) {
-                output += matchTaskCounter + "." + tasks.getTasks().get(allTaskCounter).toString() + "\n";
                 matchTaskCounter++;
+                break;
             }
             line = reader.readLine();
             allTaskCounter++;
+        }
+        if (matchTaskCounter == 1) {
+            output = "Here is no matching task in your list.\n";
+        } else {
+            matchTaskCounter = 1;
+            output = "Here are the matching tasks in your list:\n";
+            while (line != null) {
+                if (line.indexOf(match) != -1) {
+                    output += matchTaskCounter + "." + tasks.getTasks().get(allTaskCounter).toString() + "\n";
+                    matchTaskCounter++;
+                }
+                line = reader.readLine();
+                allTaskCounter++;
+            }
         }
         return output;
     }
