@@ -9,7 +9,7 @@ With a simple user interface and customizable avatar, it is an indispensable par
 3. Copy the file to the directory you want to use as the home folder for Duke.
     * A data folder will also be created in the same directory to store Duke files. 
 4. Double-click the file to start the app. The window below should appear.
-   ![startingscreen](startpage.PNG)
+   ![startingscreen](./screenshots/startpage.PNG)
 5. Type the command in the chat box and press `Enter` or click Send to execute it.
 
 ### Add tasks to Duke!
@@ -151,7 +151,7 @@ Expected outcome:
 ### `bye` - Exits the program
 Exits the program after a short delay, in which tasks are saved. 
 
-![find](./screenshots/bye.PNG)
+![find](./screenshots/bye.png)
 
 ## Command Summary
 
