@@ -1,7 +1,7 @@
 # User Guide
 
 ## Introduction
-**Duke** is a jar application to track a user's tasks in a list format.
+**Duke** is a jar application to track a user's tasks in a list format. <br> 
 It is a CLI application that requires the download of [Java SE 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 
 ## Features
@@ -17,9 +17,9 @@ Example of usage:
 
 Expected outcome:
 
-`Ok! I've added this task:`
-`[T][X][H] run`
-`Currently, you have 1 task(s) in the list!`
+`Ok! I've added this task:` <br>
+`[T][X][H] run` <br>
+`Currently, you have 1 task(s) in the list!` <br>
 
 
 ### Feature `event` 
@@ -33,9 +33,9 @@ Example of usage:
 
 Expected outcome:
 
-`Ok! I've added this task:`
-`[E][X][M] walk (at: Mar 12 2021 12:12 PM)`
-`Currently, you have 1 task(s) in the list!`
+`Ok! I've added this task:` <br>
+`[E][X][M] walk (at: Mar 12 2021 12:12 PM)` <br>
+`Currently, you have 1 task(s) in the list!` <br>
 
 
 ### Feature `deadline` 
@@ -49,9 +49,9 @@ Example of usage:
 
 Expected outcome:
 
-`Ok! I've added this task:`
-`[D][X][L] walk (by: Mar 12 2021 12:12 PM)`
-`Currently, you have 1 task(s) in the list!`
+`Ok! I've added this task:` <br>
+`[D][X][L] walk (by: Mar 12 2021 12:12 PM)` <br>
+`Currently, you have 1 task(s) in the list!` <br>
 
 
 ### Feature `list` 
@@ -65,8 +65,8 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:`
-`1.[D][X][L] walk (by: Mar 12 2021 12:12 PM)`
+`Here are the tasks in your list:` <br>
+`1.[D][X][L] walk (by: Mar 12 2021 12:12 PM)` <br>
 
 
 ### Feature `delete` 
@@ -80,9 +80,9 @@ Example of usage:
 
 Expected outcome:
 
-`Ok! I've removed this task:`
-`[E][X][M] walk (by: Mar 12 2021 12:12 PM)`
-`Currently, you have 0 task(s) in the list!`
+`Ok! I've removed this task:` <br>
+`[E][X][M] walk (by: Mar 12 2021 12:12 PM)` <br>
+`Currently, you have 0 task(s) in the list!` <br>
 
 
 ### Feature `done` 
@@ -96,8 +96,8 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`
-`[E][O][M] walk (by: Mar 12 2021 12:12 PM)`
+`Nice! I've marked this task as done:` <br>
+`[E][O][M] walk (by: Mar 12 2021 12:12 PM)` <br>
 
 
 ### Feature `find` 
@@ -111,11 +111,11 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:`
-`1.[E][O][M] walk (by: Mar 12 2021 12:12 PM)`
+`Here are the tasks in your list:` <br>
+`1.[E][O][M] walk (by: Mar 12 2021 12:12 PM)` <br>
 
 
-##Command Summary
+## Command Summary
 Action | Format
 -------|-------
 Add todo | todo <priority> <name>
@@ -126,8 +126,12 @@ Delete task | delete <index>
 Mark task as done | done <index>
 Find task using keyword | find <keyword
 
-priority - takes in H, M or L characters
-keyword/name - takes in String
-index - takes in Integer
-hh:mm - takes in time in 24 hours (e.g 23:30)
-yyyy-mm-dd - takes in date (e.g 2021-12-12)
+priority - takes in H, M or L characters <br>
+
+keyword/name - takes in String <br>
+
+index - takes in Integer <br>
+
+hh:mm - takes in time in 24 hours (e.g 23:30) <br>
+
+yyyy-mm-dd - takes in date (e.g 2021-12-12) <br>
