@@ -1,8 +1,8 @@
 # Elaina
 
-![Checkstyle](https://github.com/lirc572/ip/workflows/Checkstyle/badge.svg)
-![Unit Test](https://github.com/lirc572/ip/workflows/Unit%20Test/badge.svg)
-![Create JAR](https://github.com/lirc572/ip/workflows/Create%20JAR/badge.svg)
+[![Checkstyle](https://github.com/lirc572/ip/workflows/Checkstyle/badge.svg)](https://github.com/lirc572/ip/actions?query=workflow%3ACheckstyle)
+[![Unit Test](https://github.com/lirc572/ip/workflows/Unit%20Test/badge.svg)](https://github.com/lirc572/ip/actions?query=workflow%3A%22Unit+Test%22)
+[![Create JAR](https://github.com/lirc572/ip/workflows/Create%20JAR/badge.svg)](https://github.com/lirc572/ip/actions?query=workflow%3A%22Create+JAR%22)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/36845b44-bacc-4042-b40b-5fdd8695ae61/deploy-status)](https://app.netlify.com/sites/elaina/deploys)
 
 Elaina is the ultimate personal assistant chatbot.
