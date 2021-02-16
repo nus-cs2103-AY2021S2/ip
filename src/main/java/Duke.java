@@ -1,3 +1,4 @@
+import main.java.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,7 +8,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String cmd = "";
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         while (!cmd.equals("bye")) {
             cmd = sc.nextLine();
             if (cmd.equals("bye")) {
@@ -49,13 +50,13 @@ public class Duke {
         System.out.println(indentation + horizontalLine);
     }
 
-    public static ArrayList<String> addTask(ArrayList<String> tasks, String task) {
-        ArrayList<String> newTasks = new ArrayList<>(tasks);
-        newTasks.add(task);
+    public static ArrayList<Task> addTask(ArrayList<Task> tasks, String task) {
+        ArrayList<Task> newTasks = new ArrayList<>(tasks);
+        newTasks.add(new Task(task));
         return newTasks;
     }
 
-    public static void printTasks(ArrayList<String> tasks) {
+    public static void printTasks(ArrayList<Task> tasks) {
         String indentation = "        ";
         String horizontalLine = "____________________________________________________________";
         System.out.println(indentation + horizontalLine);
