@@ -6,17 +6,17 @@ import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     public static final String TEST_DESC_1 = "return books";
-    public static final String TEST_DATE_1 = "2019-11-01T18:00";
+    public static final String TEST_DATE_1 = "2019-11-01 18:00";
     public static final String TEST_DESC_2 = "pay phone bill";
-    public static final String TEST_DATE_2 = "2021-01-26T19:00";
+    public static final String TEST_DATE_2 = "2021-01-26 19:00";
 
     @Test
     public void toStorageStringTest() {
         Deadline newDeadline1 = new Deadline(TEST_DESC_1, TEST_DATE_1);
-        assertEquals("D | 0 | return books | 2019-11-01T18:00", newDeadline1.toStorageString());
+        assertEquals("D | 0 | return books | 2019-11-01 18:00", newDeadline1.toStorageString());
 
         Deadline newDeadline2 = new Deadline(1, TEST_DESC_2, TEST_DATE_2);
-        assertEquals("D | 1 | pay phone bill | 2021-01-26T19:00", newDeadline2.toStorageString());
+        assertEquals("D | 1 | pay phone bill | 2021-01-26 19:00", newDeadline2.toStorageString());
     }
 
     @Test

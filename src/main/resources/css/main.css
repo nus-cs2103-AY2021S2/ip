@@ -1,0 +1,49 @@
+.duke-titled-pane {
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, .75), 20, 0.19, 0, 6);
+}
+
+.duke-titled-pane > .title {
+    -fx-background-color: #78acdb;
+}
+
+.input-text-area {
+    -fx-background-color: transparent;
+}
+
+.input-text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.input-text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.input-text-area .scroll-pane .content {
+    -fx-background-color: white;
+}
+
+.scroll-pane {
+    -fx-border-color: #C0C0C0;
+    -fx-background: #fafafa;
+    -fx-border-width: 0 0 1 0;
+}
+
+.scroll-bar:vertical{
+    -fx-background-color: transparent;
+    -fx-padding: 4;
+}
+
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #78acdb;
+}
+
+.chat-bubble {
+    -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.8), 2, 0, 1, 1.5);
+    -fx-background-radius: 4px;
+}

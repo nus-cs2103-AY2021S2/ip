@@ -1,7 +1,7 @@
 package duke.common;
 
 public class Messages {
-    public static final String MESSAGE_ERROR = ":( OOPS!!! %1$s";
+    public static final String MESSAGE_ERROR = "OOPS! %1$s";
     public static final String MESSAGE_FILE_NOT_FOUND = "File not found.";
     public static final String MESSAGE_SAVE_FILE_ERROR = "Error saving file.";
     public static final String MESSAGE_COMMAND_NOT_FOUND = "I'm sorry, but I don't know what that means.";
@@ -21,10 +21,11 @@ public class Messages {
     public static final String MESSAGE_TASK_COMPLETED = "You have already completed this task!";
     public static final String MESSAGE_TASK_ALL_COMPLETED = "You have already completed all the tasks!";
     public static final String MESSAGE_INVALID_DATETIME_FORMAT = "You have entered an invalid date time format.";
-    public static final String MESSAGE_INVALID_TASK_FORMAT = "You have entered an invalid %1$s format.";
+    public static final String MESSAGE_INVALID_TASK_FORMAT = "You have entered an invalid %1$s format.%n%2$s";
+    public static final String MESSAGE_CORRECT_EVENT_FORMAT = "Event Format: event DESCRIPTION /at DATETIME";
+    public static final String MESSAGE_CORRECT_DEADLINE_FORMAT = "Deadline Format: deadline DESCRIPTION /by DATETIME";
     public static final String MESSAGE_EMPTY_TASK_DESCRIPTION = "The description of %1$s cannot be empty.";
     public static final String MESSAGE_EMPTY_DATETIME_DESCRIPTION = "The date and time of %1$s cannot be empty.";
-    public static final String MESSAGE_EMPTY_DESCRIPTION = "The description cannot be empty.";
     public static final String MESSAGE_TASK_DUPLICATE = "You have already inserted this task.";
     public static final String MESSAGE_TASK_ANOMALIES = "There is a timing clash with existing tasks.";
 
