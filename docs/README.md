@@ -1,5 +1,12 @@
 # User Guide
 
+## Setting up
+
+Ensure you have installed Java 11 or above.
+Download the latest duke.jar [here](https://github.com/jlxw48/ip/releases/).
+Copy the file to the folder you want to use as the home folder for Popo Task Manager.
+Double-click the jar file to start the application. Alternatively, you can run the command `java -jar duke.jar` in your terminal or command line!
+
 ## Features
 
 ### `todo` - Create a todo task
@@ -168,4 +175,4 @@ Displays all possible commands and their formats.
 
 **Q**: What are the acceptable time formats?
 
-**A**: Currently, we only accept 1 time format - 24h! For example, 
+**A**: Currently, we only accept 1 time format - 24h!
