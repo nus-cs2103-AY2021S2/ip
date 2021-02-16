@@ -7,7 +7,7 @@ Jozu (the bot) will help you (diamond hand retard) keep track of tasks that you 
 Tasks that are complete have a `✓`, while tasks that are incomplete have a `✘`.
 
 ## Features 
-###GUI
+### GUI
 A graphical user interface to provide stronger interaction between the user and the chatbox.
 
 ### Add different types of task
