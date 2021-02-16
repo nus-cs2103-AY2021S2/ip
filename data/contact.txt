@@ -1,4 +1,6 @@
-/name jeff  /number 98789878 /address singapore
-/name james /number 98782263 /address 
-/name jacob lim /number 0 /address utown
-/name lydia /number 87879989 /address 
+/name jeff  /number 98789878 /address 
+/name micah richards /number 87256352 /address sheares hall
+/name jacob lim /number 98982838 /address utown
+/name jason /number 80804858 /address 
+/name yannick /number 0 /address trinidad and tobago
+/name david /number 98128712 /address valencia, spain

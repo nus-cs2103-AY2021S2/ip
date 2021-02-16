@@ -122,7 +122,7 @@ public class Ui {
                 "\n'find (keyword)' (searches for all tasks in your list containing the keyword)" +
                 "\n'contact add /name (name) /number (number) /address (address)' (name or address can be omitted)" +
                 "\n'contact delete (index)' (removes contact)" +
-                "\n'contact edit (/name OR /number OR /address) (desired change)' (edits the contact)" +
+                "\n'contact edit (index) (/name OR /number OR /address) (desired change)' (edits the contact)" +
                 "\n'contact list' (lists all contacts)" +
                 "\n'bye' (exits Duke)" +
                 "\nDo omit the parentheses in the actual command." +
@@ -196,6 +196,13 @@ public class Ui {
         String str = "Friends turn to foes in a blink of an eye. I shall remove:\n" +
                 getContact(contact) +
                 "\nI pray for your safety.";
+        return str;
+    }
+
+    public String getEditContact(Contact contact) {
+        String str = "Your mistake has been forgiven. Do check if this is the correct contact:\n" +
+                getContact(contact) +
+                "\nFeel free to make as many mistakes as you please. I am here to resolve all.";
         return str;
     }
 }

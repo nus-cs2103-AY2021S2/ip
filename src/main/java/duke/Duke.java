@@ -51,6 +51,8 @@ public class Duke {
                 cmd = new ListContactCommand(command, input, tasks, contactList);
             } else if (command.equals("contact delete")) {
                 cmd = new DeleteContactCommand(command, input, tasks, contactList);
+            } else if (command.equals("contact edit")) {
+                cmd = new EditContactCommand(command, input, tasks, contactList);
             } else {
                 throw new WrongCommandDukeException();
             }

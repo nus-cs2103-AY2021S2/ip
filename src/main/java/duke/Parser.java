@@ -391,7 +391,7 @@ public class Parser {
      */
     private boolean canParseContactIndexCommand(String input, int size) {
         String[] command = input.split(" ");
-        if (command.length != 3) {
+        if (command.length < 3) {
             return false;
         }
         try {
@@ -413,8 +413,9 @@ public class Parser {
      * @return Boolean.
      */
     public boolean canParseContactDeleteCommand(String input, int size) {
+        String[] command = input.split(" ");
         boolean isValidCommand = false;
-        if (parseCommand(input).equals("contact delete")) {
+        if (parseCommand(input).equals("contact delete") && command.length == 3) {
             isValidCommand = true;
         }
         boolean hasValidIndex = canParseContactIndexCommand(input, size);
@@ -433,5 +434,81 @@ public class Parser {
         int index = Integer.valueOf(command[2]) - 1;
         assert index <= 0 && index < size : "Index is out of bounds";
         return index;
+    }
+
+    /**
+     * Checks if the user input is formatted to a correct Edit Contact command.
+     *
+     * @param input User input.
+     * @param size Size of contact list.
+     * @return Boolean.
+     */
+    public boolean canParseEditContactCommand(String input, int size) {
+        String[] command = input.split(" ");
+        if (command.length < 4) {
+            return false;
+        }
+        boolean hasValidIndex = canParseContactIndexCommand(input, size);
+        boolean hasValidField = false;
+        boolean hasValidEdit = true;
+        boolean isValidCommand = false;
+        if (command[3].equals("/name") || command[3].equals("/number") || command[3].equals("/address")) {
+            hasValidField = true;
+        }
+        if (command[0].equals("contact") && command[1].equals("edit")) {
+            isValidCommand = true;
+        }
+        if (hasValidField && parseContactEditField(input).equals("/number")) {
+            try {
+                Integer.valueOf(parseContactEditChange(input));
+                hasValidEdit = true;
+            } catch (NumberFormatException e) {
+                hasValidEdit = false;
+            }
+        }
+        if (hasValidField && parseContactEditField(input).equals("/name")) {
+            hasValidEdit = command.length >= 5;
+        }
+        return hasValidIndex && hasValidField && hasValidEdit && isValidCommand;
+    }
+
+    /**
+     * Parses the user input and returns the index of the contact to be edited.
+     *
+     * @param input User input.
+     * @param size Size of contact list.
+     * @return Index of contact to be edited.
+     */
+    public int parseContactEditIndex(String input, int size) {
+        String[] command = input.split(" ");
+        int index = Integer.valueOf(command[2]) - 1;
+        assert index >= 0 && index < size : "Index is out of bounds";
+        return index;
+    }
+
+    /**
+     * Parses the user input and returns the field of the contact to be edited.
+     *
+     * @param input User input.
+     * @return Field to be edited.
+     */
+    public String parseContactEditField(String input) {
+        String[] command = input.split(" ");
+        return command[3];
+    }
+
+    /**
+     * Parses the user input and returns the change to be made to the contact.
+     *
+     * @param input User input.
+     * @return Change to be made.
+     */
+    public String parseContactEditChange(String input) {
+        String field = parseContactEditField(input) + " ";
+        String[] command = input.split(field);
+        if (command.length == 2) {
+            return command[1];
+        }
+        return "";
     }
 }

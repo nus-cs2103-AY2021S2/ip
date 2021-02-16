@@ -11,16 +11,31 @@ public class Contact {
         this.address = address;
     }
 
-    public Contact changeName(String newName) {
-        return new Contact(newName, number, address);
+    /**
+     * Changes the name of the contact.
+     *
+     * @param newName Changed name.
+     */
+    public void changeName(String newName) {
+        name = newName;
     }
 
-    public Contact changeNumber(int newNumber) {
-        return new Contact(name, newNumber, address);
+    /**
+     * Changes the number of the contact.
+     *
+     * @param newNumber Changed number.
+     */
+    public void changeNumber(int newNumber) {
+        number = newNumber;
     }
 
-    public Contact changeAddress(String newAddress) {
-        return new Contact(name, number, newAddress);
+    /**
+     * Changes the address of the contact.
+     *
+     * @param newAddress Changed address.
+     */
+    public void changeAddress(String newAddress) {
+        address = newAddress;
     }
 
     /**
@@ -32,6 +47,12 @@ public class Contact {
         return String.format("/name %s /number %d /address %s", name, number, address);
     }
 
+    /**
+     * Returns a String that has been formatted which contains the information of the Contact.
+     * String is formatted into a form to be printed by the Ui.
+     *
+     * @return String to be printed by Ui.
+     */
     @Override
     public String toString() {
         if (number == 0) {
