@@ -2,11 +2,16 @@ package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
     private Label text;
@@ -25,19 +30,29 @@ public class DialogBox extends HBox {
     }
 
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
     }
 
+    private void style() {
+        CornerRadii rad = new CornerRadii(5);
+        Color color = Color.rgb(0, 148, 135);
+        BackgroundFill backgroundFill = new BackgroundFill(color, rad, new Insets(-2, -2, -2 , -2));
+        Background background = new Background(backgroundFill);
+        text.setBackground(background);
+    }
+
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        DialogBox result = new DialogBox(l, iv);
+        result.style();
+        return result;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
-        db.flip();
-        return db;
+        DialogBox result = new DialogBox(l, iv);
+        result.style();
+        result.flip();
+        return result;
     }
 }
