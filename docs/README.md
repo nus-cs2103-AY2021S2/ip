@@ -69,12 +69,12 @@ Expected outcome:
 ### Marking a task as done: `done`
 Marks the specified task or all the tasks as done from the task list.
 
-####Format 1: `INDEX`
+#### Format 1: `INDEX`
 
 Marks the task at the specified INDEX as done.  
 - Example: `done 1`
 
-####Format 2: `all`
+#### Format 2: `all`
 
 Marks all the tasks from the task list as done. 
 - Example: `done all`
