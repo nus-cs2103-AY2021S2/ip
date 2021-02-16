@@ -44,13 +44,17 @@ public class MainWindow extends AnchorPane {
         String response;
         try {
             response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
         } catch (DukeException de) {
             response = de.getMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeErrorDialog(response, dukeImage)
+            );
         }
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
         userInput.clear();
     }
 }
