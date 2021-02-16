@@ -13,12 +13,12 @@ public class ToDo extends Task {
     }
 
     /**
-     * Private constructor to complete this task.
+     * Constructor to create a task that is completed.
      *
      * @param details Details of the todo task.
      * @param indicator Denotes that event is completed regardless of boolean value passed.
      */
-    private ToDo(String details, boolean indicator) {
+    public ToDo(String details, boolean indicator) {
         super(details, indicator);
     }
 

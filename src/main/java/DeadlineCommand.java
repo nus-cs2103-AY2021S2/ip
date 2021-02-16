@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends Command {
 
@@ -30,7 +31,7 @@ public class DeadlineCommand extends Command {
 
             return output;
 
-        } catch (DukeException e) {
+        } catch (DukeException | DateTimeParseException e) {
             throw new DukeException(ERROR_MESSAGE);
         }
     }

@@ -27,14 +27,14 @@ public class Deadline extends Task {
     }
 
     /**
-     * Private constructor to complete a deadline.
+     * Constructor to complete a deadline that is completed.
      *
      * @param details Details of the task.
      * @param deadline Date of the deadline.
      * @param deadlineTime Time of the deadline.
      * @param indicator Denotes that task is completed regardless of boolean value passed.
      */
-    private Deadline(String details, LocalDate deadline, LocalTime deadlineTime, boolean indicator) {
+    public Deadline(String details, LocalDate deadline, LocalTime deadlineTime, boolean indicator) {
         super(details, indicator);
         this.deadline = deadline;
         this.deadlineTime = deadlineTime;
@@ -57,12 +57,12 @@ public class Deadline extends Task {
         if (this.isDone()) {
             return "D 1 "
                     + this.getTask_details()
-                    + " (by: " + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
+                    + " (by: " + deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                     + deadlineTime.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
         } else {
             return "D 0 "
                     + this.getTask_details()
-                    + " (by: " + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
+                    + " (by: " + deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                     + deadlineTime.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
         }
     }

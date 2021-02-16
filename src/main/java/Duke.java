@@ -3,8 +3,8 @@
  */
 public class Duke {
 
-    /** Storage to handle task list files */
-    private Storage storage;
+    /** String indicating location of task list file */
+    static private String STORAGE_LOCATION = "dukeTaskList.txt";
 
     /** Ui to display messages for user */
     private Ui ui;
@@ -15,7 +15,6 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("dukeTaskList.txt");
     }
 
     /**
@@ -29,7 +28,7 @@ public class Duke {
 
         try {
             Parser parser = new Parser(input);
-            Command c = parser.getCommand(parser, ui, storage);
+            Command c = parser.getCommand(parser, ui, STORAGE_LOCATION);
             output = c.execute();
 
         } catch (DukeException e) {

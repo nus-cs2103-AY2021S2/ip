@@ -27,14 +27,14 @@ public class Event extends Task {
     }
 
     /**
-     * Private constructor to complete an Event.
+     * Constructor to complete an Event that is completed.
      *
      * @param details Details of the event.
      * @param date Date of the event.
      * @param time Time of the event.
      * @param indicator Denotes that event is completed regardless of boolean value passed.
      */
-    private Event(String details, LocalDate date, LocalTime time, boolean indicator) {
+    public Event(String details, LocalDate date, LocalTime time, boolean indicator) {
         super(details, indicator);
         this.date = date;
         this.time = time;
@@ -57,12 +57,12 @@ public class Event extends Task {
         if (this.isDone()) {
             return "E 1 "
                     + this.getTask_details()
-                    + " (on: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
+                    + " (on: " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                     + time.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
         } else {
             return "E 0 "
                     + this.getTask_details()
-                    + " (on: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
+                    + " (on: " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                     + time.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
         }
     }

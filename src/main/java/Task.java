@@ -21,7 +21,7 @@ public class Task {
     // private constructor to maintain Immutability
     protected Task(String details, boolean indicator){
         task_details = details;
-        isDone = true;
+        isDone = indicator;
     }
 
     /** returns task details.

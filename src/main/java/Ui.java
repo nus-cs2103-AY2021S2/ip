@@ -23,7 +23,22 @@ public class Ui {
      * @param taskList TaskList containing list of tasks.
      */
     public String displayListMessage(TaskList taskList) {
-        String output = "Here are the tasks in your list:\n" + taskList.getList();
+        String output;
+        int size = taskList.getSize();
+
+        switch (size) {
+        case 0:
+            output = "There are currently no tasks in your list.";
+            break;
+
+        case 1:
+            output = "Here is the task in your list:\n" + taskList.getList();
+            break;
+
+        default:
+            output = "Here are the tasks in your list:\n" + taskList.getList();
+            break;
+        }
         return output;
     }
 

@@ -1,3 +1,7 @@
-T 1               sing another song
-D 0             sleep (by: 6 Dec 2021 1200 )
-D 0             wakeup       (by: 7 Dec 2021 0000 )
+E 1         test (on: 16 Feb 2021 2359 )
+T 0       d
+T 0      2
+T 0     2
+T 0    54
+T 0   532r
+T 0  sda

@@ -12,9 +12,11 @@ public class DoneCommand extends Command {
 
         try {
             int indexOfTaskToComplete = parser.getIndexToModify();
+
+            Task task = taskList.getTask(indexOfTaskToComplete).completeTask();
             taskList = taskList.completeTask(indexOfTaskToComplete);
 
-            String output = userInterface.displayTaskCompleted(taskList.getTask(indexOfTaskToComplete));
+            String output = userInterface.displayTaskCompleted(task);
             storage.writeFile(taskList);
 
             return output;

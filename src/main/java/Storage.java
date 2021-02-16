@@ -81,19 +81,19 @@ public class Storage {
                     counter++;
                     year = split[counter];
                     fullDate = day + " " + month + " " + year;
-                    LocalDate date = LocalDate.parse(fullDate, DateTimeFormatter.ofPattern("d MMM yyyy"));
+                    LocalDate date = LocalDate.parse(fullDate, DateTimeFormatter.ofPattern("dd MMM yyyy"));
 
                     counter++;
                     LocalTime time = LocalTime.parse(split[counter], DateTimeFormatter.ofPattern("HHmm"));
 
                     if (taskType.equals("E")) {
-                        toAdd = new Event(task, date, time);
+                        toAdd = new Event(task, date, time, isDone);
                     } else {
-                        toAdd = new Deadline(task, date, time);
+                        toAdd = new Deadline(task, date, time, isDone);
                     }
 
                 } else {
-                    toAdd = new ToDo(task);
+                    toAdd = new ToDo(task, isDone);
                 }
 
                 if (isDone) {

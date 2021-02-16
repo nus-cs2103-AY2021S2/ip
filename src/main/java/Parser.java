@@ -35,8 +35,9 @@ public class Parser {
      *
      * @return An executable command.
      */
-    public Command getCommand(Parser parser, Ui ui, Storage storage) throws DukeException {
+    public Command getCommand(Parser parser, Ui ui, String storageLocation) throws DukeException {
 
+        Storage storage = new Storage(storageLocation);
         String userInput = input[0].toLowerCase();
         Command output;
 
