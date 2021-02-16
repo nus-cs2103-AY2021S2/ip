@@ -55,12 +55,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates and returns DialogBox showing the user's input.
+     * @param text User input.
+     * @param img User image icon.
+     * @return DialogBox showing the user's input with their image icon.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(USER_DIALOG_HEIGHT);
         return db;
     }
 
+    /**
+     * Creates and returns DialogBox showing Duke's response.
+     * @param text Duke response.
+     * @param img Duke image icon.
+     * @return DialogBox showing Duke's response with its image icon.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(DUKE_DIALOG_HEIGHT);
@@ -71,6 +83,12 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Creates and returns DialogBox showing an error response from Duke.
+     * @param text Duke error response.
+     * @param img Duke image icon.
+     * @return DialogBox showing Duke's error response with its image icon.
+     */
     public static DialogBox getDukeErrorDialog(String text, Image img) {
         var db = getDukeDialog(text, img);
         Color warningColor = Color.RED;

@@ -56,6 +56,9 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Reverses the order of the Tasks in the TaskList.
+     */
     public void reverse() {
         Collections.reverse(tasks);
     }

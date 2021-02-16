@@ -1,13 +1,15 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Handles receiving user input and outputting relevant textual information for the user to see.
  */
 public class Ui {
 
-
+    /**
+     * Shows the details of every Task in the TaskList.
+     * @param tasks TaskList to show Tasks from.
+     * @return String representation of the Tasks in the TaskList.
+     */
     public String showAllTasks(TaskList tasks) {
         String msg;
 
@@ -38,7 +40,7 @@ public class Ui {
      * Shows details of a Task that's been removed from the TaskList.
      * @param tasks Tasks that are being removed from the list.
      * @param listSize Size of the TaskList, after the Task is removed.
-     * @return Message confirming that the task has been removed.
+     * @return Message confirming that the tasks have been removed.
      */
     public String showRemovedTasks(TaskList tasks, int listSize) {
         String msg;
@@ -58,7 +60,7 @@ public class Ui {
     /**
      * Shows details of a Task that's been marked as done/completed.
      * @param tasks Tasks that are being marked as done/completed.
-     * @return Message confirming that the task has been marked as done/completed.
+     * @return Message confirming that the tasks have been marked as done/completed.
      */
     public String showDoneTasks(TaskList tasks) {
         String msg;
@@ -74,6 +76,11 @@ public class Ui {
     }
 
 
+    /**
+     * Shows the details of Tasks that have been found from the TaskList.
+     * @param tasks TaskList of Tasks found via a search.
+     * @return String representation of the found Tasks in the TaskList.
+     */
     public String showFoundTasks(TaskList tasks) {
         String msg;
 
@@ -86,7 +93,6 @@ public class Ui {
 
         return msg;
     }
-
 
     /**
      * Returns the contents of a TaskList in a neat format.
