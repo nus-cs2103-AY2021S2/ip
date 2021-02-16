@@ -2,7 +2,6 @@ import command.ByeCommand;
 import command.Command;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,12 +21,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Button sendButton;
 
     private Mike mike;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private String initMessage = "Hi! Enter any of the below commands to begin:\nList, Todo, Event, Deadline, Delete or"
+            + " Done.\n Enter Bye to exit.";
 
     @FXML
     public void initialize() {
@@ -37,6 +38,9 @@ public class MainWindow extends AnchorPane {
     public void setMike(Mike m) {
         mike = m;
         m.mikeInit();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(initMessage, dukeImage)
+        );
     }
 
     /**
