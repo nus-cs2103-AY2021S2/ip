@@ -37,7 +37,7 @@ public class Duke {
         ui = new ConsoleUI(System.in);
         parser = new Parser(ui, validator);
         tasks = new Task[100];
-        storage = new Storage("D:/Repos/2103_ip1/ip/src/main/java/duke/data/taskList.txt");
+        storage = new Storage("./data/taskList.txt");
         taskIterator = storage.readTaskListToArray(tasks, validator);
     }
 

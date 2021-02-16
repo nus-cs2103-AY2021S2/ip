@@ -18,21 +18,26 @@ import java.util.Date;
 import java.util.List;
 
 public class Storage {
+    private Path relativePath;
     private Path absolutePath;
     private File taskText;
 
     /**
      * Constructor, creates a file of the searched file if it doesn't exist.
      * Afterwards, create a {@code FileWriter} which is used to write to the file.
-     * @param absolutePath absolute path of file to be searched for.
+     * @param relativePath relative path of file to be searched for.
      */
-    public Storage (String absolutePath) {
-        // assert a file path so you cant generate files anywhere on the computer
-        String basePath = "D:/Repos/2103_ip1/ip/src/main/java/duke/data/";
-        assert absolutePath.contains(basePath) : "Please use a path that's within the directory.\n";
+    public Storage (String relativePath) {
+        this.relativePath = Paths.get(relativePath);
+        this.absolutePath = this.relativePath.toAbsolutePath();
 
-        this.absolutePath = Paths.get(absolutePath);
-        taskText = new File(absolutePath);
+        try {
+            Files.createDirectories(Paths.get("./data/"));
+        } catch (IOException e) {
+            System.out.println("IOException has occurred");
+            e.printStackTrace();
+        }
+        taskText = new File(String.valueOf(this.absolutePath));
         try {
             if (!taskText.exists()) {
                 System.out.println("new file created");
