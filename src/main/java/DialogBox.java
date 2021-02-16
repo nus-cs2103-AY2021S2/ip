@@ -75,9 +75,9 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-       DialogBox userBox = new DialogBox(text, img);
-       customiseUserBox(userBox);
-       return userBox;
+        DialogBox userBox = new DialogBox(text, img);
+        customiseUserBox(userBox);
+        return userBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
