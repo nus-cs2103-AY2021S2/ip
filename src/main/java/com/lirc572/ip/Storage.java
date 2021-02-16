@@ -1,8 +1,11 @@
 package com.lirc572.ip;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -26,7 +29,8 @@ public class Storage {
         try {
             File fileObj = new File(FILE_NAME);
             fileObj.createNewFile();
-            FileWriter fileWriter = new FileWriter(FILE_NAME);
+            // FileWriter fileWriter = new FileWriter(FILE_NAME);
+            Writer fileWriter = new OutputStreamWriter(new FileOutputStream(FILE_NAME), StandardCharsets.UTF_8);
             fileWriter.write(tasks.toSavedString());
             fileWriter.close();
         } catch (IOException e) {
