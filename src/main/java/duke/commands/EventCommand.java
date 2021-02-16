@@ -14,16 +14,16 @@ import duke.ui.DukeResponses;
  */
 public class EventCommand extends Command{
     private String eventDescription;
-    private String period;
+    private String date;
 
     /**
      * Constructor: creates a new EventCommand
      * @param eventDescription description of Event
-     * @param period period of Event
+     * @param date period of Event
      */
-    public EventCommand(String eventDescription, String period) {
+    public EventCommand(String eventDescription, String date) {
         this.eventDescription = eventDescription;
-        this.period = period;
+        this.date = date;
     }
 
     /**
@@ -36,7 +36,7 @@ public class EventCommand extends Command{
      */
     public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
         try {
-            Task event = new Event(eventDescription, period);
+            Task event = new Event(eventDescription, date);
             tasks.addTask(event);
             storage.saveFile(tasks.getTaskList());
             return dukeResponses.showAddTask(event, tasks);
