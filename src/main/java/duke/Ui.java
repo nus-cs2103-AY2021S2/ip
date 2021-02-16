@@ -167,4 +167,11 @@ public class Ui {
         str += "Do not fear to call upon their friendship.";
         return str;
     }
+
+    public String getDeleteContact(Contact contact) {
+        String str = "Friends turn to foes in a blink of an eye. I shall remove:\n" +
+                getContact(contact) +
+                "\nI pray for your safety.";
+        return str;
+    }
 }

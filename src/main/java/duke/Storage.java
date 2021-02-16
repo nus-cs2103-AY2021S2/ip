@@ -102,7 +102,10 @@ public class Storage {
                 String name = nameInfo[0];
                 String numString = numInfo[0];
                 int number = Integer.valueOf(numString);
-                String address = numInfo[1];
+                String address = "";
+                if (numInfo.length == 2) {
+                    address = numInfo[1];
+                }
                 Contact contact = new Contact(name, number, address);
                 contactList.addContact(contact);
             }

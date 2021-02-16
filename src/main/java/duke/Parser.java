@@ -254,21 +254,6 @@ public class Parser {
         return command[1];
     }
 
-    private boolean canParseContactCommand(String input) {
-        String[] command = input.split(" ");
-        if (command.length < 2) {
-            return false;
-        }
-        boolean isAdd = command[1].equals("add");
-        boolean isDelete = command[1].equals("delete");
-        boolean isEdit = command[1].equals("edit");
-        boolean isList = command[1].equals("list");
-        if (command[0].equals("contact")) {
-            return isAdd || isDelete || isEdit || isList;
-        }
-        return false;
-    }
-
     private boolean canParseAddName(String input) {
         String[] command = input.split("/name");
         if (command.length != 2) {
@@ -301,7 +286,10 @@ public class Parser {
     }
 
     public boolean canParseAddContactCommand(String input) {
-        boolean isContactCommand = canParseContactCommand(input);
+        boolean isContactCommand = false;
+        if (parseCommand(input).equals("contact add")) {
+            isContactCommand = true;
+        }
         boolean hasValidName = canParseAddName(input);
         boolean hasValidNumber = canParseAddNumber(input);
         boolean hasValidAddress = canParseAddAddress(input);
@@ -344,4 +332,35 @@ public class Parser {
         return input.equals("contact list");
     }
 
+    private boolean canParseContactIndexCommand(String input, int size) {
+        String[] command = input.split(" ");
+        if (command.length != 3) {
+            return false;
+        }
+        try {
+            int index = Integer.valueOf(command[2]);
+            if (index > 0 && index <= size) {
+                return true;
+            }
+            return false;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public boolean canParseContactDeleteCommand(String input, int size) {
+        boolean isValidCommand = false;
+        if (parseCommand(input).equals("contact delete")) {
+            isValidCommand = true;
+        }
+        boolean hasValidIndex = canParseContactIndexCommand(input, size);
+        return isValidCommand && hasValidIndex;
+    }
+
+    public int parseContactDeleteCommand(String input, int size) {
+        String[] command = input.split(" ");
+        int index = Integer.valueOf(command[2]) - 1;
+        assert index <= 0 && index < size : "Index is out of bounds";
+        return index;
+    }
 }

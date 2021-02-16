@@ -10,6 +10,7 @@ public class WrongFormatDukeException extends DukeException {
     private final String HELP = "help";
     private final String FIND = "find (keyword)";
     private final String ADD_CONTACT = "contact add /name (name) /number (number) /address (address)";
+    private final String DELETE_CONTACT = "contact delete (valid index)";
     private final String BYE = "bye";
     private String command;
 
@@ -43,6 +44,8 @@ public class WrongFormatDukeException extends DukeException {
             str += FIND;
         } else if (command.equals("contact add")) {
             str += ADD_CONTACT;
+        } else if (command.equals("contact delete")) {
+            str += DELETE_CONTACT;
         } else if (command.equals("bye")) {
             str += BYE;
         }
