@@ -19,11 +19,12 @@ public class TaskList {
      * Constructor for class TaskList supplied with some Task instances.
      *
      * @param tasks a list of Tasks instances
+     * @param stats a Statistics instance
      */
-    public TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks, Statistics stats) {
         this.tasks = new ArrayList<>();
         this.tasks.addAll(tasks);
-        this.stats = new Statistics();
+        this.stats = stats;
     }
 
     /**
@@ -40,7 +41,11 @@ public class TaskList {
      * @return the encoded format of the list of tasks
      */
     public List<String> encode() {
-        return tasks.stream().map(task -> task.encode()).filter(str -> str != null).collect(Collectors.toList());
+        List<String> encoding = tasks.stream().map(task -> task.encode()).filter(str -> str != null).collect(Collectors.toList());
+        encoding.add("%");
+        encoding.addAll(stats.encode());
+
+        return encoding;
 
     }
 

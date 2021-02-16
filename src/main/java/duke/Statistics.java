@@ -3,10 +3,17 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 public class Statistics { 
     final Queue<LocalDateTime> datetime;
+
+    public Statistics(List<LocalDateTime> dateTime) {
+        this.datetime = new LinkedList<>();
+        this.datetime.addAll(dateTime);
+    }
 
     public Statistics() {
         this.datetime = new LinkedList<>();
@@ -39,5 +46,9 @@ public class Statistics {
         long numberOfDays = ChronoUnit.DAYS.between(dt, now);
         return numberOfDays > 7;
     }
+
+	public List<String> encode() {
+		return datetime.stream().map(dt -> dt.toString()).collect(Collectors.toList());
+	}
 
 }
