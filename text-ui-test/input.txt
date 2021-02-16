@@ -1,0 +1,27 @@
+todo borrow book
+deadline return book /by 13-12-2021 1515
+deadline return book /by 13/12/2021 1616
+deadline return book /by 13/12/2021 3:15PM
+deadline return book /by 13-12-2021 3:15 PM
+deadline return book /by Sunday
+deadline return book /by sunday
+deadline return book /by Sunday 1515
+deadline return book /by Sunday 0615PM
+deadline return book /by Sunday 0615 PM
+deadline return book /by Sunday 615PM
+deadline return book /by Sunday 615 PM
+deadline return book /by Sunday 06:15PM
+deadline return book /by Sunday 06:15 PM
+deadline return book /by Sunday 6:15PM
+deadline return book /by Sunday 6:15 PM
+deadline return book /by Sunday 6 PM
+deadline return book /by Sunday 6 pm
+deadline buy book /by Sunday 915
+deadline buy cakes /by Monday 1615
+deadline conference /by Monday 10 AM
+deadline do homework /by no idea :-p
+list
+done 2
+delete 2
+list
+bye
