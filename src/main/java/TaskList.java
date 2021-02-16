@@ -81,9 +81,9 @@ public class TaskList {
     public String listTask() {
         String listed = "";
         for (int i = 0; i < size; i++) {
-            listed  = listed + (i + 1) + "." + list.get(i) + "\n";
+            listed = listed + (i + 1) + "." + list.get(i) + "\n";
         }
-        return listed ;
+        return listed;
     }
 
     /**

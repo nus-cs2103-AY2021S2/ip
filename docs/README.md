@@ -32,6 +32,9 @@ Deletes the specified task from the list by the given index.
 ### bye
 Save the current list and exit Duke.
 
+### save
+Duke data are saved in the hard disk automatically after any command that changes the data. 
+There is no need to save manually.
 
 ## Usage
 
@@ -169,7 +172,7 @@ Expected outcome:
 
 ### `bye` - Exiting Duke
 
-Save the current list and exit Duke.
+Exit the program Duke.
 
 Example of usage:
 

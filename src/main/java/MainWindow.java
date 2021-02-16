@@ -1,3 +1,4 @@
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -36,7 +38,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends the to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing. Exits program if user input is bye.
      */
     @FXML
     private void handleUserInput() {
@@ -49,7 +51,9 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (isExit) {
-            Platform.exit();
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.play();
         }
     }
 
