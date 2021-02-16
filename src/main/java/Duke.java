@@ -120,9 +120,13 @@ public class Duke {
 
     public static void printTasks(ArrayList<Task> tasks) {
         System.out.println(SEPARATOR);
-        System.out.println(INDENTATION + "Here are the tasks in your list:");
-        for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(INDENTATION + "    " + i + ". " + tasks.get(i - 1));
+        if (tasks.size() == 0) {
+            System.out.println(INDENTATION + "You have no tasks currently.");
+        } else {
+            System.out.println(INDENTATION + "Here are the tasks in your list:");
+            for (int i = 1; i <= tasks.size(); i++) {
+                System.out.println(INDENTATION + "    " + i + ". " + tasks.get(i - 1));
+            }
         }
         System.out.println(SEPARATOR);
     }
@@ -139,8 +143,8 @@ public class Duke {
 
     public static void displayDeleteTaskMsg(int size, Task task) {
         System.out.println(SEPARATOR);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("    " + task);
+        System.out.println(INDENTATION + "Noted. I've removed this task:");
+        System.out.println(INDENTATION + "    " + task);
         System.out.println(INDENTATION + "Now you have " + size + " task" + (size > 1 ? "s" : "") + " in the list.");
         System.out.println(SEPARATOR);
     }
