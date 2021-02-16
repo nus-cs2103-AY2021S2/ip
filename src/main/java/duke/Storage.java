@@ -122,7 +122,7 @@ public class Storage {
 
     private File getOrCreateFile() throws IOException {
         Files.createDirectories(Paths.get(fileDir));
-        File file = new File(fileDir, fileName); // create a File for the given file path
+        File file = new File(fileDir, fileName);
         file.createNewFile();
         return file;
     }

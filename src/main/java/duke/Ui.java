@@ -9,7 +9,7 @@ import duke.exception.InvalidCommandException;
 
 public class Ui {
     private static final String LOGO =
-              " ____        _        \n" //TODO: Figure out if this is allowed by style
+              " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"

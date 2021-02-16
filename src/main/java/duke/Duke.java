@@ -30,7 +30,7 @@ public class Duke {
     }
 
     /**
-     * Handle startup Procedure //TODO: Give better comment
+     * Handle Startup Procedure, which includes messages and loading from file.
      *
      * @return dialog for startup.
      */
@@ -104,7 +104,7 @@ public class Duke {
     }
 
     /**
-     * Handle Termination //TODO: Fix this javadoc properly
+     * Handle Termination, including private variables and messages.
      */
     private void handleTermination() {
         isTerminated = true;

@@ -4,7 +4,7 @@ import duke.exception.EmptyArgumentException;
 
 public abstract class Task {
     private final String description;
-    private boolean isDone; //TODO: Figure out if I can restrict access
+    private boolean isDone;
 
     /**
      * Creates a Task that has a description
