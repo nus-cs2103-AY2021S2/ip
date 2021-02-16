@@ -40,6 +40,15 @@ Format: `clear`
 
 ![clear demo](images/clear.png)
 
+### `delete` a task
+Delete a given tasks within Duke
+
+Format: `delete N`
+
+Example: `delete 1`
+
+![delete demo](images/delete.png)
+
 ### Mark a task as `done`
 Clear all tasks within Duke
 
