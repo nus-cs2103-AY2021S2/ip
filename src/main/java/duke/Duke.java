@@ -6,13 +6,16 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class Duke extends Application {
 
@@ -22,6 +25,10 @@ public class Duke extends Application {
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
+
+    private static final String DEFAULT_CONTROL_INNER_BACKGROUND = "derive(-fx-base,80%)";
+    private static final String OLLY_BACKGROUND_COLOR = "#53edd3";
+    private static final String ME_BACKGROUND_COLOR = "#fcac62";
 
     public Duke() {}
 
@@ -51,6 +58,37 @@ public class Duke extends Application {
         // Setup GUI
         TextField textField = new TextField();
         ListView<String> listView = new ListView<String>();
+
+        // List View Methods
+        listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> stringListView) {
+                return new ListCell<String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item == null || empty) {
+                            setText(null);
+                            setStyle("-fx-control-inner-background: " + DEFAULT_CONTROL_INNER_BACKGROUND + ";");
+                        } else {
+                            setText(item);
+                            if (item.startsWith("Me")) {
+                                setStyle("-fx-control-inner-background: " + ME_BACKGROUND_COLOR);
+                                // setAlignment(Pos.BASELINE_RIGHT);
+                                // setStyle("-fx-alignment: right");
+                            } else if (item.startsWith("Olly: ALAMAK")) {
+                                setStyle("-fx-control-inner-background: #ed6853");
+                            } else {
+                                setStyle("-fx-control-inner-background: " + OLLY_BACKGROUND_COLOR);
+                            }
+                        }
+
+                        setPadding(new Insets(10));
+                    }
+                };
+            }
+        });
 
         // List View
         listView.getItems().add("Olly: Welcome! Talk to me, i'm bored!");
