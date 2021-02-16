@@ -6,7 +6,10 @@ while still having the benefits of a **Graphical User Interface (GUI)**.
 
 Duke's GUI is in the form of a chatbot.
 
-![Ui](./Ui.png)
+<div align="center">
+   <h1>Duke Chatbot</h1>
+   <img src="Ui.png" />
+</div>
 
 ## Quick Start
 
@@ -38,6 +41,8 @@ Examples:
 
 - `deadline Read books /by Monday`
 - `deadline Read books /by 12/12/2021`
+
+See [Date/Time Formats](#datetime-formats) for the formatting.
 
 ### Deleting a task: `delete`
 
@@ -81,6 +86,8 @@ Examples:
 
 - `event CS2103 Tutorial /at Monday`
 - `event CS2103 Tutorial /at 12/12/2021`
+
+See [Date/Time Formats](#datetime-formats) for the formatting.
 
 ### Exiting the application: `exit`
 
@@ -129,3 +136,19 @@ Examples:
 
 - `todo read books`
 - `todo buy eggs`
+
+## Date/Time Formats
+
+The allowed date formats are:
+- `dd-mm-yyyy` (19-02-2021)
+- `dd/mm/yyyy` (19/02/2021)
+- Mon or Monday
+  
+The allowed time formats are:
+- 12 hour format
+  - `hh[:mm] am|pm`
+    - 11PM or 11 PM
+    - 11:59PM or 11:59 PM
+- 24 hour format
+  - `HH:mm or HHmm`
+    - 11:00 or 1100
