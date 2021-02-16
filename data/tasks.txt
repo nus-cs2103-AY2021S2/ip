@@ -1,3 +1,4 @@
-E | 0 | dinner | 12 Mar 2021 1:00 AM
-D | 0 | coding assignment | 02 Mar 2021 11:59 PM
+D | 0 | coding assignment | 02 Mar 2021 11:59 PM R: 19 Feb 2021 2:00 AM
 D | 0 | submit essay | 21 Feb 2021 11:59 PM
+T | 0 | eat
+E | 1 | eat | 02 Feb 2021 8:00 PM
