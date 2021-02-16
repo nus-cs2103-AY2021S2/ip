@@ -9,12 +9,18 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * This constructor create a duke class after loading the tasks from a given file path
+     * @param filePath path of the file which stores the list of tasks from last time
+     * @return a Duke object with all of its variables initialised
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
+            taskList = new TaskList();
             ui.showLoadingError();
             ui.showError(e);
         }

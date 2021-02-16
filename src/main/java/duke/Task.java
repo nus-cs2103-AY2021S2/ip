@@ -10,6 +10,10 @@ public class Task {
         this.eventName = eventName;
         this.eventType = eventType;
     }
+
+    /**
+     * This function sets a task to be done
+     */
     public void setDone() {
         this.isDone = true;
     }

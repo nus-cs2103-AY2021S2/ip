@@ -15,6 +15,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * This function loads the tasks from the file which is specified by the file path
+     * @return an arraylist of Tasks
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         File tasks = new File(filePath);
@@ -44,6 +49,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * This function writes and save the taskList to a file
+     * @param tasks TaskList object containing a list of tasks
+     * @param filePath The path to save the file
+     * @throws DukeException
+     */
     public void writeToFile(TaskList tasks, String filePath) throws DukeException {
         try {
             FileWriter writer = new FileWriter(filePath, false);

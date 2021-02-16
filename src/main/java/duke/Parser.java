@@ -5,6 +5,12 @@ import java.util.Arrays;
 public class Parser {
     private static Ui ui = new Ui();
 
+    /**
+     * This function returns a Task object after parsing the data from the file
+     * @param data line data from the file
+     * @return Task object of various types, e.g. Deadlines, ToDos, Events
+     * @throws DukeException
+     */
     public static Task parseFile(String data) throws DukeException {
         String[] dataSplit = data.split(" \\| ");
         switch (dataSplit[0]) {
@@ -19,6 +25,12 @@ public class Parser {
         }
     }
 
+    /**
+     * This function returns the TaskList object after passing the commands from user
+     * @param input User input
+     * @param tasks TaskList object
+     * @return TaskList after adding the new task from the user input
+     */
     public static TaskList parseInput(String input, TaskList tasks) {
         String[] inputSplit = input.split(" ");
         if (inputSplit.length < 2) {
