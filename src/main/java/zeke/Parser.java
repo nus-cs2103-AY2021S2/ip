@@ -2,9 +2,9 @@ package zeke;
 
 import java.util.ArrayList;
 
-import zeke.exceptions.ZekeException;
 import zeke.exceptions.InvalidDescriptionException;
 import zeke.exceptions.InvalidIndexException;
+import zeke.exceptions.ZekeException;
 
 /**
  * Parser class to make sense of user input.
