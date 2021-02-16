@@ -1,23 +1,7 @@
 # User Guide
 
 Hello user! Duke is your friendly chatbot to help you manage and organize your tasks efficiently. 
-With a simple user interface and customizable avatar, it is an indispensable part of everyday life. 
-
-
-#Table of Contents
-
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-   * [Adding a todo task](#adding-a-todo-task-todo)
-   * [Adding a deadline task](#adding-a-deadline-task-deadline)
-   * [Adding an event task](#adding-an-event-task-event)
-   * [Listing all tasks](#listing-all-tasks-list)
-   * [Marking a task as done](#marking-a-task-as-done-done)
-   * [Deleting a task](#deleting-a-task-delete)
-   * [Finding a Task](#finding-a-task-find)
-   * [Viewing statistics](#viewing-statistics-stats)
-   * [Exiting the program](#exiting-the-program-bye)
-3. [Command Summary](#command-summary)
+With a simple user interface and customizable avatar, it is an indispensable part of everyday life.
 
 ## Quick Start
 1. Ensure that you have Java `11` or above installed in your Computer.
@@ -60,7 +44,7 @@ along with the keyword you wish to search for.
 
 ### `todo` - Adds a Todo task
 
-Creates and adds a Todo task to the list.
+Creates and adds a Todo task to the list. Also tells you the number of tasks you have in the list after adding.
 
 Example of usage:
 
@@ -68,11 +52,11 @@ Example of usage:
 
 Expected outcome:
 
-![borrow_book](borrowbook.PNG)
+![todo](./screenshots/todo.PNG)
 ### `deadline` - Adds a Deadline task
 
 
-Creates and adds a Deadline task to the list.
+Creates and adds a Deadline task to the list. Also tells you the number of tasks you have in the list after adding. 
 
 Example of usage:
 
@@ -82,12 +66,12 @@ You must use the `/by` keyword and follow the date format yyyy-MM-dd exactly!
 
 Expected outcome:
 
-![borrow_book](deadline.PNG)
+![deadline](./screenshots/deadline.PNG)
 
 ### `event` - Adds an Event task
 
 
-Creates and adds an Event task to the list.
+Creates and adds an Event task to the list. Also tells you the number of tasks you have in the list after adding.
 
 Example of usage:
 
@@ -97,7 +81,7 @@ You must use the `/at` keyword and follow the date format yyyy-MM-dd exactly!
 
 Expected outcome:
 
-![borrow_book](event.PNG)
+![event](./screenshots/event.PNG)
 
 ### `list` - Displays all tasks
 
@@ -109,13 +93,14 @@ Example of usage:
 
 Expected outcome:
 
-![borrow_book](list.PNG)
+![list](./screenshots/list.PNG)
 
 ### `done` - Mark a task as complete
 
 
 Marks a task as complete with a tick in the box.
 The index of the item you wish to mark must be provided.
+**The tasks will appear in chronological order! All todo tasks will be placed at the top.**
 * The index of the item is displayed when the list command is used. 
 
 Example of usage:
@@ -124,7 +109,7 @@ Example of usage:
 
 Expected outcome:
 
-![borrow_book](done.PNG)
+![done](./screenshots/done.PNG)
 
 
 
@@ -141,7 +126,7 @@ Example of usage:
 
 Expected outcome:
 
-![borrow_book](delete.PNG)
+![delete](./screenshots/delete.PNG)
 
 
 Wwhen the `list` command is used again,
@@ -161,5 +146,17 @@ Example of usage:
 
 Expected outcome:
 
-![borrow_book](find.PNG)
+![find](./screenshots/find.PNG)
 
+## Command Summary
+
+**Action**  | **Format, Examples**
+--------|-----------------
+**Add todo task** | `todo description` <br /> e.g., `todo Laundry`
+**Add deadline task** | `deadline description /by yyyy-MM-dd` <br /> e.g., `deadline return book /by 2021-03-03 `
+**Add event task** | `event description /at yyyy-MM-dd` <br /> e.g., `event project meeting /at 2021-04-04`
+**List** | `list`
+**Done** | `done`
+**Delete** | `delete index` <br /> e.g., `delete 2`
+**Find** | `find keyword` <br /> e.g., `find project`
+**Exit** | `bye`
