@@ -1,7 +1,7 @@
 ﻿# User Guide
 
 Duke is a **desktop application for managing tasks, optimized to be used with Command Line Interface** (CLI). It showcased your inputs and the outputs using Graphical User Interface (GUI).
-
+  
 ![Image of Duke.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Ui.png)
 
 #### Table Of Contents
@@ -50,6 +50,7 @@ Format: `find KEYWORDS`
 	* Example: funfair will match with fun.
 Examples: 
  * `find CS2101` returns `CS2101 HW`, `CS2101 assgn`, and `CS2101 exam`.  
+
 ![Image of find method example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Find_method_example.png)
 
 ### Marking a task as complete: `done`
@@ -58,6 +59,7 @@ Format: `done INDEX`
  * Marks the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, ...
 Eamples:
  - `done 1` Marks your first task as completed.  
+
 ![Image of done example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Done_method_example.png)
 
 ### Deleting a task: `delete`
@@ -81,12 +83,13 @@ Duke saves your data in `[file location]/data/save.txt]`. You are welcomed to up
 	>2. D | 0/1 | DESCRIPTION | YYYY-MM-DD  
 	>3. E | 0/1 | DESCRIPTION | YYYY-MM-DD
 	
-## Command Summary
-Action | Format | Examples 
------- | ------- | --------
+## Command Summary  
+
+|Action | Format | Examples| 
+|------ | ------- | --------|
 |Add|`todo DESCRIPTION` <br /> `deadline DESCRIPTION /by YYYY-MM-DD` <br /> `event DESCRIPTION /at YYYY-MM-DD`. | `todo task1` <br /> `deadline task2 /by 2021-03-12` <br /> `event task3 /at 2021-04-02`|
 |List|`list`|
 |Find|`find KEYWORDS`. | `find task`|
 |Done|`done INDEX`. | `done 1`|
-|Delete|`delete INDEX`. | `delete 6`
+|Delete|`delete INDEX`. | `delete 6`|
 
