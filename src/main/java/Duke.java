@@ -42,81 +42,83 @@ public class Duke {
     public String run(String input) {
 
         Parser parser = new Parser(input);
-        String command = parser.getCommand();
-        String output;
+        String command = parser.getCommand().toUpperCase();
+        String output, taskDesc;
+        int index;
+        LocalDate date;
+        LocalTime time;
+        Task newTask;
 
         try {
-                // user exits the program
-                if (command.equals("bye")) {
-                    output = ui.displayClosingMessage();
+            switch (command) {
 
-                    // user wants list of tasks
-                } else if (command.equals("list")) {
-                    output = ui.displayListMessage(taskList);
+            case "bye":
+                output = ui.displayClosingMessage();
+                break;
 
-                    // user wants to complete a task
-                } else if (command.equals("done")) {
-                    int index = parser.getIndexToModify();
+            case "list":
+                output = ui.displayListMessage(taskList);
+                break;
 
-                    assert index >= 1;
 
-                    taskList = taskList.completeTask(index);
-                    output = ui.displayTaskCompleted(taskList.getTask(index));
-                    storage.writeFile(taskList);
+            case "done":
+                index = parser.getIndexToModify();
+                taskList = taskList.completeTask(index);
+                output = ui.displayTaskCompleted(taskList.getTask(index));
+                storage.writeFile(taskList);
+                break;
 
-                    // user wants to delete a task
-                } else if (command.equals("delete")) {
-                    int index = parser.getIndexToModify();
+            case "delete":
+                index = parser.getIndexToModify();
+                Task task = taskList.getTask(index);
+                taskList = taskList.deleteTask(index);
+                output = ui.displayTaskDeleted(task, taskList);
+                storage.writeFile(taskList);
+                break;
 
-                    assert index >= 1;
+            case "todo":
+                taskDesc = parser.getTaskDescription();
+                newTask = new ToDo(taskDesc);
+                taskList = taskList.addTask(newTask);
+                output = ui.displayTaskAdded(newTask, taskList);
+                storage.writeFile(taskList);
+                break;
 
-                    Task task = taskList.getTask(index);
-                    taskList = taskList.deleteTask(index);
-                    output = ui.displayTaskDeleted(task, taskList);
-                    storage.writeFile(taskList);
+            case "deadline":
+                taskDesc = parser.getTaskDescription();
+                date = LocalDate.parse(parser.getDate(),
+                        DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                time = LocalTime.parse(parser.getTime(),
+                        DateTimeFormatter.ofPattern("HHmm"));
 
-                    // user wants to add a ToDo
-                } else if (command.equals("todo")) {
-                    String taskDesc = parser.getTaskDescription();
-                    ToDo newTask = new ToDo(taskDesc);
-                    taskList = taskList.addTask(newTask);
-                    output = ui.displayTaskAdded(newTask, taskList);
-                    storage.writeFile(taskList);
+                newTask = new Deadline(taskDesc, date, time);
+                taskList = taskList.addTask(newTask);
+                output = ui.displayTaskAdded(newTask, taskList);
+                storage.writeFile(taskList);
+                break;
 
-                    // user wants to add a Deadline
-                } else if (command.equals("deadline")) {
-                    String taskDesc = parser.getTaskDescription();
-                    LocalDate date = LocalDate.parse(parser.getDate(),
-                            DateTimeFormatter.ofPattern("d/MM/yyyy"));
-                    LocalTime time = LocalTime.parse(parser.getTime(),
-                            DateTimeFormatter.ofPattern("HHmm"));
+            case "event":
+                taskDesc = parser.getTaskDescription();
+                date = LocalDate.parse(parser.getDate(),
+                        DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                time = LocalTime.parse(parser.getTime(),
+                        DateTimeFormatter.ofPattern("HHmm"));
+                
+                newTask = new Event(taskDesc, date, time);
+                taskList = taskList.addTask(newTask);
+                output = ui.displayTaskAdded(newTask, taskList);
+                storage.writeFile(taskList);
+                break;
 
-                    Deadline newTask = new Deadline(taskDesc, date, time);
-                    taskList = taskList.addTask(newTask);
-                    output = ui.displayTaskAdded(newTask, taskList);
-                    storage.writeFile(taskList);
+            case "find":
+                String keyword = parser.getKeyword();
+                output = ui.displayTaskSearch(keyword, taskList);
+                break;
 
-                    // user wants to add an Event
-                } else if (command.equals("event")) {
-                    String taskDesc = parser.getTaskDescription();
-                    LocalDate date = LocalDate.parse(parser.getDate(),
-                            DateTimeFormatter.ofPattern("d/MM/yyyy"));
-                    LocalTime time = LocalTime.parse(parser.getTime(),
-                            DateTimeFormatter.ofPattern("HHmm"));
+            default:
+                throw new DukeException(UNKNOWN_MESSAGE);
 
-                    Event newTask = new Event(taskDesc, date, time);
-                    taskList = taskList.addTask(newTask);
-                    output = ui.displayTaskAdded(newTask, taskList);
-                    storage.writeFile(taskList);
-
-                // user wants to find tasks using a keyword
-                } else if (command.equals("find")) {
-                    String keyword = parser.getKeyword();
-                    output = ui.displayTaskSearch(keyword, taskList);
-
-                } else {
-                    throw new DukeException(UNKNOWN_MESSAGE);
-                }
+            }
 
         } catch (DukeException e) {
             output = e.errorMessage();
