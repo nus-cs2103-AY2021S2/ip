@@ -1,17 +1,20 @@
 package duke.task;
+
 import java.time.LocalDate;
 
 import duke.dukeException.DukeException;
 
 /**
  * Deadline is the main entity we'll be using to define a deadline task.
- *
+ * <p>
  * Please see the {@link Task} class for true identity
- * @author Ni Jiaying
  *
+ * @author Ni Jiaying
  */
 public class Deadline extends Task {
-    /** Date of the deadline */
+    /**
+     * Date of the deadline
+     */
     protected LocalDate done_by;
 
     /**
@@ -34,9 +37,9 @@ public class Deadline extends Task {
     /**
      * Adds a deadline to taskList.
      *
-     * @param count  the current count of tasks in the taskList.
-     * @throws DukeException  If an input or output
-     *                      exception occurred
+     * @param count the current count of tasks in the taskList.
+     * @throws DukeException If an input or output
+     *                       exception occurred
      */
     @Override
     public String addTask(int count) throws DukeException {

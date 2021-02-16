@@ -6,13 +6,15 @@ import duke.dukeException.DukeException;
 
 /**
  * Event is the main entity we'll be using to define a event task.
- *
+ * <p>
  * Please see the {@link Task} class for true identity
- * @author Ni Jiaying
  *
+ * @author Ni Jiaying
  */
 public class Event extends Task {
-    /** Event time */
+    /**
+     * Event time
+     */
     protected LocalDate at;
 
     /**
@@ -35,9 +37,9 @@ public class Event extends Task {
     /**
      * Adds a event to taskList.
      *
-     * @param count  the current count of tasks in the taskList.
-     * @throws DukeException  If an input or output
-     *                      exception occurred
+     * @param count the current count of tasks in the taskList.
+     * @throws DukeException If an input or output
+     *                       exception occurred
      */
     @Override
     public String addTask(int count) throws DukeException {

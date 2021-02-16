@@ -1,4 +1,5 @@
 package duke.ui;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -22,7 +23,7 @@ public class Ui {
     /**
      * Prints the error message of a specific error.
      *
-     * @param message  the error message of the error.
+     * @param message the error message of the error.
      */
     public String showError(String message) {
         return message;

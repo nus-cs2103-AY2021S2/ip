@@ -16,15 +16,25 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 public class Command {
-    /** The input command by user */
+    /**
+     * The input command by user
+     */
     private String commandName;
-    /** The default data path of the file storing all tasks in this project */
-    final String DATA_PATH  = "data/duke.txt";
-    /** The starting index of the name of a todo task */
+    /**
+     * The default data path of the file storing all tasks in this project
+     */
+    final String DATA_PATH = "data/duke.txt";
+    /**
+     * The starting index of the name of a todo task
+     */
     final int todoLength = 5;
-    /** The starting index of the name of a event task */
+    /**
+     * The starting index of the name of a event task
+     */
     final int eventLength = 6;
-    /** The starting index of the name of a deadline task */
+    /**
+     * The starting index of the name of a deadline task
+     */
     final int deadlineLength = 9;
 
     /**
@@ -37,10 +47,10 @@ public class Command {
     /**
      * Processes tasks according to the command.
      *
-     * @param tasks  the tasks before execution.
+     * @param tasks the tasks before execution.
      * @return all the processed tasks.
-     * @throws IOException  If an input or output
-     *                      exception occurred
+     * @throws IOException If an input or output
+     *                     exception occurred
      */
     public String execute(TaskList tasks) throws IOException, DukeException {
         ArrayList<Task> tList = tasks.getTasks();
@@ -58,10 +68,10 @@ public class Command {
         } else if (commandName.split(" ")[0].equals("event")) {
             output = executeEvent(tList, tasks);
         } else if (commandName.split(" ")[0].equals("find")) {
-            output  = executeFind(tasks);
+            output = executeFind(tasks);
         } else if (commandName.equals("bye")) {
             output = "     Bye. Hope to see you again soon!\n";
-        } else if(commandName.equals("")) {
+        } else if (commandName.equals("")) {
             output = "      Please enter something!\n";
         } else {
             output = "      OOPS!!! I'm sorry, but I don't know what that means :-(\n";
@@ -73,7 +83,7 @@ public class Command {
     /**
      * Returns all the existing tasks in the task list.
      *
-     * @param tList  the list of tasks stored.
+     * @param tList the list of tasks stored.
      * @return all the existing tasks in the task list.
      */
     public String executeList(ArrayList<Task> tList) {
@@ -93,8 +103,8 @@ public class Command {
     /**
      * Marks one specified task's status as done.
      *
-     * @param tList  the copy of tasks before execution.
-     * @param tasks  the tasks before execution.
+     * @param tList the copy of tasks before execution.
+     * @param tasks the tasks before execution.
      * @return all the processed tasks after marking one specified task's status as done.
      */
     public String executeDone(ArrayList<Task> tList, TaskList tasks) {
@@ -147,8 +157,8 @@ public class Command {
     /**
      * Deletes one specified task.
      *
-     * @param tList  the copy of tasks before execution.
-     * @param tasks  the tasks before execution.
+     * @param tList the copy of tasks before execution.
+     * @param tasks the tasks before execution.
      * @return the rest of the tasks after deleting one specified task.
      */
     public String executeDelete(ArrayList<Task> tList, TaskList tasks) {
@@ -186,11 +196,11 @@ public class Command {
     /**
      * Finds one specified task from the task list.
      *
-     * @param tList  the copy of tasks before execution.
-     * @param task   the task to look for.
+     * @param tList the copy of tasks before execution.
+     * @param task  the task to look for.
      * @return the found task if it exists.
      */
-    public Task findExact (ArrayList<Task> tList, Task task) {
+    public Task findExact(ArrayList<Task> tList, Task task) {
         for (Task t : tList) {
             if (t.getName().equals(task.getName()) && t.getStatus() == task.getStatus()) {
                 return t;
@@ -202,13 +212,13 @@ public class Command {
     /**
      * Adds a todo task into the task list.
      *
-     * @param tList  the copy of tasks before execution.
-     * @param tasks  the tasks before execution.
+     * @param tList the copy of tasks before execution.
+     * @param tasks the tasks before execution.
      * @return all tasks after adding one todo task.
-     * @throws DukeException  If an input or output
+     * @throws DukeException If an input or output
      *                       exception occurred
      */
-    public String executeToDo (ArrayList<Task> tList, TaskList tasks) throws DukeException {
+    public String executeToDo(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
         if (commandName.length() < todoLength) {
             ToDo todo = new ToDo(commandName);
@@ -239,13 +249,13 @@ public class Command {
     /**
      * Adds a deadline task into the task list.
      *
-     * @param tList  the copy of tasks before execution.
-     * @param tasks  the tasks before execution.
+     * @param tList the copy of tasks before execution.
+     * @param tasks the tasks before execution.
      * @return all tasks after adding one deadline task.
-     * @throws DukeException  If an input or output
+     * @throws DukeException If an input or output
      *                       exception occurred
      */
-    public String executeDeadline (ArrayList<Task> tList, TaskList tasks) throws DukeException {
+    public String executeDeadline(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
         if (commandName.length() < deadlineLength) {
             Deadline deadline = new Deadline(commandName, null);
@@ -284,13 +294,13 @@ public class Command {
     /**
      * Adds a event task into the task list.
      *
-     * @param tList  the copy of tasks before execution.
-     * @param tasks  the tasks before execution.
+     * @param tList the copy of tasks before execution.
+     * @param tasks the tasks before execution.
      * @return all tasks after adding one event task.
-     * @throws DukeException  If an input or output
+     * @throws DukeException If an input or output
      *                       exception occurred
      */
-    public String executeEvent (ArrayList<Task> tList, TaskList tasks) throws DukeException {
+    public String executeEvent(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
         if (commandName.length() < eventLength) {
             Event event = new Event(commandName, null);
@@ -299,7 +309,7 @@ public class Command {
             try {
                 int end1 = commandName.indexOf(" ");
                 int end = commandName.indexOf("/");
-                String subString1 = commandName.substring(end1 + 1 , end - 1);
+                String subString1 = commandName.substring(end1 + 1, end - 1);
                 String subString2 = commandName.substring(end + 4);
                 int year = Integer.valueOf(subString2.substring(0, 4));
                 int mon = Integer.valueOf(subString2.substring(5, 7));
@@ -329,12 +339,12 @@ public class Command {
     /**
      * Finds all the tasks which partially or fully match the given task from the task list .
      *
-     * @param tasks  the tasks to look for.
+     * @param tasks the tasks to look for.
      * @return all the found tasks if any exists.
-     * @throws IOException  If an input or output
-     *                       exception occurred
+     * @throws IOException If an input or output
+     *                     exception occurred
      */
-    public String executeFind (TaskList tasks) throws IOException {
+    public String executeFind(TaskList tasks) throws IOException {
         String output;
         String match = commandName.split(" ")[1];
         BufferedReader reader = new BufferedReader(new FileReader(DATA_PATH));

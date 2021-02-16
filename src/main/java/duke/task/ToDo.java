@@ -4,10 +4,10 @@ import duke.dukeException.DukeException;
 
 /**
  * ToDo is the main entity we'll be using to define a todo task.
- *
+ * <p>
  * Please see the {@link Task} class for true identity
- * @author Ni Jiaying
  *
+ * @author Ni Jiaying
  */
 public class ToDo extends Task {
     /**
@@ -28,9 +28,9 @@ public class ToDo extends Task {
     /**
      * Adds a todo to taskList.
      *
-     * @param count  the current count of tasks in the taskList.
-     * @throws DukeException  If an input or output
-     *                      exception occurred
+     * @param count the current count of tasks in the taskList.
+     * @throws DukeException If an input or output
+     *                       exception occurred
      */
     @Override
     public String addTask(int count) throws DukeException {
