@@ -1,3 +1,4 @@
 T --- 1 --- this
-T --- 0 --- today
-Ex --- 0 --- this --- 2
+T --- 1 --- today
+D --- 0 --- assignment 2 --- tmr
+Ex --- 0 --- this --- 20
