@@ -9,7 +9,6 @@ public class TodoHandler extends TaskHandler {
     }
 
     public Todo getTodoTask() {
-        assert (super.toAdd instanceof Todo);
         Todo todoTask = (Todo) toAdd;
         return todoTask;
     }

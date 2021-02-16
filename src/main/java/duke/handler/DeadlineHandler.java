@@ -11,7 +11,6 @@ public class DeadlineHandler extends TaskHandler {
     }
 
     public Deadline getDeadlineTask() {
-        assert (toAdd instanceof Deadline);
         Deadline deadlineTask = (Deadline) toAdd;
         return deadlineTask;
     }

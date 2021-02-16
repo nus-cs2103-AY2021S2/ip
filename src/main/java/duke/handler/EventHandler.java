@@ -11,7 +11,6 @@ public class EventHandler extends TaskHandler {
     }
 
     public Event getEventTask() {
-        assert toAdd instanceof Event;
         Event eventTask = (Event) toAdd;
         return eventTask;
     }
