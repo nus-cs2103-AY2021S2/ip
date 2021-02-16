@@ -52,31 +52,35 @@ public class Storage {
                 data.append(fileReader.nextLine() + "\n");
             }
             fileReader.close();
-            String[] lines = data.toString().split("\n");
-            for (String line : lines) {
-                String[] sections = line.split(Pattern.quote(" | "));
-                if (sections[0].equals("T")) {
-                    Task task = new TodoTask(sections[2]);
-                    if (sections[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                } else if (sections[0].equals("D")) {
-                    Task task = new DeadlineTask(sections[2], sections[3].equals("null") ? null : sections[3]);
-                    if (sections[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                } else if (sections[0].equals("E")) {
-                    Task task = new EventTask(sections[2], sections[3].equals("null") ? null : sections[3]);
-                    if (sections[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                }
-            }
+            addToTaskList(data.toString(), tasks);
         } catch (IOException e) {
             Ui.printError(e);
+        }
+    }
+
+    private static void addToTaskList(String data, TaskList tasks) {
+        String[] lines = data.split("\n");
+        for (String line : lines) {
+            String[] sections = line.split(Pattern.quote(" | "));
+            if (sections[0].equals("T")) {
+                Task task = new TodoTask(sections[2]);
+                if (sections[1].equals("1")) {
+                    task.setIsDone(true);
+                }
+                tasks.add(task);
+            } else if (sections[0].equals("D")) {
+                Task task = new DeadlineTask(sections[2], sections[3].equals("null") ? null : sections[3]);
+                if (sections[1].equals("1")) {
+                    task.setIsDone(true);
+                }
+                tasks.add(task);
+            } else if (sections[0].equals("E")) {
+                Task task = new EventTask(sections[2], sections[3].equals("null") ? null : sections[3]);
+                if (sections[1].equals("1")) {
+                    task.setIsDone(true);
+                }
+                tasks.add(task);
+            }
         }
     }
 }
