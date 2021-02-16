@@ -27,24 +27,6 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    /**
-     * Show Dialog Box given the Label and ImageView
-     * @param l Label for the DialogBox
-     * @param iv Image for the DialogBox
-     */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        customiseBox();
-        this.getChildren().addAll(text, displayPicture);
-    }
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -70,6 +52,18 @@ public class DialogBox extends HBox {
         this.setSpacing(10);
     }
 
+    private static void customiseUserBox(DialogBox userDialogBox) {
+        userDialogBox.setBackground(new Background(new BackgroundFill(Color.web("#eaffd0"), new CornerRadii(5), null)));
+        userDialogBox.setPadding(new Insets(15, 12, 15, 12));
+        userDialogBox.setSpacing(10);
+    }
+
+    private static void customiseWormBox(DialogBox wormDialogBox) {
+        wormDialogBox.setBackground(new Background(new BackgroundFill(Color.web("#ffb4b4"), new CornerRadii(5), null)));
+        wormDialogBox.setPadding(new Insets(15, 12, 15, 12));
+        wormDialogBox.setSpacing(10);
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -81,12 +75,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+       DialogBox userBox = new DialogBox(text, img);
+       customiseUserBox(userBox);
+       return userBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        customiseWormBox(db);
         return db;
     }
 }
