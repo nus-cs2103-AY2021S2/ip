@@ -1,5 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import  java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 
 public class Duke {
 
@@ -16,11 +23,31 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         //while(sc.hasNext()){
         System.out.println("Welcome to my todo list");
+
+
+
+        File logFile = new File("./logs");
+        try{
+            if(logFile.isFile()){
+                Scanner logs = new Scanner("./logs");
+                while (logs.hasNextLine()){
+                    System.out.println(logs.nextLine());
+                }
+                logs.close();
+            }else{
+                logFile.createNewFile();
+            }
+
+        }catch (IOException e){
+            System.out.println("Problem with creating new file:"+ e);
+        }
+
+
         int ran_output = -1;
         while (ran_output!= 0){
             try {
-                ran_output = run();
-            }catch (DukeException e){
+                ran_output = run("./logs");
+            }catch (DukeException | FileNotFoundException e){
                 System.out.println(e);
             }
 
@@ -29,10 +56,16 @@ public class Duke {
 
 
     }
-    public static int run() throws DukeException, NotFoundException, TimeException, DescriptionException{
+    public static int run(String log) throws DukeException, NotFoundException, TimeException, DescriptionException, FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         String[] input;
         ArrayList<Task> arr = new ArrayList<>();
+        ArrayList<String> fileContent = null;
+        try{
+            fileContent = new ArrayList<>(Files.readAllLines(Paths.get(log)));
+        }catch(IOException e){
+            System.out.println(e);
+        }
         int number = 0;
 
 
@@ -53,7 +86,9 @@ public class Duke {
                         }
                         break;
                     case "done":
-                        Task task = arr.get(Integer.parseInt((input[1])) - 1);
+                        int taskIndex = Integer.parseInt((input[1])) - 1;
+                        Task task = arr.get(taskIndex);
+                        fileContent.set(taskIndex, task.toString());
                         task.setDone(true);
                         System.out.println("Nice! I've marked this Task as done:");
                         System.out.println(input[1] + arr.get(Integer.parseInt(input[1]) - 1).toString());
@@ -66,6 +101,7 @@ public class Duke {
                             task_in = task_in + input[1];
                         }
                         arr.add(new Todo(next));
+                        fileContent.add(new Todo(next).toString());
                         number++;
                         System.out.println("Got it. I've added this task:");
                         System.out.println(next);
@@ -96,6 +132,7 @@ public class Duke {
                             time = time + " " + input [i];
                         }
                         arr.add(new Deadline(task_in, time.trim()));
+                        fileContent.add(new Deadline(task_in, time.trim()).toString());
                         number++;
                         System.out.println("Got it. I've added this task:");
                         System.out.println(task_in + " by" + time);
@@ -126,6 +163,7 @@ public class Duke {
                             time = time + " " + input [i];
                         }
                         arr.add(new Event(task_in, time.trim()));
+                        fileContent.add(new Event(task_in,time.trim()).toString());
                         number++;
                         System.out.println("Got it. I've added this task:");
                         System.out.println(task_in + " at"+ time);
@@ -135,6 +173,7 @@ public class Duke {
                         System.out.println("Noted. I've removed this task:");
                         System.out.println(arr.get(Integer.parseInt(input[1]) -1));
                         arr.remove(Integer.parseInt(input[1]) -1 );
+                        fileContent.remove(Integer.parseInt(input[1])-1);
                         number--;
                         System.out.println("you now have " + number + " tasks in the list");
                         break;
@@ -144,6 +183,11 @@ public class Duke {
 
             }
 
+            PrintWriter writer = new PrintWriter(log);
+            for(String str : fileContent){
+                writer.print(str);
+            }
+            writer.close();
 
         }
         sc.close();
