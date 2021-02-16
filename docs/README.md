@@ -1,21 +1,52 @@
-# User Guide
+# Chip the Squirrel User Guide
 
 Hi I'm Chip the Squirrel, a personal assistant chatbot to help you keep track of your deadlines, events and todos.
 ![chip](./Ui.png)
 
-## Features
+# Table of Contents
+- [Chip the Squirrel User Guide](#chip-the-squirrel-user-guide)- 
+- [Table of Contents](#table-of-contents)
+- [Features](#features)
+    - [Command Format](#command-format)
+    - [Seeking Help](#seeking-help)
+    - [Quitting the Application](#quitting-the-application)
+    - [Adding Todos](#adding-todos)
+    - [Adding Deadlines](#adding-deadlines)
+    - [Adding Events](#adding-events)
+    - [List out all tasks](#list-out-all-tasks)
+    - [Mark task as done](#mark-task-as-done)
+    - [Deleting a task](#deleting-a-task)
+    - [Finding a task](#finding-a-task)
+- [Saving your data](#saving-your-data)
+- [Acknowledgements](#acknowledgements)
+
+## Quick Start
+
+1. Ensure you have `Java 11` or above installed in your Computer.
+
+2. Download the latest chip.jar from www.github.com/samuelfangjw/ip/releases.
+
+3. Copy the file to the folder you want to use as the home folder for Chip the Squirrel.
+
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
+
+5. Type the command in the command box and press Enter to execute it.
+
+6. Refer to `Features` below for details on available commands.
+
+# Features
 
 Below are some commands that I understand. Commands are not case-sensitive, so I understand 'help', 'Help' and 'HELP'.
 We squirrels are smart creatures!
 
-### Command  Format
+## Command Format
 
 Words in `UPPER_CASE` are parameters to be supplied by the user.
 
 `<Angle Brackets>` and `(Round Brackets)` are used to denote compulsory and optional parameters respectively.
 `...` is used to denote that one or more parameters are accepted.
 
-### Seeking Help
+## Seeking Help
 
 The help command helps you remember what each command does. Help is always a 'help' away!
 
@@ -33,7 +64,7 @@ Expected outcome:
 
 ![help example](screenshots/help.png)
 
-### Quitting the Application
+## Quitting the Application
 
 The bye command quits the application. Don't worry I'll remember all your tasks the next time you come back!
 
@@ -49,7 +80,7 @@ Expected outcome:
 
 Application quits.
 
-### Adding Todos
+## Adding Todos
 
 Add a todo and I'll remember it for you!
 
@@ -66,7 +97,7 @@ Expected outcome:
 
 ![todo example](screenshots/todo.png)
 
-### Adding Deadlines
+## Adding Deadlines
 
 Add a deadline and I'll remember it for you!
 
@@ -85,7 +116,7 @@ Expected outcome:
 
 ![deadline example](screenshots/deadline.png)
 
-### Adding Events
+## Adding Events
 
 Add an event and I'll remember it for you!
 
@@ -104,7 +135,7 @@ Expected outcome:
 
 ![event example](screenshots/event.png)
 
-### List out all tasks
+## List out all tasks
 
 I can list out your task for you!
 
@@ -120,7 +151,7 @@ Expected outcome:
 
 ![list example](screenshots/list.png)
 
-### Mark task as done
+## Mark task as done
 
 You can let me know what tasks you have completed!
 
@@ -137,7 +168,7 @@ Expected outcome:
 
 ![done example](screenshots/done.png)
 
-### Deleting a task
+## Deleting a task
 
 Let me know if you would like a task to be deleted forever. Don't worry any secrets are safe with me!
 
@@ -154,7 +185,7 @@ Expected outcome:
 
 ![delete example](screenshots/delete.png)
 
-### Finding a task
+## Finding a task
 
 Let me know what you are looking for!
 
@@ -170,3 +201,21 @@ Example of usage:
 Expected outcome:
 
 ![find example](screenshots/find.png)
+
+# Saving your data
+
+I'll remember your tasks automatically, no need to worry!
+
+# Acknowledgements
+
+Photo of User
+by [Dušan Veverkolog](https://unsplash.com/@veverkolog?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+Photo of Chip
+by [Demi-Felicia Vares](https://unsplash.com/@dfv?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+Photo of Background
+by [Richard Loader](https://unsplash.com/@fhfpix?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
