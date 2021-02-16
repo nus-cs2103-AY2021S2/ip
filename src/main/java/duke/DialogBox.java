@@ -30,6 +30,7 @@ public class DialogBox extends HBox {
     }
 
     private void flip() {
+        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
@@ -37,7 +38,7 @@ public class DialogBox extends HBox {
 
     private void style() {
         CornerRadii rad = new CornerRadii(5);
-        Color color = Color.rgb(0, 148, 135);
+        Color color = Color.rgb(98,  125,  168);
         BackgroundFill backgroundFill = new BackgroundFill(color, rad, new Insets(-2, -2, -2 , -2));
         Background background = new Background(backgroundFill);
         text.setBackground(background);
