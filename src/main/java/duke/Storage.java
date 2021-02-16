@@ -1,19 +1,17 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
-import java.util.Scanner;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Storage for Duke
@@ -23,7 +21,6 @@ public class Storage {
 
     /**
      * Construction with specified file path
-     * 
      * @param filePath the file path to load and save from
      */
     public Storage(String filePath) {
@@ -32,7 +29,6 @@ public class Storage {
 
     /**
      * Loads task list from the file path given during initialisation
-     * 
      * @return List of saved tasks
      * @throws IOException
      * @throws DateTimeParseException
@@ -87,7 +83,6 @@ public class Storage {
 
     /**
      * Stores task list into file path specified during initialisation
-     * 
      * @param tasks Task list to be saved
      * @throws IOException
      */

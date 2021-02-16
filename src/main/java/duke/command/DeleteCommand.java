@@ -15,7 +15,6 @@ public class DeleteCommand implements Command {
 
     /**
      * Constructor
-     * 
      * @param taskNum The task number of the task to be deleted
      */
     public DeleteCommand(int taskNum) {
@@ -45,5 +44,4 @@ public class DeleteCommand implements Command {
                 + tasks.size() + " tasks in the list.";
         return deleteResponse;
     }
-    
 }

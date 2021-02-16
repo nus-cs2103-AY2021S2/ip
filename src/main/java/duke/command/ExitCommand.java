@@ -1,11 +1,10 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.Storage;
-
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents a command telling duke to close

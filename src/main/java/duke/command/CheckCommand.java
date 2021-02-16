@@ -1,16 +1,15 @@
 package duke.command;
 
-import duke.Storage;
+import java.time.LocalDate;
 
+import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.time.LocalDate;
 
 /**
  * Represetns a command telling to list all tasks on a specified date
  */
-public class CheckCommand implements Command{
+public class CheckCommand implements Command {
     private LocalDate date;
 
     /**
@@ -26,7 +25,6 @@ public class CheckCommand implements Command{
         return false;
     }
 
-    /** */
     @Override
     public String getResponString(TaskList tasks, Storage storage) {
         TaskList filteredList = new TaskList();
@@ -37,9 +35,8 @@ public class CheckCommand implements Command{
                 filteredList.add(currTask);
             }
         }
-        
+
         String checkResponse = filteredList.toString();
         return checkResponse;
     }
-    
 }

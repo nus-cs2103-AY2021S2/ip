@@ -1,10 +1,9 @@
 package duke.command;
 
 import duke.Storage;
-
 import duke.task.TaskList;
 
-/** 
+/**
  * Represents a command to duke
  */
 public interface Command {
@@ -16,9 +15,7 @@ public interface Command {
 
     /**
      * Executes the command
-     * 
      * @param tasks List of tasks to operate on
-     * @param ui User interface for user interaction
      * @param storage Storage manager for loading and saving task files
      */
     public String getResponString(TaskList tasks, Storage storage);

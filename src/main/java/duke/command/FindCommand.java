@@ -30,5 +30,4 @@ public class FindCommand implements Command {
         String findResponse = filteredList.toString();
         return findResponse;
     }
-    
 }

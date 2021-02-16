@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import duke.DukeException;
 import duke.Storage;
-
 import duke.task.TaskList;
 
 /**
@@ -15,7 +14,6 @@ public class DoneCommand implements Command {
 
     /**
      * Constructor
-     * 
      * @param taskNum Task number of the task to be marked as complete
      */
     public DoneCommand(int taskNum) {

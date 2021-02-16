@@ -1,10 +1,10 @@
 package duke;
 
-import duke.command.Command;
-import duke.task.TaskList;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+
+import duke.command.Command;
+import duke.task.TaskList;
 
 /**
  * Represents a task manager
@@ -15,7 +15,6 @@ public class Duke {
 
     /**
      * Class constructor with specified file path.
-     * 
      * @param filePath The path to load and save from
      */
     public Duke(String filePath) {
