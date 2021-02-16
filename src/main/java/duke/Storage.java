@@ -19,8 +19,19 @@ import duke.task.Task;
 import duke.task.ToDos;
 
 public class Storage {
-    public static final String FILE_DIR = "data";
-    public static final String FILE_NAME = "duke.txt";
+    private final String fileDir;
+    private final String fileName;
+
+    /**
+     * Create new Storage interface with a particular folder path and file name.
+     *
+     * @param directory Relative directory path to store data in
+     * @param fileName Name of file to store data in
+     */
+    public Storage(String directory, String fileName) {
+        this.fileDir = directory;
+        this.fileName = fileName;
+    }
 
     /**
      * Attempts to parse a line from a file and load a corresponding Task.
@@ -28,7 +39,7 @@ public class Storage {
      * @param line The line to be parsed
      * @return A task if successful, or null otherwise
      */
-    private static Task parseLineFromFile(String line) {
+    private Task parseLineFromFile(String line) {
         Task t;
         String pattern = "([TED]),([01]),(\\d*),(.*)";
         Pattern r = Pattern.compile(pattern);
@@ -81,7 +92,7 @@ public class Storage {
      * @return TaskList that corresponds to the loaded data
      * @throws IOException Uncontrollable IO Error
      */
-    public static TaskList loadTaskList() throws IOException {
+    public TaskList loadTaskList() throws IOException {
         List<Task> taskList = new ArrayList<>();
         File file = getOrCreateFile();
         Scanner s = new Scanner(file);
@@ -101,7 +112,7 @@ public class Storage {
      * @param data TaskList to save to disk
      * @throws IOException Unable to create subfolder
      */
-    public static void saveTaskList(TaskList data) throws IOException {
+    public void saveTaskList(TaskList data) throws IOException {
         String saveText = data.toFileString();
         File f = getOrCreateFile();
         FileWriter writer = new FileWriter(f);
@@ -109,9 +120,9 @@ public class Storage {
         writer.close();
     }
 
-    private static File getOrCreateFile() throws IOException {
-        Files.createDirectories(Paths.get(FILE_DIR));
-        File file = new File(FILE_DIR, FILE_NAME); // create a File for the given file path
+    private File getOrCreateFile() throws IOException {
+        Files.createDirectories(Paths.get(fileDir));
+        File file = new File(fileDir, fileName); // create a File for the given file path
         file.createNewFile();
         return file;
     }

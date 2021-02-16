@@ -10,15 +10,19 @@ import duke.exception.InvalidCommandException;
 
 
 public class Duke {
+    public static final String FILE_DIR = "data";
+    public static final String FILE_NAME = "duke.txt";
     private Ui ui;
     private TaskList taskList;
     private boolean isTerminated;
+    private Storage storage;
 
     /**
      * Constructor for Duke
      */
     public Duke() {
         ui = new Ui();
+        storage = new Storage(FILE_DIR, FILE_NAME);
         isTerminated = false;
     }
     public boolean getIsTerminated() {
@@ -34,7 +38,7 @@ public class Duke {
         ui.printStartUp();
         try {
             ui.printLoadStart();
-            taskList = Storage.loadTaskList();
+            taskList = storage.loadTaskList();
             ui.printLoadSuccess();
         } catch (IOException e) {
             ui.printLoadFail();
@@ -91,7 +95,7 @@ public class Duke {
     private void saveIfNeeded() {
         if (taskList.isEdited()) {
             try {
-                Storage.saveTaskList(taskList);
+                storage.saveTaskList(taskList);
                 taskList.markSaved();
             } catch (IOException e) {
                 ui.dumpState(taskList);
