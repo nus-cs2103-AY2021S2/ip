@@ -14,9 +14,4 @@ public class SaveCommand extends Command {
         ui.save();
         return Ui.showGoodbye();
     }
-
-    @Override
-    public boolean isExit() {
-        return command.equalsIgnoreCase("bye");
-    }
 }
