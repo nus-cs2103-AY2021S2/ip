@@ -137,8 +137,6 @@ public class Duke extends Application {
 //                DialogBox.getDukeDialog(dukeText.getText(), dukeImage)
         );
         userInput.clear();
-//        dialogContainer.getChildren().add(dukeText);
-//        userInput.clear();
     }
 
 

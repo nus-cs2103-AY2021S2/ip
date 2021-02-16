@@ -19,7 +19,8 @@ public class Ui {
                 "event [insert event] - creates an event\n" +
                 "delete [insert index] - deletes event based on index\n" +
                 "find [insert keyword] [search type(optional)] - finds tasks " +
-                "corresponding to keyword");
+                "corresponding to keyword\n" +
+                "done [insert keyword] - marks task as done");
         return res;
     }
 
