@@ -1,7 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Greetings. My name is I-01B, but you may call me DUKE. What can I assist you with?
+Added to to-do list: 
+[T][ ] borrow book
+Added to to-do list: 
+[D][ ] return book (By: June 6th)
+Added to to-do list: 
+[E][ ] project meeting (At: Aug 6th 2-4pm)
+This is your to-do list:
+1. [T][ ] borrow book
+2. [D][ ] return book (By: June 6th)
+3. [E][ ] project meeting (At: Aug 6th 2-4pm)
+Added to to-do list: 
+[T][ ] join sports club
+Added to to-do list: 
+[T][ ] borrow book
+Affirmative. The following task has been marked as done: 
+[T][X] borrow book
+This is your to-do list:
+1. [T][X] borrow book
+2. [D][ ] return book (By: June 6th)
+3. [E][ ] project meeting (At: Aug 6th 2-4pm)
+4. [T][ ] join sports club
+5. [T][ ] borrow book
+Affirmative. The following task has been marked as done: 
+[T][X] join sports club
+Added to to-do list: 
+[D][ ] return book (By: Sunday)
+Added to to-do list: 
+[E][ ] project meeting (At: Mon 2-4pm)
+This is your to-do list:
+1. [T][X] borrow book
+2. [D][ ] return book (By: June 6th)
+3. [E][ ] project meeting (At: Aug 6th 2-4pm)
+4. [T][X] join sports club
+5. [T][ ] borrow book
+6. [D][ ] return book (By: Sunday)
+7. [E][ ] project meeting (At: Mon 2-4pm)
+ErRoR: I apologize, please input description for 'todo'.
+ErRoR: I apologize, please input description and time for 'event'.
+ErRoR: I apologize, please input description and time for 'deadline'.
+ErRoR: I apologize, please use '/by' argument to specify time for 'deadline'.
+ErRoR: I apologize, please use '/at' argument to specify time for 'event'.
+I hope I have been of assistance. Goodbye. C:
