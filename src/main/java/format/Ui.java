@@ -19,7 +19,10 @@ public class Ui {
 
         // intro message
         System.out.println(logo);
-        print(new String[]{"Welcome, traveller. I'm Kiwi.", "What would you like to do today?"});
+        print(new String[]{
+                "Welcome, traveller. I'm Kiwi.",
+                "What would you like to do today?",
+                "Psst if you're unsure, use type 'help' to get started."});
 
     }
 
@@ -129,7 +132,7 @@ public class Ui {
         for (Object s : messages) {
             res += EXTRA_INDENT;
             res += s;
-//            res += '\n';
+            res += '\n'; // might give extra \n for everything that's not help output
         }
         return res;
     }
