@@ -57,8 +57,4 @@ public class Duke {
     public void welcomeResponse() {
         ui.showWelcome();
     }
-
-    public static void main(String[] args) throws IOException, ParseException {
-       new Duke().welcomeResponse();
-    }
 }
