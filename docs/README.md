@@ -28,6 +28,7 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 	** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
 	
 4. After starting the application, you should see the GUI as shown below:
+
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/Ui.png)
 
 
@@ -36,9 +37,10 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 
 ### Add a task :  `todo`, `deadline`, `event`
 
-There are three different tasks, namely todo, event and deadline. 
-Different commands are used to faciliate the adding of different tasks to Duke as seen below.
-Commands are case insenstive so do ensure that commands are keyed in correctly without additional space and in lower alphabets. 
+There are three different tasks, namely, todo, event and deadline. 
+<br> Different commands are used to faciliate the adding of different tasks to the program as seen below.
+<br> Commands are case insenstive so do ensure that commands are keyed in correctly without additional space and in lower alphabets. 
+<br> Users are only allowed to add ONE task at a time. 
 
 #### `todo`
 Todo command add a todo task which requires task description and no other field as input.
@@ -48,20 +50,21 @@ Examples:
 * `todo CNY visiting`
 * `todo ST2334 tutorial`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/addTodoTask.png)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addTodoTask.png)
 
 #### `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
-Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
+<br> Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
 
 Examples:
 * `deadline return pen /by 03/05/2021 1800`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/addDeadlineTask.png)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addDeadlineTask.png)
 
 #### `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
-Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
+<br>Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]
+<br> Note: Do ensure that the time is given in HHMM format with no extra spacing or semicolon 
 
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
@@ -92,7 +95,7 @@ Assume that we still have 4 task,
 ### Mark task as done : `done`
 
 Mark the given task as completed which will add a tick beside the task when list command is executed. 
-By default, all tasks added are uncompleted. 
+<br> By default, all tasks added are uncompleted. 
 
 Format: `done index_of_task'
 
