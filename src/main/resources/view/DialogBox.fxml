@@ -4,26 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 
 
-<fx:root type="VBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <javafx.scene.layout.HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" stylesheets="@darktheme.css">
-        <children>
-          <Label fx:id="dialog" stylesheets="@darktheme.css" text="Label" wrapText="true" />
-          <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
-        </children>
-        <padding>
-          <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-        </padding>
-      </javafx.scene.layout.HBox>
-      <Pane prefHeight="10.0" prefWidth="400.0">
-         <children>
-            <Line endX="20.0" startX="380.0" strokeWidth="2.0" />
-         </children>
-      </Pane>
-   </children>
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" stylesheets="@darktheme.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <Label fx:id="dialog" stylesheets="@darktheme.css" text="Label" wrapText="true" />
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+  </children>
+  <padding>
+    <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+  </padding>
 </fx:root>
