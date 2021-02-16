@@ -117,6 +117,7 @@ public class Checklst extends Application {
         }
 
         this.addChecklstMessage(this.ui.sendWelcome());
+
     }
 
     /**
@@ -125,7 +126,7 @@ public class Checklst extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        if (userInput.getText().equals("exit")) {
+        if (userInput.getText().equals("bye")) {
             try {
                 Platform.exit();
             } catch (Exception e) {
