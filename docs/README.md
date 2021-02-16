@@ -115,9 +115,9 @@ Priority of listing:
 3. deadline/event tasks that are done, ordered by date.
 4. todo tasks that are done, by order of being marked as done.
 
-### Locating events by name: `find`
+### Locating tasks by name: `find`
 
-Finds events whose descriptions contain the given keyword.
+Finds tasks whose descriptions contain the given keyword.
 
 Format: `find KEYWORD`
 
