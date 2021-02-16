@@ -5,7 +5,7 @@ public class ToDo extends Task {
     ToDo() {
     }
 
-    ToDo(String task) {
+    public ToDo(String task) {
         super(task);
     }
     static ToDo parseInput(String input) throws DukeIncompleteCommandException {

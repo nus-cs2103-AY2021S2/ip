@@ -28,7 +28,7 @@ public class Parser {
             } else if (input.contains("todo") ||
                     input.contains("deadline") ||
                     input.contains("event")) {
-                parseAddTaskCommand(input);
+                taskList.add(parseAddTaskCommand(input));
             } else {
                 throw new DukeInvalidCommandException();
             }
@@ -57,7 +57,7 @@ public class Parser {
         }
     }
 
-    void parseAddTaskCommand(String input) throws DukeIncompleteCommandException,
+    public static Task parseAddTaskCommand(String input) throws DukeIncompleteCommandException,
             DateTimeParseException {
         TimedTask timedTask = new TimedTask();
         String editedInput;
@@ -70,7 +70,7 @@ public class Parser {
             regex = "/by";
             timedTask = new Deadline();
         } else {
-            editedInput = input.substring(4).trim();
+            editedInput = input.substring(5).trim();
             regex = "/at";
             timedTask = new Event();
         }
@@ -79,13 +79,13 @@ public class Parser {
         }
         if (regex.equals("")) {
             Task task = new ToDo(editedInput);
-            taskList.add(task);
+            return task;
         } else {
-            String[] editedInputs = input.split(regex);
+            String[] editedInputs = editedInput.split(regex);
             timedTask.task = editedInputs[0].trim();
             try {
                 timedTask.date = LocalDate.parse(editedInputs[1].trim());
-                taskList.add(timedTask);
+                return timedTask;
             } catch (DateTimeParseException e) {
                 throw e;
             }

@@ -1,6 +1,6 @@
 package duke;
 
-class Task {
+public class Task {
     String task;
     boolean isDone;
 
@@ -12,7 +12,7 @@ class Task {
         isDone = false;
     }
 
-    Task markDone() {
+    public Task markDone() {
         isDone = true;
         return this;
     }

@@ -3,3 +3,8 @@ EVNT[ ] play with bingrae (at: 2000-09-08)
 TODO[ ] yoz
 DDLN[ ] deadline hello (by: 2000-09-08)
 EVNT[ ] event y (at: 2003-08-15)
+TODO[ ] yellow
+TODO[ ] check check
+EVNT[ ] event yoooz (at: 2000-04-03)
+EVNT[ ] event check (at: 0000-04-03)
+EVNT[ ] t yo (at: 0000-04-05)

@@ -6,10 +6,10 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends TimedTask {
 
-    Event() {
+    public Event() {
         this.isDone = false;
     }
-
+    /*
     static Event parseInput(String input) throws DukeIncompleteCommandException,
             DateTimeParseException {
 
@@ -31,6 +31,7 @@ public class Event extends TimedTask {
         event.date = LocalDate.parse(inputs[1].trim());
         return event;
     }
+
     static Event fileReader(String line) {
         Event event = new Event();
         if (line.charAt(5) == 'X') {
@@ -45,6 +46,7 @@ public class Event extends TimedTask {
         return event;
     }
 
+     */
     @Override
     public String toString() {
         return String.format("EVNT%s (at: %s)" , super.toString(),
