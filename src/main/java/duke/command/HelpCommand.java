@@ -55,6 +55,6 @@ public class HelpCommand extends Command {
      * Checks if it is time to exit Duke.
      */
     public boolean isExit() {
-        return true;
+        return false;
     }
 }

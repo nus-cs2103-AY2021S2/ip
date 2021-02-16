@@ -17,8 +17,8 @@ public class DeleteCommandTest {
         try {
             String deleteInput = "delete 1";
             DeleteCommand deleteCommand = new DeleteCommand(deleteInput);
-
             deleteCommand.execute(taskList, deleteInput, storage);
+
         } catch (IndexOutOfBoundsException e) {
             assertEquals("Index 0 out of bounds for length 0", e.getMessage());
         }

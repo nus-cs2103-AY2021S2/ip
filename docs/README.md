@@ -81,7 +81,7 @@ With great usability and a simple design, it's never been easier to manage your 
   
 ### 3.7 Exit
 ###### Finally done with organising my tasks. Time to start on them :sob:
-#### Just type `bye` to save the tasks added.
+#### Just type `bye` to close `Duke`.
 ##### `bye`: _`bye`_
 * _Saves all tasks added before closing the app._ \
 ![img.png](images/bye.png)

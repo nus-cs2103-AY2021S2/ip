@@ -13,7 +13,7 @@ Reused from https://github.com/ruilingk/ip/tree/master/src/main/resources/view w
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="650.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-       <Label fx:id="dialog" text="LABEL" wrapText="true" minHeight="-Infinity" styleClass="duke">
+        <Label fx:id="dialog" text="LABEL" wrapText="true" minHeight="-Infinity" styleClass="duke">
             <font>
                 <Font name="Trebuchet MS" size="14.0" />
             </font>
@@ -34,8 +34,8 @@ Reused from https://github.com/ruilingk/ip/tree/master/src/main/resources/view w
         </Circle>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="20.0" />
+        <Insets bottom="15.0" left="25.0" right="5.0" top="20.0" />
     </padding>
 </fx:root>
 
-<!-- @@author -->
+        <!-- @@author -->

@@ -1,17 +1,16 @@
 package duke;
 
-import java.io.IOException;
-
-import duke.exception.DukeException;
 import duke.ui.DialogBox;
 import duke.ui.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for duke.MainWindow. Provides the layout for the other controls.
@@ -23,8 +22,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -41,6 +38,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage)
         );
     }
+
+    /**
+     * Initialise Duke
+     * @param dukeObject to be set to Duke
+     */
     public void setDuke(Duke dukeObject) {
         duke = dukeObject;
     }
@@ -49,17 +51,20 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      *
-     * @throws IOException User keys in invalid storage location
-     * @throws DukeException invalid user input
      */
     @FXML
-    private void handleUserInput() throws IOException, DukeException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (input.equals("bye")) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.play();
+        }
         userInput.clear();
     }
 }

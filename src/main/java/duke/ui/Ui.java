@@ -28,7 +28,7 @@ public class Ui {
      * @return exit message
      */
     public String exitDuke() {
-        String toPrint = "Bye. Hope to see you again soon!";
+        String toPrint = "Bye. Hope to see you again soon!" + "\nThis window will close in 3 seconds.";
         assert !toPrint.isEmpty() : "Something should be printed.";
         return toPrint;
     }

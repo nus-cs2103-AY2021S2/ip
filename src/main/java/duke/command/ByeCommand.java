@@ -31,7 +31,7 @@ public class ByeCommand extends Command {
 
     public String execute(TaskList tasks, String input, Storage storage) {
         assert !input.isEmpty() : "Input should not be blank.";
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!\n" + "This window will close in 3 seconds.";
     }
 
     /**

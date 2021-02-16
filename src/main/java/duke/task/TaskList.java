@@ -24,7 +24,7 @@ import duke.storage.Storage;
  */
 public class TaskList {
     private ArrayList<Task> taskList;
-    private Storage storage = new Storage();
+    private Storage storage = new Storage("data/data.txt");
 
     /**
      * Creates TaskList which is essentially an ArrayList of Task.
@@ -78,12 +78,14 @@ public class TaskList {
 
             int numberOfItems = this.taskList.size();
             if (numberOfItems == 1) {
-                return "Got it. I've added this task:\n"
-                    + todoTask + "\nNow you have 1 task in the list.";
+                String toPrint = "Got it. I've added this task:\n"
+                        + todoTask + "\nNow you have 1 task in the list.";
+                return toPrint;
             } else {
-                return "Got it. I've added this task:\n"
+                String toPrint = "Got it. I've added this task:\n"
                     + todoTask + "\nNow you have " + this.taskList.size()
                     + " tasks in the list.";
+                return toPrint;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyTodoException();
@@ -129,12 +131,14 @@ public class TaskList {
 
             int numberOfItems = this.taskList.size();
             if (numberOfItems == 1) {
-                return "Got it. I've added this task:\n"
+                String toPrint = "Got it. I've added this task:\n"
                     + deadlineTask + "\nNow you have 1 task in the list.";
+                return toPrint;
             } else {
-                return "Got it. I've added this task:\n"
+                String toPrint = "Got it. I've added this task:\n"
                     + deadlineTask + "\nNow you have " + this.taskList.size()
                     + " tasks in the list.";
+                return toPrint;
             }
         } catch (DateTimeParseException e) {
             throw new EmptyDateTimeException();
@@ -179,12 +183,14 @@ public class TaskList {
 
             int numberOfItems = this.taskList.size();
             if (numberOfItems == 1) {
-                return "Got it. I've added this task:\n"
+                String toPrint = "Got it. I've added this task:\n"
                         + eventTask + "\nNow you have 1 task in the list.";
+                return toPrint;
             } else {
-                return "Got it. I've added this task:\n"
+                String toPrint = "Got it. I've added this task:\n"
                         + eventTask + "\nNow you have " + this.taskList.size()
                         + " tasks in the list.";
+                return toPrint;
             }
         } catch (DateTimeParseException e) {
             throw new EmptyDateTimeException();
@@ -212,8 +218,9 @@ public class TaskList {
         this.taskList.get(index).setDone();
         storage.saveData(this);
 
-        return "Nice! I've marked this task as done:\n"
+        String toPrint = "Nice! I've marked this task as done:\n"
                 + this.taskList.get(index);
+        return toPrint;
     }
 
     /**
@@ -233,10 +240,13 @@ public class TaskList {
             throw new EmptyDeleteException();
         }
 
+        Task taskToBeDeleted;
         try {
             String[] inputDetails = input.split(" ", 2);
             int taskIndex = Integer.parseInt(inputDetails[1]) - 1;
-            this.taskList.get(taskIndex);
+            taskToBeDeleted = taskList.get(taskIndex);
+            this.taskList.remove(taskIndex);
+            storage.saveData(this);
         } catch (NumberFormatException e) {
             throw new AlphabetsInsteadOfNumberException();
         }
@@ -244,24 +254,24 @@ public class TaskList {
         try {
             String[] inputDetails = input.split(" ", 2);
             int taskIndex = Integer.parseInt(inputDetails[1]) - 1;
-            this.taskList.get(taskIndex);
+            taskToBeDeleted = taskList.get(taskIndex);
+            this.taskList.remove(taskIndex);
+            storage.saveData(this);
         } catch (IndexOutOfBoundsException e) {
             throw new EmptyListDeletionException();
         }
-        String[] inputDetails = input.split(" ", 2);
-        int taskIndex = Integer.parseInt(inputDetails[1]) - 1;
-        Task taskToBeDeleted = taskList.get(taskIndex);
-        this.taskList.remove(taskIndex);
-        storage.saveData(this);
+
 
         int numberOfItems = this.taskList.size();
         if (numberOfItems == 1) {
-            return "Noted. I've removed this task:\n"
+            String toPrint = "Noted. I've removed this task:\n"
                 + taskToBeDeleted + "\nNow you have 1 task in the list.";
+            return toPrint;
         } else {
-            return "Noted. I've removed this task:\n"
+            String toPrint = "Noted. I've removed this task:\n"
                 + taskToBeDeleted + "\nNow you have "
                 + this.taskList.size() + " tasks in the list.";
+            return toPrint;
         }
     }
 
@@ -357,8 +367,9 @@ public class TaskList {
                 Task newTask = this.taskList.get(taskIndex);
                 storage.saveData(this);
 
-                return "Noted. I've updated this task:\n"
+                String toPrint = "Noted. I've updated this task:\n"
                         + taskNumber + "." + newTask;
+                return toPrint;
             }
         } else if (taskType.equals("deadline")) {
             try {
@@ -380,8 +391,9 @@ public class TaskList {
                     Task newTask = this.taskList.get(taskIndex);
                     storage.saveData(this);
 
-                    return "Noted. I've updated this task:\n"
+                    String toPrint = "Noted. I've updated this task:\n"
                             + taskNumber + "." + newTask;
+                    return toPrint;
 
                 } catch (DateTimeParseException e) {
                     throw new EmptyDateTimeException();
@@ -407,8 +419,9 @@ public class TaskList {
                     Task newTask = this.taskList.get(taskIndex);
                     storage.saveData(this);
 
-                    return "Noted. I've updated this task:\n"
+                    String toPrint = "Noted. I've updated this task:\n"
                             + taskNumber + "." + newTask;
+                    return toPrint;
 
                 } catch (DateTimeParseException e) {
                     throw new EmptyDateTimeException();
