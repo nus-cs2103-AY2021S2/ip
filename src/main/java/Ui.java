@@ -35,7 +35,7 @@ public class Ui {
     public String userAddTask(TaskList list, Task task) {
         return "Got it. I've added this task: \n  "
                             + task
-                            + "\now you have " + String.valueOf(list.size())
+                            + "\nnow you have " + String.valueOf(list.size())
                             + " tasks in the list.";
     }
 
