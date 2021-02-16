@@ -31,12 +31,12 @@ Nothing happens.
 
 # Usage of keywords
 <!-- ### `Keyword` - Describe action -->
-### `bye`
+### Keyword - `bye`
 Example of usage: `bye`
 
 Expected outcome: App Exits.
 
-### `list`
+### Keyword - `list`
 Example of usage: `list`
 
 Expected outcome: All tasks currently in the tasklist will be returned.
