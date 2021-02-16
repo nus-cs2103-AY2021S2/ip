@@ -31,6 +31,7 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String userInput) throws DukeException {
+        assert userInput != null : "user input should not be null";
         Pattern BASE_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<commandDescription>.*)");
         Matcher matcher = BASE_COMMAND_FORMAT.matcher(userInput.trim());
 
