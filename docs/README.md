@@ -99,7 +99,7 @@ Finds and lists all tasks from the task list that contain the entered key word.
 `find` *book*
 
 ### Expected outcome:
-There were 1 tasks containing your keyword:
+There were 1 tasks containing your keyword:   
 1: [D][] deadline return library book/by Sun Feb 14 14:00:00 SGT 2021
 
 ## `Help`
