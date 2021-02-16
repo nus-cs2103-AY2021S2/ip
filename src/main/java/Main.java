@@ -20,6 +20,7 @@ public class Main extends Application {
             GridPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().greetings();
             stage.show();

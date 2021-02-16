@@ -12,7 +12,8 @@
 <?import javafx.scene.text.Font?>
 
 
-<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="410.0"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
