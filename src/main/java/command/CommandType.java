@@ -9,5 +9,5 @@ public enum CommandType {
     DEADLINE,
     EVENT,
     FIND,
-    BYE
+    QUIT
 }

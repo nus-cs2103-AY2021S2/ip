@@ -12,7 +12,7 @@ import java.util.List;
 
 public class EventCommand extends Command {
     public static final String COMMAND_STRING = "event";
-    public static final CommandType COMMAND_TYPE = CommandType.DEADLINE;
+    public static final CommandType COMMAND_TYPE = CommandType.EVENT;
 
     private final String description;
     private final LocalDate date;

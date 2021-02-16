@@ -15,10 +15,6 @@ public interface Ui {
                 + "\nWhat shall we do today?\n";
     }
 
-    static String echo(String input) {
-        return input;
-    }
-
     static void printGreeting() {
         System.out.println(greeting());
     }

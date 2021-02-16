@@ -48,20 +48,18 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) throws DukeException {
+    public void execute(TaskManager taskManager) {
         message = keywordOpt.orElse(defaultHelpText());
     }
 
     private String defaultHelpText() {
         String validKeywordList = String.join(", ", VALID_KEYWORDS);
 
-        StringBuilder result = new StringBuilder();
-        result.append("Type \"help <keyword>\" to read detailed information about each command")
-                .append("\n")
-                .append("List of commands: \n")
-                .append(validKeywordList);
-
-        return result.toString();
+        String result = "Type \"help <keyword>\" to read detailed information about each command" +
+                "\n" +
+                "List of commands: \n" +
+                validKeywordList;
+        return result;
     }
 
     private String keywordHelpText(String keyword) {

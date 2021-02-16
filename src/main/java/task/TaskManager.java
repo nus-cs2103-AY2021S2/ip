@@ -1,12 +1,9 @@
 package task;
 
 import util.DukeException;
-import util.Formatter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class TaskManager {
@@ -22,10 +19,6 @@ public class TaskManager {
 
     public List<Task> getTasks() {
         return this.taskList;
-    }
-
-    public int size() {
-        return this.taskList.size();
     }
 
     public String addTask(Task task) {
@@ -57,27 +50,6 @@ public class TaskManager {
         return "I've removed the task:\n"
                 + taskToRemove.toString()
                 + taskCountMsg();
-    }
-
-    public String listTasks() {
-        return "Here is your list of tasks: \n" + Formatter.formatList(taskList
-                .stream()
-                .map(Task::toString)
-                .collect(Collectors.toList())
-        );
-    }
-
-    public String findTask(HashMap<String, String> argMap) throws NoSuchElementException {
-        if (!argMap.containsKey("desc")) {
-            throw new NoSuchElementException("Search keyword cannot be empty.");
-        }
-
-        return "Tasks that match \"" + argMap.get("desc") + "\": \n" + Formatter.formatList(taskList
-                .stream()
-                .map(Task::toString)
-                .filter(t -> t.contains(argMap.get("desc")))
-                .collect(Collectors.toList())
-        );
     }
 
     public String toSaveString() {

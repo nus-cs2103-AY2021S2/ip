@@ -32,7 +32,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) throws DukeException {
+    public void execute(TaskManager taskManager) {
         StringBuilder output = new StringBuilder();
 
         // Returns true if the task contains all of the keywords

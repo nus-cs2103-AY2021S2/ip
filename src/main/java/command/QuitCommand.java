@@ -7,7 +7,7 @@ import java.util.List;
 
 public class QuitCommand extends Command {
     public static final String COMMAND_STRING = "quit";
-    public static final CommandType COMMAND_TYPE = CommandType.DONE;
+    public static final CommandType COMMAND_TYPE = CommandType.QUIT;
     private String message = "";
 
     public static QuitCommand fromCommandMap(HashMap<String, List<String>> commandMap) {

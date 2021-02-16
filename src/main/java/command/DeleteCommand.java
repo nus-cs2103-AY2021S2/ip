@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_STRING = "delete";
-    public static final CommandType COMMAND_TYPE = CommandType.DONE;
+    public static final CommandType COMMAND_TYPE = CommandType.DELETE;
     private final int position;
     private String message = "";
 
