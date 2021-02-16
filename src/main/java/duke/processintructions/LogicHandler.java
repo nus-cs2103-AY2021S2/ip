@@ -80,8 +80,9 @@ public class LogicHandler {
         try {
             Todo todo = new Todo(input.split(" ", 2)[1]);
             list.add(todo);
-            return ("added: " + todo + "\n"
-                    + "Now you have " + list.size() + " tasks in the list.");
+            int numberOfTasks = list.size();
+
+            return ("added: " + todo + "\nNow you have " + numberOfTasks + " tasks in the list.");
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Oops, your todo requires at least a description.";
         }
@@ -160,21 +161,30 @@ public class LogicHandler {
         try {
             Find find = new Find();
 
-            String itemToFind = input.split(" ", 2)[1];
-            List<Task> newList = find.contains(itemToFind, list);
+            String itemToFind = getKeywordToFind(input);
+            List<Task> listContainingInputString = find.contains(itemToFind, list);
 
-            String temp = "";
+            StringBuilder finalOutput = new StringBuilder();
 
-            for (int i = 0; i < newList.size(); i++) {
-                temp += String.format("%d. %s", i + 1, newList.get(i));
-                if (i != newList.size() - 1) {
-                    temp += "\n";
-                }
+            for (int i = 0; i < listContainingInputString.size(); i++) {
+                finalOutput.append(formattedFoundTasks(listContainingInputString, i));
             }
-            return temp;
+            return finalOutput.toString();
         } catch (ArrayIndexOutOfBoundsException e) {
             return ("Oops, your find requires a string description to find a match.");
         }
+    }
+
+    private String getKeywordToFind(String input) {
+        return input.split(" ", 2)[1];
+    }
+
+    private String formattedFoundTasks(List<?> list, int index) {
+        String outputString = String.format("%d. %s", index + 1, list.get(index));
+        if (index != list.size() - 1) {
+            outputString += "\n";
+        }
+        return outputString;
     }
 
     public String expense(String input, List<Task> list) {
