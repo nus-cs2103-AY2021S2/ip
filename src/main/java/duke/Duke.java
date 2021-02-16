@@ -67,7 +67,7 @@ public class Duke {
     }
 
     /**
-     * Saves the task list into the storage file.
+     * Saves the task list into the storage file and the contact list into the storage file.
      */
     private void save() {
         String taskStr = "";

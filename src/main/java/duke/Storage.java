@@ -36,7 +36,7 @@ public class Storage {
     /**
      * Reads the saved task list in the file and adds the task into the task list.
      *
-     *  Task list to load the tasks from the file to.
+     * @return Task list with tasks from the file loaded.
      */
     public TaskList loadTaskList() {
         try {
@@ -78,6 +78,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the contacts in the contact list into the specified file.
+     *
+     * @param contacts Contact list to be saved.
+     */
     public void saveContactList(String contacts) {
         try {
             FileWriter fw = new FileWriter(filePath + fileName);
@@ -88,6 +93,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the saved contact list in the file and adds the contacts into the contact list.
+     *
+     * @return Contact list with contacts from the file loaded.
+     */
     public ContactList loadContactList() {
         try {
             File f = new File(filePath + fileName);

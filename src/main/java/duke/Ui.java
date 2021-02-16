@@ -146,10 +146,22 @@ public class Ui {
         return str;
     }
 
+    /**
+     * Gets string of contact.
+     *
+     * @param contact Contact.
+     * @return String of contact.
+     */
     private String getContact(Contact contact) {
         return contact.toString();
     }
 
+    /**
+     * Gets the add contact message.
+     *
+     * @param contact Contact to add.
+     * @return String of Add Contact message.
+     */
     public String getAddContact(Contact contact) {
         String str = "I have added a new companion to your list of allies:\n" +
                 getContact(contact) +
@@ -157,6 +169,12 @@ public class Ui {
         return str;
     }
 
+    /**
+     * Gets the string when a contact list is to be listed.
+     *
+     * @param contactList Contact list to be listed.
+     * @return String of contacts in the list.
+     */
     public String getContactList(ContactList contactList) {
         String str = "Here are your reliable comrades:\n";
         for (int i = 1; i <= contactList.getSize(); i++) {
@@ -168,6 +186,12 @@ public class Ui {
         return str;
     }
 
+    /**
+     * Gets the string when a contact is to be deleted.
+     *
+     * @param contact Contact to be deleted.
+     * @return String of delete contact command.
+     */
     public String getDeleteContact(Contact contact) {
         String str = "Friends turn to foes in a blink of an eye. I shall remove:\n" +
                 getContact(contact) +

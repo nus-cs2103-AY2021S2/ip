@@ -9,6 +9,13 @@ public class AddContactCommand extends Command {
         this.contactList = contactList;
     }
 
+    /**
+     * Checks if the user input is formatted into a correct Add Contact command.
+     * If it is, it adds the contact and prints the Add Contact message.
+     * Otherwise, it prints the exception faced.
+     *
+     * @return Message to be printed.
+     */
     private String add() {
         try {
             if (parser.canParseAddContactCommand(input)) {
@@ -26,6 +33,11 @@ public class AddContactCommand extends Command {
         }
     }
 
+    /**
+     * Executes the add contact command.
+     *
+     * @return Message of command.
+     */
     @Override
     public String execute() {
         return add();

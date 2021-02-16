@@ -178,6 +178,7 @@ public class Parser {
      * Checks if the user input is formatted into a correct index calling command.
      *
      * @param input User input.
+     * @param size Size of task list.
      * @return Boolean.
      */
     public boolean canParseIndexCommand(String input, int size) {
@@ -203,6 +204,7 @@ public class Parser {
      * Parses the user input and returns the index of an index calling command.
      *
      * @param input User input.
+     * @param size Size of task list.
      * @return Index.
      */
     public int parseIndex(String input, int size) {
@@ -254,6 +256,12 @@ public class Parser {
         return command[1];
     }
 
+    /**
+     * Checks if user input is formatted for an Add Contact command with a valid name input.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     private boolean canParseAddName(String input) {
         String[] command = input.split("/name");
         if (command.length != 2) {
@@ -262,6 +270,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Checks if user input is formatted for an Add Contact command with a valid number input.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     private boolean canParseAddNumber(String input) {
         String[] command = input.split("/number ");
         if (command.length != 2) {
@@ -269,14 +283,20 @@ public class Parser {
         }
         try {
             String[] details = command[1].split("/address ");
-            details = details[0].split(" ");
-            Integer.valueOf(details[0]);
+            String[] numInfo = details[0].split(" ");
+            Integer.valueOf(numInfo[0]);
         } catch (NumberFormatException e) {
             return false;
         }
         return true;
     }
 
+    /**
+     * Checks if user input is formatted for Add Contact command with a valid address input.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     private boolean canParseAddAddress(String input) {
         String[] command = input.split("/address ");
         if (command.length != 2) {
@@ -285,6 +305,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Checks if user input is formatted correctly for an Add Contact command.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     public boolean canParseAddContactCommand(String input) {
         boolean isContactCommand = false;
         if (parseCommand(input).equals("contact add")) {
@@ -297,6 +323,12 @@ public class Parser {
         return isContactCommand && hasValidName && hasEitherNumberOrAddress;
     }
 
+    /**
+     * Parses the user input and returns the name of a contact.
+     *
+     * @param input User input.
+     * @return Name of contact.
+     */
     public String parseAddContactName(String input) {
         String[] command = input.split("/name ");
         String[] details = command[1].split(" /number ");
@@ -307,6 +339,12 @@ public class Parser {
         return name;
     }
 
+    /**
+     * Parses the user input and returns the number of a contact.
+     *
+     * @param input User input.
+     * @return Contact number.
+     */
     public int parseAddContactNumber(String input) {
         String[] command = input.split("/number ");
         if (command.length != 2) {
@@ -319,6 +357,12 @@ public class Parser {
         return number;
     }
 
+    /**
+     * Parses the user input and returns the address of a contact.
+     *
+     * @param input User input.
+     * @return Contact address.
+     */
     public String parseAddContactAddress(String input) {
         String[] command = input.split("/address ");
         if (command.length != 2) {
@@ -328,10 +372,23 @@ public class Parser {
         return address;
     }
 
+    /**
+     * Checks if user input is formatted as a correct Contact List command.
+     *
+     * @param input User input.
+     * @return Boolean.
+     */
     public boolean canParseListContactCommand(String input) {
         return input.equals("contact list");
     }
 
+    /**
+     * Checks if user input has a valid index in the correct format for an contact command that uses an index.
+     *
+     * @param input User input.
+     * @param size Size of contact list.
+     * @return Boolean.
+     */
     private boolean canParseContactIndexCommand(String input, int size) {
         String[] command = input.split(" ");
         if (command.length != 3) {
@@ -348,6 +405,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if user input is formatted correctly as a Contact Delete command.
+     *
+     * @param input User input.
+     * @param size Size of contact list.
+     * @return Boolean.
+     */
     public boolean canParseContactDeleteCommand(String input, int size) {
         boolean isValidCommand = false;
         if (parseCommand(input).equals("contact delete")) {
@@ -357,6 +421,13 @@ public class Parser {
         return isValidCommand && hasValidIndex;
     }
 
+    /**
+     * Parses the user input and returns the index of the contact to be deleted.
+     *
+     * @param input User input.
+     * @param size Size of contact list.
+     * @return Index of contact to be deleted.
+     */
     public int parseContactDeleteCommand(String input, int size) {
         String[] command = input.split(" ");
         int index = Integer.valueOf(command[2]) - 1;

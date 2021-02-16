@@ -11,18 +11,6 @@ public class Contact {
         this.address = address;
     }
 
-    public Contact(String name, int number) {
-        this.name = name;
-        this.number = number;
-        this.address = null;
-    }
-
-    public Contact(String name, String address) {
-        this.name = name;
-        this.number = 0;
-        this.address = address;
-    }
-
     public Contact changeName(String newName) {
         return new Contact(newName, number, address);
     }
@@ -35,6 +23,11 @@ public class Contact {
         return new Contact(name, number, newAddress);
     }
 
+    /**
+     * Returns the contact in a format that can be saved by the Storage.
+     *
+     * @return String of contact in the format to be saved.
+     */
     public String formatToSave() {
         return String.format("/name %s /number %d /address %s", name, number, address);
     }

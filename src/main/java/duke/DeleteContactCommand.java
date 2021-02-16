@@ -8,6 +8,13 @@ public class DeleteContactCommand extends Command {
         this.contactList = contactList;
     }
 
+    /**
+     * Checks if the user input is formatted into a correct Delete Contact command.
+     * If it is, it removes the contact and prints the Delete Contact message.
+     * Otherwise, it prints the exception faced.
+     *
+     * @return Message to print.
+     */
     private String delete() {
         try {
             int size = contactList.getSize();
@@ -24,6 +31,11 @@ public class DeleteContactCommand extends Command {
         }
     }
 
+    /**
+     * Executes the delete command.
+     *
+     * @return Message of command.
+     */
     @Override
     public String execute() {
         return delete();

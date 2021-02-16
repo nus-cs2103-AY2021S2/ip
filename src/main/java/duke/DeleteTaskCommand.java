@@ -10,6 +10,8 @@ public class DeleteTaskCommand extends Command {
      * Checks if the user input is formatted into a correct Delete command.
      * If it is, it removes the task and prints the Delete message.
      * Otherwise, it prints the exception faced.
+     *
+     * @return Message of remove task command.
      */
     private String removeTask() {
         try {
@@ -28,6 +30,8 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Executes the command to remove task.
+     *
+     * @return Message of command.
      */
     @Override
     public String execute() {
