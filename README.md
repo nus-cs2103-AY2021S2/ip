@@ -1,5 +1,7 @@
 # User Guide
 
+![PercyUi](https://github.com/colintkn/ip/blob/master/docs/Ui.png?raw=true)
+
 ## Features 
 Percy chat bot is a task manager. It allows users to add, delete, find tasks. 
 ### 1. `help` - Exits the application 
