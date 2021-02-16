@@ -1,6 +1,6 @@
 # User Guide
 
-Duke is the go-to chatbot which helps to manage and organize your task efficiently. Implemented with different avatars and a simple user interface, you will be able to nagivate through it without fuss.
+Duke is the go-to chat-bot which helps to manage and organize your task efficiently. Implemented with different avatars and a simple user interface, you will be able to nagivate through it without fuss.
 
 ## Table Of Content
 
@@ -28,7 +28,7 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 	** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
 	
 4. After starting the application, you should see the GUI as shown below:
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Ui.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/Ui.png)
 
 
 
@@ -37,8 +37,9 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 ### Add a task :  `todo`, `deadline`, `event`
 
 There are three different tasks, namely todo, event and deadline. 
-Different commands are used to faciliate the adding of different tasks to Duke as seen below.
-Commands are case insenstive so do ensure that commands are keyed in correctly without additional space and in lower alphabets. 
+The different commands used helps to facilitate the adding of different tasks to Duke as seen below.
+Note: * Commands are case-insensitive. 
+      * The program only accept commands in lower alphabets. 
 
 #### `todo`
 Todo command add a todo task which requires task description and no other field as input.
@@ -51,18 +52,17 @@ Examples:
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/addTodoTask.PNG)
 
 #### `deadline`
-Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
-Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
 
+Deadline command add a deadline task which requires task description, due date and due time of the task. 
+Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
 Examples:
-* `deadline return pen /by 03/05/2021 1800`
+* `deadline submit proposal /by 03/05/2021 1800`
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/addDeadlineTask.PNG)
 
 #### `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
 Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
-
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
 
@@ -98,12 +98,12 @@ Format: `done index_of_task'
 
 Example:
 
-Assume that we still have 3 task, 
+Assume that we still have 3 tasks, 
 * `done 1`: will mark the first task on the list as completed 
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/markAsDone.PNG)
 
-### Find specific task : `find`
+### Find a specific task : `find`
 
 Show all tasks that matches or contain keywords. 
 
