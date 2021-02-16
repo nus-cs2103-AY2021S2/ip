@@ -1,9 +1,10 @@
 # User Guide
 
 Welcome to Apollo's user guide.
-                           
+                             
+__________________________________________________________
 
-###What is Apollo?
+##What is Apollo?
 
 Apollo is a desktop app for managing todos, deadlines and events, 
 optimised for use via the **command line interface (CLI)**. If you 
@@ -11,16 +12,18 @@ can type fast, Apollo can perform your tasks management faster than
 traditional GUI apps.
                   
 ![Screenshot of Apollo](Ui.png)
-               
-          
 
+__________________________________________________________
+               
 ##Contents
 - Quick Start
 - Features
 - Usage
 - FAQ
 - Command Summary
-     
+            
+__________________________________________________________
+
 ## Quick Start
 1. Ensure you have `Java 11` or above installed in your Computer.
 
@@ -33,7 +36,8 @@ traditional GUI apps.
 5. Type the command in the command box and press Enter to execute it. 
 
 6. Refer to `Features` below for details on available commands.
-
+        
+__________________________________________________________
 
 ## Features 
 
@@ -62,6 +66,8 @@ Tasks are saved automatically whenever you say "bye" to Apollo.
 The saved data (/data/ApolloTaskData.txt) is saved in the same
 folder as your Java executable. If no previous saves were found,
 a new file would be created for you automatically.
+
+__________________________________________________________          
 
 ## Usage
 ### Adding Todos
@@ -191,6 +197,8 @@ All tasks have been listed.
 **Expected outcome:**
 
 Apollo has been exited and data has been saved.
+     
+__________________________________________________________
 
 ## FAQ
 
@@ -205,6 +213,8 @@ Then, start Apollo.
 >**A:** This was done intentionally to allow any unintended changes
 to be easily undone as well as to ensure that only intended changes
 > are saved.
+         
+__________________________________________________________
 
 ## Command Summary
 Command | Format example
