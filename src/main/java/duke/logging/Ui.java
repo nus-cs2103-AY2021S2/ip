@@ -10,31 +10,6 @@ import duke.model.Task;
  */
 public class Ui {
     /**
-     * A welcome message from Duke chat bot.
-     * @param tasks    A list of tasks in Duke chat bot.
-     */
-    public void showWelcome(TaskList tasks) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("Hello from\n" + logo);
-        tasks.list();
-        System.out.println("\n     What can I do for you?");
-        System.out.println("     _______________________________________\n");
-    }
-
-    /**
-     * Print a straight line.
-     * @return       A straight line.
-     */
-    public String printLine() {
-        return "     _______________________________________";
-    }
-
-    /**
      * An add command interaction which complements with the add command.
      * @param task    The task to be added to the list.
      * @param tasks   The list of tasks in Duke chat bot.

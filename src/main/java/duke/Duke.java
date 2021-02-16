@@ -37,16 +37,12 @@ public class Duke {
      */
     public String run(String input) {
         try {
-            String message = ui.printLine();
             Command command = Parser.parse(input);
-            message += ("\n" + command.execute(tasks, ui, storage));
-            message += ("\n" + ui.printLine());
+            String message = (command.execute(tasks, ui, storage));
             System.out.println(message); // For CLI
             return message;
         } catch (Exception e) {
             return e.getMessage();
-        } finally {
-            ui.printLine();
         }
     }
 
