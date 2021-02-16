@@ -1,7 +1,7 @@
 package duke.exception;
 
 public class InvalidCommandException extends Exception {
-    private String badCommand;
+    private final String badCommand;
 
     /**
      * Create Exception to indicate an invalid command

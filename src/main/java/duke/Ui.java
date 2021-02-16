@@ -15,7 +15,7 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String SEPARATOR = "------------------\n";
-    private StringBuilder builder;
+    private final StringBuilder builder;
 
     /**
      * Ui constructor

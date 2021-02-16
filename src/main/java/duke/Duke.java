@@ -12,10 +12,10 @@ import duke.exception.InvalidCommandException;
 public class Duke {
     public static final String FILE_DIR = "data";
     public static final String FILE_NAME = "duke.txt";
-    private Ui ui;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList taskList;
     private boolean isTerminated;
-    private Storage storage;
 
     /**
      * Constructor for Duke
