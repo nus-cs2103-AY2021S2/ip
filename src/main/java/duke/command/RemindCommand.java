@@ -1,12 +1,5 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +8,14 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class RemindCommand extends Command{
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
+public class RemindCommand extends Command {
     private static final int DEFAULT_NUM_DAYS = 3;
     private final int numDays;
 
@@ -29,7 +29,7 @@ public class RemindCommand extends Command{
         this.numDays = numDays;
     }
 
-    private boolean isUpcoming(Task task){
+    boolean isUpcoming(Task task){
         boolean validTaskType = task.getTaskType().equals("DEADLINE") ||
                 task.getTaskType().equals("EVENT");
 

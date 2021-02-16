@@ -1,20 +1,21 @@
 package duke;
 
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Deadline;
 
-import java.time.LocalDateTime;
-import java.util.Scanner;
-import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Storage class to save information to hard disk.
@@ -52,28 +53,28 @@ public class Storage {
         for (Task task : taskList) {
             String toBeSaved = "";
             switch (task.getTaskType()) {
-                case "DEADLINE":
-                    toBeSaved = String.format("%s|%s|%s|%s",
-                            task.getTaskType(),
-                            task.getIsDone(),
-                            task.getTaskDescription(),
-                            ((Deadline) task).getEndTime());
-                    break;
-                case "TODO":
-                    toBeSaved = String.format("%s|%s|%s",
-                            task.getTaskType(),
-                            task.getIsDone(),
-                            task.getTaskDescription());
-                    break;
-                case "EVENT":
-                    toBeSaved = String.format("%s|%s|%s|%s",
-                            task.getTaskType(),
-                            task.getIsDone(),
-                            task.getTaskDescription(),
-                            ((Event) task).getEventTime());
-                    break;
-                default:
-                    continue;
+            case "DEADLINE":
+                toBeSaved = String.format("%s|%s|%s|%s",
+                        task.getTaskType(),
+                        task.getIsDone(),
+                        task.getTaskDescription(), (
+                                (Deadline) task).getEndTime());
+                break;
+            case "TODO":
+                toBeSaved = String.format("%s|%s|%s",
+                        task.getTaskType(),
+                        task.getIsDone(),
+                        task.getTaskDescription());
+                break;
+            case "EVENT":
+                toBeSaved = String.format("%s|%s|%s|%s",
+                        task.getTaskType(),
+                        task.getIsDone(),
+                        task.getTaskDescription(), (
+                                (Event) task).getEventTime());
+                break;
+            default:
+                continue;
             }
             file.write(toBeSaved + "\n");
         }
@@ -91,7 +92,11 @@ public class Storage {
         saveData(taskList.getTaskList());
     }
 
-
+    /**
+     * Load data from hard disk
+     * @return list of tasks
+     * @throws IOException
+     */
     public List<Task> loadData() throws IOException {
         // checks to see if a file is already supposed to be there
         Scanner sc = new Scanner(filePath.toFile());
@@ -104,17 +109,17 @@ public class Storage {
             String taskDescription = storedTask[2];
             Task taskToBeAdded;
             switch (taskType) {
-                case "DEADLINE":
-                    taskToBeAdded = new Deadline(taskDescription, LocalDateTime.parse(storedTask[3]), isDone);
-                    break;
-                case "TODO":
-                    taskToBeAdded = new ToDo(taskDescription, isDone);
-                    break;
-                case "EVENT":
-                    taskToBeAdded = new Event(taskDescription, LocalDateTime.parse(storedTask[3]), isDone);
-                    break;
-                default:
-                    continue;
+            case "DEADLINE":
+                taskToBeAdded = new Deadline(taskDescription, LocalDateTime.parse(storedTask[3]), isDone);
+                break;
+            case "TODO":
+                taskToBeAdded = new ToDo(taskDescription, isDone);
+                break;
+            case "EVENT":
+                taskToBeAdded = new Event(taskDescription, LocalDateTime.parse(storedTask[3]), isDone);
+                break;
+            default:
+                continue;
             }
             taskList.add(taskToBeAdded);
         }

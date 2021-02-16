@@ -1,11 +1,19 @@
 package duke;
 
-import duke.command.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.RemindCommand;
+import duke.command.TaskCommand;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeToDoException;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 
 public class Parser {
@@ -17,7 +25,11 @@ public class Parser {
      * @return Different Command depending on input
      */
     public static Command parseCommand(String userInput) throws DukeToDoException, DukeCommandException {
-        String[] splitInput = userInput.split(" ", 2);
+        if (userInput.equals("")) {
+            throw new DukeCommandException("Hi Human. Please enter a command");
+        }
+
+        String[] splitInput = userInput.trim().split(" ", 2);
         String command = splitInput[0];
 
         if (command.equals("bye")) {
@@ -30,9 +42,9 @@ public class Parser {
             return parseDelete(splitInput[1]);
         } else if (command.equals("find")) {
             return parseFind(splitInput[1]);
-        }else if (command.equals("remind")) {
+        } else if (command.equals("remind")) {
             return parseRemind(userInput);
-        }else if (isValidTaskCommand(command)) {
+        } else if (isValidTaskCommand(command)) {
             return parseTask(userInput);
         } else {
             throw new DukeCommandException("Sorry Human. I do not comprehend.");
@@ -110,7 +122,7 @@ public class Parser {
 
         switch (command) {
         case "todo":
-            if(splitInput.length == 1) {
+            if (splitInput.length == 1) {
                 throw new DukeToDoException("The description of a todo cannot be empty.");
             }
             String taskDescription = splitInput[1].trim();
@@ -119,14 +131,14 @@ public class Parser {
         case "deadline":
             String[] taskDetails = splitInput[1].split("/by");
             taskDescription = taskDetails[0].trim();
-            LocalDateTime endTime =  LocalDateTime.parse(taskDetails[1].trim(),
+            LocalDateTime endTime = LocalDateTime.parse(taskDetails[1].trim(),
                     dateTimeFormatter);
             return new TaskCommand(command, taskDescription, endTime);
 
         case "event":
             taskDetails = splitInput[1].split("/at");
             taskDescription = taskDetails[0].trim();
-            LocalDateTime eventTime =  LocalDateTime.parse(taskDetails[1].trim(),
+            LocalDateTime eventTime = LocalDateTime.parse(taskDetails[1].trim(),
                     dateTimeFormatter);
             return new TaskCommand(command, taskDescription, eventTime);
 

@@ -44,16 +44,17 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "bob"
     archiveClassifier = null
 }
 
 checkstyle {
     toolVersion = '8.29'
+    sourceSets = []
 }
 
 run{
