@@ -5,6 +5,10 @@ public class Duke {
     private Ui ui;
     private String filePath;
 
+    /**
+     * Construct a Duke object.
+     * @param filePath File Path of data storage in hard disk.
+     */
     public Duke(String filePath) {
         this.filePath = filePath;
         this.ui = new Ui();

@@ -9,15 +9,15 @@ public class Ui {
         return result.getFeedbackToUser();
     }
 
-    public String showGoodbyeMessage(){
+    public String showGoodbyeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String showLoadingError(){
+    public String showLoadingError() {
         return "OOPS!! Duke fails to load, please restart!";
     }
 
-    public String showErrorMessage(String message){
+    public String showErrorMessage(String message) {
         return message;
     }
 }

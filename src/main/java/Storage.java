@@ -12,7 +12,7 @@ public class Storage {
 
     private String filePath;
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -34,7 +34,7 @@ public class Storage {
                 tasks.add(newTask);
             }
             return tasks;
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new DukeException("OOPS!! File is not found.");
         }
     }
@@ -55,7 +55,7 @@ public class Storage {
                 writer.write(t.toString() + System.lineSeparator());
             }
             writer.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new DukeException("OOPS!! Task list failed to update.");
         }
     }
@@ -76,25 +76,27 @@ public class Storage {
             newTask = new ToDo(description, isCompleted);
             break;
         case "D":
-            time = taskDetails[3].replace("am", "AM").replace("pm","PM");
+            time = taskDetails[3].replace("am", "AM").replace("pm", "PM");
             // re-format time from "MMM d yyyy hh:mm a" to "yyyy-m-d hh:mm"
             dateTime = LocalDateTime.parse(time, inputFormat);
             time = dateTime.format(outputFormat).replace("T", " ");
             newTask = new Deadline(description, time, isCompleted);
             break;
         case "E":
-            time = taskDetails[3].replace("am", "AM").replace("pm","PM");
+            time = taskDetails[3].replace("am", "AM").replace("pm", "PM");
             // re-format time from "MMM d yyyy hh:mm a" to "yyyy-m-d hh:mm"
             dateTime = LocalDateTime.parse(time, inputFormat);
             time = dateTime.format(outputFormat).replace("T", " ");
             newTask = new Event(description, time, isCompleted);
             break;
+        default:
+            newTask = new Task("");
         }
         return newTask;
     }
 
     private boolean isDone(String icon) {
-        if (icon.equals("\u2713")){
+        if (icon.equals("\u2713")) {
             return true;
         }
         return false;

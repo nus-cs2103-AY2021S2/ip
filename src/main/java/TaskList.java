@@ -50,7 +50,7 @@ public class TaskList {
         try {
             Task curTask = this.taskList.remove(taskNumber - 1);
             return curTask;
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!! The task number is invalid.");
         }
     }
@@ -66,7 +66,7 @@ public class TaskList {
             Task curTask = this.taskList.get(taskNumber - 1);
             curTask.markAsDone();
             return curTask;
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!! The task number is invalid.");
         }
     }
@@ -82,11 +82,10 @@ public class TaskList {
         // loop through every task in the list
         for (Task t: this.taskList) {
             // add task to list if its description contains the keyword
-            if (t.getDescription().contains(keyword)){
+            if (t.getDescription().contains(keyword)) {
                 matchingTasks.add(t);
             }
         }
-//        int totalTask = matchingTasks.size();
         return new TaskList(matchingTasks);
     }
 

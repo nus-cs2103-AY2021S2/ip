@@ -15,7 +15,7 @@ public class ListCommand extends Command {
         for (int i = 1; i < len + 1; i++) {
             Task curTask = myTasks.get(i - 1);
             String toAdd = "\n" + i + ". " + curTask.toString();
-            responseToUser +=  toAdd;
+            responseToUser += toAdd;
         }
         successMessage = responseToUser;
         return new CommandResult(successMessage);

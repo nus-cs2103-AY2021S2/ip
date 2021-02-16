@@ -6,7 +6,7 @@ public class FindCommand extends Command {
     private String successMessage;
 
     public FindCommand (String keyword) {
-            this.keyword = keyword;
+        this.keyword = keyword;
     }
 
     @Override

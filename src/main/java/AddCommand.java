@@ -4,6 +4,11 @@ public class AddCommand extends Command {
     private Task taskToAdd;
     private String successMessage;
 
+    /**
+     * Construct an AddCommand.
+     * @param operator Type of task to be added.
+     * @param taskDetail Details of task to be added.
+     */
     public AddCommand(String operator, String... taskDetail) {
         String description;
         String time;
@@ -27,6 +32,8 @@ public class AddCommand extends Command {
             description = taskDetail[0];
             time = taskDetail[1];
             taskToAdd = new Event(description, time);
+        default:
+            taskToAdd = new Task("");
         }
     }
 

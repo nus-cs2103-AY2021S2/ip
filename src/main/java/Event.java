@@ -1,11 +1,10 @@
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class Event extends Task {
     private String type = "E";
 
     public Event(String description, String at) {
-       this(description, at, false);
+        this(description, at, false);
     }
 
     public Event(String description, String at, boolean isDone) {

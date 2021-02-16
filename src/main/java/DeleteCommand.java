@@ -1,8 +1,8 @@
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
-    private int taskNumberToDelete;
-    protected String successMessage;
     protected String errorMessage;
+    protected String successMessage;
+    private int taskNumberToDelete;
 
     public DeleteCommand(int taskNumber) {
         this.taskNumberToDelete = taskNumber;

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class Parser {
-    private ArrayList<String> validOperators;
     private static final String timeFormat = "yyyy-M-d H:mm";
+    private ArrayList<String> validOperators;
 
-    public Parser(){
+    public Parser() {
         this.validOperators = initialiseOperators();
     }
 
@@ -24,7 +24,7 @@ public class Parser {
         operators.add("delete");
         operators.add("find");
         operators.add("schedule");
-        return operators ;
+        return operators;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Parser {
 
         // split command text by its first space into 2 parts
         String[] taskDetail = userInput.split(" ", 2);
-        Command command = new Command();
+        Command command;
 
         // parse command details according to their operator
         switch (operator) {
@@ -76,6 +76,8 @@ public class Parser {
         case "schedule":
             String targetDate = parseSchedule(taskDetail);
             command = new ScheduleCommand(targetDate);
+        default:
+            command = new Command();
         }
         return command;
     }
@@ -98,8 +100,7 @@ public class Parser {
         return operator;
     }
 
-
-    private boolean isValidOperator(String operator){
+    private boolean isValidOperator(String operator) {
         return validOperators.contains(operator.toLowerCase());
     }
 
@@ -158,9 +159,9 @@ public class Parser {
     private String parseAddToDo(String[] taskDetail) throws DukeException {
         // parse description of ToDo
         assert taskDetail.length > 0;
-        if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
+        if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-        } else{
+        } else {
             String description = taskDetail[1];
             return description;
         }
@@ -176,9 +177,9 @@ public class Parser {
     private String[] parseAddDeadline(String[] taskDetail) throws DukeException {
         // parse details of Deadline
         assert taskDetail.length > 0;
-        if(taskDetail.length == 1 || taskDetail[1].isBlank()) {
+        if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-        } else{
+        } else {
             // split details to description and time
             String[] details = taskDetail[1].split(" /by ", 2);
             if (details.length == 1 || !isValidTime(details[1])) {
@@ -226,7 +227,7 @@ public class Parser {
         assert taskDetail.length > 0;
         if (taskDetail.length == 1 || taskDetail[1].isBlank()) {
             throw new DukeException("OOPS!!! Keyword cannot be empty.");
-        } else{
+        } else {
             String keyword = taskDetail[1];
             return keyword;
         }
@@ -252,7 +253,7 @@ public class Parser {
             // convert time from String to LocalDateTime
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm", Locale.ENGLISH);
             inputFormat.parse(time);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             return false;
         }
         return true;
@@ -262,7 +263,7 @@ public class Parser {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
             LocalDate dt = LocalDate.parse(time, formatter);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             return false;
         }
         return true;

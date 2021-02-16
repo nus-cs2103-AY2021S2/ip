@@ -1,12 +1,4 @@
-D | ✘ | read | Oct 25 2019 07:00 pm
-D | ✘ | read | Jan 1 2020 10:00 am
-T | ✘ | submit homework
-D | ✓ | notes | Jan 1 2021 10:00 am
-D | ✓ | homework | Jan 10 2021 10:00 am
-E | ✘ | meeting | Oct 11 2021 11:00 am
-E | ✓ | meeting | Jan 1 2021 01:00 am
-D | ✘ | hw1 | Feb 4 2021 12:00 pm
-D | ✘ | hw2 | Feb 18 2021 05:00 pm
+D | ✓ | hw1 | Feb 4 2021 12:00 pm
 E | ✘ | project meeting | Feb 18 2021 08:00 pm
 T | ✘ | shopping
-D | ✘ | vocab quiz | Feb 18 2021 02:00 pm
+D | ✘ | quiz | Feb 18 2021 02:00 pm

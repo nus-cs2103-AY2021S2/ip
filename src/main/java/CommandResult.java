@@ -7,7 +7,7 @@ public class CommandResult {
         this.feedbackToUser = feedbackToUser;
     }
 
-    public String getFeedbackToUser(){
+    public String getFeedbackToUser() {
         return this.feedbackToUser;
     }
 }

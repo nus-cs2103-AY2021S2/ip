@@ -1,5 +1,4 @@
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class Deadline extends Task {
     private String type = "D";

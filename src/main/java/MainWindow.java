@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialize the main window, with a greeting message from Duke. The main window contains a scroll bar and dialog boxes.
+     */
     @FXML
     public void initialize() {
         String greetingMessage = "Hello! I'm Duke\n" + "What can I do for you?";
