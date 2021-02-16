@@ -19,6 +19,7 @@ public class Main extends Application {
             assert ap != null : "AnchorPane is Null.";
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Mike the Hawk");
             fxmlLoader.<MainWindow>getController().setMike(mike);
             stage.show();
         } catch (IOException e) {
