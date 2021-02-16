@@ -26,6 +26,11 @@ public class Deadlines extends Task{
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    @Override
+    public void editTask(String newDescription) {
+        super.editTask(newDescription);
+    }
+
     /**
      * Returns String of error message for empty description
      * @return String of error message for empty description

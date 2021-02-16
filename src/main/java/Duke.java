@@ -42,6 +42,11 @@ public class Duke {
         case "delete":
             taskIndex = Integer.parseInt(result.get(1));
             return taskList.deleteTask(taskIndex);
+        case "edit":
+            taskIndex = Integer.parseInt(result.get(1));
+            description = result.get(2);
+//            date = result.get(3);
+            return taskList.editTask(taskIndex, description);
         case "todo":
             description = result.get(1);
             return taskList.addTodo(description);

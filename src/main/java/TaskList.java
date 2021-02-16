@@ -67,6 +67,19 @@ public class TaskList {
         return response;
     }
 
+    public String editTask(int taskIndex, String editedDesc) throws IOException {
+        Task task = tasks.get(taskIndex);
+
+        String before = task.formatData();
+
+        task.editTask(editedDesc);
+        String after = tasks.get(taskIndex).formatData();
+
+        storage.modifyFile(before, after);
+
+        return ui.printEdit(tasks, taskIndex);
+    }
+
     /**
      * Creates ToDos object to add to task list and file data.
      * If description is empty, will print prompt to tell user.

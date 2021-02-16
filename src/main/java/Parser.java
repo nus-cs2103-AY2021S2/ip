@@ -38,6 +38,15 @@ public class Parser {
                     taskIndex = Integer.toString(Integer.parseInt(details) - 1);
                     result.add(taskIndex);
                     break;
+                case "edit":
+                    String[] arrOfEdit = details.split(" ", 2);
+                    taskIndex = Integer.toString(Integer.parseInt(arrOfEdit[0]) - 1);
+                    result.add(taskIndex);
+
+                    description = arrOfEdit[1];
+                    result.add(description);
+
+                    break;
                 case "todo":
                 case "find":
                     description = details;

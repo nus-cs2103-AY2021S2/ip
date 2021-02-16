@@ -35,6 +35,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void editTask(String newDescription) {
+        this.description = newDescription;
+    }
+
     /**
      * Returns String of error message for empty description
      *

@@ -21,6 +21,11 @@ public class ToDos extends Task {
         return "[T]" + super.toString();
     }
 
+    @Override
+    public void editTask(String newDescription) {
+        super.editTask(newDescription);
+    }
+
     /**
      * Returns String of error message for empty description
      *
