@@ -29,7 +29,7 @@ items off even before having them on the list, you can mark tasks as `/done` imm
 as well. How cool is that?
 
 You can leave the app by clicking on the close button, but of course, a `bye` command
-with the exact same functionality is supplied for those lazy to use a mouse.
+with the exact same functionality is supplied for those lazy - to use a mouse.
 
 ## Command syntax
 
@@ -123,12 +123,12 @@ Expected outcome:
 
 1. Click on the boxes containing your past inputs to copy them directly
    into the input box.
-1. Input is insensitive to extraneous whitespaces.
+1. Input is insensitive to extraneous duplicate whitespaces.
 1. The `TIME` format takes in a relatively larger variety of datetime formats,
    including `2021-01-13 13:40` (ISO-like format), `Jan 13` (American-style),
    `13 Jan` (British-style), `13/1/2021` (old school), etc.
    Description of exact parsing rules is in the Java documentation.
 1. Options are prefixed with the `/` symbol. But this program also knows to parse dates containing `/`.
 1. Text boxes are especially allowed to be highlightable, in the off chance you want to copy it somewhere else...
-1. ...and exercise an undocumented `delete /all` nuclear option, but you'll never want to delete all the tasks
-   on this cute little app, right?
+1. ...and exercise an undocumented `delete /all` nuclear option, but you'll never want to stop using
+   this cute little app, won't you?
