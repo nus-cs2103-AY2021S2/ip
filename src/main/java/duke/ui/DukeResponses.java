@@ -34,6 +34,7 @@ public class DukeResponses {
      * @return error message
      */
     public String showError(DukeException e) {
+        assert e != null : "Error should not be null";
         return e.getMessage();
     }
 
@@ -61,6 +62,7 @@ public class DukeResponses {
      * @return add task success message
      */
     public String showAddTask(Task task, TaskList tasks) {
+        assert task != null : "task should not be null";
         int numOfTasks = tasks.getSize();
         return"Got it. I've added this task:\n" + "  " + task + "\n" + "Now you have " +
                     numOfTasks + (numOfTasks <= 1 ? " task" : " tasks") + " in the list.";
@@ -73,6 +75,7 @@ public class DukeResponses {
      * @return delete task success message
      */
     public String showDeleteTask(Task task, TaskList tasks) {
+        assert task != null : "task should not be null";
         int numOfTasks = tasks.getSize();
         return "Noted. I've removed this task:\n" + "  " + task + "\n" + "Now you have " + numOfTasks +
                     " tasks in the list.";
@@ -85,6 +88,7 @@ public class DukeResponses {
      * @return complete task success message
      */
     public String showCompleteTask(Task task, TaskList tasks) {
+        assert task != null : "task should not be null";
         return "Nice! I've marked this task as done:\n" + "  " + task;
     }
 
