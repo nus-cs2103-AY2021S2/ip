@@ -44,12 +44,13 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Main"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "MetaDuke"
     archiveClassifier = null
+    mergeServiceFiles()
 }
 
 checkstyle {
