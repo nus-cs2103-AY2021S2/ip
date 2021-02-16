@@ -61,9 +61,12 @@ public class TestListCommand {
     @Test
     public void testResponse() {
         String expectedResponse = "Here are the task(s) in your list:\n"
-                + "1.[T][ ] CS2103 Quiz 1\n"
-                + "2.[D][ ] BT4013 Quiz 2 (by: 2021-02-06 23:30)\n"
-                + "3.[E][ ] CS2103 Quiz 3 (at: 2021-02-06 23:30)\n";
+                + "\n"
+                + "Status   | Description          | Time            \n"
+                + "--------------------------------------------------\n"
+                + "1.[T][ ] | CS2103 Quiz 1        | \n"
+                + "2.[D][ ] | BT4013 Quiz 2        | 2021-02-06 23:30\n"
+                + "3.[E][ ] | CS2103 Quiz 3        | 2021-02-06 23:30\n";
         assertEquals(expectedResponse, this.command.getResponse(this.tasks));
 
         String expectedEmptyResponse = "You have no tasks in your list yet :)";

@@ -61,8 +61,11 @@ public class TestFindCommand {
     @Test
     public void testResponse() {
         String expectedResponse = "Here are the matching tasks in your list:\n"
-                + "1.[T][ ] CS2103 Quiz 1\n"
-                + "2.[E][ ] CS2103 Quiz 3 (at: 2021-02-06 23:30)\n";
+                + "\n"
+                + "Status   | Description          | Time            \n"
+                + "--------------------------------------------------\n"
+                + "1.[T][ ] | CS2103 Quiz 1        | \n"
+                + "2.[E][ ] | CS2103 Quiz 3        | 2021-02-06 23:30\n";
         assertEquals(expectedResponse, this.command.getResponse(this.tasks));
 
         String expectedEmptyResponse = "There are no tasks matching the string 'CS' in your list :O";

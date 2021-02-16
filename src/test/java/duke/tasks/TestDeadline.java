@@ -64,23 +64,6 @@ public class TestDeadline {
     }
 
     /**
-     * Tests that the task's status string is output correctly.
-     */
-    @Test
-    public void testStatusString() {
-        assertEquals(
-                "[D][ ] " + this.description + " (by: " + this.dateTimeString + ")",
-                this.deadline.getStatusString()
-        );
-
-        this.deadline.markAsDone();
-        assertEquals(
-                "[D][X] " + this.description + " (by: " + this.dateTimeString + ")",
-                this.deadline.getStatusString()
-        );
-    }
-
-    /**
      * Tests that the task is correctly flagged out if overdue.
      */
     @Test

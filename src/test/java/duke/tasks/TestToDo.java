@@ -38,14 +38,4 @@ public class TestToDo {
     public void testDescription() {
         assertEquals(this.description, this.toDo.getDescription());
     }
-
-    /**
-     * Tests that the task's status string is output correctly.
-     */
-    @Test
-    public void testStatusString() {
-        assertEquals("[T][ ] " + this.description, this.toDo.getStatusString());
-        this.toDo.markAsDone();
-        assertEquals("[T][X] " + this.description, this.toDo.getStatusString());
-    }
 }

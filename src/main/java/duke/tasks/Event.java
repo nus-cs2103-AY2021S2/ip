@@ -39,15 +39,6 @@ public class Event extends Task {
     }
 
     /**
-     * Retrieves the event task's description and status.
-     *
-     * @return A formatted string displaying the event task's description and status.
-     */
-    public String getStatusString() {
-        return "[E]" + super.getStatusString() + " (at: " + this.getAtDateTimeString() + ")";
-    }
-
-    /**
      * Determines if the <code>Event</code> is overdue.
      *
      * @return True if the deadline is later than the current time, and false otherwise.
@@ -56,12 +47,11 @@ public class Event extends Task {
         if (this.isDone()) {
             return false;
         }
-
         return LocalDateTime.now().isAfter(this.getAtDateTime());
     }
 
     /**
-     * Determines if the <code>Event</code> is urgent.
+     * Determines if the <code>Event</code> is soon.
      *
      * @param urgencyInDays Number of days to use when determining if the <code>Deadline</code>
      *                      is urgent.
@@ -71,7 +61,6 @@ public class Event extends Task {
         if (this.isDone()) {
             return false;
         }
-
         LocalDateTime urgencyMark = this.getAtDateTime().minusDays(urgencyInDays);
         return LocalDateTime.now().isAfter(urgencyMark) && !this.isOverdue();
     }

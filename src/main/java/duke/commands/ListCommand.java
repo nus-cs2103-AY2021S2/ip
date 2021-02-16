@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
+import duke.ui.TaskStringFormatter;
 
 /**
  * Handles the logic of listing the tasks in the to-do list.
@@ -25,7 +26,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Creates a response to display the existing tasks to the users. The output will
+     * Creates a response to display the existing tasks, if any, to the users. The output will
      * take the form of a multi-line string, with each row displaying one task with its
      * index, description and status.
      *
@@ -36,7 +37,9 @@ public class ListCommand extends Command {
         if (tasks.getSize() == 0) {
             return "You have no tasks in your list yet :)";
         } else {
-            return "Here are the task(s) in your list:\n" + tasks.getTaskListAsString();
+            return "Here are the task(s) in your list:\n"
+                    + "\n"
+                    + TaskStringFormatter.getTaskTable(tasks);
         }
     }
 }

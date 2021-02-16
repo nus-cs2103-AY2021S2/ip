@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.ui.TaskStringFormatter;
 
 /**
  * Handles the logic of adding a <code>Task</code> to the to-do list.
@@ -44,7 +45,9 @@ public class AddTaskCommand extends Command {
      */
     public String getResponse(TaskList tasks) {
         return "Got it. I've added this task:\n"
-                + this.task.getStatusString() + "\n"
+                + "\n"
+                + TaskStringFormatter.getTaskTable(this.task) + "\n"
+                + "\n"
                 + "Now you have " + tasks.getSize() + " task(s) in the list.";
     }
 }

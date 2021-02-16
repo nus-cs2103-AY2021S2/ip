@@ -1,9 +1,9 @@
 package duke.tasks;
 
 /**
- * Represents a Task.
+ * An abstract class representing a general "task".
  */
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -33,19 +33,6 @@ public class Task {
         return this.isDone;
     }
 
-    private String getStatusIcon() {
-        return this.isDone ? "X" : " ";
-    }
-
-    /**
-     * Retrieves the Task's description and status.
-     *
-     * @return A formatted string displaying the Task's description and status.
-     */
-    public String getStatusString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
-    }
-
     /**
      * Retrieves the Task's description.
      *
@@ -54,5 +41,4 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
-
 }

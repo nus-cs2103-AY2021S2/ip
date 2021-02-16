@@ -3,6 +3,7 @@ package duke.commands;
 import duke.exceptions.TaskNumberNotExistException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.ui.TaskStringFormatter;
 
 /**
  * Handles the logic of deleting a task from the to-do list.
@@ -59,6 +60,8 @@ public class DeleteCommand extends Command {
             return e.getMessage();
         }
 
-        return "Noted. I've removed this task:\n" + this.deletedTask.getStatusString();
+        return "Noted. I've removed this task:\n"
+                + "\n"
+                + TaskStringFormatter.getTaskTable(this.deletedTask);
     }
 }

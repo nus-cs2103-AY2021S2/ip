@@ -46,15 +46,15 @@ public class HelperFunctions {
         TaskList newTasks = new TaskList();
 
         for (Task task : tasks.getListOfTasks()) {
+            assert (task instanceof ToDo || task instanceof Deadline || task instanceof Event);
+
             Task newTask;
             if (task instanceof ToDo) {
                 newTask = new ToDo(task.getDescription());
             } else if (task instanceof Deadline) {
                 newTask = new Deadline(task.getDescription(), ((Deadline) task).getByDateTime());
-            } else if (task instanceof Event) {
-                newTask = new Event(task.getDescription(), ((Event) task).getAtDateTime());
             } else {
-                newTask = new Task(task.getDescription());
+                newTask = new Event(task.getDescription(), ((Event) task).getAtDateTime());
             }
 
             if (task.isDone()) {

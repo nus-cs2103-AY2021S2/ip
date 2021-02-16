@@ -13,13 +13,4 @@ public class ToDo extends Task {
     public ToDo(String description) {
         super(description);
     }
-
-    /**
-     * Retrieves the to-do task's description and status.
-     *
-     * @return A formatted string displaying the to-do task's description and status.
-     */
-    public String getStatusString() {
-        return "[T]" + super.getStatusString();
-    }
 }

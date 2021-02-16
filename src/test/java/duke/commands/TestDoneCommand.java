@@ -87,7 +87,10 @@ public class TestDoneCommand {
         this.command.execute(this.tasks);
 
         String expectedResponse = "Nice! I've marked this task as done:\n"
-                + "[E][X] CS2103 Quiz 3 (at: 2021-02-06 23:30)";
+                + "\n"
+                + "Status | Description          | Time            \n"
+                + "------------------------------------------------\n"
+                + "[E][X] | CS2103 Quiz 3        | 2021-02-06 23:30";
         assertEquals(expectedResponse, this.command.getResponse(this.tasks));
 
         DoneCommand invalidCommand = new DoneCommand(10);

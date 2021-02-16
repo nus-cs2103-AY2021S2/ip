@@ -60,7 +60,7 @@ public class Parser {
      */
     public static Command parse(String input) {
         // If the input is valid, getExceptionMessage will return null.
-        // If the input is invalid, getExceptionMessage will return an appropriate message to be displayed.
+        // If the input is invalid, getExceptionMessage will return the appropriate message to be displayed.
         String exceptionMessage = getExceptionMessage(input);
         if (exceptionMessage != null) {
             return new InvalidInputCommand(exceptionMessage);

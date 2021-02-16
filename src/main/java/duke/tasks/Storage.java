@@ -107,18 +107,12 @@ public class Storage {
         assert taskType.equals("T") || dateTime != null;
 
         Task newTask;
-        switch (taskType) {
-        case "T":
+        if (taskType.equals("T")) {
             newTask = new ToDo(description);
-            break;
-        case "D":
+        } else if (taskType.equals("D")) {
             newTask = new Deadline(description, dateTime);
-            break;
-        case "E":
+        } else {
             newTask = new Event(description, dateTime);
-            break;
-        default:
-            newTask = null;
         }
 
         if (done.equals("1")) {
@@ -138,6 +132,8 @@ public class Storage {
      * @return The corresponding formatted <code>String</code> containing the input task's details.
      */
     private String convertTaskToSavableString(Task task) {
+        assert (task instanceof ToDo || task instanceof Deadline || task instanceof Event);
+
         String dateTimeString = "";
         String taskType;
 
@@ -147,10 +143,8 @@ public class Storage {
         } else if (task instanceof Event) {
             taskType = "E";
             dateTimeString = ((Event) task).getAtDateTimeString();
-        } else if (task instanceof ToDo) {
-            taskType = "T";
         } else {
-            return "";
+            taskType = "T";
         }
 
         String done = task.isDone() ? "1" : "0";

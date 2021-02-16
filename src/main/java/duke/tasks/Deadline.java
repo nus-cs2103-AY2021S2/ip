@@ -39,15 +39,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Retrieves the deadline task's description and status.
-     *
-     * @return A formatted string displaying the deadline task's description and status.
-     */
-    public String getStatusString() {
-        return "[D]" + super.getStatusString() + " (by: " + this.getByDateTimeString() + ")";
-    }
-
-    /**
      * Determines if the <code>Deadline</code> is overdue.
      *
      * @return True if the deadline is later than the current time, and false otherwise.
@@ -56,7 +47,6 @@ public class Deadline extends Task {
         if (this.isDone()) {
             return false;
         }
-
         return LocalDateTime.now().isAfter(this.getByDateTime());
     }
 
@@ -71,7 +61,6 @@ public class Deadline extends Task {
         if (this.isDone()) {
             return false;
         }
-
         LocalDateTime urgencyMark = this.getByDateTime().minusDays(urgencyInDays);
         return LocalDateTime.now().isAfter(urgencyMark) && !this.isOverdue();
     }

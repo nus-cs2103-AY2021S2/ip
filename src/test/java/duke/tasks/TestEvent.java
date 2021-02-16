@@ -64,23 +64,6 @@ public class TestEvent {
     }
 
     /**
-     * Tests that the task's status string is output correctly.
-     */
-    @Test
-    public void testStatusString() {
-        assertEquals(
-                "[E][ ] " + this.description + " (at: " + this.dateTimeString + ")",
-                this.event.getStatusString()
-        );
-
-        this.event.markAsDone();
-        assertEquals(
-                "[E][X] " + this.description + " (at: " + this.dateTimeString + ")",
-                this.event.getStatusString()
-        );
-    }
-
-    /**
      * Tests that the task is correctly flagged out if overdue.
      */
     @Test

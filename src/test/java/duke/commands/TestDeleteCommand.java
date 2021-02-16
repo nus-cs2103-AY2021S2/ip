@@ -75,7 +75,11 @@ public class TestDeleteCommand {
     @Test
     public void testResponse() {
         this.command.execute(this.tasks);
-        String expectedResponse = "Noted. I've removed this task:\n" + "[T][ ] CS2103 Quiz 1";
+        String expectedResponse = "Noted. I've removed this task:\n"
+                + "\n"
+                + "Status | Description          | Time            \n"
+                + "------------------------------------------------\n"
+                + "[T][ ] | CS2103 Quiz 1        | ";
         assertEquals(expectedResponse, this.command.getResponse(this.tasks));
 
         DeleteCommand invalidCommand = new DeleteCommand(10);

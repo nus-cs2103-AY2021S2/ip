@@ -113,6 +113,6 @@ public class DialogBox extends HBox {
      */
     private int getValidDialogHeight(String text) {
         int numLines = text.split("\n", -1).length;
-        return 50 + 17 * numLines;
+        return 60 + 17 * numLines;
     }
 }

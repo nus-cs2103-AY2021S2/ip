@@ -50,18 +50,6 @@ public class TestTaskList {
     }
 
     /**
-     * Tests whether the <code>String</code> of <code>Task</code> objects are generated correctly.
-     */
-    @Test
-    public void testTaskListString() {
-        String taskListString = this.tasks.getTaskListAsString();
-        String expected = "1.[T][ ] CS2103 Quiz 1\n"
-                + "2.[D][X] BT4013 Quiz 2 (by: 2021-02-06 23:30)\n"
-                + "3.[E][ ] CS2103 Quiz 3 (at: 2021-02-06 23:30)\n";
-        assertEquals(expected, taskListString);
-    }
-
-    /**
      * Tests whether the correct task can be retrieved, by index, from the <code>TaskList</code> collection.
      */
     @Test

@@ -21,8 +21,8 @@ import duke.tasks.TaskList;
 public class TestReminderCommand {
     private final TaskList tasks;
 
-    private final String twoDaysAfterDateTimeString;
-    private final String oneDayBeforeDateTimeString;
+    private final String twoDaysAfter;
+    private final String oneDayBefore;
 
     /**
      * Initializes a <code>ReminderCommand</code> instance and a <code>TaskList</code>
@@ -32,10 +32,10 @@ public class TestReminderCommand {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
 
         LocalDateTime twoDaysAfterDateTime = LocalDateTime.now().plusDays(2);
-        this.twoDaysAfterDateTimeString = twoDaysAfterDateTime.format(formatter);
+        this.twoDaysAfter = twoDaysAfterDateTime.format(formatter);
 
         LocalDateTime oneDayBeforeDateTime = LocalDateTime.now().minusDays(1);
-        this.oneDayBeforeDateTimeString = oneDayBeforeDateTime.format(formatter);
+        this.oneDayBefore = oneDayBeforeDateTime.format(formatter);
 
         Deadline overdueDeadline = new Deadline("CS2103 Quiz 1", oneDayBeforeDateTime);
         Deadline goodDeadline = new Deadline("CS2103 Quiz 2", twoDaysAfterDateTime);
@@ -83,22 +83,33 @@ public class TestReminderCommand {
     public void testResponse() {
         // "Relaxed" because tasks will only be flagged out as urgent if there are less than 1 day left.
         ReminderCommand relaxedCommand = new ReminderCommand(1);
-        String expectedRelaxed = "Oh no... You have 2 overdue task(s):\n"
-                + "1.[D][ ] CS2103 Quiz 1 (by: " + this.oneDayBeforeDateTimeString + ")\n"
-                + "2.[E][ ] CS2103 Quiz 4 (at: " + this.oneDayBeforeDateTimeString + ")\n"
+        String expectedRelaxed = "Uh oh... You have 2 overdue task(s):\n"
+                + "\n"
+                + "Status   | Description          | Time            \n"
+                + "--------------------------------------------------\n"
+                + "1.[D][ ] | CS2103 Quiz 1        | " + this.oneDayBefore + "\n"
+                + "2.[E][ ] | CS2103 Quiz 4        | " + this.oneDayBefore + "\n"
+                + "\n"
                 + "\n"
                 + "You do not have any urgent tasks!\n";
         assertEquals(expectedRelaxed, relaxedCommand.getResponse(this.tasks));
 
         // "Urgent" because tasks will be flagged out as urgent if there are 10 or less days left.
         ReminderCommand urgentCommand = new ReminderCommand(10);
-        String expectedUrgent = "Oh no... You have 2 overdue task(s):\n"
-                + "1.[D][ ] CS2103 Quiz 1 (by: " + this.oneDayBeforeDateTimeString + ")\n"
-                + "2.[E][ ] CS2103 Quiz 4 (at: " + this.oneDayBeforeDateTimeString + ")\n"
+        String expectedUrgent = "Uh oh... You have 2 overdue task(s):\n"
                 + "\n"
-                + "You have 2 task(s) that are due in less than 10 day(s):\n"
-                + "1.[D][ ] CS2103 Quiz 2 (by: " + this.twoDaysAfterDateTimeString + ")\n"
-                + "2.[E][ ] CS2103 Quiz 5 (at: " + this.twoDaysAfterDateTimeString + ")\n";
+                + "Status   | Description          | Time            \n"
+                + "--------------------------------------------------\n"
+                + "1.[D][ ] | CS2103 Quiz 1        | " + this.oneDayBefore + "\n"
+                + "2.[E][ ] | CS2103 Quiz 4        | " + this.oneDayBefore + "\n"
+                + "\n"
+                + "\n"
+                + "You have 2 task(s) due in less than 10 day(s):\n"
+                + "\n"
+                + "Status   | Description          | Time            \n"
+                + "--------------------------------------------------\n"
+                + "1.[D][ ] | CS2103 Quiz 2        | " + this.twoDaysAfter + "\n"
+                + "2.[E][ ] | CS2103 Quiz 5        | " + this.twoDaysAfter + "\n";
         assertEquals(expectedUrgent, urgentCommand.getResponse(this.tasks));
 
         String expectedEmpty = "You do not have any overdue tasks!\n" + "\n" + "You do not have any urgent tasks!\n";

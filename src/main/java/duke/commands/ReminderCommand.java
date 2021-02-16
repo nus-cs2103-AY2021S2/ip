@@ -4,6 +4,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.ui.TaskStringFormatter;
 
 /**
  * Handles the logic of generating reminders w.r.t. the tasks in the to-do list.
@@ -39,7 +40,7 @@ public class ReminderCommand extends Command {
     }
 
     /**
-     * Creates a response to display the existing tasks to the users. The output will
+     * Creates a response to display overdue or urgent tasks, if any, to the users. The output will
      * take the form of a multi-line string, with each row displaying one task with its
      * index, description and status.
      *
@@ -47,7 +48,9 @@ public class ReminderCommand extends Command {
      * @return A <code>String</code> displaying the existing tasks.
      */
     public String getResponse(TaskList tasks) {
-        return this.getOverdueTasksResponse(tasks) + "\n" + this.getUrgentTasksResponse(tasks, this.urgencyDays);
+        return this.getOverdueTasksResponse(tasks)
+                + "\n"
+                + this.getUrgentTasksResponse(tasks, this.urgencyDays);
     }
 
     private String getOverdueTasksResponse(TaskList tasks) {
@@ -57,7 +60,9 @@ public class ReminderCommand extends Command {
         if (numOverdue == 0) {
             return "You do not have any overdue tasks!\n";
         } else {
-            return "Oh no... You have " + numOverdue + " overdue task(s):\n" + overdueTasks.getTaskListAsString();
+            return "Uh oh... You have " + numOverdue + " overdue task(s):\n"
+                    + "\n"
+                    + TaskStringFormatter.getTaskTable(overdueTasks) + "\n";
         }
     }
 
@@ -68,8 +73,9 @@ public class ReminderCommand extends Command {
         if (numUrgent == 0) {
             return "You do not have any urgent tasks!\n";
         } else {
-            return "You have " + numUrgent + " task(s) that are due in less than " + urgencyDays + " day(s):\n"
-                    + urgentTasks.getTaskListAsString();
+            return "You have " + numUrgent + " task(s) due in less than " + urgencyDays + " day(s):\n"
+                    + "\n"
+                    + TaskStringFormatter.getTaskTable(urgentTasks);
         }
     }
 
