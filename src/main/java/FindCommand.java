@@ -16,6 +16,10 @@ public class FindCommand extends Command {
      * @param storage Storage that interacts with information stored on harddrive.
      */
     public String execute(TaskManager manager, Ui ui, Storage storage) {
+        String found = manager.find(this.keyword);
+        if (found.equals("")) {
+            return String.format("You have no tasks that matches \"%s\"", this.keyword);
+        } 
         return this.message + "\n" + manager.find(this.keyword);
     }
 }
