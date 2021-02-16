@@ -22,9 +22,9 @@ public class Event extends Task {
     public String savedFormat() {
         String savedInfo;
         if (this.isDone()) {
-            savedInfo = "E | 1 | " + this.getDescription(); 
+            savedInfo = "E | 1 | " + this.getDescription();
         } else {
-            savedInfo = "E | 0 | " + this.getDescription(); 
+            savedInfo = "E | 0 | " + this.getDescription();
         }
         return savedInfo;
     }

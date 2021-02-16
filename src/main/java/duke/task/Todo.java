@@ -12,12 +12,15 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * change to save format
+     */
     public String savedFormat() {
         String savedInfo;
         if (this.isDone()) {
-            savedInfo = "T | 1 | " + this.getDescription(); 
+            savedInfo = "T | 1 | " + this.getDescription();
         } else {
-            savedInfo = "T | 0 | " + this.getDescription(); 
+            savedInfo = "T | 0 | " + this.getDescription();
         }
         return savedInfo;
     }

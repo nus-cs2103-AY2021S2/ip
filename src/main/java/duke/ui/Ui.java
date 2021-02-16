@@ -14,20 +14,19 @@
 
 package duke.ui;
 
-import duke.task.*;
-import duke.exception.DukeException;
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.fileSaver.FileSaver;
+import duke.task.*;
 
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ui {
-    public static String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+    private static String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     public static String line = "_______________________________________\n";
-    public static String indentation = "    ";
+    //public static String indentation = "    ";
 
     public final Scanner sc;
 
@@ -47,18 +46,30 @@ public class Ui {
         return line + output + "\n" + line;
     }
 
+    /**
+     * @return greeting message
+     */
     public String greetingMessage() {
         return printMessage("Hello! I'm Duke. What I can do for you?");
     }
 
+    /**
+     * print greeting message
+     */
     public String greeting() {
         return logo + line + greetingMessage() + line;
     }
 
+    /**
+     * return bye message
+     */
     public String bye() {
         return line + "Bye. Hope to see you again soon!\n" + line;
     }
 
+    /**
+     * report how many tasks are there
+     */
     public String reportTask(Task t, TaskList task) {
         int count = task.getSize();
         String output = "Got it, I've added this task to the list:\n" +
@@ -68,10 +79,16 @@ public class Ui {
         return printMessage(output);
     }
 
+    /**
+     * return error message
+     */
     public String printErrorMessage(String message) {
         return printMessage("☹ OOPS!!! " + message);
     }
 
+    /**
+     * parser user input
+     */
     public Command getUserInputType(String userInput) throws DukeException {
         try {
             return Command.valueOf(userInput.toUpperCase());
@@ -80,6 +97,9 @@ public class Ui {
         }
     }
 
+    /**
+     * reported on the finded task
+     */
     public String reportFindedTask(List<Task> task) {
         String ans = "Here are the matching tasks in your list\n";
         for (int i = 0; i < task.size(); i++) {
@@ -89,35 +109,38 @@ public class Ui {
         return printMessage(ans);
     }
 
+    /**
+     * parser for response user input
+     */
     public String getResponse(String userInput, TaskList task, FileSaver fs) {
         String response = " ";
         try {
             String[] input = userInput.split(" ", 2);
             Command command = getUserInputType(input[0]);
             switch (command) {
-                case DEADLINE:
-                case TODO:
-                case EVENT:
-                    response = task.add(input, this);
-                    break;
-                case DELETE:
-                    response = task.deleteTask(input[1], this);
-                    break;
-                case LIST:
-                    response = task.printTask(this);
-                    break;
-                case DONE:
-                    response = task.doneTask(input[1], this);
-                    break;
-                case FIND:
-                    response = reportFindedTask(task.findTask(input[1]));
-                    break;
-//                case BYE:
-//                    bye();
-//                    run = false;
-//                    break;
-                default:
-                    throw new DukeException("Sorry, I dont understand that");
+            case DEADLINE:
+            case TODO:
+            case EVENT    :
+                response = task.add(input, this);
+                break;
+            case DELETE:
+                response = task.deleteTask(input[1], this);
+                break;
+            case LIST:
+                response = task.printTask(this);
+                break;
+            case DONE:
+                response = task.doneTask(input[1], this);
+                break;
+            case FIND:
+                response = reportFindedTask(task.findTask(input[1]));
+                break;
+//          case BYE:
+//              bye();
+//              run = false;
+//              break;
+            default:
+                throw new DukeException("Sorry, I dont understand that");
             }
             fs.save(task);
         } catch (DukeException e) {
