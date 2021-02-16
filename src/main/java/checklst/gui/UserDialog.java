@@ -12,6 +12,11 @@ public class UserDialog extends DialogBox {
 
     private static final String NAME = "You";
 
+    /**
+     * Creates a message dialog from the user.
+     * @param l Message to be shown.
+     * @param iv Image of User.
+     */
     public UserDialog(Label l, ImageView iv) {
         super(NAME, l, iv);
 

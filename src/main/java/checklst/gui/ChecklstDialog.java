@@ -12,13 +12,18 @@ public class ChecklstDialog extends DialogBox {
 
     private static final String NAME = "Checklst";
 
+    /**
+     * Creates a message dialog from the Checklst bot.
+     * @param l Message to be shown.
+     * @param iv Image of Checklst.
+     */
     public ChecklstDialog(Label l, ImageView iv) {
         super(NAME, l, iv);
 
         Color dialogColor = new Color(0, 0.7, 1, 1);
         this.text.setBackground(
             new Background(new BackgroundFill(dialogColor, new CornerRadii(7.0), Insets.EMPTY)));
-    
+
         this.flip();
     }
 

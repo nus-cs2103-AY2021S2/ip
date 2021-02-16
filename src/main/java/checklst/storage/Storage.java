@@ -71,7 +71,7 @@ public class Storage {
         } catch (InvalidPathException | IOException e) {
             throw new ChecklstException("No history found... Initializing from blank state!");
         }
-        
+
     }
 
 }

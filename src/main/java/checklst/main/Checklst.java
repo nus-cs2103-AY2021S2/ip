@@ -33,8 +33,8 @@ public class Checklst extends Application {
     private static final Font STANDARD_FONT = new Font("Arial", 14);
 
     private final Ui ui = new Ui();
-    private final Parser parser = new Parser();
     private final TaskList taskList = new TaskList();
+    private final Parser parser = new Parser(this.taskList);
     private final Storage storage = new Storage();
 
     private ScrollPane scrollPane;
@@ -137,7 +137,7 @@ public class Checklst extends Application {
 
         String response = "";
         try {
-            response = this.parser.parse(userInput.getText().split(" ", 2), this.taskList);
+            response = this.parser.parse(userInput.getText().split(" ", 2));
             this.addChecklstMessage(response);
         } catch (ChecklstException e) {
             this.addErrorMessage(e.getMessage());
@@ -163,7 +163,7 @@ public class Checklst extends Application {
         this.dialogContainer.getChildren().add(newDialogBox);
         VBox.setMargin(newDialogBox, new Insets(3));
     }
-    
+
     @Override
     public void stop() throws Exception {
         this.storage.saveToFile(this.taskList);

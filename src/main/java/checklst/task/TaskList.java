@@ -108,13 +108,13 @@ public class TaskList {
      * @return String of new Sorted List
      */
     public String sort() {
-        Map<Class<? extends Task>, Integer> sortMap = 
+        Map<Class<? extends Task>, Integer> sortMap =
             Map.of(Todo.class, 0, Deadline.class, 1, Event.class, 2);
 
         this.taskList.sort((x, y) -> {
             if (x.isCompleted && y.isCompleted) {
                 return sortMap.get(x.getClass()).compareTo(sortMap.get(y.getClass()));
-            } 
+            }
 
             return x.isCompleted ? 1 : -1;
         });
