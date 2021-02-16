@@ -160,6 +160,7 @@ public class Parser {
                     try {
                         String indexString = parts[1];
                         int index =Integer.parseInt(indexString);
+                        assert index>0 : "index should be more than zero";
                         Task t = taskList.getList().get(index - 1);
                         t.markAsDone();
                         database.writeTaskToFile(taskList.getList());
@@ -241,6 +242,7 @@ public class Parser {
                     try {
                         String indexString = parts[1];
                         int index =Integer.parseInt(indexString);
+                        assert index>0: "index should be more than 0";
                         Task t = taskList.getList().get(index-1);
                         taskList.removeTask(index-1);
                         database.writeTaskToFile(taskList.getList());
