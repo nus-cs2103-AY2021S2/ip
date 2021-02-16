@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
 
 /**
  * This class controls the creation and styling of dialog boxes for both the user and Duke.
@@ -36,9 +35,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(25, 25, 20));
+        this.dialog.setText(text);
+        this.displayPicture.setImage(img);
     }
 
     /**
@@ -103,9 +101,7 @@ public class DialogBox extends HBox {
      * @param color HEX code of desired background color for label box.
      */
     private void styleLabelBox(String color) {
-        this.dialog.setStyle("-fx-background-color: " + color + ";"
-                + "-fx-border-radius: 10 10 10 10;"
-                + "-fx-background-radius: 10 10 10 10;");
+        this.dialog.setStyle("-fx-background-color: " + color + ";");
     }
 
     /**

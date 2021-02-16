@@ -1,0 +1,18 @@
+.dialog-container {
+    -fx-background-color: white;
+}
+
+.dialog-box {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+.send-button {
+    -fx-background-radius: 7 7 7 7;
+    -fx-border-radius: 7 7 7 7;
+}
+
+.user-input {
+    -fx-background-radius: 7 7 7 7;
+    -fx-border-radius: 7 7 7 7;
+}
