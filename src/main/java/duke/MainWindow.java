@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -42,9 +44,18 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        if (response.equals("Bye!")) {
+            System.exit(0);
+        }
+        Color textColor = Color.BLACK;
+        if (response.contains("!")) {
+            textColor = Color.RED;
+        } else if (response.contains("added")) {
+            textColor = Color.GREEN;
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage, textColor)
         );
         userInput.clear();
     }

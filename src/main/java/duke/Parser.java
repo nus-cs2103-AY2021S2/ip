@@ -71,10 +71,10 @@ public class Parser {
      */
     public String commandDone(String line, TaskList tasks) {
         String indexStr = line.substring(5);
-            int index = Integer.parseInt(indexStr) - 1;
-            AbstractTask currentTask = tasks.get(index);
-            currentTask.markDone();
-            return String.format("Marked task %d as done:\n%s\n", index, currentTask);
+        int index = Integer.parseInt(indexStr) - 1;
+        AbstractTask currentTask = tasks.get(index);
+        currentTask.markDone();
+        return String.format("Marked task %d as done:\n%s\n", index, currentTask);
     }
 
     /**
@@ -130,7 +130,7 @@ public class Parser {
         assert(tokens[0].equals("find"));
 
         if (tokens.length < 4) {
-            return "Invalid command for tag";
+            return "Invalid command for tag!";
         }
         int taskIdx = Integer.parseInt(tokens[2]) - 1;
         if (tokens[1].equals("add")) {
@@ -138,9 +138,9 @@ public class Parser {
         } else if (tokens[1].equals("delete")) {
             tasks.get(taskIdx).deleteTag(tokens[3]);
         } else {
-            return "Invalid tag command";
+            return "Invalid tag command!";
         }
-        return "Task tag " + tokens[1] + " complete!";
+        return "Task tag " + tokens[1] + " complete";
     }
 
     /**

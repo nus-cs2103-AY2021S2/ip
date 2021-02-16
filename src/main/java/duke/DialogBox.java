@@ -1,5 +1,4 @@
 package duke;
-
 import java.io.IOException;
 import java.util.Collections;
 
@@ -13,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -20,6 +21,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    @FXML
+    private Label dialogTitle;
     @FXML
     private Label dialog;
     @FXML
@@ -53,8 +56,9 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, Color textColor) {
         var db = new DialogBox(text, img);
+        db.dialog.setTextFill(textColor);
         db.flip();
         return db;
     }
