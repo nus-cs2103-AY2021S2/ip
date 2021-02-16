@@ -54,10 +54,10 @@ Lists all tasks currently in the task list.
 `list`
 
 ### Expected outcome:
-All Tasks:
-[T][] buy groceries
-[D][] deadline return library book/by Sun Feb 14 14:00:00 SGT 2021
-[E][] Marcus's birthday party/from Sun Feb 14 18:00:00 SGT 2021 to Sun Feb 14 23:30:00 SGT 2021
+All Tasks:   
+[T][] buy groceries  
+[D][] deadline return library book/by Sun Feb 14 14:00:00 SGT 2021  
+[E][] Marcus's birthday party/from Sun Feb 14 18:00:00 SGT 2021 to Sun Feb 14 23:30:00 SGT 2021  
 
 ## `Complete`
 
@@ -114,7 +114,7 @@ Lists all commandss accepted by Duke
 `help`
 
 ### Expected outcome:
-Enter one of the following commands:
+Enter one of the following commands:  
 [1] Hello  
 [2] Todo <Description of Task>  
 [3] Deadline <Description of Task>/by <DD.MM.YYYY HH:MM>  
