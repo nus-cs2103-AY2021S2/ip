@@ -23,36 +23,41 @@ import javafx.collections.ObservableList;
  * Currently supports these functionalities:
  * <br>bye
  * <br>  - Prompt user to save tasklist. Then closes Duke.
- * <br>deadline [description] /by [date]
+ * <br>clear
+ * <br>  - Clear all current tasks and start a new tasklist
+ * <br>deadline DESCRIPTION /by DATE
  * <br>  - Add a deadline task with a due date (YYYY-MM-DD)
- * <br>delete [int (int int...)]
+ * <br>delete INT [INT...]
  * <br>  - Delete one or more tasks eg. (delete 1 2 3)
- * <br>done [int (int int...)]
+ * <br>done INT [INT...]
  * <br>  - Mark one or more tasks as done eg. (done 1 2 3)
- * <br>event [description] /at [date]
+ * <br>event DESCRIPTION /at DATE
  * <br>  - Add an event task with a date (YYYY-MM-DD)
  * <br>help
  * <br>  - Display list of commands
+ * <br>highpriority INDEX
+ * <br>  - Set this task as high priority
  * <br>list
  * <br>  - List out all tasks
  * <br>load
  * <br>  - Load tasklist from saved file
- * <br>new
- * <br>  - Clear all current tasks and start a new tasklist
+ * <br>lowpriority INDEX
+ * <br>  - Set this task as low priority
  * <br>sample
  * <br>  - Load some sample data
  * <br>save
  * <br>  - save tasklist to "data/dukeData.txt"
- * <br>search [keyword | date]
+ * <br>search {KEYWORD | DATE}
  * <br>  - Display all task containing the following keyword.
  * <br>  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.
  * <br>sort
  * <br>  - Order tasklist in the following priority
- * <br>    1. Incomplete task
- * <br>    2. Todo task
- * <br>    3. Eariler date
- * <br>    4. lexicographically";
- * <br>todo [description]
+ * <br>    1. High Priority task
+ * <br>    2. Incomplete task
+ * <br>    3. Todo task
+ * <br>    4. Eariler date
+ * <br>    5. lexicographically";
+ * <br>todo DESCRIPTION
  * <br>  - Add a todo task
  */
 public class Duke {
@@ -69,7 +74,7 @@ public class Duke {
     /**
      * Constructor to create Duke object.
      *
-     * @param filePath File path to save tasklist.
+     * @param filePath File path to saved file.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -79,7 +84,7 @@ public class Duke {
         try {
             tasks.load(storage.loadTaskList());
         } catch (DukeException e) {
-            // No file loaded..
+            // Save file missing/invalid so no file loaded
         }
     }
 
@@ -109,18 +114,67 @@ public class Duke {
             return ui.displayError(e);
         }
 
+        return processCommand(input);
+    }
+
+    private String processCommand(String input) {
         String[] s = input.split(" ", 2);
-        Command cmd = Command.valueOf(s[0].toUpperCase());
+        Command command = Command.valueOf(s[0].toUpperCase());
         String args = s.length == 2 ? s[1] : "";
 
-        return processCommand(cmd, args);
+        if (args.equals("-h")) {
+            return command.getHelp();
+        }
+
+        try {
+            switch(command) {
+            case BYE:
+                return exit();
+            case CLEAR:
+                return clearAllTasks();
+            case DEADLINE:
+                return addTask(Deadline.createDeadline(args));
+            case DELETE:
+                return deleteTask(args);
+            case DONE:
+                return completeTask(args);
+            case EVENT:
+                return addTask(Event.createEvent(args));
+            case HELP:
+                return displayHelp();
+            case HIGHPRIORITY:
+                return setHighPriority(args);
+            case LIST:
+                return listOutTask();
+            case LOAD:
+                return load();
+            case LOWPRIORITY:
+                return setLowPriority(args);
+            case SAMPLE:
+                return loadSampleData();
+            case SAVE:
+                return save();
+            case SEARCH:
+                return search(args);
+            case SORT:
+                return sort();
+            case TODO:
+                return addTask(Todo.createTodo(args));
+            default:
+                // Should never reach here
+                assert false : "Missed out command in processCommand()";
+                return "";
+            }
+        } catch (DukeException e) {
+            return ui.displayError(e);
+        }
     }
 
     private String completeTask(String num) throws DukeInputException {
 
         int[] tasksNum = Arrays.stream(num.split(" "))
-              .mapToInt(x -> Integer.parseInt(x) - 1)
-              .toArray();
+                .mapToInt(x -> Integer.parseInt(x) - 1)
+                .toArray();
 
         String[] completedTasks = tasks.completeTask(tasksNum);
         return ui.completeTask(completedTasks);
@@ -129,49 +183,6 @@ public class Duke {
     private String addTask(Task t) {
         tasks.addTask(t);
         return ui.addTask(t.toString(), tasks.size());
-    }
-
-    private String confirmDelete(String s) {
-        try {
-            Parser.parseYesNo(s);
-        } catch (DukeInputException e) {
-            return ui.displayError(e);
-        }
-        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
-        isWaitingDeleteTaskResponse = false;
-
-        if (s.equals("y")) {
-            String[] deletedTasks;
-
-            try {
-                deletedTasks = tasks.deleteTask(tasksToBeDeleted);
-            } catch (DukeInputException e) {
-                return ui.displayError(e);
-            }
-            return ui.deleteTask(deletedTasks, tasks.size());
-
-        } else {
-            return ui.abortDelete();
-        }
-    }
-
-    private String confirmSave(String s) {
-        try {
-            Parser.parseYesNo(s);
-        } catch (DukeInputException e) {
-            return ui.displayError(e);
-        }
-        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
-
-        isWaitingSaveFileResponse = false;
-        if (s.equals("y")) {
-            try {
-                storage.saveTaskList(tasks.getList());
-            } catch (DukeException e) {
-                return ui.displayError(e);
-            }
-        }
-        return "shutdownConfirm";
     }
 
     private String deleteTask(String num) {
@@ -233,7 +244,7 @@ public class Duke {
             tasks.load(SampleData.loadSampleData());
         } catch (DukeInputException e) {
             // Should not reach here.
-            assert false : "Fix SampleData tasks creation";
+            assert false : "Fix creation of task in SampleData.loadSampleData()";
         }
 
         return ui.displayLoadSampleMessage();
@@ -242,6 +253,49 @@ public class Duke {
     private String clearAllTasks() {
         isWaitingDeleteAllResponse = true;
         return ui.displayDeleteAllPrompt();
+    }
+
+    private String confirmDelete(String s) {
+        try {
+            Parser.parseYesNo(s);
+        } catch (DukeInputException e) {
+            return ui.displayError(e);
+        }
+        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
+
+        isWaitingDeleteTaskResponse = false;
+        if (s.equals("y")) {
+            String[] deletedTasks;
+
+            try {
+                deletedTasks = tasks.deleteTask(tasksToBeDeleted);
+            } catch (DukeInputException e) {
+                return ui.displayError(e);
+            }
+            return ui.deleteTask(deletedTasks, tasks.size());
+
+        } else {
+            return ui.abortDelete();
+        }
+    }
+
+    private String confirmSave(String s) {
+        try {
+            Parser.parseYesNo(s);
+        } catch (DukeInputException e) {
+            return ui.displayError(e);
+        }
+        assert s.equals("y") || s.equals("n") : "Parser.parseYesNo() allowed invalid input";
+
+        isWaitingSaveFileResponse = false;
+        if (s.equals("y")) {
+            try {
+                storage.saveTaskList(tasks.getList());
+            } catch (DukeException e) {
+                return ui.displayError(e);
+            }
+        }
+        return "shutdownConfirm";
     }
 
     private String confirmClear(String s) {
@@ -258,55 +312,6 @@ public class Duke {
             return ui.displayTasksClearedMessage();
         }
         return ui.abortDelete();
-    }
-
-    private String processCommand(Command command, String args) {
-        if (args.equals("-h")) {
-            return command.getHelp();
-        }
-
-        try {
-            switch(command) {
-            case BYE:
-                return exit();
-            case CLEAR:
-                return clearAllTasks();
-            case DEADLINE:
-                return addTask(Deadline.createDeadline(args));
-            case DELETE:
-                return deleteTask(args);
-            case DONE:
-                return completeTask(args);
-            case EVENT:
-                return addTask(Event.createEvent(args));
-            case HELP:
-                return displayHelp();
-            case HIGHPRIORITY:
-                return setHighPriority(args);
-            case LIST:
-                return listOutTask();
-            case LOAD:
-                return load();
-            case LOWPRIORITY:
-                return setLowPriority(args);
-            case SAMPLE:
-                return loadSampleData();
-            case SAVE:
-                return save();
-            case SEARCH:
-                return search(args);
-            case SORT:
-                return sort();
-            case TODO:
-                return addTask(Todo.createTodo(args));
-            default:
-                break;
-            }
-        } catch (DukeException e) {
-            return ui.displayError(e);
-        }
-        // Should never reach here
-        throw new RuntimeException("ERROR in Duke's getResponse method");
     }
 
     /**

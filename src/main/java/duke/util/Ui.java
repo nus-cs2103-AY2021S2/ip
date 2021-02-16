@@ -38,20 +38,20 @@ public class Ui {
                 "List of commands:",
                 "bye",
                 "clear",
-                "deadline [description] /by [due date]",
-                "delete [int (int int...)]",
-                "done [int (int int...)]",
-                "event [description] /at [date]",
+                "deadline DESCRIPTION /by DATE",
+                "delete INDEX [INDEX...]",
+                "done INDEX [INDEX...]",
+                "event DESCRIPTION /at DATE",
                 "help",
-                "highpriority [int]",
+                "highpriority INDEX",
                 "list",
                 "load",
-                "lowpriority [int]",
+                "lowpriority INDEX",
                 "sample",
                 "save",
-                "search [keyword | date]",
+                "search {KEYWORD | DATE}",
                 "sort",
-                "todo [description]");
+                "todo DESCRIPTION");
     }
 
     /**
