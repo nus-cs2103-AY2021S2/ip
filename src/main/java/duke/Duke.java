@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 public class Duke {
     private Storage taskStorage;
     private Storage contactStorage;
@@ -9,8 +12,8 @@ public class Duke {
     private ContactList contactList;
 
     public Duke() {
-        this.taskStorage = new Storage("C:/Users/Jeremias/Documents/GitHub/ip/data/", "task.txt");
-        this.contactStorage = new Storage("C:/Users/Jeremias/Documents/GitHub/ip/data/", "contact.txt");
+        this.taskStorage = new Storage( "task.txt");
+        this.contactStorage = new Storage("contact.txt");
         this.ui = new Ui();
         this.parser = new Parser();
         this.tasks = taskStorage.loadTaskList();
@@ -114,5 +117,16 @@ public class Duke {
         } catch (Exception e) {
             return ui.getError(e);
         }
+    }
+
+    public static String getPath() {
+        String path = Duke.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String decodedPath = null;
+        try {
+            decodedPath = URLDecoder.decode(path, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return decodedPath;
     }
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,8 +14,8 @@ public class Storage {
     private final String filePath;
     private final String fileName;
 
-    public Storage(String filePath, String fileName) {
-        this.filePath = filePath;
+    public Storage(String fileName)  {
+        this.filePath = Duke.getPath();
         this.fileName = fileName;
     }
 
