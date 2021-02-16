@@ -88,7 +88,7 @@ __________________________________________________________
 A todo has been added.
 
 ### Adding Deadlines
-`deadline` or `d` - Adds a deadline.
+`deadline` - Adds a deadline.
 
 **Example of usage:**
 
@@ -105,7 +105,7 @@ A todo has been added.
 A deadline has been added.
 
 ### Adding Events
-`event` or `e` - Adds an event.
+`event` - Adds an event.
 
 **Example of usage:**
 
