@@ -50,7 +50,7 @@ Tasks can be removed from Checklst by using the `delete` command. Similarly, the
 
 | Task Command | Expected Output
 |--|--|
-| `list` | These are your current tasks: <br> 1. [T][ ] Read Books |
+| `list` | These are your current tasks: <br> 1. [T][X] Read Books |
 | `delete 1` | [T][X] Read Books |
 | `list` | Task list is currently empty! |
 
@@ -69,7 +69,7 @@ Tasks are added to the bottom of the Task List via a Chronological input order. 
 
 The sorting will be done via 2 conditions. Firstly, the tasks will be split into complete and incomplete. Secondly, the tasks will be sorted by Task type.
 
- | Task Command | Expected Output
+| Task Command | Expected Output
 |--|--|
 | `list` | These are your current tasks: <br> 1. [T][ ] Read Books <br> 2. [E][ ] Movie (at: Apr 24 2020) <br> 3. [T][X] Return Books <br> 4. [E][ ] Concert (at: Feb 13 2020)  |
 | `sort` | These are your current tasks: <br> 1. [T][ ] Read Books <br> 2. [E][ ] Movie (at: Apr 24 2020) <br> 3. [E][ ] Concert (at: Feb 13 2020) <br> 4. [T][X] Return Books |
