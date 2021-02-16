@@ -1,0 +1,7 @@
+[build]
+  base = "docs/"
+  publish = ".vitepress/dist/"
+  command = "yarn build"
+  functions = "netlify/functions/"
+[[plugins]]
+package = "@netlify/plugin-functions-install-core"
