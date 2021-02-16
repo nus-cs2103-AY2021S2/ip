@@ -3,78 +3,92 @@ package duke.ui;
 import duke.task.Task;
 
 /**
- * A class to handle interaction with users
+ * UI class to handle interaction with users
  */
 public class UI {
 
-    public static String displayStartMessage(){
+    /**
+     * Display the greeting message upon launching the application
+     */
+    public static String displayWelcomeMessage(){
         String output = "Hello! I am Will, your personal assistant." + "\n" +
                 "What can I do for you today?";
         return output;
     }
 
     /**
-     * Print out bye message to user
+     * Display bye message
      */
     public static String displayEndMessage() {
         return " Bye. Hope to see you again!" + "\n";
     }
 
-    /** Print out the task found in list
-     * @param count
-     * @param task
+    /**
+     * Display a particular task in list with its customized format
+     * @param index index of task in task list
+     * @param task task
      */
-    public String printTask(int count, Task task) {
-        return (count + 1) + "." + task.toString();
+    public String displayTask(int index, Task task) {
+        return (index + 1) + "." + task.toString();
     }
 
-
-    public String printDuplicateMessage() {
+    /**
+     * Display message to inform users that this is a duplicated task
+     */
+    public String DisplayDuplicatedMessage() {
         return "Existing entries with same task description was found. " +
                 "Please add a new task.";
     }
 
-
-    public String printNoTaskMessage() {
+    /**
+     * Display message to inform users that this are no task
+     */
+    public String DisplayNoTaskMessage() {
         return "There are currently no task available.";
     }
 
     /**
-     * Display header for list method
+     * Display header to show the tasks in the current list
      */
-    public String printListHeader() {
-        return "\nHere are the tasks in your list:";
+    public String DisplayListHeader() {
+        return "Here are the tasks in your list:";
     }
 
-    public String printFindHeader() {
-        return "\nHere are the matching tasks in your list:";
+    /**
+     * Display header to show the tasks in the current list
+     */
+    public String DisplayFindHeader() {
+        return "Here are the matching tasks in your list:";
     }
 
-    /** Print out message when task is added
-     * @param t task
-     * @param size
+    /**
+     * Display message upon successful addition of task to task list
+     * @param task task
+     * @param size amount of items in task list
      */
-    public static String displayAddedTaskMessage(Task t, int size) {
-        return "Got it. I've added this task: \n\t" + t.toString() + "\n Now you have "
+    public static String displayAddedTaskMessage(Task task, int size) {
+        return "Got it. I've added this task: \n\t" + task.toString() + "\n Now you have "
                 + size + " tasks in your list \n";
     }
 
-    /**Print out message when task is deleted
-     * @param t task
+    /**
+     * Display message upon successful deletion of task
+     * @param task task
      */
-    public static String displayDeletedTaskMessage(Task t) {
-        return "Nice! I've removed this task: \n" + t.toString() + "\n";
+    public static String displayDeletedTaskMessage(Task task) {
+        return "Nice! I've removed this task: \n" + task.toString() + "\n";
     }
 
-    /** Print out message when task is done
-     * @param t task
+    /**
+     * Display message when task status is changed to completed
+     * @param task task
      */
-    public String displayDoneTaskMessage(Task t) {
-        return  "\nNice! I'll make this task as done: \n" + t.toString() + "\n";
+    public String displayDoneTaskMessage(Task task) {
+        return  "Nice! I'll make this task as completed: \n" + task.toString() + "\n";
     }
 
-    /** Print out exception messsage
-     * @param e execption messsage
+    /** Display exception messages upon encountering errors
+     * @param e exception messages
      * @return
      */
     public String showError(String e) {

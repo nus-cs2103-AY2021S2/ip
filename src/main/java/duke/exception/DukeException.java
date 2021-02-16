@@ -1,11 +1,11 @@
 package duke.exception;
 
 /**
- * Customized exception class
+ * Customized exception class to display customized exception
  */
 public class DukeException extends Exception {
 
-    /** Create customized exception class objects
+    /** Create customized exception
      * @param message
      */
     public DukeException(String message) {

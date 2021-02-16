@@ -25,28 +25,31 @@ public class Duke extends Application {
     public void start(Stage stage) {
         Label header = new Label("Welcome to EventLab!"); // Creating a new Label control
         Scene scene = new Scene(header); // Setting the scene to be our Label
-
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }
 
-    public String displayStartMsg(){
-        return ui.displayStartMessage();
+    /**
+     * Display welcome message by chat bot
+     */
+    public String displayStartMsg() {
+        return ui.displayWelcomeMessage();
     }
 
     /**
-     * Returns bot's response after processing user input
+     * Returns duke's response after processing user input
      */
     public String getResponse(String input) {
         String output = null;
         try {
             Command c = new Command("null");
             c.execute();
-            output = Parser.parse(tasks, input);
+            output = Parser.parse(input);
         } catch (DukeException | IOException e) {
             return ui.showError(e.getMessage());
         }
         return output;
     }
+
 
 }

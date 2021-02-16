@@ -5,87 +5,85 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Stores all type of task
+ * Task class to initialize and manage different type of tasks.
  */
 public class Task {
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     protected String description;
+    //Task status
     protected boolean isCompleted;
 
-    /**
-     * Empty constructor
-     */
     public Task(){
 
     }
 
-    /** Constructor to create task object
-     * @param title
+    /** Create task with description
+     * @param description task description
      */
-    public Task(String title) {
-        this.description = title;
+    public Task(String description) {
+        this.description = description;
         this.isCompleted = false;
     }
 
-    /**Constructor to create task object for retrieval of task from data file
-     * @param title
-     * @param b
+    /** Create task with description
+     * @param description task description
+     * @param isCompleted task status
      */
-    public Task(String title, boolean b) {
-        this.description = title;
-        this.isCompleted = b;
+    public Task(String description, boolean isCompleted) {
+        this.description = description;
+        this.isCompleted = isCompleted;
     }
 
     /**
-     * Set task to completed
+     * Set task status to completed
      */
     public void setCompleted() {
         this.isCompleted = true;
     }
 
-    /** Return cross if task is completed
-     * @return
+    /** Returns task status in the form of a tick or cross
+     * @return a tick if the task status is completed or a cross if the task status is incomplete
      */
     public String getStatus() {
         return (this.isCompleted ? "\u2713" : "\u2718");
     }
 
-    /** Return description of task
+    /** Returns task description of task
      * @return
      */
-    public String getTaskName() {
+    public String getTaskDescription() {
         return this.description;
     }
 
-    /** Return customized representation of task to add to data file
-     * @return
+    /**
+     * Returns a customized representation of task to be added to data file
+     * @return string representation of a task
      */
     public String changeFormat() {
-        return "," + this.isCompleted + "," + this.getTaskName();
+        return "," + this.isCompleted + "," + this.getTaskDescription();
     }
 
-    /** Return the string version of task from data file to task objects
-     * @param input
-     * @return
+    /** Convert task information stored in data file to task objects
+     * @param taskDescription task description from data file
+     * @return task
      */
-    public Task changeToTaskFormat(String input) {
+    public Task changeToTaskFormat(String taskDescription) {
 
-        assert input!= null:"Task identifier from data file should be specified";
-        if (input.charAt(0) == 'T') {
-            String[] tasks = input.split(",");
+        assert taskDescription!= null:"Task identifier from data file should be specified";
+        if (taskDescription.charAt(0) == 'T') {
+            String[] tasks = taskDescription.split(",");
+
             return new ToDo(tasks[2], Boolean.parseBoolean(tasks[1]));
-        } else if (input.charAt(0) == 'D') {
-            String[] tasks = input.split(",");
-
+        } else if (taskDescription.charAt(0) == 'D') {
+            String[] tasks = taskDescription.split(",");
             LocalDate date = LocalDate.parse(tasks[3], dateFormatter);
             LocalTime startTime = LocalTime.parse(tasks[4], timeFormatter);
 
             return new Deadline(tasks[2], Boolean.parseBoolean(tasks[1]), date, startTime);
-        } else if (input.charAt(0) == 'E') {
-            String[] tasks = input.split(",");
-
+        } else if (taskDescription.charAt(0) == 'E') {
+            String[] tasks = taskDescription.split(",");
             LocalDate date = LocalDate.parse(tasks[3], dateFormatter);
             LocalTime startTime = LocalTime.parse(tasks[4], timeFormatter);
             LocalTime endTime = LocalTime.parse(tasks[5], timeFormatter);
@@ -96,19 +94,20 @@ public class Task {
         }
     }
 
-    /** Check for duplicate of task
-     * @return boolean
+    /** Check for duplication of task
+     * @return boolean true if task is duplicated
      */
 
     public boolean isSameTask(Task t){
-        return this.getTaskName().equals(t.getTaskName());
+        return this.getTaskDescription().equals(t.getTaskDescription());
     }
 
-    /** Print customized representation of task to user
-     * @return String
+    /**
+     * Returns a customized representation of task to user
+     * @return string representation of task to be displayed to the user
      */
     @Override
     public String toString() {
-        return this.getTaskName() + "[" + this.getStatus() + "] ";
+        return this.getTaskDescription() + "[" + this.getStatus() + "] ";
     }
 }

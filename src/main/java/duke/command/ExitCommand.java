@@ -1,26 +1,24 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
 import duke.ui.UI;
-import duke.data.DataStorage;
 
 /**
- * Create exit command class
+ * Command class to exit program
  */
 public class ExitCommand extends Command {
 
     /**
-     * Constructor to create exit command object
+     * Create exit command
      */
     public ExitCommand() {
         super("exit");
     }
 
-    /** Terminate the whole program
-     * @return
+    /**
+     * Display closing message to the user
      */
     @Override
     public String execute() {
-        return ui.displayEndMessage();
+        return UI.displayEndMessage();
     }
 }

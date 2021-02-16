@@ -1,31 +1,40 @@
 package duke.task;
 
-
 /**
- *  Create a todo class
+ * The todo class initialize and manage todo tasks.
  */
 
 public class ToDo extends Task {
 
-    public ToDo(String title, Boolean b) {
-        super(title, b);
-    }
-
-    public ToDo(String title) {
-        super(title);
-    }
-
-    /** Change representation of task to be added to data file
-     * @return String
+    /**
+     * Create a todo task with description and status
+     * @param description task description
+     * @param isCompleted task status
      */
+    public ToDo(String description, Boolean isCompleted) {
+        super(description, isCompleted);
+    }
 
+    /**
+     * Create a todo task with task description
+     * @param description task description
+     */
+    public ToDo(String description) {
+        super(description);
+    }
+
+    /**
+     * Returns a string representation of todo task to be added to data file
+     * @return string representation of todo task
+     */
     @Override
     public String changeFormat() {
         return "T" + super.changeFormat();
     }
 
-    /** Print customized representation of task to user
-     * @return String
+    /**
+     * Returns a customized representation of task to user
+     * @return string representation of todo task to be displayed to the user
      */
     @Override
     public String toString() {

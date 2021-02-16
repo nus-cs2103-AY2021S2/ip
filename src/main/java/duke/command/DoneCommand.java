@@ -1,25 +1,22 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
-import duke.ui.UI;
-import duke.data.DataStorage;
 import duke.exception.DukeException;
 
 /**
- * Create done command class
+ * Command class to mark task as complete
  */
 public class DoneCommand extends Command {
 
     /**
-     * Constructor to create done command object
+     * Create done command
      */
     public DoneCommand(String input) {
         super(input);
     }
 
-    /** Set and display task as completed
-     * Store the new changes back to data file
-     * @return
+    /**
+     * Set task status of a specific task to completed and store the new changes back to the data file
+     * @return String message upon successful execution of the command
      */
     @Override
     public String execute() throws DukeException {

@@ -11,9 +11,10 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 public class DataStorage {
-    private static final String FILE_PATH = "./src/main/java/duke/data/data.txt";
+    private static final String FILE_PATH = "Data/allTasks.txt";
 
-    /** Retrieve data file if present
+    /**
+     *  Retrieve data file if present
      * Else create new data file
      * @return file
      * @throws DukeException
@@ -33,16 +34,17 @@ public class DataStorage {
         return file;
     }
 
-    /** Save task into data file
-     * @param taskAL array list of task
+    /**
+     * Save the list of task into data file
+     * @param taskArrayList array list of task
      * @throws DukeException
      */
-    public static void save(ArrayList<Task> taskAL) throws DukeException {
+    public static void save(ArrayList<Task> taskArrayList) throws DukeException {
         try {
             File file = getFile();
             FileWriter writer = new FileWriter(file);
-            for (int i = 0; i < taskAL.size(); i++) {
-                writer.write(taskAL.get(i).changeFormat() + '\n');
+            for (int i = 0; i < taskArrayList.size(); i++) {
+                writer.write(taskArrayList.get(i).changeFormat() + '\n');
                 writer.flush();
             }
             writer.close();
@@ -51,8 +53,9 @@ public class DataStorage {
         }
     }
 
-    /** Load data in file when program starts
-     * @return array lise of task
+    /**
+     * Load file data to application when program starts
+     * @return list of task to be displayed
      * @throws DukeException
      * @throws IOException
      */

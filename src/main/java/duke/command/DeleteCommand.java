@@ -1,25 +1,22 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
-import duke.ui.UI;
-import duke.data.DataStorage;
 import duke.exception.DukeException;
 
 /**
- * Create delete command object
+ * Command class to delete task
  */
 public class DeleteCommand extends Command {
 
     /**
-     * Constructor to create delete command object
+     * Create delete command
      */
     public DeleteCommand(String input) {
         super(input);
     }
 
-    /** Delete task
-     *  Store the new changes back to data file
-     * @return array of task list
+    /**
+     *  Delete task and store the new changes back into the data file
+     * @return String message upon successful execution of the command
      * @throws DukeException
      */
     @Override

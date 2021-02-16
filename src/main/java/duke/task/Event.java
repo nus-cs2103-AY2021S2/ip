@@ -2,8 +2,8 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/** Create a Event class
- *
+/**
+ * The event class initialize and manage event tasks.
  */
 public class Event extends Task {
 
@@ -11,42 +11,46 @@ public class Event extends Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    /**Constructor to create events object
-     * @param title
-     * @param  b boolean
-     * @param data duedate
+    /**
+     * Create an event task with description, task status and due date
+     * @param description task description
+     * @param isCompleted task status
+     * @param dueDate due date
      */
 
-    public Event(String title, Boolean b, LocalDate data) {
-        super(title, b);
-        this.date = data;
+    public Event(String description, Boolean isCompleted, LocalDate dueDate) {
+        super(description, isCompleted);
+        this.date = dueDate;
     }
 
-    /**Constructor to create events object for retrieval of task from data file
-     * @param title
-     * @param  b boolean
-     * @param date duedate
-     * @param  startTime
-     * @param  endTime
+    /**
+     * Create an event task with additional start and end time field
+     * @param description task description
+     * @param isCompleted task status
+     * @param dueDate due date
+     * @param startTime start time
+     * @param endTime end time
      */
 
-    public Event(String title, Boolean b, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        super(title, b);
-        this.date = date;
+    public Event(String description, Boolean isCompleted, LocalDate dueDate, LocalTime startTime, LocalTime endTime) {
+        super(description, isCompleted);
+        this.date = dueDate;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    /** Change representation of task to be added to data file
-     * @return String
+    /**
+     * Returns a string representation of event task to be added to data file
+     * @return string representation of event task
      */
     @Override
     public String changeFormat() {
         return "E" + super.changeFormat() + "," + this.date + "," + this.startTime + "," + this.endTime;
     }
 
-    /** Print customized representation of task to user
-     * @return String
+    /**
+     * Returns a customized representation of task to user
+     * @return string representation of event task to be displayed to the user
      */
     @Override
     public String toString() {

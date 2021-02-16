@@ -8,7 +8,7 @@ import duke.exception.DukeException;
 import java.io.IOException;
 
 /**
- * A class that interacts with TaskList to add and modify task
+ * A class that interacts with TaskList class to add, show, delete, find task as well as marking them as completed
  */
 public class Command {
 
@@ -17,18 +17,16 @@ public class Command {
     protected static DataStorage storage;
     protected static UI ui = new UI();
 
-    /** Create command object
-     *
-     * @param input
+    /**
+     * Create command object
      */
     public Command (String input) {
         this.input = input;
     }
 
     /**
-     * Allow each command to execute their own function
-     *
-     * @return
+     * Retrieve past data from the data file and allow modification from other commands classes
+     * @return null
      * @throws DukeException
      */
     public String execute() throws DukeException, IOException {

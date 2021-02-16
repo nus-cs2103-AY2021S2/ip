@@ -2,13 +2,9 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
-import duke.tasklist.TaskList;
-import duke.ui.UI;
 import duke.data.DataStorage;
 import duke.exception.DukeException;
-import duke.task.Task;
 
 /**
  * Create add command class
@@ -56,7 +52,7 @@ public class AddCommand extends Command {
         DataStorage.save(tasklist.getTaskListArray());
 
         if(executedUnsuccessfully){
-            return ui.printDuplicateMessage();
+            return ui.DisplayDuplicatedMessage();
         }else{
            return ui.displayAddedTaskMessage(tasklist.getTask(currentSize), currentSize+1);
         }

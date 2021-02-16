@@ -3,47 +3,51 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.WeakHashMap;
 
-/** Create a Deadline class
- *
+/**
+ * The deadline class initialize and manage deadline tasks.
  */
 public class Deadline extends Task {
 
     private LocalDate dueDate;
     private LocalTime dueTime;
 
-    /**Constructor to create deadline object
-     * @param title
-     * @param dueBy
-     * @param time
+    /**
+     * Create a deadline task with description, due date and due time
+     * @param description task description
+     * @param dueBy due date
+     * @param dueTime due time
      */
-    public Deadline(String title, LocalDate dueBy, LocalTime time) {
-        super(title);
+    public Deadline(String description, LocalDate dueBy, LocalTime dueTime) {
+        super(description);
         this.dueDate = dueBy;
-        this.dueTime = time;
+        this.dueTime = dueTime;
     }
 
-    /** Overloaded constructor for retrieval of task from data file
-     * @param title
-     * @param b boolean
-     * @param dueBy
-     * @param time
+    /**
+     * Create a deadline task with additional status field
+     * @param description task description
+     * @param isCompleted task status
+     * @param dueBy due date
+     * @param dueTime due time
      */
-    public Deadline(String title, Boolean b, LocalDate dueBy, LocalTime time) {
-        super(title, b);
+    public Deadline(String description, Boolean isCompleted, LocalDate dueBy, LocalTime dueTime) {
+        super(description, isCompleted);
         this.dueDate = dueBy;
-        this.dueTime = time;
+        this.dueTime = dueTime;
     }
 
-    /** Change representation of task to be added to data file
-     * @return String
+    /**
+     * Returns a string representation of deadline task to be added to data file
+     * @return string representation of deadline task
      */
     @Override
     public String changeFormat() {
         return "D" + super.changeFormat() + "," + this.dueDate + "," + this.dueTime;
     }
 
-    /** Print customized representation of task to user
-     * @return String
+    /**
+     * Returns a customized representation of deadline task to user
+     * @return string representation of deadline task to be displayed to the user
      */
     @Override
     public String toString() {
