@@ -3,6 +3,14 @@
 Olly Chat Bot (OCB) is a Command Line Interface (CLI) task management application which keeps track of your task and
 their respective deadlines so you'll never miss them!
 
+## Quick Start
+1. Ensure you have `Java 11` or above installed in your Computer
+2. Download the latest `olly.jar` from Github Release
+3. Copy the file to the folder you want to use as home folder for Olly
+4. Double-click the file to start the app.
+
+If you do not have Java 11, download it [here](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html). 
+
 ## Features 
 
 ### Listing all tasks: `list`
