@@ -8,6 +8,7 @@ public class AddCommand extends Command {
         String description;
         String time;
 
+        assert taskDetail.length > 0;
         // initialise AddCommand with a specific task
         switch(operator) {
         case "todo":

@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     private String successMessage;
-    private String errorMessage;
 
     public ListCommand() {}
 

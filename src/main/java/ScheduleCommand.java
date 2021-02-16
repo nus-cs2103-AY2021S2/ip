@@ -26,7 +26,7 @@ public class ScheduleCommand extends Command {
         if (tasksByDate.size() < 1) {
             responseToUser = "Congrats! It's a FREE day.";
         } else {
-            responseToUser = "Here are the tasks for this date: ";
+            responseToUser = "Here are the tasks due/on this date: ";
             // loop through list and print every task in a new line
             for (int i = 1; i < tasksByDate.size() + 1; i++) {
                 Task curTask = tasksByDate.get(i - 1);
