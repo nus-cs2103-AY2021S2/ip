@@ -12,22 +12,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-// should be called fileSetup, but loadfromharddisk method doesn't fit
+// todo w5 / w6 storage parsing cases --> methods too long
 
-/*
-// todo
-// storage objects should store info about where each list/anything should be saved
-// have a final hashmap of where each object to store is stored
-// todo seems like storage object might be associated with the duke object? not sure
-
-// w5 / w6 storage parsing cases --> methods too long
-
- */
 /**
  * This class handles setting up the file to save Duke data to.
  */
 public class Storage {
-    // fixme this is wrong when run by bat file or jar file
     private static final String PROJECT_DIR = System.getProperty("user.dir");
     private static final Path TASK_LIST_FILE_DIR =  Paths.get(PROJECT_DIR,  "data");
     private static final Path TASK_LIST_FILE_PATH = Paths.get(
@@ -63,25 +53,19 @@ public class Storage {
      * @throws IOException
      */
     private static void createTasksFile() throws IOException {
-        if (doesTaskFileExist()) {
-            // probably not gonna be used due to tasklist.TaskList.java impl
-            return;
-        } else {
-            boolean doesDataDirExist = doesFileOrDirectoryExist(TASK_LIST_FILE_DIR);
+        assert !doesTaskFileExist() : "this shouldn't be called if task file already exists at stated path";
 
-            // create directory if it doesn't exist
-            if (!doesDataDirExist) {
-                boolean hasCreated = new File(TASK_LIST_FILE_DIR.toString()).mkdir();
-                System.out.println("done 2 " + hasCreated);
-            }
+        boolean doesDataDirExist = doesFileOrDirectoryExist(TASK_LIST_FILE_DIR);
 
-            // create file
-            // Path p = Paths.get(PROJECT_DIR, "src", "data", "tasks.txt");
-
-            boolean isCreated = new File(TASK_LIST_FILE_PATH.toString()).createNewFile();
-
-            assert isCreated : "task file still hasn't been created";
+        // create directory if it doesn't exist
+        if (!doesDataDirExist) {
+            boolean hasCreated = new File(TASK_LIST_FILE_DIR.toString()).mkdir();
+            System.out.println("done 2 " + hasCreated);
         }
+
+        boolean isCreated = new File(TASK_LIST_FILE_PATH.toString()).createNewFile();
+
+        assert isCreated : "task file still hasn't been created";
     }
 
 
