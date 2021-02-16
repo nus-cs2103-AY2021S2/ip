@@ -1,6 +1,7 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
+import duke.commands.CommandWord;
+import duke.exceptions.InvalidInputFormatException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,19 +13,18 @@ import java.time.format.DateTimeParseException;
  * Description: A class to represent a deadline in the task list
  */
 public class Deadline extends Task {
-    protected LocalDate period;
+    protected LocalDate date;
 
     /**
      * Constructor: creates a new Deadline
      * @param description Deadline description
      */
-    public Deadline(String description, String period) throws DukeException {
+    public Deadline(String description, String date) throws InvalidInputFormatException {
         super(description);
         try {
-            this.period = LocalDate.parse(period);
+            this.date = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!!! Please specify the date in this format:\n"
-                                        + "  deadline [task description] /at [yyyy-mm-dd]");
+            throw new InvalidInputFormatException(CommandWord.DEADLINE);
         }
     }
 
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String saveFormat() {
-        return "D | " + super.saveFormat() + " | " + period;
+        return "D | " + super.saveFormat() + " | " + date;
     }
 
     /**
@@ -43,6 +43,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + period.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 }
