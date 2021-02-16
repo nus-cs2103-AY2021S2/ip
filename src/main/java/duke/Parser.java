@@ -38,53 +38,81 @@ public class Parser {
 
             switch (splitInput[0]) {
             case "done":
-                if (splitInput.length < 2) {
-                    throw new DukeException("Please enter the task to mark as finished!");
-                }
+                checkDoneFormat(splitInput);
                 return getDoneCommand(splitInput[1]);
 
             case "delete":
-                if (splitInput.length < 2) {
-                    throw new DukeException("Please enter the task to delete!");
-                }
+                checkDeleteFormat(splitInput);
                 return getDeleteCommand(splitInput[1]);
 
             case "check":
-                if (splitInput.length < 2) {
-                    throw new DukeException("Please enter the date to check!");
-                }
+                checkCheckFormat(splitInput);
                 return getCheckCommand(splitInput[1]);
 
             case "find":
-                if (splitInput.length < 2) {
-                    throw new DukeException("Please enter the keyword(s) to find!");
-                }
+                checkFindFormat(splitInput);
                 return new FindCommand(splitInput[1].strip());
 
             case "todo":
-                if (splitInput.length < 2) {
-                    throw new ToDoException("Todo details cannot be empty!");
-                }
+                checkToDoFormat(splitInput);
                 ToDo todo = new ToDo(splitInput[1]);
                 return new AddCommand(todo);
 
             case "deadline":
-                if (splitInput.length < 2) {
-                    throw new DeadlineException("Deadline details cannot be empty!");
-                }
+                checkDeadlineFormat(splitInput);
                 Deadline deadline = getDeadline(splitInput[1]);
                 return new AddCommand(deadline);
 
             case "event":
-                if (splitInput.length < 2) {
-                    throw new EventException("Event details cannot be empty!");
-                }
+                checkEventFormat(splitInput);
                 Event event = getEvent(splitInput[1]);
                 return new AddCommand(event);
 
             default:
                 throw new DukeException("I'm sorry :(\nI don't know what that means");
             }
+        }
+    }
+
+    private static void checkDoneFormat(String[] splitInput) throws DukeException {
+        if (splitInput.length < 2) {
+            throw new DukeException("Please enter the task to mark as finished!");
+        }
+    }
+
+    private static void checkDeleteFormat(String[] splitInput) throws DukeException {
+        if (splitInput.length < 2) {
+            throw new DukeException("Please enter the task to delete!");
+        }
+    }
+
+    private static void checkCheckFormat(String[] splitInput) throws DukeException {
+        if (splitInput.length < 2) {
+            throw new DukeException("Please enter the date to check!");
+        }
+    }
+
+    private static void checkFindFormat(String[] splitInput) throws DukeException {
+        if (splitInput.length < 2) {
+            throw new DukeException("Please enter the keyword(s) to find!");
+        }
+    }
+
+    private static void checkToDoFormat(String[] splitInput) throws ToDoException {
+        if (splitInput.length < 2) {
+            throw new ToDoException("Todo details cannot be empty!");
+        }
+    }
+
+    private static void checkDeadlineFormat(String[] splitInput) throws DeadlineException {
+        if (splitInput.length < 2) {
+            throw new DeadlineException("Deadline details cannot be empty!");
+        }
+    }
+
+    private static void checkEventFormat(String[] splitInput) throws EventException {
+        if (splitInput.length < 2) {
+            throw new EventException("Event details cannot be empty!");
         }
     }
 
