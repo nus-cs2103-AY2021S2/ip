@@ -11,7 +11,8 @@ Duke's GUI is in the form of a chatbot.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed in your computer
-2. Download the latest `duke.jar` [here](www.example.com)
+2. Download the
+   latest `duke.jar` [here](https://github.com/yaowei-soc/ip/releases/download/release/duke.jar)
 
 ## Features
 
