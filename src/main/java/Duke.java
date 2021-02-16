@@ -1,7 +1,9 @@
-import main.java.Task;
-import main.java.Todo;
-import main.java.Deadline;
+import main.java.EmptyDescriptionException;
+import main.java.InvalidCommandException;
 import main.java.Event;
+import main.java.Deadline;
+import main.java.Todo;
+import main.java.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,45 +14,55 @@ public class Duke {
     private static final String SEPARATOR = INDENTATION + HORIZONTAL_LINE;
 
     public static void main(String[] args) {
-        displayWelcomeMsg();
-
         ArrayList<Task> tasks = new ArrayList<>();
+
+        displayWelcomeMsg();
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine();
         while (!cmd.equals("bye")) {
-            switch (cmd) {
-            case "list":
-                printTasks(tasks);
-                break;
-            default:
-                String[] arr = cmd.split(" ", 2);
-                switch (arr[0]) {
-                case "done":
-                    int index = Integer.parseInt(arr[1]) - 1;
-                    Task task = tasks.get(index);
-                    task.markAsDone();
-                    displayMarkTaskAsDoneMsg(task);
-                    break;
-                case "todo":
-                    // Fallthrough
-                case "deadline":
-                    // Fallthrough
-                case "event":
-                    addTask(tasks, cmd);
-                    displayAddTaskMsg(tasks);
-                    break;
-                default:
-                    System.out.println(SEPARATOR);
-                    System.out.println("Invalid command!");
-                    System.out.println(SEPARATOR);
-                    break;
-                }
-                break;
+            try {
+                handleInput(tasks, cmd);
+            } catch (InvalidCommandException e) {
+                System.out.println(SEPARATOR);
+                System.out.println("I'm sorry, but I don't know what that means :(");
+                System.out.println(SEPARATOR);
             }
             cmd = sc.nextLine();
         }
-        displayExitMsg();
         sc.close();
+        displayExitMsg();
+    }
+
+    public static void handleInput(ArrayList<Task> tasks, String cmd) throws InvalidCommandException {
+        if (cmd.equals("list")) {
+            printTasks(tasks);
+        } else {
+            String[] arr = cmd.split(" ", 2);
+            switch (arr[0]) {
+            case "done":
+                int index = Integer.parseInt(arr[1]) - 1;
+                Task task = tasks.get(index);
+                task.markAsDone();
+                displayMarkTaskAsDoneMsg(task);
+                break;
+            case "todo":
+                // Fallthrough
+            case "deadline":
+                // Fallthrough
+            case "event":
+                try {
+                    addTask(tasks, cmd);
+                    displayAddTaskMsg(tasks);
+                } catch (EmptyDescriptionException e) {
+                    System.out.println(SEPARATOR);
+                    System.out.println("The description of a task cannot be empty.");
+                    System.out.println(SEPARATOR);
+                }
+                break;
+            default:
+                throw new InvalidCommandException();
+            }
+        }
     }
 
     public static void displayWelcomeMsg() {
@@ -71,8 +83,11 @@ public class Duke {
         System.out.println(SEPARATOR);
     }
 
-    public static void addTask(ArrayList<Task> tasks, String cmd) {
+    public static void addTask(ArrayList<Task> tasks, String cmd) throws EmptyDescriptionException {
         String[] arr = cmd.split(" ", 2);
+        if (arr.length == 1) {
+            throw new EmptyDescriptionException();
+        }
         String type = arr[0];
         String rest = arr[1];
         Task task;
