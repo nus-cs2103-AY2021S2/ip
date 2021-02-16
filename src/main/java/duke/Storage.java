@@ -106,10 +106,7 @@ public class Storage {
 
     private Task handleNewTask(String taskType, String[] taskDetail) {
         Task newTask = new Task();
-        System.out.println(taskDetail[1]);
-        System.out.println(taskDetail[2]);
-        System.out.println(taskDetail[0]);
-        System.out.println(taskDetail.length);
+
         switch (taskType) {
         case "T":
             newTask = new ToDo(taskDetail[2]);
