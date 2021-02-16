@@ -22,7 +22,7 @@ public class Parser {
     String input = command;
     String outputMessage = "";
     if (input.equals("bye")) {
-      outputMessage = ui.bye();
+      System.exit(0);
     } else if (input.equals("list")) {
       outputMessage = tasklist.listTask();
     } else if (input.split(" ")[0].equals("done")) {
