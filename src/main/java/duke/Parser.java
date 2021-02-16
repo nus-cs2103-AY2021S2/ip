@@ -38,6 +38,7 @@ public class Parser {
             return tasks;
         }
         Task task;
+
         switch (inputSplit[0]) {
             case "done":
                 ui.printSetDone(tasks.setDone(Integer.valueOf(inputSplit[1]) - 1));
@@ -69,6 +70,7 @@ public class Parser {
             default:
                 ui.showInvalidCommandError();
         }
+
         return tasks;
     }
 }

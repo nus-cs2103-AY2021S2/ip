@@ -7,9 +7,11 @@ public class DukeException extends Exception {
      * @return a Duke Exception
      */
     public DukeException(String message) {
+
         super(message);
     }
     public DukeException() {
+
         super();
     }
 }

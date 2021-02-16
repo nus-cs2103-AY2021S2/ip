@@ -5,9 +5,11 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
+
         this.tasks = tasks;
     }
     public TaskList() {
+
         this.tasks = new ArrayList<>();
     }
 
@@ -16,6 +18,7 @@ public class TaskList {
      * @param task task to be added
      */
     public void addTask(Task task) {
+
         tasks.add(task);
     }
 
@@ -25,6 +28,7 @@ public class TaskList {
      * @return Task object in the given position
      */
     public Task getTask(int index) {
+
         return tasks.get(index);
     }
 
@@ -54,6 +58,7 @@ public class TaskList {
      * @return the size of the task list
      */
     public int getSize() {
+
         return tasks.size();
     }
 }

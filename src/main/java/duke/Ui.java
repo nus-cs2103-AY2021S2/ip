@@ -6,6 +6,7 @@ public class Ui {
     Scanner sc;
 
     public Ui() {
+
         this.sc = new Scanner(System.in);
     }
 
@@ -13,6 +14,7 @@ public class Ui {
      * This function prints the greeting message to the console
      */
     public void greet() {
+
         System.out.println("Hello! What can I do for you:>");
     }
 
@@ -56,6 +58,7 @@ public class Ui {
      * @param task task to be printed
      */
     public void printTask(Task task) {
+
         System.out.println(task.toString());
     }
 
@@ -75,6 +78,7 @@ public class Ui {
      * This function prints the message if the TaskList is empty
      */
     public void printEmptyList() {
+
         System.out.println("You have no tasks in the list!");
     }
 
@@ -94,6 +98,7 @@ public class Ui {
      * This function prints the error message when there is a reading error
      */
     public void showLoadingError() {
+
         System.out.println("An error has occurred while reading duke.txt");
     }
 
@@ -101,6 +106,7 @@ public class Ui {
      * This function prints the error message when there is an error writing the final taskList to the file
      */
     public void showWritingError() {
+
         System.out.println("Error occurred while writing to file.");
     }
 
@@ -116,6 +122,7 @@ public class Ui {
      * @param e which is the exception to be printed
      */
     public void showError(Exception e) {
+
         System.out.println(e.getMessage());
     }
 

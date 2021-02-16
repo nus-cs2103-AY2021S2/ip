@@ -28,6 +28,7 @@ public class Duke {
 
     public void run() {
         ui.greet();
+
         String input = ui.getInput();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
@@ -41,6 +42,7 @@ public class Duke {
             }
             input = ui.getInput();
         }
+        
         ui.end();
 
         try {

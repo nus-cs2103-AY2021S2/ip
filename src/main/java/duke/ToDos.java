@@ -3,6 +3,7 @@ package duke;
 public class ToDos extends Task {
 
     public ToDos(boolean isDone, String eventName) {
+
         super(isDone, eventName, "T");
     }
 

@@ -15,6 +15,7 @@ public class Task {
      * This function sets a task to be done
      */
     public void setDone() {
+
         this.isDone = true;
     }
 

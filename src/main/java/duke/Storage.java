@@ -12,6 +12,7 @@ public class Storage {
     private Ui ui = new Ui();
 
     public Storage(String filePath) {
+
         this.filePath = filePath;
     }
 
@@ -23,6 +24,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         File tasks = new File(filePath);
+
         try {
             if (tasks.exists()) {
                 Scanner sc1 = new Scanner(tasks);
@@ -46,6 +48,7 @@ public class Storage {
         } catch (DukeException e) {
             throw e;
         }
+
         return list;
     }
 
@@ -71,6 +74,7 @@ public class Storage {
                 }
                 writer.write(System.lineSeparator());
             }
+
             writer.close();
         } catch (IOException e) {
             throw new DukeException();
