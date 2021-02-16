@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -26,7 +27,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    private final Circle clip = new Circle(50, 50, 50);
+    private final Circle clip = new Circle(50, 50, 45);
 
     private DialogBox(String text, Image img) {
         try {
@@ -56,12 +57,14 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, null, null)));
+        db.setPadding(new Insets(0, 0, 0, 10));
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setPadding(new Insets(0, 10, 0, 0));
         return db;
     }
 }
