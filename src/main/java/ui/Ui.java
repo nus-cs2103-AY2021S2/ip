@@ -110,7 +110,7 @@ public class Ui {
      */
     public String delete(DukeTask task, int size) {
         return "Noted. I've removed this task:\n"
-            + "  " + task
+            + "  " + task + "\n"
             + String.format("Now you have %d tasks in the list.\n", size);
     }
 
