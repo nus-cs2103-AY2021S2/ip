@@ -71,13 +71,13 @@ public class Duke {
                 updateAndGenerateOutput(c);
             }
         } catch (ParseException e) {
-            ui.handleException(e);
+            ui.handleParsingError(e);
         } catch (InvalidCommandException e) {
-            ui.handleException(e);
+            ui.handleInvalidCommand(e);
         } catch (EmptyArgumentException e) {
-            ui.handleException(e);
+            ui.handleEmptyArgument(e);
         } catch (BadDateArgumentException e) {
-            ui.handleException(e);
+            ui.handleBadDate(e);
         } finally {
             saveIfNeeded();
         }

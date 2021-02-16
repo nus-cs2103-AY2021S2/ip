@@ -127,37 +127,37 @@ public class Ui {
     }
 
     /**
-     * Generates an UI alert for some particular error.
+     * Generates an UI alert for parsing error
      *
      * @param e Exception that requires an error message
      */
-    public void handleException(ParseException e) {
+    public void handleParsingError(ParseException e) {
         builder.append("Command has invalid parsing.\n");
         builder.append(e.getMessage() + "\n");
     }
     /**
-     * Generates an UI alert for some particular error.
+     * Generates an UI alert for an invalid command.
      *
      * @param e Exception that requires an error message
      */
-    public void handleException(InvalidCommandException e) {
+    public void handleInvalidCommand(InvalidCommandException e) {
         builder.append(e.getMessage() + "\n");
     }
     /**
-     * Generates an UI alert for some particular error.
+     * Generates an UI alert for empty arguments.
      *
      * @param e Exception that requires an error message
      */
-    public void handleException(EmptyArgumentException e) {
+    public void handleEmptyArgument(EmptyArgumentException e) {
         builder.append("Cannot have empty argument\n");
         builder.append(e.getMessage() + "\n");
     }
     /**
-     * Generates an UI alert for some particular error.
+     * Generates an UI alert for bad date formatting.
      *
      * @param e Exception that requires an error message
-     */ //TODO: Figure out how to do javadoc for overloaded method.
-    public void handleException(BadDateArgumentException e) {
+     */
+    public void handleBadDate(BadDateArgumentException e) {
         builder.append("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044\n");
         builder.append(e.getMessage() + "\n");
     }
