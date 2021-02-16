@@ -15,7 +15,7 @@ public class EventTest {
     @Test
     public void testEventInit() {
         Event event = new Event("Pet expo", LocalDate.now(), LocalTime.now());
-        String expectedToString = "[E][ ] Pet expo (at: "
+        String expectedToString = "[E][\u2717] Pet expo (at: "
                 + LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
                 + LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
         assertEquals(expectedToString, event.toString());

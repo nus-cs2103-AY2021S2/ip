@@ -10,7 +10,7 @@ public class TodoTest {
     @Test
     public void testTodoInit() {
         Todo todo = new Todo("Call granny");
-        String expectedToString = "[T][ ] Call granny";
+        String expectedToString = "[T][\u2717] Call granny";
         assertEquals(expectedToString, todo.toString());
     }
 
