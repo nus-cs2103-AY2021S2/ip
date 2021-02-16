@@ -4,13 +4,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="2.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" depthTest="ENABLE" maxHeight="2.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="dialog" alignment="TOP_LEFT" style="-fx-background-color: rgba(0, 100, 100, 0.8); -fx-background-radius: 5; -fx-padding: 5;" text="Label" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Papyrus Condensed" size="12.0" />
+         </font></Label>
+      <StackPane prefHeight="0.0" prefWidth="108.0" style="-fx-padding: 10; -fx-background-color: #212b31; -fx-background-radius: 10;">
+         <children>
+              <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 10; -fx-background-color: firebrick; -fx-background-radius: 5;" />
+         </children>
+      </StackPane>
     </children>
     <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="2.0" left="2.0" right="2.0" top="5.0" />
     </padding>
 </fx:root>

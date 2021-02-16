@@ -1,8 +1,4 @@
 ___________________________
-1.[E][X] 4 people at: 4 people 
-2.[D][O] ghogh by: JANUARY 1 2020 
-3.[D][O]  by: 5pme 
-4.[T][O] add 
-5.[T][O]  
-6.[T][O]  
+1.[D][O] ghogh by: JANUARY 1 2020 
+2.[T][O]  
 ___________________________
