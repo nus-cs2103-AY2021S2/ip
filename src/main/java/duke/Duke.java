@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * getResponse: Generates a response from Duke
+     * getResponse: Generates a response from Duke based on inputs from the user
      * @param userInput
      * @return a response from Duke
      */
@@ -47,7 +47,7 @@ public class Duke {
     }
 
     /**
-     * getDukeResponses: Retrieves DukeResponses
+     * getDukeResponses: Retrieves DukeResponses object
      * @return DukeResponses
      */
     public DukeResponses getDukeResponses() {
