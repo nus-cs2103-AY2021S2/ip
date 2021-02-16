@@ -36,6 +36,7 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    //Solution adapted from https://github.com/TeoHoeKeat/ip/blob/master/src/main/java/fakebot/ui/DialogBox.java
     private void style() {
         CornerRadii rad = new CornerRadii(5);
         Color color = Color.rgb(98,  125,  168);
