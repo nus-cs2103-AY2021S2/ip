@@ -56,12 +56,12 @@ public class Ui {
         String textHolder = "";
 
         textHolder += "To add a todo, use command: \n" +
-                "todo<space>taskName\n";
+                "eg: todo code cs2103\n";
         textHolder += "To add a deadline, use command: \n" +
-                "deadline<space>taskName<space>/by<space>YYYY-MM-DD\n";
+                "eg: deadline fly kite /by 2020-06-10\n";
         textHolder += "To add a event, use command: \n" +
-                "event<space>taskName<space>/at<space>YYYY-MM-DD<space>HH:MM\n";
-        textHolder += "To find similar tasks, use find<space>task name\n";
+                "eg: event finish iP /at 2020-02-18 18:00\n";
+        textHolder += "To find similar tasks, use eg: find my CAP\n";
 
         return textHolder;
     }
@@ -140,7 +140,10 @@ public class Ui {
     // Level 10 GUI
 
     public String welcomeMessage() {
-        return "Welcome! I am Justin, your personal Timetable planner";
+        String msg = "Welcome! I am Justin,\n";
+        msg += "Your personal Timetable planner";
+
+        return msg;
     }
 
     public String terminateMessage() {
