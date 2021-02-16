@@ -41,8 +41,8 @@ public class Task {
     }
 
     private LocalDateTime formatToDateTime(String time) {
-        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(time, format);
         return dateTime;
     }
 

@@ -19,7 +19,8 @@ public class Event extends Task {
      */
     private String getTime() {
         // convert dateTime from "yyyy-m-d hh:mm" to "MMM d yyyy hh:mm a"
-        String time = this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        String time = this.dateTime.format(format).replace("T", " ");
         return time;
     }
 
