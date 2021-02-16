@@ -36,12 +36,17 @@ public class Storage {
     public ArrayList<Task> readFile() throws DukeException {
         File file = new File(path);
         ArrayList<Task> taskList = new ArrayList<>();
-        int lineIndex = 1;
 
         if (!file.exists()) {
             try {
-                createFile(file);
-            } catch (DukeException e) {
+                boolean success = file.getParentFile().mkdir();
+
+                if (success) {
+                    file.createNewFile();
+                } else {
+                    throw new DukeException("Could not create a new file.");
+                }
+            } catch (IOException e) {
                 throw new DukeException("Could not create a new file.");
             }
         }
@@ -50,10 +55,10 @@ public class Storage {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
-                Task task = processLine(line, lineIndex);
+                Task task = processLine(line);
                 taskList.add(task);
-                lineIndex++;
             }
+            scanner.close();
         } catch (FileNotFoundException | DukeException e) {
             throw new DukeException(e.getMessage());
         }
@@ -62,27 +67,12 @@ public class Storage {
     }
 
     /**
-     * Creates a file to save to.
-     * @param file File to be saved to.
-     * @throws DukeException Occurs when file could not be created.
-     */
-    private void createFile(File file) throws DukeException {
-        try {
-            file.getParentFile().mkdir();
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new DukeException("Could not create a new file.");
-        }
-    }
-
-    /**
      * Processes a line of text in the saved file.
      * @param line Line being processed.
-     * @param lineIndex Index of the line in the file.
      * @return Task created from line that is read from.
      * @throws DukeException Occurs when saved file could not be read from or file format is incorrect.
      */
-    private Task processLine(String line, int lineIndex) throws DukeException {
+    private Task processLine(String line) throws DukeException {
         String[] lineArr = line.split(" \\| ");
 
         String typeOfTask;
@@ -147,10 +137,10 @@ public class Storage {
 
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            stringToWrite.append(formatTask(task));
-            stringToWrite.append("\n");
+            stringToWrite.append(formatTask(task)).append("\n");
         }
         fileWriter.write(stringToWrite.toString());
+        fileWriter.flush();
         fileWriter.close();
     }
 
