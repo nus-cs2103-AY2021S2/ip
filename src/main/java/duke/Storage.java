@@ -102,15 +102,10 @@ public class Storage {
      * @throws IOException Unable to create subfolder
      */
     public static void saveTaskList(TaskList data) throws IOException {
-        List<Task> store = data.getRawData();
-        StringBuilder saveText = new StringBuilder();
-        for (Task t: store) {
-            saveText.append(t.toFileString());
-            saveText.append('\n');
-        }
+        String saveText = data.toFileString();
         File f = getOrCreateFile();
         FileWriter writer = new FileWriter(f);
-        writer.write(saveText.toString());
+        writer.write(saveText);
         writer.close();
     }
 

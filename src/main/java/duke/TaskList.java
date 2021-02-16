@@ -26,16 +26,6 @@ public class TaskList {
     }
 
     /**
-     * Get Raw data for extraction of File ready data from Task directly
-     * TODO: Push the preparation of data to TaskList
-     *
-     * @return Underlying data structure
-     */
-    public List<Task> getRawData() {
-        return this.store;
-    }
-
-    /**
      * Runs command on TaskList and returns command specific output.
      * Side effects are present on some commands
      *
@@ -155,5 +145,20 @@ public class TaskList {
     }
     private String formatOrderedPrint(int i) {
         return "Entry " + (i + 1) + "|" + store.get(i).toString();
+    }
+
+    /**
+     * Generates a string that represents the state of TaskList,
+     * such that the program can recreate it.
+     *
+     * @return A machine interpretable representation of TaskList
+     */
+    public String toFileString() {
+        StringBuilder saveText = new StringBuilder();
+        for (Task t: store) {
+            saveText.append(t.toFileString());
+            saveText.append('\n');
+        }
+        return saveText.toString();
     }
 }
