@@ -11,8 +11,8 @@ public class DeadlineHandler extends TaskHandler {
     }
 
     public Deadline getDeadlineTask() {
-        Deadline deadlineTask = (Deadline) toAdd;
-        return deadlineTask;
+        assert toAdd instanceof Deadline;
+        return (Deadline) toAdd;
     }
 
     @Override
