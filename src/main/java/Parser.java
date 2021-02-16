@@ -4,14 +4,13 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Parser {
+    public static final String ERROR_INVALID_DATE_FORMAT = "OOPS!! DateTime format is incorrect. yyyy-M-dd Hmm";
     private static final String ERROR_DESCRIPTION = "OOPS!!! The description cannot be empty.";
     private static final String ERROR_SEARCH_TERM = "OPPS!!! The search term for find cannot be empty.";
     private static final String ERROR_OPTION = "OOPS!! Option is missing or at the wrong place. Keyword <Option> ....";
     private static final String ERROR_INVALID_COMMAND = "OOPS!!! I`m sorry. but i don`t know what that means :-(";
-    private static final String ERROR_INVALID_UPDATE_COMMAND = "OOPS!! Update command should be in this form : " +
-            "Update <field> <Value> ";
-
-    public static final String ERROR_INVALID_DATE_FORMAT = "OOPS!! DateTime format is incorrect. yyyy-M-dd Hmm";
+    private static final String ERROR_INVALID_UPDATE_COMMAND = "OOPS!! Update command should be in this form : "
+            + "Update <field> <Value> ";
 
     /**
      * Returns a Command object based on the fullCommand given
@@ -46,13 +45,21 @@ public class Parser {
         }
         switch (commandParts[0].toLowerCase()) {
         case"bye":
+            //Fallthrough
         case"list":
+            //Fallthrough
         case"done":
+            //Fallthrough
         case"delete":
+            //Fallthrough
         case "find":
+            //Fallthrough
         case"todo":
+            //Fallthrough
         case"deadline":
+            //Fallthrough
         case"event":
+            //Fallthrough
         case "update":
             break;
         default:
@@ -92,6 +99,7 @@ public class Parser {
     private static boolean checkRequireDescription(String keyword) {
         switch (keyword) {
         case"bye":
+            //Fallthrough
         case"list":
             return false;
         default:
@@ -102,7 +110,9 @@ public class Parser {
     private static boolean checkRequireOption(String keyword) {
         switch (keyword) {
         case"done":
+            //Fallthrough
         case"delete":
+            //Fallthrough
         case "update":
             return true;
         default:
@@ -113,6 +123,7 @@ public class Parser {
     private static boolean checkRequireDeadline(String keyword) {
         switch(keyword) {
         case "find":
+            //Fallthrough
         case "todo":
             return false;
         default:
@@ -184,7 +195,7 @@ public class Parser {
         String remainderCommand = commandParts[1].trim();
         int firstSpace = remainderCommand.indexOf(" ");
         int option = Integer.parseInt(remainderCommand.substring(0, firstSpace)) - 1;
-        int nextSpace = remainderCommand.indexOf(" ", firstSpace + 1 );
+        int nextSpace = remainderCommand.indexOf(" ", firstSpace + 1);
         if (nextSpace == -1) {
             throw new DukeException(ERROR_INVALID_UPDATE_COMMAND);
         }
