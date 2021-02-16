@@ -12,12 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -73,10 +68,12 @@ public class Haha extends Application {
         scrollPane.setContent(dialogContainer);
 
         AnchorPane mainLayout = new AnchorPane();
+
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         mainLayout.setPrefSize(400.0, 600.0);
         mainLayout.setBackground(new Background(
                 new BackgroundFill(Color.rgb(231, 239, 248), CornerRadii.EMPTY, Insets.EMPTY)));
+
         this.scene = new Scene(mainLayout);
 
     }
@@ -99,6 +96,7 @@ public class Haha extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
+        dialogContainer.setStyle(" -fx-background-image: url(\"/images/background.jpg\");");
         dialogContainer.setBackground(new Background(
                 new BackgroundFill(Color.rgb(231, 239, 248), CornerRadii.EMPTY, Insets.EMPTY)));
     }

@@ -6,13 +6,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 
@@ -32,16 +30,18 @@ public class DialogBox extends HBox {
         displayPicture = imageView;
 
         text.setWrapText(true);
+        text.setMinHeight(Region.USE_PREF_SIZE);
         text.setAlignment(Pos.CENTER);
+        text.setPadding(new Insets(5, 5, 5, 5));
         text.setBackground(new Background(new BackgroundFill(
                 Color.rgb(224, 234, 245),
                 CornerRadii.EMPTY,
                 Insets.EMPTY)));
-        text.setStyle("-fx-text-fill:#31456A;-fx-font-size: 13px;-fx-font-weight:bold;");
+        text.setStyle("-fx-text-fill:#31456A;-fx-font-size: 11px;-fx-font-weight:bold;");
         text.setEffect(new DropShadow(
                 BlurType.GAUSSIAN,
-                Color.rgb(199, 212, 228),
-                3, 5, 0, 0));
+                Color.rgb(200, 220, 230),
+                2, 10, 3, 3));
         displayPicture.setFitWidth(90.0);
         displayPicture.setFitHeight(90.0);
 
