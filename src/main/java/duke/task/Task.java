@@ -70,7 +70,7 @@ public abstract class Task {
      */
     public boolean containsSearch(String search) {
         String targetString = description;
-        boolean isCaseInsensitive = !search.toLowerCase().contains(search);
+        boolean isCaseInsensitive = search.toLowerCase().contains(search);
         if (isCaseInsensitive) {
             targetString = targetString.toLowerCase();
         }
