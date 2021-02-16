@@ -5,7 +5,7 @@ mark completion, obtain the selected task time limit and generate schedule autom
 
 ![hello](images/hello.png)
 
-##Usage
+## Usage
 1.Duck runs under java 11 or above version.
 
 2.Download the app, and double-click the file to start.
