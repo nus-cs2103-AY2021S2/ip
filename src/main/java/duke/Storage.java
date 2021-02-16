@@ -34,9 +34,10 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
+
+        // Hardcoded to: "/data/modoc_tm.txt";
         String currDir = System.getProperty("user.dir");
         String expectedDir = currDir + this.filePath;
-        // Hardcoded to: "/data/modoc_tm.txt";
 
         BufferedReader reader;
         try {
@@ -45,11 +46,15 @@ public class Storage {
             while (lineRead != null) {
                 char taskType = lineRead.charAt(0);
                 String[] data = lineRead.split("/");
+
+                // isDone boolean is represented as '1' or '0'
                 Boolean isDone = (Integer.parseInt(data[1]) == 1);
+
                 if (taskType == 'E') {
                     Event event = new Event(data[2], data[3], isDone);
                     result.add(event);
-                } else if (taskType == 'D') {
+                }
+                else if (taskType == 'D') {
                     String unparsedDate = data[3];
                     LocalDate date = LocalDate.parse(unparsedDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     Deadline deadline = new Deadline(data[2], date, isDone);

@@ -42,93 +42,83 @@ public class Duke {
         }
     }
 
+    //To Do: Java Doc
     public String getResponse(String input) {
         Parser parser = new Parser();
         String trimmedInput = input.trim();
         String command = parser.getCommand(trimmedInput);
         switch (command) {
-            case "bye":
-                storage.save(taskList);
-                Platform.exit();
+        case "bye":
+            storage.save(taskList);
+            Platform.exit();
 
-            case "list":
-                return ui.printList(taskList);
+        case "list":
+            return ui.printList(taskList);
 
-            case "done":
-                try {
-                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                    Task task = taskList.getSingleTask(index);
-                    assert task != null :"task exists";
-                    task.markDone();
+        case "done":
+            try {
+                int index = parser.getIndex(input);
+                Task task = taskList.getSingleTask(index);
+                task.markDone();
 
-                    return ui.printDone(task);
-                } catch (DukeException e) {
-                    return e.printError("Please check the index!");
-                }
+                return ui.printDone(task);
+            } catch (DukeException e) {
+                return e.printError("Please check the index!");
+            }
 
+        case "todo":
+            try {
+                String name = getTodoName(input);
+                Todo todo = new Todo(name);
+                taskList.addTask(todo);
+                return ui.printTask(todo, taskList.getSize());
+            } catch (DukeException e) {
+                return e.printError("Come On Fella! Your ToDo description cannot be empty!");
+            }
 
-            case"todo":
-                try {
-                    String name = getTodoName(input);
-                    Todo todo = new Todo(name);
-                    taskList.addTask(todo);
-                    assert taskList.getSize() > 0 : "size must be greater than 0, ensures task is added.";
+        case "deadline":
+            try {
+                String name = getEventOrDeadlineName(input);
+                String by = getDeadlineAttribute(input);
+                LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-                    return ui.printTask(todo, taskList.getSize());
-                } catch (DukeException e) {
-                    return e.printError("Come On Fella! Your ToDo description cannot be empty!");
-                }
+                Deadline deadline = new Deadline(name, date);
+                taskList.addTask(deadline);
+                return ui.printTask(deadline, taskList.getSize());
 
-            case "deadline":
-                try {
-                    String name = getEventOrDeadlineName(input);
-                    String by = getDeadlineAttribute(input);
-                    LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } catch (DukeException e) {
+                return e.printError("Hmm... You are either lacking a name or /by details!");
+            }
 
-                    Deadline deadline = new Deadline(name, date);
-                    taskList.addTask(deadline);
-                    assert taskList.getSize() > 0 : "size must be greater than 0, ensures task is added.";
+        case "event":
+            try {
+                String name = getEventOrDeadlineName(input);
+                String at = getEventAttribute(input);
+                Event event = new Event(name, at);
+                taskList.addTask(event);
+                return ui.printTask(event, taskList.getSize());
 
-                    return ui.printTask(deadline, taskList.getSize());
+            } catch (DukeException e) {
+                return e.printError("Hmm... You are either lacking a name or /at details!");
+            }
 
-                } catch (DukeException e) {
-                    return e.printError("Hmm... You are either lacking a name or /by details!");
-                }
+        case "delete":
+            try {
+                int deleteIndex = parser.getIndex(input);
+                Task deletedTask = taskList.getSingleTask(deleteIndex);
+                taskList.deleteTask(deleteIndex);
+                return ui.printDelete(deletedTask, taskList.getSize());
+            } catch (DukeException e) {
+                return e.printError("Please choose the correct index for deletion.");
+            }
 
-            case "event":
-                try {
-                    String name = getEventOrDeadlineName(input);
-                    String at = getEventAttribute(input);
-                    Event event = new Event(name, at);
-                    taskList.addTask(event);
-                    assert taskList.getSize() > 0 : "size must be greater than 0, ensures task is added.";
+        case "find":
+            String arguments = parser.getArguments(input);
+            TaskList output = taskList.matchTasks(arguments);
+            return ui.printMatchingTask(output);
 
-                    return ui.printTask(event, taskList.getSize());
-
-                } catch (DukeException e) {
-                    return e.printError("Hmm... You are either lacking a name or /at details!");
-                }
-
-            case "delete":
-                try {
-                    int deleteIndex = parser.getDeleteIndex(input);
-                    Task deletedTask = taskList.getSingleTask(deleteIndex);
-                    taskList.deleteTask(deleteIndex);
-                    assert taskList.getSize() >= 0 : "size must be equal or greater than 0, ensures task is deleted";
-
-                    return ui.printDelete(deletedTask, taskList.getSize());
-                } catch (DukeException e) {
-                    return e.printError("Please choose the correct index for deletion.");
-                }
-
-
-            case "find":
-                String arguments = parser.getArguments(input);
-                TaskList output = taskList.matchTasks(arguments);
-                return ui.printMatchingTask(output);
-
-            default:
-                return ui.printUnknownCommand();
+        default:
+            return ui.printUnknownCommand();
 
         }
     }
