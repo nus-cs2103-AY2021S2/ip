@@ -15,15 +15,17 @@ import com.tanboonji.jhin.exception.JhinException;
  */
 public class DateParser {
 
-    private static final String DATE_FORMAT = "[dd/MM/yyyy][dd-MM-yyyy][dd.MM.yyyy]";
+    private static final String DATE_FORMAT = "[dd/MM/yyyy][dd-MM-yyyy][dd.MM.yyyy][ddMMyyyy][dd/MM/yy]"
+            + "[dd-MM-yy][dd.MM.yy][ddMMyy]";
     private static final DateTimeFormatter DATE_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern(DATE_FORMAT)
             .toFormatter();
     private static final String OUTPUT_FORMAT = "dd MMM yyyy HHmm";
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_FORMAT);
-    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid time format.";
-    private static final String TIME_FORMAT = "[HHmm][mmHH]";
+    private static final String ERROR_MESSAGE = "Sorry, please enter a valid date time format.\n"
+            + "Format: ddMMyyyy HHmm";
+    private static final String TIME_FORMAT = "[HHmm][HH:mm][HH]";
     private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern(TIME_FORMAT)
@@ -40,12 +42,12 @@ public class DateParser {
         LocalDate date;
         LocalTime time;
 
-        date = parseDate(tokenizedInput[0].trim());
+        date = parseDate(tokenizedInput[0]);
 
         if (tokenizedInput.length == 1) {
             time = LocalTime.MAX;
         } else {
-            time = parseTime(tokenizedInput[1].trim());
+            time = parseTime(tokenizedInput[1]);
         }
 
         return LocalDateTime.of(date, time);
@@ -60,7 +62,7 @@ public class DateParser {
      */
     public static LocalDate parseDate(String input) throws JhinException {
         try {
-            return LocalDate.parse(input, DATE_FORMATTER);
+            return LocalDate.parse(input.trim(), DATE_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException(ERROR_MESSAGE);
         }
@@ -75,7 +77,7 @@ public class DateParser {
      */
     public static LocalTime parseTime(String input) throws JhinException {
         try {
-            return LocalTime.parse(input, TIME_FORMATTER);
+            return LocalTime.parse(input.trim(), TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException(ERROR_MESSAGE);
         }
