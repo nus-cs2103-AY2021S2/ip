@@ -108,25 +108,21 @@ public class Parser {
         }
         case "done": {
             emptyDescriptionChecker(tokens);
-
-            String taskInfo = tokens[1];
-            int taskIndex = Integer.parseInt(taskInfo) - 1;
+            int taskIndex = getTaskIndex(tokens[1]);
 
             return new DoneCommand(taskIndex);
         }
         case "delete": {
             emptyDescriptionChecker(tokens);
-
-            String taskInfo = tokens[1];
-            int taskIndex = Integer.parseInt(taskInfo) - 1;
+            int taskIndex = getTaskIndex(tokens[1]);
 
             return new DeleteCommand(taskIndex);
         }
         case "todo": {
             emptyDescriptionChecker(tokens);
 
-            String taskInfo = tokens[1];
-            String[] nextTaskInfo = taskInfo.split(" ", 2);
+            String[] nextTaskInfo = getTaskInfo(tokens[1]);
+
             switch (nextTaskInfo[0]) {
             case "H":
                 return new AddCommand(new ToDo(Priority.HIGH, nextTaskInfo[1]));
@@ -150,19 +146,11 @@ public class Parser {
             String[] nextTaskInfo = tokens[1].split(" ", 2);
             Priority priority = Priority.NONE;
 
-            switch (nextTaskInfo[0]) {
-            case "H":
-                priority = Priority.HIGH;
-                break;
-            case "M":
-                priority = Priority.MEDIUM;
-                break;
-            case "L":
-                priority = Priority.LOW;
-                break;
-            default:
-                break;
+            if (!(nextTaskInfo[0].equals("H") || nextTaskInfo[0].equals("M") || nextTaskInfo[0].equals("L"))) {
+                throw new InvalidDescriptionException("Sorry, invalid priority!");
             }
+
+            priority = getPriority(nextTaskInfo, priority);
 
             String[] taskInfoArr = nextTaskInfo[1].split(" /by ", 2);
 
@@ -170,10 +158,7 @@ public class Parser {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
             }
 
-            String[] dateAndTime = taskInfoArr[1].split(" ");
-            String date = parseDate(dateAndTime[0]);
-            String time = parseTime(dateAndTime[1]);
-            String by = date + " " + time;
+            String by = getDate(taskInfoArr[1]);
 
             return new AddCommand(new Deadline(priority, taskInfoArr[0], by));
         }
@@ -184,19 +169,11 @@ public class Parser {
             String[] nextTaskInfo = taskInfo.split(" ", 2);
             Priority priority = Priority.NONE;
 
-            switch (nextTaskInfo[0]) {
-            case "H":
-                priority = Priority.HIGH;
-                break;
-            case "M":
-                priority = Priority.MEDIUM;
-                break;
-            case "L":
-                priority = Priority.LOW;
-                break;
-            default:
-                break;
+            if (!(nextTaskInfo[0].equals("H") || nextTaskInfo[0].equals("M") || nextTaskInfo[0].equals("L"))) {
+                throw new InvalidDescriptionException("Sorry, invalid priority!");
             }
+
+            priority = getPriority(nextTaskInfo, priority);
 
             if (!(taskInfo.contains("/at"))) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
@@ -209,10 +186,7 @@ public class Parser {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
             }
 
-            String[] dateAndTime = taskInfoArr[1].split(" ");
-            String date = parseDate(dateAndTime[0]);
-            String time = parseTime(dateAndTime[1]);
-            String by = date + " " + time;
+            String by = getDate(taskInfoArr[1]);
 
             return new AddCommand(new Event(priority, taskInfoArr[0], by));
         }
@@ -227,5 +201,42 @@ public class Parser {
             throw new InvalidCommandException("Sorry, I don't know what that means...");
         }
         }
+    }
+
+    private Priority getPriority(String[] nextTaskInfo, Priority priority) {
+        switch (nextTaskInfo[0]) {
+        case "H":
+            priority = Priority.HIGH;
+            break;
+        case "M":
+            priority = Priority.MEDIUM;
+            break;
+        case "L":
+            priority = Priority.LOW;
+            break;
+        default:
+            break;
+        }
+        return priority;
+    }
+
+    private String[] getTaskInfo(String token) throws InvalidDescriptionException {
+        String[] nextTaskInfo = token.split(" ", 2);
+
+        if (!(nextTaskInfo[0].equals("H") || nextTaskInfo[0].equals("M") || nextTaskInfo[0].equals("L"))) {
+            throw new InvalidDescriptionException("Sorry, invalid priority!");
+        }
+        return nextTaskInfo;
+    }
+
+    private String getDate(String s) {
+        String[] dateAndTime = s.split(" ");
+        String date = parseDate(dateAndTime[0]);
+        String time = parseTime(dateAndTime[1]);
+        return date + " " + time;
+    }
+
+    private int getTaskIndex(String taskInfo) {
+        return Integer.parseInt(taskInfo) - 1;
     }
 }

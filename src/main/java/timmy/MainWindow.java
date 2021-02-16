@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        duke = new Duke("src\\main\\java\\taskList.txt");
+        duke = new Duke("taskList.txt");
         String response = duke.welcomeMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
