@@ -119,9 +119,9 @@ public class Storage {
                     tasks.add(deadline);
                     break;
                 case 'E':
-                    String eventDescription = data.substring(9, startingIndex - 1);
+                    String eventDescription = data.substring(7, startingIndex - 1);
                     String time = data.substring(startingIndex + 5, endingIndex);
-                    Event event = new Event(eventDescription, time);
+                    Event event = new Event(eventDescription, validate.convertDate(time));
                     if (findHash != INVALID_INDEX) {
                         String eventTag = data.substring(findHash + 1);
                         event.setTag(eventTag);

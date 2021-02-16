@@ -61,7 +61,7 @@ public class Parser {
     public Event createEvent() throws DukeException {
         Validation.checkForContentAfterSlash(command, findSlash);
         String descriptionEvent = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
-        String time = command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA);
+        LocalDateTime time = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
         Event newEvent = new Event(descriptionEvent, time);
         return newEvent;
     }
