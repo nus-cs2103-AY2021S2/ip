@@ -36,7 +36,7 @@ class Event extends Task {
             ans = "[E][X] " + this.getTaskName() + " (at: "
                     + this.eTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         } else if (!this.isTaskDone()) {
-            ans = "[E][ ] " + this.getTaskName() + " (at: "
+            ans = "[E][  ] " + this.getTaskName() + " (at: "
                     + this.eTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         } else {
             ans = "Error";

@@ -26,7 +26,7 @@ class ToDo extends Task {
         if (this.isTaskDone()) {
             ans = "[T][X] " + this.getTaskName();
         } else if (!this.isTaskDone()) {
-            ans = "[T][ ] " + this.getTaskName();
+            ans = "[T][  ] " + this.getTaskName();
         } else {
             ans = "Error";
         }

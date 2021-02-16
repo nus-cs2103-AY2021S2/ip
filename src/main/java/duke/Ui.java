@@ -131,8 +131,8 @@ class Ui {
             boolean isDeadlineToday = task instanceof Deadline && sameDay
                     (((Deadline) task).getDlTime(), LocalDateTime.now());
             boolean isEventToday = task instanceof Event && sameDay(((Event) task).geteTime(), LocalDateTime.now());
-            boolean isToDo = task instanceof ToDo;
-            if (isDeadlineToday || isEventToday || isToDo) {
+            boolean isToDoToday = task instanceof ToDo && !task.isTaskDone();
+            if (isDeadlineToday || isEventToday || isToDoToday) {
                 ans.append(String.format(" %d. " + task.printTask() + "\n", index));
                 index++;
             }

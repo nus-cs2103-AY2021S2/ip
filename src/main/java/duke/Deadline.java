@@ -35,7 +35,7 @@ class Deadline extends Task {
             ans = "[D][X] " + this.getTaskName() + " (by: "
                     + this.dlTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         } else if (!this.isTaskDone()) {
-            ans = "[D][ ] " + this.getTaskName() + " (by: "
+            ans = "[D][  ] " + this.getTaskName() + " (by: "
                     + this.dlTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         } else {
             ans = "Error";
