@@ -6,7 +6,7 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-	1. Add a task 
+	1. Add a task (#Add-a-task)
 		* To-dos
 		* Deadlines
 		* Events
@@ -15,20 +15,20 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 	4. Mark Task as done
 	5. Find a task
 	5. Exit Program
-* Command Summary
-* Acknowledgement 
+* [Command Summary](#command-summary)
+
 
 # Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `duke.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `duke.jar` from [here](https://github.com/SiTingST/ip/releases/tag/A-Release).
 
 3. Double-click on the downloaded file to launch Duke. 
 	** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
 	
 4. After starting the application, you should see the GUI as shown below:
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Ui.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/Ui.png)
 
 
 
@@ -48,7 +48,7 @@ Examples:
 * `todo CNY visiting`
 * `todo ST2334 tutorial`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/addTodoTask.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/addTodoTask.png)
 
 #### `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
@@ -57,7 +57,7 @@ Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
 Examples:
 * `deadline return pen /by 03/05/2021 1800`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/addDeadlineTask.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/addDeadlineTask.png)
 
 #### `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
@@ -66,7 +66,7 @@ Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/addEventTask.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addEventTask.png)
 
 
 ### Listing all tasks : `list`
@@ -75,7 +75,7 @@ Shows a list of all the task in duke.
 
 Format: `list`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/listTask.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/listTask.png)
 
 
 ### Delete a task : `delete`
@@ -87,7 +87,7 @@ Format: `delete index_of_task`
 Assume that we still have 4 task, 
 * `delete3`: will remove the third task on the list
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/deleteTask.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/deleteTask.png)
 
 ### Mark task as done : `done`
 
@@ -101,7 +101,7 @@ Example:
 Assume that we still have 3 task, 
 * `done 1`: will mark the first task on the list as completed 
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/markAsDone.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/markAsDone.png)
 
 ### Find specific task : `find`
 
@@ -112,7 +112,7 @@ Format: `find keywords`
 Example:
 * `find CS2105`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/findTask.PNG)
+![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/findTask.png)
 
 ## Command summary
 
