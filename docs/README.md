@@ -58,7 +58,7 @@ Format: `done INDEX`
  * Marks the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, ...
 Eamples:
  - `done 1` Marks your first task as completed. \
-![Image of done example.](https://github.com/markuz5116/Marcus-Ong-iP/docs/Done_method_example.png)
+![Image of done example.](https://github.com/markuz5116/Marcus-Ong-iP/blob/master/docs/Done_method_example.png)
 
 ### Deleting a task: `delete`
 Deletes a specified task from your task list.
