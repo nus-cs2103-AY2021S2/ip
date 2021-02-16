@@ -1,7 +1,7 @@
 package main.java;
 
 public class Task {
-    private String description;
+    private final String description;
     private boolean isDone;
 
     public Task(String description) {
@@ -11,5 +11,14 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public void markAsDone() {
+        isDone = true;
     }
 }
