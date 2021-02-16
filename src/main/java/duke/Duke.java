@@ -5,6 +5,7 @@ import java.text.ParseException;
 
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
+import duke.exception.BadIndexException;
 import duke.exception.EmptyArgumentException;
 import duke.exception.InvalidCommandException;
 
@@ -64,6 +65,8 @@ public class Duke {
         } catch (EmptyArgumentException e) {
             ui.handleException(e);
         } catch (BadDateArgumentException e) {
+            ui.handleException(e);
+        } catch (BadIndexException e) {
             ui.handleException(e);
         } finally {
             if (taskList.isEdited()) {

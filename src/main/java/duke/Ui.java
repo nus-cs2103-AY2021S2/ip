@@ -4,6 +4,7 @@ import java.text.ParseException;
 
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
+import duke.exception.BadIndexException;
 import duke.exception.EmptyArgumentException;
 import duke.exception.InvalidCommandException;
 
@@ -164,5 +165,14 @@ public class Ui {
     public void handleException(BadDateArgumentException e) {
         builder.append("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044\n");
         builder.append(e.getMessage() + "\n");
+    }
+
+    /**
+     * Generates an UI alert for some particular error.
+     *
+     * @param e Exception that requires an error message
+     */
+    public void handleException(BadIndexException e) {
+        builder.append(e.getMessage());
     }
 }

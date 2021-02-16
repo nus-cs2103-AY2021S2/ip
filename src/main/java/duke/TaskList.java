@@ -4,6 +4,7 @@ import java.util.List;
 
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
+import duke.exception.BadIndexException;
 import duke.exception.EmptyArgumentException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -43,7 +44,7 @@ public class TaskList {
      * @throws EmptyArgumentException At least one argument is missing
      * @throws BadDateArgumentException An argument that is expected to be a date is ill formatted
      */
-    public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
+    public String run(Command c) throws EmptyArgumentException, BadDateArgumentException, BadIndexException {
         String[] args = c.getCommandParameters();
         String result;
         switch (c.getType()) {
@@ -52,10 +53,12 @@ public class TaskList {
             edited = true;
             break;
         case DONE:
+            checkIndex(Integer.parseInt(args[0]));
             result = setDone(Integer.parseInt(args[0]));
             edited = true;
             break;
         case DELETE:
+            checkIndex(Integer.parseInt(args[0]));
             result = delete(Integer.parseInt(args[0]));
             edited = true;
             break;
@@ -108,6 +111,11 @@ public class TaskList {
         }
         store.add(t);
         return formatOrderedPrint(-1);
+    }
+    private void checkIndex(int index) throws BadIndexException {
+        if (index < 0 || index >= store.size()) {
+            throw new BadIndexException(index);
+        }
     }
     private String setDone(int doneIndex) {
         assert doneIndex >= 0 && doneIndex < store.size();
