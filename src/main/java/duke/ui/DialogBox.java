@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -15,12 +14,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Font;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This class controls the creation and styling of dialog boxes for both the user and Duke.
+ * A dialog box consists of a <code>Label</code> containing a user input or a response from Duke, and an
+ * <code>ImageView</code> to represent the user's or Duke's avatar respectively.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -39,15 +37,13 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(new Font("Monospaced Regular", 14));
-        dialog.setPadding(new Insets(10, 10, 10, 10));
-
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 50, 45));
+        displayPicture.setClip(new Circle(25, 25, 20));
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the display picture is on the left and the dialog box
+     * is on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -56,21 +52,43 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a styled dialog box to display the users' input.
+     *
+     * @param text A string of user input.
+     * @param img  An <code>Image</code> to use as the users' avatar.
+     * @return A <code>DialogBox</code> to be displayed.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        String lightBlue = "e8f4f8";
+        String lightBlue = "#d4ebf2";
         db.styleLabelBox(lightBlue);
         return db;
     }
 
+    /**
+     * Creates a styled dialog box to display Duke's response (to valid input).
+     *
+     * @param text Duke's response.
+     * @param img  An <code>Image</code> to use as the Duke's avatar.
+     * @return A <code>DialogBox</code> to be displayed.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         String lightGrey = "#f0f0f0";
         db.styleLabelBox(lightGrey);
         db.flip();
+        db.setMinHeight(db.getValidDialogHeight(text));
         return db;
     }
 
+    /**
+     * Creates a styled dialog box to display Duke's response (to an invalid input).
+     *
+     * @param text Duke's response.
+     * @param img  An <code>Image</code> to use as the Duke's avatar.
+     * @return A <code>DialogBox</code> to be displayed.
+     */
     public static DialogBox getDukeDialogForInvalid(String text, Image img) {
         var db = new DialogBox(text, img);
         String lightRed = "#ffe5e5";
@@ -88,5 +106,17 @@ public class DialogBox extends HBox {
         this.dialog.setStyle("-fx-background-color: " + color + ";"
                 + "-fx-border-radius: 10 10 10 10;"
                 + "-fx-background-radius: 10 10 10 10;");
+    }
+
+    /**
+     * Dynamically set the height for Duke's dialogue boxes based on the text to be displayed.
+     * This method is for displaying responses to valid input.
+     *
+     * @param text Text to be displayed.
+     * @return Height to use for the dialogue box
+     */
+    private int getValidDialogHeight(String text) {
+        int numLines = text.split("\n", -1).length;
+        return 50 + 17 * numLines;
     }
 }

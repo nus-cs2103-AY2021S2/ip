@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * This class controls the creation and styling of the application's main window.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -27,8 +27,7 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/PoliteCat.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/NeutralCat.png"));
-    private final Image dukeImageForInvalidCommand =
-            new Image(this.getClass().getResourceAsStream("/images/SkepticalCat.png"));
+    private final Image dukeImageInvalid = new Image(this.getClass().getResourceAsStream("/images/SkepticalCat.png"));
 
     /**
      * Initializes the user-interface and displays the welcome message.
@@ -59,13 +58,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = this.userInput.getText();
         String response = this.duke.getResponse(input);
-        Image dukeImage = this.duke.inputIsValid(input) ? this.dukeImage : this.dukeImageForInvalidCommand;
 
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, this.userImage),
                 this.duke.inputIsValid(input)
                         ? DialogBox.getDukeDialog(response, this.dukeImage)
-                        : DialogBox.getDukeDialogForInvalid(response, this.dukeImageForInvalidCommand)
+                        : DialogBox.getDukeDialogForInvalid(response, this.dukeImageInvalid)
         );
         this.userInput.clear();
 
