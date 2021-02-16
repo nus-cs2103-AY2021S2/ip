@@ -51,13 +51,6 @@ public class Ui {
     }
 
     /**
-     * Prints a prompt to indicate that we are expecting input.
-     */
-    public void printPrompt() {
-        builder.append(SEPARATOR + "Listening to your input: ");
-    }
-
-    /**
      * Indicate to the user that we are loading a file.
      */
     public void printLoadStart() {
