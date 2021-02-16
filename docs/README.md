@@ -3,13 +3,13 @@
 ## `ToDo`
 
 ### Usage
-todo <Description of Task>
+`todo` *Description of Task*
 
 ### Action
 Adds a new task of type "ToDo" to the task list.
 
 ### Example of usage: 
-todo buy groceries
+`todo` *buy groceries*
 
 ### Expected outcome:
 Added Task!
@@ -17,13 +17,13 @@ Added Task!
 ## `Deadline`
 
 ### Usage
-deadline <Description of Task>/by <DD.MM.YYYY HH:MM>
+`deadline` *Description of Task*/by *DD.MM.YYYY HH:MM*
 
 ### Action
 Adds a new task of type "Deadline" to the task list.
 
 ### Example of usage: 
-deadline return library book/by 14.02.2021 14:00
+`deadline` *return library book*/by *14.02.2021 14:00*
 
 ### Expected outcome:
 Added Task!
@@ -31,13 +31,13 @@ Added Task!
 ## `Event`
 
 ### Usage
-event <Description of Task>/from <DD.MM.YYYY HH:MM> to <DD.MM.YYYY HH:MM>
+`event` *Description of Task*/from *DD.MM.YYYY HH:MM* to *DD.MM.YYYY HH:MM*
 
 ### Action
 Adds a new task of type "Event" to the task list.
 
 ### Example of usage: 
-event Marcus's birthday party/from 14.02.2021 18:00 to to 14.02.2021 23:30
+`event` *Marcus's birthday party*/from *14.02.2021 18:00* to *14.02.2021 23:30*
 
 ### Expected outcome:
 Added Task!
@@ -45,13 +45,13 @@ Added Task!
 ## `List`
 
 ### Usage
-list
+`list`
 
 ### Action
 Lists all tasks currently in the task list.
 
 ### Example of usage: 
-list
+`list`
 
 ### Expected outcome:
 All Tasks:
@@ -62,13 +62,13 @@ All Tasks:
 ## `Complete`
 
 ### Usage
-complete <Task Type> <Task Description>
+`complete` *Task Type* *Task Description*
 
 ### Action
 Finds and marks the desired task complete.
 
 ### Example of usage: 
-complete todo buy groceries
+`complete` *todo* *buy groceries*
 
 ### Expected outcome:
 Task marked complete!
@@ -76,13 +76,13 @@ Task marked complete!
 ## `Remove`
 
 ### Usage
-remove <Task Type> <Task Description>
+`remove` *Task Type* *Task Description*
 
 ### Action
 Finds and removes the desired task from the task list.
 
 ### Example of usage: 
-remove todo buy groceries
+`remove` *todo buy groceries*
 
 ### Expected outcome:
 Task removed.
@@ -90,13 +90,13 @@ Task removed.
 ## `Find`
 
 ### Usage
-find <Key Word>
+`find` *Key Word*
 
 ### Action
 Finds and lists all tasks from the task list that contain the entered key word.
 
 ### Example of usage: 
-find book
+`find` *book*
 
 ### Expected outcome:
 There were 1 tasks containing your keyword:
@@ -105,13 +105,13 @@ There were 1 tasks containing your keyword:
 ## `Help`
 
 ### Usage
-help
+`help`
 
 ### Action
 Lists all commandss accepted by Duke
 
 ### Example of usage: 
-help
+`help`
 
 ### Expected outcome:
 Enter one of the following commands:
@@ -129,13 +129,13 @@ Enter one of the following commands:
 ## `Hello`
 
 ### Usage
-hello
+`hello`
 
 ### Action
 If entered upon launch, prompts a greeting and an instruction from Duke. Subsequently prompts an instruction from Duke only.
 
 ### Example of usage: 
-hello
+`hello`
 
 ### Expected outcome:
 Please enter a command.
@@ -143,13 +143,13 @@ Please enter a command.
 ## `Bye`
 
 ### Usage
-bye
+`bye`
 
 ### Action
 Exits the application.
 
 ### Example of usage: 
-bye
+`bye`
 
 ### Expected outcome:
 Closure of application.
