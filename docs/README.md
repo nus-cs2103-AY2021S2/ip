@@ -39,12 +39,15 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 
 There are three different tasks, namely, todo, event and deadline. 
 <br> There are different commands used to facilitate the adding of different tasks to the program as seen below.
-<br> Note: Commands are case-insensitive. The program only takes in command in lower alphabets. 
-<br> Users should add ONE task at a time. 
+
+Notes:
+* Commands are case-insensitive. The program only takes in command in lower alphabets. 
+* Users should add ONE task at a time. 
 
 #### `todo`
 Todo command add a todo task which requires task description and no other field as input.
-<br> Format: `todo` description`
+
+Format: `todo` description
 
 Examples:
 * `todo CNY visiting`
@@ -56,6 +59,8 @@ Examples:
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
 
 Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]
+
+Note: Do ensure that the time is given in HHMM format with no extra spacing or semicolon 
 
 Examples:
 * `deadline return pen /by 03/05/2021 1800`
@@ -91,21 +96,23 @@ Delete a task using its task index in list.
 Format: `delete task_index`
 
 Assume that we still have 4 task, 
-`delete3`: will remove the third task on the list
+<br>`delete3`: will remove the third task on the list
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/deleteTask.png)
 
 ### Mark task as done : `done`
 
 Mark the given task as completed which will add a tick beside the task when list command is executed. 
-<br> Note: All tasks added are uncompleted by default. 
+
+Note: All tasks added are uncompleted by default. 
 
 Format: `done task_index`
 
 Example:
 
 Assume that we still have 3 task, 
- `done 1`: will mark the first task on the list as completed 
+
+<br> `done 1`: will mark the first task on the list as completed 
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/markAsDone.png)
 
@@ -116,7 +123,7 @@ Show all tasks that matches or contain keywords.
 Format: `find keywords`
 
 Example:
-* `find CS2105`
+  `find CS2105`
 
 ![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/findTask.png)
 
