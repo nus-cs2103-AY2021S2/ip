@@ -4,8 +4,25 @@ public class Ui {
     private static final String GOODBYE = "Thank you for using Duke , please come back again";
     private static final String FAILURE_LOAD_START = "No task is found in file, what can i do for you? ";
     private static final String FAILURE_UPDATE = "Field to update is invalid";
+    private static final String FAILURE_SEARCH = "There are no matching task with ";
+
     private static final String SUCCESS_LOAD_START = "File loaded, what can i do for you? ";
     private static final String SUCCESS_UPDATE = "Task is updated successfully";
+    private static final String SUCCESS_MARK_DONE = "Got it. I`ve mark this task as done:";
+    private static final String SUCCESS_DELETE_TASK = "Noted. I`ve removed this task: \n";
+    private static final String SUCCESS_ADD_TASK = "Got it. I`ve added this task: \n";
+
+    private static final String SUCCESS_SEARCH = "Here are the matching tasks in your list:";
+    private static final String HELP_MESSAGE = "Example commands: \n"
+            + "bye \n"
+            + "list \n"
+            + "done <number> \n"
+            + "delete <number> \n"
+            + "find <search key> \n"
+            + "todo <taskName> \n"
+            + "deadline <taskName> /by yyyy-M-dd Hmm \n"
+            + "event <taskName> /by yyyy-M-dd Hmm - Hmm \n"
+            + "update <number> <fieldName> <value> \n";
 
 
     private TaskList tasks;
@@ -36,12 +53,12 @@ public class Ui {
         } catch (DukeDeadlineException e) {
             return showError(e.getMessage());
         }
-
+        String result = SUCCESS_LOAD_START;
         if (tasks.getTaskList().size() == 0) {
-            return FAILURE_LOAD_START;
+            result = FAILURE_LOAD_START;
         }
 
-        return SUCCESS_LOAD_START;
+        return result + "\n" + HELP_MESSAGE;
     }
 
     /**
@@ -73,8 +90,7 @@ public class Ui {
      * @param numTasks number of task in the taskList
      */
     public static String showSuccessMarkDone(String task, int numTasks) {
-        String message = "Got it. I`ve mark this task as done:";
-        return printExecuteResult(message, task, numTasks, "");
+        return printExecuteResult(SUCCESS_MARK_DONE, task, numTasks, "");
     }
 
     /**
@@ -84,8 +100,7 @@ public class Ui {
      * @return String , message to be printed on GUI
      */
     public static String showSuccessDeleteTask(String task, int numTasks) {
-        String message = "Noted. I`ve removed this task: \n";
-        return printExecuteResult(message, task, numTasks, "");
+        return printExecuteResult(SUCCESS_DELETE_TASK, task, numTasks, "");
     }
 
     /**
@@ -95,16 +110,15 @@ public class Ui {
      * @return String , message to be printed on GUI
      */
     public static String showSuccessAddTask(String task, int numTasks) {
-        String message = "Got it. I`ve added this task: \n";
-        return printExecuteResult(message, task, numTasks, "");
+        return printExecuteResult(SUCCESS_ADD_TASK, task, numTasks, "");
     }
 
     public static String showSuccessSearch() {
-        return "Here are the matching tasks in your list:";
+        return SUCCESS_SEARCH;
     }
 
     public static String showFailSearch(String searchTerm) {
-        return "There are no matching task with " + searchTerm;
+        return FAILURE_SEARCH + searchTerm;
     }
 
     public static String showSuccessUpdate() {
