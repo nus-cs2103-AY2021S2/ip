@@ -1,26 +1,121 @@
-# duke.Duke project template
+# User Guide
+Here is the user manual! Have fun!
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![Image of app]
+(https://github.com/rachelljt/ip/blob/master/docs/Ui.png)
 
-## Setting up in Intellij
+## Features
+Commands | Usage
+-------- |--------
+`todo` [description]    | Adds todo task to the list
+`deadline` [description] /by[dd/MM/yyyy HHmm] | Adds deadline task to the list
+`event` [description] /at[dd/MM/yyyy HHmm] | Adds event task to the list
+`list` | Lists all the tasks in chronological order
+`done` [taskNumber] | Marks task at taskNumber as completed
+`delete` [taskNumber] | Deletes task at taskNumber
+`find` [keyword] | Finds task with relevant keyword
+`bye` | Exits the application
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Usage
+
+### 1. `todo`
+Adds todo task to the list
+
+Example of usage:
+
+`todo complete homework`
+
+Expected outcome:
+
+`☺ Got it. I've added this task:`\
+`[T][ ] complete homework`\
+`Now you have 1 task in the list.`
+
+### 2. `deadline`
+Adds deadline task to the list
+
+Example of usage:
+
+`deadline complete assignment /by 01/03/2021 2359`
+
+Expected outcome:
+
+`☺ Got it. I've added this task:`\
+`[D][ ] complete assignment (by: Mar 1 2021, 23:59)`\
+`Now you have 2 tasks in the list.`
+
+### 3. `event`
+Adds event task to the list
+
+Example of usage:
+
+`event marathon /at 01/03/2021 0500`
+
+Expected outcome:
+
+`☺ Got it. I've added this task:`\
+`[E][ ] marathon (at: Mar 1 2021, 05:00)`\
+`Now you have 3 tasks in the list.`
+
+### 4. `list`
+List all tasks in chronological order
+
+Example of usage:
+
+`list`
+
+Expected outcome:
+
+`Here are the tasks in your list:`\
+`1. [E][ ] marathon (at: Mar 1 2021, 05:00) `\
+`2. [D][ ] complete assignment (by: Mar 1 2021, 23:59)`\
+`3. [T][ ] complete homework`
+
+### 5. `done`
+Marks task at taskNumber in list as completed
+
+Example of usage:
+
+`done 3`
+
+Expected outcome:
+
+`☺ Nice! I've marked this task as done`\
+`[T][✓] complete homework`
+
+### 6. `delete`
+Deletes task at taskNumber
+
+Example of usage:
+
+`delete 3`
+
+Expected outcome:
+
+`☺ Noted. I've removed this task:`\
+`[T][✓] complete homework`\
+`Now you have 2 task in the list.`
+
+### 7. `find`
+Find and shows tasks with relevant keyword
+
+Example of usage:
+
+`find assignment`
+
+Expected outcome:
+
+`Here are the matching tasks in your list:`\
+`1. [D][ ] complete assignment (by: Mar 1 2021, 23:59)`
+
+### 8. `bye`
+Exits the application
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+`Bye. Hope to see you again soon! ☺`
