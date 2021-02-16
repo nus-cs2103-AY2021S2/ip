@@ -27,14 +27,17 @@ public class Parser {
      * @throws ParseException for invalid date input.
      */
     public String process(String command) throws IOException {
+        assert !command.equals("");
         SimpleDateFormat dateFormat = new SimpleDateFormat("'by' dd.MM.yyyy HH:mm");
         SimpleDateFormat dateFormat2 = new SimpleDateFormat("'from' dd.MM.yyyy HH:mm ");
         SimpleDateFormat dateFormat3 = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         String[] userInput = command.split(" ", 2);
-        if(userInput[0].toLowerCase().equals(Command.TODO.toString())){
+        if(userInput[0].toLowerCase().equals(Command.TODO.toString())) {
             ToDo newToDo = new ToDo(userInput[1]);
             TaskList.taskList.add(newToDo);
             return UI.addedTask();
+        } else if (userInput[0].toLowerCase().equals(Command.HELLO.toString())) {
+            return "Hello! Please enter a command.";
         } else if(userInput[0].toLowerCase().equals(Command.DEADLINE.toString())) {
             String[] details = userInput[1].split("/", 2);
             try {
@@ -45,7 +48,7 @@ public class Parser {
             } catch (ParseException e) {
                 System.out.println("Please type the date in the format \"by dd.mm.yyyy hh:mm\"!");
             }
-        } else if(userInput[0].toLowerCase().equals(Command.EVENT.toString())){
+        } else if(userInput[0].toLowerCase().equals(Command.EVENT.toString())) {
             String[] details = userInput[1].split("/", 2);
             String[] timings = details[1].split("to ", 2);
             try {
@@ -57,12 +60,12 @@ public class Parser {
             } catch (ParseException e){
                 System.out.println("Please type the date in the format \"from dd.mm.yyyy hh:mm to dd.mm.yyyy hh:mm\"!");
             }
-        } else if(userInput[0].toLowerCase().equals(Command.LIST.toString())) {
+        } else if(userInput[0].toLowerCase().equals(Command.LIST.toString())){
             return UI.listTasks();
-        } else if (userInput[0].toLowerCase().equals(Command.FIND.toString())) {
+        } else if (userInput[0].toLowerCase().equals(Command.FIND.toString())){
             List<Task> foundTasks = TaskList.find(userInput[1]);
             return UI.listTasks(foundTasks);
-        } else if (userInput[0].toLowerCase().equals(Command.REMOVE.toString())) {
+        } else if (userInput[0].toLowerCase().equals(Command.REMOVE.toString())){
             String[] details = userInput[1].split(" ", 2);
             if(details[0].toLowerCase().equals(Command.TODO.toString())){
                 TaskList.removeTask(new ToDo(details[1]));
