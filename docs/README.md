@@ -42,8 +42,7 @@ We squirrels are smart creatures!
 ## Command Format
 
 Words in `UPPER_CASE` are parameters to be supplied by the user.
-
-`<Angle Brackets>` and `(Round Brackets)` are used to denote compulsory and optional parameters respectively.
+`(Round Brackets)` are used to denote optional parameters.
 `...` is used to denote that one or more parameters are accepted.
 
 ## Seeking Help
@@ -84,7 +83,7 @@ Application quits.
 
 Add a todo and I'll remember it for you!
 
-### `todo <DESCRIPTION>` - Add a todo
+### `todo DESCRIPTION` - Add a todo
 
 Typing `todo` followed by a description adds a todo to your list of tasks.
 <DESCRIPTION> can be made out of one or many words.
@@ -101,7 +100,7 @@ Expected outcome:
 
 Add a deadline and I'll remember it for you!
 
-### `deadline <DESCRIPTION> /by <DATE> (TIME)` - Add a deadline
+### `deadline DESCRIPTION /by DATE (TIME)` - Add a deadline
 
 Typing `deadline` followed by a description, date and optional time field adds a deadline to your list of tasks.
 <DESCRIPTION> can be made out of one or many words.
@@ -120,7 +119,7 @@ Expected outcome:
 
 Add an event and I'll remember it for you!
 
-### `event <DESCRIPTION> /at <DATE> (TIME)` - Add an  event
+### `event DESCRIPTION /at DATE (TIME)` - Add an  event
 
 Typing `event` followed by a description, date and optional time field adds an event to your list of tasks.
 <DESCRIPTION> can be made out of one or many words.
@@ -155,7 +154,7 @@ Expected outcome:
 
 You can let me know what tasks you have completed!
 
-### `done <TASK_NUMBER>` - Describe action
+### `done TASK_NUMBER` - Describe action
 
 Typing `done` followed by the task number marks the task as done. A `[X]` signifies that a task has been completed. If
 you are unsure of the task number, you can list out all tasks using the `list` command.
@@ -172,7 +171,7 @@ Expected outcome:
 
 Let me know if you would like a task to be deleted forever. Don't worry any secrets are safe with me!
 
-### `delete <TASK_NUMBER>` - Describe action
+### `delete TASK_NUMBER` - Describe action
 
 Typing `delete` followed by the task number deletes the task. If you are unsure of the task number, you can list out all
 tasks using the `list` command.
@@ -189,7 +188,7 @@ Expected outcome:
 
 Let me know what you are looking for!
 
-### `find <SEARCH_PARAMETERS...>` - Describe action
+### `find SEARCH_PARAMETERS...` - Describe action
 
 You can search for a task using the find command. One or more search parameters are accepted. The program will attempt
 to find all tasks that contain any of the search parameters. Search parameters are case-insensitive.
