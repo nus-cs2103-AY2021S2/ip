@@ -115,16 +115,16 @@ Lists all commandss accepted by Duke
 
 ### Expected outcome:
 Enter one of the following commands:
-[1] Hello
-[2] Todo <Description of Task>
-[3] Deadline <Description of Task>/by <DD.MM.YYYY HH:MM>
-[4] Event <Description of Task>/from <DD.MM.YYYY HH:MM> to <DD.MM.YYYY HH:MM>
-[5] List
-[6] Find <Key Word>
-[7] Complete <Task Type> <Description>
-[8] Remove <Task Type> <Description>
-[9] Help
-[10] Bye
+[1] Hello  
+[2] Todo <Description of Task>  
+[3] Deadline <Description of Task>/by <DD.MM.YYYY HH:MM>  
+[4] Event <Description of Task>/from <DD.MM.YYYY HH:MM> to <DD.MM.YYYY HH:MM>  
+[5] List  
+[6] Find <Key Word>  
+[7] Complete <Task Type> <Description>  
+[8] Remove <Task Type> <Description>  
+[9] Help  
+[10] Bye  
 
 ## `Hello`
 
