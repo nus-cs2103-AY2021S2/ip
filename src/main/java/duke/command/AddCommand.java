@@ -87,8 +87,8 @@ public class AddCommand implements Command {
 
 
         if (isInsert) {
-            boolean hasOnlyOneTask = tasks.size() == 1;
-            return ui.getAddTaskSuccessfulMessage(tasks.getTaskDescription(tasks.size() - 1), hasOnlyOneTask);
+            int numberOfTasks = tasks.size();
+            return ui.getAddTaskSuccessfulMessage(tasks.getTaskDescription(tasks.size() - 1), numberOfTasks);
         }
 
         return "";

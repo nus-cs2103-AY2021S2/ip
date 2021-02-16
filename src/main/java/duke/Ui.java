@@ -26,10 +26,10 @@ public class Ui {
      * @param   hasOnlyOneTask  whether there is only one task
      * @return                  the message when task is added successfully
      */
-    public String getAddTaskSuccessfulMessage(String taskDescription, boolean hasOnlyOneTask) {
+    public String getAddTaskSuccessfulMessage(String taskDescription, int numberOfTasks) {
         String headerText = "\tGot it. I've added this task: \n";
         String addedTaskText = String.format("\tTask added: %s\n", taskDescription);
-        String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", hasOnlyOneTask ? "" : "s");
+        String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", numberOfTasks, numberOfTasks == 1 ? "" : "s");
         return headerText + addedTaskText + currentTasksText;
     }
 
@@ -87,10 +87,10 @@ public class Ui {
      * @param   hasOnlyOneTask  whether there is only one task left
      * @return                  the message when task is deleted successfully
      */
-    public String getDeleteTaskMessage(Task deletedTask, boolean hasOnlyOneTask) {
+    public String getDeleteTaskMessage(Task deletedTask, int numberOfTasks) {
         String headerText = "\tNoted. I've removed this task: \n";
         String taskRemovedText = String.format("\t%s\n", deletedTask);
-        String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", hasOnlyOneTask ? "" : "s");
+        String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", numberOfTasks, numberOfTasks == 1 ? "" : "s");
         return headerText + taskRemovedText + currentTasksText;
     }
 

@@ -21,8 +21,8 @@ public class DeleteCommand implements Command {
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         if (0 <= index && index < tasks.size()) {
             final Task deletedTask = tasks.delete(index);
-            boolean hasOnlyOneTask = tasks.size() == 1;
-            return ui.getDeleteTaskMessage(deletedTask, hasOnlyOneTask);
+            int numberOfTasks = tasks.size();
+            return ui.getDeleteTaskMessage(deletedTask, numberOfTasks);
         } else {
             return ui.getIndexOutOfBoundMessage();
         }
