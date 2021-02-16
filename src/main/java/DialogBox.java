@@ -34,6 +34,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setEllipsisString("\n(...and more!)");
         displayPicture.setImage(img);
     }
 
