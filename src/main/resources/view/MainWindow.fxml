@@ -15,7 +15,7 @@
                     <children>
                         <BorderPane prefHeight="76.0" prefWidth="396.0">
                             <center>
-                                <BorderPane prefHeight="68.0" prefWidth="380.0" style="-fx-background-color: #6495ED; -fx-background-radius: 20; -fx-border-width: 5; -fx-border-color: #000080; -fx-border-radius: 20;" styleClass="header-section" BorderPane.alignment="CENTER">
+                                <BorderPane prefHeight="68.0" prefWidth="380.0" style="-fx-background-color: #4285F4; -fx-background-radius: 20; -fx-border-width: 5; -fx-border-color: #000080; -fx-border-radius: 20;" styleClass="header-section" BorderPane.alignment="CENTER">
                                     <effect>
                                         <Blend />
                                     </effect>
