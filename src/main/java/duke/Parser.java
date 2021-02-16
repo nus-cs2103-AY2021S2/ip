@@ -16,21 +16,32 @@ public class Parser {
      * @throws DukeException If input is not recognised.
      */
     public static String process(String input, TaskList tasks) throws DukeException {
-        if (input.equals("bye")) {
+        if (input.equals("bye") || input.equals("b")) {
             return null;
         }
 
+        String command = input.split(" ")[0];
         String output;
-        if (input.equals("list")) {
+        switch (command) {
+        case "list":
+        case "l":
             output = getList(tasks);
-        } else if (input.split(" ")[0].equals("done")) {
+            break;
+        case "done":
+        case "do":
             output = markAsDone(input, tasks);
-        } else if (input.split(" ")[0].equals("delete")) {
+            break;
+        case "delete":
+        case "del":
             output = deleteTask(input, tasks);
-        } else if (input.split(" ")[0].equals("find")) {
+            break;
+        case "find":
+        case "f":
             output = findTask(input, tasks);
-        } else {
+            break;
+        default:
             output = addNewTask(input, tasks);
+            break;
         }
         return output;
     }
