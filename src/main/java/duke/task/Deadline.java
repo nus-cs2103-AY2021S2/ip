@@ -44,7 +44,7 @@ public class Deadline extends Task {
     @Override
     public String addTask(int count) throws DukeException {
         if (this.name.equals("deadline")) {
-            throw new DukeException("      OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else {
             return super.addTask(count);
         }
@@ -57,7 +57,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "      [D]" + super.toString() + " (by: " + done_by.getMonth() + " "
+        return "[D]" + super.toString() + " (by: " + done_by.getMonth() + " "
                 + done_by.getDayOfMonth() + " " + done_by.getYear() + ")";
     }
 }

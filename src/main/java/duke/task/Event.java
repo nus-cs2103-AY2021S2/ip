@@ -44,7 +44,7 @@ public class Event extends Task {
     @Override
     public String addTask(int count) throws DukeException {
         if (this.name.equals("event")) {
-            throw new DukeException("      OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else {
             return super.addTask(count);
         }
@@ -57,7 +57,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "      [E]" + super.toString() + " (at: " + at.getMonth()
+        return "[E]" + super.toString() + " (at: " + at.getMonth()
                 + " " + at.getDayOfMonth() + " " + at.getYear() + ")";
     }
 }

@@ -35,7 +35,7 @@ public class ToDo extends Task {
     @Override
     public String addTask(int count) throws DukeException {
         if (this.name.equals("todo")) {
-            throw new DukeException("      OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else {
             return super.addTask(count);
         }
@@ -48,6 +48,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "      [T]" + super.toString();
+        return "[T]" + super.toString();
     }
 }
