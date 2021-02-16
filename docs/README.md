@@ -39,12 +39,12 @@ Duke is the go-to chatbot which helps to manage and organize your task efficient
 
 There are three different tasks, namely, todo, event and deadline. 
 <br> Different commands are used to faciliate the adding of different tasks to the program as seen below.
-<br> Commands are case insenstive so do ensure that commands are keyed in correctly without additional space and in lower alphabets. 
+<br> Note: Commands are case insenstive so do ensure that commands being keyed in are correct without additional space and in lower alphabets. 
 <br> Users are only allowed to add ONE task at a time. 
 
 #### `todo`
 Todo command add a todo task which requires task description and no other field as input.
-Format: `todo` description`
+<br> Format: `todo` description`
 
 Examples:
 * `todo CNY visiting`
@@ -54,7 +54,8 @@ Examples:
 
 #### `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
-<br> Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
+
+<br> Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]
 
 Examples:
 * `deadline return pen /by 03/05/2021 1800`
@@ -63,7 +64,9 @@ Examples:
 
 #### `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
+
 <br>Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]
+
 <br> Note: Do ensure that the time is given in HHMM format with no extra spacing or semicolon 
 
 Examples:
@@ -85,7 +88,7 @@ Format: `list`
 
 Delete a task using its task index in list.
 
-Format: `delete index_of_task`
+Format: `delete task_index`
 
 Assume that we still have 4 task, 
 * `delete3`: will remove the third task on the list
@@ -97,7 +100,7 @@ Assume that we still have 4 task,
 Mark the given task as completed which will add a tick beside the task when list command is executed. 
 <br> By default, all tasks added are uncompleted. 
 
-Format: `done index_of_task'
+Format: `done task_index`
 
 Example:
 
@@ -126,5 +129,5 @@ Action | Format, Examples
 **Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
 **List** | `list`
 **Delete** |`delete INDEX`e.g., `delete 3`
-**Find** |  `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find cs2103 quiz`
+**Find** |  `find KEYWORD [MORE_KEYWORDS]` e.g., `find cs2103 quiz`
 **Mark as done** | `done INDEX` e.g., 'done 4'
