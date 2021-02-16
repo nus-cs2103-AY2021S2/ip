@@ -128,6 +128,8 @@ public class Parser {
         } else if (splitDetails.length > 2) {
             throw new DeadlineException("Too many dates given!");
         } else {
+            assert(splitDetails.length == 2);
+
             try {
                 LocalDate date = LocalDate.parse(splitDetails[1]);
                 return new Deadline(splitDetails[0], date);
@@ -149,7 +151,9 @@ public class Parser {
         } else if (splitDetails.length > 2) {
             throw new EventException("Too many dates given!");
         } else {
-            try {
+            assert(splitDetails.length == 2);
+
+            try {                
                 LocalDate date = LocalDate.parse(splitDetails[1]);
                 return new Event(splitDetails[0], date);
             } catch (DateTimeParseException e) {
