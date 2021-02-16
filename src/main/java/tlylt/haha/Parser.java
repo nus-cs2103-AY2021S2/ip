@@ -17,7 +17,7 @@ public class Parser {
      */
     static int getTaskNumber(String command) throws HahaTaskNumberNotIntException {
         try {
-            return Integer.parseInt("" + command.charAt(command.length() - 1));
+            return Integer.parseInt("" + command);
         } catch (NumberFormatException ex) {
             throw new HahaTaskNumberNotIntException(command);
         }
@@ -82,9 +82,15 @@ public class Parser {
         String description = Parser.tokenize(input).length == 2 ? Parser.tokenize(input)[1] : "";
         // Check input has description following task command words
         boolean hasTaskKeyword = checkHasTaskKeyword(input);
-        if (hasTaskKeyword && description.isEmpty()) {
+        boolean requiresTaskNumber = checkRequiresTaskNumber(input);
+        if ((hasTaskKeyword || requiresTaskNumber) && description.isEmpty()) {
             throw new HahaEmptyDescriptionException(input);
         }
+    }
+
+    private static boolean checkRequiresTaskNumber(String input) {
+        String task = Parser.tokenize(input)[0];
+        return Arrays.asList(new String[]{"delete", "done"}).contains(task);
     }
 
     private static boolean checkHasTaskKeyword(String input) {
@@ -112,6 +118,23 @@ public class Parser {
     }
 
     /**
+     * Handles invalid deadline and event commands.
+     *
+     * @param input User input string.
+     * @throws HahaWrongTaskFormatException Task format not recognized.
+     */
+    static void handleWrongDeadlineEventCommand(String input) throws HahaWrongTaskFormatException {
+        String[] inputTaskDetails = Parser.tokenize(input);
+        if (inputTaskDetails[0].equals("deadline") || inputTaskDetails[0].equals("event")) {
+            try {
+                new Deadline(false, inputTaskDetails[1]);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                throw new HahaWrongTaskFormatException(ex.toString());
+            }
+        }
+    }
+
+    /**
      * Ensures safety of given command.
      *
      * @param input User input string.
@@ -121,10 +144,14 @@ public class Parser {
      */
     static void handleSafety(String input) throws HahaEmptyCommandException,
             HahaWrongCommandException,
-            HahaEmptyDescriptionException {
+            HahaEmptyDescriptionException,
+            HahaWrongTaskFormatException {
         Parser.handleEmptyCommand(input);
-        Parser.handleWrongCommand(input);
         Parser.handleEmptyDescriptionCommand(input);
+        Parser.handleWrongDeadlineEventCommand(input);
+        Parser.handleWrongCommand(input);
+
+
     }
 
     /**
@@ -176,7 +203,7 @@ public class Parser {
      */
     static LegitCommand parseInput(String input) throws HahaEmptyCommandException,
             HahaWrongCommandException,
-            HahaEmptyDescriptionException {
+            HahaEmptyDescriptionException, HahaWrongTaskFormatException {
         // Safety checks
         Parser.handleSafety(input);
         // Interpret

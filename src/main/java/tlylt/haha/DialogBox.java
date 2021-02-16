@@ -29,9 +29,17 @@ public class DialogBox extends HBox {
     public DialogBox(Label text, ImageView imageView) {
         super(20);
         this.text = text;
-        this.setPadding(new Insets(10, 10, 10, 10));
         displayPicture = imageView;
 
+        configureText();
+        configurePicture();
+
+        this.setPadding(new Insets(10, 10, 10, 10));
+        this.setAlignment(Pos.CENTER_RIGHT);
+        this.getChildren().addAll(text, displayPicture);
+    }
+
+    private void configureText() {
         text.setWrapText(true);
         text.setMinHeight(Region.USE_PREF_SIZE);
         text.setAlignment(Pos.CENTER);
@@ -45,12 +53,11 @@ public class DialogBox extends HBox {
                 BlurType.GAUSSIAN,
                 Color.rgb(200, 220, 230),
                 2, 10, 3, 3));
+    }
+
+    private void configurePicture() {
         displayPicture.setFitWidth(90.0);
         displayPicture.setFitHeight(90.0);
-
-        this.setAlignment(Pos.CENTER_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-
     }
 
     /**

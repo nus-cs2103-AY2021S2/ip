@@ -18,7 +18,6 @@ public class Ui {
      * Returns warning about a task that cannot be located.
      */
     public String taskNotFound() {
-        System.out.println(TASK_NOT_FOUND);
         return TASK_NOT_FOUND;
     }
 
@@ -26,7 +25,6 @@ public class Ui {
      * Outputs welcome message.
      */
     public String welcome() {
-        System.out.println(STARTER);
         return STARTER;
     }
 
@@ -34,7 +32,6 @@ public class Ui {
      * Outputs goodbye message.
      */
     public String bye() {
-        System.out.println("Bye now!");
         return "Bye now!";
     }
 }
