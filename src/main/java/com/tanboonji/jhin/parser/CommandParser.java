@@ -89,7 +89,7 @@ public class CommandParser {
         case ByeCommand.COMMAND:
             return new ByeCommand();
         case FindCommand.COMMAND:
-            return FindCommand.parseArguments(arguments);
+            return new FindCommand(arguments);
         case AliasCommand.COMMAND:
             return AliasCommand.parseArguments(arguments);
         case DeleteAliasCommand.COMMAND:
