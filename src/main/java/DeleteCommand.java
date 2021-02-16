@@ -31,7 +31,6 @@ public class DeleteCommand extends Command {
         if (index > tasks.getSize() - 1 || index < 0) {
             throw new DukeException("Task does not exist");
         }
-//        assert index >= 1 : "Value must be at least 1";
         Task toBeRemoved = tasks.get(index - 1);
         tasks.remove(index - 1);
         return Ui.showDeleteText() + toBeRemoved.toString() + tasks.getSizeString();
