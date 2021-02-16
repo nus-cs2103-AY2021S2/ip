@@ -38,6 +38,9 @@ public class Parser {
         if (input.equals("list")) {
             ListCommand listcommand = new ListCommand();
             return listcommand.execute(this.manager, this.ui, this.storage);
+        } else if (input.equals("help")) {
+            HelpCommand helpcommand = new HelpCommand();
+            return helpcommand.execute(this.manager, this.ui, this.storage);
         } else if (input.contains("todo")) {
             TodoCommand todocommand = new TodoCommand(input);
             return todocommand.execute(this.manager, this.ui, this.storage);
