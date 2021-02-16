@@ -60,6 +60,7 @@ public class CommandParser {
      *
      * @param input User string input.
      * @return Respective intended command with arguments or invalid command.
+     * @throws JhinException If any error occurs while parsing command from String class to Command class.
      */
     public static Command parseCommand(String input) throws JhinException {
         Matcher matcher = COMMAND_FORMAT.matcher(input);

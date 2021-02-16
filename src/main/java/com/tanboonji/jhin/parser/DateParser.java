@@ -56,6 +56,7 @@ public class DateParser {
      *
      * @param input String input.
      * @return Date object.
+     * @throws JhinException If any error occurs while parsing date from String class to LocalDate class.
      */
     public static LocalDate parseDate(String input) throws JhinException {
         try {
@@ -70,6 +71,7 @@ public class DateParser {
      *
      * @param input String input.
      * @return Time object.
+     * @throws JhinException If any error occurs while parsing time from String class to LocalTime class.
      */
     public static LocalTime parseTime(String input) throws JhinException {
         try {
