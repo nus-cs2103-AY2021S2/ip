@@ -32,72 +32,137 @@ e.g. if the command specifies `list 2`, it will be interpreted as `list`.
 
 ### Adding a todo task: `todo`
 Adds a new todo task to the chatbox.
+
 Format: `todo NAME_OF_TASK`
+
 Examples:
 * `todo eat`
 * `todo sleep`
 
+Expected Outcome:
+`Alright, I have added this new todo.
+[T][ ] eat
+There are a total of 1 task now`.
+
 ### Adding an event: `event`
 Adds a new event to the chatbox.
+
 Format: `event NAME_OF_EVENT /at: YYYY-MM-DD HHMM`
+
 * Adds an event occurring at the specified date and time.
 * The date and time **must follow the specifed format**.
 * The time is in a **24-hour format**.
+
 Examples:
 * `event eat /at: 2021-02-02 0200`
 * `event dinner /at: 2021-02-28 1900`
 
+Expected Outcome:
+`Alright, I have added this new event.
+[E][ ] eat (by: 02 Feb 2021 2:00 AM)
+There are a total of 2 tasks now`.
+
+
 ### Adding a deadline: `deadline`
 Adds a new deadline to the chatbox.
+
 Format: `deadline NAME_OF_DEADLINE /by: YYYY-MM-DD HHMM`
+
 * Adds a deadline due at the specified date and time.
 * The date and time **must follow the specifed format**.
 * The time is in a **24-hour format**.
+
 Examples:
 * `deadline essay /by: 2021-03-01 2359`
 * `deadline submit assignment /by: 2021-02-28 2359`
 
+Expected Outcome:
+`Alright, I have added this new deadline.
+[D][ ] essay (by: 01 Mar 2021 11:59 PM)
+There are a total of 3 tasks now`.
+
 ### Listing all tasks: `list`
 Shows a list of all tasks stored.
+
 Format: `list`
+
+Expected Outcome:
+`This is your list of tasks:
+1.[T][ ] eat
+2.[E][ ] eat (by: 02 Feb 2021 2:00 AM)
+3.[D][ ] essay (by: 01 Mar 2021 11:59 PM)
+Upcoming reminders: 
+01 Feb 2021 1:00 PM: [[E][ ] eat (by: 02 Feb 2021 2:00 AM)]`
 
 ### Searching for a specific task by name: `find`
 Search for tasks whose names contain any of the given keywords.
+
 Format: `find KEYWORDS`
 * The search is case-insensitive. e.g `eat` will match `Eat`
 * The order of the keywords matters. e.g. `eat and sleep` will not match `sleep and eat`
 * Only the name is searched.
+
 Examples:
 * `find eat` will return `Eat` and `eat and sleep`
 
+Expected Outcome:
+`Here are your search results:
+1.[T][ ] eat
+2.[E][ ] eat (by: 02 Feb 2021 2:00 AM)
+Upcoming reminders: `
+
 ### Adding a reminder to a task: `remind`
 Adds a reminder to a task that would be given by the chatbox at the specified time.
+
 Format: `remind INDEX /on: YYYY-MM-DD HHMM`
-* Adds a reminder to remind about the task at the specified `index`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer 1, 2, 3, …**
+* Adds a reminder to remind about the task at the specified `index`. 
+* The index refers to the index number shown in the displayed task list. 
+* The index **must be a positive integer 1, 2, 3, …**
 * The date and time **must follow the specifed format**.
 * The time is in a **24-hour format**.
+
 Examples:
-* `remind 1 /on: 2021-03-01 1300` - The bot will give a reminder about the task at 1pm on 1st of March 2021.
+* `remind 2 /on: 2021-02-01 1300` - The bot will give a reminder about the task at 1pm on 1st of February 2021.
 * `remind 3 /on: 2021-02-28 1900`
+
+Expected outcome:
+`A new reminder is added to [E][ ] eat (by: 02 Feb 2021 2:00 AM)
+on 2021-02-01T13:00`
 
 ### Mark a task as completed: `done`
 Marks the specified task as done in the chatbox.
+
 Format: `done INDEX`
 * Marks the task at the specified `INDEX` as completed.
 * The index refers to the index number shown in the displayed task list. 
 * The index **must be a positive integer 1, 2, 3, …**
+
 Examples:
-* `done 1` 
+* `done 1`
+
+Expected Outcome:
+`Good job! This task has been marked as done :)
+[T][X] eat`
 
 ### Deleting a task: `delete`
 Deletes the specified task from the chatbox.
+
 Format: `delete INDEX`
 * Deletes the task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed task list. 
 * The index **must be a positive integer 1, 2, 3, …**
 
+Examples:
+* `delete 1`
+
+Expected Outcome:
+`Alright, this task has been removed.
+[T][X] eat
+There are 2 tasks left`
+
 ### Exiting the chatbox: `bye`
 Exits the chatbox.
+
 Format: `bye`
 
 ### Saving the data
