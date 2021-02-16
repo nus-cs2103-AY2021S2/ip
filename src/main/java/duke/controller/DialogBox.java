@@ -85,7 +85,8 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         assert db != null : "Dialog Box is not initialised";
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.CRIMSON,
+        Color dialogColor = text.contains("☹ OOPS") ? Color.CRIMSON : Color.LIGHTBLUE;
+        db.setBackground(new Background(new BackgroundFill(dialogColor,
                 new CornerRadii(5.0),
                 Insets.EMPTY)));
         return db;
