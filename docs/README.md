@@ -55,11 +55,11 @@ Example: `find Birthday Party`
 ### Deleting a task: `delete`
 Deletes the specified task or all the tasks from the task list.
 
-####Format 1: `INDEX`
+#### Format 1: `INDEX`
 Deletes the task at the specified INDEX. 
 - Example: `delete 1`
 
-####Format 2: `all`
+#### Format 2: `all`
 
 Deletes all the tasks from the task list. 
 - Example: `delete all`
