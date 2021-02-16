@@ -58,6 +58,10 @@ public class Storage {
         try {
             String[] history = Files.readString(Paths.get("./data/checklst.txt")).split("\n");
             for (String task: history) {
+                if (task.isBlank()) {
+                    continue;
+                }
+
                 if (task.charAt(0) == 'T') {
                     taskList.add(Todo.parseTodo(task));
                 } else if (task.charAt(0) == 'D') {

@@ -33,7 +33,13 @@ public class Parser {
     }
 
     public String parse(String[] input) throws ChecklstException {
-        return methodMap.get(input[0]).getMethod().apply(input);
+        MethodPair method = methodMap.get(input[0]);
+        
+        if (method == null) {
+            throw new ChecklstException("Sorry I didn't understand that command!");
+        }
+
+        return method.getMethod().apply(input);
     }
 
     private String list(String[] input) {

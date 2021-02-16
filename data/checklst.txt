@@ -1,9 +1,2 @@
-E ; O ; concert2 ; 2020-12-04
-E ; O ; concert ; 2020-04-12
-T ; O ; 3
-T ; O ; hello3
-T ; O ; hello
-T ; O ; concert
-T ; X ; hello2
-T ; O ; BT4014 Assignment
-T ; O ; cs2103 assignment
+T ; X ; Read Book
+D ; O ; assignment ; 2020-02-17
