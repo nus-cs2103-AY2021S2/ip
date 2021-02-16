@@ -93,6 +93,7 @@ public class Ui {
             StringBuilder sb = new StringBuilder();
             for (Task t : taskArrayList) {
                 sb.append(t);
+                sb.append("\n");
             }
 
             if (!sb.toString().isBlank()) {
