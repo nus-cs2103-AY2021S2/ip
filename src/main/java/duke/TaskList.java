@@ -48,4 +48,13 @@ public class TaskList {
             }
         }
     }
+
+    public static boolean contains(Task task) {
+        for (Task t: taskList) {
+            if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -34,6 +34,9 @@ public class Parser {
         String[] userInput = command.split(" ", 2);
         if (userInput[0].toLowerCase().equals(Command.TODO.toString())) {
             ToDo newToDo = new ToDo(userInput[1]);
+            if (TaskList.contains(newToDo)) {
+                return "This task already exists!";
+            }
             TaskList.taskList.add(newToDo);
             return UI.addedTask();
         } else if (userInput[0].toLowerCase().equals(Command.HELLO.toString())) {
@@ -43,6 +46,9 @@ public class Parser {
             try {
                 Date by = dateFormat.parse(details[1]);
                 Deadline newDeadline = new Deadline(details[0], by);
+                if (TaskList.contains(newDeadline)) {
+                    return "This task already exists!";
+                }
                 TaskList.taskList.add(newDeadline);
                 return UI.addedTask();
             } catch (ParseException e) {
@@ -55,6 +61,9 @@ public class Parser {
                 Date start = dateFormat2.parse(timings[0]);
                 Date end = dateFormat3.parse(timings[1]);
                 Event newEvent = new Event(details[0], start, end);
+                if (TaskList.contains(newEvent)) {
+                    return "This task already exists!";
+                }
                 TaskList.taskList.add(newEvent);
                 return UI.addedTask();
             } catch (ParseException e){
