@@ -27,7 +27,7 @@ public class EventCommand extends Command {
             throw new DukeException("I apologize, please input description and time for 'event'.");
         } else {
             Tuple<String, ArrayList<Tag>> argsAndTags = Tag.retrieveTags(getArguments());
-            String[] splitByDate = argsAndTags.getFirst().split("/at");
+            String[] splitByDate = argsAndTags.getFirst().split("/at", -1);
             if (getArguments().equals(splitByDate[0])) {
                 throw new DukeException("I apologize, please use '/at' argument to specify time for 'event'.");
             } else {

@@ -112,7 +112,7 @@ public class Storage {
     }
 
     private Task fileStringToTask(String fileString) {
-        String[] taskArgsArray = fileString.split(" [|] ");
+        String[] taskArgsArray = fileString.split(" [|] ", -1);
         if (taskArgsArray[0].equals("T")) {
             return new Todo(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2],
                     Tag.processTags(taskArgsArray[3]));
