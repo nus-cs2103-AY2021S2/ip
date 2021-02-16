@@ -272,7 +272,10 @@ public class Duke {
         for (Task task : taskList.getList()) {
             String description = task.getDescription();
             String tag = task.getTag();
-            if (description.contains(argument) || tag.contains(argument)) {
+            if (tag != null && tag.contains(argument)) {
+                subList.add(task);
+                }
+            else if (description.contains(argument)) {
                 subList.add(task);
             }
         }

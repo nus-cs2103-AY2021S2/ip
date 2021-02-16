@@ -106,9 +106,9 @@ public class Storage {
 
         String details = tokens[1];
         String at = tokens[2].equals("NULL") ? null : tokens[2];
-        String by = tokens[3].equals("NULL") ? null : tokens[3];
+        String tag = tokens[3].equals("NULL") ? null : tokens[3];
 
-        return new Events(isDone, details, by, at);
+        return new Events(isDone, details, at, tag);
     }
 
     /**
@@ -125,7 +125,7 @@ public class Storage {
         String by = tokens[2].equals("NULL") ? null : tokens[2];
         String tag = tokens[3].equals("NULL") ? null : tokens[3];
 
-        return new Events(isDone, details, tag, by);
+        return new Events(isDone, details, by, tag);
     }
     /**
      * Creates a Todo object from the Task details
