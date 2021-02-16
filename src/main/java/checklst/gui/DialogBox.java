@@ -18,11 +18,11 @@ public class DialogBox extends HBox {
     protected Label text;
     protected ImageView displayPicture;
 
-    protected DialogBox(Label name, Label l, ImageView iv) {
+    protected DialogBox(String name, Label l, ImageView iv) {
         this.text = l;
         this.text.setFont(new Font("Arial", 14));
         this.displayPicture = iv;
-        this.name = name;
+        this.name = new Label(name);
 
         this.text.setWrapText(true);
         this.text.setPadding(new Insets(10));

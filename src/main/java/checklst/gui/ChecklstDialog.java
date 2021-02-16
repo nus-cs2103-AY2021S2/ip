@@ -10,9 +10,10 @@ import javafx.scene.paint.Color;
 
 public class ChecklstDialog extends DialogBox {
 
+    private static final String NAME = "Checklst";
+
     public ChecklstDialog(Label l, ImageView iv) {
-        // Should use a static Label here but for some reason static variables don't work with JavaFx.
-        super(new Label("Checklst"), l, iv);
+        super(NAME, l, iv);
 
         Color dialogColor = new Color(0, 0.7, 1, 1);
         this.text.setBackground(
