@@ -19,22 +19,27 @@ public class LogicHandler {
      * @param list List of tasks.
      */
     public String list(List<Task> list) {
-        // If the command is list, display the list of tasks.
-        int indexOfLastItem = list.size() - 1;
-
-        String listOfTasksAsString = "";
+        StringBuilder listOfTasks = new StringBuilder();
+        int indexOfLastItem = getIndexOfLastItem(list);
 
         for (int i = 0; i < list.size(); i++) {
-            String numberedTask = String.format("%d. %s", i + 1, list.get(i));
-            listOfTasksAsString += numberedTask;
+            listOfTasks.append(getEnumeratedTask(list, i));
 
             if (i == indexOfLastItem) {
                 continue;
             }
 
-            listOfTasksAsString += "\n";
+            listOfTasks.append("\n");
         }
-        return listOfTasksAsString;
+        return listOfTasks.toString();
+    }
+
+    private int getIndexOfLastItem(List<?> list) {
+        return list.size() - 1;
+    }
+
+    private String getEnumeratedTask(List<?> list, int index) {
+        return String.format("%d. %s", index + 1, list.get(index));
     }
 
     /**
