@@ -33,6 +33,7 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String userInput) throws DukeException {
+        assert userInput != null : "user input should not be null";
         Matcher matcher = BASE_COMMAND_FORMAT.matcher(userInput.trim());
         CommandWord commandWord;
         String commandDescription;
