@@ -1,40 +1,40 @@
 # Diamant Chatbox User Guide
 
-## Introduction
+# Introduction
 Diamant is a custom chatbox made for the CS2103T module individual project. 
 It is inspired by the diamond hand memes during the production of the application (January 2021).
 Jozu (the bot) will help you (diamond hand retard) keep track of tasks that you have to do.
 Tasks that are complete have a `✓`, while tasks that are incomplete have a `✘`.
 
-## Features 
-### GUI
+# Features 
+## GUI
 A graphical user interface to provide stronger interaction between the user and the chatbox.
 
-### Add different types of task
+## Add different types of task
 You can add 3 different types of tasks for Jozu to consolidate.
 1. ToDo 
 2. Event
 3. Deadline
 
-### Delete tasks
+## Delete tasks
 If you do not need a specific task anymore, Jozu will help you delete it.
 
-### Clear tasks
+## Clear tasks
 If you give up and want out, Jozu can clear all your outstanding tasks and give you a need fresh start.
 
-### Find tasks
+## Find tasks
 By entering a keyword, you can get a list of tasks that are contain the keyword.
 
-### List tasks
+## List tasks
 Lists all the tasks in the sequential order you have keyed in by.
 
-### Done tasks
+## Done tasks
 Marks the task stored by Jozu as done, as depicted by a `✓`
-### Bye
+## Bye
 Closes the program and saves all your tasks that you have input.
 
-## In-depth commands and expected output
-#### Add ToDo task - `todo` 
+##In-depth commands and expected output
+### Add ToDo task - `todo` 
 
 Format: `todo DESCRIPTION_OF_TASK`
 
@@ -51,7 +51,7 @@ ALRIGHT. I HAVE ALREADY ADDED THE TASK!!!
 [T][✘] HODL GME 
 Now you have 1 tasks in the list.
 ```
-#### Add Event task - `event` 
+### Add Event task - `event` 
 
 Format: `event DESCRIPTION_OF_TASK /at yyyy-mm-dd`
 
@@ -69,7 +69,7 @@ ALRIGHT. I HAVE ALREADY ADDED THE TASK!!!
 Now you have 2 tasks in the list.
 ```
 
-#### Add Deadline task - `deadline` 
+### Add Deadline task - `deadline` 
 
 Format: `deadline DESCRIPTION_OF_TASK /by yyyy-mm-dd`
 
@@ -86,7 +86,7 @@ ALRIGHT. I HAVE ALREADY ADDED THE TASK!!!
 [D][✘] return book (by:Oct 15 2019)
 Now you have 3 tasks in the list.
 ```
-#### Delete tasks - `delete` 
+### Delete tasks - `delete` 
 
 Format: `delete TASK_NUMBER_TO_DELETE`
 
@@ -103,7 +103,7 @@ OK. TASK REMOVED.
 [D][✘] return book (by:Oct 15 2019)
 Now you have 2 tasks in the list.
 ```
-#### Delete all tasks - `clear'
+### Delete all tasks - `clear'
 
 Format: `clear`
 
@@ -118,7 +118,7 @@ Expected outcome:
 COMMAND RECEIVED! 
 List has been cleared.
 ```
-#### Find tasks - `find` 
+### Find tasks - `find` 
 
 Format: `find DESCRIPTION_OF_LIST_ITEM`
 
@@ -138,7 +138,7 @@ Here are the matching tasks in your list.
 ```
 
 
-#### List tasks - `list` 
+### List tasks - `list` 
 
 Format: `delete TASK_NUMBER_TO_DELETE`
 
@@ -155,7 +155,7 @@ Here are the tasks.
 1. [T][✘] HODL GME 
 2. [E][✘] project meeting (at:Oct 19 2019)
 ```
-#### Done tasks - `done` 
+### Done tasks - `done` 
 
 Format: `done TASK_NUMBER_TO_MARK_AS_DONE`
 
@@ -171,7 +171,7 @@ COMMAND RECEIVED!
 ALRIGHT. THIS TASKS HAS BEEN MARKED AS COMPLETE.
 1. [T][✓] HODL GME 
 ```
-#### Exiting the program and save - `bye` 
+### Exiting the program and save - `bye` 
 
 Format: `bye`
 
