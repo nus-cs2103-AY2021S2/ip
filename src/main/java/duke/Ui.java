@@ -1,6 +1,8 @@
 package duke;
 
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 /**
@@ -50,13 +52,40 @@ public class Ui {
 
     public static void showListContent(TaskList taskList){
         System.out.println(HORIZONTAL_LINE);
-        System.out.println(" Here are your remaining tasks!");
-        System.out.println(BLANK_SPACE_BABY);
-        if(taskList.getSize() ==0){
+        if(taskList.getSize() == 0){
             System.out.println(" The list is empty!\n Please add tasks into the list :))");
+        } else {
+            System.out.println(" Here are your remaining tasks!");
+            System.out.println(BLANK_SPACE_BABY);
+            System.out.println(taskList.toString());
         }
-        System.out.println(taskList.toString());
         System.out.println(HORIZONTAL_LINE);
+    }
+
+    public static void showReminderContent(ArrayList<Deadline> deadlineTasks){
+        System.out.println(HORIZONTAL_LINE);
+        if(deadlineTasks.size() == 0){
+            System.out.println("You have no upcoming deadlines");
+        } else {
+            System.out.println(" Here are your upcoming deadline Tasks!");
+            System.out.println(BLANK_SPACE_BABY);
+            String output = "";
+            for(int i = 0; i< deadlineTasks.size(); i++){
+                if(i != deadlineTasks.size() - 1){
+                    long noOfDaysBetween = ChronoUnit.DAYS.between( LocalDate.now(), deadlineTasks.get(i).getLocalDate());
+                    output +=  " " + deadlineTasks.get(i).toString() + " "
+                            + noOfDaysBetween + " days left!!" +"\n";
+                } else {
+                    long noOfDaysBetween = ChronoUnit.DAYS.between( LocalDate.now(), deadlineTasks.get(i).getLocalDate());
+                    output +=  " " + deadlineTasks.get(i).toString() + " "
+                            + noOfDaysBetween + " days left!!";
+                }
+            }
+            System.out.println(output);
+        }
+
+        System.out.println(HORIZONTAL_LINE);
+
     }
 
     /**

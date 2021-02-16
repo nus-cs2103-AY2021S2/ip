@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * Inherits from the Task.
  */
 
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline>{
 
     private LocalDate deadline;
 
@@ -22,11 +22,26 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public LocalDate getLocalDate(){
+        return this.deadline;
+    }
+
     /**
      * representates a Deadline object as a string
      */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadline.toString() + ")";
+    }
+
+    @Override
+    public int compareTo(Deadline o) {
+        if(this.deadline.isBefore(o.deadline)){
+            return -1;
+        } else if(this.deadline.isAfter(o.deadline)){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

@@ -259,7 +259,10 @@ public class Parser {
 
     public static void parseListCommand(TaskList taskList, Ui ui){
         ui.showListContent(taskList);
+    }
 
+    public static void parseReminderCommand(ArrayList<Deadline> listOfUpComingsTasks, Ui ui){
+        ui.showReminderContent(listOfUpComingsTasks);
     }
 
     /**
