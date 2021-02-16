@@ -7,6 +7,7 @@ import duke.tasks.Todo;
 import duke.tasks.Expense;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -35,6 +36,10 @@ public class TaskList {
     }
 
     private void convertDataIntoStringsOfTask(String data) {
+        if (data == "") {
+            listOfTaskInString = Collections.emptyList();
+           return;
+        }
         String[] ArrayOfTasksFromLoad = data.split("\n");
         listOfTaskInString = Arrays.asList(ArrayOfTasksFromLoad);
     }
