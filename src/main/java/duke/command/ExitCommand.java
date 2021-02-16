@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Ui;
 import duke.Storage;
 
 import duke.task.TaskList;
@@ -19,15 +18,14 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showGoodbye();
-        
+    public String getResponString(TaskList tasks, Storage storage) {
         try {
             storage.store(tasks);
         } catch (IOException e) {
             throw new DukeException("Cannot save tasks. Save file not found");
         }
 
-        ui.close();
+        String goodbyeResponse = "Bye. Hope to see you again soon!";
+        return goodbyeResponse;
     }
 }

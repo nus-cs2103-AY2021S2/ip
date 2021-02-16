@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.WelcomeCommand;
 import duke.task.TaskList;
 
 import java.io.IOException;
@@ -13,7 +12,6 @@ import java.time.format.DateTimeParseException;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Class constructor with specified file path.
@@ -21,15 +19,12 @@ public class Duke {
      * @param filePath The path to load and save from
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
         } catch (IOException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         } catch (DateTimeParseException e) {
-            ui.showReadingError();
             tasks = new TaskList();
         }
     }
@@ -38,22 +33,17 @@ public class Duke {
     /**
      * Runs the duke programme.
      */
-    public void run() {
-        Command c = new WelcomeCommand();
-        c.execute(tasks, ui, storage);
-        while (!c.isExit()) {
-            try {
-                String fullCommand = ui.readCommand();
-                c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-                ui.printMessage(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.getResponString(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getWelcome() {
+        String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
+        return welcomeMessage;
     }
-
 }

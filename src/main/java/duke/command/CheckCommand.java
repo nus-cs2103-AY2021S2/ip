@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.Storage;
 
 import duke.task.Task;
@@ -29,7 +28,7 @@ public class CheckCommand implements Command{
 
     /** */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String getResponString(TaskList tasks, Storage storage) {
         TaskList filteredList = new TaskList();
 
         for (int i = 1; i <= tasks.size(); i++) {
@@ -38,8 +37,9 @@ public class CheckCommand implements Command{
                 filteredList.add(currTask);
             }
         }
-
-        ui.printMessage(filteredList.toString());
+        
+        String checkResponse = filteredList.toString();
+        return checkResponse;
     }
     
 }

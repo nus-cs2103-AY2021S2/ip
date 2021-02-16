@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.Storage;
 
 import duke.task.TaskList;
@@ -22,5 +21,5 @@ public interface Command {
      * @param ui User interface for user interaction
      * @param storage Storage manager for loading and saving task files
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage);
+    public String getResponString(TaskList tasks, Storage storage);
 }
