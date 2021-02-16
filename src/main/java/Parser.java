@@ -300,8 +300,8 @@ public class Parser {
      *
      * @param commandParts , String Array containing the parts of the command (keyword,remainder).
      * @return Command , a AddCommand to add a task.
-     * @throws DukeException, if keyword is invalid.
-     * @throws DukeDeadlineException, if deadline is missing or deadline is incorrect format.
+     * @throws DukeException , if keyword is invalid.
+     * @throws DukeDeadlineException , if deadline is missing or deadline is incorrect format.
      */
     private static Command createAddCommand(String[] commandParts) throws DukeException, DukeDeadlineException {
         String keyword = commandParts[0];
