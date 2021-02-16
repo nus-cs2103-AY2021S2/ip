@@ -17,6 +17,7 @@ import duke.commands.FindCommand;
 import duke.commands.InvalidInputCommand;
 import duke.commands.ListCommand;
 import duke.commands.ReminderCommand;
+import duke.exceptions.EmptyInputException;
 import duke.exceptions.InvalidActionException;
 import duke.exceptions.InvalidDateTimeFormatException;
 import duke.exceptions.InvalidUrgencyDaysException;
@@ -225,6 +226,14 @@ public class Parser {
      * @return An exception message (if applicable), or an empty string if the input was valid.
      */
     private static String getExceptionMessage(String input) {
+        try {
+            if (input.length() == 0) {
+                throw new EmptyInputException();
+            }
+        } catch (EmptyInputException e) {
+            return e.getMessage();
+        }
+
         String action = getAction(input);
         String description = getDescription(input);
         String byDateTimeString = getByDateTimeString(input);
@@ -234,31 +243,24 @@ public class Parser {
             if (!validActions.contains(action)) {
                 throw new InvalidActionException(action);
             }
-
             if ((!action.equals(BYE) && !action.equals(LIST)) & description.length() == 0) {
                 throw new MissingDescriptionException(action);
             }
-
             if ((action.equals(DONE) || action.equals(DELETE)) && (!isPositiveInteger(description))) {
                 throw new TaskNumberInvalidException();
             }
-
             if (action.equals(REMINDER) && (!isPositiveInteger(description))) {
                 throw new InvalidUrgencyDaysException();
             }
-
             if (action.equals(DEADLINE) && byDateTimeString.length() == 0) {
                 throw new MissingDeadlineException();
             }
-
             if (action.equals(EVENT) && atDateTimeString.length() == 0) {
                 throw new MissingEventTimeException();
             }
-
             if (action.equals(DEADLINE) && null == convertToDateTime(byDateTimeString)) {
                 throw new InvalidDateTimeFormatException(byDateTimeString);
             }
-
             if (action.equals(EVENT) && null == convertToDateTime(atDateTimeString)) {
                 throw new InvalidDateTimeFormatException(atDateTimeString);
             }

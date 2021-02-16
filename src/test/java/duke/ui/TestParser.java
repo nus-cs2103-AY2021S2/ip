@@ -45,6 +45,7 @@ public class TestParser {
 
         // Test that parsing invalid input would return the InvalidInputCommand, which does nothing.
         for (String input : Arrays.asList(
+                "",
                 "something invalid",
                 "done",
                 "done something",

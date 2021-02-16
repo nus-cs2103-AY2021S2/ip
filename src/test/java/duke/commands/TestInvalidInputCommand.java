@@ -51,6 +51,18 @@ public class TestInvalidInputCommand {
     }
 
     /**
+     * Tests that <code>InvalidInputCommand</code> correctly responds to the exception when an empty
+     * input is entered.
+     */
+    @Test
+    public void testEmptyInputResponse() {
+        Command command = Parser.parse("");
+        assertTrue(command instanceof InvalidInputCommand);
+        String expectedResponse = "You need to enter some input...";
+        assertEquals(expectedResponse, command.getResponse(this.tasks));
+    }
+
+    /**
      * Tests that <code>InvalidInputCommand</code> correctly respond to the exception when
      * no valid action could be inferred from the input.
      */
