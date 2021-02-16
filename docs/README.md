@@ -1,6 +1,9 @@
-# Quick User Guide
+# Duke
 
-A very basic todo manager that's a wee bit utilitarian, without pretending you're talking to a bot.
+A very basic todo manager that's a wee bit utilitarian, without pretending you're talking to a bot.  
+Also a very uninspired name, considering I leeched this off the original as a fork.
+
+**Prerequisite: Java 11**
 
 ![](images/sampleRun.gif)
 
@@ -60,7 +63,7 @@ Expected outcome:
     
     2. [D][✓] group meeting (by: 2021-02-17 14:00)
     3. [E][✓] meet friendo (at: 2021-02-19 18:00)
-    5. [E][✓] Meet army friends (at: 2021-02-22 08:25)
+    5. [E][✓] meet army friends (at: 2021-02-22 08:25)
 
 ------
 
@@ -126,3 +129,6 @@ Expected outcome:
    `13 Jan` (British-style), `13/1/2021` (old school), etc.
    Description of exact parsing rules is in the Java documentation.
 1. Options are prefixed with the `/` symbol. But this program also knows to parse dates containing `/`.
+1. Text boxes are especially allowed to be highlightable, in the off chance you want to copy it somewhere else...
+1. ...and exercise an undocumented `delete /all` nuclear option, but you'll never want to delete all the tasks
+   on this cute little app, right?
