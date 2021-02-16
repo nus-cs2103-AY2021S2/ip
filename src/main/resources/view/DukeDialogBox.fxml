@@ -8,6 +8,7 @@
 
 <fx:root alignment="TOP_RIGHT" spacing="5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #6A82FB, #FC5C7D); -fx-background-radius: 20px;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
     <children>
+        <!--Reused from https://github.com/nus-cs2103-AY2021S2/forum/issues/137-->
         <Label fx:id="dialog" minHeight="-Infinity" text="Label" wrapText="true">
          <font>
             <Font name="Menlo Regular" size="12.0" />
