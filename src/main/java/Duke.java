@@ -46,7 +46,6 @@ public class Duke {
         Parser parser = new Parser();
         String trimmedInput = input.trim();
         String command = parser.getCommand(trimmedInput);
-
         switch (command) {
             case "bye":
                 storage.save(taskList);
@@ -59,6 +58,7 @@ public class Duke {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task task = taskList.getSingleTask(index);
+                    assert task != null :"task exists";
                     task.markDone();
 
                     return ui.printDone(task);
@@ -72,6 +72,8 @@ public class Duke {
                     String name = getTodoName(input);
                     Todo todo = new Todo(name);
                     taskList.addTask(todo);
+                    assert taskList.getSize() > 0 : "size must be greater than 0, ensures task is added.";
+
                     return ui.printTask(todo, taskList.getSize());
                 } catch (DukeException e) {
                     return e.printError("Come On Fella! Your ToDo description cannot be empty!");
@@ -85,6 +87,8 @@ public class Duke {
 
                     Deadline deadline = new Deadline(name, date);
                     taskList.addTask(deadline);
+                    assert taskList.getSize() > 0 : "size must be greater than 0, ensures task is added.";
+
                     return ui.printTask(deadline, taskList.getSize());
 
                 } catch (DukeException e) {
@@ -97,6 +101,8 @@ public class Duke {
                     String at = getEventAttribute(input);
                     Event event = new Event(name, at);
                     taskList.addTask(event);
+                    assert taskList.getSize() > 0 : "size must be greater than 0, ensures task is added.";
+
                     return ui.printTask(event, taskList.getSize());
 
                 } catch (DukeException e) {
@@ -108,6 +114,8 @@ public class Duke {
                     int deleteIndex = parser.getDeleteIndex(input);
                     Task deletedTask = taskList.getSingleTask(deleteIndex);
                     taskList.deleteTask(deleteIndex);
+                    assert taskList.getSize() >= 0 : "size must be equal or greater than 0, ensures task is deleted";
+
                     return ui.printDelete(deletedTask, taskList.getSize());
                 } catch (DukeException e) {
                     return e.printError("Please choose the correct index for deletion.");
@@ -119,12 +127,10 @@ public class Duke {
                 TaskList output = taskList.matchTasks(arguments);
                 return ui.printMatchingTask(output);
 
-
             default:
                 return ui.printUnknownCommand();
 
         }
-        //return command;
     }
 
     /**
@@ -166,7 +172,6 @@ public class Duke {
      */
     public static String getDeadlineAttribute(String byDate) throws DukeException {
         try {
-            //String atBy = byDate.split("/")[1].split(" ",2)[1].trim();
             return byDate.split("/by ")[1];
         } catch (Exception e) {
             throw new DukeException();

@@ -33,7 +33,6 @@ public class Storage {
      * @throws DukeException On file not found error
      */
     public ArrayList<Task> load() throws DukeException {
-        // fetchTasks()
         ArrayList<Task> result = new ArrayList<>();
         String currDir = System.getProperty("user.dir");
         String expectedDir = currDir + this.filePath;
@@ -84,7 +83,6 @@ public class Storage {
             FileWriter writer = new FileWriter(expectedDir + "/modoc_tm.txt");
 
             ArrayList<Task> listTask = tasks.getTasks();
-
             for (Task task : listTask) {
                 String result;
 

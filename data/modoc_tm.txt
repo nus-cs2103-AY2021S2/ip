@@ -1,3 +1,2 @@
 T/0/homework
-E/0/study/school
 T/0/Extra stuff
