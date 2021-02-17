@@ -38,17 +38,17 @@ public class Parser {
     }
 
     /**
-     * Parses task number from string.
+     * Parses number from string.
      *
-     * @param taskNumber String to parse.
+     * @param number String to parse.
      * @return Parsed integer.
      * @throws OwenException Integer could not be parsed from string.
      */
-    public static int parseTaskNumber(String taskNumber) throws OwenException {
+    public static int parseNumber(String number) throws OwenException {
         try {
-            return Integer.parseInt(taskNumber);
+            return Integer.parseInt(number);
         } catch (NumberFormatException exception) {
-            throw new OwenException("Task number must be specified...");
+            throw new OwenException("Number must be specified...");
         }
     }
 }

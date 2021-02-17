@@ -64,13 +64,13 @@ public class Owen implements Chatbot {
             case LIST:
                 return this.listTasks();
             case DONE:
-                return this.doneTask(Parser.parseTaskNumber(command.getArgs()));
+                return this.doneTask(Parser.parseNumber(command.getArgs()));
             case DELETE:
-                return this.deleteTask(Parser.parseTaskNumber(command.getArgs()));
+                return this.deleteTask(Parser.parseNumber(command.getArgs()));
             case FIND:
                 return this.findTask(command.getArgs());
             case REMINDERS:
-                return this.listReminders(Parser.parseTaskNumber(command.getArgs()));
+                return this.listReminders(Parser.parseNumber(command.getArgs()));
             case BYE:
                 return this.shutdown();
             default:

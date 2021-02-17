@@ -80,7 +80,7 @@ public class MainWindow extends AnchorPane {
                 new Separator(),
                 DialogBox.getBotDialog(response, this.botImage),
                 new Separator());
-        
+
         if (!this.bot.isRunning()) {
             Platform.exit();
         }
