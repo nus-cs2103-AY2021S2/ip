@@ -197,7 +197,7 @@ public class Parser {
                     + "when updating a task.");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please provide the required information or "
-                + "ensure there is a whitespace between the task index and new date.");
+                    + "ensure there is a whitespace between the task index and new date.");
         }
     }
 
