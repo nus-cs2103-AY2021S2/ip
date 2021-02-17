@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class Parser {
-    private static final String timeFormat = "yyyy-M-d H:mm";
-    private ArrayList<String> validOperators;
+    private final ArrayList<String> validOperators;
 
     public Parser() {
         this.validOperators = initialiseOperators();
@@ -263,7 +262,7 @@ public class Parser {
     private boolean isValidDate(String time) throws DateTimeParseException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
-            LocalDate dt = LocalDate.parse(time, formatter);
+            LocalDate.parse(time, formatter);
         } catch (DateTimeParseException e) {
             return false;
         }

@@ -21,7 +21,7 @@ e.g. Duke will not understand `deadline homework /by 2021/2/28 10:00`.
 e.g. if the command specifies `list 123`, Duke will NOT understand it as `list` but will return `OOPS!!! I'm sorry, but I don't know what that means :-(`.
   
 
-* `N` in duke response `Now you have N tasks in the list.` is arbitrary and it represents the total number of tasks in the Task List immediately after the current command is executed.
+* `N` in duke response `Now you have N tasks in the list.` is arbitrary, and it represents the total number of tasks in the Task List immediately after the current command is executed.
   
 ### Adding ToDo
 Adds a ToDo task to the task list.
