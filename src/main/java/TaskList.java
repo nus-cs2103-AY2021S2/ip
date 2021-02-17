@@ -78,15 +78,17 @@ public class TaskList {
     /**
      * Replaces task at given index.
      * @param indexes Index of task to be replaced
-     * @param task New task that will replace previous task
+     * @param tasks New tasks that will replace previous tasks
      */
-    public void set(int[] indexes, Task task) {
-        for (int i : indexes) {
-            assert i > 0: "Index passed to set must be greater than 1. ";
-            assert i <= this.tasks.size(): "Index passed to set cannot be greater than length of task list. ";
+    public void set(int[] indexes, List<Task> tasks) {
+        for (int i = 0; i < indexes.length; i++) {
+            int index = indexes[i];
+            Task task = tasks.get(i);
+            assert index > 0: "Index passed to set must be greater than 1. ";
+            assert index <= this.tasks.size(): "Index passed to set cannot be greater than length of task list. ";
             assert task != null: "Task passed to set must not be null. ";
-            this.storage.set(i, task);
-            this.tasks.set(i - 1, task);
+            this.storage.set(index, task);
+            this.tasks.set(index - 1, task);
         }
     }
 

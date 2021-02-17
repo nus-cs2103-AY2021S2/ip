@@ -36,20 +36,20 @@ public class DukeTest {
     @Test
     public void pipeDoneAllTest() {
         duke.testDuke("todo a");
-        duke.testDuke("todo c");
         duke.testDuke("todo b");
+        duke.testDuke("todo c");
         String out = duke.testDuke("all | done");
         String outExpected =
                 "Alright, I will mark these as done.\n" +
                 "[T][X]  a\n" +
                 "[T][X]  b\n" +
-                "[T][X]  c";
+                "[T][X]  c\n";
 
         String listAfterAllDone = duke.testDuke("all");
         String listExpected =
                 "1. [T][X]  a\n" +
                 "2. [T][X]  b\n" +
-                "3. [T][X]  c";
+                "3. [T][X]  c\n";
         assertAll("all | done",
                 () -> assertEquals(out, outExpected),
                 () -> assertEquals(listAfterAllDone, listExpected));

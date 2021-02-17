@@ -75,13 +75,11 @@ public class Duke extends Application {
             ui.printRemoved(removedTasks);
             break;
         case 2: //done
-            int[] indexes = parserOutput.getIndex();
-            List<Task> doneTasks = this.taskList.get(indexes);
+            List<Task> doneTasks = this.taskList.get(parserOutput.getIndex());
             for (Task t : doneTasks) {
                 t.markDone();
-                System.out.println(t.getName());
-                this.taskList.set(parserOutput.getIndex(), t);
             }
+            this.taskList.set(parserOutput.getIndex(), doneTasks);
             ui.printDone(doneTasks);
             break;
         case 3: //add
@@ -93,10 +91,10 @@ public class Duke extends Application {
             ui.printSearch(results, parserOutput.getSearchString());
             break;
         case 5: //list
-            ui.printList(this.taskList);
+            Ui.printList(this.taskList);
             break;
         case 6: //piped
-            indexes = getPipeInput(parserOutput);
+            int[] indexes = getPipeInput(parserOutput);
             int nextAction = parserOutput.getNextAction();
             if (nextAction == 1) {
                 readParse(ParserOutput.removeOutput(indexes));
@@ -129,8 +127,8 @@ public class Duke extends Application {
                 List<Task> doneTasks = this.taskList.get(parserOutput.getIndex());
                 for (Task t : doneTasks) {
                     t.markDone();
-                    this.taskList.set(parserOutput.getIndex(), t);
                 }
+                this.taskList.set(parserOutput.getIndex(), doneTasks);
                 return ui.printDone(doneTasks);
             case 3: //add
                 this.taskList.add(parserOutput.getTask());
@@ -139,7 +137,7 @@ public class Duke extends Application {
                 List<Task> results = this.taskList.find(parserOutput.getSearchString());
                 return ui.printSearch(results, parserOutput.getSearchString());
             case 5: //list
-                return ui.printList(this.taskList);
+                return Ui.printList(this.taskList);
             case 6: //piped
                 int[] indexes = getPipeInput(parserOutput);
                 int nextAction = parserOutput.getNextAction();
