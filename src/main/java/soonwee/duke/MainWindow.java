@@ -68,15 +68,6 @@ public class MainWindow extends AnchorPane {
 		return "---------------------------";
 	}
 
-	/**
-	 * Prints bye message.
-	 *
-	 * @return bye message
-	 */
-	public String printBye() {
-		String text = "Bye. Hope to see you again soon!\n";
-		return text;
-	}
 
 	/**
 	 * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -86,10 +77,7 @@ public class MainWindow extends AnchorPane {
 	private void handleUserInput() throws IOException {
 		String input = userInput.getText();
 		if (input.equals("bye")) {
-			dialogContainer.getChildren().addAll(
-					DialogBox.getUserDialog(input, userImage),
-					DialogBox.getDukeDialog(printBye(), dukeImage)
-			);
+			System.exit(0);
 		} else {
 			String response = dukeBot.getResponse(input);
 			dialogContainer.getChildren().addAll(
