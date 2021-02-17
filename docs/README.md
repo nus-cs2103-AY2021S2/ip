@@ -20,7 +20,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of outcome](https://github.com/figo2127/ip/blob/master/docs/Ui.png)
+![Image of outcome](https://github.com/figo2127/ip/blob/master/docs/Ui.png?raw=true)
 
 ### `todo [description]` - Adds a todo task
 

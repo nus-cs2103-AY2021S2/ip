@@ -58,6 +58,10 @@ public class Duke {
                 return GuiUi.displayGenericError();
             }
         }
+        return dealWithCommandsThatRequiresDescriptions(input);
+    }
+
+    public String dealWithCommandsThatRequiresDescriptions(String input) {
         try {
             int indexOfSpaceAfterCommand = input.indexOf(' ');
             //get the command word
