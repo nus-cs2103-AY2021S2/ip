@@ -44,7 +44,8 @@ public class TaskStringFormatter {
             output.append(taskNumber).append(".").append(getStatusString(task)).append("\n");
         }
 
-        return output.toString();
+        // Trim to remove the newline at the end
+        return output.toString().trim();
     }
 
     /**
@@ -59,12 +60,7 @@ public class TaskStringFormatter {
     private static String getStatusString(Task task) {
         assert (task instanceof ToDo || task instanceof Deadline || task instanceof Event);
 
-        String description = task.getDescription();
-        if (description.length() < targetDescLength) {
-            description = String.format("%1$-" + targetDescLength + "s", description);
-        } else if (description.length() > targetDescLength) {
-            description = description.substring(0, targetDescLength - 3) + "...";
-        }
+        String description = setLength(task.getDescription());
 
         String status = "[" + (task.isDone() ? "X" : " ") + "]";
         String time = "";
@@ -78,6 +74,22 @@ public class TaskStringFormatter {
             time = ((Event) task).getAtDateTimeString();
         }
         return status + " | " + description + " | " + time;
+    }
+
+    /**
+     * Trims or pads with white spaces the input string to a specific length, then return it.
+     *
+     * @param string The string to be trimmed and padded.
+     * @return The trimmed or padded string with a specific length.
+     */
+    private static String setLength(String string) {
+        if (string.length() < targetDescLength) {
+            return String.format("%1$-" + targetDescLength + "s", string);
+        } else if (string.length() > targetDescLength) {
+            return string.substring(0, targetDescLength - 3) + "...";
+        } else {
+            return string;
+        }
     }
 
     /**

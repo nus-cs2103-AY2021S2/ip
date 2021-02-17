@@ -91,7 +91,7 @@ public class TestReminderCommand {
                 + "2.[E][ ] | CS2103 Quiz 4        | " + this.oneDayBefore + "\n"
                 + "\n"
                 + "\n"
-                + "You do not have any urgent tasks!\n";
+                + "You do not have any urgent tasks!";
         assertEquals(expectedRelaxed, relaxedCommand.getResponse(this.tasks));
 
         // "Urgent" because tasks will be flagged out as urgent if there are 10 or less days left.
@@ -109,10 +109,13 @@ public class TestReminderCommand {
                 + "Status   | Description          | Time            \n"
                 + "--------------------------------------------------\n"
                 + "1.[D][ ] | CS2103 Quiz 2        | " + this.twoDaysAfter + "\n"
-                + "2.[E][ ] | CS2103 Quiz 5        | " + this.twoDaysAfter + "\n";
+                + "2.[E][ ] | CS2103 Quiz 5        | " + this.twoDaysAfter;
         assertEquals(expectedUrgent, urgentCommand.getResponse(this.tasks));
 
-        String expectedEmpty = "You do not have any overdue tasks!\n" + "\n" + "You do not have any urgent tasks!\n";
+        String expectedEmpty = "You do not have any overdue tasks!\n"
+                + "\n"
+                + "\n"
+                + "You do not have any urgent tasks!";
         assertEquals(expectedEmpty, urgentCommand.getResponse(new TaskList()));
     }
 }
