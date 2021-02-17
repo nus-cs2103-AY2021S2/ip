@@ -51,12 +51,12 @@ public class Storage {
     }
 
     /**
-     * Load data from the txt file
+     * Load data from the txt file, If no txt file, create new file. If
+     * no folder, create new folder.
      * @return List of Task object
-     * @throws DukeExceptionFolder The folder doesn't exist
      * @throws DukeExceptionCorruptedData The data format is incompatible
      */
-    public TaskList load() throws DukeExceptionFolder,DukeExceptionCorruptedData {
+    public TaskList load() throws DukeExceptionCorruptedData {
         List<Task> tasks = new ArrayList<>();
         File file = new File(this.filePath + this.fileName);
         try {

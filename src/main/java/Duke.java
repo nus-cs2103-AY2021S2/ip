@@ -39,16 +39,15 @@ public class Duke {
     /**
      * Constructor of the Duke app
      * @param filepath A string showing the path of the txt file
-     * @throws DukeExceptionFolder The 'data' folder doesn't exist
      * @throws DukeExceptionCorruptedData The txt file format is corrupted
      */
-    public Duke(String filepath, String fileName) throws DukeExceptionFolder, DukeExceptionCorruptedData {
+    public Duke(String filepath, String fileName) throws DukeExceptionCorruptedData {
         this.storage = new Storage(filepath, fileName);
         this.taskList = this.storage.load();
     }
 
     /**
-     * A function that process the command from the users
+     * A function that process the command from the users and create a new Task
      * @param command The type of task given
      * @param description The description of the task need to be done
      * @param deadline The deadline of the task (if any)
@@ -69,6 +68,13 @@ public class Duke {
         throw new DukeException("Invalid Command");
     }
 
+    /**
+     * A function that process the command from the users and do the command (if it is valid)
+     * @param command The command given
+     * @param description The description of the command
+     * @return String from the processed command
+     * @throws DukeException Invalid command
+     */
     public String processCommand(String command, String description) throws DukeException {
         switch (command){
         case "list":

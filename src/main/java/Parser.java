@@ -33,42 +33,32 @@ public class Parser {
         try {
             switch (command){
             case "list":
-                if (this.description.length() != "list".length()) {
-                    throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
-                }
-                return "";
             case "help":
-                if (this.description.length() != "list".length()) {
-                    throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
-                }
-                return "";
             case "sort":
-                if (this.description.length() != "sort".length()) {
+                if (this.description.length() != 4) {
                     throw new DukeException("OOPS!!! I'm sorry, but list shouldn't have any additional arguments");
                 }
                 return "";
             case "statistics":
-                if (this.description.length() != "statistics".length()) {
+                if (this.description.length() != 10) {
                     throw new DukeException("OOPS!!! I'm sorry, but statistics shouldn't have any additional arguments");
                 }
                 return "";
-            case "contact":
-                return this.description.substring(8);
             case "allContacts":
-                if (this.description.length() != "allContacts".length()) {
+                if (this.description.length() != 11) {
                     throw new DukeException("OOPS!!! I'm sorry, but allContacts shouldn't have any additional arguments");
                 }
                 return "";
             case "undo":
                 return this.description.length() > 4 ? this.description.substring(5) : "";
             case "done":
+            case "todo":
+            case "find":
                 return this.description.substring(5);
             case "delete":
                 return this.description.substring(7);
-            case "todo":
-                return this.description.substring(5);
-            case "find":
-                return this.description.substring(5);
+            case "contact":
+                return this.description.substring(8);
             case "addContact":
                 return this.description.substring(11);
             case "deadline":
@@ -96,27 +86,16 @@ public class Parser {
         try {
             switch (command){
             case "list":
-                return "";
             case "help":
-                return "";
             case "sort":
-                return "";
             case "done":
-                return "";
             case "delete":
-                return "";
             case "todo":
-                return "";
             case "find":
-                return "";
             case "addContact":
-                return "";
             case "allContacts":
-                return "";
             case "undo":
-                return "";
             case "statistics":
-                return "";
             case "contact":
                 return "";
             case "deadline":

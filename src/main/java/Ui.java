@@ -12,7 +12,7 @@ public class Ui {
     }
 
     /**
-     * Returns a welcome message when starting Duke
+     * Returns a welcome message when starting Duke. The text intended is "YOLA"
      */
 
     public static String getWelcomeMessage() {

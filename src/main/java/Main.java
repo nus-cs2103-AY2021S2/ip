@@ -26,8 +26,6 @@ public class Main extends Application {
             stage.setTitle("Fayola");
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (DukeExceptionFolder e) {
-            Ui.showMessage(e.getMessage());
         } catch (DukeExceptionCorruptedData e) {
             Ui.showMessage(e.getMessage());
         }
