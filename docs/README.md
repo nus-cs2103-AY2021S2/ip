@@ -42,7 +42,7 @@ Notes about the command format:**<br>
 ### Add a task :  `todo`, `deadline`, `event`
 
 There are three different tasks, namely, todo, event and deadline. 
-<br> There are different commands used to facilitate the adding of different tasks to the program as seen below.
+<br> Differents commands are used to facilitate the adding of different tasks to the program as seen below.
 
 Notes:
 * Commands are case-insensitive and the program only accepts commands typed in lower alphabets. 
@@ -74,11 +74,12 @@ Examples:
 #### Adding an event task: `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
 
-Format: `event` description /AT DATE TIME-TIME 
+Format: `event` description /AT DATE START_TIME-END_TIME 
 
 Format: `deadline` DESCRIPTION /BY DATE TIME 
 * DATE is should be by DD/MM/YY
-* TIME is should be in HHMM
+* START_TIME is should be in HHMM
+* END_TIME is should be in HHMM
 
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
