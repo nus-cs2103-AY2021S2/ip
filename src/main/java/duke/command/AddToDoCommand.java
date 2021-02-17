@@ -29,8 +29,9 @@ public class AddToDoCommand extends Command {
      */
     public String execute(TaskList taskList) throws DukeException {
         int spaceIndex = userMessage.indexOf(" ");
+        int priorityIndex = userMessage.indexOf("-p");
         boolean noName = spaceIndex == -1;
-        boolean hasPriority = userMessage.substring(userMessage.length() - 4, userMessage.length() - 2).equals("-p");
+        boolean hasPriority = !(priorityIndex == -1);
 
         if (noName) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -44,8 +45,16 @@ public class AddToDoCommand extends Command {
             todo = new ToDo(todoName);
         } else {
             // input example: todo go to school -p 4
-            String todoName = userMessage.substring(spaceIndex + 1, userMessage.length() - 5);
-            int priority = Integer.parseInt(userMessage.substring(userMessage.length() - 1));
+            String todoName = userMessage.substring(spaceIndex + 1, priorityIndex - 1);
+            int priority;
+            try {
+                priority = Integer.parseInt(userMessage.substring(priorityIndex + 3));
+                if (priority < 1 || priority > 5) {
+                    throw new DukeException("OOPS!!! Please use integer range from 1-5 as the level of priority!");
+                }
+            } catch (Exception e) {
+                throw new DukeException("OOPS!!! Please use integer range from 1-5 as the level of priority!");
+            }
             todo = new ToDo(todoName, false, priority);
         }
 

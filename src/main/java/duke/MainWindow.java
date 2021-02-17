@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
 
         String info = "Hi! I'm\n" + logo + "\n"
                 + "What can I help you with?\n"
-                + "(Type 'help' for the user guidebook!)"
+                + "(Type 'help' for the user guide!)\n"
                 + "@Author:skinnychenpi";
 
         return info;

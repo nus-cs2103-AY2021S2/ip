@@ -8,6 +8,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.HelpCommand;
+import duke.command.ListByPriorityCommand;
 import duke.command.ListCommand;
 import duke.command.SearchByTaskNameCommand;
 import duke.command.SearchByTimeCommand;
@@ -31,6 +32,8 @@ public class Parser {
     public static Command parse(String userMessage) throws DukeException {
         if (userMessage.equals("list")) {
             return new ListCommand(userMessage);
+        } else if (userMessage.equals("list -p")) {
+            return new ListByPriorityCommand(userMessage);
         } else if (userMessage.startsWith("done")) {
             return new DoneCommand(userMessage);
         } else if (userMessage.startsWith("todo")) {

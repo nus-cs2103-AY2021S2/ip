@@ -75,7 +75,7 @@ public class Storage {
                 taskList.addTask(todo);
             } else if (type.equals("D")) {
                 int endNameIndex = info.indexOf("(");
-                int endTimeIndex = info.length() - 1;
+                int endTimeIndex = info.length() - 2;
                 String name = info.substring(5 , endNameIndex - 1);
                 String by = info.substring(endNameIndex + 5, endTimeIndex);
                 LocalDateTime byTime = LocalDateTime.parse(by, df);
@@ -83,7 +83,7 @@ public class Storage {
                 taskList.addTask(deadline);
             } else if (type.equals("E")) {
                 int endNameIndex = info.indexOf("(");
-                int endTimeIndex = info.length() - 1;
+                int endTimeIndex = info.length() - 2;
                 String name = info.substring(5 , endNameIndex - 1);
                 String at = info.substring(endNameIndex + 5, endTimeIndex);
                 LocalDateTime atTime = LocalDateTime.parse(at, df);

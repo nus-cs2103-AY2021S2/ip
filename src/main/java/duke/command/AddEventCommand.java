@@ -1,8 +1,8 @@
 package duke.command;
-import duke.task.Event;
 import duke.exception.DukeException;
+import duke.task.Event;
 import duke.task.TaskList;
-import duke.task.ToDo;
+
 
 /**
  * It is a command object extends from Command for the Duke program.
@@ -32,9 +32,10 @@ public class AddEventCommand extends Command {
     public String execute(TaskList taskList) throws DukeException {
         int spaceIndex = userMessage.indexOf(" ");
         int dateTimeIndex = userMessage.indexOf('/');
+        int priorityIndex = userMessage.indexOf("-p");
         boolean noDateTime = dateTimeIndex == -1;
         boolean noEventName = spaceIndex == -1;
-        boolean hasPriority = userMessage.substring(userMessage.length() - 4, userMessage.length() - 2).equals("-p");
+        boolean hasPriority = !(priorityIndex == -1);
 
 
         if (noDateTime) {
@@ -49,11 +50,21 @@ public class AddEventCommand extends Command {
         Event event;
 
         if (hasPriority) {
+            String deadlineName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
+            String by = userMessage.substring(dateTimeIndex + 4, priorityIndex - 1);
+            int priority;
+
             try {
-                String eventName = userMessage.substring(spaceIndex + 1, dateTimeIndex - 1);
-                String at = userMessage.substring(dateTimeIndex + 4, userMessage.length() - 5);
-                int priority = Integer.parseInt(userMessage.substring(userMessage.length() - 1));
-                event = new Event(eventName, at, false, priority);
+                priority = Integer.parseInt(userMessage.substring(priorityIndex + 3));
+                if (priority < 1 || priority > 5) {
+                    throw new DukeException("OOPS!!! Please use integer range from 1-5 as the level of priority!");
+                }
+            } catch (Exception e) {
+                throw new DukeException("OOPS!!! Please use integer range from 1-5 as the level of priority!");
+            }
+
+            try {
+                event = new Event(deadlineName, by, false, priority);
             } catch (Exception e) {
                 throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
             }

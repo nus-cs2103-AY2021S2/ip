@@ -1,26 +1,24 @@
 package duke.command;
+
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.exception.DukeException;
-import java.util.LinkedList;
-/**
- * It is a command object extends from Command for the Duke program.
- * When the parser calls it, it will receive the requests from the users
- * during the running of the program and starts to list all the tasks.
- */
-public class ListCommand extends Command {
 
+import java.util.Collections;
+import java.util.LinkedList;
+
+public class ListByPriorityCommand extends Command {
     /**
      * Constructor for ListCommand object
      *
      * @param userMessage The message that the user inputs for further execution.
      */
-    public ListCommand(String userMessage) {
+    public ListByPriorityCommand(String userMessage) {
         super(userMessage);
     }
 
     /**
-     * The execution after parsing, list out all the current tasks.
+     * The execution after parsing, list out all the current tasks and sorted by priority.
      *
      * @param taskList The current taskList in the program.
      * @return The Duke robot massage to the GUI.
@@ -34,7 +32,9 @@ public class ListCommand extends Command {
 
         LinkedList<Task> tasks = taskList.getTasks();
         StringBuilder builder = new StringBuilder();
-        builder.append("Here are the tasks in your list\n");
+        builder.append("Here are the tasks in your list sorted by priority\n");
+        Collections.sort(tasks);
+        Collections.reverse(tasks);
         for (int i = 0; i < numOfTasks; i++) {
             Task task = tasks.get(i);
             String taskName = task.toString();
@@ -49,5 +49,5 @@ public class ListCommand extends Command {
         return botMessage;
 
     }
-}
 
+}

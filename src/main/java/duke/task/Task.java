@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
  * fields, which are the task name and done-status.
  * And it will be the super class for deadline, event and todo.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String taskName;
     protected boolean isDone;
     protected int priority;
@@ -123,5 +123,13 @@ public class Task {
         this.isDone = true;
     }
 
-
+    @Override
+    public int compareTo(Task t) {
+        if (priority > t.getPriority()) {
+            return 1;
+        } else if (priority == t.getPriority() && !isDone && t.getStatus()) {
+            return 1;
+        }
+        return -1;
+    }
 }
