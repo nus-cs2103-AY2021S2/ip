@@ -7,6 +7,7 @@ public class AddCommand extends Command {
 
     /**
      * Create new Add command
+     *
      * @param args Parameters describing what to add
      */
     public AddCommand(String[] args) {

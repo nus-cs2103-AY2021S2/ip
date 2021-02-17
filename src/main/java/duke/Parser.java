@@ -24,9 +24,9 @@ public class Parser {
      */
     public static Command parse(String line) throws ParseException, InvalidCommandException {
         line = line.trim();
-        Command c = null;
         String[] singleTokens = {"bye", "list", "exit", "ls"};
         String[] tokens = splitTokenIntoTwo(line, " ", singleTokens);
+        Command c = null;
         switch (tokens[0].toLowerCase()) {
         case "exit":
             //Fall-through
@@ -74,7 +74,7 @@ public class Parser {
     private static String[] splitTokenIntoTwo(String parseTarget, String delimiter) throws ParseException {
         String[] tokens = parseTarget.split(delimiter, 2);
         if (tokens.length < 2) {
-            throw new ParseException("Expected deliminter '" + delimiter + "'", tokens[0].length());
+            throw new ParseException("Expected delimiter '" + delimiter + "'", tokens[0].length());
         }
         return tokens;
     }
@@ -84,7 +84,7 @@ public class Parser {
         List<String> exceptionsList = Arrays.asList(exception);
         String[] tokens = parseTarget.split(delimiter, 2);
         if (!exceptionsList.contains(tokens[0]) && tokens.length < 2) {
-            throw new ParseException("Expected deliminter '" + delimiter + "'", tokens[0].length());
+            throw new ParseException("Expected delimiter '" + delimiter + "'", tokens[0].length());
         }
         return tokens;
     }

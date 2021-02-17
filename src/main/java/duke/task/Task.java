@@ -4,7 +4,7 @@ import duke.exception.EmptyArgumentException;
 
 public abstract class Task {
     private final String description;
-    private boolean isDone; //TODO: Figure out if I can restrict access
+    private boolean isDone;
 
     /**
      * Creates a Task that has a description
@@ -66,11 +66,11 @@ public abstract class Task {
      * subject to special rules and behaviours based on capitalization and whitespace.
      *
      * @param search Case and whitespace sensitive search substring
-     * @return
+     * @return Whether the task matches the search query.
      */
     public boolean containsSearch(String search) {
         String targetString = description;
-        boolean isCaseInsensitive = !search.toLowerCase().contains(search);
+        boolean isCaseInsensitive = search.toLowerCase().contains(search);
         if (isCaseInsensitive) {
             targetString = targetString.toLowerCase();
         }
