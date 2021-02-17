@@ -73,7 +73,7 @@ Adds a deadline task with the **task description** and
 
 ![image](./images/add-deadline.png)
 
-### :large_blue_circle: Feature 2 - Listing existing tasks<a name="list"></a>
+### :large_blue_circle:  Feature 2 - Listing existing tasks<a name="list"></a>
 The user will be able to list existing tasks in B.O.B Task Manager.
 
 There are 3 types of tasking of which the user can
