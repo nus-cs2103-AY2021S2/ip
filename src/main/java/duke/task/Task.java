@@ -14,6 +14,9 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -40,6 +43,9 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Printing format
+     */
     public String toString() {
         String str = "";
         if (this.isDone) {

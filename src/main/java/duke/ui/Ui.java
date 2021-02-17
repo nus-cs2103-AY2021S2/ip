@@ -1,33 +1,25 @@
-/**
- * This UI class handles the output string of Duke
- * 
- * @param logo Duke logo
- * @param line Indentation line
- * @param terminate_input input to end Duke
- * @param indentation spaces to aline the output string
- * 
- * @param sc Scanner to scan the user input
- * 
- * @author WangYihe
- * @author E0424695
- */
-
 package duke.ui;
-
-import duke.command.Command;
-import duke.exception.DukeException;
-import duke.fileSaver.FileSaver;
-import duke.task.*;
 
 import java.util.List;
 import java.util.Scanner;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.fileSaver.FileSaver;
+import duke.task.Task;
+import duke.task.TaskList;
+
+/**
+ * This UI class handles the output string of Duke
+ * @author WangYihe
+ * @author E0424695
+ */
 public class Ui {
-    private static String logo = " ____           _        \n" +
-            "|   _  \\ _    _ | |    _____ \n" +
-            "|  |  |  |  |  |  |  | / /  _  \\\n" +
-            "|  |_|   |  |_|  |   <    ___/\n" +
-            "|____/ \\__,__|_|\\_\\_____|\n";
+    private static String logo = " ____           _        \n"
+            + "|   _  \\ _    _ | |    _____ \n"
+            + "|  |  |  |  |  |  |  | / /  _  \\\n"
+            + "|  |_|   |  |_|  |   <    ___/\n"
+            + "|____/ \\__,__|_|\\_\\_____|\n";
     public static String line = "____________________________\n";
     //public static String indentation = "    ";
 
@@ -39,10 +31,6 @@ public class Ui {
 
     public void printLine() {
         System.out.println(line);
-    }
-
-    public void close() {
-        sc.close();
     }
 
     public String printMessage(String output) {
@@ -67,7 +55,9 @@ public class Ui {
      * return bye message
      */
     public String bye() {
-        return line + "Bye. Hope to see you again soon!\n" + line;
+        return line
+                + "Bye. Hope to see you again soon!\n"
+                + line;
     }
 
     /**
@@ -76,8 +66,11 @@ public class Ui {
     public String reportTask(Task t, TaskList task) {
         int count = task.getSize();
         String output = "Got it, I've added this task to the list:\n" +
-                t.toString() + "\n" +
-                "You now have " + count + "task in the list.\n";
+                t.toString()
+                + "\n"
+                + "You now have "
+                + count
+                + "task in the list.\n";
         assert count >= 0 : "Size is less than 0";
         return printMessage(output);
     }
@@ -116,7 +109,7 @@ public class Ui {
      * parser for response user input
      */
     public String getResponse(String userInput, TaskList task, FileSaver fs) {
-        String response = " ";
+        String response;
         try {
             String[] input = userInput.split(" ", 2);
             Command command = getUserInputType(input[0]);

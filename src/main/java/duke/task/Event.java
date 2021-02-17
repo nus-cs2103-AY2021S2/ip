@@ -3,11 +3,17 @@ package duke.task;
 public class Event extends Task {
     protected String at;
 
+    /**
+     * Constructor
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Override constructor
+     */
     public Event(String[] eventArr) {
         super(eventArr[0]);
         this.at = eventArr[1];

@@ -1,12 +1,3 @@
-/**
- * This TaskList class handles the logic of adding and deleting tasks of Duke
- *
- * @param task Task arraylist to hold the current input tasks
- *
- * @author WangYihe
- * @author E0424695
- */
-
 package duke.task;
 
 import duke.exception.DukeException;
@@ -15,12 +6,17 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 import java.util.List;
 
-//to handle date and time
-import java.text.ParseException;
+import java.text.ParseException; //to handle date and time
 import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This TaskList class handles the logic of adding and deleting tasks of Duke
+ * @author WangYihe
+ * @author E0424695
+ */
 public class TaskList {
     public final List<Task> task;
 
@@ -123,8 +119,8 @@ public class TaskList {
                 return "This task was marked as done before";
             } else {
                 t.markAsDone();
-                return "You have done the following task: \n" +
-                        t.toString() + "\n";
+                return "You have done the following task: \n"
+                        + t.toString() + "\n";
             }
         } catch (IndexOutOfBoundsException e) {
             // TODO: handle exception
@@ -143,9 +139,9 @@ public class TaskList {
             int index = Integer.parseInt(inputIndex.trim());
             Task t = task.get(index - 1);
             task.remove(t);
-            return "The following task has been deleted:\n" +
-                    t.toString() + "\n" +
-                    "You now have " + task.size() + "  task in your list";
+            return "The following task has been deleted:\n"
+                    + t.toString() + "\n"
+                    + "You now have " + task.size() + "  task in your list";
         } catch (IndexOutOfBoundsException e) {
             // TODO: handle exception
             return "Sorry, I cannot find this task, please check your list again";
@@ -170,12 +166,12 @@ public class TaskList {
      * check whether a task is in the list
      */
     public List<Task> findTask(String taskInfo) {
-        List<Task> findedTasks = new ArrayList<>();
+        List<Task> foundTasks = new ArrayList<>();
         for (Task t : task) {
             if (t.getDescription().contains(taskInfo)) {
-                findedTasks.add(t);
+                foundTasks.add(t);
             }
         }
-        return findedTasks;
+        return foundTasks;
     }
 }

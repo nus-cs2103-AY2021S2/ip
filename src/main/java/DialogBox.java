@@ -1,13 +1,3 @@
-/**
- * This class is the dialog box in the GUI
- *
- * @param Lable is the text returned
- * @param ImageView is the icon of the dialog
- *
- * @author WangYihe
- * @author E0424695
- */
-
 import java.io.IOException;
 
 import javafx.collections.FXCollections;
@@ -20,10 +10,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * This class is the dialog box containing the input output dialog in the GUI
+ * @author WangYihe
+ * @author E0424695
+ */
+
 public class DialogBox extends HBox {
     private Label dialog;
     private ImageView displayPicture;
 
+    /**
+     * Create the dialog box between user and duke
+     */
     public DialogBox(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -33,12 +32,12 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    dialog = new Label(text);
-    dialog.setWrapText(true);
-    displayPicture = new ImageView(image);
-    displayPicture.setFitHeight(100.0);
-    displayPicture.setFitWidth(100.0);
-    this.getChildren().addAll(dialog, displayPicture);
+        dialog = new Label(text);
+        dialog.setWrapText(true);
+        displayPicture = new ImageView(image);
+        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(100.0);
+        this.getChildren().addAll(dialog, displayPicture);
     }
 
     /**

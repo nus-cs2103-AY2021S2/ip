@@ -1,26 +1,27 @@
-/**
- * This TaskList class handles the logic of adding and deleting tasks of Duke
- * @param file Task file to remember the tasks
- * @author WangYihe
- * @author E0424695
- */
-
 package duke.fileSaver;
-import duke.exception.DukeException;
-import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
+/**
+ * This TaskList class handles the logic of adding and deleting tasks of Duke
+ * @author WangYihe
+ * @author E0424695
+ */
 public class FileSaver {
     private File file;
 
@@ -98,7 +99,7 @@ public class FileSaver {
             break;
         default:
             break;
-        } 
+        }
     }
 
     /**

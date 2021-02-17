@@ -1,15 +1,15 @@
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.geometry.Insets;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -34,6 +34,9 @@ public class MainWindow extends AnchorPane {
     public Image userImage = new Image(this.getClass().getResourceAsStream("/images/morty.png"));
     public Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rick.png"));
 
+    /**
+     * Initialize the scroll panel layout
+     */
     @FXML
     public void initialize() {
         this.scrollPane = new ScrollPane();
@@ -47,6 +50,9 @@ public class MainWindow extends AnchorPane {
         this.mainLayout.getChildren().addAll(this.scrollPane, this.userInput, this.sendButton);
     }
 
+    /**
+     * Initialize scroll panel size
+     */
     public void initializeComponentProperties() {
         this.mainLayout.setPrefSize(600.0, 600.0);
         this.scrollPane.setPrefSize(385.0, 535.0);
@@ -76,6 +82,9 @@ public class MainWindow extends AnchorPane {
         AnchorPane.setBottomAnchor(this.userInput, 1.0);
     }
 
+    /**
+     * Initialize event listeners
+     */
     public void initializeEventListeners() {
         this.sendButton.setOnMouseClicked((event) -> {
             this.handleUserInput();
@@ -143,6 +152,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * print welcome message as first message when open
+     */
     public void printWelcomeMessage(Duke duke) {
         String welcomeMessage = duke.greeting();
         this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(

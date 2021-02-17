@@ -6,10 +6,6 @@ import duke.ui.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
- *
- * @param tasks is the task list containing the task inputs and handle the logic
- * @param ui returns the output string for duke
- * @param fs is the filesaver that save file to text
  * @author WangYihe
  * @author E0424695
  */
@@ -18,6 +14,9 @@ public class Duke {
     private Ui ui;
     private FileSaver fs;
 
+    /**
+     * Constructor, build folder name with filesaver and tasklist and ui
+     */
     public Duke() {
         fs = new FileSaver("data", "duke.txt");
         ui = new Ui();

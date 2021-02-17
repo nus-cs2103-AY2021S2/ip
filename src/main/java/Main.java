@@ -1,15 +1,15 @@
 import duke.Duke;
 
 import javafx.application.Application;
+
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
  * A GUI for duke using Javafx
- *
- * @param duke is the duke logic object
  * @author WangYihe
  * @author E0424695
+ * @version 2.2
  */
 public class Main extends Application {
 
