@@ -2,10 +2,8 @@ package duke.command;
 
 
 import duke.exception.DukeException;
-import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.LinkedList;
 
 public class HelpCommand extends Command {
     /**
@@ -29,19 +27,30 @@ public class HelpCommand extends Command {
 
         try {
             String start = "Here is the guide for you!";
-            String addCommandHelp = "\n\n 1. To add a task: \n'todo {todoName}'\n\n 'event {eventName} /at {YYYY-MM-DD HH:MM}'\n\n "
-                    + "'deadline {deadlineName} /by {YYYY-MM-DD HH:MM}'\n\n to ask Duke to add a task.\n";
+            String addCommandHelp = "\n\n 1. To add a task: type in \n\n1.1 'todo {todoName}'\n\n 1.2 'event {eventName} /at {YYYY-MM-DD HH:MM}'\n\n "
+                    + "1.3 'deadline {deadlineName} /by {YYYY-MM-DD HH:MM}'\n";
 
-            String priorityCommandHelp = "\n 2. To add a priority for a task: \nYou can add '-p {level of priority}' when adding a task.\n"
-                    + "For example: 'todo go to school -p 4'\n The priority level range from 1 to 5, and should be an integer.";
+            String priorityCommandHelp = "\n\n 2. To add a priority for a task: \n\n2.1 You can add '-p {level of priority}' at the end of add task command.\n"
+                    + "For example: 'todo go to school -p 4'\n\n 2.2 The priority level range from 1 to 5, and should be an integer.\n\n"
+                    + "2.3 If you don't specify the level of priority, the default level is 1.\n";
 
-            String botMessage = addCommandHelp + priorityCommandHelp;
+            String listCommandHelp = "\n\n 3. To show the task: \n\n3.1 type in 'list' to show all the tasks in the list."
+                    + "\n\n 3.2 type in 'list -p' to show the task sorted by priority\n";
+
+            String doneCommandHelp = "\n\n 4. To mark the task as done: \n\n4.1 type in 'done {index of task}' to mark the task as done by the index you specified.\n";
+
+            String deleteCommandHelp = "\n\n 5. To delete the task: \n\n5.1 type in 'delete {index of task}' to delete the task by the index you specified.\n";
+
+            String searchCommandHelp = "\n\n 6. To search a task: \n\n6.1 type in 'find {task name fragment}' to search for the task whose name contains the fragment specified."
+                    + "\n\n 6.2 type in 'search time {YYYY-MM-DD HH:MM}' search for the task whose time match the input.\n";
+
+            String botMessage = start + addCommandHelp + priorityCommandHelp + listCommandHelp
+                    + doneCommandHelp + deleteCommandHelp + searchCommandHelp;
             return botMessage;
 
-        } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! The description of a done is wrong.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The event index of a done is wrong.");
+        } catch (Exception e) {
+            System.out.println("HelpCommand raises exception." +  e.getMessage());
+            throw new DukeException("OOPS!!! There is something wrong with HelpCommand.");
         }
     }
 }
