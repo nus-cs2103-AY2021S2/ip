@@ -20,6 +20,9 @@ e.g. Duke will not understand `deadline homework /by 2021/2/28 10:00`.
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `bye`) will cause the program to misinterpret the command.
 e.g. if the command specifies `list 123`, Duke will NOT understand it as `list` but will return `OOPS!!! I'm sorry, but I don't know what that means :-(`.
   
+
+* `N` in duke response `Now you have N tasks in the list.` is arbitrary and it represents the total number of tasks in the Task List immediately after the current command is executed.
+  
 ### Adding ToDo
 Adds a ToDo task to the task list.
 ### Adding Deadline
@@ -92,7 +95,7 @@ Expected outcome:
 
     Noted. I've removed this task:
       T | ✘ | DESCRIPTION
-    Now you have N-1 tasks in the list.
+    Now you have N tasks in the list.
 
 ### `list` - Viewing All Tasks
 Views all tasks in the task list.
@@ -130,7 +133,7 @@ Expected outcome:
     2. E | ✘ | DESCRIPTION MMM dd yyyy hh:mm
     ...
 
-#### or (if there is no task on this date)
+#### or 
 
     Congrats! It's a FREE day.
 
