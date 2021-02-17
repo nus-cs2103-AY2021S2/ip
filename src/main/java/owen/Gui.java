@@ -18,6 +18,8 @@ public class Gui extends Application {
         MainWindow mainWindow = new MainWindow(this.bot);
         Scene scene = new Scene(mainWindow);
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Owen the Owl");
         stage.show();
     }
 

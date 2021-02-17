@@ -21,16 +21,7 @@ public class Owen implements Chatbot {
      */
     public Owen() {
         this.isRunning = true;
-
-        StringBuilder stringBuilder = new StringBuilder();
-        String logo = ""
-                + " /\\_/\\ \n"
-                + "((OvO))\n"
-                + "():::()\n"
-                + " VV-VV \n";
-        stringBuilder.append(logo);
-        stringBuilder.append("\nHello I am Owen the Owl!");
-        this.latestResponse = stringBuilder.toString();
+        this.latestResponse = "Hoot hoot I am Owen the Owl!";
 
         this.storage = new Storage(STORAGE_PATH);
         this.taskList = this.storage.readTaskList();
@@ -45,7 +36,7 @@ public class Owen implements Chatbot {
 
     @Override
     public Owen shutdown() {
-        String shutdownResponse = "Bye. Hope to see you again soon!";
+        String shutdownResponse = "Hoot. Hope to see you again soon!";
         return new Owen(false, shutdownResponse, this.taskList, this.storage);
     }
 
@@ -83,7 +74,7 @@ public class Owen implements Chatbot {
             case BYE:
                 return this.shutdown();
             default:
-                throw new OwenException("I'm sorry, but I don't know what that means...");
+                throw new OwenException("Hoot I'm sorry, but I don't know what that means...");
             }
         } catch (OwenException exception) {
             String exceptionResponse = exception.getMessage();
@@ -103,7 +94,7 @@ public class Owen implements Chatbot {
         TaskList addedTaskList = this.taskList.addTask(task);
         int numTasks = addedTaskList.getNumTasks();
         String addedFormat = ""
-                + "Got it. I've added this task:\n"
+                + "Hoot hoot. I've added this task:\n"
                 + "    %s\n"
                 + "Now you have %d tasks in the list.";
         String addedResponse = String.format(
@@ -132,7 +123,7 @@ public class Owen implements Chatbot {
     private Owen doneTask(int taskNumber) throws OwenException {
         assert taskNumber > 0 : "taskNumber must be more than 0";
         TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
-        String doneFormat = "Nice! I've marked this task as done:\n    %s";
+        String doneFormat = "Hoot! I've marked this task as done:\n    %s";
         String doneResponse = String.format(
                 doneFormat, doneTaskList.getTask(taskNumber).toString());
         Storage doneStorage = this.storage.writeTaskList(doneTaskList);
@@ -150,7 +141,7 @@ public class Owen implements Chatbot {
         assert taskNumber > 0 : "taskNumber must be more than 0";
         TaskList deleteTaskList = this.taskList.deleteTask(taskNumber);
         String deleteFormat = ""
-                + "Noted. I've removed this task:\n"
+                + "Hoot. I've removed this task:\n"
                 + "    %s\n"
                 + "Now you have %d tasks in the list.";
         int newNumTasks = deleteTaskList.getNumTasks();
@@ -168,7 +159,7 @@ public class Owen implements Chatbot {
      */
     private Owen findTask(String searchString) {
         String findResult = this.taskList.findTask(searchString);
-        String findFormat = "Here are the matching tasks in your list:\n%s";
+        String findFormat = "Hoot hoot here are the matching tasks in your list:\n%s";
         String findResponse = String.format(findFormat, findResult);
         return new Owen(this.isRunning, findResponse, this.taskList, this.storage);
     }
@@ -181,7 +172,7 @@ public class Owen implements Chatbot {
      */
     private Owen listReminders(long days) {
         String remindersResult = this.taskList.getDueTasks(days);
-        String remindersFormat = "Here are the tasks due within %d days:\n%s";
+        String remindersFormat = "Hoot hoot here are the tasks due within %d days:\n%s";
         String remindersResponse = String.format(remindersFormat, days, remindersResult);
         return new Owen(this.isRunning, remindersResponse, this.taskList, this.storage);
     }
