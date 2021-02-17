@@ -16,69 +16,69 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ## Features 
 * Add a todo Task
-   * **Format:** todo TASK_DESCRIPTION
+   * **Format:** `todo TASK_DESCRIPTION`
    * **Parameters**
       1. Description of the task
-   * **Example:** todo make breakfast
+   * **Example:** `todo make breakfast`
      <br><br>
      
 * Add a deadline Task
-   * **Format:** deadline TASK_DESCRIPTION /by DEADLINE
+   * **Format:** `deadline TASK_DESCRIPTION /by DEADLINE`
    * **Parameters**
       1. Description of the task
       2. Deadline of the task 
-   * **Example:** deadline Submit ME3103 report /by 2020-02-19
+   * **Example:** `deadline Submit ME3103 report /by 2020-02-19`
      <br><br>
      
 * Add an event Task
-   * **Format:** event TASK_DESCRIPTION /at EVENT_LOCATION_OR_TIME
+   * **Format:** `event TASK_DESCRIPTION /at EVENT_LOCATION_OR_TIME`
    * **Parameters**
       1. Description of the task
       2. Event location or time
-   * **Example:** event project meeting /at Mon 2-4pm
+   * **Example:** `event project meeting /at Mon 2-4pm`
    <br><br>
      
 * List all tasks
-   * **Format:** list
-   * **Example:** list
+   * **Format:** `list`
+   * **Example:** `list`
      <br><br>
      
 * Mark a task as done
-   * **Format:** done TASK_INDEX
+   * **Format:** `done TASK_INDEX`
    * **Parameters**
       1. Index of the task
-   * **Example:** done 2
+   * **Example:** `done 2`
    <br><br>
 
 * Delete single/multiple tasks
-   * **Format:** delete INDEX_1 INDEX_2 ...
+   * **Format:** `delete INDEX_1 INDEX_2 ...`
    * **Parameters**
       1. Index of the task to delete 
-   * **Example:** delete 2, delete 1 2 5 
+   * **Example:** `delete 2`, `delete 1 2 5` 
    <br><br>
 
 * Find tasks with keywords
-   * **Format:** find KEYWORD
+   * **Format:** `find KEYWORD`
    * **Parameters**
       1. A keyword 
-   * **Example:** find egg, find CS2103
+   * **Example:** `find egg`, `find CS2103`
    <br><br>
      
 * Save all changes and exit
-   * **Format:** bye
-   * **Example:** bye
+   * **Format:** `bye`
+   * **Example:** `bye`
    
 ## Command Summary
-Actions | Format 
------- | ------
-Add a todo task | todo TASK_DESCRIPTION
-Add a deadline | deadline TASK_DESCRIPTION /by DEADLINE
-Add an event Task | event TASK_DESCRIPTION /at EVENT_LOCATION_OR_TIME
-List all tasks | list
-Mark a task as done | done TASK_INDEX
-Delete single/multiple tasks | delete INDEX_1 INDEX_2 ...
-Find tasks with keywords | find KEYWORD
-Save all changes and exit | bye
+| Actions | Format |
+| ------ | ------ |
+| Add a todo task | todo TASK_DESCRIPTION |
+| Add a deadline | deadline TASK_DESCRIPTION /by DEADLINE |
+| Add an event Task | event TASK_DESCRIPTION /at EVENT_LOCATION_OR_TIME |
+| List all tasks | list |
+| Mark a task as done | done TASK_INDEX |
+| Delete single/multiple tasks | delete INDEX_1 INDEX_2 ... |
+| Find tasks with keywords | find KEYWORD |
+| Save all changes and exit | bye |
    
 
    
