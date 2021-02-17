@@ -6,8 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.nus.duke.command.Command;
+import com.nus.duke.command.DeadlineCommand;
 import com.nus.duke.command.DeleteCommand;
 import com.nus.duke.command.DoneCommand;
+import com.nus.duke.command.EventCommand;
 import com.nus.duke.command.FindCommand;
 import com.nus.duke.command.HelpCommand;
 import com.nus.duke.command.IncorrectCommand;
@@ -38,7 +40,6 @@ class CommandParserTest {
         final String[] inputs = {"list", "list ", "list one", "list 2", "list today"};
         parseAndAssertCommandType(ListCommand.class, inputs);
     }
-
 
     /*
      * Tests for single index argument commands
@@ -97,6 +98,42 @@ class CommandParserTest {
     @Test
     public void parse_findCommandInvalidArgs_parsedCorrectly() {
         final String[] inputs = {"find", "find ", "find    "};
+        parseAndAssertCommandType(IncorrectCommand.class, inputs);
+    }
+
+    /*
+     * Tests for Deadline Command Parser
+     */
+    @Test
+    public void parse_deadlineCommandValidArgs_parsedCorrectly() {
+        final String[] inputs = {"deadline read books /by Sunday",
+                "deadline read books /by 10/12/2021 10 PM",
+                "deadline read books /by 10-12-2021 10:59 PM",
+                "deadline read books /by 10/12/2021 2300"};
+        parseAndAssertCommandType(DeadlineCommand.class, inputs);
+    }
+
+    @Test
+    public void parse_deadlineCommandInvalidArgs_parsedCorrectly() {
+        final String[] inputs = {"deadline", "deadline read books", "deadline read books /by"};
+        parseAndAssertCommandType(IncorrectCommand.class, inputs);
+    }
+
+    /*
+     * Tests for Deadline Command Parser
+     */
+    @Test
+    public void parse_eventCommandValidArgs_parsedCorrectly() {
+        final String[] inputs = {"event conference /at Sunday",
+                "event conference /at 10/12/2021 10 PM",
+                "event conference /at 10-12-2021 10:59 PM",
+                "event conference /at 10/12/2021 2300"};
+        parseAndAssertCommandType(EventCommand.class, inputs);
+    }
+
+    @Test
+    public void parse_eventCommandInvalidArgs_parsedCorrectly() {
+        final String[] inputs = {"event", "event conference", "event conference /at"};
         parseAndAssertCommandType(IncorrectCommand.class, inputs);
     }
 
