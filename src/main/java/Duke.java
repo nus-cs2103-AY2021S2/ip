@@ -76,4 +76,8 @@ public class Duke {
         // c.debug();
         return c.getCommandOutputMsg();
     }
+
+    public boolean hasExitCommandBeenSent() {
+        return hasExitCommandBeenSent;
+    }
 }
