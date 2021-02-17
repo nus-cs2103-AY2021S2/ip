@@ -138,6 +138,7 @@ Bye! I shall go rest now. PAge me when you need me.
 
 
 # Summary of Commands
+
 Action | Format, examples
 ------------ | -------------
 Add ToDo | `todo [description]` e.g. `todo Do the laundry`
