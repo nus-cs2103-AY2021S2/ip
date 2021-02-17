@@ -26,37 +26,59 @@ ____
 
 Adds a todo task to your tasklist.
 
-Example of usage:
+Syntax:
 
 `todo {description}`
 
+Example of usage:
+
+`todo sample task 1 `
+
 Expected outcome:
 
-`outcome`
+`Success! I've added this task:`
+
+`  [T][] sample task 1`
+
+____
 
 ### `event` - Add an event to attend
 
 Adds an event to your tasklist.
 
-Example of usage:
+Syntax:
 
 `event {description} /at {DD-MM hh:mm}`
 
+Example of usage:
+
+`event task 2 /at 20/4 6PM`
+
 Expected outcome:
 
-`outcome`
+`Success! I've added this task:`
 
-### `event` - Add a deadline to attend
+`  [E][] {description} (at: {date} {time})`
+
+____
+
+### `deadline` - Add a deadline to attend
 
 Adds a deadline to your tasklist.
 
-Example of usage:
+Syntax:
 
 `deadline {description} /by {DD-MM hh:mm}`
 
+Example of usage:
+
+`deadline  task 3 /by 17/4 11:59PM`
+
 Expected outcome:
 
-`outcome`
+`Success! I've added this task:`
+
+`[D][] task 3 (by: 17/4 11:59PM)`
 
 ### View your tasks
 ____
@@ -65,25 +87,41 @@ ____
 
 Lists all your tasks.
 
-Example of usage:
+Syntax:
 
 `list`
 
 Expected outcome:
 
-`outcome`
+`Your tasks:`
 
+`1. [T][] sample task 1`
+
+`2. [E][] task 2 (at: 20/4 6PM)`
+
+`3. [D][] task 3 (by: 17/4 11:59PM)`
+
+`You have 3 tasks.`
+____
 ### `find` - find tasks in your tasklist
 
 Finds tasks containing a certain keyword.
 
-Example of usage:
+Syntax:
 
 `find {keyword}`
 
+Example of usage:
+
+`find sample`
+
 Expected outcome:
 
-`outcome`
+`Your tasks:`
+
+`1. [T][] sample task 1`
+
+`You have 1 tasks.`
 
 ### Modify tasks in your task list
 ____
@@ -96,19 +134,44 @@ Example of usage:
 
 `done {task number}`
 
+Example of usage:
+
+`done 1`
+
 Expected outcome:
 
-`outcome`
+`Good work! I've marked this task done:`
 
+`[T][/] sample task 1`
+
+
+---
 ### `delete` - Delete tasks in your tasklist
-
 
 Deletes a specified task.
 
-Example of usage:
+Syntax:
 
 `delete {task number}`
 
+Example of usage:
+
+`delete 1`
+
 Expected outcome:
 
-`outcome`
+`Got you. I've deleted this task:`
+
+` [T][/] sample task 1`
+
+---
+
+### `help` - Get a list of possible inputs you can enter
+
+Provides a list of commands and their syntax.
+
+Syntax:
+
+`help`
+
+---

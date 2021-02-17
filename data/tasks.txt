@@ -1,2 +1,1 @@
-T;;read to pascal;;false
-E;;take a walk with pascal;;false;;30:5:2021:14:0
+D;;task 3;;false;;17:5:2021:15:0

@@ -47,7 +47,7 @@ public class TaskList {
         taskArrayList.add(t);
 
         return Ui.formatMultiLineMessages(
-                "Success. I've added this task:",
+                "Success! I've added this task:",
                 t.toString()
         );
     }
