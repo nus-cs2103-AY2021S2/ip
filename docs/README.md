@@ -3,18 +3,18 @@
 ## Features 
 
 ### Feature 1 
-Description of feature.
+Add a To-do Task
 
 ## Usage
 
 ### `Keyword` - Describe action
 
-Describe action and its outcome.
+Add a to-do task into the task list
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo <Name of task>`
 
 Expected outcome:
 
-`outcome`
+`Got it! I've added this task`
