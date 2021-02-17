@@ -82,14 +82,14 @@ public class Ui {
         String response = "";
         response += LINE_PREFIX + "Ok Human. Here are the tasks I found:\n";
         response += showTasks(taskList);
-        return  response;
+        return response;
     }
 
     public String showUpcomingTasks(TaskList taskList) {
         String response = "";
         response += LINE_PREFIX + "Ok Human. Here are your upcoming tasks:\n";
         response += showTasks(taskList);
-        return  response;
+        return response;
     }
 
     public String printTaskDone(Task task) {
