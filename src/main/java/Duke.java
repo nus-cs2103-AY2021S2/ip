@@ -18,7 +18,7 @@ public class Duke {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
+                + "| |_| | |_| |   sys<  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         //while(sc.hasNext()){
@@ -29,7 +29,7 @@ public class Duke {
         File logFile = new File("./logs");
         try{
             if(logFile.isFile()){
-                Scanner logs = new Scanner("./logs");
+                Scanner logs = new Scanner(logFile);
                 while (logs.hasNextLine()){
                     System.out.println(logs.nextLine());
                 }
@@ -187,6 +187,7 @@ public class Duke {
             for(String str : fileContent){
                 writer.print(str);
             }
+            writer.println();
             writer.close();
 
         }
