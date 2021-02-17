@@ -38,15 +38,15 @@ Get reminders of tasks due within specified days.
 
 ## Usage
 
-- [todo]()
-- [deadline]()
-- [event]()
-- [list]()
-- [done]()
-- [delete]()
-- [find]()
-- [reminders]()
-- [bye]()
+- [todo](###todo---add-todo-task)
+- [deadline](###deadline---add-deadline-task)
+- [event](###event---add-event-task)
+- [list](###list---list-all-tasks)
+- [done](###done---mark-task-as-done)
+- [delete](###delete---delete-task)
+- [find](###find---find-matching-tasks)
+- [reminders](###reminders---get-reminders-about-upcoming-tasks)
+- [bye](###bye---exit-application)
 
 ### `todo` - Add Todo task
 Add Todo task with a description
@@ -113,7 +113,7 @@ Hoot. I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
-### `find` - Find task
+### `find` - Find matching tasks
 Find tasks matching a search string.
 
 Example of usage: 
