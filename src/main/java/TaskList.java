@@ -18,9 +18,7 @@ public class TaskList {
         assert this.tasks != null: "ArrayList for TaskList not successfully created. ";
 
         ArrayList<String> storageStrings = this.storage.readStorage();
-        for (String s : storageStrings) {
-            this.tasks.add(parseStorageString(s));
-        }
+        storageStrings.forEach(x -> this.tasks.add(parseStorageString(x)));
 
         this.count = this.tasks.size();
     }
@@ -103,11 +101,11 @@ public class TaskList {
      */
     public List<Task> find(String searchString) {
         List<Task> resultList = new ArrayList<>();
-        for (Task t : tasks) {
-            if (t.getName().contains(searchString)) {
-                resultList.add(t);
+        tasks.forEach(x -> {
+            if (x.getName().contains(searchString)) {
+                resultList.add(x);
             }
-        }
+        });
         return resultList;
     }
 }
