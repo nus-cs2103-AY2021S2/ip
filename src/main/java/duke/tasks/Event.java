@@ -39,8 +39,8 @@ public class Event extends TimedTask {
 
         if (obj instanceof Event) {
             TimedTask timedTask = (TimedTask) obj;
-            return timedTask.description.equalsIgnoreCase(this.description)
-                    && timedTask.taskDateTime.equals(this.taskDateTime);
+            return timedTask.description.equalsIgnoreCase(super.description)
+                    && timedTask.taskDateTime.equals(super.taskDateTime);
         }
 
         return false;

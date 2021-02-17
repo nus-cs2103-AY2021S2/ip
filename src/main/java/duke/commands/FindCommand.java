@@ -1,6 +1,5 @@
 package duke.commands;
 
-import static duke.common.CommandUtils.assertInputs;
 import static duke.common.CommandUtils.checkListIsEmpty;
 
 import duke.exception.DukeException;
@@ -28,7 +27,6 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assertInputs(query);
         TaskList printTaskList = taskList.find(query);
         checkListIsEmpty(printTaskList, true);
         return new CommandResponse(ui.showListMessage(printTaskList, true));

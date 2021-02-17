@@ -28,6 +28,11 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 test {
     useJUnitPlatform()
 
@@ -47,14 +52,23 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Duke"
     archiveClassifier = null
 }
 
 checkstyle {
     toolVersion = '8.29'
+    configFile file("config/checkstyle/checkstyle.xml")
 }
 
-run{
+checkstyleMain {
+    source ='src/main/java/duke'
+}
+
+checkstyleTest {
+    source ='src/test/java/duke'
+}
+
+run {
     standardInput = System.in
 }

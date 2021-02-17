@@ -1,7 +1,6 @@
 package duke.commands;
 
 import static duke.common.CommandUtils.ALL;
-import static duke.common.CommandUtils.assertInputs;
 import static duke.common.CommandUtils.checkIndexOutOfBounds;
 import static duke.common.CommandUtils.checkListIsEmpty;
 import static duke.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -34,7 +33,6 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assertInputs(input);
         int listSize = checkListIsEmpty(taskList, false);
 
         String response;
@@ -56,9 +54,7 @@ public class DeleteCommand extends Command {
     }
 
     private String processDeleteCommand(TaskList taskList, Ui ui, String input, int listSize) throws DukeException {
-        int index = Integer.parseInt(input) - 1;
-        checkIndexOutOfBounds(index, listSize);
-        assert index >= 0 : "input should not be negative";
+        int index = checkIndexOutOfBounds(Integer.parseInt(input), listSize);
         Task task = taskList.delete(index);
         assert taskList.get(index) == null : "task should be deleted";
         return ui.showDeleteMessage(task, taskList.size());

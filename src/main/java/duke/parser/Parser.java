@@ -57,13 +57,13 @@ public class Parser {
             return new ExitCommand();
         case DELETE:
         case DONE:
-            return parseDoneAndDeleteCmd(inputs, dukeCommand);
+            return parseDoneOrDeleteCmd(inputs, dukeCommand);
         case EVENT:
         case DEADLINE:
-            return parseEventAndDeadlineCmd(inputs, dukeCommand);
+            return parseDeadlineOrEventCmd(inputs, dukeCommand);
         case FIND:
         case TODO:
-            return parseFindAndTodoCmd(inputs, dukeCommand);
+            return parseFindOrTodoCmd(inputs, dukeCommand);
         case LIST:
             return parseListCmd(inputs);
         default:
@@ -78,23 +78,24 @@ public class Parser {
      * @return {@code DoneCommand} or {@code DeleteCommand}
      * @throws DukeException when the user types an invalid command format
      */
-    private static Command parseDoneAndDeleteCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
+    private static Command parseDoneOrDeleteCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         checkInputsLength(inputs, dukeCommand.toString());
-        String input = inputs[1];
-        if (checkValidDoneAndDeleteInput().test(input)) {
+        String params = inputs[1];
+        if (checkValidParams().test(params)) {
             throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
-        if (dukeCommand == DukeCommand.DELETE) {
-            return new DeleteCommand(input);
-        } else if (dukeCommand == DukeCommand.DONE) {
-            return new DoneCommand(input);
-        } else {
+        switch (dukeCommand) {
+        case DELETE:
+            return new DeleteCommand(params);
+        case DONE:
+            return new DoneCommand(params);
+        default:
             throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 
-    private static Predicate<String> checkValidDoneAndDeleteInput() {
+    private static Predicate<String> checkValidParams() {
         Predicate<String> isNumeric = str -> !checkIsNumeric(str);
         Predicate<String> isAll = str -> !str.equals(ALL);
         return isNumeric.and(isAll);
@@ -107,18 +108,21 @@ public class Parser {
      * @return {@code EventCommand} or {@code DeadlineCommand}
      * @throws DukeException when the user types an invalid command format
      */
-    private static Command parseEventAndDeadlineCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
+    private static Command parseDeadlineOrEventCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         String delimiter = (dukeCommand == DukeCommand.DEADLINE) ? DEADLINE_DELIMITER : EVENT_DELIMITER;
         int delimiterIndex = getDelimiterIndex(inputs, dukeCommand, delimiter);
         String taskDesc = joinStringFromArray(inputs, 1, delimiterIndex);
         String taskDate = parseDateTimeString(inputs, delimiterIndex);
 
         Task newTask;
-        if (dukeCommand == DukeCommand.EVENT) {
+        switch (dukeCommand) {
+        case TODO:
             newTask = new Event(taskDesc, taskDate);
-        } else if (dukeCommand == DukeCommand.DEADLINE) {
+            break;
+        case FIND:
             newTask = new Deadline(taskDesc, taskDate);
-        } else {
+            break;
+        default:
             throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         return new AddCommand(newTask);
@@ -131,14 +135,15 @@ public class Parser {
      * @return {@code FindCommand} or {@code ToDoCommand}
      * @throws DukeException when the user types an invalid command format
      */
-    private static Command parseFindAndTodoCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
+    private static Command parseFindOrTodoCmd(String[] inputs, DukeCommand dukeCommand) throws DukeException {
         checkInputsLength(inputs, dukeCommand.toString());
-        String desc = joinStringFromArray(inputs, 1, inputs.length);
-        if (dukeCommand == DukeCommand.TODO) {
-            return new AddCommand(new ToDo(desc));
-        } else if (dukeCommand == DukeCommand.FIND) {
-            return new FindCommand(desc);
-        } else {
+        String cmdDesc = joinStringFromArray(inputs, 1, inputs.length);
+        switch (dukeCommand) {
+        case TODO:
+            return new AddCommand(new ToDo(cmdDesc));
+        case FIND:
+            return new FindCommand(cmdDesc);
+        default:
             throw new DukeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
@@ -176,23 +181,23 @@ public class Parser {
         return String.join(" ", Arrays.copyOfRange(inputs, startIndex, endIndex));
     }
 
-    private static int getDelimiterIndex(String[] inputs, DukeCommand commandType, String delimiter)
+    private static int getDelimiterIndex(String[] inputs, DukeCommand dukeCommand, String delimiter)
             throws DukeException {
-        String commandString = commandType.toString();
-        checkInputsLength(inputs, commandString);
+        String commandType = dukeCommand.toString();
+        checkInputsLength(inputs, commandType);
         int index = Arrays.asList(inputs).indexOf(delimiter);
         //ERROR: Delimiter not found
         if (index < 0) {
-            throw new DukeException(String.format(MESSAGE_INVALID_TASK_FORMAT, commandString,
-                    getFormatMsg(commandType)));
+            throw new DukeException(String.format(MESSAGE_INVALID_TASK_FORMAT, commandType,
+                    getFormatMsg(dukeCommand)));
         }
         //ERROR: Delimiter found but no description
-        if (inputs[index - 1].equals(commandString)) {
-            throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, commandString));
+        if (inputs[index - 1].equals(commandType)) {
+            throw new DukeException(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, commandType));
         }
         //ERROR: No date after delimiter
         if (inputs.length <= index + 1) {
-            throw new DukeException(String.format(MESSAGE_EMPTY_DATETIME_DESCRIPTION, commandString));
+            throw new DukeException(String.format(MESSAGE_EMPTY_DATETIME_DESCRIPTION, commandType));
         }
         return index;
     }

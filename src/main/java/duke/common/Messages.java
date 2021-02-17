@@ -6,7 +6,7 @@ public class Messages {
     public static final String MESSAGE_SAVE_FILE_ERROR = "Error saving file.";
     public static final String MESSAGE_COMMAND_NOT_FOUND = "I'm sorry, but I don't know what that means.";
     public static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "You have entered an invalid format!";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Your command is not recognized!";
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String MESSAGE_TASK_ADD = "Got it. I've added this task:";
     public static final String MESSAGE_TASK_DONE = "Nice! I've marked this task as done:";

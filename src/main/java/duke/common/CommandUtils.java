@@ -15,26 +15,18 @@ public class CommandUtils {
     public static final String ALL = "all";
 
     /**
-     * Asserts whether the inputs given are blank or empty.
-     *
-     * @param input input of the class
-     */
-    public static void assertInputs(String input) {
-        assert !input.isBlank() : "input should not be blank";
-        assert !input.isEmpty() : "input should not be empty";
-    }
-
-    /**
      * Checks whether the index entered by the user is within the range of the size of task list.
      *
      * @param index index entered
      * @param size size of task list
      * @throws DukeException when the index is out of bounds.
      */
-    public static void checkIndexOutOfBounds(int index, int size) throws DukeException {
-        if (index < 0 || index >= size) {
+    public static int checkIndexOutOfBounds(int index, int size) throws DukeException {
+        int posIndex = index - 1;
+        if (posIndex < 0 || posIndex >= size) {
             throw new DukeException(MESSAGE_INDEX_OUT_OF_BOUND);
         }
+        return posIndex;
     }
 
     /**
@@ -42,7 +34,7 @@ public class CommandUtils {
      *
      * @param taskList task list to be checked
      * @param isQuery indicator used to differentiate whether is it a search command
-     * @return size of the tasklist
+     * @return size of the task list
      * @throws DukeException when the task list is empty
      */
     public static int checkListIsEmpty(TaskList taskList, boolean isQuery) throws DukeException {

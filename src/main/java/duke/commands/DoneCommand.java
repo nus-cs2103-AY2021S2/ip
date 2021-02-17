@@ -1,7 +1,6 @@
 package duke.commands;
 
 import static duke.common.CommandUtils.ALL;
-import static duke.common.CommandUtils.assertInputs;
 import static duke.common.CommandUtils.checkIndexOutOfBounds;
 import static duke.common.CommandUtils.checkListIsEmpty;
 import static duke.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -36,7 +35,6 @@ public class DoneCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        assertInputs(input);
         int listSize = checkListIsEmpty(taskList, false);
 
         String response;
@@ -56,19 +54,18 @@ public class DoneCommand extends Command {
             throw new DukeException(MESSAGE_TASK_ALL_COMPLETED);
         }
         taskList.setAllDone();
+        assert taskList.isAllDone() : "all tasks should be marked as done";
         return ui.showDoneMessage(taskList);
     }
 
     private String processDoneCommand(TaskList taskList, Ui ui, String input, int listSize) throws DukeException {
-        int index = Integer.parseInt(input) - 1;
-        checkIndexOutOfBounds(index, listSize);
-        assert index >= 0 : "input should not be negative";
+        int index = checkIndexOutOfBounds(Integer.parseInt(input), listSize);
         Task task = taskList.get(index);
         if (task.getDone()) {
             throw new DukeException(MESSAGE_TASK_COMPLETED);
         }
         task.setDone();
-        assert task.getDone() : "task should be set as done";
+        assert task.getDone() : "task should be marked as done";
         return ui.showDoneMessage(task);
     }
 }

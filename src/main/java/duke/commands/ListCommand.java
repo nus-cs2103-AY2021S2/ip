@@ -24,7 +24,6 @@ public class ListCommand extends Command {
         if (queryDate.length > 0) {
             newQueryDate = queryDate[0];
         }
-
         this.queryDate = newQueryDate;
     }
 
@@ -42,8 +41,8 @@ public class ListCommand extends Command {
         TaskList printTaskList = taskList;
         if (queryDate != null) {
             printTaskList = taskList.filterByDate(queryDate);
+            checkListIsEmpty(printTaskList, true);
         }
-        checkListIsEmpty(printTaskList, true);
 
         return new CommandResponse(ui.showListMessage(printTaskList, false));
     }
