@@ -254,9 +254,13 @@ public class Parser {
      * @return String representing the list of all events.
      */
     protected String printList() {
-        String listRepresentation = "Here are the tasks in your list:\n";
-        listRepresentation += tasks.toString();
-        return listRepresentation;
+        if (tasks.getSize() == 0) {
+            return "Your list is currently empty!";
+        } else {
+            String listRepresentation = "Here are the tasks in your list:\n";
+            listRepresentation += tasks.toString();
+            return listRepresentation;
+        }
     }
 
     /**
@@ -265,9 +269,13 @@ public class Parser {
      * @return String representing the list of all matching events.
      */
     protected String printList(TaskList tasks) {
-        String listRepresentation = "Here are the tasks you requested for:\n";
-        listRepresentation += tasks.toString();
-        return listRepresentation;
+        if (tasks.getSize() == 0) {
+            return "None of the tasks in your list matches the condition!";
+        } else {
+            String listRepresentation = "Here are the tasks you requested for:\n";
+            listRepresentation += tasks.toString();
+            return listRepresentation;
+        }
     }
 
 }
