@@ -83,7 +83,7 @@ public class Parser {
             throws ParseException {
         List<String> exceptionsList = Arrays.asList(exception);
         String[] tokens = parseTarget.split(delimiter, 2);
-        if (!exceptionsList.contains(tokens[0]) && tokens.length < 2) {
+        if (!exceptionsList.contains(tokens[0].toLowerCase()) && tokens.length < 2) {
             throw new ParseException("Expected delimiter '" + delimiter + "'", tokens[0].length());
         }
         return tokens;
