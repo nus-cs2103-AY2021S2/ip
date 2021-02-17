@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog box consisting of an
@@ -42,6 +43,13 @@ public class DialogBox extends HBox {
         HBox.setHgrow(this.displayPicture, Priority.ALWAYS);
         this.dialog.setText(text);
         this.displayPicture.setImage(img);
+
+        // Set round corners for image
+        Rectangle clip = new Rectangle(this.displayPicture.getFitWidth(),
+                this.displayPicture.getFitHeight());
+        clip.setArcWidth(this.displayPicture.getFitWidth());
+        clip.setArcHeight(this.displayPicture.getFitHeight());
+        this.displayPicture.setClip(clip);
     }
 
     /**

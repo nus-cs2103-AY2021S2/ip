@@ -54,10 +54,11 @@ public class MainWindow {
 
     @FXML
     public void initialize() {
-        this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
+        this.scrollPane.setVvalue(this.scrollPane.getVmax());
+        dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(
-                        "Hello! I am Duke. What can I do for you my dude?",
+                        "Hello! I am Duke.\nWhat can I do for you my dude?",
                         botImage)
         );
     }
