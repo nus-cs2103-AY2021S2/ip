@@ -24,6 +24,9 @@ public class TaskList {
      * Iterates and returns enumerated list of tasks.
      */
     public String iterateList() {
+        if (lst.size() == 0) {
+            return "There are no items in your list yet.";
+        }
         String s = "Here are the items in your list:\n";
         int i = 1;
         for (Task item : lst) {

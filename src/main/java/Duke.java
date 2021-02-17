@@ -16,7 +16,6 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private Parser parser;
-    private Scanner sc;
     private boolean shouldExit = false;
 
     /**
@@ -65,28 +64,9 @@ public class Duke {
 
     public void run() throws IOException {
         ui.printHello();
-        sc = new Scanner(System.in);
         storage = new Storage("duke.txt");
         parser = new Parser();
 
-        respond(sc, parser);
-
-        sc.close();
         storage.storeTasks(taskList);
     }
-
-    /**
-     * Runs and responds to input until exit command is detected.
-     * @param sc scanner for user input
-     * @param parser parser to deconstruct user commands
-     */
-    public void respond(Scanner sc, Parser parser) {
-        ui.printHello();
-        while (!this.shouldExit) {
-            String input = sc.nextLine();
-            this.shouldExit =  parser.parse(input, taskList);
-        }
-    }
-
-
 }

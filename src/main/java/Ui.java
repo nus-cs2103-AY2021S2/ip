@@ -7,7 +7,7 @@ public class Ui {
     /**
      * Prints a welcome message on the console when Duke is first opened.
      */
-    public String printHello() {
+    public static String printHello() {
         String logo = ".------..------..------..------.\n"
                 + "|D.--. ||U.--. ||K.--. ||E.--. |\n"
                 + "| :/\\: || (\\/) || :/\\: || (\\/) |\n"
@@ -16,7 +16,7 @@ public class Ui {
                 + "`------'`------'`------'`------'";
 
         System.out.println("Hello, this is\n" + logo + "\n What can I do for you today?\n");
-        return "Hello, this is\n" + logo + "\n What can I do for you today?\n";
+        return "Hello, this is " + "Duke!" + " What can I do for you today?\n";
     }
 
     /**
