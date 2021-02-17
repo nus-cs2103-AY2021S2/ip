@@ -31,7 +31,7 @@ public class Ui {
     /**
      * Lists out commands.
      *
-     * @return Help message.
+     * @return List of all commands.
      */
     public String displayHelp() {
         return echo("Use \"command -h\" to find out more about the command!\n",
@@ -74,16 +74,16 @@ public class Ui {
     }
 
     /**
-     * Returns list contents.
+     * Displays list of tasks.
      *
      * @param lst List to be displayed.
-     * @return Content of list.
+     * @return List of tasks.
      */
     public String displayList(List<String> lst) {
-        if (lst.size() == 0) {
+        if (lst.isEmpty()) {
             return "No task found!";
         } else {
-            return "Here are the tasks in your list:\n" + echo(lst.toArray(new String[0]));
+            return "Here are the tasks in your list:\n" + echo(lst.toArray(String[]::new));
         }
     }
 
@@ -91,11 +91,11 @@ public class Ui {
      * Returns message after tasks are marked as done.
      *
      * @param tasks Tasks marked as done.
-     * @return Tasks done message.
+     * @return Tasks completed message.
      */
-    public String completeTask(String... tasks) {
+    public String displayCompletedTask(String[] tasks) {
         return String.format("Nice! I've marked %s as done:\n%s",
-                tasks.length == 1 ? "this task" : "these tasks",
+                isSingleTask(tasks) ? "this task" : "these tasks",
                 echo(tasks));
     }
 
@@ -104,12 +104,12 @@ public class Ui {
      *
      * @param task Task added to TaskList.
      * @param size Current size of TaskList.
-     * @return Add task message.
+     * @return Task added message.
      */
-    public String addTask(String task, int size) {
+    public String displayAddedTask(String task, int size) {
         return echo("Got it. I've added this task:",
                 task,
-                String.format("Now you have %d task%s in the list.", size, size == 1 ? "" : "s"));
+                String.format("Now you have %d task%s in the list.", size, isSingleTask(size) ? "" : "s"));
     }
 
     /**
@@ -117,12 +117,20 @@ public class Ui {
      *
      * @param tasks Tasks deleted from TaskList.
      * @param size Current size of TaskList.
-     * @return Delete tasks message.
+     * @return Tasks deleted message.
      */
-    public String deleteTask(String[] tasks, int size) {
-        return String.format("Noted. I've removed %s:\n", tasks.length == 1 ? "this task" : "these tasks")
+    public String displayDeletedTask(String[] tasks, int size) {
+        return String.format("Noted. I've removed %s:\n", isSingleTask(tasks) ? "this task" : "these tasks")
                 + echo(tasks) + "\n"
-                + String.format("Now you have %d task%s in the list.", size, size == 1 ? "" : "s");
+                + String.format("Now you have %d task%s in the list.", size, isSingleTask(size) ? "" : "s");
+    }
+
+    private boolean isSingleTask(String[] arr) {
+        return arr.length == 1;
+    }
+
+    private boolean isSingleTask(int i) {
+        return i == 1;
     }
 
     /**
@@ -155,12 +163,12 @@ public class Ui {
     /**
      * Confirms if user want to delete these tasks.
      *
-     * @param isSingle Is a single or multiple task(s).
+     * @param numOfTasks Number of delete tasks.
      * @return Delete tasks confirmation message.
      */
-    public String displayDeleteTaskPrompt(boolean isSingle) {
+    public String displayDeleteTaskPrompt(int numOfTasks) {
         return String.format("Are you sure you want to delete %s? y/n",
-                isSingle ? "this task" : "these tasks");
+                isSingleTask(numOfTasks) ? "this task" : "these tasks");
     }
 
     /**
@@ -168,7 +176,7 @@ public class Ui {
      *
      * @return Cancel delete task message.
      */
-    public String abortDelete() {
+    public String displayDeleteAborted() {
         return "Deletion cancelled.";
     }
 

@@ -5,12 +5,15 @@ import java.util.List;
 
 /**
  * Represents a Task.
- * Includes description of the task and an indicator of whether it is completed.
+ * <br>- Has a description
+ * <br>- Has an optional date
+ * <br>- Has an indicator of whether it is completed.
+ * <br>- Has an indicator of its priority.
  */
 public abstract class Task implements Comparable<Task> {
     protected String description;
-    protected boolean isDone;
     protected LocalDate date;
+    protected boolean isDone;
     protected boolean isHighPriority;
 
     /**
@@ -59,9 +62,12 @@ public abstract class Task implements Comparable<Task> {
      */
     public abstract Task setLowPriority();
 
-    private String getStatus() {
-        return isDone ? "X" : " ";
-    }
+    /**
+     * Export data into a standardised format.
+     *
+     * @return List of task details.
+     */
+    protected abstract List<String> exportData();
 
     /**
      * Returns description of task.
@@ -103,12 +109,9 @@ public abstract class Task implements Comparable<Task> {
                 description);
     }
 
-    /**
-     * Export data into a standardised format.
-     *
-     * @return List of task details.
-     */
-    protected abstract List<String> exportData();
+    private String getStatus() {
+        return isDone ? "X" : " ";
+    }
 
     /**
      * Compares 2 task.
@@ -119,12 +122,16 @@ public abstract class Task implements Comparable<Task> {
      *     Last, by description lexicographically.
      *
      * @param other The task to be compared to.
-     * @return -1 if this task is smaller, 0 if same, 1 if other task is smaller.
+     * @return -1 if this task is smaller, 0 if same, 1 if this task is bigger.
      */
     @Override
     public int compareTo(Task other) {
+        return comparePriority(other);
+    }
+
+    private int comparePriority(Task other) {
         if (!(isHighPriority ^ other.isHighPriority)) {
-            return compareDone(other);
+            return compareCompleted(other);
         } else if (isHighPriority) {
             return -1;
         } else {
@@ -132,9 +139,9 @@ public abstract class Task implements Comparable<Task> {
         }
     }
 
-    private int compareDone(Task other) {
+    private int compareCompleted(Task other) {
         if (!(isDone ^ other.isDone)) {
-            return compareDate(other);
+            return compareDateExist(other);
         } else if (isDone) {
             return 1;
         } else {
@@ -142,17 +149,27 @@ public abstract class Task implements Comparable<Task> {
         }
     }
 
-    private int compareDate(Task other) {
+    private int compareDateExist(Task other) {
         if (date == null && other.date == null) {
-            return description.compareTo(other.description);
+            return compareDescription(other);
         } else if (date == null) {
             return -1;
         } else if (other.date == null) {
             return 1;
-        } else if (date.equals(other.date)) {
-            return description.compareTo(other.description);
         } else {
-            return date.compareTo(other.date);
+            return compareDate(other);
         }
+    }
+
+    private int compareDate(Task other) {
+        if (date.equals(other.date)) {
+            return compareDescription(other);
+        }
+
+        return date.compareTo(other.date);
+    }
+
+    private int compareDescription(Task other) {
+        return description.compareTo(other.description);
     }
 }

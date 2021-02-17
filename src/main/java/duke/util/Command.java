@@ -1,7 +1,7 @@
 package duke.util;
 
 /**
- * Enum for all commands of duke.
+ * Enum for all available commands of duke.
  */
 public enum Command {
     BYE,
@@ -21,6 +21,11 @@ public enum Command {
     SORT,
     TODO;
 
+    /**
+     * Returns format and more info for each command.
+     *
+     * @return Format and more info for each command.
+     */
     public String getHelp() {
         switch(this) {
         case BYE:
@@ -46,7 +51,7 @@ public enum Command {
         case LOWPRIORITY:
             return "lowpriority INDEX\n\t- Set this task as low priority";
         case SAMPLE:
-            return "sample\n\t- Load some sample data\n\t- use \"new\" command to clear all data";
+            return "sample\n\t- Load some sample data\n\t- use \"clear\" command to clear all data";
         case SAVE:
             return "save\n\t- save tasklist to \"data/dukeData.txt\"";
         case SEARCH:
@@ -56,7 +61,7 @@ public enum Command {
         case SORT:
             return "sort\n\t- Order tasklist in the following priority\n\t"
                     + "1. High Priority task\n\t2. Incomplete task\n\t"
-                    + "t3. Todo task\n\t4. Eariler date\n\t5. lexicographically";
+                    + "3. Todo task\n\t4. Eariler date\n\t5. Lexicographically";
         case TODO:
             return "todo DESCRIPTION\n\t- Add a todo task";
         default:

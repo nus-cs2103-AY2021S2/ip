@@ -5,7 +5,6 @@ import duke.util.Task;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
@@ -54,7 +53,7 @@ public class MainWindow extends SplitPane {
      */
     public void setDuke(Duke d) {
         duke = d;
-        listView.setItems(duke.getTaskList());
+        listView.setItems(duke.getTaskList().getList());
     }
 
     /**
@@ -62,8 +61,7 @@ public class MainWindow extends SplitPane {
      */
     public void showGreetings() {
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(duke.displayGreetings(), dukeImage)
-        );
+                DialogBox.getDukeDialog(duke.displayGreetings(), dukeImage));
     }
 
     /**
@@ -81,11 +79,9 @@ public class MainWindow extends SplitPane {
         history.add(input);
 
         String response = duke.getResponse(input);
-
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
-        );
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
 
         if (response.equals("shutdownConfirm")) {
@@ -94,13 +90,20 @@ public class MainWindow extends SplitPane {
     }
 
     private void handleUserKey(KeyCode key) {
-        if (key == KeyCode.UP) {
+        switch(key) {
+        case UP:
             userInput.setText(history.getPrevious());
-        } else if (key == KeyCode.DOWN) {
+            userInput.end();
+            break;
+        case DOWN:
             userInput.setText(history.getNext());
-        } else if (key == KeyCode.ESCAPE) {
-            userInput.setText("");
+            userInput.end();
+            break;
+        case ESCAPE:
+            userInput.clear();
+            break;
+        default:
+            break;
         }
-        userInput.positionCaret(userInput.getText().length());
     }
 }

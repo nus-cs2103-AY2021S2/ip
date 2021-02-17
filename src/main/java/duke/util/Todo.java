@@ -25,17 +25,13 @@ public class Todo extends Task {
      *
      * @param description Description of the task
      * @return A todo task
-     * @throws DukeInputException if description is empty
      */
-    public static Todo createTodo(String description) throws DukeInputException {
-        if (description.length() == 0) {
-            throw new DukeInputException("The description of Todo cannot be empty.");
-        }
+    public static Todo createTodo(String description) {
         return new Todo(description);
     }
 
     /**
-     * Returns String in the form "[Type] task".
+     * Returns String in the form "[TYPE] task".
      *
      * @return String representation of Todo.
      */
@@ -64,8 +60,8 @@ public class Todo extends Task {
      * @return Todo object.
      */
     protected static Todo importData(String[] args) {
-        assert args[1].equals("1") || args[1].equals("0") : "Parser.checkImportFormat() missed an invalid input";
-        assert args[2].equals("1") || args[2].equals("0") : "Parser.checkImportFormat() missed an invalid input";
+        assert args[1].equals("1") || args[1].equals("0") : "Parser.parseImport() missed an invalid input";
+        assert args[2].equals("1") || args[2].equals("0") : "Parser.parseImport() missed an invalid input";
 
         boolean isDone = args[1].equals("1");
         boolean isHighPriority = args[2].equals("1");

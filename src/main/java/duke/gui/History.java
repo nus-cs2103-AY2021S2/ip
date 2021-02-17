@@ -16,11 +16,15 @@ public class History {
      * @param s User input.
      */
     public void add(String s) {
-        if (lst.isEmpty() || !s.equals(lst.get(lst.size() - 1))) {
+        if (lst.isEmpty() || isDifferentFromLast(s)) {
             lst.add(s);
         }
 
         current = lst.size();
+    }
+
+    private boolean isDifferentFromLast(String s) {
+        return !s.equals(lst.get(lst.size() - 1));
     }
 
     /**

@@ -40,13 +40,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setBackground(new Background(
-                new BackgroundFill(Color.rgb(240, 255, 220), new CornerRadii(7.0), Insets.EMPTY)));
-
         Circle c = new Circle(32, 32, 32);
         displayPicture.setClip(c);
         displayPicture.setImage(img);
+
         dialog.setText(text);
+        dialog.setBackground(new Background(
+                new BackgroundFill(Color.rgb(240, 255, 220), new CornerRadii(7.0), Insets.EMPTY)));
     }
 
     /**

@@ -64,6 +64,7 @@ public class Storage {
      * Reads and returns tasklist from a text file.
      *
      * @return List of tasks
+     * @throws DukeException If file not found or incorrect format.
      */
     public List<Task> loadTaskList() throws DukeException {
         List<Task> lst = new ArrayList<>();
@@ -79,25 +80,9 @@ public class Storage {
             String input = sc.nextLine();
 
             try {
-                Parser.checkImportFormat(input);
+                lst.add(Parser.parseImport(input));
             } catch (DukeInputException e) {
                 throw new DukeException("File incorrect format. Unable to load");
-            }
-
-            String[] s = input.split(";");
-
-            switch (s[0]) {
-            case "T":
-                lst.add(Todo.importData(s));
-                break;
-            case "D":
-                lst.add(Deadline.importData(s));
-                break;
-            case "E":
-                lst.add(Event.importData(s));
-                break;
-            default:
-                assert false : "Parser missed an invalid input";
             }
         }
 

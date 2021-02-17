@@ -2,12 +2,11 @@ package duke.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
  * Represents a deadline task.
- * <br>A deadline task has a description and a date where it is due.
+ * <br>A deadline task has a description and a date when it is due.
  */
 public class Deadline extends Task {
 
@@ -29,29 +28,15 @@ public class Deadline extends Task {
      * @param input Description of the task and its due date.
      *     Due date should be indicated after "/by".
      * @return A deadline task.
-     * @throws DukeInputException If due date is missing.
      */
-    public static Deadline createDeadline(String input) throws DukeInputException {
+    public static Deadline createDeadline(String input) {
         String[] details = input.split(" /by ");
-
-        if (!input.contains("/by") || details.length == 1) {
-            throw new DukeInputException("Due date is missing!");
-        }
-
-        LocalDate date;
-
-        try {
-            date = LocalDate.parse(details[1]);
-        } catch (DateTimeParseException e) {
-            throw new DukeInputException("Wrong date format! Please use YYYY-MM-DD");
-        }
-
-        assert date != null : "Date was not parsed.";
+        LocalDate date = LocalDate.parse(details[1]);
         return new Deadline(details[0], date);
     }
 
     /**
-     * Returns String in the form "[Type] task".
+     * Returns String in the form "[TYPE] task".
      *
      * @return String representation of Deadline.
      */

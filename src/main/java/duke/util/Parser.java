@@ -27,11 +27,69 @@ public class Parser {
 
         return new Pair<>(command, args);
     }
+
+    /**
+     * Checks if input from text file is valid and creates the task.
+     *
+     * @param input Import statement from saved file.
+     * @return Imported task.
+     * @throws DukeInputException If input is invalid.
+     */
+    public static Task parseImport(String input) throws DukeInputException {
+        // Import statments must have at least 4 ";"
+        String[] args = input.split(";", 4);
+
+        if (args.length != 4) {
+            throw new DukeInputException("Wrong number of arguments");
+        }
+        if (isNotValidBinary(args[1])) {
+            throw new DukeInputException("isDone column should be 0 or 1");
+        }
+        if (isNotValidBinary(args[2])) {
+            throw new DukeInputException("Priority column should be 0 or 1");
+        }
+
+        // Deadline and Event will have an additional ";"
+        String[] s = args[3].split(";", 2);
+
+        switch (args[0]) {
+        case "T":
+            checkValidTodo(s[0]);
+            return Todo.importData(input.split(";"));
+        case "D":
+            checkValidDeadline(String.join(" /by ", s));
+            return Deadline.importData(input.split(";"));
+        case "E":
+            checkValidEvent(String.join(" /at ", s));
+            return Event.importData(input.split(";"));
+        default:
+            throw new DukeInputException("Not a valid Task type");
+        }
+    }
+
+    /**
+     * Checks if input is either a "y" (yes) or "n" (no).
+     *
+     * @param input Input from user.
+     * @return True if input is "y", false if input is "n".
+     * @throws DukeInputException If input is neither a "y" or "n".
+     */
+    public static boolean parseYesNo(String input) throws DukeInputException {
+        if (!(input.equals("y") || input.equals("n"))) {
+            throw new DukeInputException("Invalid input! Please key in either \"y\" or \"n\"");
+        }
+        return input.equals("y");
+    }
+
+    private static Command getCommand(String input) throws DukeInputException {
         try {
-            cmd = Command.valueOf(s[0].toUpperCase());
+            return Command.valueOf(input.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new DukeInputException("I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private static void checkValidArguments(Command cmd, String args) throws DukeInputException {
 
         if (args.equals("-h")) {
             return;
@@ -48,10 +106,10 @@ public class Parser {
             checkValidDeadline(args);
             break;
         case DELETE:
-            checkValidDoneDelete(args);
+            checkValidDoneOrDelete(args);
             break;
         case DONE:
-            checkValidDoneDelete(args);
+            checkValidDoneOrDelete(args);
             break;
         case EVENT:
             checkValidEvent(args);
@@ -91,65 +149,23 @@ public class Parser {
         }
     }
 
-    /**
-     * Checks if input from text file is valid.
-     *
-     * @param input Line from saved file.
-     * @throws DukeInputException If input is invalid.
-     */
-    public static void checkImportFormat(String input) throws DukeInputException {
-        String[] s = input.split(";", 4);
-
-        if (s.length != 4) {
-            throw new DukeInputException("Wrong number of arguments");
-        }
-        if (!(s[1].equals("0") || s[1].equals("1"))) {
-            throw new DukeInputException("isDone column should be 0 or 1");
-        }
-        if (!(s[2].equals("0") || s[2].equals("1"))) {
-            throw new DukeInputException("Priority column should be 0 or 1");
-        }
-
-        String[] args = s[3].split(";", 2);
-
-        switch (s[0]) {
-        case "T":
-            checkValidTodo(args[0]);
-            break;
-        case "D":
-            checkValidDeadline(String.join(" /by ", args));
-            break;
-        case "E":
-            checkValidEvent(String.join(" /at ", args));
-            break;
-        default:
-            throw new DukeInputException("Not a valid Task type");
-        }
-    }
-
-    /**
-     * Checks if the string in a valid LocalDate format (YYYY-MM-DD).
-     *
-     * @param s Input string.
-     * @throws DukeInputException If not a valid LocalDate format.
-     */
-    private static void checkValidDate(String s) throws DukeInputException {
+    private static void checkValidDate(String date) throws DukeInputException {
         try {
-            LocalDate.parse(s);
+            LocalDate.parse(date);
         } catch (DateTimeParseException e) {
             throw new DukeInputException(
-                String.format("\"%s\" is a wrong date format! Please use YYYY-MM-DD format.", s));
+                String.format("\"%s\" is a wrong date format! Please use YYYY-MM-DD format.", date));
         }
     }
 
-    private static void checkNoArgument(String s) throws DukeInputException {
-        if (!s.isEmpty()) {
-            throw new DukeInputException(String.format("%s is not a valid argument!", s));
+    private static void checkNoArgument(String args) throws DukeInputException {
+        if (!args.isEmpty()) {
+            throw new DukeInputException(String.format("%s is not a valid argument!", args));
         }
     }
 
-    private static void checkValidTodo(String s) throws DukeInputException {
-        if (s.length() == 0) {
+    private static void checkValidTodo(String args) throws DukeInputException {
+        if (args.isEmpty()) {
             throw new DukeInputException("Please include a description of the Todo!");
         }
     }
@@ -178,52 +194,45 @@ public class Parser {
         checkValidDate(args[1]);
     }
 
-    private static void checkValidDoneDelete(String input) throws DukeInputException {
-        if (input.length() == 0) {
+    private static void checkValidDoneOrDelete(String args) throws DukeInputException {
+        if (args.isEmpty()) {
             throw new DukeInputException("Please input a task number!");
         }
 
-        String[] args = input.split(" ");
+        String[] indexes = args.split(" ");
 
-        for (String s : args) {
-            if (s.isEmpty()) {
-                throw new DukeInputException("Please only leave one space between numbers!");
+        // Check each number is seperated by single space and is valid
+        for (String idx : indexes) {
+            if (idx.isEmpty()) {
+                throw new DukeInputException("Please leave only one space between numbers!");
             }
-            checkValidNumber(s);
+            checkValidNumber(idx);
         }
 
-        Arrays.sort(args);
-        for (int i = 1; i < args.length; i++) {
-            if (args[i].equals(args[i - 1])) {
+        // Check for duplicate numbers
+        Arrays.sort(indexes);
+        for (int i = 1; i < indexes.length; i++) {
+            if (indexes[i].equals(indexes[i - 1])) {
                 throw new DukeInputException("Please do not input duplicate numbers!");
             }
         }
     }
 
-    private static void checkValidSearch(String s) throws DukeInputException {
-        if (s.length() == 0) {
+    private static void checkValidSearch(String args) throws DukeInputException {
+        if (args.isEmpty()) {
             throw new DukeInputException("Enter a keyword to search!");
         }
     }
 
-    private static void checkValidNumber(String s) throws DukeInputException {
+    private static void checkValidNumber(String idx) throws DukeInputException {
         try {
-            Integer.parseInt(s);
+            Integer.parseInt(idx);
         } catch (NumberFormatException e) {
-            throw new DukeInputException(
-                    String.format("\"%s\" is not a valid number!", s));
+            throw new DukeInputException(String.format("\"%s\" is not a valid number!", idx));
         }
     }
 
-    /**
-     * Checks if input is either a "y" (yes) or "n" (no).
-     *
-     * @param s Input from user.
-     * @throws DukeInputException If input is neither a "y" or "n".
-     */
-    public static void parseYesNo(String s) throws DukeInputException {
-        if (!(s.equals("y") || s.equals("n"))) {
-            throw new DukeInputException("Invalid input! Please key in either \"y\" or \"n\"");
-        }
+    private static boolean isNotValidBinary(String idx) {
+        return !(idx.equals("0") || idx.equals("1"));
     }
 }

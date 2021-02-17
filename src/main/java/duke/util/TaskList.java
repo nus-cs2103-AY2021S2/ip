@@ -32,14 +32,13 @@ public class TaskList {
         lst.addAll(tasks);
     }
 
-
     /**
      * Adds task to the tasklist.
      *
-     * @param t Task to be added.
+     * @param task Task to be added.
      */
-    public void addTask(Task t) {
-        lst.add(t);
+    public void addTask(Task task) {
+        lst.add(task);
     }
 
     /**
@@ -53,14 +52,15 @@ public class TaskList {
         assert tasksNum.length != 0;
 
         for (int i : tasksNum) {
-            if (i < 0 || i >= lst.size()) {
+            if (isInvalidIndex(i)) {
+                // +1 to convert back to one-based.
                 throw new DukeInputException(String.format("\"%d\" is an invalid number!", i + 1));
             }
         }
 
         List<String> deletedTasks = new ArrayList<>();
 
-        //Remove in descending index to avoid wrong deletion.
+        // Remove in descending index to avoid wrong deletion.
         Arrays.sort(tasksNum);
         for (int i = tasksNum.length - 1; i >= 0; i--) {
             Task deletedTask = lst.remove(tasksNum[i]);
@@ -68,6 +68,10 @@ public class TaskList {
         }
 
         return deletedTasks.toArray(String[]::new);
+    }
+
+    private boolean isInvalidIndex(int i) {
+        return i < 0 || i >= lst.size();
     }
 
     /**
@@ -81,7 +85,8 @@ public class TaskList {
         assert tasksNum.length != 0;
 
         for (int i : tasksNum) {
-            if (i < 0 || i >= lst.size()) {
+            if (isInvalidIndex(i)) {
+                // +1 to convert back to one-based.
                 throw new DukeInputException(String.format("\"%d\" is an invalid number!", i + 1));
             }
         }
@@ -89,8 +94,7 @@ public class TaskList {
         List<String> completedTasks = new ArrayList<>();
 
         for (int i : tasksNum) {
-            Task t = lst.get(i);
-            Task completedTask = t.markDone();
+            Task completedTask = lst.get(i).markDone();
             lst.set(i, completedTask);
             completedTasks.add(completedTask.toString());
         }
@@ -104,14 +108,14 @@ public class TaskList {
      * @return List of numbered tasks.
      */
     public List<String> listOutTask() {
-        List<String> stringlst = new ArrayList<>();
+        List<String> stringList = new ArrayList<>();
         int counter = 1;
 
-        for (Task t : lst) {
-            stringlst.add(String.format("%d. %s", counter++, t.toString()));
+        for (Task task : lst) {
+            stringList.add(String.format("%d. %s", counter++, task.toString()));
         }
 
-        return stringlst;
+        return stringList;
     }
 
     /**
@@ -133,21 +137,17 @@ public class TaskList {
     }
 
     /**
-     * Returns list of tasks on the given date.
-     *
-     * @param d Date of task.
-     * @return List of numbered tasks with the following date.
+     * Sort tasklist by todo task first, and then by date.
      */
-    private List<String> searchByDate(LocalDate d) {
-        List<String> results = new ArrayList<>();
+    public void sort() {
+        lst.sort(null);
+    }
 
-        for (int i = 0; i < lst.size(); i++) {
-            if (d.equals(lst.get(i).getDate())) {
-                results.add(String.format("%d. %s", i + 1, lst.get(i)));
-            }
-        }
-
-        return results;
+    /**
+     * Clears tasklist.
+     */
+    public void clear() {
+        lst.clear();
     }
 
     /**
@@ -163,24 +163,48 @@ public class TaskList {
             LocalDate date = LocalDate.parse(keyword);
             return searchByDate(date);
         } catch (DateTimeParseException e) {
-            // Keyword is not a date
+            // If keyword is not a valid date format, carry on with method.
         }
 
         List<String> results = new ArrayList<>();
 
         for (int i = 0; i < lst.size(); i++) {
-            if (lst.get(i).getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+            Task task = lst.get(i);
+
+            if (containsKeyword(task, keyword)) {
                 results.add(String.format("%d. %s", i + 1, lst.get(i)));
             }
         }
         return results;
     }
 
+    private boolean containsKeyword(Task task, String keyword) {
+        return task.getDescription().toLowerCase().contains(keyword.toLowerCase());
+    }
+
     /**
-     * Sort tasklist by todo task first, and then by date.
+     * Returns list of tasks on the given date.
+     *
+     * @param d Date of task.
+     * @return List of numbered tasks with the following date.
      */
-    public void sort() {
-        lst.sort(null);
+    private List<String> searchByDate(LocalDate date) {
+        List<String> results = new ArrayList<>();
+
+        for (int i = 0; i < lst.size(); i++) {
+            Task task = lst.get(i);
+
+            if (isSameDate(task, date)) {
+                // +1 to convert back to one-based.
+                results.add(String.format("%d. %s", i + 1, lst.get(i)));
+            }
+        }
+
+        return results;
+    }
+
+    private boolean isSameDate(Task task, LocalDate date) {
+        return date.equals(task.getDate());
     }
 
     /**
@@ -192,25 +216,19 @@ public class TaskList {
      * @throws DukeInputException If given index is out of range.
      */
     public String setPriority(boolean isHigh, int taskNum) throws DukeInputException {
-        if (taskNum < 0 || taskNum >= lst.size()) {
+        if (isInvalidIndex(taskNum)) {
+            // +1 to convert back to one-based.
             throw new DukeInputException(String.format("\"%d\" is an invalid number!", taskNum + 1));
         }
 
-        Task t;
+        Task task;
         if (isHigh) {
-            t = lst.get(taskNum).setHighPriority();
+            task = lst.get(taskNum).setHighPriority();
         } else {
-            t = lst.get(taskNum).setLowPriority();
+            task = lst.get(taskNum).setLowPriority();
         }
 
-        lst.set(taskNum, t);
-        return t.toString();
-    }
-
-    /**
-     * Clears tasklist.
-     */
-    public void clear() {
-        lst.clear();
+        lst.set(taskNum, task);
+        return task.toString();
     }
 }

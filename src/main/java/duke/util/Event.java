@@ -2,7 +2,6 @@ package duke.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
@@ -29,29 +28,15 @@ public class Event extends Task {
      * @param input Description of the task and its date.
      *     Date should be indicated after "/at".
      * @return An Event task.
-     * @throws DukeInputException If date is missing or wrong format.
      */
-    public static Event createEvent(String input) throws DukeInputException {
+    public static Event createEvent(String input) {
         String[] details = input.split(" /at ");
-
-        if (!input.contains("/at") || details.length == 1) {
-            throw new DukeInputException("Please include a date for the event!");
-        }
-
-        LocalDate date;
-
-        try {
-            date = LocalDate.parse(details[1]);
-        } catch (DateTimeParseException e) {
-            throw new DukeInputException("Wrong date format! Please use YYYY-MM-DD");
-        }
-
-        assert date != null : "Date was not parsed.";
+        LocalDate date = LocalDate.parse(details[1]);
         return new Event(details[0], date);
     }
 
     /**
-     * Returns String in the form "[Type] task".
+     * Returns String in the form "[TYPE] task".
      *
      * @return String representation of Event.
      */

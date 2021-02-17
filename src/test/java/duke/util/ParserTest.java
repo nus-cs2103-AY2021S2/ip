@@ -34,10 +34,16 @@ public class ParserTest {
 
         assertThrows(DukeInputException.class, () -> Parser.parseInput("deadline"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("deadline /by "));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("deadline /by 1"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("deadline 2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("deadline/by2011-01-01"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("deadline /by t /by a"));
 
         assertThrows(DukeInputException.class, () -> Parser.parseInput("event"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("event /at "));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("event /at 1"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("event 2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.parseInput("event/at2011-01-01"));
         assertThrows(DukeInputException.class, () -> Parser.parseInput("event /at a /at b"));
 
         assertThrows(DukeInputException.class, () -> Parser.parseInput("done"));
@@ -67,22 +73,22 @@ public class ParserTest {
     }
 
     @Test
-    public void checkImportFormatTest() {
-        assertDoesNotThrow(() -> Parser.checkImportFormat("T;1;0;a"));
-        assertDoesNotThrow(() -> Parser.checkImportFormat("D;1;0;a;2011-01-01"));
-        assertDoesNotThrow(() -> Parser.checkImportFormat("E;0;0;a;2011-01-01"));
+    public void parseImportTest() {
+        assertDoesNotThrow(() -> Parser.parseImport("T;1;0;a"));
+        assertDoesNotThrow(() -> Parser.parseImport("D;1;0;a;2011-01-01"));
+        assertDoesNotThrow(() -> Parser.parseImport("E;0;0;a;2011-01-01"));
 
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("Z;1;0;a;2011-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;3;0;;2011-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;201-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;2011-01-01;"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;2011-01-01;b"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;0;a;;2011-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat(";D;1;0;a;;2011-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("D;1;2;a;2011-01-01"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat("a"));
-        assertThrows(DukeInputException.class, () -> Parser.checkImportFormat(""));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("Z;1;0;a;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("D;3;0;;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("D;1;0;a;201-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("D;1;0;a;2011-01-01;"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("D;1;0;a;2011-01-01;b"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("D;1;0;a;"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("D;1;0;a;;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport(";D;1;0;a;;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("D;1;2;a;2011-01-01"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport("a"));
+        assertThrows(DukeInputException.class, () -> Parser.parseImport(""));
     }
 
     @Test

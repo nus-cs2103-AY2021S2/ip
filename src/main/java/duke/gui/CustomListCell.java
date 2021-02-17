@@ -14,8 +14,7 @@ public class CustomListCell extends ListCell<Task> {
         super.updateItem(item, empty);
         if (empty) {
             setText("");
-            setStyle(String.format("-fx-background-color:%s",
-                    getIndex() % 2 == 0 ? "rgb(140, 140, 140);" : "rgb(130, 130, 130);"));
+            setStyle("-fx-background-color:rgb(130, 130, 130);");
         } else {
             setText((getIndex() + 1) + ". " + item);
             setStyle(String.format("-fx-text-fill:%s;-fx-background-color:%s;",
