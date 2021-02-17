@@ -167,7 +167,11 @@ public class Parser {
             throw new DukeArgumentException("You have not entered a keyword!");
         } else if (split.length == 1) {
             throw new DukeArgumentException("You have not entered a task description!");
-        } else {
+        }
+        else if (split.length > 1 && (split[1].equals("/by") || split[1].equals("at"))) {
+            throw new DukeArgumentException("You have not entered a task description!");
+        }
+        else {
             // Do nothing if a keyword or task description is provided.
         }
     }
