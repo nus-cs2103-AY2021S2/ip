@@ -1,3 +1,5 @@
 T|1|clean floor|NULL
 T|0|sweep|NULL
 T|0|borrow book|book
+T|0|l|NULL
+T|0|||NULL

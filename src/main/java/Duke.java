@@ -286,7 +286,7 @@ public class Duke {
 
             return new Response("There are no tasks that matches your search", false);
         } else {
-            sb.append("Here are the matching tasks in your list:");
+            sb.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < subList.size(); i++) {
                 sb.append(Integer.toString(i + 1) + ". "
                         + subList.get(i).getTypeIcon()
