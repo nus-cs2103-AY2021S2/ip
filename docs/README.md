@@ -1,7 +1,7 @@
 # B.O.B Task Manager User Guide
 A todo task manager bot to record and store list of tasks.
 
-![image](../src/main/resources/images/DaDuke.png)
+![image](./images/MrDestructoid.png)
 
 Source: MrDestructoid (Twitch Emote) 
 
