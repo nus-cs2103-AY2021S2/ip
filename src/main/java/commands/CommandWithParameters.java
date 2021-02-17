@@ -17,9 +17,14 @@ public abstract class CommandWithParameters extends Command {
         }
     }
 
+    /**
+     *
+     * @param size
+     * @param userIdx Index starting from 1, not 0
+     * @return
+     */
     protected boolean isInvalidListIndex(int size, int userIdx) {
-        int offZeroIdx = userIdx - 1; // abstract this how?
-        return offZeroIdx > 0 && offZeroIdx < size;
+        return userIdx < 1 || userIdx > size;
     }
 
     protected void handleInvalidListIdx(int size, int userIdx) {
@@ -28,6 +33,15 @@ public abstract class CommandWithParameters extends Command {
             String invalidNumErrMsg = "Invalid task number given: " + userIdx
                     + ". Number needs to be between " + minIdx + " and " + size + " (inclusive). "; // should be handled in exception.java
             handleException(new InvalidArgumentException(invalidNumErrMsg));
+        }
+    }
+
+    protected void checkInvalidListIdx(int size, int userIdx) throws InvalidArgumentException {
+        if (isInvalidListIndex(size, userIdx)) {
+            int minIdx = 1; // for error message. should this be abstracted somewhere in tasklist
+            String invalidNumErrMsg = "Invalid task number given: " + userIdx
+                    + ". Number needs to be between " + minIdx + " and " + size + " (inclusive). "; // should be handled in exception.java
+            throw new InvalidArgumentException(invalidNumErrMsg);
         }
     }
 }

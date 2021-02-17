@@ -13,7 +13,7 @@ public class NewParser {
 
     public NewParser(TaskList taskListToWriteInto) {
         this.taskList = taskListToWriteInto;
-//        assert false==true : "ha!";
+        assert false==true : "ha!";
     }
 
     /**
@@ -49,21 +49,25 @@ public class NewParser {
         switch (firstWord) {
         case "list":
         case "ls":
+        case "l":
             System.out.println(commandBody);
             return new ListCommand(commandBody);
         case "bye":
             return new ByeCommand(commandBody);
         case "todo":
+        case "t":
             return new TodoCommand(commandBody);
         case "event":
         case "e":
             return new EventCommand(commandBody);
         case "deadline":
+        case "dl":
             return new DeadlineCommand(commandBody);
         case "done":
             return new DoneCommand(commandBody);
         case "delete":
         case "del":
+        case "rm":
             return new DeleteCommand(commandBody);
         case "find":
             return new FindCommand(commandBody);

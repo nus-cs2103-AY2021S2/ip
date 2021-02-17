@@ -19,7 +19,7 @@ public class DeleteCommand extends CommandWithParameters {
 
             int userInputIdx = Integer.parseInt(this.commandBody);
 
-            handleInvalidListIdx(taskList.size(), userInputIdx);
+            checkInvalidListIdx(taskList.size(), userInputIdx);
 
             this.commandOutputMsg = taskList.deleteTask(userInputIdx);
 

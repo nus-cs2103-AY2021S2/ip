@@ -61,13 +61,28 @@ public class MainWindow extends AnchorPane {
      */
     private void runTests() {
         String[] inputs = {
-                // "deadline read /by 3/4 2pm",
-                // "deadline read /by 2pm 3/4"
                 "list",
                 "todo hello",
                 "done 1",
                 "delete 1",
                 "find hello",
+                "event read /at",
+                "deadline item /by 16:11 4-12",
+                "e yelp /at 11:58 pm 3/4",
+                "dl ye /by 15:30pm 4/12",
+                "help",
+                "delete 1",
+                "done 1",
+                "list",
+                // todo test everything that's supposed to throw exceptions
+                "event read /at 2pm 3/4",
+                "deadline /by 16:11 4-12",
+                "deadline 16:11 4-12",
+                "deadline ye /by 15:30pm 4/19",
+                "done 0",
+                "delete 0",
+                "delete 100",
+                "done 100",
                 "list"
         };
 
