@@ -7,6 +7,7 @@ public class Messages {
     // Messages to show to user upon a parse error.
     public static final String MESSAGE_EMPTY_DESCRIPTION = "The description of a task cannot be empty.";
     public static final String MESSAGE_ENTER_COMMAND = "Please enter a command.";
+    public static final String MESSAGE_ENTER_POSITIVE_DURATION = "Please enter a positive duration!";
     public static final String MESSAGE_FOLLOW_USAGE = "Please follow the usage as shown below:";
     public static final String MESSAGE_INDICATE_TASK = "Please indicate a task number.";
     public static final String MESSAGE_INVALID_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :-(";

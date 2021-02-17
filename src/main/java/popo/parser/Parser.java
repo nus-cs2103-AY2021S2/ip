@@ -2,6 +2,7 @@ package popo.parser;
 
 import static popo.utils.Messages.MESSAGE_EMPTY_DESCRIPTION;
 import static popo.utils.Messages.MESSAGE_ENTER_COMMAND;
+import static popo.utils.Messages.MESSAGE_ENTER_POSITIVE_DURATION;
 import static popo.utils.Messages.MESSAGE_FOLLOW_USAGE;
 import static popo.utils.Messages.MESSAGE_INDICATE_TASK;
 import static popo.utils.Messages.MESSAGE_INVALID_COMMAND;
@@ -211,6 +212,9 @@ public class Parser {
             String durationTaskName = durationInputArr[0].strip();
             String durationString = durationInputArr[1].strip();
             long amount = Long.parseLong(durationString);
+            if (amount < 0) {
+                throw new InvalidDescriptionException(MESSAGE_ENTER_POSITIVE_DURATION);
+            }
             Duration duration = Duration.of(amount, unit);
             return new DurationCommand(durationTaskName, duration);
         } catch (NumberFormatException ex) {
