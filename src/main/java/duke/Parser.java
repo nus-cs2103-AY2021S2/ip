@@ -1,10 +1,8 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
-    private static Ui ui = new Ui();
 
     /**
      * This function returns a Task object after parsing the data from the file
@@ -32,51 +30,55 @@ public class Parser {
      * @param tasks TaskList object
      * @return TaskList after adding the new task from the user input
      */
-    public static TaskList parseInput(String input, TaskList tasks) {
+    public static Pair parseInput(String input, TaskList tasks) {
         String[] inputSplit = input.split(" ");
         if (inputSplit.length < 2) {
-            ui.showInvalidCommandError();
-            return tasks;
+            return new Pair(tasks, "You have entered invalid command!");
         }
         Task task;
+        String message;
 
         switch (inputSplit[0]) {
         case "find":
             String keyword = inputSplit[1];
             TaskList result = tasks.findTask(keyword);
-            ui.printFoundTasks(result);
+            message = "Here are the matching tasks in your list:";
+            for (int i = 0; i < result.getSize(); i++) {
+                message += result.getTask(i).toString();
+            }
             break;
         case "done":
-            ui.printSetDone(tasks.setDone(Integer.valueOf(inputSplit[1]) - 1));
+            message = "Nice, I have set this task as done!" +
+                    tasks.setDone(Integer.valueOf(inputSplit[1]) - 1).toString();
             break;
         case "delete":
             task = tasks.deleteTask(Integer.valueOf(inputSplit[1]) - 1);
-            ui.printDeleteTask(task);
+            message = "Noted. I have deleted this task:" + task.toString();
             break;
         case "todo":
             String name = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
             task = new ToDos(false, name);
             tasks.addTask(task);
-            ui.printAddTask(task);
+            message = "Got it. I have added this task:" + task.toString();
             break;
         case "deadline":
             String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
             String[] deadlineSplit = deadlineName.split(" /by ");
             task = new Deadlines(false, deadlineSplit[0], deadlineSplit[1]);
             tasks.addTask(task);
-            ui.printAddTask(task);
+            message = "Got it. I have added this task:" + task.toString();
             break;
         case "event":
             String event = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
             String[] eventSplit = event.split(" /at ");
             task = new Events(false, eventSplit[0], eventSplit[1]);
             tasks.addTask(task);
-            ui.printAddTask(task);
+            message = "Got it. I have added this task:" + task.toString();
             break;
         default:
-            ui.showInvalidCommandError();
+            message = "You have entered invalid commands!";
         }
 
-        return tasks;
+        return new Pair(tasks, message);
     }
 }

@@ -21,6 +21,6 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         return "[D] " + super.toString() + "(by: " +
-                deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")\n";
     }
 }

@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class Storage {
     private String filePath;
-    private Ui ui = new Ui();
 
     public Storage(String filePath) {
 
