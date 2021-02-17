@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "ip.src.main.java.Launcher"
 }
 
 shadowJar {
