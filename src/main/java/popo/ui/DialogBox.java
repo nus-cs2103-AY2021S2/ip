@@ -32,7 +32,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -73,7 +73,7 @@ public class DialogBox extends HBox {
      * @return {@code DialogBox} representing a user command.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox();
         db.setUpComponents(text, img, COLOR_USER_DIALOG);
         return db;
     }
@@ -82,13 +82,13 @@ public class DialogBox extends HBox {
      * Creates a dialogue box with the given message text, the avatar icon,
      * and sets the background color according to whether the message is an error message.
      *
-     * @param text Text message.
-     * @param img  Avatar icon image.
+     * @param text       Text message.
+     * @param img        Avatar icon image.
      * @param isErrorMsg Boolean indicating whether the message text is an error message.
      * @return {@code DialogBox} representing a reply.
      */
     public static DialogBox getPopoDialog(String text, Image img, boolean isErrorMsg) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox();
         if (isErrorMsg) {
             db.setUpComponents(text, img, COLOR_ERROR_DIALOG);
         } else {

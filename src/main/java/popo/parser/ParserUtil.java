@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-import popo.commands.InvalidDescriptionException;
+import popo.commands.exceptions.InvalidDescriptionException;
 import popo.utils.InputDateTimeFormat;
 
 /**

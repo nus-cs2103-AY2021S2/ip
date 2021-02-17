@@ -1,4 +1,4 @@
-package popo.commands;
+package popo.commands.exceptions;
 
 /**
  * Signals an invalid description for the command.

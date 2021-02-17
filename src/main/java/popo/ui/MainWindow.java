@@ -17,12 +17,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import popo.commands.Command;
 import popo.commands.CommandResult;
-import popo.commands.InvalidCommandException;
-import popo.commands.InvalidDescriptionException;
-import popo.commands.NoDescriptionException;
+import popo.commands.exceptions.InvalidCommandException;
+import popo.commands.exceptions.InvalidDescriptionException;
+import popo.commands.exceptions.NoDescriptionException;
 import popo.parser.Parser;
 import popo.storage.Storage;
-import popo.storage.StorageException;
+import popo.storage.exceptions.StorageException;
 import popo.tasks.TaskList;
 
 /**
@@ -118,12 +118,6 @@ public class MainWindow extends VBox {
         userInput.clear();
     }
 
-    /**
-     * Executes the command and return a CommandResult instance.
-     *
-     * @param command User command.
-     * @return Result command.
-     */
     private CommandResult executeCommand(Command command) throws InvalidDescriptionException {
         try {
             command.setTaskList(taskList);

@@ -1,4 +1,4 @@
-package popo.storage;
+package popo.storage.exceptions;
 
 /**
  * Signals an error writing to file.

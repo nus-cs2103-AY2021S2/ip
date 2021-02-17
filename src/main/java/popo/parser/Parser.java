@@ -5,6 +5,7 @@ import static popo.utils.Messages.MESSAGE_ENTER_COMMAND;
 import static popo.utils.Messages.MESSAGE_FOLLOW_USAGE;
 import static popo.utils.Messages.MESSAGE_INDICATE_TASK;
 import static popo.utils.Messages.MESSAGE_INVALID_COMMAND;
+import static popo.utils.Messages.MESSAGE_INVALID_DURATION;
 import static popo.utils.Messages.MESSAGE_INVALID_SYNTAX;
 import static popo.utils.Messages.MESSAGE_INVALID_TASK_INDEX;
 import static popo.utils.Messages.MESSAGE_MISSING_SEARCH_WORD;
@@ -26,12 +27,12 @@ import popo.commands.DurationCommand;
 import popo.commands.EventCommand;
 import popo.commands.FindCommand;
 import popo.commands.HelpCommand;
-import popo.commands.InvalidCommandException;
-import popo.commands.InvalidDescriptionException;
 import popo.commands.ListCommand;
-import popo.commands.NoDescriptionException;
 import popo.commands.PeriodCommand;
 import popo.commands.ToDoCommand;
+import popo.commands.exceptions.InvalidCommandException;
+import popo.commands.exceptions.InvalidDescriptionException;
+import popo.commands.exceptions.NoDescriptionException;
 
 /**
  * Parses user input.
@@ -71,24 +72,24 @@ public class Parser {
             return parseArgumentsForToDo(arguments);
         case DeadlineCommand.COMMAND_WORD:
             return parseArgumentsForDeadline(arguments);
-        case PeriodCommand.COMMAND_WORD:
-            return parseArgumentsForPeriod(arguments);
         case EventCommand.COMMAND_WORD:
             return parseArgumentsForEvent(arguments);
         case DurationCommand.COMMAND_WORD:
             return parseArgumentsForDuration(arguments);
-        case ByeCommand.COMMAND_WORD:
-            return new ByeCommand();
+        case PeriodCommand.COMMAND_WORD:
+            return parseArgumentsForPeriod(arguments);
         case DoneCommand.COMMAND_WORD:
             return parseArgumentsForDone(arguments);
         case DeleteCommand.COMMAND_WORD:
             return parseArgumentsForDelete(arguments);
+        case FindCommand.COMMAND_WORD:
+            return parseArgumentsForFind(arguments);
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        case FindCommand.COMMAND_WORD:
-            return parseArgumentsForFind(arguments);
+        case ByeCommand.COMMAND_WORD:
+            return new ByeCommand();
         default:
             throw new InvalidCommandException(MESSAGE_INVALID_COMMAND);
         }
@@ -145,38 +146,6 @@ public class Parser {
             LocalTime deadlineTime = ParserUtil.parseTime(userInputTime);
             return new DeadlineCommand(deadlineTaskName, deadlineDate, deadlineTime);
         }
-    }
-
-    /**
-     * Parses the arguments for the period command.
-     *
-     * @param arguments User input arguments string.
-     * @return {@code PeriodCommand}.
-     * @throws NoDescriptionException      If the description of the task is empty.
-     * @throws InvalidDescriptionException If the formats of the dates are invalid.
-     */
-    private Command parseArgumentsForPeriod(String arguments) throws NoDescriptionException,
-            InvalidDescriptionException {
-        if (arguments.isBlank()) {
-            throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
-        }
-        if (!arguments.contains("/start") || !arguments.contains("/end")) {
-            throw new InvalidDescriptionException(MESSAGE_INVALID_SYNTAX + "\n"
-                    + MESSAGE_FOLLOW_USAGE + "\n"
-                    + PeriodCommand.MESSAGE_USAGE);
-        }
-        String[] periodInputArr = arguments.split("/start", 2);
-        assert periodInputArr.length == 2;
-        String periodTaskName = periodInputArr[0].strip();
-        String dates = periodInputArr[1].strip();
-
-        String[] datesArr = dates.split("/end", 2);
-        assert datesArr.length == 2;
-        String startDateString = datesArr[0].strip();
-        String endDateString = datesArr[1].strip();
-        LocalDate startDate = ParserUtil.parseDate(startDateString);
-        LocalDate endDate = ParserUtil.parseDate(endDateString);
-        return new PeriodCommand(periodTaskName, startDate, endDate);
     }
 
     /**
@@ -245,8 +214,40 @@ public class Parser {
             Duration duration = Duration.of(amount, unit);
             return new DurationCommand(durationTaskName, duration);
         } catch (NumberFormatException ex) {
-            throw new InvalidDescriptionException("Please enter a valid number.");
+            throw new InvalidDescriptionException(MESSAGE_INVALID_DURATION);
         }
+    }
+
+    /**
+     * Parses the arguments for the period command.
+     *
+     * @param arguments User input arguments string.
+     * @return {@code PeriodCommand}.
+     * @throws NoDescriptionException      If the description of the task is empty.
+     * @throws InvalidDescriptionException If the formats of the dates are invalid.
+     */
+    private Command parseArgumentsForPeriod(String arguments) throws NoDescriptionException,
+            InvalidDescriptionException {
+        if (arguments.isBlank()) {
+            throw new NoDescriptionException(MESSAGE_EMPTY_DESCRIPTION);
+        }
+        if (!arguments.contains("/start") || !arguments.contains("/end")) {
+            throw new InvalidDescriptionException(MESSAGE_INVALID_SYNTAX + "\n"
+                    + MESSAGE_FOLLOW_USAGE + "\n"
+                    + PeriodCommand.MESSAGE_USAGE);
+        }
+        String[] periodInputArr = arguments.split("/start", 2);
+        assert periodInputArr.length == 2;
+        String periodTaskName = periodInputArr[0].strip();
+        String dates = periodInputArr[1].strip();
+
+        String[] datesArr = dates.split("/end", 2);
+        assert datesArr.length == 2;
+        String startDateString = datesArr[0].strip();
+        String endDateString = datesArr[1].strip();
+        LocalDate startDate = ParserUtil.parseDate(startDateString);
+        LocalDate endDate = ParserUtil.parseDate(endDateString);
+        return new PeriodCommand(periodTaskName, startDate, endDate);
     }
 
     /**

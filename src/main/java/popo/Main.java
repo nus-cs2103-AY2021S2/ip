@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import popo.storage.InvalidStorageFilePathException;
 import popo.storage.Storage;
-import popo.storage.StorageException;
+import popo.storage.exceptions.InvalidStorageFilePathException;
+import popo.storage.exceptions.StorageException;
 import popo.tasks.TaskList;
 import popo.ui.Ui;
 
