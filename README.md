@@ -98,3 +98,10 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 <p align="center">
   <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/sort_task.PNG">
 </p>
+
+
+### Exit Application
+* Description: Ends the application.
+* Command: `exit`
+* Command Format: `exit`
+* Command Example: `exit`
