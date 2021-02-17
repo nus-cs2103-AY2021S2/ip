@@ -56,24 +56,16 @@ public class Rick {
                     storage.save(tasks);
                     break;
                 case DEADLINE:
-                    try {
-                        Deadline curr = parser.parseDeadlineCommand(input);
-                        tasks.addTask(curr);
-                        response += Gui.getMessageString("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
-                        storage.save(tasks);
-                    } catch (RickException error) {
-                        response += Gui.getErrorMessageString("The description of a deadline cannot be empty.");
-                    }
+                    Deadline newDeadline = parser.parseDeadlineCommand(input);
+                    tasks.addTask(newDeadline);
+                    response += Gui.getMessageString("Got it. I've added this task:\n  " + newDeadline + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                    storage.save(tasks);
                     break;
                 case EVENT:
-                    try {
-                        Event curr = parser.parseEventCommand(input);
-                        tasks.addTask(curr);
-                        response += Gui.getMessageString("Got it. I've added this task:\n  " + curr + "\nNow you have " + tasks.getSize() + " tasks in the list.");
-                        storage.save(tasks);
-                    } catch (RickException error) {
-                        response += Gui.getErrorMessageString("The description of an event cannot be empty.");
-                    }
+                    Event newEvent = parser.parseEventCommand(input);
+                    tasks.addTask(newEvent);
+                    response += Gui.getMessageString("Got it. I've added this task:\n  " + newEvent + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                    storage.save(tasks);
                     break;
                 case FIND:
                     try {
@@ -92,7 +84,7 @@ public class Rick {
                     break;
             }
         } catch(RickException error) {
-            response += Gui.getInputErrorString();
+            response += Gui.getErrorMessageString(error.getMessage());
         } catch(DateTimeParseException error) {
             response += Gui.getErrorMessageString("The date provided is invalid.");
         } catch (IndexOutOfBoundsException error) {
