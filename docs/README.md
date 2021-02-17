@@ -1,7 +1,5 @@
 
 # User Guide
-
-# About PAson 
 PAson is a to-do list chatbot that helps you manage your schedule in one place. Specially designed for greater productivity, managing your schedule is now just a few simple commands away.
 
 # Quick Start
