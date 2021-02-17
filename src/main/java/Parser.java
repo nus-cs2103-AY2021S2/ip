@@ -122,17 +122,27 @@ public class Parser {
     public String executeCommandFind(TaskList listOfTasks, String textInput) {
         String output = "";
         String textToFind = textInput.substring(5);
-        if (!textToFind.isBlank()) {
+        if (textToFind.isBlank()) {
+            output += "\t OOPS!!! The description of find cannot be empty.\n";
+            return output;
+        }
+        if (textToFind.length() < 3) {
             output += "\t Here are the matching tasks in your list:\n";
             int i = 1;
             for (Task task : listOfTasks) {
-                if (isPartialMatch(task, textToFind)) {
+                if (task.contains(textToFind)) {
                     output += "\t " + i + ". " + task + "\n";
                 }
                 i++;
             }
-        } else {
-            output += "\t OOPS!!! The description of find cannot be empty.\n";
+        }
+        output += "\t Here are the matching tasks in your list:\n";
+        int i = 1;
+        for (Task task : listOfTasks) {
+            if (isPartialMatch(task, textToFind)) {
+                output += "\t " + i + ". " + task + "\n";
+            }
+            i++;
         }
         return output;
     }
@@ -167,6 +177,10 @@ public class Parser {
         String output = "";
         try {
             textInput = textInput.substring(5);
+            if (textInput.isBlank()) {
+                output += "INVALID COMMAND!\n";
+                return output;
+            }
             Task task = new ToDo(textInput);
             listOfTasks.add(task);
             output += "\t Got it. I've added this task:\n";
@@ -221,23 +235,27 @@ public class Parser {
         try {
             textInput = textInput.substring(6);
             int index = textInput.indexOf("/from ");
-            if (index != -1) {
-                String dateInfo = textInput.substring(index + 6);
-                int index2 = dateInfo.indexOf("to ");
-                if (index2 != -1) {
-                    LocalDate startDate = LocalDate.parse(dateInfo.substring(0, index2 - 1));
-                    LocalDate endDate = LocalDate.parse(dateInfo.substring(index2 + 3));
-                    Task task = new Event(textInput.substring(0, index - 1), startDate, endDate);
-                    listOfTasks.add(task);
-                    output += "\t Got it. I've added this task:\n";
-                    output += "\t   " + task + "\n";
-                    output += "\t Now you have " + listOfTasks.size() + " tasks in the list.\n";
-                } else {
-                    output += "INVALID COMMAND!\n";
-                }
-            } else {
+            if (index == -1) {
                 output += "INVALID COMMAND!\n";
+                return output;
             }
+            String dateInfo = textInput.substring(index + 6);
+            int index2 = dateInfo.indexOf("to ");
+            if (index2 == -1) {
+                output += "INVALID COMMAND!\n";
+                return output;
+            }
+            LocalDate startDate = LocalDate.parse(dateInfo.substring(0, index2 - 1));
+            LocalDate endDate = LocalDate.parse(dateInfo.substring(index2 + 3));
+            if (endDate.isBefore(startDate)) {
+                output += "\t OOPS!!! The end date of an event cannot be earlier than the start date.\n";
+                return output;
+            }
+            Task task = new Event(textInput.substring(0, index - 1), startDate, endDate);
+            listOfTasks.add(task);
+            output += "\t Got it. I've added this task:\n";
+            output += "\t   " + task + "\n";
+            output += "\t Now you have " + listOfTasks.size() + " tasks in the list.\n";
         } catch (StringIndexOutOfBoundsException e) {
             output += "\t OOPS!!! The description of a event cannot be empty.\n";
         } catch (DateTimeParseException e) {
