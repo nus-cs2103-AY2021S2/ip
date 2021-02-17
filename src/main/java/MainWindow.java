@@ -1,6 +1,5 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -50,9 +49,16 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (input.equals("bye")) {
-            new Timer().schedule(new TimerTask() {
-                public void run () { Platform.exit(); }
-            }, 5000);
+            this.exit();
         }
+    }
+
+    private void exit() {
+        new Timer().schedule(new TimerTask() {
+            public void run () {
+                Platform.exit();
+                System.exit(0);
+            }
+        }, 5000);
     }
 }
