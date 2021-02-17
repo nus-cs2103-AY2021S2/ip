@@ -29,6 +29,8 @@ public class Main extends Application {
             stage.setTitle("Mr. Duke");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            scene.getStylesheets().add(
+                    Main.class.getResource("/view/Style.css").toExternalForm());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
