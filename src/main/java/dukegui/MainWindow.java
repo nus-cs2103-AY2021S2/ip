@@ -2,12 +2,11 @@ package dukegui;
 
 import dukebody.Duke;
 import javafx.fxml.FXML;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -115,12 +114,16 @@ public class MainWindow extends AnchorPane {
         hasRecentDukeOutput  = true;
     }
 
-
     /**
      * Changes the datetime format of the window dialog contents
      * @param formatExpression  an expression that represents the datetime format.
      */
     public void changeDateFormat (String formatExpression) {
         dateFormat = DateTimeFormatter.ofPattern(formatExpression);
+    }
+
+    public void exit () {
+        Platform.exit();
+        System.exit(0);
     }
 }

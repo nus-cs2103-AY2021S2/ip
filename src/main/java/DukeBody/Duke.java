@@ -97,6 +97,7 @@ public class Duke {
                 case "bye":
                     connection.updateTasks(username, tasks);
                     mainWindow.dukeOutput("bye hooman, come back soon!");
+                    mainWindow.exit();
                     break;
 
                 case "list":
