@@ -25,14 +25,12 @@ public class Storage {
         this.file = new File(filePath);
         if (!file.exists()) {
             File dataFile = new File("data");
-            if (dataFile.mkdir()) {
-                try {
-                    if (file.createNewFile()) {
-                        System.out.println("New save file created");
-                    }
-                } catch (IOException e) {
-                    System.out.println("Save file found");
+            try {
+                if (dataFile.mkdir() && file.createNewFile()) {
+                    System.out.println("New save file created");
                 }
+            } catch (IOException e) {
+                System.out.println("Error Occurred");
             }
         }
     }
@@ -85,36 +83,34 @@ public class Storage {
             String[] currArray = curr.split("\\|");
 
             switch (currArray[0]) {
-            case "T": {
-                ToDos currTask;
+            case "T":
+                ToDos currToDos;
                 if (currArray[1].equals("0")) {
-                    currTask = new ToDos(currArray[2]);
+                    currToDos = new ToDos(currArray[2]);
                 } else {
-                    currTask = new ToDos(currArray[2], true);
+                    currToDos = new ToDos(currArray[2], true);
                 }
-                list.add(currTask);
+                list.add(currToDos);
                 break;
-            }
-            case "D": {
-                Deadlines currTask;
+            case "D":
+                Deadlines currDeadlines;
                 if (currArray[1].equals("0")) {
-                    currTask = new Deadlines(currArray[2], LocalDate.parse(currArray[3]));
+                    currDeadlines = new Deadlines(currArray[2], LocalDate.parse(currArray[3]));
                 } else {
-                    currTask = new Deadlines(currArray[2], LocalDate.parse(currArray[3]), true);
+                    currDeadlines = new Deadlines(currArray[2], LocalDate.parse(currArray[3]), true);
                 }
-                list.add(currTask);
+                list.add(currDeadlines);
                 break;
-            }
-            case "E": {
-                Events currTask;
+
+            case "E":
+                Events currEvents;
                 if (currArray[1].equals("0")) {
-                    currTask = new Events(currArray[2], LocalDate.parse(currArray[3]));
+                    currEvents = new Events(currArray[2], LocalDate.parse(currArray[3]));
                 } else {
-                    currTask = new Events(currArray[2], LocalDate.parse(currArray[3]), true);
+                    currEvents = new Events(currArray[2], LocalDate.parse(currArray[3]), true);
                 }
-                list.add(currTask);
+                list.add(currEvents);
                 break;
-            }
             }
         }
         return list;
