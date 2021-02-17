@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import java.util.LinkedList;
 /**
  * It is a command object extends from Command for the Duke program.
- * When the parser calls it, it will receive the requests from the users
+ * When the parser calls it, it receives the requests from the users
  * during the running of the program and starts to
  * delete the tasks by task index.
  */
@@ -22,8 +22,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * The execution after parsing, it will delete the task based on the index.
-     * If the input is not correct, it will raise an exception.
+     * The execution after parsing, it deletes the task based on the index.
+     * If the input is not correct, it raises an exception.
      *
      * @param taskList The current taskList in the program.
      * @return The Duke robot massage to the GUI.

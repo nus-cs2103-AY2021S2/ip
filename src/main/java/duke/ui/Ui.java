@@ -21,14 +21,16 @@ public class Ui {
         System.out.println("*************************************************");
         return message;
     }
+
     /**
-     * Print out the welcome message when the program starts.
+     * Prints out the welcome message when the program starts.
      */
     public void welcome() {
         display("Hello! I am Duke!\nWhat can I do for you?");
     }
+
     /**
-     * Take the message from the program and then transfer into the designed UI format.
+     * Takes the message from the program and then transfer into the designed UI format.
      *
      * @param botMessage The string that the robot (program) wants to show.
      */

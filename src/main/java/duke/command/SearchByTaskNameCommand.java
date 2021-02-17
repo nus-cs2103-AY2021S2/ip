@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 /**
  * It is a command object extends from Command for the Duke program.
- * When the parser calls it, it will receive the requests from the users
+ * When the parser calls it, it receives the requests from the users
  * during the running of the program and starts to search the task that matches the name
  * user asks.
  */
@@ -24,8 +24,8 @@ public class SearchByTaskNameCommand extends Command {
     }
 
     /**
-     * The execution after parsing, it will search relevant tasks based on the task name.
-     * If the input is not correct, it will raise an exception.
+     * The execution after parsing, it searches relevant tasks based on the task name.
+     * If the input is not correct, it raises an exception.
      *
      * @param taskList The current taskList in the program.
      * @return The Duke robot massage to the GUI.

@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 /**
  * It is a command object extends from Command for the Duke program.
- * When the parser calls it, it will receive the requests from the users
+ * When the parser calls it, it receives the requests from the users
  * during the running of the program and starts to search the task that matches the time
  * user asks.
  */
@@ -29,8 +29,8 @@ public class SearchByTimeCommand extends Command {
 
 
     /**
-     * The execution after parsing, it will search relevant tasks based on the time.
-     * If the input is not correct, it will raise an exception.
+     * The execution after parsing, it searches relevant tasks based on the time.
+     * If the input is not correct, it raises an exception.
      *
      * @param taskList The current taskList in the program.
      * @return The Duke robot massage to the GUI.
@@ -41,7 +41,6 @@ public class SearchByTimeCommand extends Command {
         String[] info;
         LocalDateTime time;
 
-        // prevent input mistakes.
         try {
             info = userMessage.split(" ", 3);
             time = LocalDateTime.parse(info[2], df);
@@ -54,7 +53,6 @@ public class SearchByTimeCommand extends Command {
         builder.append("Here are the search results: \n");
         int numOfTasksFound = 0;
 
-        // Search by loop
         for (Task single : tasks) {
             if (single instanceof ToDo) {
                 continue;

@@ -18,7 +18,7 @@ public class ListByPriorityCommand extends Command {
     }
 
     /**
-     * The execution after parsing, list out all the current tasks and sorted by priority.
+     * The execution after parsing, it lists out all the current tasks and sorted by priority.
      *
      * @param taskList The current taskList in the program.
      * @return The Duke robot massage to the GUI.

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.ui.MainWindow;
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -15,6 +17,9 @@ public class Main extends Application {
 
     private Duke duke = new Duke("./data/duke.txt", "./data");
 
+    /**
+     * Starter for JavaFx.
+     */
     @Override
     public void start(Stage stage) {
         try {

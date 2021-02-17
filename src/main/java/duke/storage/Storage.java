@@ -34,7 +34,7 @@ public class Storage {
     }
 
     /**
-     * The function will read the txt file based on the file path and
+     * The function reads the txt file based on the file path and
      * directory path and then returns the taskList.
      *
      * @param taskList The taskList that will be used in the program, usually an empty list
@@ -96,7 +96,7 @@ public class Storage {
 
 
     /**
-     * The function will save the tasks immediately after the program terminates into the txt file into the
+     * The function saves the tasks immediately after the program terminates into the txt file into the
      * path that the user specified.
      *
      * @param taskList The taskList that will be used in the program.

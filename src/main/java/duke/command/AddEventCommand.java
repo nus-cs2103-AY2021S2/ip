@@ -6,7 +6,7 @@ import duke.task.TaskList;
 
 /**
  * It is a command object extends from Command for the Duke program.
- * When the parser calls it, it will receive the requests from the users
+ * When the parser calls it, it receives the requests from the users
  * during the running of the program and starts add new events to the task list.
  */
 public class AddEventCommand extends Command {
@@ -21,8 +21,8 @@ public class AddEventCommand extends Command {
     }
 
     /**
-     * The execution after parsing, it will add a event object into the tasks.
-     * If the input is not correct, it will raise an exception.
+     * The execution after parsing, it adds a event object into the tasks.
+     * If the input is not correct, it raises an exception.
      *
      * @param taskList The current taskList in the program.
      * @return The Duke robot massage to the GUI.

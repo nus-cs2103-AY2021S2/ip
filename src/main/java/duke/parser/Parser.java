@@ -22,7 +22,7 @@ import duke.exception.DukeException;
  */
 public class Parser {
     /**
-     * The function will take the user message and then parse it to return the command objects
+     * The function takes the user message and then parse it to return the command objects
      * for further procedures.
      *
      * @param userMessage The message the user inputs.

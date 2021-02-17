@@ -3,7 +3,7 @@ import duke.task.TaskList;
 
 /**
  * It is a command object extends from Command for the Duke program.
- * When the parser calls it, it will receive the requests from the users
+ * When the parser calls it, it receives the requests from the users
  * during the running of the program and change the status of the status
  * of command as wants to exit, and hence terminates the program.
  */
@@ -19,7 +19,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * The execution after parsing, it will change the static variable of all Command
+     * The execution after parsing, it changes the static variable of all Command
      * object into exit = true, which means the user wants to exit.
      *
      * @param taskList The current taskList in the program.

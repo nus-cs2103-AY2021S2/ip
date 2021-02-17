@@ -14,8 +14,8 @@ class DeleteCommandTest {
         AddEventCommand c1 = new AddEventCommand("event go to school /at 2020-01-01 19:00");
         DeleteCommand c2 = new DeleteCommand("delete 1");
         try{
-            c1.execute(taskList,ui);
-            c2.execute(taskList,ui);
+            c1.execute(taskList);
+            c2.execute(taskList);
         }
         catch (DukeException e){
             System.out.println(e.getMessage());
@@ -31,8 +31,8 @@ class DeleteCommandTest {
         AddEventCommand c1 = new AddEventCommand("event go to school /at 2020-01-01 19:00");
         DeleteCommand c2 = new DeleteCommand("delete 2");
         try{
-            c1.execute(taskList,ui);
-            c2.execute(taskList,ui);
+            c1.execute(taskList);
+            c2.execute(taskList);
         }
         catch (DukeException e){
             ui.display(e.getMessage());

@@ -69,7 +69,7 @@ public class Event extends Task {
 
 
     /**
-     * Get the event time as a LocalDateTime object.
+     * Gets the event time as a LocalDateTime object.
      * @return the the event time as a LocalDateTime object.
      */
     public LocalDateTime getAt() {
@@ -78,7 +78,7 @@ public class Event extends Task {
 
 
     /**
-     * Get the task name for a event object.
+     * Gets the task name for a event object.
      * @return A String object that represent the task name, including information
      * about the task type, name and event time.
      */

@@ -34,10 +34,20 @@ public class Duke {
         taskList = dukeReadFromStorage();
     }
 
+    /**
+     * A getter for Duke task list.
+     *
+     * @return the task list stored in a duke object.
+     */
     public TaskList getTaskList() {
         return taskList;
     }
 
+    /**
+     * Reads txt file stored in the disk to restore the task list last time.
+     *
+     * @return the task list stored in the txt file.
+     */
     private TaskList dukeReadFromStorage() {
         try {
             TaskList taskListFromStorage = storage.readTasks(new TaskList());
@@ -48,6 +58,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes when user type in 'bye', duke will store the current tasks into the txt file.
+     */
     public void dukeSaveToStorage() {
         try {
             storage.saveTasks(taskList);
@@ -56,9 +69,13 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Takes in the user input and ask duke to handle the user input. The result from duke will be sent back.
+     *
+     * @param input The message that the user types in.
+     * @return The message that Duke sends to the user.
+     */
     public String getResponse(String input) {
-        TaskList taskList = this.getTaskList();
         try {
             Command c = Parser.parse(input);
             String botMessage = c.execute(taskList);

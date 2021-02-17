@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 
@@ -21,6 +21,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for a new dialog box.
+     */
     public DialogBox(String s, Image iv) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/style/DialogBox.fxml"));
@@ -46,10 +49,16 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Get the user dialog box in correct format.
+     */
     public static DialogBox getUserDialog(String l, Image iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Get Duke dialog box in correct format.
+     */
     public static DialogBox getDukeDialog(String l, Image iv) {
         var db = new DialogBox(l, iv);
         db.flip();

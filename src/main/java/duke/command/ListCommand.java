@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * The execution after parsing, list out all the current tasks.
+     * The execution after parsing, it lists out all the current tasks.
      *
      * @param taskList The current taskList in the program.
      * @return The Duke robot massage to the GUI.

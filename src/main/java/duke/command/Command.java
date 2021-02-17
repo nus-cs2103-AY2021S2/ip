@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 /**
  * It is a super class that named Command for the Duke program.
- * When the parser calls it, it will receive the requests from the users
+ * When the parser calls it, it receives the requests from the users
  * during the running of the program and starts to call its subclasses for
  * execution.
  */

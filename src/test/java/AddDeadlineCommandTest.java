@@ -16,7 +16,7 @@ class AddDeadlineCommandTest {
         Ui ui = new Ui();
         AddDeadlineCommand c1 = new AddDeadlineCommand("deadline go to school /by 2020-01-01 19:00");
         try{
-            c1.execute(taskList,ui);
+            c1.execute(taskList);
         }
         catch (DukeException e){
             System.out.println(e.getMessage());
@@ -34,7 +34,7 @@ class AddDeadlineCommandTest {
         AddDeadlineCommand c2 = new AddDeadlineCommand("deadline go to school /by 2020-01-1 19:02");
 
         try{
-            c2.execute(taskList,ui);
+            c2.execute(taskList);
         }
         catch (DukeException e){
             assertEquals("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM",e.getMessage());

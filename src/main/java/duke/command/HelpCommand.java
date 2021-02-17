@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * The execution after parsing, it will print out the command guide for the user.
+     * The execution after parsing, it prints out the command guide for the user.
      *
      * @param taskList The current taskList in the program. (This is to follow the execute method in Command Class, however in this method,
      *                  taskList is useless.
@@ -44,8 +44,10 @@ public class HelpCommand extends Command {
             String searchCommandHelp = "\n\n 6. To search a task: \n\n6.1 type in 'find {task name fragment}' to search for the task whose name contains the fragment specified."
                     + "\n\n 6.2 type in 'search time {YYYY-MM-DD HH:MM}' search for the task whose time match the input.\n";
 
+            String byeCommandHelp = "\n\n 7. To exit the program: \n\n7.1 type in 'bye'.\n";
+
             String botMessage = start + addCommandHelp + priorityCommandHelp + listCommandHelp
-                    + doneCommandHelp + deleteCommandHelp + searchCommandHelp;
+                    + doneCommandHelp + deleteCommandHelp + searchCommandHelp + byeCommandHelp;
             return botMessage;
 
         } catch (Exception e) {

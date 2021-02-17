@@ -22,8 +22,8 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * The execution after parsing, it will mark the task as done based on the index.
-     * If the input is not correct, it will raise an exception.
+     * The execution after parsing, it marks the task as done based on the index.
+     * If the input is not correct, it raises an exception.
      *
      * @param taskList The current taskList in the program.
      * @return The Duke robot massage to the GUI.

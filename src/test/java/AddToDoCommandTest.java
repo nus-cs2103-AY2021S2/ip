@@ -17,7 +17,7 @@ class AddToDoCommandTest {
         Ui ui = new Ui();
         AddToDoCommand c1 = new AddToDoCommand("todo go to school");
         try{
-            c1.execute(taskList,ui);
+            c1.execute(taskList);
         }
         catch (DukeException e){
             System.out.println(e.getMessage());

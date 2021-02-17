@@ -26,7 +26,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Get the task name for a todo object.
+     * Gets the task name for a todo object.
      * @return A String object that represent the task name, including information
      * about the task type and task name.
      */

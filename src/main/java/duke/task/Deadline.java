@@ -66,7 +66,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Get the deadline time as a LocalDateTime object.
+     * Gets the deadline time as a LocalDateTime object.
      * @return the the deadline time as a LocalDateTime object.
      */
     public LocalDateTime getBy() {
@@ -75,7 +75,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Get the task name for a deadline object.
+     * Gets the task name for a deadline object.
      * @return A String object that represent the task name, including information
      * about the task type, name and deadline time.
      */

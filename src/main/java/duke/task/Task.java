@@ -117,7 +117,7 @@ public class Task implements Comparable<Task> {
 
 
     /**
-     * Set the task as done.
+     * Sets the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
