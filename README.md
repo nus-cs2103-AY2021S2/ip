@@ -1,30 +1,119 @@
-This is a greenfield Java project. It's named HAHA. Given below are instructions on how to use it.
 
-## Setting up in Intellij
+# Haha
+[![CI Status](https://github.com/tlylt/ip/workflows/Java%20CI/badge.svg)](https://github.com/tlylt/ip/actions)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+![Haha Image](docs/images/OverallDemo.gif)
+## Features 
+- Add a number of tasks (Todos, Events & Deadlines)
+- Display status of saved tasks
+- Mark tasks as completed
+- Delete selected task
+- Find task by keyword
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Haha.java` file, right-click it, and choose `Run Haha.main()`. If the setup is correct, you should see something like the below:
-```
-Hello from
- _    _          _    _
-| |  | |   /\   | |  | |   /\
-| |__| |  /  \  | |__| |  /  \
-|  __  | / /\ \ |  __  | / /\ \
-| |  | |/ ____ \| |  | |/ ____ \
-|_|  |_/_/    \_\_|  |_/_/    \_\
-____________________________________________________________
-Dude, I'm HAHA
-What can I do for you?
-(Oh when you are done, say bye)
-____________________________________________________________
-```
+
+## Usage
+
+### `todo XXX` - Add a Todo
+
+A new todo with description(XXX) will be added.
+
+Duplicated todos will not be allowed and will result in an error warning.
+
+Example of usage: 
+
+`todo homework`
+
+Sample screenshot:
+
+![Todo Image](docs/images/todoDemo.png)
+
+### `deadline XXX /by YYY ZZZ` - Add a Deadline
+
+A new deadline with description(XXX), date(YYY) & time(ZZZ) will be added.
+
+Duplicated deadlines will not be allowed and will result in an error warning.
+
+Example of usage: 
+
+`deadline housework /by 2020-02-15 18:00`
+
+Sample screenshot:
+
+![Deadline Image](docs/images/deadlineDemo.png)
+
+### `event XXX /at YYY ZZZ` - Add an Event
+
+A new event with description(XXX), date(YYY) & time(ZZZ) will be added.
+
+Duplicated events will not be allowed and will result in an error warning.
+
+Example of usage: 
+
+`event concert /at 2020-02-16 20:00`
+
+Sample screenshot:
+
+![Event Image](docs/images/eventDemo.png)
+
+### `list` - List all saved tasks
+
+Display all saved tasks in a list.
+
+Example of usage: 
+
+`list`
+
+Sample screenshot:
+
+![List Image](docs/images/listDemo.png)
+
+
+### `done XXX` - Mark a task as completed
+
+The task at the index(XXX) will be marked as done.
+
+Index starts from 1 and out of range indexes will result in an error warning.
+
+Example of usage: 
+
+`done 1`
+
+Sample screenshot:
+
+![Done Image](docs/images/DoneDemo.png)
+
+### `delete XXX` - Delete a task
+
+The task at the index(XXX) will be deleted.
+
+Index starts from 1 and out of range indexes will result in an error warning.
+
+Example of usage: 
+
+`delete 1`
+
+Sample screenshot:
+
+![Delete Image](docs/images/deleteDemo.png)
+
+### `find XXX` - Find tasks containing XXX in its description
+
+Tasks with descriptions including the specified keyword(XXX) will be listed.
+
+When there are no related tasks, Haha will respond appropriately.
+
+Example of usage: 
+
+`find concert`
+
+Sample screenshot:
+
+![Find Image](docs/images/findDemo.png)
+
+### `bye` - Exit application
+
+The application will exit gracefully.
+
+Example of usage: 
+
+`bye`
