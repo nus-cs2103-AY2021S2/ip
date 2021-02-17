@@ -82,12 +82,15 @@ public class TaskList {
                         new TimeTask((Events) this.getTasksList().get(i)));
             }
         }
-        Collections.sort(sortedTasks);
+        Collections.sort(sortedTasks, Collections.reverseOrder());
+        //Collections.sort(sortedTasks);
 
         for (int i = 0; i < sortedTasks.size(); i++) {
             chronoTasks.add(sortedTasks.get(i).getTask());
         }
-        chronoTasks.addAll(nonSortedTasks);
+        chronoTasks.addAll(0,nonSortedTasks);
+        //chronoTasks.addAll(nonSortedTasks);
+
         return new TaskList(chronoTasks);
 
     }
