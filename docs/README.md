@@ -47,6 +47,7 @@ There are three different tasks, namely, todo, event and deadline.
 Notes:
 * Commands are case-insensitive and the program only accepts commands typed in lower alphabets. 
 * Users should add ONE task at a time. 
+* There should not be two task with the same task description. 
 
 #### Adding a todo task: `todo`
 Todo command add a todo task which requires task description and no other field as input.
