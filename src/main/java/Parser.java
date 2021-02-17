@@ -50,7 +50,7 @@ public class Parser {
             return parseBye();
 
         case "help":
-            return parseHelp();
+            return parseHelp(cmdWithArgs);
 
         default:
             return "Notice. Unfamiliar command detected. Enter 'help' to view commands.\n";
@@ -68,13 +68,12 @@ public class Parser {
 
     public String parseTodo(String[] cmdWithArgs) {
         StringBuilder outputString = new StringBuilder();
-        String args = cmdWithArgs[1];
 
-        if (args.strip().equals("")) {
+        if (cmdWithArgs.length < 2 || cmdWithArgs[1].strip().equals("")) {
             outputString.append("Warning: ToDo entry format incorrect.\n")
                     .append("Try 'todo <task name>'");
         } else {
-            ToDo nextToDo = new ToDo(args.strip());
+            ToDo nextToDo = new ToDo(cmdWithArgs[1].strip());
             taskList.add(nextToDo);
             outputString.append("Acknowledged. Adding task:\n").append(nextToDo).append("\n")
                     .append("Notice. You now have [").append(taskList.size()).append("] task(s).\n");
@@ -85,16 +84,16 @@ public class Parser {
 
     public String parseDeadline(String[] cmdWithArgs) {
         StringBuilder outputString = new StringBuilder();
-        String[] deadLineArgs = cmdWithArgs[1].split(" /by ");
 
         try {
+            String[] deadLineArgs = cmdWithArgs[1].split(" /by ");
             Deadline nextDeadLine = new Deadline(deadLineArgs[0].strip(), deadLineArgs[1]);
             taskList.add(nextDeadLine);
             outputString.append("Acknowledged. Adding deadline:\n").append(nextDeadLine).append("\n")
                     .append("Notice. You now have [").append(taskList.size()).append("] task(s).\n");
         } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             outputString.append("Warning: Deadline entry format incorrect.\n")
-                    .append("Try 'deadline <deadline title> /by <deadline date and time>'");
+                    .append("Try 'deadline <deadline title> /by <yyyy-mm-dd hhmm>'");
         }
 
         return outputString.toString();
@@ -102,16 +101,16 @@ public class Parser {
 
     public String parseEvent(String[] cmdWithArgs) {
         StringBuilder outputString = new StringBuilder();
-        String[] eventArgs = cmdWithArgs[1].split(" /at ");
 
         try {
+            String[] eventArgs = cmdWithArgs[1].split(" /at ");
             Event nextEvent = new Event(eventArgs[0].strip(), eventArgs[1]);
             taskList.add(nextEvent);
             outputString.append("Acknowledged. Adding event:\n").append(nextEvent).append("\n")
                     .append("Notice. You now have [").append(taskList.size()).append("] task(s).\n");
         } catch (IndexOutOfBoundsException e) {
             outputString.append("Warning: Event entry format incorrect.\n")
-                    .append("Try 'event <event title> /at <event date and time>'");
+                    .append("Try 'event <event title> /at <yyyy-mm-dd hhmm>'");
         }
 
         return outputString.toString();
@@ -155,6 +154,11 @@ public class Parser {
     public String parseFind(String[] cmdWithArgs) {
         StringBuilder outputString = new StringBuilder();
 
+        if (cmdWithArgs.length < 2) {
+            outputString.append("Warning: find command format incorrect. \n ")
+                    .append("Try 'find <keyword>'");
+        }
+
         String searchString = cmdWithArgs[1].strip();
         outputString.append("Understood. The following tasks were found: \n");
         int j = 1;
@@ -182,16 +186,60 @@ public class Parser {
         return outputString.toString();
     }
 
-    public String parseHelp() {
+    public String parseHelp(String[] cmdWithArgs) {
         StringBuilder outputString = new StringBuilder();
-        outputString.append("list: lists tasks | ")
-                .append("todo: adds new todo task | ")
-                .append("deadline: adds new deadline | ")
-                .append("event: adds new event | ")
-                .append("done: marks task as done | ")
-                .append("delete: deletes task | ")
-                .append("find: finds tasks | ")
-                .append("bye: tells Sage to go away\n");
+        if (cmdWithArgs.length < 2) {
+            outputString.append("Understood. Listing available commands:\n")
+                    .append("list | todo | deadline | event | done | delete | find | bye\n")
+                    .append("Try 'help <command>' to get more information");
+        } else {
+            switch (cmdWithArgs[1]) {
+            case "list":
+                outputString.append("list: lists tasks\n")
+                        .append("Command format: 'list'");
+                break;
+
+            case "todo":
+                outputString.append("todo: adds new todo task\n")
+                        .append("Command format: 'todo <task name>'");
+                break;
+
+            case "deadline":
+                outputString.append("deadline: adds new deadline\n")
+                        .append("Command format: 'deadline <deadline title> /by <yyyy-mm-dd hhmm>'");
+                break;
+
+            case "event":
+                outputString.append("event: adds new event\n")
+                        .append("Command format: 'event <event title> /at <yyyy-mm-dd hhmm>'");
+                break;
+
+            case "done":
+                outputString.append("done: marks task as done\n")
+                        .append("Command format: 'done <index>'");
+                break;
+
+            case "delete":
+                outputString.append("delete: deletes task\n")
+                        .append("Command format: 'delete <index>'");
+                break;
+
+            case "find":
+                outputString.append("find: finds tasks\n")
+                        .append("Command format: 'find <keyword>'");
+                break;
+
+            case "bye":
+                outputString.append("bye: tells Sage to go away\n")
+                        .append("Command format: 'bye'");
+                break;
+
+            default:
+                outputString.append("Notice. Unknown command detected.\n")
+                        .append("Try 'help' to see available commands.");
+            }
+        }
+
         return outputString.toString();
     }
 }
