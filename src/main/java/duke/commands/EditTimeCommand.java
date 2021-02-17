@@ -25,9 +25,13 @@ public class EditTimeCommand extends Command {
      */
     @Override
     public String execute(TaskList list) {
-        Task curr = list.getTask(taskNum - 1);
-        assert curr instanceof Deadline || curr instanceof Event;
-        curr.editTime(this.newTime);
-        return ui.printTimeEdit(curr, this.taskNum);
+        try {
+            Task curr = list.getTask(taskNum - 1);
+            assert curr instanceof Deadline || curr instanceof Event;
+            curr.editTime(this.newTime);
+            return ui.printTimeEdit(curr, this.taskNum);
+        } catch (IndexOutOfBoundsException e) {
+            return ui.printIndexOutOfBoundError();
+        }
     }
 }

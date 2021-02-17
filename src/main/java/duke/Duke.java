@@ -1,6 +1,5 @@
 package duke;
 
-import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.tasks.TaskList;
 
@@ -25,7 +24,12 @@ public class Duke {
         Parser parser = new Parser();
         Command command = parser.parse(input);
         String response = command.execute(taskList);
+        storage.writeFile(taskList);
         return response;
+    }
+
+    public String getWelcomeText() {
+        return ui.printWelcomeText();
     }
 
 }

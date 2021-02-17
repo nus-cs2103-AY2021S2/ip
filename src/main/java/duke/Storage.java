@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exceptions.FileIoException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -29,7 +28,7 @@ public class Storage {
      * Storage constructor
      *
      * @param path Filepath of .txt file to save tasks in
-     * @throws FileIoException If Duke is unable to read the file
+     * @throws IOException If Duke is unable to read the file
      */
     public Storage(String path) {
         this.path = path;
@@ -45,7 +44,7 @@ public class Storage {
      * Loads saved tasks
      *
      * @return ArrayList of saved tasks
-     * @throws FileIoException If Duke is unable to read the file
+     * @throws FileNotFoundException If Duke is unable to read the file
      */
     public ArrayList<Task> getTasks() {
         ArrayList<Task> list = new ArrayList<>();

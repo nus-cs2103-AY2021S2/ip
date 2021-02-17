@@ -2,8 +2,7 @@ package duke;
 
 import java.util.Scanner;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
+import duke.tasks.*;
 
 /**
  * Ui class to manage user input and Duke output
@@ -21,11 +20,40 @@ public class Ui {
     }
 
     /**
-     * Prints welcome message
+     *  welcome message
      */
     public String printWelcomeText() {
         return DIVIDER + SPACE + "Konichiwa~ Watashi wa Duke desu! \n" + SPACE
-                + "What can I do for you today?\n" + DIVIDER;
+                + SPACE + "What can I do for you today?\n"
+                + DIVIDER;
+    }
+
+    public String printHelpMessage() {
+        return DIVIDER + SPACE + "How to add tasks to the list:\n"
+                + SPACE + "For Todo, type \n"
+                + SPACE + "'todo <task name>'\n"
+                + SPACE + "For Deadline, type \n"
+                + SPACE + "'deadline <task name> /by: <YYYY-MM-DD>'\n"
+                + SPACE + "For Event, type\n"
+                + SPACE + "'event <task name> /at: <YYYY-MM-DD>'\n"
+                + SPACE + "\n"
+                + SPACE + "How to edit tasks in list:\n"
+                + SPACE + "Type 'edit <task number> /name <new name>'\n"
+                + SPACE + "and I will change the name of that task\n"
+                + SPACE + "Type 'edit <task number> /time <new time>'\n"
+                + SPACE + "and I will change the time of that task\n"
+                + SPACE + "when applicable\n"
+                + SPACE + "\n"
+                + SPACE + "Type 'done <task number>'\n"
+                + SPACE + "and I will mark it as done!\n"
+                + SPACE + "Type 'find <keyword>'\n"
+                + SPACE + "and I will return all search results\n"
+                + SPACE + "Type 'list'\n"
+                + SPACE + "and I will return list of tasks\n"
+                + SPACE + "Type 'delete <task number>'\n"
+                + SPACE + "and I will delete that task\n"
+                + SPACE + "Type 'bye' to exit"
+                + DIVIDER;
     }
 
     /**
@@ -60,15 +88,6 @@ public class Ui {
 
         resultString = resultString + DIVIDER;
         return resultString;
-    }
-
-    /**
-     * Prints given text in output format
-     *
-     * @param text Given text
-     */
-    public String printText(String text) {
-        return DIVIDER + SPACE + text + "\n" + DIVIDER;
     }
 
     /**
@@ -113,7 +132,7 @@ public class Ui {
         if (taskList.size() == 0) {
             resultString = resultString + SPACE + "There are no matching results D:\n" + DIVIDER;
         } else {
-            resultString = resultString + SPACE + "Hai~ The search results are are: \n"
+            resultString = resultString + SPACE + "Hai~ The search results are: \n"
                     + printOnlyList(taskList) + DIVIDER;
         }
         return resultString;
@@ -121,23 +140,44 @@ public class Ui {
     }
     public String printNameEdit(Task task, int index) {
         String resultString = DIVIDER + SPACE + "Done! Name of task number "
-                + index + " has been changed to " + task.getName() + "\n" + DIVIDER;
+                + index + " has been changed to " + task.getName() + ".\n" + DIVIDER;
         return resultString;
     }
 
     public String printTimeEdit(Task task, int index) {
-        String resultString = DIVIDER + SPACE + "Done! Time of task number "
-                + index + " has been changed to " + task.getTime() + "\n" + DIVIDER;
-        return resultString;
+        if (task instanceof Todo) {
+            String resultString = DIVIDER + SPACE + "Sorry! " + task.getTime() + " \n"
+                    + SPACE + "Try again pwease?\n"
+                    + SPACE + "Type 'help' for help! ;)"
+                    + DIVIDER;
+            return resultString;
+        } else if (task instanceof Deadline || task instanceof Event) {
+            String resultString = DIVIDER + SPACE + "Done! Time of task number "
+                    + index + " has been changed to " + task.getTime() + ".\n" + DIVIDER;
+            return resultString;
+        } else {
+            return printUnknownInputError();
+        }
     }
 
     /**
      * Prints error when unable to parse user input into known command
      */
-    public String printUnknowInputError() {
-        return DIVIDER + SPACE + "Sorry! I do not understand what you just said. Try again pwease?"
+    public String printUnknownInputError() {
+        return DIVIDER + SPACE + "Sorry! I do not understand what you just said.\n"
+                + SPACE + "Try again pwease?\n"
+                + SPACE + "Type 'help' for help! ;)"
                 + DIVIDER;
     }
+
+    public String printIndexOutOfBoundError() {
+        return DIVIDER + SPACE + "Sorry! The task number seems to be incorrect!\n"
+                + SPACE + "Try again pwease?\n"
+                + SPACE + "Type 'help' for help! ;)"
+                + DIVIDER;
+    }
+
+
 
     /**
      * Gets next line of user input
@@ -145,7 +185,7 @@ public class Ui {
      * @return User input
      */
     public String getNextCommand() {
-        return sc.nextLine();
+        return sc.nextLine().strip();
     }
 
     /**
@@ -157,11 +197,5 @@ public class Ui {
         return sc.hasNext();
     }
 
-    /**
-     * Prints error if saved .txt file is unable to load
-     */
-    public void showLoadingError() {
-        System.out.println("Ehhh-- There is something wrong with the file!");
-    }
 
 }

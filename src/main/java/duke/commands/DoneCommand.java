@@ -26,7 +26,11 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList list) {
-        Task curr = list.markCompleted(taskNum - 1);
-        return ui.printCompletedMsg(curr);
+        try {
+            Task curr = list.markCompleted(taskNum - 1);
+            return ui.printCompletedMsg(curr);
+        } catch (IndexOutOfBoundsException e) {
+            return ui.printIndexOutOfBoundError();
+        }
     }
 }

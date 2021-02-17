@@ -26,8 +26,12 @@ public class EditNameCommand extends Command {
      */
     @Override
     public String execute(TaskList list) {
-        Task curr = list.getTask(taskNum - 1);
-        curr.editName(this.newName);
-        return ui.printNameEdit(curr, this.taskNum);
+        try {
+            Task curr = list.getTask(taskNum - 1);
+            curr.editName(this.newName);
+            return ui.printNameEdit(curr, this.taskNum);
+        } catch (IndexOutOfBoundsException e) {
+            return ui.printIndexOutOfBoundError();
+        }
     }
 }
