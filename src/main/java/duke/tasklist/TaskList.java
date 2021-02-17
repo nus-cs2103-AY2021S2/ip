@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -113,8 +114,8 @@ public class TaskList {
             for (int i = 0; i < taskList.size(); i++) {
                 allTask = allTask + "\n" + ui.displayTask(i, taskList.get(i));
             }
-        }else {
-            allTask = ui.DisplayNoTaskMessage();
+        } else {
+            allTask = ui.displayNoTaskMessage();
         }
         return allTask;
     }
@@ -124,10 +125,20 @@ public class TaskList {
      * @param index position of task in the task list
      * @return
      */
-    public String markAsDone(int index) {
-        taskArraylist.get(index).setCompleted();
-        taskArraylist.get(index).setCompleted();
-        return ui.displayDoneTaskMessage(taskArraylist.get(index));
+    public String markAsDone(int index) throws DukeException {
+
+        if (index < 0) {
+            throw new DukeException(UI.displayInvalidTaskIndex());
+        } else if (taskArraylist.isEmpty() || taskArraylist.size() <= index) {
+            throw new DukeException(UI.displayNoTaskMessage());
+        } else {
+            System.out.println(taskArraylist.get(index).getStatus());
+            if(taskArraylist.get(index).getStatus().equals("\u2713")){
+                throw new DukeException(UI.displayMarkingCompletedAsDone());
+            }
+            taskArraylist.get(index).setCompleted();
+            return ui.displayDoneTaskMessage(taskArraylist.get(index));
+        }
     }
 
     /**
@@ -135,10 +146,17 @@ public class TaskList {
      * @param index position of task in list
      * @return
      */
-    public String deleteTask(int index) {
-        String output = ui.displayDeletedTaskMessage(taskArraylist.get(index));
-        taskArraylist.remove(index);
-        return output;
+    public String deleteTask(int index) throws DukeException {
+
+        if (index < 0) {
+            throw new DukeException(UI.displayInvalidTaskIndex());
+        } else if (taskArraylist.isEmpty() || taskArraylist.size() <= index) {
+            throw new DukeException(UI.displayNoTaskMessage());
+        } else {
+            String output = ui.displayDeletedTaskMessage(taskArraylist.get(index));
+            taskArraylist.remove(index);
+            return output;
+        }
     }
 
     /**

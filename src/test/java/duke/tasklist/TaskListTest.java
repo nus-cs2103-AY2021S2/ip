@@ -1,5 +1,6 @@
 package duke.tasklist;
 
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -9,32 +10,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
 
-    private static TaskList tl = new TaskList();
+    private static TaskList taskList = new TaskList();
 
     @Test
     public void addingTaskTest(){
-        tl.addToDo("testing description");
-        tl.addDeadline("test deadline", LocalDate.of(2021, 1,25),
+        taskList.addToDo("testing description");
+        taskList.addDeadline("test deadline", LocalDate.of(2021, 1,25),
                 LocalTime.NOON);
-        tl.addEvent("test event", LocalDate.of(2021, 1,26),
+        taskList.addEvent("test event", LocalDate.of(2021, 1,26),
                 LocalTime.NOON, LocalTime.MIDNIGHT);
 
-        assertEquals("[T][ ] testing description",  tl.getTaskListArray().get(1).toString());
-        assertEquals("[D][ ] test deadline (by: 2021-01-25 12:00)",  tl.getTaskListArray().get(2).toString());
-        assertEquals("[E][ ] test event(at: 2021-01-26 12:00 00:00)",  tl.getTaskListArray().get(3).toString());
+        assertEquals("[T][ ] testing description",  taskList.getTaskListArray().get(1).toString());
+        assertEquals("[D][ ] test deadline (by: 2021-01-25 12:00)",  taskList.getTaskListArray().get(2).toString());
+        assertEquals("[E][ ] test event(at: 2021-01-26 12:00 00:00)",  taskList.getTaskListArray().get(3).toString());
     }
 
     @Test
     public void markAsDoneTest(){
-        tl.addToDo("do ip");
-        tl.markAsDone(0);
-        assertEquals("[T][✘] do ip", tl.getTaskListArray().get(0).toString());
+        taskList.addToDo("do ip");
+        taskList.markAsDone(0);
+        assertEquals("[T][✘] do ip", taskList.getTaskListArray().get(0).toString());
     }
 
     @Test
-    public void deleteTaskTest(){
-        tl.deleteTask(0);
-        assertEquals("[T][ ] testing description", tl.getTaskListArray().get(0).toString());
+    public void deleteTaskTest() throws DukeException {
+        taskList.deleteTask(0);
+        assertEquals("[T][ ] testing description", taskList.getTaskListArray().get(0).toString());
     }
-
-    }
+}

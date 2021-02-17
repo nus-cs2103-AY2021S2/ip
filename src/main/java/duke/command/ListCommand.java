@@ -26,7 +26,7 @@ public class ListCommand extends Command {
         System.out.println("all list size is: " + tasklist.getTaskListArray().size());
 
         if (allTaskMsg.isEmpty()) {
-            return ui.DisplayNoTaskMessage();
+            return ui.displayNoTaskMessage();
         } else {
             return allTaskMsg;
         }

@@ -20,7 +20,7 @@ public class UI {
      * Display bye message
      */
     public static String displayEndMessage() {
-        return " Bye. Hope to see you again!" + "\n";
+        return "Bye. Hope to see you again!" + "\n";
     }
 
     /**
@@ -43,8 +43,8 @@ public class UI {
     /**
      * Display message to inform users that this are no task
      */
-    public String DisplayNoTaskMessage() {
-        return "There are currently no task available.";
+    public static String displayNoTaskMessage() {
+        return "No such task is found.";
     }
 
     /**
@@ -59,6 +59,20 @@ public class UI {
      */
     public String displayFindHeader() {
         return "Here are the matching tasks in your list:";
+    }
+
+    /**
+     * Display message to inform users that task index is invalid
+     */
+    public static String displayInvalidTaskIndex() {
+        return "Task index starts from 1. Please try again with a valid task index.";
+    }
+
+    /**
+     * Display message to inform users that task has been marked as complete
+     */
+    public static String displayMarkingCompletedAsDone() {
+        return "Task has already been marked as complete.";
     }
 
     /**

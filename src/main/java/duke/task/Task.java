@@ -51,7 +51,6 @@ public class Task {
     }
 
     /** Returns task description of task
-     * @return
      */
     public String getTaskDescription() {
         return this.description;
@@ -94,12 +93,14 @@ public class Task {
         }
     }
 
-    /** Check for duplication of task
+    /**
+     * Check for duplication of task
+     * @param task
      * @return boolean true if task is duplicated
      */
 
-    public boolean isSameTask(Task t) {
-        return this.getTaskDescription().equals(t.getTaskDescription());
+    public boolean isSameTask(Task task) {
+        return this.getTaskDescription().equals(task.getTaskDescription());
     }
 
     /**

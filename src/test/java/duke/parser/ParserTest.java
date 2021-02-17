@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
     @Test
     public void isValidTaskNumberTest(){
-        Parser p = new Parser();
+        Parser parser = new Parser();
 
-        assertEquals(false,p.isValidTaskNumber(-1, "done", 0));
-        assertEquals(false,p.isValidTaskNumber(-1, "delete", 0));
-        assertEquals(true,p.isValidTaskNumber(3, "done", 10));
+        assertEquals(false,parser.isValidTaskNumber(-1, "done", 0));
+        assertEquals(false,parser.isValidTaskNumber(-1, "delete", 0));
+        assertEquals(true,parser.isValidTaskNumber(3, "done", 10));
     }
 }

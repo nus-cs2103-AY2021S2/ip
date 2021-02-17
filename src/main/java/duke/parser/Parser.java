@@ -44,23 +44,25 @@ public class Parser {
         assert commandArray[0] != null : "Command cannot be null";
 
         if (commandArray[0].equals("find")) {
-            if (taskDetail.isBlank()) {
-                throw new DukeException("Please input task description to be searched.");
-            } else {
-                SearchCommand sc = new SearchCommand(taskDetail);
-                return sc.execute();
-            }
+            CheckIfParameterIsEmpty(taskDetail, "Please input task description to be searched.");
+            SearchCommand sc = new SearchCommand(taskDetail);
+            return sc.execute();
         } else if (commandArray[0].equals("list")) {
             ListCommand lc = new ListCommand(null);
             return lc.execute();
         } else if (commandArray[0].equals("delete")) {
+           CheckIfParameterIsEmpty(taskDetail, "Please input task description to be searched.");
+
             DeleteCommand dc = new DeleteCommand(commandArray[1]);
             return dc.execute();
         } else if (commandArray[0].equals("done")) {
+
+            CheckIfParameterIsEmpty(taskDetail, "You did not specify a task index. " +
+                    "Please try again with a valid task index.");
             DoneCommand doneCommand = new DoneCommand(commandArray[1]);
             return doneCommand.execute();
         } else {
-            return InvokeAddCommand(type, taskDetail, input);
+            return invokeAddCommand(type, taskDetail, input);
         }
     }
 
@@ -74,7 +76,7 @@ public class Parser {
      * @throws DukeException
      * @throws IOException
      */
-    public static String InvokeAddCommand(String type, String userInput, String taskDetail) throws DukeException {
+    public static String invokeAddCommand(String type, String userInput, String taskDetail) throws DukeException {
         switch (type) {
             case ("todo"):
                 AddCommand ac = new AddCommand(userInput, "todo", null, null, null);
@@ -226,5 +228,11 @@ public class Parser {
             throw new DukeException("Please separate the time with '-'. For ie, 1800-2000 or include start/end date");
         }
         return timeArr;
+    }
+
+    public static void CheckIfParameterIsEmpty(String taskDetail, String message) throws DukeException {
+        if (taskDetail.isBlank()) {
+            throw new DukeException(message);
+        }
     }
 }

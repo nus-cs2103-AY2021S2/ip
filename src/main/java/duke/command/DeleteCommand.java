@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
+
         String output = this.tasklist.deleteTask(Integer.parseInt(input) - 1);
         storage.save(this.tasklist.getTaskListArray());
         return output;
