@@ -1,3 +1,5 @@
+
+// Solution below are adapted from https://se-education.org/guides/tutorials/javaFx.html
 import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
