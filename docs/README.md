@@ -46,9 +46,10 @@ Duke is **desktop app for managing tasks**.
 
 1. Refer to the [Features](#features) below for details of each command.
 
-## Features 
+## Features
 
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
