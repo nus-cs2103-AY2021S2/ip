@@ -22,7 +22,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.getIcons().add(new Image("/images/DaHappy.jpg"));
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.setTitle("Duke101");
+            stage.setTitle("Duke");
             stage.show();
         } catch (IOException e) {
 

@@ -6,6 +6,9 @@ import task.Todo;
 import storage.Storage;
 import ui.Ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static java.lang.System.exit;
 
 public class Duke {
@@ -174,6 +177,8 @@ public class Duke {
 
         assert argument != null : "OOPS!!! The description of a deadline cannot be empty.";
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
         StringBuilder sb = new StringBuilder();
 
         String[] split = argument.split("/tag", 2);
@@ -183,6 +188,15 @@ public class Duke {
         split = arg1.split("/by", 2);
         String description = split[0];
         String by = split.length > 1 ? split[1].strip() : null;
+
+        if (by != null) {
+            try {
+                LocalDateTime.parse(by, formatter);
+            } catch (Exception e) {
+                return new Response("Incorrect data format: d/M/yyyy HHmm", false);
+            }
+        }
+
 
         Task task = new Deadlines(description, by, tag);
         taskList.add(task);
@@ -238,7 +252,7 @@ public class Duke {
 
         int taskId;
         try {
-            taskId = Integer.parseInt(argument) - 1;
+            taskId = Integer.parseInt(argument.strip()) - 1;
         } catch (NumberFormatException e) {
             return new Response("OOPS!!! The id of a delete must be an integer.", false);
         }

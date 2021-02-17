@@ -9,15 +9,12 @@ public class Deadlines extends Task {
     private final String DELIMITER = "|";
     private final String NULL = "NULL";
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     private LocalDateTime time;
 
     public Deadlines(String description, String by, String tag) {
         super(description, tag);
-
-        System.out.println(description);
-        System.out.println(by);
 
         if (by == null) {
             time = null;
@@ -44,7 +41,7 @@ public class Deadlines extends Task {
         }
 
         if (tag != null) {
-            result = String.format("%s (tag: %s)", result, this.time.format(formatter));
+            result = String.format("%s (tag: %s)", result, this.tag);
         }
 
         return result;
