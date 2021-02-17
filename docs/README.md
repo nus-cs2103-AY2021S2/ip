@@ -80,7 +80,7 @@ Event command add a event task which requires task description, date as well as 
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
 
-![Ui](/Images/addEventTask.png)
+![Ui](./Images/addEventTask.png)
 
 
 ### Listing all tasks : `list`
@@ -89,7 +89,7 @@ Shows a list of all the task in duke.
 
 Format: `list`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/listTask.png)
+![Ui](./Images/listTask.png)
 
 ### Delete a task : `delete`
 
@@ -100,7 +100,7 @@ Format: `delete task_index`
 Assume that we still have 4 task, 
 <br>`delete3`: will remove the third task on the list
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/deleteTask.png)
+![Ui](.Images/deleteTask.png)
 
 ### Mark task as done : `done`
 
@@ -115,7 +115,7 @@ Example:
 Assume that we still have 3 task, 
 <br> `done 1`: will mark the first task on the list as completed 
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/markAsDone.png)
+![Ui](./Images/markAsDone.png)
 
 ### Find a specific task : `find`
 
@@ -126,7 +126,7 @@ Format: `find keywords`
 Example:
   `find CS2105`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/findTask.png)
+![Ui](./Images/findTask.png)
 
 ## Command summary
 
