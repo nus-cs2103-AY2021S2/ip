@@ -19,6 +19,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public String getType() {
+        return "TASK";
+    }
+
     /**
      * Returns String format of task
      *

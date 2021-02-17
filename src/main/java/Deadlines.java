@@ -27,6 +27,11 @@ public class Deadlines extends Task{
     }
 
     @Override
+    public String getType() {
+        return "D";
+    }
+
+    @Override
     public void editTask(String newDescription) {
         super.editTask(newDescription);
     }

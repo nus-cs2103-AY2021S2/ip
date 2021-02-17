@@ -39,12 +39,35 @@ public class Parser {
                     result.add(taskIndex);
                     break;
                 case "edit":
-                    String[] arrOfEdit = details.split(" ", 2);
-                    taskIndex = Integer.toString(Integer.parseInt(arrOfEdit[0]) - 1);
+                    String hasDescription = "0", hasDate = "0";
+                    final String NO_CHANGE = "NO_CHANGE";
+                    description = NO_CHANGE;
+                    date = NO_CHANGE;
+
+                    String[] arrOfEdit = details.split(" /", 3);
+                    int taskIndexInt = Integer.parseInt(arrOfEdit[0]) - 1;
+                    taskIndex = Integer.toString(taskIndexInt);
                     result.add(taskIndex);
 
-                    description = arrOfEdit[1];
+                    for (int i = 1; i < arrOfEdit.length; i++) {
+                        String partOfEdit = arrOfEdit[i];
+
+                        String[] arrOfPartOfEdit = partOfEdit.split(" ", 2);
+                        String attributeType = arrOfPartOfEdit[0];
+                        String editedAttribute = arrOfPartOfEdit[1];
+
+                        if (attributeType.equals("desc")) {
+                            hasDescription = "1";
+                            description = editedAttribute;
+                        } else if (attributeType.equals("date")) {
+                            hasDate = "1";
+                            date = editedAttribute;
+                        }
+                    }
+                    result.add(hasDescription);
                     result.add(description);
+                    result.add(hasDate);
+                    result.add(date);
 
                     break;
                 case "todo":
@@ -74,7 +97,7 @@ public class Parser {
                 break;
             } catch (ArrayIndexOutOfBoundsException e) {
                 if (command.equals("todo") || command.equals("deadline") || command.equals("event")
-                        || command.equals("done") || command.equals("delete")) {
+                        || command.equals("done") || command.equals("delete") || command.equals("edit")) {
                     result.add("emptyDescError");
                 } else {
                     result.add("idkError");

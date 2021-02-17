@@ -126,4 +126,8 @@ public class Ui {
     public String printDateError() {
         return "Oops! Date should be in YYYY-MM-DD format.";
     }
+
+    public String printToDoHasNoDateError() {
+        return "Oops! Todo has no date.\nPlease only enter the description!";
+    }
 }
