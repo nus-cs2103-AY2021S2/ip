@@ -1,4 +1,5 @@
-T 0 def
-T 0 ghi
+E 0 GME mooning
+2021-02-22
 snooze
-T 0 abc
+D 0 return book
+2021-03-01
