@@ -10,7 +10,7 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructor for task list.
+     * Constructs a task list.
      */
     public TaskList() {
         tasks = new ArrayList<>();

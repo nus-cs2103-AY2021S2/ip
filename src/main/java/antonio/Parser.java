@@ -19,6 +19,9 @@ import antonio.command.ListCommand;
  */
 public class Parser {
 
+    private static final int MAX_TIME_VALUE = 2359;
+    private static final int MIN_TIME_VALUE = 0;
+
     /**
      * The types of commands available.
      */
@@ -66,17 +69,24 @@ public class Parser {
         case EVENT:
             try {
                 return processEvent(input);
-            } catch (Exception e) {
+            } catch (InvalidTimeFormatException e) {
                 e.printStackTrace();
                 throw new AntonioException(e.getMessage() + "\nPlease enter a valid format\n'/at "
-                        + "YYYY-MM-DD TIME-TIME'");
+                        + "YYYY-MM-DD TIME /to YYYY-MM-DD TIME'");
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new AntonioException("\nPlease enter a valid format\n'/at "
+                        + "YYYY-MM-DD TIME /to YYYY-MM-DD TIME'");
             }
         case DEADLINE:
             try {
                 return processDeadline(input);
-            } catch (Exception e) {
+            } catch (InvalidTimeFormatException e) {
                 e.printStackTrace();
-                throw new AntonioException(e.getMessage() + "\nPlease enter a valid format\n'/by "
+                throw new AntonioException(e.getMessage() + "\nA valid format is:\n'deadline <description> /by "
+                        + "YYYY-MM-DD TIME'");
+            } catch (Exception e) {
+                throw new AntonioException("Please enter a valid format:\n'deadline <description> /by "
                         + "YYYY-MM-DD TIME'");
             }
         case DELETE:
@@ -101,32 +111,52 @@ public class Parser {
     private static AddDeadline processDeadline(String input) throws Exception {
         String preProcessedData = input.split(" /by ")[1];
         String[] dateTime = preProcessedData.split(" ");
-        String time = dateTime[1];
-        if (time.length() != 4) {
-            throw new IllegalArgumentException("\nYou have entered the time in a wrong format,"
+
+        assert dateTime[1] != null : "dateTime[1] should have a value";
+        int time = Integer.parseInt(dateTime[1]);
+        boolean isValidTimeFormat = (time >= MIN_TIME_VALUE) && (time <= MAX_TIME_VALUE);
+
+        if (!isValidTimeFormat) {
+            throw new InvalidTimeFormatException("You have entered the time in a wrong format,"
                     + " please ensure it is in 24hr format");
         }
         LocalDate deadline = LocalDate.parse(dateTime[0]);
         String description = input.split(" /by ")[0].split("deadline ")[1];
-        return new AddDeadline("deadline", description, deadline, time);
+        return new AddDeadline("deadline", description, deadline, Integer.toString(time));
     }
 
     private static AddEvent processEvent(String input) throws Exception {
-        String preProcessedData = input.split(" /at ")[1];
-        String[] dateTime = preProcessedData.split(" ");
-        LocalDate eventDate = LocalDate.parse(dateTime[0]);
-        String startTime = dateTime[1].split("-")[0];
-        String endTime = dateTime[1].split("-")[1];
-        if (startTime.length() != 4) {
-            throw new IllegalArgumentException("\nYou have entered the starting time in a wrong format,"
+        String[] preProcessedData = input.split(" /at ");
+        String eventDuration = preProcessedData[1];
+        String[] startData = eventDuration.split(" /to ")[0].split(" ");
+        String[] endData = eventDuration.split(" /to ")[1].split(" ");
+
+        LocalDate startDate = LocalDate.parse(startData[0]);
+        LocalDate endDate = LocalDate.parse(endData[0]);
+        String startTime = startData[1];
+        String endTime = endData[1];
+
+        int startTimeCheck = Integer.parseInt(startTime);
+        int endTimeCheck = Integer.parseInt(endTime);
+
+        boolean isStartTimeValid = (startTimeCheck >= MIN_TIME_VALUE) && (startTimeCheck <= MAX_TIME_VALUE);
+        boolean isEndTimeValid = (endTimeCheck >= MIN_TIME_VALUE) && (endTimeCheck <= MAX_TIME_VALUE);
+
+        if (!isStartTimeValid && !isEndTimeValid) {
+            throw new InvalidTimeFormatException("You have entered BOTH times in a wrong format,"
                     + " please ensure it is in 24hr format");
         }
-        if (endTime.length() != 4) {
-            throw new IllegalArgumentException("\nYou have entered the ending time in a wrong format,"
+        if (!isStartTimeValid) {
+            throw new InvalidTimeFormatException("You have entered the STARTING time in a wrong format,"
                     + " please ensure it is in 24hr format");
         }
+        if (!isEndTimeValid) {
+            throw new InvalidTimeFormatException("You have entered the ENDING time in a wrong format,"
+                    + " please ensure it is in 24hr format");
+        }
+
         String description = input.split(" /at ")[0].split("event ")[1];
-        return new AddEvent("event", description, eventDate, startTime, endTime);
+        return new AddEvent("event", description, startDate, startTime, endDate, endTime);
     }
 
     private static String processDescription(String[] processedInput) {

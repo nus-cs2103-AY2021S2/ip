@@ -9,9 +9,10 @@ import antonio.task.EventTask;
  */
 public class AddEvent extends AddCommand {
 
-    private LocalDate eventDate;
-    private String startTime;
-    private String endTime;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final String startTime;
+    private final String endTime;
 
     /**
      * Constructor for a commands that adds Event tasks.
@@ -21,9 +22,11 @@ public class AddEvent extends AddCommand {
      * @param startTime Start time of the event.
      * @param endTime End time of the event
      */
-    public AddEvent(String commandType, String description, LocalDate eventDate, String startTime, String endTime) {
+    public AddEvent(String commandType, String description, LocalDate startDate, String startTime,
+                    LocalDate endDate, String endTime) {
         super(commandType, description);
-        this.eventDate = eventDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -45,7 +48,7 @@ public class AddEvent extends AddCommand {
     @Override
     public TaskList execute(TaskList taskList) {
         int taskID = taskList.getSize() + 1;
-        newTask = new EventTask(description, taskID, 0, eventDate, startTime, endTime);
+        newTask = new EventTask(description, taskID, 0, startDate, startTime, endDate, endTime);
         taskList.addTask(newTask);
         numTasks = taskList.getSize();
         return taskList;

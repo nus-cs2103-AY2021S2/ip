@@ -7,7 +7,8 @@ import java.time.LocalDate;
  */
 public class EventTask extends Task {
 
-    private LocalDate eventDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String startTime;
     private String endTime;
 
@@ -20,10 +21,12 @@ public class EventTask extends Task {
      * @param startTime Start time of deadline for the task.
      * @param endTime End time of deadline for the task.
      */
-    public EventTask(String description, int id, int status, LocalDate eventDate, String startTime, String endTime) {
+    public EventTask(String description, int id, int status, LocalDate startDate, String startTime,
+                     LocalDate endDate, String endTime) {
         super(description, id);
         super.isDone = status > 0;
-        this.eventDate = eventDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -33,12 +36,14 @@ public class EventTask extends Task {
      * @return Serialized event duration.
      */
     public String serializeEvent() {
-        return eventDate.toString() + " | " + startTime + " | " + endTime;
+        return startDate.toString() + " | " + startTime + " | " + endDate.toString() + " | " + endTime;
     }
+
     @Override
     public String toString() {
-        return "[E]" + super.checkBoxToString() + description + " (at: " + eventDate.getDayOfMonth()
-                + " " + eventDate.getMonth() + " " + eventDate.getYear() + " "
-                + startTime + "HRS to " + endTime + "HRS" + ")";
+        return "[E]" + super.checkBoxToString() + description + "\n(at: " + startDate.getDayOfMonth()
+                + " " + startDate.getMonth() + " " + startDate.getYear() + " "
+                + startTime + "HRS to " + endDate.getDayOfMonth()
+                + " " + endDate.getMonth() + " " + endDate.getYear() + " " + endTime + "HRS" + ")";
     }
 }
