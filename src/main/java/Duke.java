@@ -4,6 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -22,6 +24,8 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    private Image sparkling = new Image(this.getClass().getResourceAsStream("/images/Sparkling.png"));
 
     @Override
     public void start(Stage stage) {
@@ -42,20 +46,21 @@ public class Duke extends Application {
         stage.setTitle("Sonia");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(900.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(900.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(885, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
+        dialogContainer.setMinHeight(Region.USE_PREF_SIZE);
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(885.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -111,7 +116,8 @@ public class Duke extends Application {
         Command c = Parser.parse(inputs);
         String response = this.executeCommand(c);
         Label responseText = new Label(response);
-        dialogContainer.getChildren().add(new DialogBox(responseText));
+        responseText.setWrapText(true);
+        dialogContainer.getChildren().add(new DialogBox(responseText, new ImageView(sparkling)));
         userInput.clear();
     }
 

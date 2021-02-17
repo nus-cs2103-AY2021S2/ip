@@ -95,7 +95,7 @@ public class TaskList {
      * Prints all the tasks in the task list matching the search keyword.
      */
     public String findTasks(String keyword) {
-        String response = "";
+        String response = "Sonia: Here are your tasks!\n";
         if (data.size() > 0){
             for (int i = 1; i <= data.size(); i++) {
                 Task t = data.get(i - 1);
@@ -107,14 +107,14 @@ public class TaskList {
             response = "   Looks like you haven't added any tasks.";
         }
 
-        return response;
+        return response.substring(0, response.length() - 1);
     }
 
     /**
      * Prints all the tasks in the task list.
      */
     public String showTasks() {
-        String response = "";
+        String response = "Sonia: Here are your tasks!\n";
         if (data.size() > 0) {
             for (int i = 1; i <= data.size(); i++) {
                 response += "   " + i + ": " + data.get(i - 1) + "\n";
@@ -123,6 +123,6 @@ public class TaskList {
             response = "   Looks like you haven't added any tasks.";
         }
 
-        return response;
+        return response.substring(0, response.length() - 1);
     }
 }

@@ -33,7 +33,7 @@ public class Event extends Task {
         return (isDone ? "[X]" : "[ ]")
             + " Event: "
             + name
-            + " by "
+            + " at "
             + t;
     }
 }
