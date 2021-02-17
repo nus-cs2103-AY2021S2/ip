@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Tasks.Deadline;
+import duke.tasks.Deadline;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +24,7 @@ public class DeadlineTest {
             fail(); // test should not reach this line.
         } catch (Exception e) {
             assertEquals("Sorry Unable to Parse date for Deadline. "
-                    + "Did you try to do it in yyyy-mm-dd format?", e.getMessage());
+                    + "Did you put your date in yyyy-mm-dd format?", e.getMessage());
         }
     }
 

@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.Exceptions.DukeOutOfBoundsException;
-import duke.Exceptions.DukeStorageException;
-import duke.Model.TaskList;
-import duke.Storage.Storage;
-import duke.Tasks.Task;
-import duke.Ui.MessageGenerator;
+import duke.exceptions.DukeOutOfBoundsException;
+import duke.exceptions.DukeStorageException;
+import duke.model.TaskList;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.ui.MessageGenerator;
 
 public class DeleteCommand extends Command {
 

@@ -1,7 +1,7 @@
-package duke.Model;
+package duke.model;
 
-import duke.Exceptions.DukeOutOfBoundsException;
-import duke.Tasks.Task;
+import duke.exceptions.DukeOutOfBoundsException;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Collections;

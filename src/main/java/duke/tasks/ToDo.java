@@ -1,6 +1,4 @@
-package duke.Tasks;
-
-import duke.Tasks.Task;
+package duke.tasks;
 
 /**
  * A type of task that is to be done without any associated date for completion.

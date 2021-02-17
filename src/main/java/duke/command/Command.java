@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Exceptions.DukeOutOfBoundsException;
-import duke.Exceptions.DukeStorageException;
-import duke.Model.TaskList;
-import duke.Storage.Storage;
-import duke.Ui.MessageGenerator;
+import duke.exceptions.DukeOutOfBoundsException;
+import duke.exceptions.DukeStorageException;
+import duke.model.TaskList;
+import duke.storage.Storage;
+import duke.ui.MessageGenerator;
 
 public abstract class Command {
     protected boolean isExitAfterExecution = false;

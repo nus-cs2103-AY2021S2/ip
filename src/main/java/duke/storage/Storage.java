@@ -1,10 +1,10 @@
-package duke.Storage;
+package duke.storage;
 
-import duke.Exceptions.DukeParseException;
-import duke.Exceptions.DukeStorageException;
-import duke.Parser.StorageParser;
-import duke.Model.TaskList;
-import duke.Tasks.Task;
+import duke.exceptions.DukeParseException;
+import duke.exceptions.DukeStorageException;
+import duke.parser.StorageParser;
+import duke.model.TaskList;
+import duke.tasks.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;

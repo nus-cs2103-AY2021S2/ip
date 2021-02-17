@@ -1,10 +1,10 @@
-package duke.Parser;
+package duke.parser;
 
-import duke.Exceptions.DukeParseException;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.ToDo;
+import duke.exceptions.DukeParseException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 public class StorageParser {
     private static final String STORAGE_PARSE_ERROR_MESSAGE = "Please delete contents " +

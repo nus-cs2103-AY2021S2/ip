@@ -1,13 +1,13 @@
-package duke.Parser;
+package duke.parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.Exceptions.DukeParseException;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.ToDo;
+import duke.exceptions.DukeParseException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -57,7 +57,7 @@ public class CommandParser {
      * @param inputCommand String which the Parser will parse.
      */
     public CommandParser(String inputCommand) {
-        this.inputCommand = inputCommand;
+        this.inputCommand = inputCommand.trim();
     }
 
 
@@ -70,10 +70,10 @@ public class CommandParser {
 
 
     public Command parseCommand() throws DukeParseException {
-        assert !inputCommand.equals("");
-        String command = getKeyWord();
+        String commandWord = getKeyWord();
+        assert !this.inputCommand.equals("");  // check that empty string is handled by getKeyWord
         String arguments = getArguments();
-        switch (command) {
+        switch (commandWord) {
         case ADD_DEADLINE_COMMAND:
             return parseAddDeadlineArguments(arguments);
         case ADD_EVENT_COMMAND:
@@ -96,7 +96,7 @@ public class CommandParser {
     }
 
     public String getArguments() throws DukeParseException {
-        Matcher m = KEYWORD_AND_ARGUMENTS_PATTERN.matcher(inputCommand);
+        Matcher m = KEYWORD_AND_ARGUMENTS_PATTERN.matcher(this.inputCommand);
         if (m.matches()) {
             return m.group("arguments").trim();
         } else {
@@ -262,9 +262,9 @@ public class CommandParser {
      */
 
     public String getKeyWord() throws DukeParseException{
-        throwErrorIfEmpty(inputCommand);
+        throwErrorIfEmpty(this.inputCommand);
         Matcher m = KEYWORD_AND_ARGUMENTS_PATTERN.matcher(this.inputCommand);
-        m.matches();
+        m.matches();  // there will definitely be a match because string is non empty and hence contains a word.
         return m.group("keyword").toLowerCase();
     }
 

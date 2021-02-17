@@ -1,7 +1,7 @@
-package duke.Ui;
+package duke.ui;
 
-import duke.Model.TaskList;
-import duke.Tasks.Task;
+import duke.model.TaskList;
+import duke.tasks.Task;
 
 /**
  * Provides some functions which handle formatting display messages to display to the user.

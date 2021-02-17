@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage.Storage;
-import duke.Model.TaskList;
-import duke.Ui.MessageGenerator;
+import duke.storage.Storage;
+import duke.model.TaskList;
+import duke.ui.MessageGenerator;
 
 public class ListCommand extends Command {
 

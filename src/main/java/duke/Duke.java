@@ -3,13 +3,13 @@ package duke;
 import java.io.File;
 import java.io.IOException;
 
-import duke.Exceptions.DukeOutOfBoundsException;
-import duke.Exceptions.DukeParseException;
-import duke.Exceptions.DukeStorageException;
-import duke.Model.TaskList;
-import duke.Parser.CommandParser;
-import duke.Storage.Storage;
-import duke.Ui.MessageGenerator;
+import duke.exceptions.DukeOutOfBoundsException;
+import duke.exceptions.DukeParseException;
+import duke.exceptions.DukeStorageException;
+import duke.model.TaskList;
+import duke.parser.CommandParser;
+import duke.storage.Storage;
+import duke.ui.MessageGenerator;
 import duke.command.Command;
 import duke.command.CommandResult;
 
@@ -93,4 +93,5 @@ public class Duke {
     public boolean getIsExit() {
         return isExit;
     }
+
 }
