@@ -129,7 +129,7 @@ Expected outcome:
     1. D | ✘ | DESCRIPTION MMM dd yyyy hh:mm
     2. E | ✘ | DESCRIPTION MMM dd yyyy hh:mm
     ...
-or
+#### or
 
     Congrats! It's a FREE day.
 
