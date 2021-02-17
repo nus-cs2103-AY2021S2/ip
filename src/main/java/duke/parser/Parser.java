@@ -89,13 +89,6 @@ public class Parser {
                 LocalTime deadlineDueTime;
                 String[] dueDateArray = separateDueDate(taskDetail, "deadline");
 
-                System.out.println("hihi");
-
-                System.out.println(dueDateArray[0]);
-                if(dueDateArray[0].contains(":")){
-
-                }
-
                 try {
                     deadlineDueDate = LocalDate.parse(dueDateArray[0], dateFormatter);
                 } catch (DateTimeParseException e){
