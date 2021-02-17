@@ -8,15 +8,11 @@ The app manages a list of tasks, recording and tracking the following informatio
 2. The task's description.
 3. The task's deadline or time.
 
----------------------------------------------------------------------------------------------------
-
 ## Usage
 
 This section specifies a list of features together with the respective commands to execute them.
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
+### Notes about the command format:
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter specifying the to-do's description, as
@@ -30,8 +26,6 @@ This section specifies a list of features together with the respective commands 
 
 * Extraneous parameters for commands that do not take in parameters will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
-
-</div>
 
 ### Adding to-dos: `todo`
 
@@ -136,7 +130,7 @@ Example of usage:
 
 Terminates the application, but only after saving the task list into the hard drive.
 
-Format: `bye`
+Command format: `bye`
 
 ### Loading saved data
 
