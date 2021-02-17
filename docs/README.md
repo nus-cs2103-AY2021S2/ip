@@ -46,7 +46,7 @@ Prerequisites: JDK 11
 * Example: `todo Bring the kids to school`
 * Expected Outcome: Adds a new To-Do with the description of "Bring the kids to school".
 <p align="center">
-
+<img height="640" src="todo.png" />
 </p>
 
 ### Add Event
@@ -55,7 +55,7 @@ Prerequisites: JDK 11
 * Example: `event Meeting with Minister /at 2021-02-20`
 * Expected Outcome: Adds a new Event with the description "Meeting with Minister" on 20th Feb 2021.
 <p align="center">
-
+<img height="640" src="event.png" />
 </p>
 
 ### Add Deadline
@@ -64,7 +64,7 @@ Prerequisites: JDK 11
 * Example: `deadline Submit Project /by 2021-02-19`
 * Expected Outcome: Adds a new Deadline with the description "Submit project" to be done by 19th Feb 2021.
 <p align="center">
-
+<img height="640" src="deadline.png" />
 </p>
 
 
@@ -74,7 +74,7 @@ Prerequisites: JDK 11
 * Example: `done 2`
 * Expected Outcome: Marks the 2nd task in the list as complete.
 <p align="center">
-
+<img height="640" src="done.png" />
 </p>
 
 ### Delete a Task
@@ -83,7 +83,7 @@ Prerequisites: JDK 11
 * Example: `delete 2`
 * Expected Outcome: Deletes the 2nd task in the list.
 <p align="center">
-
+<img height="640" src="delete.png" />
 </p>
 
 ### Show Help
