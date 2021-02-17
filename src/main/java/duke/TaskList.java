@@ -62,6 +62,12 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Find the task that the keyword totally or partially matches it.
+     *
+     * @param keyword The search keyword input from users.
+     * @return
+     */
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task task: tasks) {
