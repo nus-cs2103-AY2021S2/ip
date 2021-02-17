@@ -27,6 +27,7 @@ public class Duke {
     public String getResponse(String input) {
 
         if (input.equals("bye")) {
+            assert storage.fileExists() : ui.showFileDoesNotExistMessage();
             storage.save(list);
             return ui.showGoodByeMessage();
         } else {

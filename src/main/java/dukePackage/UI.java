@@ -9,7 +9,8 @@ import java.time.format.DateTimeFormatter;
 public class UI {
     private static final String WELCOME_MESSAGE =  "Hello! I'm Duke\nWhat can I do for you today?";
     private static final String GOODBYE_MESSAGE = "Good bye and take care! This application will close in 5 seconds.";
-    private static final String SIZE_ASSERT_MESSAGE = "size of list cannot be negative";
+    private static final String SIZE_ASSERT_MESSAGE = "Size of list cannot be negative";
+    private static final String FILE_DOES_NOT_EXIST_MESSAGE = "File does not exist!";
 
     public UI() {
     }
@@ -188,5 +189,13 @@ public class UI {
      */
     public String showWelcomeMessage() {
         return WELCOME_MESSAGE;
+    }
+
+    /**
+     * Returns the file error message
+     * @return String FILE_DOES_NOT_EXIST
+     */
+    public String showFileDoesNotExistMessage() {
+        return FILE_DOES_NOT_EXIST_MESSAGE;
     }
 }

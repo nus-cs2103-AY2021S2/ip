@@ -119,4 +119,12 @@ public class Storage {
         }
         return list;
     }
+
+    /**
+     * checks if data file exists
+     * @return boolean whether the file exists
+     */
+    public boolean fileExists() {
+        return file.exists();
+    }
 }
