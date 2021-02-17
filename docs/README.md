@@ -130,8 +130,10 @@ Example:
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
+## Command Summary
+
+**Action**  | **Format, Examples**
+--------|-----------------
 **Add todo** |  `todo description`e.g, `add todo watch netflix `
 **Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
 **Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
