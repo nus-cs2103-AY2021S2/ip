@@ -102,6 +102,10 @@ public class Ui {
         return textWrapper("The description of a task cannot be empty.");
     }
 
+    public static String showDukeRemoveError() {
+        return textWrapper("Please tell me what you want me to delete.");
+    }
+
     public static String showDukeGeneralError() {
         return textWrapper("I'm sorry, but I don't know what that means");
     }
@@ -111,7 +115,7 @@ public class Ui {
     }
 
     public static String showLoadingError() {
-        return textWrapper("This file cant be loaded! Creating a new file called duke.txt in CWD");
+        return textWrapper("This file cant be loaded! Creating a new file called duke.txt in storage");
     }
 
     public static String showEmptyError() {
