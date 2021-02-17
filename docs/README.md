@@ -16,7 +16,7 @@ What can I do you for?
     
     `list`
    
-    `todo [description]`
+    `todo [DESCRIPTION]`
    
     `delete 2`
     
@@ -76,7 +76,7 @@ Adds a new event task to the list with a description. Event tasks starts from a 
 and time, and ends at a specific date and time.
 Note that the time specified is in the 24 hour format.
 
-Format: `event [description] /at YYYY-MM-DD HHMM /to YYYY-MM-DD HHMM `
+Format: `event [DESCRIPTION] /at YYYY-MM-DD HHMM /to YYYY-MM-DD HHMM `
 
 Examples:
 ```
@@ -119,7 +119,7 @@ Completato! I've marked this task as done:
 ### Find a task
 Find a task that exists in the list by its description.
 
-Format: `find [description]`
+Format: `find [DESCRIPTION]`
 
 Examples:
 ```
@@ -157,12 +157,12 @@ TaskListData.txt from the source computer to the newly created folder, and run A
 | Action       | Format and Examples          |
 | ------------- |:-------------|
 | list| `list`| 
-| add todo|`todo [DESCRIPTION]` e.g `todo make pasta`|
-| add deadline|`deadline [DESCRIPTION] /by YYYY-MM-DD HHMM` eg. `deadline visit uncle mario /by 2021-04-03 1430`|
-| add event|`event [description] /at YYYY-MM-DD HHMM /to YYYY-MM-DD HHMM` e.g `event Carnevale di Venezia /at 2021-02-06 1030 /to 2021-02-16 2300`|
+| add todo|`todo [DESCRIPTION]` <br/>e.g `todo make pasta`|
+| add deadline|`deadline [DESCRIPTION] /by YYYY-MM-DD HHMM` <br/>eg. `deadline visit uncle mario /by 2021-04-03 1430`|
+| add event|`event [DESCRIPTION] /at YYYY-MM-DD HHMM /to YYYY-MM-DD HHMM` <br/>e.g `event Carnevale di Venezia /at 2021-02-06 1030 /to 2021-02-16 2300`|
 |delete|`delete 2`|
 |done|`done 3`|
-|find|`find [DESCRIPTION]` e.g `find pasta`|
+|find|`find [DESCRIPTION]` <br/>e.g `find pasta`|
 |help|`help`|
 |exit|`bye`|
 
