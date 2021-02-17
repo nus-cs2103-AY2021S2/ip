@@ -104,6 +104,6 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 
 ### Exit Application
 * Description: Ends the application.
-* Command: `exit`
-* Command Format: `exit`
-* Command Example: `exit`
+* Command: `bye`
+* Command Format: `bye`
+* Command Example: `bye`
