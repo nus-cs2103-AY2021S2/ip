@@ -1,0 +1,15 @@
+todo wakeup
+bla
+event field trip at 2020-01-20
+todo bring bread
+deadline project by 2020-01-21
+done 1
+done 3
+list
+deadline
+deadline lab excel by 2020-01-22
+done 4
+list
+delete 5
+list
+bye
