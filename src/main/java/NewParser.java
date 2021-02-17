@@ -1,30 +1,22 @@
 import commands.*;
-import exceptions.InvalidArgumentException;
-import exceptions.MissingArgumentException;
 import exceptions.UnsupportedCommandException;
-import format.Ui;
-import tasklist.TaskList;
-
-import java.io.IOException;
 
 public class NewParser {
 
-    private final TaskList taskList;
-
-    public NewParser(TaskList taskListToWriteInto) {
-        this.taskList = taskListToWriteInto;
-        assert false==true : "ha!";
+    public NewParser() {
+        assert false == true : "ha!";
     }
 
     /**
-     * Main driver for parsing any user input
+     * Main driver for parsing any user input. The first word of user input contains the command name,
+     * while any subsequent words contain arguments for the command.
      * @param userInput User input from terminal
-     * @return returns whether to keep scanner open
+     * @return parsed command
      */
     public Command parseInputLine(String userInput) throws UnsupportedCommandException {
 
         // SETTING UP THE VARIABLES NEEDED FOR ERROR CHECKING / PARSING
-        int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
+        int firstSpaceIndex = userInput.indexOf(" ");
         String firstWord;
         String commandBody;
 
@@ -36,13 +28,16 @@ public class NewParser {
             commandBody = userInput.substring(firstSpaceIndex).trim();
         }
 
-        try {
-            return parseIntoCommand(firstWord, commandBody);
-        } catch (UnsupportedCommandException e) {
-            throw e;
-        }
+        return parseIntoCommand(firstWord, commandBody);
     }
 
+    /**
+     * Calls the appropriate command constructor based on the first word in the user input
+     * @param firstWord Corresponds to a command name or a short-form
+     * @param commandBody Arguments provided for the command
+     * @return A command that can be run
+     * @throws UnsupportedCommandException
+     */
     private Command parseIntoCommand(String firstWord, String commandBody) throws UnsupportedCommandException {
         // w6 multiple cases --> abstract out all possible strings that correspond to one command later.
         // also allow users to define own aliases
@@ -50,7 +45,6 @@ public class NewParser {
         case "list":
         case "ls":
         case "l":
-            System.out.println(commandBody);
             return new ListCommand(commandBody);
         case "bye":
             return new ByeCommand(commandBody);

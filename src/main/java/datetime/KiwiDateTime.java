@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
  */
 public class KiwiDateTime {
 
-    private boolean hasDate; // tracked internally by kiwi date and kiwi time
-    private boolean hasTime;
     private final KiwiDate kiwiDate;
     private final KiwiTime kiwiTime;
     private static final String delimiter = ":"; // needs to not clash with storage delimiter
@@ -55,9 +53,15 @@ public class KiwiDateTime {
 
 
     public String unparse() {
-        return String.format("%s%s%s", this.kiwiDate.unparse(delimiter), this.delimiter, this.kiwiTime.unparse(delimiter));
+        return String.format("%s%s%s", this.kiwiDate.unparse(delimiter), delimiter, this.kiwiTime.unparse(delimiter));
     }
 
+    // todo rename all parse functions
+    /**
+     * Converts a string stored in storage to a KiwiDateTime object. Does the opposite of unparse().
+     * @param strToParse a string from hard disk storage that represents a KiwiDateTime object
+     * @return
+     */
     public static KiwiDateTime parse(String strToParse) {
         String[] str = strToParse.split(KiwiDateTime.delimiter);
         int[] values = new int[str.length];

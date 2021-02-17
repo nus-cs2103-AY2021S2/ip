@@ -11,8 +11,8 @@ public class ByeCommand extends CommandWithNoParameters {
 
     @Override
     public void run(TaskList taskList) {
-        assert commandBody.trim().equals(commandBody) :
-                "parser is not sending trimmed strings to commands. some commands operate on this assumption";
+        assert commandBody.trim().equals(commandBody)
+                : "parser is not sending trimmed strings to commands. some commands operate on this assumption";
 
         if (!commandBody.isEmpty()) {
             handleTooManyArgs();

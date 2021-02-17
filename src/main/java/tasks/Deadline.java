@@ -1,11 +1,8 @@
 package tasks;
 
 import datetime.KiwiDateTime;
-import datetime.ParseDateTime;
 
 import static java.lang.Boolean.parseBoolean;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents a task with a deadline.
@@ -18,11 +15,6 @@ public class Deadline extends Task {
      * @param desc description of the deadline object
      * @param deadlineDateTime date/time that the deadline task is due
      */
-//    public Deadline(String desc, String deadlineDateTime) {
-//        super(desc);
-//        this.deadlineDateTime = ParseDateTime.parse(deadlineDateTime);
-//    }
-
     public Deadline(String desc, KiwiDateTime deadlineDateTime) {
         super(desc);
         this.deadlineDateTime = deadlineDateTime;
@@ -45,8 +37,8 @@ public class Deadline extends Task {
 
     @Override
     public String unparse() {
-        return "D" + delimiter + description + delimiter + isDone
-                + delimiter + deadlineDateTime.unparse() + System.lineSeparator();
+        return "D" + STORAGE_DELIMITER + description + STORAGE_DELIMITER + isDone
+                + STORAGE_DELIMITER + deadlineDateTime.unparse() + System.lineSeparator();
     }
 
     // note that this parsing is different from parsing user inputs.
@@ -60,16 +52,18 @@ public class Deadline extends Task {
     public static Deadline parse(String oneLine) {
 
         // some repetition in this function across all types of tasks but abstracting them might be costly
-        assert oneLine.startsWith("D" + delimiter);
+        assert oneLine.startsWith("D" + STORAGE_DELIMITER);
 
         // fixme - refer to event method equivalent to fix this portion
 
-        String[] args = oneLine.split(delimiter);
-        assert args.length == 3 + 1 : "storage parser detecting fewer than needed event arguments";
+        // split string into different fields
+        String[] fields = oneLine.split(STORAGE_DELIMITER);
+        assert fields.length == 3 + 1 : "storage parser detecting fewer than needed event arguments";
 
-        boolean isDone = parseBoolean(args[2]);
-        String desc = args[1];
-        KiwiDateTime dt = KiwiDateTime.parse(args[3]);
+        // fields for deadline object
+        boolean isDone = parseBoolean(fields[2]);
+        String desc = fields[1];
+        KiwiDateTime dt = KiwiDateTime.parse(fields[3]);
 
         return new Deadline(desc, dt, isDone);
     }

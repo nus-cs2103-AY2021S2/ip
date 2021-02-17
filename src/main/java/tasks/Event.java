@@ -3,15 +3,13 @@ package tasks;
 import static java.lang.Boolean.parseBoolean;
 
 import datetime.KiwiDateTime;
-import datetime.ParseDateTime;
-import java.time.LocalDateTime;
 
 /**
  * This class implements a type of task that users can add to their tasklist on this app.
  * The event task has an event-specific variable, event timing.
  */
 public class Event extends Task {
-    private KiwiDateTime eventTiming;
+    private final KiwiDateTime eventTiming;
 
     /**
      * Public constructor which is used when parsing user inputted command
@@ -45,8 +43,8 @@ public class Event extends Task {
     public String unparse() {
         // should abstract e here away
         // todo use join instead for all tasks, can standardize
-        return "E" + delimiter + description + delimiter + isDone
-                + delimiter + eventTiming.unparse() + System.lineSeparator();
+        return "E" + STORAGE_DELIMITER + description + STORAGE_DELIMITER + isDone
+                + STORAGE_DELIMITER + eventTiming.unparse() + System.lineSeparator();
     }
 
     /**
@@ -58,17 +56,19 @@ public class Event extends Task {
     public static Event parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
         // another assumption: there's no line separator (storage scanner removes line separator that unparse adds)
-        assert oneLine.startsWith("E" + delimiter);
+        assert oneLine.startsWith("E" + STORAGE_DELIMITER);
 
-        // todo init num args per command
-        // fixme realise how the order of args here depend on order of args in unparse function
-        String[] args = oneLine.split(delimiter);
-        assert args.length == 3 + 1 : // 3 + 1 bc command name, desc, done, time - much hardcoding
+        // todo init num fields per command
+        // fixme realise how the order of fields here depend on order of fields in unparse function
+        // split string into different fields
+        String[] fields = oneLine.split(STORAGE_DELIMITER);
+        assert fields.length == 3 + 1 : // 3 + 1 bc command name, desc, done, time - much hardcoding
                 "storage parser detecting fewer than needed event arguments";
 
-        String desc = args[1];
-        boolean isDone = parseBoolean(args[2]);
-        KiwiDateTime dt = KiwiDateTime.parse(args[3]);
+        // parse strings into fields needed for this class
+        String desc = fields[1];
+        boolean isDone = parseBoolean(fields[2]);
+        KiwiDateTime dt = KiwiDateTime.parse(fields[3]);
 
         return new Event(desc, dt, isDone);
     }

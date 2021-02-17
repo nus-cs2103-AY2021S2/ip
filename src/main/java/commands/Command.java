@@ -9,11 +9,10 @@ import format.Ui;
 import tasklist.TaskList;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 public abstract class Command {
 
-    String[] commandList =
+    private String[] commandList =
             {"bye", "list", "event", "todo", "deadline", "delete", "done"};
 
 
@@ -26,8 +25,6 @@ public abstract class Command {
     protected String commandOutputMsg;
     protected boolean hasRunSuccessfully = false;
     protected boolean hasSentExitDukeSignal = false;
-    // won't be needed for gui? what's the gui equivalent? why should something related to gui/cli be implemented
-    // at this level
 
     protected Command(String commandName, String commandBody) {
         this.commandName = commandName;

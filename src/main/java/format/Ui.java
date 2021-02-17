@@ -53,8 +53,8 @@ public class Ui {
     public static void print(String[] messages) {
         System.out.println(DIVIDER_LINE);
 
-        for (int i = 0; i < messages.length; i++) {
-            System.out.println(DEFAULT_INDENT + messages[i]);
+        for (String message : messages) {
+            System.out.println(DEFAULT_INDENT + message);
         }
 
         System.out.println(DIVIDER_LINE);

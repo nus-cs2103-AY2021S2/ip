@@ -1,8 +1,6 @@
 package commands;
 
 import exceptions.InvalidArgumentException;
-import format.Ui;
-import tasklist.TaskList;
 
 public abstract class CommandWithNoParameters extends Command {
     final String tooManyArgumentsErrMsg = "Too many arguments provided. Did you mean '" + this.commandName + "'?";

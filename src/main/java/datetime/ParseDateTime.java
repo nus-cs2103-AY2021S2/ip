@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A class that helps parse user input strings into date time objects for relevant tasks
  */
+@SuppressWarnings("UnnecessaryLocalVariable")
 public class ParseDateTime {
     // LIST OF SUPPORTED DATES
     // dd-MM ha i.e. "30-04 6PM"
@@ -69,10 +70,6 @@ public class ParseDateTime {
         return str.substring(0, patt.length() - 4);
     }
 
-//    @Override
-//    public String toString() {
-//        return readableString()
-//    }
 
     /**
      * This method only exists for one-off testing of this class.

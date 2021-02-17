@@ -4,7 +4,7 @@ import exceptions.InvalidArgumentException;
 import exceptions.MissingArgumentException;
 
 public abstract class CommandWithParameters extends Command {
-    protected static final String insufficientArgsErrMsg = "There are missing arguments inputted for this %s command.";
+    protected static final String INSUFFICIENT_ARGS_ERR_MSG = "There are missing arguments inputted for this %s command.";
     protected String methodUsage; // todo can be used in err msg
 
     protected CommandWithParameters(String commandName, String commandBody) {
@@ -13,7 +13,7 @@ public abstract class CommandWithParameters extends Command {
 
     protected void handleNoArgs() throws MissingArgumentException {
         if (this.commandBody.isEmpty()) {
-            throw new MissingArgumentException(String.format(insufficientArgsErrMsg, commandName));
+            throw new MissingArgumentException(String.format(INSUFFICIENT_ARGS_ERR_MSG, commandName));
         }
     }
 
@@ -39,8 +39,9 @@ public abstract class CommandWithParameters extends Command {
     protected void checkInvalidListIdx(int size, int userIdx) throws InvalidArgumentException {
         if (isInvalidListIndex(size, userIdx)) {
             int minIdx = 1; // for error message. should this be abstracted somewhere in tasklist
-            String invalidNumErrMsg = "Invalid task number given: " + userIdx
-                    + ". Number needs to be between " + minIdx + " and " + size + " (inclusive). "; // should be handled in exception.java
+            String invalidNumErrMsg =
+                    String.format("Invalid task number given: %d. Number needs to be between %d and %d (inclusive). ",
+                            userIdx, minIdx, size);
             throw new InvalidArgumentException(invalidNumErrMsg);
         }
     }

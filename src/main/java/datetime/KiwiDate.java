@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  */
 public class KiwiDate {
 
-    private LocalDate date;
+    private final LocalDate date;
     private boolean isEmpty;
 
     private KiwiDate(LocalDate ld) {
@@ -20,8 +20,14 @@ public class KiwiDate {
         this.date = null;
     }
 
+    /**
+     * Creates a KiwiDate with given day and month, and the current year
+     * @param day
+     * @param month
+     * @return
+     */
     public static KiwiDate of(int day, int month) {
-        if (day==0 && month==0) {
+        if (day == 0 && month == 0) {
             return new KiwiDate();
         }
 
@@ -29,7 +35,7 @@ public class KiwiDate {
     }
 
     public static KiwiDate of(int day, int month, int year) {
-        if (day==0 && month==0) {
+        if (day == 0 && month == 0) {
             return new KiwiDate();
         }
 
@@ -62,6 +68,7 @@ public class KiwiDate {
     }
 
     public String unparse(String delimiter) {
-        return String.format("%d%s%d%s%d", this.date.getDayOfMonth(), delimiter, this.date.getMonth().getValue(), delimiter, this.date.getYear());
+        return String.format("%d%s%d%s%d",
+                this.date.getDayOfMonth(), delimiter, this.date.getMonth().getValue(), delimiter, this.date.getYear());
     }
 }

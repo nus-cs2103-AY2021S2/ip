@@ -1,9 +1,7 @@
 package datetime;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 /**
  * Custom time class that wraps a java.time.LocalTime object. Should only be called by KiwiDateTime class.
@@ -36,7 +34,7 @@ public class KiwiTime {
         return new KiwiTime();
     }
 
-    private void checkHourOnly(){
+    private void checkHourOnly() {
         this.isHourOnly = (this.time.getMinute() == 0);
     }
 

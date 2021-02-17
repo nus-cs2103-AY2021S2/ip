@@ -19,9 +19,9 @@ import java.util.Scanner;
  */
 public class Storage {
     private static final String PROJECT_DIR = System.getProperty("user.dir");
-    private static final Path TASK_LIST_FILE_DIR =  Paths.get(PROJECT_DIR,  "data");
-    private static final Path TASK_LIST_FILE_PATH = Paths.get(
-            TASK_LIST_FILE_DIR.toString(), "tasks.txt");
+    private static final Path TASK_LIST_FILE_DIR = Paths.get(PROJECT_DIR,  "data");
+    private static final Path TASK_LIST_FILE_PATH =
+            Paths.get(TASK_LIST_FILE_DIR.toString(), "tasks.txt");
 
 
     /**

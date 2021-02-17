@@ -7,6 +7,7 @@ import java.util.HashMap;
 // todo maybe kiwi date time should be the only one who calls this class... or should it be the oher way... but how to parse two parts
 /**
  * Parses user-inputted date/time arguments into KiwiDateTime objects.
+ * KiwiDateTime is a wrapper class for storing LocalDateTime in this kiwi app.
  */
 public class ParseKiwiDateTime {
 
@@ -33,42 +34,26 @@ public class ParseKiwiDateTime {
         initDelimiters();
     }
 
-    // entry function
-    // what if you want to allow date time or time date
+    /**
+     * Parses a user input string into a KiwiDateTime object. Is the main driver of this class.
+     * @param input
+     * @return
+     * @throws MissingArgumentException
+     */
     public KiwiDateTime parse(String input) throws MissingArgumentException {
         resetVars();
-        
+
         String[] inputs = input.split(" ");
-        
+
         if (inputs.length == 3) {
-             parse3InputStrs(inputs);
+            parse3InputStrs(inputs);
         } else if (inputs.length == 2) {
-             parse2InputStrs(inputs);
+            parse2InputStrs(inputs);
         } else if (inputs.length == 1) {
-            // parse1InputStr(inputs[0]);
             throw new MissingArgumentException("Missing date or time.");
         }
         return createKiwiDateTimeObj();
     }
-
-    // THESE ARE FOR DEALING WITH INPUTS THAT HAVE NO SPACES
-//    private void parse1InputStr(String input) {
-//        if (isDateString(input)) {
-//            parseDateString(input);
-//        } else if (isTimeString(input)) {
-//
-//        }
-//    }
-//
-//    // ha or h:ma or
-//    private boolean isTimeString(String input) {
-//        String s = input.toLowerCase();
-//        int x = s.indexOf("am");
-//        int y = s.indexOf("pm");
-//        if (x == -1 && y == -1) {
-//
-//        }
-//    }
 
     private void resetVars() {
         this.day = 0;
@@ -84,6 +69,12 @@ public class ParseKiwiDateTime {
 
 
     // two of the three spaced input strings can be connected, hence this function is created
+
+    /**
+     * Parses three input strings that were delimited by a space by the user. This exists because
+     * 2 of the three spaced strings describe time and need to be parsed together.
+     * @param inputs
+     */
     private void parse3InputStrs(String[] inputs) {
         if (isAmPm(inputs[1])) { // inputs are: time AM/PM date
             parse12hTimeString(inputs[0], inputs[1]);
@@ -95,19 +86,24 @@ public class ParseKiwiDateTime {
     }
 
     // the two spaced input strings can be connected, hence this function is created
+    /**
+     * Parses two input strings that were delimited by a space by the user. This exists because
+     * the two spaced strings may both describe time and need to be parsed together.
+     * @param inputs
+     */
     private void parse2InputStrs(String[] inputs) {
         if (isAmPm(inputs[1])) { // inputs are: time AM/PM
             parse12hTimeString(inputs[0], inputs[1]);
         }
 
         // valid inputs are either: date 24hTime or 24hTime date or date 12hUnspacedtime or reverse
-        if (false) {
 
-        } else if (isDateString(inputs[0]) && isUnspaced12hTimeString(inputs[1])) { // note 12h time string check needs to come before 24h
+        // check if one input string is a date and the other is either a 12h or 24h time input
+        if (isDateString(inputs[0]) && isUnspaced12hTimeString(inputs[1])) {
             parseDateString(inputs[0]);
             parseUnspaced12hTimeString(inputs[1]);
 
-        } else if (isDateString(inputs[1]) && isUnspaced12hTimeString(inputs[0])) { // note 12h time string check needs to come before 24h
+        } else if (isDateString(inputs[1]) && isUnspaced12hTimeString(inputs[0])) {
             parseDateString(inputs[1]);
             parseUnspaced12hTimeString(inputs[0]);
 
@@ -153,9 +149,14 @@ public class ParseKiwiDateTime {
         );
     }
 
+    /**
+     * Initialises this.hour and this.minute from two strings that make up a valid 12h format.
+     * @param input
+     * @param amPm
+     */
     private void parse12hTimeString(String input, String amPm) {
-        // parse24hTimeString(input); // fixme what if got no hour
-
+        // input string may contain a single integer to represent the hour, or the input string is
+        // essentially a 24h time string excluding the "am" or "pm"
         if (isHourOnly(input)) {
             this.hour = Integer.parseInt(input);
         } else {
@@ -169,6 +170,10 @@ public class ParseKiwiDateTime {
         }
     }
 
+    /**
+     * Initialises this.day, this.month and this.year based on a valid input string.
+     * @param input
+     */
     private void parseDateString(String input) {
         String d = findDateDelimiter(input);
         String[] parts = input.split(d);
@@ -184,13 +189,19 @@ public class ParseKiwiDateTime {
 
     // why unspaced, because parsing function already split all the spaces
     // ha or h:ma
+
+    /**
+     * Detects if a string containing no spaces contains a 12h time format containing the phrase 'am' or 'pm'..
+     * @param input
+     * @return
+     */
     private boolean isUnspaced12hTimeString(String input) {
         return input.toLowerCase().contains("am") || input.toLowerCase().contains("pm");
     }
 
 
     /**
-     *
+     * Finds a recognized date delimiter in the string provided
      * @param input
      * @return delimiter found in string, empty string if none matched
      */
@@ -203,7 +214,7 @@ public class ParseKiwiDateTime {
         return "";
     }
     /**
-     *
+     * Finds a recognized time delimiter in the string provided
      * @param input
      * @return delimiter found in string, empty string if none matched
      */

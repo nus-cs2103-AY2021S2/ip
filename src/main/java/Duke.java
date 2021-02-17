@@ -12,14 +12,16 @@ public class Duke {
     private NewParser newParser;
     // storage location should be here
 
-    // assume default storage/tasklist settings if no arguments given to constructor
+    /**
+     * Initialise duke with a taskList and a parser.
+     */
     public Duke() {
         this.setTaskList();
         this.setParser();
     }
 
     private void setParser() {
-        this.newParser = new NewParser(taskList);
+        this.newParser = new NewParser();
     }
 
     // both gui and cli need to do this

@@ -25,7 +25,7 @@ public class Todo extends Task {
 
     @Override
     public String unparse() {
-        return "T" + delimiter + description + delimiter + isDone + System.lineSeparator();
+        return "T" + STORAGE_DELIMITER + description + STORAGE_DELIMITER + isDone + System.lineSeparator();
     }
 
 
@@ -35,9 +35,9 @@ public class Todo extends Task {
      * @return tasks.Todo Object
      */
     public static Todo parse(String oneLine) {
-        assert oneLine.startsWith("T" + delimiter);
+        assert oneLine.startsWith("T" + STORAGE_DELIMITER);
 
-        String[] args = oneLine.split(delimiter);
+        String[] args = oneLine.split(STORAGE_DELIMITER);
 
         boolean isDone = parseBoolean(args[2]);
 

@@ -1,7 +1,7 @@
 package tasks;
 
 public abstract class Task {
-    protected static final String delimiter = ";;"; // todo make sure no one uses this reserved delimiter for tasks
+    protected static final String STORAGE_DELIMITER = ";;"; // todo make sure no one uses this reserved delimiter for tasks
     protected final String description;
     protected boolean isDone;
     protected String taskType;
