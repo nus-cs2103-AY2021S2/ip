@@ -33,6 +33,7 @@ public class TaskList {
 
     /**
      * get the number i task
+     * @param i index
      */
     public Task get(int i) {
         assert i >= 0 : "Getter error, pointer less than 0";
@@ -41,6 +42,9 @@ public class TaskList {
 
     /**
      * check whether is date format
+     * @param date String date
+     * @param pattern date pattern
+     * @return boolean of whether string match the pattern
      */
     public boolean isDateFormat(String date, String pattern) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
@@ -59,6 +63,7 @@ public class TaskList {
 
     /**
      * add task to the list
+     * @param t task that being added
      */
     public void add(Task t) {
         task.add(t);
@@ -66,6 +71,9 @@ public class TaskList {
 
     /**
      * parser for add tasks
+     * @param userInput
+     * @param ui
+     * @return String that indicating the result
      */
     public String add(String[] userInput, Ui ui) throws DukeException {
         String reportString = " ";
@@ -111,6 +119,9 @@ public class TaskList {
 
     /**
      * mark task as done
+     * @param inputIndex
+     * @param ui
+     * return String indicating the done option
      */
     public String doneTask(String inputIndex, Ui ui) {
         try {
@@ -134,6 +145,9 @@ public class TaskList {
 
     /**
      * delete task from list
+     * @param inputIndex the index of the task being deleted
+     * @param ui the ui for style printing
+     * @return string indicating the result of deletion
      */
     public String deleteTask(String inputIndex, Ui ui) {
         try {
@@ -154,8 +168,9 @@ public class TaskList {
 
     /**
      * print out task
+     * @return tasks description in the list
      */
-    public String printTask(Ui ui) {
+    public String printTask() {
         String taskList;
         taskList = "Here is your current tasks\n";
         for (int i = 1; i <= task.size(); ++i) {
@@ -166,6 +181,8 @@ public class TaskList {
 
     /**
      * check whether a task is in the list
+     * @param taskInfo
+     * @return foundTasks tasks with discriptions that match the string
      */
     public List<Task> findTask(String taskInfo) {
         List<Task> foundTasks = new ArrayList<>();

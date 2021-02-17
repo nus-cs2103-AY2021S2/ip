@@ -126,7 +126,7 @@ public class Ui {
                 response = task.deleteTask(input[1], this);
                 break;
             case LIST:
-                response = task.printTask(this);
+                response = task.printTask();
                 break;
             case DONE:
                 response = task.doneTask(input[1], this);
