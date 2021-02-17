@@ -22,7 +22,9 @@ Type in: `{Command part 1} {Command part 2} {Command part 3}` in correct order.
 
 For example:
 
-`todo go to school -p 3`; `deadline HW2 /at 2021-01-01 19:00 -p 5`; `todo watch movie`
+* `todo go to school -p 3` 
+* `deadline HW2 /at 2021-01-01 19:00 -p 5` 
+* `todo watch movie`
 
 Tips:
 
@@ -40,7 +42,8 @@ Type in: `list` or `list -p`
 
 Tips:
 
-`list` will list all the tasks. `list -p` will list all the tasks sorted by priority.
+* `list` will list all the tasks. 
+* `list -p` will list all the tasks sorted by priority.
 
 ### Delete tasks : `delete`
 Deletes a task in Duke.
@@ -49,7 +52,7 @@ Type in: `delete {taskIndex}`
 
 For example:
 
-`delete 3`
+* `delete 3`
 
 ### Mark task as done : `done`
 Mark a task as done.
@@ -58,7 +61,7 @@ Type in: `done {taskIndex}`
 
 For example:
 
-`done 2`
+* `done 2`
 
 ### Search tasks : `find` or `search time`
 Search a task based on the information provided.
