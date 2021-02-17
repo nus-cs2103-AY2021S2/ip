@@ -11,7 +11,16 @@ public class Ui {
      * @return Welcome greeting as String
      */
     public String getWelcomeGreetingString() {
-        return "\nSup peeps! I am Meme Bot\n" + "What can I do for you?\n";
+        return "\nSup peeps! I am Meme Bot.\n"
+                + "\nThese are the list of commands:\n"
+                + "1. todo <details>\n"
+                + "2. event <details> /at <date>\n"
+                + "3. deadline <details> /by <date>\n"
+                + "4. list\n"
+                + "5. done <task number>\n"
+                + "6. delete <task number>\n"
+                + "7. undo\n"
+                + "8. bye\n\nSo.. What can I do for you?\n";
     }
 
     /**

@@ -38,8 +38,11 @@ public class Parser {
      */
     public ToDo parseAddTodo(String command, TaskList userList) throws InvalidToDoCommandException {
         int taskDetailOffset = 5;
+        if (command.length() <= taskDetailOffset) {
+            throw new InvalidToDoCommandException();
+        }
         String toDoTaskDetail = command.substring(taskDetailOffset);
-        if (toDoTaskDetail.length() == 0 || toDoTaskDetail.startsWith(" ")) {
+        if (toDoTaskDetail.startsWith(" ")) {
             throw new InvalidToDoCommandException();
         } else {
             ToDo newTodo = new ToDo(toDoTaskDetail);
@@ -96,6 +99,9 @@ public class Parser {
      * @return Index of Task to be deleted.
      */
     public Task parseDeleteCommand(String command, TaskList userList) throws InvalidDeleteCommandException {
+        if (command.length() <= "delete ".length()) {
+            throw new InvalidDeleteCommandException();
+        }
         int taskNumToBeDeleted = Integer.parseInt(command.split(" ")[1]);
         int indexNum = taskNumToBeDeleted - 1;
         int userListSize = userList.getTaskListSize();
