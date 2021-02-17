@@ -12,7 +12,7 @@ Below are the features currently implemented:
 6. [**`Find`**](#find) Finding tasks based on keywords.
 7. [**`Remind`**](#remind) Remind Users about upcoming tasks.
 
-### Feature 1 - Adding tasks<a name="add"></a>
+### :large_blue_circle: Feature 1 - Adding tasks<a name="add"></a>
 The user will be able to add new tasks into B.O.B Task Manager. 
 
 There are 3 types of tasking of which the user can
@@ -73,7 +73,7 @@ Adds a deadline task with the **task description** and
 
 ![image](./images/add-deadline.png)
 
-### Feature 2 - Listing existing tasks<a name="list"></a>
+### :large_blue_circle: Feature 2 - Listing existing tasks<a name="list"></a>
 The user will be able to list existing tasks in B.O.B Task Manager.
 
 There are 3 types of tasking of which the user can
