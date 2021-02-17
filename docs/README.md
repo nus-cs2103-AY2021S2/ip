@@ -10,7 +10,7 @@ see the tasks entered at a glance.
 
 2. Download the latest duke.jar [here](https://github.com/arihantjain97/ip/releases/tag/A-Jar).
 
-3. Copy the file to the folder you want to use as the home folder for your Address Book.
+3. Copy the file to the folder you want to use as the home folder for your Duke application.
 
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
@@ -143,7 +143,7 @@ see the tasks entered at a glance.
 
 Q:  How do I transfer my data to another Computer?
 
-A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Duke folder.
 
 ## 5. Command Summary
 * list: `list`
