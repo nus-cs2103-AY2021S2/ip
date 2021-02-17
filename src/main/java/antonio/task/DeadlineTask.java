@@ -10,8 +10,8 @@ public class DeadlineTask extends Task {
     private final String time;
 
     /**
-     * Constructor for Deadline task.
-     * @param description Name of the command.
+     * Constructs a Deadline task.
+     * @param description Description of the task
      * @param id ID of task
      * @param status Status of task completion.
      * @param deadline Date of deadline for the task.
@@ -61,7 +61,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Pads the time string with zeroes to a 24 hour format.
-     * @param time to be padded to a 24 hour format.
+     * @param time Time to be padded to a 24 hour format.
      * @return The padded time string.
      */
     private String timeToString(String time) {

@@ -11,7 +11,7 @@ public class FindCommand implements Command {
     private TaskList findList;
 
     /**
-     * Constructor for find command.
+     * Constructs a find command.
      * @param key Key to be matched with finding.
      */
     public FindCommand(String key) {

@@ -13,7 +13,7 @@ public class DeleteCommand implements Command {
     private int numTasks;
 
     /**
-     * Constructor for delete command.
+     * Constructs a delete command.
      * @param deletedID ID of the task to be deleted.
      */
     public DeleteCommand(int deletedID) {

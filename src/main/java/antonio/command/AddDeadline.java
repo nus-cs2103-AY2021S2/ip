@@ -13,7 +13,7 @@ public class AddDeadline extends AddCommand {
     private String time;
 
     /**
-     * Constructor for a commands that adds Deadline tasks.
+     * Constructs a commands that adds Deadline tasks.
      * @param commandType Type of command.
      * @param description Description of the task.
      * @param deadline Deadline of the task.

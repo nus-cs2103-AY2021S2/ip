@@ -13,13 +13,14 @@ public class EventTask extends Task {
     private final String endTime;
 
     /**
-     * Constructor for event task.
-     * @param description Name of the command.
+     * Constructs an event task.
+     * @param description Description of the event.
      * @param id ID of task
      * @param status Status of task completion.
-     * @param eventDate Date of deadline for the task.
-     * @param startTime Start time of deadline for the task.
-     * @param endTime End time of deadline for the task.
+     * @param startDate Starting date of the event.
+     * @param startTime Starting time of the event.
+     * @param endDate Ending date of the event.
+     * @param endTime Ending time of the event.
      */
     public EventTask(String description, int id, int status, LocalDate startDate, String startTime,
                      LocalDate endDate, String endTime) {

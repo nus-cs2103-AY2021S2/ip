@@ -15,7 +15,7 @@ public class AddEvent extends AddCommand {
     private final String endTime;
 
     /**
-     * Constructor for a commands that adds Event tasks.
+     * Constructs a commands that adds Event tasks.
      * @param commandType Type of command.
      * @param description Description of the task.
      * @param eventDate Date of the event.

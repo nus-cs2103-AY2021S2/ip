@@ -20,7 +20,7 @@ public class Storage {
     private final String path;
 
     /**
-     * Constructor for storage.
+     * Constructs a storage handler object.
      * @param path A string containing the path to the file.
      */
     Storage(String path) {
@@ -72,7 +72,7 @@ public class Storage {
     }
 
     /**
-     * Create the string to be written as file contents.
+     * Creates the string to be written as file contents.
      * @param taskList Task list to be written to local storage.
      * @param sb StringBuilder object to hold the formatted strings.
      * @throws AntonioException If unable to format file contents.
@@ -100,7 +100,7 @@ public class Storage {
     }
 
     /**
-     * Format task into a string to be stored on local storage.
+     * Formats the task into a string to be stored on local storage.
      * @param task Task to be formatted into a string.
      * @return Task that has been formatted into a string.
      * @throws AntonioException If unknown task type.
@@ -140,7 +140,7 @@ public class Storage {
 
     /**
      * Formats a line of string from a file into a Task object.
-     * @param newLine Line from string read from file to be converted to a task.
+     * @param newLine New line from string read from file to be converted to a task.
      * @param taskID ID of task to be created.
      * @return Task converted from string read from file.
      * @throws AntonioException If task type is unknown.

@@ -13,7 +13,7 @@ public abstract class AddCommand implements Command {
     protected int numTasks;
 
     /**
-     * Constructor for AddCommand class command name and description.
+     * Constructs an AddCommand class command name and description.
      * @param commandType Name of the command.
      * @param description Description to add to command.
      */

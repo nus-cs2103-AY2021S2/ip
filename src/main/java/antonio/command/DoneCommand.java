@@ -11,7 +11,7 @@ public class DoneCommand implements Command {
     private String response;
 
     /**
-     * Constructor for done command.
+     * Constructs a done command.
      * @param id ID of task to be marked as done.
      */
     public DoneCommand(int id) {

@@ -8,7 +8,7 @@ import antonio.task.ToDoTask;
 public class AddToDo extends AddCommand {
 
     /**
-     * Constructor for a commands that adds to-do tasks.
+     * Constructs a commands that adds to-do tasks.
      * @param commandType Type of command.
      * @param description Description of the task.
      */

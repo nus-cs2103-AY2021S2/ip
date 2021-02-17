@@ -23,7 +23,7 @@ public class Parser {
     private static final int MIN_TIME_VALUE = 0;
 
     /**
-     * The types of commands available.
+     * Represents the types of commands available.
      */
     enum CommandType {
         HELP,
