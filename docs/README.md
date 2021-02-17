@@ -26,7 +26,13 @@ Below are the features currently implemented:
 
 ## Feature Details
 
-### :large_blue_circle: Feature 1 - Adding tasks<a name="add"></a>
+[comment]: <> (### Feature 1 - Adding tasks<a name="add"></a>)
+<h3>
+   <span style="color:#4285F4"> 
+      Feature 1 - Adding tasks<a name="add"></a>
+   </span>
+</h3>
+
 The user will be able to add new tasks into B.O.B Task Manager. 
 
 There are 3 types of tasking of which the user can
@@ -112,7 +118,7 @@ GUI:
 
 ---
 
-### :large_blue_circle: Feature 2 - Listing tasks<a name="list"></a>
+### Feature 2 - Listing tasks<a name="list"></a>
 The user will be able to list all existing tasks in B.O.B Task Manager.
 
 **Command Syntax** 
