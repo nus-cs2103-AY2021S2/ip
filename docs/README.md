@@ -100,7 +100,7 @@ Format: `delete task_index`
 Assume that we still have 4 task, 
 <br>`delete3`: will remove the third task on the list
 
-![Ui](.Images/deleteTask.png)
+![Ui](./Images/deleteTask.png)
 
 ### Mark task as done : `done`
 
