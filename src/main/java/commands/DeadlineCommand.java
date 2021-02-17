@@ -15,7 +15,8 @@ public class DeadlineCommand extends AddTaskWithTimeCommand {
     public void run(TaskList taskList) {
         try {
             parseCommandBody();
-            this.commandOutputMsg = taskList.addTask(new Deadline(secondArg, thirdArg));
+            this.commandOutputMsg = taskList.addTask(
+                    new Deadline(secondArg, parseToKiwiDateTime(thirdArg)));
         } catch (Exception e) {
             handleException(e);
         }

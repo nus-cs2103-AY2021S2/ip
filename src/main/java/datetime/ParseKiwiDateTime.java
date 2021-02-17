@@ -1,5 +1,7 @@
 package datetime;
 
+import exceptions.MissingArgumentException;
+
 import java.util.HashMap;
 
 // todo maybe kiwi date time should be the only one who calls this class... or should it be the oher way... but how to parse two parts
@@ -34,7 +36,7 @@ public class ParseKiwiDateTime {
 
     // entry function
     // what if you want to allow date time or time date
-    public KiwiDateTime parse(String input) {
+    public KiwiDateTime parse(String input) throws MissingArgumentException {
         resetVars();
         
         String[] inputs = input.split(" ");
@@ -45,6 +47,7 @@ public class ParseKiwiDateTime {
              parse2InputStrs(inputs);
         } else if (inputs.length == 1) {
             // parse1InputStr(inputs[0]);
+            throw new MissingArgumentException("Missing date or time.");
         }
         return createKiwiDateTimeObj();
     }
@@ -104,6 +107,10 @@ public class ParseKiwiDateTime {
         } else if (isDateString(inputs[0]) && isUnspaced12hTimeString(inputs[1])) { // note 12h time string check needs to come before 24h
             parseDateString(inputs[0]);
             parseUnspaced12hTimeString(inputs[1]);
+
+        } else if (isDateString(inputs[1]) && isUnspaced12hTimeString(inputs[0])) { // note 12h time string check needs to come before 24h
+            parseDateString(inputs[1]);
+            parseUnspaced12hTimeString(inputs[0]);
 
         } else if (isDateString(inputs[0]) && is24hTimeString(inputs[1])) {
             parseDateString(inputs[0]);
@@ -282,7 +289,7 @@ public class ParseKiwiDateTime {
         ParseKiwiDateTime p = new ParseKiwiDateTime(); // todo rename kiwidatetimeparser
 
         for (String s : strings) {
-            print(p.parse(s));
+            //print(p.parse(s));
         }
     }
 }

@@ -69,10 +69,10 @@ public class KiwiDateTime {
     }
 
     public static void main(String[] args) {
-        ParseKiwiDateTime p = new ParseKiwiDateTime();
-        KiwiDateTime k = p.parse("1/4 6pm");
-        System.out.println(k.unparse());
-        System.out.println(parse(k.unparse()));
+//        ParseKiwiDateTime p = new ParseKiwiDateTime();
+//        KiwiDateTime k = p.parse("1/4 6pm");
+//        System.out.println(k.unparse());
+//        System.out.println(parse(k.unparse()));
     }
 
 }

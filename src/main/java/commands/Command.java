@@ -4,6 +4,7 @@ import datetime.KiwiDateTime;
 import datetime.ParseDateTime;
 import datetime.ParseKiwiDateTime;
 import exceptions.InvalidArgumentException;
+import exceptions.MissingArgumentException;
 import format.Ui;
 import tasklist.TaskList;
 
@@ -87,7 +88,7 @@ public abstract class Command {
         return ParseDateTime.parse(s);
     }
 
-    protected KiwiDateTime parseToKiwiDateTime(String s) {
+    protected KiwiDateTime parseToKiwiDateTime(String s) throws MissingArgumentException {
         ParseKiwiDateTime p = new ParseKiwiDateTime();
         return p.parse(s);
     }

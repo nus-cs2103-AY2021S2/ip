@@ -1,5 +1,6 @@
 package tasks;
 
+import datetime.KiwiDateTime;
 import datetime.ParseDateTime;
 
 import static java.lang.Boolean.parseBoolean;
@@ -10,26 +11,26 @@ import java.time.LocalDateTime;
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
-    private final LocalDateTime deadlineDateTime; // need a better name, but also cannot confuse with the class name
+    private final KiwiDateTime deadlineDateTime; // need a better name, but also cannot confuse with the class name
 
     /**
      * Creates a deadline object
      * @param desc description of the deadline object
      * @param deadlineDateTime date/time that the deadline task is due
      */
-    public Deadline(String desc, String deadlineDateTime) {
-        super(desc);
-        this.deadlineDateTime = ParseDateTime.parse(deadlineDateTime);
-    }
+//    public Deadline(String desc, String deadlineDateTime) {
+//        super(desc);
+//        this.deadlineDateTime = ParseDateTime.parse(deadlineDateTime);
+//    }
 
-    public Deadline(String desc, LocalDateTime deadlineDateTime) {
+    public Deadline(String desc, KiwiDateTime deadlineDateTime) {
         super(desc);
         this.deadlineDateTime = deadlineDateTime;
     }
 
-    private Deadline(String desc, String deadlineDateTime, boolean isDone) {
+    private Deadline(String desc, KiwiDateTime deadlineDateTime, boolean isDone) {
         super(desc, isDone);
-        this.deadlineDateTime = ParseDateTime.parse(deadlineDateTime);
+        this.deadlineDateTime = (deadlineDateTime);
     }
 
     /**
@@ -39,13 +40,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + description
-                + " (by: " + ParseDateTime.readableString(deadlineDateTime) + ")";
+                + " (by: " + deadlineDateTime + ")";
     }
 
     @Override
     public String unparse() {
         return "D" + delimiter + description + delimiter + isDone
-                + delimiter + ParseDateTime.unparse(deadlineDateTime) + System.lineSeparator();
+                + delimiter + deadlineDateTime.unparse() + System.lineSeparator();
     }
 
     // note that this parsing is different from parsing user inputs.
@@ -66,9 +67,11 @@ public class Deadline extends Task {
         String[] args = oneLine.split(delimiter);
         assert args.length == 3 + 1 : "storage parser detecting fewer than needed event arguments";
 
-        Boolean isDone = parseBoolean(args[2]);
+        boolean isDone = parseBoolean(args[2]);
+        String desc = args[1];
+        KiwiDateTime dt = KiwiDateTime.parse(args[3]);
 
-        return new Deadline(args[1], args[3], isDone);
+        return new Deadline(desc, dt, isDone);
     }
 
     /**
@@ -76,12 +79,12 @@ public class Deadline extends Task {
      * @param args
      */
     public static void main(String[] args) {
-        Deadline t = new Deadline("hello world", "7am on wed");
-        System.out.println(t);
-        t.markAsDone();
-        System.out.println(t);
-        System.out.println(t.unparse());
-        System.out.println(parse(t.unparse()));
+//        Deadline t = new Deadline("hello world", "7am on wed");
+//        System.out.println(t);
+//        t.markAsDone();
+//        System.out.println(t);
+//        System.out.println(t.unparse());
+//        System.out.println(parse(t.unparse()));
         // test with other cases without relying on t
     }
 

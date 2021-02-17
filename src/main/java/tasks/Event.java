@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * The event task has an event-specific variable, event timing.
  */
 public class Event extends Task {
-    private KiwiDateTime eventTiming; // todo make a custom class for datetimes (it can contain formatting functions)
+    private KiwiDateTime eventTiming;
 
     /**
      * Public constructor which is used when parsing user inputted command
@@ -68,9 +68,9 @@ public class Event extends Task {
 
         String desc = args[1];
         boolean isDone = parseBoolean(args[2]);
-        KiwiDateTime k = KiwiDateTime.parse(args[3]);
+        KiwiDateTime dt = KiwiDateTime.parse(args[3]);
 
-        return new Event(desc, k, isDone);
+        return new Event(desc, dt, isDone);
     }
 
     /**
