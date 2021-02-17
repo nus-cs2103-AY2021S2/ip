@@ -101,4 +101,4 @@ Expected outcome:
 
 `Bye! Hope to see you `
 
-![User interface](images/Ui.png)
+![User interface](Ui.png)
