@@ -26,7 +26,6 @@ Below are the features currently implemented:
 
 ## Feature Details
 
-[comment]: <> (### Feature 1 - Adding tasks<a name="add"></a>)
 <h3>
    <span style="color:#4285F4"> 
       Feature 1 - Adding tasks<a name="add"></a>
@@ -118,7 +117,11 @@ GUI:
 
 ---
 
-### Feature 2 - Listing tasks<a name="list"></a>
+<h3>
+   <span style="color:#4285F4"> 
+      Feature 2 - Listing tasks<a name="list"></a>
+   </span>
+</h3>
 The user will be able to list all existing tasks in B.O.B Task Manager.
 
 **Command Syntax** 
@@ -144,7 +147,12 @@ GUI:
 
 ---
 
-### Feature 3 - Marking Done  <a name="done"></a>
+<h3>
+   <span style="color:#4285F4"> 
+      Feature 3 - Marking Done  <a name="done"></a>
+   </span>
+</h3>
+
 Marks the completion of a task using the index of the task. 
 
 Completion status is indicated by a `X` or `✓`.
@@ -171,7 +179,14 @@ GUI:
 
 ![image](./images/done.png)
 
-### Feature 4 - Delete  <a name="delete"></a>
+---
+
+<h3>
+   <span style="color:#4285F4"> 
+      Feature 4 - Delete  <a name="delete"></a>
+   </span>
+</h3>
+
 Deletes a task from the list using the index of the task.
 
 **Command Syntax**
@@ -200,7 +215,12 @@ GUI:
 
 ----
 
-### Feature 5 - Find  <a name="find"></a>
+<h3>
+   <span style="color:#4285F4"> 
+      Feature 5 - Find  <a name="find"></a>
+   </span>
+</h3>
+
 Find task(s) from the list using a given keyword and lists only the relevant task(s).
 
 **Command Syntax**
@@ -226,7 +246,12 @@ GUI:
 
 ---
 
-### Feature 6 - Remind  <a name="find"></a>
+<h3>
+   <span style="color:#4285F4"> 
+      Feature 6 - Remind  <a name="find"></a>
+   </span>
+</h3>
+
 Show upcoming task(s), and optional **number of days** argument can be given to 
 specify the maximum time span (in days) for the task to be considered 'upcoming'.
 
@@ -262,7 +287,12 @@ GUI:
 
 ---
 
-### Feature 7. Storage and Retrieval of Tasks  <a name="storage"></a>
+<h3>
+   <span style="color:#4285F4"> 
+      Feature 7 - Storage and Retrieval of Tasks  <a name="storage"></a>
+   </span>
+</h3>
+
 B.O.B Task Manager will attempt to retrieve stored tasks from a storage file 
 in your local computer. Upon launching, it will parse through the
 text file and populate the application with the stored data.
