@@ -17,6 +17,7 @@ public class Parser {
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
+    private static final String HELP_COMMAND = "help";
 
     /**
      * Checks if the command given is "bye"
@@ -101,18 +102,13 @@ public class Parser {
     }
 
     /**
-     * Checks if the input is a number
+     * Checks if the command given is "help"
      *
-     * @param num the input to be checked
-     * @return boolean, where true means input is a number
+     * @param check the command to be checked
+     * @return boolean, where true means command is indeed "help"
      */
-    public static boolean isNumber(String num) {
-        try {
-            int check = Integer.parseInt(num);
-            return true;
-        } catch (NumberFormatException error) {
-            return false;
-        }
+    public static boolean isHelp(String check) {
+        return check.equals(HELP_COMMAND);
     }
 
     /**
@@ -139,6 +135,8 @@ public class Parser {
             return new DeleteCommand(input);
         } else if (isFind(command)) {
             return new FindCommand(input);
+        } else if(isHelp(command)) {
+            return new HelpCommand(input);
         } else {
             throw new InvalidCommandException();
         }
