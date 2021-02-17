@@ -31,8 +31,13 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 ![Ui](Ui.png)
 
 
-
 ## Features
+
+Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add todo finish user guide`.
+  
 
 ### Add a task :  `todo`, `deadline`, `event`
 
@@ -40,13 +45,13 @@ There are three different tasks, namely, todo, event and deadline.
 <br> There are different commands used to facilitate the adding of different tasks to the program as seen below.
 
 Notes:
-* Commands are case-insensitive. The program only takes in command in lower alphabets. 
+* Commands are case-insensitive and the program only accepts commands typed in lower alphabets. 
 * Users should add ONE task at a time. 
 
 #### Adding a todo task: `todo`
 Todo command add a todo task which requires task description and no other field as input.
 
-Format: `todo` description
+Format: `todo` DESCRIPTION
 
 Examples:
 * `todo CNY visiting`
@@ -57,12 +62,10 @@ Examples:
 #### Adding a deadline task: `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
 
-Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]
+Format: `deadline` DESCRIPTION /BY DATE TIME 
+* DATE is should be by DD/MM/YY
+* TIME is should be in HHMM
 
-Note: Do ensure that the time is given in HHMM format with no extra spacing or semicolon 
-
-Deadline command add a deadline task which requires task description, due date and due time of the task. 
-Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
 Examples:
 * `deadline submit proposal /by 03/05/2021 1800`
 
@@ -71,12 +74,12 @@ Examples:
 #### Adding an event task: `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
 
-Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]
+Format: `event` description /AT DATE TIME-TIME 
 
-Note: Do ensure that the time is given in HHMM format with no extra spacing or semicolon 
+Format: `deadline` DESCRIPTION /BY DATE TIME 
+* DATE is should be by DD/MM/YY
+* TIME is should be in HHMM
 
-Event command add a event task which requires task description, date as well as start and end time of the task. 
-<br>Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
 
@@ -95,7 +98,9 @@ Format: `list`
 
 Delete a task using its task index in list.
 
-Format: `delete task_index`
+Note: TASK_INDEX starts from 1.
+
+Format: `delete TASK_INDEX`
 
 Assume that we still have 4 task, 
 <br>`delete3`: will remove the third task on the list
@@ -106,9 +111,9 @@ Assume that we still have 4 task,
 
 Mark the given task as completed which will add a tick beside the task when list command is executed. 
 
-Note: All tasks added are uncompleted by default. 
+Note: All tasks added are uncompleted by default and TASK_INDEX starts from 1. 
 
-Format: `done task_index`
+Format: `done TASK_INDEX`
 
 Example:
 
@@ -121,30 +126,29 @@ Assume that we still have 3 task,
 
 Show all tasks that matches or contain keywords. 
 
-Format: `find keywords`
+Format: `find KEYWORDS`
 
 Example:
-  `find CS2105`
+  `find cs2103`
 
 ![Ui](./Images/findTask.png)
 
 ### Exit : `bye`
 
-The program will terminate a few seconds  after returning a "Bye. Hope to see you again!" message. 
+The program will terminate a few seconds after returning a "Bye. Hope to see you again!" message. 
 
 
 ## Command Summary
 
 **Action**  | **Format, Examples**
 --------|-----------------
-**Add todo task** | `todo TASK_DESCRIPTION` e.g, `add todo watch netflix `
+**Add todo task** | `todo TASK_DESCRIPTION` e.g, `add todo watch netflix`
 **Add deadline task** | `deadline TASK_DESCRIPTION /by DATE` e.g., `deadline finish cs2103 quiz /by 18/02/2021`
 **Add event task** | `event TASK_DESCRIPTION /at DATE START_TIME END_TIME` e.g., `event attend internship meeting /at 17/02/2021 1000-1100`
 **List** | `list`
 **Mark as Done** |`delete TASK_INDEX` e.g., `delete 3`
 **Delete** | `delete TASK_NUMBER` e.g., `delete 1`
 **Find** | `find KEYWORD` e.g., `find cs2103`
-**Statistics** | `stats`
 **Exit** | `bye`
 
 
