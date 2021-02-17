@@ -77,7 +77,7 @@ Example of usage:
 
 Sample screenshot:
 
-![Done Image](images/DoneDemo.png)
+![Done Image](images/doneDemo.png)
 
 ### `delete XXX` - Delete a task
 

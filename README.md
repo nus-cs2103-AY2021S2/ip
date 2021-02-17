@@ -80,7 +80,7 @@ Example of usage:
 
 Sample screenshot:
 
-![Done Image](docs/images/DoneDemo.png)
+![Done Image](docs/images/doneDemo.png)
 
 ### `delete XXX` - Delete a task
 
