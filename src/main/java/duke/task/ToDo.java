@@ -38,6 +38,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return " Todo:" + super.toString();
+        return "Todo:" + super.toString();
     }
 }

@@ -131,7 +131,7 @@ public class TaskList {
     public String markAsDone(int index) throws DukeException {
 
         isValidIndex(index);
-        if(taskArraylist.get(index).getStatus().equals("complete")){
+        if (taskArraylist.get(index).getStatus().equals("complete")) {
             throw new DukeException(UI.displayMarkingCompletedAsDone());
         }
         taskArraylist.get(index).setCompleted();
@@ -160,10 +160,10 @@ public class TaskList {
     }
 
     /** Change the current task list to given task list
-     * @param TaskArrayList task list
+     * @param taskArrayList task list
      */
-    public void setTaskList(ArrayList<Task> TaskArrayList) {
-        this.taskArraylist = TaskArrayList;
+    public void setTaskList(ArrayList<Task> taskArrayList) {
+        this.taskArraylist = taskArrayList;
     }
 
     /**

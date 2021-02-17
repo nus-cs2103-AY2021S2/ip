@@ -1,4 +1,5 @@
 package duke.parser;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,8 +13,6 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.SearchCommand;
 import duke.exception.DukeException;
-import duke.task.Task;
-import duke.ui.UI;
 
 /**
  * Parser class to handle all user commands and input.
@@ -53,14 +52,12 @@ public class Parser {
             ListCommand lc = new ListCommand(null);
             return lc.execute();
         } else if (commandArray[0].equals("delete")) {
-           isTaskDetailEmpty(taskDetail, "Please input task description to be searched.");
-
+            isTaskDetailEmpty(taskDetail, "Please input task description to be searched.");
             DeleteCommand dc = new DeleteCommand(commandArray[1]);
             return dc.execute();
         } else if (commandArray[0].equals("done")) {
-
-            isTaskDetailEmpty(taskDetail, "You did not specify a task index. " +
-                    "Please try again with a valid task index.");
+            isTaskDetailEmpty(taskDetail, "You did not specify a task index. "
+                    + "Please try again with a valid task index.");
             DoneCommand doneCommand = new DoneCommand(commandArray[1]);
             return doneCommand.execute();
         } else {
@@ -95,29 +92,30 @@ public class Parser {
 
                 try {
                     deadlineDueDate = LocalDate.parse(dueDateArray[0], dateFormatter);
-                } catch (DateTimeParseException e){
-                    throw new DukeException("This is an invalid date. Please try again with the expected date format" +
-                            " given as: /by (YYYY-MM-DD hhmm).");
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("This is an invalid date. Please try again with the expected date format"
+                            + " given as: /by (YYYY-MM-DD hhmm).");
                 }
 
-                if(dueDateArray.length <2){
-                    throw new DukeException("OOPS!!! Please follow the given format to add deadline. " +
-                            "deadline task description /by (YYYY-MM-DD hhmm)");
-                }else if (dueDateArray.length > 2) {
-                    throw new DukeException("OOPS!!! You might not be following the syntax given or " +
-                            "trying to add more than one task at a time.");
-                }else{
+                if (dueDateArray.length < 2) {
+                    throw new DukeException("OOPS!!! Please follow the given format to add deadline. "
+                            + "deadline task description /by (YYYY-MM-DD HHMM)");
+                } else if (dueDateArray.length > 2) {
+                    throw new DukeException("OOPS!!! You might not be following the syntax given or "
+                            + "trying to add more than one task at a time.");
+                } else {
                     try {
                         deadlineDueTime = LocalTime.parse(dueDateArray[1], timeFormatter);
-                    } catch (DateTimeParseException e){
-                        throw new DukeException("This is an invalid time format. " +
-                                "Please try again with the expected time format" +
-                                " given as: hhmm with no spacing or semi colon.");
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("This is an invalid time format. "
+                                + "Please try again with the expected time format"
+                                + " given as: HHMM with no spacing or semi colon.");
                     }
                 }
 
                 String[] taskDescription = userInput.split("/by");
-                AddCommand addCommand = new AddCommand(taskDescription[0], "deadline", deadlineDueDate, deadlineDueTime, null);
+                AddCommand addCommand = new AddCommand(taskDescription[0], "deadline",
+                        deadlineDueDate, deadlineDueTime, null);
                 return addCommand.execute();
 
             case ("event"):
@@ -133,15 +131,15 @@ public class Parser {
                     startTime = LocalTime.parse(eventDueTimeArray[0], timeFormatter);
                     endTime = LocalTime.parse(eventDueTimeArray[1], timeFormatter);
                 } catch (DateTimeParseException e) {
-                    throw new DukeException("This is an invalid date. Please try again with the expected date format" +
-                            " given as: /at (YYYY-MM-DD hhmm-hhmm).");
+                    throw new DukeException("This is an invalid date. Please try again with the expected date format"
+                            + " given as: /at (YYYY-MM-DD hhmm-hhmm).");
                 }
 
                 String[] description = userInput.split("/at");
 
                 if (description.length > 2) {
-                    throw new DukeException("OOPS!!! You might not be following the syntax given or " +
-                            "trying to add more than one task at a time.");
+                    throw new DukeException("OOPS!!! You might not be following the syntax given or "
+                            + "trying to add more than one task at a time.");
                 }
 
                 AddCommand addEventCommand = new AddCommand(description[0], "event", startDate, startTime, endTime);

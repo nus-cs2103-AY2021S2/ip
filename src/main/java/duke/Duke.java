@@ -1,14 +1,12 @@
 package duke;
-
 import java.io.IOException;
 
 import duke.command.Command;
-import duke.parser.Parser;
-import duke.exception.DukeException;
 import duke.data.DataStorage;
+import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

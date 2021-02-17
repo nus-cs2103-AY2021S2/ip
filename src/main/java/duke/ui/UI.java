@@ -36,8 +36,8 @@ public class UI {
      * Display message to inform users that there is a duplicated task
      */
     public String displayDuplicatedMessage() {
-        return "Existing entries with same task description was found. " +
-                "Please add a new task.";
+        return "Existing entries with same task description was found. "
+                + "Please add a new task.";
     }
 
     /**
