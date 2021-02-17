@@ -20,9 +20,9 @@ Add a ToDo task to your list.
 `todo Do the laundry`
 
 **Expected outcome:**
->Done! I've added a new task:\
-    [T][✘] Do the laundry\
-    Now there are 1 tasks in your list.
+>Done! I've added a new task:
+>    [T][✘] Do the laundry
+>    Now there are 1 tasks in your list.
 
 ### Add an Event
 Add an Event to your list. Events must contain a mandatory date and can include an optional time.
@@ -34,9 +34,9 @@ Add an Event to your list. Events must contain a mandatory date and can include 
 `event Jason's birthday /at 24/09/2021`
 
 **Expected outcome:**
->Done! I've added a new task:\
-    [E][✘] Jason's birthday (at 24 Sep 2021)\
-    Now there are 2 tasks in your list.
+>Done! I've added a new task:
+>    [E][✘] Jason's birthday (at 24 Sep 2021)
+>    Now there are 2 tasks in your list.
 
 
 ### Add a Deadline
@@ -49,9 +49,9 @@ Add a Deadline to your list. Deadlines must contain a mandatory date and time.
 `deadline CS2106 Assignment 1 /by 05/03/2021 2359`
 
 **Expected outcome:**
->Done! I've added a new task:\
-    [D][✘] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)\
-    Now there are 3 tasks in your list.
+>Done! I've added a new task:
+>    [D][✘] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)
+>    Now there are 3 tasks in your list.
 
 
 ### List Tasks
@@ -61,9 +61,9 @@ View the full list of current tasks in PAson.
 `list`
 
 **Expected outcome:**
-> Here are the tasks in your list:\
-> 1. [T][✘] Do the laundry\
-> 2. [E][✘] Jason's birthday (at 24 Sep 2021)\
+> Here are the tasks in your list:
+> 1. [T][✘] Do the laundry
+> 2. [E][✘] Jason's birthday (at 24 Sep 2021)
 > 3. [D][✘] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)
 
 
@@ -77,7 +77,7 @@ Change the status of a given task to done.
 `done 1`
 
 **Expected outcome:**
-> Good job! I've marked this task as done:\
+> Good job! I've marked this task as done:
 > [D][✓] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm
 
 
@@ -91,8 +91,8 @@ Delete a task from PAson.
 `delete 1`
 
 **Expected outcome:**
-> Okay! I've removed this task:\
-> [T][✘] Do the laundry\
+> Okay! I've removed this task:
+> [T][✘] Do the laundry
 > There are now 2 tasks in your list.
 
 
@@ -106,7 +106,7 @@ Find all tasks in your list matching a specific keyword.
 `find birthday`
 
 **Expected outcome:**
-> Here are the matching tasks in your list:\
+> Here are the matching tasks in your list:
 > 2. [E][✘] Jason's birthday (at 24 Sep 2021)
 
 
@@ -123,7 +123,7 @@ Find all tasks in your list matching a specific date. Two shortcut commands `tod
 `listschedule 24/09/2021`
 
 **Expected outcome:**
-> Here are the matching tasks in your list:\
+> Here are the matching tasks in your list:
 > 2. [E][✘] Jason's birthday (at 24 Sep 2021)
 
 
@@ -134,7 +134,7 @@ Exit the PAson chatbot. Your tasks will be stored locally and available to you w
 `bye`
 
 **Expected outcome:**
-> Bye! I shall go rest now. PAge me when you need me.
+Bye! I shall go rest now. PAge me when you need me.
 
 
 # Summary of Commands
