@@ -23,13 +23,16 @@ public class Storage {
     public static final String DEFAULT_STORAGE_FILEPATH = "data/tasks.txt";
     public final Path path;
 
+    /**
+     * Constructor. Uses the default storage filepath.
+     * @throws DukeException Error if invalid file path.
+     */
     public Storage() throws DukeException {
         this(DEFAULT_STORAGE_FILEPATH);
     }
 
     /**
-     * Constructs a new instance of a Storage object.
-     * The storage object will attempt to read and write to a file.
+     * Constructor takes in the path of the file.
      * @param filePath The path of the file.
      */
     public Storage(String filePath) throws DukeException {
@@ -43,6 +46,11 @@ public class Storage {
         return filePath.toString().endsWith(".txt");
     }
 
+    /**
+     * Saves the task list to storage.
+     * @param tasks The task list.
+     * @throws DukeException Error if cannot write to file.
+     */
     public void save(TaskList tasks) throws DukeException {
         try {
             List<String> encodedTasks = TaskListEncoder.encodeTaskList(tasks);
@@ -52,6 +60,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task list from storage.
+     * @return The task list.
+     * @throws DukeException Error if cannot read from file.
+     */
     public TaskList load() throws DukeException {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return new TaskList();

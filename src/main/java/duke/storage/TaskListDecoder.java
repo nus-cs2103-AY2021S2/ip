@@ -13,6 +13,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Decodes a storage data file into a {@code TaskList} object.
+ */
 public class TaskListDecoder {
     private static final Pattern ENCODED_TASK_FORMAT =
             Pattern.compile("(?<encodedTaskType>[A-Z]{1})/(?<encodedTaskData>.*)");
@@ -24,6 +27,12 @@ public class TaskListDecoder {
             Pattern.compile("(?<status>[0-1]{1})/(?<description>[^/]+)/(?<date>[^/]+)");
     private static final String DONE_STATUS = "1";
 
+    /**
+     * Decodes {@code encodedTaskList} into a {@code TaskList} containing decoded tasks.
+     * @param encodedTaskList The encoded task list.
+     * @return The decoded task list.
+     * @throws DukeException Error while decoding the encoded task list.
+     */
     public static TaskList decodeTaskList(List<String> encodedTaskList) throws DukeException {
         List<Task> decodedTasks = new ArrayList<>();
         for (String encodedTask : encodedTaskList) {
