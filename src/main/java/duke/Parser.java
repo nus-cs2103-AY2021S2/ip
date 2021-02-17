@@ -131,10 +131,15 @@ public class Parser {
         }
     }
 
-    public Task parseDoneCommand(int taskNumber, TaskList userList) {
-        Task doneTask = userList.getTask(taskNumber - 1);
-        doneTask.markAsDone();
-        return doneTask;
+    public Task parseDoneCommand(int taskNumber, TaskList userList) throws InvalidDoneCommandException {
+        int userListLength = userList.getTaskListSize();
+        if (taskNumber > userListLength || taskNumber < 1) {
+            throw new InvalidDoneCommandException();
+        } else {
+            Task doneTask = userList.getTask(taskNumber - 1);
+            doneTask.markAsDone();
+            return doneTask;
+        }
     }
 
     private ToDo createTodoTask (String command) {

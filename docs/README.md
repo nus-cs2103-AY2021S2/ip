@@ -15,7 +15,7 @@ Example of usage:
 
 ![todo fork my TP](./todo.png "todo command usage")
 ##
-###Feature 2: `event`
+### Feature 2: `event`
 
 ## Usage
 
@@ -27,7 +27,7 @@ Example of usage:
 
 ![event go for dinner with A](./event.png "event command usage")
 
-###Feature 3: `deadline`
+### Feature 3: `deadline`
 
 ## Usage
 
@@ -39,7 +39,7 @@ Example of usage:
 
 ![deadline submit my IP /by 2021-02-19](./deadline.png "deadline command usage")
 
-###Feature 4: `list`
+### Feature 4: `list`
 
 ## Usage
 
@@ -51,7 +51,7 @@ Example of usage:
 
 ![list](./list.png "list command usage")
 
-###Feature 5: `done`
+### Feature 5: `done`
 
 ## Usage
 
@@ -63,7 +63,7 @@ Example of usage:
 
 ![done](./done.png "done command usage")
 
-###Feature 6: `delete`
+### Feature 6: `delete`
 
 ## Usage
 
@@ -75,7 +75,7 @@ Example of usage:
 
 ![delete 1](./delete.png "delete command usage")
 
-###Feature 7: `undo`
+### Feature 7: `undo`
 
 ## Usage
 
@@ -93,7 +93,7 @@ Example of usage:
 
 ![undo](./undo.png "undo command usage")
 
-###Feature 8: `bye`
+### Feature 8: `bye`
 
 ## Usage
 

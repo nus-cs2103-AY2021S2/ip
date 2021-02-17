@@ -7,6 +7,6 @@ public class InvalidDeleteCommandException extends DukeException {
 
     @Override
     public String getMessage() {
-        return "I can't delete that for you :-(\nCheck if the task number is less than the last number in the list";
+        return "I can't delete that for you :-(\nCheck if the task number is valid.\nFormat: delete <task number>";
     }
 }
