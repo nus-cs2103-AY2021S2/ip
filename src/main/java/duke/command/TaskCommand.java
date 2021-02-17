@@ -1,16 +1,16 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeCommandException;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-import duke.task.Deadline;
-import duke.Ui;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
 
 public class TaskCommand extends Command {
     private LocalDateTime time = null;
@@ -38,19 +38,19 @@ public class TaskCommand extends Command {
             ToDo newToDo = new ToDo(this.description);
             taskList.addTask(newToDo);
             storage.saveData(taskList);
-            return ui.showAdd(newToDo);
+            return ui.showAdd(newToDo, taskList);
 
         case "deadline":
             Deadline newDeadLine = new Deadline(this.description, this.time);
             taskList.addTask(newDeadLine);
             storage.saveData(taskList);
-            return ui.showAdd(newDeadLine);
+            return ui.showAdd(newDeadLine, taskList);
 
         case "event":
             Event newEvent = new Event(this.description, this.time);
             taskList.addTask(newEvent);
             storage.saveData(taskList);
-            return ui.showAdd(newEvent);
+            return ui.showAdd(newEvent, taskList);
 
         default:
             throw new DukeCommandException("Invalid Command.");

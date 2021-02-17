@@ -2,13 +2,10 @@ package duke;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
+
 
 
 /**
@@ -53,6 +50,21 @@ public class Ui {
 
     public String showBye() {
         return LINE_PREFIX + EXIT_MESSAGE + "\n";
+    }
+
+    /**
+     *
+      * @param taskList
+     * @return
+     */
+    public String showTasksCount(TaskList taskList) {
+        int count = taskList.getTasksCount();
+        return (count == 1)
+            ? "Current Total Tasks: " + count
+                + " task"
+            : "Current Total Tasks: " + count
+                    + " tasks";
+
     }
 
     /**
@@ -129,40 +141,15 @@ public class Ui {
      * @param task
      * @return
      */
-    public String showTaskDeleted(Task task) {
-        return String.format(LINE_PREFIX + "Task deleted successfully:\n[%s] [%s] %s\n",
+    public String showTaskDeleted(Task task, TaskList taskList) {
+        return String.format(LINE_PREFIX + "Task deleted successfully:\n[%s] [%s] %s\n%s",
                 task.getTaskType(), task.getStatusIcon(),
-                task.getTaskDescription());
+                task.getTaskDescription(), showTasksCount(taskList));
     }
 
-    public String showAdd(Task task) {
-        return String.format(LINE_PREFIX + "Added:\n%s\n", task);
+    public String showAdd(Task task, TaskList taskList) {
+        return String.format(LINE_PREFIX + "Added:\n%s\n%s\n", task, showTasksCount(taskList));
     }
-
-    public String showAddToDo(ToDo toDo) {
-        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s\n",
-                toDo.getTaskType(), toDo.getStatusIcon(),
-                toDo.getTaskDescription());
-
-    }
-
-    public String showAddDeadLine(Deadline deadline) {
-        LocalDateTime time = deadline.getEndTime();
-        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s (by: %s %s %s %02d:%02d)\n",
-                deadline.getTaskType(), deadline.getStatusIcon(), deadline.getTaskDescription(),
-                time.getMonth(), time.getDayOfMonth(), time.getYear(), time.getHour(),
-                time.getMinute());
-    }
-
-    public String showAddEvent(Event event) {
-        LocalDateTime time = event.getEventTime();
-        return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s (at: %s %s %s %02d:%02d)\n",
-                event.getTaskType(), event.getStatusIcon(), event.getTaskDescription(),
-                time.getMonth(), time.getDayOfMonth(), time.getYear(), time.getHour(),
-                time.getMinute());
-    }
-
-
 
     public String showError(String errorMsg) {
         return "[ERROR] : " + errorMsg + "\n";
