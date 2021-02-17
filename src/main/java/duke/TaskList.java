@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * Provides class that supports methods to interact with the taskList
  */
 public class TaskList {
-    public ArrayList<Task> taskList;
     public static int taskListSize;
+    public ArrayList<Task> taskList;
 
     /**
      * Initialises TaskList object.

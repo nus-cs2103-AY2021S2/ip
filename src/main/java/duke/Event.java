@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * description and at due date.
  */
 public class Event extends Task {
-    public LocalDate at;
+    private LocalDate at;
 
     /**
      * Initialises Event object.

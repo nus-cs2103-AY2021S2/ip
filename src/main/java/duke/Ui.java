@@ -14,13 +14,6 @@ public class Ui {
     }
 
     /**
-     * Returns string of the welcome message to be shown when the user starts up Duke.
-     */
-    public String showWelcomeMessage() {
-        return "Hey, I'm Duke!\n" + "How can I help you?";
-    }
-
-    /**
      * Returns string of the goodbye message to be shown when the user types 'bye' command.
      */
     public String showGoodbyeMessage() {
@@ -92,7 +85,7 @@ public class Ui {
         if (matchingTasks.size() == 0) {
             return "Looks like there were no tasks matching your search, try again?";
         } else {
-            String message = "Here are the matching tasks in your list:";
+            String message = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < matchingTasks.size(); i++) {
                 Task item = matchingTasks.get(i);
                 message += (i + 1) + "." + item.toString() + "\n";

@@ -10,7 +10,7 @@ public class FindCommand extends Command {
     /**
      * Initialises FindCommand object.
      *
-     * @param description
+     * @param description refers to the keyword provided by user
      */
     public FindCommand(String description) {
         super(description);

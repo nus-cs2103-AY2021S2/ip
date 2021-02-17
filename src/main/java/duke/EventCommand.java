@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
  * Specifies the command for event command type.
  */
 public class EventCommand extends Command {
-    String at;
+    private String at;
 
     /**
      * Initialises EventCommand object.

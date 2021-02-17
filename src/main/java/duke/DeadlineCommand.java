@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
  * Specifies the command for deadline command type.
  */
 public class DeadlineCommand extends Command {
-    String by;
+    private String by;
 
     /**
      * Initialises DeadlineCommand object.
