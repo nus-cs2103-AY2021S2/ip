@@ -1,14 +1,15 @@
 package duke;
 
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Deadline;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 /**
  * Class to represent text UI of application.
@@ -54,10 +55,15 @@ public class Ui {
         return LINE_PREFIX + EXIT_MESSAGE + "\n";
     }
 
+    /**
+     * Return all task in taskList as a string
+     * @param taskList
+     * @return
+     */
     public String showTasks(TaskList taskList) {
         int i = 1;
         StringBuilder response = new StringBuilder();
-        for( Task t : taskList.getTaskList()) {
+        for ( Task t : taskList.getTaskList()) {
             if (t.getTaskType().equals("TODO")) {
                 response.append(String.format("%d: [%s] [%s] %s\n", i,
                         t.getTaskType(), t.getStatusIcon(), t.getTaskDescription()));
@@ -71,6 +77,11 @@ public class Ui {
         return response.toString();
     }
 
+    /**
+     * Wrapper around showTask to add interactive sentence before the tasks
+     * @param taskList
+     * @return
+     */
     public String showAllTasks(TaskList taskList) {
         String response = "";
         response += LINE_PREFIX + "Ok Human. Here are your tasks:\n";
@@ -78,6 +89,11 @@ public class Ui {
         return response;
     }
 
+    /**
+     * Show tasks found.
+     * @param taskList
+     * @return
+     */
     public String showFoundTasks(TaskList taskList) {
         String response = "";
         response += LINE_PREFIX + "Ok Human. Here are the tasks I found:\n";
@@ -85,6 +101,11 @@ public class Ui {
         return response;
     }
 
+    /**
+     * Show upcoming tasks
+     * @param taskList
+     * @return
+     */
     public String showUpcomingTasks(TaskList taskList) {
         String response = "";
         response += LINE_PREFIX + "Ok Human. Here are your upcoming tasks:\n";
@@ -92,17 +113,28 @@ public class Ui {
         return response;
     }
 
-    public String printTaskDone(Task task) {
+    /**
+     * Show done tasks
+     * @param task
+     * @return
+     */
+    public String showTaskDone(Task task) {
         return String.format("%sNoted Human. I've marked this task as done:\n[%s] [%s] %s\n",
                 LINE_PREFIX, task.getTaskType(), task.getStatusIcon(),
                 task.getTaskDescription());
     }
 
+    /**
+     * Show deleted tasks
+     * @param task
+     * @return
+     */
     public String showTaskDeleted(Task task) {
         return String.format(LINE_PREFIX + "Task deleted successfully:\n[%s] [%s] %s\n",
                 task.getTaskType(), task.getStatusIcon(),
                 task.getTaskDescription());
     }
+
 
     public String showAddToDo(ToDo toDo) {
         return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s\n",
