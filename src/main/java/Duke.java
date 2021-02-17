@@ -24,8 +24,11 @@ public class Duke {
     }
 
     public String getResponse(String input) throws IOException {
+        assert(!input.equals(""));
 
         ArrayList<String> result = parser.parseInputToList(input);
+        assert(result.get(0) != null);
+
         String command = result.get(0);
 
         String description, date;
@@ -37,23 +40,29 @@ public class Duke {
         case "list":
             return taskList.listTask();
         case "done":
+            assert(result.get(1) != null);
             taskIndex = Integer.parseInt(result.get(1));
             return taskList.doneTask(taskIndex);
         case "delete":
+            assert(result.get(1) != null);
             taskIndex = Integer.parseInt(result.get(1));
             return taskList.deleteTask(taskIndex);
         case "todo":
+            assert(result.get(1) != null);
             description = result.get(1);
             return taskList.addTodo(description);
         case "deadline":
+            assert(result.get(1) != null && result.get(2) != null);
             description = result.get(1);
             date = result.get(2);
             return taskList.addDeadline(description, date);
         case "event":
+            assert(result.get(1) != null && result.get(2) != null);
             description = result.get(1);
             date = result.get(2);
             return taskList.addEvent(description, date);
         case "find":
+            assert(result.get(1) != null);
             description = result.get(1);
             return taskList.findTasks(description);
         default:
