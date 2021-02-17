@@ -1,5 +1,8 @@
 # User Guide
 
+<p align="center"><img src="https://soonkeatneo.github.io/ip/Ui.png"/></p>
+<h1 align="center">DukeNukem</h1>
+
 ## Features 
 
 ### Feature 1 
