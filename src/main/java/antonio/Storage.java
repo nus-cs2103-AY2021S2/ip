@@ -46,7 +46,7 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String newLine = sc.nextLine();
-                Task task = processFileContents(newLine, taskID);
+                Task task = formatStringToTask(newLine, taskID);
                 taskList.addTask(task);
             }
         } catch (FileNotFoundException e) {
@@ -80,7 +80,7 @@ public class Storage {
     private void createStringFormat(TaskList taskList, StringBuilder sb) throws AntonioException {
         for (int i = 1; i <= taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
-            sb.append(formatFileContents(task));
+            sb.append(formatTaskToString(task));
             sb.append("\n");
         }
     }
@@ -105,7 +105,7 @@ public class Storage {
      * @return Task that has been formatted into a string.
      * @throws AntonioException If unknown task type.
      */
-    private String formatFileContents(Task task) throws AntonioException {
+    private String formatTaskToString(Task task) throws AntonioException {
         assert task != null : "task should not be null";
         String format;
         String description = task.getDescription();
@@ -145,7 +145,7 @@ public class Storage {
      * @return Task converted from string read from file.
      * @throws AntonioException If task type is unknown.
      */
-    private Task processFileContents(String newLine, int taskID) throws AntonioException {
+    private Task formatStringToTask(String newLine, int taskID) throws AntonioException {
         String[] lineContents = newLine.split(" \\| ");
         String taskType = lineContents[0];
         int status = Integer.parseInt(lineContents[1]);
@@ -159,10 +159,11 @@ public class Storage {
             LocalDate deadline = LocalDate.parse(lineContents[3]);
             return new DeadlineTask(description, taskID, status, deadline, time);
         case "E":
-            LocalDate eventDate = LocalDate.parse(lineContents[3]);
+            LocalDate startDate = LocalDate.parse(lineContents[3]);
             String startTime = lineContents[4];
-            String endTime = lineContents[5];
-            return new EventTask(description, taskID, status, eventDate, startTime, endTime);
+            LocalDate endDate = LocalDate.parse(lineContents[5]);
+            String endTime = lineContents[6];
+            return new EventTask(description, taskID, status, startDate, startTime, endDate, endTime);
         default:
             throw new AntonioException("There is an error in file reading: Unknown task type");
         }
