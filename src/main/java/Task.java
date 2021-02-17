@@ -23,6 +23,7 @@ public class Task {
         this.isDone = false;
     }
 
+
     /**
      * Gets completion status icon.
      *

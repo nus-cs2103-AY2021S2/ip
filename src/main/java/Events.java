@@ -11,7 +11,7 @@ public class Events extends Task {
     /**
      * The at.
      */
-    private String at;
+    private final String at;
     /**
      * The Date.
      */
@@ -90,6 +90,18 @@ public class Events extends Task {
 
     public String getAt() {
         return this.at;
+    }
+
+    public LocalDate getDateObj(){
+        return this.date;
+    }
+
+    public LocalTime getStartTimeObj(){
+        return this.startTime;
+    }
+
+    public LocalTime getEndTimeObj(){
+        return this.endTime;
     }
 
     public String getDescription() {

@@ -16,7 +16,11 @@ public abstract class BaseException extends Exception {
     public BaseException(String message) {
         this.message = message;
     }
-
+    /**
+     * Returns error message.
+     *
+     * @return  message the error message
+     */
     public String getMessage() {
         return message;
     }

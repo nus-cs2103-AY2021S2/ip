@@ -5,6 +5,7 @@ import javafx.application.Application;
  */
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(dapp.class, args);
+
+        Application.launch(Gui.class, args);
     }
 }

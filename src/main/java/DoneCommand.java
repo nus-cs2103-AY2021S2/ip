@@ -1,5 +1,5 @@
 public class DoneCommand extends Command {
-    private int doneTaskNum;
+    private final int doneTaskNum;
 
     public DoneCommand(String fullCommand) {
         this.doneTaskNum = Integer.parseInt(

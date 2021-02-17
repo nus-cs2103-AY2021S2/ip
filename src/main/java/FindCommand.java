@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * The type Find command.
  */
 public class FindCommand extends Command {
-    private String fullCommand;
+    private final String fullCommand;
 
     /**
      * Instantiates a new Find command.

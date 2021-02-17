@@ -8,8 +8,8 @@ import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
 
-    private Label text;
-    private ImageView displayPicture;
+    private final Label text;
+    private final ImageView displayPicture;
 
     public DialogBox(Label l, ImageView iv) {
         text = l;

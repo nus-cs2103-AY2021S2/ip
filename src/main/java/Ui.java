@@ -1,12 +1,7 @@
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
     public ArrayList<String> outList;
-    //private final Scanner in;
-    //private final PrintStream out;
     private static final String DIVIDER_LINE
             = "____________________________________________________________\n";
     private static final String LIST_MESSAGE
@@ -35,28 +30,9 @@ public class Ui {
             + "\nHello! I'm Duke"
             + "\nWhat can I do for you?";
 
-    /*
-    public Ui(){
-        this(System.in, System.out);
-    }
-
-    public Ui(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
-        this.outList = new ArrayList<String>();
-    }
-     */
-
     public Ui(){
         this.outList = new ArrayList<String>();
     }
-
-    /*
-    public String readCommand() {
-        return in.nextLine();
-    }
-
-     */
 
     public void showToUser(String... stringToUser) {
         String printStr = "";

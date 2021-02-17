@@ -38,6 +38,8 @@ public class Parser {
                 } else if (fullCommand.equals("list")) {
                     //create listCommand
                     return new ListCommand();
+                } else if (fullCommand.equals("sort")) {
+                    return new SortCommand();
                 } else {
                     final Matcher doneMatcher =
                             DONE_COMMAND_FORMAT.matcher(fullCommand);

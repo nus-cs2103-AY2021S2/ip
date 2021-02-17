@@ -1,5 +1,5 @@
 public class TodoCommand extends Command {
-    private String fullCommand;
+    private final String fullCommand;
 
     public TodoCommand(String fullCommand) {
         this.fullCommand = fullCommand;

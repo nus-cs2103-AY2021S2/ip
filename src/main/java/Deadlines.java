@@ -10,7 +10,7 @@ public class Deadlines extends Task {
     /**
      * The By.
      */
-    private String by;
+    private final String by;
     /**
      * The Date.
      */
@@ -51,12 +51,31 @@ public class Deadlines extends Task {
         return this.date.format(format);
     }
 
+    /**
+     * Get by string.
+     *
+     * @return the string
+     */
     public String getBy() {
         return this.by;
     }
 
+    /**
+     * Get description string.
+     *
+     * @return the string
+     */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Get LocalDate object.
+     *
+     * @return the LocalDate object.
+     */
+    public LocalDate getDateObj() {
+        return this.date;
     }
 
     /***

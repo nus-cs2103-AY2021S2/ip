@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
     /**
      * Instantiates a new Storage object.

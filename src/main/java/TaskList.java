@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * The type Task list.
@@ -7,7 +8,7 @@ public class TaskList {
     /***
      * Arraylist of Tasks (Todo, Deadline, Event).
      */
-    private ArrayList<Task> tasksList;
+    private final ArrayList<Task> tasksList;
 
     /**
      * Instantiates a new Task list.
@@ -22,11 +23,8 @@ public class TaskList {
      * @param loadTasksList the load tasks list
      */
     public TaskList(ArrayList<Task> loadTasksList) {
-
             this.tasksList = new ArrayList<>();
             this.tasksList.addAll(loadTasksList);
-
-
     }
 
     public ArrayList<Task> getTasksList() {
@@ -61,10 +59,37 @@ public class TaskList {
         this.tasksList.remove(index);
     }
 
+    public TaskList dateSort(){
+        ArrayList<TimeTask> sortedTasks = new ArrayList<>();
+        ArrayList<Task> nonSortedTasks = new ArrayList<>();
+        ArrayList<Task> chronoTasks = new ArrayList<>();
+
+        for(int i = 0; i < this.getTasksCount(); i++){
+            if(this.getTasksList().get(i) instanceof Todo){
+                nonSortedTasks.add(this.getTasksList().get(i));
+            }else if(this.getTasksList().get(i) instanceof Deadlines){
+                sortedTasks.add(new TimeTask( (Deadlines) this.getTasksList().get(i)));
+
+            }else{
+                assert (this.getTasksList().get(i) instanceof Events) : "dateSort() error";
+                sortedTasks.add(new TimeTask( (Events) this.getTasksList().get(i)));
+            }
+        }
+        Collections.sort(sortedTasks);
+
+        for(int i = 0; i < sortedTasks.size(); i++){
+            chronoTasks.add(sortedTasks.get(i).getTask());
+        }
+        chronoTasks.addAll(nonSortedTasks);
+        return new TaskList(chronoTasks);
+
+    }
+
     /***
      * Provides the complete current list of Tasks.
      * @return String of current list of Tasks
      */
+
     @Override
     public String toString() {
         //List Tasks
