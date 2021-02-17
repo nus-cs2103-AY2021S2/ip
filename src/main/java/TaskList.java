@@ -34,6 +34,8 @@ public class TaskList {
      * @throws IOException for modifying data.
      */
     public String doneTask(int taskIndex) throws IOException {
+        assert(taskIndex >= 0 && taskIndex < tasks.size());
+
         String before = tasks.get(taskIndex).formatData();
 
         tasks.get(taskIndex).markAsDone();
@@ -52,6 +54,8 @@ public class TaskList {
      * @throws IOException for deleting from file.
      */
     public String deleteTask(int taskIndex) throws IOException {
+        assert(taskIndex >= 0 && taskIndex < tasks.size());
+
         String response;
 
         Task deletedTask = tasks.get(taskIndex);

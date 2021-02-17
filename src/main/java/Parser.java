@@ -104,6 +104,8 @@ public class Parser {
                 }
             }
         }
+        assert(result.size() > 0);
+
         return result;
     }
 

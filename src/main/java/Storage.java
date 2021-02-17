@@ -65,24 +65,22 @@ public class Storage {
             String desc = dataArr[2];
 
             switch (taskType) {
-                case "T":
-                    ToDos newTodo = new ToDos(desc, isDone.equals("1"));
-                    tasks.add(newTodo);
-                    numTasks++;
-                    break;
-                case "D":
-                    LocalDate by = LocalDate.parse(dataArr[3]);
-                    Deadlines newDeadline = new Deadlines(desc, by, isDone.equals("1"));
-                    tasks.add(newDeadline);
-                    numTasks++;
-                    break;
-                case "E":
-                    LocalDate at = LocalDate.parse(dataArr[3]);
-                    Events newEvent = new Events(desc, at, isDone.equals("1"));
-                    tasks.add(newEvent);
-                    numTasks++;
-                    break;
+            case "T":
+                ToDos newTodo = new ToDos(desc, isDone.equals("1"));
+                tasks.add(newTodo);
+                break;
+            case "D":
+                LocalDate by = LocalDate.parse(dataArr[3]);
+                Deadlines newDeadline = new Deadlines(desc, by, isDone.equals("1"));
+                tasks.add(newDeadline);
+                break;
+            case "E":
+                LocalDate at = LocalDate.parse(dataArr[3]);
+                Events newEvent = new Events(desc, at, isDone.equals("1"));
+                tasks.add(newEvent);
+                break;
             }
+            numTasks++;
         }
     }
 
@@ -118,6 +116,8 @@ public class Storage {
      * @throws IOException for FileWriter.
      */
     public void modifyFile(String before, String after) throws IOException {
+        assert(stringBufferOfData.length() > 0);
+
         int startIndex = stringBufferOfData.indexOf(before);
         int endIndex = startIndex + before.length();
         stringBufferOfData.replace(startIndex, endIndex, after);
@@ -135,6 +135,8 @@ public class Storage {
      * @throws IOException for FileWriter.
      */
     public void deleteFromFile(String data) throws IOException {
+        assert(stringBufferOfData.length() > 0);
+
         int startIndex = stringBufferOfData.indexOf(data);
         int endIndex = startIndex + data.length() + 1;
         stringBufferOfData.delete(startIndex, endIndex);
