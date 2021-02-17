@@ -1,0 +1,5 @@
+T | 0 | borrow book |  
+D | 0 | return book  | Sunday
+D | 0 | do homework  | no idea :-p
+D | 0 | do dishes  | Oct 11 2019
+E | 0 | do tasks  | Jan 15 2020

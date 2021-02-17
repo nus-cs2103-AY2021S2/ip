@@ -8,15 +8,7 @@ public class DukeUi {
     private TaskList tasks;
     private Parser parser;
 
-    public DukeUi() {
-        initializeDuke("duke.txt");
-    }
-
-    public String getResponse(String input) {
-        return this.parser.response(input);
-    }
-
-    private void initializeDuke(String filePath) {
+    public DukeUi(String filePath) {
         try {
             this.storage = new Storage(filePath);
             this.tasks = new TaskList(storage.load());
@@ -25,5 +17,19 @@ public class DukeUi {
         }
         this.parser = new Parser(storage, tasks);
     }
+
+    public String getResponse(String input) {
+        return this.parser.response(input);
+    }
+
+    // private void initializeDuke(String filePath) {
+    //     try {
+    //         this.storage = new Storage(filePath);
+    //         this.tasks = new TaskList(storage.load());
+    //     } catch (Exception e) {
+    //         this.tasks = new TaskList();
+    //     }
+    //     this.parser = new Parser(storage, tasks);
+    // }
 
 }
