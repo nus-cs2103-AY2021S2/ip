@@ -1,7 +1,130 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+   Henlooooo~! My name is DukeNukem!
+   What can I do for you today? :)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Wakarimashita! Task added to list:
+    [T][ ] eat cake
+    The size of your task list is now: 1
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Tasks in your list are~: 
+    1.[T][ ] eat cake
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+Great~! Task completed:
+    [T][?] eat cake
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Wakarimashita! Task added to list:
+    [D][ ] shoot pancakes (by: Tuesday)
+    The size of your task list is now: 2
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Tasks in your list are~: 
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Tasks in your list are~: 
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Wakarimashita! Task added to list:
+    [T][ ] go to school
+    The size of your task list is now: 3
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Wakarimashita! Task added to list:
+    [D][ ] return book (by: Sunday)
+    The size of your task list is now: 4
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Tasks in your list are~: 
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
+    3.[T][ ] go to school
+    4.[D][ ] return book (by: Sunday)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Wakarimashita! Task added to list:
+    [E][ ] project meeting (at: Mon 2-4pm)
+    The size of your task list is now: 5
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Tasks in your list are~: 
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
+    3.[T][ ] go to school
+    4.[D][ ] return book (by: Sunday)
+    5.[E][ ] project meeting (at: Mon 2-4pm)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+Great~! Task completed:
+    [D][?] return book (by: Sunday)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Wakarimashita! Task added to list:
+    [T][ ] play cards against humanity
+    The size of your task list is now: 6
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Wakarimashita! Task added to list:
+    [D][ ] submit cs2103 assignment (by: tomorrow)
+    The size of your task list is now: 7
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Wakarimashita! Task added to list:
+    [E][ ] nomination of hawker culture (at: Sunday wholeday)
+    The size of your task list is now: 8
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Tasks in your list are~: 
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
+    3.[T][ ] go to school
+    4.[D][?] return book (by: Sunday)
+    5.[E][ ] project meeting (at: Mon 2-4pm)
+    6.[T][ ] play cards against humanity
+    7.[D][ ] submit cs2103 assignment (by: tomorrow)
+    8.[E][ ] nomination of hawker culture (at: Sunday wholeday)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Okie! I've deleted the task from your list:
+    [E][ ] project meeting (at: Mon 2-4pm)
+    The size of your task list is now: 7
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Okie! I've deleted the task from your list:
+    [D][ ] shoot pancakes (by: Tuesday)
+    The size of your task list is now: 6
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Hmm... Looks like the task number isn't correct. Check it and try again!
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Tasks in your list are~: 
+    1.[T][?] eat cake
+    2.[T][ ] go to school
+    3.[D][?] return book (by: Sunday)
+    4.[T][ ] play cards against humanity
+    5.[D][ ] submit cs2103 assignment (by: tomorrow)
+    6.[E][ ] nomination of hawker culture (at: Sunday wholeday)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Hope you had an enjoyable experience! Good-bye~

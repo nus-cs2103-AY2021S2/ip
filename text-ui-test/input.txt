@@ -1,0 +1,26 @@
+todo eat cake
+list
+todo
+deadline
+done 1
+deadline shoot pancakes /by 2021-01-24
+list
+list
+todo go to school
+deadline return book /by 2021-01-27
+list
+deadline
+event project meeting /at 2021-01-15
+list
+done 4
+event
+todo 
+todo play cards against humanity
+deadline submit cs2103 assignment /by 2021-02-01
+event nomination of hawker culture /at 2021-03-01
+list
+delete 5
+delete 2
+done 7
+list
+bye
