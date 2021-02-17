@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class UI {
     private static final String WELCOME_MESSAGE =  "Hello! I'm Duke\nWhat can I do for you today?";
     private static final String GOODBYE_MESSAGE = "Good bye and take care! This application will close in 5 seconds.";
+    private static final String SIZE_ASSERT_MESSAGE = "size of list cannot be negative";
 
     public UI() {
     }
@@ -52,6 +53,7 @@ public class UI {
      */
     private String findMessage(DukeList list, String keyword) {
         int size = list.getSize();
+        assert size >= 0 : SIZE_ASSERT_MESSAGE;
         int counter = 1;
         StringBuilder fullFindMessage = new StringBuilder("Here are tasks matching the keyword provided");
         for (int i = 0; i < size; i++) {
@@ -70,6 +72,7 @@ public class UI {
      */
     public String listMessage(DukeList list) {
         int size = list.getSize();
+        assert size >= 0 : SIZE_ASSERT_MESSAGE;
         StringBuilder fullListMessage = new StringBuilder("Here are your task!");
         for (int i = 0; i < size; i++) {
             fullListMessage.append("\n").append(i + 1).append(".").append(list.get(i));
@@ -114,7 +117,9 @@ public class UI {
         int counter = 1;
         StringBuilder fullShowString = new StringBuilder("Here are your task on "
                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-        for (int i = 0; i < list.getSize(); i++) {
+        int size = list.getSize();
+        assert size >= 0 : SIZE_ASSERT_MESSAGE;
+        for (int i = 0; i < size; i++) {
             Task curr = list.get(i);
             if (curr instanceof Deadlines && ((Deadlines) curr).getBy().equals(date)) {
                 fullShowString.append("\n").append(counter).append(".").append(curr);
