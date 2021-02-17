@@ -15,20 +15,20 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ## List of Features 
 These are the following features of Duke:
-###Add tasks
+### Add tasks
 Add task into the tasklist.
-###Delete tasks
+### Delete tasks
 Deletes the task from the tasklist.
-###List tasks
+### List tasks
 List all the task in the tasklist.
-###Mark task as done
+### Mark task as done
 Marks the task as done.
-###Tag tasks
+### Tag tasks
 Tag the task added.
-###Find tag/task
+### Find tag/task
 Display the list of task that has the tag/task in the tasklist.
 
-##Categories of tasks
+## Categories of tasks
 There are 3 categories of tasks:
 1) Todo represented by
    [T][ ] find book
@@ -37,12 +37,12 @@ There are 3 categories of tasks:
 3) Event
    [E][ ] project meeting (at: 10/02/2021 2000)
 
-##Notes about commands
+## Notes about commands
 When there are extra parameters behind the function 'list' , the program is smart enough to know that the user wants the 'list' function so no error would be thrown and the tasklist would be displayed.
 
 The date format should be written in the format "d/M/yyyy HHmm", else an error would be thrown
    
-#Saving of commands
+# Saving of commands
 Commands would be saved into a file once the 'bye' command is typed into the app. Data will be saved in the directory where you saved the jar file, under /data/duke.txt . A new file would be formed if there are no existing file. If there exists an existing file, the file would be used. 
 
 
