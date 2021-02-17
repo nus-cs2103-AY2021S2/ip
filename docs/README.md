@@ -133,16 +133,18 @@ Example:
 The program will terminate a few seconds  after returning a "Bye. Hope to see you again!" message. 
 
 
-## Command summary
+## Command Summary
 
-Action | Format, Examples
---------|------------------
-**Add todo** |  `todo description`e.g, `add todo watch netflix `
-**Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
-**Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
+**Action**  | **Format, Examples**
+--------|-----------------
+**Add todo task** | `todo TASK_DESCRIPTION` e.g, `add todo watch netflix `
+**Add deadline task** | `deadline TASK_DESCRIPTION /by DATE` e.g., `deadline finish cs2103 quiz /by 18/02/2021`
+**Add event task** | `event TASK_DESCRIPTION /at DATE START_TIME END_TIME` e.g., `event attend internship meeting /at 17/02/2021 1000-1100`
 **List** | `list`
-**Delete** |`delete INDEX`e.g., `delete 3`
-**Find** |  `find KEYWORD [MORE_KEYWORDS]` e.g., `find cs2103 quiz`
-**Mark as done** | `done INDEX` e.g., 'done 4'
+**Mark as Done** |`delete TASK_INDEX` e.g., `delete 3`
+**Delete** | `delete TASK_NUMBER` e.g., `delete 1`
+**Find** | `find KEYWORD` e.g., `find cs2103`
+**Statistics** | `stats`
 **Exit** | `bye`
+
 
