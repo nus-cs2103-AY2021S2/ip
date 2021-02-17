@@ -28,7 +28,6 @@ public class Deadline extends Task {
      * @param description A brief description of the deadline.
      * @param isDone "0" if task is not done. "1" if task is done.
      */
-
     public Deadline(String description, String isDone, LocalDateTime deadline) {
         super(description, isDone);
         this.deadline = deadline;

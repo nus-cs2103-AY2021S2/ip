@@ -29,7 +29,6 @@ public class Event extends Task {
      * @param isDone "0" if the task is not done. "1" if the task is done.
      * @param eventTime Date and Time of the Event.
      */
-
     public Event(String description, String isDone, LocalDateTime eventTime) {
         super(description, isDone);
         this.eventTime = eventTime;

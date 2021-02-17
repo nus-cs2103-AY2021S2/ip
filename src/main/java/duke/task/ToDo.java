@@ -20,7 +20,6 @@ public class ToDo extends Task {
      * @param description A brief description of the ToDo task.
      * @param isDone "0" if the task is not done. "1" if the task is done.
      */
-
     public ToDo(String description, String isDone) {
         super(description, isDone);
     }

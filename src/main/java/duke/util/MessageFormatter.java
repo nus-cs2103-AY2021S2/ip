@@ -51,6 +51,12 @@ public class MessageFormatter {
                 taskDone);
     }
 
+    /**
+     * Formats Duke's message to the user after setting a task as not complete.
+     *
+     * @param taskUndone The task that was set as not complete.
+     * @return A String that lets the user know which task was set as not complete.
+     */
     public String formatUndoDone(Task taskUndone) {
         return ("I have marked this task as not done:\n" +
                 taskUndone);
@@ -99,6 +105,13 @@ public class MessageFormatter {
         return msg;
     }
 
+    /**
+     * Formats Duke's message to the user after undoing an Add command.
+     *
+     * @param removedTask The task that was removed.
+     * @param tasks The list of tasks.
+     * @return A String that lets the user know which task was removed.
+     */
     public String formatUndoAdd(Task removedTask, TaskList tasks) {
         return ("ADD undone, the following task is removed:\n" +
                 removedTask +
@@ -108,6 +121,13 @@ public class MessageFormatter {
                 " in your list");
     }
 
+    /**
+     * Formats Duke's message to the user after undoing a Delete command.
+     *
+     * @param addedTask The task that was added back into the list.
+     * @param tasks The list of tasks.
+     * @return A String that lets the user know which task was added back into the list.
+     */
     public String formatUndoDelete(Task addedTask, TaskList tasks) {
         return ("DELETE undone, the following task is added:\n" +
                 addedTask +

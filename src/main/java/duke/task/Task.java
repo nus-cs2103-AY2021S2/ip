@@ -13,7 +13,6 @@ public class Task {
      * @param description A brief description of the task.
      * @param isDone "0" if the task is done. "1" if the task is not done.
      */
-
     protected Task(String description, String isDone) {
         this.description = description;
         this.isDone = isDone.equals("1") ? true : false;
@@ -24,7 +23,6 @@ public class Task {
      *
      * @return A cross symbol if task is not done, a tick symbol if task is done.
      */
-
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
@@ -34,7 +32,6 @@ public class Task {
      *
      * @return A String describing the task.
      */
-
     public String getDescription() {
         return description;
     }
@@ -51,7 +48,6 @@ public class Task {
     /**
      * Updates the task as completed.
      */
-
     public void setDone() {
         this.isDone = true;
     }
@@ -59,7 +55,6 @@ public class Task {
     /**
      * Updates the task as incomplete.
      */
-
     public void setNotDone() {
         this.isDone = false;
     }

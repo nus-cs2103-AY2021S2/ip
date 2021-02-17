@@ -31,7 +31,7 @@ public class Parser {
      * Parses user input and returns a Command corresponding to user input.
      *
      * @param userInput The input of the user.
-     * @param tasks     List of tasks.
+     * @param tasks List of tasks.
      * @return An executable command.
      */
     public static Command parse(String userInput, TaskList tasks) {
@@ -78,6 +78,15 @@ public class Parser {
         return res;
     }
 
+    /**
+     * Handles the case when user enters a ToDo command.
+     *
+     * @param split Array of substrings obtained from removing blank spaces from user input.
+     * @param userInput String that represents user input.
+     * @param tasks A list of tasks.
+     * @return An executable command that adds a ToDo task.
+     * @throws DukeArgumentException If user did not enter any task description.
+     */
     private static AddCommand handleToDo(String[] split, String userInput, TaskList tasks) throws DukeArgumentException {
         checkStringArgument(split, COMMAND.TODO);
         String description = userInput.substring(5);
@@ -87,6 +96,17 @@ public class Parser {
         return new AddCommand(toAdd);
     }
 
+    /**
+     * Handles the case when user enters a Deadline or Event command.
+     *
+     * @param split Array of substrings obtained from removing blank spaces from user input.
+     * @param userInput String that represents user input.
+     * @param command The name of the command.
+     * @param tasks A list of tasks.
+     * @return An executable command that adds a Deadline/Event task.
+     * @throws DukeArgumentException If user did not enter any task description.
+     * @throws DukeDateTimeException If user did not enter any Date and Time.
+     */
     private static AddCommand handleDateTimeTasks(String[] split, String userInput, String command, TaskList tasks)
             throws DukeArgumentException, DukeDateTimeException {
         checkStringArgument(split, command);
@@ -104,12 +124,29 @@ public class Parser {
         return new AddCommand(toAdd);
     }
 
+    /**
+     * Handles the case when user enters a Find command.
+     *
+     * @param split Array of substrings obtained from removing blank spaces from user input.
+     * @param userInput String that represents user input.
+     * @return An executable command that searches for all tasks related to the keyword.
+     * @throws DukeArgumentException If user did not enter any keyword to search for.
+     */
     private static FindCommand handleFind(String[] split, String userInput) throws DukeArgumentException {
         checkStringArgument(split, COMMAND.FIND);
         String keyword = userInput.substring(5);
         return new FindCommand(keyword);
     }
 
+    /**
+     * Handles the case when user enters a Done or Delete command.
+     *
+     * @param split Array of substrings obtained from removing blank spaces from user input.
+     * @param tasks A list of tasks.
+     * @param command The name of the command.
+     * @return An executable command that deletes a task from the list or sets a task as done.
+     * @throws DukeArgumentException If user did not enter any task index, or if task index is invalid.
+     */
     private static Command handleTaskOps(String[] split, TaskList tasks, String command) throws DukeArgumentException {
         int taskIdx = checkNumericalArgument(split, tasks);
         assert(taskIdx >= 0 && (taskIdx < tasks.getSize()));

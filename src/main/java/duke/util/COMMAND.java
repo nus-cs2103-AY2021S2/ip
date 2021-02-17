@@ -1,5 +1,8 @@
 package duke.util;
 
+/**
+ * A class that contains all constants for user commands.
+ */
 public class COMMAND {
     public static final String EVENT = "event";
     public static final String DEADLINE = "deadline";

@@ -67,6 +67,12 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Adds task to a specific index of the list.
+     *
+     * @param task The task to be added to the list.
+     * @param taskIdx The index where the task is added.
+     */
     public void addTask(Task task, int taskIdx) {
         tasks.add(taskIdx, task);
     }
