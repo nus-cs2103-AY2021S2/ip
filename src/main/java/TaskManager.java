@@ -1,9 +1,7 @@
 package duke;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.List;
 
 /**
  * Encapsulates information of all tasks entered by user.

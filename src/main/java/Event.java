@@ -19,14 +19,14 @@ public class Event extends Task {
         if (eventDateTime.contains("-")) {
             this.eventDateTime = LocalDate.parse(eventDateTime);
         } else {
-            this.eventDateTime = LocalDate.parse(eventDateTime, 
+            this.eventDateTime = LocalDate.parse(eventDateTime,
                 DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
     }
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), super.toString(), 
+        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), super.toString(),
             this.eventDateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }

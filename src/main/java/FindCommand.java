@@ -2,7 +2,7 @@ package duke;
 
 /** Find command is used when user wants to find all tasks that contain a certain keyword. */
 public class FindCommand extends Command {
-    String keyword;
+    private String keyword;
 
     /** Initialises find command with keyword. */
     public FindCommand(String description) {
@@ -19,7 +19,7 @@ public class FindCommand extends Command {
         String found = manager.find(this.keyword);
         if (found.equals("")) {
             return String.format("You have no tasks that matches \"%s\"", this.keyword);
-        } 
+        }
         return this.message + "\n" + manager.find(this.keyword);
     }
 }

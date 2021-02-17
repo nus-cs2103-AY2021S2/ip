@@ -1,12 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.lang.ArrayIndexOutOfBoundsException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 /** The Parser makes sense of user inputs and executes follow up actions accordingly. */
 public class Parser {
     /** Storage to store and update tasks entered in hard drive. */
@@ -29,7 +22,7 @@ public class Parser {
      * @throws DukeException if input has no keyword or if task has no description.
      */
     public String process(String input) throws DukeException {
-        if (input.contains("todo") || input.contains("deadline") 
+        if (input.contains("todo") || input.contains("deadline")
                 || input.contains("event") || input.contains("find")) {
             if (input.split(" ").length == 1) {
                 throw new EmptyException();

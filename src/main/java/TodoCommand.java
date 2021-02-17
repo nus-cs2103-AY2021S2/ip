@@ -16,7 +16,7 @@ public class TodoCommand extends AddCommand {
     public String execute(TaskManager manager, Ui ui, Storage storage) {
         Task t = new Todo(this.description.split("todo ")[1]);
         manager.addTask(t);
-        this.message += t.toString() + "\n" 
+        this.message += t.toString() + "\n"
             + String.format("Now you have %s tasks in the list.", manager.taskVolume());
         storage.writeToDisk(manager.getStore());
         return this.message;

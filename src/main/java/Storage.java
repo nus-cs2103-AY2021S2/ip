@@ -1,12 +1,12 @@
 package duke;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.List;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * The Storage is used to interact with content stored on hard drive.
@@ -21,7 +21,7 @@ public class Storage {
             dir.mkdirs();
             File f = new File(dir, "mytasks.txt");
             f.createNewFile();
-            this.filepath  = f.toPath();
+            this.filepath = f.toPath();
         } catch (IOException err) {
             err.printStackTrace();
         }
@@ -49,7 +49,7 @@ public class Storage {
                 String line = sc.nextLine();
                 boolean done = false;
                 Task t;
-                if (!line.split("\\]")[1].split("\\[")[1].equals(" ")) { 
+                if (!line.split("\\]")[1].split("\\[")[1].equals(" ")) {
                     done = true;
                 }
                 if (line.contains("T")) {

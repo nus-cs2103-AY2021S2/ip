@@ -9,7 +9,7 @@ public abstract class Command {
         this.message = msg;
     }
 
-    /** 
+    /**
      * Execute each command to achieve respective effect.
      * @param manager Helper that manages the stored tasks.
      * @param ui Interface helper that decides what user sees.

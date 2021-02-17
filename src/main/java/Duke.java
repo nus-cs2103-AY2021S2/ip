@@ -1,14 +1,14 @@
+import duke.DukeException;
+import duke.Parser;
 import duke.Storage;
 import duke.Ui;
-import duke.Parser;
-import duke.DukeException;
 
 /** Reads in user inputs and perform actions accordingly. */
 public class Duke {
-    /** Storage to store and update tasks entered in hard drive. */
-    private Storage storage;
     /** Template for replying user. */
     protected Ui ui;
+    /** Storage to store and update tasks entered in hard drive. */
+    private Storage storage;
     /** Helper to make sense of user inputs. */
     private Parser parser;
 

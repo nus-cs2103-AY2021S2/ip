@@ -5,9 +5,9 @@ public class HelpCommand extends Command {
 
     /** Initialises find command with keyword. */
     public HelpCommand() {
-        super("here are some commands you can try!\n" +
-        	"todo DESCRIPTION / deadline DESCRIPTION by DUEDATE / event DESCRIPTION at DATETIME" + 
-        	"/ delete INDEX / done INDEX / list / find KEYWORD / bye " + "(datetime format: yyyy-mm-dd)");
+        super("here are some commands you can try!\n"
+                + "todo DESCRIPTION / deadline DESCRIPTION by DUEDATE / event DESCRIPTION at DATETIME"
+                + "/ delete INDEX / done INDEX / list / find KEYWORD / bye " + "(datetime format: yyyy-mm-dd)");
     }
 
     /** Executes find command to present all tasks containing keyword.
