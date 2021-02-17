@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Custom date class that wraps a java.time.LocalTime object. Should only be called by KiwiDateTime class.
  */
 public class KiwiDate {
-    private LocalDate date;
+    private final LocalDate date;
 
     private KiwiDate(LocalDate ld) {
         this.date = ld;

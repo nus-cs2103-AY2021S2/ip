@@ -8,8 +8,8 @@ import java.util.HashMap;
  */
 class ParseKiwiDateTime {
 
-    HashMap<String, Integer> dateDelimiters = new HashMap<>();
-    HashMap<String, Integer> timeDelimiters = new HashMap<>(); // time delimiter might not always be used; also might have whitesapces
+    final HashMap<String, Integer> dateDelimiters = new HashMap<>();
+    final HashMap<String, Integer> timeDelimiters = new HashMap<>(); // time delimiter might not always be used; also might have whitesapces
 
     public void initDelimiters() {
         dateDelimiters.put("-", 1);

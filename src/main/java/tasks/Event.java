@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * The event task has an event-specific variable, event timing.
  */
 public class Event extends Task {
-    private LocalDateTime eventTiming; // todo make a custom class for datetimes (it can contain formatting functions)
+    private final LocalDateTime eventTiming; // todo make a custom class for datetimes (it can contain formatting functions)
 
     /**
      * Public constructor which is used when parsing user inputted command

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static Duke duke = new Duke(); //
+    private static final Duke duke = new Duke(); //
 
     @Override
     public void start(Stage stage) {

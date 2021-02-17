@@ -4,7 +4,8 @@ import format.Ui;
 import tasklist.TaskList;
 
 public class HelpCommand extends CommandWithNoParameters {
-    private String helpMessage = Ui.formatMultiLineMessages("Here are all the inputs you can enter: " ,
+    private final String helpMessage =
+            Ui.formatMultiLineMessages("Here are all the inputs you can enter: " , // there's a bug in formatting this
                     "replace words in curly braces as appropriate" ,
                     "list" ,
                     "todo {description}" ,
@@ -12,7 +13,7 @@ public class HelpCommand extends CommandWithNoParameters {
                     "deadline {description} /by DD-MM hh:mm" ,
                     "done {task number}" ,
                     "delete {task number}" ,
-                    "find {keyword}" , // do you need to find todo/event keywords also
+                    "find {keyword}",
                     //"help date" ,
                     //"help shortcuts" ,
                     "End of command list.");

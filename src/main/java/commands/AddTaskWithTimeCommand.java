@@ -1,7 +1,6 @@
 package commands;
 
 import exceptions.MissingArgumentException;
-import tasklist.TaskList;
 
 // can be generalised to two arg command
 // need to make it clear whether you're counting "todo" as an argument
@@ -11,8 +10,9 @@ public abstract class AddTaskWithTimeCommand extends CommandWithParameters {
     protected String secondArg;
     protected String thirdArg;
     protected String missingThirdArgErrMsg = "Missing third argument";
-    protected String missingDelimiterErrMsg =
-            "Missing delimiter / time argument. Please use this command this way: " + this.methodUsage;
+    protected final String missingDelimiterErrMsg =
+            "Missing delimiter / time argument. Please type help for usage.";
+            // Please use this command this way: " + methodUsage;
     
     protected AddTaskWithTimeCommand(String commandName, String commandBody) {
         super(commandName, commandBody);

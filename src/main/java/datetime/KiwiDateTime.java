@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
  */
 public class KiwiDateTime {
 //    private LocalDateTime dateTime;
-    private KiwiDate kiwiDate;
-    private KiwiTime kiwiTime;
+    private final KiwiDate kiwiDate;
+    private final KiwiTime kiwiTime;
 
     // todo possible inheritance: subclasses for datetimes
     // or just customize toStrings not to print minute / hour if don't have, or year if this year
@@ -50,9 +50,6 @@ public class KiwiDateTime {
         // todo, any of the java methods throw a datetime exception...
         print(LocalDateTime.now());
 
-//        LocalDateTime a =
-//                LocalDateTime.of(2021, 4, 23, 6, 38);
-
         print(
                 KiwiDateTime.ofThisYear(21, 4),
                 KiwiDateTime.ofThisYear(31, 3, 12),
@@ -60,12 +57,6 @@ public class KiwiDateTime {
                 KiwiDate.of(21, 4),
                 KiwiTime.of(13, 3)
         );
-//
-//        try {
-////            KiwiDateTime.ofThisYear(5, 2, 60, 11);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 }
 

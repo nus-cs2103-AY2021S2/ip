@@ -7,7 +7,7 @@ import java.time.LocalTime;
  */
 public class KiwiTime {
     private LocalTime time;
-    private boolean isEmpty; // i.e. user did not set time
+    private final boolean isEmpty; // i.e. user did not set time
     private boolean isHourOnly;
 
     KiwiTime() {

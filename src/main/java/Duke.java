@@ -64,7 +64,7 @@ public class Duke {
         }
 
         // save to hard disk - think about how to OOP saving behaviour later
-        boolean needRewrite = true; // take this from command object instead
+        boolean needRewrite = true; // todo take this from command object instead
         if (needRewrite) {
             try {
                 Storage.saveTasksList(taskList);

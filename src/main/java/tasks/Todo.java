@@ -46,8 +46,4 @@ public class Todo extends Task {
 
     }
 
-    // for testing purposes
-    public static void main(String[] args) {
-    }
-
 }

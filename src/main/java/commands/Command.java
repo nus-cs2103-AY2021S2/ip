@@ -6,15 +6,18 @@ import format.Ui;
 import tasklist.TaskList;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 public abstract class Command {
 
     String[] commandList =
             {"bye", "list", "event", "todo", "deadline", "delete", "done"};
 
+
+
     /** For description and toString purposes. Not for switch case or anything that an enum
      * could do better. Should correspond with the command to type in? */
-    String commandName;
+    final String commandName;
 
     protected final String commandBody;
     protected String commandOutputMsg;
@@ -30,7 +33,7 @@ public abstract class Command {
 
     /**
      * Runs a command and stores output and status in instance variables.
-     * @param
+     * @param taskList taskList to call relevant methods on
      */
     public abstract void run(TaskList taskList);
     // exceptions thrown from running these commands should be caught in this run method so they can be stored in command output?

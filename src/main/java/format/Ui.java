@@ -96,8 +96,6 @@ public class Ui {
                 + "####################\n";
 
         // intro message
-//        System.out.println(logo);
-//        print(new String[]{});
         return logo + indent("Welcome, traveller. I'm Kiwi.", "What would you like to do today?\n");
     }
 
@@ -156,12 +154,12 @@ public class Ui {
      */
     public static void main(String[] args) {
         Ui ui = new Ui();
-        System.out.println(ui.getExitMessage());
+        System.out.println(getExitMessage());
         printExitMsg();
 
         String er = "halkf";
         printException(er);
-        System.out.println(ui.formatException(er));
+        System.out.println(formatException(er));
     }
     
     public static String stringifyTaskList(TaskList taskList) {
