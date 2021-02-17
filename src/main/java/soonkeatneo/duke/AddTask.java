@@ -62,7 +62,7 @@ public class AddTask {
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException(
                         "Your input format doesn't seem right!"
-                                + " For deadlines, it needs to be: deadline <title> /at [YYYY-MM-DD]");
+                                + " For deadlines, it needs to be: deadline <title> /by [YYYY-MM-DD]");
             } catch (DateTimeParseException e) {
                 throw new InvalidInputException(
                         "The format of your date and time seem to be wrong! Ensure it adheres to YYYY-MM-DD format.");
