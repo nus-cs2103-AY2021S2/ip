@@ -1,1 +1,1 @@
-T | 1 | new task
+T | 0 | new task
