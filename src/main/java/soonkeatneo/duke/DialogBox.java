@@ -18,7 +18,7 @@ import javafx.scene.layout.HBox;
  * Handles the dialog boxes that are used in the graphical interface of Duke.
  *
  * @author Soon Keat Neo
- * @version CS2103T AY20/21 Sem 2 iP v0.1
+ * @version CS2103T AY20/21 Sem 2 iP
  */
 public class DialogBox extends HBox {
     @FXML

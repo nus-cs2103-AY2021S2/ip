@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * Graphical user interface implementation for the Duke chat-bot.
  *
  * @author Soon Keat Neo
- * @version CS2103T AY20/21 Sem 2 iP v0.1
+ * @version CS2103T AY20/21 Sem 2 iP
  */
 public class Main extends Application {
 

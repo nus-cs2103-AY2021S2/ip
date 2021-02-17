@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
  * Main Window implementation for the Duke chat-bot.
  *
  * @author Soon Keat Neo
- * @version CS2103T AY20/21 Sem 2 iP v0.1
+ * @version CS2103T AY20/21 Sem 2 iP
  */
 public class MainWindow extends AnchorPane {
 

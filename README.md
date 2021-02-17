@@ -1,4 +1,9 @@
-# Duke project template
+# Duke
+
+<img src="https://soonkeatneo.github.io/ip/Ui.png" align="center"/>
+<h1 align="center">DukeNukem</h1>
+
+[![CI Status](https://github.com/soonkeatneo/ip/workflows/Java%20CI/badge.svg)](https://github.com/soonkeatneo/ip/actions)
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
