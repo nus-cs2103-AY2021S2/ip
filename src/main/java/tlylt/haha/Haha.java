@@ -4,7 +4,6 @@ import java.util.List;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,15 +12,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Haha extends Application {
+    private static final double PREF_WIDTH = 400.0;
+    private static final double PREF_HEIGHT = 600.0;
+    private static final int SCROLL_PREF_HEIGHT = 572;
+    private static final double USER_INPUT_PREF_WIDTH = 325.0;
+    private static final double V_VALUE = 1.0;
+    private static final double SEND_BUTTON_PREF_WIDTH = 55.0;
+    private static final double ANCHOR = 1.0;
+    private static final String FX_BACKGROUND_IMAGE_URL_IMAGES_BACKGROUND_JPG =
+            "-fx-background-image: url(\"/images/background.jpg\");";
     private final TaskList database = new TaskList();
     private final Ui ui = new Ui();
     private final ScrollPane scrollPane = new ScrollPane();
@@ -42,6 +46,9 @@ public class Haha extends Application {
         this.database.readTasks(list);
     }
 
+    /**
+     * Starts the Application logic.
+     */
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     @Override
@@ -58,7 +65,7 @@ public class Haha extends Application {
         // Step 3 Add functionality to handle user input
         configureUserInteraction();
 
-        // Starter
+        // Start internal logic
         new Haha();
         dialogContainer.getChildren().add(makeHahaDialogBox(ui.welcome()));
         stage.setScene(scene);
@@ -73,12 +80,8 @@ public class Haha extends Application {
         scrollPane.setContent(dialogContainer);
 
         AnchorPane mainLayout = new AnchorPane();
-
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        mainLayout.setPrefSize(400.0, 600.0);
-        mainLayout.setBackground(new Background(
-                new BackgroundFill(Color.rgb(231, 239, 248), CornerRadii.EMPTY, Insets.EMPTY)));
-
+        mainLayout.setPrefSize(PREF_WIDTH, PREF_HEIGHT);
         this.scene = new Scene(mainLayout);
 
     }
@@ -88,39 +91,38 @@ public class Haha extends Application {
     private void formatStage(Stage stage) {
         stage.setTitle("Haha");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(PREF_HEIGHT);
+        stage.setMinWidth(PREF_WIDTH);
     }
 
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     private void formatScrollPane() {
-        scrollPane.setPrefSize(400, 572);
+        scrollPane.setPrefSize(PREF_WIDTH, SCROLL_PREF_HEIGHT);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVvalue(1.0);
+        scrollPane.setVvalue(V_VALUE);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
-        dialogContainer.setStyle(" -fx-background-image: url(\"/images/background.jpg\");");
-        dialogContainer.setBackground(new Background(
-                new BackgroundFill(Color.rgb(231, 239, 248), CornerRadii.EMPTY, Insets.EMPTY)));
+        dialogContainer.setStyle(FX_BACKGROUND_IMAGE_URL_IMAGES_BACKGROUND_JPG);
+
     }
 
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     private void setLayout() {
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        AnchorPane.setTopAnchor(scrollPane, ANCHOR);
+        AnchorPane.setBottomAnchor(sendButton, ANCHOR);
+        AnchorPane.setRightAnchor(sendButton, ANCHOR);
+        AnchorPane.setLeftAnchor(userInput, ANCHOR);
+        AnchorPane.setBottomAnchor(userInput, ANCHOR);
     }
 
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
     private void formatSmallerComponents() {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(USER_INPUT_PREF_WIDTH);
     }
 
     //@@author Jeffry Lum-reused
@@ -130,7 +132,7 @@ public class Haha extends Application {
         userInput.setOnAction((event) -> handleUserInput());
 
         // Scroll down to the end every time dialogContainer's height changes
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(V_VALUE));
     }
 
     private DialogBox makeUserDialogBox(String text) {
@@ -139,7 +141,7 @@ public class Haha extends Application {
     }
 
     private void configureSendButton() {
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(SEND_BUTTON_PREF_WIDTH);
         sendButton.setOnMouseClicked((event) -> handleUserInput());
     }
     private DialogBox makeHahaDialogBox(String text) {
@@ -148,8 +150,7 @@ public class Haha extends Application {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes and clears the user input after processing.
      */
     //@@author Jeffry Lum-reused
     //Reused from https://se-education.org/guides/tutorials/javaFx.html with minor modifications
