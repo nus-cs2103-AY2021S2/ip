@@ -1,8 +1,8 @@
 package duke.exceptions;
 
 /**
- * Represents the a command is used but task name is
- * not being inputted
+ * Represents the a command is given but task name is
+ * not being inputted.
  */
 public class IncompleteCommandException extends DukeException {
     public IncompleteCommandException() {

@@ -19,7 +19,7 @@ public class Deadline extends Task {
      * @param afterBy details after "/by" in the input
      */
     public Deadline (String info, String afterBy) {
-        super(info, taskType.Deadline);
+        super(info, taskType.DEADLINE);
         this.afterBy = afterBy.trim();
     }
 
@@ -32,12 +32,13 @@ public class Deadline extends Task {
      * @param isDone, boolean value to indicate whether task is done
      */
     public Deadline(String info, String afterBy, boolean isDone) {
-        super(info, taskType.Deadline, isDone);
+        super(info, taskType.DEADLINE, isDone);
         this.afterBy = afterBy.trim();
     }
 
     /**
      * Returns the due date and time (if available) of the Deadline object.
+     *
      * @return date and time (if available)
      */
     public String getDateTime() {

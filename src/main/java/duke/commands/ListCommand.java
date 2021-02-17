@@ -7,6 +7,9 @@ import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A command class that gives the list of all the tasks in the taskList.
+ */
 public class ListCommand extends Command {
     public ListCommand(String description) {
         super(description);
@@ -15,9 +18,9 @@ public class ListCommand extends Command {
     /**
      * Returns the tasks in taskList
      *
-     * @param taskList, the list of tasks
-     * @param ui, the UI object
-     * @param storage, the storage object
+     * @param taskList the list of tasks
+     * @param ui the UI object
+     * @param storage the storage object
      * @return String which is the list of tasks in taskList
      * @throws DukeException
      */
@@ -37,7 +40,7 @@ public class ListCommand extends Command {
             sb.append("\n" + String.valueOf(i + 1) + ". " + taskList.getTask(i).toString());
         }
 
-        ui.formatAndPrintType1(sb.toString());
+        ui.formatAndPrintType(sb.toString());
         return sb.toString();
     }
 

@@ -2,6 +2,10 @@ package duke.exceptions;
 
 import duke.tasks.Task;
 
+/**
+ * Represents the exception when a task has been marked as completed
+ * but the 'done' command is called on the task again.
+ */
 public class TaskDoneException extends DukeException {
     private Task task;
 

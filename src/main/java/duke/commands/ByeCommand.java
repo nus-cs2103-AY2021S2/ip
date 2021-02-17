@@ -6,6 +6,9 @@ import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Ends the program
+ */
 public class ByeCommand extends Command {
     public ByeCommand(String description) {
         super(description);
@@ -14,9 +17,9 @@ public class ByeCommand extends Command {
     /**
      * Gives a goodbye greeting
      *
-     * @param taskList, the list of tasks
-     * @param ui, the UI object
-     * @param storage, the storage object
+     * @param taskList the list of tasks
+     * @param ui the UI object
+     * @param storage the storage object
      * @return String which is a goodbye greeting after saving taskList into storage
      * @throws DukeException
      */

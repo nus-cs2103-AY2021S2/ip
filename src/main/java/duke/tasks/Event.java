@@ -13,15 +13,14 @@ public class Event extends Task{
     protected String location;
     protected String dateTime;
 
-
     /**
      * Default constructor used when a new Event task is added
      *
-     * @param info, name of the task
+     * @param info name of the task
      * @param afterAt details after "/at" in the input
      */
     public Event (String info, String afterAt) {
-        super(info, taskType.Event);
+        super(info, taskType.EVENT);
         String[] afterAtList = afterAt.trim().split(" ", 2);
         this.location = afterAtList[0];
         this.dateTime = afterAtList[1];
@@ -32,19 +31,20 @@ public class Event extends Task{
      * Secondary constructor used when a new Event task is loaded
      * from a .txt file
      *
-     * @param info, name of the task
-     * @param afterAt, details after "/at" in the input
-     * @param isDone, boolean value indicating whether task is done
+     * @param info name of the task
+     * @param afterAt details after "/at" in the input
+     * @param isDone boolean value indicating whether task is done
      */
     public Event(String info, String afterAt, boolean isDone) {
-        super(info, taskType.Event, isDone);
+        super(info, taskType.EVENT, isDone);
         String[] afterAtList = afterAt.split(" ", 2);
         this.location = afterAtList[0];
         this.dateTime = afterAtList[1];
     }
 
     /**
-     * Returns the due date and time (if available) of the Deadline object.
+     * Returns the due date and time (if available) of the Event object.
+     *
      * @return date and time (if available)
      */
     public String getDateTime() {

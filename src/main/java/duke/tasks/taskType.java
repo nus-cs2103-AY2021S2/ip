@@ -1,8 +1,11 @@
 package duke.tasks;
 
+/**
+ * An enum class used to dictate the type of tasks
+ */
 public enum taskType {
-    Deadline,
-    Event,
-    ToDo,
-    Task
+    DEADLINE,
+    EVENT,
+    TODO,
+    TASK
 }

@@ -25,9 +25,9 @@ public abstract class Command {
     /**
      * Abstract method to execute command
      *
-     * @param taskList, the list of tasks
-     * @param ui, the UI object
-     * @param storage, the storage object
+     * @param taskList the list of tasks
+     * @param ui the UI object
+     * @param storage the storage object
      * @return String stating what command has been executed
      * @throws DukeException, throws error warning for errors.
      */

@@ -9,6 +9,9 @@ import duke.taskList.TaskList;
 import duke.ui.Ui;
 import duke.tasks.Task;
 
+/**
+ * A command class that marks a task as completed.
+ */
 public class DoneCommand extends Command {
     public DoneCommand(String description) {
         super(description);
@@ -17,9 +20,9 @@ public class DoneCommand extends Command {
     /**
      * Marks a task when it is completed
      *
-     * @param taskList, the list of tasks
-     * @param ui, the UI object
-     * @param storage, the storage object
+     * @param taskList the list of tasks
+     * @param ui the UI object
+     * @param storage the storage object
      * @return String messaged based on Done Command
      * @throws DukeException
      */

@@ -7,6 +7,9 @@ import duke.taskList.TaskList;
 import duke.tasks.*;
 import duke.ui.Ui;
 
+/**
+ * A command class that adds a new task into the taskList
+ */
 public class AddCommand extends Command {
     public AddCommand(String description) {
         super(description);
@@ -15,14 +18,14 @@ public class AddCommand extends Command {
     /**
      * Adds a new task to taskList
      *
-     * @param taskList, the list of tasks
-     * @param ui, the UI object
-     * @param storage, the storage object
+     * @param taskList the list of tasks
+     * @param ui the UI object
+     * @param storage the storage object
      * @return String message based on AddCommand
      * @throws DukeException
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task taskItem = new Task("placebo task", taskType.Task);
+        Task taskItem = new Task("placebo task", taskType.TASK);
         String[] inputList = description.trim().split(" ", 2);
 
         if (inputList.length != 2) {

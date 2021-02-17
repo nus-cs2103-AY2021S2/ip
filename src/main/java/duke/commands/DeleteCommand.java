@@ -8,6 +8,9 @@ import duke.taskList.TaskList;
 import duke.ui.Ui;
 import duke.tasks.Task;
 
+/**
+ * A command class that deletes a task from the taskList
+ */
 public class DeleteCommand extends Command {
     public DeleteCommand(String description) {
         super(description);
@@ -16,9 +19,9 @@ public class DeleteCommand extends Command {
     /**
      * Deletes an existing task in taskList
      *
-     * @param taskList, the list of tasks
-     * @param ui, the UI object
-     * @param storage, the storage object
+     * @param taskList the list of tasks
+     * @param ui the UI object
+     * @param storage the storage object
      * @return String message based on Delete Command
      * @throws DukeException
      */

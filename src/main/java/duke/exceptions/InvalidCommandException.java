@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Represents the exception when an invalid command keyword is given
+ * Represents the exception when an invalid command keyword is given.
  */
 public class InvalidCommandException extends DukeException{
     public InvalidCommandException() {

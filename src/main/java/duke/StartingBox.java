@@ -16,8 +16,8 @@ import javafx.scene.layout.HBox;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * This control represents a dialog box consisting of an ImageView to represent
+ * the speaker's face and a label containing text from the speaker.
  */
 public class StartingBox extends HBox {
     @FXML
@@ -27,6 +27,13 @@ public class StartingBox extends HBox {
     @FXML
     private ImageView dukePhoto;
 
+    /**
+     * Generates the starting box of the CLI app
+     *
+     * @param text String to be displayed when the app starts
+     * @param img The image displayed as the Logo when the app starts
+     * @param dukeImg The image of Duke when it starts
+     */
     private StartingBox(String text, Image img, Image dukeImg) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/StartingBox.fxml"));

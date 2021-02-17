@@ -34,6 +34,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Outputs the logo and starting message when opening up the app
+     *
+     * @param d the Duke object
+     */
     public void setDuke(Duke d) {
         alfred = d;
         dialogContainer.getChildren().add(
@@ -42,16 +47,17 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input while the other contains
+     * Duke's reply and then appends them to the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() throws DukeException {
         String input = userInput.getText();
         String response = alfred.getResponse(input);
         dialogContainer.getChildren().addAll(
-                UserDialogBox.getUserDialog(input, userImage),
-                DukeDialogBox.getDukeDialog(response, alfredImage)
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, alfredImage)
         );
         userInput.clear();
     }

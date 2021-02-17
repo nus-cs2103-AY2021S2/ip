@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.util.Locale;
 
+/**
+ * A command class that finds tasks based on a given keyword.
+ */
 public class FindCommand extends Command {
     private static TaskList tempList;
 
@@ -18,9 +21,9 @@ public class FindCommand extends Command {
     /**
      * Finds tasks in the taskList based on keyword given
      *
-     * @param taskList, the list of tasks
-     * @param ui, the UI object
-     * @param storage, the storage object
+     * @param taskList the list of tasks
+     * @param ui the UI object
+     * @param storage the storage object
      * @return String which are a list of tasks that are found with the keyword
      * @throws DukeException
      */
@@ -39,7 +42,7 @@ public class FindCommand extends Command {
 
         if (tempList.getSize() == 0) {
             String message = "Master, I'm unable to find such a task.";
-            ui.formatAndPrintType1(message);
+            ui.formatAndPrintType(message);
             return message;
         } else {
             StringBuilder sb = new StringBuilder();
@@ -51,7 +54,7 @@ public class FindCommand extends Command {
                 Task currentTask = tempList.getTask(j);
                 sb.append((j + 1) + "." + currentTask.toString() + "\n");
             }
-            ui.formatAndPrintType1(sb.toString());
+            ui.formatAndPrintType(sb.toString());
             return sb.toString();
         }
     }
