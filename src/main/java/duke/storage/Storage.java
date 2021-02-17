@@ -1,6 +1,7 @@
 package duke.storage;
 
-import duke.exceptions.DukeParseException;
+import duke.exceptions.DukeCommandParseException;
+import duke.exceptions.DukeDateParseException;
 import duke.exceptions.DukeStorageException;
 import duke.parser.StorageParser;
 import duke.model.TaskList;
@@ -62,7 +63,7 @@ public class Storage {
      * @throws DukeStorageException when unable find the file
      */
 
-    public List<Task> loadStorage() throws DukeStorageException, DukeParseException {
+    public List<Task> loadStorage() throws DukeStorageException, DukeCommandParseException, DukeDateParseException {
         Scanner scanner = getScannerToReadFile();
         List<Task> savedListOfTasks = new ArrayList<>();
         while (scanner.hasNextLine()) {

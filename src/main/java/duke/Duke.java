@@ -3,8 +3,9 @@ package duke;
 import java.io.File;
 import java.io.IOException;
 
+import duke.exceptions.DukeDateParseException;
 import duke.exceptions.DukeOutOfBoundsException;
-import duke.exceptions.DukeParseException;
+import duke.exceptions.DukeCommandParseException;
 import duke.exceptions.DukeStorageException;
 import duke.model.TaskList;
 import duke.parser.CommandParser;
@@ -40,7 +41,7 @@ public class Duke {
         }
         try {
             tasks = new TaskList(storage.loadStorage());
-        } catch (DukeStorageException | DukeParseException err) {
+        } catch (DukeStorageException | DukeCommandParseException | DukeDateParseException err) {
             // resets the tracking of the number of tasks.
             err.printStackTrace();
             System.out.println(err.getMessage());
@@ -81,7 +82,7 @@ public class Duke {
             this.isExit = commandResult.getIsExit();
             return commandResult.getMessageToDisplay();
 
-        } catch (DukeParseException | DukeOutOfBoundsException e) {
+        } catch (DukeCommandParseException | DukeOutOfBoundsException | DukeDateParseException e) {
             return "OOPS!!! " + e.getMessage();
         } catch (DukeStorageException e) {
             // error saving and loading to database.

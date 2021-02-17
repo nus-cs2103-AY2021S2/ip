@@ -1,4 +1,5 @@
-E | 1 | starbucks | NUS 2021-02-17
-D | 0 | Financial Aid Submission | 2021-03-01 (FIRST MARCH)
+D | 0 | apply financial assistance | 2021-03-01
 E | 0 | CS3230 midterm  | 2021-03-06
+E | 0 | chess competition | 2021-04-14
+E | 0 | graduation | I think is somewhere around 2022-05-03...
 T | 0 | touch up on CSS for CS2103 project

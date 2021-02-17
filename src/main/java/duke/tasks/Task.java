@@ -83,4 +83,16 @@ public abstract class Task implements Comparable<Task>{
     public int compareTo(Task o) {
         return this.localDate.compareTo(o.localDate);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        } else if (obj instanceof Task) {
+            Task other = (Task) obj;
+            return other.toString().equals(this.toString());
+        } else {
+            return false;
+        }
+    }
 }

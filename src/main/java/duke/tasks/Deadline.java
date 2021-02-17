@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.exceptions.DukeParseException;
+import duke.exceptions.DukeDateParseException;
 import duke.parser.DateParser;
 
 import java.time.format.DateTimeFormatter;
@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     private String by;
+    private String byToPrint; //all dates are converted to more readable form for printing.
 
     /**
      * Constructor. Note that it parses the first occurrence of the string "yyyy-M-d" that occurs
@@ -19,19 +20,13 @@ public class Deadline extends Task {
      * @param description description of the task
      * @param by the string containing a date of the deadline in the format "yyyy-M-d"
      */
-    private static final String DEADLINE_FORMAT_ERROR_MESSAGE =
-            "Sorry Unable to Parse date for Deadline. "
-            + "Did you put your date in yyyy-mm-dd format?";
 
-    public Deadline(String description, String by) throws DukeParseException {
+
+    public Deadline(String description, String by) throws DukeDateParseException{
         super(description, "D");
-        String dateString = DateParser.extractDate(by);
-        if (!dateString.equals("")) {
-            this.localDate = DateParser.parseDate(dateString);
-        } else {
-            throw new DukeParseException(DEADLINE_FORMAT_ERROR_MESSAGE);
-        }
+        this.localDate = DateParser.parseLocalDate(by);
         this.by = by;
+        this.byToPrint = DateParser.replaceDate(by,localDate);
     }
 
     /**
@@ -42,10 +37,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String dateString = DateParser.extractDate(by);
-        String convertedDateString = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String modifiedBy = by.replaceAll(dateString, convertedDateString);
-        return super.toString() + " (by: " + modifiedBy + ")";
+        return super.toString() + " (by: " + byToPrint + ")";
     }
 
     /**
@@ -58,5 +50,6 @@ public class Deadline extends Task {
     public String getSavedStringFormat() {
         return super.getSavedStringFormat() + " | " + by;
     }
+
 
 }

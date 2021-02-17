@@ -1,6 +1,7 @@
 package duke.parser;
 
-import duke.exceptions.DukeParseException;
+import duke.exceptions.DukeCommandParseException;
+import duke.exceptions.DukeDateParseException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -17,7 +18,7 @@ public class StorageParser {
      * @param input String representation of Task as it is stored in the hard disk.
      * @return the corresponding Task.
      */
-    public static Task parseTaskFromStorageFormat(String input) throws DukeParseException {
+    public static Task parseTaskFromStorageFormat(String input) throws DukeCommandParseException, DukeDateParseException {
         Task parsedTask;
         String[] fields = input.split(" \\| ");
         String commandCode = fields[0];
@@ -32,7 +33,7 @@ public class StorageParser {
             parsedTask = new Event(fields[2], fields[3]);
             break;
         default:
-            throw new DukeParseException(STORAGE_PARSE_ERROR_MESSAGE);
+            throw new DukeCommandParseException(STORAGE_PARSE_ERROR_MESSAGE);
         }
         boolean isDone = (Integer.parseInt(fields[1]) == 1);
         if (isDone) {

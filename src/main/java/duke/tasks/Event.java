@@ -1,20 +1,16 @@
 package duke.tasks;
 
-import duke.exceptions.DukeParseException;
+import duke.exceptions.DukeDateParseException;
 import duke.parser.DateParser;
 
-import java.time.format.DateTimeFormatter;
 
 /**
  * A type of Task that will happen at some point in the future.
  */
 public class Event extends Task {
-
-    private static final String EVENT_FORMAT_ERROR_MESSAGE =
-            "Sorry Unable to Parse Date for Event. "
-            + "Did you put in yyyy-mm-dd format?";
-
+    
     protected String at;
+    protected String atToPrint;
 
     /**
      * Constructor.
@@ -22,24 +18,16 @@ public class Event extends Task {
      * @param at
      */
 
-    public Event(String description, String at) throws DukeParseException {
+    public Event(String description, String at) throws DukeDateParseException {
         super(description, "E");
-
-        String dateString = DateParser.extractDate(at);
-        if (!dateString.equals("")) {
-            this.localDate = DateParser.parseDate(dateString);
-            this.at = at;
-        } else {
-            throw new DukeParseException(EVENT_FORMAT_ERROR_MESSAGE);
-        }
+        this.at = at;
+        this.localDate = DateParser.parseLocalDate(at);
+        this.atToPrint = DateParser.replaceDate(at,localDate);
     }
 
     @Override
     public String toString() {
-        String dateString = DateParser.extractDate(at);
-        String convertedDateString = localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String modifiedAt = at.replaceAll(dateString, convertedDateString);
-        return super.toString() + " (at: " + modifiedAt + ")";
+        return super.toString() + " (at: " + atToPrint + ")";
     }
 
     /**
