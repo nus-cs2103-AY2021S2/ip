@@ -131,13 +131,12 @@ Example:
 ## Command summary
 
 **Action**  | **Format, Examples**
-
 |--------|-----------------|
-|**Add todo** |  `todo description`e.g, `add todo watch netflix `
-|**Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
-|**Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
-|**List** | `list`
-|**Delete** |`delete INDEX`e.g., `delete 3`
-|**Find** |  `find KEYWORD [MORE_KEYWORDS]` e.g., `find cs2103 quiz`
-|**Mark as done** | `done INDEX` e.g., 'done 4'
+**Add todo** |  `todo description`e.g, `add todo watch netflix `
+**Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
+**Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
+**List** | `list`
+**Delete** |`delete INDEX`e.g., `delete 3`
+**Find** |  `find KEYWORD [MORE_KEYWORDS]` e.g., `find cs2103 quiz`
+**Mark as done** | `done INDEX` e.g., 'done 4'
 
