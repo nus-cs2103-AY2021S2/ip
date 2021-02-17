@@ -1,14 +1,8 @@
 
 # User Guide
 
-## About PAson 
+# About PAson 
 PAson is a to-do list chatbot that helps you manage your schedule in one place. Specially designed for greater productivity, managing your schedule is now just a few simple commands away.
-
-## Table of Contents
-Quick Start
-Features
-FAQs
-Summary of Commands
 
 # Quick Start
 1. Ensure that you have [Java 11](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html) installed on your computer
@@ -45,7 +39,6 @@ Expected outcome:
 >Done! I've added a new task:
     [E][✘] Jason's birthday (at 24 Sep 2021)
     Now there are 2 tasks in your list.
-
 
 
 ### Add a Deadline
@@ -148,13 +141,13 @@ Expected outcome:
 
 # Summary of Commands
 Action|Format, examples
---|--
-Add ToDo| `todo [description]` e.g. `todo Do the laundry`
-Add Event|`event [description] /at [date] [optional time]` e.g. `event Jason's birthday /at 24/09/2021`
-Add Deadline|`deadline [description] /by [date] [time]` e.g. `deadline CS2106 Assignment 1 /by 05/03/2021 2359`
-List tasks|`list`
-Mark as Done|`done` e.g. `done 1`
-Delete|`delete [task number]` e.g. `delete 1`
-Find|`find [keyword]` e.g. `find Birthday`
-List Schedule|`listschedule [dd/mm/yyyy]`, `listschedule today`, `listschedule tomorrow` e.g. `listschedule 24/09/2021`
-Exit|`exit`
+------------ | -------------
+Add ToDo | `todo [description]` e.g. `todo Do the laundry`
+Add Event | `event [description] /at [date] [optional time]` e.g. `event Jason's birthday /at 24/09/2021`
+Add Deadline | `deadline [description] /by [date] [time]` e.g. `deadline CS2106 Assignment 1 /by 05/03/2021 2359`
+List tasks | `list`
+Mark as Done | `done` e.g. `done 1`
+Delete | `delete [task number]` e.g. `delete 1`
+Find | `find [keyword]` e.g. `find Birthday`
+List Schedule | `listschedule [dd/mm/yyyy]`, `listschedule today`, `listschedule tomorrow` e.g. `listschedule 24/09/2021`
+Exit | `exit`
