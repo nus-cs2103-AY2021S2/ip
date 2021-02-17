@@ -217,6 +217,7 @@ to be easily undone as well as to ensure that only intended changes
 __________________________________________________________
 
 ## Command Summary
+
 Command | Format example
 ------------ | -------------
 Add todo | `todo Read a book`
