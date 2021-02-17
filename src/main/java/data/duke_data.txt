@@ -1,5 +1,5 @@
-0,todo Task 1
-1,event Task 2 /at 2021-02-01
-0,deadline Task 3 /by 2021-02-17
-1,todo Task 4
-0,todo test
+0,todo taskOne
+1,event taskTwo /at 2021-02-01
+1,todo taskThree
+0,todo taskFour
+0,deadline taskFive/by 

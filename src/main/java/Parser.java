@@ -4,7 +4,6 @@ public class Parser {
         String taskIsDone, taskType, taskName, taskByAt;
 
         taskIsDone = task.getIsDone() ? "1" : "0";
-        taskType = "";
         taskName = task.getDescription();
         taskByAt = "";
 

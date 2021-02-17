@@ -41,7 +41,8 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String welcomeMessage = "Hello from \n" + logo + "\n"
-                + "What can I do for you?";
+                + "What can I do for you?\n";
+        welcomeMessage += "Commands:  list, todo, event, deadline, done, delete, bye";
         printMessage(welcomeMessage);
         return;
     }

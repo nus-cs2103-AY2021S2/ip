@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private String dirName;
-    private String fileName;
+    private final String dirName;
+    private final String fileName;
 
     public Storage(String filePath) { // split into directory and filename
         int index = filePath.lastIndexOf("/");
@@ -21,12 +21,12 @@ public class Storage {
 
     private Task loadParser(String taskStringFromFile) {
         Task t;
-        String taskIsDone, taskString, taskCommand, taskDesc;
+        String taskIsDone, taskString;
 
         taskIsDone = new SplitString(taskStringFromFile, ",").getFirstString(); // e.g. "1"
         taskString = new SplitString(taskStringFromFile, ",").getSecondString(); // e.g. "todo randomTask"
         t = Parser.parseStringToTask(taskString);
-        if (String.valueOf(taskIsDone).equals("1") == true) {
+        if (taskIsDone.equals("1")) {
             t.markAsDone();
         }
 
@@ -39,11 +39,11 @@ public class Storage {
         // Check if directory and file exist, create if not
         try {
             taskDir = new File(dirName);
-            if (taskDir.isDirectory() == false) {
+            if (!taskDir.isDirectory()) {
                 taskDir.mkdir();
             }
             taskFile = new File(dirName + fileName);
-            if (taskFile.exists() == false) {
+            if (!taskFile.exists()) {
                 taskFile.createNewFile();
             }
         } catch (Exception e) {
@@ -72,7 +72,6 @@ public class Storage {
     }
 
     public Task[] load() throws Exception {
-        String taskString;
         Task[] tasks = new Task[100];
         int numTask = 0;
 

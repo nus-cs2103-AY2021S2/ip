@@ -1,7 +1,7 @@
 public class Command {
     public String action;
     public String description;
-    public boolean isExit = false;
+    public boolean isExit;
 
     public Command(String line) {
         action = new SplitString(line, " ").getFirstString().toLowerCase();
@@ -10,7 +10,7 @@ public class Command {
     }
 
     public void execute(Ui ui, Storage storage, TaskList taskList) {
-        String messageToPrint = "";
+        String messageToPrint;
         switch (action) {
         case "list":
             messageToPrint = taskList.listTask();
@@ -29,7 +29,8 @@ public class Command {
         case "bye":
             return;
         default:
-            messageToPrint = "Oops, the command '" + action + "' is not recognised.";
+            messageToPrint = "Oops, the command '" + action + "' is not recognised.\n";
+            messageToPrint += "Commands:  list, todo, event, deadline, done, delete, bye";
         }
         ui.printMessage(messageToPrint);
         storage.save(taskList);

@@ -1,8 +1,8 @@
 import java.util.NoSuchElementException;
 
 public class Duke {
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList taskList;
 
     public Duke(String filePath) {

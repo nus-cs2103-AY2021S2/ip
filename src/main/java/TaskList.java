@@ -1,7 +1,7 @@
 public class TaskList {
     private static final int MAX_TASKS = 100;
     public Task[] tasks;
-    public int numTask = 0;
+    public int numTask;
 
     public TaskList(Task[] tasks) {
         this.tasks = tasks;
@@ -28,9 +28,15 @@ public class TaskList {
     }
 
     public String addTask(String taskType, String taskDesc) {
-        String addTaskMessage = "";
-        if (String.valueOf(taskType).equals("") == true) {
-            addTaskMessage = "Oops, the description of a '" + taskType + "' cannot be empty.";
+        String addTaskMessage;
+        if (taskDesc.equals("")) {
+            addTaskMessage = "Usage: " + taskType + " [description of task]";
+            if (taskType.equals("deadline")) {
+                addTaskMessage += " /by [e.g. 2021-02-17]";
+            }
+            if (taskType.equals("event")) {
+                addTaskMessage += " /at [e.g. 2021-02-17]";
+            }
             return addTaskMessage;
         }
 
@@ -64,6 +70,9 @@ public class TaskList {
     }
 
     public String doTask(String description) {
+        if (description.equals("")) {
+            return "Usage: done [task number]";
+        }
         int taskNum;
         try {
             taskNum = Integer.parseInt(description);
@@ -74,15 +83,16 @@ public class TaskList {
             return "Not possible to do task " + description + ".";
         }
 
-        String doTaskMessage = "";
         Task t = tasks[taskNum - 1];
         t.markAsDone();
-        doTaskMessage = "Nice! I've marked this task as done: \n" + "   " + t.toString();
 
-        return doTaskMessage;
+        return "Nice! I've marked this task as done: \n" + "   " + t.toString();
     }
 
     public String deleteTask(String description) {
+        if (description.equals("")) {
+            return "Usage: delete [task number]";
+        }
         int taskNum;
         try {
             taskNum = Integer.parseInt(description);
@@ -93,7 +103,6 @@ public class TaskList {
             return "Not possible to remove task " + description + ".";
         }
 
-        String deleteTaskMessage = "";
         Task t = tasks[taskNum - 1];
         int i = taskNum;
         while (i < MAX_TASKS) {
@@ -102,7 +111,7 @@ public class TaskList {
         }
         numTask--;
 
-        deleteTaskMessage = "Noted, I've removed this task: \n" + "   " + t.toString() + "\n";
+        String deleteTaskMessage = "Noted, I've removed this task: \n" + "   " + t.toString() + "\n";
         deleteTaskMessage += "Now you have " + numTask + " task";
         deleteTaskMessage += numTask == 1 ? "" : "s";
         deleteTaskMessage += " in the list.";
