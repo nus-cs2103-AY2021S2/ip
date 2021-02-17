@@ -3,6 +3,9 @@ package com.nus.duke.command;
 import com.nus.duke.data.Task;
 import com.nus.duke.ui.TextUi;
 
+/**
+ * DeleteCommand class encapsulates the logic for processing a "delete" command.
+ */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND = "delete";
@@ -31,6 +34,12 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Parses and validate the arguments then returns the command object.
+     *
+     * @param arguments command arguments
+     * @return DeleteCommand if successful and IncorrectCommand if unsuccessful.
+     */
     public static Command parseArguments(String arguments) {
         if (arguments != null && !arguments.trim().isEmpty()) {
             try {

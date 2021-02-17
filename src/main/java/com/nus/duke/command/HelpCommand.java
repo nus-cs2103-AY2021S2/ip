@@ -1,5 +1,8 @@
 package com.nus.duke.command;
 
+/**
+ * HelpCommand class encapsulates the logic for processing a "help" command.
+ */
 public class HelpCommand extends Command {
 
     public static final String COMMAND = "help";

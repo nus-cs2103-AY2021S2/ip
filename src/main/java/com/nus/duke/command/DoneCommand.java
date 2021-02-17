@@ -3,6 +3,9 @@ package com.nus.duke.command;
 import com.nus.duke.data.Task;
 import com.nus.duke.ui.TextUi;
 
+/**
+ * DoneCommand class encapsulates the logic for processing a "done" command.
+ */
 public class DoneCommand extends Command {
 
     public static final String COMMAND = "done";
@@ -29,6 +32,12 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Parses and validate the arguments then returns the command object.
+     *
+     * @param arguments command arguments
+     * @return DoneCommand if successful and IncorrectCommand if unsuccessful.
+     */
     public static Command parseArguments(String arguments) {
         if (arguments != null && !arguments.trim().isEmpty()) {
             try {

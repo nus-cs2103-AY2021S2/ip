@@ -12,6 +12,9 @@ import com.nus.duke.common.DukeStorageException;
 import com.nus.duke.data.Task;
 import com.nus.duke.data.TaskList;
 
+/**
+ * TaskListStorage class handles the loading and saving of data from the disk.
+ */
 public class TaskListStorage {
 
     public static final String DEFAULT_STORAGE_FILEPATH = Paths
@@ -19,6 +22,12 @@ public class TaskListStorage {
     public static final String SAVE_FAILURE_MESSAGE = "Unable to save to file. Your data may not be saved.";
     public static final String LOAD_FAILURE_MESSAGE = "Unable to read from file.";
 
+    /**
+     * Saves the taskList to disk.
+     *
+     * @param taskList taskList to be saved
+     * @throws DukeStorageException on any file access exception
+     */
     public void save(TaskList taskList) throws DukeStorageException {
         ArrayList<Task> arrayList = taskList.getList();
         try {
@@ -31,6 +40,11 @@ public class TaskListStorage {
         }
     }
 
+    /**
+     * Loads the existing taskList from disk.
+     * @return existing taskList or new taskList
+     * @throws DukeStorageException on any file access exception
+     */
     public TaskList load() throws DukeStorageException {
         FileInputStream fileIn;
         try {

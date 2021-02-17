@@ -7,6 +7,9 @@ import com.nus.duke.common.DukeDateParserException;
 import com.nus.duke.data.Deadline;
 import com.nus.duke.parser.DateParser;
 
+/**
+ * DeadlineCommand class encapsulates the logic for processing a "deadline" command.
+ */
 public class DeadlineCommand extends Command {
 
     public static final String COMMAND = "deadline";
@@ -33,6 +36,12 @@ public class DeadlineCommand extends Command {
         return String.format(SUCCESS_MESSAGE_TEMPLATE, this.deadline, size);
     }
 
+    /**
+     * Parses and validate the arguments then returns the command object.
+     *
+     * @param arguments command arguments
+     * @return DeadlineCommand if successful and IncorrectCommand if unsuccessful.
+     */
     public static Command parseArguments(String arguments) {
         final Matcher matcher = COMMAND_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {

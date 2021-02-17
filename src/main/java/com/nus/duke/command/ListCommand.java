@@ -2,6 +2,9 @@ package com.nus.duke.command;
 
 import com.nus.duke.data.Task;
 
+/**
+ * ListCommand class encapsulates the logic for processing a "list" command.
+ */
 public class ListCommand extends Command {
 
     public static final String COMMAND = "list";

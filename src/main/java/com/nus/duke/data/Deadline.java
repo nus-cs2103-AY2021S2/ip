@@ -5,8 +5,7 @@ import java.time.LocalDateTime;
 import com.nus.duke.parser.DateParser;
 
 /**
- * Deadline is a type of Task that needs to be done before a specific date/time. Note: Date/time are
- * treated as Strings, so any formats are accepted.
+ * Deadline is a type of Task that needs to be done before a specific date/time.
  */
 public class Deadline extends Task {
 

@@ -15,6 +15,10 @@ import com.nus.duke.command.IncorrectCommand;
 import com.nus.duke.command.ListCommand;
 import com.nus.duke.command.TodoCommand;
 
+/**
+ * CommandParser class is used to parse a string and to determine which parser should be used to
+ * process the input.
+ */
 public class CommandParser {
 
     /**

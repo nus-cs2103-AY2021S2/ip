@@ -7,6 +7,9 @@ import com.nus.duke.common.DukeDateParserException;
 import com.nus.duke.data.Event;
 import com.nus.duke.parser.DateParser;
 
+/**
+ * EventCommand class encapsulates the logic for processing a "event" command.
+ */
 public class EventCommand extends Command {
 
     public static final String COMMAND = "event";
@@ -33,6 +36,12 @@ public class EventCommand extends Command {
         return String.format(SUCCESS_MESSAGE_TEMPLATE, this.event, size);
     }
 
+    /**
+     * Parses and validate the arguments then returns the command object.
+     *
+     * @param arguments command arguments
+     * @return EventCommand if successful and IncorrectCommand if unsuccessful.
+     */
     public static Command parseArguments(String arguments) {
         final Matcher matcher = COMMAND_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {

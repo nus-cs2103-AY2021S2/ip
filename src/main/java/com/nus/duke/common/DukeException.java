@@ -1,7 +1,7 @@
 package com.nus.duke.common;
 
 /**
- * Indicates an error during Duke Application runtime.
+ * DukeException class Indicates an error during Duke Application runtime.
  */
 public class DukeException extends Exception {
 

@@ -1,5 +1,8 @@
 package com.nus.duke.command;
 
+/**
+ * IncorrectCommand class encapsulates the logic for processing a "incorrect" command.
+ */
 public class IncorrectCommand extends Command {
 
     private final String message;

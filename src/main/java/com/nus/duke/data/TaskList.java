@@ -2,6 +2,9 @@ package com.nus.duke.data;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList class abstracts away the underlying logic for adding and removing tasks.
+ */
 public class TaskList {
 
     private final ArrayList<Task> tasks;

@@ -17,6 +17,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * MainWindow class is the controller for MainWindow.fxml file.
+ */
 public class MainWindow {
 
     private static final String FXML = "/views/MainWindow.fxml";
@@ -52,6 +55,10 @@ public class MainWindow {
         }
     }
 
+    /**
+     * Initializes the GUI by setting setting up the scrollpane height and displaying a default
+     * welcome message.
+     */
     @FXML
     public void initialize() {
         this.scrollPane.setVvalue(this.scrollPane.getVmax());
@@ -63,8 +70,14 @@ public class MainWindow {
         );
     }
 
+    /**
+     * Handles the text entered by a user by executing it. Will create a DialogBox for the entered
+     * text and the result.
+     */
     @FXML
     private void handleCommandText() {
+        assert logic != null;
+
         Command command = this.logic.parseInputForCommand(this.commandTextField.getText());
         assert command != null : "Command should not be null";
         String result = this.logic.executeCommand(command);

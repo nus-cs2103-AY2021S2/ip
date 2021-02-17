@@ -5,6 +5,9 @@ import java.util.List;
 import com.nus.duke.data.Task;
 import com.nus.duke.ui.TextUi;
 
+/**
+ * FindCommand class encapsulates the logic for processing a "find" command.
+ */
 public class FindCommand extends Command {
 
     public static final String COMMAND = "find";
@@ -41,6 +44,12 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Parses and validate the arguments then returns the command object.
+     *
+     * @param arguments command arguments
+     * @return FindCommand if successful and IncorrectCommand if unsuccessful.
+     */
     public static Command parseArguments(String arguments) {
         if (arguments != null && !arguments.trim().isEmpty()) {
             return new FindCommand(arguments.trim());
