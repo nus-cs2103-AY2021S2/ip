@@ -61,6 +61,15 @@ public class Duke {
         return dealWithCommandsThatRequiresDescriptions(input);
     }
 
+    /**
+     * Deals with commands that requires descriptions from the user,
+     * for example date, task description, expense description, amount spent,
+     * date, time etc. Returns a formatted String that indicates successful
+     * or unsuccessful operation.
+     *
+     * @param input user input
+     * @return Tasker's response
+     */
     public String dealWithCommandsThatRequiresDescriptions(String input) {
         try {
             int indexOfSpaceAfterCommand = input.indexOf(' ');

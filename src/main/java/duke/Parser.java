@@ -108,8 +108,8 @@ public class Parser {
             String dateStr = input.substring(indexOfDate + 6);
             LocalDate date = LocalDate.parse(dateStr);
             if (amt <= 0) {
-                throw new ParseException("Input invalid! Please enter a proper spending amount... (how" +
-                        " could you spend less than or equal to zero dollars??)");
+                throw new ParseException("Input invalid! Please enter a proper spending amount... (how"
+                        + " could you spend less than or equal to zero dollars??)");
             }
             return new Expense(description, amt, date);
         } else {
