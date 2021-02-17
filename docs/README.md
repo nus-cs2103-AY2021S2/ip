@@ -7,6 +7,16 @@
 * [Introduction](#introduction)
 * [Getting Started](#getting-started)
 * [Features](#features)
+** [View all Tasks](#view-all-tasks)
+** [Find a Task](#find-a-task)
+** [Clear all Tasks](#clear-all-tasks)
+** [Add To-Do](#add-to-do)
+** [Add Event](#add-event)
+** [Add Deadline](#add-deadline)
+** [Mark as Complete](#mark-as-complete)
+** [Delete a Task](#delete-a-task)
+** [Show Help](#show-help)
+** [Exit](#exit)
 * [Advanced Setup](#advanced-setup)
 
 ## Introduction
@@ -32,7 +42,7 @@ Prerequisites: JDK 11
 * Example: `find abcd`, where the task I wanted to find has `abcd` as a part of it.
 * Expected Outcome: Tasks matching the string would be printed.
 <p align="center">
-<img height="640" width="480" src="find.png" />
+<img height="640" src="find.png" />
 </p>
 
 ### Clear all Tasks
