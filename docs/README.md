@@ -1,6 +1,7 @@
 # User Guide
 
-Duke is the go-to chat-bot which helps to manage and organize your task efficiently. Implemented with different avatars and a simple user interface, you will be able to nagivate through it without fuss.
+Duke is the go-to chat-bot which helps to manage and organize your task efficiently.
+<br> Implemented with different avatars and a simple user interface, you will be able to nagivate through it without fuss.
 
 ## Table Of Content
 
@@ -25,7 +26,7 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 2. Download the latest `duke.jar` from [here](https://github.com/SiTingST/ip/releases/tag/A-Release).
 
 3. Double-click on the downloaded file to launch Duke. 
-	** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
+	<br> ** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
 	
 4. After starting the application, you should see the GUI as shown below:
 ![Ui](Ui.png)
