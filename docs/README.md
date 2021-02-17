@@ -8,13 +8,13 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 * [Features](#features)
 	1. Add a task 
 		* [Todo](#adding-a-todo-task-todo)
-		* [Deadline](#adding-a-deadline-task-todo)
-		* [Event](#adding-an-event-task-todo)
+		* [Deadline](#adding-a-deadline-task-deadline)
+		* [Event](#adding-an-event-task-event)
 	2. [List all tasks](#listing-all-tasks-list)
-	3. [Delete a task](#delete-a-task)
-	4. [Mark task as done](#mark-task-as-done)
-	5. [Find a task](#find-a-task)
-	6. [Exit Program](#exit)
+	3. [Delete a task](#delete-a-task-delete)
+	4. [Mark task as done](#mark-task-as-done-done)
+	5. [Find a task](#find-a-task-find)
+	6. [Exit Program](#exit-bye)
 * [Command Summary](#command-summary)
 
 
