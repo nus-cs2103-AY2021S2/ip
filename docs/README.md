@@ -6,15 +6,15 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-	1. Add a task (#Add-a-task)
-		* To-dos
-		* Deadlines
-		* Events
-	2. List all tasks
-	3. Delete a task
-	4. Mark Task as done
-	5. Find a task
-	5. Exit Program
+	1. Add a task 
+		* [Todo](#adding-a-todo-task-todo)
+		* [Deadline](#adding-a-deadline-task-deadline)
+		* [Event](#adding-an-event-task-event)
+	2. [List all tasks](#listing-all-tasks-list)
+	3. [Delete a task](#delete-a-task-delete)
+	4. [Mark task as done](#mark-task-as-done-done)
+	5. [Find a task](#find-a-task-find)
+	6. [Exit Program](#exit-bye)
 * [Command Summary](#command-summary)
 
 
@@ -28,59 +28,63 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 	** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
 	
 4. After starting the application, you should see the GUI as shown below:
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/Ui.png)
-
+![Ui](Ui.png)
 
 
 ## Features
 
+Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add todo finish user guide`.
+  
+
 ### Add a task :  `todo`, `deadline`, `event`
 
 There are three different tasks, namely, todo, event and deadline. 
-<br> There are different commands used to facilitate the adding of different tasks to the program as seen below.
+<br> Differents commands are used to facilitate the adding of different tasks to the program as seen below.
 
 Notes:
-* Commands are case-insensitive. The program only takes in command in lower alphabets. 
+* Commands are case-insensitive and the program only accepts commands typed in lower alphabets. 
 * Users should add ONE task at a time. 
 
-#### `todo`
+#### Adding a todo task: `todo`
 Todo command add a todo task which requires task description and no other field as input.
 
-Format: `todo` description
+Format: `todo` DESCRIPTION
 
 Examples:
 * `todo CNY visiting`
 * `todo ST2334 tutorial`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addTodoTask.png)
+![Ui](./Images/addTodoTask.png)
 
-#### `deadline`
+#### Adding a deadline task: `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
 
-Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]
+Format: `deadline` DESCRIPTION /BY DATE TIME 
+* DATE is should be by DD/MM/YY
+* TIME is should be in HHMM
 
-Note: Do ensure that the time is given in HHMM format with no extra spacing or semicolon 
-
-Deadline command add a deadline task which requires task description, due date and due time of the task. 
-Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
 Examples:
 * `deadline submit proposal /by 03/05/2021 1800`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addDeadlineTask.png)
+![Ui](./Images/addDeadlineTask.png)
 
-#### `event`
+#### Adding an event task: `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
 
-Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]
+Format: `event` description /AT DATE START_TIME-END_TIME 
 
-Note: Do ensure that the time is given in HHMM format with no extra spacing or semicolon 
+Format: `deadline` DESCRIPTION /BY DATE TIME 
+* DATE is should be by DD/MM/YY
+* START_TIME is should be in HHMM
+* END_TIME is should be in HHMM
 
-Event command add a event task which requires task description, date as well as start and end time of the task. 
-<br>Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]`
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addEventTask.png)
+![Ui](./Images/addEventTask.png)
 
 
 ### Listing all tasks : `list`
@@ -89,53 +93,63 @@ Shows a list of all the task in duke.
 
 Format: `list`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/listTask.png)
+![Ui](./Images/listTask.png)
 
 ### Delete a task : `delete`
 
 Delete a task using its task index in list.
 
-Format: `delete task_index`
+Note: TASK_INDEX starts from 1.
+
+Format: `delete TASK_INDEX`
 
 Assume that we still have 4 task, 
 <br>`delete3`: will remove the third task on the list
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/deleteTask.png)
+![Ui](./Images/deleteTask.png)
 
 ### Mark task as done : `done`
 
 Mark the given task as completed which will add a tick beside the task when list command is executed. 
 
-Note: All tasks added are uncompleted by default. 
+Note: All tasks added are uncompleted by default and TASK_INDEX starts from 1. 
 
-Format: `done task_index`
+Format: `done TASK_INDEX`
 
 Example:
 
 Assume that we still have 3 task, 
 <br> `done 1`: will mark the first task on the list as completed 
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/markAsDone.png)
+![Ui](./Images/markAsDone.png)
 
 ### Find a specific task : `find`
 
 Show all tasks that matches or contain keywords. 
 
-Format: `find keywords`
+Format: `find KEYWORDS`
 
 Example:
-  `find CS2105`
+  `find cs2103`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/findTask.png)
+![Ui](./Images/findTask.png)
 
-## Command summary
+### Exit : `bye`
 
-Action | Format, Examples
---------|------------------
-**Add todo** |  `todo description`e.g, `add todo watch netflix `
-**Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
-**Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
+The program will terminate a few seconds after returning a "Bye. Hope to see you again!" message. 
+
+
+## Command Summary
+
+**Action**  | **Format, Examples**
+--------|-----------------
+**Add todo task** | `todo TASK_DESCRIPTION` e.g, `add todo watch netflix`
+**Add deadline task** | `deadline TASK_DESCRIPTION /by DATE` e.g., `deadline finish cs2103 quiz /by 18/02/2021`
+**Add event task** | `event TASK_DESCRIPTION /at DATE START_TIME END_TIME` e.g., `event attend internship meeting /at 17/02/2021 1000-1100`
 **List** | `list`
-**Delete** |`delete INDEX`e.g., `delete 3`
-**Find** |  `find KEYWORD [MORE_KEYWORDS]` e.g., `find cs2103 quiz`
-**Mark as done** | `done INDEX` e.g., 'done 4'
+**Mark as Done** |`delete TASK_INDEX` e.g., `delete 3`
+**Delete** | `delete TASK_NUMBER` e.g., `delete 1`
+**Find** | `find KEYWORD` e.g., `find cs2103`
+**Exit** | `bye`
+
+
