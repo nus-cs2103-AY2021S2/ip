@@ -29,13 +29,6 @@ public class Ui {
                 + LINE);
     }
 
-    /**
-     * Prints line for Elly's response display.
-     */
-    public void printLine() {
-        System.out.println(LINE);
-    }
-
     public String printList(ArrayList<Task> tasks, int numTasks) {
         StringBuilder response;
         if (numTasks == 0) {

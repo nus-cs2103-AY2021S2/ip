@@ -65,24 +65,22 @@ public class Storage {
             String desc = dataArr[2];
 
             switch (taskType) {
-                case "T":
-                    ToDos newTodo = new ToDos(desc, isDone.equals("1"));
-                    tasks.add(newTodo);
-                    numTasks++;
-                    break;
-                case "D":
-                    LocalDate by = LocalDate.parse(dataArr[3]);
-                    Deadlines newDeadline = new Deadlines(desc, by, isDone.equals("1"));
-                    tasks.add(newDeadline);
-                    numTasks++;
-                    break;
-                case "E":
-                    LocalDate at = LocalDate.parse(dataArr[3]);
-                    Events newEvent = new Events(desc, at, isDone.equals("1"));
-                    tasks.add(newEvent);
-                    numTasks++;
-                    break;
+            case "T":
+                ToDos newTodo = new ToDos(desc, isDone.equals("1"));
+                tasks.add(newTodo);
+                break;
+            case "D":
+                LocalDate by = LocalDate.parse(dataArr[3]);
+                Deadlines newDeadline = new Deadlines(desc, by, isDone.equals("1"));
+                tasks.add(newDeadline);
+                break;
+            case "E":
+                LocalDate at = LocalDate.parse(dataArr[3]);
+                Events newEvent = new Events(desc, at, isDone.equals("1"));
+                tasks.add(newEvent);
+                break;
             }
+            numTasks++;
         }
     }
 
