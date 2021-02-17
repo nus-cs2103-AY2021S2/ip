@@ -96,7 +96,7 @@ Prerequisites: JDK 11
 </p>
 
 ### Show Help
-* Prints the help documentation in DukeNukem.
+* Description: Prints the help documentation in DukeNukem.
 * Command: `help`
 * Expected Outcome: Help text would be printed.
 

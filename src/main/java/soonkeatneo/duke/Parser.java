@@ -10,7 +10,7 @@ import static soonkeatneo.duke.AddTask.addTask;
 
 public class Parser {
     /**
-     * Handle the input and passes to the relevant methods.
+     * Handles the input and passes to the relevant methods.
      * @param inputString User input string to be handled
      * @param tasks Task List to be manipulated
      * @param storage {@Storage} object to be used
