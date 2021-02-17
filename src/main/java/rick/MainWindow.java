@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Gui.getWelcomeString(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getRickDialog(Gui.getWelcomeString(), dukeImage));
     }
 
     public void setDuke(Rick d) {
@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
         String response = rick.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getRickDialog(response, dukeImage)
         );
         if (input.equalsIgnoreCase(Command.BYE.name())) {
             TimerTask closeApp = new TimerTask() {

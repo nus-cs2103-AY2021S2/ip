@@ -24,6 +24,9 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String RICK_DIALOG_COLOR = "#D9D9D9";
+    private static final String USER_DIALOG_COLOR = "#95EC69";
+
     @FXML
     private Label dialog;
     @FXML
@@ -53,13 +56,21 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    private void setDialogColor(String color) {
+        String currentStyle = dialog.styleProperty().getValue();
+        dialog.setStyle(String.format("%s -fx-background-color: %s;", currentStyle, color));
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+    public static DialogBox getUserDialog(String text, Image img) {
+        var userDialog = new DialogBox(text, img);
+        userDialog.setDialogColor(USER_DIALOG_COLOR);
+        return userDialog;
+    }
+
+    public static DialogBox getRickDialog(String text, Image img) {
+        var rickDialog = new DialogBox(text, img);
+        rickDialog.setDialogColor(RICK_DIALOG_COLOR);
+        rickDialog.flip();
+        return rickDialog;
     }
 }
