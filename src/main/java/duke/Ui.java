@@ -11,7 +11,7 @@ public class Ui {
      * @return Welcome greeting as String
      */
     public String getWelcomeGreetingString() {
-        return "\nHello! I am Duke\n" + "What can I do for you?\n";
+        return "\nSup peeps! I am Meme Bot\n" + "What can I do for you?\n";
     }
 
     /**
@@ -20,7 +20,7 @@ public class Ui {
      * @return Exit message, when user inputs 'bye' command, as String
      */
     public String getExitMessageString() {
-        return "GoodBye. Hope to see you again soon!\n";
+        return "Sayonara! Hope to never see you again..\n";
     }
 
     /**

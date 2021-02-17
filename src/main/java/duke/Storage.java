@@ -81,8 +81,6 @@ public class Storage {
                     tasks.add(taskInList);
                     break;
                 case ("[LC]"):
-                    //do nothing
-                    break;
                 case ("[LDT]"):
                     //do nothing
                     break;

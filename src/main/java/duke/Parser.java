@@ -95,11 +95,16 @@ public class Parser {
      * @param command command passed in by the user.
      * @return Index of Task to be deleted.
      */
-    public Task parseDeleteCommand(String command, TaskList userList) {
+    public Task parseDeleteCommand(String command, TaskList userList) throws InvalidDeleteCommandException {
         int taskNumToBeDeleted = Integer.parseInt(command.split(" ")[1]);
-        Task deletedTask = userList.removeTask(taskNumToBeDeleted - 1);
-        deletedTask.markAsDone();
-        return deletedTask;
+        int indexNum = taskNumToBeDeleted - 1;
+        if(taskNumToBeDeleted >= indexNum) {
+            throw new InvalidDeleteCommandException();
+        } else {
+            Task deletedTask = userList.removeTask(indexNum);
+            deletedTask.markAsDone();
+            return deletedTask;
+        }
     }
 
     /**
