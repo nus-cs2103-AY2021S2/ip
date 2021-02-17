@@ -54,13 +54,13 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+        //db.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, null, null)));
+        //db.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, null, null)));
         db.flip();
         return db;
     }

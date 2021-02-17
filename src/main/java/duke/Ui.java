@@ -13,6 +13,11 @@ public class Ui {
     /**
      * The messages that the chat bot will send out.
      */
+    static final String BOT_LOGO = "     _       _        \n"
+        + "    | |_   _| | _____ \n"
+        + " _  | | | | | |/ / _ \\\n"
+        + "| |_| | |_| |   <  __/\n"
+        + "|____/ \\__,_|_|\\_\\___|\n";
     static final String WELCOME_MESSAGE = "Hello! I am Juke, your personal assistant, how can I help you today?";
     static final String HELP_PROMPT = "[Type 'help' to display instructions]";
     static final String HELP_INTRO = "Here are the list of commands for Juke: \n";
@@ -42,8 +47,13 @@ public class Ui {
      * Shows Duke's welcome message.
      */
     public String showWelcome() {
+        /*String s = "     _       _        \n"
+            + "    | |_   _| | _____ \n"
+            + " _  | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";*/
         StringBuilder sb = new StringBuilder(Ui.WELCOME_MESSAGE + "\n" +"\n" + Ui.HELP_PROMPT);
-        return sb.toString().trim();
+        return sb.toString();
     }
 
 
