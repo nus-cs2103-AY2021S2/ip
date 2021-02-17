@@ -2,7 +2,7 @@ package duke.exceptions;
 
 /**
  * Represents the exception from invalid creation of Event objects
- * due to wrong format being inputted
+ * due to wrong format being inputted.
  */
 public class EventException extends DukeException {
     public EventException() {

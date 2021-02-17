@@ -16,8 +16,8 @@ import java.nio.file.Paths;
 
 /**
  * A Storage class that creates a storage object which
- * Saves the Arraylist of Tasks into a .txt file.
- * Loads the Arraylist of Tasks from a .txt file into a ArrayList Object
+ * 1) Saves the Arraylist of Tasks into a .txt file.
+ * 2) Loads the Arraylist of Tasks from a .txt file into a ArrayList Object
  */
 public class Storage {
     public static String DIRECTORY;
@@ -34,7 +34,8 @@ public class Storage {
 
     /** Saves the list of Tasks in the ArrayList object
      * into a .txt file.
-     * @param taskList
+     *
+     *  @param taskList
      */
     public void saveTaskList(TaskList taskList) {
         Path path = Paths.get(this.DIRECTORY, "Data");
@@ -52,7 +53,6 @@ public class Storage {
             /* Check if the file exists.
              * If it doesn't, create a new file
              */
-
             if (!taskFile.exists()) {
                 taskFile.createNewFile();
             }
@@ -65,6 +65,7 @@ public class Storage {
                 task = taskList.getTask(i);
                 bufferedWriter.write(task.toSave());
                 bufferedWriter.write("~");
+
                 if(task.getDoneStatus()) {
                     bufferedWriter.write("1");
                 } else {
@@ -98,30 +99,51 @@ public class Storage {
                     for (int i = 0; i < tasks.length; i++) {
                         String[] doneList = tasks[i].split("~", 2);
                         String[] nameList = doneList[0].split(" ", 2);
+                        String command = nameList[0];
 
-                        if (nameList[0].equals("deadline")) {
-                            String[] deadlineItem = nameList[1].split("/by", 2);
-                            Task taskItem = new Deadline(deadlineItem[0],
-                                    deadlineItem[1],
-                                    checkDone(deadlineItem[1]));
-                            taskList.addTask(taskItem);
-                        } else if (nameList[0].equals("event")) {
-                            String[] eventItem = nameList[1].split("/at", 2);
-                            Task taskItem = new Event(eventItem[0],
-                                    eventItem[1],
-                                    checkDone(eventItem[1]));
-                            taskList.addTask(taskItem);
-                        } else if (nameList[0].equals("todo")) {
-                            Task taskItem = new ToDo(nameList[1], checkDone(doneList[1]));
-                            taskList.addTask(taskItem);
-                        }
+                        createTask(command, doneList, nameList, taskList);
                     }
                 }
             } catch (IOException error) {
                 System.out.println(error.getMessage());
             }
         } else {
-            File createFile = new File("/DAta/duke.txt");
+            File createFile = new File("/Data/duke.txt");
+        }
+    }
+
+    /**
+     * Creates the respective task based the command using details from nameList
+     * and doneList before storing them into the taskList for loading
+     *
+     * @param command the command keyword to identify the task type
+     * @param doneList a list of tasks stored
+     * @param nameList list of details of each individual task
+     * @param taskList the list to store the tasks allowing the user to modify the task objects
+     */
+    public void createTask(String command, String[] doneList, String[] nameList, TaskList taskList) {
+        Task taskItem;
+        switch (command) {
+            case "deadline":
+                String[] deadlineItem = nameList[1].split("/by", 2);
+                taskItem = new Deadline(deadlineItem[0],
+                        deadlineItem[1],
+                        checkDone(deadlineItem[1]));
+                taskList.addTask(taskItem);
+                break;
+            case "event":
+                String[] eventItem = nameList[1].split("/at", 2);
+                taskItem = new Event(eventItem[0],
+                        eventItem[1],
+                        checkDone(eventItem[1]));
+                taskList.addTask(taskItem);
+                break;
+            case "todo":
+                taskItem = new ToDo(nameList[1], checkDone(doneList[1]));
+                taskList.addTask(taskItem);
+                break;
+            default:
+                break;
         }
     }
 

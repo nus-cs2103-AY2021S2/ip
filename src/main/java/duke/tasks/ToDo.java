@@ -12,7 +12,7 @@ public class ToDo extends Task {
      * @param info, the details of the task
      */
     public ToDo (String info) {
-        super(info, taskType.ToDo);
+        super(info, taskType.TODO);
 
     }
 
@@ -23,7 +23,7 @@ public class ToDo extends Task {
      * @param isDone, boolean value indicating whether the task is done
      */
     public ToDo(String info, boolean isDone) {
-        super(info, taskType.ToDo, isDone);
+        super(info, taskType.TODO, isDone);
     }
 
     @Override
