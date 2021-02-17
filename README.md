@@ -20,6 +20,8 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 
 ### [Sort tasks by DateTime](#sort-tasks-by-datetime-1)
 
+### [Exit Application](#exit-application-1)
+
 ## Command Usage
 
 ### Create a ToDo task
