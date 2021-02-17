@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * The deadline class initialize and manage deadline tasks.
+ * Deadline class initialize and manage deadline tasks.
  */
 public class Deadline extends Task {
 

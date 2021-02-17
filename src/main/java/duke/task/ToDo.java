@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * The todo class initialize and manage todo tasks.
+ * Todo class initialize and manage todo tasks.
  */
 
 public class ToDo extends Task {

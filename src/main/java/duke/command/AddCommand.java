@@ -28,7 +28,8 @@ public class AddCommand extends Command {
         this.endTime = endTime;
     }
 
-    /** Adds task into task list and return task list
+    /**
+     * Add a task into task list
      * @return TaskList
      * @throws DukeException
      */
@@ -41,7 +42,7 @@ public class AddCommand extends Command {
         case ("deadline"):
             executedUnsuccessfully = tasklist.addDeadline(this.input, dueDate, startTime);
             break;
-        case ("events"):
+        case ("event"):
             executedUnsuccessfully = tasklist.addEvent(this.input, dueDate, startTime, endTime);
             break;
         default:

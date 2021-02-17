@@ -16,14 +16,13 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Display all the tasks found in the task list
+     * Display all tasks found in the task list
      * @return String message upon successful execution of the command
      */
     @Override
     public String execute() throws DukeException, IOException {
         tasklist.setTaskList(storage.loadFile());
         String allTaskMsg = tasklist.showAllTask("list");
-        System.out.println("all list size is: " + tasklist.getTaskListArray().size());
 
         if (allTaskMsg.isEmpty()) {
             return ui.displayNoTaskMessage();

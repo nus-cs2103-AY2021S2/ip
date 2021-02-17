@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * The event class initialize and manage event tasks.
+ * Event class initialize and manage event tasks.
  */
 public class Event extends Task {
 

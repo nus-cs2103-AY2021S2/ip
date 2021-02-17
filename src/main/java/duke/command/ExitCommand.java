@@ -3,7 +3,7 @@ package duke.command;
 import duke.ui.UI;
 
 /**
- * Command class to exit program
+ * Command class to exit the program
  */
 public class ExitCommand extends Command {
 

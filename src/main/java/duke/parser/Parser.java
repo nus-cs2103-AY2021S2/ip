@@ -12,9 +12,11 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.SearchCommand;
 import duke.exception.DukeException;
+import duke.task.Task;
+import duke.ui.UI;
 
 /**
- * A parser class to handle all user commands and input.
+ * Parser class to handle all user commands and input.
  */
 public class Parser {
 
@@ -22,18 +24,13 @@ public class Parser {
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
     /**
-     * Invoke the respective command method to handle the different cases of commands
+     * Invoke the respective command method to handle the different cases of user input
      * @param input user input
      * @return String message to be displayed upon completion of commands
      * @throws DukeException
      * @throws IOException
      */
     public static String parse(String input) throws DukeException, IOException {
-
-        if (input.equals("bye")) {
-            ExitCommand ec = new ExitCommand();
-            return ec.execute();
-        }
 
         String[] commandArray = input.split("\\s+");
 
@@ -43,21 +40,26 @@ public class Parser {
 
         assert commandArray[0] != null : "Command cannot be null";
 
+        if (input.equals("bye")) {
+            ExitCommand ec = new ExitCommand();
+            return ec.execute();
+        }
+
         if (commandArray[0].equals("find")) {
-            CheckIfParameterIsEmpty(taskDetail, "Please input task description to be searched.");
+            isTaskDetailEmpty(taskDetail, "Please input task description to be searched.");
             SearchCommand sc = new SearchCommand(taskDetail);
             return sc.execute();
-        } else if (commandArray[0].equals("list")) {
+        } else if (input.equals("list")) {
             ListCommand lc = new ListCommand(null);
             return lc.execute();
         } else if (commandArray[0].equals("delete")) {
-           CheckIfParameterIsEmpty(taskDetail, "Please input task description to be searched.");
+           isTaskDetailEmpty(taskDetail, "Please input task description to be searched.");
 
             DeleteCommand dc = new DeleteCommand(commandArray[1]);
             return dc.execute();
         } else if (commandArray[0].equals("done")) {
 
-            CheckIfParameterIsEmpty(taskDetail, "You did not specify a task index. " +
+            isTaskDetailEmpty(taskDetail, "You did not specify a task index. " +
                     "Please try again with a valid task index.");
             DoneCommand doneCommand = new DoneCommand(commandArray[1]);
             return doneCommand.execute();
@@ -68,7 +70,7 @@ public class Parser {
 
 
     /**
-     * Invoke the add command method
+     * Invoke and pass in necessary information to the add command method
      * @param type type of task
      * @param userInput user input
      * @param taskDetail details of the task
@@ -142,7 +144,7 @@ public class Parser {
                             "trying to add more than one task at a time.");
                 }
 
-                AddCommand addEventCommand = new AddCommand(description[0], "events", startDate, startTime, endTime);
+                AddCommand addEventCommand = new AddCommand(description[0], "event", startDate, startTime, endTime);
                 return addEventCommand.execute();
 
             default:
@@ -151,31 +153,19 @@ public class Parser {
     }
 
     /**
-     * Check if index exist in task list
-     * @param no index in task list
-     * @param type type of task
-     * @param sizeOfTaskList size of task list
-     * @return boolean true if index given is valid
+     * Check if task parameter is empty
+     * @param taskDetail
+     * @param message message to be printed
+     * @throws DukeException
      */
-    public static boolean isValidTaskNumber(int no, String type, int sizeOfTaskList) {
-        try {
-            if (no < 0 || no >= sizeOfTaskList && !type.equals("done")) {
-                throw new DukeException("There are no task in list. Please add some task and try again.");
-            } else if (no >= sizeOfTaskList && type.equals("delete")) {
-                throw new DukeException("Item number " + no + " is not found in list. Please check again");
-            } else if (sizeOfTaskList < 0 && type.equals("list")) {
-                throw new DukeException("There are no task in list. Please check again");
-            } else {
-                return true;
-            }
-        } catch (DukeException e) {
-            e.printMessage();
-            return false;
+    public static void isTaskDetailEmpty(String taskDetail, String message) throws DukeException {
+        if (taskDetail.isBlank()) {
+            throw new DukeException(message);
         }
     }
 
     /**
-     * Returns an array of string after separating the given input by space
+     * Returns an array of string after separating the given input by spaces
      * @param userInput
      * @return array of string that is split
      * @throws DukeException
@@ -228,11 +218,5 @@ public class Parser {
             throw new DukeException("Please separate the time with '-'. For ie, 1800-2000 or include start/end date");
         }
         return timeArr;
-    }
-
-    public static void CheckIfParameterIsEmpty(String taskDetail, String message) throws DukeException {
-        if (taskDetail.isBlank()) {
-            throw new DukeException(message);
-        }
     }
 }

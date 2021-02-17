@@ -8,7 +8,8 @@ import duke.tasklist.TaskList;
 import duke.ui.UI;
 
 /**
- * A class that interacts with TaskList class to add, show, delete, find task as well as marking them as completed
+ * Command class that interacts with TaskList class to add, show, delete
+ *  find task and marking task as completed
  */
 public class Command {
 

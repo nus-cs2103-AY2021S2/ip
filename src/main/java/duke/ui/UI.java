@@ -33,7 +33,7 @@ public class UI {
     }
 
     /**
-     * Display message to inform users that this is a duplicated task
+     * Display message to inform users that there is a duplicated task
      */
     public String displayDuplicatedMessage() {
         return "Existing entries with same task description was found. " +
@@ -81,8 +81,8 @@ public class UI {
      * @param size amount of items in task list
      */
     public static String displayAddedTaskMessage(Task task, int size) {
-        return "Got it. I've added this task: \n\t" + task.toString() + "\n Now you have "
-                + size + " tasks in your list \n";
+        return "Got it. I've added this task:\n" + task.toString() + "\nNow you have "
+                + size + " tasks in your list";
     }
 
     /**
@@ -90,7 +90,7 @@ public class UI {
      * @param task task
      */
     public static String displayDeletedTaskMessage(Task task) {
-        return "Nice! I've removed this task: \n" + task.toString() + "\n";
+        return "Nice! I've removed this task:" + task.toString();
     }
 
     /**
@@ -98,7 +98,7 @@ public class UI {
      * @param task task
      */
     public String displayDoneTaskMessage(Task task) {
-        return "Nice! I'll make this task as completed: \n" + task.toString() + "\n";
+        return "Nice! I'll make this task as completed:" + task.toString();
     }
 
     /** Display exception messages upon encountering errors

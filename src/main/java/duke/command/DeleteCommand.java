@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     *  Delete task and store the new changes back into the data file
+     *  Delete the specific task given the task index and store the new changes back into the data file
      * @return String message upon successful execution of the command
      * @throws DukeException
      */

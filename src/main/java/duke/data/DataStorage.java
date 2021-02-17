@@ -14,8 +14,7 @@ public class DataStorage {
     private static final String FILE_PATH = "Data/allTasks.txt";
 
     /**
-     *  Retrieve data file if present
-     * Else create new data file
+     *  Retrieve the data file if it is present. If not, a new data file will be created
      * @return file
      * @throws DukeException
      */
@@ -35,8 +34,8 @@ public class DataStorage {
     }
 
     /**
-     * Save the list of task into data file
-     * @param taskArrayList array list of task
+     * Save all tasks in the task list into data file
+     * @param taskArrayList task list
      * @throws DukeException
      */
     public static void save(ArrayList<Task> taskArrayList) throws DukeException {
@@ -54,8 +53,8 @@ public class DataStorage {
     }
 
     /**
-     * Load file data to application when program starts
-     * @return list of task to be displayed
+     * Load the file data to the application when program starts
+     * @return task list to be displayed
      * @throws DukeException
      * @throws IOException
      */

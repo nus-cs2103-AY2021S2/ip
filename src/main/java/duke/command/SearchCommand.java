@@ -16,7 +16,7 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Display the result of task in the task list which matches or contains the given user keyword
+     * Display the task in the task list which matches or contains the given keyword
      * @return String message upon successful execution of the command
      */
     @Override

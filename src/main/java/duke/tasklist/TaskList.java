@@ -12,7 +12,7 @@ import duke.task.ToDo;
 import duke.ui.UI;
 
 /**
- * Interact with task class to facilitate the creation, deletion and update of task
+ * TaskList interact with task class to facilitate the creation, deletion and update of task
  */
 public class TaskList {
 
@@ -50,6 +50,7 @@ public class TaskList {
      * @return Boolean true if the task is duplicated in the task list
      */
     public Boolean addDeadline(String description, LocalDate dueDate, LocalTime endTime) {
+
         Task deadline = new Deadline(description, dueDate, endTime);
         boolean isDuplicate = false;
         for (int i = 0; i < taskArraylist.size(); i++) {
@@ -73,6 +74,7 @@ public class TaskList {
      * @return Boolean true if the task is duplicated in the task list
      */
     public Boolean addEvent(String description, LocalDate dueDate, LocalTime startTime, LocalTime endTime) {
+
         Task event = new Event(description, false , dueDate, startTime, endTime);
         boolean isDuplicate = false;
         for (int i = 0; i < taskArraylist.size(); i++) {
@@ -95,6 +97,7 @@ public class TaskList {
      * @return
      */
     public String showAllTask(String commandType) {
+
         ArrayList<Task> taskList;
         String allTask = "";
 
@@ -127,18 +130,12 @@ public class TaskList {
      */
     public String markAsDone(int index) throws DukeException {
 
-        if (index < 0) {
-            throw new DukeException(UI.displayInvalidTaskIndex());
-        } else if (taskArraylist.isEmpty() || taskArraylist.size() <= index) {
-            throw new DukeException(UI.displayNoTaskMessage());
-        } else {
-            System.out.println(taskArraylist.get(index).getStatus());
-            if(taskArraylist.get(index).getStatus().equals("\u2713")){
-                throw new DukeException(UI.displayMarkingCompletedAsDone());
-            }
-            taskArraylist.get(index).setCompleted();
-            return ui.displayDoneTaskMessage(taskArraylist.get(index));
+        isValidIndex(index);
+        if(taskArraylist.get(index).getStatus().equals("complete")){
+            throw new DukeException(UI.displayMarkingCompletedAsDone());
         }
+        taskArraylist.get(index).setCompleted();
+        return ui.displayDoneTaskMessage(taskArraylist.get(index));
     }
 
     /**
@@ -148,27 +145,22 @@ public class TaskList {
      */
     public String deleteTask(int index) throws DukeException {
 
-        if (index < 0) {
-            throw new DukeException(UI.displayInvalidTaskIndex());
-        } else if (taskArraylist.isEmpty() || taskArraylist.size() <= index) {
-            throw new DukeException(UI.displayNoTaskMessage());
-        } else {
-            String output = ui.displayDeletedTaskMessage(taskArraylist.get(index));
-            taskArraylist.remove(index);
-            return output;
-        }
+        isValidIndex(index);
+        String output = ui.displayDeletedTaskMessage(taskArraylist.get(index));
+        taskArraylist.remove(index);
+        return output;
     }
 
     /**
-     * Returns the list containing all task
-     * @return list of task
+     * Returns the task list
+     * @return task list
      */
     public ArrayList<Task> getTaskListArray() {
         return this.taskArraylist;
     }
 
-    /** Change the current array list of task to given array list
-     * @param TaskArrayList array list of task
+    /** Change the current task list to given task list
+     * @param TaskArrayList task list
      */
     public void setTaskList(ArrayList<Task> TaskArrayList) {
         this.taskArraylist = TaskArrayList;
@@ -198,5 +190,18 @@ public class TaskList {
      */
     public Task getTask(int index) {
         return taskArraylist.get(index);
+    }
+
+    /**
+     * Check if task index given is valid
+     * @param index task index
+     * @throws DukeException
+     */
+    public static void isValidIndex(int index) throws DukeException {
+        if (index < 0) {
+            throw new DukeException(UI.displayInvalidTaskIndex());
+        } else if (taskArraylist.isEmpty() || taskArraylist.size() <= index) {
+            throw new DukeException(UI.displayNoTaskMessage());
+        }
     }
 }
