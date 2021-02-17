@@ -15,99 +15,119 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * Loads the file containing the task list from the hard drive when Duke starts up.
+     * If the file or folder doesn't exist yet, create a file in the file path or file path first.
+     */
     public void retrieveOrCreate() {
         Path path = Paths.get(filePath);
-        if (Files.exists(path)) {
-            taskList = readFromFile();
-        } else {
+        if (!Files.exists(path)) {
             try {
                 Files.createDirectories(path.getParent());
                 Files.createFile(path);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            return;
         }
+        taskList = readFromFile();
     }
 
-    public TaskList getTaskList() {
-        return taskList;
-    }
-
+    /**
+     * Saves the updated task list in the hard drive automatically whenever the task list changes.
+     */
     public void writeToFile(TaskList taskList) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < taskList.numOfTasks(); i++) {
-            output += taskList.getTask(i).toString() + "\n";
+            output.append(taskList.getTask(i).toString()).append("\n");
         }
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-            bw.write(output);
+            bw.write(output.toString());
             bw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Converts the line from a string array to a Todo.
+     * @param dataArr The line in a string array.
+     * @return A Todo.
+     */
+    public Task convertToTodo(String[] dataArr) {
+        StringBuilder description = new StringBuilder();
+        for (int i = 2; i < dataArr.length; i++) {
+            description.append(dataArr[i]).append(" ");
+        }
+        return new Todo(description.toString());
+    }
+
+    /**
+     * Converts the line from a string array to either a Deadline or Event.
+     * @param dataArr The line in a string array.
+     * @param isDeadline A flag indicating if the line is a Deadline.
+     * @return A Deadline or Event depending on isDeadline.
+     */
+    public Task convertToDeadlineOrEvent(String[] dataArr, boolean isDeadline) {
+        int lastIndex = dataArr.length - 1;
+        String timeWithBracket = dataArr[lastIndex];
+        String[] timeWithBracketArr = timeWithBracket.split("");
+        int timeWithBracketLength = timeWithBracketArr.length;
+        int timeWithBracketLastIndex = timeWithBracketLength - 2;
+        StringBuilder time = new StringBuilder();
+        for (int i = 0; i <= timeWithBracketLastIndex; i++) {
+            time.append(timeWithBracketArr[i]);
+        }
+        String yearData = dataArr[lastIndex - 1];
+        String[] yearArr = yearData.split("");
+        StringBuilder year = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            year.append(yearArr[i]);
+        }
+        String date = dataArr[lastIndex - 3] + " " + dataArr[lastIndex - 2] + " " + year;
+        int descriptionLastIndex = lastIndex - 5;
+        StringBuilder description = new StringBuilder();
+        for (int i = 2; i <= descriptionLastIndex; i++) {
+            description.append(dataArr[i]).append(" ");
+        }
+        if (isDeadline) {
+            return new Deadline(description.toString(), date, time.toString());
+        }
+        return new Event(description.toString(), date, time.toString());
+    }
+
+    /**
+     * Reads the whole file line by line.
+     * For each line, checks which type of Task it is.
+     * Passes the line to the relevant converter to convert into a Task.
+     * Adds the task to a list.
+     * After reading the entire file, return the list.
+     * @return The saved task list.
+     */
     public TaskList readFromFile() {
         TaskList taskList = new TaskList();
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             String input = br.readLine();
-            String type = "";
-            int length = 0;
-            int lastIndex = 0;
-            String timeWithBracket = "";
-            int twbLength = 0;
-            int twbLastIndex = 0;
-            String year = "";
-            String yearLine = "";
-            int descLastIndex = 0;
-            Task task = null;
-            String description = "";
-            String date = "";
-            String time = "";
             while (input != null) {
                 String[] inputArr = input.split(" ");
-                type = inputArr[0];
-                length = inputArr.length;
-                lastIndex = length - 1;
-                if (type.equals("[T]")) {
-                    for (int i = 2; i < length; i++) {
-                        description += inputArr[i] + " ";
-                    }
-                    task = new Todo(description);
+                Task task;
+                if (input.startsWith("[T]")) {
+                    task = convertToTodo(inputArr);
+                } else if (input.startsWith("[D]")) {
+                    task = convertToDeadlineOrEvent(inputArr, true);
                 } else {
-                    timeWithBracket = inputArr[lastIndex];
-                    String[] twb = timeWithBracket.split("");
-                    twbLength = twb.length;
-                    twbLastIndex = twbLength - 2;
-                    for (int i = 0; i <= twbLastIndex; i++) {
-                        time += twb[i];
-                    }
-                    yearLine = inputArr[lastIndex - 1];
-                    String[] yearArr = yearLine.split("");
-                    for (int i = 0; i < 4; i++) {
-                        year += yearArr[i];
-                    }
-                    date = inputArr[lastIndex - 3] +
-                            " " + inputArr[lastIndex - 2] + " " + year;
-                    descLastIndex = lastIndex - 5;
-                    for (int i = 2; i <= descLastIndex; i++) {
-                        description += inputArr[i] + " ";
-                    }
-                    if (type.equals("[D]")) {
-                        task = new Deadline(description, date, time);
-                    } else {
-                        task = new Event(description, date, time);
-                    }
+                    task = convertToDeadlineOrEvent(inputArr, false);
                 }
                 if (inputArr[1].equals("[/]")) {
                     task.markAsDone();
                 }
                 taskList.addTask(task);
-                description = "";
-                date = "";
-                time = "";
-                year = "";
                 input = br.readLine();
             }
             br.close();

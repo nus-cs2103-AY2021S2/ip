@@ -12,7 +12,9 @@ public class TaskTest {
 
     @Test
     public void testFormatTime() {
-        task.formatTime();
+        String time = task.getTime();
+        String formattedTime = task.formatTime(time);
+        task.setTime(formattedTime);
         assertEquals("2:00pm", task.getTime());
     }
 }
