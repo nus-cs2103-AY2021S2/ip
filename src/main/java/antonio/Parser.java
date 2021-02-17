@@ -71,11 +71,11 @@ public class Parser {
                 return processEvent(input);
             } catch (InvalidTimeFormatException e) {
                 e.printStackTrace();
-                throw new AntonioException(e.getMessage() + "\nPlease enter a valid format\n'/at "
+                throw new AntonioException(e.getMessage() + "\nPlease enter a valid format\n'event <description> /at "
                         + "YYYY-MM-DD TIME /to YYYY-MM-DD TIME'");
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new AntonioException("\nPlease enter a valid format\n'/at "
+                throw new AntonioException("\nPlease enter a valid format\n'event <description> /at "
                         + "YYYY-MM-DD TIME /to YYYY-MM-DD TIME'");
             }
         case DEADLINE:

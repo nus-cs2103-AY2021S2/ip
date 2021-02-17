@@ -7,10 +7,10 @@ import java.time.LocalDate;
  */
 public class EventTask extends Task {
 
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String startTime;
-    private String endTime;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final String startTime;
+    private final String endTime;
 
     /**
      * Constructor for event task.
@@ -39,11 +39,30 @@ public class EventTask extends Task {
         return startDate.toString() + " | " + startTime + " | " + endDate.toString() + " | " + endTime;
     }
 
+    /**
+     * Pads the time string with zeroes to a 24 hour format.
+     * @param time to be padded to 24 hour format
+     * @return The padded time string.
+     */
+    private String padTimeFormat(String time) {
+        String padding;
+        if (time.length() == 1) {
+            padding = String.format("%03d", 0);
+        } else if (time.length() == 2) {
+            padding = String.format("%02d", 0);
+        } else if (time.length() == 3) {
+            padding = String.format("%01d", 0);
+        } else {
+            padding = "";
+        }
+        return padding + time;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.checkBoxToString() + description + "\n(at: " + startDate.getDayOfMonth()
                 + " " + startDate.getMonth() + " " + startDate.getYear() + " "
-                + startTime + "HRS to " + endDate.getDayOfMonth()
-                + " " + endDate.getMonth() + " " + endDate.getYear() + " " + endTime + "HRS" + ")";
+                + padTimeFormat(startTime) + "HRS to " + endDate.getDayOfMonth()
+                + " " + endDate.getMonth() + " " + endDate.getYear() + " " + padTimeFormat(endTime) + "HRS" + ")";
     }
 }
