@@ -11,7 +11,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task{
     protected String location;
-    protected String dateTime;
+    protected String date;
+    protected String time;
 
     /**
      * Default constructor used when a new Event task is added
@@ -21,9 +22,10 @@ public class Event extends Task{
      */
     public Event (String info, String afterAt) {
         super(info, taskType.EVENT);
-        String[] afterAtList = afterAt.trim().split(" ", 2);
+        String[] afterAtList = afterAt.trim().split(" ", 3);
         this.location = afterAtList[0];
-        this.dateTime = afterAtList[1];
+        this.date = afterAtList[1];
+        this.time = afterAtList[2];
 
     }
 
@@ -37,9 +39,10 @@ public class Event extends Task{
      */
     public Event(String info, String afterAt, boolean isDone) {
         super(info, taskType.EVENT, isDone);
-        String[] afterAtList = afterAt.split(" ", 2);
+        String[] afterAtList = afterAt.split(" ", 3);
         this.location = afterAtList[0];
-        this.dateTime = afterAtList[1];
+        this.date = afterAtList[1];
+        this.time = afterAtList[2];
     }
 
     /**
@@ -50,13 +53,11 @@ public class Event extends Task{
     public String getDateTime() {
         //Example of date based on format: 10 Aug 2021
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        String[] dateList = this.dateTime.split(" ", 2);
-        LocalDate eventDate = LocalDate.parse(dateList[0]);
+        LocalDate eventDate = LocalDate.parse(date);
 
-        if (dateList.length == 2) {
+        if (time != null) {
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm a");
-            LocalTime eventTime = LocalTime.parse(dateList[1]);
-
+            LocalTime eventTime = LocalTime.parse(time);
             return eventDate.format(dateFormat) + " " + eventTime.format(timeFormat);
         } else {
             return eventDate.toString();
