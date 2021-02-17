@@ -5,11 +5,20 @@ public class Task {
     private final String taskDescription;
     private boolean isDone;
 
+    /**
+     * Constructor
+     * @param taskDescription
+     */
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;
     }
 
+    /**
+     * Constructor
+     * @param taskDescription
+     * @param isDone
+     */
     public Task(String taskDescription, boolean isDone) {
         this.taskDescription = taskDescription;
         this.isDone = isDone;

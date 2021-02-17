@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        taskList.setTaskIsDone(index,true);
+        taskList.setTaskIsDone(index, true);
         storage.saveData(taskList);
         return ui.showTaskDone(taskList.getTask(index));
     }

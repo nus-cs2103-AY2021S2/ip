@@ -7,7 +7,8 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.util.Duration;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
+
     public ExitCommand() {
         super(true);
     }

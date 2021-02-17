@@ -1,9 +1,12 @@
 import java.io.IOException;
 
-import duke.*;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.command.Command;
 import duke.exception.DukeCommandException;
 import duke.exception.DukeToDoException;
-import duke.command.Command;
 
 public class Duke {
     private final Storage storage;

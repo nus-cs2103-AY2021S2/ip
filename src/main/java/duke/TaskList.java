@@ -1,9 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Task;
 
-import java.util.List;
-import java.util.ArrayList;
 
 public class TaskList {
     private final List<Task> taskList;

@@ -19,19 +19,26 @@ public class RemindCommand extends Command {
     private static final int DEFAULT_NUM_DAYS = 3;
     private final int numDays;
 
+    /**
+     * Constructor for RemindCommand
+     */
     public RemindCommand() {
         super();
         this.numDays = DEFAULT_NUM_DAYS;
     }
 
+    /**
+     * Constructor for RemindCommand with numDays
+     * @param numDays
+     */
     public RemindCommand(int numDays) {
         super();
         this.numDays = numDays;
     }
 
-    boolean isUpcoming(Task task){
-        boolean validTaskType = task.getTaskType().equals("DEADLINE") ||
-                task.getTaskType().equals("EVENT");
+    boolean isUpcoming(Task task) {
+        boolean validTaskType = task.getTaskType().equals("DEADLINE")
+                || task.getTaskType().equals("EVENT");
 
         if (validTaskType) {
             LocalDateTime taskTime;
@@ -55,7 +62,7 @@ public class RemindCommand extends Command {
 
     }
 
-    private TaskList findUpcomingTasks(TaskList taskList) throws IllegalStateException{
+    private TaskList findUpcomingTasks(TaskList taskList) throws IllegalStateException {
         Stream<Task> fullTaskStream = new ArrayList<>(taskList.getTaskList()).stream();
 
         Function<Task, Boolean> isUpcomingFunc = this::isUpcoming;

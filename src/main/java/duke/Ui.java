@@ -75,7 +75,7 @@ public class Ui {
     public String showTasks(TaskList taskList) {
         int i = 1;
         StringBuilder response = new StringBuilder();
-        for ( Task t : taskList.getTaskList()) {
+        for (Task t : taskList.getTaskList()) {
             if (t.getTaskType().equals("TODO")) {
                 response.append(String.format("%d: [%s] [%s] %s\n", i,
                         t.getTaskType(), t.getStatusIcon(), t.getTaskDescription()));

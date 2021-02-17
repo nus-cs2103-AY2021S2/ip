@@ -1,18 +1,18 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FindCommand extends Command{
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
+
+public class FindCommand extends Command {
     private final String keyword;
 
     /**
@@ -38,7 +38,7 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage){
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList findResults = findMatchingTasks(taskList);
         return ui.showFoundTasks(findResults);
 

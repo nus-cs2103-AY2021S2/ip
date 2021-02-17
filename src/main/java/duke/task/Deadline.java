@@ -8,11 +8,22 @@ public class Deadline extends Task {
     private static final String TASK_TYPE = "DEADLINE";
     private LocalDateTime endTime;
 
+    /**
+     * Constructor for Deadline
+     * @param taskDescription
+     * @param endTime
+     */
     public Deadline(String taskDescription, LocalDateTime endTime) {
         super(taskDescription);
         this.endTime = endTime;
     }
 
+    /**
+     * Constructor for Deadline
+     * @param taskDescription
+     * @param endTime
+     * @param isDone
+     */
     public Deadline(String taskDescription, LocalDateTime endTime, boolean isDone) {
         super(taskDescription, isDone);
         this.endTime = endTime;

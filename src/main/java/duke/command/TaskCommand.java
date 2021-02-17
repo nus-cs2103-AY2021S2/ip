@@ -17,11 +17,22 @@ public class TaskCommand extends Command {
     private final String description;
     private final String taskType;
 
+    /**
+     * Constructor for TaskCommand
+     * @param taskType
+     * @param description
+     */
     public TaskCommand(String taskType, String description) {
         this.taskType = taskType;
         this.description = description;
     }
 
+    /**
+     * Constructor for TaskCommand
+     * @param taskType
+     * @param description
+     * @param time
+     */
     public TaskCommand(String taskType, String description, LocalDateTime time) {
         this.taskType = taskType;
         this.description = description;
