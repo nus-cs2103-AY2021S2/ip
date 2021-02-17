@@ -59,6 +59,16 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * This method replaces the task at index with a new task.
+     *
+     * @param taskIndex This is the index of old task
+     * @param newTask This is the new task
+     */
+    public void replaceTask(int taskIndex, Task newTask) {
+        this.tasks.set(taskIndex, newTask);
+    }
+
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }

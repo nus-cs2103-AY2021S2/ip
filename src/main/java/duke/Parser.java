@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -14,6 +16,26 @@ public class Parser {
     private String read;
 
     private Scanner scan = new Scanner(System.in);
+
+    /**
+     * This method converts a LocalDate into String format.
+     *
+     * @param date This is the date in LocalDate format
+     * @return Returns a String date
+     */
+    public String localDateToString(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    /**
+     * This method converts a String date into LocalDate format.
+     *
+     * @param dateString This is the date in String format
+     * @return Returns a LocalDate
+     */
+    public LocalDate stringToLocalDate(String dateString) {
+        return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 
     /**
      * This method extracts the command from the input

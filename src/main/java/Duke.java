@@ -90,7 +90,7 @@ public class Duke {
             try {
                 String name = getEventOrDeadlineName(input);
                 String by = getDeadlineAttribute(input);
-                LocalDate date = LocalDate.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate date = parser.stringToLocalDate(by);
 
                 Deadline deadline = new Deadline(name, date);
                 taskList.addTask(deadline);
@@ -129,6 +129,35 @@ public class Duke {
 
         case "help":
             return ui.getHelpMessage();
+
+        case "snooze":
+            try {
+                int taskIndex = parser.getIndex(input);
+                String snoozeAttribute = getSnoozeAttribute(input);
+                if (snoozeAttribute.length() > 1) {
+                    LocalDate newDate = parser.stringToLocalDate(snoozeAttribute);
+
+                    //    Set task at index to new date.
+                    String currentDeadline = taskList.getSingleTask(taskIndex).getName();
+                    Deadline newDeadline = new Deadline(currentDeadline, newDate);
+                    taskList.replaceTask(taskIndex, newDeadline);
+
+                    return ui.printDoneSnooze(parser.localDateToString(newDate));
+                } else {
+                    Deadline oldDeadline = (Deadline) taskList.getSingleTask(taskIndex);
+                    LocalDate currDate = oldDeadline.getByAttribute();
+                    LocalDate newDate = currDate.plusDays(1);
+                    Deadline newDeadline = new Deadline(oldDeadline.getName(), newDate);
+                    taskList.replaceTask(taskIndex, newDeadline);
+
+                    return ui.printDoneSnooze(parser.localDateToString(newDate))
+                            + "\n\n"
+                            + "The deadline has been automatically snoozed by 1 day";
+
+                }
+            } catch (DukeException e) {
+                return e.printError("Snooze details incorrect, please check again");
+            }
 
         default:
             return ui.printUnknownCommand();
@@ -169,9 +198,9 @@ public class Duke {
     /**
      * This method gets the Deadline attribute
      *
-     * @param byDate This is the task attribute
+     * @param byDate This is the String input
      * @return String This is the Deadline attribute
-     * @throws DukeException On input error.
+     * @throws DukeException On input error
      */
     public static String getDeadlineAttribute(String byDate) throws DukeException {
         try {
@@ -190,7 +219,29 @@ public class Duke {
      */
     public static String getEventAttribute(String at) throws DukeException {
         try {
-            return at.split("/at ")[1];
+            return at.split("/at")[1].trim();
+        } catch (Exception e) {
+            throw new DukeException();
+        }
+    }
+
+    /**
+     * This method gets the Snooze attribute
+     *
+     * @param input This is the String input
+     * @return String This is the Snooze Attribute
+     * @throws DukeException On input error
+     */
+    public static String getSnoozeAttribute(String input) throws DukeException {
+        try {
+            if (input.split(" ").length > 2) {
+                // Returns snooze attribute if it exists
+                return input.split("/to")[1].trim();
+            } else {
+                // Returns input index only
+                return input.split(" ")[1];
+            }
+
         } catch (Exception e) {
             throw new DukeException();
         }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * The Ui class is a collection of print statements
  * that guides the user's interaction.
@@ -128,6 +130,23 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the snooze complete message with updated date.
+     *
+     * @param newDate This is the snooze new date
+     * @return This is the snooze complete message
+     */
+    public String printDoneSnooze(String newDate) {
+        String l1 = "Deadline has been snoozed to "
+                + newDate;
+        return l1;
+    }
+
+    /**
+     * Prints a message of all possible commands
+     *
+     * @return This is a text based help page
+     */
     public String getHelpMessage() {
         String commands = "To get you started, here are some commands:\n\n"
                 + "\"list\": displays exisiting commands.\n"
@@ -142,6 +161,11 @@ public class Ui {
         return commands;
     }
 
+    /**
+     * Returns the introduction message
+     *
+     * @return This is the introduction message
+     */
     public String getIntroMessage() {
         String welcome = "Greetings mortal...\n"
                 + "Welcome to MODOC_TM\n\n"

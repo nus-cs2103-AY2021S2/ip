@@ -38,7 +38,7 @@ public class Deadline extends Task {
 
     /**
      * This method is used to process a given date format into
-     * a desired format.
+     * a String format.
      *
      * @param originalDate This receives an unparsed date
      * @return String This returns a String date in "MMM dd yyyy" format
@@ -52,6 +52,10 @@ public class Deadline extends Task {
         String result = threeLetteredMonth + " " + day + " " + year;
 
         return result;
+    }
+
+    public LocalDate getByAttribute() {
+        return this.by;
     }
 
     @Override
