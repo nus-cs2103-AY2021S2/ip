@@ -132,7 +132,7 @@ Noted. I've removed this task:
   [T][ ] buy bread
 ```
 
-### `find (keyword)` - Finds a task with the specified keyword
+### `find (keyword)` - Finds a task with the specified keyword.
 
 Returns all tasks in the task list with the matching keyword
 
@@ -147,7 +147,7 @@ Here are the matching tasks in your list:
 1. [E][ ] project meeting (at: 2pm)
 ```
 
-### `bye` - Bid Mister Duke goodbye
+### `bye` - Bid Mister Duke goodbye.
 
 Mister Duke will bid you goodbye after you no longer require him. He will retain the information in the task list from the previous usage.
 
