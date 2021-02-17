@@ -28,7 +28,7 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 	** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
 	
 4. After starting the application, you should see the GUI as shown below:
-![Ui](.Images/Ui.png)
+![Ui](Ui.png)
 
 
 
@@ -66,7 +66,7 @@ Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]`
 Examples:
 * `deadline submit proposal /by 03/05/2021 1800`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addDeadlineTask.png)
+![Ui](./Images/addDeadlineTask.png)
 
 #### `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
@@ -80,7 +80,7 @@ Event command add a event task which requires task description, date as well as 
 Examples:
 * `event attend internship meeting /at 17/02/2021 1000-1100`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addEventTask.png)
+![Ui](/Images/addEventTask.png)
 
 
 ### Listing all tasks : `list`
