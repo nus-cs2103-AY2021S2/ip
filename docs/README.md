@@ -8,7 +8,7 @@ Duke is a desktop app for managing tasks using Command Line Interface (CLI).
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `Duke.jar` from [here](https://github.com/Ellevy/ip/releases/tag/A-Jar).
+1. Download the latest `duke.jar` from [here](https://github.com/Ellevy/ip/releases/tag/A-Release).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Duke.
 
@@ -42,6 +42,8 @@ Duke is a desktop app for managing tasks using Command Line Interface (CLI).
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `add drink water`.
+
+* When `DESCRIPTION` is used as a parameter to be supplied by the user, the `DESCRIPTION` cannot contain `|`.
 
 * When `DATE` is used as a parameter to be supplied by the user, the only format accepted is `yyyy-mm-dd`.
   e.g. in `deadline DESCRIPTION /by DATE`, `DATE` is specified in `yyyy-mm-dd` format which can be used as

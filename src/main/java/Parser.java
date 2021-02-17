@@ -185,11 +185,15 @@ public class Parser {
             return new ArgumentException(1).toString();
         }
         String description = splits[1];
+        if (description.contains("|")) {
+            return new DescriptionException().toString();
+        }
         Todo addedTask = new Todo(description, isDone);
         tasks.addTask(addedTask);
         textToReturn += "Got it, I've added this task to the list: \n";
         textToReturn += "  " + addedTask;
         return textToReturn;
+
     }
 
     /**
@@ -209,6 +213,9 @@ public class Parser {
         }
         String description = splits[1];
         String date = splits[2];
+        if (description.contains("|")) {
+            return new DescriptionException().toString();
+        }
         try {
             Deadline addedTask = new Deadline(description, isDone, date);
             tasks.addTask(addedTask);
@@ -237,6 +244,9 @@ public class Parser {
         }
         String description = splits[1];
         String date = splits[2];
+        if (description.contains("|")) {
+            return new DescriptionException().toString();
+        }
         try {
             Event addedTask = new Event(description, isDone, date);
             tasks.addTask(addedTask);
