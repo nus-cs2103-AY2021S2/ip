@@ -19,8 +19,7 @@ import javafx.stage.Stage;
  */
 
 public class Main extends Application {
-    //private final static File f = new File("src/main/data/duke.txt");
-    private static final File file = new File("duke.txt");
+    private static final File file = new File("src/main/data/duke.txt");
 
     @Override
     public void init() {

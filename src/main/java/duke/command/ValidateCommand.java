@@ -39,8 +39,8 @@ public class ValidateCommand {
         case "deadline":
         case "event":
         case "find":
-            throw new InvalidCommandException("OOPS!!! " + "The description of a "
-                    + userInput + " cannot be empty.\n");
+            throw new InvalidCommandException("OOPS!!! " + "The description of "
+                    + userInput + " command cannot be empty.\n");
         case "bye":
             userCommand = new ByeCommand();
             break;

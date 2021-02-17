@@ -2,14 +2,12 @@ package duke.ui;
 
 import java.io.IOException;
 
-import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.duke.Duke;
 import duke.duke.Main;
 import duke.exceptions.InvalidArgumentException;
 import duke.exceptions.InvalidCommandException;
 import duke.parser.Parser;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -39,8 +37,8 @@ public class MainWindow extends VBox {
     @FXML
     private Button sendButton;
     private Duke bot;
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/heartPiglet.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/sparklePooh.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Pigglet.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Pooh.png"));
 
     /**
      * Initializes the required components.
@@ -90,9 +88,6 @@ public class MainWindow extends VBox {
             userCommand = Parser.processInput(input, bot);
             assert userCommand != null : "User command should not be empty at this point!";
             response = Main.runUserCommand(userCommand, bot);
-            if (userCommand instanceof ByeCommand) {
-                exit();
-            }
         } catch (InvalidCommandException | InvalidArgumentException | IOException ex) {
             response = ex.getMessage();
         }
@@ -106,13 +101,5 @@ public class MainWindow extends VBox {
 
     private String getResponse(String input) {
         return input;
-    }
-
-    private void exit() {
-        String exitMessage = getResponse(Ui.showExitMessage());
-        assert exitMessage != null : "Exit message should not be empty!";
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(exitMessage, dukeImage)
-        );
-        Platform.exit();
     }
 }
