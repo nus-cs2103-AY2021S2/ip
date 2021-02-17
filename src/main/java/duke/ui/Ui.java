@@ -70,9 +70,9 @@ public class Ui {
                 + "\n"
                 + "You now have "
                 + count
-                + "task in the list.\n";
+                + " task in the list.\n";
         assert count >= 0 : "Size is less than 0";
-        return printMessage(output);
+        return output;
     }
 
     /**
@@ -97,12 +97,15 @@ public class Ui {
      * reported on the finded task
      */
     public String reportFindedTask(List<Task> task) {
+        if (task.isEmpty()) {
+            return "There is no matching tasks in your list";
+        }
         String ans = "Here are the matching tasks in your list\n";
         for (int i = 0; i < task.size(); i++) {
             int index = i + 1;
             ans += index + "." + task.get(i).toString() + "\n";
         }
-        return printMessage(ans);
+        return ans;
     }
 
     /**
