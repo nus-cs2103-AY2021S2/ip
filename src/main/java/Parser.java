@@ -235,8 +235,7 @@ public class Parser {
                 break;
 
             default:
-                outputString.append("Notice. Unknown command detected.\n")
-                        .append("Try 'help' to see available commands.");
+                outputString.append("Notice. Unfamiliar command detected. Enter 'help' to view commands.\n");
             }
         }
 

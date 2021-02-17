@@ -42,10 +42,11 @@ public class MainWindow extends AnchorPane {
                 + "|_____//__/      \\__\\\\______/  |_______|\n";
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(sageFormattedSpacing
-                        + "    ________________________________________________________\n"
+                        + "   ______________________________________________________\n"
                         + "     Unique Skill: Sage\n"
-                        + "     >Acquired\n"
-                        + "    ________________________________________________________\n", dukeImage));
+                        + "     Acquired\n"
+                        + "     Enter 'help' to view commands.\n"
+                        + "   ______________________________________________________\n", dukeImage));
     }
 
     public void setDuke(Duke d) {
