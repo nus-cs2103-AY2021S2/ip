@@ -87,20 +87,4 @@ public class TaskList {
     public List<Task> unmodifiableList() {
         return Collections.unmodifiableList(taskList);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof TaskList)) {
-            return false;
-        }
-
-        TaskList otherTaskList = (TaskList) obj;
-        if (taskList != null && otherTaskList.taskList != null) {
-            return taskList.equals(otherTaskList.taskList);
-        }
-        return taskList == null && otherTaskList.taskList == null;
-    }
 }

@@ -45,28 +45,11 @@ public class CommandResultTest {
         assertFalse(new CommandResult(false).isExitingProgram());
     }
 
-    @Test
-    public void equals() {
-        CommandResult commandResult = new CommandResult(false, "Message: completed");
-
-        assertTrue(commandResult.equals(new CommandResult(false, "Message: completed")));
-
-        assertFalse(commandResult.equals(new CommandResult(false, "Message: not completed")));
-        assertFalse(commandResult.equals(new CommandResult(new TaskListStub(), false,
-                "Message: completed")));
-        assertFalse(commandResult.equals(1));
-    }
-
-    class TaskListStub extends TaskList {
+    private static class TaskListStub extends TaskList {
         private final List<Task> taskList;
 
         public TaskListStub() {
-            this.taskList = new ArrayList<>();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return this == obj;
+            taskList = new ArrayList<>();
         }
     }
 }
