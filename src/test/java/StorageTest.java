@@ -1,9 +1,11 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Deadline;
 import duke.Storage;
 import duke.ToDo;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
     @Test
@@ -14,7 +16,7 @@ public class StorageTest {
     }
 
     @Test
-    public void stringToTask_correctInputs_success() throws Exception{
+    public void stringToTask_correctInputs_success() throws Exception {
         ToDo t = new ToDo("make food");
         assertEquals(t.getTaskDescription(), new Storage().stringToTask("T, 0, make food").getTaskDescription());
     }

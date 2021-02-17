@@ -1,13 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void getDateTime_correctInput_success() throws Exception{
+    public void getDateTime_correctInput_success() throws Exception {
 
         assertEquals("Monday", new Parser(new TaskList())
                 .getDateTime("read book /by Monday", " /by "));
@@ -21,8 +22,7 @@ public class ParserTest {
         try {
             assertEquals("Monday", new Parser(new TaskList())
                     .getDateTime("read book /at Monday", " /by "));
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             assertEquals("Statement does not contain  /by ", e.getMessage());
         }
     }

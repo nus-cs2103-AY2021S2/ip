@@ -69,6 +69,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    * **Example:** `bye`
    
 ## Command Summary
+
 | Actions | Format |
 | ------ | ------ |
 | Add a todo task | todo TASK_DESCRIPTION |
