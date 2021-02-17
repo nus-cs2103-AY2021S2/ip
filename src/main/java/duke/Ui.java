@@ -155,7 +155,6 @@ public class Ui {
      */
     public void handleException(EmptyArgumentException e) {
         builder.append("Cannot have empty argument\n");
-        builder.append(e.getMessage() + "\n");
     }
     /**
      * Generates an UI alert for some particular error.
@@ -164,7 +163,6 @@ public class Ui {
      */ //TODO: Figure out how to do javadoc for overloaded method.
     public void handleException(BadDateArgumentException e) {
         builder.append("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044\n");
-        builder.append(e.getMessage() + "\n");
     }
 
     /**
