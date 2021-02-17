@@ -138,7 +138,7 @@ Exit the PAson chatbot. Your tasks will be stored locally and available to you w
 
 
 # Summary of Commands
-Action|Format, examples
+Action | Format, examples
 ------------ | -------------
 Add ToDo | `todo [description]` e.g. `todo Do the laundry`
 Add Event | `event [description] /at [date] [optional time]` e.g. `event Jason's birthday /at 24/09/2021`
