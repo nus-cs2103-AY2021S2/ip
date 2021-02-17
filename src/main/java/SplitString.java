@@ -1,5 +1,5 @@
 public class SplitString {
-    private String firstString, secondString;
+    private final String firstString, secondString;
 
     public SplitString(String string, String separator) {
         int separatorIndex = string.indexOf(separator);

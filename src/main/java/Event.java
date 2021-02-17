@@ -9,7 +9,11 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         atString = at;
-        atLocalDate = LocalDate.parse(at);
+        try {
+            atLocalDate = LocalDate.parse(at);
+        } catch (Exception e) {
+            atLocalDate = LocalDate.parse("2999-12-31");
+        }
     }
 
     @Override

@@ -1,10 +1,19 @@
 public class TaskList {
     private static final int MAX_TASKS = 100;
-    public Task[] tasks = new Task[MAX_TASKS];
+    public Task[] tasks;
     public int numTask = 0;
 
-    public TaskList() {
+    public TaskList(Task[] tasks) {
+        this.tasks = tasks;
+        int i = 0;
+        while (tasks[i] != null) {
+            i++;
+        }
+        this.numTask = i;
+    }
 
+    public TaskList() {
+        this(new Task[MAX_TASKS]);
     }
 
     public String listTask() {
@@ -54,14 +63,18 @@ public class TaskList {
         return addTaskMessage;
     }
 
-    public String doTask(Integer taskNum) {
-        String doTaskMessage = "";
-
+    public String doTask(String description) {
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(description);
+        } catch (Exception e) {
+            return "Not possible to do task " + description + ".";
+        }
         if (taskNum <= 0 || taskNum > numTask) {
-            doTaskMessage = "Not possible to do task " + taskNum + ".";
-            return doTaskMessage;
+            return "Not possible to do task " + description + ".";
         }
 
+        String doTaskMessage = "";
         Task t = tasks[taskNum - 1];
         t.markAsDone();
         doTaskMessage = "Nice! I've marked this task as done: \n" + "   " + t.toString();
@@ -69,14 +82,18 @@ public class TaskList {
         return doTaskMessage;
     }
 
-    public String deleteTask(Integer taskNum) {
-        String deleteTaskMessage = "";
-
+    public String deleteTask(String description) {
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(description);
+        } catch (Exception e) {
+            return "Not possible to remove task " + description + ".";
+        }
         if (taskNum <= 0 || taskNum > numTask) {
-            deleteTaskMessage = "Not possible to remove task " + taskNum + ".";
-            return deleteTaskMessage;
+            return "Not possible to remove task " + description + ".";
         }
 
+        String deleteTaskMessage = "";
         Task t = tasks[taskNum - 1];
         int i = taskNum;
         while (i < MAX_TASKS) {

@@ -9,7 +9,11 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         byString = by;
-        byLocalDate = LocalDate.parse(by);
+        try {
+            byLocalDate = LocalDate.parse(by);
+        } catch (Exception e) {
+            byLocalDate = LocalDate.parse("2999-12-31");
+        }
     }
 
     @Override
