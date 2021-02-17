@@ -1,7 +1,7 @@
 #<span style="color:#4285F4">B.O.B Task Manager User Guide</span>
 A todo task manager bot to record and store list of tasks.
 
-##<span style="color:#4285F4">Features</span>
+## <span style="color:#4285F4">Features</span>
 Below are the features currently implemented:
 
 1. [**`Add`**](#add) Adding tasks to the bot.
@@ -12,7 +12,7 @@ Below are the features currently implemented:
 6. [**`Find`**](#find) Finding tasks based on keywords.
 7. [**`Remind`**](#remind) Remind Users about upcoming tasks.
 
-###<span style="color:#4285F4">Feature 1 - Adding tasks</span><a name="add"></a>
+### <span style="color:#4285F4">Feature 1 - Adding tasks</span><a name="add"></a>
 The user will be able to add new tasks into B.O.B Task Manager. 
 
 There are 3 types of tasking of which the user can
@@ -73,7 +73,7 @@ Adds a deadline task with the **task description** and
 
 ![image](./images/add-deadline.png)
 
-###<span style="color:#4285F4">Feature 2 - Listing existing tasks</span><a name="list"></a>
+### <span style="color:#4285F4">Feature 2 - Listing existing tasks</span><a name="list"></a>
 The user will be able to list existing tasks in B.O.B Task Manager.
 
 There are 3 types of tasking of which the user can
