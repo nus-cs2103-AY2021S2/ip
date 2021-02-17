@@ -52,28 +52,31 @@ public class DukeFileReader {
             String[] taskBreakdown = getTaskBreakdownInArray(taskString);
             boolean isTaskDone = taskBreakdown[TASK_COMPLETION_INDEX].equals(TASK_COMPLETED_NUM);
             String taskDescription = taskBreakdown[TASK_DESCRIPTION_INDEX];
-
-            try {
-                // An empty task that will be override later
-                Task task = new Task("dummy task");
-
-                if (isTaskTypeOf(TODO_IDENTIFIER, taskBreakdown)) {
-                    task = new Todo(taskDescription);
-                } else if (isTaskTypeOf(DEADLINE_IDENTIFIER, taskBreakdown)) {
-                    task = new Deadline(taskDescription, taskBreakdown[TASK_DATE_INDEX]);
-                } else if (isTaskTypeOf(EVENT_IDENTIFIER, taskBreakdown)) {
-                    task = new Event(taskDescription, taskBreakdown[TASK_DATE_INDEX]);
-                }
-                if (isTaskDone) {
-                    task.setDone();
-                }
-                taskList.addTask(task);
-            } catch (EmptyTaskDukeException e) {
-                Ui.printError(e.getMessage());
-            }
+            addTasksToTaskList(taskList, taskBreakdown, isTaskDone, taskDescription);
         }
         sc.close();
         return taskList;
+    }
+
+    private static void addTasksToTaskList(TaskList taskList, String[] taskBreakdown, boolean isTaskDone, String taskDescription) {
+        try {
+            // An empty task that will be override later
+            Task task = new Task("dummy task");
+
+            if (isTaskTypeOf(TODO_IDENTIFIER, taskBreakdown)) {
+                task = new Todo(taskDescription);
+            } else if (isTaskTypeOf(DEADLINE_IDENTIFIER, taskBreakdown)) {
+                task = new Deadline(taskDescription, taskBreakdown[TASK_DATE_INDEX]);
+            } else if (isTaskTypeOf(EVENT_IDENTIFIER, taskBreakdown)) {
+                task = new Event(taskDescription, taskBreakdown[TASK_DATE_INDEX]);
+            }
+            if (isTaskDone) {
+                task.setDone();
+            }
+            taskList.addTask(task);
+        } catch (EmptyTaskDukeException e) {
+            Ui.printError(e.getMessage());
+        }
     }
 
     private static String[] getTaskBreakdownInArray(String taskString) {
