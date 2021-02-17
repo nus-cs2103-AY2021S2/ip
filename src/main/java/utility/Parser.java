@@ -132,7 +132,7 @@ public class Parser {
 
                 return new Deadline(deadlineParams[0], LocalDate.parse(deadlineParams[1]));
 
-            } else {
+            } else if (command == Command.EVENT) {
 
                 if (details.length() == 0) {
                     throw new DukeException("OOPS!!! The description of an event cannot be empty");
@@ -167,6 +167,9 @@ public class Parser {
                 }
 
                 return new Event(eventParams[0], LocalDate.parse(timeParams[0]), timeParams[1]);
+
+            } else {
+                assert false : "Wrong command given to Parser.parseRemainder()";
             }
 
         } catch (DukeException err) {

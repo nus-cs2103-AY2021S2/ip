@@ -109,6 +109,11 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    public static String showNoMatchedTasks() {
+        return INDENT + " No relevant tasks were found!";
+    }
+
+
     public static String showMatchedTasks(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
 

@@ -52,4 +52,8 @@ public class TaskList {
     public void markAsDone(int index) {
         tasks.set(index, tasks.get(index).markAsDone());
     }
+
+    public int getSize() {
+        return tasks.size();
+    }
 }

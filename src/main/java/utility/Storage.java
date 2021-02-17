@@ -108,12 +108,16 @@ public class Storage {
                         String[] timeParams = inputArr[3].split(" ", 2);
                         task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1]);
                         break;
+                    default:
+                        assert false : "Task read from file is not a Todo, Deadline or Event";
                     }
 
                     if (Integer.parseInt(inputArr[1]) == 1) {
                         tasksList.add(task.markAsDone());
-                    } else {
+                    } else if (Integer.parseInt(inputArr[1]) == 0) {
                         tasksList.add(task);
+                    } else {
+                        assert false;
                     }
 
                 } catch (Exception e) {
