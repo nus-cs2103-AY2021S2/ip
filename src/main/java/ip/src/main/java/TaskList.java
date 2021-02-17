@@ -44,6 +44,28 @@ public class TaskList {
             output += String.valueOf(counter) + ". " + element + "\n";
             counter++;
         }
+        output += "Now you have " + String.valueOf(this.list.size()) + " tasks in the list.";
+        return output;
+    }
+
+    public String printMatchingTasks() {
+        int counter = 1;
+        String output = "";
+        for (Task element : this.list) {
+            output += String.valueOf(counter) + ". " + element + "\n";
+            counter++;
+        }
+        output += "You have " + String.valueOf(this.list.size()) + " matching tasks from the list!";
+        return output;
+    }
+
+    public String printEditedTasks() {
+        int counter = 1;
+        String output = "";
+        for (Task element : this.list) {
+            output += String.valueOf(counter) + ". " + element + "\n";
+            counter++;
+        }
         return output;
     }
 

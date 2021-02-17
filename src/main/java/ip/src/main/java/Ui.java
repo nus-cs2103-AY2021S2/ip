@@ -69,7 +69,7 @@ public class Ui {
             Task newTask = new Task("");
 
             switch (editType) {
-                case EDIT_DATE:
+                case EDIT_DATETIME:
                     newTask = oldTask.editDate(editDetails);
                     break;
 
@@ -106,13 +106,10 @@ public class Ui {
         try {
             Command command = parser.getCommand(input);
             switch (command) {
-                case HELLO:
-                    output = this.bot.greet();
-                    break;
 
                 case BYE:
                     Storage storage = new Storage("data/duke.txt" , this.bot);
-                    this.bot.bye(storage);
+                    output = this.bot.bye(storage);
                     break;
 
                 case LIST:

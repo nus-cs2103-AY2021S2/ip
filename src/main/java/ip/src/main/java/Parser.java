@@ -1,7 +1,6 @@
 package ip.src.main.java;
 
 import java.util.Locale;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * Parser is a class that parsers user input to retrieve user commands, information to create Task objects etc.
@@ -54,9 +53,9 @@ public class Parser {
 
     protected String getEditDetails (String input) throws DukeException {
         try {
-            input = input.split(" ")[3];
+            input = input.split(" ", 4)[3];
             return input;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(("OOPS!!! The edit details cannot be empty. \n Edit format should be: edit {index} {type of edit} {edit details}"));
         }
 
@@ -74,7 +73,7 @@ public class Parser {
         try {
             input = input.split(" ", 2)[1];
             return input;
-        } catch (PatternSyntaxException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(("OOPS!!! The description cannot be empty."));
         }
 

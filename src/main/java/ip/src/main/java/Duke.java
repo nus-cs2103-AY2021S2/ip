@@ -18,14 +18,15 @@ public class Duke {
      */
     public String greet() {
         String output = "";
-        output += "Hello! I'm Duke! :)" + "\n";
+        output += "Hello! I'm Duke! :) " + "\n";
         output += "What can I do for you?";
         return output;
     }
 
-    public void bye(Storage storage) throws DukeException {
+    public String bye(Storage storage) throws DukeException {
         try {
             storage.updateFile();
+            return "Bye! See you again";
         } catch (IOException e) {
             throw new DukeException("Can't save to file!");
         }
@@ -52,7 +53,7 @@ public class Duke {
         this.list.addTask(task);
         String output = "";
         output += "Got it. I've added this task: " + "\n";
-        output += "    " + task;
+        output += "    " + task + "\n";
         output += "Now you have " + String.valueOf(this.list.size()) + " tasks in the list.";
         return output;
     }
@@ -90,7 +91,7 @@ public class Duke {
         Task task = this.list.getTask(id-1);
         task.markDone();
         String output = "";
-        output += "Nice! I've marked this task as done:";
+        output += "Nice! I've marked this task as done: \n";
         output += "  [X] "+ task.content;
         return output;
     }
@@ -104,7 +105,7 @@ public class Duke {
         Task task = this.list.getTask(id-1);
         this.list.remove(id-1);
         String output = "";
-        output += "Noted. I've removed this task: ";
+        output += "Noted. I've removed this task: \n";
         output += "    " + task + "\n";
         output += "Now you have " + String.valueOf(this.list.size()) + " tasks in the list.";
         return output;
@@ -117,7 +118,7 @@ public class Duke {
      */
     public String findMatchingTasks(String keyword){
         TaskList matchingTasks = this.list.findTasks(keyword);
-        return matchingTasks.printTasks();
+        return matchingTasks.printMatchingTasks();
     }
 
     public Task getTask (int id) {
@@ -127,7 +128,7 @@ public class Duke {
     public String editTask(Task newTask, int id) {
         this.list.editTask(newTask , id-1);
         String output = "Task has been edited. \n";
-        output += printList();
+        output += this.list.printEditedTasks();
         return output;
     }
 

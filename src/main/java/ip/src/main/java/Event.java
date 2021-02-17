@@ -39,6 +39,12 @@ public class Event extends Task {
         return newEventTask;
     }
 
+    public Event editContent (String newContent) {
+        Event newTask = new Event(newContent, "0/0/0 00:00");
+        newTask.at = this.at;
+        newTask.done = this.done;
+        return newTask;
+    }
     /**
      * toString() of Event Class.
      *

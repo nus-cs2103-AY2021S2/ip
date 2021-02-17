@@ -41,6 +41,13 @@ public class Deadline extends Task{
         return newDeadlineTask;
     }
 
+    public Deadline editContent (String newContent) {
+        Deadline newTask = new Deadline(newContent, "0/0/0 00:00");
+        newTask.by = this.by;
+        newTask.done = this.done;
+        return newTask;
+    }
+
     /**
      * toString() of Deadline Class.
      *

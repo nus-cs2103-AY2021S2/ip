@@ -46,8 +46,9 @@ public class Task {
     }
 
     protected Task editContent (String newContent) {
-        this.content = newContent;
-        return this;
+        Task newTask = new Task(newContent);
+        newTask.done = this.done;
+        return newTask;
     }
 
     /**

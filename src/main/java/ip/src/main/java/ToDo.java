@@ -11,6 +11,11 @@ public class ToDo extends Task {
         super(content);
     }
 
+    public ToDo editContent (String newContent) {
+        ToDo newTask = new ToDo(newContent);
+        newTask.done = this.done;
+        return newTask;
+    }
     /**
      * toString() of ToDo Class.
      *
