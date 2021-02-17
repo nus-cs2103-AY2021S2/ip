@@ -3,6 +3,7 @@ package todobeast.commands;
 import todobeast.TaskList;
 import todobeast.Ui;
 import todobeast.exceptions.TaskNotFoundException;
+import todobeast.tasks.Task;
 
 /**
  * A Command that represents deleting a task from the TaskList. Enclosing business logic is wrapped in the execute()
@@ -25,11 +26,11 @@ public class DeleteCommand extends Command {
      * @throws TaskNotFoundException if the task index provided does not exist within the task list.
      */
     public void execute(TaskList taskList, Ui ui) throws TaskNotFoundException {
-        if (!taskList.isTaskIndexInRange(taskNumber)) {
+        if (!taskList.isTaskIndexInRange(taskNumber - 1)) {
             throw new TaskNotFoundException("Task with index " + taskNumber + " does not exist in the list!");
         }
-        taskList.deleteTask(taskNumber);
-        ui.addToResponseOutput(ui.showDeleted(taskList.getTask(taskNumber)));
+        Task deletedTask = taskList.deleteTask(taskNumber);
+        ui.addToResponseOutput(ui.showDeleted(deletedTask));
         ui.addToResponseOutput(ui.showNumOfTasks(taskList.getNumOfTasks()));
     }
 }

@@ -39,8 +39,10 @@ public class TaskList {
         return taskList.size();
     }
 
-    public void deleteTask(int taskNumber) {
+    public Task deleteTask(int taskNumber) {
+        Task deletedTask = getTask(taskNumber);
         taskList.remove(taskNumber - 1);
+        return deletedTask;
     }
 
     public List<Task> getTaskList() {

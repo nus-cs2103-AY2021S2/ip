@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
      * @throws TaskNotFoundException if the task index provided does not exist within the task list.
      */
     public void execute(TaskList taskList, Ui ui) throws TaskNotFoundException {
-        if (!taskList.isTaskIndexInRange(taskNumber)) {
+        if (!taskList.isTaskIndexInRange(taskNumber - 1)) {
             throw new TaskNotFoundException("Task with index " + taskNumber + " does not exist in the list!");
         }
 
