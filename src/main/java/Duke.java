@@ -1,10 +1,19 @@
+import javafx.application.Application;
+
+/**
+ * Class that can create Duke objects that help the user
+ * to maintain a list of tasks.
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    /**
+     * Method to run the Duke application.
+     */
+    public void run() {
+        Application.launch(UI.class);
     }
+
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
 }
