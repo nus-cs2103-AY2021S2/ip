@@ -40,8 +40,6 @@
 
 ## About The Project
 
-[![Duke Screenshot][duke-screenshot]](docs/Ui.png)
-
 Duke is a desktop app for **managing tasks**, and it is optimized for use via a **Command Line
 Interface (CLI)**
 while still having the benefits of a **Graphical User Interface (GUI)**.

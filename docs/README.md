@@ -137,6 +137,15 @@ Examples:
 - `todo read books`
 - `todo buy eggs`
 
+## FAQ
+
+### Where is the save data stored?
+
+The save data for Duke is stored under the user's home folder.
+
+Windows: `C:\Users\${current_user_name}`
+Ubuntu/Linux: `/home/${current_user_name}`
+
 ## Date/Time Formats
 
 The allowed date formats are:
