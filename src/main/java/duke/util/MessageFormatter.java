@@ -91,7 +91,7 @@ public class MessageFormatter {
         int count = 1;
         while (iterator.hasNext()) {
             Task task = iterator.next();
-            msg += ("\t" + count + "." +
+            msg += (count + "." +
                     task +
                     (iterator.hasNext() ? "\n" : ""));
             count++;
@@ -100,7 +100,7 @@ public class MessageFormatter {
     }
 
     public String formatUndoAdd(Task removedTask, TaskList tasks) {
-        return ("The add command is undone, the following task is removed:\n" +
+        return ("ADD undone, the following task is removed:\n" +
                 removedTask +
                 "\nYou have " +
                 tasks.getSize() +
@@ -109,7 +109,7 @@ public class MessageFormatter {
     }
 
     public String formatUndoDelete(Task addedTask, TaskList tasks) {
-        return ("The delete command is undone, the following task is added:\n" +
+        return ("DELETE undone, the following task is added:\n" +
                 addedTask +
                 "\nYou have " +
                 tasks.getSize() +
