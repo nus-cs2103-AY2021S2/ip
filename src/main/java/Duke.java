@@ -42,7 +42,18 @@ public class Duke {
         }
     }
 
-    //To Do: Java Doc
+    public String getIntroMessage() {
+    //    Welcome etc..
+    //    Here are a list of useful commands...
+        return "Intro Message";
+    }
+
+    /**
+     * This method returns a response based on user input
+     *
+     * @param input
+     * @return This returns a response to user input
+     */
     public String getResponse(String input) {
         Parser parser = new Parser();
         String trimmedInput = input.trim();

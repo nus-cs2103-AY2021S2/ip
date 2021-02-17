@@ -9,6 +9,7 @@ package duke;
  * @since   2021-02-06
  */
 public class Ui {
+    private static final String EMPTY_STRING = "";
 
     /**
      * Prints the introductory statement for the program.
@@ -113,11 +114,18 @@ public class Ui {
      */
     public String printMatchingTask(TaskList taskList) {
         String l1 = "Here are the matching tasks in your list:\n";
+        String l2 = EMPTY_STRING;
+
         for (int i = 0; i < taskList.getSize(); i++) {
-            l1 += String.valueOf(i + 1) + "." + taskList.getSingleTask(i).toString()
+            l2 += String.valueOf(i + 1) + "." + taskList.getSingleTask(i).toString()
                     + "\n";
         }
-        return l1;
+
+        if (l2 == EMPTY_STRING) {
+            return "Sorry! Nothing found!";
+        } else {
+            return l1 + l2;
+        }
     }
 
     /**
