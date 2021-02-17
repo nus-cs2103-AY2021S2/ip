@@ -49,7 +49,7 @@ Add a Deadline to your list. Deadlines must contain a mandatory date and time.
 `deadline CS2106 Assignment 1 /by 05/03/2021 2359`
 
 **Expected outcome:**
->Done! I've added a new task:\
+>Done! I've added a new task:
     [D][✘] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)\
     Now there are 3 tasks in your list.
 
@@ -134,7 +134,7 @@ Exit the PAson chatbot. Your tasks will be stored locally and available to you w
 `bye`
 
 **Expected outcome:**
-Bye! I shall go rest now. PAge me when you need me.
+> Bye! I shall go rest now. PAge me when you need me.
 
 
 # Summary of Commands
