@@ -8,11 +8,57 @@ The app manages a list of tasks, recording and tracking the following informatio
 2. The task's description.
 3. The task's deadline or time.
 
+<br>
+
+## Features
+
+### Add To-do Task
+
+Adds a task of to-do type to the lists of tasks.
+
+### Add Deadline Task
+
+Adds a task of deadline type to the lists of tasks.
+
+### Add Event Task
+
+Adds a task of event type to the lists of tasks.
+
+### List Tasks
+
+Displays the list of tasks with index numbers, statuses, descriptions, and time.
+
+### Mark as Done
+
+Marks a task in the list of tasks as done.
+
+### Delete Task
+
+Deletes a task from the list of tasks.
+
+### Find Task
+
+Lists the tasks with descriptions matching some specified keyword(s).
+
+### Get Reminder
+
+Lists the tasks which are overdue or urgent.
+
+### Save Data & Terminate Application
+
+Saves the lists of tasks into the hard drive before terminating the application.
+
+### Load Save Data
+
+Loads the lists of tasks saved from the previous session.
+
+<br>
+
 ## Usage
 
-This section specifies a list of features together with the respective commands to execute them.
+This section specifies the respective commands to execute each feature.
 
-### Notes about the command format:
+#### Notes about the command format:
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter specifying the to-do's description, as
@@ -27,7 +73,9 @@ This section specifies a list of features together with the respective commands 
 * Extraneous parameters for commands that do not take in parameters will be ignored.<br>
   e.g. if the command specifies `list 123`, it will be interpreted as `list`.
 
-### Adding to-dos: `todo`
+<br>
+
+### `todo`: Add To-do Task
 
 Adds a new task of to-do type to the list of tasks.
 
@@ -37,7 +85,9 @@ Example of usage:
 
 ![todo_example](images/todoExample.png)
 
-### Adding deadlines: `deadline`
+<br>
+
+### `deadline`: Add Deadline Task
 
 Adds a new task of deadline type to the list of tasks.
 
@@ -50,7 +100,9 @@ Example of usage:
 
 ![deadline_example](images/deadlineExample.png)
 
-### Adding events: `event`
+<br>
+
+### `event`: Add Event Task
 
 Adds a new task of event type to the list of tasks.
 
@@ -63,7 +115,9 @@ Example of usage:
 
 ![event_example](images/eventExample.png)
 
-### Listing tasks: `list`
+<br>
+
+### `list`: List Tasks
 
 Displays the list of tasks with index numbers, statuses, descriptions, and timings.
 
@@ -73,7 +127,9 @@ Example of usage:
 
 ![list_example](images/listExample.png)
 
-### Marking tasks as done: `done`
+<br>
+
+### `done`: Mark as Done
 
 Marks a task, at a specified index in the list of tasks, as done.
 
@@ -87,7 +143,9 @@ Example of usage:
 
 ![done_example](images/doneExample.png)
 
-### Deleting tasks: `delete`
+<br>
+
+### `delete`: Delete Task
 
 Deletes a task from the list of tasks.
 
@@ -101,17 +159,21 @@ Example of usage:
 
 ![delete_example](images/deleteExample.png)
 
-### Finding tasks: `find`
+<br>
+
+### `find`: Find Task
 
 Lists the tasks with descriptions matching some specified keyword(s), if any.
 
-Format: `find KEYWORDS`
+Command format: `find KEYWORDS`
 
 Example of usage:
 
 ![find_example](images/findExample.png)
 
-### Getting reminders: `reminder`
+<br>
+
+### `reminder`: Get Reminder
 
 Lists the tasks which are overdue or urgent, if any.
 
@@ -126,16 +188,18 @@ Example of usage:
 
 ![reminder_example](images/reminderExample.png)
 
-### Terminating the app: `bye`
+<br>
+
+### `bye`: Save Data & Terminate Application
 
 Terminates the application, but only after saving the task list into the hard drive.
 
 Command format: `bye`
 
-### Loading saved data
+<br>
+
+### Load Save Data
 
 This is done automatically upon launching the application.
 
-### Saving data
-
-This is done automatically upon the `bye` command.
+<br>
