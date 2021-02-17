@@ -1,3 +1,5 @@
+package dukePackage;
+
 public class Task {
     /**
      * Task class stores a String as name of the task and boolean indicating task completion

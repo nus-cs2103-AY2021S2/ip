@@ -1,3 +1,1 @@
-T|1|go work
-D|1|go school|2021-03-22
-E|0|holiday|2021-05-12
+T|0|go work

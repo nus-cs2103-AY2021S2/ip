@@ -1,3 +1,5 @@
+package dukePackage;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -5,9 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Deals with User interactions, reads user inputs and outputs text
  */
 public class UI {
-    private static final String WELCOME_MESSAGE =  " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n"
-            + "\nHello! I'm Duke\nWhat can I do for you today?";
+    private static final String WELCOME_MESSAGE =  "Hello! I'm Duke\nWhat can I do for you today?";
     private static final String GOODBYE_MESSAGE = "Good bye and take care! This application will close in 5 seconds.";
 
     public UI() {
@@ -112,7 +112,8 @@ public class UI {
     public String showMessage(DukeList list, String dateStr) {
         LocalDate date = LocalDate.parse(dateStr);
         int counter = 1;
-        StringBuilder fullShowString = new StringBuilder("Here are your task on " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        StringBuilder fullShowString = new StringBuilder("Here are your task on "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         for (int i = 0; i < list.getSize(); i++) {
             Task curr = list.get(i);
             if (curr instanceof Deadlines && ((Deadlines) curr).getBy().equals(date)) {
