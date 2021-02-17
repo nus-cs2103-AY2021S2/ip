@@ -24,12 +24,12 @@ public class DoneCommand extends Command {
         }
 
         if (!Parser.isNumber(parts[1])) { //if parameter is not a number
-            throw new DukeException("Parameter must be an argument");
+            throw new DukeException("Parameter must be an number");
         }
-        int index = Integer.parseInt(parts[1]);
+        int index = Integer.parseInt(parts[1]) - 1;
         assert tasks != null : "tasks cannot be null";
 
-        if (index > tasks.getSize() - 1 || index < 0) {
+        if (index > tasks.getSize() || index < 0) {
             throw new DukeException("Task does not exist");
         }
         Task toMark = TaskList.getTasklist().get(index - 1);

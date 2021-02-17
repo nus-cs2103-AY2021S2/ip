@@ -39,12 +39,17 @@ public class AddCommand extends Command {
             } else {
                 int slashIndex = getSlashIndex();
                 String taskString = getTaskString(slashIndex);
-                String dateString = getDateString(slashIndex);
+                String dateString = parts[slashIndex + 1];
+                String prepositionString = parts[slashIndex];
                 LocalDate date = LocalDate.parse(dateString);
-                if (input.equals("deadline")) {
+                if (input.equals("deadline") && prepositionString.equals("/by")) {
                     return new DeadlineCommand(taskString, date, tasks).getString();
-                } else {
+                }
+                if (input.equals("event") && prepositionString.equals("/at")) {
                     return new EventCommand(taskString, date, tasks).getString();
+                } else {
+                    throw new DukeException("Wrong preposition used!\n Use 'by' for Deadlines " +
+                            "and 'at' for Events");
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -82,22 +87,5 @@ public class AddCommand extends Command {
             }
         }
         return slashIndex;
-    }
-
-    /**
-     * Returns the date entered by the user.
-     *
-     * @param slashIndex The position where the slash is located.
-     * @return A string that describes the date entered by the user.
-     */
-    public String getDateString(int slashIndex) {
-        StringBuilder byStringBuilder = new StringBuilder();
-        for (int k = slashIndex + 1; k < parts.length; k++) {
-            if (k != slashIndex + 1) {
-                byStringBuilder.append(" ");
-            }
-            byStringBuilder.append(parts[k]);
-        }
-        return byStringBuilder.toString();
     }
 }
