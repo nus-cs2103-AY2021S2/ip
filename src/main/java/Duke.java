@@ -46,11 +46,11 @@ public class Duke extends Application {
         stage.setTitle("Sonia");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(900.0);
+        stage.setMinWidth(750.0);
 
-        mainLayout.setPrefSize(900.0, 600.0);
+        mainLayout.setPrefSize(750.0, 600.0);
 
-        scrollPane.setPrefSize(885, 535);
+        scrollPane.setPrefSize(735, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -60,7 +60,7 @@ public class Duke extends Application {
         dialogContainer.setMinHeight(Region.USE_PREF_SIZE);
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(885.0);
+        userInput.setPrefWidth(735.0);
 
         sendButton.setPrefWidth(55.0);
 
