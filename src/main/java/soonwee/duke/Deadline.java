@@ -13,7 +13,7 @@ public class Deadline extends TimedTask {
      * Instantiates the Deadline task.
      *
      * @param description description of the task
-     * @param endTime deadline to complete the task by
+     * @param endTime     deadline to complete the task by
      */
     public Deadline(String description, LocalDateTime endTime) {
         super(description, endTime);

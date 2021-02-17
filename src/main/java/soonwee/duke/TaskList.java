@@ -9,13 +9,17 @@ import java.util.Collections;
  */
 public class TaskList {
 
-    public ArrayList<Task> tasksList;
+    private ArrayList<Task> tasksList;
 
     /**
      * Instantiates a TaskList instance.
      */
-    public TaskList(){
+    public TaskList() {
         this.tasksList = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getTasksList() {
+        return this.tasksList;
     }
 
     /**
@@ -44,7 +48,7 @@ public class TaskList {
      *
      * @param newTask new Task
      */
-    public void addTask(Task newTask){
+    public void addTask(Task newTask) {
         tasksList.add(newTask);
     }
 
@@ -64,7 +68,7 @@ public class TaskList {
      * @param index index of task
      * @return task at that index
      */
-    public Task getTask(int index){
+    public Task getTask(int index) {
         return tasksList.get(index);
     }
 
@@ -78,7 +82,7 @@ public class TaskList {
         assert tasksList != null : "TaskList is null.";
         ArrayList<Task> temporaryList = new ArrayList<>();
         for (Task task : tasksList) {
-            if (task.taskDesc.contains(cmd)) {
+            if (task.getTaskDescription().contains(cmd)) {
                 temporaryList.add(task);
             }
         }
@@ -144,7 +148,7 @@ public class TaskList {
         result = result + "Here are the tasks in your list: \n";
         for (int i = 0; i < tasksList.size(); i++) {
             result = result + String.valueOf(i + 1) + ". " + tasksList.get(i) + "\n";
-	    }
+        }
         return result;
     }
 
@@ -158,7 +162,7 @@ public class TaskList {
         ArrayList<Task> temporaryTimeList = new ArrayList<>(); //To Store items with dates
         ArrayList<Task> toDoList = new ArrayList<>(); //To store temporary ToDoList
         for (Task task : tasksList) {
-            if(task.getDateTime()!= null) {
+            if (task.getDateTime() != null) {
                 temporaryTimeList.add(task);
             } else {
                 toDoList.add(task);

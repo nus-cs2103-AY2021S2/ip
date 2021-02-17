@@ -65,13 +65,11 @@ public class Parser {
      * @return integer determining the task type
      */
     public TaskType checkTaskType(String data) {
-        if (data.startsWith("todo") && data.charAt(START_READ_TODO - 1) == ' ') {
+        if (data.startsWith("todo")) {
             return TaskType.TODO;
-        } else if (data.indexOf("deadline") == 0 && data.startsWith("deadline") &&
-                data.charAt(START_READ_DEADLINE - 1) == ' ') {
+        } else if (data.startsWith("deadline")) {
             return TaskType.DEADLINE;
-        } else if (data.indexOf("event") == 0 && data.startsWith("event") &&
-                data.charAt(START_READ_EVENT - 1) == ' ') {
+        } else if (data.startsWith("event")) {
             return TaskType.EVENT;
         } else {
             return TaskType.UNKNOWN;
@@ -82,7 +80,7 @@ public class Parser {
      * Checks the front input of the command, followed by the description at
      * the back.
      *
-     * @param cmd command input by user
+     * @param cmd      command input by user
      * @param taskType task identifier
      * @return task description
      */

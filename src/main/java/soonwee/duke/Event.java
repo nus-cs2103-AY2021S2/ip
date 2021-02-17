@@ -13,7 +13,7 @@ public class Event extends TimedTask {
      * Instantiates the Event task.
      *
      * @param description description of the task
-     * @param startTime start time of the task
+     * @param startTime   start time of the task
      */
     public Event(String description, LocalDateTime startTime) {
         super(description, startTime);

@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
  */
 public class Task {
 
-    public String taskDesc;
-    public boolean isCompleted;
+    private String taskDesc;
+    private boolean isCompleted;
 
     /**
      * Instantiates a task with its description.
@@ -20,10 +20,18 @@ public class Task {
         this.isCompleted = false;
     }
 
+    public String getTaskDescription() {
+        return this.taskDesc;
+    }
+
+    public boolean getCompleteStatus() {
+        return this.isCompleted;
+    }
+
     /**
      * Sets a task as completed.
      */
-    public void setCompleted(){
+    public void setCompleted() {
         this.isCompleted = true;
     }
 

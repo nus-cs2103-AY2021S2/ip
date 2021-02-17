@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.Scanner;
 
 /**
@@ -16,12 +14,12 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    public String filePath;
-    public String directory;
-    public File fileObject;
-    public TaskList taskList;
     static final int TASK_DESCRIPTION_INDEX = 7; //States the index in the string to read for description.
     static final int DATE_JUMP_INDEX = 5; //States the index jump from the previous read string.
+    private String filePath;
+    private String directory;
+    private File fileObject;
+    private TaskList taskList;
 
 
     /**
@@ -32,6 +30,10 @@ public class Storage {
         this.filePath = filePath;
         this.directory = "data";
         this.fileObject = createFile(filePath);
+    }
+
+    public TaskList getTaskList() {
+        return this.taskList;
     }
 
     public TaskList createNew() {
@@ -113,7 +115,7 @@ public class Storage {
             }
         }
         if (data.charAt(4) == 'X') {
-            taskList.getTask(taskList.tasksList.size() - 1).setCompleted();
+            taskList.getTask(taskList.getTasksList().size() - 1).setCompleted();
         }
     }
 

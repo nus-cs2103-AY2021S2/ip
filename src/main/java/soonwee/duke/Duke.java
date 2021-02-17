@@ -23,25 +23,25 @@ public class Duke {
         Storage storage = new Storage("data\\tasks.txt");
         boolean isValidForDoneOrDelete = new Parser().isValidDeleteAndDoneInput(input);
         if (input.equals("list")) {
-            result = storage.taskList.displayTasks();
+            result = storage.getTaskList().displayTasks();
         } else if (input.startsWith("done") && isValidForDoneOrDelete) {
             int index = Integer.parseInt(input.substring(DONE_INDEX));
-            result = storage.taskList.setTaskDone(index);
+            result = storage.getTaskList().setTaskDone(index);
             storage.writeFile();
         } else if (input.startsWith("delete") && isValidForDoneOrDelete) {
             int index = Integer.parseInt(input.substring(DELETE_INDEX));
-            result = storage.taskList.removeTask(index);
+            result = storage.getTaskList().removeTask(index);
             storage.writeFile();
         } else if (input.startsWith("find")) {
             String text = new Parser().getSearchWord(input);
-            if(text.startsWith("Invalid:")) {
+            if (text.startsWith("Invalid:")) {
                 return text;
             }
-            result = storage.taskList.searchRelatedText(text) + "\n";
+            result = storage.getTaskList().searchRelatedText(text) + "\n";
         } else if (input.equals("sort")) { //Sort by date
-            result = storage.taskList.sortTaskListByDateTime();
+            result = storage.getTaskList().sortTaskListByDateTime();
         } else {
-            result = performTaskCheck(storage.taskList, input);
+            result = performTaskCheck(storage.getTaskList(), input);
             storage.writeFile();
         }
         return result;
@@ -52,11 +52,11 @@ public class Duke {
      * create them accordingly.
      *
      * @param taskList a Task List
-     * @param cmd command input
+     * @param cmd      command input
      * @return result output
      */
     public static String performTaskCheck(TaskList taskList, String cmd) {
-        assert cmd != null: "Input command is null";
+        assert cmd != null : "Input command is null";
         String result = new String();
         Parser checker = new Parser();
         TaskType taskType = checker.checkTaskType(cmd);
@@ -84,10 +84,10 @@ public class Duke {
     /**
      * Performs adding of respective task into TaskList.
      *
-     * @param taskType type of task
+     * @param taskType      type of task
      * @param filteredInput filtered input done from the previous method
-     * @param fullInput unfiltered input
-     * @param taskList a TaskList instance
+     * @param fullInput     unfiltered input
+     * @param taskList      a TaskList instance
      * @return output result once the addition for respective task is performed
      */
     public static String performTaskAllocation(
@@ -117,7 +117,7 @@ public class Duke {
      * Performs addition of task into TaskList.
      *
      * @param taskList a TaskList instance
-     * @param task a certain task
+     * @param task     a certain task
      * @return output result from the addition action
      */
     public static String performAddTask(TaskList taskList, Task task) {
