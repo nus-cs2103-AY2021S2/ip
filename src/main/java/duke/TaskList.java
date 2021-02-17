@@ -5,6 +5,7 @@ import java.util.List;
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
 import duke.exception.EmptyArgumentException;
+import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -25,16 +26,6 @@ public class TaskList {
     }
 
     /**
-     * Get Raw data for extraction of File ready data from Task directly
-     * TODO: Push the preparation of data to TaskList
-     *
-     * @return Underlying data structure
-     */
-    public List<Task> getRawData() {
-        return this.store;
-    }
-
-    /**
      * Runs command on TaskList and returns command specific output.
      * Side effects are present on some commands
      *
@@ -43,10 +34,12 @@ public class TaskList {
      * @throws EmptyArgumentException At least one argument is missing
      * @throws BadDateArgumentException An argument that is expected to be a date is ill formatted
      */
-    public String run(Command c) throws EmptyArgumentException, BadDateArgumentException {
+    public String run(Command c)
+            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
         String[] args = c.getCommandParameters();
         String result;
-        switch (c.getType()) {
+        Action action = c.getType();
+        switch (action) {
         case ADD:
             result = addTask(args);
             edited = true;
@@ -87,23 +80,33 @@ public class TaskList {
     public boolean isEdited() {
         return this.edited;
     }
-    private String addTask(String[] tokens) throws EmptyArgumentException, BadDateArgumentException {
+    private String addTask(String[] tokens)
+            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
+        generateTask(tokens);
+        int lastIndex = store.size() - 1;
+        return formatOrderedPrint(lastIndex);
+    }
+    private void generateTask(String[] tokens)
+            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
+        String type = tokens[0];
+        String task = tokens[1];
+        String additional = tokens.length >= 3 ? tokens[2] : null;
         Task t;
-        switch (tokens[0]) {
+        switch (type) {
         case "D":
-            t = new Deadline(tokens[1], tokens[2]);
+            t = new Deadline(task, additional);
             break;
         case "E":
-            t = new Event(tokens[1], tokens[2]);
+            t = new Event(task, additional);
             break;
         case "T":
-            //Fall through
-        default: //More fault tolerant
-            t = new ToDos(tokens[1]);
+            t = new ToDos(task);
             break;
+        default:
+            //TODO: Add assert false here later when merging
+            throw new InvalidCommandException("of type " + type);
         }
         store.add(t);
-        return formatOrderedPrint(-1);
     }
     private String setDone(int doneIndex) {
         Task t = store.get(doneIndex);
@@ -141,13 +144,21 @@ public class TaskList {
         return builder.toString();
     }
     private String formatOrderedPrint(int i) {
-        final int size = store.size();
-        while (i < 0) {
-            i += size;
-        }
-        while (i >= size) {
-            i -= size;
-        }
         return "Entry " + (i + 1) + "|" + store.get(i).toString();
+    }
+
+    /**
+     * Generates a string that represents the state of TaskList,
+     * such that the program can recreate it.
+     *
+     * @return A machine interpretable representation of TaskList
+     */
+    public String toFileString() {
+        StringBuilder saveText = new StringBuilder();
+        for (Task t: store) {
+            saveText.append(t.toFileString());
+            saveText.append('\n');
+        }
+        return saveText.toString();
     }
 }

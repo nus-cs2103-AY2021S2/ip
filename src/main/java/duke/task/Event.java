@@ -10,7 +10,7 @@ public class Event extends Task {
      *
      * @param description Description of event
      * @param eventPeriod When the event takes place
-     * @throws EmptyArgumentException When an emtpy description or eventPeriod is passed
+     * @throws EmptyArgumentException When an empty description or eventPeriod is passed
      */
     public Event(String description, String eventPeriod) throws EmptyArgumentException {
         super(description);

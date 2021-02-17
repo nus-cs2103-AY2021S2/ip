@@ -3,7 +3,7 @@ package duke.command;
 import duke.TaskList;
 
 public class SearchCommand extends Command {
-    private String searchTerm;
+    private final String searchTerm;
 
     /**
      * Create command to search for Task with a particular substring.
@@ -16,8 +16,7 @@ public class SearchCommand extends Command {
 
     @Override
     public String[] getCommandParameters() {
-        String[] searchTerm = {this.searchTerm};
-        return searchTerm;
+        return new String[]{this.searchTerm};
     }
 
     @Override
