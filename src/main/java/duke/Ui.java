@@ -128,6 +128,28 @@ public class Ui {
         }
     }
 
+    public String getHelpMessage() {
+        String commands = "To get you started, here are some commands:\n\n"
+                + "\"list\": displays exisiting commands.\n"
+                + "\"done\" <taskNumber>: marks a task complete.\n "
+                + "\"delete\" <taskNumber>: deletes a task from your list.\n"
+                + "\"find\" <anyString>: finds a task that matches the string.\n"
+                + "\"todo\" <task> : adds a todo task.\n"
+                + "\"deadline\" <task> /by <date YYYY-MM-DD>: adds a deadline.\n"
+                + "\"event\" <task> /at <location>: adds an event.\n"
+                + "\"bye\": say bye to save existing tasks and exit\n"
+                + "\nType \"help\" to bring up this page again. :)";
+        return commands;
+    }
+
+    public String getIntroMessage() {
+        String welcome = "Greetings mortal...\n"
+                + "Welcome to MODOC_TM\n\n"
+                + "How can I be of service?";
+
+        return welcome;
+    }
+
     /**
      * This method is called when there are not tasks to be loaded
      * from storage.

@@ -42,10 +42,9 @@ public class Duke {
         }
     }
 
+
     public String getIntroMessage() {
-    //    Welcome etc..
-    //    Here are a list of useful commands...
-        return "Intro Message";
+        return ui.getIntroMessage();
     }
 
     /**
@@ -127,6 +126,9 @@ public class Duke {
             String arguments = parser.getArguments(input);
             TaskList output = taskList.matchTasks(arguments);
             return ui.printMatchingTask(output);
+
+        case "help":
+            return ui.getHelpMessage();
 
         default:
             return ui.printUnknownCommand();
