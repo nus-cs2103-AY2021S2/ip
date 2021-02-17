@@ -1,2 +1,0 @@
-DEADLINE|false|gym|2021-02-12T08:00
-EVENT|false|birthday|2021-04-20T04:20

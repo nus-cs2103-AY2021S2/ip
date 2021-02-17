@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Deadline extends Task {
     private static final String TASK_TYPE = "DEADLINE";
@@ -26,9 +28,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] [%s] %s (by: %s %s %s %02d:%02d)",
+        String month = endTime.getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
+        return String.format("[%s] [%s] %s (by: %s %s %s, %02d:%02d)",
                 this.getTaskType(), this.getStatusIcon(),
-                this.getTaskDescription(), endTime.getMonth(),
+                this.getTaskDescription(), month,
                 endTime.getDayOfMonth(), endTime.getYear(),
                 endTime.getHour(), endTime.getMinute());
     }

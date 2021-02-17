@@ -1,16 +1,21 @@
 # B.O.B Task Manager User Guide
 A todo task manager bot to record and store list of tasks.
 
-## Features
+# Features
 Below are the features currently implemented:
 
 1. [**`Add`**](#add) Adding tasks to the bot.
+   - 1.1 Todo
+   - 1.2 Event
+   - 1.3 Deadline
 2. [**`List`**](#list) Listing all existing tasks.
-3. [**`Delete`**](#delete) Deleting tasks using index.
-4. [**`Marking Done`**](#done) Mark completed tasks as done.
+3. [**`Marking Done`**](#done) Mark completed tasks as done.
+4. [**`Delete`**](#delete) Deleting tasks using index.
 5. [**`Storage & Retrieval`**](#storage) Storing of tasks in local drive.
 6. [**`Find`**](#find) Finding tasks based on keywords.
 7. [**`Remind`**](#remind) Remind Users about upcoming tasks.
+
+## Feature Details
 
 ### :large_blue_circle: Feature 1 - Adding tasks<a name="add"></a>
 The user will be able to add new tasks into B.O.B Task Manager. 
@@ -21,11 +26,13 @@ segment his tasks into.
 - Event
 - Deadline
 
-### Usage
-- **Todo** 
-    - `todo <task description>`
-
+### Todo
 Adds a todo task with **task description** into B.O.B Task Manager.
+
+**Command Syntax**
+    
+    todo <task description> 
+
 
 **Example of usage:**
 
@@ -37,11 +44,14 @@ Adds a todo task with **task description** into B.O.B Task Manager.
 
 ![image](./images/add-todo.png)
 
-- **Event** 
-    - `event <task description>/at<Date & Time>`
-
+### Event
 Adds an event task with the **task description** and 
 **Date and Time** into B.O.B Task Manager.
+
+**Command Syntax**
+    
+    event <task description>/at<Date & Time>
+
 
 **Date & Time format:** `yyyy-MM-dd HHmm`
 
@@ -51,15 +61,18 @@ Adds an event task with the **task description** and
 
 **Expected outcome:**
 
-    ADDED: [EVENT][X] watch movie (at: 14 Feb 2021, 17:00)
+    ADDED: [EVENT][X] watch movie (at: Feb 14 2021, 17:00)
 
 ![image](./images/add-event.png)
 
-- **Deadline** 
-    - `deadline <task description>/by<Date & Time>`
-
+### Deadline
 Adds a deadline task with the **task description** and
 **Date and Time** into B.O.B Task Manager.
+      
+**Command Syntax**
+    
+    deadline <task description>/by<Date & Time>
+
 
 **Date & Time format:** `yyyy-MM-dd HHmm`
 
@@ -69,18 +82,51 @@ Adds a deadline task with the **task description** and
 
 **Expected outcome:**
 
-    ADDED: [DEADLINE][X] return book (by: 11 Mar 2021, 23:59)
+    ADDED: [DEADLINE][X] return book (by: Mar 11 2021, 23:59)
 
 ![image](./images/add-deadline.png)
 
-### :large_blue_circle:  Feature 2 - Listing existing tasks<a name="list"></a>
-The user will be able to list existing tasks in B.O.B Task Manager.
+---
 
-There are 3 types of tasking of which the user can
-segment his tasks into.
-- Todo
-- Event
-- Deadline
+### :large_blue_circle: Feature 2 - Listing tasks<a name="list"></a>
+The user will be able to list all existing tasks in B.O.B Task Manager.
+
+**Command Syntax** 
+  
+    list
+
+**Example of usage:**
+
+    list
+
+**Expected outcome:**
+
+    Ok Human. Here are your tasks:
+        1. [TODO][X] read book
+        2. [EVENT][X] watch movie (at: Feb 14 2021, 17:00)
+        3. [DEADLINE][X] return book (by: Mar 11 2021, 23:59)
+
+![image](./list.png)      
+
+---
+
+### 4. Marking Done  <a name="done"></a>
+  
+    done <index of task>
+
+Marks the completion, indicated by a `X` or `✓`. Completed tasks will display `[✓]`.
+The index of the task corresponds to the number of which it is listed, you can simply run `list`
+to check the index of the task.
+
+**Example of usage:**
+
+    done 1
+
+**Expected outcome:**
+
+    Swee la, task done liao:
+        [T][✓] eat genki sushi
+
 
 
 ## Usage

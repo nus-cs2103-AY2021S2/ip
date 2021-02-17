@@ -38,19 +38,19 @@ public class TaskCommand extends Command {
             ToDo newToDo = new ToDo(this.description);
             taskList.addTask(newToDo);
             storage.saveData(taskList);
-            return ui.showAddToDo(newToDo);
+            return ui.showAdd(newToDo);
 
         case "deadline":
             Deadline newDeadLine = new Deadline(this.description, this.time);
             taskList.addTask(newDeadLine);
             storage.saveData(taskList);
-            return ui.showAddDeadLine(newDeadLine);
+            return ui.showAdd(newDeadLine);
 
         case "event":
             Event newEvent = new Event(this.description, this.time);
             taskList.addTask(newEvent);
             storage.saveData(taskList);
-            return ui.showAddEvent(newEvent);
+            return ui.showAdd(newEvent);
 
         default:
             throw new DukeCommandException("Invalid Command.");

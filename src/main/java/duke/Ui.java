@@ -135,6 +135,9 @@ public class Ui {
                 task.getTaskDescription());
     }
 
+    public String showAdd(Task task) {
+        return String.format(LINE_PREFIX + "Added:\n%s\n", task);
+    }
 
     public String showAddToDo(ToDo toDo) {
         return String.format(LINE_PREFIX + "Added:\n[%s] [%s] %s\n",
