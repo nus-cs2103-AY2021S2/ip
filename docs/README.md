@@ -130,8 +130,6 @@ Example:
 
 ## Command summary
 
-## Command Summary
-
 **Action**  | **Format, Examples**
 --------|-----------------
 **Add todo** |  `todo description`e.g, `add todo watch netflix `
@@ -141,3 +139,4 @@ Example:
 **Delete** |`delete INDEX`e.g., `delete 3`
 **Find** |  `find KEYWORD [MORE_KEYWORDS]` e.g., `find cs2103 quiz`
 **Mark as done** | `done INDEX` e.g., 'done 4'
+--------------------------
