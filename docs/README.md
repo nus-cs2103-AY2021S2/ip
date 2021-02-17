@@ -125,13 +125,12 @@ Example of usage: `schedule yyyy-mm-dd`
 
 Expected outcome:
 
-    Here are the tasks for this date: 
+    Here are the tasks due/on this date: 
     1. D | ✘ | DESCRIPTION MMM dd yyyy hh:mm
     2. E | ✘ | DESCRIPTION MMM dd yyyy hh:mm
     ...
-     
-    
-#### or
+
+#### or (if there is no task on this date)
 
     Congrats! It's a FREE day.
 
