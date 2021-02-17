@@ -15,7 +15,6 @@ public class TaskList {
         assert storage != null: "storage passed to TaskList cannot be null. ";
         this.storage = storage;
         this.tasks = new ArrayList<>();
-        assert this.tasks != null: "ArrayList for TaskList not successfully created. ";
 
         ArrayList<String> storageStrings = this.storage.readStorage();
         storageStrings.forEach(x -> this.tasks.add(parseStorageString(x)));
@@ -42,37 +41,53 @@ public class TaskList {
     }
 
     /**
-     * Returns task at given index.
-     * @param index Index of task wanted
-     * @return Task at given index
+     * Returns tasks given list of indexes.
+     * @param indexes Indexes of tasks wanted
+     * @return List of tasks
      */
+    public List<Task> get(int[] indexes) {
+        List<Task> resultTasks = new ArrayList<>();
+        for (int i : indexes) {
+            assert i > 0 && i <= this.getSize(): "Index to get should be between 1 and " + this.getSize() +
+                    " but given " + i + ". ";
+            resultTasks.add(this.tasks.get(i - 1));
+        }
+        return resultTasks;
+    }
+
     public Task get(int index) {
         return this.tasks.get(index - 1);
     }
-
     /**
      * Removes task at given index.
-     * @param index Index of task wanted
+     * @param indexes Index of task wanted
+     * @return List of tasks that are removed
      */
-    public void remove(int index) {
-        assert index > 0: "Index passed to remove must be greater than 1. ";
-        assert index <= this.tasks.size(): "Index passed to remove cannot be greater than length of task list. ";
-        this.storage.remove(index);
-        this.tasks.remove(index - 1);
-        this.count--;
+    public List<Task> remove(int[] indexes) {
+        List<Task> removedTasks = new ArrayList<>();
+        for (int i : indexes) {
+            assert i > 0: "Index passed to remove must be greater than 1. ";
+            assert i <= this.tasks.size(): "Index passed to remove cannot be greater than length of task list. ";
+            this.storage.remove(i);
+            removedTasks.add(this.tasks.remove(i - 1));
+            this.count--;
+        }
+        return removedTasks;
     }
 
     /**
      * Replaces task at given index.
-     * @param index Index of task to be replaced
+     * @param indexes Index of task to be replaced
      * @param task New task that will replace previous task
      */
-    public void set(int index, Task task) {
-        assert index > 0: "Index passed to set must be greater than 1. ";
-        assert index <= this.tasks.size(): "Index passed to set cannot be greater than length of task list. ";
-        assert task != null: "Task passed to set must not be null. ";
-        this.storage.set(index, task);
-        this.tasks.set(index - 1, task);
+    public void set(int[] indexes, Task task) {
+        for (int i : indexes) {
+            assert i > 0: "Index passed to set must be greater than 1. ";
+            assert i <= this.tasks.size(): "Index passed to set cannot be greater than length of task list. ";
+            assert task != null: "Task passed to set must not be null. ";
+            this.storage.set(i, task);
+            this.tasks.set(i - 1, task);
+        }
     }
 
     /**
@@ -107,5 +122,27 @@ public class TaskList {
             }
         });
         return resultList;
+    }
+
+    public int[] findIndex(String searchString) {
+        List<Integer> resultList = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (tasks.get(i).getName().contains(searchString)) {
+                resultList.add(i + 1);
+            }
+        }
+        int[] result = new int[resultList.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = resultList.get(i);
+        }
+        return result;
+    }
+
+    public int[] listIndex() {
+        int[] result = new int[this.tasks.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = i + 1;
+        }
+        return result;
     }
 }

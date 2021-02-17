@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Parser {
@@ -15,10 +17,16 @@ public class Parser {
         String joined = "";
         String timing = "";
         String[] input = raw_in.split(" ");
+        if (raw_in.contains("|")) {
+            System.out.println("HIHIHIHI pipe");
+            return pipeParse(raw_in);
+        }
         if (raw_in.equals("bye")) {
             return ParserOutput.byeOutput();
         } else {
             switch (input[0]) {
+                case "all":
+                    //Fallthrough, alias of list
                 case "list":
                     return ParserOutput.listOutput();
                 case "done":
@@ -71,6 +79,23 @@ public class Parser {
                 default:
                     throw new DukeNotFoundException();
             }
+        }
+    }
+
+    private static ParserOutput pipeParse(String raw_in) throws DukeTimingException, DukeDescriptionException, DukeNotFoundException {
+        String[] inputs = raw_in.split("\\|");
+        ParserOutput firstPart = parse(inputs[0].strip());
+        if (inputs.length > 2) {
+            throw new DukeNotFoundException();
+        }
+        String nextAction = inputs[1].strip();
+        System.out.println(raw_in);
+        if (nextAction.equals("done")) {
+            return ParserOutput.pipeOutput(firstPart, 2);
+        } else if (nextAction.equals("remove")) {
+            return  ParserOutput.pipeOutput(firstPart, 1);
+        } else {
+            throw new DukeNotFoundException();
         }
     }
 
