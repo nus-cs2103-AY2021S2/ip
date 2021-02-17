@@ -164,4 +164,4 @@ A: Install the app in the other computer and overwrite the empty data file it cr
 
 * exit: `bye`
 
-
+User guide format above adapted from [addressbook level 3](https://github.com/nus-cs2103-AY1920S2/addressbook-level3/blob/master/docs/UserGuide.adoc#Features)
