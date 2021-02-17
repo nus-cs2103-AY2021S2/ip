@@ -1,4 +1,4 @@
-# B.O.B Task Manager User Guide
+#<span style="color:#4285F4"> B.O.B Task Manager User Guide</span>
 A todo task manager bot to record and store list of tasks.
 
 ![image](./images/MrDestructoid.png)
