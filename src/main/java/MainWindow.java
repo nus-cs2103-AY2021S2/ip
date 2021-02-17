@@ -1,4 +1,5 @@
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -26,6 +27,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String welcomeMessage = Ui.printWelcomeMessage();
+        DialogBox welcomeDialogue = DialogBox.getDukeDialog(welcomeMessage, dukeImage);
+        dialogContainer.getChildren().addAll(
+            welcomeDialogue
+        );
+
     }
 
     public void setDuke(Duke d) {

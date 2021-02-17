@@ -37,6 +37,14 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    private void addDukeStyle() {
+        setStyle("-fx-background-color: #afeeee; -fx-font-size:18px; -fx-padding: 14;");
+    }
+
+   private void addUserStyle() {
+       setStyle("-fx-background-color: #fadadd; -fx-font-size:18px; -fx-padding: 14;");
+   }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -48,11 +56,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.addUserStyle();
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.addDukeStyle();
         db.flip();
         return db;
     }

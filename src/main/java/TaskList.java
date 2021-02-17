@@ -14,12 +14,11 @@ public class TaskList {
      * @return Acknowledgment that task has been marked as done.
      */
     public static String markDone(int index, List<Task> tasks) {
-        assert index > tasks.size() : "index is invalid and command should not have been allowed";
-        String reply = "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+        System.out.println(tasks.size());
         tasks.get(index).markAsDone();
+        String reply ="";
         reply += "\nGood job, I have marked this task as done!";
         reply += "\n" + tasks.get(index).toString();
-        reply += "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
@@ -47,13 +46,11 @@ public class TaskList {
         }
         tasks.add(new Todo(command.substring(5)));
         int count = tasks.size();
-        reply += "\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         reply += "\nGot it. I've added this task: ";
         reply += "\n" + tasks.get(count - 1).toString();
         reply += "\n" + "Now you have " + count
                 + (count == 1 ? " task" : " tasks")
                 + " in the list.";
-        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
@@ -84,13 +81,11 @@ public class TaskList {
             throw new InvalidDateTimeFormatException();
         }
         int count = tasks.size();
-        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         reply += "\n" + "Got it. I've added this task: ";
         reply += "\n" + tasks.get(count - 1).toString();
         reply += "\n" + "Now you have " + count
                 + (count == 1 ? " task" : " tasks")
                 + " in the list.";
-        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
@@ -119,13 +114,11 @@ public class TaskList {
             throw new InvalidDateTimeFormatException();
         }
         int count = tasks.size();
-        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         reply += "\n" + "Got it. I've added this task: ";
         reply += "\n" + tasks.get(count - 1).toString();
         reply += "\n" + "Now you have " + count
                 + (count == 1 ? " task" : " tasks")
                 + " in the list.";
-        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
@@ -147,7 +140,6 @@ public class TaskList {
     public static String deleteTask(String command, List<Task> tasks) {
         String reply = "";
         int deleteIndex = Integer.parseInt(command.split(" ")[1]) - 1;
-        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         reply += "\n" + "I've removed the task:";
         reply += "\n" + tasks.get(deleteIndex);
         tasks.remove(deleteIndex);
@@ -155,7 +147,6 @@ public class TaskList {
         reply += "\n" + "Now you have " + count
                 + (count == 1 ? " task" : " tasks")
                 + " in the list.";
-        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {
@@ -174,13 +165,11 @@ public class TaskList {
     public static String printList(List<Task> tasks) {
         String reply = "";
         int listCount = 1;
-        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         reply += "\n" + "Here are the tasks in your list:";
         for (Task task : tasks) {
             reply += "\n" + "  " + listCount + "." + task.toString();
             listCount++;
         }
-        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
@@ -195,7 +184,6 @@ public class TaskList {
     public static String findTask(String command, List<Task> tasks) {
         String reply = "";
         int listCount = 1;
-        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         reply += "\n" + "Here are the matching tasks in your list:";
         for (Task task : tasks) {
             if (task.toString().contains(command.split(" ")[1])) {
@@ -203,7 +191,6 @@ public class TaskList {
                 listCount++;
             }
         }
-        reply += "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
         assert !reply.isEmpty() : "reply cannot be an empty string";
         return reply;
     }
@@ -221,9 +208,7 @@ public class TaskList {
         for(int i = 0; i < undoNumber; i++) {
             tasks.remove(tasks.size() - 1);
         }
-        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         reply += "Undo operation successful";
-        reply += "\n" + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         try {
             Storage.saveDataToFile(tasks);
         } catch (UnableToSaveDataException e) {

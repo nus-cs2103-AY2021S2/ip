@@ -66,4 +66,8 @@ public class Duke {
         return reply;
     }
 
+    public static String run() {
+        return Ui.printWelcomeMessage();
+    }
+
 }

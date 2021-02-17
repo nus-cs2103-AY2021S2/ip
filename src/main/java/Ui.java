@@ -54,6 +54,9 @@ public class Ui {
         return "\nI'm sorry, I am not able to load data.\n";
     }
 
+    public static String printWelcomeMessage() {
+        return "\nHello! I am Zee!\n";
+    }
 
 }
 
