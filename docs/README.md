@@ -7,11 +7,12 @@
 1. Marking a task added as done
 1. Finding tasks by searching a keyword
 1. Updating the by date of a deadline added
+1. Exiting Duke
 
 
 ## Usage
 
-### `todo <description>` - Adds a todo
+### Adding a todo: `todo <description>`
 
 Adds a todo with the given description to Duke.
 
@@ -23,7 +24,7 @@ Expected outcome:
 
 ![todo demo](images/todo.png)
 
-### `event <description> /at <date>` - Adds an event
+### Adding an event: `event <description> /at <date>`
 
 Adds an event with the given description and event date to Duke.  
 - Do kindly note that Duke **does not understand** the date entered for **events**.   
@@ -38,7 +39,7 @@ Expected outcome:
 
 ![event demo](images/event.png)
 
-### `deadline <description> /by <date>` - Adds a deadline
+### Adding a deadline: `deadline <description> /by <date>`
 
 Adds a deadline with the given description and by date to Duke.
 - Do kindly note that Duke **understands** the date entered for **deadlines**.   
@@ -52,7 +53,7 @@ Expected outcome:
 
 ![deadline demo](images/deadline.png)
 
-### `list` - Lists all tasks added
+### Listing all tasks added: `list`  
 
 Lists all tasks added to Duke so far.
 
@@ -64,7 +65,7 @@ Expected outcome:
 
 ![list demo](images/list.png)
 
-### `delete <task index>` - Deletes a task
+### Deleting a task: `delete <task index>`
 
 Deletes a task with the given task index as shown in list.
 - Do kindly note that the task index given must be valid.
@@ -77,7 +78,7 @@ Expected outcome:
 
 ![delete demo](images/delete.png)
 
-### `done <task index>` - Marks a task as done
+### Marking a task as done: `done <task index>`
 
 Marks a task with the given task index as done.
 - Do kindly note that the task index given must be valid.
@@ -90,7 +91,7 @@ Expected outcome:
 
 ![done demo](images/done.png)
 
-### `find <keyword>` - Finds tasks by searching a keyword
+### Finding tasks by searching a keyword: `find <keyword>`
 
 Finds all tasks with description containing the given keyword.
 
@@ -102,7 +103,7 @@ Expected outcome:
 
 ![find demo](images/find.png)
 
-### `update <deadline index> <new date>` - Updates the date of a deadline
+### Updating the date of a deadline: `update <deadline index> <new date>`
 
 Updates the date of a deadline (with the given task index) to the given new date.
 - Do kindly note that the task index given must be valid and referring to a deadline, 
@@ -118,3 +119,15 @@ Example of usage:
 Expected outcome:
 
 ![update demo](images/update.png)
+
+### Exiting Duke: `bye`
+
+Exits the program.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+![exit demo](images/bye.png)
