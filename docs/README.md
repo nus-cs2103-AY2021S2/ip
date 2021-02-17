@@ -7,20 +7,7 @@ title: User Guide
 
 ## Table of Contents
 {:toc}
-* [Introduction](#introduction)
-* [Getting Started](#getting-started)
-* [Features](#features)
-** [View all Tasks](#view-all-tasks)
-** [Find a Task](#find-a-task)
-** [Clear all Tasks](#clear-all-tasks)
-** [Add To-Do](#add-to-do)
-** [Add Event](#add-event)
-** [Add Deadline](#add-deadline)
-** [Mark as Complete](#mark-as-complete)
-** [Delete a Task](#delete-a-task)
-** [Show Help](#show-help)
-** [Exit](#exit)
-* [Advanced Setup](#advanced-setup)
+
 
 ## Introduction
 
