@@ -15,11 +15,11 @@ see the tasks entered at a glance.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
    
-   ![Welcome Screen](https://github.com/arihantjain97/ip/blob/master/docs/WelcomeScreen.png?raw=true)
+  ![Welcome Screen](https://github.com/arihantjain97/ip/blob/master/docs/WelcomeScreen.png?raw=true)
 5. After pressing the start button, you will be taken to the main page
 
 
-![Welcome Screen](https://github.com/arihantjain97/ip/blob/master/docs/Ui.png?raw=true)
+  ![Welcome Screen](https://github.com/arihantjain97/ip/blob/master/docs/Ui.png?raw=true)
 
 6. Type in the command in the command box and press enter, or the send button, to execute it.
       
@@ -138,12 +138,13 @@ see the tasks entered at a glance.
 ### 3.10. Saving the data
 * Duke automatically saves your data.
 
-##4. FAQ
+## 4. FAQ
+
 Q:  How do I transfer my data to another Computer?
 
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
-##5. Command Summary
+## 5. Command Summary
 * list: `list`
 
 * todo: `todo DESCRIPTION`
