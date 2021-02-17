@@ -1,6 +1,6 @@
 # User Guide
 
-![DukeUiImg](ui.png)
+![DukeUiImg](Ui.png)
 
 ## Features
 
