@@ -60,7 +60,7 @@ public class DeleteCommand extends Command {
             return e.getMessage();
         }
 
-        return "Noted. I've removed this task:\n"
+        return "Mrawww I've removed this task:\n"
                 + "\n"
                 + TaskStringFormatter.getTaskTable(this.deletedTask);
     }

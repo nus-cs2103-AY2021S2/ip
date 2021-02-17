@@ -44,10 +44,10 @@ public class AddTaskCommand extends Command {
      * @return A <code>String</code> to respond to the adding of the <code>Deadline</code>.
      */
     public String getResponse(TaskList tasks) {
-        return "Got it. I've added this task:\n"
+        return "Meow... I've added this task:\n"
                 + "\n"
                 + TaskStringFormatter.getTaskTable(this.task) + "\n"
                 + "\n"
-                + "Now you have " + tasks.getSize() + " task(s) in the list.";
+                + "Now you have " + tasks.getSize() + " task(s) in the list :)";
     }
 }

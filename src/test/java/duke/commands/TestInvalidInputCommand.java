@@ -58,7 +58,7 @@ public class TestInvalidInputCommand {
     public void testEmptyInputResponse() {
         Command command = Parser.parse("");
         assertTrue(command instanceof InvalidInputCommand);
-        String expectedResponse = "You need to enter some input...";
+        String expectedResponse = "Ggrrhh you need to at least enter some input...";
         assertEquals(expectedResponse, command.getResponse(this.tasks));
     }
 
@@ -70,7 +70,7 @@ public class TestInvalidInputCommand {
     public void testInvalidActionResponse() {
         Command command = Parser.parse("Some input without a valid action type");
         assertTrue(command instanceof InvalidInputCommand);
-        String expectedResponse = "OOPS!!! I'm sorry, but I don't know what 'SOME' means :-(";
+        String expectedResponse = "I don't know what 'SOME' means... O.O";
         assertEquals(expectedResponse, command.getResponse(this.tasks));
     }
 
@@ -90,7 +90,7 @@ public class TestInvalidInputCommand {
         )) {
             Command command = Parser.parse(input);
             assertTrue(command instanceof InvalidInputCommand);
-            String expectedResponse = "You need to add a description for the action '" + input.toUpperCase() + "' :-)";
+            String expectedResponse = "Your action '" + input.toUpperCase() + "' needs to have a description!!!";
             assertEquals(expectedResponse, command.getResponse(this.tasks));
         }
     }
@@ -107,7 +107,7 @@ public class TestInvalidInputCommand {
         )) {
             Command command = Parser.parse(input);
             assertTrue(command instanceof InvalidInputCommand);
-            String expectedResponse = "The input that follows a 'done' action should be a positive integer! :O";
+            String expectedResponse = "The description that follows need to be a positive integer meow!!";
             assertEquals(expectedResponse, command.getResponse(this.tasks));
         }
     }
@@ -155,7 +155,7 @@ public class TestInvalidInputCommand {
         String inputToAddDeadline = "deadline CS2103 Quiz /by";
         String inputToAddEvent = "event CS2103 Quiz /at";
 
-        for (String dateTimeInInvalidFormat : Arrays.asList(
+        for (String invalidDateTime : Arrays.asList(
                 "some invalid string",
                 "2020-10-35",
                 "11 Feb 2021",
@@ -166,14 +166,14 @@ public class TestInvalidInputCommand {
                 "2020-02-11 25:00",
                 "2020-02-11 10:00 PM"
         )) {
-            Command addDeadlineCommand = Parser.parse(inputToAddDeadline + dateTimeInInvalidFormat);
+            Command addDeadlineCommand = Parser.parse(inputToAddDeadline + invalidDateTime);
             assertTrue(addDeadlineCommand instanceof InvalidInputCommand);
 
-            Command addEventCommand = Parser.parse(inputToAddEvent + dateTimeInInvalidFormat);
+            Command addEventCommand = Parser.parse(inputToAddEvent + invalidDateTime);
             assertTrue(addEventCommand instanceof InvalidInputCommand);
 
-            String expectedResponse = "I can't recognize '" + dateTimeInInvalidFormat
-                    + "' as a date. Please follow the 'YYYY-MM-DD HH:mm' format :P";
+            String expectedResponse = "'" + invalidDateTime
+                    + "' is not a date grrrh... Can you follow 'YYYY-MM-DD HH:mm'?";
 
             assertEquals(expectedResponse, addDeadlineCommand.getResponse(this.tasks));
             assertEquals(expectedResponse, addEventCommand.getResponse(this.tasks));
@@ -193,7 +193,7 @@ public class TestInvalidInputCommand {
         )) {
             Command command = Parser.parse(input);
             assertTrue(command instanceof InvalidInputCommand);
-            String expectedResponse = "You need to input a positive integer to specify the urgency level :O";
+            String expectedResponse = "The urgency level should be a positive integer meow!!";
             assertEquals(expectedResponse, command.getResponse(this.tasks));
         }
     }

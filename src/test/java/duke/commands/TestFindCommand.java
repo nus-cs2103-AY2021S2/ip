@@ -60,7 +60,7 @@ public class TestFindCommand {
      */
     @Test
     public void testResponse() {
-        String expectedResponse = "Here are the matching tasks in your list:\n"
+        String expectedResponse = "Meowwwwww I've found the matching tasks in your list:\n"
                 + "\n"
                 + "Status   | Description          | Time            \n"
                 + "--------------------------------------------------\n"
@@ -68,7 +68,7 @@ public class TestFindCommand {
                 + "2.[E][ ] | CS2103 Quiz 3        | 2021-02-06 23:30";
         assertEquals(expectedResponse, this.command.getResponse(this.tasks));
 
-        String expectedEmptyResponse = "There are no tasks matching the string 'CS' in your list :O";
+        String expectedEmptyResponse = "No tasks in your list matches the string 'CS' :O";
         assertEquals(expectedEmptyResponse, this.command.getResponse(new TaskList()));
     }
 }

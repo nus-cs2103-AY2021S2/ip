@@ -62,7 +62,7 @@ public class DoneCommand extends Command {
             return e.getMessage();
         }
 
-        return "Nice! I've marked this task as done:\n"
+        return "Prrrr! I've marked this task as done:\n"
                 + "\n"
                 + TaskStringFormatter.getTaskTable(this.doneTask);
     }

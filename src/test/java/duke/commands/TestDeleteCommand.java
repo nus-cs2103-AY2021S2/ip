@@ -75,7 +75,7 @@ public class TestDeleteCommand {
     @Test
     public void testResponse() {
         this.command.execute(this.tasks);
-        String expectedResponse = "Noted. I've removed this task:\n"
+        String expectedResponse = "Mrawww I've removed this task:\n"
                 + "\n"
                 + "Status | Description          | Time            \n"
                 + "------------------------------------------------\n"

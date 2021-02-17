@@ -82,33 +82,33 @@ public class TestAddTaskCommand {
         TaskList tasks = new TaskList();
 
         this.addToDoCommand.execute(tasks);
-        String expectedAddToDoResponse = "Got it. I've added this task:\n"
+        String expectedAddToDoResponse = "Meow... I've added this task:\n"
                 + "\n"
                 + "Status | Description          | Time            \n"
                 + "------------------------------------------------\n"
                 + "[T][ ] | CS2103 Post-Lectu... | \n"
                 + "\n"
-                + "Now you have 1 task(s) in the list.";
+                + "Now you have 1 task(s) in the list :)";
         assertEquals(expectedAddToDoResponse, this.addToDoCommand.getResponse(tasks));
 
         this.addDeadlineCommand.execute(tasks);
-        String expectedAddDeadlineResponse = "Got it. I've added this task:\n"
+        String expectedAddDeadlineResponse = "Meow... I've added this task:\n"
                 + "\n"
                 + "Status | Description          | Time            \n"
                 + "------------------------------------------------\n"
                 + "[D][ ] | BT4013 Quiz 2        | 2021-02-06 23:30\n"
                 + "\n"
-                + "Now you have 2 task(s) in the list.";
+                + "Now you have 2 task(s) in the list :)";
         assertEquals(expectedAddDeadlineResponse, this.addDeadlineCommand.getResponse(tasks));
 
         this.addEventCommand.execute(tasks);
-        String expectedAddEventResponse = "Got it. I've added this task:\n"
+        String expectedAddEventResponse = "Meow... I've added this task:\n"
                 + "\n"
                 + "Status | Description          | Time            \n"
                 + "------------------------------------------------\n"
                 + "[E][ ] | CS2103 Quiz 3        | 2021-02-06 23:30\n"
                 + "\n"
-                + "Now you have 3 task(s) in the list.";
+                + "Now you have 3 task(s) in the list :)";
         assertEquals(expectedAddEventResponse, this.addEventCommand.getResponse(tasks));
     }
 }

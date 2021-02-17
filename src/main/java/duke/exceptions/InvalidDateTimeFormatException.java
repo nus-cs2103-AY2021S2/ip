@@ -3,6 +3,6 @@ package duke.exceptions;
 public class InvalidDateTimeFormatException extends Exception {
 
     public InvalidDateTimeFormatException(String dateString) {
-        super("I can't recognize '" + dateString + "' as a date. Please follow the 'YYYY-MM-DD HH:mm' format :P");
+        super("'" + dateString + "' is not a date grrrh... Can you follow 'YYYY-MM-DD HH:mm'?");
     }
 }

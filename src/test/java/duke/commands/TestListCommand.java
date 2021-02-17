@@ -69,7 +69,7 @@ public class TestListCommand {
                 + "3.[E][ ] | CS2103 Quiz 3        | 2021-02-06 23:30";
         assertEquals(expectedResponse, this.command.getResponse(this.tasks));
 
-        String expectedEmptyResponse = "You have no tasks in your list yet :)";
+        String expectedEmptyResponse = "You have no tasks in your list yet :X";
         assertEquals(expectedEmptyResponse, this.command.getResponse(new TaskList()));
     }
 }

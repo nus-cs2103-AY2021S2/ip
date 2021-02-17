@@ -86,7 +86,7 @@ public class TestDoneCommand {
     public void testResponse() {
         this.command.execute(this.tasks);
 
-        String expectedResponse = "Nice! I've marked this task as done:\n"
+        String expectedResponse = "Prrrr! I've marked this task as done:\n"
                 + "\n"
                 + "Status | Description          | Time            \n"
                 + "------------------------------------------------\n"

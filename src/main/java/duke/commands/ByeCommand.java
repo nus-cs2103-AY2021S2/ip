@@ -31,6 +31,6 @@ public class ByeCommand extends Command {
      * @return A <code>String</code> to respond to the closing of the application.
      */
     public String getResponse(TaskList tasks) {
-        return "Bye. Hope to see you again soon!";
+        return "Meow... Seeya!";
     }
 }

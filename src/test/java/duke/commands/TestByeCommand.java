@@ -54,7 +54,7 @@ public class TestByeCommand {
      */
     @Test
     public void testResponse() {
-        String expectedResponse = "Bye. Hope to see you again soon!";
+        String expectedResponse = "Meow... Seeya!";
         assertEquals(expectedResponse, this.command.getResponse(this.tasks));
     }
 }

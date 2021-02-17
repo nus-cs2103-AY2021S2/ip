@@ -35,7 +35,7 @@ public class ListCommand extends Command {
      */
     public String getResponse(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            return "You have no tasks in your list yet :)";
+            return "You have no tasks in your list yet :X";
         } else {
             return "Here are the task(s) in your list:\n"
                     + "\n"
