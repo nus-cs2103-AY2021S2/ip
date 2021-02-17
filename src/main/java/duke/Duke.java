@@ -14,7 +14,8 @@ import duke.task.TaskList;
  *
  * Hope you like it!
  *
- * @author skinnychenpi
+ * @author skinnychenpi-reused
+ * (Reused some CSS file and FXML file from @author caitlinjee)
  * @since 2021-01-18
  */
 public class Duke {
