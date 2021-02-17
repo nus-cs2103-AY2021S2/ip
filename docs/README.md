@@ -1,9 +1,12 @@
-# User Guide
+---
+title: User Guide
+---
 
-<p align="center"><img src="https://soonkeatneo.github.io/ip/Ui.png"/></p>
+<p align="center"><img height="640" src="https://soonkeatneo.github.io/ip/Ui.png"/></p>
 <h1 align="center">DukeNukem</h1>
 
 ## Table of Contents
+{:toc}
 * [Introduction](#introduction)
 * [Getting Started](#getting-started)
 * [Features](#features)
