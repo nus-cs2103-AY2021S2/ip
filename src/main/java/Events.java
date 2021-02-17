@@ -30,6 +30,16 @@ public class Events extends Task {
                 + ")";
     }
 
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
+    public void editTask(String newDescription) {
+        super.editTask(newDescription);
+    }
+
     /**
      * Returns String of error message for empty description
      *

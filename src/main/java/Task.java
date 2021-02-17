@@ -19,6 +19,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public String getType() {
+        return "TASK";
+    }
+
     /**
      * Returns String format of task
      *
@@ -33,6 +37,10 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public void editTask(String newDescription) {
+        this.description = newDescription;
     }
 
     /**
