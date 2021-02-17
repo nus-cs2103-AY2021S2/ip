@@ -1,5 +1,7 @@
 # User Guide
 
+![DukeUiImg](ui.png)
+
 ## Features
 
 ### Archive
