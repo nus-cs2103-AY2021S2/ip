@@ -255,7 +255,7 @@ public class Parser {
      */
     protected String printList() {
         if (tasks.getSize() == 0) {
-            return "Your list is currently empty!";
+            return "Your task list is currently empty!";
         } else {
             String listRepresentation = "Here are the tasks in your list:\n";
             listRepresentation += tasks.toString();
