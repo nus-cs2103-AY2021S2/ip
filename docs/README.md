@@ -13,13 +13,13 @@ PAson is a to-do list chatbot that helps you manage your schedule in one place. 
 ### Add a Todo task
 Add a ToDo task to your list.
 
-Command:
+**Command:**
 `todo [description]`
 
-Example:
+**Example:**
 `todo Do the laundry`
 
-Expected outcome:
+**Expected outcome:**
 >Done! I've added a new task:
     [T][✘] Do the laundry
     Now there are 1 tasks in your list.
@@ -27,13 +27,13 @@ Expected outcome:
 ### Add an Event
 Add an Event to your list. Events must contain a mandatory date and can include an optional time.
 
-Command:
+**Command:**
 `event [description] /at [date] [optional time]`
 
-Example:
+**Example:**
 `event Jason's birthday /at 24/09/2021`
 
-Expected outcome:
+**Expected outcome:**
 >Done! I've added a new task:
     [E][✘] Jason's birthday (at 24 Sep 2021)
     Now there are 2 tasks in your list.
@@ -42,13 +42,13 @@ Expected outcome:
 ### Add a Deadline
 Add a Deadline to your list. Deadlines must contain a mandatory date and time.
 
-Command:
+**Command:**
 `deadline [description] /by [date] [time]`
 
-Example:
+**Example:**
 `deadline CS2106 Assignment 1 /by 05/03/2021 2359`
 
-Expected outcome:
+**Expected outcome:**
 >Done! I've added a new task:
     [D][✘] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)
     Now there are 3 tasks in your list.
@@ -57,10 +57,10 @@ Expected outcome:
 ### List Tasks
 View the full list of current tasks in PAson.
 
-Command:
+**Command:**
 `list`
 
-Expected outcome:
+**Expected outcome:**
 > Here are the tasks in your list:
 > 1. [T][✘] Do the laundry
 > 2. [E][✘] Jason's birthday (at 24 Sep 2021)
@@ -70,13 +70,13 @@ Expected outcome:
 ### Mark Task as Done
 Change the status of a given task to done.
 
-Command:
+**Command:**
 `done [task number]`
 
-Example:
+**Example:**
 `done 1`
 
-Expected outcome:
+**Expected outcome:**
 > Good job! I've marked this task as done:
 > [D][✓] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm
 
@@ -84,13 +84,13 @@ Expected outcome:
 ### Delete a Task
 Delete a task from PAson.
 
-Command:
+**Command:**
 `delete [task number]`
 
-Example:
+**Example:**
 `delete 1`
 
-Expected outcome:
+**Expected outcome:**
 > Okay! I've removed this task:
 > [T][✘] Do the laundry
 > There are now 2 tasks in your list.
@@ -99,13 +99,13 @@ Expected outcome:
 ### Find a Task
 Find all tasks in your list matching a specific keyword.
 
-Command:
+**Command:**
 `find [keyword]`
 
-Example:
+**Example:**
 `find birthday`
 
-Expected outcome:
+**Expected outcome:**
 > Here are the matching tasks in your list:
 > 2. [E][✘] Jason's birthday (at 24 Sep 2021)
 
@@ -113,16 +113,16 @@ Expected outcome:
 ### List Tasks On a Specific Date
 Find all tasks in your list matching a specific date. Two shortcut commands `today` and `tomorrow` are also provided for your convenience - they will display results for the current date and tomorrow's date respectively.
 
-Commands:
+**Commands:**
 
 `listschedule [dd/mm/yyyy]`
 `listschedule today`
 `listschedule tomorrow`
 
-Example:
+**Example:**
 `listschedule 24/09/2021`
 
-Expected outcome:
+**Expected outcome:**
 > Here are the matching tasks in your list:
 > 2. [E][✘] Jason's birthday (at 24 Sep 2021)
 
@@ -130,10 +130,10 @@ Expected outcome:
 ### Exit PAson
 Exit the PAson chatbot. Your tasks will be stored locally and available to you when you start PAson again.
 
-Command:
+**Command:**
 `bye`
 
-Expected outcome:
+**Expected outcome:**
 > Bye! I shall go rest now. PAge me when you need me.
 
 
