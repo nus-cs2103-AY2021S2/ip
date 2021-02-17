@@ -31,7 +31,7 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command Format: `todo <Description>`
 * Command Example: `todo Read books`
 <p align="center">
-  <img height="640" width="480" src="/docs/images/create_todo_task.png">
+  <img height="640" width="480" src="images/create_todo_task.png">
 </p>
 
 ### Create a Deadline task
@@ -41,7 +41,7 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command Format: `deadline <Description> /by <DateTime format in YYYY-MM-DD HH:MM>`
 * Command Example: `deadline Submit work /by 2021-02-28 10:00`
 <p align="center">
-  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/create_deadline_task.png">
+  <img height="640" width="480" src="images/create_deadline_task.png">
 </p>
   
 ### Create an Event task
@@ -51,7 +51,7 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command Format: `event <Description> /at <DateTime format in YYYY-MM-DD HH:MM>`
 * Command Example: `event Summer festival /at 2021-02-27 17:00`
 <p align="center">
-  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/create_event_task.png">
+  <img height="640" width="480" src="images/create_event_task.png">
 </p>
 
 ### List all tasks
@@ -60,7 +60,7 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command Format: `list`
 * Command Example: `list`
 <p align="center">
-  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/list_task.png">
+  <img height="640" width="480" src="images/list_task.png">
 </p>
 
 ### Delete task
@@ -70,7 +70,7 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command Format: `delete <index>`
 * Command Example: `delete 1`
 <p align="center">
-  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/delete_task.png">
+  <img height="640" width="480" src="images/delete_task.png">
 </p>
 
 ### Mark a task as done
@@ -80,7 +80,7 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command Format: `done <index>`
 * Command Example: `done 2`
 <p align="center">
-  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/mark_task_done.png">
+  <img height="640" width="480" src="images/mark_task_done.png">
 </p>
 
 ### Find keywords
@@ -89,7 +89,7 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command Format: `find <text>`
 * Command Example: `find festival`
 <p align="center">
-  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/find_task.png">
+  <img height="640" width="480" src="images/find_task.png">
 </p>
 
 ### Sort tasks by DateTime
@@ -98,7 +98,7 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 * Command Format: `sort`
 * Command Example: `sort`
 <p align="center">
-  <img height="640" width="480" src="https://github.com/ssoonwee/ip/blob/master/docs/images/sort_task.png">
+  <img height="640" width="480" src="images/sort_task.png">
 </p>
 
 ### Exit Application
