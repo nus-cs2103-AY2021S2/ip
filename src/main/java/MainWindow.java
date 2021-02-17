@@ -22,8 +22,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/rapunzel.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/flynn.png"));
 
 
     /**
@@ -89,7 +89,15 @@ public class MainWindow extends AnchorPane {
                 "list"
         };
 
-        for (String i : inputs) {
+        String[] demo = {
+                "delete 1",
+                "todo read to pascal",
+                "list",
+                "event take a walk with pascal /at 30-5 2pm",
+                "find pascal"
+        };
+
+        for (String i : demo) {
             runTest(i);
         }
     }

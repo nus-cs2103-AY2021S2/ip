@@ -20,7 +20,7 @@ public class Ui {
         // intro message
         System.out.println(logo);
         print(new String[]{
-                "Welcome, traveller. I'm Kiwi.",
+                "Welcome, traveller. I'm Kiwi, your task list manager.",
                 "What would you like to do today?",
                 "Psst if you're unsure, use type 'help' to get started."});
 
