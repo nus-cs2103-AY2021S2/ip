@@ -98,7 +98,8 @@ public class Parser {
     public Task parseDeleteCommand(String command, TaskList userList) throws InvalidDeleteCommandException {
         int taskNumToBeDeleted = Integer.parseInt(command.split(" ")[1]);
         int indexNum = taskNumToBeDeleted - 1;
-        if(taskNumToBeDeleted >= indexNum) {
+        int userListSize = userList.getTaskListSize();
+        if (taskNumToBeDeleted > userListSize) {
             throw new InvalidDeleteCommandException();
         } else {
             Task deletedTask = userList.removeTask(indexNum);

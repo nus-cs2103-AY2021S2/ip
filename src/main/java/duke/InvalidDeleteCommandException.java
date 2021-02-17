@@ -1,6 +1,6 @@
 package duke;
 
-public class InvalidDeleteCommandException extends DukeException{
+public class InvalidDeleteCommandException extends DukeException {
 
     public InvalidDeleteCommandException() {
     }
