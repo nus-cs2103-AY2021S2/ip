@@ -7,15 +7,22 @@ import java.time.LocalDateTime;
  * user input strings to dateTime fields for tasks.
  */
 public class KiwiDateTime {
-//    private LocalDateTime dateTime;
+
+    private boolean hasDate; // tracked internally by kiwi date and kiwi time
+    private boolean hasTime;
     private final KiwiDate kiwiDate;
     private final KiwiTime kiwiTime;
+    private static final String delimiter = ":"; // needs to not clash with storage delimiter
+
+    public static KiwiDateTime of(int day, int month, int year, int hour, int min) {
+        return new KiwiDateTime(KiwiDate.of(day, month, year), KiwiTime.of(hour, min));
+    }
 
     // todo possible inheritance: subclasses for datetimes
     // or just customize toStrings not to print minute / hour if don't have, or year if this year
     @Override
     public String toString() {
-        return kiwiDate + " " + kiwiTime;
+        return (kiwiDate + " " + kiwiTime).trim();
     }
 
     static void print(Object... objects) {
@@ -46,18 +53,29 @@ public class KiwiDateTime {
         return new KiwiDateTime(KiwiDate.of(day, month), KiwiTime.ofEmpty());
     }
 
-    public static void main(String[] args) {
-        // todo, any of the java methods throw a datetime exception...
-        print(LocalDateTime.now());
 
-        print(
-                KiwiDateTime.ofThisYear(21, 4),
-                KiwiDateTime.ofThisYear(31, 3, 12),
-                KiwiDateTime.ofThisYear(5, 2, 23, 11),
-                KiwiDate.of(21, 4),
-                KiwiTime.of(13, 3)
-        );
+    public String unparse() {
+        return String.format("%s%s%s", this.kiwiDate.unparse(delimiter), this.delimiter, this.kiwiTime.unparse(delimiter));
     }
+
+    public static KiwiDateTime parse(String strToParse) {
+        String[] str = strToParse.split(KiwiDateTime.delimiter);
+        int[] values = new int[str.length];
+
+        for (int i = 0; i < str.length; i++) {
+            values[i] = Integer.parseInt(str[i]);
+        }
+
+        return KiwiDateTime.of(values[0], values[1], values[2], values[3], values[4]);
+    }
+
+    public static void main(String[] args) {
+//        ParseKiwiDateTime p = new ParseKiwiDateTime();
+//        KiwiDateTime k = p.parse("1/4 6pm");
+//        System.out.println(k.unparse());
+//        System.out.println(parse(k.unparse()));
+    }
+
 }
 
 /*
@@ -68,3 +86,4 @@ no year --> set year to this year [/]
 
 and then natural language processing
  */
+

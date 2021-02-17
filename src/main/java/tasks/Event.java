@@ -2,6 +2,7 @@ package tasks;
 
 import static java.lang.Boolean.parseBoolean;
 
+import datetime.KiwiDateTime;
 import datetime.ParseDateTime;
 import java.time.LocalDateTime;
 
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
  * The event task has an event-specific variable, event timing.
  */
 public class Event extends Task {
-    private final LocalDateTime eventTiming; // todo make a custom class for datetimes (it can contain formatting functions)
+    private KiwiDateTime eventTiming;
 
     /**
      * Public constructor which is used when parsing user inputted command
@@ -18,21 +19,17 @@ public class Event extends Task {
      * @param desc
      * @param eventTiming
      */
-    public Event(String desc, String eventTiming) { // todo make obsolete
-        super(desc);
-        this.eventTiming = ParseDateTime.parse(eventTiming);
-    }
 
     // created trying to bug fix
-    public Event(String desc, LocalDateTime eventTiming) {
+    public Event(String desc, KiwiDateTime eventTiming) {
         super(desc);
         this.eventTiming = eventTiming;
     }
 
     // used when parsing event task from file
-    private Event(String desc, String eventTiming, boolean isDone) {
+    private Event(String desc, KiwiDateTime eventTiming, boolean isDone) {
         super(desc, isDone);
-        this.eventTiming = ParseDateTime.parse(eventTiming);
+        this.eventTiming = (eventTiming);
     }
 
     /**
@@ -41,7 +38,7 @@ public class Event extends Task {
      */
     public String toString() {
         return "[E][" + getStatusIcon() + "] " + description
-                + " (at: " + ParseDateTime.readableString(eventTiming) + ")";
+                + " (at: " + eventTiming + ")";
     }
 
     @Override
@@ -49,7 +46,7 @@ public class Event extends Task {
         // should abstract e here away
         // todo use join instead for all tasks, can standardize
         return "E" + delimiter + description + delimiter + isDone
-                + delimiter + ParseDateTime.unparse(eventTiming) + System.lineSeparator();
+                + delimiter + eventTiming.unparse() + System.lineSeparator();
     }
 
     /**
@@ -69,9 +66,11 @@ public class Event extends Task {
         assert args.length == 3 + 1 : // 3 + 1 bc command name, desc, done, time - much hardcoding
                 "storage parser detecting fewer than needed event arguments";
 
-        Boolean isDone = parseBoolean(args[2]);
+        String desc = args[1];
+        boolean isDone = parseBoolean(args[2]);
+        KiwiDateTime dt = KiwiDateTime.parse(args[3]);
 
-        return new Event(args[1], args[3], isDone);
+        return new Event(desc, dt, isDone);
     }
 
     /**
@@ -79,13 +78,13 @@ public class Event extends Task {
      * @param args
      */
     public static void main(String[] args) {
-        Event t = new Event("hello world", "30-01 8PM");
-        System.out.println(t);
-        t.markAsDone();
-        System.out.println(t);
-        System.out.println(t.unparse());
-        System.out.println(System.lineSeparator().getBytes());
-        System.out.println(parse("E;;parsing;;false;;03-03 6PM")); // lineSeperator needs to be removed from unparse
-        // test with other cases without relying on t
+//        Event t = new Event("hello world", "30-01 8PM");
+//        System.out.println(t);
+//        t.markAsDone();
+//        System.out.println(t);
+//        System.out.println(t.unparse());
+//        System.out.println(System.lineSeparator().getBytes());
+//        System.out.println(parse("E;;parsing;;false;;03-03 6PM")); // lineSeperator needs to be removed from unparse
+//        // test with other cases without relying on t
     }
 }

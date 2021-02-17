@@ -19,7 +19,7 @@ public class EventCommand extends AddTaskWithTimeCommand {
         try {
             this.parseCommandBody();
             this.commandOutputMsg = taskList.addTask(
-                    new Event(secondArg, parseArgToDateTime(thirdArg)));
+                    new Event(secondArg, parseToKiwiDateTime(thirdArg)));
         } catch (Exception e) {
             handleException(e);
         }

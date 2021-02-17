@@ -90,7 +90,7 @@ public class Storage {
                 Task t;
                 switch (letter) {
                 case "T":
-                    t = Todo.parse(line);
+                    t = Todo.parse(line); // todo throw error whenever format not recognized and help user recover from it
                     break;
                 case "E":
                     t = Event.parse(line);

@@ -13,3 +13,71 @@
         hh
         hh:mm
          */
+
+
+  /*
+    Strings to parse...
+    nn/nn haa
+    nn/n haa
+    n/nn haa
+    n/n haa
+    So should split the whitespace and parseTimeString and parseDateString
+
+    timeStrings:
+    hh:mm aa
+    h:mm aa
+    hhaa
+    haa
+    without aa --> assume 24h timing
+    h
+    hh
+    hh:mm
+
+    how about no whitespace? how to know time string or date string? - contain date-delimiters or time-delimiters2 "/"
+    haa
+    hhaa
+    hh aa
+    hh:mm aa
+     */
+
+
+DATE TIME TESTS
+//        print(
+//                p.parse("20-05 11:44"),
+//                p.parse("30-11 15:01"),
+//                p.parse("6/4 1:22"),
+//                //p.parse("1/2 9:40PM")
+//                //p.parse("1/2 9:40 PM")
+//                //p.parse("6/4 1")
+//
+//                p.isDateString("6/4"),
+//                p.isDateString("6:40"),
+//                p.is24hTimeString("6:40"),
+//                p.is24hTimeString("06/05")
+//        );
+//
+//        p.parseTimeString("6:40");
+//        print(p.min, p.hour);
+//
+//        p.parseTimeString("11:50");
+//        print(p.min, p.hour);
+//
+//        p.parseTimeString("11:50", "PM");
+//        print(p.min, p.hour);
+//
+//        p.parseDateString("13/4");
+//
+//        p.params();
+
+//        String s1 = "13/4 6:00";
+//        KiwiDateTime k = p.parse(s1);
+//        print(k);
+
+
+//        testParse("2.00pm", "2pm", "3 pm", "12am", "11:59pm");
+         p.testParse(
+//                 "2:00 pm",
+//                 "18/11 6 pm",
+//                 "18/11 6:11 pm",
+//                 "6:11 pm 18/11",
+//                 "7 pm 18/11",
