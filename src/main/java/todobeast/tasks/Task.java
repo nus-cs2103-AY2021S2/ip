@@ -53,4 +53,8 @@ public abstract class Task {
      * @return the String that contains the formatted attributes of the current task
      */
     abstract public String formatForStorage(String delimiter);
+
+    public void clearTaskNotes() {
+        taskNotes = null;
+    };
 }

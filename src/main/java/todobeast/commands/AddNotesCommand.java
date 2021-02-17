@@ -2,6 +2,7 @@ package todobeast.commands;
 
 import todobeast.TaskList;
 import todobeast.Ui;
+import todobeast.exceptions.InvalidInputException;
 import todobeast.exceptions.TaskNotFoundException;
 import todobeast.exceptions.ToDoBeastException;
 import todobeast.tasks.Task;
@@ -17,12 +18,19 @@ public class AddNotesCommand extends Command {
     }
 
     public void execute(TaskList taskList, Ui ui) throws ToDoBeastException {
-        if (!taskList.isTaskIndexInRange(taskNumber)) {
+        if (!taskList.isTaskIndexInRange(taskNumber - 1)) {
             throw new TaskNotFoundException("Task with index " + taskNumber + " does not exist in the list!");
         }
 
         Task currentTask = taskList.getTask(taskNumber);
-        taskList.setTaskNotes(currentTask, taskNotes);
-        ui.addToResponseOutput(ui.showTaskNotesAdded(currentTask));
+
+        if (taskNotes.length() == 0) {
+            taskList.clearTaskNotes(currentTask);
+            ui.addToResponseOutput(ui.showTaskNotesCleared(currentTask));
+        } else {
+            taskList.setTaskNotes(currentTask, taskNotes);
+            ui.addToResponseOutput(ui.showTaskNotesAdded(currentTask));
+        }
+
     }
 }

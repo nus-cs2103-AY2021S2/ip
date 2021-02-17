@@ -111,6 +111,8 @@ Here are your tasks:
 
 Adds notes to an existing task. `[taskIndex]` indicates the index of the task as it appears in ToDoBeast. If there were existing notes present, they will be overwritten by the new notes.
 
+Note: if `[taskNotes]` is left empty, notes will be deleted from the task.
+
 Example of usage: 
 
 `notes, 2, merge PR for assignment`

@@ -80,6 +80,10 @@ public class Ui {
         return "I've added notes to this task:\n\t" + task + "\n";
     }
 
+    public String showTaskNotesCleared(Task task) {
+        return "I've cleared notes from this task:\n\t" + task + "\n";
+    }
+
     public String showDeleted(Task task) {
         return "Got it! I've removed this task for you:\n\t" + task + "\n";
     }

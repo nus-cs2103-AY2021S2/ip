@@ -31,6 +31,10 @@ public class TaskList {
         task.setTaskNotes(taskNotes);
     }
 
+    public void clearTaskNotes(Task task) {
+        task.clearTaskNotes();
+    }
+
     public boolean isTaskIndexInRange(int taskNumber) {
         return taskNumber >= 0 && taskNumber < taskList.size();
     }
