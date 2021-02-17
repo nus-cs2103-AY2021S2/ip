@@ -1,6 +1,7 @@
 package todobeast;
 
 import org.junit.jupiter.api.Test;
+import todobeast.exceptions.InvalidInputException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,7 +26,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testLoadTasks() throws FileNotFoundException {
+    public void testLoadTasks() throws FileNotFoundException, InvalidInputException {
         TaskListStub taskListStub = new TaskListStub(new ArrayList<>());
         Storage storage = new Storage(testPath, testListData);
         assertEquals(taskListStub.toString(), storage.loadTasks().toString());
