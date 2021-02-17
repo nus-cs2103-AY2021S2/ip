@@ -71,6 +71,66 @@ public class TaskList {
         return response;
     }
 
+    public String editTask(int taskIndex, boolean hasDescription, boolean hasDate,
+                           String newDescription, String newDate) throws IOException {
+        String response = "";
+
+        Task task = tasks.get(taskIndex);
+        String type = task.getType();
+
+        String before = task.formatData();
+
+        switch (type) {
+        case "T":
+            if (hasDescription) {
+                task.editTask(newDescription);
+                if (hasDate) {
+                    response += ui.printToDoHasNoDateError();
+                }
+            } else {
+                ui.printEmptyDescError("edit");
+            }
+            break;
+        case "D":
+            String deadlineFinalDescription = task.description;
+            LocalDate deadlineLocalDate;
+
+            if (hasDescription) {
+                deadlineFinalDescription = newDescription;
+            }
+
+            if (hasDate) {
+                deadlineLocalDate = LocalDate.parse(newDate);
+                tasks.set(taskIndex, new Deadlines(deadlineFinalDescription, deadlineLocalDate));
+            } else {
+                task.editTask(deadlineFinalDescription);
+            }
+            break;
+        case "E":
+            String eventFinalDescription = task.description;
+            LocalDate eventLocalDate;
+
+            if (hasDescription) {
+                eventFinalDescription = newDescription;
+            }
+
+            if (hasDate) {
+                eventLocalDate = LocalDate.parse(newDate);
+                tasks.set(taskIndex, new Events(eventFinalDescription, eventLocalDate));
+            } else {
+                task.editTask(eventFinalDescription);
+            }
+            break;
+        }
+
+        String after = tasks.get(taskIndex).formatData();
+
+        storage.modifyFile(before, after);
+
+        response += ui.printEdit(tasks, taskIndex);
+        return response;
+    }
+
     /**
      * Creates ToDos object to add to task list and file data.
      * If description is empty, will print prompt to tell user.

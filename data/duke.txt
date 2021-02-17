@@ -1,3 +1,4 @@
-T | 0 | read book
-D | 0 | project | 2021-03-17
-E | 1 | party | 2021-02-16
+T | 0 | return book
+E | 0 | ailene's bday | 2021-06-08
+T | 0 | print art
+D | 0 | homework | 2021-04-05

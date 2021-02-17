@@ -87,6 +87,10 @@ public class Ui {
         return "Now you have " + numTasks + (numTasks == 1 ? " task" : " tasks") + " in your list.";
     }
 
+    public String printEdit(ArrayList<Task> tasks, int index) {
+        return "Okay! I've edited this task:\n" + tasks.get(index).toString() + "\n";
+    }
+
     /**
      * Prints goodbye message followed by a line.
      */
@@ -114,5 +118,9 @@ public class Ui {
      */
     public String printDateError() {
         return "Oops! Date should be in YYYY-MM-DD format.";
+    }
+
+    public String printToDoHasNoDateError() {
+        return "Oops! Todo has no date.\nPlease only enter the description!";
     }
 }
