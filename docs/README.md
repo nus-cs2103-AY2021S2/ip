@@ -20,9 +20,9 @@ Add a ToDo task to your list.
 `todo Do the laundry`
 
 **Expected outcome:**
->Done! I've added a new task:
->    [T][✘] Do the laundry
->    Now there are 1 tasks in your list.
+>Done! I've added a new task:\
+    [T][✘] Do the laundry\
+    Now there are 1 tasks in your list.
 
 ### Add an Event
 Add an Event to your list. Events must contain a mandatory date and can include an optional time.
@@ -34,9 +34,9 @@ Add an Event to your list. Events must contain a mandatory date and can include 
 `event Jason's birthday /at 24/09/2021`
 
 **Expected outcome:**
->Done! I've added a new task:
->    [E][✘] Jason's birthday (at 24 Sep 2021)
->    Now there are 2 tasks in your list.
+>Done! I've added a new task:\
+    [E][✘] Jason's birthday (at 24 Sep 2021)\
+    Now there are 2 tasks in your list.
 
 
 ### Add a Deadline
@@ -49,9 +49,9 @@ Add a Deadline to your list. Deadlines must contain a mandatory date and time.
 `deadline CS2106 Assignment 1 /by 05/03/2021 2359`
 
 **Expected outcome:**
->Done! I've added a new task:
->    [D][✘] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)
->    Now there are 3 tasks in your list.
+>Done! I've added a new task:\
+    [D][✘] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)\
+    Now there are 3 tasks in your list.
 
 
 ### List Tasks
