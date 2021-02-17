@@ -168,7 +168,7 @@ public class Parser {
         } else if (split.length == 1) {
             throw new DukeArgumentException("You have not entered a task description!");
         }
-        else if (split.length > 1 && (split[1].equals("/by") || split[1].equals("at"))) {
+        else if (split.length > 1 && (split[1].equals("/by") || split[1].equals("/at"))) {
             throw new DukeArgumentException("You have not entered a task description!");
         }
         else {
