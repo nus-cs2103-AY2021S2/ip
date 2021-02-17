@@ -58,9 +58,9 @@ public class FindCommand extends Command {
         }
 
         if (matchingTasks.getSize() == 0) {
-            return "No tasks in your list matches the string '" + this.keywords + "' :O";
+            return "No tasks matches the keyword(s) '" + this.keywords + "' :O";
         } else {
-            return "Meowwwwww I've found the matching tasks in your list:\n"
+            return "Meow I've found the matching tasks:\n"
                     + "\n"
                     + TaskStringFormatter.getTaskTable(matchingTasks);
         }
