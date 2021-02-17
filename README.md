@@ -19,7 +19,7 @@ DukeNukem is a Java-based application that aims to help remind you of upcoming t
 Prerequisites: JDK 11
 
 1. Download the latest release from [here](https://github.com/SoonKeatNeo/ip/releases/). 
-1. Double click the downloaded JAR file. If pathing is not set up, then you will have to use: `java -jar dukenukem.jar`.
+1. Double click the downloaded JAR file. If pathing is not set up, then you will have to use: `java -jar duke.jar`.
 
 ### Features
 DukeNukem can help you to manage Deadlines, Events and To-Dos.
