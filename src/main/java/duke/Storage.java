@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 import duke.exceptions.DukeException;
 import duke.expenses.Expense;
@@ -30,6 +29,7 @@ public class Storage {
 
     /**
      * Constructs a Storage object.
+     *
      * @throws DukeException If database cannot be created or found.
      */
     public Storage() throws DukeException {
@@ -39,6 +39,7 @@ public class Storage {
 
     /**
      * Returns the path for the address to save the file.
+     *
      * @return Path
      */
     public static Path getSaveFilePathForTasks() {
@@ -52,6 +53,7 @@ public class Storage {
 
     /**
      * Creates a file w/wo directory for storing of file.
+     *
      * @throws DukeException If access rights issue is violated.
      */
     protected static void createDbIfNotFoundForTasks() throws DukeException {
@@ -84,8 +86,9 @@ public class Storage {
 
     /**
      * Returns an ArrayList of Tasks by attempting to load that information from a stored file.
+     *
      * @return An ArrayList of Tasks
-     * @throws DukeException If data could not be loaded.
+     * @throws DukeException If data could not be loaded
      */
     public ArrayList<Task> loadTasksData() throws DukeException {
         ArrayList<Task> ledger = new ArrayList<>();
@@ -105,8 +108,9 @@ public class Storage {
     /**
      * Saves the list of Tasks into a file to be recovered the
      * next time the user needs it.
+     *
      * @param tasks An ArrayList of Tasks
-     * @throws DukeException If data could not be saved.
+     * @throws DukeException If data could not be saved
      */
     public void saveTasksData(ArrayList<Task> tasks) throws DukeException {
         try {
@@ -121,6 +125,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an ArrayList of Expenses by attempting to load that information from a stored file.
+     *
+     * @return ArrayList of Expenses
+     * @throws DukeException If data could not be loaded
+     */
     public ArrayList<Expense> loadExpensesData() throws DukeException {
         ArrayList<Expense> ledger = new ArrayList<>();
         try {
@@ -135,6 +145,14 @@ public class Storage {
         }
         return ledger;
     }
+
+    /**
+     * Saves the list of Expenses into a file to be recovered the
+     * next time the user needs it.
+     *
+     * @param expenses An ArrayList of Expenses
+     * @throws DukeException If data could not be saved
+     */
     public void saveExpensesData(ArrayList<Expense> expenses) throws DukeException {
         try {
             ArrayList<String> ledger = new ArrayList<>();
@@ -148,6 +166,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an Expense object by taking in a String of expense information.
+     * This String is of fixed format which facilitates the saving and loading of information.
+     *
+     * @param expenseInfo String of expense information
+     * @return The corresponding Expense object
+     * @throws DukeException If expense could not be created successfully due to input error
+     */
     private static Expense stringToExpense(String expenseInfo) throws DukeException {
         String[] savedRecord = expenseInfo.split("\\|");
         Expense output;
@@ -165,6 +191,7 @@ public class Storage {
     }
     /**
      * Returns a Task which is converted from an input String.
+     *
      * @param taskInfo String containing information about the Task
      * @return Task
      * @throws DukeException If task could not be created successfully due to input error

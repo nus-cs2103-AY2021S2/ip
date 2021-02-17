@@ -11,6 +11,11 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructs a TaskList object.
+     *
+     * @param tasks ArrayList of Tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -21,9 +26,8 @@ public class TaskList {
 
     /**
      * Deletes a task at the index given from the taskList.
-     * Index begins from 1.
      *
-     * @param index index of task to be deleted
+     * @param index index of task to be deleted, 1-Indexing
      * @return Task deleted
      */
     public Task delete(int index) {
@@ -33,9 +37,8 @@ public class TaskList {
 
     /**
      * Marks the task given by index to be done.
-     * Index begins from 1.
      *
-     * @param index the index of task to be marked as done
+     * @param index the index of task to be marked as done, 1-Indexing
      * @return Task marked done
      */
     public Task mark(int index) {

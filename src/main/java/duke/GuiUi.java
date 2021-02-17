@@ -23,7 +23,7 @@ public class GuiUi {
     /**
      * Informs the user there is error when parsing the date of tasks.
      *
-     * @return String of error message
+     * @return error message
      */
     public static String displayParseError() {
         return insertMsgIntoChatBox("Input not accepted. "
@@ -31,6 +31,11 @@ public class GuiUi {
                 + " and '/time HH:mm:ss' after date is specified.\n");
     }
 
+    /**
+     * Informs the user when there is an error for parsing the input to create an Expense object.
+     *
+     * @return error message
+     */
     public static String displaySpendParseError() {
         return insertMsgIntoChatBox("Input not accepted. "
                 + "Hint: Use '/amt [amount spent]' after description"
@@ -51,7 +56,7 @@ public class GuiUi {
     }
 
     /**
-     * Returns a String indicating Tasker is unable to save file.
+     * Returns a String indicating that Tasker is unable to save file.
      *
      * @return String of error message
      */
@@ -64,10 +69,10 @@ public class GuiUi {
     }
 
     /**
-     *  Returns a String to remind the user to use a proper number to delete/mark task
-     *  and show the number of tasks in the taskList.
+     *  Returns a String to prompt the user to use a valid number to delete/mark task
+     *  and shows the number of Tasks in the taskList.
      *
-     * @param taskList the list of task.
+     * @param taskList the list of Tasks.
      * @return String of error message
      */
     public static String displayIndexOutOfBoundsError(TaskList taskList) {
@@ -77,9 +82,10 @@ public class GuiUi {
     }
 
     /**
-     * Lists all the tasks on receive of "list" command.
+     * Shows a list of all the Tasks in the given TaskList on receive of "list" command.
      *
-     * @param taskList list of tasks
+     * @param taskList list of Tasks
+     * @return formatted String
      */
     public static String displayListOfTasks(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
@@ -95,6 +101,12 @@ public class GuiUi {
         return insertMsgIntoChatBox("Here are your tasks:\n" + output);
     }
 
+    /**
+     * Shows a list of all the Expenses in the given TaskList on receive of "list_e" command.
+     *
+     * @param expensesList list of Expenses
+     * @return formatted String
+     */
     public static String displayListOfExpenses(ExpensesList expensesList) {
         ArrayList<Expense> expenses = expensesList.getExpenses();
         int n = expenses.size();
@@ -139,10 +151,11 @@ public class GuiUi {
     }
 
     /**
-     * Returns a 'successfully added' message.
+     * Informs the user that a task is added successfully.
      *
-     * @param taskList list of tasks.
-     * @param task task added
+     * @param taskList TaskList
+     * @param task task to be added
+     * @return String of formatted message
      */
     public static String displayAddSuccess(TaskList taskList, Task task) {
         return insertMsgIntoChatBox("Got it. I've added this task:" + '\n'
@@ -150,6 +163,13 @@ public class GuiUi {
                 + "Now you have " + taskList.getTasks().size() + " tasks in the list.\n");
     }
 
+    /**
+     * Informs the user that an expense is added successfully.
+     *
+     * @param expensesList ExpensesList
+     * @param expense expense to be added
+     * @return String of formatted message
+     */
     public static String displayAddExpenseSuccess(ExpensesList expensesList, Expense expense) {
         return insertMsgIntoChatBox("Got it. I've added this expense:" + '\n'
                 + expense + "\n"
@@ -160,6 +180,7 @@ public class GuiUi {
      * Returns a 'successfully marked' message.
      *
      * @param task task done
+     * @return String of formatted message
      */
     public static String displayMarkDoneSuccess(Task task) {
         return insertMsgIntoChatBox("Nice! I've marked this Task as done:\n" + task + "\n");
@@ -168,8 +189,9 @@ public class GuiUi {
     /**
      * Returns a 'successfully deleted' message.
      *
-     * @param taskList list of tasks.
+     * @param taskList TaskList
      * @param task task deleted
+     * @return String of formatted message
      */
     public static String displayDeleteSuccess(TaskList taskList, Task task) {
         return insertMsgIntoChatBox("Got it. I've removed this task:" + '\n'

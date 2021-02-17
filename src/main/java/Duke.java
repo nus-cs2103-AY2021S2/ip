@@ -1,22 +1,14 @@
-import java.nio.file.Path;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
+import duke.ExpensesList;
 import duke.GuiUi;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.ExpensesList;
 import duke.exceptions.DukeException;
 import duke.exceptions.ParseException;
 import duke.expenses.Expense;
 import duke.tasks.Task;
-import javafx.scene.image.Image;
-
-// potential exceptions to catch:
-// 1) deleting a non-existent task
-// 2) marking a non-existent task as done
-// 3) marking an already done task done again
 
 public class Duke {
     private Storage storage;

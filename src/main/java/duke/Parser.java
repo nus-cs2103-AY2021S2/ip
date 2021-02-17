@@ -55,12 +55,12 @@ public class Parser {
     /**
      * Credit to QY-H00 - who inspired me to implement a parser for specific commands.
      *
-     * Returns a Task created after parsing the description after a command.
+     * Returns a specific type of Task object by parsing the description after the given command.
      *
-     * @param command command type
-     * @param description description after command
-     * @return the task corresponding to the input
-     * @throws ParseException if parsing fails.
+     * @param command type of task (eg. TODO, DEADLINE or EVENT)
+     * @param description description of task
+     * @return a task object corresponding to the input
+     * @throws ParseException if parsing fails
      */
     public static Task parseDescription(Command command, String description) throws ParseException {
         switch (command) {
@@ -75,6 +75,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns an Expense object by parsing the description after the given command.
+     *
+     * @param command type of expense
+     * @param description description of expense
+     * @return an expense object corresponding to the input
+     * @throws ParseException if parsing fails
+     */
     public static Expense parseExpenseDescription(Command command, String description) throws ParseException {
         switch (command) {
         case SPEND:
@@ -99,6 +107,10 @@ public class Parser {
             double amt = Double.parseDouble(amtStr);
             String dateStr = input.substring(indexOfDate + 6);
             LocalDate date = LocalDate.parse(dateStr);
+            if (amt <= 0) {
+                throw new ParseException("Input invalid! Please enter a proper spending amount... (how" +
+                        " could you spend less than or equal to zero dollars??)");
+            }
             return new Expense(description, amt, date);
         } else {
             throw new ParseException("Invalid input! Please enter using format: 'spend'_[description]_"
