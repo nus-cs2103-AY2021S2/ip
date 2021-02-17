@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import duke.Launcher;
 import duke.ui.Parser;
 
 
@@ -22,11 +23,11 @@ public class Storage {
     /**
      * Initializes a storage/loader with a file path.
      *
-     * @param fileName Name of text file in directory data/ from which tasks are loaded, and to which tasks are saved.
+     * @param fileName Name of text file in directory /data/ from which tasks are loaded,
+     *                 and to which tasks are saved.
      */
     public Storage(String fileName) {
-        assert Files.isDirectory(Path.of("data"));
-        this.filePath = "data/" + fileName;
+        this.filePath = this.getSaveFilePath(fileName);
     }
 
     /**
@@ -151,5 +152,36 @@ public class Storage {
         String description = task.getDescription();
 
         return taskType + " | " + done + " | " + description + " | " + dateTimeString + "\n";
+    }
+
+    /**
+     * Builds the path to the text file from which to load data and to which to save data.
+     *
+     * @param fileName Name of text file.
+     * @return Path to the save file.
+     */
+    private String getSaveFilePath(String fileName) {
+        String appDirectory = URLDecoder.decode(
+                Launcher.class
+                        .getProtectionDomain()
+                        .getCodeSource()
+                        .getLocation()
+                        .getPath(),
+                StandardCharsets.UTF_8);
+
+        // Obtain the path of the directory containing the save file
+        String dataDirectory;
+        if (appDirectory.endsWith(".jar")) {
+            dataDirectory = new File(appDirectory).getParentFile().getPath() + "/data";
+        } else {
+            dataDirectory = "data";
+        }
+
+        if (!new File(dataDirectory).exists()) {
+            boolean directoryCreated = new File(dataDirectory).mkdir();
+            assert directoryCreated;
+        }
+
+        return dataDirectory + "/" + fileName;
     }
 }

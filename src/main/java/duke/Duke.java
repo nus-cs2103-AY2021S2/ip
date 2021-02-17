@@ -19,9 +19,9 @@ public class Duke {
      * state of the application, and a <code>Storage</code> property, which handles the loading and saving
      * of tasks when the application starts and shuts down respectively.
      *
-     * @param fileName Name of text file in directory data/ from which tasks are loaded when the app starts, and to
+     * @param fileName Name of text file in directory /data/ from which tasks are loaded when the app starts, and to
      *                 which tasks are saved when the app terminates.
-     *                 If the text file does not already exist in the directory data/, then the app starts
+     *                 If the text file does not already exist in the directory /data/, then the app starts
      *                 with an empty <code>TaskList</code>. When the app terminates, a new text file
      *                 with the input file name will be created, to which existing tasks are saved.
      */
