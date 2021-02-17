@@ -130,13 +130,8 @@ Example:
 
 ## Command summary
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
 **Action**  | **Format, Examples**
+
 --------|-----------------
 **Add todo** |  `todo description`e.g, `add todo watch netflix `
 **Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
