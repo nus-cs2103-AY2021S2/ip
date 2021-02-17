@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -15,8 +14,6 @@ import duke.task.Todo;
 import duke.ui.ErrorBox;
 import duke.ui.Ui;
 
-
-
 /**
  * This class handles the saving and loading of the taskList to/from a specific FilePath.
  */
@@ -24,7 +21,6 @@ public class TaskStorage {
 
     private static final String FILEPATH = "data/Duke.txt";
     private static final String DIRECTORY = "data";
-
 
     /**
      * This method writes the content of a taskList to data/Duke.txt.
@@ -101,6 +97,8 @@ public class TaskStorage {
     private static String restoreTask(File file) throws IOException {
         Scanner sc = new Scanner(file);
         StringBuilder fileContent = new StringBuilder("");
+
+        //Interpret the file content and add tasks to task list.
         while (sc.hasNext()) {
             String[] line = sc.nextLine().split("@@");
             if (line.length == 3) {

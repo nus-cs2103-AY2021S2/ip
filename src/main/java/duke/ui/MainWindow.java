@@ -59,10 +59,11 @@ public class MainWindow extends AnchorPane {
         String userText = userInput.getText();
         Parser parser = new Parser(userText);
         Command command = parser.parse();
+        boolean isExit = command.getIsExitStatus();
         response = command.execute();
-        String dukeText = response;
 
-        if (response.equals(Ui.FAREWELL)) {
+
+        if (isExit) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(response, dukeImage)
             );
@@ -72,7 +73,7 @@ public class MainWindow extends AnchorPane {
         if (!response.equals("")) {
             dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getDukeDialog(dukeText, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage)
             );
         } else {
             dialogContainer.getChildren().addAll(

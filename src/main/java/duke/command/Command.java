@@ -16,7 +16,7 @@ public abstract class Command {
      * Creates a command with user instruction, task, date and a function to execute the instruction.
      *
      * @param instruction user instruction.
-     * @param task user task.
+     * @param task content of user task.
      * @param date date of the task.
      * @param func the function takes a command to execute and returns a response String.
      */

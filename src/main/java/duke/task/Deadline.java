@@ -9,15 +9,15 @@ public class Deadline extends Task {
     /**
      * creates a deadline task object with given task name and given dates/comments.
      *
-     * @param taskName String representation of the name of the task.
+     * @param taskContent String representation of the content of the task.
      * @param date     String representation of the comments/dates.
      */
-    public Deadline(String taskName, String date) {
-        super(taskName, date);
+    public Deadline(String taskContent, String date) {
+        super(taskContent, date);
     }
 
-    public Deadline(String taskName, String date, String done) {
-        super(taskName, date, done);
+    public Deadline(String taskContent, String date, String done) {
+        super(taskContent, date, done);
     }
 
     @Override

@@ -138,10 +138,13 @@ public class Parser {
      * @return the task date in String and return empty if there is no date.
      */
     static String extractDate(String input, String instruction) throws DukeException {
+
         // Remove instruction from the user input to get taskInput.
         String taskInput = input.replaceAll(instruction, "").trim();
+
         // Split task input by the first / encountered.
         String[] splitParts = taskInput.split("/", 2);
+
         boolean hasDate = splitParts.length == 2;
         String noDate = "";
         if (!hasDate) {

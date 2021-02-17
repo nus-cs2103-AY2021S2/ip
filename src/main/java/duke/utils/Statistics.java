@@ -88,7 +88,7 @@ public class Statistics {
         File directory = new File(DIRECTORY);
         if (!directory.exists()) {
             directory.mkdir();
-        }        
+        }
         File statisticsFile = new File(FILEPATH);
         if (!statisticsFile.exists()) {
             try {

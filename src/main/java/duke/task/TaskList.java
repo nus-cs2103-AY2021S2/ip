@@ -48,42 +48,48 @@ public class TaskList {
      */
     public static String findTasks(String keyword) {
         int index = 1;
-        StringBuilder sb = new StringBuilder();
+        StringBuilder response = new StringBuilder();
+
+        //Finds matching tasks in task list and appends to the response.
         for (Task task : tasks) {
             String taskName = task.getTaskName();
             if (taskName.contains(keyword)) {
                 String prefix = task.toString().substring(0, 6);
-                sb.append(prefix + " " + index + ". " + task.getTaskName() + task.getDate() + "\n");
+                response.append(prefix + " " + index + ". " + task.getTaskName() + task.getDate() + "\n");
                 index++;
             }
         }
-        boolean hasMatchTask = sb.capacity() > 0;
+
+        boolean hasMatchTask = response.capacity() > 0;
         if (!hasMatchTask) {
-            sb.append("~~~~~Sorry ah, no match.~~~~~");
+            response.append("~~~~~Sorry ah, no match.~~~~~");
         } else {
-            sb.insert(0, "Here are the matches for your search: \n");
+            response.insert(0, "Here are the matches for your search: \n");
         }
 
-        return sb.toString();
-
+        return response.toString();
     }
-
 
     /**
      * This method displays all the tasks in the list.
      */
     public static String listTasks() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder response = new StringBuilder();
 
+        if (tasks.size() == 0) {
+            response.append(Ui.EMPTY_LIST);
+        }
+
+        //Lists all tasks in the task list and appends them to the response.
         for (Task task : tasks) {
             if (task == null) {
                 break;
             }
             System.out.println(task);
-            sb.append(task.toString() + "\n");
+            response.append(task.toString() + "\n");
         }
 
-        return sb.toString();
+        return response.toString();
     }
 
     /**
@@ -92,20 +98,20 @@ public class TaskList {
      * @param i the index labelling of the task.
      */
     public static String deleteTask(int i) {
+        String response = "";
         try {
             Task t = tasks.get(i - 1);
             tasks.remove(i - 1);
-            Ui.deleteTask(t);
+            response = Ui.deleteTask(t);
             for (Task task : tasks) {
                 if (task.getIndex() > i) {
                     task.changeIndex(task.getIndex() - 1);
                 }
             }
-            return Ui.deleteTask(t);
         } catch (IndexOutOfBoundsException e) {
             ErrorBox.display(Ui.TASK_ERROR);
-            return "";
         }
+        return response;
     }
 
 

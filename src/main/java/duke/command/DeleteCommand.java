@@ -1,16 +1,12 @@
 package duke.command;
 
-
-
 import duke.task.TaskList;
 import duke.ui.ErrorBox;
 import duke.ui.Ui;
 
-
 /**
  * Sub-class of command that only represents and executes a delete instruction of a user.
  */
-
 public class DeleteCommand extends Command {
     private static final String NO_DATE = "";
 

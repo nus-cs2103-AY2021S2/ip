@@ -2,7 +2,7 @@ package duke.type;
 
 /**
  * Encapsulates a CommandType enum class that represents the type of command.
- * The class includes seven types: todo, deadline, event, bye, list, delete, done and find.
+ * The class includes seven types: todo, clear, deadline, event, bye, list, delete, done and find.
  */
 public enum CommandType {
     BYE("bye"),

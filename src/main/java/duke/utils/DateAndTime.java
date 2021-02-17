@@ -6,8 +6,6 @@ import java.time.format.DateTimeParseException;
 
 import duke.ui.Ui;
 
-
-
 /**
  * This class processes the date key in by user and converts it to the right format.
  */

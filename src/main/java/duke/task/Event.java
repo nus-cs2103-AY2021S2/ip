@@ -9,15 +9,15 @@ public class Event extends Task {
     /**
      * Creates a event Task with given task name and given comments/dates.
      *
-     * @param taskName name of the task.
-     * @param date     dates or comments of the user regarding the task.
+     * @param taskContent content of the user task in String.
+     * @param date dates or comments of the user regarding the task.
      */
-    public Event(String taskName, String date) {
-        super(taskName, date);
+    public Event(String taskContent, String date) {
+        super(taskContent, date);
     }
 
-    public Event(String taskName, String date, String done) {
-        super(taskName, date, done);
+    public Event(String taskContent, String date, String done) {
+        super(taskContent, date, done);
     }
 
     @Override

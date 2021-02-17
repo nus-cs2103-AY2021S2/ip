@@ -23,6 +23,7 @@ public class Ui {
     public static final String GREETING = "** Awww, need help ah? **";
     public static final String EMPTY_FILE = "*Awwww~ You don't have any history of tasks *";
     public static final String SUCESSFUL_LOAD = "*Sir, here is your past history: *\n";
+    public static final String EMPTY_LIST = "Awwww, there is nothing in the list yet";
 
     /**
      * Display a message to indicate the given task as done.
