@@ -48,9 +48,14 @@ public class Ui {
         System.out.println(H_RULE);
     }
 
-    public String printDone(Task task) {
-        System.out.println("Alright, I will mark this as done.\n" + task.toString());
-        return "Alright, I will mark this as done.\n" + task.toString();
+    public String printDone(List<Task> tasks) {
+        String doneString = "Alright, I will mark " + (tasks.size() > 1 ? "these" : "this") + " as done.\n";
+        for (Task t : tasks) {
+            doneString += t.toString();
+            doneString += "\n";
+        }
+        System.out.println(doneString);
+        return doneString;
     }
 
     public String printAdded(Task task, int count) {
@@ -58,9 +63,21 @@ public class Ui {
         return "Added " + task.getName() + ". \nYou now have " + count + " items in your list.";
     }
 
-    public String printRemoved(int index) {
-        System.out.println("I have removed item " + index + ".");
-        return "I have removed item " + index + ".";
+    public String printRemoved(List<Task> removedTasks) {
+        if (removedTasks.size() == 1) {
+            System.out.println("I have removed this item: \n" + removedTasks.get(0).toString());
+            return "I have removed this item: \n" + removedTasks.get(0).toString();
+        } else {
+            String removedString = "I have removed the following " + removedTasks.size() + " items: \n";
+            for (Task t : removedTasks) {
+                assert t != null: "Item removed should not be null. ";
+                removedString = removedString + t.toString() + "\n";
+            }
+            removedString = removedString.strip();
+            System.out.println(removedString);
+            return removedString;
+        }
+
     }
 
     public String printSearch(List<Task> tasks, String searchString) {
@@ -73,6 +90,11 @@ public class Ui {
             out = out + t.toString() + "\n";
         }
         return out;
+    }
+
+    public String printSorry() {
+        System.out.println("Sorry, could you repeat please? ");
+        return "Sorry, could you repeat please? ";
     }
 
 }

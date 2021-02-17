@@ -1,16 +1,31 @@
 public class ParserOutput {
     private boolean bye;
     private Task task;
-    private int index;
+    private int[] index;
     private int action;
     private String searchString;
+    private ParserOutput pipeInput;
+    private int nextAction;
 
-    private ParserOutput(boolean bye, Task task, int action, int index) {
+    private ParserOutput(boolean bye, Task task, int action, int ... index) {
         assert bye != true || action > 0: "If not a bye, action cannot be none. ";
         this.bye = bye;
         this.task = task;
         this.action = action;
         this.index = index;
+    }
+
+    public ParserOutput setPipeInput(ParserOutput pipeInput) {
+        this.pipeInput = pipeInput;
+        return this;
+    }
+
+    private ParserOutput(int nextAction, boolean bye, Task task, int action) {
+        assert bye != true || action > 0: "If not a bye, action cannot be none. ";
+        this.bye = bye;
+        this.task = task;
+        this.action = action;
+        this.nextAction = nextAction;
     }
 
     private void setSearch(String searchString) {
@@ -30,7 +45,7 @@ public class ParserOutput {
      * @param index index of task to be removed
      * @return ParserOutput with action set to 1, and index set to given index
      */
-    public static ParserOutput removeOutput(int index) {
+    public static ParserOutput removeOutput(int... index) {
         return new ParserOutput(false, null, 1, index);
     }
 
@@ -39,7 +54,7 @@ public class ParserOutput {
      * @param index index of task to be set to done
      * @return ParserOutput with action set to 2, and index set to given index
      */
-    public static ParserOutput doneOutput(int index) {
+    public static ParserOutput doneOutput(int... index) {
         return new ParserOutput(false, null, 2, index);
     }
 
@@ -66,6 +81,18 @@ public class ParserOutput {
         return new ParserOutput(false, null, 5, 0);
     }
 
+    public static ParserOutput pipeOutput(ParserOutput firstPart, int nextAction) {
+        return new ParserOutput(nextAction, false, null, 6).setPipeInput(firstPart);
+    }
+
+    public ParserOutput getPipeInput() {
+        return this.pipeInput;
+    }
+
+    public int getNextAction() {
+        return this.nextAction;
+    }
+
     /**
      * Returns if bye is true.
      * @return value of bye
@@ -78,7 +105,7 @@ public class ParserOutput {
      * Getter for index.
      * @return index
      */
-    public int getIndex() {
+    public int[] getIndex() {
         return index;
     }
 

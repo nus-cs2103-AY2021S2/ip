@@ -67,14 +67,18 @@ public class Duke extends Application {
     private void readParse(ParserOutput parserOutput) {
         switch (parserOutput.getAction()) {
         case 1: //remove
-            this.taskList.remove(parserOutput.getIndex());
-            ui.printRemoved(parserOutput.getIndex());
+            List<Task> removedTasks = this.taskList.remove(parserOutput.getIndex());
+            ui.printRemoved(removedTasks);
             break;
         case 2: //done
-            Task doneTask = this.taskList.get(parserOutput.getIndex());
-            doneTask.markDone();
-            this.taskList.set(parserOutput.getIndex(), doneTask);
-            ui.printDone(doneTask);
+            int[] indexes = parserOutput.getIndex();
+            List<Task> doneTasks = this.taskList.get(indexes);
+            for (Task t : doneTasks) {
+                t.markDone();
+                System.out.println(t.getName());
+                this.taskList.set(parserOutput.getIndex(), t);
+            }
+            ui.printDone(doneTasks);
             break;
         case 3: //add
             this.taskList.add(parserOutput.getTask());
@@ -87,31 +91,63 @@ public class Duke extends Application {
         case 5: //list
             ui.printList(this.taskList);
             break;
+        case 6: //piped
+            indexes = getPipeInput(parserOutput);
+            int nextAction = parserOutput.getNextAction();
+            if (nextAction == 1) {
+                readParse(ParserOutput.removeOutput(indexes));
+            } else if (nextAction == 2) {
+                readParse((ParserOutput.doneOutput(indexes)));
+            } else {
+                ui.printSorry();
+            }
         default:
-            //TODO: add exception for this
+            ui.printSorry();
+        }
+    }
+
+    private int[] getPipeInput(ParserOutput in) {
+        if (in.getPipeInput().getAction() == 4) {
+            return this.taskList.findIndex(in.getPipeInput().getSearchString());
+        } else if (in.getPipeInput().getAction() == 5){
+            return this.taskList.listIndex();
+        } else {
+            return null; //TODO: add exception for this
         }
     }
 
     private String readParseGui(ParserOutput parserOutput) {
         switch (parserOutput.getAction()) {
-        case 1: //remove
-            this.taskList.remove(parserOutput.getIndex());
-            return ui.printRemoved(parserOutput.getIndex());
-        case 2: //done
-            Task doneTask = this.taskList.get(parserOutput.getIndex());
-            doneTask.markDone();
-            this.taskList.set(parserOutput.getIndex(), doneTask);
-            return ui.printDone(doneTask);
-        case 3: //add
-            this.taskList.add(parserOutput.getTask());
-            return ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
-        case 4: //find
-            List<Task> results = this.taskList.find(parserOutput.getSearchString());
-            return ui.printSearch(results, parserOutput.getSearchString());
-        case 5: //list
-            return Ui.printList(this.taskList);
-        default:
-            return "Sorry, could you repeat please? ";
+            case 1: //remove
+                List<Task> removedTasks = this.taskList.remove(parserOutput.getIndex());
+                return ui.printRemoved(removedTasks);
+            case 2: //done
+                List<Task> doneTasks = this.taskList.get(parserOutput.getIndex());
+                for (Task t : doneTasks) {
+                    t.markDone();
+                    this.taskList.set(parserOutput.getIndex(), t);
+                }
+                return ui.printDone(doneTasks);
+            case 3: //add
+                this.taskList.add(parserOutput.getTask());
+                return ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
+            case 4: //find
+                List<Task> results = this.taskList.find(parserOutput.getSearchString());
+                return ui.printSearch(results, parserOutput.getSearchString());
+            case 5: //list
+                return ui.printList(this.taskList);
+            case 6: //piped
+                int[] indexes = getPipeInput(parserOutput);
+                int nextAction = parserOutput.getNextAction();
+                if (nextAction == 1) {
+                    return readParseGui(ParserOutput.removeOutput(indexes));
+                } else if (nextAction == 2) {
+                    return readParseGui((ParserOutput.doneOutput(indexes)));
+                } else {
+                    return ui.printSorry();
+                }
+            default:
+                return ui.printSorry();
         }
     }
 

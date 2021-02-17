@@ -47,8 +47,8 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
-run{
+run {
     standardInput = System.in
 }

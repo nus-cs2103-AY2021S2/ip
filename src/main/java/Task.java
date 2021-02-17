@@ -1,10 +1,22 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Task {
     private boolean done;
     private String name;
+    private List<String> tags;
 
     Task(String name) {
         this.name = name;
         this.done = false;
+        this.tags = new ArrayList<>();
+    }
+
+    Task(String name, String[] tags) {
+        this.name = name;
+        this.done = false;
+        this.tags = Arrays.asList(tags);
     }
 
     void markDone() {
@@ -27,5 +39,9 @@ public class Task {
 
     public String getName() {
         return this.name;
+    }
+
+    public List<String> getTags() {
+        return this.tags;
     }
 }
