@@ -14,16 +14,16 @@ import duke.ui.DukeResponses;
  */
 public class DeadlineCommand extends Command{
     private String deadlineDescription;
-    private String period;
+    private String date;
 
     /**
      * Constructor: creates a new DeadlineCommand
      * @param deadlineDescription description of Deadline
-     * @param period period of Deadline
+     * @param date period of Deadline
      */
-    public DeadlineCommand(String deadlineDescription, String period) {
+    public DeadlineCommand(String deadlineDescription, String date) {
         this.deadlineDescription = deadlineDescription;
-        this.period = period;
+        this.date = date;
     }
 
     /**
@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command{
      */
     public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
         try {
-            Task deadline = new Deadline(deadlineDescription, period);
+            Task deadline = new Deadline(deadlineDescription, date);
             tasks.addTask(deadline);
             storage.saveFile(tasks.getTaskList());
             return dukeResponses.showAddTask(deadline, tasks);
