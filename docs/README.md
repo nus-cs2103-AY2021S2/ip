@@ -130,6 +130,7 @@ Example:
 
 ## Command Summary
 
+
 **Action**  | **Format, Examples**
 --------|-----------------
 **Add todo** |  `todo description`e.g, `add todo watch netflix `
