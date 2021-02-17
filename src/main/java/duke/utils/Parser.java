@@ -32,7 +32,7 @@ public class Parser {
      */
     public final Command parse() {
         String[] validInputs = extractValidInput();
-        if (validInputs[0].equals("")) {
+        if (validInputs[0] == null) {
             return new ErrorCommand();
         }
 
@@ -182,7 +182,6 @@ public class Parser {
             validInputs[2] = date;
         } catch (DukeException e) {
             ErrorBox.display(e.getMessage());
-
         }
 
         return validInputs;
