@@ -12,7 +12,7 @@ import soonkeatneo.duke.task.Todo;
 /**
  * Stores and manages the list of {@Task} created.
  * @author Soon Keat Neo
- * @version CS2103T AY20/21 Sem 2 iP v0.1
+ * @version CS2103T AY20/21 Sem 2 iP
  */
 public class TaskList {
     private static List<Task> taskList;
@@ -134,7 +134,14 @@ public class TaskList {
             String typeOfTask = deletedTask.getType();
             String completionOfTask = (deletedTask.getDone() ? "1" : "0");
             String descriptionOfTask = deletedTask.getDescription().strip();
-            String oldString = typeOfTask + " | " + completionOfTask + " | " + descriptionOfTask + "\n";
+            String oldString = typeOfTask + " | " + completionOfTask + " | " + descriptionOfTask;
+            if (deletedTask.getType() == "E") {
+                Event eventTask = (Event) deletedTask;
+                oldString += " | " + eventTask.getDate();
+            } else if (deletedTask.getType() == "D") {
+                Deadline deadlineTask = (Deadline) deletedTask;
+                oldString += " | " + deadlineTask.getDate();
+            }
             storage.deleteReplaceTaskFromDisk(oldString, "");
             message += "Okie! I've deleted the task from your list:\n";
             message += deletedTask.toString();
