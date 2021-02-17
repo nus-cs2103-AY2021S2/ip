@@ -76,9 +76,9 @@ yarn clean
 
 ### Things to Note
 
-`docs/.vitepress/components/DownloadLink.vue` is a Vue.js component that calles our Netlify function to get the link to the latest release of Elaina executable.
-
-`docs/netlify/functions/jar_url.js` is the Netlify function that fetches the URL to the latest release of Elaina executable using GitHub REST API.
+- `docs/.vitepress/components/DownloadLink.vue` is a Vue.js component that calles our Netlify function to get the link to the latest release of Elaina executable.
+- `docs/netlify/functions/jar_url.js` is the Netlify function that fetches the URL to the latest release of Elaina executable using GitHub REST API.
+- `docs/CNAME` is there so that GitHub pages will automatically send a `301` response for requests made to the default GitHub pages URL to redirect to <elaina.lirc572.com> if GitHub pages is enabled. GitHub may send you an email about incorrect DNS records, but it can be ignored since we only enabled GitHub pages for its redirection function.
 
 ## DevOps
 
