@@ -7,7 +7,7 @@ This application
 ## Features
 ### Overview:
 Features | Syntax
--------- | ------
+-------------- | --------------
 Show help menu | `help`
 Show all tasks | `list`
 Find tasks | `find <keyword/keyphrase>`
