@@ -89,7 +89,7 @@ public class Parser {
      */
     private static AddCommand handleToDo(String[] split, String userInput, TaskList tasks) throws DukeArgumentException {
         checkStringArgument(split, COMMAND.TODO);
-        String description = userInput.substring(5);
+        String description = userInput.substring(5).trim();
         assert(!description.isBlank());
         Task toAdd = new ToDo(description);
         Cache.cache(toAdd, tasks.getSize(), COMMAND.TODO);
@@ -115,7 +115,7 @@ public class Parser {
         String[] taskDetails = userInput.substring(detailsIdx).split(regex);
         checkDateTime(taskDetails);
         assert(taskDetails.length == 2);
-        String description = taskDetails[0];
+        String description = taskDetails[0].trim();
         assert(!description.isBlank());
         LocalDateTime dateTime = LocalDateTime.parse(taskDetails[1].trim(), formatter);
         Task toAdd = command.equals(COMMAND.DEADLINE) ? new Deadline(description, dateTime)
@@ -134,7 +134,7 @@ public class Parser {
      */
     private static FindCommand handleFind(String[] split, String userInput) throws DukeArgumentException {
         checkStringArgument(split, COMMAND.FIND);
-        String keyword = userInput.substring(5);
+        String keyword = userInput.substring(5).trim();
         return new FindCommand(keyword);
     }
 
