@@ -41,7 +41,9 @@ public class MainWindow extends AnchorPane {
      * Greets the user
      */
     public void greetUser() {
+
         String greeting = "Hey I am Duke! How can I help you?";
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greeting, dukeImage)
         );

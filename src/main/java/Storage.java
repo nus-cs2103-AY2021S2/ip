@@ -94,11 +94,7 @@ public class Storage {
      */
     public Boolean convertToBool(String numString) {
         assert numString.equals("0") || numString.equals("1") : "Wrong value of numString";
-        if (numString.equals("1")) {
-            return true;
-        } else {
-            return false;
-        }
+        return numString.equals("1");
 
     }
 

@@ -45,7 +45,7 @@ class TaskList {
             output += i + 1 + "." + task.toString() + "\n";
 
         }
-        output += "\n" + ui.getLine();
+        output += ui.getLine();
 
         return output;
     }
@@ -140,7 +140,7 @@ class TaskList {
                 output += i + 1 + "." + task.toString() + "\n";
 
             }
-            output += "\n" + ui.getLine();
+            output += ui.getLine();
         }
         return output;
     }

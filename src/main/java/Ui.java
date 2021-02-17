@@ -8,7 +8,7 @@ class Ui {
      * @return String representing a dotted line
      */
     public String getLine() {
-        String formatLine = "....................................................";
+        String formatLine = "...................................................................";
         return formatLine;
     }
 
