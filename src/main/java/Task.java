@@ -29,7 +29,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", done ? "✓" : "✗", info);
+        return String.format("[%s] %s", done ? "O" : "X", info);
     }
 
     /**

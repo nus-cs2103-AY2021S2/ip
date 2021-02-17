@@ -10,7 +10,7 @@ public class TodoTaskTest {
 
         assertEquals(false, t.getCompletionState());
         assertEquals("read book", t.getTaskInfo());
-        assertEquals("[T][✗] read book", t.toString());
+        assertEquals("[T][X] read book", t.toString());
     }
 
     @Test
@@ -19,13 +19,13 @@ public class TodoTaskTest {
 
         assertEquals(false, t.getCompletionState());
         assertEquals("read book", t.getTaskInfo());
-        assertEquals("[T][✗] read book", t.toString());
+        assertEquals("[T][X] read book", t.toString());
 
         t.setTaskAsDone();
 
         assertEquals(true, t.getCompletionState());
         assertEquals("read book", t.getTaskInfo());
-        assertEquals("[T][✓] read book", t.toString());
+        assertEquals("[T][O] read book", t.toString());
     }
 
     @Test

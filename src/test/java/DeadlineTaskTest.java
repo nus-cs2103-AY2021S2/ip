@@ -11,7 +11,7 @@ public class DeadlineTaskTest {
         assertEquals(false, t.getCompletionState());
         assertEquals("return book", t.getTaskInfo());
         assertEquals("Mar 02 2020 1400", t.getDeadline());
-        assertEquals("[D][✗] return book (by: Mar 02 2020 1400)", t.toString());
+        assertEquals("[D][X] return book (by: Mar 02 2020 1400)", t.toString());
     }
 
     @Test
@@ -21,14 +21,14 @@ public class DeadlineTaskTest {
         assertEquals(false, t.getCompletionState());
         assertEquals("return book", t.getTaskInfo());
         assertEquals("Mar 02 2020 1400", t.getDeadline());
-        assertEquals("[D][✗] return book (by: Mar 02 2020 1400)", t.toString());
+        assertEquals("[D][X] return book (by: Mar 02 2020 1400)", t.toString());
 
         t.setTaskAsDone();
 
         assertEquals(true, t.getCompletionState());
         assertEquals("return book", t.getTaskInfo());
         assertEquals("Mar 02 2020 1400", t.getDeadline());
-        assertEquals("[D][✓] return book (by: Mar 02 2020 1400)", t.toString());
+        assertEquals("[D][O] return book (by: Mar 02 2020 1400)", t.toString());
     }
 
     @Test

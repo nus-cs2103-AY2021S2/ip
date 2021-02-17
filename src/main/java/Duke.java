@@ -111,8 +111,8 @@ public class Duke extends Application {
             return taskList.executeEvent(tokenizedInput);
         case "find":
             return taskList.executeFind(tokenizedInput);
-            case "archive":
-                return taskList.executeArchive(tokenizedInput);
+        case "archive":
+            return taskList.executeArchive(tokenizedInput);
         default:
             throw new DukeInvalidInputException(input);
         }

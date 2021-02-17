@@ -9,7 +9,7 @@ public class TaskTest {
 
         assertFalse(t.getCompletionState());
         assertEquals("testing task", t.getTaskInfo());
-        assertEquals("[✗] testing task", t.toString());
+        assertEquals("[X] testing task", t.toString());
     }
 
     @Test

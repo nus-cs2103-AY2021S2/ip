@@ -1,12 +1,7 @@
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
@@ -48,8 +43,8 @@ public class DukeTest {
         Duke.parseInput("todo test task to find 2");
 
         assertEquals("Here are the matching tasks in your list:\n"+
-            "2.[T][✗] test task to find 1\n" +
-            "4.[T][✗] test task to find 2", 
+            "2.[T][X] test task to find 1\n" +
+            "4.[T][X] test task to find 2",
             Duke.parseInput("find to find"));
     }
 
@@ -172,12 +167,12 @@ public class DukeTest {
         Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
-        final String expectedOutput = "Got it. I've added this task:\n  [D][✗] return book (by: Mar 02 2020 1400)\nNow you have 1 tasks in the list.";
+        final String expectedOutput = "Got it. I've added this task:\n  [D][X] return book (by: Mar 02 2020 1400)\nNow you have 1 tasks in the list.";
         assertEquals(expectedOutput, Duke.parseInput("deadline return book /by 02/03/2020 1400"));
 
         assertEquals("return book", Duke.storage.tasks.get(0).getTaskInfo());
         assertEquals(false, Duke.storage.tasks.get(0).getCompletionState());
-        assertEquals("[D][✗] return book (by: Mar 02 2020 1400)", Duke.storage.tasks.get(0).toString());
+        assertEquals("[D][X] return book (by: Mar 02 2020 1400)", Duke.storage.tasks.get(0).toString());
         assertTrue(Duke.storage.tasks.get(0) instanceof DeadlineTask);
     }
 
@@ -187,12 +182,12 @@ public class DukeTest {
         Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
-        final String expectedOutput = "Got it. I've added this task:\n  [E][✗] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.";
+        final String expectedOutput = "Got it. I've added this task:\n  [E][X] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.";
         assertEquals(expectedOutput, Duke.parseInput("event project meeting /at 01/03/2020 1400"));
 
         assertEquals("project meeting", Duke.storage.tasks.get(0).getTaskInfo());
         assertEquals(false, Duke.storage.tasks.get(0).getCompletionState());
-        assertEquals("[E][✗] project meeting (at: Mar 01 2020 1400)", Duke.storage.tasks.get(0).toString());
+        assertEquals("[E][X] project meeting (at: Mar 01 2020 1400)", Duke.storage.tasks.get(0).toString());
         assertTrue(Duke.storage.tasks.get(0) instanceof EventTask);
     }
 
@@ -202,12 +197,12 @@ public class DukeTest {
         Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
-        final String expectedOutput = "Got it. I've added this task:\n  [T][✗] borrow book\nNow you have 1 tasks in the list.";
+        final String expectedOutput = "Got it. I've added this task:\n  [T][X] borrow book\nNow you have 1 tasks in the list.";
         assertEquals(expectedOutput, Duke.parseInput("todo borrow book"));
 
         assertEquals("borrow book", Duke.storage.tasks.get(0).getTaskInfo());
         assertEquals(false, Duke.storage.tasks.get(0).getCompletionState());
-        assertEquals("[T][✗] borrow book", Duke.storage.tasks.get(0).toString());
+        assertEquals("[T][X] borrow book", Duke.storage.tasks.get(0).toString());
         assertTrue(Duke.storage.tasks.get(0) instanceof TodoTask);
     }
 
@@ -224,10 +219,10 @@ public class DukeTest {
 
         Duke.chatLoop(in, out);
 
-        final String expectedOutput = "Got it. I've added this task:\n  [E][✗] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.\n"
-                + "1.[E][✗] project meeting (at: Mar 01 2020 1400)\n"
-                + "Nice! I've marked this task as done:\n  [E][✓] project meeting (at: Mar 01 2020 1400)\n"
-                + "1.[E][✓] project meeting (at: Mar 01 2020 1400)\n";
+        final String expectedOutput = "Got it. I've added this task:\n  [E][X] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.\n"
+                + "1.[E][X] project meeting (at: Mar 01 2020 1400)\n"
+                + "Nice! I've marked this task as done:\n  [E][O] project meeting (at: Mar 01 2020 1400)\n"
+                + "1.[E][O] project meeting (at: Mar 01 2020 1400)\n";
         assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
@@ -244,10 +239,10 @@ public class DukeTest {
 
         Duke.chatLoop(in, out);
 
-        final String expectedOutput = "Got it. I've added this task:\n  [D][✗] return book (by: Mar 01 2020 1400)\nNow you have 1 tasks in the list.\n"
-                + "1.[D][✗] return book (by: Mar 01 2020 1400)\n"
-                + "Nice! I've marked this task as done:\n  [D][✓] return book (by: Mar 01 2020 1400)\n"
-                + "1.[D][✓] return book (by: Mar 01 2020 1400)\n";
+        final String expectedOutput = "Got it. I've added this task:\n  [D][X] return book (by: Mar 01 2020 1400)\nNow you have 1 tasks in the list.\n"
+                + "1.[D][X] return book (by: Mar 01 2020 1400)\n"
+                + "Nice! I've marked this task as done:\n  [D][O] return book (by: Mar 01 2020 1400)\n"
+                + "1.[D][O] return book (by: Mar 01 2020 1400)\n";
         assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
@@ -264,9 +259,9 @@ public class DukeTest {
 
         Duke.chatLoop(in, out);
 
-        final String expectedOutput = "Got it. I've added this task:\n  [T][✗] borrow book\nNow you have 1 tasks in the list.\n"
-                + "1.[T][✗] borrow book\n" + "Nice! I've marked this task as done:\n  [T][✓] borrow book\n"
-                + "1.[T][✓] borrow book\n";
+        final String expectedOutput = "Got it. I've added this task:\n  [T][X] borrow book\nNow you have 1 tasks in the list.\n"
+                + "1.[T][X] borrow book\n" + "Nice! I've marked this task as done:\n  [T][O] borrow book\n"
+                + "1.[T][O] borrow book\n";
         assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
@@ -283,10 +278,10 @@ public class DukeTest {
 
         Duke.chatLoop(in, out);
 
-        final String expectedOutput = "Got it. I've added this task:\n  [T][✗] help people\nNow you have 1 tasks in the list.\n"
-                + "Got it. I've added this task:\n  [T][✗] help myself\nNow you have 2 tasks in the list.\n"
-                + "Nice! I've marked this task as done:\n  [T][✓] help people\n" + "1.[T][✓] help people\n"
-                + "2.[T][✗] help myself\n";
+        final String expectedOutput = "Got it. I've added this task:\n  [T][X] help people\nNow you have 1 tasks in the list.\n"
+                + "Got it. I've added this task:\n  [T][X] help myself\nNow you have 2 tasks in the list.\n"
+                + "Nice! I've marked this task as done:\n  [T][O] help people\n" + "1.[T][O] help people\n"
+                + "2.[T][X] help myself\n";
         assertEquals(expectedOutput, new String(out.toByteArray()).replace("\r",""));
     }
 
@@ -299,14 +294,14 @@ public class DukeTest {
         // Test
         assertEquals("help people", Duke.storage.tasks.get(0).getTaskInfo());
         assertEquals(false, Duke.storage.tasks.get(0).getCompletionState());
-        assertEquals("[T][✗] help people", Duke.storage.tasks.get(0).toString());
+        assertEquals("[T][X] help people", Duke.storage.tasks.get(0).toString());
 
-        final String expectedOutput = "Nice! I've marked this task as done:\n  [T][✓] help people";
+        final String expectedOutput = "Nice! I've marked this task as done:\n  [T][O] help people";
         assertEquals(expectedOutput, Duke.parseInput("done 1"));
 
         assertEquals("help people", Duke.storage.tasks.get(0).getTaskInfo());
         assertEquals(true, Duke.storage.tasks.get(0).getCompletionState());
-        assertEquals("[T][✓] help people", Duke.storage.tasks.get(0).toString());
+        assertEquals("[T][O] help people", Duke.storage.tasks.get(0).toString());
     }
 
     @Test
@@ -319,7 +314,7 @@ public class DukeTest {
 
         assertEquals("help people", Duke.storage.tasks.get(tasksStateLength).getTaskInfo());
         assertEquals(false, Duke.storage.tasks.get(tasksStateLength).getCompletionState());
-        assertEquals("[T][✗] help people", Duke.storage.tasks.get(tasksStateLength).toString());
+        assertEquals("[T][X] help people", Duke.storage.tasks.get(tasksStateLength).toString());
     }
 
     @Test
@@ -345,7 +340,7 @@ public class DukeTest {
         Duke.parseInput("todo blah");
         Duke.parseInput("todo read book");
 
-        final String expectedString = "1.[T][✗] help people\n2.[T][✗] blah\n3.[T][✗] read book";
+        final String expectedString = "1.[T][X] help people\n2.[T][X] blah\n3.[T][X] read book";
 
         // Test
         assertEquals(expectedString, Duke.parseInput("list"));

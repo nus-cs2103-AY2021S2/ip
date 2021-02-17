@@ -11,7 +11,7 @@ public class EventTaskTest {
         assertEquals(false, t.getCompletionState());
         assertEquals("group meeting", t.getTaskInfo());
         assertEquals("Mar 02 2020 1400", t.getDate());
-        assertEquals("[E][✗] group meeting (at: Mar 02 2020 1400)", t.toString());
+        assertEquals("[E][X] group meeting (at: Mar 02 2020 1400)", t.toString());
     }
 
     @Test
@@ -21,14 +21,14 @@ public class EventTaskTest {
         assertEquals(false, t.getCompletionState());
         assertEquals("group meeting", t.getTaskInfo());
         assertEquals("Mar 02 2020 1400", t.getDate());
-        assertEquals("[E][✗] group meeting (at: Mar 02 2020 1400)", t.toString());
+        assertEquals("[E][X] group meeting (at: Mar 02 2020 1400)", t.toString());
 
         t.setTaskAsDone();
 
         assertEquals(true, t.getCompletionState());
         assertEquals("group meeting", t.getTaskInfo());
         assertEquals("Mar 02 2020 1400", t.getDate());
-        assertEquals("[E][✓] group meeting (at: Mar 02 2020 1400)", t.toString());
+        assertEquals("[E][O] group meeting (at: Mar 02 2020 1400)", t.toString());
     }
 
     @Test

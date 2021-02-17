@@ -49,7 +49,7 @@ public class TaskList {
     protected String executeDelete(HashMap<String, String> tokenizedInput) {
         // TODO: Add Exception for out of range deletion
         Task t = storage.tasks.remove(Integer.parseInt(tokenizedInput.get("info")) - 1);
-        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d storage.tasks in the list.",
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
                 t.toString(), storage.tasks.size());
     }
 
@@ -86,7 +86,7 @@ public class TaskList {
             e.printStackTrace();
         }
 
-        return String.format("Got it. I've archived this task:\n  %s\nNow you have %d tasks in the list.", t.toString(),
+        return String.format("Got it. I've added this task:\n  [E][X] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.", t.toString(),
                 storage.tasks.size());
     }
 }
