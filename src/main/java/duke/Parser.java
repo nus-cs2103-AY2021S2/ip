@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 
 public class Parser {
-    public TaskList taskList;
-    public boolean isExit;
+    private TaskList taskList;
+    private boolean isExit;
 
     /**
      * Instantiates the Parser with attributes.
@@ -18,6 +18,9 @@ public class Parser {
         this.taskList = taskList;
         this.isExit = false;
     }
+    public boolean getIsExit() {
+        return isExit;
+    }
 
     /**
      * This parses and executes relevant comments from the tasklist
@@ -25,7 +28,7 @@ public class Parser {
      * @throws DukeException an exception due to errors in parsing text
      */
     public String executeCommand(String command) throws DukeException {
-        String arr[] = command.split(" ", 2);
+        String[] arr = command.split(" ", 2);
         String firstWord = arr[0];
         String reply = "";
         switch (firstWord) {
@@ -44,6 +47,7 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Enter an integer only");
             }
+            break;
         case "find":
             String toFind = arr[1];
             reply = taskList.findTasks(toFind);
@@ -51,7 +55,6 @@ public class Parser {
         case "delete":
             try {
                 String num = arr[1];
-//                reply = taskList.deleteTask(Integer.valueOf(num));
                 ArrayList<Integer> tasksToDelete = getTaskNumbers(num);
                 reply = taskList.deleteMultipleTasks(tasksToDelete);
             } catch (NumberFormatException e) {
@@ -85,27 +88,45 @@ public class Parser {
         return reply;
     }
 
-
-    public String getDateTime(String text, String search) throws DukeException {
+    /**
+     * Parses the input text to return the deadline or event date/time.
+     * @param text input text containing task description and date/time
+     * @param delimiter the delimiter to parse the input text
+     * @return the date/time in the input text
+     * @throws DukeException thrown when the input text does not contain the required delimiter
+     */
+    public String getDateTime(String text, String delimiter) throws DukeException {
         //TODO handle case when text does not contain "/at" or "/by"
-        int index = text.indexOf(search);
+        int index = text.indexOf(delimiter);
         if (index == -1) {
-            throw new DukeException("Statement does not contain " + search);
+            throw new DukeException("Statement does not contain " + delimiter);
         }
         return text.substring(index + 5);
     }
 
-    public String getMessage(String text, String search) throws DukeException {
+    /**
+     * Parses the input text to return the task description.
+     * @param text input text containing task description and date/time
+     * @param delimiter the delimiter to parse the input text
+     * @return the task description from the input text
+     * @throws DukeException thrown when the input text does not contain the required delimiter
+     */
+    public String getMessage(String text, String delimiter) throws DukeException {
         //TODO handle case when text does not contain "/at" or "/by"
-        int index = text.indexOf(search);
+        int index = text.indexOf(delimiter);
         if (index == -1) {
-            throw new DukeException("Statement does not contain " + search);
+            throw new DukeException("Statement does not contain " + delimiter);
         }
         return text.substring(0, index);
     }
 
+    /**
+     * Converts a string of numbers to integer format and stores it an ArrayList.
+     * @param num a string of numbers
+     * @return an ArrayList of integers
+     */
     public ArrayList<Integer> getTaskNumbers(String num) {
-        String splitNum[] = num.split(" ");
+        String[] splitNum = num.split(" ");
         ArrayList<Integer> listOfTaskNumbers = new ArrayList<>();
         for (String value: splitNum) {
             listOfTaskNumbers.add(Integer.valueOf(value));

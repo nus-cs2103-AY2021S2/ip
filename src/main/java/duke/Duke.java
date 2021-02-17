@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Duke is the main class that runs the whole program.
  *
@@ -21,8 +19,7 @@ public class Duke {
         try {
             this.taskList = new TaskList(storage.loadFile());
             this.ui.loadingSuccess();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             this.ui.showError(e.getMessage());
             this.taskList = new TaskList();
             this.ui.loadingFailure();
@@ -30,10 +27,9 @@ public class Duke {
     }
 
     /**
-     * This is the driver of the program.
+     * Drives the program.
      * Parser class in initialised here and user inputs are parsed and
      * processed to generate a response.
-     * DukeExceptions are caught and handled here
      */
     public String run (String input) {
         String dukeResponse;
@@ -43,9 +39,9 @@ public class Duke {
         } catch (DukeException e) {
             dukeResponse = e.getMessage();
         }
-        if (exec.isExit) {
+        if (exec.getIsExit()) {
             try {
-                this.storage.saveFile(this.taskList.listOfTasks);
+                this.storage.saveFile(this.taskList.getListOfTasks());
             } catch (DukeException e) {
                 dukeResponse = e.getMessage();
             }

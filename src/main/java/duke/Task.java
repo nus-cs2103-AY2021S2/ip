@@ -9,7 +9,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Task constructor instatiates a task class
+     * Task constructor instantiates a task class
      * @param taskDescription
      */
     public Task(String taskDescription) {

@@ -12,20 +12,24 @@ import java.util.Scanner;
  */
 public class Storage {
     public static final String DEFAULT_STORAGE_FILE = "data/duke.txt";
-    public String filePath;
-    public File f;
+    private File f;
+    private String filePath;
 
+    /**
+     * Constructs a Storage with a specified path.
+     * @param filePath file path of where task data is stored
+     * @throws DukeException throws exception if the filePath is invalid
+     */
     public Storage(String filePath) throws DukeException {
         if (!isValidFileExtension(filePath)) {
             throw new DukeException("\t\tFile should end with .txt extension");
         }
         this.filePath = filePath;
         this.f = new File(filePath);
-
     }
 
     /**
-     * Constucts an instance of the Storage class.
+     * Constructs an instance of the Storage class.
      */
     public Storage() {
         this.filePath = "data";
@@ -56,8 +60,7 @@ public class Storage {
             while (sc.hasNext()) {
                 taskArr.add(stringToTask(sc.nextLine()));
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException("File not found!");
         }
         return taskArr;
@@ -76,8 +79,7 @@ public class Storage {
                 fw.write(taskToString(t) + "\n");
             }
             fw.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Error saving the Tasks into a file");
         }
     }
@@ -88,8 +90,8 @@ public class Storage {
      * @return Returns the task object
      * @throws DukeException throws exception
      */
-    public Task stringToTask(String task) throws DukeException{
-        String arr[] = task.split(", ");
+    public Task stringToTask(String task) throws DukeException {
+        String[] arr = task.split(", ");
         Task result;
         if (arr.length == 0) {
             throw new DukeException("Read invalid task from the file");
@@ -131,7 +133,7 @@ public class Storage {
     /**
      * Converts Tasks to string
      * @param task the task object that need to be converted to a String
-     * @return throws exception 
+     * @return throws exception
      */
     public String taskToString(Task task) {
         int num = 0;
@@ -144,7 +146,7 @@ public class Storage {
             result = "E, " + num
                     + ", " + task.taskDescription
                     + ", " + ((Event) task).at;
-        } else if (task instanceof Deadline){
+        } else if (task instanceof Deadline) {
             result = "D, " + num
                     + ", " + task.taskDescription
                     + ", " + ((Deadline) task).by;

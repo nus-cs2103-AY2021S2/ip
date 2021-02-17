@@ -1,1 +1,1 @@
-E, 0, meeting with professor, 2 Aug
+D, 0, finish ip, friday

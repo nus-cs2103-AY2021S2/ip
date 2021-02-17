@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Ui class is reponsible for outputs on the command line.
+ * Ui class is responsible for outputs on the command line.
  * The main Duke class is able to use this to print out the necessary output.
  */
 public class Ui {
