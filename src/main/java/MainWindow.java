@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        runTests();
     }
 
     /**
@@ -43,6 +44,39 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        String response = duke.getResponse(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
+
+        if (duke.hasExitCommandBeenSent()) {
+            handleExit();
+        }
+    }
+
+    /**
+     * This method simulates some user input on launcher startup, for easier testing.
+     */
+    private void runTests() {
+        String[] inputs = {
+                // "deadline read /by 3/4 2pm",
+                // "deadline read /by 2pm 3/4"
+                "list",
+                "todo hello",
+                "done 1",
+                "delete 1",
+                "find hello",
+                "list"
+        };
+
+        for (String i : inputs) {
+            runTest(i);
+        }
+    }
+
+    private void runTest(String input) {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
