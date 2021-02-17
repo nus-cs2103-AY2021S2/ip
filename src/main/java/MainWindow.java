@@ -7,14 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -53,8 +48,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void initializeComponentProperties() {
-        this.mainLayout.setPrefSize(400.0, 600.0);
-
+        this.mainLayout.setPrefSize(600.0, 600.0);
         this.scrollPane.setPrefSize(385.0, 535.0);
         this.scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         this.scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -71,7 +65,7 @@ public class MainWindow extends AnchorPane {
         this.dialogContainer.setPadding(new Insets(10.0, 10.0, 10.0, 10.0));
         this.dialogContainer.setSpacing(10.0);
 
-        this.userInput.setPrefWidth(325.0);
+        this.userInput.setPrefWidth(500.0);
 
         this.sendButton.setPrefWidth(55.0);
 
@@ -133,13 +127,13 @@ public class MainWindow extends AnchorPane {
         if (userText.trim().equals("")) {
             return;
         }
-        String elainaText = duke.getResponse(userInput.getText());
-        if (elainaText.equals("clear\n")) {
+        String dukeText = duke.getResponse(userInput.getText());
+        if (dukeText.equals("clear\n")) {
             this.dialogContainer.getChildren().clear();
         } else {
             this.dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userText, userImage),
-                    DialogBox.getDukeDialog(elainaText, dukeImage)
+                    DialogBox.getDukeDialog(dukeText, dukeImage)
             );
         }
         this.userInput.clear();
@@ -147,5 +141,12 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
             System.exit(0);
         }
+    }
+
+    public void printWelcomeMessage(Duke duke) {
+        String welcomeMessage = duke.greeting();
+        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                welcomeMessage, dukeImage
+        ));
     }
 }

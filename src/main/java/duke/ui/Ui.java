@@ -23,9 +23,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    private static String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    public static String line = "_______________________________________\n";
+    private static String logo = " ____           _        \n" +
+            "|   _  \\ _    _ | |    _____ \n" +
+            "|  |  |  |  |  |  |  | / /  _  \\\n" +
+            "|  |_|   |  |_|  |   <    ___/\n" +
+            "|____/ \\__,__|_|\\_\\_____|\n";
+    public static String line = "____________________________\n";
     //public static String indentation = "    ";
 
     public final Scanner sc;
@@ -57,7 +60,7 @@ public class Ui {
      * print greeting message
      */
     public String greeting() {
-        return logo + line + greetingMessage() + line;
+        return line + logo + greetingMessage();
     }
 
     /**
