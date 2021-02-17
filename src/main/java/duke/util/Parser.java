@@ -18,6 +18,11 @@ public class Parser {
      * @throws DukeInputException If input is invalid.
      */
     public static Pair<Command, String> parseInput(String input) throws DukeInputException {
+        // Do not allow ";" because save file uses semicolon as a delimiter.
+        if (input.contains(";")) {
+            throw new DukeInputException("Sorry! Semicolons \";\" are not allowed as input!");
+        }
+
         String[] s = input.split(" ", 2);
 
         Command command = getCommand(s[0]);
