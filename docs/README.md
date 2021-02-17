@@ -4,8 +4,8 @@ This application
 
 ---
 
-## Features
-### Overview:
+## Overview:
+
 Features | Syntax
 -------------- | --------------
 Show help menu | `help`
