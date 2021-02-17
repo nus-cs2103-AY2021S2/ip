@@ -1,4 +1,4 @@
-<center><img src="https://soonkeatneo.github.io/ip/Ui.png"/></center>
+<p align="center"><img src="https://soonkeatneo.github.io/ip/Ui.png"/></p>
 <h1 align="center">DukeNukem</h1>
 
 
