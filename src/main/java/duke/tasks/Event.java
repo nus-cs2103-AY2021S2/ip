@@ -8,7 +8,7 @@ import duke.parser.DateParser;
  * A type of Task that will happen at some point in the future.
  */
 public class Event extends Task {
-    
+
     protected String at;
     protected String atToPrint;
 

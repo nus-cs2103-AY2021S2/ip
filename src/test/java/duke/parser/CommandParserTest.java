@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.regex.Matcher;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -66,7 +67,7 @@ public class CommandParserTest {
         try {
             boolean expected = p.parseCommand() instanceof MarkTaskCommand;
             assertEquals(expected, true);
-        } catch (DukeCommandParseException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -77,7 +78,7 @@ public class CommandParserTest {
         try {
             boolean expected = p.parseCommand() instanceof ListCommand;
             assertEquals(expected, true);
-        } catch (DukeCommandParseException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -88,7 +89,7 @@ public class CommandParserTest {
         try {
             boolean expected = p.parseCommand() instanceof AddCommand;
             assertEquals(expected, true);
-        } catch (DukeCommandParseException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -99,7 +100,7 @@ public class CommandParserTest {
         try {
             boolean expected = p.parseCommand() instanceof AddCommand;
             assertEquals(expected, true);
-        } catch (DukeCommandParseException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -110,7 +111,7 @@ public class CommandParserTest {
         try {
             boolean expected = p.parseCommand() instanceof ExitCommand;
             assertEquals(expected, true);
-        } catch (DukeCommandParseException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -121,7 +122,7 @@ public class CommandParserTest {
         try {
             boolean expected = p.parseCommand() instanceof FindTaskCommand;
             assertEquals(expected, true);
-        } catch (DukeCommandParseException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -132,8 +133,32 @@ public class CommandParserTest {
         try {
             boolean expected = p.parseCommand() instanceof AddCommand;
             assertEquals(expected, true);
-        } catch (DukeCommandParseException e) {
+        } catch (Exception e) {
             fail();
         }
     }
+
+    @Test
+    public void matchToInteger_integerArguments_success() throws Exception{
+        CommandParser p = new CommandParser("done 4");
+        Matcher m = p.matchToInteger("45");
+        assertEquals(m.group(0),"45");
+    }
+
+    @Test
+    public void matchAddDeadlineFormat_correctDeadlineFormat_success() throws Exception {
+        CommandParser p = new CommandParser("done 3");
+        Matcher m = p.matchAddDeadlineFormat("something /by 2020-10-09");
+        assertEquals(m.group(1), "something");
+        assertEquals(m.group(2), "2020-10-09");
+    }
+
+    @Test
+    public void matchAddEventFormat_correctEventFormat_success() throws Exception {
+        CommandParser p = new CommandParser("done 3");
+        Matcher m = p.matchAddEventFormat("nothing /at 2020-10-04");
+        assertEquals(m.group(1), "nothing");
+        assertEquals(m.group(2), "2020-10-04");
+    }
+
 }
