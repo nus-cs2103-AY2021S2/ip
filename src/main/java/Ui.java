@@ -9,7 +9,7 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~\n";
+    private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
     /**
      * Returns the line variable.
@@ -26,8 +26,7 @@ public class Ui {
      * @return String introductory message.
      */
     public static String introduce() {
-        return "Hello from\n" + LOGO + "\n" + LINE + " Hey there! I'm Duke\n"
-                + " How can I help you?\n" + LINE;
+        return LINE + " Hey there! I'm Duke\n How can I help you?\n" + LINE;
     }
 
     /**
