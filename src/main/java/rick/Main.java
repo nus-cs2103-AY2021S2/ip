@@ -24,6 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(styleSheetsPath);
+            stage.setTitle("Rick & Morty");
             stage.setScene(scene);
             stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(rick);
