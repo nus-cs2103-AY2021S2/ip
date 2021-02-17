@@ -6,7 +6,7 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-	1. Add a task (#Add-a-task)
+	1. Add a task 
 		* To-dos
 		* Deadlines
 		* Events
@@ -28,7 +28,7 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 	** A data folder will be created in the folder containing duke.jar file. Duke save your task in the data file for efficient retrieval of task. 
 	
 4. After starting the application, you should see the GUI as shown below:
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/Ui.png)
+![Ui](.Images/Ui.png)
 
 
 
@@ -52,7 +52,7 @@ Examples:
 * `todo CNY visiting`
 * `todo ST2334 tutorial`
 
-![Ui](https://github.com/SiTingST/ip/blob/master/docs/Images/addTodoTask.png)
+![Ui](./Images/addTodoTask.png)
 
 #### `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
