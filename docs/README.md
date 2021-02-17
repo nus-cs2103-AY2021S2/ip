@@ -128,11 +128,11 @@ Example:
 
 ![Ui](./Images/findTask.png)
 
-## Command Summary
+## Command summary
 
-
-**Action**  | **Format, Examples**
---------|-----------------
+Action | Format, Examples
+--------|------------------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add todo** |  `todo description`e.g, `add todo watch netflix `
 **Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
 **Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
@@ -141,12 +141,6 @@ Example:
 **Find** |  `find KEYWORD [MORE_KEYWORDS]` e.g., `find cs2103 quiz`
 **Mark as done** | `done INDEX` e.g., 'done 4'
 **Exit** | `bye`
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
