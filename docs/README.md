@@ -4,23 +4,23 @@ Welcome to Duke Application. This program acts as a companion to remind you of t
 
 ## Feature Page (Highlight this segment to link features to their corresponding functions.
 
-### [Create a ToDo task](#create-a-todo-task)
+### [Create a ToDo task](#create-a-todo-task-1)
 
-### [Create a Deadline task](#create-a-deadline-task)
+### [Create a Deadline task](#create-a-deadline-task-1)
 
-### [Create an Event task](#create-an-event-task)
+### [Create an Event task](#create-an-event-task-1)
 
-### [List all tasks](#list-all-tasks)
+### [List all tasks](#list-all-tasks-1)
 
-### [Delete a task](#delete-a-task)
+### [Delete a task](#delete-a-task-1)
 
-### [Mark a task as done](#mark-a-task-as-done)
+### [Mark a task as done](#mark-a-task-as-done-1)
 
-### [Find keywords](#find-keywords)
+### [Find keywords](#find-keywords-1)
 
-### [Sort tasks by DateTime](#sort-tasks-by-datetime)
+### [Sort tasks by DateTime](#sort-tasks-by-datetime-1)
 
-### [Exit Application](#exit-application)
+### [Exit Application](#exit-application-1)
 
 ## Command Usage
 
