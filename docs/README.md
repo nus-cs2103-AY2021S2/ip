@@ -16,6 +16,7 @@ see the tasks entered at a glance.
 
    
   ![Welcome Screen](https://github.com/arihantjain97/ip/blob/master/docs/WelcomeScreen.png?raw=true)
+
 5. After pressing the start button, you will be taken to the main page
 
 
