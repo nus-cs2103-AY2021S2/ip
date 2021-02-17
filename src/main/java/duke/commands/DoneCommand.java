@@ -29,6 +29,8 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] inputList = description.trim().split(" ", 2);
 
+        assert(inputList.length >= 2);
+
         if (inputList.length < 2) {
             throw new MissingArgumentException();
         }

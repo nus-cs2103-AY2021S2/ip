@@ -28,7 +28,9 @@ public class AddCommand extends Command {
         Task taskItem = new Task("placebo task", taskType.TASK);
         String[] inputList = description.trim().split(" ", 2);
 
-        if (inputList.length != 2) {
+        assert(inputList.length >= 2);
+
+        if (inputList.length < 2) {
             throw new IncompleteCommandException();
         }
 
