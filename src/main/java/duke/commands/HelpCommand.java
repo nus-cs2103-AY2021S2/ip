@@ -5,11 +5,11 @@ import duke.tasks.TaskList;
 import duke.ui.DukeResponses;
 
 /**
- * class InvalidCommand
+ * class HelpCommand
  * @author Png Zheng Jie, Sebastian
- * Description: A class to represent an invalid command input by the user
+ * Description: A class to represent an executable command that corresponds to the user input "help"
  */
-public class InvalidCommand extends Command {
+public class HelpCommand extends Command {
     /**
      * execute: executes the command
      * @param tasks the list of tasks

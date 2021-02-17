@@ -8,11 +8,12 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.FindCommand;
-import duke.commands.InvalidCommand;
+import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteInputException;
+import duke.exceptions.InvalidCommandException;
 import duke.exceptions.InvalidInputFormatException;
 
 import java.util.regex.Matcher;
@@ -36,7 +37,7 @@ public class Parser {
         Matcher matcher = BASE_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            throw new InvalidCommandException();
         }
 
         try {
@@ -46,33 +47,35 @@ public class Parser {
             switch (commandWord) {
             case DEADLINE:
             case EVENT:
-                return taskWithDateHandler(commandWord, commandDescription);
+                return commandWithDateHandler(commandWord, commandDescription);
 
             case DELETE:
             case DONE:
                 return commandWithIndexHandler(commandWord, commandDescription);
 
             default:
-                return emptyCommandDescriptionHandler(commandWord, commandDescription);
+                return commandWithoutDateHandler(commandWord, commandDescription);
             }
         } catch (IllegalArgumentException e) {
-            return new InvalidCommand();
+            throw new InvalidCommandException();
         }
     }
 
     /**
-     * emptyCommandDescriptionHandler: handles cases when the command description is empty
+     * commandWithoutDateHandler: handles bye, help, list, find, todo commands
      * @param commandWord
      * @param commandDescription
      * @return an executable command
      * @throws IncompleteInputException
      */
-    private static Command emptyCommandDescriptionHandler(CommandWord commandWord, String commandDescription)
-            throws IncompleteInputException {
+    private static Command commandWithoutDateHandler(CommandWord commandWord, String commandDescription)
+            throws DukeException {
         if (commandDescription.isEmpty()) {
             switch(commandWord) {
             case BYE:
                 return new ByeCommand();
+            case HELP:
+                return new HelpCommand();
             case LIST:
                 return new ListCommand();
             default:
@@ -83,20 +86,22 @@ public class Parser {
         } else if (commandWord.equals(CommandWord.TODO)) {
             return new ToDoCommand(commandDescription);
         } else {
-            return new InvalidCommand();
+            throw new InvalidCommandException();
         }
     }
 
     /**
-     * taskWithDateHandler: handles deadline and event commands
+     * commandWithDateHandler: handles deadline and event commands
      * @param commandWord
      * @param commandDescription
      * @return an executable command
      * @throws DukeException
      */
-    private static Command taskWithDateHandler(CommandWord commandWord, String commandDescription)
+    private static Command commandWithDateHandler(CommandWord commandWord, String commandDescription)
             throws DukeException {
-        emptyCommandDescriptionHandler(commandWord, commandDescription);
+        if (commandDescription.isEmpty()) {
+            throw new IncompleteInputException(commandWord);
+        }
 
         if (commandWord.equals(CommandWord.DEADLINE)) {
             Pattern DEADLINE_FORMAT = Pattern.compile("(?<deadlineDescription>.*) /by (?<deadlineDate>.*)");
@@ -114,10 +119,9 @@ public class Parser {
             if (!eventMatcher.matches()) {
                 throw new InvalidInputFormatException(commandWord);
             }
-            return new EventCommand(eventMatcher.group("eventDescription"),
-                    eventMatcher.group("eventDate"));
+            return new EventCommand(eventMatcher.group("eventDescription"), eventMatcher.group("eventDate"));
         } else {
-            return new InvalidCommand();
+            throw new InvalidCommandException();
         }
     }
 
@@ -130,8 +134,11 @@ public class Parser {
      */
     private static Command commandWithIndexHandler(CommandWord commandWord, String commandDescription)
             throws DukeException {
+        if (commandDescription.isEmpty()) {
+            throw new IncompleteInputException(commandWord);
+        }
+
         try {
-            emptyCommandDescriptionHandler(commandWord, commandDescription);
             int index = Integer.parseInt(commandDescription);
 
             if (commandWord.equals(CommandWord.DELETE)) {
@@ -139,7 +146,7 @@ public class Parser {
             } else if (commandWord.equals(CommandWord.DONE)) {
                 return new DoneCommand(index);
             } else {
-                return new InvalidCommand();
+                throw new InvalidCommandException();
             }
         } catch (NumberFormatException e) {
             throw new InvalidInputFormatException(commandWord);

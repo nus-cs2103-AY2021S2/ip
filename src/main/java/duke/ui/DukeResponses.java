@@ -43,8 +43,7 @@ public class DukeResponses {
      * @return list of available commands
      */
     public String showCommands() {
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                + "List of recognised user commands:\n"
+        return "List of recognised user commands:\n"
                 + "  1. todo - adds a todo (E.g. todo borrow book)\n"
                 + "  2. deadline - adds a deadline (E.g. deadline return book /by 2021-02-04)\n"
                 + "  3. event - adds an event (E.g. event project meeting /at 2021-03-05)\n"
@@ -52,7 +51,8 @@ public class DukeResponses {
                 + "  5. done - marks a task as done in the list of tasks (E.g. done 2)\n"
                 + "  6. find - finds and displays tasks that matches the input keyword (E.g. find book)\n"
                 + "  7. list - displays the list of tasks\n"
-                + "  8. bye - terminates Duke";
+                + "  8. help - displays the list of commands that Duke recognises\n"
+                + "  9. bye - terminates Duke";
     }
 
     /**
