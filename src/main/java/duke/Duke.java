@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
