@@ -9,28 +9,28 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     public static final String ENCODED_TYPE = "D";
-    protected LocalDateTime time;
+    protected LocalDateTime dateTime;
 
     /**
      * Constructs a new Deadline with a description
      * that is due by a certain date and time.
      * @param description The specified description.
-     * @param time The specified date and time.
+     * @param dateTime The specified date and time.
      */
-    public Deadline(String description, String time) {
+    public Deadline(String description, String dateTime) {
         super(description);
-        this.time = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd Hmm"));
+        this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd Hmm"));
     }
 
-    public Deadline(boolean isDone, String description, String time) {
-        this(description, time);
+    public Deadline(boolean isDone, String description, String dateTime) {
+        this(description, dateTime);
         this.isDone = isDone;
     }
 
     public boolean isSameTask(Task toCheck) {
         if (toCheck instanceof Deadline) {
             return description.equals(toCheck.description)
-                    && time.equals(((Deadline) toCheck).time);
+                    && dateTime.equals(((Deadline) toCheck).dateTime);
         }
         return false;
     }
@@ -42,13 +42,13 @@ public class Deadline extends Task {
     @Override
     public String encode() {
         assert description != null;
-        assert time != null;
+        assert dateTime != null;
         String status = isDone ? "1" : "0";
         return String.format("%s/%s/%s/%s",
                 ENCODED_TYPE,
                 status,
                 description,
-                time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd Hmm")));
+                dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd Hmm")));
     }
 
     /**
@@ -58,10 +58,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         assert description != null;
-        assert time != null;
+        assert dateTime != null;
         return String.format("[D][%s] %s (by: %s)",
                 getStatusIcon(),
                 description,
-                time.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")));
+                dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a")));
     }
 }
