@@ -3,12 +3,14 @@ package duke;
 // JavaFX Imports
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -36,7 +38,9 @@ public class Duke extends Application{
     }
 
     /**
-     *
+     *  This method will check to see if any events or deadlines are due or overdue within 3 days. It will
+     *  an appropriate message
+     * @param taskList The TaskList for the method to check
      */
     public void remind(TaskList taskList){
 
@@ -166,7 +170,11 @@ public class Duke extends Application{
         sendButton.setOnMouseClicked((event) -> {
             String input = userInput.getText();
 
-            dialogContainer.getChildren().add(getDialogLabel(">> " + input));
+            HBox hBox = new HBox();
+            hBox.getChildren().add(getDialogLabel(input + " <<"));
+            hBox.setAlignment(Pos.BASELINE_RIGHT);
+
+            dialogContainer.getChildren().add(hBox);
             userInput.clear();
 
             // Call Parser
@@ -183,7 +191,11 @@ public class Duke extends Application{
         userInput.setOnAction((event) -> {
             String input = userInput.getText();
 
-            dialogContainer.getChildren().add(getDialogLabel(">> " + input));
+            HBox hBox = new HBox();
+            hBox.getChildren().add(getDialogLabel(input + " <<"));
+            hBox.setAlignment(Pos.BASELINE_RIGHT);
+
+            dialogContainer.getChildren().add(hBox);
             userInput.clear();
 
             // Call Parser
