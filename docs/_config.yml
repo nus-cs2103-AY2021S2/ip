@@ -1,4 +1,5 @@
 # Jekyll configuration
+title: "DukeNukem"
 theme: jekyll-theme-cayman
 plugins:
- - jekyll-readme-index
+  - jekyll-readme-index
