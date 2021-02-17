@@ -155,7 +155,10 @@ public class Ui {
      * @param e Exception that requires an error message
      */
     public void handleBadDate(BadDateArgumentException e) {
-        builder.append("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044\n");
+        builder.append("Date must be one of the following:\n");
+        builder.append("    Special keyword: Yesterday, Today/Now, Tomorrow/Tmr");
+        builder.append("    Days of the week; Eg: Mon/M/Mo/Monday");
+        builder.append("    'dd MM yyyy'; Eg: 27 08 2044\n");
     }
 
     /**
