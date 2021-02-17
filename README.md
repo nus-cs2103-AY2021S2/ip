@@ -2,7 +2,7 @@
 
 Welcome to Duke Application. This program acts as a companion to remind you of the upcoming tasks that you have. It uses a command line interface which you can operate it by typing commands into the Command Box.
 
-## Feature Page (Highlight this segment to link features to their corresponding functions.
+## Feature Page
 
 ### [Create a ToDo task](#create-a-todo-task-1)
 
