@@ -1,6 +1,6 @@
-<img src="https://soonkeatneo.github.io/ip/Ui.png" align="center"/>
-<h1 align="center">DukeNukem</h1>
-
+<center><img src="https://soonkeatneo.github.io/ip/Ui.png"/>
+<h1>DukeNukem</h1>
+</center>
 [![CI Status](https://github.com/soonkeatneo/ip/workflows/Java%20CI/badge.svg)](https://github.com/soonkeatneo/ip/actions)
 
 ## Table of Contents
