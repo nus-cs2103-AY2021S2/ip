@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class DukeTest {
 
@@ -18,17 +19,40 @@ public class DukeTest {
 
     @DisplayName("Test if parser creates Todo object when todo is added. ")
     @Test
-    public void addTodoTest() throws DukeException {
+    public void addTodoTest() {
         String out = duke.testDuke("todo do something");
         assertEquals(out, "Added  do something. \nYou now have 1 items in your list.");
     }
 
     @DisplayName("Test clear all. ")
     @Test
-    public void pipeClearAllTest() throws DukeException {
+    public void pipeClearAllTest() {
         duke.testDuke("todo do something");
         String out = duke.testDuke("all | remove");
         assertEquals(out, "I have removed this item: \n[T][ ]  do something");
+    }
+
+    @DisplayName("Test done all. ")
+    @Test
+    public void pipeDoneAllTest() {
+        duke.testDuke("todo a");
+        duke.testDuke("todo c");
+        duke.testDuke("todo b");
+        String out = duke.testDuke("all | done");
+        String outExpected =
+                "Alright, I will mark these as done.\n" +
+                "[T][X]  a\n" +
+                "[T][X]  b\n" +
+                "[T][X]  c";
+
+        String listAfterAllDone = duke.testDuke("all");
+        String listExpected =
+                "1. [T][X]  a\n" +
+                "2. [T][X]  b\n" +
+                "3. [T][X]  c";
+        assertAll("all | done",
+                () -> assertEquals(out, outExpected),
+                () -> assertEquals(listAfterAllDone, listExpected));
     }
 
     @AfterEach
