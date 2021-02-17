@@ -34,9 +34,12 @@ public class TaskList {
         return this.ls;
     }
 
-    public boolean detectDuplicates(Task task){
-        for(Task t : this.ls){
-            if(t.equals(task)){
+    /**
+     * Check if the class you are supposed to add is a duplicate
+     */
+    public boolean detectDuplicates(Task task) {
+        for (Task t : this.ls) {
+            if (t.equals(task)) {
                 return true;
             }
         }
@@ -85,7 +88,7 @@ public class TaskList {
 
     /**
      * Mark the task as done
-     * @param index
+     * @param index index of a certain task
      */
 
     public String finishTask(int index) {

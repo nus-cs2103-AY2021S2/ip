@@ -21,8 +21,8 @@ public class Event extends Task {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj instanceof Event){
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
             Event e = (Event) obj;
             return this.getTaskName().equals(e.getTaskName()) && this.by.equals(e.by);
         }

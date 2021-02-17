@@ -68,7 +68,8 @@ public class MainWindow extends AnchorPane {
                 userInput.clear();
             } catch (DukeException | IOException e) {
 
-                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(e.toString(), dukeImage, Color.NAVAJOWHITE));
+                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(e.toString(),
+                        dukeImage, Color.NAVAJOWHITE));
 
             }
 

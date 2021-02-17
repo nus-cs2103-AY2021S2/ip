@@ -20,8 +20,8 @@ public class ToDo extends Task {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj instanceof ToDo){
+    public boolean equals(Object obj) {
+        if (obj instanceof ToDo) {
             ToDo e = (ToDo) obj;
             return this.getTaskName().equals(e.getTaskName());
         }

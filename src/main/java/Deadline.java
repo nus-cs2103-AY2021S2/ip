@@ -41,8 +41,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj instanceof Deadline){
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
             Deadline e = (Deadline) obj;
             return this.getTaskName().equals(e.getTaskName()) && this.by.equals(e.by);
         }
