@@ -44,44 +44,20 @@ public class Storage {
      */
     public TaskList load() {
         File taskData = new File(filePath);
-
         TaskList leest = new TaskList();
-
-        //opens the duke.txt file to read from, creates file if not found
         try {
             Scanner s = new Scanner(taskData);
             while (s.hasNext()) {
                 String[] line = s.nextLine().split(" \\| ");
                 switch (line[0]) {
                 case "T":
-                    Task task = new Task(line[2]);
-                    if (line[1].equals("1")) {
-                        task.setDone();
-                    }
-                    if (line.length > 3) {
-                        updateTags(task, line[3]);
-                    }
-                    leest.add(task);
+                    leest.add(loadTask(line));
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(line[2], line[3]);
-                    if (line[1].equals("1")) {
-                        deadline.setDone();
-                    }
-                    if (line.length > 4) {
-                        updateTags(deadline, line[4]);
-                    }
-                    leest.add(deadline);
+                    leest.add(loadDeadline(line));
                     break;
                 case "E":
-                    Event event = new Event(line[2], line[3]);
-                    if (line[1].equals("1")) {
-                        event.setDone();
-                    }
-                    if (line.length > 4) {
-                        updateTags(event, line[4]);
-                    }
-                    leest.add(event);
+                    leest.add(loadEvent(line));
                     break;
                 default:
                 }
@@ -100,6 +76,57 @@ public class Storage {
             }
         }
         return leest;
+    }
+
+    /**
+     * Loads a task from storage.
+     *
+     * @param line The line representing a task stored in the Duke.txt file.
+     * @return The line as a Task.
+     */
+    private Task loadTask(String[] line) {
+        Task task = new Task(line[2]);
+        if (line[1].equals("1")) {
+            task.setDone();
+        }
+        if (line.length > 3) {
+            updateTags(task, line[3]);
+        }
+        return task;
+    }
+
+    /**
+     * Loads a deadline from storage.
+     *
+     * @param line The line representing a deadline stored in the Duke.txt file.
+     * @return The line as a Deadline.
+     */
+    private Deadline loadDeadline(String[] line) {
+        Deadline deadline = new Deadline(line[2], line[3]);
+        if (line[1].equals("1")) {
+            deadline.setDone();
+        }
+        if (line.length > 4) {
+            updateTags(deadline, line[4]);
+        }
+        return deadline;
+    }
+
+    /**
+     * Loads a event from storage.
+     *
+     * @param line The line representing an event stored in the Duke.txt file.
+     * @return The line as an Event.
+     */
+    private Event loadEvent(String[] line) {
+        Event event = new Event(line[2], line[3]);
+        if (line[1].equals("1")) {
+            event.setDone();
+        }
+        if (line.length > 4) {
+            updateTags(event, line[4]);
+        }
+        return event;
     }
 
     /**

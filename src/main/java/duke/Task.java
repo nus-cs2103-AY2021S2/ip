@@ -9,6 +9,7 @@ public class Task {
     protected String todo;
     protected boolean isDone;
     protected List<String> tags;
+
     /**
      * Instantiates a task.
      *
@@ -22,6 +23,10 @@ public class Task {
 
     public void setDone() {
         this.isDone = true;
+    }
+
+    public boolean getDone() {
+        return this.isDone;
     }
 
     public String getTodo() {
@@ -55,6 +60,11 @@ public class Task {
         this.tags.add(tag);
     }
 
+    /**
+     * Returns the current tags as a String.
+     *
+     * @return Current tags.
+     */
     protected String showTags() {
         String toReturn = "";
         for (String s : tags) {
@@ -63,6 +73,11 @@ public class Task {
         return toReturn;
     }
 
+    /**
+     * Returns the current tags as a String to be saved.
+     *
+     * @return A string to be saved in Duke.txt.
+     */
     protected String saveTags() {
         String toReturn = "";
         for (String s : tags) {

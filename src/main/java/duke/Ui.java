@@ -48,6 +48,10 @@ public class Ui {
             return ("GRR!!! Please define your todo properly uwu.");
         case "invalidDone":
             return ("GRR!!! Please indicate a valid task to complete uwu.");
+        case "alreadyDone":
+            return ("GRR!!! That task is already done uwu.");
+        case "invalidIndex":
+            return ("GRR!!! Please indicate a valid index uwu.");
         case "badTag":
             return ("GRR!!! Please provide a tag uwu.");
         default:
