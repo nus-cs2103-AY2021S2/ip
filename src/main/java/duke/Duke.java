@@ -5,6 +5,7 @@ import java.text.ParseException;
 
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
+import duke.exception.BadIndexException;
 import duke.exception.EmptyArgumentException;
 import duke.exception.InvalidCommandException;
 
@@ -78,13 +79,16 @@ public class Duke {
             ui.handleEmptyArgument(e);
         } catch (BadDateArgumentException e) {
             ui.handleBadDate(e);
+        } catch (BadIndexException e) {
+            ui.handleBadIndex(e);
         } finally {
             saveIfNeeded();
         }
         return ui.flushMessage();
     }
     private void updateAndGenerateOutput(Command c)
-            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
+            throws EmptyArgumentException, BadDateArgumentException,
+            InvalidCommandException, BadIndexException {
         String data = taskList.run(c);
         ui.printCommandMessage(c, data);
     }

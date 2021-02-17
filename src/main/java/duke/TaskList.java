@@ -4,6 +4,7 @@ import java.util.List;
 
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
+import duke.exception.BadIndexException;
 import duke.exception.EmptyArgumentException;
 import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
@@ -24,7 +25,6 @@ public class TaskList {
     public TaskList(List<Task> store) {
         this.store = store;
     }
-
     /**
      * Runs command on TaskList and returns command specific output.
      * Side effects are present on some commands
@@ -33,9 +33,12 @@ public class TaskList {
      * @return Output meant for Ui Class
      * @throws EmptyArgumentException At least one argument is missing
      * @throws BadDateArgumentException An argument that is expected to be a date is ill formatted
+     * @throws InvalidCommandException A bad command has been passed that cannot be handled
+     * @throws BadIndexException An index in the command is out of bounds and needs to be communicated
      */
     public String run(Command c)
-            throws EmptyArgumentException, BadDateArgumentException, InvalidCommandException {
+            throws EmptyArgumentException, BadDateArgumentException,
+            InvalidCommandException, BadIndexException {
         String[] args = c.getCommandParameters();
         String result;
         Action action = c.getType();
@@ -45,10 +48,12 @@ public class TaskList {
             edited = true;
             break;
         case DONE:
+            checkIndex(Integer.parseInt(args[0]));
             result = setDone(Integer.parseInt(args[0]));
             edited = true;
             break;
         case DELETE:
+            checkIndex(Integer.parseInt(args[0]));
             result = delete(Integer.parseInt(args[0]));
             edited = true;
             break;
@@ -94,26 +99,37 @@ public class TaskList {
         Task t;
         switch (type) {
         case "D":
+            assert tokens.length == 3;
             t = new Deadline(task, additional);
             break;
         case "E":
+            assert tokens.length == 3;
             t = new Event(task, additional);
             break;
         case "T":
+            assert tokens.length == 2;
             t = new ToDos(task);
             break;
         default:
-            //TODO: Add assert false here later when merging
+            assert false
+                    : "This assertion failed because an un-processable command has been received";
             throw new InvalidCommandException("of type " + type);
         }
         store.add(t);
     }
+    private void checkIndex(int index) throws BadIndexException {
+        if (index < 0 || index >= store.size()) {
+            throw new BadIndexException(index);
+        }
+    }
     private String setDone(int doneIndex) {
+        assert doneIndex >= 0 && doneIndex < store.size();
         Task t = store.get(doneIndex);
         t.setDone();
         return formatOrderedPrint(doneIndex);
     }
     private String delete(int deleteIndex) {
+        assert deleteIndex >= 0 && deleteIndex < store.size();
         String returnValue = formatOrderedPrint(deleteIndex);
         store.remove(deleteIndex);
         return returnValue;

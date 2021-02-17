@@ -11,6 +11,7 @@ public class AddCommand extends Command {
      * @param args Parameters describing what to add
      */
     public AddCommand(String[] args) {
+        assert args.length > 1 : "Need at least the type and description";
         this.args = args;
     }
 

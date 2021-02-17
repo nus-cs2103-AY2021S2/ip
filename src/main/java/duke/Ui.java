@@ -4,6 +4,7 @@ import java.text.ParseException;
 
 import duke.command.Command;
 import duke.exception.BadDateArgumentException;
+import duke.exception.BadIndexException;
 import duke.exception.EmptyArgumentException;
 import duke.exception.InvalidCommandException;
 
@@ -95,14 +96,17 @@ public class Ui {
             builder.append(data);
             break;
         case DONE:
+            assert data.length() > 0;
             builder.append("The following task is now marked as done:\n"
                     + data + "\n");
             break;
         case ADD:
+            assert data.length() > 0;
             builder.append("The following task has been added:\n"
                     + data + "\n");
             break;
         case DELETE:
+            assert data.length() > 0;
             builder.append("The following Task has been deleted:\n");
             builder.append(data + "\n");
             break;
@@ -115,6 +119,7 @@ public class Ui {
             }
             break;
         default:
+            assert false : "This Really should not happen ever";
             builder.append("ERROR: Unhandled Case!\n");
         }
     }
@@ -143,7 +148,6 @@ public class Ui {
      */
     public void handleEmptyArgument(EmptyArgumentException e) {
         builder.append("Cannot have empty argument\n");
-        builder.append(e.getMessage() + "\n");
     }
     /**
      * Generates an UI alert for bad date formatting.
@@ -152,6 +156,14 @@ public class Ui {
      */
     public void handleBadDate(BadDateArgumentException e) {
         builder.append("Date must be of format 'dd MM yyyy'; Eg: 27 08 2044\n");
-        builder.append(e.getMessage() + "\n");
+    }
+
+    /**
+     * Generates an UI alert for an out of bounds error
+     *
+     * @param e Exception that requires an error message
+     */
+    public void handleBadIndex(BadIndexException e) {
+        builder.append(e.getMessage());
     }
 }
