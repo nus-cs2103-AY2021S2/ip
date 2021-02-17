@@ -1,16 +1,15 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.ui.Ui;
-
+//to handle date and time
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.text.ParseException; //to handle date and time
-import java.text.SimpleDateFormat;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import duke.exception.DukeException;
+import duke.ui.Ui;
 
 /**
  * This TaskList class handles the logic of adding and deleting tasks of Duke
@@ -30,13 +29,6 @@ public class TaskList {
     public int getSize() {
         assert task.size() >= 0;
         return task.size();
-    }
-
-    /**
-     * add task to the list
-     */
-    public void add(Task t) {
-        task.add(t);
     }
 
     /**
@@ -66,6 +58,13 @@ public class TaskList {
     }
 
     /**
+     * add task to the list
+     */
+    public void add(Task t) {
+        task.add(t);
+    }
+
+    /**
      * parser for add tasks
      */
     public String add(String[] userInput, Ui ui) throws DukeException {
@@ -83,7 +82,10 @@ public class TaskList {
                 throw new DukeException("Missing component: due date");
             }
             String time = deadlineArr[1];
-            if (isDateFormat(time, "yyyy-mm-dd") || isDateFormat(time, "yyyy-m-dd") || isDateFormat(time, "yyyy-mm-d") || isDateFormat(time, "yyyy-m-d")) {
+            if (isDateFormat(time, "yyyy-mm-dd")
+                    || isDateFormat(time, "yyyy-m-dd")
+                    || isDateFormat(time, "yyyy-mm-d")
+                    || isDateFormat(time, "yyyy-m-d")) {
                 LocalDate date = LocalDate.parse(time);
                 time = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             }
@@ -93,7 +95,7 @@ public class TaskList {
             break;
 
         case "event":
-            String eventArr[] = userInput[1].split(" /at ", 2);
+            String[] eventArr = userInput[1].split(" /at ", 2);
             if (eventArr.length != 2) {
                 throw new DukeException("Missing component: event date and time");
             }

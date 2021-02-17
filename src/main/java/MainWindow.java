@@ -27,12 +27,34 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     @FXML
-    public AnchorPane mainLayout;
+    private AnchorPane mainLayout;
 
     private Duke duke;
 
-    public Image userImage = new Image(this.getClass().getResourceAsStream("/images/morty.png"));
-    public Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rick.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/morty.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/rick.png"));
+
+    /**
+     * return duke image
+     */
+    public Image getDukeImage() {
+        return dukeImage;
+    }
+
+    /**
+     * return user image
+     */
+    public Image getUserImage() {
+        return userImage;
+    }
+
+    /**?
+     * getter for main layout
+     * @return mainLayout
+     */
+    public AnchorPane getMainLayout() {
+        return mainLayout;
+    }
 
     /**
      * Initialize the scroll panel layout
@@ -101,6 +123,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Set Duke
+     * @param d duke to be set
      */
     public void setDuke(Duke d) {
         duke = d;
@@ -154,6 +177,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * print welcome message as first message when open
+     * @param duke duke that handle the main logic
      */
     public void printWelcomeMessage(Duke duke) {
         String welcomeMessage = duke.greeting();

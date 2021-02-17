@@ -1,7 +1,5 @@
 import duke.Duke;
-
 import javafx.application.Application;
-
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -19,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         mainWindow.initialize();
-        Scene scene = new Scene(mainWindow.mainLayout);
+        Scene scene = new Scene(mainWindow.getMainLayout());
         stage.setScene(scene);
         stage.show();
 
@@ -27,7 +25,7 @@ public class Main extends Application {
         stage.setResizable(true);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
-        stage.getIcons().add(mainWindow.dukeImage);
+        stage.getIcons().add(mainWindow.getDukeImage());
 
         mainWindow.setDuke(duke);
         mainWindow.initializeComponentProperties();

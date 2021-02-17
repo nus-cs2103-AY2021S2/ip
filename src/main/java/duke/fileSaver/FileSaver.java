@@ -1,4 +1,4 @@
-package duke.fileSaver;
+package duke.filesaver;
 
 import java.io.File;
 import java.io.FileNotFoundException;

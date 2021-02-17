@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.fileSaver.FileSaver;
+import duke.filesaver.FileSaver;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,7 +20,7 @@ public class Ui {
             + "|  |  |  |  |  |  |  | / /  _  \\\n"
             + "|  |_|   |  |_|  |   <    ___/\n"
             + "|____/ \\__,__|_|\\_\\_____|\n";
-    public static String line = "____________________________\n";
+    private static String line = "____________________________\n";
     //public static String indentation = "    ";
 
     public final Scanner sc;
@@ -65,8 +65,8 @@ public class Ui {
      */
     public String reportTask(Task t, TaskList task) {
         int count = task.getSize();
-        String output = "Got it, I've added this task to the list:\n" +
-                t.toString()
+        String output = "Got it, I've added this task to the list:\n"
+                + t.toString()
                 + "\n"
                 + "You now have "
                 + count
@@ -119,7 +119,7 @@ public class Ui {
             switch (command) {
             case DEADLINE:
             case TODO:
-            case EVENT    :
+            case EVENT:
                 response = task.add(input, this);
                 break;
             case DELETE:
@@ -134,10 +134,10 @@ public class Ui {
             case FIND:
                 response = reportFindedTask(task.findTask(input[1]));
                 break;
-//          case BYE:
-//              bye();
-//              run = false;
-//              break;
+            //case BYE:
+            //bye();
+            //run = false;
+            //break;
             default:
                 throw new DukeException("Sorry, I dont understand that");
             }
