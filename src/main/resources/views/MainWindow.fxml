@@ -8,11 +8,11 @@
 <fx:root title="Duke" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <scene>
     <Scene>
-      <VBox focusTraversable="true" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      <VBox alignment="CENTER" focusTraversable="true" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
         <children>
                <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hvalue="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #303030;" vbarPolicy="ALWAYS" vvalue="1.0" VBox.vgrow="ALWAYS">
                   <content>
-                     <VBox fx:id="dialogContainer" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" />
+                     <VBox fx:id="dialogContainer" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" />
                   </content>
                </ScrollPane>
         <TextField fx:id="commandTextField" onAction="#handleCommandText" promptText="Enter your command" style="-fx-background-color: #424242; -fx-border-color: #424242; -fx-text-fill: #fff;" />
