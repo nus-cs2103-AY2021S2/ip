@@ -9,6 +9,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.DeadlineException;
@@ -33,10 +34,16 @@ public class Parser {
         case "list":
             return new ListCommand();
 
+        case "help":
+            return HelpCommand.getHelpAllCommand();
+
         default:
             String[] splitInput = input.split(" ", 2);
 
             switch (splitInput[0]) {
+            case "help":
+                return getHelpCommand(splitInput[1].strip());
+
             case "done":
                 checkDoneFormat(splitInput);
                 return getDoneCommand(splitInput[1]);
@@ -69,7 +76,8 @@ public class Parser {
                 return new AddCommand(event);
 
             default:
-                throw new DukeException("I'm sorry :(\nI don't know what that means");
+                throw new DukeException("I'm sorry :(\nI don't know what that means\n"
+                        + "Type 'help' in the chat to see the list of valid commands");
             }
         }
     }
@@ -113,6 +121,31 @@ public class Parser {
     private static void checkEventFormat(String[] splitInput) throws EventException {
         if (splitInput.length < 2) {
             throw new EventException("Event details cannot be empty!");
+        }
+    }
+
+    // get methods
+    private static Command getHelpCommand(String command) throws DukeException {
+        switch (command) {
+        case "todo":
+            return HelpCommand.getHelpToDoCommand();
+        case "deadline":
+            return HelpCommand.getHelpDeadlineCommand();
+        case "event":
+            return HelpCommand.getHelpEventCommand();
+        case "list":
+            return HelpCommand.getHelpListCommand();
+        case "done":
+            return HelpCommand.getHelpDoneCommand();
+        case "delete":
+            return HelpCommand.getHelpDeleteCommand();
+        case "find":
+            return HelpCommand.getHelpFindCommand();
+        case "check":
+            return HelpCommand.getHelpCheckCommand();
+        default:
+            throw new DukeException(command + " is not a valid command!\n"
+                    + "Type 'help' in the chat to see the list of valid commands");
         }
     }
 
