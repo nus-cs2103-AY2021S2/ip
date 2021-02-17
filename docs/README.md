@@ -7,14 +7,14 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 * [Quick Start](#quick-start)
 * [Features](#features)
 	1. Add a task 
-		* [Todo](#adding-a-todo)
-		* [Deadline](#adding-a-deadline)
-		* [Event](#adding-an-event)
-	2. [List all tasks](#listing-all-tasks)
+		* [Todo](#adding-a-todo-task-todo)
+		* [Deadline](#adding-a-deadline-task-todo)
+		* [Event](#adding-an-event-task-todo)
+	2. [List all tasks](#listing-all-tasks-list)
 	3. [Delete a task](#delete-a-task)
 	4. [Mark task as done](#mark-task-as-done)
 	5. [Find a task](#find-a-task)
-	6. Exit Program(#exit)
+	6. [Exit Program](#exit)
 * [Command Summary](#command-summary)
 
 
@@ -43,7 +43,7 @@ Notes:
 * Commands are case-insensitive. The program only takes in command in lower alphabets. 
 * Users should add ONE task at a time. 
 
-#### Adding a todo: `todo`
+#### Adding a todo task: `todo`
 Todo command add a todo task which requires task description and no other field as input.
 
 Format: `todo` description
@@ -54,7 +54,7 @@ Examples:
 
 ![Ui](./Images/addTodoTask.png)
 
-#### Adding a deadline: `deadline`
+#### Adding a deadline task: `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
 
 Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]
@@ -68,7 +68,7 @@ Examples:
 
 ![Ui](./Images/addDeadlineTask.png)
 
-#### Adding an event: `event`
+#### Adding an event task: `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
 
 Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]
