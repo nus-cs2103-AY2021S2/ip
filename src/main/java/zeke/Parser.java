@@ -1,6 +1,7 @@
 package zeke;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import zeke.exceptions.InvalidDescriptionException;
 import zeke.exceptions.InvalidIndexException;
@@ -16,6 +17,26 @@ public class Parser {
      * Initializes a Parser object.
      */
     public Parser() {
+    }
+
+    /**
+     * Separates the command from the rest of the text.
+     *
+     * @param input user input.
+     * @return an array of String objects.
+     */
+    public String[] getInputArr(String input) {
+        return input.split(" ", 2);
+    }
+
+    /**
+     * Gets the command from the input array
+     *
+     * @param inputArr user input array.
+     * @return
+     */
+    public Command getCommand(String[] inputArr) {
+        return Command.valueOf(inputArr[0].toUpperCase(Locale.ROOT));
     }
 
     /**
@@ -44,26 +65,17 @@ public class Parser {
     }
 
     /**
-     * Returns an input array of String objects given an input String.
-     *
-     * @param input user input.
-     * @return an array of String objects.
-     */
-    public String[] getInputArr(String input) {
-        return input.split(" ", 2);
-    }
-
-    /**
      *  Gets the description of task from input array
      *
      * @param inputArr user input array.
      * @param taskType type of task.
-     * @return
+     * @return description of task
      */
     public String getDescription(String[] inputArr, String taskType) {
         if (taskType.equals("todo")) {
             return inputArr[1];
         } else {
+            assert taskType.equals("event") || taskType.equals("deadline") : "Task type should be an event or deadline";
             return inputArr[1].substring(0, inputArr[1].indexOf("/") - 1);
         }
     }
@@ -73,7 +85,7 @@ public class Parser {
      *
      * @param inputArr user input array.
      * @param taskType type of task.
-     * @return
+     * @return date of task
      */
     public String getDate(String[] inputArr, String taskType) {
         if (taskType.equals("deadline")) {

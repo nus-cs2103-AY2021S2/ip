@@ -1,8 +1,9 @@
 package zeke;
 
 import java.io.IOException;
-import java.util.Locale;
+import java.time.format.DateTimeParseException;
 
+import zeke.exceptions.InvalidDateException;
 import zeke.exceptions.UnknownInputException;
 import zeke.exceptions.ZekeException;
 
@@ -34,11 +35,11 @@ public class Zeke {
      */
     public String getResponse(String input) {
         String response;
+        String description;
+        String date;
         String[] inputArr = parser.getInputArr(input);
         try {
-            Command command = Command.valueOf(inputArr[0].toUpperCase(Locale.ROOT));
-            String description;
-            String date;
+            Command command = parser.getCommand(inputArr);
             switch (command) {
             case BYE:
                 response = ui.exit();
@@ -98,11 +99,12 @@ public class Zeke {
             storage.saveTasks(tasks.getList());
         } catch (IllegalArgumentException e) {
             response = new UnknownInputException().getMessage();
-        } catch (ZekeException e) {
+        } catch (ZekeException | IOException e) {
             response = e.getMessage();
-        } catch (IOException e) {
-            e.printStackTrace();
-            response = e.getMessage();
+        } catch (DateTimeParseException e) {
+            response = new InvalidDateException().getMessage();
+        } catch (StringIndexOutOfBoundsException e) {
+            response = new InvalidDateException().getMessage();
         }
         return response;
     }
