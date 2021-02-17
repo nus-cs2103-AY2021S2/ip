@@ -16,6 +16,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    public String filePath;
     public String directory;
     public File fileObject;
     public TaskList taskList;
@@ -26,10 +27,11 @@ public class Storage {
     /**
      * Instantiates Storage with its target directory.
      */
-    public Storage(String directory) {
+    public Storage(String filePath) {
         this.taskList = createNew();
-        this.directory = directory;
-        this.fileObject = createFile(directory);
+        this.filePath = filePath;
+        this.directory = "data";
+        this.fileObject = createFile(filePath);
     }
 
     public TaskList createNew() {
@@ -37,14 +39,21 @@ public class Storage {
     }
 
     /**
-     * Creates a file in the specified directory.
+     * Creates the directory and file for tasks.
      *
-     * @param directory target directory
+     * @param filePath file path
      * @return new file object
      */
-    public File createFile(String directory) {
+    public File createFile(String filePath) {
         try {
-            File fileObject = new File(directory);
+            File directory = new File(this.directory);
+            boolean isDirCreated = directory.mkdirs();
+            if (isDirCreated) {
+                System.out.println("A new directory is created.");
+            } else {
+                System.out.println("The directory exists.");
+            }
+            File fileObject = new File(filePath);
             if (fileObject.createNewFile()) {
                 System.out.println("New file created: " + fileObject.getName());
             } else {
