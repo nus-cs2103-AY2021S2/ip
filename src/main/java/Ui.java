@@ -11,11 +11,9 @@ public class Ui {
      *                     general class of exceptions produced by failed or interrupted I/O operations.
      */
     public void bye() throws IOException {
-        Duke.respond = "Bye. Hope to see you again soon!";
-        String msg = "    ____________________________________________________________\n     "
-                + "Bye. Hope to see you again soon!\n"
-                + "    ____________________________________________________________";
-        System.out.println(msg);
+        Duke.respond = "Bye. Hope to see you again soon!\nYour data is saved!\n" +
+                "Click [X] to exit the program!";
+        System.out.println("Program terminated!");
         Storage.save();
     }
 
@@ -23,13 +21,6 @@ public class Ui {
      * Welcome the user when login.
      */
     public void greet() {
-        System.out.println("    ____________________________________________________________\n     "
-                + " ____        _        \n"
-                + "     |  _ \\ _   _| | _____ \n"
-                + "     | | | | | | | |/ / _ \\\n"
-                + "     | |_| | |_| |   <  __/\n"
-                + "     |____/ \\__,_|_|\\_\\___|\n\n     "
-                + "Hello! I'm Duke :P");
-        Duke.respond = "Hello there, I am Duke :P+" + "\n" + "Tell me what you want!";
+        Duke.respond = "Hello there, I am Duke :P+" + "\n" + "How can I help you?";
     }
 }

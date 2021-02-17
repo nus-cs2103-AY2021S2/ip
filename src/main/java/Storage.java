@@ -11,12 +11,24 @@ import java.util.Scanner;
  * A class that deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    static String filePath;
+    static File file;
     static Scanner fileScanner;
 
-    public Storage(String filePath) {
+    public Storage(String filePath) throws IOException {
         assert filePath.length() > 0;
-        this.filePath = filePath;
+        try {
+            File directory = new File("data");
+            directory.mkdirs();
+            this.file = new File(filePath);
+            if (file.createNewFile()) {
+                System.out.println("Hard Disk created.");
+                Duke.respond = "Welcome! New user :)\n";
+            } else {
+                System.out.println("Hard Disk loaded.");
+            }
+        } catch (IOException e) {
+            throw new IOException("File not found.");
+        }
     }
 
     /**
@@ -29,25 +41,12 @@ public class Storage {
      *                       cannot be created, or cannot be opened for any other reason
      */
     public List<Task> check() throws IOException, DukeException {
-        File file = new File(filePath);
-        if (!file.exists()) {
-            File directory = new File("data");
-            directory.mkdirs();
-            file.createNewFile();
-            System.out.println("     Welcome! New user :)");
-            Duke.respond = "Welcome! New user :)\n" + "What can I do for you?";
-        } else if (file.exists()) {
-            scanFile();
-            if (TaskList.tasks.size() == 0) {
-                System.out.println("     You have no saved task!");
-                Duke.respond = "You have no saved task!\n" + "What can I do for you?";
-            } else {
-                System.out.println("     You have " + TaskList.tasks.size() + " saved tasks!");
-                Duke.respond = "You have " + TaskList.tasks.size() + " saved tasks!\n" + "What can I do for you?";
-            }
+        scanFile();
+        if (TaskList.tasks.size() == 0) {
+            Duke.respond = "You have no saved task!\n" + "What can I do for you?";
+        } else {
+            Duke.respond = "You have " + TaskList.tasks.size() + " saved tasks!\n" + "What can I do for you?";
         }
-        System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________");
         return TaskList.tasks;
     }
 
@@ -58,7 +57,6 @@ public class Storage {
      * @throws FileNotFoundException If the attempt to open the file denoted by a specified pathname has failed.
      */
     public void scanFile() throws FileNotFoundException {
-        File file = new File(filePath);
         fileScanner = new Scanner(file);
         while (fileScanner.hasNextLine()) {
             String type = fileScanner.next();
@@ -111,7 +109,7 @@ public class Storage {
      *                     cannot be created, or cannot be opened for any other reason.
      */
     public static void save() throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter(file);
         for (int i = 0; i < TaskList.tasks.size(); i++) {
             int isDone = 0;
             Task task = TaskList.tasks.get(i);

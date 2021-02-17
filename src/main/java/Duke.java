@@ -13,8 +13,8 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         ui.greet();
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.check());
         } catch (IOException | DukeException e) {
             System.out.println(e.getMessage());
@@ -24,8 +24,8 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         ui.greet();
-        storage = new Storage("data/duke.txt");
         try {
+            storage = new Storage("data/duke.txt");
             tasks = new TaskList(storage.check());
         } catch (IOException | DukeException e) {
             System.out.println(e.getMessage());
@@ -65,11 +65,20 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Return Duke's respond to user input.
+     *
+     * @return Duke's respond.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description, date and time.
+     * @throws IOException   If the named file exists but is a directory rather than a regular file,
+     *                       does not exist but cannot be created, or cannot be opened for any other reason.
      */
     String getResponse(String input) throws IOException, DukeException {
-        Parser.parse(input);
+        try {
+            Parser.parse(input);
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
         return respond;
     }
 }

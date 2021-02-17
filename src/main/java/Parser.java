@@ -36,11 +36,8 @@ public class Parser {
         } else if (command.startsWith("deadline")) {
             addDeadline(command);
         } else {
-            Duke.respond = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                    "Our program has terminated, please restart to continue using our service";
-            throw (new DukeException("\n    ____________________________________________________________\n"
-                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________"));
+            throw (new DukeException("Error detected: Invalid command!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service"));
         }
     }
 
@@ -60,7 +57,8 @@ public class Parser {
      */
     public static void find(String command) throws DukeException {
         if (command.length() == 4) {
-            throw new DukeException("Keyword for search is missing!");
+            throw new DukeException("Error detected: Keyword for search is missing!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         }
         TaskList.find(command.substring(5));
     }
@@ -74,7 +72,8 @@ public class Parser {
      */
     public static void done(String command) throws DukeException {
         if (command.length() == 4) {
-            throw new DukeException("Index for task done is missing!");
+            throw new DukeException("Error detected: Index for task done is missing!" +
+                    "\nThe program has terminated.\nPlease restart to continue using our service");
         }
         TaskList.done(Integer.parseInt(command.substring(5)));
     }
@@ -88,7 +87,8 @@ public class Parser {
      */
     public static void delete(String command) throws DukeException {
         if (command.length() == 7) {
-            throw new DukeException("Index for task to be deleted is missing!");
+            throw new DukeException("Error detected: Index for task to be deleted is missing!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         }
         TaskList.delete(Integer.parseInt(command.substring(7)));
     }
@@ -103,7 +103,8 @@ public class Parser {
     public static void addToDo(String command) throws DukeException {
         ToDo todo = new ToDo(getDescription(command, "T"));
         if (TaskList.isDuplicate(todo)) {
-            throw new DukeException("This task is duplicated!");
+            throw new DukeException("Error detected: This task is duplicated!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         }
         TaskList.addTask(todo);
     }
@@ -121,9 +122,11 @@ public class Parser {
         String date = Parser.getDate(command, "E", eventDescription.length() + 11);
         int currentIndexOfString = eventDescription.length() + date.length();
         if (command.length() < currentIndexOfString + 16) {
-            throw new DukeException("startTime need to be included!");
+            throw new DukeException("Error detected: StartTime need to be included!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         } else if (command.length() < currentIndexOfString + 21) {
-            throw new DukeException("endTime need to be included!");
+            throw new DukeException("Error detected: EndTime need to be included!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         }
         String startTime = command.substring(currentIndexOfString + 12, currentIndexOfString + 16);
         String endTime = command.substring(currentIndexOfString + 17, currentIndexOfString + 21);
@@ -132,7 +135,8 @@ public class Parser {
         Event event = new Event(eventDescription, LocalDate.parse(format(date), formatter),
                 LocalTime.parse(localStart), LocalTime.parse(localEnd));
         if (TaskList.isDuplicate(event)) {
-            throw new DukeException("This task is duplicated!");
+            throw new DukeException("Error detected: This task is duplicated!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         }
         TaskList.addTask(event);
     }
@@ -150,14 +154,16 @@ public class Parser {
         String date = Parser.getDate(command, "D", deadlineDescription.length() + 14);
         int currentIndexOfString = deadlineDescription.length() + date.length();
         if (command.length() < currentIndexOfString + 15) {
-            throw new DukeException("Time need to be included!");
+            throw new DukeException("Error detected: Time need to be included!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         }
         String time = command.substring(currentIndexOfString + 15);
         String localTime = time.substring(0, 2) + ":" + time.substring(2, 4);
         Deadline deadline = new Deadline(deadlineDescription,
                 LocalDate.parse(format(date), formatter), LocalTime.parse(localTime));
         if (TaskList.isDuplicate(deadline)) {
-            throw new DukeException("This task is duplicated!");
+            throw new DukeException("Error detected: This task is duplicated!\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         }
         TaskList.addTask(deadline);
     }
@@ -188,7 +194,8 @@ public class Parser {
             }
         }
         if (date.length() == 0) {
-            throw new DukeException("Date cannot be empty");
+            throw new DukeException("Error detected: Date cannot be empty\n" +
+                    "The program has terminated.\nPlease restart to continue using our service");
         }
         return date;
     }
@@ -205,13 +212,15 @@ public class Parser {
         switch (type) {
             case "T":
                 if (command.length() == 4) {
-                    throw new DukeException("Description cannot be empty");
+                    throw new DukeException("Error detected: Description cannot be empty\n" +
+                            "The program has terminated.\nPlease restart to continue using our service");
                 }
                 description = command.substring(5);
                 break;
             case "E":
                 if (command.length() == 5) {
-                    throw new DukeException("Description cannot be empty");
+                    throw new DukeException("Error detected: Description cannot be empty\n" +
+                            "The program has terminated.\nPlease restart to continue using our service");
                 }
                 for (int i = 6; i < command.length(); i++) {
                     if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
@@ -222,7 +231,8 @@ public class Parser {
                 break;
             case "D":
                 if (command.length() == 8) {
-                    throw new DukeException("Description cannot be empty");
+                    throw new DukeException("Error detected: Description cannot be empty\n" +
+                            "The program has terminated.\nPlease restart to continue using our service");
                 }
                 for (int i = 9; i < command.length(); i++) {
                     if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
