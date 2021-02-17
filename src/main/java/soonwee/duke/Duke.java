@@ -14,6 +14,7 @@ public class Duke {
      * Initializes the input by checking the front command and performing
      * their required actions.
      *
+     * @param input string input
      * @return a string output based on the result computed
      */
     public static String initialize(String input) {
@@ -50,6 +51,8 @@ public class Duke {
      * Performs the checking of Tasks to determine and validate what they are, and
      * create them accordingly.
      *
+     * @param taskList a Task List
+     * @param cmd command input
      * @return result output
      */
     public static String performTaskCheck(TaskList taskList, String cmd) {
@@ -66,6 +69,9 @@ public class Duke {
                 if (taskType == TaskType.UNKNOWN) {
                     throw new
                             DukeException("OOPS!!! I'm sorry, " + "but I don't know what that means :-(");
+                }
+                if (task.trim().length() == 0) {
+                    throw new DukeException("Description cannot be empty.");
                 }
                 result = performTaskAllocation(taskType, task, cmd, taskList);
             } catch (DukeException de) {
@@ -84,7 +90,8 @@ public class Duke {
      * @param taskList a TaskList instance
      * @return output result once the addition for respective task is performed
      */
-    public static String performTaskAllocation(TaskType taskType, String filteredInput, String fullInput, TaskList taskList) {
+    public static String performTaskAllocation(
+            TaskType taskType, String filteredInput, String fullInput, TaskList taskList) {
         assert taskType != TaskType.UNKNOWN : "An unknown task is being allocated.";
         String result;
         Parser checker = new Parser();

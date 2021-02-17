@@ -41,7 +41,7 @@ public class Storage {
     /**
      * Creates the directory and file for tasks.
      *
-     * @param filePath file path
+     * @param filePath relative file path
      * @return new file object
      */
     public File createFile(String filePath) {
