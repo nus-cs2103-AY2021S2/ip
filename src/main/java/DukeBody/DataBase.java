@@ -21,10 +21,10 @@ public class DataBase {
         }
     }
 
-    Path dirpath;
+    Path dirPath;
 
     public DataBase (String path) {
-        dirpath = Paths.get(path);
+        dirPath = Paths.get(path);
     }
 
     // default constructor set child directory in current working directory as path.
@@ -45,7 +45,7 @@ public class DataBase {
         TaskList tasks = new TaskList();
 
         try {
-            File userdata = new File(dirpath.toAbsolutePath() + File.separator
+            File userdata = new File(dirPath.toAbsolutePath() + File.separator
                     + username + ".txt");
 
             Scanner scanner = new Scanner(userdata);
@@ -72,12 +72,12 @@ public class DataBase {
      * @throws IOException
      */
     public void updateTasks (String username, TaskList tasks) throws IOException {
-        if (!Files.exists(dirpath)) {
-            Files.createDirectories(dirpath);
+        if (!Files.exists(dirPath)) {
+            Files.createDirectories(dirPath);
         }
 
-        assert Files.exists(dirpath): "database directory not found on update.";
-        FileWriter writer = new FileWriter(dirpath.toAbsolutePath()
+        assert Files.exists(dirPath): "database directory not found on update.";
+        FileWriter writer = new FileWriter(dirPath.toAbsolutePath()
                 + File.separator + username + ".txt");
 
         for (Task task: tasks) {
@@ -94,6 +94,6 @@ public class DataBase {
      * @throws java.nio.file.InvalidPathException
      */
     public void changePath (String path) throws java.nio.file.InvalidPathException {
-        dirpath = Paths.get(path);
+        dirPath = Paths.get(path);
     }
 }

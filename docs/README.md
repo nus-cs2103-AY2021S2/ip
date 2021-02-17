@@ -4,17 +4,17 @@ User guide for the use of task management chatbot dogeDuke.
 ## Features 
 
 ### LogIn
-#### Command: `USERNAME [/read_from:TXTFILE_PATH]`
+#### Command: `USERNAME [/read_from:DIRECTORY_PATH]`
 - Sets up the username for dogeDuke to address the user and reads any stored data from 
-  TXTFILE_PATH.
-- Where TXTFILE_PATH is invalid or unspecified, defaults to userdata/USERNAME.txt in the 
+  USERNAME.txt in the DIRECTORY_PATH.
+- Where DIRECTORY_PATH is invalid or unspecified, defaults to userdata in the 
   current working directory.
 - DogeDuke greets the user and prompts for subsequent actions post-set up.
 
 #### Example Usage:
-`A0183450J /read_from:custom_data.txt`
+`A0183450J /read_from:custom`
 #### Expected Outcome:
-- Sets username as A0183450J and reads the stored data from custom_data.txt file.
+- Sets username as A0183450J and reads the stored data from custom/A0183450J.txt file.
 - DogeDuke greets "HENLO A0183450J ..."
 
 ### Listing All Tasks
@@ -100,11 +100,17 @@ User guide for the use of task management chatbot dogeDuke.
 #### Expected Outcome:
 - Adds a deadline task with the description "IP Submission", in an undone state,
   to be done by 19 Feb 2021 11:59pm and creation datetime at current datetime.
+
+### Exiting the App
+#### Command: `bye`
+- Update tasks to the database and exits the app.
+- Where DIRECTORY_PATH/USERNAME.txt as per the LogIn setup does not exist, DogeDuke creates
+  the directory and file.
   
 ## Example Use of DogeDuke
 - App start up and setting up of user
 
-![startup.png](startup.png)
+![startup.png](startup.png)  
 
 - Adding an event task
 
