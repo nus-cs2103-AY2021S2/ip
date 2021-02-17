@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'java-library'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -56,6 +57,15 @@ checkstyle {
     toolVersion = '8.32'
 }
 
-run{
+run {
+    enableAssertions = true
     standardInput = System.in
 }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+version = '1.2.1'

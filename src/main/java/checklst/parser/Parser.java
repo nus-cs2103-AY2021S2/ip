@@ -33,9 +33,15 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * Parses the input string and returns the corresponding command.
+     * @param input Input string to be parsed.
+     * @return String representing the output.
+     * @throws ChecklstException Exception when command is invalid.
+     */
     public String parse(String[] input) throws ChecklstException {
         MethodPair method = methodMap.get(input[0]);
-        
+
         if (method == null) {
             throw new ChecklstException("Sorry I didn't understand that command!");
         }
