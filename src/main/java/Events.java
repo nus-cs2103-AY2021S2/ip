@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an Event Task.
+ *
  * @author Arihant Jain
  */
 public class Events extends Task {
@@ -31,7 +32,6 @@ public class Events extends Task {
      * @param description the task description
      * @param at          the at
      */
-//by is the time/date simple string
     public Events(String description, String at) {
         super(description);
         this.at = at;
@@ -88,22 +88,47 @@ public class Events extends Task {
         return this.endTime.toString();
     }
 
+    /**
+     * Gets at.
+     *
+     * @return the at
+     */
     public String getAt() {
         return this.at;
     }
 
+    /**
+     * Get date object.
+     *
+     * @return the local date.
+     */
     public LocalDate getDateObj(){
         return this.date;
     }
 
+    /**
+     * Get start time object.
+     *
+     * @return the local time
+     */
     public LocalTime getStartTimeObj(){
         return this.startTime;
     }
 
+    /**
+     * Get end time object.
+     *
+     * @return the local time
+     */
     public LocalTime getEndTimeObj(){
         return this.endTime;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return this.description;
     }

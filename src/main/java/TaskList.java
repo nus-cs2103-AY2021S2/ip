@@ -51,33 +51,40 @@ public class TaskList {
     }
 
     /**
-     * Deletes a Task in Task List based on index
+     * Deletes a Task in Task List based on index.
      *
      * @param index the task index
      */
     public void delTask(int index) {
         this.tasksList.remove(index);
     }
-
-    public TaskList dateSort(){
+    /**
+     * Sorts Tasks in Task List chronologically.
+     *
+     * @return  Sorted Task List
+     */
+    public TaskList dateSort() {
         ArrayList<TimeTask> sortedTasks = new ArrayList<>();
         ArrayList<Task> nonSortedTasks = new ArrayList<>();
         ArrayList<Task> chronoTasks = new ArrayList<>();
 
-        for(int i = 0; i < this.getTasksCount(); i++){
-            if(this.getTasksList().get(i) instanceof Todo){
+        for (int i = 0; i < this.getTasksCount(); i++) {
+            if (this.getTasksList().get(i) instanceof Todo) {
                 nonSortedTasks.add(this.getTasksList().get(i));
-            }else if(this.getTasksList().get(i) instanceof Deadlines){
-                sortedTasks.add(new TimeTask( (Deadlines) this.getTasksList().get(i)));
+            } else if (this.getTasksList().get(i) instanceof Deadlines) {
+                sortedTasks.add(
+                        new TimeTask((Deadlines) this.getTasksList().get(i)));
 
-            }else{
-                assert (this.getTasksList().get(i) instanceof Events) : "dateSort() error";
-                sortedTasks.add(new TimeTask( (Events) this.getTasksList().get(i)));
+            } else {
+                assert (this.getTasksList().get(i) instanceof Events)
+                        : "dateSort() error";
+                sortedTasks.add(
+                        new TimeTask((Events) this.getTasksList().get(i)));
             }
         }
         Collections.sort(sortedTasks);
 
-        for(int i = 0; i < sortedTasks.size(); i++){
+        for (int i = 0; i < sortedTasks.size(); i++) {
             chronoTasks.add(sortedTasks.get(i).getTask());
         }
         chronoTasks.addAll(nonSortedTasks);

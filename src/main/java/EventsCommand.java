@@ -1,6 +1,14 @@
+/**
+ * The type Events command.
+ */
 public class EventsCommand extends Command {
     private final String fullCommand;
 
+    /**
+     * Instantiates a new Events command.
+     *
+     * @param fullCommand the full command
+     */
     public EventsCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }

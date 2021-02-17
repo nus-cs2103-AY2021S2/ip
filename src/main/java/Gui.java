@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -12,11 +11,14 @@ import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.io.*;
+import java.io.File;
 import java.util.HashMap;
 
-public class Gui extends Application{
-    private HashMap<String,Image> imageMap;
+/**
+ * The type Gui.
+ */
+public class Gui extends Application {
+    private HashMap<String, Image> imageMap;
     private Scene welcomeScene;
     private Scene dukeRunScene;
     private Button startButton;
@@ -27,16 +29,18 @@ public class Gui extends Application{
     private Image user;
     private Image bot;
 
-    //function to obtain images
-    public void loadResources(){
+    /**
+     * Load resources from resources folder.
+     */
+    public void loadResources() {
         assert ((new File("src/main/resources/images/botDead.png")).exists()
             && (new File("src/main/resources/images/botHappy.png")).exists()
-            && (new File("src/main/resources/images/botNormal.png")).exists()):
-                "image files for bot do not exist";
-        assert (new File("src/main/resources/images/userNormal.png")).exists():
-                "image file for user does not exist";
-        assert (new File("src/main/resources/images/welcomeScreen.png")).exists():
-                "image file for welcome screen does not exist";
+            && (new File("src/main/resources/images/botNormal.png")).exists())
+                : "image files for bot do not exist";
+        assert (new File("src/main/resources/images/userNormal.png")).exists()
+                : "image file for user does not exist";
+        assert (new File("src/main/resources/images/welcomeScreen.png")).exists()
+                : "image file for welcome screen does not exist";
 
         this.imageMap = new HashMap<>();
         this.imageMap.put("botDead", new Image(this.getClass().getResourceAsStream(
@@ -52,8 +56,12 @@ public class Gui extends Application{
 
     }
 
-    //Setting gui preferences
-    public Scene welcomeCreate(){
+    /**
+     * Create welcome screen scene.
+     *
+     * @return the scene
+     */
+    public Scene welcomeCreate() {
         ScrollPane scrollPane = new ScrollPane();
         VBox dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -68,19 +76,24 @@ public class Gui extends Application{
         startButton.setPrefWidth(55.0);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(startButton, 1.0);
-        AnchorPane.setRightAnchor(startButton,175.0);
+        AnchorPane.setRightAnchor(startButton, 175.0);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         mainLayout.setPrefSize(400.0, 600.0);
         ImageView imageView = new ImageView(imageMap.get("welcomeScreen"));
         imageView.setFitHeight(550.0);
         imageView.setPreserveRatio(true);
-        mainLayout.getChildren().addAll(scrollPane, startButton,imageView);
+        mainLayout.getChildren().addAll(scrollPane, startButton, imageView);
         return new Scene(mainLayout);
 
 
     }
 
-    public Scene dukeRunCreate(){
+    /**
+     * Create duke main screen scene.
+     *
+     * @return the scene
+     */
+    public Scene dukeRunCreate() {
         ScrollPane scrollPane = new ScrollPane();
         this.dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -100,7 +113,7 @@ public class Gui extends Application{
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         mainLayout.setPrefSize(400.0, 600.0);
@@ -110,7 +123,12 @@ public class Gui extends Application{
 
     }
 
-    public void stageSet(Scene scene){
+    /**
+     * Stage set.
+     *
+     * @param scene the scene
+     */
+    public void stageSet(Scene scene) {
         this.primaryStage.setScene(scene);
         this.primaryStage.setTitle("Duke");
         this.primaryStage.setResizable(false);
@@ -124,7 +142,12 @@ public class Gui extends Application{
         return duke.returnOutput();
     }
 
-    public void handleUserInput(Duke duke){
+    /**
+     * Handle user input.
+     *
+     * @param duke the duke
+     */
+    public void handleUserInput(Duke duke) {
         String userCommand = userInput.getText();
         Label userText = new Label(userCommand);
 
@@ -133,7 +156,7 @@ public class Gui extends Application{
 
         this.user = this.imageMap.get("userNormal");
         this.bot = this.imageMap.get("botNormal");
-        if(duke.getHasError()){
+        if (duke.getHasError()) {
             this.bot = this.imageMap.get("botDead");
         }
 
@@ -141,7 +164,7 @@ public class Gui extends Application{
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(bot))
         );
-        if(userCommand.equals("bye")){
+        if (userCommand.equals("bye")) {
             Platform.exit();
         }
         userInput.clear();
@@ -166,8 +189,8 @@ public class Gui extends Application{
             handleUserInput(duke);
         });
         this.dialogContainer.getChildren().addAll(
-                //DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(new Label(duke.lastOutListElement()), new ImageView(this.bot))
+                DialogBox.getDukeDialog(new Label(duke.lastOutListElement()),
+                        new ImageView(this.bot))
         );
 
     }
