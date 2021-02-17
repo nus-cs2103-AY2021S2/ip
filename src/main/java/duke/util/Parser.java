@@ -10,18 +10,23 @@ import java.util.Arrays;
 public class Parser {
 
     /**
-     * Checks if input from user is valid.
+     * Checks if input from user is valid and returns a pair of command and arugments.
      * <br>Only accepts valid commands, followed by valid parameters.
      *
      * @param input Input from user.
+     * @return Pair of command and the arguments.
      * @throws DukeInputException If input is invalid.
      */
-    public static void parseInput(String input) throws DukeInputException {
+    public static Pair<Command, String> parseInput(String input) throws DukeInputException {
         String[] s = input.split(" ", 2);
 
-        Command cmd;
+        Command command = getCommand(s[0]);
         String args = s.length == 2 ? s[1] : "";
 
+        checkValidArguments(command, args);
+
+        return new Pair<>(command, args);
+    }
         try {
             cmd = Command.valueOf(s[0].toUpperCase());
         } catch (IllegalArgumentException e) {

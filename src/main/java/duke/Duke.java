@@ -8,6 +8,7 @@ import duke.util.Deadline;
 import duke.util.DukeException;
 import duke.util.DukeInputException;
 import duke.util.Event;
+import duke.util.Pair;
 import duke.util.Parser;
 import duke.util.SampleData;
 import duke.util.Storage;
@@ -109,7 +110,7 @@ public class Duke {
         }
 
         try {
-            Parser.parseInput(input);
+            return processCommand(Parser.parseInput(input));
         } catch (DukeInputException e) {
             return ui.displayError(e);
         }
@@ -121,6 +122,10 @@ public class Duke {
         String[] s = input.split(" ", 2);
         Command command = Command.valueOf(s[0].toUpperCase());
         String args = s.length == 2 ? s[1] : "";
+
+    private String processCommand(Pair<Command, String> instruction) {
+        Command command = instruction.getFirst();
+        String args = instruction.getSecond();
 
         if (args.equals("-h")) {
             return command.getHelp();
