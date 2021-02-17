@@ -2,6 +2,7 @@ package owen.controller;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -79,5 +80,9 @@ public class MainWindow extends AnchorPane {
                 new Separator(),
                 DialogBox.getBotDialog(response, this.botImage),
                 new Separator());
+        
+        if (!this.bot.isRunning()) {
+            Platform.exit();
+        }
     }
 }
