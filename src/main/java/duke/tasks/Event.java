@@ -41,7 +41,7 @@ public class Event extends Task {
     }
 
     /**
-     * Helper method to get the details of the event to be stored.
+     * Gets the details of the event to be stored.
      * @returnthe the details of the event to be stored
      */
     @Override

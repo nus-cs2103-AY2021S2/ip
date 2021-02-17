@@ -7,7 +7,8 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 
 /**
- * Updates the task at given index
+ * Updates the task at given index.
+ * At this iteration, it only updates the date for deadline objects.
  */
 public class UpdateCommand extends Command {
     private int taskIndexToUpdate;

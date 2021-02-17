@@ -256,7 +256,8 @@ public class Parser {
             date = LocalDate.parse(dateInString);
             assert !dateInString.isEmpty() : "deadline cannot be created without a by date!";
         } catch (DateTimeParseException e) {
-            throw new DukeException("invalid deadline date given.");
+            throw new DukeException("Invalid deadline date given. " +
+                    "Please ensure date given is valid and follows the yyyy-mm-dd format, e.g. 2021-02-17.");
         }
         return date;
     }
