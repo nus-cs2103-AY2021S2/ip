@@ -1,3 +1,5 @@
+import javafx.beans.binding.StringBinding;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -128,32 +130,22 @@ public class Storage {
      * @throws IOException If a FileWriter cannot be created.
      */
     public void update(TaskList taskList) throws IOException {
-        StringBuilder textToAdd = new StringBuilder();
         FileWriter fw = new FileWriter(this.file);
-        for (Task curr : taskList.getNormalTasks()) {
-            if (curr instanceof Todo) {
-                textToAdd.append("T ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append(curr.getName())
-                        .append(System.lineSeparator());
-            } else if (curr instanceof Deadline) {
-                textToAdd.append("D ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append(curr.getName())
-                        .append(System.lineSeparator())
-                        .append(((Deadline) curr).getBy())
-                        .append(System.lineSeparator());
-            } else if (curr instanceof Event) {
-                textToAdd.append("E ")
-                        .append(curr.isDone() ? "1 " : "0 ")
-                        .append(curr.getName())
-                        .append(System.lineSeparator())
-                        .append(((Event) curr).getAt())
-                        .append(System.lineSeparator());
-            }
-        }
-        textToAdd.append("snooze\n");
-        for (Task curr : taskList.getSnoozedTasks()) {
+        String textToAdd = translateToString(taskList.getNormalTasks()) +
+                "snooze\n" +
+                translateToString(taskList.getSnoozedTasks());
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    /**
+     * Translate Tasks in TaskList to String form for storage in hard drive.
+     * @param taskList TaskList containing the tasks.
+     * @return A String format of the Tasks inside the TaskList.
+     */
+    public String translateToString(ArrayList<Task> taskList) {
+        StringBuilder textToAdd = new StringBuilder();
+        for (Task curr : taskList) {
             if (curr instanceof Todo) {
                 textToAdd.append(caseTodo((Todo) curr));
             } else if (curr instanceof Deadline) {
@@ -162,8 +154,7 @@ public class Storage {
                 textToAdd.append(caseEvent((Event) curr));
             }
         }
-        fw.write(textToAdd.toString());
-        fw.close();
+        return textToAdd.toString();
     }
 
     public String caseTodo(Todo todo) {

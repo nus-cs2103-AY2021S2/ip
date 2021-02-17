@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -48,12 +49,37 @@ public class SampleDialogBox extends HBox {
     }
 
     public static SampleDialogBox getUserDialog(String text, Image img) {
-        return new SampleDialogBox(text, img);
+        var db = new SampleDialogBox(text, img);
+        db.addDesignUser();
+        return db;
     }
 
     public static SampleDialogBox getDukeDialog(String text, Image img) {
         var db = new SampleDialogBox(text, img);
         db.flip();
+        db.addDesignDuke();
         return db;
+    }
+
+    public void addDesignUser() {
+        this.dialog.setStyle("-fx-background-color: #87CEEB;"
+                + "-fx-text-fill: black;"
+                + "-fx-min-width: 200px;"
+                + "-fx-font-size: 14;"
+                + "-fx-alignment: baseline-left;"
+                + "-fx-border-width: 0;"
+                + "-fx-background-radius: 15.0;"
+                + "-fx-padding: 15.0");
+    }
+
+    public void addDesignDuke() {
+        this.dialog.setStyle("-fx-background-color: #FFC0CB;"
+                + "-fx-text-fill: black;"
+                + "-fx-min-width: 200px;"
+                + "-fx-font-size: 14;"
+                + "-fx-alignment: baseline-left;"
+                + "-fx-border-width: 0;"
+                + "-fx-background-radius: 15.0;"
+                + "-fx-padding: 15.0");
     }
 }
