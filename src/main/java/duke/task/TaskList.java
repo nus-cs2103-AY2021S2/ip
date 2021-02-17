@@ -29,6 +29,11 @@ public class TaskList {
      */
     public static String markDone(int i) {
         String response = "";
+
+        if (tasks.size() == 0) {
+            response = (Ui.EMPTY_LIST);
+        }
+
         try {
             Task t = tasks.get(i - 1);
             tasks.get(i - 1).markDone();
@@ -99,6 +104,10 @@ public class TaskList {
      */
     public static String deleteTask(int i) {
         String response = "";
+
+        if (tasks.size() == 0) {
+            response = (Ui.EMPTY_LIST);
+        }
         try {
             Task t = tasks.get(i - 1);
             tasks.remove(i - 1);
