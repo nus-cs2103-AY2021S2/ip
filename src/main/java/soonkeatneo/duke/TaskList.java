@@ -105,6 +105,23 @@ public class TaskList {
     }
 
     /**
+     * Clears all tasks from the list.
+     * @param storage Storage object to remove from disk
+     * @return String representing output of success
+     */
+    public String clear(Storage storage) {
+        List<Task> temp = new ArrayList<>();
+        for (Task task : taskList) {
+            temp.add(task);
+        }
+        for (Task task : temp) {
+            String stringDesc = "delete " + (taskList.indexOf(task) + 1);
+            deleteTask(stringDesc, storage);
+        }
+        return "Successfully cleared all tasks from the task list!";
+    }
+
+    /**
      * Delete the specified task from the list.
      * @param inputString User input string
      * @param storage Storage object to remove from disk

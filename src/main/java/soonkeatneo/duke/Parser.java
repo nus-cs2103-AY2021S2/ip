@@ -26,6 +26,8 @@ public class Parser {
             return Help.print();
         } else if (inputString.equals("bye")) {
             System.exit(0);
+        } else if (inputString.equals("clear")) {
+            return tasks.clear(storage);
         } else if (inputString.startsWith("done")) {
             return tasks.completeTask(inputString, storage);
         } else if (inputString.startsWith("delete")) {

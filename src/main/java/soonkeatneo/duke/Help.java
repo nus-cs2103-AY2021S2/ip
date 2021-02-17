@@ -16,11 +16,13 @@ public class Help {
         String helpText = "The following are the implemented functions in " + Duke.BOT_NAME + ":\n"
                 + "list - List all Tasks added to the bot.\n"
                 + "find - Search for a Task containing the given string.\n"
+                + "clear - Clears all Tasks from the list.\n"
                 + "todo - Add a new ToDo Task.\n"
                 + "event - Add a new Event Task.\n"
                 + "deadline - Add a new Deadline Task.\n"
                 + "done - Mark a Task as completed.\n"
                 + "delete - Removes a Task from the application.\n"
+                + "help - Prints the help text\n"
                 + "bye - Exit the application.";
         return helpText;
     }

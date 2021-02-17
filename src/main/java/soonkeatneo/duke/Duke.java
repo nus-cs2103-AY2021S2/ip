@@ -18,10 +18,10 @@ public class Duke {
      * @param filePath file path for initialization of Storage
      */
     public Duke(String filePath) {
-        storage = new Storage(filePath).load();
-        isFirstLaunch = false;
-        if (storage.isSampleDataLoaded()) {
-            isFirstLaunch = true;
+        this.storage = new Storage(filePath).load();
+        this.isFirstLaunch = false;
+        if (this.storage.isSampleDataLoaded()) {
+            this.isFirstLaunch = true;
         }
         tasks = new TaskList(storage);
     }
