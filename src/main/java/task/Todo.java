@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 /**
  * The simplest type of Task with no date and time.

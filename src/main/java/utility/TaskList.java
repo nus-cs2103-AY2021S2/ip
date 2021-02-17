@@ -1,7 +1,9 @@
-package duke;
+package utility;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import task.Task;
 
 /**
  * Represents a list of Task objects in a more abstract way.

@@ -1,6 +1,9 @@
-package duke;
+package utility;
 
 import java.util.ListIterator;
+
+import duke.DukeException;
+import task.Task;
 
 /**
  * Aids Duke in displaying messages on its UI
