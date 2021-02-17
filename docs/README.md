@@ -6,15 +6,15 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-	1. [Add a task](#to-do) 
-		* To-dos
-		* Deadlines
-		* Events
-	2. List all tasks
-	3. Delete a task
-	4. Mark Task as done
-	5. Find a task
-	5. Exit Program
+	1. Add a task 
+		* [Todo](#adding-a-todo)
+		* [Deadline](#adding-a-deadline)
+		* [Event](#adding-an-event)
+	2. [List all tasks](#listing-all-tasks)
+	3. [Delete a task](#delete-a-task)
+	4. [Mark task as done](#mark-task-as-done)
+	5. [Find a task](#find-a-task)
+	6. Exit Program(#exit)
 * [Command Summary](#command-summary)
 
 
@@ -43,7 +43,7 @@ Notes:
 * Commands are case-insensitive. The program only takes in command in lower alphabets. 
 * Users should add ONE task at a time. 
 
-#### `todo`
+#### Adding a todo: `todo`
 Todo command add a todo task which requires task description and no other field as input.
 
 Format: `todo` description
@@ -54,7 +54,7 @@ Examples:
 
 ![Ui](./Images/addTodoTask.png)
 
-#### `deadline`
+#### Adding a deadline: `deadline`
 Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
 
 Format: `deadline` description /BY date[DD/MM/YY] time [HHMM]
@@ -68,7 +68,7 @@ Examples:
 
 ![Ui](./Images/addDeadlineTask.png)
 
-#### `event`
+#### Adding an event: `event`
 Event command add a event task which requires task description, date as well as start and end time of the task. 
 
 Format: `event` description /AT date[DD/MM/YY] time [HHMM] - time [HHMM]
@@ -128,11 +128,15 @@ Example:
 
 ![Ui](./Images/findTask.png)
 
+### Exit : `bye`
+
+The program will terminate a few seconds  after returning a "Bye. Hope to see you again!" message. 
+
+
 ## Command summary
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add todo** |  `todo description`e.g, `add todo watch netflix `
 **Add deadline** | `deadline description, date` e.g, `deadline finish cs2103 quiz 18/02/2021 `
 **Add event** | `deadline description, date, start time, end time` e.g, ` event attend internship meeting /at 17/02/2021 1000-1100`
@@ -141,10 +145,4 @@ Action | Format, Examples
 **Find** |  `find KEYWORD [MORE_KEYWORDS]` e.g., `find cs2103 quiz`
 **Mark as done** | `done INDEX` e.g., 'done 4'
 **Exit** | `bye`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
 
