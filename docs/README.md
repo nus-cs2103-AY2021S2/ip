@@ -23,66 +23,75 @@ Prerequisites: JDK 11
 ## Features
 
 ### View all Tasks
-Shows all tasks that are present in the list.
-Command: `list`
+* Description: Shows all tasks that are present in the list.
+* Command: `list`
 
 ### Find a Task
-Format: `find <item>`
-Example: `find abcd`, where the task I wanted to find has `abcd` as a part of it.
-Expected Outcome: Tasks matching the string would be printed.
+* Description: Find Tasks matching a given string.
+* Format: `find <item>`
+* Example: `find abcd`, where the task I wanted to find has `abcd` as a part of it.
+* Expected Outcome: Tasks matching the string would be printed.
 <p align="center">
-
+<img height="640" width="480" src="find.png" />
 </p>
 
 ### Clear all Tasks
-Command: `clear`
-Expected Outcome: All tasks will be cleared.
+* Description: Clears all tasks in DukeNukem.
+* Command: `clear`
+* Expected Outcome: All tasks will be cleared.
 
 ### Add To-Do
-Format: `todo <description>`
-Example: `todo Bring the kids to school`
-Expected Outcome: Adds a new To-Do with the given details.
+* Description: Adds a new To-Do with the given details.
+* Format: `todo <description>`
+* Example: `todo Bring the kids to school`
+* Expected Outcome: Adds a new To-Do with the description of "Bring the kids to school".
 <p align="center">
 
 </p>
 
 ### Add Event
-Format: `event <description> /at YYYY-MM-DD`
-Example: `event Meeting with Minister /at 2021-02-20`
-Expected Outcome: Adds a new Event with the given details.
+* Description: Adds a new Event with the given details.
+* Format: `event <description> /at YYYY-MM-DD`
+* Example: `event Meeting with Minister /at 2021-02-20`
+* Expected Outcome: Adds a new Event with the description "Meeting with Minister" on 20th Feb 2021.
 <p align="center">
 
 </p>
 
 ### Add Deadline
-Format: `deadline <description> /by YYYY-MM-DD`
-Example: `deadline Submit Project /by 2021-02-19`
-Expected Outcome: Adds a new Deadline with the given details.
+* Description: Adds a new Deadline with the given details.
+* Format: `deadline <description> /by YYYY-MM-DD`
+* Example: `deadline Submit Project /by 2021-02-19`
+* Expected Outcome: Adds a new Deadline with the description "Submit project" to be done by 19th Feb 2021.
 <p align="center">
 
 </p>
 
 
 ### Mark as Complete
-Format: `done <task number>`
-Example: `done 2`
-Expected Outcome: Marks the 2nd task in the list as complete.
+* Description: Marks the given task as complete.
+* Format: `done <task number>`
+* Example: `done 2`
+* Expected Outcome: Marks the 2nd task in the list as complete.
 <p align="center">
 
 </p>
 
 ### Delete a Task
-Format: `delete <task number>`
-Example: `delete 2`
-Expected Outcome: Deletes the 2nd task in the list.
+* Description: Deletes the task at the respective index number.
+* Format: `delete <task number>`
+* Example: `delete 2`
+* Expected Outcome: Deletes the 2nd task in the list.
 <p align="center">
 
 </p>
 
 ### Show Help
-Command: `help`
-Expected Outcome: Help text would be printed.
+* Prints the help documentation in DukeNukem.
+* Command: `help`
+* Expected Outcome: Help text would be printed.
 
 ### Exit
-Command: `bye`
-Expected Outcome: Application is exited.
+* Description: Exits the application.
+* Command: `bye`
+* Expected Outcome: Application is exited.
