@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.commands.AddCommand;
@@ -22,6 +23,7 @@ import duke.tasks.Todo;
  * Parser class to parse user input
  */
 public class Parser {
+
     private Ui ui = new Ui();
 
     /**
@@ -32,189 +34,169 @@ public class Parser {
      */
     public Command parse(String str) {
         if (str.startsWith("bye")) {
-            return new ByeCommand();
-
+            return parseByeCommand(str);
         } else if (str.startsWith("list")) {
-            return new ListCommand();
-
+            return parseListCommand(str);
         } else if (str.startsWith("help")) {
-            return new HelpCommand();
+            return parseHelpCommand(str);
+        } else if (str.startsWith("delete ")) {
+            return parseDeleteString(str);
+        } else if (str.startsWith("done ")) {
+            return parseDoneString(str);
+        } else if (str.startsWith("find ")) {
+            return parseFindString(str);
+        } else if (str.startsWith("edit ")) {
+            if (str.contains(" /name ")) {
+                return parseEditNameString(str);
+            } else if (str.contains( " /time ")) {
+                return parseEditTimeString(str);
+            } else {
+                return new ErrorCommand(ui.printUnknownInputError());
+            }
+        } else if (str.startsWith("todo ")) {
+            return parseTodoString(str);
+        } else if (str.startsWith("deadline ")) {
+            return parseDeadlineString(str);
+        } else if (str.startsWith("event ")) {
+            return parseEventString(str);
+        } else {
+            return new ErrorCommand(ui.printUnknownInputError());
+        }
+    }
 
-        } else if (str.startsWith("delete") && isCorrectDeleteString(str)) {
+    public Command parseByeCommand(String str) {
+        if (str.equals("bye")) {
+            return new ByeCommand();
+        } else {
+            return new ErrorCommand(ui.printUnknownInputError());
+        }
+    }
+
+    public Command parseListCommand(String str) {
+        if (str.equals("list")) {
+            return new ListCommand();
+        } else {
+            return new ErrorCommand(ui.printUnknownInputError());
+        }
+    }
+
+    public Command parseHelpCommand(String str) {
+        if (str.equals("help")) {
+            return new HelpCommand();
+        } else {
+            return new ErrorCommand(ui.printUnknownInputError());
+        }
+    }
+
+    public Command parseDeleteString(String str) {
+        try {
             int taskNum = Integer.parseInt(str.substring(7));
             return new DeleteCommand(taskNum);
+        } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
+            return new ErrorCommand(ui.printWrongIndexError());
+        }
+    }
 
-        } else if (str.startsWith("done") && isCorrectDoneString(str)) {
+    public Command parseDoneString(String str) {
+        try {
             int taskNum = Integer.parseInt(str.substring(5));
             return new DoneCommand(taskNum);
-
-        } else if (str.startsWith("find")) {
-            String text = str.substring(5);
-            return new FindCommand(text);
-
-        } else if (str.startsWith("edit")) {
-            return editTask(str);
-
-        } else {
-            return addTask(str);
-        }
-    }
-
-    /**
-     * Parses user input for adding tasks and returns the corresponding command
-     *
-     * @param str User input
-     * @return Corresponding command for Duke to execute
-     */
-    public Command addTask(String str) {
-        if (str.startsWith("todo ") && isCorrectTodoString(str)) {
-            String name = str.substring(5);
-            Todo curr = new Todo(name, false);
-            return new AddCommand(curr);
-
-        } else if (str.startsWith("deadline ") && isCorrectDeadlineString(str)) {
-            int cut = str.indexOf("/by");
-            String name = str.substring(9, cut - 1);
-            String time = str.substring(cut + 4);
-            Deadline curr = new Deadline(name, false, time);
-            return new AddCommand(curr);
-
-        } else if (str.startsWith("event ") && isCorrectEventString(str)) {
-            int cut = str.indexOf("/at");
-            String name = str.substring(6, cut - 1);
-            String time = str.substring(cut + 4);
-            Event curr = new Event(name, false, time);
-            return new AddCommand(curr);
-        } else {
-            return new ErrorCommand(ui.printUnknownInputError());
-        }
-    }
-
-
-    /**
-     * Parses user input for editing tasks and returns the corresponding command
-     *
-     * @param str User input
-     * @return Corresponding command for Duke to execute
-     */
-    public Command editTask(String str) {
-        if (str.contains("/name") && isCorrectEditNameString(str)) {
-            int cut = str.indexOf("/name");
-            int index = Integer.parseInt(str.substring(5, cut - 1));
-            String newName = str.substring(cut + 6);
-            return new EditNameCommand(index, newName);
-
-        } else if (str.contains("/time") && isCorrectEditTimeString(str)) {
-            int cut = str.indexOf("/time");
-            int index = Integer.parseInt(str.substring(5, cut - 1));
-            String newTime = str.substring(cut + 6);
-            return new EditTimeCommand(index, newTime);
-
-        } else {
-            return new ErrorCommand(ui.printUnknownInputError());
-        }
-    }
-
-    public boolean isCorrectDeleteString(String str) {
-        try {
-            int taskNum = Integer.parseInt(str.substring(7));
         } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
-            return false;
+            return new ErrorCommand(ui.printWrongIndexError());
         }
-        return true;
     }
 
-    public boolean isCorrectDoneString(String str) {
+    public Command parseFindString(String str) {
         try {
-            int taskNum = Integer.parseInt(str.substring(5));
-        } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
-            return false;
+            String keyword = str.substring(5);
+            return new FindCommand(keyword);
+        } catch (StringIndexOutOfBoundsException e) {
+            return new ErrorCommand(ui.printMissingKeywordError());
         }
-        return true;
+
     }
 
-    public boolean isCorrectTodoString(String str) {
+    public Command parseTodoString(String str) {
         String name = str.substring(5);
-        if (name.length() == 0) {
-            return false;
-        }
-        return true;
+        Todo curr = new Todo(name, false);
+        return new AddCommand(curr);
     }
 
-    public boolean isCorrectDeadlineString(String str) {
-        int cut = str.indexOf("/by");
+    public Command parseDeadlineString(String str) {
+        int cut = str.indexOf(" /by ");
         if (cut == -1) {
-            return false;
+            return new ErrorCommand(ui.printWrongTimeError());
         }
 
-        String name = str.substring(9, cut - 1);
+        String name = str.substring(9, cut);
         if (name.length() == 0) {
-            return false;
+            return new ErrorCommand(ui.printWrongNameError());
         }
 
-        String time = str.substring(cut + 4);
+        String time = str.substring(cut + 5);
         try {
             LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            return false;
+            return new ErrorCommand(ui.printWrongTimeError());
         }
 
-        return true;
+        Deadline curr = new Deadline(name, false, time);
+        return new AddCommand(curr);
     }
 
-    public boolean isCorrectEventString(String str) {
-        int cut = str.indexOf("/at");
+    public Command parseEventString(String str) {
+        int cut = str.indexOf(" /at ");
         if (cut == -1) {
-            return false;
+            return new ErrorCommand(ui.printWrongTimeError());
         }
 
         String name = str.substring(6, cut - 1);
         if (name.length() == 0) {
-            return false;
+            return new ErrorCommand(ui.printWrongNameError());
         }
 
-        String time = str.substring(cut + 4);
+        String time = str.substring(cut + 5);
         try {
             LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            return false;
+            return new ErrorCommand(ui.printWrongTimeError());
         }
 
-        return true;
+        Event curr = new Event(name, false, time);
+        return new AddCommand(curr);
     }
 
-    public boolean isCorrectEditNameString(String str) {
-        int cut = str.indexOf("/name");
+    public Command parseEditNameString(String str) {
         try {
-            int index = Integer.parseInt(str.substring(5, cut - 1));
+            int cut = str.indexOf(" /name");
+            int index = Integer.parseInt(str.substring(5, cut));
+            String newName = str.substring(cut + 7);
+
+            if (newName.length() == 0) {
+                return new ErrorCommand(ui.printWrongNameError());
+            }
+
+            return new EditNameCommand(index, newName);
         } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
-            return false;
+            return new ErrorCommand(ui.printWrongIndexError());
         }
 
 
-        String newName = str.substring(cut + 6);
-        if (newName.length() == 0) {
-            return false;
-        }
-        return true;
     }
 
-    public boolean isCorrectEditTimeString(String str) {
-        int cut = str.indexOf("/time");
-
+    public Command parseEditTimeString(String str) {
         try {
-            int index = Integer.parseInt(str.substring(5, cut - 1));
-        } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
-            return false;
-        }
-
-        String newTime = str.substring(cut + 6);
-        try {
+            int cut = str.indexOf(" /time");
+            int index = Integer.parseInt(str.substring(5, cut));
+            String newTime = str.substring(cut + 7);
             LocalDate.parse(newTime);
-        } catch (DateTimeParseException e) {
-            return false;
+            return new EditTimeCommand(index, newTime);
+        } catch (StringIndexOutOfBoundsException | NumberFormatException | DateTimeParseException e) {
+            return e instanceof DateTimeParseException
+                    ? new ErrorCommand(ui.printWrongTimeError())
+                    : new ErrorCommand(ui.printWrongIndexError());
         }
-        return true;
+
     }
 
 

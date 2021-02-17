@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -37,14 +38,17 @@ public class MainWindow extends AnchorPane {
         duke = d;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(d.getWelcomeText(), dukeImage));
     }
-    public void setStage(Stage stage) {this.stage = stage;}
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -53,6 +57,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (input.equals("bye")) {
+            Thread.sleep(1000);
             stage.close();
         }
     }

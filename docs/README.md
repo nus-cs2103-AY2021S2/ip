@@ -19,7 +19,6 @@ Duke is a chatbox that users can use to track their tasks.
 
 #### `todo` - Add todo
 `<>` - required fields
-`[]` - optional fields
 
 Adds a todo task to the task list.
 
@@ -117,7 +116,7 @@ Expected outcome:
 
 Find all task as done in the task list.
 
-Format: `find [keyword]`
+Format: `find <keyword>`
 
 Example of usage: `find sleep`
 

@@ -146,11 +146,7 @@ public class Ui {
 
     public String printTimeEdit(Task task, int index) {
         if (task instanceof Todo) {
-            String resultString = DIVIDER + SPACE + "Sorry! " + task.getTime() + " \n"
-                    + SPACE + "Try again pwease?\n"
-                    + SPACE + "Type 'help' for help! ;)"
-                    + DIVIDER;
-            return resultString;
+            return printErrorText("Sorry! " + task.getTime());
         } else if (task instanceof Deadline || task instanceof Event) {
             String resultString = DIVIDER + SPACE + "Done! Time of task number "
                     + index + " has been changed to " + task.getTime() + ".\n" + DIVIDER;
@@ -160,23 +156,39 @@ public class Ui {
         }
     }
 
+    public String printErrorText(String str) {
+        return DIVIDER + SPACE + str + "\n"
+                + SPACE + "Try again pwease?\n"
+                + SPACE + "Type 'help' for help! ;)"
+                + DIVIDER;
+    }
+
     /**
      * Prints error when unable to parse user input into known command
      */
     public String printUnknownInputError() {
-        return DIVIDER + SPACE + "Sorry! I do not understand what you just said.\n"
-                + SPACE + "Try again pwease?\n"
-                + SPACE + "Type 'help' for help! ;)"
-                + DIVIDER;
+        return printErrorText("Sorry! I do not understand what you just said.");
     }
 
     public String printIndexOutOfBoundError() {
-        return DIVIDER + SPACE + "Sorry! The task number seems to be incorrect!\n"
-                + SPACE + "Try again pwease?\n"
-                + SPACE + "Type 'help' for help! ;)"
-                + DIVIDER;
+        return printErrorText("Sorry! The task number seems to be non-existent.");
     }
 
+    public String printWrongIndexError() {
+        return printErrorText("Sorry! The index needs to be an integer.");
+    }
+
+    public String printMissingKeywordError() {
+        return printErrorText("Sorry! Keyword cannot be empty.");
+    }
+
+    public String printWrongNameError() {
+        return printErrorText("Sorry! Task name cannot be empty.");
+    }
+
+    public String printWrongTimeError() {
+        return printErrorText("Sorry! Time seems to be missing/wrongly formatted.");
+    }
 
 
     /**
