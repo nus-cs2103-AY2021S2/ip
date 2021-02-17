@@ -6,7 +6,7 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-	1. Add a task 
+	1. [Add a task](#to-do) 
 		* To-dos
 		* Deadlines
 		* Events
