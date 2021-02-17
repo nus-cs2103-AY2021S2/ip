@@ -11,7 +11,7 @@ public class OwenTest {
         Owen owen = new Owen();
 
         owen = owen.parseCommand("todo test");
-        String expected = "Got it. I've added this task:\n"
+        String expected = "Hoot hoot. I've added this task:\n"
                 + "    [T][ ] test\n"
                 + "Now you have 1 tasks in the list.";
         assertEquals(expected, owen.getResponse());
@@ -24,7 +24,7 @@ public class OwenTest {
         Owen owen = new Owen();
 
         owen = owen.parseCommand("event test /at 1/1/2021 1400 - 01/01/2021 1600");
-        String expected = "Got it. I've added this task:\n"
+        String expected = "Hoot hoot. I've added this task:\n"
                 + "    [E][ ] test (at: January 1 2021 2:00 PM - January 1 2021 4:00 PM)\n"
                 + "Now you have 1 tasks in the list.";
         assertEquals(expected, owen.getResponse());
@@ -37,7 +37,7 @@ public class OwenTest {
         Owen owen = new Owen();
 
         owen = owen.parseCommand("deadline test /by 1/1/2021 1400");
-        String expected = "Got it. I've added this task:\n"
+        String expected = "Hoot hoot. I've added this task:\n"
                 + "    [D][ ] test (by: January 1 2021 2:00 PM)\n"
                 + "Now you have 1 tasks in the list.";
         assertEquals(expected, owen.getResponse());
@@ -73,7 +73,7 @@ public class OwenTest {
         owen = owen.parseCommand("deadline test /by 1/1/2021 1400");
 
         owen = owen.parseCommand("done 2");
-        String expected = "Nice! I've marked this task as done:\n"
+        String expected = "Hoot! I've marked this task as done:\n"
                 + "    [E][X] test (at: January 1 2021 2:00 PM - January 1 2021 4:00 PM)";
         assertEquals(expected, owen.getResponse());
 
@@ -91,7 +91,7 @@ public class OwenTest {
         owen = owen.parseCommand("deadline test /by 1/1/2021 1400");
 
         owen = owen.parseCommand("delete 2");
-        String expected = "Noted. I've removed this task:\n"
+        String expected = "Hoot. I've removed this task:\n"
                 + "    [E][ ] test (at: January 1 2021 2:00 PM - January 1 2021 4:00 PM)\n"
                 + "Now you have 2 tasks in the list.";
         assertEquals(expected, owen.getResponse());
@@ -109,7 +109,7 @@ public class OwenTest {
         owen = owen.parseCommand("deadline app /by 1/1/2021 1400");
 
         owen = owen.parseCommand("find app");
-        String expected = "Here are the matching tasks in your list:\n"
+        String expected = "Hoot hoot here are the matching tasks in your list:\n"
                 + "1. [T][ ] apple\n"
                 + "3. [D][ ] app (by: January 1 2021 2:00 PM)";
         assertEquals(expected, owen.getResponse());
