@@ -33,7 +33,7 @@ Marks the task stored by Jozu as done, as depicted by a `✓`
 ## Bye
 Closes the program and saves all your tasks that you have input.
 
-##In-depth commands and expected output
+## In-depth commands and expected output
 ### Add ToDo task - `todo` 
 
 Format: `todo DESCRIPTION_OF_TASK`
