@@ -1,3 +1,4 @@
+import java.io.InputStream;
 import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -25,11 +26,14 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/ans_parrot.png"));
 
     public Duke() {
-        Storage store = new Storage(LOG_PATH);
+        this(LOG_PATH);
+    }
+
+    public Duke(String path) {
+        Storage store = new Storage(path);
         this.taskList = new TaskList(store);
         this.ui = new Ui();
     }
-
     /**
      * Starts running Duke.
      * @return 0 for successful exit
@@ -149,6 +153,22 @@ public class Duke extends Application {
             default:
                 return ui.printSorry();
         }
+    }
+
+    public String testDuke(String userInput) {
+        ParserOutput parserOutput = null;
+        try {
+            parserOutput = Parser.parse(userInput);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return "";
+        }
+
+        if (parserOutput.isBye()) {
+            return Ui.printGoodbye();
+        }
+
+        return this.readParseGui(parserOutput);
     }
 
     @Override

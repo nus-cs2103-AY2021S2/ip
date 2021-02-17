@@ -8,7 +8,6 @@ public class ParserOutput {
     private int nextAction;
 
     private ParserOutput(boolean bye, Task task, int action, int ... index) {
-        assert bye != true || action > 0: "If not a bye, action cannot be none. ";
         this.bye = bye;
         this.task = task;
         this.action = action;
