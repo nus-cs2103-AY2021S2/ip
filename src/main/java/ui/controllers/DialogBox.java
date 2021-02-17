@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog
@@ -38,8 +39,15 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Create circle mask to clip the display picture
+        double centerX = displayPicture.getFitWidth() / 2.0;
+        double centerY = displayPicture.getFitHeight() / 2.0;
+        double radius = Math.min(displayPicture.getFitWidth(), displayPicture.getFitHeight()) / 2.0;
+        Circle circleMask = new Circle(centerX, centerY, radius);
+
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(circleMask);
     }
 
     /**
