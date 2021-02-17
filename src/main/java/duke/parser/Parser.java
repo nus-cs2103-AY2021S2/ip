@@ -7,6 +7,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.SearchByTaskNameCommand;
 import duke.command.SearchByTimeCommand;
@@ -46,6 +47,8 @@ public class Parser {
             return new ByeCommand(userMessage);
         } else if (userMessage.startsWith("find")) {
             return new SearchByTaskNameCommand(userMessage);
+        } else if (userMessage.startsWith("help")) {
+            return new HelpCommand(userMessage);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

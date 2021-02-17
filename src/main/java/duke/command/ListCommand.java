@@ -44,6 +44,9 @@ public class ListCommand extends Command {
             builder.append(index + ". " + "[" + icon + "]");
             builder.append(taskName + " " + priorityIcon + "\n");
         }
+
+
+
         String botMessage = builder.toString();
         return botMessage;
 

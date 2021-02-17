@@ -122,9 +122,6 @@ public class Storage {
                 builder.append("\n");
             }
             String textToAppend = builder.toString();
-
-            System.out.println(textToAppend);
-
             fw.write(textToAppend);
             fw.close();
         }
