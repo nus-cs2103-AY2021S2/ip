@@ -10,7 +10,7 @@ Duke is a simple desktop application that allows you to keep track your tasks in
 
 ## Before you begin...
 1. Ensure you have Java `11` or above installed in your system.
-2. Download the latest `duke.jar` from.
+2. Download the latest `duke.jar` from [here](https://github.com/lrj689/ip/releases/tag/1.0).
 3. Place `duke.jar` in an empty folder of your choice.
 4. Double click to start the app.
 
