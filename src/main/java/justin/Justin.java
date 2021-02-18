@@ -80,38 +80,28 @@ public class Justin {
 
                 case "HELP":
 
-                    // additional
                     response = ui.showHelpMessage();
                     break;
 
                 case "BYE":
-                    // level 10 gui
+
                     storage.saveFile(tasks, storage.getFilePath());
-                    // exit func handle in Main.java
 
                 case "LIST":
 
-                    //level 10 gui
                     response = ui.editResponseMessage(ui.showListMessage());
                     response += ui.printList(tasks);
                     break;
 
                 case "DONE":
 
-                    //level 10 gui
                     String num = text.substring(5); // take out the int value of the task to be completed
-                    int listNum = Integer.parseInt(num); // changes to int
-                    Task hold = tasks.getList().get(listNum - 1);
-                    hold.markAsDone();
-                    response = ui.showDoneMessage(tasks, listNum);
+                    response = ui.showDoneMessage(tasks, num);
                     break;
 
                 case "DEADLINE":
 
-                    String newText = text.substring(9); // remove deadline from the string text
-                    String description = newText.substring(0, newText.indexOf("/") - 1);
-                    String date = newText.substring(newText.indexOf("/") + 4);
-                    response = tasks.addDeadline(description, date);
+                    response = tasks.addDeadline(text);
 
                     break;
 
@@ -124,11 +114,9 @@ public class Justin {
 
                 case "EVENT":
 
-                    String eventText = text.substring(text.indexOf(" ") + 1); // removing the event to get description
-                    String descriptionEvent = eventText.substring(0, eventText.indexOf("/") - 1);
-                    String dateEvent = eventText.substring(eventText.indexOf("/") + 4);
-                    response = tasks.addEvent(descriptionEvent, dateEvent);
+                    response = tasks.addEvent(text);
                     break;
+
                 case "DELETE":
 
                     String numDelete = text.substring(7); // take out the int value of the task to be completed
@@ -147,9 +135,8 @@ public class Justin {
 
                 default:
 
+                    tasks.addTask(text);
                     response = "added: " + text;
-                    Task holder = new Task(text);
-                    tasks.getList().add(holder); // position corresponds to item number
 
             }
         } catch (JustinException m) {

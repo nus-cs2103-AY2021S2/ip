@@ -78,11 +78,10 @@ public class Ui {
         return "Here are the tasks in your list:\n";
     }
 
-    public String showDoneMessage(TaskList tasks, int listNum) {
-
+    public String showDoneMessage(TaskList tasks, String num) {
 
         String holder = "";
-
+        int listNum = tasks.markDone(num);
         holder += "Nice! I've marked this task as done:\n";
         holder += tasks.getList().get(listNum-1).toString() + "\n";
 

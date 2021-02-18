@@ -31,7 +31,11 @@ public class TaskList {
      * @param date of the given task
      */
 
-    public String addDeadline(String description, String date) {
+    public String addDeadline(String text) {
+
+        String newText = text.substring(9); // remove deadline from the string text
+        String description = newText.substring(0, newText.indexOf("/") - 1);
+        String date = newText.substring(newText.indexOf("/") + 4);
 
         try {
             boolean ifExist = false; // checking if there is an instance of a default tasks
@@ -126,7 +130,11 @@ public class TaskList {
      */
 
 
-    public String addEvent(String description, String date) {
+    public String addEvent(String text) {
+
+        String eventText = text.substring(text.indexOf(" ") + 1); // removing the event to get description
+        String description = eventText.substring(0, eventText.indexOf("/") - 1);
+        String date = eventText.substring(eventText.indexOf("/") + 4);
 
         try {
             boolean ifExist = false;
@@ -222,6 +230,18 @@ public class TaskList {
             }
 
         }
+    }
+
+    public int markDone(String num) {
+        int listNum = Integer.parseInt(num); // changes to int
+        list.get(listNum - 1).markAsDone();
+        return listNum;
+    }
+
+    public void addTask(String text) {
+
+        Task holder = new Task(text);
+        list.add(holder); // position corresponds to item number
     }
 
 }
