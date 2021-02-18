@@ -1,0 +1,4 @@
+todo|Homework|F
+event|CS2103 Lecture |2021-02-16|F
+deadline|Lab Report |2021-02-19|F
+todo|Buy flowers|T
