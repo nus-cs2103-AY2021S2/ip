@@ -6,6 +6,7 @@ import duke.task.Event;
 import duke.task.ListItem;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.tools;
 
 /**
  * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,
@@ -15,7 +16,7 @@ import duke.task.Todo;
 public class Parser {
     private final String command;
     private final String argument;
-    private final String date;
+    private final String optionalArgument;
 
     enum PredefinedCommand {
         LIST,
@@ -26,7 +27,8 @@ public class Parser {
         EVENT,
         ERROR,
         DELETE,
-        FIND
+        FIND,
+        TAG
     }
 
     /**
@@ -34,59 +36,75 @@ public class Parser {
      */
     public Parser() {
         this.command = "";
-        this.date = null;
+        this.optionalArgument = null;
         this.argument = "";
     }
 
     /**
-     *
      * @param in - a string that will be parsed and stored as
-     *           <code>command</code>, <code>argument</code> and <code>date</code> accordingly
+     *           <code>command</code>, <code>argument</code> and <code>optionalArgument</code> accordingly
      * @throws DukeException.UnknownCommandException if unknown command entered
-     * @throws DukeException.NoDescriptionException if required no. of arg is not met
+     * @throws DukeException.NoDescriptionException  if required no. of arg is not met
      */
     public Parser(String in) {
         String tempDate = null;
         String tempCommand = "";
         String[] result = in.split("\\s");
         String tempArg = "";
+        // has temporary variables tempArg, tempDate, tempCommand as they are "final"
         try {
-            if (result[0].equals("done") || result[0].equals("find")) {
-                tempCommand = result[0];
-                if (result.length <= 1) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else {
-                    tempArg = result[1];
-                }
-            } else if (result[0].equals("todo") || result[0].equals("delete")) {
-                String temp = in.substring(in.indexOf(" ") + 1);
-                tempArg = temp;
-                if (temp.equals("todo") || temp.equals("delete")) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else {
+            // check the first part of the input string and decide what to do next using switch case
+            switch(result[0]) {
+                case "find":
+                case "todo": // both only need a name in a form of string therefore grouped
                     tempCommand = result[0];
-                }
-            } else if (result[0].equals("deadline") || result[0].equals("event")) {
-                String firstParam = in.substring(in.indexOf("/") + 1);
-                if (firstParam.equals("deadline") || firstParam.equals("event")) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else {
-                    int dateIndex = Math.max(firstParam.indexOf("by "), firstParam.indexOf("at "));
-                    if (dateIndex == -1) {
+                    if (result.length <= 1) {
                         throw new DukeException.NoDescriptionException(result[0]);
                     } else {
-                        tempCommand = result[0];
-                        tempDate = firstParam.substring(dateIndex + 3);
-                        firstParam = in.substring(in.indexOf(" ") + 1);
-                        tempArg = firstParam.substring(0, firstParam.indexOf("/") - 1);
+                        tempArg = result[1];
                     }
-                }
-            } else {
-                try {
-                    tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0]));
-                } catch (IllegalArgumentException ex) {
-                    throw new DukeException.UnknownCommandException();
-                }
+                    break;
+                case "done":
+                case "delete": // both requires an index of the item
+                    String indexOfItemAsString = in.substring(in.indexOf(" ") + 1);
+                    tempArg = indexOfItemAsString;
+                    if(!tools.isInteger(indexOfItemAsString)){
+                        throw new DukeException.NoDescriptionException(result[0]);
+                    }else{
+                        tempCommand = result[0];
+                    }
+                    break;
+                case "deadline":
+                case "event": // both requires an extra string (date)
+                    String firstParam = in.substring(in.indexOf("/") + 1);
+                    if (firstParam.equals("deadline") || firstParam.equals("event")) {
+                        throw new DukeException.NoDescriptionException(result[0]);
+                    } else {
+                        // check if the date starts by "by" or "at" to classify them
+                        int dateIndex = Math.max(firstParam.indexOf("by "), firstParam.indexOf("at "));
+                        if (dateIndex == -1) {
+                            throw new DukeException.NoDescriptionException(result[0]);
+                        } else {
+                            tempCommand = result[0];
+                            tempDate = firstParam.substring(dateIndex + 3);
+                            firstParam = in.substring(in.indexOf(" ") + 1);
+                            tempArg = firstParam.substring(0, firstParam.indexOf("/") - 1);
+                        }
+                    }
+                    break;
+                case "tag":
+                    tempCommand = result[0];
+                    tempArg = result[1];
+                    tempDate = result[2];
+                    break;
+                default:
+                    // try parsing the command first, else throw exception
+                    try {
+                        tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0]));
+                    } catch (IllegalArgumentException ex) {
+                        throw new DukeException.UnknownCommandException();
+                    }
+                    break;
             }
         } catch (DukeException ex) {
             tempCommand = "error";
@@ -94,11 +112,12 @@ public class Parser {
         }
         this.command = tempCommand;
         this.argument = tempArg;
-        this.date = tempDate;
+        this.optionalArgument = tempDate;
     }
 
     /**
      * Getter method
+     *
      * @return the private variable command
      */
     public String getCommand() {
@@ -107,6 +126,7 @@ public class Parser {
 
     /**
      * Getter method
+     *
      * @return the private variable argument
      */
     public String getDate() {
@@ -114,7 +134,6 @@ public class Parser {
     }
 
     /**
-     *
      * @param inputList - take in the list and do corresponding action according to the command
      * @return a string to be printed to the console by UI
      */
@@ -130,15 +149,15 @@ public class Parser {
             }
             return initStr;
         case DONE:
-            inputList.updateItemMutable(Integer.parseInt(this.argument));
+            inputList.markItemasDone(Integer.parseInt(this.argument));
             return "Nice! I've marked this task as done: \n"
                     + inputList.getListItems().get(Integer.parseInt(this.argument) - 1);
         case EVENT:
-            Event newEvent = new Event(this.argument, this.date);
+            Event newEvent = new Event(this.argument, this.optionalArgument);
             inputList.addCommandMutable(newEvent);
             return printPredefinedMessage(newEvent.toString(), inputList);
         case DEADLINE:
-            Deadline newDeadline = new Deadline(this.argument, this.date);
+            Deadline newDeadline = new Deadline(this.argument, this.optionalArgument);
             inputList.addCommandMutable(newDeadline);
             return printPredefinedMessage(newDeadline.toString(), inputList);
         case TODO:
@@ -154,23 +173,27 @@ public class Parser {
             return "Noted. I've removed this task: " + tempItem
                     + "\nNow you have " + inputList.getListItems().size() + " tasks in the list";
         case FIND:
-            String matchedStr = "Here are the tasks in your list:";
+            String matchedStr = "Here are the tasks in your list that fulfills your requirement:";
             TaskList tempList = inputList.findItem(this.argument);
             for (int i = 0; i < tempList.getListItems().size(); i++) {
                 matchedStr += "\n" + ((i + 1) + "." + tempList.getListItems().get(i));
             }
             return matchedStr;
+        case TAG:
+            inputList.updateItemTag(Integer.parseInt(this.argument), this.optionalArgument);
+            return "Nice! I've marked task " + this.argument + " with the tag: \n#"
+                    + this.optionalArgument;
         default:
             return "";
-        }
-//         every case must return some form of string, therefore break is not required
+    }
+        //every case must return some form of string, therefore break is not required
     }
 
     /**
      * creates a standardised string that is common for all the tasks type to be printed
      *
      * @param typeOfTask
-     * @param inputList - to get the size of the list
+     * @param inputList  - to get the size of the list
      * @return a string to be printed by UI
      */
     public String printPredefinedMessage(String typeOfTask, TaskList inputList) {

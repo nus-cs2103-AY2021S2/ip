@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The list that contains and holds all the tasks imported/added by the user
@@ -47,10 +48,17 @@ public class TaskList {
      *
      * @param index the index of the item to be changed
      */
-    public void updateItemMutable(int index) {
+    public void markItemasDone(int index) {
         int correctIndex = index - 1;
+        assertIndexInRange(correctIndex);
         ListItem tempItem = this.listItems.get(correctIndex).markAsDone();
+        assert tempItem.getDone(); // check the updated item's done status is true
         this.listItems.set(correctIndex, tempItem);
+    }
+
+    public void updateItemTag(int index, String tag) {
+        int correctIndex = index - 1;
+        this.listItems.get(correctIndex).addNewTagMutable(tag);
     }
 
     /**
@@ -60,6 +68,7 @@ public class TaskList {
      */
     public void deleteCommandMutable(int index) {
         int correctIndex = index - 1;
+        assertIndexInRange(correctIndex);
         this.listItems.remove(correctIndex);
     }
 
@@ -69,13 +78,12 @@ public class TaskList {
      * @param keyword the keyword to be searched through the TaskList, in SQL LIKE syntax
      */
     public TaskList findItem(String keyword) {
-        List<ListItem> tempList = new ArrayList<>();
-        for (ListItem item : listItems) {
-            if (item.getTask().contains(keyword)) {
-                tempList.add(item);
-            }
+        if(keyword.contains("#")){
+            System.out.println("#");
+            return new TaskList(listItems.stream().filter(x -> x.containTag(keyword.replace("#", ""))).collect(Collectors.toList()));
+        }else {
+            return new TaskList(listItems.stream().filter(x -> x.getTask().contains(keyword)).collect(Collectors.toList()));
         }
-        return new TaskList(tempList);
     }
 
     @Override
@@ -87,5 +95,10 @@ public class TaskList {
                     + "|" + tempItem.getDone() + "|" + tempItem.getTask() + tempItem.getDate() + "\n");
         }
         return initStr;
+    }
+
+    // a method with an assertion that checks the index is >= 0 so it can be used for indexing with the List
+    public void assertIndexInRange(int index){
+        assert index >= 0;
     }
 }

@@ -34,6 +34,9 @@ public class    Window extends AnchorPane {
 
     private TaskList tasks;
 
+    /**
+     * initialise new <code>tasklist</code> and set the <code>scrollPane</code> property to work properly for GUI
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

@@ -11,32 +11,46 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends ListItem {
     private final String date;
     private LocalDate parsedDate;
+    private boolean isDateParsable;
 
     /**
      * Constructor for Deadline that was not provided the task done status
-     * @param task takes in a string and pass to parent's constructor as task name
+     *
+     * @param task      takes in a string and pass to parent's constructor as task name
      * @param inputDate the deadline input by user
      */
     public Deadline(String task, String inputDate) {
         super(task);
         this.date = inputDate;
         this.parsedDate = parseDate(inputDate);
+        if (this.parsedDate == null) {
+            this.isDateParsable = false;
+        }else{
+            this.isDateParsable = true;
+        }
     }
 
     /**
      * the overloaded constructor that allows taking the status of the task
-     * @param task takes in string and pass to parent's constructor as the task name
+     *
+     * @param task      takes in string and pass to parent's constructor as the task name
      * @param inputDate date entered as the deadline
-     * @param isDone the status of the task
+     * @param isDone    the status of the task
      */
     public Deadline(String task, String inputDate, boolean isDone) {
         super(task, isDone);
         this.date = inputDate;
         this.parsedDate = parseDate(inputDate);
+        if (this.parsedDate == null) {
+            this.isDateParsable = false;
+        }else{
+            this.isDateParsable = true;
+        }
     }
 
     /**
      * Changes the task's status to be done
+     *
      * @return the task to replace the old one in the list or to be used later
      */
     @Override
@@ -50,7 +64,8 @@ public class Deadline extends ListItem {
         return "[D]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask()
                 + " (by: "
                 + (parsedDate == null
-                ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";
+                ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")"
+                + super.printTags();
     }
 
     /**
@@ -62,11 +77,15 @@ public class Deadline extends ListItem {
 
     /**
      * Check whether the date provide by the user is parsable and store it accordingly
+     *
      * @param input the date given by the user
-     * @return eithe a null or LocalDate that has a parsed date
+     * @return either a null or LocalDate that has a parsed date
      */
     public LocalDate parseDate(String input) {
         try {
+            LocalDate parsedDate = LocalDate.parse(input);
+            // check the deadline is not before the moment this is created
+            assert parsedDate.isAfter(LocalDate.now());
             return LocalDate.parse(input);
         } catch (DateTimeParseException ex) {
             return null;
