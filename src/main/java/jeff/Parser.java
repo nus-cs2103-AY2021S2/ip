@@ -124,7 +124,7 @@ public class Parser {
             return s;
 
         default:
-            return "";
+            throw new JeffException("something went wrong");
 
         }
     }
