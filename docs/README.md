@@ -1,5 +1,7 @@
 # User Guide
 
+Zee helps you to manage your tasks and keep track of deadlines and events.
+
 ## Features 
 
 ### Adding a todo task: `todo`
