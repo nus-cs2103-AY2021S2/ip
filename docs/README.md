@@ -6,6 +6,7 @@
 1. Add a Todo task
 1. Add a Deadline task
 1. Add an Event task
+1. Search task
 1. Mark task as done
 1. Remove task
 1. Say goodbye
