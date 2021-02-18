@@ -50,12 +50,18 @@ public class TaskList {
      */
     public TaskList matchTasks(String match) {
         TaskList output = new TaskList();
-        for (int f = 0; f < this.getSize(); f++) {
-            Task selectedTask = this.getSingleTask(f);
-            if (selectedTask.toString().contains(match)) {
-                output.addTask(selectedTask);
+
+        try {
+            for (int f = 0; f < this.getSize(); f++) {
+                Task selectedTask = this.getSingleTask(f);
+                if (selectedTask.toString().contains(match)) {
+                    output.addTask(selectedTask);
+                }
             }
+        } catch (DukeException e) {
+
         }
+
         return output;
     }
 
@@ -73,8 +79,13 @@ public class TaskList {
         return this.tasks;
     }
 
-    public Task getSingleTask(int index) {
-        return this.tasks.get(index);
+    public Task getSingleTask(int index) throws DukeException {
+        try {
+            return this.tasks.get(index);
+        } catch (Exception e) {
+            // Catches invalid index
+            throw new DukeException("Task not found! Invalid Index");
+        }
     }
 
     public int getSize() {
