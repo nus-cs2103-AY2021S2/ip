@@ -47,7 +47,8 @@ public class Ui {
     }
 
     /**
-     * This method outputs the helper message when the user
+     * This method outputs the helper
+     * message when the user
      * first start the program
      *
      */
