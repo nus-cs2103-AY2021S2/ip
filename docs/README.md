@@ -38,7 +38,7 @@ deadlines, events and todos.
 Shows a message with all recognised commands and their formats. <br>
 Format: `help` <br>
 Expected output: <br>
-![](./screenshots/help.PNG)
+![](screenshots/help.png)
 
 ### <a id="todo"></a> <span style="color:darkorange">Adding a todo: `todo`</span>
 Adds a todo to the task list. <br>
@@ -46,7 +46,7 @@ Format: `todo DESCRIPTION` <br>
 Example of usage: <br>
 `todo borrow book` <br>
 Expected output: <br>
-![](./screenshots/todo.PNG)
+![](screenshots/todo.png)
 
 ### <a id="deadline"></a> <span style="color:darkorange">Adding a deadline: `deadline`</span>
 Adds a deadline to the task list. <br>
@@ -56,7 +56,7 @@ Format: `deadline DESCRIPTION /by DATE` <br>
 Example of usage: <br>
 `deadline return book /by 2021-02-04` <br>
 Expected output: <br>
-![](./screenshots/deadline.PNG)
+![](screenshots/deadline.png)
 
 ### <a id="event"></a> <span style="color:darkorange">Adding an event: `event`</span>
 Adds an event to the task list. <br>
@@ -66,13 +66,13 @@ Format: `event DESCRIPTION /at DATE` <br>
 Example of usage: <br>
 `event project meeting /at 2021-03-05` <br>
 Expected output: <br>
-![](./screenshots/event.PNG)
+![](screenshots/event.png)
 
 ### <a id="list"></a> <span style="color:darkorange">Listing all tasks: `list`</span>
 Shows a list of all the tasks in the task list. <br>
 Format: `list` <br>
 Expected output: <br>
-![](./screenshots/list.PNG)
+![](screenshots/list.png)
 
 ### <a id="done"></a> <span style="color:darkorange">Marking a task as done: `done`</span>
 Marks the specified task from the task list as done. <br>
@@ -84,7 +84,7 @@ Format: `done INDEX`
 Example of usage: <br>
 `done 2` <br>
 Expected output: <br>
-![](./screenshots/done.PNG)
+![](screenshots/done.png)
 
 ### <a id="find"></a> <span style="color:darkorange">Locating tasks by keyword: `find`</span>
 Finds tasks with names that contain the given keyword <br>
@@ -92,7 +92,7 @@ Format: `find KEYWORD` <br>
 Example of usage: <br>
 `find book` <br>
 Expected output: <br>
-![](./screenshots/find.PNG)
+![](screenshots/find.png)
 
 ### <a id="delete"></a> <span style="color:darkorange">Deleting a task: `delete`</span>
 Deletes the specified task from the task list. <br>
@@ -104,7 +104,7 @@ Format: `delete INDEX`
 Example of usage: <br>
 `delete 2` <br>
 Expected output: <br>
-![](./screenshots/delete.PNG)
+![](screenshots/delete.png)
 
 ### <a id="bye"></a> <span style="color:darkorange">Exiting the program: `bye`</span>
 Exits the program. <br>

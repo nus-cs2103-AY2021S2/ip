@@ -2,7 +2,7 @@
 As part of CS2103 Software Engineering, this project aims to build a product named Duke, a personal assistant chatbot that helps a person to keep track of various tasks, such as
 deadlines, events and todos. The user guide can be found [here.](https://pngsebastian.github.io/ip/) <br>
 
-![](./docs/Ui.PNG)
+![](docs/Ui.png)
 
 ---
 ## <a id="commandSummary"></a> <span style="color:darkorange">Command Summary</span>
