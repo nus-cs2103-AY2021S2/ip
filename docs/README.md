@@ -15,11 +15,11 @@
 
     * **`list`** : Lists all tasks.
 
-    * **`todo`**`homework` : Adds a todo Task with description `homework` to Olaf.
+    * **`todo`** `homework` : Adds a todo Task with description `homework` to Olaf.
 
-    * **`delete`**`3` : Deletes the 3rd listed task shown in the current list.
+    * **`delete`** `3` : Deletes the 3rd listed task shown in the current list.
 
-    * **`done`**`3` : Marks the 3rd Task in the current list as done.
+    * **`done`** `3` : Marks the 3rd Task in the current list as done.
 
     * **`bye`** : Exits the app after showing a goodbye message.
 
@@ -190,4 +190,4 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-// md template adapted from: https://github.com/se-edu/addressbook-level3/blob/master/docs/UserGuide.md
+md template adapted from: https://github.com/se-edu/addressbook-level3/blob/master/docs/UserGuide.md
