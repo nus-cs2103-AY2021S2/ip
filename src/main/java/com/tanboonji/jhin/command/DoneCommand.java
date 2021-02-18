@@ -51,7 +51,8 @@ public class DoneCommand extends Command {
             Task task = taskList.markTaskAsDone(taskIndex);
             return String.format(SUCCESS_MESSAGE_FORMAT, task);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, taskIndex));
+            int indexOneBase = taskIndex + 1;
+            throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, indexOneBase));
         }
     }
 

@@ -66,7 +66,8 @@ public class AliasMap implements Serializable {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (String alias: aliasMap.keySet()) {
-            builder.append(String.format(aliasFormat, alias, aliasMap.get(alias)))
+            builder.append("- ")
+                    .append(String.format(aliasFormat, alias, aliasMap.get(alias)))
                     .append("\n");
         }
 
