@@ -169,7 +169,7 @@ public class MainWindow extends AnchorPane {
             );
         }
         this.userInput.clear();
-        if (this.isTerminating()) {
+        if (userText.equals("bye")) {
             Platform.exit();
             System.exit(0);
         }

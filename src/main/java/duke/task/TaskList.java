@@ -175,6 +175,9 @@ public class TaskList {
      * @return tasks description in the list
      */
     public String printTask() {
+        if (task.isEmpty()) {
+            return "There is no tasks in your list right now";
+        }
         String taskList;
         taskList = "Here is your current tasks\n";
         for (int i = 1; i <= task.size(); ++i) {
