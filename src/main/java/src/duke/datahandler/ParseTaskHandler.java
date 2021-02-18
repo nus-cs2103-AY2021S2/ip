@@ -15,7 +15,6 @@ public class ParseTaskHandler {
     /**
      * Gets the relevant information from the parser and breaks down the relevant
      * informatino needed to create a new task
-     * 
      * @param information informatino needed to create a new task
      */
     ParseTaskHandler(String[] information) {
@@ -33,24 +32,23 @@ public class ParseTaskHandler {
         assert timeAndDescription.size() >= 2;
 
         switch (typeOfTask) {
-            case TODO:
-                this.description = timeAndDescription.get(0);
-                break;
-            case DEADLINE:
-            case EVENT:
-                this.description = timeAndDescription.get(0);
-                this.date = timeAndDescription.get(1).split(" ", 2)[1];
-                break;
+        case TODO:
+            this.description = timeAndDescription.get(0);
+            break;
+        case DEADLINE:
+        case EVENT:
+            this.description = timeAndDescription.get(0);
+            this.date = timeAndDescription.get(1).split(" ", 2)[1];
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
     }
 
     /**
      * gets the date of the new task
-     * 
      * @return inputted new task date
      */
     public String getDate() {
@@ -59,7 +57,6 @@ public class ParseTaskHandler {
 
     /**
      * gets the description of the new task
-     * 
      * @return inputted new task description
      */
     public String getDescription() {

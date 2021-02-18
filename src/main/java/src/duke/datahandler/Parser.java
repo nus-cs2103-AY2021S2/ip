@@ -25,32 +25,32 @@ public class Parser {
             assert information.length > 0;
             this.command = Command.valueOf(information[0].toUpperCase());
             switch (this.command) {
-                case FIND:
-                    this.description = information[1];
-                    break;
-                case DELETE:
-                case DONE:
-                    this.taskIndex = Integer.parseInt(information[1]);
-                    break;
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    ParseTaskHandler handleTaskInfo = new ParseTaskHandler(information);
-                    this.description = handleTaskInfo.getDescription();
-                    this.date = handleTaskInfo.getDate();
+            case FIND:
+                this.description = information[1];
+                break;
+            case DELETE:
+            case DONE:
+                this.taskIndex = Integer.parseInt(information[1]);
+                break;
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                ParseTaskHandler handleTaskInfo = new ParseTaskHandler(information);
+                this.description = handleTaskInfo.getDescription();
+                this.date = handleTaskInfo.getDate();
 
-                    break;
-                case SNOOZE:
-                    this.taskIndex = Integer.parseInt(information[1].split(" ", 2)[0]);
-                    this.date = information[1].split(" ", 3)[2];
-                    System.out.println(this.taskIndex);
-                    System.out.println(this.date);
+                break;
+            case SNOOZE:
+                this.taskIndex = Integer.parseInt(information[1].split(" ", 2)[0]);
+                this.date = information[1].split(" ", 3)[2];
+                System.out.println(this.taskIndex);
+                System.out.println(this.date);
 
-                    break;
-                case BYE:
-                case NONE:
-                case LIST:
-                default:
+                break;
+            case BYE:
+            case NONE:
+            case LIST:
+            default:
             }
         } catch (IllegalArgumentException e) {
             this.command = Command.NONE;
@@ -87,7 +87,6 @@ public class Parser {
 
     /**
      * throws a task exception for when the parser has a task exception
-     * 
      * @param exceptionMessage the message to be passed to the task exception
      * @throws TaskException the exception that will be thowen by parser
      */
@@ -97,7 +96,6 @@ public class Parser {
 
     /**
      * returns task index the user has inputted
-     * 
      * @return inputted task index
      */
     public int getTaskIndex() {
@@ -106,7 +104,6 @@ public class Parser {
 
     /**
      * gets the command the user has inputted
-     * 
      * @return inputted command
      */
     public Command getCommand() {
@@ -115,7 +112,6 @@ public class Parser {
 
     /**
      * gets the date inputted by the user
-     * 
      * @return inputted date
      */
     public String getDate() {
@@ -124,7 +120,6 @@ public class Parser {
 
     /**
      * gets the task description inputted by the user
-     * 
      * @return inputted task description
      */
     public String getDescription() {
