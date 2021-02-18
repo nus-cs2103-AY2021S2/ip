@@ -20,29 +20,35 @@ import duke.tasks.Todo;
 
 /**
  * Parses the user input and return corresponding Command objects for execution.
+ * The naming convention for all functions with name prefixed with "prepare" in this file
+ *       is adapted from the parser.java file from addressbook-level2. The link is:
+ *      https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
  */
 public class Parser {
 
     /**
-     * Constructor
+     * Constructor.
+     *
      */
     public Parser() {
 
     }
 
     /**
-     * returns the Task based on taskinfo stored in storage
-     * @param taskInfo information stored in storage
-     * @return the Task
-     * @throws DukeException when information in storage is corrupted
+     * Returns the Task based on taskinfo stored in storage.
+     *
+     * @param taskInfo information stored in storage.
+     * @return the Task.
+     * @throws DukeException when information in storage is corrupted.
      */
-    public static Task stringToTask(String taskInfo) throws DukeException {
+    public static Task getTaskFromTaskInfo(String taskInfo) throws DukeException {
         String[] taskInfoArr = taskInfo.split("\\|");
+
         String type = taskInfoArr[0].strip();
         boolean isDone = taskInfoArr[1].strip().equals("1");
         String description = taskInfoArr[2].strip();
 
-        Task task = null;
+        Task task;
         switch(type) {
         case "T":
             task = new Todo(description, isDone);
@@ -58,20 +64,18 @@ public class Parser {
         default:
             throw new DukeException("Invalid task info found in storage.");
         }
+
         return task;
     }
 
     /**
      * Parses the user input.
-     * 1. Takes in the first word from user input and carries out relevant actions based on
+     * Takes in the first word from user input and carries out relevant actions based on
      *      the word by printing out corresponding replies.
-     * 2. A command is NOT case sensitive.
-     *      For example, "LIST"/"list"/"List" will have the same effect.
-     * 3. However, no additional whitespaces should be entered.
-     *      For example, "LIST "/"list "/"List " will not work.
-     * 4. Disclaimer: the idea of using .valueOf and convert to UpperCase is inspired
+     * Disclaimer: the idea of using .valueOf and convert to UpperCase is inspired
      *      based on discussion of #Issue 14 in forum.
      *      Credit to @samuelfangjw who mentioned it first.
+     *
      * @param userInput user input
      * @throws DukeException thrown if user enters a valid command but invalid related information
      *                       or an invalid command
@@ -97,41 +101,55 @@ public class Parser {
         String otherInfo = processedUserInput[1];
         Command command;
         try {
-            command = commandWordToCommand(commandWord, otherInfo);
+            command = getCommandFromCommandWord(commandWord, otherInfo);
         } catch (IllegalArgumentException e) {
             throw new DukeException("I do not understand this command.");
         }
         return command;
     }
 
-    private Command commandWordToCommand(String commandWord, String otherInfo)
-            throws DukeException {
+    private Command getCommandFromCommandWord(String commandWord, String otherInfo) throws DukeException {
+        CommandOption commandEnum = getCommandOption(commandWord);
+        return createCommandFromCommandEnum(otherInfo, commandEnum);
+    }
+
+    /**
+     * Creates the respective command based on the given information and commandEnum(command option).
+     * This structure for this function is adapted from the parser.java file
+     *      from addressbook-level2. The link is:
+     *      https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
+     *
+     * @param otherInfo information relevant to the command.
+     * @param commandEnum the command entered by user, an Enum.
+     * @return the corresponding command.
+     * @throws DukeException if the command given is invalid (eg. does not exist among all command options).
+     */
+    private Command createCommandFromCommandEnum(String otherInfo, CommandOption commandEnum) throws DukeException {
         Command command;
-        CommandOption commandEnum = CommandOption.valueOf(commandWord.toUpperCase(Locale.ROOT));
         switch (commandEnum) {
         case LIST:
             command = new ListCommand();
             break;
         case DONE:
-            command = preCompleteTask(otherInfo);
+            command = prepareCompleteTask(otherInfo);
             break;
         case TODO:
-            command = preTodoTask(otherInfo);
+            command = prepareTodoTask(otherInfo);
             break;
         case EVENT:
-            command = preEventTask(otherInfo);
+            command = prepareEventTask(otherInfo);
             break;
         case DEADLINE:
-            command = preDeadlineTask(otherInfo);
+            command = prepareDeadlineTask(otherInfo);
             break;
         case DELETE:
-            command = preDeleteTask(otherInfo);
+            command = prepareDeleteTask(otherInfo);
             break;
         case FIND:
-            command = preFindTask(otherInfo);
+            command = prepareFindTask(otherInfo);
             break;
         case UPDATE:
-            command = preUpdateTask(otherInfo);
+            command = prepareUpdateTask(otherInfo);
             break;
         default:
             throw new DukeException("Unexpected value: " + commandEnum);
@@ -139,59 +157,63 @@ public class Parser {
         return command;
     }
 
-    private Command preCompleteTask(String taskIndex) throws DukeException {
-        int index = validateInteger(taskIndex);
+    private CommandOption getCommandOption(String commandWord) {
+        return CommandOption.valueOf(commandWord.toUpperCase(Locale.ROOT));
+    }
+
+    private Command prepareCompleteTask(String taskIndex) throws DukeException {
+        int index = parseTaskIndex(taskIndex);
         return new DoneCommand(index);
     }
 
-    private Command preDeleteTask(String taskIndex) throws DukeException {
-        int index = validateInteger(taskIndex);
+    private Command prepareDeleteTask(String taskIndex) throws DukeException {
+        int index = parseTaskIndex(taskIndex);
         return new DeleteCommand(index);
     }
 
-    private Command preTodoTask(String description) throws DukeException {
+    private Command prepareTodoTask(String description) throws DukeException {
         if (description == null) {
             throw new DukeException("Please provide a description when creating todo.");
         }
         return new AddCommand(new Todo(description));
     }
 
-    private Command preDeadlineTask(String otherInfo) throws DukeException {
-        String[] validatedInfo = validateOtherInfo(otherInfo, "/by");
+    private Command prepareDeadlineTask(String otherInfo) throws DukeException {
+        String[] validatedInfo = getValidatedOtherInfo(otherInfo, "/by");
         String description = validatedInfo[0];
         LocalDate byDate = parseByDate(validatedInfo[1]);
         Task deadline = new Deadline(description, byDate);
         return new AddCommand(deadline);
     }
 
-    private Command preEventTask(String otherInfo) throws DukeException {
-        String[] validatedInfo = validateOtherInfo(otherInfo, "/at");
+    private Command prepareEventTask(String otherInfo) throws DukeException {
+        String[] validatedInfo = getValidatedOtherInfo(otherInfo, "/at");
         String description = validatedInfo[0];
         String at = validatedInfo[1];
         Task event = new Event(description, at);
         return new AddCommand(event);
     }
 
-    private Command preFindTask(String keyword) throws DukeException {
+    private Command prepareFindTask(String keyword) throws DukeException {
         if (keyword == null || keyword.equals(" ") || keyword.equals("")) {
             throw new DukeException("Please enter a keyword when finding the task.");
         }
         return new FindCommand(keyword);
     }
 
-    private Command preUpdateTask(String otherInfo) throws DukeException {
-        String[] validatedInfo = validateOtherInfoForUpdate(otherInfo);
-        int taskIndexToUpdate = validateInteger(validatedInfo[0]);
+    private Command prepareUpdateTask(String otherInfo) throws DukeException {
+        String[] validatedInfo = getValidatedOtherInfoForUpdate(otherInfo);
+        int taskIndexToUpdate = parseTaskIndex(validatedInfo[0]);
         LocalDate byDate = parseByDate(validatedInfo[1]);
         return new UpdateCommand(taskIndexToUpdate, byDate);
     }
 
-    private String[] validateOtherInfoForUpdate(String otherInfo) throws DukeException {
-        String[] validatedOtherInfoForUpdate;
+    private String[] getValidatedOtherInfoForUpdate(String otherInfo) throws DukeException {
+        String[] validatedOtherInfo;
         String splitBy = " ";
         try {
-            validatedOtherInfoForUpdate = getValidatedOtherInfo(otherInfo, splitBy);
-            return validatedOtherInfoForUpdate;
+            validatedOtherInfo = prepareValidatedOtherInfo(otherInfo, splitBy);
+            return validatedOtherInfo;
         } catch (NullPointerException e) {
             throw new DukeException("Please provide the relevant information "
                     + "when updating a task.");
@@ -201,10 +223,10 @@ public class Parser {
         }
     }
 
-    private String[] validateOtherInfo(String otherInfo, String splitBy) throws DukeException {
+    private String[] getValidatedOtherInfo(String otherInfo, String splitBy) throws DukeException {
         String[] validatedOtherInfo;
         try {
-            validatedOtherInfo = getValidatedOtherInfo(otherInfo, splitBy);
+            validatedOtherInfo = prepareValidatedOtherInfo(otherInfo, splitBy);
             return validatedOtherInfo;
         } catch (NullPointerException e) {
             throw new DukeException("Please provide the relevant information "
@@ -216,7 +238,7 @@ public class Parser {
         }
     }
 
-    private String[] getValidatedOtherInfo(String otherInfo, String splitBy) throws DukeException {
+    private String[] prepareValidatedOtherInfo(String otherInfo, String splitBy) throws DukeException {
         String[] splitOtherInfo = otherInfo.split(splitBy, 2);
         String description = splitOtherInfo[0].strip();
         String date = splitOtherInfo[1].strip();
@@ -229,26 +251,27 @@ public class Parser {
         }
     }
 
-    private int validateInteger(String taskIndex) throws DukeException {
-        int index;
+    private int parseTaskIndex(String taskIndex) throws DukeException {
+        int unvalidatedIndex;
         if (taskIndex == null) {
             throw new DukeException("Please enter a task index.");
         }
 
         try {
-            index = Integer.parseInt(taskIndex);
+            unvalidatedIndex = Integer.parseInt(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException("Task index entered is not an integer.");
         }
-        return index;
+        return unvalidatedIndex;
     }
 
 
     /**
-     * parses the given by date for deadline
-     * @param dateInString by date in String
-     * @return a parsed local date object
-     * @throws DukeException when given date is invalid
+     * Parses the given by date for deadline.
+     *
+     * @param dateInString by date in String.
+     * @return a parsed local date object.
+     * @throws DukeException when given date is invalid.
      */
     private static LocalDate parseByDate(String dateInString) throws DukeException {
         LocalDate date;

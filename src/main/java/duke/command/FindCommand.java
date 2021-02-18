@@ -10,7 +10,8 @@ public class FindCommand extends Command {
 
     /**
      * Constructor.
-     * @param keyword keyword of the task description
+     *
+     * @param keyword keyword of the task description.
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -18,10 +19,11 @@ public class FindCommand extends Command {
 
     /**
      * Executes the action of finding required tasks.
-     * @return the information of the tasks containing the given keyword
+     *
+     * @return the information of the tasks containing the given keyword.
      */
     @Override
     public String[] execute() {
-        return TaskList.findTasks(keyword);
+        return TaskList.getTasksFound(keyword);
     }
 }

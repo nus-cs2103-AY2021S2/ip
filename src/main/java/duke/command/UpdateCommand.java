@@ -8,7 +8,8 @@ import duke.tasks.TaskList;
 
 /**
  * Updates the task at given index.
- * At this iteration, it only updates the date for deadline objects.
+ *
+ * Currently, it only updates the by date for deadline objects.
  */
 public class UpdateCommand extends Command {
     private int taskIndexToUpdate;
@@ -16,7 +17,8 @@ public class UpdateCommand extends Command {
 
     /**
      * Constructor for the DoneCommand class.
-     * @param taskIndexToUpdate an index for the Task object to be done
+     *
+     * @param taskIndexToUpdate an index for the Task object to be done.
      */
     public UpdateCommand(int taskIndexToUpdate, LocalDate newDate) {
         this.taskIndexToUpdate = taskIndexToUpdate;
@@ -25,7 +27,8 @@ public class UpdateCommand extends Command {
 
     /**
      * Executes the action of updating the task.
-     * @return the corresponding results to be printed to user
+     *
+     * @return the corresponding results to be printed to user.
      */
     @Override
     public String[] execute() {

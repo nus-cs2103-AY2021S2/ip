@@ -37,6 +37,7 @@ public class Ui {
 
     /**
      * Returns the formatted message to be printed.
+     *
      * @param messages an array of strings, main body of the message to be formatted.
      * @return the formatted message to be printed.
      */
@@ -51,6 +52,7 @@ public class Ui {
 
     /**
      * Returns the formatted message to be printed for GUI.
+     *
      * @param messages an array of strings, main body of the message to be formatted.
      * @return the formatted message to be printed.
      */
@@ -64,6 +66,7 @@ public class Ui {
 
     /**
      * Returns the greet message to be printed for GUI.
+     *
      * @return the greet message to be printed.
      */
     public static String getGreetGui() {
@@ -73,6 +76,7 @@ public class Ui {
 
     /**
      * Returns the exit message to be printed for GUI.
+     *
      * @return the exit message to be printed.
      */
     public static String getExitGui() {
@@ -90,21 +94,23 @@ public class Ui {
     /**
      * Prints the exit message when duke closes.
      */
-    public static void bye() {
+    public static void exit() {
         System.out.println(formatMessage(exit));
     }
 
     /**
-     * Helper method that prints the message or reply after the user command is executed.
-     * @param msg message to be printed
+     * Prints the message or reply after the user command is executed.
+     *
+     * @param msg message to be printed.
      */
     private static void printReply(String msg) {
         System.out.println(msg);
     }
 
     /**
-     * Takes in user input.
-     * @return user input as String
+     * Obtains the user input.
+     *
+     * @return user input as String.
      */
     public String getUserInput() {
         return in.nextLine();
@@ -112,7 +118,8 @@ public class Ui {
 
     /**
      * Prints the result after the command is executed.
-     * @param msg result from Command class .execute method
+     *
+     * @param msg result from Command class after execution.
      */
     public static void printMessage(String[] msg) {
         printReply(formatMessage(msg));

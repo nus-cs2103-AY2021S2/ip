@@ -15,7 +15,8 @@ public class ListCommand extends Command {
 
     /**
      * Executes the action of adding the task.
-     * @return the corresponding results to be printed to user
+     *
+     * @return the corresponding results to be printed to user.
      */
     @Override
     public String[] execute() {

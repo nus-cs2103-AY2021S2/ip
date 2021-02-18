@@ -13,9 +13,10 @@ public class TodoTest {
         Todo todo = new Todo("test");
         assertEquals("[T][ ] test", todo.toString());
     }
+
     @Test
     public void testInfoToStoreConversion() {
         Todo todo = new Todo("test");
-        assertEquals("T | 0 | test", todo.infoToStore());
+        assertEquals("T | 0 | test", todo.getTaskInfoToStore());
     }
 }

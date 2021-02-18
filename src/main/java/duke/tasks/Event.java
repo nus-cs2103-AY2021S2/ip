@@ -1,17 +1,17 @@
 package duke.tasks;
 
 /**
+ * Events are tasks that start at a specific time and ends at a specific time.
  * Inherited from Task, used to store information related to tasks of type 'Event'.
- *
- * Events are tasks that start at a specific time and ends at a specific time
  */
 public class Event extends Task {
-    protected String at;
+    private String at;
 
     /**
      * Constructor for Event class object.
-     * @param description event description
-     * @param at starting and ending time
+     *
+     * @param description event description.
+     * @param at starting and ending time.
      */
     public Event(String description, String at) {
         super(description);
@@ -21,8 +21,9 @@ public class Event extends Task {
 
     /**
      * Constructor for Event class object, used for storage.
-     * @param description event description
-     * @param at starting and ending time
+     *
+     * @param description event description.
+     * @param at starting and ending time.
      */
     public Event(String description, boolean isDone, String at) {
         super(description);
@@ -32,8 +33,9 @@ public class Event extends Task {
     }
 
     /**
-     * Acts as a helper method to print out the details of the event.
-     * @return the details of the event
+     * Returns the details of the event.
+     *
+     * @return the details of the event.
      */
     @Override
     public String toString() {
@@ -42,10 +44,11 @@ public class Event extends Task {
 
     /**
      * Gets the details of the event to be stored.
-     * @returnthe the details of the event to be stored
+     *
+     * @return the details of the event to be stored.
      */
     @Override
-    public String infoToStore() {
+    public String getTaskInfoToStore() {
         assert !description.isEmpty() : "event does not have a description!";
         assert !at.isEmpty() : "event does not have an at date!";
 

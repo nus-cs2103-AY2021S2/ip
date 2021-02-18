@@ -8,12 +8,14 @@ import duke.ui.Ui;
 
 /**
  * Main class for the duke project.
- * Disclaimer: This iteration of folder is heavily influenced by the folder structure
- *      and coding style of se-edu/addressbook-level2
+ * This file is heavily influenced by coding style of the Main.java file
+ *      from addressbook-level2. The link is:
+ *      https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java
  */
 public class Duke {
     private Storage storage;
     private Ui ui;
+
     /**
      * Constructor.
      */
@@ -22,7 +24,8 @@ public class Duke {
 
     /**
      * Main method for the code to start running.
-     * @param args user input
+     *
+     * @param args user input.
      */
     public static void main(String[] args) {
         new Duke().run(args);
@@ -60,14 +63,15 @@ public class Duke {
     }
 
     private void exit() {
-        Ui.bye();
+        Ui.exit();
         System.exit(-1);
     }
 
     /**
      * Returns the response from user input to GUI.
-     * @param input user input
-     * @return response after input is executed
+     *
+     * @param input user input.
+     * @return response after input is executed.
      */
     public String getResponse(String input) {
         if (input.equalsIgnoreCase("bye")) {
@@ -85,15 +89,17 @@ public class Duke {
 
     /**
      * Returns the greet message.
-     * @return the greet message
+     *
+     * @return the greet message.
      */
     public String getGreetMessage() {
         return Ui.getGreetGui();
     }
 
     /**
-     * Loads Ui and storage for duke created
-     * @throws DukeException when unable to load storage
+     * Loads Ui and storage for duke created.
+     *
+     * @throws DukeException when unable to load storage.
      */
     public void loadUiAndStorage() throws DukeException {
         this.ui = new Ui();
