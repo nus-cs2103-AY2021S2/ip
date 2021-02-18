@@ -26,12 +26,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task targetTask = tasks.getTask(index);
             tasks.deleteTask(index);
-            ui.printDeleteMsg(targetTask, tasks);
             storage.write(tasks);
+            return ui.getDeleteMsg(targetTask, tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(OUT_OF_BOUND_ERROR);
         }

@@ -26,12 +26,12 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task targetTask = tasks.getTask(index);
             targetTask.setDone(true);
-            ui.printDoneMsg(targetTask);
             storage.write(tasks);
+            return ui.getDoneMsg(targetTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(OUT_OF_BOUND_ERROR);
         }

@@ -30,24 +30,23 @@ public class Duke {
     }
 
     /**
-     * Starts reading inputs and executing Duke's program.
+     * Returns greeting message String.
+     * @return greeting message String
      */
-    public void run() {
-        ui.showGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExitCommand();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
+    public String greet() {
+        return ui.getGreeetingMsg();
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.getError(e.getMessage());
+        }
     }
 }

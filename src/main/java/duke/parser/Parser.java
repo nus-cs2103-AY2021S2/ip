@@ -15,7 +15,7 @@ public class Parser {
      * Parses the input string from the user and returns a Command according to the input.
      * @param inputString input string from user
      * @return Command object according to user's input
-     * @throws DukeException
+     * @throws DukeException Invalid user input
      */
     public static Command parse(String inputString) throws DukeException {
         String[] splitInput = inputString.split(" ", 2);
