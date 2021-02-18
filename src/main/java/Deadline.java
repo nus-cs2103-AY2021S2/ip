@@ -1,5 +1,5 @@
-/*
- * A type of Task.
+/**
+ * A type of Task with a deadline.
  */
 public class Deadline extends Task {
     public Deadline(String description, String date, String time) {

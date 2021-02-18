@@ -1,76 +1,76 @@
+import java.util.Scanner;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-/*
- * The main class for the Duke app.
- */
 public class Duke extends Application {
-    private Storage storage;
     private TaskList taskList;
-    private Ui ui;
-    private Parser parser;
+    private final Ui ui;
+    private final Storage storage;
+    private final Parser parser;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
+        taskList = new TaskList();
         ui = new Ui();
         storage = new Storage("C:/ip/src/main/java/Duke.java");
-        taskList = new TaskList();
         parser = new Parser(taskList, ui, storage);
     }
 
-    public void initiate() {
+    /**
+     * Retrieves the saved task list from the hard drive, if any.
+     * Reads the user's input command.
+     * Passes the command to the Parser to handle.
+     * Terminates if the parser is terminated.
+     */
+    public void run() {
         ui.greet();
         storage.retrieveOrCreate();
         taskList = storage.getTaskList();
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        do {
             String input = sc.nextLine();
-            parser.insertCommand(input);
+            parser.addCommand(input);
             System.out.println(parser.process());
-            if (parser.hasTerminated()) {
-                break;
-            }
-        }
+        } while (!parser.hasTerminated());
         System.exit(0);
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     @Override
     public void start(Stage stage) {
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
 
-        //Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -99,16 +99,10 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
-        //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
@@ -123,11 +117,7 @@ public class Duke extends Application {
     }
 
     public String getResponse(String input) {
-        parser.insertCommand(input);
+        parser.addCommand(input);
         return parser.process();
-    }
-
-    public static void main(String[] args) {
-        new Duke().initiate();
     }
 }
