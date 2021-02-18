@@ -20,6 +20,7 @@ public class Jeff {
         } catch (JeffException e) {
             tasks = new TaskList();
         }
+        assert tasks instanceof TaskList : "TaskList is not present";
     }
 
     public String getResponse (String message) {

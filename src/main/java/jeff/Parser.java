@@ -79,6 +79,7 @@ public class Parser {
             return new CommandFind(messageFrontSplit[1]);
 
         default:
+            assert false : "Code should not reach this point of execution.";
             throw new JeffException("something went wrong");
 
         }

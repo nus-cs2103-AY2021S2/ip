@@ -59,6 +59,7 @@ public class Storage {
             markTask(lineSplit[1], savedEvent);
             return savedEvent;
         default:
+            assert false : "Error with storage format of data.";
             return null;
         }
     }
