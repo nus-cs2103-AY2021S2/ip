@@ -65,7 +65,7 @@ Examples:
 Deadline command adds a deadline task which requires task description, date and time to specify the due date and time of the task. 
 
 Format: `deadline` DESCRIPTION /BY DATE TIME 
-* DATE should be by DD/MM/YYYY (DATE earlier than the current date will not be accepted as valid date)
+* DATE should be by DD/MM/YYYY (DATE that has already pass will not be accepted as a valid date)
 * TIME should be in HHMM
 
 Examples:
@@ -79,8 +79,8 @@ Event command adds a event task which requires task description, date as well as
 Format: `event` description /AT DATE START_TIME-END_TIME 
 
 Format: `deadline` DESCRIPTION /BY DATE TIME 
-* DATE is should be by DD/MM/YYYY (DATE earlier than the current date will not be accepted as valid date)
-* START_TIME and END_IME should be in HHMM (END_TIME earlier than START_TIME will not be accepted as valid time)
+* DATE is should be by DD/MM/YYYY (DATE that has already pass will not be accepted as a valid date)
+* START_TIME and END_IME should be in HHMM (END_TIME earlier than START_TIME will *not be accepted as valid time)
 
 Examples:
 * `event attend internship meeting /at 17/02/2022 1000-1100`
