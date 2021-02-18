@@ -63,7 +63,7 @@ public class EventCommand extends Command {
             date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
         } catch (NullPointerException e) {
             throw new DukeException("Please provide a date using the \"/at\" flag");
-        } catch (DateTimeParseException e) {
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException("Please input date in the form YYYY-MM-DD");
         }
 
