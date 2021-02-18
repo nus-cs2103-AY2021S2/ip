@@ -59,11 +59,34 @@ To find similar tasks, use eg: find my CAP
          * eg: User wants to add a todo task
               1. User keys in: todo finish iP 
               1. Justin adds the new todo task and display the newly added task
+             
+*Expected input*
+````
+list
+````
+*Expected output*
+````
+Here are the tasks in your list:
+1. [T][COMPLETED] finish iP 
+2. [E][INCOMPLETE] finish tP (at: Jun 19 2020 18:00)
+````
+
 1. `deadline`
    * User can add a deadline task by using the command key: deadline<space>d/[Task Name] /by [YYYY-MM-DD]
       * eg: User wants to add a deadline task
          1. User keys in: deadline need some sleep /by 2020-02-14
          1. Justin adds the new deadline task and display the newly added task
+
+*Expected input*
+````
+deadline catch dog /by 2020-06-10
+````
+*Expected output*
+````
+Got it, I've added this task:
+   [D][INCOMPLETE] catch dog (by: Jun 10 2020)
+Now you have 1 task in the list
+````
 
 1. `event`
    * User can add an event task by using the command key: event e/[Task Name] /at [YYYY-MM-DD HH:MM]
@@ -71,11 +94,34 @@ To find similar tasks, use eg: find my CAP
          1. User keys in: event fly me to the moon /at 2020-07-16 21:02
          2. Justin adds the new event task and display the newly added task
 
+*Expected input*
+````
+event catch cat /at 2020-06-10 18:00
+````
+*Expected output*
+````
+Got it, I've added this task:
+   [E][INCOMPLETE] catch cat (by: Jun 10 2020 18:00)
+Now you have 1 task in the list
+````
+
+
 1. `find`
    * User can find tasks by using the command: find [keyword]
       * eg: User wants to find a particuler task in the list
          1. User keys in: find where is my beer
          2. Justin will return a list of tasks that matches or contain the keywords of User's input
+
+*Expected input*
+````
+find catch
+````
+*Expected output*
+````
+Here are the matching tasks in your list
+1. [D][INCOMPLETE] catch dog (by: Jun 10 2020)
+2. [T][COMPLETED] catch cat 
+````
 
 1. `delete`
    * User can delete a task on the list by using the command: delete [Number]
@@ -84,6 +130,26 @@ To find similar tasks, use eg: find my CAP
          2. User key in command: delete 3
          3. Justin will delete the task and display the contents of the deleted task
 
+*Expected input*
+````
+delete 3
+````
+*Expected output*
+````
+Noted. I've removed this task
+   [E][INCOMPLETE] catch cat (by: Jun 10 2020 18:00)
+Now you have 1 task in the list
+````
+
 1. `bye`
    * Lastly, User can exit the application by using the command: bye
+
+*Expected input*
+````
+bye
+````
+*Expected output*
+````
+See you soon again!
+````
 
