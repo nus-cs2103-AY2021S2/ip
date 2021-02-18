@@ -29,11 +29,14 @@ public class EventCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        if (!cmd.contains("/at")) {
+        cmd = cmd.trim();
+        if (cmd.equals("event")) {
+            throw new DuckieException("oops! event cannot be empty!");
+        } else if (!cmd.contains("/at")) {
             throw new DuckieException("oops! please specify the time of your event using '/at'");
         }
 
-        String[] strE = cmd.trim().split("/at", 2);
+        String[] strE = cmd.split("/at", 2);
         String[] description = strE[0].split(" ", 2);
 
         DateParser dateParser = new DateParser();

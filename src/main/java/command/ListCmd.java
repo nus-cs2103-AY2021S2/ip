@@ -1,11 +1,11 @@
 package command;
 
+import java.io.IOException;
+
 import classes.DuckieException;
 import classes.Storage;
 import classes.TaskList;
 import classes.Ui;
-
-import java.io.IOException;
 
 public class ListCmd extends Command {
     private String cmd;
@@ -28,6 +28,11 @@ public class ListCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
+        cmd = cmd.trim();
+        if (!cmd.equals("list")) {
+            throw new DuckieException("please enter 'list' only!");
+        }
+
         String output = "";
 
         for (int i = 0; i < lst.getListSize(); i++) {
@@ -51,7 +56,6 @@ public class ListCmd extends Command {
             return "get to work! these are the tasks in your list: " + output
                     + "\n" + ui.customLine();
         }
-
     }
 
     /**

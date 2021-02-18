@@ -29,6 +29,10 @@ public class ByeCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
+        cmd = cmd.trim();
+        if (!cmd.equals("bye")) {
+            throw new DuckieException("please enter 'bye' only!");
+        }
         try {
             storage.saveTasks(lst.getTaskList());
         } catch (IOException e) {

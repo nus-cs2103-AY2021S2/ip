@@ -1,11 +1,11 @@
 package command;
 
+import java.io.IOException;
+
 import classes.DuckieException;
 import classes.Storage;
 import classes.TaskList;
 import classes.Ui;
-
-import java.io.IOException;
 
 public class FindCmd extends Command {
     private String cmd;
@@ -16,7 +16,11 @@ public class FindCmd extends Command {
 
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        String[] cmdArr = cmd.trim().split(" ");
+        cmd = cmd.trim();
+        if (cmd.equals("find")) {
+            throw new DuckieException("oops! find cannot be empty!");
+        }
+        String[] cmdArr = cmd.split(" ");
         String output = "";
         int taskSize = lst.getListSize();
         for (int i = 1; i < taskSize + 1; i++) {

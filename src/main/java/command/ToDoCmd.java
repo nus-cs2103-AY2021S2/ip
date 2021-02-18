@@ -29,7 +29,12 @@ public class ToDoCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        String[] cmdArr = cmd.trim().split(" ", 2);
+        cmd = cmd.trim();
+        if (cmd.equals("todo")) {
+            throw new DuckieException("oops! todo cannot be empty!");
+        }
+
+        String[] cmdArr = cmd.split(" ", 2);
         ToDo tempT = new ToDo(cmdArr[1]);
         lst.addTask(tempT);
         try {

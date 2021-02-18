@@ -1,4 +1,9 @@
-D | done | eat | Sat Dec 12 12:02:00 SGT 2020
-T | done | eat
 T | not done | eat
-T | not done | eat 
+T | done | eat
+T | not done | eat dinner
+E | not done | cs conference | Sat Dec 12 19:30:00 SGT 2020
+T | not done | ear
+T | not done | drink
+T | not done | eat
+T | not done | add
+D | not done | do this | Sat Dec 12 19:23:00 SGT 2020

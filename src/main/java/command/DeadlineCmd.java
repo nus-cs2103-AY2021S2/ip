@@ -31,11 +31,14 @@ public class DeadlineCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        if (!cmd.contains("/by")) {
+        cmd = cmd.trim();
+        if (cmd.equals("deadline")) {
+            throw new DuckieException("oops! deadline cannot be empty!");
+        } else if (!cmd.contains("/by")) {
             throw new DuckieException("oops! please specify deadline using '/by'");
         }
 
-        String[] strD = cmd.trim().split("/by", 2);
+        String[] strD = cmd.split("/by", 2);
         String[] description = strD[0].split(" ", 2);
 
         DateParser dateParser = new DateParser();

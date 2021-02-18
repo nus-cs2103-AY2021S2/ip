@@ -30,7 +30,11 @@ public class DoneCmd extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        String[] cmdArr = cmd.trim().split(" ");
+        cmd = cmd.trim();
+        if (cmd.equals("done")) {
+            throw new DuckieException("oops! please specify the task number after 'done'!");
+        }
+        String[] cmdArr = cmd.split(" ");
         assert !cmdArr[1].contains(" ");
         int taskNum = Integer.parseInt(cmdArr[1]);
         Task temp = lst.getTask(taskNum - 1);

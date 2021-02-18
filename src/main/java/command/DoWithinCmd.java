@@ -17,16 +17,19 @@ public class DoWithinCmd extends Command {
 
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) throws DuckieException {
-        if (!cmd.contains("/from") || !cmd.contains("/to")) {
+        cmd = cmd.trim();
+        if (cmd.equals("doWithin")) {
+            throw new DuckieException("oops! doWithin cannot be empty!");
+        } else if (!cmd.contains("/from") || !cmd.contains("/to")) {
             throw new DuckieException("oops! please specify the time of your "
                    + "do within task using '/from' and '/to'");
         }
 
-        String[] strFrom = cmd.trim().split("/from", 2);
+        String[] strFrom = cmd.split("/from", 2);
         String[] dateStr1 = strFrom[1].trim().split(" ");
         Date date1 = DateParserDw.parse(dateStr1[0]);
 
-        String[] strTo = cmd.trim().split("/to", 2);
+        String[] strTo = cmd.split("/to", 2);
         Date date2 = DateParserDw.parse(strTo[1]);
 
         String[] description = strFrom[0].split(" ", 2);
