@@ -11,8 +11,6 @@ import com.tanboonji.jhin.exception.JhinException;
  */
 public class AliasCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "alias";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("^\\W*(\\S+)\\W*(\\S+)$");
     private static final String ERROR_MESSAGE =
             "Sorry, please enter a valid command and alias\n"

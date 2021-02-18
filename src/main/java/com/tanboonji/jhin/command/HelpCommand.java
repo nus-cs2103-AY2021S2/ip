@@ -5,8 +5,6 @@ package com.tanboonji.jhin.command;
  */
 public class HelpCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "help";
     /** Command list for help message */
     public static final String COMMAND_LIST = "Commands available:\n"
             + "- list\n"

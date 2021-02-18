@@ -10,8 +10,6 @@ import com.tanboonji.jhin.model.ToDo;
  */
 public class ToDoCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "todo";
     private static final String ERROR_MESSAGE = "Sorry, please enter a description for the todo.\n"
             + "Command: todo [description]";
     private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n"

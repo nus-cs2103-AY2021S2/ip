@@ -5,8 +5,6 @@ package com.tanboonji.jhin.command;
  */
 public class ListCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "list";
     private static final String SUCCESS_MESSAGE = "Here are the tasks in your list:\n"
             + "%s";
     private static final String SUCCESS_EMPTY_ALIAS_MESSAGE = "You currently have 0 tasks.";

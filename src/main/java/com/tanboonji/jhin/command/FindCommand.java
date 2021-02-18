@@ -7,8 +7,6 @@ import com.tanboonji.jhin.model.TaskList;
  */
 public class FindCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "find";
     private static final String SUCCESS_MATCH_MESSAGE = "Here are the matching tasks in your list:\n"
             + "%s";
     private static final String SUCCESS_NO_MATCH_MESSAGE =

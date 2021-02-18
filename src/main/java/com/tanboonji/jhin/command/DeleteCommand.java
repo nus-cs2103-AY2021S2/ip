@@ -9,8 +9,6 @@ import com.tanboonji.jhin.model.Task;
  */
 public class DeleteCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "delete";
     private static final String ERROR_MESSAGE = "Sorry, please enter a valid task number.\n"
             + "Command: delete [task number]";
     private static final String SUCCESS_MESSAGE = "Noted! I've removed this task:\n"

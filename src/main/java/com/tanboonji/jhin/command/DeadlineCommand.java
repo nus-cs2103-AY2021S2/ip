@@ -15,8 +15,6 @@ import com.tanboonji.jhin.parser.DateParser;
  */
 public class DeadlineCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "deadline";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/by)/by\\W(.*)");
     private static final String ERROR_MESSAGE =
             "Sorry, please enter a valid description and datetime for the deadline.\n"

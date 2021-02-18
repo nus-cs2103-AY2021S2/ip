@@ -11,8 +11,6 @@ import com.tanboonji.jhin.exception.JhinException;
  */
 public class DeleteAliasCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "deletealias";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("^\\W*(\\S+)\\W*$");
     private static final String ERROR_MESSAGE = "Sorry, please enter a valid alias.\n"
             + "Command: deletealias [alias]";

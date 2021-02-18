@@ -9,8 +9,6 @@ import com.tanboonji.jhin.model.Task;
  */
 public class DoneCommand extends Command {
 
-    /** String to execute this command */
-    public static final String COMMAND = "done";
     private static final String ERROR_MESSAGE = "Sorry, please enter a valid task number.\n"
             + "Command: done [task number]";
     private static final String SUCCESS_MESSAGE = "Nice! I've marked this task as done:\n"

@@ -5,8 +5,6 @@ package com.tanboonji.jhin.command;
  */
 public class ListAliasCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "listalias";
     private static final String SUCCESS_MESSAGE = "Here are the your aliases:\n"
             + "%s";
     private static final String SUCCESS_EMPTY_ALIAS_MESSAGE = "You currently have 0 aliases.";

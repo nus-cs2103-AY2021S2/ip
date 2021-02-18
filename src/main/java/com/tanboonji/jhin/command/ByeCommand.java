@@ -5,8 +5,6 @@ package com.tanboonji.jhin.command;
  */
 public class ByeCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "bye";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**

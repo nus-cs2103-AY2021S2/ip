@@ -15,8 +15,6 @@ import com.tanboonji.jhin.parser.DateParser;
  */
 public class EventCommand extends Command {
 
-    /** String input to execute this command */
-    public static final String COMMAND = "event";
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/at)/at\\W(.*)");
     private static final String ERROR_MESSAGE = "Sorry, please enter a valid description and datetime for the event.\n"
             + "Command: event [description] /at [datetime]";

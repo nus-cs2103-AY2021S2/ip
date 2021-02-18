@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import com.tanboonji.jhin.command.AliasCommand;
 import com.tanboonji.jhin.command.ByeCommand;
 import com.tanboonji.jhin.command.Command;
+import com.tanboonji.jhin.command.Command.CommandType;
 import com.tanboonji.jhin.command.DeadlineCommand;
 import com.tanboonji.jhin.command.DeleteAliasCommand;
 import com.tanboonji.jhin.command.DeleteCommand;
@@ -71,30 +72,40 @@ public class CommandParser {
         String command = matcher.group(COMMAND_GROUP).trim();
         String arguments = matcher.group(ARGUMENTS_GROUP).trim();
 
-        switch (command.toLowerCase()) {
-        case ToDoCommand.COMMAND:
+        if (!Command.isCommandValid(command)) {
+            throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
+        }
+
+        switch (CommandType.valueOf(command.toUpperCase())) {
+        case TODO:
             return ToDoCommand.parseArguments(arguments);
-        case EventCommand.COMMAND:
+        case EVENT:
             return EventCommand.parseArguments(arguments);
-        case DeadlineCommand.COMMAND:
+        case DEADLINE:
             return DeadlineCommand.parseArguments(arguments);
-        case ListCommand.COMMAND:
+        case LIST:
+        case LS:
             return new ListCommand();
-        case DoneCommand.COMMAND:
+        case DONE:
             return DoneCommand.parseArguments(arguments);
-        case DeleteCommand.COMMAND:
+        case DELETE:
+        case RM:
             return DeleteCommand.parseArguments(arguments);
-        case HelpCommand.COMMAND:
+        case HELP:
             return new HelpCommand();
-        case ByeCommand.COMMAND:
+        case BYE:
+        case EXIT:
             return new ByeCommand();
-        case FindCommand.COMMAND:
+        case FIND:
+        case SEARCH:
             return new FindCommand(arguments);
-        case AliasCommand.COMMAND:
+        case ALIAS:
             return AliasCommand.parseArguments(arguments);
-        case DeleteAliasCommand.COMMAND:
+        case DELETEALIAS:
+        case RMALIAS:
             return DeleteAliasCommand.parseArguments(arguments);
-        case ListAliasCommand.COMMAND:
+        case LISTALIAS:
+        case LSALIAS:
             return new ListAliasCommand();
         default:
             throw new InvalidCommandException(INVALID_COMMAND_MESSAGE);
