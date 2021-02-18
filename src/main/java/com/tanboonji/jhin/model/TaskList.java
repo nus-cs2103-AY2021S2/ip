@@ -56,9 +56,19 @@ public class TaskList implements Serializable {
      * @param index Index of task in array list.
      * @return Task that is marked as done.
      */
-    public Task markAsDone(int index) {
+    public Task markTaskAsDone(int index) {
         Task task = taskList.get(index);
         return task.markAsDone();
+    }
+
+    /**
+     * Checks if a task is done in task list by index in array list.
+     *
+     * @param index Index of task in array list.
+     * @return True if task is done, else false.
+     */
+    public boolean isTaskDone(int index) {
+        return taskList.get(index).isDone();
     }
 
     /**

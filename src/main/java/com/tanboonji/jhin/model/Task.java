@@ -25,12 +25,21 @@ public class Task implements Serializable {
     }
 
     /**
+     * Checks if the task is done.
+     *
+     * @return True if task is done, else false.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Marks the task as done.
      *
      * @return Task itself after getting marked as done.
      */
     public Task markAsDone() {
-        this.isDone = true;
+        isDone = true;
         return this;
     }
 
