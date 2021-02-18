@@ -190,24 +190,8 @@ public class Ui {
         return printErrorText("Sorry! Time seems to be missing/wrongly formatted.");
     }
 
-
-    /**
-     * Gets next line of user input
-     *
-     * @return User input
-     */
-    public String getNextCommand() {
-        return sc.nextLine().strip();
+    public String printSpecialCharacterUsedError() {
+        return printErrorText("Sorry! Task names cannot contain ||.");
     }
-
-    /**
-     * Checks if there is user input
-     *
-     * @return True if user typed a command
-     */
-    public boolean hasNextCommand() {
-        return sc.hasNext();
-    }
-
 
 }

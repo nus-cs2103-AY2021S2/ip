@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.commands.AddCommand;
@@ -118,6 +117,12 @@ public class Parser {
 
     public Command parseTodoString(String str) {
         String name = str.substring(5);
+        if (name.length() == 0) {
+            return new ErrorCommand(ui.printWrongNameError());
+        }
+        if (name.contains("||")) {
+            return new ErrorCommand(ui.printSpecialCharacterUsedError());
+        }
         Todo curr = new Todo(name, false);
         return new AddCommand(curr);
     }
@@ -131,6 +136,9 @@ public class Parser {
         String name = str.substring(9, cut);
         if (name.length() == 0) {
             return new ErrorCommand(ui.printWrongNameError());
+        }
+        if (name.contains("||")) {
+            return new ErrorCommand(ui.printSpecialCharacterUsedError());
         }
 
         String time = str.substring(cut + 5);
@@ -150,9 +158,12 @@ public class Parser {
             return new ErrorCommand(ui.printWrongTimeError());
         }
 
-        String name = str.substring(6, cut - 1);
+        String name = str.substring(6, cut);
         if (name.length() == 0) {
             return new ErrorCommand(ui.printWrongNameError());
+        }
+        if (name.contains("||")) {
+            return new ErrorCommand(ui.printSpecialCharacterUsedError());
         }
 
         String time = str.substring(cut + 5);
@@ -168,12 +179,15 @@ public class Parser {
 
     public Command parseEditNameString(String str) {
         try {
-            int cut = str.indexOf(" /name");
+            int cut = str.indexOf(" /name ");
             int index = Integer.parseInt(str.substring(5, cut));
             String newName = str.substring(cut + 7);
 
             if (newName.length() == 0) {
                 return new ErrorCommand(ui.printWrongNameError());
+            }
+            if (newName.contains("||")) {
+                return new ErrorCommand(ui.printSpecialCharacterUsedError());
             }
 
             return new EditNameCommand(index, newName);
@@ -186,7 +200,7 @@ public class Parser {
 
     public Command parseEditTimeString(String str) {
         try {
-            int cut = str.indexOf(" /time");
+            int cut = str.indexOf(" /time ");
             int index = Integer.parseInt(str.substring(5, cut));
             String newTime = str.substring(cut + 7);
             LocalDate.parse(newTime);
