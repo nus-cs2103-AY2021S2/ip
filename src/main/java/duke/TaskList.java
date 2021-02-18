@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     public static int taskListSize;
-    public ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     /**
      * Initialises TaskList object.
@@ -74,6 +74,29 @@ public class TaskList {
     public Task markTaskDone(int index) {
         Task task = taskList.get(index);
         task.markAsDone();
+        return task;
+    }
+
+    /**
+     * Updates the task at specified index by changing description to new one.
+     * @param index index of task.
+     * @param newDescription new description user wants to change to.
+     * @return updated Task object.
+     */
+    public Task updateTask(int index, String newDescription) {
+        Task task = taskList.get(index);
+        taskList.remove(index);
+        task.updateDescription(newDescription);
+//        if (task.getTaskType().equals("Todo")) {
+//            task = new Todo(newDescription);
+//        } else if (task.getTaskType().equals("Deadline")) {
+//            String[] descriptionArr = newDescription.split("(?i)/by ");
+//            task = new Deadline(descriptionArr[0], descriptionArr[1]);
+//        } else {
+//            String[] descriptionArr = newDescription.split("(?i)/at ");
+//            task = new Event(descriptionArr[0], descriptionArr[1]);
+//        }
+        taskList.add(index, task);
         return task;
     }
 

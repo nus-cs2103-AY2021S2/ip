@@ -49,6 +49,10 @@ public class Ui {
                 + TaskList.taskListSize + " task(s) in the list.";
     }
 
+    public String showTaskUpdated(Task task) {
+        return "Noted. I've updated this task:\n" + task.toString();
+    }
+
     /**
      * Returns string of the task marked as done.
      *

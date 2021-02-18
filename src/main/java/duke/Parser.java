@@ -16,7 +16,7 @@ public class Parser {
      */
     public static Command parseCommand(String userInput) throws DukeException {
         String[] commandArr = userInput.split(" ", 2);
-        String commandType = commandArr[0];
+        String commandType = commandArr[0].toLowerCase();
 
         if (commandType.equals("bye")) {
             return new ExitCommand();
@@ -35,21 +35,37 @@ public class Parser {
                 String keyword = commandArr[1];
                 return new FindCommand(keyword);
             }
+        } else if (commandType.equals("update")) {
+            String commandDescription = commandArr[1];
+            String[] descriptionArr = commandDescription.split(" ", 2);
+            try {
+                return new UpdateCommand(descriptionArr[0], descriptionArr[1]);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Please describe what you want to update!");
+            }
         } else if (commandType.equals("deadline")) {
             if (commandArr.length == 1) {
                 throw new DukeException("Oops! The description of deadline cannot be empty!");
             } else {
                 String commandDescription = commandArr[1];
-                String[] descriptionArr = commandDescription.split("/by ");
-                return new DeadlineCommand(descriptionArr[0], descriptionArr[1]);
+                String[] descriptionArr = commandDescription.split("(?i)/by ");
+                try {
+                    return new DeadlineCommand(descriptionArr[0], descriptionArr[1]);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please provide a 'by' date! E.g. /at 2021-01-01");
+                }
             }
         } else if (commandType.equals("event")) {
             if (commandArr.length == 1) {
                 throw new DukeException("Oops! The description of event cannot be empty!");
             } else {
                 String commandDescription = commandArr[1];
-                String[] descriptionArr = commandDescription.split("/at ");
-                return new EventCommand(descriptionArr[0], descriptionArr[1]);
+                String[] descriptionArr = commandDescription.split("(?i)/at ");
+                try {
+                    return new EventCommand(descriptionArr[0], descriptionArr[1]);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Please provide an 'at' date! E.g. /at 2021-01-01");
+                }
             }
         } else if (commandType.equals("todo")) {
             if (commandArr.length == 1) {
