@@ -25,6 +25,7 @@ public class OrangEasterEgg extends EasterEgg {
 
     /**
      * Describes usage of orang easteregg command.
+     *
      * @return String describing the orang easteregg command.
      */
     public static String displayHelp() {

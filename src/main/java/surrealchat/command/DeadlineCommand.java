@@ -62,6 +62,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes deadline command to generate new DeadlineTask object.
+     *
      * @param taskManagement TaskManagement object to which DeadlineTask is added.
      * @return String to be printed upon successful addition of DeadlineTask.
      */
@@ -77,6 +78,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Describes usage of deadline command.
+     *
      * @return String describing the deadline command.
      */
     public static String displayHelp() {
