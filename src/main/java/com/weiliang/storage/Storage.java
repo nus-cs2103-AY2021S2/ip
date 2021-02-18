@@ -23,7 +23,6 @@ public class Storage {
 
     /**
      * Initializes a new storage instance.
-     * 
      * @param fileName File name of text document.
      */
     public Storage(String fileName) {
@@ -32,7 +31,6 @@ public class Storage {
 
     /**
      * Stores a list of tasks into text documents.
-     * 
      * @param tasks Task list.
      */
     public void storeFile(TaskList tasks) {
@@ -48,7 +46,6 @@ public class Storage {
 
     /**
      * Returns list of tasks from text document.
-     * 
      * @return Associated {@code TaskList}.
      * @throws DukeException If unable to fetch tasks.
      */
@@ -79,7 +76,6 @@ public class Storage {
 
     /**
      * Parses task information from raw data.
-     * 
      * @param content Raw string content.
      * @return The parsed task.
      * @throws DukeException If file fails to load.

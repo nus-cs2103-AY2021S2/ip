@@ -1,8 +1,8 @@
 package com.weiliang.ui;
 
 import com.weiliang.Duke;
-
 import com.weiliang.DukeException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

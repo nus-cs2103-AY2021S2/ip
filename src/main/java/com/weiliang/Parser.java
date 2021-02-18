@@ -93,7 +93,7 @@ public class Parser {
         int i = 0;
         for (Task task : tasks) {
             if (task.getDescription().contains(searchField)) {
-                message += "\n" + (i+1) + "." + task;
+                message += "\n" + (i + 1) + "." + task;
             }
             i++;
         }

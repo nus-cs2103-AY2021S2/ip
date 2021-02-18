@@ -1,13 +1,14 @@
 package com.weiliang;
 
+import java.io.IOException;
+
 import com.weiliang.ui.MainWindow;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Main GUI for bot using FXML.
