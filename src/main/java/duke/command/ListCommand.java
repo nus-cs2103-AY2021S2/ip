@@ -25,7 +25,7 @@ public class ListCommand extends Command {
         String allTaskMsg = tasklist.showAllTask("list");
 
         if (allTaskMsg.isEmpty()) {
-            return ui.displayNoTaskMessage();
+            return ui.displayNoTaskInList();
         } else {
             return allTaskMsg;
         }

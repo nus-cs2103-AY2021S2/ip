@@ -33,6 +33,13 @@ public class UI {
     }
 
     /**
+     * Display message to inform users that there is are no task in list
+     */
+    public String displayNoTaskInList() {
+        return "There are no tasks in list.";
+    }
+
+    /**
      * Display message to inform users that there is a duplicated task
      */
     public String displayDuplicatedMessage() {
