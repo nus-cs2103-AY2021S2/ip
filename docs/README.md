@@ -1,8 +1,6 @@
 # User Guide
-___
 
 ## Features 
-___
 
 ### Adding a todo task: `todo`
 Adds a todo task to the list. 
