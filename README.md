@@ -1,23 +1,139 @@
-# Duke project template
+# Duke User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features 
 
-## Setting up in Intellij
+### 1. List all the tasks 
+User can view all the existing tasks. 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### 2. Create a ToDO task
+User can create a ToDo task and store it in a file.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### 3. Create a Deadline task
+User can create a Deadline task and store it in a file.
+
+### 4. Create an Event task
+User can create an Event task and store it in a file.
+
+### 5. Mark a task as done
+User can mark tasks as done.
+
+### 6. Delete a task
+User can delete tasks from the list.
+
+### 7. Find a task
+User can find a task by searching for a keyword
+
+
+## Usage
+
+### `list` - List all the tasks
+
+By entering 'list', user can view all the existing tasks.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+`Here are the matching tasks in your list`
+
+`1.[T][X] join sports club`
+
+
+### `todo` - Create a ToDO task
+
+User can create a ToDo task and store it in a file by entering 'todo' followed by the task name.
+
+Example of usage:
+
+`todo CS2103 ip`
+
+Expected outcome:
+
+`Got it. I've added this task:`
+
+`[T][] CS2103 ip`
+
+`Now you have 2 tasks in the list.`
+
+### `deadline` - Create a Deadline task
+
+User can create a Deadline task and store it in a file by entering 'deadline' followed by the task name and due date.
+
+Example of usage:
+
+`deadline CS2103 Quiz /by 2021-02-19`
+
+Expected outcome:
+
+`Got it. I've added this task:`
+
+`[D][] CS2103 Quiz (by: FEBRUARY 19 2021)`
+
+`Now you have 3 tasks in the list.`
+
+### `event` - Create an Event task
+
+User can create an Event task and store it in a file by entering 'event' followed by the task name and the date of the event.
+
+Example of usage:
+
+`event CS2103 Lecture /at 2021-02-19`
+
+Expected outcome:
+
+`Got it. I've added this task:`
+
+`[E][] CS2103 Lecture (at: FEBRUARY 19 2021)`
+
+`Now you have 4 tasks in the list.`
+
+
+### `done` - Mark a task as done
+
+User can mark a task as done by entering 'done' followed by its index number.
+
+Example of usage:
+
+`done 3`
+
+Expected outcome:
+
+`Nice! I've marked this task as done:`
+
+`[D][X] CS2103 Quiz (by: FEBRUARY 19 2021)`
+
+
+### `delete` - Delete a task
+
+User can delete tasks from the list by entering 'delete' followed by its index number.
+
+Example of usage:
+
+`delete 3`
+
+Expected outcome:
+
+`Noted. I've removed this task:`
+
+`[D][X] CS2103 Quiz (by: FEBRUARY 19 2021)`
+
+`Now you have 3 tasks in the list.`
+
+
+### `find` - Find a task
+
+User can find a task by searching for a keyword.
+
+Example of usage:
+
+`find CS2103`
+
+Expected outcome:
+
+`Here are the matching tasks in your list:`
+
+`1.[T][] CS2103 ip`
+
+`2.[E][] CS2103 Lecture (at: FEBRUARY 19 2021)`
