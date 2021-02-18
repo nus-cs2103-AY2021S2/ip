@@ -62,7 +62,7 @@ public class DeadlineCommand extends Command {
             String dateString = dateStrings.get(0);
             date = LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE);
         } catch (NullPointerException e) {
-            throw new DukeException("Please provide an end date");
+            throw new DukeException("Please provide an end date using the \"/by\" flag");
         } catch (DateTimeParseException e) {
             throw new DukeException("Please input date in the form YYYY-MM-DD");
         }
