@@ -9,15 +9,21 @@ Juke is a command-line based Task Manager application. A user will type a series
 
 ## Content Page
 Here is an overview of the commands that Juke supports and a user can input.
-* [help] (#-help-command)
-* [todo]
-* [deadline]
-* [event]
-* [delete]
-* [find]
-* [done]
-* [list]
-* [bye]
+- [Juke Bot User Guide](#juke-bot-user-guide)
+  - [User Interface](#user-interface)
+  - [Content Page](#content-page)
+  - [Features](#features)
+    - [Task Manager](#task-manager)
+  - [Usage](#usage)
+- [`help` command](#help-command)
+    - [`todo` command](#todo-command)
+    - [`deadline` command](#deadline-command)
+    - [`event` command](#event-command)
+    - [`delete` command](#delete-command)
+    - [`find` command](#find-command)
+    - [`done` command](#done-command)
+    - [`list` command](#list-command)
+    - [`bye` command](#bye-command)
 <br/><br/>
 
 
@@ -28,13 +34,14 @@ Juke Chat Bot is a personal task manager. It allows users to add, delete and sea
 
 ## Usage
 
-### help command
+# `help` command
 * Description: Shows a list of supported commands and their descriptions.
 * Format: `help`
 * Example: `help`
+
 <img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/help.png">
 
-### `todo`
+### `todo` command
 * Description: Creates a todo task and adds it to your task list.
 * Format: `todo <description>`
 * Example: `todo read book`
@@ -49,7 +56,7 @@ Now you have XX tasks in the list.
 </p>
 
 
-### `deadline`
+### `deadline` command
 * Description: Creates a deadline task due at a specific date and time and adds it to your task list.
 * Format: `deadline <description> /by <deadline date>`
 * Example: `deadline group project /by 2021-01-10 1800` 
@@ -64,7 +71,7 @@ Now you have XX tasks in the list.
 <img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/deadline.png">
 </p>
 
-### `event`
+### `event` command
 * Description: Creates an event task with an event at a specific date and time and adds it to your task list.
 * Format: `event <description> /at <event time>`
 * Example: `event meeting /at Wednesday 10PM` 
@@ -78,7 +85,7 @@ Now you have XX tasks in the list.
 <img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/event.png">
 </p>
 
-### `delete`
+### `delete` command
 * Description: Shows a list of supported commands and their descriptions.
 * Format: `delete <taskID>`
 * Example: `delete 1`
@@ -86,7 +93,7 @@ Now you have XX tasks in the list.
 <img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/delete.png">
 </p>
 
-### `find`
+### `find` command
 * Description: Shows a list of supported commands and their descriptions.
 * Format: `find <regex>`
 * Example: `find read`
@@ -94,7 +101,7 @@ Now you have XX tasks in the list.
 <img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/find.png">
 </p>
 
-### `done`
+### `done` command
 * Description: Shows a list of supported commands and their descriptions.
 * Format: `done <taskID>`
 * Example: `done 1`
@@ -102,7 +109,7 @@ Now you have XX tasks in the list.
 <img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/done.png">
 </p>
 
-### `list`
+### `list` command
 * Description: Shows a list of supported commands and their descriptions.
 * Format: `list`
 * Example: `list`
@@ -110,7 +117,7 @@ Now you have XX tasks in the list.
 <img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/list.png">
 </p>
 
-### `bye` 
+### `bye` command
 * Description: Exits the application.
 * Format: `bye`
 * Example: `bye`
