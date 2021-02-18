@@ -19,7 +19,7 @@ public class Storage {
      */
     public static void createAndWrite(String path, TaskList listOfTasks) {
         try {
-            File savedTasks = new File(path);
+            File savedTasks = new File(System.getProperty("user.dir"), path);
             savedTasks.createNewFile();
             FileWriter writer = new FileWriter(path);
             for (int i = 0; i < listOfTasks.numberOfTasks(); i++) {
