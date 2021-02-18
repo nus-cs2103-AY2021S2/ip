@@ -51,7 +51,7 @@ public class Duke  {
     public String getResponse(String line) {
         Command command = parser.parseCommand(line);
         if(command.isExit()) return "Bye bye";
-        return tasks.run(command,ui,storage);
+        return tasks.run(command,storage);
     }
     public String welcome() {
         ui.sendWelcomeMessage();

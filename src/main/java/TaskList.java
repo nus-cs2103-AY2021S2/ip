@@ -34,14 +34,13 @@ public class TaskList {
     /**
      *
      * @param command the type of command needed to be executed according to user input
-     * @param ui the ui object
      * @param storage the storage object
      * @throws EmptyArgumentException empty argument exception
      * @throws BadDateException bad date exception
      * @throws InvalidCommandException invalid command exception
      * @throws IOException ioexception
      */
-    public String run(Command command, Ui ui, Storage storage)  {
+    public String run(Command command, Storage storage)  {
         try {
         switch(command.getType()) {
             case "deadline":
@@ -62,7 +61,7 @@ public class TaskList {
                 return "Nice, I have marked this task as done!\n" + tasks.get(command.itemNo-1);
             case "list" :
                 String res = "here are your tasks:\n";
-                for(int itemNo=1;itemNo<=tasks.size();itemNo++) {
+                for(int itemNo = 1;itemNo <= tasks.size();itemNo++) {
                     res += " ";
                     res += "" + itemNo + ". " + tasks.get(itemNo-1) + "\n";
                 }
