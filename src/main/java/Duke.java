@@ -1,4 +1,3 @@
-import java.io.InputStream;
 import java.util.List;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -6,33 +5,38 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.paint.Paint;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 public class Duke extends Application {
+    private static final String LOG_PATH = "./logs";
+
     private Ui ui;
     private TaskList taskList;
-
-    private static final String LOG_PATH = "./logs";
+    private boolean testEnv;
 
     private ScrollPane scrollPane;
     private VBox dialogueContainer;
     private TextField userInput;
-    private Button sendButton;
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/qn_parrot.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/ans_parrot.png"));
 
     public Duke() {
-        this(LOG_PATH);
+        this(LOG_PATH, false);
     }
 
-    public Duke(String path) {
+    public Duke(String path, boolean testEnv) {
         Storage store = new Storage(path);
         this.taskList = new TaskList(store);
         this.ui = new Ui();
+        this.testEnv = testEnv;
     }
     /**
      * Starts running Duke.
@@ -103,6 +107,7 @@ public class Duke extends Application {
             } else {
                 ui.printSorry();
             }
+            break;
         default:
             ui.printSorry();
         }
@@ -111,7 +116,7 @@ public class Duke extends Application {
     private int[] getPipeInput(ParserOutput in) {
         if (in.getPipeInput().getAction() == 4) {
             return this.taskList.findIndex(in.getPipeInput().getSearchString());
-        } else if (in.getPipeInput().getAction() == 5){
+        } else if (in.getPipeInput().getAction() == 5) {
             return this.taskList.listIndex();
         } else {
             return null; //TODO: add exception for this
@@ -120,40 +125,46 @@ public class Duke extends Application {
 
     private String readParseGui(ParserOutput parserOutput) {
         switch (parserOutput.getAction()) {
-            case 1: //remove
-                List<Task> removedTasks = this.taskList.remove(parserOutput.getIndex());
-                return ui.printRemoved(removedTasks);
-            case 2: //done
-                List<Task> doneTasks = this.taskList.get(parserOutput.getIndex());
-                for (Task t : doneTasks) {
-                    t.markDone();
-                }
-                this.taskList.set(parserOutput.getIndex(), doneTasks);
-                return ui.printDone(doneTasks);
-            case 3: //add
-                this.taskList.add(parserOutput.getTask());
-                return ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
-            case 4: //find
-                List<Task> results = this.taskList.find(parserOutput.getSearchString());
-                return ui.printSearch(results, parserOutput.getSearchString());
-            case 5: //list
-                return Ui.printList(this.taskList);
-            case 6: //piped
-                int[] indexes = getPipeInput(parserOutput);
-                int nextAction = parserOutput.getNextAction();
-                if (nextAction == 1) {
-                    return readParseGui(ParserOutput.removeOutput(indexes));
-                } else if (nextAction == 2) {
-                    return readParseGui((ParserOutput.doneOutput(indexes)));
-                } else {
-                    return ui.printSorry();
-                }
-            default:
+        case 1: //remove
+            List<Task> removedTasks = this.taskList.remove(parserOutput.getIndex());
+            return ui.printRemoved(removedTasks);
+        case 2: //done
+            List<Task> doneTasks = this.taskList.get(parserOutput.getIndex());
+            for (Task t : doneTasks) {
+                t.markDone();
+            }
+            this.taskList.set(parserOutput.getIndex(), doneTasks);
+            return ui.printDone(doneTasks);
+        case 3: //add
+            this.taskList.add(parserOutput.getTask());
+            return ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
+        case 4: //find
+            List<Task> results = this.taskList.find(parserOutput.getSearchString());
+            return ui.printSearch(results, parserOutput.getSearchString());
+        case 5: //list
+            return Ui.printList(this.taskList);
+        case 6: //piped
+            int[] indexes = getPipeInput(parserOutput);
+            int nextAction = parserOutput.getNextAction();
+            if (nextAction == 1) {
+                return readParseGui(ParserOutput.removeOutput(indexes));
+            } else if (nextAction == 2) {
+                return readParseGui((ParserOutput.doneOutput(indexes)));
+            } else {
                 return ui.printSorry();
+            }
+        default:
+            return ui.printSorry();
         }
     }
 
+    /**
+     * JUnit test entry point. Only runs when testEnv property is set to true.
+     * @param userInput String input from the user
+     * @return String output displayed to the user
+     */
     public String testDuke(String userInput) {
+        assert this.testEnv : "testDuke method should only used for testing. ";
         ParserOutput parserOutput = null;
         try {
             parserOutput = Parser.parse(userInput);
@@ -183,7 +194,7 @@ public class Duke extends Application {
         scrollPane.setContent(dialogueContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -241,7 +252,12 @@ public class Duke extends Application {
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
+        userText.setFont(Font.font("ubuntu", FontWeight.NORMAL, FontPosture.REGULAR, 16));
+        userText.setTextFill(Paint.valueOf("141823"));
+
         Label dukeText = new Label(getResponse(userInput.getText()));
+        dukeText.setFont(Font.font("ubuntu", FontWeight.NORMAL, FontPosture.REGULAR, 16));
+        dukeText.setTextFill(Paint.valueOf("cb4b16"));
         dialogueContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))

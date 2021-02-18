@@ -1,8 +1,8 @@
 public class ParserOutput {
     private boolean bye;
     private Task task;
-    private int[] index;
     private int action;
+    private int[] index;
     private String searchString;
     private ParserOutput pipeInput;
     private int nextAction;
@@ -20,7 +20,7 @@ public class ParserOutput {
     }
 
     private ParserOutput(int nextAction, boolean bye, Task task, int action) {
-        assert bye != true || action > 0: "If not a bye, action cannot be none. ";
+        assert bye != true || action > 0 : "If not a bye, action cannot be none. ";
         this.bye = bye;
         this.task = task;
         this.action = action;
@@ -66,6 +66,11 @@ public class ParserOutput {
         return new ParserOutput(false, task, 3, 0);
     }
 
+    /**
+     * Factory for creating ParserOutput to indicate find command.
+     * @param searchString subString used for the search
+     * @return ParserOutput with action set to 4, and containing the searchString
+     */
     public static ParserOutput findOutput(String searchString) {
         ParserOutput p = new ParserOutput(false, null, 4, 0);
         p.setSearch(searchString);

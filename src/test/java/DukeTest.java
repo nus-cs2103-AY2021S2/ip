@@ -14,7 +14,7 @@ public class DukeTest {
 
     @BeforeEach
     public void setUp() {
-        this.duke = new Duke("./testLog");
+        this.duke = new Duke("./testLog", true);
     }
 
     @DisplayName("Test if parser creates Todo object when todo is added. ")

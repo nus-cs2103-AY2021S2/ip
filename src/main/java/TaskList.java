@@ -12,7 +12,7 @@ public class TaskList {
      * @param storage Storage object that TaskList writes to.
      */
     public TaskList(Storage storage) {
-        assert storage != null: "storage passed to TaskList cannot be null. ";
+        assert storage != null : "storage passed to TaskList cannot be null. ";
         this.storage = storage;
         this.tasks = new ArrayList<>();
 
@@ -48,8 +48,8 @@ public class TaskList {
     public List<Task> get(int[] indexes) {
         List<Task> resultTasks = new ArrayList<>();
         for (int i : indexes) {
-            assert i > 0 && i <= this.getSize(): "Index to get should be between 1 and " + this.getSize() +
-                    " but given " + i + ". ";
+            assert i > 0 && i <= this.getSize() : "Index to get should be between 1 and " + this.getSize()
+                    + " but given " + i + ". ";
             resultTasks.add(this.tasks.get(i - 1));
         }
         return resultTasks;
@@ -66,8 +66,8 @@ public class TaskList {
     public List<Task> remove(int[] indexes) {
         List<Task> removedTasks = new ArrayList<>();
         for (int i : indexes) {
-            assert i > 0: "Index passed to remove must be greater than 1. ";
-            assert i <= this.tasks.size(): "Index passed to remove cannot be greater than length of task list. ";
+            assert i > 0 : "Index passed to remove must be greater than 1. ";
+            assert i <= this.tasks.size() : "Index passed to remove cannot be greater than length of task list. ";
             this.storage.remove(i);
             removedTasks.add(this.tasks.remove(i - 1));
             this.count--;
@@ -84,9 +84,9 @@ public class TaskList {
         for (int i = 0; i < indexes.length; i++) {
             int index = indexes[i];
             Task task = tasks.get(i);
-            assert index > 0: "Index passed to set must be greater than 1. ";
-            assert index <= this.tasks.size(): "Index passed to set cannot be greater than length of task list. ";
-            assert task != null: "Task passed to set must not be null. ";
+            assert index > 0 : "Index passed to set must be greater than 1. ";
+            assert index <= this.tasks.size() : "Index passed to set cannot be greater than length of task list. ";
+            assert task != null : "Task passed to set must not be null. ";
             this.storage.set(index, task);
             this.tasks.set(index - 1, task);
         }
@@ -97,7 +97,7 @@ public class TaskList {
      * @param task Task to be added
      */
     public void add(Task task) {
-        assert task != null: "Task to be added must not be null. ";
+        assert task != null : "Task to be added must not be null. ";
         this.storage.add(task);
         this.tasks.add(task);
         this.count++;
@@ -126,7 +126,12 @@ public class TaskList {
         return resultList;
     }
 
-    public int[] findIndex(String searchString) {
+    /**
+     * Alternative to find, returns indexes of tasks instead of a list of tasks.
+     * @param searchString substring to search for
+     * @return int array of indexes of tasks containing searchString
+     */
+    int[] findIndex(String searchString) {
         List<Integer> resultList = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
             if (tasks.get(i).getName().contains(searchString)) {
@@ -140,7 +145,11 @@ public class TaskList {
         return result;
     }
 
-    public int[] listIndex() {
+    /**
+     * Alternative to list, returns array of all indexes in the taskList.
+     * @return int array of indexes of all tasks
+     */
+    int[] listIndex() {
         int[] result = new int[this.tasks.size()];
         for (int i = 0; i < result.length; i++) {
             result[i] = i + 1;

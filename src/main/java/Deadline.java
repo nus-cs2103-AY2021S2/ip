@@ -11,11 +11,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM D YYYY")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM D YYYY")) + ")";
     }
 
     @Override
     public String toStorageString() {
-        return "D|" + super.toStorageString() + "|" + this.deadline.format(DateTimeFormatter.ofPattern("yyyy-M-dd"));
+        return "D|" + super.toStorageString() + "|"
+                + this.deadline.format(DateTimeFormatter.ofPattern("yyyy-M-dd"));
     }
 }

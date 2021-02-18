@@ -11,6 +11,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Contructor for DialogeBox that contains text and picture for user and Duke.
+     * @param l Displayed ext
+     * @param iv Displayed image
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
