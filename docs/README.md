@@ -18,9 +18,21 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ![Justin Image](https://github.com/mrweikiat/ip/blob/master/docs/Ui.png)
 
+
+
 ## Commands in Justin 
 
-Features 
+### Content Page
+* help
+* list
+* todo
+* deadline
+* event
+* find
+* delete
+* bye
+
+### Features 
 
 1. Instructions can be displayed by using the command key: help
    * This will display all the basic commands that Justin can do
