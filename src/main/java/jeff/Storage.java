@@ -58,6 +58,7 @@ public class Storage {
                     savedTasks.add(savedEvent);
                     break;
                 default:
+                    assert false : "Error with storage format of data.";
                 }
             }
             return savedTasks;
