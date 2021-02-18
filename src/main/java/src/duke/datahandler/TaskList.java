@@ -80,7 +80,6 @@ public class TaskList {
 
     /**
      * removes the task at the taskindex and replaces it with the new task
-     * 
      * @param task      task to be put in the task list
      * @param taskIndex deletes the task at this index
      */

@@ -65,7 +65,6 @@ public abstract class Task {
 
     /**
      * gets the current is done status
-     * 
      * @return true is task is done false if not
      */
 

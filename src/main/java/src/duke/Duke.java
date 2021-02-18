@@ -10,10 +10,7 @@ import duke.datahandler.TaskList;
 import duke.datahandler.Ui;
 import duke.enums.Command;
 import duke.exception.TaskException;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
 import javafx.scene.image.Image;
 
 /**
@@ -25,9 +22,9 @@ import javafx.scene.image.Image;
  */
 public class Duke {
 
-    private final Image USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image DUKE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private final String ILLEGAL_ARGUMENT_MESSAGE = "    Invalid command, work harder!!!\n";
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private String illegalArgumentString = "    Invalid command, work harder!!!\n";
     private TaskList taskList;
 
     /**
@@ -40,7 +37,6 @@ public class Duke {
     /**
      * Get the users input and generates the relevant response based on the command
      * input and validity.
-     * 
      * @param input input from the user in the ui
      * @return text display to the user
      */
@@ -51,54 +47,54 @@ public class Duke {
 
         try {
             switch (taskType) {
-                case LIST:
-                    output = Ui.execute(Command.LIST, taskList, null);
-                    System.out.println(output);
-                    break;
-                case DELETE:
-                    Task deletedTask = taskList.get(parser.getTaskIndex() - 1);
-                    taskList.delete(parser.getTaskIndex() - 1);
-                    output = Ui.execute(Command.DELETE, taskList, deletedTask.getStatus());
-                    break;
-                case DONE:
-                    Task doneTask = taskList.get(parser.getTaskIndex() - 1);
-                    doneTask.setDone(true);
-                    output = Ui.execute(Command.DONE, taskList, doneTask.getStatus());
-                    break;
-                case SNOOZE:
-                    Task changeTask = taskList.get(parser.getTaskIndex() - 1);
-                    LocalDate newDate = LocalDate.parse(parser.getDate(),
-                            DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
-                    changeTask.changeEventTime(newDate);
-                    taskList.update(changeTask, parser.getTaskIndex() - 1);
-                    output = Ui.execute(Command.SNOOZE, taskList, changeTask.getStatus());
-                    break;
-                case DEADLINE:
-                case EVENT:
-                case TODO:
-                    DukeTaskHandler dukeTaskHandler = new DukeTaskHandler(parser, taskType);
-                    Task task = dukeTaskHandler.getNewTask();
-                    taskList.add(task);
-                    output = Ui.execute(Command.TODO, taskList, task.getStatus());
-                    break;
-                case FIND:
-                    output = Ui.execute(Command.FIND, taskList, parser.getDescription());
-                    break;
-                case NONE:
-                    throw new TaskException(ILLEGAL_ARGUMENT_MESSAGE);
-                case BYE:
-                    output = Ui.execute(Command.BYE, taskList, null);
-                    break;
+            case LIST:
+                output = Ui.execute(Command.LIST, taskList, null);
+                System.out.println(output);
+                break;
+            case DELETE:
+                Task deletedTask = taskList.get(parser.getTaskIndex() - 1);
+                taskList.delete(parser.getTaskIndex() - 1);
+                output = Ui.execute(Command.DELETE, taskList, deletedTask.getStatus());
+                break;
+            case DONE:
+                Task doneTask = taskList.get(parser.getTaskIndex() - 1);
+                doneTask.setDone(true);
+                output = Ui.execute(Command.DONE, taskList, doneTask.getStatus());
+                break;
+            case SNOOZE:
+                Task changeTask = taskList.get(parser.getTaskIndex() - 1);
+                LocalDate newDate = LocalDate.parse(parser.getDate(),
+                        DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+                changeTask.changeEventTime(newDate);
+                taskList.update(changeTask, parser.getTaskIndex() - 1);
+                output = Ui.execute(Command.SNOOZE, taskList, changeTask.getStatus());
+                break;
+            case DEADLINE:
+            case EVENT:
+            case TODO:
+                DukeTaskHandler dukeTaskHandler = new DukeTaskHandler(parser, taskType);
+                Task task = dukeTaskHandler.getNewTask();
+                taskList.add(task);
+                output = Ui.execute(Command.TODO, taskList, task.getStatus());
+                break;
+            case FIND:
+                output = Ui.execute(Command.FIND, taskList, parser.getDescription());
+                break;
+            case NONE:
+                throw new TaskException(illegalArgumentString);
+            case BYE:
+                output = Ui.execute(Command.BYE, taskList, null);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
 
             }
 
         } catch (TaskException e) {
             return (e.getMessage());
         } catch (IllegalArgumentException e) {
-            return (ILLEGAL_ARGUMENT_MESSAGE);
+            return (illegalArgumentString);
         }
         Storage.createAndWrite("savedTasks.txt", taskList);
 
@@ -108,7 +104,6 @@ public class Duke {
 
     /**
      * sends the greeting from duke to the user
-     * 
      * @return text shown to the user when they start duke
      */
 

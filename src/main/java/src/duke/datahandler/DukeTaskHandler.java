@@ -17,12 +17,11 @@ import duke.task.ToDo;
  */
 public class DukeTaskHandler {
     private Task newTask;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
     /**
      * constructs the task handler by taking in a parser that has parsed the input
      * and a task type to determine what type of task is created
-     * 
      * @param parser   the parser that has been given user input
      * @param taskType the task that the handler should create
      * @throws TaskException invalid arguments or missing arguments
@@ -36,24 +35,23 @@ public class DukeTaskHandler {
 
         TaskType typeOfTask = TaskType.valueOf(taskType.toString());
         switch (typeOfTask) {
-            case DEADLINE:
-                newTask = new Deadline(parser.getDescription(), LocalDate.parse(parser.getDate(), FORMATTER));
-                break;
-            case EVENT:
-                newTask = new Event(parser.getDescription(), LocalDate.parse(parser.getDate(), FORMATTER));
-                break;
-            case TODO:
-                newTask = new ToDo(parser.getDescription());
-                break;
-            default:
-                break;
+        case DEADLINE:
+            newTask = new Deadline(parser.getDescription(), LocalDate.parse(parser.getDate(), formatter));
+            break;
+        case EVENT:
+            newTask = new Event(parser.getDescription(), LocalDate.parse(parser.getDate(), formatter));
+            break;
+        case TODO:
+            newTask = new ToDo(parser.getDescription());
+            break;
+        default:
+            break;
 
         }
     }
 
     /**
      * returns the task created by the task handler
-     * 
      * @return new task created by task handler
      */
     public Task getNewTask() {
