@@ -65,6 +65,18 @@ Expected outcome:
 
 ![Screenshot of Event](./screenshots/event.png)
 
+### `find <search keyword>` - Search tasks
+
+Searches the task list for all tasks with descriptions that contain the search keyword.
+
+Example of usage:
+
+`find eat`
+
+Expected outcome:
+
+![Screenshot of Bye](./screenshots/find.png)
+
 ### `done <index>` - Mark a task as done.
 
 Mark a specific task in the task list as done by specifying its index.
