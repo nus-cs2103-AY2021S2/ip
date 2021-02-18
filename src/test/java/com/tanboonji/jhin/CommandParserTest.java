@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import com.tanboonji.jhin.command.AliasCommand;
+import com.tanboonji.jhin.command.ByeCommand;
 import com.tanboonji.jhin.command.DeadlineCommand;
 import com.tanboonji.jhin.command.DoneCommand;
 import com.tanboonji.jhin.command.EventCommand;
@@ -31,7 +32,7 @@ class CommandParserTest {
     @Test
     void parse_eventCommand_success() {
         String[] inputs = {"event book reading /at 01/02/2021 0000", " event  book reading /at 01-02-2021",
-            "event  book reading /at 01.02.2021 2359 "};
+            "event  book reading /at 01.02.2021 2359 ", "event book reading /at"};
         for (String input: inputs) {
             try {
                 assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(EventCommand.class));
@@ -44,7 +45,7 @@ class CommandParserTest {
     @Test
     void parse_deadlineCommand_success() {
         String[] inputs = {"deadline return book /by 01/02/2021 0000", " deadline  return book /by 01-02-2021",
-            "deadline  return book /by 01.02.2021 2359 "};
+            "deadline  return book /by 01.02.2021 2359 ", "deadline return book /by"};
         for (String input: inputs) {
             try {
                 assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(DeadlineCommand.class));
@@ -56,7 +57,7 @@ class CommandParserTest {
 
     @Test
     void parse_listCommand_success() {
-        String[] inputs = {"list", " list  all", "list  everything "};
+        String[] inputs = {"list", " list  all", "list  everything ", "ls"};
         for (String input: inputs) {
             try {
                 assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(ListCommand.class));
@@ -84,6 +85,18 @@ class CommandParserTest {
         for (String input: inputs) {
             try {
                 assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(AliasCommand.class));
+            } catch (JhinException e) {
+                fail();
+            }
+        }
+    }
+
+    @Test
+    void parse_byeCommand_success() {
+        String[] inputs = {"bye", " exit", "bye "};
+        for (String input: inputs) {
+            try {
+                assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(ByeCommand.class));
             } catch (JhinException e) {
                 fail();
             }
@@ -154,6 +167,25 @@ class CommandParserTest {
             } catch (JhinException e) {
                 // pass test case, no action required
             }
+        }
+    }
+
+    @Test
+    void parse_markTaskAsDoneTwice_jhinExceptionThrown() {
+        JhinStub jhin = new JhinStub();
+        try {
+            jhin.initialise();
+            jhin.getResponse("todo read book");
+            jhin.getResponse("done 1");
+        } catch (JhinException e) {
+            fail();
+        }
+
+        try {
+            jhin.getResponse("done 1");
+            fail();
+        } catch (JhinException e) {
+            // pass test case, no action required
         }
     }
 }
