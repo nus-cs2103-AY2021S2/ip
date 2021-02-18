@@ -6,7 +6,7 @@ By you typing in simple command lines, Monica can interact with you, helping wit
 
 Here is what the application looks like:
 
-![GUI](GUI.png)
+![GUI](Ui.png)
 
 ## What can Monica do?
 
