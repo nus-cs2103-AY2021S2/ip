@@ -14,13 +14,22 @@ import javafx.stage.Stage;
 import nodes.DialogBox;
 import util.Storage;
 
+import java.io.IOException;
+
 /**
  * JavaFX Application used to wrap a Duke instance and provide GUI interaction
  * for Duke.
  */
 public class Sweh extends Application {
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DaDuke.png"));
+    private final Label greetingText = new Label("Hello, I am SWEH. "
+            + "Your Simple Word-Executed Helper!\n"
+            + "What shall we do today?");
+    private final Label storageErrorText = new Label("A save file was found,"
+            + "but the contents could not be read... I will start from scratch instead.");
     private Duke duke;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -88,7 +97,20 @@ public class Sweh extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        // more code to be added here later
+        //Show greeting text
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greetingText, new ImageView(dukeImage))
+        );
+
+        //Print error text if storage could not load a save file.
+        try {
+            storage.readTaskManager();
+        } catch (IOException e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(storageErrorText, new ImageView(dukeImage))
+            );
+        }
+
     }
 
     /**
