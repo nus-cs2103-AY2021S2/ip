@@ -50,7 +50,7 @@ public class DukeTest {
     public void ui_done_success() {
         Ui ui = new Ui();
         ui.showDone(new Todo("borrow book"));
-        assertEquals("Nice! I've marked this task as done:\n  [T][ ] borrow book",
+        assertEquals("Nice! I've marked this task as done:\n[T][ ] borrow book",
                 ui.getMessage());
     }
 
@@ -66,8 +66,8 @@ public class DukeTest {
     public void ui_add_success() {
         Ui ui = new Ui();
         ui.showAddMessage(new Todo("borrow book"), 5);
-        assertEquals("Got it. I've added this task:\n  " +
-                        "[T][ ] borrow book\nNow you have "
+        assertEquals("Got it. I've added this task:\n"
+                        + "[T][ ] borrow book\nNow you have "
                         + "5 tasks in the list.",
                 ui.getMessage());
     }
@@ -83,8 +83,8 @@ public class DukeTest {
     public void ui_delete_success() {
         Ui ui = new Ui();
         ui.showDelete(new Todo("borrow book"), 5);
-        assertEquals("Noted. I've removed this task:\n  " +
-                        "[T][ ] borrow book\nNow you have "
+        assertEquals("Noted. I've removed this task:\n"
+                        + "[T][ ] borrow book\nNow you have "
                         + "5 tasks in the list.",
                 ui.getMessage());
     }
@@ -100,7 +100,7 @@ public class DukeTest {
     @Test
     public void ui_find_error() {
         Ui ui = new Ui();
-        ui.showFind( "");
+        ui.showFind("");
         assertEquals("There are no matching task in your list",
                 ui.getMessage());
     }
