@@ -1,23 +1,23 @@
-# Duke project template
+# Popo
+## Personal Task Manager
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+A personal task list manager that keeps track of multiple types of task.
 
-## Setting up in Intellij
+### Types of Tasks
+1. Todo (only description)
+2. Deadline (with additional deadline date and time)
+3. Event (with additional string describing the location)
+4. Duration (with additional duration of task)
+5. Period (with additional starting and ending date)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Example
+![ui.png](docs/Ui.png)
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## User Guide
+Read the user guide [here](https://w2vgd.github.io/ip/).
+
+## Remarks
+A Java greenfield project for NUS software engineering students.
+
+## Credits
+Images by [omatian](https://omatian.sg/).
