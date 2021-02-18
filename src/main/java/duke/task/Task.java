@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -77,6 +78,36 @@ public class Task {
      */
     public String getDateFormat() {
         return getDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
+
+    /**
+     * Returns the size of the command
+     * @return
+     */
+    public int getSizeOfCommand(){
+        return divideCommand.length;
+    }
+
+    /**
+     * Returns the time of the task to be completed
+     * @return
+     */
+    public LocalTime getTime(){
+        if(getSizeOfCommand() > 5) {
+            String StringTime = divideCommand[5];
+            return LocalTime.parse(StringTime);
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * Structures the time in the relevant format
+     * @return
+     */
+    public String getTimeFormat(){
+        return getTime() == null ? ""
+                : getTime().format(DateTimeFormatter.ofPattern("hh:mma"));
     }
 
     @Override

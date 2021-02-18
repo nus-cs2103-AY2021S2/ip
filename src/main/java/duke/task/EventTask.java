@@ -1,37 +1,27 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * This class handles the eventTask.
  */
 public class EventTask extends Task {
-    private LocalDate date;
-    String[] divideCommand;
 
+    /**
+     * Constructor for event
+     * @param task
+     */
     public EventTask(String task) {
         super(task);
-        divideCommand = task.split(" ");
     }
 
-    public String getName() {
-        return divideCommand[1] + " " + divideCommand[2];
-    }
 
-    public LocalDate getDate() {
-        String StringDate = divideCommand[4];
-        return LocalDate.parse(StringDate);
-    }
-
-    public String getDateFormat() {
-        return getDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-    }
-
+    /**
+     * String representation of event
+     * @return
+     */
     @Override
     public String toString() {
-        String taskRepresent = getName() + " (" + divideCommand[3].substring(1)
-                + ": " + getDateFormat() + ")";
+        String taskRepresent = getName() + " (" + super.divideCommand[3].substring(1)
+                + ": " + getDateFormat() + " " + getTimeFormat() + ")";
         if (this.isDone()) {
             return "[E][X] " + taskRepresent;
         } else {

@@ -17,3 +17,8 @@ todo play soccer undone
 deadline finish lab /by 2021-05-02 undone
 event attend beach-party /at 2021-04-17 undone
 deadline finish duke /by 2021-02-19 undone
+todo read book undone
+deadline attend meeting /by 2021-05-10 18:00:00 undone
+event attend meeting /at 2021-05-19 18:00:00 undone
+deadline finish homework /by 2021-05-19 undone
+event attend seminar /at 2021-08-18 undone

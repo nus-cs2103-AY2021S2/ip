@@ -1,36 +1,26 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * This class handles the deadlineTasks
  */
 public class DeadlineTask extends Task {
-    String[] divideCommand;
-
+    /**
+     * Constructor for deadlines
+     *
+     * @param task
+     */
     public DeadlineTask(String task) {
         super(task);
-        divideCommand = task.split(" ");
     }
 
-    public String getName() {
-        return divideCommand[1] + " " + divideCommand[2];
-    }
-
-    public LocalDate getDate() {
-        String StringDate = divideCommand[4];
-        return LocalDate.parse(StringDate);
-    }
-
-    public String getDateFormat() {
-        return getDate().format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-    }
-
+    /**
+     * String representation of the deadline
+     * @return
+     */
     @Override
     public String toString() {
-        String taskRepresent = getName() + " (" + divideCommand[3].substring(1)
-                + ": " + getDateFormat() + ")";
+        String taskRepresent = getName() + " (" + super.divideCommand[3].substring(1)
+                + ": " + getDateFormat() + " " + getTimeFormat() + ")";
         if (this.isDone()) {
             return "[D][X] " + taskRepresent;
         } else {
