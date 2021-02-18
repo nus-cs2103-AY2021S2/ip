@@ -16,68 +16,59 @@ Notes about the command format:
 e.g. `todo DESCRIPTION` - `DESCRIPTION` is the parameter to be passed in, can be used as `todo homework`
 - Items in square brackets are optional.<br>
 e.g `deadline DESCRIPTION /by DATE [TIME]`, `TIME` is an optional parameter to be passed in, can be used as `deadline cancel spotify /by 2021-02-16 12:00`.
-  
+- Items with `...` after them can be used multiple time.<br/>
+e.g. `delete ...` can be used as `delete 1 2 3` etc.
+
+### Help : `help`
+Shows a list of commands with its respective formats.<br/>
+**Format**: `help`
+
 ### Adding a Deadline task: `deadline`
-Adds a deadline type of task to the personal task list.
-
-Format: `deadline DESCRIPTION /by DATE [TIME]`
-
-Examples: `deadline assignment submission /by 2021-02-16 23:30`
+Adds a deadline type of task to the personal task list.<br/>
+**Format**: `deadline DESCRIPTION /by DATE [TIME]`<br/>
+**Example**: `deadline assignment submission /by 2021-02-16 23:30`
 
 ### Adding an Event task: `event`
-Adds an event type of task to the personal task list.
-
-Format: `event DESCRIPTION /at DATE [TIME]`
-
-Examples: `event Sam's Birthday Party /at 2021-02-20 12:30`
+Adds an event type of task to the personal task list.<br/>
+**Format**: `event DESCRIPTION /at DATE [TIME]`<br/>
+**Example**: `event Sam's Birthday Party /at 2021-02-20`
 
 ### Adding a ToDo task: `todo`
-Adds a todo type of task to the personal task list.
-
-Format: `todo DESCRIPTION`
-
-Examples: `todo borrow book`
+Adds a todo type of task to the personal task list.<br/>
+**Format**: `todo DESCRIPTION`<br/>
+**Example**: `todo borrow book`
 
 ### Listing all task(s): `task`
-Shows a list of all task in the task list. Display the tasks on a desired date by entering date after the `list` command.
+Shows a list of all task in the task list. Display the tasks on a desired date by entering date after the `list` command.<br/>
+**Format**: `list [DATE]`<br/>
+**Example**: `list`, `list 2020-02-16`, `list 16/2/2021`
 
-Format: `list [DATE]`
+### Search for a task(s): `find`
+Find tasks contain any of the given keywords.<br/>
+**Format**: `find KEYWORD [MORE_KEYWORDS]`<br/>
+**Example**: `find Birthday Party`
 
-Examples: `list 2020-02-16`
+### Marking a task as done: `done`
+Marks the specified task or all the tasks as done from the task list.
+#### Format 1: `done ...`
+- Marks one or more tasks as done.
+- **Examples**: `done 1`, `done 1 2 3`
 
-### Search for task(s): `find`
-Find tasks contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-Example: `find Birthday Party`
+#### Format 2: `all`
+- Marks all the tasks from the task list as done.
+- **Example**: `done all`
 
 ### Deleting a task: `delete`
 Deletes the specified task or all the tasks from the task list.
 
-#### Format 1: `INDEX`
-Deletes the task at the specified INDEX. 
-- Example: `delete 1`
+#### Format 1: `delete ...`
+- Deletes one or more tasks from the task list.
+- **Example**: `delete 1`, `delete 1 2 3`
 
-#### Format 2: `all`
+#### Format 2: `delete all`
 
-Deletes all the tasks from the task list. 
-- Example: `delete all`
-
-Expected outcome:
-
-### Marking a task as done: `done`
-Marks the specified task or all the tasks as done from the task list.
-
-#### Format 1: `INDEX`
-
-Marks the task at the specified INDEX as done.  
-- Example: `done 1`
-
-#### Format 2: `all`
-
-Marks all the tasks from the task list as done. 
-- Example: `done all`
+- Deletes all the tasks from the task list. 
+- **Example**: `delete all`
 
 ###Saving the data
 Duke data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -87,11 +78,11 @@ Duke data are saved in the hard disk automatically after any command that change
 ## FAQ
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file
-it creates with the file that contains the data of your previous Snom home folder.
+it creates with the file that contains the data of your previous Duke home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action | Format
 --------|------------------
@@ -100,6 +91,6 @@ Action | Format
 **event** | `event DESCRIPTION /at DATE[TIME]`
 **list** | `list [DATE]`
 **find** | `find KEYWORD [MORE KEYWORDS]`
-**delete** | `done INDEX` or `done all`
-**done** | `delete INDEX` or `delete all`
+**delete** | `delete ...` or `delete all`
+**done** | `done ...` or `done all`
 **bye** | `bye`

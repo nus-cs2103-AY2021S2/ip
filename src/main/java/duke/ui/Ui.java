@@ -1,18 +1,18 @@
 package duke.ui;
 
-import static duke.common.Messages.MESSAGE_ERROR;
-import static duke.common.Messages.MESSAGE_GOODBYE;
-import static duke.common.Messages.MESSAGE_LIST;
-import static duke.common.Messages.MESSAGE_TASKLIST_SUMMARY;
-import static duke.common.Messages.MESSAGE_TASK_ADD;
-import static duke.common.Messages.MESSAGE_TASK_ALL_DELETE;
-import static duke.common.Messages.MESSAGE_TASK_ALL_DONE;
-import static duke.common.Messages.MESSAGE_TASK_DELETE;
-import static duke.common.Messages.MESSAGE_TASK_DONE;
-import static duke.common.Messages.MESSAGE_WELCOME;
+import static duke.commons.core.Messages.MESSAGE_ERROR;
+import static duke.commons.core.Messages.MESSAGE_GOODBYE;
+import static duke.commons.core.Messages.MESSAGE_HELP;
+import static duke.commons.core.Messages.MESSAGE_LIST;
+import static duke.commons.core.Messages.MESSAGE_TASKLIST_SUMMARY;
+import static duke.commons.core.Messages.MESSAGE_TASK_ADD;
+import static duke.commons.core.Messages.MESSAGE_TASK_ALL_DELETE;
+import static duke.commons.core.Messages.MESSAGE_TASK_ALL_DONE;
+import static duke.commons.core.Messages.MESSAGE_TASK_DELETE;
+import static duke.commons.core.Messages.MESSAGE_WELCOME;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
+import duke.model.task.Task;
+import duke.model.task.TaskList;
 
 /**
  * Text UI of the application.
@@ -77,19 +77,6 @@ public class Ui {
     }
 
     /**
-     * Returns the information of the completed {@code Task}.
-     *
-     * @param task the completed {@code Task}
-     */
-    public String showDoneMessage(Task task) {
-        clear();
-        sb.append(MESSAGE_TASK_DONE);
-        sb.append("\n");
-        sb.append(formattedPrint(task.toString()));
-        return sb.toString();
-    }
-
-    /**
      * Returns the information of the {@code TaskList} of completed {@code Task}.
      *
      * @param taskList the completed {@code TaskList} of {@code Task}
@@ -103,18 +90,10 @@ public class Ui {
     }
 
     /**
-     * Returns the information of the deleted {@code Task}.
-     *
-     * @param task the deleted {@code Task}
-     * @param listSize size of the current {@code TaskList}
+     * Returns the information possible commands of Duke.
      */
-    public String showDeleteMessage(Task task, int listSize) {
-        clear();
-        sb.append(MESSAGE_TASK_DELETE);
-        sb.append("\n");
-        sb.append(formattedPrint(task.toString()));
-        showSummaryMessage(listSize);
-        return sb.toString();
+    public String showHelpMessage() {
+        return MESSAGE_HELP;
     }
 
     /**
@@ -128,6 +107,20 @@ public class Ui {
         sb.append("\n");
         printList(taskList);
         showSummaryMessage(0);
+        return sb.toString();
+    }
+
+    /**
+     * Returns the information of the {@code Task} that is deleted from {@code TaskList}.
+     *
+     * @param taskList the {@code TaskList} to be cleared
+     */
+    public String showDeleteMessage(TaskList taskList, int listSize) {
+        clear();
+        sb.append(MESSAGE_TASK_DELETE);
+        sb.append("\n");
+        printList(taskList);
+        showSummaryMessage(listSize);
         return sb.toString();
     }
 

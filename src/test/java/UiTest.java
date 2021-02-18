@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 import duke.ui.Ui;
 
 public class UiTest {
-    private Ui ui = new Ui();
+    private final Ui ui = new Ui();
 
     @Test
     public void showWelcomeTest() {
-        assertEquals("Hello! I'm Duke\nWhat can I do for you?", ui.showWelcome());
+        assertEquals("Hello! I'm Duke, your personal assistant!\n" +
+                "What can I do for you today?", Ui.showWelcome());
     }
 
     @Test

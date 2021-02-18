@@ -1,8 +1,8 @@
 package duke.storage;
 
-import static duke.common.Messages.MESSAGE_COMMAND_NOT_FOUND;
-import static duke.common.Messages.MESSAGE_FILE_NOT_FOUND;
-import static duke.common.Messages.MESSAGE_SAVE_FILE_ERROR;
+import static duke.commons.core.Messages.MESSAGE_COMMAND_NOT_FOUND;
+import static duke.commons.core.Messages.MESSAGE_FILE_NOT_FOUND;
+import static duke.commons.core.Messages.MESSAGE_SAVE_FILE_ERROR;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.exception.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.tasks.ToDo;
+import duke.commons.exceptions.DukeException;
+import duke.model.task.Deadline;
+import duke.model.task.Event;
+import duke.model.task.Task;
+import duke.model.task.TaskList;
+import duke.model.task.ToDo;
 
 /**
  * Stores and restores the user's task list.
@@ -60,6 +60,13 @@ public class Storage {
         return populateTasksFromStorage(sc);
     }
 
+    /**
+     * Process the data stored in the text file and returns a populated task list.
+     *
+     * @param sc Scanner object
+     * @return a populated task list
+     * @throws DukeException when an invalid task type is in the data file
+     */
     private List<Task> populateTasksFromStorage(Scanner sc) throws DukeException {
         List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
@@ -97,6 +104,8 @@ public class Storage {
     public void saveFile(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
+            File folder = file.getParentFile();
+            assert folder.exists() : "folder should exist";
             fileWriter.write(taskList.toStorageString());
             fileWriter.close();
         } catch (IOException e) {
