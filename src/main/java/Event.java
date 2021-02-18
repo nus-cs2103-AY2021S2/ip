@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    static final String DATE_FORMAT = "MMM dd yyyy h:mm a";
+    static final String DATE_TIME_FORMAT = "MMM dd yyyy h:mm a";
     protected LocalDateTime time;
 
     /**
@@ -22,13 +22,12 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public String parseTime(LocalDateTime time) {
-        return time.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
-
+    public String parseEventDateTime(LocalDateTime details) {
+        return details.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + parseTime(time) + ") " + (isThereTag ? getTag() : "");
+        return "[E]" + super.toString() + " (at: " + parseEventDateTime(time) + ") " + (isThereTag ? getTag() : "");
     }
 }

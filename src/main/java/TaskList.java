@@ -62,34 +62,6 @@ public class TaskList {
     }
 
     /**
-     * Finds the tasks that contain the keyword input by user.
-     *
-     * @param keyword Keyword input by user.
-     * @return A String consists of all the matching tasks.
-     */
-    public String findWithKeyword(String keyword) {
-        String output = "";
-        int numberOfMatches = 0;
-        int tracker = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            String task = tasks.get(i).toString();
-            boolean isPresent = task.toLowerCase().contains(keyword.toLowerCase());
-            if (isPresent) {
-                if (tracker == 0) {
-                    output = Ui.respondToFind() + "\n";
-                    tracker++;
-                }
-                output = output + task + "\n";
-                numberOfMatches++;
-            }
-        }
-        if (numberOfMatches == 0) {
-            output = Ui.respondToNoMatches();
-        }
-        return output;
-    }
-
-    /**
      * Returns the number of tasks in the task list.
      * @return Number of tasks.
      */

@@ -8,12 +8,13 @@ public class Parser {
 
     public static final int INDEX_OFFSET = 1;
     public static final int OFFSET_TO_NEXT_REQUIRED_DATA = 4;
-    public static final int VALID_INDEX_BOUND = -1;
+    public static final int INVALID_INDEX = -1;
 
     protected Storage storage;
     protected TaskList tasks;
     protected Ui ui;
     protected String command;
+
     protected int index;
     protected int findSlash;
     protected int taskIdentifier;
@@ -44,31 +45,35 @@ public class Parser {
     /**
      * Helper function to obtain necessary details and create a Deadline.
      * @return New Deadline created.
+     * @throws DukeException On validation error.
      */
     public Deadline createDeadline() throws DukeException {
         Validation.checkForContentAfterSlash(command, findSlash);
-        String descriptionDeadline = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
-        LocalDateTime date = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
-        System.out.println(date);
-        Deadline newDeadline = new Deadline(descriptionDeadline, date);
+        String deadlineDescription = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
+        LocalDateTime deadlineDateTime =
+                DateTimeValidation.handleDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
+        Deadline newDeadline = new Deadline(deadlineDescription, deadlineDateTime);
         return newDeadline;
     }
 
     /**
      * Helper function to obtain necessary details and create an Event.
      * @return New Event created.
+     * @throws DukeException On validation error.
      */
     public Event createEvent() throws DukeException {
         Validation.checkForContentAfterSlash(command, findSlash);
-        String descriptionEvent = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
-        LocalDateTime time = DateValidation.handleDate(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
-        Event newEvent = new Event(descriptionEvent, time);
+        String eventDescription = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
+        LocalDateTime eventDateTime =
+                DateTimeValidation.handleDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
+        Event newEvent = new Event(eventDescription, eventDateTime);
         return newEvent;
     }
 
     /**
      * Helper function to find a task needed for handling commands.
      * @return Task needed.
+     * @throws DukeException On validation error.
      */
     public Task findTask() throws DukeException {
         if (command.substring(0, index).equals("tag")) {
@@ -87,74 +92,62 @@ public class Parser {
      * @throws IOException On file error when adding the ToDo task
      * to the file in the hard disk.
      */
-    public String handleToDo() {
-        try {
-            ToDo newToDo = createTodo();
-            tasks.add(newToDo);
-            storage.addTask(newToDo);
-            return ui.respondToAddTask(newToDo, tasks.getSize());
-        } catch (IOException e) {
-            return e.getMessage();
-        }
+    public String handleToDo() throws IOException {
+        ToDo newToDo = createTodo();
+        tasks.add(newToDo);
+        storage.addTask(newToDo);
+        return ui.respondToAddTask(newToDo, tasks.getSize());
     }
 
     /**
      * Handles the Deadline command.
      * @return A string with the response to the command.
+     * @throws DukeException On validation error.
+     * @throws IOException On file error.
      */
-    public String handleDeadline() {
-        try {
-            Deadline newDeadline = createDeadline();
-            tasks.add(newDeadline);
-            storage.addTask(newDeadline);
-            return ui.respondToAddTask(newDeadline, tasks.getSize());
-        } catch (IOException | DukeException e) {
-            return e.getMessage();
-        }
+    public String handleDeadline() throws DukeException, IOException {
+        Deadline newDeadline = createDeadline();
+        tasks.add(newDeadline);
+        storage.addTask(newDeadline);
+        return ui.respondToAddTask(newDeadline, tasks.getSize());
     }
 
     /**
      * Handles the Event command.
      * @return A string with the response to the command.
+     * @throws DukeException On validation error.
+     * @throws IOException On file error.
      */
-    public String handleEvent() {
-        try {
-            Event newEvent = createEvent();
-            tasks.add(newEvent);
-            storage.addTask(newEvent);
-            return ui.respondToAddTask(newEvent, tasks.getSize());
-        } catch (DukeException | IOException e) {
-            return e.getMessage();
-        }
+    public String handleEvent() throws DukeException, IOException {
+        Event newEvent = createEvent();
+        tasks.add(newEvent);
+        storage.addTask(newEvent);
+        return ui.respondToAddTask(newEvent, tasks.getSize());
     }
 
     /**
      * Handles the Done command.
      * @return A string with the response to the command.
+     * @throws DukeException On validation error.
+     * @throws IOException On file error.
      */
-    public String handleDone() {
-        try {
-            Task toMark = findTask();
-            storage.markTask(toMark);
-            return ui.respondToDone(toMark);
-        } catch (DukeException | IOException e) {
-            return e.getMessage();
-        }
+    public String handleDone() throws DukeException, IOException {
+        Task toMark = findTask();
+        storage.markTask(toMark);
+        return ui.respondToDone(toMark);
     }
 
     /**
      * Handles the Delete command.
      * @return A string with the response to the command.
+     * @throws DukeException On validation error.
+     * @throws IOException On file error.
      */
-    public String handleDelete() {
-        try {
-            Task selected = findTask();
-            tasks.delete(taskIdentifier - INDEX_OFFSET);
-            storage.deleteTask(selected);
-            return ui.respondToDelete(selected, tasks.getSize());
-        } catch (DukeException | IOException e) {
-            return e.getMessage();
-        }
+    public String handleDelete() throws DukeException, IOException {
+        Task selected = findTask();
+        tasks.delete(taskIdentifier - INDEX_OFFSET);
+        storage.deleteTask(selected);
+        return ui.respondToDelete(selected, tasks.getSize());
     }
 
     /**
@@ -163,7 +156,26 @@ public class Parser {
      */
     public String handleFind() {
         String keyword = command.substring(index + INDEX_OFFSET);
-        return tasks.findWithKeyword(keyword);
+        String output = "";
+        int numberOfMatches = 0;
+        int tracker = 0;
+
+        for (int i = 0; i < tasks.getSize(); i++) {
+            String task = tasks.find(i).toString();
+            boolean isPresent = task.toLowerCase().contains(keyword.toLowerCase());
+            if (isPresent) {
+                if (tracker == 0) {
+                    output = ui.respondToFind() + "\n";
+                    tracker++;
+                }
+                output = output + task + "\n";
+                numberOfMatches++;
+            }
+        }
+        if (numberOfMatches == 0) {
+            output = ui.respondToNoMatches();
+        }
+        return output;
     }
 
     /**
@@ -177,18 +189,16 @@ public class Parser {
     /**
      * Handles the Tag command.
      * @return A string with the response to the command.
+     * @throws DukeException On validation error.
+     * @throws IOException On file error.
      */
-    public String handleTag() {
-        try {
-            Validation.checkForContentAfterSlash(command, findSlash);
-            String tag = extractTag();
-            Task selected = findTask();
-            storage.addTag(selected, tag);
-            selected.setTag(tag);
-            return ui.respondToTag(selected);
-        } catch (DukeException | IOException e) {
-            return e.getMessage();
-        }
+    public String handleTag() throws DukeException, IOException {
+        Validation.checkForContentAfterSlash(command, findSlash);
+        String tag = extractTag();
+        Task selected = findTask();
+        storage.addTag(selected, tag);
+        selected.setTag(tag);
+        return ui.respondToTag(selected);
     }
 
     /**
@@ -205,7 +215,7 @@ public class Parser {
             index = command.indexOf(' ');
             findSlash = command.indexOf('/');
 
-            if (index > VALID_INDEX_BOUND) {
+            if (index > INVALID_INDEX) {
                 String type = command.substring(0, index);
                 switch (type) {
                 case "todo":
@@ -237,7 +247,7 @@ public class Parser {
                     return null;
                 }
             }
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             return e.getMessage();
         }
     }

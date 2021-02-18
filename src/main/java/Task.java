@@ -6,9 +6,9 @@
 public class Task {
 
     protected String name;
+    protected String tag;
     protected boolean isDone;
     protected boolean isThereTag;
-    protected String tag;
 
     /**
      * Creates a new instance of a Task.

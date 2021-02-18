@@ -18,12 +18,11 @@ import java.util.Scanner;
 public class Storage {
 
     public static final int INVALID_INDEX = -1;
+    public static final int INDEX_OFFSET = 1;
 
-    protected String path;
-    protected File localFile;
     protected boolean isFileOriginallyPresent;
-    protected DateValidation validate;
-
+    protected File localFile;
+    protected String path;
 
     /**
      * Creates a new instance of Storage for a user.
@@ -33,7 +32,6 @@ public class Storage {
         this.path = path;
         this.localFile = new File(path);
         this.isFileOriginallyPresent = true;
-        this.validate = new DateValidation();
     }
 
     /**
@@ -83,18 +81,20 @@ public class Storage {
 
             while (contents.hasNext()) {
                 String data = contents.nextLine();
+
                 Character type = data.charAt(1);
                 Character isDone = data.charAt(4);
                 int startingIndex = data.indexOf('(');
                 int endingIndex = data.indexOf(')');
                 int findHash = data.indexOf('#');
+
                 switch (type) {
                 case 'T':
                     String todoDescription = data.substring(7);
                     String todoTag = "";
                     if (findHash != INVALID_INDEX) {
-                        todoDescription = data.substring(7, findHash - 1);
-                        todoTag = data.substring(findHash + 1);
+                        todoDescription = data.substring(7, findHash - INDEX_OFFSET);
+                        todoTag = data.substring(findHash + INDEX_OFFSET);
                     }
                     ToDo todo = new ToDo(todoDescription);
                     if (findHash != INVALID_INDEX) {
@@ -106,11 +106,11 @@ public class Storage {
                     tasks.add(todo);
                     break;
                 case 'D':
-                    String deadlineDescription = data.substring(7, startingIndex - 1);
+                    String deadlineDescription = data.substring(7, startingIndex - INDEX_OFFSET);
                     String by = data.substring(startingIndex + 5, endingIndex);
-                    Deadline deadline = new Deadline(deadlineDescription, validate.convertDate(by));
+                    Deadline deadline = new Deadline(deadlineDescription, DateTimeValidation.convertDate(by));
                     if (findHash != INVALID_INDEX) {
-                        String deadlineTag = data.substring(findHash + 1);
+                        String deadlineTag = data.substring(findHash + INDEX_OFFSET);
                         deadline.setTag(deadlineTag);
                     }
                     if (isDone == 'X') {
@@ -119,11 +119,11 @@ public class Storage {
                     tasks.add(deadline);
                     break;
                 case 'E':
-                    String eventDescription = data.substring(7, startingIndex - 1);
+                    String eventDescription = data.substring(7, startingIndex - INDEX_OFFSET);
                     String time = data.substring(startingIndex + 5, endingIndex);
-                    Event event = new Event(eventDescription, validate.convertDate(time));
+                    Event event = new Event(eventDescription, DateTimeValidation.convertDate(time));
                     if (findHash != INVALID_INDEX) {
-                        String eventTag = data.substring(findHash + 1);
+                        String eventTag = data.substring(findHash + INDEX_OFFSET);
                         event.setTag(eventTag);
                     }
                     if (isDone == 'X') {

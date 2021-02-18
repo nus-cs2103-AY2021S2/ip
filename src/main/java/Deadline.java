@@ -10,9 +10,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    static final String DATE_FORMAT = "MMM dd yyyy h:mm a";
+    static final String DATE_TIME_FORMAT = "MMM dd yyyy h:mm a";
     protected LocalDateTime by;
-
 
     /**
      * Creates a Deadline with the description and date and time by which the task should be completed.
@@ -28,16 +27,16 @@ public class Deadline extends Task {
     /**
      * Parses the date and time in the format of "MMM dd yyyy h:mm a".
      *
-     * @param date Date and time to be parsed.
+     * @param details Date and time to be parsed.
      * @return A String representing the date and time in the new format.
      */
-    public String parseDate(LocalDateTime date) {
-        return date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    public String parseDeadlineDateTime(LocalDateTime details) {
+        return details.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
 
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + parseDate(by) + ") " + (isThereTag ? getTag() : "");
+        return "[D]" + super.toString() + " (by: " + parseDeadlineDateTime(by) + ") " + (isThereTag ? getTag() : "");
     }
 }

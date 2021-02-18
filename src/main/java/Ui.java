@@ -57,7 +57,7 @@ public class Ui {
     }
 
     /**
-     * Prints the initial response to the 'list' command, depending on whether
+     * Creates the initial response to the 'list' command, depending on whether
      * the TaskList is empty.
      *
      * @param taskListSize Number of tasks in the TaskList.
@@ -87,7 +87,7 @@ public class Ui {
      * Creates the response after successfully finding matching tasks.
      * @return A string.
      */
-    public static String respondToFind() {
+    public String respondToFind() {
         return "Here are the matching tasks in your list:";
     }
 
@@ -95,7 +95,7 @@ public class Ui {
      * Creates the response after being unable to find any matching tasks.
      * @return A string.
      */
-    public static String respondToNoMatches() {
+    public String respondToNoMatches() {
         return "There are no matching tasks! Time to add one!";
     }
 
@@ -125,6 +125,5 @@ public class Ui {
         String bye = "- bye\n" + "     Exits the program \n";
         return "AVAILABLE COMMANDS: \n" + todo + deadline + event + done + delete + find + tag + list + bye;
     }
-
 
 }
