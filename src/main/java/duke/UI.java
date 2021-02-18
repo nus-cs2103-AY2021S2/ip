@@ -8,12 +8,16 @@ import java.time.format.DateTimeFormatter;
  */
 public class UI {
 
-    private static final String HELP_MESSAGE = "Here are commands you can use!\n" +
-            "All DATE is written in YYYY-MM-DD format\n\nAdd a todo task - add [TASK NAME]\n\n" +
-            "Add a deadline task - add deadline [TASK NAME] /by [DATE]\n\n" +
-            "Add an event task - add event [TASK NAME] /at [DATE]\n\n" +
-            "Show all your tasks - list\n\nMark a task as done - done [TASK NUMBER]\n\n" +
-            "Delete a task - delete [TASK NUMBER]\n\nDelete all tasks - reset\n\n" +
+    private static final String HELP_MESSAGE = "Here are commands you can use!\n\n" +
+            "*Read as: Description - User input\n" +
+            "*All DATE is written in YYYY-MM-DD format\n" +
+            "*Ignore square brackets when entering commands!\n\n" +
+            "------------------------------------------------------------------\n\n" +
+            "Add a todo task - todo [TASK_NAME]\n\n" +
+            "Add a deadline task - deadline [TASK_NAME] /by [DATE]\n\n" +
+            "Add an event task - event [TASK_NAME] /at [DATE]\n\n" +
+            "Show all your tasks - list\n\nMark a task as done - done [TASK_NUMBER]\n\n" +
+            "Delete a task - delete [TASK_NUMBER]\n\nDelete all tasks - reset\n\n" +
             "Show all tasks that matches a given date - show [DATE]\n\n" +
             "Find tasks matching a keyword - find [KEYWORD]\n\nSave and exit: bye";
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke o/\nWhat can I do for you today?\n\n" +
