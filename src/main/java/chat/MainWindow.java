@@ -23,8 +23,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     
     private Chat chat;
-    
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
 
     /**
      * Initialises anchor pane such that initial greeting from Chat will also be displayed
@@ -35,7 +33,7 @@ public class MainWindow extends AnchorPane {
         
         //initial greeting / loading error will be displayed on start up
         dialogContainer.getChildren().addAll(
-                DialogBox.getChatDialog(chat.getUi().getRespondString(), chat.getUi().getChatImage())
+                ChatDialogBox.getChatDialog(chat.getUi().getRespondString(), chat.getUi().getChatImage())
         );
 
     }
@@ -56,15 +54,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         assert userInput != null; 
-        assert chat != null; 
-        assert userImage != null; 
+        assert chat != null;
         assert chat.getUi() != null; 
         
         String input = userInput.getText();
         chat.run(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userInput.getText(), userImage),
-                DialogBox.getChatDialog(chat.getUi().getRespondString(), chat.getUi().getChatImage())
+                UserDialogBox.getUserDialog(userInput.getText()),
+                ChatDialogBox.getChatDialog(chat.getUi().getRespondString(), chat.getUi().getChatImage())
         );
         userInput.clear();
     }

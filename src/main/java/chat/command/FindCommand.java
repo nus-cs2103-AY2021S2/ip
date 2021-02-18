@@ -64,7 +64,6 @@ public class FindCommand extends Command {
      */
     public TaskList getFoundTaskList(String keyword, TaskList taskList) throws ChatException {
         assert taskList != null;
-        assert keyword != "";
 
         String formatStr = "Please find with format:\n" +
                 "find taskType,name,isDone,dates\n\n" +
