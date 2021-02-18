@@ -92,7 +92,7 @@ public class Parser {
         case "help":
             return new HelpCommand();
         default:
-            throw new MonicaException("I don't know what '" + commandType + "' means.");
+            throw new MonicaException("I don't know what '" + commandLine + "' means.");
         }
     }
 
