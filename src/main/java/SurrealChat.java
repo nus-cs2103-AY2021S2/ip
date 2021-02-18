@@ -44,6 +44,7 @@ public class SurrealChat {
 
     /**
      * Creates new SurrealChat instance.
+     *
      * @param filePath Path of file for save/load.
      * @return SurrealChat instance.
      */
@@ -66,6 +67,7 @@ public class SurrealChat {
 
     /**
      * Generates output to be printed based on what command is executed.
+     *
      * @param inputString The entire command, inclusive of arguments if any.
      * @return Output to be printed.
      */
@@ -171,6 +173,7 @@ public class SurrealChat {
 
     /**
      * Saves the tasks into file.
+     *
      * @return A string indicating that tasks are being saved.
      */
     public String saveFile() {

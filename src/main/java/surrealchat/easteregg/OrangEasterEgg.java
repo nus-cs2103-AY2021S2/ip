@@ -13,6 +13,7 @@ public class OrangEasterEgg extends EasterEgg {
 
     /**
      * Executes orang easteregg command to give hilarious output regarding the nature of CS2103T.
+     *
      * @return String of hilarious output.
      */
     public String execute() {

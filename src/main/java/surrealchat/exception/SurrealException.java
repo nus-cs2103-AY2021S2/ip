@@ -7,6 +7,7 @@ public class SurrealException extends Exception {
 
     /**
      * Constructs SurrealException object.
+     *
      * @param message The message for Meme Man display.
      */
     public SurrealException(String message) {

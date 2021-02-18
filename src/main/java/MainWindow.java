@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Sets the SurrealChat object to property.
+     *
      * @param surrealChat The SurrealChat object containining internal logic.
      */
     public void setSurreal(SurrealChat surrealChat) {

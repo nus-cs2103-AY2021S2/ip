@@ -16,6 +16,7 @@ public enum TaskPriority {
 
     /**
      * Obtains the priority level in int form.
+     *
      * @return Int of priority level.
      */
     public int getPriorityLevel() {
@@ -24,6 +25,7 @@ public enum TaskPriority {
 
     /**
      * Obtains correct priority enum based on num.
+     *
      * @param num The number denoting priority in ascending order.
      * @return The appropriate TaskPriority enum.
      */

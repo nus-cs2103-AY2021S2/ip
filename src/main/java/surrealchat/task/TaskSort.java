@@ -15,6 +15,7 @@ public class TaskSort {
 
     /**
      * Obtains the correct Comparator for sorting.
+     *
      * @param key The sorting criteria.
      * @return Appropriate Comparator for that criteria.
      * @throws SurrealException If Comparator cannot be found.

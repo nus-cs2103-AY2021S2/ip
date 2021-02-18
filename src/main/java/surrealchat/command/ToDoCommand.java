@@ -14,6 +14,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Creates new ToDoCommand object.
+     *
      * @param taskDescription The description for new ToDoTask object.
      */
     public ToDoCommand(String taskDescription) {
@@ -45,6 +46,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Executes todo command to generate new ToDoTask object.
+     *
      * @param taskManagement TaskManagement object to which ToDoTask is added.
      * @return String to be printed upon successful addition of DeadlineTask.
      */
@@ -60,6 +62,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Describes usage of todo command.
+     *
      * @return String describing the todo command.
      */
     public static String displayHelp() {

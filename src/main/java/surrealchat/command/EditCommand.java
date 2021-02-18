@@ -23,6 +23,7 @@ public class EditCommand extends Command {
 
     /**
      * Creates a new EditCommand object
+     *
      * @param rawDescription The task number to edit + /edit tag + new parameters.
      */
     public EditCommand(String rawDescription) {
@@ -211,6 +212,7 @@ public class EditCommand extends Command {
 
     /**
      * Executes edit command to edit Task parameters
+     *
      * @param taskManagement TaskManagement object where Task to be edited is stored.
      * @return String to describe the new task.
      */
@@ -245,6 +247,7 @@ public class EditCommand extends Command {
 
     /**
      * Describes usage of edit command.
+     *
      * @return String describing the edit command.
      */
     public static String displayHelp() {

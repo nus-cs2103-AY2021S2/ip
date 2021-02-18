@@ -10,6 +10,7 @@ public class ToDoTask extends Task {
 
     /**
      * Creates new instance of ToDoTask object.
+     *
      * @param taskDescription The description of new task.
      * @param taskPriority Priority of task.
      * @return New ToDoTask that is not done.
@@ -20,6 +21,7 @@ public class ToDoTask extends Task {
 
     /**
      * Creates instance of ToDoTask based on what was loaded from file.
+     *
      * @param isDone Whether task was previously marked as done.
      * @param taskDescription The description of new task.
      * @param taskPriority Priority of task.
@@ -31,6 +33,7 @@ public class ToDoTask extends Task {
 
     /**
      * Changes the description and priority of the ToDoTask.
+     *
      * @param newDescription New description of the task.
      * @param newPriority New task priority.
      * @return New ToDoTask with edited description and priority.
@@ -41,6 +44,7 @@ public class ToDoTask extends Task {
 
     /**
      * Changes the description of the ToDoTask.
+     *
      * @param newDescription The new description for the Task.
      * @return New ToDoTask with edited description.
      */
@@ -50,6 +54,7 @@ public class ToDoTask extends Task {
 
     /**
      * Changes the priority of the ToDoTask.
+     *
      * @param newPriority The new priority for the Task.
      * @return New ToDoTask with edited priority.
      */
@@ -59,6 +64,7 @@ public class ToDoTask extends Task {
 
     /**
      * Toggles a ToDoTask between done and undone.
+     *
      * @return ToDoTask that is marked as done/undone.
      */
     public ToDoTask markAsDone() {

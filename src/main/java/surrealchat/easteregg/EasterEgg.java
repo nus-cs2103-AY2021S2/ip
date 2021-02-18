@@ -8,6 +8,7 @@ public abstract class EasterEgg {
 
     /**
      * Creates new EasterEgg command.
+     *
      * @param easterEggType The type of easter egg.
      */
     public EasterEgg(String easterEggType) {
@@ -16,6 +17,7 @@ public abstract class EasterEgg {
 
     /**
      * Executes easteregg command to give some funny output.
+     *
      * @return String to be printed.
      */
     public abstract String execute();

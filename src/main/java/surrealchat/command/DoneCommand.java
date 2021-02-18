@@ -14,6 +14,7 @@ public class DoneCommand extends Command {
 
     /**
      * Creates a new DoneCommand object.
+     *
      * @param taskNumberString Index number of Task for which to toggle done/undone.
      */
     public DoneCommand(String taskNumberString) {
@@ -36,6 +37,7 @@ public class DoneCommand extends Command {
 
     /**
      * Executes done command to toggle isDone variable on Task object.
+     *
      * @param taskManagement TaskManagement object where Task object to be marked done/undone is stored.
      * @return String upon successful toggling of Task.
      */
@@ -55,6 +57,7 @@ public class DoneCommand extends Command {
 
     /**
      * Describes usage of done command.
+     *
      * @return String describing the done command.
      */
     public static String displayHelp() {

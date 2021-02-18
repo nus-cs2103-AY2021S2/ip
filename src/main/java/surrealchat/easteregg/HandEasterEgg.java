@@ -13,6 +13,7 @@ public class HandEasterEgg extends EasterEgg {
 
     /**
      * Executes icandoit or aikendueet easteregg command to give hilarious output about HAND.
+     *
      * @return String of hilarious output.
      */
     public String execute() {
@@ -21,6 +22,7 @@ public class HandEasterEgg extends EasterEgg {
 
     /**
      * Describes usage of icandoit or aikendueet easteregg command.
+     *
      * @return String describing the icandoit or aikendueet easteregg command.
      */
     public static String displayHelp() {

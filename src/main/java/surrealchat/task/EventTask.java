@@ -15,6 +15,7 @@ public class EventTask extends Task {
 
     /**
      * Creates new instance of EventTask object.
+     *
      * @param taskDescription The description of task.
      * @param taskPriority Priority of task.
      * @param event LocalDateTime object of the date and time at which task should happen.
@@ -27,6 +28,7 @@ public class EventTask extends Task {
 
     /**
      * Creates instance of EventTask based on what was loaded from file.
+     *
      * @param isDone Whether task was previously marked as done.
      * @param taskDescription The description of new task.
      * @param taskPriority Priority of task.
@@ -40,6 +42,7 @@ public class EventTask extends Task {
 
     /**
      * Changes the description, event datetime and priority of the EventTask.
+     *
      * @param newDescription New description of the task.
      * @param newPriority New task priority.
      * @param newEventDate New event datetime of the task.
@@ -51,6 +54,7 @@ public class EventTask extends Task {
 
     /**
      * Changes the description of the EventTask.
+     *
      * @param newDescription The new description for the Task.
      * @return New EventTask with edited description.
      */
@@ -60,6 +64,7 @@ public class EventTask extends Task {
 
     /**
      * Changes the deadline of the EventTask.
+     *
      * @param newEventDate The new event datetime for the Task.
      * @return New EventTask with edited event datetime.
      */
@@ -69,6 +74,7 @@ public class EventTask extends Task {
 
     /**
      * Changes the priority of the EventTask.
+     *
      * @param newPriority The new priority for the Task.
      * @return New EventTask with edited priority.
      */
@@ -78,6 +84,7 @@ public class EventTask extends Task {
 
     /**
      * Toggles an EventTask between done and undone.
+     *
      * @return EventTask that is marked as done/undone.
      */
     public EventTask markAsDone() {
@@ -86,6 +93,7 @@ public class EventTask extends Task {
 
     /**
      * Converts the EventTask into a string format for saving into file.
+     *
      * @return EventTask in string format for file storage.
      */
     @Override
@@ -95,6 +103,7 @@ public class EventTask extends Task {
 
     /**
      * Converts the EventTask into a string format for display on user output.
+     *
      * @return EventTask in string format for user output.
      */
     @Override

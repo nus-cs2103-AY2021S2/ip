@@ -13,6 +13,7 @@ public abstract class Task {
 
     /**
      * Creates instance of Task object.
+     *
      * @param type Type in terms of todo (denoted "T"), deadline (denoted "D"), event (denoted "E").
      * @param isDone Boolean flag of whether task is done or not.
      * @param description Description of task.
@@ -27,6 +28,7 @@ public abstract class Task {
 
     /**
      * Obtains type of task.
+     *
      * @return String letter denoting type of task.
      */
     public String getType() {
@@ -35,6 +37,7 @@ public abstract class Task {
 
     /**
      * Converts status of isDone into integer.
+     *
      * @return 1 if task was completed and 0 if task was not completed.
      */
     public int getStatusInt() {
@@ -47,6 +50,7 @@ public abstract class Task {
 
     /**
      * Gives an icon displaying whether task was completed.
+     *
      * @return Tick if task was completed and cross if task was not completed.
      */
     public String getStatusIcon() {
@@ -55,6 +59,7 @@ public abstract class Task {
 
     /**
      * Gives a description of the Task.
+     *
      * @return Task description.
      */
     public String getDescription() {
@@ -63,6 +68,7 @@ public abstract class Task {
 
     /**
      * Toggles the Task between done and undone.
+     *
      * @return Task marked as done/undone.
      */
     public abstract Task markAsDone();
@@ -70,6 +76,7 @@ public abstract class Task {
 
     /**
      * Converts the Task into a string format for saving into file.
+     *
      * @return Task in string format for file storage.
      */
     public String saveTask() {
@@ -79,6 +86,7 @@ public abstract class Task {
 
     /**
      * Converts the Task into a string format for display on user output.
+     *
      * @return Task in string format for user output.
      */
     @Override

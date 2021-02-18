@@ -13,6 +13,7 @@ public class VegetalEasterEgg extends EasterEgg {
 
     /**
      * Executes vegetal easteregg command to give hilarious output about someone saying no vegetals.
+     *
      * @return String of hilarious output.
      */
     public String execute() {
@@ -23,6 +24,7 @@ public class VegetalEasterEgg extends EasterEgg {
 
     /**
      * Describes usage of vegetal easteregg command.
+     *
      * @return String describing the vegetal easteregg command.
      */
     public static String displayHelp() {

@@ -16,6 +16,7 @@ public class FileManagement {
 
     /**
      * Creates a new FileManagement instance.
+     *
      * @param file File object with specified file path for save/load.
      */
     public FileManagement(File file) {
@@ -24,6 +25,7 @@ public class FileManagement {
 
     /**
      * Scans a file to generate list of tasks in the file.
+     *
      * @return List of tasks as taken from file.
      * @throws IOException If error arises during file creation process.
      */
@@ -43,6 +45,7 @@ public class FileManagement {
 
     /**
      * Writes tasks into file to be saved.
+     *
      * @param fileTaskList List of tasks to be keyed into the file.
      */
     public void saveTasksToFile(List<String> fileTaskList) {

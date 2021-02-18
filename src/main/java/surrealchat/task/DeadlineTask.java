@@ -15,6 +15,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Creates new instance of DeadlineTask object.
+     *
      * @param taskDescription The description of task.
      * @param taskPriority Priority of task.
      * @param deadline LocalDate object of the date and time by which task should be completed.
@@ -27,6 +28,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Creates instance of DeadlineTask based on what was loaded from file.
+     *
      * @param isDone Whether task was previously marked as done.
      * @param deadline The deadline of the task.
      * @param taskDescription The description of new task.
@@ -40,6 +42,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Changes the description, deadline and priority of the DeadlineTask.
+     *
      * @param newDescription New description of the task.
      * @param newPriority New task priority.
      * @param newDeadline New deadline of the task.
@@ -51,6 +54,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Changes the description of the DeadlineTask.
+     *
      * @param newDescription The new description for the Task.
      * @return New DeadlineTask with edited description.
      */
@@ -60,6 +64,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Changes the deadline of the DeadlineTask.
+     *
      * @param newDeadline The new deadline for the Task.
      * @return New DeadlineTask with edited deadline.
      */
@@ -69,6 +74,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Changes the priority of the DeadlineTask.
+     *
      * @param newPriority The new priority for the Task.
      * @return New DeadlineTask with edited priority.
      */
@@ -78,6 +84,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Toggles a DeadlineTask between done and undone.
+     *
      * @return Deadline that is marked as done/undone.
      */
     public DeadlineTask markAsDone() {
@@ -87,6 +94,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Converts the DeadlineTask into a string format for saving into file.
+     *
      * @return DeadlineTask in string format for file storage.
      */
     @Override
@@ -96,6 +104,7 @@ public class DeadlineTask extends Task {
 
     /**
      * Converts the DeadlineTask into a string format for display on user output.
+     *
      * @return DeadlineTask in string format for user output.
      */
     @Override

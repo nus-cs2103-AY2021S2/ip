@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates new DeleteCommand object.
+     *
      * @param taskNumberString Index number of Task to be deleted.
      */
     public DeleteCommand(String taskNumberString) {
@@ -28,6 +29,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes delete command to delete a task.
+     *
      * @param taskManagement TaskManagement object where Task to be deleted is stored.
      * @return String output upon successful deletion of Task.
      */
@@ -46,6 +48,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Describes usage of delete command.
+     *
      * @return String describing the delete command.
      */
     public static String displayHelp() {

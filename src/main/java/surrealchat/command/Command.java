@@ -11,6 +11,7 @@ public abstract class Command {
 
     /**
      * Creates new Command object.
+     *
      * @param commandType Type of command.
      */
     public Command(String commandType) {
@@ -19,6 +20,7 @@ public abstract class Command {
 
     /**
      * Executes the user command to give a String output.
+     *
      * @param taskManagement TaskManagement object that handles Task objects relevant to command.
      * @return String to be printed.
      */
@@ -26,6 +28,7 @@ public abstract class Command {
 
     /**
      * Checks if taskNumber falls outside the range [1, size of task list].
+     *
      * @param taskNumber Number keyed in by user.
      * @param size Total number of tasks in list.
      * @return True if out of range, false if within range.
@@ -36,6 +39,7 @@ public abstract class Command {
 
     /**
      * Obtains int from String.
+     *
      * @param description String to be parsed to int.
      * @return Int inside the String.
      * @throws SurrealException If description cannot be parsed to String.

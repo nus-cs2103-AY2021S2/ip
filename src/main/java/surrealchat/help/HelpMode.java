@@ -20,6 +20,7 @@ import surrealchat.easteregg.VegetalEasterEgg;
 public class HelpMode {
     /**
      * Displays descriptions on how to use commands.
+     *
      * @param command The command which user wishes to understand how to use.
      * @return String related to how the above command works.
      */

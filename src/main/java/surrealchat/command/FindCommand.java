@@ -13,6 +13,7 @@ public class FindCommand extends Command {
 
     /**
      * Creates new FindCommand object.
+     *
      * @param keyword The keyword to search. Case-insensitive.
      */
     public FindCommand(String keyword) {
@@ -32,6 +33,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes find command to locate a Task based on keyword.
+     *
      * @param taskManagement TaskManagement object where Tasks are stored.
      * @return String of list of Tasks and their corresponding numbers with keyword if any are found.
      */
@@ -49,6 +51,7 @@ public class FindCommand extends Command {
 
     /**
      * Describes usage of find command.
+     *
      * @return String describing the find command.
      */
     public static String displayHelp() {

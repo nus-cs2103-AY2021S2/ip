@@ -18,6 +18,7 @@ public class TaskManagement {
 
     /**
      * Creates instance of TaskManagement object.
+     *
      * @param taskList List of tasks.
      */
     public TaskManagement(List<Task> taskList) {
@@ -27,6 +28,7 @@ public class TaskManagement {
 
     /**
      * Returns List of tasks for further processing.
+     *
      * @return List of tasks.
      */
     public List<Task> getTaskList() {
@@ -35,6 +37,7 @@ public class TaskManagement {
 
     /**
      * Returns number of tasks stored.
+     *
      * @return Number of tasks stored.
      */
     public int getNumberOfTasks() {
@@ -43,6 +46,7 @@ public class TaskManagement {
 
     /**
      * Adds task to internal task list.
+     *
      * @param task Task to be added.
      */
     public void addTask(Task task) {
@@ -51,6 +55,7 @@ public class TaskManagement {
 
     /**
      * Obtains the relevant task.
+     *
      * @param taskNumber The number associated with task.
      * @return The associated task.
      */
@@ -60,6 +65,7 @@ public class TaskManagement {
 
     /**
      * Replaces the task at a certain position.
+     *
      * @param taskNumber Position at which to replace task.
      * @param task The replacement task.
      */
@@ -69,6 +75,7 @@ public class TaskManagement {
 
     /**
      * Toggles a task designated by number between done and undone.
+     *
      * @param taskNumber Position number of task (starting from 1) to be marked as done/undone.
      * @return Task that has been marked as done/undone.
      */
@@ -81,6 +88,7 @@ public class TaskManagement {
 
     /**
      * Deletes a task from the list.
+     *
      * @param taskNumber Position number of task (starting from 1) to be deleted.
      * @return Deleted task.
      */
@@ -90,6 +98,7 @@ public class TaskManagement {
 
     /**
      * Deletes all tasks from the list.
+     *
      * @throws SurrealException If list was empty to begin with.
      */
     public void deleteAllTasks() throws SurrealException {
@@ -156,6 +165,7 @@ public class TaskManagement {
 
     /**
      * Parses lines that were loaded form file into tasks.
+     *
      * @param fileLines Lines from the loaded file.
      * @return String of tasks successfully loaded from files.
      */
@@ -238,6 +248,7 @@ public class TaskManagement {
 
     /**
      * Generates list of tasks for saving into a file.
+     *
      * @return List of tasks in file string format.
      */
     public List<String> convertTasksForFile() {
@@ -248,6 +259,7 @@ public class TaskManagement {
 
     /**
      * Converts list of tasks into string form for printing.
+     *
      * @return List of tasks in print string format.
      * @throws SurrealException If list is empty.
      */
@@ -265,6 +277,7 @@ public class TaskManagement {
 
     /**
      * Obtains the tasks with keyword and corresponding numbers.
+     *
      * @param keyword The keyword for which to search.
      * @return List of tasks with their corresponding numbers in string form.
      */
@@ -283,6 +296,7 @@ public class TaskManagement {
 
     /**
      * Sorts the task list in level of priority order.
+     *
      * @param sortBy The criteria by which to sort taskList.
      * @throws SurrealException If no sort criteria given, taskList is empty or sort criteria is unsupported.
      */

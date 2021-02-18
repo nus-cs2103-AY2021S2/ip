@@ -49,6 +49,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates DialogBox from what user says.
+     *
      * @param text User input.
      * @param img User avatar.
      * @return DialogBox with user input as text and user avatar.
@@ -59,6 +60,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates DialogBox from what Meme Man says.
+     *
      * @param text Meme Man's words.
      * @param img Meme Man's avatar.
      * @return DialogBox with Meme Man's words as text and Meme Man's avatar.

@@ -17,6 +17,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Creates new DeadlineCommand object.
+     *
      * @param rawDescription The description for new DeadlineTask object, inclusive of date.
      */
     public DeadlineCommand(String rawDescription) {

@@ -17,6 +17,7 @@ public class EventCommand extends Command {
 
     /**
      * Creates new EventCommand object.
+     *
      * @param rawDescription The description for new EventTask object, inclusive of date.
      */
     public EventCommand(String rawDescription) {
@@ -61,6 +62,7 @@ public class EventCommand extends Command {
 
     /**
      * Executes event command to generate new EventTask object.
+     *
      * @param taskManagement TaskManagement object to which EventTask is added.
      * @return String to be printed upon successful addition of EventTask.
      */
@@ -76,6 +78,7 @@ public class EventCommand extends Command {
 
     /**
      * Describes usage of event command.
+     *
      * @return String describing the event command.
      */
     public static String displayHelp() {

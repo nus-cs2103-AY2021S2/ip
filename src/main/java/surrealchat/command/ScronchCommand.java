@@ -22,6 +22,7 @@ public class ScronchCommand extends Command {
 
     /**
      * Executes scronch command to delete all tasks.
+     *
      * @param taskManagement TaskManagement object that handles Task objects relevant to command.
      * @return String output upon successful deletion of all tasks.
      */
@@ -36,6 +37,7 @@ public class ScronchCommand extends Command {
 
     /**
      * Describes usage of scronch command.
+     *
      * @return String describing the scronch command.
      */
     public static String displayHelp() {

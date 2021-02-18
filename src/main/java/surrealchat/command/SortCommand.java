@@ -11,6 +11,7 @@ public class SortCommand extends Command {
 
     /**
      * Creates SortCommand object.
+     *
      * @param sortBy Keyword to obtain correct comparator.
      */
     public SortCommand(String sortBy) {
@@ -20,6 +21,7 @@ public class SortCommand extends Command {
 
     /**
      * Executes sort command to sort tasks.
+     *
      * @param taskManagement TaskManagement object that handles Task objects relevant to command.
      * @return Message upon successful sorting of task.
      */
@@ -34,6 +36,7 @@ public class SortCommand extends Command {
 
     /**
      * Describes usage of sort command.
+     *
      * @return String describing sort command.
      */
     public static String displayHelp() {
