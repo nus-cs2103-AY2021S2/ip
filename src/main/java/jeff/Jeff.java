@@ -24,7 +24,9 @@ public class Jeff {
 
     public String getResponse (String message) {
         try {
-            return Parser.execute(message, tasks, storage);
+            Command c = Parser.parse(message);
+            return c.execute(tasks, storage);
+            //return Parser.execute(message, tasks, storage);
         } catch (JeffException e) {
             return e.getMessage();
         }

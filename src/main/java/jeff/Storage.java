@@ -34,35 +34,38 @@ public class Storage {
             Scanner sc = new Scanner(data);
             ArrayList<Task> savedTasks = new ArrayList<>();
             while (sc.hasNext()) {
-                String[] line = sc.nextLine().split("#");
-                switch (line[0]) {
-                case "T":
-                    ToDo savedToDo = new ToDo(line[2]);
-                    if (line[1].equals("X")) {
-                        savedToDo.setDone();
-                    }
-                    savedTasks.add(savedToDo);
-                    break;
-                case "D":
-                    Deadline savedDeadline = new Deadline(line[2], line[3], line[4]);
-                    if (line[1].equals("X")) {
-                        savedDeadline.setDone();
-                    }
-                    savedTasks.add(savedDeadline);
-                    break;
-                case "E":
-                    Event savedEvent = new Event(line[2], line[3], line[4]);
-                    if (line[1].equals("X")) {
-                        savedEvent.setDone();
-                    }
-                    savedTasks.add(savedEvent);
-                    break;
-                default:
-                }
+                Task newTask = readLine(sc.nextLine());
+                savedTasks.add(newTask);
             }
             return savedTasks;
         } catch (FileNotFoundException e) {
             throw new JeffException("No saved tasks");
+        }
+    }
+
+    public Task readLine(String line) {
+        String[] lineSplit = line.split("#");
+        switch (lineSplit[0]) {
+        case "T":
+            ToDo savedToDo = new ToDo(lineSplit[2]);
+            markTask(lineSplit[1], savedToDo);
+            return savedToDo;
+        case "D":
+            Deadline savedDeadline = new Deadline(lineSplit[2], lineSplit[3], lineSplit[4]);
+            markTask(lineSplit[1], savedDeadline);
+            return savedDeadline;
+        case "E":
+            Event savedEvent = new Event(lineSplit[2], lineSplit[3], lineSplit[4]);
+            markTask(lineSplit[1], savedEvent);
+            return savedEvent;
+        default:
+            return null;
+        }
+    }
+
+    public void markTask(String mark, Task task) {
+        if (mark.equals("X")) {
+            task.setDone();
         }
     }
 
@@ -76,20 +79,25 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task t : tasks) {
-                String currLine = t.getSymbol() + "#" + t.getStatus() + "#" + t.getName();
-                if (t instanceof Deadline) {
-                    Deadline d = (Deadline) t;
-                    currLine += "#" + d.getDate().toString() + "#" + d.getTime().toString();
-                } else if (t instanceof Event) {
-                    Event e = (Event) t;
-                    currLine += "#" + e.getDate().toString() + "#" + e.getTime().toString();
-                }
-                currLine += "\n";
-                fw.write(currLine);
+                String line = writeLine(t);
+                fw.write(line);
             }
             fw.close();
         } catch (IOException e) {
-            throw new JeffException("Cannot save tasks" + e.getMessage());
+            throw new JeffException("Cannot save tasks " + e.getMessage());
         }
+    }
+
+    public String writeLine(Task task) {
+        String line = task.getSymbol() + "#" + task.getStatus() + "#" + task.getName();
+        if (task instanceof Deadline) {
+            Deadline d = (Deadline) task;
+            line += "#" + d.getDate().toString() + "#" + d.getTime().toString();
+        } else if (task instanceof Event) {
+            Event e = (Event) task;
+            line += "#" + e.getDate().toString() + "#" + e.getTime().toString();
+        }
+        line += "\n";
+        return line;
     }
 }
