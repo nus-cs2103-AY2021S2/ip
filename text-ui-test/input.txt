@@ -1,0 +1,29 @@
+hello
+How are you?
+todo buy groceries
+list
+done 1
+list
+deadline 01 /by 12-jan-2020
+deadline 02  /by 12-jan-2020
+deadline 03   /by 12-jan-2020
+deadline 04    /by 12-jan-2020
+deadline 05     /by 12-jan-2020
+deadline
+deadline /by
+event /at
+todo
+done 999
+done 4
+done 2
+done 3
+list
+event attend lecture /at tomorrow noon
+done 7
+list
+delete 1
+list
+delete 1
+list
+delete 200
+list
