@@ -94,6 +94,13 @@ public class Parser {
      */
     private String todoCommand() {
         try {
+            String name = input.substring(5);
+            if (name.trim().length() == 0) {
+                return ui.errorMessage("invalidTodo");
+            }
+            if (name.contains("|")) {
+                return ui.errorMessage("invalidBug");
+            }
             taskList.add(new Task(input.substring(5)));
             return (ui.taskAdded(taskList.get(taskList.size() - 1)) + "\n"
                     + ui.showTaskListSize(taskList.size()));
@@ -109,11 +116,21 @@ public class Parser {
      */
     private String deadlineCommand() {
         try {
-            taskList.add(new Task(input.substring(5)));
+            String[] splitagain2 = input.substring(9).split("/by");
+            String name = splitagain2[0];
+            if (name.trim().length() == 0) {
+                return ui.errorMessage("invalidDeadline");
+            }
+            if (name.contains("|")) {
+                return ui.errorMessage("invalidBug");
+            }
+            taskList.add(new Deadline(splitagain2[0], splitagain2[1].substring(1)));
             return (ui.taskAdded(taskList.get(taskList.size() - 1)) + "\n"
                     + ui.showTaskListSize(taskList.size()));
+        } catch (DateTimeParseException de) {
+            return ui.errorMessage("dateTimeError");
         } catch (Exception e) {
-            return ui.errorMessage("invalidTodo");
+            return ui.errorMessage("invalidDeadline");
         }
     }
 
@@ -125,6 +142,13 @@ public class Parser {
     private String eventCommand() {
         try {
             String[] splitagain2 = input.substring(6).split("/at");
+            String name = splitagain2[0];
+            if (name.trim().length() == 0) {
+                return ui.errorMessage("invalidEvent");
+            }
+            if (name.contains("|")) {
+                return ui.errorMessage("invalidBug");
+            }
             taskList.add(new Event(splitagain2[0], splitagain2[1].substring(1)));
             return (ui.taskAdded(taskList.get(taskList.size() - 1)) + "\n"
                     + ui.showTaskListSize(taskList.size()));
@@ -157,14 +181,21 @@ public class Parser {
      * @return A reply to the user.
      */
     private String findCommand() {
-        String toFind = input.substring(5);
-        TaskList toReturn = new TaskList();
-        for (Task t : taskList.getList()) {
-            if (t.getTodo().contains(toFind)) {
-                toReturn.add(t);
+        try {
+            String toFind = input.substring(5);
+            if (toFind.trim().length() == 0) {
+                return ui.errorMessage("badFind");
             }
+            TaskList toReturn = new TaskList();
+            for (Task t : taskList.getList()) {
+                if (t.getTodo().contains(toFind)) {
+                    toReturn.add(t);
+                }
+            }
+            return ui.showSearchList(toReturn);
+        } catch (Exception e) {
+            return ui.errorMessage("invalidFind");
         }
-        return ui.showSearchList(toReturn);
     }
 
     /**

@@ -84,10 +84,8 @@ public class Duke extends Application {
 
     /**
      * Sets the correct GUI values for the ScrollPane.
-     *
-     * @param scrollpane The current ScrollPane.
      */
-    private void setScrollPane(ScrollPane scrollpane) {
+    private void setScrollPane() {
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -139,7 +137,7 @@ public class Duke extends Application {
 
         setStage(scene);
         setMainLayout(mainLayout);
-        setScrollPane(scrollPane);
+        setScrollPane();
         setDialogContainer();
         setInputBar();
         setAnchorPane();

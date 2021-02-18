@@ -1,3 +1,1 @@
-T | 1 | attend 2103 tutorial | XD 
-T | 0 | wheee | 
-T | 0 | 4 | 
+T | 1 | _ | 

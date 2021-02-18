@@ -11,7 +11,7 @@ public class Ui {
      */
     public String greet() {
         return ("Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!\n"
-                + "What can I do for you? uwu");
+                + "Visit https://jellybeano.github.io/ip/ for friendly user guide!");
     }
 
     public String showLoadingError() {
@@ -52,8 +52,14 @@ public class Ui {
             return ("GRR!!! That task is already done uwu.");
         case "invalidIndex":
             return ("GRR!!! Please indicate a valid index uwu.");
+        case "invalidFind":
+            return ("GRR!!! Please follow the find format properly uwu.");
         case "badTag":
             return ("GRR!!! Please provide a tag uwu.");
+        case "badFind":
+            return ("GRR!!! Are you finding things in the list or bugs in the code? uwu");
+        case "invalidBug":
+            return ("GRR!!! Please don't use weird characters like | uwu.");
         default:
             return "GRR!!! Something went really really wrong uwu.";
         }
