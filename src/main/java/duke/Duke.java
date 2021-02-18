@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.control.Button;

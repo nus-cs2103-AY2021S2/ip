@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,5 +71,21 @@ public class TaskList {
             taskNumber++;
         }
         return list.toString();
+    }
+
+    /**
+     * Checks if the task list has the given task.
+     * @param givenTask The given task.
+     * @return True if the task list has the given task, false otherwise.
+     */
+    public boolean hasTask(Task givenTask) {
+        String givenTaskString = givenTask.toString();
+        for (Task task : taskList) {
+            String taskString = task.toString();
+            if (taskString.equals(givenTaskString)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
