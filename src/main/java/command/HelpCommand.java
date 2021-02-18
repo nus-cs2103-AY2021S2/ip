@@ -1,7 +1,6 @@
 package command;
 
 import task.TaskManager;
-import util.DukeException;
 import util.Formatter;
 
 import java.util.ArrayList;
@@ -38,11 +37,6 @@ public class HelpCommand extends Command {
             String keyword = keywords.get(0);
             return new HelpCommand(keyword);
         }
-    }
-
-    @Override
-    public String execute(TaskManager taskManager) {
-        return response;
     }
 
     private static String defaultHelpText() {
@@ -126,5 +120,10 @@ public class HelpCommand extends Command {
 
     private static String quitHelpText() {
         return "Usage: \"quit\" - Terminates the application";
+    }
+
+    @Override
+    public String execute(TaskManager taskManager) {
+        return response;
     }
 }
