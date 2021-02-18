@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * A type of Task with a date and time.
  */

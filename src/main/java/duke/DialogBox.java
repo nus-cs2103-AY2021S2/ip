@@ -1,3 +1,5 @@
+package duke;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -8,19 +10,14 @@ import javafx.scene.Node;
 
 public class DialogBox extends HBox {
 
-    private Label text;
-    private ImageView displayPicture;
-
     public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        l.setWrapText(true);
+        iv.setFitWidth(100.0);
+        iv.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        this.getChildren().addAll(l, iv);
     }
 
     /**
