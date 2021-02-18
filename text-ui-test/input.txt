@@ -1,0 +1,7 @@
+todo buy bread
+event have breakfast /at 9am
+deadline wash the dishes /by 10am
+list
+done 2
+list
+bye
