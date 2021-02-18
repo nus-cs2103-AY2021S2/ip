@@ -39,12 +39,8 @@ public class Ui {
      *                 this command is a search command.
      */
     String showList(List<Task> list, boolean isSearch) {
-        if (isSearch) {
-            if (list.isEmpty()) {
+        if (isSearch && list.isEmpty()) {
                 return "Sorry, there are no matching tasks in your list";
-            } else {
-                return "Here are matching tasks in your list:";
-            }
         } else {
             StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
 

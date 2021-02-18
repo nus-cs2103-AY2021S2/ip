@@ -1,5 +1,5 @@
-public class DukeException extends Exception {
-    public DukeException(String message) {
+public class MayaException extends Exception {
+    public MayaException(String message) {
         super(message);
     }
 }

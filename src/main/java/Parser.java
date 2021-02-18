@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.NoSuchElementException;
 
 public class Parser {
 
@@ -11,13 +10,11 @@ public class Parser {
      * @param ui Ui object
      * @param taskList TaskList object.
      * @param storage Storage object.
-     * @throws NoSuchElementException if additional user input required is not provided.
-     * @throws UnknownCommandException if command is not supported by Maya.
+     * @throws MayaException if command is not supported by Maya.
      * @throws IOException if null is supplied to Storage or if file is not found.
      */
     static String parse(String command, Ui ui, TaskList taskList, Storage storage)
-            throws NoSuchElementException, UnknownCommandException, CommandFormatException,
-                IOException, ArrayIndexOutOfBoundsException {
+            throws MayaException, IOException {
         switch(parseCommand(command)) {
         case "bye":
             return ui.showBye();
@@ -29,6 +26,7 @@ public class Parser {
             Task doneTask = taskList.markTaskAsDone(index);
             storage.writeToFile(taskList.getList());
             return ui.showDone(doneTask);
+//            return handleDoneCommand(command, ui, taskList, storage);
         case "todo":
             String name = getDescription(command);
             if (!name.equals("")) {
@@ -42,7 +40,7 @@ public class Parser {
                 storage.appendToFile(todo);
                 return ui.showAddTask(newTask, taskList.getListSize());
             } else {
-                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                throw new CommandFormatException("☹ OOPS!!! The description of"
                         + " a todo cannot be empty.");
             }
         case "deadline":
@@ -63,7 +61,7 @@ public class Parser {
                 storage.appendToFile(deadline);
                 return ui.showAddTask(newTask, taskList.getListSize());
             } else {
-                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                throw new CommandFormatException("☹ OOPS!!! The description of"
                         + " a deadline cannot be empty.");
             }
         case "event":
@@ -84,7 +82,7 @@ public class Parser {
                 storage.appendToFile(event);
                 return ui.showAddTask(newTask, taskList.getListSize());
             } else {
-                throw new NoSuchElementException("☹ OOPS!!! The description of"
+                throw new CommandFormatException("☹ OOPS!!! The description of"
                         + " an event cannot be empty.");
             }
         case "find":
@@ -92,7 +90,7 @@ public class Parser {
             if (!searchString.equals("")) {
                 return ui.showList(taskList.searchTask(searchString.trim()), true);
             } else {
-                throw new NoSuchElementException("    ☹ OOPS!!! The search keyword cannot be empty.");
+                throw new CommandFormatException("    ☹ OOPS!!! The search keyword cannot be empty.");
             }
         case "delete":
             // To get the index

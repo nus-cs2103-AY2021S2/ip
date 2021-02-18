@@ -47,10 +47,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates dialog box for user according to user input with user image.
+     *
+     * @param text a String representing the user input.
+     * @param img an Image for user profile picture.
+     * @return DialogBox with user input and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates dialog box for Maya according to response to user input.
+     *
+     * @param text a String representing the response to user input.
+     * @param img an Image for Maya profile picture.
+     * @return DialogBox with Maya response and image.
+     */
     public static DialogBox getMayaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

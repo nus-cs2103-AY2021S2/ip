@@ -18,6 +18,7 @@ public class Maya extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
+
     private final Image maya = new Image(this.getClass().getResourceAsStream("/images/maya.jpg"));
     private final Image user = new Image(this.getClass().getResourceAsStream("/images/tucker.jpg"));
 
@@ -139,8 +140,7 @@ public class Maya extends Application {
     public String getResponse(String input) {
         try {
             return Parser.parse(input, ui, taskList, storage);
-        } catch (UnknownCommandException | NoSuchElementException | CommandFormatException
-                | IOException | ArrayIndexOutOfBoundsException e) {
+        } catch (MayaException | IOException e) {
             return e.getMessage();
         }
     }
@@ -168,8 +168,7 @@ public class Maya extends Application {
                 }
             }
             sc.close();
-        } catch (UnknownCommandException | NoSuchElementException | CommandFormatException
-                | ArrayIndexOutOfBoundsException | IOException e) {
+        } catch (MayaException | IOException e) {
             System.out.println(e.getMessage());
         } finally {
             ui.showLine();
