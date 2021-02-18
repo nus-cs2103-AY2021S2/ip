@@ -1,20 +1,7 @@
-# User Guide
+Duke is a Personal Assistant Chatbot that helps a person to 
+keep track of various things.
 
-## Features 
-
-### Feature 1 
-Description of feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+## Setting up
+Prerequisites:
+* JDK 11
+Fork this repo and clone it to your computer!
