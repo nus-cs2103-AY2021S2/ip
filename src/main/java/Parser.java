@@ -44,18 +44,19 @@ public class Parser {
      * In the case of a bad command, a relevant response is given.
      */
     public String process() {
+        String output = "";
         if (command.equals("list")) {
             String list = "";
             for (int i = 0; i < taskList.numOfTasks(); i++) {
                 Integer taskNum = i + 1;
                 list += taskNum.toString() + "." + taskList.getTask(i).toString() + "\n";
             }
-            return ui.giveList(list);
+            output = ui.giveList(list);
         } else if (command.contains("todo")) {
             String[] line = command.split(" ");
             int length = line.length;
             if (length == 1) {
-                return ui.noDescReply();
+                output = ui.noDescReply();
             }
             String description = "";
             for (int i = 1; i < length; i++) {
@@ -69,12 +70,12 @@ public class Parser {
             taskList.addTask(todo);
             Integer numOfTasks = taskList.numOfTasks();
             storage.writeToFile(taskList);
-            return ui.addTaskReply(todo.toString(), numOfTasks.toString());
+            output = ui.addTaskReply(todo.toString(), numOfTasks.toString());
         } else if (command.contains("deadline")) {
             String[] line = command.split(" ");
             int length = line.length;
             if (length == 1) {
-                return ui.noDescReply();
+                output = ui.noDescReply();
             }
             String description = "";
             String date = "";
@@ -98,9 +99,9 @@ public class Parser {
                 }
             }
             if (date.equals("")) {
-                return ui.noDateReply();
+                output = ui.noDateReply();
             } else if (time.equals("")) {
-                return ui.noTimeReply();
+                output = ui.noTimeReply();
             } else {
                 Deadline deadline = new Deadline(description, date, time);
                 deadline.formatDate();
@@ -108,13 +109,13 @@ public class Parser {
                 taskList.addTask(deadline);
                 Integer numOfTasks = taskList.numOfTasks();
                 storage.writeToFile(taskList);
-                return ui.addTaskReply(deadline.toString(), numOfTasks.toString());
+                output = ui.addTaskReply(deadline.toString(), numOfTasks.toString());
             }
         } else if (command.contains("event")) {
             String[] line = command.split(" ");
             int length = line.length;
             if (length == 1) {
-                return ui.noDescReply();
+                output = ui.noDescReply();
             }
             String description = "";
             String date = "";
@@ -138,9 +139,9 @@ public class Parser {
                 }
             }
             if (date.equals("")) {
-                return ui.noDateReply();
+                output = ui.noDateReply();
             } else if (time.equals("")) {
-                return ui.noTimeReply();
+                output = ui.noTimeReply();
             } else {
                 Event event = new Event(description, date, time);
                 event.formatDate();
@@ -148,44 +149,44 @@ public class Parser {
                 taskList.addTask(event);
                 Integer numOfTasks = taskList.numOfTasks();
                 storage.writeToFile(taskList);
-                return ui.addTaskReply(event.toString(), numOfTasks.toString());
+                output = ui.addTaskReply(event.toString(), numOfTasks.toString());
             }
         } else if (command.contains("done")) {
             String[] line = command.split(" ");
             int length = line.length;
             if (length == 1) {
-                return ui.noLineReply();
+                output = ui.noLineReply();
             }
             int number = Integer.parseInt(line[1]);
             if (number > taskList.numOfTasks()) {
-                return ui.wrongLineReply();
+                output = ui.wrongLineReply();
             }
             int index = number - 1;
             Task task = taskList.getTask(index);
             task.markAsDone();
             taskList.replaceTask(index, task);
             storage.writeToFile(taskList);
-            return ui.doneReply(task.toString());
+            output = ui.doneReply(task.toString());
         } else if (command.contains("delete")) {
             String[] line = command.split(" ");
             int length = line.length;
             if (length == 1) {
-                return ui.noLineReply();
+                output = ui.noLineReply();
             }
             int number = Integer.parseInt(line[1]);
             if (number > taskList.numOfTasks()) {
-                return ui.wrongLineReply();
+                output = ui.wrongLineReply();
             }
             int index =  number - 1;
             Task deletedTask = taskList.deleteTask(index);
             Integer numOfTasks = taskList.numOfTasks();
             storage.writeToFile(taskList);
-            return ui.deleteReply(deletedTask.toString(), numOfTasks.toString());
+            output = ui.deleteReply(deletedTask.toString(), numOfTasks.toString());
         } else if (command.contains("find")) {
             String[] line = command.split(" ");
             int length = line.length;
             if (length == 1) {
-                return ui.noDescReply();
+                output = ui.noDescReply();
             }
             String word = line[1];
             List<String> matches = new ArrayList<>();
@@ -205,15 +206,17 @@ public class Parser {
                 for (int i = 0; i < matches.size(); i++) {
                     tasks += matches.get(i) + "\n";
                 }
-                return ui.foundReply(tasks);
+                output = ui.foundReply(tasks);
             } else {
-                return ui.notFoundReply();
+                output = ui.notFoundReply();
             }
         } else if (command.equals("bye")) {
             isTerminated = true;
-            return ui.bidFarewell();
+            output = ui.bidFarewell();
         } else {
-            return ui.confusedReply();
+            output = ui.confusedReply();
         }
+        assert output.length() > 0 : "the response cannot be empty";
+        return output;
     }
 }
