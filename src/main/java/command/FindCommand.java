@@ -78,10 +78,19 @@ public class FindCommand extends Command {
                 .filter(taskPredicate)
                 .map(Task::toString)
                 .collect(Collectors.toList());
-        String listOfTasks = Formatter.formatList(filteredTaskStrings);
 
+        // If no tasks match the predicate, inform the user.
+        if (filteredTaskStrings.isEmpty()) {
+            String quotedKeywords = keywords.stream()
+                    .map(s -> "\"" + s + "\"")
+                    .collect(Collectors.joining(" + "));
+            return "No tasks match the keywords: \n" + quotedKeywords;
+        }
+
+        String listOfTasks = Formatter.formatList(filteredTaskStrings);
         output.append("Here are the tasks that match your search: ").append("\n");
         output.append(listOfTasks);
+
         return output.toString();
     }
 }
