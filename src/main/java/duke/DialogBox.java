@@ -1,7 +1,9 @@
 package duke;
 
 import java.io.IOException;
+
 import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,14 +50,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the user dialog box
+     * @param text String text
+     * @param img Image image representing the user
+     * @return DialogBox user dialog box
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns the Duke dialog box
+     * @param text String text
+     * @param img Image image representing Duke
+     * @return DialogBox Duke dialog box
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
-
 }

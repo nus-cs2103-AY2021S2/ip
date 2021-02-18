@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Custom arraylist for task objects
  */
 public class DukeList {
+
     private final ArrayList<Task> list;
     private int size;
 
@@ -13,6 +14,7 @@ public class DukeList {
         this.list = new ArrayList<>();
         this.size = 0;
     }
+
     public DukeList(ArrayList<Task> list) {
         this.list = list;
         size = list.size();
@@ -36,7 +38,7 @@ public class DukeList {
     }
 
     /**
-     * deletes the stated task
+     * deletes a task from the list
      * @param x Task number to be removed
      */
 
@@ -45,6 +47,9 @@ public class DukeList {
         size--;
     }
 
+    /**
+     * deletes all task in the list
+     */
     public void deleteAll() {
         if (size > 0) {
             list.subList(0, size).clear();
@@ -52,17 +57,20 @@ public class DukeList {
         size = 0;
     }
 
+    /**
+     * Returns the size of the list
+     * @return int size
+     */
     public int getSize() {
         return size;
     }
 
     /**
-     * DukeList getter
+     * Returns the task from the list
      * @param x Task number x
      * @return Task x
      */
     public Task get(int x) {
         return list.get(x);
     }
-
 }
