@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -32,7 +31,7 @@ public class Sweh extends Application {
     private final Label greetingText = new Label("Hello, I am SWEH. "
             + "Your Simple Word-Executed Helper!\n"
             + "What shall we do today?");
-    private final Label storageErrorText = new Label("A save file was found,"
+    private final Label storageErrorText = new Label("A save file was found, "
             + "but the contents could not be read... I will start from scratch instead.");
     private Duke duke;
     private ScrollPane scrollPane;

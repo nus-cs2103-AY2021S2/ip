@@ -56,6 +56,7 @@ public class Deadline extends Task {
     public static Deadline fromSaveString(String saveString) throws IOException  {
         HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
 
+        // Attempt to parse the description
         List<String> descriptions;
         String description;
         try {

@@ -53,6 +53,7 @@ public class Event extends Task {
     public static Event fromSaveString(String saveString) throws IOException {
         HashMap<String, List<String>> commandMap = Parser.parseCommandMap(saveString);
 
+        // Attempt to parse the description
         List<String> descriptions;
         String description;
         try {
@@ -62,6 +63,7 @@ public class Event extends Task {
             throw new IOException("Description could not be parsed from: " + saveString);
         }
 
+        // Attempt to parse the date from the saveString
         String eventDateString;
         LocalDate eventDate;
         try {
