@@ -51,7 +51,7 @@ public class DeleteAliasCommand extends Command {
      *
      * @param arguments Command arguments.
      * @return New delete alias command.
-     * @throws JhinException If alias does not exist.
+     * @throws JhinException If arguments does not match deletealias command format or alias does not exist.
      */
     public static DeleteAliasCommand parseArguments(String arguments) throws JhinException {
         Matcher matcher = COMMAND_FORMAT.matcher(arguments);

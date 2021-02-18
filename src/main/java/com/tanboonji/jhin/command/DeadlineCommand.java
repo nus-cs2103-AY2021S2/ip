@@ -59,7 +59,7 @@ public class DeadlineCommand extends Command {
      *
      * @param arguments Command arguments.
      * @return New deadline command.
-     * @throws JhinException If user input does not match deadline command format.
+     * @throws JhinException If arguments does not match deadline command format.
      */
     public static DeadlineCommand parseArguments(String arguments) throws JhinException {
         Matcher matcher = COMMAND_FORMAT.matcher(arguments);

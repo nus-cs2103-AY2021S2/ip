@@ -77,7 +77,7 @@ public abstract class Command {
      * Executes the command and returns response of command after execution.
      *
      * @return Response of command after execution.
-     * @throws JhinException If any error occurs during command execution.
+     * @throws JhinException If any error occurs during command creation and execution.
      */
     public abstract String execute() throws JhinException;
 
