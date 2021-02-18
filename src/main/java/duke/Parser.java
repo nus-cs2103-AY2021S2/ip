@@ -8,6 +8,7 @@ import duke.command.CheckCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
@@ -36,6 +37,9 @@ public class Parser {
 
         case "help":
             return HelpCommand.getHelpAllCommand();
+
+        case "exit":
+            return new ExitCommand();
 
         default:
             String[] splitInput = input.split(" ", 2);
@@ -143,6 +147,8 @@ public class Parser {
             return HelpCommand.getHelpFindCommand();
         case "check":
             return HelpCommand.getHelpCheckCommand();
+        case "exit":
+            return HelpCommand.getHelpExitCommand();
         default:
             throw new DukeException(command + " is not a valid command!\n"
                     + "Type 'help' in the chat to see the list of valid commands");
@@ -154,7 +160,7 @@ public class Parser {
             int taskNum = Integer.parseInt(taskNumString);
             return new DoneCommand(taskNum);
         } catch (NumberFormatException e) {
-            throw new DukeException("Too many inputs!\nPlease re-enter the command in the format: done <task number>");
+            throw new DukeException("Incorrect input!\nPlease re-enter the command in the format: done <task number>");
         }
     }
 
@@ -164,7 +170,7 @@ public class Parser {
             return new DeleteCommand(taskNum);
         } catch (NumberFormatException e) {
             throw new DukeException(
-                    "Too many inputs!\nPlease re-enter the command in the format: delete <task number>");
+                    "Incorrect input!\nPlease re-enter the command in the format: delete <task number>");
         }
     }
 

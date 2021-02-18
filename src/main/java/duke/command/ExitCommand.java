@@ -18,12 +18,6 @@ public class ExitCommand implements Command {
 
     @Override
     public String getResponString(TaskList tasks, Storage storage) {
-        try {
-            storage.store(tasks);
-        } catch (IOException e) {
-            throw new DukeException("Cannot save tasks. Save file not found");
-        }
-
         String goodbyeResponse = "Bye. Hope to see you again soon!";
         return goodbyeResponse;
     }

@@ -12,6 +12,8 @@ import duke.task.TaskList;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
+    private boolean isClosed;
+    private boolean isConfused;
 
     /**
      * Class constructor with specified file path.
@@ -19,6 +21,8 @@ public class Duke {
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
+        isClosed = false;
+        isConfused = false;
         try {
             tasks = storage.load();
         } catch (IOException e) {
@@ -35,14 +39,42 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.getResponString(tasks, storage);
+            if (c.isExit()) {
+                isClosed = true;
+            } else {
+                isClosed = false;
+            }
+            String response = c.getResponString(tasks, storage);
+            isConfused = false;
+            return response;
         } catch (DukeException e) {
+            isConfused = true;
             return e.getMessage();
         }
     }
 
+    /**
+     * Gets the welcome string
+     * @return Welcome string
+     */
     public String getWelcome() {
         String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
         return welcomeMessage;
+    }
+
+    /**
+     * Checks if previous command was an exit command
+     * @return true if previous command was an exit command and false otherwise
+     */
+    public boolean isClosed() {
+        return this.isClosed;
+    }
+
+    /**
+     * Checks duke is confused by the last command
+     * @return true if duke is confused and false otherwise
+     */
+    public boolean isConfused() {
+        return this.isConfused;
     }
 }

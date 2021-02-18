@@ -60,7 +60,7 @@ public class TaskList {
     public String toString() {
         StringBuilder taskListString = new StringBuilder();
         for (int i = 1; i <= this.tasks.size(); i++) {
-            taskListString.append(i + "." + this.get(i).toString() + "\n");
+            taskListString.append(i + ". " + this.get(i).toString() + "\n");
         }
         return taskListString.toString();
     }

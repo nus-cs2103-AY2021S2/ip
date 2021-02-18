@@ -5,7 +5,7 @@ import duke.task.TaskList;
 
 public class HelpCommand implements Command {
     private static final String HELP_ALL_RESPONSE = "List of commands:\n"
-            + "1. todo\n2. deadline\n3. event\n4. list\n5. done\n6.delete\n7. find\n8. check\n"
+            + "1. todo\n2. deadline\n3. event\n4. list\n5. done\n6.delete\n7. find\n8. check\n9. exit\n"
             + "Type 'help <command>' in the chat to see the details!";
     private static final String HELP_TODO_RESPONSE = "Adds a todo task to the list\n\nFormat: todo <task name>";
     private static final String HELP_DEADLINE_RESPONSE = "Adds a deadline task to the list\n\n"
@@ -18,6 +18,7 @@ public class HelpCommand implements Command {
     private static final String HELP_FIND_RESPONSE = "Finds a task that contains the search term\n\nFormat: find <search term>";
     private static final String HELP_CHECK_RESPONSE = "Checks all tasks on a specific date\n\n"
             + "Format: check <date in YYYY-MM-DD format>";
+    private static final String HELP_EXIT_RESPONSE = "Exits duke\n\nFormat: exit";
 
     private String helpResponse;
 
@@ -60,6 +61,10 @@ public class HelpCommand implements Command {
 
     public static HelpCommand getHelpCheckCommand() {
         return new HelpCommand(HELP_CHECK_RESPONSE);
+    }
+
+    public static HelpCommand getHelpExitCommand() {
+        return new HelpCommand(HELP_EXIT_RESPONSE);
     }
 
     @Override
