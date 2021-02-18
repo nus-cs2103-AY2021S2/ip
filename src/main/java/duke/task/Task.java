@@ -57,7 +57,8 @@ public class Task {
      * @return just the task name
      */
     public String getName() {
-        return divideCommand[1] + " " + divideCommand[2];
+        return divideCommand[1].equals("-") ? divideCommand[2]
+                : divideCommand[1] + " " + divideCommand[2];
     }
 
     /**
@@ -82,30 +83,33 @@ public class Task {
 
     /**
      * Returns the size of the command
+     *
      * @return
      */
-    public int getSizeOfCommand(){
+    public int getSizeOfCommand() {
         return divideCommand.length;
     }
 
     /**
      * Returns the time of the task to be completed
+     *
      * @return
      */
-    public LocalTime getTime(){
-        if(getSizeOfCommand() > 5) {
+    public LocalTime getTime() {
+        if (getSizeOfCommand() > 5) {
             String StringTime = divideCommand[5];
             return LocalTime.parse(StringTime);
-        }else{
+        } else {
             return null;
         }
     }
 
     /**
      * Structures the time in the relevant format
+     *
      * @return
      */
-    public String getTimeFormat(){
+    public String getTimeFormat() {
         return getTime() == null ? ""
                 : getTime().format(DateTimeFormatter.ofPattern("hh:mma"));
     }
