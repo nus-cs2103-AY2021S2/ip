@@ -1,6 +1,6 @@
 # Duke User Guide
 
-Duke is a desk application to help users keep track of tasks, and make notes. It functions using a GUI (Graphical User
+**Duke** is a desk application to help users keep track of tasks, and make notes. It functions using a GUI (Graphical User
 Interface) to help those potential users be at ease while using Duke.
 
 ## Basic Info
@@ -27,7 +27,6 @@ Example of usage:
 `bye` or `exit`
 
 Expected outcome:
-
 ```
 Goodbye for now.
 Hope to see you soon!
@@ -65,5 +64,69 @@ add todo task
 
 ### `todo` - Key in `todo <task description>`
 
-#### Note: Task description must be two words. If you want to key in one word, then type `-` in place of first word
+
+Example of Usage:
+
+`todo read book`
+
+Expected outcome:
+```
+Got it! Added: 
+[T][-] read book
+Now you have 6 items in your list
+```
+
+#### Note: 
+Task description must be two words. If your task description is one word, then type `-` in place of first word, and the description in place of the second one. For example: `todo - run`.
+
+### Feature 3
+
+add deadline task
+
+### Usage
+
+### `deadline` - Key in `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+
+
+Example of Usage:
+
+`deadline finish lab /by 2021-03-15 18:00:00`
+
+Expected outcome:
+```
+Got it! Added: 
+[D][-] finish lab (by: Mar 15 2021 6:00PM)
+Now you have 7 items in your list
+```
+
+#### Note: 
+Task description must be two words. If your task description is one word, then type `-` in place of first word, and the description in place of the second one. For example: `deadline - lab /by 2021-03-15 18:00:00`.
+
+Also you may not key in the time, and the task would still be added.
+
+
+### Feature 4
+
+add event task
+
+### Usage
+
+### `event` - Key in `event <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+
+
+Example of Usage:
+
+`event attend meeting /by 2021-03-15 18:00:00`
+
+Expected outcome:
+```
+Got it! Added: 
+[E][-] attend meeting (by: Mar 15 2021 6:00PM)
+Now you have 8 items in your list
+```
+
+#### Note:
+Task description must be two words. If your task description is one word, then type `-` in place of first word, and the description in place of the second one. For example: `event - meeting /by 2021-03-15 18:00:00`.
+
+Also you may not key in the time, and the task would still be added.
 
