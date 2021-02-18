@@ -33,6 +33,10 @@ public class DukeMissingDesException extends DukeException {
             message += "Your request for TODO is empty.\n"
                     + "Have you specified a task description?";
             break;
+        case "SCHEDULE":
+            message += "Your request for SCHEDULE is missnig.\n"
+                    + "Have you specified: Schedule W [no. of times] [command] ?";
+            break;
         default:
             message += "Your request is missing a description.";
         }

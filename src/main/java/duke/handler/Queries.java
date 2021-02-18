@@ -8,6 +8,7 @@ public enum Queries {
     FIND,
     DONE,
     DELETE,
+    SCHEDULE,
     BYE;
 
     /**
