@@ -23,8 +23,21 @@ public class DateParser {
             .toFormatter();
     private static final String OUTPUT_FORMAT = "dd MMM yyyy HHmm";
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_FORMAT);
-    private static final String ERROR_MESSAGE = "Sorry, please enter a valid date time format.\n"
-            + "Format: ddMMyyyy HHmm";
+    private static final String INVALID_DATE_MESSAGE_FORMAT = "Sorry, the date '%s' you entered is invalid."
+            + "Please enter a valid date in the following format:\n"
+            + "ddMMyyyy\n"
+            + "ddMMyy\n"
+            + "dd/MM/yyyy\n"
+            + "dd/MM/yy\n"
+            + "dd.MM.yyyy\n"
+            + "dd.MM.yy\n"
+            + "dd-MM-yyyy\n"
+            + "dd-MM-yy";
+    private static final String INVALID_TIME_MESSAGE_FORMAT = "Sorry, the time '%s' you entered is invalid."
+            + "Please enter a valid time in the following format:\n"
+            + "HHmm\n"
+            + "HH:mm\n"
+            + "HH";
     private static final String TIME_FORMAT = "[HHmm][HH:mm][HH]";
     private static final DateTimeFormatter TIME_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
@@ -62,9 +75,9 @@ public class DateParser {
      */
     public static LocalDate parseDate(String input) throws JhinException {
         try {
-            return LocalDate.parse(input.trim(), DATE_FORMATTER);
+            return LocalDate.parse(input, DATE_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException(ERROR_MESSAGE);
+            throw new InvalidDateTimeException(String.format(INVALID_DATE_MESSAGE_FORMAT, input));
         }
     }
 
@@ -77,9 +90,9 @@ public class DateParser {
      */
     public static LocalTime parseTime(String input) throws JhinException {
         try {
-            return LocalTime.parse(input.trim(), TIME_FORMATTER);
+            return LocalTime.parse(input, TIME_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException(ERROR_MESSAGE);
+            throw new InvalidDateTimeException(String.format(INVALID_TIME_MESSAGE_FORMAT, input));
         }
     }
 

@@ -12,11 +12,13 @@ import com.tanboonji.jhin.exception.JhinException;
 public class DeleteAliasCommand extends Command {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("^\\W*(\\S+)\\W*$");
-    private static final String ERROR_MESSAGE = "Sorry, please enter a valid alias.\n"
-            + "Command: deletealias [alias]";
-    private static final String SUCCESS_MESSAGE = "Noted! I've removed this alias:\n"
+    private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the delete alias command you entered is invalid.\n"
+                    + "Please enter a valid delete alias command in the following format:\n"
+                    + "[deletealias, rmalias] <alias>";
+    private static final String SUCCESS_MESSAGE_FORMAT = "Noted! I've removed this alias:\n"
             + "%s";
-    private static final String SUCCESS_NO_MATCH_MESSAGE = "Sorry, I couldn't find the alias '%s' to delete.";
+    private static final String INVALID_ALIAS_MESSAGE_FORMAT = "Sorry, I couldn't find the alias '%s' to delete.\n"
+            + "Please enter a valid alias and try again.";
 
     private final String alias;
 
@@ -37,11 +39,11 @@ public class DeleteAliasCommand extends Command {
     @Override
     public String execute() {
         if (!aliasMap.containsAlias(alias)) {
-            return String.format(SUCCESS_NO_MATCH_MESSAGE, alias);
+            return String.format(INVALID_ALIAS_MESSAGE_FORMAT, alias);
         }
 
         String deletedAlias = aliasMap.deleteAlias(alias);
-        return String.format(SUCCESS_MESSAGE, deletedAlias);
+        return String.format(SUCCESS_MESSAGE_FORMAT, deletedAlias);
     }
 
     /**
@@ -53,9 +55,8 @@ public class DeleteAliasCommand extends Command {
      */
     public static DeleteAliasCommand parseArguments(String arguments) throws JhinException {
         Matcher matcher = COMMAND_FORMAT.matcher(arguments);
-
         if (!matcher.matches()) {
-            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
         return new DeleteAliasCommand(arguments.trim());

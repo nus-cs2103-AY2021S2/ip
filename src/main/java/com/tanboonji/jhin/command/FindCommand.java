@@ -7,10 +7,10 @@ import com.tanboonji.jhin.model.TaskList;
  */
 public class FindCommand extends Command {
 
-    private static final String SUCCESS_MATCH_MESSAGE = "Here are the matching tasks in your list:\n"
+    private static final String SUCCESS_MATCH_MESSAGE_FORMAT = "Here are the matching tasks in your task list:\n"
             + "%s";
-    private static final String SUCCESS_NO_MATCH_MESSAGE =
-            "Sorry, I couldn't find any tasks matching '%s' in your list.";
+    private static final String SUCCESS_NO_MATCH_MESSAGE_FORMAT =
+            "Sorry, I couldn't find any tasks matching '%s' in your task list.";
 
     private final String keyword;
 
@@ -38,8 +38,9 @@ public class FindCommand extends Command {
         TaskList matchingTask = taskList.find(keyword);
 
         if (matchingTask.getSize() == 0) {
-            return String.format(SUCCESS_NO_MATCH_MESSAGE, keyword);
+            return String.format(SUCCESS_NO_MATCH_MESSAGE_FORMAT, keyword);
         }
-        return String.format(SUCCESS_MATCH_MESSAGE, matchingTask);
+
+        return String.format(SUCCESS_MATCH_MESSAGE_FORMAT, matchingTask);
     }
 }

@@ -5,9 +5,9 @@ package com.tanboonji.jhin.command;
  */
 public class ListCommand extends Command {
 
-    private static final String SUCCESS_MESSAGE = "Here are the tasks in your list:\n"
+    private static final String SUCCESS_MESSAGE_FORMAT = "Here are the tasks in your task list:\n"
             + "%s";
-    private static final String SUCCESS_EMPTY_ALIAS_MESSAGE = "You currently have 0 tasks.";
+    private static final String SUCCESS_EMPTY_TASK_MESSAGE = "You currently have 0 tasks.";
 
     /**
      * Default class constructor.
@@ -28,9 +28,9 @@ public class ListCommand extends Command {
     @Override
     public String execute() {
         if (taskList.getSize() == 0) {
-            return SUCCESS_EMPTY_ALIAS_MESSAGE;
+            return SUCCESS_EMPTY_TASK_MESSAGE;
         }
 
-        return String.format(SUCCESS_MESSAGE, taskList);
+        return String.format(SUCCESS_MESSAGE_FORMAT, taskList);
     }
 }

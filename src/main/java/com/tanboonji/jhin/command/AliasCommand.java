@@ -12,12 +12,19 @@ import com.tanboonji.jhin.exception.JhinException;
 public class AliasCommand extends Command {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("^\\W*(\\S+)\\W*(\\S+)$");
-    private static final String ERROR_MESSAGE =
-            "Sorry, please enter a valid command and alias\n"
-                    + "Command: alias [command] [alias]";
-    private static final String SUCCESS_MESSAGE = "You have aliased '%s' with '%s'.";
-    private static final int COMMAND_GROUP = 1;
-    private static final int ALIAS_GROUP = 2;
+    private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the alias command you entered is invalid.\n"
+                    + "Please enter a valid alias command in the following format:\n"
+                    + "alias <alias> <command>";
+    private static final String INVALID_COMMAND_MESSAGE_FORMAT =
+            "Sorry, the command '%s' you entered is invalid.\n"
+                    + "Please enter a valid command and try again.";
+    private static final String INVALID_ALIAS_MESSAGE_FORMAT =
+            "Sorry, the alias '%s' you entered is a default command.\n"
+            + "Please enter another alias and try again.";
+    private static final String SUCCESS_MESSAGE_FORMAT = "Got it. I've added this alias:\n"
+            + "%s";
+    private static final int ALIAS_GROUP = 1;
+    private static final int COMMAND_GROUP = 2;
 
     private final String alias;
     private final String command;
@@ -55,9 +62,8 @@ public class AliasCommand extends Command {
      */
     public static AliasCommand parseArguments(String arguments) throws JhinException {
         Matcher matcher = COMMAND_FORMAT.matcher(arguments);
-
         if (!matcher.matches()) {
-            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
         String command = matcher.group(COMMAND_GROUP);

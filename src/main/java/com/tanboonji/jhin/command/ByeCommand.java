@@ -5,7 +5,7 @@ package com.tanboonji.jhin.command;
  */
 public class ByeCommand extends Command {
 
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String SUCCESS_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**
      * Default class constructor.
@@ -25,6 +25,6 @@ public class ByeCommand extends Command {
 
     @Override
     public String execute() {
-        return EXIT_MESSAGE;
+        return SUCCESS_MESSAGE;
     }
 }

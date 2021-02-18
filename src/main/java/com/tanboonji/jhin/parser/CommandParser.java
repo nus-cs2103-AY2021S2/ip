@@ -27,7 +27,8 @@ import com.tanboonji.jhin.model.AliasMap;
 public class CommandParser {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("\\W*(\\S+)\\W*(.*)");
-    private static final String INVALID_COMMAND_MESSAGE = "Sorry, please enter a valid command.\n";
+    private static final String INVALID_COMMAND_MESSAGE = "Sorry, the command you entered is invalid.\n"
+            + "Please enter a valid command.\n";
     private static final int COMMAND_GROUP = 1;
     private static final int ARGUMENTS_GROUP = 2;
 

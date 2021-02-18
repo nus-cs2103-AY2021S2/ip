@@ -16,9 +16,10 @@ import com.tanboonji.jhin.parser.DateParser;
 public class EventCommand extends Command {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/at)/at\\W(.*)");
-    private static final String ERROR_MESSAGE = "Sorry, please enter a valid description and datetime for the event.\n"
-            + "Command: event [description] /at [datetime]";
-    private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n"
+    private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the event command you entered is invalid.\n"
+                    + "Please enter a valid event command in the following format:\n"
+                    + "event <description> /at <date> <time>";
+    private static final String SUCCESS_MESSAGE_FORMAT = "Got it. I've added this event task:\n"
             + "%s\n"
             + "Now you have %d %s.";
     private static final String TASK_SINGULAR = "task";
@@ -50,7 +51,7 @@ public class EventCommand extends Command {
         taskList.addTask(newTask);
 
         String taskSingularPlural = (taskList.getSize() > 1) ? TASK_PLURAL : TASK_SINGULAR;
-        return String.format(SUCCESS_MESSAGE, newTask, taskList.getSize(), taskSingularPlural);
+        return String.format(SUCCESS_MESSAGE_FORMAT, newTask, taskList.getSize(), taskSingularPlural);
     }
 
     /**
@@ -62,9 +63,8 @@ public class EventCommand extends Command {
      */
     public static EventCommand parseArguments(String arguments) throws JhinException {
         Matcher matcher = COMMAND_FORMAT.matcher(arguments);
-
         if (!matcher.matches()) {
-            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
         String description = matcher.group(DESCRIPTION_GROUP);

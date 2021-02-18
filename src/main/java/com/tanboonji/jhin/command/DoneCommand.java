@@ -9,9 +9,16 @@ import com.tanboonji.jhin.model.Task;
  */
 public class DoneCommand extends Command {
 
-    private static final String ERROR_MESSAGE = "Sorry, please enter a valid task number.\n"
-            + "Command: done [task number]";
-    private static final String SUCCESS_MESSAGE = "Nice! I've marked this task as done:\n"
+    private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the done command you entered is invalid.\n"
+                    + "Please enter a valid done command in the following format:\n"
+                    + "done <task number>";
+    private static final String INVALID_TASK_NUMBER_MESSAGE_FORMAT =
+            "Sorry, the task number '%s' you entered is invalid.\n"
+                    + "Please enter a valid task number and try again.";
+    private static final String TASK_ALREADY_DONE_MESSAGE =
+            "Sorry, the task you entered is already done.\n"
+                    + "Please enter a task that is not done and try again.";
+    private static final String SUCCESS_MESSAGE_FORMAT = "Nice! I've marked this task as done:\n"
             + "%s";
 
     private final int taskIndex;
@@ -34,9 +41,9 @@ public class DoneCommand extends Command {
     public String execute() throws JhinException {
         try {
             Task task = taskList.markAsDone(taskIndex);
-            return String.format(SUCCESS_MESSAGE, task);
+            return String.format(SUCCESS_MESSAGE_FORMAT, task);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, taskIndex));
         }
     }
 
@@ -53,7 +60,7 @@ public class DoneCommand extends Command {
             taskIndex = Integer.parseInt(arguments) - 1;
             return new DoneCommand(taskIndex);
         } catch (NumberFormatException e) {
-            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
+            throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, arguments));
         }
     }
 }

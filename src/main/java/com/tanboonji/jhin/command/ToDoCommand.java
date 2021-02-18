@@ -10,9 +10,10 @@ import com.tanboonji.jhin.model.ToDo;
  */
 public class ToDoCommand extends Command {
 
-    private static final String ERROR_MESSAGE = "Sorry, please enter a description for the todo.\n"
-            + "Command: todo [description]";
-    private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n"
+    private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the todo command you entered is invalid.\n"
+            + "Please enter a todo event command in the following format:\n"
+            + "todo <description>";
+    private static final String SUCCESS_MESSAGE_FORMAT = "Got it. I've added this todo task:\n"
             + "%s\n"
             + "Now you have %d %s.";
     private static final String TASK_SINGULAR = "task";
@@ -39,7 +40,7 @@ public class ToDoCommand extends Command {
         taskList.addTask(newTask);
 
         String taskSingularPlural = (taskList.getSize() > 1) ? TASK_PLURAL : TASK_SINGULAR;
-        return String.format(SUCCESS_MESSAGE, newTask, taskList.getSize(), taskSingularPlural);
+        return String.format(SUCCESS_MESSAGE_FORMAT, newTask, taskList.getSize(), taskSingularPlural);
     }
 
     /**
@@ -50,9 +51,10 @@ public class ToDoCommand extends Command {
      * @throws JhinException If user input does not match todo command format.
      */
     public static ToDoCommand parseArguments(String arguments) throws JhinException {
-        if (arguments.trim().equals("")) {
-            throw new InvalidCommandArgumentException(ERROR_MESSAGE);
+        if (arguments.isEmpty()) {
+            throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
+
         return new ToDoCommand(arguments);
     }
 }

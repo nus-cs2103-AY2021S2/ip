@@ -7,18 +7,18 @@ public class HelpCommand extends Command {
 
     /** Command list for help message */
     public static final String COMMAND_LIST = "Commands available:\n"
-            + "- list\n"
-            + "- find [keyword]\n"
-            + "- todo [description]\n"
-            + "- deadline [description] /by [deadline]\n"
-            + "- event [description] /at [datetime]\n"
-            + "- done [task number]\n"
-            + "- delete [task number]\n"
-            + "- alias [command] [alias]\n"
-            + "- listalias\n"
-            + "- deletealias [alias]\n"
-            + "- help\n"
-            + "- bye\n";
+            + "[list, ls]\n"
+            + "todo <description>\n"
+            + "deadline <description> /by <date> <time>\n"
+            + "event <description> /at <date> <time>\n"
+            + "done <task number>\n"
+            + "[delete, rm] <task number>\n"
+            + "[find, search] <keyword>\n"
+            + "[listalias, lsalias]\n"
+            + "alias <command> <alias>\n"
+            + "[deletealias, rmalias] <alias>\n"
+            + "help\n"
+            + "[bye, exit]\n";
 
     /**
      * Default class constructor.
