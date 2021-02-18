@@ -45,7 +45,7 @@ public class Storage {
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
-                String[] taskSplit = sc.nextLine().split("\\|");
+                String[] taskSplit = sc.nextLine().split(" \\| ");
                 switch (taskSplit[0].trim()) {
                 case "T":
                     Todo t = new Todo(taskSplit[2]);
