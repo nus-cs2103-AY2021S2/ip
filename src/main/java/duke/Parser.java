@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +47,12 @@ public class Parser {
     public String processTodo(String command) {
         String description = command.replace("todo", "").strip();
         if (description.length() == 0) {
-            return ui.noDescReply();
+            return ui.missingDescriptionReply();
         }
         Todo todo = new Todo(description);
+        if (taskList.hasTask(todo)) {
+            return ui.detectDuplicateReply(todo.toString());
+        }
         taskList.addTask(todo);
         storage.writeToFile(taskList);
         int numOfTasks = taskList.numOfTasks();
@@ -64,7 +69,7 @@ public class Parser {
     public String processDeadline(String command) {
         String input = command.replace("deadline", "").strip();
         if (input.length() == 0) {
-            return ui.noDescReply();
+            return ui.missingDescriptionReply();
         }
         String[] inputArr = input.split(" ");
         StringBuilder description = new StringBuilder();
@@ -85,14 +90,17 @@ public class Parser {
             }
         }
         if (date.length() == 0) {
-            return ui.noDateReply();
+            return ui.missingDateReply();
         } else if (time.length() == 0) {
-            return ui.noTimeReply();
+            return ui.missingTimeReply();
         }
         Deadline deadline = new Deadline(description.toString(), date.toString(), time.toString());
         deadline.formatDate();
         String formattedTime = deadline.formatTime(time.toString());
         deadline.setTime(formattedTime);
+        if (taskList.hasTask(deadline)) {
+            return ui.detectDuplicateReply(deadline.toString());
+        }
         taskList.addTask(deadline);
         storage.writeToFile(taskList);
         int numOfTasks = taskList.numOfTasks();
@@ -109,7 +117,7 @@ public class Parser {
     public String processEvent(String command) {
         String input = command.replace("event", "").strip();
         if (input.length() == 0) {
-            return ui.noDescReply();
+            return ui.missingDescriptionReply();
         }
         String[] inputArr = input.split(" ");
         StringBuilder description = new StringBuilder();
@@ -130,13 +138,16 @@ public class Parser {
             }
         }
         if (date.length() == 0) {
-            return ui.noDateReply();
+            return ui.missingDateReply();
         } else if (time.length() == 0) {
-            return ui.noTimeReply();
+            return ui.missingTimeReply();
         }
         Event event = new Event(description.toString(), date.toString(), time.toString());
         event.formatDate();
         event.formatStartEndTime();
+        if (taskList.hasTask(event)) {
+            return ui.detectDuplicateReply(event.toString());
+        }
         taskList.addTask(event);
         storage.writeToFile(taskList);
         int numOfTasks = taskList.numOfTasks();
@@ -153,7 +164,7 @@ public class Parser {
     public String processDone(String command) {
         String input = command.replace("done", "").strip();
         if (input.length() == 0) {
-            return ui.noLineReply();
+            return ui.missingLineNumberReply();
         }
         int lineNumber = Integer.parseInt(input);
         if (lineNumber > taskList.numOfTasks()) {
@@ -162,7 +173,7 @@ public class Parser {
         int index = lineNumber - 1;
         Task completedTask = taskList.markTaskAsDone(index);
         storage.writeToFile(taskList);
-        return ui.doneReply(completedTask.toString());
+        return ui.markAsDoneReply(completedTask.toString());
     }
 
     /**
@@ -175,7 +186,7 @@ public class Parser {
     public String processDelete(String command) {
         String input = command.replace("delete", "").strip();
         if (input.length() == 0) {
-            return ui.noLineReply();
+            return ui.missingLineNumberReply();
         }
         int lineNumber = Integer.parseInt(input);
         if (lineNumber > taskList.numOfTasks()) {
@@ -185,7 +196,7 @@ public class Parser {
         Task deletedTask = taskList.deleteTask(index);
         int numOfTasks = taskList.numOfTasks();
         storage.writeToFile(taskList);
-        return ui.deleteReply(deletedTask.toString(), String.valueOf(numOfTasks));
+        return ui.deleteTaskReply(deletedTask.toString(), String.valueOf(numOfTasks));
     }
 
     /**
@@ -199,7 +210,7 @@ public class Parser {
     public String processFind(String command) {
         String word = command.replace("find", "").strip();
         if (word.length() == 0) {
-            return ui.noWordReply();
+            return ui.missingSearchWordReply();
         }
         List<String> matches = new ArrayList<>();
         boolean isFound = false;
@@ -214,13 +225,13 @@ public class Parser {
             }
         }
         if (!isFound) {
-            return ui.notFoundReply();
+            return ui.wordNotFoundReply();
         }
         StringBuilder matchesInString = new StringBuilder();
         for (String match : matches) {
             matchesInString.append(match).append("\n");
         }
-        return ui.findReply(matchesInString.toString());
+        return ui.findWordReply(matchesInString.toString());
     }
 
     /**
@@ -231,7 +242,7 @@ public class Parser {
         String response;
         if (inputCommand.startsWith("list")) {
             String list = taskList.listAllTasks();
-            response = ui.giveList(list);
+            response = ui.provideList(list);
         } else if (inputCommand.startsWith("todo")) {
             response = processTodo(inputCommand);
         } else if (inputCommand.startsWith("deadline")) {

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Deals with the interactions with users.
  */
@@ -29,7 +31,7 @@ public class Ui {
      * @param list The task list.
      * @return All the tasks in the task list.
      */
-    public String giveList(String list) {
+    public String provideList(String list) {
         return "Here are the tasks in your list:\n" + list;
     }
 
@@ -48,7 +50,7 @@ public class Ui {
      * @param task The task marked as done.
      * @return The completed task.
      */
-    public String doneReply(String task) {
+    public String markAsDoneReply(String task) {
         return "Nice! I've marked this task as done:\n" + task;
     }
 
@@ -58,7 +60,7 @@ public class Ui {
      * @param numOfTasks The number of tasks left in the task list.
      * @return The deleted task and number of tasks left in the task list.
      */
-    public String deleteReply(String task, String numOfTasks) {
+    public String deleteTaskReply(String task, String numOfTasks) {
         return "Noted. I've removed this task:\n" + task + "\n" + "Now you have " + numOfTasks + " tasks in the list.";
     }
 
@@ -67,7 +69,7 @@ public class Ui {
      * @param tasks The matching tasks.
      * @return The matching tasks.
      */
-    public String findReply(String tasks) {
+    public String findWordReply(String tasks) {
         return "Here are the matching tasks in your list:\n" + tasks;
     }
 
@@ -75,7 +77,7 @@ public class Ui {
      * Informs the user that there are no tasks with descriptions containing the search word from the task list.
      * @return The response that there are no matching tasks.
      */
-    public String notFoundReply() {
+    public String wordNotFoundReply() {
         return "Your list does not contain this word.";
     }
 
@@ -83,7 +85,7 @@ public class Ui {
      * Informs the user that they did not input a description.
      * @return The warning of an empty description.
      */
-    public String noDescReply() {
+    public String missingDescriptionReply() {
         return "The description cannot be empty.";
     }
 
@@ -91,7 +93,7 @@ public class Ui {
      * Informs the user that they did not input a date.
      * @return The warning of an empty date.
      */
-    public String noDateReply() {
+    public String missingDateReply() {
         return "The date cannot be empty.";
     }
 
@@ -99,7 +101,7 @@ public class Ui {
      * Informs the user that they did not input a time.
      * @return The warning of an empty time.
      */
-    public String noTimeReply() {
+    public String missingTimeReply() {
         return "The time cannot be empty.";
     }
 
@@ -107,7 +109,7 @@ public class Ui {
      * Informs the user that they did not input a line number.
      * @return The warning of an empty line number.
      */
-    public String noLineReply() {
+    public String missingLineNumberReply() {
         return "The line number cannot be empty.";
     }
 
@@ -115,7 +117,7 @@ public class Ui {
      * Informs the user that they did not input a search word.
      * @return The warning of an empty search word.
      */
-    public String noWordReply() {
+    public String missingSearchWordReply() {
         return "The word cannot be empty.";
     }
 
@@ -133,5 +135,13 @@ public class Ui {
      */
     public String invalidCommandReply() {
         return "Invalid command. Please try again.";
+    }
+
+    /**
+     * Informs the user that the task they are adding already exists in the task list.
+     * @return The warning that the task already exist.
+     */
+    public String detectDuplicateReply(String task) {
+        return "This task: \"" + task + "\" already exists in the list.";
     }
 }
