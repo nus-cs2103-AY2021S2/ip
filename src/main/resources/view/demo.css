@@ -1,0 +1,24 @@
+Button {
+    -fx-padding: 20px;
+    -fx-font-size: 20px;
+    -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+#dialogContainer, VBox, ScrollPane {
+    -fx-border-radius: 20px;
+}
+
+TextField {
+    -fx-background-insets: 10 5 10 20;
+    -fx-padding: 10 5 10 30;
+    -fx-background-radius: 40px;
+    -fx-background-color: #E9F0FB;
+}
+
+Label {
+    -fx-text-fill: white;
+    -fx-background-insets: 5 10 0 10;
+    -fx-padding: 15 25 10 25;
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(42, 135, 255, 1);
+}

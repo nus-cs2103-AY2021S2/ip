@@ -13,8 +13,6 @@ import duke.task.Todo;
  * <code>print</code> the output and add the parsed item to the list if needed
  */
 public class Parser {
-    private static final String LINE = "\n____________________________________________________________";
-
     private final String command;
     private final String argument;
     private final String date;
@@ -123,47 +121,51 @@ public class Parser {
     public String print(TaskList inputList) {
         PredefinedCommand switchVal = PredefinedCommand.valueOf(this.command.toUpperCase());
         switch (switchVal) {
-        case BYE:
-            return "Bye. Hope to see you again soon!";
-        case LIST:
-            String initStr = "Here are the tasks in your list:";
-            for (int i = 0; i < inputList.getListItems().size(); i++) {
-                initStr += "\n" + ((i + 1) + "." + inputList.getListItems().get(i));
-            }
-            return initStr + LINE;
-        case DONE:
-            inputList.updateItemMutable(Integer.parseInt(this.argument));
-            return "Nice! I've marked this task as done: \n"
-                    + inputList.getListItems().get(Integer.parseInt(this.argument) - 1) + LINE;
-        case EVENT:
-            Event newEvent = new Event(this.argument, this.date);
-            inputList.addCommandMutable(newEvent);
-            return printPredefinedMessage(newEvent.toString(), inputList);
-        case DEADLINE:
-            Deadline newDeadline = new Deadline(this.argument, this.date);
-            inputList.addCommandMutable(newDeadline);
-            return printPredefinedMessage(newDeadline.toString(), inputList);
-        case TODO:
-            Todo newTodo = new Todo(this.argument);
-            inputList.addCommandMutable(newTodo);
-            return printPredefinedMessage(newTodo.toString(), inputList);
-        case ERROR:
-            return this.argument;
-        case DELETE:
-            int index = Integer.parseInt(this.argument);
-            ListItem tempItem = inputList.getListItems().get(index - 1);
-            inputList.deleteCommandMutable(index);
-            return "Noted. I've removed this task: " + tempItem
-                    + "\nNow you have " + inputList.getListItems().size() + " tasks in the list" + LINE;
-        case FIND:
-            String matchedStr = "Here are the tasks in your list:";
-            TaskList tempList = inputList.findItem(this.argument);
-            for (int i = 0; i < tempList.getListItems().size(); i++) {
-                matchedStr += "\n" + ((i + 1) + "." + tempList.getListItems().get(i));
-            }
-            return matchedStr + LINE;
-        default:
-            return "";
+            case BYE:
+                return "Bye. Hope to see you again soon!";
+            case LIST:
+                String initStr = "Here are the tasks in your list: \n";
+                for (int i = 0; i < inputList.getListItems().size(); i++) {
+                    initStr += ((i + 1) + "." + inputList.getListItems().get(i)) + "\n";
+                }
+                return initStr;
+            case DONE:
+                inputList.markItemasDone(Integer.parseInt(this.argument));
+                return "Nice! I've marked this task as done: \n"
+                        + inputList.getListItems().get(Integer.parseInt(this.argument) - 1);
+            case EVENT:
+                Event newEvent = new Event(this.argument, this.optionalArgument);
+                inputList.addCommandMutable(newEvent);
+                return printPredefinedMessage(newEvent.toString(), inputList);
+            case DEADLINE:
+                Deadline newDeadline = new Deadline(this.argument, this.optionalArgument);
+                inputList.addCommandMutable(newDeadline);
+                return printPredefinedMessage(newDeadline.toString(), inputList);
+            case TODO:
+                Todo newTodo = new Todo(this.argument);
+                inputList.addCommandMutable(newTodo);
+                return printPredefinedMessage(newTodo.toString(), inputList);
+            case ERROR:
+                return this.argument;
+            case DELETE:
+                int index = Integer.parseInt(this.argument);
+                ListItem tempItem = inputList.getListItems().get(index - 1);
+                inputList.deleteCommandMutable(index);
+                return "Noted. I've removed this task: " + tempItem
+                        + "\nNow you have " + inputList.getListItems().size() + " tasks in the list";
+            case FIND:
+                String matchedStr = "Here are the tasks in your list that fulfills your requirement:";
+                TaskList tempList = inputList.findItem(this.argument);
+                for (int i = 0; i < tempList.getListItems().size(); i++) {
+                    matchedStr += "\n" + ((i + 1) + "." + tempList.getListItems().get(i));
+                }
+                return matchedStr;
+            case TAG:
+                inputList.updateItemTag(Integer.parseInt(this.argument), this.optionalArgument);
+                return "Nice! I've marked task " + this.argument + " with the tag: \n#"
+                        + this.optionalArgument;
+            default:
+                return "";
         }
 //         every case must return some form of string, therefore break is not required
     }
@@ -177,6 +179,6 @@ public class Parser {
      */
     public String printPredefinedMessage(String typeOfTask, TaskList inputList) {
         return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have "
-                + inputList.getListItems().size() + " tasks in the list" + LINE;
+                + inputList.getListItems().size() + " tasks in the list";
     }
 }

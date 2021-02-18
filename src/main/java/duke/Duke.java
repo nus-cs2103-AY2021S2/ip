@@ -12,8 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 
 public class Duke{
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/memeeman.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/memeeman.jpg"));
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
