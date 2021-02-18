@@ -73,7 +73,7 @@ public class DeadlineCommand extends Command {
     /**
      * Adds the specified Deadline Task to the supplied TaskManager.
      *
-     * @param taskManager TaskManager object add the Deadline Task to.
+     * @param taskManager TaskManager object to add the Deadline Task to.
      * @return String response of the action that was performed.
      */
     @Override
