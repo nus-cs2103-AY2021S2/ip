@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command {
      * description and date to a TaskManager when executed.
      *
      * @param description Description of the Deadline to be added.
-     * @param date Date of the Deadlien to be added.
+     * @param date Date of the Deadline to be added.
      */
     private DeadlineCommand(String description, LocalDate date) {
         this.description = description;
@@ -71,9 +71,9 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Performs the specified action on the supplied TaskManager.
+     * Adds teh specified Deadline Task to the supplied TaskManager.
      *
-     * @param taskManager TaskManager object to perform the action on.
+     * @param taskManager TaskManager object add the Deadline Task to.
      * @return String response of the action that was performed.
      */
     @Override
