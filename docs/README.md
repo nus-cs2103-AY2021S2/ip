@@ -151,5 +151,3 @@ Example of usage:
 Expected outcome:
 
 ![](images/setexample.png)
-
-[]: #Introduction
