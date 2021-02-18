@@ -1,7 +1,7 @@
 import javafx.application.Application;
 
-public class DukeLauncher {
+public class HenchmanLauncher {
     public static void main(String[] args) {
-        Application.launch(DukeMain.class, args);
+        Application.launch(HenchmanMain.class, args);
     }
 }

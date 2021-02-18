@@ -1,4 +1,4 @@
-public class Duke {
+public class Henchman {
     private final Storage storage;
     private final TaskList tasks;
 
@@ -6,13 +6,13 @@ public class Duke {
      * Constructs Duke object, which immediately runs and starts accepting
      * user input.
      */
-    public Duke() {
+    public Henchman() {
         storage = new Storage();
 
         TaskList tempTasks;
         try {
             tempTasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (HenchmanException e) {
             tempTasks = new TaskList(); // case where save file does not exist
         }
 
@@ -30,7 +30,7 @@ public class Duke {
         try {
             Command command = Parser.parse(input);
             return command.execute(tasks, storage);
-        } catch (DukeException e) {
+        } catch (HenchmanException e) {
             return e.getMessage();
         }
     }

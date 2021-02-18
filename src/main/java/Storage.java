@@ -38,10 +38,10 @@ public class Storage {
      * directory.
      *
      * @return ArrayList of Tasks from the saved tasks in the save file "duke_saved_tasks"
-     * @throws DukeException Thrown exception when an error occurs during loading, according to the reason specified in
+     * @throws HenchmanException Thrown exception when an error occurs during loading, according to the reason specified in
      * error body.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws HenchmanException {
         try {
             File file = new File("duke_saved_tasks");
             boolean fileIsAlreadyPresent = !file.createNewFile();
@@ -81,7 +81,7 @@ public class Storage {
                         break;
 
                     default:
-                        throw new DukeException("Wrong save format, unable to load.");
+                        throw new HenchmanException("Wrong save format, unable to load.");
                     }
 
                     currLine = bufferedReader.readLine();
@@ -90,11 +90,11 @@ public class Storage {
                 return loadedTasks;
 
             } else {
-                throw new DukeException("No existing save file, creating new save now.\n");
+                throw new HenchmanException("No existing save file, creating new save now.\n");
             }
 
         } catch (IOException e) {
-            throw new DukeException("Error loading file, creating new save now.\n");
+            throw new HenchmanException("Error loading file, creating new save now.\n");
         }
 
     }

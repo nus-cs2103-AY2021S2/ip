@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class DukeUi extends AnchorPane {
+public class HenchmanUi extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -18,7 +18,7 @@ public class DukeUi extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Henchman henchman;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -28,8 +28,8 @@ public class DukeUi extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setHenchman(Henchman d) {
+        henchman = d;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(printGreetings(), dukeImage));
     }
 
@@ -40,7 +40,7 @@ public class DukeUi extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.run(input);
+        String response = henchman.run(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

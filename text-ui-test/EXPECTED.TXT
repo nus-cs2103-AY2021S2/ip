@@ -5,7 +5,7 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello, I'm Duke!
+Hello, I'm Henchman!
 What can I do for you?
 
 added: [T][ ] buy bread

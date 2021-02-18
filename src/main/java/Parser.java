@@ -9,9 +9,9 @@ public class Parser {
      *
      * @param input Input string to be parsed.
      * @return The corresponding Command of the input string.
-     * @throws DukeException Thrown exception caused by the reason specified in its error body.
+     * @throws HenchmanException Thrown exception caused by the reason specified in its error body.
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws HenchmanException {
         String[] commandAndParams = input.split(" ", 2);
         String command = commandAndParams[0].toUpperCase();
         Command parsed = null;
@@ -28,7 +28,7 @@ public class Parser {
 
         case "DEADLINE":
             if (!hasParams) {
-                throw new DukeException("DEADLINE description and date cannot be empty!");
+                throw new HenchmanException("DEADLINE description and date cannot be empty!");
             }
 
             parsed = parseTimedTaskInput(commandAndParams[1], command);
@@ -36,7 +36,7 @@ public class Parser {
 
         case "DELETE":
             if (!hasParams) {
-                throw new DukeException("Task index cannot be empty!");
+                throw new HenchmanException("Task index cannot be empty!");
             }
 
             parsed = new CommandDelete(Integer.parseInt(commandAndParams[1]));
@@ -44,7 +44,7 @@ public class Parser {
 
         case "DONE":
             if (!hasParams) {
-                throw new DukeException("Task index cannot be empty!");
+                throw new HenchmanException("Task index cannot be empty!");
             }
 
             parsed = new CommandDone(Integer.parseInt(commandAndParams[1]));
@@ -52,7 +52,7 @@ public class Parser {
 
         case "EVENT":
             if (!hasParams) {
-                throw new DukeException("EVENT description and date cannot be empty!");
+                throw new HenchmanException("EVENT description and date cannot be empty!");
             }
 
             parsed = parseTimedTaskInput(commandAndParams[1], command);
@@ -60,7 +60,7 @@ public class Parser {
 
         case "FIND":
             if (!hasParams) {
-                throw new DukeException("Search term cannot be empty!");
+                throw new HenchmanException("Search term cannot be empty!");
             }
 
             parsed = new CommandFind(commandAndParams[1]);
@@ -80,14 +80,14 @@ public class Parser {
 
         case "TODO":
             if (!hasParams) {
-                throw new DukeException("TODO description cannot be empty!");
+                throw new HenchmanException("TODO description cannot be empty!");
             }
 
             parsed = new CommandToDo(commandAndParams[1]);
             break;
 
         default:
-            throw new DukeException("Invalid command, please provide a supported command.");
+            throw new HenchmanException("Invalid command, please provide a supported command.");
         }
 
         assert parsed != null : "Error in parsed command: parsed command is null";
@@ -95,7 +95,7 @@ public class Parser {
         return parsed;
     }
 
-    private static Command parseTimedTaskInput(String input, String taskType) throws DukeException,
+    private static Command parseTimedTaskInput(String input, String taskType) throws HenchmanException,
             DateTimeParseException {
 
         char taskIcon = taskType.charAt(0);
@@ -118,7 +118,7 @@ public class Parser {
 
         if (arguments.length != 2) {
             String errorMsg = taskType + " command must follow the format: description" + delimiter + "date";
-            throw new DukeException(errorMsg);
+            throw new HenchmanException(errorMsg);
         }
 
         String[] dateAndTime = arguments[1].split(" ");
@@ -144,12 +144,12 @@ public class Parser {
             return timedTaskCommand;
 
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please follow the Date-Time format: YYYY-MM-DD TIME");
+            throw new HenchmanException("Please follow the Date-Time format: YYYY-MM-DD TIME");
         }
     }
 
     // currently unused, new implementation planned
-    private static Command parseUpdateTaskInput(String input) throws DukeException{
+    private static Command parseUpdateTaskInput(String input) throws HenchmanException {
         String[] arguments = input.split("/");
         int index = Integer.parseInt(arguments[0].strip());
         String description = arguments.length > 1 && !arguments[1].isBlank() ? arguments[1].strip() : null;
@@ -169,7 +169,7 @@ public class Parser {
         }
 
         if (description == null && date == null && time == null) {
-            throw new DukeException("There is nothing to change, please provide a change to least one field!");
+            throw new HenchmanException("There is nothing to change, please provide a change to least one field!");
         }
 
         return new CommandUpdate(index, description, date, time);

@@ -9,18 +9,18 @@ import java.io.IOException;
 /**
  * A GUI for Duke using FXML.
  */
-public class DukeMain extends Application {
+public class HenchmanMain extends Application {
 
-    private final Duke DUKE = new Duke();
+    private final Henchman Henchman = new Henchman();
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(DukeMain.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HenchmanMain.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<DukeUi>getController().setDuke(DUKE);
+            fxmlLoader.<HenchmanUi>getController().setHenchman(Henchman);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
