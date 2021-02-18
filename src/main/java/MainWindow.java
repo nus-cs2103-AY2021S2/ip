@@ -17,8 +17,9 @@ public class MainWindow extends AnchorPane {
     private ScrollPane scrollPane;
 
     private Duke duke;
-
+    //Image below adapted from https://line.17qq.com/article/swsarucrx.html
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/image/2.png"));
+    //Image below adapted from https://weheartit.com/entry/106756123
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/image/3.png"));
 
     public void setDuke(Duke d) {
