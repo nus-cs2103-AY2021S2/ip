@@ -29,7 +29,8 @@ public class Parser {
                         || input.contains("find") || input.contains("reschedule"))) {
             holder = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n";
         } else if (input.equals("todo") || input.equals("event") || input.equals("deadline")
-                        || input.equals("done") || input.equals("delete") || input.equals("find") || input.equals("reschedule")) {
+                        || input.equals("done") || input.equals("delete") || input.equals("find")
+                || input.equals("reschedule")) {
             holder = "☹ OOPS!!! The description of a todo cannot be empty." + "\n";
         } else if (input.equals("list")) {
             holder = containsList(arrayList);
