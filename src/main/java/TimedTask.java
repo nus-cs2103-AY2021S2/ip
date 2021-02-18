@@ -12,12 +12,25 @@ public abstract class TimedTask extends Task {
         this.dateTime = dateTime;
     }
 
+    protected TimedTask(String description, LocalDateTime timeCreated, LocalDateTime dateTime, String icon) {
+        super(description, timeCreated, icon);
+        this.dateTime = dateTime;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     public void changeDate(LocalDate newDate) {
         this.dateTime = LocalDateTime.of(newDate, this.dateTime.toLocalTime());
     }
 
     public void changeTime(LocalTime newTime) {
         this.dateTime = LocalDateTime.of(this.dateTime.toLocalDate(), newTime);
+    }
+
+    public String toLog() {
+        return super.toLog() + " | " + dateTime;
     }
 
     @Override

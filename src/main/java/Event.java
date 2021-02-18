@@ -12,11 +12,11 @@ public class Event extends TimedTask {
         super(description, dateTime, "E");
     }
 
-    public String toString() {
-        return super.toString() + " (at: " + dateTime.format(DATE_TIME_FORMAT) + ")";
+    public Event(String description, LocalDateTime timeCreated,LocalDateTime dateTime) {
+        super(description, timeCreated, dateTime, "E");
     }
 
-    public String toLog() {
-        return super.toLog() + " | " + dateTime;
+    public String toString() {
+        return super.toString() + " (at: " + dateTime.format(DATE_TIME_FORMAT) + ")";
     }
 }

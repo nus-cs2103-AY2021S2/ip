@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+// currently unused, new implementation planned
 public class CommandUpdate extends Command {
     private final int index;
     private final String description;

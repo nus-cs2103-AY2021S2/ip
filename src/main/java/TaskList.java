@@ -1,4 +1,6 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -84,6 +86,55 @@ public class TaskList {
         }
         return foundTasks.toString();
 
+    }
+
+    public boolean sortTasks(String sortBy) {
+        Comparator<Task> comparator;
+        boolean isSorted = true;
+
+        switch (sortBy.toUpperCase()) {
+        case "CREATED":
+            comparator = null;
+            break;
+
+        case "DESCRIPTION":
+            comparator = Comparator.comparing(Task::getDescription);
+            break;
+
+        case "DONE":
+            comparator = Comparator.comparing(Task::isDone);
+            break;
+
+        case "END":
+            comparator = new Comparator<Task>() {
+                @Override
+                public int compare(Task t1, Task t2) {
+                    LocalDateTime t1DateTime = t1.isTimed() ? ((TimedTask) t1).getDateTime() : LocalDateTime.MAX;
+                    LocalDateTime t2DateTime = t2.isTimed() ? ((TimedTask) t2).getDateTime() : LocalDateTime.MAX;
+                    return t1DateTime.compareTo(t2DateTime);
+                }
+            };
+            break;
+
+        case "TYPE":
+            comparator = Comparator.comparing(Task::getIcon);
+            break;
+
+        default:
+            comparator = null;
+            isSorted = false; // set isSorted to false upon invalid sort key
+            break;
+        }
+
+        if (isSorted) { // only sort if sort key is valid
+            tasks.sort(comparator);
+        }
+
+        return isSorted;
+    }
+
+    public void clearAllTasks() {
+        tasks.clear();
     }
 
     public ArrayList<Task> getTasks() {

@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 public class Parser {
     /**
@@ -21,6 +20,10 @@ public class Parser {
         switch (command) {
         case "BYE":
             parsed = new CommandBye();
+            break;
+
+        case "CLEAR":
+            parsed = new CommandClear();
             break;
 
         case "DEADLINE":
@@ -67,20 +70,20 @@ public class Parser {
             parsed = new CommandList();
             break;
 
+        case "SORT":
+            if (hasParams) {
+                parsed = new CommandSort(commandAndParams[1]);
+            } else {
+                parsed = new CommandSort("CREATED");
+            }
+            break;
+
         case "TODO":
             if (!hasParams) {
                 throw new DukeException("TODO description cannot be empty!");
             }
 
             parsed = new CommandToDo(commandAndParams[1]);
-            break;
-
-        case "UPDATE":
-            if (!hasParams) {
-                throw new DukeException("UPDATE command must include at least one parameter!");
-            }
-
-            parsed = parseUpdateTaskInput(commandAndParams[1]);
             break;
 
         default:
@@ -145,6 +148,7 @@ public class Parser {
         }
     }
 
+    // currently unused, new implementation planned
     private static Command parseUpdateTaskInput(String input) throws DukeException{
         String[] arguments = input.split("/");
         int index = Integer.parseInt(arguments[0].strip());

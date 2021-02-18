@@ -57,22 +57,25 @@ public class Storage {
                     String icon = split[0];
                     String isDone = split[1];
                     String description = split[2];
+                    String timeCreated = split[3];
 
                     switch (icon) {
                     case "D":
-                        Deadline deadline = new Deadline(description, LocalDateTime.parse(split[3]));
+                        Deadline deadline = new Deadline(description, LocalDateTime.parse(timeCreated),
+                                LocalDateTime.parse(split[4]));
                         setDoneStatus(deadline, isDone);
                         loadedTasks.add(deadline);
                         break;
 
                     case "E":
-                        Event event = new Event(description, LocalDateTime.parse(split[3]));
+                        Event event = new Event(description, LocalDateTime.parse(timeCreated),
+                                LocalDateTime.parse(split[4]));
                         setDoneStatus(event, isDone);
                         loadedTasks.add(event);
                         break;
 
                     case "T":
-                        ToDo toDo = new ToDo(description);
+                        ToDo toDo = new ToDo(description, LocalDateTime.parse(timeCreated));
                         setDoneStatus(toDo, isDone);
                         loadedTasks.add(toDo);
                         break;

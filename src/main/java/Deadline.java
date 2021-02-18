@@ -12,11 +12,11 @@ public class Deadline extends TimedTask {
         super(description, dateTime, "D");
     }
 
-    public String toString() {
-        return super.toString() + " (by: " + dateTime.format(DATE_TIME_FORMAT) + ")";
+    public Deadline(String description, LocalDateTime timeCreated, LocalDateTime dateTime) {
+        super(description, timeCreated, dateTime, "D");
     }
 
-    public String toLog() {
-        return super.toLog() + " | " + dateTime;
+    public String toString() {
+        return super.toString() + " (by: " + dateTime.format(DATE_TIME_FORMAT) + ")";
     }
 }
