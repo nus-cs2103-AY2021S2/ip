@@ -69,7 +69,7 @@ public class Storage {
         String taskType = content[0];
         int taskStatus = Integer.parseInt(content[1]);
         String taskDescription = content[2];
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy");
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("HHmm, dd MMM yyyy");
 
         switch(taskType) {
         case "D":
