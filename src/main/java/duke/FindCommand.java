@@ -6,14 +6,15 @@ import java.util.ArrayList;
  * Specifies the command for find command type.
  */
 public class FindCommand extends Command {
+    private String keyword;
 
     /**
      * Initialises FindCommand object.
      *
-     * @param description refers to the keyword provided by user
+     * @param keyword refers to the keyword provided by user
      */
-    public FindCommand(String description) {
-        super(description);
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -27,7 +28,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        ArrayList<Task> matchingTasks = taskList.findTasks(description);
+        ArrayList<Task> matchingTasks = taskList.findTasks(keyword);
         return ui.showMatchingTasks(matchingTasks);
     }
 }

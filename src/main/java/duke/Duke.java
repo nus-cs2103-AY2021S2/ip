@@ -7,9 +7,9 @@ import javafx.fxml.FXML;
  * Contains the main method to be run.
  */
 public class Duke {
-    public Storage storage;
-    public TaskList taskList;
-    public Ui ui;
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
     /**
      * Initialises the Duke object and loads hard disk data to current taskList.
@@ -41,7 +41,7 @@ public class Duke {
             }
             return message;
         } catch (DukeException e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
 }

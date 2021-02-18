@@ -4,6 +4,7 @@ package duke;
  * Specifies the command for todo command type.
  */
 public class TodoCommand extends Command {
+    private String description;
 
     /**
      * Initialises the TodoCommand object.
@@ -11,7 +12,7 @@ public class TodoCommand extends Command {
      * @param description the description of the deadline task.
      */
     public TodoCommand(String description) {
-        super(description);
+        this.description = description;
     }
 
     /**

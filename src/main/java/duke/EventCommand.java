@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
  */
 public class EventCommand extends Command {
     private String at;
+    private String description;
 
     /**
      * Initialises EventCommand object.
@@ -15,7 +16,7 @@ public class EventCommand extends Command {
      * @param at the date of the task, in the format YYYY-MM-DD
      */
     public EventCommand(String description, String at) {
-        super(description);
+        this.description = description;
         this.at = at;
     }
 

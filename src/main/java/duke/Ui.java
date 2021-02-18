@@ -15,6 +15,8 @@ public class Ui {
 
     /**
      * Returns string of the goodbye message to be shown when the user types 'bye' command.
+     *
+     * @return response message.
      */
     public String showGoodbyeMessage() {
         return "Aw. It was nice chatting with you! Don't forget me! :)";
@@ -22,6 +24,8 @@ public class Ui {
 
     /**
      * Returns string of a response to an unrecognised command.
+     *
+     * @return response message.
      */
     public String showInvalidTaskMessage() {
         return "Oops! I don't know what this means! :(";
@@ -31,6 +35,7 @@ public class Ui {
      * Returns string of the task the user just added and the current size of the task list.
      *
      * @param task the task the user added.
+     * @return response message.
      */
     public String showTaskAdded(Task task) {
         return "Got it. I've added this task:\n"
@@ -42,6 +47,7 @@ public class Ui {
      * Returns string of the task the user just deleted and the current size of the task list.
      *
      * @param task the task the user deleted.
+     * @return response message.
      */
     public String showTaskDeleted(Task task) {
         return "Gotcha. I've removed this task:\n"
@@ -49,6 +55,12 @@ public class Ui {
                 + TaskList.taskListSize + " task(s) in the list.";
     }
 
+    /**
+     * Returns string of updated task.
+     *
+     * @param task the task the user updated.
+     * @return response message.
+     */
     public String showTaskUpdated(Task task) {
         return "Noted. I've updated this task:\n" + task.toString();
     }
@@ -57,6 +69,7 @@ public class Ui {
      * Returns string of the task marked as done.
      *
      * @param task the task the user marked as done.
+     * @return response message.
      */
     public String showTaskDone(Task task) {
         return "Nice job! I've marked this task as done:\n" + task.toString();
@@ -66,6 +79,7 @@ public class Ui {
      * Returns string of the current list of tasks. If there are no tasks, Ui will provide a different prompt.
      *
      * @param taskList the current list of tasks.
+     * @return response message.
      */
     public String showTaskList(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
@@ -84,6 +98,7 @@ public class Ui {
      * Returns string of matching tasks. If there are no tasks, Ui will provide a different prompt.
      *
      * @param matchingTasks the list of tasks that has matching keyword.
+     * @return response message.
      */
     public String showMatchingTasks(ArrayList<Task> matchingTasks) {
         if (matchingTasks.size() == 0) {

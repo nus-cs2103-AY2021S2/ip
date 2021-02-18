@@ -4,6 +4,7 @@ package duke;
  * Specifies the command for deadline command type.
  */
 public class DoneCommand extends Command {
+    private int index;
 
     /**
      * Initialises the DoneCommand object.
@@ -11,7 +12,7 @@ public class DoneCommand extends Command {
      * @param index the index of the task to be marked as done.
      */
     public DoneCommand(int index) {
-        super(index);
+        this.index = index;
     }
 
     /**
@@ -24,9 +25,13 @@ public class DoneCommand extends Command {
      * @return Ui of response to user request.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = taskList.markTaskDone(index);
-        storage.writeToFile(taskList.getList());
-        return ui.showTaskDone(task);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        try {
+            Task task = taskList.markTaskDone(index);
+            storage.writeToFile(taskList.getList());
+            return ui.showTaskDone(task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("This task number does not exist! Try again?");
+        }
     }
 }

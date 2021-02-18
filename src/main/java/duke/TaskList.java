@@ -79,6 +79,7 @@ public class TaskList {
 
     /**
      * Updates the task at specified index by changing description to new one.
+     *
      * @param index index of task.
      * @param newDescription new description user wants to change to.
      * @return updated Task object.
@@ -87,15 +88,6 @@ public class TaskList {
         Task task = taskList.get(index);
         taskList.remove(index);
         task.updateDescription(newDescription);
-//        if (task.getTaskType().equals("Todo")) {
-//            task = new Todo(newDescription);
-//        } else if (task.getTaskType().equals("Deadline")) {
-//            String[] descriptionArr = newDescription.split("(?i)/by ");
-//            task = new Deadline(descriptionArr[0], descriptionArr[1]);
-//        } else {
-//            String[] descriptionArr = newDescription.split("(?i)/at ");
-//            task = new Event(descriptionArr[0], descriptionArr[1]);
-//        }
         taskList.add(index, task);
         return task;
     }
