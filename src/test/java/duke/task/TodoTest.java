@@ -8,7 +8,7 @@ public class TodoTest {
     @Test
     public void testToString() {
         Todo todo = new Todo("read book");
-        assertEquals("[T][✘][0] read book", todo.toString());
+        assertEquals("[T][\u2718][0] read book", todo.toString());
     }
 
     @Test
