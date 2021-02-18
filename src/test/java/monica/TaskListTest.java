@@ -2,9 +2,9 @@ package monica;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import monica.task.TaskList;
 import org.junit.jupiter.api.Test;
 
+import monica.task.TaskList;
 import monica.task.Todo;
 
 /**
