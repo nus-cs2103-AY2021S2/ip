@@ -1,12 +1,12 @@
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.File;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class DukeTest {
 
@@ -40,19 +40,20 @@ public class DukeTest {
         duke.testDuke("todo c");
         String out = duke.testDuke("all | done");
         String outExpected =
-                "Alright, I will mark these as done.\n" +
-                "[T][X]  a\n" +
-                "[T][X]  b\n" +
-                "[T][X]  c\n";
+                "Alright, I will mark these as done.\n"
+                + "[T][X]  a\n"
+                + "[T][X]  b\n"
+                + "[T][X]  c\n";
 
         String listAfterAllDone = duke.testDuke("all");
         String listExpected =
-                "1. [T][X]  a\n" +
-                "2. [T][X]  b\n" +
-                "3. [T][X]  c\n";
-        assertAll("all | done",
-                () -> assertEquals(out, outExpected),
-                () -> assertEquals(listAfterAllDone, listExpected));
+                "1. [T][X]  a\n"
+                + "2. [T][X]  b\n"
+                + "3. [T][X]  c\n";
+        assertAll("all | done", () ->
+                assertEquals(out, outExpected), () ->
+                assertEquals(listAfterAllDone, listExpected)
+        );
     }
 
     @AfterEach

@@ -1,10 +1,10 @@
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.instanceOf;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
@@ -14,12 +14,11 @@ public class ParserTest {
         ParserOutput out = Parser.parse("list");
         ParserOutput outAll = Parser.parse("all");
         assertEquals(out.getAction(), 5);
-        assertAll("list and all",
-                () -> assertEquals(out.getAction(), 5),
-                () -> assertEquals(outAll.getAction(), 5)
+        assertAll("list and all", () ->
+                assertEquals(out.getAction(), 5), () ->
+                assertEquals(outAll.getAction(), 5)
         );
     }
-
 
     @DisplayName("Test for add. ")
     @Test
@@ -74,9 +73,10 @@ public class ParserTest {
     @Test
     public void listPipe() throws DukeException {
         ParserOutput out = Parser.parse("list | done");
-        assertAll("actions and nextActions",
-                () -> assertEquals(out.getAction(), 6),
-                () -> assertEquals(out.getNextAction(), 2),
-                () -> assertEquals(out.getPipeInput().getAction(), 5));
+        assertAll("actions and nextActions", () ->
+                    assertEquals(out.getAction(), 6), () ->
+                    assertEquals(out.getNextAction(), 2), () ->
+                    assertEquals(out.getPipeInput().getAction(), 5)
+        );
     }
 }
