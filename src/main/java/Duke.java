@@ -1,6 +1,7 @@
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -268,6 +269,7 @@ public class Duke extends Application {
         textToAdd.setWrapText(true);
         textToAdd.setTextFill(fill);
         textToAdd.setFont(font);
+        textToAdd.setPadding(new Insets(10, 10, 10, 10));
 
         return textToAdd;
     }

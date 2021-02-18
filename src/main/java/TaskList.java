@@ -17,12 +17,17 @@ public class TaskList {
         this.tasks = new ArrayList<>();
 
         ArrayList<String> storageStrings = this.storage.readStorage();
-        storageStrings.forEach(x -> this.tasks.add(parseStorageString(x)));
+        storageStrings.forEach(x -> {
+            try {
+                this.tasks.add(parseStorageString(x));
+            } catch (DukeTimingException ignore) {
+            }
+        });
 
         this.count = this.tasks.size();
     }
 
-    private Task parseStorageString(String storageString) {
+    private Task parseStorageString(String storageString) throws DukeTimingException {
         String[] splitStorageString = storageString.split("\\|");
         Task task;
         if (splitStorageString[0].equals("T")) {

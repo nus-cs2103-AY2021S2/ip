@@ -25,13 +25,9 @@ public class Ui {
      * @return Hello message
      */
     public static String printHello() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "\n   D U K E   \n";
 
-        String out = "Hello from\n" + logo + "\nGreetings! I am Duke! How may I assist you?";
+        String out = "Hello from\n" + logo + "\nGreetings! I am Duke! \nHow may I assist you?";
 
         System.out.println(out + "\n" + H_RULE);
 

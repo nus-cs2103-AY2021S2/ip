@@ -15,7 +15,6 @@ public class Parser {
         String timing = "";
         String[] input = rawIn.split(" ");
         if (rawIn.contains("|")) {
-            System.out.println("HIHIHIHI pipe");
             return pipeParse(rawIn);
         }
         if (rawIn.equals("bye")) {

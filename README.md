@@ -1,8 +1,12 @@
-# Duke project template
+# Duke Task Manager
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke Task Manager is a small desktop application that allows one to keep track of todos, deadlines, and events. 
 
-## Setting up in Intellij
+<p align="center">
+    <img src="./Ui.png">
+</p>
+
+## Usage
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
