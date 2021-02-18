@@ -69,9 +69,9 @@ public class UI {
         int counter = 1;
         StringBuilder fullFindMessage = new StringBuilder("Here are tasks matching the keyword provided");
         for (int i = 0; i < size; i++) {
-            if (list.get(i).getTaskName().contains(keyword)) {
-                fullFindMessage.append("\n").append(counter).append(".")
-                        .append(list.get(i)).append("\n");
+            Task curr = list.get(i);
+            if (curr.getTaskName().contains(keyword)) {
+                fullFindMessage.append("\n").append(counter).append(".").append(curr);
                 counter++;
             }
         }
