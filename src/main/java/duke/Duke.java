@@ -1,16 +1,9 @@
 package duke;
 
 import duke.system.Parser;
-import duke.system.Storage;
 import duke.system.view.Gui;
 import duke.task.TaskList;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 
 public class Duke{
     private TaskList tasks;
@@ -26,6 +19,9 @@ public class Duke{
         return in.print(tasks);
     }
 
+    /**
+     * Initiate the GUI interface
+     */
     public static void main(String[] args) {
         Application.launch(Gui.class, args);
     }

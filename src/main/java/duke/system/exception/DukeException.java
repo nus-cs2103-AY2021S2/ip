@@ -2,8 +2,6 @@ package duke.system.exception;
 
 public abstract class DukeException extends Exception {
 
-    private static final long serialVersionUID = 1L;
-
     public DukeException(String errorMessage) {
         super(errorMessage);
     }
