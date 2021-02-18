@@ -55,6 +55,14 @@ Example of usage:
 
 Expected outcome:
 
+```
+Contents:
+1. <task>
+2. <task>
+    -
+    -
+```
+
 Returns the list of all the tasks and they are numbered starting from 1.
 
 ### Feature 2
@@ -226,3 +234,94 @@ Contents:
 ```
 
 The output depends on the number of matching tasks found
+
+## Note Features
+
+### Feature 1
+
+Get the list of notes
+
+### Usage
+
+### `notes` - Simply type in `notes`
+
+Returns the list of tasks
+
+Example of usage:
+
+`notes`
+
+Expected outcome:
+
+```
+Contents:
+1. <task>
+2. <task>
+    -
+    -
+```
+
+
+Returns the list of all the notes and they are numbered starting from 1.
+
+### Feature 2
+
+add note
+
+### Usage
+
+### `add` - Key in `add <note description>`
+
+Example of Usage:
+
+`add play video games`
+
+Expected outcome:
+
+```
+Got it! Added: 
+play video games
+Now you have 6 items in your list
+```
+
+
+### Feature 3
+
+Remove a note
+
+### Usage
+
+### `delete-note` or `remove-note` - Key in `delete-note <index>` or `remove-note <index>`
+
+Example of Usage:
+
+`remove-note 6`
+
+Expected outcome:
+
+```
+Noted. Item removed:
+play video games
+Now you have 5 items in your list
+```
+### Feature 4
+
+Find matching notes based on keyword
+
+### Usage
+
+### `find-note` or `search-note` - Key in `find-note <keyword>` or `search-note <keyword>`
+
+Example of Usage:
+
+`find-note movies`
+
+Expected outcome:
+
+```
+We have found the following 2 item(s)
+Contents:
+1. <note>
+2. <note>
+```
+The size of the list depends on the number of matches
