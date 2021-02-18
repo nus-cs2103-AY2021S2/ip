@@ -1,8 +1,8 @@
 package jeff;
 
 public abstract class Command {
-    String mainInfo;
-    String supplementaryInfo;
+    private String mainInfo;
+    private String supplementaryInfo;
 
     Command(String main, String supp) {
         mainInfo = main;
@@ -14,6 +14,13 @@ public abstract class Command {
     }
 
     Command() {
+    }
+
+    public String getMainInfo() {
+        return mainInfo;
+    }
+    public String getSupplementaryInfo() {
+        return supplementaryInfo;
     }
 
     public abstract String execute(TaskList tasks, Storage storage) throws JeffException;

@@ -11,6 +11,6 @@ public class JeffException extends Exception {
      * @param errorMessage Message describing error.
      */
     public JeffException(String errorMessage) {
-        super ("Oops!! Error: " + errorMessage);
+        super ("Oops! Error: " + errorMessage);
     }
 }

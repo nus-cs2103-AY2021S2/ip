@@ -8,10 +8,10 @@ public class CommandDelete extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws JeffException {
         try {
-            int taskIndex = Integer.parseInt(mainInfo) - 1;
+            int taskIndex = Integer.parseInt(getMainInfo()) - 1;
             Task toRemove = tasks.getTask(taskIndex);
             tasks.deleteTask(taskIndex);
-            return "Noted. I've removed this task:\n" + toRemove + tasks.queryNumTasks();
+            return "Noted. I've removed this task:\n" + toRemove + tasks.formatNumTasks();
         } catch (NumberFormatException e) {
             throw new JeffException("indicate task number as an integer");
         } catch (IndexOutOfBoundsException e) {

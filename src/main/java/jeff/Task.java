@@ -40,7 +40,7 @@ public abstract class Task {
      * @return "X" if Task is done, " " otherwise.
      */
     public String getStatus() {
-        return (isDone ? "X" : " ");
+        return (isDone ? "X" : "  ");
     }
 
     /**

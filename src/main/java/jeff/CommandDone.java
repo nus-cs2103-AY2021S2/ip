@@ -9,7 +9,7 @@ public class CommandDone extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws JeffException {
         try {
-            int taskIndex = Integer.parseInt(mainInfo) - 1;
+            int taskIndex = Integer.parseInt(getMainInfo()) - 1;
             Task doneTask = tasks.getTask(taskIndex);
             doneTask.setDone();
             return "Nice! I've marked this task as done:\n" + doneTask;

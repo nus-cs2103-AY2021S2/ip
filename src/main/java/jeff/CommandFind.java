@@ -10,8 +10,8 @@ public class CommandFind extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) throws JeffException {
-        ArrayList<Task> foundTasks = tasks.findTask(mainInfo);
-        String s = "Here are the tasks I found matching \"" + mainInfo + "\":\n";
+        ArrayList<Task> foundTasks = tasks.findTask(getMainInfo());
+        String s = "Here are the tasks I found matching \"" + getMainInfo() + "\":\n";
         for (Task t : foundTasks) {
             s += t.toString() + "\n";
         }

@@ -11,5 +11,6 @@ public enum CommandTypes {
     done,
     delete,
     bye,
-    find
+    find,
+    reschedule
 }

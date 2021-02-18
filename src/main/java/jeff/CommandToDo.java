@@ -7,9 +7,9 @@ public class CommandToDo extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage) throws JeffException{
-        Task todo = new ToDo(this.mainInfo);
+    public String execute(TaskList tasks, Storage storage) throws JeffException {
+        Task todo = new ToDo(this.getMainInfo());
         tasks.addTask(todo);
-        return "Got it. I've added this task:\n" + todo + tasks.queryNumTasks();
+        return "Got it. I've added this task:\n" + todo + tasks.formatNumTasks();
     }
 }

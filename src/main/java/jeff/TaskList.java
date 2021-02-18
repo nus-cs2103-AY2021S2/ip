@@ -47,7 +47,7 @@ public class TaskList {
      *
      * @return Message describing number of tasks.
      */
-    public String queryNumTasks() {
+    public String formatNumTasks() {
         return "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
@@ -68,6 +68,15 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Sets a Task at a certain index in TaskList.
+     *
+     * @param task Task to be added.
+     */
+    public void setTask(int index, Task task) {
+        tasks.set(index, task);
     }
 
     /**

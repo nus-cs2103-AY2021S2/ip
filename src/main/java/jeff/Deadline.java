@@ -60,7 +60,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (by: %s %s %s %s:%s)", super.toString(), date.getDayOfMonth(),
-                date.getMonth(), date.getYear(), time.getHour(), time.getMinute());
+        return String.format("%s (by: %s %s %s %s)", super.toString(), date.getDayOfMonth(),
+                date.getMonth(), date.getYear(), time);
     }
 }

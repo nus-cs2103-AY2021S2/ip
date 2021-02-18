@@ -34,7 +34,7 @@ public class Storage {
             Scanner sc = new Scanner(data);
             ArrayList<Task> savedTasks = new ArrayList<>();
             while (sc.hasNext()) {
-                Task newTask = readLine(sc.nextLine());
+                Task newTask = stringToTask(sc.nextLine());
                 savedTasks.add(newTask);
             }
             return savedTasks;
@@ -43,7 +43,13 @@ public class Storage {
         }
     }
 
-    public Task readLine(String line) {
+    /**
+     * Takes a String and interprets it as a Task.
+     *
+     * @param line String to be interpreted.
+     * @return Task that is represented.
+     */
+    public Task stringToTask(String line) {
         String[] lineSplit = line.split("#");
         switch (lineSplit[0]) {
         case "T":
@@ -64,6 +70,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Marks task as done, if the mark is "X".
+     *
+     * @param mark Mark representing status of task, either "X" or " ".
+     * @param task Task to be potentially marked as done.
+     */
     public void markTask(String mark, Task task) {
         if (mark.equals("X")) {
             task.setDone();
@@ -80,7 +92,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task t : tasks) {
-                String line = writeLine(t);
+                String line = taskToString(t);
                 fw.write(line);
             }
             fw.close();
@@ -89,7 +101,13 @@ public class Storage {
         }
     }
 
-    public String writeLine(Task task) {
+    /**
+     * Takes a Task and interprets it as a String.
+     *
+     * @param task Task to be interpreted.
+     * @return String that represents task.
+     */
+    public String taskToString(Task task) {
         String line = task.getSymbol() + "#" + task.getStatus() + "#" + task.getName();
         if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
