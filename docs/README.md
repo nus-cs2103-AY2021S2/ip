@@ -6,11 +6,11 @@ Graphical User Interface (GUI).
 If you can type fast and need a personal assistant to keep track of lots of tasks,
 Popo task manager is here to help you!
 
-- Quick Start
-- Types of Tasks
-- Features
-- FAQ
-- Command Summary
+- [Quick Start](#quick-start)
+- [Types of Tasks](#types-of-tasks)
+- [Features](#features)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
 
 
 ## Quick Start
