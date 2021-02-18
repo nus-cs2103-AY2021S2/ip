@@ -1,10 +1,10 @@
 package dukePackage;
 
 public class Task {
+
     /**
      * Task class stores a String as name of the task and boolean indicating task completion
      */
-
     private final String taskName;
     private boolean isDone;
 
@@ -46,7 +46,7 @@ public class Task {
         if (isDone) {
             return "[X] " + taskName;
         } else {
-            return "[ ] " + taskName;
+            return "[  ] " + taskName;
         }
     }
 }

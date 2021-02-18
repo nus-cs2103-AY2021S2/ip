@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Deals with User interactions, reads user inputs and outputs text
  */
 public class UI {
-    private static final String WELCOME_MESSAGE =  "Hello! I'm Duke\nWhat can I do for you today?";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke\n\nWhat can I do for you today?";
     private static final String GOODBYE_MESSAGE = "Good bye and take care! This application will close in 5 seconds.";
 
     public UI() {

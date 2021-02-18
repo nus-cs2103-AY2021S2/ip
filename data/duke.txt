@@ -1,3 +1,7 @@
 T|1|homework
 D|0|ip|2021-02-18
 E|0|recess week|2021-02-21
+T|0|go yeet
+D|0|go inn|2021-06-22
+D|1|seee birds|2020-09-09
+T|0|sleep for very long good bye
