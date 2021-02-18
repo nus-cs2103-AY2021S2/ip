@@ -1,17 +1,9 @@
-package utility;
+package duke;
 
 import java.time.LocalDate;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import duke.Command;
-import task.Deadline;
-import duke.DukeCommand;
-import duke.DukeException;
-import task.Event;
-import task.Task;
-import task.Todo;
 
 /**
  * Parser is involved with parsing user commands in Duke.
@@ -132,7 +124,7 @@ public class Parser {
 
                 return new Deadline(deadlineParams[0], LocalDate.parse(deadlineParams[1]));
 
-            } else if (command == Command.EVENT) {
+            } else {
 
                 if (details.length() == 0) {
                     throw new DukeException("OOPS!!! The description of an event cannot be empty");
@@ -167,9 +159,6 @@ public class Parser {
                 }
 
                 return new Event(eventParams[0], LocalDate.parse(timeParams[0]), timeParams[1]);
-
-            } else {
-                throw new AssertionError("Wrong command given to Parser.parseRemainder()");
             }
 
         } catch (DukeException err) {

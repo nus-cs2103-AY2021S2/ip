@@ -6,12 +6,6 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-import utility.Parser;
-
 public class ParserTest {
 
     @Test
