@@ -4,6 +4,7 @@ import task.Task;
 import task.TaskManager;
 import util.DukeException;
 import util.Formatter;
+import util.Parser;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +39,9 @@ public class FindCommand extends Command {
      */
     public static FindCommand fromCommandMap(HashMap<String, List<String>> commandMap)
             throws DukeException {
+        assert Parser.extractCommandString(commandMap).equals(COMMAND_STRING)
+                : COMMAND_STRING + "CommandFlag does not match";
+
         List<String> keywords = commandMap.get(COMMAND_STRING);
 
         if (keywords.isEmpty()) {
