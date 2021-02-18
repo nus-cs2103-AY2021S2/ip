@@ -1,7 +1,7 @@
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Task {
     private final String description;
@@ -160,8 +160,7 @@ public class Task {
         output = description + output;
         if (isDone) {
             return symbol + " [/] " + output;
-        } else {
-            return symbol + " [] " + output;
         }
+        return symbol + " [] " + output;
     }
 }
