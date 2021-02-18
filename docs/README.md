@@ -34,7 +34,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ### Features 
 
-1. `help`
+`help`
    * Instructions can be displayed by using the command key: help
       * This will display all the basic commands that Justin can do
  
@@ -53,7 +53,7 @@ event finish iP /at 2020-02-18 18:00
 To find similar tasks, use eg: find my CAP
 ````
 
-1. `list`
+`list`
    * Justin can show you all the tasks User added by the command key: list
          * User can add a todo task by using the command key: todo td/[Task Name]
          * eg: User wants to add a todo task
@@ -71,7 +71,7 @@ Here are the tasks in your list:
 2. [E][INCOMPLETE] finish tP (at: Jun 19 2020 18:00)
 ````
 
-1. `deadline`
+`deadline`
    * User can add a deadline task by using the command key: deadline<space>d/[Task Name] /by [YYYY-MM-DD]
       * eg: User wants to add a deadline task
          1. User keys in: deadline need some sleep /by 2020-02-14
@@ -88,7 +88,7 @@ Got it, I've added this task:
 Now you have 1 task in the list
 ````
 
-1. `event`
+`event`
    * User can add an event task by using the command key: event e/[Task Name] /at [YYYY-MM-DD HH:MM]
       * eg: User wants to add an event task
          1. User keys in: event fly me to the moon /at 2020-07-16 21:02
@@ -106,7 +106,7 @@ Now you have 1 task in the list
 ````
 
 
-1. `find`
+`find`
    * User can find tasks by using the command: find [keyword]
       * eg: User wants to find a particuler task in the list
          1. User keys in: find where is my beer
@@ -123,7 +123,7 @@ Here are the matching tasks in your list
 2. [T][COMPLETED] catch cat 
 ````
 
-1. `delete`
+`delete`
    * User can delete a task on the list by using the command: delete [Number]
       * eg: User use the command list to view all tasks on the list
          1. After viewing the list, user decides to delete third task
@@ -141,7 +141,7 @@ Noted. I've removed this task
 Now you have 1 task in the list
 ````
 
-1. `bye`
+`bye`
    * Lastly, User can exit the application by using the command: bye
 
 *Expected input*
