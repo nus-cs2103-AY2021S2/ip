@@ -15,6 +15,13 @@ public class HelpCommand extends Command {
         super(IS_EXIT);
     }
 
+    /**
+     *
+     * @param tasks The tasks in the TaskList.
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @return String the line to print.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.showHelpReply();

@@ -18,8 +18,9 @@ public class ByeCommand extends Command {
      * Execute method for ByeCommand
      * Prints bye message and exits the bot.
      * @param tasks The tasks in the TaskList.
-     * @param ui Standard UI object
-     * @param storage Standard storage object
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @return the line to print.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -26,8 +26,9 @@ public class FindCommand extends Command {
      * Executes find command and prints list of tasks that match the command.
      * Tasks shown are numbered in ascending order starting from "1."
      * @param tasks The tasks in the TaskList.
-     * @param ui Standard UI object
-     * @param storage Standard storage object
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @return String the line to print.
      * @throws DukeException if the user input is invalid.
      */
     @Override

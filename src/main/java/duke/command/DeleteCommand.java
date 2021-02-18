@@ -26,8 +26,9 @@ public class DeleteCommand extends Command {
      * Executes a delete command.
      * Deletes a task from the list of tasks.
      * @param tasks The tasks in the TaskList.
-     * @param ui Standard UI object
-     * @param storage Standard storage object
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @return the line to print.
      * @throws DukeException if delete command is missing a number/description.
      */
     @Override

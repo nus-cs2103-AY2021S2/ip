@@ -28,8 +28,9 @@ public class DoneCommand extends Command {
      * Executes a done command.
      * Marks a task as done from the list of tasks.
      * @param tasks The tasks in the TaskList.
-     * @param ui Standard UI object
-     * @param storage Standard storage object
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @return the line to print.
      * @throws DukeException is thrown if the description is missing or the input is invalid.
      */
     @Override

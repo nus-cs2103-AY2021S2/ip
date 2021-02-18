@@ -29,10 +29,10 @@ public class Ui {
         + " the specified <description> by <yyyy-MM-dd HH:mm>";
     static final String EVENT_HELP = "event <description> /at <yyyy-MM-dd HH:mm> - adds an Event task with"
         + " the specified <description>, date and time";
-    static final String DONE_HELP = "done <taskId>' - marks a specific task as done";
+    static final String DONE_HELP = "done <taskId> - marks a specific task as done";
     static final String FIND_HELP = "find <regex> - to find all items containing the specified "
         + "regex in its description";
-    static final String DELETE_HELP = "delete <taskId>' - deletes a specific task";
+    static final String DELETE_HELP = "delete <taskId> - deletes a specific task";
     private Scanner sc;
 
     /**

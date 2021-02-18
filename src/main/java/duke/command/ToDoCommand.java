@@ -25,8 +25,9 @@ public class ToDoCommand extends Command {
     /**
      * Executes method for ToDo command.
      * @param tasks The tasks in the TaskList.
-     * @param ui Standard UI object
-     * @param storage Standard storage object
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @return the line to print.
      * @throws DukeException if the description of command is missing or if the user input is invalid.
      */
     @Override

@@ -25,8 +25,9 @@ public class EventCommand extends Command {
     /**
      * Execute command for event command.
      * @param tasks The tasks in the TaskList.
-     * @param ui Standard UI object
-     * @param storage Standard storage object
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @return the line to print.
      * @throws DukeException if the event command is missing description or the user input is invalid.
      */
     @Override

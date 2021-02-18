@@ -25,8 +25,9 @@ public class DeadlineCommand extends Command {
     /**
      * The execute method for deadline.
      * @param tasks The tasks in the TaskList.
-     * @param ui Standard UI object
-     * @param storage Standard storage object
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @return the line to print.
      * @throws DukeException if the deadline command is missing a description or the user input is invalid.
      */
     @Override
