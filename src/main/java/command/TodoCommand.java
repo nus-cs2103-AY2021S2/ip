@@ -6,6 +6,7 @@ import util.DukeException;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class TodoCommand extends Command {
     public static final String COMMAND_STRING = "todo";
@@ -29,12 +30,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) {
-        message = taskManager.addTask(new Todo(description));
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+    public String execute(TaskManager taskManager) {
+        return taskManager.addTask(new Todo(description));
     }
 }

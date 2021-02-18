@@ -10,7 +10,6 @@ public class DoneCommand extends Command {
     public static final String COMMAND_STRING = "done";
     public static final CommandType COMMAND_TYPE = CommandType.DONE;
     private final int position;
-    private String message = "";
 
     public DoneCommand(int position) {
         this.position = position;
@@ -31,12 +30,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) throws DukeException {
-        message = taskManager.markTaskDone(position);
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+    public String execute(TaskManager taskManager) throws DukeException {
+        return taskManager.markTaskDone(position);
     }
 }

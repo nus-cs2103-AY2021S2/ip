@@ -14,7 +14,6 @@ public class FindCommand extends Command {
     public static final String COMMAND_STRING = "find";
     public static final CommandType COMMAND_TYPE = CommandType.FIND;
     private final List<String> keywords;
-    private String message = "";
 
     private FindCommand(List<String> keywords) {
         this.keywords = keywords;
@@ -32,7 +31,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) {
+    public String execute(TaskManager taskManager) {
         StringBuilder output = new StringBuilder();
 
         // Returns true if the task contains all of the keywords
@@ -55,11 +54,6 @@ public class FindCommand extends Command {
 
         output.append("Here are the tasks that match your search: ").append("\n");
         output.append(listOfTasks);
-        message = output.toString();
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+        return output.toString();
     }
 }

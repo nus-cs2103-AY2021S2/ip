@@ -11,14 +11,13 @@ import java.util.stream.Collectors;
 public class ListCommand extends Command {
     public static final String COMMAND_STRING = "list";
     public static final CommandType COMMAND_TYPE = CommandType.LIST;
-    private String message = "";
 
     public static ListCommand fromCommandMap(HashMap<String, List<String>> commandMap) {
         return new ListCommand();
     }
 
     @Override
-    public void execute(TaskManager taskManager) {
+    public String execute(TaskManager taskManager) {
         StringBuilder output = new StringBuilder();
         List<Task> tasks = taskManager.getTasks();
         List<String> taskStrings = tasks.stream()
@@ -28,11 +27,6 @@ public class ListCommand extends Command {
 
         output.append("Here is your list of tasks: ").append("\n");
         output.append(listOfTasks);
-        message = output.toString();
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+        return output.toString();
     }
 }

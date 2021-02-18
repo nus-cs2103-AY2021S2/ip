@@ -16,7 +16,6 @@ public class EventCommand extends Command {
 
     private final String description;
     private final LocalDate date;
-    private String message;
 
     private EventCommand(String description, LocalDate date) {
         this.description = description;
@@ -50,12 +49,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) {
-        message = taskManager.addTask(new Event(description, date));
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+    public String execute(TaskManager taskManager) {
+        return taskManager.addTask(new Event(description, date));
     }
 }

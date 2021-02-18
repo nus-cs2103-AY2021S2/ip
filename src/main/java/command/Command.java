@@ -4,9 +4,7 @@ import task.TaskManager;
 import util.DukeException;
 
 public abstract class Command {
-    public abstract void execute(TaskManager taskManager) throws DukeException;
-
-    public abstract String getMessage();
+    public abstract String execute(TaskManager taskManager) throws DukeException;
 
     public boolean isQuitCommand() {
         return false;

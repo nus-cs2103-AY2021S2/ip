@@ -22,7 +22,6 @@ public class HelpCommand extends Command {
         add(QuitCommand.COMMAND_STRING);
     }};
     private final Optional<String> keywordOpt;
-    private String message = "";
 
     private HelpCommand(String keyword) {
         this.keywordOpt = Optional.of(keyword);
@@ -48,17 +47,17 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) {
-        message = keywordOpt.orElse(defaultHelpText());
+    public String execute(TaskManager taskManager) {
+        return keywordOpt.map(k -> keywordHelpText(k)).orElse(defaultHelpText());
     }
 
     private String defaultHelpText() {
         String validKeywordList = String.join(", ", VALID_KEYWORDS);
 
-        String result = "Type \"help <keyword>\" to read detailed information about each command" +
-                "\n" +
-                "List of commands: \n" +
-                validKeywordList;
+        String result = "Type \"help <command>\" to read detailed information about each command"
+                + "\n"
+                + "List of commands: \n"
+                + validKeywordList;
         return result;
     }
 
@@ -115,13 +114,13 @@ public class HelpCommand extends Command {
     }
 
     private String deadlineHelpText() {
-        return "Usage: \"deadline <description> /by <YYYY-MM-DD>\" - " +
-                "Creates a Deadline with the supplied description and date";
+        return "Usage: \"deadline <description> /by <YYYY-MM-DD>\" - "
+                + "Creates a Deadline with the supplied description and date";
     }
 
     private String eventHelpText() {
-        return "Usage: \"deadline <description> /at <YYYY-MM-DD>\" - " +
-                "Creates an Event with the supplied description and date";
+        return "Usage: \"deadline <description> /at <YYYY-MM-DD>\" - "
+                + "Creates an Event with the supplied description and date";
     }
 
     private String doneHelpText() {
@@ -130,16 +129,11 @@ public class HelpCommand extends Command {
     }
 
     private String deleteHelpText() {
-        return "Usage: \"delete <i>\" - " +
-                "Removes the task with index i from the list";
+        return "Usage: \"delete <i>\" - "
+                + "Removes the task with index i from the list";
     }
 
     private String quitHelpText() {
         return "Usage: \"quit\" - Terminates the application";
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 }

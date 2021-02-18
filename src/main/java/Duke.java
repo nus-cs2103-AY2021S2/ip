@@ -90,9 +90,9 @@ public class Duke {
     public String respondToInput(String input) {
         try {
             Command c = Parser.parseCommand(input);
-            c.execute(taskManager);
+            String response = c.execute(taskManager);
             storage.writeTaskManager(taskManager);
-            return c.getMessage();
+            return response;
         } catch (DukeException e) {
             return e.getMsg();
         } catch (IOException e) {

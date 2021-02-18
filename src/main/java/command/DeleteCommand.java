@@ -10,7 +10,6 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_STRING = "delete";
     public static final CommandType COMMAND_TYPE = CommandType.DELETE;
     private final int position;
-    private String message = "";
 
     public DeleteCommand(int position) {
         this.position = position;
@@ -31,12 +30,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) throws DukeException {
-        message = taskManager.deleteTask(position);
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+    public String execute(TaskManager taskManager) throws DukeException {
+        return taskManager.deleteTask(position);
     }
 }

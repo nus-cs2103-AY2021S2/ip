@@ -16,7 +16,6 @@ public class DeadlineCommand extends Command {
 
     private final String description;
     private final LocalDate date;
-    private String message;
 
     private DeadlineCommand(String description, LocalDate date) {
         this.description = description;
@@ -50,12 +49,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager) {
-        message = taskManager.addTask(new Deadline(description, date));
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+    public String execute(TaskManager taskManager) {
+        return taskManager.addTask(new Deadline(description, date));
     }
 }
