@@ -98,7 +98,7 @@ Message from Monica:
 
 ```
 Here are the tasks in your list:
-1.[T][✓] run every day
+1.[T][✗] run every day
 2.[E][✗] CS2101 presentation (at 10:00, 01 MAR 2021)
 3.[D][✗] CS2102 assignment 1 (by 23:59, 02 MAR 2021)
 ```

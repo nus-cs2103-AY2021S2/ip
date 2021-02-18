@@ -1,6 +1,8 @@
 package monica.ui;
 
-import javafx.application.Platform;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,9 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import monica.Monica;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Controller for MainWindow.
@@ -29,16 +28,22 @@ public class MainWindow extends AnchorPane {
 
     private Monica monica;
 
-    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private final Image MONICA_IMAGE = new Image(this.getClass().getResourceAsStream("/images/Monica.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image monicaImage = new Image(this.getClass().getResourceAsStream("/images/Monica.png"));
 
+    /**
+     * Initializes dialogs
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcome(), MONICA_IMAGE));
+        dialogContainer.getChildren().add(DialogBox.getMonicaDialog(Ui.showWelcome(), monicaImage));
     }
 
-    public void setDuke(Monica monica) {
+    /**
+     * Sets up Monica
+     */
+    public void setMonica(Monica monica) {
         this.monica = monica;
     }
 
@@ -52,13 +57,14 @@ public class MainWindow extends AnchorPane {
         String response = monica.getResponse(input);
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, USER_IMAGE),
-                DialogBox.getDukeDialog(response, MONICA_IMAGE)
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getMonicaDialog(response, monicaImage)
         );
 
         if (input.equals("bye")) {
             new Timer().schedule(new TimerTask() {
-                public void run () { System.exit(0); }
+                public void run () {
+                    System.exit(0); }
             }, 3000);
         }
 

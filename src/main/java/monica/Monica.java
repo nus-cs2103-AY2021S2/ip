@@ -8,19 +8,19 @@ import monica.ui.Ui;
  * Represents the read-and-respond action of the application <code>Monica</code>.
  */
 public class Monica {
-    private final Storage STORAGE;
-    private final Ui UI;
     private static final String FILE_PATH = "data/tasks.txt";
+    private final Storage storage;
+    private final Ui ui;
     private TaskList tasks;
 
     /**
      * Constructor for Monica class that initiates task storage locally.
      */
     public Monica() {
-        UI = new Ui();
-        STORAGE = new Storage(FILE_PATH);
+        ui = new Ui();
+        storage = new Storage(FILE_PATH);
         try {
-            tasks = STORAGE.openFile();
+            tasks = storage.openFile();
         } catch (MonicaException e) {
             tasks = new TaskList();
         }
@@ -33,9 +33,9 @@ public class Monica {
         assert input != null : "Command is missing.";
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, UI, STORAGE);
+            return c.execute(tasks, ui, storage);
         } catch (MonicaException e) {
-            return UI.showError(e);
+            return ui.showError(e);
         }
     }
 

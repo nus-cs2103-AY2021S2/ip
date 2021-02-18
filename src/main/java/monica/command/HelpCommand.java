@@ -8,7 +8,7 @@ import monica.ui.Ui;
 /**
  * Represents a command that provides user with guidance on commands.
  */
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
 
     /**
      * Executes help command.

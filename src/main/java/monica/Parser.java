@@ -29,7 +29,7 @@ public class Parser {
      */
     public static Command parse(String commandLine) throws MonicaException {
         assert commandLine != null : "Command line cannot be processed.";
-        if(commandLine.isBlank()){
+        if (commandLine.isBlank()) {
             throw new MonicaException("I didn't receive any command.");
         }
         String[] messages = commandLine.split(" ");
@@ -39,29 +39,26 @@ public class Parser {
         switch (commandType) {
         case "bye":
             return new ExitCommand();
-
         case "delete":
             if (isIncomplete) {
                 throw new MonicaException("The delete index is missing.");
             }
-            try{
+            try {
                 int id = Integer.parseInt(messages[1]);
                 return new DeleteCommand(id);
             } catch (NumberFormatException e) {
                 throw new MonicaException("The delete index must be an integer.");
             }
-
         case "done":
             if (isIncomplete) {
                 throw new MonicaException("The done index is missing.");
             }
-            try{
+            try {
                 int id = Integer.parseInt(messages[1]);
                 return new DoneCommand(id);
             } catch (NumberFormatException e) {
                 throw new MonicaException("The done index must be an integer.");
             }
-
         case "deadline":
             if (isIncomplete) {
                 throw new MonicaException("The deadline description is missing.");
@@ -71,7 +68,6 @@ public class Parser {
             } catch (Exception ex) {
                 throw new MonicaException("The deadline description is in wrong format.");
             }
-
         case "event":
             if (isIncomplete) {
                 throw new MonicaException("The event description is missing.");
@@ -81,28 +77,22 @@ public class Parser {
             } catch (Exception ex) {
                 throw new MonicaException("The event description is in wrong format.");
             }
-
         case "todo":
             if (isIncomplete) {
                 throw new MonicaException("The todo description is missing.");
             }
             return new AddTodo(new Todo(processTask(commandLine), 0));
-
         case "list":
             return new ListCommand();
-
         case "find":
             if (isIncomplete) {
                 throw new MonicaException("The keyword is missing.");
             }
             return new FindCommand(processTask(commandLine));
-
         case "help":
             return new HelpCommand();
-            
         default:
             throw new MonicaException("I don't know what '" + commandType + "' means.");
-
         }
     }
 

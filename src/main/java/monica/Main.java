@@ -28,7 +28,7 @@ public class Main extends Application {
             assert ap != null : "JavaFX cannot be loaded.";
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(monica);
+            fxmlLoader.<MainWindow>getController().setMonica(monica);
             stage.show();
             stage.setTitle("Monica");
             stage.setResizable(false);
