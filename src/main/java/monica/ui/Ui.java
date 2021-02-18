@@ -117,15 +117,15 @@ public class Ui {
      */
     public static String showHelp() {
         final String GUIDANCE_MESSAGE = "You can enter any command from the below list:\n";
-        final String BYE_COMMAND = "bye\n";
-        final String DEADLINE_COMMAND = "deadline taskName /by yyyy-MM-dd HHmm\n";
-        final String DELETE_COMMAND = "delete taskIndex\n";
-        final String DONE_COMMAND  = "done taskIndex\n";
-        final String EVENT_COMMAND = "event taskName /at yyyy-MM-dd HHmm\n";
-        final String FIND_COMMAND = "find\n";
-        final String HELP_COMMAND = "help\n";
-        final String LIST_COMMAND = "list\n";
-        final String TODO_COMMAND = "todo taskName\n";
+        final String BYE_COMMAND = "'bye'\n";
+        final String DEADLINE_COMMAND = "'deadline taskName /by yyyy-MM-dd HHmm'\n";
+        final String DELETE_COMMAND = "'delete taskIndex'\n";
+        final String DONE_COMMAND  = "'done taskIndex'\n";
+        final String EVENT_COMMAND = "'event taskName /at yyyy-MM-dd HHmm'\n";
+        final String FIND_COMMAND = "'find'\n";
+        final String HELP_COMMAND = "'help'\n";
+        final String LIST_COMMAND = "'list'\n";
+        final String TODO_COMMAND = "'todo taskName'\n";
 
         return GUIDANCE_MESSAGE + BYE_COMMAND + DEADLINE_COMMAND + DELETE_COMMAND
                 + DONE_COMMAND + EVENT_COMMAND + FIND_COMMAND
