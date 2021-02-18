@@ -124,6 +124,7 @@ public class Parser {
             return s;
 
         default:
+            assert false : "Code should not reach this point of execution.";
             throw new JeffException("something went wrong");
 
         }
