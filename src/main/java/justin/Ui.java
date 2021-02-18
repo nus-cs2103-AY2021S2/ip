@@ -4,7 +4,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * This class contains all the UI methods that runs in the Main Justin.java class
+ * This class contains all the UI methods
+ * that runs in the Main Justin.java class
  *
  * @author Goh Wei Kiat aka github : mrweikiat
  * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
@@ -16,7 +17,6 @@ public class Ui {
     Scanner sc;
 
     static String line = "-------------------------------------------------------------------------------------------";
-
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -39,8 +39,10 @@ public class Ui {
     }
 
     /**
-     * This method outputs the helper message when the user
+     * This method outputs the helper
+     * message when the user
      * first start the program
+     * Then Justin will run
      *
      */
 

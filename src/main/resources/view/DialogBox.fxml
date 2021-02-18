@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="194.0" prefWidth="600.0" style="-fx-background-color: #ffffff; -fx-border-color: #EBECF0; -fx-border-width: 10;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" prefHeight="194.0" prefWidth="600.0" style="-fx-background-color: #ffffff; -fx-border-color: #EBECF0; -fx-border-width: 10;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" wrapText="true" HBox.hgrow="ALWAYS">
+        <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" wrapText="true" HBox.hgrow="ALWAYS">
          <font>
-            <Font name="Comic Sans MS" size="11.0" />
+            <Font name="Comic Sans MS Bold" size="9.0" />
          </font></Label>
         <ImageView fx:id="displayPicture" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
     </children>
