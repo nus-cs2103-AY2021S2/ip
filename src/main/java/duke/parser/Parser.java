@@ -10,6 +10,7 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.PrintCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -149,6 +150,8 @@ public class Parser {
             } catch (DukeException ex) {
                 return new PrintCommand(ex.getMessage());
             }
+        case SORT:
+            return new SortCommand();
         default:
             return new PrintCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

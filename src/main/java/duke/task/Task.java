@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task. A <code>Task</code> consist of
  * name, type (todo, event, deadline), status and deadline (if applicable).
@@ -79,5 +81,9 @@ public class Task {
                 "T",
                 isDone ? "1" : 0,
                 this.name);
+    }
+
+    public LocalDate getDate() {
+        return null;
     }
 }

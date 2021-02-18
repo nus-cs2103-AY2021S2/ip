@@ -30,6 +30,7 @@ public class Deadline extends Task {
      * Getter method for date
      * @return
      */
+    @Override
     public LocalDate getDate() {
         return date;
     }
