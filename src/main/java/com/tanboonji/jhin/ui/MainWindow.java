@@ -51,10 +51,10 @@ public class MainWindow extends AnchorPane {
         this.jhin = jhin;
         try {
             String response = this.jhin.initialise();
-            dialogContainer.getChildren().add(DialogBox.getJhinDialog(response, jhinImage));
+            addJhinDialog(response, false);
         } catch (JhinException e) {
-            dialogContainer.getChildren().add(DialogBox.getJhinDialog(e.getMessage(), errorImage));
-            dialogContainer.getChildren().add(DialogBox.getJhinDialog(RESTART_MESSAGE, errorImage));
+            addJhinDialog(e.getMessage(), true);
+            addJhinDialog(RESTART_MESSAGE, true);
             forceShutdown(SEVEN_SECOND);
         }
     }
@@ -65,26 +65,42 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
 
         String response;
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        addUserDialog(input);
         try {
             response = jhin.getResponse(input);
-            dialogContainer.getChildren().add(DialogBox.getJhinDialog(response, jhinImage));
+            addJhinDialog(response, false);
         } catch (JhinException e) {
             response = e.getMessage();
-            dialogContainer.getChildren().add(DialogBox.getJhinDialog(response, errorImage));
+            addJhinDialog(response, true);
         }
         userInput.clear();
-
-        scrollPane.applyCss();
-        scrollPane.layout();
-        scrollPane.setVvalue(scrollPane.getVmax());
+        scrollToBottom();
 
         if (jhin.isShuttingDown()) {
             forceShutdown(TWO_SECOND);
         }
+    }
+
+    private void addJhinDialog(String message, boolean error) {
+        if (error) {
+            dialogContainer.getChildren().add(DialogBox.getJhinDialog(message, errorImage));
+            return;
+        }
+
+        dialogContainer.getChildren().add(DialogBox.getJhinDialog(message, jhinImage));
+    }
+
+    private void addUserDialog(String message) {
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(message, userImage));
+    }
+
+    private void scrollToBottom() {
+        scrollPane.applyCss();
+        scrollPane.layout();
+        scrollPane.setVvalue(scrollPane.getVmax());
     }
 
     private void forceShutdown(int time) {
