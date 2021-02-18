@@ -13,7 +13,7 @@ public abstract class Command {
      * based on the action that was performed.
      *
      * @param taskManager TaskManager object to perform the action on.
-     * @return String response of the action that was taken.
+     * @return String response of the action that was performed.
      * @throws DukeException Whenever the supplied action cannot be performed on
      *                       the given
      */
@@ -23,7 +23,7 @@ public abstract class Command {
      * Indicates if the Command object should signal to the application that the
      * user wants to terminate it.
      *
-     * @return True, if the Command should telll the application to end.
+     * @return True, if the Command should tell the application to end.
      */
     public boolean isQuitCommand() {
         return false;
