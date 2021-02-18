@@ -1,6 +1,6 @@
-<div align="center">
-  <img src="/images/ApplicationIcon.png"/>
-</div>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tanboonji/ip/master/docs/images/ApplicationIcon.png" alt="Application Icon"/>
+</p>
 
 # User Guide
 
@@ -10,8 +10,6 @@ optimized for use via a **Command Line Interface (CLI)** while still having the 
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Terminology Used](#terminology-used)
-  * [Feature List](#feature-list)
     * [Listing all tasks: `list`, `ls`](#listing-all-tasks-list-ls)
     * [Adding a todo task: `todo`](#adding-a-todo-task-todo)
     * [Adding a deadline task: `deadline`](#adding-a-deadline-task-deadline)
@@ -39,32 +37,15 @@ optimized for use via a **Command Line Interface (CLI)** while still having the 
 3. Copy the jar file to the folder you want to use as the **home folder** for your Jhin.
 4. Double-click the jar file to start Jhin. The GUI similar to the below should appear in a few seconds.
 
-<div>
-  <img src="Startup.png"/>
-</div>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tanboonji/ip/master/docs/images/Startup.png" alt="Startup Screenshot"/>
+</p>
 
 ## Features
-
-### Terminology Used
 
 * `[COMMAND1, COMMAND2]`: The command can be executed with either `COMMAND1` or `COMMAND2`.
 * `<VALUE>`: This command arguments is compulsory.
 * `{VALUE}`: This command arguments is optional.
-
-### Feature List
-
-* [Listing all tasks: `list`, `ls`](#listing-all-tasks-list-ls)
-* [Adding a todo task: `todo`](#adding-a-todo-task-todo)
-* [Adding a deadline task: `deadline`](#adding-a-deadline-task-deadline)
-* [Adding an event task: `event`](#adding-an-event-task-event)
-* [Marking a task as done: `done`](#marking-a-task-as-done-done)
-* [Deleting a task: `delete`, `rm`](#deleting-a-task-delete-rm)
-* [Finding a task by description: `find`, `search`](#finding-a-task-by-description-find-search)
-* [Listing all command aliases: `listalias`, `lsalias`](#listing-all-command-aliases-listalias-lsalias)
-* [Adding a command alias: `alias`](#adding-a-command-alias-alias)
-* [Deleting a command alias: `deletealias`, `rmalias`](#deleting-a-command-alias-deletealias-rmalias)
-* [Viewing help: `help`](#viewing-help-help)
-* [Exiting the application: `bye`, `exit`](#exiting-the-application-bye-exit)
 
 ### Listing all tasks: `list`, `ls`
 
