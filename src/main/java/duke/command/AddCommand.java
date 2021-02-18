@@ -13,7 +13,8 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for the AddCommand class.
-     * @param taskToAdd a Task object to be added
+     *
+     * @param taskToAdd a Task object to be added.
      */
     public AddCommand(Task taskToAdd) {
         this.taskToAdd = taskToAdd;
@@ -21,7 +22,8 @@ public class AddCommand extends Command {
 
     /**
      * Executes the action of adding the task.
-     * @return the corresponding results to be printed to user
+     *
+     * @return the corresponding results to be printed to user.
      */
     @Override
     public String[] execute() {

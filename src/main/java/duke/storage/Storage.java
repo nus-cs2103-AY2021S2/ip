@@ -18,33 +18,35 @@ import duke.tasks.TaskList;
  */
 public class Storage {
     private static TaskList taskList;
-    private static String rootProject = System.getProperty("user.dir");
+    private static final String PROJECT_ROOT = System.getProperty("user.dir");
     private static Path dataFilePath =
-        Paths.get(rootProject, "data", "duke.txt");
+        Paths.get(PROJECT_ROOT, "data", "duke.txt");
     private static Path dataFolderPath =
-        Paths.get(rootProject, "data");
+        Paths.get(PROJECT_ROOT, "data");
 
     /**
-     * Initializes the storage class
-     * @throws DukeException when an error happens when loading data from storage
+     * Initializes the storage class.
+     *
+     * @throws DukeException when an error happens when loading data from storage.
      */
     public Storage() throws DukeException {
         init();
     }
 
     private static void init() throws DukeException {
-        storageExistOrCreate();
-        taskList = loadTaskListFromStorage();
+        createStorageIfNotPresent();
+        taskList = getTaskListFromStorage();
     }
 
-    private static TaskList loadTaskListFromStorage() throws DukeException {
-        ArrayList<Task> tasks = loadDataFromStorage(dataFilePath);
+    private static TaskList getTaskListFromStorage() throws DukeException {
+        ArrayList<Task> tasks = getTasksStored(dataFilePath);
         return new TaskList(tasks);
     }
 
     /**
      * Saves the current task list into storage, used by the public.
-     * @throws DukeException when an error occurs while saving data, eg. no access rights
+     *
+     * @throws DukeException when an error occurs while saving data, eg. no access rights.
      */
     public static void saveDataToStorage() throws DukeException {
         ArrayList<Task> tasks = taskList.getAllTasks();
@@ -55,36 +57,43 @@ public class Storage {
         try {
             ArrayList<String> tasksInfoToStore = new ArrayList<>();
             for (Task task : tasks) {
-                tasksInfoToStore.add(task.infoToStore());
+                tasksInfoToStore.add(task.getTaskInfoToStore());
             }
             Files.write(filePath, tasksInfoToStore);
         } catch (IOException e) {
             throw new DukeException("error in saving data."
-                + System.lineSeparator()
-                + "      " + e);
+                    + System.lineSeparator()
+                    + "      " + e);
         }
     }
 
-    private static ArrayList<Task> loadDataFromStorage(Path filePath) throws DukeException {
+    private static ArrayList<Task> getTasksStored(Path filePath) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
+
         try {
-            BufferedReader br = Files.newBufferedReader(filePath);
-            String taskInfoInString;
-            while ((taskInfoInString = br.readLine()) != null) {
-                Task task = Parser.stringToTask(taskInfoInString);
-                if (task != null) {
-                    tasks.add(task);
-                }
-            }
+            loadDataFromStorage(filePath, tasks);
         } catch (IOException e) {
             throw new DukeException("error when loading Data. Closing..."
-                + System.lineSeparator()
-                + "      " + e);
+                    + System.lineSeparator()
+                    + "      " + e);
         }
+
         return tasks;
     }
 
-    private static void storageExistOrCreate() throws DukeException {
+    private static void loadDataFromStorage(Path filePath, ArrayList<Task> tasks)
+            throws IOException, DukeException {
+        BufferedReader br = Files.newBufferedReader(filePath);
+        String taskInfoInString;
+        while ((taskInfoInString = br.readLine()) != null) {
+            Task task = Parser.getTaskFromTaskInfo(taskInfoInString);
+            if (task != null) {
+                tasks.add(task);
+            }
+        }
+    }
+
+    private static void createStorageIfNotPresent() throws DukeException {
         try {
             if (Files.notExists(dataFilePath)) {
                 if (Files.notExists(dataFolderPath)) {
@@ -94,8 +103,8 @@ public class Storage {
             }
         } catch (IOException e) {
             throw new DukeException("Unable to access data stored, access rights issue. Closing..."
-                + System.lineSeparator()
-                + "      " + e);
+                    + System.lineSeparator()
+                    + "      " + e);
         }
     }
 }

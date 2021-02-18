@@ -13,7 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow.
+ * Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -38,15 +39,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Completes the init of duke object by loading Ui and storage
-     * This can be improved to follow OOP better
-     * @param d duke object created from Main class
+     * Completes the init of duke object by loading Ui and storage.
+     * This can be improved to follow OOP better.
+     *
+     * @param duke duke object created from Main class.
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
         try {
-            d.loadUiAndStorage();
-            printResponse(d.getGreetMessage());
+            duke.loadUiAndStorage();
+            printResponse(duke.getGreetMessage());
         } catch (DukeException e) {
             String message = e.getMessage() + "\n"
                 + "Closing...";
@@ -55,25 +57,35 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, and clears the user input after processing.
+     * One echoing user input and the other containing Duke's reply and then appends them to the dialog container.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        boolean isExitCalled = input.equalsIgnoreCase("bye");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        if (input.equalsIgnoreCase("bye")) {
-            new Timer().schedule(new TimerTask() {
-                public void run () {
-                    System.exit(0);
-                }
-            }, 1500);
+
+        if (isExitCalled) {
+            exit();
         }
         userInput.clear();
+    }
+
+    /**
+     * Exits program for GUI.
+     * Delays the closing of GUI for 1.5 seconds so that users can see the exit message.
+     */
+    private void exit() {
+        new Timer().schedule(new TimerTask() {
+            public void run () {
+                System.exit(0);
+            }
+        }, 1500);
     }
 
     @FXML

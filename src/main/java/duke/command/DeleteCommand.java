@@ -12,7 +12,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for the DeleteCommand class.
-     * @param taskIndexToDelete an index for the Task object to be deleted
+     *
+     * @param taskIndexToDelete an index for the Task object to be deleted.
      */
     public DeleteCommand(int taskIndexToDelete) {
         this.taskIndexToDelete = taskIndexToDelete;
@@ -20,7 +21,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the action of deleting the task.
-     * @return the corresponding results to be printed to user
+     *
+     * @return the corresponding results to be printed to user.
      */
     @Override
     public String[] execute() {

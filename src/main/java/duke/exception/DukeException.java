@@ -6,7 +6,8 @@ package duke.exception;
 public class DukeException extends Exception {
     /**
      * Constructor.
-     * @param errorMessage specific error message for the exception created
+     *
+     * @param errorMessage specific error message for the exception created.
      */
     public DukeException(String errorMessage) {
         super("Oh no :( " + errorMessage);

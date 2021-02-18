@@ -12,7 +12,8 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for the DoneCommand class.
-     * @param taskIndexToComplete an index for the Task object to be done
+     *
+     * @param taskIndexToComplete an index for the Task object to be done.
      */
     public DoneCommand(int taskIndexToComplete) {
         this.taskIndexToComplete = taskIndexToComplete;
@@ -20,7 +21,8 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the action of completing the task.
-     * @return the corresponding results to be printed to user
+     *
+     * @return the corresponding results to be printed to user.
      */
     @Override
     public String[] execute() {
