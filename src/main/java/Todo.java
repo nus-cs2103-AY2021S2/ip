@@ -1,5 +1,7 @@
+/**
+ * Defines a task of type todo.
+ */
 public class Todo extends Task {
-
 
     /**
      * Constructs todo object.
@@ -11,7 +13,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Formats string to be stored.
+     * Formats string to the save format.
      *
      * @return Formatted String.
      */

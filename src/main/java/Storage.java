@@ -11,9 +11,18 @@ import java.util.List;
 
 public class Storage {
 
-    private static ArrayList<Task> data;
+    /**
+     * Hard coded path for file.
+     */
     private static final Path fileLocation = Paths.get("./data", "duke.txt");
+    /**
+     * Hard coded path for directory.
+     */
     private static final Path directoryLocation = Paths.get("./data");
+    /**
+     * Data retrieved from file.
+     */
+    private static ArrayList<Task> data;
 
     private static void createFile() {
         try {
@@ -43,6 +52,31 @@ public class Storage {
 
     }
 
+    private static void convertDataToTask(List<Task> tasks, String task) {
+        String typeOfTask = Parser.parseTypeOfTask(task);
+        String isDone = Parser.parseCompletionStatus(task);
+        String name = Parser.parseName(task);
+        LocalDateTime time = Parser.parseTime(task);
+        if (typeOfTask.equals("T")) {
+            tasks.add(new Todo(name));
+            if (isDone.equals("1")) {
+                tasks.get(tasks.size() - 1).isDone = true;
+            }
+        }
+        if (typeOfTask.equals("D")) {
+            tasks.add(new Deadline(name, time));
+            if (isDone.equals("1")) {
+                tasks.get(tasks.size() - 1).isDone = true;
+            }
+        }
+        if (typeOfTask.equals("E")) {
+            tasks.add(new Event(name, time));
+            if (isDone.equals("1")) {
+                tasks.get(tasks.size() - 1).isDone = true;
+            }
+        }
+    }
+
     /**
      * Reads the data file and creates tasks.
      *
@@ -56,28 +90,7 @@ public class Storage {
                     .map(task -> task.trim())
                     .filter(task -> !task.isEmpty())
                     .forEach(task -> {
-                        String typeOfTask = Parser.parseTypeOfTask(task);
-                        String isDone = Parser.parseCompletionStatus(task);
-                        String name = Parser.parseName(task);
-                        LocalDateTime time = Parser.parseTime(task);
-                        if (typeOfTask.equals("T")) {
-                            tasks.add(new Todo(name));
-                            if (isDone.equals("1")) {
-                                tasks.get(tasks.size() - 1).isDone = true;
-                            }
-                        }
-                        if (typeOfTask.equals("D")) {
-                            tasks.add(new Deadline(name, time));
-                            if (isDone.equals("1")) {
-                                tasks.get(tasks.size() - 1).isDone = true;
-                            }
-                        }
-                        if (typeOfTask.equals("E")) {
-                            tasks.add(new Event(name, time));
-                            if (isDone.equals("1")) {
-                                tasks.get(tasks.size() - 1).isDone = true;
-                            }
-                        }
+                        convertDataToTask(tasks, task);
                     });
         } catch (IOException e) {
             throw new UnableToLoadDataException();
@@ -124,7 +137,7 @@ public class Storage {
             try {
                 data = getDataFromFile();
             } catch (UnableToLoadDataException er) {
-                Ui.printUnableToLoadDataMessage();
+                Ui.getUnableToLoadDataMessage();
             }
         }
         return data;

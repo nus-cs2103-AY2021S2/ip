@@ -6,7 +6,6 @@ public class Event extends Task {
 
     protected LocalDateTime at;
 
-
     /**
      * Constructs event object.
      *

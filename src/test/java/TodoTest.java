@@ -1,22 +1,23 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
     public void TodoTestOne() {
-        assertEquals("T | 0 | finish project",new Todo("finish project").getSaveString());
+        assertEquals("T | 0 | finish project", new Todo("finish project").getSaveString());
     }
 
     @Test
     public void TodoTestFour() {
         Task todo = new Todo("finish project");
         todo.markAsDone();
-        assertEquals("T | 1 | finish project",todo.getSaveString());
+        assertEquals("T | 1 | finish project", todo.getSaveString());
     }
 
     @Test
     public void TodoTestTwo() {
-        assertEquals("[T][ ] finish project",new Todo("finish project").toString());
+        assertEquals("[T][ ] finish project", new Todo("finish project").toString());
     }
 
     @Test
