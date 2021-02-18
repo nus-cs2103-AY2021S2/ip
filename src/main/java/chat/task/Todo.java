@@ -1,6 +1,5 @@
 package chat.task;
 
-import chat.Chat;
 import chat.ChatException;
 
 /**

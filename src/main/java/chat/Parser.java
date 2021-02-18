@@ -39,7 +39,7 @@ public class Parser {
         } else {
             throw new ChatException("Sorry this instruction does not exist!\n" +
                     "Please choose from the following: " +
-                    "todo, deadline, event, done, list, bye");
+                    "todo, deadline, event, done, find, list, bye");
         }
     }
     
