@@ -17,7 +17,7 @@ public class Duke  {
 
     private Storage storage = new Storage();
     private TaskList tasks = new TaskList();
-    private Ui ui = new Ui();
+    private Ui ui;
     private Parser parser = new Parser();
     private Image user = new Image(this.getClass().getResourceAsStream("/images/img.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/img_1.png"));
@@ -28,8 +28,11 @@ public class Duke  {
     private Scene scene;
 
     public Duke() {
+        ui =  new Ui();
+        assert ui != null : "error initializing ui";
         try {
             tasks = new TaskList(storage.load());
+            assert tasks != null : "error initializing tasks";
         }
         catch(IOException | EmptyArgumentException e) {
             ui.showLoadingError();
