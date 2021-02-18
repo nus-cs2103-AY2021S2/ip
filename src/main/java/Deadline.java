@@ -10,7 +10,7 @@ public class Deadline extends Task {
     Deadline(String name, String deadLine) throws DukeTimingException {
         super(name);
         List<String> formatterStrings = Arrays.asList("yyyy-M-dd", "yyyy M dd", "yyyy/M/dd",
-                "M dd YYYY", "yyyy M dd");
+                "M dd YYYY");
         for (String formatterString : formatterStrings) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);
@@ -32,7 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageString() {
-        return "D|" + super.toStorageString() + "|"
+        return "D|" + super.toStorageString()
                 + this.deadline.format(DateTimeFormatter.ofPattern("yyyy-M-dd"));
     }
 }

@@ -11,7 +11,7 @@ public class Event extends Task {
     Event(String name, String timing) throws DukeTimingException {
         super(name);
         List<String> formatterStrings = Arrays.asList("yyyy-M-dd", "yyyy M dd", "yyyy/M/dd",
-                "M dd YYYY", "yyyy M dd");
+                "M dd YYYY");
         for (String formatterString : formatterStrings) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formatterString);

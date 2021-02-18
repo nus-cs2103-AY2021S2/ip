@@ -11,11 +11,14 @@ public class Parser {
      */
     public static ParserOutput parse(String rawIn) throws DukeDescriptionException,
             DukeTimingException, DukeNotFoundException {
-        String joined = "";
+        StringBuilder joined = new StringBuilder();
         String timing = "";
-        String[] input = rawIn.split(" ");
+        String[] input = rawIn.strip().split(" ");
         if (rawIn.contains("|")) {
             return pipeParse(rawIn);
+        }
+        if (!Parser.checkInput(input[0], input.length)){
+            throw new DukeNotFoundException();
         }
         if (rawIn.equals("bye")) {
             return ParserOutput.byeOutput();
@@ -30,13 +33,13 @@ public class Parser {
                 return ParserOutput.doneOutput(itemToBeUpdatedIndex);
             case "todo":
                 for (int i = 1; i < input.length; i++) {
-                    joined = joined + " " + input[i];
+                    joined.append(" ").append(input[i]);
                 }
-                return ParserOutput.addOutput(new Todo(joined));
+                return ParserOutput.addOutput(new Todo(joined.toString()));
             case "deadline":
                 int seq = 0;
                 while (!input[seq].equals("/by")) {
-                    joined = joined + " " + input[seq];
+                    joined.append(" ").append(input[seq]);
                     seq++;
                     if (seq == input.length) {
                         throw new DukeDescriptionException(input[0]);
@@ -49,11 +52,11 @@ public class Parser {
                 for (int i = seq + 1; i < input.length; i++) {
                     timing = timing + " " + input[i];
                 }
-                return ParserOutput.addOutput(new Deadline(joined, timing.trim()));
+                return ParserOutput.addOutput(new Deadline(joined.toString(), timing.trim()));
             case "event":
                 int seq2 = 0;
                 while (!input[seq2].equals("/at")) {
-                    joined = joined + " " + input[seq2];
+                    joined.append(" ").append(input[seq2]);
                     seq2++;
                     if (seq2 == input.length) {
                         throw new DukeDescriptionException(input[0]);
@@ -67,17 +70,27 @@ public class Parser {
                 for (int i = seq2 + 1; i < input.length; i++) {
                     timing = timing + " " + input[i];
                 }
-                return ParserOutput.addOutput(new Event(joined, timing.trim()));
+                return ParserOutput.addOutput(new Event(joined.toString(), timing.trim()));
             case "delete":
                 return ParserOutput.removeOutput(Integer.parseInt(input[1]));
             case "find":
-                return ParserOutput.findOutput(input[1]);
+                for (int i = 1; i < input.length; i++) {
+                    joined.append(input[i]).append(" ");
+                }
+                return ParserOutput.findOutput(joined.toString().strip());
             default:
                 throw new DukeNotFoundException();
             }
         }
     }
 
+    private static boolean checkInput(String command, int length) {
+        if (!command.equals("all") && !command.equals("list") && !command.equals("bye")) {
+            return length > 1;
+        } else {
+            return length == 1;
+        }
+    }
     private static ParserOutput pipeParse(String rawIn) throws DukeTimingException,
             DukeDescriptionException, DukeNotFoundException {
         String[] inputs = rawIn.split("\\|");
@@ -89,7 +102,7 @@ public class Parser {
         System.out.println(rawIn);
         if (nextAction.equals("done")) {
             return ParserOutput.pipeOutput(firstPart, 2);
-        } else if (nextAction.equals("remove")) {
+        } else if (nextAction.equals("delete")) {
             return ParserOutput.pipeOutput(firstPart, 1);
         } else {
             throw new DukeNotFoundException();
