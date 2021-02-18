@@ -37,6 +37,8 @@ public class Parser {
         String[] userInputArr = userInput.split(" ");
         Pattern pattern;
         Matcher matcher;
+        DateTimeFormatter format;
+        LocalDateTime dateTimeObject;
 
         switch (userInputArr[0].toLowerCase()) {
         case BYE_COMMAND:
@@ -46,87 +48,68 @@ public class Parser {
             return new ListCommand();
 
         case DONE_COMMAND:
-            try {
-                int taskIndexToDone = Integer.parseInt(userInputArr[1]);
-                if (taskIndexToDone <= 0) {
-                    throw new NumberFormatException();
-                }
-                return new DoneCommand(taskIndexToDone);
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            pattern = Pattern.compile("(?i)done (\\d+)");
+            matcher = pattern.matcher(userInput);
+            if (!matcher.find() || Integer.parseInt(matcher.group(1)) <= 0 ) {
                 errMsg = " ☹ OOPS!!! Input does not match Done command format. eg.\n"
-                                + "   Done <index of task to mark completed>";
+                        + "   Done <index of task to mark completed>";
+                break;
             }
-            break;
+            int taskIndexToDone = Integer.parseInt(matcher.group(1));
+            return new DoneCommand(taskIndexToDone);
 
         case TODO_COMMAND:
             pattern = Pattern.compile("(?i)todo (.+)");
             matcher = pattern.matcher(userInput);
             if (!matcher.find()) {
-                errMsg = " ☹ OOPS!!! Input does not match Todo command format. eg.\n"
-                        + "   todo <description>";
+                errMsg = " ☹ OOPS!!! Input does not match Todo command format. eg.\n   todo <description>";
                 break;
             }
             return new TodoCommand(matcher.group(1));
 
         case EVENT_COMMAND:
-            try {
-                pattern = Pattern.compile("(?i)event (.+) /at (\\d?\\d-\\d\\d-\\d\\d\\d\\d \\d?\\d:\\d\\d)");
-                matcher = pattern.matcher(userInput);
-
-                matcher.find();
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                LocalDateTime dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
-
-                return new EventCommand(matcher.group(1), dateTimeObject);
-            } catch (IllegalStateException e) {
+            pattern = Pattern.compile("(?i)event (.+) /at (\\d?\\d-\\d\\d-\\d\\d\\d\\d \\d?\\d:\\d\\d)");
+            matcher = pattern.matcher(userInput);
+            if (!matcher.find()) {
                 errMsg = " ☹ OOPS!!! Input does not match Event command format. eg.\n"
-                                + "   event <description> /at <dd-MM-yyyy> <hh:mm>";
+                        + "   event <description> /at <dd-MM-yyyy> <hh:mm>";
+                break;
             }
-            break;
+            format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
+            return new EventCommand(matcher.group(1), dateTimeObject);
 
         case DEADLINE_COMMAND:
-            try {
-                pattern = Pattern.compile("(?i)deadline (.+) /by (\\d?\\d-\\d\\d-\\d\\d\\d\\d \\d?\\d:\\d\\d)");
-                matcher = pattern.matcher(userInput);
-
-                matcher.find();
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                LocalDateTime dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
-
-                return new DeadlineCommand(matcher.group(1), dateTimeObject);
-            } catch (IllegalStateException e) {
+            pattern = Pattern.compile("(?i)deadline (.+) /by (\\d?\\d-\\d\\d-\\d\\d\\d\\d \\d?\\d:\\d\\d)");
+            matcher = pattern.matcher(userInput);
+            if (!matcher.find()) {
                 errMsg = " ☹ OOPS!!! Input does not match Deadline command format. eg.\n"
-                                + "   deadline <description> /by <deadline>";
+                        + "   deadline <description> /by <deadline>";
+                break;
             }
-            break;
+            format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
+            return new DeadlineCommand(matcher.group(1), dateTimeObject);
 
         case DELETE_COMMAND:
-            int taskIndexToDelete = 0;
-            try {
-                taskIndexToDelete = Integer.parseInt(userInputArr[1]);
-                if (taskIndexToDelete <= 0) {
-                    throw new NumberFormatException();
-                }
-                return new DeleteCommand(taskIndexToDelete);
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            pattern = Pattern.compile("(?i)delete (\\d+)");
+            matcher = pattern.matcher(userInput);
+            if (!matcher.find() || Integer.parseInt(matcher.group(1)) <= 0 ) {
                 errMsg = " ☹ OOPS!!! Input does not match Delete command format. eg.\n"
-                                + "   Delete <index of task to delete>";
+                        + "   Delete <index of task to delete>";
+                break;
             }
-            break;
+            int taskIndexToDelete = Integer.parseInt(matcher.group(1));
+            return new DeleteCommand(taskIndexToDelete);
 
         case FIND_COMMAND:
-            try {
-                pattern = Pattern.compile("(?i)find (.+)");
-                matcher = pattern.matcher(userInput);
-
-                matcher.find();
-
-                return new FindCommand(matcher.group(1));
-            } catch (IllegalStateException e) {
-                errMsg = " ☹ OOPS!!! Input does not match Find command format. eg.\n"
-                                + "   find <keyword> ";
+            pattern = Pattern.compile("(?i)find (.+)");
+            matcher = pattern.matcher(userInput);
+            if (!matcher.find()) {
+                errMsg = " ☹ OOPS!!! Input does not match Find command format. eg.\n   find <keyword> ";
+                break;
             }
-            break;
+            return new FindCommand(matcher.group(1));
 
         default:
             errMsg = " OOPS!!! I'm sorry, but I don't know what that means :-(";
