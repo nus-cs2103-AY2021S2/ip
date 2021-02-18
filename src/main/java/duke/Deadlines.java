@@ -21,12 +21,13 @@ public class Deadlines extends Task {
      * Returns the deadline of the task as a LocalDate Object
      * @return LocalDate object
      */
-    public LocalDate getBy() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

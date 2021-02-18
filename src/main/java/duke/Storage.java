@@ -58,9 +58,9 @@ public class Storage {
                     }
                 } else {
                     if (curr.isTaskDone()) {
-                        fw.write("D|1|" + curr.getTaskName() + "|" + ((Deadlines) curr).getBy() + "\n");
+                        fw.write("D|1|" + curr.getTaskName() + "|" + ((Deadlines) curr).getDeadline() + "\n");
                     } else {
-                        fw.write("D|0|" + curr.getTaskName() + "|" + ((Deadlines) curr).getBy() + "\n");
+                        fw.write("D|0|" + curr.getTaskName() + "|" + ((Deadlines) curr).getDeadline() + "\n");
                     }
                 }
             }
