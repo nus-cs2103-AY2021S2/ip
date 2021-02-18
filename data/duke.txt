@@ -1,2 +1,1 @@
-E|1|another world|12/11/2046 2200
-T|0|hello world
+E|1|new event|21/04/2313 1500

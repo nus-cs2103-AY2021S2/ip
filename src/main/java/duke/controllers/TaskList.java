@@ -191,7 +191,7 @@ public class TaskList {
             throw new DukeBlankTaskException("Please enter a task description to update your current task");
         }
 
-        Optional<? extends Todo> updatedTodo;
+        Optional<? extends Todo> updatedTodo = Optional.empty();
         // do stateful operation of returning a new object depending on what type it is and what flag was used
         try {
             updatedTodo = todoToUpdate.map(todo -> {
@@ -237,9 +237,10 @@ public class TaskList {
             }
         }
 
+        Optional<? extends Todo> finalUpdatedTodo = updatedTodo;
         return new Pair<>(new TaskList(IntStream.range(0, this.todos.size())
                 .mapToObj(idx -> idx == idxToUpdate
-                        ? updatedTodo
+                        ? finalUpdatedTodo
                         : this.todos.get(idx))
                 .collect(Collectors.toList())), updatedTodo);
     }

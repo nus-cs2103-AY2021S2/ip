@@ -4,6 +4,9 @@ import duke.controllers.Ui;
 import duke.models.Storage;
 import duke.views.Greeting;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Duke {
     /** Storage object to be passed to AppController for reading / writing to db */
     private final Storage storage;
@@ -29,6 +32,15 @@ public class Duke {
      * @return output from user input provided from front-end basaed on Duke logic
      */
     public String getResponse(String input) {
+        // if input is bye, close after 0.5s
+        if (input.equals("bye")) {
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 500);
+        }
         return ui.respondToInput(input);
     }
 
