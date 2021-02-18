@@ -2,11 +2,18 @@ package duke.ui;
 
 import duke.Duke;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 
 public class MainWindow extends AnchorPane {
@@ -24,10 +31,24 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/Background.png"));
+    private Image sendIconImage = new Image(this.getClass().getResourceAsStream("/images/SendIcon.png"));
 
+    /**
+     * Initialises the main window
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        BackgroundImage background = new BackgroundImage(backgroundImage,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        dialogContainer.setBackground(new Background(background));
+        sendButton.setPadding(Insets.EMPTY);
+        ImageView sendIconView = new ImageView(sendIconImage);
+        sendIconView.setFitWidth(25);
+        sendIconView.setFitHeight(25);
+        sendButton.setGraphic(sendIconView);
     }
 
     public void setDuke(Duke d) {
