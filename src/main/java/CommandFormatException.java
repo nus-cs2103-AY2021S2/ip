@@ -13,6 +13,6 @@ public class CommandFormatException extends MayaException {
      * @param message a String representation of the custom error message.
      */
     public CommandFormatException(String message) {
-        super("The command you have entered did not follow the format. Please try again!");
+        super(message);
     }
 }

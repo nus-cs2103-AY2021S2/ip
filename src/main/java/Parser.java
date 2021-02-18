@@ -7,82 +7,46 @@ public class Parser {
      * to carry out different functions according to the command argument.
      *
      * @param command user input
-     * @param ui Ui object
-     * @param taskList TaskList object.
-     * @param storage Storage object.
      * @throws MayaException if command is not supported by Maya.
      * @throws IOException if null is supplied to Storage or if file is not found.
      */
-    static String parse(String command, Ui ui, TaskList taskList, Storage storage)
-            throws MayaException, IOException {
+    static String parse(String command, CommandHandler commandHandler) throws MayaException, IOException {
         switch(parseCommand(command)) {
         case "bye":
-            return ui.showBye();
+            return commandHandler.handleByeCommand();
         case "list":
-            return ui.showList(taskList.getList(), false);
+            return commandHandler.handleListCommand();
         case "done":
             // To get the index
             int index = Integer.parseInt(getDescription(command));
-            Task doneTask = taskList.markTaskAsDone(index);
-            storage.writeToFile(taskList.getList());
-            return ui.showDone(doneTask);
-//            return handleDoneCommand(command, ui, taskList, storage);
+            return commandHandler.handleDoneCommand(index);
         case "todo":
-            String name = getDescription(command);
-                String[] split = name.split("/p", 2);
-                if (split.length < 2) {
-                    throw  new CommandFormatException();
-                }
+            String todoName = getDescription(command);
+            String[] todoSplitArr = splitByRegex(todoName, "/p");
 
-                Todo todo = new Todo(split[0].trim(), split[1].trim());
-                Task newTask = taskList.addTask(todo);
-                storage.appendToFile(todo);
-                return ui.showAddTask(newTask, taskList.getListSize());
+            return commandHandler.handleTaskCommand("todo", todoSplitArr[0].trim(),
+                    todoSplitArr[1].trim(), "");
         case "deadline":
-            String desc = getDescription(command);
-                String[] split = desc.split("/by", 2);
-                if (split.length < 2) {
-                    throw  new CommandFormatException();
-                }
+            String deadlineName = getDescription(command);
+            String[] deadlineBySplitArr = splitByRegex(deadlineName, "/by");
+            String[] deadlinePrioritySplitArr = splitByRegex(deadlineBySplitArr[1], "/p");
 
-                String[] split2 = split[1].split("/p", 2);
-                if (split2.length < 2) {
-                    throw  new CommandFormatException();
-                }
-
-                Deadline deadline = new Deadline(split[0].trim(), split2[0].trim(), split2[1].trim());
-                Task newTask = taskList.addTask(deadline);
-                storage.appendToFile(deadline);
-                return ui.showAddTask(newTask, taskList.getListSize());
+            return  commandHandler.handleTaskCommand("deadline", deadlineBySplitArr[0].trim(),
+                    deadlinePrioritySplitArr[1].trim(), deadlinePrioritySplitArr[0].trim());
         case "event":
-            String description = getDescription(command);
-                String[] split = description.split("/at", 2);
-                if (split.length < 2) {
-                    throw  new CommandFormatException();
-                }
+            String eventName = getDescription(command);
+            String[] eventBySplitArr = splitByRegex(eventName, "/at");
+            String[] eventPrioritySplitArr = splitByRegex(eventBySplitArr[1], "/p");
 
-                String[] split2 = split[1].split("/p", 2);
-                if (split2.length < 2) {
-                    throw  new CommandFormatException();
-                }
-
-                Event event = new Event(split[0].trim(), split2[0].trim(), split2[1].trim());
-                Task newTask = taskList.addTask(event);
-                storage.appendToFile(event);
-                return ui.showAddTask(newTask, taskList.getListSize());
+            return  commandHandler.handleTaskCommand("event", eventBySplitArr[0].trim(),
+                    eventPrioritySplitArr[1].trim(), eventPrioritySplitArr[0].trim());
         case "find":
             String searchString = getDescription(command);
-            if (!searchString.equals("")) {
-                return ui.showList(taskList.searchTask(searchString.trim()), true);
-            } else {
-                throw new CommandFormatException("    ☹ OOPS!!! The search keyword cannot be empty.");
-            }
+            return commandHandler.handleFindCommand(searchString);
         case "delete":
             // To get the index
             int i = Integer.parseInt(getDescription(command));
-            Task removedTask = taskList.removeTask(i);
-            storage.writeToFile(taskList.getList());
-            return ui.showRemoveTask(removedTask, taskList.getListSize());
+            return commandHandler.handleDeleteCommand(i);
         default:
             throw new UnknownCommandException();
         }
@@ -97,16 +61,22 @@ public class Parser {
             return command.split(" ", 2)[1];
         } catch (IndexOutOfBoundsException e) {
             String task = parseCommand(command);
-            if (task.equals("todo")) {
-                throw new CommandFormatException("☹ OOPS!!! The description of"
-                        + " a todo cannot be empty.");
-            } else if (task.equals("deadline")) {
-                throw new CommandFormatException("☹ OOPS!!! The description of"
-                        + " a deadline cannot be empty.");
+            if (task.equals("find")) {
+                throw new CommandFormatException("☹ OOPS!!! The search keyword cannot be empty.");
             } else {
-                throw new CommandFormatException("☹ OOPS!!! The description of"
-                        + " an event cannot be empty.");
+                throw new CommandFormatException("☹ OOPS!!! The description of " + task
+                        + " cannot be empty.");
             }
         }
+    }
+
+    static String[] splitByRegex(String text, String regex) throws CommandFormatException {
+        String[] splitArr = text.split(regex, 2);
+
+        if (splitArr.length < 2) {
+            throw new CommandFormatException();
+        }
+
+        return splitArr;
     }
 }

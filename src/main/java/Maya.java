@@ -25,6 +25,7 @@ public class Maya extends Application {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private CommandHandler commandHandler;
 
     /**
      * Initiates an object of Maya with a Ui and Storage object.
@@ -41,6 +42,8 @@ public class Maya extends Application {
                 | ArrayIndexOutOfBoundsException | IOException e) {
             System.out.println(e.getMessage());
         }
+
+        commandHandler = new CommandHandler(ui, taskList, storage);
     }
 
     @Override
@@ -139,7 +142,7 @@ public class Maya extends Application {
      */
     public String getResponse(String input) {
         try {
-            return Parser.parse(input, ui, taskList, storage);
+            return Parser.parse(input, commandHandler);
         } catch (MayaException | IOException e) {
             return e.getMessage();
         }
@@ -160,7 +163,7 @@ public class Maya extends Application {
                 String command = sc.next();
                 ui.showLine();
 
-                System.out.println(Parser.parse(command, ui, taskList, storage));
+                System.out.println(Parser.parse(command, commandHandler));
 
                 // To exit the program with the command "bye"
                 if (command.equals("bye")) {
