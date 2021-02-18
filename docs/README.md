@@ -9,21 +9,15 @@ Juke is a command-line based Task Manager application. A user will type a series
 
 ## Content Page
 Here is an overview of the commands that Juke supports and a user can input.
-- [Juke Bot User Guide](#juke-bot-user-guide)
-  - [User Interface](#user-interface)
-  - [Content Page](#content-page)
-  - [Features](#features)
-    - [Task Manager](#task-manager)
-  - [Usage](#usage)
-- [`help` command](#help-command)
-    - [`todo` command](#todo-command)
-    - [`deadline` command](#deadline-command)
-    - [`event` command](#event-command)
-    - [`delete` command](#delete-command)
-    - [`find` command](#find-command)
-    - [`done` command](#done-command)
-    - [`list` command](#list-command)
-    - [`bye` command](#bye-command)
+* [`help`](#help-command)
+* [`todo`](#todo-command)
+* [`deadline`](#deadline-command)
+* [`event`](#event-command)
+* [`delete`](#delete-command)
+* [`find`](#find-command)
+* [`done`](#done-command)
+* [`list`](#list-command)
+* [`bye`](#bye-command)
 <br/><br/>
 
 
