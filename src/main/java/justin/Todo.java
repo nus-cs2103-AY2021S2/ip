@@ -3,7 +3,8 @@ package justin;
 import justin.Task;
 
 /**
- * This class creates a TOD0 class that extends
+ * This class creates a TOD0 class
+ * that extends
  * from task class
  *
  * @author Goh Wei Kiat aka github : mrweikiat
