@@ -1,8 +1,8 @@
 # duke - User Guide
-duke is a personal task tracker that stores and records your to-dos, deadlines and events.This user guide demonstrates how to set up duke and how use the basic features of duke.
+duke is a personal task tracker that stores and records your to-dos, deadlines and events.This user guide demonstrates how to set up duke and how to use the basic features of duke.
 
 ## Setting Up
-1. Extract the jar file
+1. Download the latest jar file version
 2. Open and enter in your terminal `java -jar duke.jar`
 
 
@@ -63,7 +63,7 @@ Format: `deadline <description1 description2> /by <date and time>`
 
 Example of usage:
 
-`deadline return book /by 20/02/2021 1800
+`deadline return book /by 20/02/2021 1800`
 
 Expected outcome:
 
@@ -79,11 +79,11 @@ Adds an Event task with a description of the task and the event time to the task
 time
 has to be in the following format: "event time"
 
-Format: `event <description> /at <even time>`
+Format: `event <description> /at <event time>`
 
 Example of usage:
 
-`event project meeting /at Mon 2-4pm
+`event project meeting /at Mon 2-4pm`
 
 Expected outcome:
 ```
@@ -160,7 +160,7 @@ Here are the tasks in ur list:
       3. [E][] project meeting (at:on 2-4pm)
 
 ```
-### <a id="bye"></a> 'bye' - ends the application
+### <a id="bye"></a> 'bye' - Ends the application
 Format: `bye`
 
 Example of usage:
@@ -168,5 +168,5 @@ Example of usage:
 `bye`
 
 Expected outcome:
-   Application will end and exit
+   Application will display goodbye message and exit
 
