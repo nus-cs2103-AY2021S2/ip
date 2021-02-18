@@ -17,7 +17,6 @@ public class Ui {
     Scanner sc;
 
     static String line = "-------------------------------------------------------------------------------------------";
-    
 
     public Ui() {
         sc = new Scanner(System.in);
