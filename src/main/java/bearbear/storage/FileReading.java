@@ -16,7 +16,7 @@ public class FileReading {
      * Retrieves and loads list of task stored into task list.
      * @param file The file that task information retrieved from.
      * @return Task retrieved task list.
-     * @throws IOException If error occurs while retrieving tasks from file.
+     * @throws IOException If error occurs while reading task data from file.
      */
     public static TaskList loadTask(File file) throws IOException {
         FileReader fr = new FileReader(file);

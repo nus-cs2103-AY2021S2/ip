@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import bearbear.command.Command;
+import bearbear.exceptions.StorageException;
 import bearbear.storage.Storage;
 import bearbear.tasks.TaskList;
 import bearbear.ui.MainWindow;
@@ -27,7 +28,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws StorageException {
         BearBear bot = startMain();
         assert bot != null : "There should be a BearBear object at this point";
         try {
@@ -50,20 +51,18 @@ public class Main extends Application {
      * Initializes task list from storage.
      * @return A BearBear object that manages task list operations
      */
-    public static BearBear startMain() {
+    public static BearBear startMain() throws StorageException {
         BearBear bot = null;
-        try {
-            if (!(file.createNewFile())) {
-                TaskList previous = Storage.runFile(file);
-                bot = new BearBear(previous);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        TaskList previous = Storage.runFile(file);
+
+        if (previous != null) {
+            bot = new BearBear(previous);
         }
 
         if (bot == null) {
             bot = new BearBear();
         }
+
         return bot;
     }
 
