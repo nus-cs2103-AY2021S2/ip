@@ -1,4 +1,5 @@
 # User Guide
+BearBear is a desktop task manager application done as part of the CS2103T module in NUS.
 
 ## Features 
 
