@@ -1,6 +1,9 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
+
+
 
 public class Parser {
 
@@ -17,12 +20,14 @@ public class Parser {
   /**
    * Reads in the input by the user from the commandline and processes it.
    */
-
   public String userinput(String command) throws IOException, DescriptionError {
     String input = command;
     String outputMessage = "";
     if (input.equals("bye")) {
-      System.exit(0);
+      outputMessage = ui.bye();
+      PauseTransition delay = new PauseTransition(Duration.seconds(1));
+      delay.setOnFinished(event -> Platform.exit());
+      delay.play();
     } else if (input.equals("list")) {
       outputMessage = tasklist.listTask();
     } else if (input.split(" ")[0].equals("done")) {
@@ -132,6 +137,7 @@ public class Parser {
       if (detectDuplicate(task, taskList) != 1) {
         output += "Got it. I've added this task: " + "\n";
         taskList.getTasklist().add(task);
+        output += task + "\n";
         output += "Now you have " + taskList.getTasklist().size() + " tasks in the list.";
       }
     }

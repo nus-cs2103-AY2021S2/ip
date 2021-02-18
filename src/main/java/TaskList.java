@@ -49,9 +49,8 @@ public class TaskList {
   }
 
   /**
-   * Outputs matching taks in the arraylist to a keyword
+   * Outputs matching taks in the arraylist to a keyword.
    */
-
   public String findTask(String keyword) {
     ArrayList<Task> list = new ArrayList<>();
     int i = 1;
