@@ -12,7 +12,9 @@ public class MessageGenerator {
      * Returns the welcome message when first starting duke.
      */
     public String getWelcomeMessage() {
-        return  "Hello! I'm Duke\n" + "What can I do for you?";
+        return  "Hello! I'm Duke\n" +
+                "I can help you bookmark basic tasks and events!\n" +
+                "What can I do for you?";
     }
 
 
@@ -21,6 +23,9 @@ public class MessageGenerator {
      */
 
     public static String getDisplayOfAllTasks(TaskList listOfTasks) {
+        if (listOfTasks.size() == 0) {
+            return "You have nothing on currently.";
+        }
         String output = "";
         int counter = 1;
         for (Task currentTask : listOfTasks) {

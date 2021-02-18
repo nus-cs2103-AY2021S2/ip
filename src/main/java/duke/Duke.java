@@ -25,20 +25,14 @@ public class Duke {
     private final static String STORAGE_INITIALIZATION_ERROR_MESSAGE = "Cannot Crete file duke.txt";
 
     private static Storage storage;
-    private TaskList tasks;
     private MessageGenerator messageGenerator;
+    private TaskList tasks;
     private boolean isExit = false;
 
 
-    Duke() {
+    public Duke() throws IOException {
         this.messageGenerator = new MessageGenerator();
-        try {
-            Duke.storage = initializeStorage();
-        } catch (IOException e) {
-            // cannot create the Storage
-            e.printStackTrace();
-            throw new RuntimeException(STORAGE_INITIALIZATION_ERROR_MESSAGE);
-        }
+        Duke.storage = initializeStorage();
         try {
             tasks = new TaskList(storage.loadStorage());
         } catch (DukeStorageException | DukeCommandParseException | DukeDateParseException err) {
@@ -70,9 +64,10 @@ public class Duke {
 
 
 
-    public String start(){
+    public String startMessage(){
         return messageGenerator.getWelcomeMessage();
     }
+
 
     public String getResponse(String input) {
         try {
@@ -86,8 +81,7 @@ public class Duke {
             return "OOPS!!! " + e.getMessage();
         } catch (DukeStorageException e) {
             // error saving and loading to database.
-            e.printStackTrace();
-            throw new  RuntimeException(e.getMessage());
+            return "DATABASE ERROR!" + e.getMessage();
         }
     }
 

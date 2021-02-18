@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -24,17 +27,34 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    //@author Frieda Bredesen
+    //Image DaUser.png
+    // https://unsplash.com/photos/IxlY2KB4Krs?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink
+    //@author Mark Stoop
+    // Image DaDuke.png
+    //https://unsplash.com/photos/IxlY2KB4Krs?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    //@author
+
+    private final static String LOAD_ERROR_MESSAGE = "There might be a problem with initializing the necessary" +
+            " data files in data folder, PLEASE Close the program and check the data directory";
+            ;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.start(), dukeImage));
+    public void setDuke() {
+        try {
+            duke = new Duke();
+        } catch (IOException e)  {
+            dialogContainer.getChildren().
+                    add(DialogBox.getDukeDialog(LOAD_ERROR_MESSAGE, dukeImage));
+            return;
+        }
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.startMessage(), dukeImage));
     }
 
     /**

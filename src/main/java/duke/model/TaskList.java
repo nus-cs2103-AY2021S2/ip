@@ -123,8 +123,8 @@ public class TaskList implements Iterable<Task> {
     public TaskList filterByWord(String keyword) {
         List<Task> filteredListOfTasks = new ArrayList<>();
         for (Task currentTask : listOfTasks) {
-            String description = currentTask.getDescription().toLowerCase();
-            boolean isContainsKeyword = description.contains(keyword.toLowerCase());
+            String taskString = currentTask.toString().toLowerCase();
+            boolean isContainsKeyword = taskString.contains(keyword.toLowerCase());
             if (isContainsKeyword) {
                 filteredListOfTasks.add(currentTask);
             }

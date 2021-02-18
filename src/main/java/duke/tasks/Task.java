@@ -71,7 +71,7 @@ public abstract class Task implements Comparable<Task>{
 
     @Override
     public String toString() {
-        String mark = (isDone ? "X" : " ");
+        String mark = getStatusIcon();
         return "[" + this.getLetterCode() + "]" + "[" + mark + "] " + description;
     }
 
