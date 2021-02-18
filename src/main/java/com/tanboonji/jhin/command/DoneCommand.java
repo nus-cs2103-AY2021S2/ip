@@ -43,11 +43,11 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute() throws JhinException {
-        if (taskList.isTaskDone(taskIndex)) {
-            throw new InvalidCommandArgumentException(TASK_ALREADY_DONE_MESSAGE);
-        }
-
         try {
+            if (taskList.isTaskDone(taskIndex)) {
+                throw new InvalidCommandArgumentException(TASK_ALREADY_DONE_MESSAGE);
+            }
+
             Task task = taskList.markTaskAsDone(taskIndex);
             return String.format(SUCCESS_MESSAGE_FORMAT, task);
         } catch (IndexOutOfBoundsException e) {
