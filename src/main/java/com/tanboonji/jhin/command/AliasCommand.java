@@ -11,7 +11,7 @@ import com.tanboonji.jhin.exception.JhinException;
  */
 public class AliasCommand extends Command {
 
-    private static final Pattern COMMAND_FORMAT = Pattern.compile("^\\W*(\\S+)\\W*(\\S+)$");
+    private static final Pattern COMMAND_FORMAT = Pattern.compile("^(\\S+)\\W+(\\S+)$");
     private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the alias command you entered is invalid.\n"
                     + "Please enter a valid alias command in the following format:\n"
                     + "alias <alias> <command>";
@@ -32,9 +32,9 @@ public class AliasCommand extends Command {
     /**
      * Default class constructor.
      */
-    public AliasCommand(String command, String alias) {
-        this.command = command;
+    public AliasCommand(String alias, String command) {
         this.alias = alias;
+        this.command = command;
     }
 
     @Override
@@ -49,8 +49,8 @@ public class AliasCommand extends Command {
 
     @Override
     public String execute() {
-        aliasMap.addAlias(command, alias);
-        return String.format(SUCCESS_MESSAGE, command, alias);
+        String newAlias = aliasMap.addAlias(command, alias);
+        return String.format(SUCCESS_MESSAGE_FORMAT, newAlias);
     }
 
     /**
@@ -58,7 +58,7 @@ public class AliasCommand extends Command {
      *
      * @param arguments Command arguments.
      * @return New alias command.
-     * @throws JhinException If user input does not match alias command format.
+     * @throws JhinException If arguments does not match alias command format or contains invalid arguments.
      */
     public static AliasCommand parseArguments(String arguments) throws JhinException {
         Matcher matcher = COMMAND_FORMAT.matcher(arguments);
@@ -66,9 +66,16 @@ public class AliasCommand extends Command {
             throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
-        String command = matcher.group(COMMAND_GROUP);
         String alias = matcher.group(ALIAS_GROUP);
+        String command = matcher.group(COMMAND_GROUP);
 
-        return new AliasCommand(command, alias);
+        if (Command.isCommandValid(alias)) {
+            throw new InvalidCommandArgumentException(String.format(INVALID_ALIAS_MESSAGE_FORMAT, alias));
+        }
+        if (!Command.isCommandValid(command)) {
+            throw new InvalidCommandArgumentException(String.format(INVALID_COMMAND_MESSAGE_FORMAT, command));
+        }
+
+        return new AliasCommand(alias, command);
     }
 }

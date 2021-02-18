@@ -80,7 +80,7 @@ class CommandParserTest {
 
     @Test
     void parse_aliasCommand_success() {
-        String[] inputs = {"alias listalias la", " alias deletealias  da", "alias  list l "};
+        String[] inputs = {"alias la  listalias", " alias da  deletealias", "alias  l list "};
         for (String input: inputs) {
             try {
                 assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(AliasCommand.class));
