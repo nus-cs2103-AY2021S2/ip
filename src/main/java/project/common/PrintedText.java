@@ -81,8 +81,10 @@ public enum PrintedText {
                     + "  " + EVENT_FORMAT + "      \\_ adds an event\n"
                     + "  " + DONE_FORMAT + "      \\_ marks a task as done\n"
                     + "  " + DELETE_FORMAT + "      \\_ deletes a task from the list\n"
-                    + "    list\n      \\_ lists all tasks, deadlines and events\n"
+                    + "  " + FIND_FORMAT + "      \\_ finds tasks that match the search terms\n"
+                    + "    list\n      \\_ lists all tasks, deadlines & events\n"
                     + "      with their respective task number\n"
+                    + "    remind\n      \\_ lists deadlines & events for the next week\n"
                     + "    bye\n      \\_ exists this application\n";
         }
     },

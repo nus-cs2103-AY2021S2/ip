@@ -22,7 +22,7 @@ public class MainApp extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(MainApp.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load(); //breaks here cos it cant load MainWindow
+            AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Olaf");

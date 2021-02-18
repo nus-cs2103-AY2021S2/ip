@@ -4,7 +4,7 @@ package project.common;
  * All key user commands that the application responds to.
  */
 public interface UserCommands {
-    // Note to self: All fields are public, static and final.
+    // All fields are public, static and final in interfaces.
     String BYE = "bye";
     String HELP = "help";
     String LIST = "list";

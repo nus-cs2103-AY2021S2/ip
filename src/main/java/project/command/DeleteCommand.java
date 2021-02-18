@@ -1,7 +1,5 @@
 package project.command;
 
-import java.util.Arrays;
-
 import project.common.PrintedText;
 import project.io.Parser;
 import project.io.Ui;
@@ -19,13 +17,7 @@ public class DeleteCommand extends Command {
         try {
             int id = Parser.parseIntParameter(userInput);
             Task deleted = taskList.deleteTask(id);
-
-            // will save in every storage path provided
-            Arrays.stream(storage).forEach(s -> {
-                s.saveData(taskList);
-                assert s.isSaved();
-            });
-
+            this.saveTasks(taskList, storage);
             return ui.showDeleteSuccess(id, deleted, taskList.getTotalNumberOfTasks());
         } catch (ArrayIndexOutOfBoundsException e) {
             return ui.showFormatError(PrintedText.DELETE_FORMAT);

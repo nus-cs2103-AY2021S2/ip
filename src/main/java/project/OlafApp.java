@@ -44,6 +44,7 @@ public class OlafApp implements UserCommands {
     public String run(String userInput) {
         String command = userInput.toLowerCase().trim();
 
+        // Solution adapted from https://github.com/nus-cs2103-AY2021S2/ip/pull/91/files
         if (command.equals(UserCommands.BYE)) {
             return new ExitCommand().execute(taskList, ui);
         } else if (command.equals(UserCommands.HELP)) {

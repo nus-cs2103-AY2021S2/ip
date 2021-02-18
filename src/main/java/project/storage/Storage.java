@@ -23,9 +23,6 @@ import project.task.TaskList;
  * All {@code Task}s are stored and read from this file.
  */
 public class Storage {
-    // source: https://stackoverflow.com/questions/28947250
-    // /create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
-    // inserts correct file path separator on *nix and Windows
     private Path dataPath;
     private boolean isSaveSuccessful = false;
 
@@ -39,6 +36,10 @@ public class Storage {
 
         String[] filePathSplit = filePath.split("(?:.(?!/))+$", 2);
         String fileDirectory = filePathSplit[0];
+
+        // Solution adapted from: https://stackoverflow.com/questions/28947250/..
+        // ..create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
+        // inserts correct file path separator on *nix and Windows
         File directory = new File(fileDirectory);
         if (!directory.exists()) {
             directory.mkdir();
@@ -66,7 +67,7 @@ public class Storage {
                         .reduce((a, b) -> a + b)
                         .get();
 
-                // adapted from: https://attacomsian.com/blog/java-save-string-to-text-file
+                // Solution adapted from: https://attacomsian.com/blog/java-save-string-to-text-file
                 // write string to a file
                 Files.writeString(dataPath,
                         toSave,

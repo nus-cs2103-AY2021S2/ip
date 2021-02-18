@@ -1,7 +1,5 @@
 package project.command;
 
-import java.util.Arrays;
-
 import project.common.PrintedText;
 import project.io.Parser;
 import project.io.Ui;
@@ -18,13 +16,7 @@ public class DoneCommand extends Command {
         try {
             int id = Parser.parseIntParameter(userInput);
             taskList.markTaskAsDone(id);
-
-            // will save in every storage path provided
-            Arrays.stream(storage).forEach(s -> {
-                s.saveData(taskList);
-                assert s.isSaved();
-            });
-
+            this.saveTasks(taskList, storage);
             return ui.showDoneSuccess(id, taskList.getTask(id), taskList.getTotalNumberOfTasksUndone());
         } catch (ArrayIndexOutOfBoundsException e) {
             return ui.showFormatError(PrintedText.DONE_FORMAT);

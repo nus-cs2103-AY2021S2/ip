@@ -7,7 +7,7 @@ import project.storage.Storage;
 import project.task.TaskList;
 
 // @@author: VRSoorya
-// adapted from GitHub repo nus-cs2103-AY2021S2/ip
+// Adapted from GitHub repo nus-cs2103-AY2021S2/ip
 
 /**
  * Initialises each session of the application.

@@ -83,7 +83,7 @@ public class TaskList {
      */
     public TaskList findTasks(String[] search) {
         ArrayList<Task> matches = tasks.stream()
-                // adapted from: https://stackoverflow.com/questions/8992100/
+                // Solution adapted from: https://stackoverflow.com/questions/8992100/
                 // test-if-a-string-contains-any-of-the-strings-from-an-array
                 .filter(task -> Arrays.stream(search).map(term -> term.trim())
                         .filter(term -> term.length() > 0)
@@ -130,7 +130,7 @@ public class TaskList {
     @Override
     public String toString() {
         if (this.hasTasks()) {
-            // adapted from: https://stackoverflow.com/questions/49080255/get-index-while-iterating-list-with-stream
+            // Adapted from: https://stackoverflow.com/questions/49080255/get-index-while-iterating-list-with-stream
             return IntStream.range(0, tasks.size())
                     .mapToObj(index -> String.format("  %s. %s\n", index + 1, tasks.get(index).toString()))
                     .reduce((a, b) -> a + b)

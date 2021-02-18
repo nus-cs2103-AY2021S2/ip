@@ -1,7 +1,6 @@
 package project.command;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 import project.common.PrintedText;
 import project.io.Parser;
@@ -42,23 +41,20 @@ public class AddDeadline extends AddTask {
 
             String dateTime = Parser.parseParameter(expression, "/by", 1);
             LocalDateTime deadline = Parser.parseInputDateTime(dateTime);
-            if (!deadline.isAfter(LocalDateTime.now())) {
+            if (deadline.isBefore(LocalDateTime.now())) {
                 throw new Exception("Oops! The deadline cannot be in the past...");
             }
 
             Deadline newDeadline = new Deadline(description, deadline);
+            assert newDeadline.getOccurrence().isAfter(LocalDateTime.now());
             taskList.addTask(newDeadline);
-
-            // will save in every storage path provided
-            Arrays.stream(storage).forEach(s -> {
-                s.saveData(taskList);
-                assert s.isSaved();
-            });
-
+            this.saveTasks(taskList, storage);
             return ui.showNewTaskAddedSuccess(taskList.getTotalNumberOfTasks(),
                     newDeadline, taskList.getTotalNumberOfTasksUndone());
         } catch (Exception e) {
             // catches ParseException, IndexOutOfBounds exception and invalid dates in the past
+            // todo: throw Olaf-specific Exceptions for ParseException and IndexOutOfBounds etc
+            // so that error-specific messages can be displayed in the UI
             return ui.showFormatError(PrintedText.DEADLINE_FORMAT);
         }
     }
