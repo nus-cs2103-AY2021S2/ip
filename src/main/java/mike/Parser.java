@@ -34,13 +34,12 @@ public class Parser {
      */
     public static Command parseInput(String userInput) {
         String errMsg;
-        String[] userInputArr = userInput.split(" ");
         Pattern pattern;
         Matcher matcher;
         DateTimeFormatter format;
         LocalDateTime dateTimeObject;
 
-        switch (userInputArr[0].toLowerCase()) {
+        switch (userInput.split(" ")[0].toLowerCase()) {
         case BYE_COMMAND:
             return new ByeCommand();
 
@@ -50,9 +49,8 @@ public class Parser {
         case DONE_COMMAND:
             pattern = Pattern.compile("(?i)done (\\d+)");
             matcher = pattern.matcher(userInput);
-            if (!matcher.find() || Integer.parseInt(matcher.group(1)) <= 0 ) {
-                errMsg = " ☹ OOPS!!! Input does not match Done command format. eg.\n"
-                        + "   Done <index of task to mark completed>";
+            if (!matcher.find() || Integer.parseInt(matcher.group(1)) <= 0) {
+                errMsg = " ☹ OOPS!!! Input does not match Done command format. eg.\n   Done <task index to complete>";
                 break;
             }
             int taskIndexToDone = Integer.parseInt(matcher.group(1));
@@ -94,9 +92,8 @@ public class Parser {
         case DELETE_COMMAND:
             pattern = Pattern.compile("(?i)delete (\\d+)");
             matcher = pattern.matcher(userInput);
-            if (!matcher.find() || Integer.parseInt(matcher.group(1)) <= 0 ) {
-                errMsg = " ☹ OOPS!!! Input does not match Delete command format. eg.\n"
-                        + "   Delete <index of task to delete>";
+            if (!matcher.find() || Integer.parseInt(matcher.group(1)) <= 0) {
+                errMsg = " ☹ OOPS!!! Input does not match Delete command format. eg.\n   Delete <task index to delete>";
                 break;
             }
             int taskIndexToDelete = Integer.parseInt(matcher.group(1));

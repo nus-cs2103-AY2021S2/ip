@@ -57,11 +57,24 @@ Format:`event [TASK_DESCRIPTION] /at DD-MM-YYYY HH:MM`
 
 Example input: `event house party /at 12-12-2021 09:00`
 
-Expected outcome: 
+Expected outcome:
 ```
 Got it. I've added this task:
  [E] [ ] house party (at: 12 Dec 2021 09:00)
 Now you have 3 tasks in the list.
+```
+
+### Adding a task to list occurring at a specific time: `Find`
+Finds a task with the provided keyword in the description
+
+Format:`find [KEYWORD]`
+
+Example input: `find party`
+
+Expected outcome:
+```
+Here are the matching tasks in your list:
+ 1. [E] [ ] house party (at: 12 Dec 2021 09:00)
 ```
 
 ### Marking a task as done: `Done`
