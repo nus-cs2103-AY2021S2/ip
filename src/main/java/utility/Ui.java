@@ -1,6 +1,9 @@
-package duke;
+package utility;
 
 import java.util.ListIterator;
+
+import duke.DukeException;
+import task.Task;
 
 /**
  * Aids Duke in displaying messages on its UI
@@ -105,6 +108,11 @@ public class Ui {
 
         return stringBuilder.toString();
     }
+
+    public static String showNoMatchedTasks() {
+        return INDENT + " No relevant tasks were found!";
+    }
+
 
     public static String showMatchedTasks(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
