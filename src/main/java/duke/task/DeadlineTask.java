@@ -20,11 +20,6 @@ public class DeadlineTask extends Task {
 
     public LocalDate getDate() {
         String StringDate = divideCommand[4];
-        /*
-        for (int i = 4; i < divideCommand.length; i++) {
-            StringDate += i == divideCommand.length - 1
-                    ? divideCommand[i] : divideCommand[i] + " ";
-        }*/
         return LocalDate.parse(StringDate);
     }
 

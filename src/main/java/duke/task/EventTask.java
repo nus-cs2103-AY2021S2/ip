@@ -20,11 +20,7 @@ public class EventTask extends Task {
     }
 
     public LocalDate getDate() {
-        String StringDate = "";
-        for (int i = 4; i < divideCommand.length; i++) {
-            StringDate += i == divideCommand.length - 1
-                    ? divideCommand[i] : divideCommand[i] + " ";
-        }
+        String StringDate = divideCommand[4];
         return LocalDate.parse(StringDate);
     }
 
