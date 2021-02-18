@@ -13,7 +13,7 @@ It aims to help individuals keep track of various tasks.
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. 
 
-2. Download the latest `Duke.jar` from here.
+2. Download the latest `Duke.jar` from [here](https://github.com/ljhgab/ip/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 
