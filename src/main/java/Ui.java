@@ -138,4 +138,8 @@ public class Ui {
         return "Sorry, could you repeat please? ";
     }
 
+    public void close() {
+        this.sc.close();
+    }
+
 }

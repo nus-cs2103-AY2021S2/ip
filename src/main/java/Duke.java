@@ -1,5 +1,6 @@
 import java.util.List;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Duke extends Application {
     private static final String LOG_PATH = "./logs";
@@ -29,6 +31,8 @@ public class Duke extends Application {
     private VBox dialogueContainer;
     private TextField userInput;
     private Scene scene;
+
+    private boolean toClose;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/qn_parrot.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/ans_parrot.png"));
@@ -67,7 +71,7 @@ public class Duke extends Application {
                 continue;
             }
 
-            ui.printHRule();
+            Ui.printHRule();
 
             if (parserOutput.isBye()) {
                 break;
@@ -75,7 +79,7 @@ public class Duke extends Application {
 
             this.readParse(parserOutput);
 
-            ui.printHRule();
+            Ui.printHRule();
         }
 
         Ui.printGoodbye();
@@ -246,10 +250,12 @@ public class Duke extends Application {
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
+            checkIfToCloseGui(stage);
         });
 
         userInput.setOnAction((event) -> {
             handleUserInput();
+            checkIfToCloseGui(stage);
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -275,17 +281,33 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
+        String userInputText = userInput.getText();
         Font userFont = Font.font("ubuntu", FontWeight.NORMAL, FontPosture.REGULAR, 16);
         Font font = Font.font("Source Sans Pro Semibold", FontWeight.NORMAL, FontPosture.REGULAR, 16);
 
-        Label userText = getDialogLabel(userInput.getText(), userFont, Paint.valueOf("141823"));
-        Label dukeText = getDialogLabel(getResponse(userInput.getText()), font, Paint.valueOf("cb4b16"));
+        Label userText = getDialogLabel(userInputText, userFont, Paint.valueOf("141823"));
+        Label dukeText = getDialogLabel(getResponse(userInputText), font, Paint.valueOf("cb4b16"));
 
         dialogueContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
+
         userInput.clear();
+
+    }
+
+    private void checkIfToCloseGui(Stage stage) {
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.8));
+        if (this.toClose) {
+            delay.setOnFinished(event -> stage.close());
+            this.close();
+            delay.play();
+        }
+    }
+
+    private void close() {
+        this.ui.close();
     }
 
     private String getResponse(String input) {
@@ -297,6 +319,7 @@ public class Duke extends Application {
         }
 
         if (parserOutput.isBye()) {
+            this.toClose = true;
             return Ui.printGoodbye();
         }
 
@@ -304,6 +327,8 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Duke().dukeRunner());
+        Duke duke = new Duke();
+        System.out.println(duke.dukeRunner());
+        duke.close();
     }
 }
