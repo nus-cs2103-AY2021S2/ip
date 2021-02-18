@@ -3,7 +3,6 @@ package duke.handler;
 import java.time.LocalDateTime;
 
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -28,25 +27,24 @@ public class ScheduleHandler implements CommandHandler {
     }
 
     @Override
-    public String execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Storage storage, TaskList taskList) {
         String response;
         if (commandHandler instanceof DeadlineHandler) {
-            response = deadlineScheduleExecute(ui, storage, taskList);
+            response = deadlineScheduleExecute(storage, taskList);
         } else {
             assert commandHandler instanceof EventHandler;
-            response = this.eventScheduleExecute(ui, storage, taskList);
+            response = this.eventScheduleExecute(storage, taskList);
         }
         return response;
     }
 
     /**
      * Executes the recurring scheduling of deadline tasks.
-     * @param ui The ui.
      * @param storage The storage.
      * @param taskList The list of tasks.
      * @return The string response for recurrence tasks scheduled.
      */
-    private String deadlineScheduleExecute(Ui ui, Storage storage, TaskList taskList) {
+    private String deadlineScheduleExecute(Storage storage, TaskList taskList) {
         String response = "";
         Deadline firstTask = ((DeadlineHandler) commandHandler).getDeadlineTask();
         LocalDateTime firstTime = firstTask.getBy();
@@ -54,28 +52,27 @@ public class ScheduleHandler implements CommandHandler {
         LocalDateTime dateTime = firstTime;
         for (int i = 0; i < numOfTimes; i++) {
             dateTime = dateTime.plusDays(7);
-            response += new DeadlineHandler(taskDescription, dateTime).execute(ui, storage, taskList);
+            response += new DeadlineHandler(taskDescription, dateTime).execute(storage, taskList);
         }
         return response;
     }
 
     /**
      * Executes the recurring scheduling of events.
-     * @param ui The ui.
      * @param storage The storage.
      * @param taskList The list of tasks.
      * @return The string response for recurrence tasks scheduled.
      */
-    private String eventScheduleExecute(Ui ui, Storage storage, TaskList taskList) {
+    private String eventScheduleExecute(Storage storage, TaskList taskList) {
         String response = "";
         Event firstTask = ((EventHandler) commandHandler).getEventTask();
         LocalDateTime firstTime = firstTask.getAt();
         String taskDescription = firstTask.getDescription();
         LocalDateTime dateTime = firstTime;
-        new DeadlineHandler(taskDescription, dateTime).execute(ui, storage, taskList);
+        new DeadlineHandler(taskDescription, dateTime).execute(storage, taskList);
         for (int i = 0; i < numOfTimes; i++) {
             dateTime = dateTime.plusDays(7);
-            new DeadlineHandler(taskDescription, dateTime).execute(ui, storage, taskList);
+            new DeadlineHandler(taskDescription, dateTime).execute(storage, taskList);
         }
         response += scheduleRespond(firstTask, taskList);
         return response;

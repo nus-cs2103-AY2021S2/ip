@@ -1,7 +1,6 @@
 package duke.handler;
 
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -26,7 +25,7 @@ public class DeleteHandler implements CommandHandler {
     }
 
     @Override
-    public String execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Storage storage, TaskList taskList) {
         Task task = taskList.getTask(taskNum);
         taskList.removeTask(taskNum);
         response = deleteRespond(task);
