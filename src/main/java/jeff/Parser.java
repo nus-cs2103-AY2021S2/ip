@@ -9,20 +9,20 @@ import java.util.ArrayList;
 public class Parser {
 
     /**
-     * Executes the message passed in by user.
+     * Parses the message passed in by user into a Command object.
      *
      * @param message Message passed in by user.
-     * @param tasks TaskList object to operate on.
-     * @param storage Storage object to read/store tasks to disk.
-     * @return true if Jeff should terminate, false otherwise.
+     * @return Command object representing the message.
      * @throws JeffException If an error is encountered.
      */
-    public static String execute(String message, TaskList tasks, Storage storage) throws JeffException {
-        String[] messageSplit = message.split(",");
-        String[] messageMain = messageSplit[0].split(" ", 2);
-        Command cmd;
+    public static Command parse(String message) throws JeffException{
+        String[] messageSplit = message.split(",", 2);
+        String[] messageFrontSplit = messageSplit[0].split(" ", 2);
+        String messageCmd = messageFrontSplit[0];
+
+        CommandTypes cmd;
         try {
-            cmd = Command.valueOf(messageMain[0]);
+            cmd = CommandTypes.valueOf(messageCmd);
         } catch (IllegalArgumentException e) {
             throw new JeffException("I can't understand the message");
         }
@@ -30,98 +30,53 @@ public class Parser {
         switch (cmd) {
 
         case list:
-            if (tasks.getNumTasks() == 0) {
-                return "No tasks right now";
-            } else {
-                String toPrint = "";
-                for (int i = 0; i < tasks.getNumTasks(); i++) {
-                    toPrint += (i + 1) + "." + tasks.getTask(i) + "\n";
-                }
-                return toPrint;
-            }
+            return new CommandList();
 
         case todo:
-            if (messageMain.length < 2) {
+            if (messageFrontSplit.length < 2) {
                 throw new JeffException("please provide a description for todo");
             }
-            Task todo = new ToDo(messageMain[1]);
-            tasks.addTask(todo);
-            return "Got it. I've added this task:\n" + todo + tasks.queryNumTasks();
+            return new CommandToDo(messageFrontSplit[1]);
 
         case deadline:
-            if (messageMain.length < 2) {
+            if (messageFrontSplit.length < 2) {
                 throw new JeffException("please provide a description for deadline");
             }
-            try {
-                String[] dateTime = messageSplit[1].split("by ")[1].split(" ", 2);
-                Task deadline = new Deadline(messageMain[1], dateTime[0], dateTime[1]);
-                tasks.addTask(deadline);
-                return "Got it. I've added this task:\n" + deadline + tasks.queryNumTasks();
-            } catch (ArrayIndexOutOfBoundsException e) {
+            if (messageSplit.length < 2) {
                 throw new JeffException("please provide a date and time for deadline");
-            } catch (DateTimeParseException e) {
-                throw new JeffException("please provide datetime as YYYY-MM-DD HH:MM");
             }
+            return new CommandDeadline(messageFrontSplit[1], messageSplit[1]);
 
         case event:
-            if (messageMain.length < 2) {
+            if (messageFrontSplit.length < 2) {
                 throw new JeffException("please provide a description for event");
             }
-            try {
-                String[] dateTime = messageSplit[1].split("at ")[1].split(" ", 2);
-                Task event = new Event(messageMain[1], dateTime[0], dateTime[1]);
-                tasks.addTask(event);
-                return "Got it. I've added this task:\n" + event + tasks.queryNumTasks();
-            } catch (ArrayIndexOutOfBoundsException e) {
+            if (messageSplit.length < 2) {
                 throw new JeffException("please provide a date and time for event");
-            } catch (DateTimeParseException e) {
-                throw new JeffException("please provide datetime as YYYY-MM-DD HH:MM");
             }
+            return new CommandEvent(messageFrontSplit[1], messageSplit[1]);
 
         case done:
-            if (messageMain.length != 2) {
+            if (messageFrontSplit.length < 2) {
                 throw new JeffException("wrong number of arguments for done");
             }
-            try {
-                int taskIndex = Integer.parseInt(messageMain[1]) - 1;
-                Task doneTask = tasks.getTask(taskIndex);
-                doneTask.setDone();
-                return "Nice! I've marked this task as done:\n" + doneTask;
-            } catch (IndexOutOfBoundsException e) {
-                throw new JeffException("task number does not exist");
-            } catch (NumberFormatException e) {
-                throw new JeffException("indicate task number as an integer");
-            }
+            return new CommandDone(messageFrontSplit[1]);
+
 
         case delete:
-            if (messageMain.length != 2) {
+            if (messageFrontSplit.length < 2) {
                 throw new JeffException("wrong number of arguments for delete");
             }
-            try {
-                int taskIndex = Integer.parseInt(messageMain[1]) - 1;
-                Task toRemove = tasks.getTask(taskIndex);
-                tasks.deleteTask(taskIndex);
-                return "Noted. I've removed this task:\n" + toRemove + tasks.queryNumTasks();
-            } catch (IndexOutOfBoundsException e) {
-                throw new JeffException("task number does not exist");
-            } catch (NumberFormatException e) {
-                throw new JeffException("indicate task number as an integer");
-            }
+            return new CommandDelete(messageFrontSplit[1]);
 
         case bye:
-            storage.save(tasks.getTaskList());
-            return "Bye. Hope to see you again!";
+            return new CommandBye();
 
         case find:
-            if (messageMain.length != 2) {
-                throw new JeffException("enter keyword to find task(s) by");
+            if (messageFrontSplit.length < 2) {
+                throw new JeffException("enter keyword(s) to find task(s) by");
             }
-            ArrayList<Task> foundTasks = tasks.findTask(messageMain[1]);
-            String s = "Here are the tasks I found matching \"" + messageMain[1] + "\":\n";
-            for (Task t : foundTasks) {
-                s += t.toString() + "\n";
-            }
-            return s;
+            return new CommandFind(messageFrontSplit[1]);
 
         default:
             assert false : "Code should not reach this point of execution.";
