@@ -154,7 +154,7 @@ Expected outcome:
 
 ### `bye` - Ending a conversation
 
-Says goodbye and terminates the program.
+Says goodbye and terminates the program in 3 seconds.
 
 Format: `bye`
 
