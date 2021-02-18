@@ -13,14 +13,14 @@ public class IndexParser implements Parser {
      * @return The index contained in the input string.
      * @throws DescriptionMissingException If the index is not in the input string.
      */
-    public static int parseIndex(String input) throws DescriptionMissingException {
-        String[] instructions = input.trim().split(" ");
-
-        if (instructions.length < 2) {
+    public static int parseIndex(String input, int sepIndex) throws DescriptionMissingException {
+        if (sepIndex == -1) {
             throw new DescriptionMissingException("Please specify the index!");
         }
+        String[] instructions = input.substring(sepIndex).trim().split(" ");
         try {
-            String indexInString = instructions[1].trim();
+            // Rule out the possible effect by "set" statement
+            String indexInString = instructions[0].replace("/as", "").trim();
             return Integer.parseInt(indexInString) - 1;
         } catch (NumberFormatException e) {
             throw new DescriptionMissingException("Input index is not valid");
@@ -34,6 +34,7 @@ public class IndexParser implements Parser {
      * @throws DescriptionMissingException If the priority is not a valid one.
      */
     public static int parsePriority(String input) throws DescriptionMissingException, InvalidPriorityException {
+        missingAsAlert(input.trim());
         String[] instructions = input.trim().split("/as");
 
         if (instructions.length < 2) {
@@ -48,6 +49,13 @@ public class IndexParser implements Parser {
             return priority;
         } catch (NumberFormatException e) {
             throw new DescriptionMissingException("Input priority is not valid");
+        }
+    }
+
+    private static void missingAsAlert(String input) throws DescriptionMissingException {
+        int indexOfBy = input.indexOf("/as");
+        if (indexOfBy == -1) {
+            throw new DescriptionMissingException("Please make sure you have /as in your input.");
         }
     }
 }

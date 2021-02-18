@@ -33,7 +33,7 @@ public class TodoCommand extends AddCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String name = descriptions.getDescriptionOfIndex(NAME_INDEX);
+            String name = descriptions.getDescriptionOfIndex(NAME_INDEX).trim();
             Task todo = TaskParser.parseTask(EnumTask.TODO, name);
             super.addThisTask(tasks, todo, ui, storage);
             return ui.addTaskResponse(todo, tasks);

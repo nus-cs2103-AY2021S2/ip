@@ -19,15 +19,15 @@ public class DateTimeParser implements Parser {
      * @throws InvalidDateTimeException If the input date and time string is not valid.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws InvalidDateTimeException {
-        String[] dateAndTime = dateTime.strip().split(" ");
+        String[] dateAndTime = dateTime.trim().split(" ");
 
         LocalDateTime parsedDateTime;
 
         if (dateAndTime.length != 2) {
-            throw new InvalidDateTimeException("Input date and time is not complete.");
+            throw new InvalidDateTimeException("Input date and time is not valid!");
         }
-        String date = dateAndTime[0].strip();
-        String time = dateAndTime[1].strip();
+        String date = dateAndTime[0].trim();
+        String time = dateAndTime[1].trim();
         parsedDateTime = LocalDateTime.of(parseDate(date), parseTime(time));
         return parsedDateTime;
     }
@@ -37,9 +37,9 @@ public class DateTimeParser implements Parser {
         if (yearMonthDay.length != 3) {
             throw new InvalidDateTimeException("Input date is not valid.");
         }
-        String year = yearMonthDay[0].strip();
-        String month = yearMonthDay[1].strip();
-        String day = yearMonthDay[2].strip();
+        String year = yearMonthDay[0].trim();
+        String month = yearMonthDay[1].trim();
+        String day = yearMonthDay[2].trim();
         if (year.length() == 4 && month.length() == 2 && day.length() == 2) {
             try {
                 return LocalDate.parse(date);
@@ -52,8 +52,8 @@ public class DateTimeParser implements Parser {
     }
 
     private static LocalTime parseTime(String time) throws InvalidDateTimeException {
-        String hour = time.strip().substring(0, 2);
-        String minute = time.strip().substring(2, 4);
+        String hour = time.trim().substring(0, 2);
+        String minute = time.trim().substring(2, 4);
         try {
             return LocalTime.parse(hour + ":" + minute);
         } catch (DateTimeParseException e) {

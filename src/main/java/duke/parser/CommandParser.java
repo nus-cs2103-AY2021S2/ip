@@ -42,11 +42,12 @@ public class CommandParser implements Parser {
         } else if (potentialCommand.equalsIgnoreCase("BYE")) {
             command = new ExitCommand();
         } else if (potentialCommand.equalsIgnoreCase("DONE")) {
-            command = new DoneCommand(IndexParser.parseIndex(cleanerInput));
+            command = new DoneCommand(IndexParser.parseIndex(cleanerInput, endIndex));
         } else if (potentialCommand.equalsIgnoreCase("DELETE")) {
-            command = new DeleteCommand(IndexParser.parseIndex(cleanerInput));
+            command = new DeleteCommand(IndexParser.parseIndex(cleanerInput, endIndex));
         } else if (potentialCommand.equalsIgnoreCase("SET")) {
-            command = new SetCommand(IndexParser.parseIndex(cleanerInput), IndexParser.parsePriority(cleanerInput));
+            command = new SetCommand(IndexParser.parseIndex(cleanerInput, endIndex),
+                    IndexParser.parsePriority(cleanerInput));
         } else if (potentialCommand.equalsIgnoreCase("TODO")) {
             TaskDescription td = DescriptionParser.parseDescription(EnumTask.TODO, cleanerInput, endIndex);
             command = new TodoCommand(td);

@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.exception.DescriptionMissingException;
 import duke.exception.DukeException;
 import duke.task.EnumTask;
 import duke.task.TaskDescription;
@@ -24,11 +25,27 @@ public class DescriptionParser implements Parser {
         case TODO:
             return new TaskDescription(input.substring(index).trim());
         case DEADLINE:
+            missingByAlert(input.substring(index).trim());
             return new TaskDescription(input.substring(index).trim().split("/by"));
         case EVENT:
+            missingAtAlert(input.substring(index).trim());
             return new TaskDescription(input.substring(index).trim().split("/at"));
         default:
             throw new DukeException("I do not know this task");
+        }
+    }
+
+    private static void missingByAlert(String input) throws DescriptionMissingException {
+        int indexOfBy = input.indexOf("/by");
+        if (indexOfBy == -1) {
+            throw new DescriptionMissingException("Please make sure you have /by in your input.");
+        }
+    }
+
+    private static void missingAtAlert(String input) throws DescriptionMissingException {
+        int indexOfBy = input.indexOf("/at");
+        if (indexOfBy == -1) {
+            throw new DescriptionMissingException("Please make sure you have /at in your input.");
         }
     }
 }

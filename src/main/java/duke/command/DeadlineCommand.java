@@ -34,7 +34,7 @@ public class DeadlineCommand extends AddCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String name = descriptions.getDescriptionOfIndex(NAME_INDEX);
+            String name = descriptions.getDescriptionOfIndex(NAME_INDEX).trim();
             String dateAndTime = descriptions.getDescriptionOfIndex(DATE_TIME_INDEX);
             Task deadline = TaskParser.parseTask(EnumTask.DEADLINE, name, dateAndTime);
             super.addThisTask(tasks, deadline, ui, storage);
