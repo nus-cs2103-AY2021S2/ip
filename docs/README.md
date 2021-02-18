@@ -30,6 +30,11 @@ e.g. in `todo NAME`, `NAME` is a parameter which can be used as `todo eat`.
 * Extraneous parameters for commands that do not take in parameters (such as `list` and `bye`) will be ignored.
 e.g. if the command specifies `list 2`, it will be interpreted as `list`.
 
+### Getting a list of commands: `help`
+List commands that Bob can take in.
+
+Format: `help`
+
 ### Adding a todo task: `todo`
 Adds a new todo task to the chatbox.
 
