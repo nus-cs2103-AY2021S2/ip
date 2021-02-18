@@ -155,9 +155,13 @@ public class TaskList {
             int index = Integer.parseInt(inputIndex.trim());
             Task t = task.get(index - 1);
             task.remove(t);
-            return "The following task has been deleted:\n"
-                    + t.toString() + "\n"
-                    + "You now have " + task.size() + "  task in your list";
+            String doneTaskReport = "The following task has been deleted:\n"
+                    + t.toString() + "\n";
+            if (task.isEmpty()) {
+                return doneTaskReport + "You don't have any tasks in your list now. \n";
+            } else {
+                return doneTaskReport + "You now have " + task.size() + " task in your list. \n";
+            }
         } catch (IndexOutOfBoundsException e) {
             // TODO: handle exception
             return "Sorry, I cannot find this task, please check your list again";

@@ -65,13 +65,16 @@ public class Ui {
      */
     public String reportTask(Task t, TaskList task) {
         int count = task.getSize();
+        assert count >= 0 : "Size is less than 0";
+        if (count == 0) {
+            return "Seems you do not have any tasks now. \n";
+        }
         String output = "Got it, I've added this task to the list:\n"
                 + t.toString()
                 + "\n"
                 + "You now have "
                 + count
                 + " task in the list.\n";
-        assert count >= 0 : "Size is less than 0";
         return output;
     }
 
