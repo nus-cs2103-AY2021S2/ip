@@ -12,7 +12,7 @@ public class FileAccessor {
     //File f = new File("./");
     //System.out.println(f.getAbsolutePath());
     //to get the path to see which path java is looking
-    private static final String FOLDER_PATH = "./src/main/java/data/";
+    private static final String FOLDER_PATH = "./data/";
     private static final String FILE_NAME = "All Tasks.txt";
 
     public static String getFolderPath() {

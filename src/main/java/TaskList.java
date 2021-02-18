@@ -146,6 +146,10 @@ public class TaskList {
             }
         }
 
+        if (reminders.length() == 0) {
+            reminders += " No tasks due in a week!\n";
+        }
+
         return reminders;
     }
 }
