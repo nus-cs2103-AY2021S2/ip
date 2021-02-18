@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class TaskListTest {
     TaskList taskList = new TaskList();
     Todo todo = new Todo("read book");

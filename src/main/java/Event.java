@@ -15,7 +15,7 @@ public class Event extends Task {
      */
     @Override
     public void formatTime() {
-        String copy = this.getTime();
+        String copy = getTime();
         String[] sArr = copy.split("-");
         String time1 = sArr[0];
         String time2 = sArr[1];
@@ -88,6 +88,6 @@ public class Event extends Task {
             end += "am";
         }
         String convertedTime = start + "-" + end;
-        this.setTime(convertedTime);
+        setTime(convertedTime);
     }
 }
