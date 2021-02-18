@@ -66,11 +66,12 @@ public class Task {
      * @return the date of the task
      */
     public LocalDate getDate() {
-        String StringDate = "";
+        String StringDate = divideCommand[4];
+        /**
         for (int i = 4; i < divideCommand.length; i++) {
             StringDate += i == divideCommand.length - 1
                     ? divideCommand[i] : divideCommand[i] + " ";
-        }
+        }**/
         return LocalDate.parse(StringDate);
     }
 
