@@ -69,4 +69,17 @@ public class Parser {
         return index;
     }
 
+    /**
+     * This one is for inputting the note
+     * @return
+     */
+    public String getTaskWithoutType(){
+        String out = "";
+        for(int i = 1; i < commandSeparate.length; i++){
+            out += i == commandSeparate.length - 1
+                    ? commandSeparate[i] : commandSeparate[i] + " ";
+        }
+        return out;
+    }
+
 }

@@ -83,7 +83,7 @@ public class Duke {
         } else if (TaskType.equals("find") || TaskType.equals("search")) {
             result = taskList.findTask(p.getTaskName());
         } else if (TaskType.equals("find-note") || TaskType.equals("search-note")) {
-            result = noteList.findTask(p.getTaskName());
+            result = noteList.findTask(p.getTaskWithoutType());
         } else if (TaskType.equals("todo")) {
             result = taskList.addTask(new TodoTask(command));
         } else if (TaskType.equals("deadline")) {
