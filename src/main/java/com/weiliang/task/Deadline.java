@@ -6,10 +6,20 @@ import java.time.format.DateTimeParseException;
 
 import com.weiliang.DukeException;
 
+/**
+ * A deadline affiliated task.
+ */
 public class Deadline extends Task {
 
     private final LocalDateTime timing;
 
+    /**
+     * Instantiates a deadline with the given task description and timing.
+     *
+     * @param task The description of the task.
+     * @param timing The time associated in String representation.
+     * @throws DukeException If the timing provided is invalid.
+     */
     public Deadline(String task, String timing) throws DukeException {
         super(task);
         try {

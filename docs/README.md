@@ -12,7 +12,7 @@ SimpleBot is a chat-operated task reminder system. Contains the bare minimum to 
 - Download the latest [release](https://github.com/WeiLiangLOL/ip/releases/latest).
 - Run the jar executable.
 
-## Features
+## Overview
 
 ![Ui](Ui.png)
 

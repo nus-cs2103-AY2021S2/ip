@@ -34,14 +34,19 @@ public class Task {
     }
 
     /**
-     * Returns an alternative string formatting of the task, using vertical bars.
+     * Returns {@code true} if the task is completed, {@code false} otherwise.
      *
-     * @return String formatting.
+     * @return The completion status.
      */
     public boolean isComplete() {
         return isComplete;
     }
 
+    /**
+     * Returns an alternative string formatting of the task, using vertical bars.
+     *
+     * @return String formatting.
+     */
     public String toFormattedString() {
         return "T | " + (isComplete ? 1 : 0) + " | " + task;
     }
