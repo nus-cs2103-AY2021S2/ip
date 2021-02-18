@@ -1,9 +1,6 @@
 ____________________________________________________________
-No existing task list was found. A new task list will be created.
-____________________________________________________________
-____________________________________________________________
-Hello! I'm Duke
-What can I do for you?
+Hello! I'm Duke, your personal assistant
+What can I do for you today?
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
@@ -16,19 +13,19 @@ Here are the task in your list:
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-	[D][ ] return book (by: Nov 01 2019)
+	[D][ ] return book (by: Nov 01 2019 12:00am)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-	[E][ ] project meeting (at: Nov 01 2019)
+	[E][ ] project meeting (at: Nov 02 2019 11:00am)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Nov 01 2019)
-3.[E][ ] project meeting (at: Nov 01 2019)
+2.[D][ ] return book (by: Nov 01 2019 12:00am)
+3.[E][ ] project meeting (at: Nov 02 2019 11:00am)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -37,17 +34,17 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][✘] borrow book
-2.[D][ ] return book (by: Nov 01 2019)
-3.[E][ ] project meeting (at: Nov 01 2019)
+2.[D][ ] return book (by: Nov 01 2019 12:00am)
+3.[E][ ] project meeting (at: Nov 02 2019 11:00am)
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
-	[D][ ] return book (by: Nov 01 2019)
+	[D][ ] return book (by: Nov 01 2019 12:00am)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the task in your list:
-1.[E][ ] project meeting (at: Nov 01 2019)
+1.[E][ ] project meeting (at: Nov 02 2019 11:00am)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
