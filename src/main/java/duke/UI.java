@@ -7,8 +7,18 @@ import java.time.format.DateTimeFormatter;
  * Deals with User interactions, reads user inputs and outputs text
  */
 public class UI {
-    private static final String WELCOME_MESSAGE = "Hello! I'm Duke\n\nWhat can I do for you today?";
-    private static final String GOODBYE_MESSAGE = "Good bye and take care! This application will close in 5 seconds.";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke o/\nWhat can I do for you today?\n\n" +
+            "Enter 'help' if you are lost =)";
+    private static final String GOODBYE_MESSAGE = "Good bye and take care o/" +
+            "\nThis application will close in 5 seconds.";
+    private static final String HELP_MESSAGE = "Here are commands you can use!\n" +
+            "All DATE is written in YYYY-MM-DD format\n\nAdd a todo task - add [TASK NAME]\n\n" +
+            "Add a deadline task - add deadline [TASK NAME] /by [DATE]\n\n" +
+            "Add an event task - add event [TASK NAME] /at [DATE]\n\n" +
+            "Show all your tasks - list\n\nMark a task as done - done [TASK NUMBER]\n\n" +
+            "Delete a task - delete [TASK NUMBER]\n\nDelete all tasks - reset\n\n" +
+            "Show all tasks that matches a given date - show [DATE]\n\n" +
+            "Find tasks matching a keyword - find [KEYWORD]\n\nSave and exit: bye";
 
     public UI() {
     }
@@ -39,6 +49,8 @@ public class UI {
             return findMessage(list, commandAndParams[1]);
         case "bye":
             return GOODBYE_MESSAGE;
+        case "help":
+            return HELP_MESSAGE;
         default:
             return unknownCommandMessage();
         }
