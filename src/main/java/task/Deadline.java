@@ -33,13 +33,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overloaded constructor to create a TAsk with the supplied description,
-     * dates and completion status.
+     * Overloaded constructor to create a Deadline with the supplied description,
+     * date and completion status.
      *
      * @param desc String description of the Deadline.
      * @param endDate LocalDate object representing the date the Deadline should
      *                be completed.
-     * @param isDone True, if the Task should be initialised as done.
+     * @param isDone True, if the Deadline should be initialised as done.
      */
     public Deadline(String desc, LocalDate endDate, boolean isDone) {
         super(desc, isDone);
@@ -97,6 +97,12 @@ public class Deadline extends Task {
         return COMMAND_STRING;
     }
 
+    /**
+     * Convert the Deadline, its state and variables to a String representation
+     * that can be parsed to obtain back the same Deadline.
+     *
+     * @return String representation of the Deadline and its state.
+     */
     @Override
     public String toSaveString() {
         HashMap<String, List<String>> commandMap = new HashMap<>();

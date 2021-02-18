@@ -131,7 +131,7 @@ public class HelpCommand extends Command {
     }
 
     private static String eventHelpText() {
-        return "Usage: \"deadline <description> /at <YYYY-MM-DD>\" - "
+        return "Usage: \"event <description> /at <YYYY-MM-DD>\" - "
                 + "Creates an Event with the supplied description and date";
     }
 

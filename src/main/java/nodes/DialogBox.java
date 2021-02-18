@@ -8,8 +8,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
-import javax.swing.text.View;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class DialogBox extends HBox {
     private final Label text;
@@ -20,6 +22,7 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
+        text.setFont(Font.font ("Consolas"));
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
 
@@ -31,13 +34,18 @@ public class DialogBox extends HBox {
         var db = new DialogBox(l, iv);
         db.setPadding(new Insets(5, 10, 5, 10));
         db.setSpacing(10);
-        return new DialogBox(l, iv);
+        db.setAlignment(Pos.CENTER_RIGHT);
+        db.text.setFont(Font.font("Consolas", FontWeight.BOLD,
+                FontPosture.REGULAR, 12));
+        db.text.setTextFill(Color.SADDLEBROWN);
+        return db;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.setPadding(new Insets(5, 10, 5, 10));
         db.setSpacing(10);
+        db.text.setTextFill(Color.DARKSLATEBLUE);
         db.flip();
         return db;
     }

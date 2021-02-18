@@ -10,6 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import nodes.DialogBox;
 import util.Storage;
@@ -22,9 +26,9 @@ import java.io.IOException;
  */
 public class Sweh extends Application {
     private final Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaUser.png"));
+            .getResourceAsStream("/images/DaUser.jpg"));
     private final Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/images/DaDuke.png"));
+            .getResourceAsStream("/images/DaSweh.jpg"));
     private final Label greetingText = new Label("Hello, I am SWEH. "
             + "Your Simple Word-Executed Helper!\n"
             + "What shall we do today?");
@@ -60,7 +64,7 @@ public class Sweh extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Sweh");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -78,6 +82,9 @@ public class Sweh extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
+        userInput.setFont(Font.font("Consolas", FontWeight.BOLD,
+                FontPosture.REGULAR, 12));
+        userInput.setStyle("-fx-text-inner-color: saddlebrown");
 
         sendButton.setPrefWidth(55.0);
 
