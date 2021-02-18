@@ -11,7 +11,7 @@ import com.tanboonji.jhin.exception.JhinException;
  */
 public class DeleteAliasCommand extends Command {
 
-    private static final Pattern COMMAND_FORMAT = Pattern.compile("^\\W*(\\S+)\\W*$");
+    private static final Pattern COMMAND_FORMAT = Pattern.compile("^(\\S+)$");
     private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the delete alias command you entered is invalid.\n"
                     + "Please enter a valid delete alias command in the following format:\n"
                     + "[deletealias, rmalias] <alias>";
@@ -59,6 +59,6 @@ public class DeleteAliasCommand extends Command {
             throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
-        return new DeleteAliasCommand(arguments.trim());
+        return new DeleteAliasCommand(arguments);
     }
 }

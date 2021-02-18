@@ -51,16 +51,16 @@ public class DateParser {
      * @return Date time object.
      */
     public static LocalDateTime parseDateTime(String input) throws JhinException {
-        String[] tokenizedInput = input.trim().split(" ", 2);
+        String[] tokenizedInput = input.split(" ", 2);
         LocalDate date;
         LocalTime time;
 
-        date = parseDate(tokenizedInput[0]);
+        date = parseDate(tokenizedInput[0].trim());
 
         if (tokenizedInput.length == 1) {
             time = LocalTime.MAX;
         } else {
-            time = parseTime(tokenizedInput[1]);
+            time = parseTime(tokenizedInput[1].trim());
         }
 
         return LocalDateTime.of(date, time);

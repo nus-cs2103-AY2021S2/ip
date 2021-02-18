@@ -20,7 +20,7 @@ public class FindCommand extends Command {
      * @param keyword Keyword to be searched in task list.
      */
     public FindCommand(String keyword) {
-        this.keyword = keyword.trim();
+        this.keyword = keyword;
     }
 
     @Override

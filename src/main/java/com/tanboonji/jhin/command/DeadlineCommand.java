@@ -67,8 +67,8 @@ public class DeadlineCommand extends Command {
             throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
-        String description = matcher.group(DESCRIPTION_GROUP);
-        LocalDateTime by = DateParser.parseDateTime(matcher.group(DATE_GROUP));
+        String description = matcher.group(DESCRIPTION_GROUP).trim();
+        LocalDateTime by = DateParser.parseDateTime(matcher.group(DATE_GROUP).trim());
 
         return new DeadlineCommand(description, by);
     }
