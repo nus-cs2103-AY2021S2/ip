@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 public class DeadlineTest {
 
     @Test
-    public void DeadlineTestOne() {
+    public void deadlineConstruction_normalInput_objectCreated() {
         assertEquals("[D][ ] finish project (by: Apr 15 2021 16:00)", new Deadline("finish project",
                 LocalDateTime.of(2021, Month.APRIL, 15, 16, 00)).toString());
     }
 
     @Test
-    public void TodoTestFour() {
+    public void gettingSaveString_inputWithTaskMarkedAsDone_formattedSaveString() {
         Task deadline = new Deadline("finish project",
                 LocalDateTime.of(2021, Month.APRIL, 15, 16, 00));
         deadline.markAsDone();
