@@ -9,7 +9,7 @@ Juke is a command-line based Task Manager application. A user will type a series
 
 ## Content Page
 Here is an overview of the commands that Juke supports and a user can input.
-* [help]
+* [help] (#-help-command)
 * [todo]
 * [deadline]
 * [event]
@@ -28,7 +28,7 @@ Juke Chat Bot is a personal task manager. It allows users to add, delete and sea
 
 ## Usage
 
-### `help` 
+### help command
 * Description: Shows a list of supported commands and their descriptions.
 * Format: `help`
 * Example: `help`
