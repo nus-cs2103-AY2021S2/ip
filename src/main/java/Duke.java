@@ -1,28 +1,20 @@
-import task.Deadlines;
-import task.Events;
-import task.TaskList;
-import task.Task;
-import task.Todo;
-import storage.Storage;
-import ui.Ui;
+import static java.lang.System.exit;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static java.lang.System.exit;
+import storage.Storage;
+import task.Deadlines;
+import task.Events;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+import ui.Ui;
 
 public class Duke {
-    /**
-     * Storage for the tasks.
-     */
+
     private Storage storage;
-    /**
-     * List of task.
-     */
     private TaskList taskList;
-    /**
-     * Ui of program.
-     */
     private Ui ui;
 
     /**
@@ -57,35 +49,34 @@ public class Duke {
         String argument = tokens.length == 2 ? tokens[1] : null;
 
         switch (command) {
-            case "bye":
-                response = executeByeCommand();
-                break;
-//                System.exit(0);
-            case "list":
-                response = executeListCommand();
-                break;
-            case "done":
-                response = executeDoneCommand(argument);
-                break;
-            case "todo":
-                response = executeTodoCommand(argument);
-                break;
-            case "deadline":
-                response = executeDeadlineCommand(argument);
-                break;
-            case "event":
-                response = executeEventCommand(argument);
-                break;
-            case "delete":
-                response = executeDeleteCommand(argument);
-                break;
-            case "find":
-                response = executeFindCommand(argument);
-                break;
-            default:
-                response = new Response("OOPS!!! I'm sorry, "
-                        + "but I don't know what that means :-(", false);
-                break;
+        case "bye":
+            response = executeByeCommand();
+            break;
+        case "list":
+            response = executeListCommand();
+            break;
+        case "done":
+            response = executeDoneCommand(argument);
+            break;
+        case "todo":
+            response = executeTodoCommand(argument);
+            break;
+        case "deadline":
+            response = executeDeadlineCommand(argument);
+            break;
+        case "event":
+            response = executeEventCommand(argument);
+            break;
+        case "delete":
+            response = executeDeleteCommand(argument);
+            break;
+        case "find":
+            response = executeFindCommand(argument);
+            break;
+        default:
+            response = new Response("OOPS!!! I'm sorry, "
+                    + "but I don't know what that means :-(", false);
+            break;
         }
 
         return response;
@@ -335,14 +326,12 @@ public class Duke {
 
         return new Response(sb.toString(), false);
     }
-
     /**
-     * App shuts down after sleeptime when bye is typed by user.
+     *  * App shuts down after sleeptime when bye is typed by user.
      */
     public void shutDown() {
         try {
-            Integer sleeptime = 2000;
-            Thread.sleep(sleeptime);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

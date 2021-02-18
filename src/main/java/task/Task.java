@@ -1,13 +1,18 @@
 package task;
 
 public abstract class Task {
-    /**
-     *
-     */
-    protected String description;
-    protected String tag;
-    protected boolean isDone;
 
+    protected boolean isDone;
+    protected String description;
+    final String tag;
+
+    /**
+     * Task constructor
+     *
+     * @param description
+     * @param tag
+     * @return task object
+     */
     public Task(String description, String tag) {
         this.description = description;
         this.isDone = false;

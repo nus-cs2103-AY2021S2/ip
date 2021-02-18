@@ -1,19 +1,14 @@
 package task;
 
+/**
+ * Class inherits from task.
+ */
 public class Todo extends Task {
-    /**
-     * Type icon represented by [T].
-     */
-    private final String TYPE_ICON = "[T]";
-    /**
-     * Icon represented by T.
-     */
-    private final String ICON = "T";
-    /**
-     * To partition between the icons.
-     */
-    private final String DELIMITER = "|";
-    private final String NULL = "NULL";
+
+    private final String typeIcon = "[T]";
+    private final String icon = "T";
+    private final String delimiter = "|";
+    private final String nullString = "NULL";
 
     /**
      * Constructor for todo.
@@ -35,9 +30,14 @@ public class Todo extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns the type icon specific to todo.
+     *
+     * @return [T]
+     */
     @Override
     public String getTypeIcon() {
-        return this.TYPE_ICON;
+        return this.typeIcon;
     }
 
     @Override
@@ -58,13 +58,13 @@ public class Todo extends Task {
     @Override
     public String tokenize() {
         String isDoneString = isDone ? "1" : "0";
-        String result = ICON + DELIMITER + isDoneString + DELIMITER
+        String result = icon + delimiter + isDoneString + delimiter
                 + this.description;
 
         if (tag == null) {
-            result += DELIMITER + NULL;
+            result += delimiter + nullString;
         } else {
-            result += DELIMITER + tag;
+            result += delimiter + tag;
         }
 
         return result;

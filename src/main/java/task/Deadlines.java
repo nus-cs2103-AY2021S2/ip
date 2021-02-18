@@ -3,39 +3,30 @@ package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task.
+ */
 public class Deadlines extends Task {
-    /**
-     *Type icon for deadlines task.
-     */
-    private final String TYPE_ICON = "[D]";
-    /**
-     * Icon is represented by D.
-     */
-    private final String ICON = "D";
-    /**
-     * To have a line between the details.
-     */
-    private final String DELIMITER = "|";
-    /**
-     * Null String.
-     */
-    private final String NULL = "NULL";
+
+    private final String typeIcon = "[D]";
+    private final String icon = "D";
+    private final String delimiter = "|";
+    private final String nullString = "NULL";
+
     /**
      * Format of how date and time is displayed.
      */
     private final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    /**
-     * To make time accessible outside of the method.
-     */
+
     private LocalDateTime time;
 
     /**
-     * Contructor of deadlines.
+     * Constructor of deadlines.
      *
-     * @param description
-     * @param by
-     * @param tag
+     * @param description description of task
+     * @param by time of task
+     * @param tag tag of task
      */
     public Deadlines(String description, String by, String tag) {
         super(description, tag);
@@ -50,10 +41,22 @@ public class Deadlines extends Task {
             }
         }
     }
+
+    /**
+     * returns typeicon of deadline.
+     *
+     * @return [D]
+     */
     @Override
     public String getTypeIcon() {
-        return this.TYPE_ICON;
+        return this.typeIcon;
     }
+
+    /**
+     * returns the description of the deadline.
+     *
+     * @return string of the deadline description
+     */
     @Override
     public String getDescription() {
         String result = description;
@@ -72,31 +75,36 @@ public class Deadlines extends Task {
     /**
      * Converts the object into a String representation for storage.
      *
-     * @return  String represtentation
+     * @return  String representation of object
      */
     @Override
     public String tokenize() {
 
         String isDoneString = isDone ? "1" : "0";
 
-        String result = ICON + DELIMITER + isDoneString
-                + DELIMITER + this.description;
+        String result = icon + delimiter + isDoneString
+                + delimiter + this.description;
 
         if (time == null) {
-            result += DELIMITER + NULL;
+            result += delimiter + nullString;
         } else {
-            result += DELIMITER + time;
+            result += delimiter + time;
         }
 
         if (tag == null) {
-            result += DELIMITER + NULL;
+            result += delimiter + nullString;
         } else {
-            result += DELIMITER + tag;
+            result += delimiter + tag;
         }
 
         return result;
     }
 
+    /**
+     * returns the description of the deadline task.
+     *
+     * @return String of the deadline task
+     */
     @Override
     public String toString() {
         return getDescription();

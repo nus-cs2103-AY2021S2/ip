@@ -1,30 +1,35 @@
 package task;
 
 public class Events extends Task {
-    /**
-     * Events represented by typeicon of [E].
-     */
-    private final String TYPE_ICON = "[E]";
-    /**
-     * Represented by icon E.
-     */
-    private final String ICON = "E";
-    /**
-     * To partition between the icons.
-     */
-    private final String DELIMITER = "|";
-    /**
-     * A null string.
-     */
-    private final String NULL = "NULL";
+
+    private final String typeIcon = "[E]";
+    private final String icon = "E";
+    private final String delimiter = "|";
+    private final String nullString = "NULL";
 
     private String at;
 
+    /**
+     * Events constructor.
+     *
+     * @param description
+     * @param at
+     * @param tag
+     * @return events object
+     */
     public Events(String description, String at, String tag) {
         super(description, tag);
         this.at = at;
     }
-
+    /**
+     * Overloaded events constructor.
+     *
+     * @param isDone
+     * @param description
+     * @param at
+     * @param tag
+     * @return events object
+     */
     public Events(boolean isDone, String description, String at, String tag) {
         super(description, tag);
         this.at = at;
@@ -33,7 +38,7 @@ public class Events extends Task {
 
     @Override
     public String getTypeIcon() {
-        return this.TYPE_ICON;
+        return this.typeIcon;
     }
 
     @Override
@@ -53,29 +58,33 @@ public class Events extends Task {
     /**
      * Converts the object into a String representation for storage.
      *
-     * @return  String represtentation
+     * @return  String representation
      */
     @Override
     public String tokenize() {
         String isDoneString = isDone ? "1" : "0";
-        String result = ICON + DELIMITER + isDoneString
-                + DELIMITER + this.description;
+        String result = icon + delimiter + isDoneString
+                + delimiter + this.description;
 
         if (at == null) {
-            result += DELIMITER + NULL;
+            result += delimiter + nullString;
         } else {
-            result += DELIMITER + this.at;
+            result += delimiter + this.at;
         }
 
         if (tag == null) {
-            result += DELIMITER + NULL;
+            result += delimiter + nullString;
         } else {
-            result += DELIMITER + this.tag;
+            result += delimiter + this.tag;
         }
 
         return result;
     }
 
+    /**
+     *
+     * @return the description for the event task
+     */
     @Override
     public String toString() {
         return getDescription();

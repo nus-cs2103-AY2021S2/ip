@@ -1,10 +1,5 @@
 package storage;
 
-import task.TaskList;
-import task.Task;
-import task.Todo;
-import task.Events;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,11 +7,21 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
+import task.Events;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+
 public class Storage {
 
     private String directory;
     private String fileName;
-
+    /**
+     * Initialises a Storage object.
+     * @param directory
+     * @param fileName
+     * @return a Storage object
+     */
     public Storage(String directory, String fileName) {
         this.directory = directory;
         this.fileName = fileName;
@@ -24,14 +29,16 @@ public class Storage {
 
     /**
      * Saves the tasklist.
-     * Converts a tasklist into its string representation then saves it in a file
+     * Converts a tasklist into its string representation
+     * then saves it in a file
      *
-     * @param taskList  the tasklist to be saved
+     * @param taskList the tasklist to be saved
      */
     public void saveToHardisk(TaskList taskList) {
 
         try {
-            PrintWriter writer = new PrintWriter(this.directory + this.fileName, "UTF-8");
+            PrintWriter writer = new PrintWriter(this.directory
+                    + this.fileName, "UTF-8");
 
             for (Task task : taskList.getList()) {
                 writer.println(task.tokenize());
@@ -46,7 +53,7 @@ public class Storage {
     }
 
     /**
-     * Loads a text file and parses it into a tasklist
+     * Loads a text file and parses it into a tasklist.
      */
     public TaskList loadFromHardisk() {
 
@@ -84,14 +91,14 @@ public class Storage {
         String taskDetails = tokens[1];
 
         switch (taskSymbol) {
-            case "T":
-                return createTodo(taskDetails);
-            case "D":
-                return createDeadline(taskDetails);
-            case "E":
-                return createEvent(taskDetails);
-            default:
-                return null;
+        case "T":
+            return createTodo(taskDetails);
+        case "D":
+            return createDeadline(taskDetails);
+        case "E":
+            return createEvent(taskDetails);
+        default:
+            return null;
         }
     }
 
