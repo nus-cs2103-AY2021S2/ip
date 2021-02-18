@@ -3,7 +3,7 @@ Antonio is a chat bot that is able to keep track of three types of tasks: todos,
 
 ## Quick Start
 1. Ensure you have Java 11 or above installed on your Computer.
-2. Download the latest Antonio.jar from [here](http://google.com).
+2. Download the latest Antonio.jar from [here](https://github.com/chewterence/ip/releases/tag/A-Jar-v0.2).
 3. Double-click on the file to run the application. Upon starting the application, you should encounter the screen below:
 ```
 Ciao, buongiorno! My name Antonio
@@ -152,7 +152,7 @@ TaskListData.txt from the source computer to the newly created folder, and run A
 
 ---
 
-##Command Summary
+## Command Summary
 
 | Action       | Format and Examples          |
 | ------------- |:-------------|
