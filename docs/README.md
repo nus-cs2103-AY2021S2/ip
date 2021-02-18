@@ -49,7 +49,7 @@ Add a Deadline to your list. Deadlines must contain a mandatory date and time.
 `deadline CS2106 Assignment 1 /by 05/03/2021 2359`
 
 **Expected outcome:**
->Done! I've added a new task:
+>Done! I've added a new task:\
     [D][✘] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)\
     Now there are 3 tasks in your list.
 
@@ -77,8 +77,8 @@ Change the status of a given task to done.
 `done 1`
 
 **Expected outcome:**
-> Good job! I've marked this task as done:
-> [D][✓] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm
+> Good job! I've marked this task as done:\
+> [D][✓] CS2106 Assignment 1 (at 05 Mar 2021 11:59pm)
 
 
 ### Delete a Task
@@ -91,8 +91,8 @@ Delete a task from PAson.
 `delete 1`
 
 **Expected outcome:**
-> Okay! I've removed this task:
-> [T][✘] Do the laundry
+> Okay! I've removed this task:\
+> [T][✘] Do the laundry\
 > There are now 2 tasks in your list.
 
 
