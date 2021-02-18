@@ -54,16 +54,20 @@ public class TaskList {
         }
     }
 
-    /**
-     * Prints the task list using ui.
-     * @param ui An duke.Ui object which deals with interactions with the user.
-     */
-    public void printTasks(Ui ui) {
+    public String toStringWithIndex() {
+        String str = "";
         for (int i = 0; i < getNumOfTasks(); i++) {
-            ui.printMsg((i + 1) + "." + tasks.get(i).toString());
+            str = str + (i + 1) + "." + tasks.get(i).toString() + "\n";
         }
+        return str;
     }
 
+    /**
+     * Find the task that the keyword totally or partially matches it.
+     *
+     * @param keyword The search keyword input from users.
+     * @return
+     */
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task task: tasks) {
