@@ -25,6 +25,7 @@ public class DukeList {
     public void add(Task item) {
         list.add(item);
         size++;
+        assert size >= 0 : "size cannot be negative";
     }
 
     /**
@@ -43,6 +44,7 @@ public class DukeList {
     public void delete(int x) {
         list.remove(x);
         size--;
+        assert size >= 0 : "size cannot be negative";
     }
 
     public void deleteAll() {
@@ -53,6 +55,7 @@ public class DukeList {
     }
 
     public int getSize() {
+        assert size >= 0 : "size cannot be negative";
         return size;
     }
 

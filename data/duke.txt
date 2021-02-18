@@ -1,3 +1,7 @@
 T|0|go work
 D|0|project|2021-02-19
 E|0|recess week|2021-02-22
+T|0|go to school
+D|0|buy a horse|2024-08-01
+T|0|go mall
+T|0|project
