@@ -29,7 +29,6 @@ public class Parser {
 //            return handleDoneCommand(command, ui, taskList, storage);
         case "todo":
             String name = getDescription(command);
-            if (!name.equals("")) {
                 String[] split = name.split("/p", 2);
                 if (split.length < 2) {
                     throw  new CommandFormatException();
@@ -39,13 +38,8 @@ public class Parser {
                 Task newTask = taskList.addTask(todo);
                 storage.appendToFile(todo);
                 return ui.showAddTask(newTask, taskList.getListSize());
-            } else {
-                throw new CommandFormatException("☹ OOPS!!! The description of"
-                        + " a todo cannot be empty.");
-            }
         case "deadline":
             String desc = getDescription(command);
-            if (!desc.equals("")) {
                 String[] split = desc.split("/by", 2);
                 if (split.length < 2) {
                     throw  new CommandFormatException();
@@ -60,13 +54,8 @@ public class Parser {
                 Task newTask = taskList.addTask(deadline);
                 storage.appendToFile(deadline);
                 return ui.showAddTask(newTask, taskList.getListSize());
-            } else {
-                throw new CommandFormatException("☹ OOPS!!! The description of"
-                        + " a deadline cannot be empty.");
-            }
         case "event":
             String description = getDescription(command);
-            if (!description.equals("")) {
                 String[] split = description.split("/at", 2);
                 if (split.length < 2) {
                     throw  new CommandFormatException();
@@ -81,10 +70,6 @@ public class Parser {
                 Task newTask = taskList.addTask(event);
                 storage.appendToFile(event);
                 return ui.showAddTask(newTask, taskList.getListSize());
-            } else {
-                throw new CommandFormatException("☹ OOPS!!! The description of"
-                        + " an event cannot be empty.");
-            }
         case "find":
             String searchString = getDescription(command);
             if (!searchString.equals("")) {
@@ -111,7 +96,17 @@ public class Parser {
         try {
             return command.split(" ", 2)[1];
         } catch (IndexOutOfBoundsException e) {
-            throw new CommandFormatException();
+            String task = parseCommand(command);
+            if (task.equals("todo")) {
+                throw new CommandFormatException("☹ OOPS!!! The description of"
+                        + " a todo cannot be empty.");
+            } else if (task.equals("deadline")) {
+                throw new CommandFormatException("☹ OOPS!!! The description of"
+                        + " a deadline cannot be empty.");
+            } else {
+                throw new CommandFormatException("☹ OOPS!!! The description of"
+                        + " an event cannot be empty.");
+            }
         }
     }
 }
