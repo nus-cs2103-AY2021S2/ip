@@ -4,35 +4,16 @@ import java.io.IOException;
 
 
 public class Storage {
-    private File file;
+    private String path;
 
-    Storage() {
-        this.file = new File("data", "duke.txt");
+    Storage(String path) {
+        this.path = path;
     }
 
-    /**
-     * Creates a file if the given file is not available
-     */
-    public void createFile() {
-        if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
-            System.out.println("Directory created");
-        }
-
-        if (!file.exists()) {
-            System.out.println("New file created");
-        }
-
+    public String getFilePath() {
+        return this.path;
     }
 
-    /**
-     * Return file
-     */
-
-    public File getFile() {
-        createFile();
-        return this.file;
-    }
 
     /**
      * Update all the task in taskList to file before exiting
@@ -41,7 +22,11 @@ public class Storage {
 
     public void update(TaskList taskList) throws IOException {
         assert taskList != null : "the taskList should not be null";
-        FileWriter fw = new FileWriter(this.file);
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        FileWriter fw = new FileWriter(this.path);
         for (Task task : taskList.getList()) {
             fw.write(task.toSaveFormat() + "\n");
 

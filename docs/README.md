@@ -33,7 +33,7 @@ You can mark a task as done.
 ### `todo`  Add a ToDO Task 
 
 Add a ToDo task. 
-This is the simplest type of task that you can add. Trumden only requires a description to do so.
+Tasks that you need to do without specifying the deadline. Trumden only requires a description to do so.
 
 Example of usage: 
 

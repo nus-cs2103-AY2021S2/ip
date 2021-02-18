@@ -21,7 +21,10 @@ public class TaskList {
      * load the task in file to arrayList
      */
     public void addTaskFromFile() throws IOException {
-        File file = this.storage.getFile();
+        File f = new File("data");
+        f.mkdirs();
+        File file = new File(this.storage.getFilePath());
+        file.createNewFile();
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String str = sc.nextLine();

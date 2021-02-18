@@ -11,7 +11,7 @@ public class Duke {
 
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage();
+        this.storage = new Storage("data/duke.txt");
         this.taskList = new TaskList(storage);
     }
 
@@ -29,7 +29,6 @@ public class Duke {
      */
 
     public void run() throws IOException {
-        this.storage.createFile();
         Ui.greeting();
         this.taskList.addTaskFromFile();
     }
