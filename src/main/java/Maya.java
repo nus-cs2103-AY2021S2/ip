@@ -3,7 +3,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,6 +27,7 @@ public class Maya extends Application {
 
     /**
      * Initiates an object of Maya with a Ui and Storage object.
+     *
      * @param filePath a String that represents the path to store the file of Tasks.
      */
     public Maya(String filePath) {
@@ -44,7 +44,6 @@ public class Maya extends Application {
 
     @Override
     public void start(Stage stage) {
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -105,13 +104,12 @@ public class Maya extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -119,7 +117,6 @@ public class Maya extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -134,6 +131,11 @@ public class Maya extends Application {
         userInput.clear();
     }
 
+    /**
+     * Gets the response to the user input.
+     * @param input a String representing the user input
+     * @return a String representing Maya's response to user input
+     */
     public String getResponse(String input) {
         try {
             return Parser.parse(input, ui, taskList, storage);
