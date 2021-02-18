@@ -6,18 +6,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-            prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.tanboonji.jhin.ui.MainWindow">
-    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="660.0" prefWidth="500.0" vbarPolicy="ALWAYS"
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="710.0" prefWidth="600.0" vbarPolicy="ALWAYS"
                 hvalue="1.0" vvalue="1.0" style="-fx-background-color: #0e1621; -fx-border-color: #0e1621">
-        <VBox fx:id="dialogContainer" prefHeight="656.0" prefWidth="484.0"
+        <VBox fx:id="dialogContainer" prefHeight="706.0" prefWidth="584.0"
               style="-fx-background-color: #0e1621; -fx-border-color: #0e1621; -fx-padding: 0 2 0 0"/>
     </ScrollPane>
-    <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="40.0" prefWidth="500.0"
+    <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="40.0" prefWidth="520.0"
                style="-fx-background-color: #17212b; -fx-border-color: #17212b; -fx-text-fill: #cccccc"
                promptText="Enter your command..." AnchorPane.bottomAnchor="0"/>
-    <Button fx:id="sendButton" layoutX="420.0" mnemonicParsing="false" onAction="#handleUserInput"
+    <Button fx:id="sendButton" layoutX="520.0" mnemonicParsing="false" onAction="#handleUserInput"
             style="-fx-background-color: #5288c1; -fx-border-color: #5288c1"
             prefHeight="40.0" prefWidth="80.0" text="Send" AnchorPane.bottomAnchor="0" textFill="#eeeeee"/>
 </AnchorPane>
