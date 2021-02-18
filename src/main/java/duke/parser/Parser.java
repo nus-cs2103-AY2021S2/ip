@@ -45,18 +45,18 @@ public class Parser {
         }
 
         if (commandArray[0].equals("find")) {
-            isTaskDetailEmpty(taskDetail, "Please input task description to be searched.");
+            validatingTaskDetails(taskDetail, "null", "Please input task description to be searched.");
             SearchCommand sc = new SearchCommand(taskDetail);
             return sc.execute();
         } else if (input.equals("list")) {
             ListCommand lc = new ListCommand(null);
             return lc.execute();
         } else if (commandArray[0].equals("delete")) {
-            isTaskDetailEmpty(taskDetail, "Please input task description to be searched.");
+            validatingTaskDetails(taskDetail, "delete", "Please input task description to be searched.");
             DeleteCommand dc = new DeleteCommand(commandArray[1]);
             return dc.execute();
         } else if (commandArray[0].equals("done")) {
-            isTaskDetailEmpty(taskDetail, "You did not specify a task index. "
+            validatingTaskDetails(taskDetail, "done", "You did not specify a task index. "
                     + "Please try again with a valid task index.");
             DoneCommand doneCommand = new DoneCommand(commandArray[1]);
             return doneCommand.execute();
@@ -151,14 +151,21 @@ public class Parser {
     }
 
     /**
-     * Check if task parameter is empty
+     * Check if task parameters are valid
      * @param taskDetail
      * @param message message to be printed
      * @throws DukeException
      */
-    public static void isTaskDetailEmpty(String taskDetail, String message) throws DukeException {
+    public static void validatingTaskDetails(String taskDetail, String type, String message) throws DukeException {
         if (taskDetail.isBlank()) {
             throw new DukeException(message);
+        } else if(type.equals("done") || type.equals("delete")){
+            try{
+                int index = Integer.parseInt(taskDetail);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Please enter a valid task index.");
+            }
+
         }
     }
 
