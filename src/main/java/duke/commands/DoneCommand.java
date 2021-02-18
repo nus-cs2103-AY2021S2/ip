@@ -20,7 +20,7 @@ public class DoneCommand implements Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (index >= tasks.size()) {
+        if (index > tasks.size()) {
             throw new DukeException("The index of the task needs to be present in the list.");
         }
 
