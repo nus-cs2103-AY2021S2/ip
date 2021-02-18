@@ -30,7 +30,11 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public Task markAsDone() {
+
+    public Task markAsDone() throws DukeException {
+        if (isDone) {
+            throw new DukeException("This Task has already been marked as done!");
+        }
         return new Task(description, true);
     }
 

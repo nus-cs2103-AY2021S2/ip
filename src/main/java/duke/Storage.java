@@ -66,62 +66,53 @@ public class Storage {
 
     /**
      * Reads data (Task objects) from the file
-     *
      * @return the list of Task objects stored in the file
+     * @throws Exception if an IO error occurs
      */
-    public List<Task> readFromFile() {
+    public List<Task> readFromFile() throws Exception {
 
         List<Task> tasksList = new ArrayList<>();
         final String DELIMITER = " \\| ";
 
-        try {
-            boolean dirExists = Files.exists(dirPath);
-            boolean fileExists = Files.exists(filePath);
+        boolean dirExists = Files.exists(dirPath);
+        boolean fileExists = Files.exists(filePath);
 
-            if (!dirExists) {
-                Files.createDirectory(dirPath);
-            }
-            if (!fileExists) {
-                Files.createFile(filePath);
-            }
-
-            Task task = null;
-            BufferedReader br = new BufferedReader(new FileReader(filePath.toString()));
-            String input = br.readLine();
-            while (input != null) {
-                String[] inputArr = input.split(DELIMITER);
-
-                try {
-                    switch (inputArr[0]) {
-                    case "T":
-                        task = new Todo(inputArr[2]);
-                        break;
-                    case "D":
-                        task = new Deadline(inputArr[2], LocalDate.parse(inputArr[3]));
-                        break;
-                    case "E":
-                        String[] timeParams = inputArr[3].split(" ", 2);
-                        task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1]);
-                        break;
-                    }
-
-                    if (Integer.parseInt(inputArr[1]) == 1) {
-                        tasksList.add(task.markAsDone());
-                    } else {
-                        tasksList.add(task);
-                    }
-
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-
-                input = br.readLine();
-            }
-            br.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!dirExists) {
+            Files.createDirectory(dirPath);
         }
+        if (!fileExists) {
+            Files.createFile(filePath);
+        }
+
+        Task task = null;
+        BufferedReader br = new BufferedReader(new FileReader(filePath.toString()));
+        String input = br.readLine();
+        while (input != null) {
+            String[] inputArr = input.split(DELIMITER);
+
+            switch (inputArr[0]) {
+            case "T":
+                task = new Todo(inputArr[2]);
+                break;
+            case "D":
+                task = new Deadline(inputArr[2], LocalDate.parse(inputArr[3]));
+                break;
+            case "E":
+                String[] timeParams = inputArr[3].split(" ", 2);
+                task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1]);
+                break;
+            }
+
+            if (Integer.parseInt(inputArr[1]) == 1) {
+                tasksList.add(task.markAsDone());
+            } else {
+                tasksList.add(task);
+            }
+
+            input = br.readLine();
+        }
+
+        br.close();
 
         return tasksList;
     }

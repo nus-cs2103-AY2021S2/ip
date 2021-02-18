@@ -14,23 +14,25 @@ public class Ui {
     private static final String farewell = INDENT + " Bye. Hope to see you again soon!\n";
 
     /**
-     * Displays the message when Duke starts up.
+     * Creates Duke's response when the program starts up.
+     * @return a String representing Duke's response
      */
     public static String showInitUi() {
         return greeting;
     }
 
     /**
-     * Displays the message when Duke exits.
+     * Creates Duke's response when the program exits.
+     * @return a String representing Duke's response
      */
     public static String showExitUi() {
         return farewell;
     }
 
     /**
-     * Displays the current list of Task objects
-     *
+     * Creates Duke's response when the user requests for the saved Task's to be shown in a list
      * @param taskList the current list of tasks
+     * @return a String representing Duke's response
      */
     public static String showList(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -49,10 +51,10 @@ public class Ui {
     }
 
     /**
-     * Displays the message when a Task has been added.
-     *
+     * Creates Duke's response when a Task has been successfully added to the list.
      * @param numTasks current number of tasks in the list
      * @param relevantTask the newly added Task
+     * @return a String representing Duke's response
      */
     public static String showSuccessfulAdd(int numTasks, Task relevantTask) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -61,30 +63,27 @@ public class Ui {
                 .append(relevantTask)
                 .append("\n\n");
         stringBuilder.append(INDENT + " Now you have ").append(numTasks).append(" tasks in the list.");
-        //stringBuilder.append(HORIZ_SEP + "\n");
-        
+
         return stringBuilder.toString();
     }
 
     /**
-     * Displays the message when a Task is marked as done.
-     *
+     * Creates Duke's response when a Task has been marked as done.
      * @param relevantTask the Task that has just been done
+     * @return a String representing Duke's response
      */
     public static String showSuccessfulDone(Task relevantTask) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(INDENT + " Nice! I've marked this task as done: \n");
         stringBuilder.append(INDENT + "   ").append(relevantTask);
-        //stringBuilder.append(HORIZ_SEP + "\n");
-        
         return stringBuilder.toString();
     }
 
     /**
-     * Displays the message when a Task is deleted
-     *
+     * Creates Duke's response when a Task is deleted
      * @param numTasks current number of tasks in the list
      * @param relevantTask the deleted Task
+     * @return a String representing Duke's response
      */
     public static String showSuccessfulDelete(int numTasks, Task relevantTask) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -93,11 +92,15 @@ public class Ui {
                 .append(relevantTask)
                 .append("\n\n");
         stringBuilder.append(INDENT + " Now you have ").append(numTasks).append(" tasks in the list.");
-        //stringBuilder.append(HORIZ_SEP + "\n");
 
         return stringBuilder.toString();
     }
 
+    /**
+     * Creates Duke's response when the program catches a DukeException
+     * @param ex the DukeException caught
+     * @return a String representing Duke's response
+     */
     public static String showDukeException(DukeException ex) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -106,7 +109,25 @@ public class Ui {
         return stringBuilder.toString();
     }
 
-    public static String showMatchedTasks(TaskList taskList) {
+    /**
+     * Creates Duke's response when the program catches a Exception
+     * @param ex the Exception caught
+     * @return a String representing Duke's response
+     */
+    public static String showException(Exception ex) {
+        return INDENT + " " + ex.getMessage();
+    }
+
+    /**
+     * Creates Duke's response to user's request to find tasks if the keyword found relevant tasks.
+     * @param taskList a non-empty TaskList containing the tasks relevant to what the user is searching for.
+     * @return a String representing Duke's response
+     */
+    public static String showMatchedTasks(TaskList taskList) throws IllegalArgumentException {
+        if (taskList.getTasks().size() == 0) {
+            throw new IllegalArgumentException("Ui.showMatchedTasks() expects a non-empty taskList argument");
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
 
         ListIterator<Task> taskIter = taskList.getTasks().listIterator();

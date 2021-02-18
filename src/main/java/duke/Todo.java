@@ -20,11 +20,14 @@ public class Todo extends Task {
 
     /**
      * Marks a Todo as done.
-     *
+     * @throws DukeException if the Todo is already marked as done.
      * @return a new Todo that is considered done
      */
     @Override
-    public Todo markAsDone() {
+    public Todo markAsDone() throws DukeException {
+        if (isDone) {
+            throw new DukeException("This Task has already been marked as done!");
+        }
         return new Todo(description, true);
     }
 
