@@ -10,8 +10,8 @@ It is a chatbox that handles interactions using a CLI (Command Line Interface)
 3. Type the commands available and start adding your tasks.
 
 ## Feature List
-1. [**`todo`**](#todo): adds a todo task
-   [**`deadline`**](#deadline): adds a deadline task
+1. [**`todo`**](#todo): adds a todo task  
+   [**`deadline`**](#deadline): adds a deadline task  
    [**`event`**](#event): adds an event task
 2. [**`list`**](#list): prints a list of all tasks
 3. [**`done`**](#done): marks a task as done
