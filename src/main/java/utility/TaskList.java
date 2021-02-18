@@ -1,7 +1,9 @@
-package duke;
+package utility;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import task.Task;
 
 /**
  * Represents a list of Task objects in a more abstract way.
@@ -49,5 +51,9 @@ public class TaskList {
      */
     public void markAsDone(int index) {
         tasks.set(index, tasks.get(index).markAsDone());
+    }
+
+    public int getSize() {
+        return tasks.size();
     }
 }
