@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * The Command class represents a command to be done by Danh's Duke. A command has 2 main components:
+ * The Command class represents a command to be done by ChaeLisa. A command has 2 main components:
  * the command name: commandTitle
  * the command body: commandContent
  */
@@ -20,10 +20,21 @@ class Command {
         this.commandTitle = commandTitle;
         this.commandContent = commandContent;
     }
+
+    /**
+     * Returns the content of a command.
+     *
+     * @return the content of a command
+     */
     public String getCommandContent() {
         return commandContent;
     }
 
+    /**
+     * Returns the name (title) of the command.
+     *
+     * @return the name (title) of the command
+     */
     public String getCommandTitle() {
         return commandTitle;
     }

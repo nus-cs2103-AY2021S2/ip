@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
 import javafx.application.Platform;
 
 /**
- * Class Duke represents Danh's Duke, a powerful assistant that can take note of your task everyday and
- * help you control them easily.
+ * Class Duke represents ChaeLisa's main component, which is in charge of managing its attributes to
+ * execute commands, store data, write data, and interact with user.
  * <p>
  * Duke has 3 main components:
  * Ui: deals with interactions with the user
@@ -30,12 +30,8 @@ class Duke {
         this.storage.writeBack(this.taskList.getListUsed());
     }
 
-    public TaskList getTaskList() {
-        return taskList;
-    }
-
     /**
-     * Illustrates full usage of Danh's Duke before shutting it down
+     * Illustrates full usage of ChaeLisa's main component before shutting it down
      *
      * @param args by default
      * @throws IOException exception regarding open and access taskFile
@@ -94,7 +90,7 @@ class Duke {
      * lets it execute the action of throwing an exception to catch and handle.
      *
      * @param command The short syntax of the wrong format command
-     * @throws DukeException Special exception related to wrong format of command entered into Danh's Duke
+     * @throws DukeException Special exception related to wrong format of command entered for ChaeLisa
      */
     public static void executeFalseCommand(String command) throws DukeException {
         if (command.startsWith("list")) {
@@ -123,11 +119,10 @@ class Duke {
         }
     }
 
-
     /**
      * Executes the command and produce the output of that command.
      *
-     * @param myDuke Duke carrying out this command.
+     * @param myDuke  Duke carrying out this command.
      * @param command The Command to be executed.
      * @return the output of that command.
      */
@@ -173,6 +168,16 @@ class Duke {
             }
         }
         return ans;
+    }
+
+
+    /**
+     * Returns the task list of this Duke.
+     *
+     * @return the taskList object of this Duke.
+     */
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     /**

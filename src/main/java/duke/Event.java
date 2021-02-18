@@ -11,17 +11,17 @@ import java.time.format.DateTimeFormatter;
  * The time of event: eTime
  */
 class Event extends Task {
-    private final LocalDateTime eTime;
+    private final LocalDateTime eventTime;
 
     /**
      * Returns an event with specified name and time
      *
-     * @param taskName The event name (description)
-     * @param eTime    The time of event
+     * @param taskName  The event name (description)
+     * @param eventTime The time of event
      */
-    public Event(String taskName, LocalDateTime eTime) {
+    public Event(String taskName, LocalDateTime eventTime) {
         super(taskName);
-        this.eTime = eTime;
+        this.eventTime = eventTime;
     }
 
     /**
@@ -34,10 +34,10 @@ class Event extends Task {
         String ans;
         if (this.isTaskDone()) {
             ans = "[E][X] " + this.getTaskName() + " (at: "
-                    + this.eTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
+                    + this.eventTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         } else if (!this.isTaskDone()) {
             ans = "[E][  ] " + this.getTaskName() + " (at: "
-                    + this.eTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
+                    + this.eventTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
         } else {
             ans = "Error";
         }
@@ -55,8 +55,13 @@ class Event extends Task {
         return super.getTaskName();
     }
 
-    public LocalDateTime geteTime() {
-        return eTime;
+    /**
+     * Returns the event time of this Event object in the correct format.
+     *
+     * @return the time of this Event object
+     */
+    public LocalDateTime getEventTime() {
+        return eventTime;
     }
 }
 

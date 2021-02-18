@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Operations provided: addTask, doneTask, deleteTask.
  */
 class TaskList {
-    private ArrayList<Task> listUsed;
+    private final ArrayList<Task> listUsed;
 
     /**
      * Returns a TaskList.

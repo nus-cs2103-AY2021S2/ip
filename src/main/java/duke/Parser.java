@@ -212,6 +212,12 @@ class Parser {
         return new Command("find", commandLine.substring(5));
     }
 
+    /**
+     * Returns the suitable reminder command.
+     *
+     * @param commandLine the command line of a reminder command
+     * @return the suitable Command Object
+     */
     private static Command getReminderCommand(String commandLine) {
         if (commandLine.length() != 8) {
             return new Command("executeFalseCommand", "reminder");

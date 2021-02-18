@@ -15,6 +15,11 @@ public class Main extends Application {
 
     private final Duke duke = new Duke();
 
+    /**
+     * Returns a Main object and throw exception if needed.
+     *
+     * @throws IOException exception related to IO
+     */
     public Main() throws IOException {
     }
 

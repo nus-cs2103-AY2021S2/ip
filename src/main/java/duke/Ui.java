@@ -6,11 +6,12 @@ import java.util.Scanner;
 
 /**
  * Class Ui helps Danh's Duke interact with user by calling suitable method.
- * Ui has 2 main functions: read input and return output with print.
+ * Ui has 2 main functions: read input and return output.
  */
 class Ui {
     public static final String WELCOME_MESSAGE = "Hello! I'm Park Chaeyoung\nWhat can I do for you, Lalisa Manoban?\n";
     private final Scanner input;
+
     /**
      * Returns an Ui with integrated Scanner.
      */
@@ -108,8 +109,9 @@ class Ui {
         StringBuilder ans = new StringBuilder("Here are the tasks on " + dateTime.toString().substring(0, 10) + ":\n");
         int index = 1;
         for (Task task : taskList) {
-            boolean isDeadlineThatDay = task instanceof Deadline && sameDay(((Deadline) task).getDlTime(), dateTime);
-            boolean isEventThatDay = task instanceof Event && sameDay(((Event) task).geteTime(), dateTime);
+            boolean isDeadlineThatDay = task instanceof Deadline
+                    && sameDay(((Deadline) task).getDeadlineTime(), dateTime);
+            boolean isEventThatDay = task instanceof Event && sameDay(((Event) task).getEventTime(), dateTime);
             if (isDeadlineThatDay || isEventThatDay) {
                 ans.append(String.format(" %d. " + task.printTask() + "\n", index));
                 index++;
@@ -129,8 +131,8 @@ class Ui {
         int index = 1;
         for (Task task : taskList) {
             boolean isDeadlineToday = task instanceof Deadline && sameDay
-                    (((Deadline) task).getDlTime(), LocalDateTime.now());
-            boolean isEventToday = task instanceof Event && sameDay(((Event) task).geteTime(), LocalDateTime.now());
+                    (((Deadline) task).getDeadlineTime(), LocalDateTime.now());
+            boolean isEventToday = task instanceof Event && sameDay(((Event) task).getEventTime(), LocalDateTime.now());
             boolean isToDoToday = task instanceof ToDo && !task.isTaskDone();
             if (isDeadlineToday || isEventToday || isToDoToday) {
                 ans.append(String.format(" %d. " + task.printTask() + "\n", index));
@@ -159,7 +161,7 @@ class Ui {
     }
 
     /**
-     * Prints all the deadlines coming up..
+     * Prints all the deadlines coming up.
      *
      * @param taskList The taskList related.
      * @return output of this scho
@@ -169,7 +171,7 @@ class Ui {
         ArrayList<Deadline> deadlineList = new ArrayList<>();
         for (Task task : taskList) {
             boolean isDeadlineAvailable = (task instanceof Deadline)
-                    && ((Deadline) task).getDlTime().isAfter(LocalDateTime.now());
+                    && ((Deadline) task).getDeadlineTime().isAfter(LocalDateTime.now());
             if (isDeadlineAvailable && !task.isTaskDone()) {
                 addDeadline(deadlineList, (Deadline) task);
             }
@@ -184,12 +186,12 @@ class Ui {
      * (Helper function) Adds a deadline to a deadline list in the correct chronological order.
      *
      * @param deadlineList the deadline list related.
-     * @param deadline the deadline to add.
+     * @param deadline     the deadline to add.
      */
     private void addDeadline(ArrayList<Deadline> deadlineList, Deadline deadline) {
         int insertIndex = 0;
         for (Deadline dl : deadlineList) {
-            if (dl.getDlTime().isBefore(deadline.getDlTime())) {
+            if (dl.getDeadlineTime().isBefore(deadline.getDeadlineTime())) {
                 insertIndex++;
             } else {
                 break;

@@ -71,8 +71,9 @@ class Storage {
 
     /**
      * Adds a new Event into task list.
+     *
      * @param taskList the task list to add this new Event.
-     * @param line String description of this Event.
+     * @param line     String description of this Event.
      */
     private void addEvent(ArrayList<Task> taskList, String line) {
         int etIndex = line.indexOf("(at: ");
@@ -89,8 +90,9 @@ class Storage {
 
     /**
      * Adds a new Deadline into task list.
+     *
      * @param taskList the task list to add this new Event.
-     * @param line String description of this Event.
+     * @param line     String description of this Event.
      */
     private void addDeadline(ArrayList<Task> taskList, String line) {
         int dlIndex = line.indexOf("(by: ");
@@ -107,8 +109,9 @@ class Storage {
 
     /**
      * Adds a new Todo into task list.
+     *
      * @param taskList the task list to add this new Event.
-     * @param line String description of this Event.
+     * @param line     String description of this Event.
      */
     private void addTodo(ArrayList<Task> taskList, String line) {
         if (line.charAt(4) == ' ') {

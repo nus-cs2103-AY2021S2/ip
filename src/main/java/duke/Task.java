@@ -42,12 +42,18 @@ class Task {
 
     /**
      * Returns the information whether a task is done or not.
+     *
      * @return a boolean containing this information.
      */
     public boolean isTaskDone() {
         return isTaskDone;
     }
 
+    /**
+     * Returns the name of the task.
+     *
+     * @return The name of the task.
+     */
     public String getTaskName() {
         return taskName;
     }
