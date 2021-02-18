@@ -47,8 +47,8 @@ There are three different tasks, namely, todo, event and deadline.
 
 Notes:
 * Commands are case-insensitive and the program only accepts commands typed in lower alphabets. 
-* Users should add ONE task at a time. 
-* There should not be duplication of task with the same task description. 
+* Users should add **ONE** task at a time. 
+* There should **no duplication of tasks** with the same task description. 
 
 #### Adding a todo task: `todo`
 Todo command adds a todo task which requires task description and no other field as input.
@@ -65,11 +65,11 @@ Examples:
 Deadline command adds a deadline task which requires task description, date and time to specify the due date and time of the task. 
 
 Format: `deadline` DESCRIPTION /BY DATE TIME 
-* DATE is should be by DD/MM/YYYY
-* TIME is should be in HHMM
+* DATE should be by DD/MM/YYYY (DATE earlier than the current date will not be accepted as valid date)
+* TIME should be in HHMM
 
 Examples:
-* `deadline submit proposal /by 03/05/2021 1800`
+* `deadline submit proposal /by 03/05/2022 1800`
 
 ![Ui](./Images/addDeadlineTask.png)
 
@@ -79,12 +79,11 @@ Event command adds a event task which requires task description, date as well as
 Format: `event` description /AT DATE START_TIME-END_TIME 
 
 Format: `deadline` DESCRIPTION /BY DATE TIME 
-* DATE is should be by DD/MM/YYYY
-* START_TIME is should be in HHMM
-* END_TIME is should be in HHMM
+* DATE is should be by DD/MM/YYYY (DATE earlier than the current date will not be accepted as valid date)
+* START_TIME and END_IME should be in HHMM (END_TIME earlier than START_TIME will not be accepted as valid time)
 
 Examples:
-* `event attend internship meeting /at 17/02/2021 1000-1100`
+* `event attend internship meeting /at 17/02/2022 1000-1100`
 
 ![Ui](./Images/addEventTask.png)
 
