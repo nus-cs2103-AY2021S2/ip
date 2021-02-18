@@ -39,6 +39,7 @@ public class DeleteCommand extends Command {
             } else {
                 errorMessage = "The task list is empty and there is nothing to be deleted.";
             }
+            assert errorMessage != null : "Error message after IndexOutOfBoundsException should not be null.";
             throw new DBotException(errorMessage, e);
         }
     }
