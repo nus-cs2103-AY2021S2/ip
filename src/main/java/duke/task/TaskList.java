@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 
 import duke.exception.DukeException;
@@ -9,12 +10,13 @@ import duke.exception.DukeException;
  */
 public class TaskList {
     private LinkedList<Task> list;
-
+    private Comparator<Task> compareDate;
     /**
      * Constructor for <code>TaskList</code>.
      */
     public TaskList() {
         this.list = new LinkedList<>();
+        initComparator();
     }
 
     /**
@@ -24,10 +26,11 @@ public class TaskList {
      */
     public TaskList(LinkedList<Task> list) {
         this.list = new LinkedList<Task>(list);
+        initComparator();
     }
 
     /**
-     * Add a <code>Task</code> into <code>TaskList</code>.
+     * Adds a <code>Task</code> into <code>TaskList</code>.
      *
      * @param task a task to be added
      * @return the task that is added
@@ -38,7 +41,7 @@ public class TaskList {
     }
 
     /**
-     * Remove a <code>Task</code> from <code>TaskList</code>.
+     * Removes a <code>Task</code> from <code>TaskList</code>.
      * This method will remove a <code>Task</code> by the position in <code>TaskList</code>
      * and return the removed task.
      *
@@ -56,7 +59,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a <code>Task</code> as done.
+     * Marks a <code>Task</code> as done.
      * This method will mark a <code>Task</code> done by the position in <code>TaskList</code> and
      * return the task that is marked.
      *
@@ -98,5 +101,28 @@ public class TaskList {
             }
         }
         return new TaskList(foundList);
+    }
+
+    /**
+     * Initialises the comparator for sort by date
+     * This method will be called when creating a new <code>TaskList</code>
+     */
+    public void initComparator() {
+        this.compareDate = (x, y) -> {
+            if (x.getDate() == null) {
+                return -1;
+            } else if (y.getDate() == null) {
+                return 1;
+            } else {
+                return x.getDate().compareTo(y.getDate());
+            }
+        };
+    }
+
+    /**
+     * Sorts the list by date
+     */
+    public void sortListByDate() {
+        list.sort(compareDate);
     }
 }

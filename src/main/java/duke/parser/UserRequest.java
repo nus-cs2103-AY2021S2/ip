@@ -9,5 +9,6 @@ public enum UserRequest {
     FIND,
     DELETE,
     BYE,
-    INVALID
+    INVALID,
+    SORT
 }
