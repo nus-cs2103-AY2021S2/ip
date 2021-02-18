@@ -30,8 +30,7 @@ public class HelpCommand extends Command {
                 .orElse(defaultHelpText());
     }
 
-    public static HelpCommand fromCommandMap(HashMap<String, List<String>> commandMap)
-            throws DukeException {
+    public static HelpCommand fromCommandMap(HashMap<String, List<String>> commandMap) {
         List<String> keywords = commandMap.get(COMMAND_STRING);
         if (keywords.isEmpty()) {
             return new HelpCommand(null);

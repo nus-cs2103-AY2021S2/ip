@@ -6,13 +6,11 @@ import util.DukeException;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class TodoCommand extends Command {
     public static final String COMMAND_STRING = "todo";
     public static final CommandType COMMAND_TYPE = CommandType.TODO;
     private final String description;
-    private String message;
 
     private TodoCommand(String description) {
         this.description = description;
@@ -33,4 +31,6 @@ public class TodoCommand extends Command {
     public String execute(TaskManager taskManager) {
         return taskManager.addTask(new Todo(description));
     }
+
+
 }
