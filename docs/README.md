@@ -14,6 +14,7 @@ deadlines, events and todos.
     - [Deleting a task: `delete`](#delete)
     - [Exiting the program: `bye`](#bye)
 - [Command summary](#commandSummary)
+- [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -35,13 +36,17 @@ deadlines, events and todos.
 
 ### <a id="help"></a> <span style="color:darkorange">Viewing help: `help`</span>
 Shows a message with all recognised commands and their formats. <br>
-Format: `help`
+Format: `help` <br>
+Expected output: <br>
+![](./screenshots/help.PNG)
 
 ### <a id="todo"></a> <span style="color:darkorange">Adding a todo: `todo`</span>
 Adds a todo to the task list. <br>
 Format: `todo DESCRIPTION` <br>
 Example of usage: <br>
-`todo borrow book`
+`todo borrow book` <br>
+Expected output: <br>
+![](./screenshots/todo.PNG)
 
 ### <a id="deadline"></a> <span style="color:darkorange">Adding a deadline: `deadline`</span>
 Adds a deadline to the task list. <br>
@@ -49,7 +54,9 @@ Format: `deadline DESCRIPTION /by DATE` <br>
 - The date **must be in the format of `YYYY-MM-DD`**
 
 Example of usage: <br>
-`deadline return book /by 2021-02-04`
+`deadline return book /by 2021-02-04` <br>
+Expected output: <br>
+![](./screenshots/deadline.PNG)
 
 ### <a id="event"></a> <span style="color:darkorange">Adding an event: `event`</span>
 Adds an event to the task list. <br>
@@ -57,11 +64,15 @@ Format: `event DESCRIPTION /at DATE` <br>
 - The date **must be in the format of `YYYY-MM-DD`**
 
 Example of usage: <br>
-`event project meeting /at 2021-03-05`
+`event project meeting /at 2021-03-05` <br>
+Expected output: <br>
+![](./screenshots/event.PNG)
 
 ### <a id="list"></a> <span style="color:darkorange">Listing all tasks: `list`</span>
 Shows a list of all the tasks in the task list. <br>
-Format: `list`
+Format: `list` <br>
+Expected output: <br>
+![](./screenshots/list.PNG)
 
 ### <a id="done"></a> <span style="color:darkorange">Marking a task as done: `done`</span>
 Marks the specified task from the task list as done. <br>
@@ -71,13 +82,17 @@ Format: `done INDEX`
 - The index **must be a positive integer (E.g. 1, 2, 3...)** <br>
 
 Example of usage: <br>
-`done 2`
+`done 2` <br>
+Expected output: <br>
+![](./screenshots/done.PNG)
 
 ### <a id="find"></a> <span style="color:darkorange">Locating tasks by keyword: `find`</span>
 Finds tasks with names that contain the given keyword <br>
 Format: `find KEYWORD` <br>
 Example of usage: <br>
-`find book`
+`find book` <br>
+Expected output: <br>
+![](./screenshots/find.PNG)
 
 ### <a id="delete"></a> <span style="color:darkorange">Deleting a task: `delete`</span>
 Deletes the specified task from the task list. <br>
@@ -87,7 +102,9 @@ Format: `delete INDEX`
 - The index **must be a positive integer (E.g. 1, 2, 3...)** <br>
 
 Example of usage: <br>
-`delete 2`
+`delete 2` <br>
+Expected output: <br>
+![](./screenshots/delete.PNG)
 
 ### <a id="bye"></a> <span style="color:darkorange">Exiting the program: `bye`</span>
 Exits the program. <br>
@@ -138,3 +155,8 @@ Format: `bye`
     <td><code class="language-plaintext highlighter-rouge">todo DESCRIPTION</code> <br /> e.g. <code class="language-plaintext highlighter-rouge">todo borrow book</code></td>
   </tr>
 </table>
+
+---
+
+## <a id="acknowledgements"></a> <span style="color:darkorange"> Acknowledgements </span>
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
