@@ -117,8 +117,6 @@ public class Justin {
 
                     // set delimiter to take out date of the deadline
                     String date = newText.substring(newText.indexOf("/")+4);
-                    //System.out.println(date); // for debugging
-
                     printLineBreaker();
                     System.out.println("Got it. I've added this task:");
 
