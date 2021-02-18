@@ -151,3 +151,17 @@ Example of usage:
 Expected outcome:
 
 ![](images/setexample.png)
+
+### `bye` - Ending a conversation
+
+Says goodbye and terminates the program.
+
+Format: `bye`
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+![](images/byeexample.png)
