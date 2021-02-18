@@ -2,7 +2,7 @@
 
 This project is a simple chatbot that handles your task as a markdown list.
 
-### Setting up using Gradle
+## Setting up using Gradle
 
 Prerequisites: JDK 11, update Intellij to the most recent version, Gradle.
 
@@ -14,17 +14,17 @@ Prerequisites: JDK 11, update Intellij to the most recent version, Gradle.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 1. Open the Gradle option on the right and click run, you should see the ui appear.
 
-### Using the bot
+## Using the bot
 
 These are some simple commands for you to manipulate the bot
 
-#### Task creation
+### Task creation
 
 - todo {name of your todo task}
 - deadline {name of you deadline task} /by {date in 'dd/mm/yyyy hhhh' format}
 - event {name of you event task} /at {date in 'dd/mm/yyyy hhhh' format}
 
-#### Task manipulation
+### Task manipulation
 
 The task index is 1 based.
 
