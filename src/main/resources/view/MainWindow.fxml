@@ -26,7 +26,7 @@
          </effect></Button>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" maxHeight="Infinity" maxWidth="Infinity" spacing="10.0" style="-fx-background-image: url('/images/C.jpg');-fx-background-position: center;">
+                <VBox fx:id="dialogContainer" maxHeight="Infinity" maxWidth="Infinity" spacing="10.0" style="-fx-background-image: url('/images/C.JPG');">
                <children>
                    <ImageView fitHeight="554.0" fitWidth="386.0">
                        <image>
