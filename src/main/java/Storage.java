@@ -11,15 +11,8 @@ import java.util.regex.Pattern;
  * Storage class stores user data
  */
 public class Storage {
-    String filePath;
 
-    /**
-     *
-     * @param filePath the file path to user data
-     */
-    public Storage(String filePath) {
-        this.filePath = filePath;
-    }
+    String filePath = System.getProperty("user.dir") + "/data/duke.txt";
 
     /**
      *
@@ -90,5 +83,4 @@ public class Storage {
         }
         return tasks;
     }
-
 }

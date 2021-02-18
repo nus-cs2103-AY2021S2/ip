@@ -8,7 +8,7 @@ public class Parser {
      * @return a command
      * @throws InvalidCommandException when the command is not recognized
      */
-    public Command parseCommand(String line) throws InvalidCommandException {
+    public static Command parseCommand(String line) {
         String[] inputs = line.split(" ");
         if(inputs[0].equals("list")) {
             return new ListCommand();
@@ -31,6 +31,6 @@ public class Parser {
         else if(inputs[0].equals("event")) {
             return new EventCommand(line);
         }
-        else throw new InvalidCommandException();
+        else return new InvalidCommand();
     }
 }

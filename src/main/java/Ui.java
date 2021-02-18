@@ -28,50 +28,5 @@ public class Ui {
     public void showLoadingError() {
         System.out.println("loading failed");
     }
-
-    /**
-     *
-     * @param task the task
-     * @param numOfItems number of items
-     */
-    public void showUiForAdd(Task task,int numOfItems) {
-        System.out.print("added: ");
-        System.out.println(task);
-        System.out.println("Now you have " + numOfItems + " tasks in the list");
-    }
-
-    /**
-     *
-     * @param removedTask the task to be removed
-     * @param numOfItems number of items
-     */
-    public void showUiForDelete(Task removedTask,int numOfItems) {
-        System.out.println("Noted.I have removed this task:");
-        System.out.print("  ");
-        System.out.println(removedTask);
-        System.out.println("Now you have " + numOfItems + " tasks in the list");
-    }
-
-    /**
-     *
-     * @param task the task
-     */
-    public void showUiForDone(Task task) {
-        System.out.println("Nice, I have marked this task as done!");
-        System.out.print("  ");
-        System.out.print(task);
-    }
-
-    /**
-     *
-     * @param tasks the user tasks
-     */
-    public void printList(List<Task> tasks) {
-        System.out.println("here are your tasks:");
-        for(int itemNo=1;itemNo<=tasks.size();itemNo++) {
-            System.out.print("  ");
-            System.out.println("" + itemNo + ". " + tasks.get(itemNo-1));
-        }
-    }
 }
 

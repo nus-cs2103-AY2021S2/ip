@@ -32,4 +32,9 @@ public class Deadline extends Task {
     public String getDateString() {
         return dateString;
     }
+
+    @Override
+    public String toString() {
+        return "[D]" + "[" + (isCompleted ? "X" : " ") + "] " + dateString;
+    }
 }

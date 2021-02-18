@@ -41,34 +41,36 @@ public class TaskList {
      * @throws InvalidCommandException invalid command exception
      * @throws IOException ioexception
      */
-    public void run(Command command, Ui ui,Storage storage) throws EmptyArgumentException, BadDateException, InvalidCommandException, IOException {
+    public String run(Command command, Ui ui, Storage storage)  {
+        try {
         switch(command.getType()) {
             case "deadline":
                 tasks.add(new Deadline(command.getDescription()));
-                ui.showUiForAdd(tasks.get(tasks.size()-1),numOfItems());
-                break;
+                return "added: " + tasks.get(tasks.size()-1) + "\n" + "Now you have " + numOfItems() + " tasks in the list";
             case "todo":
                 tasks.add(new ToDos(command.getDescription()));
-                ui.showUiForAdd(tasks.get(tasks.size()-1),numOfItems());
-                break;
+                return "added: " + tasks.get(tasks.size()-1) + "\n" + "Now you have " + numOfItems() + " tasks in the list";
             case "event":
                 tasks.add(new Event(command.getDescription()));
-                ui.showUiForAdd(tasks.get(tasks.size()-1),numOfItems());
-                break;
+                return "added: " + tasks.get(tasks.size()-1) + "\n" + "Now you have " + numOfItems() + " tasks in the list";
             case "delete" :
                 Task toBeDeleted = tasks.get(command.itemNo-1);
                 tasks.remove(command.itemNo-1);
-                ui.showUiForDelete(toBeDeleted,this.numOfItems());
-                break;
+                return "Noted. I have removed this task: " + toBeDeleted + "\n" + "Now you have " + numOfItems() + " tasks in the list";
             case "done" :
                 tasks.get(command.itemNo-1).isCompleted = true;
-                ui.showUiForDone(tasks.get(command.itemNo-1));
-                break;
+                return "Nice, I have marked this task as done!\n" + tasks.get(command.itemNo-1);
             case "list" :
-                ui.printList(tasks);
-                break;
-            default : throw new InvalidCommandException();
+                String res = "here are your tasks:\n";
+                for(int itemNo=1;itemNo<=tasks.size();itemNo++) {
+                    res += " ";
+                    res += "" + itemNo + ". " + tasks.get(itemNo-1) + "\n";
+                }
+            default : return "Sorry, invalid command!";
         }
-        storage.save(tasks);
+        }
+        catch(EmptyArgumentException | BadDateException e) {
+            return e.getMessage();
+        }
     }
 }

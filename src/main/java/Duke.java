@@ -1,31 +1,37 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Pattern;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * class for duke
  */
-public class Duke {
+public class Duke  {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
+    private Storage storage = new Storage();
+    private TaskList tasks = new TaskList();
+    private Ui ui = new Ui();
+    private Parser parser = new Parser();
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/img.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/img_1.png"));
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
-    /**
-     *
-     * @param filePath file path which contains the app data
-     */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        parser = new Parser();
-        tasks = new TaskList();
+    public Duke() {
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException | EmptyArgumentException e) {
+        }
+        catch(IOException | EmptyArgumentException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -38,26 +44,14 @@ public class Duke {
      * @throws InvalidCommandException invalid command exception
      * @throws IOException ioexception
      */
-    public void run() throws EmptyArgumentException, BadDateException, InvalidCommandException, IOException {
-        ui.sendWelcomeMessage();
-        while(true) {
-            String line = ui.listenToInput();
-            Command command = parser.parseCommand(line);
-            if(command.isExit()) break;
-            tasks.run(command,ui,storage);
-        }
-        ui.byeUser();
-    }
 
-    /**
-     *
-     * @param args args
-     * @throws EmptyArgumentException empty argument exception
-     * @throws BadDateException bad date exception
-     * @throws InvalidCommandException invalid command exception
-     * @throws IOException ioexception
-     */
-    public static void main(String[] args) throws EmptyArgumentException, BadDateException, InvalidCommandException, IOException {
-        new Duke(System.getProperty("user.dir") + "/data/duke.txt").run();
+    public String getResponse(String line) {
+        Command command = parser.parseCommand(line);
+        if(command.isExit()) return "Bye bye";
+        return tasks.run(command,ui,storage);
+    }
+    public String welcome() {
+        ui.sendWelcomeMessage();
+        return "Hi Im Duke, how may I help you?";
     }
 }
