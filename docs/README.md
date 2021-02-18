@@ -18,7 +18,8 @@ Duke is a simple desktop application that allows you to keep track your tasks in
 
 ## Features
 
-###Notes about formatting
+### Notes about formatting
+
 * Commands given are case-sensitive.
 * Square brackets `[ ]` are not needed when entering commands.
 
@@ -125,7 +126,7 @@ Format: `bye`
 
 ---
 
-##FAQ
+## FAQ
 
 Q: How do I transfer my data to another system?
 
@@ -133,7 +134,8 @@ A: You can transfer your data by moving the data file located at `your_home_fold
 
 ---
 
-##Command summary
+## Command summary
+
 
 | Command       |        Format                     |
 |:-------------:|:---------------------------------:|
