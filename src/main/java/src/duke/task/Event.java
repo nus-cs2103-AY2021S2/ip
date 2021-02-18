@@ -42,6 +42,9 @@ public class Event extends Task {
         return "E" + super.currentStatus();
     }
 
+    /**
+     * Changes the task time to a new time
+     */
     @Override
     public void changeEventTime(LocalDate newEventTime) {
         this.eventTime = newEventTime;

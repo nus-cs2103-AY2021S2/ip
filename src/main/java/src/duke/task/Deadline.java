@@ -44,6 +44,9 @@ public class Deadline extends Task {
         return "D" + super.currentStatus();
     }
 
+    /**
+     * Changes the task time to a new time
+     */
     @Override
     public void changeEventTime(LocalDate newEventTime) {
         this.deadlineTime = newEventTime;

@@ -5,10 +5,19 @@ import java.util.Arrays;
 
 import duke.enums.TaskType;
 
+/**
+ * The ParseTaskHandler object handles all task logic for the parser
+ */
 public class ParseTaskHandler {
     private String description;
     private String date;
 
+    /**
+     * Gets the relevant information from the parser and breaks down the relevant
+     * informatino needed to create a new task
+     * 
+     * @param information informatino needed to create a new task
+     */
     ParseTaskHandler(String[] information) {
         ArrayList<String> timeAndDescription;
 
@@ -22,6 +31,7 @@ public class ParseTaskHandler {
         timeAndDescription.add("DESCRIPTION.ERROR DATE.ERROR");
         timeAndDescription.add("DATE.ERROR ");
         assert timeAndDescription.size() >= 2;
+
         switch (typeOfTask) {
             case TODO:
                 this.description = timeAndDescription.get(0);
@@ -38,10 +48,20 @@ public class ParseTaskHandler {
 
     }
 
+    /**
+     * gets the date of the new task
+     * 
+     * @return inputted new task date
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * gets the description of the new task
+     * 
+     * @return inputted new task description
+     */
     public String getDescription() {
         return description;
     }

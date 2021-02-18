@@ -34,7 +34,7 @@ public class TaskList {
      * @param taskIndex index - 1 where the task is to be deleted
      */
     public void delete(int taskIndex) {
-        this.listOfTasks.remove(taskIndex - 1);
+        this.listOfTasks.remove(taskIndex);
     }
 
     /**
@@ -78,7 +78,14 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * removes the task at the taskindex and replaces it with the new task
+     * 
+     * @param task      task to be put in the task list
+     * @param taskIndex deletes the task at this index
+     */
     public void update(Task task, int taskIndex) {
+        this.delete(taskIndex);
         this.listOfTasks.add(taskIndex, task);
     }
 }

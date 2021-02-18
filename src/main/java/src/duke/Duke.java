@@ -25,9 +25,9 @@ import javafx.scene.image.Image;
  */
 public class Duke {
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
+    private final Image USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image DUKE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final String ILLEGAL_ARGUMENT_MESSAGE = "    Invalid command, work harder!!!\n";
     private TaskList taskList;
 
     /**
@@ -38,8 +38,11 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Get the users input and generates the relevant response based on the command
+     * input and validity.
+     * 
+     * @param input input from the user in the ui
+     * @return text display to the user
      */
     public String getResponse(String input) {
         Parser parser = new Parser(input);
@@ -50,10 +53,11 @@ public class Duke {
             switch (taskType) {
                 case LIST:
                     output = Ui.execute(Command.LIST, taskList, null);
+                    System.out.println(output);
                     break;
                 case DELETE:
                     Task deletedTask = taskList.get(parser.getTaskIndex() - 1);
-                    taskList.delete(parser.getTaskIndex());
+                    taskList.delete(parser.getTaskIndex() - 1);
                     output = Ui.execute(Command.DELETE, taskList, deletedTask.getStatus());
                     break;
                 case DONE:
@@ -63,9 +67,9 @@ public class Duke {
                     break;
                 case SNOOZE:
                     Task changeTask = taskList.get(parser.getTaskIndex() - 1);
-                    taskList.delete(parser.getTaskIndex());
-                    changeTask.changeEventTime(
-                            LocalDate.parse(parser.getDate(), DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")));
+                    LocalDate newDate = LocalDate.parse(parser.getDate(),
+                            DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+                    changeTask.changeEventTime(newDate);
                     taskList.update(changeTask, parser.getTaskIndex() - 1);
                     output = Ui.execute(Command.SNOOZE, taskList, changeTask.getStatus());
                     break;
@@ -81,7 +85,7 @@ public class Duke {
                     output = Ui.execute(Command.FIND, taskList, parser.getDescription());
                     break;
                 case NONE:
-                    throw new TaskException("    OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    throw new TaskException(ILLEGAL_ARGUMENT_MESSAGE);
                 case BYE:
                     output = Ui.execute(Command.BYE, taskList, null);
                     break;
@@ -94,13 +98,19 @@ public class Duke {
         } catch (TaskException e) {
             return (e.getMessage());
         } catch (IllegalArgumentException e) {
-            return ("    OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            return (ILLEGAL_ARGUMENT_MESSAGE);
         }
         Storage.createAndWrite("savedTasks.txt", taskList);
 
         return output;
 
     }
+
+    /**
+     * sends the greeting from duke to the user
+     * 
+     * @return text shown to the user when they start duke
+     */
 
     public static String greeting() {
         return "    Hey yo, I'm Travis.\n    I make you work. \n";

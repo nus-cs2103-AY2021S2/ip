@@ -3,6 +3,10 @@ package duke.datahandler;
 import duke.enums.Command;
 import duke.exception.TaskException;
 
+/**
+ * The parser object reads and deconstructs the user input into useful parts
+ * that can be processed by other handlers.
+ */
 public class Parser {
     private String date;
     private Command command;
@@ -20,9 +24,6 @@ public class Parser {
             String[] information = input.split(" ", 2);
             assert information.length > 0;
             this.command = Command.valueOf(information[0].toUpperCase());
-            System.out.println(command.toString());
-            for (int i = 0; i < information.length; i++)
-                System.out.println(information[i]);
             switch (this.command) {
                 case FIND:
                     this.description = information[1];
@@ -63,7 +64,7 @@ public class Parser {
      * @return true if there is no description false otherwise
      */
     public boolean hasDescriptionError() {
-        return description.equals("DESCRIPTION.ERROR DATE.ERROR");
+        return description.equals("DESCRIPTION.ERROR DATE.ERROR") || description.equals("");
     }
 
     /**
@@ -84,22 +85,48 @@ public class Parser {
         return this.command.equals(Command.BYE);
     }
 
+    /**
+     * throws a task exception for when the parser has a task exception
+     * 
+     * @param exceptionMessage the message to be passed to the task exception
+     * @throws TaskException the exception that will be thowen by parser
+     */
     public static void exception(String exceptionMessage) throws TaskException {
         throw new TaskException(exceptionMessage);
     }
 
+    /**
+     * returns task index the user has inputted
+     * 
+     * @return inputted task index
+     */
     public int getTaskIndex() {
         return taskIndex;
     }
 
+    /**
+     * gets the command the user has inputted
+     * 
+     * @return inputted command
+     */
     public Command getCommand() {
         return command;
     }
 
+    /**
+     * gets the date inputted by the user
+     * 
+     * @return inputted date
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * gets the task description inputted by the user
+     * 
+     * @return inputted task description
+     */
     public String getDescription() {
         return description;
     }

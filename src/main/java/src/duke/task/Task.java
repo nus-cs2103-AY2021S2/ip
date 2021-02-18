@@ -43,7 +43,7 @@ public abstract class Task {
     /**
      * returns formatted string based on whether task is done
      *
-     * @return a formwatted string based on done status
+     * @return a formatted string based on done status
      */
     public String currentStatus() {
         if (this.isDone) {
@@ -63,9 +63,19 @@ public abstract class Task {
         return this.description.contains(word);
     }
 
+    /**
+     * gets the current is done status
+     * 
+     * @return true is task is done false if not
+     */
+
     public boolean getDone() {
         return this.isDone;
     }
+
+    /**
+     * to be implemented by subclasses if they intend to support the snooze command
+     */
 
     public abstract void changeEventTime(LocalDate newTime);
 }
