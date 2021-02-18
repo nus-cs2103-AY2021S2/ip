@@ -19,6 +19,7 @@ public class IndexParser implements Parser {
         }
         String[] instructions = input.substring(sepIndex).trim().split(" ");
         try {
+            assert(instructions.length > 0);
             // Rule out the possible effect by "set" statement
             String indexInString = instructions[0].replace("/as", "").trim();
             return Integer.parseInt(indexInString) - 1;
