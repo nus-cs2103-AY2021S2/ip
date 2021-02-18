@@ -2,4 +2,3 @@ D|0|catch dog|2021-02-03
 E|1|catch bird|2019-06-10 19:00
 D|0|catch myself|2020-10-20
 T|0|catch joker
-T|0|buy ryan's dog food

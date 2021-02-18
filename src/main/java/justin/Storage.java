@@ -57,20 +57,13 @@ public class Storage {
         TaskList holder = new TaskList();
         File file = new File(filePath);
 
+        assert file != null : "justin.txt does not exist!";
+
         if (file.exists()) {
             try {
                 for (String line : Files.readAllLines(Paths.get(filePath))) {
 
-                    //System.out.println(line); // for debugging
-
-                    // create an linkedlist to store the split lines
                     String[] splits = line.split("\\|", 5);
-
-                    // splits[0] is the holder
-                    // T is t0do
-                    // E is event
-                    // D is deadline
-                    // else just a vanilla task
 
                     if (splits[0].equals("T")) {
                         Todo td = new Todo(splits[2]);
@@ -160,7 +153,6 @@ public class Storage {
                                 "|" + ((Event) tasks.getList().get(i)).dateTime;
                     }
                 } else {
-                    // vanilla event
                     if (tasks.getList().get(i).isDone) {
                         holder = "1" + "|" + tasks.getList().get(i).description;
                     } else {
@@ -178,7 +170,6 @@ public class Storage {
             }
 
             // write content of sb into file
-
             FileWriter myWriter = new FileWriter(new File(filePath));
             myWriter.write(sb.toString());
             myWriter.close();

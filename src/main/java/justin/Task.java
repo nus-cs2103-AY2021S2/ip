@@ -51,6 +51,7 @@ public class Task {
 
     // method to mark task as done
     public void markAsDone() {
+        assert this.isDone == false : "Task is already done";
         this.isDone = true;
     }
 

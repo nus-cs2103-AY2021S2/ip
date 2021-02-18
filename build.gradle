@@ -47,12 +47,13 @@ test {
 }
 
 application {
-    mainClassName = "justin.Justin"
+    mainClassName = "justin.Launcher"
 }
 
 shadowJar {
     archiveBaseName = "justin"
     archiveClassifier = null
+    mainClassName = "justin.Launcher"
 }
 
 checkstyle {

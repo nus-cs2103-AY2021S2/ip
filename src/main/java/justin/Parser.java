@@ -79,6 +79,10 @@ public class Parser {
 
                 return "HELP";
 
+            } else if (fullText.contains("empty")) {
+
+                return "EMPTY";
+
             } else {
 
                 return "ADD";

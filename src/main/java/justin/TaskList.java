@@ -95,26 +95,19 @@ public class TaskList {
                         td.markAsDone();
                     }
                     list.set(i, td); // insert into list
-                    // formatting
-                    //printLineBreaker();
                     holder += "Got it. I've added this task:\n";
                     holder += " " + td.toString() + "\n";
                     holder += "Now you have " + list.size() + " tasks in the list\n";
-                    //printLineBreaker();
                     ifExist = true;
                 }
             }
 
             if (!ifExist) {
-                // no instance of new task in exisiting list, must create new one
                 Todo td = new Todo(description);
                 list.add(td);
-                // formatting
-                //printLineBreaker();
                 holder += "Got it. I've added this task:\n";
                 holder += " " + td.toString() + "\n";
                 holder += "Now you have " + list.size() + " tasks in the list\n";
-                //printLineBreaker();
             }
 
             return holder;
@@ -144,19 +137,13 @@ public class TaskList {
             for (int i = 0; i < list.size(); i++) {
                 if(list.get(i).description.equals(description)) {
                     Event e = new Event(description, date);
-                    // bringing over info from superclass
                     if (list.get(i).isDone) {
                         e.markAsDone();
                     }
-
-                    list.set(i, e); // insert into list
-
-                    //formatting
-                    //printLineBreaker();
+                    list.set(i, e);
                     holder += "Got it. I've added this task:\n";
                     holder += " " + e.toString() + "\n";
                     holder += "Now you have " + list.size() + " tasks in the list\n";
-                    //printLineBreaker();
                     ifExist = true;
                 }
             }
@@ -164,12 +151,9 @@ public class TaskList {
             if (!ifExist) {
                 Event e = new Event(description, date);
                 list.add(e);
-                //formatting
-                //printLineBreaker();
                 holder += "Got it. I've added this task:\n";
                 holder += " " + e.toString() + "\n";
                 holder += "Now you have " + list.size() + " tasks in the list\n";
-                //printLineBreaker();
             }
 
             return holder;
@@ -195,12 +179,9 @@ public class TaskList {
 
             int listNum = Integer.parseInt(num); // changes to int
             Task newTask = list.remove(listNum-1); // delete the entry of choice
-            //format
-            //printLineBreaker();
             holder += "Noted. I've removed this task:\n";
             holder += " " + newTask.toString() + "\n";
             holder += "Now you have " + list.size() + " tasks in the list\n";
-            //printLineBreaker();
             return holder;
 
         } catch(IndexOutOfBoundsException e) {

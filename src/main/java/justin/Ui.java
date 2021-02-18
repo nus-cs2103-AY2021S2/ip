@@ -141,7 +141,8 @@ public class Ui {
 
     public String welcomeMessage() {
         String msg = "Welcome! I am Justin,\n";
-        msg += "Your personal Timetable planner";
+        msg += "Your personal Timetable planner\n";
+        msg += "Type command 'help' to see what you can do\n";
 
         return msg;
     }
@@ -161,6 +162,5 @@ public class Ui {
         holder += newText;
         return holder;
     }
-
 
 }

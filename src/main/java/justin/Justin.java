@@ -50,8 +50,6 @@ public class Justin {
 
     public static void main(String[] args) {
         Justin justin = new Justin();
-        //justin.run();
-
     }
 
 
@@ -73,7 +71,10 @@ public class Justin {
         String response = "";
 
         try {
+
             String command = pr.checkCommand();
+
+            assert command != null;
 
             switch (command) {
 
@@ -107,57 +108,39 @@ public class Justin {
 
                 case "DEADLINE":
 
-                    //level 10 gui
                     String newText = text.substring(9); // remove deadline from the string text
-                    // set delimiter to take out the description of the deadline
                     String description = newText.substring(0, newText.indexOf("/") - 1);
-                    // set delimiter to take out date of the deadline
                     String date = newText.substring(newText.indexOf("/") + 4);
-
-                    // C-DetectDuplicates
                     response = tasks.addDeadline(description, date);
 
                     break;
 
                 case "TODO":
 
-                    // level 10 gui
                     String descriptionToDo = text.substring(text.indexOf(" ") + 1); // take out the item from the text
-                    // C-DetectDuplicates
                     response = tasks.addToDo(descriptionToDo);
 
                     break;
 
                 case "EVENT":
 
-                    // level 10 gui
                     String eventText = text.substring(text.indexOf(" ") + 1); // removing the event to get description
-                    // set delimiter to obtain the description and the at
                     String descriptionEvent = eventText.substring(0, eventText.indexOf("/") - 1);
                     String dateEvent = eventText.substring(eventText.indexOf("/") + 4);
-                    // splitting the date and time respectively
-                    // C-DetectDuplicates
                     response = tasks.addEvent(descriptionEvent, dateEvent);
-
                     break;
-
                 case "DELETE":
 
                     String numDelete = text.substring(7); // take out the int value of the task to be completed
-
                     try {
                         response += tasks.delete(numDelete);
                     } catch (JustinException e) {
                         response += e.getMessage();
                     }
-
                     break;
-
                 case "FIND": // for level 9
 
-                    // level 10 gui
-
-                    String findText = text.substring(text.indexOf(" ") + 1); // key for searching
+                    String findText = text.substring(text.indexOf(" ") + 1);
                     response = ui.printFoundTask(tasks.find(findText));
 
                     break;
