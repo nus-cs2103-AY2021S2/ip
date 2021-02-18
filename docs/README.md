@@ -35,7 +35,7 @@ Hope to see you soon!
 
 ### Reminder
 
-Remember to always execute this command or else the task would not be saved!
+Remember to always execute this command after working on duke or else the task would not be saved!
 
 ## Task Features
 
