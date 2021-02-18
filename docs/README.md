@@ -89,7 +89,7 @@ Examples:
 
 ---
 
-### Undo tasks: `undo previous command`
+### Undo previous command: `undo`
 Performs undo operation.
 
 Format: `undo`
