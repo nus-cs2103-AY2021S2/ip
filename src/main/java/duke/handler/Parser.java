@@ -169,9 +169,9 @@ public class Parser {
 
     private static ScheduleHandler parseSchedule(String userInput, String keywordUppCaps) throws DukeException {
         String[] sInfo = userInput.split(" ", 4);
-        String frequency = sInfo[1];
+        int numOfTimes = Integer.parseInt(sInfo[1]);
+        String frequency = sInfo[2];
         checkFreqIsWeekly(frequency, keywordUppCaps);
-        int numOfTimes = Integer.parseInt(sInfo[2]);
         String command = sInfo[3];
         CommandHandler toScheduleHandler = parseFromInput(command);
         checkCommandCanSchedule(toScheduleHandler, keywordUppCaps);

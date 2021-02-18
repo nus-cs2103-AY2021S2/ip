@@ -32,7 +32,7 @@ public class DukeInvalidDesException extends DukeException {
         case "SCHEDULE":
             message += "Your request for SCHEDULE is invalid.\n"
                     + "Is it of the format:\n"
-                    + "schedule weekly [no. of times] [Schedulable task] ?";
+                    + "schedule [no. of times] weekly [Schedulable task] ?";
             break;
         default:
             message += "Your description is invalid.";

@@ -50,10 +50,12 @@ public class ScheduleHandler implements CommandHandler {
         LocalDateTime firstTime = firstTask.getBy();
         String taskDescription = firstTask.getDescription();
         LocalDateTime dateTime = firstTime;
-        for (int i = 0; i < numOfTimes; i++) {
+        new DeadlineHandler(taskDescription, dateTime).execute(storage, taskList);
+        for (int i = 1; i < numOfTimes; i++) {
             dateTime = dateTime.plusDays(7);
-            response += new DeadlineHandler(taskDescription, dateTime).execute(storage, taskList);
+            new DeadlineHandler(taskDescription, dateTime).execute(storage, taskList);
         }
+        response += scheduleRespond(firstTask, taskList);
         return response;
     }
 
@@ -69,10 +71,10 @@ public class ScheduleHandler implements CommandHandler {
         LocalDateTime firstTime = firstTask.getAt();
         String taskDescription = firstTask.getDescription();
         LocalDateTime dateTime = firstTime;
-        new DeadlineHandler(taskDescription, dateTime).execute(storage, taskList);
-        for (int i = 0; i < numOfTimes; i++) {
+        new EventHandler(taskDescription, dateTime).execute(storage, taskList);
+        for (int i = 1; i < numOfTimes; i++) {
             dateTime = dateTime.plusDays(7);
-            new DeadlineHandler(taskDescription, dateTime).execute(storage, taskList);
+            new EventHandler(taskDescription, dateTime).execute(storage, taskList);
         }
         response += scheduleRespond(firstTask, taskList);
         return response;
