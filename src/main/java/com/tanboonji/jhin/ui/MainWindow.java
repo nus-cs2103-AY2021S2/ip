@@ -24,7 +24,7 @@ public class MainWindow extends AnchorPane {
     private static final String RESTART_MESSAGE = "Please delete data files on local disk and restart the application.";
     private static final int TWO_SECOND = 2000;
     private static final int SEVEN_SECOND = 7000;
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/HeimerdingerIcon.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserIcon.jpg"));
     private final Image jhinImage = new Image(this.getClass().getResourceAsStream("/images/JhinIcon.jpg"));
     private final Image errorImage = new Image(this.getClass().getResourceAsStream("/images/ErrorIcon.jpg"));
     @FXML
