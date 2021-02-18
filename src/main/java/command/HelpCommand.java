@@ -2,6 +2,7 @@ package command;
 
 import task.TaskManager;
 import util.DukeException;
+import util.Formatter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,47 +22,39 @@ public class HelpCommand extends Command {
         add(DeleteCommand.COMMAND_STRING);
         add(QuitCommand.COMMAND_STRING);
     }};
-    private final Optional<String> keywordOpt;
+    private final String response;
 
     private HelpCommand(String keyword) {
-        this.keywordOpt = Optional.of(keyword);
-    }
-
-    private HelpCommand() {
-        this.keywordOpt = Optional.empty();
+        this.response = Optional.ofNullable(keyword)
+                .map(HelpCommand::keywordHelpText)
+                .orElse(defaultHelpText());
     }
 
     public static HelpCommand fromCommandMap(HashMap<String, List<String>> commandMap)
             throws DukeException {
         List<String> keywords = commandMap.get(COMMAND_STRING);
         if (keywords.isEmpty()) {
-            return new HelpCommand();
-        }
-        String keyword = keywords.get(0);
-        boolean isValidKeyword = VALID_KEYWORDS.contains(keyword);
-        if (isValidKeyword) {
-            return new HelpCommand(keyword);
+            return new HelpCommand(null);
         } else {
-            throw new DukeException("Help keyword is not valid");
+            String keyword = keywords.get(0);
+            return new HelpCommand(keyword);
         }
     }
 
     @Override
     public String execute(TaskManager taskManager) {
-        return keywordOpt.map(k -> keywordHelpText(k)).orElse(defaultHelpText());
+        return response;
     }
 
-    private String defaultHelpText() {
-        String validKeywordList = String.join(", ", VALID_KEYWORDS);
+    private static String defaultHelpText() {
 
-        String result = "Type \"help <command>\" to read detailed information about each command"
+        return "Type \"help <command>\" to read detailed information about each command"
                 + "\n"
                 + "List of commands: \n"
-                + validKeywordList;
-        return result;
+                + Formatter.formatList(VALID_KEYWORDS);
     }
 
-    private String keywordHelpText(String keyword) {
+    private static String keywordHelpText(String keyword) {
         String preText = "Help for \"" + keyword + "\":\n";
         String text;
 
@@ -91,49 +84,48 @@ public class HelpCommand extends Command {
             text = quitHelpText();
             break;
         default:
-            text = "";
-            assert false; //Method should not have been called with an invalid keyword.
+            return "Please a valid command for \"help <command>\"";
         }
 
         return preText + text;
     }
 
-    private String listHelpText() {
-        return "Usage: \"list\" - " +
-                "Shows all outstanding tasks.";
+    private static String listHelpText() {
+        return "Usage: \"list\" - "
+                + "Shows all outstanding tasks.";
     }
 
-    private String findHelpText() {
-        return "Usage: \"find <keyword1> <keyword2>...\" - " +
-                "Shows all tasks whose description contains all of the keywords";
+    private static String findHelpText() {
+        return "Usage: \"find <keyword1> <keyword2>...\" - "
+                + "Shows all tasks whose description contains all of the keywords";
     }
 
-    private String todoHelpText() {
-        return "Usage: \"todo <description>\" - " +
-                "Creates a Todo Task with the supplied description";
+    private static String todoHelpText() {
+        return "Usage: \"todo <description>\" - "
+                + "Creates a Todo Task with the supplied description";
     }
 
-    private String deadlineHelpText() {
+    private static String deadlineHelpText() {
         return "Usage: \"deadline <description> /by <YYYY-MM-DD>\" - "
                 + "Creates a Deadline with the supplied description and date";
     }
 
-    private String eventHelpText() {
+    private static String eventHelpText() {
         return "Usage: \"deadline <description> /at <YYYY-MM-DD>\" - "
                 + "Creates an Event with the supplied description and date";
     }
 
-    private String doneHelpText() {
-        return "Usage: \"done <i>\" - " +
-                "Marks the task with index i in the list as done";
+    private static String doneHelpText() {
+        return "Usage: \"done <i>\" - "
+                + "Marks the task with index i in the list as done";
     }
 
-    private String deleteHelpText() {
+    private static String deleteHelpText() {
         return "Usage: \"delete <i>\" - "
                 + "Removes the task with index i from the list";
     }
 
-    private String quitHelpText() {
+    private static String quitHelpText() {
         return "Usage: \"quit\" - Terminates the application";
     }
 }

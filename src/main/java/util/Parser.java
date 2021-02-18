@@ -48,7 +48,9 @@ public interface Parser {
         case QuitCommand.COMMAND_STRING:
             return QuitCommand.fromCommandMap(commandMap);
         default:
-            throw new DukeException("Sorry I didn't understand that");
+            throw new DukeException("Sorry I didn't understand "
+                    + "\"" + commandFlag + "\"!\n"
+                    + "Try typing \"help\" to see the available commands.");
         }
     }
 
