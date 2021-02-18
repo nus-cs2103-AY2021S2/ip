@@ -1,4 +1,6 @@
-T | 0 | return book
 E | 0 | ailene's bday | 2021-06-08
 D | 0 | homework | 2021-04-05
-T | 0 |  buy plants
+T | 1 |  buy plants
+T | 0 | read book
+T | 0 | buy stationery
+T | 0 | go on an adventure

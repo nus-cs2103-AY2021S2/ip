@@ -17,6 +17,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             duke.prepare();
+            stage.setTitle("Don, The Little Adventurer");
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
