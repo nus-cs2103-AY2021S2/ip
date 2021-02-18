@@ -23,10 +23,8 @@ public class Ui {
 
         System.out.println("   C H A T   W I T H\n" + logo);
 
-        System.out.println(LINE + "\n"
-                + TAB + "Hi there! I'm Elly.\n"
-                + TAB + "How can I help you today?\n"
-                + LINE);
+        System.out.println("Hello, fellow adventurer!\n"
+                + "What's our mission for today?\n");
     }
 
     public String printList(ArrayList<Task> tasks, int numTasks) {
