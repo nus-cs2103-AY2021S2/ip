@@ -89,7 +89,7 @@ Examples:
 ![Ui](./Images/addEventTask.png)
 
 
-### Listing all tasks : `list`
+### Listing all tasks: `list`
 
 Shows a list of all the task in duke.
 
@@ -97,7 +97,7 @@ Format: `list`
 
 ![Ui](./Images/listTask.png)
 
-### Delete a task : `delete`
+### Delete a task: `delete`
 
 Delete a task using its task index in list.
 
@@ -110,7 +110,7 @@ Assume that we still have 4 task,
 
 ![Ui](./Images/deleteTask.png)
 
-### Mark task as done : `done`
+### Mark task as done: `done`
 
 Mark the given task as completed which will add a tick beside the task when list command is executed. 
 
@@ -125,7 +125,7 @@ Assume that we still have 3 task,
 
 ![Ui](./Images/markAsDone.png)
 
-### Find a specific task : `find`
+### Find a specific task: `find`
 
 Show all tasks that matches or contain keywords. 
 
@@ -136,7 +136,7 @@ Example:
 
 ![Ui](./Images/findTask.png)
 
-### Exit : `bye`
+### Exit: `bye`
 
 The program will terminate a few seconds after returning a "Bye. Hope to see you again!" message. 
 
