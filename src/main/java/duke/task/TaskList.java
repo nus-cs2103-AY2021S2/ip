@@ -29,6 +29,11 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Returns a TaskList containing tasks that have the keyword String in their descriptions.
+     * @param keyword Keyword String to find relevant tasks
+     * @return TaskList containing tasks that have keyword String in their descriptions
+     */
     public TaskList find(String keyword) {
         TaskList results = new TaskList();
         keyword = keyword.toLowerCase();
