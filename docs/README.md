@@ -7,7 +7,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 1. From www.github.com/winniehyx/ip/releases, download the latest duke.jar .
 
-2. Open the jar file to start the app. The GUI for Duke would appear.
+2. For Windows, open the jar file to start the app. The GUI for Duke would appear. For Mac, type `java -jar duke.jar` into the terminal to run the file.
 
 4. Refer to `Features` for the commands you can type in the command box. 
    

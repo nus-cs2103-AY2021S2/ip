@@ -12,22 +12,41 @@ import java.time.format.DateTimeFormatter;
 import static java.lang.System.exit;
 
 public class Duke {
-
+    /**
+     * Storage for the tasks.
+     */
     private Storage storage;
+    /**
+     * List of task.
+     */
     private TaskList taskList;
+    /**
+     * Ui of program.
+     */
     private Ui ui;
 
+    /**
+     * Initialise Duke.
+     */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(System.getProperty("user.dir") + "/data/", "duke.txt");
+        this.storage = new Storage(System.getProperty(
+                "user.dir") + "/data/", "duke.txt");
         try {
             this.taskList = storage.loadFromHardisk();
         } catch (Exception e) {
-            System.out.println("Error loading from storage, starting with new tasklist");
+            System.out.println("Error loading from storage,"
+                    + "starting with new tasklist");
             this.taskList = new TaskList();
         }
     }
 
+    /**
+     * Gives the corresponding output for the given task.
+     *
+     * @param input
+     * @return output on the Ui based on what the user has typed
+     */
     public Response getResponse(String input) {
 
         Response response;
@@ -64,14 +83,16 @@ public class Duke {
                 response = executeFindCommand(argument);
                 break;
             default:
-                response = new Response("OOPS!!! I'm sorry, but I don't know what that means :-(", false);
+                response = new Response("OOPS!!! I'm sorry, "
+                        + "but I don't know what that means :-(", false);
                 break;
         }
+
         return response;
     }
 
     /**
-     * Executes Bye Command
+     * Executes Bye Command.
      *
      * @return String to represent termination of the program
      */
@@ -81,7 +102,7 @@ public class Duke {
     }
 
     /**
-     * Lists out all tasks
+     * Lists out all tasks.
      *
      * @return String to represent termination of the program
      */
@@ -106,23 +127,23 @@ public class Duke {
     }
 
     /**
-     * Executes Done Command
+     * Executes Done Command.
      *
      * @param argument command arguments
      * @return String to represent termination of the program
      */
     private Response executeDoneCommand(String argument) {
         // check for correct number of arguments
-        assert argument != null : "OOPS!!! The description of a done cannot be empty.";
-
+        assert argument != null : "OOPS!!! The description of "
+                + "a done cannot be empty.";
         // check if argument is an integer
         int taskId;
         try {
             taskId = Integer.parseInt(argument) - 1;
         } catch (NumberFormatException e) {
-            return new Response("OOPS!!! The id of a done must be an integer.", false);
+            return new Response("OOPS!!! The id of a done"
+                    + " must be an integer.", false);
         }
-
         // check if integer is within bounds
         if (taskId >= taskList.size() || taskId < 0) {
             return new Response("OOPS!!! That is an invalid task id.", false);
@@ -141,15 +162,14 @@ public class Duke {
     }
 
     /**
-     * Executes Todo Command
+     * Executes Todo Command.
      *
      * @param argument command arguments
      * @return String to represent termination of the program
      */
     private Response executeTodoCommand(String argument) {
-
-        assert argument != null : "OOPS!!! The description of a done cannot be empty.";
-
+        assert argument != null : "OOPS!!! The description of a "
+                + "done cannot be empty.";
         String[] split = argument.split("/tag", 2);
         String description = split[0];
         String tag = split.length > 1 ? split[1].strip() : null;
@@ -168,16 +188,16 @@ public class Duke {
     }
 
     /**
-     * Executes Deadline Command
+     * Executes Deadline Command.
      *
      * @param argument command arguments
      * @return String to represent termination of the program
      */
     private Response executeDeadlineCommand(String argument) {
-
-        assert argument != null : "OOPS!!! The description of a deadline cannot be empty.";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        assert argument != null : "OOPS!!! The description of a "
+                + "deadline cannot be empty.";
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
         StringBuilder sb = new StringBuilder();
 
@@ -193,7 +213,8 @@ public class Duke {
             try {
                 LocalDateTime.parse(by, formatter);
             } catch (Exception e) {
-                return new Response("Incorrect data format: d/M/yyyy HHmm", false);
+                return new Response("Incorrect data "
+                        + "format: d/M/yyyy HHmm", false);
             }
         }
 
@@ -210,15 +231,15 @@ public class Duke {
     }
 
     /**
-     * Executes Events Command
+     * Executes Events Command.
      *
      * @param argument command arguments
      * @return String to represent termination of the program
      */
     private Response executeEventCommand(String argument) {
 
-        assert argument != null : "OOPS!!! The description of an event cannot be empty.";
-
+        assert argument != null : "OOPS!!! The description of "
+                + "an event cannot be empty.";
         String[] split = argument.split("/tag", 2);
         String arg1 = split[0];
         String tag = split.length > 1 ? split[1].strip() : null;
@@ -241,24 +262,26 @@ public class Duke {
     }
 
     /**
-     * Executes Delete Command
+     * Executes Delete Command.
      *
      * @param argument command arguments
      * @return String to represent termination of the program
      */
     private Response executeDeleteCommand(String argument) {
-
-        assert argument != null : "OOPS!!! The description of a delete cannot be empty.";
+        assert argument != null : "OOPS!!! The description of a delete"
+                + "cannot be empty.";
 
         int taskId;
         try {
             taskId = Integer.parseInt(argument.strip()) - 1;
         } catch (NumberFormatException e) {
-            return new Response("OOPS!!! The id of a delete must be an integer.", false);
+            return new Response("OOPS!!! The id of a delete "
+                    + "must be an integer.", false);
         }
 
         if (taskId >= taskList.size() || taskId < 0) {
-            return new Response("OOPS!!! That is an invalid task id.", false);
+            return new Response("OOPS!!! That is an invalid task id.",
+                    false);
         }
 
         Task task = taskList.remove(taskId);
@@ -273,14 +296,14 @@ public class Duke {
     }
 
     /**
-     * Executes find Command
+     * Executes find Command.
      *
      * @param argument command arguments
      * @return String to represent termination of the program
      */
     private Response executeFindCommand(String argument) {
-
-        assert argument != null : "OOPS!!! The description of a find cannot be empty.";
+        assert argument != null : "OOPS!!! The description of a"
+                + "find cannot be empty.";
 
         TaskList subList = new TaskList();
         for (Task task : taskList.getList()) {
@@ -288,8 +311,7 @@ public class Duke {
             String tag = task.getTag();
             if (tag != null && tag.contains(argument)) {
                 subList.add(task);
-                }
-            else if (description.contains(argument)) {
+            } else if (description.contains(argument)) {
                 subList.add(task);
             }
         }
@@ -298,7 +320,8 @@ public class Duke {
 
         if (subList.size() == 0) {
 
-            return new Response("There are no tasks that matches your search", false);
+            return new Response("There are no tasks that matches your search",
+                    false);
         } else {
             sb.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < subList.size(); i++) {
@@ -313,9 +336,13 @@ public class Duke {
         return new Response(sb.toString(), false);
     }
 
+    /**
+     * App shuts down after sleeptime when bye is typed by user.
+     */
     public void shutDown() {
         try {
-            Thread.sleep(2000);
+            Integer sleeptime = 2000;
+            Thread.sleep(sleeptime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

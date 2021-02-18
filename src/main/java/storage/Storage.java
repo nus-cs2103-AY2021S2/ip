@@ -1,6 +1,9 @@
 package storage;
 
-import task.*;
+import task.TaskList;
+import task.Task;
+import task.Todo;
+import task.Events;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,8 +47,6 @@ public class Storage {
 
     /**
      * Loads a text file and parses it into a tasklist
-     *
-     * @return
      */
     public TaskList loadFromHardisk() {
 
@@ -72,7 +73,7 @@ public class Storage {
     }
 
     /**
-     * parses a string representation of a task into a Task object
+     * Parses a string representation of a task into a Task object.
      *
      * @param data  String representation of task
      * @return      the Task parsed
@@ -95,7 +96,7 @@ public class Storage {
     }
 
     /**
-     * Creates an Event object from the Task details
+     * Creates an Event object from the Task details.
      *
      * @param taskDetails   Task details of the event object
      * @return              The Event Object specified
@@ -106,13 +107,14 @@ public class Storage {
 
         String details = tokens[1];
         String at = tokens[2].equals("NULL") ? null : tokens[2];
-        String tag = tokens[3].equals("NULL") ? null : tokens[3];
+        Integer three = 3;
+        String tag = tokens[three].equals("NULL") ? null : tokens[3];
 
         return new Events(isDone, details, at, tag);
     }
 
     /**
-     * Creates a Deadline object from the Task details
+     * Creates a Deadline object from the Task details.
      *
      * @param taskDetails   Task details of the deadline object
      * @return              The Deadline Object specified
@@ -128,7 +130,7 @@ public class Storage {
         return new Events(isDone, details, by, tag);
     }
     /**
-     * Creates a Todo object from the Task details
+     * Creates a Todo object from the Task details.
      *
      * @param taskDetails   Task details of the todo object
      * @return              The Todo Object specified
@@ -143,7 +145,7 @@ public class Storage {
     }
 
     /**
-     * Creates a new file and directory
+     * Creates a new file and directory.
      */
     private void createNewFile() {
         File directory = new File(this.directory);
@@ -154,7 +156,8 @@ public class Storage {
         try {
             File file = new File(this.directory + this.fileName);
             if (file.createNewFile()) {
-                System.out.println("Created File: " + this.directory + this.fileName);
+                System.out.println("Created File: " + this.directory
+                        + this.fileName);
             } else {
                 System.out.println("File already exists.");
             }

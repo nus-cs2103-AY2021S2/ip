@@ -1,9 +1,21 @@
 package task;
 
 public class Events extends Task {
+    /**
+     * Events represented by typeicon of [E].
+     */
     private final String TYPE_ICON = "[E]";
+    /**
+     * Represented by icon E.
+     */
     private final String ICON = "E";
+    /**
+     * To partition between the icons.
+     */
     private final String DELIMITER = "|";
+    /**
+     * A null string.
+     */
     private final String NULL = "NULL";
 
     private String at;
@@ -39,15 +51,15 @@ public class Events extends Task {
         return result;
     }
     /**
-     * Converts the object into a String representation for storage
+     * Converts the object into a String representation for storage.
      *
      * @return  String represtentation
      */
     @Override
     public String tokenize() {
         String isDoneString = isDone ? "1" : "0";
-
-        String result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
+        String result = ICON + DELIMITER + isDoneString
+                + DELIMITER + this.description;
 
         if (at == null) {
             result += DELIMITER + NULL;

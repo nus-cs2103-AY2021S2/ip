@@ -1,4 +1,4 @@
 T|1|clean floor|NULL
-T|0|sweep|NULL
-T|0|borrow book|book
-D|0|book |NULL|NULL
+D|0|return book |2021-03-06T10:00|NULL
+E|0|project meeting |8/3/2021 1200|NULL
+T|0|join sports club |club

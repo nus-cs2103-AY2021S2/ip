@@ -1,7 +1,5 @@
 package task;
 
-import task.Task;
-
 import java.util.ArrayList;
 
 public class TaskList {
@@ -24,17 +22,32 @@ public class TaskList {
         return this.taskList;
     }
 
+    /**
+     * Returns the size of the tasklist.
+     *
+     * @return tasklist size
+     */
     public int size() {
         return this.taskList.size();
     }
-
+    /**
+     * Gets the task of that particular index in the tasklist.
+     *
+     * @param i
+     * @return the task at that index
+     */
     public Task get(int i) {
         return this.taskList.get(i);
     }
-
+    /**
+     * Removes the task of that particular index in the tasklist.
+     *
+     * @param i
+     */
     public Task remove(int i) {
         return this.taskList.remove(i);
     }
 
 }
+
 

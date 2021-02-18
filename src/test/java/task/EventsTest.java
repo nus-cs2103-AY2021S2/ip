@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EventsTest {
 
-    Events event1 = new Events("event1", null);
-    Events event2 = new Events("event2", "NUS");
+    Events event1 = new Events("event1", null, null);
+    Events event2 = new Events("event2", "NUS", null);
 
     @Test
     void getTypeIcon() {

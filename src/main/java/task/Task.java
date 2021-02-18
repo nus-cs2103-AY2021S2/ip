@@ -1,7 +1,9 @@
 package task;
 
 public abstract class Task {
-
+    /**
+     *
+     */
     protected String description;
     protected String tag;
     protected boolean isDone;

@@ -1,8 +1,18 @@
 public class Response {
-
+    /**
+     *boolean of isExit to create a response.
+     */
     private boolean isExit;
-    private String responseString;
+    /**
+     * String of response.
+     */
+    private final String responseString;
 
+    /**
+     * Constructor of response.
+     * @param responseString
+     * @param isExit
+     */
     public Response(String responseString, boolean isExit) {
         this.responseString = responseString;
         this.isExit = isExit;
