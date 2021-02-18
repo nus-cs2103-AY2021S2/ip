@@ -202,11 +202,16 @@ public class TaskList {
      * @param tasks List of tasks.
      * @return Acknowledgement message that the undo operation has been performed.
      */
-    public static String undoTask(String command, List<Task> tasks) {
+    public static String undoCommand(String command, List<Task> tasks, String lastCommand, Task deletedTask) {
         String reply = "";
-        int undoNumber = Integer.parseInt(command.split(" ")[1]);
-        for(int i = 0; i < undoNumber; i++) {
+        String parsedCommand = Parser.parseCommand(lastCommand);
+        if(parsedCommand.equals("todo") || parsedCommand.equals("deadline") || parsedCommand.equals("event")) {
             tasks.remove(tasks.size() - 1);
+        } else if(parsedCommand.equals("done")) {
+            int index = Parser.parseDoneIndex(lastCommand);
+            tasks.get(index).markAsIncomplete();
+        } else if(parsedCommand.equals("delete")){
+            tasks.add(deletedTask);
         }
         reply += "Undo operation successful";
         try {

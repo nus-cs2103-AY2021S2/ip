@@ -39,6 +39,13 @@ public class Task {
     }
 
     /**
+     *Marks a task as incomplete.
+     */
+    public void markAsIncomplete() {
+        this.isDone = false;
+    }
+
+    /**
      * Formats string to be stored.
      *
      * @return Formatted String.

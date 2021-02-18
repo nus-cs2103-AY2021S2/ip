@@ -4,6 +4,8 @@ public class Duke {
 
     /** List of tasks added by the user */
     private static final List<Task> tasks = Storage.getData();
+    private static String lastCommand;
+    private static Task deletedTask = new Task("dummy");
 
     /**
      * Performs the specified action.
@@ -19,32 +21,38 @@ public class Duke {
         if (command.equals("list")) {
             reply = TaskList.printList(tasks);
         } else if (parsedCommand.equals("done")) {
+            lastCommand = command;
             int index = Parser.parseDoneIndex(command);
             reply = TaskList.markDone(index, tasks);
         } else if (parsedCommand.equals("todo")) {
             try {
                 reply = TaskList.addTodo(command, tasks);
+                lastCommand = command;
             } catch (InvalidTodoException e) {
                 reply = Ui.printEmptyTodoMessage();
             }
         } else if (parsedCommand.equals("deadline")) {
             try {
                 reply = TaskList.addDeadline(command, tasks);
+                lastCommand = command;
             } catch (InvalidDateTimeFormatException e) {
                 reply = Ui.printInvalidDateFormatMessage();
             }
         } else if (parsedCommand.equals("event")) {
             try {
                 reply = TaskList.addEvent(command, tasks);
+                lastCommand = command;
             } catch (InvalidDateTimeFormatException e) {
                 reply = Ui.printInvalidDateFormatMessage();
             }
         } else if (parsedCommand.equals("delete")) {
+            lastCommand = command;
+            deletedTask = tasks.get(Integer.parseInt(command.split(" ")[1]) - 1);
             reply = TaskList.deleteTask(command, tasks);
         } else if (parsedCommand.equals("find")) {
             reply = TaskList.findTask(command, tasks);
         } else if (parsedCommand.equals("undo")) {
-            reply = TaskList.undoTask(command, tasks);
+            reply = TaskList.undoCommand(command, tasks, lastCommand, deletedTask);
         } else if (command.equals("bye")) {
             reply = Ui.printExitMessage();
             System.exit(0);
@@ -64,10 +72,6 @@ public class Duke {
             reply = Ui.printInvalidCommandMessage();
         }
         return reply;
-    }
-
-    public static String run() {
-        return Ui.printWelcomeMessage();
     }
 
 }
