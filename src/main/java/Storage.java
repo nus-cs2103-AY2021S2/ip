@@ -2,13 +2,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Storage {
     private File file;
+    private final String dirPath = System.getProperty("user.dir") + "/data";
+    private final String filePath = System.getProperty("user.dir") + "/data/duke.txt";
 
     public Storage() {
-        this.file = new File("/Users/sidneychong/Desktop/CS2103/iP/PreviousTaskList.txt");
+        this.file = new File(System.getProperty("user.dir") + "/data/duke.txt");
+    }
+
+    private void print(String toString) {
     }
 
     public boolean isSavedHistory() {
@@ -43,6 +50,8 @@ public class Storage {
                 }
             }
             s.close();
+        } else {
+            this.file.mkdirs();
         }
     }
 
@@ -53,7 +62,10 @@ public class Storage {
      * @throws IOException
      */
     public void saveHistory(TaskList tasklist) throws IOException {
-        FileWriter fw = new FileWriter("PreviousTaskList.txt");
+        File file = new File(filePath);
+        File dir = new File(dirPath);
+        handleNonExistentFiles(file, dir);
+        FileWriter fw = new FileWriter(file, false);
         tasklist.forEach(x -> {
             try {
                 fw.write(x.saveInStorageAs() + "\n");
@@ -62,5 +74,17 @@ public class Storage {
             }
         });
         fw.close();
+    }
+
+    private void handleNonExistentFiles(File file, File dir) throws IOException {
+        if (!Files.isDirectory(Paths.get(dirPath))) {
+            // Create data folder and duke.txt if do not exist
+            dir.mkdir();
+            assert Files.isDirectory(Paths.get(dirPath)) : "Directory does not exist";
+            file.createNewFile();
+        } else if (!file.exists()) {
+            // Create duke.txt if do not exist
+            file.createNewFile();
+        }
     }
 }
