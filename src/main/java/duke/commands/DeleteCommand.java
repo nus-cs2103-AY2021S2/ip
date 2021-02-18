@@ -20,7 +20,11 @@ public class DeleteCommand implements Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        assert (index <= tasks.size());
+        if (index > tasks.size()) {
+            throw new DukeException("The index of the task needs to be present in the list.");
+        }
+
+        assert (index > 0);
 
         Task curTask = tasks.getTask(index - 1);
         tasks.removeTask(index - 1);
