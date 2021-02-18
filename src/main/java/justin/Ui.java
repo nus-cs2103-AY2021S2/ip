@@ -31,12 +31,6 @@ public class Ui {
      * when the user first start the program
      */
 
-    public void showWelcomeMessage() {
-        printLine();
-        System.out.println(logo);
-        printLine();
-
-    }
 
     /**
      * This method outputs the helper
