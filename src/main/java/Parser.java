@@ -43,31 +43,26 @@ public class Parser {
     }
 
     /**
-     * Helper function to obtain necessary details and create a Deadline.
-     * @return New Deadline created.
+     * Helper function to obtain necessary details and create a Deadline/Event.
+     *
+     * @param taskType A Character to indicate if command is a Deadline or Event.
+     * @return A Task object, either a Deadline or Event object.
      * @throws DukeException On validation error.
      */
-    public Deadline createDeadline() throws DukeException {
+    public Task createDeadlineOrEvent(Character taskType) throws DukeException {
         CommandValidation.checkForContentAfterSlash(command, findSlash);
-        String deadlineDescription = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
-        LocalDateTime deadlineDateTime =
+        String description = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
+        LocalDateTime taskDateTime =
                 DateTimeHandler.validateDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
-        Deadline newDeadline = new Deadline(deadlineDescription, deadlineDateTime);
-        return newDeadline;
-    }
-
-    /**
-     * Helper function to obtain necessary details and create an Event.
-     * @return New Event created.
-     * @throws DukeException On validation error.
-     */
-    public Event createEvent() throws DukeException {
-        CommandValidation.checkForContentAfterSlash(command, findSlash);
-        String eventDescription = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
-        LocalDateTime eventDateTime =
-                DateTimeHandler.validateDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
-        Event newEvent = new Event(eventDescription, eventDateTime);
-        return newEvent;
+        if (taskType == 'D') {
+            Deadline newDeadline = new Deadline(description, taskDateTime);
+            return newDeadline;
+        } else if (taskType == 'E') {
+            Event newEvent = new Event(description, taskDateTime);
+            return newEvent;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -87,42 +82,25 @@ public class Parser {
     }
 
     /**
-     * Handles the ToDo command.
+     * Handles a ToDo, Deadline or Event command.
+     * @param type A Character to indicate type of command.
+     *
      * @return A string with the response to the command.
-     * @throws IOException On file error when adding the ToDo task
+     * @throws IOException On file error when adding the task
      * to the file in the hard disk.
-     */
-    public String handleToDo() throws IOException {
-        ToDo newToDo = createTodo();
-        tasks.add(newToDo);
-        storage.addTask(newToDo);
-        return ui.respondToAddTask(newToDo, tasks.getSize());
-    }
-
-    /**
-     * Handles the Deadline command.
-     * @return A string with the response to the command.
      * @throws DukeException On validation error.
-     * @throws IOException On file error.
      */
-    public String handleDeadline() throws DukeException, IOException {
-        Deadline newDeadline = createDeadline();
-        tasks.add(newDeadline);
-        storage.addTask(newDeadline);
-        return ui.respondToAddTask(newDeadline, tasks.getSize());
-    }
-
-    /**
-     * Handles the Event command.
-     * @return A string with the response to the command.
-     * @throws DukeException On validation error.
-     * @throws IOException On file error.
-     */
-    public String handleEvent() throws DukeException, IOException {
-        Event newEvent = createEvent();
-        tasks.add(newEvent);
-        storage.addTask(newEvent);
-        return ui.respondToAddTask(newEvent, tasks.getSize());
+    public String handleATaskCreation(Character type) throws IOException, DukeException {
+        assert type == 'T' | type == 'D' | type == 'E';
+        Task newTask = null;
+        if (type == 'T') {
+            newTask = createTodo();
+        } else {
+            newTask = createDeadlineOrEvent(type);
+        }
+        tasks.add(newTask);
+        storage.addTask(newTask);
+        return ui.respondToAddTask(newTask, tasks.getSize());
     }
 
     /**
@@ -219,11 +197,11 @@ public class Parser {
                 String type = command.substring(0, index);
                 switch (type) {
                 case "todo":
-                    return handleToDo();
+                    return handleATaskCreation('T');
                 case "deadline":
-                    return handleDeadline();
+                    return handleATaskCreation('D');
                 case "event":
-                    return handleEvent();
+                    return handleATaskCreation('E');
                 case "done":
                     return handleDone();
                 case "delete":
