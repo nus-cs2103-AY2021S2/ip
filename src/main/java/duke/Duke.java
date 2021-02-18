@@ -17,8 +17,8 @@ public class Duke {
     private final Storage notesStorage;
 
     public Duke() {
-        storage = new Storage("data/dukeGUI.txt");
-        notesStorage = new Storage("data/dukeGUINotes.txt");
+        storage = new Storage("DukeTasks.txt");
+        notesStorage = new Storage("DukeNotes.txt");
         try {
             taskList = storage.load();
             noteList = notesStorage.load();
