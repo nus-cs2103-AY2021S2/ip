@@ -38,6 +38,7 @@ public class Ui {
      * first start the program
      * Then Justin will run
      *
+     * @return the message to print for Justin
      */
 
     public String showHelpMessage() {
@@ -60,11 +61,22 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * This method will show the list message for the task
+     * @return the UI message for task list
+     */
 
-    // Level 10 GUI edited
+
     public String showListMessage() {
         return "Here are the tasks in your list:\n";
     }
+
+    /**
+     * This method prints the done message
+     * @param tasks tasklist of tasks
+     * @param num the desired task to be marked as done
+     * @return the UI message for done task
+     */
 
     public String showDoneMessage(TaskList tasks, String num) {
 
@@ -87,6 +99,12 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * This method prints the list in the tasklist
+     * @param tasks containing all the tasks
+     * @return a Text of tasks descriptions
+     */
+
     public String printList(TaskList tasks) {
         String holder = "";
         for (int i = 0; i < tasks.getList().size(); i++) {
@@ -102,6 +120,12 @@ public class Ui {
         printSpace();
         printLine();
     }
+
+    /**
+     * This method prints the UI for task list
+     * @param text of the task
+     * @return the UI message for task list
+     */
 
     public String printFoundTask(String text) {
 
@@ -123,8 +147,10 @@ public class Ui {
         System.out.println();
     }
 
-
-    // Level 10 GUI
+    /**
+     * This method prints the welcome message
+     * @return the welcome message to display
+     */
 
     public String welcomeMessage() {
         String msg = "Welcome! I am Justin,\n";
@@ -134,15 +160,31 @@ public class Ui {
         return msg;
     }
 
+    /**
+     * This method returns the terminating message
+     * @return the terminating message after 'bye' is input
+     */
+
     public String terminateMessage() {
         return "See you again soon!";
     }
 
     private String responseMessage = "";
 
+    /**
+     * This method returns the response message
+     * @return response message
+     */
+
     public String getResponseMessage() {
         return responseMessage;
     }
+
+    /**
+     * This method edit adds the response message to the text
+     * @param newText of the output
+     * @return a new String with response message
+     */
 
     public String editResponseMessage(String newText) {
         String holder = getResponseMessage();

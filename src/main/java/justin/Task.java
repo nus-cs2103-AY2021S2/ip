@@ -36,14 +36,6 @@ public class Task {
      * @return a String indicated completion of task
      */
 
-   /*
-     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-    }
-
-    */
-
-
     public String getStatusIcon() {
         return (isDone ? "COMPLETED" : "INCOMPLETE"); //return tick or X symbols
     }
@@ -55,10 +47,18 @@ public class Task {
         this.isDone = true;
     }
 
-    // method to return isDone condition
+    /**
+     * This method returns whether the task is done
+     * @return boolean value of done status
+     */
     public boolean getDone() {
         return isDone;
     }
+
+    /**
+     * This method returns the string of description of task
+     * @return the description of task
+     */
 
     public String getDescription() {
         return this.description;

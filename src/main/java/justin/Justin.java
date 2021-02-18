@@ -59,7 +59,7 @@ public class Justin {
      * and input into parser class
      * to get commands for Justin to execute
      *
-     * @param text
+     * @param text of the user input
      * @return The description of the command and outputs
      */
 
@@ -147,10 +147,20 @@ public class Justin {
         return response;
     }
 
+    /**
+     * This method prints the welcome message of the GUI
+     * @return the text to be printed
+     */
+
     public String getWelcome() {
         return ui.welcomeMessage();
 
     }
+
+    /**
+     * This method prints the terminate message of the Application
+     * @return the text to be printed
+     */
 
     public String getTerminate() {
 

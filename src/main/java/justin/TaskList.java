@@ -14,7 +14,6 @@ public class TaskList {
 
     ArrayList<Task> list;
 
-
     public TaskList() {
         this.list = new ArrayList<>();
     }
@@ -27,8 +26,8 @@ public class TaskList {
     /**
      * This method adds a deadline to a task class
      *
-     * @param description of the task
-     * @param date of the given task
+     * @param text of the User input
+     * @return text to be printed by Justin
      */
 
     public String addDeadline(String text) {
@@ -124,8 +123,7 @@ public class TaskList {
     /**
      * This method adds a new event to the ArrayList
      *
-     * @param description of the given task
-     * @param date of the given task
+     * @param text of the User input
      * @return The string output for Justin
      */
 
@@ -178,6 +176,7 @@ public class TaskList {
      *
      * @param num position of the task to be deleted
      * @throws JustinException cannot delete an invalid entry task
+     * @return text for Justin to output
      */
 
     public String delete(String num) throws JustinException {
@@ -197,7 +196,11 @@ public class TaskList {
         }
     }
 
-    // C-BetterSearch
+    /**
+     * This method returns the string of list of found tasks
+     * @param key to be checked with the tasks
+     * @return the string of list of found tasks
+     */
     public String find(String key) {
 
         String holder = "";
@@ -223,6 +226,13 @@ public class TaskList {
         System.out.println();
     }
 
+    /**
+     * This method checks if there are duplicate tasks in tasklist
+     * @param description of the task
+     * @param tasks to get the description of current task
+     * @throws JustinException cannot add duplicate tasks
+     */
+
     static void checkDuplicates(String description, ArrayList<Task> tasks) throws JustinException  {
         for (int i = 0; i < tasks.size(); i++) {
             if (description.equals(tasks.get(i).getDescription())) {
@@ -232,11 +242,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * This method marks a task as done
+     * @param num the task number to be marked
+     * @return the int of the marked task
+     */
+
     public int markDone(String num) {
         int listNum = Integer.parseInt(num); // changes to int
         list.get(listNum - 1).markAsDone();
         return listNum;
     }
+
+    /**
+     * This method adds a normal task to the task list
+     * @param text description of the task
+     */
 
     public void addTask(String text) {
 
