@@ -1,25 +1,27 @@
 package todobeast;
 
-import todobeast.commands.Command;
-import todobeast.exceptions.InvalidInputException;
-import todobeast.exceptions.ToDoBeastException;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import todobeast.commands.Command;
+import todobeast.exceptions.InvalidInputException;
+import todobeast.exceptions.ToDoBeastException;
 
 /**
  * Main client class for the application.
  */
 public class ToDoBeast {
+    private static final String DATA_DIRECTORY_NAME = "./data/";
+    private static final String DATA_FILE_NAME = "data.txt";
 
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
 
-    private static final String DATA_DIRECTORY_NAME = "./data/";
-    private static final String DATA_FILE_NAME = "data.txt";
-
+    /**
+     * Constructor for ToDoBeast.
+     */
     public ToDoBeast() {
         storage = new Storage(DATA_DIRECTORY_NAME, DATA_FILE_NAME);
         ui = new Ui();
@@ -35,8 +37,6 @@ public class ToDoBeast {
 
     String getResponse(String fullCommand) {
         try {
-//            String fullCommand = ui.readCommand();
-//            ui.addToResponseOutput(ui.showLine());
             Command command = Parser.parse(fullCommand);
             assert command != null : "No command produced from application!";
             command.execute(taskList, ui);
@@ -52,14 +52,12 @@ public class ToDoBeast {
             } catch (IOException e) {
                 ui.addToResponseOutput(ui.showError(e.getMessage()));
             }
-//            ui.addToResponseOutput(ui.showLine());
         }
         return ui.returnResponseOutput();
     }
 
     String getWelcome() {
         ui.addToResponseOutput(ui.showWelcome());
-//        ui.addToResponseOutput(ui.showLine());
         return ui.returnResponseOutput();
     }
 
@@ -104,7 +102,4 @@ public class ToDoBeast {
         ToDoBeast toDoBeast = new ToDoBeast();
         toDoBeast.runApplication();
     }
-
-
-
 }

@@ -1,10 +1,9 @@
 package todobeast.tasks;
 
-import todobeast.commands.TaskType;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
+import todobeast.commands.TaskType;
 
 /**
  * A Task that represents a event-type task. Events have a time and date component.

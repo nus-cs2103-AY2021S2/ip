@@ -81,6 +81,8 @@ public class AddCommand extends Command {
                 throw new InvalidInputException("Task time and/or date not provided.");
             }
             break;
+        default:
+            throw new InvalidInputException("Task type provided is invalid!");
         }
         taskList.addTask(newTask);
         ui.addToResponseOutput(ui.showAdded(newTask));

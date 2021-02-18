@@ -6,12 +6,12 @@ import todobeast.commands.TaskType;
  * An abstract class that represents a Task within the application.
  */
 public abstract class Task {
+    public static final String TASK_DELIMITER = " | ";
 
     protected TaskType taskType;
     protected String taskDescription;
     protected boolean isDone;
     protected String taskNotes;
-    public final static String TASK_DELIMITER = " | ";
 
     /**
      * Constructor that allows user to add notes to the task being created.
@@ -52,7 +52,7 @@ public abstract class Task {
      * @param delimiter the delimiter used to join the various attributes within the task
      * @return the String that contains the formatted attributes of the current task
      */
-    abstract public String formatForStorage(String delimiter);
+    public abstract String formatForStorage(String delimiter);
 
     public void clearTaskNotes() {
         taskNotes = null;

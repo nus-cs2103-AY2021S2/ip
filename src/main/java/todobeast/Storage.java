@@ -1,15 +1,14 @@
 package todobeast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 import todobeast.exceptions.InvalidInputException;
 import todobeast.tasks.Deadline;
@@ -21,10 +20,10 @@ import todobeast.tasks.Todo;
  * Handles CRUD functionality for storing the data produced and required by the application into a text file.
  */
 public class Storage {
+    public static final String STORAGE_DELIMITER = ".";
+    public static final String STORAGE_DELIMITER_REGEX = "[.]";
 
     private final File data;
-    public final static String STORAGE_DELIMITER = ".";
-    public final static String STORAGE_DELIMITER_REGEX = "[.]";
 
     /**
      * Creates a text file to store data in the specified directory, and stores it such that future CRUD
@@ -111,7 +110,8 @@ public class Storage {
                 } else {
                     newTask = new Event(taskArgs[2], isTaskDone, LocalDate.parse(taskArgs[3]),
                             LocalTime.parse(taskArgs[4]), null);
-                }                break;
+                }
+                break;
             default:
                 throw new InvalidInputException("Invalid task type provided!");
             }

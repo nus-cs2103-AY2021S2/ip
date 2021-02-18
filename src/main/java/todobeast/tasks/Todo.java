@@ -11,6 +11,11 @@ public class Todo extends Task {
         super(TaskType.TODO, toDoDescription, isDone, taskNotes);
     }
 
+    /**
+     * Formats this ToDo for storage using the specified delimiter
+     * @param delimiter the delimiter used to join the various attributes within the task
+     * @return the formatted string output of this task for storage.
+     */
     public String formatForStorage(String delimiter) {
         String doneIndicator = isDone ? "1" : "0";
         String taskNotesForStorage = hasTaskNotes() ? delimiter + taskDescription : "";

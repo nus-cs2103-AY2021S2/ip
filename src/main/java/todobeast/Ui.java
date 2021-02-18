@@ -12,27 +12,20 @@ import todobeast.tasks.Task;
  * merely contains all the possible responses that the app can produce.
  */
 public class Ui {
-    private final Scanner sc;
-    private StringBuilder responseOutput;
-    private final static String line = "\t________________________________________________________________\n";
-    private final static String oldLogo = "                                                     \n"
-            + "\t88                                                   \n"
-            + "\t88                                            ,d     \n"
-            + "\t88                                            88     \n"
-            + "\t88,dPPYba,   ,adPPYba, ,adPPYYba, ,adPPYba, MM88MMM  \n"
-            + "\t88P'    \"8a a8P_____88 \"\"     `Y8 I8[    \"\"   88     \n"
-            + "\t88       d8 8PP\"\"\"\"\"\"\" ,adPPPPP88  `\"Y8ba,    88     \n"
-            + "\t88b,   ,a8\" \"8b,   ,aa 88,    ,88 aa    ]8I   88,    \n"
-            + "\t8Y\"Ybbd8\"'   `\"Ybbd8\"' `\"8bbdP\"Y8 `\"YbbdP\"'   \"Y888  \n"
-            + "\t                                                     \n"
-            + "\t                                                     \n";
-    private final static String logo = " _                    _   \n"
+    private static final String line = "\t________________________________________________________________\n";
+    private static final String logo = " _                    _   \n"
             + "| |                  | |  \n"
             + "| |__   ___  __ _ ___| |_ \n"
             + "| '_ \\ / _ \\/ _` / __| __|\n"
             + "| |_) |  __/ (_| \\__ \\ |_ \n"
             + "|_.__/ \\___|\\__,_|___/\\__|\n";
 
+    private final Scanner sc;
+    private StringBuilder responseOutput;
+
+    /**
+     * Constructor for Ui.
+     */
     public Ui() {
         sc = new Scanner(System.in);
         responseOutput = new StringBuilder();
@@ -92,10 +85,19 @@ public class Ui {
         return "You now have " + numOfTasks + " tasks in total." + "\n";
     }
 
+    /**
+     * Returns a string representing the UI output for the task that has been added.
+     * @param task the task that has been added.
+     * @return a string representing the UI output for the task that has been added.
+     */
     public String showAdded(Task task) {
         return "One more task added to the hustle:\n\t" + task + "\n";
     }
 
+    /**
+     * Returns a string with the welcome message.
+     * @return a string with the welcome message.
+     */
     public String showWelcome() {
         String greeting = logo + "\nWelcome to ToDoBeast, your best productivity task tracker tool!\n"
                 + "Let's get this bread! How would you like to be productive today?\n\n"
@@ -107,13 +109,21 @@ public class Ui {
         return "Here are your tasks:\n\n";
     }
 
+    /**
+     * Returns a string representing all tasks that have been found in the task list.
+     * @return a string representing all tasks that have been found in the task list.
+     */
     public String findTasks() {
         return "Here are the matching tasks in your list:\n\n";
     }
 
+    /**
+     * Returns a string representing all tasks in the task list.
+     * @param taskList the task list to be printed.
+     * @return a string representing all tasks in the task list.
+     */
     public String printTaskList(List<Task> taskList) {
         StringBuilder output = new StringBuilder();
-//        int count = 1;
         for (Task task : taskList) {
             int listIndex = taskList.indexOf(task) + 1;
             output.append(listIndex).append(". ").append(task).append("\n");
@@ -121,9 +131,13 @@ public class Ui {
         return output.toString();
     }
 
+    /**
+     * Returns a string representing all filtered tasks in the map.
+     * @param filteredMap the map to be printed.
+     * @return a string representing all filtered tasks in the map.
+     */
     public String printFilteredMap(Map<Integer, Task> filteredMap) {
         StringBuilder output = new StringBuilder();
-//        int count = 1;
         for (Map.Entry<Integer, Task> entry : filteredMap.entrySet()) {
             int taskIndex = entry.getKey() + 1;
             Task task = entry.getValue();
@@ -132,6 +146,10 @@ public class Ui {
         return output.toString();
     }
 
+    /**
+     * Returns a string representation of the instructions for ToDoBeast.
+     * @return a string representation of the instructions for ToDoBeast.
+     */
     public String showInstructions() {
         String instructions = "List of commands for ToDoBeast:\n\n"
                 + "1. bye/exit - to quit ToDoBeast\n"
@@ -151,10 +169,19 @@ public class Ui {
         return instructions;
     }
 
+    /**
+     * Returns a string representation of an error.
+     * @param error the error to be shown.
+     * @return a string representation of an error.
+     */
     public String showError(String error) {
         return error;
     }
 
+    /**
+     * Returns a string representation of the exit message for ToDoBeast.
+     * @return a string representation of the exit message for ToDoBeast.
+     */
     public String showExit() {
         String exitMsg = "This app may have stopped but the grind never stops.\n"
                 + "\tSee you again soon!\n";

@@ -1,14 +1,23 @@
 package todobeast;
 
-import todobeast.commands.*;
-import todobeast.exceptions.InvalidCommandException;
-import todobeast.exceptions.InvalidInputException;
-import todobeast.exceptions.ToDoBeastException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+
+import todobeast.commands.AddCommand;
+import todobeast.commands.AddNotesCommand;
+import todobeast.commands.Command;
+import todobeast.commands.DeleteCommand;
+import todobeast.commands.DoneCommand;
+import todobeast.commands.ExitCommand;
+import todobeast.commands.FindCommand;
+import todobeast.commands.ListCommand;
+import todobeast.commands.ShowInstructionsCommand;
+import todobeast.commands.TaskType;
+import todobeast.exceptions.InvalidCommandException;
+import todobeast.exceptions.InvalidInputException;
+import todobeast.exceptions.ToDoBeastException;
 
 /**
  * A utility class that parses commands given by the user, and generates the appropriate command for the application
@@ -114,7 +123,8 @@ public class Parser {
         return command;
     }
 
-    private static Command getTimeBasedCommand(String[] dateAndTimeTokens, String[] commandArgs, TaskType deadlineType) {
+    private static Command getTimeBasedCommand(String[] dateAndTimeTokens,
+                                               String[] commandArgs, TaskType deadlineType) {
         Command command;
         if (commandArgs.length == 3) {
             command = new AddCommand(deadlineType, commandArgs[1], LocalDate.parse(dateAndTimeTokens[0]),

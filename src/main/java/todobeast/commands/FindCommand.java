@@ -17,14 +17,17 @@ public class FindCommand extends Command {
         this.regex = regex;
     }
 
+    /**
+     * Finds all tasks that match the regex given
+     * @param taskList the TaskList that belongs to this application
+     * @param ui the Ui that belongs to this application
+     * @throws ToDoBeastException if task list does not exist.
+     */
     public void execute(TaskList taskList, Ui ui) throws ToDoBeastException {
         if (taskList == null) {
             throw new ToDoBeastException("Task list cannot be found.");
         }
         List<Task> tasks = taskList.getTaskList();
-//        List<Task> filteredList = tasks.stream()
-//                .filter(task -> task.containsStringInDesc(regex))
-//                .collect(Collectors.toList());
         Map<Integer, Task> filteredMap = tasks.stream()
                 .filter(task -> task.containsStringInDesc(regex))
                 .collect(Collectors.toMap(task -> taskList.getTaskList().indexOf(task), task -> task));

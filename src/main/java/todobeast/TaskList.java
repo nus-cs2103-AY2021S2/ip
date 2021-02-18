@@ -1,7 +1,7 @@
 package todobeast;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import todobeast.tasks.Task;
 
@@ -43,6 +43,11 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Deletes the task with the specified task number from the task list.
+     * @param taskNumber the index of the task number to be deleted.
+     * @return the task that has been deleted from the task list.
+     */
     public Task deleteTask(int taskNumber) {
         Task deletedTask = getTask(taskNumber);
         taskList.remove(taskNumber - 1);
