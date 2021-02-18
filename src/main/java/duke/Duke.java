@@ -21,10 +21,6 @@ public class Duke {
     }
 
 
-    public String greet() {
-        return "Hello! What can I do for you:>";
-    }
-
 
     public String getResponse(String string) {
         switch (string) {
