@@ -45,8 +45,6 @@ public class Parser {
             return new DeleteCommand(argument);
         case FIND:
             return new FindCommand(argument);
-        case UPDATE:
-            return new UpdateCommand(argument);
         default:
             throw new DukeException("Sorry, I don't quite understand!");
         }

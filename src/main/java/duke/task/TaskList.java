@@ -45,16 +45,4 @@ public class TaskList {
         }
         return results;
     }
-
-    /**
-     * Changes the description of a Task at position index in the TaskList
-     * @param index Position of Task in TaskList
-     * @param newDescription New description of Task
-     * @return Returns the updated Task
-     */
-    public Task editTask(int index, String newDescription) {
-        Task targetTask = getTask(index);
-        targetTask.setDescription(newDescription);
-        return targetTask;
-    }
 }

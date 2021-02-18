@@ -69,10 +69,4 @@ public class Ui {
         formatString(msg);
     }
 
-    public String getUpdatedTaskMsg(Task task, TaskList tasks) {
-        String[] msg = new String[2];
-        msg[0] = "Noted. I've updated this task.";
-        msg[1] = " " + task.toString();
-        return formatString(msg);
-    }
 }

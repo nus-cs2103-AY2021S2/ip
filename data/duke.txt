@@ -1,4 +1,2 @@
-T | 0 | read
-T | 0 | read read
-T | 0 | read
-T | 0 | read read read
+T | 0 |     read 1
+T | 0 |    read
