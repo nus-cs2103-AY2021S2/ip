@@ -136,3 +136,93 @@ description in place of the second one. For example: `event - meeting /at 2021-0
 
 Also you may not key in the time, and the task would still be added.
 
+### Feature 5
+
+Mark a task as done
+
+### Usage
+
+### `done` - Key in `done <index>`
+
+Example of Usage:
+
+`done 6`
+
+Expected outcome:
+
+```
+Task 6 is complete:
+[T][X] read book
+```
+
+Similar output is expected for other type of tasks
+
+### Feature 6
+
+Remove a task
+
+### Usage
+
+### `delete` or `remove` - Key in `delete <index>` or `remove <index>`
+
+Example of Usage:
+
+`remove 6`
+
+Expected outcome:
+
+```
+Noted. Item removed:
+[T][X] read book
+Now you have 6 items in your list
+```
+
+Similar output is expected for other type of tasks
+
+### Feature 6
+
+Find matching tasks based on keyword
+
+### Usage
+
+### `find` or `search` - Key in `find <keyword>` or `search <keyword>`
+
+Example of Usage:
+
+`find meeting`
+
+Expected outcome:
+
+```
+We have found the following 2 item(s)
+Contents:
+1. <task>
+2. <task>
+```
+
+The output depends on the number of matching tasks found
+
+### Feature 7
+
+Get tasks that are currently due
+
+### Usage
+
+### `dues` or `reminders` - Key in `dues` or `reminders`
+
+Example of Usage:
+
+`reminders`
+
+Expected outcome:
+
+```
+These are the due tasks
+Contents:
+1. <task>
+2. <task>
+    -
+    -
+```
+
+The output depends on the number of matching tasks found
