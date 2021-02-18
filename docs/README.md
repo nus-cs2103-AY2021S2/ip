@@ -13,8 +13,8 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 		* [Event](#adding-an-event-task-event)
 	2. [List all tasks](#listing-all-tasks-list)
 	3. [Delete a task](#delete-a-task-delete)
-	4. [Mark task as done](#mark-task-as-done-done)
-	5. [Find a task](#find-a-task-find)
+	4. [Mark task as done](#mark-a-task-as-done-done)
+	5. [Find a task](#find-a-specific-task-find)
 	6. [Exit Program](#exit-bye)
 * [Command Summary](#command-summary)
 
@@ -110,7 +110,7 @@ Assume that we still have 4 task,
 
 ![Ui](./Images/deleteTask.png)
 
-### Mark task as done: `done`
+### Mark a task as done: `done`
 
 Mark the given task as completed which will add a tick beside the task when list command is executed. 
 
