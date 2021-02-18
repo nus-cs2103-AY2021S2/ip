@@ -6,13 +6,13 @@ public class Notes extends Task {
     public Notes(String task) {
         super(task);
         note = "";
-        for(int i = 1; i < super.divideCommand.length; i++){
+        for (int i = 1; i < super.divideCommand.length; i++) {
             note += i == super.divideCommand.length - 1
                     ? super.divideCommand[i] : super.divideCommand[i] + " ";
         }
     }
 
-    public String getNote(){
+    public String getNote() {
         return note;
     }
 

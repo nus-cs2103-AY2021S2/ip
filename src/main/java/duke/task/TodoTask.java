@@ -6,6 +6,7 @@ package duke.task;
 public class TodoTask extends Task {
     /**
      * Constructor of todoTask
+     *
      * @param task
      */
     public TodoTask(String task) {
@@ -15,6 +16,7 @@ public class TodoTask extends Task {
 
     /**
      * String representation of todoTask
+     *
      * @return
      */
     @Override

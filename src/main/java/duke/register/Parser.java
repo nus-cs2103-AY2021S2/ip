@@ -71,11 +71,12 @@ public class Parser {
 
     /**
      * This one is for inputting the note
+     *
      * @return
      */
-    public String getTaskWithoutType(){
+    public String getTaskWithoutType() {
         String out = "";
-        for(int i = 1; i < commandSeparate.length; i++){
+        for (int i = 1; i < commandSeparate.length; i++) {
             out += i == commandSeparate.length - 1
                     ? commandSeparate[i] : commandSeparate[i] + " ";
         }
