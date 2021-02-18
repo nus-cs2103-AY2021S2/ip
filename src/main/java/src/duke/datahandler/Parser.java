@@ -43,8 +43,6 @@ public class Parser {
             case SNOOZE:
                 this.taskIndex = Integer.parseInt(information[1].split(" ", 2)[0]);
                 this.date = information[1].split(" ", 3)[2];
-                System.out.println(this.taskIndex);
-                System.out.println(this.date);
 
                 break;
             case BYE:
