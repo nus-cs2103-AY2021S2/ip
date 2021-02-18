@@ -1,14 +1,15 @@
 # User Guide
 
-* [Introduction](#Introduction)
-* [Quick Start](#Quick-Start)
-* [Features](#Features)
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
 
+<a name="introduction"></a>
 ## Introduction
 Duke is a personal task managing application which is based on Command Line Tool. 
 It aims to help individuals keep track of various tasks.
 
-
+<a name="quick_start"></a>
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer. 
 
@@ -30,7 +31,7 @@ It aims to help individuals keep track of various tasks.
     
 6. Refer to the [Features](#Features) below for more commands and their details. 
 
-
+<a name="features"></a>
 ## Features 
 
 #### ℹ️ Notes about the command format
@@ -150,3 +151,5 @@ Example of usage:
 Expected outcome:
 
 ![](images/setexample.png)
+
+[]: #Introduction
