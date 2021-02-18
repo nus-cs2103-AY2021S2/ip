@@ -1,7 +1,30 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Sonia: Hi, I am Sonia! How can I help you?
+You: Sonia: Here are your tasks!
+   Looks like you haven't added any tasks.
+You: Sonia: I added this to-do to the task list!
+   [ ] Todo: a
+You: Sonia: Here are your tasks!
+   1: [ ] Todo: a
+You: Sonia: I added this deadline to the task list!
+   [ ] Deadline: b by c
+You: Sonia: I added this deadline to the task list!
+   [ ] Deadline: d by e
+You: Sonia: I marked the following task as done!
+   [X] Deadline: b by c
+You: Sonia: Here are your tasks!
+   1: [ ] Todo: a
+   2: [X] Deadline: b by c
+   3: [ ] Deadline: d by e
+You: Sonia: I added this event to the task list!
+   [ ] Event: f by g
+You: Sonia: I added this event to the task list!
+   [ ] Event: h by i
+You: Sonia: I marked the following task as done!
+   [X] Deadline: d by e
+You: Sonia: Here are your tasks!
+   1: [ ] Todo: a
+   2: [X] Deadline: b by c
+   3: [X] Deadline: d by e
+   4: [ ] Event: f by g
+   5: [ ] Event: h by i
+You: Sonia: Goodbye!
