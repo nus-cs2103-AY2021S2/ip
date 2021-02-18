@@ -1,0 +1,11 @@
+list
+todo todo1
+deadline deadline1 /by 2020-04-13
+deadline test1 /by 2020-04-1
+deadline /by 2020-04-13
+event event1 /at 2020-04-13 2-4pm
+event test2 /at 2020-04-1 2-4pm
+list
+done 1
+delete 1
+list
