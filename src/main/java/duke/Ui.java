@@ -10,11 +10,8 @@ import duke.exception.InvalidCommandException;
 
 public class Ui {
     private static final String LOGO =
-              " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+              "The Wondrous Duke of Singapore(TM)\n"
+            + "(wipe your feet)\n";
     private static final String SEPARATOR = "------------------\n";
     private final StringBuilder builder;
 
@@ -40,15 +37,19 @@ public class Ui {
      * Prints a start up message for when the program starts.
      */
     public void printStartUp() {
+        builder.append(SEPARATOR);
         builder.append("Hello from\n" + LOGO + "\n");
         builder.append("No unicode allowed" + "\n");
+        builder.append(SEPARATOR);
     }
 
     /**
      * Prints a shutdown message for when the program ends.
      */
     public void generateShutDownMessage() {
-        builder.append(SEPARATOR + "Goodbye from\n" + LOGO + "\n");
+        builder.append(SEPARATOR);
+        builder.append("Goodbye from\n" + LOGO);
+        builder.append(SEPARATOR);
     }
 
     /**
@@ -91,6 +92,7 @@ public class Ui {
      * @param data The results of that command, in a pre-processed format
      */
     public void printCommandMessage(Command command, String data) {
+        builder.append(SEPARATOR);
         switch (command.getType()) {
         case LIST:
             builder.append(data);
@@ -122,6 +124,7 @@ public class Ui {
             assert false : "This Really should not happen ever";
             builder.append("ERROR: Unhandled Case!\n");
         }
+        builder.append(SEPARATOR);
     }
 
     /**
