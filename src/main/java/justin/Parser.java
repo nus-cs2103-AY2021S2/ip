@@ -20,7 +20,6 @@ public class Parser {
 
     /**
      * This method creates a Parser class
-     *
      * @param fullText of the user input
      */
 
