@@ -2,9 +2,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Validation handles the initial validation of the user command inputs.
+ * CommandValidation handles the initial validation of the user command inputs.
  */
-public class Validation {
+public class CommandValidation {
 
     public static final int VALID_INDEX_BOUND = -1;
     public static final int INDEX_OFFSET = 1;
@@ -16,18 +16,15 @@ public class Validation {
      * @throws DukeException On invalid input.
      */
     public static void checkValidCommand(String command) throws DukeException {
-        String[] validCommands = new String[]{"todo", "deadline", "event", "list",
+        String[] validCommands = new String[] {"todo", "deadline", "event", "list",
                 "bye", "done", "delete", "find", "tag", "help"};
         List<String> commands = Arrays.asList(validCommands);
 
         int index = command.indexOf(' ');
-        String first = "";
+        String first = command;
         if (index > VALID_INDEX_BOUND) {
             first = command.substring(0, index);
-        } else {
-            first = command;
         }
-
         if (!commands.contains(first.toLowerCase())) {
             throw new DukeException(":( OOPS! I'm sorry, but I don't know what that means!!!");
         } else {

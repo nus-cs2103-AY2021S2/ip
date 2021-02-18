@@ -108,7 +108,7 @@ public class Storage {
                 case 'D':
                     String deadlineDescription = data.substring(7, startingIndex - INDEX_OFFSET);
                     String by = data.substring(startingIndex + 5, endingIndex);
-                    Deadline deadline = new Deadline(deadlineDescription, DateTimeValidation.convertDate(by));
+                    Deadline deadline = new Deadline(deadlineDescription, DateTimeHandler.convertDateTime(by));
                     if (findHash != INVALID_INDEX) {
                         String deadlineTag = data.substring(findHash + INDEX_OFFSET);
                         deadline.setTag(deadlineTag);
@@ -121,7 +121,7 @@ public class Storage {
                 case 'E':
                     String eventDescription = data.substring(7, startingIndex - INDEX_OFFSET);
                     String time = data.substring(startingIndex + 5, endingIndex);
-                    Event event = new Event(eventDescription, DateTimeValidation.convertDate(time));
+                    Event event = new Event(eventDescription, DateTimeHandler.convertDateTime(time));
                     if (findHash != INVALID_INDEX) {
                         String eventTag = data.substring(findHash + INDEX_OFFSET);
                         event.setTag(eventTag);
@@ -192,6 +192,7 @@ public class Storage {
 
     /**
      * Adds a tag to a task.
+     *
      * @param task Task with the new tag to be added.
      * @throws IOException On file error.
      */

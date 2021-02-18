@@ -3,9 +3,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Handles the validation of dates/times for Deadlines.
+ * Handles the dates/times input.
  */
-public class DateTimeValidation {
+public class DateTimeHandler {
 
     static final String DATE_FORMAT = "MMM dd yyyy h:mm a";
     static final String INPUT_FORMAT = "yyyy-MM-dd HHmm";
@@ -17,7 +17,7 @@ public class DateTimeValidation {
      * @return A LocalDateTime object created from the input.
      * @throws DukeException On invalid input. Input format is wrong.
      */
-    public static LocalDateTime handleDateTime(String details) throws DukeException {
+    public static LocalDateTime validateDateTime(String details) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(INPUT_FORMAT);
             LocalDateTime verifiedDate = LocalDateTime.parse(details, formatter);
@@ -33,11 +33,10 @@ public class DateTimeValidation {
      * @param date String that is used to create a LocalDateTime object.
      * @return A LocalDateTime object created.
      */
-    public static LocalDateTime convertDate(String date) {
+    public static LocalDateTime convertDateTime(String date) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_FORMAT);
         LocalDateTime createDate = LocalDateTime.parse(date, format);
         return createDate;
-
     }
 
 }

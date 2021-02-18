@@ -48,10 +48,10 @@ public class Parser {
      * @throws DukeException On validation error.
      */
     public Deadline createDeadline() throws DukeException {
-        Validation.checkForContentAfterSlash(command, findSlash);
+        CommandValidation.checkForContentAfterSlash(command, findSlash);
         String deadlineDescription = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
         LocalDateTime deadlineDateTime =
-                DateTimeValidation.handleDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
+                DateTimeHandler.validateDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
         Deadline newDeadline = new Deadline(deadlineDescription, deadlineDateTime);
         return newDeadline;
     }
@@ -62,10 +62,10 @@ public class Parser {
      * @throws DukeException On validation error.
      */
     public Event createEvent() throws DukeException {
-        Validation.checkForContentAfterSlash(command, findSlash);
+        CommandValidation.checkForContentAfterSlash(command, findSlash);
         String eventDescription = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
         LocalDateTime eventDateTime =
-                DateTimeValidation.handleDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
+                DateTimeHandler.validateDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
         Event newEvent = new Event(eventDescription, eventDateTime);
         return newEvent;
     }
@@ -81,7 +81,7 @@ public class Parser {
         } else {
             taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
         }
-        Validation.checkValidRange(tasks.getSize(), taskIdentifier);
+        CommandValidation.checkValidRange(tasks.getSize(), taskIdentifier);
         Task task = tasks.find(taskIdentifier - INDEX_OFFSET);
         return task;
     }
@@ -193,7 +193,7 @@ public class Parser {
      * @throws IOException On file error.
      */
     public String handleTag() throws DukeException, IOException {
-        Validation.checkForContentAfterSlash(command, findSlash);
+        CommandValidation.checkForContentAfterSlash(command, findSlash);
         String tag = extractTag();
         Task selected = findTask();
         storage.addTag(selected, tag);
@@ -211,7 +211,7 @@ public class Parser {
     public String handleCommand(String command) {
         this.command = command;
         try {
-            Validation.checkValidCommand(command);
+            CommandValidation.checkValidCommand(command);
             index = command.indexOf(' ');
             findSlash = command.indexOf('/');
 
