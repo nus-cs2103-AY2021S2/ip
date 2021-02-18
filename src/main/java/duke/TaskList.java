@@ -94,6 +94,10 @@ public class TaskList {
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
 
+            if (task.getType() != 'E' && task.getType() != 'D') {
+                continue;
+            }
+
             if (today.compareTo(task.getDate()) == 0) {
                 taskMap.put(task, new Integer(0));
                 continue;
@@ -128,6 +132,7 @@ public class TaskList {
                 taskMap.put(task, new Integer(-1));
                 continue;
             }
+
         }
 
         return taskMap;
