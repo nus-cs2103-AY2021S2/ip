@@ -29,7 +29,7 @@ public class Ui {
      * Sets all ui attributes for greeting message from Chat the Cat.
      */
     public void greet() {
-        this.respondString = "Mew! I'm Chat the Cat\nWhat can I do for you?";
+        this.respondString = "Mew! I'm Chat the Cat \uD83D\uDC3E\nWhat can I do for you?";
         this.chatImage = greetingChat;
     }
 
@@ -86,7 +86,7 @@ public class Ui {
         
         this.respondString =  "Mew! I've marked this task as done:\n" + 
                 task + 
-                "\n* Good job, you deserve a kit-kat *";
+                "\n\u2728* Good job, you deserve a kit-kat \uD83C\uDF6B *\u2728";
         this.chatImage = gdJobChat;
     }
 
