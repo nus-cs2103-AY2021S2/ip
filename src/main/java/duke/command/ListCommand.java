@@ -21,13 +21,14 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute() throws DukeException, IOException {
-        tasklist.setTaskList(storage.loadFile());
-        String allTaskMsg = tasklist.showAllTask("list");
 
-        if (allTaskMsg.isEmpty()) {
+        tasklist.setTaskList(storage.loadFile());
+        String allTaskMessage = tasklist.showAllTask("list");
+
+        if (allTaskMessage.trim().isBlank()) {
             return ui.displayNoTaskInList();
         } else {
-            return allTaskMsg;
+            return allTaskMessage;
         }
     }
 

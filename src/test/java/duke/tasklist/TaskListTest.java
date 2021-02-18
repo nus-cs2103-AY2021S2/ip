@@ -26,7 +26,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void markAsDoneTest(){
+    public void markAsDoneTest() throws DukeException {
         taskList.addToDo("do ip");
         taskList.markAsDone(0);
         assertEquals("[T][✘] do ip", taskList.getTaskListArray().get(0).toString());

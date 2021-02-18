@@ -98,28 +98,27 @@ public class TaskList {
      */
     public String showAllTask(String commandType) {
 
-        ArrayList<Task> taskList;
+        ArrayList<Task> taskList = new ArrayList<>();
         String allTask = "";
 
-        if (commandType.equals("find")) {
+        if (commandType.equals("find") && findTaskArraylist.size() > 0 ) {
             taskList = findTaskArraylist;
-        } else {
+            allTask = UI.displayHeader("find");
+        } else if(commandType.equals("list") && taskArraylist.size() > 0) {
             taskList = taskArraylist;
-        }
-
-        if (taskList.size() > 0) {
-            if (commandType.equals("find")) {
-                allTask = ui.displayFindHeader();
-            } else {
-                allTask = ui.displayListHeader();
-            }
-
-            for (int i = 0; i < taskList.size(); i++) {
-                allTask = allTask + "\n" + ui.displayTask(i, taskList.get(i));
-            }
+            allTask = UI.displayHeader("list");
+        } else if(commandType.equals("find")){
+            allTask = ui.displayNoTaskFoundMessage();
         } else {
-            allTask = ui.displayNoTaskMessage();
+            allTask = ui.displayNoTaskInList();
         }
+
+        for (int i = 0; i < taskList.size(); i++) {
+            if(!taskList.get(i).toString().isBlank()) {
+                allTask = allTask + ui.displayTask(i, taskList.get(i));
+            }
+        }
+
         return allTask;
     }
 
@@ -131,7 +130,7 @@ public class TaskList {
     public String markAsDone(int index) throws DukeException {
 
         isValidIndex(index);
-        if (taskArraylist.get(index).getStatus().equals("complete")) {
+        if (taskArraylist.get(index).getStatus().equals("\u2713")) {
             throw new DukeException(UI.displayMarkingCompletedAsDone());
         }
         taskArraylist.get(index).setCompleted();
@@ -201,7 +200,7 @@ public class TaskList {
         if (index < 0) {
             throw new DukeException(UI.displayInvalidTaskIndex());
         } else if (taskArraylist.isEmpty() || taskArraylist.size() <= index) {
-            throw new DukeException(UI.displayNoTaskMessage());
+            throw new DukeException(UI.displayNoTaskFoundMessage());
         }
     }
 }

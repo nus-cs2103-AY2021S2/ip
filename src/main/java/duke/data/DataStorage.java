@@ -11,7 +11,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 public class DataStorage {
-    private static final String FILE_PATH = "Data/allTasks.txt";
+    private static final String FILE_PATH = "data/listOfTask.txt";
 
     /**
      *  Retrieve the data file if it is present. If not, a new data file will be created

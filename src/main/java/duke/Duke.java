@@ -40,8 +40,8 @@ public class Duke extends Application {
     public String getResponse(String input) {
         String output = null;
         try {
-            Command c = new Command("null");
-            c.execute();
+            Command command = new Command("null");
+            command.execute();
             output = Parser.parse(input);
         } catch (DukeException | IOException e) {
             return ui.showError(e.getMessage());
