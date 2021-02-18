@@ -43,7 +43,8 @@ public class Justin {
     }
 
      /**
-     * Main method inputs the file path to justin.txt to retrieve any list data stored within
+     * Main method inputs the file path to justin.txt
+      * to retrieve any list data stored within
      *
      * @param args unused
      */
