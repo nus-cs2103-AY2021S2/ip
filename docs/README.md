@@ -11,9 +11,9 @@ Duke is the go-to chat-bot which helps to manage and organize your task efficien
 		* [Todo](#adding-a-todo-task-todo)
 		* [Deadline](#adding-a-deadline-task-deadline)
 		* [Event](#adding-an-event-task-event)
-	2. [List all tasks](#listing-all-tasks-list)
+	2. [List all tasks](#list-all-tasks-list)
 	3. [Delete a task](#delete-a-task-delete)
-	4. [Mark task as done](#mark-a-task-as-done-done)
+	4. [Mark a task as done](#marks-a-task-as-done-done)
 	5. [Find a task](#find-a-specific-task-find)
 	6. [Exit Program](#exit-bye)
 * [Command Summary](#command-summary)
@@ -51,7 +51,7 @@ Notes:
 * There should not be two task with the same task description. 
 
 #### Adding a todo task: `todo`
-Todo command add a todo task which requires task description and no other field as input.
+Todo command adds a todo task which requires task description and no other field as input.
 
 Format: `todo` DESCRIPTION
 
@@ -62,7 +62,7 @@ Examples:
 ![Ui](./Images/addTodoTask.png)
 
 #### Adding a deadline task: `deadline`
-Deadline command add a deadline task which requires task description, date and time to specify the due date and time of the task. 
+Deadline command adds a deadline task which requires task description, date and time to specify the due date and time of the task. 
 
 Format: `deadline` DESCRIPTION /BY DATE TIME 
 * DATE is should be by DD/MM/YY
@@ -74,7 +74,7 @@ Examples:
 ![Ui](./Images/addDeadlineTask.png)
 
 #### Adding an event task: `event`
-Event command add a event task which requires task description, date as well as start and end time of the task. 
+Event command adds a event task which requires task description, date as well as start and end time of the task. 
 
 Format: `event` description /AT DATE START_TIME-END_TIME 
 
@@ -89,7 +89,7 @@ Examples:
 ![Ui](./Images/addEventTask.png)
 
 
-### Listing all tasks: `list`
+### List all tasks: `list`
 
 Shows a list of all the task in duke.
 
@@ -97,9 +97,9 @@ Format: `list`
 
 ![Ui](./Images/listTask.png)
 
-### Delete a task: `delete`
+### Deletes a task: `delete`
 
-Delete a task using its task index in list.
+Deletes a task using its task index in list.
 
 Note: TASK_INDEX starts from 1.
 
@@ -110,9 +110,9 @@ Assume that we still have 4 task,
 
 ![Ui](./Images/deleteTask.png)
 
-### Mark a task as done: `done`
+### Marks a task as done: `done`
 
-Mark the given task as completed which will add a tick beside the task when list command is executed. 
+Marks the given task as completed which adds a tick beside the task when list command is executed. 
 
 Note: All tasks added are uncompleted by default and TASK_INDEX starts from 1. 
 
@@ -125,7 +125,7 @@ Assume that we still have 3 task,
 
 ![Ui](./Images/markAsDone.png)
 
-### Find a specific task: `find`
+### Finds a specific task: `find`
 
 Show all tasks that matches or contain keywords. 
 
