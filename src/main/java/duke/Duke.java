@@ -9,8 +9,7 @@ import duke.ui.DukeResponses;
 
 /**
  * class Duke
- * @author Png Zheng Jie, Sebastian
- * Description: A class to represent chatbot program that keeps track of tasks
+ * Description: A class to represent a chatbot program that keeps track of tasks
  */
 public class Duke {
     private Storage storage;
