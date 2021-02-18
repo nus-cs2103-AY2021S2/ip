@@ -91,7 +91,7 @@ public class Parser {
      * @param taskIterator Number of tasks user has, used by Duke.
      * @param tasks        Array of available user tasks.
      * @param input        Entirety of user input.
-     * @return
+     * @return Message telling user task has been added.
      */
     public Tuple2 todoCase(int taskIterator, Task[] tasks, String input) {
         String[] taskCommands = input.split("/", 2);
@@ -116,7 +116,7 @@ public class Parser {
      * @param taskIterator Number of tasks user has, used by Duke.
      * @param tasks        Array of available user tasks.
      * @param input        Entirety of user input.
-     * @return
+     * @return Message telling user task has been added.
      */
     public Tuple2 eventCase(int taskIterator, Task[] tasks, String input) {
         String[] taskCommands = input.split("/", 2);
@@ -143,7 +143,7 @@ public class Parser {
      * @param taskIterator Number of tasks user has, used by Duke.
      * @param tasks        Array of available user tasks.
      * @param input        Entirety of user input.
-     * @return
+     * @return Message telling user task has been added.
      */
     public Tuple2 deadlineCase(int taskIterator, Task[] tasks, String input) {
         String[] taskCommands = input.split("/", 2);
@@ -266,7 +266,7 @@ public class Parser {
      * @param taskIterator      Number of tasks user has, used by Duke.
      * @param tasks             Array of available user tasks.
      * @param deletedTaskNumber The task number that is now deleted.
-     * @return
+     * @return Message to user telling them task is deleted, and how many tasks are left.
      */
     public Tuple2 deleteCase(int taskIterator, Task[] tasks, String deletedTaskNumber) {
         int removeIndex = Integer.parseInt(deletedTaskNumber);
@@ -284,7 +284,7 @@ public class Parser {
      * @param taskIterator Number of tasks user has, used by Duke.
      * @param tasks        Array of available user tasks.
      * @param toFind       String to find within tasks.
-     * @return
+     * @return String of found tasks.
      */
     public Tuple2 findCase(int taskIterator, Task[] tasks, String toFind) {
         String output = "Here are the matching tasks in your list:\n";
@@ -297,6 +297,16 @@ public class Parser {
             }
         }
         return new Tuple2(taskIterator, output);
+    }
+
+    /**
+     * Output case when user inputs invalid inputs.
+     * @param taskIterator Number of tasks user has, used by Duke.
+     * @return Message to user telling them input is invalid.
+     */
+    public Tuple2 invalidCase(int taskIterator) {
+        return new Tuple2(taskIterator, "You have entered an invalid input!\n"
+                + "Check the user guide at https://ssagit.github.io/ip/");
     }
 
     /**
@@ -314,39 +324,33 @@ public class Parser {
         Tuple2 results = new Tuple2();
         results.setInteger(taskIterator);
 
-        try {
-            switch (command) {
-            case "bye":
-                results = byeCase(taskIterator);
-                break;
-            case "list":
-                results = listCase(taskIterator, tasks);
-                break;
-            case "done":
-                results = doneCase(taskIterator, tasks, inputArr[1]);
-                break;
-            case "todo":
-                results = todoCase(taskIterator, tasks, input);
-                break;
-            case "event":
-                results = eventCase(taskIterator, tasks, input);
-                break;
-            case "deadline":
-                results = deadlineCase(taskIterator, tasks, input);
-                break;
-            case "delete":
-                results = deleteCase(taskIterator, tasks, inputArr[1]);
-                break;
-            case "find":
-                results = findCase(taskIterator, tasks, inputArr[1]);
-                break;
-            default:
-                throw new UnknownInputParamException("------------------------------------\n"
-                        + ":( OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                        + "------------------------------------");
-            }
-        } catch (UnknownInputParamException e) {
-            System.out.println(e.getMessage());
+        switch (command) {
+        case "bye":
+            results = byeCase(taskIterator);
+            break;
+        case "list":
+            results = listCase(taskIterator, tasks);
+            break;
+        case "done":
+            results = doneCase(taskIterator, tasks, inputArr[1]);
+            break;
+        case "todo":
+            results = todoCase(taskIterator, tasks, input);
+            break;
+        case "event":
+            results = eventCase(taskIterator, tasks, input);
+            break;
+        case "deadline":
+            results = deadlineCase(taskIterator, tasks, input);
+            break;
+        case "delete":
+            results = deleteCase(taskIterator, tasks, inputArr[1]);
+            break;
+        case "find":
+            results = findCase(taskIterator, tasks, inputArr[1]);
+            break;
+        default:
+            results = invalidCase(taskIterator);
         }
 
         return results;

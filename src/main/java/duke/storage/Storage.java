@@ -31,17 +31,12 @@ public class Storage {
         this.relativePath = Paths.get(relativePath);
         this.absolutePath = this.relativePath.toAbsolutePath();
 
-        try {
-            Files.createDirectories(Paths.get("./data/"));
-        } catch (IOException e) {
-            System.out.println("IOException has occurred");
-            e.printStackTrace();
-        }
+        new File("./data/").mkdirs(); // Create directory if it doesn't exist
         taskText = new File(String.valueOf(this.absolutePath));
         try {
             if (!taskText.exists()) {
                 System.out.println("new file created");
-                taskText.createNewFile(); // creates the file if it doesn't exist
+                taskText.createNewFile(); // Create file if it doesn't exist
             }
         } catch (IOException e) {
             System.out.println("IOException has occurred");

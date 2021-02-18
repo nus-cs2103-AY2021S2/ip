@@ -9,7 +9,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -37,8 +43,16 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        BackgroundFill bgf = new BackgroundFill(
+                Color.CORNSILK,
+                new CornerRadii(10),
+                null
+        );
+        final Circle clip = new Circle(50, 50, 50);
 
         dialog.setText(text);
+        dialog.setBackground(new Background(bgf));
+        displayPicture.setClip(clip);
         displayPicture.setImage(img);
     }
 
