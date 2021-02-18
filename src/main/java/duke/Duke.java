@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.FileNotFoundException;
+
 import java.time.format.DateTimeParseException;
 
 public class Duke {
@@ -25,7 +26,6 @@ public class Duke {
      * @return Response String
      */
     public String getResponse(String input) {
-
         if (input.equals("bye")) {
             storage.save(list);
             return ui.showGoodByeMessage();
