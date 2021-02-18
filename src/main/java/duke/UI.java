@@ -8,8 +8,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class UI {
 
-    private static final String WELCOME_MESSAGE = "Hello! I'm Duke\n\nWhat can I do for you today?";
-    private static final String GOODBYE_MESSAGE = "Good bye and take care! This application will close in 5 seconds.";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke o/\nWhat can I do for you today?\n\n" +
+            "Enter 'help' if you are lost =)";
+    private static final String GOODBYE_MESSAGE = "Good bye and take care o/" +
+            "\nThis application will close in 5 seconds.";
 
     /**
      * Returns a response string
