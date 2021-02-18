@@ -14,6 +14,7 @@ import dbot.exception.DBotException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 /**
  * Parses user input and generates representative DBot commands.
@@ -23,32 +24,42 @@ public class Parser {
     /**
      * Parses user input from direct DBot interactions with the user.
      *
-     * @param userInputText A String containing the user input.
+     * @param userInput A String containing the user input.
      * @return A Command representing the user input.
      * @throws DBotException If the user input cannot be parsed as a valid command.
      */
-    public static Command parse(String userInputText) throws DBotException {
-        return Parser.parse(userInputText.strip().split("\\s+", 2), false);
+    public static Command parse(String userInput) throws DBotException {
+        String[] userInputs = userInput.split("\\s+", 2);
+        String[] strippedUserInputs = Arrays.stream(userInputs)
+                .map(String::strip)
+                .toArray(String[]::new);
+
+        return Parser.parse(strippedUserInputs, false);
     }
 
     /**
      * Parses input containing the string representation of a saved Task and recognises whether
      * the Task was marked as done.
      *
-     * @param savedInputText A String containing the string representation of a saved Task.
+     * @param inputFromSave A String containing the string representation of a saved Task.
      * @return A Command representing the saved Task.
      * @throws DBotException If the input text cannot be parsed as a valid command.
      */
-    public static Command parseSaved(String savedInputText) throws DBotException {
-        String[] inputs = savedInputText.strip().split("\\|", 3);
-        boolean commandDone = Boolean.parseBoolean(inputs[1].strip());
-        return Parser.parse(new String[]{inputs[0], inputs[2]}, commandDone);
+    public static Command parseSaved(String inputFromSave) throws DBotException {
+        String[] inputs = inputFromSave.split("\\|", 3);
+        String[] strippedInputs = Arrays.stream(inputs)
+                .map(String::strip)
+                .toArray(String[]::new);
+
+        boolean commandIsDone = Boolean.parseBoolean(strippedInputs[1]);
+        String[] taskTypeAndDescription = {strippedInputs[0], strippedInputs[2]};
+        return Parser.parse(taskTypeAndDescription, commandIsDone);
     }
 
     private static Command parse(String[] inputs, boolean isDone) throws DBotException {
         Command command;
         try {
-            command = parseSwitch(inputs[0].strip(), inputs);
+            command = parseSwitch(inputs[0], inputs);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DBotException("Command was not properly called");
         } catch (DateTimeParseException e) {
@@ -66,37 +77,28 @@ public class Parser {
         String[] descriptors;
         switch (commandType) {
         case TodoCommand.COMMAND_WORD:
-            commandDescription = inputs[1].strip();
-            command = new TodoCommand(commandDescription);
+            command = parseTodoCommand(inputs[1]);
             break;
         case EventCommand.COMMAND_WORD:
-            commandDescription = inputs[1].strip();
-            descriptors = commandDescription.split("/at", 2);
-            command = new EventCommand(descriptors[0].strip(), LocalDate.parse(descriptors[1].strip()));
+            command = parseEventCommand(inputs[1]);
             break;
         case DeadlineCommand.COMMAND_WORD:
-            commandDescription = inputs[1].strip();
-            descriptors = commandDescription.split("/by", 2);
-            command = new DeadlineCommand(descriptors[0].strip(), LocalDate.parse(descriptors[1].strip()));
+            command = parseDeadlineCommand(inputs[1]);
             break;
         case ListCommand.COMMAND_WORD:
             command = new ListCommand();
             break;
         case DoneCommand.COMMAND_WORD:
-            // E.g. "done 3 __the_rest_is_to_be_ignored__" marks the 3rd Task as complete
-            commandDescription = inputs[1].strip();
-            command = new DoneCommand(Integer.parseInt(commandDescription));
+            command = parseDoneCommand(inputs[1]);
             break;
         case DeleteCommand.COMMAND_WORD:
-            // E.g. "delete 3 __the_rest_is_to_be_ignored__" deletes the 3rd Task
-            commandDescription = inputs[1].strip();
-            command = new DeleteCommand(Integer.parseInt(commandDescription));
+            command = parseDeleteCommand(inputs[1]);
             break;
         case ExitCommand.COMMAND_WORD:
             command = new ExitCommand();
             break;
         case FindCommand.COMMAND_WORD:
-            command = new FindCommand(inputs[1].strip());
+            command = parseFindCommand(inputs[1]);
             break;
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
@@ -104,5 +106,53 @@ public class Parser {
         }
         return command;
     }
+
+    private static Command parseFindCommand(String input) {
+        return new FindCommand(input);
+    }
+
+    private static Command parseDeleteCommand(String input) {
+        return new DeleteCommand(Integer.parseInt(input));
+    }
+
+    private static Command parseDoneCommand(String input) {
+        int targetIndex = Integer.parseInt(input);
+        return new DoneCommand(targetIndex);
+    }
+
+    private static Command parseDeadlineCommand(String input) {
+        String[] descriptors = getTaskDescriptorAndDate(input, "/by");
+
+        String taskDescription = descriptors[0];
+        String taskDateString = descriptors[1];
+        LocalDate taskDate = LocalDate.parse(taskDateString);
+
+        return new DeadlineCommand(taskDescription, taskDate);
+    }
+
+    private static Command parseEventCommand(String input) {
+        String[] descriptors = getTaskDescriptorAndDate(input, "/at");
+
+        String taskDescription = descriptors[0];
+        String taskDateString = descriptors[1];
+        LocalDate taskDate = LocalDate.parse(taskDateString);
+
+        return new EventCommand(taskDescription, taskDate);
+    }
+
+    private static Command parseTodoCommand(String input) {
+        return new TodoCommand(input);
+    }
+
+    private static String[] getTaskDescriptorAndDate(String input, String delimiter) {
+        assert !delimiter.equals("\\s+") : "A Command delimiter cannot be whitespace.";
+
+        String[] commandComponents = input.split(delimiter, 2);
+        String[] strippedCommandComponents = Arrays.stream(commandComponents)
+                .map(String::strip)
+                .toArray(String[]::new);
+        return strippedCommandComponents;
+    }
+
 }
 
