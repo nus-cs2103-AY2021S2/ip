@@ -32,6 +32,8 @@ public class DoneCommand extends Command {
             return ui.showTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("This task number does not exist! Try again?");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 }

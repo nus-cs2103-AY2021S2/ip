@@ -39,6 +39,8 @@ public class DeadlineCommand extends Command {
             return ui.showTaskAdded(deadline);
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date entered! Please type in valid yyyy-mm-dd format!");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 }
