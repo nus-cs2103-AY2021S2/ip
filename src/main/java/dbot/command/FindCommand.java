@@ -21,6 +21,8 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DBotException {
+        assert keyword != null : "FindCommand keyword cannot be null when executing the command.";
+
         TaskList relevantTasks = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
