@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task of type Deadline.
@@ -10,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    static final String DATE_TIME_FORMAT = "MMM dd yyyy h:mm a";
     protected LocalDateTime by;
 
     /**
@@ -24,19 +22,9 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    /**
-     * Parses the date and time in the format of "MMM dd yyyy h:mm a".
-     *
-     * @param details Date and time to be parsed.
-     * @return A String representing the date and time in the new format.
-     */
-    public String parseDeadlineDateTime(LocalDateTime details) {
-        return details.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
-
-    }
-
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + parseDeadlineDateTime(by) + ") " + (isThereTag ? getTag() : "");
+        return "[D]" + super.toString() + " (by: " + DateTimeHandler.parseDateTime(by) + ") "
+                + (isThereTag ? getTag() : "");
     }
 }

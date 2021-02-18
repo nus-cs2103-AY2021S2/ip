@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTimeHandler {
 
-    static final String DATE_FORMAT = "MMM dd yyyy h:mm a";
+    static final String DATE_TIME_FORMAT = "MMM dd yyyy h:mm a";
     static final String INPUT_FORMAT = "yyyy-MM-dd HHmm";
 
     /**
@@ -34,9 +34,19 @@ public class DateTimeHandler {
      * @return A LocalDateTime object created.
      */
     public static LocalDateTime convertDateTime(String date) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
         LocalDateTime createDate = LocalDateTime.parse(date, format);
         return createDate;
+    }
+
+    /**
+     * Parses LocalDateTime object into a string for tasks, according to given format.
+     *
+     * @param details LocalDateTime object.
+     * @return A String representing the date and time in the new format.
+     */
+    public static String parseDateTime(LocalDateTime details) {
+        return details.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
     }
 
 }

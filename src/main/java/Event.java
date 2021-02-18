@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task of type Event.
@@ -8,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    static final String DATE_TIME_FORMAT = "MMM dd yyyy h:mm a";
     protected LocalDateTime time;
 
     /**
@@ -22,12 +20,9 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public String parseEventDateTime(LocalDateTime details) {
-        return details.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT));
-    }
-
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + parseEventDateTime(time) + ") " + (isThereTag ? getTag() : "");
+        return "[E]" + super.toString() + " (at: " + DateTimeHandler.parseDateTime(time) + ") "
+                + (isThereTag ? getTag() : "");
     }
 }
