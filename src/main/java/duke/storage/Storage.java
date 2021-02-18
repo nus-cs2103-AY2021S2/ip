@@ -20,7 +20,7 @@ public class Storage {
     /**
      * Checks if parent and file directory exists. Creates the parent and file directory
      * if they do not exist.
-     * @throws DukeException
+     * @throws DukeException Error during creation of file
      */
     public void createNewFile() throws DukeException {
         try {
@@ -39,7 +39,6 @@ public class Storage {
     /**
      * Reads saved txt file and adds the tasks to Duke's TaskList.
      * @param tasks Duke's TaskList
-     * @throws DukeException
      */
     public void readFile(TaskList tasks) throws DukeException {
         createNewFile();
@@ -89,7 +88,7 @@ public class Storage {
     /**
      * Writes the current TaskList to txt file.
      * @param tasks Duke's TaskList
-     * @throws DukeException
+     * @throws DukeException Error when writing to file
      */
     public void write(TaskList tasks) throws DukeException {
         try {
@@ -102,5 +101,4 @@ public class Storage {
             throw new DukeException("There is an error writing to file.");
         }
     }
-
 }

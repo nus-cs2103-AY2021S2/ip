@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) throws DukeException {
         if (keyword.trim().isEmpty()) {
@@ -16,9 +16,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList result = tasks.find(keyword);
-        ui.printTaskList(result);
+        return ui.printTaskList(result);
     }
 
     @Override

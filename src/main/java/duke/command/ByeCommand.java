@@ -8,9 +8,9 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printExitMsg();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.write(tasks);
+        return ui.getExitMsg();
     }
 
     @Override
