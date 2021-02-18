@@ -8,15 +8,8 @@ public class Ui {
      * Prints a welcome message on the console when Duke is first opened.
      */
     public static String printHello() {
-        String logo = ".------..------..------..------.\n"
-                + "|D.--. ||U.--. ||K.--. ||E.--. |\n"
-                + "| :/\\: || (\\/) || :/\\: || (\\/) |\n"
-                + "| (__) || :\\/: || :\\/: || :\\/: |\n"
-                + "| '--'D|| '--'U|| '--'K|| '--'E|\n"
-                + "`------'`------'`------'`------'";
-
-        System.out.println("Hello, this is\n" + logo + "\n What can I do for you today?\n");
-        return "Hello, this is " + "Duke!" + " What can I do for you today?\n";
+        return "Hello, this is " + "Duke!" + " What can I do for you today? " +
+                "\nFor the list of commands, type \"help\"";
     }
 
     /**
