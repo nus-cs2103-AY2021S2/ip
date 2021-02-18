@@ -3,6 +3,7 @@ public class ParserOutput {
     private Task task;
     private int action;
     private int[] index;
+
     private String searchString;
     private ParserOutput pipeInput;
     private int nextAction;
@@ -14,17 +15,17 @@ public class ParserOutput {
         this.index = index;
     }
 
-    public ParserOutput setPipeInput(ParserOutput pipeInput) {
-        this.pipeInput = pipeInput;
-        return this;
-    }
-
     private ParserOutput(int nextAction, boolean bye, Task task, int action) {
-        assert bye != true || action > 0 : "If not a bye, action cannot be none. ";
+        assert !bye || action > 0 : "If not a bye, action cannot be none. ";
         this.bye = bye;
         this.task = task;
         this.action = action;
         this.nextAction = nextAction;
+    }
+
+    public ParserOutput setPipeInput(ParserOutput pipeInput) {
+        this.pipeInput = pipeInput;
+        return this;
     }
 
     private void setSearch(String searchString) {

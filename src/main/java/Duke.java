@@ -1,13 +1,17 @@
 import java.util.List;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -28,16 +32,26 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/qn_parrot.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/ans_parrot.png"));
 
-    public Duke() {
-        this(LOG_PATH, false);
-    }
-
+    /**
+     * Constructor for Duke.
+     * @param path Path for storage file
+     * @param testEnv Whether Duke is being created for testing purposes, testDuke only runs if this is true
+     */
     public Duke(String path, boolean testEnv) {
         Storage store = new Storage(path);
         this.taskList = new TaskList(store);
         this.ui = new Ui();
         this.testEnv = testEnv;
     }
+
+    /**
+     * Creates a Duke object used in production.
+     * @return Duke object with testEnv set to false and using default LOG_PATH
+     */
+    public static Duke makeDuke() {
+        return new Duke(LOG_PATH, false);
+    }
+
     /**
      * Starts running Duke.
      * @return 0 for successful exit
@@ -281,6 +295,6 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke().dukeRunner();
+        Duke.makeDuke().dukeRunner();
     }
 }
