@@ -219,6 +219,7 @@ Duke data are saved as a TXT file `[JAR file location]/data/tasks.txt`. Advanced
 to update data directly by editing that data file.
 
 Caution: If your changes to the data file makes its format invalid, Duke will not be able to run.
+If that happens, please delete the data file.
 
 ## FAQ
 
