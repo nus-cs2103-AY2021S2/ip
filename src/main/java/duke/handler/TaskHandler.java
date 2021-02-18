@@ -1,7 +1,6 @@
 package duke.handler;
 
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -17,7 +16,7 @@ abstract class TaskHandler implements CommandHandler {
     }
 
     @Override
-    public String execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Storage storage, TaskList taskList) {
         taskList.addTask(toAdd);
         response = taskRespond(toAdd, taskList);
         storage.addTask(toAdd);

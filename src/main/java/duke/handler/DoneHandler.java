@@ -1,7 +1,6 @@
 package duke.handler;
 
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -18,7 +17,7 @@ public class DoneHandler implements CommandHandler {
     }
 
     @Override
-    public String execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Storage storage, TaskList taskList) {
         taskList.markDone(taskNum);
         Task updatedTask = taskList.getTask(taskNum);
         response = doneRespond(updatedTask);

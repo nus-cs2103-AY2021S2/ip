@@ -27,7 +27,12 @@ public class DukeInvalidDesException extends DukeException {
             break;
         case "DELETE":
             message += "Your request for DELETE is invalid.\n"
-                + "Have you specified an existing task number?";
+                    + "Have you specified an existing task number?";
+            break;
+        case "SCHEDULE":
+            message += "Your request for SCHEDULE is invalid.\n"
+                    + "Is it of the format:\n"
+                    + "schedule weekly [no. of times] [Schedulable task] ?";
             break;
         default:
             message += "Your description is invalid.";

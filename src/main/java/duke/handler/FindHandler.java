@@ -1,7 +1,6 @@
 package duke.handler;
 
 import duke.Storage;
-import duke.Ui;
 import duke.tasks.TaskList;
 
 /**
@@ -16,7 +15,7 @@ public class FindHandler implements CommandHandler {
     }
 
     @Override
-    public String execute(Ui ui, Storage storage, TaskList taskList) {
+    public String execute(Storage storage, TaskList taskList) {
         response = taskList.findTaskStringWith(findWord);
         return response;
     }

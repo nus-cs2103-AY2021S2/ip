@@ -22,7 +22,6 @@ public class Duke {
     private boolean isExit = false;
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Class constructor taking in String storagePath.
@@ -31,7 +30,6 @@ public class Duke {
     public Duke(String storagePath) {
         storage = new Storage(storagePath);
         tasks = storage.load();
-        ui = new Ui();
     }
 
     /**
@@ -44,7 +42,7 @@ public class Duke {
         try {
             CommandHandler commandHandler = Parser.parseFromInput(input);
             checkDeleteDonePossible(commandHandler, tasks);
-            String output = commandHandler.execute(ui, storage, tasks);
+            String output = commandHandler.execute(storage, tasks);
             if (commandHandler instanceof ByeHandler) {
                 isExit = true;
             }
