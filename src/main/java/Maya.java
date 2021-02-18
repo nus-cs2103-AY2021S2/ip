@@ -3,6 +3,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -129,6 +130,14 @@ public class Maya extends Application {
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getMayaDialog(mayaText, maya)
         );
+
+        System.out.println("oi");
+
+        if (userText.equals("bye")) {
+            System.out.println("called");
+            Platform.exit();
+        }
+
         userInput.clear();
     }
 
