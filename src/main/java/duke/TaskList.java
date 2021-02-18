@@ -145,7 +145,8 @@ public class TaskList {
         return IntStream.range(0, store.size())
                         .parallel()
                         .mapToObj(this::formatOrderedPrint)
-                        .reduce("", (a, b) -> a + b + "\n");
+                        .map(str -> str + "\n")
+                        .reduce("", (a, b) -> a + b);
     }
 
     private String getFilteredList(String searchTerm) {
@@ -153,7 +154,8 @@ public class TaskList {
                         .parallel()
                         .filter(i -> store.get(i).containsSearch(searchTerm))
                         .mapToObj(this::formatOrderedPrint)
-                        .reduce("", (a, b) -> a + b + "\n");
+                        .map(str -> str + "\n")
+                        .reduce("", (a, b) -> a + b);
     }
     private String formatOrderedPrint(int i) {
         return "Entry " + (i + 1) + "|" + store.get(i).toString();
