@@ -54,6 +54,7 @@ public class Parser {
         String description = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
         LocalDateTime taskDateTime =
                 DateTimeHandler.validateDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));
+
         if (taskType == 'D') {
             Deadline newDeadline = new Deadline(description, taskDateTime);
             return newDeadline;
