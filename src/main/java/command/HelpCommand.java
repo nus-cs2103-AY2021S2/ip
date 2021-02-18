@@ -1,14 +1,17 @@
 package command;
 
 import task.TaskManager;
-import util.DukeException;
 import util.Formatter;
+import util.Parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Command to display help text.
+ */
 public class HelpCommand extends Command {
     public static final String COMMAND_STRING = "help";
     public static final CommandType COMMAND_TYPE = CommandType.HELP;
@@ -24,14 +27,30 @@ public class HelpCommand extends Command {
     }};
     private final String response;
 
+    /**
+     * Creates a HelpCommand that would return help text to explain the commands
+     * available in the application. Depending on the keyword supplied, the help
+     * text will differ accordingly.
+     *
+     * @param keyword The type of help to be displayed. Nullable.
+     */
     private HelpCommand(String keyword) {
+        // If the keyword is null, return the defaultHelpText.
         this.response = Optional.ofNullable(keyword)
                 .map(HelpCommand::keywordHelpText)
                 .orElse(defaultHelpText());
     }
 
-    public static HelpCommand fromCommandMap(HashMap<String, List<String>> commandMap)
-            throws DukeException {
+    /**
+     * Constructs a HelpCommand from a commandMap.
+     *
+     * @param commandMap CommandMap representing the instruction.
+     * @return HelpCommand object based on the commandMap.
+     */
+    public static HelpCommand fromCommandMap(HashMap<String, List<String>> commandMap) {
+        assert Parser.extractCommandString(commandMap).equals(COMMAND_STRING)
+                : COMMAND_STRING + "CommandFlag does not match";
+
         List<String> keywords = commandMap.get(COMMAND_STRING);
         if (keywords.isEmpty()) {
             return new HelpCommand(null);
@@ -39,11 +58,6 @@ public class HelpCommand extends Command {
             String keyword = keywords.get(0);
             return new HelpCommand(keyword);
         }
-    }
-
-    @Override
-    public String execute(TaskManager taskManager) {
-        return response;
     }
 
     private static String defaultHelpText() {
@@ -54,6 +68,12 @@ public class HelpCommand extends Command {
                 + Formatter.formatList(VALID_KEYWORDS);
     }
 
+    /**
+     * Returns help text based on the keyword that was supplied.
+     *
+     * @param keyword The keyword to show help text for.
+     * @return Keyword-based help text.
+     */
     private static String keywordHelpText(String keyword) {
         String preText = "Help for \"" + keyword + "\":\n";
         String text;
@@ -111,7 +131,7 @@ public class HelpCommand extends Command {
     }
 
     private static String eventHelpText() {
-        return "Usage: \"deadline <description> /at <YYYY-MM-DD>\" - "
+        return "Usage: \"event <description> /at <YYYY-MM-DD>\" - "
                 + "Creates an Event with the supplied description and date";
     }
 
@@ -127,5 +147,17 @@ public class HelpCommand extends Command {
 
     private static String quitHelpText() {
         return "Usage: \"quit\" - Terminates the application";
+    }
+
+    /**
+     * Returns the help text.
+     *
+     * @param taskManager Does not perform any action on the TaskManager. Still
+     *                    requires an input for class abstraction.
+     * @return Help text.
+     */
+    @Override
+    public String execute(TaskManager taskManager) {
+        return response;
     }
 }

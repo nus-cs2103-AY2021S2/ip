@@ -54,6 +54,12 @@ public interface Parser {
         }
     }
 
+    /**
+     * Parses the user input into a commandMap.
+     *
+     * @param input String input from the user.
+     * @return HashMap representing the commandMap of the user's input
+     */
     static HashMap<String, List<String>> parseCommandMap(String input) {
         HashMap<String, List<String>> commandMap = new HashMap<>();
 
@@ -90,10 +96,25 @@ public interface Parser {
         return commandMap;
     }
 
+    /**
+     * Extracts the command or first word from a commandMap.
+     *
+     * @param commandMap CommandMap to be parsed.
+     * @return The first word or command in the commandMap.
+     */
     static String extractCommandString(HashMap<String, List<String>> commandMap) {
         return commandMap.get(COMMAND_FLAG).get(0);
     }
 
+    /**
+     * Converts a commandMap into a string representation that can be parsed to
+     * obtain the same commandMap. Should produce the inverse output of
+     * parseCommandMap(String: )
+     *
+     * @param commandMap Command map to be translated into a String instruction.
+     * @return A String representation that can be parsed to obtain back the same
+     *         commandMap.
+     */
     static String commandMapToString(HashMap<String, List<String>> commandMap) {
         List<String> results = new ArrayList<>();
 
