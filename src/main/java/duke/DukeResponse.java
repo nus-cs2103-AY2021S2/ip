@@ -11,18 +11,6 @@ import task.Task;
  */
 public class DukeResponse {
     /**
-     * Duke message dividers.
-     */
-    public static final String DIVIDER_FRONT = "\n\u2550\u2550\u2550"
-            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563DUKE\u2560"
-            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n";
-    /**
-     * Duke message dividers.
-     */
-    public static final String DIVIDER_BACK = "\n\u2550\u2550\u2550\u2550\u2550"
-            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550"
-            + "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n";
-    /**
      * Duke task add headers.
      */
     public static final String TASK_ADD_HEADER = "Alrighty! I've added this task:\n";
@@ -54,8 +42,8 @@ public class DukeResponse {
      * Respond a welcome message to the user.
      */
     public String welcome() {
-        this.currentMessage = "Hey there! I'm Duke\n"
-                + "What can I do for you today?";
+        this.currentMessage = "Alright Butters!\n"
+                + "What do you want to do today?";
         return this.currentMessage;
     }
 
@@ -63,7 +51,7 @@ public class DukeResponse {
      * Respond a farewell message to the user.
      */
     public String farewell() {
-        this.currentMessage = "Good bye. Hope to see you again soon!";
+        this.currentMessage = "Bye bye Butters! See you tomorrow!";
         return this.currentMessage;
     }
 
@@ -86,8 +74,8 @@ public class DukeResponse {
      * @param count the count
      */
     public String deleteTask(Task task, int count) {
-        this.currentMessage = TASK_DELETE_HEADER + Color.BLUE_BOLD
-                + Emoji.TRASH + Color.RESET + " " + task
+        this.currentMessage = TASK_DELETE_HEADER
+                + Emoji.TRASH + " " + task
                 + TASK_FOOTER1 + count + TASK_FOOTER2;
         return printMessage();
     }
@@ -124,10 +112,10 @@ public class DukeResponse {
                 .append(t.toString())
                 .append("\n"));
         if (isFind) {
-            this.currentMessage = "Found some tasks matching your find:\n" + strList.substring(0,
+            this.currentMessage = "Oh oh! I've found something:\n" + strList.substring(0,
                     strList.toString().length() - 1);
         } else {
-            this.currentMessage = strList.substring(0,
+            this.currentMessage = "Hey Butters! You've got to do these tasks:\n" + strList.substring(0,
                     strList.toString().length() - 1);
         }
         return printMessage();
@@ -138,7 +126,7 @@ public class DukeResponse {
      * Print message.
      */
     public String printMessage() {
-        return DIVIDER_FRONT + this.currentMessage + DIVIDER_BACK;
+        return this.currentMessage;
     }
 
 }

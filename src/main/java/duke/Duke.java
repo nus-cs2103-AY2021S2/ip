@@ -67,6 +67,9 @@ public class Duke {
         case (""):
             throw new DukeNoInputException();
             // Fallthrough
+        case ("welcome"):
+            return handleWelcome();
+            // Fallthrough
         case ("todo"): {
             return handleToDo(parsedInput);
             //Fallthrough
@@ -100,6 +103,9 @@ public class Duke {
             throw new DukeUnknownInputException();
             // Fallthrough
         }
+    }
+    public String handleWelcome() throws DukeException {
+        return dukeResponse.welcome();
     }
 
     /**
