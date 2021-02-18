@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -12,6 +13,7 @@ public class MainWindow extends AnchorPane {
 
     static final String WELCOME_MESSAGE = "Hello I'm DUKE! What can I help you with today? :)\n\nType the command"
             + " 'help' to see a list of available commands!";
+    static final String RESPONSE_TO_BYE = "Bye. Hope to see you again soon!";
 
     @FXML
     private ScrollPane scrollPane;
@@ -49,5 +51,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals(RESPONSE_TO_BYE)) {
+            Platform.exit();
+        }
     }
 }
