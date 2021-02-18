@@ -117,6 +117,7 @@ public class Deadline extends Todo {
     /**
      * Update a Deadline with a new message, keeping it's isDone state
      * @param newMessage String containing new message
+     * @param newTime String containing new time
      * @return Deadline updated with new message passed in
      */
     public Deadline update(String newMessage, String newTime) {

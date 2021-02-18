@@ -116,6 +116,7 @@ public class Event extends Todo {
     /**
      * Update an Event with a new message, keeping it's isDone state
      * @param newMessage String containing new message
+     * @param newTime String containing new time the task is scheduled at
      * @return Event updated with new message passed in
      */
     public Event update(String newMessage, String newTime) {

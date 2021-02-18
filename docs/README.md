@@ -6,14 +6,14 @@
 
 | Commands                                                                   | Usage                                                           |
 | -------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `todo` [message]                                                           | Adds a todo with the message to task list                       |
-| `deadline` [message] /by [DD/MM/YYYY HHMM]                                 | Adds a deadline with a message and deadline to the task list    |
-| `event` [message] /at [DD/MM/YYYY HHMM]                                    | Adds an event with a message and an event time to the task list |
-| `update` [index] [-m / -t flag] [message] [time (for events or deadlines)] | Updates a task at index with other given parameters             |
+| `todo` message                                                           | Adds a todo with the message to task list                       |
+| `deadline` message /by DD/MM/YYYY HHMM                                 | Adds a deadline with a message and deadline to the task list    |
+| `event` message /at DD/MM/YYYY HHMM                                    | Adds an event with a message and an event time to the task list |
+| `update` index [-m / -t flag] [message] [time (for events or deadlines)] | Updates a task at index with other given parameters             |
 | `list`                                                                     | List all tasks in the task list                                 |
-| `done` [index]                                                             | Marks task at index as done                                     |
-| `delete` [index]                                                           | Removes task at index from the task list                        |
-| `find` [keyword]                                                           | Finds a task matching specific keywords in the list             |
+| `done` index                                                             | Marks task at index as done                                     |
+| `delete` index                                                           | Removes task at index from the task list                        |
+| `find` keyword                                                           | Finds a task matching specific keywords in the task list             |
 | `bye`                                                                      | Exits the application and saves your tasks                      |
 
 ## Usage

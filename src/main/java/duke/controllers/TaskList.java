@@ -129,23 +129,28 @@ public class TaskList {
      * if no flag, update whole task
      * @param updateTodoCommandArgsSplitByWhitespace params passed in from user in CLI
      * @return pair of updated tasklist and updatedtask to be returned as user feedback
+     * @throws DukeBlankTaskException If there is no specified task description for the new updated task
+     * @throws DukeTaskIndexOutOfRangeException if the input index is out of range of task list size
+     * @throws DukeDateTimeParseException if there is an error in the date time input by the user
+     * @throws DukeInvalidFlagException if user inputs more than one flag into the update method
+     * @throws DukeBlankDetailsException if the user does not add a /at or /by flag for Event or Deadlines to amend
+     *          and if no -m or -t flags are used
      */
     public Pair<TaskList, Optional<? extends Todo>> updateTodo(List<String> updateTodoCommandArgsSplitByWhitespace)
             throws DukeBlankTaskException, DukeTaskIndexOutOfRangeException, DukeDateTimeParseException,
-                    DukeInvalidFlagException {
+            DukeInvalidFlagException, DukeBlankDetailsException {
         if (updateTodoCommandArgsSplitByWhitespace.size() == 0) {
-            throw new DukeBlankTaskException("The Deadline you are trying to add cannot be blank!");
+            throw new DukeBlankTaskException("The new task you are trying to update it to cannot be blank");
         }
 
         // check if the command contains more than one flag
         // flag -> means contains '-' as first char and length of 2
         long noOfFlags = updateTodoCommandArgsSplitByWhitespace.stream()
-                .filter(arg -> arg.charAt(0) == '-'
-                        && (arg.charAt(1) == 'm' || arg.charAt(1) == 't'))
+                .filter(arg -> arg.equals("-m") || arg.equals("-t"))
                 .count();
 
         if (noOfFlags > 1) {
-            throw new DukeInvalidFlagException("Please only use one dash flag in your update command");
+            throw new DukeInvalidFlagException("Please use only a single dash flag in your update command");
         }
 
         // updateTodo = [idx, flag with message OR full message with time]
@@ -173,8 +178,7 @@ public class TaskList {
         updateTodoCommandArgsSplitByWhitespace
                 .subList(idxToStartIterating, updateTodoCommandArgsSplitByWhitespace.size())
                 .forEach(substring -> {
-                    // catches dates as well since dates contain "/"
-                    if (substring.contains("/")) {
+                    if (substring.equals("/by") || substring.equals("/at")) {
                         todoEventTimeArgs.add(substring);
                     } else if (todoEventTimeArgs.size() == 0) {
                         todoMessageArgs.add(substring);
@@ -182,6 +186,10 @@ public class TaskList {
                         todoEventTimeArgs.add(substring);
                     }
         });
+
+        if (todoMessageArgs.size() == 0) {
+            throw new DukeBlankTaskException("Please enter a task description to update your current task");
+        }
 
         Optional<? extends Todo> updatedTodo;
         // do stateful operation of returning a new object depending on what type it is and what flag was used
@@ -194,7 +202,7 @@ public class TaskList {
                     case MESSAGE:
                         return event.updateMessage(String.join(" ", todoMessageArgs));
                     case TIME:
-                        return event.updateTime(String.join(" ", todoEventTimeArgs));
+                        return event.updateTime(String.join(" ", todoMessageArgs));
                     case NONE:
                         return event.update(
                                 String.join(" ", todoMessageArgs),
@@ -208,7 +216,7 @@ public class TaskList {
                     case MESSAGE:
                         return deadline.updateMessage(String.join(" ", todoMessageArgs));
                     case TIME:
-                        return deadline.updateTime(String.join(" ", todoEventTimeArgs));
+                        return deadline.updateTime(String.join(" ", todoMessageArgs));
                     case NONE:
                         return deadline.update(
                                 String.join(" ", todoMessageArgs),
@@ -221,6 +229,12 @@ public class TaskList {
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
                     "Please format your date to be DD/MM/YYYY HHMM");
+        } catch (Exception e) {
+            if (flag == Flags.NONE) {
+                throw new DukeBlankDetailsException("Please ensure you have entered the date if "
+                        + "you are updating an Event or a Deadline, after the task description"
+                        + "after adding a /at or /by or use a -m flag to update only the message");
+            }
         }
 
         return new Pair<>(new TaskList(IntStream.range(0, this.todos.size())
@@ -255,7 +269,7 @@ public class TaskList {
         // iterate through list to find where escape character is
         // once found, everything after is part of the deadline
         deadlineCommandArgsSplitByWhitespace.stream().forEach(substring -> {
-            if (substring.contains("/")) {
+            if (substring.equals("/by")) {
                 newDeadlineDateTimeStrings.add(substring);
             } else if (newDeadlineDateTimeStrings.size() == 0) {
                 newDeadlineMessages.add(substring);
@@ -323,7 +337,7 @@ public class TaskList {
         // iterate through list to find where escape character is
         // once found, everything after is part of the deadline
         newEventCommandArgs.forEach(substring -> {
-            if (substring.contains("/")) {
+            if (substring.equals("/at")) {
                 newEventDateTimeStrings.add(substring);
             } else if (newEventDateTimeStrings.size() == 0) {
                 newEventMessages.add(substring);
@@ -337,10 +351,10 @@ public class TaskList {
             throw new DukeBlankTaskException("Please define a task message for your Event");
         }
 
-        // if no deadline input or /by without any deadline, throw exception
+        // if no event input or /at without any event, throw exception
         if (newEventDateTimeStrings.size() <= 1) {
             // @formatter:off
-            String exceptionMessage = "Please add a /by followed by the event time and date in DD/MM/YYYY "
+            String exceptionMessage = "Please add a /at followed by the event time and date in DD/MM/YYYY "
                             + "HHMM to specify a time and date for the Event task. If there is no time for "
                             + "this event perhaps consider creating a todo instead.";
             throw new DukeBlankDetailsException(exceptionMessage);

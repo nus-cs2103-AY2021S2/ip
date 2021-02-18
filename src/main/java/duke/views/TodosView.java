@@ -56,7 +56,7 @@ public class TodosView {
      * @return String showing todo that got updated
      */
     public static String updateTodoReply(Optional<? extends Todo> updatedTodo) {
-        return String.format("Got it! Task has been amended to:\n%s\n.",
+        return String.format("Got it! Task has been amended to:\n%s",
                 renderTodoLine(updatedTodo));
     }
 
