@@ -33,42 +33,42 @@ public enum PrintedText {
     TODO_FORMAT {
         @Override
         public String toString() {
-            return "  todo <task description>\n";
+            return "  todo <TASK DESCRIPTION>\n";
         }
     },
 
     DEADLINE_FORMAT {
         @Override
         public String toString() {
-            return "  deadline <task description> /by <YYYY-MM-DD HH:mm>\n";
+            return "  deadline <TASK DESCRIPTION> /by <YYYY-MM-DD HH:mm>\n";
         }
     },
 
     EVENT_FORMAT {
         @Override
         public String toString() {
-            return "  event <task description> /at <YYYY-MM-DD HH:mm> to <YYYY-MM-DD HH:mm>\n";
+            return "  event <TASK DESCRIPTION> /at <YYYY-MM-DD HH:mm> to <YYYY-MM-DD HH:mm>\n";
         }
     },
 
     DONE_FORMAT {
         @Override
         public String toString() {
-            return "  done <task number>\n";
+            return "  done <TASK NUMBER>\n";
         }
     },
 
     DELETE_FORMAT {
         @Override
         public String toString() {
-            return "  delete <task number>\n";
+            return "  delete <TASK NUMBER>\n";
         }
     },
 
     FIND_FORMAT {
         @Override
         public String toString() {
-            return "  find <search terms>\n\n  *! separate the search terms with a ','";
+            return "  find <SEARCH TERM> [,<SEARCH TERM>]\n\n  *! separate the search terms with a ','";
         }
     },
 

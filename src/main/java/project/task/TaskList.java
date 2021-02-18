@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -85,9 +86,9 @@ public class TaskList {
         ArrayList<Task> matches = tasks.stream()
                 // Solution adapted from: https://stackoverflow.com/questions/8992100/
                 // test-if-a-string-contains-any-of-the-strings-from-an-array
-                .filter(task -> Arrays.stream(search).map(term -> term.trim())
+                .filter(task -> Arrays.stream(search).map(term -> term.trim().toLowerCase())
                         .filter(term -> term.length() > 0)
-                        .anyMatch(task.getDescription()::contains))
+                        .anyMatch(task.getDescription().toLowerCase()::contains))
                 .collect(Collectors.toCollection(ArrayList::new));
         return new TaskList(matches);
     }
