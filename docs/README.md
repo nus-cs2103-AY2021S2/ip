@@ -4,9 +4,9 @@ BearBear is a desktop task manager application done as part of the CS2103T modul
 ![start.png](images/start.png)
 
 ## Content Page 
-* [Add Todo Task](#todo-task)
-* [Add Deadline Task](#deadline-task)
-* [Add Event Task](#event-task)
+* [Add Todo Task](#add-todo-task)
+* [Add Deadline Task](#add-deadline-task)
+* [Add Event Task](#add-event-task)
 * [Mark Task as Complete](#mark-task-as-complete)
 * [Delete Task](#delete-task)
 * [Find Task](#find-task)
