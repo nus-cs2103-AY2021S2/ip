@@ -4,23 +4,25 @@
 
 ## Features
 
-| Commands                                                                   | Usage                                                           |
-| -------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `todo` message                                                           | Adds a todo with the message to task list                       |
-| `deadline` message /by DD/MM/YYYY HHMM                                 | Adds a deadline with a message and deadline to the task list    |
-| `event` message /at DD/MM/YYYY HHMM                                    | Adds an event with a message and an event time to the task list |
-| `update` index [-m / -t flag] [message] [time (for events or deadlines)] | Updates a task at index with other given parameters             |
-| `list`                                                                     | List all tasks in the task list                                 |
-| `done` index                                                             | Marks task at index as done                                     |
-| `delete` index                                                           | Removes task at index from the task list                        |
-| `find` keyword                                                           | Finds a task matching specific keywords in the task list             |
-| `bye`                                                                      | Exits the application and saves your tasks                      |
+| Commands                                                       | Usage                                                           |
+| -------------------------------------------------------------- | --------------------------------------------------------------- |
+| `todo TASK_DESCRIPTION`                                        | Adds a todo with the message to task list                       |
+| `deadline DESCRIPTION /by DD/MM/YYYY HHMM`                     | Adds a deadline with a message and deadline to the task list    |
+| `event DESCRIPTION /at DD/MM/YYYY HHMM`                        | Adds an event with a message and an event time to the task list |
+| `update INDEX [-m / -t] TASK_DESCRIPTION OR DATE_TIME OR BOTH` | Updates a task at index with other given parameters             |
+| `list`                                                         | List all tasks in the task list                                 |
+| `done INDEX`                                                   | Marks task at index as done                                     |
+| `delete INDEX`                                                 | Removes task at index from the task list                        |
+| `find KEYWORDS`                                                | Finds a task matching specific keywords in the task list        |
+| `bye`                                                          | Exits the application and saves your tasks                      |
 
 ## Usage
 
 ### `todo`
 
 Adds a new todo task to the list
+
+Format: `todo TASK_DESCRIPTION`
 
 #### Usage:
 
@@ -38,6 +40,8 @@ Where X should reflect the actual number of tasks you currently have in your tas
 
 Adds a deadline with a message and deadline to the task list
 
+Format: `deadline TASK_DESCRIPTION /by DATE_TIME(in DD/MM/YYYY)`
+
 #### Usage:
 
 ```
@@ -54,6 +58,8 @@ Where X should reflect the actual number of tasks you currently have in your tas
 
 Adds an event with a message and an event time to the task list
 
+Format: `event TASK_DESCRIPTION /at DATE_TIME(in DD/MM/YYYY)`
+
 #### Usage:
 
 ```
@@ -69,6 +75,8 @@ Where X should reflect the actual number of tasks you currently have in your tas
 ### `list`
 
 List all tasks currently in the task list, listed with their index
+
+Format: `list`
 
 #### Usage:
 
@@ -90,6 +98,17 @@ Here are the tasks in your list:
 
 Updates a task at index with other given parameters
 
+Formats:
+
+- `update INDEX TASK_DESCRIPTION DATE_TIME`
+- `update INDEX -m TASK_DESCRIPTION`
+- `update INDEX -t DATE_TIME`
+
+Note:
+
+- DATE_TIME is to be given in `DD/MM/YYYY HHMM` format
+- Adding a `-m` or `-t` flag to update a Todo will only update the Task Description
+
 #### Optional Flags:
 
 Flags can be used to change only a specific part of your Event or Deadline
@@ -100,11 +119,6 @@ Flags can be used to change only a specific part of your Event or Deadline
 | `-t` | Amend the time of an Event / Deadline    |
 
 #### Usage:
-
-```
-Command format:
-update [index] [optional flag: -m / -t] [message / message and date]
-```
 
 ```
 > list
@@ -129,7 +143,7 @@ Got it! Task has been amended to:
 Got it! Task has been amended to:
 [E][✘] Hackathon (at: Sat 20 Feb 2021 17:00 hrs)
 
-> update 2 Assignment 1 Part A Section B 18/10/2021 1800
+> update 2 Assignment 1 Part A Section B /by 18/10/2021 1800
 
 Got it! Task has been amended to:
 [D][✘] Assignment 1 Part A Section B (by: Mon 18 Oct 2021 18:00 hrs)
@@ -138,6 +152,8 @@ Got it! Task has been amended to:
 ### `done`
 
 Marks task at index as done
+
+Format: `done INDEX`
 
 #### Usage:
 
@@ -158,6 +174,8 @@ Nice! I've marked this task as done:
 ### `delete`
 
 Removes task at index from the task list
+
+Format: `delete INDEX`
 
 #### Usage:
 
@@ -182,6 +200,12 @@ Where X should reflect the actual number of tasks you currently have in your tas
 
 Finds a task matching specific keywords in the list
 
+Format: `find KEYWORDS`
+
+Note:
+
+- You can type multiple keywords and it will return matches for any of the keywords
+
 #### Usage:
 
 ```
@@ -201,6 +225,8 @@ Here are the matching tasks in your list:
 ### `bye`
 
 Exits the application and saves your tasks
+
+Format: `bye`
 
 #### Usage:
 
