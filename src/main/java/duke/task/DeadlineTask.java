@@ -15,12 +15,15 @@ public class DeadlineTask extends Task {
 
     /**
      * String representation of the deadline
+     *
      * @return
      */
     @Override
     public String toString() {
         String taskRepresent = getName() + " (" + super.divideCommand[3].substring(1)
-                + ": " + getDateFormat() + " " + getTimeFormat() + ")";
+                + ": " + getDateFormat();
+        taskRepresent += getTime() == null ? ")"
+                : " " + getTimeFormat() + ")";
         if (this.isDone()) {
             return "[D][X] " + taskRepresent;
         } else {
