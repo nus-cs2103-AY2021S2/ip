@@ -18,7 +18,7 @@ public class DeadlineCommand extends Command {
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/by)/by\\W*(.*)");
     private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the deadline command you entered is invalid.\n"
                     + "Please enter a valid deadline command in the following format:\n"
-                    + "deadline <description> /by <date> <time>";
+                    + "deadline <description> /by {date} {time}";
     private static final String SUCCESS_MESSAGE_FORMAT = "Got it. I've added this deadline task:\n"
             + "%s\n"
             + "Now you have %d %s.";

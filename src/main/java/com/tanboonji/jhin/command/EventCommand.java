@@ -18,7 +18,7 @@ public class EventCommand extends Command {
     private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/at)/at\\W*(.*)");
     private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the event command you entered is invalid.\n"
                     + "Please enter a valid event command in the following format:\n"
-                    + "event <description> /at <date> <time>";
+                    + "event <description> /at {date} {time}";
     private static final String SUCCESS_MESSAGE_FORMAT = "Got it. I've added this event task:\n"
             + "%s\n"
             + "Now you have %d %s.";
