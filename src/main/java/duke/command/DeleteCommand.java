@@ -1,16 +1,16 @@
 package duke.command;
 
-import duke.util.TaskList;
-import duke.util.TaskStorage;
-import duke.util.MessageFormatter;
 import duke.exception.DukeStorageException;
 import duke.task.Task;
+import duke.util.MessageFormatter;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
 
 /**
  * Class representing a Delete Command.
  */
 public class DeleteCommand extends Command {
-    private int indexToDelete;
+    private final int indexToDelete;
 
     /**
      * Constructor of DeleteCommand.

@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.util.MessageFormatter;
 import duke.util.TaskList;
 import duke.util.TaskStorage;
-import duke.util.MessageFormatter;
 
 /**
  * Class representing an Exit Command.

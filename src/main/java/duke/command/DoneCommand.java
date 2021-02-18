@@ -1,16 +1,16 @@
 package duke.command;
 
+import duke.exception.DukeStorageException;
+import duke.task.Task;
 import duke.util.MessageFormatter;
 import duke.util.TaskList;
 import duke.util.TaskStorage;
-import duke.exception.DukeStorageException;
-import duke.task.Task;
 
 /**
  * Class representing a Done Command.
  */
 public class DoneCommand extends Command {
-    private int completedTaskIdx;
+    private final int completedTaskIdx;
 
     /**
      * Constructor for DoneCommand.

@@ -25,5 +25,5 @@ public abstract class Command {
      */
     public boolean toExit() {
         return false;
-    };
+    }
 }

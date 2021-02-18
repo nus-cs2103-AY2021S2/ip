@@ -1,16 +1,16 @@
 package duke.command;
 
-import duke.util.TaskStorage;
-import duke.util.MessageFormatter;
 import duke.exception.DukeStorageException;
 import duke.task.Task;
+import duke.util.MessageFormatter;
 import duke.util.TaskList;
+import duke.util.TaskStorage;
 
 /**
  * Class representing an Add command in Duke.
  */
 public class AddCommand extends Command {
-    private Task toAdd;
+    private final Task toAdd;
 
     /**
      * Constructor of AddCommand.

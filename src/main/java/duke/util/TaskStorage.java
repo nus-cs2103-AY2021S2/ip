@@ -1,11 +1,5 @@
 package duke.util;
 
-import duke.exception.DukeStorageException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,6 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Scanner;
+
+import duke.exception.DukeStorageException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 /**
  * Class representing a storage for the user's tasks.
@@ -55,7 +57,7 @@ public class TaskStorage {
             Task task;
             while (iterator.hasNext()) {
                 task = iterator.next();
-                String taskType = task.toString().substring(1,2);
+                String taskType = task.toString().substring(1, 2);
                 assert(taskType.equals(TODO) || taskType.equals(DEADLINE) || taskType.equals(EVENT));
                 int done = task.isDone() ? 1 : 0;
                 String description = task.getDescription();
@@ -72,8 +74,8 @@ public class TaskStorage {
                 default:
                     break;
                 }
-                writer.write(taskType + " | " + done + " | " +  description +
-                        (details.isBlank() ? "" : " | " + details));
+                writer.write(taskType + " | " + done
+                        + " | " + description + (details.isBlank() ? "" : " | " + details));
                 writer.write(System.lineSeparator());
             }
             writer.close();
@@ -122,7 +124,7 @@ public class TaskStorage {
                 }
             }
             return new TaskList(retrievedTasks);
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new DukeStorageException("Save file is missing/corrupted!");
         }
     }

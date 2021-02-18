@@ -2,18 +2,18 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeStorageException;
+import duke.util.MessageFormatter;
 import duke.util.Parser;
 import duke.util.TaskList;
 import duke.util.TaskStorage;
-import duke.util.MessageFormatter;
 
 /**
  * Class representing chat bot, Duke.
  */
 public class Duke {
-    private TaskList tasks;
-    private TaskStorage storage;
-    private MessageFormatter messageFormatter;
+    private final TaskList tasks;
+    private final TaskStorage storage;
+    private final MessageFormatter messageFormatter;
     private boolean isActive;
 
     /**

@@ -1,12 +1,16 @@
 package duke.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
-import duke.command.InvalidCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
-import duke.command.DeleteCommand;
+import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.UndoCommand;
 import duke.exception.DukeArgumentException;
@@ -17,9 +21,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Class representing a Parser.
@@ -87,7 +88,8 @@ public class Parser {
      * @return An executable command that adds a ToDo task.
      * @throws DukeArgumentException If user did not enter any task description.
      */
-    private static AddCommand handleToDo(String[] split, String userInput, TaskList tasks) throws DukeArgumentException {
+    private static AddCommand handleToDo(
+            String[] split, String userInput, TaskList tasks) throws DukeArgumentException {
         checkStringArgument(split, COMMAND.TODO);
         String description = userInput.substring(5).trim();
         assert(!description.isBlank());
@@ -167,8 +169,7 @@ public class Parser {
             throw new DukeArgumentException("You have not entered a keyword!");
         } else if (split.length == 1) {
             throw new DukeArgumentException("You have not entered a task description!");
-        }
-        else if (split.length > 1 && (split[1].equals("/by") || split[1].equals("/at"))) {
+        } else if (split.length > 1 && (split[1].equals("/by") || split[1].equals("/at"))) {
             throw new DukeArgumentException("You have not entered a task description!");
         } else {
             // Do nothing if a keyword or task description is provided.
@@ -188,8 +189,9 @@ public class Parser {
         try {
             LocalDateTime.parse(details[1].trim(), formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeDateTimeException("Please make sure that you enter the Date and Time " +
-                    "in the following format: yyyy-mm-dd HHmm");
+            throw new DukeDateTimeException(
+                    "Please make sure that you enter the Date and Time "
+                            + "in the following format: yyyy-mm-dd HHmm");
         }
     }
 

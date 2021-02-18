@@ -1,10 +1,10 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.List;
+import java.util.ListIterator;
+
+import duke.task.Task;
 
 /**
  * Class representing A List of Tasks.

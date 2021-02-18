@@ -1,9 +1,10 @@
 package duke.util;
 
-import duke.task.Task;
-import javafx.util.Pair;
-
 import java.util.LinkedList;
+
+import duke.task.Task;
+
+import javafx.util.Pair;
 
 /**
  * Class that serves as a Cache for Add, Delete, Done operations.

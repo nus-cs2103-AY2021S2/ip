@@ -1,14 +1,14 @@
 package duke.command;
 
+import duke.util.MessageFormatter;
 import duke.util.TaskList;
 import duke.util.TaskStorage;
-import duke.util.MessageFormatter;
 
 /**
  * Class representing an Invalid Command.
  */
 public class InvalidCommand extends Command {
-    private String errorMessage;
+    private final String errorMessage;
 
     /**
      * Constructor of the InvalidCommand class.

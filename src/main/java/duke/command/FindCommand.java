@@ -1,19 +1,20 @@
 package duke.command;
 
-import duke.util.TaskList;
-import duke.util.TaskStorage;
-import duke.util.MessageFormatter;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
+import duke.task.Task;
+
+import duke.util.MessageFormatter;
+import duke.util.TaskList;
+import duke.util.TaskStorage;
 
 /**
  * Class representing the Find Command.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     /**
      * Constructor of FindCommand class.

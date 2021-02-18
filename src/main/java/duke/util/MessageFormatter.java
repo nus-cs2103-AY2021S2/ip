@@ -1,8 +1,8 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ListIterator;
+
+import duke.task.Task;
 
 /**
  * Class containing methods that formats Duke's messages to the user.
@@ -17,11 +17,11 @@ public class MessageFormatter {
      *          current size of the list of tasks.
      */
     public String formatAddMsg(Task taskAdded, TaskList tasks) {
-        return ("Got it. I've added this task:\n" + taskAdded +
-                "\nYou have " +
-                tasks.getSize() +
-                (tasks.getSize() == 1 ? " task" : " tasks") +
-                " in your list");
+        return ("Got it. I've added this task:\n" + taskAdded
+                + "\nYou have "
+                + tasks.getSize()
+                + (tasks.getSize() == 1 ? " task" : " tasks")
+                + " in your list");
     }
 
     /**
@@ -33,11 +33,12 @@ public class MessageFormatter {
      *          current size of the list of tasks.
      */
     public String formatRemoveMsg(Task taskRemoved, TaskList tasks) {
-        return ("I've removed this task:\n" +
-                taskRemoved +
-                "\nYou have " +
-                tasks.getSize() + (tasks.getSize() == 1 ? " task" : " tasks") +
-                " in your list");
+        return ("I've removed this task:\n"
+                + taskRemoved
+                + "\nYou have "
+                + tasks.getSize()
+                + (tasks.getSize() == 1 ? " task" : " tasks")
+                + " in your list");
     }
 
     /**
@@ -47,8 +48,8 @@ public class MessageFormatter {
      * @return A String that lets the user know which task was set as completed.
      */
     public String formatDoneMsg(Task taskDone) {
-        return ("Nice! I have marked this task as done:\n" +
-                taskDone);
+        return ("Nice! I have marked this task as done:\n"
+                + taskDone);
     }
 
     /**
@@ -58,8 +59,8 @@ public class MessageFormatter {
      * @return A String that lets the user know which task was set as not complete.
      */
     public String formatUndoDone(Task taskUndone) {
-        return ("I have marked this task as not done:\n" +
-                taskUndone);
+        return ("I have marked this task as not done:\n"
+                + taskUndone);
     }
 
     /**
@@ -97,9 +98,9 @@ public class MessageFormatter {
         int count = 1;
         while (iterator.hasNext()) {
             Task task = iterator.next();
-            msg += (count + "." +
-                    task +
-                    (iterator.hasNext() ? "\n" : ""));
+            msg += (count + "."
+                    + task
+                    + (iterator.hasNext() ? "\n" : ""));
             count++;
         }
         return msg;
@@ -113,12 +114,12 @@ public class MessageFormatter {
      * @return A String that lets the user know which task was removed.
      */
     public String formatUndoAdd(Task removedTask, TaskList tasks) {
-        return ("ADD undone, the following task is removed:\n" +
-                removedTask +
-                "\nYou have " +
-                tasks.getSize() +
-                (tasks.getSize() == 1 ? " task" : " tasks") +
-                " in your list");
+        return ("ADD undone, the following task is removed:\n"
+                + removedTask
+                + "\nYou have "
+                + tasks.getSize()
+                + (tasks.getSize() == 1 ? " task" : " tasks")
+                + " in your list");
     }
 
     /**
@@ -129,11 +130,11 @@ public class MessageFormatter {
      * @return A String that lets the user know which task was added back into the list.
      */
     public String formatUndoDelete(Task addedTask, TaskList tasks) {
-        return ("DELETE undone, the following task is added:\n" +
-                addedTask +
-                "\nYou have " +
-                tasks.getSize() +
-                (tasks.getSize() == 1 ? " task" : " tasks") +
-                " in your list");
+        return ("DELETE undone, the following task is added:\n"
+                + addedTask
+                + "\nYou have "
+                + tasks.getSize()
+                + (tasks.getSize() == 1 ? " task" : " tasks")
+                + " in your list");
     }
 }
