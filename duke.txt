@@ -1,0 +1,5 @@
+1. [T]✓  breakfast with Josh
+2. [E]✓  afternoon tea with Dion (at: 2021-02-08 15:00)
+3. [D]✘  add features (by: 2021-02-12)
+4. [T]✘  tai makeover
+5. [D]✘  send love letter (by: 2021-02-14)

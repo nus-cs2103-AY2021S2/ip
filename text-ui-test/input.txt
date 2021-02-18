@@ -1,0 +1,45 @@
+event xxx /at 1pm
+deadline xxx /by Mon
+todo read book
+list
+done
+delete
+done 4
+delete 4
+todo
+deadline
+event
+deadline /by
+event /at
+event xxx
+deadline xxx
+event /at 1pm
+deadline /by Mon
+done 1
+delete 1
+list
+bye
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
