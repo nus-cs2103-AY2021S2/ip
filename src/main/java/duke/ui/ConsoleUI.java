@@ -32,7 +32,8 @@ public class ConsoleUI {
      * Duke says bye
      */
     public String bye() {
-        return this.formatBox("Bye. Hope to see you again soon!");
+        return this.formatBox("Bye. No more inputs will be accepted, please close the program!\n"
+                + "Hope to see you again soon :)");
     }
 
     /**
