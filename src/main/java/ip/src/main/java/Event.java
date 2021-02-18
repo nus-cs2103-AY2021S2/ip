@@ -17,7 +17,6 @@ public class Event extends Task {
      * @param content String content given by user.
      * @param atStr Event date given by user, parsed into a Date object with the format dd/MM/yyyy HH:mm.
      */
-
     public Event(String content , String atStr) {
         super(content);
         DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -31,26 +30,38 @@ public class Event extends Task {
 
     }
 
+    /**
+     *Edits the date and time of the Event task by cloning the old Event task.
+     *
+     * @param newDate New date given by user.
+     * @return A clone of the old Event task with the new date and time change.
+     */
     public Event editDate (String newDate) {
         String content = this.content;
         boolean doneStatus = this.done;
-        Event newEventTask = new Event (content, newDate);
+        Event newEventTask = new Event (content , newDate);
         newEventTask.done = doneStatus;
         return newEventTask;
     }
 
+    /**
+     *Edits the content of the Event task by cloning the old Event task.
+     *
+     * @param newContent New content given by user.
+     * @return A clone of the old Event task with the new content change.
+     */
     public Event editContent (String newContent) {
-        Event newTask = new Event(newContent, "0/0/0 00:00");
+        Event newTask = new Event(newContent , "0/0/0 00:00");
         newTask.at = this.at;
         newTask.done = this.done;
         return newTask;
     }
+
     /**
      * toString() of Event Class.
      *
      * @return toString() representation of a Event object with its done status, content and date.
      */
-
     @Override
     public String toString() {
         DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");

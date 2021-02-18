@@ -9,7 +9,6 @@ import java.util.Scanner;
  * Storage class that deals with loading and updating the tasks in the given file.
  *
  */
-
 public class Storage {
     protected String filePath;
     protected Duke bot;
@@ -41,6 +40,7 @@ public class Storage {
         bot.addToBot(newTask);
         return newTask;
     }
+
     /**
      * Updates the Duke bot with the tasks by loading the tasks in the file.
      * Task is in the format {type} | {doneStatus} | {details}.
@@ -48,10 +48,11 @@ public class Storage {
      * @param taskData The task from the file.
      * @throws FileNotFoundException
      */
-
     public void loadTasks(String taskData) throws FileNotFoundException {
-        File f = new File(this.filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        // create a File for the given file path
+        File f = new File(this.filePath);
+        // create a Scanner using the File as the source
+        Scanner s = new Scanner(f);
 
         String[] taskDataArr = taskData.split(" \\| ");
         String type = taskDataArr[0];
@@ -60,10 +61,8 @@ public class Storage {
 
         if (newTask.isToDoTask(type)) {
             newTask = loadToDoTask(taskDataArr);
-
         } else if (newTask.isEventTask(type)) {
             newTask = loadEventTask(taskDataArr);
-
         } else {
             assert type.equals("D");
             newTask = loadDeadlineTask(taskDataArr);
@@ -72,7 +71,6 @@ public class Storage {
         if (newTask.isDone(doneStatus)) {
             newTask.markDone();
         }
-
     }
 
     /**
@@ -83,18 +81,19 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public void createBot(String filePath, Duke bot) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        // create a File for the given file path
+        File f = new File(filePath);
+        // create a Scanner using the File as the source
+        Scanner s = new Scanner(f);
         Storage storage = new Storage(filePath, bot);
 
         while (s.hasNext()) {
             storage.loadTasks(s.nextLine());
         }
-
     }
 
     /**
-     * Updates the file with the bot current TaskList.
+     * Updates the file at the specific relative filepath with the bot's final tasklist.
      *
      * @throws IOException
      */
@@ -102,9 +101,7 @@ public class Storage {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task element:this.bot.list.list) {
             fw.write(element.toString() + "\n");
-
         }
         fw.close();
     }
-
 }

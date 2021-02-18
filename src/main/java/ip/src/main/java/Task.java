@@ -18,7 +18,6 @@ public class Task {
 
     /**
      * Updates the Task Status to completed.
-     *
      */
     public void markDone() {
         this.done = true;
@@ -45,6 +44,13 @@ public class Task {
         return inputType.equals("E");
     }
 
+    /**
+     *Dummy method for editing the content of the old task.
+     * Exact implementations in each child class, utilizing Polymorphism when editContent is called.
+     *
+     * @param newContent New content given by user.
+     * @return A clone of the old task with the new content change.
+     */
     protected Task editContent (String newContent) {
         Task newTask = new Task(newContent);
         newTask.done = this.done;
@@ -52,7 +58,8 @@ public class Task {
     }
 
     /**
-     * Dummy method for editDate in Task. Exact implementations in each child class, utilizing Polymorphism.
+     * Dummy method for editDate in Task.
+     * Exact implementations in each child class, utilizing Polymorphism when editDate is called.
      *
      * @param newDate New date given by user.
      */

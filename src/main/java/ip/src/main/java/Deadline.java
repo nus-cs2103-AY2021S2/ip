@@ -33,16 +33,28 @@ public class Deadline extends Task{
 
     }
 
+    /**
+     *Edits the date and time of the Deadline task by cloning the old Deadline task.
+     *
+     * @param newDate New date given by user.
+     * @return A clone of the old Deadline task with the new date and time change.
+     */
     protected Deadline editDate (String newDate) {
         String content = this.content;
         boolean doneStatus = this.done;
-        Deadline newDeadlineTask = new Deadline(content, newDate);
+        Deadline newDeadlineTask = new Deadline(content , newDate);
         newDeadlineTask.done = doneStatus;
         return newDeadlineTask;
     }
 
+    /**
+     *Edits the content of the Deadline task by cloning the old Deadline task.
+     *
+     * @param newContent New content given by user.
+     * @return A clone of the old Deadline task with the new content change.
+     */
     public Deadline editContent (String newContent) {
-        Deadline newTask = new Deadline(newContent, "0/0/0 00:00");
+        Deadline newTask = new Deadline(newContent , "0/0/0 00:00");
         newTask.by = this.by;
         newTask.done = this.done;
         return newTask;
@@ -58,9 +70,9 @@ public class Deadline extends Task{
     public String toString() {
         DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String strDate = sourceFormat.format(this.by);
-        if(!this.done){
+        if (!this.done) {
             return "D | 0 | " + super.toString() + " | " + strDate;
-        }else {
+        } else {
             return "D | 1 | " + super.toString() + " | " + strDate;
 
         }

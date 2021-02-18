@@ -31,8 +31,8 @@ public class Main extends Application {
             }
         } catch (IOException e) {
             e.printStackTrace();
-
         }
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
@@ -43,7 +43,6 @@ public class Main extends Application {
             String greet = duke.greet();
             Label label = new Label(greet);
             stage.setTitle(greet);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

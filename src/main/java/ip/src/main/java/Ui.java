@@ -19,7 +19,6 @@ public class Ui {
      *
      * @param id The specified position of the task which status is to be updated as done in the Task List.
      */
-
     public String doneCommand(int id) {
         return this.bot.markTaskAsDone(id);
     }
@@ -30,7 +29,6 @@ public class Ui {
      *
      * @param content Content of the ToDo object.
      */
-
     private String toDoCommand(String content) {
         ToDo newTask = new ToDo(content);
         return this.bot.addToList(newTask);
@@ -43,7 +41,6 @@ public class Ui {
      * @param content Content of the Event object.
      * @param at Date of the Event object.
      */
-
     private String eventCommand(String content, String at) {
         Event newTask = new Event(content, at);
         return this.bot.addToList(newTask);
@@ -57,7 +54,6 @@ public class Ui {
      * @param content Content of the Event object.
      * @param by Date of the Event object.
      */
-
     private String deadlineCommand(String content, String by) {
         Deadline newTask = new Deadline(content, by);
         return this.bot.addToList(newTask);
@@ -91,7 +87,6 @@ public class Ui {
      *
      * @param id The specified position of the task to be removed from the bot Task List.
      */
-
     public String deleteCommand(int id) throws DukeException {
         try {
             return this.bot.deleteTask(id-1);
@@ -100,6 +95,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Handles user input for the different commands given by the user.
+     * Gets the result string to respond to the user.
+     *
+     * @param input User input.
+     * @return Result string.
+     */
     public String handleUserInput(String input) {
         Parser parser = new Parser();
         String output = "";

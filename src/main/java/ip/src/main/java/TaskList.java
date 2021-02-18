@@ -18,7 +18,6 @@ public class TaskList {
      *
      * @param task New Task to be added to list.
      */
-
     public void addTask(Task task) {
         this.list.add(task);
     }
@@ -28,14 +27,14 @@ public class TaskList {
      *
      * @return Boolean to indicate if list is empty.
      */
-
     public boolean isEmpty() {
         return this.list.isEmpty();
     }
 
     /**
-     * Prints the tasks in the list in order.
+     * Prints the tasks in the bot's tasklist.
      *
+     * @return A string representation of the list of the tasks in the tasklist.
      */
     public String printTasks() {
         int counter = 1;
@@ -48,6 +47,11 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Prints the tasks that contain the keyword/s from the bot's tasklist.
+     *
+     * @return A string representation of the list of matching tasks.
+     */
     public String printMatchingTasks() {
         int counter = 1;
         String output = "";
@@ -59,6 +63,11 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Prints the edited bot's tasklist.
+     *
+     * @return A string representation of the newly edited tasks in the tasklist.
+     */
     public String printEditedTasks() {
         int counter = 1;
         String output = "";
@@ -97,6 +106,12 @@ public class TaskList {
         return this.list.size();
     }
 
+    /**
+     * Gets the matching tasks that contain the keyword/s.
+     *
+     * @param keyword Keyword/s given by user.
+     * @return A tasklist of tasks that contain the keyword/s.
+     */
     public TaskList findTasks(String keyword) {
         TaskList taskListWithMatches = new TaskList();
 

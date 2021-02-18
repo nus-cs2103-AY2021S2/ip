@@ -9,6 +9,7 @@ import java.util.Locale;
 
 public class Parser {
 
+    //static field to standardize the parsing for Edit commands.
     private static final String EDIT_HEADER = "EDIT_";
 
     Parser() {
@@ -33,24 +34,36 @@ public class Parser {
         try {
             Command command = Command.valueOf(commandType.toUpperCase(Locale.ENGLISH));
             return command;
-
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS! I don't know what this means! :(");
         }
     }
 
+    /**
+     * Gets the specific edit type from the edit command given.
+     *
+     * @param input The type of edit stated by the user.
+     * @return EditType command.
+     * @throws DukeException
+     */
     protected EditType getEditType (String input) throws DukeException {
         try {
             String editType = input.split(" ")[2];
             editType = EDIT_HEADER + editType;
             EditType edit = EditType.valueOf(editType.toUpperCase(Locale.ENGLISH));
             return edit;
-
         } catch (Exception e) {
             throw new DukeException("OOPS! Invalid edit type! :( \n Edit format should be: edit {index} {type of edit} {edit details}");
         }
     }
 
+    /**
+     * Gets the edit details from the edit command given.
+     *
+     * @param input The edit details provided by the users.
+     * @return Edit details, either new content or new date and time.
+     * @throws DukeException
+     */
     protected String getEditDetails (String input) throws DukeException {
         try {
             input = input.split(" ", 4)[3];
@@ -68,7 +81,6 @@ public class Parser {
      * @param input User input.
      * @return String content needed to create a ToDo Object.
      */
-
     public String toDoTask(String input) throws DukeException {
         try {
             input = input.split(" ", 2)[1];
@@ -76,7 +88,6 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(("OOPS!!! The description cannot be empty."));
         }
-
     }
 
 
@@ -86,7 +97,6 @@ public class Parser {
      * @param input User input.
      * @return String content needed to create a Event Object.
      */
-
     public String eventTaskContent(String input) {
         input = input.split(" ", 2)[1];
         String content = input.split("/at")[0];
@@ -99,7 +109,6 @@ public class Parser {
      * @param input User input.
      * @return String date needed to create a Event Object.
      */
-
     public String eventTaskAt(String input) {
         input = input.split(" ", 2)[1];
         String at = input.split("/at")[1];
@@ -112,7 +121,6 @@ public class Parser {
      * @param input User input.
      * @return String content needed to create a Deadline Object.
      */
-
     public String deadlineTaskContent(String input) {
         input = input.split(" ", 2)[1];
         String content = input.split("/by")[0];
@@ -125,7 +133,6 @@ public class Parser {
      * @param input User input.
      * @return String date needed to create a Deadline Object.
      */
-
     public String deadlineTaskBy(String input) {
         input = input.split(" ", 2)[1];
         String by = input.split("/by")[1];
@@ -138,7 +145,6 @@ public class Parser {
      * @param input User input.
      * @return Integer ID that represents the position (1-th based) of the task in the TaskList.
      */
-
     public int getId(String input) throws DukeException {
         try {
             int id = Integer.valueOf(input.split(" ")[1]);
@@ -155,7 +161,6 @@ public class Parser {
      * @param input User input.
      * @return The keyword used to find the matching tasks in the Task list.
      */
-
     public String getKeyword(String input) {
         String keyword = input.split(" ", 2)[1];
         return keyword;
