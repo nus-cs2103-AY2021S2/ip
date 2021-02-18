@@ -1,0 +1,15 @@
+todo read book
+done 1
+todo swimming
+deadline project /2020-10-22
+deadline meeting /2021-1-2
+done 3
+list
+event project /2020-10-22
+event project2 /2021-1-2
+done 6
+list
+done 10
+delete 5
+delete 9
+bye
