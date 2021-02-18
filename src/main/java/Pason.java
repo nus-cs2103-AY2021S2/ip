@@ -25,8 +25,7 @@ public class Pason {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response and parses command.
      */
     public CommandResult getResponse(String input) {
         try {
@@ -35,9 +34,5 @@ public class Pason {
         } catch (Exception e) {
             return new CommandResult(e.getMessage(), CommandResultType.ERROR);
         }
-    }
-
-    public static void main(String[] args) {
-
     }
 }
