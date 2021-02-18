@@ -16,7 +16,8 @@ public class Parser {
      * @throws IOException if null is supplied to Storage or if file is not found.
      */
     static String parse(String command, Ui ui, TaskList taskList, Storage storage)
-            throws NoSuchElementException, UnknownCommandException, IOException {
+            throws NoSuchElementException, UnknownCommandException, CommandFormatException,
+                IOException, ArrayIndexOutOfBoundsException {
         switch(parseCommand(command)) {
         case "bye":
             return ui.showBye();
@@ -32,6 +33,10 @@ public class Parser {
             String name = getDescription(command);
             if (!name.equals("")) {
                 String[] split = name.split("/p", 2);
+                if (split.length < 2) {
+                    throw  new CommandFormatException();
+                }
+
                 Todo todo = new Todo(split[0].trim(), split[1].trim());
                 Task newTask = taskList.addTask(todo);
                 storage.appendToFile(todo);
@@ -44,7 +49,15 @@ public class Parser {
             String desc = getDescription(command);
             if (!desc.equals("")) {
                 String[] split = desc.split("/by", 2);
+                if (split.length < 2) {
+                    throw  new CommandFormatException();
+                }
+
                 String[] split2 = split[1].split("/p", 2);
+                if (split2.length < 2) {
+                    throw  new CommandFormatException();
+                }
+
                 Deadline deadline = new Deadline(split[0].trim(), split2[0].trim(), split2[1].trim());
                 Task newTask = taskList.addTask(deadline);
                 storage.appendToFile(deadline);
@@ -57,7 +70,15 @@ public class Parser {
             String description = getDescription(command);
             if (!description.equals("")) {
                 String[] split = description.split("/at", 2);
+                if (split.length < 2) {
+                    throw  new CommandFormatException();
+                }
+
                 String[] split2 = split[1].split("/p", 2);
+                if (split2.length < 2) {
+                    throw  new CommandFormatException();
+                }
+
                 Event event = new Event(split[0].trim(), split2[0].trim(), split2[1].trim());
                 Task newTask = taskList.addTask(event);
                 storage.appendToFile(event);
@@ -88,7 +109,11 @@ public class Parser {
         return command.split(" ", 2)[0];
     }
 
-    static String getDescription(String command) {
-        return command.split(" ", 2)[1];
+    static String getDescription(String command) throws CommandFormatException {
+        try {
+            return command.split(" ", 2)[1];
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandFormatException();
+        }
     }
 }

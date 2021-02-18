@@ -97,7 +97,6 @@ public class Storage {
      */
     List<Task> convertFileToList() throws FileNotFoundException, UnknownCommandException {
         assert file != null : "File not found";
-        
         Scanner sc = new Scanner(file);
         List<Task> list = new ArrayList<>();
 

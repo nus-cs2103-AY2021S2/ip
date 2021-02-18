@@ -131,20 +131,14 @@ public class Maya extends Application {
                 DialogBox.getMayaDialog(mayaText, maya)
         );
 
-        System.out.println("oi");
-
-        if (userText.equals("bye")) {
-            System.out.println("called");
-            Platform.exit();
-        }
-
         userInput.clear();
     }
 
     public String getResponse(String input) {
         try {
             return Parser.parse(input, ui, taskList, storage);
-        } catch (UnknownCommandException | IOException e) {
+        } catch (UnknownCommandException | NoSuchElementException | CommandFormatException
+                | IOException | ArrayIndexOutOfBoundsException e) {
             return e.getMessage();
         }
     }
@@ -172,7 +166,7 @@ public class Maya extends Application {
                 }
             }
             sc.close();
-        } catch (UnknownCommandException | NoSuchElementException
+        } catch (UnknownCommandException | NoSuchElementException | CommandFormatException
                 | ArrayIndexOutOfBoundsException | IOException e) {
             System.out.println(e.getMessage());
         } finally {

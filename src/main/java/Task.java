@@ -23,7 +23,7 @@ public class Task {
      * @param priority a String representing the priority of the task.
      * @param isDone a boolean value representing whether the task has been completed.
      */
-    public Task(String name, boolean isDone, String priority ) {
+    public Task(String name, boolean isDone, String priority) {
         this.name = name;
         this.priority = priority;
         this.isDone = isDone;
