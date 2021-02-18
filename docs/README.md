@@ -32,6 +32,7 @@ Juke Chat Bot is a personal task manager. It allows users to add, delete and sea
 * Description: Shows a list of supported commands and their descriptions.
 * Format: `help`
 * Example: `help`
+<img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/help.png">
 
 ### `todo`
 * Description: Creates a todo task and adds it to your task list.
@@ -41,7 +42,7 @@ Juke Chat Bot is a personal task manager. It allows users to add, delete and sea
 ```
 Got it. I've added this task. 
 [T][X] read book
-
+Now you have XX tasks in the list.
 ```
 <p align="center">
   <img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/todo.png">
@@ -50,50 +51,70 @@ Got it. I've added this task.
 
 ### `deadline`
 * Description: Creates a deadline task due at a specific date and time and adds it to your task list.
-* Format: `deadline <description> /by <yyyy-MM-dd HH:mm>`
+* Format: `deadline <description> /by <deadline date>`
 * Example: `deadline group project /by 2021-01-10 1800` 
+  Note: `deadline date` has to be in the `yyyy-MM-dd HH:mm` or `yyyy-MM-dd` format or else an exception will be thrown. 
 * Expected outcome: 
 ```
 Got it. I've added this task. 
 [D][X] group project (by:Jan 10 2021 6PM) 
-
+Now you have XX tasks in the list.
 ```
+<p align="center">
+<img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/deadline.png">
+</p>
 
 ### `event`
 * Description: Creates an event task with an event at a specific date and time and adds it to your task list.
-* Format: `event <description> /at <yyyy-MM-dd HH:mm>`
-* Example: `event meeting /at 2021-01-10 1800` 
+* Format: `event <description> /at <event time>`
+* Example: `event meeting /at Wednesday 10PM` 
 * Expected outcome: 
 ```
 Got it. I've added this task. 
-[E][X] meeting (at:Jan 10 2021 6PM) 
-
+[E][X] meeting (at:Wednesday 10PM) 
+Now you have XX tasks in the list.
 ```
+<p align="center">
+<img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/event.png">
+</p>
 
 ### `delete`
 * Description: Shows a list of supported commands and their descriptions.
-* Format: `help`
-* Example: `help`
+* Format: `delete <taskID>`
+* Example: `delete 1`
+<p align="center">
+<img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/delete.png">
+</p>
 
 ### `find`
 * Description: Shows a list of supported commands and their descriptions.
-* Format: `help`
-* Example: `help`
+* Format: `find <regex>`
+* Example: `find read`
+<p align="center">
+<img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/find.png">
+</p>
 
 ### `done`
 * Description: Shows a list of supported commands and their descriptions.
-* Format: `help`
-* Example: `help`
+* Format: `done <taskID>`
+* Example: `done 1`
+<p align="center">
+<img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/done.png">
+</p>
 
 ### `list`
 * Description: Shows a list of supported commands and their descriptions.
-* Format: `help`
-* Example: `help`
+* Format: `list`
+* Example: `list`
+<p align="center">
+<img height="740" width="512" src="https://raw.githubusercontent.com/branzuelajohn/ip/master/docs/images/list.png">
+</p>
 
 ### `bye` 
-* Description: Shows a list of supported commands and their descriptions.
-* Format: `help`
-* Example: `help`
+* Description: Exits the application.
+* Format: `bye`
+* Example: `bye`
+
 
 
 

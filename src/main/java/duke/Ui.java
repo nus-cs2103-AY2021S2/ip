@@ -27,8 +27,8 @@ public class Ui {
     static final String TODO_HELP = "3. todo <description> - adds a Todo task with the specified <description>";
     static final String DEADLINE_HELP = "4.  deadline <description> /by <yyyy-MM-dd HH:mm> - adds a Deadline task with"
         + " the specified <description> by <yyyy-MM-dd HH:mm>";
-    static final String EVENT_HELP = "event <description> /at <yyyy-MM-dd HH:mm> - adds an Event task with"
-        + " the specified <description>, date and time";
+    static final String EVENT_HELP = "event <description> /at <event time> - adds an Event task with"
+        + " the specified <description> and time";
     static final String DONE_HELP = "done <taskId> - marks a specific task as done";
     static final String FIND_HELP = "find <regex> - to find all items containing the specified "
         + "regex in its description";
