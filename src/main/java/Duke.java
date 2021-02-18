@@ -24,6 +24,7 @@ public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
+    private static final String AUTO_SNOOZE_VALUE = "1";
 
     /**
      * This object is created to encapsulate other objects
@@ -67,13 +68,14 @@ public class Duke {
 
         case "done":
             try {
+                // Does not throw exception yet
                 int index = parser.getIndex(input);
                 Task task = taskList.getSingleTask(index);
                 task.markDone();
 
                 return ui.printDone(task);
             } catch (DukeException e) {
-                return e.printError("Please check the index!");
+                return e.printError("Task not found! Invalid index!");
             }
 
         case "todo":
@@ -83,7 +85,7 @@ public class Duke {
                 taskList.addTask(todo);
                 return ui.printTask(todo, taskList.getSize());
             } catch (DukeException e) {
-                return e.printError("Come On Fella! Your ToDo description cannot be empty!");
+                return e.printMessage();
             }
 
         case "deadline":
@@ -97,7 +99,7 @@ public class Duke {
                 return ui.printTask(deadline, taskList.getSize());
 
             } catch (DukeException e) {
-                return e.printError("Hmm... You are either lacking a name or /by details!");
+                return e.printMessage();
             }
 
         case "event":
@@ -109,17 +111,18 @@ public class Duke {
                 return ui.printTask(event, taskList.getSize());
 
             } catch (DukeException e) {
-                return e.printError("Hmm... You are either lacking a name or /at details!");
+                return e.printMessage();
             }
 
         case "delete":
             try {
+                // Does not throw exception yet
                 int deleteIndex = parser.getIndex(input);
                 Task deletedTask = taskList.getSingleTask(deleteIndex);
                 taskList.deleteTask(deleteIndex);
                 return ui.printDelete(deletedTask, taskList.getSize());
             } catch (DukeException e) {
-                return e.printError("Please choose the correct index for deletion.");
+                return e.printMessage();
             }
 
         case "find":
@@ -133,6 +136,12 @@ public class Duke {
         case "snooze":
             try {
                 int taskIndex = parser.getIndex(input);
+
+                //Guard Condition
+                if (!(taskList.getSingleTask(taskIndex) instanceof Deadline) ) {
+                    throw new DukeException("Task is not a Deadline! Snooze unsuccessful...");
+                }
+
                 String snoozeAttribute = getSnoozeAttribute(input);
                 if (snoozeAttribute.length() > 1) {
                     LocalDate newDate = parser.stringToLocalDate(snoozeAttribute);
@@ -152,11 +161,13 @@ public class Duke {
 
                     return ui.printDoneSnooze(parser.localDateToString(newDate))
                             + "\n\n"
-                            + "The deadline has been automatically snoozed by 1 day";
+                            + "The deadline has been automatically snoozed by "
+                            + AUTO_SNOOZE_VALUE
+                            + " day";
 
                 }
             } catch (DukeException e) {
-                return e.printError("Snooze details incorrect, please check again");
+                return e.printMessage();
             }
 
         default:
@@ -176,7 +187,7 @@ public class Duke {
         try {
             return input.split(" ", 2)[1].trim();
         } catch (Exception e) {
-            throw new DukeException();
+            throw new DukeException("Hmm... You are either lacking a \"name\" detail!");
         }
     }
 
@@ -191,7 +202,7 @@ public class Duke {
         try {
             return input.split("/")[0].split(" ", 2)[1].trim();
         } catch (Exception e) {
-            throw new DukeException();
+            throw new DukeException("Hmm... You are lacking a \"name\" detail!");
         }
     }
 
@@ -206,7 +217,7 @@ public class Duke {
         try {
             return byDate.split("/by ")[1];
         } catch (Exception e) {
-            throw new DukeException();
+            throw new DukeException("Hmm... You are lacking a \"/by\" detail!");
         }
     }
 
@@ -221,7 +232,7 @@ public class Duke {
         try {
             return at.split("/at")[1].trim();
         } catch (Exception e) {
-            throw new DukeException();
+            throw new DukeException("Hmm... You are lacking \"/at\" detail!");
         }
     }
 
@@ -243,7 +254,7 @@ public class Duke {
             }
 
         } catch (Exception e) {
-            throw new DukeException();
+            throw new DukeException("Snooze details incorrect, please check again");
         }
     }
 
