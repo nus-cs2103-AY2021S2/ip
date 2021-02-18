@@ -107,7 +107,7 @@ public class Storage {
         try {
             PrintWriter pw = new PrintWriter(file);
             for (int i = 0; i < tasks.numOfTasks(); i++) {
-                String status = tasks.getTask(i).isDone() ? "done" : "undone";
+                String status = tasks.getTask(i).isDone() ? "done" : "notDone";
                 pw.println(tasks.getTask(i).getTaskName() + " " + status);
             }
             pw.close();
