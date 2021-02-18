@@ -1,5 +1,8 @@
 package util;
 
+/**
+ * Used to represent Exceptions related to parsing errors due to invalid user input.
+ */
 public class DukeException extends Exception {
     private final String msg;
 
