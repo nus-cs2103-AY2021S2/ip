@@ -32,6 +32,10 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/qn_parrot.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/ans_parrot.png"));
 
+    public Duke() {
+        this(LOG_PATH, false);
+    }
+
     /**
      * Constructor for Duke.
      * @param path Path for storage file
@@ -42,14 +46,6 @@ public class Duke extends Application {
         this.taskList = new TaskList(store);
         this.ui = new Ui();
         this.testEnv = testEnv;
-    }
-
-    /**
-     * Creates a Duke object used in production.
-     * @return Duke object with testEnv set to false and using default LOG_PATH
-     */
-    public static Duke makeDuke() {
-        return new Duke(LOG_PATH, false);
     }
 
     /**
@@ -245,6 +241,8 @@ public class Duke extends Application {
 
         stage.show();
 
+        sendHelloMessage();
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -257,21 +255,30 @@ public class Duke extends Application {
         dialogueContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    private Label getDialogLabel(String text) {
+    private void sendHelloMessage() {
+        Font font = Font.font("Source Sans Pro Semibold", FontWeight.NORMAL, FontPosture.REGULAR, 16);
+        Label dukeText = getDialogLabel(Ui.printHello(), font, Paint.valueOf("cb4b16"));
+        dialogueContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+    }
+
+    private Label getDialogLabel(String text, Font font, Paint fill) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
+        textToAdd.setTextFill(fill);
+        textToAdd.setFont(font);
 
         return textToAdd;
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        userText.setFont(Font.font("ubuntu", FontWeight.NORMAL, FontPosture.REGULAR, 16));
-        userText.setTextFill(Paint.valueOf("141823"));
+        Font userFont = Font.font("ubuntu", FontWeight.NORMAL, FontPosture.REGULAR, 16);
+        Font font = Font.font("Source Sans Pro Semibold", FontWeight.NORMAL, FontPosture.REGULAR, 16);
 
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dukeText.setFont(Font.font("ubuntu", FontWeight.NORMAL, FontPosture.REGULAR, 16));
-        dukeText.setTextFill(Paint.valueOf("cb4b16"));
+        Label userText = getDialogLabel(userInput.getText(), userFont, Paint.valueOf("141823"));
+        Label dukeText = getDialogLabel(getResponse(userInput.getText()), font, Paint.valueOf("cb4b16"));
+
         dialogueContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -295,6 +302,6 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        Duke.makeDuke().dukeRunner();
+        System.out.println(new Duke().dukeRunner());
     }
 }

@@ -66,10 +66,11 @@ public class TaskList {
     public List<Task> remove(int[] indexes) {
         List<Task> removedTasks = new ArrayList<>();
         for (int i : indexes) {
-            assert i > 0 : "Index passed to remove must be greater than 1. ";
-            assert i <= this.tasks.size() : "Index passed to remove cannot be greater than length of task list. ";
-            this.storage.remove(i);
-            removedTasks.add(this.tasks.remove(i - 1));
+            int actualIndex = i - removedTasks.size(); //size of tasks will change as tasks are removed
+            assert actualIndex > 0 : "Index passed to remove must be greater than 1. ";
+            assert actualIndex <= this.tasks.size() : "Index passed to remove cannot be greater than length of task list. ";
+            this.storage.remove(actualIndex);
+            removedTasks.add(this.tasks.remove(actualIndex - 1));
             this.count--;
         }
         return removedTasks;
