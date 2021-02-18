@@ -1,5 +1,8 @@
 package com.tanboonji.jhin.command;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.tanboonji.jhin.exception.InvalidCommandArgumentException;
 import com.tanboonji.jhin.exception.JhinException;
 import com.tanboonji.jhin.model.Task;
@@ -9,6 +12,7 @@ import com.tanboonji.jhin.model.Task;
  */
 public class DeleteCommand extends Command {
 
+    private static final Pattern COMMAND_FORMAT = Pattern.compile("^(\\d+)$");
     private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the delete command you entered is invalid.\n"
                     + "Please enter a valid delete command in the following format:\n"
                     + "[delete, rm] <task number>";
@@ -49,12 +53,16 @@ public class DeleteCommand extends Command {
      *
      * @param arguments Command arguments.
      * @return New delete command.
-     * @throws JhinException If user input is not an integer.
+     * @throws JhinException If arguments does not match delete command format or task index is not an integer.
      */
     public static DeleteCommand parseArguments(String arguments) throws JhinException {
-        int taskIndex;
+        Matcher matcher = COMMAND_FORMAT.matcher(arguments);
+        if (!matcher.matches()) {
+            throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
+        }
+
         try {
-            taskIndex = Integer.parseInt(arguments) - 1;
+            int taskIndex = Integer.parseInt(arguments) - 1;
             return new DeleteCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, arguments));
