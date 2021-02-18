@@ -114,16 +114,7 @@ public class Ui {
      * @return A String.
      */
     public static String respondToHelp() {
-        String todo = "- todo {description} \n" + "     Adds a ToDo\n";
-        String deadline = "- deadline {description} /by {date in yyyy-mm-dd format} \n" + "     Adds a Deadline\n";
-        String event = "- event {description} /at {date/time}\n" + "     Adds an Event\n";
-        String done = "- done {task number}\n" + "     Checks a task off as done, using the task number \n";
-        String delete = "- delete {task number}\n" + "     Deletes a task, using the task number \n";
-        String find = "- find {keyword}\n" + "     Finds a task using keywords \n";
-        String tag = "- tag {task number} /{tag}\n" + "     Tags a task, using the task number \n";
-        String list = "- list\n" + "     Lists all the tasks, together with the task numbers \n";
-        String bye = "- bye\n" + "     Exits the program \n";
-        return "AVAILABLE COMMANDS: \n" + todo + deadline + event + done + delete + find + tag + list + bye;
+        return "Refer to the user guide: https://mabel-kang.github.io/ip/";
     }
 
 }
