@@ -169,7 +169,7 @@ public class Parser {
                 return new Event(eventParams[0], LocalDate.parse(timeParams[0]), timeParams[1]);
 
             } else {
-                assert false : "Wrong command given to Parser.parseRemainder()";
+                throw new AssertionError("Wrong command given to Parser.parseRemainder()");
             }
 
         } catch (DukeException err) {

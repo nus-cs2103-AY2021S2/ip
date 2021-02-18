@@ -39,10 +39,6 @@ public class Storage {
      * @param taskList the current list of tasks
      */
     public void writeToFile(TaskList taskList) {
-        //String home = System.getProperty("user.home");
-
-        //Path dirPath = Paths.get(home, "data");
-        //Path filePath = Paths.get(home,"data", "duke.txt");
         List<Task> myList = taskList.getTasks();
 
         try {
@@ -109,7 +105,7 @@ public class Storage {
                         task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1]);
                         break;
                     default:
-                        assert false : "Task read from file is not a Todo, Deadline or Event";
+                        throw new AssertionError("Task read from file is not a Todo, Deadline or Event");
                     }
 
                     if (Integer.parseInt(inputArr[1]) == 1) {
@@ -117,7 +113,7 @@ public class Storage {
                     } else if (Integer.parseInt(inputArr[1]) == 0) {
                         tasksList.add(task);
                     } else {
-                        assert false;
+                        throw new AssertionError();
                     }
 
                 } catch (Exception e) {
