@@ -46,9 +46,7 @@ public class DukeList {
     }
 
     public void deleteAll() {
-        if (size > 0) {
-            list.subList(0, size).clear();
-        }
+        list.clear();
         size = 0;
     }
 

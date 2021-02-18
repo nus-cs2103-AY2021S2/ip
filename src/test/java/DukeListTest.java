@@ -7,11 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeListTest {
 
     @Test
+    public void getSizeTest() {
+        DukeList list = new DukeList();
+        list.add(new ToDos("test1"));
+        list.add(new ToDos("test2"));
+        assertEquals(2, list.getSize());
+    }
+
+    @Test
     public void addTest() {
         DukeList list = new DukeList();
         list.add(new ToDos("Live"));
-        assertEquals(1 , list.getSize());
+        assertEquals(1, list.getSize());
     }
+
     @Test
     public void deleteTest() {
         DukeList list = new DukeList();
@@ -20,6 +29,7 @@ public class DukeListTest {
         list.delete(0);
         assertEquals(1, list.getSize());
     }
+
     @Test
     public void deleteAllTest() {
         DukeList list = new DukeList();
@@ -28,6 +38,7 @@ public class DukeListTest {
         list.deleteAll();
         assertEquals(0, list.getSize());
     }
+
     @Test
     public void markAsDoneTest() {
         DukeList list = new DukeList();
@@ -35,5 +46,4 @@ public class DukeListTest {
         list.markAsDone(0);
         assertEquals(true, list.get(0).isTaskDone());
     }
-
 }
