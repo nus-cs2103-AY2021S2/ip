@@ -1,23 +1,62 @@
-# Henchman project template
+# User Guide
+Henchman is your loyal Task Manager application built using Java 11.
+Henchman can help track all your tasks and their deadlines, so feel free to order him around. Go on to the **Features** section to test out the commands! 
+---
+## Features 
+Note: All commands are case insensitive.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+### Create a ToDo task:
+* Description: Adds new ToDo task to your list of tasks.
+* Command: `todo`
+* Format: `todo <description>`
+* Note: `<description>` cannot be empty,
+* Example:
 
-## Setting up in Intellij
+### Create an Event task:
+* Description: Adds new Event, with the specified event time, task to your list of tasks.
+* Command: `event`
+* Format: `event <description> /at <YYYY-MM-DD> <HH:mm>`
+* Note: `<description>` and `<date>` cannot be empty; `<time>` is optional,
+* Example:
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### Create a Deadline task:
+* Description: Adds new Deadline task, with the specified deadline, to your list of tasks.
+* Command: `deadline`
+* Format: `deadline <description> /by <YYYY-MM-DD> <HH:mm>`
+* Note: `<description>` and `<date>` cannot be empty; `<time>` is optional,
+* Example:
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Henchman.java` file, right-click it, and choose `Run Henchman.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Delete a task:
+* Description: Deletes the task specified by its input index.
+* Command: `delete`
+* Format: `delete <task index>`
+* Note: `<task index>` cannot be empty,
+* Example:
+
+
+### List tasks:
+* Description: Lists all tasks currently in the task list.
+* Command: `list`
+* Format: `list`
+* Note: Just `list` is enough,
+* Example: 
+
+### Find tasks: 
+* Description: Finds all tasks containing the specified search term.
+* Command: `find`
+* Format: `find <search term>`
+* Note: `<search term>` can even be a phrase, and is case insensitive.
+* Example:
+
+### Sort tasks: 
+* Description: Sort all tasks according to the sort key.
+* Command: `sort`
+* Format: `sort <sort key>`
+* Key (case insensitive):
+    *  `created`: sort by task created date
+    *  `description`: sort by task description
+    *  `done`: sort by task done status, with unfinished tasks first
+    *  `end`: sort by task end date
+    *  `type`: sort by task type
+* Note: If no sort key is provided, sort by task created date by default. 
+* Example:
