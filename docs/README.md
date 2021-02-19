@@ -21,7 +21,7 @@ Example: `bye`
 ### Help `help`
 Shows available commands and their formats
 
-![Image of Help](src/main/resources/images/Help.PNG)
+![Image of Help](https://github.com/jrvslam/ip/blob/master/src/main/resources/images/Help.PNG)
 
 ## Add Tasks
 ### Add ToDo `todo`
