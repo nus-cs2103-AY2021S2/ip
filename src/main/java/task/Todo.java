@@ -1,5 +1,7 @@
 package task;
 
+import java.util.List;
+
 import duke.DukeException;
 
 /**
@@ -16,8 +18,8 @@ public class Todo extends Task {
         super(description);
     }
 
-    public Todo(String description, boolean isDone) {
-        super(description, isDone);
+    public Todo(String description, boolean isDone, List<String> tags) {
+        super(description, isDone, tags);
     }
 
     /**
@@ -30,7 +32,7 @@ public class Todo extends Task {
         if (isDone) {
             throw new DukeException("This Task has already been marked as done!");
         }
-        return new Todo(description, true);
+        return new Todo(description, true, tags);
     }
 
     /**
@@ -39,7 +41,7 @@ public class Todo extends Task {
      * @return a String representation of the Todo
      */
     public String fileFormat() {
-        return "T | " + (super.isDone ? "1 | " : "0 | ") + this.description;
+        return "T | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | " + tags;
     }
 
     @Override

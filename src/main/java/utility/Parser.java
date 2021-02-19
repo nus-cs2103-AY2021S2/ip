@@ -34,7 +34,6 @@ public class Parser {
             if (params.length == 1) {
                 throw new DukeException("delete is missing 1 argument");
             }
-
             return new DukeCommand(Command.DELETE, params[1]);
 
         } else if (input.equals("list")) {
@@ -44,36 +43,38 @@ public class Parser {
             if (params.length == 1) {
                 throw new DukeException("done is missing 1 argument");
             }
-
             return new DukeCommand(Command.DONE, params[1]);
 
         } else if (params[0].equals("todo")) {
             if (params.length == 1) {
                 throw new DukeException("todo is missing 1 argument");
             }
-
             return new DukeCommand(Command.TODO, params[1]);
 
         } else if (params[0].equals("deadline")) {
             if (params.length == 1) {
                 throw new DukeException("Missing arguments for deadline");
             }
-
             return new DukeCommand(Command.DEADLINE, params[1]);
 
         } else if (params[0].equals("event")) {
             if (params.length == 1) {
                 throw new DukeException("Missing arguments for event");
             }
-
             return new DukeCommand(Command.EVENT, params[1]);
 
         } else if (params[0].equals("find")) {
             if (params.length == 1) {
                 throw new DukeException("Missing keyword for find");
             }
-
             return new DukeCommand(Command.FIND, params[1]);
+
+        } else if (params[0].equals("tag")) {
+            if (params.length == 1) {
+                throw new DukeException("Missing arguments for tag");
+            }
+            return new DukeCommand(Command.TAG, params[1]);
+
         } else {
             return new DukeCommand(Command.INVALID, "");
         }
@@ -148,7 +149,7 @@ public class Parser {
             if (!dateMt.find()) {
                 throw new DukeException("OOPS!!! Please enter '/by YYYY-MM-DD {time range}' after description");
             }
-            
+
             Pattern timePt = Pattern.compile("\\d{1,2}-\\d{1,2}p?a?m");
             Matcher timeMt = timePt.matcher(timeParams[1]); // timeParams[1] refers to the time
             

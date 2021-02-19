@@ -88,20 +88,26 @@ public class Storage {
         Task task = null;
         BufferedReader br = new BufferedReader(new FileReader(filePath.toString()));
         String input = br.readLine();
+
         while (input != null) {
             String[] inputArr = input.split(DELIMITER);
 
             switch (inputArr[0]) {
             case "T":
-                task = new Todo(inputArr[2]);
+                List<String> tags = getTagListFromInputArr(inputArr, true);
+                task = new Todo(inputArr[2], false, tags);
                 break;
             case "D":
-                task = new Deadline(inputArr[2], LocalDate.parse(inputArr[3]));
+                tags = getTagListFromInputArr(inputArr, false);
+                task = new Deadline(inputArr[2], LocalDate.parse(inputArr[3]), false, tags);
                 break;
             case "E":
                 String[] timeParams = inputArr[3].split(" ", 2);
-                task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1]);
+                tags = getTagListFromInputArr(inputArr, false);
+                task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1], false, tags);
                 break;
+            default:
+                throw new AssertionError();
             }
 
             if (Integer.parseInt(inputArr[1]) == 1) {
@@ -116,5 +122,20 @@ public class Storage {
         br.close();
 
         return tasksList;
+    }
+
+    private List<String> getTagListFromInputArr(String[] inputArr, boolean isTodo) {
+
+        int index = isTodo ? 3 : 4;
+        String[] tagsArr = inputArr[index].substring(1, inputArr[index].length() - 1).split(", ");
+        List<String> tags = new ArrayList<>();
+
+        for (String tag : tagsArr) {
+            if (tag.equals("")) {
+                continue;
+            }
+            tags.add(tag);
+        }
+        return tags;
     }
 }
