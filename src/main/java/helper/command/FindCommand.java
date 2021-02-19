@@ -1,13 +1,13 @@
 package helper.command;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import helper.Storage;
 import helper.TaskList;
 import helper.Ui;
 import task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
 

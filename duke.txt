@@ -1,7 +1,6 @@
-[T][ ] talk to suitemate
-[D][X] finish hw (by: 2021-02-22)
-[E][ ] birthday (at: 2021-06-24)
-[D][ ] swe tp (by: 2021-02-22)
-[T][ ] hey
-[E][ ] yo (at: 2021-02-23)
-[T][ ] aha
+[T][X] call mom
+[E][ ] party (at: 2021-02-24)
+[D][ ] swe hw (by: 2021-02-22)
+[T][ ] sleep
+[E][ ] buy shoes (at: 2021-02-21)
+[D][ ] watch movie (by: 2021-02-22)

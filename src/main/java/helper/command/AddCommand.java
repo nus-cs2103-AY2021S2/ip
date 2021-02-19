@@ -1,5 +1,12 @@
 package helper.command;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
+
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+
 import helper.DukeException;
 import helper.Storage;
 import helper.TaskList;
@@ -7,13 +14,6 @@ import helper.Ui;
 import task.Deadline;
 import task.Event;
 import task.Todo;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
-
-import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
 
 /**
  * Commands for adds (todo..., deadline..., event...)
@@ -23,6 +23,11 @@ public class AddCommand extends Command {
     private final String whichAdd;
     private final String addString;
 
+    /**
+     * Initialize the command
+     * @param whichAdd
+     * @param description
+     */
     public AddCommand(String whichAdd, String description) {
         this.whichAdd = whichAdd;
         this.addString = description;
@@ -30,12 +35,11 @@ public class AddCommand extends Command {
 
     /**
      * Executes the parsed command
-     *
      * @param tasks
      * @param ui
      * @param storage
-     * @throws DukeException
-     * @return
+     * @return string to print
+     * @throws DukeExceptione
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String stringToReturn = "";
@@ -67,6 +71,8 @@ public class AddCommand extends Command {
                 throw new DukeException("Invalid deadline");
             }
             break;
+        default:
+            throw new DukeException("Invalid add");
         }
         storage.saveFile(tasks);
         return stringToReturn;

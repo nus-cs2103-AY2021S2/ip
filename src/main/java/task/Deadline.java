@@ -1,7 +1,6 @@
 package task;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Deadline tasks
@@ -9,6 +8,11 @@ import java.util.Date;
 public class Deadline extends Task {
     protected LocalDate by;
 
+    /**
+     * Make deadline
+     * @param description
+     * @param by
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;

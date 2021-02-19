@@ -11,12 +11,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+
 import task.Deadline;
 import task.Event;
-import task.Todo;
 import task.Task;
-
-import java.time.LocalDate;
+import task.Todo;
 /**
  * Handles storage
  */
@@ -51,13 +50,13 @@ public class Storage {
 
     /**
      * Parse each line in saved file and update taskList
-     * @param line, String in the file
-     * @param taskList, the task list
+     * @param line String in the file
+     * @param taskList the task list
      */
     private void parseLine(String line, List<Task> taskList) {
         Task task = null;
-        int index = line.indexOf("] ",-1);
-        String boxes = line.substring(0,index + 1);
+        int index = line.indexOf("] ", -1);
+        String boxes = line.substring(0, index + 1);
         if (boxes.contains("[T]")) {
             task = new Todo(line.substring(index + 2));
         } else if (boxes.contains("[D]")) {
@@ -71,9 +70,9 @@ public class Storage {
             LocalDate date = parseTime(line.substring(dateIndex));
             task = new Event(stringBeforeDate, date);
         } else {
-            return ;
+            return;
         }
-        handleDone(boxes,task);
+        handleDone(boxes, task);
         taskList.add(task);
     }
 
@@ -90,7 +89,7 @@ public class Storage {
 
     /**
      * Helps parse the time
-     * @param s, String with time info
+     * @param s String with time info
      * @return date
      */
     private LocalDate parseTime(String s) {

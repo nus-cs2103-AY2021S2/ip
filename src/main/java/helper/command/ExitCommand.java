@@ -3,8 +3,6 @@ package helper.command;
 import helper.Storage;
 import helper.TaskList;
 import helper.Ui;
-import javafx.application.Platform;
-import task.Task;
 
 /**
  * Command to end duke

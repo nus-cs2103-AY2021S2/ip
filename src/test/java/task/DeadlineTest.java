@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DeadlineTest {
 
-
     LocalDate localDate = LocalDate.of(2021,2,1);
     Deadline deadline = new Deadline("description", localDate);
 
