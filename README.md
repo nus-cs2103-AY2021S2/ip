@@ -14,6 +14,7 @@ Note: All commands are case insensitive.
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/todo.png?raw=true">
   <br />
+  <br />
 </p>
 
 ### Create an Event task:
@@ -24,6 +25,7 @@ Note: All commands are case insensitive.
 * Example:
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/event.png?raw=true">
+  <br />
   <br />
 </p>
 
@@ -101,6 +103,4 @@ Note: All commands are case insensitive.
 * Example:
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/sort.png?raw=true">
-  <br />
-  <br />
 </p>
