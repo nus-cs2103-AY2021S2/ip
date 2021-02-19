@@ -68,10 +68,10 @@ optimized for use via a **Command Line Interface (CLI)** while still having the 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-The simple way to start using Jhin is to download Jhin from [here](https://github.com/tanboonji/ip/releases) and follow
+The simple way to start using Jhin is to download the latest version of Jhin from [here](https://github.com/tanboonji/ip/releases) and follow
 the installation steps in the [Jhin User Guide](https://tanboonji.github.io/ip/#quick-start).
 
-Alternatively, you can follow the installation steps below to set up Jhin as a project on IntelliJ.
+Alternatively, you can follow the installation steps below to set up Jhin as a project in IntelliJ.
 
 ### Prerequisites
 
@@ -79,25 +79,22 @@ Alternatively, you can follow the installation steps below to set up Jhin as a p
 2. Ensure that you have the latest version of [**IntelliJ**](https://www.jetbrains.com/idea/) installed in your computer.
 
 ### Installation
-
 1. Clone the repository to your local computer.
     ```shell
     git clone https://github.com/tanboonji/ip.git
     ```
-2. Open the local repository directory in IntelliJ.
+2. Open Jhin as a project in IntelliJ.
    * In IntelliJ, click `File` > `Open`.
    * Select the local repository directory and click `OK`.
 3. Ensure that the Project SDK is configured to JDK 11.
    * In IntelliJ, click `File` > `Project Structure`
-   * If your Project SDK is not configured to JDK 11, you can follow this [guide](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk)
-     to configure JDK 11.
-4. After opening the project in IntelliJ and ensuring that JDK 11 is configured, locate `src/main/java/com.tanboonji.jhin/Launcher.java` file, 
+   * If your Project SDK is not configured to JDK 11, you can follow this [guide](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) to do so.
+4. After opening the project and ensuring that JDK 11 is configured, locate `src/main/java/com/tanboonji/jhin/Launcher.java` file in the project, 
    right click and select `Run Launcher.main()`. The GUI should appear in a few seconds.
 
 
 <!-- CONTRIBUTING -->
 ## Contributing
-
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any
 contributions you make are **greatly appreciated**.
 

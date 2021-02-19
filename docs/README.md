@@ -40,11 +40,9 @@ optimized for use via a **Command Line Interface (CLI)** while still having the 
       ```shell
       java -jar jhin.jar
       ```
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/tanboonji/ip/master/docs/images/Startup.png" alt="Startup Screenshot" height="700"/>
 </p>
-
 5. Start using Jhin!
 
 ## Features
