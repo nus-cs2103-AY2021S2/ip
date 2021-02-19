@@ -11,6 +11,9 @@ public class Deadline extends Task {
 
     protected String by;
 
+    /**
+     * Constructor
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -33,7 +36,7 @@ public class Deadline extends Task {
         LocalDate date = LocalDate.parse(temp[0]);
         result = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
-        if(temp.length > 1) {
+        if (temp.length > 1) {
             LocalTime time = LocalTime.parse(temp[1]);
             String res = time.format(DateTimeFormatter.ofPattern("HH:mm"));
             result += (" " + res);
@@ -64,7 +67,7 @@ public class Deadline extends Task {
      * @return String of correctly formatted task
      */
     @Override
-    public String toString()  {
-        return "D" + super.toString() + " | " + extractDateTime(by);
+    public String toString() {
+        return ("D" + super.toString() + " | " + extractDateTime(by));
     }
 }

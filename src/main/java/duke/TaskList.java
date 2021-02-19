@@ -34,7 +34,7 @@ public class TaskList {
      * @return the Task to be extracted
      */
     public Task getTask(int i) {
-        return this.taskList.get(i-1);
+        return this.taskList.get(i - 1);
     }
 
     /**
@@ -61,7 +61,7 @@ public class TaskList {
      * @param taskIndex the index of the task that is to be removed from the task list
      */
     public void deleteTask(int taskIndex) {
-        this.taskList.remove(taskIndex-1);
+        this.taskList.remove(taskIndex - 1);
     }
 
     /**
@@ -69,7 +69,7 @@ public class TaskList {
      *
      * @param updateInfo relevant information related to the update
      */
-    public void updateTask(String[] updateInfo) throws DukeException{
+    public void updateTask(String[] updateInfo) throws DukeException {
         int taskIndex = Integer.parseInt(updateInfo[1]);
         String type = updateInfo[2];
         String info = updateInfo[3];
@@ -120,7 +120,7 @@ public class TaskList {
      * If nothing is found, an empty List is returned
      *
      * @param keyword the keyword we aim to find.
-     * @return List of found tasks
+     * @return List<Task></> of found tasks
      */
     public List<Task> findTask(String keyword) {
         List<Task> foundTasks = new ArrayList<>();

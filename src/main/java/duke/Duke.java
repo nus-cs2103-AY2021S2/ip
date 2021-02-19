@@ -65,7 +65,7 @@ public class Duke {
             } else {
                 ui.showError("Something went wrong!");
             }
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
         System.out.println(ui.getResponse());
@@ -224,7 +224,7 @@ public class Duke {
      *
      * @param parsedInput parsed user input
      */
-    public void handleUpdate(String[] parsedInput) throws DukeException{
+    public void handleUpdate(String[] parsedInput) throws DukeException {
         tasks.updateTask(parsedInput);
 
         Task updatedTask = tasks.getTask(Integer.parseInt(parsedInput[1]));

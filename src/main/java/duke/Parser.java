@@ -43,7 +43,7 @@ public class Parser {
      * @return an array of processes strings
      * @throws DukeException If user input is in invalid formats
      */
-    public String[] processInput(String inputLine) throws DukeException{
+    public String[] processInput(String inputLine) throws DukeException {
 
         String[] results = new String[5];
 
@@ -123,12 +123,14 @@ public class Parser {
      */
     public String[] processDl(String input, String[] results) throws DukeException {
         if (input.equals("deadline")) {
-            throw new DukeException("Please follow the correct deadline input format:\ndeadline <desc> /by <yyyy-mm-dd> <time>\n");
+            throw new DukeException("Please follow the correct deadline input format:\n"
+                    + "deadline <desc> /by <yyyy-mm-dd> <time>\n");
         } else {
             String dlMsg = input.substring(9);
             String[] temp = dlMsg.split(" /by ");
             if (temp.length == 1) {
-                throw new DukeException("Please follow the correct deadline input format:\ndeadline <desc> /by <yyyy-mm-dd> <time>\n");
+                throw new DukeException("Please follow the correct deadline input format:\n"
+                        + "deadline <desc> /by <yyyy-mm-dd> <time>\n");
             } else {
                 String dlDesc = temp[0];
                 String by = temp[1];
@@ -152,12 +154,14 @@ public class Parser {
      */
     public String[] processEv(String input, String[] results) throws DukeException {
         if (input.equals("event")) {
-            throw new DukeException("Please follow the correct event input format:\nevent <desc> /at <yyyy-mm-dd> <time>\n");
+            throw new DukeException("Please follow the correct event input format:\n"
+                    + "event <desc> /at <yyyy-mm-dd> <time>\n");
         } else {
             String dlMsg = input.substring(6);
             String[] temp = dlMsg.split(" /at ");
             if (temp.length == 1) {
-                throw new DukeException("Please follow the correct event input format:\nevent <desc> /at <yyyy-mm-dd> <time>\n");
+                throw new DukeException("Please follow the correct event input format:\n"
+                        + "event <desc> /at <yyyy-mm-dd> <time>\n");
             } else {
                 String evDesc = temp[0];
                 String at = temp[1];
@@ -268,7 +272,7 @@ public class Parser {
         try {
             LocalDate date = LocalDate.parse(inputs[0]);
             date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            if(inputs.length > 1) {
+            if (inputs.length > 1) {
                 LocalTime time = LocalTime.parse(inputs[1]);
                 time.format(DateTimeFormatter.ofPattern("HH:mm"));
             }

@@ -14,7 +14,6 @@ public class Ui {
     /**
      * modifies response to an empty string
      *
-     * @return void
      */
     public void clearResponse() {
         response = "";
@@ -33,7 +32,6 @@ public class Ui {
      * append the string specified to the response
      *
      * @param msg message to be appended
-     * @return void
      */
 
     public void appendResponse(String msg) {
@@ -43,7 +41,6 @@ public class Ui {
     /**
      * append a general error message to the reponse
      *
-     * @return void
      */
     public void showLoadingError() {
         response += "Error occurred while loading\n";
@@ -52,7 +49,6 @@ public class Ui {
     /**
      * append line to the reponse
      *
-     * @return void
      */
     public void showLine() {
         response += "_____________________________________________\n";
@@ -62,7 +58,6 @@ public class Ui {
      * append specified error message to the reponse
      *
      * @param msg error message
-     * @return void
      */
     public void showError(String msg) {
         response += (msg + "\n");
@@ -72,7 +67,6 @@ public class Ui {
      * appends textual form of task to the response
      *
      * @param task task
-     * @return void
      */
     public void printTask(Task task) {
         response += task.toString() + "\n";
@@ -86,7 +80,6 @@ public class Ui {
      * appends textual form of task from a tasklist to the response
      *
      * @param taskList taskList
-     * @return void
      */
     public void printTasks(TaskList taskList) {
         int i = 1;
@@ -99,7 +92,6 @@ public class Ui {
     /**
      * appends list header message to the response
      *
-     * @return void
      */
     public void showListMsg() {
         response += "Here are the tasks in your list:\n";
@@ -108,7 +100,6 @@ public class Ui {
     /**
      * appends list is empty message to the response
      *
-     * @return void
      */
     public void showEmptyListMsg() {
         response += "You do not have any tasks at the moment.\n";
@@ -116,7 +107,6 @@ public class Ui {
     /**
      * appends goodbye message to the response
      *
-     * @return void
      */
     public void showByeMsg() {
         response += "Goodbye comrade. Hope to see you again soon!\n";
@@ -125,7 +115,6 @@ public class Ui {
     /**
      * appends marking task as done message to the response
      *
-     * @return void
      */
     public void showDoneMsg() {
         response += "Nice! I've marked this task as done:\n";
@@ -134,7 +123,6 @@ public class Ui {
     /**
      * appends task is already done message to the response
      *
-     * @return void
      */
     public void showIsAlrDoneMsg() {
         response += "You have already completed this task!\n";
@@ -143,7 +131,6 @@ public class Ui {
     /**
      * appends added task message to the response
      *
-     * @return void
      */
     public void showTaskMsg() {
         response += "Got it. I've added this task:\n";
@@ -152,16 +139,14 @@ public class Ui {
     /**
      * appends task count message to the response
      *
-     * @return void
      */
     public void showTaskCount(int i) {
-        response += ("Now you have " + i+ " tasks in the list.\n");
+        response += ("Now you have " + i + " tasks in the list.\n");
     }
 
     /**
      * appends delete header message to the response
      *
-     * @return void
      */
     public void showDeleteMsg() {
         response += "Noted. I've removed this task:\n";
@@ -170,7 +155,6 @@ public class Ui {
     /**
      * appends cannot find task message to the response
      *
-     * @return void
      */
     public void showCannotFind() {
         response += "I'm sorry, I can't find the task requested\n";
@@ -179,7 +163,6 @@ public class Ui {
     /**
      * appends founded task header message to the response
      *
-     * @return void
      */
     public void showFoundText() {
         response += "Here are the matching tasks in your list:\n";
@@ -188,7 +171,6 @@ public class Ui {
     /**
      * appends task updated message to the response
      *
-     * @return void
      */
     public void showTaskUpdated() {
         response += "The task is updated!\n";

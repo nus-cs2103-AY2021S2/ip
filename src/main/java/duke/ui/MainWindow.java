@@ -1,14 +1,12 @@
 package duke.ui;
 
 import duke.Duke;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -38,8 +36,12 @@ public class MainWindow {
         duke = d;
     }
 
+    /**
+     * Shows welcome msg to the UI
+     */
     public void showWelcomeMsg() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Good morning comrade, welcome to KGB.\nWhat can I do for you?", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Good morning comrade, welcome to KGB.\n"
+                + "What can I do for you?", dukeImage));
     }
 
     /**

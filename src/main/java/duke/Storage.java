@@ -3,7 +3,6 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,10 +23,10 @@ public class Storage {
      * Returns a list of tasks contained in a List<Task> by reading inputs from text file
      * If the text file is empty or there is loading errors, an empty List<Task> is returned
      *
-     * @return tasklist
+     * @return List<Task>
      * @throws DukeException If there is reading error of the text file
      */
-    public List<Task> load() throws DukeException{
+    public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
 
         try {

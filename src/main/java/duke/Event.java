@@ -11,6 +11,9 @@ public class Event extends Task {
 
     protected String at;
 
+    /**
+     * Class constructor
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
@@ -33,7 +36,7 @@ public class Event extends Task {
         LocalDate date = LocalDate.parse(temp[0]);
         result = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
-        if(temp.length > 1) {
+        if (temp.length > 1) {
             LocalTime time = LocalTime.parse(temp[1]);
             String res = time.format(DateTimeFormatter.ofPattern("HH:mm"));
             result += (" " + res);
