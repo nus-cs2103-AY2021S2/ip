@@ -39,9 +39,10 @@ public class TaskdateCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
         Matcher matcher = pattern.matcher(description);
+
         if (!matcher.find()) {
-            throw new DukeException("Your deadline is given in the wrong format! "
-                    + "Please make sure it is in the following format: YYYY-MM-DD HH:MM");
+            throw new DukeException("Your task date is given in the wrong format! "
+                    + "Please make sure it is in the following format: YYYY-MM-DD");
         }
 
         try {
