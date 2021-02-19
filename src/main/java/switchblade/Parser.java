@@ -1,5 +1,8 @@
 package switchblade;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * switchblade.Parser will be used to manipulate any String to retrieve the desired output
  *
@@ -15,6 +18,8 @@ public class Parser {
      * @return String found after the argument
      */
     private static String findDatetime(String input, String argument) {
+        assert input.length() > 0;
+
         int argumentIndex = input.lastIndexOf(argument);
         String output = input.substring(argumentIndex + argument.length());
 
@@ -33,6 +38,8 @@ public class Parser {
      * @return Datetime String for switchblade.Deadline type Tasks
      */
     public static String findDeadlineDatetime(String input) {
+        assert input.length() > 0;
+
         // split by /at and /to
         return findDatetime(input, "/by");
     }
@@ -44,6 +51,8 @@ public class Parser {
      * @return String[] containing start datetime and end datetime
      */
     public static String[] findEventDatetime(String input) {
+        assert input.length() > 0;
+
         // split by /at and /to
         String output = input;
 
@@ -72,6 +81,8 @@ public class Parser {
      * @return Removes command from input string and returns description without datetime
      */
     public static String findDescription(String input) {
+        assert input.length() > 0;
+
         String noCommand = input.split("\\s+", 2)[1];
 
         if (noCommand.contains("/by")) {
@@ -81,5 +92,24 @@ public class Parser {
         } else {
             return noCommand;
         }
+    }
+
+    /**
+     * Returns tasks to delete as array
+     *
+     * @param input String to scan
+     * @return List<Integer> containing events to be deleted with corrections for 0-indexed array
+     */
+    public static List<Integer> findTaskToDelete(String input) {
+        assert input.length() > 0;
+        String noCommand = input.replace("delete", "");
+        List<Integer> integers = new ArrayList<>();
+
+        for (String s : noCommand.split("\\s+")) {
+            if (s.length() > 0)
+                integers.add(Integer.parseInt(s) - 1);
+        }
+
+        return integers;
     }
 }
