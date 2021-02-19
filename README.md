@@ -1,23 +1,90 @@
-# Duke project template
+# User Guide
+BearBear is a desktop task manager application done as part of the CS2103T module in NUS.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![start.png](docs/images/start.png)
 
-## Setting up in Intellij
+## Content Page
+* [Add Todo Task](#add-todo-task)
+* [Add Deadline Task](#add-deadline-task)
+* [Add Event Task](#add-event-task)
+* [Mark Task as Complete](#mark-task-as-complete)
+* [Delete Task](#delete-task)
+* [Find Task](#find-task)
+* [List Tasks](#list-tasks)
+* [View Help guide](#view-help-guide)
+* [Exit Application](#exit-application)
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Features
+### Add Todo Task
+* Description: Creates and adds a Todo task to the task list.
+* Format: `todo <task_description>`
+* Example: `todo borrow book`
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+![todo_example.png](docs/images/todo_example.png)
+
+
+### Add Deadline Task
+* Description: Creates and adds a Deadline task to the task list.
+* Format: `deadline <task_description> <deadline>`
+* Examples:
+   1. `deadline submit project /by Sunday 2359`
+   2. `deadline submit project /by 2021-2-23`
+
+![deadline_example.png](docs/images/deadline_example.png)
+
+
+### Add Event Task
+* Description: Creates and adds an Event task to the task list.
+* Format: `event <task_description> <event_time>`
+* Examples:
+   1. `event school /at Monday 1400`
+   2. `event school /at 2021-2-23`
+
+![event_example.png](docs/images/event_example.png)
+
+
+### Mark Task as Complete
+* Description: Marks a task corresponding to a task index in task list as complete.
+* Format: done <task_index>
+* Example: `done 2`
+
+![done_example.png](docs/images/done_example.png)
+
+
+### Delete Task
+* Description: Deletes a task corresponding to a task index in task list.
+* Format: delete <task_index>
+* Example: `delete 2`
+
+![delete_example.png](docs/images/delete_example.png)
+
+
+### Find Task
+* Description: Finds a task with task description that matches a keyword.
+* Format: `find <keyword>`
+* Example: `find book`
+
+![find_example.png](docs/images/find_example.png)
+
+
+### List Tasks
+* Description: Shows a list of all tasks.
+* Format: `list`
+* Example: `list`
+
+![list_example.png](docs/images/list_example.png)
+
+
+### View Help guide
+* Description: Shows a list of supported commands and their descriptions.
+* Format: `help`
+* Example: `help`
+
+![help_example.png](docs/images/help_example.png)
+
+
+### Exit Application
+* Description: Terminates the application.
+* Format: `bye`
+* Example: `bye`
+
