@@ -44,7 +44,7 @@ public class AddEvent extends AddTask {
             String expression = Parser.parseParameter(userInput, " ", 1);
             String description = Parser.parseParameter(expression, "/at", 0);
             if (description.length() == 0) {
-                throw new Exception("Oops! The task description cannot be empty :/");
+                throw new Exception("*! The task description cannot be empty :/");
             }
 
             String dateTime = Parser.parseParameter(expression, "/at", 1);
@@ -54,7 +54,7 @@ public class AddEvent extends AddTask {
             LocalDateTime startDateTime = Parser.parseInputDateTime(start);
             LocalDateTime endDateTime = Parser.parseInputDateTime(end);
             if (!startDateTime.isBefore(endDateTime)) {
-                throw new Exception("Oops! End time must be after start of event :)");
+                throw new Exception("*! End time must be after start of event :)");
             }
 
             Event newEvent = new Event(description, startDateTime, endDateTime);

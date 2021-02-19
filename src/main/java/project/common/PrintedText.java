@@ -68,7 +68,7 @@ public enum PrintedText {
     FIND_FORMAT {
         @Override
         public String toString() {
-            return "  find <SEARCH TERM> [,<SEARCH TERM>]\n\n  *! separate the search terms with a ','";
+            return "  find <SEARCH TERM> [,<SEARCH TERM>]\n";
         }
     },
 
@@ -82,6 +82,7 @@ public enum PrintedText {
                     + "  " + DONE_FORMAT + "      \\_ marks a task as done\n"
                     + "  " + DELETE_FORMAT + "      \\_ deletes a task from the list\n"
                     + "  " + FIND_FORMAT + "      \\_ finds tasks that match the search terms\n"
+                    + "        *! separate the search terms with a ','\n"
                     + "    list\n      \\_ lists all tasks, deadlines & events\n"
                     + "      with their respective task number\n"
                     + "    remind\n      \\_ lists deadlines & events for the next week\n"

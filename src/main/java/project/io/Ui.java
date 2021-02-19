@@ -23,6 +23,15 @@ public class Ui {
     }
 
     /**
+     * Prints a formatted error message.
+     *
+     * @param text The message to be printed.
+     */
+    public String showErrorResponse(String text) {
+        return "OW MY NOSE!!!\n" + text;
+    }
+
+    /**
      * Prints a formatted message.
      * Overloads previous method.
      *
@@ -116,8 +125,8 @@ public class Ui {
      * @param format The {@code PrintText} format message to be printed.
      */
     public String showFormatError(PrintedText format) {
-        String message = "  Oops! Please say it like this:\n\n" + format;
-        return this.formatResponse(message);
+        String message = "~* Please say it like this:\n\n" + format;
+        return this.showErrorResponse(message);
     }
 
     /**
@@ -125,9 +134,9 @@ public class Ui {
      * Message shows the expected input format for the respective commands.
      */
     public String showInvalidIndexError() {
-        String message = "  Oops! Please use a valid task number.\n\n"
+        String message = "~* Please use a valid task number.\n\n"
                 + "  Type 'list' to view all tasks\n  and their respective numbers\n";
-        return this.formatResponse(message);
+        return this.showErrorResponse(message);
     }
 
     /**

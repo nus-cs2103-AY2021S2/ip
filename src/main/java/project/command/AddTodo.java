@@ -28,7 +28,7 @@ public class AddTodo extends AddTask {
         try {
             String description = Parser.parseParameter(userInput, " ", 1);
             if (description.length() == 0) {
-                throw new Exception("Oops! The task description cannot be empty :/");
+                throw new Exception("*! The task description cannot be empty :/");
             }
             Todo newTodo = new Todo(description);
             taskList.addTask(newTodo);

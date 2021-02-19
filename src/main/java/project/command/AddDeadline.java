@@ -36,13 +36,13 @@ public class AddDeadline extends AddTask {
             String expression = Parser.parseParameter(userInput, " ", 1);
             String description = Parser.parseParameter(expression, "/by", 0);
             if (description.length() == 0) {
-                throw new Exception("Oops! The task description cannot be empty ");
+                throw new Exception("*! The task description cannot be empty :/");
             }
 
             String dateTime = Parser.parseParameter(expression, "/by", 1);
             LocalDateTime deadline = Parser.parseInputDateTime(dateTime);
             if (deadline.isBefore(LocalDateTime.now())) {
-                throw new Exception("Oops! The deadline cannot be in the past...");
+                throw new Exception("*! The deadline cannot be in the past...");
             }
 
             Deadline newDeadline = new Deadline(description, deadline);

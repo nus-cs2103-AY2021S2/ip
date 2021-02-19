@@ -22,7 +22,7 @@ public class FindCommand extends Command {
                 String output = "  Here are the tasks that match your search:\n\n" + matches.toString();
                 return ui.showFormatResponse(output);
             } else {
-                return ui.showFormatResponse("  Oops! No tasks match your search...");
+                return ui.showFormatResponse("  Welps, no tasks match your search...");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             return ui.showFormatError(PrintedText.FIND_FORMAT);
