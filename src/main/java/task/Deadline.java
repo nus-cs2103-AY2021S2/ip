@@ -3,6 +3,8 @@ package task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import duke.DukeException;
+
 /**
  * A Task that has a time representing the deadline.
  */
@@ -44,11 +46,14 @@ public class Deadline extends Task {
 
     /**
      * Marks a Deadline as done.
-     *
+     * @throws DukeException if the Deadline is already marked as done.
      * @return a new Deadline that is considered done
      */
     @Override
-    public Deadline markAsDone() {
+    public Deadline markAsDone() throws DukeException {
+        if (isDone) {
+            throw new DukeException("This Task has already been marked as done!");
+        }
         return new Deadline(description, deadline, true);
     }
 

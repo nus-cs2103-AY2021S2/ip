@@ -3,6 +3,7 @@ package utility;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.DukeException;
 import task.Task;
 
 /**
@@ -46,10 +47,10 @@ public class TaskList {
 
     /**
      * Marks the Task at the given index as done.
-     *
      * @param index the index of the finished Task.
+     * @throws DukeException the DukeException thrown if the Task is already marked as done
      */
-    public void markAsDone(int index) {
+    public void markAsDone(int index) throws DukeException {
         tasks.set(index, tasks.get(index).markAsDone());
     }
 

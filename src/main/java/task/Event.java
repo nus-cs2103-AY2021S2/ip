@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
 
+import duke.DukeException;
+
 /**
  * A Task that has both a time and date.
  */
@@ -42,11 +44,14 @@ public class Event extends Task {
 
     /**
      * Marks a Event as done.
-     *
+     * @throws DukeException if the Event is already marked as done.
      * @return a new Event that is considered done
      */
     @Override
-    public Event markAsDone() {
+    public Event markAsDone() throws DukeException {
+        if (isDone) {
+            throw new DukeException("This Event has already been marked as done!");
+        }
         return new Event(description, date, timeRange, true);
     }
 

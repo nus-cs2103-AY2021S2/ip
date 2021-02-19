@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents an Exception raised in Duke.
+ * Represents a Exception specific to Duke.
  */
 public class DukeException extends Exception {
     // private final String err;

@@ -23,10 +23,14 @@ public class Duke {
         this.storage = new Storage(Paths.get("data", "duke.txt"), Paths.get("data"));
     }
 
+    /**
+     * Makes changes to the program's state and returns Duke's response to the user's input.
+     * @param input the String representing the user's input
+     * @return a String representing the program's response
+     */
     public String run(String input) {
-        taskList = new TaskList(storage.readFromFile());
-
         try {
+            taskList = new TaskList(storage.readFromFile());
             DukeCommand dukeCommand = Parser.parseCommand(input);
 
             if (dukeCommand.getCommand() == Command.BYE) {
@@ -95,7 +99,6 @@ public class Duke {
             } else {
                 Task newTask = Parser.parseRemainder(dukeCommand.getCommand(), dukeCommand.getDetails());
 
-                assert newTask != null : "Newly created task is a null";
                 taskList.add(newTask);
                 storage.writeToFile(taskList);
                 return Ui.showSuccessfulAdd(taskList.getSize(), newTask);
@@ -104,10 +107,8 @@ public class Duke {
         } catch (DukeException exp) {
             return Ui.showDukeException(exp);
         } catch (Exception err) {
-            err.printStackTrace();
+            return Ui.showException(err);
         }
-
-        return "Edit code, need to handle non DukeException objects";
     }
 
     public String getResponse(String input) {
