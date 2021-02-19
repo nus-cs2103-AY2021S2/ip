@@ -16,6 +16,14 @@ sourceSets {
             srcDirs = ['src']
         }
     }
+
+    jar {
+        manifest {
+            attributes(
+                    'Main-Class': 'vergil.main.Launcher'
+            )
+        }
+    }
 }
 
 javafx {

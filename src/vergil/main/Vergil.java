@@ -31,8 +31,8 @@ public class Vergil extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("images/user.png"));
-    private Image vergil = new Image(this.getClass().getResourceAsStream("images/vergil.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("resources/user.png"));
+    private Image vergil = new Image(this.getClass().getResourceAsStream("resources/vergil.png"));
 
     private Ui ui;
     private Storage storage;
