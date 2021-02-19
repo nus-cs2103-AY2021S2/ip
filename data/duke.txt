@@ -1,5 +1,5 @@
 E | 1 | play | 2021-05-17
 T | 1 | read books
-E | 0 | career fair | 2021-03-12
+E | 1 | career fair | 2021-03-12
 D | 0 | return books | 2021-03-14
 T | 1 | sleep

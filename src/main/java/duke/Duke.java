@@ -9,7 +9,7 @@ import duke.commands.Command;
 import java.io.FileNotFoundException;
 
 /**
- * Duke allows the user to maintain a list of tasks
+ * Duke allows the user to maintain a list of tasks, and responses to user commands.
  */
 public class Duke {
     private Storage storage;
@@ -17,6 +17,11 @@ public class Duke {
     private Ui ui;
     private String filePath = "";
 
+    /**
+     * Initialises Duke.
+     *
+     * @param filePath File path to a .txt file containing the list of tasks.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.ui.greet();
@@ -30,8 +35,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns response from Duke when the user keys in his / her input.
+     *
+     * @param input String input from the user.
+     * @return String response from Duke.
      */
     public String getResponse(String input) {
         Parser parser = new Parser(this.tasks);
@@ -45,6 +52,11 @@ public class Duke {
         return "Duke says:\n" + this.ui.format(message);
     }
 
+    /**
+     * Returns a greeting, in String, to the user.
+     *
+     * @return Greeting, in String.
+     */
     public String getGreeting() {
         return this.ui.greet();
     }

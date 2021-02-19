@@ -6,15 +6,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadline is a Task object that is define by a due date
+ * Deadline is task that is defined by a due date.
  */
 public class Deadline extends Task implements DueDate {
     protected LocalDate time;
 
     /**
-     * Constructs a deadline that has yet to be completed
-     * @param description description of the deadline
-     * @param time due date in yyyy-MM-dd format (e.g. 2021-03-12)
+     * Constructs a deadline with its description, and due date.
+     * The deadline has yet to be completed.
+     *
+     * @param description A String description of the deadline.
+     * @param time Due date in yyyy-MM-dd format (e.g. 2021-03-12).
      */
     public Deadline(String description, LocalDate time) {
         super(description);
@@ -22,11 +24,11 @@ public class Deadline extends Task implements DueDate {
     }
 
     /**
-     * Constructs a deadline
-     * @param description description of the task
-     * @param isDone whether the task is completed (true indicated that the task is completed,
-     *              while false indicates that the task is incomplete
-     * @param time due date in yyyy-MM-dd format (e.g. 2021-03-12)
+     * Constructs a deadline with its description, due date, and its specified completion status.
+     *
+     * @param description A String description of the deadline.
+     * @param isDone A boolean variable indicating if the deadline is completed.
+     * @param time Due date in yyyy-MM-dd format (e.g. 2021-03-12).
      */
     public Deadline(String description, boolean isDone, LocalDate time) {
         super(description, isDone);
@@ -34,16 +36,18 @@ public class Deadline extends Task implements DueDate {
     }
 
     /**
-     * Marks a deadline as completed
-     * @return a task that is completed
+     * Marks a deadline as completed.
+     *
+     * @return A completed deadline with the same description.
      */
     public Deadline markAsDone() {
         return new Deadline(this.description, true, this.time);
     }
 
     /**
-     * Method to know if the deadline has been completed or not
-     * @return true if the task is completed and false if it is not
+     * Returns the due date of the deadline.
+     *
+     * @return A String representation of the due date of the deadline.
      */
     @Override
     public String getDueDate() {
@@ -51,8 +55,9 @@ public class Deadline extends Task implements DueDate {
     }
 
     /**
-     * Returns information on the deadline
-     * @return A String that describes the deadline
+     * Returns a String representation of the deadline.
+     *
+     * @return A String representation of the deadline.
      */
     @Override
     public String toString() {

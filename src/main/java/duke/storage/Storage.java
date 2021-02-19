@@ -17,11 +17,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage loads existing tasks from the file and saves tasks to the file when required
+ * Storage loads existing tasks from the file and saves tasks to the file when required.
  */
 public class Storage {
     private String filePath;
 
+    /**
+     * Initialises storage with a file path.
+     *
+     * @param filePath A String indicating the path of the file containing the task list.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
