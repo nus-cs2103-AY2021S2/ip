@@ -8,14 +8,14 @@ import duke.exception.DukeException;
 public class DeleteCommand extends Command {
 
     /**
-     * Create delete command
+     * Create a delete command
      */
     public DeleteCommand(String input) {
         super(input);
     }
 
     /**
-     *  Delete the specific task given the task index and store the new changes back into the data file
+     *  Delete a specific task and store the new changes into the data file
      * @return String message upon successful execution of the command
      * @throws DukeException
      */

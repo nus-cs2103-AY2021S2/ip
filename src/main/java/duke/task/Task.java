@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Task class to initialize and manage different type of tasks.
+ * Task class to initialize and manage different type of tasks
  */
 public class Task {
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -19,7 +19,7 @@ public class Task {
 
     }
 
-    /** Create task with description
+    /** Creates a task with description
      * @param description task description
      */
     public Task(String description) {
@@ -27,7 +27,7 @@ public class Task {
         this.isCompleted = false;
     }
 
-    /** Create task with description
+    /** Creates a task with description and status
      * @param description task description
      * @param isCompleted task status
      */
@@ -43,7 +43,7 @@ public class Task {
         this.isCompleted = true;
     }
 
-    /** Returns task status in the form of a tick or cross
+    /** Returns task status in the form of a tick or a cross
      * @return a tick if the task status is completed or a cross if the task status is incomplete
      */
     public String getStatus() {
@@ -57,14 +57,14 @@ public class Task {
     }
 
     /**
-     * Returns a customized representation of task to be added to data file
+     * Returns a customized representation of the task to be added to the data file
      * @return string representation of a task
      */
     public String changeFormat() {
         return "," + this.isCompleted + "," + this.getTaskDescription();
     }
 
-    /** Convert task information stored in data file to task objects
+    /** Convert the task information stored in data file to task objects
      * @param taskDescription task description from data file
      * @return task
      */
@@ -104,7 +104,7 @@ public class Task {
     }
 
     /**
-     * Returns a customized representation of task to user
+     * Returns a customized representation of the task to the user
      * @return string representation of task to be displayed to the user
      */
     @Override

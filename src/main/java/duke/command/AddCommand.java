@@ -18,7 +18,7 @@ public class AddCommand extends Command {
     private LocalTime endTime;
 
     /**
-     * Constructor to create add command object
+     * Create an add command
      */
     public AddCommand(String input, String type, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(input);
@@ -29,7 +29,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add a task into task list
+     * Adds a task into the task list
      * @return TaskList
      * @throws DukeException
      */

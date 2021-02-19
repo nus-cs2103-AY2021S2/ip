@@ -11,7 +11,7 @@ public class Deadline extends Task {
     private LocalTime dueTime;
 
     /**
-     * Create a deadline task with description, due date and due time
+     * Creates a deadline task with description, due date, and due time
      * @param description task description
      * @param dueBy due date
      * @param dueTime due time
@@ -23,7 +23,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Create a deadline task with additional status field
+     * Creates a deadline task with additional status field
      * @param description task description
      * @param isCompleted task status
      * @param dueBy due date
@@ -36,7 +36,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representation of deadline task to be added to data file
+     * Returns a string representation of deadline task to be added to the data file
      * @return string representation of deadline task
      */
     @Override
@@ -45,7 +45,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a customized representation of deadline task to user
+     * Returns a customized representation of the deadline task to the user
      * @return string representation of deadline task to be displayed to the user
      */
     @Override

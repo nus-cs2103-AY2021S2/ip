@@ -19,7 +19,7 @@ public class Command {
     protected static UI ui = new UI();
 
     /**
-     * Create command object
+     * Createa  command object
      */
     public Command (String input) {
         this.input = input;

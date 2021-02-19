@@ -8,7 +8,7 @@ import duke.ui.UI;
 public class ExitCommand extends Command {
 
     /**
-     * Create exit command
+     * Create an exit command
      */
     public ExitCommand() {
         super("exit");

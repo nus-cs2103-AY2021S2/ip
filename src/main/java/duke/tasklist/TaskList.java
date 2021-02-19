@@ -101,20 +101,20 @@ public class TaskList {
         ArrayList<Task> taskList = new ArrayList<>();
         String allTask = "";
 
-        if (commandType.equals("find") && findTaskArraylist.size() > 0 ) {
+        if (commandType.equals("find") && findTaskArraylist.size() > 0) {
             taskList = findTaskArraylist;
             allTask = UI.displayHeader("find");
-        } else if(commandType.equals("list") && taskArraylist.size() > 0) {
+        } else if (commandType.equals("list") && taskArraylist.size() > 0) {
             taskList = taskArraylist;
             allTask = UI.displayHeader("list");
-        } else if(commandType.equals("find")){
+        } else if (commandType.equals("find")) {
             allTask = ui.displayNoTaskFoundMessage();
         } else {
             allTask = ui.displayNoTaskInList();
         }
 
         for (int i = 0; i < taskList.size(); i++) {
-            if(!taskList.get(i).toString().isBlank()) {
+            if (!taskList.get(i).toString().isBlank()) {
                 allTask = allTask + ui.displayTask(i, taskList.get(i));
             }
         }
@@ -204,3 +204,4 @@ public class TaskList {
         }
     }
 }
+

@@ -12,7 +12,7 @@ public class Event extends Task {
     private LocalTime endTime;
 
     /**
-     * Create an event task with description, task status and due date
+     * Creates an event task with description, task status, and due date
      * @param description task description
      * @param isCompleted task status
      * @param dueDate due date
@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     /**
-     * Create an event task with additional start and end time field
+     * Creates an event task with additional start and end time field
      * @param description task description
      * @param isCompleted task status
      * @param dueDate due date
@@ -40,7 +40,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string representation of event task to be added to data file
+     * Returns a string representation of event task to be added to the data file
      * @return string representation of event task
      */
     @Override
@@ -49,7 +49,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a customized representation of task to user
+     * Returns a customized representation of the event task to the user
      * @return string representation of event task to be displayed to the user
      */
     @Override

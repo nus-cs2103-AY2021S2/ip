@@ -4,19 +4,10 @@ package duke.exception;
  */
 public class DukeException extends Exception {
 
-    /** Create customized exception
+    /** Create a customized exception
      * @param message
      */
     public DukeException(String message) {
         super(message);
     }
-
-    /**
-     * Display exception message
-     */
-    public void printMessage() {
-        System.out.println("----------------------------------------\n" + super.getMessage()
-                + "\n----------------------------------------");
-    }
-
 }

@@ -24,7 +24,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a string representation of todo task to be added to data file
+     * Returns a string representation of todo task to be added to the data file
      * @return string representation of todo task
      */
     @Override
@@ -33,7 +33,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a customized representation of task to user
+     * Returns a customized representation of the todo task to the user
      * @return string representation of todo task to be displayed to the user
      */
     @Override

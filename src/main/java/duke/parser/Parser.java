@@ -15,8 +15,6 @@ import duke.command.SearchCommand;
 import duke.exception.DukeException;
 import duke.ui.UI;
 
-import javax.swing.text.html.StyleSheet;
-
 /**
  * Parser class to handle all user commands and input.
  */
@@ -35,7 +33,6 @@ public class Parser {
     public static String parse(String input) throws DukeException, IOException {
 
         String[] commandArray = input.split("\\s+");
-
         String[] userInputArray = separateUserInput(input);
         String type = userInputArray[0];
         String taskDetail = input.replace(type, " ");
@@ -67,9 +64,8 @@ public class Parser {
         }
     }
 
-
     /**
-     * Invoke and pass in necessary information to the add command method
+     * Invoke and pass in the necessary information to the add command method
      * @param type type of task
      * @param userInput user input
      * @param taskDetail details of the task
@@ -79,92 +75,71 @@ public class Parser {
      */
     public static String invokeAddCommand(String type, String userInput, String taskDetail) throws DukeException {
         switch (type) {
-            case ("todo"):
-                AddCommand ac = new AddCommand(userInput, "todo", null, null, null);
-                if (userInput.isBlank()) {
-                    throw new DukeException(UI.displayInvalidParameter("noDescription"));
-                }
-                return ac.execute();
+        case ("todo"):
+            AddCommand ac = new AddCommand(userInput, "todo", null, null, null);
+            if (userInput.isBlank()) {
+                throw new DukeException(UI.displayInvalidParameter("noDescription"));
+            }
+            return ac.execute();
 
-            case ("deadline"):
-
-                if (userInput.isBlank()) {
-                    throw new DukeException(UI.displayInvalidParameter("noDescription"));
-                }
-
-                //check if there are no parameter following /by
-                String[] dueDateArray = separateDueDate(taskDetail, "deadline");
-
-                //check for format of given date
-                LocalDate deadlineDueDate = check_valid_date(dueDateArray[1]);
-                if (dueDateArray.length == 2) {
-                    throw new DukeException(UI.displayInvalidParameter("noDueTime"));
-                } else if(dueDateArray.length > 3){
-                    throw new DukeException(UI.displayDeadlineInvalidParameter("extraParameter"));
-                }
-                LocalTime deadlineDueTime = check_valid_time(dueDateArray[2]);
-
-                String[] taskDescription = userInput.split("/by");
-                AddCommand addCommand = new AddCommand(taskDescription[0], "deadline",
-                        deadlineDueDate, deadlineDueTime, null);
-                return addCommand.execute();
-
-            case ("event"):
-                LocalDate startDate = null;
-                LocalTime startTime = null;
-                LocalTime endTime = null;
-
-                String[] eventDueDateArray = separateDueDate(taskDetail, "event");
-
-                startDate = check_valid_date(eventDueDateArray[1]);
-
-                if(eventDueDateArray.length == 2){
-                    throw new DukeException(UI.displayInvalidParameter("noDueDate"));
-                } else if(eventDueDateArray.length > 3){
-                    throw new DukeException(UI.displayEventInvalidParameter("extraParameter"));
-                }
-                String[] eventDueTimeArray = separateStartEndTime(eventDueDateArray);
-
-                try {
-                    startTime = LocalTime.parse(eventDueTimeArray[0], TIME_FORMATTER);
-                    endTime = LocalTime.parse(eventDueTimeArray[1], TIME_FORMATTER);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException(UI.displayEventInvalidParameter("wrongTimeFormat"));
-                }
-
-                if(startTime.isAfter(endTime) || startTime.toString().equals(endTime.toString())){
-                    throw new DukeException(UI.displayEventInvalidParameter("invalidTimeInput"));
-                }
-
-                String[] description = userInput.split("/at");
-
-                if (description.length > 2) {
-                    throw new DukeException(UI.displayInvalidParameter("lesserParameterGiven"));
-                }
-
-                AddCommand addEventCommand = new AddCommand(description[0], "event", startDate, startTime, endTime);
-                return addEventCommand.execute();
-
-            default:
-                throw new DukeException(UI.displayUnknownCommand());
-        }
-    }
-
-    /**
-     * Check if task parameters are valid
-     * @param taskDetail
-     * @throws DukeException
-     */
-    public static void validatingTaskDetails(String taskDetail, String command) throws DukeException {
-        if (taskDetail.isBlank()) {
-            throw new DukeException(UI.displayInvalidParameter(command));
-        } else if(command.equals("done") || command.equals("delete")){
-            try{
-                Integer.parseInt(taskDetail.trim());
-            } catch (NumberFormatException e) {
-                throw new DukeException(UI.displayInvalidParameter(command));
+        case ("deadline"):
+            if (userInput.isBlank()) {
+                throw new DukeException(UI.displayInvalidParameter("noDescription"));
             }
 
+            //check if there are no parameter following /by
+            String[] dueDateArray = separateDueDate(taskDetail, "deadline");
+
+            //check for format of given date
+            LocalDate deadlineDueDate = check_valid_date(dueDateArray[1]);
+            if (dueDateArray.length == 2) {
+                throw new DukeException(UI.displayInvalidParameter("noDueTime"));
+            } else if (dueDateArray.length > 3) {
+                throw new DukeException(UI.displayDeadlineInvalidParameter("extraParameter"));
+            }
+            LocalTime deadlineDueTime = check_valid_time(dueDateArray[2]);
+
+            String[] taskDescription = userInput.split("/by");
+            AddCommand addCommand = new AddCommand(taskDescription[0], "deadline",
+                        deadlineDueDate, deadlineDueTime, null);
+            return addCommand.execute();
+        case ("event"):
+            LocalDate startDate = null;
+            LocalTime startTime = null;
+            LocalTime endTime = null;
+
+            String[] eventDueDateArray = separateDueDate(taskDetail, "event");
+            startDate = check_valid_date(eventDueDateArray[1]);
+
+            if (eventDueDateArray.length == 2) {
+                throw new DukeException(UI.displayInvalidParameter("noDueDate"));
+            } else if (eventDueDateArray.length > 3) {
+                throw new DukeException(UI.displayEventInvalidParameter("extraParameter"));
+            }
+            String[] eventDueTimeArray = separateStartEndTime(eventDueDateArray);
+
+            try {
+                startTime = LocalTime.parse(eventDueTimeArray[0], TIME_FORMATTER);
+                endTime = LocalTime.parse(eventDueTimeArray[1], TIME_FORMATTER);
+            } catch (DateTimeParseException e) {
+                throw new DukeException(UI.displayEventInvalidParameter("wrongTimeFormat"));
+            }
+
+            if (startTime.isAfter(endTime) || startTime.toString().equals(endTime.toString())) {
+                throw new DukeException(UI.displayEventInvalidParameter("invalidTimeInput"));
+            }
+
+            String[] description = userInput.split("/at");
+
+            if (description.length > 2) {
+                throw new DukeException(UI.displayInvalidParameter("lesserParameterGiven"));
+            }
+
+            AddCommand addEventCommand = new AddCommand(description[0], "event", startDate, startTime, endTime);
+            return addEventCommand.execute();
+
+        default:
+            throw new DukeException(UI.displayUnknownCommand());
         }
     }
 
@@ -176,7 +151,6 @@ public class Parser {
      */
     public static String[] separateUserInput(String userInput) throws DukeException {
         String[] inputArray = userInput.trim().split(" ");
-
         String taskName = inputArray[0];
 
         if (taskName.isBlank()) {
@@ -196,12 +170,12 @@ public class Parser {
     public static String[] separateDueDate(String taskDetail, String taskType) throws DukeException {
 
         if (taskDetail.contains("/by") && taskType.equals("deadline")) {
-            String[] dueBy = split_parameters_into_date_time(taskDetail, "/by", taskType);
-            String[] dueTimeArray = split_parameters_into_date_time(dueBy[1], " ", taskType);
+            String[] dueBy = splitParametersByDelimiter(taskDetail, "/by", taskType);
+            String[] dueTimeArray = splitParametersByDelimiter(dueBy[1], " ", taskType);
             return dueTimeArray;
         } else if (taskDetail.contains("/at") && taskType.equals("event")) {
-            String[] dueDetailsArray = split_parameters_into_date_time(taskDetail, "/at", taskType);
-            String[] dueDateAndDueTimeArray = split_parameters_into_date_time(dueDetailsArray[1]," ", taskType);
+            String[] dueDetailsArray = splitParametersByDelimiter(taskDetail, "/at", taskType);
+            String[] dueDateAndDueTimeArray = splitParametersByDelimiter(dueDetailsArray[1], " ", taskType);
             return dueDateAndDueTimeArray;
         } else {
             throw new DukeException(UI.displayInvalidParameter("wrongCommand"));
@@ -222,69 +196,103 @@ public class Parser {
             } else {
                 throw new DukeException(UI.displayEventInvalidParameter("errorSeparatingTime"));
             }
-        } catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(UI.displayEventInvalidParameter("extraParameter"));
         }
         return timeArr;
     }
 
-    public static LocalDate check_valid_date(String given_date) throws DukeException {
-        LocalDate due_date;
-        String dayOfMonth;
-        try{
-            due_date = LocalDate.parse(given_date, DATE_TIME_FORMATTER);
-            dayOfMonth = given_date.substring(0,2);
-        } catch (DateTimeParseException e){
-            throw new DukeException(UI.displayInvalidParameter("invalidDate"));
-        }
-
-        if(Integer.parseInt(dayOfMonth) > due_date.lengthOfMonth()){
-            throw new DukeException(UI.displayInvalidParameter("dateExtendTotalDateInMonth"));
-        }
-
-        LocalDate today = LocalDate.now();
-        if(due_date.isBefore(today)){
-            throw new DukeException(UI.displayInvalidParameter("invalidDate"));
-        }
-        return due_date;
-    }
-
-    public static LocalTime check_valid_time(String given_time) throws DukeException {
-        LocalTime due_time;
-        try{
-            due_time = LocalTime.parse(given_time, TIME_FORMATTER);
-        } catch (DateTimeParseException e){
-            throw new DukeException(UI.displayInvalidParameter("invalidTimeFormat"));
-        }
-        return due_time;
-    }
-
-    public static String[] split_parameters_into_date_time(String given_array, String delimiter, String taskType)
+    /**
+     * Returns the array of string after separating task details by the given delimiter with handled exception
+     * @param givenArray array used to separate inputs
+     * @param delimiter string to separate the given array by
+     * @param taskType type of task
+     * @throws DukeException
+     */
+    public static String[] splitParametersByDelimiter(String givenArray, String delimiter, String taskType)
             throws DukeException {
-        String[] seperatedOutput;
+
+        String[] separateOutput;
         try {
-            seperatedOutput = given_array.split(delimiter);
-            String output = seperatedOutput[1];
-        } catch (ArrayIndexOutOfBoundsException e){
-            if(taskType.equals("deadline")){
+            separateOutput = givenArray.split(delimiter);
+            String output = separateOutput[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            if (taskType.equals("deadline")) {
                 throw new DukeException(UI.displayDeadlineInvalidParameter("noDueDateOrWrongFormat"));
-            }else{
+            } else {
                 throw new DukeException(UI.displayEventInvalidParameter("noDueDateOrWrongFormat"));
             }
         }
 
-        boolean is_there_task_description_for_deadline = taskType.equals("deadline") && delimiter.equals("/by") &&
-                seperatedOutput[0].trim().replace("deadline", "").isEmpty();
+        boolean isThereTaskDescriptionForDeadline = taskType.equals("deadline") && delimiter.equals("/by")
+                && separateOutput[0].trim().replace("deadline", "").isEmpty();
 
-        boolean is_there_task_description_for_event = taskType.equals("event") && delimiter.equals("/at") &&
-                seperatedOutput[0].trim().replace("event", "").isEmpty();
+        boolean isThereTaskDescriptionForEvent = taskType.equals("event") && delimiter.equals("/at")
+                && separateOutput[0].trim().replace("event", "").isEmpty();
 
-        if(is_there_task_description_for_deadline || is_there_task_description_for_event){
+        if (isThereTaskDescriptionForDeadline || isThereTaskDescriptionForEvent) {
             throw new DukeException(UI.displayInvalidParameter("noDescription"));
         }
 
-        return seperatedOutput;
+        return separateOutput;
     }
 
+    /**
+     * Check the validity of task parameters
+     * @param taskDetail
+     * @throws DukeException
+     */
+    public static void validatingTaskDetails(String taskDetail, String command) throws DukeException {
+        if (taskDetail.isBlank()) {
+            throw new DukeException(UI.displayInvalidParameter(command));
+        } else if (command.equals("done") || command.equals("delete")) {
+            try {
+                Integer.parseInt(taskDetail.trim());
+            } catch (NumberFormatException e) {
+                throw new DukeException(UI.displayInvalidParameter(command));
+            }
 
+        }
+    }
+
+    /**
+     * Check the validity of the date if it has already passed or is an invalid date
+     * @param givenDate
+     * @throws DukeException
+     */
+    public static LocalDate check_valid_date(String givenDate) throws DukeException {
+        LocalDate dueDate;
+        String dayOfMonth;
+        try {
+            dueDate = LocalDate.parse(givenDate, DATE_TIME_FORMATTER);
+            dayOfMonth = givenDate.substring(0, 2);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(UI.displayInvalidParameter("invalidDate"));
+        }
+
+        if (Integer.parseInt(dayOfMonth) > dueDate.lengthOfMonth()) {
+            throw new DukeException(UI.displayInvalidParameter("dateExtendTotalDateInMonth"));
+        }
+
+        LocalDate today = LocalDate.now();
+        if (dueDate.isBefore(today)) {
+            throw new DukeException(UI.displayInvalidParameter("invalidDate"));
+        }
+        return dueDate;
+    }
+
+    /**
+     * Check the validity of the given time
+     * @param givenTime string containing the start and end time
+     * @throws DukeException
+     */
+    public static LocalTime check_valid_time(String givenTime) throws DukeException {
+        LocalTime dueTime;
+        try {
+            dueTime = LocalTime.parse(givenTime, TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(UI.displayInvalidParameter("invalidTimeFormat"));
+        }
+        return dueTime;
+    }
 }

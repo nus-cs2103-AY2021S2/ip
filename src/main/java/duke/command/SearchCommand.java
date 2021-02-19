@@ -9,7 +9,7 @@ import duke.exception.DukeException;
 public class SearchCommand extends Command {
 
     /**
-     * Create search command
+     * Create a search command
      */
     public SearchCommand(String input) {
         super(input.trim());

@@ -8,14 +8,14 @@ import duke.exception.DukeException;
 public class DoneCommand extends Command {
 
     /**
-     * Create done command
+     * Create a done command
      */
     public DoneCommand(String input) {
         super(input);
     }
 
     /**
-     * Set task status of a specific task to a tick and store the new changes back to the data file
+     * Set task status of a specific task to complete and store the new changes to the data file
      * @return String message upon successful execution of the command
      */
     @Override
