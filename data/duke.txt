@@ -1,4 +1,3 @@
-E | 1 |  carrer fair  | 2020-09-09
-T | 0 |  play
+D | 0 |  assignment  | 2021-02-28
 T | 1 |  read book
-T | 0 |  study
+E | 0 |  seminar  | 2021-03-04
