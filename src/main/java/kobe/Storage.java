@@ -32,6 +32,7 @@ public class Storage {
         this.pathName = pathName;
         if (!pathName.endsWith(".txt")) {
             this.f = new File(pathName, "kobe.txt");
+            this.pathName = f.getPath();
         } else {
             this.f = new File(pathName);
         }
