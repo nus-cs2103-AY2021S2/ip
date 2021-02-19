@@ -1,4 +1,4 @@
-# User Guide
+# **DUKE** - User Guide
 
 ## Features 
 1. todo
