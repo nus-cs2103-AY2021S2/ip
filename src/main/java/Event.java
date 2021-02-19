@@ -7,10 +7,6 @@ public class Event extends Command {
         this.eventTime = eventTime;
     }
 
-    public String getTime() {
-        return this.eventTime;
-    }
-
     @Override
     public String toString() {
         return "[E] " + super.toString() + " | at: " + eventTime;

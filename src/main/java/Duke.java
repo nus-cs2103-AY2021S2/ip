@@ -7,30 +7,13 @@
  * @since 2021-01-31
  */
 
-import java.io.File;
-import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        String filePath = "./data/duke.txt";
-        Path path = Paths.get("./data/duke.txt");
-        try {
-            File file = new File(filePath);
-            Files.createDirectories(Path.of(file.getParent()));
-            Files.createFile(path);
-
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
 
         String logo = "░▄▀▄▀▀▀▀▄▀▄░░░░░░░░░\n"
                 + "░█░░░░░░░░▀▄░░░░░░▄░\n"
@@ -92,8 +75,6 @@ public class Duke {
                     printList(commands);
                     System.out.println(spacer);
 
-                    save(commands, filePath);
-
                 } else if (input.contains("delete")) {
                     String[] deleteCommand = input.split(separator);
                     int id = Integer.parseInt(deleteCommand[1]) - 1;
@@ -109,8 +90,6 @@ public class Duke {
 
                     commands.remove(id);
                     System.out.println(spacer);
-
-                    save(commands, filePath);
 
                 } else {
                     Command command;
@@ -130,8 +109,6 @@ public class Duke {
                                 + " commands!"
                                 + spacer);
 
-                        save(commands, filePath);
-
                     // To recognise Event user input
                     } else if (input.contains("event")) {
                         String[] inputTime = input.split(" /at ");
@@ -147,8 +124,6 @@ public class Duke {
                                 + " commands!"
                                 + spacer);
 
-                        save(commands, filePath);
-
                     // To recognise Deadline user input
                     } else if (input.contains("deadline")) {
                         String[] inputTime = input.split(" /by ");
@@ -163,8 +138,6 @@ public class Duke {
                                 + len
                                 + " commands!"
                                 + spacer);
-
-                        save(commands, filePath);
 
                     } else {}
                 }
@@ -186,7 +159,7 @@ public class Duke {
     static void printList(ArrayList<Command> xs) {
         for (int i = 0; i < xs.size(); i++) {
             Command value = xs.get(i);
-            System.out.println((i + 1) + ". " + value);
+            System.out.println(i + 1 + ". " + value);
         }
     }
 
@@ -227,51 +200,6 @@ public class Duke {
         } else {
             throw new DukeException("Whoops :( I'm sorry, I'm not sure what that means. "
                     + "Did you forget to add a command type?");
-        }
-    }
-
-    /**
-     * Method saves the current Command list
-     * into a text file
-     *
-     * @param xs ArrayList of commands
-     * @param path Filepath of text file to save to
-     */
-    static void save(ArrayList<Command> xs, String path) {
-        try {
-            FileWriter fw = new FileWriter(path);
-            for (Command c : xs) {
-                if (c instanceof ToDo) {
-                    fw.write("T |"
-                            + c.getDone()
-                            + "| "
-                            + c.getDescription()
-                            + "\n");
-                } else if (c instanceof Deadline) {
-                    fw.write("D |"
-                            + c.getDone()
-                            + "| "
-                            + c.getDescription()
-                            + " | "
-                            + ((Deadline) c).getTime()
-                            + "\n");
-                } else if (c instanceof Event) {
-                    fw.write("E |"
-                            + c.getDone()
-                            + "| "
-                            + c.getDescription()
-                            + " | "
-                            + ((Event) c).getTime()
-                            + "\n");
-
-                } else {
-                    // Empty Description
-                }
-            }
-            fw.close();
-        } catch(IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
     }
 }
