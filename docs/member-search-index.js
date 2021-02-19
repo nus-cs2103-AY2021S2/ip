@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"chat","c":"ChatException","l":"ChatException(String)","url":"%3Cinit%3E(java.lang.String)"}]
