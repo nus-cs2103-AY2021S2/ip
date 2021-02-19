@@ -41,7 +41,7 @@ public class DukeCommandAdd extends DukeCommand {
         /* Successful execution */
         String respondMessage = "Got it. I've added this task:\n"
                 + "  " + task + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.";
+                + "Now you have " + tasks.size() + " task(s) in the list.";
         return Response.createResponseOk(respondMessage);
     }
 }
