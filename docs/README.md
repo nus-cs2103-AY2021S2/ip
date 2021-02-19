@@ -24,7 +24,7 @@ One event task must be associated with one date, that is the date this event occ
   Example of usage: 1.`event hang out with friends /at Cathay Cineplex 2021-03-04`
 
 Expected outcome:
-`Got it! I have added this task: \n\t [E][X] hang out with friends (at: Cathay Cineplex Mar 4 2021) \n Now you have __ number of tasks in the
+`Got it! I have added this task: \n\t [E][X] hang out with friends (at: Cathay Cineplex Mar 4 2021) \n Now you have 1 tasks in the
 list.`
 
 
@@ -40,7 +40,7 @@ A deadline task must be associated with one date, that is the date by which the 
 CLI with the following format `deadline (String description) /by (String containing date`). Similar to adding an event task from earlier, 
 the date must be in the format "yyyy-mm", and it must be present after that /by keyword. It can be at any position in the string so long as 
 it comes after /by. For multiple date clashes, **see 'event' feature** for how it will be resolved, as it is similar. After entering the command,
-a deadline task will be added to the list, and the chatbot will output a message to notify you if the command was succesful.
+a deadline task will be added to the list, and the chatbot will output a message to notify you if the command was successful.
 
 Example of usage: 
 
@@ -49,7 +49,7 @@ Example of usage:
 Expected outcome:
 
 `Got it! I have added this task: 
-\n\t [D][X] I need to do my homework (by: Apr 5 2021 6pm) \n Now you have __ number of tasks in the
+\n\t [D][X] I need to do my homework (by: Apr 5 2021 6pm) \n Now you have 2  tasks in the
  list.`
 
 ### Feature 3 
@@ -68,7 +68,7 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I have added this task: \n\t [T][X] read a good book \n Now you have __ number of tasks in the list.`
+`Got it! I have added this task: \n\t [T][X] read a good book \n Now you have 3 tasks in the list.`
 
 ### Feature 4
 
@@ -110,6 +110,7 @@ Example of usage:
 Expected outcome:
 
 the third numbered task should be deleted from the list and GUI displays the task that is deleted, within a confirmation message.
+Also the number of tasks left in the list is displayed.
 
 ### Feature 6
 
@@ -132,7 +133,7 @@ Expected outcome:
 
 The task at 3 will be marked as done. The next time the task is displayed, in the string 
  representation, the task will be ticked instead of marked with a cross. For example the 
- following  to do task is marked as done 
+ following  to do task is marked as done.
  
  `[T][✓] Get out of the house`
   
