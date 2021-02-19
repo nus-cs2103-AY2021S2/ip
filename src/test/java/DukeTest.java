@@ -28,7 +28,7 @@ public class DukeTest {
     @Test
     public void pipeClearAllTest() {
         duke.testDuke("todo do something");
-        String out = duke.testDuke("all | remove");
+        String out = duke.testDuke("all | delete");
         assertEquals(out, "I have removed this item: \n[T][ ]  do something");
     }
 
