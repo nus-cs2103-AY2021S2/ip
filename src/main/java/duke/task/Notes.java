@@ -9,6 +9,7 @@ public class Notes extends Task {
 
     /**
      * Constructor for Notes
+     *
      * @param task
      */
     public Notes(String task) {
@@ -22,6 +23,7 @@ public class Notes extends Task {
 
     /**
      * Returns the note Name
+     *
      * @return
      */
     public String getNote() {

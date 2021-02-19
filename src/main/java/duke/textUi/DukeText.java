@@ -13,7 +13,6 @@ import duke.task.TodoTask;
  * The main class where the duke text ui is run
  * This is slightly outdated from the current versions
  * Note features not available
- *
  */
 public class DukeText {
     private final Ui ui;
