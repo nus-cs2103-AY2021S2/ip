@@ -46,9 +46,22 @@ test {
 
 application {
     //mainClassName = "seedu.duke.Duke"
-    mainClassName = "Duke"
+    //mainClassName = "Duke"
+    mainClassName = "Launcher"
     //build/classes/java/main/Duke.class
 
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'Launcher'
+    }
+    archiveClassifier = "all"
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
 }
 
 shadowJar {

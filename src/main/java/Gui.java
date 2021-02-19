@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -171,12 +172,17 @@ public class Gui extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
         loadResources();
         this.primaryStage = stage;
         this.welcomeScene = welcomeCreate();
         this.dukeRunScene = dukeRunCreate();
-        Duke duke = new Duke("src/main/java/data.txt");
+            //String filePath = new File(".").getCanonicalPath();
+            //filePath.concat("/data.txt");
+            Duke duke = new Duke("data.txt");
+
+
+        //Duke duke = new Duke("src/main/java/data.txt");
         stageSet(this.welcomeScene);
 
         this.startButton.setOnMouseClicked((event) -> {
