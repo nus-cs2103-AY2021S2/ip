@@ -3,8 +3,8 @@
 ## Features 
 
 #### Addition of Todo's, Events and Deadlines
-Add a new task of either type todo (has no associated time), events or deadlines (both of which has an associated 
-time with them).
+Add a new task of either type todo (has no associated date), events or deadlines (both of which has an associated 
+date with them).
 
 ##### Marking items as Done
 After a certain task is done, just mark it as done!
