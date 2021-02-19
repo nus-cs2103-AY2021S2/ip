@@ -1,4 +1,2 @@
 T | 0 | Watch CS2103T lecture
-T | 0 | Wash dishes
-D | 0 | CS2103T Project | Feb 19 2021 11:59 PM
-E | 0 | Vivian's birthday | Feb 21 2021 05:00 PM
+D | 0 | iP Project | Feb 19 2021 11:59 PM
