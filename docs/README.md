@@ -11,7 +11,7 @@ Note: All commands are case insensitive.
 * Format: `todo <description>`
 * Note: `<description>` cannot be empty.
 * Example: 
-<p align="center">
+<p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/todo.png?raw=true">
 </p>
 
@@ -21,6 +21,9 @@ Note: All commands are case insensitive.
 * Format: `event <description> /at <YYYY-MM-DD> <HH:mm>`
 * Note: `<description>` and `<date>` cannot be empty; `<time>` is optional.
 * Example:
+<p align="left">
+  <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/event.png?raw=true">
+</p>
 
 ### Create a Deadline task:
 * Description: Adds new Deadline task, with the specified deadline, to your list of tasks.
@@ -28,6 +31,9 @@ Note: All commands are case insensitive.
 * Format: `deadline <description> /by <YYYY-MM-DD> <HH:mm>`
 * Note: `<description>` and `<date>` cannot be empty; `<time>` is optional.
 * Example:
+<p align="left">
+  <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/deadline.png?raw=true">
+</p>
 
 ### Delete a task:
 * Description: Deletes the task specified by its input index.
@@ -35,13 +41,19 @@ Note: All commands are case insensitive.
 * Format: `delete <task index>`
 * Note: `<task index>` cannot be empty.
 * Example: 
+<p align="left">
+  <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/delete.png?raw=true">
+</p>
 
-### Delete a task:
+### Mark a task as done:
 * Description: Marks the task specified by its input index as done.
 * Command: `done`
 * Format: `done <task index>`
 * Note: `<task index>` cannot be empty.
 * Example:
+<p align="left">
+  <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/done.png?raw=true">
+</p>
 
 ### List all tasks:
 * Description: Lists all tasks currently in the task list.
@@ -49,6 +61,9 @@ Note: All commands are case insensitive.
 * Format: `list`
 * Note: Just `list` is enough.
 * Example: 
+<p align="left">
+  <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/list.png?raw=true">
+</p>
 
 ### Find tasks: 
 * Description: Finds all tasks containing the specified search term.
@@ -56,6 +71,9 @@ Note: All commands are case insensitive.
 * Format: `find <search term>`
 * Note: `<search term>` can even be a phrase, and is case insensitive.
 * Example:
+<p align="left">
+  <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/find.png?raw=true">
+</p>
 
 ### Sort tasks: 
 * Description: Sort all tasks according to the sort key.
@@ -69,3 +87,6 @@ Note: All commands are case insensitive.
     *  `type`: sort by task type
 * Note: If no sort key is provided, sort by task created date by default. 
 * Example:
+<p align="left">
+  <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/sort.png?raw=true">
+</p>
