@@ -88,7 +88,7 @@ public class Storage {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             List<String> tasks = new ArrayList<>();
             List<String> stats = new ArrayList<>();
-            
+
             int i = 0;
             for (; i < lines.size(); i++) {
                 if (lines.get(i).equals("%")) {

@@ -33,7 +33,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns true if the marking of completion status of the Task object is 
+     * Returns true if the marking of completion status of the Task object is
      * successful.
      *
      * @return true when the task was not already marked as done.

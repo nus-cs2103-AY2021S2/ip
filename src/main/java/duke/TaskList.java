@@ -41,7 +41,10 @@ public class TaskList {
      * @return the encoded format of the list of tasks
      */
     public List<String> encode() {
-        List<String> encoding = tasks.stream().map(task -> task.encode()).filter(str -> str != null).collect(Collectors.toList());
+        List<String> encoding = tasks.stream()
+            .map(task -> task.encode())
+            .filter(str -> str != null)
+            .collect(Collectors.toList());
         encoding.add("%");
         encoding.addAll(stats.encode());
 

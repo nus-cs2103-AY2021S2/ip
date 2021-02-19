@@ -23,13 +23,14 @@ public class Ui {
      * Returns the message when task is added successfully.
      *
      * @param   taskDescription the description of the task added
-     * @param   hasOnlyOneTask  whether there is only one task
+     * @param   numberOfTasks   the number of tasks including the added task
      * @return                  the message when task is added successfully
      */
     public String getAddTaskSuccessfulMessage(String taskDescription, int numberOfTasks) {
         String headerText = "\tGot it. I've added this task: \n";
         String addedTaskText = String.format("\tTask added: %s\n", taskDescription);
-        String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", numberOfTasks, numberOfTasks == 1 ? "" : "s");
+        String currentTasksText = String.format("\tNow you have %d task%s in the list.\n",
+                numberOfTasks, numberOfTasks == 1 ? "" : "s");
         return headerText + addedTaskText + currentTasksText;
     }
 
@@ -42,7 +43,7 @@ public class Ui {
     public String getMarkTaskAsDoneMessage(String taskDescription, int numberOfCompletedTaskLastWeek) {
         String headerText = "\tNice! I've marked this task as done:\n";
         String taskMarkedText = String.format("\t%s\n", taskDescription);
-        String completedTasksText = String.format("\tWell done! You have completed %d task(s) last week.\n", 
+        String completedTasksText = String.format("\tWell done! You have completed %d task(s) last week.\n",
                 numberOfCompletedTaskLastWeek);
         return headerText + taskMarkedText + completedTasksText;
     }
@@ -86,13 +87,14 @@ public class Ui {
      * Returns the message when task is deleted successfully.
      *
      * @param   deletedTask     the description of the deleted task
-     * @param   hasOnlyOneTask  whether there is only one task left
+     * @param   numberOfTasks   the number of tasks left after deletion
      * @return                  the message when task is deleted successfully
      */
     public String getDeleteTaskMessage(Task deletedTask, int numberOfTasks) {
         String headerText = "\tNoted. I've removed this task: \n";
         String taskRemovedText = String.format("\t%s\n", deletedTask);
-        String currentTasksText = String.format("\tNow you have %d task%s in the list.\n", numberOfTasks, numberOfTasks == 1 ? "" : "s");
+        String currentTasksText = String.format("\tNow you have %d task%s in the list.\n",
+                numberOfTasks, numberOfTasks == 1 ? "" : "s");
         return headerText + taskRemovedText + currentTasksText;
     }
 

@@ -7,9 +7,15 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-public class Statistics { 
+public class Statistics {
     final Queue<LocalDateTime> datetime;
 
+
+    /**
+     * Sole constructor for Statistics class.
+     *
+     * @param   dateTime    the list of datetime the user has completed.
+     **/
     public Statistics(List<LocalDateTime> dateTime) {
         this.datetime = new LinkedList<>();
         this.datetime.addAll(dateTime);
@@ -47,8 +53,8 @@ public class Statistics {
         return numberOfDays > 7;
     }
 
-	public List<String> encode() {
-		return datetime.stream().map(dt -> dt.toString()).collect(Collectors.toList());
-	}
+    public List<String> encode() {
+        return datetime.stream().map(dt -> dt.toString()).collect(Collectors.toList());
+    }
 
 }

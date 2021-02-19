@@ -161,8 +161,16 @@ public class Parser {
         }
     }
 
-	public static Statistics parseAsStats(List<String> stats) {
-        List<LocalDateTime> dateTimes = stats.stream().map(str -> LocalDateTime.parse(str)).collect(Collectors.toList());
-		return new Statistics(dateTimes);
-	}
+    /**
+     * Parses a list of String representing the statistics into a Statistics instance.
+     *
+     * @param   stats   the list of String encoded to the saved file
+     */
+    public static Statistics parseAsStats(List<String> stats) {
+        List<LocalDateTime> dateTimes = stats.stream().map(str -> LocalDateTime
+                .parse(str))
+                .collect(Collectors.toList()
+        );
+        return new Statistics(dateTimes);
+    }
 }
