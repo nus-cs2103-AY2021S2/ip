@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Command {
 
     public LocalDate dueDate;
-    public String formattedDate;
+    private String formattedDate;
 
     public Deadline(String commandDescription, LocalDate dueDate) {
         super(commandDescription);
