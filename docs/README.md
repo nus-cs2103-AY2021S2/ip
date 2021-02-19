@@ -10,7 +10,7 @@ faster than traditional GUI apps.
   - [Viewing Help](#viewing-help): `help`
   - [Adding a task](#adding-a-task):
     - [Adding a todo](#adding-a-todo): `todo`
-    - [Adding a deadline](#adding-a-deadline:): `deadline`
+    - [Adding a deadline](#adding-a-deadline): `deadline`
     - [Adding an event](#adding-an-event): `event`
   - [Listing tasks](#listing-tasks): `list`
   - [Finding tasks by key word](#finding-tasks-by-key-word): `find`
