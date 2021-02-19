@@ -25,7 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (dueDate: %s)", this.getStatusIcon(),
+        return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(),
                 super.toString(), this.dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 }
