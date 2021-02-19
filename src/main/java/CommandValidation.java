@@ -8,6 +8,7 @@ public class CommandValidation {
 
     public static final int VALID_INDEX_BOUND = -1;
     public static final int INDEX_OFFSET = 1;
+    public static final int STARTING_INDEX = 0;
 
     /**
      * Checks if the user input is within the list of accepted commands.
@@ -54,7 +55,7 @@ public class CommandValidation {
         boolean isDescriptionNotValid = command.substring(findSlash + INDEX_OFFSET).isBlank();
 
         int index = command.indexOf(' ');
-        String commandType = command.substring(0, index);
+        String commandType = command.substring(STARTING_INDEX, index);
 
         if (isSlashAbsent || isDescriptionNotComplete || isDescriptionNotValid) {
             if (commandType.equals("tag")) {
@@ -62,6 +63,39 @@ public class CommandValidation {
             } else {
                 throw new DukeException(":( OOPS! Please input a valid time/date");
             }
+        }
+    }
+
+    /**
+     * Checks if the syntax for commands with time and date is correct.
+     *
+     * @param taskType A Character indicating the type of task.
+     * @param command  User's command input.
+     * @param findSlash Position of slash in the input.
+     * @throws DukeException On invalid input.
+     */
+    public static void validateSyntaxForSettingTimeDate(
+            Character taskType, String command, int findSlash) throws DukeException {
+
+        String subcommand = command.substring(findSlash + INDEX_OFFSET);
+        int findSpace = subcommand.indexOf(' ');
+        String descriptionAfterSlash = subcommand.substring(STARTING_INDEX, findSpace);
+
+        switch (taskType) {
+        case 'E':
+            if (!descriptionAfterSlash.equals("at")) {
+                throw new DukeException(":( OOPS the command syntax is wrong, check out the help page for the "
+                        + "correct syntax!");
+            }
+            break;
+        case 'D':
+            if (!descriptionAfterSlash.equals("by")) {
+                throw new DukeException(":( OOPS the command syntax is wrong, check out the help page for the "
+                        + "correct syntax!");
+            }
+            break;
+        default:
+            break;
         }
     }
 

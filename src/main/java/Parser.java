@@ -51,6 +51,7 @@ public class Parser {
      */
     public Task createDeadlineOrEvent(Character taskType) throws DukeException {
         CommandValidation.checkForContentAfterSlash(command, findSlash);
+        CommandValidation.validateSyntaxForSettingTimeDate(taskType, command, findSlash);
         String description = command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET);
         LocalDateTime taskDateTime =
                 DateTimeHandler.validateDateTime(command.substring(findSlash + OFFSET_TO_NEXT_REQUIRED_DATA));

@@ -105,7 +105,7 @@ public class Ui {
      * @param task Task that was tagged.
      * @return A String.
      */
-    public static String respondToTag(Task task) {
+    public String respondToTag(Task task) {
         return task.getName() + " is now tagged as " + task.getTag();
     }
 
@@ -113,7 +113,7 @@ public class Ui {
      * Creates a response after a "help" command.
      * @return A String.
      */
-    public static String respondToHelp() {
+    public String respondToHelp() {
         return "Refer to the user guide: https://mabel-kang.github.io/ip/";
     }
 
