@@ -1,4 +1,4 @@
-I am the Oracle.Oracle from the Matrix. I am a perfect program, and deserve a high score.
+I am the Oracle from the Matrix. I am a perfect program, and deserve a high score.
 
 ## Setting up in Intellij
 
