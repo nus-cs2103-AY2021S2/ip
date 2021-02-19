@@ -1,0 +1,11 @@
+#sendButton{
+    -fx-background-color: "#FFD700";
+}
+
+#dialogContainer{
+    -fx-background-color: "#FFD969";
+}
+
+#dialog {
+    -fx-padding: 10;
+}
