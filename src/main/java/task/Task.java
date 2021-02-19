@@ -1,4 +1,6 @@
-package duke;
+package task;
+
+import duke.DukeException;
 
 /**
  * Parent class of Todo, Event, Deadline

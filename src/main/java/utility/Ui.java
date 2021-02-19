@@ -1,6 +1,9 @@
-package duke;
+package utility;
 
 import java.util.ListIterator;
+
+import duke.DukeException;
+import task.Task;
 
 /**
  * Aids Duke in displaying messages on its UI
@@ -109,6 +112,7 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+
     /**
      * Creates Duke's response when the program catches a Exception
      * @param ex the Exception caught
@@ -127,7 +131,6 @@ public class Ui {
         if (taskList.getTasks().size() == 0) {
             throw new IllegalArgumentException("Ui.showMatchedTasks() expects a non-empty taskList argument");
         }
-
         StringBuilder stringBuilder = new StringBuilder();
 
         ListIterator<Task> taskIter = taskList.getTasks().listIterator();
@@ -143,6 +146,10 @@ public class Ui {
         }
 
         return stringBuilder.toString();
+    }
+
+    public static String showNoMatchedTasks() {
+        return INDENT + " No relevant tasks were found!";
     }
 
 }

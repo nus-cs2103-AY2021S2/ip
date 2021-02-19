@@ -4,6 +4,12 @@ import java.util.ListIterator;
 
 import java.nio.file.Paths;
 
+import task.Task;
+import utility.Parser;
+import utility.Storage;
+import utility.TaskList;
+import utility.Ui;
+
 /**
  * Represents the highest level code responsible for Duke's operations.
  */
@@ -33,13 +39,16 @@ public class Duke {
             } else if (dukeCommand.getCommand() == Command.DELETE) {
                 Integer index = Integer.parseInt(dukeCommand.getDetails()) - 1;
 
-                if (index >= taskList.getTasks().size()) {
+                assert index >= 0;
+                if (index >= taskList.getSize()) {
                     throw new DukeException("No such task in the list");
                 }
 
-                Task removedTask = taskList.delete(Integer.parseInt(dukeCommand.getDetails()) - 1);
+                Task removedTask = taskList.delete(index);
                 storage.writeToFile(taskList);
-                return Ui.showSuccessfulDelete(taskList.getTasks().size(), removedTask);
+
+                assert removedTask != null : "removed task from TaskList is a null";
+                return Ui.showSuccessfulDelete(taskList.getSize(), removedTask);
 
             } else if (dukeCommand.getCommand() == Command.LIST) {
                 return Ui.showList(taskList);
@@ -47,10 +56,12 @@ public class Duke {
             } else if (dukeCommand.getCommand() == Command.DONE) {
                 Integer index = Integer.parseInt(dukeCommand.getDetails()) - 1;
 
-                if (index >= taskList.getTasks().size()) {
+                assert index >= 0;
+                if (index >= taskList.getSize()) {
                     throw new DukeException("No such task in the list");
                 }
 
+                assert taskList.get(index) != null : "Task to be completed is a null";
                 taskList.markAsDone(index);
                 storage.writeToFile(taskList);
                 return Ui.showSuccessfulDone(taskList.get(index));
@@ -70,12 +81,18 @@ public class Duke {
 
                 while (taskIter.hasNext()) {
                     Task curr = taskIter.next();
+                    assert curr != null : "The list of tasks contains a null";
 
                     if (curr.getDescription().contains(keyword)) {
                         matchedTasks.add(curr);
                     }
                 }
 
+                if (matchedTasks.getSize() == 0) {
+                    return Ui.showNoMatchedTasks();
+                }
+
+                assert matchedTasks.getSize() > 0;
                 return Ui.showMatchedTasks(matchedTasks);
 
 
@@ -84,7 +101,7 @@ public class Duke {
 
                 taskList.add(newTask);
                 storage.writeToFile(taskList);
-                return Ui.showSuccessfulAdd(taskList.getTasks().size(), newTask);
+                return Ui.showSuccessfulAdd(taskList.getSize(), newTask);
             }
 
         } catch (DukeException exp) {

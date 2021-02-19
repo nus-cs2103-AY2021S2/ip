@@ -1,4 +1,4 @@
-package duke;
+package utility;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,6 +9,11 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 /**
  * Handles read and write operations for Task objects in Duke.
@@ -34,10 +39,6 @@ public class Storage {
      * @param taskList the current list of tasks
      */
     public void writeToFile(TaskList taskList) {
-        //String home = System.getProperty("user.home");
-
-        //Path dirPath = Paths.get(home, "data");
-        //Path filePath = Paths.get(home,"data", "duke.txt");
         List<Task> myList = taskList.getTasks();
 
         try {

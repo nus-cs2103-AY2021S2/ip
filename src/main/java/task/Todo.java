@@ -1,4 +1,6 @@
-package duke;
+package task;
+
+import duke.DukeException;
 
 /**
  * The simplest type of Task with no date and time.

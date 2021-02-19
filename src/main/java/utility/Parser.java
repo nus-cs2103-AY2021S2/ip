@@ -1,9 +1,17 @@
-package duke;
+package utility;
 
 import java.time.LocalDate;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.Command;
+import task.Deadline;
+import duke.DukeCommand;
+import duke.DukeException;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 /**
  * Parser is involved with parsing user commands in Duke.
@@ -140,17 +148,17 @@ public class Parser {
             if (!dateMt.find()) {
                 throw new DukeException("OOPS!!! Please enter '/by YYYY-MM-DD {time range}' after description");
             }
-
-
+            
             Pattern timePt = Pattern.compile("\\d{1,2}-\\d{1,2}p?a?m");
             Matcher timeMt = timePt.matcher(timeParams[1]); // timeParams[1] refers to the time
-
+            
             if (!timeMt.find()) {
                 throw new DukeException("OOPS!!! Please enter a valid time range in this format \"{start}-{end}\""
                         + " and include am/pm after");
             }
-
+            
             return new Event(eventParams[0], LocalDate.parse(timeParams[0]), timeParams[1]);
+            
         } else {
             throw new AssertionError("Parser.parseRemainder() was given a Command other than Todo, "
                     + "Deadline and Event");

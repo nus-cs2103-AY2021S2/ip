@@ -1,7 +1,10 @@
-package duke;
+package utility;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
+import task.Task;
 
 /**
  * Represents a list of Task objects in a more abstract way.
@@ -49,5 +52,9 @@ public class TaskList {
      */
     public void markAsDone(int index) throws DukeException {
         tasks.set(index, tasks.get(index).markAsDone());
+    }
+
+    public int getSize() {
+        return tasks.size();
     }
 }
