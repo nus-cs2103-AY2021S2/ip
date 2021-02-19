@@ -22,6 +22,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add("view/StyleSheet.css");
             stage.setScene(scene);
+            stage.setTitle("Butler Alfred");
             fxmlLoader.<MainWindow>getController().setDuke(alfred);
             stage.show();
         } catch (IOException e) {

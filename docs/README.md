@@ -1,7 +1,7 @@
 # User Guide
-The duke bot is a desktop task management app, optimised for Command Line Interface (CLI). It is suitable for people who are familiar with CLI and particularly benefits users who are able to type fast.
+Butler Alfred is a desktop task management app, optimised for Command Line Interface (CLI). It is suitable for people who are familiar with CLI and particularly benefits users who are able to type fast.
 
-Thus, Duke bot can track and manage your tasks faster than traditional GUI apps.
+Thus, Butler Alfred can track and manage your tasks faster than traditional GUI apps.
 
 ## User Inteface
 <p align="left"><img width="40%" src="Ui.png"/></p>
@@ -22,7 +22,7 @@ Thus, Duke bot can track and manage your tasks faster than traditional GUI apps.
 * [Command Summary](#command-summary)
 
 ## Features 
-This section will be showcasing the list of commands currently available on Duke and their usages.
+This section will be showcasing the list of commands currently available on Butler Alfred and their usages.
 
 ### Add a todo task: `todo` 
 Adds a todo task which is a basic task to your task list.
@@ -191,7 +191,7 @@ Example: event John's birthday /at MBS 2021-04-15 19:00
 ```
 
 ### Exit the application: `bye`
-Exits duke bot application and saves the task list.
+Exits Butler Alfred application and saves the task list.
 
 Format: `bye`
 
@@ -204,7 +204,7 @@ Have a good day, Master. Take care.
 
 ##FAQ
 Q: How do I transfer my data to another computer?
-A: Install the Duke app in the other computer and overwrite the empty data file it creates with the file containing your data from your previous duke home folder.
+A: Install the Butler Alfred app in the other computer and overwrite the empty data file it creates with the file containing your data from your previous Butler Alfred home folder.
 
 ## Command Summary
 Action | Format/example
