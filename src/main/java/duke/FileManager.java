@@ -90,6 +90,13 @@ public class FileManager {
         outputFile.renameTo(inputFile);
     }
 
+    /**
+     * Updates the list of tasks with no header and number labels.
+     *
+     * @param filePath File path.
+     * @param tasks Task list.
+     * @throws IOException If file does not exist.
+     */
     public static void updateTaskList(String filePath, TaskList tasks) throws IOException {
         File inputFile = new File(filePath);
         File outputFile = new File("data/newDuke.txt");

@@ -43,6 +43,7 @@ public class TaskdateCommand extends Command {
             throw new DukeException("Your deadline is given in the wrong format! "
                     + "Please make sure it is in the following format: YYYY-MM-DD HH:MM");
         }
+
         try {
             LocalDate date = LocalDate.parse(this.description);
             return tasks.printTasksOn(date);
