@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 public class Storage {
     private String pathName;
     private TaskList tasks;
-    private File f;
+    private File file;
     public static String ind = "    ";
     public static String line = ind + "____________________________________________________________\n" + ind;
     public static String line2 = ind + "____________________________________________________________\n";
@@ -29,13 +29,14 @@ public class Storage {
      * @param ui       the user interface to inform the user of the outcome
      */
     Storage(String pathName, TaskList tasks, Ui ui) {
-        this.pathName = pathName;
+        this.pathName = "data/kobe.txt";
         if (!pathName.endsWith(".txt")) {
-            this.f = new File(pathName, "kobe.txt");
-            this.pathName = f.getPath();
+            this.file = new File(pathName, "kobe.txt");
+            this.pathName = file.getPath();
         } else {
-            this.f = new File(pathName);
+            this.file = new File(this.pathName);
         }
+        this.file.getParentFile().mkdirs();
 
         //Read line by line of the storage file
         try (BufferedReader br = new BufferedReader(
