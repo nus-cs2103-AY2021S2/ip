@@ -4,6 +4,7 @@ package duke;
  * Specifies the command for delete command type.
  */
 public class DeleteCommand extends Command {
+    private int index;
 
     /**
      * Initialises DeleteCommand object.
@@ -11,7 +12,7 @@ public class DeleteCommand extends Command {
      * @param index the index of the task to be deleted.
      */
     public DeleteCommand(int index) {
-        super(index);
+        this.index = index;
     }
 
     /**
@@ -24,9 +25,15 @@ public class DeleteCommand extends Command {
      * @return Ui of response to user request.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = taskList.deleteTask(index);
-        storage.writeToFile(taskList.getList());
-        return ui.showTaskDeleted(task);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        try {
+            Task task = taskList.deleteTask(index);
+            storage.writeToFile(taskList.getList());
+            return ui.showTaskDeleted(task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("This task number does not exist! Try again?");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 }

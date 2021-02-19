@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
  */
 public class EventCommand extends Command {
     private String at;
+    private String description;
 
     /**
      * Initialises EventCommand object.
@@ -15,7 +16,7 @@ public class EventCommand extends Command {
      * @param at the date of the task, in the format YYYY-MM-DD
      */
     public EventCommand(String description, String at) {
-        super(description);
+        this.description = description;
         this.at = at;
     }
 
@@ -38,6 +39,8 @@ public class EventCommand extends Command {
             return ui.showTaskAdded(event);
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date entered! Please type in valid yyyy-mm-dd format!");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 }

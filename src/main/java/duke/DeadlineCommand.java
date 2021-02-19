@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
  */
 public class DeadlineCommand extends Command {
     private String by;
+    private String description;
 
     /**
      * Initialises DeadlineCommand object.
@@ -15,7 +16,7 @@ public class DeadlineCommand extends Command {
      * @param by the due date of the deadline task.
      */
     public DeadlineCommand(String description, String by) {
-        super(description);
+        this.description = description;
         this.by = by;
     }
 
@@ -38,6 +39,8 @@ public class DeadlineCommand extends Command {
             return ui.showTaskAdded(deadline);
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date entered! Please type in valid yyyy-mm-dd format!");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 }
