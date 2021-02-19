@@ -74,3 +74,5 @@ bye
 
 ## Acknowledgements
 - JSON formatting library from [Jackson](https://github.com/FasterXML/jackson)
+- GUI from [JavaFX](https://openjfx.io)
+- Unit Testing from [JUnit5](https://github.com/junit-team/junit5)
