@@ -1,6 +1,6 @@
 # Duke User Guide
 
-**Duke** is a desk application to help users keep track of tasks, and make notes. It functions using a GUI (Graphical
+**Duke** is a desktop application to help users keep track of tasks, and make notes. It functions using a GUI (Graphical
 User Interface) to help those potential users be at ease while using Duke.
 
 ## Basic Info
