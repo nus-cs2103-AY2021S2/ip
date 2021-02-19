@@ -17,7 +17,7 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I've added this task`\n
+`Got it! I've added this task`<\n>
 `[T][] Homework`\n
 `Now you have 1 tasks in the list`
 
