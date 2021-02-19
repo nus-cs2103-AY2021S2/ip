@@ -3,7 +3,7 @@
 ## Introduction
 Duke is a task manager designed to keep track of your personal duke.
 
-![Image](Ui.PNG)
+![Image](Ui.png)
 
 ## Usage
 Summary
