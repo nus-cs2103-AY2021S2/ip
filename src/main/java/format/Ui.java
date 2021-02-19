@@ -35,7 +35,9 @@ public class Ui {
                 + "####################\n";
 
         // intro message
-        return logo + indent("Welcome, traveller. I'm Kiwi.", "What would you like to do today?\n");
+        return logo + indent("Welcome, traveller. I'm Kiwi.",
+                "What would you like to do today?",
+                "Psst if you're unsure you can type 'help'.");
     }
 
     /**

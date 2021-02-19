@@ -86,6 +86,8 @@ public class MainWindow extends AnchorPane {
                 "delete 0",
                 "delete 100",
                 "done 100",
+                "tag",
+                "delete tag",
                 "list"
         };
 

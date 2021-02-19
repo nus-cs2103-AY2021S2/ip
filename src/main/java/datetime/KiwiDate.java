@@ -63,11 +63,6 @@ public class KiwiDate {
         }
     }
 
-    public static void main(String[] args) {
-        KiwiDate a = KiwiDate.of(4, 7);
-        KiwiDateTime.print(a);
-    }
-
     public String unparse(String delimiter) {
         return String.format("%d%s%d%s%d",
                 this.date.getDayOfMonth(), delimiter, this.date.getMonth().getValue(), delimiter, this.date.getYear());

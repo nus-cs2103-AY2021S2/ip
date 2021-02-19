@@ -1,5 +1,0 @@
-T;;read book;;false
-D;;return book;;false;;Sunday
-E;;project meeting;;false;;Mon 2-4pm
-D;;do homework;;false;;no idea :-p
-T;;copythisfileandpastetotasks.txt;;false

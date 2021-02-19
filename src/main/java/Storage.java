@@ -60,7 +60,7 @@ public class Storage {
         // create directory if it doesn't exist
         if (!doesDataDirExist) {
             boolean hasCreated = new File(TASK_LIST_FILE_DIR.toString()).mkdir();
-            System.out.println("done 2 " + hasCreated);
+            assert hasCreated : "directory hasn't been created";
         }
 
         boolean isCreated = new File(TASK_LIST_FILE_PATH.toString()).createNewFile();
