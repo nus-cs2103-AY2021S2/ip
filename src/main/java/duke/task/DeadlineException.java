@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.logic.DukeException;
 
 public class DeadlineException extends DukeException {
     private static final long serialVersionUID = 5843754080272552309L;

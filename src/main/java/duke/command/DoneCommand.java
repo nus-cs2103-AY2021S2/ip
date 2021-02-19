@@ -2,8 +2,8 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.DukeException;
-import duke.Storage;
+import duke.logic.DukeException;
+import duke.logic.Storage;
 import duke.task.TaskList;
 
 /**
@@ -26,7 +26,7 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public String getResponString(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         if (this.taskNum > tasks.size()) {
             throw new DukeException("No such task exists!");
         }

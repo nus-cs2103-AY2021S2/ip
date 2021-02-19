@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import duke.logic.DukeException;
 
 public class ToDoException extends DukeException {
     private static final long serialVersionUID = -1674176699745504837L;

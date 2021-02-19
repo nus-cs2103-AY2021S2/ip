@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Storage;
+import duke.logic.Storage;
 import duke.task.TaskList;
 
 /**
@@ -14,9 +14,10 @@ public interface Command {
     public boolean isExit();
 
     /**
-     * Executes the command
+     * Executes the command and gets the response
      * @param tasks List of tasks to operate on
      * @param storage Storage manager for loading and saving task files
+     * @return Duke's response after executing the command
      */
-    public String getResponString(TaskList tasks, Storage storage);
+    public String execute(TaskList tasks, Storage storage);
 }

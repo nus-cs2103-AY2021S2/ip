@@ -2,7 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.Storage;
+import duke.logic.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -26,17 +26,17 @@ public class CheckCommand implements Command {
     }
 
     @Override
-    public String getResponString(TaskList tasks, Storage storage) {
-        TaskList filteredList = new TaskList();
+    public String execute(TaskList tasks, Storage storage) {
+        TaskList filteredTasks = new TaskList();
 
         for (int i = 1; i <= tasks.size(); i++) {
             Task currTask = tasks.get(i);
             if (this.date.equals(currTask.getDate())) {
-                filteredList.add(currTask);
+                filteredTasks.add(currTask);
             }
         }
 
-        String checkResponse = filteredList.toString();
+        String checkResponse = filteredTasks.toString();
         return checkResponse;
     }
 }

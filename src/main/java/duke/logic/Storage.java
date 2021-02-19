@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,7 +49,6 @@ public class Storage {
             assert(f.exists());
             return new TaskList();
         } else {
-            assert(f.exists());
             TaskList memList = readFromMem(f);
             return memList;
         }
