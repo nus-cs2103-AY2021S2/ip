@@ -1,6 +1,8 @@
 # User Guide
 Duke is a personal assistant that helps you keep track of your tasks!
+
 ## Features
+
 ### Keep track of various tasks 
 * Add todo tasks
 * Add deadline tasks
@@ -11,6 +13,7 @@ Duke is a personal assistant that helps you keep track of your tasks!
 * Delete tasks
 * Find tasks
 * Add and look up additional information regarding tasks
+
 ## Usage
 
 ### `todo` - Adds a todo task
