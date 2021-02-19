@@ -5,12 +5,18 @@ User Interface) to help those potential users be at ease while using Duke.
 
 ## Basic Info
 
-Duke allows the user to key in three types of tasks: todo, deadlines and events. Todo tasks are those that you expect to
-finish immediately, and so does not have an end date. Deadlines and Events are tasks that must have an end date, whereas
-it is optional to add time.
+**Duke** allows the user to key in three types of tasks: **todo**, **deadlines** and **events**, and also be able to
+manipulate them.
 
-Duke also allows the user to keep track of notes, which are separately stored compared to tasks. Notes are flexible in
-that you can key in anything, search for them using keywords, and be able to delete them if you know their index.
+1. **Todo** tasks are those that you expect to finish immediately, and so does not have an end date.
+2. **Deadlines** are tasks that must have an end date, whereas it is optional to add time.
+3. **Events** are tasks that must have an end date, and although the time here is optional, it is recommended that you
+   key in the time.
+
+**Note:** The time for both deadline and events are in 24-hour format.
+
+Duke also allows the user to keep track of **notes**, which are separately stored compared to tasks. Notes are flexible
+in that you can key in anything, search for them using keywords, and be able to delete them if you know their index.
 
 ## Setting Up
 
