@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Duckie duck;
-    
+
     {
         try {
             duck = new Duckie();
