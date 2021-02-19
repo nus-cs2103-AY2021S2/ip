@@ -19,6 +19,7 @@ public class EventCommand extends Command {
         this.taskDescription = taskDescription;
         this.eventDate = eventDate;
     }
+
     public EventCommand(String[] userInput, TaskList taskList) {
         super(userInput, taskList);
         this.taskDescription = "";
