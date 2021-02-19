@@ -67,7 +67,7 @@ public class DukeCommandFind extends DukeCommand {
         }
 
         /* Prepare non-empty response */
-        lines.add("Found " + validTaskIndices.size() + " task(s) matching query / date range");
+        lines.add("Found " + validTaskIndices.size() + " task(s) matching query / date range:");
         addToResponseSearchParameters(lines);
         addToResponseFoundTasks(lines, validTaskIndices, tasks);
         return Response.createResponseOk(lines.toArray(new String[0]));
@@ -109,6 +109,11 @@ public class DukeCommandFind extends DukeCommand {
         to.ifPresent(localDateTime -> lines.add(" till:  " + DatetimeParser.formatDateFull(localDateTime)));
         if (!searchTerms.isBlank()) {
             lines.add(" query: '" + searchTerms + "'");
+        }
+
+        /* Print empty response line if params not present */
+        if (from.isEmpty() && to.isEmpty() && searchTerms.isBlank()) {
+            lines.add("no query / date range provided");
         }
     }
 
