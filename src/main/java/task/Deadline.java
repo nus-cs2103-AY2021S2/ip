@@ -2,6 +2,7 @@ package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import duke.DukeException;
 
@@ -29,8 +30,8 @@ public class Deadline extends Task {
      * @param deadline the Task's deadline
      * @param isDone status of Task's completion
      */
-    public Deadline(String description, LocalDate deadline, boolean isDone) {
-        super(description, isDone);
+    public Deadline(String description, LocalDate deadline, boolean isDone, List<String> tags) {
+        super(description, isDone, tags);
         this.deadline = deadline;
     }
 
@@ -41,7 +42,7 @@ public class Deadline extends Task {
      */
     public String fileFormat() {
         return "D | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | "
-                + this.deadline.format(DateTimeFormatter.ISO_LOCAL_DATE);
+                + this.deadline.format(DateTimeFormatter.ISO_LOCAL_DATE) + " | " + tags;
     }
 
     /**
@@ -54,7 +55,7 @@ public class Deadline extends Task {
         if (isDone) {
             throw new DukeException("This Task has already been marked as done!");
         }
-        return new Deadline(description, deadline, true);
+        return new Deadline(description, deadline, true, tags);
     }
 
     @Override

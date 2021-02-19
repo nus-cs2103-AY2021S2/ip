@@ -3,6 +3,7 @@ package task;
 import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import duke.DukeException;
 
@@ -26,8 +27,8 @@ public class Event extends Task {
         this.timeRange = timeRange;
     }
 
-    public Event(String description, LocalDate date, String timeRange, boolean isDone) {
-        super(description, isDone);
+    public Event(String description, LocalDate date, String timeRange, boolean isDone, List<String> tags) {
+        super(description, isDone, tags);
         this.date = date;
         this.timeRange = timeRange;
     }
@@ -39,7 +40,7 @@ public class Event extends Task {
      */
     public String fileFormat() {
         return "E | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | "
-                + date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + timeRange;
+                + date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " + timeRange + " | " + tags;
     }
 
     /**
@@ -52,7 +53,7 @@ public class Event extends Task {
         if (isDone) {
             throw new DukeException("This Event has already been marked as done!");
         }
-        return new Event(description, date, timeRange, true);
+        return new Event(description, date, timeRange, true, tags);
     }
 
     @Override

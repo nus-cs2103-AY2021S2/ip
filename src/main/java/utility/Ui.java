@@ -3,6 +3,7 @@ package utility;
 import java.util.ListIterator;
 
 import duke.DukeException;
+import duke.Tag;
 import task.Task;
 
 /**
@@ -150,6 +151,25 @@ public class Ui {
 
     public static String showNoMatchedTasks() {
         return INDENT + " No relevant tasks were found!";
+    }
+
+    public static String showTagHandling(Tag action, String tag, Task relevantTask) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        switch (action) {
+        case ADD:
+            stringBuilder.append("The tag #").append(tag).append(" was added to Task ")
+                    .append("\"").append(relevantTask).append("\"");
+            return stringBuilder.toString();
+
+        case DELETE:
+            stringBuilder.append("The tag #").append(tag).append(" was deleted from Task ")
+                    .append("\"").append(relevantTask).append("\"");
+            return stringBuilder.toString();
+
+        default:
+            throw new AssertionError();
+        }
     }
 
 }
