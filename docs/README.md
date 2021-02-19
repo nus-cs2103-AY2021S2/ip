@@ -13,7 +13,7 @@ manipulate them.
 3. **Events** are tasks that must have an end date, and although the time here is optional, it is recommended that you
    key in the time.
 
-**Note:** The time for both deadline and events are in 24-hour format.
+**Note:** The time for both deadline and events must be entered in 24-hour format.
 
 Duke also allows the user to keep track of **notes**, which are separately stored compared to tasks. Notes are flexible
 in that you can key in anything, search for them using keywords, and be able to delete them if you know their index.
