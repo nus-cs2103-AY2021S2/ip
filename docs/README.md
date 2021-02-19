@@ -10,7 +10,10 @@ Note: All commands are case insensitive.
 * Command: `todo`
 * Format: `todo <description>`
 * Note: `<description>` cannot be empty.
-* Example: <img src="https://github.com/oeiyiping/ip/tree/master/screenshots/todo.png">
+* Example: 
+<p align="center">
+  <img width="100%" src="https://github.com/oeiyiping/ip/tree/master/screenshots/todo.png">
+</p>
 
 ### Create an Event task:
 * Description: Adds new Event, with the specified event time, task to your list of tasks.
