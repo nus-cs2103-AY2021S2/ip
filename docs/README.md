@@ -7,7 +7,7 @@
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Olaf app.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Notice your app will be blank unlike the example below.<br>
+4. Double-click the file to start the app. The GUI with a greeting from Olaf, similar to the below should appear in a few seconds. Notice your app will not have any data in the task list unlike the example below.<br>
    ![Ui](Ui.png)
 
 5. Type the command in the command box below and press Enter to execute it. e.g. typing **`help`** and pressing Enter will give a response listing all the  possible commands you can use.<br>
@@ -39,7 +39,7 @@
 * Items in square brackets are optional.<br>
   e.g `find <SEARCH TERM> [, <MORE SEARCH TERMS>]` can be used as `find project, presentation` or as `find project`.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will NOT be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `remind` and `bye`) will NOT be ignored.<br>
   e.g. if the command specifies `help 123`, it will not be interpreted as `help`.
 
 </div>
@@ -98,9 +98,9 @@ Adds a deadline Task to the application.
 
 Format: `deadline <TASK DESCRIPTION> /by <YYYY-MM-DD HH:mm>`
 
-* The deadline date and time has to be after current time
 * Description cannot be empty  
 * Time is given in 24 hour format
+* The deadline date and time has to be after current time
 
 Examples:
 * `deadline birthday /by <2021-06-21 00:00>`
@@ -112,9 +112,10 @@ Adds an event Task to the application.
 
 Format: `event <TASK DESCRIPTION> /at <YYYY-MM-DD HH:mm> to <YYYY-MM-DD HH:mm>`
 
-* The start date and time has to be before end date and time
 * Description cannot be empty
 * Time is given in 24 hour format
+* The start date and time has to be before end date and time
+* When loading existing event task from storage, it will be marked as done if the event is already over.
 
 Examples:
 * `event new year's eve /at <2021-12-31 00:00> to <2022-01-01 00:00>`

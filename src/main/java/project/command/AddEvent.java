@@ -31,7 +31,11 @@ public class AddEvent extends AddTask {
         LocalDateTime startDateTime = Parser.parseOutputDateTime(start);
         LocalDateTime endDateTime = Parser.parseOutputDateTime(end);
 
-        return new Event(description, startDateTime, endDateTime);
+        Event e = new Event(description, startDateTime, endDateTime);
+        if (endDateTime.isBefore(LocalDateTime.now())) {
+            e.markAsDone();
+        }
+        return e;
     }
 
     @Override

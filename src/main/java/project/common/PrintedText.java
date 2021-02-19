@@ -18,7 +18,7 @@ public enum PrintedText {
     BORDER {
         @Override
         public String toString() {
-            return " --*---*---*---*---*---*---*---*---*---*--\n";
+            return " --*---*---*---*---*---*---*---*---*---*---*---*---*---*---*-- \n";
         }
     },
 
