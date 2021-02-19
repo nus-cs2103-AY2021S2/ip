@@ -1,6 +1,6 @@
 # Welcome to Ranga! Rawrz! 
 
-Hello! I am Ranga! Your personal tasks manager chatbot! I can keep track of your ToDos, Deadlines, and Events! Rawrz!
+Hello! I am **Ranga**! Your personal tasks manager chatbot! I can keep track of your ToDos, Deadlines, and Events! Rawrz!
 
 ![GUI](GUI.PNG)
 
@@ -15,23 +15,25 @@ Hello! I am Ranga! Your personal tasks manager chatbot! I can keep track of your
 ---
 
 ### Types of Tasks
-I can record 3 different types of tasks for you:
+I can record **3 different types of tasks** for you:
 1. Todo
 2. Deadline
 3. Event
+
+I can record **Reminders** too!
 
 ---
 ### Bye `bye`
 Quit the application.
 
-Format: `bye`
+**Format: `bye`**
 
 Example: `bye`
 
 ### Help `help`
 Shows available commands and their formats
 
-Format: `help`
+**Format: `help`**
 
 ![Help](Help.PNG)
 
@@ -41,21 +43,21 @@ Format: `help`
 ### Add ToDo `todo`
 Add a todo task.
 
-Format: `todo DESCRIPTION`
+**Format: `todo DESCRIPTION`**
 
 Example: `todo Run with Ranga`
 
 ### Add Deadline `deadline`
 Add a deadline task.
 
-Format: `deadline DESCRIPTION /by DATE`
+**Format: `deadline DESCRIPTION /by DATE`**
 
 Example: `deadline Feed Ranga /by 22 Feb 2021 1800`
 
 ### Add Event `event`
 Add a event task.
 
-Format: `event DESCRIPTION /at DATE`
+**Format: `event DESCRIPTION /at DATE`**
 
 Example: `event Ranga's Birthday /by 23 Feb 2021`
 
@@ -65,21 +67,21 @@ Example: `event Ranga's Birthday /by 23 Feb 2021`
 ### Mark as Done `done`
 Marks a task as done.
 
-Format: `done TASK_ID`
+**Format: `done TASK_ID`**
 
 Example: `done 1`
 
 ### Add a Reminder to a Task `Remind`
 Adds a Reminder to a task for a specific date. Reminders show when I start up!
 
-Format: `remind TASK_ID /on DATE`
+**Format: `remind TASK_ID /on DATE`**
 
 Example: `remind 1 /on 25/02/21`
 
 ### Remove a Task
 Removes a stored task.
 
-Format: `remove TASK_ID`
+**Format: `remove TASK_ID`**
 
 Example: `remove 1`
 
@@ -89,21 +91,21 @@ Example: `remove 1`
 ### List tasks `list`
 Shows the stored tasks.
 
-Format: `list`
+**Format: `list`**
 
 Example: `list`
 
 ### List Reminders - `reminders`
 Shows a list of all stored reminders.
 
-Format: `reminders`
+**Format: `reminders`**
 
 Example: `reminders`
 
 ### Find Tasks - `find`
 Find a task by its description.
 
-Format: `find SEARCH_STRING`
+**Format: `find SEARCH_STRING`**
 
 Example: `find Birthday`
 
