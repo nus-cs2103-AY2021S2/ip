@@ -18,7 +18,7 @@ public class Ui {
             "MarkDoneCommand", "done {taskIndex}",
             "FindCommand", "    find {keyword}",
             "DeleteCommand", "  delete {taskIndex}",
-            "PostponeCommand", "postpone {taskIndex} {value} {measure}"
+            "PostponeCommand", "postpone {taskIndex} {value} {measure}\n where measure is \'mins/hrs/days/weeks\'"
             );
 
     /**

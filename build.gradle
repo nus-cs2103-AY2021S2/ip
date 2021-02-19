@@ -34,10 +34,11 @@ test {
 }
 
 application {
-    mainClassName = "Oracle.Oracle"
+    mainClassName = "oracle.Launcher"
 }
 
 shadowJar {
+    mainClassName = "oracle.Launcher"
     archiveBaseName = "oracle"
     archiveClassifier = null
 }

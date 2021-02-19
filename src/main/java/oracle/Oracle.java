@@ -1,6 +1,7 @@
 package oracle;
 
 import command.Command;
+import command.ExitCommand;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -55,6 +56,9 @@ public class Oracle {
         System.setOut(new PrintStream(outContent));
         Command c = parser.parse(input);
         c.execute(ui, tasks);
+        if (c instanceof ExitCommand) {
+            storage.store(tasks.getTasks());
+        }
         System.setOut(originalOut);
         String res = outContent.toString();
         outContent.reset();
