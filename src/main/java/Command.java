@@ -13,6 +13,19 @@ public class Command {
         return this;
     }
 
+    //Getters
+    public String getDescription() {
+        return this.commandDescription;
+    }
+
+    public String getDone() {
+        if (isDone) {
+            return " 1 ";
+        } else {
+            return " 0 ";
+        }
+    }
+
     @Override
     public String toString() {
         if (this.isDone) {
