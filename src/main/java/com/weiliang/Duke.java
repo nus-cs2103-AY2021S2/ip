@@ -12,7 +12,6 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
 
-    private boolean isRunning;
     private String name;
 
     /**
@@ -34,6 +33,15 @@ public class Duke {
     }
 
     /**
+     * Returns the name the artificial intelligence.
+     *
+     * @return The name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Returns a {@link String} response after processing is done by the artificial intelligence.
      *
      * @param input Input from user.
@@ -49,7 +57,6 @@ public class Duke {
             return "Hello! My name is " + name + "!";
         }
         if (input.equalsIgnoreCase("bye")) {
-            isRunning = false;
             storage.storeFile(tasks);
             return "Bye. Hope to see you again soon!";
         }

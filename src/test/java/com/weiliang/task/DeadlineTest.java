@@ -11,7 +11,7 @@ public class DeadlineTest {
     public void deadlineTest() throws DukeException {
         Task task = new Deadline("test", "2000-01-01T23:59:59");
         task.markComplete();
-        assertEquals(task.toString(), "[T][X] test (by: 01 January 2000, 11:59PM)");
+        assertEquals(task.toString(), "[D][X] test (by: 01 January 2000, 11:59PM)");
     }
 
 }
