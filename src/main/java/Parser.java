@@ -97,6 +97,7 @@ public class Parser {
 
         try {
             index = input[1];
+
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException();
         }

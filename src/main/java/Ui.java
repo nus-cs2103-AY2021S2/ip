@@ -22,24 +22,30 @@ public class Ui {
      *
      * @param taskList TaskList containing list of tasks.
      */
-    public String displayListMessage(TaskList taskList) {
-        String output;
-        int size = taskList.getSize();
+    public String displayListMessage(TaskList taskList) throws DukeException {
 
-        switch (size) {
-        case 0:
-            output = "There are currently no tasks in your list.";
-            break;
+        try {
+            String output;
+            int size = taskList.getSize();
 
-        case 1:
-            output = "Here is the task in your list:\n" + taskList.getList();
-            break;
+            switch (size) {
+            case 0:
+                output = "There are currently no tasks in your list.";
+                break;
 
-        default:
-            output = "Here are the tasks in your list:\n" + taskList.getList();
-            break;
+            case 1:
+                output = "Here is the task in your list:\n" + taskList.getList();
+                break;
+
+            default:
+                output = "Here are the tasks in your list:\n" + taskList.getList();
+                break;
+            }
+            return output;
+
+        } catch (DukeException e) {
+            throw new DukeException();
         }
-        return output;
     }
 
     /**

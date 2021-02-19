@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -39,9 +40,13 @@ public class TaskList {
      * @param index Index of the task of interest.
      * @return Task at the given index.
      */
-    public Task getTask(int index) {
-        assert index >= 0;
-        return taskArrayList.get(index);
+    public Task getTask(int index) throws DukeException {
+        try {
+            return taskArrayList.get(index);
+
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException();
+        }
     }
 
     /**
@@ -61,10 +66,14 @@ public class TaskList {
      * @param index Index of the task to be deleted.
      * @return New TaskList object with the task deleted.
      */
-    public TaskList deleteTask(int index) {
-        assert index >= 0;
-        taskArrayList.remove(index);
-        return new TaskList(taskArrayList);
+    public TaskList deleteTask(int index) throws DukeException {
+        try {
+            taskArrayList.remove(index);
+            return new TaskList(taskArrayList);
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException();
+        }
     }
 
     /**
@@ -73,10 +82,14 @@ public class TaskList {
      * @param index Index of the task to be completed.
      * @return New TaskList object with the task completed.
      */
-    public TaskList completeTask(int index) {
-        ArrayList<Task> output = taskArrayList;
-        output.set(index, taskArrayList.get(index).completeTask());
-        return new TaskList(output);
+    public TaskList completeTask(int index) throws DukeException {
+        try {
+            ArrayList<Task> output = taskArrayList;
+            output.set(index, taskArrayList.get(index).completeTask());
+            return new TaskList(output);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException();
+        }
     }
 
     /**
@@ -85,19 +98,25 @@ public class TaskList {
      *
      * @return String comprising the entire list of tasks.
      */
-    public String getList() {
+    public String getList() throws DukeException {
 
-        String output = "";
+        try {
+            String output = "";
 
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            if (i == taskArrayList.size() - 1) {
-                output = output + getTask(i).taskStatus();
-            } else {
-                output = output + getTask(i).taskStatus() + "\n";
+
+            for (int i = 0; i < taskArrayList.size(); i++) {
+                if (i == taskArrayList.size() - 1) {
+                    output = output + getTask(i).taskStatus();
+                } else {
+                    output = output + getTask(i).taskStatus() + "\n";
+                }
             }
-        }
 
-        return output;
+            return output;
+
+        } catch (DukeException e) {
+            throw new DukeException();
+        }
     }
 
     /**

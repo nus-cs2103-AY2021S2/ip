@@ -1,8 +1,1 @@
-E 1          test (on: 16 Feb 2021 2359 )
-T 0        d
-T 0       2
-T 0      2
-T 0     54
-T 0    532r
-T 0   sda
-T 0  djsd
+T 0  wake up
