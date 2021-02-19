@@ -15,7 +15,7 @@ public class DeadlineCommand extends Command {
     private final Deadline deadline;
 
     private static final String NO_ARGUMENT_ERROR = "Please specify a deadline!";
-    private static final String INVALID_DEADLINE_ERROR = "Please specify a valid deadline!";
+    private static final String INVALID_DATE_ERROR = "Please specify a valid date!";
 
     public DeadlineCommand(String description) throws DukeException {
         try {
@@ -29,7 +29,7 @@ public class DeadlineCommand extends Command {
             LocalDateTime time = Parser.parseInputToDateTime(descArr[1]);
             this.deadline = new Deadline(descArr[0], time);
         } catch (DateTimeParseException e) {
-            throw new DukeException(INVALID_DEADLINE_ERROR);
+            throw new DukeException(INVALID_DATE_ERROR);
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }

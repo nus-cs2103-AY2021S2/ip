@@ -15,7 +15,7 @@ public class EventCommand extends Command {
     private final Event event;
 
     private static final String NO_ARGUMENT_ERROR = "Please specify a valid event!";
-    private static final String INVALID_DEADLINE_ERROR = "Please specify a valid deadline!";
+    private static final String INVALID_DATE_ERROR = "Please specify a valid date!";
 
     public EventCommand(String description) throws DukeException {
         try {
@@ -29,7 +29,7 @@ public class EventCommand extends Command {
             LocalDateTime time = Parser.parseInputToDateTime(descArr[1]);
             this.event = new Event(descArr[0], time);
         } catch (DateTimeParseException e) {
-            throw new DukeException(INVALID_DEADLINE_ERROR);
+            throw new DukeException(INVALID_DATE_ERROR);
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }
