@@ -1,8 +1,5 @@
-[D][ ] test (by: Feb 9 2020, 7:00PM)
-[E][ ] party (at: Sep 3 2020, 11:00PM)
-[D][ ] project (by: Sep 3 2020, 11:00PM)
-[D][ ] homework (by: Oct 1 2020, 7:00PM)
-[E][ ] party (at: Oct 1 2020, 7:00PM)
-[D][ ] bleh (by: Jan 1 2021, 3:00AM)
-[T][ ] read book
-[D][ ] return book (by: Feb 2 2021, 7:00PM)
+[D][X] project (by: Mar 3 2020, 7:00PM)
+[E][X] party (at: Mar 3 2020, 8:00PM)
+[T][ ] book review
+[E][ ] book release (at: Jan 1 2021, 6:00PM)
+[T][ ] clean room

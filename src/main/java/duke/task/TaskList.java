@@ -1,10 +1,13 @@
 package duke.task;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -55,10 +58,13 @@ public class TaskList {
      * @param description Description of task.
      * @param isReadingFile True if a file is being read, false if a file is not being read.
      * @param storage Storage.
+     * @param isDone Task is done or not.
+     *
+     * @return Output string.
      * @throws DukeException If description is not given in the correct format.
      * @throws IOException If there are any input and output issues.
      */
-    public String addTask(TaskType taskType, String description, boolean isReadingFile, Storage storage)
+    public String addTask(TaskType taskType, String description, boolean isDone, boolean isReadingFile, Storage storage)
             throws DukeException, IOException {
         Task newTask = new Task(description);
         if (taskType == TaskType.TODO) {
@@ -92,6 +98,9 @@ public class TaskList {
 
             newTask = new EventTask(descriptionArr[0], descriptionArr[1]);
         }
+        if (isDone) {
+            newTask.markAsDone();
+        }
         this.tasks.add(newTask);
         if (!isReadingFile) {
             storage.appendToFile("data/duke.txt", newTask.toString());
@@ -107,6 +116,7 @@ public class TaskList {
      *
      * @param taskNo Task number.
      * @param storage Storage.
+     * @return Output string.
      * @throws DukeException If task number does not exist.
      */
     public String deleteTask(int taskNo, Storage storage) throws DukeException, IOException {
@@ -129,8 +139,12 @@ public class TaskList {
 
     }
 
+
+
     /**
      * Prints tasks in task list.
+     *
+     * @return Output string.
      */
     public String printTaskList() {
         if (this.tasks.size() == 0) {
@@ -144,10 +158,19 @@ public class TaskList {
         }
     }
 
+    public String printTaskListWithoutNumbers() {
+        String listOfTasks = "";
+        for (Task task : this.tasks) {
+            listOfTasks += task + "\n";
+        }
+        return listOfTasks;
+    }
+
     /**
      * Prints tasks that match the given date.
      *
      * @param date Date to be matched to tasks.
+     * @return Output string.
      */
     public String printTasksOn(LocalDate date) {
         List<Task> list = new ArrayList();
@@ -182,6 +205,7 @@ public class TaskList {
      * Prints tasks that match the given keyword.
      *
      * @param keyword Keyword to be matched to tasks.
+     * @return Output string.
      */
     public String printTasksWith(String keyword) {
         List<Task> list = new ArrayList();

@@ -29,6 +29,7 @@ public class DeleteCommand extends Command {
      * @param tasks Task list.
      * @param ui UI.
      * @param storage Storage.
+     * @return Output string.
      * @throws IOException If there are input or output issues.
      * @throws DukeException If no task number was specified or task number specified is invalid.
      */

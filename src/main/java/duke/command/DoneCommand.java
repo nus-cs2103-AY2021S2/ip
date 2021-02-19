@@ -1,9 +1,12 @@
 package duke.command;
 
+import duke.FileManager;
 import duke.Storage;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+
+import java.io.IOException;
 
 /**
  * Represents a command to mark a task as done.
@@ -27,15 +30,18 @@ public class DoneCommand extends Command {
      * @param tasks Task list.
      * @param ui User interface.
      * @param storage Storage.
+     * @return Output string.
      * @throws DukeException If task number does not exist or is not specified.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (Integer.parseInt(this.description) > tasks.getTaskListSize()) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
         }
         int taskNo = Integer.parseInt(this.description);
-        return tasks.getTask(taskNo).markAsDone();
+        String doneTask = tasks.getTask(taskNo).markAsDone();
+        FileManager.updateTaskList(storage.getFilePath(), tasks);
+        return doneTask;
     }
 
     @Override

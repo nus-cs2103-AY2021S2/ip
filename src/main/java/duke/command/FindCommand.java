@@ -26,6 +26,7 @@ public class FindCommand extends Command {
      * @param tasks Task list.
      * @param ui User interface.
      * @param storage Storage.
+     * @return Output string.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

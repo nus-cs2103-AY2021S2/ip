@@ -29,6 +29,8 @@ public class Task {
 
     /**
      * Marks a task as done.
+     *
+     * @return Output string.
      */
     public String markAsDone() {
         this.isDone = true;

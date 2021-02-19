@@ -31,12 +31,13 @@ public class AddCommand extends Command {
      * @param tasks Task list.
      * @param ui User interface.
      * @param storage Storage.
+     * @return Output string.
      * @throws IOException If there are any input or output issues.
      * @throws DukeException If user input is not in the correct format or is invalid.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
-        return tasks.addTask(TaskType.valueOf(this.type.toUpperCase()), description, false, storage);
+        return tasks.addTask(TaskType.valueOf(this.type.toUpperCase()), description, false, false, storage);
     }
 
     @Override

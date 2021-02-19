@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -85,6 +87,13 @@ public class FileManager {
             }
         }
 
+        outputFile.renameTo(inputFile);
+    }
+
+    public static void updateTaskList(String filePath, TaskList tasks) throws IOException {
+        File inputFile = new File(filePath);
+        File outputFile = new File("data/newDuke.txt");
+        FileManager.writeToNewFile("data/newDuke.txt", tasks.printTaskListWithoutNumbers());
         outputFile.renameTo(inputFile);
     }
 

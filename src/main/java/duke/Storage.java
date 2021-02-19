@@ -27,6 +27,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+
+    public String getFilePath() {
+        return this.filePath;
+    }
+
     /**
      * Loads the file at the given file path.
      *
@@ -91,22 +96,23 @@ public class Storage {
         while (sc.hasNextLine()) {
             String nextLine = sc.nextLine();
             String taskTypeLetter = Character.toString(nextLine.charAt(1));
+            boolean isDone = (Character.toString(nextLine.charAt(4)).equals("X"));
             if (taskTypeLetter.equals("T")) {
-                taskList.addTask(TaskType.TODO, nextLine.substring(7), true, this);
+                taskList.addTask(TaskType.TODO, nextLine.substring(7), isDone,true, this);
             } else if (taskTypeLetter.equals("D")) {
                 String[] nextLineArr = nextLine.substring(7).split(" \\(by: ");
                 String[] dateTime = nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")")).split(", ");
                 String description = nextLineArr[0] + " /by "
                         + Storage.convertOutputDateToInputDate(dateTime[0]) + " "
                         + Storage.convertOutputTimeToInputTime(dateTime[1]);
-                taskList.addTask(TaskType.DEADLINE, description, true, this);
+                taskList.addTask(TaskType.DEADLINE, description, isDone,true, this);
             } else if (taskTypeLetter.equals("E")) {
                 String[] nextLineArr = nextLine.substring(7).split(" \\(at: ");
                 String[] dateTime = nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")")).split(", ");
                 String description = nextLineArr[0] + " /at "
                         + Storage.convertOutputDateToInputDate(dateTime[0]) + " "
                         + Storage.convertOutputTimeToInputTime(dateTime[1]);
-                taskList.addTask(TaskType.EVENT, description, true, this);
+                taskList.addTask(TaskType.EVENT, description, isDone,true, this);
             }
         }
 

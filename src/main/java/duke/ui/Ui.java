@@ -17,7 +17,8 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        return ("Hello from Duke!\n"
+        return ("Hello from Duke!\n");
+                /*
                 + "So here are the rules:\n"
                 + "-- list\n"
                 + "-- todo <nameOfToDoTask>\n"
@@ -28,6 +29,8 @@ public class Ui {
                 + "-- taskdate <YYYY-MM-DD>\n"
                 + "-- find <keyword>\n"
                 + "-- bye");
+
+                 */
         /*
         return ("Hello from Duke!\n"
                 + "-- list:  Prints current tasks in the list\n"
