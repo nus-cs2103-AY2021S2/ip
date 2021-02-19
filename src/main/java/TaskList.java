@@ -74,12 +74,13 @@ public class TaskList {
             return "Oops, the task list is empty boss, there's nothing to find!";
         }
 
+        query = query.toLowerCase();
         StringBuilder foundTasks = new StringBuilder("Here you go boss:\n");
 
         int i = 1;
         for (Task task : tasks) {
             String string = task.toString();
-            if (string.contains(query)) {
+            if (string.toLowerCase().contains(query)) {
                 foundTasks.append(i).append(". ").append(string).append("\n");
             }
             i++;

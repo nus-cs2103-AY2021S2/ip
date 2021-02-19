@@ -3,6 +3,7 @@ Henchman is your loyal Task Manager application built using Java 11.
 Henchman can help track all your tasks and their deadlines, so feel free to order him around. Go on to the **Features** section to test out the commands! 
 ---
 ## Features 
+Note: All commands are case insensitive.
 
 ### Create a ToDo task:
 * Description: Adds new ToDo task to your list of tasks.
@@ -32,14 +33,8 @@ Henchman can help track all your tasks and their deadlines, so feel free to orde
 * Note: `<task index>` cannot be empty,
 * Example:
 
-### Update a task:
-* Description: Updates the task specified by its input index with the specified fields.
-* Command: `edit`
-* Format: `edit <task index>`  
-* Note: `<task index>` cannot be empty,
-* Example:
 
-### List all tasks:
+### List tasks:
 * Description: Lists all tasks currently in the task list.
 * Command: `list`
 * Format: `list`
@@ -50,6 +45,18 @@ Henchman can help track all your tasks and their deadlines, so feel free to orde
 * Description: Finds all tasks containing the specified search term.
 * Command: `find`
 * Format: `find <search term>`
-* Note: `<search term>` can even be a phrase,
+* Note: `<search term>` can even be a phrase, and is case insensitive.
 * Example:
 
+### Sort tasks: 
+* Description: Sort all tasks according to the sort key.
+* Command: `sort`
+* Format: `sort <sort key>`
+* Key (case insensitive):
+    *  `created`: sort by task created date
+    *  `description`: sort by task description
+    *  `done`: sort by task done status, with unfinished tasks first
+    *  `end`: sort by task end date
+    *  `type`: sort by task type
+* Note: If no sort key is provided, sort by task created date by default. 
+* Example:
