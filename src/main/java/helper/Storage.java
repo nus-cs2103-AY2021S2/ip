@@ -116,7 +116,7 @@ public class Storage {
             }
             FileWriter myWriter = new FileWriter("duke.txt");
             for (Task t: taskList.getTaskList()) {
-                myWriter.write(t.toString() + "\n");
+                myWriter.write(t.toString() + System.lineSeparator());
             }
             myWriter.close();
             //  System.out.println("Successfully wrote to the file.");
