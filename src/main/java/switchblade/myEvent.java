@@ -42,6 +42,7 @@ public class myEvent extends Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
+        // changed according to completion
         if (this.completed) {
             sb.append("[E] [x] ");
         } else {
