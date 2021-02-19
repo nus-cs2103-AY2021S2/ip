@@ -34,7 +34,7 @@ management tasks done faster than traditional GUI apps.
 
 1. Refer to the Features below for details of each command that can be used.
 
-![Image of Duke](https://tsh22.github.com/images/Ui.png)
+![Image of Duke](https://raw.githubusercontent.com/tsh22/ip/master/docs/Ui.png)
 
 ## Features
 
@@ -98,7 +98,7 @@ Examples:
 
 ### Find a task using keywords: `find`
 
-Updates the description of an existing task in the task list.
+Finds an existing task that matches the keyword(s).
 
 Format: `find KEYWORD`
 
