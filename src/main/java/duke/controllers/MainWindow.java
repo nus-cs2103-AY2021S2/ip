@@ -27,7 +27,6 @@ import javafx.scene.text.Font;
  */
 public class MainWindow extends AnchorPane {
 
-    private static final Font MONOSPACED_FONT = new Font("Consolas", 11);
     private static final Border THIN_BORDER = new Border(new BorderStroke(
             Paint.valueOf("0x000000"),
             BorderStrokeStyle.SOLID,
@@ -49,10 +48,26 @@ public class MainWindow extends AnchorPane {
     private TextArea tasklistContainer;
 
     private Duke duke;
+    private Font monospacedFont = Font.getDefault(); // default fallback
 
+    /**
+     * Sets initial properties of components.
+     */
     @FXML
     public void initialize() {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        overrideMonospacedFont();
+    }
+
+    private void overrideMonospacedFont() {
+        List<String> availableFonts = Font.getFontNames();
+        String[] selectedFonts = { "Consolas", "Monaco", "Menlo", "Courier", "Courier New" };
+        for (String font : selectedFonts) {
+            if (availableFonts.contains(font)) {
+                monospacedFont = new Font(font, 11);
+                break;
+            }
+        }
     }
 
     /** Initialize Duke and queries initial setup information */
@@ -102,7 +117,7 @@ public class MainWindow extends AnchorPane {
         textBox.setOnMouseClicked(event -> {
             focusOnTextField();
             userInput.setText(inputText);
-            userInput.setFont(MONOSPACED_FONT);
+            userInput.setFont(monospacedFont);
             userInput.positionCaret(inputText.length());
         });
 
@@ -112,12 +127,12 @@ public class MainWindow extends AnchorPane {
 
     private void updateResponseContainer(String responseText) {
         responseContainer.setText(responseText);
-        responseContainer.setFont(MONOSPACED_FONT);
+        responseContainer.setFont(monospacedFont);
     }
 
     private void updateTasklistContainer(String tasklistString) {
         tasklistContainer.setText(tasklistString);
-        tasklistContainer.setFont(MONOSPACED_FONT);
+        tasklistContainer.setFont(monospacedFont);
 
     }
 
