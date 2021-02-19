@@ -118,7 +118,6 @@ public class Storage {
                 myWriter.write(t.toString() + System.lineSeparator());
             }
             myWriter.close();
-            //  System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             throw new DukeException("Cannot save file. Do you have it open?");
         }
