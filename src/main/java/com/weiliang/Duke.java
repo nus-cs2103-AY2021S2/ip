@@ -65,13 +65,21 @@ public class Duke {
         if (input.equals("list")) {
             return parser.list();
         }
-        if (input.matches("^delete \\d+$")) {
-            int taskNo = Integer.parseInt(input.replaceFirst("delete ", "")) - 1;
-            return parser.delete(taskNo);
+        if (input.startsWith("delete")) {
+            if (input.matches("^delete \\d+$")) {
+                int taskNo = Integer.parseInt(input.replaceFirst("delete ", "")) - 1;
+                return parser.delete(taskNo);
+            } else {
+                throw new DukeException("Missing delete index!");
+            }
         }
-        if (input.matches("^done \\d+$")) {
-            int taskNo = Integer.parseInt(input.substring(5)) - 1;
-            return parser.markDone(taskNo);
+        if (input.startsWith("done")) {
+            if (input.matches("^done \\d+$")) {
+                int taskNo = Integer.parseInt(input.substring(5)) - 1;
+                return parser.markDone(taskNo);
+            } else {
+                throw new DukeException("Missing done index!");
+            }
         }
         if (input.startsWith("todo")) {
             if (input.matches("^todo .+$")) {
@@ -97,9 +105,13 @@ public class Duke {
                 throw new DukeException("The description of an event cannot be empty!");
             }
         }
-        if (input.matches("^find .+$")) {
-            String searchField = input.substring(5);
-            return parser.search(searchField);
+        if (input.startsWith("find")) {
+            if (input.matches("^find .+$")) {
+                String searchField = input.substring(5);
+                return parser.search(searchField);
+            } else {
+                throw new DukeException("Missing search information!");
+            }
         }
         if (input.equals("undo")) {
             return parser.undo();
