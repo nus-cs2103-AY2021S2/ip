@@ -13,7 +13,6 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
     private Duckie duck;
 
     {
@@ -23,6 +22,10 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+
+
+    //private Duckie duck = new Duckie();
 
     @Override
     public void start(Stage stage) {

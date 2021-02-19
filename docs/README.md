@@ -10,15 +10,15 @@ Note: words in < > are customizable user input.
 
 Adding tasks:
 1. `todo` <task> - adds a simple todo task.
-2. `deadline` <task> /by <date>' - adds a deadline task with a date to be completed by.
-3. `event` <task> /at <date>' - adds an event task with a date to be held at.
-4. `doWithin` <task> /from <date> /to <date>' - adds a doWithin task with a beginning date to an end date.
+2. `deadline` <task> /by <date> - adds a deadline task with a date to be completed by.
+3. `event` <task> /at <date> - adds an event task with a date to be held at.
+4. `doWithin` <task> /from <date> /to <date> - adds a doWithin task with a beginning date to an end date.
 
 Managing tasks:
 1. `list` - shows all tasks in the list in the added order.
-2. `done` <task number>' - marks the specified task as done.
-3. `delete` <task number>' - deletes the specified task.
-4. `find` <task>' - finds tasks matching user input.
+2. `done` <task number> - marks the specified task as done.
+3. `delete` <task number> - deletes the specified task.
+4. `find` <task>  - finds tasks matching user input.
 
 Ending session:
 1. `bye` - shows end message.
