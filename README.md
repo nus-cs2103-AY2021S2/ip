@@ -46,7 +46,7 @@ Format: delete TASK NUMBER
 
 Example: delete 2  
 
-**`list` - Returns the list of all tasks**\
+**`list` - Returns the list of all tasks**
 
 **`done` - Marks a task as complete**
 
@@ -54,8 +54,8 @@ Format: done TASK NUMBER
 
 Example: done 1  
 
-
 **`find` - Looks for a task from the provided description**
+
 Format: find DESCRIPTION
 
 Example: find baby shower  
