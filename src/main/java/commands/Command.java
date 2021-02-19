@@ -1,14 +1,12 @@
 package commands;
 
 import datetime.KiwiDateTime;
-import datetime.ParseDateTime;
 import datetime.ParseKiwiDateTime;
 import exceptions.InvalidArgumentException;
 import exceptions.MissingArgumentException;
 import format.Ui;
 import tasklist.TaskList;
 
-import java.time.LocalDateTime;
 
 public abstract class Command {
 
@@ -32,11 +30,10 @@ public abstract class Command {
     }
 
     /**
-     * Runs a command and stores output and status in instance variables.
+     * Runs a command and stores the command's output and status in instance variables.
      * @param taskList taskList to call relevant methods on
      */
     public abstract void run(TaskList taskList);
-    // exceptions thrown from running these commands should be caught in this run method so they can be stored in command output?
 
     @Override
     public String toString() {
@@ -56,7 +53,7 @@ public abstract class Command {
         return this.hasSentExitDukeSignal;
     }
 
-    // maybe "handle" isn't descriptive enough
+    // todo maybe "handle" isn't descriptive enough
 
     /**
      * Called by commands that can't be used on empty lists, and throws an error
@@ -81,11 +78,6 @@ public abstract class Command {
 
     public void debug() {
         System.out.println(this.commandBody);
-    }
-
-    // used by event, deadline subclasses
-    protected LocalDateTime parseArgToDateTime(String s) {
-        return ParseDateTime.parse(s);
     }
 
     protected KiwiDateTime parseToKiwiDateTime(String s) throws MissingArgumentException {

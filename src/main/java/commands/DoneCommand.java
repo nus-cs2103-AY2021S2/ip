@@ -12,7 +12,6 @@ public class DoneCommand extends CommandWithParameters {
     @Override
     public void run(TaskList taskList) {
         try {
-            // many overlaps with delete command, can abstract into another method maybe.
 
             handleNoArgs();
 

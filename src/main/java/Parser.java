@@ -1,11 +1,7 @@
 import commands.*;
 import exceptions.UnsupportedCommandException;
 
-public class NewParser {
-
-    public NewParser() {
-        assert false == true : "ha!";
-    }
+public class Parser {
 
     /**
      * Main driver for parsing any user input. The first word of user input contains the command name,
@@ -39,8 +35,6 @@ public class NewParser {
      * @throws UnsupportedCommandException
      */
     private Command parseIntoCommand(String firstWord, String commandBody) throws UnsupportedCommandException {
-        // w6 multiple cases --> abstract out all possible strings that correspond to one command later.
-        // also allow users to define own aliases
         switch (firstWord) {
         case "list":
         case "ls":
@@ -61,7 +55,6 @@ public class NewParser {
             return new DoneCommand(commandBody);
         case "delete":
         case "del":
-        case "rm":
             return new DeleteCommand(commandBody);
         case "find":
             return new FindCommand(commandBody);

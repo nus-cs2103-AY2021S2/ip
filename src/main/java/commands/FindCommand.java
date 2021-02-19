@@ -4,7 +4,6 @@ import exceptions.MissingArgumentException;
 import tasklist.TaskList;
 
 public class FindCommand extends CommandWithParameters {
-    // todo find command hasn't been re-implemented yet...
 
     public FindCommand(String commandBody) {
         super("find", commandBody);

@@ -16,8 +16,6 @@ public class KiwiDateTime {
         return new KiwiDateTime(KiwiDate.of(day, month, year), KiwiTime.of(hour, min));
     }
 
-    // todo possible inheritance: subclasses for datetimes
-    // or just customize toStrings not to print minute / hour if don't have, or year if this year
     @Override
     public String toString() {
         return (kiwiDate + " " + kiwiTime).trim();
@@ -29,26 +27,9 @@ public class KiwiDateTime {
         }
     }
 
-
-    public static int getCurrYear() {
-        return LocalDateTime.now().getYear();
-    }
-
     private KiwiDateTime(KiwiDate d, KiwiTime t) {
         this.kiwiDate = d;
         this.kiwiTime = t;
-    }
-
-    public static KiwiDateTime ofThisYear(int day, int month, int hour, int minute) {
-        return new KiwiDateTime(KiwiDate.of(day, month), KiwiTime.of(hour, minute));
-    }
-
-    public static KiwiDateTime ofThisYear(int day, int month, int hour) {
-        return new KiwiDateTime(KiwiDate.of(day, month), KiwiTime.of(hour));
-    }
-
-    public static KiwiDateTime ofThisYear(int day, int month) {
-        return new KiwiDateTime(KiwiDate.of(day, month), KiwiTime.ofEmpty());
     }
 
 
@@ -57,8 +38,10 @@ public class KiwiDateTime {
     }
 
     // todo rename all parse functions
+
     /**
      * Converts a string stored in storage to a KiwiDateTime object. Does the opposite of unparse().
+     *
      * @param strToParse a string from hard disk storage that represents a KiwiDateTime object
      * @return
      */
@@ -73,21 +56,4 @@ public class KiwiDateTime {
         return KiwiDateTime.of(values[0], values[1], values[2], values[3], values[4]);
     }
 
-    public static void main(String[] args) {
-//        ParseKiwiDateTime p = new ParseKiwiDateTime();
-//        KiwiDateTime k = p.parse("1/4 6pm");
-//        System.out.println(k.unparse());
-//        System.out.println(parse(k.unparse()));
-    }
-
 }
-
-/*
-need the following parsing functions
-only kiwiTime --> set kiwiDate to today [/]
-no kiwiTime --> set kiwiTime.isEmpty [/]
-no year --> set year to this year [/]
-
-and then natural language processing
- */
-

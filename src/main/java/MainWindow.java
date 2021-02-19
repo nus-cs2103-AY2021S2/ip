@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-        runTests();
+        // runTests();
     }
 
     /**
@@ -89,15 +89,7 @@ public class MainWindow extends AnchorPane {
                 "list"
         };
 
-        String[] demo = {
-                "delete 1",
-                "todo read to pascal",
-                "list",
-                "event take a walk with pascal /at 30-5 2pm",
-                "find pascal"
-        };
-
-        for (String i : demo) {
+        for (String i : inputs) {
             runTest(i);
         }
     }

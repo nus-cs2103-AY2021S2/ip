@@ -8,12 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class KiwiTime {
     private LocalTime time;
-    private final boolean isEmpty; // i.e. user did not set time
+    private final boolean isEmpty;
     private boolean isHourOnly;
-
-    KiwiTime() {
-        this.isEmpty = true;
-    }
 
     // hmm what happens when users want to edit time variables
     KiwiTime(int hour, int minute) {
@@ -30,10 +26,6 @@ public class KiwiTime {
         return new KiwiTime(hour, 0);
     }
 
-    public static KiwiTime ofEmpty() {
-        return new KiwiTime();
-    }
-
     private void checkHourOnly() {
         this.isHourOnly = (this.time.getMinute() == 0);
     }
@@ -41,9 +33,6 @@ public class KiwiTime {
     // todo printing AM or PM
     @Override
     public String toString() {
-        if (isEmpty) {
-            return "";
-        }
 
         DateTimeFormatter f;
 
@@ -56,15 +45,6 @@ public class KiwiTime {
         return this.time.format(f).toLowerCase();
     }
 
-    public static void main(String[] args) {
-        KiwiTime t0 = new KiwiTime();
-        KiwiTime t1 = new KiwiTime(6, 12);
-        KiwiTime t2 = KiwiTime.of(8);
-        KiwiTime t3 = new KiwiTime(14, 40);
-        KiwiDateTime.print(
-                t0, t1, t2, t3
-        );
-    }
 
     public String unparse(String delimiter) {
         return String.format("%d%s%d", this.time.getHour(), delimiter, this.time.getMinute());

@@ -12,8 +12,8 @@ public class TodoCommand extends CommandWithParameters {
     @Override
     public void run(TaskList taskList) {
         try {
-            handleNoArgs();
 
+            handleNoArgs();
             this.commandOutputMsg = taskList.addTask(new Todo(commandBody));
 
         } catch (MissingArgumentException e) {

@@ -9,8 +9,7 @@ import java.io.IOException;
 public class Duke {
     private static TaskList taskList;
     private boolean hasExitCommandBeenSent;
-    private NewParser newParser;
-    // storage location should be here
+    private Parser parser;
 
     /**
      * Initialise duke with a taskList and a parser.
@@ -21,7 +20,7 @@ public class Duke {
     }
 
     private void setParser() {
-        this.newParser = new NewParser();
+        this.parser = new Parser();
     }
 
     // both gui and cli need to do this
@@ -29,8 +28,8 @@ public class Duke {
         try {
             taskList = Storage.setupTaskList();
         } catch (IOException e) {
-            Ui.print(new String[]{"Something went wrong in loading the task file and parsing",
-                    e.getMessage()});
+            Ui.print(new String[]{"Something went wrong in loading the task file and parsing", e.getMessage()});
+            taskList = new TaskList();
         }
         // todo ensure a tasklist is always created?
     }
@@ -41,7 +40,7 @@ public class Duke {
 
     /**
      * This is the main function that generates a response to user inputted commands and strings.
-     * Todo has only been tested with gui, not with cli.
+     *
      * @param input User input
      * @return Response after processing the command(s) and argument(s) from the user input
      */
@@ -50,35 +49,38 @@ public class Duke {
 
         // parse command
         try {
-            c = newParser.parseInputLine(input);
+            c = parser.parseInputLine(input);
         } catch (UnsupportedCommandException e) {
-            return e.getMessage();
+            return Ui.formatException(e.getMessage());
         }
 
         // run command
         assert c != null;
         c.run(taskList);
 
-        // update exit signal boolean so duke knows to close scanner/gui
-        if (c.hasSentExitDukeSignal()) {
-            this.hasExitCommandBeenSent = true;
-            // todo how to exit gui and where
-        }
+        // update exit signal boolean so javafx application can be exited
+        this.hasExitCommandBeenSent = c.hasSentExitDukeSignal();
 
-        // save to hard disk - think about how to OOP saving behaviour later
-        boolean needRewrite = true; // todo take this from command object instead
-        if (needRewrite) {
-            try {
-                Storage.saveTasksList(taskList);
-            } catch (IOException e) {
-                return e.getMessage();
-            }
-        }
+        // save task list to hard disk
+        String errMsg = saveToHardDisk();
 
-        // c.debug();
-        return c.getCommandOutputMsg();
+        // return output
+        return c.getCommandOutputMsg() + errMsg;
     }
 
+    private String saveToHardDisk() {
+        try {
+            Storage.saveTasksList(taskList);
+            return "";
+        } catch (IOException e) {
+            return "\n" + e.getMessage();
+        }
+    }
+
+    /**
+     * Returns whether an exit command has been sent to duke.
+     * @return
+     */
     public boolean hasExitCommandBeenSent() {
         return hasExitCommandBeenSent;
     }

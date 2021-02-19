@@ -22,6 +22,7 @@ public class KiwiDate {
 
     /**
      * Creates a KiwiDate with given day and month, and the current year
+     *
      * @param day
      * @param month
      * @return

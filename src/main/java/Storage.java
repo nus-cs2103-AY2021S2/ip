@@ -35,7 +35,7 @@ public class Storage {
         } else if (java.nio.file.Files.notExists(path)) {
             return false;
         } else {
-            // todo throw no access exception here
+            // likely because user is not allowed access to path
             return false;
         }
     }
@@ -79,42 +79,48 @@ public class Storage {
         boolean isAnyTaskFound = false;
 
         if (doesTaskFileExist()) {
-            // load it
+
             File f = new File(TASK_LIST_FILE_PATH.toString());
-            Scanner sc = new Scanner(f);
+            Scanner sc = new Scanner(f); // read from existing task file
+
             while (sc.hasNextLine()) {
-                // much hardcoding to parse which class' unparse method to use
-                // figure out how to use polymorphism?
                 String line = sc.nextLine();
                 String letter = line.substring(0, 1);
-                Task t;
-                switch (letter) {
-                case "T":
-                    t = Todo.parse(line); // todo throw error whenever format not recognized and help user recover from it
-                    break;
-                case "E":
-                    t = Event.parse(line);
-                    break;
-                case "D":
-                    t = Deadline.parse(line);
-                    break;
-                default:
-                    // todo create exceptions for parsing from hard disk
-                    t = null;
-                    break;
-                }
+                Task t = parseToTask(letter, line);
+
                 taskList.add(t);
                 isAnyTaskFound = true;
             }
+
         } else {
-            // probably not gonna be used due to tasklist.TaskList.java impl
             createTasksFile();
         }
+
         return isAnyTaskFound;
     }
 
+    private static Task parseToTask(String letter, String line) {
+        Task t;
 
-    // setup at default location
+        switch (letter) {
+        case "T":
+            t = Todo.parse(line);
+            break;
+        case "E":
+            t = Event.parse(line);
+            break;
+        case "D":
+            t = Deadline.parse(line);
+            break;
+        default:
+            t = null;
+            break;
+        }
+
+        return t;
+    }
+
+    // todo setup at default location
     // how to recover from the IOException
     public static TaskList setupTaskList() throws IOException {
         if (Storage.doesTaskFileExist()) {

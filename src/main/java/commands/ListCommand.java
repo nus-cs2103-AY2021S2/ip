@@ -12,7 +12,6 @@ public class ListCommand extends CommandWithNoParameters {
     public void run(TaskList taskList) {
         if (!commandBody.isEmpty()) {
             handleTooManyArgs();
-            // assert this.commandBody != null : "list command doesn't need arguments";
             return;
         }
 

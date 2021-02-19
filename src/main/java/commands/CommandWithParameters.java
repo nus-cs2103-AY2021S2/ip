@@ -27,15 +27,8 @@ public abstract class CommandWithParameters extends Command {
         return userIdx < 1 || userIdx > size;
     }
 
-    protected void handleInvalidListIdx(int size, int userIdx) {
-        if (isInvalidListIndex(size, userIdx)) {
-            int minIdx = 1; // for error message. should this be abstracted somewhere in tasklist
-            String invalidNumErrMsg = "Invalid task number given: " + userIdx
-                    + ". Number needs to be between " + minIdx + " and " + size + " (inclusive). "; // should be handled in exception.java
-            handleException(new InvalidArgumentException(invalidNumErrMsg));
-        }
-    }
 
+    // todo rename handle
     protected void checkInvalidListIdx(int size, int userIdx) throws InvalidArgumentException {
         if (isInvalidListIndex(size, userIdx)) {
             int minIdx = 1; // for error message. should this be abstracted somewhere in tasklist

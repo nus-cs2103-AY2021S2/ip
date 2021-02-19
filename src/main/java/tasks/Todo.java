@@ -28,7 +28,6 @@ public class Todo extends Task {
         return "T" + STORAGE_DELIMITER + description + STORAGE_DELIMITER + isDone + System.lineSeparator();
     }
 
-
     /**
      * Creates a tasks.Todo object based on the string stored in the hard disk.
      * @param oneLine One line of stored input to be parsed into a todo
@@ -42,8 +41,5 @@ public class Todo extends Task {
         boolean isDone = parseBoolean(args[2]);
 
         return new Todo(args[1], isDone);
-
-
     }
-
 }

@@ -20,6 +20,7 @@ public class Deadline extends Task {
         this.deadlineDateTime = deadlineDateTime;
     }
 
+    // used when parsing deadline task from stored file
     private Deadline(String desc, KiwiDateTime deadlineDateTime, boolean isDone) {
         super(desc, isDone);
         this.deadlineDateTime = (deadlineDateTime);
@@ -41,24 +42,18 @@ public class Deadline extends Task {
                 + STORAGE_DELIMITER + deadlineDateTime.unparse() + System.lineSeparator();
     }
 
-    // note that this parsing is different from parsing user inputs.
-    // since this parsing for hard disk storage is separate from that parsing,
-    // the /at /by style of inputs won't affect this if they change, i think
+    // todo note that this parsing is different from parsing user inputs.
     /**
      * Creates a deadline object based on the string stored in the hard disk.
      * @param oneLine One line of stored input to be parsed into a deadline
      * @return tasks.Deadline Object
      */
     public static Deadline parse(String oneLine) {
-
-        // some repetition in this function across all types of tasks but abstracting them might be costly
         assert oneLine.startsWith("D" + STORAGE_DELIMITER);
-
-        // fixme - refer to event method equivalent to fix this portion
 
         // split string into different fields
         String[] fields = oneLine.split(STORAGE_DELIMITER);
-        assert fields.length == 3 + 1 : "storage parser detecting fewer than needed event arguments";
+        assert fields.length == 3 + 1 : "deadline storage parser detecting fewer than needed fields";
 
         // fields for deadline object
         boolean isDone = parseBoolean(fields[2]);
@@ -66,20 +61,6 @@ public class Deadline extends Task {
         KiwiDateTime dt = KiwiDateTime.parse(fields[3]);
 
         return new Deadline(desc, dt, isDone);
-    }
-
-    /**
-     * This method only exists for one-off testing of this deadline class
-     * @param args
-     */
-    public static void main(String[] args) {
-//        Deadline t = new Deadline("hello world", "7am on wed");
-//        System.out.println(t);
-//        t.markAsDone();
-//        System.out.println(t);
-//        System.out.println(t.unparse());
-//        System.out.println(parse(t.unparse()));
-        // test with other cases without relying on t
     }
 
 

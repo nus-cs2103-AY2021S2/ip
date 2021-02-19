@@ -12,7 +12,6 @@ public abstract class AddTaskWithTimeCommand extends CommandWithParameters {
     protected String missingThirdArgErrMsg = "Missing third argument";
     protected final String missingDelimiterErrMsg =
             "Missing delimiter. Please type help for method usage.";
-            // Please use this command this way: " + methodUsage;
     
     protected AddTaskWithTimeCommand(String commandName, String commandBody) {
         super(commandName, commandBody);

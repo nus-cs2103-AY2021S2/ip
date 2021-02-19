@@ -9,45 +9,8 @@ public class Ui {
     private static final String DEFAULT_INDENT = "      ";
 
     /**
-     * Prints introductory message.
-     */
-    public static void intro() {
-        String logo = " ______\n"
-                + "/______\\ Kiwi's\n"
-                + "|______|     Inn\n"
-                + "####################";
-
-        // intro message
-        System.out.println(logo);
-        print(new String[]{
-                "Welcome, traveller. I'm Kiwi, your task list manager.",
-                "What would you like to do today?",
-                "Psst if you're unsure, use type 'help' to get started."});
-
-    }
-
-    /**
-     * Prints a formatted task list.
-     * @param taskList tasks.Task list to be printed
-     */
-    public static void printTaskList(TaskList taskList) {
-        System.out.println(DIVIDER_LINE);
-
-        System.out.println(DEFAULT_INDENT + "Your tasks:");
-
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.print(EXTRA_INDENT);
-            System.out.println(DEFAULT_INDENT + (i + 1) + "." + taskList.get(i));
-        }
-
-        System.out.println();
-        System.out.println(DEFAULT_INDENT + "You have " + taskList.size() + " tasks. ");
-
-        System.out.println(DIVIDER_LINE);
-    }
-
-    /**
      * Helper method to format chat bot responses
+     *
      * @param messages An array containing all messages to print in response to one command
      */
     public static void print(String[] messages) {
@@ -61,34 +24,10 @@ public class Ui {
     }
 
     /**
-     * Helper method to format chat bot response
-     * @param message A message to print in response to one command
+     * Provides a string with a formatted intro message
+     *
+     * @return
      */
-    public static void print(String message) {
-        System.out.println(DIVIDER_LINE);
-
-        System.out.println(DEFAULT_INDENT + message);
-
-        System.out.println(DIVIDER_LINE);
-    }
-
-
-    /**
-     * Formats printing of exception.
-     * @param errMsg Error message from the exception
-     */
-    public static void printException(String errMsg) {
-        print(new String[]{"Oops, Kiwi couldn't process that.", EXTRA_INDENT + errMsg});
-    }
-
-    /**
-     * Prints exit message
-     */
-    public static void printExitMsg() {
-        print("Bye. See you again soon!");
-    }
-
-    // STRING VERSIONS OF ALL THE ABOVE COMMANDS FOR GUI SAKE
     public static String introMessage() {
         String logo = " ______\n"
                 + "/______\\ Kiwi's\n"
@@ -99,6 +38,11 @@ public class Ui {
         return logo + indent("Welcome, traveller. I'm Kiwi.", "What would you like to do today?\n");
     }
 
+    /**
+     * Helper method to format error messages
+     *
+     * @param errMsg A message to print in response to one command
+     */
     public static String formatException(String errMsg) {
         String s = "Oops, Kiwi couldn't process that.";
         return addDividers(
@@ -109,9 +53,10 @@ public class Ui {
         return formatSingleLineMsg("Bye. See you again soon!");
     }
 
-    /** Formatter.
+    /**
+     * Adds intends to each string provided as argument
      *
-     * @param messages
+     * @param messages Objects whose toString need to be displayed on the gui
      * @return
      */
     private static String indent(Object... messages) {
@@ -124,44 +69,49 @@ public class Ui {
         return res;
     }
 
-    // changed params to Obj so that toString invoked
+
     private static String addExtraIndent(Object... messages) {
         String res = "";
         for (Object s : messages) {
             res += EXTRA_INDENT;
             res += s;
-            res += '\n'; // might give extra \n for everything that's not help output
+            res += '\n';
         }
         return res;
     }
 
     private static String addDividers(String message) {
-        // assertion is that individual lines of messages already have been indented and have line breaks
+        // assumption is that individual lines of messages already have been indented and have line breaks
         return DIVIDER_LINE + '\n' + message + DIVIDER_LINE;
     }
 
-    // rename this
-    public static String formatMultiLineMessages(String firstLine, Object ... moreIndentedLines) {
+    /**
+     * Formats messages that span multi-lines
+     *
+     * @param firstLine
+     * @param moreIndentedLines
+     * @return
+     */
+    public static String formatMultiLineMessages(String firstLine, Object... moreIndentedLines) {
         return addDividers(indent(firstLine, addExtraIndent(moreIndentedLines)));
     }
 
+    /**
+     * Formats a single line message
+     *
+     * @param firstLine
+     * @return
+     */
     public static String formatSingleLineMsg(String firstLine) {
         return addDividers(indent(firstLine));
     }
 
     /**
-     * For testing purposes
+     * Formats a task list into a string for easy displaying.
+     *
+     * @param taskList
+     * @return
      */
-    public static void main(String[] args) {
-        Ui ui = new Ui();
-        System.out.println(getExitMessage());
-        printExitMsg();
-
-        String er = "halkf";
-        printException(er);
-        System.out.println(formatException(er));
-    }
-    
     public static String stringifyTaskList(TaskList taskList) {
         String s = "";
         String nl = "\n";
