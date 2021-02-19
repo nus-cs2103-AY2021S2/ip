@@ -5,6 +5,7 @@ import core.task.Task;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
@@ -41,7 +42,7 @@ TaskStorageFile
                 } else {
                     return new ArrayList<>();
                 }
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException | InvalidClassException e) {
                 Files.deleteIfExists(fileLocation);
                 return new ArrayList<>();
             }
