@@ -97,7 +97,7 @@ public class Parser {
             int index = Integer.parseInt(mAddInfo.group(2)) - 1;
             tasks.getAtInd(index).moreInfo = mAddInfo.group(3);
         }else {
-            throw new DukeException("I don't know what that means!!!!");
+            output += "I do not understand what that means!";
         }
         return output;
     }
