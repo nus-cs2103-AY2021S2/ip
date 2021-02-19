@@ -45,11 +45,22 @@ public class Event extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Marks task as done.
+     * @return Completed task.
      */
     @Override
     Task done() {
         return new Event(this.name, this.duration.toString(), true);
+    }
+
+    /**
+     * Sets the duration to a new duration.
+     * @param date New duration.
+     * @return Event with new duration.
+     */
+    @Override
+    Task set(String date) {
+        return new Event(this.name, date, this.isDone);
     }
 
     /**

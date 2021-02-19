@@ -45,11 +45,22 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Marks task as done.
+     * @return Completed task.
      */
     @Override
     Task done() {
         return new Deadline(this.name, this.deadline.toString(), true);
+    }
+
+    /**
+     * Sets the deadline to a new deadline.
+     * @param date New deadline.
+     * @return Deadline with new deadline.
+     */
+    @Override
+    Task set(String date) {
+        return new Deadline(this.name, date, this.isDone);
     }
 
     /**
