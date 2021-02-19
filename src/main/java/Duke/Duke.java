@@ -130,17 +130,6 @@ public class Duke {
         return "Now you have " + taskList.getNumberOfTasks() + " tasks in the list.\n";
     }
 
-//    /**
-//     * Initialise scanner.
-//     *
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//        Duke duke = new Duke();
-//        System.out.println(duke.getResponse("todo"));
-//
-//    }
-
     /**
      * Generate a response to user input.
      */
@@ -148,7 +137,7 @@ public class Duke {
 
         Ui ui = new Ui(this);
         String response = ui.readCommand(input);
-        return "Duke response: " + response;
+        return response;
     }
 
 
