@@ -1,9 +1,10 @@
 package duke;
 
-import duke.task.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Event;
 
 public class EventTest {
     @Test
@@ -13,6 +14,6 @@ public class EventTest {
 
     @Test
     public void markAsDone_checkDoneStatus() {
-        assertEquals(true, new Event("return book", "Sunday").markAsDone().getDone());
+        assertEquals(true, new Event("return book", "Sunday").markAsDone().isDone());
     }
 }

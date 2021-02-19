@@ -1,19 +1,21 @@
 package duke.system;
 
+import duke.Helper;
 import duke.system.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ListItem;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.Helper;
-
-import java.util.Locale;
 
 /**
  * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,
  * then return the parsed <code>command</code>, <code>argument</code> and <code>date</code>
  * <code>print</code> the output and add the parsed item to the list if needed
+ *
+ * <code>command</code> stores the command that extracts from the string passing into the constructor
+ * <code>argument</code> stores the first argument for the command e.g. index number for DONE
+ * <code>optionalArgument</code> stores the optional argument for the command such as the dates for DEADLINE and EVENT
  */
 public class Parser {
     private final String command;
@@ -56,58 +58,58 @@ public class Parser {
         // has temporary variables tempArg, tempDate, tempCommand as they are "final"
         try {
             // check the first part of the input string and decide what to do next using switch case
-            switch(result[0].toLowerCase()) {
-                case "find":
-                case "todo": // both only need a name in a form of string therefore grouped
-                    tempCommand = result[0];
-                    if (result.length <= 1) {
-                        throw new DukeException.NoDescriptionException(result[0]);
-                    } else {
-                        tempArg = result[1];
-                    }
-                    break;
-                case "done":
-                case "delete": // both requires an index of the item
-                    String indexOfItemAsString = in.substring(in.indexOf(" ") + 1);
-                    tempArg = indexOfItemAsString;
-                    if(!Helper.isInteger(indexOfItemAsString)){
-                        throw new DukeException.NoDescriptionException(result[0]);
-                    }else{
-                        tempCommand = result[0];
-                    }
-                    break;
-                case "deadline":
-                case "event": // both requires an extra string (date)
-                    String firstParam = in.substring(in.indexOf("/") + 1);
-                    if (firstParam.equals("deadline") || firstParam.equals("event")) {
-                        throw new DukeException.NoDescriptionException(result[0]);
-                    } else {
-                        // check if the date starts by "by" or "at" to classify them
-                        int dateIndex = Math.max(firstParam.indexOf("by "), firstParam.indexOf("at "));
-                        if (dateIndex == -1) {
-                            throw new DukeException.NoDescriptionException(result[0]);
-                        } else {
-                            tempCommand = result[0];
-                            tempDate = firstParam.substring(dateIndex + 3);
-                            firstParam = in.substring(in.indexOf(" ") + 1);
-                            tempArg = firstParam.substring(0, firstParam.indexOf("/") - 1);
-                        }
-                    }
-                    break;
-                case "tag":
-                    tempCommand = result[0];
+            switch (result[0].toLowerCase()) {
+            case "find":
+            case "todo": // both only need a name in a form of string therefore grouped
+                tempCommand = result[0];
+                if (result.length <= 1) {
+                    throw new DukeException.NoDescriptionException(result[0]);
+                } else {
                     tempArg = result[1];
-                    tempDate = result[2];
-                    break;
-                default:
-                    // try parsing the command first by finding the equivalent in Enum PredefinedCommand,
-                    // else throw exception
-                    try {
-                        tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0].toUpperCase())).toLowerCase();
-                    } catch (IllegalArgumentException ex) {
-                        throw new DukeException.UnknownCommandException();
+                }
+                break;
+            case "done":
+            case "delete": // both requires an index of the item
+                String indexOfItemAsString = in.substring(in.indexOf(" ") + 1);
+                tempArg = indexOfItemAsString;
+                if (!Helper.isInteger(indexOfItemAsString)) {
+                    throw new DukeException.NoDescriptionException(result[0]);
+                } else {
+                    tempCommand = result[0];
+                }
+                break;
+            case "deadline":
+            case "event": // both requires an extra string (date)
+                String firstParam = in.substring(in.indexOf("/") + 1);
+                if (firstParam.equals("deadline") || firstParam.equals("event")) {
+                    throw new DukeException.NoDescriptionException(result[0]);
+                } else {
+                    // check if the date starts by "by" or "at" to classify them
+                    int dateIndex = Math.max(firstParam.indexOf("by "), firstParam.indexOf("at "));
+                    if (dateIndex == -1) {
+                        throw new DukeException.NoDescriptionException(result[0]);
+                    } else {
+                        tempCommand = result[0];
+                        tempDate = firstParam.substring(dateIndex + 3);
+                        firstParam = in.substring(in.indexOf(" ") + 1);
+                        tempArg = firstParam.substring(0, firstParam.indexOf("/") - 1);
                     }
-                    break;
+                }
+                break;
+            case "tag":
+                tempCommand = result[0];
+                tempArg = result[1];
+                tempDate = result[2];
+                break;
+            default:
+                // try parsing the command first by finding the equivalent in Enum PredefinedCommand,
+                // else throw exception
+                try {
+                    tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0].toUpperCase())).toLowerCase();
+                } catch (IllegalArgumentException ex) {
+                    throw new DukeException.UnknownCommandException();
+                }
+                break;
             }
         } catch (DukeException ex) {
             tempCommand = "error";
@@ -177,7 +179,7 @@ public class Parser {
                     + "\nNow you have " + inputList.getListItems().size() + " tasks in the list";
         case FIND:
             String matchedStr = "Here are the tasks in your list that fulfills your requirement:";
-            TaskList tempList = inputList.findItem(this.argument);
+            TaskList tempList = inputList.findMatchingItems(this.argument);
             for (int i = 0; i < tempList.getListItems().size(); i++) {
                 matchedStr += "\n" + ((i + 1) + "." + tempList.getListItems().get(i));
             }
@@ -188,7 +190,7 @@ public class Parser {
                     + this.optionalArgument;
         default:
             return "";
-            //every case must return some form of string, therefore break is not required
+        //every case must return some form of string, therefore break is not required
         }
     }
 

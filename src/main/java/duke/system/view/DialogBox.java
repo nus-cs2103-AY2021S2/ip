@@ -1,4 +1,5 @@
 package duke.system.view;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -35,7 +36,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setText(text);
-        if(text.contains("OOPS")){
+        if (text.contains("OOPS")) {
             dialog.setStyle("-fx-background-color: rgba(238,113,135,1);");
         }
         dialog.setMinHeight(Region.USE_PREF_SIZE);
@@ -53,7 +54,6 @@ public class DialogBox extends HBox {
     }
 
     /**
-     *
      * @param text
      * @param img
      * @return

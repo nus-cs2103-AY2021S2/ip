@@ -1,10 +1,11 @@
 package duke;
 
-import duke.system.Parser;
-import duke.task.TaskList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.system.Parser;
+import duke.task.TaskList;
 
 public class ParserTest {
     @Test
@@ -18,7 +19,7 @@ public class ParserTest {
 
     @Test
     public void checkPrintStringReturns() {
-       Parser temp = new Parser("bye");
-       assertEquals("Bye. Hope to see you again soon!", temp.print(new TaskList()));
+        Parser temp = new Parser("bye");
+        assertEquals("Bye. Hope to see you again soon!", temp.print(new TaskList()));
     }
 }

@@ -52,10 +52,15 @@ public class TaskList {
         int correctIndex = index - 1;
         assertIndexInRange(correctIndex);
         ListItem tempItem = this.listItems.get(correctIndex).markAsDone();
-        assert tempItem.getDone(); // check the updated item's done status is true
+        assert tempItem.isDone(); // check the updated item's done status is true
         this.listItems.set(correctIndex, tempItem);
     }
 
+    /**
+     * Update the task with a new tag by add the string tag to the listItem's tagList
+     * @param index the index of the task the user wish to update
+     * @param tag the tag name that the user wish to assign the task to
+     */
     public void updateItemTag(int index, String tag) {
         int correctIndex = index - 1;
         this.listItems.get(correctIndex).addNewTagMutable(tag);
@@ -77,12 +82,14 @@ public class TaskList {
      *
      * @param keyword the keyword to be searched through the TaskList, in SQL LIKE syntax
      */
-    public TaskList findItem(String keyword) {
-        if(keyword.contains("#")){
+    public TaskList findMatchingItems(String keyword) {
+        if (keyword.contains("#")) {
             System.out.println("#");
-            return new TaskList(listItems.stream().filter(x -> x.containTag(keyword.replace("#", ""))).collect(Collectors.toList()));
-        }else {
-            return new TaskList(listItems.stream().filter(x -> x.getTask().contains(keyword)).collect(Collectors.toList()));
+            return new TaskList(listItems.stream().filter(
+                x -> x.containTag(keyword.replace("#", ""))).collect(Collectors.toList()));
+        } else {
+            return new TaskList(listItems.stream().filter(
+                x -> x.getTask().contains(keyword)).collect(Collectors.toList()));
         }
     }
 
@@ -92,7 +99,7 @@ public class TaskList {
         for (int i = 0; i < this.listItems.size(); i++) {
             ListItem tempItem = this.listItems.get(i);
             initStr = initStr + (tempItem.getClass().getName().charAt(0)
-                    + "|" + tempItem.getDone() + "|" + tempItem.getTask() + tempItem.getDate() + "\n");
+                    + "|" + tempItem.isDone() + "|" + tempItem.getTask() + tempItem.getDate() + "\n");
         }
         return initStr;
     }
@@ -100,7 +107,7 @@ public class TaskList {
     /**
      * a method with an assertion that checks the index is >= 0 so it can be used for indexing with the List
      */
-    public void assertIndexInRange(int index){
+    public void assertIndexInRange(int index) {
         assert index >= 0;
     }
 }

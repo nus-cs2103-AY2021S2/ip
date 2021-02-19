@@ -1,9 +1,10 @@
 package duke;
 
-import duke.task.Deadline;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Deadline;
 
 public class DeadlineTest {
     @Test
@@ -18,6 +19,6 @@ public class DeadlineTest {
 
     @Test
     public void markAsDone_checkDoneStatus() {
-        assertEquals(true, new Deadline("return book", "Sunday").markAsDone().getDone());
+        assertEquals(true, new Deadline("return book", "Sunday").markAsDone().isDone());
     }
 }

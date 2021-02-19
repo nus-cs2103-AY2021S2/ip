@@ -1,11 +1,10 @@
 package duke;
 
-import duke.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import java.time.format.DateTimeFormatter;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Todo;
 
 public class TodoTest {
     @Test
@@ -15,6 +14,6 @@ public class TodoTest {
 
     @Test
     public void markAsDone_checkDoneStatus() {
-        assertEquals(true, new Todo("return book").markAsDone().getDone());
+        assertEquals(true, new Todo("return book").markAsDone().isDone());
     }
 }

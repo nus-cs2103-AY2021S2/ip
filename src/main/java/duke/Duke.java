@@ -5,10 +5,13 @@ import duke.system.view.Gui;
 import duke.task.TaskList;
 import javafx.application.Application;
 
-public class Duke{
+public class Duke {
     private TaskList tasks;
     private Parser in;
 
+    /**
+     * Initiate Duke with default Parser and TaskList for it to function
+     */
     public Duke() {
         in = new Parser();
         tasks = new TaskList();
@@ -16,6 +19,7 @@ public class Duke{
 
     /**
      * Get response for the user input
+     *
      * @return the string to be displayed on the GUI
      */
     public String getResponse(String input, TaskList tasks) {

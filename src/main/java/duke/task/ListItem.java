@@ -2,9 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * the abstract task class as a base for the tasks "deadline", "event" annd "todo"
@@ -17,6 +15,7 @@ public abstract class ListItem {
 
     /**
      * Constructor for ListItem
+     *
      * @param task takes in string and pass to parent's constructor as the task name
      */
     public ListItem(String task) {
@@ -29,7 +28,8 @@ public abstract class ListItem {
 
     /**
      * Overloaded version of Constructor for ListItem
-     * @param task takes in string and pass to parent's constructor as the task name
+     *
+     * @param task   takes in string and pass to parent's constructor as the task name
      * @param isDone takes in the task's status
      */
     public ListItem(String task, boolean isDone) {
@@ -40,6 +40,9 @@ public abstract class ListItem {
         this.tagList = new ArrayList<>();
     }
 
+    /**
+     * Overloaded version of Constructor for ListItem with tag list provided
+     */
     public ListItem(String task, boolean isDone, List<String> inputTagList) {
         this.task = task;
         this.isDone = isDone;
@@ -50,7 +53,7 @@ public abstract class ListItem {
      * @return a boolean of the task's status,
      * useful for subclasses that passed the status to parent (this class)
      */
-    public boolean getDone() {
+    public boolean isDone() {
         return this.isDone;
     }
 
@@ -60,24 +63,26 @@ public abstract class ListItem {
 
     public abstract ListItem markAsDone();
 
-    public void addNewTagMutable(String tagName){
+    public void addNewTagMutable(String tagName) {
         tagList.add(tagName);
     }
 
     /**
      * Check if any tasks in the list is associate with the tag that the user provided
+     *
      * @param inputTag the tag name that user wants to find
      * @return
      */
-    public boolean containTag(String inputTag){
+    public boolean containTag(String inputTag) {
         return tagList.contains(inputTag);
     }
 
     /**
      * Print all the tags associated using stream
+     *
      * @return the string concatenated all the tags
      */
-    public String printTags(){
+    public String printTags() {
         return tagList.stream().map((x) -> " #" + x).collect(Collectors.joining());
     }
 

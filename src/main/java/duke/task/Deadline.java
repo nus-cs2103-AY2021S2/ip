@@ -25,7 +25,7 @@ public class Deadline extends ListItem {
         this.parsedDate = parseDate(inputDate);
         if (this.parsedDate == null) {
             this.isDateParsable = false;
-        }else{
+        } else {
             this.isDateParsable = true;
         }
     }
@@ -43,7 +43,7 @@ public class Deadline extends ListItem {
         this.parsedDate = parseDate(inputDate);
         if (this.parsedDate == null) {
             this.isDateParsable = false;
-        }else{
+        } else {
             this.isDateParsable = true;
         }
     }
@@ -61,7 +61,7 @@ public class Deadline extends ListItem {
 
     @Override
     public String toString() {
-        return "[D]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask()
+        return "[D]" + (super.isDone() == true ? "[X] " : "[ ] ") + super.getTask()
                 + " (by: "
                 + (parsedDate == null
                 ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")"

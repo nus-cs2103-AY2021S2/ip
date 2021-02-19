@@ -14,7 +14,7 @@ public class Event extends ListItem {
     }
 
     /**
-     * overloaded version of constructor for Event
+     * the overloaded constructor for Event
      * @param task takes in string and pass to parent's constructor
      * @param inputDate takes in user's input date
      * @param isDone the status of the task
@@ -35,7 +35,8 @@ public class Event extends ListItem {
 
     @Override
     public String toString() {
-        return "[E]" + (super.getDone() == true ? "[X] " : "[ ] ") + super.getTask() + " (at: " + date + ")" + super.printTags();
+        return "[E]" + (super.isDone() == true ? "[X] " : "[ ] ")
+                + super.getTask() + " (at: " + date + ")" + super.printTags();
     }
 
     public String getDate() {
