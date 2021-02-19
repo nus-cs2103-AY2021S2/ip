@@ -48,7 +48,7 @@ public class Ui {
         } else {
             t = "tasks";
         }
-        output += " Now you have " + numTask + t +"in your TaskList.\n";
+        output += " Now you have " + numTask + " "+  t +" in your TaskList.\n";
         output += HORIZONTAL_LINE;
         return output;
     }

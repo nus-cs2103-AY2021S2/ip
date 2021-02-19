@@ -27,6 +27,10 @@ public class Duke {
         this.deadlineTasks = readDeadlineTasks(database.readFile());
     }
 
+    public static void main(String[] args) {
+
+    }
+
     /**
      * Reads string as input from database and initialize TaskList with tasks
      *
@@ -85,7 +89,7 @@ public class Duke {
 
             case "deadline":
                 rest = str.substring(8);
-                return parser.parseDeadlineCommand(rest,taskList,ui,database);
+                return parser.parseDeadlineCommand(rest,taskList,ui,database, deadlineTasks);
 
             case "reminder":
                 rest = str.substring(8);
@@ -93,7 +97,6 @@ public class Duke {
                     return "Please do not type other chars after reminder";
                 }
                 return parser.parseReminderCommand(deadlineTasks,ui);
-
             case "event":
                 rest = str.substring(5);
                 return parser.parseEventCommand(rest, taskList, ui, database);

@@ -25,24 +25,19 @@ public class Parser {
         try {
             String s1 = input;
             if (s1.equals("")) {
-                throw new DukeException(" Enter a valid todo task");
+                throw new DukeException(" Enter a valid tododwn task");
             } else {
                 char[] chars = s1.toCharArray();
                 String ws = s1.substring(1);
                 String[] parts = ws.split(" ");
-                if(parts.length == 1){
-                    throw new DukeException(" Enter a valid todo task");
-                } else {
-                    try{
-                        String desc = s1.substring(1);
-                        Todo newTodo = new Todo(desc);
-                        taskList.addTask(newTodo);
-                        database.writeTaskToFile(taskList.getList());
-                        //change ui.... to return String
-                        return ui.showSuccessfulAddedMessage(taskList.getSize(), newTodo);
-                    } catch (Exception e){
-                        return " Enter a valid todo task";
-                    }
+                try{
+                    String desc = s1.substring(1);
+                    Todo newTodo = new Todo(desc);
+                    taskList.addTask(newTodo);
+                    database.writeTaskToFile(taskList.getList());
+                    return ui.showSuccessfulAddedMessage(taskList.getSize(), newTodo);
+                } catch (Exception e){
+                    return " Enter a valid todo task";
                 }
             }
         } catch (DukeException e){
@@ -104,7 +99,7 @@ public class Parser {
      * @return String response from Ui
      */
 
-    public static String parseDeadlineCommand(String input, TaskList taskList, Ui ui, Database database){
+    public static String parseDeadlineCommand(String input, TaskList taskList, Ui ui, Database database, ArrayList<Deadline> deadlines){
         try{
             String s1 = input;
             if(s1.equals("")){
@@ -122,8 +117,10 @@ public class Parser {
                             LocalDate deadline = LocalDate.parse(dl);
                             Deadline newDeadline = new Deadline(deadlineDesc, deadline);
                             taskList.addTask(newDeadline);
+                            if(deadline.isAfter(LocalDate.now())){
+                                deadlines.add(newDeadline);
+                            }
                             database.writeTaskToFile(taskList.getList());
-                            //
                             return ui.showSuccessfulAddedMessage(taskList.getSize(), newDeadline);
 
                         } catch (DateTimeParseException e){

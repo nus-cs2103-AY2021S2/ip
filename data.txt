@@ -1,14 +1,11 @@
+[T][✘] Homework
+[E][✘] party (at: Clementi Mall)
+[D][✘] assignment (by: 2021-03-03)
+[D][✘] deadline (by: 2021-04-04)
+[D][✘] deadlineadad (by: 2020-01-01)
+[D][✘] deadlines (by: 2023-12-12)
+[D][✘] task1 (by: 2031-12-12)
+[D][✘] deadlines (by: 2020-12-12)
+[D][✘] deadline123 (by: 2012-12-12)
+[D][✘] valid deadline (by: 2030-12-12)
 [T][✘] hello
-[E][✘] event (at: lanflaf)
-[D][✓] deadline (by: 2021-02-16)
-[D][✘] deadline1 (by: 2022-12-12)
-[D][✘] deadline123 (by: 2022-12-11)
-[D][✘] deadline1232 (by: 2021-04-04)
-[D][✘] deadline213213 (by: 2021-03-03)
-[D][✘] deadline Task_name (by: 2333-12-12)
-[D][✘] Task_NAME (by: 2344-12-12)
-[E][✘] eveafd (at: place)
-[T][✘] hello world
-[D][✘] stuff (by: 2020-02-19)
-[T][✘] clean the floor
-[D][✘] submission (CS1010) (by: 2021-04-04)
