@@ -17,6 +17,10 @@ public class Storage {
 
     public static final int INVALID_INDEX = -1;
     public static final int INDEX_OFFSET = 1;
+    public static final int START_OF_DESCRIPTION = 7;
+    public static final int OFFSET_TO_DATE_TIME = 5;
+    public static final int INDEX_OF_TYPE = 1;
+    public static final int INDEX_OF_CHECK_FOR_DONE = 4;
 
     protected boolean isFileOriginallyPresent;
     protected File localFile;
@@ -24,6 +28,7 @@ public class Storage {
 
     /**
      * Creates a new instance of Storage for a user.
+     *
      * @param path Path of file that is to be saved on the hard disk.
      */
     public Storage(String path) {
@@ -62,6 +67,18 @@ public class Storage {
         fw.close();
     }
 
+    public void helperForTaskCreationFromData(int hashIndex, Character doneIndicator, Task task, List<Task> list,
+                                              String data) {
+        if (hashIndex != INVALID_INDEX) {
+            String tag = data.substring(hashIndex + INDEX_OFFSET);
+            task.setTag(tag);
+        }
+        if (doneIndicator == 'X') {
+            task.setDone();
+        }
+        list.add(task);
+    }
+
     /**
      * Load tasks into a list if the file exists on the hard disk.
      * @return A list consisting of all the tasks if the file exists,
@@ -80,57 +97,36 @@ public class Storage {
             while (contents.hasNext()) {
                 String data = contents.nextLine();
 
-                Character type = data.charAt(1);
-                Character isDone = data.charAt(4);
+                Character type = data.charAt(INDEX_OF_TYPE);
+                Character isDone = data.charAt(INDEX_OF_CHECK_FOR_DONE);
                 int startingIndex = data.indexOf('(');
                 int endingIndex = data.indexOf(')');
                 int findHash = data.indexOf('#');
+                Task task = null;
 
                 switch (type) {
                 case 'T':
-                    String todoDescription = data.substring(7);
-                    String todoTag = "";
+                    String todoDescription = data.substring(START_OF_DESCRIPTION);
                     if (findHash != INVALID_INDEX) {
-                        todoDescription = data.substring(7, findHash - INDEX_OFFSET);
-                        todoTag = data.substring(findHash + INDEX_OFFSET);
+                        todoDescription = data.substring(START_OF_DESCRIPTION, findHash - INDEX_OFFSET);
                     }
-                    ToDo todo = new ToDo(todoDescription);
-                    if (findHash != INVALID_INDEX) {
-                        todo.setTag(todoTag);
-                    }
-                    if (isDone == 'X') {
-                        todo.setDone();
-                    }
-                    tasks.add(todo);
+                    task = new ToDo(todoDescription);
                     break;
                 case 'D':
-                    String deadlineDescription = data.substring(7, startingIndex - INDEX_OFFSET);
-                    String by = data.substring(startingIndex + 5, endingIndex);
-                    Deadline deadline = new Deadline(deadlineDescription, DateTimeHandler.convertDateTime(by));
-                    if (findHash != INVALID_INDEX) {
-                        String deadlineTag = data.substring(findHash + INDEX_OFFSET);
-                        deadline.setTag(deadlineTag);
-                    }
-                    if (isDone == 'X') {
-                        deadline.setDone();
-                    }
-                    tasks.add(deadline);
+                    String deadlineDescription = data.substring(START_OF_DESCRIPTION, startingIndex - INDEX_OFFSET);
+                    String by = data.substring(startingIndex + OFFSET_TO_DATE_TIME, endingIndex);
+                    task = new Deadline(deadlineDescription, DateTimeHandler.convertDateTime(by));
                     break;
                 case 'E':
-                    String eventDescription = data.substring(7, startingIndex - INDEX_OFFSET);
-                    String time = data.substring(startingIndex + 5, endingIndex);
-                    Event event = new Event(eventDescription, DateTimeHandler.convertDateTime(time));
-                    if (findHash != INVALID_INDEX) {
-                        String eventTag = data.substring(findHash + INDEX_OFFSET);
-                        event.setTag(eventTag);
-                    }
-                    if (isDone == 'X') {
-                        event.setDone();
-                    }
-                    tasks.add(event);
+                    String eventDescription = data.substring(START_OF_DESCRIPTION, startingIndex - INDEX_OFFSET);
+                    String time = data.substring(startingIndex + OFFSET_TO_DATE_TIME, endingIndex);
+                    task = new Event(eventDescription, DateTimeHandler.convertDateTime(time));
                     break;
                 default:
                     break;
+                }
+                if (type == 'T' | type == 'D' | type == 'E') {
+                    helperForTaskCreationFromData(findHash, isDone, task, tasks, data);
                 }
             }
         }
