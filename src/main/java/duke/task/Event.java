@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 
 /**
  * Event is the main entity we'll be using to define a event task.

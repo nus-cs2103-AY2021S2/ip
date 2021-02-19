@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 
 /**
  * Deadline is the main entity we'll be using to define a deadline task.
@@ -15,22 +15,22 @@ public class Deadline extends Task {
     /**
      * Date of the deadline
      */
-    protected LocalDate done_by;
+    protected LocalDate doneBy;
 
     /**
      * Class constructor specifying deadline name and due date.
      */
-    public Deadline(String name, LocalDate done_by) {
+    public Deadline(String name, LocalDate doneBy) {
         super(name);
-        this.done_by = done_by;
+        this.doneBy = doneBy;
     }
 
     /**
      * Class constructor specifying deadline name, due date and status.
      */
-    public Deadline(String name, LocalDate done_by, boolean isDone) {
+    public Deadline(String name, LocalDate doneBy, boolean isDone) {
         super(name);
-        this.done_by = done_by;
+        this.doneBy = doneBy;
         this.isDone = isDone;
     }
 
@@ -57,8 +57,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + done_by.getMonth() + " "
-                + done_by.getDayOfMonth() + " " + done_by.getYear() + ")";
+        return "[D]" + super.toString() + " (by: " + doneBy.getMonth() + " "
+                + doneBy.getDayOfMonth() + " " + doneBy.getYear() + ")";
     }
 }
 

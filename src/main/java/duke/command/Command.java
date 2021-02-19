@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,13 +17,9 @@ import duke.task.ToDo;
 
 public class Command {
     /**
-     * The input command by user
-     */
-    private String commandName;
-    /**
      * The default data path of the file storing all tasks in this project
      */
-    final String DATA_PATH = "data/duke.txt";
+    final String dataPath = "data/duke.txt";
     /**
      * The starting index of the name of a todo task
      */
@@ -36,6 +32,10 @@ public class Command {
      * The starting index of the name of a deadline task
      */
     final int deadlineLength = 9;
+    /**
+     * The input command by user
+     */
+    private String commandName;
 
     /**
      * Class constructor.
@@ -73,8 +73,18 @@ public class Command {
             output = "Bye. Hope to see you again soon!\n";
         } else if (commandName.equals("")) {
             output = "Please enter something!\n";
+        } else if (commandName.equals("help")) {
+            output = "Duke User Guide: \n";
+            output += "1. `list` - List all the tasks \n";
+            output += "2. `todo` - Create a ToDO task (e.g. `todo CS2103 ip`) \n";
+            output += "3. `deadline` - Create a Deadline task (e.g. `deadline CS2103 Quiz /by 2021-02-19`) \n";
+            output += "4. `event` - Create an Event task (e.g. `event CS2103 Lecture /at 2021-02-19`) \n";
+            output += "5. `done` - Mark a task as done (e.g. `done 3`) \n";
+            output += "6. `delete` - Delete a task (e.g. `delete 3`) \n";
+            output += "7. `find` - Find a task (e.g. `find CS2103`) \n";
         } else {
-            output = "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+            output = "OOPS!!! I'm sorry, but I don't know what that means :-( \n\n";
+            output += "Enter 'Help' to see all the commands.";
         }
         assert output != "" : "output is null";
         return output;
@@ -89,13 +99,13 @@ public class Command {
     public String executeList(ArrayList<Task> tList) {
         String output = "Here are the tasks in your list:\n";
         int taskCounter = 1;
+        System.out.println(tList.size());
+        if (tList.size() == 0) {
+            return "Here is currently no task in your list :)";
+        }
         for (Task s : tList) {
-            if (s != null) {
-                output += taskCounter + "." + s.toString() + "\n";
-                taskCounter++;
-            } else {
-                break;
-            }
+            output += taskCounter + "." + s.toString() + "\n";
+            taskCounter++;
         }
         return output;
     }
@@ -125,7 +135,7 @@ public class Command {
                 assert currTask instanceof Event;
                 oldTask = "E | 0 | " + currTask.getName();
             }
-            BufferedReader reader = new BufferedReader(new FileReader(DATA_PATH));
+            BufferedReader reader = new BufferedReader(new FileReader(dataPath));
             String oldContent = "";
             String line = reader.readLine();
             while (line != null) {
@@ -141,7 +151,7 @@ public class Command {
                 assert currTask instanceof Event;
                 newContent = oldContent.replace(oldTask, "E | 1 | " + currTask.getName());
             }
-            FileWriter writer = new FileWriter(DATA_PATH);
+            FileWriter writer = new FileWriter(dataPath);
             writer.write(newContent);
             reader.close();
             writer.close();
@@ -170,7 +180,7 @@ public class Command {
             output += "Now you have " + (tList.size() - 1) + " tasks in the list.\n";
             tList.remove(index - 1);
             tasks.setTasks(tList);
-            BufferedReader reader = new BufferedReader(new FileReader(DATA_PATH));
+            BufferedReader reader = new BufferedReader(new FileReader(dataPath));
             String oldContent = "";
             String line = reader.readLine();
             int taskCounter = 0;
@@ -181,7 +191,7 @@ public class Command {
                 taskCounter++;
                 line = reader.readLine();
             }
-            FileWriter writer = new FileWriter(DATA_PATH);
+            FileWriter writer = new FileWriter(dataPath);
             writer.write(oldContent);
             reader.close();
             writer.close();
@@ -236,11 +246,11 @@ public class Command {
             tList.add(newTask);
             output = tList.get(tList.size() - 1).addTask(tList.size());
             BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(DATA_PATH, true));
+                    new FileWriter(dataPath, true));
             writer.write("T | 0 | " + name + "\n");
             writer.close();
             tasks.setTasks(tList);
-        } catch (DukeException | IOException e) {
+        } catch (IOException e) {
             output += e.getMessage();
         }
         return output;
@@ -260,34 +270,34 @@ public class Command {
         if (commandName.length() < deadlineLength) {
             Deadline deadline = new Deadline(commandName, null);
             output = deadline.addTask(0);
-        } else {
-            try {
-                int end1 = commandName.indexOf(" ");
-                int end = commandName.indexOf("/");
-                String subString1 = commandName.substring(end1 + 1, end - 1);
-                String subString2 = commandName.substring(end + 4);
-                int year = Integer.valueOf(subString2.substring(0, 4));
-                int mon = Integer.valueOf(subString2.substring(5, 7));
-                int day = Integer.valueOf(subString2.substring(8));
-                Task newTask = new Deadline(subString1, LocalDate.of(year, mon, day));
-                if (findExact(tList, newTask) != null) {
-                    output = "Sorry:( This Task has already existed. \n";
-                    return output + findExact(tList, newTask).toString();
-                }
-                tList.add(newTask);
-                output = tList.get(tList.size() - 1).addTask(tList.size());
-                BufferedWriter writer = new BufferedWriter(
-                        new FileWriter(DATA_PATH, true));
-                writer.write("D | 0 | " + subString1 + " | " + subString2 + "\n");
-                writer.close();
-                tasks.setTasks(tList);
-            } catch (DukeException e) {
-                output += e.getMessage();
-            } catch (StringIndexOutOfBoundsException | IOException e) {
-                output += "OOPS!!! The due date of a deadline "
-                        + "cannot be empty. (Format: /by + date[YYYY-MM-DD])";
-            }
+            return output;
         }
+        try {
+            int end1 = commandName.indexOf(" ");
+            int end = commandName.indexOf("/");
+            String subString1 = commandName.substring(end1 + 1, end - 1);
+            String subString2 = commandName.substring(end + 4);
+            int year = Integer.valueOf(subString2.substring(0, 4));
+            int mon = Integer.valueOf(subString2.substring(5, 7));
+            int day = Integer.valueOf(subString2.substring(8));
+            Task newTask = new Deadline(subString1, LocalDate.of(year, mon, day));
+            if (findExact(tList, newTask) != null) {
+                output = "Sorry:( This Task has already existed. \n";
+                return output + findExact(tList, newTask).toString();
+            }
+            tList.add(newTask);
+            output = tList.get(tList.size() - 1).addTask(tList.size());
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(dataPath, true));
+            writer.write("D | 0 | " + subString1 + " | " + subString2 + "\n");
+            writer.close();
+            tasks.setTasks(tList);
+        } catch (DukeException e) {
+            output += e.getMessage();
+        } catch (StringIndexOutOfBoundsException | IOException e) {
+            output += "OOPS!!! The due date of a deadline "
+                    + "cannot be empty. (Format: /by + date[YYYY-MM-DD])";
+    }
         return output;
     }
 
@@ -305,33 +315,33 @@ public class Command {
         if (commandName.length() < eventLength) {
             Event event = new Event(commandName, null);
             output = event.addTask(0);
-        } else {
-            try {
-                int end1 = commandName.indexOf(" ");
-                int end = commandName.indexOf("/");
-                String subString1 = commandName.substring(end1 + 1, end - 1);
-                String subString2 = commandName.substring(end + 4);
-                int year = Integer.valueOf(subString2.substring(0, 4));
-                int mon = Integer.valueOf(subString2.substring(5, 7));
-                int day = Integer.valueOf(subString2.substring(8));
-                Task newTask = new Event(subString1, LocalDate.of(year, mon, day));
-                if (findExact(tList, newTask) != null) {
-                    output = "Sorry:( This Task has already existed. \n";
-                    return output + findExact(tList, newTask).toString();
-                }
-                tList.add(newTask);
-                output = tList.get(tList.size() - 1).addTask(tList.size());
-                BufferedWriter writer = new BufferedWriter(
-                        new FileWriter(DATA_PATH, true));
-                writer.write("E | 0 | " + subString1 + " | " + subString2 + "\n");
-                writer.close();
-                tasks.setTasks(tList);
-            } catch (DukeException e) {
-                output += e.getMessage();
-            } catch (StringIndexOutOfBoundsException | IOException e) {
-                output += "OOPS!!! The start and end date of "
-                        + "an event cannot be empty.(Format: /at + duration[YYYY-MM-DD])";
+            return output;
+        }
+        try {
+            int end1 = commandName.indexOf(" ");
+            int end = commandName.indexOf("/");
+            String subString1 = commandName.substring(end1 + 1, end - 1);
+            String subString2 = commandName.substring(end + 4);
+            int year = Integer.valueOf(subString2.substring(0, 4));
+            int mon = Integer.valueOf(subString2.substring(5, 7));
+            int day = Integer.valueOf(subString2.substring(8));
+            Task newTask = new Event(subString1, LocalDate.of(year, mon, day));
+            if (findExact(tList, newTask) != null) {
+                output = "Sorry:( This Task has already existed. \n";
+                return output + findExact(tList, newTask).toString();
             }
+            tList.add(newTask);
+            output = tList.get(tList.size() - 1).addTask(tList.size());
+            BufferedWriter writer = new BufferedWriter(
+                    new FileWriter(dataPath, true));
+            writer.write("E | 0 | " + subString1 + " | " + subString2 + "\n");
+            writer.close();
+            tasks.setTasks(tList);
+        } catch (DukeException e) {
+            output += e.getMessage();
+        } catch (StringIndexOutOfBoundsException | IOException e) {
+            output += "OOPS!!! The start and end date of "
+                    + "an event cannot be empty.(Format: /at + duration[YYYY-MM-DD])";
         }
         return output;
     }
@@ -347,7 +357,7 @@ public class Command {
     public String executeFind(TaskList tasks) throws IOException {
         String output;
         String match = commandName.split(" ")[1];
-        BufferedReader reader = new BufferedReader(new FileReader(DATA_PATH));
+        BufferedReader reader = new BufferedReader(new FileReader(dataPath));
         String line = reader.readLine();
         int allTaskCounter = 0;
         int matchTaskCounter = 1;
@@ -361,17 +371,17 @@ public class Command {
         }
         if (matchTaskCounter == 1) {
             output = "Here is no matching task in your list.\n";
-        } else {
-            matchTaskCounter = 1;
-            output = "Here are the matching tasks in your list:\n";
-            while (line != null) {
-                if (line.indexOf(match) != -1) {
-                    output += matchTaskCounter + "." + tasks.getTasks().get(allTaskCounter).toString() + "\n";
-                    matchTaskCounter++;
-                }
-                line = reader.readLine();
-                allTaskCounter++;
+            return output;
+        }
+        matchTaskCounter = 1;
+        output = "Here are the matching tasks in your list:\n";
+        while (line != null) {
+            if (line.indexOf(match) != -1) {
+                output += matchTaskCounter + "." + tasks.getTasks().get(allTaskCounter).toString() + "\n";
+                matchTaskCounter++;
             }
+            line = reader.readLine();
+            allTaskCounter++;
         }
         return output;
     }

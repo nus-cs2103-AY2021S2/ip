@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 
 /**
  * ToDo is the main entity we'll be using to define a todo task.

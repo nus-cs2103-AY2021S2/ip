@@ -42,7 +42,9 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         dialog.setPadding(new Insets(0, 20, 0, 20));
-        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(50, 150,  100, 0.5), new CornerRadii(5.0), new Insets(0))));
+        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(50, 150, 100, 0.5),
+                        new CornerRadii(5.0),
+                        new Insets(0))));
         dialog.setFont(new Font("Arial", 15));
         displayPicture.setImage(img);
 
@@ -60,7 +62,8 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         dialog.setPadding(new Insets(0, 20, 0, 20));
-        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(200, 90,  50, 0.5), new CornerRadii(5.0), new Insets(0))));
+        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(200, 90, 50, 0.5),
+                new CornerRadii(5.0), new Insets(0))));
         displayPicture.setImage(img);
     }
 

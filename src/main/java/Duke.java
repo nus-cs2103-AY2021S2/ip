@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 import duke.command.Command;
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -43,12 +43,12 @@ public class Duke extends Application {
      *
      * @param filePath the filePath of the data file.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException | DukeException e) {
+        } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }

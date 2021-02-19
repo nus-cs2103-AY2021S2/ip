@@ -1,5 +1,5 @@
 package duke.task;
-import duke.dukeException.DukeException;
+import duke.dukeexception.DukeException;
 
 public class Task {
     /** Status of the task */
@@ -43,7 +43,7 @@ public class Task {
      * @throws DukeException  If an input or output
      *                      exception occurred
      */
-    public String addTask(int count) throws DukeException, DukeException {
+    public String addTask(int count) throws DukeException, DukeException, DukeException {
         String output = "";
         if (this.name.equals("todo")) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
