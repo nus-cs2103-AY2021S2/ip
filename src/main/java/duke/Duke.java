@@ -2,7 +2,6 @@ package duke;
 
 import javafx.fxml.FXML;
 
-
 /**
  * Contains the main method to be run.
  */
@@ -33,6 +32,7 @@ public class Duke {
     /**
      * Reads user input and provides the logic for handling each user input.
      *
+     * @param duke the initialised Duke object.
      * @param userInput refers to user input from text field.
      */
     @FXML
