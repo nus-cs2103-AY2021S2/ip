@@ -39,6 +39,11 @@ public class CommandResult {
         return feedbackToUser;
     }
 
+    /**
+     * Check whether the instance is resulted from user's error in commands.
+     *
+     * @return True if the instance is resulted from user's error in commands.
+     */
     public boolean isUserCommandError() {
         return isUserCommandError;
     }

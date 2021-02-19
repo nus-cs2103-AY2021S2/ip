@@ -41,12 +41,17 @@ public class Task implements Comparable<Task> {
         this.isDone = isDone;
     }
 
+    /**
+     * Gets the name for the task.
+     *
+     * @return The name description of the task in a string.
+     */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets the date for the class.
+     * Gets the date for the task.
      *
      * @return NULL as this is a dummy method.
      */

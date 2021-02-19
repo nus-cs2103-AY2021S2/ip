@@ -18,6 +18,11 @@ public class Main extends Application {
     private static final String GUI_RESOURCE_PATH = "/view/MainWindow.fxml";
     private Lihua lihua = new Lihua();
 
+    /**
+     * Starts the application with a javafx.stage.Stage
+     *
+     * @param stage The UI stage on which the application launches.
+     */
     @Override
     public void start(Stage stage) {
         try {
