@@ -209,9 +209,9 @@ public class FindCommand extends Command {
     }
     
     private static boolean isMatchingDates(Task task, String dateStr) {
-        String[] dates = dateStr.split(" ");
+        String[] dates = dateStr.split(",");
         for (String date : dates) {
-            if (!task.toString().contains(date)) {
+            if (!task.toString().contains(date.strip())) {
                 return false;
             }
         }
