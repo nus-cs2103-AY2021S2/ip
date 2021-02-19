@@ -1,5 +1,6 @@
 /**
- * Represents a task that is created from the user's command line input
+ * Represents a task that is created from the user's command line input.
+ *
  * @author Damith C. Rajapakse, Jeffry Lum
  */
 public class Task {
@@ -7,8 +8,9 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Initializes a task object
-     * @param description the task description
+     * Initializes a task object.
+     *
+     * @param description the task description.
      */
     public Task(String description) {
         this.description = description;
@@ -16,8 +18,9 @@ public class Task {
     }
 
     /**
-     * Indicates if a task is completed or still in progress
-     * @return the task status
+     * Indicates if a task is completed or still in progress.
+     *
+     * @return the task status.
      */
     public String getStatus() {
         return (isDone) ? "COMPLETED!" : "INPROGRESS";

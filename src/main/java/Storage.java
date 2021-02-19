@@ -6,15 +6,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Loads and saves tasks from and into the specified file
+ * Loads and saves tasks from and into the specified file.
  */
 public class Storage {
     protected static boolean hasLoadingError;
     protected static ArrayList<String> loadedTasks = new ArrayList<>();
     protected String filePath;
     /**
-     * Initializes a Storage object
-     * @param filePath the file path in which tasks are loaded from or saved into
+     * Initializes a Storage object.
+     *
+     * @param filePath the file path in which tasks are loaded from or saved into.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -29,9 +30,10 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the file
-     * @return the lists of tasks loaded from the file
-     * @throws FileNotFoundException if the file at the specified filepath does not exist
+     * Loads tasks from the file.
+     *
+     * @return the lists of tasks loaded from the file.
+     * @throws FileNotFoundException if the file at the specified filepath does not exist.
      */
     public ArrayList<String> load() throws FileNotFoundException {
         File f = new File(filePath);
@@ -45,8 +47,9 @@ public class Storage {
     }
 
     /**
-     * Stores tasks into the file
-     * @param filePath the file path in which tasks are saved into
+     * Stores tasks into the file.
+     *
+     * @param filePath the file path in which tasks are saved into.
      */
     public static void store(String filePath) {
         try {
