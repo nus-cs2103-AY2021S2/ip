@@ -71,3 +71,6 @@ Exits the app. Duke will save your tasks so you do not need to re-enter them whe
 ```
 bye
 ```
+
+## Acknowledgements
+- JSON formatting library from [Jackson](https://github.com/FasterXML/jackson)
