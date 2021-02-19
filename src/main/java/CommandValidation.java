@@ -25,12 +25,13 @@ public class CommandValidation {
         if (index > VALID_INDEX_BOUND) {
             first = command.substring(0, index);
         }
-        if (!commands.contains(first.toLowerCase())) {
-            throw new DukeException(":( OOPS! I'm sorry, but I don't know what that means!!!");
+        if (!commands.contains(first)) {
+            throw new DukeException(":( OOPS! I'm sorry, but I don't know what that means!!! Tip: commands should "
+                     + "not be in capital letters!");
         } else {
             String[] secondValidation = new String[] {"todo", "deadline", "event", "done", "delete", "find", "tag"};
             List<String> secondListOfCommands = Arrays.asList(secondValidation);
-            boolean isCommandInSecondList = secondListOfCommands.contains(first.toLowerCase());
+            boolean isCommandInSecondList = secondListOfCommands.contains(first);
 
             if (isCommandInSecondList
                     && (index <= VALID_INDEX_BOUND || command.substring(index).isBlank())) {
