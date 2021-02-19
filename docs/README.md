@@ -65,10 +65,13 @@ Example of usage:
 
 Expected outcome:
 
-`Here are your tasks!
-1.[T][][] wash clothes
-2.[D][][] Homework (by: March 3 2021)
-3.[E][][] dinner (at: orchard road)`
+`Here are your tasks!`
+
+`1.[T][][] wash clothes`
+
+`2.[D][][] Homework (by: March 3 2021)`
+
+`3.[E][][] dinner (at: orchard road)`
 
 ### `done` - Marks a task as completed
 
@@ -80,8 +83,9 @@ Example of usage:
 
 Expected outcome:
 
-`Good job, I've marked the task as done!
-[D][X][] Homework (by: March 3 2021)`
+`Good job, I've marked the task as done!`
+
+`[D][X][] Homework (by: March 3 2021)`
 
 ### `delete` - Deletes a task
 
@@ -93,8 +97,9 @@ Example of usage:
 
 Expected outcome:
 
-`Okay I have removed this task!
-[D][X][] Homework (by: March 3 2021)`
+`Okay I have removed this task!`
+
+`[D][X][] Homework (by: March 3 2021)`
 
 ### `find` - Finds and returns a task
 
@@ -106,8 +111,9 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list!
-1.[T][][] wash clothes`
+`Here are the matching tasks in your list!`
+
+`1.[T][][] wash clothes`
 
 ### `addinfo` - Adds additional information regard the specified task
 
@@ -125,8 +131,10 @@ Expected outcome:
 
 Retrieves the additional information about the specified task, if any
 A task with additional info is marked by [i] when 'list' is called. 
-1.[T][][i] wash clothes
-2.[E][][] dinner (at: orchard road)`
+
+`1.[T][][i] wash clothes`
+
+`2.[E][][] dinner (at: orchard road)`
 
 Example of usage: 
 
@@ -134,5 +142,6 @@ Example of usage:
 
 Expected outcome:
 
-`Here is the additonal info regarding this task!
-gym clothes`
+`Here is the additonal info regarding this task!`
+
+`gym clothes`
