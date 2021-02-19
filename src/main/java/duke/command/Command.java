@@ -76,12 +76,13 @@ public class Command {
         } else if (commandName.equals("help")) {
             output = "Duke User Guide: \n";
             output += "1. `list` - List all the tasks \n";
-            output += "2. `todo` - Create a ToDO task (e.g. `todo CS2103 ip`) \n";
-            output += "3. `deadline` - Create a Deadline task (e.g. `deadline CS2103 Quiz /by 2021-02-19`) \n";
-            output += "4. `event` - Create an Event task (e.g. `event CS2103 Lecture /at 2021-02-19`) \n";
-            output += "5. `done` - Mark a task as done (e.g. `done 3`) \n";
-            output += "6. `delete` - Delete a task (e.g. `delete 3`) \n";
-            output += "7. `find` - Find a task (e.g. `find CS2103`) \n";
+            output += "2. `todo` - Create a ToDO task \n (e.g. `todo CS2103 ip`) \n";
+            output += "3. `deadline` - Create a Deadline task \n (e.g. `deadline CS2103 Quiz /by 2021-02-19`) \n";
+            output += "4. `event` - Create an Event task \n (e.g. `event CS2103 Lecture /at 2021-02-19`) \n";
+            output += "5. `done` - Mark a task as done \n (e.g. `done 3`) \n";
+            output += "6. `delete` - Delete a task \n (e.g. `delete 3`) \n";
+            output += "7. `find` - Find a task \n (e.g. `find CS2103`) \n";
+            output += "8. `bye` - Quit the program \n";
         } else {
             output = "OOPS!!! I'm sorry, but I don't know what that means :-( \n\n";
             output += "Enter 'help' to see all the commands.";
@@ -121,6 +122,12 @@ public class Command {
         String output = "";
         try {
             int index = Integer.parseInt(commandName.split(" ")[1]);
+            if (index > tList.size()) {
+                return "Sorry, the index you entered is out of bound. \nTo view all the tasks, enter `list` :)";
+            }
+            if (tList.get(index - 1).getStatus()) {
+                return "This task is already done!";
+            }
             tList.get(index - 1).markAsDone();
             output = "Nice! I've marked this task as done:\n";
             output += tList.get(index - 1).toString() + "\n";
@@ -175,6 +182,9 @@ public class Command {
         String output = "";
         try {
             int index = Integer.parseInt(commandName.split(" ")[1]);
+            if (index > tList.size()) {
+                return "Sorry, the index you entered is out of bound. \nTo view all the tasks, enter `list` :)";
+            }
             output = "Noted. I've removed this task:\n";
             output += tList.get(index - 1).toString() + "\n";
             output += "Now you have " + (tList.size() - 1) + " tasks in the list.\n";
