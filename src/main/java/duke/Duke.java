@@ -67,6 +67,12 @@ public class Duke {
         return tasks;
     }
 
+    /**
+     * Parses the users input and returns output for given input
+     * @param wholeInput String representation of User input
+     * @return String output for for the given command
+     */
+
     public String parseCommands(String wholeInput){
         String str = wholeInput;
         String[] parts = str.split(" ");
@@ -121,6 +127,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Reads list of string representation of tasks and returns only deadline tasks in a deadline List
+     * @param strings
+     * @return list of deadline tasks that is sorted in order of date
+     */
     private static ArrayList<Deadline> readDeadlineTasks(ArrayList<String> strings){
         ArrayList<Deadline> arrayListOfDeadlines = new ArrayList<>();
         for(String str: strings){

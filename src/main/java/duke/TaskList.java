@@ -50,6 +50,10 @@ public class TaskList {
         tasks.remove(index + 1);
     }
 
+    /**
+     * gets the List of the instance
+     * @return tasks
+     */
     public ArrayList<Task> getList(){
         return this.tasks;
     }

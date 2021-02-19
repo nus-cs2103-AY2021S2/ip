@@ -42,14 +42,22 @@ public class Ui {
         String output = "";
         output += (HORIZONTAL_LINE + "\n" + " Got it! I've added this new Task!\n" );
         output += "  " + task.toString() +"\n";
-        output += " Now you have " + numTask + " tasks in your TaskList.\n";
+        String t;
+        if(numTask == 1){
+            t = "task";
+        } else {
+            t = "tasks";
+        }
+        output += " Now you have " + numTask + t +"in your TaskList.\n";
         output += HORIZONTAL_LINE;
         return output;
     }
 
 
     /**
-     * Prints TaskList as a string
+     * formars List as a string as output for the user
+     * @param taskList
+     * @return string output
      */
 
     public static String showListContent(TaskList taskList){
@@ -67,6 +75,12 @@ public class Ui {
             return output;
         }
     }
+
+    /**
+     * formats the deadline tasks as a string as output for the user
+     * @param deadlineTasks
+     * @return string output
+     */
 
     public static String showReminderContent(ArrayList<Deadline> deadlineTasks){
         String output = "";
@@ -88,9 +102,10 @@ public class Ui {
     }
 
     /**
-     * Prints message when a user successful marks a task as done.
+     * formats the done task as a string as output for the user
+     * @param task
+     * @return String output
      */
-
     public static String markTaskAsDone(Task task){
         String output = "";
         output += HORIZONTAL_LINE + "\n";
@@ -101,7 +116,9 @@ public class Ui {
     }
 
     /**
-     * Prints message when a user successful deletes a task.
+     * formats deleted tasks as a string to be output to the user
+     * @param task
+     * @return String output
      */
     public static String showTaskAsDeleted(Task task){
         String output = "";
@@ -112,8 +129,10 @@ public class Ui {
         return output;
     }
 
+
     /**
-     * Prints message when a user exits programme.
+     * formats bye message as string as output for user
+     * @return String output
      */
 
     public static String showByeMessage(){
@@ -126,8 +145,9 @@ public class Ui {
 
 
     /**
-     *
+     * formats list of tasks that has common keywords as a string as output for user
      * @param matchingTaks
+     * @return string output
      */
     public static String showKeyWordMessage(ArrayList<String> matchingTaks){
         String output = "";
@@ -141,8 +161,8 @@ public class Ui {
     }
 
     /**
-     * Prints default message when a user inputs invalid arguments.
-     * Prints list of valid arguments
+     * formats default message as a string as output for user
+     * @return default message, list of all valid commands, as string
      */
 
     public static String showDefaultStatement(){

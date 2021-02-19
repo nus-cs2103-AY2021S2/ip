@@ -18,12 +18,23 @@ import java.util.Collections;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
+
+//@@ jellymias-reused
+// Reused from http://https://github.com/jellymias/ip/blob/master/src/main/java/duke/DialogBox.java
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
+
+    /**
+     * Constructor for dialoguebox that has an image(jpeg/gif) as input
+     * @param text
+     * @param img
+     */
+    //@@ banchiang-reused
+    //Reused from https://github.com/banchiang/ip/blob/master/src/main/java/duke/DialogBox.java
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -36,6 +47,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
     }
+    //@@ banchiang
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -47,13 +59,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets the User dialogueBox
+     * @param text
+     * @param img
+     * @return new DialogueBox for Users side
+     */
     public static DialogBox getUserDialogue(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets Duke's dialogue box
+     * @param text
+     * @param img
+     * @return new Dialogue box for Duke
+     */
     public static DialogBox getDukeDialogue(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
 }
+//@@ jellymias

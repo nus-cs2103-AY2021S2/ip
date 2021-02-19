@@ -15,6 +15,9 @@ import java.util.TimerTask;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
+
+//@@ jellymias-reused
+// reused from http://https://github.com/jellymias/ip/blob/master/src/main/java/duke/MainWindow.java
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -30,6 +33,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/tenor.gif"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/MAGA.gif"));
 
+    /**
+     * Initialises the Main window with the dialogue box
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -37,6 +43,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialogue(Ui.initGreeting(), dukeImage));
     }
 
+    /**
+     * Sets d as Duke for the main window
+     * @param d
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -68,3 +78,4 @@ public class MainWindow extends AnchorPane {
         }
     }
 }
+//@@jellyias

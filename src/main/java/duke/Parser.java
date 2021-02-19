@@ -18,6 +18,7 @@ public class Parser {
      * @param ui the current ui
      * @param database the current database
      * @throws DukeException if the user input a command with invalid format.
+     * @return String response from Ui
      */
 
     public static String parseTodoCommand(String input, TaskList taskList, Ui ui, Database database){
@@ -58,6 +59,7 @@ public class Parser {
      * @param ui the current ui
      * @param database the current database
      * @throws DukeException if the user input a command with invalid format.
+     * @return String response from Ui
      */
 
     public static String parseEventCommand(String input, TaskList taskList, Ui ui, Database database){
@@ -99,6 +101,7 @@ public class Parser {
      * @param ui the current ui
      * @param database the current database
      * @throws DukeException if the user input a command with invalid format.
+     * @return String response from Ui
      */
 
     public static String parseDeadlineCommand(String input, TaskList taskList, Ui ui, Database database){
@@ -145,6 +148,7 @@ public class Parser {
      * @param ui the current ui
      * @param database the current database
      * @throws DukeException if the user input a command with invalid format.
+     * @return String response from Ui
      */
 
     public static String parseDoneCommand(String input, TaskList taskList, Ui ui, Database database){
@@ -183,6 +187,7 @@ public class Parser {
      * @param taskList the current taskList
      * @param ui the current ui
      * @throws DukeException if the user input a command with invalid format.
+     * @return String response from Ui
      */
     public static String parseFindCommand(String input, TaskList taskList, Ui ui){
         try{
@@ -228,6 +233,7 @@ public class Parser {
      * @param ui the current ui
      * @param database the current database
      * @throws DukeException if the user input a command with invalid format.
+     * @return String response from Ui
      */
     public static String parseDeleteCommand(String input, TaskList taskList, Ui ui, Database database){
         try{
@@ -264,12 +270,19 @@ public class Parser {
      *
      * @param taskList the current taskList
      * @param ui the current ui
+     * @return String response from Ui
      */
 
     public static String parseListCommand(TaskList taskList, Ui ui){
         return ui.showListContent(taskList);
     }
 
+    /**
+     * Parses the deadline tasks to Ui to get String representation of the response.
+     * @param listOfUpComingsTasks
+     * @param ui
+     * @return String response from Ui.
+     */
     public static String parseReminderCommand(ArrayList<Deadline> listOfUpComingsTasks, Ui ui){
         return ui.showReminderContent(listOfUpComingsTasks);
     }
@@ -279,6 +292,7 @@ public class Parser {
      * Calls ui to print bye message
      * Empties buffer is System
      * @param ui the current ui
+     * @return String response from Ui
      */
     public static String parseByeCommand(Ui ui){
         return ui.showByeMessage();
@@ -288,6 +302,7 @@ public class Parser {
      *
      * Calls ui to print default message
      * @param ui the current ui
+     * @return String response from Ui
      */
     public static String parseDefault(Ui ui){
 

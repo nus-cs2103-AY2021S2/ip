@@ -14,11 +14,18 @@ import java.io.IOException;
  */
 public class Main extends Application  {
 
+    /**
+     * Constructor of new Duke instance
+     */
     private Duke duke = new Duke();
 
     public Main() throws FileNotFoundException {
     }
 
+    /**
+     * Overridden method inherited from application
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

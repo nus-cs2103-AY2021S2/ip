@@ -22,6 +22,10 @@ public class Deadline extends Task implements Comparable<Deadline>{
         this.deadline = deadline;
     }
 
+    /**
+     * Gets the LocalDate of deadline tasks
+     * @return localdate.
+     */
     public LocalDate getLocalDate(){
         return this.deadline;
     }
@@ -34,6 +38,12 @@ public class Deadline extends Task implements Comparable<Deadline>{
         return "[D]" + super.toString() + " (by: " + this.deadline.toString() + ")";
     }
 
+
+    /**
+     *
+     * @param o other deadline to compare based on how many days to the deadline
+     * @return int to be used and interpreted by comparator
+     */
     @Override
     public int compareTo(Deadline o) {
         if(this.deadline.isBefore(o.deadline)){
