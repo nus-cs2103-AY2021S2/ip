@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private HashMap<LocalDateTime, Task> dateTimeTaskPairs;
@@ -30,8 +33,9 @@ public class TaskList {
 
     /**
      * Constructs a new TaskList from the given save file.
-     * @param save the save file containing the info needed to create the TaskList.
-     * @throws VergilException if the save file is not found.
+     *
+     * @param   save            the save file containing the info needed to create the TaskList.
+     * @throws  VergilException if the save file is not found.
      */
     public TaskList(File save) throws VergilException {
         this();
@@ -47,8 +51,9 @@ public class TaskList {
 
     /**
      * Fills the TaskList with tasks from the given file.
-     * @param f the file object containing the tasks to load.
-     * @throws VergilFileException if the file is not found.
+     *
+     * @param   f                   the file object containing the tasks to load.
+     * @throws  VergilFileException if the file is not found.
      */
     public void loadFromFile(File f) throws VergilException {
         try {
@@ -86,7 +91,8 @@ public class TaskList {
 
     /**
      * Adds a task to the list.
-     * @param t the task to be added.
+     *
+     * @param   t   the task to be added.
      */
     public void add(Task t) throws VergilAnomalyException {
         if (t instanceof TimedTask) {
@@ -97,6 +103,13 @@ public class TaskList {
         tasks.add(t);
     }
 
+    /**
+     * Checks if a timed task clashes with another timed task already in the list.
+     *
+     * @param   tt                      the task to be checked for clashes.
+     * @throws  VergilAnomalyException  if there is a clash in timing with another timed task
+     *                                  in the list.
+     */
     public void checkAnomaly(TimedTask tt) throws VergilAnomalyException {
         if (dateTimeTaskPairs.containsKey(tt.getTime())) {
             throw new VergilAnomalyException(
@@ -106,6 +119,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a given task (represented by its list number) as a string by using its toString() method.
+     *
+     * @param   listNum         The task's serial number in the list.
+     * @return                  A string representation of the task at the list number position.
+     * @throws  VergilException if there is no task with the given list number.
+     */
     public String getAsString(int listNum) throws VergilException {
         try {
             return tasks.get(listNum - 1)
@@ -117,9 +137,10 @@ public class TaskList {
 
     /**
      * Marks the task with the given list number as done.
-     * @param listNum the number of the task on the list.
-     * @throws VergilException if the given number of the task is not found
-     * within the task list.
+     *
+     * @param   listNum         the number of the task on the list.
+     * @throws  VergilException if the given number of the task is not found
+     *                          within the task list.
      */
     public void complete(int listNum) throws VergilException {
         try {
@@ -131,9 +152,10 @@ public class TaskList {
 
     /**
      * Deletes the task with the given list number from the list.
-     * @param listNum the number of the task on the list.
-     * @throws VergilException if the given number of the task is not found
-     * within the task list.
+     *
+     * @param   listNum         the number of the task on the list.
+     * @throws  VergilException if the given number of the task is not found
+     *                          within the task list.
      */
     public void delete(int listNum) throws VergilException {
         try {
@@ -146,10 +168,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the list's length (i.e., the number of existing tasks).
+     *
+     * @return  The list's length.
+     */
     public int getLength() {
         return tasks.size();
     }
 
+    /**
+     * Searches for the given keyword in the descriptions of the list's tasks and returns the results.
+     *
+     * @param   keyword                 The keyword(s) to be used to search for tasks.
+     * @return                          A new list containing tasks that match the search query.
+     * @throws  VergilAnomalyException  if there is a clash between any two timed tasks.
+     */
     public TaskList find(String keyword) throws VergilAnomalyException {
         TaskList subList = new TaskList();
 
@@ -164,7 +198,8 @@ public class TaskList {
 
     /**
      * Returns the tasks in the list, but as save file entries.
-     * @return a save-file-entries representation of the task list.
+     *
+     * @return  a save-file-entries representation of the task list.
      */
     public String toSaveString() {
         StringBuilder str = new StringBuilder();
@@ -176,6 +211,12 @@ public class TaskList {
         return str.toString();
     }
 
+    /**
+     * Returns a string representation of the list as follows: for each task in the list...
+     * [entry-number]. [task-info]
+     *
+     * @return  a string representation of the list.
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

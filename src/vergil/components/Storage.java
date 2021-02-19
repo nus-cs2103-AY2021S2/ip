@@ -9,6 +9,9 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
+/**
+ * Represents a stoarge handler for Vergil.
+ */
 public class Storage {
     private String filePath;
 
@@ -18,7 +21,8 @@ public class Storage {
 
     /**
      * Returns a File object with the path filePath.
-     * @return a File object representation of filePath.
+     *
+     * @return  a File object representation of filePath.
      */
     public File load() {
         return new File(filePath);
@@ -26,9 +30,10 @@ public class Storage {
 
     /**
      * Writes the content of the given task list to filePath.
-     * @param tl the task list whose contents are to be written to filePath.
-     * @throws VergilException if the FileWriter object fails to write to
-     * the specified path.
+     *
+     * @param   tl              the task list whose contents are to be written to filePath.
+     * @throws  VergilException if the FileWriter object fails to write to
+     *                          the specified path.
      */
     public void save(TaskList tl) throws VergilException {
         try {

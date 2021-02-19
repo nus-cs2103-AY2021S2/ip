@@ -24,9 +24,10 @@ public class Parser {
     /**
      * Parses a given command as String and returns a Command object representation
      * of that command.
-     * @param command the String command to be parsed.
-     * @return a Command object representing the given command.
-     * @throws VergilException if the command is unknown or invalid.
+     *
+     * @param   command         the String command to be parsed.
+     * @return                  a Command object representing the given command.
+     * @throws  VergilException if the command is unknown or invalid.
      */
     public Command parse(String command) throws VergilException {
         String index;

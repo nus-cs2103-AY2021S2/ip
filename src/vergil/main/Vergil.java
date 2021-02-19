@@ -21,6 +21,9 @@ import vergil.components.DialogBox;
 
 import vergil.types.exceptions.VergilException;
 
+/**
+ * Represents the Vergil chatbot application.
+ */
 public class Vergil extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -52,6 +55,11 @@ public class Vergil extends Application {
         }
     }
 
+    /**
+     * Initializes the GUI window and displays it.
+     *
+     * @param stage (fill using overridden def.)
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -114,16 +122,36 @@ public class Vergil extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Creates a new dialog box representing the user's input.
+     *
+     * @param   l   the label containing the user's input.
+     * @param   iv  the ImageView object containing the user's image.
+     * @return      a dialog box containing the user's input and image.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Creates a new dialog box representing Vergil's response.
+     *
+     * @param   l   the label containing Vergil's response.
+     * @param   iv  the ImageView object containing Vergil's image.
+     * @return      a dialog box containing Vergil's response and image.
+     */
     public static DialogBox getVergilDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
         return db;
     }
 
+    /**
+     * Retrieves Vergil's response to the the execution of a given command.
+     *
+     * @param   command the user's command to be executed.
+     * @return          Vergil's response after the command has been executed.
+     */
     public String getResponse(String command) {
         try {
             return parser.parse(command).execute(ui, taskList, storage);
@@ -132,6 +160,10 @@ public class Vergil extends Application {
         }
     }
 
+    /**
+     * Handles the user's input by displaying it, executing it,
+     * displaying Vergil's response, and clearing the input's containing text box.
+     */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label vergilText = new Label(getResponse(userInput.getText()));
@@ -148,6 +180,11 @@ public class Vergil extends Application {
         }
     }
 
+    /**
+     * Main method to run Vergil.
+     *
+     * @param   args    arguments given to Vergil (not used).
+     */
     public static void main(String[] args) {
         // Do nothing.
     }

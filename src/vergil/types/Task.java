@@ -1,9 +1,17 @@
 package vergil.types;
 
+/**
+ * Represents a general task with a description and a completion status.
+ */
 public abstract class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Creates a new task that is unfinished.
+     *
+     * @param   description a description of the task.
+     */
     public Task(String description) {
         assert description != null : "Description cannot be null.";
         this.description = description;
@@ -11,8 +19,10 @@ public abstract class Task {
     }
 
     /**
-     * Construct a new task object.
-     * @param description a description of the task.
+     * Creates a new task object with its completion status specified.
+     *
+     * @param   description a description of the task.
+     * @param   isDone      the completion status of the task.
      */
     public Task(String description, boolean isDone) {
         assert description != null : "Description cannot be null.";
@@ -20,18 +30,10 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    /**
-     * Returns the task's description.
-     * @return the task's description.
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * Returns the task's current state.
-     * @return true if the task is done; false otherwise.
-     */
     public boolean isDone() {
         return isDone;
     }
@@ -43,10 +45,30 @@ public abstract class Task {
         isDone = true;
     }
 
+    /**
+     * Returns the task as part of a save-entry string.
+     * <p>
+     *     The save-file entry's format is as follows:
+     *     TASK_DESCRIPTION::TASK_IS_DONE
+     * </p>
+     *
+     * @return  a string representing part of a save-entry string.
+     */
     public String getSaveString() {
         return String.format("%s::%b", description, isDone);
     }
 
+    /**
+     * Returns the task as part of a full string representation.
+     * <p>
+     *     The string representation's format is as follows:
+     *     [ ] TASK_DESCRIPTION, or
+     *     [X] TASK_DESCRIPTION
+     *     The 'X' represents the task's completion status: 'X' if completed; ' ' otherwise.
+     * </p>
+     *
+     * @return  a string representing part of a full string representation for the task.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", description);
