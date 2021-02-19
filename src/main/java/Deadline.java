@@ -8,6 +8,10 @@ public class Deadline extends Command {
         this.dueDate = dueDate;
     }
 
+    public String getTime() {
+        return this.dueDate;
+    }
+
     @Override
     public String toString() {
         return "[D] " + super.toString() + " | by: " + dueDate;
