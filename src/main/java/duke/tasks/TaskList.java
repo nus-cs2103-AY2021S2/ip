@@ -92,9 +92,9 @@ public class TaskList {
     /**
      * findTask: finds tasks that matches keyword input by user
      * @param keyword keyword to search for matching tasks
-     * @return a TaskList of tasks that matches the keyword
+     * @return a array list of tasks that matches the keyword
      */
-    public static TaskList findTask(String keyword) {
+    public static ArrayList<Task> findTask(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
 
         for (Task task : tasks) {
@@ -103,6 +103,6 @@ public class TaskList {
             }
         }
 
-        return new TaskList(filteredTasks);
+        return filteredTasks;
     }
 }

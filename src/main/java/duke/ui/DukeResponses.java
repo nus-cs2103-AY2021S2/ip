@@ -84,10 +84,9 @@ public class DukeResponses {
     /**
      * showCompleteTask: show to user that task is successfully marked as completed in the TaskList
      * @param task task to be marked as completed in the TaskList
-     * @param tasks list of Task
      * @return complete task success message
      */
-    public String showCompleteTask(Task task, TaskList tasks) {
+    public String showCompleteTask(Task task) {
         assert task != null : "task should not be null";
         return "Nice! I've marked this task as done:\n" + "  " + task;
     }
@@ -98,17 +97,16 @@ public class DukeResponses {
      * @param taskType
      * @return list of tasks
      */
-    public String showTaskList(TaskList tasks, String taskType) {
-        if (tasks.getSize() <= 0) {
+    public String showTaskList(ArrayList<Task> tasks, String taskType) {
+        if (tasks.size() <= 0) {
             return "There are no " + taskType + "tasks at the moment.";
         } else {
             int counter = 1;
-            ArrayList<Task> taskList = tasks.getTaskList();
             String listHeader = "Here are the " + taskType + "tasks in your list:\n";
             StringBuilder outputList = new StringBuilder();
             outputList.append(listHeader);
 
-            for (Task task : taskList) {
+            for (Task task : tasks) {
                 String t = "  " + counter + ". " + task + "\n";
                 outputList.append(t);
                 counter++;

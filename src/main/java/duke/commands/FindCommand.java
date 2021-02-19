@@ -1,8 +1,11 @@
 package duke.commands;
 
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.DukeResponses;
+
+import java.util.ArrayList;
 
 /**
  * class FindCommand
@@ -28,7 +31,7 @@ public class FindCommand extends Command {
      * @return result of find task message
      */
     public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
-        TaskList filteredTasks = tasks.findTask(keyword);
+        ArrayList<Task> filteredTasks = tasks.findTask(keyword);
         return dukeResponses.showTaskList(filteredTasks, "matching ");
     }
 }

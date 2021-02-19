@@ -1,8 +1,11 @@
 package duke.commands;
 
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.DukeResponses;
+
+import java.util.ArrayList;
 
 /**
  * class ListCommand
@@ -18,6 +21,7 @@ public class ListCommand extends Command {
      * @return list of tasks
      */
     public String execute(TaskList tasks, DukeResponses dukeResponses, Storage storage) {
-        return dukeResponses.showTaskList(tasks, "");
+        ArrayList<Task> taskList = tasks.getTaskList();
+        return dukeResponses.showTaskList(taskList, "");
     }
 }
