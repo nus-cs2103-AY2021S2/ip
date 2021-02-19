@@ -22,8 +22,8 @@ Duke is a chat bot app that helps you to organise your tasks in a CLI manner wit
 
 1. Copy the file to the folder you want to use as the home folder for your Duke chatbot.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
-
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
+   ![img.png](img.png)
 1. Type the command into the textbox to interact with the chat bot
 
 **Notes about the command format:**
