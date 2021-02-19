@@ -61,7 +61,7 @@ public class Parser {
             tasks.addTodo(mTodo.group(2));
             output += "Got it!. I have added the following task:\n";
             output += tasks.getAtInd(tasks.getNumItems() - 1) + "\n";
-            output += "Now you have " + tasks.getNumItems() + " tasks in the tasks.";
+            output += "Now you have " + tasks.getNumItems() + " tasks!";
         } else if (mDeadline.find()) {
             if (mDeadline.group(2).equals("")) {
                 throw new DukeException("The description of a Deadline cannot be empty!");
@@ -69,7 +69,7 @@ public class Parser {
             tasks.addDeadline(mDeadline.group(2), mDeadline.group(4));
             output += "Got it!. I have added the following task:" + "\n";
             output += tasks.getAtInd(tasks.getNumItems() - 1) + "\n";
-            output += "Now you have " + tasks.getNumItems() + " tasks in the tasks.";
+            output += "Now you have " + tasks.getNumItems() + " tasks!";
         } else if (mEvent.find()) {
             if (mEvent.group(2).equals("")) {
                 throw new DukeException("The description of an Event cannot be empty!");
@@ -77,13 +77,13 @@ public class Parser {
             tasks.addEvent(mEvent.group(2), mEvent.group(4));
             output += "Got it!. I have added the following task:" + "\n";
             output += tasks.getAtInd(tasks.getNumItems() - 1) + "\n";
-            output += "Now you have " + tasks.getNumItems() + " tasks in the tasks.";
+            output += "Now you have " + tasks.getNumItems() + " tasks!";
         } else if (mDelete.find()) {
             output += "Okay I have removed this task!" + "\n";
             int index = Integer.parseInt(mDelete.group(2)) - 1;
             output += tasks.getAtInd(index) + "\n";
             tasks.deleteTask(index);
-            output += "Now you have " + tasks.getNumItems() + " tasks in the list.";
+            output += "Now you have " + tasks.getNumItems() + " tasks!";
         } else if (mFind.find()) {
             output += "Here are the matching tasks in your list!" + "\n";
             String word = mFind.group(2);
@@ -91,7 +91,7 @@ public class Parser {
         } else if (mInfo.find()) {
             output += "Here is the additional info regarding this task!" + "\n";
             int index = Integer.parseInt(mInfo.group(2)) - 1;
-            output += tasks.getAtInd(index).moreInfo + "\n";
+            output += tasks.getAtInd(index).getAdditionalInfo() + "\n";
         } else if (mAddInfo.find()) {
             output += "I have added the additional info regarding this task!" + "\n";
             int index = Integer.parseInt(mAddInfo.group(2)) - 1;

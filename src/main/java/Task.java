@@ -26,6 +26,15 @@ public class Task {
     }
 
     /**
+     * Returns the additional info of the task.
+     *
+     * @return additional info of task.
+     */
+    public String getAdditionalInfo() {
+        return moreInfo == null ? "No additional info." : moreInfo;
+    }
+
+    /**
      * Sets the task isDone status to be true.
      */
     public void markAsDone() {
