@@ -13,6 +13,9 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    
 5.Press Enter on your keyboard to execute the commands.
 
+Image of Ui:
+https://github.com/Winniehyx/ip/blob/master/docs/Ui.png
+
 ## List of Features 
 These are the following features of Duke:
 ### Add tasks
@@ -40,7 +43,9 @@ There are 3 categories of tasks:
 ## Notes about commands
 When there are extra parameters behind the function 'list' , the program is smart enough to know that the user wants the 'list' function so no error would be thrown and the tasklist would be displayed.
 
-The date format should be written in the format "d/M/yyyy HHmm", else an error would be thrown
+The date format should be written in the format "d/M/yyyy HHmm", else an error would be thrown.
+
+Tag should be the last argument.
    
 # Saving of commands
 Commands would be saved into a file once the 'bye' command is typed into the app. Data will be saved in the directory where you saved the jar file, under /data/duke.txt . A new file would be formed if there are no existing file. If there exists an existing file, the file would be used. 
@@ -108,7 +113,7 @@ Expected outcome:
 The list of task in the order that they are added would be displayed.
 
 ### 'tag'
-Tags a specific task in the tasklist.
+Tags a specific task in the tasklist. Tag should come after at or by.
 
 Example of usage:
 `todo buy shoes /tag purchase`
