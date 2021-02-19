@@ -5,7 +5,6 @@ import java.util.ArrayList;
  */
 public class Ui {
     /** Constants that help in the formatting of the printed messages. */
-    private static final String SPACE = "     ";
     private static final String LINE = "<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n";
 
     /**
@@ -60,17 +59,21 @@ public class Ui {
         case "todo":
             return "todo *description of task*";
         case "deadline":
-            return "deadline *description of task* /by *date and time*";
+            return "deadline *description of task* /by *yyyy-mm-dd hh:mm*";
         case "event":
-            return "event *description of task* /at *date and time*";
+            return "event *description of task* /at *yyyy-mm-dd hh:mm*";
         case "done":
             return "done *index of task according to the list*";
         case "list":
             return "list";
+        case "find":
+            return "find *keywords you want to find";
         case "delete":
             return "delete *index of task according to the list*";
         case "tag":
             return "tag *index number of task according to the list* *description of the tag*";
+        case "tagged":
+            return "tagged *keywords of the tag you want to find in the tasks that have been tagged*";
         case "bye":
             return "bye";
         default:
@@ -133,6 +136,12 @@ public class Ui {
         return output + LINE;
     }
 
+    /**
+     * Outputs all the tasks with the description in their tags, if there are tags available.
+     * @param storage The list of tasks to search from
+     * @param description The keywords in the tags that are being searched for.
+     * @return The list of all tasks with the given description in their tags.
+     */
     public static String outputMessageTagged(ArrayList<Task> storage, String description) {
         String output = LINE;
         int index = 1;

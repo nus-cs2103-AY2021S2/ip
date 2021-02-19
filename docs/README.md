@@ -70,7 +70,7 @@
 1. Example of usage: `delete 5`
 
 
-### **Exiting the app: `by`e**
+### **Exiting the app: `bye`**
 
 #### Leaves the app and saves the existing list.
 1. Format: `bye`

@@ -72,9 +72,13 @@ public abstract class Task {
         return description;
     }
 
-    public boolean getIsTagged() { return isTagged; }
+    public boolean getIsTagged() {
+        return isTagged;
+    }
 
-    public String getTag() { return tag; }
+    public String getTag() {
+        return tag;
+    }
 
     /**
      * Setter that sets the value of isDone to indicate that the task has been completed.
@@ -83,6 +87,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    /**
+     * Adds a tag to the current task.
+     * @param description The tag that is to be added.
+     */
     public void addTag(String description) {
         isTagged = true;
         tag = description;

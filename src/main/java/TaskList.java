@@ -47,15 +47,20 @@ public class TaskList {
 
     static String processTaskOutput(String task, String description, LocalDate date, LocalTime time, String tag) {
         Task toAdd;
-        if (task.equals("todo")) {
+        switch (task) {
+        case "todo":
             toAdd = new Todo(description);
-        } else if (task.equals("deadline")) {
+            break;
+        case "deadline":
             toAdd = new Deadline(description, date, time);
-        } else if (task.equals("event")) {
+            break;
+        case "event":
             toAdd = new Event(description, date, time);
-        } else {
+            break;
+        default:
             return "Error in Task processing.";
         }
+
         if (tag != null) {
             toAdd.addTag(tag);
         }
@@ -77,7 +82,7 @@ public class TaskList {
 
     /**
      * Prints the output message for a list of all the tasks which contain the keyword.
-     * @param spl Contains the keyword and the word that is being searched in the array.
+     * @param description Contains the keywords that are being searched for in the array.
      */
     static String processFindOutput(String description) {
         return Ui.outputMessageFind(storage, description);

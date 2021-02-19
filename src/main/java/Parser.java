@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Parses the inputs given by the user.
@@ -116,11 +117,19 @@ public class Parser {
 
         String description = splitDescriptionAndTimeDateTag[0];
         String tag = null;
+
         if (splitTimeDateAndTag.length == 2) {
             tag = splitTimeDateAndTag[1];
         }
-        LocalDate date = LocalDate.parse(splitDateAndTime[0]);
-        LocalTime time = LocalTime.parse(splitDateAndTime[1]);
+
+        LocalDate date;
+        LocalTime time;
+        try {
+            date = LocalDate.parse(splitDateAndTime[0]);
+            time = LocalTime.parse(splitDateAndTime[1]);
+        } catch (DateTimeParseException e){
+            throw new InvalidTaskFormatException(Ui.invalidTaskFormatExceptionMessage(task));
+        }
 
         return TaskList.processTaskOutput(task, description, date, time, tag);
     }
