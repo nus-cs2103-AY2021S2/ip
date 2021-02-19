@@ -134,7 +134,8 @@ Expected outcome:
 ### `info` - Retrieves additional information regarding the specified task
 
 Retrieves the additional information about the specified task, if any
-A task with additional info is marked by [i] when 'list' is called. 
+
+A task with additional info is marked by [i] when 'list' is called
 
 `1.[T][][i] wash clothes`
 
