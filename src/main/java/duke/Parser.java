@@ -15,6 +15,7 @@ public class Parser {
      * @throws DukeException if user input is invalid or if description of tasks is empty.
      */
     public static Command parseCommand(String userInput) throws DukeException {
+        assert userInput != null;
         String[] commandArr = userInput.split(" ", 2);
         String commandType = commandArr[0].toLowerCase();
 

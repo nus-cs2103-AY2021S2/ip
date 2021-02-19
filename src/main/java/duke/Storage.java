@@ -64,11 +64,12 @@ public class Storage {
      * @throws DukeException if task type is not recognised.
      */
     public Task stringToTask(String input) throws DukeException {
+        assert input != null;
         String[] splitTask = input.split(" \\| ");
         String taskType = splitTask[0];
         String isDone = splitTask[1];
         String description = splitTask[2];
-        Task task = new Task(" ", " ");
+        Task task;
 
         switch(taskType) {
         case "D":
@@ -121,6 +122,7 @@ public class Storage {
      * @throws DukeException if task type is not recognised.
      */
     public String taskToString(Task task) throws DukeException {
+        assert task != null;
         int isDone;
         String converted = " ";
         String taskType = task.getTaskType();
