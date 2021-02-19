@@ -1,4 +1,4 @@
-# User Guide
+# Hayate User Guide
 
 ## Features 
 

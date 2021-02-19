@@ -4,18 +4,13 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class Ui {
-    private static final String INDENTATION = "    ";
-    private static final String BORDER = "--------------------------------"
-            + "----------------";
     private static final String ADD_TASK_ACK = "Got it. I've added this task:";
 
     public String formatString(String... msg) {
         String outputString = "";
-        outputString += BORDER + "\n";
         for (String m : msg) {
-            outputString += INDENTATION + m + "\n";
+            outputString += m + "\n";
         }
-        outputString += BORDER + "\n";
         return outputString;
     }
 
