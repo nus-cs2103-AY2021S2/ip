@@ -17,6 +17,7 @@ public class Deadline extends Task {
                 this.deadline = LocalDate.parse(deadLine, formatter);
                 break;
             } catch (DateTimeParseException ignored) {
+                //continue with loop
             }
         }
         if (this.deadline == null) {

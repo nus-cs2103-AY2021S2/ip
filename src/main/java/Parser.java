@@ -17,7 +17,7 @@ public class Parser {
         if (rawIn.contains("|")) {
             return pipeParse(rawIn);
         }
-        if (!Parser.checkInput(input[0], input.length)){
+        if (!Parser.checkInput(input[0], input.length)) {
             throw new DukeNotFoundException();
         }
         if (rawIn.equals("bye")) {

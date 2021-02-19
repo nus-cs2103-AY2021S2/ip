@@ -1,4 +1,3 @@
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,6 +17,7 @@ public class Event extends Task {
                 this.timing = LocalDate.parse(timing, formatter);
                 break;
             } catch (DateTimeParseException ignored) {
+                //continue
             }
         }
         if (this.timing == null) {

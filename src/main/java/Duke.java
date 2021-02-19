@@ -326,6 +326,10 @@ public class Duke extends Application {
         return readParseGui(parserOutput);
     }
 
+    /**
+     * Main method of Duke.
+     * @param args standard parameters for main
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         System.out.println(duke.dukeRunner());
