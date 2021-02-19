@@ -6,20 +6,20 @@ while having the benefits of a Graphical User Interface (GUI).
 
 ## Features
 
-###1. Adding a new task
+### 1. Adding a new task
 
 Adds a task to Chat's list of tasks. Type of task needs to be specified.
 
-####To add todo task: `todo`
+#### To add todo task: `todo`
 * Command:`todo [name of todo task]`
 * Example: `todo read book`
 
-####To add deadline task: `deadline`
+#### To add deadline task: `deadline`
 * Command: `deadline [name of deadline task] /by [date]`
     * Date should be written as: **dd/MM/YYYY HH:MM**
 * Example: `deadline submit paper /by 20/01/2021 23:59`
 
-####To add event task: `event`
+#### To add event task: `event`
 * Command: `event [name of event task] /at [start date] - [end date]`
     * Start and end date should be written as: **dd/MM/YYYY HH:MM**
 * Example: `event camp /at 20/01/2021 11:00 - 22/01/2021 12:00`
@@ -31,7 +31,7 @@ Expected outcome:
 Error:
 ChatException will be thrown if format of command is incorrect.
 
-###2. Deleting a task: `delete`
+### 2. Deleting a task: `delete`
 
 Deletes a task from Chat's list of tasks.
 
@@ -47,7 +47,7 @@ Expected outcome:
 Error: ChatException will be thrown if format of command is incorrect.
 For example, if given index is a negative number.
 
-###3. Marking a task as completed: `done`
+### 3. Marking a task as completed: `done`
 
 Marks a task as completed.
 
@@ -66,7 +66,7 @@ Error:
 ChatException will be thrown if format of command is incorrect.
 For example, if given index is a negative number.
 
-###4. Finding tasks: `find`
+### 4. Finding tasks: `find`
 
 Finds task by given keywords.
 
@@ -75,7 +75,7 @@ Command: `find [keywords]`
 Example: `find t/T n/read d/20 Mar,21 Mar`
 * This will display all found **todo tasks** with name that includes the word **"read"**.
 
-####Keywords:
+#### Keywords:
 * `t/[task type]`
   * `[task type]` = _T_, _D_ or _E_
   * _T_ for todo tasks, _D_ for deadlines and _E_ for events.
@@ -88,7 +88,7 @@ Example: `find t/T n/read d/20 Mar,21 Mar`
     * `[dates]` can include just one date (start/end) or both start and end dates.
         * dates should be separated with `,` if both start and end dates are entered.
     
-####Additional details
+#### Additional details
     * Each type of keyword should be separated by a space bar.
     * Keywords can be arranged in any order.
     * There should only be one of each kind of keywords. 
@@ -102,7 +102,7 @@ Error:
 ChatException will be thrown if format of command is incorrect.
 For example, if incorrect type of keywords are being entered.
 
-###5. Listing all tasks: `list`
+### 5. Listing all tasks: `list`
 
 List all tasks saved by Chat.
 
@@ -111,7 +111,7 @@ Command: `list`
 Expected outcome:
 * Chat will list all tasks.
 
-###6. Exit Chat: `bye`
+### ****************6. Exit Chat: `bye`
 
 Exits Chat the Cat.
 
