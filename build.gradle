@@ -11,6 +11,11 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+compileJava   {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
 repositories {
     mavenCentral()
 }
