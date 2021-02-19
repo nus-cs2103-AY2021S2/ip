@@ -23,8 +23,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I have added the following task:
-[T][][] wash clothes`
+`Got it! I have added the following task:`
+
+`[T][][] wash clothes`
 
 ### `deadline` - Adds a deadline task
 
@@ -36,8 +37,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I have added the following task:
-[D][][] Homework (by: March 3 2021)`
+`Got it! I have added the following task:`
+
+`[D][][] Homework (by: March 3 2021)`
 
 ### `event` - Adds an event task
 
@@ -49,8 +51,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I have added the following task:
-[E][][] dinner (at: orchard road)`
+`Got it! I have added the following task:`
+
+`[E][][] dinner (at: orchard road)`
 
 ### `list` - Lists out all your tasks
 
@@ -131,5 +134,5 @@ Example of usage:
 
 Expected outcome:
 
-'Here is the additonal info regarding this task!
+`Here is the additonal info regarding this task!
 gym clothes`
