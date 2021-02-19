@@ -53,7 +53,7 @@ public class TaskList {
             boolean isDuplicate = false;
             for (int i = 0; i < this.tasks.size(); i++) {
                 Task previouslyAddedTask = this.tasks.get(i);
-                String previouslyAddedTaskName = previouslyAddedTask.getTaskName();
+                String previouslyAddedTaskName = previouslyAddedTask.getTaskName().strip();
                 String previouslyAddedTaskType = previouslyAddedTask.getTaskType();
                 if (echoedText.equals(previouslyAddedTaskName) &&
                         type.equals(previouslyAddedTaskType)) {
@@ -104,6 +104,7 @@ public class TaskList {
             intoParts3 = intoParts3[1].substring(1).split("\\(", 2);
             String taskNameStr = intoParts3[0].substring(0);
             taskName = taskNameStr.substring(0, taskNameStr.length() - 1); //to fix extra space formed at the end
+            taskName = taskName.strip();
 
             //Getting the condition
             String[] intoParts4 = intoParts3[1].split(": ", 2);
