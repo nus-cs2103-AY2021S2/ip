@@ -35,16 +35,16 @@ jobs:
 
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
-        working-directory:  ${{ github.workspace }}/text-ui-test
+        working-directory:  ${{ github.workspace }}/src/test
         run: ./runtest.sh
 
       - name: Perform IO redirection test (MacOS)
         if: always() && runner.os == 'macOS'
-        working-directory:  ${{ github.workspace }}/text-ui-test
+        working-directory:  ${{ github.workspace }}/src/test
         run: ./runtest.sh
 
       - name: Perform IO redirection test (Windows)
         if: always() && runner.os == 'Windows'
-        working-directory:  ${{ github.workspace }}/text-ui-test
+        working-directory:  ${{ github.workspace }}/src/test
         shell: cmd
         run: runtest.bat
