@@ -23,14 +23,14 @@ I can record **3 different types of tasks** for you:
 I can record **Reminders** too!
 
 ---
-### Bye `bye`
+### Bye - `bye`
 Quit the application.
 
 **Format: `bye`**
 
 Example: `bye`
 
-### Help `help`
+### Help - `help`
 Shows available commands and their formats
 
 **Format: `help`**
@@ -40,21 +40,21 @@ Shows available commands and their formats
 ---
 
 ## Add Tasks
-### Add ToDo `todo`
+### Add ToDo - `todo`
 Add a todo task.
 
 **Format: `todo DESCRIPTION`**
 
 Example: `todo Run with Ranga`
 
-### Add Deadline `deadline`
+### Add Deadline - `deadline`
 Add a deadline task.
 
 **Format: `deadline DESCRIPTION /by DATE`**
 
 Example: `deadline Feed Ranga /by 22 Feb 2021 1800`
 
-### Add Event `event`
+### Add Event - `event`
 Add a event task.
 
 **Format: `event DESCRIPTION /at DATE`**
@@ -64,21 +64,21 @@ Example: `event Ranga's Birthday /by 23 Feb 2021`
 ---
 
 ## Modify Tasks
-### Mark as Done `done`
+### Mark as Done - `done`
 Marks a task as done.
 
 **Format: `done TASK_ID`**
 
 Example: `done 1`
 
-### Add a Reminder to a Task `Remind`
+### Add a Reminder to a Task - `Remind`
 Adds a Reminder to a task for a specific date. Reminders show when I start up!
 
 **Format: `remind TASK_ID /on DATE`**
 
 Example: `remind 1 /on 25/02/21`
 
-### Remove a Task
+### Remove a Task - `remove`
 Removes a stored task.
 
 **Format: `remove TASK_ID`**
@@ -88,7 +88,7 @@ Example: `remove 1`
 ---
 
 ## See Tasks
-### List tasks `list`
+### List tasks - `list`
 Shows the stored tasks.
 
 **Format: `list`**
