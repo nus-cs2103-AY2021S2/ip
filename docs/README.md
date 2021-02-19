@@ -15,7 +15,7 @@ or meetings).
 ### `event` - Add Event task to the list
 
 One event task must be associated with one date, that is the date this event occurs. The event must be entered into the CLI with the following format  
- `event (String description) /at (String containing date)`. The date must be in the following format  *"yyyy-mm-dd"* and it must be present in the
+ `event (String description) /at (String containing date)`. The date must be in the following format  *"yyyy-mm-dd"* .It must be present in the
  string after the /at keyword, else the event cannot be parsed. The date can be anywhere so long as it comes after /at. If there are multiple different 
  dates following the format specified earlier, only the earliest date will be the one parsed and associated with this event. After the adding the event
  to the list. When the task is displayed by the GUI, all occurrences of the associated date will be converted to a more readable format *'MMM-dd-yyyy'* .  After entering the command,
@@ -166,7 +166,7 @@ of the list. If the tasks have the same date then the more recently addded tasks
 
 Example of usage: 
 
-The program automatically maintains the sorted propoerty whenever you add an event to the list.
+The program automatically maintains the sorted property whenever you add a task to the list.
 No input needed.
 
 Expected outcome:
