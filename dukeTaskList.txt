@@ -1,3 +1,2 @@
-T 0    wake up
-E 0   sleep time! (on: 20 Feb 2021 0000 )
-T 0  score A+ in CS2103
+T 0 Homework
+D 0 CS2106 Assignment 03/03/2021 2359 (by: 03 Mar 2021 2359 )

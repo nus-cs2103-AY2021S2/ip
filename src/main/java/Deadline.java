@@ -55,12 +55,12 @@ public class Deadline extends Task {
      */
     public String taskStatus() {
         if (this.isDone()) {
-            return "D 1 "
+            return "D 1"
                     + this.getTask_details()
                     + " (by: " + deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                     + deadlineTime.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
         } else {
-            return "D 0 "
+            return "D 0"
                     + this.getTask_details()
                     + " (by: " + deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                     + deadlineTime.format(DateTimeFormatter.ofPattern("HHmm")) + " )";

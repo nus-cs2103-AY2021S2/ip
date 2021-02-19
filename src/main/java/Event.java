@@ -55,12 +55,12 @@ public class Event extends Task {
      */
     public String taskStatus() {
         if (this.isDone()) {
-            return "E 1 "
+            return "E 1"
                     + this.getTask_details()
                     + " (on: " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                     + time.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
         } else {
-            return "E 0 "
+            return "E 0"
                     + this.getTask_details()
                     + " (on: " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " "
                     + time.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
