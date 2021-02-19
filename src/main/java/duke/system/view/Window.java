@@ -21,14 +21,15 @@ public class Window extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton = new Button("Send", imageView);
 
     private Duke duke;
     private Image buttonImage = new Image(this.getClass().getResourceAsStream("/images/button.png"));
     private ImageView imageView = new ImageView(buttonImage);
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/robot.png"));
+
+    @FXML
+    private Button sendButton = new Button("Send", imageView);
 
     private TaskList tasks;
 
