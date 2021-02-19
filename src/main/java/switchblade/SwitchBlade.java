@@ -3,6 +3,7 @@ package switchblade;
 import javafx.application.Application;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -35,12 +36,8 @@ public class SwitchBlade {
         case "event":
             return addEvent(input, taskList);
         case "delete":
-            if (input.split("\\s+").length == 2) {
-                int index = Integer.parseInt(input.split("\\s+")[1]);
-                return taskList.delete(index - 1);
-            } else {
-                return Ui.argumentError();
-            }
+            List<Integer> eventsToDelete = Parser.findTaskToDelete(input);
+            return taskList.delete(eventsToDelete);
         case "find":
             ArrayList<Task> foundTasks = taskList.findTasks(Parser.findDescription(input));
             return Ui.printFoundTasks(foundTasks);

@@ -1,5 +1,8 @@
 package switchblade;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * switchblade.Parser will be used to manipulate any String to retrieve the desired output
  *
@@ -89,5 +92,24 @@ public class Parser {
         } else {
             return noCommand;
         }
+    }
+
+    /**
+     * Returns tasks to delete as array
+     *
+     * @param input String to scan
+     * @return List<Integer> containing events to be deleted with corrections for 0-indexed array
+     */
+    public static List<Integer> findTaskToDelete(String input) {
+        assert input.length() > 0;
+        String noCommand = input.replace("delete", "");
+        List<Integer> integers = new ArrayList<>();
+
+        for (String s : noCommand.split("\\s+")) {
+            if (s.length() > 0)
+                integers.add(Integer.parseInt(s) - 1);
+        }
+
+        return integers;
     }
 }
