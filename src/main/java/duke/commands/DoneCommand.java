@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
             Task taskToComplete = tasks.getTask(index);
             tasks.completeTask(index);
             storage.saveFile(tasks.getTaskList());
-            return dukeResponses.showCompleteTask(taskToComplete, tasks);
+            return dukeResponses.showCompleteTask(taskToComplete);
         } catch (DukeException e) {
             return dukeResponses.showError(e);
         }
