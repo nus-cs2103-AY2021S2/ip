@@ -1,12 +1,14 @@
 package helper;
 
 import helper.command.AddCommand;
+import helper.command.ClearCommand;
 import helper.command.Command;
 import helper.command.DeleteCommand;
 import helper.command.DoneCommand;
 import helper.command.ExitCommand;
 import helper.command.FindCommand;
 import helper.command.ListCommand;
+import helper.command.SaveCommand;
 
 /**
  * Parsing class
@@ -39,6 +41,10 @@ public class Parser {
                 return new AddCommand(firstWord, strings[1]);
             case "find":
                 return new FindCommand(strings[1]);
+            case "clear":
+                return new ClearCommand();
+            case "save":
+                return new SaveCommand();
             default:
                 throw new DukeException("Weird keyword...");
             }

@@ -57,6 +57,10 @@ public class TaskList {
         return taskList.size();
     }
 
+    public void clear() {
+        taskList.clear();
+    }
+
     /**
      * Get task list as a List of tasks
      * @return List of tasks
