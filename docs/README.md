@@ -9,13 +9,18 @@ this guide will help you get to know Don a little better.
 
 ## Features 
 Here is an overview of what Don can do:
-1. Add: Todo, Deadline or Event
-2. List
-3. Done
-4. Edit
-5. Delete
-6. Find
-7. Bye
+
+Feature | Command(s)
+--------|--------
+Add task: todo | `todo DESCRIPTION`
+Add task: deadline| `deadline DESCRIPTION /by YYYY-MM-DD`
+Add task: event| `event DESCRIPTION /at YYYY-MM-DD`
+List all tasks | `list`
+Mark task as done | `done INDEX`
+Edit a task | `edit INDEX [/desc DESCRIPTION] [/date YYYY-MM-DD]`
+Delete a task | `delete INDEX`
+Find tasks containing a keyword | `find KEYWORD`
+Exit | `bye`
 
 ---
 ## Add tasks
@@ -35,7 +40,8 @@ todo buy plants
 Don will reply:
 
 ```
-
+Got it. I've added this task:
+[T][] buy plants
 ```
 
 ### `deadline` — Add a deadline
@@ -51,7 +57,8 @@ deadline project /by 2021-02-19
 Don will reply:
 
 ```
-
+Got it. I've added this task:
+[D][] project (by: Feb 19 2021)
 ```
 
 ### `event` — Add an event
@@ -67,7 +74,8 @@ event cny celebration /at 2021-02-12
 Don will reply:
 
 ```
-
+Got it. I've added this task:
+[E][] cny celebration (at: Feb 12 2021)
 ```
 ---
 
@@ -107,7 +115,8 @@ done 3
 Don will reply:
 
 ```
-
+Nice! I've marked this task as done:
+[E][] cny celebration (at: Feb 12 2021)
 ```
 ---
 
@@ -119,19 +128,59 @@ Edit the task at the specified index.\
 
 For todos, you can edit the description. \
 For deadlines & events, you can edit the description, date or both.
+Order of command (`/desc` or `/date`) does not matter.
 
-Example of usage
+Example #1 of usage
 
 ```
-edit 2 /desc 
+edit 2 /desc group project
 ```
 
 Don will reply:
 
 ```
+Okay! I've edited this task:
+[D][] group project (by: Feb 19 2021)
+```
+***
+Example #2 of usage
 
 ```
+edit 2 /date 2021-01-20
+```
 
+Don will reply:
+
+```
+Okay! I've edited this task:
+[D][] group project (by: Feb 20 2021)
+```
+***
+Example #3 of usage
+
+```
+edit 2 /desc indiv project /date 2021-01-21
+```
+
+Don will reply:
+
+```
+Okay! I've edited this task:
+[D][] indiv project (by: Feb 21 2021)
+```
+***
+Example #4 of usage
+
+```
+edit 2 /date 2021-01-22 /desc another project
+```
+
+Don will reply:
+
+```
+Okay! I've edited this task:
+[D][] another project (by: Feb 22 2021)
+```
 ---
 
 ## Delete tasks
@@ -149,7 +198,8 @@ delete 2
 Don will reply:
 
 ```
-
+Noted. I've removed this task:
+2. [D][] another project (by: Feb 22 2021)
 ```
 ---
 
@@ -168,7 +218,9 @@ find book
 Don will reply:
 
 ```
-
+Here are the matching tasks in your list:
+4. [T][X] read book
+7. [E][] book event (at: Mar 26 2021)
 ```
 ---
 

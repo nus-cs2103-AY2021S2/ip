@@ -4,27 +4,15 @@ import java.util.ArrayList;
  * Deals with interactions with the user.
  */
 public class Ui {
-    public static String TAB = "     ";
-    public static String LINE = "     ............................................................";
 
     public Ui() { }
 
     /**
      * Prints Elly logo and introduction message.
      */
-    public void printIntro() {
-        String logo = " _____   _   _\n"
-                + "| ____| | | | |\n"
-                + "| |___  | | | | __   __\n"
-                + "|  ___| | | | | \\ \\ / /\n"
-                + "| |___  | | | |  \\ v /\n"
-                + "|_____| |_| |_|  /  /\n"
-                + "                /__/\n";
-
-        System.out.println("   C H A T   W I T H\n" + logo);
-
-        System.out.println("Hello, fellow adventurer!\n"
-                + "What's our mission for today?\n");
+    public static String printIntro() {
+        return "Hello, fellow adventurer!\n"
+                + "What's our mission for today?\n";
     }
 
     public String printList(ArrayList<Task> tasks, int numTasks) {

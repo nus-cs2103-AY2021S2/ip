@@ -14,11 +14,18 @@
     <VBox alignment="TOP_RIGHT" prefHeight="56.0" prefWidth="279.0"
           style="-fx-background-color: #FAEDBE#FAEDBE #FAEDBE#FAEDBE;">
         <Label fx:id="nameLabel" text="Name" textFill="#e4b612" wrapText="true">
-           <font>
-               <Font name="Avenir Next Bold" size="15.0"/>
-           </font>
+            <padding>
+                <Insets top="10" right="15" left="15"/>
+            </padding>
+            <font>
+                <Font name="Avenir Next Bold" size="15.0"/>
+            </font>
         </Label>
-        <Label fx:id="dialog" text="Label" textFill="#81735e" wrapText="true"/>
+        <Label fx:id="dialog" text="Label" textFill="#81735e" wrapText="true">
+            <padding>
+                <Insets top="5" right="15" bottom="5" left="15"/>
+            </padding>
+        </Label>
     </VBox>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
 </fx:root>
