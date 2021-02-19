@@ -1,11 +1,10 @@
 # Duke User Guide
 
-##Introduction
+## Introduction
 
 Duke is a chat bot app that helps you to organise your tasks in a CLI manner with graphical feedback.
 
 ## Features
-
 - [Adding a todo task - `todo`](#todo)
 - [Adding an event task - `event`](#event)
 - [Adding a deadline task - `deadline`](#deadline)
@@ -27,6 +26,13 @@ Duke is a chat bot app that helps you to organise your tasks in a CLI manner wit
 
 1. Type the command into the textbox to interact with the chat bot
 
+**Notes about the command format:**
+
+Commands are presented in the format: `command ARGS`
+
+- Words in `[brackets]` are optional and may not be required
+- Words with a bar|seperating indicate one of the option should be used and only one is needed
+- Words in UPPERCASE are arguments to be supplied by the user
 
 ## Usage
 

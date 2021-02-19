@@ -6,7 +6,7 @@ import duke.task.Event;
 import duke.task.ListItem;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.tools;
+import duke.Helper;
 
 /**
  * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,
@@ -68,7 +68,7 @@ public class Parser {
                 case "delete": // both requires an index of the item
                     String indexOfItemAsString = in.substring(in.indexOf(" ") + 1);
                     tempArg = indexOfItemAsString;
-                    if(!tools.isInteger(indexOfItemAsString)){
+                    if(!Helper.isInteger(indexOfItemAsString)){
                         throw new DukeException.NoDescriptionException(result[0]);
                     }else{
                         tempCommand = result[0];

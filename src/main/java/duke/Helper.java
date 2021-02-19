@@ -3,7 +3,7 @@ package duke;
 /**
  * a class that provides helper function for others
  */
-public class tools {
+public class Helper {
     /**
      * Quick method to check whether the string passed is an integer or not
      * @return a boolean

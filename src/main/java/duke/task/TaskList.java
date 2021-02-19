@@ -97,7 +97,9 @@ public class TaskList {
         return initStr;
     }
 
-    // a method with an assertion that checks the index is >= 0 so it can be used for indexing with the List
+    /**
+     * a method with an assertion that checks the index is >= 0 so it can be used for indexing with the List
+     */
     public void assertIndexInRange(int index){
         assert index >= 0;
     }
