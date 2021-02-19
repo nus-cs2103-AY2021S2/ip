@@ -108,7 +108,9 @@ Expected output: <br>
 
 ### <a id="bye"></a> <span style="color:darkorange">Exiting the program: `bye`</span>
 Exits the program. <br>
-Format: `bye`
+Format: `bye` <br>
+Expected output: <br>
+![](screenshots/bye.png)
 
 ---
 
