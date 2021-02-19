@@ -12,7 +12,7 @@ import com.tanboonji.jhin.model.Task;
  */
 public class DeleteCommand extends Command {
 
-    private static final Pattern COMMAND_FORMAT = Pattern.compile("^(\\d+)$");
+    private static final Pattern COMMAND_FORMAT = Pattern.compile("^(\\S+)$");
     private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the delete command you entered is invalid.\n"
                     + "Please enter a valid delete command in the following format:\n"
                     + "[delete, rm] <task number>";
@@ -62,11 +62,16 @@ public class DeleteCommand extends Command {
             throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
+        int taskIndex;
         try {
-            int taskIndex = Integer.parseInt(arguments) - 1;
-            return new DeleteCommand(taskIndex);
+            taskIndex = Integer.parseInt(arguments) - 1;
         } catch (NumberFormatException e) {
             throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, arguments));
         }
+
+        if (taskIndex < 0) {
+            throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, arguments));
+        }
+        return new DeleteCommand(taskIndex);
     }
 }

@@ -12,7 +12,7 @@ import com.tanboonji.jhin.model.Task;
  */
 public class DoneCommand extends Command {
 
-    private static final Pattern COMMAND_FORMAT = Pattern.compile("^(\\d+)$");
+    private static final Pattern COMMAND_FORMAT = Pattern.compile("^(\\S+)$");
     private static final String INVALID_ARGUMENT_MESSAGE = "Sorry, the done command you entered is invalid.\n"
                     + "Please enter a valid done command in the following format:\n"
                     + "done <task number>";
@@ -69,11 +69,16 @@ public class DoneCommand extends Command {
             throw new InvalidCommandArgumentException(INVALID_ARGUMENT_MESSAGE);
         }
 
+        int taskIndex;
         try {
-            int taskIndex = Integer.parseInt(arguments) - 1;
-            return new DoneCommand(taskIndex);
+            taskIndex = Integer.parseInt(arguments) - 1;
         } catch (NumberFormatException e) {
             throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, arguments));
         }
+
+        if (taskIndex < 0) {
+            throw new InvalidCommandArgumentException(String.format(INVALID_TASK_NUMBER_MESSAGE_FORMAT, arguments));
+        }
+        return new DoneCommand(taskIndex);
     }
 }
