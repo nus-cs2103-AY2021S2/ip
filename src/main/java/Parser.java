@@ -34,6 +34,16 @@ public class Parser {
             } catch (Exception e) {
                 throw new IncompleteCommandException();
             }
+        } else if (input.startsWith("update")) {
+            try {
+                String substring = input.substring(7);
+                int index = substring.indexOf(" ");
+                int taskNo = Integer.parseInt(substring.substring(0, index));
+                assert isValidDate(substring.substring(index + 1)) == true;
+                command = new UpdateCommand(taskNo, substring.substring(index + 1));
+            } catch (Exception e) {
+                throw new IncompleteCommandException();
+            }
         } else if (input.startsWith("event")) {
             try {
                 int index = input.indexOf("/at");

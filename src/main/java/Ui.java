@@ -61,6 +61,10 @@ public class Ui {
                 + String.format("Now you have %s tasks in the list.", tasks);
     }
 
+    String updateTask(String task) {
+        return "Noted. I've edited this task:\n" + task;
+    }
+
     /**
      * Reminds user to provide valid input.
      * @param errormsg Error Message.

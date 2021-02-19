@@ -25,11 +25,20 @@ public class ToDo extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Marks task as done.
+     * @return Completed task.
      */
     @Override
     Task done() {
         return new ToDo(this.name, true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    Task set(String date) {
+        return this;
     }
 
     /**
