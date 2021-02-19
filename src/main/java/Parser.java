@@ -12,6 +12,7 @@ public class Parser {
     public Command parseInputLine(String userInput) throws UnsupportedCommandException {
 
         // SETTING UP THE VARIABLES NEEDED FOR ERROR CHECKING / PARSING
+        userInput = userInput.trim(); // in case user entered leading spaces
         int firstSpaceIndex = userInput.indexOf(" ");
         String firstWord;
         String commandBody;
@@ -20,7 +21,7 @@ public class Parser {
             firstWord = userInput.trim();
             commandBody = "";
         } else {
-            firstWord = userInput.substring(0, firstSpaceIndex);
+            firstWord = userInput.substring(0, firstSpaceIndex).trim();
             commandBody = userInput.substring(firstSpaceIndex).trim();
         }
 
@@ -57,6 +58,7 @@ public class Parser {
         case "del":
             return new DeleteCommand(commandBody);
         case "find":
+        case "f":
             return new FindCommand(commandBody);
         case "h":
         case "help":
