@@ -96,7 +96,7 @@ public class Parser {
             output += "I have added the additional info regarding this task!" + "\n";
             int index = Integer.parseInt(mAddInfo.group(2)) - 1;
             tasks.getAtInd(index).moreInfo = mAddInfo.group(3);
-        }else {
+        } else {
             output += "I do not understand what that means!";
         }
         return output;

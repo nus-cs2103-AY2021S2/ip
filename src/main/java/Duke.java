@@ -67,8 +67,6 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // more code to be added here later
-
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);

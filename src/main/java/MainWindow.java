@@ -46,7 +46,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws DukeException, IOException {
         String input = userInput.getText();
         String response = Parser.parse(duke.getTaskList(), input);
-        //String response = duke.getResponse(input);
         duke.getStorage().finalise(duke.getTaskList());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
