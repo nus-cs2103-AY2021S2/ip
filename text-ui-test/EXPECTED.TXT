@@ -5,3 +5,36 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+No unicode allowed
+------------------
+Listening to your input: The following deadline item has been added:
+Entry 1|[D][ ]: do homework (Deadline: no idea :-p)
+------------------
+Listening to your input: The following todo item has been added:
+Entry 2|[T][ ]: Dab on Homies
+------------------
+Listening to your input: The following event item has been added:
+Entry 3|[E][ ]: Ninja_0 (Event Time: 3pm EST)
+------------------
+Listening to your input: Entry 1|[D][ ]: do homework (Deadline: no idea :-p)
+Entry 2|[T][ ]: Dab on Homies
+Entry 3|[E][ ]: Ninja_0 (Event Time: 3pm EST)
+------------------
+Listening to your input: The following task is now marked as done:
+Entry 3|[E][*]: Ninja_0 (Event Time: 3pm EST)
+------------------
+Listening to your input: The following task is now marked as done:
+Entry 3|[E][*]: Ninja_0 (Event Time: 3pm EST)
+------------------
+Listening to your input: Entry 1|[D][*]: do homework (Deadline: no idea :-p)
+Entry 2|[T][ ]: Dab on Homies
+Entry 3|[E][*]: Ninja_0 (Event Time: 3pm EST)
+------------------
+Listening to your input: ------------------
+Goodbye from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
