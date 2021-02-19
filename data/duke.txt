@@ -1,5 +1,4 @@
 D | 1 | apply financial assistance | 2021-03-01
+D | 0 | CS3230 homework | 2021-03-02
 E | 0 | CS3230 midterm  | 2021-03-06
 E | 1 | graduation | I think is somewhere around 2022-05-03...
-T | 0 | CS3230 homwork
-T | 0 | NOBODY MOVE

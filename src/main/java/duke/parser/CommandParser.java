@@ -3,12 +3,6 @@ package duke.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.exceptions.DukeDateParseException;
-import duke.exceptions.DukeCommandParseException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -16,6 +10,12 @@ import duke.command.ExitCommand;
 import duke.command.FindTaskCommand;
 import duke.command.ListCommand;
 import duke.command.MarkTaskCommand;
+import duke.exceptions.DukeCommandParseException;
+import duke.exceptions.DukeDateParseException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 
 
@@ -31,7 +31,7 @@ public class CommandParser {
     private static final Pattern KEYWORD_AND_ARGUMENTS_PATTERN =
             Pattern.compile("(?<keyword>\\S+)(?<arguments>.*)");
     private static final Pattern SINGLE_INTEGER_ARGUMENT_PATTERN =
-            Pattern.compile("(?<integerArgument>[0-9]+)$", Pattern.CASE_INSENSITIVE);
+            Pattern.compile("^(?<integerArgument>[0-9]+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern ADD_DEADLINE_ARGUMENTS_PATTERN =
             Pattern.compile("^(?<description>.+)\\s+/by\\s+(?<by>.+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern ADD_EVENT_ARGUMENTS_PATTERN =
@@ -46,12 +46,11 @@ public class CommandParser {
     private static final String MARK_DONE_COMMAND = "done";
     private static final String EXIT_COMMAND = "bye";
     private static final String FIND_COMMAND = "find";
-
-    private static final String PARSE_ERROR_MESSAGE = "I'm sorry, " +
-            "but I don't know what that means :-(";
+    private static final String PARSE_ERROR_MESSAGE = "I'm sorry, "
+            + "but I don't know what that means :-(";
+    private static final String DEADLINE_FORMAT_ERROR_MESSAGE = "The deadline is of incorrect format.";
+    private static final String EVENT_FORMAT_ERROR_MESSAGE = "The event to add is of incorrect format.";
     private static final String EMPTY_INPUT_ERROR_MESSAGE = "The input cannot be empty";
-    public static final String DEADLINE_FORMAT_ERROR_MESSAGE = "The deadline is of incorrect format.";
-    public static final String EVENT_FORMAT_ERROR_MESSAGE = "The event to add is of incorrect format.";
     private static final String INTEGER_FORMAT_ERROR_MESSAGE = "The input to the command must be integer.";
 
     /* Stores the string to Parse*/
@@ -75,9 +74,9 @@ public class CommandParser {
      */
 
 
-    public Command parseCommand() throws DukeCommandParseException,DukeDateParseException {
+    public Command parseCommand() throws DukeCommandParseException, DukeDateParseException {
         String commandWord = getKeyWord();
-        assert !this.inputCommand.equals("");  // check that empty string is handled by getKeyWord
+        assert !this.inputCommand.equals(""); //check that empty string is handled by getKeyWord
         String arguments = getArguments();
         switch (commandWord) {
         case ADD_DEADLINE_COMMAND:
@@ -101,6 +100,12 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Gets the argument string following the command word.
+     * @return the argument string
+     * @throws DukeCommandParseException if it does not match the command format.
+     */
+
     public String getArguments() throws DukeCommandParseException {
         Matcher m = KEYWORD_AND_ARGUMENTS_PATTERN.matcher(this.inputCommand);
         if (m.matches()) {
@@ -110,6 +115,11 @@ public class CommandParser {
         }
     }
 
+    /**
+     * check if the string is empty. Throws error if its not empty.
+     * @param input string to be checked
+     * @throws DukeCommandParseException if string is not ""
+     */
     private void throwErrorIfNotEmpty(String input) throws DukeCommandParseException {
         if (!input.equals("")) {
             throw new DukeCommandParseException(PARSE_ERROR_MESSAGE);
@@ -142,13 +152,27 @@ public class CommandParser {
         return new ListCommand();
     }
 
-    public void throwErrorIfEmpty(String arguments) throws DukeCommandParseException {
+    /**
+     * Check if the string is nonempty. Throws error is string is empty.
+     * @param arguments string to be checked
+     * @throws DukeCommandParseException if the string is ""
+     */
+
+    private void throwErrorIfEmpty(String arguments) throws DukeCommandParseException {
         if (arguments.equals("")) {
             throw new DukeCommandParseException(EMPTY_INPUT_ERROR_MESSAGE);
         }
     }
 
-    public Matcher matchToInteger(String arguments) throws DukeCommandParseException {
+    /**
+     * Matches a string if it is just a string literal of an integer value,
+     * and returns the matcher. Else throws exception.
+     * @param arguments the strng to be matched.
+     * @return matcher the matcher that is successfully matched to an integer literal.
+     * @throws DukeCommandParseException if there is no match found.
+     */
+
+    Matcher matchToInteger(String arguments) throws DukeCommandParseException {
         throwErrorIfEmpty(arguments);
         Matcher m = SINGLE_INTEGER_ARGUMENT_PATTERN.matcher(arguments);
         if (!m.matches()) {
@@ -207,7 +231,18 @@ public class CommandParser {
         return new AddCommand(t);
     }
 
-    public Matcher matchAddDeadlineFormat(String arguments) throws DukeCommandParseException {
+    /**
+     * Matches a given argument string to the format required of a valid Add Deadline command.
+     * The matcher returned will then be
+     * used to extract out the arguments needed by parseAddEvent.
+     *
+     * @param arguments the string to match
+     * @return matcher containing extracted arguments.
+     * @throws DukeCommandParseException when the string does not match to a valid argument.
+     */
+
+
+    Matcher matchAddDeadlineFormat(String arguments) throws DukeCommandParseException {
         throwErrorIfEmpty(arguments);
         Matcher m = ADD_DEADLINE_ARGUMENTS_PATTERN.matcher(arguments);
         if (!m.matches()) {
@@ -226,7 +261,8 @@ public class CommandParser {
      * @throws DukeCommandParseException when the string is of incorrect format.
      */
 
-    public Command parseAddDeadlineArguments(String arguments) throws DukeCommandParseException, DukeDateParseException {
+    public Command parseAddDeadlineArguments(String arguments)
+            throws DukeCommandParseException, DukeDateParseException {
         Matcher m = matchAddDeadlineFormat(arguments);
         String description = m.group("description");
         String by = m.group("by");
@@ -234,7 +270,17 @@ public class CommandParser {
         return new AddCommand(t);
     }
 
-    public Matcher matchAddEventFormat(String arguments) throws DukeCommandParseException {
+    /**
+     * Matches a given argument string to the format required of a valid Add Event command.
+     * The matcher returned will then be
+     * used to extract out the arguments needed by parseAddEvent.
+     *
+     * @param arguments the string to match
+     * @return matcher containing extracted arguments.
+     * @throws DukeCommandParseException when the string does not match to a valid argument.
+     */
+
+    Matcher matchAddEventFormat(String arguments) throws DukeCommandParseException {
         throwErrorIfEmpty(arguments);
         Matcher m = ADD_EVENT_ARGUMENTS_PATTERN.matcher(arguments);
         if (!m.matches()) {
@@ -252,7 +298,7 @@ public class CommandParser {
      * @throws DukeCommandParseException when the event command is of incorrect format.
      */
 
-    public Command parseAddEventArguments(String arguments) throws DukeCommandParseException, DukeDateParseException{
+    public Command parseAddEventArguments(String arguments) throws DukeCommandParseException, DukeDateParseException {
         Matcher m = matchAddEventFormat(arguments);
         String description = m.group("description");
         String at = m.group("at");
@@ -269,7 +315,9 @@ public class CommandParser {
     public String getKeyWord() throws DukeCommandParseException {
         throwErrorIfEmpty(this.inputCommand);
         Matcher m = KEYWORD_AND_ARGUMENTS_PATTERN.matcher(this.inputCommand);
-        m.matches();  // there will definitely be a match because string is non empty and hence contains a word.
+        boolean isMatch = m.matches();
+        //there will definitely be a match because string is non empty and hence contains a word.
+        assert isMatch == true;
         return m.group("keyword").toLowerCase();
     }
 

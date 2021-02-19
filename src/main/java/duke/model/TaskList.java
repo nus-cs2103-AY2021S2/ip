@@ -1,23 +1,23 @@
 package duke.model;
 
-import duke.exceptions.DukeOutOfBoundsException;
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import duke.exceptions.DukeOutOfBoundsException;
+import duke.tasks.Task;
+
+
 /**
  * Wrapper class for a List of Tasks. Supports add and remove operations, as well as additional operations
- * to search and mark tasks as done.
+ * to search and mark tasks as done. The tasks in the list are maintained in sorted order when tasks are added to it.
  */
 
 public class TaskList implements Iterable<Task> {
 
-    private final static String OUT_OF_BOUNDS_ERROR_MESSAGE =
-            "Sorry, the index is out of Range ." +
-            "Try to specify a number from 1 to (the size of the list) ";
+    private static final String OUT_OF_BOUNDS_ERROR_MESSAGE = "Sorry, the index is out of Range ."
+                    + "Try to specify a number from 1 to (the size of the list) ";
 
     private List<Task> listOfTasks;
 
@@ -29,7 +29,7 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Constructor with 1 input.
+     * Constructor that wraps around the provided list of tasks.
      *
      * @param listOfTasks the task of lists to wrap around
      */
@@ -39,15 +39,16 @@ public class TaskList implements Iterable<Task> {
         this.listOfTasks = copiedListOfTasks;
     }
 
-    /**
-     * Adds the task to the end of the list, much like append.
-     *
-     * @param t Task to be appended on the list.
-     */
-    public void add(Task t) {
+    private void add(Task t) {
         listOfTasks.add(t);
     }
 
+    /**
+     * Adds the task to the end of the list, then sorts the TaskList.
+     * This is to ensure list remains sorted after the insertion.
+     *
+     * @param t Task to be appended on the list.
+     */
     public void insertIntoSortedPosition(Task t) {
         add(t);
         sort();
@@ -84,7 +85,7 @@ public class TaskList implements Iterable<Task> {
      * Marks a Task as done at certain index on the list. ( 1 -based indexing ).
      *
      * @param indexToMarkDone index of Task to mark
-     * @return Task that is marked
+     * @throws DukeOutOfBoundsException thrown when there is no available task at that index.
      */
 
     public void markTaskDone(int indexToMarkDone) throws DukeOutOfBoundsException {
@@ -132,7 +133,7 @@ public class TaskList implements Iterable<Task> {
         return new TaskList(filteredListOfTasks);
     }
 
-    public void sort() {
+    private void sort() {
         Collections.sort(listOfTasks);
     }
 }

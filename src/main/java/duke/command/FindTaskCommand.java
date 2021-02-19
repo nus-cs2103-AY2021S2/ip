@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.storage.Storage;
 import duke.model.TaskList;
+import duke.storage.Storage;
 import duke.ui.MessageGenerator;
 
 public class FindTaskCommand extends Command {
@@ -17,6 +17,6 @@ public class FindTaskCommand extends Command {
     public CommandResult execute(MessageGenerator messageGenerator, TaskList tasks, Storage storage) {
         TaskList filteredTaskList = tasks.filterByWord(keyword);
         String findTaskMessage = messageGenerator.generateFindTaskMessage(filteredTaskList);
-        return new CommandResult(findTaskMessage,false);
+        return new CommandResult(findTaskMessage, false);
     }
 }

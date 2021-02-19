@@ -21,7 +21,7 @@ public class MarkTaskCommand extends Command {
         tasks.markTaskDone(indexToMarkDone);
         Task doneTask = tasks.get(indexToMarkDone);
         storage.saveTasks(tasks);
-        String MarkTaskMessage = messageGenerator.generateMarkTaskMessage(doneTask);
-        return new CommandResult(MarkTaskMessage,false);
+        String markTaskMessage = messageGenerator.generateMarkTaskMessage(doneTask);
+        return new CommandResult(markTaskMessage, false);
     }
 }

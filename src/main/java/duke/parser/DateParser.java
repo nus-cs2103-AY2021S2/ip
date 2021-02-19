@@ -1,12 +1,12 @@
 package duke.parser;
 
-import duke.exceptions.DukeDateParseException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.exceptions.DukeDateParseException;
 
 public class DateParser {
 
@@ -15,9 +15,10 @@ public class DateParser {
     private static final String INVALID_DATE_ERROR_MESSAGE = "Date must be a valid date in the calendar!";
 
     /**
-     * parses the date and returns the string containing the date if it is of broad format ( yyyy-MM-dd)
+     * parses the date string if it is of broad format (yyyy-MM-dd)
+     * and converts it into a LocalDate object if it is of broad format (yyyy-MM-dd)
      *
-     * @param input string to be parsed.
+     * @param input string of only the date.
      * @return string containing the date.
      */
 
@@ -27,10 +28,12 @@ public class DateParser {
     }
 
     /**
-     * Extracts date within the string in the format d - d - d, d stand for arbitrary number of digits.
+     * Extracts date within the string in the format d-d-d, d stand for arbitrary number of digits. Only the
+     * first occurrence of such a date in the form d-d-d is parsed.
      *
      * @param input string to be parsed.
      * @return The subtring containing the date only.
+     * @throws DukeDateParseException when the date of the required format is not found in the string.
      */
 
     public static String extractDate(String input) throws DukeDateParseException {
@@ -42,7 +45,18 @@ public class DateParser {
         }
     }
 
-    public static LocalDate parseLocalDate(String input) throws DukeDateParseException {
+    /**
+     * Extracts the first occurence of a substring containing the date, and then
+     * parses it into a localDate Object.
+     * The date substring must be in the following format (d-d-d) where d
+     * represents an arbitrary number of digits.
+     *
+     * @param input the string to extract and parse the date from
+     * @return the LocalDate that is obtained from parsing the date inside the string
+     * @throws DukeDateParseException throws error when it is not a valid date
+     */
+
+    public static LocalDate parseStringContainingDate(String input) throws DukeDateParseException {
         String dateString = DateParser.extractDate(input);
         try {
             return DateParser.parseDate(dateString);
@@ -51,10 +65,20 @@ public class DateParser {
         }
     }
 
+    /**
+     * Replaces all occurrences of a date inside the string with a new formatted date.
+     * All the replaced dates are in the format
+     * (MMM-dd-yyy) for example "Oct 9 2021".
+     *
+     * @param stringWithOldDate string containing a date inside as a substring
+     * @param newLocalDate the new local date to replace the old date.
+     * @return the resulting new string containing the formatted new date in place of the old date
+     */
+
     public static String replaceDate(String stringWithOldDate , LocalDate newLocalDate) {
         try {
             String oldDateString = DateParser.extractDate(stringWithOldDate);
-            String newDateString = newLocalDate.format(DateTimeFormatter.ofPattern("MMM d yyyy" ));
+            String newDateString = newLocalDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             String stringWithNewDate = stringWithOldDate.replaceAll(oldDateString, newDateString);
             return stringWithNewDate;
         } catch (DukeDateParseException e) {

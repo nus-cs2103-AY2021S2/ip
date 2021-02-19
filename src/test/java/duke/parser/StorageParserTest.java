@@ -1,22 +1,23 @@
 package duke.parser;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.stream.Stream;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class StorageParserTest {
 
-    private static Stream<Arguments> parseTaskFromStorageFormatGetArguments() throws Exception{
-        Event e1 =  new Event("party", "my house 2020-10-09");
+    private static Stream<Arguments> parseTaskFromStorageFormatGetArguments() throws Exception {
+        Event e1 = new Event("party", "my house 2020-10-09");
         Event e2 = new Event("Badminton", "your house 2020-09-08");
         ToDo t1 = new ToDo("Japan trip");
         ToDo t2 = new ToDo("French trip");
@@ -31,19 +32,19 @@ public class StorageParserTest {
                 Arguments.of("T | 1 | Japan trip", t1),
                 Arguments.of("T | 0 | French trip", t2),
                 Arguments.of("D | 0 | homework | 2020-10-09", d1),
-                Arguments.of("D | 1 | nothing | 2020-10-09",d2)
+                Arguments.of("D | 1 | nothing | 2020-10-09", d2)
         );
     }
     @ParameterizedTest
     @MethodSource("parseTaskFromStorageFormatGetArguments")
-    public void parseTaskFromStorageFormat_success(String input, Task t) throws Exception{
-        assertEquals(StorageParser.parseTaskFromStorageFormat(input),t);
+    public void parseTaskFromStorageFormat_success(String input, Task t) throws Exception {
+        assertEquals(StorageParser.parseTaskFromStorageFormat(input), t);
     }
 
     @ParameterizedTest
     @MethodSource("parseTaskFromStorageFormatGetArguments")
-    public void convertTaskToStorageFormat_success(String input, Task t) throws Exception{
-        assertEquals(input,StorageParser.convertTaskToStorageFormat(t));
+    public void convertTaskToStorageFormat_success(String input, Task t) {
+        assertEquals(input, StorageParser.convertTaskToStorageFormat(t));
     }
 
 

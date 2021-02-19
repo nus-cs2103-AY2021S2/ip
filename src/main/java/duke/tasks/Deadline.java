@@ -3,8 +3,6 @@ package duke.tasks;
 import duke.exceptions.DukeDateParseException;
 import duke.parser.DateParser;
 
-import java.time.format.DateTimeFormatter;
-
 /**
  * A Task with a deadline to complete.
  */
@@ -22,11 +20,11 @@ public class Deadline extends Task {
      */
 
 
-    public Deadline(String description, String by) throws DukeDateParseException{
+    public Deadline(String description, String by) throws DukeDateParseException {
         super(description, "D");
-        this.localDate = DateParser.parseLocalDate(by);
+        this.localDate = DateParser.parseStringContainingDate(by);
         this.by = by;
-        this.byToPrint = DateParser.replaceDate(by,localDate);
+        this.byToPrint = DateParser.replaceDate(by, localDate);
     }
 
     /**

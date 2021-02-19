@@ -21,8 +21,8 @@ public class Event extends Task {
     public Event(String description, String at) throws DukeDateParseException {
         super(description, "E");
         this.at = at;
-        this.localDate = DateParser.parseLocalDate(at);
-        this.atToPrint = DateParser.replaceDate(at,localDate);
+        this.localDate = DateParser.parseStringContainingDate(at);
+        this.atToPrint = DateParser.replaceDate(at, localDate);
     }
 
     @Override

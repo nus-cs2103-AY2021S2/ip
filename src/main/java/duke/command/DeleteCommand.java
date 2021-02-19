@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
             throws DukeStorageException, DukeOutOfBoundsException {
         Task taskToDelete = tasks.pop(indexToDelete);
         storage.saveTasks(tasks);
-        String deleteMessage = messageGenerator.generateDeleteMessage(taskToDelete,tasks);
+        String deleteMessage = messageGenerator.generateDeleteMessage(taskToDelete, tasks);
         return new CommandResult(deleteMessage, false);
     }
 }

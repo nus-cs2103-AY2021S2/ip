@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.exceptions.DukeCommandParseException;
-import duke.exceptions.DukeDateParseException;
-import duke.exceptions.DukeStorageException;
-import duke.parser.StorageParser;
-import duke.model.TaskList;
-import duke.tasks.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exceptions.DukeCommandParseException;
+import duke.exceptions.DukeDateParseException;
+import duke.exceptions.DukeStorageException;
+import duke.model.TaskList;
+import duke.parser.StorageParser;
+import duke.tasks.Task;
 
 /**
  * Responsible for storing and fetching the data of the tasks from the hard disk
@@ -24,7 +24,7 @@ public class Storage {
     private static final String WRITE_FILE_EXCEPTION_MESSAGE =
             "Unable to write to file! Check duke/data.txt file.";
     private static final String READ_FILE_EXCEPTION_MESSAGE =
-            "Unable to read the duke/data.txt because it cant be found." ;
+            "Unable to read the duke/data.txt because it cant be found.";
 
     private String filePath;
 
@@ -79,7 +79,7 @@ public class Storage {
 
 
     private void clearFile() throws DukeStorageException {
-        try ( FileWriter fw = new FileWriter(filePath);){
+        try (FileWriter fw = new FileWriter(filePath);) {
             fw.write(""); // clear the file.
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,12 +99,12 @@ public class Storage {
         writeTasksToFile(listOfTasks);
     }
 
-    public void writeTasksToFile(TaskList listOfTasks) throws DukeStorageException {
+    private void writeTasksToFile(TaskList listOfTasks) throws DukeStorageException {
         try (FileWriter fileWriter = new FileWriter(filePath, true)) {
             for (Task t : listOfTasks) {
                 fileWriter.write(StorageParser.convertTaskToStorageFormat(t) + "\n");
             }
-        } catch( IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             throw new DukeStorageException(WRITE_FILE_EXCEPTION_MESSAGE);
         }

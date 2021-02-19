@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Represents a Task. Stores relevant information about the task like  basic description, the code letter that will
  * be displayed when the Task is printed, as well as the state of whether or not the Task is done.
  */
-public abstract class Task implements Comparable<Task>{
+public abstract class Task implements Comparable<Task> {
 
     protected String description;
     protected boolean isDone;
@@ -75,18 +75,29 @@ public abstract class Task implements Comparable<Task>{
         return "[" + this.getLetterCode() + "]" + "[" + mark + "] " + description;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
+    /**
+     * Tasks are compared based on comparing the dates associated with the task.
+     * A task is greater than another task if it has
+     * a further date and vice versa.
+     *
+     * @param o the task to compare with this task
+     * @return the comparator value of the two tasks, positive if t is greater than o, negative if lesser
+     */
     @Override
     public int compareTo(Task o) {
         return this.localDate.compareTo(o.localDate);
     }
 
+    /**
+     * Compares two tasks to see if they are equal. A task is qual to another task
+     * if the string representations are equal.
+     * @param obj to be compared with
+     * @return a boolean value, true if the two tasks are equal to each other and false if not equal.
+     */
+
     @Override
     public boolean equals(Object obj) {
-        if(obj == null) {
+        if (obj == null) {
             return false;
         } else if (obj instanceof Task) {
             Task other = (Task) obj;

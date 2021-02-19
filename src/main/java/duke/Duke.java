@@ -3,16 +3,17 @@ package duke;
 import java.io.File;
 import java.io.IOException;
 
+import duke.command.Command;
+import duke.command.CommandResult;
+import duke.exceptions.DukeCommandParseException;
 import duke.exceptions.DukeDateParseException;
 import duke.exceptions.DukeOutOfBoundsException;
-import duke.exceptions.DukeCommandParseException;
 import duke.exceptions.DukeStorageException;
 import duke.model.TaskList;
 import duke.parser.CommandParser;
 import duke.storage.Storage;
 import duke.ui.MessageGenerator;
-import duke.command.Command;
-import duke.command.CommandResult;
+
 
 /**
  * main class containing the Duke Chatbot main logic.
@@ -20,15 +21,21 @@ import duke.command.CommandResult;
 
 public class Duke {
 
-    private final static String STORAGE_DIRECTORY_PATH = "data";
-    private final static String STORAGE_FILE_PATH = "data/duke.txt";
-    private final static String STORAGE_INITIALIZATION_ERROR_MESSAGE = "Cannot Crete file duke.txt";
+    private static final String STORAGE_DIRECTORY_PATH = "data";
+    private static final String STORAGE_FILE_PATH = "data/duke.txt";
+    private static final String STORAGE_INITIALIZATION_ERROR_MESSAGE = "Cannot Crete file duke.txt";
 
     private static Storage storage;
     private MessageGenerator messageGenerator;
     private TaskList tasks;
     private boolean isExit = false;
 
+
+    /**
+     * Initializes and loads all the data from storage, as well as create the nexessary classes.
+     *
+     * @throws IOException when the file does not exist and Duke cannot create the file in the necessary path
+     */
 
     public Duke() throws IOException {
         this.messageGenerator = new MessageGenerator();
@@ -62,12 +69,22 @@ public class Duke {
         return new Storage("data/duke.txt");
     }
 
+    /**
+     * Returns the message to display at the start of the program.
+     *
+     * @return the message to display at the when Duke is started.
+     */
 
-
-    public String startMessage(){
+    public String startMessage() {
         return messageGenerator.getWelcomeMessage();
     }
 
+    /**
+     * Runs the Duke logic given the input string  and gets Duke's response to the input.
+     *
+     * @param input the string to be passed to Dyke
+     * @return the response after Duke analyses the string
+     */
 
     public String getResponse(String input) {
         try {
@@ -84,6 +101,13 @@ public class Duke {
             return "DATABASE ERROR!" + e.getMessage();
         }
     }
+
+    /**
+     * Gets the exit flag for Duke Chatbot
+     * @return the flag isExit. It is true if the exit Command has been executed.
+     * Else it will be false to show Duke is still running
+     *
+     */
 
     public boolean getIsExit() {
         return isExit;

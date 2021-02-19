@@ -1,27 +1,31 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exceptions.DukeCommandParseException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.regex.Matcher;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.regex.Matcher;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
+import duke.command.AddCommand;
+import duke.command.ExitCommand;
+import duke.command.FindTaskCommand;
+import duke.command.ListCommand;
+import duke.command.MarkTaskCommand;
+import duke.exceptions.DukeCommandParseException;
 
 public class CommandParserTest {
 
     private static Stream<Arguments> provideGetArguments() {
         return Stream.of(
-                Arguments.of("done 3 ", "3" ),
-                Arguments.of("list", "" ),
-                Arguments.of("deadline something /by this date \t" , "something /by this date" )
+                Arguments.of("done 3 ", "3"),
+                Arguments.of("list", ""),
+                Arguments.of("deadline something /by this date \t" , "something /by this date")
         );
     }
     @ParameterizedTest
@@ -34,11 +38,11 @@ public class CommandParserTest {
         } catch (DukeCommandParseException e) {
             fail();
         }
-        assertEquals(actual , expected);
+        assertEquals(actual, expected);
     }
 
     @ParameterizedTest
-    @CsvSource({"done 3,done", "deadline something /by sometime,deadline", " todo task,todo",})
+    @CsvSource({"done 3,done", "deadline something /by sometime,deadline", " todo task,todo"})
     public void getKeyWord_correctKeyword_success(String input, String expected) {
         CommandParser p = new CommandParser(input);
         String actual = null;
@@ -139,10 +143,10 @@ public class CommandParserTest {
     }
 
     @Test
-    public void matchToInteger_integerArguments_success() throws Exception{
+    public void matchToInteger_integerArguments_success() throws Exception {
         CommandParser p = new CommandParser("done 4");
         Matcher m = p.matchToInteger("45");
-        assertEquals(m.group(0),"45");
+        assertEquals(m.group(0), "45");
     }
 
     @Test
