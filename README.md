@@ -2,7 +2,7 @@
 
 Duke is a Personal Assistant Chatbot that helps to keep track of various things.
 
-## Setting up
+# Setting up
 Prerequisites:
 * JDK 11
 * Fork this repo and clone it to your computer!
@@ -10,14 +10,14 @@ Prerequisites:
 Alternatively, check out Duke by downloading the latest jar 
 release and run java -jar v0.2.jar on your terminal in the same directory.
 
-## User Guide
-# Functionality
+# User Guide
+## Functionality
 * Adding and deleting tasks: todos/ deadlines/ events
 * Updating task description and information
 * Marking task as completed
 * Search for tasks
 
-# Commands
+## Commands
 **`help` - Returns list of main commands**
 
 **`todo` - Adds a todo task**
