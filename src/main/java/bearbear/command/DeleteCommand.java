@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Returns index of task to be deleted.
-     * @return task index
+     * @return Task index.
      */
     public int getTaskNumber() {
         return taskNumber;
@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
     /**
      * Validates argument of DeleteCommand.
      * @param userInput User Input as String.
-     * @param bot A Duke object.
+     * @param bot A {@code BearBear} object.
      * @return Index of task as int.
      * @throws InvalidArgumentException If task index is invalid.
      */

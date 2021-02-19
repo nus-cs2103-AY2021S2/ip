@@ -12,7 +12,7 @@ public abstract class Task {
      * Creates a {@code Task} object with a task description, task type,
      * with task initially set to not done status.
      * @param description Task description.
-     * @param type Type of task
+     * @param type Type of task.
      */
     public Task(String description, String type) {
         this.description = description;

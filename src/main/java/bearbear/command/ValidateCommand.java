@@ -40,7 +40,8 @@ public class ValidateCommand {
         case "event":
         case "find":
             throw new InvalidCommandException("OOPS!!! " + "The description of "
-                    + userInput + " command cannot be empty.\n");
+                    + userInput + " command cannot be empty.\n"
+                    + "\nUse 'help' to show list of commands.");
         case "bye":
             userCommand = new ByeCommand();
             break;

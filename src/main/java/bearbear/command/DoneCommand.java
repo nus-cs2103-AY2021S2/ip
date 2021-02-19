@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
 
     /**
      * Returns index of task to be marked as done.
-     * @return task index
+     * @return Task index.
      */
     public int getTaskNumber() {
         return taskNumber;
@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
     /**
      * Validates argument of DoneCommand.
      * @param userInput User input as String.
-     * @param bot A Duke object.
+     * @param bot A {@code BearBear} object.
      * @return Index of task as int.
      * @throws InvalidArgumentException If task number is invalid.
      */

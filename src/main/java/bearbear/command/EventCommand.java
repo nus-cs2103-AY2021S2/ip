@@ -18,8 +18,8 @@ public class EventCommand extends Command {
 
     /**
      * Creates an {@code EventCommand} object with a task description and event time component.
-     * @param description task description
-     * @param eventTime time of event
+     * @param description Task description.
+     * @param eventTime Time of event.
      */
     public EventCommand(String description, String eventTime) {
         super("event");
@@ -29,7 +29,7 @@ public class EventCommand extends Command {
 
     /**
      * Returns description of event task.
-     * @return description of event task
+     * @return Description of event task.
      */
     public String getDescription() {
         return description;
@@ -37,7 +37,7 @@ public class EventCommand extends Command {
 
     /**
      * Returns event time of task.
-     * @return event time of task
+     * @return Event time of task.
      */
     public String getEventTime() {
         return eventTime;

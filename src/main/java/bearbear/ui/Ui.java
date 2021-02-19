@@ -20,7 +20,7 @@ public class Ui {
 
     /**
      * Displays welcome message upon launch of application.
-     * @param bot A Duke object that manages task list operations.
+     * @param bot A {@code BearBear} object that manages task list operations.
      */
     public static String showWelcomeMessage(BearBear bot) {
         return String.format("Hello! I'm BearBear\n%s\n%s\n", bot.getLogo(), "What can I do for you?");

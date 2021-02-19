@@ -19,7 +19,7 @@ public class FileWriting {
     /**
      * Saves list of tasks by writing into the file whenever a command updates the task list.
      * @param file The file that is written to.
-     * @param bearBear A BearBear object that manages task list operations.
+     * @param bearBear A {@code BearBear} object that manages task list operations.
      * @throws IOException If error occurs while writing to the file.
      */
     public static void writeToFile(File file, BearBear bearBear) throws IOException {

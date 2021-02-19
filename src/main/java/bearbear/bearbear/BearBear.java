@@ -19,7 +19,7 @@ public class BearBear {
     private final TaskList list;
 
     /**
-     * Creates a {@code Duke} object with an empty task list.
+     * Creates a {@code BearBear} object with an empty task list.
      */
     public BearBear() {
         this.list = new TaskList();
@@ -27,7 +27,7 @@ public class BearBear {
     }
 
     /**
-     * Creates a {@code Duke} object with a task list.
+     * Creates a {@code BearBear} object with a task list.
      * @param list Task list.
      */
     public BearBear(TaskList list) {
@@ -73,7 +73,7 @@ public class BearBear {
 
     /**
      * Marks a task as done.
-     * @param id index of task to be marked as done
+     * @param id Index of task to be marked as done
      */
     public String markAsDone(int id) {
         int n = id - 1;
@@ -90,7 +90,7 @@ public class BearBear {
     }
 
     /**
-     * Returns task list.
+     * Returns Task List.
      * @return Task list
      */
     public TaskList getList() {
@@ -115,7 +115,7 @@ public class BearBear {
 
     /**
      * Returns String of tasks containing a keyword.
-     * @param keyword keyword to be searched.
+     * @param keyword Keyword to be searched.
      * @return String of tasks containing a keyword.
      */
     public String showTasksContainingKeyword(String keyword) {

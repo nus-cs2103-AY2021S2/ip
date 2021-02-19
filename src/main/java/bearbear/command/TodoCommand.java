@@ -16,7 +16,7 @@ public class TodoCommand extends Command {
 
     /**
      * Creates a {@code TodoCommand} object with a task description component only.
-     * @param description task description
+     * @param description Task description.
      */
     public TodoCommand(String description) {
         super("todo");
@@ -25,7 +25,7 @@ public class TodoCommand extends Command {
 
     /**
      * Returns description of Todo task.
-     * @return description of Todo task
+     * @return Description of Todo task.
      */
     public String getDescription() {
         return description;

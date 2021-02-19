@@ -7,6 +7,7 @@ import bearbear.bearbear.Main;
 import bearbear.command.Command;
 import bearbear.exceptions.InvalidArgumentException;
 import bearbear.exceptions.InvalidCommandException;
+import bearbear.exceptions.UiException;
 import bearbear.parser.Parser;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -38,7 +39,7 @@ public class MainWindow extends VBox {
     private Button sendButton;
     private BearBear bot;
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Pigglet.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Pooh.png"));
+    private final Image bearImage = new Image(this.getClass().getResourceAsStream("/images/Pooh.png"));
 
     /**
      * Initializes the required components.
@@ -51,21 +52,22 @@ public class MainWindow extends VBox {
 
     /**
      * Adds the welcome message label.
+     * @throws UiException If error occurs when creating DialogBox.
      */
     @FXML
-    public void showWelcomeMessage() {
+    public void showWelcomeMessage() throws UiException {
         String welcomeMessage = getResponse(Ui.showWelcomeMessage(bot));
         assert welcomeMessage != null : "Welcome message should not be empty!";
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+        dialogContainer.getChildren().addAll(DialogBox.getBearBearDialog(welcomeMessage, bearImage)
         );
     }
 
     /**
-     * Sets Duke object.
-     * @param duke A Duke object.
+     * Sets {@code BearBear} object.
+     * @param bearBear A {@code BearBear} object.
      */
-    public void setBearBear(BearBear duke) {
-        bot = duke;
+    public void setBearBear(BearBear bearBear) {
+        bot = bearBear;
     }
 
 
@@ -79,7 +81,7 @@ public class MainWindow extends VBox {
     }
 
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws UiException {
         String userText = userInput.getText();
         String input = userInput.getText();
         String response;
@@ -94,7 +96,7 @@ public class MainWindow extends VBox {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getBearBearDialog(response, bearImage)
         );
         userInput.clear();
     }

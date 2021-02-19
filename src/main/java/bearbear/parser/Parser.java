@@ -25,10 +25,10 @@ public class Parser {
     /**
      * Parses user input into a command.
      * @param userInput User input string.
-     * @param bot A Duke object that manages task list operations.
+     * @param bot A BearBear object that manages task list operations.
      * @return User command.
      * @throws InvalidCommandException If user input is an unrecognised command.
-     * @throws InvalidArgumentException If argument is missing from user input.
+     * @throws InvalidArgumentException If arguments are missing from user input.
      */
     public static Command processInput(String userInput, BearBear bot) throws InvalidCommandException,
             InvalidArgumentException {

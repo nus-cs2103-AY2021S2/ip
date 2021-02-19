@@ -22,7 +22,7 @@ public abstract class Command {
     /**
      * Runs the command.
      * @param file The file that task information is stored and retrieved from.
-     * @param bot A duke object.
+     * @param bot A {@code BearBear} object.
      * @return Output message as String to be shown to user.
      * @throws IOException If error occurs while writing to file.
      */

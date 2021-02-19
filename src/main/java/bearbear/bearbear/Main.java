@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import bearbear.command.Command;
 import bearbear.exceptions.StorageException;
+import bearbear.exceptions.UiException;
 import bearbear.storage.Storage;
 import bearbear.tasks.TaskList;
 import bearbear.ui.MainWindow;
@@ -23,12 +24,7 @@ public class Main extends Application {
     private static final File file = new File("src/main/data/BearBear.txt");
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void start(Stage stage) throws StorageException {
+    public void start(Stage stage) throws StorageException, UiException {
         BearBear bot = startMain();
         assert bot != null : "There should be a BearBear object at this point";
         try {
@@ -43,7 +39,7 @@ public class Main extends Application {
             stage.setMinHeight(600.0);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UiException("Failure in initialising user interface.");
         }
     }
 
