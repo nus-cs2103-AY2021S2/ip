@@ -12,7 +12,7 @@ Note: All commands are case insensitive.
 * Note: `<description>` cannot be empty.
 * Example: 
 <p align="center">
-  <img width="100%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/todo.png?raw=true">
+  <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/todo.png?raw=true">
 </p>
 
 ### Create an Event task:
