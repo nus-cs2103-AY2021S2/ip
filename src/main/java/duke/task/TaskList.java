@@ -1,15 +1,10 @@
 package duke.task;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import duke.FileManager;
 import duke.Storage;
@@ -51,14 +46,18 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public boolean hasTaskNumber(int taskNo) {
+        return (taskNo > 0) && (taskNo <= this.tasks.size());
+    }
+
     /**
      * Adds task to task list.
      *
      * @param taskType Type of task.
      * @param description Description of task.
+     * @param isDone Task is done or not.
      * @param isReadingFile True if a file is being read, false if a file is not being read.
      * @param storage Storage.
-     * @param isDone Task is done or not.
      *
      * @return Output string.
      * @throws DukeException If description is not given in the correct format.
@@ -70,47 +69,33 @@ public class TaskList {
         if (taskType == TaskType.TODO) {
             newTask = new ToDoTask(description);
         } else if (taskType == TaskType.DEADLINE) {
+            DeadlineTask.checkFormat(description);
             String[] descriptionArr = description.split(" /by ");
-            if (descriptionArr.length == 1) {
-                throw new DukeException("Your description is not given in the correct format!");
-            }
-
-            Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
-            Matcher matcher = pattern.matcher(descriptionArr[1]);
-            if (!matcher.find()) {
-                throw new DukeException("Your deadline is given in the wrong format! "
-                        + "Please make sure it is in the following format: YYYY-MM-DD HH:MM");
-            }
-
-            newTask = new DeadlineTask(descriptionArr[0], descriptionArr[1]);
+            String info = descriptionArr[0];
+            String dateTime = descriptionArr[1];
+            newTask = new DeadlineTask(info, dateTime);
         } else if (taskType == TaskType.EVENT) {
+            EventTask.checkFormat(description);
             String[] descriptionArr = description.split(" /at ");
-            if (descriptionArr.length == 1) {
-                throw new DukeException("Your description is not given in the correct format!");
-            }
-
-            Pattern pattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$");
-            Matcher matcher = pattern.matcher(descriptionArr[1]);
-            if (!matcher.find()) {
-                throw new DukeException("Your event date is given in the wrong format! "
-                        + "Please make sure it is in the following format: YYYY-MM-DD HH:MM");
-            }
-
-            newTask = new EventTask(descriptionArr[0], descriptionArr[1]);
-        } else {
-            assert false : "Task cannot be added because it is not a todo, deadline or event task.";
+            String info = descriptionArr[0];
+            String dateTime = descriptionArr[1];
+            newTask = new EventTask(info, dateTime);
         }
+
         if (isDone) {
             newTask.markAsDone();
         }
+
         this.tasks.add(newTask);
+
         if (!isReadingFile) {
             storage.appendToFile("data/duke.txt", newTask.toString());
             return ("Got it. I've added this task: \n"
                     + "  " + newTask + "\n"
                     + "Now you have " + this.tasks.size() + " tasks in the list.");
+        } else {
+            return "";
         }
-        return "";
     }
 
     /**
@@ -122,15 +107,16 @@ public class TaskList {
      * @throws DukeException If task number does not exist.
      */
     public String deleteTask(int taskNo, Storage storage) throws DukeException, IOException {
-        if (taskNo > this.tasks.size()) {
+        if (!this.hasTaskNumber(taskNo)) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
         }
 
         String message;
+        int taskIndex = taskNo - 1;
 
-        message = "Noted. I've removed this task:\n";
-        message += "  " + this.tasks.get(taskNo - 1);
-        this.tasks.remove(taskNo - 1);
+        message = "Noted. I've removed this task:\n"
+                + "  " + this.tasks.get(taskIndex);
+        this.tasks.remove(taskIndex);
         String taskOrTasks = (this.tasks.size() <= 1)
                 ? " task"
                 : " tasks";
@@ -160,6 +146,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints tasks without header and number labels.
+     *
+     * @return Output string.
+     */
     public String printTaskListWithoutNumbers() {
         String listOfTasks = "";
         for (Task task : this.tasks) {
@@ -177,19 +168,21 @@ public class TaskList {
     public String printTasksOn(LocalDate date) {
         List<Task> list = new ArrayList();
         for (int i = 0; i < this.tasks.size(); i++) {
-            if (tasks.get(i) instanceof DeadlineTask) {
-                LocalDate deadlineDate = ((DeadlineTask) tasks.get(i)).getDeadlineDate();
-                if (deadlineDate.compareTo(date) == 0) {
-                    list.add(tasks.get(i));
+            Task task = tasks.get(i);
+            if (task instanceof DeadlineTask) {
+                LocalDate existingDate = ((DeadlineTask) task).getDeadlineDate();
+                if (existingDate.compareTo(date) == 0) {
+                    list.add(task);
                 }
-            } else if (tasks.get(i) instanceof EventTask) {
-                LocalDate eventDateDate = ((EventTask) tasks.get(i)).getEventDateDate();
-                if (eventDateDate.compareTo(date) == 0) {
-                    list.add(tasks.get(i));
+            } else if (task instanceof EventTask) {
+                LocalDate existingDate = ((EventTask) task).getEventDateDate();
+                if (existingDate.compareTo(date) == 0) {
+                    list.add(task);
                 }
             } else {
-                assert false : "Tasks on this date cannot be printed because it is not a deadline or event task.";
+                continue;
             }
+
         }
 
         if (list.size() == 0) {
@@ -217,7 +210,6 @@ public class TaskList {
             if (task.description.contains(keyword)) {
                 list.add(task);
             }
-
         }
 
         if (list.size() == 0) {

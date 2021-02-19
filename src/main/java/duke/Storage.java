@@ -102,16 +102,20 @@ public class Storage {
             } else if (taskTypeLetter.equals("D")) {
                 String[] nextLineArr = nextLine.substring(7).split(" \\(by: ");
                 String[] dateTime = nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")")).split(", ");
+                String date = dateTime[0];
+                String time = dateTime[1];
                 String description = nextLineArr[0] + " /by "
-                        + Storage.convertOutputDateToInputDate(dateTime[0]) + " "
-                        + Storage.convertOutputTimeToInputTime(dateTime[1]);
+                        + Storage.convertOutputDateToInputDate(date) + " "
+                        + Storage.convertOutputTimeToInputTime(time);
                 taskList.addTask(TaskType.DEADLINE, description, isDone,true, this);
             } else if (taskTypeLetter.equals("E")) {
                 String[] nextLineArr = nextLine.substring(7).split(" \\(at: ");
                 String[] dateTime = nextLineArr[1].substring(0, nextLineArr[1].lastIndexOf(")")).split(", ");
+                String date = dateTime[0];
+                String time = dateTime[1];
                 String description = nextLineArr[0] + " /at "
-                        + Storage.convertOutputDateToInputDate(dateTime[0]) + " "
-                        + Storage.convertOutputTimeToInputTime(dateTime[1]);
+                        + Storage.convertOutputDateToInputDate(date) + " "
+                        + Storage.convertOutputTimeToInputTime(time);
                 taskList.addTask(TaskType.EVENT, description, isDone,true, this);
             } else {
                 assert false : "Task type is invalid.";

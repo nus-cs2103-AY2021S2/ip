@@ -38,6 +38,7 @@ public class DoneCommand extends Command {
         if (Integer.parseInt(this.description) > tasks.getTaskListSize() || Integer.parseInt(this.description) == 0) {
             throw new DukeException("☹ OOPS!!! This task number does not exist.");
         }
+
         int taskNo = Integer.parseInt(this.description);
         assert (taskNo > 0 && taskNo < tasks.getTaskListSize()) : "Invalid task number to be marked as done.";
         String doneTask = tasks.getTask(taskNo).markAsDone();
