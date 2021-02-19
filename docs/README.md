@@ -5,8 +5,9 @@
 </p>
  
 ## About
-Duke is a desktop app to track and manage tasks easily. Built for [CS2103T: Software Engineering Module](https://nus-cs2103-ay2021s2.github.io/website/admin/index.html).
 
+Duke is a desktop app to track and manage tasks easily. Built
+for [CS2103T: Software Engineering Module](https://nus-cs2103-ay2021s2.github.io/website/admin/index.html).
 
 ## Features
 

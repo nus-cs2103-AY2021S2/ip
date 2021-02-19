@@ -54,10 +54,15 @@ class TaskList {
      * Adds a task to the task list.
      *
      * @param task An instance of Task representing the newly added task.
+     * @return String containing details of the newly added task.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) throws DukeException {
+        String description = task.getDescription();
+        if (description.strip().equals("")) {
+            throw new DukeException("task description cannot be empty");
+        }
         this.tasks.add(task);
-
+        return addedTaskDetails(task);
 
     }
 
@@ -84,7 +89,10 @@ class TaskList {
      * @param index An integer representing the index of the task to be marked as done.
      * @return String containing details of the task marked as done.
      */
-    public String markAsDone(int index) {
+    public String markAsDone(int index) throws DukeException {
+        if (index > listSize() || index <= 0) {
+            throw new DukeException("The list item number provided is invalid");
+        }
         Task task = this.tasks.get(index);
         task.markAsDone();
         String output = "";
@@ -102,7 +110,10 @@ class TaskList {
      * @param index An integer representing the index of the task to be deleted.
      * @return String containing details of the deleted task.
      */
-    public String deleteTask(int index) {
+    public String deleteTask(int index) throws DukeException {
+        if (index > listSize() || index <= 0) {
+            throw new DukeException("The list item number provided is invalid");
+        }
         Task task = this.tasks.get(index);
         this.tasks.remove(index);
         String output = "";
@@ -122,6 +133,7 @@ class TaskList {
      * @return String containing details of all the tasks found in the search.
      */
     public String findTask(String keyword) {
+
         ArrayList<Task> filteredTasks = new ArrayList<>();
         String output = "";
         for (Task task : this.tasks) {
