@@ -35,18 +35,8 @@ public class KobeN{
         storage = new Storage(filePath, tasks, ui);
     }
 
-//    /**
-//     * Main method. Allows Kobe to run.
-//     */
-//    public static void main(String[] args) {
-////        Application.launch(kobe.Main.class, args);
-//        Path path = Paths.get(HOME + "/ip/src/main/data/kobe.txt");
-//        String pathName = HOME + "/ip/src/main/data/kobe.txt";
-//        new KobeN(pathName).run();
-//    }
-
     /**
-     * Runs Kobe, ready to accept commands typed into the command line.
+     * Runs Kobe, ready to accept commands typed into the command line, in sync with the GUI.
      */
     public void run() {
         //Scanner things
@@ -82,5 +72,12 @@ public class KobeN{
         kobesResponse = Ui.getMostRecentResponse();
         return kobesResponse;
     }
+
+    public String getGreeting() {
+        String kobesResponse = "";
+        kobesResponse = Ui.getMostRecentResponse();
+        return kobesResponse;
+    }
+
 }
 

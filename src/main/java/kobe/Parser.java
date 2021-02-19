@@ -39,11 +39,13 @@ public class Parser {
                 String type = text;
                 String condition = "";
 
+                //Isolating the command type, which is the first word
                 String[] commandArrFirst2Parts = command.split(" ", 2);
                 String firstWord = commandArrFirst2Parts[0];
 
                 //Error Handling for wrong commands
                 if (commandArrFirst2Parts.length == 1) {
+                    //For incomplete commands
                     if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
                         Ui.addIncompleteDescriptionResponse();
                         String errMessage = "Incomplete Description: Command " + firstWord + " does not have any name";
@@ -69,16 +71,17 @@ public class Parser {
                     }
                 }
 
+                //Isolate the task name
                 String[] commandArrSecond2Parts = commandArrFirst2Parts[1].split(" /", 2);
-
                 taskName = commandArrSecond2Parts[0];
 
-                //If the array is in 2 parts, there is a condition, add that
+                //Isolate the condition if there is any
                 if (commandArrSecond2Parts.length > 1) {
                     condition = commandArrSecond2Parts[1].substring(3);
                     //no "/by"
                 }
 
+                //Add the task accordingly
                 tasks.addItem(taskName, type, condition);
             }
         } catch (CustomExceptions.IncompleteDecriptionException e) {

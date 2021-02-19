@@ -96,8 +96,6 @@ class Task {
         return this.taskName;
     }
 
-
-
     /**
      * Rewrites the task into a formatted string that is understood by the parser.
      */
@@ -121,7 +119,6 @@ class Task {
                 conditionString = "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
             } else {
             }
-
         } else if (this.type.equals("event")) {
             typeString = "[E]";
             if (!this.condition.equals("")) {
@@ -130,7 +127,6 @@ class Task {
                 conditionString = "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
             } else {
             }
-
         } else {}
 
         return typeString + doneString + " " + taskName + " " + conditionString;

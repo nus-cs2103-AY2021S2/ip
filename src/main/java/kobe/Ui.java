@@ -14,7 +14,8 @@ public class Ui {
      * Constructor for the Ui object.
      */
     public Ui() {
-//        System.out.println(line + "Hello! I'm Kobe\n" + ind + "What can I do for you?\n" + line);
+        System.out.println(line + "Hello! I'm Kobe\n" + ind + "What can I do for you?\n" + line);
+        responses.add("Hello! I'm Kobe.\n What can I do for you?");
     }
 
     /**

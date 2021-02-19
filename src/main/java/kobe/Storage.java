@@ -31,7 +31,6 @@ public class Storage {
             while (readLine != null) {
                 isFileEmpty = false;
                 System.out.println(readLine);
-
                 tasks.addItemByString(readLine);
                 readLine = br.readLine();
             }
@@ -50,9 +49,8 @@ public class Storage {
     }
 
     /**
-     * To save the TaskList into the text file
+     * To save the current TaskList into the text file
      */
-    //UPDATE THE KOBE.TXT FILE
     public static void saveFile(Storage storage) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(storage.pathName,
                 StandardCharsets.US_ASCII))) {

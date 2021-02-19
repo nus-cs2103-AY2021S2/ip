@@ -9,9 +9,6 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    public static String ind = "    ";
-    public static String line = ind + "____________________________________________________________\n" + ind;
-    public static String line2 = ind + "____________________________________________________________\n";
 
     /**
      * Constructor for TaskList.
@@ -98,6 +95,7 @@ public class TaskList {
         } else {
         }
 
+        //Recognise command
         if (type.equals("T")) {
             type = "todo";
         } else if (type.equals("D")) {
@@ -106,6 +104,7 @@ public class TaskList {
             type = "event";
         }
 
+        //Recognise done status
         boolean isItDoneBoolean = false;
         if (isItDone.equals("X")) {
             isItDoneBoolean = true;
@@ -128,7 +127,6 @@ public class TaskList {
      * Marks a task as completed
      *
      * @param taskNumber  the task number associated to the task that has been completed
-     * @param ui  the user interface to inform the user of the outcome
      */
     public void completeTask(int taskNumber) {
         this.tasks.get(taskNumber).markAsDone();
@@ -141,7 +139,6 @@ public class TaskList {
      * Deletes a task
      *
      * @param taskNumber  the task number associated to the task that has been completed
-     * @param ui  the user interface to inform the user of the outcome
      */
     public void deleteTask(int taskNumber) {
         if (this.tasks.isEmpty()) { //Managing empty lists from the start
@@ -159,7 +156,6 @@ public class TaskList {
      * Finds a task corresponding to the String input by the user
      *
      * @param keyword  the String input by the user
-     * @param ui  the user interface to inform the user of the outcome
      */
     public void findTask(String keyword) {
         String currentTaskName = "";
