@@ -97,6 +97,15 @@ class Task {
     }
 
     /**
+     * Gets the task type
+     *
+     * @return  the task name of that task
+     */
+    public String getTaskType() {
+        return this.type;
+    }
+
+    /**
      * Rewrites the task into a formatted string that is understood by the parser.
      */
     @Override
