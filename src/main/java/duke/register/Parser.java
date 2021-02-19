@@ -4,6 +4,11 @@ package duke.register;
  * This class processes the command by breaking down into components
  */
 public class Parser {
+    /**
+     * The various components of a command
+     * Their might be overlaps, such as taskName and index are both second elements of commandSeparate array
+     * but for different commands
+     */
     private final String command;
     private final String[] commandSeparate;
     private String taskType;
@@ -35,6 +40,9 @@ public class Parser {
         }
     }
 
+    /**
+     * This method parses the command
+     */
     public void parse() {
         if (commandSeparate.length == 1) {
             parseTaskType();
