@@ -35,10 +35,15 @@ public class Storage {
      * @throws DukeException
      */
     public ArrayList<Task> loadFile() throws DukeException {
-        File tasksListFile = new File(filePath);
         ArrayList<Task> tasksList = new ArrayList<>();
+        File tasksListFile = new File(filePath);
+
+        if (!tasksListFile.exists()) {
+            tasksListFile.getParentFile().mkdir();
+        }
 
         try {
+            tasksListFile.createNewFile();
             Scanner sc = new Scanner(tasksListFile);
 
             while (sc.hasNextLine()) {
@@ -82,8 +87,14 @@ public class Storage {
      * @throws DukeException
      */
     public void saveFile(ArrayList<Task> tasks) throws DukeException {
+        File tasksListFile = new File(filePath);
+
+        if (!tasksListFile.exists()) {
+            tasksListFile.getParentFile().mkdir();
+        }
+
         try {
-            File tasksListFile = new File(filePath);
+            tasksListFile.createNewFile();
             FileWriter fw = new FileWriter(tasksListFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
