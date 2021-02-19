@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Represents a Parser which parses user inputs.
  */
@@ -35,6 +37,7 @@ public class Parser {
         } else if (input.startsWith("event")) {
             try {
                 int index = input.indexOf("/at");
+                assert isValidDate(input.substring(index + 4)) == true;
                 command = new EventCommand(input.substring(6, index - 1), input.substring(index + 4));
             } catch (Exception e) {
                 throw new IncompleteCommandException();
@@ -42,6 +45,7 @@ public class Parser {
         } else if (input.startsWith("deadline")) {
             try {
                 int index = input.indexOf("/by");
+                assert isValidDate(input.substring(index + 4)) == true;
                 command = new DeadlineCommand(input.substring(9, index - 1), input.substring(index + 4));
             } catch (Exception e) {
                 throw new IncompleteCommandException();
@@ -50,5 +54,14 @@ public class Parser {
             throw new NoSuchCommandException();
         }
         return command;
+    }
+
+    static boolean isValidDate(String date) {
+        try {
+            LocalDate.parse(date);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }

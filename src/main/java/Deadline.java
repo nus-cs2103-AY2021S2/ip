@@ -16,6 +16,7 @@ public class Deadline extends Task {
      */
     Deadline(String name, String deadline) {
         this.name = name;
+        assert LocalDate.parse(deadline) instanceof LocalDate : "Date is not in valid format.";
         this.deadline = LocalDate.parse(deadline);
         this.done = false;
     }
