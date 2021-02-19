@@ -3,12 +3,8 @@ package duke.parser;
 import java.time.LocalDateTime;
 
 /**
- * Parses hard disk String input.
- *
- * @author Oh Jun Ming
- * @version 1.0
+ * Parses string input saved in hard disk.
  */
-
 public class ListParser {
     private String typeOfTask;
     private Boolean isDone;
@@ -16,7 +12,7 @@ public class ListParser {
     private LocalDateTime time;
 
     /**
-     * Return ListParser.
+     * ListParser constructor.
      */
     public ListParser() {
         this.typeOfTask = "";

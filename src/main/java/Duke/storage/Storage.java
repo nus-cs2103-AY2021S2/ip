@@ -12,7 +12,6 @@ import duke.parser.ListParser;
 import duke.task.Task;
 import duke.task.TaskList;
 
-
 public class Storage {
     private static Path filePath;
 

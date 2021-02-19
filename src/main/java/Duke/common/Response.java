@@ -1,10 +1,7 @@
 package duke.common;
 
 /**
- * Stores all generic string responses back to user.
- *
- * @author Oh Jun Ming
- * @version 1.0
+ * Stores all generic string reply to user.
  */
 public enum Response {
     GREET("Welcome to Duke\nWhat can I do for you?\n"),
@@ -28,7 +25,7 @@ public enum Response {
     /**
      * Returns a String that contain generic response.
      *
-     * @return String
+     * @return String of response message.
      */
     @Override
     public String toString() {

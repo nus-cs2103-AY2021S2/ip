@@ -1,7 +1,16 @@
 package duke.exception;
 
+/**
+ * Represents a invalid task index number exception.
+ */
 public class InvalidTaskNumber extends DukeException {
     private int numberOfTasks;
+
+    /**
+     * Constructor for InvalidTaskNumber.
+     *
+     * @param numberOfTasks size of current task list.
+     */
     public InvalidTaskNumber(int numberOfTasks) {
         this.numberOfTasks = numberOfTasks + 1;
     }

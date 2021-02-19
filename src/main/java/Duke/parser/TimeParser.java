@@ -5,9 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Parses string time into LocalDateTime object.
- *
- * @author Oh Jun Ming
- * @version 1.0
  */
 public class TimeParser {
     private LocalDateTime time;

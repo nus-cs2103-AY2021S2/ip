@@ -6,9 +6,6 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Deadline.
  * Sub-class of Task.
- *
- * @author Oh Jun Ming
- * @version 1.0
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
@@ -17,6 +14,7 @@ public class Deadline extends Task {
      * Returns a Deadline.
      *
      * @param msg description of Deadline.
+     * @param by LocalDateTime object.
      * @return Deadline
      */
     public Deadline(String msg, LocalDateTime by) {
@@ -40,7 +38,7 @@ public class Deadline extends Task {
     /**
      * Returns time deadline of Deadline.
      *
-     * @return
+     * @return LocalDateTime
      */
     public LocalDateTime getTime() {
         return by;

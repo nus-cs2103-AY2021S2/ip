@@ -2,16 +2,24 @@ package duke.ui;
 
 import duke.Duke;
 import duke.common.Command;
+import duke.exception.DuplicateTask;
 import duke.exception.EmptyDescription;
 import duke.exception.InvalidTaskNumber;
 import duke.exception.InvalidTypeOfTask;
 import duke.parser.Parser;
 
+/**
+ *
+ */
 public class Ui {
     private Boolean shouldExit = false;
     private Duke duke;
 
-
+    /**
+     * Ui constructor.
+     *
+     * @param duke
+     */
     public Ui(Duke duke) {
         this.duke = duke;
     }
@@ -20,7 +28,7 @@ public class Ui {
      * Returns Duke response to user input.
      *
      * @param input user command line input.
-     * @return Duke response.
+     * @return String Duke response.
      */
     public String readCommand(String input) {
         String response = "";
@@ -63,6 +71,8 @@ public class Ui {
         } catch (EmptyDescription e) {
             response = e.toString();
         } catch (InvalidTaskNumber e) {
+            response = e.toString();
+        } catch (DuplicateTask e) {
             response = e.toString();
         }
         return response;

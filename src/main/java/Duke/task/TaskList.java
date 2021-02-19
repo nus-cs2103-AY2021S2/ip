@@ -7,7 +7,9 @@ import duke.common.Response;
 import duke.exception.InvalidTaskNumber;
 import duke.parser.ListParser;
 
-
+/**
+ * Represents a list of task objects.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -15,18 +17,25 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Getter for arraylist of tasks.
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
+
+    /**
+     * Returns number of tasks in taskList.
+     *
+     * @return int
+     */
     public int getNumberOfTasks() {
         return tasks.size();
     }
-
-
     /**
      * Adds task from storage to tasklist.
      *
-     * @param p
+     * @param p ListParser.
      */
     public void populate(ListParser p) {
         String typeOfTask = p.getTypeOfTask();
@@ -49,6 +58,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds task to taskList.
+     *
+     * @param task
+     */
     public void add(Task task) {
         tasks.add(task);
     }
@@ -57,21 +71,26 @@ public class TaskList {
      * Checks for duplicate task input.
      *
      * @param newTask
-     * @return isDuplicate
+     * @return isDuplicate Boolean.
      */
     public Boolean detectDuplicates(Task newTask) {
         Boolean isDuplicate = false;
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).equals(newTask)) {
                 isDuplicate = true;
-                System.out.println("Input already exists. Please try again");
                 break;
             }
         }
         return isDuplicate;
     }
 
-
+    /**
+     * Deletes task from taskList.
+     *
+     * @param i
+     * @return String
+     * @throws InvalidTaskNumber
+     */
     public String delete(int i) throws InvalidTaskNumber {
         if (i >= tasks.size() || i < 0) {
             throw new InvalidTaskNumber(tasks.size());
@@ -85,7 +104,13 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * Marks Task as done.
+     *
+     * @param i
+     * @return String
+     * @throws InvalidTaskNumber
+     */
     public String markAsDone(int i) throws InvalidTaskNumber {
         String reply = "";
         if (i >= tasks.size() || i < 0) {
@@ -96,9 +121,10 @@ public class TaskList {
         }
         return reply;
     }
-
     /**
      * Locates tasks matched with keyword.
+     * @param keyword
+     * @return String
      */
     public String find(String keyword) {
         SearchList searchList = new SearchList();
@@ -129,8 +155,6 @@ public class TaskList {
         }
         return Response.LIST.toString() + msg;
     }
-
-
 
     public String status() {
         return "Now you have " + tasks.size() + " tasks in the list.\n";

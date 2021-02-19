@@ -2,9 +2,6 @@ package duke.exception;
 
 /**
  * Represent a empty task description parsed from user input.
- *
- * @author Oh Jun Ming
- * @version 1.0
  */
 public class EmptyDescription extends DukeException {
     private String typeOfTask;

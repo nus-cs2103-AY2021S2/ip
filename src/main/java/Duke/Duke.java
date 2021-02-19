@@ -1,52 +1,55 @@
 package duke;
 
-
 import java.time.LocalDateTime;
 
 import duke.common.Command;
 import duke.common.Response;
+import duke.exception.DuplicateTask;
 import duke.exception.EmptyDescription;
 import duke.exception.InvalidTaskNumber;
 import duke.exception.InvalidTypeOfTask;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
-import duke.storage.Storage;
-
 
 /**
- * Duke program maintains a taskList for user to track tasks.
- * Reads user input tasks(todo, event, deadline).
- * Able to perform add, delete, markasDone tasks.
+ * Duke program maintains storage for user to track tasks.
+ * Able to perform add, delete, markasDone, list, find tasks.
  */
-
 public class Duke {
     private Storage storage;
     private TaskList taskList;
 
     /**
-     * Initialise Duke chatbot.
+     * Initialise Duke program.
      */
     public Duke() {
         storage = new Storage();
         taskList = storage.load();
     }
 
+    /**
+     * Saves taskList changes to Storage.
+     */
     public void save() {
         storage.save(taskList.getTasks());
     }
 
     /**
-     * Adds task to tasklist.
+     * Adds task to taskList.
      *
-     * @param p
+     * @param p Parser object.
+     * @return String
      * @throws EmptyDescription
+     * @throws InvalidTypeOfTask
+     * @throws DuplicateTask
      */
-    public String addTask(Parser p) throws EmptyDescription, InvalidTypeOfTask {
+    public String addTask(Parser p) throws EmptyDescription, InvalidTypeOfTask, DuplicateTask {
         String reply = "";
         Command command = p.getCommand();
         String description = p.getDescription();
@@ -69,13 +72,13 @@ public class Duke {
                 throw new InvalidTypeOfTask();
             }
             if (taskList.detectDuplicates(newTask)) {
-                reply = "Input already exists. Please try again";
+                throw new DuplicateTask();
             } else if (!taskList.detectDuplicates(newTask)) {
                 taskList.add(newTask);
                 String instructions = Response.ADD.toString() + newTask + "\n" + this.status();
                 reply = instructions;
             } else {
-                reply = "Input already exists. Please try again";
+                throw new DuplicateTask();
             }
         }
         return reply;
@@ -84,7 +87,8 @@ public class Duke {
      * Marks task as DONE.
      *
      * @param p
-     * @throws EmptyDescription
+     * @return String
+     * @throws InvalidTaskNumber
      */
     public String markAsDone(Parser p) throws InvalidTaskNumber {
         String reply = "";
@@ -99,11 +103,12 @@ public class Duke {
         }
         return reply;
     }
-
     /**
-     * Removes task from taskList.
+     * Delete Task from list.
      *
      * @param p
+     * @return String
+     * @throws InvalidTaskNumber
      */
     public String deleteTask(Parser p) throws InvalidTaskNumber {
         int i = Integer.parseInt(p.getDescription()) - 1;
@@ -112,12 +117,15 @@ public class Duke {
 
     /**
      * Prints list.
+     *
+     * @return String
      */
     public String list() {
         return taskList.list();
     }
     /**
      * Locates tasks matched with keyword.
+     *
      * @param parser
      */
     public String find(Parser parser) {
@@ -125,13 +133,20 @@ public class Duke {
         return taskList.find(keyword);
     }
 
-
+    /**
+     * Return current number of tasks.
+     *
+     * @return string
+     */
     public String status() {
         return "Now you have " + taskList.getNumberOfTasks() + " tasks in the list.\n";
     }
 
     /**
-     * Generate a response to user input.
+     * Generate a response to user input on duke chat GUI.
+     *
+     * @param input
+     * @return String
      */
     public String getResponse(String input) {
 

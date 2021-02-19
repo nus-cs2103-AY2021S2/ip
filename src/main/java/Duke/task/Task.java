@@ -2,9 +2,6 @@ package duke.task;
 
 /**
  * Represents a Task.
- *
- * @author Oh Jun Ming
- * @version 1.0
  */
 public class Task {
     protected String msg;
@@ -52,10 +49,20 @@ public class Task {
         return new Task(this.msg, true);
     }
 
+    /**
+     * Gets Message description.
+     *
+     * @return String
+     */
     public String getMsg() {
         return msg;
     }
 
+    /**
+     * Gets Boolean of task completion status.
+     *
+     * @return Boolean
+     */
     public Boolean getDone() {
         return isDone;
     }

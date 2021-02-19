@@ -2,9 +2,6 @@ package duke.exception;
 
 /**
  * Represent a invalid TypeOfTask parsed from user input.
- *
- * @author Oh Jun Ming
- * @version 1.0
  */
 public class InvalidTypeOfTask extends DukeException {
     /**

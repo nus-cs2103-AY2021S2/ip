@@ -42,6 +42,7 @@ public class Todo extends Task {
 
     /**
      * Encode format for save to storage.
+     *
      * @return
      */
     @Override

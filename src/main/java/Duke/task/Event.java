@@ -6,9 +6,6 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents an Event.
  * Sub-class of Task.
- *
- * @author Oh Jun Ming
- * @version 1.0
  */
 public class Event extends Task {
     protected LocalDateTime time;

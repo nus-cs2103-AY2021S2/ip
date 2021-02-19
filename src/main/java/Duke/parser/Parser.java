@@ -5,9 +5,6 @@ import java.time.LocalDateTime;
 import duke.common.Command;
 /**
  * Parses user input into typeOfTask, description, time.
- *
- * @author Oh Jun Ming
- * @version 1.0
  */
 public class Parser {
     private String typeOfTask;
