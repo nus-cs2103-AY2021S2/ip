@@ -1,5 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * This class is in charge of understanding the user's input and process input
  * to be passed to other classes for further processing
@@ -61,6 +65,8 @@ public class Parser {
             results = processDelete(inputLine, results);
         } else if (inputLine.startsWith("find")) {
             results = processFind(inputLine, results);
+        } else if (inputLine.startsWith("update")) {
+            results = processUpdate(inputLine, results);
         } else {
             throw new DukeException("I'm sorry, I don't understand what that means.");
         }
@@ -71,7 +77,8 @@ public class Parser {
      * Returns an array of strings with processed text inputs for Done
      * the returned array will then be passed to other functions in Duke.java for further processing
      *
-     * @param inputLine input by user
+     * @param input input by user
+     * @param results results array
      * @return an array of processes strings
      * @throws DukeException If user input is in invalid formats
      */
@@ -90,8 +97,8 @@ public class Parser {
      * Returns an array of strings with processed text inputs for Todo
      * the returned array will then be passed to other functions in Duke.java for further processing
      *
-     * @param inputLine input by user
-     * @return an array of processes strings
+     * @param input input by user
+     * @param results results array
      * @throws DukeException If user input is in invalid formats
      */
     public String[] processTodo(String input, String[] results) throws DukeException {
@@ -109,21 +116,23 @@ public class Parser {
      * Returns an array of strings with processed text inputs for Deadline
      * the returned array will then be passed to other functions in Duke.java for further processing
      *
-     * @param inputLine input by user
+     * @param input input by user
+     * @param results results array
      * @return an array of processes strings
      * @throws DukeException If user input is in invalid formats
      */
     public String[] processDl(String input, String[] results) throws DukeException {
         if (input.equals("deadline")) {
-            throw new DukeException("Please enter a deadline description.");
+            throw new DukeException("Please follow the correct deadline input format:\ndeadline <desc> /by <yyyy-mm-dd> <time>\n");
         } else {
             String dlMsg = input.substring(9);
             String[] temp = dlMsg.split(" /by ");
             if (temp.length == 1) {
-                throw new DukeException("Please enter a deadline completion time.");
+                throw new DukeException("Please follow the correct deadline input format:\ndeadline <desc> /by <yyyy-mm-dd> <time>\n");
             } else {
                 String dlDesc = temp[0];
                 String by = temp[1];
+                checkDateTimeFormat(by);
                 results[0] = "DDL";
                 results[1] = dlDesc;
                 results[2] = by;
@@ -136,21 +145,23 @@ public class Parser {
      * Returns an array of strings with processed text inputs for Event
      * the returned array will then be passed to other functions in Duke.java for further processing
      *
-     * @param inputLine input by user
+     * @param input input by user
+     * @param results results array
      * @return an array of processes strings
      * @throws DukeException If user input is in invalid formats
      */
     public String[] processEv(String input, String[] results) throws DukeException {
         if (input.equals("event")) {
-            throw new DukeException("Please enter an event description.");
+            throw new DukeException("Please follow the correct event input format:\nevent <desc> /at <yyyy-mm-dd> <time>\n");
         } else {
             String dlMsg = input.substring(6);
             String[] temp = dlMsg.split(" /at ");
             if (temp.length == 1) {
-                throw new DukeException("Please enter an event time.");
+                throw new DukeException("Please follow the correct event input format:\nevent <desc> /at <yyyy-mm-dd> <time>\n");
             } else {
                 String evDesc = temp[0];
                 String at = temp[1];
+                checkDateTimeFormat(at);
                 results[0] = "ENT";
                 results[1] = evDesc;
                 results[2] = at;
@@ -163,7 +174,8 @@ public class Parser {
      * Returns an array of strings with processed text inputs for Delete
      * the returned array will then be passed to other functions in Duke.java for further processing
      *
-     * @param inputLine input by user
+     * @param input input by user
+     * @param results results array
      * @return an array of processes strings
      * @throws DukeException If user input is in invalid formats
      */
@@ -186,7 +198,8 @@ public class Parser {
      * Returns an array of strings with processed text inputs for Find
      * the returned array will then be passed to other functions in Duke.java for further processing
      *
-     * @param inputLine input by user
+     * @param input input by user
+     * @param results results array
      * @return an array of processes strings
      * @throws DukeException If user input is in invalid formats
      */
@@ -202,6 +215,14 @@ public class Parser {
 
     }
 
+    /**
+     * Processes relevant update information
+     *
+     * @param input input by user
+     * @param results results array
+     * @return an array of processes strings
+     * @throws DukeException If user input is in invalid formats
+     */
     public String[] processUpdate(String input, String[] results) throws DukeException {
         if (input.equals("update")) {
             throw new DukeException("Please tell me what you like to update.");
@@ -219,7 +240,7 @@ public class Parser {
                 String type = temp[1];
                 String details = temp[2];
 
-                if (type.equals("time") || type.equals("desc")) {
+                if (type.equals("dt") || type.equals("desc")) {
                     results[0] = "UPD";
                     results[1] = taskIndex;
                     results[2] = type;
@@ -227,8 +248,32 @@ public class Parser {
                 } else {
                     throw new DukeException("Please tell me which attribute you want to update");
                 }
+
+                if (type.equals("dt")) {
+                    checkDateTimeFormat(details);
+                }
             }
         }
         return results;
+    }
+
+    /**
+     * Checks if the date and time input from the user is of the valid format
+     *
+     * @param dateTimeInput input by user
+     * @throws DukeException If user input is in invalid formats
+     */
+    public void checkDateTimeFormat(String dateTimeInput) throws DukeException {
+        String[] inputs = dateTimeInput.split(" ");
+        try {
+            LocalDate date = LocalDate.parse(inputs[0]);
+            date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            if(inputs.length > 1) {
+                LocalTime time = LocalTime.parse(inputs[1]);
+                time.format(DateTimeFormatter.ofPattern("HH:mm"));
+            }
+        } catch (Exception ex) {
+            throw new DukeException("Please follow the correct datetime input format: <yyyy-mm-dd> <HH:mm>\n");
+        }
     }
 }

@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -24,11 +25,21 @@ public class Deadline extends Task {
      */
     public String extractDateTime(String by) {
         String[] temp = by.split(" ");
+        String result = "";
         for (String str : temp) {
             System.out.println(str);
         }
+
         LocalDate date = LocalDate.parse(temp[0]);
-        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + temp[1];
+        result = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
+        if(temp.length > 1) {
+            LocalTime time = LocalTime.parse(temp[1]);
+            String res = time.format(DateTimeFormatter.ofPattern("HH:mm"));
+            result += (" " + res);
+        }
+
+        return result;
     }
 
     @Override
@@ -53,7 +64,7 @@ public class Deadline extends Task {
      * @return String of correctly formatted task
      */
     @Override
-    public String toString() {
+    public String toString()  {
         return "D" + super.toString() + " | " + extractDateTime(by);
     }
 }

@@ -64,6 +64,11 @@ public class TaskList {
         this.taskList.remove(taskIndex-1);
     }
 
+    /**
+     * given info related to the updating of a task, updates the task from the task list
+     *
+     * @param updateInfo relevant information related to the update
+     */
     public void updateTask(String[] updateInfo) throws DukeException{
         int taskIndex = Integer.parseInt(updateInfo[1]);
         String type = updateInfo[2];
@@ -85,11 +90,18 @@ public class TaskList {
      * @return the boolean of whether the task exists
      */
     public boolean checkTaskExist(int index) {
-        if (index < 1 || index >= this.taskList.size()) {
+        if (index < 1 || index > this.taskList.size()) {
             return false;
         } else {
             return true;
         }
+    }
+
+    /**
+     * check if the task list is empty
+     */
+    public boolean isEmpty() {
+        return this.taskList.isEmpty();
     }
 
     /**
@@ -115,8 +127,6 @@ public class TaskList {
 
         for (Task t : this.taskList) {
             String taskDesc = t.getDescription();
-            assert (taskDesc == null || taskDesc.trim().isEmpty()) : "Empty task description";
-
             if (taskDesc.contains(keyword)) {
                 foundTasks.add(t);
             }

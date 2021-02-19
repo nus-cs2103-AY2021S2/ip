@@ -32,7 +32,7 @@ public class Ui {
     /**
      * append the string specified to the response
      *
-     * @param String message to be appended
+     * @param msg message to be appended
      * @return void
      */
 
@@ -61,7 +61,7 @@ public class Ui {
     /**
      * append specified error message to the reponse
      *
-     * @param String error message
+     * @param msg error message
      * @return void
      */
     public void showError(String msg) {
@@ -71,7 +71,7 @@ public class Ui {
     /**
      * appends textual form of task to the response
      *
-     * @param Task task
+     * @param task task
      * @return void
      */
     public void printTask(Task task) {
@@ -85,7 +85,7 @@ public class Ui {
     /**
      * appends textual form of task from a tasklist to the response
      *
-     * @param TaskList taskList
+     * @param taskList taskList
      * @return void
      */
     public void printTasks(TaskList taskList) {
@@ -106,6 +106,14 @@ public class Ui {
     }
 
     /**
+     * appends list is empty message to the response
+     *
+     * @return void
+     */
+    public void showEmptyListMsg() {
+        response += "You do not have any tasks at the moment.\n";
+    }
+    /**
      * appends goodbye message to the response
      *
      * @return void
@@ -121,6 +129,15 @@ public class Ui {
      */
     public void showDoneMsg() {
         response += "Nice! I've marked this task as done:\n";
+    }
+
+    /**
+     * appends task is already done message to the response
+     *
+     * @return void
+     */
+    public void showIsAlrDoneMsg() {
+        response += "You have already completed this task!\n";
     }
 
     /**
@@ -168,6 +185,11 @@ public class Ui {
         response += "Here are the matching tasks in your list:\n";
     }
 
+    /**
+     * appends task updated message to the response
+     *
+     * @return void
+     */
     public void showTaskUpdated() {
         response += "The task is updated!\n";
     }

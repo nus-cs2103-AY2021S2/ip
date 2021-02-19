@@ -38,8 +38,18 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Update time of the task
+     *
+     * @param time new value of time
+     */
     public void updateTime(String time) {};
 
+    /**
+     * Update description of the task
+     *
+     * @param desc new description of the task
+     */
     public void updateDesc(String desc) {
         this.description = desc;
     };
