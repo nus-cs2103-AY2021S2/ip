@@ -3,6 +3,14 @@
 ## Contents 
 1. [Features](#features)
 2. [Usage](#Usage)
+   
+   i. [How to interpret this guide](#how-to-interpret-this-guide)
+   
+   ii. [Add tasks to your task list](#add-tasks-to-your-task-list)
+   
+   iii. [Modify tasks in your task list](#modify-tasks-in-your-task-list)
+   
+   iv. [Miscellaneous](#miscellaneous)
 3. [Command Syntax Summary](#command-syntax-summary)
 4. [Accepted date time formats](#accepted-date-time-formats) 
 
@@ -25,7 +33,7 @@ Kiwi provides convenient alternative syntax so that you can save time and keystr
 
 ## Usage
 
-#### How to interpret this guide
+### How to interpret this guide
 Replace the words given in {curly braces} with appropriate inputs. For example, replace {DD/MM hh:mm} with a valid date format.
 
 ### Add tasks to your task list
@@ -61,7 +69,7 @@ Syntax:
 
 Example of usage:
 
-`event task 2 /at 20/4 6PM`
+`event task 2 /at 20/4 18:00`
 
 Expected outcome:
 
@@ -81,7 +89,7 @@ Syntax:
 
 Example of usage:
 
-`deadline  task 3 /by 17/4 11:59PM`
+`deadline  task 3 /by 17/4 23:59`
 
 Expected outcome:
 
@@ -201,8 +209,8 @@ Syntax:
 Command keyword | Accepted alternative keywords* | Usage | Examples
 ----------|------|------|------
 `todo`| `t` | `todo {description}`|`todo sample task 1 `
-`event`|`e` | `event {description} /at {DD-MM hh:mm}` | `event task 2 /at 20/4 6PM`
-`deadline` | `dl` | `deadline {description} /by {DD-MM hh:mm}` | `deadline  task 3 /by 17/4 11:59PM`
+`event`|`e` | `event {description} /at {DD-MM hh:mm}` | `event task 2 /at 20/4 18:00`
+`deadline` | `dl` | `deadline {description} /by {DD-MM hh:mm}` | `deadline  task 3 /by 17/4 23:59`
 `list`|`ls` `l` | `list` | `list`
 `find` | `f` | `find {keyword}` | `find sample`
 `done` |- | `done {task number}` | `done 1`
@@ -233,6 +241,7 @@ dd-mm-yyyy  | 30-04-2023
 
 syntax | example(s)
 ---|---
-hh:mm | 16:11
-hh:mm pm | 11:58 pm, 11:58 am
 hham | 11am, 2pm
+hh:mm | 16:11, 7:33
+hh:mm pm | 11:58 pm, 11:58 am
+hh:mmpm | 11:58pm, 11:58am
