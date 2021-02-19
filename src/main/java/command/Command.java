@@ -28,4 +28,6 @@ public abstract class Command {
     public boolean isQuitCommand() {
         return false;
     }
+
+    public abstract boolean equals(Object o);
 }

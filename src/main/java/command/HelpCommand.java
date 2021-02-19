@@ -4,10 +4,7 @@ import task.TaskManager;
 import util.Formatter;
 import util.Parser;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Command to display help text.
@@ -159,5 +156,18 @@ public class HelpCommand extends Command {
     @Override
     public String execute(TaskManager taskManager) {
         return response;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HelpCommand that = (HelpCommand) o;
+        return Objects.equals(response, that.response);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(response);
     }
 }

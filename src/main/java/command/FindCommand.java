@@ -8,6 +8,7 @@ import util.Parser;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -92,5 +93,18 @@ public class FindCommand extends Command {
         output.append(listOfTasks);
 
         return output.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FindCommand that = (FindCommand) o;
+        return keywords.equals(that.keywords);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(keywords);
     }
 }

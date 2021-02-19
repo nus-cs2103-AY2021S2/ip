@@ -48,4 +48,10 @@ public class ListCommand extends Command {
         output.append(listOfTasks);
         return output.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        return o != null && getClass() == o.getClass();
+    }
 }

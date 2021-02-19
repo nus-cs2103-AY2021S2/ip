@@ -6,6 +6,7 @@ import util.DukeException;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Command to add a Todo Task to a TaskManager.
@@ -55,5 +56,16 @@ public class TodoCommand extends Command {
         return taskManager.addTask(new Todo(description));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoCommand that = (TodoCommand) o;
+        return description.equals(that.description);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
+    }
 }

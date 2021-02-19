@@ -50,4 +50,10 @@ public class QuitCommand extends Command {
     public boolean isQuitCommand() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        return o != null && getClass() == o.getClass();
+    }
 }

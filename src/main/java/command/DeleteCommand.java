@@ -6,6 +6,7 @@ import util.Parser;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Command to remove the specified Task from a TaskManger.
@@ -62,5 +63,18 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskManager taskManager) throws DukeException {
         return taskManager.deleteTask(position);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeleteCommand that = (DeleteCommand) o;
+        return position == that.position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 }

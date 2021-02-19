@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Command to add a Deadline Task to a TaskManager.
@@ -79,5 +80,18 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskManager taskManager) {
         return taskManager.addTask(new Deadline(description, date));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DeadlineCommand that = (DeadlineCommand) o;
+        return description.equals(that.description) && date.equals(that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, date);
     }
 }
