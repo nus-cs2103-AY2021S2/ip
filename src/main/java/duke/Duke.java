@@ -2,6 +2,11 @@ package duke;
 
 import java.io.IOException;
 
+import duke.commands.Commands;
+import duke.commands.Task;
+import duke.exception.DukeException;
+
+
 /**
  * Duke represents a task list application.
  * It takes in the following types of tasks: todo, deadline, event.
@@ -58,6 +63,7 @@ public class Duke {
         Task newTask;
 
         try {
+            System.out.println(lastCommand);
             switch (Commands.valueOf(keyWordToCompare)) {
             case BYE:
                 storage.writeAllData(tasks, lastCommand, lastDeletedTask);
@@ -65,6 +71,7 @@ public class Duke {
                 break;
             case LIST:
                 response += ui.getPrintTaskListString(tasks);
+                lastCommand = command;
                 break;
             case DONE:
                 int taskNumber = Integer.parseInt(commandArr[1]);
@@ -106,10 +113,12 @@ public class Duke {
             case FIND:
                 TaskList tasksFound = parser.parseFindCommand(command, tasks);
                 response += ui.getPrintFoundTasksString(tasksFound);
+                lastCommand = command;
                 break;
             case UNDO:
                 boolean undoStatus = parser.parseUndoCommand(lastCommand, lastDeletedTask, tasks);
                 response += ui.getPrintUndoCommandString(undoStatus);
+                lastCommand = command;
                 break;
             default:
                 //do nothing

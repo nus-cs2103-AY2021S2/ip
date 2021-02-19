@@ -1,7 +1,7 @@
-package duke;
+package duke.exception;
 
 public class InvalidEventCommandException extends DukeException {
-    InvalidEventCommandException() {
+    public InvalidEventCommandException() {
         super();
     }
 

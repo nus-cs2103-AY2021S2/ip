@@ -1,7 +1,20 @@
 package duke;
 
-import java.time.Month;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import duke.commands.Commands;
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Task;
+import duke.commands.ToDo;
+import duke.exception.InvalidDeadlineCommandException;
+import duke.exception.InvalidDeleteCommandException;
+import duke.exception.InvalidDoneCommandException;
+import duke.exception.InvalidEventCommandException;
+import duke.exception.InvalidFindCommandException;
+import duke.exception.InvalidToDoCommandException;
+
 
 /**
  * Represents a parser that makes sense of user input by reformatting data, making objects etc.
@@ -9,24 +22,6 @@ import java.util.ArrayList;
  */
 public class Parser {
 
-    /**
-     * Returns formattedDate in "yyyy-MM-DD" format from unformatted "month day yyyy".
-     *
-     * @param unformattedDate String in "month day year" format.
-     * @return formatted date in "yyyy-MM-DD" format.
-     */
-    public String parseDate(String unformattedDate) {
-        try {
-            String[] dateArr = unformattedDate.split(" ");
-            String monthString = String.format("%02d", Month.valueOf(dateArr[0].toUpperCase()).getValue());
-            String day = String.format("%02d", Integer.parseInt(dateArr[1]));
-            String year = dateArr[2];
-            String formattedDate = year + "-" + monthString + "-" + day;
-            return formattedDate;
-        } catch (IllegalArgumentException e) {
-            return e.getMessage() + " date input as 'month day year' format ";
-        }
-    }
 
     /**
      * Processes a "todo" command and returns a ToDo object.
@@ -63,10 +58,7 @@ public class Parser {
         if (!command.contains(" /by ")) {
             throw new InvalidDeadlineCommandException();
         } else {
-            String[] deadlineAndTask = command.split(" /by ");
-            int deadlineDetailStartIndexOffset = 9;
-            Deadline newDeadline = new Deadline(deadlineAndTask[1],
-                    deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
+            Deadline newDeadline = createDeadlineTask(command);
             userList.addTask(newDeadline);
             return newDeadline;
         }
@@ -84,9 +76,7 @@ public class Parser {
         if (!command.contains(" /at ")) {
             throw new InvalidEventCommandException();
         } else {
-            String[] eventTimeAndTask = command.split(" /at ");
-            int eventDetailStartIndexOffset = 6;
-            Event newEvent = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(eventDetailStartIndexOffset));
+            Event newEvent = this.createEventTask(command);
             userList.addTask(newEvent);
             return newEvent;
         }
@@ -157,17 +147,22 @@ public class Parser {
 
     private Event createEventTask (String command) {
         String[] eventTimeAndTask = command.split(" /at ");
-        int eventDetailOffset = 6;
-        return new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(eventDetailOffset));
+        LocalDate eventDate = LocalDate.parse(eventTimeAndTask[1]);
+
+        int eventDetailStartIndexOffset = 6;
+        String eventDetails = eventTimeAndTask[0].substring(eventDetailStartIndexOffset);
+
+        return new Event(eventDate, eventDetails);
     }
 
     private Deadline createDeadlineTask (String command) {
         String[] deadlineAndTask = command.split(" /by ");
+        LocalDate date = LocalDate.parse(deadlineAndTask[1]);
         int deadlineDetailStartIndexOffset = 9;
-        return new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
+        return new Deadline(date, deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
     }
 
-    public boolean parseUndoCommand(String lastCommand, Task lastDeletedTask, TaskList userList) throws Exception {
+    public boolean parseUndoCommand (String lastCommand, Task deletedTask, TaskList userList) {
         String keyWord = lastCommand.split(" ")[0];
         String keyWordToCompare = keyWord.toUpperCase();
 
@@ -206,17 +201,14 @@ public class Parser {
                 isUndoSuccessful = true;
                 break;
             case DELETE:
-                if (lastDeletedTask instanceof ToDo) {
-                    this.parseAddTodo(lastCommand, userList);
-                } else if (lastDeletedTask instanceof Event) {
-                    this.parseAddEvent(lastCommand, userList);
-                } else if (lastDeletedTask instanceof Deadline) {
-                    this.parseAddDeadline(lastCommand, userList);
+                if (deletedTask instanceof ToDo || deletedTask instanceof Event || deletedTask instanceof Deadline) {
+                    userList.addTask(deletedTask);
+                    deletedTask.markAsUndone();
+                    isUndoSuccessful = true;
                 }
-                isUndoSuccessful = true;
                 break;
             default:
-                //do nothing
+                // do nothing
             }
         }
         return isUndoSuccessful;

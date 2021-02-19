@@ -1,8 +1,8 @@
-package duke;
+package duke.exception;
 
 public class InvalidDoneCommandException extends DukeException {
 
-    InvalidDoneCommandException() {
+    public InvalidDoneCommandException() {
 
     }
     @Override

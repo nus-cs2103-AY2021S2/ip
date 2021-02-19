@@ -1,4 +1,4 @@
-package duke;
+package duke.commands;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ public class Task {
     private boolean isDone;
     private final String taskDetail;
 
-    Task(String taskDetail) {
+    public Task(String taskDetail) {
         this.taskDetail = taskDetail;
         this.isDone = false;
     }

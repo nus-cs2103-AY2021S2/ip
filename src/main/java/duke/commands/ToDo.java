@@ -1,7 +1,7 @@
-package duke;
+package duke.commands;
 
 public class ToDo extends Task {
-    ToDo(String toDoDetail) {
+    public ToDo(String toDoDetail) {
         super(toDoDetail);
     }
 

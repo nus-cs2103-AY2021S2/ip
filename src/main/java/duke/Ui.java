@@ -1,5 +1,7 @@
 package duke;
 
+import duke.commands.Task;
+
 /**
  * Represents the Ui of Duke CLI application with methods to print the output according to the input given.
  */

@@ -2,6 +2,8 @@ package duke;
 
 import java.util.ArrayList;
 
+import duke.commands.Task;
+
 /**
  * Represents the user's list of tasks.
  * Task objects are stored in the object

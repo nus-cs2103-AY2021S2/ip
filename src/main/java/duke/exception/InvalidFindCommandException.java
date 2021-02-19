@@ -1,7 +1,7 @@
-package duke;
+package duke.exception;
 
 public class InvalidFindCommandException extends DukeException {
-    InvalidFindCommandException() {
+    public InvalidFindCommandException() {
         super();
     }
 

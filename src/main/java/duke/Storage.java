@@ -3,8 +3,15 @@ package duke;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Task;
+import duke.commands.ToDo;
 
 /**
  * Represents the storage for user's task list.
@@ -67,16 +74,22 @@ public class Storage {
                 case ("[E]"):
                     assert line.contains("at") : "every event task should have specified event date after 'at'";
 
-                    String eventDuration = parser.parseDate(userTask[3].split("at: ")[1]);
                     String eventDetail = userTask[2];
+
+                    String eventDateStr = userTask[3].split("at: ")[1].replaceAll(" ", "-");
+                    LocalDate eventDuration = LocalDate.parse(eventDateStr, DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+
                     taskInList = new Event(eventDuration, eventDetail);
                     tasks.add(taskInList);
                     break;
                 case ("[D]"):
                     assert line.contains("by") : "every deadline task should have deadline date after 'by'";
 
-                    String deadline = parser.parseDate(userTask[3].split("by: ")[1]);
                     String deadlineDetail = userTask[2];
+
+                    String deadlineStr = userTask[3].split("by: ")[1].replaceAll(" ", "-");
+                    LocalDate deadline = LocalDate.parse(deadlineStr, DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+
                     taskInList = new Deadline(deadline, deadlineDetail);
                     tasks.add(taskInList);
                     break;
@@ -124,13 +137,19 @@ public class Storage {
                 lastDeletedTask = new ToDo(taskSubStringArr[2]);
                 break;
             case ("[E]"):
-                String eventDuration = parser.parseDate(taskSubStringArr[3].split("at: ")[1]);
+                String eventDateStr = taskSubStringArr[3].split("at: ")[1].replaceAll(" ", "-");
+                LocalDate eventDate = LocalDate.parse(eventDateStr, DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+
                 String eventDetail = taskSubStringArr[2];
-                lastDeletedTask = new Event(eventDuration, eventDetail);
+
+                lastDeletedTask = new Event(eventDate, eventDetail);
                 break;
             case ("[D]"):
-                String deadline = parser.parseDate(taskSubStringArr[3].split("by: ")[1]);
+                String deadlineStr = taskSubStringArr[3].split("by: ")[1].replaceAll(" ", "-");
+                LocalDate deadline = LocalDate.parse(deadlineStr, DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+
                 String deadlineDetail = taskSubStringArr[2];
+
                 lastDeletedTask = new Deadline(deadline, deadlineDetail);
                 break;
             default:
