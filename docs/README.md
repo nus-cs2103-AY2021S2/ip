@@ -196,7 +196,7 @@ Now you have 6 items in your list
 
 Similar output is expected for other type of tasks
 
-### Feature 6
+### Feature 7
 
 Find matching tasks based on keyword
 
@@ -219,7 +219,7 @@ Contents:
 
 The output depends on the number of matching tasks found
 
-### Feature 7
+### Feature 8
 
 Get tasks that are currently due
 
@@ -335,3 +335,26 @@ Contents:
 
 The size of the list depends on the number of matches
 
+## Summary of features:
+
+1. Exit duke - `bye` or `exit`
+2. Get list of all tasks - `list`
+3. Add todo task - `todo <task description>`
+4. Add deadline task - `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+5. Add event task - `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+6. Mark task as done - `done <index>`
+7. Remove a task - `delete <index>` or `remove <index>`
+8. Find tasks matching a keyword - `find <keyword>` or `search <keyword>`
+9. Get tasks that are due - `dues` or `reminders`
+10. Get list of notes - `notes`
+11. Add notes - `add <note description>`
+12. Delete a note - `delete-note <index>` or `remove-note <index>`
+13. Find notes based on keyword - `find-note <keyword>` or `search-note <keyword>`
+
+### Reminder:
+
+After working on duke, make sure to key in the **exit** command (`bye` or `exit`) in order to **save** your entries.
+
+### Hope you have a wonderful time using Duke!
+
+## End
