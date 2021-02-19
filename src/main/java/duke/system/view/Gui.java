@@ -16,6 +16,10 @@ public class Gui extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Initiate the scene and GUI for Duke
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

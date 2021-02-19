@@ -14,6 +14,10 @@ public class Duke{
         tasks = new TaskList();
     }
 
+    /**
+     * Get response for the user input
+     * @return the string to be displayed on the GUI
+     */
     public String getResponse(String input, TaskList tasks) {
         in = new Parser(input);
         return in.print(tasks);

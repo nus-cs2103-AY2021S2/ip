@@ -10,25 +10,23 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class    Window extends AnchorPane {
+public class Window extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-
-    private Image buttonImage = new Image(this.getClass().getResourceAsStream("/images/button.png"));
-    private ImageView imageView = new ImageView(buttonImage);
-
     @FXML
     private Button sendButton = new Button("Send", imageView);
 
     private Duke duke;
-
+    private Image buttonImage = new Image(this.getClass().getResourceAsStream("/images/button.png"));
+    private ImageView imageView = new ImageView(buttonImage);
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/robot.png"));
 

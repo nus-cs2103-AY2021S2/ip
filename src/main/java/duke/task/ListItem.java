@@ -64,10 +64,19 @@ public abstract class ListItem {
         tagList.add(tagName);
     }
 
+    /**
+     * Check if any tasks in the list is associate with the tag that the user provided
+     * @param inputTag the tag name that user wants to find
+     * @return
+     */
     public boolean containTag(String inputTag){
         return tagList.contains(inputTag);
     }
 
+    /**
+     * Print all the tags associated using stream
+     * @return the string concatenated all the tags
+     */
     public String printTags(){
         return tagList.stream().map((x) -> " #" + x).collect(Collectors.joining());
     }

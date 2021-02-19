@@ -98,7 +98,8 @@ public class Parser {
                     tempDate = result[2];
                     break;
                 default:
-                    // try parsing the command first, else throw exception
+                    // try parsing the command first by finding the equivalent in Enum PredefinedCommand,
+                    // else throw exception
                     try {
                         tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0].toUpperCase()));
                     } catch (IllegalArgumentException ex) {
