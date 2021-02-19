@@ -12,7 +12,7 @@ public class InvalidTaskNumber extends DukeException {
      * @param numberOfTasks size of current task list.
      */
     public InvalidTaskNumber(int numberOfTasks) {
-        this.numberOfTasks = numberOfTasks + 1;
+        this.numberOfTasks = numberOfTasks;
     }
     /**
      * Returns String that produces error exception message to user.

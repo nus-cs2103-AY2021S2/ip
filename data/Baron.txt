@@ -15,5 +15,4 @@ T|DONE|study
 E|PENDING|project debrief|03-04-2021 22:01
 T|PENDING|read shit
 T|PENDING|buy book
-D|PENDING|return book|06-08-2021 12:00
-E|PENDING|project meeting|01-04-2021 23:59
+D|DONE|return book|06-08-2021 12:00
