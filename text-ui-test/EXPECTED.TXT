@@ -1,7 +1,143 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _ ___
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
+========================================
+Hello! I'm Duke.
+What can I do for you?
+========================================
+
+========================================
+Here are the tasks in your list:
+
+========================================
+
+========================================
+Got it. I've added this task:
+	[T][ ] borrow book
+Now you have 1 tasks in the list.
+========================================
+
+========================================
+Got it. I've added this task:
+	[D][ ] return book (by: Sunday)
+Now you have 2 tasks in the list.
+========================================
+
+========================================
+Got it. I've added this task:
+	[E][ ] project meeting (at: Mon 2-4pm)
+Now you have 3 tasks in the list.
+========================================
+
+========================================
+Here are the tasks in your list:
+	1. [T][ ] borrow book
+	2. [D][ ] return book (by: Sunday)
+	3. [E][ ] project meeting (at: Mon 2-4pm)
+========================================
+
+========================================
+Nice! I've marked this task as done:
+	[T][✓] borrow book
+========================================
+
+========================================
+Nice! I've marked this task as done:
+	[D][✓] return book (by: Sunday)
+========================================
+
+========================================
+Nice! I've marked this task as done:
+	[E][✓] project meeting (at: Mon 2-4pm)
+========================================
+
+========================================
+Here are the tasks in your list:
+	1. [T][✓] borrow book
+	2. [D][✓] return book (by: Sunday)
+	3. [E][✓] project meeting (at: Mon 2-4pm)
+========================================
+
+========================================
+☹ OPPS!!! I'm sorry, but I don't know what that means :-(
+========================================
+
+========================================
+☹ OPPS!!! Invalid task number entered.
+========================================
+
+========================================
+☹ OPPS!!! The description of a todo cannot be empty.
+========================================
+
+========================================
+☹ OPPS!!! The description of a deadline cannot be empty.
+========================================
+
+========================================
+☹ OPPS!!! Deadline should be in the following format: deadline [description] /by [deadline]
+========================================
+
+========================================
+☹ OPPS!!! Deadline should be in the following format: deadline [description] /by [deadline]
+========================================
+
+========================================
+☹ OPPS!!! The description of a event cannot be empty.
+========================================
+
+========================================
+☹ OPPS!!! Event should be in the following format: event [description] /at [datetime]
+========================================
+
+========================================
+☹ OPPS!!! Event should be in the following format: event [description] /at [datetime]
+========================================
+
+========================================
+Here are the tasks in your list:
+	1. [T][✓] borrow book
+	2. [D][✓] return book (by: Sunday)
+	3. [E][✓] project meeting (at: Mon 2-4pm)
+========================================
+
+========================================
+Noted! I've removed this task:
+	[T][✓] borrow book
+========================================
+
+========================================
+Noted! I've removed this task:
+	[D][✓] return book (by: Sunday)
+========================================
+
+========================================
+Here are the tasks in your list:
+	1. [E][✓] project meeting (at: Mon 2-4pm)
+========================================
+
+========================================
+Noted! I've removed this task:
+	[E][✓] project meeting (at: Mon 2-4pm)
+========================================
+
+========================================
+☹ OPPS!!! Invalid task number entered.
+========================================
+
+========================================
+☹ OPPS!!! Invalid task number entered.
+========================================
+
+========================================
+Here are the tasks in your list:
+
+========================================
+
+========================================
+Bye. Hope to see you again soon!
+========================================
 
