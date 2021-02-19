@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/glenn/.gradle/caches/modules-2/files-2.1/org.openjfx/**/*.jar"
+    ]
+}
