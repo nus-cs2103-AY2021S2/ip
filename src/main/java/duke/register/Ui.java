@@ -3,7 +3,7 @@ package duke.register;
 import java.util.Scanner;
 
 /**
- * This class is mainly for the input
+ * This class is mainly for the text input
  */
 public class Ui {
     Scanner ui;
