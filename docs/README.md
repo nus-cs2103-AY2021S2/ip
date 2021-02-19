@@ -17,8 +17,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I've added this task`
-`[T][] Homework`
+`Got it! I've added this task`\n
+`[T][] Homework`\n
 `Now you have 1 tasks in the list`
 
 ### Feature 2
@@ -36,8 +36,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I've added this task`
-`[E][] My Birthday (at: Nov 26 2020)`
+`Got it! I've added this task`\n
+`[E][] My Birthday (at: Nov 26 2020)`\n
 `Now you have 1 tasks in the list`
 
 ### Feature 3
@@ -55,8 +55,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I've added this task`
-`[D][] Project (at: Feb 19 2020)`
+`Got it! I've added this task`\n
+`[D][] Project (at: Feb 19 2020)`\n
 `Now you have 1 tasks in the list`
 
 ### Feature 3
@@ -74,8 +74,8 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task`
-`[T][] Homework`
+`Noted. I've removed this task`\n
+`[T][] Homework`\n
 `Now you have 0 tasks in the list`
 
 
@@ -94,9 +94,9 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:`
-`1. [T][] Homework`
-`2. [E][] My Birthday (at: Nov 26 2020)`
+`Here are the tasks in your list:`\n
+`1. [T][] Homework`\n
+`2. [E][] My Birthday (at: Nov 26 2020)`\n
 `3. [D][] Project (at: Feb 19 2020)`
 
 
@@ -115,7 +115,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:`
+`Here are the matching tasks in your list:`\n
 `1. [T][] Homework`
 
 ### Feature 4
@@ -133,9 +133,9 @@ Example of usage:
 
 Expected outcome:
 
-`Bye. Hope to see you again!`
-`Application exiting in 3`
-`Application exiting in 2`
+`Bye. Hope to see you again!`\n
+`Application exiting in 3`\n
+`Application exiting in 2`\n
 `Application exiting in 1`
 
 
