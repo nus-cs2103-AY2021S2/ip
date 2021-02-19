@@ -29,6 +29,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setTitle("Duke: The Todolist");
             stage.getIcons().add(new Image(Main.class.getResourceAsStream("/icons/GitHubIcon.png")));
             fxmlLoader.<duke.controllers.MainWindow>getController().setDuke(duke);
