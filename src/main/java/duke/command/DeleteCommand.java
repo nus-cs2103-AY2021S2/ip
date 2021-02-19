@@ -28,7 +28,7 @@ public class DeleteCommand extends IndexCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskIndexOutOfBoundsException {
-        if (index < tasks.size()) {
+        if (index < tasks.size() && index > 0) {
             Task removingTask = tasks.get(index);
             tasks.remove(index);
             storage.updateInFile(tasks);
