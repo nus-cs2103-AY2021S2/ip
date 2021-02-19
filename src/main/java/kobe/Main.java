@@ -24,8 +24,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Path path = Paths.get(HOME + "/ip/src/main/data/kobe.txt");
-            String pathName = HOME + "/ip/src/main/data/kobe.txt";
+//            Path path = Paths.get(HOME + "/ip/src/main/data/kobe.txt");
+            Path path = Paths.get(HOME, "ip", "src", "main", "data", "kobe.txt");
+//            String pathName = HOME + "/ip/src/main/data/kobe.txt";
+            String pathName = path.toString();
             KobeN kobe = new KobeN(pathName);
             FXMLLoader fxmlLoader = new FXMLLoader(kobe.Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
