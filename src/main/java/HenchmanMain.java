@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Henchman using FXML.
  */
 public class HenchmanMain extends Application {
 

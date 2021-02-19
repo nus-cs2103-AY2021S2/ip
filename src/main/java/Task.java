@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 
+/**
+ * Represents Task object.
+ */
 public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;

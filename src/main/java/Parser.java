@@ -1,6 +1,4 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
@@ -146,32 +144,5 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new HenchmanException("Please follow the Date-Time format: YYYY-MM-DD TIME");
         }
-    }
-
-    // currently unused, new implementation planned
-    private static Command parseUpdateTaskInput(String input) throws HenchmanException {
-        String[] arguments = input.split("/");
-        int index = Integer.parseInt(arguments[0].strip());
-        String description = arguments.length > 1 && !arguments[1].isBlank() ? arguments[1].strip() : null;
-        LocalDate date;
-        LocalTime time;
-
-        try {
-            date = arguments.length > 2 ? LocalDate.parse(arguments[2].strip()) : null;
-        } catch (DateTimeParseException e) {
-            date = null;
-        }
-
-        try {
-            time = arguments.length > 3 ? LocalTime.parse(arguments[3].strip()) : null;
-        } catch (DateTimeParseException e) {
-            time = null;
-        }
-
-        if (description == null && date == null && time == null) {
-            throw new HenchmanException("There is nothing to change, please provide a change to least one field!");
-        }
-
-        return new CommandUpdate(index, description, date, time);
     }
 }

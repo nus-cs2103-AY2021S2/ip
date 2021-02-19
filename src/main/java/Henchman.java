@@ -3,8 +3,7 @@ public class Henchman {
     private final TaskList tasks;
 
     /**
-     * Constructs Duke object, which immediately runs and starts accepting
-     * user input.
+     * Constructs Henchman object, which immediately attempts to load previously save tasks (if save file exists).
      */
     public Henchman() {
         storage = new Storage();
@@ -16,7 +15,7 @@ public class Henchman {
             tempTasks = new TaskList(); // case where save file does not exist
         }
 
-        assert tempTasks != null : "Error: Attempt to construct Duke without valid Storage.";
+        assert tempTasks != null : "Error: Attempt to construct Henchman without valid Storage.";
         this.tasks = tempTasks;
     }
 

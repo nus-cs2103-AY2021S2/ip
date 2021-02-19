@@ -1,8 +1,8 @@
 import java.time.LocalDateTime;
 
 /**
- * Represents the Command for "deadline" for the Duke object. CommandDeadline helps to initiate creation and adding of
- * the Deadline Task with the specified attributes into the provided TaskList.
+ * Represents the Command for "deadline" for the Henchman object. CommandDeadline helps to initiate creation and adding
+ * of the Deadline Task with the specified attributes into the provided TaskList.
  */
 public class CommandDeadline extends Command {
     private final String description;
@@ -23,24 +23,24 @@ public class CommandDeadline extends Command {
      * Creates a Deadline Task with the specified attributes and adds it into the provided TaskList. Then, save the
      * updated TaskList.
      *
-     * @param tasks TaskList of Duke object, contains all the Tasks that were added.
-     * @param storage Storage of Duke object, saves the TaskList into a text file.
+     * @param tasks TaskList of Henchman object, contains all the Tasks that were added.
+     * @param storage Storage of Henchman object, saves the TaskList into a text file.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
         Deadline deadline = new Deadline(description, dateTime);
         tasks.addTask(deadline);
         storage.save(tasks);
-        return this.toDukeOutput() + "\n" + deadline.toString();
+        return this.toHenchmanOutput() + "\n" + deadline.toString();
     }
 
     /**
-     * Returns the string representation of the message to be printed by the Duke object's Ui.
+     * Returns the string representation of the message to be printed.
      *
-     * @return String representation of the message to be printed by the Duke object's Ui.
+     * @return String representation of the message to be printed.
      */
     @Override
-    public String toDukeOutput() {
+    public String toHenchmanOutput() {
         return "Roger that boss, I've added a new Deadline: ";
     }
 }

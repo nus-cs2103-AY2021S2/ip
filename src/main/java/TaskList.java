@@ -2,6 +2,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Represents the list of Tasks in Henchman object. Supports operations that deal with modifying of the tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -67,6 +70,7 @@ public class TaskList {
 
     /**
      * Prints all the Tasks with String representation that contains the query term.
+     *
      * @param query The query term that the command string must include.
      */
     public String findTasks(String query) {
@@ -89,6 +93,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Sorts the tasks according to the sort key.
+     *
+     * @param sortBy Sort key which dictates how the tasks should be sorted.
+     * @return Returns true if tasks are sorted, false otherwise.
+     */
     public boolean sortTasks(String sortBy) {
         Comparator<Task> comparator;
         boolean isSorted = true;
@@ -134,9 +144,13 @@ public class TaskList {
         return isSorted;
     }
 
+    /**
+     * Removes all tasks in the task list.
+     */
     public void clearAllTasks() {
         tasks.clear();
     }
+
 
     public ArrayList<Task> getTasks() {
         return tasks;

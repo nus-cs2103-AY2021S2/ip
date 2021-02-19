@@ -12,13 +12,13 @@ public class Storage {
     }
 
     /**
-     * Saves the tasks in taskList into save file "duke_saved_tasks" in the same directory.
+     * Saves the tasks in taskList into save file "henchman_saved_tasks" in the same directory.
      *
      * @param taskList TaskList containing the tasks to be saved.
      */
     public void save(TaskList taskList) {
         try {
-            FileWriter fileWriter = new FileWriter("duke_saved_tasks");
+            FileWriter fileWriter = new FileWriter("henchman_saved_tasks");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
             ArrayList<Task> tasks = taskList.getTasks();
@@ -34,16 +34,16 @@ public class Storage {
     }
 
     /**
-     * Builds and return an ArrayList of Tasks from the saved tasks in the save file "duke_saved_tasks" in the same
+     * Builds and return an ArrayList of Tasks from the saved tasks in the save file "henchman_saved_tasks" in the same
      * directory.
      *
-     * @return ArrayList of Tasks from the saved tasks in the save file "duke_saved_tasks"
+     * @return ArrayList of Tasks from the saved tasks in the save file "henchman_saved_tasks"
      * @throws HenchmanException Thrown exception when an error occurs during loading, according to the reason specified in
      * error body.
      */
     public ArrayList<Task> load() throws HenchmanException {
         try {
-            File file = new File("duke_saved_tasks");
+            File file = new File("henchman_saved_tasks");
             boolean fileIsAlreadyPresent = !file.createNewFile();
 
             if (fileIsAlreadyPresent) {

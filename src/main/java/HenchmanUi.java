@@ -30,7 +30,7 @@ public class HenchmanUi extends AnchorPane {
 
     public void setHenchman(Henchman d) {
         henchman = d;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(printGreetings(), dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getHenchmanDialog(printGreetings(), dukeImage));
     }
 
     /**
@@ -43,7 +43,7 @@ public class HenchmanUi extends AnchorPane {
         String response = henchman.run(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getHenchmanDialog(response, dukeImage)
         );
         userInput.clear();
 
@@ -72,7 +72,7 @@ public class HenchmanUi extends AnchorPane {
     }
 
     public String printCommand(Command command) {
-        return command.toDukeOutput();
+        return command.toHenchmanOutput();
     }
 
     public String printTask(Task task) {

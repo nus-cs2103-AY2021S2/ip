@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 
+/**
+ * Represents the Event Task.
+ */
 public class Event extends TimedTask {
 
     /**
@@ -12,6 +15,13 @@ public class Event extends TimedTask {
         super(description, dateTime, "E");
     }
 
+    /**
+     * Initializes an Event Task with the specified description, timeCreated, and dateTime.
+     *
+     * @param description Description of the Event Task.
+     * @param timeCreated DateTime when this Event object was created.
+     * @param dateTime Date and Time the Event Task occurs at.
+     */
     public Event(String description, LocalDateTime timeCreated,LocalDateTime dateTime) {
         super(description, timeCreated, dateTime, "E");
     }

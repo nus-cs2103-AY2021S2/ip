@@ -1,5 +1,9 @@
 import java.time.LocalDateTime;
 
+/**
+ * Represents the Deadline Task.
+ */
+
 public class Deadline extends TimedTask {
 
     /**
@@ -12,6 +16,13 @@ public class Deadline extends TimedTask {
         super(description, dateTime, "D");
     }
 
+    /**
+     * Initializes a Deadline Task with the specified description, timeCreated, and dateTime.
+     *
+     * @param description Description of the Deadline Task.
+     * @param timeCreated DateTime when this Deadline object was created.
+     * @param dateTime Date and Time the Deadline Task should be done by.
+     */
     public Deadline(String description, LocalDateTime timeCreated, LocalDateTime dateTime) {
         super(description, timeCreated, dateTime, "D");
     }

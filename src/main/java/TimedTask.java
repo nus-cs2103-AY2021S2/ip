@@ -3,6 +3,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a timed task.
+ */
 public abstract class TimedTask extends Task {
     protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
     protected LocalDateTime dateTime;

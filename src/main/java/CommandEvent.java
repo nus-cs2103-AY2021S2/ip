@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 
 /**
- * Represents the Command for "event" for the Duke object. CommandEvent helps to initiate creation and adding of
+ * Represents the Command for "event" for the Henchman object. CommandEvent helps to initiate creation and adding of
  * the Event Task with the specified attributes into the provided TaskList.
  */
 public class CommandEvent extends Command {
@@ -23,24 +23,24 @@ public class CommandEvent extends Command {
      * Creates an Event Task with the specified attributes and adds it into the provided TaskList. Then, save the
      * updated TaskList.
      *
-     * @param tasks TaskList of Duke object, contains all the Tasks that were added.
-     * @param storage Storage of Duke object, saves the TaskList into a text file.
+     * @param tasks TaskList of Henchman object, contains all the Tasks that were added.
+     * @param storage Storage of Henchman object, saves the TaskList into a text file.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
         Event event = new Event(description, dateTime);
         tasks.addTask(event);
         storage.save(tasks);
-        return this.toDukeOutput() + "\n" + event.toString();
+        return this.toHenchmanOutput() + "\n" + event.toString();
     }
 
     /**
-     * Returns the string representation of the message to be printed by the Duke object's Ui.
+     * Returns the string representation of the message to be printed.
      *
-     * @return String representation of the message to be printed by the Duke object's Ui.
+     * @return String representation of the message to be printed.
      */
     @Override
-    public String toDukeOutput() {
+    public String toHenchmanOutput() {
         return "Roger that boss, I've added a new Event: ";
     }
 }
