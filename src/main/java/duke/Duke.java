@@ -31,7 +31,6 @@ public class Duke {
         } catch (DukeException | IOException e) {
             ui.showError(e.getMessage());
             tasks = new TaskList();
-            ui.showLine();
         }
     }
 
@@ -58,28 +57,12 @@ public class Duke {
 
 
     public String getResponse(String input) {
-        //boolean isExit = false;
-        //while (!isExit) {
-            try {
-                Command c = Parser.parse(input);
-                return c.execute(tasks, ui, storage);
-                //isExit = c.isExit();
-            } catch (DukeException | IOException | DateTimeParseException e) {
-                return e.getMessage();
-            }
-        //}
-        //return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException | IOException | DateTimeParseException e) {
+            return e.getMessage();
+        }
     }
 
-    /**
-     * Runs Duke for the given file path
-     *
-     * @param args
-     */
-    /*
-    public static void main(String[] args) {
-        String filePath = "data/duke.txt";
-        new Duke(filePath).run();
-    }
-     */
 }

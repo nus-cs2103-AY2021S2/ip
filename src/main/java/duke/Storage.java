@@ -114,6 +114,8 @@ public class Storage {
                         + Storage.convertOutputDateToInputDate(dateTime[0]) + " "
                         + Storage.convertOutputTimeToInputTime(dateTime[1]);
                 taskList.addTask(TaskType.EVENT, description, isDone,true, this);
+            } else {
+                assert false : "Task type is invalid.";
             }
         }
 
@@ -129,7 +131,7 @@ public class Storage {
     public static String convertOutputDateToInputDate(String outputDate) {
         String[] outputDateArr = outputDate.split(" ");
         String year = outputDateArr[2];
-        String month;
+        String month = "";
         if (outputDateArr[0].equals("Jan")) {
             month = "01";
         } else if (outputDateArr[0].equals("Feb")) {
@@ -152,8 +154,10 @@ public class Storage {
             month = "10";
         } else if (outputDateArr[0].equals("Nov")) {
             month = "11";
-        } else {
+        } else if (outputDateArr[0].equals("Dec")) {
             month = "12";
+        } else {
+            assert false : "The month of the output date is invalid.";
         }
         String day = String.format("%02d", Integer.parseInt(outputDateArr[1]));
         return year + "-" + month + "-" + day;

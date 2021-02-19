@@ -97,6 +97,8 @@ public class TaskList {
             }
 
             newTask = new EventTask(descriptionArr[0], descriptionArr[1]);
+        } else {
+            assert false : "Task cannot be added because it is not a todo, deadline or event task.";
         }
 
         if (isReadingFile) {
@@ -136,7 +138,7 @@ public class TaskList {
         String taskOrTasks = (this.tasks.size() <= 1)
                 ? " task"
                 : " tasks";
-        message += "Now you have " + this.tasks.size() + taskOrTasks + " in the list.";
+        message += "\nNow you have " + this.tasks.size() + taskOrTasks + " in the list.";
         FileManager.deleteLine("data/duke.txt", taskNo, storage);
 
         return message;
@@ -189,6 +191,8 @@ public class TaskList {
                 if (eventDateDate.compareTo(date) == 0) {
                     list.add(tasks.get(i));
                 }
+            } else {
+                assert false : "Tasks on this date cannot be printed because it is not a deadline or event task.";
             }
         }
 
