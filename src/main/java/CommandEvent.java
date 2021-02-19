@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
  * the Event Task with the specified attributes into the provided TaskList.
  */
 public class CommandEvent extends Command {
-    private final String DESCRIPTION;
-    private final LocalDateTime DATE_TIME;
+    private final String description;
+    private final LocalDateTime dateTime;
 
     /**
      * Initialize the CommandEvent object to represent the Event Task with the specified description and datetime.
@@ -15,8 +15,8 @@ public class CommandEvent extends Command {
      * @param dateTime Date and time the Event Task will occur on.
      */
     public CommandEvent(String description, LocalDateTime dateTime) {
-        this.DESCRIPTION = description;
-        this.DATE_TIME = dateTime;
+        this.description = description;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -28,7 +28,7 @@ public class CommandEvent extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        Event event = new Event(DESCRIPTION, DATE_TIME);
+        Event event = new Event(description, dateTime);
         tasks.addTask(event);
         storage.save(tasks);
         return this.toHenchmanOutput() + "\n" + event.toString();

@@ -1,22 +1,22 @@
 public class Henchman {
-    private final Storage STORAGE;
-    private final TaskList TASKS;
+    private final Storage storage;
+    private final TaskList tasks;
 
     /**
      * Constructs Henchman object, which immediately attempts to load previously save tasks (if save file exists).
      */
     public Henchman() {
-        STORAGE = new Storage();
+        storage = new Storage();
 
         TaskList tempTasks;
         try {
-            tempTasks = new TaskList(STORAGE.load());
+            tempTasks = new TaskList(storage.load());
         } catch (HenchmanException e) {
             tempTasks = new TaskList(); // case where save file does not exist
         }
 
         assert tempTasks != null : "Error: Attempt to construct Henchman without valid Storage.";
-        this.TASKS = tempTasks;
+        this.tasks = tempTasks;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Henchman {
     public String run(String input) {
         try {
             Command command = Parser.parse(input);
-            return command.execute(TASKS, STORAGE);
+            return command.execute(tasks, storage);
         } catch (HenchmanException e) {
             return e.getMessage();
         }

@@ -109,6 +109,9 @@ public class Parser {
             delimiter = " /at ";
             defaultTime = "00:00:00";
             break;
+        default:
+            // do nothing on default
+            break;
         }
 
         assert delimiter != null : "Split key is invalid.";
@@ -121,7 +124,7 @@ public class Parser {
 
         String[] dateAndTime = arguments[1].split(" ");
         String date = dateAndTime[0];
-        String time = dateAndTime.length > 1  // if time is not provided, use default time
+        String time = dateAndTime.length > 1 // if time is not provided, use default time
                 ? dateAndTime[1].substring(0, 2) + ":" + dateAndTime[1].substring(2, 4)
                 : defaultTime;
 
@@ -136,6 +139,9 @@ public class Parser {
             case 'E':
                 timedTaskCommand = new CommandEvent(arguments[0], parsedDateAndTime);
                 break;
+
+            default:
+                break; // do nothing on default
             }
 
             assert timedTaskCommand != null : "Error in creating timedTaskCommand.";

@@ -22,7 +22,7 @@ public class Event extends TimedTask {
      * @param timeCreated DateTime when this Event object was created.
      * @param dateTime Date and Time the Event Task occurs at.
      */
-    public Event(String description, LocalDateTime timeCreated,LocalDateTime dateTime) {
+    public Event(String description, LocalDateTime timeCreated, LocalDateTime dateTime) {
         super(description, timeCreated, dateTime, "E");
     }
 

@@ -24,11 +24,11 @@ public abstract class TimedTask extends Task {
         return dateTime;
     }
 
-    public void changeDate(LocalDate newDate) {
+    public void setDate(LocalDate newDate) {
         this.dateTime = LocalDateTime.of(newDate, this.dateTime.toLocalTime());
     }
 
-    public void changeTime(LocalTime newTime) {
+    public void setTime(LocalTime newTime) {
         this.dateTime = LocalDateTime.of(this.dateTime.toLocalDate(), newTime);
     }
 

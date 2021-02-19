@@ -2,10 +2,10 @@
  * Represents the Command for "sort" for the Henchman object. Sorts the tasks in TaskList according to the sort key.
  */
 public class CommandSort extends Command {
-    private final String SORT_BY;
+    private final String sortBy;
 
     public CommandSort(String sortBy) {
-        this.SORT_BY = sortBy;
+        this.sortBy = sortBy;
     }
 
     /**
@@ -17,10 +17,10 @@ public class CommandSort extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        boolean isSorted = tasks.sortTasks(SORT_BY);
+        boolean isSorted = tasks.sortTasks(sortBy);
         if (isSorted) {
             storage.save(tasks);
-            StringBuilder sortedTasks = new StringBuilder(toHenchmanOutput()).append(SORT_BY).append("!\n");
+            StringBuilder sortedTasks = new StringBuilder(toHenchmanOutput()).append(sortBy).append("!\n");
             sortedTasks.append(tasks.printTasks());
 
             return sortedTasks.toString();

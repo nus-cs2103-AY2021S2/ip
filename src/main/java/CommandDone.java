@@ -3,10 +3,10 @@
  * the index as done.
  */
 public class CommandDone extends Command {
-    private final int INDEX;
+    private final int index;
 
     public CommandDone(int index) {
-        this.INDEX = index;
+        this.index = index;
     }
 
     /**
@@ -19,12 +19,12 @@ public class CommandDone extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            Task task = tasks.doneTask(INDEX);
+            Task task = tasks.doneTask(index);
             storage.save(tasks);
             return this.toHenchmanOutput() + "\n" + task.toString();
         } catch (IndexOutOfBoundsException e) {
             return "Index provided is out of bounds! Please provide a valid index (1 to "
-                    + tasks.getTASKS().size() + ").";
+                    + tasks.getTasks().size() + ").";
         }
     }
 

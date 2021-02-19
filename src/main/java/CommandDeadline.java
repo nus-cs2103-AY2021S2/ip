@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
  * of the Deadline Task with the specified attributes into the provided TaskList.
  */
 public class CommandDeadline extends Command {
-    private final String DESCRIPTION;
-    private final LocalDateTime DATE_TIME;
+    private final String description;
+    private final LocalDateTime dateTime;
 
     /**
      * Initialize the CommandDeadline object to represent the Deadline Task with the specified description and datetime.
@@ -15,8 +15,8 @@ public class CommandDeadline extends Command {
      * @param dateTime Date and time the Deadline Task should be done by.
      */
     public CommandDeadline(String description, LocalDateTime dateTime) {
-        this.DESCRIPTION = description;
-        this.DATE_TIME = dateTime;
+        this.description = description;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -28,7 +28,7 @@ public class CommandDeadline extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        Deadline deadline = new Deadline(DESCRIPTION, DATE_TIME);
+        Deadline deadline = new Deadline(description, dateTime);
         tasks.addTask(deadline);
         storage.save(tasks);
         return this.toHenchmanOutput() + "\n" + deadline.toString();

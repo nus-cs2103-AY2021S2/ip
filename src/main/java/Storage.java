@@ -22,7 +22,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter("henchman_saved_tasks");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            ArrayList<Task> tasks = taskList.getTASKS();
+            ArrayList<Task> tasks = taskList.getTasks();
             for (Task t : tasks) {
                 bufferedWriter.write(t.toLog() + "\n");
             }
@@ -39,8 +39,8 @@ public class Storage {
      * directory.
      *
      * @return ArrayList of Tasks from the saved tasks in the save file "henchman_saved_tasks"
-     * @throws HenchmanException Thrown exception when an error occurs during loading, according to the reason specified in
-     * error body.
+     * @throws HenchmanException Thrown exception when an error occurs during loading, according to the reason specified
+     * in error body.
      */
     public ArrayList<Task> load() throws HenchmanException {
         try {

@@ -6,18 +6,18 @@ import java.util.Comparator;
  * Represents the list of Tasks in Henchman object. Supports operations that deal with modifying of the tasks.
  */
 public class TaskList {
-    private final ArrayList<Task> TASKS;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.TASKS = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> tasks) {
-        this.TASKS = tasks;
+        this.tasks = tasks;
     }
 
     public void addTask(Task task) {
-        TASKS.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -27,8 +27,8 @@ public class TaskList {
      * @return The deleted task.
      */
     public Task deleteTask(int index) {
-        Task task = TASKS.get(index - 1);
-        TASKS.remove(index - 1);
+        Task task = tasks.get(index - 1);
+        tasks.remove(index - 1);
 
         return task;
     }
@@ -40,7 +40,7 @@ public class TaskList {
      * @return The done task.
      */
     public Task doneTask(int index) {
-        Task task = TASKS.get(index - 1);
+        Task task = tasks.get(index - 1);
         task.setDone();
 
         return task;
@@ -50,16 +50,16 @@ public class TaskList {
      * Prints all the tasks in the TaskList.
      */
     public String printTasks() {
-        if (TASKS.isEmpty()) {
+        if (tasks.isEmpty()) {
             return "The task list is empty boss.";
         }
 
         StringBuilder allTasks = new StringBuilder("You have ")
-                .append(TASKS.size())
+                .append(tasks.size())
                 .append(" task(s) in the list:\n");
 
         int i = 1;
-        for (Task task : TASKS) {
+        for (Task task : tasks) {
             allTasks.append(i).append(". ").append(task).append("\n");
 
             i++;
@@ -74,7 +74,7 @@ public class TaskList {
      * @param query The query term that the command string must include.
      */
     public String findTasks(String query) {
-        if (TASKS.isEmpty()) {
+        if (tasks.isEmpty()) {
             return "Oops, the task list is empty boss, there's nothing to find!";
         }
 
@@ -82,7 +82,7 @@ public class TaskList {
         StringBuilder foundTasks = new StringBuilder("Here you go boss:\n");
 
         int i = 1;
-        for (Task task : TASKS) {
+        for (Task task : tasks) {
             String string = task.toString();
             if (string.toLowerCase().contains(query)) {
                 foundTasks.append(i).append(". ").append(string).append("\n");
@@ -128,7 +128,7 @@ public class TaskList {
             break;
 
         case "TYPE":
-            comparator = Comparator.comparing(Task::getICON);
+            comparator = Comparator.comparing(Task::getIcon);
             break;
 
         default:
@@ -138,7 +138,7 @@ public class TaskList {
         }
 
         if (isSorted) { // only sort if sort key is valid
-            TASKS.sort(comparator);
+            tasks.sort(comparator);
         }
 
         return isSorted;
@@ -148,11 +148,11 @@ public class TaskList {
      * Removes all tasks in the task list.
      */
     public void clearAllTasks() {
-        TASKS.clear();
+        tasks.clear();
     }
 
 
-    public ArrayList<Task> getTASKS() {
-        return TASKS;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }
