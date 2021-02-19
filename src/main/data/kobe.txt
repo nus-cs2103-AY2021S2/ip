@@ -1,3 +1,2 @@
-    1. [D][X] def                                
-    2. [D][X] thou (by: Apr 21 1998)
-    3. [D][X] this project haha (by: 28 Jan)
+    1. [D][X] Movie Reservation (by: Apr 21 2021)
+    2. [E][X] Nature Walk (at: Gardens by the Bay)

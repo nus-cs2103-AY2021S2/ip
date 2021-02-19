@@ -2,12 +2,16 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id "com.github.johnrengelman.shadow" version "6.1.0"
 }
+
+mainClassName = "kobe.Launcher"
 
 repositories {
     mavenCentral()
 }
+
+apply plugin: "com.github.johnrengelman.shadow"
 
 dependencies {
     String javaFxVersion = '11'
@@ -44,7 +48,7 @@ test {
 }
 
 application {
-    mainClassName = "kobe.KobeN"
+    mainClassName = "kobe.Launcher"
 }
 
 shadowJar {
@@ -58,4 +62,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
