@@ -1,20 +1,117 @@
-# User Guide
+# Vergil User Guide
 
-## Features 
+Welcome! This is a user guide for the Vergil chatbot application.
+![UI screenshot](Ui.png)
 
-### Feature 1 
-Description of feature.
+## Table of Contents
+~~0. Quick start.~~
+1. Adding tasks.
+    1.1. To-do tasks.
+    1.2. Deadline tasks.
+    1.3. Event tasks.
+2. Displaying tasks.
+3. Finding tasks.
+4. Completing tasks.
+5. Deleting tasks.
+6. Exiting the program.
+7. Command summary.
 
-## Usage
+## ~~Quick Start~~
 
-### `Keyword` - Describe action
+## 1. Adding Tasks
+### 1.1. To-do tasks: `todo`
 
-Describe action and its outcome.
+To add a new to-do task, enter the following command:
 
-Example of usage: 
+`todo <task-description>`
 
-`keyword (optional arguments)`
+Where `<task-description>` is the description of the to-do task.
 
-Expected outcome:
+Entering this command properly should result in the following message:
+> Success! '<task-description>' has been added as a todo task.
 
-`outcome`
+### 1.2. Deadline tasks: `deadline`
+To add a new deadline task, enter the following command:
+
+`deadline <task-description> /by <date> <time>`
+
+Where...
+* `<task-description>` is the description of the deadline task;
+* `<date>` is the date of the deadline in the following format: d/m/yyyy; and
+* `<time>` is the time of the deadline, in 24-hours time, in the following format: hhmm.
+
+Entering this command properly should result in the following message:
+> Success! '<task-description>' has been added as a deadline task.
+
+### 1.3. Event tasks: `event`
+To add a new event task, enter the following command:
+
+`event <task-description> /at <date> <time>`
+
+Where...
+* `<task-description>` is the description of the deadline task;
+* `<date>` is the date of the event in the following format: d/m/yyyy; and
+* `<time>` is the time of the event, in 24-hours time, in the following format: hhmm.
+
+Entering this command properly should result in the following message:
+> Success! '<task-description>' has been added as an event task.
+
+## 2. Displaying Tasks: `list`
+To display the list of current tasks, enter the following command:
+
+`list`
+
+This should display a list of the currently existing tasks, with each task prefixed by its list's serial number (with respect to the other tasks).
+
+## 3. Finding Tasks: `find`
+To search for tasks whose descriptions match a keyword, enter the following command:
+
+`find <keywords>`
+
+Where `<keywords>` is a word or phrase to be used for searching.
+
+This should display a list of the currently existing tasks whose descritptions match the search query. If no such task exists, the following message would be displayed instead:
+> There are no tasks matching with the given keywords.
+
+## 4. Completing Tasks: `done`
+To mark an existing task as completed, enter the following command:
+
+`done <task-list-number>`
+
+Where `<task-list-number>` is the serial number of task with respect to the other tasks in the list.
+
+Entering this command properly should result in the following message:
+> Success! The following task has been completed:
+> <task-information>
+
+Where `<task-information>` is the information stored in the task.
+
+## 5. Deleting Tasks: `delete`
+To delete an existing task from the list, enter the following command:
+
+`delete <task-list-number>`
+
+Where `<task-list-number>` is the serial number of task with respect to the other tasks in the list.
+
+Entering this command properly should result in the following message:
+> Acknowledged. The following task has been deleted:
+> <task-information>
+
+Where `<task-information>` is the information stored in the task.
+
+## 6. Exiting Vergil: `bye`
+To exit the program, simply click the 'Close' button in the top right of the window or type in the following command:
+
+`bye`
+
+## 7. Command Summary
+Function            | Command format
+--------------------|---------------
+Add a to-do task    | `todo <task-description>`
+Add a deadline task | `deadline <task-description> /by <date> <time>`
+Add an event task   | `event <task-description> /at <date> <time>`
+List tasks          | `list`
+Find tasks          | `find`
+Complete a task     | `done <task-list-number>`
+Delete a task       | `delete <task-list-number>`
+Exit                | `bye`
