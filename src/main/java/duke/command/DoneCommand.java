@@ -38,7 +38,7 @@ public class DoneCommand implements Command {
             throw new DukeException("Cannot save tasks. Save file not found");
         }
 
-        String doneResponse = "Nice! I've marked this task as done:\n" + tasks.get(taskNum).toString();
+        String doneResponse = "Nice! I've marked this task as done:\n  " + tasks.get(taskNum).toString();
         return doneResponse;
     }
 }

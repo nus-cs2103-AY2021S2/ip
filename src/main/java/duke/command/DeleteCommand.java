@@ -40,8 +40,9 @@ public class DeleteCommand implements Command {
             throw new DukeException("Cannot save delete. Save file not found");
         }
 
-        String deleteResponse = "Noted. I've removed this task:\n" + "  " + deletedTask + "\nNow you have "
-                + tasks.size() + " tasks in the list.";
+        String numOfTasks = tasks.size() + (tasks.size() > 1 ? " tasks" : " task");
+        String deleteResponse = "Noted. I've removed this task:\n  " + deletedTask + "\nNow you have "
+                + numOfTasks + " in the list.";
         return deleteResponse;
     }
 }

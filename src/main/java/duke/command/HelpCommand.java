@@ -8,7 +8,7 @@ import duke.task.TaskList;
  */
 public class HelpCommand implements Command {
     private static final String HELP_ALL_RESPONSE = "List of commands:\n"
-            + "1. todo\n2. deadline\n3. event\n4. list\n5. done\n6.delete\n7. find\n8. check\n9. exit\n"
+            + "1. todo\n2. deadline\n3. event\n4. list\n5. done\n6. delete\n7. find\n8. check\n9. exit\n"
             + "Type 'help <command>' in the chat to see the details!";
     private static final String HELP_TODO_RESPONSE = "Adds a todo task to the list\n\nFormat: todo <task name>";
     private static final String HELP_DEADLINE_RESPONSE = "Adds a deadline task to the list\n\n"
