@@ -11,6 +11,7 @@ public class Ui {
         for (String m : msg) {
             outputString += m + "\n";
         }
+        System.out.println(outputString); // Delete later
         return outputString;
     }
 
