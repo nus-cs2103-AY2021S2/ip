@@ -35,6 +35,8 @@ public class DeadlineCommand extends AddCommand {
             return this.message;
         } catch (DateTimeParseException err) {
             return "datetime should be in yyyy-mm-dd format";
+        } catch (Exception err) {
+            return ":( sorry i don't recognise this format. type help for more info!";
         }
     }
 }

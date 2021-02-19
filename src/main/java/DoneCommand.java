@@ -23,9 +23,13 @@ public class DoneCommand extends Command {
      * @param storage Storage that interacts with information stored on harddrive.
      */
     public String execute(TaskManager manager, Ui ui, Storage storage) {
-        manager.markTaskDone(this.index);
-        storage.writeToDisk(manager.getStore());
-        return this.message;
+        try {
+            manager.markTaskDone(this.index);
+            storage.writeToDisk(manager.getStore());
+            return this.message;
+        } catch (Exception err) {
+            return ":( sorry i don't recognise this format. type help for more info!";
+        }
     }
 
 }

@@ -23,8 +23,13 @@ public class DeleteCommand extends Command {
      * @param storage Storage that interacts with information stored on harddrive.
      */
     public String execute(TaskManager manager, Ui ui, Storage storage) {
-        manager.deleteTask(this.index);
-        storage.writeToDisk(manager.getStore());
-        return "Task deleted";
+        try {
+            manager.deleteTask(this.index);
+            storage.writeToDisk(manager.getStore());
+            return "Task deleted";
+        } catch (Exception err) {
+            return ":( sorry i don't recognise this format. type help for more info!";
+        }
+
     }
 }
