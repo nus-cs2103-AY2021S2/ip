@@ -40,6 +40,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcome, dukeImage));
     }
 
+    /**
+     * Create an instance of duke
+     * @param d
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
