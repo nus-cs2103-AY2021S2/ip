@@ -1,27 +1,27 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tanboonji/ip/master/docs/images/ApplicationIcon.png" alt="Application Icon"/>
+  <img src="https://raw.githubusercontent.com/tanboonji/ip/master/docs/images/ApplicationIcon.png" alt="Application Icon" height="240"/>
 </p>
 
-# User Guide
+# Jhin User Guide
 
-Jhin is a **desktop chatbot app for managing your tasks** so that you can focus on doing than remembering. It is 
-optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface 
+Jhin is a **desktop chatbot app for managing your tasks** so that you can focus on doing than remembering. It is
+optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface
 (GUI).
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-    * [Listing all tasks: `list`, `ls`](#listing-all-tasks-list-ls)
-    * [Adding a todo task: `todo`](#adding-a-todo-task-todo)
-    * [Adding a deadline task: `deadline`](#adding-a-deadline-task-deadline)
-    * [Adding an event task: `event`](#adding-an-event-task-event)
-    * [Marking a task as done: `done`](#marking-a-task-as-done-done)
-    * [Deleting a task: `delete`, `rm`](#deleting-a-task-delete-rm)
-    * [Finding a task by description: `find`, `search`](#finding-a-task-by-description-find-search)
-    * [Listing all command aliases: `listalias`, `lsalias`](#listing-all-command-aliases-listalias-lsalias)
-    * [Adding a command alias: `alias`](#adding-a-command-alias-alias)
-    * [Deleting a command alias: `deletealias`, `rmalias`](#deleting-a-command-alias-deletealias-rmalias)
-    * [Viewing help: `help`](#viewing-help-help)
-    * [Exiting the application: `bye`, `exit`](#exiting-the-application-bye-exit)
+  * [Listing all tasks: `list`, `ls`](#listing-all-tasks-list-ls)
+  * [Adding a todo task: `todo`](#adding-a-todo-task-todo)
+  * [Adding a deadline task: `deadline`](#adding-a-deadline-task-deadline)
+  * [Adding an event task: `event`](#adding-an-event-task-event)
+  * [Marking a task as done: `done`](#marking-a-task-as-done-done)
+  * [Deleting a task: `delete`, `rm`](#deleting-a-task-delete-rm)
+  * [Finding a task by description: `find`, `search`](#finding-a-task-by-description-find-search)
+  * [Listing all command aliases: `listalias`, `lsalias`](#listing-all-command-aliases-listalias-lsalias)
+  * [Adding a command alias: `alias`](#adding-a-command-alias-alias)
+  * [Deleting a command alias: `deletealias`, `rmalias`](#deleting-a-command-alias-deletealias-rmalias)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [Exiting the application: `bye`, `exit`](#exiting-the-application-bye-exit)
 * [Command Summary](#command-summary)
 * [Miscellaneous](#miscellaneous)
   * [Auto Save](#auto-save)
@@ -32,14 +32,20 @@ optimized for use via a **Command Line Interface (CLI)** while still having the 
 
 ## Quick Start
 
-1. Ensure that you have **Java 11** or above installed in your computer.
+1. Ensure that you have [**Java 11**](https://www.oracle.com/java/) or above installed in your computer.
 2. Download the latest `jhin.jar` from [here](https://github.com/tanboonji/ip/releases).
 3. Copy the jar file to the folder you want to use as the **home folder** for your Jhin.
 4. Double-click the jar file to start Jhin. The GUI similar to the below should appear in a few seconds.
+    * If the app does not start, you can use the following command in your command prompt to start the app.
+      ```shell
+      java -jar jhin.jar
+      ```
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tanboonji/ip/master/docs/images/Startup.png" alt="Startup Screenshot"/>
+  <img src="https://raw.githubusercontent.com/tanboonji/ip/master/docs/images/Startup.png" alt="Startup Screenshot" height="700"/>
 </p>
+
+5. Start using Jhin!
 
 ## Features
 
@@ -64,7 +70,7 @@ Adds a todo task to Jhin.
 
 Format: `todo <description>`
 
-Examples: 
+Example:
 
 * `todo read book`
 * `todo do iP`
@@ -79,7 +85,7 @@ Format: `deadline <description> /by {date} {time}`
 * If no date is entered, the date will be automatically set to the current date today.
 * If no time is entered, the time will be automatically set to 11:59PM.
 
-Example: 
+Example:
 
 * `deadline return book /by 01012021 0000`
 * `deadline finish iP /by 020221`
@@ -94,7 +100,7 @@ Format: `event <description> /at {date} {time}`
 * If no date is entered, the date will be automatically set to the current date today.
 * If no time is entered, the time will be automatically set to 11:59PM.
 
-Example: 
+Example:
 
 * `event book release /at 15022021 14`
 * `event midterms /at`
@@ -108,7 +114,7 @@ Format: `done <task index>`
 * The task index is shown in the [`list`, `ls` command](#listing-all-tasks-list-ls).
 * The task index must be a positive integer.
 
-Example: 
+Example:
 
 * `done 1`
 * `done 10`
@@ -122,7 +128,7 @@ Format: `[delete, rm] <task index>`
 * The task index is shown in the [`list`, `ls`](#listing-all-tasks-list-ls) command.
 * The task index must be a positive integer.
 
-Example: 
+Example:
 
 * `delete 1`
 * `delete 10`
@@ -138,7 +144,7 @@ Format: `[find, search] {keyword}`
 * Partial words will be matched, therefore *bo* will match *books*.
 * If no keyword is entered, all tasks in Jhin will be shown.
 
-Example: 
+Example:
 
 * `find`
 * `search book`
@@ -172,7 +178,7 @@ Deletes the specified alias from Jhin.
 
 Format: `[deletealias, rmalias] <alias>`
 
-Example: 
+Example:
 * `deletealias l`
 * `rmalias da`
 
