@@ -50,7 +50,6 @@ Tag should be the last argument.
 # Saving of commands
 Commands would be saved into a file once the 'bye' command is typed into the app. Data will be saved in the directory where you saved the jar file, under /data/duke.txt . A new file would be formed if there are no existing file. If there exists an existing file, the file would be used. 
 
-
 ## Usage
 
 ### 'todo'
@@ -62,18 +61,20 @@ Example of usage:
 
 Expected outcome:
 
-`[T][ ] borrow book`
+`[T][X] borrow book`
 
 ### 'event'
-Adds an event task into the tasklist.
+Adds an event task into the tasklist. The time input for /at can be a duration or a time itself.
 
 Example of usage:
 
-`event project meeting /at 10/02/2021 1030`
+`event project meeting /at 10/02/2021 1030-1200`
+`event birthday party /at 15/02/2021 1000`
 
 Expected outcome:
 
-`[T][ ] event project meeting (at: 10/02/2021 1030)`
+`[T][X] event project meeting (at: 10/02/2021 1030-1200)`
+`[T][X] birthday party (at: 15/02/2021 1000)`
 
 ### 'delete'
 Delete the task corresponding to that number in the tasklist.
@@ -117,9 +118,11 @@ Tags a specific task in the tasklist. Tag should come after at or by.
 
 Example of usage:
 `todo buy shoes /tag purchase`
+`deadline join archery /by 10/02/2021 1000 /tag club`
 
 Expected outcome:
 `todo buy shoes (tag: purchase)`
+`deadline join archery (by: 10/02/2021 1000 (tag: club)`
 
 ### 'find'
 Finds the word in the description or the tag from the tasklist.
