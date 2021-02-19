@@ -13,7 +13,7 @@
 5. Type the command in the command box below and press Enter to execute it. e.g. typing **`help`** and pressing Enter will give a response listing all the  possible commands you can use.<br>
    Some example commands you can try:
 
-    * **`list`** : Lists all tasks.
+    * **`list`** : Lists all tasks in the current list.
 
     * **`todo`** `homework` : Adds a todo Task with description `homework` to Olaf.
 
