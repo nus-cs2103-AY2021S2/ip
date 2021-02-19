@@ -1,4 +1,9 @@
 T | 0 | read
 T | 0 | read read
+T | 0 | write
 T | 0 | read
+T | 0 | read 5
 T | 0 | read read read
+T | 0 | read
+T | 0 | read
+T | 0 | read

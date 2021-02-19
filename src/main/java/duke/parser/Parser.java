@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.Duke;
 import duke.command.*;
 import duke.exception.DukeException;
 import duke.ui.CommandType;
@@ -10,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import static duke.ui.CommandType.*;
 
 public class Parser {
+
+    private static final String INVALID_ARGUMENT_ERROR = "Sorry! I don't know what that means.";
 
     /**
      * Parses the input string from the user and returns a Command according to the input.
@@ -25,8 +28,13 @@ public class Parser {
         }
         String argument = splitInput[1].trim();
 
-        CommandType commandType = valueOf(splitInput[0].trim()
-                .toUpperCase());
+        CommandType commandType;
+        try {
+            commandType = valueOf(splitInput[0].trim()
+                    .toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(INVALID_ARGUMENT_ERROR);
+        }
 
         switch (commandType) {
         case BYE:
@@ -48,7 +56,7 @@ public class Parser {
         case UPDATE:
             return new UpdateCommand(argument);
         default:
-            throw new DukeException("Sorry, I don't quite understand!");
+            throw new DukeException(INVALID_ARGUMENT_ERROR);
         }
     }
 
