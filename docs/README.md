@@ -30,9 +30,10 @@ Duke is a chat bot app that helps you to organise your tasks in a CLI manner wit
 
 Commands are presented in the format: `command ARGS`
 
+- `command` cases do not matter (both lowercases and uppercases works fine)
 - Words in `[brackets]` are optional and may not be required
-- Words with a bar|seperating indicate one of the option should be used and only one is needed
-- Words in UPPERCASE are arguments to be supplied by the user
+- Words with a `bar|seperating` indicate one of the option should be used and only one is needed
+- Words in `UPPERCASE` are arguments to be supplied by the user
 
 ## Usage
 
@@ -68,7 +69,7 @@ Format: `done INDEX`
 ### <a name="find">`find` - Finding a task by name or tag</a>
 Finds a task which contains the given word in the name or associate with the tag
 
-Format: `find KEYWORD|TAG`
+Format: `find KEYWORD|#TAG`
 
 ### <a name="delete">`delete` - Tagging a task</a>
 Deletes the specific task using its index

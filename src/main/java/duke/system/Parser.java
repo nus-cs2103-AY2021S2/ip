@@ -8,6 +8,8 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.Helper;
 
+import java.util.Locale;
+
 /**
  * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,
  * then return the parsed <code>command</code>, <code>argument</code> and <code>date</code>
@@ -54,7 +56,7 @@ public class Parser {
         // has temporary variables tempArg, tempDate, tempCommand as they are "final"
         try {
             // check the first part of the input string and decide what to do next using switch case
-            switch(result[0]) {
+            switch(result[0].toLowerCase()) {
                 case "find":
                 case "todo": // both only need a name in a form of string therefore grouped
                     tempCommand = result[0];
