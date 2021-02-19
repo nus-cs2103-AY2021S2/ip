@@ -1,0 +1,2 @@
+T | 0 | rollover
+T | 1 | jump
