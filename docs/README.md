@@ -6,9 +6,10 @@ It functions as a GUI for users to type down tasks they want to record. <br>
 Duke requires the download of [Java SE 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html);
 
 # Features 
+<br>
 
 ## General features:
-<br>
+
 
 ## Feature `help`
 View the commands for Duke.
@@ -59,9 +60,9 @@ Expected outcome:
 
 `These are the tasks in your list:`<br>
 `1. [T][] read book`
+<br>
 
 ## Features to add a task in your list:
-<br>
 
 ## Feature `todo`
 Add a to-do task in your list.
@@ -158,6 +159,7 @@ Expected outcome:
 
 Notice that 'X' appears at the second box of the task. <br>
 That 'X' signifies that the task is done. <br>
+<br>
 
 # Summary of Duke Commands
 

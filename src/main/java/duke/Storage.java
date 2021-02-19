@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String PATH_NAME = "C:/users/chian/Desktop/CS2103/ip/data/";
     private static final String FILE_NAME = ".data.txt";
 
     /**
@@ -47,6 +46,7 @@ public class Storage {
     }
 
     private Task loadTask(String taskInfo) throws DukeWrongFormatException {
+
         /* Split task info into 3 - 4 parts (array)
         *  first part is task type
         *  second part is if task is finished

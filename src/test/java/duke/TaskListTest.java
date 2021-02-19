@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class TaskListTest {
 
     @Test
-    public void testAddTask() {
+    public void testAddTask() throws DukeNumOutOfRangeException {
         TaskList tl = new TaskList();
         Task t1 = new ToDo("read book");
         tl.add(t1);
@@ -17,7 +17,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testDeleteTask() {
+    public void testDeleteTask() throws DukeNumOutOfRangeException {
         TaskList tl = new TaskList();
         Task t1 = new ToDo("read book");
         tl.add(t1);
