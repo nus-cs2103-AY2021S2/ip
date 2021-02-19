@@ -74,7 +74,7 @@ Get the list of tasks
 
 ### Usage
 
-### `list` - Simply type in `list`
+### `list` - Key in `list`
 
 Returns the list of tasks
 
