@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
+         style="-fx-background-color: transparent;" stylesheets="@../css/main.css" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox alignment="TOP_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" style="-fx-background-color: #78acdb;"
+              styleClass="chat-bubble">
+            <HBox.margin>
+                <Insets right="8.0"/>
+            </HBox.margin>
+            <padding>
+                <Insets bottom="12.0" left="16.0" right="16.0" top="12.0"/>
+            </padding>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <Label text="You" textFill="WHITE">
+                <font>
+                    <Font name="Roboto Black" size="13.0"/>
+                </font>
+            </Label>
+            <Label fx:id="dialog" alignment="TOP_LEFT" minHeight="-Infinity" text="Text Text" textFill="WHITE"/>
+        </VBox>
+        <ImageView fx:id="displayPicture" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/UserAvatar.png"/>
+            </image>
+            <HBox.margin>
+                <Insets left="5.0"/>
+            </HBox.margin>
+        </ImageView>
+    </children>
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="8.0" top="16.0"/>
+    </padding>
+</fx:root>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: white; -fx-border-color: #C0C0C0; -fx-border-width: 0 0 1 0;" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
+    <children>
+        <TitledPane alignment="TOP_CENTER" animated="false" collapsible="false" contentDisplay="TOP" expanded="false" focusTraversable="false" prefHeight="49.0" prefWidth="500.0" styleClass="duke-titled-pane" text="Duke" textAlignment="CENTER" AnchorPane.bottomAnchor="662.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <font>
+                <Font name="Roboto Black" size="20.0" />
+            </font>
+            <rotationAxis>
+                <Point3D />
+            </rotationAxis>
+        </TitledPane>
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" layoutY="39.0" maxWidth="-Infinity" vvalue="1.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="39.0">
+            <content>
+                <VBox fx:id="dialogContainer" alignment="TOP_CENTER" prefWidth="530.0" style="-fx-background-color: #fafafa;" />
+            </content>
+        </ScrollPane>
+        <TextField fx:id="userInput" alignment="TOP_LEFT" onAction="#handleUserInput" prefHeight="60.0" styleClass="input-text-area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0">
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+            <font>
+                <Font name="Roboto" size="13.0" />
+            </font>
+        </TextField>
+        <ImageView fx:id="sendButton" accessibleRole="BUTTON" fitHeight="35.0" fitWidth="50.0" layoutX="354.0" layoutY="604.0" onMouseClicked="#handleUserInput" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="5.0">
+            <image>
+                <Image url="@../images/SendIcon.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>
