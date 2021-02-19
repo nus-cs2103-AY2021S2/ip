@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private String name;
     private LocalDate deadline;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for Deadline which has not been done.
@@ -16,9 +16,8 @@ public class Deadline extends Task {
      */
     Deadline(String name, String deadline) {
         this.name = name;
-        assert LocalDate.parse(deadline) instanceof LocalDate : "Date is not in valid format.";
         this.deadline = LocalDate.parse(deadline);
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -30,7 +29,7 @@ public class Deadline extends Task {
     Deadline(String name, String deadline, boolean done) {
         this.name = name;
         this.deadline = LocalDate.parse(deadline);
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -42,7 +41,7 @@ public class Deadline extends Task {
     Deadline(String name, LocalDate deadline, boolean done) {
         this.name = name;
         this.deadline = deadline;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -68,7 +67,7 @@ public class Deadline extends Task {
             Deadline deadline = (Deadline) obj;
             return deadline.name.equals(this.name)
                     && (deadline.deadline.equals(this.deadline))
-                            && (deadline.done == this.done);
+                            && (deadline.isDone == this.isDone);
         }
         return false;
     }
@@ -79,7 +78,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return String.format("[D][X] %s (by: %s)",
                                  this.name,
                                  this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));

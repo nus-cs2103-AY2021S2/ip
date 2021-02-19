@@ -1,10 +1,3 @@
-import java.io.IOException;
-
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 
 /**
@@ -35,9 +28,8 @@ public class Duke {
      * Allows user to start chatting with Duke.
      * @param input Command from user.
      * @param tasks List of tasks user has saved.
-     * @throws IOException If exception occurs when method is running.
      */
-    public String chat(String input, TaskList tasks) throws IOException {
+    public String chat(String input, TaskList tasks) {
         String s = "";
         try {
             Command command = Parser.parse(input);
@@ -53,9 +45,8 @@ public class Duke {
      * @param input Command given by user.
      * @param duke Duke chatbot.
      * @return Appropriate response given command.
-     * @throws IOException
      */
-    public String getResponse(String input, Duke duke) throws IOException {
+    public String getResponse(String input, Duke duke) {
         return duke.chat(input, duke.tasks);
     }
 

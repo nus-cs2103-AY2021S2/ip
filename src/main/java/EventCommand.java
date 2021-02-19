@@ -27,14 +27,6 @@ public class EventCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks the equivalence of EventCommand this and Object obj.
      * If obj is an instance of the EventCommand class and all attributes are equivalent,
      * it is equivalent to this.

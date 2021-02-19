@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private String name;
     private LocalDate duration;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for Event which has not been done.
@@ -16,9 +16,8 @@ public class Event extends Task {
      */
     Event(String name, String duration) {
         this.name = name;
-        assert LocalDate.parse(duration) instanceof LocalDate;
         this.duration = LocalDate.parse(duration);
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -30,7 +29,7 @@ public class Event extends Task {
     Event(String name, String duration, boolean done) {
         this.name = name;
         this.duration = LocalDate.parse(duration);
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -42,7 +41,7 @@ public class Event extends Task {
     Event(String name, LocalDate duration, boolean done) {
         this.name = name;
         this.duration = duration;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -68,7 +67,7 @@ public class Event extends Task {
             Event event = (Event) obj;
             return event.name.equals(this.name)
                     && (event.duration.equals(this.duration))
-                            && (event.done == this.done);
+                            && (event.isDone == this.isDone);
         }
         return false;
     }
@@ -79,7 +78,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return String.format("[E][X] %s (at: %s)",
                                  this.name,
                                  this.duration.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));

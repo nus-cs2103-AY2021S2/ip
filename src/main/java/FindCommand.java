@@ -28,14 +28,6 @@ public class FindCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks the equivalence of FindCommand this and Object obj.
      * If obj is an instance of the FindCommand class and all attributes are equivalent,
      * it is equivalent to this.

@@ -56,6 +56,11 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Checks if date given in String is in the valid format.
+     * @param date Date given by user.
+     * @return The validity of the date formatting.
+     */
     static boolean isValidDate(String date) {
         try {
             LocalDate.parse(date);

@@ -23,14 +23,6 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks the equivalence of DoneCommand this and Object obj.
      * If obj is an instance of the DoneCommand class and all attributes are equivalent,
      * it is equivalent to this.

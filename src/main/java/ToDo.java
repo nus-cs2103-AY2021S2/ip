@@ -3,7 +3,7 @@
  */
 public class ToDo extends Task {
     private String name;
-    private boolean done;
+    private boolean isDone;
 
     /**
      * Constructor for ToDo which has not been done.
@@ -11,7 +11,7 @@ public class ToDo extends Task {
      */
     ToDo(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -21,7 +21,7 @@ public class ToDo extends Task {
      */
     ToDo(String name, boolean done) {
         this.name = name;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
@@ -45,7 +45,7 @@ public class ToDo extends Task {
             return true;
         } else if (obj instanceof ToDo) {
             ToDo toDo = (ToDo) obj;
-            return toDo.name.equals(this.name) && (toDo.done == this.done);
+            return toDo.name.equals(this.name) && (toDo.isDone == this.isDone);
         }
         return false;
     }
@@ -56,7 +56,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[T][X] " + this.name;
         }
         return "[T][ ] " + this.name;
