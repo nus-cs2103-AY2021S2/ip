@@ -13,7 +13,7 @@ public class ListCommand implements Command {
 
     @Override
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
-        boolean hasTask = tasks.size() == 0;
+        boolean hasTask = tasks.size() != 0;
         return ui.getListTaskMessage(tasks.list(), hasTask);
     }
 
