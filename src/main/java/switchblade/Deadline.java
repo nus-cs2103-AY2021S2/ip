@@ -40,9 +40,7 @@ public class Deadline extends Task{
             sb.append("[D] [ ] ");
         }
 
-        sb.append(this.description
-                + " by: "
-                + this.datetime);
+        sb.append(this.description).append(" by: ").append(this.datetime);
         return sb.toString();
     }
 }
