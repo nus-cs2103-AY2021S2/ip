@@ -126,6 +126,7 @@ public class Ui {
                 "I can show you tasks and reminders:\n" +
                 "   list\n" +
                 "   reminders\n" +
+                "   find <search>\n" +
                 "Lastly:\n" +
                 "   help\n" +
                 "   bye\n" +
