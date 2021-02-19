@@ -27,6 +27,25 @@ in that you can key in anything, search for them using keywords, and be able to 
 
 ### Feature 1
 
+Save entries
+
+### Usage
+
+### `save` - key in `save`
+Saves all the data and exits duke
+
+Example of usage:
+
+`save`
+
+Expected outcome:
+
+```
+Your entries have been saved :)
+```
+
+### Feature 2
+
 Exit Duke
 
 ### Usage
@@ -343,19 +362,20 @@ The size of the list depends on the number of matches
 
 ## Summary of features:
 
-1. Exit duke - `bye` or `exit`
-2. Get list of all tasks - `list`
-3. Add todo task - `todo <task description>`
-4. Add deadline task - `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
-5. Add event task - `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
-6. Mark task as done - `done <index>`
-7. Remove a task - `delete <index>` or `remove <index>`
-8. Find tasks matching a keyword - `find <keyword>` or `search <keyword>`
-9. Get tasks that are due - `dues` or `reminders`
-10. Get list of notes - `notes`
-11. Add notes - `add <note description>`
-12. Delete a note - `delete-note <index>` or `remove-note <index>`
-13. Find notes based on keyword - `find-note <keyword>` or `search-note <keyword>`
+1. Save entries - `save`
+2. Exit duke - `bye` or `exit`
+3. Get list of all tasks - `list`
+4. Add todo task - `todo <task description>`
+5. Add deadline task - `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+6. Add event task - `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+7. Mark task as done - `done <index>`
+8. Remove a task - `delete <index>` or `remove <index>`
+9. Find tasks matching a keyword - `find <keyword>` or `search <keyword>`
+10. Get tasks that are due - `dues` or `reminders`
+11. Get list of notes - `notes`
+12. Add notes - `add <note description>`
+13. Delete a note - `delete-note <index>` or `remove-note <index>`
+14. Find notes based on keyword - `find-note <keyword>` or `search-note <keyword>`
 
 ### Reminder:
 
