@@ -9,36 +9,42 @@ Note: All commands are case insensitive.
 * Description: Adds new ToDo task to your list of tasks.
 * Command: `todo`
 * Format: `todo <description>`
-* Note: `<description>` cannot be empty,
+* Note: `<description>` cannot be empty.
 * Example:
 
 ### Create an Event task:
 * Description: Adds new Event, with the specified event time, task to your list of tasks.
 * Command: `event`
 * Format: `event <description> /at <YYYY-MM-DD> <HH:mm>`
-* Note: `<description>` and `<date>` cannot be empty; `<time>` is optional,
+* Note: `<description>` and `<date>` cannot be empty; `<time>` is optional.
 * Example:
 
 ### Create a Deadline task:
 * Description: Adds new Deadline task, with the specified deadline, to your list of tasks.
 * Command: `deadline`
 * Format: `deadline <description> /by <YYYY-MM-DD> <HH:mm>`
-* Note: `<description>` and `<date>` cannot be empty; `<time>` is optional,
+* Note: `<description>` and `<date>` cannot be empty; `<time>` is optional.
 * Example:
 
 ### Delete a task:
 * Description: Deletes the task specified by its input index.
 * Command: `delete`
 * Format: `delete <task index>`
-* Note: `<task index>` cannot be empty,
+* Note: `<task index>` cannot be empty.
 * Example:
 
+### Delete a task:
+* Description: Marks the task specified by its input index as done.
+* Command: `done`
+* Format: `done <task index>`
+* Note: `<task index>` cannot be empty.
+* Example:
 
-### List tasks:
+### List all tasks:
 * Description: Lists all tasks currently in the task list.
 * Command: `list`
 * Format: `list`
-* Note: Just `list` is enough,
+* Note: Just `list` is enough.
 * Example: 
 
 ### Find tasks: 
