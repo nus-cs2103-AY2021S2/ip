@@ -8,7 +8,7 @@ User Interface) to help those potential users be at ease while using Duke.
 **Duke** allows the user to key in three types of tasks: **todo**, **deadlines** and **events**, and also be able to
 manipulate them.
 
-1. **Todo** tasks are those that you expect to finish immediately, and so does not have an end date.
+1. **Todo** tasks are those that you expect to finish soon, and so does not have an end date.
 2. **Deadlines** are tasks that must have an end date, whereas it is optional to add time.
 3. **Events** are tasks that must have an end date, and although the time here is optional, it is recommended that you
    key in the time.
