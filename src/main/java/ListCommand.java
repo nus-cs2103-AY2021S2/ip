@@ -16,14 +16,6 @@ public class ListCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks the equivalence of ListCommand this and Object obj.
      * If obj is an instance of the ListCommand class and all attributes are equivalent,
      * it is equivalent to this.

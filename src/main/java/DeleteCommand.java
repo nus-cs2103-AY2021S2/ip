@@ -24,14 +24,6 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks the equivalence of DeleteCommand this and Object obj.
      * If obj is an instance of the DeleteCommand class and all attributes are equivalent,
      * it is equivalent to this.

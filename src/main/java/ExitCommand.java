@@ -12,14 +12,6 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    boolean isExit() {
-        return true;
-    }
-
-    /**
      * Checks the equivalence of ExitCommand this and Object obj.
      * If obj is an instance of the ExitCommand class and all attributes are equivalent,
      * it is equivalent to this.

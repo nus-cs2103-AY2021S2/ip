@@ -24,14 +24,6 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    boolean isExit() {
-        return false;
-    }
-
-    /**
      * Checks the equivalence of ToDoCommand this and Object obj.
      * If obj is an instance of the ToDoCommand class and all attributes are equivalent,
      * it is equivalent to this.

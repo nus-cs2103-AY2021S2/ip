@@ -39,7 +39,8 @@ public class Ui {
      * @param tasks Number of saved tasks after deleting.
      */
     String delete(String task, int tasks) {
-        return "Noted. I've removed this task:\n" + task + "\n" + String.format("Now you have %s tasks in the list.", tasks);
+        return "Noted. I've removed this task:\n" + task + "\n"
+                + String.format("Now you have %s tasks in the list.", tasks);
     }
 
     /**
@@ -56,7 +57,8 @@ public class Ui {
      * @param tasks Number of tasks after saving.
      */
     String addTask(String task, int tasks) {
-        return "Got it. I've added this task:\n" + task + "\n" + String.format("Now you have %s tasks in the list.", tasks);
+        return "Got it. I've added this task:\n" + task + "\n"
+                + String.format("Now you have %s tasks in the list.", tasks);
     }
 
     /**

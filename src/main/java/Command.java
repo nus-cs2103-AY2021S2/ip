@@ -10,10 +10,4 @@ public abstract class Command {
      * @param storage Handles saving tasks to computer.
      */
     abstract String execute(TaskList tasks,Ui ui, Storage storage);
-
-    /**
-     * Returns an indication of whether user wants to exit the program.
-     * @return Indication of whether user wants to exit the program.
-     */
-    abstract boolean isExit();
 }
