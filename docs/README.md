@@ -1,5 +1,9 @@
 # User Guide - Features 
 
+## UI Sample
+![image](Ui.png)
+<br>
+
 ## `ToDo`
 
 ### Usage
