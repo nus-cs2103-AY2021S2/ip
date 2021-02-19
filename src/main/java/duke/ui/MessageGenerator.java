@@ -12,8 +12,8 @@ public class MessageGenerator {
      * Returns the welcome message when first starting duke.
      */
     public String getWelcomeMessage() {
-        return  "Hello! I'm Duke\n" +
-                "I can help you bookmark basic tasks and events!\n" +
+        return  "Hello! I'm Monique the Monitor Lizard\n" +
+                "I can help you monitor your life and beat procrastination!\n" +
                 "What can I do for you?";
     }
 
