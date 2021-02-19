@@ -1,10 +1,17 @@
-public class Event extends Command {
-    public String eventTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String commandDescription, String eventTime) {
+public class Event extends Command {
+    public LocalDate eventDate;
+    private String formattedDate;
+
+    public Event(String commandDescription, LocalDate eventDate) {
         super(commandDescription);
         this.isDone = false;
-        this.eventTime = eventTime;
+        this.eventDate = eventDate;
+
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        this.formattedDate = this.eventDate.format(format);
     }
 
     public String getTime() {
@@ -13,6 +20,6 @@ public class Event extends Command {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " | at: " + eventTime;
+        return "[E] " + super.toString() + " | at: " + formattedDate;
     }
 }

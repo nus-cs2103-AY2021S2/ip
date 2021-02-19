@@ -1,8 +1,8 @@
-/**
- * Doge Duke implements a virtual pet application that
- * returns different commands passed by owner (user).
- *
- * @author Chia Jia-Xi, Kymie
+/*
+  Doge Duke implements a virtual pet application that
+  returns different commands passed by owner (user).
+
+  @author Chia Jia-Xi, Kymie
  * @version 1.0
  * @since 2021-01-31
  */
@@ -123,7 +123,7 @@ public class Duke {
                         int len = commands.size();
                         System.out.println(spacer
                                 + "Mlem I've added a new command for you to do:\n"
-                                + commands.get(len-1)
+                                + commands.get(len - 1)
                                 + "\n"
                                 + "Now I can do a total of "
                                 + len
@@ -135,12 +135,13 @@ public class Duke {
                     // To recognise Event user input
                     } else if (input.contains("event")) {
                         String[] inputTime = input.split(" /at ");
-                        command = new Event(inputTime[0].substring(6), inputTime[1]);
+                        LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
+                        command = new Event(inputTime[0].substring(6), parseDate);
                         commands.add(command);
                         int len = commands.size();
                         System.out.println(spacer
                                 + "Much wow! I've added a new command with an Event:\n"
-                                + commands.get(len-1)
+                                + commands.get(len - 1)
                                 + "\n"
                                 + "Now I can do a total of "
                                 + len
@@ -152,12 +153,13 @@ public class Duke {
                     // To recognise Deadline user input
                     } else if (input.contains("deadline")) {
                         String[] inputTime = input.split(" /by ");
-                        command = new Deadline(inputTime[0].substring(9), inputTime[1]);
+                        LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
+                        command = new Deadline(inputTime[0].substring(9), parseDate);
                         commands.add(command);
                         int len = commands.size();
                         System.out.println(spacer
                                 + "Woofers! I've added a new command with a Ded-line:\n"
-                                + commands.get(len-1)
+                                + commands.get(len - 1)
                                 + "\n"
                                 + "Now I can do a total of "
                                 + len
@@ -168,11 +170,12 @@ public class Duke {
 
                     } else {}
                 }
-
+            } catch (DateTimeParseException e) {
+                    System.out.println("This date doesnt exist! "
+                            + "The right format should be in yyyy-mm-dd.");
             } catch (Exception e) {
                 System.out.println(e);
             }
-
         }
         sc.close();
     }
