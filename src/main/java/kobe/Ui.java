@@ -219,6 +219,19 @@ public class Ui {
         System.out.print(line + fullResponse + "\n" + line);
     }
 
+    public static void addDuplicateTaskResponse(Task taskThatAlreadyExists) {
+        String fullResponse = "";
+        fullResponse += ind + "Kobe has found a duplicate task in your list:\n";
+        fullResponse += ind + ind + taskThatAlreadyExists + "\n";
+        fullResponse += ind + "Kobe did not add your task.\n";
+        fullResponse += ind + "To add your task, use a different title for your task.";
+        responses.add(fullResponse);
+
+        System.out.print(line + "Kobe has found a duplicate task in your list:\n");
+        System.out.println(ind + ind + taskThatAlreadyExists);
+        System.out.println(line + "Kobe did not add your task.");
+        System.out.println(ind + "To add your task, use a different title for your task.\n");
+    }
 
     /**
      * To display an error message in the context of Kobe.

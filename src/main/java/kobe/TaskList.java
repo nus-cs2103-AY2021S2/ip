@@ -47,13 +47,31 @@ public class TaskList {
         //Recognise if condition is time
         DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
         df1.setLenient(false);
-        Task currentTask;
+        Task currentTask = new Task(echoedText, type, condition);
         try {
-            df1.parse(condition);
-            LocalDate d1 = LocalDate.parse(condition);
-            currentTask = new Task(false, echoedText, type, d1);
-            this.tasks.add(currentTask);
-            Ui.addAddDateTaskResponse(currentTask, this.tasks.size());
+            //check if there already exists a similar task
+            boolean isDuplicate = false;
+            for (int i = 0; i < this.tasks.size(); i++) {
+                Task previouslyAddedTask = this.tasks.get(i);
+                String previouslyAddedTaskName = previouslyAddedTask.getTaskName();
+                String previouslyAddedTaskType = previouslyAddedTask.getTaskType();
+                if (echoedText.equals(previouslyAddedTaskName) &&
+                        type.equals(previouslyAddedTaskType)) {
+                    currentTask = previouslyAddedTask;
+                    isDuplicate = true;
+                }
+            }
+
+            if (isDuplicate) {
+                Ui.addDuplicateTaskResponse(currentTask);
+            } else {
+                df1.parse(condition);
+                LocalDate d1 = LocalDate.parse(condition);
+                currentTask = new Task(false, echoedText, type, d1);
+
+                this.tasks.add(currentTask);
+                Ui.addAddDateTaskResponse(currentTask, this.tasks.size());
+            }
 
         } catch (ParseException | NullPointerException e) { //not in the format
             currentTask = new Task(echoedText, type, condition);
