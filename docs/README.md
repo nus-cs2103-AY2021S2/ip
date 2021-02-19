@@ -1,13 +1,14 @@
 # User Guide
 
+<p align="center">
+    <img src="./Ui.png" alt="Screenshot" height="400">
+</p>
+ 
 ## About
+Duke is a desktop app to track and manage tasks easily. Built for [CS2103T: Software Engineering Module](https://nus-cs2103-ay2021s2.github.io/website/admin/index.html).
 
-Duke is a desktop app to track and manage tasks easily. Built
-for [CS2103T: Software Engineering Module](https://nus-cs2103-ay2021s2.github.io/website/admin/index.html):
 
 ## Features
-
-<img align="right" src="assets/gifs/Explore Frames.gif" height="400">
 
 ### 1. Add Tasks
 
@@ -37,13 +38,15 @@ Sort the task list alphabetically based on the task description.
 
 Search for tasks from the task list based on a keyword.
 
+<br>
+
 ## Usage
 
 |      Feature      |              Command Format               |               Example                | Expected Outcome             |
 |:-----------------:|:-----------------------------------------:|:------------------------------------:|:----------------------------:|
 |   Add Todo Task   |            `todo <description>`           |           `todo read book`           |![](./outcome_images/todo.png)|
-|   Add Event Task  |   `event <description> /at <YYYY-MM-DD>`  |    `event seminar /at 2021-03-04`    |![](./outcome_images/event.png)|
-| Add Deadline Task | `deadline <description> /at <YYYY-MM-DD>` | `deadline assignment /by 2021-02-28` |![](./outcome_images/deadline.png)|
+|   Add Event Task  |   `event <description> /at <YYYY-MM-DD>`  |    `event seminar /at 2021-03-04`    |![](./outcome_images/event.PNG)|
+| Add Deadline Task | `deadline <description> /at <YYYY-MM-DD>` | `deadline assignment /by 2021-02-28` |![](./outcome_images/deadline.PNG)|
 |     View Tasks    |                   `list`                  |                `list`                |![](./outcome_images/list.png)|
 | Mark as Completed |            `done <task_number>`           |               `done 1`               |![](./outcome_images/done.png)|
 |    Delete Tasks   |           `delete <task_number>`          |              `delete 2`              |![](./outcome_images/delete.png)|
