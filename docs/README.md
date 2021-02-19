@@ -207,14 +207,14 @@ Q: How do I transfer my data to another computer?
 A: Install the Butler Alfred app in the other computer and overwrite the empty data file it creates with the file containing your data from your previous Butler Alfred home folder.
 
 ## Command Summary
-Action | Format/example
+Action | Format/Example
 -------------|-------------
-todo | `todo <TASK_NAME>` <br> e.g. `todo groceries shopping`
-deadline | `deadline <TASK_NAME> /at <YYYY-MM-DD> <HH:MM>` <br> e.g. `deadline CS2100 written assignment /by 2021-03-12 23:59`
-event | `event <TASK_NAME> /at <LOCATION> <YYYY-MM-DD> <HH:MM>` <br> e.g. `event lunch /at NUSS 2021-02-24 12:15`
-done | `done <TASK_NUMBER>` <br> e.g. `done 5`
-delete | `delete <TASK_NUMBER>` <br> e.g. `delete 5`
-list | `list` <br>
-find | `find <KEYWORD>` <br> e.g. `find assignment`
-help | `help` or `help <COMMAND>` <br> e.g.`help` or `help event`
-bye | `bye`
+**todo** | `todo <TASK_NAME>` <br> e.g. `todo groceries shopping`
+**deadline** | `deadline <TASK_NAME> /at <YYYY-MM-DD> <HH:MM>` <br> e.g. `deadline CS2100 written assignment /by 2021-03-12 23:59`
+**event** | `event <TASK_NAME> /at <LOCATION> <YYYY-MM-DD> <HH:MM>` <br> e.g. `event lunch /at NUSS 2021-02-24 12:15`
+**done** | `done <TASK_NUMBER>` <br> e.g. `done 5`
+**delete** | `delete <TASK_NUMBER>` <br> e.g. `delete 5`
+**list** | `list` <br>
+**find** | `find <KEYWORD>` <br> e.g. `find assignment`
+**help** | `help` or `help <COMMAND>` <br> e.g.`help` or `help event`
+**bye** | `bye`
