@@ -63,9 +63,6 @@ Goodbye for now.
 Hope to see you soon!
 ```
 
-### Reminder
-
-Remember to always execute this command after working on duke or else the task would not be saved!
 
 ## Task Features
 
@@ -379,7 +376,7 @@ The size of the list depends on the number of matches
 
 ### Reminder:
 
-After working on duke, make sure to key in the **exit** command (`bye` or `exit`) in order to **save** your entries.
+After working on duke, make sure to key in the **exit** command (`bye` or `exit`) or **save** command (`save`) in order to **save** your entries.
 
 ## Hope you have a wonderful time using Duke!
 
