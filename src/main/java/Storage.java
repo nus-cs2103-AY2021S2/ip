@@ -229,6 +229,9 @@ public class Storage {
      * @throws IOException On file error.
      */
     public void copyFile(File input, File output) throws IOException {
+        // @@author mabel-kang-reused
+        // Reused from https://stackoverflow.com/questions/35787039/copy-file-in-java-using-filestream with minor
+        // modifications.
         FileInputStream in = new FileInputStream(input);
         FileOutputStream out = new FileOutputStream(output);
         byte[] data = new byte[1024];
