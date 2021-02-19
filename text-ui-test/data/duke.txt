@@ -1,0 +1,12 @@
+D | 1 | returnbook | 2020-01-02
+E | 0 | projectmeeting | 2020-03-04
+T | 1 | borrowbook
+T | 0 | study
+T | 0 | exercise
+D | 0 | returnbook | 2020-01-02
+E | 0 | projectmeeting | 2020-03-04
+T | 0 |  borrow book
+T | 0 |  study
+T | 0 |  exercise
+D | 0 |  return book  | 2020-01-02
+E | 0 |  project meeting  | 2020-03-04
