@@ -56,7 +56,7 @@ public class Storage {
             } else {
                 ui.showLoadingError();
             }
-
+            br.close();
         } catch (IOException e) {
             System.out.println("IOException: " + e);
         } finally {
@@ -78,7 +78,7 @@ public class Storage {
                     bw.write(ind + (i + 1) + ". " + storage.tasks.get(i) + "\n");
                 }
             }
-
+            bw.close();
         } catch (IOException e) {
             System.out.println("IOException: " + e);
         } catch (NullPointerException e) {
