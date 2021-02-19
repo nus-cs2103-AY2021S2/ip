@@ -48,7 +48,7 @@ public class TaskList {
      *
      * @param index the index of the item to be changed
      */
-    public void markItemasDone(int index) {
+    public void markItemAsDone(int index) {
         int correctIndex = index - 1;
         assertIndexInRange(correctIndex);
         ListItem tempItem = this.listItems.get(correctIndex).markAsDone();

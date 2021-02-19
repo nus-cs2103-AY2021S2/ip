@@ -100,7 +100,7 @@ public class Parser {
                 default:
                     // try parsing the command first, else throw exception
                     try {
-                        tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0]));
+                        tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0].toUpperCase()));
                     } catch (IllegalArgumentException ex) {
                         throw new DukeException.UnknownCommandException();
                     }
@@ -149,7 +149,7 @@ public class Parser {
             }
             return initStr;
         case DONE:
-            inputList.markItemasDone(Integer.parseInt(this.argument));
+            inputList.markItemAsDone(Integer.parseInt(this.argument));
             return "Nice! I've marked this task as done: \n"
                     + inputList.getListItems().get(Integer.parseInt(this.argument) - 1);
         case EVENT:

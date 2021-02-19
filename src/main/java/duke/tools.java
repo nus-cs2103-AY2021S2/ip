@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * a class that provides helper function for others
+ */
 public class tools {
     /**
      * Quick method to check whether the string passed is an integer or not
