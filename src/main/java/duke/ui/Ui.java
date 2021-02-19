@@ -7,11 +7,6 @@ public class Ui {
     private static final String INDENTATION = "    ";
     private static final String BORDER = "--------------------------------"
             + "----------------";
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String ADD_TASK_ACK = "Got it. I've added this task:";
 
     public String formatString(String... msg) {
@@ -25,7 +20,7 @@ public class Ui {
     }
 
     public String getGreeetingMsg() {
-        return formatString("Hello from \n" + LOGO, "How may I help you?");
+        return formatString("Hello from Hayate! How may I help you?");
     }
 
     public String getError(String msg) {

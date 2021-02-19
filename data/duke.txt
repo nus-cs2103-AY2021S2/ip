@@ -1,9 +1,2 @@
-T | 0 | read
-T | 0 | read read
-T | 0 | write
-T | 0 | read
-T | 0 | read 5
-T | 0 | read read read
-T | 0 | read
-T | 0 | read
-T | 0 | read
+T | 0 | Watch CS2103T lecture
+D | 0 | iP Project | Feb 19 2021 11:59 PM
