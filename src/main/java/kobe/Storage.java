@@ -1,11 +1,22 @@
 package kobe;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+
 import java.nio.charset.StandardCharsets;
+
 
 public class Storage {
     private String pathName;
     private TaskList tasks;
+    private File f;
     public static String ind = "    ";
     public static String line = ind + "____________________________________________________________\n" + ind;
     public static String line2 = ind + "____________________________________________________________\n";
@@ -13,12 +24,17 @@ public class Storage {
     /**
      * Constructor for Storage object.
      *
-     * @param pathName  the name of the path where the text file is stored
-     * @param tasks  the list of tasks to be retrieved and written
-     * @param ui  the user interface to inform the user of the outcome
+     * @param pathName the name of the path where the text file is stored
+     * @param tasks    the list of tasks to be retrieved and written
+     * @param ui       the user interface to inform the user of the outcome
      */
     Storage(String pathName, TaskList tasks, Ui ui) {
         this.pathName = pathName;
+        if (!pathName.endsWith(".txt")) {
+            this.f = new File(pathName, "kobe.txt");
+        } else {
+            this.f = new File(pathName);
+        }
 
         //Read line by line of the storage file
         try (BufferedReader br = new BufferedReader(
