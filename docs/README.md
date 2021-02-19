@@ -1,12 +1,12 @@
 # User Guide
-Duke is a thing
+Duke is a personal assistant that helps you keep track of your tasks!
 ## Features
 ### Keep track of various tasks 
-* Add a todo task
-* Add a deadline task
-* Add an event task
+* Add todo tasks
+* Add deadline tasks
+* Add event tasks
 ### Manage your tasks
-* List out tasks
+* List out your tasks
 * Mark tasks as done
 * Delete tasks
 * Find tasks
