@@ -1,27 +1,32 @@
 # Duke User Guide
 
+<br>
+
 ## Features
 
-* `List` down all the tasks from the list.
+- `List` down all the tasks from the list.
 
-* Add `todo`, `deadline` and `event` tasks to the list.
+- Add `todo`, `deadline` and `event` tasks to the list.
    
-* Mark any task in the list as `done`.
+- Mark any task in the list as `done`.
 
-* `Find` all tasks in the list whose description contains the keyword.
+- `Find` all tasks in the list whose description contains the keyword.
 
-* `Delete` any task in the list.
+- `Delete` any task in the list.
 
-* `Delete all` tasks in the list.
+- `Delete all` tasks in the list.
+
+<br>
 
 ## A Screenshot of Duke in Action!
 
 ![image](Ui.png)
 
+<br>
 
 ## Usage
 
-### *`List`*
+### **`List`**
 
 #### What it does:
 
@@ -40,7 +45,9 @@ Here are the tasks in your list:
 3. [E] [] formal dinner (at: 2 Apr 2021, 6:00pm-9:00pm)
 ```
 
-### *`Todo`*
+<br>
+
+### **`Todo`**
 
 #### What it does:
 
@@ -62,7 +69,9 @@ Got it. I've added this task:
 Now you have 4 tasks in the list.
 ```
 
-### *`Deadline`*
+<br>
+
+### **`Deadline`**
 
 #### What it does:
 
@@ -84,7 +93,9 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 ```
 
-### *`Event`*
+<br>
+
+### **`Event`**
 
 #### What it does:
 
@@ -106,7 +117,9 @@ Got it. I've added this task:
 Now you have 6 tasks in the list.
 ```
 
-### *`Done`*
+<br>
+
+### **`Done`**
 
 #### What it does:
 
@@ -127,7 +140,9 @@ Nice! I've marked this task as done:
 [T] [/] read book
 ```
 
-### *`Find`*
+<br>
+
+### **`Find`**
 
 #### What it does:
 
@@ -149,7 +164,9 @@ Here are the matching tasks in your list:
 2. [D] [] return book (by: 28 Feb 2021, 5:00pm)
 ```
 
-### *`Delete`*
+<br>
+
+### **`Delete`**
 
 #### What it does:
 
@@ -181,7 +198,9 @@ Now you have 5 tasks in the list.
 Noted. I've removed all the tasks from the list.
 ```
 
-### *`Bye`*
+<br>
+
+### **`Bye`**
 
 #### What it does:
 
