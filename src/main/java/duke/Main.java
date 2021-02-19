@@ -9,16 +9,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -32,12 +33,14 @@ public class Main extends Application {
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * Formats how the send button will look like and its action upon clicking it
+     * @param sendButton
+     */
     public void buttonSetting(Button sendButton) {
-        Font font = Font.font("Verdana");
         sendButton.setPrefWidth(55.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-        //sendButton.setFont(font);
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -63,14 +66,18 @@ public class Main extends Application {
         });
     }
 
+    /**
+     * Formats how the initial portion of the gui will look like upon running duke
+     * @param dialogContainer
+     */
     public void vBoxSetting(VBox dialogContainer) {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.setPadding(new Insets(10, 5, 10, 5));
         dialogContainer.setSpacing(25);
         Label label = new Label(Ui.greet());
-        label.setMinSize(500,150);
+        label.setMinSize(500, 150);
         label.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
-        Rectangle rect = new Rectangle(500,150);
+        Rectangle rect = new Rectangle(500, 150);
         rect.setArcHeight(120.0);
         rect.setArcWidth(120.0);
         label.setClip(rect);
@@ -81,6 +88,10 @@ public class Main extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Formats how the the textField of the user input portion will look like
+     * @param userInput
+     */
     public void textFieldSetting(TextField userInput) {
         userInput.setPrefWidth(580.0);
         AnchorPane.setLeftAnchor(userInput, 1.0);
@@ -104,6 +115,10 @@ public class Main extends Application {
         });
     }
 
+    /**
+     * Formats how the scroll pane behaves
+     * @param scrollPane
+     */
     public void scrollPaneSetting(ScrollPane scrollPane) {
 
         scrollPane.setPrefSize(580, 735);

@@ -36,9 +36,15 @@ public class DeadlineTask extends Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DeadlineTask)) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DeadlineTask)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         DeadlineTask that = (DeadlineTask) o;
         return Objects.equals(time, that.time);
     }

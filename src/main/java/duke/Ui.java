@@ -22,11 +22,17 @@ public class Ui {
         return "Hello from\n" + logo + "Hello! I'm Duke" + "\n" + "Type help to get started!";
     }
 
+    /**
+     * Show instructions to the user on how to use duke
+     * @return a list of command and how they work
+     */
     public static String helpGuide() {
         StringBuilder sb = new StringBuilder();
         sb.append("These are the available commands: \n");
-        sb.append("event TASKNAME /at yyyy-MM-dd start time-end time (eg: event project meeting /at 2019-12-01 2-4pm) \n");
-        sb.append("deadline TASKNAME /by yyyy-MM-dd expected end time (eg: deadline project meeting /by 2019-12-01 4pm) \n");
+        sb.append("event TASKNAME /at yyyy-MM-dd start time-end time"
+                + "eg: event project meeting /at 2019-12-01 2-4pm) \n");
+        sb.append("deadline TASKNAME /by yyyy-MM-dd expected end time "
+                + "(eg: deadline project meeting /by 2019-12-01 4pm) \n");
         sb.append("todo TASKNAME (eg: todo read book) \n");
         sb.append("done + taskNumber (eg: done 1) \n");
         sb.append("delete + taskNumber (eg: delete 1) \n");

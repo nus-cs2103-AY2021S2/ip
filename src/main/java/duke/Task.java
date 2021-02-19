@@ -29,24 +29,14 @@ public class Task {
         this.isDone = true;
     }
 
-    /*@Override
-    public boolean equals(Object o) {
-        if (o == null) {
-            return false;
-        }
-        if (o == this) {
-            return true;
-        } else if ((o instanceof Task) && (((Task) o).getDescription() == this.description)) {
-            return true;
-        } else {
-            return false;
-        }
-    }*/
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Task)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
         Task task = (Task) o;
         return getDescription().equals(task.getDescription());
     }

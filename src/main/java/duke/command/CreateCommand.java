@@ -1,15 +1,20 @@
 package duke.command;
 
-import duke.*;
+import duke.DeadlineTask;
+import duke.EventTask;
+import duke.Parser;
+import duke.ToDoTask;
 
+/**
+ * handles the creation of the different task objects
+ */
 public class CreateCommand {
 
-    /*public static String addTask(Task newTask) {
-        Parser.getTaskList().add(newTask);
-        return ("Got it. I've added this task:" + "\n" + newTask.toString()
-                + "\n" + "Now you have " + Parser.getTaskList().size() + " tasks in the list.");
-    }*/
-
+    /**
+     * Creates a event task based on the information the user entered
+     * @param inputArray the tokenized input that the user entered
+     * @return the event task
+     */
     public static EventTask createEvent(String[] inputArray) {
         String description = "";
         String time = "";
@@ -29,6 +34,11 @@ public class CreateCommand {
         return new EventTask(description, time);
     }
 
+    /**
+     * Creates a deadline task based on the information the user entered
+     * @param inputArray the tokenized input that the user entered
+     * @return the deadline task created
+     */
     public static DeadlineTask createDeadline(String[] inputArray) {
         String description = "";
         String time = "";
@@ -48,6 +58,11 @@ public class CreateCommand {
         return new DeadlineTask(description, time);
     }
 
+    /**
+     * Creates a to do task based on the information the user entered
+     * @param inputArray the tokenized input that the user entered
+     * @return the to do task created
+     */
     public static ToDoTask createToDo(String[] inputArray) {
         String description = "";
         for (int i = 1; i < inputArray.length; ++i) {
@@ -57,7 +72,12 @@ public class CreateCommand {
         return new ToDoTask(description);
     }
 
-    public static String runCommand(String input) throws DukeException, Exception {
+    /**
+     * handles the user input and decides which type of task to create
+     * @param input user input
+     * @return the response string upon successfully creating and adding the task into the task list
+     */
+    public static String runCommand(String input) {
         String[] spiltInput = input.split("\\s+");
         String typeOfEvent = spiltInput[0];
         switch(typeOfEvent) {

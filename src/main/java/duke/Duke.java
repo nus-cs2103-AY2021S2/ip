@@ -6,4 +6,12 @@ package duke;
 
 public class Duke {
 
+    /**
+     * Construct duke object with parser, storage and ui
+     */
+    public Duke() {
+        Parser parser = new Parser();
+        Storage storage = new Storage();
+        Ui ui = new Ui();
+    }
 }

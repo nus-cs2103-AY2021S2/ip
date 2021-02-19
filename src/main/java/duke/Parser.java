@@ -2,11 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 
-import duke.command.ReadCommand;
-import duke.command.DetectDuplicateCommand;
-import duke.command.UpdateCommand;
 import duke.command.CreateCommand;
 import duke.command.DeleteCommand;
+import duke.command.DetectDuplicateCommand;
+import duke.command.ReadCommand;
+import duke.command.UpdateCommand;
 
 /**
  * Parser class which handles the parsing of user's input and delivers the expected action accordingly
@@ -77,13 +77,12 @@ public class Parser {
 
     /**
      * Reads user input and parse it accordingly so as to deliver the according action correctly
-     *
      * @throws DukeException if user input is empty or invalid
      * @throws Exception
      */
     public static String read(String input) throws DukeException, Exception {
         if (input.equals("")) {
-            throw new EmptyArgument("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new EmptyArgument("OOPS!!! The user input cannot be empty.");
         }
         if (input.startsWith("done")) {
             return UpdateCommand.runCommand(input);

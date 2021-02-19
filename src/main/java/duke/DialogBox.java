@@ -8,7 +8,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -25,7 +28,7 @@ class DialogBox extends HBox {
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100);
 
-        Circle circle = new Circle(50,50,50);
+        Circle circle = new Circle(50, 50, 50);
         circle.setEffect(new DropShadow(10, Color.BLACK));
         displayPicture.setClip(circle);
         displayPicture.setSmooth(true);
