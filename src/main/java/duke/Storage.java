@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Solution below adapted from https://github.com/vevek/ip/blob/master/src/main/java/duke/util/Storage.java
+
 /**
  * Provides the methods to create a storage object and relevant methods to interact with storage.
  */
@@ -57,6 +59,27 @@ public class Storage {
     }
 
     /**
+     * Writes the specified taskList into the specified file in the hard disk.
+     *
+     * @param taskList the list of tasks to be written into file.
+     * @throws DukeException if task type is not recognised or unable to write to file.
+     */
+    public void writeToFile(ArrayList<Task> taskList) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
+                fw.write(taskToString(task) + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Oops, unable to write to file!");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
+    /**
      * Converts the data being stored as strings in the hard disk into Task objects.
      *
      * @param input each individual string task data from the file in the hard disk.
@@ -91,27 +114,6 @@ public class Storage {
             task.markAsDone();
         }
         return task;
-    }
-
-    /**
-     * Writes the specified taskList into the specified file in the hard disk.
-     *
-     * @param taskList the list of tasks to be written into file.
-     * @throws DukeException if task type is not recognised or unable to write to file.
-     */
-    public void writeToFile(ArrayList<Task> taskList) throws DukeException {
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
-                fw.write(taskToString(task) + System.lineSeparator());
-            }
-            fw.close();
-        } catch (IOException e) {
-            throw new DukeException("Oops, unable to write to file!");
-        } catch (DukeException e) {
-            throw new DukeException(e.getMessage());
-        }
     }
 
     /**
