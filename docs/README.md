@@ -21,7 +21,7 @@ Example: `bye`
 ### Help `help`
 Shows available commands and their formats
 
-![Image of Help](ip/src/main/resources/images/help.png)
+![Image of Help](src/main/resources/images/Help.PNG)
 
 ## Add Tasks
 ### Add ToDo `todo`
