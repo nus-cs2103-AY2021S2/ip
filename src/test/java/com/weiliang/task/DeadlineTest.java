@@ -1,12 +1,13 @@
 package com.weiliang.task;
 
-import com.weiliang.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import com.weiliang.DukeException;
+
 public class DeadlineTest {
-    
+
     @Test
     public void deadlineTest() throws DukeException {
         Task task = new Deadline("test", "2000-01-01T23:59:59");
