@@ -31,7 +31,7 @@ management tasks done faster than traditional GUI apps.
 
 1. Refer to the Features below for details of each command that can be used.
 
-![Image of Duke](https://tsh22.github.com/ip/Ui.png)
+![Image of Duke](https://raw.githubusercontent.com/tsh22/ip/master/docs/Ui.png)
 
 ## Features
 
@@ -139,8 +139,7 @@ done | `done NUMBER` e.g. `done 3`, `DONE 2`
 delete | `delete NUMBER` e.g. `delete 3 `, `Delete 1`
 bye | `bye`
 
-
-###Acknowledgement
+### Acknowledgement
 * Background image: [link](https://i.pinimg.com/564x/4b/78/f2/4b78f244924f21ba1fc5d150d2c05c35.jpg)
 
 * User image: [link](https://static.wikia.nocookie.net/undertale-au-fanon/images/1/1e/Undertale_frisk_Sprite.png/revision/latest?cb=20200624132041)
