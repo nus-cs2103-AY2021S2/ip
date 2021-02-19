@@ -1,3 +1,5 @@
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_EXCLUSIONPeer;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
@@ -33,10 +35,15 @@ public class Storage {
      * Overwrites content to save new content to disk.
      */
     public void saveFile(String tasksToSave) throws IOException {
-        BufferedWriter out = new BufferedWriter(new FileWriter(sourceFolder + sourceFile,
-                false));
-        out.write(tasksToSave);
-        out.flush();
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(sourceFolder + sourceFile,
+                    false));
+            out.write(tasksToSave);
+            out.flush();
+        } catch (Exception ignored) {
+
+        }
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -53,31 +60,36 @@ public class Storage {
     public List<Task> loadFile() throws IOException {
         File directory = new File(sourceFolder + sourceFile);
         List<Task> taskList = new ArrayList<>();
-        if (directory.exists()) {
-            BufferedReader br =
-                    new BufferedReader(new FileReader(sourceFolder + sourceFile));
-            String line;
-            while ((line = br.readLine()) != null) {
+        try {
+            if (directory.exists()) {
+                BufferedReader br =
+                        new BufferedReader(new FileReader(sourceFolder + sourceFile));
+                String line;
+                while ((line = br.readLine()) != null) {
 
-                String[] eachTask = line.split("[|]");
-                String taskType = eachTask[0];
-                assert eachTask.length >= 2;
-                boolean isDone = eachTask[1].contains("X");
-                assert eachTask.length >= 3;
-                String description = eachTask[2];
+                    String[] eachTask = line.split("[|]");
+                    String taskType = eachTask[0];
+                    assert eachTask.length >= 2;
+                    boolean isDone = eachTask[1].contains("X");
+                    assert eachTask.length >= 3;
+                    String description = eachTask[2];
 
-                if (taskType.equals("T")) {
-                    taskList.add(new Todo(description, isDone));
-                } else if (taskType.equals("E")) {
-                    assert eachTask.length >=4;
-                    taskList.add(new Event(description, eachTask[3], isDone));
-                } else {
-                    assert eachTask.length >=4;
-                    String eventDate = eachTask[eachTask.length - 1].replaceAll("\\s+",
-                            "");
-                    taskList.add(new Deadline(description, eventDate, isDone));
+                    if (taskType.equals("T")) {
+                        taskList.add(new Todo(description, isDone));
+                    } else if (taskType.equals("E")) {
+                        assert eachTask.length >=4;
+                        taskList.add(new Event(description, eachTask[3], isDone));
+                    } else {
+                        assert eachTask.length >=4;
+                        String eventDate = eachTask[eachTask.length - 1].replaceAll("\\s+",
+                                "");
+                        taskList.add(new Deadline(description, eventDate, isDone));
+                    }
                 }
             }
+
+        } catch (Exception e) {
+            return taskList;
         }
 
         return taskList;

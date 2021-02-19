@@ -21,6 +21,7 @@ public class Duke {
         Ui getInput = new Ui();
         TaskList taskList = new TaskList(taskListStored);
         Storage storage = new Storage();
+        storage.createDirectory();
 
         String output = "";
 
@@ -77,6 +78,7 @@ public class Duke {
             output = getInput.outNotRecognized();
         }
         // Saving updated tasks to local disk
+
         storage.saveFile(taskList.logAllTasks());
 
         return output;
