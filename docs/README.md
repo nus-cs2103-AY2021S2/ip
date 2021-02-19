@@ -1,7 +1,7 @@
 # User Guide
 
 # Introduction
-**Duke (banchiang's version)** is a desktop (jar) application to track user's daily tasks. <br>
+**[Duke (banchiang's version)](https://github.com/banchiang/ip/releases/tag/A-Release)** is a desktop (jar) application to track user's daily tasks. <br>
 It functions as a GUI for users to type down tasks they want to record. <br>
 Duke requires the download of [Java SE 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html);
 
@@ -109,7 +109,7 @@ Expected outcome:
 `[E][] team meeting (at: Dec 31 2021 1200 - Dec 31 2021 1400)` <br>
 `You have 1 task(s) in your list.`
 
-## Features regarding tasks
+## Features regarding tasks:
 <br>
 
 ## Feature `delete`
