@@ -85,6 +85,7 @@ public class UI {
      * Display message to inform users that more parameters should be specified
      */
     public static String displayInvalidParameter(String command) {
+
         if (command.equals("find")) {
             return "Please input task description to be searched.";
         } else if (command.equals("done")) {
@@ -99,7 +100,8 @@ public class UI {
         } else if(command.equals("invalidTimeFormat")) {
             return "Please specify a valid time format (HHmm) for the task.";
         }  else if (command.equals("invalidDate")) {
-            return "Please specify a valid due date (DD/MM/YYYY) that has not pass.";
+            return "Please specify a valid due date in the format (DD/MM/YYYY) " +
+                    "and the date must not have already passed.";
         } else if(command.equals("dateExtendTotalDateInMonth")){
             return "Please specify a valid day in the month.";
         } else if (command.equals("noDueTime")) {
