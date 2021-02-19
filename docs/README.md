@@ -12,6 +12,11 @@ it is optional to add time.
 Duke also allows the user to keep track of notes, which are separately stored compared to tasks. Notes are flexible in
 that you can key in anything, search for them using keywords, and be able to delete them if you know their index.
 
+## Setting Up
+
+1. Download the latest jar file version
+2. Open and enter in your terminal the following command: `java -jar duke.jar`
+
 ## Basic Features
 
 ### Feature 1
@@ -112,10 +117,12 @@ Now you have 7 items in your list
 
 #### Note:
 
-Task description must be two words. If your task description is one word, then type `-` in place of first word, and the
-description in place of the second one. For example: `deadline - lab /by 2021-03-15 18:00:00`.
+1. Task description must be two words. If your task description is one word, then type `-` in place of first word, and
+   the description in place of the second one. For example: `deadline - lab /by 2021-03-15 18:00:00`.
 
-Also you may not key in the time, and the task would still be added.
+2. Also you may not key in the time, and the task would still be added.
+
+3. Time is in 24-hour format.
 
 ### Feature 4
 
@@ -139,10 +146,12 @@ Now you have 8 items in your list
 
 #### Note:
 
-Task description must be two words. If your task description is one word, then type `-` in place of first word, and the
-description in place of the second one. For example: `event - meeting /at 2021-03-15 18:00:00`.
+1. Task description must be two words. If your task description is one word, then type `-` in place of first word, and
+   the description in place of the second one. For example: `event - meeting /at 2021-03-15 18:00:00`.
 
-Also you may not key in the time, and the task would still be added.
+2. Also you may not key in the time, and the task would still be added.
+
+3. Time is in 24-hour format.
 
 ### Feature 5
 
@@ -261,7 +270,6 @@ Contents:
     -
 ```
 
-
 Returns the list of all the notes and they are numbered starting from 1.
 
 ### Feature 2
@@ -284,7 +292,6 @@ play video games
 Now you have 6 items in your list
 ```
 
-
 ### Feature 3
 
 Remove a note
@@ -304,6 +311,7 @@ Noted. Item removed:
 play video games
 Now you have 5 items in your list
 ```
+
 ### Feature 4
 
 Find matching notes based on keyword
@@ -324,4 +332,6 @@ Contents:
 1. <note>
 2. <note>
 ```
+
 The size of the list depends on the number of matches
+
