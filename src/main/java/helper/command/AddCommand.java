@@ -73,6 +73,11 @@ public class AddCommand extends Command {
     }
 
 
+    /**
+     * Helps parse the time
+     * @param s with time info
+     * @return date
+     */
     private LocalDate parseTime(String s) {
         List<Date> dates = new PrettyTimeParser().parse(s);
         Date date = dates.get(0);

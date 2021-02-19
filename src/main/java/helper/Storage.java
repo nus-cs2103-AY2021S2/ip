@@ -49,6 +49,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Parse each line in saved file and update taskList
+     * @param line, String in the file
+     * @param taskList, the task list
+     */
     private void parseLine(String line, List<Task> taskList) {
         Task task = null;
         int index = line.indexOf("] ",-1);
@@ -72,12 +77,22 @@ public class Storage {
         taskList.add(task);
     }
 
+    /**
+     * Handles the doneness of tasks
+     * @param boxes
+     * @param task
+     */
     private void handleDone(String boxes, Task task) {
         if (boxes.contains("[X]")) {
             task.setDone(true);
         }
     }
 
+    /**
+     * Helps parse the time
+     * @param s, String with time info
+     * @return date
+     */
     private LocalDate parseTime(String s) {
         List<Date> dates = new PrettyTimeParser().parse(s);
         Date date = dates.get(0);

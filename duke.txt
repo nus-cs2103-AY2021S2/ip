@@ -1,0 +1,4 @@
+[T][ ] talk to suitemate
+[D][X] finish hw (by: 2021-02-22)
+[E][ ] birthday (at: 2021-06-24)
+[D][ ] swe tp (by: 2021-02-22)
