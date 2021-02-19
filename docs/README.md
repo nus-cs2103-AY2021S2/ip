@@ -29,9 +29,13 @@ items off even before having them on the list, you can mark tasks as `/done` imm
 as well. How cool is that?
 
 You can leave the app by clicking on the close button, but of course, a `bye` command
-with the exact same functionality is supplied for those lazy - to use a mouse.
+with the exact same functionality is supplied for those lazy - to use a mouse. Other fast-quit
+alternatives include `Ctrl-Q` and `Ctrl-H`, if these are available on your system as well.
 
 ## Command syntax
+
+Terms in `SCREAMING_SNAKE_CASE` should be supplied by you, the user.
+You wouldn't want a mysterious albeit charming task called `TASK_NAME`, do you?
 
 | Command | Example |
 |---|---|
@@ -55,11 +59,10 @@ Example of usage:
 `find meet /from 17 Feb`
 
 Expected outcome:
-    
-    Found 3 task(s) matching query / date range
-    
-    from:  Wed 12:00 AM, 17 Feb 2021
-    query: 'meet'
+
+    Found 3 task(s) matching query / date range:
+      from:  Wed 12:00 AM, 17 Feb 2021
+      query: 'meet'
     
     2. [D][✓] group meeting (by: 2021-02-17 14:00)
     3. [E][✓] meet friendo (at: 2021-02-19 18:00)
@@ -128,6 +131,8 @@ Expected outcome:
    including `2021-01-13 13:40` (ISO-like format), `Jan 13` (American-style),
    `13 Jan` (British-style), `13/1/2021` (old school), etc.
    Description of exact parsing rules is in the Java documentation.
+1. Note, however, a bug in the `java.time.LocalDateTime` parser that matches invalid dates (e.g.
+   31 Feb) by mapping it to the nearest valid date. Make sure the dates you supply are correct in the first place!
 1. Options are prefixed with the `/` symbol. But this program also knows to parse dates containing `/`.
 1. Text boxes are especially allowed to be highlightable, in the off chance you want to copy it somewhere else...
 1. ...and exercise an undocumented `delete /all` nuclear option, but you'll never want to stop using
