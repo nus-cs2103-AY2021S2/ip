@@ -2,6 +2,7 @@ package duke.system.view;
 
 import duke.Duke;
 import duke.task.TaskList;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -33,6 +34,8 @@ public class Window extends AnchorPane {
 
     private TaskList tasks;
 
+    private boolean isFinished;
+
     /**
      * initialise new <code>tasklist</code> and set the <code>scrollPane</code> property to work properly for GUI
      */
@@ -62,5 +65,10 @@ public class Window extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (response == "Bye. Hope to see you again soon!") {
+            this.userInput.setVisible(false);
+            this.sendButton.setVisible(false);
+        }
     }
 }

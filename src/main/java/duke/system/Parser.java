@@ -103,7 +103,7 @@ public class Parser {
                     // try parsing the command first by finding the equivalent in Enum PredefinedCommand,
                     // else throw exception
                     try {
-                        tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0].toUpperCase()));
+                        tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0].toUpperCase())).toLowerCase();
                     } catch (IllegalArgumentException ex) {
                         throw new DukeException.UnknownCommandException();
                     }

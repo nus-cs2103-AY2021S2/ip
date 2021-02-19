@@ -3,11 +3,13 @@ package duke.system.view;
 import java.io.IOException;
 
 import duke.Duke;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * A GUI for Duke using FXML.
@@ -18,6 +20,7 @@ public class Gui extends Application {
 
     /**
      * Initiate the scene and GUI for Duke
+     *
      * @param stage
      */
     @Override
@@ -34,3 +37,4 @@ public class Gui extends Application {
         }
     }
 }
+

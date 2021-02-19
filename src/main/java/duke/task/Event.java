@@ -24,6 +24,10 @@ public class Event extends ListItem {
         this.date = inputDate;
     }
 
+    /**
+     * creates a new Event item with a done status in immutable way
+     * @return a ListItem with a runtime type Event
+     */
     @Override
     public ListItem markAsDone() {
         return new Event(super.getTask(), this.date, true);

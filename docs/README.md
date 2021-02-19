@@ -73,7 +73,13 @@ Now you have 1 task in the list
 Adds an event task that occurs at a specific time.
 
 Format: `event TASK_NAME /at DATE`
-`event team meeting /at 2:00pm`Got it. I've added this task:[E][ ] team meeting (at: 2:00pm)Now you have 1 task in the list
+```
+event team meeting /at 2:00pm
+
+Got it. I've added this task:
+[E][ ] team meeting (at: 2:00pm)
+Now you have 1 task in the list
+```
 ### <a name="list">`list` - Listing all the tasks</a>
 
 Shows a list of tasks recorded with Duke
