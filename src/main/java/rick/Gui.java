@@ -6,14 +6,6 @@ package rick;
  */
 public class Gui {
     /**
-     * This method is used to output an input error message.
-     */
-    public static String getInputErrorString() {
-        return "Rick's sorry, but Rick don't know what that means.\n"
-                + "Type \"help\" to view the list of available commands.";
-    }
-
-    /**
      * This method is used to output a loading file error message.
      */
     public static String getLoadingErrorString() {
@@ -51,11 +43,11 @@ public class Gui {
         return "Here you go Morty! This is the list of available commands:\n"
                 + "bye -> To exit application\n"
                 + "list -> To list tasks\n"
-                + "done [index] -> To mark task as done \n"
-                + "delete [index] -> To delete task\n"
-                + "todo [description] -> To create todo\n"
-                + "deadline [description] /by [date] -> To create deadline\n"
-                + "event [description] /on [date] -> To create event";
+                + "done <index> -> To mark task as done \n"
+                + "delete <index> -> To delete task\n"
+                + "todo <description> -> To create todo\n"
+                + "deadline <description> /by <yyyy-mm-dd> -> To create deadline\n"
+                + "event <description> /on <yyyy-mm-dd> -> To create event";
     }
 
     /**

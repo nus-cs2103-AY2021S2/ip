@@ -1,5 +1,8 @@
 package rick;
 
+import rick.exceptions.RickException;
+
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -18,12 +21,12 @@ public class Rick {
     public Rick(String filePath) {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage(filePath, ui);
         try {
+            storage = new Storage(filePath, ui);
             tasks = new TaskList(storage.load());
-        } catch(RickException error) {
-            ui.showLoadingError();
+        } catch(IOException error) {
             tasks = new TaskList();
+            ui.showLoadingError();
         }
     }
 
@@ -33,62 +36,62 @@ public class Rick {
             Command command = parser.parseCommand(input);
             switch(command) {
                 case BYE:
-                    response += Gui.getGoodbyeString();
+                    response = Gui.getGoodbyeString();
                     storage.save(tasks);
                     break;
                 case LIST:
-                    response += Gui.getTasksString(tasks);
+                    response = Gui.getTasksString(tasks);
                     break;
                 case DONE:
                     int taskToMarkAsDone = parser.parseDoneCommand(input);
-                    response += Gui.getMessageString("Good work, Morty! I've marked this task as done:\n  " + tasks.markTaskAsDone(taskToMarkAsDone));
+                    response = Gui.getMessageString("Good work, Morty! I've marked this task as done:\n  " + tasks.markTaskAsDone(taskToMarkAsDone));
                     storage.save(tasks);
                     break;
                 case DELETE:
                     int taskToDelete = parser.parseDeleteCommand(input);
-                    response += Gui.getMessageString("Got it. I've removed this task:\n  " + tasks.deleteTask(taskToDelete) + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                    response = Gui.getMessageString("Got it. I've removed this task:\n  " + tasks.deleteTask(taskToDelete) + "\nNow you have " + tasks.getSize() + " tasks in the list.");
                     storage.save(tasks);
                     break;
                 case TODO:
                     Todo newTodo = parser.parseTodoCommand(input);
                     tasks.addTask(newTodo);
-                    response += Gui.getMessageString("Got it. I've added this task:\n  " + newTodo + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                    response = Gui.getMessageString("Got it. I've added this task:\n  " + newTodo + "\nNow you have " + tasks.getSize() + " tasks in the list.");
                     storage.save(tasks);
                     break;
                 case DEADLINE:
                     Deadline newDeadline = parser.parseDeadlineCommand(input);
                     tasks.addTask(newDeadline);
-                    response += Gui.getMessageString("Got it. I've added this task:\n  " + newDeadline + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                    response = Gui.getMessageString("Got it. I've added this task:\n  " + newDeadline + "\nNow you have " + tasks.getSize() + " tasks in the list.");
                     storage.save(tasks);
                     break;
                 case EVENT:
                     Event newEvent = parser.parseEventCommand(input);
                     tasks.addTask(newEvent);
-                    response += Gui.getMessageString("Got it. I've added this task:\n  " + newEvent + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+                    response = Gui.getMessageString("Got it. I've added this task:\n  " + newEvent + "\nNow you have " + tasks.getSize() + " tasks in the list.");
                     storage.save(tasks);
                     break;
                 case FIND:
-                    try {
-                        String keywords = parser.parseFindCommand(input);
-                        TaskList foundTasks = tasks.findTasks(keywords);
-                        response += Gui.getFoundTasksString(foundTasks);
-                    } catch (RickException error) {
-                        response += Gui.getErrorMessageString("No task with specified keywords can be found.");
-                    }
+                    String keywords = parser.parseFindCommand(input);
+                    TaskList foundTasks = tasks.findTasks(keywords);
+                    response = Gui.getFoundTasksString(foundTasks);
                     break;
                 case HELP:
-                    response += Gui.getHelpMessageString();
+                    response = Gui.getHelpMessageString();
                     break;
                 default:
                     assert false : command;
                     break;
             }
         } catch(RickException error) {
-            response += Gui.getErrorMessageString(error.getMessage());
+            response = Gui.getErrorMessageString(error.getMessage());
         } catch(DateTimeParseException error) {
-            response += Gui.getErrorMessageString("The date provided is invalid.");
+            response = Gui.getErrorMessageString("The date provided is invalid.\nValid format: yyyy-mm-dd");
         } catch (IndexOutOfBoundsException error) {
-            response += Gui.getErrorMessageString("Selected item does not exist.");
+            response = Gui.getErrorMessageString("Selected item does not exist.");
+        } catch (NumberFormatException error) {
+            response = Gui.getErrorMessageString("Invalid task index number.");
+        } catch (IOException error) {
+            response = Gui.getSavingErrorString();
         }
         return response;
     }

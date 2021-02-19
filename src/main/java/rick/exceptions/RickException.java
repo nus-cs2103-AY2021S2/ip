@@ -1,4 +1,4 @@
-package rick;
+package rick.exceptions;
 
 /**
  * Custom exception class

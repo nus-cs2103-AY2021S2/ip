@@ -1,5 +1,7 @@
 package rick;
 
+import rick.exceptions.TaskAlreadyDoneException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -48,7 +50,7 @@ public class TaskList {
      * @param index The index of <code>Task</code> to mark as done.
      * @return The selected <code>Task</code> object.
      */
-    public Task markTaskAsDone(int index) {
+    public Task markTaskAsDone(int index) throws TaskAlreadyDoneException {
         return tasks.get(index).markAsDone();
     }
 
@@ -72,7 +74,8 @@ public class TaskList {
     public TaskList findTasks(String keywords) {
         TaskList foundTasks = new TaskList();
         for(Task task : tasks) {
-            if(task.getDescription().toUpperCase().contains(keywords) || task.getClass().getName().toUpperCase().contains(keywords)) {
+            System.out.println(task.getClass().getName().substring(5));
+            if(task.getDescription().toUpperCase().contains(keywords) || task.getClass().getName().toUpperCase().substring(5).equals(keywords)) {
                 foundTasks.addTask(task);
             }
         }

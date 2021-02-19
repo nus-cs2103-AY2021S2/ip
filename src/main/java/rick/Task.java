@@ -1,5 +1,7 @@
 package rick;
 
+import rick.exceptions.TaskAlreadyDoneException;
+
 /**
  * Represents a task. A <code>Task</code> object corresponds
  * to a task description supplied by the user. eg., <code>running</code>
@@ -10,7 +12,12 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -29,9 +36,12 @@ public class Task {
      *
      * @return Current instance of <code>Task</code> object.
      */
-    public Task markAsDone() {
-        isDone = true;
+    public Task markAsDone() throws TaskAlreadyDoneException {
+        if(isDone) {
+            throw new TaskAlreadyDoneException();
+        }
         assert isDone : "Task is not marked as done yet";
+        isDone = true;
         return this;
     }
 

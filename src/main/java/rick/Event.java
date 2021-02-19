@@ -17,6 +17,11 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public Event(String description, LocalDate date, boolean isDone) {
+        super(description, isDone);
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "E | " + super.toString() + " | " + date.format(DateTimeFormatter.ofPattern("dd MMM YYYY"));

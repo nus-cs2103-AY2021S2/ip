@@ -1,9 +1,9 @@
-package rick;
+package rick.exceptions;
 
-public class InvalidDescriptionException extends RickException {
+public class MissingFlagException extends RickException {
     @Override
     public String getMessage() {
-        return "The description cannot be empty!\n"
+        return "Invalid Flag!\n"
                 + "Type \"help\" to view the list of available commands.";
     }
 }
