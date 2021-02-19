@@ -9,7 +9,8 @@ import java.util.Comparator;
  * Ui Class that handles passing output
  */
 public class Ui {
-    private final static String CHATBOT_NAME = "Rawrz";
+    private final static String CHATBOT_NAME = "Ranga";
+    private final static String CHATBOT_RAWR = "Rawr!";
 
     /**
      * Constructor for Ui. Creates a Scanner with System.in
@@ -21,14 +22,15 @@ public class Ui {
      * Shows the introduction message to the user.
      */
     public String getIntroResponse() {
-        return "Hello there! I'm " + CHATBOT_NAME + ", always here for you!\n\nHow can I help you today?";
+        return "Hello there! I'm " + CHATBOT_NAME +
+                ", always here for you!\n\nHow can I help you today?\n" + CHATBOT_RAWR;
     }
 
     /**
      * Shows the goodbye message to the user.
      */
     public String getGoodbyeResponse() {
-        return "Bye! Hope to see you again! " + CHATBOT_NAME + "! :)";
+        return "Bye! Hope to see you again! " + CHATBOT_RAWR + "! :)";
     }
 
     /**
@@ -109,5 +111,24 @@ public class Ui {
     public String getAddReminderResponse(Task task) {
         return "Got it! I've added this reminder for:\n   " + task + "\nI'll remind you on " +
                 task.getReminder().getReminderDateOnly() + "! :)";
+    }
+
+    public String getHelp() {
+        return "Sure! I'm " + CHATBOT_NAME + " and I can do different things!\n" +
+                "You can add tasks such as:\n" +
+                "   todo <desc>\n" +
+                "   deadline <desc> /by <date>\n" +
+                "   event <desc> /at <date>\n" +
+                "You can modify reminders:\n" +
+                "   remind <id> /on <date>\n" +
+                "   remove <id>\n" +
+                "   done <id>\n" +
+                "I can show you tasks and reminders:\n" +
+                "   list\n" +
+                "   reminders\n" +
+                "Lastly:\n" +
+                "   help\n" +
+                "   bye\n" +
+                CHATBOT_RAWR;
     }
 }

@@ -111,6 +111,8 @@ public class CommandParser {
             storage.closeFile();
             output = ui.getGoodbyeResponse();
             break;
+        case HELP:
+            output = ui.getHelp();
         default:
              assert false : command;
         }
@@ -204,6 +206,7 @@ public class CommandParser {
         case LIST:
         case BYE:
         case REMINDERS:
+        case HELP:
             break;
         default:
             assert false : commandList;
