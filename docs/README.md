@@ -7,6 +7,7 @@
 1. [Delete tasks](#delete---removes-a-task)
 1. [Search for tasks using keyword](#find---search-for-tasks)
 1. [Sort all tasks by date](#sort---search-for-tasks)
+
 ## Usage
 
 ### `todo` - Adds a todo task
