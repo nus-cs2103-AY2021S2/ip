@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -183,6 +184,28 @@ public class Storage {
 
         String hour = String.format("%02d", Integer.parseInt(timeArr[0]) + additionalHours);
         return hour + ":" + timeArr[1];
+    }
+
+    /**
+     * Checks if new task to be added already exists in current task list.
+     *
+     * @param newTask New task to be added.
+     * @throws FileNotFoundException If file is not found at the given file path.
+     * @throws DukeException If new task to be added already exists in current task list.
+     */
+    public void checkForDuplicate(String newTask) throws FileNotFoundException, DukeException {
+        File file = new File(this.filePath);
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNextLine()) {
+            String existingTask = sc.nextLine();
+            String existingTaskNotDone = existingTask.substring(0, 4) + " " + existingTask.substring(5);
+            if (existingTaskNotDone.equals(newTask)) {
+                throw new DukeException("This task already exists in your list! This task will not be added.");
+            } else {
+                continue;
+            }
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 [D][X] project (by: Mar 3 2020, 7:00PM)
 [E][X] party (at: Mar 3 2020, 8:00PM)
 [T][ ] book review
-[E][X] book release (at: Jan 1 2021, 6:00PM)
-[T][ ] clean room
-[D][ ] submission (by: Mar 9 2021, 11:59PM)
+[E][ ] book release (at: Jan 1 2021, 6:00PM)
+[T][X] clean room
