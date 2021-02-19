@@ -1,8 +1,6 @@
 package duke.storage;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,20 +12,17 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 public class Storage {
+    /** The default data path of the file storing all tasks in this project */
+    final String dataPath = "data/duke.txt";
     /** The path of the file storing all tasks */
     private String filePath;
-    File file = new File(filePath);
 
     /**
      * Class constructor.
      */
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.filePath = filePath;
-        if (!file.exists()) {
-            file.createNewFile();
-        }
     }
-
 
 
     /**
@@ -38,7 +33,11 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
-        Scanner myReader = new Scanner(file);
+        File myObj = new File(dataPath);
+        if (!myObj.exists()) {
+            myObj.createNewFile();
+        }
+        Scanner myReader = new Scanner(myObj);
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
             Character type = data.charAt(0);
@@ -77,11 +76,8 @@ public class Storage {
         return tasks;
     }
 
-    public void addTask(Task task) throws IOException {
-        BufferedWriter writer = new BufferedWriter(
-                new FileWriter(filePath, true));
-        writer.write("T | 0 | " + task.getName() + "\n");
-        writer.close();
+    public void addTask(Task task) {
+
     }
 
 }

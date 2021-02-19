@@ -43,7 +43,7 @@ public class Duke extends Application {
      *
      * @param filePath the filePath of the data file.
      */
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
