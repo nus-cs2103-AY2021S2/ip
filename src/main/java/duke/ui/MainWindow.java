@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.logic.Duke;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -88,7 +89,9 @@ public class MainWindow extends AnchorPane {
 
     private void exit() {
         PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
-        delay.setOnFinished(event -> {stage.close();});
+        delay.setOnFinished(event -> {
+            stage.close();
+        });
         delay.play();
     }
 

@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -32,9 +32,10 @@ public class Duke {
         }
     }
 
-
     /**
-     * Runs the duke programme.
+     * Gets duke's response to the user input
+     * @param input The user input
+     * @return Duke's response
      */
     public String getResponse(String input) {
         try {
@@ -44,7 +45,7 @@ public class Duke {
             } else {
                 isClosed = false;
             }
-            String response = c.getResponString(tasks, storage);
+            String response = c.execute(tasks, storage);
             isConfused = false;
             return response;
         } catch (DukeException e) {

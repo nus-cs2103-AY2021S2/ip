@@ -1,12 +1,19 @@
 package duke.command;
 
-import duke.Storage;
+import duke.logic.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents a command telling Duke to find tasks containing a given word
+ */
 public class FindCommand implements Command {
     private String searchString;
 
+    /**
+     * Constructor
+     * @param searchString The user input
+     */
     public FindCommand(String searchString) {
         this.searchString = searchString;
     }
@@ -17,17 +24,17 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public String getResponString(TaskList tasks, Storage storage) {
-        TaskList filteredList = new TaskList();
+    public String execute(TaskList tasks, Storage storage) {
+        TaskList filteredTasks = new TaskList();
 
         for (int i = 1; i <= tasks.size(); i++) {
             Task currTask = tasks.get(i);
             if (currTask.getDetail().indexOf(this.searchString) >= 0) {
-                filteredList.add(currTask);
+                filteredTasks.add(currTask);
             }
         }
 
-        String findResponse = filteredList.toString();
+        String findResponse = filteredTasks.toString();
         return findResponse;
     }
 }

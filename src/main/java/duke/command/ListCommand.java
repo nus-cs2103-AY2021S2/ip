@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Storage;
+import duke.logic.Storage;
 import duke.task.TaskList;
 
 /**
@@ -14,7 +14,7 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public String getResponString(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         String listResponse = tasks.toString();
         return listResponse;
     }
