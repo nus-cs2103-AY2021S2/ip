@@ -1,11 +1,11 @@
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
 
 public class TaskListTest {
     private final PrintStream standardOut = System.out;
@@ -54,28 +54,5 @@ public class TaskListTest {
         tasks.doneTask(1);
 
         Assertions.assertEquals("[[T][X] description]", tasks.getTasks().toString());
-    }
-
-    @Test
-    public void testList() {
-        TaskList tasks = new TaskList();
-        tasks.addTask(new ToDo("description"));
-        tasks.addTask(new ToDo("description 2"));
-        String expected = "You have 2 task(s) in the list:\r\n" +
-        "1. [T][ ] description\r\n" +
-        "2. [T][ ] description 2";
-        tasks.printTasks();
-        Assertions.assertEquals(expected, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void testFind() {
-        TaskList tasks = new TaskList();
-        tasks.addTask(new ToDo("description"));
-        tasks.addTask(new ToDo("description 2"));
-        String expected = "Here you go boss: \r\n" +
-                "2. [T][ ] description 2";
-        tasks.findTasks("2");
-        Assertions.assertEquals(expected, outputStreamCaptor.toString().trim());
     }
 }
