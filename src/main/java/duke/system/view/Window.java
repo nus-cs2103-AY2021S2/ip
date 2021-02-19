@@ -40,6 +40,9 @@ public class Window extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         tasks = new TaskList();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Greetings, how may I help you?", dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
