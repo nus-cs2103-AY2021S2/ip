@@ -29,14 +29,14 @@ ____________________________________________________________
 
 ____________________________________________________________
 Much wow! I've added a new command with an Event:
-[E] [ ] dog festival | at: monday 1400 hours
+[E] [ ] dog festival | at: 10 Feb 2021
 Now I can do a total of 2 commands!
 ____________________________________________________________
 
 
 ____________________________________________________________
 Woofers! I've added a new command with a Ded-line:
-[D] [ ] finish doggo treats | by: friday 2359 hours
+[D] [ ] finish doggo treats | by: 11 Mar 2021
 Now I can do a total of 3 commands!
 ____________________________________________________________
 
@@ -46,8 +46,8 @@ ____________________________________________________________
 Woof! I have completed these commands before:
 
 1. [T] [X] rollover
-2. [E] [ ] dog festival | at: monday 1400 hours
-3. [D] [ ] finish doggo treats | by: friday 2359 hours
+2. [E] [ ] dog festival | at: 10 Feb 2021
+3. [D] [ ] finish doggo treats | by: 11 Mar 2021
 
 ____________________________________________________________
 
@@ -57,8 +57,8 @@ ____________________________________________________________
 Woof! I have completed these commands before:
 
 1. [T] [X] rollover
-2. [E] [ ] dog festival | at: monday 1400 hours
-3. [D] [X] finish doggo treats | by: friday 2359 hours
+2. [E] [ ] dog festival | at: 10 Feb 2021
+3. [D] [X] finish doggo treats | by: 11 Mar 2021
 
 ____________________________________________________________
 
@@ -66,7 +66,7 @@ DukeException: What are you referring to? Remember to key in the correct command
 
 ____________________________________________________________
 Noted! This task has been removed:
-[E] [ ] dog festival | at: monday 1400 hours
+[E] [ ] dog festival | at: 10 Feb 2021
 Now you have 2 commands remaining.
 
 ____________________________________________________________
@@ -75,7 +75,7 @@ ____________________________________________________________
 ____________________________________________________________
 
 1. [T] [X] rollover
-2. [D] [X] finish doggo treats | by: friday 2359 hours
+2. [D] [X] finish doggo treats | by: 11 Mar 2021
 
 ____________________________________________________________
 
