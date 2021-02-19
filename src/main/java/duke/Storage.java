@@ -68,7 +68,7 @@ public class Storage {
         String taskType = splitTask[0];
         String isDone = splitTask[1];
         String description = splitTask[2];
-        Task task = new Task(" ", " ");
+        Task task;
 
         switch(taskType) {
         case "D":

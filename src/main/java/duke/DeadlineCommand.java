@@ -10,14 +10,18 @@ public class DeadlineCommand extends Command {
     private String description;
 
     /**
-     * Initialises DeadlineCommand object.
+     * Initialises DeadlineCommand object and parses description to description and by.
      *
-     * @param description the description of the deadline task.
-     * @param by the due date of the deadline task.
+     * @param description the entire description of the deadline task.
      */
-    public DeadlineCommand(String description, String by) {
-        this.description = description;
-        this.by = by;
+    public DeadlineCommand(String description) throws DukeException {
+        String[] descriptionArr = description.split("(?i)/by ");
+        try {
+            this.description = descriptionArr[0];
+            this.by = descriptionArr[1];
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please provide a 'by' date! E.g. /by 2021-01-01");
+        }
     }
 
     /**
