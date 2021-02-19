@@ -32,7 +32,8 @@ Save entries
 ### Usage
 
 ### `save` - key in `save`
-Saves all the data and exits duke
+
+Saves all the data entered so far
 
 Example of usage:
 
@@ -50,7 +51,9 @@ Exit Duke
 
 ### Usage
 
-### `bye` or `exit` - saves all the data and exits duke
+### `bye` or `exit` - key in `bye` or `exit`
+
+Saves all the data and exits duke
 
 Example of usage:
 
@@ -62,7 +65,6 @@ Expected outcome:
 Goodbye for now.
 Hope to see you soon!
 ```
-
 
 ## Task Features
 
@@ -376,7 +378,8 @@ The size of the list depends on the number of matches
 
 ### Reminder:
 
-After working on duke, make sure to key in the **exit** command (`bye` or `exit`) or **save** command (`save`) in order to **save** your entries.
+After working on duke, make sure to key in the **exit** command (`bye` or `exit`) or **save** command (`save`) in order
+to **save** your entries.
 
 ## Hope you have a wonderful time using Duke!
 
