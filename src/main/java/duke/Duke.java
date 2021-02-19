@@ -10,11 +10,10 @@ import javafx.application.Application;
  * The class where duke is initialized and then launch GUI
  */
 public class Duke {
-    private TaskList taskList;
-    private TaskList noteList;
-
     private final Storage storage;
     private final Storage notesStorage;
+    private TaskList taskList;
+    private TaskList noteList;
 
     public Duke() {
         storage = new Storage("DukeTasks.txt");
@@ -26,6 +25,15 @@ public class Duke {
             taskList = new TaskList();
             noteList = new TaskList();
         }
+    }
+
+    /**
+     * The main method launching Duke
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 
     /**
@@ -108,14 +116,5 @@ public class Duke {
      */
     public String getResponse(String input) {
         return processGUI(input);
-    }
-
-    /**
-     * The main method launching Duke
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Application.launch(Main.class, args);
     }
 }
