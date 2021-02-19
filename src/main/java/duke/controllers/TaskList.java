@@ -110,7 +110,14 @@ public class TaskList {
         }
 
         // get index of todo to delete
-        int idxDelete = Integer.parseInt(deleteTodoArgs.get(0)) - 1;
+        int idxDelete;
+        try {
+            idxDelete = Integer.parseInt(deleteTodoArgs.get(0)) - ONE_BASED_INDEX_OFFSET;
+        } catch (NumberFormatException e) {
+            throw new DukeTaskIndexOutOfRangeException("Please input the index of the task "
+                    + "right after the update command as '" + deleteTodoArgs.get(0)
+                    + "' is not recognised as a valid index");
+        }
         if (idxDelete >= this.todos.size()) {
             throw new DukeTaskIndexOutOfRangeException("The index you input has an index that "
                             + "is beyond the range of the number of tasks you "
@@ -154,7 +161,14 @@ public class TaskList {
         }
 
         // updateTodo = [idx, flag with message OR full message with time]
-        int idxToUpdate = Integer.parseInt(updateTodoCommandArgsSplitByWhitespace.get(0)) - ONE_BASED_INDEX_OFFSET;
+        int idxToUpdate;
+        try {
+            idxToUpdate = Integer.parseInt(updateTodoCommandArgsSplitByWhitespace.get(0)) - ONE_BASED_INDEX_OFFSET;
+        } catch (NumberFormatException e) {
+            throw new DukeTaskIndexOutOfRangeException("Please input the index of the task "
+                    + "right after the update command as '" + updateTodoCommandArgsSplitByWhitespace.get(0)
+                    + "' is not recognised as a valid index");
+        }
 
         if (idxToUpdate < 0 || idxToUpdate >= this.todos.size()) {
             throw new DukeTaskIndexOutOfRangeException("The index you specified for the task does not exist, "
@@ -388,7 +402,14 @@ public class TaskList {
      *         index that is out of range.
      */
     public Pair<TaskList, Optional<? extends Todo>> markAsDone(List<String> doneCommandArgs) throws DukeTaskIndexOutOfRangeException {
-        int idxIsDone = Integer.parseInt(doneCommandArgs.get(0)) - ONE_BASED_INDEX_OFFSET;
+        int idxIsDone;
+        try {
+            idxIsDone = Integer.parseInt(doneCommandArgs.get(0)) - ONE_BASED_INDEX_OFFSET;
+        } catch (NumberFormatException e) {
+            throw new DukeTaskIndexOutOfRangeException("Please input the index of the task "
+                    + "right after the update command as '" + doneCommandArgs.get(0)
+                    + "' is not recognised as a valid index");
+        }
         if (idxIsDone >= this.todos.size()) {
             throw new DukeTaskIndexOutOfRangeException("The index you input has an index that is "
                             + "beyond the range of the number of tasks you currently have. "
