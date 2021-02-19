@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Delete command is used when user wants to remove a specific task.

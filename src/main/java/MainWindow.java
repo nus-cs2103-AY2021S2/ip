@@ -1,3 +1,6 @@
+package duke.ui;
+
+import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,7 +37,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void showGreetings() {
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.ui.greet(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.getUi().greet(), dukeImage));
     }
 
     /**

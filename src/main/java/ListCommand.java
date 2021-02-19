@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /** List command is used when user wants to view all tasks he/she has. */
 public class ListCommand extends Command {

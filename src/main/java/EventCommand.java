@@ -1,5 +1,12 @@
-package duke;
+package duke.command;
+
 import java.time.format.DateTimeParseException;
+
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Event command is used when user wants to add an event task.

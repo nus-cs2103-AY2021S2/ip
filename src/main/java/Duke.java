@@ -1,12 +1,14 @@
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.Ui;
+package duke;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /** Reads in user inputs and perform actions accordingly. */
 public class Duke {
     /** Template for replying user. */
-    protected Ui ui;
+    private Ui ui;
     /** Storage to store and update tasks entered in hard drive. */
     private Storage storage;
     /** Helper to make sense of user inputs. */
@@ -17,6 +19,10 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage();
         this.parser = new Parser(this.storage);
+    }
+
+    public Ui getUi() {
+        return this.ui;
     }
 
     /**

@@ -1,4 +1,21 @@
-package duke;
+package duke.parser;
+
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.exception.CommandException;
+import duke.exception.DukeException;
+import duke.exception.EmptyException;
+import duke.exception.KeywordException;
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /** The Parser makes sense of user inputs and executes follow up actions accordingly. */
 public class Parser {

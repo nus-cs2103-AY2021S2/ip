@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /** Exit command is used when user bids chatbot goodbye. */
 public class ExitCommand extends Command {

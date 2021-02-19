@@ -1,4 +1,4 @@
-package duke;
+package duke.command;
 
 /** Stores information of a task that is to be added. */
 public abstract class AddCommand extends Command {

@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /** Done command is used when user wants to mark a task as done. */
 public class DoneCommand extends Command {

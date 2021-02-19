@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 /**
  * Encapsulates the visuals used in chatting with user.

@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 /** Todo command is used when user wants to add a new task without date information. */
 public class TodoCommand extends AddCommand {

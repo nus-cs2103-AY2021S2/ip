@@ -1,5 +1,12 @@
-package duke;
+package duke.command;
+
 import java.time.format.DateTimeParseException;
+
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /**
  * Deadline command is used for user to add a deadline task.

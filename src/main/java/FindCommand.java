@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
 
 /** Find command is used when user wants to find all tasks that contain a certain keyword. */
 public class FindCommand extends Command {

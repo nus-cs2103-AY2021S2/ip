@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * Encapsulates information and state of an EmptyException.
