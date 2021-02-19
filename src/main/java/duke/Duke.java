@@ -14,6 +14,7 @@ public class Duke {
     private final Ui ui;
     private final TaskList tasks;
     private final Storage storage;
+    private boolean isExit = false;
 
     /**
      * Initializes a Duke object.
@@ -37,6 +38,10 @@ public class Duke {
         return ui.getGreeetingMsg();
     }
 
+    public boolean getExitStatus() {
+        return isExit;
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
@@ -44,6 +49,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            isExit = c.isExitCommand();
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.getError(e.getMessage());

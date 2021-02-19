@@ -12,6 +12,7 @@ public class UpdateCommand extends Command {
     private final String newDescription;
 
     private static final String EMPTY_DESCRIPTION_ERROR = "No blank descriptions allowed!";
+    private static final String OUT_OF_BOUND_ERROR = "Not in the list!";
 
     public UpdateCommand(String argument) throws DukeException {
         try {
@@ -28,9 +29,13 @@ public class UpdateCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task targetTask = tasks.editTask(index, newDescription);
-        storage.write(tasks);
-        return ui.getUpdatedTaskMsg(targetTask, tasks);
+        try {
+            Task targetTask = tasks.editTask(index, newDescription);
+            storage.write(tasks);
+            return ui.getUpdatedTaskMsg(targetTask, tasks);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(OUT_OF_BOUND_ERROR);
+        }
     }
 
     @Override

@@ -49,7 +49,7 @@ application {
 
 shadowJar {
     archiveBaseName = "Hayate"
-    archiveVersion = "v0.3"
+    archiveVersion = "v0.4"
     archiveClassifier = null
 }
 
