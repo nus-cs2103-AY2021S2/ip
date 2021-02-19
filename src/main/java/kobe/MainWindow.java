@@ -11,6 +11,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+// MainWindow class (below) and FXML files adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */

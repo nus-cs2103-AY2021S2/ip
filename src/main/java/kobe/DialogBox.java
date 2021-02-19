@@ -14,6 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+// DialogBox class (below) and FXML files adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
+
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;

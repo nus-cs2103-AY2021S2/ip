@@ -12,8 +12,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 
+// Main class (below) and FXML files adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Kobe using FXML.
  */
 public class Main extends Application {
     private static final String HOME = System.getProperty("user.home");
