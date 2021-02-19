@@ -2,9 +2,6 @@
 Welcome to the Duke User Guide! Duke is a task list manager that you
 can use to add, view and delete your tasks, amongst other features.
 
-- Bye
-- Help
-
 ## Features 
 
 ### Add a New Task
