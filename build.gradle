@@ -5,6 +5,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+
 repositories {
     mavenCentral()
 }
@@ -44,12 +45,13 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    project.setProperty("mainClassName", "duke.Launcher")
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    manifest {
+        attributes "Main-Class": 'duke.Launcher'
+    }
 }
 
 checkstyle {

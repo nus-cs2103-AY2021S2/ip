@@ -65,7 +65,7 @@ public class Duke {
                 setTimeOut(() -> {
                    Platform.exit();
                    System.exit(0);
-                }, 2000);
+                }, 1500);
             }
             return output;
         } catch (DukeException e){
