@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import duke.command.CreateCommand;
 import duke.command.DeleteCommand;
 import duke.command.DetectDuplicateCommand;
+import duke.command.FindCommand;
 import duke.command.ReadCommand;
 import duke.command.UpdateCommand;
 
@@ -98,6 +99,8 @@ public class Parser {
             return Storage.saveTaskList();
         } else if (input.equals("load")) {
             return Storage.loadTaskList();
+        } else if (input.startsWith("find")) {
+            return FindCommand.runCommand(input);
         } else if (input.equals("detect")) {
             return DetectDuplicateCommand.runCommand();
         } else if (input.equals("clean")) {
