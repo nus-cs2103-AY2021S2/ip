@@ -6,7 +6,7 @@ JDK 11
 Bot that takes in a list of tasks to do and stores it in a list. 
 Tasks that are
 done are marked as done with a cross. 
-####Commands
+#### Commands
 list - lists all existing tasks
 
 todo, deadline, event {some task} - creates the respective task
@@ -20,10 +20,11 @@ done {index} - marks task as done
 
 ## Usage
 
-### `Keyword` - Expected Outcome
+### `Keyword` `task to be added` `date if present` 
 
-Describe command and its outcome.
 Example of usage: 
+
+### Adding a todo task Read book
 
 `todo Read book`
 
@@ -31,6 +32,8 @@ Expected outcome:
 
 Retrieving the list by typing the string list as input will give:
 Here are the tasks in your list:
+
+### Marking the todo task as done
 
 1.[T][] Read book
 
@@ -41,6 +44,8 @@ Expected Outcome:
 Nice! I've marked this task as done:
 
 1.[T][X] Read book
+
+### Deleting the todo task
 
 `delete 1`
 

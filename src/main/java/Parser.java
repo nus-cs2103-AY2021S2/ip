@@ -16,6 +16,8 @@ public class Parser {
         return command.startsWith("todo");
     }
 
+    public boolean isHelp(String command) {return command.startsWith("help");}
+
     public boolean isDeadline(String command) {
         return command.startsWith("deadline");
     }

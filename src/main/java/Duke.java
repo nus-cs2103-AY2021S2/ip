@@ -73,12 +73,13 @@ public class Duke {
             }
         } else if (parser.isBye(command)) {
             output = getInput.outBye();
+        } else if (parser.isHelp(command)) {
+            output = getInput.outHelp();
         } else {
             // Command is not recognized
             output = getInput.outNotRecognized();
         }
         // Saving updated tasks to local disk
-
         storage.saveFile(taskList.logAllTasks());
 
         return output;
