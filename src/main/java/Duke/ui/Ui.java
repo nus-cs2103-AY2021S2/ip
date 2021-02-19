@@ -3,6 +3,7 @@ package duke.ui;
 import duke.Duke;
 import duke.common.Command;
 import duke.exception.EmptyDescription;
+import duke.exception.InvalidTaskNumber;
 import duke.exception.InvalidTypeOfTask;
 import duke.parser.Parser;
 
@@ -54,9 +55,14 @@ public class Ui {
                 throw new InvalidTypeOfTask();
             }
             duke.save();
+        } catch (IllegalArgumentException e) {
+            InvalidTypeOfTask error = new InvalidTypeOfTask();
+            response = error.toString();
         } catch (InvalidTypeOfTask e) {
             response = e.toString();
         } catch (EmptyDescription e) {
+            response = e.toString();
+        } catch (InvalidTaskNumber e) {
             response = e.toString();
         }
         return response;

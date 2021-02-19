@@ -21,8 +21,8 @@ public class Storage {
      */
     public void retrieveFilePath() {
         try {
-            String home = System.getProperty("user.home");
-            Path directoryPath = Paths.get(home.toString(), "Desktop", "repo", "ip", "data");
+            String home = System.getProperty("user.dir");
+            Path directoryPath = Paths.get(home.toString(), "data");
             Boolean directoryExists = Files.exists(directoryPath);
             if (directoryExists.equals(false)) {
                 Files.createDirectory(directoryPath);

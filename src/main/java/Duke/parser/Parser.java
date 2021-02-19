@@ -65,7 +65,7 @@ public class Parser {
      *
      * @return Command
      */
-    public Command getCommand() {
+    public Command getCommand() throws IllegalArgumentException {
         return Command.valueOf(typeOfTask.toUpperCase());
     }
     /**

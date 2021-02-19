@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import duke.common.Response;
+import duke.exception.InvalidTaskNumber;
 import duke.parser.ListParser;
 
 
@@ -71,20 +72,28 @@ public class TaskList {
     }
 
 
-    public String delete(int i) {
-        Task task = tasks.get(i);
-        assert task != null : "task should not be empty";
-        tasks.remove(i);
+    public String delete(int i) throws InvalidTaskNumber {
+        if (i >= tasks.size() || i < 0) {
+            throw new InvalidTaskNumber(tasks.size());
+        } else {
+            Task task = tasks.get(i);
+            assert task != null : "task should not be empty";
+            tasks.remove(i);
 
-        String reply = Response.DELETE.toString() + task + "\n" + this.status();
-        return reply;
+            String reply = Response.DELETE.toString() + task + "\n" + this.status();
+            return reply;
+        }
     }
 
 
-    public String markAsDone(int i) {
+    public String markAsDone(int i) throws InvalidTaskNumber {
         String reply = "";
-        tasks.set(i, tasks.get(i).setDone());
-        reply = Response.DONE.toString() + tasks.get(i) + "\n";
+        if (i >= tasks.size() || i < 0) {
+            throw new InvalidTaskNumber(tasks.size());
+        } else {
+            tasks.set(i, tasks.get(i).setDone());
+            reply = Response.DONE.toString() + tasks.get(i) + "\n";
+        }
         return reply;
     }
 
@@ -93,6 +102,7 @@ public class TaskList {
      */
     public String find(String keyword) {
         SearchList searchList = new SearchList();
+        String reply = "";
 
         for (int i = 0; i < tasks.size(); i++) {
             String description = tasks.get(i).getMsg();
@@ -101,7 +111,12 @@ public class TaskList {
                 searchList.add(tasks.get(i));
             }
         }
-        return searchList.list();
+        if (searchList.list().equals("")) {
+            reply = "Keyword cannot be found in tasklist";
+        } else {
+            reply = searchList.list();
+        }
+        return reply;
     }
 
     /**

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import duke.common.Command;
 import duke.common.Response;
 import duke.exception.EmptyDescription;
+import duke.exception.InvalidTaskNumber;
 import duke.exception.InvalidTypeOfTask;
 import duke.parser.Parser;
 import duke.task.Deadline;
@@ -67,7 +68,6 @@ public class Duke {
             default:
                 throw new InvalidTypeOfTask();
             }
-            // check for duplicate task input
             if (taskList.detectDuplicates(newTask)) {
                 reply = "Input already exists. Please try again";
             } else if (!taskList.detectDuplicates(newTask)) {
@@ -86,7 +86,7 @@ public class Duke {
      * @param p
      * @throws EmptyDescription
      */
-    public String markAsDone(Parser p) {
+    public String markAsDone(Parser p) throws InvalidTaskNumber {
         String reply = "";
         try {
             if (p.getDescription().equals("")) {
@@ -105,7 +105,7 @@ public class Duke {
      *
      * @param p
      */
-    public String deleteTask(Parser p) {
+    public String deleteTask(Parser p) throws InvalidTaskNumber {
         int i = Integer.parseInt(p.getDescription()) - 1;
         return taskList.delete(i);
     }
@@ -130,21 +130,22 @@ public class Duke {
         return "Now you have " + taskList.getNumberOfTasks() + " tasks in the list.\n";
     }
 
-    /**
-     * Initialise scanner.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        System.out.println(duke.getResponse("haha"));
-
-    }
+//    /**
+//     * Initialise scanner.
+//     *
+//     * @param args
+//     */
+//    public static void main(String[] args) {
+//        Duke duke = new Duke();
+//        System.out.println(duke.getResponse("todo"));
+//
+//    }
 
     /**
      * Generate a response to user input.
      */
     public String getResponse(String input) {
+
         Ui ui = new Ui(this);
         String response = ui.readCommand(input);
         return "Duke response: " + response;

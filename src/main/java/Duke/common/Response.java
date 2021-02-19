@@ -7,7 +7,7 @@ package duke.common;
  * @version 1.0
  */
 public enum Response {
-    GREET("Hello! I'm Duke\nWhat can I do for you?\n"),
+    GREET("Welcome to Duke\nWhat can I do for you?\n"),
     EXIT("Bye. Hope to see you again soon!\n"),
     ADD("Got it. I 've added this task:\n"),
     DELETE("Noted. I've removed this task:\n"),
