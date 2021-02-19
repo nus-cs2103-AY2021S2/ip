@@ -72,7 +72,7 @@ Finds task by given keywords.
 
 Command: `find [keywords]`
 
-Example: `find t/T n/read`
+Example: `find t/T n/read d/20 Mar,21 Mar`
 * This will display all found **todo tasks** with name that includes the word **"read"**.
 
 ####Keywords:
