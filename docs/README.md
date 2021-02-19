@@ -46,8 +46,8 @@ optimized for use via a **Command Line Interface (CLI)** while still having the 
 ## Features
 
 * `[COMMAND1, COMMAND2]`: The command can be executed with either `COMMAND1` or `COMMAND2`.
-* `<VALUE>`: This command arguments is compulsory.
-* `{VALUE}`: This command arguments is optional.
+* `<VALUE>`: This command argument is compulsory.
+* `{VALUE}`: This command argument is optional.
 
 ### Listing all tasks: `list`, `ls`
 

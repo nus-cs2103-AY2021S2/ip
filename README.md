@@ -118,7 +118,7 @@ Project Link: [https://github.com/tanboonji/ip](https://github.com/tanboonji/ip)
 ## Acknowledgements
 * [se-edu/addressbook-level-3](https://github.com/se-edu/addressbook-level3)
 * [othneildrew/Best-README-Template](https://github.com/othneildrew/Best-README-Template)
-* [badges/shields](https://shields.io/)
+* [badges/shields](https://github.com/badges/shields)
 
 
 
