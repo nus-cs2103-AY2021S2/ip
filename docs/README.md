@@ -355,6 +355,5 @@ The size of the list depends on the number of matches
 
 After working on duke, make sure to key in the **exit** command (`bye` or `exit`) in order to **save** your entries.
 
-### Hope you have a wonderful time using Duke!
+## Hope you have a wonderful time using Duke!
 
-## End
