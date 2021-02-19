@@ -9,3 +9,7 @@
 [D][✘] deadline123 (by: 2012-12-12)
 [D][✘] valid deadline (by: 2030-12-12)
 [T][✘] hello
+<<<<<<< Updated upstream
+=======
+[D][✘] deadline (by: 2040-12-12)
+>>>>>>> Stashed changes

@@ -28,6 +28,10 @@ public class Duke {
     }
 
 
+    public static void main(String[] args) {
+
+    }
+
     /**
      * Reads string as input from database and initialize TaskList with tasks
      *
@@ -151,6 +155,5 @@ public class Duke {
         Collections.sort(arrayListOfDeadlines);
         return arrayListOfDeadlines;
     }
-
 
 }
