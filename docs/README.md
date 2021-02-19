@@ -111,7 +111,7 @@ Command: `list`
 Expected outcome:
 * Chat will list all tasks.
 
-### ****************6. Exit Chat: `bye`
+### 6. Exit Chat: `bye`
 
 Exits Chat the Cat.
 
