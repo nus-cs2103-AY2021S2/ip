@@ -45,7 +45,7 @@ Adds a task with a specified deadline into your list of tasks.
 
 `deadline (task) /by (YYYY-MM-DD)`
 
-**Example of usage: **
+**Example of usage:**
 
 `deadline Homework /by 2021-03-03`
 
@@ -65,7 +65,7 @@ Adds a task with a specified location into your list of tasks.
 
 `event (task) /at (location)`
 
-**Example of usage: **
+**Example of usage:**
 
 `event dinner /at orchard road`
 
@@ -85,7 +85,7 @@ Shows a list of all your completed and uncompleted tasks, indexed from 1-n, wher
 
 `list`
 
-**Example of usage: **
+**Example of usage:**
 
 `list`
 
@@ -107,7 +107,7 @@ Marks the specified task as completed. Specify the task using its index, which c
 
 `done (task index)`
 
-**Example of usage: **
+**Example of usage:**
 
 `done 2`
 
@@ -125,7 +125,7 @@ Deletes the specified task from your list. Specify the task using its index, whi
 
 `delete (task index)`
 
-**Example of usage: **
+**Example of usage:**
 
 `delete 2`
 
@@ -145,7 +145,7 @@ Finds 1 or more tasks that contains the specified keyword.
 
 `find (keyword)`
 
-**Example of usage: **
+**Example of usage:**
 
 `find wash`
 
@@ -163,7 +163,7 @@ Updates the specified task with additional information provided. Specify the tas
 
 `addinfo (task index) (info)`
 
-**Example of usage: **
+**Example of usage:**
 
 `addinfo 1 gym clothes`
 
@@ -185,7 +185,7 @@ A task that contains additional info is marked by [i] when *'list'* is called, a
 
 `info (task index)`
 
-**Example of usage: **
+**Example of usage:**
 
 `info 1`
 
