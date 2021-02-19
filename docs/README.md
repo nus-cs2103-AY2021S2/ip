@@ -2,7 +2,7 @@
 
 Hello! I am **Ranga**! Your personal tasks manager chatbot! I can keep track of your ToDos, Deadlines, and Events! Rawrz!
 
-![GUI](GUI.PNG)
+![GUI](Ui.png)
 
 ## Quickstart
 1. Ensure you have Java 11 or above installed in your Computer.
