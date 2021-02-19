@@ -45,7 +45,7 @@ public class Parser {
 
         assert !str.isBlank() : "No command given!";
         if (str.equals("list")) {
-            output += "Here are the tasks in your tasks!\n";
+            output += "Here are your tasks!\n";
             tasks.getNumItems();
             output += tasks.printTasksToString();
         } else if (mDone.find()) {
