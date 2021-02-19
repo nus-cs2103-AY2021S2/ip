@@ -2,22 +2,22 @@
 
 MODOC_TM stands for Mechanized Organism Designed Only for Computing_Task Management. 
 
-This is a chat-bot style task manager that saves to your local storage after exit.
+This is a chat-bot style task manager that saves existing tasks to your local storage after exit.
 
 -----
 ## Features
 
 
-### 1. [list](#1-list)
-### 2. [todo](#2-todo)
-### 3. [event](#3-event)
-### 4. [deadline](#4-deadline)
-### 5. [snooze](#5-snooze)
-### 6. [done](#6-done)
-### 7. [delete](#7-delete)
-### 8. [find](#8-find)
-### 9. [help](#9-help)
-### 10. [bye](#-10-bye)
+### 1. [list](#list---shows-all-the-existing-tasks)
+### 2. [todo](#todo---adds-a-todo-to-the-task-list)
+### 3. [event](#event---adds-an-event-to-the-task-list)
+### 4. [deadline](#deadline---adds-a-deadline-to-the-task-list)
+### 5. [snooze](#snooze---postpones-a-deadline-to-a-specified-date-or-automatically-snoozes-for-one-day)
+### 6. [done](#done---marks-a-task-at-given-index-as-completed)
+### 7. [delete](#delete---deletes-a-task-at-given-index-from-the-task-list)
+### 8. [find](#find---finds-a-task-with-the-provided-keywordscharactersdetails)
+### 9. [help](#help---shows-a-list-of-possible-commands-for-the-user)
+### 10. [bye](#bye---saves-the-current-task-list-onto-local-storage-and-closes-the-program)
 ---
 ## Usage
 
@@ -109,11 +109,14 @@ Example of usage:
 
     find work
 
+"work" is the search keyword.
+
 Expected outcome:
     
     Here are the matching tasks in your list: 
     [T][✔] homework
     [E][✔] do work (at: school)
+
 
 ### `help` - Shows a list of possible commands for the user.
 Example of usage:
