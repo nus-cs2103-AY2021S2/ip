@@ -74,7 +74,7 @@ public enum InputType {
 
     DELETE(x -> x.toLowerCase().startsWith("delete"), (tm, data) -> {
         try {
-            int loc = Integer.parseInt(data.substring(5)) - 1;
+            int loc = Integer.parseInt(data.substring(7)) - 1;
             Task x = tm.retrieveTaskByListId(loc);
             tm.deleteTaskByListId(loc);
             return "The task has been deleted ! \n - " + x;

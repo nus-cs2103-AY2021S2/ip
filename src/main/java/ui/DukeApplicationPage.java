@@ -5,17 +5,20 @@ import core.InputListener;
 import core.InputType;
 import core.task.TaskManager;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class DukeApplicationPage extends Application {
+public class DukeApplicationPage
+        extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -79,28 +82,40 @@ public class DukeApplicationPage extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         // more code to be added here later
+        sendButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            private StringBuilder text;
 
-        sendButton.setOnMouseClicked(event -> {
-            String data = userInput.getText();
-            String toPrint = "";
-
-            if(data.equalsIgnoreCase("bye")) {
-                tm.save();
-                System.exit(0);
-            }
-
-            for(var x : InputType.values()) {
-                if(x.doesMatch(data)) {
-                    toPrint += inputListener.onNewInput(x, data);
-                    break;
+            @Override
+            public void handle(MouseEvent event) {
+                if (text == null) {
+                    text = new StringBuilder("");
                 }
+
+                String data = userInput.getText();
+                text.append("[user] : " + data + "\n");
+                String toPrint = "";
+
+                if (data.equalsIgnoreCase("bye")) {
+                    tm.save();
+                    System.exit(0);
+                }
+
+                for (var x : InputType.values()) {
+                    if (x.doesMatch(data)) {
+                        toPrint += inputListener.onNewInput(x, data);
+                        break;
+                    }
+                }
+
+                text.append(toPrint + " \n");
+
+                textArea.setText(text.toString());
+                userInput.setText("");
             }
-            textArea.setText(toPrint);
-            userInput.setText("");
         });
 
     }
