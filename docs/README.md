@@ -14,6 +14,11 @@
 
 * `Delete all` tasks in the list.
 
+## A Screenshot of Duke in Action!
+
+![image](Ui.png)
+
+
 ## Usage
 
 ### *`List`*
