@@ -208,7 +208,7 @@ Remove a task
 
 Example of Usage:
 
-`remove 6`
+`delete 6` or `remove 6`
 
 Expected outcome:
 
@@ -230,7 +230,7 @@ Find matching tasks based on keyword
 
 Example of Usage:
 
-`find meeting`
+`find meeting` or `search meeting`
 
 Expected outcome:
 
@@ -253,7 +253,7 @@ Get tasks that are currently due
 
 Example of Usage:
 
-`reminders`
+`dues` or `reminders`
 
 Expected outcome:
 
@@ -326,7 +326,7 @@ Remove a note
 
 Example of Usage:
 
-`remove-note 6`
+`delete-note 6` or `remove-note 6`
 
 Expected outcome:
 
@@ -346,7 +346,7 @@ Find matching notes based on keyword
 
 Example of Usage:
 
-`find-note movies`
+`find-note movies` or `search-note movies`
 
 Expected outcome:
 
