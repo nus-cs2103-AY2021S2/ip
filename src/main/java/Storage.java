@@ -1,18 +1,17 @@
-import tasklist.TaskList;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.Scanner;
 
-// todo w5 / w6 storage parsing cases --> methods too long
+import tasklist.TaskList;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 /**
  * This class handles setting up the file to save Duke data to.
@@ -120,8 +119,11 @@ public class Storage {
         return t;
     }
 
-    // todo setup at default location
-    // how to recover from the IOException
+    /**
+     * Setup a new taskList or existing one already in hard disk
+     * @return
+     * @throws IOException
+     */
     public static TaskList setupTaskList() throws IOException {
         if (Storage.doesTaskFileExist()) {
             TaskList t = new TaskList();

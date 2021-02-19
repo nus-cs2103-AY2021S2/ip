@@ -14,8 +14,6 @@ public class HelpCommand extends CommandWithNoParameters {
                     "done {task number}" ,
                     "delete {task number}" ,
                     "find {keyword}",
-                    //"help date" ,
-                    //"help shortcuts" ,
                     "End of command list.");
 
     public HelpCommand(String commandBody) {
@@ -24,7 +22,6 @@ public class HelpCommand extends CommandWithNoParameters {
 
     @Override
     public void run(TaskList taskList) {
-        // currently ignores any words in commandBody, todo can display date specific or shortcut specific help
         this.commandOutputMsg = helpMessage;
         this.hasRunSuccessfully = true;
     }

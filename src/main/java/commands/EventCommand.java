@@ -14,7 +14,7 @@ public class EventCommand extends AddTaskWithTimeCommand {
     @Override
     public void run(TaskList taskList) {
         try {
-            this.parseCommandBody(); // todo super?
+            this.parseCommandBody();
             this.commandOutputMsg = taskList.addTask(
                     new Event(secondArg, parseToKiwiDateTime(thirdArg)));
         } catch (Exception e) {

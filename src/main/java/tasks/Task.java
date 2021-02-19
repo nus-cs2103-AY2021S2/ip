@@ -1,10 +1,9 @@
 package tasks;
 
 public abstract class Task {
-    protected static final String STORAGE_DELIMITER = ";;"; // todo make sure no one uses this reserved delimiter for tasks
+    protected static final String STORAGE_DELIMITER = ";;";
     protected final String description;
     protected boolean isDone;
-    protected String taskType;
 
     /**
      * Creates simple task with one field
@@ -52,7 +51,7 @@ public abstract class Task {
     public abstract String unparse();
 
     /**
-     * Description asked for tasklist.find. Todo maybe contains method should be brought in here instead
+     * Description asked for tasklist.find
      * @return
      */
     public String getDescription() {

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 /**
  * Custom date class that wraps a java.time.LocalTime object. Should only be called by KiwiDateTime class.
  */
-public class KiwiDate {
+class KiwiDate {
 
     private final LocalDate date;
     private boolean isEmpty;
@@ -63,7 +63,7 @@ public class KiwiDate {
         }
     }
 
-    public String unparse(String delimiter) {
+    String unparse(String delimiter) {
         return String.format("%d%s%d%s%d",
                 this.date.getDayOfMonth(), delimiter, this.date.getMonth().getValue(), delimiter, this.date.getYear());
     }

@@ -29,9 +29,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Creates a tasks.Todo object based on the string stored in the hard disk.
+     * Creates a todo object based on the string stored in the hard disk.
      * @param oneLine One line of stored input to be parsed into a todo
-     * @return tasks.Todo Object
+     * @return todo Object
      */
     public static Todo parse(String oneLine) {
         assert oneLine.startsWith("T" + STORAGE_DELIMITER);

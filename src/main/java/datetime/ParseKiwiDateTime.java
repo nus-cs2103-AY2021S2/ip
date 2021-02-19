@@ -1,10 +1,10 @@
 package datetime;
 
-import exceptions.MissingArgumentException;
-
 import java.util.HashMap;
 
-// todo maybe kiwi date time should be the only one who calls this class... or should it be the oher way... but how to parse two parts
+import exceptions.MissingArgumentException;
+
+
 /**
  * Parses user-inputted date/time arguments into KiwiDateTime objects.
  * KiwiDateTime is a wrapper class for storing LocalDateTime in this kiwi app.
@@ -12,10 +12,8 @@ import java.util.HashMap;
 public class ParseKiwiDateTime {
 
     // not allowed: ' '
-    HashMap<String, Integer> dateDelimiters = new HashMap<>();
-    HashMap<String, Integer> timeDelimiters = new HashMap<>();
-
-    // can't remember what this entire class was doing before
+    private HashMap<String, Integer> dateDelimiters = new HashMap<>();
+    private HashMap<String, Integer> timeDelimiters = new HashMap<>();
 
     private int hour;
     private int min;
@@ -23,19 +21,24 @@ public class ParseKiwiDateTime {
     private int month;
     private int year;
 
-    public void initDelimiters() {
-        dateDelimiters.put("-", 1);
-        dateDelimiters.put("/", 1);
-        timeDelimiters.put(":", 1);
-        timeDelimiters.put(".", 1); // bugs because split(regex) interprets . as a regex symbol
-    }
+    final String MISSING_ARG_ERR_MSG = "Missing date or time.";
 
     public ParseKiwiDateTime() {
         initDelimiters();
     }
 
     /**
+     * Initialise all recognized delimiters for the Kiwi app
+     */
+    public void initDelimiters() {
+        dateDelimiters.put("-", 1);
+        dateDelimiters.put("/", 1);
+        timeDelimiters.put(":", 1);
+    }
+
+    /**
      * Parses a user input string into a KiwiDateTime object. Is the main driver of this class.
+     *
      * @param input
      * @return
      * @throws MissingArgumentException
@@ -50,7 +53,7 @@ public class ParseKiwiDateTime {
         } else if (inputs.length == 2) {
             parse2InputStrs(inputs);
         } else if (inputs.length == 1) {
-            throw new MissingArgumentException("Missing date or time.");
+            throw new MissingArgumentException(MISSING_ARG_ERR_MSG);
         }
         return createKiwiDateTimeObj();
     }
@@ -67,36 +70,34 @@ public class ParseKiwiDateTime {
         return KiwiDateTime.of(this.day, this.month, this.year, this.hour, this.min);
     }
 
-
-    // two of the three spaced input strings can be connected, hence this function is created
-
     /**
      * Parses three input strings that were delimited by a space by the user. This exists because
      * 2 of the three spaced strings describe time and need to be parsed together.
+     *
      * @param inputs
      */
-    private void parse3InputStrs(String[] inputs) {
+    private void parse3InputStrs(String[] inputs) throws MissingArgumentException {
         if (isAmPm(inputs[1])) { // inputs are: time AM/PM date
             parse12hTimeString(inputs[0], inputs[1]);
             parseDateString(inputs[2]);
         } else if (isAmPm(inputs[2])) { // inputs are: date time AM/PM
             parseDateString(inputs[0]);
             parse12hTimeString(inputs[1], inputs[2]);
+        } else {
+            throw new MissingArgumentException(MISSING_ARG_ERR_MSG);
         }
     }
 
-    // the two spaced input strings can be connected, hence this function is created
     /**
      * Parses two input strings that were delimited by a space by the user. This exists because
      * the two spaced strings may both describe time and need to be parsed together.
+     *
      * @param inputs
      */
-    private void parse2InputStrs(String[] inputs) {
+    private void parse2InputStrs(String[] inputs) throws MissingArgumentException {
         if (isAmPm(inputs[1])) { // inputs are: time AM/PM
             parse12hTimeString(inputs[0], inputs[1]);
         }
-
-        // valid inputs are either: date 24hTime or 24hTime date or date 12hUnspacedtime or reverse
 
         // check if one input string is a date and the other is either a 12h or 24h time input
         if (isDateString(inputs[0]) && isUnspaced12hTimeString(inputs[1])) {
@@ -110,12 +111,13 @@ public class ParseKiwiDateTime {
         } else if (isDateString(inputs[0]) && is24hTimeString(inputs[1])) {
             parseDateString(inputs[0]);
             parse24hTimeString(inputs[1]);
+
         } else if (isDateString(inputs[1]) && is24hTimeString(inputs[0])) {
             parseDateString(inputs[1]);
             parse24hTimeString(inputs[0]);
 
         } else {
-            // throw unsupported argument exception
+            throw new MissingArgumentException(MISSING_ARG_ERR_MSG);
         }
     }
 
@@ -129,6 +131,7 @@ public class ParseKiwiDateTime {
 
     /**
      * Is only for 24h timestring
+     *
      * @param input
      */
     private void parse24hTimeString(String input) {
@@ -151,6 +154,7 @@ public class ParseKiwiDateTime {
 
     /**
      * Initialises this.hour and this.minute from two strings that make up a valid 12h format.
+     *
      * @param input
      * @param amPm
      */
@@ -172,6 +176,7 @@ public class ParseKiwiDateTime {
 
     /**
      * Initialises this.day, this.month and this.year based on a valid input string.
+     *
      * @param input
      */
     private void parseDateString(String input) {
@@ -187,11 +192,9 @@ public class ParseKiwiDateTime {
         }
     }
 
-    // why unspaced, because parsing function already split all the spaces
-    // ha or h:ma
-
     /**
-     * Detects if a string containing no spaces contains a 12h time format containing the phrase 'am' or 'pm'..
+     * Detects if a string containing no spaces contains a 12h time format containing the phrase 'am' or 'pm'.
+     *
      * @param input
      * @return
      */
@@ -202,6 +205,7 @@ public class ParseKiwiDateTime {
 
     /**
      * Finds a recognized date delimiter in the string provided
+     *
      * @param input
      * @return delimiter found in string, empty string if none matched
      */
@@ -213,8 +217,10 @@ public class ParseKiwiDateTime {
         }
         return "";
     }
+
     /**
      * Finds a recognized time delimiter in the string provided
+     *
      * @param input
      * @return delimiter found in string, empty string if none matched
      */
@@ -229,6 +235,7 @@ public class ParseKiwiDateTime {
 
     /**
      * Returns true if formatted with a recognized date delimiter
+     *
      * @param input
      * @return
      */
@@ -245,61 +252,5 @@ public class ParseKiwiDateTime {
     private boolean isHourOnly(String input) {
         String d = findTimeDelimiter(input);
         return d.isEmpty();
-    }
-
-    static void print(Object... objects) {
-        for (Object o : objects) {
-            System.out.println(o);
-        }
-    }
-
-    void params() {
-        String str = String.format("h:%d m:%d d:%d m:%d", this.hour, this.min, this.day, this.month);
-        print(str);
-    }
-
-    public static void main(String[] args) {
-        // focus on the simple case first
-        // todo datetime throws a lot of exceptions
-        ParseKiwiDateTime p = new ParseKiwiDateTime();
-
-         p.testParse(
-//                 "2:00 pm",
-//                 "18/11 6 pm",
-//                 "18/11 6:11 pm",
-//                 "6:11 pm 18/11",
-//                 "7 pm 18/11",
-
-                 "18/11/31 6 pm",
-
-                 "6 pm",
-                 "11:59 pm",
-                 "13/4 13:00",
-                 "6:00 1/7",
-
-                 "2/3 11pm",
-                 "2/3 11:49pm",
-                 // "6:11pm 8/11", // fixme
-                 "7pm 18/1" // fixme
-                 // todo check if in creation, time and date are being set to none instead of 12am
-         );
-
-         // unsupported
-        /*
-        "4/5",
-        "14:39", // fixme
-         "2:31", // fixme
-         */
-
-//        testParse("13/4 6pm");
-    }
-
-    private static void testParse(String... strings) {
-
-        ParseKiwiDateTime p = new ParseKiwiDateTime(); // todo rename kiwidatetimeparser
-
-        for (String s : strings) {
-            //print(p.parse(s));
-        }
     }
 }

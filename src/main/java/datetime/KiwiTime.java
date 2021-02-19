@@ -11,8 +11,7 @@ public class KiwiTime {
     private final boolean isEmpty;
     private boolean isHourOnly;
 
-    // hmm what happens when users want to edit time variables
-    KiwiTime(int hour, int minute) {
+    private KiwiTime(int hour, int minute) {
         this.time = LocalTime.of(hour, minute);
         this.isEmpty = false;
         checkHourOnly();
@@ -30,7 +29,7 @@ public class KiwiTime {
         this.isHourOnly = (this.time.getMinute() == 0);
     }
 
-    // todo printing AM or PM
+
     @Override
     public String toString() {
 
@@ -46,7 +45,7 @@ public class KiwiTime {
     }
 
 
-    public String unparse(String delimiter) {
+    String unparse(String delimiter) {
         return String.format("%d%s%d", this.time.getHour(), delimiter, this.time.getMinute());
     }
 

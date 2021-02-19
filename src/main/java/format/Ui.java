@@ -4,7 +4,7 @@ import tasklist.TaskList;
 
 public class Ui {
     // formatting for print messages
-    public static final String EXTRA_INDENT = "  "; // an extra indent for listing tasks, is used outside this class
+    public static final String EXTRA_INDENT = "  ";
     private static final String DIVIDER_LINE = "    ______________________________________________";
     private static final String DEFAULT_INDENT = "      ";
 

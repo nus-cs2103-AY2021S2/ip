@@ -1,7 +1,5 @@
 package datetime;
 
-import java.time.LocalDateTime;
-
 /**
  * This is a wrapper class for a local kiwiDate kiwiTime object, wrapped with functions that parse
  * user input strings to dateTime fields for tasks.
@@ -33,11 +31,13 @@ public class KiwiDateTime {
     }
 
 
+    /**
+     * Creates a string representation of a KiwiDateTime object to be usable in storage.
+     * @return
+     */
     public String unparse() {
         return String.format("%s%s%s", this.kiwiDate.unparse(delimiter), delimiter, this.kiwiTime.unparse(delimiter));
     }
-
-    // todo rename all parse functions
 
     /**
      * Converts a string stored in storage to a KiwiDateTime object. Does the opposite of unparse().

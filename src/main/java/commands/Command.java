@@ -13,8 +13,6 @@ public abstract class Command {
     private String[] commandList =
             {"bye", "list", "event", "todo", "deadline", "delete", "done"};
 
-
-
     /** For description and toString purposes. Not for switch case or anything that an enum
      * could do better. Should correspond with the command to type in? */
     final String commandName;
@@ -45,15 +43,21 @@ public abstract class Command {
         return this.commandOutputMsg;
     }
 
+    /**
+     * Returns whether this command has ran successfully
+     * @return
+     */
     public boolean hasRunSuccessfully() {
         return this.hasRunSuccessfully;
     }
 
+    /**
+     * Returns whether any command has sent a signal to exit the app
+     * @return
+     */
     public boolean hasSentExitDukeSignal() {
         return this.hasSentExitDukeSignal;
     }
-
-    // todo maybe "handle" isn't descriptive enough
 
     /**
      * Called by commands that can't be used on empty lists, and throws an error

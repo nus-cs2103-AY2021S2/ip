@@ -1,8 +1,9 @@
 package tasks;
 
+import static java.lang.Boolean.parseBoolean;
+
 import datetime.KiwiDateTime;
 
-import static java.lang.Boolean.parseBoolean;
 
 /**
  * Represents a task with a deadline.
@@ -42,7 +43,7 @@ public class Deadline extends Task {
                 + STORAGE_DELIMITER + deadlineDateTime.unparse() + System.lineSeparator();
     }
 
-    // todo note that this parsing is different from parsing user inputs.
+
     /**
      * Creates a deadline object based on the string stored in the hard disk.
      * @param oneLine One line of stored input to be parsed into a deadline

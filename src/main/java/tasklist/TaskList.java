@@ -1,10 +1,11 @@
 package tasklist;
 
+import java.util.ArrayList;
+
 import exceptions.InvalidArgumentException;
 import format.Ui;
 import tasks.Task;
 
-import java.util.ArrayList;
 
 /**
  * TaskList class that abstracts away arrayList that contains tasks and all task operations in this app.
@@ -22,13 +23,10 @@ public class TaskList {
         this.taskArrayList.add(t);
     }
 
-    // is used in junit tests
-    // abstract away anything else that uses size directly on arraylist?
     public int size() {
         return this.taskArrayList.size();
     }
 
-    // need to get rid of this get for OOP
     public Task get(int i) {
         return this.taskArrayList.get(i);
     }
@@ -38,9 +36,9 @@ public class TaskList {
     }
 
 
-
     /**
      * Adds task to array list and prints success message with task details
+     *
      * @param t task object to add
      */
     public String addTask(Task t) {
@@ -54,6 +52,7 @@ public class TaskList {
 
     /**
      * Deletes a task in the list
+     *
      * @param i index of task to be deleted
      */
     public String deleteTask(int i) {
@@ -66,14 +65,13 @@ public class TaskList {
 
     /**
      * Marks a task in the list done
+     *
      * @param i index of task to mark done
      * @throws InvalidArgumentException
      */
     public String markDone(int i) {
 
         taskArrayList.get(i - 1).markAsDone();
-
-        // todo checkstyle doesn't allow 8 space formatting
 
         return Ui.formatMultiLineMessages(
                 "Good work! I've marked this task done:",
@@ -85,6 +83,7 @@ public class TaskList {
     /**
      * Finds tasks whose description match a user-inputted string, and prints all
      * matching tasks.
+     *
      * @param s Search keyword, inputted by user
      */
     public String findTasks(String s) {
@@ -95,6 +94,6 @@ public class TaskList {
             }
         }
 
-        return Ui.stringifyTaskList(filtered); // fixme words printed should be slightly different
+        return Ui.stringifyTaskList(filtered);
     }
 }

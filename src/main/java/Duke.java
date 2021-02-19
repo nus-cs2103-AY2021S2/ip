@@ -1,11 +1,13 @@
+import java.io.IOException;
+
 import commands.Command;
 import exceptions.UnsupportedCommandException;
 import format.Ui;
 import tasklist.TaskList;
 
-import java.io.IOException;
-
-// w6 - think about how to improve code quality here
+/**
+ * Represents the Kiwi tasklist app. Named as Duke for legacy purposes.
+ */
 public class Duke {
     private static TaskList taskList;
     private boolean hasExitCommandBeenSent;
@@ -15,23 +17,24 @@ public class Duke {
      * Initialise duke with a taskList and a parser.
      */
     public Duke() {
-        this.setTaskList();
-        this.setParser();
+        this.initTaskList();
+        this.initParser();
     }
 
-    private void setParser() {
+    private void initParser() {
         this.parser = new Parser();
     }
 
-    // both gui and cli need to do this
-    public void setTaskList() {
+    /**
+     * Initialise taskList for the app
+     */
+    private void initTaskList() {
         try {
             taskList = Storage.setupTaskList();
         } catch (IOException e) {
             Ui.print(new String[]{"Something went wrong in loading the task file and parsing", e.getMessage()});
             taskList = new TaskList();
         }
-        // todo ensure a tasklist is always created?
     }
 
 
