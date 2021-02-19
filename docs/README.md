@@ -10,7 +10,7 @@ faster than traditional GUI apps.
   - [Viewing Help](#viewing-help): `help`
   - [Adding a task](#adding-a-task):
     - [Adding a todo](#adding-a-todo): `todo`
-    - [Adding a deadline](#adding-a-deadline): `deadline`
+    - [Adding a deadline](#adding-a-deadline:): `deadline`
     - [Adding an event](#adding-an-event): `event`
   - [Listing tasks](#listing-tasks): `list`
   - [Finding tasks by key word](#finding-tasks-by-key-word): `find`
@@ -56,7 +56,7 @@ Notes about the features:
   (such as `help` and `exit`) will be ignored.
 - Tasks will be stored based on their alphabetic order in the list, from the smallest to the largest. 
 
-### Viewing Help: `help`
+### Viewing Help
 Shows a message giving detailed explanation of available commands.
 
 Format: `help`.
@@ -65,14 +65,14 @@ Format: `help`.
 Adds a task to the Lihua's task list. 
 More specifically, there are 3 types of tasks you can add, as specified below.
 
-#### Adding a todo: `todo`
+#### Adding a todo
 Adds a `todo` task to Lihua. A `todo` task is a task with only a task name.
 
 Format: `todo TASKNAME`.
 
 Example: `todo Do homework`.
 
-#### Adding a deadline: `deadline`
+#### Adding a deadline
 Adds a `deadline` task to Lihua. A `deadline` task is a task with a task name and a task deadline date.
 
 Format: `deadline TASKNAME /by YYYY-MM-DD`.
@@ -83,7 +83,7 @@ Notes:
 - The date format must be `YYYY-MM-DD`.
 - The indicator ` /by ` cannot be omitted nor replaced.
 
-#### Adding an event: `event`
+#### Adding an event
 Adds an `event` task to Lihua. An `event` task is a task with a task name and a task commencement date.
 
 Format: `event TASKNAME /at YYYY-MM-DD`.
@@ -94,7 +94,7 @@ Notes:
 - The date format must be `YYYY-MM-DD`.
 - The indicator ` /at ` cannot be omitted nor replaced.
 
-### Listing tasks: `list`
+### Listing tasks
 Lists all tasks stored in Lihua.
 
 Format: `list [-time]`.
@@ -109,7 +109,7 @@ Notes:
 If two tasks are on the same date, then the relative ordering of the tasks will not change, 
   which is specified in the whole task list.
 
-### Finding tasks by key word: `find`
+### Finding tasks by key word
 Finds all tasks containing the key word specified.
 
 Format: `find KEYWORDS`.
@@ -126,7 +126,7 @@ e.g. `find A` is equivalent to `find a`.
 - The key word only needs to be part of the task name. It does not need to be the whole task name.
 e.g. `find a` can return you a `todo` task named `abc`.
 
-### Marking a task as done: `done`
+### Marking a task as done
 Marks a task as done.
 
 Format: `done TASKINDEX`.
@@ -137,7 +137,7 @@ Notes:
 - The `TASKINDEX` refers to the index number shown in the displayed task list by calling `list`.
 - The `TASKINDEX` you can specify is **an integer from 1 to total number tasks, inclusive**. 
 
-### Deleting a task: `delete`
+### Deleting a task
 Deletes a task.
 
 Format: `delete TASKINDEX`.
@@ -148,7 +148,7 @@ Notes:
 - The `TASKINDEX` refers to the index number shown in the displayed task list by calling `list`.
 - The `TASKINDEX` you can specify is **an integer from 1 to total number tasks, inclusive**.
 
-### Exiting the program: `bye`
+### Exiting the program
 Exits the application.
 
 Format: `bye`.
