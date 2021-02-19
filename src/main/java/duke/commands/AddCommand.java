@@ -58,7 +58,7 @@ public class AddCommand extends Command {
             throw new InvalidCommandException();
         }
         taskList.addTask(taskItem);
-        return ui.addedTask(taskItem);
+        return ui.addedTask(taskItem, taskList.getSize());
     }
 
     @Override

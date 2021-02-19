@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
             throw new NotExistingTaskException();
         } else {
             Task deletedTask = taskList.removeTask(currentIndex);
-            return ui.deletedTask(deletedTask);
+            return ui.deletedTask(deletedTask, taskList.getSize());
         }
     }
 

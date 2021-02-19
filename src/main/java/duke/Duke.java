@@ -6,6 +6,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.taskList.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 
 /**
@@ -25,9 +26,28 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(DIRECTORY);
+        this.storage = new Storage(this.DIRECTORY);
         this.tasks = new TaskList();
         storage.loadTasks(tasks);
+    }
+
+    /**
+     * Sets a delayed timeout when exiting the program.
+     * @author Shilo
+     * Adapted https://gist.github.com/Shilo/207c7ba4a604b7811b77ff17be8580f3
+     *
+     * @param runnable Function to be executed after the timeout.
+     * @param delay Delay before exiting the program in ms.
+     */
+    public static void setTimeOut(Runnable runnable, int delay) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }).start();
     }
 
     /**
@@ -42,7 +62,10 @@ public class Duke {
             Command executableCommand = Parser.parse(input);
             String output = executableCommand.execute(tasks, ui, storage);
             if (executableCommand.isEndOfProgram()){
-                System.exit(0);
+                setTimeOut(() -> {
+                   Platform.exit();
+                   System.exit(0);
+                }, 2000);
             }
             return output;
         } catch (DukeException e){
@@ -50,6 +73,5 @@ public class Duke {
             ui.formatAndPrintType(message);
             return message;
         }
-
     }
 }

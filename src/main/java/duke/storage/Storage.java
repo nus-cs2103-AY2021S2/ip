@@ -124,21 +124,21 @@ public class Storage {
     public void createTask(String command, String[] doneList, String[] nameList, TaskList taskList) {
         Task taskItem;
         switch (command) {
-            case "deadline":
+            case "DEADLINE":
                 String[] deadlineItem = nameList[1].split("/by", 2);
                 taskItem = new Deadline(deadlineItem[0],
                         deadlineItem[1],
-                        checkDone(deadlineItem[1]));
+                        checkDone(doneList[1]));
                 taskList.addTask(taskItem);
                 break;
-            case "event":
+            case "EVENT":
                 String[] eventItem = nameList[1].split("/at", 2);
                 taskItem = new Event(eventItem[0],
                         eventItem[1],
-                        checkDone(eventItem[1]));
+                        checkDone(doneList[1]));
                 taskList.addTask(taskItem);
                 break;
-            case "todo":
+            case "TODO":
                 taskItem = new ToDo(nameList[1], checkDone(doneList[1]));
                 taskList.addTask(taskItem);
                 break;

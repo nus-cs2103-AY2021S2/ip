@@ -63,8 +63,8 @@ public class Ui {
      * @param task the task that is to be marked done
      */
     public static String taskDone(Task task) {
-        String message = "Well done, Master! I've marked this task as done:\n" +
-                task.toString();
+        String message = "Well done, Master! I've marked this task as done:\n"
+                       + task.toString();
         formatAndPrintType(message);
         return message;
     }
@@ -74,9 +74,12 @@ public class Ui {
      *
      * @param task the task to be deleted from the list
      */
-    public static String deletedTask(Task task) {
-        String message = "Understood Master. I've removed this task from the list:\n" +
-                task.toString();
+    public static String deletedTask(Task task, int size) {
+        String message = "Understood Master. I've removed this task from the list:\n"
+                       + task.toString()
+                       + "\n\nYou have "
+                       + Integer.toString(size)
+                       + " tasks left in the list now, Master.";
         formatAndPrintType(message);
         return message;
     }
@@ -86,9 +89,13 @@ public class Ui {
      *
      * @param task the task that is added into the list.
      */
-    public static String addedTask(Task task) {
-        String message = "As requested, I've added a new task for you, Master:\n" +
-                task.toString();
+    public static String addedTask(Task task, int size) {
+        String message = "As requested, I've added a new task for you, Master:\n"
+                       + task.toString()
+                       + "\n\nYou have "
+                       + Integer.toString(size)
+                       + " tasks in the list now, Master.";
+
 
         formatAndPrintType(message);
         return message;

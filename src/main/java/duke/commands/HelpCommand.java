@@ -19,11 +19,11 @@ public class HelpCommand extends Command{
                                                 + "Example: deadline English Essay /by 2021-03-08 23:59\n\n";
 
     private final static String DELETE_PROMPT = "delete - Deletes the task at the specified position.\n"
-                                              + "Enter \"delete INDEX_OF_TASK\"\n"
+                                              + "Enter \"delete TASK_NUMBER\"\n"
                                               + "Example: delete 1\n\n";
 
     private final static String DONE_PROMPT = "done - Marks the task at the specified position as completed.\n"
-                                            + "Enter \"done INDEX_OF_TASK\"\n"
+                                            + "Enter \"done TASK_NUMBER\"\n"
                                             + "Example: done 1\n\n";
 
 
@@ -32,7 +32,7 @@ public class HelpCommand extends Command{
                                              + "Example: event John's Birthday /at MBS 2021-04-15 19:00\n\n";
 
 
-    private final static String FIND_PROMPT = "find - Finds tasks in the Task List that contains the keyword\n"
+    private final static String FIND_PROMPT = "find - Finds tasks in the Task List that contains the keyword.\n"
                                             + "Enter \"find KEYWORD\"\n"
                                             + "Example: find meeting\n\n";
 

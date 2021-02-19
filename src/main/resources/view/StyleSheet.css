@@ -6,7 +6,6 @@
 #dialogContainer {
     -fx-background-image: url("/images/GUI_BG.jpg");
     -fx-background-size: auto;
-    -fx-background-insets: ;
 }
 
 #dialog{

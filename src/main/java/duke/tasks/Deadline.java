@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     protected String afterBy;
+    protected String date;
+    protected String time;
 
     /**
      * Default constructor used when a new Deadline task is added
@@ -21,6 +23,12 @@ public class Deadline extends Task {
     public Deadline (String info, String afterBy) {
         super(info, taskType.DEADLINE);
         this.afterBy = afterBy.trim();
+        String[] afterByList = this.afterBy.split(" ", 2);
+        this.date = afterByList[0];
+
+        if (afterByList.length == 3) {
+            this.time = afterByList[1];
+        }
     }
 
     /**
@@ -34,6 +42,21 @@ public class Deadline extends Task {
     public Deadline(String info, String afterBy, boolean isDone) {
         super(info, taskType.DEADLINE, isDone);
         this.afterBy = afterBy.trim();
+        String[] afterByList = this.afterBy.split(" ", 2);
+        this.date = afterByList[0];
+
+        if (afterByList.length == 3) {
+            this.time = afterByList[1];
+        }
+    }
+
+    /**
+     * Returns string containing details of Deadline object after /by
+     *
+     * @return String with details of after /by
+     */
+    public String getAfterBy() {
+        return this.afterBy;
     }
 
     /**
@@ -45,16 +68,26 @@ public class Deadline extends Task {
         //Example of date based on format: 10 Aug 2021
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String[] dateList = this.afterBy.split(" ", 2);
-        LocalDate deadlineDate = LocalDate.parse(dateList[0]);
+        LocalDate deadlineDate;
+
+        deadlineDate = LocalDate.parse(dateList[0]);
 
         if (dateList.length >= 2) {
-            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm a");
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mma");
             LocalTime time = LocalTime.parse(dateList[1]);
 
             return deadlineDate.format(dateFormat) + " " + time.format(timeFormat);
         } else {
             return deadlineDate.toString();
         }
+    }
+
+    @Override
+    public String toSave() {
+        return this.getType().toString() + " "
+                + this.getInfo().trim()
+                + "/by"
+                + this.getAfterBy().trim();
     }
 
     @Override
