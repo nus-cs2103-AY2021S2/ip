@@ -8,17 +8,15 @@ import java.util.List;
  */
 public class Parser {
     private String inputCommand;
-    private final TaskList taskList;
+    private TaskList taskList;
     private final Ui ui;
     private final Storage storage;
-    private boolean hasTerminated;
 
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         inputCommand = "";
         this.taskList = taskList;
         this.ui = ui;
         this.storage = storage;
-        hasTerminated = false;
     }
 
     /**
@@ -30,11 +28,12 @@ public class Parser {
     }
 
     /**
-     * Checks if Parser is done dealing with all commands and has terminated.
-     * @return the Parser's status.
+     * Lists down all the tasks in the task list.
+     * @return Every tasks in the list.
      */
-    public boolean hasTerminated() {
-        return hasTerminated;
+    public String processList() {
+        String list = taskList.listAllTasks();
+        return ui.provideList(list);
     }
 
     /**
@@ -177,18 +176,32 @@ public class Parser {
     }
 
     /**
-     * Checks if the input command is valid, if not, respond accordingly.
-     * Deletes the task at the given line number.
-     * Saves any changes to the hard drive.
-     * @param command The delete command followed by the line number.
-     * @return The deleted task with the number of tasks left in the task list.
+     * Checks if the user inputted a line number to be deleted, if not, inform the user.
+     * Checks if the user wants to delete one or all tasks from the task list.
+     * Redirects to the appropriate process method.
+     * @param command The delete command followed by either the line number or all command.
+     * @return The relevant response from the redirected process method.
      */
-    public String processDelete(String command) {
-        String input = command.replace("delete", "").strip();
-        if (input.length() == 0) {
+    public String checkDelete(String command) {
+        String suffix = command.replace("delete", "").strip();
+        if (suffix.length() == 0) {
             return ui.missingLineNumberReply();
         }
-        int lineNumber = Integer.parseInt(input);
+        if (suffix.startsWith("all")) {
+            return processDeleteAll();
+        }
+        return processDelete(suffix);
+    }
+
+    /**
+     * Checks if the line number to be deleted is valid, if not, inform the user.
+     * Deletes the task at the given line number.
+     * Saves any changes to the hard drive.
+     * @param suffix The line number in string.
+     * @return The deleted task with the number of tasks left in the task list.
+     */
+    public String processDelete(String suffix) {
+        int lineNumber = Integer.parseInt(suffix);
         if (lineNumber > taskList.numOfTasks()) {
             return ui.invalidLineReply();
         }
@@ -197,6 +210,17 @@ public class Parser {
         int numOfTasks = taskList.numOfTasks();
         storage.writeToFile(taskList);
         return ui.deleteTaskReply(deletedTask.toString(), String.valueOf(numOfTasks));
+    }
+
+    /**
+     * Deletes all the tasks from the task list.
+     * Saves any changes to the hard drive.
+     * @return The reply informing the user that all tasks have been deleted.
+     */
+    public String processDeleteAll() {
+        taskList = new TaskList();
+        storage.writeToFile(taskList);
+        return ui.deleteAllReply();
     }
 
     /**
@@ -219,7 +243,7 @@ public class Parser {
             Task task = taskList.getTask(i);
             String taskInString = task.toString();
             if (taskInString.contains(word)) {
-                matches.add(matchNumber + "." + taskInString);
+                matches.add(matchNumber + ". " + taskInString);
                 isFound = true;
                 matchNumber++;
             }
@@ -239,10 +263,11 @@ public class Parser {
      * @return The appropriate response based on the input command.
      */
     public String process() {
-        String response;
-        if (inputCommand.startsWith("list")) {
-            String list = taskList.listAllTasks();
-            response = ui.provideList(list);
+        String response = "";
+        if (inputCommand.startsWith("start")) {
+            response = ui.greet();
+        } else if (inputCommand.startsWith("list")) {
+            response = processList();
         } else if (inputCommand.startsWith("todo")) {
             response = processTodo(inputCommand);
         } else if (inputCommand.startsWith("deadline")) {
@@ -252,12 +277,11 @@ public class Parser {
         } else if (inputCommand.startsWith("done")) {
             response = processDone(inputCommand);
         } else if (inputCommand.startsWith("delete")) {
-            response = processDelete(inputCommand);
+            response = checkDelete(inputCommand);
         } else if (inputCommand.startsWith("find")) {
             response = processFind(inputCommand);
         } else if (inputCommand.startsWith("bye")) {
-            hasTerminated = true;
-            response = ui.bidFarewell();
+            System.exit(0);
         } else {
             response = ui.invalidCommandReply();
         }

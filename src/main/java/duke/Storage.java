@@ -127,7 +127,7 @@ public class Storage {
                     task = convertToDeadlineOrEvent(inputArr, false);
                 }
                 if (inputArr[1].equals("[/]")) {
-                    task.markAsDone();
+                    task = task.markAsDone();
                 }
                 taskList.addTask(task);
                 input = br.readLine();

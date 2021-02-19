@@ -8,22 +8,8 @@ public class Ui {
     /**
      * Greets the user and showcases the DUKE logo.
      */
-    public void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greeting = "Hello from\n" + logo + "What can I do for you?";
-        System.out.println(greeting);
-    }
-
-    /**
-     * Bids the user farewell.
-     * @return The farewell greeting.
-     */
-    public String bidFarewell() {
-        return "Goodbye! Hope to see you again soon!";
+    public String greet() {
+        return "Hi! I'm DUKE, your task manager. What can I do for you?";
     }
 
     /**
@@ -62,6 +48,14 @@ public class Ui {
      */
     public String deleteTaskReply(String task, String numOfTasks) {
         return "Noted. I've removed this task:\n" + task + "\n" + "Now you have " + numOfTasks + " tasks in the list.";
+    }
+
+    /**
+     * Informs the user that all the task has been deleted from the list.
+     * @return The deletion of all tasks.
+     */
+    public String deleteAllReply() {
+        return "Noted. I've removed all the tasks from the list.";
     }
 
     /**

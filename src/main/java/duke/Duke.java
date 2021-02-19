@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,9 +14,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
-    private TaskList taskList;
-    private final Ui ui;
-    private final Storage storage;
     private final Parser parser;
 
     private ScrollPane scrollPane;
@@ -27,33 +23,11 @@ public class Duke extends Application {
     private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke() {
-        taskList = new TaskList();
-        ui = new Ui();
-        storage = new Storage("C:/ip/src/main/java/Duke.java");
-        parser = new Parser(taskList, ui, storage);
-    }
-
-    /**
-     * Retrieves the saved task list from the hard drive, if any.
-     * Reads the user's input command.
-     * Passes the command to the Parser to handle.
-     * Terminates if the parser is terminated.
-     */
-    public void run() {
-        ui.greet();
+        Storage storage = new Storage("./data/duke.txt");
         storage.retrieveOrCreate();
-        taskList = storage.getTaskList();
-        Scanner sc = new Scanner(System.in);
-        do {
-            String input = sc.nextLine();
-            parser.addCommand(input);
-            System.out.println(parser.process());
-        } while (!parser.hasTerminated());
-        System.exit(0);
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
+        TaskList taskList = storage.getTaskList();
+        Ui ui = new Ui();
+        parser = new Parser(taskList, ui, storage);
     }
 
     @Override
