@@ -1,5 +1,4 @@
-T|| read book
-E|| project meeting| Mon2-4pm
-T|| summary pages
-E|| prop up markets| Tue 6pm
-D|| return book |2020-08-25
+T||borrow book
+E||meet friend | wed 2pm
+D|X|return book |2020-08-25
+T||hello world

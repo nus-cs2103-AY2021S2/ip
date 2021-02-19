@@ -14,7 +14,7 @@ public class TaskList {
      * @param currentTask Current task.
      */
     protected String logTask(Task currentTask) {
-        return String.format("Got it. I've added this task:" + currentTask +
+        return String.format("Got it. I've added this task: " + currentTask +
                 String.format("\nNow you have %d tasks in the list", taskList.size()));
 
     }
@@ -74,11 +74,9 @@ public class TaskList {
         // Retrieving task
         Task givenTask = taskList.get(index - 1);
         givenTask.markAsDone();
-        String res = "Nice! I've marked this task as done:";
+        String res = "Nice! I've marked this task as done:\n";
 
-        res += String.format("\n  [%s][%s] %s",
-                givenTask.getTaskType(), givenTask.getStatusIcon(),
-                givenTask.getDescription());
+        res += givenTask.toString();
         return res;
     }
 
