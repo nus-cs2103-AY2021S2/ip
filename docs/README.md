@@ -12,8 +12,9 @@ now be a breeze (风) !
 4. Double-click `Hayate.jar` to run the app.
 
 ## Command List
+
 **Commands** | **Usage**
---- | ---
+------------ | ----------
 `todo` | Adds a `todo` to the list
 `deadline <deadlineDescription> /by dd/MM/yyyy HHmm` | Adds a `deadline` to the list
 `event <eventDescription> /at dd/MM/yyyy HHmm` | Adds an `event` to the list
