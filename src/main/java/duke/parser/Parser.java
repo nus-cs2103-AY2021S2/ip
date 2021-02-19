@@ -18,10 +18,21 @@ import duke.tasks.TaskList;
 public class Parser {
     private TaskList taskList;
 
+    /**
+     * Constructs a parser for making sense of the user-input command.
+     *
+     * @param taskList A task list.
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Identifies and returns a command based on the user input.
+     *
+     * @param userInput A String containing the user input.
+     * @return A command, which is indicated the user.
+     */
     public Command parse(String userInput) {
         try {
             String[] input = userInput.split(" ");

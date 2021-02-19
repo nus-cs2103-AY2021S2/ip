@@ -2,10 +2,12 @@ package duke.commands;
 
 import duke.parser.DuplicateException;
 import duke.parser.InsufficientArgumentsException;
-import duke.parser.Parser;
 import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
+/**
+ * ToDoCommand is a command that adds a Todo to the task list.
+ */
 public class ToDoCommand extends Command {
     private String taskDescription;
 
@@ -13,11 +15,13 @@ public class ToDoCommand extends Command {
         super(taskList);
         this.taskDescription = taskDescription;
     }
+
     public ToDoCommand(String[] userInput, TaskList taskList) {
         super(userInput, taskList);
         this.taskDescription = "";
     }
 
+    @Override
     public Command process() {
         try {
             if (this.getUserInput().length == 1) {
@@ -32,6 +36,7 @@ public class ToDoCommand extends Command {
         }
     }
 
+    @Override
     public TaskList execute() {
         TaskList taskList = this.getTaskList();
         int initialSize = taskList.size();
@@ -41,6 +46,7 @@ public class ToDoCommand extends Command {
         return taskList;
     }
 
+    @Override
     public String toString() {
         String message = "Got it. I've added this task:\n";
         Todo todo = new Todo(this.taskDescription);

@@ -1,19 +1,23 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 /**
- * Ui allows interactions with the user and prompts user for command
+ * Ui allows interactions with the user and formats Duke's responses to the user.
  */
 public class Ui {
-    private final Scanner sc;
     private boolean exit;
 
+    /**
+     * Constructs a Ui.
+     */
     public Ui() {
-        this.sc = new Scanner(System.in);
         this.exit = false;
     }
 
+    /**
+     * Greets the user.
+     *
+     * @return A String representing greetings to the user.
+     */
     public String greet() {
         String logo = " ____         _        \n"
                     + "|  _ \\ _   _| |  _____ \n"
@@ -28,6 +32,12 @@ public class Ui {
         return greeting;
     }
 
+    /**
+     * Formats a given string (from either the user or from Duke)
+     *
+     * @param response A String to be formatted.
+     * @return Formatted input String.
+     */
     public String format(String response) {
         String result = "_______________________________________________\n";
         result += response + "\n";

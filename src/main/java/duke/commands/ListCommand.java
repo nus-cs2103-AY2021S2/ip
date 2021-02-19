@@ -6,6 +6,9 @@ import duke.tasks.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * ListCommand is a command that lists out all the tasks in the task list.
+ */
 public class ListCommand extends Command {
 
     public ListCommand(TaskList taskList) {
@@ -16,6 +19,7 @@ public class ListCommand extends Command {
         super(userInput, taskList);
     }
 
+    @Override
     public Command process() {
         try {
             if (this.getUserInput().length != 1) {
@@ -28,10 +32,12 @@ public class ListCommand extends Command {
         }
     }
 
+    @Override
     public TaskList execute() {
         return this.getTaskList();
     }
 
+    @Override
     public String toString() {
         String message = "Here are the tasks in your list:\n";
         ArrayList<Task> tasks = this.getTaskList().getList();

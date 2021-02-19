@@ -1,12 +1,14 @@
 package duke.commands;
 
 import duke.parser.InsufficientArgumentsException;
-import duke.parser.WrongArgumentException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * DoneCommand is a command that sets a specific task as completed.
+ */
 public class DoneCommand extends Command{
     private int indexOfTaskDone;
 
@@ -22,6 +24,7 @@ public class DoneCommand extends Command{
         this.indexOfTaskDone = -1;
     }
 
+    @Override
     public Command process() {
         try {
             if (this.getUserInput().length == 1) {
@@ -34,6 +37,7 @@ public class DoneCommand extends Command{
         }
     }
 
+    @Override
     public TaskList execute() {
         ArrayList<Task> tasks = this.getTaskList().getList();
         int size = tasks.size();
@@ -46,6 +50,7 @@ public class DoneCommand extends Command{
         return new TaskList(tasks);
     }
 
+    @Override
     public String toString() {
         TaskList tasks = this.getTaskList();
         String message = "Nice! I've marked this task as done:\n";

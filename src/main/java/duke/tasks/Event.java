@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event is a task defined by a time at which it will occur
+ * Event is a task defined by a time at which it will occur.
  */
 public class Event extends Task implements DueDate {
     protected LocalDate time;

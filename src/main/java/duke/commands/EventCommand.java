@@ -7,6 +7,9 @@ import duke.tasks.Event;
 
 import java.time.LocalDate;
 
+/**
+ * An EventCommand is a command that adds an event to the task list.
+ */
 public class EventCommand extends Command {
     private String taskDescription;
     private LocalDate eventDate;
@@ -22,6 +25,7 @@ public class EventCommand extends Command {
         this.eventDate = null;
     }
 
+    @Override
     public Command process() {
         try {
             if (this.getUserInput().length == 1) {
@@ -37,6 +41,7 @@ public class EventCommand extends Command {
         }
     }
 
+    @Override
     public TaskList execute() {
         TaskList taskList = this.getTaskList();
         int initialSize = taskList.size();
@@ -46,6 +51,7 @@ public class EventCommand extends Command {
         return taskList;
     }
 
+    @Override
     public String toString() {
         String message = "Got it. I've added this task:\n";
         Event event = new Event(this.taskDescription, this.eventDate);

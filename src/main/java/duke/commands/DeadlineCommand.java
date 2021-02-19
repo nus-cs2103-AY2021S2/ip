@@ -3,12 +3,13 @@ package duke.commands;
 import duke.parser.DuplicateException;
 import duke.parser.InsufficientArgumentsException;
 import duke.tasks.TaskList;
-import duke.tasks.Task;
 import duke.tasks.Deadline;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
+/**
+ * DeadlineCommand is a command that adds a Deadline to the task list.
+ */
 public class DeadlineCommand extends Command {
     private String taskDescription;
     private LocalDate dueDate;
@@ -25,6 +26,7 @@ public class DeadlineCommand extends Command {
         this.dueDate = null;
     }
 
+    @Override
     public Command process() {
         try {
             if (this.getUserInput().length == 1) {
@@ -40,6 +42,7 @@ public class DeadlineCommand extends Command {
         }
     }
 
+    @Override
     public TaskList execute() {
         LocalDate dueDate = this.dueDate;
         String taskDescription = this.taskDescription;
@@ -51,6 +54,7 @@ public class DeadlineCommand extends Command {
         return taskList;
     }
 
+    @Override
     public String toString() {
         String message = "Got it. I've added this task:\n";
         Deadline deadline = new Deadline(this.taskDescription, this.dueDate);

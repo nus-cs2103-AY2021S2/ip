@@ -1,10 +1,11 @@
 package duke.commands;
 
 import duke.parser.InsufficientArgumentsException;
-import duke.parser.Parser;
-import duke.parser.WrongArgumentException;
 import duke.tasks.TaskList;
 
+/**
+ * FindCommand is a command that finds if a task exists within the task list.
+ */
 public class FindCommand extends Command {
     private String taskDescription;
 
@@ -18,6 +19,7 @@ public class FindCommand extends Command {
         this.taskDescription = "";
     }
 
+    @Override
     public Command process() {
         try {
             if (getUserInput().length == 1) {
@@ -38,10 +40,12 @@ public class FindCommand extends Command {
         }
     }
 
+    @Override
     public TaskList execute() {
         return this.getTaskList();
     }
 
+    @Override
     public String toString() {
         String message = "Here are the matching tasks in your list:\n";
         TaskList tasks = this.getTaskList();

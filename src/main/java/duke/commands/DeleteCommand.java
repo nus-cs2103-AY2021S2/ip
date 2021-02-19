@@ -1,9 +1,11 @@
 package duke.commands;
 
 import duke.parser.InsufficientArgumentsException;
-import duke.parser.WrongArgumentException;
 import duke.tasks.TaskList;
 
+/**
+ * DeleteCommand is a command that deletes a specified task from the task list.
+ */
 public class DeleteCommand extends Command {
     private int indexOfTaskToDelete;
 
@@ -16,6 +18,7 @@ public class DeleteCommand extends Command {
         this.indexOfTaskToDelete = -1;
     }
 
+    @Override
     public Command process() {
         try {
             if (this.getUserInput().length == 1) {
@@ -28,6 +31,7 @@ public class DeleteCommand extends Command {
         }
     }
 
+    @Override
     public TaskList execute() {
         TaskList tasks = this.getTaskList();
         int initialSize = tasks.size();
@@ -36,6 +40,7 @@ public class DeleteCommand extends Command {
         return tasks;
     }
 
+    @Override
     public String toString() {
         String message = "Noted. I've removed this task: \n";
         message += this.getTaskList().get(this.indexOfTaskToDelete - 1).toString() + "\n";

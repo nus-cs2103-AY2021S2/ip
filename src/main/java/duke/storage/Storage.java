@@ -31,6 +31,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task list from the filepath given during initialisation of Storage
+     *
+     * @return A task list containing the tasks for the user.
+     * @throws FileNotFoundException If the file, given by the filepath during initialisation,
+     * does not exist
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -56,6 +63,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the list of tasks to the file indicated by the file path during initialisation.
+     *
+     * @param taskList List of task to be saved.
+     */
     public void save(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getList();
         try {

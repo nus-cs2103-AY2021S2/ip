@@ -1,40 +1,41 @@
 package duke.commands;
 
-import duke.parser.DuplicateException;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
+/**
+ * Command is a parent class for inheriting by specific commands.
+ */
 public abstract class Command {
     private String[] userInput;
     private TaskList taskList;
 
-    public Command(TaskList taskList) {
+    protected Command(TaskList taskList) {
         this.taskList = taskList;
     }
 
-    public Command(String[] userInput, TaskList taskList) {
+    protected Command(String[] userInput, TaskList taskList) {
         this.userInput = userInput;
         this.taskList = taskList;
     }
 
     /**
-     * Gets the type for the task of concern
-     * @param parts Array containing the command entered by the user
-     * @param delimiter String used for identifying due date of the task
-     * @return Description of the task
+     * Gets the task description from the user input.
+     *
+     * @param input String array containing the command entered by the user.
+     * @param delimiter String used for identifying due date of the tasks.
+     * @return A String description of the task.
      */
-    protected String getDescription(String[] parts, String delimiter) {
+    protected String getDescription(String[] input, String delimiter) {
         String description = "";
         boolean first = true;
-        for (int i = 1; i < parts.length; ++i) {
-            if (!parts[i].equals(delimiter)) {
+        for (int i = 1; i < input.length; ++i) {
+            if (!input[i].equals(delimiter)) {
                 if (!first) {
-                    description += " " + parts[i];
+                    description += " " + input[i];
                 } else {
-                    description += parts[i];
+                    description += input[i];
                 }
                 first = false;
             } else {
@@ -45,16 +46,17 @@ public abstract class Command {
     }
 
     /**
-     * Obtains the due date of the task of concern
-     * @param parts Array containing the command entered by the user
-     * @param delimiter String used for identifying due date of the task
-     * @return Due date of the task of concern
+     * Obtains the due date of the task of concern.
+     *
+     * @param input String array containing the command entered by the user.
+     * @param delimiter String used for identifying due date of the task.
+     * @return Due date for the task of concern.
      */
-    protected LocalDate getDueDate(String[] parts, String delimiter) {
+    protected LocalDate getDueDate(String[] input, String delimiter) {
         boolean flag = false;
         boolean first = true;
         String dueDate = "";
-        for (String s : parts) {
+        for (String s : input) {
             if (flag) {
                 if (!first) {
                     dueDate += ' ' + s;
@@ -70,15 +72,6 @@ public abstract class Command {
         return LocalDate.parse(dueDate);
     }
 
-    public void hasDuplicate(String taskDescription) throws DuplicateException {
-        ArrayList<Task> tasks = this.getTaskList().getList();
-        for (Task t : tasks) {
-            if (t.getDescription() == taskDescription) {
-                throw new DuplicateException("The task has already been recorded!\n");
-            }
-        }
-    }
-
     public abstract TaskList execute();
 
     public abstract Command process();
@@ -90,6 +83,4 @@ public abstract class Command {
     public TaskList getTaskList() {
         return this.taskList;
     }
-
-    public abstract String toString();
 }
