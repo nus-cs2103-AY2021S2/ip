@@ -1,6 +1,8 @@
 package helper;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ import task.Todo;
 
 class TaskListTest {
 
-    TaskList taskList = new TaskList();
+    private TaskList taskList = new TaskList();
 
     @Test
     void get() {

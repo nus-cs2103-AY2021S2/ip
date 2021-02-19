@@ -1,15 +1,17 @@
-import duke.Duke;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import duke.Duke;
+
 public class DukeTest {
+
+    private Duke duke = new Duke("duke.txt");
+
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         assertEquals(2, 2);
     }
-
-    Duke duke = new Duke("duke.txt");
 
     @Test
     void main() {
