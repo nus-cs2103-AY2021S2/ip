@@ -81,6 +81,11 @@ public class Task implements Serializable {
         return "[" + getStatusIcon() + "] " + getTaskDescription();
     }
 
+    /**
+     * Checks whether the given word is contained in the taskDescription.
+     * @param word - the given word to check
+     * @return - true if the word is contained, false otherwise
+     */
     public boolean contains(String word) {
         return taskDescription.toLowerCase().contains(word.toLowerCase());
     }

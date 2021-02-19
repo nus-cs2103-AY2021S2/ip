@@ -15,7 +15,8 @@ import java.util.ArrayList;
  * Implementation of a {@code TaskStorage} in a file location.
  */
 public class
-TaskStorageFile extends TaskStorage {
+TaskStorageFile
+        extends TaskStorage {
 
     @Override
     public void saveTaskList(ArrayList<Task> tm, Path fileLocation) throws IOException {
@@ -28,22 +29,22 @@ TaskStorageFile extends TaskStorage {
     @SuppressWarnings("unchecked")
     @Override
     public ArrayList<Task> retrieveTaskList(Path fileLocation) throws IOException {
-        if (Files.isRegularFile(fileLocation)) {
-            try (var fWriter = new FileInputStream(fileLocation.toFile()); var ois = new ObjectInputStream((fWriter))) {
-                try {
-                    var x = ois.readObject();
-                    if(x instanceof ArrayList<?>) {
-                        return (ArrayList<Task>) x;
-                    }else {
-                        return new ArrayList<>();
-                    }
-                } catch (ClassNotFoundException e) {
-                    Files.deleteIfExists(fileLocation);
+        if (!Files.isRegularFile(fileLocation)) {
+            return new ArrayList<>();
+        }
+
+        try (var fWriter = new FileInputStream(fileLocation.toFile()); var ois = new ObjectInputStream((fWriter))) {
+            try {
+                var x = ois.readObject();
+                if (x instanceof ArrayList<?>) {
+                    return (ArrayList<Task>) x;
+                } else {
                     return new ArrayList<>();
                 }
+            } catch (ClassNotFoundException e) {
+                Files.deleteIfExists(fileLocation);
+                return new ArrayList<>();
             }
-        } else {
-            return new ArrayList<>();
         }
     }
 }
