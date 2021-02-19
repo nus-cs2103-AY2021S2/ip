@@ -3,11 +3,20 @@ package helper;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import org.ocpsoft.prettytime.nlp.PrettyTimeParser;
+import task.Deadline;
+import task.Event;
+import task.Todo;
 import task.Task;
 
+import java.time.LocalDate;
 /**
  * Handles storage
  */
@@ -25,14 +34,57 @@ public class Storage {
      * @throws DukeException
      */
     public List<Task> load() throws DukeException {
+        List<Task> taskList = new ArrayList<>();
         try {
             File myFile = new File("duke.txt");
             Scanner myScanner = new Scanner(myFile);
+            while (myScanner.hasNextLine()) {
+                String line = myScanner.nextLine();
+                parseLine(line, taskList);
+            }
+
         } catch (Exception e) {
             throw new DukeException("No such file");
         }
-        return null;
+        return taskList;
     }
+
+    private void parseLine(String line, List<Task> taskList) {
+        Task task = null;
+        int index = line.indexOf("] ",-1);
+        String boxes = line.substring(0,index + 1);
+        if (boxes.contains("[T]")) {
+            task = new Todo(line.substring(index + 2));
+        } else if (boxes.contains("[D]")) {
+            int dateIndex = line.indexOf(" (by: ");
+            String stringBeforeDate = line.substring(index + 2, dateIndex);
+            LocalDate date = parseTime(line.substring(dateIndex));
+            task = new Deadline(stringBeforeDate, date);
+        } else if (boxes.contains("[E]")) {
+            int dateIndex = line.indexOf(" (at: ");
+            String stringBeforeDate = line.substring(index + 2, dateIndex);
+            LocalDate date = parseTime(line.substring(dateIndex));
+            task = new Event(stringBeforeDate, date);
+        } else {
+            return ;
+        }
+        handleDone(boxes,task);
+        taskList.add(task);
+    }
+
+    private void handleDone(String boxes, Task task) {
+        if (boxes.contains("[X]")) {
+            task.setDone(true);
+        }
+    }
+
+    private LocalDate parseTime(String s) {
+        List<Date> dates = new PrettyTimeParser().parse(s);
+        Date date = dates.get(0);
+        return LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
+
 
     /**
      * Save the tasks
@@ -54,7 +106,7 @@ public class Storage {
             myWriter.close();
             //  System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-            throw new DukeException("Cannot save file");
+            throw new DukeException("Cannot save file. Do you have it open?");
         }
 
 
