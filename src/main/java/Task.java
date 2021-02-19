@@ -20,6 +20,11 @@ public class Task {
     }
 
 
+    /**
+     * Overloaded method to change the isDone parameter.
+     * @param description Description of task
+     * @param isDone Boolean flag representing whether event is completed.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -39,6 +44,11 @@ public class Task {
         this.date = null;
     }
 
+    /**
+     * Overloaded method to change the isDone parameter and also accepts date.
+     * @param description Description of task
+     * @param isDone Boolean flag representing whether event is completed.
+     */
     public Task(String description, String eventDate, boolean isDone) {
         this.description = description;
         this.eventDate = eventDate;

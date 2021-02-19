@@ -13,8 +13,14 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    // Initializing Duke object.
     private Duke duke = new Duke();
 
+    /**
+     * Overriding start method of application interface so that we can link the
+     * lauuncher to the main program logic in Duke.java
+     * @param stage Stage object that contains attributes that helps build the scene
+     */
     @Override
     public void start(Stage stage) {
         try {

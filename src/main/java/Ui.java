@@ -2,6 +2,7 @@ import java.io.File;
 
 public class Ui {
 
+
     public static final String primer = "Hello";
 
     public void printStarter() {
@@ -12,15 +13,15 @@ public class Ui {
     public String printStart() {
         String res = String.format("Hello! I'm Duke" + "\n" + "What can I do for " +
                         "you?\n");
-        res += String.format("Here are the list of commands: \n" +
+        res += String.format("Here are the list of all commands: \n\n" +
                 "list - lists all existing tasks\n" +
                 "todo [insert task] - creates a todo task\n" +
                 "deadline [insert deadline] - creates a deadline\n" +
                 "event [insert event] - creates an event\n" +
                 "delete [insert index] - deletes event based on index\n" +
                 "find [insert keyword] [search type(optional)] - finds tasks " +
-                "corresponding to keyword\n" +
-                "done [insert keyword] - marks task as done");
+                "corresponding \n to keyword\n" +
+                "done [insert index] - marks task as done");
         return res;
     }
 

@@ -10,8 +10,9 @@ import java.util.List;
 
 public class Storage {
 
-
+    // Source folder
     private final static String sourceFolder = "data";
+    // Name of text file to store tasks
     private final static String sourceFile = "/Duke.txt";
 
 
@@ -39,6 +40,12 @@ public class Storage {
         out.flush();
     }
 
+    /**
+     * Method that loads primary file from local disk. Takes in the stored string in
+     * text file stored locally, and parses it into a List containing tasks.
+     * @return Task List
+     * @throws IOException
+     */
     public List<Task> loadFile() throws IOException {
         File directory = new File(sourceFolder + sourceFile);
         List<Task> taskList = new ArrayList<>();

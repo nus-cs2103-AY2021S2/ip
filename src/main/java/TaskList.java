@@ -14,7 +14,6 @@ public class TaskList {
      * @param currentTask Current task.
      */
     protected String logTask(Task currentTask) {
-
         return String.format("Got it. I've added this task:" + currentTask +
                 String.format("\nNow you have %d tasks in the list", taskList.size()));
 
@@ -100,7 +99,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieve task(s) by keyword match so long as description contains the word
+     * Retrieve task(s) by keyword match so long as description contains the word.
      * @param command Keyword to match
      * @return A string line-spaced by each task that has the keyword
      */

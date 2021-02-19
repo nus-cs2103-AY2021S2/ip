@@ -28,11 +28,26 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Method that formats the date into a standard format.
+     */
     public void formatDate() {
         try {
             time = LocalDateTime.parse(this.eventDate, formatter);
         } catch (Exception e) {
             time = null;
+        }
+    }
+
+    /**
+     * Method that returns a standard formatted date.
+     * @return A formatted date time string.
+     */
+    public String getDate() {
+        if (time == null) {
+            return this.eventDate;
+        } else {
+            return time.format(formatter);
         }
     }
 
@@ -42,10 +57,14 @@ public class Deadline extends Task {
         return "D";
     }
 
+    /**
+     * Returns formatted string of deadline.
+     * @return Formatted String representing deadline.
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s(by:%s)", this.getTaskType(),
-                this.getStatusIcon(), this.getDescription(), this.getEventDate());
+                this.getStatusIcon(), this.getDescription(), this.getDate());
     }
 
 

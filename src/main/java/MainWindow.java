@@ -30,7 +30,9 @@ public class MainWindow extends AnchorPane {
             "/Bot.png"));
 
 
-
+    /**
+     * Initialize method for fxml.
+     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();

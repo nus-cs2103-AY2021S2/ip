@@ -55,6 +55,10 @@ public class Event extends Task {
         return "E";
     }
 
+    /**
+     * String method of event.
+     * @return A formatted string of an event.
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s(at:%s)", this.getTaskType(),

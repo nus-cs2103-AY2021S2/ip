@@ -21,6 +21,10 @@ public class Todo extends Task {
         return "T";
     }
 
+    /**
+     * Standard to string method.
+     * @return Formatted string of a task.
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s ", this.getTaskType(),
