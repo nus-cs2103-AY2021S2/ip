@@ -74,7 +74,7 @@ Get the list of tasks
 
 ### Usage
 
-### `list` - Key in `list`
+### `list` - key in `list`
 
 Returns the list of tasks
 
@@ -100,7 +100,7 @@ add todo task
 
 ### Usage
 
-### `todo` - Key in `todo <task description>`
+### `todo` - key in `todo <task description>`
 
 Example of Usage:
 
@@ -125,7 +125,7 @@ add deadline task
 
 ### Usage
 
-### `deadline` - Key in `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+### `deadline` - key in `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
 
 Example of Usage:
 
@@ -154,7 +154,7 @@ add event task
 
 ### Usage
 
-### `event` - Key in `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+### `event` - key in `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
 
 Example of Usage:
 
@@ -183,7 +183,7 @@ Mark a task as done
 
 ### Usage
 
-### `done` - Key in `done <index>`
+### `done` - key in `done <index>`
 
 Example of Usage:
 
@@ -204,7 +204,7 @@ Remove a task
 
 ### Usage
 
-### `delete` or `remove` - Key in `delete <index>` or `remove <index>`
+### `delete` or `remove` - key in `delete <index>` or `remove <index>`
 
 Example of Usage:
 
@@ -226,7 +226,7 @@ Find matching tasks based on keyword
 
 ### Usage
 
-### `find` or `search` - Key in `find <keyword>` or `search <keyword>`
+### `find` or `search` - key in `find <keyword>` or `search <keyword>`
 
 Example of Usage:
 
@@ -249,7 +249,7 @@ Get tasks that are currently due
 
 ### Usage
 
-### `dues` or `reminders` - Key in `dues` or `reminders`
+### `dues` or `reminders` - key in `dues` or `reminders`
 
 Example of Usage:
 
@@ -276,7 +276,7 @@ Get the list of notes
 
 ### Usage
 
-### `notes` - Simply type in `notes`
+### `notes` - key in `notes`
 
 Returns the list of tasks
 
@@ -302,7 +302,7 @@ add note
 
 ### Usage
 
-### `add` - Key in `add <note description>`
+### `add` - key in `add <note description>`
 
 Example of Usage:
 
@@ -322,7 +322,7 @@ Remove a note
 
 ### Usage
 
-### `delete-note` or `remove-note` - Key in `delete-note <index>` or `remove-note <index>`
+### `delete-note` or `remove-note` - key in `delete-note <index>` or `remove-note <index>`
 
 Example of Usage:
 
@@ -342,7 +342,7 @@ Find matching notes based on keyword
 
 ### Usage
 
-### `find-note` or `search-note` - Key in `find-note <keyword>` or `search-note <keyword>`
+### `find-note` or `search-note` - key in `find-note <keyword>` or `search-note <keyword>`
 
 Example of Usage:
 
