@@ -7,16 +7,16 @@ a Graphical User Interface (GUI). If you can type fast, Lihua can get your daily
 faster than traditional GUI apps.
 - [Quick start](#quick-start)
 - [Features](#features)
-  - [Viewing Help](#viewing-help-help): `help`
+  - [Viewing Help](#viewing-help): `help`
   - [Adding a task](#adding-a-task):
-    - [Adding a todo](#adding-a-todo-todo): `todo`
-    - [Adding a deadline](#adding-a-deadline-deadline): `deadline`
-    - [Adding an event](#adding-an-event-event): `event`
-  - [Listing tasks](#listing-tasks-list): `list`
-  - [Finding tasks by key word](#finding-tasks-by-key-word-find): `find`
-  - [Marking a task as done](#marking-a-task-as-done-done): `done`
-  - [Deleting a task](#deleting-a-task-delete): `delete`
-  - [Exiting the program](#exiting-the-program-bye): `bye`
+    - [Adding a todo](#adding-a-todo): `todo`
+    - [Adding a deadline](#adding-a-deadline): `deadline`
+    - [Adding an event](#adding-an-event): `event`
+  - [Listing tasks](#listing-tasks): `list`
+  - [Finding tasks by key word](#finding-tasks-by-key-word): `find`
+  - [Marking a task as done](#marking-a-task-as-done): `done`
+  - [Deleting a task](#deleting-a-task): `delete`
+  - [Exiting the program](#exiting-the-program): `bye`
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
 - [FAQ](#faq)
