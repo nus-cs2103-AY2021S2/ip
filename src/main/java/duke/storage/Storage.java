@@ -2,6 +2,9 @@ package duke.storage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,8 +15,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 public class Storage {
-    /** The default data path of the file storing all tasks in this project */
-    final String dataPath = "data/duke.txt";
+
     /** The path of the file storing all tasks */
     private String filePath;
 
@@ -33,7 +35,11 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
-        File myObj = new File(dataPath);
+        File myObj = new File(filePath);
+        if (Files.notExists(Path.of("data/"))) {
+            System.out.println("no such file");
+            Files.createDirectories(Paths.get("data/"));
+        }
         if (!myObj.exists()) {
             myObj.createNewFile();
         }

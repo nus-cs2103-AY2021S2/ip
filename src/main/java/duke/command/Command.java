@@ -84,7 +84,7 @@ public class Command {
             output += "7. `find` - Find a task (e.g. `find CS2103`) \n";
         } else {
             output = "OOPS!!! I'm sorry, but I don't know what that means :-( \n\n";
-            output += "Enter 'Help' to see all the commands.";
+            output += "Enter 'help' to see all the commands.";
         }
         assert output != "" : "output is null";
         return output;
@@ -230,9 +230,8 @@ public class Command {
      */
     public String executeToDo(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
-        if (commandName.length() < todoLength) {
-            ToDo todo = new ToDo(commandName);
-            output = todo.addTask(0);
+        if (commandName.length() <= todoLength) {
+            output = "Please enter the task name!";
             return output;
         }
         int end = commandName.indexOf(" ");
@@ -267,9 +266,8 @@ public class Command {
      */
     public String executeDeadline(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
-        if (commandName.length() < deadlineLength) {
-            Deadline deadline = new Deadline(commandName, null);
-            output = deadline.addTask(0);
+        if (commandName.length() <= deadlineLength) {
+            output = "Please enter the task name!";
             return output;
         }
         try {
@@ -297,7 +295,7 @@ public class Command {
         } catch (StringIndexOutOfBoundsException | IOException e) {
             output += "OOPS!!! The due date of a deadline "
                     + "cannot be empty. (Format: /by + date[YYYY-MM-DD])";
-    }
+        }
         return output;
     }
 
@@ -312,9 +310,8 @@ public class Command {
      */
     public String executeEvent(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
-        if (commandName.length() < eventLength) {
-            Event event = new Event(commandName, null);
-            output = event.addTask(0);
+        if (commandName.length() <= eventLength) {
+            output = "Please enter the task name!";
             return output;
         }
         try {

@@ -158,7 +158,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return new Duke("data/tasks.txt").run(input);
+        return new Duke("data/duke.txt").run(input);
     }
 
 
