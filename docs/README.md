@@ -4,7 +4,7 @@ The duke bot is a desktop task management app, optimised for Command Line Interf
 Thus, Duke bot can track and manage your tasks faster than traditional GUI apps.
 
 ## User Inteface
-<p align="center"><img width="50%" src="Ui.png"/></p>
+<p align="left"><img width="20%" src="Ui.png"/></p>
 
 ## Table of Contents
 * [Quick Start](#quick-start)
