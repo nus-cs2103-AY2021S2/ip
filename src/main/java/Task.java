@@ -51,7 +51,7 @@ public abstract class Task implements Comparable<Task> {
      */
     public String toString() {
         String doneIcon = isDone ? "[X]" : "[ ]";
-        return "[" + icon + "]" + doneIcon + " " + this.description + ", Created On: " + timeCreated.toString();
+        return "[" + icon + "]" + doneIcon + " " + this.description;
     }
 
     /**
