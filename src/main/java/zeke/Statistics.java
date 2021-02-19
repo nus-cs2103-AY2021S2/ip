@@ -10,8 +10,8 @@ public class Statistics {
     /**
      * Returns deadlines that are overdue and not completed yet.
      *
-     * @param list list of tasks
-     * @return list of deadlines as a String.
+     * @param list list of tasks.
+     * @return list of overdue deadlines.
      */
     public String getOverdueDeadlines(ArrayList<Task> list) {
         String message = "";
@@ -19,7 +19,7 @@ public class Statistics {
         for (Task task : list) {
             if (task.getType() == 'D' && !task.getDoneStatus()) {
                 Deadline deadline = (Deadline) task;
-                if (deadline.getFormattedDate().isBefore(LocalDate.now())) {
+                if (deadline.getLocalDate().isBefore(LocalDate.now())) {
                     overdueDeadlines.add(task);
                 }
             }
@@ -35,8 +35,8 @@ public class Statistics {
     /**
      * Returns deadlines due or events happening in a week from now.
      *
-     * @param list list of tasks
-     * @return list of deadlines and events as a String.
+     * @param list list of tasks.
+     * @return list of deadlines and events due soon.
      */
     public String getTasksDueSoon(ArrayList<Task> list) {
         String message = "";
@@ -44,13 +44,13 @@ public class Statistics {
         for (Task task : list) {
             if (task.getType() == 'D') {
                 Deadline deadline = (Deadline) task;
-                int numberOfDaysApart = (int) LocalDate.now().until(deadline.getFormattedDate(), ChronoUnit.DAYS);
+                int numberOfDaysApart = (int) LocalDate.now().until(deadline.getLocalDate(), ChronoUnit.DAYS);
                 if (numberOfDaysApart <= 7 && numberOfDaysApart >= 0) {
                     tasksDueSoon.add(task);
                 }
             } else if (task.getType() == 'E') {
                 Event event = (Event) task;
-                int numberOfDaysApart = (int) LocalDate.now().until(event.getFormattedDate(), ChronoUnit.DAYS);
+                int numberOfDaysApart = (int) LocalDate.now().until(event.getLocalDate(), ChronoUnit.DAYS);
                 if (numberOfDaysApart <= 7 && numberOfDaysApart >= 0) {
                     tasksDueSoon.add(task);
                 }
@@ -63,6 +63,5 @@ public class Statistics {
         }
         return message;
     }
-
 
 }

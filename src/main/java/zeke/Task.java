@@ -1,7 +1,5 @@
 package zeke;
 
-import java.time.LocalDate;
-
 /**
  * Task class to represent a task, which is a todo, deadline or event.
  */
@@ -13,7 +11,8 @@ public class Task {
     /**
      * Constructor for Task class.
      * Initializes a Task object with given description and marks it as not done.
-     * @param description task description
+     *
+     * @param description task description.
      */
     public Task(String description) {
         this.description = description;
@@ -29,39 +28,37 @@ public class Task {
     }
 
     /**
-     * Marks this task as done
+     * Marks this task as done.
      */
     public void done() {
         this.isDone = true;
     }
 
-
     /**
-     * Returns the type of this task
-     * @return Type of this task as char
+     * Returns the type of this task.
+     *
+     * @return Type of this task as char.
      */
     public char getType() {
         return this.type;
     }
 
     /**
-     * Returns the description of this task
-     * @return A String description of this task
+     * Returns the description of this task.
+     *
+     * @return A String description of this task.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Returns a boolean depending on whether this task is done
-     * @return Boolean depending on whether this task is done
+     * Returns a boolean depending on whether this task is done.
+     *
+     * @return Boolean depending on whether this task is done.
      */
     public boolean getDoneStatus() {
         return this.isDone;
-    }
-
-    public LocalDate getFormattedDate() {
-        return null;
     }
 
     @Override

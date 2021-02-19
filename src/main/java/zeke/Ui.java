@@ -18,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Prints greetings message at the start when user runs the Zeke app.
+     * Returns greetings message at the start when user runs the Zeke application.
      */
     public static String greetings() {
         String message = "Eren... I have waited to meet you for a long time.\n"
@@ -29,7 +29,9 @@ public class Ui {
     }
 
     /**
-     * Prints exit message when user inputs "bye".
+     * Returns exit message.
+     *
+     * @return exit message as a String.
      */
     public String exit() {
         String message = "Bye Eren. Till next time.";
@@ -37,10 +39,11 @@ public class Ui {
     }
 
     /**
-     * Prints message when user adds a task to list
+     * Returns message when user adds a task to list.
      *
-     * @param list list of tasks
-     * @param addedTask task that is added
+     * @param list list of tasks.
+     * @param addedTask task that is added.
+     * @return message when task is added.
      */
     public String addTaskMessage(ArrayList<Task> list, Task addedTask) {
         String message = "Got it. I've added this task:\n"
@@ -50,10 +53,11 @@ public class Ui {
     }
 
     /**
-     * Prints message when user deletes a task from list
+     * Returns message when user deletes a task from list.
      *
-     * @param list list of tasks
-     * @param deletedTask task that is deleted
+     * @param list list of tasks.
+     * @param deletedTask task that is deleted.
+     * @return message when task is deleted.
      */
     public String deleteTaskMessage(ArrayList<Task> list, Task deletedTask) {
         String message = "Noted. I've removed this task:\n"
@@ -63,9 +67,10 @@ public class Ui {
     }
 
     /**
-     * Prints message when user checks a task as done
+     * Returns message when user checks a task as done.
      *
-     * @param task task that is checked as done
+     * @param task task that is checked as done.
+     * @return a message informing user task is checked as done.
      */
     public String checkAsDoneMessage(Task task) {
         String message = "Nice! I've marked this task as done:\n" + task;
@@ -73,9 +78,10 @@ public class Ui {
     }
 
     /**
-     * Prints message when user requests for tasks in list
+     * Returns all the tasks in the list.
      *
-     * @param list list of tasks
+     * @param list list of tasks as a string
+     * @return list of all tasks as a String.
      */
     public String listAllTasks(ArrayList<Task> list) {
         String message = "Here are the tasks in your list:\n";
@@ -88,10 +94,11 @@ public class Ui {
     }
 
     /**
-     * Prints matching tasks in list
+     * Returns matching tasks in list.
      *
-     * @param keyword keyword to search for in list
-     * @param list list of tasks
+     * @param keyword keyword to search for in list.
+     * @param list list of tasks.
+     * @return matching tasks as a String.
      */
     public String findTask(String keyword, ArrayList<Task> list) {
         ArrayList<Task> newList = new ArrayList<>();
@@ -114,9 +121,9 @@ public class Ui {
     }
 
     /**
-     * Prints the help message
+     * Returns the help message.
      *
-     * @return help message as a String
+     * @return help message as a String.
      */
     public String viewHelpMessage() {
         String message = "List of commands\n"
@@ -134,10 +141,10 @@ public class Ui {
     }
 
     /**
-     * Prints statistics for the task list
+     * Returns statistics for the task list.
      *
-     * @param list task list
-     * @return statistics as a String
+     * @param list task list.
+     * @return statistics as a String.
      */
     public String getStatistics(ArrayList<Task> list) {
         String divider = "------\n";

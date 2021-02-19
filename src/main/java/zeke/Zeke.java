@@ -31,7 +31,9 @@ public class Zeke {
     }
 
     /**
-     * Processes user input and interacts with Ui and TaskList objects.
+     * Processes user input and returns Zeke's response.
+     *
+     * @return response of Zeke to user input.
      */
     public String getResponse(String input) {
         String response;
@@ -105,6 +107,8 @@ public class Zeke {
             response = new InvalidDateException().getMessage();
         } catch (StringIndexOutOfBoundsException e) {
             response = new InvalidDateException().getMessage();
+        } catch (Exception e) {
+            response = new UnknownInputException().getMessage();
         }
         return response;
     }

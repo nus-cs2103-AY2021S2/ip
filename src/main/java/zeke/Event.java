@@ -9,32 +9,47 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected String date;
-    protected LocalDate formattedDate;
+    protected LocalDate localDate;
 
     /**
      * Constructor for event class.
-     * Initializes a event with specified description.
+     * Initializes an event with specified description and date.
      *
-     * @param description description of the event task
+     * @param description description of the event task.
+     * @param date date of the event task.
      */
     public Event(String description, String date) {
         super(description);
         this.date = date;
-        this.formattedDate = LocalDate.parse(date);
+        this.localDate = LocalDate.parse(date);
         this.type = 'E';
     }
 
+    /**
+     * Returns date of this event.
+     *
+     * @return the date of this event.
+     */
     public String getDate() {
         return this.date;
     }
 
-    @Override
-    public LocalDate getFormattedDate() {
-        return this.formattedDate;
+    /**
+     * Returns the parsed LocalDate.
+     *
+     * @return the LocalDate of this event.
+     */
+    public LocalDate getLocalDate() {
+        return this.localDate;
     }
 
+    /**
+     * Returns an event in MMM dd yyyy format.
+     *
+     * @return a formatted event.
+     */
     public String getFormattedDateString() {
-        return formattedDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override

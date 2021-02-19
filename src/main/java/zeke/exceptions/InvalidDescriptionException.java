@@ -1,7 +1,13 @@
 package zeke.exceptions;
 
+/**
+ * Represents an error which occurs when user enters an invalid description of the task.
+ */
 public class InvalidDescriptionException extends ZekeException {
 
+    /**
+     * Constructor for InvalidDescriptionException class.
+     */
     public InvalidDescriptionException() {
     }
 

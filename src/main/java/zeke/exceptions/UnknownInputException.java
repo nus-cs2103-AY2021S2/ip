@@ -1,7 +1,13 @@
 package zeke.exceptions;
 
+/**
+ * Represents an error which occurs when user enters an unknown input.
+ */
 public class UnknownInputException extends ZekeException {
 
+    /**
+     * Constructor for UnknownInputException class.
+     */
     public UnknownInputException() {
     }
 

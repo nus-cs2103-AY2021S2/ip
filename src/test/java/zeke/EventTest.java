@@ -16,7 +16,7 @@ public class EventTest {
 
     @Test
     public void getFormattedDateTest() {
-        assertEquals(LocalDate.parse("2019-10-15"), event.getFormattedDate());
+        assertEquals(LocalDate.parse("2019-10-15"), event.getLocalDate());
     }
 
     @Test

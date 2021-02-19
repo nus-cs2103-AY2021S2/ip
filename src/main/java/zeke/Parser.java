@@ -30,10 +30,10 @@ public class Parser {
     }
 
     /**
-     * Gets the command from the input array
+     * Gets the command from the input array.
      *
      * @param inputArr user input array.
-     * @return
+     * @return command.
      */
     public Command getCommand(String[] inputArr) {
         return Command.valueOf(inputArr[0].toUpperCase(Locale.ROOT));
@@ -55,7 +55,7 @@ public class Parser {
      * Checks whether input index is out of range.
      *
      * @param inputArr user input array.
-     * @throws InvalidIndexException
+     * @throws InvalidIndexException if index given is out of range.
      */
     public void isValidIndex(String[] inputArr, ArrayList<Task> list) throws InvalidIndexException {
         int indexToDelete = Integer.parseInt(inputArr[1]);
@@ -65,11 +65,11 @@ public class Parser {
     }
 
     /**
-     *  Gets the description of task from input array
+     *  Gets the description of task from input array.
      *
      * @param inputArr user input array.
      * @param taskType type of task.
-     * @return description of task
+     * @return description of task.
      */
     public String getDescription(String[] inputArr, String taskType) {
         if (taskType.equals("todo")) {
@@ -81,11 +81,11 @@ public class Parser {
     }
 
     /**
-     *  Gets the date of task from input array
+     *  Gets the date of task from input array.
      *
      * @param inputArr user input array.
      * @param taskType type of task.
-     * @return date of task
+     * @return date of task.
      */
     public String getDate(String[] inputArr, String taskType) {
         if (taskType.equals("deadline")) {
