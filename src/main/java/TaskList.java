@@ -90,7 +90,7 @@ class TaskList {
      * @return String containing details of the task marked as done.
      */
     public String markAsDone(int index) throws DukeException {
-        if (index > listSize() || index <= 0) {
+        if (index > listSize() - 1 || index < 0) {
             throw new DukeException("The list item number provided is invalid");
         }
         Task task = this.tasks.get(index);
@@ -111,7 +111,7 @@ class TaskList {
      * @return String containing details of the deleted task.
      */
     public String deleteTask(int index) throws DukeException {
-        if (index > listSize() || index <= 0) {
+        if (index > listSize() - 1 || index < 0) {
             throw new DukeException("The list item number provided is invalid");
         }
         Task task = this.tasks.get(index);
