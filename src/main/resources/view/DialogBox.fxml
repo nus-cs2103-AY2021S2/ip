@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @@author Cheng20010201-reused -->
+<!-- From the javaFX tutorial https://se-education.org/guides/tutorials/javaFxPart4.html -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<!-- Idea adopted from github.com/QY-H00/ip -->
+<!-- @@author -->
+
+<fx:root alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="105.0" prefWidth="327.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label fx:id="dialog" minHeight="-Infinity" text="Label" wrapText="true">
+         <font>
+            <Font name="Calibri Bold" size="13.0" />
+         </font></Label>
+        <ImageView fx:id="displayPicture" blendMode="ADD" fitHeight="75.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+    </padding>
+   <effect>
+      <Blend />
+   </effect>
+</fx:root>
