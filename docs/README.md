@@ -218,3 +218,4 @@ list | `list` <br>
 find | `find <KEYWORD>` <br> e.g. `find assignment`
 help | `help` or `help <COMMAND>` <br> e.g.`help` or `help event`
 bye | `bye`
+-------------------------------------------------------------------------------
