@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class with methods for saving and loading files.
+ */
 public class Storage {
     String path;
     String directory;
@@ -18,6 +21,10 @@ public class Storage {
         this.directory = directory;
     }
 
+    /**
+     * Loads data from files if there is data to load.
+     * @return A list of tasks according to the saved data.
+     */
     ArrayList<Task> loadFile() {
         // String path = "./data/duke.txt";
         // String directory = "./data";
@@ -43,6 +50,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves individual tasks to the existing data file.
+     * @param input String to be stored in the file.
+     */
     void saveFile(String input) {
         // String path = "./data/duke.txt";
         try {
@@ -55,6 +66,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites file with new list of task if changes are made to the list.
+     * @param list New list of tasks to be saved.
+     */
     void saveFile(ArrayList<Task> list) {
         // String path = "./data/duke.txt";
         try {

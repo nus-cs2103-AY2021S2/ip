@@ -4,12 +4,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Class containing methods for parsing user input and
+ * file contents.
+ */
 public class Parser {
     TaskList taskList;
 
     Parser(TaskList taskList) {
         this.taskList = taskList;
     }
+
+    /**
+     * Parses all user input and processes each line and
+     * command.
+     */
 
     void parseAll() {
         Scanner sc = new Scanner(System.in);
@@ -20,6 +29,12 @@ public class Parser {
         }
         sc.close();
     }
+
+    /**
+     * Parses each line of user input and determines if it
+     * is a general command or a command for adding tasks.
+     * @param input Each line of user input
+     */
     void parseLine(String input) {
         try {
             if (input.equals("list") || input.contains("done")
@@ -41,6 +56,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses commands like "list", "done" and "delete".
+     * @param input User input that are general commands.
+     * @throws DukeIncompleteCommandException If "done" or "delete"
+     * commands do not state an index.
+     */
+
     void parseGeneralCommand(String input) throws DukeIncompleteCommandException {
         String[] inputs;
         int index;
@@ -57,6 +79,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses commands for adding tasks like "todo", "event" and "deadline".
+     * @param input User input that are task adding commands.
+     * @return Task that corresponds to the input.
+     * @throws DukeIncompleteCommandException If no task has been specified.
+     * @throws DateTimeParseException If date is not in the YYYY-MM-DD format.
+     */
     public static Task parseAddTaskCommand(String input) throws DukeIncompleteCommandException,
             DateTimeParseException {
         TimedTask timedTask = new TimedTask();
@@ -91,6 +120,12 @@ public class Parser {
             }
         }
     }
+
+    /**
+     * Parses data stored in file.
+     * @param line Each line stored in data.txt.
+     * @return Task that corresponds to each line in data.txt.
+     */
     static Task parseFile(String line) {
         if (line.contains("TODO")) {
             Task task = new ToDo();

@@ -12,10 +12,16 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * Marks task as done.
+     * @return Task that has been marked as done.
+     */
     public Task markDone() {
         isDone = true;
         return this;
     }
+
+    /*
     static Task parseInput(String input) throws DukeIncompleteCommandException {
         Task task;
         if (input.contains("todo")) {
@@ -27,6 +33,7 @@ public class Task {
         }
         return task;
     }
+    */
 
 
     @Override
@@ -37,6 +44,11 @@ public class Task {
             return "[ ] " + task;
         }
     }
+
+    /**
+     * Creates a string for saving in the file.
+     * @return String to be saved in file.
+     */
     public String toFileString() {
         return toString();
     }

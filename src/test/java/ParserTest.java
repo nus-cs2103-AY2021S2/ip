@@ -16,7 +16,7 @@ public class ParserTest {
 
             Task deadline = Parser.parseAddTaskCommand("deadline junit test /by 2021-02-14");
             assertEquals(deadline.toFileString(), "DDLN[ ] junit test (by: 2021-02-14)");
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -1,8 +1,6 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Event extends TimedTask {
 
@@ -52,6 +50,11 @@ public class Event extends TimedTask {
         return String.format("EVNT%s (at: %s)" , super.toString(),
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
+    /**
+     * Creates a string for saving in the file.
+     * @return String to be saved in file.
+     */
+    @Override
     public String toFileString() {
         return String.format("EVNT%s (at: %s)" , super.toString(), date);
     }

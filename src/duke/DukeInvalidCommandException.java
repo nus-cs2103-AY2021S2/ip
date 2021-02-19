@@ -5,6 +5,10 @@ public class DukeInvalidCommandException extends Exception {
     DukeInvalidCommandException() {
     }
 
+    /**
+     * Returns an invalid command error message.
+     * @return Error message in the form of a string.
+     */
     @Override
     public String getMessage() {
         return message;

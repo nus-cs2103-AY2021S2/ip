@@ -8,6 +8,10 @@ public class DukeIncompleteCommandException extends Exception {
     DukeIncompleteCommandException(String message) {
         this.message = message;
     }
+    /**
+     * Returns an incomplete command error message.
+     * @return Error message in the form of a string.
+     */
     @Override
     public String getMessage() {
         return message;
