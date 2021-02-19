@@ -1,12 +1,12 @@
 # User Guide
 
 ## Features
-1. [Add tasks](#todo)
-1. [View all tasks](#list)
-1. [Mark tasks as done](#done)
-1. [Delete tasks](#delete)
-1. [Search for tasks using keyword](#find)
-1. [Sort all tasks by date](#sort)
+1. [Add tasks](#todo---adds-a-todo-task)
+1. [View all tasks](#list---view-all-tasks)
+1. [Mark tasks as done](#done---marks-a-task-as-done)
+1. [Delete tasks](#delete---removes-a-task)
+1. [Search for tasks using keyword](#find---search-for-tasks)
+1. [Sort all tasks by date](#sort---search-for-tasks)
 ## Usage
 
 ### `todo` - Adds a todo task
@@ -66,7 +66,7 @@ Here are the tasks in your list:
 2. [E][] eat a cow (at: Sep 16 2021)
 3. [D][] ip submission (by: Jan 12 2017)
 ```
-### `done` - Marks a task as done <a name="done"></a> 
+### `done` - Marks a task as done 
 Mark a task in the specified position as done.
 
 Example of usage: 
@@ -79,7 +79,7 @@ Expected outcome:
 Got it. I've marked this task as done:
  [T][X] mark a task
 ```
-### `delete` - Removes a task <a name="delete"></a> 
+### `delete` - Removes a task 
 Removes a task in the specified position.
 
 Example of usage: 
@@ -93,7 +93,7 @@ Got it. I've removed this task:
 [T][X] mark a task
 Now you have 2 tasks in the list.
 ```
-### `find` - Search for tasks <a name="find"></a> 
+### `find` - Search for tasks
 Search for tasks that matches the specified keyword.
 
 Example of usage: 
@@ -106,7 +106,7 @@ Expected outcome:
 Here are the matching tasks in your list:
 1.[D][] ip submission (by: Jan 12 2017)
 ```
-### `sort` - Search for tasks <a name="sort"></a> 
+### `sort` - Search for tasks
 Sort all tasks by date
 
 Example of usage: 
