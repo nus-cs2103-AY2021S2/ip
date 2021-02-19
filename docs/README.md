@@ -19,17 +19,17 @@ Duke is a personal assistant that helps you keep track of your tasks! It support
 
 ### `todo` - Adds a todo task
 
-Adds a task that you are planning to do into your list of tasks. This task should not have any restrictions on the deadline or location, else use 'deadline' or 'event' instead!
+Adds a task that you are planning to do into your list of tasks. This task should not have any restrictions on the deadline or location, else use *'deadline'* or *'event'* instead!
 
-Format:
+**Format:**
 
 `todo (task)`
 
-Example of usage: 
+**Example of usage:** 
 
 `todo wash clothes`
 
-Expected outcome:
+**Expected outcome:**
 
 `Got it! I have added the following task:`
 
@@ -41,15 +41,15 @@ Expected outcome:
 
 Adds a task with a specified deadline into your list of tasks.
 
-Format:
+**Format:**
 
 `deadline (task) /by (YYYY-MM-DD)`
 
-Example of usage: 
+**Example of usage: **
 
 `deadline Homework /by 2021-03-03`
 
-Expected outcome:
+**Expected outcome:**
 
 `Got it! I have added the following task:`
 
@@ -61,15 +61,15 @@ Expected outcome:
 
 Adds a task with a specified location into your list of tasks.
 
-Format:
+**Format:**
 
 `event (task) /at (location)`
 
-Example of usage: 
+**Example of usage: **
 
 `event dinner /at orchard road`
 
-Expected outcome:
+**Expected outcome:**
 
 `Got it! I have added the following task:`
 
@@ -81,15 +81,15 @@ Expected outcome:
 
 Shows a list of all your completed and uncompleted tasks, indexed from 1-n, where n is the total number of tasks you currently have.
 
-Format:
+**Format:**
 
 `list`
 
-Example of usage: 
+**Example of usage: **
 
 `list`
 
-Expected outcome:
+**Expected outcome:**
 
 `Here are your tasks!`
 
@@ -101,17 +101,17 @@ Expected outcome:
 
 ### `done` - Marks a task as completed
 
-Marks the specified task as completed. Specify the task using its index, which can be found by doing 'list'.
+Marks the specified task as completed. Specify the task using its index, which can be found by doing *'list'*.
 
-Format:
+**Format:**
 
 `done (task index)`
 
-Example of usage: 
+**Example of usage: **
 
 `done 2`
 
-Expected outcome:
+**Expected outcome:**
 
 `Good job, I've marked the task as done!`
 
@@ -119,17 +119,17 @@ Expected outcome:
 
 ### `delete` - Deletes a task
 
-Deletes the specified task from your list. Specify the task using its index, which can be found by doing 'list'.
+Deletes the specified task from your list. Specify the task using its index, which can be found by doing *'list'*.
 
-Format:
+**Format:**
 
 `delete (task index)`
 
-Example of usage: 
+**Example of usage: **
 
 `delete 2`
 
-Expected outcome:
+**Expected outcome:**
 
 `Okay I have removed this task!`
 
@@ -141,15 +141,15 @@ Expected outcome:
 
 Finds 1 or more tasks that contains the specified keyword.
 
-Format:
+**Format:**
 
 `find (keyword)`
 
-Example of usage: 
+**Example of usage: **
 
 `find wash`
 
-Expected outcome:
+**Expected outcome:**
 
 `Here are the matching tasks in your list!`
 
@@ -157,39 +157,39 @@ Expected outcome:
 
 ### `addinfo` - Adds additional information regard the specified task
 
-Updates the specified task with additional information provided. Specify the task using its index, which can be found by doing 'list'.
+Updates the specified task with additional information provided. Specify the task using its index, which can be found by doing *'list'*.
 
-Format:
+**Format:**
 
 `addinfo (task index) (info)`
 
-Example of usage: 
+**Example of usage: **
 
 `addinfo 1 gym clothes`
 
-Expected outcome:
+**Expected outcome:**
 
 `I have added the additional info regarding this task!`
 
 ### `info` - Retrieves additional information regarding the specified task
 
-Retrieves the additional information about the specified task, if any. Specify the task using its index, which can be found by doing 'list'.
+Retrieves the additional information about the specified task, if any. Specify the task using its index, which can be found by doing *'list'*.
 
-A task that contains additional info is marked by [i] when 'list' is called, as shown below:
+A task that contains additional info is marked by [i] when *'list'* is called, as shown below:
 
 `1.[T][][i] wash clothes`
 
 `2.[E][][] dinner (at: orchard road)`
 
-Format:
+**Format:**
 
 `info (task index)`
 
-Example of usage: 
+**Example of usage: **
 
 `info 1`
 
-Expected outcome:
+**Expected outcome:**
 
 `Here is the additonal info regarding this task!`
 
