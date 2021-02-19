@@ -130,4 +130,4 @@ Terminates the program and closes the window
 
 Example of usage:
 
-`bye`
+`see you again!`
