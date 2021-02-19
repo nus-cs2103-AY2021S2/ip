@@ -1,15 +1,25 @@
 package duke;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.application.Platform;
 
 public class Main extends Application {
 
@@ -22,39 +32,79 @@ public class Main extends Application {
     private Button sendButton;
     private Scene scene;
 
-    @Override
-    public void start(Stage stage) throws DukeException, Exception {
-        //Step 1. Formatting the window to look as expected.
+    public void buttonSetting(Button sendButton) {
+        Font font = Font.font("Verdana");
+        sendButton.setPrefWidth(55.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        //sendButton.setFont(font);
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
 
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
 
-        userInput = new TextField();
-        sendButton = new Button("Send");
+        sendButton.setOnMouseClicked((event) -> {
+            try {
+                handleUserInput();
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    dialogContainer.getChildren().addAll(
+                            DialogBox.getUserDialog(new Label(userInput.getText()), new ImageView(user)),
+                            DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
+                    userInput.clear();
+                });
 
-        Alert instruction = new Alert(Alert.AlertType.INFORMATION);
-        instruction.setTitle("Instructions Manual");
-        instruction.setContentText(Ui.greet());
-        instruction.setHeaderText("These are the commands");
-        instruction.show();
+            }
+        });
+    }
 
+    public void vBoxSetting(VBox dialogContainer) {
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setPadding(new Insets(10, 5, 10, 5));
+        dialogContainer.setSpacing(25);
+        Label label = new Label(Ui.greet());
+        label.setMinSize(500,150);
+        label.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
+        Rectangle rect = new Rectangle(500,150);
+        rect.setArcHeight(120.0);
+        rect.setArcWidth(120.0);
+        label.setClip(rect);
+        label.setAlignment(Pos.CENTER);
+        label.setFont(new Font("Verdana Bold", 14));
+        dialogContainer.getChildren().addAll(label);
+        dialogContainer.setAlignment(Pos.CENTER);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
 
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, dialogContainer);
+    public void textFieldSetting(TextField userInput) {
+        userInput.setPrefWidth(580.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
 
-        scene = new Scene(mainLayout);
+        userInput.setOnAction((event) -> {
+            try {
+                handleUserInput();
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    dialogContainer.getChildren().addAll(
+                            DialogBox.getUserDialog(new Label(userInput.getText()), new ImageView(user)),
+                            DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
+                    userInput.clear();
+                });
+            }
+        });
+    }
 
-        stage.setScene(scene);
-        stage.show();
-
-        //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(800);
-        stage.setMinWidth(600.0);
-
-        mainLayout.setPrefSize(600, 800);
+    public void scrollPaneSetting(ScrollPane scrollPane) {
 
         scrollPane.setPrefSize(580, 735);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -63,72 +113,45 @@ public class Main extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+    }
 
-        Label label = new Label(Ui.greet());
-        dialogContainer.getChildren().addAll(label);
+    @Override
+    public void start(Stage stage) throws DukeException, Exception {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        userInput = new TextField();
+        sendButton = new Button("Send");
 
-        userInput.setPrefWidth(580.0);
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton, dialogContainer);
 
-        sendButton.setPrefWidth(55.0);
+        scene = new Scene(mainLayout);
+        Color color = Color.BEIGE;
+        scene.setFill(color);
+
+        stage.setScene(scene);
+        stage.show();
+
+        buttonSetting(sendButton);
+        textFieldSetting(userInput);
+        vBoxSetting(dialogContainer);
+        scrollPaneSetting(scrollPane);
+
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(800);
+        stage.setMinWidth(600.0);
+        mainLayout.setPrefSize(600, 800);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-
-        // more code to be added here later
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (Exception e) {
-                Platform.runLater(() -> {
-                    dialogContainer.getChildren().addAll(
-                            DialogBox.getUserDialog(new Label(userInput.getText()), new ImageView(user)),
-                            DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
-                    userInput.clear();
-                });
-
-            }
-        });
-
-        userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (Exception e) {
-                Platform.runLater(() -> {
-                    dialogContainer.getChildren().addAll(
-                            DialogBox.getUserDialog(new Label(userInput.getText()), new ImageView(user)),
-                            DialogBox.getDukeDialog(getDialogLabel(e.getMessage()), new ImageView(duke)));
-                    userInput.clear();
-                });
-            }
-        });
-
-
     }
 
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
+        textToAdd.setFont(new Font("Verdana Bold", 14));
+        textToAdd.setTextFill(Color.RED);
         return textToAdd;
     }
 
@@ -138,7 +161,10 @@ public class Main extends Application {
             Platform.exit();
         }
         Label userText = new Label(userInput.getText());
+        userText.setFont(new Font("Verdana Bold Italic", 14));
         Label dukeText = new Label(getResponse(userInput.getText()));
+        dukeText.setFont(new Font("Verdana", 13));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))

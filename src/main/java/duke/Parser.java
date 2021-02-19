@@ -103,6 +103,8 @@ public class Parser {
             return DetectDuplicateCommand.runCommand();
         } else if (input.equals("clean")) {
             return DetectDuplicateCommand.cleanDuplicates();
+        } else if (input.equals("help")) {
+            return Ui.helpGuide();
         } else {
             throw new InvalidArgument("Your input is invalid, Please try again");
         }

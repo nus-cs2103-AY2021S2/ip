@@ -6,14 +6,4 @@ package duke;
 
 public class Duke {
 
-    /**
-     * main method run
-     *
-     * @param args
-     * @throws DukeException
-     * @throws Exception
-     */
-    public static void main(String[] args) throws DukeException, Exception {
-        Ui.greet();
-    }
 }

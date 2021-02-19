@@ -2,11 +2,15 @@ package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 class DialogBox extends HBox {
 
@@ -19,8 +23,12 @@ class DialogBox extends HBox {
 
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitHeight(100);
 
+        Circle circle = new Circle(50,50,50);
+        circle.setEffect(new DropShadow(10, Color.BLACK));
+        displayPicture.setClip(circle);
+        displayPicture.setSmooth(true);
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
     }
@@ -33,11 +41,14 @@ class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        DialogBox dBox = new DialogBox(l, iv);
+        dBox.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        return dBox;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+        DialogBox db = new DialogBox(l, iv);
+        db.setBackground(new Background(new BackgroundFill(Color.LIGHTCYAN, CornerRadii.EMPTY, Insets.EMPTY)));
         db.flip();
         return db;
     }
