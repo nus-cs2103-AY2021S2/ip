@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  * Description: A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private Duke duke = new Duke("data/tasks.txt");
+    private Duke duke = new Duke();
 
     /**
      * start: Starts the GUI for Duke
@@ -27,6 +27,7 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            stage.setTitle("Duke - Personal Assistant Chatbot");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().showWelcome();

@@ -12,17 +12,17 @@ import duke.ui.DukeResponses;
  * Description: A class to represent a chatbot program that keeps track of tasks
  */
 public class Duke {
+    private final String FILEPATH = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private DukeResponses dukeResponses;
 
     /**
      * Constructor: creates a new Duke program
-     * @param filePath path where the list of tasks is saved
      */
-    public Duke(String filePath) {
+    public Duke() {
         dukeResponses = new DukeResponses();
-        storage = new Storage(filePath);
+        storage = new Storage(FILEPATH);
         try {
             tasks = new TaskList(storage.loadFile());
         } catch (DukeException e) {
