@@ -38,7 +38,7 @@ management tasks done faster than traditional GUI apps.
 ###Notes about the command format:
 * Words in UPPER_CASE are the parameters to be supplied by the user.
 
-* Commands are case insensitive.
+* Commands are case-insensitive.
 
    * E.g. TODO will match todo.
 * All fields specified in UPPER_CASE must be provided for the command to be valid.
@@ -49,8 +49,8 @@ Adds a todo task to the task list.
 Format: `todo DESCRIPTION`
 
 Examples:
-* todo read book
-* TODO have a meal
+* `todo read book`
+* `TODO have a meal`
 
 ###Adding a Deadline task: `deadline`
 Adds a deadline task to the task list.
@@ -126,3 +126,23 @@ Format: `bye`
 ###Saving the data
 Duke data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+##Command Summary
+Action | Format, Examples 
+------ | ----------------
+todo | `todo DESCRIPTION` e.g. `todo read book`, `TODO have a meal`
+deadline | `deadline DESCRIPTION /by DATE` e.g. `deadline return book /by 2021-10-10`, `Deadline do homework /by 2021-10-12`
+event | `event DESCRIPTION /at DATE` e.g. `event return book /at 2021-10-10`, `EVENT do homework /at 2021-10-12`
+update | `update NUMBER DESCRIPTION` e.g. `update 2 return book`, `update 6 do homework`
+find | `find KEYWORD` e.g. `find return book`, `find book`
+list | `list`
+done | `done NUMBER` e.g. `done 3`, `DONE 2`
+delete | `delete NUMBER` e.g. `delete 3 `, `Delete 1`
+bye | `bye`
+
+
+###Acknowledgement
+* Background image: [link](https://i.pinimg.com/564x/4b/78/f2/4b78f244924f21ba1fc5d150d2c05c35.jpg)
+
+* User image: [link](https://static.wikia.nocookie.net/undertale-au-fanon/images/1/1e/Undertale_frisk_Sprite.png/revision/latest?cb=20200624132041)
+
+* Duke image: [link](https://www.google.com/url?sa=i&url=https%3A%2F%2Fdebatesjungle.fandom.com%2Fwiki%2FMettaton&psig=AOvVaw3srOl5r0-3p2tt80THoApY&ust=1613828616339000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJipup2K9u4CFQAAAAAdAAAAABAD)
