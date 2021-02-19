@@ -28,15 +28,6 @@ public class Duke {
     }
 
     /**
-     * The main method launching Duke
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Application.launch(Main.class, args);
-    }
-
-    /**
      * This method takes in the input from the GUI
      *
      * @param input
@@ -116,5 +107,14 @@ public class Duke {
      */
     public String getResponse(String input) {
         return processGUI(input);
+    }
+
+    /**
+     * The main method launching Duke
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 }
