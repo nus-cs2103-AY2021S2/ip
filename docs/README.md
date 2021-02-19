@@ -1,7 +1,7 @@
 # User Guide
 
 ## Introduction
-Duke is a task manager designed to keep track of your personal tasks.
+Duke is a task manager designed to keep track of your personal duke.
 
 ![Image](Ui.PNG)
 
@@ -19,7 +19,7 @@ Command | Examples
 `event DESCRIPTION /at DATE` | `event career fair /at 2021-03-15`
 `find DESCRIPTION` |`find career fair`
 
-### `list` - lists your existing tasks
+### `list` - lists your existing duke
 
 Example of usage: `list`
 
@@ -31,7 +31,7 @@ Example of usage: `done 3`
 
 Example of usage: `delete 3`
 
-### `bye` - thanks Duke for keeping track of your tasks
+### `bye` - thanks Duke for keeping track of your duke
 
 Example of usage: `bye`
 
@@ -57,7 +57,7 @@ Tells Duke that you have a career fair to attend on 2021 March 15.
 
 Example of usage: `find career fair`
 
-Tells Duke to find if your have any tasks related to career fair.
+Tells Duke to find if your have any duke related to career fair.
 
 ## Acknowledgements
 The images of Pikachu and Psyduck are reproduced from https://premierespeakers.com/pikachu and https://sonicpokemon.fandom.com/wiki/Psyduck respectively
