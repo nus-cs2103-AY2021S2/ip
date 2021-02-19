@@ -23,15 +23,6 @@ public class Ui {
     }
 
     /**
-     * Prints a formatted error message.
-     *
-     * @param text The message to be printed.
-     */
-    public String showErrorResponse(String text) {
-        return "OW MY NOSE!!!\n" + text;
-    }
-
-    /**
      * Prints a formatted message.
      * Overloads previous method.
      *
@@ -39,6 +30,15 @@ public class Ui {
      */
     public String showFormatResponse(PrintedText text) {
         return PrintedText.BORDER.toString() + text + PrintedText.BORDER.toString();
+    }
+
+    /**
+     * Prints a formatted error message.
+     *
+     * @param text The message to be printed.
+     */
+    public String showErrorResponse(String text) {
+        return "OW MY NOSE!!!\n" + text;
     }
 
     /**
