@@ -35,14 +35,14 @@ public class DialogBox extends HBox {
 
         hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,
                 new CornerRadii(5, 5, 5, 5, false),
-                new Insets(5, 5, 5, 50))));
+                new Insets(5, 60, 5, 75))));
         hbox.setPadding(new Insets(5,5,5,50));
         hbox.setSpacing(5);
-        dialog.setText(text);
-        dialog.setPadding(new Insets(15,50,15,15));
-        displayPicture.setImage(img);
 
-        Circle clip = new Circle(40);
+        dialog.setPadding(new Insets(15,15,15,40));
+        displayPicture.setImage(img);
+        dialog.setText(text);
+        Circle clip = new Circle(25);
         clip.setCenterX(displayPicture.getFitWidth() / 2);
         clip.setCenterY(displayPicture.getFitHeight() / 2);
         displayPicture.setClip(clip);
@@ -60,14 +60,14 @@ public class DialogBox extends HBox {
         if (isError) {
             hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTSALMON,
                     new CornerRadii(5, 5, 5, 5, false),
-                    new Insets(5, 50, 5, 5))));
+                    new Insets(5, 75, 5, 60))));
         } else {
             hbox.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK,
                     new CornerRadii(5, 5, 5, 5, false),
-                    new Insets(5, 50, 5, 5))));
+                    new Insets(5, 75, 5, 60))));
         }
         hbox.setPadding(new Insets(5,50,5,5));
-        dialog.setPadding(new Insets(15,15,15,0));
+        dialog.setPadding(new Insets(15,40,15,15));
 
     }
 
