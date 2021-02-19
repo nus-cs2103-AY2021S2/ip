@@ -6,7 +6,7 @@ Hello! I am **Ranga**! Your personal tasks manager chatbot! I can keep track of 
 
 ## Quickstart
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest jar from here:
+2. Download the latest jar from here: [](https://github.com/jrvslam/ip/releases/tag/A-Release)
 3. Copy the file to the folder you want to use as the home folder for Ranga.
 4. Double-click the file to start the app. 
 5. Type in your commands and hit enter.
