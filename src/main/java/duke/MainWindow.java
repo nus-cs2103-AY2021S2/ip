@@ -1,11 +1,16 @@
 package duke;
 
+import java.util.concurrent.CompletableFuture;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -42,10 +47,24 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+
+        DialogBox user = DialogBox.getUserDialog(input, userImage);
+        DialogBox duke = DialogBox.getDukeDialog(response, dukeImage);
+        HBox.setHgrow(user, Priority.ALWAYS);
+        HBox.setHgrow(duke, Priority.ALWAYS);
+
+        dialogContainer.getChildren().addAll(user, duke);
+
         userInput.clear();
+        if (input.equalsIgnoreCase("bye")) {
+            CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+            cf.thenRun(Platform::exit).thenRun(() -> System.exit(0));
+        }
     }
 }
