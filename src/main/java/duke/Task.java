@@ -4,9 +4,9 @@ package duke;
  * Provides super class for types of tasks.
  */
 public class Task {
-    public String description;
-    public boolean isDone;
-    public String taskType;
+    private String description;
+    private boolean isDone;
+    private String taskType;
 
     /**
      * Initialises Task objects.
@@ -61,6 +61,15 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Updates description of the task.
+     *
+     * @param newDescription new description user wants to edit.
+     */
+    public void updateDescription(String newDescription) {
+        this.description = newDescription;
     }
 
     /**

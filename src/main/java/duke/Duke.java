@@ -2,14 +2,13 @@ package duke;
 
 import javafx.fxml.FXML;
 
-
 /**
  * Contains the main method to be run.
  */
 public class Duke {
-    public Storage storage;
-    public TaskList taskList;
-    public Ui ui;
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
     /**
      * Initialises the Duke object and loads hard disk data to current taskList.
@@ -19,7 +18,11 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        taskList = new TaskList(storage.loadData());
+        try {
+            taskList = new TaskList(storage.loadData());
+        } catch (DukeException e) {
+            e.getMessage();
+        }
     }
 
     public Ui getUi() {
@@ -29,6 +32,7 @@ public class Duke {
     /**
      * Reads user input and provides the logic for handling each user input.
      *
+     * @param duke the initialised Duke object.
      * @param userInput refers to user input from text field.
      */
     @FXML
@@ -41,7 +45,7 @@ public class Duke {
             }
             return message;
         } catch (DukeException e) {
-            return e.toString();
+            return e.getMessage();
         }
     }
 }

@@ -25,11 +25,17 @@ public class Storage {
      * Loads the data in the hard disk location specified by file path.
      *
      * @return an array list of the tasks saved in the hard disk.
+     * @throws DukeException if task type is not recognised or file or directory cannot be created.
      */
-    public ArrayList<Task> loadData() {
+    public ArrayList<Task> loadData() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             File file = new File(filePath);
+            File directory = file.getParentFile();
+
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
 
             if (!file.exists()) {
                 file.createNewFile();
@@ -41,7 +47,11 @@ public class Storage {
                 taskList.add(stringToTask(input));
             }
         } catch (IOException e) {
-            System.out.println("Oops sorry, unable to create a new file.");
+            throw new DukeException("Oops sorry, unable to create a new file.");
+        } catch (SecurityException e) {
+            throw new DukeException("Oops sorry, unable to create a new directory.");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
         return taskList;
     }
@@ -51,8 +61,9 @@ public class Storage {
      *
      * @param input each individual string task data from the file in the hard disk.
      * @return the Task object of the String description.
+     * @throws DukeException if task type is not recognised.
      */
-    public Task stringToTask(String input) {
+    public Task stringToTask(String input) throws DukeException {
         String[] splitTask = input.split(" \\| ");
         String taskType = splitTask[0];
         String isDone = splitTask[1];
@@ -72,7 +83,7 @@ public class Storage {
             task = new Todo(description);
             break;
         default:
-            System.out.println("I don't recognise this task type!");
+            throw new DukeException("I don't recognise this task type!");
         }
 
         if (isDone.equals("1")) {
@@ -85,8 +96,9 @@ public class Storage {
      * Writes the specified taskList into the specified file in the hard disk.
      *
      * @param taskList the list of tasks to be written into file.
+     * @throws DukeException if task type is not recognised or unable to write to file.
      */
-    public void writeToFile(ArrayList<Task> taskList) {
+    public void writeToFile(ArrayList<Task> taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (int i = 0; i < taskList.size(); i++) {
@@ -95,7 +107,9 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Oops, unable to write to file!");
+            throw new DukeException("Oops, unable to write to file!");
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 
@@ -104,8 +118,9 @@ public class Storage {
      *
      * @param task the individual tasks from the taskList to be converted.
      * @return a String object of the task.
+     * @throws DukeException if task type is not recognised.
      */
-    public String taskToString(Task task) {
+    public String taskToString(Task task) throws DukeException {
         int isDone;
         String converted = " ";
         String taskType = task.getTaskType();
@@ -130,7 +145,7 @@ public class Storage {
             converted = String.format("T | %d | %s", isDone, description);
             break;
         default:
-            System.out.println("I don't recognise this task type!");
+            throw new DukeException("I don't recognise this task type!");
         }
         return converted;
     }

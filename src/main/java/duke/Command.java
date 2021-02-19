@@ -4,19 +4,6 @@ package duke;
  * Provides abstract class for types of commands.
  */
 public abstract class Command {
-    String description;
-    int index;
-
-    public Command() {
-    }
-
-    public Command(int index) {
-        this.index = index;
-    }
-
-    public Command(String description) {
-        this.description = description;
-    }
 
     /**
      * Provides abstract method that executes command.
