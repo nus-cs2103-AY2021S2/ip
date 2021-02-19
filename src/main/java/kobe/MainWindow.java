@@ -52,11 +52,4 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    public void greet() {
-//        String response = kobe.getGreeting();
-        String response = "Hello! I'm Kobe.\n What can I do for you?";
-        dialogContainer.getChildren().addAll(
-                DialogBox.getKobeDialog(response, kobeImage)
-        );
-    }
 }

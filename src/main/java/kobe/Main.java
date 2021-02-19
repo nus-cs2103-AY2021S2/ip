@@ -31,12 +31,6 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setKobe(kobe);
-            stage.setOnShown((event) -> {
-               String response = "Hello! I'm Kobe.\n What can I do for you?";
-               VBox dialogContainerTemp = new VBox();
-               dialogContainerTemp.getChildren().addAll(
-                    DialogBox.getKobeDialog(response, kobeImage));
-            });
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

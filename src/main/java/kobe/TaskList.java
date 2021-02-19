@@ -9,9 +9,6 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    public static String ind = "    ";
-    public static String line = ind + "____________________________________________________________\n" + ind;
-    public static String line2 = ind + "____________________________________________________________\n";
 
     /**
      * Constructor for TaskList.
