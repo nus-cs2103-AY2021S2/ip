@@ -50,7 +50,7 @@ public final class UserInputTokenizer {
         }
 
         // Read command and text
-        tokenSet.set("/command", extractOption(tokens));
+        tokenSet.set("/command", extractCommand(tokens));
         tokenSet.set("/text", extractText(tokens));
 
         // Process arguments
@@ -59,6 +59,11 @@ public final class UserInputTokenizer {
             tokenSet.set(optionToken, extractText(tokens));
         }
         return tokenSet;
+    }
+
+    private static String extractCommand(Queue<String> tokens) {
+        assert !tokens.isEmpty();
+        return tokens.poll().toLowerCase();
     }
 
     private static String extractOption(Queue<String> tokens) {
