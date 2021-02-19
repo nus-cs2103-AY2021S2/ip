@@ -1,32 +1,150 @@
-# Duke Project
+# User Guide
 
-Say hello to Duke! It is a personal assistant chatbot to help you manage your tasks.\
-Given below are instructions on how to use it so give it a go!
+## Features 
 
-## Setting up in Intellij
+### Adding a todo task: `todo`
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Add a todo task.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/duke/launcher.java` file, right-click it, and choose `Run Launcher.main()`. There should be a popup for you to interact with Duke.
+Example of usage:
+`todo homework`
 
-## Commands
+Expected outcome:
+```
+Got it. I've added this task:
+  [T][ ] homework
+Now you have 1 task in the list.
+````
 
-Here are some of the ways for Duke to understand you:
 
-Action | Command Format | Examples
------------- | ------------- | -------------
-To list all current tasks | `list` | e.g. `list`
-To add a todo task | `todo` | e.g. `todo homework`
-To add a deadline task | `deadline` | e.g. `deadline project /by 2020-01-01 23:59`
-To add an event task | `event` | e.g. `event party /at 2020-01-01 18:00`
-To delete a task | `delete` | e.g. `delete 2` will delete the 2nd task in the list
-To mark a task as done | `done` | e.g. `done 3` will mark the 3rd task in the list as done
-To find tasks with a <br />specific keyword | `find` | e.g. `find book` will list all existing tasks with the <br />word `book`
-To list tasks with a <br />specific date | `taskdate` | e.g. `taskdate 2020-01-01` will list all existing tasks <br />with the date `2020-01-01`
-To exit | `bye` | e.g. `bye`
+### Adding a deadline task: `deadline`
+
+Add a deadline task.
+
+Example of usage: 
+`deadline project /by 2020-01-01 23:39`
+
+Expected outcome:
+```
+Got it. I've added this task:
+  [D][ ] project (by: Jan 1 2020, 11:59PM)
+Now you have 2 tasks in the list.
+````
+
+
+### Adding an event task: `event`
+
+Add an event task.
+
+Example of usage: 
+`event party /at 2020-01-01 18:00`
+
+Expected outcome:
+```
+Got it. I've added this task:
+  [E][ ] party (at: Jan 01 2020, 6:00PM)
+Now you have 3 tasks in the list.
+````
+
+
+### Listing all tasks: `list`
+
+List all existing tasks.
+
+Example of usage: 
+`list`
+
+Expected outcome:
+```
+Here are the tasks in your list:
+1.[T][ ] homework
+2.[D][ ] project (by: Jan 1 2020, 11:59PM)
+3.[E][ ] party (at: Jan 01 2020, 6:00PM)
+```
+
+
+### Deleting a task: `delete`
+
+Delete a specified task.
+
+Example of usage: `delete 2`
+
+Expected outcome:
+```
+Noted. I've removed this task:
+  [D][ ] project (by: Jan 1 2020, 11:59PM)
+Now you have 2 tasks in the list.
+```
+
+
+### Marking a task as done: `done`
+
+Mark a specified task as done.
+
+Example of usage: 
+`done 1`
+
+Expected outcome:
+```
+Nice! I've marked this task as done:
+[T][X] homework
+```
+
+
+### Finding tasks with a specified keyword: `find`
+
+Find tasks that contain a specified keyword.
+
+Example of usage: 
+`find party`
+
+Expected outcome:
+```
+Here are the matching tasks in your list:
+1.[E][ ] party (at: Jan 01 2020, 6:00PM)
+```
+
+
+### Listing tasks with a specified date: `taskdate`
+
+Listings tasks that have a specified date.
+
+Example of usage: 
+`taskdate 2020-01-01`
+
+Expected outcome:
+```
+Here are the tasks on Jan 1 2020 in your list:
+1.[D][ ] project (by: Jan 1 2020, 11:59PM)
+2.[E][ ] party (at: Jan 01 2020, 6:00PM)
+```
+
+
+### Exiting the program: `bye`
+
+Exit the program.
+
+Example of usage: 
+`bye`
+
+Expected outcome:
+```
+Bye. Hope to see you again soon!
+```
+
+
+
+
+## Command Summary
+
+Command Format | Examples
+------------- | -------------
+`todo` | e.g. `todo homework`
+`deadline` | e.g. `deadline project /by 2020-01-01 23:59`
+`event` | e.g. `event party /at 2020-01-01 18:00`
+`list` | e.g. `list`
+`delete` | e.g. `delete 2` will delete the 2nd task in the list
+`done` | e.g. `done 3` will mark the 3rd task in the list as done
+`find` | e.g. `find book` will list all existing tasks with the word `book`
+`taskdate` | e.g. `taskdate 2020-01-01` will list all existing tasks with the date `2020-01-01`
+`bye` | e.g. `bye`
