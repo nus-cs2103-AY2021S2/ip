@@ -13,7 +13,8 @@ public class Ui {
     public String printStart() {
         String res = String.format("Hello! I'm Duke" + "\n" + "What can I do for " +
                         "you?\n");
-        res += String.format("Here are the list of all commands: \n\n" +
+        final String commandTypes = String.format("Here are the list of all commands:" +
+                " \n\n" +
                 "list - lists all existing tasks\n" +
                 "todo [insert task] - creates a todo task\n" +
                 "deadline [insert deadline] - creates a deadline\n" +
@@ -22,6 +23,7 @@ public class Ui {
                 "find [insert keyword] [search type(optional)] - finds tasks " +
                 "corresponding \n to keyword\n" +
                 "done [insert index] - marks task as done");
+        res += commandTypes;
         return res;
     }
 

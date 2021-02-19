@@ -15,7 +15,6 @@ public class Storage {
     // Name of text file to store tasks
     private final static String sourceFile = "/Duke.txt";
 
-
     /**
      * Creating directory if it does not exist.
      */

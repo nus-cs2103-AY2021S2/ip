@@ -19,7 +19,6 @@ public class TaskList {
 
     }
 
-
     /**
      * Method that logs all existing tasks and returns a string that can be logged
      * into the local disk in data/Duke.txt.
@@ -41,7 +40,6 @@ public class TaskList {
         }
         return out.toString();
     }
-
 
     /**
      * Adds current task to list of tasks.
