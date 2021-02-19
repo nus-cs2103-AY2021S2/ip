@@ -69,7 +69,7 @@ class CommandParserTest {
 
     @Test
     void parse_doneCommand_success() {
-        String[] inputs = {"done 0", " done  1", "done  2 "};
+        String[] inputs = {"done 1", " done  10", "done  100 "};
         for (String input: inputs) {
             try {
                 assertTrue(CommandParser.parseCommand(input).getClass().isAssignableFrom(DoneCommand.class));
@@ -159,7 +159,7 @@ class CommandParserTest {
 
     @Test
     void parse_invalidDoneCommand_jhinExceptionThrown() {
-        String[] inputs = {"done", " done  one", "done  two "};
+        String[] inputs = {"done", " done  one", "done  two ", "done -1"};
         for (String input: inputs) {
             try {
                 CommandParser.parseCommand(input);
