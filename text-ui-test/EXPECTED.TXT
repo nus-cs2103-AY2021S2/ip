@@ -1,7 +1,80 @@
+-------------------------------------
+An error was encountered when loading from the provided filepath.
+-------------------------------------
+-------------------------------------
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+-------------------------------------
+-------------------------------------
+Got it. I've added this task:
+  added: [T][ ] read up on blockchain
+Now you have 1 tasks in the list.
+-------------------------------------
+-------------------------------------
+Got it. I've added this task:
+  added: [E][ ] dinner appointment (at: Jewel)
+Now you have 2 tasks in the list.
+-------------------------------------
+-------------------------------------
+Got it. I've added this task:
+  added: [D][ ] CS3244 Assignment 1 (by: Mar 18 2021 8:00 AM)
+Now you have 3 tasks in the list.
+-------------------------------------
+-------------------------------------
+Got it. I've added this task:
+  added: [D][ ] CS3244 Assignment 2 (by: Mar 19 2021 6:47 PM)
+Now you have 4 tasks in the list.
+-------------------------------------
+-------------------------------------
+Got it. I've added this task:
+  added: [D][ ] CS3244 Assignment 3 (by: Mar 20 2021)
+Now you have 5 tasks in the list.
+-------------------------------------
+-------------------------------------
+Here are the tasks in your list:
+1.[T][ ] read up on blockchain
+2.[E][ ] dinner appointment (at: Jewel)
+3.[D][ ] CS3244 Assignment 1 (by: Mar 18 2021 8:00 AM)
+4.[D][ ] CS3244 Assignment 2 (by: Mar 19 2021 6:47 PM)
+5.[D][ ] CS3244 Assignment 3 (by: Mar 20 2021)
+-------------------------------------
+-------------------------------------
+Nice! I've marked this task as done:
+[D][X] CS3244 Assignment 1 (by: Mar 18 2021 8:00 AM)
+-------------------------------------
+-------------------------------------
+Noted. I've removed this task:
+  [T][ ] read up on blockchain
+Now you have 4 tasks in the list.
+-------------------------------------
+-------------------------------------
+Here are the tasks in your list:
+1.[E][ ] dinner appointment (at: Jewel)
+2.[D][X] CS3244 Assignment 1 (by: Mar 18 2021 8:00 AM)
+3.[D][ ] CS3244 Assignment 2 (by: Mar 19 2021 6:47 PM)
+4.[D][ ] CS3244 Assignment 3 (by: Mar 20 2021)
+-------------------------------------
+-------------------------------------
+☹ OOPS!!! I'm sorry, but I the description of the task cannot be empty :-(
+-------------------------------------
+-------------------------------------
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+-------------------------------------
+-------------------------------------
+☹ OOPS!!! The datetime description of a deadline must be either of the form'YYYY-MM-DD' or 'YYYY-MM-DD hh:mm'
+-------------------------------------
+-------------------------------------
+☹ OOPS!!! I'm sorry, but I the description of the task cannot be empty :-(
+-------------------------------------
+-------------------------------------
+☹ OOPS!!! I'm sorry, but there is no such task :-(
+-------------------------------------
+-------------------------------------
+Bye. Hope to see you soon!
+-------------------------------------

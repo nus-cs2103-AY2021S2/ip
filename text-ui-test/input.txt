@@ -1,0 +1,15 @@
+todo read up on blockchain
+event dinner appointment /at Jewel
+deadline CS3244 Assignment 1 /by 2021-03-18 08:00
+deadline CS3244 Assignment 2 /by 2021-03-19 18:47
+deadline CS3244 Assignment 3 /by 2021-03-20
+list
+done 3
+delete 1
+list
+event
+invalid
+deadline CS3244 Assignment 3 /by 2021-03-2
+todo
+done 5
+bye

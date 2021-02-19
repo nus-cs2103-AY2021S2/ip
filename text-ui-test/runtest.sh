@@ -12,15 +12,20 @@ then
     rm ACTUAL.TXT
 fi
 
+if [ -e "./data/tasks.txt" ]
+then
+  rm data/tasks.txt
+fi
+
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
+if ! /usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*/*.java
 then
     echo "********** BUILD FAILURE **********"
     exit 1
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
