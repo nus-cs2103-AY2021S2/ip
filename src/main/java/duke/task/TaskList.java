@@ -98,17 +98,21 @@ public class TaskList {
 
             newTask = new EventTask(descriptionArr[0], descriptionArr[1]);
         }
-        if (isDone) {
-            newTask.markAsDone();
-        }
-        this.tasks.add(newTask);
-        if (!isReadingFile) {
+
+        if (isReadingFile) {
+            if (isDone) {
+                newTask.markAsDone();
+            }
+            this.tasks.add(newTask);
+            return "";
+        } else {
+            storage.checkForDuplicate(newTask.toString());
+            this.tasks.add(newTask);
             storage.appendToFile("data/duke.txt", newTask.toString());
             return ("Got it. I've added this task: \n"
                     + "  " + newTask + "\n"
                     + "Now you have " + this.tasks.size() + " tasks in the list.");
         }
-        return "";
     }
 
     /**

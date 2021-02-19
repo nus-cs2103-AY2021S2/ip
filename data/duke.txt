@@ -2,4 +2,4 @@
 [E][X] party (at: Mar 3 2020, 8:00PM)
 [T][ ] book review
 [E][ ] book release (at: Jan 1 2021, 6:00PM)
-[T][ ] clean room
+[T][X] clean room
