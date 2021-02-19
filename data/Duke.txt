@@ -1,5 +1,5 @@
-T||read book
-E||project meeting | Mon 2-4pm
-D|X|return book | Sunday
-T||summary pages
-E||prop up markets | Tue 6pm
+T|| read book
+E|| project meeting| Mon2-4pm
+T|| summary pages
+E|| prop up markets| Tue 6pm
+D|| return book |2020-08-25

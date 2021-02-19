@@ -39,6 +39,11 @@ public class Storage {
         out.flush();
     }
 
+    public static void main(String[] args) throws IOException {
+        Storage storage = new Storage();
+        storage.loadFile();
+    }
+
     /**
      * Method that loads primary file from local disk. Takes in the stored string in
      * text file stored locally, and parses it into a List containing tasks.
@@ -68,7 +73,9 @@ public class Storage {
                     taskList.add(new Event(description, eachTask[3], isDone));
                 } else {
                     assert eachTask.length >=4;
-                    taskList.add(new Deadline(description, eachTask[3], isDone));
+                    String eventDate = eachTask[eachTask.length - 1].replaceAll("\\s+",
+                            "");
+                    taskList.add(new Deadline(description, eventDate, isDone));
                 }
             }
         }
