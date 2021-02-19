@@ -7,7 +7,7 @@ now be a breeze (风) !
 
 ## Quick Start
 1. Ensure you have `Java 11` or above installed on your computer.
-2. Download the latest release of `Hayate.jar` from [here](url).
+2. Download the latest release of `Hayate.jar` from [here](https://github.com/khiaxeng/ip/releases/tag/v0.4).
 3. Copy `Hayate.jar` to a directory of your choice.
 4. Double-click `Hayate.jar` to run the app.
 
