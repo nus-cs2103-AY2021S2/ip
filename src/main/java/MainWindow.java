@@ -44,10 +44,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.setPadding(new Insets(5,5,5,5));
         //dialogContainer.setBackground(new Background(new BackgroundFill(Color.LAVENDER, CornerRadii.EMPTY,
         //        Insets.EMPTY)));
-        dialogContainer.setBackground(new Background(new BackgroundImage(new Image(
-                this.getClass().getResourceAsStream("images/bg(2).jpg")), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(BackgroundSize.AUTO,
-                BackgroundSize.AUTO, false, false, false, true))));
+        //dialogContainer.setBackground(new Background(new BackgroundImage(new Image(
+        //        this.getClass().getResourceAsStream("images/bg(2).jpg")), BackgroundRepeat.REPEAT,
+        //        BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+
     }
 
     public void setDuke(Duke d) {
