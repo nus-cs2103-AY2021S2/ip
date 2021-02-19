@@ -1,13 +1,14 @@
-/**
- * Doge Duke implements a virtual pet application that
- * returns different commands passed by owner (user).
- *
- * @author Chia Jia-Xi, Kymie
+/*
+  Doge Duke implements a virtual pet application that
+  returns different commands passed by owner (user).
+
+  @author Chia Jia-Xi, Kymie
  * @version 1.0
  * @since 2021-01-31
  */
 
-import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +41,6 @@ public class Duke {
 
         System.out.println(spacer + greet + spacer);
 
-        int ctr = 0;
         ArrayList<Command> commands = new ArrayList<Command>();
         String separator = " ";
 
@@ -63,7 +63,7 @@ public class Duke {
                     printList(commands);
                     System.out.println(spacer);
 
-                // To recognise Done user input
+                    // To recognise Done user input
                 } else if (input.contains("done")) {
                     String[] doneCommand = input.split(separator);
                     int id = Integer.parseInt(doneCommand[1]) - 1;
@@ -102,50 +102,54 @@ public class Duke {
                         int len = commands.size();
                         System.out.println(spacer
                                 + "Mlem I've added a new command for you to do:\n"
-                                + commands.get(len-1)
+                                + commands.get(len - 1)
                                 + "\n"
                                 + "Now I can do a total of "
                                 + len
                                 + " commands!"
                                 + spacer);
 
-                    // To recognise Event user input
+                        // To recognise Event user input
                     } else if (input.contains("event")) {
                         String[] inputTime = input.split(" /at ");
-                        command = new Event(inputTime[0].substring(6), inputTime[1]);
+                        LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
+                        command = new Event(inputTime[0].substring(6), parseDate);
                         commands.add(command);
                         int len = commands.size();
                         System.out.println(spacer
                                 + "Much wow! I've added a new command with an Event:\n"
-                                + commands.get(len-1)
+                                + commands.get(len - 1)
                                 + "\n"
                                 + "Now I can do a total of "
                                 + len
                                 + " commands!"
                                 + spacer);
 
-                    // To recognise Deadline user input
+                        // To recognise Deadline user input
                     } else if (input.contains("deadline")) {
                         String[] inputTime = input.split(" /by ");
-                        command = new Deadline(inputTime[0].substring(9), inputTime[1]);
+                        LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
+                        command = new Deadline(inputTime[0].substring(9), parseDate);
                         commands.add(command);
                         int len = commands.size();
                         System.out.println(spacer
                                 + "Woofers! I've added a new command with a Ded-line:\n"
-                                + commands.get(len-1)
+                                + commands.get(len - 1)
                                 + "\n"
                                 + "Now I can do a total of "
                                 + len
                                 + " commands!"
                                 + spacer);
 
-                    } else {}
+                    } else {
+                    }
                 }
-
+            }catch (DateTimeParseException e) {
+                    System.out.println("This date doesnt exist! "
+                            + "The right format should be in yyyy-mm-dd.");
             } catch (Exception e) {
                 System.out.println(e);
             }
-
         }
         sc.close();
     }
