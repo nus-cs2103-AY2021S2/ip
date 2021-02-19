@@ -61,6 +61,7 @@
         <property name="specialImportsRegExp" value="^org\."/>
         <property name="thirdPartyPackageRegExp" value="^com\."/>
         <property name="sortImportsInGroupAlphabetically" value="true"/>
+        <property name="separateLineBetweenGroups" value="true"/>
     </module>
 
     <!-- Checks for redundant import statements.
@@ -340,6 +341,7 @@
 
     <module name="Indentation">
       <property name="caseIndent" value="0" />
+      <property name="arrayInitIndent" value="8"/>
     </module>
 
     <module name="NoWhitespaceBefore">

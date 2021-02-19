@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-
 /**
  * Storage handles the loading of tasks from the file and making changes
  * to the file based on user commands.
