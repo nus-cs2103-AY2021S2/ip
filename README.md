@@ -36,6 +36,7 @@ Note: All commands are case insensitive.
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/deadline.png?raw=true">
   <br />
+  <br />
 </p>
 
 ### Delete a task:
@@ -46,6 +47,7 @@ Note: All commands are case insensitive.
 * Example: 
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/delete.png?raw=true">
+  <br />
   <br />
 </p>
 
@@ -58,6 +60,7 @@ Note: All commands are case insensitive.
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/done.png?raw=true">
   <br />
+  <br />
 </p>
 
 ### List all tasks:
@@ -69,6 +72,7 @@ Note: All commands are case insensitive.
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/list.png?raw=true">
   <br />
+  <br />
 </p>
 
 ### Find tasks: 
@@ -79,6 +83,7 @@ Note: All commands are case insensitive.
 * Example:
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/find.png?raw=true">
+  <br />
   <br />
 </p>
 
@@ -96,5 +101,6 @@ Note: All commands are case insensitive.
 * Example:
 <p align="left">
   <img width="50%" src="https://github.com/oeiyiping/ip/blob/master/screenshots/sort.png?raw=true">
+  <br />
   <br />
 </p>
