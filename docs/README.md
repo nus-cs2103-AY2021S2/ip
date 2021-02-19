@@ -32,6 +32,7 @@ Example: `bye`
 Shows available commands and their formats
 
 Format: `help`
+
 ![Help](Help.PNG)
 
 ---
