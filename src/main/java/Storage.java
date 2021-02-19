@@ -67,6 +67,15 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Helps to set tag and done if they exist.
+     *
+     * @param hashIndex Index at which the hash is located.
+     * @param doneIndicator Character indicating if the task is done.
+     * @param task Task that is being created.
+     * @param list List of all tasks.
+     * @param data User's command.
+     */
     public void helperForTaskCreationFromData(int hashIndex, Character doneIndicator, Task task, List<Task> list,
                                               String data) {
         if (hashIndex != INVALID_INDEX) {
@@ -115,16 +124,17 @@ public class Storage {
                 case 'D':
                     String deadlineDescription = data.substring(START_OF_DESCRIPTION, startingIndex - INDEX_OFFSET);
                     String by = data.substring(startingIndex + OFFSET_TO_DATE_TIME, endingIndex);
-                    task = new Deadline(deadlineDescription, DateTimeHandler.convertDateTime(by));
+                    task = new Deadline(deadlineDescription, DateTimeHandler.parseStringIntoLocalDateTime(by));
                     break;
                 case 'E':
                     String eventDescription = data.substring(START_OF_DESCRIPTION, startingIndex - INDEX_OFFSET);
                     String time = data.substring(startingIndex + OFFSET_TO_DATE_TIME, endingIndex);
-                    task = new Event(eventDescription, DateTimeHandler.convertDateTime(time));
+                    task = new Event(eventDescription, DateTimeHandler.parseStringIntoLocalDateTime(time));
                     break;
                 default:
                     break;
                 }
+
                 if (type == 'T' | type == 'D' | type == 'E') {
                     helperForTaskCreationFromData(findHash, isDone, task, tasks, data);
                 }

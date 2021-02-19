@@ -6,9 +6,10 @@ import java.time.LocalDateTime;
  */
 public class Parser {
 
-    public static final int INDEX_OFFSET = 1;
-    public static final int OFFSET_TO_NEXT_REQUIRED_DATA = 4;
-    public static final int INVALID_INDEX = -1;
+    protected static final int INDEX_OFFSET = 1;
+    protected static final int OFFSET_TO_NEXT_REQUIRED_DATA = 4;
+    protected static final int INVALID_INDEX = -1;
+    protected static final int STARTING_INDEX = 0;
 
     protected Storage storage;
     protected TaskList tasks;
@@ -73,7 +74,7 @@ public class Parser {
      * @throws DukeException On validation error.
      */
     public Task findTask() throws DukeException {
-        if (command.substring(0, index).equals("tag")) {
+        if (command.substring(STARTING_INDEX, index).equals("tag")) {
             taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET, findSlash - INDEX_OFFSET));
         } else {
             taskIdentifier = Integer.parseInt(command.substring(index + INDEX_OFFSET));
@@ -85,8 +86,8 @@ public class Parser {
 
     /**
      * Handles a ToDo, Deadline or Event command.
-     * @param type A Character to indicate type of command.
      *
+     * @param type A Character to indicate type of command.
      * @return A string with the response to the command.
      * @throws IOException On file error when adding the task
      * to the file in the hard disk.
@@ -196,7 +197,7 @@ public class Parser {
             findSlash = command.indexOf('/');
 
             if (index > INVALID_INDEX) {
-                String type = command.substring(0, index);
+                String type = command.substring(STARTING_INDEX, index);
                 switch (type) {
                 case "todo":
                     return handleATaskCreation('T');

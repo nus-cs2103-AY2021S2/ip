@@ -24,7 +24,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTimeHandler.parseDateTime(by) + ") "
+        return "[D]" + super.toString() + " (by: " + DateTimeHandler.parseLocalDateTimeIntoString(by) + ") "
                 + (isThereTag ? getTag() : "");
     }
 }

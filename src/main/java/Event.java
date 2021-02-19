@@ -22,7 +22,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DateTimeHandler.parseDateTime(time) + ") "
+        return "[E]" + super.toString() + " (at: " + DateTimeHandler.parseLocalDateTimeIntoString(time) + ") "
                 + (isThereTag ? getTag() : "");
     }
 }

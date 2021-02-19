@@ -3,11 +3,12 @@
  */
 public class Ui {
 
-    public static final int EMPTY_LIST = 0;
-    public static final int SINGLE_TASK_IN_LIST = 1;
+    protected static final int EMPTY_LIST = 0;
+    protected static final int SINGLE_TASK_IN_LIST = 1;
 
     /**
      * Prints the response depending on whether the list has 1 or more than 1 task.
+     *
      * @param taskListSize Number of tasks in the list.
      * @return A String depending on whether there is 1 task or more than 1 task.
      */

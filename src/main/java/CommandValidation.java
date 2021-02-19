@@ -6,9 +6,9 @@ import java.util.List;
  */
 public class CommandValidation {
 
-    public static final int VALID_INDEX_BOUND = -1;
-    public static final int INDEX_OFFSET = 1;
-    public static final int STARTING_INDEX = 0;
+    protected static final int VALID_INDEX_BOUND = -1;
+    protected static final int INDEX_OFFSET = 1;
+    protected static final int STARTING_INDEX = 0;
 
     /**
      * Checks if the user input is within the list of accepted commands.
@@ -43,30 +43,6 @@ public class CommandValidation {
     }
 
     /**
-     * Checks if the tag/deadline/event commands are valid.
-     *
-     * @param command User's command input.
-     * @param findSlash Position of slash in the input.
-     * @throws DukeException On invalid input.
-     */
-    public static void checkForContentAfterSlash(String command, int findSlash) throws DukeException {
-        boolean isSlashAbsent = (findSlash == VALID_INDEX_BOUND);
-        boolean isDescriptionNotComplete = command.endsWith("/");
-        boolean isDescriptionNotValid = command.substring(findSlash + INDEX_OFFSET).isBlank();
-
-        int index = command.indexOf(' ');
-        String commandType = command.substring(STARTING_INDEX, index);
-
-        if (isSlashAbsent || isDescriptionNotComplete || isDescriptionNotValid) {
-            if (commandType.equals("tag")) {
-                throw new DukeException(":( OOPS! Please input a valid tag");
-            } else {
-                throw new DukeException(":( OOPS! Please input a valid time/date");
-            }
-        }
-    }
-
-    /**
      * Checks if the syntax for commands with time and date is correct.
      *
      * @param taskType A Character indicating the type of task.
@@ -96,6 +72,31 @@ public class CommandValidation {
             break;
         default:
             break;
+        }
+    }
+
+
+    /**
+     * Checks if the content of the tag/deadline/event commands are valid.
+     *
+     * @param command User's command input.
+     * @param findSlash Position of slash in the input.
+     * @throws DukeException On invalid input.
+     */
+    public static void checkForContentAfterSlash(String command, int findSlash) throws DukeException {
+        boolean isSlashAbsent = (findSlash == VALID_INDEX_BOUND);
+        boolean isDescriptionNotComplete = command.endsWith("/");
+        boolean isDescriptionNotValid = command.substring(findSlash + INDEX_OFFSET).isBlank();
+
+        int index = command.indexOf(' ');
+        String commandType = command.substring(STARTING_INDEX, index);
+
+        if (isSlashAbsent || isDescriptionNotComplete || isDescriptionNotValid) {
+            if (commandType.equals("tag")) {
+                throw new DukeException(":( OOPS! Please input a valid tag");
+            } else {
+                throw new DukeException(":( OOPS! Please input a valid time/date");
+            }
         }
     }
 

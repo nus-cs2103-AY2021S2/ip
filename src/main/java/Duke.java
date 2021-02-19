@@ -1,11 +1,11 @@
 public class Duke {
 
-    static final String PATH = "data/tasks.txt";
+    protected static final String PATH = "data/tasks.txt";
 
     protected Parser parser;
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
 
     /**
      * Creates a new instance of Duke.
