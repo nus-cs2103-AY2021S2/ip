@@ -128,3 +128,7 @@ Example of usage:
     
     bye
 
+# Acknowledgements
+User and Duke pictures
+
+http://brendantobin.blogspot.com/2017/08/modok-and-modam.html 

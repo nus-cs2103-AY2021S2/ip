@@ -23,8 +23,9 @@ public class DukeException extends Exception {
     }
 
     /**
+     * Returns an error message
      *
-     * @return
+     * @return Returns the error message as a String
      */
     public String printMessage() {
         return this.message;

@@ -16,15 +16,11 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/modam.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/modok.jpg"));
-
-    @FXML public Button buttonIntro;
 
     @FXML
     public void initialize() {

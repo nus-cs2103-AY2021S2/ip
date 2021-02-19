@@ -1,15 +1,9 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import duke.Deadline;
 import duke.DukeException;
-import duke.Event;
 import duke.Parser;
 import duke.Storage;
-import duke.Task;
 import duke.TaskList;
-import duke.Todo;
 import duke.Ui;
+import duke.CommandHandler;
 import javafx.application.Platform;
 
 
@@ -24,7 +18,8 @@ public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
-    private static final String AUTO_SNOOZE_VALUE = "1";
+    private CommandHandler commandHandler;
+    private Parser parser;
 
     /**
      * This object is created to encapsulate other objects
@@ -35,6 +30,8 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        parser = new Parser();
+        commandHandler = new CommandHandler(ui, parser);
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -42,7 +39,6 @@ public class Duke {
             taskList = new TaskList();
         }
     }
-
 
     public String getIntroMessage() {
         return ui.getIntroMessage();
@@ -55,9 +51,10 @@ public class Duke {
      * @return This returns a response to user input
      */
     public String getResponse(String input) {
-        Parser parser = new Parser();
+
         String trimmedInput = input.trim();
         String command = parser.getCommand(trimmedInput);
+
         switch (command) {
         case "bye":
             storage.save(taskList);
@@ -67,195 +64,32 @@ public class Duke {
             return ui.printList(taskList);
 
         case "done":
-            try {
-                // Does not throw exception yet
-                int index = parser.getIndex(input);
-                Task task = taskList.getSingleTask(index);
-                task.markDone();
-
-                return ui.printDone(task);
-            } catch (DukeException e) {
-                return e.printError("Task not found! Invalid index!");
-            }
+             return commandHandler.processDone(input, taskList);
 
         case "todo":
-            try {
-                String name = getTodoName(input);
-                Todo todo = new Todo(name);
-                taskList.addTask(todo);
-                return ui.printTask(todo, taskList.getSize());
-            } catch (DukeException e) {
-                return e.printMessage();
-            }
+             return commandHandler.processTodo(input, taskList);
 
         case "deadline":
-            try {
-                String name = getEventOrDeadlineName(input);
-                String by = getDeadlineAttribute(input);
-                LocalDate date = parser.stringToLocalDate(by);
-
-                Deadline deadline = new Deadline(name, date);
-                taskList.addTask(deadline);
-                return ui.printTask(deadline, taskList.getSize());
-
-            } catch (DukeException e) {
-                return e.printMessage();
-            }
+            return commandHandler.processDeadline(input, taskList);
 
         case "event":
-            try {
-                String name = getEventOrDeadlineName(input);
-                String at = getEventAttribute(input);
-                Event event = new Event(name, at);
-                taskList.addTask(event);
-                return ui.printTask(event, taskList.getSize());
-
-            } catch (DukeException e) {
-                return e.printMessage();
-            }
+            return commandHandler.processEvent(input, taskList);
 
         case "delete":
-            try {
-                // Does not throw exception yet
-                int deleteIndex = parser.getIndex(input);
-                Task deletedTask = taskList.getSingleTask(deleteIndex);
-                taskList.deleteTask(deleteIndex);
-                return ui.printDelete(deletedTask, taskList.getSize());
-            } catch (DukeException e) {
-                return e.printMessage();
-            }
+            return commandHandler.processDelete(input, taskList);
 
         case "find":
-            String arguments = parser.getArguments(input);
-            TaskList output = taskList.matchTasks(arguments);
-            return ui.printMatchingTask(output);
+            return commandHandler.processFind(input, taskList);
 
         case "help":
-            return ui.getHelpMessage();
+            return commandHandler.processHelp();
 
         case "snooze":
-            try {
-                int taskIndex = parser.getIndex(input);
-
-                //Guard Condition
-                if (!(taskList.getSingleTask(taskIndex) instanceof Deadline) ) {
-                    throw new DukeException("Task is not a Deadline! Snooze unsuccessful...");
-                }
-
-                String snoozeAttribute = getSnoozeAttribute(input);
-                if (snoozeAttribute.length() > 1) {
-                    LocalDate newDate = parser.stringToLocalDate(snoozeAttribute);
-
-                    //    Set task at index to new date.
-                    String currentDeadline = taskList.getSingleTask(taskIndex).getName();
-                    Deadline newDeadline = new Deadline(currentDeadline, newDate);
-                    taskList.replaceTask(taskIndex, newDeadline);
-
-                    return ui.printDoneSnooze(parser.localDateToString(newDate));
-                } else {
-                    Deadline oldDeadline = (Deadline) taskList.getSingleTask(taskIndex);
-                    LocalDate currDate = oldDeadline.getByAttribute();
-                    LocalDate newDate = currDate.plusDays(1);
-                    Deadline newDeadline = new Deadline(oldDeadline.getName(), newDate);
-                    taskList.replaceTask(taskIndex, newDeadline);
-
-                    return ui.printDoneSnooze(parser.localDateToString(newDate))
-                            + "\n\n"
-                            + "The deadline has been automatically snoozed by "
-                            + AUTO_SNOOZE_VALUE
-                            + " day";
-
-                }
-            } catch (DukeException e) {
-                return e.printMessage();
-            }
+            return commandHandler.processSnooze(input, taskList);
 
         default:
             return ui.printUnknownCommand();
 
         }
     }
-
-    /**
-     * This method gets the name of a To-Do task
-     *
-     * @param input This is the user input
-     * @return String This is the To-Do task name
-     * @throws DukeException On input error.
-     */
-    public static String getTodoName(String input) throws DukeException {
-        try {
-            return input.split(" ", 2)[1].trim();
-        } catch (Exception e) {
-            throw new DukeException("Hmm... You are either lacking a \"name\" detail!");
-        }
-    }
-
-    /**
-     * This method gets the Event or Deadline name
-     *
-     * @param input This is the user input
-     * @return String This is the Event or Deadline name
-     * @throws DukeException On input error.
-     */
-    public static String getEventOrDeadlineName(String input) throws DukeException {
-        try {
-            return input.split("/")[0].split(" ", 2)[1].trim();
-        } catch (Exception e) {
-            throw new DukeException("Hmm... You are lacking a \"name\" detail!");
-        }
-    }
-
-    /**
-     * This method gets the Deadline attribute
-     *
-     * @param byDate This is the String input
-     * @return String This is the Deadline attribute
-     * @throws DukeException On input error
-     */
-    public static String getDeadlineAttribute(String byDate) throws DukeException {
-        try {
-            return byDate.split("/by ")[1];
-        } catch (Exception e) {
-            throw new DukeException("Hmm... You are lacking a \"/by\" detail!");
-        }
-    }
-
-    /**
-     * This method gets the Event attribute
-     *
-     * @param at This is the task attribute
-     * @return String This is the Event attribute
-     * @throws DukeException On input error.
-     */
-    public static String getEventAttribute(String at) throws DukeException {
-        try {
-            return at.split("/at")[1].trim();
-        } catch (Exception e) {
-            throw new DukeException("Hmm... You are lacking \"/at\" detail!");
-        }
-    }
-
-    /**
-     * This method gets the Snooze attribute
-     *
-     * @param input This is the String input
-     * @return String This is the Snooze Attribute
-     * @throws DukeException On input error
-     */
-    public static String getSnoozeAttribute(String input) throws DukeException {
-        try {
-            if (input.split(" ").length > 2) {
-                // Returns snooze attribute if it exists
-                return input.split("/to")[1].trim();
-            } else {
-                // Returns input index only
-                return input.split(" ")[1];
-            }
-
-        } catch (Exception e) {
-            throw new DukeException("Snooze details incorrect, please check again");
-        }
-    }
-
 }
