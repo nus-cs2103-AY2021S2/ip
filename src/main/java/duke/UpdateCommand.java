@@ -8,14 +8,18 @@ public class UpdateCommand extends Command {
     private String newDescription;
 
     /**
-     * Initialise UpdateCommand object.
+     * Initialise UpdateCommand object and parses description to index of task and description.
      *
-     * @param index index of task to be updated.
-     * @param newDescription new description to be updated.
+     * @param newDescription new description to be updated, including index of task.
      */
-    public UpdateCommand(String index, String newDescription) {
-        this.index = Integer.parseInt(index) - 1;
-        this.newDescription = newDescription;
+    public UpdateCommand(String newDescription) throws DukeException {
+        String[] descriptionArr = newDescription.split(" ", 2);
+        try {
+            this.index = Integer.parseInt(descriptionArr[0]) - 1;
+            this.newDescription = descriptionArr[1];
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please describe what you want to update!");
+        }
     }
 
     /**

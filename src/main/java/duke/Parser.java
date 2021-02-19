@@ -37,35 +37,20 @@ public class Parser {
             }
         } else if (commandType.equals("update")) {
             String commandDescription = commandArr[1];
-            String[] descriptionArr = commandDescription.split(" ", 2);
-            try {
-                return new UpdateCommand(descriptionArr[0], descriptionArr[1]);
-            } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("Please describe what you want to update!");
-            }
+            return new UpdateCommand(commandDescription);
         } else if (commandType.equals("deadline")) {
             if (commandArr.length == 1) {
                 throw new DukeException("Oops! The description of deadline cannot be empty!");
             } else {
                 String commandDescription = commandArr[1];
-                String[] descriptionArr = commandDescription.split("(?i)/by ");
-                try {
-                    return new DeadlineCommand(descriptionArr[0], descriptionArr[1]);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please provide a 'by' date! E.g. /at 2021-01-01");
-                }
+                return new DeadlineCommand(commandDescription);
             }
         } else if (commandType.equals("event")) {
             if (commandArr.length == 1) {
                 throw new DukeException("Oops! The description of event cannot be empty!");
             } else {
                 String commandDescription = commandArr[1];
-                String[] descriptionArr = commandDescription.split("(?i)/at ");
-                try {
-                    return new EventCommand(descriptionArr[0], descriptionArr[1]);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Please provide an 'at' date! E.g. /at 2021-01-01");
-                }
+                return new EventCommand(commandDescription);
             }
         } else if (commandType.equals("todo")) {
             if (commandArr.length == 1) {

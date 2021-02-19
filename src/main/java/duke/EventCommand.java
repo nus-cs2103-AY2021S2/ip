@@ -10,14 +10,18 @@ public class EventCommand extends Command {
     private String description;
 
     /**
-     * Initialises EventCommand object.
+     * Initialises EventCommand object and parses description to description and at.
      *
-     * @param description the description of the task.
-     * @param at the date of the task, in the format YYYY-MM-DD
+     * @param description the entire description of the task.
      */
-    public EventCommand(String description, String at) {
-        this.description = description;
-        this.at = at;
+    public EventCommand(String description) throws DukeException {
+        String[] descriptionArr = description.split("(?i)/at ");
+        try {
+            this.description = descriptionArr[0];
+            this.at = descriptionArr[1];
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please provide an 'at' date! E.g. /at 2021-01-01");
+        }
     }
 
     /**
