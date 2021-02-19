@@ -1,6 +1,8 @@
-[T][ ][ ] eat
-null
+[T][X][i] eat
+ lunch
 [T][X][i] sleep
  at home la
-[D][X][ ] hw (by: 2021-01-01)
+[D][X][i] hw (by: 2021-01-01)
+ 2103 tp
+[E][ ][ ] bbq (at: ecp)
 null
