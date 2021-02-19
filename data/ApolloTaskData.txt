@@ -1,0 +1,29 @@
+T | 0 | ohwofhoehwo
+T | 0 | owehfwoef
+T | 0 | iohfhwo3fh
+T | 0 | ewofhowef
+T | 0 | hello
+T | 0 | wassup
+T | 0 | yo
+T | 0 | nofnf
+T | 0 | ewnfwoe
+T | 0 | efowf
+T | 0 | owfw
+T | 1 | fowoef
+T | 1 | jfwef
+T | 1 | pjfwje
+D | 0 | owjefow  | 2001-03-03
+D | 0 | obfweof  | 1929-01-01
+D | 1 | efwbf  | 2009-01-01
+D | 1 | owefnowf  | 2009-05-05
+D | 1 | odo | 2003-01-02
+D | 1 | jwfjwpejf  | 2009-01-01
+E | 0 | wofowenf  | 2003-09-10
+E | 0 | ewfn  | 2001-01-01
+E | 1 | wfoejwfwoej  | 2008-02-02
+E | 0 | jfwjfwj  | 2002-05-07
+E | 1 | ioewfnwnf  | 2002-01-09
+E | 1 | wqeondwo  | 2010-05-19
+D | 0 | oefohwf  | 1997-07-09
+D | 0 | ewonfowenfo  | 2008-01-01
+E | 0 | oewnownfon  | 2009-09-09

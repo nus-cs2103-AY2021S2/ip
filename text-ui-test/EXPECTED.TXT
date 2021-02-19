@@ -1,7 +1,317 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+    ____________________________________________________________
+     Hello! I'm Apollo the Robot!
+     What would you like to do today?
+    ____________________________________________________________
+    ____________________________________________________________
+     You have not added any tasks yet.
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     The description of a todo cannot be empty. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     The description of a todo cannot be empty. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [T][ ] read long book
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][ ] read long book
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for deadline.
+     Did you specify /by? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for deadline.
+     Did you specify /by? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for deadline.
+     Did you specify /by? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for deadline.
+     Did you specify /by? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for deadline.
+     Did you specify /by? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for deadline.
+     Did you specify /by? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [D][ ] finish book  (by: 30 Jan 2021)
+     Now you have 2 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][ ] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for event.
+     Did you specify /at? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for event.
+     Did you specify /at? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for event.
+     Did you specify /at? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for event.
+     Did you specify /at? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for event.
+     Did you specify /at? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid description for event.
+     Did you specify /at? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [E][ ] competition  (at: 30 Jan 2021)
+     Now you have 3 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][ ] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [T][ ] go fishing
+     Now you have 4 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [D][ ] finish tutorial  (by: 30 Jan 2021)
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [E][ ] play soccer  (at: 30 Jan 2021)
+     Now you have 6 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [T][ ] go to the gym
+     Now you have 7 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][ ] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][ ] go to the gym
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid option for done.
+     Did you specify a valid number? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][ ] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][ ] go to the gym
+    ____________________________________________________________
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+     [T][X] go to the gym
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][ ] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][X] go to the gym
+    ____________________________________________________________
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+     [T][X] read long book
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][X] go to the gym
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [D][ ] eat dinner  (by: 30 Jan 2021)
+     Now you have 8 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][X] go to the gym
+     8. [D][ ] eat dinner  (by: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     Nice! I've marked this task as done:
+     [D][X] eat dinner  (by: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][X] go to the gym
+     8. [D][X] eat dinner  (by: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid option for done.
+     Did you specify a valid number? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][X] go to the gym
+     8. [D][X] eat dinner  (by: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [T][ ] sleep early
+     Now you have 9 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][X] go to the gym
+     8. [D][X] eat dinner  (by: 30 Jan 2021)
+     9. [T][ ] sleep early
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid option for delete.
+     Did you specify a valid number? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid option for delete.
+     Did you specify a valid number? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [E][ ] play soccer  (at: 30 Jan 2021)
+     7. [T][X] go to the gym
+     8. [D][X] eat dinner  (by: 30 Jan 2021)
+     9. [T][ ] sleep early
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+         [T][ ] sleep early
+     Now you have 8 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+         [E][ ] play soccer  (at: 30 Jan 2021)
+     Now you have 7 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: 30 Jan 2021)
+     3. [E][ ] competition  (at: 30 Jan 2021)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     6. [T][X] go to the gym
+     7. [D][X] eat dinner  (by: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+         [D][ ] finish book  (by: 30 Jan 2021)
+     Now you have 6 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [E][ ] competition  (at: 30 Jan 2021)
+     3. [T][ ] go fishing
+     4. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     5. [T][X] go to the gym
+     6. [D][X] eat dinner  (by: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+         [T][ ] go fishing
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [E][ ] competition  (at: 30 Jan 2021)
+     3. [D][ ] finish tutorial  (by: 30 Jan 2021)
+     4. [T][X] go to the gym
+     5. [D][X] eat dinner  (by: 30 Jan 2021)
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "BLAH", which is an unrecognised command. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "WRONG", which is an unrecognised command. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "1", which is an unrecognised command. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "2", which is an unrecognised command. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "BLAH", which is an unrecognised command. Please try again!
+    ____________________________________________________________
+     Goodbye! Hope to see you again soon!

@@ -1,0 +1,56 @@
+list
+todo
+todo
+todo read long book
+list
+deadline
+deadline
+deadline   /by
+deadline   /by
+deadline finish book /by
+deadline finish book /by
+deadline finish book /by 2021-01-30
+list
+event
+event
+event   /at
+event   /at
+event competition /at
+event competition /at
+event competition /at 2021-01-30
+list
+todo go fishing
+deadline finish tutorial /by 2021-01-30
+event play soccer /at 2021-01-30
+todo go to the gym
+list
+done 8
+list
+done 7
+list
+done 1
+list
+deadline eat dinner /by 2021-01-30
+list
+done 8
+list
+done 9
+list
+todo sleep early
+list
+delete 10
+delete a
+list
+delete 9
+delete 6
+list
+delete 2
+list
+delete 3
+list
+blah
+wrong
+1
+2
+blah blah blah
+bye
