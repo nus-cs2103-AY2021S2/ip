@@ -1,9 +1,9 @@
+import duke.CommandHandler;
 import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.CommandHandler;
 import javafx.application.Platform;
 
 
@@ -64,10 +64,10 @@ public class Duke {
             return ui.printList(taskList);
 
         case "done":
-             return commandHandler.processDone(input, taskList);
+            return commandHandler.processDone(input, taskList);
 
         case "todo":
-             return commandHandler.processTodo(input, taskList);
+            return commandHandler.processTodo(input, taskList);
 
         case "deadline":
             return commandHandler.processDeadline(input, taskList);

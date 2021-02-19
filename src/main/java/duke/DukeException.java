@@ -7,6 +7,11 @@ public class DukeException extends Exception {
         super();
     }
 
+    /**
+     * This creates a DukeException with the specified message.
+     *
+     * @param message This is the exception message
+     */
     public DukeException(String message) {
         super(message);
         this.message = message;

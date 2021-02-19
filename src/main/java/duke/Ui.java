@@ -1,7 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
-
 /**
  * The Ui class is a collection of print statements
  * that guides the user's interaction.

@@ -6,9 +6,9 @@ import java.time.LocalDate;
  * Handles all the logic behind each command
  */
 public class CommandHandler {
+    private static final String AUTO_SNOOZE_VALUE = "1";
     private Ui ui;
     private Parser parser;
-    private static final String AUTO_SNOOZE_VALUE = "1";
 
     /**
      * This object is created to encapsulate a Ui and Parser object.
@@ -151,7 +151,7 @@ public class CommandHandler {
         try {
             int taskIndex = parser.getIndex(input);
 
-            if (!(taskList.getSingleTask(taskIndex) instanceof Deadline) ) {
+            if (!(taskList.getSingleTask(taskIndex) instanceof Deadline)) {
                 throw new DukeException("Task is not a Deadline! Snooze unsuccessful...");
             }
 

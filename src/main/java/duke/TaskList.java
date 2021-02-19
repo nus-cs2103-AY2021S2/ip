@@ -50,7 +50,6 @@ public class TaskList {
      */
     public TaskList matchTasks(String match) {
         TaskList output = new TaskList();
-
         try {
             for (int f = 0; f < this.getSize(); f++) {
                 Task selectedTask = this.getSingleTask(f);
@@ -59,7 +58,7 @@ public class TaskList {
                 }
             }
         } catch (DukeException e) {
-
+            return new TaskList();
         }
 
         return output;

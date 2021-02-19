@@ -53,8 +53,7 @@ public class Storage {
                 if (taskType == 'E') {
                     Event event = new Event(data[2], data[3], isDone);
                     result.add(event);
-                }
-                else if (taskType == 'D') {
+                } else if (taskType == 'D') {
                     String unparsedDate = data[3];
                     LocalDate date = LocalDate.parse(unparsedDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     Deadline deadline = new Deadline(data[2], date, isDone);
