@@ -37,6 +37,8 @@ public class Duke {
      */
     @FXML
     public String getResponse(Duke duke, String userInput) {
+        assert duke != null;
+
         try {
             Command command = Parser.parseCommand(userInput);
             String message = command.execute(duke.taskList, duke.ui, duke.storage);

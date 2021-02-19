@@ -34,6 +34,9 @@ public class UpdateCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        assert taskList != null;
+        assert ui != null;
+        assert storage != null;
         try {
             Task task = taskList.updateTask(index, newDescription);
             storage.writeToFile(taskList.getList());

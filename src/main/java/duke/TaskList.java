@@ -59,6 +59,7 @@ public class TaskList {
      * @return Task object that was deleted.
      */
     public Task deleteTask(int index) {
+        assert index >= 0;
         Task task = taskList.get(index);
         taskList.remove(index);
         taskListSize = taskList.size();
@@ -72,6 +73,7 @@ public class TaskList {
      * @return Task object that was marked as done.
      */
     public Task markTaskDone(int index) {
+        assert index >= 0;
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
@@ -85,6 +87,8 @@ public class TaskList {
      * @return updated Task object.
      */
     public Task updateTask(int index, String newDescription) {
+        assert index >= 0;
+        assert newDescription != null;
         Task task = taskList.get(index);
         taskList.remove(index);
         task.updateDescription(newDescription);
@@ -99,6 +103,7 @@ public class TaskList {
      * @return an array list of tasks that contains the keyword.
      */
     public ArrayList<Task> findTasks(String keyword) {
+        assert keyword != null;
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
