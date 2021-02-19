@@ -26,7 +26,7 @@
 
 ## Usage
 
-### **`List`**
+### `List`
 
 #### What it does:
 
@@ -47,7 +47,7 @@ Here are the tasks in your list:
 
 <br>
 
-### **`Todo`**
+### `Todo`
 
 #### What it does:
 
@@ -71,7 +71,7 @@ Now you have 4 tasks in the list.
 
 <br>
 
-### **`Deadline`**
+### `Deadline`
 
 #### What it does:
 
@@ -95,7 +95,7 @@ Now you have 5 tasks in the list.
 
 <br>
 
-### **`Event`**
+### `Event`
 
 #### What it does:
 
@@ -119,7 +119,7 @@ Now you have 6 tasks in the list.
 
 <br>
 
-### **`Done`**
+### `Done`
 
 #### What it does:
 
@@ -142,7 +142,7 @@ Nice! I've marked this task as done:
 
 <br>
 
-### **`Find`**
+### `Find`
 
 #### What it does:
 
@@ -166,7 +166,7 @@ Here are the matching tasks in your list:
 
 <br>
 
-### **`Delete`**
+### `Delete`
 
 #### What it does:
 
@@ -200,7 +200,7 @@ Noted. I've removed all the tasks from the list.
 
 <br>
 
-### **`Bye`**
+### `Bye`
 
 #### What it does:
 
