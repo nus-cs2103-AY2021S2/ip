@@ -1,24 +1,21 @@
 # User Guide
 Duke is a thing
 ## Features
-* Keep track of various tasks
-  * Add a todo task
-  * Add a deadline task
-  * Add an event task
-* Manage tasks
-  * List out tasks
-  * Mark tasks as done
-  * Delete tasks
-  * Find tasks
-  * Add and look up additional information regarding tasks
-### Adding a todo task 
-Adds a todo task.
-
+### Keep track of various tasks 
+* Add a todo task
+* Add a deadline task
+* Add an event task
+### Manage your tasks
+* List out tasks
+* Mark tasks as done
+* Delete tasks
+* Find tasks
+* Add and look up additional information regarding tasks
 ## Usage
 
-### `todo` - Describe action
+### `todo` - Add a todo task
 
-Describe action and its outcome.
+Adds a task that you are planning to do into your list of tasks
 
 Example of usage: 
 
@@ -26,7 +23,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it! I have added the following task:\n[T][][] (your todo task)`
+`Got it! I have added the following task:
+[T][][] (your todo task)`
 
 ### Feature 1 
 Description of feature.
