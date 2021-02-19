@@ -39,7 +39,7 @@ list.`
 A deadline task must be associated with one date, that is the date by which the task must be completed. The command must be entered into the
 CLI with the following format `deadline (String description) /by (String containing date`). Similar to adding an event task from earlier, 
 the date must be in the format "yyyy-mm", and it must be present after that /by keyword. It can be at any position in the string so long as 
-it comes after /by. For multiple date clashes, **see 'event' feature ** for how it will be resolved, as it is similar. After entering the command,
+it comes after /by. For multiple date clashes, **see 'event' feature** for how it will be resolved, as it is similar. After entering the command,
 a deadline task will be added to the list, and the chatbot will output a message to notify you if the command was succesful.
 
 Example of usage: 
@@ -118,9 +118,10 @@ the third numbered task should be deleted from the list and GUI displays the tas
 ### `Done` - Mark Task as done.
 
 Command must be of the format `done (index)`. Command will then find the task in the list at the index and mark it as done. GUI displays a
-to notify you if the command was successful. 
+message to notify you if the command was successful. 
 If an already marked done task wis located at the index, it will still proceed to "mark" the task, even if in the end the 
 task's state will not change.
+GUI displays the task that is marked as done, within a confirmation message.
  
 
 Example of usage: 
