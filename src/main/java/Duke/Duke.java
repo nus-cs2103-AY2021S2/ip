@@ -1,12 +1,21 @@
 package duke;
 
-import java.io.IOException;
-import java.util.Scanner;
+
+import java.time.LocalDateTime;
+
+import duke.common.Command;
+import duke.common.Response;
 import duke.exception.EmptyDescription;
 import duke.exception.InvalidTypeOfTask;
-import duke.storage.Storage;
+import duke.parser.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Todo;
 import duke.ui.Ui;
+import duke.storage.Storage;
+
 
 /**
  * Duke program maintains a taskList for user to track tasks.
@@ -16,39 +25,109 @@ import duke.ui.Ui;
 
 public class Duke {
     private Storage storage;
-    private Ui ui;
     private TaskList taskList;
-    private Boolean shouldExit = false;
 
     /**
      * Initialise Duke chatbot.
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage();
         taskList = storage.load();
     }
 
-    /**
-     * Start Duke chat services.
-     */
-    public void execute() {
-        ui.greet();
-        Scanner s = new Scanner(System.in);
+    public void save() {
+        storage.save(taskList.getTasks());
+    }
 
-        while (!shouldExit && s.hasNextLine()) {
-            try {
-                taskList = ui.readCommand(taskList, s);
-                storage.save(taskList.getTasks());
-                shouldExit = ui.getExit();
-            } catch (EmptyDescription e) {
-                ui.enclose(e.toString());
-            } catch (InvalidTypeOfTask e) {
-                ui.enclose(e.toString());
+    /**
+     * Adds task to tasklist.
+     *
+     * @param p
+     * @throws EmptyDescription
+     */
+    public String addTask(Parser p) throws EmptyDescription, InvalidTypeOfTask {
+        String reply = "";
+        Command command = p.getCommand();
+        String description = p.getDescription();
+        if (description.equals("")) {
+            throw new EmptyDescription(p.getTypeOfTask());
+        } else {
+            LocalDateTime time = p.getTime();
+            Task newTask;
+            switch (command) {
+            case TODO:
+                newTask = new Todo(description);
+                break;
+            case DEADLINE:
+                newTask = new Deadline(description, time);
+                break;
+            case EVENT:
+                newTask = new Event(description, time);
+                break;
+            default:
+                throw new InvalidTypeOfTask();
+            }
+            // check for duplicate task input
+            if (taskList.detectDuplicates(newTask)) {
+                reply = "Input already exists. Please try again";
+            } else if (!taskList.detectDuplicates(newTask)) {
+                taskList.add(newTask);
+                String instructions = Response.ADD.toString() + newTask + "\n" + this.status();
+                reply = instructions;
+            } else {
+                reply = "Input already exists. Please try again";
             }
         }
-        assert shouldExit == true : "shouldExit boolean false";
-        ui.exit();
+        return reply;
+    }
+    /**
+     * Marks task as DONE.
+     *
+     * @param p
+     * @throws EmptyDescription
+     */
+    public String markAsDone(Parser p) {
+        String reply = "";
+        try {
+            if (p.getDescription().equals("")) {
+                throw new EmptyDescription(p.getTypeOfTask());
+            }
+            int i = Integer.parseInt(p.getDescription()) - 1;
+            reply = taskList.markAsDone(i);
+        } catch (EmptyDescription e) {
+            System.out.println(e.toString());
+        }
+        return reply;
+    }
+
+    /**
+     * Removes task from taskList.
+     *
+     * @param p
+     */
+    public String deleteTask(Parser p) {
+        int i = Integer.parseInt(p.getDescription()) - 1;
+        return taskList.delete(i);
+    }
+
+    /**
+     * Prints list.
+     */
+    public String list() {
+        return taskList.list();
+    }
+    /**
+     * Locates tasks matched with keyword.
+     * @param parser
+     */
+    public String find(Parser parser) {
+        String keyword = parser.getDescription();
+        return taskList.find(keyword);
+    }
+
+
+    public String status() {
+        return "Now you have " + taskList.getNumberOfTasks() + " tasks in the list.\n";
     }
 
     /**
@@ -58,14 +137,31 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.execute();
+        System.out.println(duke.getResponse("haha"));
+
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generate a response to user input.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Ui ui = new Ui(this);
+        String response = ui.readCommand(input);
+        return "Duke response: " + response;
+    }
+
+
+    /**
+     * Greets user.
+     */
+    public String greet() {
+        return Response.GREET.toString();
+    }
+
+    /**
+     * Say bye bye
+     */
+    public String exit() {
+        return Response.EXIT.toString();
     }
 }

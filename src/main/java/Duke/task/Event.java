@@ -20,7 +20,7 @@ public class Event extends Task {
      * @param time time of Event.
      * @return Event
      */
-    Event(String msg, LocalDateTime time) {
+    public Event(String msg, LocalDateTime time) {
         super(msg);
         this.time = time;
     }

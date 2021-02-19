@@ -9,3 +9,10 @@ T|DONE|burn book
 T|PENDING|burn book
 T|PENDING|burn book
 E|PENDING|project debrief|03-04-2021 22:11
+T|PENDING|buy food
+T|PENDING|buy fooddd
+T|PENDING|read ns
+T|PENDING|study
+E|PENDING|project debrief|03-04-2021 22:01
+T|PENDING|read shit
+T|PENDING|buy boko

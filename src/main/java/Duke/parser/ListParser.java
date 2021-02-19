@@ -58,14 +58,12 @@ public class ListParser {
         } else { //status "PENDING"
             isDone = false;
         }
-
         if (inputSplit.length == 4) {
             TimeParser timeParser = new TimeParser();
             time = timeParser.parse(inputSplit[3]);
         } else {
             time = null;
         }
-
         return new ListParser(typeOfTask, isDone, description, time);
     }
 
@@ -78,6 +76,10 @@ public class ListParser {
         return typeOfTask;
     }
 
+    /**
+     * Returns isDone attribute.
+     * @return isDone
+     */
     public Boolean getIsDone() {
         return isDone;
     }

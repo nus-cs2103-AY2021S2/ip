@@ -18,12 +18,13 @@ public class SearchList {
     /**
      * Prints taskList.
      */
-    public void list() {
+    public String list() {
         String msg = "";
         for (int i = 0; i < tasks.size(); i++) {
             msg += (i + 1) + "." + tasks.get(i) + "\n";
         }
         enclose(Response.LIST.toString() + msg);
+        return Response.LIST.toString() + msg;
     }
 
     /**

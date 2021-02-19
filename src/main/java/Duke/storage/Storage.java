@@ -50,7 +50,6 @@ public class Storage {
                 data = data + taskList.get(i).encode() + "\n";
             }
             Files.write(filePath, data.getBytes(StandardCharsets.UTF_8));
-
         } catch (IOException e) {
             System.out.println("save error");
         }

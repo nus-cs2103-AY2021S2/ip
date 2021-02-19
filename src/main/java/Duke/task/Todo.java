@@ -14,7 +14,7 @@ public class Todo extends Task {
      * @param msg description of Todo.
      * @return Todo
      */
-    Todo(String msg) {
+    public Todo(String msg) {
         super(msg);
     }
 

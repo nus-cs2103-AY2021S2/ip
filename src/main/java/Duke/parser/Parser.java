@@ -48,7 +48,7 @@ public class Parser {
      */
     public Parser parse(String input) {
         String[] inputSplit = input.split("/");
-        typeOfTask = inputSplit[0];
+        typeOfTask = inputSplit[0].replaceAll("\\s+", "");
 
         if (inputSplit.length == 2) {
             description = inputSplit[1];
