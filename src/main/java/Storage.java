@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Storage uses current directory as save/load location.
+ */
 public class Storage {
-    public Storage() { // default Storage uses current directory as save/load location
-    }
 
     /**
      * Saves the tasks in taskList into save file "henchman_saved_tasks" in the same directory.
@@ -21,7 +22,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter("henchman_saved_tasks");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            ArrayList<Task> tasks = taskList.getTasks();
+            ArrayList<Task> tasks = taskList.getTASKS();
             for (Task t : tasks) {
                 bufferedWriter.write(t.toLog() + "\n");
             }

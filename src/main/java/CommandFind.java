@@ -3,10 +3,10 @@
  * the search term, and returns the list of task containing said term.
  */
 public class CommandFind extends Command {
-    private final String query;
+    private final String QUERY;
 
     public CommandFind(String query) {
-        this.query = query;
+        this.QUERY = query;
     }
 
     /**
@@ -18,7 +18,7 @@ public class CommandFind extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return this.toHenchmanOutput() + "\n" + tasks.findTasks(query);
+        return this.toHenchmanOutput() + "\n" + tasks.findTasks(QUERY);
     }
 
     /**

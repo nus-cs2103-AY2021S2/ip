@@ -25,7 +25,7 @@ public class TaskListTest {
     public void testInitialization() {
         TaskList tasks = new TaskList();
         ArrayList<Task> expected = new ArrayList<>();
-        Assertions.assertEquals(expected, tasks.getTasks());
+        Assertions.assertEquals(expected, tasks.getTASKS());
     }
 
     @Test
@@ -38,12 +38,12 @@ public class TaskListTest {
         expected.add(new ToDo("description"));
         tasks.addTask(new ToDo("description 2"));
         expected.add(new ToDo("description 2"));
-        Assertions.assertEquals(expected.toString(), tasks.getTasks().toString());
+        Assertions.assertEquals(expected.toString(), tasks.getTASKS().toString());
 
         // test case 2: test delete
         tasks.deleteTask(1);
         expected.remove(0);
-        Assertions.assertEquals(expected.toString(), tasks.getTasks().toString());
+        Assertions.assertEquals(expected.toString(), tasks.getTASKS().toString());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class TaskListTest {
         tasks.addTask(new ToDo("description"));
         tasks.doneTask(1);
 
-        Assertions.assertEquals("[[T][X] description]", tasks.getTasks().toString());
+        Assertions.assertEquals("[[T][X] description]", tasks.getTASKS().toString());
     }
 
     @Test

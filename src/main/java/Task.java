@@ -6,33 +6,33 @@ import java.time.LocalDateTime;
 public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
-    protected final String icon;
-    protected final LocalDateTime timeCreated;
+    protected final String ICON;
+    protected final LocalDateTime TIME_CREATED;
 
     protected Task(String description, String icon) {
         this.description = description;
-        this.icon = icon;
+        this.ICON = icon;
         isDone = false;
-        this.timeCreated = LocalDateTime.now();
+        this.TIME_CREATED = LocalDateTime.now();
     }
 
     protected Task(String description, LocalDateTime timeCreated, String icon) {
         this.description = description;
-        this.icon = icon;
+        this.ICON = icon;
         isDone = false;
-        this.timeCreated = timeCreated;
+        this.TIME_CREATED = timeCreated;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public LocalDateTime getTimeCreated() {
-        return timeCreated;
+    public LocalDateTime getTIME_CREATED() {
+        return TIME_CREATED;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getICON() {
+        return ICON;
     }
 
     public boolean isDone() {
@@ -54,7 +54,7 @@ public abstract class Task implements Comparable<Task> {
      */
     public String toString() {
         String doneIcon = isDone ? "[X]" : "[ ]";
-        return "[" + icon + "]" + doneIcon + " " + this.description;
+        return "[" + ICON + "]" + doneIcon + " " + this.description;
     }
 
     /**
@@ -64,12 +64,12 @@ public abstract class Task implements Comparable<Task> {
      */
     public String toLog() {
         String doneIcon = isDone ? "T" : "F";
-        return icon + " | " + doneIcon + " | " + this.description + " | " + this.timeCreated.toString();
+        return ICON + " | " + doneIcon + " | " + this.description + " | " + this.TIME_CREATED.toString();
     }
 
     // by default compare by timeCreated
     public int compareTo(Task that) {
-        return this.timeCreated.compareTo(that.timeCreated);
+        return this.TIME_CREATED.compareTo(that.TIME_CREATED);
     }
 
     public boolean isTimed() {

@@ -3,10 +3,10 @@
  * the index from the TaskList.
  */
 public class CommandDelete extends Command {
-    private final int index;
+    private final int INDEX;
 
     public CommandDelete (int index) {
-        this.index = index;
+        this.INDEX = index;
     }
 
     /**
@@ -19,12 +19,12 @@ public class CommandDelete extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            Task task = tasks.deleteTask(index);
+            Task task = tasks.deleteTask(INDEX);
             storage.save(tasks);
             return this.toHenchmanOutput() + "\n" + task.toString();
         } catch (IndexOutOfBoundsException e) {
             return "Index provided is out of bounds! Please provide a valid index (1 to "
-                    + tasks.getTasks().size() + ").";
+                    + tasks.getTASKS().size() + ").";
         }
     }
 

@@ -14,7 +14,7 @@ public class CommandClear extends Command {
         tasks.clearAllTasks();
         storage.save(tasks);
 
-        assert tasks.getTasks().isEmpty() : "task list not cleared!";
+        assert tasks.getTASKS().isEmpty() : "task list not cleared!";
         return toHenchmanOutput();
     }
 

@@ -3,10 +3,10 @@
  * of the ToDo Task with the specified attributes into the provided TaskList.
  */
 public class CommandToDo extends Command {
-    private final String description;
+    private final String DESCRIPTION;
 
     public CommandToDo(String description) {
-        this.description = description;
+        this.DESCRIPTION = description;
     }
 
     /**
@@ -18,7 +18,7 @@ public class CommandToDo extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        ToDo toDo = new ToDo(description);
+        ToDo toDo = new ToDo(DESCRIPTION);
         tasks.addTask(toDo);
         storage.save(tasks);
         return this.toHenchmanOutput() + "\n" + toDo.toString();
