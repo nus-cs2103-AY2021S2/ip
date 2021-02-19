@@ -64,7 +64,8 @@ Expected outcome:
 `[T][X] borrow book`
 
 ### 'event'
-Adds an event task into the tasklist. The time input for /at can be a duration or a time itself.
+Adds an event task into the tasklist. It can work with only the description, the same way as todo.
+The time input for /at can be a duration or a time itself.
 
 Example of usage:
 
@@ -75,6 +76,17 @@ Expected outcome:
 
 `[T][X] event project meeting (at: 10/02/2021 1030-1200)`
 `[T][X] birthday party (at: 15/02/2021 1000)`
+
+### 'deadline'
+Adds an deadline task into the tasklist. It can work with only the description, the same way as todo.
+
+Example of usage:
+
+`deadline submission /by 11/02/2021 1000`
+
+Expected outcome:
+
+`[D][X] submission (by: 11/02/2021 1000`
 
 ### 'delete'
 Delete the task corresponding to that number in the tasklist.
@@ -87,6 +99,7 @@ The second task in the list (if present) would be deleted.
 
 ### 'done'
 Marks the task corresponding to that number in the tasklist as done with a tick.
+Status changes from [X] to [✔]
 
 Example of usage:
 `done 2`
@@ -94,15 +107,6 @@ Example of usage:
 Expected outcome:
 The second task in the list (if present) would be marked as done.
 `[T][✔] event project meeting (at: 10/02/2021 1030)`
-
-### 'list'
-Lists all the tasks in the tasklist.
-
-Example of usage:
-`list`
-
-Expected outcome:
-The list of task in the order that they are added would be displayed.
 
 ### 'list'
 Lists all the tasks in the tasklist.
