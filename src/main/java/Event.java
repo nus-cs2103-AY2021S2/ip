@@ -16,6 +16,7 @@ public class Event extends Task {
      */
     Event(String name, String duration) {
         this.name = name;
+        assert LocalDate.parse(duration) instanceof LocalDate;
         this.duration = LocalDate.parse(duration);
         this.done = false;
     }
