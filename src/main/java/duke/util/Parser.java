@@ -58,17 +58,17 @@ public class Parser {
             break;
         case DONE:
         case DO:
-            handleDone(command, inputArr[1], taskList);
+            handleDone(command, inputArr[1], taskList, apollo);
             break;
         case DELETE:
         case DEL:
-            handleDelete(command, inputArr[1], taskList);
+            handleDelete(command, inputArr[1], taskList, apollo);
             break;
         case TODO:
         case T:
         case DEADLINE:
         case EVENT:
-            handleTask(command, inputArr[1], taskList);
+            handleTask(command, inputArr[1], taskList, apollo);
             break;
         case FIND:
         case F:
@@ -94,12 +94,14 @@ public class Parser {
      * @param command Command that has been called.
      * @param input Input from user command.
      * @param taskList TaskList containing tasks.
+     * @param apollo Instance of Apollo.
      * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
      */
-    private static void handleDone(Commands command, String input, ArrayList<Task> taskList)
+    private static void handleDone(Commands command, String input, ArrayList<Task> taskList, Duke apollo)
             throws InvalidOptionException {
         try {
             TaskHandler.doneTask(input, taskList);
+            apollo.saveData();
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidOptionException(command.name());
         }
@@ -110,12 +112,14 @@ public class Parser {
      * @param command Command that has been called.
      * @param input Input from user command.
      * @param taskList TaskList containing tasks.
+     * @param apollo Instance of Apollo.
      * @throws InvalidOptionException Occurs when a command has been passed in with the wrong format.
      */
-    private static void handleDelete(Commands command, String input, ArrayList<Task> taskList)
+    private static void handleDelete(Commands command, String input, ArrayList<Task> taskList, Duke apollo)
             throws InvalidOptionException {
         try {
             TaskHandler.deleteTask(input, taskList);
+            apollo.saveData();
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidOptionException(command.name());
         }
@@ -142,11 +146,13 @@ public class Parser {
      * @param command Command that has been called.
      * @param input Input from user command.
      * @param taskList TaskList containing tasks.
+     * @param apollo Instance of Apollo.
      * @throws DukeException Occurs when a command has been passed in with the wrong format.
      */
-    private static void handleTask(Commands command, String input, ArrayList<Task> taskList) throws DukeException {
+    private static void handleTask(Commands command, String input, ArrayList<Task> taskList, Duke apollo) throws DukeException {
         try {
             TaskHandler.addTask(command, input, taskList);
+            apollo.saveData();
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidOptionException(command.name());
         }
