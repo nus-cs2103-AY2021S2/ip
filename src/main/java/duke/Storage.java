@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ class Storage {
      * @param taskList The corresponding task list in which the text file is
      * based on.
      */
-    public static void update(ArrayList<Task> taskList) throws IOException {
+    public static void updateTextFile(ArrayList<Task> taskList) throws IOException {
         File storageTextFile = new File(FILE_NAME);
         FileWriter fileWriter = new FileWriter(storageTextFile);
         for (Task task : taskList) {
@@ -68,6 +69,16 @@ class Storage {
         }
         scanner.close();
     }
+    private static String taskToText (Task task) {
+        String taskText = "";
+        if (task.isComplete()) {
+            taskText += "1 | ";
+        } else {
+            taskText += "0 | ";
+        }
+        taskText += task.taskName;
+        return taskText;
+    }
     private static String deadlineToText (Deadline deadline) {
         String deadlineText = "D | ";
         deadlineText += taskToText(deadline);
@@ -84,16 +95,6 @@ class Storage {
         String toDoText = "T | ";
         toDoText += taskToText(toDo);
         return toDoText;
-    }
-    private static String taskToText (Task task) {
-        String taskText = "";
-        if (task.isComplete()) {
-            taskText += "1 | ";
-        } else {
-            taskText += "0 | ";
-        }
-        taskText += task.taskName;
-        return taskText;
     }
     private static String[] parseString(String inputString) {
         String[] parsedString = new String[4];
@@ -116,7 +117,7 @@ class Storage {
         if (typeOfTask.equals("T")) {
             return new ToDo(taskName, isCompleted);
         }
-        LocalDate date = dateConverter(parsedString[3].substring(1));
+        LocalDate date = convertTextToDate(parsedString[3].substring(1));
         if (typeOfTask.equals("D")) {
             return new Deadline(taskName, isCompleted, date);
         } else if (typeOfTask.equals("E")) {
@@ -126,36 +127,7 @@ class Storage {
         }
     }
 
-    private static LocalDate dateConverter(String date) {
-        String month = date.substring(0, 3);
-        String day = date.split(" ")[1];
-        String year = date.split(" ")[2];
-        String numericalMonth = " ";
-        if (month.equals("Jan")) {
-            numericalMonth = "01";
-        } else if (month.equals("Feb")) {
-            numericalMonth = "02";
-        } else if (month.equals("Mar")) {
-            numericalMonth = "03";
-        } else if (month.equals("Apr")) {
-            numericalMonth = "04";
-        } else if (month.equals("May")) {
-            numericalMonth = "05";
-        } else if (month.equals("Jun")) {
-            numericalMonth = "06";
-        } else if (month.equals("Jul")) {
-            numericalMonth = "07";
-        } else if (month.equals("Aug")) {
-            numericalMonth = "08";
-        } else if (month.equals("Sep")) {
-            numericalMonth = "09";
-        } else if (month.equals("Oct")) {
-            numericalMonth = "10";
-        } else if (month.equals("Nov")) {
-            numericalMonth = "11";
-        } else if (month.equals("Dec")) {
-            numericalMonth = "12";
-        }
-        return LocalDate.parse(year + "-" + numericalMonth + "-" + day);
+    private static LocalDate convertTextToDate(String date) {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 }

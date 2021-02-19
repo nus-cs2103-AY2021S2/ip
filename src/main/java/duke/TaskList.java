@@ -177,9 +177,9 @@ class TaskList {
     public String sort(String sortCriteria) {
         if (sortCriteria.equals("name")) {
             return sortByName();
-        } else if (sortCriteria.equals("done")) {
+        } else if (sortCriteria.equals("donefirst")) {
             return sortByDone();
-        } else if (sortCriteria.equals("notdone")) {
+        } else if (sortCriteria.equals("notdonefirst")) {
             return sortByNotDone();
         } else {
             return "Invalid sorting criteria.";
@@ -215,7 +215,7 @@ class TaskList {
     private String sortByDone() {
         String dukeMessage = "The list is now sorted with the completed tasks "
                 + "being listed first\n";
-        taskList.sort(new DoneComparator());
+        taskList.sort(new DoneFirstComparator());
         writeToHardDisk();
         dukeMessage += this.listTask();
         return dukeMessage;
@@ -224,7 +224,7 @@ class TaskList {
     private String sortByNotDone() {
         String dukeMessage = "The list is now sorted with the incomplete tasks"
                 + " being listed first\n";
-        taskList.sort(new NotDoneComparator());
+        taskList.sort(new NotDoneFirstComparator());
         writeToHardDisk();
         dukeMessage += this.listTask();
         return dukeMessage;
@@ -232,7 +232,7 @@ class TaskList {
     private void writeToHardDisk () {
         if (canWriteToHardDisk) {
             try {
-                Storage.update(this.taskList);
+                Storage.updateTextFile(this.taskList);
             } catch (IOException exception) {
                 canWriteToHardDisk = false;
             }

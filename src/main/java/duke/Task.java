@@ -1,5 +1,6 @@
 package duke;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The class in which Deadline, Event and ToDo inherits from. It contains
@@ -67,12 +68,7 @@ abstract class Task {
      * @return A string representation of the date in the specified format.
      */
     public static String printDate(LocalDate date) {
-        String monthOfDate = date.getMonth().toString().substring(0, 3);
-        String monthInLowerCase = monthOfDate.substring(0, 1);
-        monthInLowerCase += monthOfDate.substring(1, 3).toLowerCase();
-        String[] parsedDate = date.toString().split("-");
-        String yearOfDate = parsedDate[0];
-        String dayOfDate = parsedDate[2];
-        return monthInLowerCase + " " + dayOfDate + " " + yearOfDate;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyy");
+        return date.format(formatter);
     }
 }

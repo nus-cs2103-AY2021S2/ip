@@ -1,20 +1,22 @@
 # Spongebob Duke User Guide
 
 ##Introduction
+
 Spongebob duke is a personal assistant chatbot that can
-also help you keep track of various tasks.
+also help you keep track of your tasks.
 
 ## Features 
-The commands offered by Spongebob duke are :
+The features offered by Spongebob duke are :
 
-1. Add
-2. List 
-3. Done
-4. Delete
-5. Find
-6. Sort
+1. Add a task
+2. List tasks
+3. Mark a task as done
+4. Delete a task 
+5. Find a task
+6. Sort tasks
+7. Bye
 
-### Add
+### Add a task
 Add a new task to the list. Spongebob duke supports 3 types of tasks :
 1. ToDo, which are tasks that are not tied to a specific date.
 2. Deadline, which are tasks that must be completed before a certain date.
@@ -22,35 +24,39 @@ Add a new task to the list. Spongebob duke supports 3 types of tasks :
 
 When a new task is added, the corresponding text file dukeText.txt is also updated.
 
-### List
+### List tasks
 
-Shows every task sorted in the list.
+Displays a list of all currently saved tasks.
 
-### Done
+### Mark a task as done
 
 Mark the task at a particular index as completed.
 
-### Delete
+### Delete a task
 
-Remove the task at a particular index.
+Remove the task at a particular index from the list.
 
-### Find
+### Find a task
 
 Search for tasks containing a specific keyword.
 
-### Sort
+### Sort tasks
 Sort the tasks in the list according to one of the following criteria :
 1. By name alphabetically.
-2. By showing completed tasks first followed
-by incomplete tasks. Within completed tasks and incomplete
-tasks, sorting is done by ascending alphabetical order.
-3. By showing incomplete tasks first followed
-   by completed tasks. Within completed tasks and incomplete
-   tasks, sorting is done by ascending alphabetical order.
+2. By completed tasks first followed by incomplete tasks. 
+3. By incomplete tasks first followed by completed tasks.
+
+### Bye
+
+Exits the program.
 
 ## Usage
 
 ### `todo` - Adds a todo task to the list
+
+Format:
+
+`todo [description]`
 
 Example of usage:
 
@@ -58,9 +64,13 @@ Example of usage:
 
 Expected outcome:
 
-![Todo](./images/Todo.png)
+![Todo](./Images/Todo.png)
 
 ### `deadline` - Adds a deadline task to the list
+
+Format:
+
+`deadline [description] /by [YYYY-MM-DD]`
 
 Example of usage:
 
@@ -68,9 +78,13 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline](./images/Deadline.png)
+![Deadline](./Images/Deadline.png)
 
 ### `event` - Adds an event task to the list
+
+Format:
+
+`event [description] /by [YYYY-MM-DD]`
 
 Example of usage:
 
@@ -78,9 +92,13 @@ Example of usage:
 
 Expected outcome:
 
-![Event](./images/Event.png)
+![Event](./Images/Event.png)
 
 ### `list` - Display all tasks in the list
+
+Format:
+
+`list`
 
 Example of usage:
 
@@ -88,9 +106,13 @@ Example of usage:
 
 Expected outcome:
 
-![List](./images/List.png)
+![List](./Images/List.png)
 
 ### `done` - Mark task as completed
+
+Format:
+
+`done [index]`
 
 Example of usage:
 
@@ -98,9 +120,13 @@ Example of usage:
 
 Expected outcome:
 
-![Done](./images/Done.png)
+![Done](./Images/Done.png)
 
 ### `delete` - Delete a task from the list
+
+Format:
+
+`delete [index]`
 
 Example of usage:
 
@@ -108,9 +134,13 @@ Example of usage:
 
 Expected outcome:
 
-![Delete](./images/Delete.png)
+![Delete](./Images/Delete.png)
 
 ### `find` - Search for particular tasks in the list
+
+Format:
+
+`find [keyword]`
 
 Example of usage:
 
@@ -118,9 +148,13 @@ Example of usage:
 
 Expected outcome:
 
-![Find](./images/Find.png)
+![Find](./Images/Find.png)
 
 ### `sort name` - Sort by alphabetical order
+
+Format:
+
+`sort name`
 
 Example of usage:
 
@@ -128,27 +162,45 @@ Example of usage:
 
 Expected outcome:
 
-![Sortname](./images/Sortname.png)
+![Sortname](./Images/Sortname.png)
 
-### `sort done` - Sort by completed tasks first
+### `sort doneFirst` - Sort by completed tasks first
 
-Example of usage:
+Format:
 
-`sort done`
-
-Expected outcome:
-
-![Sortdone](./images/Sortdone.png)
-
-### `sort notdone` - Sort by incomplete tasks first
+`sort doneFirst`
 
 Example of usage:
 
-`sort notdone`
+`sort doneFirst`
 
 Expected outcome:
 
-![Sortnotdone](./images/Sortnotdone.png)
+![Sortdone](./Images/Sortdone.png)
+
+### `sort notdonefirst` - Sort by incomplete tasks first
+
+Format:
+
+`sort notdonefirst`
+
+Example of usage:
+
+`sort notdonefirst`
+
+Expected outcome:
+
+![Sortnotdone](./Images/Sortnotdone.png)
+
+### `bye` - Exits the program
+
+Format:
+
+`bye`
+
+Example of usage:
+
+`bye`
 
 
 

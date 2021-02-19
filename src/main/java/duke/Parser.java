@@ -38,10 +38,11 @@ public class Parser {
     }
 
     private String[] processList(String input) throws DukeException {
+        String errorMessage = "Invalid input. To use the list command, use the format: list";
         String[] parsedInput = new String[1];
         String[] removeSpaces = input.split(" ");
         if (removeSpaces.length > 1) {
-            throw new DukeException("Invalid input");
+            throw new DukeException(errorMessage);
         }
         parsedInput[0] = "list";
         return parsedInput;
@@ -187,14 +188,14 @@ public class Parser {
         String[] parsedInput = new String[2];
         String errorMessage = "Invalid input for sort. The commands for sort are:\n";
         errorMessage += "sort name";
-        errorMessage += "\nsort done";
-        errorMessage += "\nsort notdone";
+        errorMessage += "\nsort donefirst";
+        errorMessage += "\nsort notdonefirst";
         if (input.length() <= 5) {
             throw new DukeException(errorMessage);
         }
         String removeSpaces = input.substring(5);
-        boolean isWrongInput = !(removeSpaces.equals("name") || removeSpaces.equals("done")
-                || removeSpaces.equals("notdone"));
+        boolean isWrongInput = !(removeSpaces.equals("name") || removeSpaces.equals("donefirst")
+                || removeSpaces.equals("notdonefirst"));
         if (isWrongInput) {
             throw new DukeException(errorMessage);
         }

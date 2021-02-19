@@ -6,7 +6,7 @@ import java.util.Comparator;
  * Custom comparator to sort tasks by whether they are completed, then by
  * alphabetical order.
  */
-class NotDoneComparator implements Comparator<Task> {
+class DoneFirstComparator implements Comparator<Task> {
 
     /**
      * Tasks which are completed will come before tasks which are not completed.
@@ -25,9 +25,9 @@ class NotDoneComparator implements Comparator<Task> {
             return nameComparator.compare(firstTask, secondTask);
         }
         if (firstTask.isComplete()) {
-            return 1;
-        } else {
             return -1;
+        } else {
+            return 1;
         }
     }
 }
