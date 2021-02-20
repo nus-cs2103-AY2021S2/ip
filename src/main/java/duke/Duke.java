@@ -9,15 +9,15 @@ import duke.task.TaskList;
 
 
 /**
- * The Duke class serves as the main entry point to the program.
- * Duke is a personal assistant chat bot that helps a person to
- * keep track of various tasks. It uses a CLI to interact with
- * the user and allows users to create, update, delete tasks.
+ * Represents the Duke CLI personal task assistant.
  */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor. Starts an instance of Duke.
+     */
     public Duke() {
         try {
             storage = new Storage();
@@ -27,6 +27,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns a response to be displayed to
+     * the user based on input from the user.
+     * @param input The user input.
+     * @return Response to be displayed to user.
+     */
     public String getResponse(String input) {
         assert storage != null;
         assert tasks != null;
