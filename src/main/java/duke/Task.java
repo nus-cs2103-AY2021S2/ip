@@ -7,9 +7,7 @@ import java.time.format.DateTimeFormatter;
  * several common methods shared by all subclasses.
  */
 abstract class Task {
-    // The name of the task.
     protected final String taskName;
-    // Whether the task is completed.
     protected boolean isDone;
 
     /**
@@ -19,6 +17,7 @@ abstract class Task {
      * @param taskName The name of the task.
      */
     public Task(String taskName) {
+        assert (taskName.equals("")) : "Name of task cannot be empty";
         this.taskName = taskName;
         this.isDone = false;
     }
@@ -61,14 +60,14 @@ abstract class Task {
     }
 
     /**
-     * Takes in a LocalDate object and returns the date of the object in a
-     * specific format.
+     * Takes in a LocalDate object and returns the date of the object as a string
+     * in the format MMM DD YYYY.
      *
      * @param date The LocalDate object to print the date of.
-     * @return A string representation of the date in the specified format.
+     * @return A string representation of the date in the format MMM DD YYYY.
      */
     public static String printDate(LocalDate date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return date.format(formatter);
     }
 }

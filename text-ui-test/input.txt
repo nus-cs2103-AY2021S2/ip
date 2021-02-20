@@ -29,8 +29,8 @@ find
 find test 
 sort
 sort name
-sort done
-sort notdone
+sort donefirst
+sort notdonefirst
 delete 0
 delete -2
 delete 8

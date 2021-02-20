@@ -1,16 +1,14 @@
-package main.javatest;
+package duke;
 
-import duke.DukeException;
-import duke.Parser;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
     @Test
-    public void parserEvent() {
+    public void parseEvent() {
         Parser parser = new Parser();
         String[] actual = {"event", "Dinner", "2019-12-11"};
         try {
@@ -21,7 +19,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parserDeadline() {
+    public void parseDeadline() {
         Parser parser = new Parser();
         try {
             assertEquals(null, parser.parseCommand("deadline Dinner 2019-12-11"));
@@ -32,7 +30,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parserToDo() {
+    public void parseToDo() {
         Parser parser = new Parser();
         try {
             assertEquals(null, parser.parseCommand("todo"));
@@ -42,4 +40,5 @@ public class ParserTest {
                     + "of todo cannot be empty").toString(), e.toString());
         }
     }
+
 }

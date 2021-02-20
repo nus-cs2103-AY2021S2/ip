@@ -12,14 +12,14 @@ import java.util.Scanner;
  * saving tasks in the file.
  */
 class Storage {
-    private static final String FILE_NAME = "./data/dukeText.txt";
+    private static final String FILE_NAME = "./data/duke.txt";
 
     /**
      * If there is an existing text file on the local computer, this method
      * will load the text file. Otherwise it will create a new text file so
      * that the tasks can be saved on the local computer.
      *
-     * @return The text file to save the taskslist on.
+     * @return The text file to save the tasks tn.
      * @throws IOException When there is an error in loading or creating the
      * text file.
      */
@@ -32,10 +32,10 @@ class Storage {
     }
 
     /**
-     * Updates the text file to match the input task List.
+     * Updates the text file to match the input task list.
      *
-     * @param taskList The corresponding task list in which the text file is
-     * based on.
+     * @param taskList The corresponding task list which the text file is based on.
+     * @throws IOException When there is an error in writing to the file.
      */
     public static void updateTextFile(ArrayList<Task> taskList) throws IOException {
         File storageTextFile = new File(FILE_NAME);
@@ -52,13 +52,14 @@ class Storage {
         }
         fileWriter.close();
     }
+
     /**
      * Method to read an existing text file and convert it into a corresponding task list within
      * the Dukebot.
      *
      * @param storageTextFile The text file in which the task list is created from.
      * @param taskList The corresponding task list to copy the text file over.
-     * @throws IOException Whenever an issue with reading the file arises.
+     * @throws IOException When there is an error in reading the file.
      */
     public static void convert(File storageTextFile, ArrayList<Task> taskList)
             throws IOException {
@@ -69,6 +70,7 @@ class Storage {
         }
         scanner.close();
     }
+
     private static String taskToText (Task task) {
         String taskText = "";
         if (task.isComplete()) {
@@ -79,23 +81,27 @@ class Storage {
         taskText += task.taskName;
         return taskText;
     }
+
     private static String deadlineToText (Deadline deadline) {
         String deadlineText = "D | ";
         deadlineText += taskToText(deadline);
         deadlineText += " | " + deadline.getDate();
         return deadlineText;
     }
+
     private static String eventToText (Event event) {
         String eventText = "E | ";
         eventText += taskToText(event);
         eventText += " | " + event.getDate();
         return eventText;
     }
+
     private static String toDoToText (ToDo toDo) {
         String toDoText = "T | ";
         toDoText += taskToText(toDo);
         return toDoText;
     }
+
     private static String[] parseString(String inputString) {
         String[] parsedString = new String[4];
         int counter = 0;
@@ -110,6 +116,7 @@ class Storage {
         }
         return parsedString;
     }
+
     private static Task parsedStringToTask (String[] parsedString) throws IOException {
         String typeOfTask = parsedString[0];
         boolean isCompleted = parsedString[1].equals("1");

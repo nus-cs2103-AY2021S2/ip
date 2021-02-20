@@ -3,18 +3,18 @@ package duke;
 import java.util.Comparator;
 
 /**
- * Custom comparator to sort tasks by whether they are completed, then by
+ * Custom comparator to sort tasks by completed tasks first, then by
  * alphabetical order.
  */
 class DoneFirstComparator implements Comparator<Task> {
 
     /**
-     * Tasks which are completed will come before tasks which are not completed.
-     * After that, tasks are sorted by ascending alphabetical order.
+     * Tasks are sorted by completed tasks first before incomplete tasks, and
+     * then they are sorted by ascending alphabetical order.
      *
-     * @param firstTask The first task to compare.
-     * @param secondTask The second task to compare.
-     * @return An int value to indicate which task has higher priority.
+     * @param firstTask The first task to be compared.
+     * @param secondTask The second task to be compared.
+     * @return -1 if the first task has higher priority and 1 otherwise.
      */
     @Override
     public int compare(Task firstTask, Task secondTask) {

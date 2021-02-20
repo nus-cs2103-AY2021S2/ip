@@ -6,29 +6,29 @@ Now you have 1 task in the list
 Got it. I've added this task:
   [T][ ] go out and play
 Now you have 2 tasks in the list
-Description of todo cannot be empty
+Invalid input for todo command, description of todo cannot be empty
 Here are the tasks in your list:
 1.[T][ ] dinner
 2.[T][ ] go out and play
-Invalid input
-Invalid input
+Invalid input for list command
+Invalid input for list command
 Got it. I've added this task:
   [D][ ] homework (by: Feb 20 2021)
 Now you have 3 tasks in the list
 Got it. I've added this task:
   [D][ ] finish personal project (by: Dec 12 2021)
 Now you have 4 tasks in the list
-Description of deadline cannot be empty
-Name of deadline task cannot be empty
+Invalid input for deadline command, description of deadline cannot be empty
+Invalid input for deadline command, name of deadline task cannot be empty
 Got it. I've added this task:
   [E][ ] party (at: Mar 31 2019)
 Now you have 5 tasks in the list
 Got it. I've added this task:
   [E][ ] freshman orientation camp (at: Jul 21 2022)
 Now you have 6 tasks in the list
-Invalid description of event
-Name of event task cannot be empty
-Invalid date. Input date in the format: yyyy-mm-dd
+Invalid input for event command, invalid description of event
+Invalid input for event command, name of event task cannot be empty
+Invalid input for event command, invalid date format
 Here are the tasks in your list:
 1.[T][ ] dinner
 2.[T][ ] go out and play
@@ -36,9 +36,9 @@ Here are the tasks in your list:
 4.[D][ ] finish personal project (by: Dec 12 2021)
 5.[E][ ] party (at: Mar 31 2019)
 6.[E][ ] freshman orientation camp (at: Jul 21 2022)
-Nice! I've marked this task as done:
+Invalid input for done commandNice! I've marked this task as done:
  [T][X] go out and play
-Nice! I've marked this task as done:
+Invalid input for done commandNice! I've marked this task as done:
  [D][X] finish personal project (by: Dec 12 2021)
 Here are the tasks in your list:
 1.[T][ ] dinner
@@ -47,20 +47,20 @@ Here are the tasks in your list:
 4.[D][X] finish personal project (by: Dec 12 2021)
 5.[E][ ] party (at: Mar 31 2019)
 6.[E][ ] freshman orientation camp (at: Jul 21 2022)
-Invalid index
-Invalid index
-Invalid index
-Invalid input, index must be an integer
-Invalid input
+Invalid input for done command, invalid index
+Invalid input for done command, invalid index
+Invalid input for done command, invalid index
+Invalid input for done command, index must be an integer
+Invalid input for done command
 [D][ ] homework (by: Feb 20 2021)
 [D][X] finish personal project (by: Dec 12 2021)
-No keyword found
-No keyword found
+Invalid input for find command, no keyword found
+Invalid input for find command, no keyword found
 No task with that keyword has been found
 Invalid input for sort. The commands for sort are:
 sort name
-sort done
-sort notdone
+sort donefirst
+sort notdonefirst
 The list is now sorted by name
 Here are the tasks in your list:
 1.[T][ ] dinner
@@ -85,10 +85,10 @@ Here are the tasks in your list:
 4.[E][ ] party (at: Mar 31 2019)
 5.[D][X] finish personal project (by: Dec 12 2021)
 6.[T][X] go out and play
-Invalid index
-Invalid index
+Invalid input for delete command, invalid index
+Invalid input for delete command, invalid index
 Invalid index
 Noted. I've removed this task:
-  [D][X] finish personal project (by: Dec 12 2021)
+ [D][X] finish personal project (by: Dec 12 2021)
 Now you have 5 tasks in the list
 Bye. Hope to see you again soon!

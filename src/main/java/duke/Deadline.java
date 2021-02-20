@@ -41,7 +41,7 @@ class Deadline extends Task {
     }
 
     /**
-     * Prints the details of the deadline task in a special format.
+     * Prints the details of the deadline task.
      *
      * @return A string representation of the details of the deadline task.
      */

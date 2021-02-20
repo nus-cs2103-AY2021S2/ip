@@ -41,7 +41,7 @@ class Event extends Task {
     }
 
     /**
-     * Prints the details of the event task in a specific format.
+     * Prints the details of the event task.
      *
      * @return A string representation of the details of the event task.
      */

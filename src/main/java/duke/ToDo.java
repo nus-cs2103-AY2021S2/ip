@@ -16,9 +16,9 @@ class ToDo extends Task {
 
     /**
      * Overloaded constructor to create a Todo task object. It accepts one extra
-     * argument to determine if the task is already done.
+     * argument to determine if the Todo task is already done.
      *
-     * @param taskName The name of the task.
+     * @param taskName The name of the Todo task.
      * @param isDone Whether the task is already done.
      */
     public ToDo(String taskName, boolean isDone) {
@@ -26,7 +26,7 @@ class ToDo extends Task {
     }
 
     /**
-     * Prints the details of the task in a specific format.
+     * Prints the details of the Todo task.
      *
      * @return A string representation of the details of the Todo task.
      */

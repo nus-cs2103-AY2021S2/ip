@@ -1,6 +1,6 @@
 # Spongebob Duke User Guide
 
-##Introduction
+## Introduction
 
 Spongebob duke is a personal assistant chatbot that can
 also help you keep track of your tasks.
@@ -22,7 +22,8 @@ Add a new task to the list. Spongebob duke supports 3 types of tasks :
 2. Deadline, which are tasks that must be completed before a certain date.
 3. Event, which are tasks that occur on a certain date.
 
-When a new task is added, the corresponding text file dukeText.txt is also updated.
+The task list will also be automatically saved as a text file on the local hard disk. The
+local text file will be automatically updated whenever there is a change in the task list.
 
 ### List tasks
 
@@ -64,9 +65,11 @@ Example of usage:
 
 Expected outcome:
 
-![Todo](./Images/Todo.png)
+![Todo](./Images/todo.png)
 
 ### `deadline` - Adds a deadline task to the list
+
+The year of the date must be larger than 0.
 
 Format:
 
@@ -78,9 +81,11 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline](./Images/Deadline.png)
+![Deadline](./Images/deadline.png)
 
 ### `event` - Adds an event task to the list
+
+The year of the date must be larger than 0.
 
 Format:
 
@@ -92,7 +97,7 @@ Example of usage:
 
 Expected outcome:
 
-![Event](./Images/Event.png)
+![Event](./Images/event.png)
 
 ### `list` - Display all tasks in the list
 
@@ -106,7 +111,7 @@ Example of usage:
 
 Expected outcome:
 
-![List](./Images/List.png)
+![List](./Images/list.png)
 
 ### `done` - Mark task as completed
 
@@ -120,7 +125,7 @@ Example of usage:
 
 Expected outcome:
 
-![Done](./Images/Done.png)
+![Done](./Images/done.png)
 
 ### `delete` - Delete a task from the list
 
@@ -134,7 +139,7 @@ Example of usage:
 
 Expected outcome:
 
-![Delete](./Images/Delete.png)
+![Delete](./Images/delete.png)
 
 ### `find` - Search for particular tasks in the list
 
@@ -148,7 +153,7 @@ Example of usage:
 
 Expected outcome:
 
-![Find](./Images/Find.png)
+![Find](./Images/find.png)
 
 ### `sort name` - Sort by alphabetical order
 
@@ -162,21 +167,21 @@ Example of usage:
 
 Expected outcome:
 
-![Sortname](./Images/Sortname.png)
+![Sortname](./Images/sort name.png)
 
-### `sort doneFirst` - Sort by completed tasks first
+### `sort donefirst` - Sort by completed tasks first
 
 Format:
 
-`sort doneFirst`
+`sort donefirst`
 
 Example of usage:
 
-`sort doneFirst`
+`sort donefirst`
 
 Expected outcome:
 
-![Sortdone](./Images/Sortdone.png)
+![Sortdone](./Images/sort donefirst.png)
 
 ### `sort notdonefirst` - Sort by incomplete tasks first
 
@@ -190,7 +195,7 @@ Example of usage:
 
 Expected outcome:
 
-![Sortnotdone](./Images/Sortnotdone.png)
+![Sortnotdone](./Images/sort notdonefirst.png)
 
 ### `bye` - Exits the program
 

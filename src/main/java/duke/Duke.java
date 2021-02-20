@@ -14,7 +14,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructor for our Dukebot.
+     * Constructor to initialise a new Dukebot.
      */
     public Duke() {
         this.taskList = new TaskList();
@@ -77,7 +77,7 @@ public class Duke {
         }
         return this.process(input);
     }
-
+    
     private String process(String input) {
         try {
             String[] parsedCommand = this.parser.parseCommand(input);
