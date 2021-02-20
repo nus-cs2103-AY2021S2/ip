@@ -15,6 +15,9 @@ public class Parser {
      * @throws DukeException If the format of the user input is incorrect.
      */
     public String[] parseCommand (String userInput) throws DukeException {
+        if (checkForVerticalBars(userInput)) {
+            throw new DukeException("Input command should not contain vertical bars.");
+        }
         String typeOfCommand = userInput.split(" ")[0];
         if (typeOfCommand.equals("list")) {
             return this.processList(userInput);
@@ -35,6 +38,10 @@ public class Parser {
         } else {
             throw new DukeException("Invalid command");
         }
+    }
+
+    private boolean checkForVerticalBars(String input) {
+        return input.contains("|");
     }
 
     private String[] processList(String input) throws DukeException {

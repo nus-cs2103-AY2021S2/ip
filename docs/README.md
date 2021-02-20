@@ -53,6 +53,8 @@ Exits the program.
 
 ## Usage
 
+Note that there should be no vertical bars when inputting a command to Spongebob Duke.
+
 ### `todo` - Adds a todo task to the list
 
 Format:

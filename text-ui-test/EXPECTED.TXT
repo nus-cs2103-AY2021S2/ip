@@ -36,9 +36,9 @@ Here are the tasks in your list:
 4.[D][ ] finish personal project (by: Dec 12 2021)
 5.[E][ ] party (at: Mar 31 2019)
 6.[E][ ] freshman orientation camp (at: Jul 21 2022)
-Invalid input for done commandNice! I've marked this task as done:
+Nice! I've marked this task as done:
  [T][X] go out and play
-Invalid input for done commandNice! I've marked this task as done:
+Nice! I've marked this task as done:
  [D][X] finish personal project (by: Dec 12 2021)
 Here are the tasks in your list:
 1.[T][ ] dinner
