@@ -24,7 +24,7 @@ public class Storage {
         File d = new File(directory);
         File f = new File(path);
         ArrayList<Task> list = new ArrayList<>();
-        if (!d.exists()){
+        if (!d.exists()) {
             d.mkdirs();
         }
         try {
@@ -35,7 +35,8 @@ public class Storage {
                     String line = sc.nextLine();
                     Task task = Parser.parseFile(line);
                     list.add(task);
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -59,7 +60,7 @@ public class Storage {
         // String path = "./data/duke.txt";
         try {
             FileWriter fw = new FileWriter(path);
-            for(Task t: list) {
+            for (Task t : list) {
                 fw.write(t.toFileString() + System.lineSeparator());
             }
             fw.close();

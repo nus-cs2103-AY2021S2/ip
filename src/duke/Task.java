@@ -16,6 +16,7 @@ public class Task {
         isDone = true;
         return this;
     }
+
     static Task parseInput(String input) throws DukeIncompleteCommandException {
         Task task;
         if (input.contains("todo")) {
@@ -37,6 +38,7 @@ public class Task {
             return "[ ] " + task;
         }
     }
+
     public String toFileString() {
         return toString();
     }

@@ -9,6 +9,7 @@ public class Event extends TimedTask {
     public Event() {
         this.isDone = false;
     }
+
     /*
     static Event parseInput(String input) throws DukeIncompleteCommandException,
             DateTimeParseException {
@@ -49,10 +50,11 @@ public class Event extends TimedTask {
      */
     @Override
     public String toString() {
-        return String.format("EVNT%s (at: %s)" , super.toString(),
+        return String.format("EVNT%s (at: %s)", super.toString(),
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
+
     public String toFileString() {
-        return String.format("EVNT%s (at: %s)" , super.toString(), date);
+        return String.format("EVNT%s (at: %s)", super.toString(), date);
     }
 }

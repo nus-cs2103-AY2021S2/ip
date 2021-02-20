@@ -2,7 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 
-public class TimedTask extends Task{
+public class TimedTask extends Task {
     LocalDate date;
 
     TimedTask() {

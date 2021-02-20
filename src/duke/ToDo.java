@@ -1,6 +1,7 @@
 package duke;
 
 import java.lang.Throwable;
+
 public class ToDo extends Task {
     ToDo() {
     }
@@ -8,6 +9,7 @@ public class ToDo extends Task {
     public ToDo(String task) {
         super(task);
     }
+
     static ToDo parseInput(String input) throws DukeIncompleteCommandException {
         ToDo todo = new ToDo();
         input = input.substring(4).trim();
@@ -18,6 +20,7 @@ public class ToDo extends Task {
         todo.isDone = false;
         return todo;
     }
+
     static ToDo fileReader(String line) {
         ToDo todo = new ToDo();
         if (line.charAt(5) == 'X') {
