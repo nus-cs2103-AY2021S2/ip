@@ -18,6 +18,20 @@ public class Duke {
     private Ui ui;
 
     /**
+     * Creates a new default Duke instance.
+     */
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage();
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException | IOException e) {
+            tasks = new TaskList();
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Creates a new Duke instance.
      * @param filePath file path
      */

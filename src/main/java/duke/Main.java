@@ -14,8 +14,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private final String FILE_PATH = "data/duke.txt";
-    private final Duke DUKE = new Duke(FILE_PATH);
+    private final Duke DUKE = new Duke();
 
     @Override
     public void start(Stage stage) {

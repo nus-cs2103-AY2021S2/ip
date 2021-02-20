@@ -1,26 +1,34 @@
 package duke.component;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.io.*;
+import java.util.ArrayList;
+
 public class Storage {
-    private String filePath;
+    //@@author stein414-reused
+    //DukeResponse abstraction adapted from https://github.com/stein414/ip
+    private static final String WORKING_PATH = System.getProperty("user.dir");
+    private static final String DEFAULT_PATH = java.nio.file.Paths.get(WORKING_PATH, "duke.txt").toString();
+
+    private File dataFile;
 
     /**
-     * Creates a Storage with specified filePath.
+     * Creates a Storage with default path.
+     */
+    public Storage() {
+        this(DEFAULT_PATH);
+    }
+
+    /**
+     * Creates a Storage with specified path.
      * @param filePath
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.dataFile = new File(filePath);
     }
 
     /**
@@ -29,10 +37,12 @@ public class Storage {
      * @throws IOException
      */
     public String[] load() throws IOException {
+        dataFile.createNewFile();
+
         ArrayList<String> lines = new ArrayList<>();
         BufferedReader br = null;
         try {
-            FileReader fr = new FileReader(this.filePath);
+            FileReader fr = new FileReader(dataFile.getAbsolutePath());
             br = new BufferedReader(fr);
             String line;
             while ((line = br.readLine()) != null) {
@@ -52,9 +62,11 @@ public class Storage {
      * @throws IOException
      */
     public void save(TaskList tl) throws IOException {
+        dataFile.createNewFile();
+
         BufferedWriter bw = null;
         try {
-            FileWriter fw = new FileWriter(this.filePath);
+            FileWriter fw = new FileWriter(dataFile.getAbsolutePath());
             bw = new BufferedWriter(fw);
             for (Task t : tl.getTasks()) {
                 String line = "";
