@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.lang.IndexOutOfBoundsException;
-
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
