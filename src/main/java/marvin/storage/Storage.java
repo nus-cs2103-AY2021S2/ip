@@ -66,11 +66,12 @@ public class Storage {
      * @throws DukeException Error if cannot read from file.
      */
     public TaskList load() throws DukeException {
-        if (!Files.exists(path) || !Files.isRegularFile(path)) {
-            return new TaskList();
-        }
-
         try {
+            if (!Files.exists(path) || !Files.isRegularFile(path)) {
+                Files.createDirectory(path.getParent());
+                Files.createFile(path);
+                return new TaskList();
+            }
             return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
