@@ -8,22 +8,22 @@ import duke.exception.DukeException;
 import duke.util.Utils;
 
 /**
- * The TaskList class represents the
- * abstraction of a list of tasks.
+ * Represents a list of tasks.
  */
 public class TaskList implements Iterable<Task> {
     private List<Task> tasks;
 
     /**
-     * Constructs an empty TaskList.
+     * Constructor. Defaults to an empty list of tasks.
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * Constructs a TaskList with a certain list of tasks.
-     * @param tasks The specified list of tasks.
+     * Constructor takes in a list of tasks.
+     * @param tasks The list of tasks.
+     * @throws DukeException Error if the list of tasks contains any duplicates.
      */
     public TaskList(List<Task> tasks) throws DukeException {
         if (!Utils.elementsAreUnique(tasks)) {
@@ -33,9 +33,10 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Retrieves a task from the TaskList with a 0-based index.
-     * @param index The specified index.
-     * @return The task at the specified index in the TaskList.
+     * Returns a task from the list of tasks
+     * using a 0-based index.
+     * @param index The 0-based index of the task.
+     * @return The task at the 0-based index of the list of tasks.
      */
     public Task get(int index) {
         assert tasks != null;
@@ -43,8 +44,8 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns the number of tasks in the TaskList.
-     * @return The number of tasks.
+     * Returns the number of tasks in the list of tasks.
+     * @return The number of tasks in the list of tasks.
      */
     public int size() {
         assert tasks != null;
@@ -52,8 +53,9 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a task to the TaskList.
-     * @param task The specified task.
+     * Adds a task to the list of tasks.
+     * @param task The task to be added.
+     * @throws DukeException Error if the task to be added is a duplicate.
      */
     public void add(Task task) throws DukeException {
         assert tasks != null;
@@ -64,8 +66,8 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Removes a task from the TaskList using a 0-based index
-     * @param index The specified index.
+     * Removes a task from the list of tasks using a 0-based index.
+     * @param index The 0-based index of the task.
      * @return The task which was removed.
      */
     public Task remove(int index) {
@@ -75,7 +77,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Reference from github.com/se-edu/addressbook-level2
-     * Checks if the list contains an equivalent person as the given argument.
+     * Checks if the list contains an equivalent task as the given argument.
      * The {@link Task#isSameTask} method is used for this comparison, which
      * defines a weaker notion of equality.
      */
@@ -89,8 +91,8 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns an iterator over the tasks in the TaskList.
-     * @return The iterator over the tasks in the TaskList in proper sequence.
+     * Returns an iterator over the list of tasks.
+     * @return The iterator over the list of tasks in proper sequence.
      */
     @Override
     public Iterator<Task> iterator() {
@@ -98,6 +100,12 @@ public class TaskList implements Iterable<Task> {
         return tasks.iterator();
     }
 
+    /**
+     * Returns a list of tasks that contains the keywords.
+     * @param keywords The keywords to match.
+     * @return The list of tasks that contain the keywords.
+     * @throws DukeException Error if the list of tasks contains any duplicates.
+     */
     public TaskList filter(String keywords) throws DukeException {
         List<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {

@@ -4,29 +4,41 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Deadline class is a type of Task and represents the abstraction
- * of a deadline which is due by a certain date and time.
+ * Represents a deadline.
  */
 public class Deadline extends Task {
     public static final String ENCODED_TYPE = "D";
     protected LocalDateTime dateTime;
 
     /**
-     * Constructs a new Deadline with a description
-     * that is due by a certain date and time.
-     * @param description The specified description.
-     * @param dateTime The specified date and time.
+     * Constructor takes in the description of a deadline
+     * and the date and time it is due by.
+     * @param description The description of the deadline.
+     * @param dateTime The date and time the deadline is due by.
      */
     public Deadline(String description, String dateTime) {
         super(description);
         this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd Hmm"));
     }
 
+    /**
+     * Constructor takes in whether a deadline is done,
+     * its description, and the date and time it is due by.
+     * @param isDone True if the deadline is done, false otherwise.
+     * @param description The description of the deadline.
+     * @param dateTime The date and time the deadline is due by.
+     */
     public Deadline(boolean isDone, String description, String dateTime) {
         this(description, dateTime);
         this.isDone = isDone;
     }
 
+    /**
+     * Checks if a task is the same as the task to check with.
+     * @param toCheck The task to check with
+     * @return True if the tasks are the same, false otherwise.
+     */
+    @Override
     public boolean isSameTask(Task toCheck) {
         if (toCheck instanceof Deadline) {
             return description.equals(toCheck.description)
@@ -36,8 +48,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts a deadline to the format to be saved to a file.
-     * @return The deadline in save format.
+     * Encodes a deadline into a decodable string representation of the deadline.
+     * @return The encoded string representation of the deadline.
      */
     @Override
     public String encode() {

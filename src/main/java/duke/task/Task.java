@@ -1,17 +1,16 @@
 package duke.task;
 
 /**
- * The Task class represents the abstraction of a
- * task which can have a description, and be marked done.
+ * Represents a task. A base class for other types of tasks to inherit from.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructs a new Task with a description
-     * that is initially marked as not done.
-     * @param description The specified description.
+     * Constructor takes in the description of the task.
+     * A task by default is not done.
+     * @param description The description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -19,24 +18,24 @@ public class Task {
     }
 
     /**
-     * Setter to update the done status of a task.
-     * @param isDone The new done status.
+     * Setter to update whether a task is done.
+     * @param isDone True if the task is done and false otherwise.
      */
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
     /**
-     * Getter to check the done status of a task.
-     * @return The done status of a task.
+     * Getter to check whether a task is done.
+     * @return True if the task is done and false otherwise.
      */
     public boolean isDone() {
         return isDone;
     }
 
     /**
-     * Returns task description.
-     * @return The task description.
+     * Returns the description of the task.
+     * @return The description of the task.
      */
     public String getDescription() {
         assert description != null;
@@ -44,20 +43,26 @@ public class Task {
     }
 
     /**
-     * Returns an icon based on the done status of a task.
-     * @return The icon.
+     * Returns a string-based representation of an icon of whether a task is done.
+     * @return A tick icon if the task is done, otherwise a cross icon.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Checks if a task is the same as the task to check with.
+     * Method must be implemented by subclasses.
+     * @param toCheck The task to check with
+     * @return True if the tasks are the same, false otherwise.
+     */
     public boolean isSameTask(Task toCheck) {
         throw new UnsupportedOperationException("Method must be implemented by child classes");
     }
 
     /**
-     * Converts a task to the format to be saved to a file.
-     * @return The task in save format.
+     * Encodes a task into a decodable string representation of the task.
+     * @return The encoded string representation of the task.
      */
     public String encode() {
         throw new UnsupportedOperationException("Method must be implemented by child classes");

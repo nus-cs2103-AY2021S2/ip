@@ -1,25 +1,35 @@
 package duke.task;
 
 /**
- * The Todo class is a type of Task that represents the abstraction
- * of a todo with a description of what is to be done.
+ * Represents a to-do.
  */
 public class Todo extends Task {
     public static final String ENCODED_TYPE = "T";
+
     /**
-     * Constructs a new Todo with a
-     * description of what is to be done.
-     * @param description The specified description.
+     * Constructor takes in the description of a to-do.
+     * @param description The description of the to-do.
      */
     public Todo(String description) {
         super(description);
     }
 
+    /**
+     * Constructor takes in whether a to-do is done, and its description.
+     * @param isDone True if the to-do is done, false otherwise.
+     * @param description The to-do of the deadline.
+     */
     public Todo(boolean isDone, String description) {
         this(description);
         this.isDone = isDone;
     }
 
+    /**
+     * Checks if a task is the same as the task to check with.
+     * @param toCheck The task to check with
+     * @return True if the tasks are the same, false otherwise.
+     */
+    @Override
     public boolean isSameTask(Task toCheck) {
         if (toCheck instanceof Todo) {
             return description.equals(toCheck.description);
@@ -28,8 +38,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Converts a todo to the format to be saved to a file.
-     * @return The todo in save format.
+     * Encodes a to-do into a decodable string representation of the to-do.
+     * @return The encoded string representation of the to-do.
      */
     @Override
     public String encode() {
@@ -39,8 +49,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Converts a todo to the format to be displayed to the user by the Ui.
-     * @return The todo in display format.
+     * Converts a to-do to the format to be displayed to the user by the Ui.
+     * @return The to-do in display format.
      */
     @Override
     public String toString() {

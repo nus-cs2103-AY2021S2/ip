@@ -4,29 +4,41 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Event class is a type of Task and represents the
- * abstraction of an event which occurs at a certain date.
+ * Represents an event.
  */
 public class Event extends Task {
     public static final String ENCODED_TYPE = "E";
     protected LocalDate date;
 
     /**
-     * Constructs a new Event with a description
-     * that occurs a certain date.
-     * @param description The specified description.
-     * @param time The specified date.
+     * Constructor takes in the description of an
+     * event task and the date it occurs at.
+     * @param description The description of the event.
+     * @param date The date the event occurs at.
      */
     public Event(String description, String date) {
         super(description);
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
+    /**
+     * Constructor takes in whether an event is done,
+     * its description, and the date it occurs at.
+     * @param isDone True if the event is done, false otherwise.
+     * @param description The description of the event.
+     * @param date The date the event occurs at.
+     */
     public Event(boolean isDone, String description, String date) {
         this(description, date);
         this.isDone = isDone;
     }
 
+    /**
+     * Checks if a task is the same as the task to check with.
+     * @param toCheck The task to check with
+     * @return True if the tasks are the same, false otherwise.
+     */
+    @Override
     public boolean isSameTask(Task toCheck) {
         if (toCheck instanceof Event) {
             return description.equals(toCheck.description)
@@ -36,8 +48,8 @@ public class Event extends Task {
     }
 
     /**
-     * Converts an event to the format to be saved to a file.
-     * @return The event in save format.
+     * Encodes an event into a decodable string representation of the event.
+     * @return The encoded string representation of the event.
      */
     @Override
     public String encode() {
