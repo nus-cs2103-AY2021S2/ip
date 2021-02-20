@@ -1,7 +1,40 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+You are now in the presence of
+ ____            _      ____   ____
+|    \ |        / \    |    \ |    \
+|____/ |       /___\   |____/ |____/
+|    \ |      /     \  |  \   |    \
+|____/ |____ /       \ |   \_ |____/
 
+This is BLARB.
+You may speak.
+
+> Affirmative. I've added this task:
+ [T][✘] curl up and cry
+Now you have 1 tasks in the list.
+
+> Affirmative. I've added this task:
+ [D][✘] SWE IP (by: Thursday)
+Now you have 2 tasks in the list.
+
+> Affirmative. I've added this task:
+ [E][✘] barhopping (at: Clarke Quay)
+Now you have 3 tasks in the list.
+
+> Here are your tasks:
+
+1. [T][✘] curl up and cry
+2. [D][✘] SWE IP (by: Thursday)
+3. [E][✘] barhopping (at: Clarke Quay)
+
+> The task is terminated:
+[E][✘] barhopping (at: Clarke Quay)
+
+> I've marked this task as done:
+[T][✓] curl up and cry
+
+> Here are your tasks:
+
+1. [T][✓] curl up and cry
+2. [D][✘] SWE IP (by: Thursday)
+
+> Hasta la vida, baby.

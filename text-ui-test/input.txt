@@ -1,0 +1,8 @@
+todo curl up and cry
+deadline SWE IP /by Thursday
+event barhopping /at Clarke Quay
+list
+delete 3
+done 1
+list
+bye
