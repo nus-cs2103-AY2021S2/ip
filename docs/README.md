@@ -10,8 +10,6 @@ Duke is a desktop app for managing tasks, for use via a Command Line Interface (
 5. Type the command in the text box and press Enter to execute it. Some example commands to start:
 * **`todo`**`bring water`: Adds a todo task named bring water to the tasklist.
 * **`list`**: Lists all tasks.
-* **`delete 2`**: Deletes the second task shown in the current list.
-* **`find`**`fOreSt`: Finds all tasks that contain forest in current list.
 * **`bye`**: Exits the app.
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -85,10 +83,10 @@ Duke data are saved in the hard disk automatically after any command that change
 ## Command summary
 Action | Format, Examples
 -------|------------------
-Add | `todo DESCRIPTION`, `deadline DESCRIPTION by DATE`, `event DESCRIPTION at DATE` </br> eg. `todo wash clothes`, `deadline lit review by 2021-05-09`, `event production at 2020-03-12`
-Delete | `delete INDEX` </br> eg. `delete 3`
-Done | `done INDEX` </br> eg. `done 2`
-Find | `find KEYWORD` </br> eg. `find wAtEr`, `find omewor`
+Add | `todo DESCRIPTION`, `deadline DESCRIPTION by DATE`, `event DESCRIPTION at DATE` <br> eg. `todo wash clothes`, `deadline lit review by 2021-05-09`, `event production at 2020-03-12`
+Delete | `delete INDEX` <br> eg. `delete 3`
+Done | `done INDEX` <br> eg. `done 2`
+Find | `find KEYWORD` <br> eg. `find wAtEr`, `find omewor`
 Help | `list`
 List | `list`
 Exit | `bye`
