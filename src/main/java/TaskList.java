@@ -65,6 +65,7 @@ public class TaskList {
                     res += " ";
                     res += "" + itemNo + ". " + tasks.get(itemNo-1) + "\n";
                 }
+                return res;
             default : return "Sorry, invalid command!";
         }
         }

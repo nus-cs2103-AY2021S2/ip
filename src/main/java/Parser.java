@@ -10,7 +10,7 @@ public class Parser {
      */
     public static Command parseCommand(String line) {
         String[] inputs = line.split(" ");
-        if(inputs[0].equals("list")) {
+        if(line.equals("list")) {
             return new ListCommand();
         }
         else if(inputs[0].equals("delete")) {
