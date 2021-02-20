@@ -26,8 +26,8 @@ public class TaskList {
      * Prints out task list.
      */
     void displayList() {
-        for(int i = 0; i < list.size(); i++) {
-            System.out.printf("%d. %s%n",i + 1, list.get(i).toString());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, list.get(i).toString());
         }
         System.out.println("\n");
     }
@@ -46,7 +46,7 @@ public class TaskList {
      * Deletes the task specified.
      * @param index Index of task to delete.
      */
-    void delete (int index) {
+    void delete(int index) {
         Task task = list.get(index);
         try {
             list.remove(index);

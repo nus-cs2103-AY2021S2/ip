@@ -88,6 +88,7 @@ public class Parser {
      */
     public static Task parseAddTaskCommand(String input) throws DukeIncompleteCommandException,
             DateTimeParseException {
+        // Get rid of command string and get date regex
         TimedTask timedTask = new TimedTask();
         String editedInput;
         String regex;
@@ -103,9 +104,13 @@ public class Parser {
             regex = "/at";
             timedTask = new Event();
         }
+
+        // Catch incomplete commands
         if (editedInput.equals("")) {
             throw new DukeIncompleteCommandException();
         }
+
+        // Check if todo, or timed task (event, deadline)
         if (regex.equals("")) {
             Task task = new ToDo(editedInput);
             return task;

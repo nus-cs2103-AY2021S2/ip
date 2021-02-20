@@ -2,9 +2,11 @@ package duke;
 
 public class DukeIncompleteCommandException extends Exception {
     public String message;
+
     DukeIncompleteCommandException() {
         this.message = "Oh no! Task cannot be empty. ):\n";
     }
+
     DukeIncompleteCommandException(String message) {
         this.message = message;
     }
@@ -16,6 +18,7 @@ public class DukeIncompleteCommandException extends Exception {
     public String getMessage() {
         return message;
     }
+
     public String toString() {
         return message;
     }

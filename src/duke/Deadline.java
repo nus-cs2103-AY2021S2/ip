@@ -9,6 +9,7 @@ public class Deadline extends TimedTask {
     Deadline() {
         this.isDone = false;
     }
+
     static Deadline parseInput(String input) throws DukeIncompleteCommandException,
             DateTimeParseException {
 
@@ -44,12 +45,14 @@ public class Deadline extends TimedTask {
         deadline.date = LocalDate.parse(dateString.subSequence(0, dateString.length()));
         return deadline;
     }
+
     @Override
     public String toString() {
-        return String.format("DDLN%s (by: %s)" , super.toString(),
+        return String.format("DDLN%s (by: %s)", super.toString(),
                 date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
+
     public String toFileString() {
-        return String.format("DDLN%s (by: %s)" , super.toString(), date);
+        return String.format("DDLN%s (by: %s)", super.toString(), date);
     }
 }

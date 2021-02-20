@@ -65,7 +65,7 @@ public class Ui {
      * Prints error message for IndexOutOfBoundsExceptions
      */
     static void printIndexError() {
-        System.out.println("Oh no! This task does not exist. D:\n" );
+        System.out.println("Oh no! This task does not exist. D:\n");
     }
 
     /**
