@@ -1,0 +1,44 @@
+todo borrow book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
+done 1
+done 3
+list
+done 2
+event a /at
+event a /at a
+event a /at
+deadline b
+deadline
+deadline /by
+deadline /by a
+deadline fdasf /by d
+list
+todo
+todo afdsa
+list
+done 4
+done 5
+done 6
+list
+done 0
+done -1
+done 7
+list
+delete 0
+delete -1
+delete 7
+delete 4
+list
+delete 4
+list
+delete 1
+list
+delete 2
+list
+delete 1
+list
+delete 1
+list
+bye
