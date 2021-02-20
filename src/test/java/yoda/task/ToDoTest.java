@@ -9,6 +9,6 @@ class ToDoTest {
     void testToString() {
         ToDo todo = new ToDo("do that");
         assertEquals(todo.toString(),
-                "[T][ ] do that ---> created on " + todo.formatDateTime());
+                "[T][ ] do that");
     }
 }

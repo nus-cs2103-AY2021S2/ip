@@ -20,6 +20,18 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Gets the number of tasks in the list.
+     * @return The number of tasks in the list
+     */
+    public int getTaskListSize() {
+        return tasks.size();
+    }
+
+    public List<Task> getList() {
+        return tasks;
+    }
+
+    /**
      * Accesses a task from the list.
      * @param taskNumber Position of task in list.
      * @return Task requested by user
@@ -79,13 +91,6 @@ public class TaskList implements Serializable {
         tasks.clear();
     }
 
-    /**
-     * Gets the number of tasks in the list.
-     * @return The number of tasks in the list
-     */
-    public int getTaskListSize() {
-        return tasks.size();
-    }
 
     public int getNumberOfUnfinishedTasks() {
         int unfinishedTasks = 0;
@@ -126,10 +131,6 @@ public class TaskList implements Serializable {
                     .filter(p -> p.toString().toLowerCase().contains(formattedType))
                     .collect(Collectors.toList()));
         }
-    }
-
-    public List<Task> getList() {
-        return tasks;
     }
 
     /**

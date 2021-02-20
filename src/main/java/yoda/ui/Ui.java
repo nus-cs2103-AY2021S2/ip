@@ -8,6 +8,7 @@ import yoda.task.Task;
 public class Ui {
     /** Valid inputs that are available to the user */
     private static final String HELP_LIST = "The commands you can use, these are:\n"
+                                          + "\n"
                                           + "To add a task:\n"
                                           + "todo [description]\n"
                                           + "event [description] /at YYYY-MM-DD HHmm\n"
@@ -26,7 +27,7 @@ public class Ui {
                                           + "done [taskNumbers_in_the_list]\n"
                                           + "e.g. done 1 3 5\n"
                                           + "To mark all tasks as done:\n"
-                                          + "done all"
+                                          + "done all\n"
                                           + "\n"
                                           + "To delete task(s):\n"
                                           + "delete [taskNumbers_in_the_list]\n"
@@ -48,7 +49,8 @@ public class Ui {
     public String greet() {
         return "Greetings, young Padawan!\n"
                + "Yoda, my name is!\n"
-               + "How may I help you, hmm?";
+               + "How may I help you, hmm?\n"
+               + "To get a list of all available commands, type help!";
     }
 
     /**
@@ -63,7 +65,7 @@ public class Ui {
     public String showError() {
         return "The greatest teacher, failure is \n"
                 + "Recognise your request, I do not\n"
-                + showHelp();
+                + "To get a list of all available commands, use 'help'";
     }
 
     public String showHelp() {

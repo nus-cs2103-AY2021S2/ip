@@ -39,6 +39,8 @@ public class Parser {
             return new EditCommand(splitInput);
         case BYE:
             return new ExitCommand();
+        case HELP:
+        case ERROR:
         default:
             return new HelpCommand(splitInput);
         }
