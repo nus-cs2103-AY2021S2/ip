@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.command.Command;
 import duke.component.Parser;
 import duke.component.Storage;
@@ -11,6 +9,8 @@ import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.UnknownCommandException;
 import duke.exception.WrongFormatException;
+
+import java.io.IOException;
 
 public class Duke {
     private Storage storage;
@@ -32,6 +32,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns DukeResponse based on user input.
+     * @param input
+     * @return DukeResponse
+     */
     public DukeResponse getResponse(String input) {
         Command c;
         try {

@@ -1,31 +1,28 @@
 package duke.component;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import duke.component.Parser;
+import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
-import duke.command.ListCommand;
+import duke.command.FindCommand;
 import duke.command.ExitCommand;
-import duke.command.AddCommand;
-import duke.task.ToDo;
-import duke.task.Deadline;
-import duke.task.Event;
+import duke.command.ListCommand;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test
     public void parse_validCommand_success() throws Exception {
-        assertEquals(new ExitCommand(), Parser.parse("bye"));
-        assertEquals(new ListCommand(), Parser.parse("list"));
-        assertEquals(new DoneCommand(0), Parser.parse("done 1"));
-        assertEquals(new DeleteCommand(0), Parser.parse("delete 1"));
-        assertEquals(new AddCommand(new ToDo("buy book")), Parser.parse("todo buy book"));
-        assertEquals(new AddCommand(new Deadline("return book", "2020-06-07")), Parser.parse("deadline return book "
-                + "/by 2020-06-07"));
-        assertEquals(new AddCommand(new Event("library meetup", "2020-08-27")), Parser.parse("deadline return book "
-                + "/at 2020-08-27"));
+        assertTrue(Parser.parse("bye") instanceof ExitCommand);
+        assertTrue(Parser.parse("list") instanceof ListCommand);
+        assertTrue(Parser.parse("done 1") instanceof DoneCommand);
+        assertTrue(Parser.parse("delete 1") instanceof DeleteCommand);
+        assertTrue(Parser.parse("todo buy book") instanceof AddCommand);
+        assertTrue(Parser.parse("deadline return book /by 2020-06-07") instanceof AddCommand);
+        assertTrue(Parser.parse("event library meetup /at 2020-08-27") instanceof AddCommand);
+        assertTrue(Parser.parse("find book") instanceof FindCommand);
     }
 
     @Test

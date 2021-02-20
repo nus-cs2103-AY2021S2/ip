@@ -22,12 +22,13 @@ public class DeleteCommand extends Command {
      * @param taskList
      * @param ui
      * @param storage
+     * @return DukeResponse
      */
     public DukeResponse execute(TaskList taskList, Ui ui, Storage storage) {
         if (index > taskList.getTasks().size() - 1 || index < 0) {
             return new DukeResponse(ui.showNotFound());
         }
-        assert index >= 0 && index < taskList.getTasks().size() - 1 : "index should be in valid range";
+        assert index >= 0 && index <= taskList.getTasks().size() - 1 : "index should be in valid range";
         Task t = taskList.getTasks().remove(index);
         return new DukeResponse(ui.showDelete(t, taskList));
     }

@@ -16,10 +16,18 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * Returns date in displayed format.
+     * @return String
+     */
     public String getDisplayBy() {
         return this.by.format(DateTimeFormatter.ofPattern(Task.DATE_DISPLAY_FORMAT));
     }
 
+    /**
+     * Returns date in saved format.
+     * @return String
+     */
     public String getSaveBy() {
         return this.by.format(DateTimeFormatter.ofPattern(Event.DATE_SAVE_FORMAT));
     }

@@ -1,10 +1,8 @@
 package duke.controller;
 
+import duke.Duke;
 import duke.DukeResponse;
 import duke.component.Ui;
-import duke.exception.EmptyDescriptionException;
-import duke.exception.UnknownCommandException;
-import duke.exception.WrongFormatException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,9 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import duke.Duke;
-
-import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -55,7 +50,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws UnknownCommandException, WrongFormatException, EmptyDescriptionException, IOException {
+    private void handleUserInput() {
         String input = userInput.getText();
         DukeResponse response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -63,6 +58,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response.getResponse(), DUKE_IMAGE)
         );
         userInput.clear();
+
+        //@@author stein414-reused
+        //Solution adapted from https://github.com/stein414/ip
         if (response.getIsExit()) {
             CompletableFuture.delayedExecutor(EXIT_DELAY_MILLI, TimeUnit.MILLISECONDS)
                     .execute(() -> Platform.exit());

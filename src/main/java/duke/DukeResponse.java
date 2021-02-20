@@ -1,5 +1,7 @@
 package duke;
 
+//@@author stein414-reused
+//DukeResponse abstraction adapted from https://github.com/stein414/ip
 public class DukeResponse {
     private String response;
     private boolean isExit;
