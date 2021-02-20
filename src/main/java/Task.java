@@ -1,6 +1,6 @@
 package main.java;
 
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -20,5 +20,15 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    public abstract String getTaskCommand();
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 }

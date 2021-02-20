@@ -5,6 +5,11 @@ import main.java.Deadline;
 import main.java.Todo;
 import main.java.Task;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +20,7 @@ public class Duke {
 
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
+        loadTasks(tasks);
 
         displayWelcomeMsg();
         Scanner sc = new Scanner(System.in);
@@ -64,6 +70,7 @@ public class Duke {
             default:
                 throw new InvalidCommandException();
             }
+            writeTasksToDisk(tasks);
         }
     }
 
@@ -147,5 +154,51 @@ public class Duke {
         System.out.println(INDENTATION + "    " + task);
         System.out.println(INDENTATION + "Now you have " + size + " task" + (size > 1 ? "s" : "") + " in the list.");
         System.out.println(SEPARATOR);
+    }
+
+    public static void loadTasks(ArrayList<Task> tasks) {
+        String filePath = "tasks.txt";
+        File file = new File(filePath);
+        try {
+            if (file.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line = br.readLine();
+                while (line != null) {
+                    if (line.charAt(0) == '#') {
+                        line = line.substring(1);
+                        addTask(tasks, line);
+                        markLatestTaskAsDone(tasks);
+                    } else {
+                        addTask(tasks, line);
+                    }
+                    line = br.readLine();
+                }
+            } else {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EmptyDescriptionException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void writeTasksToDisk(ArrayList<Task> tasks) {
+        try {
+            FileWriter myWriter = new FileWriter("tasks.txt");
+            for (Task task : tasks) {
+                if (task.isDone()) {
+                    myWriter.write("#"); // Use # to represent done tasks
+                }
+                myWriter.write(task.getTaskCommand() + "\n");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void markLatestTaskAsDone(ArrayList<Task> tasks) {
+        tasks.get(tasks.size() - 1).markAsDone();
     }
 }
