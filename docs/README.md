@@ -8,6 +8,8 @@ which can serve as a sort of bullet reminder about outstanding things)*, deadlin
 to be completed by a certain date)* and lastly event tasks *(events occurring on a certain date, like promos
 or meetings).
 
+
+Note all command words are case-insensitive
 ### Feature 1 
 
 ## Usage
@@ -82,7 +84,7 @@ Note : The string representation of a task is the string which is displayed by t
 you can call a list Command to see the format. So for example in the earlier todo task example, the string representation is 
 `[T][X] read a good book`. Note that you can also search out all deadline tasks using the unique task identifier, for example 
 `find [D]`. Additionally if you want to search by date, you have to search the 'MMM-dd-yyyy' format string, so for example 
-`find Mar 3 2021`;
+`find Mar 3 2021`. Note that the search is case insenstive.
 
 Example of usage: 
 
@@ -162,7 +164,7 @@ GUI displays list of tasks, numbered.
 
 The program sorts tasks by its date. Events or deadlines that are happening sooner
 are higher up the list. Since ToDo tasks do not have any date associated with them, they will be pushed back to the end
-of the list. If the tasks have the same date then the more recently addded tasks will come later in the list.
+of the list. If the tasks have the same date then the more recently added tasks will come later in the list.
 
 Example of usage: 
 
