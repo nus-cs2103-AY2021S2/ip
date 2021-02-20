@@ -2,29 +2,28 @@
 
 ## Features 
 
-### Feature 1
 Add Tasks:
 * Todo
 * Deadline
 * Event
 
-### Feature 2
-List Tasks
 
-### Feature 3
-Set task as done
+1)List Tasks
 
-### Feature 4
-Delete Task
 
-### Feature 5
-Find tasks with specific keyword
+2)Set task as done
 
-### Feature 6
-Sort Tasks chronologically (Deadline only)
 
-### Feature 7
-Save Tasks
+3)Delete Task
+
+
+4)Find tasks with specific keyword
+
+
+5)Sort Tasks chronologically (Deadline only)
+
+
+6)Save Tasks
 
 
 ## Usage
