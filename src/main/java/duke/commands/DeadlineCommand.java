@@ -13,17 +13,18 @@ import duke.task.TaskList;
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     private String description;
-    private String date;
+    private String dateTime;
 
     /**
-     * Constructor takes in the description of a deadline and the by date.
+     * Constructor takes in the description of a deadline and
+     * the date and time it is due by.
      * @param description The description of the deadline.
-     * @param date The by date.
+     * @param dateTime The date and time the description is due by.
      */
-    public DeadlineCommand(String description, String date) {
+    public DeadlineCommand(String description, String dateTime) {
         super();
         this.description = description;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -38,9 +39,9 @@ public class DeadlineCommand extends Command {
         assert tasks != null;
         assert storage != null;
         assert description != null;
-        assert date != null;
+        assert dateTime != null;
 
-        Task newTask = new Deadline(description, date);
+        Task newTask = new Deadline(description, dateTime);
         tasks.add(newTask);
         storage.save(tasks);
         return Messages.getAddTaskMessage(newTask, tasks.size());

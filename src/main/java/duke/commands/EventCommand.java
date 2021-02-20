@@ -13,16 +13,16 @@ import duke.task.TaskList;
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     private String description;
-    private String dateTime;
+    private String date;
 
     /**
-     * Constructor takes in the description of an event and the date and time which it occurs at.
+     * Constructor takes in the description of an event and the date which it occurs at.
      * @param description The description of the event.
-     * @param dateTime The date and time which the event occurs at.
+     * @param date The date which the event occurs at.
      */
-    public EventCommand(String description, String dateTime) {
+    public EventCommand(String description, String date) {
         this.description = description;
-        this.dateTime = dateTime;
+        this.date = date;
     }
 
     /**
@@ -37,9 +37,9 @@ public class EventCommand extends Command {
         assert tasks != null;
         assert storage != null;
         assert description != null;
-        assert dateTime != null;
+        assert date != null;
 
-        Task newTask = new Event(description, dateTime);
+        Task newTask = new Event(description, date);
         tasks.add(newTask);
         storage.save(tasks);
         return Messages.getAddTaskMessage(newTask, tasks.size());
