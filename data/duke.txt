@@ -1,0 +1,8 @@
+[D][X] project (by: Mar 3 2020, 7:00PM)
+[E][X] party (at: Mar 3 2020, 8:00PM)
+[T][ ] book review
+[E][ ] book release (at: Jan 1 2021, 6:00PM)
+[T][X] clean room
+[T][X] a
+[D][ ] b (by: Mar 4 2020, 7:00PM)
+[E][ ] c (at: Sep 9 2020, 7:00PM)
