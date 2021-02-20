@@ -1,8 +1,10 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Command {
+public class Deadline extends duke.Command {
 
     public LocalDate dueDate;
     private String formattedDate;
@@ -16,7 +18,7 @@ public class Deadline extends Command {
         this.formattedDate = this.dueDate.format(format);
     }
 
-    public String getTime() {
+    public LocalDate getTime() {
         return this.dueDate;
     }
 

@@ -1,3 +1,5 @@
+package duke;
+
 public class Command {
     String commandDescription;
     boolean isDone;

@@ -1,7 +1,9 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Command {
+public class Event extends duke.Command {
     public LocalDate eventDate;
     private String formattedDate;
 
@@ -14,8 +16,8 @@ public class Event extends Command {
         this.formattedDate = this.eventDate.format(format);
     }
 
-    public String getTime() {
-        return this.eventTime;
+    public LocalDate getTime() {
+        return this.eventDate;
     }
 
     @Override
