@@ -51,7 +51,7 @@ application {
 shadowJar {
     archiveBaseName = "DukeLukeMuke"
     archiveClassifier = null
-    archiveVersion = "v0.3";
+    archiveVersion = "v0.4";
 }
 
 checkstyle {
