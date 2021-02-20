@@ -67,7 +67,7 @@ Example of usage:
 
 Expected outcome:
 
-![Todo](./Images/todo.png)
+![todo](./Images/todo.png)
 
 ### `deadline` - Adds a deadline task to the list
 
@@ -83,7 +83,7 @@ Example of usage:
 
 Expected outcome:
 
-![Deadline](./Images/deadline.png)
+![deadline](./Images/deadline.png)
 
 ### `event` - Adds an event task to the list
 
@@ -99,7 +99,7 @@ Example of usage:
 
 Expected outcome:
 
-![Event](./Images/event.png)
+![event](./Images/event.png)
 
 ### `list` - Display all tasks in the list
 
@@ -113,7 +113,7 @@ Example of usage:
 
 Expected outcome:
 
-![List](./Images/list.png)
+![list](./Images/list.png)
 
 ### `done` - Mark task as completed
 
@@ -127,7 +127,7 @@ Example of usage:
 
 Expected outcome:
 
-![Done](./Images/done.png)
+![done](./Images/done.png)
 
 ### `delete` - Delete a task from the list
 
@@ -141,7 +141,7 @@ Example of usage:
 
 Expected outcome:
 
-![Delete](./Images/delete.png)
+![delete](./Images/delete.png)
 
 ### `find` - Search for particular tasks in the list
 
@@ -155,7 +155,7 @@ Example of usage:
 
 Expected outcome:
 
-![Find](./Images/find.png)
+![find](./Images/find.png)
 
 ### `sort name` - Sort by alphabetical order
 
@@ -169,7 +169,7 @@ Example of usage:
 
 Expected outcome:
 
-![Sortname](./Images/sort name.png)
+![sortname](./Images/sort name.png)
 
 ### `sort donefirst` - Sort by completed tasks first
 
@@ -183,7 +183,7 @@ Example of usage:
 
 Expected outcome:
 
-![Sortdone](./Images/sort donefirst.png)
+![sortdonefirst](./Images/sort donefirst.png)
 
 ### `sort notdonefirst` - Sort by incomplete tasks first
 
@@ -197,7 +197,7 @@ Example of usage:
 
 Expected outcome:
 
-![Sortnotdone](./Images/sort notdonefirst.png)
+![sortnotdonefirst](./Images/sort notdonefirst.png)
 
 ### `bye` - Exits the program
 
