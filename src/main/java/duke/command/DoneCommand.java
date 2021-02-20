@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.lang.IndexOutOfBoundsException;
+
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
@@ -27,6 +29,8 @@ public class DoneCommand extends Command {
             manager.markTaskDone(this.index);
             storage.writeToDisk(manager.getStore());
             return this.message;
+        } catch (IndexOutOfBoundsException err) {
+            return "oops, number must be between 1 and number of tasks (inclusive).";
         } catch (Exception err) {
             return ":( sorry i don't recognise this format. type help for more info!";
         }
