@@ -82,11 +82,11 @@ Duke data are saved in the hard disk automatically after any command that change
 
 ## Command summary
 Action | Format, Examples
--------|------------------
-Add | `todo DESCRIPTION`, `deadline DESCRIPTION by DATE`, `event DESCRIPTION at DATE` <br> eg. `todo wash clothes`, `deadline lit review by 2021-05-09`, `event production at 2020-03-12`
-Delete | `delete INDEX` <br> eg. `delete 3`
-Done | `done INDEX` <br> eg. `done 2`
-Find | `find KEYWORD` <br> eg. `find wAtEr`, `find omewor`
-Help | `list`
+--------|------------------
+Add | `todo DESCRIPTION`, `deadline DESCRIPTION by DATE`, `event DESCRIPTION at DATE`<br> e.g., `todo wash clothes`, `deadline lit review by 2021-05-09`, `event production at 2020-03-12`
+Delete | `delete INDEX`<br> e.g., `delete 3`
+Done | `done INDEX`<br> e.g., `done 2`
+Find | `find KEYWORD`<br> e.g.,`find oMeWor`
+Help | `help`
 List | `list`
 Exit | `bye`
