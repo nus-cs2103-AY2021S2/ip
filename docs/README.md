@@ -1,8 +1,6 @@
 # Duke Task Manager
 
-# User Guide
-
-## Features 
+## User Guide : Features
 
 ### Add todo
 
@@ -14,7 +12,7 @@ Example : `todo go to school `
 
 ### Add event
 
-Add an event with a time
+Add an event with a date. This date can be written in natural English.
 
 `event <TEXT> /at <TIME>`
 
@@ -23,7 +21,7 @@ Example : `event attend birthday party /at tomorrow`
 
 ### Add deadline
 
-Add a deadline with a due date
+Add a deadline with a due date. This date can be written in natural English.
 
 `deadline <TEXT> /by <TIME>`
 
@@ -43,13 +41,13 @@ Mark any task as done
 
 Example : `done 1`
 
-### Remove task
+### Delete task
 
-Remove a task from the list
+Delete a task from the list
 
-`remove <TASK_INDEX>`
+`delete <TASK_INDEX>`
 
-Example : `remove 2`
+Example : `delete 2`
 
 ### Clearing all tasks
 
@@ -67,7 +65,7 @@ Example : `find birthday`
 
 ### Save
 
-Save the file. The file is saved automatically after every edit (except clear).
+This manually saves the file. The file is saved automatically after every edit (except clear).
 
 `save`
 

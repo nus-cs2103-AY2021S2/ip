@@ -39,7 +39,7 @@ public class AddCommand extends Command {
      * @param ui
      * @param storage
      * @return string to print
-     * @throws DukeExceptione
+     * @throws DukeException
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String stringToReturn = "";
