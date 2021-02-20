@@ -35,7 +35,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="JUnit.ToDoTest">
+  <component name="RunManager" selected="JUnit.ParserTest.parseAddTaskCommand_correctInput_success">
     <configuration name="Duke" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="duke.Duke" />
       <module name="duke" />
@@ -49,10 +49,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DukeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ParserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DukeTest" />
+      <option name="MAIN_CLASS_NAME" value="ParserTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ParserTest.parseAddTaskCommand_correctInput_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ParserTest" />
+      <option name="METHOD_NAME" value="parseAddTaskCommand_correctInput_success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TaskTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -69,9 +88,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ToDoTest" />
-        <item itemvalue="JUnit.DukeTest" />
+        <item itemvalue="JUnit.ParserTest.parseAddTaskCommand_correctInput_success" />
+        <item itemvalue="JUnit.ParserTest" />
         <item itemvalue="Application.Duke" />
+        <item itemvalue="JUnit.TaskTest" />
+        <item itemvalue="JUnit.ToDoTest" />
       </list>
     </recent_temporary>
   </component>

@@ -35,7 +35,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="JUnit.ParserTest.parseAddTaskCommand_correctInput_success">
+  <component name="RunManager" selected="Application.Duke">
     <configuration name="Duke" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="duke.Duke" />
       <module name="duke" />
@@ -88,9 +88,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Duke" />
         <item itemvalue="JUnit.ParserTest.parseAddTaskCommand_correctInput_success" />
         <item itemvalue="JUnit.ParserTest" />
-        <item itemvalue="Application.Duke" />
         <item itemvalue="JUnit.TaskTest" />
         <item itemvalue="JUnit.ToDoTest" />
       </list>

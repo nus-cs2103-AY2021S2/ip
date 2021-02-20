@@ -25,27 +25,50 @@ public class TaskList {
         }
         System.out.println("\n");
     }
-
-    void markDone(int index) {
-        Task task = list.get(index);
-        task.markDone();
-        Ui.printDone(task);
+    static void displayTabbedList(ArrayList<Task> tasks) {
+        for(int i = 0; i < tasks.size(); i++) {
+            System.out.printf("    %d. %s%n",i + 1, tasks.get(i).toString());
+        }
+        System.out.println("\n");
     }
-    void delete (int index) {
-        Task task = list.get(index);
+    void markDone(int index) {
         try {
-            list.remove(index);
+            Task task = list.get(index);
+            task.markDone();
+            Ui.printDone(task);
+            storage.saveFile(list);
+            // Ui.printDone(task);
         } catch (IndexOutOfBoundsException e) {
             Ui.printIndexError();
         }
-        storage.saveFile(list);
-        Ui.printDelete(task, list.size());
+    }
+    void delete (int index) {
+        try {
+            Task task = list.get(index);
+            list.remove(index);
+            storage.saveFile(list);
+            Ui.printDelete(task, list.size());
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printIndexError();
+        }
+
     }
 
     void add(Task task) {
         list.add(task);
         storage.saveFile(task.toFileString());
         Ui.printAdd(task, list.size());
+    }
+
+    void find(String keyword) {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            String taskString = list.get(i).toString();
+            if (taskString.contains(keyword)) {
+                newList.add(list.get(i));
+            }
+        }
+        Ui.printFind(newList);
     }
 
 

@@ -23,7 +23,7 @@ public class Parser {
     void parseLine(String input) {
         try {
             if (input.equals("list") || input.contains("done")
-                    || input.contains("delete")) {
+                    || input.contains("delete") || input.contains("find")) {
                 parseGeneralCommand(input);
             } else if (input.contains("todo") ||
                     input.contains("deadline") ||
@@ -50,10 +50,14 @@ public class Parser {
             inputs = input.split(" ");
             index = Integer.parseInt(inputs[1]) - 1;
             taskList.markDone(index);
-        } else {
+        } else if (input.contains("delete")) {
             inputs = input.split(" ");
             index = Integer.parseInt(inputs[1]) - 1;
             taskList.delete(index);
+        } else {
+            inputs = input.split(" ");
+            String keyword = inputs[1];
+            taskList.find(keyword);
         }
     }
 
