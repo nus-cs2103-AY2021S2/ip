@@ -23,7 +23,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/squareface.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/squareface.png"));
 
     @FXML
     public void initialize() {

@@ -43,7 +43,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setPadding(new Insets(10, 10, 10, 10));
+        dialog.setPadding(new Insets(10, 15, 10, 15));
     }
 
     /**
@@ -57,7 +57,7 @@ public class DialogBox extends HBox {
         var dukeDialogBox = new DialogBox(text);
         dukeDialogBox.dialog.setBackground(new Background(new BackgroundFill(
                 Color.rgb(255, 255, 255),
-                new CornerRadii(5.0),
+                new CornerRadii(10.0),
                 new Insets(0, 5, 0, 5))));
 
         ImageView imageNode = new ImageView(image);
@@ -79,7 +79,7 @@ public class DialogBox extends HBox {
         var userDialogBox = new DialogBox(text);
         userDialogBox.dialog.setBackground(new Background(new BackgroundFill(
                 Color.rgb(102, 255, 204),
-                new CornerRadii(5.0),
+                new CornerRadii(10.0),
                 null)));
         return userDialogBox;
     }

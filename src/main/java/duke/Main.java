@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -12,8 +13,9 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
+    private static final String APP_NAME = "Duke";
     private final Duke duke = new Duke();
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/squareface.png"));
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +25,8 @@ public class Main extends Application {
             AnchorPane anchorPane = fxmlLoader.load();
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
-            stage.setTitle("Duke");
+            stage.getIcons().add(dukeImage);
+            stage.setTitle(APP_NAME);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().showWelcome();
             stage.show();
