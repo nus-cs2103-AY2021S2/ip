@@ -18,7 +18,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dateTime) {
         super(description);
-        this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd Hmm"));
+        this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     /**

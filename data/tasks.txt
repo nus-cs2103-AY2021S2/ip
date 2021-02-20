@@ -1,2 +1,3 @@
-D/0/buy ring/2020-11-14 1900
-T/0/buy milk
+T/1/buy milk
+E/0/birthday party/2021-02-20
+D/0/finish project/2021-02-10 1400
