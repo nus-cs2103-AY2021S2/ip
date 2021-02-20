@@ -63,9 +63,7 @@ public class Ui {
     public static String showSuccessfulAdd(int numTasks, Task relevantTask) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(INDENT + " Got it. I've added this task: \n");
-        stringBuilder.append(INDENT + "   ")
-                .append(relevantTask)
-                .append("\n\n");
+        stringBuilder.append(relevantTask).append("\n\n");
         stringBuilder.append(INDENT + " Now you have ").append(numTasks).append(" tasks in the list.");
 
         return stringBuilder.toString();
@@ -79,7 +77,7 @@ public class Ui {
     public static String showSuccessfulDone(Task relevantTask) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(INDENT + " Nice! I've marked this task as done: \n");
-        stringBuilder.append(INDENT + "   ").append(relevantTask);
+        stringBuilder.append(relevantTask);
         return stringBuilder.toString();
     }
 
@@ -92,9 +90,7 @@ public class Ui {
     public static String showSuccessfulDelete(int numTasks, Task relevantTask) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(INDENT + " Noted. I've removed this task \n");
-        stringBuilder.append(INDENT + "   ")
-                .append(relevantTask)
-                .append("\n\n");
+        stringBuilder.append(relevantTask).append("\n\n");
         stringBuilder.append(INDENT + " Now you have ").append(numTasks).append(" tasks in the list.");
 
         return stringBuilder.toString();
@@ -108,7 +104,7 @@ public class Ui {
     public static String showDukeException(DukeException ex) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(INDENT + " " + ex.getMessage());
+        stringBuilder.append(ex.getMessage());
 
         return stringBuilder.toString();
     }
@@ -139,8 +135,7 @@ public class Ui {
         stringBuilder.append(INDENT + " Here are the matching tasks in your list: \n");
         while (taskIter.hasNext()) {
             Task curr = taskIter.next();
-            stringBuilder.append(INDENT + " ")
-                    .append(String.valueOf(taskIter.nextIndex()))
+            stringBuilder.append(String.valueOf(taskIter.nextIndex()))
                     .append(".")
                     .append(curr)
                     .append("\n");
@@ -158,13 +153,13 @@ public class Ui {
 
         switch (action) {
         case ADD:
-            stringBuilder.append("The tag #").append(tag).append(" was added to Task ")
-                    .append("\"").append(relevantTask).append("\"");
+            stringBuilder.append("The tag #").append(tag).append(" was added to the Task ")
+                    .append("\"").append(relevantTask.getDescription()).append("\"");
             return stringBuilder.toString();
 
         case DELETE:
-            stringBuilder.append("The tag #").append(tag).append(" was deleted from Task ")
-                    .append("\"").append(relevantTask).append("\"");
+            stringBuilder.append("The tag #").append(tag).append(" was deleted from the Task ")
+                    .append("\"").append(relevantTask.getDescription()).append("\"");
             return stringBuilder.toString();
 
         default:
