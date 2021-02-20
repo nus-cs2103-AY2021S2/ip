@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Class containing methods for printing different messages
  * according to the situation.
@@ -74,5 +76,10 @@ public class Ui {
     static void printDateFormatError() {
         System.out.println("Oh no! " +
                 " Please key in the date in the format YYYY-MM-DD.\n");
+    }
+    static void printFind(ArrayList<Task> tasks) {
+        System.out.println("Here are the matching tasks in your list:\n");
+        TaskList.displayTabbedList(tasks);
+        System.out.println("Found " + tasks.size() + " result(s).\n");
     }
 }
