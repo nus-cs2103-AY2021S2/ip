@@ -60,6 +60,19 @@ public class Ui {
         System.out.println(SEPARATOR);
     }
 
+    public void printFoundTasks(ArrayList<String> printableTasks) {
+        System.out.println(SEPARATOR);
+        if (printableTasks.size() == 0) {
+            System.out.println(INDENTATION + "Found no matching tasks.");
+        } else {
+            System.out.println(INDENTATION + "Here are the matching tasks in your list:");
+            for (String printableTask : printableTasks) {
+                System.out.println(INDENTATION + "    " + printableTask);
+            }
+        }
+        System.out.println(SEPARATOR);
+    }
+
     public void displayEmptyDescriptionError() {
         System.out.println(SEPARATOR);
         System.out.println(INDENTATION + "The description of a task cannot be empty.");
