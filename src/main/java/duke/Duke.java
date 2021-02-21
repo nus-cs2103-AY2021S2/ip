@@ -36,7 +36,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.getLoadingError();
             tasks = new TaskList();
         }
     }
@@ -57,8 +56,8 @@ public class Duke {
             assert this.ui != null;
             return c.getResponse(tasks, ui, storage);
         } catch (DukeException e) {
-            String msg = ui.getErrorMessage(e.getMessage());
-            return new CommandResponse(msg, false);
+            String message = ui.getErrorMessage(e.getMessage());
+            return new CommandResponse(message, false);
         }
     }
 }
