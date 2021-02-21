@@ -1,7 +1,7 @@
-import main.java.EmptyDescriptionException;
-import main.java.TaskList;
-import org.junit.jupiter.api.Test;
+import duke.EmptyDescriptionException;
+import duke.TaskList;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -12,7 +12,7 @@ public class TaskListTest {
             new TaskList().addTask("todo");
             fail();
         } catch (EmptyDescriptionException e) {
-            assertEquals("main.java.EmptyDescriptionException", e.toString());
+            assertEquals("duke.EmptyDescriptionException", e.toString());
         }
     }
 }

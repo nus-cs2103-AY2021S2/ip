@@ -1,6 +1,6 @@
-import main.java.Deadline;
-import org.junit.jupiter.api.Test;
+import duke.Deadline;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
