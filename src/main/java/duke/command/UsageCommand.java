@@ -12,6 +12,6 @@ public class UsageCommand extends Command {
     @Override
     public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
         String message = Ui.getUsage();
-        return new CommandResponse(message, UsageCommand.toExit);
+        return new CommandResponse(UsageCommand.class, message, UsageCommand.toExit);
     }
 }

@@ -21,6 +21,6 @@ public class MarkTaskAsUndoneCommand extends Command {
         Task task = tasks.markUndone(this.taskIndex);
 
         String message = Ui.getMarkUndoneTaskSuccess(task);
-        return new CommandResponse(message, MarkTaskAsUndoneCommand.toExit);
+        return new CommandResponse(MarkTaskAsUndoneCommand.class, message, MarkTaskAsUndoneCommand.toExit);
     }
 }

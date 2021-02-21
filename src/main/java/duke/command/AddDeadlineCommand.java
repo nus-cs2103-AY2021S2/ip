@@ -23,6 +23,6 @@ public class AddDeadlineCommand extends Command {
         tasks.addTask(this.deadline);
 
         String message = Ui.getAddTaskSuccess(this.deadline);
-        return new CommandResponse(message, AddDeadlineCommand.toExit);
+        return new CommandResponse(AddDeadlineCommand.class, message, AddDeadlineCommand.toExit);
     }
 }

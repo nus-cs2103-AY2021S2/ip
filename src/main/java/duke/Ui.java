@@ -22,6 +22,7 @@ public class Ui {
             + NEWLINE + TAB + "- bye"
             + NEWLINE + TAB + "- list"
             + NEWLINE + TAB + "- find <keyword>"
+            + NEWLINE + TAB + "- stats"
             + NEWLINE + TAB + "- save"
             + NEWLINE + TAB + "- todo <task_description>"
             + NEWLINE + TAB + "- deadline <task_description> /by <date_time>"
@@ -29,6 +30,7 @@ public class Ui {
             + NEWLINE + TAB + "- delete <task_number>"
             + NEWLINE + TAB + "- done <task_number>";
     private static final String BYE_SUCCESS = "Alright, take care. Hope to see you again!";
+    private static final String STATISTICS_SUCCESS = "";
     private static final String STORAGE_LOAD_FAILURE = "Argh, I can't load your data file.";
     private static final String STORAGE_SAVE_SUCCESS = "Alright, I've saved your current data.";
     private static final String STORAGE_SAVE_FAILURE = "Argh, I can't save your data.";
@@ -57,6 +59,10 @@ public class Ui {
 
     public static String getByeSuccess() {
         return Ui.BYE_SUCCESS;
+    }
+
+    public static String getStatsSuccess() {
+        return Ui.STATISTICS_SUCCESS;
     }
 
     public static String getLoadTaskListFailure() {

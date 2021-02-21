@@ -1,5 +1,6 @@
 import duke.Duke;
 import duke.command.CommandResponse;
+import duke.command.StatsCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,9 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-/**
- * Controller for MainWindow. Provides the layout for the other controls.
- */
+
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -39,34 +38,24 @@ public class MainWindow extends AnchorPane {
     public void displayGreeting() {
         String greeting = duke.welcomeUser();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greeting, dukeImage));
+                DukeTextDialogBox.getDialogBox(greeting, dukeImage));
     }
 
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         CommandResponse response = duke.getResponse(input);
+
+        dialogContainer.getChildren().add(UserTextDialogBox.getDialogBox(input, userImage));
+        if (response.getCommandClass() == StatsCommand.class) {
+            dialogContainer.getChildren().add(DukePieChartDialogBox.getDialogBox(this.duke.getTaskList(), userImage));
+        } else {
+            dialogContainer.getChildren().add(DukeTextDialogBox.getDialogBox(response.toString(), userImage));
+        }
+        userInput.clear();
+
         if (response.canExit()) {
             Platform.exit();
-        }
-
-
-        if (input.equalsIgnoreCase("stats")) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    StatsBox.getDukeDialog(this.duke.getTasks(), dukeImage)
-            );
-            userInput.clear();
-        } else {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response.toString(), dukeImage)
-            );
-            userInput.clear();
         }
     }
 }

@@ -12,11 +12,12 @@ import java.util.regex.Pattern;
 public class CommandParser {
 
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private static final Pattern COMMAND_TYPE_PATTERN = Pattern.compile("usage|bye|list|find|save|todo|deadline|event|delete|done");
+    private static final Pattern COMMAND_TYPE_PATTERN = Pattern.compile("usage|bye|list|find|stats|save|todo|deadline|event|delete|done");
     private static final Pattern USAGE_PATTERN = Pattern.compile("usage");
     private static final Pattern BYE_PATTERN = Pattern.compile("bye");
     private static final Pattern LIST_TASKS_PATTERN = Pattern.compile("list");
     private static final Pattern FIND_TASKS_PATTERN = Pattern.compile("find ([a-zA-Z0-9\\s]+)");
+    private static final Pattern STATS_PATTERN = Pattern.compile("stats");
     private static final Pattern SAVE_TASKS_PATTERN = Pattern.compile("save");
     private static final Pattern ADD_TODO_PATTERN = Pattern.compile("todo ([a-zA-Z0-9\\s]+)");
     private static final Pattern ADD_DEADLINE_PATTERN = Pattern.compile("deadline ([a-zA-Z0-9\\s]+) /by (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})");
@@ -37,6 +38,8 @@ public class CommandParser {
             return CommandParser.getListTasksCommand(input);
         case "find":
             return CommandParser.getFindTasksCommand(input);
+        case "stats":
+            return CommandParser.getStatsCommand(input);
         case "save":
             return CommandParser.getSaveTasksCommand(input);
         case "todo":
@@ -97,6 +100,14 @@ public class CommandParser {
 
         String keyword = m.group(1);
         return new FindTasksCommand(keyword);
+    }
+
+    public static StatsCommand getStatsCommand(String input) throws DukeException {
+        Matcher m = CommandParser.STATS_PATTERN.matcher(input);
+        if (!m.find()) {
+            throw new DukeException(Ui.getInvalidCommand());
+        }
+        return new StatsCommand();
     }
 
     public static SaveTasksCommand getSaveTasksCommand(String input) throws DukeException {

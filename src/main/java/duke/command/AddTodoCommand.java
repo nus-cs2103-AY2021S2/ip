@@ -21,6 +21,6 @@ public class AddTodoCommand extends Command {
         tasks.addTask(this.todo);
 
         String message = Ui.getAddTaskSuccess(this.todo);
-        return new CommandResponse(message, AddTodoCommand.toExit);
+        return new CommandResponse(AddTodoCommand.class, message, AddTodoCommand.toExit);
     }
 }

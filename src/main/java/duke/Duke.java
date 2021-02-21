@@ -30,8 +30,8 @@ public class Duke {
         return ui.getGreeting();
     }
 
-    public ArrayList<Task> getTasks() {
-        return tasks.getList();
+    public TaskList getTaskList() {
+        return tasks;
     }
 
     public CommandResponse getResponse(String input) {
@@ -42,7 +42,7 @@ public class Duke {
             return c.getResponse(tasks, storage);
         } catch (DukeException e) {
             String message = ui.getErrorMessage(e.getMessage());
-            return new CommandResponse(message, false);
+            return new CommandResponse(null, message, false);
         }
     }
 }

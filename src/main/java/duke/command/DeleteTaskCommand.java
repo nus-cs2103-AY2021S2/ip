@@ -21,6 +21,6 @@ public class DeleteTaskCommand extends Command {
         Task task = tasks.deleteTask(this.taskIndex);
 
         String message = Ui.getDeleteTaskSuccess(task);
-        return new CommandResponse(message, DeleteTaskCommand.toExit);
+        return new CommandResponse(DeleteTaskCommand.class, message, DeleteTaskCommand.toExit);
     }
 }

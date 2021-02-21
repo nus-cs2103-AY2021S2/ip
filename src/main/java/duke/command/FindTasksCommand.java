@@ -18,6 +18,6 @@ public class FindTasksCommand extends Command {
     @Override
     public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
         String message = Ui.getTaskList(tasks.findTasks(this.keyword));
-        return new CommandResponse(message, FindTasksCommand.toExit);
+        return new CommandResponse(FindTasksCommand.class, message, FindTasksCommand.toExit);
     }
 }

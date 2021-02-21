@@ -11,6 +11,6 @@ public class ByeCommand extends Command {
     @Override
     public CommandResponse getResponse(TaskList tasks, Storage storage) {
         String message = Ui.getByeSuccess();
-        return new CommandResponse(message, ByeCommand.toExit);
+        return new CommandResponse(ByeCommand.class, message, ByeCommand.toExit);
     }
 }

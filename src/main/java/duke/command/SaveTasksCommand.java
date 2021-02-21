@@ -14,6 +14,6 @@ public class SaveTasksCommand extends Command {
         storage.save(tasks);
 
         String message = Ui.getSaveTaskListSuccess();
-        return new CommandResponse(message, SaveTasksCommand.toExit);
+        return new CommandResponse(SaveTasksCommand.class, message, SaveTasksCommand.toExit);
     }
 }

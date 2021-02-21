@@ -23,6 +23,6 @@ public class AddEventCommand extends Command {
         tasks.addTask(this.event);
 
         String message = Ui.getAddTaskSuccess(this.event);
-        return new CommandResponse(message, AddEventCommand.toExit);
+        return new CommandResponse(AddEventCommand.class, message, AddEventCommand.toExit);
     }
 }

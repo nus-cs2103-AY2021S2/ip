@@ -21,6 +21,6 @@ public class MarkTaskAsDoneCommand extends Command {
         Task task = tasks.markDone(this.taskIndex);
 
         String message = Ui.getMarkDoneTaskSuccess(task);
-        return new CommandResponse(message, MarkTaskAsDoneCommand.toExit);
+        return new CommandResponse(MarkTaskAsDoneCommand.class, message, MarkTaskAsDoneCommand.toExit);
     }
 }
