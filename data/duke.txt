@@ -1,2 +1,5 @@
 [T][X] assignment
 [T][X] homework
+[T][ ] homework
+[D][ ] return book (by: Oct 15 2019)
+[E][ ] project meeting (at: Oct 15 2019)
