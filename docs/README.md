@@ -103,6 +103,7 @@ To exit the program, simply click the 'Close' button in the top right of the win
 `bye`
 
 ## 7. Command Summary
+
 Function            | Command format
 --------------------|---------------
 Add a to-do task    | `todo <task-description>`
