@@ -1,6 +1,7 @@
 # Vergil User Guide
 
 Welcome! This is a user guide for the Vergil chatbot application.
+
 ![UI screenshot](Ui.png)
 
 ## Table of Contents
