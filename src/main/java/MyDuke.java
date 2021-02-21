@@ -22,6 +22,7 @@ public class MyDuke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadTasks());
+            ui.showFileLoadSuccessMsg();
         } catch (MyDukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -39,118 +40,18 @@ public class MyDuke {
         
         Scanner sc = new Scanner(System.in);
         MyDuke myDuke = new MyDuke(DATA_SAVE_FILE_DIR);
-        ui.showFileLoadSuccessMsg();
+//        ui.showFileLoadSuccessMsg();
         ui.askForUserInput();
 
         String input = ui.getInput(sc);
+        Parser parser = new Parser(input, storage, tasks, ui);
 
         // level-1
-        while (!input.equals("bye")) {
+        while (!parser.isInputBye()) {
 
-            String[] inputArr = input.split(" ", 2); // improved implementation
-            // System.out.println(inputArr[0]);
-            // Level-2 implementation
-            if (input.equals("list")) {
-                int counter = 1;
-                String[] tempArr = new String[100];
-                if (tasks.getTaskList().isEmpty()) { // improved implementation in case list is empty, gives a clear output
-                    ui.showListEmptyMsg();
-                } else {
-                    for (Task t : tasks.getTaskList()) { // changed String s to Task t
-                        tempArr[counter - 1] = counter + ". " + t.toString();
-                        counter++;
-                    }
-                    ui.printTasksInList(tempArr);
-                }
-
-            } else if (inputArr[0].equals("done")) { // level-3 addition
-
-                try {
-                    indexChecker(inputArr);
-                    int ref = Integer.parseInt(inputArr[1]);
-                    tasks.getTaskList().set(ref - 1, tasks.getTaskList().get(ref - 1).setAsDone());
-                    ui.printDoneTaskAlert(tasks.getTaskList().get(ref - 1).toString());
-                } catch (NoIndexException e) {
-                    ui.printErrorMsg(e.getMessage());
-                } catch (IndexOutOfBoundsException e) {
-                    ui.printErrorMsg("Paikia Bot: the number that you inputted is invalid leh (more than the " 
-                            + "total number of tasks or less than 1), try again pls ah");
-                } catch (NumberFormatException e) {
-                    ui.printErrorMsg("Paikia Bot: ur input after 'done' is invalid, reminder that it should be a single integer"
-                            + "and remember to not leave a space after your input. eg, done 3");
-                }
-
-            } else if (inputArr[0].equals("delete")) { // level-6 addition
-
-                try {
-                    indexChecker(inputArr);
-                    int ref = Integer.parseInt(inputArr[1]);
-                    Task toRemove = tasks.getTask(ref);
-                    tasks.deleteTask(ref - 1);
-                    ui.printDeletedTaskAlert(toRemove.toString(), tasks.getTaskList().size());
-                } catch (NoIndexException e) {
-                    ui.printErrorMsg(e.getMessage());
-                } catch (IndexOutOfBoundsException e) {
-                    ui.printErrorMsg("Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah");
-                } catch (NumberFormatException e) {
-                    ui.printErrorMsg("Paikia Bot: ur input after 'done' is invalid, reminder that it should be a single integer"
-                            + "and remember to not leave a space after your input. eg, done 3");
-                }
-
-            } else if (inputArr[0].equals("todo")) {
-
-                try {
-                    todoChecker(inputArr);
-                    ToDo todo = new ToDo(inputArr[1], false);
-                    tasks.addTask(todo);
-                    ui.printAddedTodoAlert(todo.toString(), tasks.getTaskList().size());
-                } catch (NoToDoException e) {
-                    ui.printErrorMsg(e.getMessage());
-
-                }
-            } else if (inputArr[0].equals("event")) {
-
-                try {
-                    eventChecker(inputArr);
-                    String[] temp = inputArr[1].split("/", 2);
-                    Event event = new Event(LocalDate.parse(temp[1].substring(3)), temp[0], false);
-                    tasks.addTask(event);
-                    ui.printAddedEventAlert(event.toString(), tasks.getTaskList().size());
-                } catch (NoEventException e) {
-                    ui.printErrorMsg(e.getMessage());
-                } catch (NoDateException e) {
-                    ui.printErrorMsg(e.getMessage());
-                } catch (DateTimeParseException e) {
-                    ui.printErrorMsg(new String[] {
-                        "Paikia Bot: oi your date input got format error cannot parse sial: " + inputArr[1].split("/", 2)[1],
-                        "Paikia Bot: the format should be liddis: yyyy-mm-dd, eg. 2020-03-02"
-                    });
-                }
-
-            } else if (inputArr[0].equals("deadline")) {
-
-                try {
-                    deadlineChecker(inputArr);
-                    String[] temp = inputArr[1].split("/", 2);
-                    Deadline deadline = new Deadline(LocalDate.parse(temp[1].substring(3)), temp[0], false);
-                    tasks.addTask(deadline);
-                    ui.printAddedDeadlineAlert(deadline.toString(), tasks.getTaskList().size());
-                } catch (NoDeadlineException e) {
-                    ui.printErrorMsg(e.getMessage());
-                } catch (NoDateException e) {
-                    ui.printErrorMsg(e.getMessage());
-                } catch (DateTimeParseException e) {
-                    ui.printErrorMsg(new String[] {
-                        "Paikia Bot: oi your date input got format error cannot parse sial: " + inputArr[1].split("/", 2)[1],
-                        "Paikia Bot: the format should be liddis: yyyy-mm-dd, eg. 2020-03-02"
-                    });
-                }
-
-            } else {
-                ui.showInputError();
-            }
-
+            parser.handleInput();
             input = ui.getInput(sc);
+            parser = parser.parseNextInput(input);
         }
 
         ui.showByeMsg();
@@ -160,10 +61,12 @@ public class MyDuke {
         } catch (IOException e) {
             String newDir = "../data/saveFile.txt";
             ui.printErrorMsg("Something went wrong: " + e.getMessage());
-            
+
         }
         sc.close();
     }
+
+
 
     static void indexChecker(String[] inputArr) throws NoIndexException {
         if (inputArr.length == 1) {
@@ -197,6 +100,142 @@ public class MyDuke {
             throw new NoDateException(
                     "Paikia Bot: i dun see any date inputs leh. to add date input, use '/YYYY-MM-DD'. eg, deadline return book /by 2020-01-01");
         }
+    }
+
+}
+
+class Parser {
+
+    String input;
+    Storage storage;
+    TaskList tasks;
+    Ui ui;
+
+    Parser(Storage storage, TaskList tasks, Ui ui) {
+        this.input = "";
+        this.storage = storage;
+        this.tasks = tasks;
+        this.ui = ui;
+    }
+
+    Parser(String input, Storage storage, TaskList tasks, Ui ui) {
+        this.input = input;
+        this.storage = storage;
+        this.tasks = tasks;
+        this.ui = ui;
+    }
+
+    Parser parseNextInput(String input) {
+        return new Parser(input, storage, tasks, ui);
+    }
+
+    boolean isInputBye() {
+        return this.input.equals("bye");
+    }
+
+    String[] getParsedInput() {
+        return this.input.split(" ", 2);
+    }
+
+    void handleInput() {
+        switch (getParsedInput()[0]) {
+            case "list":
+                int counter = 1;
+                String[] tempArr = new String[100];
+                if (tasks.getTaskList().isEmpty()) { // improved implementation in case list is empty, gives a clear output
+                    ui.showListEmptyMsg();
+                } else {
+                    for (Task t : tasks.getTaskList()) { // changed String s to Task t
+                        tempArr[counter - 1] = counter + ". " + t.toString();
+                        counter++;
+                    }
+                    ui.printTasksInList(tempArr);
+                }
+                break;
+            case "done":
+                try {
+                    MyDuke.indexChecker(getParsedInput());
+                    int ref = Integer.parseInt(getParsedInput()[1]);
+                    tasks.getTaskList().set(ref - 1, tasks.getTaskList().get(ref - 1).setAsDone());
+                    ui.printDoneTaskAlert(tasks.getTaskList().get(ref - 1).toString());
+                } catch (NoIndexException e) {
+                    ui.printErrorMsg(e.getMessage());
+                } catch (IndexOutOfBoundsException e) {
+                    ui.printErrorMsg("Paikia Bot: the number that you inputted is invalid leh (more than the "
+                            + "total number of tasks or less than 1), try again pls ah");
+                } catch (NumberFormatException e) {
+                    ui.printErrorMsg("Paikia Bot: ur input after 'done' is invalid, reminder that it should be a single integer"
+                            + "and remember to not leave a space after your input. eg, done 3");
+                }
+                break;
+            case "delete":
+                try {
+                    MyDuke.indexChecker(getParsedInput());
+                    int ref = Integer.parseInt(getParsedInput()[1]);
+                    Task toRemove = tasks.getTask(ref);
+                    tasks.deleteTask(ref - 1);
+                    ui.printDeletedTaskAlert(toRemove.toString(), tasks.getTaskList().size());
+                } catch (NoIndexException e) {
+                    ui.printErrorMsg(e.getMessage());
+                } catch (IndexOutOfBoundsException e) {
+                    ui.printErrorMsg("Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah");
+                } catch (NumberFormatException e) {
+                    ui.printErrorMsg("Paikia Bot: ur input after 'done' is invalid, reminder that it should be a single integer"
+                            + "and remember to not leave a space after your input. eg, done 3");
+                }
+                break;
+            case "todo":
+                try {
+                    MyDuke.todoChecker(getParsedInput());
+                    ToDo todo = new ToDo(getParsedInput()[1], false);
+                    tasks.addTask(todo);
+                    ui.printAddedTodoAlert(todo.toString(), tasks.getTaskList().size());
+                } catch (NoToDoException e) {
+                    ui.printErrorMsg(e.getMessage());
+
+                }
+                break;
+            case "event":
+                try {
+                    MyDuke.eventChecker(getParsedInput());
+                    String[] temp = getParsedInput()[1].split("/", 2);
+                    Event event = new Event(LocalDate.parse(temp[1].substring(3)), temp[0], false);
+                    tasks.addTask(event);
+                    ui.printAddedEventAlert(event.toString(), tasks.getTaskList().size());
+                } catch (NoEventException e) {
+                    ui.printErrorMsg(e.getMessage());
+                } catch (NoDateException e) {
+                    ui.printErrorMsg(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    ui.printErrorMsg(new String[]{
+                            "Paikia Bot: oi your date input got format error cannot parse sial: " + getParsedInput()[1].split("/", 2)[1],
+                            "Paikia Bot: the format should be liddis: yyyy-mm-dd, eg. 2020-03-02"
+                    });
+                }
+                break;
+            case "deadline":
+                try {
+                    MyDuke.deadlineChecker(getParsedInput());
+                    String[] temp = getParsedInput()[1].split("/", 2);
+                    Deadline deadline = new Deadline(LocalDate.parse(temp[1].substring(3)), temp[0], false);
+                    tasks.addTask(deadline);
+                    ui.printAddedDeadlineAlert(deadline.toString(), tasks.getTaskList().size());
+                } catch (NoDeadlineException e) {
+                    ui.printErrorMsg(e.getMessage());
+                } catch (NoDateException e) {
+                    ui.printErrorMsg(e.getMessage());
+                } catch (DateTimeParseException e) {
+                    ui.printErrorMsg(new String[]{
+                            "Paikia Bot: oi your date input got format error cannot parse sial: " + getParsedInput()[1].split("/", 2)[1],
+                            "Paikia Bot: the format should be liddis: yyyy-mm-dd, eg. 2020-03-02"
+                    });
+                }
+                break;
+            default:
+                ui.showInputError();
+        }
+
+
     }
 
 }
