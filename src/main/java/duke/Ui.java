@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
-
 public class Ui {
 
     static String spacer = "\n____________________________________________________________\n";
@@ -22,8 +20,8 @@ public class Ui {
     static String goodbye = "Bye! Hope I was a good dog, "
             + "see you again soon!";
 
-    static void printGreeting() {
-        System.out.println(spacer + greet + spacer);
+    public static void printGreeting() {
+        System.out.println(logo + spacer + greet + spacer);
     }
 
     static void printGoodbye() {
@@ -63,12 +61,13 @@ public class Ui {
                 + spacer);
     }
 
-    static void printDone(ArrayList<Command> xs) {
+     static void printDone(Command command) {
         System.out.println(spacer
                 + "Very Woof! "
-                + "I have completed these commands before:");
-        duke.CommandList.printList();
-        System.out.println(spacer);
+                + "I have completed this commands:\n"
+                + command
+                + "\n"
+                + spacer);
     }
 
     static void printDelete(Command command, int size) {

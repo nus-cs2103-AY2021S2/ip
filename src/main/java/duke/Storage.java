@@ -5,23 +5,34 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Storage {
 
-    static String filePath;
-    static Path path;
+    public String filePath = "./data/duke.txt";
+    public Path path = Paths.get("./data/duke.txt");
 
+    public Storage() {
+        new Storage(filePath, path);
+    }
     public Storage(String filePath, Path path) {
         this.filePath = filePath;
         this.path = path;
     }
 
-    static void checkPath(String filePath, Path path) {
+    public void checkPath(String filePath, Path path) {
         try {
             File file = new File(filePath);
-            Files.createDirectories(Path.of(file.getParent()));
-            Files.createFile(path);
+
+            boolean isDir = Files.isDirectory(path);
+            boolean fileExists = file.exists();
+
+            if (isDir) {
+                //directory exists, proceed.
+            } else {
+                Files.createDirectories(Path.of(file.getParent()));
+            }
 
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -29,8 +40,15 @@ public class Storage {
         }
     }
 
-    static void save(ArrayList<Command> xs, String filePath) {
+    /**
+     * Method saves the current Command list
+     * into a text file
+     *
+     * @param filePath Filepath of text file to save to
+     */
+     void save(String filePath, ArrayList<Command> xs) {
         try {
+            checkPath(filePath, path);
             FileWriter fw = new FileWriter(filePath);
             for (Command c : xs) {
                 if (c instanceof ToDo) {
@@ -55,9 +73,7 @@ public class Storage {
                             + " | "
                             + ((Event) c).getTime()
                             + "\n");
-
                 } else {
-                    // Empty Description
                 }
             }
             fw.close();

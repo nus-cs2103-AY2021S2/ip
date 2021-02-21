@@ -5,12 +5,12 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Parser {
-    private static CommandList commandList;
+    CommandList commandList;
     static String terminate = "bye";
-    private static String separator = " ";
-    private static String regexToDo = " ";
-    private static String regexDeadline = " /by ";
-    private static String regexEvent = " /at ";
+    private final static String separator = " ";
+    private final static String regexToDo = " ";
+    private final static String regexDeadline = " /by ";
+    private final static String regexEvent = " /at ";
 
     public Parser(CommandList commandList) {
         this.commandList = commandList;
@@ -51,20 +51,25 @@ public class Parser {
         }
     }
 
-    static void parseAdd(String input) {
+    void parseAdd(String input) {
         Command command;
         try {
             if (input.contains("todo")) {
                 String[] description = input.split(regexToDo);
                 command = new ToDo(description[1]);
+                commandList.addCommand(command, "T");
             } else if (input.contains("deadline")) {
                 String[] inputTime = input.split(regexDeadline);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
                 command = new Deadline(inputTime[0].substring(9), parseDate);
+                commandList.addCommand(command, "D");
+
             } else if (input.contains("event")) {
                 String[] inputTime = input.split(regexEvent);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
                 command = new Event(inputTime[0].substring(6), parseDate);
+                commandList.addCommand(command, "E");
+
             } else {
 
             }
@@ -74,31 +79,31 @@ public class Parser {
         }
     }
 
-    static void parseDelete(String input) {
+     void parseDelete(String input) {
         String[] deleteCommand = input.split(separator);
         int id = Integer.parseInt(deleteCommand[1]) - 1;
         commandList.deleteCommand(id);
     }
 
-   static void parseList() {
+     void parseList() {
        System.out.println(Ui.spacer);
        commandList.printList();
        System.out.println(Ui.spacer);
    }
 
-   static void parseDone(String input) {
+    void parseDone(String input) {
        String[] doneCommand = input.split(separator);
        int id = Integer.parseInt(doneCommand[1]) - 1;
        commandList.doneCommand(id);
    }
 
-   static void parseAll() throws DukeException {
+    public void parseAll() {
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine().trim();
+        while (true) {
 
-        while(true) {
+            String input = sc.nextLine().trim();
+
             try {
-                // Check for errors in errorHandling() method
                 errorHandling(input);
 
                 if (input.equals(terminate)) {
@@ -121,5 +126,5 @@ public class Parser {
             }
         }
         sc.close();
-    }
+   }
 }

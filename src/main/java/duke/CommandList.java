@@ -3,22 +3,30 @@ package duke;
 import java.util.ArrayList;
 
 public class CommandList {
-    static ArrayList<Command> commands;
-    static Storage storage;
+    ArrayList<Command> commands = new ArrayList<Command>();
+    Storage storage;
 
-    public CommandList(ArrayList<Command> commands, Storage storage) {
+    public CommandList(Storage storage, ArrayList<Command> commands) {
+        this.storage = storage;
         this.commands = commands;
+    }
+
+    public CommandList(Storage storage) {
         this.storage = storage;
     }
 
-    static void printList() {
-        for (int i = 0; i < commands.size(); i++) {
-            Command value = commands.get(i);
-            System.out.println((i + 1) + ". " + value);
+     void printList() {
+        if (commands.size() == 0) {
+            System.out.println("Your list of commands are currently empty!\n");
+        } else {
+            for (int i = 0; i < commands.size(); i++) {
+                Command value = commands.get(i);
+                System.out.println((i + 1) + ". " + value);
+            }
         }
     }
 
-    static void addCommand(Command command, String commandType) {
+     void addCommand(Command command, String commandType) {
         commands.add(command);
         int size = commands.size();
 
@@ -29,21 +37,21 @@ public class CommandList {
         } else {
             Ui.printEvent(command, size);
         }
-        storage.save(commands, storage.filePath);
+        storage.save(storage.filePath, commands);
     }
 
-    static void doneCommand(int id) {
+     void doneCommand(int id) {
         Command command = commands.get(id);
         command.markDone();
-        Ui.printDone(commands);
-        storage.save(commands, storage.filePath);
+        Ui.printDone(command);
+        storage.save(storage.filePath, commands);
     }
 
-    static void deleteCommand(int id) {
+     void deleteCommand(int id) {
         Command command = commands.get(id);
         commands.remove(id);
         int size = commands.size();
         Ui.printDelete(command, size);
-        storage.save(commands, storage.filePath);
+        storage.save(storage.filePath, commands);
     }
 }
