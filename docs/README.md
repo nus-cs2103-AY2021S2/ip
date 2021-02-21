@@ -5,7 +5,9 @@ a Command Line Interface while still having the benefits
 of a Graphical User Interface (GUI). If you can type fast, 
 Yoda can get your task management tasks done faster than 
 traditional GUI apps.
+
 --------------------------------------------------------------------------------------------------------------------
+
 ##Quick start
 1. Ensure you have java `11` or above installed.
    
@@ -23,7 +25,9 @@ Some example commands you can try:
    * **`done 1`** : Marks the 1st task on the task list as done.
    * **`delete 1`** : Deletes the 1st task on the task list.
    * **`bye`**: Exits the app.
+   
 --------------------------------------------------------------------------------------------------------------------
+
 ## Features 
 **Notes about the command format:**<br>
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -108,6 +112,7 @@ Task list data is saved automatically after any command that changes the data. T
 --------------------------------------------------------------------------------------------------------------------
 
 ##Command summary
+
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
