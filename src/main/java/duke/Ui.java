@@ -14,6 +14,11 @@ public class Ui {
     private static final String TAB = "\t";
     private static final String SPACE = " ";
     private static final String PERIOD = ".";
+    private static final String SINGLE_QUOTE = "'";
+    private static final String DOUBLE_QUOTE = "\"";
+
+    private static final String ERROR_HEAD = "Oh no... ";
+    private static final String INVALID_COMMAND = "I'm not trained with these commands yet...";
 
     private static final String GREETING = "Hello there! I'm Duke, your personal chat bot."
             + NEWLINE + "To know more about what I can do, type 'usage'."
@@ -29,28 +34,33 @@ public class Ui {
             + NEWLINE + TAB + "- event <task_description> /at <date_time>"
             + NEWLINE + TAB + "- delete <task_number>"
             + NEWLINE + TAB + "- done <task_number>";
-    private static final String NO_TASKS = "There isn't any task found in the list.";
-    private static final String LOAD_ERROR = "Unable to load file.";
-    private static final String ERROR_HEAD = "Oh no... ";
+
+    private static final String STORAGE_LOAD_FAILURE = "Argh, I can't load your data file.";
+    private static final String STORAGE_SAVE_SUCCESS = "Alright, I've saved your current data.";
+    private static final String STORAGE_SAVE_FAILURE = "Argh, I can't save your data.";
+
+    private static final String TASK_LIST_TITLE = "Tasks currently in your list:";
+    private static final String TASK_LIST_EMPTY = "There isn't any task found in the list.";
+    private static final String TASK_ADD_SUCCESS = "have been successfully added to the list.";
 
     /**
      * Retrieves greeting.
      */
-    public String getGreeting() {
+    public static String getGreeting() {
         return Ui.GREETING;
     }
 
     /**
      * Retrieves usage.
      */
-    public String getUsage() {
+    public static String getUsage() {
         return Ui.USAGE;
     }
 
     /**
      * Retrieves file load error.
      */
-    public String getErrorMessage(String message) {
+    public static String getErrorMessage(String message) {
         StringBuilder sb = new StringBuilder();
         sb.append(Ui.ERROR_HEAD);
         sb.append(message);
@@ -60,8 +70,8 @@ public class Ui {
     /**
      * Retrieves file load error.
      */
-    public String getLoadingError() {
-        return this.getErrorMessage(Ui.LOAD_ERROR);
+    public static String getLoadingError() {
+        return Ui.getErrorMessage(Ui.STORAGE_LOAD_FAILURE);
     }
 
     /**
@@ -70,20 +80,46 @@ public class Ui {
      * @param tasks Task list.
      * @return Formatted String of task list.
      */
-    public String getTaskList(ArrayList<Task> tasks) {
+    public static String getTaskList(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
-            return Ui.NO_TASKS;
+            return Ui.TASK_LIST_EMPTY;
         }
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(Ui.TASK_LIST_TITLE + Ui.NEWLINE);
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(Ui.TAB);
-            sb.append(i);
+            sb.append(i + 1);
             sb.append(Ui.PERIOD);
             sb.append(Ui.SPACE);
             sb.append(tasks.get(i));
             sb.append(Ui.NEWLINE);
         }
         return sb.toString();
+    }
+
+
+
+
+    public static String getInvalidCommand() {
+        return Ui.getInvalidCommand();
+    }
+
+
+    public static String getLoadTaskListFailure() {
+        return Ui.STORAGE_LOAD_FAILURE;
+    }
+
+
+    public static String getSaveTaskListSuccess() {
+        return Ui.STORAGE_SAVE_SUCCESS;
+    }
+
+    public static String getSaveTaskListFailure() {
+        return Ui.STORAGE_SAVE_FAILURE;
+    }
+
+    public static String getAddTaskSuccess(Task task) {
+        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
+                + Ui.SPACE + Ui.TASK_ADD_SUCCESS;
     }
 }

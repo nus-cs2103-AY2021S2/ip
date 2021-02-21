@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandResponse;
+import duke.parser.CommandParser;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class Duke {
 
     public CommandResponse getResponse(String input) {
         try {
-            Command c = Parser.parseCommand(input);
+            Command c = CommandParser.getCommand(input);
             assert this.storage != null;
             assert this.tasks != null;
             assert this.ui != null;
