@@ -38,6 +38,7 @@ Expected outcome:
 `[T][ ] borrow book`
 
 `Now you have 5 tasks in the list.`
+
 `______________________________________________________`
 
 ### `deadline` - Add a task with deadline (e.g. 2019-10-15) attached to it
@@ -105,6 +106,7 @@ Expected outcome:
 `       [E][ ] project meeting (at: Aug 6th 2-4pm)`
 
 `    Now you have 4 tasks in the list.`
+
 `    ______________________________________________________`
 
 ### `find` - Find a task by searching for a keyword
