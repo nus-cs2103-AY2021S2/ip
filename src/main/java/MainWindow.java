@@ -1,5 +1,7 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -26,6 +28,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String greeting = " __  __  ____  __ __  __  __  ____   __ __ \n" +
+                "|   \\/  |/  ()  \\|   |  |  |  \\/  |/  ()  \\ |   |  |\n" +
+                "|_|\\/|_|\\____/ \\___/ |_|\\/|_|\\____/ \\___/"
+                        + " is back!\n     What have you awoken MouMou for?";
+        DialogBox greetDialog = DialogBox.getDukeDialog(greeting, dukeImage);
+        dialogContainer.getChildren().add(greetDialog);
     }
 
     public void setDuke(Duke d) {
@@ -40,10 +48,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        if (input.equals("bye")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getClosingDialog(input, dukeImage));
+            Platform.exit();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+                DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
     }
 }

@@ -65,4 +65,9 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
+    public static DialogBox getClosingDialog(String text, Image img) {
+        String goodbyeText = "Goodnight! Moumou will go back to sleep now.";
+        return getDukeDialog(goodbyeText, img);
+    }
 }
