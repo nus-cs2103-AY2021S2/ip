@@ -17,7 +17,7 @@ public class Ui {
     private static final String GREETING = "Hello there! I'm Duke, your personal chat bot."
             + NEWLINE + "To know more about what I can do, type 'usage'."
             + NEWLINE + "So... Is there anything I can do for you today?";
-    private static final String COMMAND_USAGE = "These are the commands available:"
+    private static final String USAGE = "These are the commands available:"
             + NEWLINE + TAB + "- usage"
             + NEWLINE + TAB + "- bye"
             + NEWLINE + TAB + "- list"
@@ -28,7 +28,7 @@ public class Ui {
             + NEWLINE + TAB + "- event <task_description> /at <date_time>"
             + NEWLINE + TAB + "- delete <task_number>"
             + NEWLINE + TAB + "- done <task_number>";
-    private static final String COMMAND_BYE_SUCCESS = "Alright, take care. Hope to see you again!";
+    private static final String BYE_SUCCESS = "Alright, take care. Hope to see you again!";
     private static final String STORAGE_LOAD_FAILURE = "Argh, I can't load your data file.";
     private static final String STORAGE_SAVE_SUCCESS = "Alright, I've saved your current data.";
     private static final String STORAGE_SAVE_FAILURE = "Argh, I can't save your data.";
@@ -52,11 +52,11 @@ public class Ui {
     }
 
     public static String getUsage() {
-        return Ui.COMMAND_USAGE;
+        return Ui.USAGE;
     }
 
     public static String getByeSuccess() {
-        return Ui.COMMAND_BYE_SUCCESS;
+        return Ui.BYE_SUCCESS;
     }
 
     public static String getLoadTaskListFailure() {
