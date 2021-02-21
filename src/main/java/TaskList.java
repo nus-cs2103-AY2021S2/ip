@@ -2,9 +2,17 @@ package main.java;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Creates a new TaskList object with an ArrayList of tasks.
+     *
+     * @param taskCommands ArrayList of Strings representing task commands.
+     */
     public TaskList(ArrayList<String> taskCommands) {
         try {
             tasks = initialiseTasks(taskCommands);
@@ -13,6 +21,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates a new TaskList object with an empty lisk of tasks.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
@@ -57,15 +68,32 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Creates and adds a new task to the list of tasks.
+     *
+     * @param taskCommand Command entered by the user to create a new task.
+     * @throws EmptyDescriptionException If the task does not contain a description.
+     */
     public void addTask(String taskCommand) throws EmptyDescriptionException {
         Task task = createTask(taskCommand);
         tasks.add(task);
     }
 
+    /**
+     * Deletes the task with taskId from the list of tasks.
+     *
+     * @param taskId ID of the task.
+     */
     public void deleteTask(int taskId) {
         tasks.remove(taskId - 1);
     }
 
+    /**
+     * Returns an ArrayList of Strings representing the current tasks in the list of tasks.
+     * The tasks are represented in a format that is to be displayed to the user.
+     *
+     * @return ArrayList of Strings representing the tasks in printable format.
+     */
     public ArrayList<String> getPrintableTasks() {
         ArrayList<String> printableTasks = new ArrayList<>();
         int id = 1;
@@ -76,6 +104,12 @@ public class TaskList {
         return printableTasks;
     }
 
+    /**
+     * Returns an ArrayList of Strings representing the current tasks in the list of tasks.
+     * The tasks are represented in a format that is to be written to the hard disk.
+     *
+     * @return ArrayList of Strings representing the tasks in writable format.
+     */
     public ArrayList<String> getWritableTasks() {
         ArrayList<String> writableTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -88,14 +122,30 @@ public class TaskList {
         return writableTasks;
     }
 
+    /**
+     * Deletes the task with taskId from the list of tasks.
+     *
+     * @param taskId ID of the task.
+     */
     public void markTaskAsDone(int taskId) {
         tasks.get(taskId - 1).markAsDone();
     }
 
+    /**
+     * Returns the string representation of the task with taskId in the list of tasks.
+     *
+     * @param taskId ID of the task.
+     * @return String representation of the task.
+     */
     public String getTaskString(int taskId) {
         return tasks.get(taskId - 1).toString();
     }
 
+    /**
+     * Returns the number of tasks in the list of tasks.
+     *
+     * @return Number of tasks.
+     */
     public int getNumOfTasks() {
         return tasks.size();
     }

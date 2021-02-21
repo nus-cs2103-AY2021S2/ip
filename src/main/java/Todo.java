@@ -1,6 +1,14 @@
 package main.java;
 
+/**
+ * Represents a task with a description.
+ */
 public class Todo extends Task {
+    /**
+     * Creates a new Todo object with a description.
+     *
+     * @param description Description of the task.
+     */
     public Todo(String description) {
         super(description);
     }

@@ -1,6 +1,21 @@
 package main.java;
 
+/**
+ * A parser that deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Identifies the type of user command and calls the relevant method to perform the action.
+     * Commands accepted are list, done, delete, todo, deadline and event.
+     *
+     * @param storage Storage object that deals with loading and saving tasks.
+     * @param ui Ui object that deals with interactions with the user.
+     * @param tasks TaskList that contains the list of Task objects.
+     * @param cmd Command entered by the user.
+     * @throws EmptyDescriptionException If the user tries to create a task without a description.
+     * @throws InvalidCommandException If the user enters an invalid command.
+     * @throws WriteTasksException If an error is encountered when trying to write tasks to the hard disk.
+     */
     public void handleInput(Storage storage, Ui ui, TaskList tasks, String cmd) throws EmptyDescriptionException, InvalidCommandException, WriteTasksException {
         if (cmd.equals("list")) {
             ui.printTasks(tasks.getPrintableTasks());

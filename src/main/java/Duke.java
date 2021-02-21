@@ -9,13 +9,16 @@ import main.java.WriteTasksException;
 
 import java.util.Scanner;
 
+/**
+ * A Personal Assistant Chatbot that helps the user to keep track of various things.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
     private Parser parser;
     private TaskList tasks;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
         parser = new Parser();
@@ -27,7 +30,7 @@ public class Duke {
         }
     }
 
-    public void run() {
+    private void run() {
         ui.displayWelcomeMsg();
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine();
