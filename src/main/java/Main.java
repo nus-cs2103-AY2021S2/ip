@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private static final String TITLE = "Quackers";
     private Image appIcon = new Image("/images/AppIcon.png");
 
     private Quackers quackers = new Quackers();
@@ -22,10 +23,11 @@ public class Main extends Application {
                     Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setQuackers(this.quackers);
+            stage.setTitle(Main.TITLE);
             stage.setResizable(false);
             stage.getIcons().add(this.appIcon);
-            fxmlLoader.<MainWindow>getController().setQuackers(this.quackers);
+            stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
