@@ -22,7 +22,7 @@ public class Yoda {
      */
     public Yoda() {
         String home = System.getProperty("user.home");
-        String filePath = home + "/dukeTasks.txt";
+        String filePath = home + "/yodaTasks.txt";
         storage = new Storage(filePath);
         this.ui = new Ui();
         this.tasks = storage.load();
