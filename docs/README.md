@@ -27,10 +27,12 @@ traditional GUI applications.
 
 ## Quick start 
 1. Ensure you have Java `11` or above installed in your Computer. 
-1. Download the latest `MouMou.jar` from [here](https://github.com/mesyeux/ip).
+1. Download the latest `MouMou.jar` from [here](https://github.com/mesyeux/ip/releases/tag/v0.2).
 1. Copy the file to the folder you want to use as the *home folder* for your MouMou application.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
+
 ![Startup Screenshot](images/startup.jpg)
+
 1. Type the command in the command box and press Enter to execute it. e.g. typing `list` and pressing 
 Enter will list all the tasks currently in the task list. 
 Some example commands you can try: 
@@ -158,6 +160,7 @@ Format: `bye`
 ## FAQ 
 
 Q: How do I transfer my data to another Computer? 
+
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
 the data of your previous MouMou home folder.
 
