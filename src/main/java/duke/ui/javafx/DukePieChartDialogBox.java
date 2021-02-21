@@ -1,6 +1,8 @@
+package duke.ui.javafx;
+
 import java.io.IOException;
 
-import duke.TaskList;
+import duke.tasklist.TaskList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

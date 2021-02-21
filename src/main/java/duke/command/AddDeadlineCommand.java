@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 import duke.task.Deadline;
 
 import java.time.LocalDateTime;

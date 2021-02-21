@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,8 +7,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.DukeException;
+import duke.tasklist.TaskList;
 import duke.parser.FileDataParser;
 import duke.task.Task;
+import duke.ui.Ui;
 
 public class Storage {
 

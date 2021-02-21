@@ -1,3 +1,5 @@
+package duke.ui.javafx;
+
 import java.io.IOException;
 
 import javafx.fxml.FXML;
@@ -7,16 +9,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public class DukeTextDialogBox extends HBox {
+public class UserTextDialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DukeTextDialogBox(String text, Image image) {
+    private UserTextDialogBox(String text, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(
-                    MainWindow.class.getResource("/view/DukeTextDialogBox.fxml"));
+                    MainWindow.class.getResource("/view/UserTextDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -26,8 +28,8 @@ public class DukeTextDialogBox extends HBox {
         this.loadProperties(text, image);
     }
 
-    public static DukeTextDialogBox getDialogBox(String text, Image img) {
-        return new DukeTextDialogBox(text, img);
+    public static UserTextDialogBox getDialogBox(String text, Image img) {
+        return new UserTextDialogBox(text, img);
     }
 
     private void loadProperties(String text, Image image) {

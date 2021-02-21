@@ -1,3 +1,5 @@
+package duke.ui.javafx;
+
 import duke.Duke;
 import duke.command.CommandResponse;
 import duke.command.StatsCommand;
@@ -31,12 +33,12 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(
                 this.dialogContainer.heightProperty());
-        this.dialogContainer.getChildren().add(
-                DukeTextDialogBox.getDialogBox(this.duke.getGreeting(), this.dukeImage));
     }
 
     public void setDuke(Duke d) {
         this.duke = d;
+        this.dialogContainer.getChildren().add(
+                DukeTextDialogBox.getDialogBox(this.duke.getGreeting(), this.dukeImage));
     }
 
     @FXML

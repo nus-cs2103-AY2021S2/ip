@@ -1,7 +1,7 @@
 package duke.parser;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.command.*;
 
 import java.time.LocalDateTime;

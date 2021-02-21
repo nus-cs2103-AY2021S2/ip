@@ -3,6 +3,9 @@ package duke;
 import duke.command.Command;
 import duke.command.CommandResponse;
 import duke.parser.CommandParser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
 
