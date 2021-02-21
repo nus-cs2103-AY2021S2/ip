@@ -13,6 +13,8 @@ traditional GUI apps.
    
 1. Download the latest `Yoda.jar` from [here](https://github.com/vivegank/ip/releases).
 
+1. Copy the downloaded file to the folder from which the app will be used.
+
 1. Use _java -jar Yoda.jar_ or just double-click to start the app. The GUI
 similar to below should appear in a few seconds.<br>
    ![UI](Ui.png)
