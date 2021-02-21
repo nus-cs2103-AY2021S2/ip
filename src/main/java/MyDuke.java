@@ -10,6 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents a Personal Assistant Chatbot with that interacts with the user with the characteristics
+ * similar to that of a stereotypical Singaporean gangster.
+ */
 public class MyDuke {
 
     static Storage storage;
@@ -47,7 +51,7 @@ public class MyDuke {
         Parser parser = new Parser(input, storage, tasks, ui);
 
         // level-1
-        while (!parser.isInputBye()) {
+        while (!parser.hasByeInput()) {
 
             parser.handleInput();
             input = ui.getInput(sc);
@@ -66,8 +70,12 @@ public class MyDuke {
         sc.close();
     }
 
-
-
+    /**
+     * Checks if the user has provided the index number in the input.
+     * @param inputArr String array consisting of the String input being split by the first two space " ".
+     * @throws NoIndexException If inputArr.length == 1 (i.e. there is no inputArr[1],
+     * indicating that the index is missing in the input.
+     */
     static void indexChecker(String[] inputArr) throws NoIndexException {
         if (inputArr.length == 1) {
             throw new NoIndexException(
@@ -75,6 +83,12 @@ public class MyDuke {
         }
     }
 
+    /**
+     * Checks if the user has provided the description of the ToDo task in the input.
+     * @param inputArr String array consisting of the String input being split by the first two space " ".
+     * @throws NoToDoException If inputArr.length == 1 (i.e. there is no inputArr[1],
+     * indicating that the description of the ToDo Task is missing in the input.
+     */
     static void todoChecker(String[] inputArr) throws NoToDoException {
         if (inputArr.length == 1) {
             throw new NoToDoException(
@@ -82,6 +96,14 @@ public class MyDuke {
         }
     }
 
+    /**
+     * Checks if the user has provided the description of the Event task and the date in the input.
+     * @param inputArr String array consisting of the String input being split by the first two space " ".
+     * @throws NoEventException If inputArr.length == 1 (i.e. there is no inputArr[1],
+     * indicating that the description of the Event Task is missing in the input.
+     * @throws NoDateException If inputArr[1] is missing a "/", which is used before date inputs,
+     * indicating that the date information is missing in the input.
+     */
     static void eventChecker(String[] inputArr) throws NoEventException, NoDateException {
         if (inputArr.length == 1) {
             throw new NoEventException(
@@ -92,6 +114,14 @@ public class MyDuke {
         }
     }
 
+    /**
+     * Checks if the user has provided the description of the Deadline task and the date in the input.
+     * @param inputArr String array consisting of the String input being split by the first two space " ".
+     * @throws NoDeadlineException If inputArr.length == 1 (i.e. there is no inputArr[1],
+     * indicating that the description of the Deadline Task is missing in the input.
+     * @throws NoDateException If inputArr[1] is missing a "/", which is used before date inputs,
+     * indicating that the date information is missing in the input.
+     */
     static void deadlineChecker(String[] inputArr) throws NoDeadlineException, NoDateException {
         if (inputArr.length == 1) {
             throw new NoDeadlineException(
@@ -104,6 +134,9 @@ public class MyDuke {
 
 }
 
+/**
+ * A parser that deals with making sense of the user command and handles parsed input.
+ */
 class Parser {
 
     String input;
@@ -125,18 +158,35 @@ class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Parses the next input to create a new Parser object.
+     * @param input next String input to be parsed.
+     * @return Parser object containing the new input.
+     */
     Parser parseNextInput(String input) {
         return new Parser(input, storage, tasks, ui);
     }
 
-    boolean isInputBye() {
+    /**
+     * Checks for loop terminating condition in main method (if input is "bye")
+     * @return boolean result of input.equals("bye").
+     */
+    boolean hasByeInput() {
         return this.input.equals("bye");
     }
 
+    /**
+     * Splits user input into String arrays with the first two instance space " " in the input.
+     * @return String array of parsed input.
+     */
     String[] getParsedInput() {
         return this.input.split(" ", 2);
     }
 
+    /**
+     * Handles the input according to instructions stated by the input, utilises the ui methods to print
+     * respective response messages as output to the users (eg. when list is empty, when there are caught exceptions).
+     */
     void handleInput() {
         switch (getParsedInput()[0]) {
             case "list":
@@ -240,6 +290,9 @@ class Parser {
 
 }
 
+/**
+ * A task list that contains all tasks inputted e.g., it has operations to add/delete tasks in the list.
+ */
 class TaskList {
 
     List<Task> taskList;
@@ -250,28 +303,53 @@ class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     * Adds task to taskList.
+     * @param task Task to be added.
+     */
     void addTask(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Replaces a Task at the specified index in the taskList with a specified Task.
+     * @param newTask Task to replace the original.
+     * @param index integer value of the index of the Task in the taskList to be replaced.
+     */
     void changeTask(Task newTask, int index) {
         taskList.set(index - 1, newTask);
     }
 
+    /**
+     * Deletes a Task at the specified index in the taskList.
+     * @param index integer value of the index of the Task in the taskList to be deleted.
+     */
     void deleteTask(int index) {
         taskList.remove(index - 1);
     }
 
+    /**
+     * Retrieves a Task at the specified index in the taskList.
+     * @param index integer value of the index of the Task in the taskList to be retrieved.
+     * @return Task object at the specified index in the taskList.
+     */
     Task getTask(int index) {
         return taskList.get(index - 1);
     }
 
+    /**
+     * Retrieves the taskList.
+     * @return the taskList.
+     */
     List<Task> getTaskList() {
         return this.taskList;
     }
 
 }
 
+/**
+ * A storage that deals with loading tasks from the file and saving tasks in the file.
+ */
 class Storage {
 
     String filePath;
@@ -280,6 +358,16 @@ class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from an input data file and populate them onto the taskList.
+     * @throws FileNotFoundException if the input data file provided by the filePath is invalid.
+     * @throws InvalidArgException if the params provided in the input file are insufficient (<3),
+     * or excessive (>4).
+     * @throws NumberFormatException if the String argument to be parsed into an integer is invalid.
+     * @throws InvalidTypeException if the String argument for the task type is not "T", "E" or "D".
+     * @throws DateTimeParseException if the String argument to be parsed into DateTime is invalid.
+     * @returns a list of Tasks collated from the input data file.
+     */
     List<Task> loadTasks() throws FileNotFoundException, InvalidArgException,
             NumberFormatException, InvalidTypeException, DateTimeParseException {
 
@@ -309,6 +397,11 @@ class Storage {
 
     }
 
+    /**
+     * Save tasks from the taskList and update the input data file.
+     * @param list Tasklist from the MyDuke class.
+     * @throws FileNotFoundException if there are I/O errors whilst creating the FileWriter object.
+     */
     void saveToFile(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task t : list) {
@@ -326,6 +419,12 @@ class Storage {
         fw.close();
     }
 
+    /**
+     * Save tasks from the taskList and update the input data file in a new directory.
+     * @throws FileNotFoundException if there is I/O errors whilst creating the FileWriter object.
+     * @param list Tasklist from the MyDuke class.
+     * @param newDir new String directory for the input data file to be saved.
+     */
     void saveToFile(List<Task> list, String newDir) throws IOException {
         FileWriter fw = new FileWriter(newDir);
         for (Task t : list) {
@@ -345,6 +444,9 @@ class Storage {
 
 }
 
+/**
+ * A UI that deals with interactions with the user
+ */
 class Ui {
 
     Ui() {
@@ -459,7 +561,9 @@ class Ui {
     }
 }
 
-// Level-3 additions
+/**
+ * Represents a Task that contains its information/description and a done/not-done status
+ */
 class Task {
     String info;
     boolean isDone;
@@ -473,10 +577,18 @@ class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Marks the current task object as done and returns it as a new Task object.
+     * @returns new done Task object.
+     */
     Task setAsDone() {
         return new Task(this.info, true);
     }
 
+    /**
+     * Marks the current task object as undone and returns it as a new Task object.
+     * @returns new undone Task object.
+     */
     Task setAsUndone() {
         return new Task(this.info, false);
     }
@@ -487,6 +599,9 @@ class Task {
     }
 }
 
+/**
+ * Represents a ToDo Task
+ */
 class ToDo extends Task {
 
     ToDo(String s, boolean b) {
@@ -507,6 +622,9 @@ class ToDo extends Task {
     }
 }
 
+/**
+ * Represents a Deadline Task
+ */
 class Deadline extends Task {
     LocalDate deadline;
 
@@ -539,6 +657,9 @@ class Deadline extends Task {
     }
 }
 
+/**
+ * Represents a Event Task
+ */
 class Event extends Task {
     LocalDate date;
 
@@ -571,6 +692,9 @@ class Event extends Task {
     }
 }
 
+/**
+ * A custom exception class to represent exceptions specific to MyDuke.
+ */
 class MyDukeException extends Exception {
 
     MyDukeException(String s) {
