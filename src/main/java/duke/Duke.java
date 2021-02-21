@@ -37,8 +37,9 @@ public class Duke {
                 return "You have no tasks in the list!";
             }
             for (int i = 0; i < taskList.getSize(); i++) {
-                output += taskList.getTask(i).toString();
+                output += taskList.getTask(i).toString() + "\n";
             }
+            assert output.length() != 0 : "No tasks in the list";
             return output;
         default:
             Pair result = Parser.parseInput(string, taskList);

@@ -42,7 +42,7 @@ public class Parser {
         case "find":
             String keyword = inputSplit[1];
             TaskList result = tasks.findTask(keyword);
-            message = "Here are the matching tasks in your list:";
+            message = "Here are the matching tasks in your list: \n";
             for (int i = 0; i < result.getSize(); i++) {
                 message += result.getTask(i).toString();
             }
@@ -53,27 +53,27 @@ public class Parser {
             break;
         case "delete":
             task = tasks.deleteTask(Integer.valueOf(inputSplit[1]) - 1);
-            message = "Noted. I have deleted this task:" + task.toString();
+            message = "Noted. I have deleted this task: \n" + task.toString();
             break;
         case "todo":
             String name = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
             task = new ToDos(false, name);
             tasks.addTask(task);
-            message = "Got it. I have added this task:" + task.toString();
+            message = "Got it. I have added this task: \n" + task.toString();
             break;
         case "deadline":
             String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
             String[] deadlineSplit = deadlineName.split(" /by ");
             task = new Deadlines(false, deadlineSplit[0], deadlineSplit[1]);
             tasks.addTask(task);
-            message = "Got it. I have added this task:" + task.toString();
+            message = "Got it. I have added this task: \n" + task.toString();
             break;
         case "event":
             String event = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
             String[] eventSplit = event.split(" /at ");
             task = new Events(false, eventSplit[0], eventSplit[1]);
             tasks.addTask(task);
-            message = "Got it. I have added this task:" + task.toString();
+            message = "Got it. I have added this task: \n" + task.toString();
             break;
         default:
             message = "You have entered invalid commands!";

@@ -22,9 +22,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone == true) {
-            return "[X] " + eventName + "\n";
+            return "[X] " + eventName;
         } else {
-            return "[ ] " + eventName + "\n";
+            return "[ ] " + eventName;
         }
     }
 }
