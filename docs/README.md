@@ -8,7 +8,7 @@ traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
-##Quick start
+## Quick start
 1. Ensure you have java `11` or above installed.
    
 1. Download the latest `Yoda.jar` from [here](https://github.com/vivegank/ip/releases).
@@ -111,7 +111,7 @@ Task list data is saved automatically after any command that changes the data. T
 
 --------------------------------------------------------------------------------------------------------------------
 
-##Command summary
+## Command summary
 
 Action | Format, Examples
 --------|------------------
