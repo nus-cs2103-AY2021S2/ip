@@ -35,10 +35,10 @@ public class Ui {
     private static final String STORAGE_SAVE_FAILURE = "Argh, I can't save your data.";
     private static final String TASK_LIST_TITLE = "Tasks currently in your list:";
     private static final String TASK_LIST_EMPTY = "There isn't any task found in the list.";
-    private static final String TASK_ADD_SUCCESS = "have been successfully added to the list.";
-    private static final String TASK_DELETE_SUCCESS = "have been successfully removed from the list.";
-    private static final String TASK_MARK_DONE_SUCCESS = "have been successfully marked as completed.";
-    private static final String TASK_MARK_UNDONE_SUCCESS = "have been successfully marked as incomplete.";
+    private static final String TASK_ADD_SUCCESS = "has been successfully added to the list.";
+    private static final String TASK_DELETE_SUCCESS = "has been successfully removed from the list.";
+    private static final String TASK_MARK_DONE_SUCCESS = "has been successfully marked as completed.";
+    private static final String TASK_MARK_UNDONE_SUCCESS = "has been successfully marked as incomplete.";
 
     public static String getErrorMessage(String message) {
         return Ui.ERROR_HEADING + message;
