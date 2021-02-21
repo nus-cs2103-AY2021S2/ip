@@ -60,8 +60,7 @@ public class Ui {
      */
     public String exit() {
         return "May the force be with you!\n"
-             + "See you soon, I will!\n"
-             + "Within 3 seconds, the self-destruct will be!";
+             + "See you soon, I will!\n";
     }
 
     /**
