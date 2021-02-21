@@ -5,16 +5,16 @@ Welcome! This is a user guide for the Vergil chatbot application.
 ![UI screenshot](Ui.png)
 
 ## Table of Contents
-[1. Adding tasks.](#1-Adding-Tasks)\
-&nbsp;&nbsp;&nbsp;&nbsp;[1.1. To-do tasks.](#11-To-do-tasks-todo)\
-&nbsp;&nbsp;&nbsp;&nbsp;[1.2. Deadline tasks.](#12-Deadline-tasks-deadline)\
-&nbsp;&nbsp;&nbsp;&nbsp;[1.3. Event tasks.](#13-Event-tasks-event)\
-[2. Displaying tasks.](#2-Displaying-Tasks-list)\
-[3. Finding tasks.](#3-Finding-Tasks-find)\
-[4. Completing tasks.](#4-Completing-Tasks-done)\
-[5. Deleting tasks.](#5-Deleting-Tasks-delete)\
-[6. Exiting the program.](#6-Exiting-Vergil-bye)\
-[7. Command summary.](#7-Command-Summary)\
+[1. Adding tasks.](#1-adding-tasks)\
+&nbsp;&nbsp;&nbsp;&nbsp;[1.1. To-do tasks.](#11-to-do-tasks-todo)\
+&nbsp;&nbsp;&nbsp;&nbsp;[1.2. Deadline tasks.](#12-deadline-tasks-deadline)\
+&nbsp;&nbsp;&nbsp;&nbsp;[1.3. Event tasks.](#13-event-tasks-event)\
+[2. Displaying tasks.](#2-displaying-tasks-list)\
+[3. Finding tasks.](#3-finding-tasks-find)\
+[4. Completing tasks.](#4-completing-tasks-done)\
+[5. Deleting tasks.](#5-deleting-tasks-delete)\
+[6. Exiting the program.](#6-exiting-vergil-bye)\
+[7. Command summary.](#7-command-summary)
 
 ## 1. Adding Tasks
 ### 1.1. To-do tasks: `todo`
