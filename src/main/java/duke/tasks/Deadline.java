@@ -62,6 +62,6 @@ public class Deadline extends Task implements DueDate {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[D]" + super.toString() + " (by: " + time.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " + this.time.format(formatter) + ")";
     }
 }

@@ -60,6 +60,6 @@ public class Event extends Task implements DueDate {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[E]" + super.toString() + " (at: " + time.format(formatter) + ")";
+        return "[E]" + super.toString() + " (at: " + this.time.format(formatter) + ")";
     }
 }

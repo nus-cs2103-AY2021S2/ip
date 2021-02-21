@@ -7,6 +7,8 @@ import duke.ui.Ui;
 import duke.commands.Command;
 
 import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Duke allows the user to maintain a list of tasks, and responses to user commands.
@@ -24,7 +26,6 @@ public class Duke {
      */
     public Duke(String filePath) {
         this.ui = new Ui();
-        this.ui.greet();
         this.storage = new Storage(filePath);
         this.filePath = filePath;
         try {

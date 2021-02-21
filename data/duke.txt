@@ -1,5 +1,5 @@
-E | 1 | play | 2021-05-17
-E | 1 | career fair | 2021-03-12
-D | 0 | project submission | 2021-03-14
-T | 0 | read books
-D | 0 | return books | 2021-04-06
+T | 1 | study
+D | 0 | report submission | 2021-03-28
+E | 0 | career fair | 2021-03-14
+E | 0 | project meeting | 2021-03-24
+D | 1 | oral presentation | 2021-03-12

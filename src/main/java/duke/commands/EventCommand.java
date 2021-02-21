@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.parser.DateCommandException;
 import duke.parser.DuplicateException;
 import duke.parser.InsufficientArgumentsException;
 import duke.tasks.TaskList;
@@ -10,20 +11,15 @@ import java.time.LocalDate;
 /**
  * An EventCommand is a command that adds an event to the task list.
  */
-public class EventCommand extends Command {
-    private String taskDescription;
-    private LocalDate eventDate;
+public class EventCommand extends DateCommand {
+    private static final String DELIMITER = "/at";
 
     public EventCommand(TaskList taskList, String taskDescription, LocalDate eventDate) {
-        super(taskList);
-        this.taskDescription = taskDescription;
-        this.eventDate = eventDate;
+        super(taskList, taskDescription, eventDate);
     }
 
     public EventCommand(String[] userInput, TaskList taskList) {
         super(userInput, taskList);
-        this.taskDescription = "";
-        this.eventDate = null;
     }
 
     @Override
@@ -33,11 +29,12 @@ public class EventCommand extends Command {
                 throw new InsufficientArgumentsException("OOPS!!! The "
                         + "description of an event cannot be empty.");
             }
-            String taskDescription = this.getDescription(this.getUserInput(), "/at");
+            String taskDescription = this.getDescription(this.getUserInput(), DELIMITER);
+            this.checkValidity(this.getUserInput(), DELIMITER);
             this.getTaskList().hasDuplicate(taskDescription);
-            LocalDate dueDate = this.getDueDate(this.getUserInput(), "/at");
+            LocalDate dueDate = this.extractDateFromCommand(this.getUserInput(), DELIMITER);
             return new EventCommand(this.getTaskList(), taskDescription, dueDate);
-        } catch (InsufficientArgumentsException | DuplicateException e) {
+        } catch (InsufficientArgumentsException | DuplicateException | DateCommandException e) {
             return new ErrorCommand(this.getTaskList(), e.getMessage());
         }
     }
@@ -46,7 +43,7 @@ public class EventCommand extends Command {
     public TaskList execute() {
         TaskList taskList = this.getTaskList();
         int initialSize = taskList.size();
-        Event event = new Event(this.taskDescription, this.eventDate);
+        Event event = new Event(this.taskDescription, this.date);
         taskList = taskList.add(event);
         assert(initialSize + 1 == taskList.size()); // ensure that event is properly added
         return taskList;
@@ -55,7 +52,7 @@ public class EventCommand extends Command {
     @Override
     public String toString() {
         String message = "Got it. I've added this task:\n";
-        Event event = new Event(this.taskDescription, this.eventDate);
+        Event event = new Event(this.taskDescription, this.date);
         message += event + "\n";
         message += "Now you have " + (this.getTaskList().size() + 1) + " tasks in the list.";
         return message;

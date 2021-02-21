@@ -45,33 +45,6 @@ public abstract class Command {
         return description;
     }
 
-    /**
-     * Obtains the due date of the task of concern.
-     *
-     * @param input String array containing the command entered by the user.
-     * @param delimiter String used for identifying due date of the task.
-     * @return Due date for the task of concern.
-     */
-    protected LocalDate getDueDate(String[] input, String delimiter) {
-        boolean flag = false;
-        boolean first = true;
-        String dueDate = "";
-        for (String s : input) {
-            if (flag) {
-                if (!first) {
-                    dueDate += ' ' + s;
-                } else {
-                    dueDate += s;
-                }
-                first = false;
-            }
-            if (s.equals(delimiter)) {
-                flag = true;
-            }
-        }
-        return LocalDate.parse(dueDate);
-    }
-
     public abstract TaskList execute();
 
     public abstract Command process();
