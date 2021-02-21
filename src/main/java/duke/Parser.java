@@ -56,12 +56,20 @@ public class Parser {
 
         if (type.equals("todo")) {
             return Executor.add(taskList, type, desc);
-        } else if (type.equals("deadline") || type.equals("event")) {
+        } else if (type.equals("deadline")) {
             if (!desc.contains("/")) {
                 throw new DukeException("Missing argument(s)!");
             } else {
-                time = desc.substring(desc.indexOf("/") + 4, desc.length());
-                desc = desc.substring(0, desc.indexOf("/") - 1);
+                time = desc.substring(desc.indexOf("/by") + 4, desc.length());
+                desc = desc.substring(0, desc.indexOf("/by") - 1);
+            }
+            return Executor.add(taskList, type, desc, time);
+        } else if (type.equals("event")) {
+            if (!desc.contains("/")) {
+                throw new DukeException("Missing argument(s)!");
+            } else {
+                time = desc.substring(desc.indexOf("/at") + 4, desc.length());
+                desc = desc.substring(0, desc.indexOf("/at") - 1);
             }
             return Executor.add(taskList, type, desc, time);
         } else if (type.equals("done")) {
