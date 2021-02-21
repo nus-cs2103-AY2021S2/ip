@@ -2,19 +2,20 @@ package duke.command;
 
 public class CommandResponse {
 
-    private String msg;
-    private Boolean toExit;
+    private String message;
+    private boolean toExit;
 
-    public CommandResponse(String msg, Boolean toExit) {
-        this.msg = msg;
+    public CommandResponse(String message, boolean toExit) {
+        this.message = message;
         this.toExit = toExit;
     }
 
-    public String getMsg() {
-        return this.msg;
+    public boolean canExit() {
+        return this.toExit;
     }
 
-    public Boolean canExit() {
-        return this.toExit;
+    @Override
+    public String toString() {
+        return this.message;
     }
 }

@@ -48,11 +48,13 @@ public class TaskList {
         this.taskList.add(task);
     }
 
-    public void deleteTask(Integer taskIndex) {
-        this.taskList.remove(taskIndex);
+    public Task deleteTask(int taskIndex) {
+        return this.taskList.remove(taskIndex - 1);
     }
 
-    public void markDone(Integer taskIndex) {
-        this.taskList.get(taskIndex).markAsDone();
+    public Task markDone(Integer taskIndex) {
+        Task task = this.taskList.get(taskIndex - 1);
+        task.markAsDone();
+        return task;
     }
 }

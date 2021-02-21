@@ -55,7 +55,7 @@ public class Duke {
             assert this.storage != null;
             assert this.tasks != null;
             assert this.ui != null;
-            return c.execute(tasks, ui, storage);
+            return c.getResponse(tasks, ui, storage);
         } catch (DukeException e) {
             String msg = ui.getErrorMessage(e.getMessage());
             return new CommandResponse(msg, false);

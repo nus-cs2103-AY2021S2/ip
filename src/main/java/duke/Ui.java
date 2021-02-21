@@ -35,6 +35,8 @@ public class Ui {
             + NEWLINE + TAB + "- delete <task_number>"
             + NEWLINE + TAB + "- done <task_number>";
 
+    private static final String COMMAND_BYE_SUCCESS = "Alright, take care. Hope to see you again!";
+
     private static final String STORAGE_LOAD_FAILURE = "Argh, I can't load your data file.";
     private static final String STORAGE_SAVE_SUCCESS = "Alright, I've saved your current data.";
     private static final String STORAGE_SAVE_FAILURE = "Argh, I can't save your data.";
@@ -42,6 +44,8 @@ public class Ui {
     private static final String TASK_LIST_TITLE = "Tasks currently in your list:";
     private static final String TASK_LIST_EMPTY = "There isn't any task found in the list.";
     private static final String TASK_ADD_SUCCESS = "have been successfully added to the list.";
+    private static final String TASK_DELETE_SUCCESS = "have been successfully removed from the list.";
+    private static final String TASK_MARK_DONE_SUCCESS = "have been successfully marked as completed.";
 
     /**
      * Retrieves greeting.
@@ -104,11 +108,14 @@ public class Ui {
         return Ui.getInvalidCommand();
     }
 
+    public static String getByeSuccess() {
+        return Ui.COMMAND_BYE_SUCCESS;
+    }
+
 
     public static String getLoadTaskListFailure() {
         return Ui.STORAGE_LOAD_FAILURE;
     }
-
 
     public static String getSaveTaskListSuccess() {
         return Ui.STORAGE_SAVE_SUCCESS;
@@ -121,5 +128,15 @@ public class Ui {
     public static String getAddTaskSuccess(Task task) {
         return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
                 + Ui.SPACE + Ui.TASK_ADD_SUCCESS;
+    }
+
+    public static String getDeleteTaskSuccess(Task task) {
+        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
+                + Ui.SPACE + Ui.TASK_DELETE_SUCCESS;
+    }
+
+    public static String getMarkDoneTaskSuccess(Task task) {
+        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
+                + Ui.SPACE + Ui.TASK_MARK_DONE_SUCCESS;
     }
 }
