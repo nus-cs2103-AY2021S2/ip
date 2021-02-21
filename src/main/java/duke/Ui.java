@@ -37,6 +37,7 @@ public class Ui {
     private static final String TASK_ADD_SUCCESS = "have been successfully added to the list.";
     private static final String TASK_DELETE_SUCCESS = "have been successfully removed from the list.";
     private static final String TASK_MARK_DONE_SUCCESS = "have been successfully marked as completed.";
+    private static final String TASK_MARK_UNDONE_SUCCESS = "have been successfully marked as incomplete.";
 
     public static String getErrorMessage(String message) {
         return Ui.ERROR_HEADING + message;
@@ -100,5 +101,10 @@ public class Ui {
     public static String getMarkDoneTaskSuccess(Task task) {
         return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
                 + Ui.SPACE + Ui.TASK_MARK_DONE_SUCCESS;
+    }
+
+    public static String getMarkUndoneTaskSuccess(Task task) {
+        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
+                + Ui.SPACE + Ui.TASK_MARK_UNDONE_SUCCESS;
     }
 }

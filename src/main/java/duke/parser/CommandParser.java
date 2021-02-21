@@ -23,6 +23,7 @@ public class CommandParser {
     private static final Pattern ADD_EVENT_PATTERN = Pattern.compile("event ([a-zA-Z0-9\\s]+) /at (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})");
     private static final Pattern DELETE_TASK_PATTERN = Pattern.compile("delete ([0-9]+)");
     private static final Pattern MARK_TASK_AS_DONE_PATTERN = Pattern.compile("done ([0-9]+)");
+    private static final Pattern MARK_TASK_AS_UNDONE_PATTERN = Pattern.compile("undone ([0-9]+)");
 
     public static Command getCommand(String input) throws DukeException {
         String commandType = CommandParser.getCommandType(input);
@@ -48,6 +49,8 @@ public class CommandParser {
             return CommandParser.getDeleteTaskCommand(input);
         case "done":
             return CommandParser.getMarkTaskAsDoneCommand(input);
+        case "undone":
+            return CommandParser.getMarkTaskAsUndoneCommand(input);
         default:
             throw new DukeException(Ui.getInvalidCommand());
         }
@@ -154,5 +157,15 @@ public class CommandParser {
 
         Integer index = Integer.parseInt(m.group(1));
         return new MarkTaskAsDoneCommand(index);
+    }
+
+    public static MarkTaskAsUndoneCommand getMarkTaskAsUndoneCommand(String input) throws DukeException {
+        Matcher m = CommandParser.MARK_TASK_AS_UNDONE_PATTERN.matcher(input);
+        if (!m.find() || m.groupCount() != 1) {
+            throw new DukeException(Ui.getInvalidCommand());
+        }
+
+        Integer index = Integer.parseInt(m.group(1));
+        return new MarkTaskAsUndoneCommand(index);
     }
 }

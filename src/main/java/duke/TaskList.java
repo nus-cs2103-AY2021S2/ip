@@ -57,4 +57,10 @@ public class TaskList {
         task.markAsDone();
         return task;
     }
+
+    public Task markUndone(Integer taskIndex) {
+        Task task = this.taskList.get(taskIndex - 1);
+        task.markAsUndone();
+        return task;
+    }
 }
