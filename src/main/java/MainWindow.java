@@ -1,5 +1,4 @@
-package duke;
-
+import duke.Duke;
 import duke.command.CommandResponse;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
