@@ -32,7 +32,12 @@ public class Deadline extends Task {
         String[] splitInput = input.split(" /by ");
         if (splitInput.length == 1) {
             throw new ChecklstException("Inproper Deadline format used! Please use { name } /by { deadline }");
+        } else if (splitInput[0].equals("")) {
+            throw new ChecklstException("Deadline needs a name!");
+        } else if (splitInput[0].contains(";") || splitInput[1].contains(";")) {
+            throw new ChecklstException("Sorry, Deadline input cannot contain a \";\"!");
         }
+
 
         LocalDate dueDate;
         try {

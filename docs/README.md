@@ -2,6 +2,9 @@
 
 Checklst is a basic Todo app, allowing users to store and track events, deadlines and todos. Checklst has gradually evolved from a basic CLI application to a fully ready GUI.
 
+#### Github Link
+https://github.com/glennljs/ip
+
 ![](main_ui.png)
 
 # Command Syntax

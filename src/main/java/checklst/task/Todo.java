@@ -23,6 +23,8 @@ public class Todo extends Task {
     public static Todo makeTodo(String name) throws ChecklstException {
         if (name.equals("")) {
             throw new ChecklstException("Todo needs a name!");
+        } else if (name.contains(";")) {
+            throw new ChecklstException("Sorry, Todo name cannot contain a \";\"!");
         }
         return new Todo(name);
     }

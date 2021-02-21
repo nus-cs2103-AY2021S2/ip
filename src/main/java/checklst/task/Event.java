@@ -32,6 +32,10 @@ public class Event extends Task {
         String[] splitInput = input.split(" /at ");
         if (splitInput.length == 1) {
             throw new ChecklstException("Inproper Event format used! Please use { name } /at { event }");
+        } else if (splitInput[0].equals("")) {
+            throw new ChecklstException("Event needs a name!");
+        } else if (splitInput[0].contains(";") || splitInput[1].contains(";")) {
+            throw new ChecklstException("Sorry, Event input cannot contain a \";\"!");
         }
 
         LocalDate eventDate;
