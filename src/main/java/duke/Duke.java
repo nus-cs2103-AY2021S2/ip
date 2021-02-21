@@ -1,3 +1,4 @@
+package duke;
 /*
   Doge Duke implements a virtual pet application that
   returns different commands passed by owner (user).
