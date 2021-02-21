@@ -76,6 +76,18 @@ public class TaskList {
         return printableTasks;
     }
 
+    public ArrayList<String> getPrintableTasksWithKeyword(String keyword) {
+        ArrayList<String> printableTasks = new ArrayList<>();
+        int id = 1;
+        for (Task task : tasks) {
+            if (task.descriptionContains(keyword)) {
+                printableTasks.add(id + ". " + task);
+                id++;
+            }
+        }
+        return printableTasks;
+    }
+
     public ArrayList<String> getWritableTasks() {
         ArrayList<String> writableTasks = new ArrayList<>();
         for (Task task : tasks) {

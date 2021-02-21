@@ -7,6 +7,9 @@ public class Parser {
         } else {
             String[] arr = cmd.split(" ", 2);
             switch (arr[0]) {
+            case "find":
+                ui.printFoundTasks(tasks.getPrintableTasksWithKeyword(arr[1]));
+                break;
             case "done":
                 int doneId = Integer.parseInt(arr[1]);
                 tasks.markTaskAsDone(doneId);

@@ -31,4 +31,8 @@ public abstract class Task {
     public boolean isDone() {
         return isDone;
     }
+
+    public boolean descriptionContains(String keyword) {
+        return description.contains(keyword);
+    }
 }
