@@ -22,37 +22,38 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(
+            this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(
+            this.getClass().getResourceAsStream("/images/DaUser.png"));
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.scrollPane.vvalueProperty().bind(
+                this.dialogContainer.heightProperty());
+        this.dialogContainer.getChildren().add(
+                DukeTextDialogBox.getDialogBox(this.duke.getGreeting(), this.dukeImage));
     }
 
     public void setDuke(Duke d) {
-        duke = d;
-        displayGreeting();
-    }
-
-    public void displayGreeting() {
-        String greeting = duke.welcomeUser();
-        dialogContainer.getChildren().addAll(
-                DukeTextDialogBox.getDialogBox(greeting, dukeImage));
+        this.duke = d;
     }
 
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        CommandResponse response = duke.getResponse(input);
+        String input = this.userInput.getText();
+        CommandResponse response = this.duke.getResponse(input);
 
-        dialogContainer.getChildren().add(UserTextDialogBox.getDialogBox(input, userImage));
+        this.dialogContainer.getChildren().add(
+                UserTextDialogBox.getDialogBox(input, this.userImage));
         if (response.getCommandClass() == StatsCommand.class) {
-            dialogContainer.getChildren().add(DukePieChartDialogBox.getDialogBox(this.duke.getTaskList(), userImage));
+            this.dialogContainer.getChildren().add(
+                    DukePieChartDialogBox.getDialogBox(this.duke.getTaskList(), this.userImage));
         } else {
-            dialogContainer.getChildren().add(DukeTextDialogBox.getDialogBox(response.toString(), userImage));
+            this.dialogContainer.getChildren().add(
+                    DukeTextDialogBox.getDialogBox(response.toString(), this.userImage));
         }
-        userInput.clear();
+        this.userInput.clear();
 
         if (response.canExit()) {
             Platform.exit();

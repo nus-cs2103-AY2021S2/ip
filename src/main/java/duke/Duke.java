@@ -3,35 +3,23 @@ package duke;
 import duke.command.Command;
 import duke.command.CommandResponse;
 import duke.parser.CommandParser;
-import duke.task.Task;
-
-import java.util.ArrayList;
 
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     public Duke() {
         this("data/tasks.txt");
     }
 
     public Duke(String filePath) {
-        storage = new Storage(filePath);
+        this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(this.storage.load());
         } catch (DukeException e) {
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
-    }
-
-    public String welcomeUser() {
-        return ui.getGreeting();
-    }
-
-    public TaskList getTaskList() {
-        return tasks;
     }
 
     public CommandResponse getResponse(String input) {
@@ -39,10 +27,18 @@ public class Duke {
             Command c = CommandParser.getCommand(input);
             assert this.storage != null;
             assert this.tasks != null;
-            return c.getResponse(tasks, storage);
+            return c.getResponse(this.tasks, this.storage);
         } catch (DukeException e) {
-            String message = ui.getErrorMessage(e.getMessage());
+            String message = Ui.getErrorMessage(e.getMessage());
             return new CommandResponse(null, message, false);
         }
+    }
+
+    public String getGreeting() {
+        return Ui.getGreeting();
+    }
+
+    public TaskList getTaskList() {
+        return this.tasks;
     }
 }

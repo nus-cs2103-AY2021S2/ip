@@ -43,7 +43,7 @@ public class DukePieChartDialogBox extends HBox {
 
     private void setTaskListBreakdown(TaskList taskList) {
         this.dialog.setTitle("Task List Breakdown");
-        this.dialog.setData(getBreakdownData(taskList));
+        this.dialog.setData(this.getBreakdownData(taskList));
     }
 
     private ObservableList<PieChart.Data> getBreakdownData(TaskList taskList) {
@@ -52,16 +52,18 @@ public class DukePieChartDialogBox extends HBox {
         int eventCount = taskList.getEventCount();
         int total = todoCount + deadlineCount + eventCount;
 
-        String todoText = String.format("To-do %.2f%%", Double.valueOf(todoCount) / total);
-        String deadlineText = String.format("Deadline %.2f%%", Double.valueOf(deadlineCount) / total);
-        String eventText = String.format("Event %.2f%%", Double.valueOf(eventCount) / total);
+        String todoText = String.format("To-do %.2f%%",
+                Double.valueOf(todoCount) / total);
+        String deadlineText = String.format("Deadline %.2f%%",
+                Double.valueOf(deadlineCount) / total);
+        String eventText = String.format("Event %.2f%%",
+                Double.valueOf(eventCount) / total);
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
                         new PieChart.Data(todoText, todoCount),
                         new PieChart.Data(deadlineText, deadlineCount),
                         new PieChart.Data(eventText, eventCount));
-
         return pieChartData;
     }
 }

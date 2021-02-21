@@ -8,19 +8,21 @@ import duke.task.Task;
 
 public class DeleteTaskCommand extends Command {
 
-    private static final Boolean toExit = false;
+    private static final boolean toExit = false;
 
-    private Integer taskIndex;
+    private int taskIndex;
 
-    public DeleteTaskCommand(Integer taskIndex) {
+    public DeleteTaskCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks,
+                                       Storage storage) throws DukeException {
         Task task = tasks.deleteTask(this.taskIndex);
 
         String message = Ui.getDeleteTaskSuccess(task);
-        return new CommandResponse(DeleteTaskCommand.class, message, DeleteTaskCommand.toExit);
+        return new CommandResponse(DeleteTaskCommand.class,
+                message, DeleteTaskCommand.toExit);
     }
 }

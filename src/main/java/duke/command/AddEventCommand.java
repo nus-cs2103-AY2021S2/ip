@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public class AddEventCommand extends Command {
 
-    private static final Boolean toExit = false;
+    private static final boolean toExit = false;
 
     private Event event;
 
@@ -19,10 +19,12 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks,
+                                       Storage storage) throws DukeException {
         tasks.addTask(this.event);
 
         String message = Ui.getAddTaskSuccess(this.event);
-        return new CommandResponse(AddEventCommand.class, message, AddEventCommand.toExit);
+        return new CommandResponse(AddEventCommand.class,
+                message, AddEventCommand.toExit);
     }
 }

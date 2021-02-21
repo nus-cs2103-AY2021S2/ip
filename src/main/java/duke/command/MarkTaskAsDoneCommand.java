@@ -8,19 +8,21 @@ import duke.task.Task;
 
 public class MarkTaskAsDoneCommand extends Command {
 
-    private static final Boolean toExit = false;
+    private static final boolean toExit = false;
 
-    private Integer taskIndex;
+    private int taskIndex;
 
-    public MarkTaskAsDoneCommand(Integer taskIndex) {
+    public MarkTaskAsDoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks,
+                                       Storage storage) throws DukeException {
         Task task = tasks.markDone(this.taskIndex);
 
         String message = Ui.getMarkDoneTaskSuccess(task);
-        return new CommandResponse(MarkTaskAsDoneCommand.class, message, MarkTaskAsDoneCommand.toExit);
+        return new CommandResponse(MarkTaskAsDoneCommand.class,
+                message, MarkTaskAsDoneCommand.toExit);
     }
 }

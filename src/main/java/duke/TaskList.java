@@ -71,13 +71,13 @@ public class TaskList {
         return this.taskList.remove(taskIndex - 1);
     }
 
-    public Task markDone(Integer taskIndex) {
+    public Task markDone(int taskIndex) {
         Task task = this.taskList.get(taskIndex - 1);
         task.markAsDone();
         return task;
     }
 
-    public Task markUndone(Integer taskIndex) {
+    public Task markUndone(int taskIndex) {
         Task task = this.taskList.get(taskIndex - 1);
         task.markAsUndone();
         return task;

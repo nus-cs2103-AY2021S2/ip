@@ -7,13 +7,15 @@ import duke.Ui;
 
 public class SaveTasksCommand extends Command {
 
-    private static final Boolean toExit = false;
+    private static final boolean toExit = false;
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks,
+                                       Storage storage) throws DukeException {
         storage.save(tasks);
 
         String message = Ui.getSaveTaskListSuccess();
-        return new CommandResponse(SaveTasksCommand.class, message, SaveTasksCommand.toExit);
+        return new CommandResponse(SaveTasksCommand.class,
+                message, SaveTasksCommand.toExit);
     }
 }

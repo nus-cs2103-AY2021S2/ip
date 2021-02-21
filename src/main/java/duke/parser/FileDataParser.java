@@ -16,11 +16,16 @@ import java.util.regex.Pattern;
 
 public class FileDataParser {
 
-    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private static final Pattern COMMAND_TYPE_PATTERN = Pattern.compile("^\\[(T|D|E)\\]");
-    private static final Pattern TODO_DATA_PATTERN = Pattern.compile("\\[(T)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+)");
-    private static final Pattern DEADLINE_DATA_PATTERN = Pattern.compile("\\[(D)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+) \\(by: (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})\\)");
-    private static final Pattern EVENT_DATA_PATTERN = Pattern.compile("\\[(E)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+) \\(at: (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})\\)");
+    private static final DateTimeFormatter DATETIME_FORMATTER
+            = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final Pattern COMMAND_TYPE_PATTERN
+            = Pattern.compile("^\\[(T|D|E)\\]");
+    private static final Pattern TODO_DATA_PATTERN
+            = Pattern.compile("\\[(T)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+)");
+    private static final Pattern DEADLINE_DATA_PATTERN
+            = Pattern.compile("\\[(D)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+) \\(by: (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})\\)");
+    private static final Pattern EVENT_DATA_PATTERN
+            = Pattern.compile("\\[(E)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+) \\(at: (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})\\)");
 
     public static ArrayList<Task> getTaskListData(List<String> lines) throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -44,7 +49,7 @@ public class FileDataParser {
         return taskList;
     }
 
-    public static String getCommandType(String input) throws DukeException {
+    private static String getCommandType(String input) throws DukeException {
         Matcher m = FileDataParser.COMMAND_TYPE_PATTERN.matcher(input);
         if (!m.find() || m.groupCount() != 1) {
             throw new DukeException(Ui.getLoadTaskListFailure());
@@ -54,7 +59,7 @@ public class FileDataParser {
         return commandType;
     }
 
-    public static Todo getTodoData(String input) throws DukeException {
+    private static Todo getTodoData(String input) throws DukeException {
         Matcher m = FileDataParser.TODO_DATA_PATTERN.matcher(input);
         if (!m.find() || m.groupCount() != 3) {
             throw new DukeException(Ui.getLoadTaskListFailure());
@@ -67,26 +72,28 @@ public class FileDataParser {
         return todo;
     }
 
-    public static Deadline getDeadlineData(String input) throws DukeException {
+    private static Deadline getDeadlineData(String input) throws DukeException {
         Matcher m = FileDataParser.DEADLINE_DATA_PATTERN.matcher(input);
         if (!m.find() || m.groupCount() != 4) {
             throw new DukeException(Ui.getLoadTaskListFailure());
         }
 
-        Deadline deadline = new Deadline(m.group(3), LocalDateTime.parse(m.group(4), DATETIME_FORMATTER));
+        Deadline deadline = new Deadline(m.group(3),
+                LocalDateTime.parse(m.group(4), DATETIME_FORMATTER));
         if (m.group(2).equals("*")) {
             deadline.markAsDone();
         }
         return deadline;
     }
 
-    public static Event getEventData(String input) throws DukeException {
+    private static Event getEventData(String input) throws DukeException {
         Matcher m = FileDataParser.EVENT_DATA_PATTERN.matcher(input);
         if (!m.find() || m.groupCount() != 4) {
             throw new DukeException(Ui.getLoadTaskListFailure());
         }
 
-        Event event = new Event(m.group(3), LocalDateTime.parse(m.group(4), DATETIME_FORMATTER));
+        Event event = new Event(m.group(3),
+                LocalDateTime.parse(m.group(4), DATETIME_FORMATTER));
         if (m.group(2).equals("*")) {
             event.markAsDone();
         }

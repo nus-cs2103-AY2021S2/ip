@@ -8,7 +8,7 @@ import duke.task.Todo;
 
 public class AddTodoCommand extends Command {
 
-    private static final Boolean toExit = false;
+    private static final boolean toExit = false;
 
     private Todo todo;
 
@@ -17,10 +17,12 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks,
+                                       Storage storage) throws DukeException {
         tasks.addTask(this.todo);
 
         String message = Ui.getAddTaskSuccess(this.todo);
-        return new CommandResponse(AddTodoCommand.class, message, AddTodoCommand.toExit);
+        return new CommandResponse(AddTodoCommand.class,
+                message, AddTodoCommand.toExit);
     }
 }
