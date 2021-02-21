@@ -2,7 +2,7 @@
 
 Checklst is a basic Todo app, allowing users to store and track events, deadlines and todos. Checklst has gradually evolved from a basic CLI application to a fully ready GUI.
 
-![](main_ui.png)
+![](docs/main_ui.png)
 
 # Command Syntax
 
@@ -77,7 +77,7 @@ The sorting will be done via 2 conditions. Firstly, the tasks will be split into
 ## Errors
 Checklst is is capable of handling errors in command or keyword inputs. Whenever an error is encounted, Checklst will return the error message with a clear red indicator.
 
-![](Ui.png)
+![](docs/Ui.png)
 
 ## Credits
 Icons in Checklst are made by and used with courtesy from Flat Icons. 
