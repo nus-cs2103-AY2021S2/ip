@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class CommandList {
     static ArrayList<Command> commands;
-    private String separator = " ";
     static Storage storage;
 
     public CommandList(ArrayList<Command> commands, Storage storage) {
@@ -12,9 +11,9 @@ public class CommandList {
         this.storage = storage;
     }
 
-    static void printList(ArrayList<Command> xs) {
-        for (int i = 0; i < xs.size(); i++) {
-            Command value = xs.get(i);
+    static void printList() {
+        for (int i = 0; i < commands.size(); i++) {
+            Command value = commands.get(i);
             System.out.println((i + 1) + ". " + value);
         }
     }
@@ -33,10 +32,11 @@ public class CommandList {
         storage.save(commands, storage.filePath);
     }
 
-    static void markCommand(int id) {
+    static void doneCommand(int id) {
         Command command = commands.get(id);
         command.markDone();
         Ui.printDone(commands);
+        storage.save(commands, storage.filePath);
     }
 
     static void deleteCommand(int id) {

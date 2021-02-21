@@ -29,9 +29,9 @@ public class Storage {
         }
     }
 
-    static void save(ArrayList<Command> xs, String path) {
+    static void save(ArrayList<Command> xs, String filePath) {
         try {
-            FileWriter fw = new FileWriter(path);
+            FileWriter fw = new FileWriter(filePath);
             for (Command c : xs) {
                 if (c instanceof ToDo) {
                     fw.write("T |"

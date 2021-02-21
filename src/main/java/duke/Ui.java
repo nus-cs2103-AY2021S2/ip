@@ -21,7 +21,6 @@ public class Ui {
             + "Type your request in below!\n";
     static String goodbye = "Bye! Hope I was a good dog, "
             + "see you again soon!";
-    static String terminate = "bye";
 
     static void printGreeting() {
         System.out.println(spacer + greet + spacer);
@@ -64,18 +63,11 @@ public class Ui {
                 + spacer);
     }
 
-    static void printList(ArrayList<Command> xs) {
-        for (int i = 0; i < xs.size(); i++) {
-            Command value = xs.get(i);
-            System.out.println((i + 1) + ". " + value);
-        }
-    }
-
     static void printDone(ArrayList<Command> xs) {
         System.out.println(spacer
                 + "Very Woof! "
                 + "I have completed these commands before:");
-        printList(xs);
+        duke.CommandList.printList();
         System.out.println(spacer);
     }
 
@@ -86,7 +78,7 @@ public class Ui {
                 + command
                 + "\n"
                 + "Now you have "
-                + (size - 1)
+                + size
                 + " commands remaining."
                 + spacer);
     }
