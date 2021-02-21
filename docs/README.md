@@ -5,7 +5,6 @@ Welcome! This is a user guide for the Vergil chatbot application.
 ![UI screenshot](Ui.png)
 
 ## Table of Contents
-~~0. Quick start.~~
 1. Adding tasks.
     1.1. To-do tasks.
     1.2. Deadline tasks.
@@ -16,8 +15,6 @@ Welcome! This is a user guide for the Vergil chatbot application.
 5. Deleting tasks.
 6. Exiting the program.
 7. Command summary.
-
-## ~~Quick Start~~
 
 ## 1. Adding Tasks
 ### 1.1. To-do tasks: `todo`
