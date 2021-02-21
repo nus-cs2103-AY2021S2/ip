@@ -12,7 +12,9 @@ public class Parser {
     private static String regexDeadline = " /by ";
     private static String regexEvent = " /at ";
 
-
+    public Parser(CommandList commandList) {
+        this.commandList = commandList;
+    }
 
     static void errorHandling(String errorInput) throws DukeException {
         String[] inputArr = new String[100];
