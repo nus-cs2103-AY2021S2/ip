@@ -3,6 +3,8 @@
 A very basic todo manager that's a wee bit utilitarian, without pretending you're talking to a bot.  
 Also a very uninspired name, considering I leeched this off the original as a fork.
 
+Disclaimer: Done as part of [NUS CS2103 Software Engineering](https://nus-cs2103-ay2021s2.github.io/website/admin/index.html)
+project assignment.  
 **Prerequisite: Java 11**
 
 ![](docs/images/sampleRun.gif)
