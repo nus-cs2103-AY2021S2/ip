@@ -13,7 +13,7 @@ import yoda.task.ToDo;
 import yoda.ui.Ui;
 
 /**
- * AddCommand class that handles adding tasks to TaskList and is a child of Command class.
+ * AddCommand class that handles adding tasks to TaskList and a child of Command class.
  */
 public class AddCommand extends Command {
     /**
@@ -26,8 +26,10 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Makes the task requested by the user.
+     * Makes the task requested by user.
      * @return Task requested by the user.
+     * @throws InvalidCommandFormatException If invalid arguments are entered for command.
+     * @throws InvalidDateTimeFormatException If datetime entered is of an invalid format.
      */
     public Task makeTask() throws InvalidCommandFormatException, InvalidDateTimeFormatException {
         switch(commandType) {
@@ -42,6 +44,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Makes ToDo tasks using the arguments given by user.
+     * @param toDoDesc Description of ToDo task to be created.
+     * @return ToDo task requested by user.
+     * @throws InvalidCommandFormatException If invalid arguments are given for ToDo task.
+     */
     public ToDo makeToDo(String ... toDoDesc) throws InvalidCommandFormatException {
         if (toDoDesc.length == 1) {
             throw new InvalidCommandFormatException("Give a description for todo, you must!");
@@ -53,6 +61,13 @@ public class AddCommand extends Command {
         return new ToDo(toDoDetails.toString());
     }
 
+    /**
+     * Makes Event tasks using the arguments given by user.
+     * @param eventDesc Description of Event task to be created.
+     * @return Event task requested by user.
+     * @throws InvalidCommandFormatException If invalid arguments are given for Event task.
+     * @throws InvalidDateTimeFormatException If datetime entered for Event task is in an invalid format.
+     */
     public Event makeEvent(String ... eventDesc) throws InvalidCommandFormatException,
             InvalidDateTimeFormatException {
         try {
@@ -74,6 +89,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Makes Deadline tasks using the arguments given by user.
+     * @param deadlineDesc Description of Deadline task to be created.
+     * @return Deadline task requested by user.
+     * @throws InvalidCommandFormatException If invalid arguments are given for Deadline task.
+     * @throws InvalidDateTimeFormatException If datetime entered for Deadline task is in an invalid format.
+     */
     public Deadline makeDeadline(String ... deadlineDesc) throws InvalidCommandFormatException,
             InvalidDateTimeFormatException {
         try {
@@ -95,6 +117,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the datetime format is correct and returns a valid datetime String.
+     * @param date Date of task
+     * @param time Time of task
+     * @return Valid datetime String for Event/Deadline task
+     * @throws InvalidDateTimeFormatException If datetime format is invalid
+     */
     public String checkDateTime(String date, String time) throws InvalidDateTimeFormatException {
         try {
             String dateTime = date + " " + time;
@@ -113,10 +142,12 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds a specific type of task to the TaskList based on the command issued by the user.
-     * @param taskList TaskList associated with the AddCommand being executed.
-     * @param ui Ui associated with the AddCommand being executed.
-     * @param storage Storage associated with the AddCommand being executed.
+     * Adds a specific type of task to the TaskList based on the command issued by user and
+     * writes updated TaskList to the file.
+     * @param taskList TaskList associated with the command being executed.
+     * @param ui Ui associated with the command being executed.
+     * @param storage Storage associated with the command being executed.
+     * @return Message to user informing if the AddCommand was executed successfully or not.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

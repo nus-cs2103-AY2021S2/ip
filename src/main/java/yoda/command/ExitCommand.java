@@ -15,10 +15,11 @@ public class ExitCommand extends Command {
     public ExitCommand() {}
 
     /**
-     * Exits the Yoda chatbot after writing TaskList to the file.
-     * @param taskList TaskList associated with the ExitCommand being executed.
-     * @param ui Ui associated with the ExitCommand being executed.
-     * @param storage Storage associated with the ExitCommand being executed.
+     * Exits the Yoda chatbot after writing tasklist to the file.
+     * @param taskList TaskList associated with the command being executed.
+     * @param ui Ui associated with the command being executed.
+     * @param storage Storage associated with the command being executed.
+     * @return Message saying goodbye to the user.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

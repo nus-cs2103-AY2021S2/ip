@@ -1,13 +1,13 @@
 package yoda.task;
 
 /**
- * Event class that is a specialised version of the Task class and extends the Task class.
+ * Event class that is a specialized version of the Task class and extends the Task class.
  */
 public class Event extends Task {
     /**
      * Creates an Event object.
      * @param description Description of Event object.
-     * @param at When the Event object is occurring.
+     * @param at Datetime the Event object is occurring.
      */
     public Event(String description, String at) {
         super(description);

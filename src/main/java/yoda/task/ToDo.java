@@ -1,7 +1,7 @@
 package yoda.task;
 
 /**
- * ToDo class that is a specialised version of the Task class and extends the Task class.
+ * ToDo class that is a specialized version of the Task class and extends the Task class.
  */
 public class ToDo extends Task {
     /**

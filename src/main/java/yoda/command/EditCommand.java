@@ -1,13 +1,13 @@
 package yoda.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import yoda.storage.Storage;
 import yoda.task.InvalidTaskListIndexException;
 import yoda.task.Task;
 import yoda.task.TaskList;
 import yoda.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * EditCommand class that handles task states and a child of the Command class.
@@ -22,6 +22,12 @@ public class EditCommand extends Command {
         commandType = CommandType.valueOf(details[0]);
     }
 
+    /**
+     * Accesses the tasks from the TaskList that are about to be edited and puts them in another TaskList.
+     * @param taskList Tasklist from which the tasks are being accessed.
+     * @return TaskList containing the tasks which were accessed to be edited.
+     * @throws InvalidTaskListIndexException If the user does not provide index or provides an invalid task index.
+     */
     public TaskList accessTasksToBeEdited(TaskList taskList) throws InvalidTaskListIndexException {
         if (details.length == 1) {
             throw new InvalidTaskListIndexException("Enter the list number of task to be edited, you must!");
@@ -43,6 +49,10 @@ public class EditCommand extends Command {
         }
     }
 
+    /**
+     * Deletes the tasks specified by user from the TaskList.
+     * @param taskList TaskList from which the tasks are deleted
+     */
     public void deleteTasks(TaskList taskList) {
         if (details[1].equals("all")) {
             taskList.deleteAllTasks();
@@ -54,6 +64,10 @@ public class EditCommand extends Command {
         }
     }
 
+    /**
+     * Marks the tasks specified by user as done in the TaskList.
+     * @param taskList TaskList in which the tasks are marked as done.
+     */
     public void markTasksAsDone(TaskList taskList) {
         if (details[1].equals("all")) {
             taskList.markAllTasksAsDone();
@@ -65,10 +79,12 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Deletes a task or marks a task as done based on the command issued by user.
-     * @param taskList TaskList associated with the EditCommand being executed.
-     * @param ui Ui associated with the EditCommand being executed.
-     * @param storage Storage associated with the EditCommand being executed.
+     * Deletes or marks as done the tasks specified by user in their issued command and
+     * writes updated Tasklist to the file.
+     * @param taskList TaskList associated with the command being executed.
+     * @param ui Ui associated with the command being executed.
+     * @param storage Storage associated with the command being executed.
+     * @return Message to user informing if the EditCommand was executed successfully or not.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

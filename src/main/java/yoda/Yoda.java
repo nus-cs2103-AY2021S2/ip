@@ -7,7 +7,7 @@ import yoda.task.TaskList;
 import yoda.ui.Ui;
 
 /**
- * Yoda chatbot to keep track of tasks.
+ * Yoda class which contains the main logic of the Yoda chatbot.
  */
 public class Yoda {
     /** Specialised list to handle task-related instructions */
@@ -28,12 +28,16 @@ public class Yoda {
         this.tasks = storage.load();
     }
 
+    /**
+     * Greets user.
+     * @return Message containing greetings.
+     */
     public String greetUser() {
         return ui.greet();
     }
 
     /**
-     * Runs the Yoda chatbot.
+     * Runs the Yoda chatbot by making it parse user input.
      */
     public String runYoda(String input) {
         Command c = Parser.parse(input);

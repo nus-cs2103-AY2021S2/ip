@@ -17,6 +17,13 @@ public class ListCommand extends Command {
         super(details);
     }
 
+    /**
+     * Filters tasks in the TaskList matching the keyword given and puts them in another TaskList.
+     * @param keyword Keyword used to filter tasks.
+     * @param taskList TaskList from which tasks are filtered.
+     * @return TaskList containing the tasks filtered by keyword.
+     * @throws InvalidKeywordException If keyword given by user is too short or more than one word.
+     */
     public TaskList findByKeyword(String keyword, TaskList taskList) throws InvalidKeywordException {
         assert taskList != null;
         if (keyword.length() <= 2) {
@@ -30,10 +37,11 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Lists tasks based on the information given by the user.
-     * @param taskList TaskList associated with the ListCommand being executed.
-     * @param ui Ui associated with the ListCommand being executed.
-     * @param storage Storage associated with the ListCommand being executed.
+     * Lists tasks based on the information given by user.
+     * @param taskList TaskList associated with the command being executed.
+     * @param ui Ui associated with the command being executed.
+     * @param storage Storage associated with the command being executed.
+     * @return Message containing the list of tasks requested by user.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (details[0].equals("FIND")) {
@@ -60,7 +68,6 @@ public class ListCommand extends Command {
             default:
                 return ui.printTasks("bad", "", 0);
             }
-
         }
     }
 }

@@ -26,18 +26,17 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the TaskList from the file if available and creates a new file if not available.
+     * @return TaskList loaded from the file if available or a new TaskList if not available.
+     */
     public TaskList load() {
         File tasks = new File(filePath);
         TaskList taskList = new TaskList(new ArrayList<>());
         boolean isNewFile = false;
         try {
             if (tasks.createNewFile()) {
-                System.out.println("Created new file " + tasks.getName());
-                System.out.println("Location: " + tasks.getAbsolutePath());
                 isNewFile = true;
-            } else {
-                System.out.println("Used existing file");
-                System.out.println("Location: " + tasks.getAbsolutePath());
             }
         } catch (IOException e) {
             System.out.println("An error occurred when trying to create the file during load");
@@ -49,6 +48,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Serializes and stores the TaskList in the file.
+     * @param taskList TaskList to be serialized for storage.
+     */
     public void serialize(TaskList taskList) {
         File tasks = new File(filePath);
         try {
@@ -57,8 +60,6 @@ public class Storage {
             objOutputStream.writeObject(taskList);
             objOutputStream.flush();
             objOutputStream.close();
-            System.out.println("Wrote to file");
-            System.out.println("Location: " + tasks.getAbsolutePath());
         } catch (FileNotFoundException e) {
             System.out.println("File not found when serializing!");
         } catch (IOException e) {

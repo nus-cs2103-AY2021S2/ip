@@ -14,6 +14,7 @@ public abstract class Task implements Serializable {
     protected boolean isDone;
     /** Date and time related to the task created */
     protected LocalDateTime dateTime;
+    /** Shows if the task has been marked to be deleted */
     protected boolean isMarkedToBeDeleted;
 
     /**
@@ -58,6 +59,9 @@ public abstract class Task implements Serializable {
         isDone = true;
     }
 
+    /**
+     * Marks the task to be deleted.
+     */
     public void markToBeDeleted() {
         isMarkedToBeDeleted = true;
     }

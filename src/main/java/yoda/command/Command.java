@@ -5,7 +5,7 @@ import yoda.task.TaskList;
 import yoda.ui.Ui;
 
 /**
- * Command class to handle user inputs.
+ * Abstract Command class for handling user inputs.
  */
 public abstract class Command {
     /** Details of user input */
@@ -14,7 +14,7 @@ public abstract class Command {
     protected CommandType commandType;
 
     /**
-     * Creates a command object.
+     * Creates a command object that does not have any details associated with it.
      */
     public Command() {}
 
@@ -28,9 +28,10 @@ public abstract class Command {
 
     /**
      * Executes the command.
-     * @param taskList TaskList associated with the command being executed.
+      * @param taskList TaskList associated with the command being executed.
      * @param ui Ui associated with the command being executed.
      * @param storage Storage associated with the command being executed.
+     * @return Message to user informing if the command was executed successfully or not.
      */
     public abstract String execute (TaskList taskList, Ui ui, Storage storage);
 }

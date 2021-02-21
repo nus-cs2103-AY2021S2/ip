@@ -9,10 +9,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import yoda.Yoda;
 
+/**
+ * Gui class to start up Yoda's Gui and set the stage.
+ */
 public class Gui extends Application {
-
+    /** Yoda object for which a Gui is being created*/
     private Yoda yoda = new Yoda();
 
+    /**
+     * Starts up the Gui for Yoda.
+     * @param stage Stage of Gui.
+     */
     @Override
     public void start(Stage stage) {
         try {

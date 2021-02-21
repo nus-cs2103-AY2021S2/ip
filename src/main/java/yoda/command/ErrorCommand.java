@@ -5,24 +5,23 @@ import yoda.task.TaskList;
 import yoda.ui.Ui;
 
 /**
- * HelpCommand class that handles helping the user navigate the Yoda chatbot and
- * a child of the Command class.
+ * ErrorCommand class that handles invalid commands entered by user and a child of Command class.
  */
-public class HelpCommand extends Command {
+public class ErrorCommand extends Command {
     /**
-     * Creates a HelpCommand object.
+     * Creates an ErrorCommand object.
      */
-    public HelpCommand() {}
+    public ErrorCommand() {}
 
     /**
-     * Shows list of commands available to user.
+     * Shows user that they have entered an invalid command.
      * @param taskList TaskList associated with the command being executed.
      * @param ui Ui associated with the command being executed.
      * @param storage Storage associated with the command being executed.
-     * @return Message showing all commands available to user.
+     * @return Message informing an invalid command was entered and prompting user to use help command.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.showHelp();
+        return ui.showError();
     }
 }

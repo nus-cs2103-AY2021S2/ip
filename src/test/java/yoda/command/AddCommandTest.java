@@ -1,6 +1,5 @@
 package yoda.command;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ class AddCommandTest {
     void testMakeToDo() throws InvalidCommandFormatException, InvalidDateTimeFormatException {
         String[] toDoArgs = {"TODO", "read", "a", "book"};
         AddCommand addToDo = new AddCommand(toDoArgs);
-        ToDo toDo  = new ToDo("read a book ");
+        ToDo toDo = new ToDo("read a book ");
         assertEquals(addToDo.makeTask().toString(), toDo.toString());
     }
 

@@ -4,9 +4,11 @@ import yoda.command.AddCommand;
 import yoda.command.Command;
 import yoda.command.CommandType;
 import yoda.command.EditCommand;
+import yoda.command.ErrorCommand;
 import yoda.command.ExitCommand;
 import yoda.command.HelpCommand;
 import yoda.command.ListCommand;
+
 
 /**
  * Parser class that parses user input to decide the next course of action.
@@ -40,12 +42,18 @@ public class Parser {
         case BYE:
             return new ExitCommand();
         case HELP:
+            return new HelpCommand();
         case ERROR:
         default:
-            return new HelpCommand(splitInput);
+            return new ErrorCommand();
         }
     }
 
+    /**
+     * Checks if the input entered by user corresponds to one of the available commands.
+     * @param command User input corresponding to an available command.
+     * @return CommandType enumeration based on whether the input is valid or not.
+     */
     private static CommandType checkCommand(String command) {
         try {
             return CommandType.valueOf(command);

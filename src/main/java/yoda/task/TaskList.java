@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Specialised list class to handle task-related instructions.
+ * Specialized list class to handle task-related instructions.
  */
 public class TaskList implements Serializable {
     /** List of tasks created by user */
@@ -21,20 +21,25 @@ public class TaskList implements Serializable {
 
     /**
      * Gets the number of tasks in the list.
-     * @return The number of tasks in the list
+     * @return Number of tasks in the list.
      */
     public int getTaskListSize() {
         return tasks.size();
     }
 
+    /**
+     * Gets the list of tasks contained within the TaskList.
+     * @return List of tasks in the TaskList.
+     */
     public List<Task> getList() {
         return tasks;
     }
 
     /**
      * Accesses a task from the list.
-     * @param taskNumber Position of task in list.
-     * @return Task requested by user
+     * @param taskNumber Index of task in list.
+     * @return Task requested by user.
+     * @throws InvalidTaskListIndexException If the index of task requested is invalid.
      */
     public Task accessTask(int taskNumber) throws InvalidTaskListIndexException {
         try {
@@ -54,8 +59,8 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Marks a task in the list as done.
-     * @param taskNumber Position of task in the list.
+     * Marks tasks in the list as done based on the indexes given.
+     * @param taskNumber Index(es) of tasks in the list.
      */
     public void markTaskAsDone(int ... taskNumber) {
         for (int j : taskNumber) {
@@ -63,6 +68,9 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Marks all the tasks in the list as done.
+     */
     public void markAllTasksAsDone() {
         for (Task t : tasks) {
             t.markAsDone();
@@ -70,8 +78,8 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Deletes a task from the list.
-     * @param taskNumber Position of task in list.
+     * Marks tasks from the list for deletion based on the indexes given.
+     * @param taskNumber Index(es) of task in list.
      */
     public void markTaskToBeDeleted(int ... taskNumber) {
         for (int j : taskNumber) {
@@ -79,6 +87,9 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Deletes all tasks in the list which have been marked for deletion.
+     */
     public void deleteMarkedTasks() {
         for (int i = tasks.size() - 1; i >= 0; i--) {
             if (tasks.get(i).isMarkedToBeDeleted) {
@@ -87,16 +98,22 @@ public class TaskList implements Serializable {
         }
     }
 
+    /**
+     * Deletes all tasks in the list.
+     */
     public void deleteAllTasks() {
         tasks.clear();
     }
 
-
+    /**
+     * Gets the number of unfinished tasks left in the list.
+     * @return Number of unfinished tasks in the list.
+     */
     public int getNumberOfUnfinishedTasks() {
         int unfinishedTasks = 0;
         for (int i = 0; i < tasks.size(); i++) {
-            if(!tasks.get(i).isDone) {
-               unfinishedTasks++;
+            if (!tasks.get(i).isDone) {
+                unfinishedTasks++;
             }
         }
         return unfinishedTasks;
@@ -105,8 +122,7 @@ public class TaskList implements Serializable {
     /**
      * Filters the tasks in the list by the type or keyword requested.
      * @param type Type of task requested.
-     * @return TaskList containing tasks of the type requested or tasks with the
-     * keyword requested.
+     * @return TaskList containing tasks of the type requested or tasks with the keyword requested.
      */
     public TaskList filterByTask(String type) {
         if (type.equals("ToDo")) {
@@ -134,8 +150,8 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Formats the tasklist to be readable by the user.
-     * @return User-readable format of the tasklist.
+     * Formats the TaskList to be readable by the user.
+     * @return User-readable format of the TaskList.
      */
     @Override
     public String toString() {

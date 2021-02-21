@@ -1,13 +1,13 @@
 package yoda.task;
 
 /**
- * Deadline class that is a specialised version of the Task class and extends the Task class.
+ * Deadline class that is a specialized version of the Task class and extends the Task class.
  */
 public class Deadline extends Task {
     /**
      * Creates a Deadline object.
      * @param description Description of Deadline object.
-     * @param by When the Deadline object is due.
+     * @param by Datetime the Deadline object is due.
      */
     public Deadline(String description, String by) {
         super(description);

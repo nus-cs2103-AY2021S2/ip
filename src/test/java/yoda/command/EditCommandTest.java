@@ -1,16 +1,18 @@
 package yoda.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import yoda.task.InvalidTaskListIndexException;
 import yoda.task.TaskList;
 import yoda.task.ToDo;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EditCommandTest {
-    TaskList tasks = new TaskList(new ArrayList<>());
+    private TaskList tasks = new TaskList(new ArrayList<>());
     @Test
     void testAccessTasksToBeEdited() throws InvalidTaskListIndexException {
         ToDo rest = new ToDo("have a break");

@@ -112,11 +112,11 @@ class TaskListTest {
         TaskList eventList = tasks.filterByTask("Event");
         TaskList deadlineList = tasks.filterByTask("Deadline");
         TaskList filteredList = tasks.filterByTask("that");
-        assertAll("Checking if filter works:",
-                () -> assertEquals(3, toDoList.getTaskListSize()),
-                () -> assertEquals(2, eventList.getTaskListSize()),
-                () -> assertEquals(1, deadlineList.getTaskListSize()),
-                () -> assertEquals(2, filteredList.getTaskListSize())
+        assertAll("Checking if filter works:", ()
+                -> assertEquals(3, toDoList.getTaskListSize()), ()
+                -> assertEquals(2, eventList.getTaskListSize()), ()
+                -> assertEquals(1, deadlineList.getTaskListSize()), ()
+                -> assertEquals(2, filteredList.getTaskListSize())
         );
     }
 

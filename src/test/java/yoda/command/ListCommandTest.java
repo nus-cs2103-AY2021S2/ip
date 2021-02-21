@@ -1,16 +1,17 @@
 package yoda.command;
 
-import org.junit.jupiter.api.Test;
-import yoda.task.TaskList;
-import yoda.task.ToDo;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import yoda.task.TaskList;
+import yoda.task.ToDo;
+
 class ListCommandTest {
-    TaskList tasks = new TaskList(new ArrayList<>());
+    private TaskList tasks = new TaskList(new ArrayList<>());
 
     @Test
     void testFindByKeyword() throws InvalidKeywordException {
