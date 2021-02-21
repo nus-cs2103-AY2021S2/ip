@@ -1,7 +1,7 @@
 # Yoda
 
 ## Personal Assistant Chatbot
-This is a Personal Assistant Chatbot that helps to keep track of different types of tasks such as ToDos, Deadlines and Events.
+A Personal Assistant Chatbot that helps to keep track of different types of tasks such as ToDos, Deadlines and Events.
 
 ## Ui
 ![UI](docs/Ui.png)
