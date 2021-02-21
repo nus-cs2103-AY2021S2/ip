@@ -49,12 +49,14 @@ Format: `todo TASK_DESC`<br><br>
 Examples:
 * `todo read a book`
 * `todo go to the bank`
+
 #### 2. Event : `event`
 Events are for tasks that occur at a specific date and time.<br><br>
 Format: `event TASK_DESC /at YYYY-MM-DD HHMM`<br><br>
 Examples:
 * `event group meeting /at 2021-03-21 1200`
 * `event birthday party /at 2021-03-13 1700`
+
 #### 3. Deadline : `deadline`
 Deadlines are for tasks that need to be done before a specific date and time.<br><br>
 Format: `deadline TASK_DESC /by YYYY-MM-DD HHMM`<br><br>
