@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static String USER_IMAGE_PATH = "/images/User.jpg";
+    private static String DUKE_IMAGE_PATH = "/images/Duke.jpg";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -22,11 +24,14 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
+    private Image userImage = new Image(
+            this.getClass().getResourceAsStream(USER_IMAGE_PATH));
+    private Image dukeImage = new Image(
+            this.getClass().getResourceAsStream(DUKE_IMAGE_PATH));
 
     @FXML
     public void initialize() {
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -35,12 +40,14 @@ public class MainWindow extends AnchorPane {
     }
 
     public void greet() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! What can I do for you:>", dukeImage));
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Hello! What can I do for you:>", dukeImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * Duke's reply and then appends them to the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
