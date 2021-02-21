@@ -9,6 +9,7 @@ public class SaveTasksCommand extends Command {
 
     private static final Boolean toExit = false;
 
+    @Override
     public CommandResponse getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.save(tasks);
 
