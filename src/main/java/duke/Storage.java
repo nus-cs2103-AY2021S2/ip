@@ -7,35 +7,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.parser.CommandParser;
 import duke.parser.FileDataParser;
 import duke.task.Task;
 
-/**
- * Represents the storage functionalities used by
- * the Duke chat bot. It manages the loading and saving
- * of tasks in and out of the disk.
- */
 public class Storage {
 
     protected Path filePath;
 
-    /**
-     * Initialises the class with a file path
-     * where the file will be used for data storage
-     * operations.
-     */
     public Storage(String filePath) {
         this.filePath = Paths.get(System.getProperty("user.dir"), filePath);
     }
 
-    /**
-     * Loads task list data found in the disk
-     * into the Duke chat bot.
-     *
-     * @return Task list.
-     * @throws DukeException If the file cannot be found.
-     */
     public ArrayList<Task> load() throws DukeException {
         try {
             List<String> lines;

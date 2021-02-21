@@ -7,12 +7,6 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-/**
- * Represents the main logic used by the Duke chat bot.
- * It encapsulates all the functionalities such as
- * storage, the handling of tasks, Ui, as well as
- * error handling.
- */
 public class Duke {
 
     private Storage storage;
@@ -23,13 +17,6 @@ public class Duke {
         this("data/tasks.txt");
     }
 
-    /**
-     * Initialises the Duke chat bot with all
-     * of its core functionalities.
-     * Attempts to load previously saved tasks' data.
-     *
-     * @param filePath Saved data file path.
-     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
