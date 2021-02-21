@@ -30,11 +30,15 @@ public class Ui {
     private static final String BYE_SUCCESS = "Alright, take care. Hope to see you again!";
     private static final String STATISTICS_SUCCESS = "";
     private static final String STORAGE_LOAD_FAILURE = "Argh, I can't load your data file.";
-    private static final String STORAGE_SAVE_FAILURE = "Argh, I can't save your data.";
+    private static final String STORAGE_SAVE_FAILURE = "Argh, I can't save your data."
+            + NEWLINE + "I believe you do not have the necessary data directory set up."
+            + NEWLINE + "I've taken the liberty to set them up for you. Please try saving again..."
+            + NEWLINE + "Quack quack...";
     private static final String TASK_LIST_TITLE = "Tasks currently in your list:";
     private static final String TASK_LIST_EMPTY = "There isn't any task found in the list.";
     private static final String TASK_ADD_SUCCESS = "has been successfully added to the list.";
     private static final String TASK_DELETE_SUCCESS = "has been successfully removed from the list.";
+    private static final String TASK_DELETE_FAILURE = "How do you want me to remove something that doesn't even exist?";
     private static final String TASK_MARK_DONE_SUCCESS = "has been successfully marked as completed.";
     private static final String TASK_MARK_UNDONE_SUCCESS = "has been successfully marked as incomplete.";
 
@@ -95,6 +99,10 @@ public class Ui {
     public static String getDeleteTaskSuccess(Task task) {
         return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
                 + Ui.SPACE + Ui.TASK_DELETE_SUCCESS;
+    }
+
+    public static String getDeleteTaskFailure() {
+        return Ui.TASK_DELETE_FAILURE;
     }
 
     public static String getMarkDoneTaskSuccess(Task task) {

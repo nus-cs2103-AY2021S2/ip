@@ -1,6 +1,8 @@
 package quackers.tasklist;
 
+import quackers.QuackersException;
 import quackers.task.Task;
+import quackers.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -56,8 +58,12 @@ public class TaskList {
         this.taskList.add(task);
     }
 
-    public Task deleteTask(int taskIndex) {
-        return this.taskList.remove(taskIndex - 1);
+    public Task deleteTask(int taskIndex) throws QuackersException {
+        try {
+            return this.taskList.remove(taskIndex - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new QuackersException(Ui.getDeleteTaskFailure());
+        }
     }
 
     public Task markDone(int taskIndex) {

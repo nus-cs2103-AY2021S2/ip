@@ -45,20 +45,21 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = this.userInput.getText();
         CommandResponse response = this.quackers.getResponse(input);
-
-        this.dialogContainer.getChildren().add(
-                UserTextDialogBox.getDialogBox(input, this.userImage));
-        if (response.getCommandClass() == StatsCommand.class) {
-            this.dialogContainer.getChildren().add(
-                    QuackersPieChartDialogBox.getDialogBox(this.quackers.getTaskList(), this.quackersImage));
-        } else {
-            this.dialogContainer.getChildren().add(
-                    QuackersTextDialogBox.getDialogBox(response.toString(), this.quackersImage));
-        }
-        this.userInput.clear();
-
         if (response.canExit()) {
             Platform.exit();
         }
+
+        if (!input.isBlank()) {
+            this.dialogContainer.getChildren().add(
+                    UserTextDialogBox.getDialogBox(input, this.userImage));
+            if (response.getCommandClass() == StatsCommand.class) {
+                this.dialogContainer.getChildren().add(
+                        QuackersPieChartDialogBox.getDialogBox(this.quackers.getTaskList(), this.quackersImage));
+            } else {
+                this.dialogContainer.getChildren().add(
+                        QuackersTextDialogBox.getDialogBox(response.toString(), this.quackersImage));
+            }
+        }
+        this.userInput.clear();
     }
 }

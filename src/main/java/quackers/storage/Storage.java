@@ -29,6 +29,15 @@ public class Storage {
             ArrayList<Task> taskList = FileDataParser.getTaskListData(lines);
             return taskList;
         } catch (IOException e) {
+            this.forceCreateStorageDirectory();
+            throw new QuackersException(Ui.getLoadTaskListFailure());
+        }
+    }
+
+    public void forceCreateStorageDirectory() throws QuackersException {
+        try {
+            Files.createDirectories(this.filePath.toAbsolutePath().getParent());
+        } catch (IOException e) {
             throw new QuackersException(Ui.getLoadTaskListFailure());
         }
     }
@@ -42,6 +51,7 @@ public class Storage {
             }
             Files.write(this.filePath, sb.toString().getBytes());
         } catch (IOException e) {
+            this.forceCreateStorageDirectory();
             throw new QuackersException(Ui.getSaveTaskListFailure());
         }
     }
