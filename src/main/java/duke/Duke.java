@@ -11,7 +11,7 @@ public class Duke {
     private Parser parser;
     private TaskList tasks;
 
-    private Duke(String filePath) {
+    public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
         parser = new Parser();
@@ -45,6 +45,10 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
+    }
+
+    public String getResponse(String input) {
+        return "hello";
     }
 }
 
