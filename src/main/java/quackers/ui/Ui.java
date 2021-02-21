@@ -22,7 +22,6 @@ public class Ui {
             + NEWLINE + TAB + "- list"
             + NEWLINE + TAB + "- find <keyword>"
             + NEWLINE + TAB + "- stats"
-            + NEWLINE + TAB + "- save"
             + NEWLINE + TAB + "- todo <task_description>"
             + NEWLINE + TAB + "- deadline <task_description> /by <date_time>"
             + NEWLINE + TAB + "- event <task_description> /at <date_time>"
@@ -31,7 +30,6 @@ public class Ui {
     private static final String BYE_SUCCESS = "Alright, take care. Hope to see you again!";
     private static final String STATISTICS_SUCCESS = "";
     private static final String STORAGE_LOAD_FAILURE = "Argh, I can't load your data file.";
-    private static final String STORAGE_SAVE_SUCCESS = "Alright, I've saved your current data.";
     private static final String STORAGE_SAVE_FAILURE = "Argh, I can't save your data.";
     private static final String TASK_LIST_TITLE = "Tasks currently in your list:";
     private static final String TASK_LIST_EMPTY = "There isn't any task found in the list.";
@@ -66,10 +64,6 @@ public class Ui {
 
     public static String getLoadTaskListFailure() {
         return Ui.STORAGE_LOAD_FAILURE;
-    }
-
-    public static String getSaveTaskListSuccess() {
-        return Ui.STORAGE_SAVE_SUCCESS;
     }
 
     public static String getSaveTaskListFailure() {

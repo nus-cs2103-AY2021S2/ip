@@ -20,7 +20,6 @@ public class CommandParser {
     private static final Pattern LIST_TASKS_PATTERN = Pattern.compile("list");
     private static final Pattern FIND_TASKS_PATTERN = Pattern.compile("find ([a-zA-Z0-9\\s]+)");
     private static final Pattern STATS_PATTERN = Pattern.compile("stats");
-    private static final Pattern SAVE_TASKS_PATTERN = Pattern.compile("save");
     private static final Pattern ADD_TODO_PATTERN = Pattern.compile("todo ([a-zA-Z0-9\\s]+)");
     private static final Pattern ADD_DEADLINE_PATTERN
             = Pattern.compile("deadline ([a-zA-Z0-9\\s]+) /by (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})");
