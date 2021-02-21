@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="400.0" style="-fx-background-color: #708090;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
       <VBox prefHeight="200.0" prefWidth="291.0" HBox.hgrow="SOMETIMES">
          <children>
-          <Label fx:id="dialog" maxHeight="1.7976931348623157E308" minHeight="-Infinity" text="Label" wrapText="true" />
+          <Label fx:id="dialog" maxHeight="1.7976931348623157E308" minHeight="-Infinity" style="-fx-background-radius: 10px; -fx-background-color: #c0c0c0; -fx-border-color: #c0c0c0; -fx-border-radius: 10px; -fx-border-width: 10px;" text="Label" textFill="#3e6504" wrapText="true" />
          </children>
       </VBox>
   </children>
