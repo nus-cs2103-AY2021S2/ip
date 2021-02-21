@@ -22,6 +22,7 @@ public class AddEventCommand extends Command {
     public CommandResponse getResponse(TaskList tasks,
                                        Storage storage) throws QuackersException {
         tasks.addTask(this.event);
+        storage.save(tasks);
 
         String message = Ui.getAddTaskSuccess(this.event);
         return new CommandResponse(AddEventCommand.class,

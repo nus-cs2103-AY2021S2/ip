@@ -20,6 +20,7 @@ public class DeleteTaskCommand extends Command {
     public CommandResponse getResponse(TaskList tasks,
                                        Storage storage) throws QuackersException {
         Task task = tasks.deleteTask(this.taskIndex);
+        storage.save(tasks);
 
         String message = Ui.getDeleteTaskSuccess(task);
         return new CommandResponse(DeleteTaskCommand.class,

@@ -20,6 +20,7 @@ public class MarkTaskAsUndoneCommand extends Command {
     public CommandResponse getResponse(TaskList tasks,
                                        Storage storage) throws QuackersException {
         Task task = tasks.markUndone(this.taskIndex);
+        storage.save(tasks);
 
         String message = Ui.getMarkUndoneTaskSuccess(task);
         return new CommandResponse(MarkTaskAsUndoneCommand.class,

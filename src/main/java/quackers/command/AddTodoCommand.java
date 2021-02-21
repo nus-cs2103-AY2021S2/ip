@@ -20,6 +20,7 @@ public class AddTodoCommand extends Command {
     public CommandResponse getResponse(TaskList tasks,
                                        Storage storage) throws QuackersException {
         tasks.addTask(this.todo);
+        storage.save(tasks);
 
         String message = Ui.getAddTaskSuccess(this.todo);
         return new CommandResponse(AddTodoCommand.class,

@@ -14,7 +14,7 @@ public class CommandParser {
     private static final DateTimeFormatter DATETIME_FORMATTER
             = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final Pattern COMMAND_TYPE_PATTERN
-            = Pattern.compile("usage|bye|list|find|stats|save|todo|deadline|event|delete|done");
+            = Pattern.compile("usage|bye|list|find|stats|todo|deadline|event|delete|done");
     private static final Pattern USAGE_PATTERN = Pattern.compile("usage");
     private static final Pattern BYE_PATTERN = Pattern.compile("bye");
     private static final Pattern LIST_TASKS_PATTERN = Pattern.compile("list");
@@ -44,8 +44,6 @@ public class CommandParser {
             return CommandParser.getFindTasksCommand(input);
         case "stats":
             return CommandParser.getStatsCommand(input);
-        case "save":
-            return CommandParser.getSaveTasksCommand(input);
         case "todo":
             return CommandParser.getAddTodoCommand(input);
         case "deadline":
@@ -112,14 +110,6 @@ public class CommandParser {
             throw new QuackersException(Ui.getInvalidCommand());
         }
         return new StatsCommand();
-    }
-
-    private static SaveTasksCommand getSaveTasksCommand(String input) throws QuackersException {
-        Matcher m = CommandParser.SAVE_TASKS_PATTERN.matcher(input);
-        if (!m.find()) {
-            throw new QuackersException(Ui.getInvalidCommand());
-        }
-        return new SaveTasksCommand();
     }
 
     private static AddTodoCommand getAddTodoCommand(String input) throws QuackersException {

@@ -20,6 +20,7 @@ public class MarkTaskAsDoneCommand extends Command {
     public CommandResponse getResponse(TaskList tasks,
                                        Storage storage) throws QuackersException {
         Task task = tasks.markDone(this.taskIndex);
+        storage.save(tasks);
 
         String message = Ui.getMarkDoneTaskSuccess(task);
         return new CommandResponse(MarkTaskAsDoneCommand.class,

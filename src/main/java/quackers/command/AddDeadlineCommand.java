@@ -22,6 +22,7 @@ public class AddDeadlineCommand extends Command {
     public CommandResponse getResponse(TaskList tasks,
                                        Storage storage) throws QuackersException {
         tasks.addTask(this.deadline);
+        storage.save(tasks);
 
         String message = Ui.getAddTaskSuccess(this.deadline);
         return new CommandResponse(AddDeadlineCommand.class,
