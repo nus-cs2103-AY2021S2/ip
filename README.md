@@ -8,6 +8,8 @@ Instructions on how to use the app can be found in the [User Guide](http://samue
 
 # Acknowledgements
 
+This project is based on the Duke project created by the [SE-EDU initiative](https://se-education.org).
+
 Photo of User
 by [Dušan Veverkolog](https://unsplash.com/@veverkolog?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
