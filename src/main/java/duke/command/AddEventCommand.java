@@ -19,10 +19,10 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(this.event);
 
-        String message = ui.getAddTaskSuccess(this.event);
+        String message = Ui.getAddTaskSuccess(this.event);
         return new CommandResponse(message, AddEventCommand.toExit);
     }
 }

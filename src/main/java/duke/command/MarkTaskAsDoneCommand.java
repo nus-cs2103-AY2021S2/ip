@@ -17,10 +17,10 @@ public class MarkTaskAsDoneCommand extends Command {
     }
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
         Task task = tasks.markDone(this.taskIndex);
 
-        String message = ui.getMarkDoneTaskSuccess(task);
+        String message = Ui.getMarkDoneTaskSuccess(task);
         return new CommandResponse(message, MarkTaskAsDoneCommand.toExit);
     }
 }

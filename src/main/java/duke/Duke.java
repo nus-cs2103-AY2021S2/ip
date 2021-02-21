@@ -18,7 +18,6 @@ public class Duke {
     }
 
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -40,8 +39,7 @@ public class Duke {
             Command c = CommandParser.getCommand(input);
             assert this.storage != null;
             assert this.tasks != null;
-            assert this.ui != null;
-            return c.getResponse(tasks, ui, storage);
+            return c.getResponse(tasks, storage);
         } catch (DukeException e) {
             String message = ui.getErrorMessage(e.getMessage());
             return new CommandResponse(message, false);

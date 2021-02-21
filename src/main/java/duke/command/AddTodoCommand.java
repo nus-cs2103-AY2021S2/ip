@@ -17,10 +17,10 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(this.todo);
 
-        String message = ui.getAddTaskSuccess(this.todo);
+        String message = Ui.getAddTaskSuccess(this.todo);
         return new CommandResponse(message, AddTodoCommand.toExit);
     }
 }

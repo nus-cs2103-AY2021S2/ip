@@ -9,8 +9,8 @@ public class ByeCommand extends Command {
     private static final Boolean toExit = true;
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Ui ui, Storage storage) {
-        String message = ui.getByeSuccess();
+    public CommandResponse getResponse(TaskList tasks, Storage storage) {
+        String message = Ui.getByeSuccess();
         return new CommandResponse(message, ByeCommand.toExit);
     }
 }

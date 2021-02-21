@@ -19,10 +19,10 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(this.deadline);
 
-        String message = ui.getAddTaskSuccess(this.deadline);
+        String message = Ui.getAddTaskSuccess(this.deadline);
         return new CommandResponse(message, AddDeadlineCommand.toExit);
     }
 }

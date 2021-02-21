@@ -10,10 +10,10 @@ public class SaveTasksCommand extends Command {
     private static final Boolean toExit = false;
 
     @Override
-    public CommandResponse getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public CommandResponse getResponse(TaskList tasks, Storage storage) throws DukeException {
         storage.save(tasks);
 
-        String message = ui.getSaveTaskListSuccess();
+        String message = Ui.getSaveTaskListSuccess();
         return new CommandResponse(message, SaveTasksCommand.toExit);
     }
 }
