@@ -20,20 +20,6 @@ public class TaskList {
         return this.taskList;
     }
 
-    public int getSize() {
-        return this.taskList.size();
-    }
-
-    public int getCompletedSize() {
-        int count = 0;
-        for (Task task : this.taskList) {
-            if (task.getStatusIcon().equals("*")) {
-                count += 1;
-            }
-        }
-        return count;
-    }
-
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> temp = new ArrayList<Task>();
         for (Task task : this.taskList) {
