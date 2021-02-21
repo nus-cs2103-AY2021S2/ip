@@ -40,6 +40,8 @@ public class Storage {
                 }
                 tasks.createNewFile();
             }
+
+            assert tasks.exists() : "File creation error";
         } catch (FileNotFoundException e){
             throw new DukeException("File not found.");
         } catch (IOException e) {
