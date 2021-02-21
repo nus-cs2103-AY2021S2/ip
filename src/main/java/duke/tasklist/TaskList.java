@@ -1,9 +1,6 @@
 package duke.tasklist;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
 
 import java.util.ArrayList;
 
@@ -19,48 +16,40 @@ public class TaskList {
         this.taskList = new ArrayList<>(taskList);
     }
 
+    public int size() {
+        return this.taskList.size();
+    }
+
     public ArrayList<Task> getList() {
         return this.taskList;
     }
 
-    public int getTodoCount() {
+    public Task get(int taskIndex) {
+        return this.taskList.get(taskIndex);
+    }
+
+    public TaskList getTaskList() {
+        return new TaskList(this.taskList);
+    }
+
+    public int getTaskCount(Class<? extends Task> cls) {
         int count = 0;
         for (Task task : this.taskList) {
-            if (task instanceof Todo) {
+            if (task.getClass() == cls) {
                 count += 1;
             }
         }
         return count;
     }
 
-    public int getDeadlineCount() {
-        int count = 0;
-        for (Task task : this.taskList) {
-            if (task instanceof Deadline) {
-                count += 1;
-            }
-        }
-        return count;
-    }
-
-    public int getEventCount() {
-        int count = 0;
-        for (Task task : this.taskList) {
-            if (task instanceof Event) {
-                count += 1;
-            }
-        }
-        return count;
-    }
-
-    public ArrayList<Task> findTasks(String keyword) {
+    public TaskList findTasks(String keyword) {
         ArrayList<Task> temp = new ArrayList<Task>();
         for (Task task : this.taskList) {
             if (task.getDescription().contains(keyword)) {
                 temp.add(task);
             }
         }
-        return temp;
+        return new TaskList(temp);
     }
 
     public void addTask(Task task) {

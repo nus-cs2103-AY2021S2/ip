@@ -12,7 +12,7 @@ public class ListTasksCommand extends Command {
     @Override
     public CommandResponse getResponse(TaskList tasks,
                                        Storage storage) throws DukeException {
-        String message = Ui.getTaskList(tasks.getList());
+        String message = Ui.getTaskList(tasks.getTaskList());
         return new CommandResponse(ListTasksCommand.class,
                 message, ListTasksCommand.toExit);
     }

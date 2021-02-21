@@ -2,6 +2,9 @@ package duke.ui.javafx;
 
 import java.io.IOException;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 import duke.tasklist.TaskList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,9 +52,9 @@ public class DukePieChartDialogBox extends HBox {
     }
 
     private ObservableList<PieChart.Data> getBreakdownData(TaskList taskList) {
-        int todoCount = taskList.getTodoCount();
-        int deadlineCount = taskList.getDeadlineCount();
-        int eventCount = taskList.getEventCount();
+        int todoCount = taskList.getTaskCount(Todo.class);
+        int deadlineCount = taskList.getTaskCount(Deadline.class);
+        int eventCount = taskList.getTaskCount(Event.class);
         int total = todoCount + deadlineCount + eventCount;
 
         String todoText = String.format("To-do %.2f%%",

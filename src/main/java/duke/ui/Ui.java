@@ -1,8 +1,7 @@
 package duke.ui;
 
 import duke.task.Task;
-
-import java.util.ArrayList;
+import duke.tasklist.TaskList;
 
 public class Ui {
 
@@ -77,7 +76,7 @@ public class Ui {
         return Ui.STORAGE_SAVE_FAILURE;
     }
 
-    public static String getTaskList(ArrayList<Task> tasks) {
+    public static String getTaskList(TaskList tasks) {
         if (tasks.size() == 0) {
             return Ui.TASK_LIST_EMPTY;
         }
