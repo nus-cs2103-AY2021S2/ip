@@ -35,7 +35,7 @@ public class Parser {
 
             try {
                 switch (parsedCommand[0]) {
-                    case "done": case "delete":
+                case "done": case "delete":
                     int taskId = Integer.parseInt(parsedCommand[1]) - 1;
                     if (parsedCommand[0].equals("done")) {
                         return new DoneCommand(fullCommand, taskId);
