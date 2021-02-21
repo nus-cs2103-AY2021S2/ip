@@ -13,8 +13,8 @@ public class Ui {
 
     private static final String ERROR_HEADING = "Oh no... ";
     private static final String INVALID_COMMAND = "I'm not trained with these commands yet...";
-    private static final String GREETING = "Quack quack! I'm Quackers, a duck really good with tasks management!"
-            + SPACE + "To know more about what I can do for you, quack 'usage'."
+    private static final String GREETING = "Quack quack! I'm Quackers, a duck really good with task management!"
+            + NEWLINE + "To know more about what I can do for you, quack 'usage'."
             + NEWLINE + "Is there anything I can do for you today?";
     private static final String USAGE = "These are the commands available:"
             + NEWLINE + TAB + "- usage"
