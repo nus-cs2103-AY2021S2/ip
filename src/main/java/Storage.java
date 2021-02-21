@@ -7,13 +7,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from a file and saving tasks to the file.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Creates a new Storage object with a file path.
+     *
+     * @param filePath File path.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task commands from the file specified by filePath and stores each line in an ArrayList.
+     * If the file does not exist, a new file is created in that path.
+     *
+     * @throws LoadTasksException If an error is encountered when trying to load tasks from the file.
+     * @return ArrayList of Strings representing the task commands.
+     */
     public ArrayList<String> load() throws LoadTasksException {
         ArrayList<String> taskCommands = new ArrayList<>();
         File file = new File(filePath);
@@ -34,6 +49,11 @@ public class Storage {
         return taskCommands;
     }
 
+    /**
+     * Writes the task commands of current tasks in the TaskList to the file specified by filePath.
+     *
+     * @throws LoadTasksException If an error is encountered when trying to write tasks to the file.
+     */
     public void writeTasksToDisk(TaskList tasks) throws WriteTasksException {
         try {
             ArrayList<String> writableTasks = tasks.getWritableTasks();

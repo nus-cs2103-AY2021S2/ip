@@ -3,10 +3,20 @@ package main.java;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that is to be completed by a deadline.
+ */
 public class Deadline extends Task {
     private final String by;
     private final LocalDate date;
 
+    /**
+     * Creates a new Deadline object with a description and deadline.
+     * If deadline is not properly formatted in yyyy-mm-dd format, the date attribute will be null.
+     *
+     * @param description Description of the task.
+     * @param by Deadline that the task is to be completed by (in yyyy-mm-dd format).
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
