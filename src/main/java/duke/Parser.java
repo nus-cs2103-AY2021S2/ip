@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 /**
  * A parser that deals with making sense of the user command.

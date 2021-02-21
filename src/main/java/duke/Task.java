@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 /**
  * Abstract class that represents a task.

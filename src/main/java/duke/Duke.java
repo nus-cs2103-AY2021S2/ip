@@ -1,11 +1,4 @@
-import main.java.EmptyDescriptionException;
-import main.java.InvalidCommandException;
-import main.java.LoadTasksException;
-import main.java.Parser;
-import main.java.Storage;
-import main.java.TaskList;
-import main.java.Ui;
-import main.java.WriteTasksException;
+package duke;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 /**
  * Represents an event that is occurring at a given date/time.

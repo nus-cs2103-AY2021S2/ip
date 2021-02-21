@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 /**
  * An exception that is thrown when the user enters an invalid command.

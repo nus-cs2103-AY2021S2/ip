@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 /**
  * Represents exceptions that are specific to the Duke program.

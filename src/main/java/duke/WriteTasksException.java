@@ -1,4 +1,4 @@
-package main.java;
+package duke;
 
 /**
  * An exception that is thrown when an error is encountered while trying to write tasks to the
