@@ -104,6 +104,14 @@ public class TaskList {
         return printableTasks;
     }
 
+    /**
+     * Returns an ArrayList of Strings representing the current tasks in the list of tasks whose
+     * description contains the key word given by the user.
+     * The tasks are represented in a format that is to be displayed to the user.
+     *
+     * @param keyword Keyword
+     * @return ArrayList of Strings representing the tasks in printable format.
+     */
     public ArrayList<String> getPrintableTasksWithKeyword(String keyword) {
         ArrayList<String> printableTasks = new ArrayList<>();
         int id = 1;

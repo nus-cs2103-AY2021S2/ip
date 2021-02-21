@@ -68,7 +68,7 @@ public class Ui {
     /**
      * Prints the current tasks in the list of tasks.
      *
-     * @param printableTasks ArrayList of Strings representing the current tasks.
+     * @param printableTasks ArrayList of Strings representing the tasks.
      */
     public void printTasks(ArrayList<String> printableTasks) {
         System.out.println(SEPARATOR);
@@ -83,6 +83,11 @@ public class Ui {
         System.out.println(SEPARATOR);
     }
 
+    /**
+     * Prints the current tasks in the list of tasks whose description contains the keyword given by the user.
+     *
+     * @param printableTasks ArrayList of Strings representing the tasks.
+     */
     public void printFoundTasks(ArrayList<String> printableTasks) {
         System.out.println(SEPARATOR);
         if (printableTasks.size() == 0) {

@@ -64,6 +64,12 @@ public abstract class Task {
         return isDone;
     }
 
+    /**
+     * Returns true if the task description contains the keyword.
+     *
+     * @param keyword Keyword
+     * @return True if the task description contains the keyword
+     */
     public boolean descriptionContains(String keyword) {
         return description.contains(keyword);
     }
