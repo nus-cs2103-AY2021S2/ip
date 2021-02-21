@@ -1,4 +1,9 @@
-D @ 1 @ submission  @ by June 6th
 T @ 0 @ dishes
-D @ 1 @ submission  @ by June 6th
-E @ 0 @ play soccer  @ at Aug 6th 2-4pm
+D @ 1 @ submission  @ 2020-06-06
+E @ 0 @ play soccer  @ 2020-03-04
+T @ 1 @ dishes
+D @ 0 @ submission  @ 2020-06-06
+E @ 0 @ play soccer  @ 2020-03-04
+T @ 0 @ dishes
+D @ 0 @ submission  @ 2020-06-06
+E @ 0 @ play soccer  @ 2020-03-04
