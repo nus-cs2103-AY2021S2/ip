@@ -16,25 +16,27 @@ public class Parser {
      * @throws InvalidCommandException If the user enters an invalid command.
      * @throws WriteTasksException If an error is encountered when trying to write tasks to the hard disk.
      */
-    public void handleInput(Storage storage, Ui ui, TaskList tasks, String cmd) throws EmptyDescriptionException, InvalidCommandException, WriteTasksException {
+    public String handleInput(Storage storage, Ui ui, TaskList tasks, String cmd) throws
+        EmptyDescriptionException, InvalidCommandException, WriteTasksException {
         if (cmd.equals("list")) {
-            ui.printTasks(tasks.getPrintableTasks());
+            return ui.getListOfTasks(tasks.getPrintableTasks());
+        } else if (cmd.equals("bye")) {
+            storage.writeTasksToDisk(tasks);
+            return ui.getExitMsg();
         } else {
             String[] arr = cmd.split(" ", 2);
             switch (arr[0]) {
             case "find":
-                ui.printFoundTasks(tasks.getPrintableTasksWithKeyword(arr[1]));
-                break;
+                return ui.getListOfFoundTasks(tasks.getPrintableTasksWithKeyword(arr[1]));
             case "done":
                 int doneId = Integer.parseInt(arr[1]);
                 tasks.markTaskAsDone(doneId);
-                ui.displayMarkTaskAsDoneMsg(tasks.getTaskString(doneId));
-                break;
+                return ui.getMarkTaskAsDoneMsg(tasks.getTaskString(doneId));
             case "delete":
                 int deleteId = Integer.parseInt(arr[1]);
-                ui.displayDeleteTaskMsg(tasks.getTaskString(deleteId), tasks.getNumOfTasks() - 1);
+                String taskString = tasks.getTaskString(deleteId);
                 tasks.deleteTask(deleteId);
-                break;
+                return ui.getDeleteTaskMsg(taskString, tasks.getNumOfTasks());
             case "todo":
                 // Fallthrough
             case "deadline":
@@ -42,12 +44,10 @@ public class Parser {
             case "event":
                 tasks.addTask(cmd);
                 int numOfTasks = tasks.getNumOfTasks();
-                ui.displayAddTaskMsg(tasks.getTaskString(numOfTasks), numOfTasks);
-                break;
+                return ui.getAddTaskMsg(tasks.getTaskString(numOfTasks), numOfTasks);
             default:
                 throw new InvalidCommandException();
             }
-            storage.writeTasksToDisk(tasks);
         }
     }
 }
