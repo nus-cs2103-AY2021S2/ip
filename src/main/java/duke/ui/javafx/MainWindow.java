@@ -50,10 +50,10 @@ public class MainWindow extends AnchorPane {
                 UserTextDialogBox.getDialogBox(input, this.userImage));
         if (response.getCommandClass() == StatsCommand.class) {
             this.dialogContainer.getChildren().add(
-                    DukePieChartDialogBox.getDialogBox(this.duke.getTaskList(), this.userImage));
+                    DukePieChartDialogBox.getDialogBox(this.duke.getTaskList(), this.dukeImage));
         } else {
             this.dialogContainer.getChildren().add(
-                    DukeTextDialogBox.getDialogBox(response.toString(), this.userImage));
+                    DukeTextDialogBox.getDialogBox(response.toString(), this.dukeImage));
         }
         this.userInput.clear();
 
