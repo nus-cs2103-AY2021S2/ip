@@ -1,0 +1,14 @@
+//@@author mesyeux-reused 
+//Reused from https://github.com/caitlinjee/ip/blob/master/src/main/resources/view/cait.css with minor modifications
+
+.dialog-background{
+    -fx-background-color: #A06B46;
+    -fx-background-radius: 15px;
+}
+
+.background{
+    -fx-background-image:url('../images/lettercropped.jpg');
+    -fx-background-size: cover;
+}
+
+//@@author 

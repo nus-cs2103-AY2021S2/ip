@@ -7,10 +7,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * A custom control using FXML.
@@ -22,6 +27,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Circle circle;
 
     private DialogBox(String text, Image img) {
         try {
@@ -34,7 +41,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        //Solution below adapted from https://www.youtube.com/watch?v=54fEFYx34vk
+        circle.setStroke(Color.SADDLEBROWN);
+        circle.setFill(new ImagePattern(img));
     }
 
     /**
