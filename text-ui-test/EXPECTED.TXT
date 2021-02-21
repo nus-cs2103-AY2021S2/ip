@@ -10,7 +10,6 @@ Greetings from
 ░█░▄▀█░▄▀░░█░▄▀█░▄▀░
 ░░▀░░░▀░░░░░▀░░░▀░░░
 
-
 ____________________________________________________________
 Woof! I'm Doge Duke
 What do you want me to do?
@@ -18,7 +17,7 @@ Type your request in below!
 
 ____________________________________________________________
 
-DukeException: Whoops :( I'm sorry, I'm not sure what that means. Did you forget to add a command type?
+duke.DukeException: Whoops :( I'm sorry, I'm not sure what that means. Did you forget to add a command type?
 
 ____________________________________________________________
 Mlem I've added a new command for you to do:
@@ -26,6 +25,7 @@ Mlem I've added a new command for you to do:
 Now I can do a total of 1 commands!
 ____________________________________________________________
 
+This date doesnt exist! The right format should be in yyyy-mm-dd.
 
 ____________________________________________________________
 Much wow! I've added a new command with an Event:
@@ -40,35 +40,28 @@ Woofers! I've added a new command with a Ded-line:
 Now I can do a total of 3 commands!
 ____________________________________________________________
 
-DukeException: Whoops :( I'm sorry, I'm not sure what that means. Did you forget to add a command type?
+duke.DukeException: Whoops :( I'm sorry, I'm not sure what that means. Did you forget to add a command type?
 
 ____________________________________________________________
-Woof! I have completed these commands before:
-
-1. [T] [X] rollover
-2. [E] [ ] dog festival | at: 10 Feb 2021
-3. [D] [ ] finish doggo treats | by: 11 Mar 2021
+Very Woof! I have completed this commands:
+[T] [X] rollover
 
 ____________________________________________________________
 
-DukeException: Eh? Your command description cannot be empty. Try again!
+duke.DukeException: Eh? Your command description cannot be empty. Try again!
 
 ____________________________________________________________
-Woof! I have completed these commands before:
-
-1. [T] [X] rollover
-2. [E] [ ] dog festival | at: 10 Feb 2021
-3. [D] [X] finish doggo treats | by: 11 Mar 2021
+Very Woof! I have completed this commands:
+[D] [X] finish doggo treats | by: 11 Mar 2021
 
 ____________________________________________________________
 
-DukeException: What are you referring to? Remember to key in the correct command id!
+duke.DukeException: What are you referring to? Remember to key in the correct command id!
 
 ____________________________________________________________
 Noted! This task has been removed:
 [E] [ ] dog festival | at: 10 Feb 2021
 Now you have 2 commands remaining.
-
 ____________________________________________________________
 
 
