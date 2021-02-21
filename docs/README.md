@@ -43,21 +43,21 @@ Format: `help`
 
 ### Adding a task :
 There are three types of tasks that can be added:
-#### 1. ToDo : `todo`
+#### ToDo : `todo`
 ToDos are for tasks without any date/time attached to them.<br><br>
 Format: `todo TASK_DESC`<br><br>
 Examples:
 * `todo read a book`
 * `todo go to the bank`
 
-#### 2. Event : `event`
+#### Event : `event`
 Events are for tasks that occur at a specific date and time.<br><br>
 Format: `event TASK_DESC /at YYYY-MM-DD HHMM`<br><br>
 Examples:
 * `event group meeting /at 2021-03-21 1200`
 * `event birthday party /at 2021-03-13 1700`
 
-#### 3. Deadline : `deadline`
+#### Deadline : `deadline`
 Deadlines are for tasks that need to be done before a specific date and time.<br><br>
 Format: `deadline TASK_DESC /by YYYY-MM-DD HHMM`<br><br>
 Examples:
