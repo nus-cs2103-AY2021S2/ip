@@ -1,0 +1,27 @@
+package duke.gui;
+
+import javafx.application.Application;
+import javafx.fml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scence.layout.AnchorPane;
+import java.io.IOException;
+
+import java.io.IOException;
+
+public class Main1 extends Application {
+
+    private Duke duke = new Duke("data/duke.txt");
+    @Override
+    public void start(Stage stage){
+        try {
+            MainWindow mainWindow = new MainWindow(duke);
+            Scene scene = new Scene(mainWindow);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+}
