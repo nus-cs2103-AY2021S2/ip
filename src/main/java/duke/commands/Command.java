@@ -2,8 +2,6 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 
-import java.time.LocalDate;
-
 /**
  * Command is a parent class for inheriting by specific commands.
  */
@@ -24,7 +22,7 @@ public abstract class Command {
      * Gets the task description from the user input.
      *
      * @param input String array containing the command entered by the user.
-     * @param delimiter String used for identifying due date of the tasks.
+     * @param delimiter String used for identifying date of the tasks.
      * @return A String description of the task.
      */
     protected String getDescription(String[] input, String delimiter) {

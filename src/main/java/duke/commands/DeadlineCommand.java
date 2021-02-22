@@ -7,6 +7,7 @@ import duke.tasks.TaskList;
 import duke.tasks.Deadline;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * DeadlineCommand is a command that adds a Deadline to the task list.
@@ -36,6 +37,10 @@ public class DeadlineCommand extends DateCommand {
             return new DeadlineCommand(this.getTaskList(), taskDescription, dueDate);
         } catch (InsufficientArgumentsException | DuplicateException | DateCommandException e) {
             return new ErrorCommand(this.getTaskList(), e.getMessage());
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand(this.getTaskList(),
+                    "Please enter the date in the format yyyy-mm-dd "
+                            + "(e.g. 2021-03-19)");
         }
     }
 

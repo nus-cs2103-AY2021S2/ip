@@ -4,6 +4,7 @@ import duke.parser.DateCommandException;
 import duke.tasks.TaskList;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public abstract class DateCommand extends Command {
     protected String taskDescription;
@@ -21,6 +22,15 @@ public abstract class DateCommand extends Command {
         this.date = null;
     }
 
+    /**
+     * Checks if a date related command entered by the user is valid.
+     * The command should contain the command type, the task description and the date of task.
+     *
+     * @param input String array containing the command entered by the user.
+     * @param delimiter String used for identifying date of the task.
+     * @throws DateCommandException If the date-related command entered
+     * by the user has insufficient parameters.
+     */
     protected void checkValidity (String[] input, String delimiter) throws DateCommandException {
         int delimiterIndex = -10;
         for (int i = 0; i < input.length; ++i) {
@@ -40,10 +50,11 @@ public abstract class DateCommand extends Command {
      * Obtains the due date of the task of concern.
      *
      * @param input String array containing the command entered by the user.
-     * @param delimiter String used for identifying due date of the task.
+     * @param delimiter String used for identifying date of the task.
      * @return Due date for the task of concern.
      */
-    protected LocalDate extractDateFromCommand(String[] input, String delimiter) {
+    protected LocalDate extractDateFromCommand(String[] input, String delimiter)
+            throws DateTimeParseException {
         boolean flag = false;
         boolean first = true;
         String dueDate = "";

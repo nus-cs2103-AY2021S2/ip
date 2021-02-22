@@ -7,6 +7,7 @@ import duke.tasks.TaskList;
 import duke.tasks.Event;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * An EventCommand is a command that adds an event to the task list.
@@ -34,8 +35,13 @@ public class EventCommand extends DateCommand {
             this.getTaskList().hasDuplicate(taskDescription);
             LocalDate dueDate = this.extractDateFromCommand(this.getUserInput(), DELIMITER);
             return new EventCommand(this.getTaskList(), taskDescription, dueDate);
-        } catch (InsufficientArgumentsException | DuplicateException | DateCommandException e) {
+        } catch (InsufficientArgumentsException | DuplicateException
+                | DateCommandException e) {
             return new ErrorCommand(this.getTaskList(), e.getMessage());
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand(this.getTaskList(),
+                    "Please enter the date in the format yyyy-mm-dd "
+                            + "(e.g. 2021-03-19)");
         }
     }
 
