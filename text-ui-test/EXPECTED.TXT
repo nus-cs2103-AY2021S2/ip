@@ -87,7 +87,7 @@ Here are the tasks in your list:
 6.[T][X] go out and play
 Invalid input for delete command, invalid index
 Invalid input for delete command, invalid index
-Invalid index
+Invalid input for delete command, invalid index
 Noted. I've removed this task:
  [D][X] finish personal project (by: Dec 12 2021)
 Now you have 5 tasks in the list
