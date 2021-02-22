@@ -1,4 +1,4 @@
-# Duke
+<h1 align="center">Duke</h1>
 
 <p align="center">
     <img src="./docs/Ui.png" alt="Screenshot" height="400">
@@ -39,7 +39,6 @@ Sort the task list alphabetically based on the task description.
 
 Search for tasks from the task list based on a keyword.
 
-<br>
 
 ## Usage
 
