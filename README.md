@@ -59,7 +59,7 @@ Format: `deadline DESCRIPTION /by DATETIME`
 - The datetime argument must conform to the format `YYYY-MM-DD HH:mm`.
 <hr>
 
-### Adding aa Event task: `event`
+### Adding an Event task: `event`
 Adds a Event task to the list of tasks being managed by Quackers.
 
 Format: `event DESCRIPTION /at DATETIME`
