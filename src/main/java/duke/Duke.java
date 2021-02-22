@@ -23,7 +23,7 @@ public class Duke {
 
 
     public String getResponse(String string) {
-        switch (string) {
+        switch (string.toLowerCase()) {
         case "bye":
             try {
                 storage.writeToFile(taskList, "./data/duke.txt");
@@ -37,7 +37,7 @@ public class Duke {
                 return "You have no tasks in the list!";
             }
             for (int i = 0; i < taskList.getSize(); i++) {
-                output += taskList.getTask(i).toString() + "\n";
+                output += i+1 + ". " + taskList.getTask(i).toString() + "\n";
             }
             assert output.length() != 0 : "No tasks in the list";
             return output;
