@@ -92,6 +92,12 @@ public class CommandList {
         storage.save(storage.filePath, commands);
     }
 
+    /**
+     * Searches all commands in commandList that match
+     * given keyword given by owner
+     *
+     * @param keyWord to match during search for user
+     */
     public void findCommand(String keyWord) {
         ArrayList<Command> targetList = new ArrayList<Command>();
 

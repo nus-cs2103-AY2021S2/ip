@@ -138,6 +138,13 @@ public class Parser {
        commandList.doneCommand(id);
    }
 
+    /**
+     * Splits input to get keyWord from user
+     * to relay formatted input to findCommand
+     *
+     * @see duke.CommandList#findCommand(String) findCommand
+     * @param input Raw user input to mark command
+     */
     void parseFind(String input) {
         String[] findInput = input.split(separator);
         commandList.findCommand(findInput[1]);

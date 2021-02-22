@@ -17,6 +17,7 @@ public class Duke {
         Storage storage = new Storage();
         this.commandList = new CommandList(storage);
     }
+
     public void run() {
         Ui ui = new Ui();
         Parser parser = new Parser(commandList);
