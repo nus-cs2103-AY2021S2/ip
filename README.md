@@ -46,20 +46,20 @@ Shows a message describing the breakdown of the task list by their task type.
 Format: `stats`
 <hr>
 
-### Adding a to-do task: `todo`
+### Adding a To-do task: `todo`
 Adds a Todo task to the list of tasks being managed by Quackers.
 
 Format: `todo DESCRIPTION`
 <hr>
 
-### Adding a deadline task: `deadline`
+### Adding a Deadline task: `deadline`
 Adds a Deadline task to the list of tasks being managed by Quackers.
 
 Format: `deadline DESCRIPTION /by DATETIME`
 - The datetime argument must conform to the format `YYYY-MM-DD HH:mm`.
 <hr>
 
-### Adding a event task: `event`
+### Adding an Event task: `event`
 Adds a Event task to the list of tasks being managed by Quackers.
 
 Format: `event DESCRIPTION /at DATETIME`

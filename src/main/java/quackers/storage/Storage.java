@@ -13,14 +13,28 @@ import quackers.parser.FileDataParser;
 import quackers.task.Task;
 import quackers.ui.Ui;
 
+/**
+ * Represents the storage capabilities of Quackers.
+ */
 public class Storage {
 
     protected Path filePath;
 
+    /**
+     * Constructs the core Storage object.
+     *
+     * @param filePath Path to file containing tasks data.
+     */
     public Storage(String filePath) {
         this.filePath = Paths.get(System.getProperty("user.dir"), filePath);
     }
 
+    /**
+     * Loads the tasks data file.
+     *
+     * @return List of tasks generated from the data file.
+     * @throws QuackersException If the data file cannot be opened.
+     */
     public ArrayList<Task> load() throws QuackersException {
         try {
             List<String> lines;
@@ -34,14 +48,12 @@ public class Storage {
         }
     }
 
-    public void forceCreateStorageDirectory() throws QuackersException {
-        try {
-            Files.createDirectories(this.filePath.toAbsolutePath().getParent());
-        } catch (IOException e) {
-            throw new QuackersException(Ui.getLoadTaskListFailure());
-        }
-    }
-
+    /**
+     * Saves the existing list of tasks onto the disk.
+     *
+     * @param taskList Existing list of tasks.
+     * @throws QuackersException If the data file cannot be opened.
+     */
     public void save(TaskList taskList) throws QuackersException {
         try {
             StringBuilder sb = new StringBuilder();
@@ -53,6 +65,19 @@ public class Storage {
         } catch (IOException e) {
             this.forceCreateStorageDirectory();
             throw new QuackersException(Ui.getSaveTaskListFailure());
+        }
+    }
+
+    /**
+     * Force create directories leading to the specified task data file.
+     *
+     * @throws QuackersException If I/O errors occurred.
+     */
+    private void forceCreateStorageDirectory() throws QuackersException {
+        try {
+            Files.createDirectories(this.filePath.toAbsolutePath().getParent());
+        } catch (IOException e) {
+            throw new QuackersException(Ui.getLoadTaskListFailure());
         }
     }
 }

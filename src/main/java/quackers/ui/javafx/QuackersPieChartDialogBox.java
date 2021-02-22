@@ -15,6 +15,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a PieChart
+ * containing statistics generated from the speaker.
+ */
 public class QuackersPieChartDialogBox extends HBox {
     @FXML
     private PieChart dialog;
@@ -57,12 +61,9 @@ public class QuackersPieChartDialogBox extends HBox {
         int eventCount = taskList.getTaskCount(Event.class);
         int total = todoCount + deadlineCount + eventCount;
 
-        String todoText = String.format("To-do %.2f%%",
-                Double.valueOf(todoCount) / total);
-        String deadlineText = String.format("Deadline %.2f%%",
-                Double.valueOf(deadlineCount) / total);
-        String eventText = String.format("Event %.2f%%",
-                Double.valueOf(eventCount) / total);
+        String todoText = String.format("To-do %.2f%%", Double.valueOf(todoCount) / total);
+        String deadlineText = String.format("Deadline %.2f%%", Double.valueOf(deadlineCount) / total);
+        String eventText = String.format("Event %.2f%%", Double.valueOf(eventCount) / total);
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(

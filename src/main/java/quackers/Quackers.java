@@ -7,15 +7,26 @@ import quackers.storage.Storage;
 import quackers.tasklist.TaskList;
 import quackers.ui.Ui;
 
+/**
+ * Represents the main logic used by Quackers.
+ */
 public class Quackers {
 
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructs Quackers object with a fixed data file path.
+     */
     public Quackers() {
         this("data/tasks.txt");
     }
 
+    /**
+     * Constructs Quackers object by specifying data file path.
+     *
+     * @param filePath Path to data file.
+     */
     public Quackers(String filePath) {
         this.storage = new Storage(filePath);
         try {
@@ -25,6 +36,12 @@ public class Quackers {
         }
     }
 
+    /**
+     * Parses a raw command input text, executes the relevant Command and returns the response.
+     *
+     * @param input Raw command input text.
+     * @return CommandResponse object.
+     */
     public CommandResponse getResponse(String input) {
         try {
             Command c = CommandParser.getCommand(input);
@@ -37,10 +54,20 @@ public class Quackers {
         }
     }
 
+    /**
+     * Retrieves the Ui greeting.
+     *
+     * @return Ui greeting.
+     */
     public String getGreeting() {
         return Ui.getGreeting();
     }
 
+    /**
+     * Retrieves the TaskList object.
+     *
+     * @return TaskList object.
+     */
     public TaskList getTaskList() {
         return this.tasks;
     }

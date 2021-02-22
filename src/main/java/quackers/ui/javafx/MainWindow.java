@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Controller for MainWindow. Provides the layout for the other controls.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -24,10 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Quackers quackers;
 
-    private Image quackersImage = new Image(
-            this.getClass().getResourceAsStream("/images/Quackers.png"));
-    private Image userImage = new Image(
-            this.getClass().getResourceAsStream("/images/User.png"));
+    private Image quackersImage = new Image(this.getClass().getResourceAsStream("/images/Quackers.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
 
     @FXML
     public void initialize() {
@@ -37,10 +38,13 @@ public class MainWindow extends AnchorPane {
 
     public void setQuackers(Quackers d) {
         this.quackers = d;
-        this.dialogContainer.getChildren().add(
-                QuackersTextDialogBox.getDialogBox(this.quackers.getGreeting(), this.quackersImage));
+        this.dialogContainer.getChildren().add(QuackersTextDialogBox.getDialogBox(this.quackers.getGreeting(), this.quackersImage));
     }
 
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Quackers's reply.
+     * Clears the user input after processing.
+     */
     @FXML
     private void handleUserInput() {
         String input = this.userInput.getText();
@@ -50,14 +54,11 @@ public class MainWindow extends AnchorPane {
         }
 
         if (!input.isBlank()) {
-            this.dialogContainer.getChildren().add(
-                    UserTextDialogBox.getDialogBox(input, this.userImage));
+            this.dialogContainer.getChildren().add(UserTextDialogBox.getDialogBox(input, this.userImage));
             if (response.getCommandClass() == StatsCommand.class) {
-                this.dialogContainer.getChildren().add(
-                        QuackersPieChartDialogBox.getDialogBox(this.quackers.getTaskList(), this.quackersImage));
+                this.dialogContainer.getChildren().add(QuackersPieChartDialogBox.getDialogBox(this.quackers.getTaskList(), this.quackersImage));
             } else {
-                this.dialogContainer.getChildren().add(
-                        QuackersTextDialogBox.getDialogBox(response.toString(), this.quackersImage));
+                this.dialogContainer.getChildren().add(QuackersTextDialogBox.getDialogBox(response.toString(), this.quackersImage));
             }
         }
         this.userInput.clear();

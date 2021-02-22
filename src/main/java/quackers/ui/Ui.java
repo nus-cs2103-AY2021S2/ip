@@ -3,6 +3,9 @@ package quackers.ui;
 import quackers.task.Task;
 import quackers.tasklist.TaskList;
 
+/**
+ * Represents the Ui capabilities of Quackers.
+ */
 public class Ui {
 
     private static final String NEWLINE = "\n";
@@ -10,7 +13,6 @@ public class Ui {
     private static final String SPACE = " ";
     private static final String PERIOD = ".";
     private static final String DOUBLE_QUOTE = "\"";
-
     private static final String ERROR_HEADING = "Oh no... ";
     private static final String INVALID_COMMAND = "I'm not trained with these commands yet...";
     private static final String GREETING = "Quack quack! I'm Quackers, a duck really good with task management!"
@@ -44,38 +46,84 @@ public class Ui {
     private static final String TASK_MARK_UNDONE_SUCCESS = "has been successfully marked as incomplete.";
     private static final String TASK_MARK_UNDONE_FAILURE = "How do you want me to mark something that doesn't even exist?";
 
+    /**
+     * Formats any given message into an error message.
+     *
+     * @param message Message input.
+     * @return Error message.
+     */
     public static String getErrorMessage(String message) {
         return Ui.ERROR_HEADING + message;
     }
 
+    /**
+     * Retrieves the invalid command message
+     *
+     * @return Invalid command message.
+     */
     public static String getInvalidCommand() {
         return Ui.INVALID_COMMAND;
     }
 
+    /**
+     * Retrieves the greeting.
+     *
+     * @return Greeting message.
+     */
     public static String getGreeting() {
         return Ui.GREETING;
     }
 
+    /**
+     * Retrieves the UsageCommand message.
+     *
+     * @return UsageCommand message.
+     */
     public static String getUsage() {
         return Ui.USAGE;
     }
 
+    /**
+     * Retrieves the ByeCommand successful message.
+     *
+     * @return ByeCommand successful message.
+     */
     public static String getByeSuccess() {
         return Ui.BYE_SUCCESS;
     }
 
+    /**
+     * Retrieves the StatsCommand successful message.
+     *
+     * @return StatsCommand successful message
+     */
     public static String getStatsSuccess() {
         return Ui.STATISTICS_SUCCESS;
     }
 
+    /**
+     * Retrieves the message when reading file data failed.
+     *
+     * @return Reading file data failure message.
+     */
     public static String getLoadTaskListFailure() {
         return Ui.STORAGE_LOAD_FAILURE;
     }
 
+    /**
+     * Retrieves the message when writing file data failed.
+     *
+     * @return Writing file data failure message.
+     */
     public static String getSaveTaskListFailure() {
         return Ui.STORAGE_SAVE_FAILURE;
     }
 
+    /**
+     * Generates a formatted text from a list of tasks.
+     * @param tasks List of tasks.
+     * @return Formatted text.
+     */
     public static String getTaskList(TaskList tasks) {
         if (tasks.size() == 0) {
             return Ui.TASK_LIST_EMPTY;
@@ -93,34 +141,69 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Retrieves the message when adding task succeeded.
+     *
+     * @param task Task to add.
+     * @return Add task success message.
+     */
     public static String getAddTaskSuccess(Task task) {
-        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
-                + Ui.SPACE + Ui.TASK_ADD_SUCCESS;
+        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE + Ui.SPACE + Ui.TASK_ADD_SUCCESS;
     }
 
+    /**
+     * Retrieves the message when deleting task succeeded.
+     *
+     * @param task Task to delete.
+     * @return Delete task success message.
+     */
     public static String getDeleteTaskSuccess(Task task) {
-        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
-                + Ui.SPACE + Ui.TASK_DELETE_SUCCESS;
+        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE + Ui.SPACE + Ui.TASK_DELETE_SUCCESS;
     }
 
+    /**
+     * Retrieves the message when deleting task failed.
+     *
+     * @return Delete task failure message.
+     */
     public static String getDeleteTaskFailure() {
         return Ui.TASK_DELETE_FAILURE;
     }
 
+    /**
+     * Retrieves the message when marking task as complete succeeded.
+     *
+     * @param task Task to mark.
+     * @return Mark task complete success message.
+     */
     public static String getMarkDoneTaskSuccess(Task task) {
-        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
-                + Ui.SPACE + Ui.TASK_MARK_DONE_SUCCESS;
+        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE + Ui.SPACE + Ui.TASK_MARK_DONE_SUCCESS;
     }
 
+    /**
+     * Retrieves the message when marking task as complete failed.
+     *
+     * @return Mark task complete fail message.
+     */
     public static String getMarkDoneTaskFailure() {
         return Ui.TASK_MARK_DONE_FAILURE;
     }
 
+    /**
+     * Retrieves the message when marking task as incomplete succeeded.
+     *
+     * @param task Task to mark.
+     * @return Mark task incomplete success message.
+     */
     public static String getMarkUndoneTaskSuccess(Task task) {
-        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
-                + Ui.SPACE + Ui.TASK_MARK_UNDONE_SUCCESS;
+        return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE + Ui.SPACE + Ui.TASK_MARK_UNDONE_SUCCESS;
     }
 
+    /**
+     * Retrieves the message when marking task as incomplete failed.
+     *
+     * @return Mark task incomplete fail message.
+     */
     public static String getMarkUndoneTaskFailure() {
         return Ui.TASK_MARK_UNDONE_FAILURE;
     }
