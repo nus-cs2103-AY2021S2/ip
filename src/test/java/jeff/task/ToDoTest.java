@@ -1,8 +1,7 @@
-package jeff;
+package jeff.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import jeff.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
@@ -15,7 +14,7 @@ public class ToDoTest {
     @Test
     public void toStringTest1() {
         ToDo todo = new ToDo("read book");
-        assertEquals("[T][ ] read book", todo.toString());
+        assertEquals("[T][  ] read book", todo.toString());
     }
 
     @Test

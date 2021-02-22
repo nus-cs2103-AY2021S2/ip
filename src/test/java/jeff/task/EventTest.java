@@ -1,11 +1,10 @@
-package jeff;
+package jeff.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import jeff.task.Event;
 import org.junit.jupiter.api.Test;
 
 public class EventTest {
@@ -30,7 +29,7 @@ public class EventTest {
     @Test
     public void toStringTest1() {
         Event event = new Event("book club meeting", "2020-02-05", "13:30");
-        assertEquals("[E][ ] book club meeting (at: 5 FEBRUARY 2020 13:30)", event.toString());
+        assertEquals("[E][  ] book club meeting (at: 5 FEBRUARY 2020 13:30)", event.toString());
     }
 
     @Test

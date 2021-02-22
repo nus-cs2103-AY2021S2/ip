@@ -1,11 +1,10 @@
-package jeff;
+package jeff.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import jeff.task.Deadline;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
@@ -30,14 +29,14 @@ public class DeadlineTest {
     @Test
     public void toStringTest1() {
         Deadline deadline = new Deadline("return book", "2020-01-01", "09:59");
-        assertEquals("[D][ ] return book (by: 1 JANUARY 2020 9:59)", deadline.toString());
+        assertEquals("[D][  ] return book (by: 1 JANUARY 2020 09:59)", deadline.toString());
     }
 
     @Test
     public void toStringTest2() {
         Deadline deadline = new Deadline("return book", "2020-01-01", "09:59");
         deadline.setDone();
-        assertEquals("[D][X] return book (by: 1 JANUARY 2020 9:59)", deadline.toString());
+        assertEquals("[D][X] return book (by: 1 JANUARY 2020 09:59)", deadline.toString());
     }
 }
 
