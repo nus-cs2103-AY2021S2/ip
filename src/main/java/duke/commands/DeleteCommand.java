@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.parser.InsufficientArgumentsException;
+import duke.parser.WrongArgumentException;
 import duke.tasks.TaskList;
 
 /**
@@ -25,9 +26,18 @@ public class DeleteCommand extends Command {
                 throw new InsufficientArgumentsException("OOPS!!! The "
                         + "description of delete cannot be empty.");
             }
-            return new DeleteCommand(this.getTaskList(), Integer.parseInt(this.getUserInput()[1]));
-        } catch (InsufficientArgumentsException e) {
+            int taskIndex = Integer.parseInt(this.getUserInput()[1]);
+            if (taskIndex > this.getTaskList().size()) {
+                throw new WrongArgumentException("The task " + taskIndex + " does not exists.\n"
+                        + "Please indicate a positive task number smaller or equal to "
+                        + this.getTaskList().size() + ".");
+            }
+            return new DeleteCommand(this.getTaskList(), taskIndex);
+        } catch (InsufficientArgumentsException | WrongArgumentException e) {
             return new ErrorCommand(this.getTaskList(), e.getMessage());
+        } catch (NumberFormatException e) {
+            return new ErrorCommand(this.getTaskList(),
+                    "Please enter a positive number for the task to be deleted.");
         }
     }
 

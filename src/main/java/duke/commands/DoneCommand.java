@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.parser.InsufficientArgumentsException;
+import duke.parser.WrongArgumentException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -31,9 +32,18 @@ public class DoneCommand extends Command{
                 throw new InsufficientArgumentsException("OOPS!!! The "
                         + "description of done cannot be empty.");
             }
-            return new DoneCommand(this.getTaskList(), Integer.parseInt(this.getUserInput()[1]));
-        } catch (InsufficientArgumentsException e) {
+            int taskIndex = Integer.parseInt(this.getUserInput()[1]);
+            if (taskIndex > this.getTaskList().size()) {
+                throw new WrongArgumentException("The task " + taskIndex + " does not exists.\n"
+                        + "Please indicate a positive task number smaller or equal to "
+                        + this.getTaskList().size() + ".");
+            }
+            return new DoneCommand(this.getTaskList(), taskIndex);
+        } catch (InsufficientArgumentsException | WrongArgumentException e) {
             return new ErrorCommand(this.getTaskList(), e.getMessage());
+        } catch (NumberFormatException e) {
+            return new ErrorCommand(this.getTaskList(),
+                    "Please enter a positive number for the task that is completed.");
         }
     }
 
@@ -44,6 +54,7 @@ public class DoneCommand extends Command{
         for (int i = 0; i < size; ++i) {
             if (i == this.indexOfTaskDone - 1) {
                 tasks.set(i, tasks.get(i).markAsDone());
+                break;
             }
         }
         assert (tasks.size() == size);  // check that marking a task as done does not remove the task
