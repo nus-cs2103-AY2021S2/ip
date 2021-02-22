@@ -1,5 +1,6 @@
 package duke.gui;
 
+import duke.Duke;
 import javafx.application.Application;
 import javafx.fml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +10,7 @@ import java.io.IOException;
 
 import java.io.IOException;
 
-public class Main1 extends Application {
+public class Main extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
     @Override
