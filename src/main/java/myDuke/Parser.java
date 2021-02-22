@@ -200,11 +200,9 @@ public class Parser {
                 }
                 return ui.printTasksInListStr(tempArr);
             }
-        case "done":
+            case "done":
             try {
                 MyDuke.indexChecker(getParsedInput());
-                assert getParsedInput().length == 2 : "getParsedInput() should have two"
-                        + " in the array, requires an index as the second arg";
                 int ref = Integer.parseInt(getParsedInput()[1]);
                 tasks.getTaskList().set(ref - 1, tasks.getTaskList().get(ref - 1).setAsDone());
                 return ui.printDoneTaskAlertStr(tasks.getTaskList().get(ref - 1).toString());
@@ -220,8 +218,6 @@ public class Parser {
         case "delete":
             try {
                 MyDuke.indexChecker(getParsedInput());
-                assert getParsedInput().length == 2 : "getParsedInput() should have only two element"
-                        + " in the array, requires an index int for the second arg";
                 int ref = Integer.parseInt(getParsedInput()[1]);
                 Task toRemove = tasks.getTask(ref);
                 tasks.deleteTask(ref - 1);
@@ -238,8 +234,6 @@ public class Parser {
         case "todo":
             try {
                 MyDuke.todoChecker(getParsedInput());
-                assert getParsedInput().length == 2 : "getParsedInput() should have only two element"
-                        + " in the array, requires a String description for the second arg";
                 ToDo todo = new ToDo(getParsedInput()[1], false);
                 tasks.addTask(todo);
                 return ui.printAddedTodoAlertStr(todo.toString(), tasks.getTaskList().size());
@@ -249,8 +243,6 @@ public class Parser {
         case "event":
             try {
                 MyDuke.eventChecker(getParsedInput());
-                assert getParsedInput().length == 3 : "getParsedInput() should have three elements"
-                        + " in the array, requires a String description as 2nd arg and localdate as 3rd arg";
                 String[] temp = getParsedInput()[1].split("/", 2);
                 Event event = new Event(LocalDate.parse(temp[1].substring(3)), temp[0], false);
                 tasks.addTask(event);
@@ -269,8 +261,6 @@ public class Parser {
         case "deadline":
             try {
                 MyDuke.deadlineChecker(getParsedInput());
-                assert getParsedInput().length == 3 : "getParsedInput() should have three elements"
-                        + " in the array, requires a String description as 2nd arg and localdate as 3rd arg";
                 String[] temp = getParsedInput()[1].split("/", 2);
                 Deadline deadline = new Deadline(LocalDate.parse(temp[1].substring(3)), temp[0], false);
                 tasks.addTask(deadline);
@@ -289,8 +279,6 @@ public class Parser {
         case "find":
             try {
                 MyDuke.finderChecker(getParsedInput());
-                assert getParsedInput().length == 2 : "getParsedInput() should have only two element"
-                        + " in the array, requires a search String as the second arg";
                 String keyword = this.input.split(" ", 2)[1];
                 List<Task> searchResultList = new ArrayList<>();
                 for (Task t : tasks.getTaskList()) {
@@ -315,8 +303,7 @@ public class Parser {
         case "bye":
             return ui.showByeMsgStr();
         default:
-            assert false : "no valid command detected, missed all cases";
             return ui.showInputErrorStr();
-    }
+        }
     }
 }
