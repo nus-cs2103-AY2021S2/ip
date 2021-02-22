@@ -215,4 +215,11 @@ public class Ui {
         }
         return ("Paikia Bot: dis is your search result for '" + keyword + "': " + str);
     }
+
+    void showSortedMsg() {
+        print("Pai Kia Bot: Ok can limpeh help u sort your list according to alphabetical order liao");
+    }
+    String showSortedMsgStr() {
+        return ("Ok can limpeh help u sort your list according to alphabetical order liao");
+    }
 }

@@ -31,30 +31,30 @@ public class MyDuke {
         }
     }
 
-//    public static void main(String[] args) {
-//
-//        Scanner sc = new Scanner(System.in);
-//        MyDuke myDuke = new MyDuke(DATA_SAVE_FILE_DIR);
-//        ui.askForUserInput();
-//
-//        String input = ui.getInput(sc);
-//        Parser parser = new Parser(input, storage, tasks, ui);
-//
-//        while (!parser.isGoodbye()) {
-//            parser.handleInput();
-//            input = ui.getInput(sc);
-//            parser = parser.parseNextInput(input);
-//        }
-//        ui.showByeMsg();
-//
-//        try {
-//            storage.saveToFile(tasks.getTaskList());
-//        } catch (IOException e) {
-//            String newDir = "../data/saveFile.txt";
-//            ui.printErrorMsg("Something went wrong: " + e.getMessage());
-//        }
-//        sc.close();
-//    }
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        MyDuke myDuke = new MyDuke(DATA_SAVE_FILE_DIR);
+        ui.askForUserInput();
+
+        String input = ui.getInput(sc);
+        Parser parser = new Parser(input, storage, tasks, ui);
+
+        while (!parser.isGoodbye()) {
+            parser.handleInput();
+            input = ui.getInput(sc);
+            parser = parser.parseNextInput(input);
+        }
+        ui.showByeMsg();
+
+        try {
+            storage.saveToFile(tasks.getTaskList());
+        } catch (IOException e) {
+            String newDir = "../data/saveFile.txt";
+            ui.printErrorMsg("Something went wrong: " + e.getMessage());
+        }
+        sc.close();
+    }
 
     /**
      * Checks if the user has provided the index number in the input.

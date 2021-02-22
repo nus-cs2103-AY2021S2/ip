@@ -3,6 +3,7 @@ package myDuke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -181,6 +182,11 @@ public class Parser {
             break;
         case "bye":
             ui.showByeMsg();
+            break;
+        case "sort":
+            Collections.sort(tasks.taskList, new TaskListComparator());
+            ui.showSortedMsg();
+            break;
         default:
             ui.showInputError();
         }
@@ -302,6 +308,9 @@ public class Parser {
             }
         case "bye":
             return ui.showByeMsgStr();
+        case "sort":
+            Collections.sort(tasks.taskList, new TaskListComparator());
+            return ui.showSortedMsgStr();
         default:
             return ui.showInputErrorStr();
         }
