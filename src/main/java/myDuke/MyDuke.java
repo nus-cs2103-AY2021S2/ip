@@ -13,7 +13,7 @@ public class MyDuke {
     static Storage storage;
     static TaskList tasks;
     static Ui ui;
-    static String DATA_SAVE_FILE_DIR = "../data/saveFile.txt";
+    static String DATA_SAVE_FILE_DIR = "saveFile.txt";
 
     public MyDuke(String filePath) {
         ui = new Ui();
@@ -133,17 +133,19 @@ public class MyDuke {
 
 
     public String getResponse(String input) {
+        MyDuke myDuke = new MyDuke(DATA_SAVE_FILE_DIR);
+        ui.askForUserInput();
+
         Parser parser = new Parser(input, storage, tasks, ui);
+
+//        try {
+//            storage.saveToFile(tasks.getTaskList());
+//        } catch (IOException e) {
+//            String newDir = "../data/saveFile.txt";
+//            ui.printErrorMsg("Something went wrong: " + e.getMessage());
+//        }
         parser.handleInput();
-
-        try {
-            storage.saveToFile(tasks.getTaskList());
-        } catch (IOException e) {
-            String newDir = "../data/saveFile.txt";
-            ui.printErrorMsg("Something went wrong: " + e.getMessage());
-        }
-
-        return "Duke heard: " + input;
+        return parser.handleInputStr();
     }
 
 
