@@ -11,6 +11,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 
 public class Parser {
@@ -55,6 +56,7 @@ public class Parser {
         } else if ((errorInput.contains("done")
                 || errorInput.contains("delete"))
                 && inputArr[1] == null) {
+
             throw new DukeException("What are you referring to? Remember to key in the correct command id!");
 
         } else if (inputArr[1] != null) {
