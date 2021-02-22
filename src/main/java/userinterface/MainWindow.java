@@ -43,6 +43,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         if (input.equals("bye")) {
             Platform.exit();
+            return;
         }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

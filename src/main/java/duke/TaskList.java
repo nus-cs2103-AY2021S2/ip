@@ -22,7 +22,7 @@ class TaskList {
         try {
             File storageTextFile = Storage.initialiseFile();
             Storage.convert(storageTextFile, this.tasks);
-        } catch (IOException | ArrayIndexOutOfBoundsException exception) {
+        } catch (Exception exception) {
             this.canWriteToHardDisk = false;
         }
     }
