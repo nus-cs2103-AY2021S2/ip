@@ -40,7 +40,9 @@ public class Ui {
     private static final String TASK_DELETE_SUCCESS = "has been successfully removed from the list.";
     private static final String TASK_DELETE_FAILURE = "How do you want me to remove something that doesn't even exist?";
     private static final String TASK_MARK_DONE_SUCCESS = "has been successfully marked as completed.";
+    private static final String TASK_MARK_DONE_FAILURE = "How do you want me to mark something that doesn't even exist?";
     private static final String TASK_MARK_UNDONE_SUCCESS = "has been successfully marked as incomplete.";
+    private static final String TASK_MARK_UNDONE_FAILURE = "How do you want me to mark something that doesn't even exist?";
 
     public static String getErrorMessage(String message) {
         return Ui.ERROR_HEADING + message;
@@ -110,8 +112,16 @@ public class Ui {
                 + Ui.SPACE + Ui.TASK_MARK_DONE_SUCCESS;
     }
 
+    public static String getMarkDoneTaskFailure() {
+        return Ui.TASK_MARK_DONE_FAILURE;
+    }
+
     public static String getMarkUndoneTaskSuccess(Task task) {
         return Ui.DOUBLE_QUOTE + task.getDescription() + Ui.DOUBLE_QUOTE
                 + Ui.SPACE + Ui.TASK_MARK_UNDONE_SUCCESS;
+    }
+
+    public static String getMarkUndoneTaskFailure() {
+        return Ui.TASK_MARK_UNDONE_FAILURE;
     }
 }
