@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "seashell.Main"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "seashell"
     archiveClassifier = null
 }
 

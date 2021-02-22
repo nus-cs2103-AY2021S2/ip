@@ -24,7 +24,7 @@ public class MainWindow extends AnchorPane {
     private Seashell seashell;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image seashellImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image seashellImage = new Image(this.getClass().getResourceAsStream("/images/DaSeashell.png"));
 
     @FXML
     public void initialize() {

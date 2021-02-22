@@ -6,7 +6,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seashell.Seashell;
-import seashell.Ui;
 
 import java.io.IOException;
 
@@ -16,7 +15,7 @@ public class Main extends Application {
      * @param args
      */
     private Seashell seashell = new Seashell();
-    private Image seashellImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image seashellImage = new Image(this.getClass().getResourceAsStream("/images/DaSeashell.png"));
 
     @Override
     public void start(Stage stage) {
