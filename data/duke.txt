@@ -1,2 +1,4 @@
-T | 1 | rollover
-D | 1 | finish doggo treats | 2021-03-11
+T | 0 | roll
+T | 0 | rollover
+T | 0 | rollie
+D | 0 | roll over | 2021-01-01

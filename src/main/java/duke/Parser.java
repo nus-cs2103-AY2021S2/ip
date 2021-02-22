@@ -114,8 +114,8 @@ public class Parser {
      * @param input Raw user input to delete command
      */
      void parseDelete(String input) {
-        String[] deleteCommand = input.split(separator);
-        int id = Integer.parseInt(deleteCommand[1]) - 1;
+        String[] deleteInput = input.split(separator);
+        int id = Integer.parseInt(deleteInput[1]) - 1;
         commandList.deleteCommand(id);
     }
 
@@ -133,11 +133,16 @@ public class Parser {
      * @param input Raw user input to mark command
      */
     void parseDone(String input) {
-       String[] doneCommand = input.split(separator);
-       int id = Integer.parseInt(doneCommand[1]) - 1;
+       String[] doneInput = input.split(separator);
+       int id = Integer.parseInt(doneInput[1]) - 1;
        commandList.doneCommand(id);
    }
 
+    void parseFind(String input) {
+        String[] findInput = input.split(separator);
+        commandList.findCommand(findInput[1]);
+    }
+    
     /**
      * Introduces scanner class to read in input
      * and sorts input into appropriate parsing commands
@@ -161,6 +166,8 @@ public class Parser {
                     parseDone(input);
                 } else if (input.contains("delete")) {
                     parseDelete(input);
+                } else if(input.contains("find")) {
+                    parseFind(input);
                 } else if (input.contains("todo")
                         || input.contains("deadline")
                         || input.contains("event")) {

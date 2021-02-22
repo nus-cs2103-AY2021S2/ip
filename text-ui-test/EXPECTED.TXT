@@ -56,6 +56,14 @@ Very Woof! I have completed this commands:
 
 ____________________________________________________________
 
+
+____________________________________________________________
+We found some matching commands:
+1. [E] [ ] dog festival | at: 10 Feb 2021
+2. [D] [X] finish doggo treats | by: 11 Mar 2021
+
+____________________________________________________________
+
 duke.DukeException: What are you referring to? Remember to key in the correct command id!
 
 ____________________________________________________________

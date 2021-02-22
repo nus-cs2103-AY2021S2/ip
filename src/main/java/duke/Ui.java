@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     static String spacer = "\n____________________________________________________________\n";
@@ -26,6 +28,15 @@ public class Ui {
 
     static void printGoodbye() {
         System.out.println(spacer + goodbye + spacer);
+    }
+
+    static String indexList(ArrayList<Command> xs) {
+        String result = "";
+        for (int i = 0; i < xs.size(); i++) {
+            Command value = xs.get(i);
+            result += (i + 1) + ". " + value +"\n";
+        }
+        return result;
     }
 
     static void printToDo(Command command, int size) {
@@ -81,4 +92,20 @@ public class Ui {
                 + " commands remaining."
                 + spacer);
     }
+
+    static void printFind(ArrayList<Command> targetList, boolean isFound) {
+        if (isFound) {
+            System.out.println(spacer
+                    + "We found some matching commands:\n"
+                    + indexList(targetList)
+                    + spacer);
+        } else {
+            System.out.println(spacer
+                    + "Omo :( "
+                    + "We could not find anything. "
+                    + "Try another keyword?\n"
+                    + spacer);
+        }
+    }
+
 }

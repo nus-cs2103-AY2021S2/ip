@@ -7,6 +7,7 @@ shake
 done 1
 todo
 done 3
+find dog
 delete
 delete 2
 list
