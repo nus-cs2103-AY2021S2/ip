@@ -13,7 +13,7 @@ public class CommandList extends Command {
         }
         String toPrint = "";
         for (int i = 0; i < tasks.getNumTasks(); i++) {
-            toPrint += (i + 1) + "." + tasks.getTask(i) + "\n";
+            toPrint += (i + 1) + ". " + tasks.getTask(i) + "\n";
         }
         return toPrint;
     }
