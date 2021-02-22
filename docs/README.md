@@ -33,14 +33,14 @@ traditional GUI applications.
 
 ![Startup Screenshot](images/startup.jpg)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing `list` and pressing 
+5. Type the command in the command box and press Enter to execute it. e.g. typing `list` and pressing 
 Enter will list all the tasks currently in the task list. 
 Some example commands you can try: 
   * `list` : Lists all tasks.
   * `event project meeting /at 2021-02-03 1400-1600`: Adds an event task 'project meeting' that falls on 3rd Feb 2021 from 2pm to 4pm.
   * `delete 1` : Deletes the 1st task shown in the current list.
   * `bye` : Exits the application.
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ## Features 
 
