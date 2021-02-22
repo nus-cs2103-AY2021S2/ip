@@ -16,11 +16,15 @@ import utility.Ui;
 public class Duke {
 
     private TaskList taskList;
-    private final Storage storage;
+    private Storage storage;
 
     Duke() {
-        this.taskList = new TaskList();
-        this.storage = new Storage(Paths.get("data", "duke.txt"), Paths.get("data"));
+        try {
+            this.storage = new Storage(Paths.get("data", "duke.txt"), Paths.get("data"));
+            this.taskList = new TaskList(storage.readFromFile());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -99,23 +103,28 @@ public class Duke {
                 if (dukeCommand.getDetails().length() == 0) {
                     throw new DukeException("OOPS!!! tag keyword cannot be empty");
                 }
-                String[] tagParams = dukeCommand.getDetails().split(" ", 3);
-                String tagMode = tagParams[0];
-                String taskDescription = tagParams[1];
-                String tag = tagParams[2];
+
                 Tag tagAction;
                 Task relevantTask = null;
-
+                String copy = new String(dukeCommand.getDetails());
+                int startIndexOfTaskDesc = copy.indexOf(" \"");
+                int endIndexOfTaskDesc = copy.indexOf("\" ");
+                if (startIndexOfTaskDesc == -1 || endIndexOfTaskDesc == -1) {
+                    throw new DukeException("OOPS! Either the Task Description was not wrapped in inverted commas, or"
+                            + " tag is missing some arguments!");
+                }
+                String taskDescription = copy.substring(startIndexOfTaskDesc + 2, endIndexOfTaskDesc);
+                String tagMode = copy.stripLeading().substring(0, startIndexOfTaskDesc);
+                String tag = copy.stripTrailing().substring(endIndexOfTaskDesc + 1).stripLeading();
                 if (tagMode.equals("add")) {
                     tagAction = Tag.ADD;
                 } else if (tagMode.equals("delete")) {
                     tagAction = Tag.DELETE;
                 } else {
-                    throw new DukeException("OOPS!!! Duke does not understand what you want to do with tag");
+                    throw new DukeException("OOPS! tag is missing some arguments!");
                 }
 
                 ListIterator<Task> taskIter = taskList.getTasks().listIterator();
-
                 while (taskIter.hasNext()) {
                     Task curr = taskIter.next();
                     assert curr != null : "The list of tasks contains a null";
@@ -152,5 +161,9 @@ public class Duke {
 
     public String getResponse(String input) {
         return run(input);
+    }
+
+    public int getNumOfTasks() {
+        return taskList.getSize();
     }
 }
