@@ -15,7 +15,8 @@ public class DateCommandTest {
     @Test
     void execute() throws DukeException {
         List<Task> list = List.of(new ToDo("buy a car"),
-                new Deadline("finish iP", LocalDate.of(2021, Month.AUGUST, 8), LocalTime.of(14, 14)),
+                new Deadline("finish iP", LocalDate.of(2021, Month.AUGUST, 8),
+                        LocalTime.of(14, 14)),
                 new Event("casting", LocalDate.of(2021, Month.AUGUST, 8),
                         LocalTime.of(16, 30), LocalTime.of(17, 0)));
         TaskList tl = new TaskList(list);

@@ -114,7 +114,7 @@ public class FileHandler {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        File f = new File("data/duke.txt");
+        File f = new File("data/oui.txt");
         if (!f.exists()) {
             f.createNewFile();
         }
@@ -137,8 +137,10 @@ public class FileHandler {
      * @throws IOException
      */
     public void writeToFile(TaskList list) throws IOException {
-        FileWriter fw = new FileWriter("data/duke.txt");
-        PrintWriter pw = new PrintWriter("data/duke.txt");
+        File textFile = new File("data/oui.txt");
+        assert textFile.exists() : "Data file does not exist";
+        FileWriter fw = new FileWriter("data/oui.txt");
+        PrintWriter pw = new PrintWriter("data/oui.txt");
         //before writing to it, clear file to make sure it is empty and no content is leftover from last run
         pw.print("");
         pw.close();
