@@ -21,8 +21,6 @@ public class Parser {
             return parseAddDeadline(input);
         } else if (input.startsWith("event")) {
             return parseAddEvent(input);
-        } else if (input.stripTrailing().equals("help")) {
-            return new HelpCommand();
         } else if (input.stripTrailing().equals("clear")) {
             return new ClearCommand();
         } else if (input.startsWith("find ")) {
