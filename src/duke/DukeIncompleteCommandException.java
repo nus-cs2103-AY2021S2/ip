@@ -1,4 +1,4 @@
-package duke;
+package duke.duke;
 
 public class DukeIncompleteCommandException extends Exception {
     public String message;

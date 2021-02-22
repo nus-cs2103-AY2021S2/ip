@@ -1,11 +1,14 @@
-package duke.duke;
+package duke;
 
-import java.util.ArrayList;
-
+<<<<<<< HEAD
 /**
  * Class containing methods for printing different messages
  * according to the situation.
  */
+=======
+import java.util.ArrayList;
+
+>>>>>>> branch-Level-9
 public class Ui {
     /**
      * Prints welcome message.

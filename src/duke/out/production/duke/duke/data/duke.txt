@@ -1,9 +1,0 @@
-TODO[ ] rea
-EVNT[ ] play with bingrae (at: 2000-09-08)
-TODO[ ] yoz
-DDLN[ ] deadline hello (by: 2000-09-08)
-EVNT[ ] event y (at: 2003-08-15)
-TODO[X] yellow
-TODO[ ] check check
-EVNT[X] event yoooz (at: 2000-04-03)
-DDLN[X] shit (by: 2021-03-09)

@@ -1,10 +1,13 @@
-import org.junit.jupiter.api.Test;
+/*
+import org.testng.annotations.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
+
+ */
     /*
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -21,7 +24,5 @@ public class DukeTest {
     public void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
-    }
-
-     */
-}
+    } */
+//}

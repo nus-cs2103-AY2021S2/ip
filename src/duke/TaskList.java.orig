@@ -1,4 +1,4 @@
-package duke.duke;
+package duke;
 
 import java.util.ArrayList;
 
@@ -31,17 +31,20 @@ public class TaskList {
         }
         System.out.println("\n");
     }
+<<<<<<< HEAD
+
+    /**
+     * Marks the task specified as done.
+     * @param index Index of task to mark.
+     */
+=======
     static void displayTabbedList(ArrayList<Task> tasks) {
         for(int i = 0; i < tasks.size(); i++) {
             System.out.printf("    %d. %s%n",i + 1, tasks.get(i).toString());
         }
         System.out.println("\n");
     }
-    /**
-     * Marks the task specified as done.
-     *
-     * @param index Index of task to mark.
-     */
+>>>>>>> branch-Level-9
     void markDone(int index) {
         try {
             Task task = list.get(index);
@@ -53,12 +56,17 @@ public class TaskList {
             Ui.printIndexError();
         }
     }
+<<<<<<< HEAD
 
     /**
      * Deletes the task specified.
      * @param index Index of task to delete.
      */
     void delete(int index) {
+        Task task = list.get(index);
+=======
+    void delete (int index) {
+>>>>>>> branch-Level-9
         try {
             Task task = list.get(index);
             list.remove(index);
