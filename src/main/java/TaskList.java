@@ -16,6 +16,11 @@ public class TaskList {
         this.size = 0;
     }
 
+    public TaskList(List<Task> list) {
+        this.tasks = list;
+        this.size = list.size();
+    }
+
     /**
      * Returns a task with the specified task number.
      * @param taskNo the task number
