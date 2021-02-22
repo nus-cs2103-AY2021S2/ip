@@ -1,10 +1,17 @@
-package jeff;
+package jeff.command;
 
 import java.time.format.DateTimeParseException;
 
+import jeff.JeffException;
+import jeff.Storage;
+import jeff.TaskList;
+import jeff.task.Deadline;
+import jeff.task.Event;
+import jeff.task.Task;
+
 public class CommandReschedule extends Command {
 
-    CommandReschedule(String main, String supp) {
+    public CommandReschedule(String main, String supp) {
         super(main, supp);
     }
 

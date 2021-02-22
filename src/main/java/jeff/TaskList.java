@@ -2,6 +2,8 @@ package jeff;
 
 import java.util.ArrayList;
 
+import jeff.task.Task;
+
 /**
  * Represents a list of Task objects.
  */

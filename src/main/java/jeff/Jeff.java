@@ -1,5 +1,7 @@
 package jeff;
 
+import jeff.command.Command;
+
 /**
  * Main class for the Jeff chatbot.
  */

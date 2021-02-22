@@ -1,8 +1,13 @@
-package jeff;
+package jeff.command;
+
+import jeff.JeffException;
+import jeff.Storage;
+import jeff.TaskList;
+import jeff.task.Task;
 
 public class CommandDone extends Command {
 
-    CommandDone (String main) {
+    public CommandDone (String main) {
         super(main);
     }
 

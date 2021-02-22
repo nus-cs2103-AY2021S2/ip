@@ -1,4 +1,4 @@
-package jeff;
+package jeff.task;
 
 /**
  * Represents a ToDo, child class of Task.

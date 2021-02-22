@@ -1,10 +1,16 @@
-package jeff;
+package jeff.command;
 
 import java.time.format.DateTimeParseException;
 
+import jeff.JeffException;
+import jeff.Storage;
+import jeff.TaskList;
+import jeff.task.Event;
+import jeff.task.Task;
+
 public class CommandEvent extends Command {
 
-    CommandEvent (String main, String supp) {
+    public CommandEvent (String main, String supp) {
         super(main, supp);
     }
     @Override

@@ -1,5 +1,16 @@
 package jeff;
 
+import jeff.command.Command;
+import jeff.command.CommandBye;
+import jeff.command.CommandDeadline;
+import jeff.command.CommandDelete;
+import jeff.command.CommandDone;
+import jeff.command.CommandEvent;
+import jeff.command.CommandFind;
+import jeff.command.CommandList;
+import jeff.command.CommandReschedule;
+import jeff.command.CommandToDo;
+
 /**
  * Parses a single user input line and executes the input.
  */

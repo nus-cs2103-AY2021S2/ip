@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import jeff.task.Deadline;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {

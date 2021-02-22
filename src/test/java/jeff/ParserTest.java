@@ -3,6 +3,8 @@ package jeff;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import jeff.command.Command;
+import jeff.command.CommandDeadline;
 import org.junit.jupiter.api.Test;
 
 public class ParserTest {

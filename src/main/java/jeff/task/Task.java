@@ -1,4 +1,4 @@
-package jeff;
+package jeff.task;
 
 /**
  * Represents a Task.

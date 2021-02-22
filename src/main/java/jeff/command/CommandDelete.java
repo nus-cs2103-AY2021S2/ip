@@ -1,8 +1,13 @@
-package jeff;
+package jeff.command;
+
+import jeff.JeffException;
+import jeff.Storage;
+import jeff.TaskList;
+import jeff.task.Task;
 
 public class CommandDelete extends Command {
 
-    CommandDelete(String main) {
+    public CommandDelete(String main) {
         super(main);
     }
     @Override

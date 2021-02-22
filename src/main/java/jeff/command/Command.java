@@ -1,4 +1,8 @@
-package jeff;
+package jeff.command;
+
+import jeff.JeffException;
+import jeff.Storage;
+import jeff.TaskList;
 
 public abstract class Command {
     private String mainInfo;

@@ -1,10 +1,15 @@
-package jeff;
+package jeff.command;
 
 import java.util.ArrayList;
 
+import jeff.JeffException;
+import jeff.Storage;
+import jeff.TaskList;
+import jeff.task.Task;
+
 public class CommandFind extends Command {
 
-    CommandFind(String main) {
+    public CommandFind(String main) {
         super(main);
     }
 
