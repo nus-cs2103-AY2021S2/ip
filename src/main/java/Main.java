@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Oui using FXML.
  */
 public class Main extends Application {
 
@@ -20,7 +20,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("MouMou");
+            stage.setTitle("Oui");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
             Duke.readData();

@@ -67,7 +67,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getClosingDialog(String text, Image img) {
-        String goodbyeText = "Goodnight! Moumou will go back to sleep now.";
+        String goodbyeText = "Bonne nuit! Oui will go back to sleep now.";
         return getDukeDialog(goodbyeText, img);
     }
 }

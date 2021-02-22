@@ -25,9 +25,9 @@ public class FindCommand extends Command {
         String response = "";
         String[] inputs = this.fullCommand.split(" ");
         if (inputs.length == 1) {
-            throw new DukeException("Please give me a keyword to search for!");
+            throw new DukeException("Ooh lah lah! Please give me a keyword to search for!");
         } else if (inputs.length > 2) {
-            throw new DukeException("Sorry! I can't search for more than one keyword.");
+            throw new DukeException("Pardon! I can't search for more than one keyword.");
         } else { }
         String keyword = inputs[1];
         List<Task> toPrint = tasks.findKeyword(keyword);

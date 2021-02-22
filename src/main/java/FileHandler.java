@@ -34,7 +34,7 @@ public class FileHandler {
         } else if (typeOfCommand.equals("E")) {
             return addEventFromFile(splitInputs, tasks);
         } else {
-            throw new DukeException("Sorry! No such command is allowed.");
+            throw new DukeException("Pardon! No such command is allowed.");
         }
     }
 

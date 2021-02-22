@@ -26,7 +26,7 @@ public class DateCommand extends Command {
         String response = "";
         String[] splitInputs = this.fullCommand.split(" ");
         if (splitInputs.length == 1) {
-            throw new DukeException("OOPS! Please give me the date that you want to check in YYYY-MM-DD format.");
+            throw new DukeException("Ooh lah lah! Please give me the date that you want to check in YYYY-MM-DD format.");
         }
         LocalDate parsedDate = LocalDate.parse(splitInputs[1]);
         List<Task> toPrint = tasks.listTasksOnDate(parsedDate);

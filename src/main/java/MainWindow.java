@@ -1,7 +1,6 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -28,10 +27,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String greeting = " __  __  ____  __ __  __  __  ____   __ __ \n" +
-                "|   \\/  |/  ()  \\|   |  |  |  \\/  |/  ()  \\ |   |  |\n" +
-                "|_|\\/|_|\\____/ \\___/ |_|\\/|_|\\____/ \\___/"
-                        + " is back!\nWhat have you awoken MouMou for?";
+        String greeting = "Bonjour, Oui is back! What have you awoken Oui for?";
         DialogBox greetDialog = DialogBox.getDukeDialog(greeting, dukeImage);
         dialogContainer.getChildren().add(greetDialog);
     }

@@ -22,11 +22,11 @@ public class DoneCommand extends Command {
         String response;
         String[] inputs = this.fullCommand.split(" ");
         if (inputs.length == 1) {
-            throw new DukeException("OOPS! Please tell me what to mark as done!");
+            throw new DukeException("Ooh lah lah! Please tell me what to mark as done!");
         }
         int taskNo = Integer.parseInt(String.valueOf(fullCommand.charAt(5))) - 1;
         String toPrint = tasks.makeDone(taskNo);
-        response = "Good job! I've marked this task as done:\n" + toPrint;
+        response = "Parfait! I've marked this task as done:\n" + toPrint;
         return response;
     }
 }

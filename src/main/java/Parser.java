@@ -15,7 +15,7 @@ public class Parser {
     public static Command parse(String userInput) throws DukeException {
         String[] inputs = userInput.split(" ");
         if (inputs.length == 0) {
-            throw new DukeException("OOPS! Please enter a command or say bye so I can go back to sleep!");
+            throw new DukeException("Ooh lah lah! Please enter a command or say bye so I can go back to sleep!");
         }
         String typeOfCommand = inputs[0];
         if (typeOfCommand.equals("list")) {
@@ -37,7 +37,7 @@ public class Parser {
         } else if (typeOfCommand.equals("reschedule")) {
             return new RescheduleCommand(userInput, "reschedule");
         } else {
-            throw new DukeException("OOPS! Sorry, I have no idea what that means :(");
+            throw new DukeException("Ooh lah lah! Pardon, I have no idea what that means :(");
         }
     }
 }

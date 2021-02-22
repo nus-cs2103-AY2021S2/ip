@@ -27,21 +27,21 @@ public class AddCommand extends Command {
         String[] splitInputs = this.fullCommand.split(" ");
         if (typeOfCommand.equals("todo")) {
             if (splitInputs.length == 1) {
-                throw new DukeException("OOPS! The description of a todo cannot be empty.");
+                throw new DukeException("Ooh la la! The description of a todo cannot be empty.");
             }
             return executeToDo(tasks);
         } else if (typeOfCommand.equals("deadline")) {
             if (splitInputs.length == 1) {
-                throw new DukeException("OOPS! The description of a deadline cannot be empty.");
+                throw new DukeException("Ooh la la! The description of a deadline cannot be empty.");
             }
             return executeDeadline(tasks);
         } else if (typeOfCommand.equals("event")) {
             if (splitInputs.length == 1) {
-                throw new DukeException("OOPS! The description of an event cannot be empty.");
+                throw new DukeException("Ooh la la! The description of an event cannot be empty.");
             }
             return executeEvent(tasks);
         } else {
-            throw new DukeException("OOPS! Sorry, I have no idea what that means :(");
+            throw new DukeException("Ooh la la! Pardon, I have no idea what that means :(");
         }
     }
 
@@ -55,7 +55,7 @@ public class AddCommand extends Command {
     public String executeToDo(TaskList tasks) {
         String response;
         String toPrint = tasks.addByCommand(fullCommand, "todo");
-        response = "Sure! I've added this todo: \n" + toPrint + "\n" + "Now you have a whopping "
+        response = "Oui oui! I've added this todo: \n" + toPrint + "\n" + "Now you have a whopping "
                 + tasks.size() + " task(s) in the list.";
         return response;
     }
@@ -70,7 +70,7 @@ public class AddCommand extends Command {
     public String executeDeadline(TaskList tasks) {
         String response;
         String toPrint = tasks.addByCommand(fullCommand, "deadline");
-        response = "Sure! I've added this deadline: \n" + toPrint + "\n" + "Now you have a whopping "
+        response = "Oui oui! I've added this deadline: \n" + toPrint + "\n" + "Now you have a whopping "
                 + tasks.size() + " task(s) in the list.";
         return response;
     }
@@ -84,7 +84,7 @@ public class AddCommand extends Command {
     public String executeEvent(TaskList tasks) {
         String response;
         String toPrint = tasks.addByCommand(fullCommand, "event");
-        response = "Sure! I've added this event: \n" + toPrint + "\n" + "Now you have a whopping "
+        response = "Oui oui! I've added this event: \n" + toPrint + "\n" + "Now you have a whopping "
                 + tasks.size() + " task(s) in the list.";
         return response;
     }

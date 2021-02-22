@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
     private static TaskList tasks;
@@ -62,7 +61,7 @@ public class Duke {
         } catch (DukeException ex) {
             ui.showError(ex.getMessage());
         } catch (IOException ex) {
-            System.out.println("Oops! Something went wrong: " + ex.getMessage());
+            System.out.println("Ooh lah lah! Something went wrong: " + ex.getMessage());
         }
     }
 
@@ -70,7 +69,7 @@ public class Duke {
         try {
             fh.writeToFile(tasks);
         } catch (IOException ex) {
-            System.out.println("Oops! Something went wrong: " + ex.getMessage());
+            System.out.println("Ooh lah lah! Something went wrong: " + ex.getMessage());
         }
     }
 

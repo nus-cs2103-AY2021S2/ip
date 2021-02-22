@@ -25,7 +25,7 @@ public class ListCommand extends Command {
         String response;
         String[] splitInputs = this.fullCommand.split(" ");
         if (splitInputs.length == 0) {
-            throw new DukeException("OOPS! Please enter a command or say bye so I can go back to sleep!");
+            throw new DukeException("Ooh lah lah! Please enter a command or say bye so I can go back to sleep!");
         }
         response = "Here are the tasks in your list:\n" + tasks.listAllTasks();
         return response;

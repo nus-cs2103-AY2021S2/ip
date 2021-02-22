@@ -25,16 +25,16 @@ public class RescheduleCommand extends Command {
         String response;
         String[] splitInputs = this.fullCommand.split(" ");
         if (splitInputs.length == 1) {
-            throw new DukeException("Please enter a task to reschedule and the date to " +
+            throw new DukeException("Ooh lah lah! Please enter a task to reschedule and the date to " +
                     "reschedule it to!");
         }
         if (splitInputs.length == 2) {
-            throw new DukeException("Please enter a date to reschedule the task to!");
+            throw new DukeException("Ooh lah lah! Please enter a date to reschedule the task to!");
         }
         int taskNo = Integer.parseInt(splitInputs[1]) - 1;
         String newDateAndTime = fullCommand.substring(13);
         Task rescheduledTask = tasks.rescheduleTask(tasks, taskNo, newDateAndTime);
-        response = "Alright! I've rescheduled the following task: \n"
+        response = "Oui oui! I've rescheduled the following task: \n"
                 + rescheduledTask.toString();
         return response;
     }
