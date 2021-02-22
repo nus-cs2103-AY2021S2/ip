@@ -91,11 +91,11 @@ The year of the date must be larger than 0.
 
 Format:
 
-`event [description] /by [YYYY-MM-DD]`
+`event [description] /at [YYYY-MM-DD]`
 
 Example of usage:
 
-`event Midterm test /at 2021-02-18`
+`event Lunch with family /at 2021-02-20`
 
 Expected outcome:
 
