@@ -21,8 +21,9 @@ public class Seashell {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Take in user input and executes the command, then return the response from Seashell as a string
+     * @param input command input by user
+     * @return response to user input from Seashell
      */
     public String getResponse(String input) {
         try {
@@ -40,7 +41,6 @@ public class Seashell {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
