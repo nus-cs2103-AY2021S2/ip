@@ -1,7 +1,7 @@
 package seashell;
 
 import java.util.Scanner;
-
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import seashell.command.Command;
 
@@ -27,7 +27,11 @@ public class Seashell {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-            return command.execute(this.taskListObj, this.saveHandler);
+            if (command.isExit()) {
+                Platform.exit();
+            }
+            String response = command.execute(this.taskListObj, this.saveHandler);
+            return response;
         } catch (SeashellException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -47,21 +51,4 @@ public class Seashell {
 
         return textToAdd;
     }
-
-//    protected void start() {
-//        ui.showWelcome();
-//        Scanner sc = new Scanner(System.in);
-//        Parser parser = new Parser();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            String input = sc.nextLine();
-//            try {
-//                Command command = parser.parse(input);
-//                command.execute(this.taskListObj, this.saveHandler);
-//                isExit = command.isExit();
-//            } catch (SeashellException e) {
-//                ui.showError(e.getMessage());
-//            }
-//        }
-//    }
 }

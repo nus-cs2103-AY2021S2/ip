@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import seashell.Seashell;
+import seashell.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -28,6 +29,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getSeashellDialog(Ui.showWelcome(), seashellImage)
+        );
     }
 
     public void setSeashell(Seashell seashell) {

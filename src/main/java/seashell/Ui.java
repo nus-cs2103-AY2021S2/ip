@@ -1,10 +1,11 @@
 package seashell;
 
 public class Ui {
-    public static final String HELP_TEXT = "Welcome to Seashells! You can start by trying out some of these commands"
+    public static final String HELP_TEXT = "Welcome to Seashells! Here is a list of commands you can do and its descriptions:"
             + "\n todo <task name> - add a todo task"
             + "\n deadline <task name> /by <datetime> - add a deadline task"
             + "\n event <task name> /at <datetime> - add an event task"
+            + "\n list - list out the tasks that are currently in the task list"
             + "\n done <task index> - mark the task at the specified index as done"
             + "\n delete <task index> - remove the task at the specified index from the list"
             + "\n clear - clears the task list"
