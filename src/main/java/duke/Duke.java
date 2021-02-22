@@ -10,6 +10,7 @@ public class Duke {
     private TaskList tasks;
 
     public Duke(String filePath) {
+        assert filePath.length() > 0 : "filePath cannot be empty";
         storage = new Storage(filePath);
         ui = new Ui();
         parser = new Parser();
