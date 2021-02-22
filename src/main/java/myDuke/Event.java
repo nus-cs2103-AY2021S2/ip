@@ -11,12 +11,12 @@ public class Event extends Task {
     }
 
     @Override
-    public Event setAsDone() {
+    Event setAsDone() {
         return new Event(this.date, this.info, true);
     }
 
     @Override
-    public Event setAsUndone() {
+    Event setAsUndone() {
         return new Event(this.date, this.info, false);
     }
 

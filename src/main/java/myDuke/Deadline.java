@@ -14,12 +14,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Deadline setAsDone() {
+    Deadline setAsDone() {
         return new Deadline(this.deadline, this.info, true);
     }
 
     @Override
-    public Deadline setAsUndone() {
+    Deadline setAsUndone() {
         return new Deadline(this.deadline, this.info, false);
     }
 

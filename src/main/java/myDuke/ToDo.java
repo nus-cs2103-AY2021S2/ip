@@ -10,12 +10,12 @@ class ToDo extends Task {
     }
 
     @Override
-    public ToDo setAsDone() {
+    ToDo setAsDone() {
         return new ToDo(this.info, true);
     }
 
     @Override
-    public ToDo setAsUndone() {
+    ToDo setAsUndone() {
         return new ToDo(this.info, false);
     }
 

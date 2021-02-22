@@ -3,7 +3,7 @@ package myDuke;
 /**
  * Represents a Task that contains its information/description and a done/not-done status
  */
-public abstract class Task {
+public class Task {
     String info;
     boolean isDone;
 
@@ -20,13 +20,17 @@ public abstract class Task {
      * Marks the current task object as done and returns it as a new Task object.
      * @returns new done Task object.
      */
-    public abstract Task setAsDone();
+    Task setAsDone() {
+        return new Task(this.info, true);
+    }
 
     /**
      * Marks the current task object as undone and returns it as a new Task object.
      * @returns new undone Task object.
      */
-    public abstract Task setAsUndone();
+    Task setAsUndone() {
+        return new Task(this.info, false);
+    }
 
     @Override
     public String toString() {
