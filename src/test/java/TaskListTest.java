@@ -13,7 +13,7 @@ public class TaskListTest {
 
     @Test
     public void testAddTask() {
-        Task t = new ToDo(Priority.HIGH, "run");
+        Task t = new ToDo(Priority.LOW, "run");
         taskListTest.addTask(new ToDo(Priority.LOW, "run"));
         assertEquals(t.toString(), taskListTest.getList().get(0).toString());
     }
@@ -29,6 +29,6 @@ public class TaskListTest {
     public void testMarkTask() throws DukeException {
         taskListTest.addTask(new ToDo(Priority.LOW, "run"));
         taskListTest.markTask(0);
-        assertEquals("\u2713", taskListTest.getList().get(0).getStatusIcon());
+        assertEquals("O", taskListTest.getList().get(0).getStatusIcon());
     }
 }

@@ -13,12 +13,11 @@ public class ParserTest {
     @Test
     public void testParse() throws DukeException {
         Assertions.assertTrue(p.parse("list") instanceof PrintListCommand);
-        Assertions.assertTrue(p.parse("todo run") instanceof AddCommand);
+        Assertions.assertTrue(p.parse("todo H run") instanceof AddCommand);
         Assertions.assertTrue(p.parse("done 1") instanceof DoneCommand);
         Assertions.assertTrue(p.parse("delete 1") instanceof DeleteCommand);
-        Assertions.assertTrue(p.parse("deadline run /by 1999-12-19 23:24") instanceof AddCommand);
-        Assertions.assertTrue(p.parse("event run /at 1999-12-19 23:21") instanceof AddCommand);
-        Assertions.assertTrue(p.parse("bye") instanceof ExitCommand);
+        Assertions.assertTrue(p.parse("deadline L run /by 1999-12-19 23:24") instanceof AddCommand);
+        Assertions.assertTrue(p.parse("event M run /at 1999-12-19 23:21") instanceof AddCommand);
         try {
             p.parse("asd");
         } catch (Exception e) {
