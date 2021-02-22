@@ -80,7 +80,7 @@ class TaskList {
         String dukeMessage = "";
         int indexToDelete = index;
         if (this.tasks.size() < indexToDelete) {
-            dukeMessage += "Invalid index";
+            dukeMessage += "Invalid input for delete command, invalid index";
             return dukeMessage;
         }
         dukeMessage += "Noted. I've removed this task:\n" + " ";
