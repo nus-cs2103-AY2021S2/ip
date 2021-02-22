@@ -10,14 +10,22 @@ package duke;
  */
 
 public class Duke {
-    public static void main(String[] args) {
 
-        Ui ui = new Ui();
+    final CommandList commandList;
+
+    public Duke() {
         Storage storage = new Storage();
-        CommandList commandList = new CommandList(storage);
+        this.commandList = new CommandList(storage);
+    }
+    public void run() {
+        Ui ui = new Ui();
         Parser parser = new Parser(commandList);
 
         ui.printGreeting();
         parser.parseAll();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
