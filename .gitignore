@@ -25,3 +25,4 @@ junit-jupiter-params-5.4.2.jar
 junit-platform-commons-1.4.2.jar
 junit-platform-engine-1.4.2.jar
 opentest4j-1.1.1.jar
+*.txt
