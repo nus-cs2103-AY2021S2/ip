@@ -2,7 +2,6 @@
 
 ## Description
 
-### 
 Kobe is a desktop chatbot app for managing tasks, optimised with both a Command Line Interface (CLI)
 and packaged with a Graphical User Interface (GUI).
 
