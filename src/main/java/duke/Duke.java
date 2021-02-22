@@ -1,5 +1,6 @@
 package duke;
 
+import duke.commands.ErrorCommand;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -32,6 +33,14 @@ public class Duke {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
+            File directory = new File("data");
+            directory.mkdir();
+            File file = new File(filePath);
+            try {
+                file.createNewFile();
+            } catch (IOException ex){
+                new ErrorCommand(tasks, ex.getMessage());
+            }
         }
     }
 

@@ -60,4 +60,4 @@ Example of usage: `find career fair`
 Tells Duke to find if your have any duke related to career fair.
 
 ## Acknowledgements
-The images of Pikachu and Psyduck are reproduced from https://premierespeakers.com/pikachu and https://sonicpokemon.fandom.com/wiki/Psyduck respectively
+The images of Pikachu and Psyduck are reproduced from https://premierespeakers.com/pikachu and https://sonicpokemon.fandom.com/wiki/Psyduck respectively.

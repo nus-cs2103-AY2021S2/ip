@@ -1,0 +1,5 @@
+T | 1 | study
+D | 0 | report submission | 2021-03-28
+E | 0 | career fair | 2021-03-14
+E | 0 | project meeting | 2021-03-24
+D | 1 | oral presentation | 2021-03-12
