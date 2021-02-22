@@ -1,0 +1,5 @@
+T|1|minuman
+T|1|ayah
+T|1|abcde
+T|1|meki
+T|0|ayam
