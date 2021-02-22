@@ -81,7 +81,6 @@ public class Ui {
             for (int i = 0; i < tasksArray.size(); i++) {
 //                sb.append(String.format("%d. %s", (i + 1), tasksArray.get(i).toString()) + "\n");
                 sb.append(String.valueOf(i + 1) + ". " + tasksArray.get(i).toString() + "\n");
-                System.out.println(sb.toString());
             }
             return sb.toString();
         }
