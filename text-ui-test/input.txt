@@ -1,8 +1,8 @@
 list
 todo dishes
-deadline submission /by June 6th
-deadline submission /by 2020-06-06
-event play soccer /at 2020-03-04
+deadline another submission /by June 6th
+deadline another submission /by 2020-06-06
+event play table tennis /at 2020-03-04
 list
 done
 done 0
@@ -21,4 +21,6 @@ delete 0
 delete 10
 delete 1
 list
+find play
+find table tennis
 bye

@@ -2,12 +2,8 @@ T @ 0 @ dishes
 D @ 1 @ submission  @ 2020-06-06
 E @ 0 @ play soccer  @ 2020-03-04
 T @ 1 @ dishes
-D @ 0 @ submission  @ 2020-06-06
-E @ 0 @ play soccer  @ 2020-03-04
+D @ 0 @ another submission  @ 2020-06-06
+E @ 0 @ play table tennis @ 2020-03-04
 T @ 0 @ dishes
-D @ 0 @ submission  @ 2020-06-06
-D @ 0 @ submission  @ 2020-06-06
-E @ 0 @ play soccer  @ 2020-03-04
-T @ 0 @ dishes
-D @ 0 @ submission  @ 2020-06-06
-E @ 0 @ play soccer  @ 2020-03-04
+D @ 0 @ another submission  @ 2020-06-06
+E @ 0 @ play table tennis  @ 2020-03-04

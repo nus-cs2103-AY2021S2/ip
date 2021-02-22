@@ -129,6 +129,13 @@ public class MyDuke {
                             + "eg, deadline return book /by 2020-01-01");
         }
     }
+    static void finderChecker(String[] inputArr) throws NoKeywordException {
+        if (inputArr.length == 1) {
+            throw new NoKeywordException(
+                    "Paikia Bot: you want to find what task, limpeh need more information ah. "
+                            + "input 'find <keyword>. eg, find party");
+        }
+    }
 }
 
 /**
@@ -278,6 +285,31 @@ class Parser {
                                 + getParsedInput()[1].split("/", 2)[1],
                         "Paikia Bot: the format should be liddis: yyyy-mm-dd, eg. 2020-03-02"
                 });
+            }
+            break;
+        case "find":
+            try {
+                MyDuke.finderChecker(getParsedInput());
+                String keyword = this.input.split(" ", 2)[1];
+                List<Task> searchResultList = new ArrayList<>();
+                for (Task t : tasks.getTaskList()) {
+                    if (t.info.contains(keyword)) {
+                        searchResultList.add(t);
+                    }
+                }
+                int searchResultCounter = 1;
+                String[] tempSearchResultArr = new String[100];
+                if (searchResultList.isEmpty()) { // improved implementation in case list is empty, gives a clear output
+                    ui.showListEmptyMsg();
+                } else {
+                    for (Task t : searchResultList) { // changed String s to Task t
+                        tempSearchResultArr[searchResultCounter - 1] = searchResultCounter + ". " + t.toString();
+                        searchResultCounter++;
+                    }
+                    ui.printSearchResultList(keyword, tempSearchResultArr);
+                }
+            } catch (NoKeywordException e) {
+                ui.printErrorMsg(e.getMessage());
             }
             break;
         default:
@@ -466,7 +498,17 @@ class Ui {
     void print(String[] sArr) {
         System.out.println(DASH);
         for (String s : sArr) {
-            // Level-2 adjustments
+            if (s != null) {
+                System.out.println(s);
+            }
+        }
+        System.out.println(DASH);
+    }
+
+    void print(String description, String[] sArr) {
+        System.out.println(DASH);
+        System.out.println(description);
+        for (String s : sArr) {
             if (s != null) {
                 System.out.println(s);
             }
@@ -553,14 +595,15 @@ class Ui {
     void printTasksInList(String[] tasksArr) {
         print(tasksArr);
     }
+
+    void printSearchResultList(String keyword, String[] tasksArr) {
+        print("Paikia Bot: dis is your search result for '" + keyword + "'", tasksArr);
+    }
 }
 
-<<<<<<< HEAD
 /**
  * Represents a Task that contains its information/description and a done/not-done status
  */
-=======
->>>>>>> branch-A-CodingStandard
 class Task {
     String info;
     boolean isDone;
@@ -724,6 +767,12 @@ class NoEventException extends MyDukeException {
 
 class NoDeadlineException extends MyDukeException {
     NoDeadlineException(String s) {
+        super(s);
+    }
+}
+
+class NoKeywordException extends MyDukeException {
+    NoKeywordException(String s) {
         super(s);
     }
 }
