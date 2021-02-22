@@ -1,16 +1,8 @@
 package myDuke;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Represents a Personal Assistant Chatbot with that interacts with the user with the characteristics
@@ -23,7 +15,7 @@ public class MyDuke {
     static Ui ui;
     static String DATA_SAVE_FILE_DIR = "../data/saveFile.txt";
 
-    MyDuke(String filePath) {
+    public MyDuke(String filePath) {
         ui = new Ui();
         ui.showGreetingMsg();
         storage = new Storage(filePath);
@@ -39,30 +31,30 @@ public class MyDuke {
         }
     }
 
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-        MyDuke myDuke = new MyDuke(DATA_SAVE_FILE_DIR);
-        ui.askForUserInput();
-
-        String input = ui.getInput(sc);
-        Parser parser = new Parser(input, storage, tasks, ui);
-
-        while (!parser.isGoodbye()) {
-            parser.handleInput();
-            input = ui.getInput(sc);
-            parser = parser.parseNextInput(input);
-        }
-        ui.showByeMsg();
-
-        try {
-            storage.saveToFile(tasks.getTaskList());
-        } catch (IOException e) {
-            String newDir = "../data/saveFile.txt";
-            ui.printErrorMsg("Something went wrong: " + e.getMessage());
-        }
-        sc.close();
-    }
+//    public static void main(String[] args) {
+//
+//        Scanner sc = new Scanner(System.in);
+//        MyDuke myDuke = new MyDuke(DATA_SAVE_FILE_DIR);
+//        ui.askForUserInput();
+//
+//        String input = ui.getInput(sc);
+//        Parser parser = new Parser(input, storage, tasks, ui);
+//
+//        while (!parser.isGoodbye()) {
+//            parser.handleInput();
+//            input = ui.getInput(sc);
+//            parser = parser.parseNextInput(input);
+//        }
+//        ui.showByeMsg();
+//
+//        try {
+//            storage.saveToFile(tasks.getTaskList());
+//        } catch (IOException e) {
+//            String newDir = "../data/saveFile.txt";
+//            ui.printErrorMsg("Something went wrong: " + e.getMessage());
+//        }
+//        sc.close();
+//    }
 
     /**
      * Checks if the user has provided the index number in the input.
@@ -138,6 +130,23 @@ public class MyDuke {
                             + "input 'find <keyword>. eg, find party");
         }
     }
+
+
+    public String getResponse(String input) {
+        Parser parser = new Parser(input, storage, tasks, ui);
+        parser.handleInput();
+
+        try {
+            storage.saveToFile(tasks.getTaskList());
+        } catch (IOException e) {
+            String newDir = "../data/saveFile.txt";
+            ui.printErrorMsg("Something went wrong: " + e.getMessage());
+        }
+
+        return "Duke heard: " + input;
+    }
+
+
 }
 
 

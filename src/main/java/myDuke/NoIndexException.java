@@ -1,7 +1,7 @@
 package myDuke;
 
 public class NoIndexException extends MyDukeException {
-    NoIndexException(String s) {
+    public NoIndexException(String s) {
         super(s);
     }
 }

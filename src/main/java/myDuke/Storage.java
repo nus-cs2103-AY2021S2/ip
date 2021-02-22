@@ -17,7 +17,7 @@ public class Storage {
 
     String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -31,7 +31,7 @@ public class Storage {
      * @throws DateTimeParseException if the String argument to be parsed into DateTime is invalid.
      * @returns a list of Tasks collated from the input data file.
      */
-    List<Task> loadTasks() throws FileNotFoundException, InvalidArgException,
+    public List<Task> loadTasks() throws FileNotFoundException, InvalidArgException,
             NumberFormatException, InvalidTypeException, DateTimeParseException {
 
         File f = new File(this.filePath); // create a File for the given file path
@@ -62,10 +62,10 @@ public class Storage {
 
     /**
      * Save tasks from the taskList and update the input data file.
-     * @param list Tasklist from the MyDuke class.
+     * @param list Tasklist from the myDuke.MyDuke class.
      * @throws FileNotFoundException if there are I/O errors whilst creating the FileWriter object.
      */
-    void saveToFile(List<Task> list) throws IOException {
+    public void saveToFile(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task t : list) {
             int doneStatus = t.isDone ? 1 : 0;
@@ -85,7 +85,7 @@ public class Storage {
     /**
      * Save tasks from the taskList and update the input data file in a new directory.
      * @throws FileNotFoundException if there is I/O errors whilst creating the FileWriter object.
-     * @param list Tasklist from the MyDuke class.
+     * @param list Tasklist from the myDuke.MyDuke class.
      * @param newDir new String directory for the input data file to be saved.
      */
     void saveToFile(List<Task> list, String newDir) throws IOException {

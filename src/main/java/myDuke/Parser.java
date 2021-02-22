@@ -22,7 +22,7 @@ public class Parser {
         this.ui = ui;
     }
 
-    Parser(String input, Storage storage, TaskList tasks, Ui ui) {
+    public Parser(String input, Storage storage, TaskList tasks, Ui ui) {
         this.input = input;
         this.storage = storage;
         this.tasks = tasks;
@@ -34,7 +34,7 @@ public class Parser {
      * @param input next String input to be parsed.
      * @return Parser object containing the new input.
      */
-    Parser parseNextInput(String input) {
+    public Parser parseNextInput(String input) {
         return new Parser(input, storage, tasks, ui);
     }
 
@@ -42,7 +42,7 @@ public class Parser {
      * Checks for loop terminating condition in main method (if input is "bye")
      * @return boolean result of input.equals("bye").
      */
-    boolean isGoodbye() {
+    public boolean isGoodbye() {
         return this.input.equals("bye");
     }
 
@@ -58,7 +58,7 @@ public class Parser {
      * Handles the input according to instructions stated by the input, utilises the ui methods to print
      * respective response messages as output to the users (eg. when list is empty, when there are caught exceptions).
      */
-    void handleInput() {
+    public void handleInput() {
         switch (getParsedInput()[0]) {
             case "list":
                 int counter = 1;

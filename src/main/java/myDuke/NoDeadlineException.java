@@ -1,7 +1,7 @@
 package myDuke;
 
 public class NoDeadlineException extends MyDukeException {
-    NoDeadlineException(String s) {
+    public NoDeadlineException(String s) {
         super(s);
     }
 }

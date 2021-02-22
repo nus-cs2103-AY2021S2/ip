@@ -16,7 +16,7 @@ public class Ui {
         System.out.println(DASH);
     }
 
-    String getInput(Scanner sc) {
+    public String getInput(Scanner sc) {
         System.out.print("You: ");
         String input = sc.nextLine();
         System.out.println(input);
@@ -44,15 +44,15 @@ public class Ui {
         System.out.println(DASH);
     }
 
-    void showGreetingMsg() {
+    public void showGreetingMsg() {
         print("Pai Kia Bot: Eh harlo! Call me Pai Kia Bot.");
     }
 
-    void showFileLoadSuccessMsg() {
+    public void showFileLoadSuccessMsg() {
         print("Pai Kia Bot: Got ur input file, baik la");
     }
 
-    void showLoadingError() {
+    public void showLoadingError() {
         print(new String[] {
                 "Pai Kia Bot: I cannot find ur input file sia, could be becuz",
                 "1) u never create file because u r new user, in that case, just continue using this program and i "
@@ -62,11 +62,11 @@ public class Ui {
         });
     }
 
-    void askForUserInput() {
+    public void askForUserInput() {
         print("Pai Kia Bot: how u want me to help u?");
     }
 
-    void printErrorMsg(String errorMsg) {
+    public void printErrorMsg(String errorMsg) {
         print(errorMsg);
     }
 
@@ -115,7 +115,7 @@ public class Ui {
         print("Paikia Bot: wrong input format leh, can try again onot?");
     }
 
-    void showByeMsg() {
+    public void showByeMsg() {
         print("Pai Kia Bot: Leave so soon ah? Ok can limpeh help u save your list "
                 + "in [root]/data as saveFile.txt, i go sleep first");
     }

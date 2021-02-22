@@ -1,7 +1,7 @@
 package myDuke;
 
 public class NoKeywordException extends MyDukeException {
-    NoKeywordException(String s) {
+    public NoKeywordException(String s) {
         super(s);
     }
 }

@@ -1,7 +1,7 @@
 package myDuke;
 
 public class NoToDoException extends MyDukeException {
-    NoToDoException(String s) {
+    public NoToDoException(String s) {
         super(s);
     }
 }

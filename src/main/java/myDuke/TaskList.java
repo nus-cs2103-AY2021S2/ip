@@ -10,11 +10,11 @@ public class TaskList {
 
     List<Task> taskList;
 
-    TaskList(List<Task> taskList) {
+    public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
@@ -56,7 +56,7 @@ public class TaskList {
      * Retrieves the taskList.
      * @return the taskList.
      */
-    List<Task> getTaskList() {
+    public List<Task> getTaskList() {
         return this.taskList;
     }
 
