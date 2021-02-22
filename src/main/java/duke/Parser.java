@@ -42,6 +42,8 @@ public class Parser {
             case "deadline":
                 // Fallthrough
             case "event":
+                // Fallthrough
+            case "fixedDur":
                 tasks.addTask(cmd);
                 int numOfTasks = tasks.getNumOfTasks();
                 return ui.getAddTaskMsg(tasks.getTaskString(numOfTasks), numOfTasks);

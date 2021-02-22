@@ -59,11 +59,16 @@ public class TaskList {
             String description = temp[0];
             String by = temp[1];
             task = new Deadline(description, by);
-        } else {
+        } else if (type.equals("event")) {
             String[] temp = rest.split(" /at ");
             String description = temp[0];
             String at = temp[1];
             task = new Event(description, at);
+        } else {
+            String[] temp = rest.split(" /dur ");
+            String description = temp[0];
+            String duration = temp[1];
+            task = new FixedDurationTask(description, duration);
         }
         return task;
     }
