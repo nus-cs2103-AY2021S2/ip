@@ -2,9 +2,9 @@ package quackers.command;
 
 import quackers.QuackersException;
 import quackers.storage.Storage;
+import quackers.task.Todo;
 import quackers.tasklist.TaskList;
 import quackers.ui.Ui;
-import quackers.task.Todo;
 
 /**
  * Represents the command to add a To-do task.

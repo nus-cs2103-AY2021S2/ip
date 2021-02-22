@@ -1,12 +1,12 @@
 package quackers.command;
 
+import java.time.LocalDateTime;
+
 import quackers.QuackersException;
 import quackers.storage.Storage;
+import quackers.task.Event;
 import quackers.tasklist.TaskList;
 import quackers.ui.Ui;
-import quackers.task.Event;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents the command to add an Event task.

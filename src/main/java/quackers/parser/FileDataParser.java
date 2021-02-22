@@ -1,18 +1,18 @@
 package quackers.parser;
 
-import quackers.QuackersException;
-import quackers.ui.Ui;
-import quackers.task.Deadline;
-import quackers.task.Event;
-import quackers.task.Task;
-import quackers.task.Todo;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import quackers.QuackersException;
+import quackers.task.Deadline;
+import quackers.task.Event;
+import quackers.task.Task;
+import quackers.task.Todo;
+import quackers.ui.Ui;
 
 /**
  * Represents the storage parser.
@@ -22,8 +22,10 @@ public class FileDataParser {
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final Pattern COMMAND_TYPE_PATTERN = Pattern.compile("^\\[(T|D|E)\\]");
     private static final Pattern TODO_DATA_PATTERN = Pattern.compile("\\[(T)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+)");
-    private static final Pattern DEADLINE_DATA_PATTERN = Pattern.compile("\\[(D)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+) \\(by: (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})\\)");
-    private static final Pattern EVENT_DATA_PATTERN = Pattern.compile("\\[(E)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+) \\(at: (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})\\)");
+    private static final Pattern DEADLINE_DATA_PATTERN = Pattern.compile(
+            "\\[(D)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+) \\(by: (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})\\)");
+    private static final Pattern EVENT_DATA_PATTERN = Pattern.compile(
+            "\\[(E)\\]\\[(\\*|\\s)\\] ([a-zA-Z0-9\\s]+) \\(at: (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})\\)");
 
     /**
      * Parses a list of raw text lines and generate a TaskList from it.

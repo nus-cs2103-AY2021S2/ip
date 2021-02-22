@@ -2,9 +2,9 @@ package quackers.command;
 
 import quackers.QuackersException;
 import quackers.storage.Storage;
+import quackers.task.Task;
 import quackers.tasklist.TaskList;
 import quackers.ui.Ui;
-import quackers.task.Task;
 
 /**
  * Represents the command to delete a task.

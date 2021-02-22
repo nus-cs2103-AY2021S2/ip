@@ -1,13 +1,24 @@
 package quackers.parser;
 
-import quackers.QuackersException;
-import quackers.ui.Ui;
-import quackers.command.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import quackers.QuackersException;
+import quackers.command.AddDeadlineCommand;
+import quackers.command.AddEventCommand;
+import quackers.command.AddTodoCommand;
+import quackers.command.ByeCommand;
+import quackers.command.Command;
+import quackers.command.DeleteTaskCommand;
+import quackers.command.FindTasksCommand;
+import quackers.command.ListTasksCommand;
+import quackers.command.MarkTaskAsDoneCommand;
+import quackers.command.MarkTaskAsUndoneCommand;
+import quackers.command.StatsCommand;
+import quackers.command.UsageCommand;
+import quackers.ui.Ui;
 
 /**
  * Represents the command parser.
@@ -15,15 +26,18 @@ import java.util.regex.Pattern;
 public class CommandParser {
 
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private static final Pattern COMMAND_TYPE_PATTERN = Pattern.compile("usage|bye|list|find|stats|todo|deadline|event|delete|done");
+    private static final Pattern COMMAND_TYPE_PATTERN = Pattern.compile(
+            "usage|bye|list|find|stats|todo|deadline|event|delete|done");
     private static final Pattern USAGE_PATTERN = Pattern.compile("usage");
     private static final Pattern BYE_PATTERN = Pattern.compile("bye");
     private static final Pattern LIST_TASKS_PATTERN = Pattern.compile("list");
     private static final Pattern FIND_TASKS_PATTERN = Pattern.compile("find ([a-zA-Z0-9\\s]+)");
     private static final Pattern STATS_PATTERN = Pattern.compile("stats");
     private static final Pattern ADD_TODO_PATTERN = Pattern.compile("todo ([a-zA-Z0-9\\s]+)");
-    private static final Pattern ADD_DEADLINE_PATTERN = Pattern.compile("deadline ([a-zA-Z0-9\\s]+) /by (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})");
-    private static final Pattern ADD_EVENT_PATTERN = Pattern.compile("event ([a-zA-Z0-9\\s]+) /at (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})");
+    private static final Pattern ADD_DEADLINE_PATTERN = Pattern.compile(
+            "deadline ([a-zA-Z0-9\\s]+) /by (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})");
+    private static final Pattern ADD_EVENT_PATTERN = Pattern.compile(
+            "event ([a-zA-Z0-9\\s]+) /at (\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2})");
     private static final Pattern DELETE_TASK_PATTERN = Pattern.compile("delete ([0-9]+)");
     private static final Pattern MARK_TASK_AS_DONE_PATTERN = Pattern.compile("done ([0-9]+)");
     private static final Pattern MARK_TASK_AS_UNDONE_PATTERN = Pattern.compile("undone ([0-9]+)");

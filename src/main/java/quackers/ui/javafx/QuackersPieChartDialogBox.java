@@ -2,10 +2,6 @@ package quackers.ui.javafx;
 
 import java.io.IOException;
 
-import quackers.task.Deadline;
-import quackers.task.Event;
-import quackers.task.Todo;
-import quackers.tasklist.TaskList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +10,10 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import quackers.task.Deadline;
+import quackers.task.Event;
+import quackers.task.Todo;
+import quackers.tasklist.TaskList;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a PieChart
@@ -27,7 +27,8 @@ public class QuackersPieChartDialogBox extends HBox {
 
     private QuackersPieChartDialogBox(TaskList taskList, Image image) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/QuackersPieChartDialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    MainWindow.class.getResource("/view/QuackersPieChartDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

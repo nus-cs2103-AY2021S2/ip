@@ -40,11 +40,11 @@ public class Ui {
     private static final String TASK_LIST_EMPTY = "There isn't any task found in the list.";
     private static final String TASK_ADD_SUCCESS = "has been successfully added to the list.";
     private static final String TASK_DELETE_SUCCESS = "has been successfully removed from the list.";
-    private static final String TASK_DELETE_FAILURE = "How do you want me to remove something that doesn't even exist?";
+    private static final String TASK_DELETE_FAILURE = "I can't remove something that doesn't even exist...";
     private static final String TASK_MARK_DONE_SUCCESS = "has been successfully marked as completed.";
-    private static final String TASK_MARK_DONE_FAILURE = "How do you want me to mark something that doesn't even exist?";
+    private static final String TASK_MARK_DONE_FAILURE = "I can't mark something that doesn't even exist...";
     private static final String TASK_MARK_UNDONE_SUCCESS = "has been successfully marked as incomplete.";
-    private static final String TASK_MARK_UNDONE_FAILURE = "How do you want me to mark something that doesn't even exist?";
+    private static final String TASK_MARK_UNDONE_FAILURE = "I can't mark something that doesn't even exist...";
 
     /**
      * Formats any given message into an error message.

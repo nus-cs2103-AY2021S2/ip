@@ -1,13 +1,13 @@
 import java.io.IOException;
 
-import quackers.Quackers;
-import quackers.ui.javafx.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import quackers.Quackers;
+import quackers.ui.javafx.MainWindow;
 
 /**
  * A GUI for Quackers using FXML.
