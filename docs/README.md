@@ -1,10 +1,10 @@
 # User Guide
 
-## What is MouMou? 
+## What is Oui? 
 
-MouMou is a desktop application that functions as a planner, allowing you to keep track of your tasks in a task list. 
+Oui is a desktop application that functions as a planner, allowing you to keep track of your tasks in a task list. 
 It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-MouMou functions like a chatbot. If you can type fast, MouMou can help you keep track of your tasks even more efficiently than
+Oui functions like a chatbot. If you can type fast, Oui can help you keep track of your tasks even more efficiently than
 traditional GUI applications.
 
 ## Table of Contents 
@@ -26,9 +26,9 @@ traditional GUI applications.
 
 
 ## Quick start 
-1. Ensure you have Java `11` or above installed in your Computer. 
-1. Download the latest `MouMou.jar` from [here](https://github.com/mesyeux/ip/releases/tag/v0.2).
-1. Copy the file to the folder you want to use as the *home folder* for your MouMou application.
+1. Ensure you have Java `11` installed in your Computer. 
+1. Download the latest `oui.jar` from [here](https://github.com/mesyeux/ip/releases/tag/0.2).
+1. Copy the file to the folder you want to use as the *home folder* for your Oui application.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
 
 ![Startup Screenshot](images/startup.jpg)
@@ -149,7 +149,7 @@ Examples:
 * `reschedule 3 2021-02-15 1600-1800` will reschedule the 3rd task (must be a deadline) within the task list to 15th Feb 2021 4PM-6PM.
 
 ### Saving the data 
-MouMou's data is automatically saved in the hard disk upon exiting using the `bye` command. There is no need to save manually.
+Oui's data is automatically saved in the hard disk upon exiting using the `bye` command. There is no need to save manually.
 
 ### Exiting the program 
 Exits the program with all tasks in the task list saved.
@@ -162,7 +162,7 @@ Format: `bye`
 Q: How do I transfer my data to another Computer? 
 
 A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
-the data of your previous MouMou home folder.
+the data of your previous Oui home folder.
 
 
 ## Command summary
