@@ -2,25 +2,64 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import command.Command;
+import command.CommandDetails;
 import command.DukeCommand;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+
 import utility.Parser;
 
 public class ParserTest {
 
     @Test
-    public void parseCommandForByeTest() {
+    public void parseCommandForInvalid() {
+        try {
+            Command c = Parser.parseCommand("   abcdefg i love damith").getCommand();
+            assertEquals(Command.INVALID, c);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void parseCommandForFind() {
+        try {
+            DukeCommand dukeCommand = Parser.parseCommand("find lovexoxo");
+            assertEquals(Command.FIND, dukeCommand.getCommand());
+            assertEquals(new CommandDetails(Command.FIND, "lovexoxo"), dukeCommand.getDetails());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void parseCommandForDelete() {
+        try {
+            DukeCommand dukeCommand = Parser.parseCommand("delete 10");
+            assertEquals(Command.DELETE, dukeCommand.getCommand());
+            assertEquals(new CommandDetails(Command.DELETE, "10"), dukeCommand.getDetails());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void parseCommandForTag() {
+        try {
+            DukeCommand dukeCommand = Parser.parseCommand("tag add \"CS2103T_tP\" intenseAF");
+            assertEquals(Command.TAG, dukeCommand.getCommand());
+            assertEquals(new CommandDetails(Command.TAG, "add", "CS2103T_tP", "intenseAF"), dukeCommand.getDetails());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void parseCommandForBye() {
         try {
             Command c = Parser.parseCommand("bye").getCommand();
-            assertEquals(c, Command.BYE);
+            assertEquals(Command.BYE, c);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -28,85 +67,60 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommandForDoneTest() {
+    public void parseCommandForDone() {
 
         try {
-            Command c = Parser.parseCommand("done 1").getCommand();
-            assertEquals(c, Command.DONE);
+            DukeCommand dukeCommand = Parser.parseCommand("done 1");
+            assertEquals(Command.DONE, dukeCommand.getCommand());
+            assertEquals(new CommandDetails(Command.DONE, "1"), dukeCommand.getDetails());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
     }
     @Test
-    public void parseCommandForToDoTest() {
+    public void parseCommandForToDo() {
 
         try {
             DukeCommand c = Parser.parseCommand("todo todo1");
-            assertEquals(c.getCommand(), Command.TODO);
-            assertEquals(c.getDetails(), "todo1");
-            assertEquals(Parser.parseRemainder(c.getCommand(), c.getDetails()),
-                    new Todo("todo1"));
+            assertEquals(Command.TODO, c.getCommand());
+            assertEquals(new CommandDetails(Command.TODO, "todo1"), c.getDetails());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
     }
     @Test
-    public void parseCommandForDeadlineTest() {
+    public void parseCommandForDeadline() {
         try {
             DukeCommand c = Parser.parseCommand("deadline deadline1 /by 2020-04-13");
-            assertEquals(c.getCommand(), Command.DEADLINE);
-            assertEquals(c.getDetails(), "deadline1 /by 2020-04-13");
-            assertEquals(Parser.parseRemainder(c.getCommand(), c.getDetails()),
-                    new Deadline("deadline1", LocalDate.parse("2020-04-13")));
+            assertEquals(Command.DEADLINE, c.getCommand());
+            assertEquals(new CommandDetails(Command.DEADLINE, "deadline1", "2020-04-13"), c.getDetails());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
     }
     @Test
-    public void parseCommandForEventTest() {
+    public void parseCommandForEvent() {
         try {
             DukeCommand c = Parser.parseCommand("event event1 /at 2020-04-13 2-4pm");
-            assertEquals(c.getCommand(), Command.EVENT);
-            assertEquals(c.getDetails(), "event1 /at 2020-04-13 2-4pm");
-            assertEquals(Parser.parseRemainder(c.getCommand(), c.getDetails()),
-                    new Event("event1", LocalDate.parse("2020-04-13"), "2-4pm"));
+            assertEquals(Command.EVENT, c.getCommand());
+            assertEquals(new CommandDetails(Command.EVENT, "event1", "2020-04-13", "2-4pm"), c.getDetails());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
     }
     @Test
-    public void parseCommandForListTest() {
+    public void parseCommandForList() {
         try {
             Command c = Parser.parseCommand("list").getCommand();
-            assertEquals(c, Command.LIST);
+            assertEquals(Command.LIST, c);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-    }
-    @Test
-    public void parseDeadlineTest() {
-        try {
-            DukeCommand dukeCommand = Parser.parseCommand("deadline deadline1 /by 2021-01-20");
-            Task deadline = Parser.parseRemainder(dukeCommand.getCommand(), dukeCommand.getDetails());
-            assertEquals(deadline.toString(), new Deadline("deadline1", LocalDate.parse("2021-01-20")).toString());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    @Test
-    public void parseEventTest() {
-        try {
-            DukeCommand dukeCommand = Parser.parseCommand("event event1 /at 2021-01-20 2-4pm");
-            Task event = Parser.parseRemainder(dukeCommand.getCommand(), dukeCommand.getDetails());
-            assertEquals(event.toString(), new Event("event1", LocalDate.parse("2021-01-20"), "2-4pm").toString());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 

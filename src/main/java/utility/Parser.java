@@ -1,19 +1,15 @@
 package utility;
 
-import java.time.LocalDate;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import command.Command;
 import command.CommandDetails;
-import duke.Tag;
-import task.Deadline;
-import command.DukeCommand;
+
 import duke.DukeException;
-import task.Event;
-import task.Task;
-import task.Todo;
+import duke.Tag;
+
+import command.DukeCommand;
 
 /**
  * Parser is involved with parsing user commands in Duke.
@@ -82,7 +78,6 @@ public class Parser {
                 throw new DukeException("Missing arguments for tag");
             }
 
-            Tag tagAction;
             String inputDetails = new String(params[1]);
             int startIndexOfTaskDesc = inputDetails.indexOf(" \"");
             int endIndexOfTaskDesc = inputDetails.indexOf("\" ");
@@ -93,11 +88,7 @@ public class Parser {
             String taskDescription = inputDetails.substring(startIndexOfTaskDesc + 2, endIndexOfTaskDesc);
             String tagMode = inputDetails.stripLeading().substring(0, startIndexOfTaskDesc);
             String tag = inputDetails.stripTrailing().substring(endIndexOfTaskDesc + 1).stripLeading();
-            if (tagMode.equals("add")) {
-                tagAction = Tag.ADD;
-            } else if (tagMode.equals("delete")) {
-                tagAction = Tag.DELETE;
-            } else {
+            if (!tagMode.equals("add") && !tagMode.equals("delete")) {
                 throw new DukeException("OOPS! tag is missing some arguments!");
             }
 
@@ -112,7 +103,7 @@ public class Parser {
      * Parses a DukeCommand further if necessary.
      * @param command a Command
      * @param details Additional details on the command
-     * @return the Task the user intends to create
+     * @return a CommandDetails parsed from the user's input
      * @throws Exception if user's input for Todo, Event and Deadline from the enum Command is not acceptable.
      */
     public static CommandDetails parseRemainder(Command command, String details) throws Exception {

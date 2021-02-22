@@ -4,8 +4,12 @@ import java.time.LocalDate;
 
 import duke.Tag;
 
+/**
+ * Represents the additional details parsed from the user's input
+ */
 public class CommandDetails implements CommandDetailsExtractable {
 
+    private final Command command;
     private Tag tagAction;
     private String taskDescription;
     private String tag;
@@ -14,7 +18,13 @@ public class CommandDetails implements CommandDetailsExtractable {
     private String eventTime;
     private String findKeyword;
 
+    /**
+     * Creates a CommandDetails object
+     * @param command the Command parsed from the user's input
+     * @param strings string arguments parsed from the user's input
+     */
     public CommandDetails(Command command, String ...strings) {
+        this.command = command;
         switch (command) {
         case DONE:
         case DELETE:
@@ -86,5 +96,27 @@ public class CommandDetails implements CommandDetailsExtractable {
     @Override
     public String getFindKeyword() {
         return findKeyword;
+    }
+
+    public Command getCommand() {
+        return command;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else {
+            boolean isEqualCommand = command.equals(((CommandDetails) obj).getCommand());
+            boolean isEqualTag = tag.equals(((CommandDetails) obj).getTag());
+            boolean isEqualTagAction = tagAction == ((CommandDetails) obj).getTagAction();
+            boolean isEqualIndex = indexForListDoneOrDelete == ((CommandDetails) obj).getIndexForListDoneOrDelete();
+            boolean isEqualDeadline = deadline.equals(((CommandDetails) obj).getDeadline());
+            boolean isEqualEventTime = eventTime.equals(((CommandDetails) obj).getEventTime());
+            boolean isEqualFindKeyword = findKeyword == ((CommandDetails) obj).getFindKeyword();
+
+            return obj instanceof CommandDetails && isEqualCommand && isEqualTag && isEqualTagAction && isEqualIndex
+                    && isEqualDeadline && isEqualEventTime && isEqualFindKeyword;
+        }
     }
 }

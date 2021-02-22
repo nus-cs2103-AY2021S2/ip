@@ -1,7 +1,5 @@
 package command;
 
-import java.util.List;
-
 /**
  * Represents a Command and more details for that Command.
  */
