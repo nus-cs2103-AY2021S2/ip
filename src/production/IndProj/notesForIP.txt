@@ -1,0 +1,24 @@
+
+TODOS:
+- put every class into a package
+- add linter
+- credit James
+
+
+instanceOf may be useful for handling objects of the same superclass
+
+
+JAMES CODE WEEK 2:
+DRY
+
+return (isDone ? "[X]" : "[ ]"); 
+
+WEEK 3 NOTES:
+
+Junit tests should only have one test per method
+[csharp]WhatAreWeTesting_InWhatConditions_WhatAreExpectedResult[/csharp]
+E.g. LogIn_ExistingUsernameWithIncorrectPassword_ShouldReturnMessageWrongPassword.
+JUNIT tests should be for public methods which are "contracts"
+Tests should be done in isolation. IE find a way to test only ONE method and ONE class. Use stubs
+
+
