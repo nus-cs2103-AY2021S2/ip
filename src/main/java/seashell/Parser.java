@@ -6,6 +6,7 @@ import seashell.task.TaskType;
 public class Parser {
 
     protected static Command parse(String input) throws SeashellException {
+        assert !input.isEmpty();
         if (input.stripTrailing().equals("bye")) {
             return new ExitCommand();
         } else if (input.stripTrailing().equals("list")) {
