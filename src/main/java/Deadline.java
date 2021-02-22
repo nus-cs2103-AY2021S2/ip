@@ -60,6 +60,13 @@ public class Deadline extends Task {
                                 DateTimeFormatter.ofPattern("hh:mma")) + ")";
     }
 
+    /**
+     * Changes the date and time of this deadline.
+     * @param newDateAndTime the desired date and time the deadline is to be rescheduled to
+     * @return a deadline with the new date and timing
+     * @throws DukeException if the user enters a time range instead of a single deadline timing
+     */
+
     public Deadline reschedule(String newDateAndTime) throws DukeException {
         String[] splitInputs = newDateAndTime.split(" "); //2021-02-03 1400
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
@@ -67,8 +74,8 @@ public class Deadline extends Task {
         String time = splitInputs[1];
         //if user input contains a time range
         if (time.indexOf("-") != -1) {
-            throw new DukeException("Ooh lah lah! This is a deadline, enter only the timing" +
-                    " of the deadline!");
+            throw new DukeException("Ooh lah lah! This is a deadline, enter only the timing"
+                    + " of the deadline!");
         }
         LocalDate newDateBy = LocalDate.parse(date);
         LocalTime newTimeBy = LocalTime.parse(time, formatter);

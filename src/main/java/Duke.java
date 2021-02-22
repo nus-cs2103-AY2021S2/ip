@@ -26,13 +26,7 @@ public class Duke {
             }
     }
 
-    public static void start() {
-        ui.printStart();
-        readData();
-    }
-
     public static void run() {
-        start();
         String fullCommand = ui.readCommand();
         while (!fullCommand.equals("bye")) {
             try {
@@ -40,10 +34,8 @@ public class Duke {
                 c.execute(tasks);
                 fullCommand = ui.readCommand();
             } catch (DukeException ex) {
-                System.out.println(ex);
-                Ui.printLine();
+                ui.showError(ex.getMessage());
                 fullCommand = ui.readCommand();
-                Ui.printLine();
             }
         }
         end();
@@ -51,7 +43,6 @@ public class Duke {
 
     public static void end() {
         writeData();
-        ui.printEnd();
     }
 
     public static void readData() {
@@ -61,7 +52,7 @@ public class Duke {
         } catch (DukeException ex) {
             ui.showError(ex.getMessage());
         } catch (IOException ex) {
-            System.out.println("Ooh lah lah! Something went wrong: " + ex.getMessage());
+            ui.showError("Ooh lah lah! Something went wrong: " + ex.getMessage());
         }
     }
 
@@ -69,7 +60,7 @@ public class Duke {
         try {
             fh.writeToFile(tasks);
         } catch (IOException ex) {
-            System.out.println("Ooh lah lah! Something went wrong: " + ex.getMessage());
+            ui.showError("Ooh lah lah! Something went wrong: " + ex.getMessage());
         }
     }
 

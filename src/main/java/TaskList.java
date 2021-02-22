@@ -68,7 +68,7 @@ public class TaskList {
      * Adds a task into the task list provided a <code>fullCommand</code> and a <code>typeOfCommand</code>.
      * @param fullCommand the full user input
      * @param typeOfCommand the type of command to be executed
-     * @return
+     * @return the description of the task added
      */
     public String addByCommand(String fullCommand, String typeOfCommand) {
         if (typeOfCommand.equals("todo")) {

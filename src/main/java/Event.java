@@ -62,6 +62,12 @@ public class Event extends Task {
                         + this.endTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
     }
 
+    /**
+     * Changes the date and time of this event.
+     * @param newDateAndTime the desired date and time range the event is to be rescheduled to
+     * @return an event with the new date and time range
+     * @throws DukeException if the user enters a single timing instead of a time range
+     */
     public Event reschedule(String newDateAndTime) throws DukeException {
         String[] splitInputs = newDateAndTime.split(" "); //2021-02-03 1400-1500
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
