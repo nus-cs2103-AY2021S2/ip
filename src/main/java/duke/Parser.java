@@ -24,6 +24,7 @@ public class Parser {
      * @throws DukeException exception when there is an parsing error
      */
     public Command parseCommand(String fullCommand) throws DukeException {
+        assert !fullCommand.isEmpty();
         if (fullCommand.equals("bye")) {
             return new ExitCommand();
         } else if (fullCommand.equals("list")) {

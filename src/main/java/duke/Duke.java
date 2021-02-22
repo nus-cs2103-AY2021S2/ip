@@ -10,10 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,8 +32,9 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/WallE.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Eve.png"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/Galaxy.jpg"));
 
     public Duke() {
         this.ui = new Ui();
@@ -78,7 +77,16 @@ public class Duke extends Application {
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent; ");
         dialogContainer = new VBox();
+        BackgroundImage backgroundimage = new BackgroundImage(backgroundImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+//                new BackgroundSize(385, 535, false, false, false, false));
+        Background background = new Background(backgroundimage);
+        dialogContainer.setBackground(background);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
