@@ -1,3 +1,5 @@
+NOTE: TO BE UPDATED AGAIN
+
 # User Guide
 
 ## Features 
