@@ -1,0 +1,10 @@
+.text-bubble {
+    -fx-background-color: #f7f7f7;
+    -fx-background-radius: 17px;
+    -fx-border-color: #c7c7c7;
+    -fx-border-radius: 17px;
+}
+
+.scroll-pane .viewport {
+    -fx-background-image: url('../images/background.jpg');
+}

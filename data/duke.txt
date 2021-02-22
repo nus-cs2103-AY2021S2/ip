@@ -1,0 +1,10 @@
+T | 1 | join sports club
+T | 0 | hi
+T | 0 | hi hi
+T | 0 | Do my Homework
+T | 0 | hey
+T | 0 | haha
+D | 0 | hi | 2021-02-01
+D | 0 | math hw | 2021-03-04
+E | 0 | Track Festival | 2021-02-20 10:00 - 14:00
+E | 0 | hi | Monday 10:00 - 14:00
