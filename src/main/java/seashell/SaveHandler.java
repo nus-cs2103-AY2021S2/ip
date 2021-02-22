@@ -24,15 +24,18 @@ public class SaveHandler {
             if (!this.isDirExist()) {
                 File dir = new File(DIR_PATH);
                 dir.mkdir();
+                assert dir.isDirectory();
                 File saveFile = new File(FILE_PATH);
                 saveFile.createNewFile();
                 return new ArrayList<>();
             } else { // dir exists already
                 File saveFile = new File(FILE_PATH);
                 if (saveFile.createNewFile()) { // file doesn't exist yet -> create new file
+                    assert saveFile.exists();
                     System.out.println("Save file was not found, new file created: " + saveFile.getName());
                     return new ArrayList<>();
                 } else {
+                    assert saveFile.exists();
                     System.out.println("Existing file loaded");
                     Scanner sc = new Scanner(saveFile);
                     ArrayList<Task> loadedTaskList = new ArrayList<>();
