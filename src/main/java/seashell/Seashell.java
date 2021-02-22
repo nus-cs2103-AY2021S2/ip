@@ -1,7 +1,5 @@
 package seashell;
 
-import java.util.Scanner;
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 import seashell.command.Command;
 
@@ -27,9 +25,6 @@ public class Seashell {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-            if (command.isExit()) {
-                Platform.exit();
-            }
             String response = command.execute(this.taskListObj, this.saveHandler);
             return response;
         } catch (SeashellException e) {

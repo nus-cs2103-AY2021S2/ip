@@ -1,12 +1,14 @@
 package seashell.command;
 
 import seashell.SaveHandler;
+import javafx.application.Platform;
 import seashell.TaskList;
 
 public class ExitCommand implements Command {
 
     @Override
     public String execute(TaskList taskListObj, SaveHandler saveHandler) {
+        Platform.exit();
         return "Bye. Hope to see you again soon!";
     }
 
