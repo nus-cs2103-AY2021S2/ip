@@ -10,7 +10,7 @@ public class Event extends Task {
      * Creates a new Event object with a description and date/time of occurrence.
      *
      * @param description Description of the event.
-     * @param at Date/time that the event is occurring at.
+     * @param at          Date/time that the event is occurring at.
      */
     public Event(String description, String at) {
         super(description);

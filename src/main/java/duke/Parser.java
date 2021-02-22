@@ -9,15 +9,15 @@ public class Parser {
      * Commands accepted are list, done, delete, todo, deadline and event.
      *
      * @param storage Storage object that deals with loading and saving tasks.
-     * @param ui Ui object that deals with interactions with the user.
-     * @param tasks TaskList that contains the list of Task objects.
-     * @param cmd Command entered by the user.
+     * @param ui      Ui object that deals with interactions with the user.
+     * @param tasks   TaskList that contains the list of Task objects.
+     * @param cmd     Command entered by the user.
      * @throws EmptyDescriptionException If the user tries to create a task without a description.
-     * @throws InvalidCommandException If the user enters an invalid command.
-     * @throws WriteTasksException If an error is encountered when trying to write tasks to the hard disk.
+     * @throws InvalidCommandException   If the user enters an invalid command.
+     * @throws WriteTasksException       If an error is encountered when trying to write tasks to the hard disk.
      */
     public String handleInput(Storage storage, Ui ui, TaskList tasks, String cmd) throws
-        EmptyDescriptionException, InvalidCommandException, WriteTasksException {
+            EmptyDescriptionException, InvalidCommandException, WriteTasksException {
         if (cmd.equals("list")) {
             return ui.getListOfTasks(tasks.getPrintableTasks());
         } else if (cmd.equals("bye")) {

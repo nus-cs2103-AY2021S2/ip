@@ -17,8 +17,8 @@ public class Ui {
      * Displays a message confirming that a new task has been added.
      */
     public String getAddTaskMsg(String taskString, int numOfTasks) {
-        return "Got it! I've added this task:\n    " + taskString + "\nNow you have " +
-            numOfTasks + " task" + (numOfTasks == 1 ? "" : "s") + " in the list.";
+        return "Got it! I've added this task:\n    " + taskString + "\nNow you have "
+                + numOfTasks + " task" + (numOfTasks == 1 ? "" : "s") + " in the list.";
     }
 
     /**
@@ -32,8 +32,8 @@ public class Ui {
      * Displays a message confirming that a task has been deleted.
      */
     public String getDeleteTaskMsg(String taskString, int numOfTasksRemaining) {
-        return "Noted! I've removed this task:\n    " + taskString + "\nNow you have " +
-            numOfTasksRemaining + " task" + (numOfTasksRemaining == 1 ? "" : "s") + " in the list.";
+        return "Noted! I've removed this task:\n    " + taskString + "\nNow you have "
+                + numOfTasksRemaining + " task" + (numOfTasksRemaining == 1 ? "" : "s") + " in the list.";
     }
 
     /**

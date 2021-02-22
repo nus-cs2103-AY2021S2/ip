@@ -15,7 +15,7 @@ public class Deadline extends Task {
      * If deadline is not properly formatted in yyyy-mm-dd format, the date attribute will be null.
      *
      * @param description Description of the task.
-     * @param by Deadline that the task is to be completed by (in yyyy-mm-dd format).
+     * @param by          Deadline that the task is to be completed by (in yyyy-mm-dd format).
      */
     public Deadline(String description, String by) {
         super(description);

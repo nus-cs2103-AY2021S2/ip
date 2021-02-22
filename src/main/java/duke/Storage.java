@@ -26,8 +26,8 @@ public class Storage {
      * Loads the task commands from the file specified by filePath and stores each line in an ArrayList.
      * If the file does not exist, a new file is created in that path.
      *
-     * @throws LoadTasksException If an error is encountered when trying to load tasks from the file.
      * @return ArrayList of Strings representing the task commands.
+     * @throws LoadTasksException If an error is encountered when trying to load tasks from the file.
      */
     public ArrayList<String> load() throws LoadTasksException {
         ArrayList<String> taskCommands = new ArrayList<>();
