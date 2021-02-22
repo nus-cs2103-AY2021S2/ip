@@ -1,19 +1,30 @@
 public class Deadline extends Task{
 
-    protected String by;
+    protected TimeWrapper by;
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, TimeWrapper by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
 
     public static Deadline getDeadline(String description, String by) {
-        return new Deadline(description, by, false);
+        return new Deadline(description, TimeWrapper.getTimeWrapper(by), false);
+    }
+
+    @Override
+    public String getContentString(){
+        return String.format("D|%d|%S|%S",isDone ? 1 : 0, this.description, this.by);
+
     }
 
     @Override
     public Task markDone(){
         return new Deadline(description,by,true);
+    }
+
+    @Override
+    public boolean isSameTime(String time) {
+        return by.equals(TimeWrapper.getTimeWrapper(time));
     }
 
     @Override

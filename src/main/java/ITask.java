@@ -12,5 +12,8 @@ public interface ITask {
      */
     boolean isDone();
 
+    String getContentString();
+
+    boolean isSameTime(String date);
 
 }

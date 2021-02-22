@@ -1,17 +1,19 @@
 import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Main Duke chatbot class.
  */
 public class Duke implements IDuke{
     /** List of Tasks */
-    private final ArrayList<ITask> list;
+    private final List<ITask> list;
+    private final TaskManager tm;
 
-    private Duke(ArrayList<ITask> lst){
-
+    private Duke(List<ITask> lst, TaskManager tm){
         this.list = new ArrayList<>(lst);
-
+        this.tm = tm;
     }
 
     /**
@@ -19,8 +21,9 @@ public class Duke implements IDuke{
      *
      * @return New Duke chatbot object.
      */
-    public static Duke getDuke(){
-        return new Duke(new ArrayList<>());
+    public static Duke getDuke(String filePath) {
+        TaskManager tm = TaskManager.getTaskManager(filePath);
+        return new Duke(tm.read(), tm);
     }
 
     /**
@@ -46,9 +49,16 @@ public class Duke implements IDuke{
     @Override
     public IDuke processInput(String input) {
         try {
-            if (input.equals("list")) {
-               display();
-                return this;
+            if (input.matches("^list.*")) {
+                if (input.equals("list")) {
+                    display();
+                    return this;
+                } else if (!input.matches("^list .+")) {
+                    throw new DukeIllegalArgumentException(
+                            "Wrong list command! Format: list Optional:<date>");
+                }
+                handleDisplay(input.split(" ", 2)[1]);
+
             } else if (input.matches("^done.*")) {
                 // Handle done command
                 if (!input.matches("^done -?[0-9]+$")) {
@@ -109,9 +119,10 @@ public class Duke implements IDuke{
      */
     @Override
     public IDuke addTask(ITask task) {
-        ArrayList<ITask> newList = new ArrayList<>(this.list);
+        List<ITask> newList = new ArrayList<>(this.list);
         newList.add(task);
-        return new Duke(newList);
+        tm.save(newList);
+        return new Duke(newList, tm);
     }
 
     /**
@@ -123,6 +134,11 @@ public class Duke implements IDuke{
             throw new IllegalArgumentException("Task id out of bound!");
         }
         return list.get(id - 1);
+    }
+
+    @Override
+    public List<?extends ITask> getTasks(){
+            return this.list;
     }
 
 
@@ -140,6 +156,23 @@ public class Duke implements IDuke{
         System.out.println(sb.toString());
     }
 
+
+    private void handleDisplay(String date) {
+        int[] indexes = IntStream
+                .range(0, list.size())
+                .filter(x -> list.get(x).isSameTime(date))
+                .toArray();
+        if (indexes.length == 0) {
+            System.out.println("Looks like there's no matching task!");
+        } else {
+            StringBuilder sb = new StringBuilder("Here are the task on " + date + ":\n");
+            for (int index : indexes) {
+                sb.append(" ").append(index + 1).append(". ")
+                        .append(list.get(index).toString()).append("\n");
+            }
+            System.out.println(sb.toString());
+        }
+    }
 
 
     /**
@@ -165,7 +198,8 @@ public class Duke implements IDuke{
         }
         ArrayList<ITask> newList = new ArrayList<>(this.list);
         newList.remove(id - 1);
-        return new Duke(newList);
+        tm.save(newList);
+        return new Duke(newList,tm);
     }
 
 
@@ -192,7 +226,8 @@ public class Duke implements IDuke{
             }
             ArrayList<ITask> newList = new ArrayList<>(this.list);
             newList.set(index - 1, newList.get(index - 1).markDone());
-            return new Duke(newList);
+            tm.save(newList);
+            return new Duke(newList, tm);
         }
 
 
@@ -203,6 +238,7 @@ public class Duke implements IDuke{
         IDuke newDuke = done(index);
         System.out.println(
                 "Nice! I've marked this task done!\n" + newDuke.getTask(index));
+        tm.save(newDuke.getTasks());
         return newDuke;
     }
 
@@ -262,7 +298,7 @@ public class Duke implements IDuke{
 
     public static void main(String[] args) {
 
-        IDuke duke = getDuke();
+        IDuke duke = getDuke("data/duke.txt");
         Scanner sc = new Scanner(System.in);
 
         // Greet user

@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,35 +16,64 @@ public class TaskManager {
         this.filePath = filePath;
     }
 
-    private void WriteFile(String fileContent) throws IOException {
+    public static TaskManager getTaskManager(String filePath) {
+        TaskManager tm = new TaskManager(Path.of(filePath));
+        try {
+            tm.createPath();
+            return tm;
+        } catch (IOException e) {
+            System.out.println("Error creating file structure!");
+        }
+        System.exit(1);
+        return null;
+    }
+
+    private void writeFile(String fileContent) throws IOException {
         FileWriter fileWriter = new FileWriter(String.valueOf(this.filePath));
         fileWriter.write(fileContent);
         fileWriter.close();
     }
 
-    private ArrayList<String> ReadFile(String fileName) throws FileNotFoundException {
-        Scanner scanner = new Scanner(fileName);
-        ArrayList<String> fileContent = new ArrayList<>();
-
-        while(scanner.hasNext()){
-            fileContent.add(scanner.nextLine());
-            }
-
-        return fileContent;
-
+    private List<String> readFile() throws FileNotFoundException {
+        File f = new File(String.valueOf(filePath));
+        List<String> taskStringList = new ArrayList<>();
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            taskStringList.add(s.nextLine());
+        }
+        return taskStringList;
     }
 
-    public void save(List<? extends Task> list) {
+    public List<ITask> read() {
+        try {
+            return TaskDecoder.decodeTask(readFile());
+        } catch (FileNotFoundException e) {
+            System.out.println("Error reading from file!");
+            e.printStackTrace();
+        }
+        throw new RuntimeException("Unable to read task list from disk, exiting...");
+    }
+
+    public void save(List<? extends ITask> list) {
         StringBuilder sb = new StringBuilder();
 
         list.forEach(x -> sb.append(x).append("\n"));
         try {
-            WriteFile(sb.toString());
+            writeFile(sb.toString());
         } catch (IOException e) {
-            System.out.println("Unable to save to disk!");
+            System.out.println("Unable to save the task!");
             e.printStackTrace();
         }
 
+    }
+
+    public void createPath() throws IOException{
+            if(!Files.exists(filePath.getParent())){
+                Files.createDirectory(filePath.getParent()) ;
+                Files.createFile(filePath);
+            } else if (!Files.exists(filePath)){
+                Files.createFile(filePath);
+            }
     }
 
 

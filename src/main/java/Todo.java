@@ -1,6 +1,5 @@
 public class Todo extends Task {
 
-    protected String by;
 
     public Todo(String description, boolean isDone) {
         super(description, isDone);
@@ -9,6 +8,12 @@ public class Todo extends Task {
 
     public static Todo getTodo(String description) {
         return new Todo(description, false);
+    }
+
+    @Override
+    public String getContentString(){
+        return String.format("T|%d|%S|%S",isDone ? 1 : 0, this.description);
+
     }
 
     @Override

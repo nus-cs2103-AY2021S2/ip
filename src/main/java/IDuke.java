@@ -1,3 +1,4 @@
+import java.util.List;
 interface IDuke {
 
     /**
@@ -41,5 +42,7 @@ interface IDuke {
      * @return number of tasks in the list
      */
     int numOfTasks();
+
+    List<? extends ITask> getTasks();
 
 }

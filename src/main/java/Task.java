@@ -13,6 +13,10 @@ public class Task implements ITask{
         return new Task(description, false);
     }
 
+    @Override
+    public boolean isSameTime(String time) {
+        return false;
+    }
 
     @Override
     public boolean isDone() {
@@ -22,6 +26,11 @@ public class Task implements ITask{
     @Override
     public ITask markDone(){
         return new Task(this.description,true);
+    }
+
+    @Override
+    public String getContentString(){
+        return String.format("TASK|%d|%s", this.isDone() ? 1 : 0, this.description);
     }
     
     @Override
