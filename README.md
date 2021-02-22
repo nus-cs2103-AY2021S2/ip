@@ -10,7 +10,7 @@
 3. Copy the file to the folder you want to use as the home folder for your Quackers.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
 
-![Image of Quackers](./Ui.png)
+![Image of Quackers](./docs/Ui.png)
 <hr>
 
 ## Features
