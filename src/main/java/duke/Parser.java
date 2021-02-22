@@ -1,5 +1,14 @@
 package duke;
 
+/** Processes user input and possible input-based errors
+ * and sorts to relevant commandList methods or displays
+ * correct error messages to prompt user for correct inputs.
+ *
+ * @author Chia Jia-Xi, Kymie
+ * @version 0.1
+ * @since 2021-02-22
+ */
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -16,6 +25,14 @@ public class Parser {
         this.commandList = commandList;
     }
 
+    /**
+     * Handles and displays specified error
+     * messages as per different cases of
+     * incorrect user input
+     *
+     * @param errorInput Raw user input
+     * @throws DukeException if description is empty or in wrong formats
+     */
     static void errorHandling(String errorInput) throws DukeException {
         String[] inputArr = new String[100];
         if (errorInput.contains(" ")) {
@@ -24,7 +41,6 @@ public class Parser {
             inputArr[0] = errorInput;
         }
 
-        // Empty description
         if ((errorInput.contains("todo")
                 || errorInput.contains("deadline")
                 || errorInput.contains("event"))
@@ -51,6 +67,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Sorts user input accordingly and splits input by
+     * command type to relay formatted input to addCommand
+     *
+     * @see duke.CommandList#addCommand(Command, String) addCommand
+     * @param input Raw user input to add commands
+     * @exception DateTimeParseException if the LocalDate user input is in wrong format
+     */
     void parseAdd(String input) {
         Command command;
         try {
@@ -58,6 +82,7 @@ public class Parser {
                 String[] description = input.split(regexToDo);
                 command = new ToDo(description[1]);
                 commandList.addCommand(command, "T");
+
             } else if (input.contains("deadline")) {
                 String[] inputTime = input.split(regexDeadline);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
@@ -79,6 +104,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Splits input to get id of desired deleted command
+     * to relay formatted input to deleteCommand
+     *
+     * @see duke.CommandList#deleteCommand(int) deleteCommand
+     * @param input Raw user input to delete command
+     */
      void parseDelete(String input) {
         String[] deleteCommand = input.split(separator);
         int id = Integer.parseInt(deleteCommand[1]) - 1;
@@ -91,12 +123,24 @@ public class Parser {
        System.out.println(Ui.spacer);
    }
 
+    /**
+     * Splits input to get id of desired done command
+     * to relay formatted input to doneCommand
+     *
+     * @see duke.CommandList#doneCommand(int) doneCommand
+     * @param input Raw user input to mark command
+     */
     void parseDone(String input) {
        String[] doneCommand = input.split(separator);
        int id = Integer.parseInt(doneCommand[1]) - 1;
        commandList.doneCommand(id);
    }
 
+    /**
+     * Introduces scanner class to read in input
+     * and sorts input into appropriate parsing commands
+     *
+     */
     public void parseAll() {
         Scanner sc = new Scanner(System.in);
         while (true) {
