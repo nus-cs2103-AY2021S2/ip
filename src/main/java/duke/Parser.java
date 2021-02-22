@@ -80,8 +80,8 @@ public class Parser {
     }
 
      void parseDelete(String input) {
-        String[] deleteCommand = input.split(separator);
-        int id = Integer.parseInt(deleteCommand[1]) - 1;
+        String[] deleteInput = input.split(separator);
+        int id = Integer.parseInt(deleteInput[1]) - 1;
         commandList.deleteCommand(id);
     }
 
@@ -92,10 +92,15 @@ public class Parser {
    }
 
     void parseDone(String input) {
-       String[] doneCommand = input.split(separator);
-       int id = Integer.parseInt(doneCommand[1]) - 1;
+       String[] doneInput = input.split(separator);
+       int id = Integer.parseInt(doneInput[1]) - 1;
        commandList.doneCommand(id);
    }
+
+    void parseFind(String input) {
+        String[] findInput = input.split(separator);
+        commandList.findCommand(findInput[1]);
+    }
 
     public void parseAll() {
         Scanner sc = new Scanner(System.in);
@@ -115,6 +120,8 @@ public class Parser {
                     parseDone(input);
                 } else if (input.contains("delete")) {
                     parseDelete(input);
+                } else if(input.contains("find")) {
+                    parseFind(input);
                 } else if (input.contains("todo")
                         || input.contains("deadline")
                         || input.contains("event")) {

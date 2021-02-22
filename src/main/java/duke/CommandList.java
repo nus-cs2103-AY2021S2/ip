@@ -54,4 +54,25 @@ public class CommandList {
         Ui.printDelete(command, size);
         storage.save(storage.filePath, commands);
     }
+
+    public void findCommand(String keyWord) {
+        ArrayList<Command> targetList = new ArrayList<Command>();
+
+        for (int i = 0; i < commands.size(); i++) {
+            Command value = commands.get(i);
+            String description = value.getDescription();
+            if (description.contains(keyWord)) {
+                targetList.add(value);
+            }
+        }
+        if (commands.isEmpty()) {
+            System.out.println("Your list of commands are currently empty!\n");
+        } else {
+            if (targetList.isEmpty()) {
+                Ui.printFind(targetList, false);
+            } else {
+                Ui.printFind(targetList, true);
+            }
+        }
+    }
 }
