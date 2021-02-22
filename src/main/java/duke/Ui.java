@@ -81,5 +81,4 @@ public class Ui {
                 + " commands remaining."
                 + spacer);
     }
-
 }
