@@ -1,19 +1,19 @@
-package duke;
+package command;
 
 /**
  * Represents a Command and more details for that Command.
  */
 public class DukeCommand {
     private final Command command;
-    private final String details;
+    private final CommandDetails details;
 
     /**
      * Creates a DukeCommand
      *
      * @param command a Command
-     * @param details more details relevant to this Command
+     * @param details a CommandDetails that contains details relevant to this Command
      */
-    public DukeCommand(Command command, String details) {
+    public DukeCommand(Command command, CommandDetails details) {
         this.command = command;
         this.details = details;
     }
@@ -30,9 +30,9 @@ public class DukeCommand {
     /**
      * Retrieves the details in this DukeCommand.
      *
-     * @return the details stored as a String
+     * @return the details represented as a CommandDetails
      */
-    public String getDetails() {
+    public CommandDetails getDetails() {
         return details;
     }
 }

@@ -101,7 +101,7 @@ public class TagTest {
             duke.run("deadline CS2103T iP wk5 /by 2020-04-13");
             String inputToDeleteTask = "delete " + duke.getNumOfTasks();
             String result = duke.run(inputToAddTag);
-            System.out.println(duke.run(inputToDeleteTask));
+            duke.run(inputToDeleteTask);
             assertEquals("The tag #tag1 was added to the Task \"CS2103T iP wk5\"", result);
         } catch (Exception ex) {
             ex.printStackTrace();

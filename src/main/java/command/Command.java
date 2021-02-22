@@ -1,4 +1,4 @@
-package duke;
+package command;
 
 /**
  * Represents all types of commands in Duke

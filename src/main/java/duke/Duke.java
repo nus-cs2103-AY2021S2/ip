@@ -4,7 +4,13 @@ import java.util.ListIterator;
 
 import java.nio.file.Paths;
 
+import command.Command;
+import command.CommandDetails;
+import command.DukeCommand;
+import task.Deadline;
+import task.Event;
 import task.Task;
+import task.Todo;
 import utility.Parser;
 import utility.Storage;
 import utility.TaskList;
@@ -36,13 +42,14 @@ public class Duke {
         try {
             taskList = new TaskList(storage.readFromFile());
             DukeCommand dukeCommand = Parser.parseCommand(input);
+            Command command = dukeCommand.getCommand();
+            CommandDetails cmdDetails = dukeCommand.getDetails();
 
-            if (dukeCommand.getCommand() == Command.BYE) {
+            if (command == Command.BYE) {
                 return Ui.showExitUi();
 
-            } else if (dukeCommand.getCommand() == Command.DELETE) {
-                Integer index = Integer.parseInt(dukeCommand.getDetails()) - 1;
-
+            } else if (command == Command.DELETE) {
+                int index = cmdDetails.getIndexForListDoneOrDelete();
                 assert index >= 0;
                 if (index >= taskList.getSize()) {
                     throw new DukeException("No such task in the list");
@@ -54,12 +61,11 @@ public class Duke {
                 assert removedTask != null : "removed task from TaskList is a null";
                 return Ui.showSuccessfulDelete(taskList.getSize(), removedTask);
 
-            } else if (dukeCommand.getCommand() == Command.LIST) {
+            } else if (command == Command.LIST) {
                 return Ui.showList(taskList);
 
-            } else if (dukeCommand.getCommand() == Command.DONE) {
-                Integer index = Integer.parseInt(dukeCommand.getDetails()) - 1;
-
+            } else if (command == Command.DONE) {
+                int index = cmdDetails.getIndexForListDoneOrDelete();
                 assert index >= 0;
                 if (index >= taskList.getSize()) {
                     throw new DukeException("No such task in the list");
@@ -71,16 +77,13 @@ public class Duke {
                 return Ui.showSuccessfulDone(taskList.get(index));
 
 
-            } else if (dukeCommand.getCommand() == Command.INVALID) {
+            } else if (command == Command.INVALID) {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-()");
 
-            } else if (dukeCommand.getCommand() == Command.FIND) {
-                if (dukeCommand.getDetails().length() == 0) {
-                    throw new DukeException("OOPS!!! Search keyword cannot be empty");
-                }
+            } else if (command == Command.FIND) {
 
                 ListIterator<Task> taskIter = taskList.getTasks().listIterator();
-                String keyword = dukeCommand.getDetails();
+                String keyword = cmdDetails.getFindKeyword();
                 TaskList matchedTasks = new TaskList();
 
                 while (taskIter.hasNext()) {
@@ -95,36 +98,16 @@ public class Duke {
                 if (matchedTasks.getSize() == 0) {
                     return Ui.showNoMatchedTasks();
                 }
-
                 assert matchedTasks.getSize() > 0;
                 return Ui.showMatchedTasks(matchedTasks);
 
-            } else if (dukeCommand.getCommand() == Command.TAG) {
-                if (dukeCommand.getDetails().length() == 0) {
-                    throw new DukeException("OOPS!!! tag keyword cannot be empty");
-                }
-
-                Tag tagAction;
-                Task relevantTask = null;
-                String copy = new String(dukeCommand.getDetails());
-                int startIndexOfTaskDesc = copy.indexOf(" \"");
-                int endIndexOfTaskDesc = copy.indexOf("\" ");
-                if (startIndexOfTaskDesc == -1 || endIndexOfTaskDesc == -1) {
-                    throw new DukeException("OOPS! Either the Task Description was not wrapped in inverted commas, or"
-                            + " tag is missing some arguments!");
-                }
-                String taskDescription = copy.substring(startIndexOfTaskDesc + 2, endIndexOfTaskDesc);
-                String tagMode = copy.stripLeading().substring(0, startIndexOfTaskDesc);
-                String tag = copy.stripTrailing().substring(endIndexOfTaskDesc + 1).stripLeading();
-                if (tagMode.equals("add")) {
-                    tagAction = Tag.ADD;
-                } else if (tagMode.equals("delete")) {
-                    tagAction = Tag.DELETE;
-                } else {
-                    throw new DukeException("OOPS! tag is missing some arguments!");
-                }
-
+            } else if (command == Command.TAG) {
                 ListIterator<Task> taskIter = taskList.getTasks().listIterator();
+                Tag tagAction = cmdDetails.getTagAction();
+                String taskDescription = cmdDetails.getTaskDescription();
+                String tag = cmdDetails.getTag();
+                Task relevantTask = null;
+
                 while (taskIter.hasNext()) {
                     Task curr = taskIter.next();
                     assert curr != null : "The list of tasks contains a null";
@@ -144,12 +127,28 @@ public class Duke {
                 storage.writeToFile(taskList);
                 return Ui.showTagHandling(tagAction, tag, relevantTask);
 
-            } else {
-                Task newTask = Parser.parseRemainder(dukeCommand.getCommand(), dukeCommand.getDetails());
-
-                taskList.add(newTask);
+            } else if (command == Command.TODO) {
+                Todo newTodo = new Todo(cmdDetails.getTaskDescription());
+                taskList.add(newTodo);
                 storage.writeToFile(taskList);
-                return Ui.showSuccessfulAdd(taskList.getSize(), newTask);
+                return Ui.showSuccessfulAdd(taskList.getSize(), newTodo);
+
+            } else if (command == Command.DEADLINE) {
+                Deadline newDeadline = new Deadline(cmdDetails.getTaskDescription(), cmdDetails.getDeadline());
+                taskList.add(newDeadline);
+                storage.writeToFile(taskList);
+                return Ui.showSuccessfulAdd(taskList.getSize(), newDeadline);
+
+            } else if (command == Command.EVENT) {
+                Event newEvent = new Event(cmdDetails.getTaskDescription(), cmdDetails.getDeadline(),
+                        cmdDetails.getEventTime());
+                taskList.add(newEvent);
+                storage.writeToFile(taskList);
+                return Ui.showSuccessfulAdd(taskList.getSize(), newEvent);
+
+            } else {
+                throw new AssertionError("Duke has encountered an input in Duke.java that it does not know how to "
+                        + "handle");
             }
 
         } catch (DukeException exp) {
