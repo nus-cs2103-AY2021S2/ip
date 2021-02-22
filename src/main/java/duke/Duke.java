@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Application;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.Collections;
  * The Duke class scans users inputs as command line arguments.
  * It prints the relevant information for the user requests to the CLI.
  */
-//
+
 public class Duke {
 
     private Database database;
@@ -27,10 +29,15 @@ public class Duke {
         this.deadlineTasks = readDeadlineTasks(database.readFile());
     }
 
+    /**
+     * launches the GUI
+     * @param args
+     */
 
     public static void main(String[] args) {
-
+        Application.launch(Main.class, args);
     }
+
 
     /**
      * Reads string as input from database and initialize TaskList with tasks

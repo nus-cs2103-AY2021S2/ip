@@ -23,15 +23,15 @@ public class Parser {
 
     public static String parseTodoCommand(String input, TaskList taskList, Ui ui, Database database){
         try {
-            String s1 = input;
-            if (s1.equals("")) {
+            String inputCopy = input;
+            if (inputCopy.equals("")) {
                 throw new DukeException(" Enter a valid tododwn task");
             } else {
-                char[] chars = s1.toCharArray();
-                String ws = s1.substring(1);
+                char[] chars = inputCopy.toCharArray();
+                String ws = inputCopy.substring(1);
                 String[] parts = ws.split(" ");
                 try{
-                    String desc = s1.substring(1);
+                    String desc = inputCopy.substring(1);
                     Todo newTodo = new Todo(desc);
                     taskList.addTask(newTodo);
                     database.writeTaskToFile(taskList.getList());
@@ -41,7 +41,6 @@ public class Parser {
                 }
             }
         } catch (DukeException e){
-            //change ui.. to return String
             return ui.showErrorMessage(e.getMessage());
         }
     }
@@ -59,12 +58,12 @@ public class Parser {
 
     public static String parseEventCommand(String input, TaskList taskList, Ui ui, Database database){
         try{
-            String s1 = input;
-            if(s1.equals("")){
+            String inputCopy = input;
+            if(inputCopy.equals("")){
                 throw new DukeException(" Enter a valid event task.");
             } else {
                 try {
-                    String wholeString = s1.substring(1);
+                    String wholeString = inputCopy.substring(1);
                     String[] parts = wholeString.split(" /at ");
                     String eventDesc = parts[0];
                     if(parts.length == 1){
@@ -74,7 +73,6 @@ public class Parser {
                         Event newEvent = new Event(eventDesc, eventDetails);
                         taskList.addTask(newEvent);
                         database.writeTaskToFile(taskList.getList());
-                        //
                         return ui.showSuccessfulAddedMessage(taskList.getSize(), newEvent);
                     }
                 } catch(DukeException e) {
@@ -101,12 +99,12 @@ public class Parser {
 
     public static String parseDeadlineCommand(String input, TaskList taskList, Ui ui, Database database, ArrayList<Deadline> deadlines){
         try{
-            String s1 = input;
-            if(s1.equals("")){
+            String inputCopy = input;
+            if(inputCopy.equals("")){
                 throw new DukeException(" Enter valid deadline task after typing deadline.");
             } else {
                 try {
-                    String wholeString = s1.substring(1);
+                    String wholeString = inputCopy.substring(1);
                     String[] parts = wholeString.split(" /by ");
                     String deadlineDesc = parts[0];
                     if(parts.length == 1){
@@ -150,11 +148,11 @@ public class Parser {
 
     public static String parseDoneCommand(String input, TaskList taskList, Ui ui, Database database){
         try{
-            String s1 = input;
-            if(s1.equals("")){
+            String inputCopy = input;
+            if(inputCopy.equals("")){
                 throw new DukeException(" Please specify what task is done");
             } else {
-                String parts[] = s1.split(" ");
+                String parts[] = inputCopy.split(" ");
                 if(parts.length> 2){
                     throw new DukeException(" Please insert valid index to mark as done");
                 } else {
@@ -188,11 +186,11 @@ public class Parser {
      */
     public static String parseFindCommand(String input, TaskList taskList, Ui ui){
         try{
-            String s1 = input;
-            if(s1.equals("")){
+            String inputCopy = input;
+            if(inputCopy.equals("")){
                 throw new DukeException("Please specify a keyword you are trying to find");
             } else {
-                String parts[] = s1.split(" ");
+                String parts[] = inputCopy.split(" ");
                 if(parts.length> 2){
                     throw new DukeException(" Please insert only 1 keyword");
                 } else {
@@ -234,11 +232,11 @@ public class Parser {
      */
     public static String parseDeleteCommand(String input, TaskList taskList, Ui ui, Database database){
         try{
-            String s1 = input;
-            if(s1.equals("")){
+            String inputCopy = input;
+            if(inputCopy.equals("")){
                 throw new DukeException(" Please specify which task to delete");
             } else {
-                String parts[] = s1.split(" ");
+                String parts[] = inputCopy.split(" ");
                 if(parts.length> 2){
                     throw new DukeException(" Please insert valid index to delete");
                 } else {
