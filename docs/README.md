@@ -74,3 +74,6 @@ Format: `delete INDEX`
 - The index refers to the index number shown in the displayed task list.
 - The index must be a positive integer 1, 2, 3, ...
 <hr>
+
+### Saving the data
+Quackers data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.

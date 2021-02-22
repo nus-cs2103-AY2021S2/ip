@@ -10,7 +10,7 @@
 3. Copy the file to the folder you want to use as the home folder for your Quackers.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.
 
-![Image of Quackers](./docs/Ui.png)
+![Image of Quackers](./Ui.png)
 <hr>
 
 ## Features
@@ -59,7 +59,7 @@ Format: `deadline DESCRIPTION /by DATETIME`
 - The datetime argument must conform to the format `YYYY-MM-DD HH:mm`.
 <hr>
 
-### Adding an Event task: `event`
+### Adding aa Event task: `event`
 Adds a Event task to the list of tasks being managed by Quackers.
 
 Format: `event DESCRIPTION /at DATETIME`
@@ -74,3 +74,6 @@ Format: `delete INDEX`
 - The index refers to the index number shown in the displayed task list.
 - The index must be a positive integer 1, 2, 3, ...
 <hr>
+
+### Saving the data
+Quackers data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
