@@ -4,6 +4,17 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    private enum Commands {
+        LIST,
+        TODO,
+        DEADLINE,
+        EVENT,
+        BYE,
+        FIND,
+        DONE,
+        DELETE
+    }
+
 
     /**
      * This constructor create a duke class after loading the tasks from a given file path
@@ -19,11 +30,21 @@ public class Duke {
             taskList = new TaskList();
         }
     }
+    public static String getHelp() {
+        return "You have entered invalid commands! " +
+                "Type 'help' if you are unsure of which commands I can understand:>";
+    }
 
 
 
     public String getResponse(String string) {
         switch (string.toLowerCase()) {
+        case "help":
+            String commandsList = "The commands that I can understand are: \n";
+            for (Commands command : Commands.values()) {
+                commandsList += command.toString() + "\n";
+            }
+            return commandsList;
         case "bye":
             try {
                 storage.writeToFile(taskList, "./data/duke.txt");

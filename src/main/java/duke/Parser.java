@@ -33,7 +33,7 @@ public class Parser {
     public static Pair parseInput(String input, TaskList tasks) {
         String[] inputSplit = input.split(" ");
         if (inputSplit.length < 2) {
-            return new Pair(tasks, "You have entered invalid command!");
+            return new Pair(tasks, Duke.getHelp());
         }
         Task task;
         String message;
@@ -44,7 +44,7 @@ public class Parser {
             TaskList result = tasks.findTask(keyword);
             message = "Here are the matching tasks in your list: \n";
             for (int i = 0; i < result.getSize(); i++) {
-                message += result.getTask(i).toString();
+                message += i+1 + ". " + result.getTask(i).toString();
             }
             break;
         case "done":
@@ -76,7 +76,7 @@ public class Parser {
             message = "Got it. I have added this task: \n" + task.toString();
             break;
         default:
-            message = "You have entered invalid commands!";
+            message = Duke.getHelp();
         }
 
         return new Pair(tasks, message);
