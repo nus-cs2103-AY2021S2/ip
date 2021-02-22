@@ -16,7 +16,7 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 *.class
-data/duke.txt
+src/main/java/data/duke.txt
 
 junit-jupiter-5.4.2.jar
 junit-jupiter-api-5.4.2.jar
