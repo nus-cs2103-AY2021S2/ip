@@ -44,6 +44,6 @@ public class CommandReschedule extends Command {
             newTask.setDone();
         }
         tasks.setTask(taskIndex, newTask);
-        return "I've rescheduled this task:\n" + newTask + tasks.formatNumTasks();
+        return "I've rescheduled this task:\n" + newTask;
     }
 }
