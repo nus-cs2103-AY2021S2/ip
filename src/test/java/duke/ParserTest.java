@@ -25,7 +25,8 @@ public class ParserTest {
             assertEquals(null, parser.parseCommand("deadline Dinner 2019-12-11"));
             fail();
         } catch (DukeException e) {
-            assertEquals(new DukeException("Invalid description of deadline").toString(), e.toString());
+            assertEquals(new DukeException("Invalid input for deadline command, "
+                    + "invalid description of deadline").toString(), e.toString());
         }
     }
 
@@ -36,8 +37,8 @@ public class ParserTest {
             assertEquals(null, parser.parseCommand("todo"));
             fail();
         } catch (DukeException e) {
-            assertEquals(new DukeException("Invalid input, description "
-                    + "of todo cannot be empty").toString(), e.toString());
+            assertEquals(new DukeException("Invalid input for todo command, "
+                    + "description of todo cannot be empty").toString(), e.toString());
         }
     }
 
