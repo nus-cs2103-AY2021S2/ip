@@ -5,8 +5,7 @@ title: User Guide
 description: User Guide for Quackers
 baseurl: "/ip"
 url: "https://deyixtan.github.io"
-
-# Just-the-docs settings
+logo: "./docs/AppIcon.png"
 search_enabled: false
 heading_anchors: true
 aux_links:
@@ -14,4 +13,3 @@ aux_links:
     - "//github.com/deyixtan/ip"
 aux_links_new_tab: false
 color_scheme: dark
-
