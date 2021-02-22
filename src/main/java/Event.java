@@ -62,11 +62,16 @@ public class Event extends Task {
                         + this.endTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
     }
 
-    public Event reschedule(String newDateAndTime) {
+    public Event reschedule(String newDateAndTime) throws DukeException {
         String[] splitInputs = newDateAndTime.split(" "); //2021-02-03 1400-1500
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         String date = splitInputs[0];
         String timeRange = splitInputs[1];
+        //if user did not enter a time range
+        if (timeRange.indexOf("-") == -1) {
+            throw new DukeException("Ooh lah lah! This is an event, please enter the time " +
+                    "range of the event!");
+        }
         String startTime = timeRange.split("-")[0];
         String endTime = timeRange.split("-")[1];
         LocalDate newDate = LocalDate.parse(date);

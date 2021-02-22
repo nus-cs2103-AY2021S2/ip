@@ -31,6 +31,9 @@ public class RescheduleCommand extends Command {
         if (splitInputs.length == 2) {
             throw new DukeException("Ooh lah lah! Please enter a date to reschedule the task to!");
         }
+        if (splitInputs.length == 3) {
+            throw new DukeException("Ooh lah lah! Please enter the timing to reschedule it to!");
+        }
         int taskNo = Integer.parseInt(splitInputs[1]) - 1;
         String newDateAndTime = fullCommand.substring(13);
         Task rescheduledTask = tasks.rescheduleTask(tasks, taskNo, newDateAndTime);

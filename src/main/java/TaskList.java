@@ -188,7 +188,7 @@ public class TaskList {
         return tasksWithKeywords;
     }
 
-    public Task rescheduleTask(TaskList tasks, int taskNo, String newDateAndTime) {
+    public Task rescheduleTask(TaskList tasks, int taskNo, String newDateAndTime) throws DukeException {
         return tasks.get(taskNo).reschedule(newDateAndTime);
     }
 }

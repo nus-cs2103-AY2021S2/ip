@@ -45,7 +45,7 @@ public class Task {
         return this.description;
     }
 
-    public Task reschedule(String fullCommand) {
+    public Task reschedule(String fullCommand) throws DukeException {
         return this;
     }
 
