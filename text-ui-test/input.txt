@@ -1,0 +1,13 @@
+todo TODO 1
+deadline DEADLINE 2 /by SOME TIME
+event EVENT 3 /on SOME TIME
+list
+todo TODO 4
+event EVENT 5 /on SOME TIME
+deadline DEADLINE 6 /by SOME TIME
+list
+done 1
+finish 2
+complete 3
+list
+bye
