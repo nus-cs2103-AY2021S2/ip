@@ -62,9 +62,13 @@ public class QuackersPieChartDialogBox extends HBox {
         int eventCount = taskList.getTaskCount(Event.class);
         int total = todoCount + deadlineCount + eventCount;
 
-        String todoText = String.format("To-do %.2f%%", Double.valueOf(todoCount) / total);
-        String deadlineText = String.format("Deadline %.2f%%", Double.valueOf(deadlineCount) / total);
-        String eventText = String.format("Event %.2f%%", Double.valueOf(eventCount) / total);
+        double todoPercentage = Double.valueOf(todoCount) / total * 100;
+        double deadlinePercentage = Double.valueOf(deadlineCount) / total * 100;
+        double eventPercentage = Double.valueOf(eventCount) / total * 100;
+
+        String todoText = String.format("To-do %.2f%%", todoPercentage);
+        String deadlineText = String.format("Deadline %.2f%%", deadlinePercentage);
+        String eventText = String.format("Event %.2f%%", eventPercentage);
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(

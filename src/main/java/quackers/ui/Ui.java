@@ -14,7 +14,7 @@ public class Ui {
     private static final String PERIOD = ".";
     private static final String DOUBLE_QUOTE = "\"";
     private static final String ERROR_HEADING = "Oh no... ";
-    private static final String INVALID_COMMAND = "I'm not trained with these commands yet...";
+    private static final String INVALID_COMMAND = "I'm not trained with to understand this yet...";
     private static final String GREETING = "Quack quack! I'm Quackers, a duck really good with task management!"
             + NEWLINE + "To know more about what I can do for you, quack 'usage'."
             + NEWLINE + "Is there anything I can do for you today?";
