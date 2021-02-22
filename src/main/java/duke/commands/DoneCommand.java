@@ -33,7 +33,7 @@ public class DoneCommand extends Command{
                         + "description of done cannot be empty.");
             }
             int taskIndex = Integer.parseInt(this.getUserInput()[1]);
-            if (taskIndex > this.getTaskList().size()) {
+            if (taskIndex > this.getTaskList().size() || taskIndex <= 0) {
                 throw new WrongArgumentException("The task " + taskIndex + " does not exists.\n"
                         + "Please indicate a positive task number smaller or equal to "
                         + this.getTaskList().size() + ".");
