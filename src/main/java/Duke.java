@@ -12,18 +12,18 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-            try {
-                if (input.equals("bye")) {
-                    end();
-                    return ui.printEnd();
-                } else {
-                    Command c = Parser.parse(input);
-                    String response = c.execute(tasks);
-                    return response;
-                }
-            } catch (DukeException ex) {
-                return ex.getMessage();
+        try {
+            if (input.equals("bye")) {
+                end();
+                return ui.printEnd();
+            } else {
+                Command c = Parser.parse(input);
+                String response = c.execute(tasks);
+                return response;
             }
+        } catch (DukeException ex) {
+            return ex.getMessage();
+        }
     }
 
     public static void run() {

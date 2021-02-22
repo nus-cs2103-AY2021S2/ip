@@ -30,8 +30,8 @@ public class DeleteCommand extends Command {
         } else if (tasks.size() == 0) {
             throw new DukeException("Ooh lah lah! You can't delete when there are no tasks in the"
                     + " list!");
-        } else if ((Integer.parseInt(splitInputs[1]) > tasks.size()) ||
-                (Integer.parseInt(splitInputs[1]) < 1)) {
+        } else if ((Integer.parseInt(splitInputs[1]) > tasks.size())
+                || (Integer.parseInt(splitInputs[1]) < 1)) {
             throw new DukeException("Ooh lah lah! You've entered an invalid task number.");
         }
         int taskNo = Integer.parseInt(splitInputs[1]) - 1;

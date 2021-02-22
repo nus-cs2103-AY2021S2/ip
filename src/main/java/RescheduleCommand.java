@@ -25,8 +25,8 @@ public class RescheduleCommand extends Command {
         String response;
         String[] splitInputs = this.fullCommand.split(" ");
         if (splitInputs.length == 1) {
-            throw new DukeException("Ooh lah lah! Please enter a task to reschedule and the date to " +
-                    "reschedule it to!");
+            throw new DukeException("Ooh lah lah! Please enter a task to reschedule and the date to "
+                    + "reschedule it to!");
         }
         if (splitInputs.length == 2) {
             throw new DukeException("Ooh lah lah! Please enter a date to reschedule the task to!");

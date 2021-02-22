@@ -75,8 +75,8 @@ public class Event extends Task {
         String timeRange = splitInputs[1];
         //if user did not enter a time range
         if (timeRange.indexOf("-") == -1) {
-            throw new DukeException("Ooh lah lah! This is an event, please enter the time " +
-                    "range of the event!");
+            throw new DukeException("Ooh lah lah! This is an event, please enter the time "
+                    + "range of the event!");
         }
         String startTime = timeRange.split("-")[0];
         String endTime = timeRange.split("-")[1];
