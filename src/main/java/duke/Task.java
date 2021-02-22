@@ -35,7 +35,7 @@ public abstract class Task {
     /**
      * Marks the task as completed.
      */
-    public void markAsDone() {
+    public void setDone() {
         isDone = true;
     }
 

@@ -35,7 +35,7 @@ public class TaskList {
             if (taskCommand.charAt(0) == '#') {
                 taskCommand = taskCommand.substring(1);
                 task = createTask(taskCommand);
-                task.markAsDone();
+                task.setDone();
             } else {
                 task = createTask(taskCommand);
             }
@@ -148,7 +148,7 @@ public class TaskList {
      * @param taskId ID of the task.
      */
     public void markTaskAsDone(int taskId) {
-        tasks.get(taskId - 1).markAsDone();
+        tasks.get(taskId - 1).setDone();
     }
 
     /**
