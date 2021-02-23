@@ -12,7 +12,6 @@ import duke.command.CDone;
 import duke.command.CEvent;
 import duke.command.CList;
 import duke.command.CTodo;
-import duke.command.CDue;
 import duke.command.ICommand;
 
 public class Parser {
