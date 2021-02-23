@@ -50,7 +50,7 @@ public class MyDuke {
         try {
             storage.saveToFile(tasks.getTaskList());
         } catch (IOException e) {
-            String newDir = "../data/saveFile.txt";
+//            String newDir = "../data/saveFile.txt";
             ui.printErrorMsg("Something went wrong: " + e.getMessage());
         }
         sc.close();
@@ -133,18 +133,9 @@ public class MyDuke {
 
 
     public String getResponse(String input) {
-        MyDuke myDuke = new MyDuke(DATA_SAVE_FILE_DIR);
         ui.askForUserInput();
-
         Parser parser = new Parser(input, storage, tasks, ui);
-
-//        try {
-//            storage.saveToFile(tasks.getTaskList());
-//        } catch (IOException e) {
-//            String newDir = "../data/saveFile.txt";
-//            ui.printErrorMsg("Something went wrong: " + e.getMessage());
-//        }
-        parser.handleInput();
+//        parser.handleInput();
         return parser.handleInputStr();
     }
 

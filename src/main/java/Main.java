@@ -12,7 +12,7 @@ import myDuke.MyDuke;
  */
 public class Main extends Application {
 
-    private MyDuke myDuke = new MyDuke("../data/saveFile.txt");
+    private MyDuke myDuke = new MyDuke("saveFile.txt");
 
     @Override
     public void start(Stage stage) {

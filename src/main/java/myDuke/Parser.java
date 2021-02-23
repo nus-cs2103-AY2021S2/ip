@@ -1,5 +1,6 @@
 package myDuke;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class Parser {
                 MyDuke.indexChecker(getParsedInput());
                 int ref = Integer.parseInt(getParsedInput()[1]);
                 Task toRemove = tasks.getTask(ref);
-                tasks.deleteTask(ref - 1);
+                tasks.deleteTask(ref);
                 ui.printDeletedTaskAlert(toRemove.toString(), tasks.getTaskList().size());
             } catch (NoIndexException e) {
                 ui.printErrorMsg(e.getMessage());
@@ -196,14 +197,15 @@ public class Parser {
         switch (getParsedInput()[0]) {
         case "list":
             int counter = 1;
-            String[] tempArr = new String[100];
+            List<String> tempArr = new ArrayList<>();
             if (tasks.getTaskList().isEmpty()) { // improved implementation in case list is empty, gives a clear output
                 return ui.showListEmptyMsgStr();
             } else {
                 for (Task t : tasks.getTaskList()) { // changed String s to Task t
-                    tempArr[counter - 1] = counter + ". " + t.toString();
+                    tempArr.add(counter + ". " + t.toString());
                     counter++;
                 }
+
                 return ui.printTasksInListStr(tempArr);
             }
             case "done":
@@ -226,7 +228,7 @@ public class Parser {
                 MyDuke.indexChecker(getParsedInput());
                 int ref = Integer.parseInt(getParsedInput()[1]);
                 Task toRemove = tasks.getTask(ref);
-                tasks.deleteTask(ref - 1);
+                tasks.deleteTask(ref);
                 return ui.printDeletedTaskAlertStr(toRemove.toString(), tasks.getTaskList().size());
             } catch (NoIndexException e) {
                 return ui.printErrorMsgStr(e.getMessage());
@@ -307,6 +309,12 @@ public class Parser {
                 return ui.printErrorMsgStr(e.getMessage());
             }
         case "bye":
+            try {
+                storage.saveToFile(tasks.getTaskList());
+            } catch (IOException e) {
+//            String newDir = "../data/saveFile.txt";
+                ui.printErrorMsg("Something went wrong: " + e.getMessage());
+            }
             return ui.showByeMsgStr();
         case "sort":
             Collections.sort(tasks.taskList, new TaskListComparator());

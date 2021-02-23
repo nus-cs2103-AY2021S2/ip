@@ -1,5 +1,6 @@
 package myDuke;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -124,8 +125,8 @@ public class Ui {
 
     void printDeletedTaskAlert(String deletedTask, int numOfRemainingTasksInList) {
         print(new String[] {
-                "ok i just help u deleted this task -- " + deletedTask,
-                ". now u got " + numOfRemainingTasksInList + " item(s) in your list ah"
+                "Pai Kia Bot: ok i just help u deleted this task -- " + deletedTask + ". ",
+                "now u got " + numOfRemainingTasksInList + " item(s) in your list ah"
         });
     }
 
@@ -200,6 +201,15 @@ public class Ui {
         String str = "";
         for (String s : tasksArr) {
             str += s + ", ";
+        }
+        return str;
+    }
+
+    String printTasksInListStr(List<String> tasksArr) {
+
+        String str = "";
+        for (String s : tasksArr) {
+            str += s + "\n";
         }
         return str;
     }
