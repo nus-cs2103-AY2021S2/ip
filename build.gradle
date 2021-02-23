@@ -5,9 +5,6 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
-group 'com.nus.duke'
-version '1.0-SNAPSHOT'
-
 repositories {
     mavenCentral()
 }
@@ -18,12 +15,12 @@ java {
 }
 
 checkstyle {
-    toolVersion '8.40'
+    toolVersion = '8.40'
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 application {
-    mainClassName = "com.nus.duke.Main"
+    mainClassName = "com.nus.duke.Launcher"
 }
 
 test {

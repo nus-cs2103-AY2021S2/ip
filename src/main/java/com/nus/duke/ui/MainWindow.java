@@ -3,7 +3,7 @@ package com.nus.duke.ui;
 import java.io.IOException;
 import java.net.URL;
 
-import com.nus.duke.Main;
+import com.nus.duke.Launcher;
 import com.nus.duke.command.Command;
 import com.nus.duke.command.ExitCommand;
 import com.nus.duke.common.Logic;
@@ -41,7 +41,7 @@ public class MainWindow {
 
     public MainWindow(Stage primaryStage, Logic logic) {
         this.logic = logic;
-        URL fileUrl = Main.class.getResource(FXML);
+        URL fileUrl = Launcher.class.getResource(FXML);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(fileUrl);
         fxmlLoader.setController(this);
