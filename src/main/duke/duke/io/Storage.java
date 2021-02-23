@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.SplittableRandom;
 
 import duke.DukeException;
 import duke.DukeList;
@@ -51,11 +52,27 @@ public class Storage {
     private String getDirectory(){
         return System.getProperty("user.dir");
     }
-    public removeTask{}
+    public void removeTask(String toRemove){
+        String newLine = System.getProperty("line.separator");
+        toRemove = toRemove + newLine;
+        setReplacing(toRemove, "", stringBufferOfTasks);
+    }
+    public void setReplacing(String toReplace, String replacement, StringBuffer stringBuffer) throws StringIndexOutOfBoundsException{
+        int start = stringBuffer.indexOf(toReplace);
+        int end = start + toReplace.length();
+        stringBuffer.replace(start,end, replacement);
+    }
+    public void changeText(String toChange, String changeTo){
+        setReplacing(toChange,changeTo,stringBufferOfTasks);
+    }
 
-    public  addText{}
+    public void addText(String toAdd){
+        String newLine = System.getProperty("line.separator");
+        toAdd = toAdd + newLine;
+        stringBufferOfTasks.append(toAdd);
+    }
 
-    public changeText{}
+
     public DukeList load(){
         DukeList dukeList = new DukeList();
         stringBufferOfTasks = new StringBuffer();
