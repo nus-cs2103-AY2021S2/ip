@@ -4,7 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 
 <?import javafx.scene.shape.Circle?>
 <fx:root xmlns:fx="http://javafx.com/fxml/1" alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox"
