@@ -5,3 +5,16 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Added the following task:
+ [T] [X] sleep
+You now have 1 tasks in your list
+
+Added the following task:
+ [D] [X] tosleep 2020-01-01 0001
+You now have 2 tasks in your list
+
+These are the tasks in your list:
+ 1. [T] [X] sleep
+ 2. [D] [X] tosleep 2020-01-01 0001
+
+ Goodbye
