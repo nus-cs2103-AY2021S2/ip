@@ -49,7 +49,7 @@ public class Storage {
                 Deadline deadline = new Deadline(strArray[2].trim(), date);
                 if (strArray[1].trim().equals("[Done]")) {
                     deadline.isDone = true;
-                } else if (strArray[1].trim().equals("[Incompleted]")){
+                } else if (strArray[1].trim().equals("[Incompleted]")) {
                     deadline.isDone = false;
                 }
                 list.addTask(deadline);
