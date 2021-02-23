@@ -77,7 +77,8 @@ public class DateParser {
         LocalDate dateComp;
         LocalTime timeComp;
 
-        if (hasOnlyDateComponent(trimmedUserDateTime) || hasOnlyTimeComponent(trimmedUserDateTime)) {
+        if (hasOnlyDateComponent(trimmedUserDateTime) || hasOnlyTimeComponent(
+                trimmedUserDateTime)) {
             try {
                 timeComp = parseTime(trimmedUserDateTime);
             } catch (DukeDateTimeParserException ex) {
