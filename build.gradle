@@ -50,7 +50,8 @@ application {
 
 shadowJar {
     manifest {
-        attributes "Main-Class": 'duke.Launcher'
+        attributes "Main-Class": 'duke.L' +
+                'auncher'
     }
 }
 
