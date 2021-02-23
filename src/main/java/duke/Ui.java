@@ -22,12 +22,18 @@ public class Ui {
     static String goodbye = "Bye! Hope I was a good dog, "
             + "see you again soon!";
 
-    public static void printGreeting() {
-        System.out.println(logo + spacer + greet + spacer);
+    public static String printGreeting() {
+        return (logo + spacer + greet + spacer);
     }
 
-    static void printGoodbye() {
-        System.out.println(spacer + goodbye + spacer);
+    static String printGoodbye() {
+        return (spacer + goodbye + spacer);
+    }
+
+    static String printGeneralError() {
+        return (spacer
+                + "Doge can't recognise this. Try another command?"
+                + spacer);
     }
 
     static String indexList(ArrayList<Command> xs) {
@@ -39,8 +45,8 @@ public class Ui {
         return result;
     }
 
-    static void printToDo(Command command, int size) {
-        System.out.println(spacer
+    static String printToDo(Command command, int size) {
+        return (spacer
                 + "Mlem I've added a new command for you to do:\n"
                 + command
                 + "\n"
@@ -50,8 +56,8 @@ public class Ui {
                 + spacer);
     }
 
-    static void printDeadline(Command command, int size) {
-        System.out.println(spacer
+    static String printDeadline(Command command, int size) {
+        return (spacer
                 + "Woofers! I've added a new command with a Ded-line:\n"
                 + command
                 + "\n"
@@ -61,8 +67,8 @@ public class Ui {
                 + spacer);
     }
 
-    static void printEvent(Command command, int size) {
-        System.out.println(spacer
+    static String printEvent(Command command, int size) {
+        return (spacer
                 + "Much wow! I've added a new command with an Event:\n"
                 + command
                 + "\n"
@@ -72,8 +78,8 @@ public class Ui {
                 + spacer);
     }
 
-     static void printDone(Command command) {
-        System.out.println(spacer
+     static String printDone(Command command) {
+        return (spacer
                 + "Very Woof! "
                 + "I have completed this commands:\n"
                 + command
@@ -81,8 +87,8 @@ public class Ui {
                 + spacer);
     }
 
-    static void printDelete(Command command, int size) {
-        System.out.println(spacer
+    static String printDelete(Command command, int size) {
+        return (spacer
                 + "Noted! "
                 + "This task has been removed:\n"
                 + command
@@ -93,14 +99,14 @@ public class Ui {
                 + spacer);
     }
 
-    static void printFind(ArrayList<Command> targetList, boolean isFound) {
+    static String printFind(ArrayList<Command> targetList, boolean isFound) {
         if (isFound) {
-            System.out.println(spacer
+            return (spacer
                     + "We found some matching commands:\n"
                     + indexList(targetList)
                     + spacer);
         } else {
-            System.out.println(spacer
+            return (spacer
                     + "Omo :( "
                     + "We could not find anything. "
                     + "Try another keyword?\n"

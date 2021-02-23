@@ -77,52 +77,41 @@ public class Parser {
      * @param input Raw user input to add commands
      * @exception DateTimeParseException if the LocalDate user input is in wrong format
      */
-    void parseAdd(String input) {
+    String parseAdd(String input) {
         Command command;
+        String result = "";
         try {
             if (input.contains("todo")) {
                 String[] description = input.split(regexToDo);
                 command = new ToDo(description[1]);
-                commandList.addCommand(command, "T");
+                result = commandList.addCommand(command, "T");
 
             } else if (input.contains("deadline")) {
                 String[] inputTime = input.split(regexDeadline);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
                 command = new Deadline(inputTime[0].substring(9), parseDate);
-                commandList.addCommand(command, "D");
+                result =  commandList.addCommand(command, "D");
 
             } else if (input.contains("event")) {
                 String[] inputTime = input.split(regexEvent);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
                 command = new Event(inputTime[0].substring(6), parseDate);
-                commandList.addCommand(command, "E");
+                result =  commandList.addCommand(command, "E");
 
             } else {
-
+                result = "An error occurred, did you add the correct command?";
             }
         } catch (DateTimeParseException e) {
             System.out.println("This date doesnt exist! "
                     + "The right format should be in yyyy-mm-dd.");
         }
+        return result;
     }
 
-    /**
-     * Splits input to get id of desired deleted command
-     * to relay formatted input to deleteCommand
-     *
-     * @see duke.CommandList#deleteCommand(int) deleteCommand
-     * @param input Raw user input to delete command
-     */
-     void parseDelete(String input) {
-        String[] deleteInput = input.split(separator);
-        int id = Integer.parseInt(deleteInput[1]) - 1;
-        commandList.deleteCommand(id);
-    }
-
-     void parseList() {
-       System.out.println(Ui.spacer);
-       commandList.printList();
-       System.out.println(Ui.spacer);
+     String parseList() {
+       return (Ui.spacer
+               + commandList.printList()
+               + Ui.spacer);
    }
 
     /**
@@ -132,11 +121,24 @@ public class Parser {
      * @see duke.CommandList#doneCommand(int) doneCommand
      * @param input Raw user input to mark command
      */
-    void parseDone(String input) {
+    String parseDone(String input) {
        String[] doneInput = input.split(separator);
        int id = Integer.parseInt(doneInput[1]) - 1;
-       commandList.doneCommand(id);
+       return commandList.doneCommand(id);
    }
+
+    /**
+     * Splits input to get id of desired deleted command
+     * to relay formatted input to deleteCommand
+     *
+     * @see duke.CommandList#deleteCommand(int) deleteCommand
+     * @param input Raw user input to delete command
+     */
+    String parseDelete(String input) {
+        String[] deleteInput = input.split(separator);
+        int id = Integer.parseInt(deleteInput[1]) - 1;
+        return commandList.deleteCommand(id);
+    }
 
     /**
      * Splits input to get keyWord from user
@@ -145,9 +147,9 @@ public class Parser {
      * @see duke.CommandList#findCommand(String) findCommand
      * @param input Raw user input to mark command
      */
-    void parseFind(String input) {
+    String parseFind(String input) {
         String[] findInput = input.split(separator);
-        commandList.findCommand(findInput[1]);
+        return commandList.findCommand(findInput[1]);
     }
     
     /**
@@ -155,36 +157,34 @@ public class Parser {
      * and sorts input into appropriate parsing commands
      *
      */
-    public void parseAll() {
+    public String parseAll() {
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        String input = sc.nextLine().trim();
+        String result = "";
 
-            String input = sc.nextLine().trim();
+        try {
+            errorHandling(input);
 
-            try {
-                errorHandling(input);
-
-                if (input.equals(terminate)) {
-                    Ui.printGoodbye();
-                    break;
-                } else if (input.equals("list")) {
-                    parseList();
-                } else if (input.contains("done")) {
-                    parseDone(input);
-                } else if (input.contains("delete")) {
-                    parseDelete(input);
-                } else if(input.contains("find")) {
-                    parseFind(input);
-                } else if (input.contains("todo")
-                        || input.contains("deadline")
-                        || input.contains("event")) {
-                    parseAdd(input);
-                } else {
-                }
-            } catch (Exception e) {
-                System.out.println(e);
+            if (input.equals(terminate)) {
+                result = Ui.printGoodbye();
+            } else if (input.equals("list")) {
+                result = parseList();
+            } else if (input.contains("done")) {
+                result = parseDone(input);
+            } else if (input.contains("delete")) {
+                result = parseDelete(input);
+            } else if(input.contains("find")) {
+                result = parseFind(input);
+            } else if (input.contains("todo")
+                    || input.contains("deadline")
+                    || input.contains("event")) {
+                result = parseAdd(input);
+            } else {
             }
+        } catch (Exception e) {
+            System.out.println(e);
         }
         sc.close();
-   }
+        return result;
+    }
 }

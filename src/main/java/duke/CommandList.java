@@ -28,16 +28,18 @@ public class CommandList {
      * and prints each command in ascending order
      *
      */
-     void printList() {
+     String printList() {
+         String result = "";
         if (commands.size() == 0) {
-            System.out.println("Your list of commands are currently empty!\n");
+            result = "Your list of commands are currently empty!\n";
         } else {
             for (int i = 0; i < commands.size(); i++) {
                 Command value = commands.get(i);
-                System.out.println((i + 1) + ". " + value);
+                result += ((i + 1) + ". " + value +"\n");
             }
         }
-    }
+         return result;
+     }
 
     /**
      * Adds and saves a single command to the command list,
@@ -47,18 +49,18 @@ public class CommandList {
      * @param command command of children classes ToDo, Deadline, Event
      * @param commandType identifier to sort command classes
      */
-     void addCommand(Command command, String commandType) {
+     String addCommand(Command command, String commandType) {
         commands.add(command);
         int size = commands.size();
+         storage.save(storage.filePath, commands);
 
-        if (commandType.equals("T")) {
-            Ui.printToDo(command, size);
+         if (commandType.equals("T")) {
+            return Ui.printToDo(command, size);
         } else if (commandType.equals("D")) {
-            Ui.printDeadline(command, size);
+            return Ui.printDeadline(command, size);
         } else {
-            Ui.printEvent(command, size);
+            return Ui.printEvent(command, size);
         }
-        storage.save(storage.filePath, commands);
     }
 
     /**
@@ -69,11 +71,11 @@ public class CommandList {
      * @param id index of command to be marked done in commands list
      * @see duke.Command#markDone() markDone
      */
-     void doneCommand(int id) {
+     String doneCommand(int id) {
         Command command = commands.get(id);
         command.markDone();
-        Ui.printDone(command);
         storage.save(storage.filePath, commands);
+        return Ui.printDone(command);
     }
 
     /**
@@ -84,12 +86,13 @@ public class CommandList {
      * @param id index of command to be marked done in commands list
      * @see duke.Command#markDone() markDone
      */
-     void deleteCommand(int id) {
+     String deleteCommand(int id) {
         Command command = commands.get(id);
         commands.remove(id);
         int size = commands.size();
-        Ui.printDelete(command, size);
         storage.save(storage.filePath, commands);
+        return Ui.printDelete(command, size);
+
     }
 
     /**
@@ -98,8 +101,9 @@ public class CommandList {
      *
      * @param keyWord to match during search for user
      */
-    public void findCommand(String keyWord) {
+    public String findCommand(String keyWord) {
         ArrayList<Command> targetList = new ArrayList<Command>();
+        String result = "";
 
         for (int i = 0; i < commands.size(); i++) {
             Command value = commands.get(i);
@@ -109,13 +113,14 @@ public class CommandList {
             }
         }
         if (commands.isEmpty()) {
-            System.out.println("Your list of commands are currently empty!\n");
+            result = "Your list of commands are currently empty!\n";
         } else {
             if (targetList.isEmpty()) {
-                Ui.printFind(targetList, false);
+                result = Ui.printFind(targetList, false);
             } else {
-                Ui.printFind(targetList, true);
+                result = Ui.printFind(targetList, true);
             }
         }
+        return result;
     }
 }
