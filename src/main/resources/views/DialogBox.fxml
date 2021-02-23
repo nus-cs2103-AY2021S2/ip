@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" type="javafx.scene.layout.HBox"
-  xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
   <padding>
     <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
   </padding>

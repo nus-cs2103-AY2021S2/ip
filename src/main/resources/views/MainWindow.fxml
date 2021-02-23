@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root title="Duke" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Duke" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
   <scene>
     <Scene>
       <VBox alignment="CENTER" focusTraversable="true" prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
