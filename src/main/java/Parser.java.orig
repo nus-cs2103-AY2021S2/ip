@@ -139,7 +139,15 @@ public class Parser {
         TimedTask timedTask = new TimedTask();
         String editedInput;
         String regex;
+<<<<<<< HEAD
+        assert (input.contains(" ")) : "Space between command and task needed!";
+        if (input.contains("todo")) {
+            editedInput = input.substring(4).trim();
+            regex = "";
+        } else if (input.contains("deadline")) {
+=======
         if (input.contains("deadline")) {
+>>>>>>> branch-A-CodeQuality
             editedInput = input.substring(8).trim();
             regex = "/by";
             timedTask = new Deadline();
