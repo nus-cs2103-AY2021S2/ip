@@ -1,5 +1,2 @@
-T @ 0 @ 123
-T @ 0 @ Aadgsadf
-T @ 0 @ caodihfsd
-T @ 0 @ fda8daf
-T @ 0 @ ughreugies
+D @ 1 @ CS1010S submission  @ 2020-06-06
+E @ 0 @ Staraptor Birthday  @ 2020-02-03
