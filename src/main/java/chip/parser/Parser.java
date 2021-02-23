@@ -28,7 +28,7 @@ public class Parser {
         try {
             return Command.valueOf(commandString.trim().toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new UnknownCommandException(commandString.trim());
+            throw new UnknownCommandException();
         }
     }
 }

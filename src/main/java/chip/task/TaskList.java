@@ -81,7 +81,7 @@ public class TaskList {
             }
             break;
         default:
-            throw new UnknownCommandException(command.name());
+            throw new UnknownCommandException();
         }
 
         tasks.add(task);
