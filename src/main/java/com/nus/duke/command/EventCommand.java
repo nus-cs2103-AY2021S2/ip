@@ -3,7 +3,7 @@ package com.nus.duke.command;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.nus.duke.common.DukeDateParserException;
+import com.nus.duke.common.DukeDateTimeParserException;
 import com.nus.duke.data.Event;
 import com.nus.duke.parser.DateParser;
 
@@ -54,8 +54,8 @@ public class EventCommand extends Command {
         try {
             Event event = new Event(description, DateParser.parseDateTime(date));
             return new EventCommand(event);
-        } catch (DukeDateParserException e) {
-            return new IncorrectCommand(IMPROPER_USAGE_FORMAT + "\n" + USAGE_MESSAGE);
+        } catch (DukeDateTimeParserException e) {
+            return new IncorrectCommand(IMPROPER_USAGE_FORMAT + "\n" + e.getLocalizedMessage());
         }
     }
 }
