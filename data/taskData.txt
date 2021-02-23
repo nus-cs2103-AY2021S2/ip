@@ -3,4 +3,5 @@ T|1|sleep
 T|0|sleep
 T|1|sleep
 D|0|cs2106 Tutorial|04 Dec 2021
-E|0|project meeting|23 Dec 2021 03:00 pm|23 Dec 2021 05:00 pm
+E|0|project meeting|23 Dec 2021 03:00 PM|23 Dec 2021 05:00 PM
+E|0|cs2105|21 Dec 2021 03:33 PM|21 Dec 2021 05:55 PM
