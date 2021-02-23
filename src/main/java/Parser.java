@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -7,7 +8,11 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
     private boolean isEnd;
-
+    /**
+     * Constructor method
+     * @param tasklist which contains the Task objects
+     * @param ui which handles the response
+     */
     public Parser(TaskList tasklist, Ui ui) {
         this.command = "";
         this.taskList = tasklist;
@@ -15,14 +20,24 @@ public class Parser {
         this.isEnd = false;
     }
 
+    /**
+     * Method to insert command
+     */
     public void insertCommand(String command) {
         this.command = command;
     }
 
+    /**
+     * Method to check if Duke should stop running
+     * @return a boolean value
+     */
     public boolean isEnd() {
         return this.isEnd;
     }
 
+    /**
+     * Method to parse the different commands of Duke
+     */
     public void process() {
         try {
             if (command.equals("list")) {

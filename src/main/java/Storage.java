@@ -8,7 +8,10 @@ import java.time.format.DateTimeFormatter;
 
 public class Storage {
     private File file;
-
+    /**
+     * Constructor method
+     * @param filePath of the saved file
+     */
     public Storage(String filePath) throws IOException {
         this.file = new File(filePath);
         if (file.createNewFile()) {

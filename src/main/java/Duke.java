@@ -11,13 +11,20 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
 
-
+/**
+ * Main class.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor method
+     * @param filePath of the saved file
+     * @throws IOException if user IO is incorrect
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -54,6 +61,9 @@ public class Duke {
         System.exit(0);
     }*/
 
+    /**
+     * Method to run Duke
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.reply();
@@ -69,6 +79,10 @@ public class Duke {
         System.exit(0);
     }
 
+    /**
+     * Main method of Duke
+     * @param args command line arguments
+     */
     public static void main(String[] args) throws IOException{
         new Duke("data/DukeData.txt").run();
     }
