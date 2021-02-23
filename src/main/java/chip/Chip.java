@@ -84,9 +84,13 @@ public class Chip {
         }
     }
 
-    private String handleFind(String[] tokens) {
-        String[] searchParameters = tokens[1].toLowerCase().split(" ");
-        return Messages.getFilteredTasksMessage(taskList.getFilteredTaskList(searchParameters));
+    private String handleFind(Command command, String[] tokens) throws IncompleteInputException {
+        try {
+            String[] searchParameters = tokens[1].toLowerCase().split("\\s+");
+            return Messages.getFilteredTasksMessage(taskList.getFilteredTaskList(searchParameters));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IncompleteInputException(command);
+        }
     }
 
     private String handleHelp(String[] tokens) {
@@ -124,7 +128,7 @@ public class Chip {
             message = handleDelete(command, tokens);
             break;
         case FIND:
-            message = handleFind(tokens);
+            message = handleFind(command, tokens);
             break;
         case LIST:
             message = Messages.getAllTasksMessage(taskList.getTasks());
