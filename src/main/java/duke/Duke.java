@@ -63,7 +63,6 @@ public class Duke {
         Task newTask;
 
         try {
-            System.out.println(lastCommand);
             switch (Commands.valueOf(keyWordToCompare)) {
             case BYE:
                 storage.writeAllData(tasks, lastCommand, lastDeletedTask);

@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.commands.Commands;
@@ -8,12 +9,7 @@ import duke.commands.Deadline;
 import duke.commands.Event;
 import duke.commands.Task;
 import duke.commands.ToDo;
-import duke.exception.InvalidDeadlineCommandException;
-import duke.exception.InvalidDeleteCommandException;
-import duke.exception.InvalidDoneCommandException;
-import duke.exception.InvalidEventCommandException;
-import duke.exception.InvalidFindCommandException;
-import duke.exception.InvalidToDoCommandException;
+import duke.exception.*;
 
 
 /**
@@ -55,7 +51,8 @@ public class Parser {
      * @see Deadline
      */
     public Deadline parseAddDeadline(String command, TaskList userList) throws InvalidDeadlineCommandException {
-        if (!command.contains(" /by ")) {
+        String commandAndDetail = command.split(" /by ")[0];
+        if (!command.contains(" /by ") || commandAndDetail.length() < "deadline ".length()) {
             throw new InvalidDeadlineCommandException();
         } else {
             Deadline newDeadline = createDeadlineTask(command);
@@ -73,7 +70,8 @@ public class Parser {
      * @see Event
      */
     public Event parseAddEvent(String command, TaskList userList) throws InvalidEventCommandException {
-        if (!command.contains(" /at ")) {
+        String commandAndDetail = command.split(" /at ")[0];
+        if (!command.contains(" /at ") || commandAndDetail.length() < "event ".length()) {
             throw new InvalidEventCommandException();
         } else {
             Event newEvent = this.createEventTask(command);
@@ -145,24 +143,32 @@ public class Parser {
         return toDoTask;
     }
 
-    private Event createEventTask (String command) {
+    private Event createEventTask (String command) throws InvalidEventCommandException {
         String[] eventTimeAndTask = command.split(" /at ");
-        LocalDate eventDate = LocalDate.parse(eventTimeAndTask[1]);
+        try {
+            LocalDate eventDate = LocalDate.parse(eventTimeAndTask[1]);
 
-        int eventDetailStartIndexOffset = 6;
-        String eventDetails = eventTimeAndTask[0].substring(eventDetailStartIndexOffset);
+            int eventDetailStartIndexOffset = 6;
+            String eventDetails = eventTimeAndTask[0].substring(eventDetailStartIndexOffset);
 
-        return new Event(eventDate, eventDetails);
+            return new Event(eventDate, eventDetails);
+        } catch (DateTimeParseException e) {
+            throw new InvalidEventCommandException();
+        }
     }
 
-    private Deadline createDeadlineTask (String command) {
+    private Deadline createDeadlineTask (String command) throws InvalidDeadlineCommandException {
         String[] deadlineAndTask = command.split(" /by ");
-        LocalDate date = LocalDate.parse(deadlineAndTask[1]);
-        int deadlineDetailStartIndexOffset = 9;
-        return new Deadline(date, deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
+        try {
+            LocalDate date = LocalDate.parse(deadlineAndTask[1]);
+            int deadlineDetailStartIndexOffset = 9;
+            return new Deadline(date, deadlineAndTask[0].substring(deadlineDetailStartIndexOffset));
+        } catch (DateTimeParseException e) {
+            throw new InvalidDeadlineCommandException();
+        }
     }
 
-    public boolean parseUndoCommand (String lastCommand, Task deletedTask, TaskList userList) {
+    public boolean parseUndoCommand (String lastCommand, Task deletedTask, TaskList userList) throws DukeException {
         String keyWord = lastCommand.split(" ")[0];
         String keyWordToCompare = keyWord.toUpperCase();
 
