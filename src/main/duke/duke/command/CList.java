@@ -7,11 +7,6 @@ import duke.tasktype.Task;
 import java.util.List;
 
 public class CList implements ICommand {
-    private String input;
-    public CList(String command){
-        this.input = command;
-    }
-
     @Override
     public boolean isBye() {
         return false;
