@@ -11,6 +11,24 @@ Duke's GUI is in the form of a chatbot.
    <img src="Ui.png" />
 </div>
 
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Features](#features)
+  * [Feature Overview](#feature-overview)
+  * [Adding a new deadline: `deadline`](#adding-a-new-deadline-deadline)
+  * [Deleting a task: `delete`](#deleting-a-task-delete)
+  * [Marking a task as completed: `done`](#marking-a-task-as-completed-done)
+  * [Adding a new event: `event`](#adding-a-new-event-event)
+  * [Exiting the application: `exit`](#exiting-the-application-exit)
+  * [Locating a task by description: `find`](#locating-a-task-by-description-find)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [List all tasks: `list`](#list-all-tasks-list)
+  * [Adding a new todo: `todo`](#adding-a-new-todo-todo)
+- [FAQ](#faq)
+  * [Where is the save data stored?](#where-is-the-save-data-stored)
+- [Date/Time Formats](#datetime-formats)
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed in your computer
@@ -149,15 +167,19 @@ Ubuntu/Linux: `/home/${current_user_name}`
 ## Date/Time Formats
 
 The allowed date formats are:
-- `dd-mm-yyyy` (19-02-2021)
-- `dd/mm/yyyy` (19/02/2021)
+
+- `dd-MM-yyyy` (19-02-2021)
+- `dd/MM/yyyy` (19/02/2021)
+- `ddMMyyyy` (19/02/2021)
 - Mon or Monday
-  
+
 The allowed time formats are:
+
 - 12 hour format
-  - `hh[:mm] am|pm`
     - 11PM or 11 PM
     - 11:59PM or 11:59 PM
+    - 1159PM or 1159 PM
 - 24 hour format
-  - `HH:mm or HHmm`
-    - 11:00 or 1100
+    - 23:59 or 2359
+    - 0300 or 300
+    - 0000
