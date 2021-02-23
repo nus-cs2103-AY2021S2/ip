@@ -42,6 +42,7 @@ public class TaskListStorage {
 
     /**
      * Loads the existing taskList from disk.
+     *
      * @return existing taskList or new taskList
      * @throws DukeStorageException on any file access exception
      */
