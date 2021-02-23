@@ -206,6 +206,7 @@ Expected outcome:
 I'll remember your tasks automatically, no need to worry!
 
 # Acknowledgements
+This project is based on the Duke project created by the [SE-EDU initiative](https://se-education.org).
 
 Photo of User
 by [Dušan Veverkolog](https://unsplash.com/@veverkolog?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
@@ -218,3 +219,5 @@ on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_
 Photo of Background
 by [Richard Loader](https://unsplash.com/@fhfpix?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+This site is hosted on GitHub Pages. Theme is modified from [midnight theme](https://github.com/pages-themes/midnight) by [mattgraham](https://twitter.com/michigangraham).
