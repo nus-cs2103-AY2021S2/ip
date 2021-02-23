@@ -18,7 +18,7 @@ public class Storage {
         }
     }
 
-    private static void saveTasks(ArrayList<Task> list, File f) throws IOException {
+    /*public static void saveTasks(TaskList list, File f) throws IOException {
         FileWriter fw = new FileWriter(f);
         for (Task temp : list) {
             if (temp instanceof Deadline) {
@@ -30,9 +30,9 @@ public class Storage {
             }
         }
         fw.close();
-    }
+    }*/
 
-    private static void loadTasks(ArrayList<Task> list, File f) throws IOException {
+    public static void loadTasks(TaskList list, File f) throws IOException {
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
@@ -49,7 +49,7 @@ public class Storage {
                 } else if (strArray[1].trim().equals("[Incompleted]")){
                     deadline.isDone = false;
                 }
-                list.add(deadline);
+                list.addTask(deadline);
             } else if (strArray[0].trim().equals("E")) {
                 Event event = new Event(strArray[2].trim(), strArray[3].trim());
                 if (strArray[1].trim().equals("[Done]")) {
@@ -57,7 +57,7 @@ public class Storage {
                 } else if (strArray[1].trim().equals("[Incompleted]")) {
                     event.isDone = false;
                 }
-                list.add(event);
+                list.addTask(event);
             } else {
                 ToDo todo = new ToDo(strArray[2].trim());
                 if (strArray[1].trim().equals("[Done]")) {
@@ -65,7 +65,7 @@ public class Storage {
                 } else if (strArray[1].trim().equals("[Incompleted]")) {
                     todo.isDone = false;
                 }
-                list.add(todo);
+                list.addTask(todo);
             }
         }
     }

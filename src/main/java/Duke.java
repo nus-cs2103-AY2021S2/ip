@@ -1,5 +1,16 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
+
 
 public class Duke {
 
@@ -13,6 +24,36 @@ public class Duke {
         tasks = new TaskList();
     }
 
+    /*public void run() {
+        Scanner sc = new Scanner(System.in);
+        ui.reply();
+        storage.loadTasks(tasks,);
+        File file = new File("data/DukeData.txt");
+        File dir = new File("data/");
+        try {
+            if(!dir.exists()) {
+                dir.mkdirs();
+            }
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+            storage.loadTasks(tasks, file);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        Parser parser = new Parser(tasks, ui);
+        while (true) {
+            String command = sc.nextLine();
+            parser.insertCommand(command);
+            parser.process();
+            if (parser.isEnd()) {
+                break;
+
+            }
+        }
+        System.exit(0);
+    }*/
+
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.reply();
@@ -23,7 +64,6 @@ public class Duke {
             parser.process();
             if (parser.isEnd()) {
                 break;
-
             }
         }
         System.exit(0);

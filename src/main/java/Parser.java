@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Parser {
     private String command;
@@ -77,6 +78,20 @@ public class Parser {
                 ui.print(remove.toString());
                 Integer numOfTask = taskList.numOfTasks();
                 ui.print("Now you have " + numOfTask.toString() + " tasks in the list.");
+            } else if (command.contains("find")) {
+                String[] find = command.split(" ");
+                String keyword = find[1];
+                ArrayList<Task> output = new ArrayList<>();
+                for (int i = 0; i < taskList.numOfTasks(); i++) {
+                    Task check = taskList.getTask(i);
+                    if (check.getDescription().contains(keyword)) {
+                        output.add(check);
+                    }
+                }
+                ui.print("Here are the matching tasks in your list:");
+                for (int j = 0; j < output.size(); j++) {
+                    ui.print(output.get(j).toString());
+                }
             } else if (command.equals("bye")) {
                 ui.print("Bye! Hope to see you again soon!");
                 this.isEnd = true;
