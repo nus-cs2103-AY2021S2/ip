@@ -1,4 +1,4 @@
-package duke.io;
+package main.duke.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,23 +10,29 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import duke.tasktype.Task;
-import duke.tasktype.Event;
-import duke.tasktype.Deadline;
-import duke.tasktype.Todo;
+
+import main.duke.DukeException;
+import main.duke.tasktype.Task;
+import main.duke.tasktype.Event;
+import main.duke.tasktype.Deadline;
+import main.duke.tasktype.Todo;
 import java.util.List;
 
-import duke.DukeList;
+import main.duke.DukeList;
 
 public class Storage {
     private StringBuffer stringBufferOfTasks = new StringBuffer();
     private String filename;
-    private Path path;
 
+    /**
+     * Constructor for the Storage Object
+     * @param filename path of the file being accessed
+     */
     public Storage(String filename) {
         this.filename = filename;
         getTaskListInFile(getDirectory());
     }
+
 
     private void getTaskListInFile(String current) {
         String[] parents = filename.split("/");
@@ -47,6 +53,10 @@ public class Storage {
         }
     }
 
+    /**
+     *
+     * @return the current directory
+     */
     private String getDirectory() {
         return System.getProperty("user.dir");
     }
@@ -73,7 +83,10 @@ public class Storage {
         stringBufferOfTasks.append(toAdd);
     }
 
-
+    /**
+     * Creates task objects based on the file information
+     * @return List of task objects
+     */
     public DukeList load() {
         DukeList dukeList = new DukeList();
         stringBufferOfTasks = new StringBuffer();
@@ -82,11 +95,15 @@ public class Storage {
                     new FileInputStream(this.filename))));
             String line = reader.readLine();
             while (line != null) {
-
+                runCommands(line,dukeList);
+                line = reader.readLine();
             }
+            reader.close();
 
         } catch (IOException e) {
-            System.out.println(filename + "could not be opened" + e.getMessage());
+            System.out.println(filename + " could not be opened" + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println((e.getMessage()));
         }
         return dukeList;
     }
