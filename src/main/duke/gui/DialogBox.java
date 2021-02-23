@@ -1,4 +1,4 @@
-package duke.gui;
+package main.duke.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 
 public class DialogBox extends HBox {
     @FXML
-    private Text dialog;
+    private Label dialog;
     @FXML
     private ImageView displayPicture;
 
