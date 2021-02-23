@@ -1,20 +1,18 @@
-package duke.io;
+package main.duke.io;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.CFind;
-import duke.DukeException;
-import duke.command.CBye;
-import duke.command.CDeadline;
-import duke.command.CDelete;
-import duke.command.CDone;
-import duke.command.CEvent;
-import duke.command.CList;
-import duke.command.CTodo;
-import duke.command.ICommand;
+import main.duke.command.*;
+import main.duke.DukeException;
 
 public class Parser {
+    /**
+     *
+     * @param input the whole user console input command
+     * @return Command for execution
+     * @throws DukeException thrown when an invalid message is inputted
+     */
     public ICommand parse(String input) throws DukeException{
         String[] splitString = input.split(" ");
         assert (splitString.length > 0);
@@ -26,7 +24,7 @@ public class Parser {
                 iCommand = new CBye();
                 break;
             case"done":
-                checkMessage(first,input);
+                checkLength(2,splitString);
                 iCommand = new CDone(input);
                 break;
             case"delete":
@@ -57,23 +55,28 @@ public class Parser {
                 checkMessage(first, input);
                 iCommand = new CTodo(input);
                 break;
+            case"help":
+                checkLength(1,splitString);
+                iCommand = new CHelp();
+                break;
             default:
                 throw new DukeException("The request is not valid");
         }
+        return iCommand;
     }
     public void checkLength(int length, String[] input) throws DukeException{
         if(length != input.length){
-            throw new DukeException("Your message is too long");
+            throw new DukeException("Your message is not the right length");
         }
     }
     public void checkMessage(String command, String wholeInput) throws DukeException{
         if(command.length() + 1 >= wholeInput.length()){
-            throw new DukeException(command + "cannot be empty!");
+            throw new DukeException(command + " cannot be empty!");
         }
     }
     public void checkBreakExist(String type, String wholeInput, String command) throws DukeException{
         if(!wholeInput.contains(type)){
-            throw new DukeException(command + "is not complete. You are missing " + type);
+            throw new DukeException(command + " is not complete. You are missing " + type);
         }
     }
     public void checkDateTime(String[] command) throws DukeException {
