@@ -1,5 +1,7 @@
 # User Guide
 
+This is a User Guide for the chatbox 'Duke!'.
+
 ## Features
 
 ### Feature 1: Load task list from the hard drive.
