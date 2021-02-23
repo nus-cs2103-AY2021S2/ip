@@ -96,15 +96,45 @@ public class Parser {
      */
     public static Task parseAddTaskCommand(String input) throws DukeIncompleteCommandException,
             DateTimeParseException {
+
+        if (input.contains("todo")) {
+            return parseAddToDoCommand(input);
+        } else {
+            return parseAddTimedTaskCommand(input);
+        }
+    }
+    /**
+     * Parses commands for adding todo tasks.
+     * @param input User input that are task adding commands.
+     * @return Task that corresponds to the input.
+     * @throws DukeIncompleteCommandException If no task has been specified.
+     */
+    public static Task parseAddToDoCommand(String input) throws DukeIncompleteCommandException {
+
+        assert (input.contains(" ")) : "Space between command and task needed!";
+        String editedInput = input.substring(4).trim();
+        // Catch incomplete commands
+        if (editedInput.equals("")) {
+            throw new DukeIncompleteCommandException();
+        }
+        Task task = new ToDo(editedInput);
+        return task;
+    }
+    /**
+     * Parses commands for adding timed tasks like events and deadlines.
+     * @param input User input that are task adding commands.
+     * @return Task that corresponds to the input.
+     * @throws DukeIncompleteCommandException If no task has been specified.
+     * @throws DateTimeParseException If date is not in the YYYY-MM-DD format.
+     */
+    public static Task parseAddTimedTaskCommand(String input) throws DukeIncompleteCommandException,
+            DateTimeParseException {
         // Get rid of command string and get date regex
+        assert (input.contains(" ")): "Space between command and task needed!";
         TimedTask timedTask = new TimedTask();
         String editedInput;
         String regex;
-        assert (input.contains(" ") : "Space between command and task needed!";
-        if (input.contains("todo")) {
-            editedInput = input.substring(4).trim();
-            regex = "";
-        } else if (input.contains("deadline")) {
+        if (input.contains("deadline")) {
             editedInput = input.substring(8).trim();
             regex = "/by";
             timedTask = new Deadline();
@@ -113,27 +143,20 @@ public class Parser {
             regex = "/at";
             timedTask = new Event();
         }
-
         // Catch incomplete commands
         if (editedInput.equals("")) {
             throw new DukeIncompleteCommandException();
         }
-
-        // Check if todo, or timed task (event, deadline)
-        if (regex.equals("")) {
-            Task task = new ToDo(editedInput);
-            return task;
-        } else {
-            String[] editedInputs = editedInput.split(regex);
-            timedTask.task = editedInputs[0].trim();
-            try {
-                timedTask.date = LocalDate.parse(editedInputs[1].trim());
-                return timedTask;
-            } catch (DateTimeParseException e) {
-                throw e;
-            }
+        String[] editedInputs = editedInput.split(regex);
+        timedTask.task = editedInputs[0].trim();
+        try {
+            timedTask.date = LocalDate.parse(editedInputs[1].trim());
+            return timedTask;
+        } catch (DateTimeParseException e) {
+            throw e;
         }
     }
+
 
     /**
      * Parses data stored in file.
