@@ -1,11 +1,11 @@
-package duke.gui;
+package main.duke.gui;
 
-import duke.Duke;
+import main.duke.Duke;
 import javafx.application.Application;
-import javafx.fml.FXMLLoader;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scence.layout.AnchorPane;
+import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 import java.io.IOException;
@@ -16,9 +16,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage){
         try {
-            MainWindow mainWindow = new MainWindow(duke);
-            Scene scene = new Scene(mainWindow);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane anchorPane  = fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
+            stage.setTitle("Duke bot");
+            fxmlLoader.<MainWindow>getController().makeDuke(duke);
             stage.show();
         }
         catch (IOException e){
