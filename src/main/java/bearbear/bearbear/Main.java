@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  */
 
 public class Main extends Application {
-    private static final File file = new File("src/main/data/BearBear.txt");
+    private static final File file = new File("data/BearBear.txt");
 
     @Override
     public void start(Stage stage) throws StorageException, UiException {

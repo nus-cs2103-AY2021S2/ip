@@ -13,7 +13,7 @@ import bearbear.tasks.TaskList;
  * Used to read and write to a file.
  */
 public class Storage {
-    private static final Path path = Path.of("src/main/data");
+    private static final Path path = Path.of("data");
 
     /**
      * Retrieves and loads list of task stored into task list.
