@@ -52,4 +52,4 @@ dependencies {
 checkstyle {
     toolVersion = '8.23'
 }
-mainClassName ="duke.gui.Launcher"
+mainClassName ="main.duke.gui.Launcher"
