@@ -1,4 +1,5 @@
-package duke.duke;
+//package duke;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +13,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.Scanner;
+
 public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -22,16 +25,25 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public static void main(String[] args) {
-        String path = "./data/duke.txt";
-        String directory = "./data";
-
-        Storage storage = new Storage(path, directory);
-        TaskList taskList = new TaskList(storage);
-        taskList.loadList();
-        Parser parser = new Parser(taskList);
+        Parser parser = createParser();
         Ui.printWelcome();
         parser.parseAll();
     }
+
+    static Parser createParser() {
+        // Set up data files
+        String path = "./data/duke.txt";
+        String directory = "./data";
+        Storage storage = new Storage(path, directory);
+
+        // Initialise TaskList from file
+        TaskList taskList = new TaskList(storage);
+
+        // Parse input
+        Parser parser = new Parser(taskList);
+        return parser;
+    }
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -118,6 +130,8 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+        assert user != null : "Error: User image does not exist";
+        assert duke != null : "Error: Duke image does not exist";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -141,7 +155,13 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Did you say " + input + "?!";
+        Parser parser = createParser();
+        if (!input.equals("bye")) {
+            return parser.parseLine(input);
+        } else {
+            System.exit(0);
+            return Ui.byeString();
+        }
     }
 }
 

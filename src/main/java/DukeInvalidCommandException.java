@@ -1,4 +1,4 @@
-package duke.duke;
+//package duke;
 
 public class DukeInvalidCommandException extends Exception {
     public String message = "Oh no! I don't know what that means. ):\n";

@@ -15,15 +15,3 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
-src/duke/.idea/workspace.xml
-src/duke/out/production/duke/duke/Parser.class
-src/duke/out/production/duke/duke/TaskList.class
-src/duke/out/production/duke/duke/Ui.class
-src/duke/out/production/duke/duke/.idea/workspace.xml
-src/duke/out/test/test/ParserTest.class
-build.gradle
-gradlew
-gradlew.bat
-data/duke.txt
-gradle/wrapper/gradle-wrapper.jar
-gradle/wrapper/gradle-wrapper.properties

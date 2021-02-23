@@ -1,4 +1,4 @@
-package duke.duke;
+//package duke;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,7 @@ public class TaskList {
 
     TaskList(Storage storage) {
         this.storage = storage;
+        this.list = this.storage.loadFile();
     }
 
     TaskList(ArrayList<Task> list, Storage storage) {
@@ -37,20 +38,34 @@ public class TaskList {
         }
         System.out.println("\n");
     }
+    public String listString() {
+        String listString = "";
+        for(int i = 0; i < list.size(); i++) {
+            listString += String.format("%d. %s%n",i + 1, list.get(i).toString());
+        }
+        return listString;
+    }
+    static String tabbedListString(ArrayList<Task> tasks) {
+        String tabbedList = "";
+        for(int i = 0; i < tasks.size(); i++) {
+            tabbedList += String.format("    %d. %s%n\n",i + 1, tasks.get(i).toString());
+        }
+        return tabbedList;
+    }
     /**
      * Marks the task specified as done.
      *
      * @param index Index of task to mark.
      */
-    void markDone(int index) {
+    String markDone(int index) {
         try {
             Task task = list.get(index);
             task.markDone();
-            Ui.printDone(task);
             storage.saveFile(list);
+            return Ui.doneString(task);
             // Ui.printDone(task);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printIndexError();
+            return Ui.indexErrorString();
         }
     }
 
@@ -58,14 +73,14 @@ public class TaskList {
      * Deletes the task specified.
      * @param index Index of task to delete.
      */
-    void delete(int index) {
+    String delete(int index) {
         try {
             Task task = list.get(index);
             list.remove(index);
             storage.saveFile(list);
-            Ui.printDelete(task, list.size());
+            return Ui.deleteString(task, list.size());
         } catch (IndexOutOfBoundsException e) {
-            Ui.printIndexError();
+            return Ui.indexErrorString();
         }
 
     }
@@ -74,13 +89,13 @@ public class TaskList {
      * Adds the task specified to the list.
      * @param task Task to be added to list.
      */
-    void add(Task task) {
+    String add(Task task) {
         list.add(task);
         storage.saveFile(task.toFileString());
-        Ui.printAdd(task, list.size());
+        return Ui.addString(task, list.size());
     }
 
-    void find(String keyword) {
+    String find(String keyword) {
         ArrayList<Task> newList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             String taskString = list.get(i).toString();
@@ -88,7 +103,7 @@ public class TaskList {
                 newList.add(list.get(i));
             }
         }
-        Ui.printFind(newList);
+        return Ui.findString(newList);
     }
 
 

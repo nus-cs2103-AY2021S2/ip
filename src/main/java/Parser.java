@@ -1,4 +1,4 @@
-package duke.duke;
+//package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -24,9 +24,10 @@ public class Parser {
         Scanner sc = new Scanner(System.in);
         String line = sc.nextLine();
         while (!line.equals("bye")) {
-            parseLine(line);
+            System.out.println(parseLine(line));
             line = sc.nextLine();
         }
+        System.exit(0);
         sc.close();
     }
 
@@ -35,24 +36,24 @@ public class Parser {
      * is a general command or a command for adding tasks.
      * @param input Each line of user input
      */
-    void parseLine(String input) {
+    String parseLine(String input) {
         try {
             if (input.equals("list") || input.contains("done")
                     || input.contains("delete") || input.contains("find")) {
-                parseGeneralCommand(input);
+                return parseGeneralCommand(input);
             } else if (input.contains("todo") ||
                     input.contains("deadline") ||
                     input.contains("event")) {
-                taskList.add(parseAddTaskCommand(input));
+                return taskList.add(parseAddTaskCommand(input));
             } else {
                 throw new DukeInvalidCommandException();
             }
         } catch (DukeInvalidCommandException e) {
-            System.out.println(e.getMessage());
+            return (e.getMessage());
         } catch (DukeIncompleteCommandException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         } catch (DateTimeParseException e) {
-            Ui.printDateFormatError();
+            return Ui.dateFormatErrorString();
         }
     }
 
@@ -63,23 +64,23 @@ public class Parser {
      * commands do not state an index.
      */
 
-    void parseGeneralCommand(String input) throws DukeIncompleteCommandException {
+    String parseGeneralCommand(String input) throws DukeIncompleteCommandException {
         String[] inputs;
         int index;
         if (input.equals("list")) {
-            taskList.displayList();
+            return taskList.listString();
         } else if (input.contains("done")) {
             inputs = input.split(" ");
             index = Integer.parseInt(inputs[1]) - 1;
-            taskList.markDone(index);
+            return taskList.markDone(index);
         } else if (input.contains("delete")) {
             inputs = input.split(" ");
             index = Integer.parseInt(inputs[1]) - 1;
-            taskList.delete(index);
+            return taskList.delete(index);
         } else {
             inputs = input.split(" ");
             String keyword = inputs[1];
-            taskList.find(keyword);
+            return taskList.find(keyword);
         }
     }
 

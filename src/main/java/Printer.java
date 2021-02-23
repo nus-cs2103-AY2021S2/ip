@@ -1,12 +1,10 @@
-package duke.duke;
-
 import java.util.ArrayList;
 
 /**
  * Class containing methods for printing different messages
  * according to the situation.
  */
-public class Ui {
+public class Printer {
     /**
      * Prints welcome message.
      */
@@ -83,3 +81,4 @@ public class Ui {
         System.out.println("Found " + tasks.size() + " result(s).\n");
     }
 }
+
