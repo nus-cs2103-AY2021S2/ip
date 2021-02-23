@@ -14,7 +14,7 @@ public class Parser {
      * @return String[] array of substrings.
      */
     public static String[] splitIntoSubstrings(String input) {
-        return input.split(" ", 2);
+        return input.split("\\s+", 2);
     }
 
     /**
