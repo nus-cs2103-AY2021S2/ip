@@ -48,7 +48,7 @@ public class TaskList {
     static String tabbedListString(ArrayList<Task> tasks) {
         String tabbedList = "";
         for(int i = 0; i < tasks.size(); i++) {
-            tabbedList += String.format("    %d. %s%n\n",i + 1, tasks.get(i).toString());
+            tabbedList += String.format("    %d. %s%n",i + 1, tasks.get(i).toString());
         }
         return tabbedList;
     }
@@ -104,6 +104,11 @@ public class TaskList {
             }
         }
         return Ui.findString(newList);
+    }
+
+    String sortByDate() {
+        list.sort(new TaskComparator());
+        return Ui.sortString(list);
     }
 
 

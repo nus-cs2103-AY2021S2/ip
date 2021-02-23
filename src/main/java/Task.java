@@ -1,8 +1,10 @@
 //package duke;
 
+import java.time.LocalDate;
 public class Task {
     String task;
     boolean isDone;
+    LocalDate date;
 
     Task() {
     }
@@ -10,6 +12,10 @@ public class Task {
     Task(String task) {
         this.task = task.trim();
         isDone = false;
+    }
+
+    boolean isTimedTask() {
+        return false;
     }
 
     /**
@@ -34,7 +40,6 @@ public class Task {
         return task;
     }
     */
-
 
     @Override
     public String toString() {

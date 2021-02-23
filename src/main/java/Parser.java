@@ -39,7 +39,8 @@ public class Parser {
     String parseLine(String input) {
         try {
             if (input.equals("list") || input.contains("done")
-                    || input.contains("delete") || input.contains("find")) {
+                    || input.contains("delete") || input.contains("find")
+                    || input.equals("sort")) {
                 return parseGeneralCommand(input);
             } else if (input.contains("todo") ||
                     input.contains("deadline") ||
@@ -79,11 +80,15 @@ public class Parser {
             assert (inputs[1] != "") : "No index found!";
             index = Integer.parseInt(inputs[1]) - 1;
             return taskList.delete(index);
-        } else {
+        } else if (input.contains("find")) {
             inputs = input.split(" ");
             assert (inputs[1] != "") : "No index found!";
             String keyword = inputs[1];
             return taskList.find(keyword);
+        } else if (input.equals("sort")) {
+            return taskList.sortByDate();
+        } else {
+            return "";
         }
     }
 
@@ -100,7 +105,7 @@ public class Parser {
         TimedTask timedTask = new TimedTask();
         String editedInput;
         String regex;
-        assert (input.contains(" ") : "Space between command and task needed!";
+        assert (input.contains(" ")) : "Space between command and task needed!";
         if (input.contains("todo")) {
             editedInput = input.substring(4).trim();
             regex = "";

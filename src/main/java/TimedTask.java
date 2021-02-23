@@ -3,9 +3,13 @@
 import java.time.LocalDate;
 
 public class TimedTask extends Task {
-    LocalDate date;
 
     TimedTask() {
+    }
+
+    @Override
+    boolean isTimedTask() {
+        return true;
     }
     /*
     static <T> T fileReader(String line, String regex) {

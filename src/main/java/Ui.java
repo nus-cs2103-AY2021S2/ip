@@ -77,4 +77,7 @@ public class Ui {
                 + TaskList.tabbedListString(tasks) +
                 "Found " + tasks.size() + " result(s).\n";
     }
+    static String sortString(ArrayList<Task> tasks) {
+        return "I've sorted your list by date:\n" + TaskList.tabbedListString(tasks);
+    }
 }
