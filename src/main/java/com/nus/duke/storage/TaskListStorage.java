@@ -30,6 +30,7 @@ public class TaskListStorage {
      */
     public void save(TaskList taskList) throws DukeStorageException {
         ArrayList<Task> arrayList = taskList.getList();
+        assert arrayList != null;
         try {
             FileOutputStream fileOut = new FileOutputStream(DEFAULT_STORAGE_FILEPATH);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
