@@ -71,14 +71,17 @@ public class Parser {
             return taskList.listString();
         } else if (input.contains("done")) {
             inputs = input.split(" ");
+            assert (inputs[1] != "") : "No index found!";
             index = Integer.parseInt(inputs[1]) - 1;
             return taskList.markDone(index);
         } else if (input.contains("delete")) {
             inputs = input.split(" ");
+            assert (inputs[1] != "") : "No index found!";
             index = Integer.parseInt(inputs[1]) - 1;
             return taskList.delete(index);
         } else {
             inputs = input.split(" ");
+            assert (inputs[1] != "") : "No index found!";
             String keyword = inputs[1];
             return taskList.find(keyword);
         }
@@ -97,6 +100,7 @@ public class Parser {
         TimedTask timedTask = new TimedTask();
         String editedInput;
         String regex;
+        assert (input.contains(" ") : "Space between command and task needed!";
         if (input.contains("todo")) {
             editedInput = input.substring(4).trim();
             regex = "";
