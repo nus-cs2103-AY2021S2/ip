@@ -36,13 +36,18 @@ public class TaskList {
         return deletedTask;
     }
     /**
-     * Method to replace the Task
-     * @param index of the Task in the TaskList
-     * @param task that will be replacing
-     * @return replace the Task at the index with task
+     * Method to check for duplicates in the TaskList
+     * @return delete the duplicated task in the TaskList
      */
-    public void replaceTask(int index, Task task) {
-        tasks.set(index, task);
+    public void checkForDuplicate() {
+        ArrayList<Task> list = new ArrayList<>();
+        for (Task check: tasks ) {
+            if(!list.contains(check)) {
+                list.add(check);
+            }
+        }
+        tasks.clear();
+        tasks.addAll(list);
     }
     /**
      * Method to get the size of TaskList

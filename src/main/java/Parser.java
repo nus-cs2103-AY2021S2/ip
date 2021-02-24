@@ -47,12 +47,20 @@ public class Parser {
                     System.out.println(i + ". " + taskList.getTask(i - 1).toString());
                 }
             } else if (command.contains("todo")) {
-                String save = command.replaceAll("todo","");
-                ToDo t = new ToDo(save);
+                String[] save = command.split(" ");
+                ToDo t = new ToDo("","");
+                if (save.length > 2) {
+                    t.setDescription(save[1]);
+                    t.setTag(save[2]);
+                } else {
+                    t.setDescription(save[1]);
+                    t.setTag("");
+                }
                 if (save.equals("")) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
                 taskList.addTask(t);
+                taskList.checkForDuplicate();
                 ui.print("Got it. I've added this task: ");
                 ui.print(t.toString());
                 Integer numOfTask = taskList.numOfTasks();
@@ -63,6 +71,7 @@ public class Parser {
                 LocalDate date =LocalDate.parse(input[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 Deadline d = new Deadline(input[0], date);
                 taskList.addTask(d);
+                taskList.checkForDuplicate();
                 ui.print("Got it. I've added this task: ");
                 ui.print(d.toString());
                 Integer numOfTask = taskList.numOfTasks();
@@ -72,6 +81,7 @@ public class Parser {
                 info[0] = info[0].replaceAll("event","");
                 Event e = new Event(info[0],info[1]);
                 taskList.addTask(e);
+                taskList.checkForDuplicate();
                 ui.print("Got it. I've added this task: ");
                 ui.print(e.toString());
                 Integer numOfTask = taskList.numOfTasks();

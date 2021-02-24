@@ -1,5 +1,6 @@
 public class Task {
     protected String description;
+    public String tag;
     public boolean isDone;
     /**
      * Constructor method
