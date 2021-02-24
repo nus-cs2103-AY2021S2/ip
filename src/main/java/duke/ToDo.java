@@ -15,7 +15,6 @@ public class ToDo extends Command {
      *
      * @param commandDescription every command has a description attached
      */
-
     public ToDo(String commandDescription) {
         super(commandDescription);
         this.isDone = false;
