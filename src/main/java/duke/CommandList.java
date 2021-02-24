@@ -12,7 +12,9 @@ import java.util.ArrayList;
 
 public class CommandList {
     ArrayList<Command> commands = new ArrayList<Command>();
+    ArrayList<Command> archivedCommands = new ArrayList<Command>();
     Storage storage;
+    Storage archiveStorage;
 
     /**
      * Constructor for command list
@@ -52,7 +54,7 @@ public class CommandList {
      String addCommand(Command command, String commandType) {
         commands.add(command);
         int size = commands.size();
-         storage.save(storage.filePath, commands);
+        storage.save(storage.filePath, storage.path, commands);
 
          if (commandType.equals("T")) {
             return Ui.printToDo(command, size);
@@ -74,7 +76,7 @@ public class CommandList {
      String doneCommand(int id) {
         Command command = commands.get(id);
         command.markDone();
-        storage.save(storage.filePath, commands);
+        storage.save(storage.filePath, storage.path, commands);
         return Ui.printDone(command);
     }
 
@@ -90,9 +92,8 @@ public class CommandList {
         Command command = commands.get(id);
         commands.remove(id);
         int size = commands.size();
-        storage.save(storage.filePath, commands);
+        storage.save(storage.filePath, storage.path, commands);
         return Ui.printDelete(command, size);
-
     }
 
     /**
@@ -122,5 +123,35 @@ public class CommandList {
             }
         }
         return result;
+    }
+
+    public String archiveCommand() {
+        archiveStorage = new Storage(storage.archiveFilePath
+                , storage.archivePath);
+
+        archivedCommands = commands;
+
+        archiveStorage.save(storage.archiveFilePath
+                , storage.archivePath
+                , archivedCommands);
+
+        commands = new ArrayList<Command>();
+        return Ui.printArchiveCompleted();
+    }
+
+    public String retrieveCommand() {
+        int size = commands.size();
+
+        if (size == 0) {
+            commands = archivedCommands;
+        } else {
+            commands.addAll(archivedCommands);
+        }
+
+        storage.save(storage.filePath
+                , storage.path
+                , commands);
+
+        return Ui.printRetrievalCompleted();
     }
 }

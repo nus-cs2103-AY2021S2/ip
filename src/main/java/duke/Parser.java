@@ -63,7 +63,7 @@ public class Parser {
 
             result = (Ui.spacer
                     + "What are you referring to?"
-                    + "Remember to key in the correct command id!"
+                    + " Remember to key in the correct command id!"
                     + Ui.spacer);
 //            throw new DukeException("Error: Non-existent id");
 
@@ -171,6 +171,16 @@ public class Parser {
         String[] findInput = input.split(separator);
         return commandList.findCommand(findInput[1]);
     }
+
+    String parseArchive(String input) {
+        String result = "";
+        if (input.contains("retrieve")) {
+            result = commandList.retrieveCommand();
+        } else {
+            result = commandList.archiveCommand();
+        }
+        return result;
+    }
         
     /**
      * Introduces scanner class to read in input
@@ -189,9 +199,7 @@ public class Parser {
                 result = Ui.printGoodbye();
             } else if (input.equals("list")) {
                 result = parseList();
-            } else if (input.contains("hi")
-                    || input.contains("hello")
-                    || input.equals("hi")
+            } else if (input.contains("hello")
                     || input.equals("hello")) {
                 result = Ui.printGreet();
             } else if (input.contains("done")) {
@@ -204,6 +212,10 @@ public class Parser {
                     || input.contains("deadline")
                     || input.contains("event")) {
                 result = parseAdd(input);
+            } else if (input.contains("archive")
+                    || input.equals("archive")) {
+                result = parseArchive(input);
+                System.out.println("socrr");
             } else {
                 result = Ui.printGeneralError();
             }
@@ -212,4 +224,5 @@ public class Parser {
         }
         return result;
     }
+
 }

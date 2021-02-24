@@ -102,4 +102,16 @@ public class Ui {
                     + spacer);
         }
     }
+
+    static String printArchiveCompleted() {
+        return (spacer
+                + "Archived all commands in text file in your data folder!"
+                + spacer);
+    }
+
+    static String printRetrievalCompleted() {
+        return (spacer
+                + "Your archived commands have been added back to your current commands!"
+                + spacer);
+    }
 }

@@ -24,6 +24,10 @@ public class Storage {
     public String filePath = "./data/duke.txt";
     public Path path = Paths.get("./data/duke.txt");
 
+    public String archiveFilePath = "./data/archive.txt";
+    public Path archivePath = Paths.get("./data/archive.txt");
+
+
     public Storage() {
         new Storage(filePath, path);
     }
@@ -65,7 +69,7 @@ public class Storage {
      * @param filePath Filepath of text file to save to
      * @param xs most updated command list to be saved
      */
-     void save(String filePath, ArrayList<Command> xs) {
+     void save(String filePath, Path path, ArrayList<Command> xs) {
         try {
             checkPath(filePath, path);
             FileWriter fw = new FileWriter(filePath);
