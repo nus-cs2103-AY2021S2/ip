@@ -45,6 +45,7 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.29'
+    configFile = file("${rootDir}/src/config/checkstyle/checkstyle.xml")
 }
 
 repositories {
