@@ -1,7 +1,12 @@
-package main.java;
+package project;
 
+/**
+ * Represents a task.
+ */
 public class Task {
+    /** Description of the task. */
     protected String description;
+    /** Status of the task. */
     protected boolean isDone;
 
     public Task(String description) {
@@ -17,6 +22,9 @@ public class Task {
         return description;
     }
 
+    /**
+     * Sets status of task to "done".
+     */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -25,5 +33,4 @@ public class Task {
     public String toString() {
         return (getStatusIcon() + " " + getDescription());
     }
-    //...
 }

@@ -1,17 +1,24 @@
-package main.java;
+package project;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+/**
+ * Represents an "event" task.
+ */
 public class Event extends Task {
+    private LocalDateTime eventTime;
 
-    protected String at;
-
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime eventTime) {
         super(description);
-        this.at = at;
+        this.eventTime = eventTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: "
+                + eventTime.format(DateTimeFormatter.ofPattern(" d MMM yyyy HH:mm"))
+                + ")";
     }
 }
 

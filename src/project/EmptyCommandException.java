@@ -1,4 +1,4 @@
-package main.java;
+package project;
 
 public class EmptyCommandException extends DukeException {
 

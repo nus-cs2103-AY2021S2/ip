@@ -1,4 +1,4 @@
-package main.java;
+package project;
 
 public class UnknownCommandException extends DukeException {
 

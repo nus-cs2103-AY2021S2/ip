@@ -1,4 +1,4 @@
-package main.java;
+package project;
 
 enum Command {
     BYE, DEADLINE, EVENT, LIST, TODO

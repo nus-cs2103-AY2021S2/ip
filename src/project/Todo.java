@@ -1,10 +1,13 @@
-package main.java;
+package project;
 
-public class todo extends Task {
+/**
+ * Represents a "todo" task.
+ */
+public class Todo extends Task {
 
     protected String by;
 
-    public todo(String description) {
+    public Todo(String description) {
         super(description);
     }
 
