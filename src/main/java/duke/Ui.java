@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    static String spacer = "\n____________________________________________________________\n";
+    static String spacer = "\n________________________________________________________\n";
     static String logo = "Greetings from\n"
             + "░▄▀▄▀▀▀▀▄▀▄░░░░░░░░░\n"
             + "░█░░░░░░░░▀▄░░░░░░▄░\n"
@@ -16,23 +16,27 @@ public class Ui {
             + "░█░░▄▄░░▄▄▄▄░░▄▄░░█░\n"
             + "░█░▄▀█░▄▀░░█░▄▀█░▄▀░\n"
             + "░░▀░░░▀░░░░░▀░░░▀░░░\n";
+
     static String greet = "Woof! I'm Doge Duke\n"
             + "What do you want me to do?\n"
-            + "Type your request in below!\n";
+            + "Type your request in below!";
+
     static String goodbye = "Bye! Hope I was a good dog, "
             + "see you again soon!";
 
-    public static String printGreeting() {
-        return (logo + spacer + greet + spacer);
-    }
+//    public static String printGreeting() {
+//        return (logo + spacer + greet + spacer);
+//    }
 
+    static String printGreet() { return (spacer + greet + spacer); }
     static String printGoodbye() {
         return (spacer + goodbye + spacer);
     }
 
     static String printGeneralError() {
         return (spacer
-                + "Doge can't recognise this. Try another command?"
+                + "Sorry, I can't recognise this."
+                + " Maybe try another command?"
                 + spacer);
     }
 

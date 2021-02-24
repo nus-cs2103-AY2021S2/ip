@@ -31,7 +31,13 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return parser.parseAll();
+        String result = "";
+        try {
+            result = parser.parseAll(input);
+        } catch (Exception e) {
+            result = parser.errorHandling(input);
+        }
+        return result;
     }
 
 

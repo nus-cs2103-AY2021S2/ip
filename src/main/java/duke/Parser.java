@@ -12,8 +12,6 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import java.util.Scanner;
-
 public class Parser {
     CommandList commandList;
     static String terminate = "bye";
@@ -34,8 +32,10 @@ public class Parser {
      * @param errorInput Raw user input
      * @throws DukeException if description is empty or in wrong formats
      */
-    static void errorHandling(String errorInput) throws DukeException {
+    static String errorHandling(String errorInput) {
         String[] inputArr = new String[100];
+        String result = "";
+
         if (errorInput.contains(" ")) {
             inputArr = errorInput.split(" ");
         } else {
@@ -47,7 +47,11 @@ public class Parser {
                 || errorInput.contains("event"))
                 && inputArr[1] == null) {
 
-            throw new DukeException("Eh? Your command description cannot be empty. Try again!");
+            result = (Ui.spacer
+                    + "Eh? Your command description cannot be empty."
+                    + "Try again!"
+                    + Ui.spacer);
+//            throw new DukeException(" Error: Empty Command");
 
         } else if (errorInput.contains("list")
                 || errorInput.contains("bye")) {
@@ -57,16 +61,25 @@ public class Parser {
                 || errorInput.contains("delete"))
                 && inputArr[1] == null) {
 
-            throw new DukeException("What are you referring to? Remember to key in the correct command id!");
+            result = (Ui.spacer
+                    + "What are you referring to?"
+                    + "Remember to key in the correct command id!"
+                    + Ui.spacer);
+//            throw new DukeException("Error: Non-existent id");
 
         } else if (inputArr[1] != null) {
             //Do nothing
 
         // Invalid description: unknown
         } else {
-            throw new DukeException("Whoops :( I'm sorry, I'm not sure what that means. "
-                    + "Did you forget to add a command type?");
+            result = (Ui. spacer
+                    + "Whoops :( I'm sorry, I'm not sure what that means. "
+                    + "Did you forget to add a command type?"
+                    + Ui.spacer) ;
+//            throw new DukeException("Error: Non-existent command type");
         }
+
+        return result;
     }
 
     /**
@@ -102,8 +115,11 @@ public class Parser {
                 result = "An error occurred, did you add the correct command?";
             }
         } catch (DateTimeParseException e) {
-            System.out.println("This date doesnt exist! "
-                    + "The right format should be in yyyy-mm-dd.");
+            result = (Ui.spacer
+                    + "This date doesnt exist! "
+                    + "The right format should be in yyyy-mm-dd."
+                    + Ui.spacer);
+            return result;
         }
         return result;
     }
@@ -157,18 +173,21 @@ public class Parser {
      * and sorts input into appropriate parsing commands
      *
      */
-    public String parseAll() {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine().trim();
+    public String parseAll(String input) {
         String result = "";
 
         try {
-            errorHandling(input);
+            result = errorHandling(input);
 
             if (input.equals(terminate)) {
                 result = Ui.printGoodbye();
             } else if (input.equals("list")) {
                 result = parseList();
+            } else if (input.contains("hi")
+                    || input.contains("hello")
+                    || input.equals("hi")
+                    || input.equals("hello")) {
+                result = Ui.printGreet();
             } else if (input.contains("done")) {
                 result = parseDone(input);
             } else if (input.contains("delete")) {
@@ -180,11 +199,11 @@ public class Parser {
                     || input.contains("event")) {
                 result = parseAdd(input);
             } else {
+                result = Ui.printGeneralError();
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        sc.close();
         return result;
     }
 }
