@@ -50,7 +50,6 @@ public class Parser {
                 String save = command.replaceAll("todo","");
                 ToDo t = new ToDo(save);
                 if (save.equals("")) {
-                    Thread.setDefaultUncaughtExceptionHandler((u, e) -> System.err.println(e.getMessage()));
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
                 taskList.addTask(t);
