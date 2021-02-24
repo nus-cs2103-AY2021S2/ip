@@ -32,7 +32,6 @@ public class Command {
         return this;
     }
 
-
     public String getDescription() {
         return this.commandDescription;
     }

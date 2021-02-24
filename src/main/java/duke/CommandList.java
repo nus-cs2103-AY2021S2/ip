@@ -124,7 +124,13 @@ public class CommandList {
         }
         return result;
     }
-
+    
+    /**
+     * Searches all commands in commandList that match
+     * given keyword given by owner
+     *
+     * @param keyWord to match during search for user
+     */
     public String archiveCommand() {
         archiveStorage = new Storage(storage.archiveFilePath
                 , storage.archivePath);
