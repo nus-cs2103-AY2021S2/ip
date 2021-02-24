@@ -16,11 +16,11 @@ public class Parser {
     CommandList commandList;
 
     static String terminate = "bye";
-    private final static String separator = " ";
 
-    private final static String regexToDo = " ";
-    private final static String regexDeadline = " /by ";
-    private final static String regexEvent = " /at ";
+    private final static String REGEX_SPACE = " ";
+    private final static String REGEX_TODO = " ";
+    private final static String REGEX_DEADLINE = " /by ";
+    private final static String REGEX_EVENT = " /at ";
 
     public Parser(CommandList commandList) {
         this.commandList = commandList;
@@ -51,7 +51,6 @@ public class Parser {
 
             result = ("Eh? Your command description cannot be empty."
                     + "Try again!");
-//            throw new DukeException(" Error: Empty Command");
 
         } else if (errorInput.contains("list")
                 || errorInput.contains("bye")) {
@@ -63,7 +62,6 @@ public class Parser {
 
             result = ("What are you referring to?"
                     + " Remember to key in the correct command id!");
-//            throw new DukeException("Error: Non-existent id");
 
         } else if (inputArr[1] != null) {
             //Do nothing
@@ -72,7 +70,6 @@ public class Parser {
         } else {
             result = ("Whoops :( I'm sorry, I'm not sure what that means. "
                     + "Did you forget to add a command type?");
-//            throw new DukeException("Error: Non-existent command type");
         }
 
         return result;
@@ -92,18 +89,18 @@ public class Parser {
         String result = "";
         try {
             if (input.contains("todo")) {
-                String[] description = input.split(regexToDo);
+                String[] description = input.split(REGEX_TODO);
                 command = new ToDo(description[1]);
                 result = commandList.addCommand(command, "T");
 
             } else if (input.contains("deadline")) {
-                String[] inputTime = input.split(regexDeadline);
+                String[] inputTime = input.split(REGEX_DEADLINE);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
                 command = new Deadline(inputTime[0].substring(9), parseDate);
                 result =  commandList.addCommand(command, "D");
 
             } else if (input.contains("event")) {
-                String[] inputTime = input.split(regexEvent);
+                String[] inputTime = input.split(REGEX_EVENT);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
                 command = new Event(inputTime[0].substring(6), parseDate);
                 result =  commandList.addCommand(command, "E");
@@ -132,7 +129,7 @@ public class Parser {
      * @return Done notification to user
      */
     String parseDone(String input) {
-       String[] doneInput = input.split(separator);
+       String[] doneInput = input.split(REGEX_SPACE);
        int id = Integer.parseInt(doneInput[1]) - 1;
        return commandList.doneCommand(id);
    }
@@ -146,7 +143,7 @@ public class Parser {
      * @return Delete notification to user
      */
     String parseDelete(String input) {
-        String[] deleteInput = input.split(separator);
+        String[] deleteInput = input.split(REGEX_SPACE);
         int id = Integer.parseInt(deleteInput[1]) - 1;
         return commandList.deleteCommand(id);
     }
@@ -160,7 +157,7 @@ public class Parser {
      * @return Found or Missing keyWord notification to user
      */
     String parseFind(String input) {
-        String[] findInput = input.split(separator);
+        String[] findInput = input.split(REGEX_SPACE);
         return commandList.findCommand(findInput[1]);
     }
 

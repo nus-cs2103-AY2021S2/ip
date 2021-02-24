@@ -67,12 +67,14 @@ public class Storage {
      * into a text file
      *
      * @param filePath Filepath of text file to save to
+     * @param path path of text file to save to
      * @param xs most updated command list to be saved
      */
      void save(String filePath, Path path, ArrayList<Command> xs) {
         try {
             checkPath(filePath, path);
             FileWriter fw = new FileWriter(filePath);
+
             for (Command c : xs) {
                 if (c instanceof ToDo) {
                     fw.write("T |"
@@ -80,6 +82,7 @@ public class Storage {
                             + "| "
                             + c.getDescription()
                             + "\n");
+
                 } else if (c instanceof Deadline) {
                     fw.write("D |"
                             + c.getDone()
@@ -88,6 +91,7 @@ public class Storage {
                             + " | "
                             + ((Deadline) c).getTime()
                             + "\n");
+
                 } else if (c instanceof Event) {
                     fw.write("E |"
                             + c.getDone()

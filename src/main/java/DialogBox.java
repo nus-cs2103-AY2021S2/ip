@@ -15,11 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-/**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
- */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -57,6 +52,9 @@ public class DialogBox extends HBox {
      *
      * @param l Label generated from duke response
      */
+    //@@lll-jy kwmiw-reused
+    //Reused from https://github.com/lll-jy/ip/blob/master/src/main/java/DialogBox.java
+    // with minor modifications to add on text bubble length
     private void setHeight(Label l) {
         int count = l.getText().endsWith("\n") ? 1 : 0;
         String[] ss = l.getText().split("\n");

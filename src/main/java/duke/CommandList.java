@@ -8,6 +8,7 @@ package duke;
  * @since 2021-02-22
  */
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class CommandList {
@@ -29,6 +30,7 @@ public class CommandList {
      * Iterates through non-empty commands list
      * and prints each command in ascending order
      *
+     * @return Numbered Printed List
      */
      String printList() {
          String result = "";
@@ -50,6 +52,7 @@ public class CommandList {
      *
      * @param command command of children classes ToDo, Deadline, Event
      * @param commandType identifier to sort command classes
+     * @return Added notification to user
      */
      String addCommand(Command command, String commandType) {
         commands.add(command);
@@ -72,6 +75,7 @@ public class CommandList {
      *
      * @param id index of command to be marked done in commands list
      * @see duke.Command#markDone() markDone
+     * @return Done notification to user
      */
      String doneCommand(int id) {
         Command command = commands.get(id);
@@ -87,6 +91,7 @@ public class CommandList {
      *
      * @param id index of command to be marked done in commands list
      * @see duke.Command#markDone() markDone
+     * @return Delete notification to user
      */
      String deleteCommand(int id) {
         Command command = commands.get(id);
@@ -101,6 +106,7 @@ public class CommandList {
      * given keyword given by owner
      *
      * @param keyWord to match during search for user
+     * @return results of search of keyWord to user
      */
     public String findCommand(String keyWord) {
         ArrayList<Command> targetList = new ArrayList<Command>();
@@ -124,12 +130,14 @@ public class CommandList {
         }
         return result;
     }
-    
+
     /**
-     * Searches all commands in commandList that match
-     * given keyword given by owner
+     * Archives all Commands in the current Command
+     * List to a text file named archive.txt in the data file
+     * (same format as storage.save)
      *
-     * @param keyWord to match during search for user
+     * @see duke.Storage#save(String, Path, ArrayList) save
+     * @return Successful Archive notification to user
      */
     public String archiveCommand() {
         archiveStorage = new Storage(storage.archiveFilePath
@@ -145,6 +153,13 @@ public class CommandList {
         return Ui.printArchiveCompleted();
     }
 
+    /**
+     * Retrieves the previously archived commands and
+     * appends them to the current working Command List
+     *
+     * @see duke.Storage#save(String, Path, ArrayList) save
+     * @return Successful Archive notification to user
+     */
     public String retrieveCommand() {
         int size = commands.size();
 

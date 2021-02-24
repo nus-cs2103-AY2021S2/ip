@@ -21,8 +21,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SoundBark {
 
-        public String audioPath = "./src/main/resources/sfx/464400__michael-grinnell__dog-bark.wav";
+    public String audioPath = "./src/main/resources/sfx/464400__michael-grinnell__dog-bark.wav";
 
+    /**
+     * Enables JavaFX to play bark audio clip
+     * at greeting and farewell
+     *
+     * @throws IOException
+     * @throws LineUnavailableException if Audio Byte format is off (16-bit supported by Desktop)
+     * @throws UnsupportedAudioFileException if Audio file is in incorrect format
+     */
+    // Solution below adapted from https://www3.ntu.edu.sg/home/ehchua/programming/java/J8c_PlayingSound.html
     void playAudio() throws IOException, LineUnavailableException, UnsupportedAudioFileException {
         File soundFile = new File(audioPath);
         AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);

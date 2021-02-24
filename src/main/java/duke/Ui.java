@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    static String greet = "Woof! I'm Doge Duke\n"
+    static String GREET = "Woof! I'm Doge Duke\n"
             + "What do you want me to do?\n"
             + "Type your request in below!";
 
-    static String goodbye = "Bye! Hope I was a good dog, "
+    static String GOODBYE = "Bye! Hope I was a good dog, "
             + "see you again soon!";
 
-    static String printGreet() { return greet; }
+    static String printGreet() { return GREET; }
     static String printGoodbye() {
-        return goodbye;
+        return GOODBYE;
     }
 
     static String printGeneralError() {
