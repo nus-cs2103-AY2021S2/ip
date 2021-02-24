@@ -26,6 +26,7 @@ public class Task {
      * @return description String
      */
     public String getDescription() {
+        assert this.description.length() > 0;
         return this.description;
     }
     /**

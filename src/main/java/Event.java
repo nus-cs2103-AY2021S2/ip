@@ -15,6 +15,7 @@ public class Event extends Task {
      * @return a String object of the datetime of the Event
      */
     public String getDatetime() {
+        assert this.datetime.length() > 0;
         return this.datetime;
     }
 

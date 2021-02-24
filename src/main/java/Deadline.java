@@ -31,6 +31,7 @@ public class Deadline extends Task {
      * @return a String object of the deadline.
      */
     public String getDateString() {
+        assert this.date.toString().length() > 0;
         return this.date.toString();
     }
 
