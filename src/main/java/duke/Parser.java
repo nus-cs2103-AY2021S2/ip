@@ -47,10 +47,8 @@ public class Parser {
                 || errorInput.contains("event"))
                 && inputArr[1] == null) {
 
-            result = (Ui.spacer
-                    + "Eh? Your command description cannot be empty."
-                    + "Try again!"
-                    + Ui.spacer);
+            result = ("Eh? Your command description cannot be empty."
+                    + "Try again!");
 //            throw new DukeException(" Error: Empty Command");
 
         } else if (errorInput.contains("list")
@@ -61,10 +59,8 @@ public class Parser {
                 || errorInput.contains("delete"))
                 && inputArr[1] == null) {
 
-            result = (Ui.spacer
-                    + "What are you referring to?"
-                    + " Remember to key in the correct command id!"
-                    + Ui.spacer);
+            result = ("What are you referring to?"
+                    + " Remember to key in the correct command id!");
 //            throw new DukeException("Error: Non-existent id");
 
         } else if (inputArr[1] != null) {
@@ -72,10 +68,8 @@ public class Parser {
 
         // Invalid description: unknown
         } else {
-            result = (Ui. spacer
-                    + "Whoops :( I'm sorry, I'm not sure what that means. "
-                    + "Did you forget to add a command type?"
-                    + Ui.spacer) ;
+            result = ("Whoops :( I'm sorry, I'm not sure what that means. "
+                    + "Did you forget to add a command type?");
 //            throw new DukeException("Error: Non-existent command type");
         }
 
@@ -116,19 +110,15 @@ public class Parser {
                 result = "An error occurred, did you add the correct command?";
             }
         } catch (DateTimeParseException e) {
-            result = (Ui.spacer
-                    + "This date doesnt exist! "
-                    + "The right format should be in yyyy-mm-dd."
-                    + Ui.spacer);
+            result = ("This date doesnt exist! "
+                    + "The right format should be in yyyy-mm-dd.");
             return result;
         }
         return result;
     }
 
      String parseList() {
-       return (Ui.spacer
-               + commandList.printList()
-               + Ui.spacer);
+       return commandList.printList();
    }
 
     /**

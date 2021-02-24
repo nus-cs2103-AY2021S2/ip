@@ -10,6 +10,8 @@ package duke;
  */
 
 
+import javafx.scene.control.Label;
+
 public class Duke {
 
     final CommandList commandList;
@@ -31,14 +33,17 @@ public class Duke {
      *
      * @param input raw user input from GUI
      */
-    public String getResponse(String input) {
+    public Label getResponse(String input) {
         String result = "";
+        Label response = null;
         try {
             result = parser.parseAll(input);
+
         } catch (Exception e) {
             result = parser.errorHandling(input);
         }
-        return result;
+        response = new Label(result);
+        return response;
     }
 
 

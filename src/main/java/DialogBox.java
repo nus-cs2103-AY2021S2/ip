@@ -26,7 +26,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(Image img, Label l) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -36,8 +36,10 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
+        dialog.setText(l.getText());
+        dialog.setWrapText(true);
         displayPicture.setImage(img);
+        setHeight(l);
     }
 
     /**
@@ -50,12 +52,27 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+    /**
+     * ensures text bubble fits the length of long inputs
+     *
+     * @param l Label generated from duke response
+     */
+    private void setHeight(Label l) {
+        int count = l.getText().endsWith("\n") ? 1 : 0;
+        String[] ss = l.getText().split("\n");
+        count += ss.length + 1;
+        for (String s : ss) {
+            count += s.length() / 32;
+        }
+        this.setMinHeight(count * 15 + 50);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getUserDialog(Label l, Image img) {
+        return new DialogBox(img, l);
+    }
+
+    public static DialogBox getDukeDialog(Label l, Image img) {
+        var db = new DialogBox(img, l);
         db.flip();
         return db;
     }

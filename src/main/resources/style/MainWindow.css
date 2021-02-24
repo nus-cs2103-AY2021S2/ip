@@ -1,0 +1,12 @@
+
+.sendButton {
+    -fx-background-color: #e9c42e;
+}
+
+.scroll-pane{
+    -fx-background-color: #e5e5e5;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #e5e5e5;
+}

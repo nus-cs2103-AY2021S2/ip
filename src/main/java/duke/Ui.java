@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    static String spacer = "\n________________________________________________________\n";
-
     static String greet = "Woof! I'm Doge Duke\n"
             + "What do you want me to do?\n"
             + "Type your request in below!";
@@ -13,16 +11,14 @@ public class Ui {
     static String goodbye = "Bye! Hope I was a good dog, "
             + "see you again soon!";
 
-    static String printGreet() { return (spacer + greet + spacer); }
+    static String printGreet() { return greet; }
     static String printGoodbye() {
-        return (spacer + goodbye + spacer);
+        return goodbye;
     }
 
     static String printGeneralError() {
-        return (spacer
-                + "Sorry, I can't recognise this."
-                + " Maybe try another command?"
-                + spacer);
+        return ("Sorry, I can't recognise this."
+                + " Maybe try another command?");
     }
 
     static String indexList(ArrayList<Command> xs) {
@@ -35,83 +31,65 @@ public class Ui {
     }
 
     static String printToDo(Command command, int size) {
-        return (spacer
-                + "Mlem I've added a new command for you to do:\n"
+        return "Mlem I've added a new command for you to do:\n"
                 + command
                 + "\n"
                 + "Now I can do a total of "
                 + size
-                + " commands!"
-                + spacer);
+                + " commands!";
     }
 
     static String printDeadline(Command command, int size) {
-        return (spacer
-                + "Woofers! I've added a new command with a Ded-line:\n"
+        return "Woofers! I've added a new command with a Ded-line:\n"
                 + command
                 + "\n"
                 + "Now I can do a total of "
                 + size
-                + " commands!"
-                + spacer);
+                + " commands!";
     }
 
     static String printEvent(Command command, int size) {
-        return (spacer
-                + "Much wow! I've added a new command with an Event:\n"
+        return "Much wow! I've added a new command with an Event:\n"
                 + command
                 + "\n"
                 + "Now I can do a total of "
                 + size
-                + " commands!"
-                + spacer);
+                + " commands!";
     }
 
      static String printDone(Command command) {
-        return (spacer
-                + "Very Woof! "
+        return "Very Woof! "
                 + "I have completed this commands:\n"
                 + command
-                + "\n"
-                + spacer);
+                + "\n";
     }
 
     static String printDelete(Command command, int size) {
-        return (spacer
-                + "Noted! "
+        return "Noted! "
                 + "This task has been removed:\n"
                 + command
                 + "\n"
                 + "Now you have "
                 + size
-                + " commands remaining."
-                + spacer);
+                + " commands remaining.";
     }
 
     static String printFind(ArrayList<Command> targetList, boolean isFound) {
         if (isFound) {
-            return (spacer
-                    + "We found some matching commands:\n"
-                    + indexList(targetList)
-                    + spacer);
+            return "We found some matching commands:\n"
+                    + indexList(targetList);
         } else {
-            return (spacer
-                    + "Omo :( "
+            return "Omo :( "
                     + "We could not find anything. "
-                    + "Try another keyword?\n"
-                    + spacer);
+                    + "Try another keyword?\n";
         }
     }
 
     static String printArchiveCompleted() {
-        return (spacer
-                + "Archived all commands in text file in your data folder!"
-                + spacer);
+        return "Archived all commands in text file in your data folder!";
     }
 
     static String printRetrievalCompleted() {
-        return (spacer
-                + "Your archived commands have been added back to your current commands!"
-                + spacer);
+        return "Your archived commands have been added back to your current commands!";
     }
 }
