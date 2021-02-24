@@ -5,17 +5,6 @@ import java.util.ArrayList;
 public class Ui {
 
     static String spacer = "\n________________________________________________________\n";
-    static String logo = "Greetings from\n"
-            + "░▄▀▄▀▀▀▀▄▀▄░░░░░░░░░\n"
-            + "░█░░░░░░░░▀▄░░░░░░▄░\n"
-            + "█░░▀░░▀░░░░░▀▄▄░░█░█\n"
-            + "█░▄░█▀░▄░░░░░░░▀▀░░█\n"
-            + "█░░▀▀▀▀░░░░░░░░░░░░█\n"
-            + "█░░░░░░░░░░░░░░░░░░█\n"
-            + "█░░░░░░░░░░░░░░░░░░█\n"
-            + "░█░░▄▄░░▄▄▄▄░░▄▄░░█░\n"
-            + "░█░▄▀█░▄▀░░█░▄▀█░▄▀░\n"
-            + "░░▀░░░▀░░░░░▀░░░▀░░░\n";
 
     static String greet = "Woof! I'm Doge Duke\n"
             + "What do you want me to do?\n"
@@ -23,10 +12,6 @@ public class Ui {
 
     static String goodbye = "Bye! Hope I was a good dog, "
             + "see you again soon!";
-
-//    public static String printGreeting() {
-//        return (logo + spacer + greet + spacer);
-//    }
 
     static String printGreet() { return (spacer + greet + spacer); }
     static String printGoodbye() {
@@ -117,5 +102,4 @@ public class Ui {
                     + spacer);
         }
     }
-
 }
