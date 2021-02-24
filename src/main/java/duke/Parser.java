@@ -14,8 +14,10 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     CommandList commandList;
+
     static String terminate = "bye";
     private final static String separator = " ";
+
     private final static String regexToDo = " ";
     private final static String regexDeadline = " /by ";
     private final static String regexEvent = " /at ";
@@ -187,25 +189,34 @@ public class Parser {
 
             if (input.equals(terminate)) {
                 result = Ui.printGoodbye();
+                new SoundBark().playAudio();
+
             } else if (input.equals("list")) {
                 result = parseList();
+
             } else if (input.contains("hello")
                     || input.equals("hello")) {
                 result = Ui.printGreet();
+                new SoundBark().playAudio();
+
             } else if (input.contains("done")) {
                 result = parseDone(input);
+
             } else if (input.contains("delete")) {
                 result = parseDelete(input);
+
             } else if(input.contains("find")) {
                 result = parseFind(input);
+
             } else if (input.contains("todo")
                     || input.contains("deadline")
                     || input.contains("event")) {
                 result = parseAdd(input);
+
             } else if (input.contains("archive")
                     || input.equals("archive")) {
                 result = parseArchive(input);
-                System.out.println("socrr");
+
             } else {
                 result = Ui.printGeneralError();
             }

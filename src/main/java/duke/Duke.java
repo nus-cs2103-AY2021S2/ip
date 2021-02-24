@@ -25,7 +25,6 @@ public class Duke {
         this.commandList = new CommandList(storage);
         this.ui = new Ui();
         this.parser = new Parser(commandList);
-
     }
 
     /**
