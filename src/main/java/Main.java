@@ -1,25 +1,26 @@
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        IDuke bot = Duke.getDuke("data/duke.txt");
-        Scanner sc = new Scanner(System.in);
+public class Main extends Application {
+    private final IDuke duke = Duke.getDuke("data/duke.txt");
 
-        // Greet user
-        bot.greeting();
-
-        // Handle commands until user types bye
-        while (sc.hasNext()) {
-            String s = sc.nextLine();
-            if (s.equals("bye")) {
-                break;
-            } else if (!s.matches("\\s*")) {
-                // Ignore white spaces or empty lines
-                bot = bot.processInput(s);
-            }
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        // Exit bot
-        bot.bye();
     }
+
+
 }
