@@ -6,12 +6,13 @@ package duke;
 public class Parser {
     /**
      * Identifies the type of user command and calls the relevant method to perform the action.
-     * Commands accepted are list, done, delete, todo, deadline and event.
+     * Commands accepted are list, done, delete, find, todo, deadline, event, fixedDur and bye.
      *
      * @param storage Storage object that deals with loading and saving tasks.
      * @param ui      Ui object that deals with interactions with the user.
      * @param tasks   TaskList that contains the list of Task objects.
      * @param cmd     Command entered by the user.
+     * @return Message to be displayed to the user after the command has been performed.
      * @throws EmptyDescriptionException If the user tries to create a task without a description.
      * @throws InvalidCommandException   If the user enters an invalid command.
      * @throws WriteTasksException       If an error is encountered when trying to write tasks to the hard disk.

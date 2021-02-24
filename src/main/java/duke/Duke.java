@@ -9,6 +9,12 @@ public class Duke {
     private Parser parser;
     private TaskList tasks;
 
+    /**
+     * Creates a new Duke object.
+     * Existing tasks previously saved, if any, will be loaded from the file specified by filePath.
+     *
+     * @param filePath Path of the file that tasks are to be loaded from and saved in.
+     */
     public Duke(String filePath) {
         assert filePath.length() > 0 : "filePath cannot be empty";
         storage = new Storage(filePath);
@@ -21,6 +27,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the response message that is to be displayed to the user depending
+     * on the input of the user.
+     *
+     * @param input User input
+     * @return Response message.
+     */
     public String getResponse(String input) {
         try {
             return parser.handleInput(storage, ui, tasks, input);

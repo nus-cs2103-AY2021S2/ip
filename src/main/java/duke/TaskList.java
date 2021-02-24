@@ -22,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * Creates a new TaskList object with an empty lisk of tasks.
+     * Creates a new TaskList object with an empty list of tasks.
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -111,7 +111,7 @@ public class TaskList {
 
     /**
      * Returns an ArrayList of Strings representing the current tasks in the list of tasks whose
-     * description contains the key word given by the user.
+     * description contains the key word specified by the user.
      * The tasks are represented in a format that is to be displayed to the user.
      *
      * @param keyword Keyword
@@ -131,7 +131,7 @@ public class TaskList {
 
     /**
      * Returns an ArrayList of Strings representing the current tasks in the list of tasks.
-     * The tasks are represented in a format that is to be written to the hard disk.
+     * The tasks are represented in a format that is to be stored in a file.
      *
      * @return ArrayList of Strings representing the tasks in writable format.
      */
@@ -148,7 +148,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task with taskId from the list of tasks.
+     * Marks the task with taskId as completed.
      *
      * @param taskId ID of the task.
      */

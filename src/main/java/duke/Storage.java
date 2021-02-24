@@ -23,7 +23,7 @@ public class Storage {
     }
 
     /**
-     * Loads the task commands from the file specified by filePath and stores each line in an ArrayList.
+     * Loads the task commands from the file specified by filePath and stores them in an ArrayList.
      * If the file does not exist, a new file is created in that path.
      *
      * @return ArrayList of Strings representing the task commands.
@@ -52,7 +52,8 @@ public class Storage {
     /**
      * Writes the task commands of current tasks in the TaskList to the file specified by filePath.
      *
-     * @throws LoadTasksException If an error is encountered when trying to write tasks to the file.
+     * @param tasks TaskList containing the current tasks.
+     * @throws WriteTasksException If an error is encountered when trying to write tasks to the file.
      */
     public void writeTasksToDisk(TaskList tasks) throws WriteTasksException {
         try {

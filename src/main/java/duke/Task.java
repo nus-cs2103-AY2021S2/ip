@@ -10,7 +10,7 @@ public abstract class Task {
     /**
      * Creates a new Task object with a description.
      *
-     * @param description Description of the task.
+     * @param description Task description.
      */
     public Task(String description) {
         this.description = description;
@@ -49,7 +49,7 @@ public abstract class Task {
     /**
      * Returns the description of the task.
      *
-     * @return Description
+     * @return Task description.
      */
     public String getDescription() {
         return description;
@@ -68,7 +68,7 @@ public abstract class Task {
      * Returns true if the task description contains the keyword.
      *
      * @param keyword Keyword
-     * @return True if the task description contains the keyword
+     * @return True if the task description contains the keyword.
      */
     public boolean descriptionContains(String keyword) {
         return description.contains(keyword);
