@@ -90,7 +90,7 @@ public class Parser {
         try {
             if (input.contains("todo")) {
                 String[] description = input.split(REGEX_TODO);
-                command = new ToDo(description[1]);
+                command = new ToDo(input.substring(5));
                 result = commandList.addCommand(command, "T");
 
             } else if (input.contains("deadline")) {
