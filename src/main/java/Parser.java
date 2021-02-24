@@ -40,7 +40,7 @@ public class Parser {
         try {
             if (input.equals("list") || input.contains("done")
                     || input.contains("delete") || input.contains("find")
-                    || input.equals("sort")) {
+                    || input.equals("sort") || input.equals("help")) {
                 return parseGeneralCommand(input);
             } else if (input.contains("todo") ||
                     input.contains("deadline") ||
@@ -88,7 +88,7 @@ public class Parser {
         } else if (input.equals("sort")) {
             return taskList.sortByDate();
         } else {
-            return "";
+            return Ui.helpString();
         }
     }
 

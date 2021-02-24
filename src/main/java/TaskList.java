@@ -107,8 +107,9 @@ public class TaskList {
     }
 
     String sortByDate() {
-        list.sort(new TaskComparator());
-        return Ui.sortString(list);
+        ArrayList<Task> sortedList = new ArrayList<>(list);
+        sortedList.sort(new TaskComparator());
+        return Ui.sortString(sortedList);
     }
 
 

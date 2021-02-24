@@ -17,9 +17,14 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        System.out.println("Hello! I'm Duke! \n"
+        System.out.println("Hello! I'm Blue! \n"
                 + "What would you like to do today? \n"
                 + "***********************************");
+    }
+    static String welcomeString() {
+        return "Hello! I'm Blue! \n"
+                + "What would you like to do today? \n"
+                + "Type 'help' to view the list of commands.";
     }
 
     /**
@@ -29,6 +34,20 @@ public class Ui {
         return ("Bye! Stay on task!");
     }
 
+    static String helpString() {
+        return  "List of commands: \n\n"
+                + "Viewing help : help\n"
+                + "Adding a to do task : todo {TASK_NAME}\n"
+                + "Adding a deadline : deadline {DEADLINE_NAME} /by {YYYY-MM-DD}'\n"
+                + "Adding a event : event {EVENT_NAME} /at {YYYY-MM-DD}'\n"
+                + "Listing all tasks : list\n"
+                + "Completing a task : done {INDEX}\n"
+                + "Deleting a task : delete {INDEX}\n"
+                + "Sorting task list : sort\n"
+                + "Locating a task : find {KEYWORD}\n"
+                + "Exiting the program : bye\n\n"
+                + "Visit the User Guide for more details.\n";
+    }
     /**
      * Returns String accompanying a "done" command.
      * @param task Task that has been marked as done.

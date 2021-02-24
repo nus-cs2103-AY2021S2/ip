@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.util.Scanner;
 
-public class Duke extends Application {
+public class Blue extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -95,6 +95,11 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        Label introText = new Label(Ui.welcomeString());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(introText, new ImageView(duke))
+        );
+        userInput.clear();
         // more code to be added here later
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {

@@ -1,7 +1,7 @@
 //package duke;
 
 public class DukeInvalidCommandException extends Exception {
-    public String message = "Oh no! I don't know what that means. ):\n";
+    public String message = "Oh no! I don't know what that means. ):\nType 'help' for more details.";
 
     DukeInvalidCommandException() {
     }
