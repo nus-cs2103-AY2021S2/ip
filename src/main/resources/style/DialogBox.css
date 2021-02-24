@@ -1,12 +1,4 @@
-.message-right {
-    -fx-font: 16px \"Segoe UI Symbol\";
-    -fx-text-alignment: right;
-    -fx-background-color: #d3d3d3;
-    -fx-background-radius: 20;
-    -fx-padding: 10;
-}
-
-.message-left {
+.message {
     -fx-font: 16px \"Segoe UI Symbol\";
     -fx-text-alignment: left;
     -fx-background-color: #fdfd96;
