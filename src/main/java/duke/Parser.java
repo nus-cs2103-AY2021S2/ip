@@ -30,7 +30,7 @@ public class Parser {
      * incorrect user input
      *
      * @param errorInput Raw user input
-     * @return Error Message to prompt correct input from user
+     * @throws DukeException if description is empty or in wrong formats
      */
     static String errorHandling(String errorInput) {
         String[] inputArr = new String[100];
@@ -88,7 +88,6 @@ public class Parser {
      *
      * @see duke.CommandList#addCommand(Command, String) addCommand
      * @param input Raw user input to add commands
-     * @return Added notification to user
      * @exception DateTimeParseException if the LocalDate user input is in wrong format
      */
     String parseAdd(String input) {
@@ -137,7 +136,6 @@ public class Parser {
      *
      * @see duke.CommandList#doneCommand(int) doneCommand
      * @param input Raw user input to mark command
-     * @return Done notification to user
      */
     String parseDone(String input) {
        String[] doneInput = input.split(separator);
@@ -151,7 +149,6 @@ public class Parser {
      *
      * @see duke.CommandList#deleteCommand(int) deleteCommand
      * @param input Raw user input to delete command
-     * @return Delete notification to user
      */
     String parseDelete(String input) {
         String[] deleteInput = input.split(separator);
@@ -165,7 +162,6 @@ public class Parser {
      *
      * @see duke.CommandList#findCommand(String) findCommand
      * @param input Raw user input to mark command
-     * @return Found or Missing keyWord notification to user
      */
     String parseFind(String input) {
         String[] findInput = input.split(separator);
@@ -176,8 +172,6 @@ public class Parser {
      * Introduces scanner class to read in input
      * and sorts input into appropriate parsing commands
      *
-     * @param input Raw user input from GUI
-     * @return Relevant response to user
      */
     public String parseAll(String input) {
         String result = "";

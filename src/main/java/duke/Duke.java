@@ -27,9 +27,8 @@ public class Duke {
     }
 
     /**
-     * Generate a response to user input for GUI
-     *
-     * @param input raw user input from GUI
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
         String result = "";

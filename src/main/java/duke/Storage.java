@@ -96,7 +96,6 @@ public class Storage {
                 }
             }
             fw.close();
-
         } catch(IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
