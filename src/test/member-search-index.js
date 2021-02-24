@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"duke","c":"Ui","l":"printGreeting()"},{"p":"duke","c":"Ui","l":"Ui()","url":"%3Cinit%3E()"}]
