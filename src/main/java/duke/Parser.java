@@ -171,7 +171,7 @@ public class Parser {
         String[] findInput = input.split(separator);
         return commandList.findCommand(findInput[1]);
     }
-    
+        
     /**
      * Introduces scanner class to read in input
      * and sorts input into appropriate parsing commands
@@ -180,8 +180,8 @@ public class Parser {
      * @return Relevant response to user
      */
     public String parseAll(String input) {
+        assert input.length() > 0 : "Command cannot be empty";
         String result = "";
-
         try {
             result = errorHandling(input);
 
