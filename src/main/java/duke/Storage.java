@@ -15,9 +15,8 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 
 public class Storage {
-    private final File file;
 
-    private final String path = "/Users/rachel/Desktop/ip/src/main/java/duke/data/myDuke.txt";
+    private final String path = "./data/myDuke.txt";
 
     /**
      * initialises a storage object.
@@ -25,25 +24,16 @@ public class Storage {
      * @throws DukeException due to IOException.
      */
     public Storage() throws DukeException {
-        this.file = new File(path);
-        createFile();
-    }
-
-    /**
-     * creates a new file if not found in directory.
-     *
-     * @throws DukeException due to IOException.
-     */
-    public void createFile() throws DukeException {
         try {
-            if (file.getParentFile().mkdirs()) {
-                System.out.println("File is loading...");
-            } else {
+            File file = new File(path);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
                 file.createNewFile();
-                System.out.println("File already exists!");
+            } else {
+                displayTasks();
             }
-        } catch (IOException e) {
-            throw new DukeException("☹ OOPS!!! File creation error");
+        } catch (IOException ex) {
+            System.out.println("failed to create directory");
         }
     }
 
@@ -56,6 +46,7 @@ public class Storage {
     public ArrayList<Task> displayTasks() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
+            File file = new File(path);
             Scanner s = new Scanner(file);
             while (s.hasNextLine()) {
                 Task task = parseTasks(s.nextLine());

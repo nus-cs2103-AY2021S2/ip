@@ -11,8 +11,6 @@ public class Duke {
 
     /**
      * Initialising certain fields.
-     *
-     * @throws DukeException If there are Exceptions.
      */
     public Duke() throws DukeException {
         ui = new Ui();
@@ -21,7 +19,6 @@ public class Duke {
             tasks = new TaskList(storage.displayTasks());
         } catch (DukeException e) {
             tasks = new TaskList();
-
         }
     }
 
