@@ -4,27 +4,27 @@ This is a User Guide for the chatbox 'Duke!'.
 
 ## Features
 
-### Feature 1: Load task list from the hard drive.
+### Load task list from the hard drive.
 
 ###### Task list is initialised from loading the data from the hard drive (if available) upon starting the programme, using pre-set file path.
 
-### Feature 2: Add a task given by the user to a list and display upon requested.
+### Add a task given by the user to a list and display upon requested.
 
 ###### Task type can be todos with no date/time associated, event within a specific timing and tasks with a deadline
 
-### Feature 3: Mark a task as done
+### Mark a task as done
 
 ###### Task can be marked as done using the position of the task in the list displayed. Task is displayed after marked done for user reference
 
-### Feature 4: Delete a task from the list
+### Delete a task from the list
 
 ###### Task can be deleted using the position of the task in the list displayed. The deleted task is displayed after deletion for user reference
 
-### Feature 5: Find tasks which match the keyword given
+### Find tasks which match the keyword given
 
 ###### Given keyword from user, return all tasks with matching task description
 
-### Feature 6: Store list on hard disk
+### Store list on hard disk
 
 ###### Upon user input "bye", the updated list is stored on the hard disk using the pre-set file path.
 
