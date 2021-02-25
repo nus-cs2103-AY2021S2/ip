@@ -1,5 +1,13 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
 /** Storage class saves most updated command list
  * to desired directories and files
  *
@@ -7,33 +15,44 @@ package duke;
  * @version 0.1
  * @since 2021-02-22
  */
-
-import java.io.File;
-import java.io.FileWriter;
-
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.util.ArrayList;
-
 public class Storage {
 
-    public String filePath = "./data/duke.txt";
-    public Path path = Paths.get("./data/duke.txt");
+    private String filePath = "./data/duke.txt";
+    private Path path = Paths.get("./data/duke.txt");
 
-    public String archiveFilePath = "./data/archive.txt";
-    public Path archivePath = Paths.get("./data/archive.txt");
+    private String archiveFilePath = "./data/archive.txt";
+    private Path archivePath = Paths.get("./data/archive.txt");
 
 
     public Storage() {
         new Storage(filePath, path);
     }
+
+    /**
+     * Constructor for storage
+     *
+     * @param filePath of desired directory and file name
+     * @param path path of desired directory and file name
+     */
     public Storage(String filePath, Path path) {
         this.filePath = filePath;
         this.path = path;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public Path getPath() {
+        return path;
+    }
+
+    public String getArchiveFilePath() {
+        return archiveFilePath;
+    }
+
+    public Path getArchivePath() {
+        return archivePath;
     }
 
     /**
@@ -70,7 +89,7 @@ public class Storage {
      * @param path path of text file to save to
      * @param xs most updated command list to be saved
      */
-     void save(String filePath, Path path, ArrayList<Command> xs) {
+    void save(String filePath, Path path, ArrayList<Command> xs) {
         try {
             checkPath(filePath, path);
             FileWriter fw = new FileWriter(filePath);
@@ -105,7 +124,7 @@ public class Storage {
             }
             fw.close();
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }

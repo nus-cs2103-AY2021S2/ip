@@ -1,5 +1,13 @@
 package duke;
 
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 /** Barking Noise enabled during start
  * and duke doge termination to greet and bid
  * farewell to the user
@@ -8,20 +16,9 @@ package duke;
  * @version 0.2
  * @since 2021-02-24
  */
-
-import java.io.File;
-import java.io.IOException;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-
 public class SoundBark {
 
-    public String audioPath = "./src/main/resources/sfx/464400__michael-grinnell__dog-bark.wav";
+    private String audioPath = "./src/main/java/sfx/464400__michael-grinnell__dog-bark.wav";
 
     /**
      * Enables JavaFX to play bark audio clip

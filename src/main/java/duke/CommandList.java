@@ -1,5 +1,8 @@
 package duke;
 
+import java.nio.file.Path;
+import java.util.ArrayList;
+
 /** Represents Command list containing commands and carries
  * methods to print, add, delete and indicate command as done.
  *
@@ -7,15 +10,11 @@ package duke;
  * @version 0.1
  * @since 2021-02-22
  */
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-
 public class CommandList {
-    ArrayList<Command> commands = new ArrayList<Command>();
-    ArrayList<Command> archivedCommands = new ArrayList<Command>();
-    Storage storage;
-    Storage archiveStorage;
+    private ArrayList<Command> commands = new ArrayList<Command>();
+    private ArrayList<Command> archivedCommands = new ArrayList<Command>();
+    private Storage storage;
+    private Storage archiveStorage;
 
     /**
      * Constructor for command list
@@ -32,18 +31,18 @@ public class CommandList {
      *
      * @return Numbered Printed List
      */
-     String printList() {
-         String result = "";
+    String printList() {
+        String result = "";
         if (commands.size() == 0) {
             result = "Your list of commands are currently empty!\n";
         } else {
             for (int i = 0; i < commands.size(); i++) {
                 Command value = commands.get(i);
-                result += ((i + 1) + ". " + value +"\n");
+                result += ((i + 1) + ". " + value + "\n");
             }
         }
-         return result;
-     }
+        return result;
+    }
 
     /**
      * Adds and saves a single command to the command list,
@@ -54,12 +53,12 @@ public class CommandList {
      * @param commandType identifier to sort command classes
      * @return Added notification to user
      */
-     String addCommand(Command command, String commandType) {
+    String addCommand(Command command, String commandType) {
         commands.add(command);
         int size = commands.size();
-        storage.save(storage.filePath, storage.path, commands);
+        storage.save(storage.getFilePath(), storage.getPath(), commands);
 
-         if (commandType.equals("T")) {
+        if (commandType.equals("T")) {
             return Ui.printToDo(command, size);
         } else if (commandType.equals("D")) {
             return Ui.printDeadline(command, size);
@@ -74,13 +73,13 @@ public class CommandList {
      * printing out appropriate Ui to notify user
      *
      * @param id index of command to be marked done in commands list
-     * @see duke.Command#markDone() markDone
      * @return Done notification to user
+     * @see duke.Command#markDone() markDone
      */
-     String doneCommand(int id) {
+    String doneCommand(int id) {
         Command command = commands.get(id);
         command.markDone();
-        storage.save(storage.filePath, storage.path, commands);
+        storage.save(storage.getFilePath(), storage.getPath(), commands);
         return Ui.printDone(command);
     }
 
@@ -90,14 +89,14 @@ public class CommandList {
      * printing out appropriate Ui to notify user
      *
      * @param id index of command to be marked done in commands list
-     * @see duke.Command#markDone() markDone
      * @return Delete notification to user
+     * @see duke.Command#markDone() markDone
      */
-     String deleteCommand(int id) {
+    String deleteCommand(int id) {
         Command command = commands.get(id);
         commands.remove(id);
         int size = commands.size();
-        storage.save(storage.filePath, storage.path, commands);
+        storage.save(storage.getFilePath(), storage.getPath(), commands);
         return Ui.printDelete(command, size);
     }
 
@@ -119,6 +118,7 @@ public class CommandList {
                 targetList.add(value);
             }
         }
+
         if (commands.isEmpty()) {
             result = "Your list of commands are currently empty!\n";
         } else {
@@ -136,18 +136,18 @@ public class CommandList {
      * List to a text file named archive.txt in the data file
      * (same format as storage.save)
      *
-     * @see duke.Storage#save(String, Path, ArrayList) save
      * @return Successful Archive notification to user
+     * @see duke.Storage#save(String, Path, ArrayList) save
      */
     public String archiveCommand() {
-        archiveStorage = new Storage(storage.archiveFilePath
-                , storage.archivePath);
+        archiveStorage = new Storage(storage.getArchiveFilePath(),
+                storage.getArchivePath());
 
         archivedCommands = commands;
 
-        archiveStorage.save(storage.archiveFilePath
-                , storage.archivePath
-                , archivedCommands);
+        archiveStorage.save(storage.getArchiveFilePath(),
+                storage.getArchivePath(),
+                archivedCommands);
 
         commands = new ArrayList<Command>();
         return Ui.printArchiveCompleted();
@@ -157,8 +157,8 @@ public class CommandList {
      * Retrieves the previously archived commands and
      * appends them to the current working Command List
      *
-     * @see duke.Storage#save(String, Path, ArrayList) save
      * @return Successful Archive notification to user
+     * @see duke.Storage#save(String, Path, ArrayList) save
      */
     public String retrieveCommand() {
         int size = commands.size();
@@ -169,10 +169,11 @@ public class CommandList {
             commands.addAll(archivedCommands);
         }
 
-        storage.save(storage.filePath
-                , storage.path
-                , commands);
+        storage.save(storage.getFilePath(),
+                storage.getPath(),
+                commands);
 
         return Ui.printRetrievalCompleted();
     }
 }
+

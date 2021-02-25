@@ -7,10 +7,9 @@ package duke;
  * @version 0.1
  * @since 2021-02-22
  */
-
 public class Command {
-    String commandDescription;
-    boolean isDone;
+    private String commandDescription;
+    private boolean isDone;
 
     /**
      * Constructor for Command

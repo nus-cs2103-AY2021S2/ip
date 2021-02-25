@@ -10,6 +10,8 @@ package duke;
 
 public class ToDo extends Command {
 
+    private final boolean isDone;
+
     /**
      * Constructor for Command child class ToDo
      *

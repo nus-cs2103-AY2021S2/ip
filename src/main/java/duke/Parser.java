@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /** Processes user input and possible input-based errors
  * and sorts to relevant commandList methods or displays
  * correct error messages to prompt user for correct inputs.
@@ -8,19 +11,13 @@ package duke;
  * @version 0.1
  * @since 2021-02-22
  */
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class Parser {
-    CommandList commandList;
-
-    static String terminate = "bye";
-
-    private final static String REGEX_SPACE = " ";
-    private final static String REGEX_TODO = " ";
-    private final static String REGEX_DEADLINE = " /by ";
-    private final static String REGEX_EVENT = " /at ";
+    private CommandList commandList;
+    private final String regexSpace = " ";
+    private final String regexToDo = " ";
+    private final String regexDeadline = " /by ";
+    private final String regexEvent = " /at ";
+    private final String terminate = "bye";
 
     public Parser(CommandList commandList) {
         this.commandList = commandList;
@@ -79,31 +76,31 @@ public class Parser {
      * Sorts user input accordingly and splits input by
      * command type to relay formatted input to addCommand
      *
-     * @see duke.CommandList#addCommand(Command, String) addCommand
      * @param input Raw user input to add commands
      * @return Added notification to user
      * @exception DateTimeParseException if the LocalDate user input is in wrong format
+     * @see duke.CommandList#addCommand(Command, String) addCommand
      */
     String parseAdd(String input) {
         Command command;
         String result = "";
         try {
             if (input.contains("todo")) {
-                String[] description = input.split(REGEX_TODO);
+                String[] description = input.split(regexToDo);
                 command = new ToDo(input.substring(5));
                 result = commandList.addCommand(command, "T");
 
             } else if (input.contains("deadline")) {
-                String[] inputTime = input.split(REGEX_DEADLINE);
+                String[] inputTime = input.split(regexDeadline);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
                 command = new Deadline(inputTime[0].substring(9), parseDate);
-                result =  commandList.addCommand(command, "D");
+                result = commandList.addCommand(command, "D");
 
             } else if (input.contains("event")) {
-                String[] inputTime = input.split(REGEX_EVENT);
+                String[] inputTime = input.split(regexDeadline);
                 LocalDate parseDate = LocalDate.parse(inputTime[1].trim());
                 command = new Event(inputTime[0].substring(6), parseDate);
-                result =  commandList.addCommand(command, "E");
+                result = commandList.addCommand(command, "E");
 
             } else {
                 result = "An error occurred, did you add the correct command?";
@@ -116,34 +113,34 @@ public class Parser {
         return result;
     }
 
-     String parseList() {
-       return commandList.printList();
-   }
+    String parseList() {
+        return commandList.printList();
+    }
 
     /**
      * Splits input to get id of desired done command
      * to relay formatted input to doneCommand
      *
-     * @see duke.CommandList#doneCommand(int) doneCommand
      * @param input Raw user input to mark command
      * @return Done notification to user
+     * @see duke.CommandList#doneCommand(int) doneCommand
      */
     String parseDone(String input) {
-       String[] doneInput = input.split(REGEX_SPACE);
-       int id = Integer.parseInt(doneInput[1]) - 1;
-       return commandList.doneCommand(id);
-   }
+        String[] doneInput = input.split(regexSpace);
+        int id = Integer.parseInt(doneInput[1]) - 1;
+        return commandList.doneCommand(id);
+    }
 
     /**
      * Splits input to get id of desired deleted command
      * to relay formatted input to deleteCommand
      *
-     * @see duke.CommandList#deleteCommand(int) deleteCommand
      * @param input Raw user input to delete command
      * @return Delete notification to user
+     * @see duke.CommandList#deleteCommand(int) deleteCommand
      */
     String parseDelete(String input) {
-        String[] deleteInput = input.split(REGEX_SPACE);
+        String[] deleteInput = input.split(regexSpace);
         int id = Integer.parseInt(deleteInput[1]) - 1;
         return commandList.deleteCommand(id);
     }
@@ -152,12 +149,12 @@ public class Parser {
      * Splits input to get keyWord from user
      * to relay formatted input to findCommand
      *
-     * @see duke.CommandList#findCommand(String) findCommand
      * @param input Raw user input to mark command
      * @return Found or Missing keyWord notification to user
+     * @see duke.CommandList#findCommand(String) findCommand
      */
     String parseFind(String input) {
-        String[] findInput = input.split(REGEX_SPACE);
+        String[] findInput = input.split(regexSpace);
         return commandList.findCommand(findInput[1]);
     }
 
@@ -170,7 +167,7 @@ public class Parser {
         }
         return result;
     }
-        
+
     /**
      * Introduces scanner class to read in input
      * and sorts input into appropriate parsing commands
@@ -202,7 +199,7 @@ public class Parser {
             } else if (input.contains("delete")) {
                 result = parseDelete(input);
 
-            } else if(input.contains("find")) {
+            } else if (input.contains("find")) {
                 result = parseFind(input);
 
             } else if (input.contains("todo")

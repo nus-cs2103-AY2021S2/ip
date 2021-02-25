@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /** Represents Event inherited from Command,
  * attached with command description and due date
  *
@@ -7,14 +10,10 @@ package duke;
  * @version 0.1
  * @since 2021-02-22
  */
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Event extends duke.Command {
-    public LocalDate eventDate;
+    private final boolean isDone;
+    private LocalDate eventDate;
     private String formattedDate;
-
 
     /**
      * Constructor for Command child class Event

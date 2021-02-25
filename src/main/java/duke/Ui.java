@@ -4,16 +4,19 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    static String GREET = "Woof! I'm Doge Duke\n"
+    private static String greet = "Woof! I'm Doge Duke\n"
             + "What do you want me to do?\n"
             + "Type your request in below!";
 
-    static String GOODBYE = "Bye! Hope I was a good dog, "
+    private static String goodbye = "Bye! Hope I was a good dog, "
             + "see you again soon!";
 
-    static String printGreet() { return GREET; }
+    static String printGreet() {
+        return greet;
+    }
+
     static String printGoodbye() {
-        return GOODBYE;
+        return goodbye;
     }
 
     static String printGeneralError() {
@@ -25,7 +28,7 @@ public class Ui {
         String result = "";
         for (int i = 0; i < xs.size(); i++) {
             Command value = xs.get(i);
-            result += (i + 1) + ". " + value +"\n";
+            result += (i + 1) + ". " + value + "\n";
         }
         return result;
     }
@@ -57,7 +60,7 @@ public class Ui {
                 + " commands!";
     }
 
-     static String printDone(Command command) {
+    static String printDone(Command command) {
         return "Very Woof! "
                 + "I have completed this commands:\n"
                 + command

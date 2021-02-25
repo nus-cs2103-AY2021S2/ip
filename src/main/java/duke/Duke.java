@@ -15,11 +15,13 @@ import javafx.scene.control.Label;
 public class Duke {
 
     final CommandList commandList;
-    Storage storage;
-    Ui ui;
-    Parser parser;
+    private Storage storage;
+    private Ui ui;
+    private Parser parser;
 
-
+    /**
+     * Constructor of Duke class
+     */
     public Duke() {
         this.storage = new Storage();
         this.commandList = new CommandList(storage);
@@ -44,6 +46,5 @@ public class Duke {
         response = new Label(result);
         return response;
     }
-
 
 }
