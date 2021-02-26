@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <padding>
+        <Insets left="10.0" right="10.0" top="10.0" />
+    </padding>
+    <Label fx:id="dialog" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" text="Label" wrapText="true" />
+</fx:root>
