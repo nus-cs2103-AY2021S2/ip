@@ -119,17 +119,17 @@ Expected Outcome:
 `Here are the tasks in your list:` 
 
 
-`[T][] cook`
+`1.[T][] cook`
 
-`[D][] project (by: Feb 19 2021 11:59 PM)`
+`2.[D][] project (by: Feb 19 2021 11:59 PM)`
 
-`[E][] meeting (at: Feb 18 2021 9:00 AM)`
+`3.[E][] meeting (at: Feb 18 2021 9:00 AM)`
 
 ### Searching for a task using keywords: `find`
 Find tasks with descriptions containing the keywords specified.
 
 Format: `find KEYWORD`
-* The search is case-sensitive. Eg, `COOK` will not match `cook`
+* The search is case-insensitive. Eg, `COOK` will match `cook`
 * Order of keywords matter. Eg, `finish project` will not match `project finish`
 * Only tasks matching all the keywords will be returned.
 
