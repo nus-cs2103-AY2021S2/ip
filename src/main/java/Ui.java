@@ -46,7 +46,7 @@ public class Ui {
                 + "Sorting task list : sort\n"
                 + "Locating a task : find {KEYWORD}\n"
                 + "Exiting the program : bye\n\n"
-                + "Visit the User Guide for more details.\n";
+                + "Visit the user guide (https://andrea-twl.github.io/ip/) for more details.\n";
     }
     /**
      * Returns String accompanying a "done" command.
