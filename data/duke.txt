@@ -1,0 +1,8 @@
+TODO[X] watch lecture
+TODO[X] eat dinner
+DDLN[ ] assignment (by: 2021-02-23)
+TODO[ ] buy groceries
+EVNT[ ] ice skating (at: 2022-03-15)
+DDLN[ ] lecture quiz (by: 2021-04-01)
+TODO[X] complete homework
+TODO[ ] som

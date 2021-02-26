@@ -221,4 +221,8 @@ Format: `bye`
 
 ## Acknowledgements
 ### External Libraries used:
+<<<<<<< HEAD
 + javafx-sdk-11.0.2
+=======
++ javafx-sdk-11.0.2
+>>>>>>> b7d0bbeddb9d3c6f43a441c6dd2cc4a23f5bb526
