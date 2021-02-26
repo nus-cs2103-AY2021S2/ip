@@ -14,7 +14,7 @@ while still having the benefits of a Graphical User Interface (GUI).
     * Tagging a task: `tag`
     * Marking a task as completed: `done`
     * Deleting a task: `delete`
-    * Exiting the program: `exit`
+    * Exiting the program: `bye`
     * Saving the data
     * Editing the data file
 * FAQ
@@ -37,7 +37,7 @@ while still having the benefits of a Graphical User Interface (GUI).
    * `list`: Lists all tasks.
    * `todo cook`: Adds a ToDo task with description 'cook'.
    * `delete 2`: Deletes the 2nd task shown in the current list.
-   * `exit`: Exits the app.
+   * `bye`: Exits the app.
    
 1. Refer to the Features below for details of each command. 
 
@@ -202,11 +202,11 @@ Expected Outcome:
 
 `Now you have 2 tasks in the list`
 
-### Exiting the program: `exit`
+### Exiting the program: `bye`
 
 Exits the program.
 
-Format: `exit`
+Format: `bye`
 
 ### Saving the data
 
