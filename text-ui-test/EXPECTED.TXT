@@ -1,7 +1,27 @@
-Hello from
- ____        _        
+ ____        _
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello Master. Nice to meet you, my name is Duke.
+How may I be of service, Master?
+Master, I've added this task as requested:
+[T][ ] finish tutorial
+
+You have 1 task in the list now, Master.
+Master, I've added this task as requested:
+[D][ ] individual assignment (by: Sunday)
+
+You have 2 tasks in the list now, Master.
+Master, I've added this task as requested:
+[E][ ] project meeting (at: HSSML, Saturday 2-4pm)
+
+You have 3 tasks in the list now, Master.
+Here is a list of your tasks, Master:
+1. [T][ ] finish tutorial
+2. [D][ ] individual assignment (by: Sunday)
+3. [E][ ] project meeting (at: HSSML, Saturday 2-4pm)
+Well done, Master! I've marked this task as done:
+[T][X] finish tutorial
+Have a good day, Master.
