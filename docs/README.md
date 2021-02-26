@@ -241,7 +241,7 @@ find | `find KEYWORD` eg, `find cook`
 tag | `tag INDEX /DESCRIPTION` eg, `tag 1/daily`
 done | `done` eg, `done 2`
 delete | `delete INDEX` eg, `delete 2`
-exit | `exit`
+exit | `bye`
 
 
 
