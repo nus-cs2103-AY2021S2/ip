@@ -1,3 +1,6 @@
+import data.Duke;
+import data.IDuke;
+
 import java.util.Scanner;
 
 public class Main {

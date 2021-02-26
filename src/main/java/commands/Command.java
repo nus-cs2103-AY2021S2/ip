@@ -1,3 +1,8 @@
+package commands;
+
+import data.IDuke;
+import data.Duke;
+
 public class Command {
     protected final int targetIndex;
     protected final IDuke duke;
@@ -7,13 +12,12 @@ public class Command {
         this.duke = duke;
     }
 
-    public IDuke execute() {
+    public String execute() {
         throw new UnsupportedOperationException("This method is to"
                 + " be implemented by child classes.");
     }
 
-
-        Command setDuke(Duke duke) {
+    Command setDuke(IDuke duke) {
         return new Command(targetIndex, duke);
     }
 

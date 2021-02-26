@@ -1,3 +1,7 @@
+package data.task;
+
+import common.TimeWrapper;
+
 public class Deadline extends Task{
 
     protected TimeWrapper by;

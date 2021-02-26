@@ -1,4 +1,6 @@
-public class Task implements ITask{
+package data.task;
+
+public class Task implements ITask {
 
     protected String description;
     protected boolean isDone;
