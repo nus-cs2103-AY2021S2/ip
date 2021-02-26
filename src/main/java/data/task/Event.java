@@ -1,4 +1,8 @@
-public class Event extends Task{
+package data.task;
+
+import common.TimeWrapper;
+
+public class Event extends Task {
 
     protected TimeWrapper at;
 
