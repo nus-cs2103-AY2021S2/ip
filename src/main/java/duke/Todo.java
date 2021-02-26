@@ -20,6 +20,6 @@ public class Todo extends Task {
 
     @Override
     public String getTaskCommand() {
-        return "todo " + getDescription();
+        return "t " + getDescription();
     }
 }

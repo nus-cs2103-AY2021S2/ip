@@ -24,6 +24,6 @@ public class Event extends Task {
 
     @Override
     public String getTaskCommand() {
-        return "event " + getDescription() + " /at " + at;
+        return "e " + getDescription() + " /at " + at;
     }
 }

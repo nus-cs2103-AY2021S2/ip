@@ -38,13 +38,13 @@ public class Parser {
                 String taskString = tasks.getTaskString(deleteId);
                 tasks.deleteTask(deleteId);
                 return ui.getDeleteTaskMsg(taskString, tasks.getNumOfTasks());
-            case "todo":
+            case "t":
                 // Fallthrough
-            case "deadline":
+            case "d":
                 // Fallthrough
-            case "event":
+            case "e":
                 // Fallthrough
-            case "fixedDur":
+            case "fd":
                 tasks.addTask(cmd);
                 int numOfTasks = tasks.getNumOfTasks();
                 return ui.getAddTaskMsg(tasks.getTaskString(numOfTasks), numOfTasks);

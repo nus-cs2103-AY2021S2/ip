@@ -45,6 +45,6 @@ public class Deadline extends Task {
 
     @Override
     public String getTaskCommand() {
-        return "deadline " + getDescription() + " /by " + by;
+        return "d " + getDescription() + " /by " + by;
     }
 }

@@ -52,14 +52,14 @@ public class TaskList {
         String type = arr[0];
         String rest = arr[1];
         Task task;
-        if (type.equals("todo")) {
+        if (type.equals("t")) {
             task = new Todo(rest);
-        } else if (type.equals("deadline")) {
+        } else if (type.equals("d")) {
             String[] temp = rest.split(" /by ");
             String description = temp[0];
             String by = temp[1];
             task = new Deadline(description, by);
-        } else if (type.equals("event")) {
+        } else if (type.equals("e")) {
             String[] temp = rest.split(" /at ");
             String description = temp[0];
             String at = temp[1];

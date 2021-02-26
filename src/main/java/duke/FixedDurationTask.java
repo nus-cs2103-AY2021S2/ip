@@ -25,6 +25,6 @@ public class FixedDurationTask extends Task {
 
     @Override
     public String getTaskCommand() {
-        return "fixedDur " + getDescription() + " /dur " + duration;
+        return "fd " + getDescription() + " /dur " + duration;
     }
 }
