@@ -9,8 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.util.Scanner;
-
 public class Main extends Application {
     private final IDuke duke = Duke.getDuke("data/duke.txt");
 
