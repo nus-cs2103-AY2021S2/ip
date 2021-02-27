@@ -146,7 +146,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        String dataFilePath = ".\\data\\duke.txt";
+        String dataFilePath = "./data/duke.txt";
         storage = new Storage(dataFilePath);
         tasks = new TaskList(storage.load());
         gui = new Gui();
