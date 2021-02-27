@@ -19,13 +19,14 @@ sourceSets {
     }
 
 }
+
+
 dependencies {
     compile 'junit:junit:4.12'
 }
 run {
     enableAssertions = true
 }
-
 test {
     useJUnitPlatform()
 }
