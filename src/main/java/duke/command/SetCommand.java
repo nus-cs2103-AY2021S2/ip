@@ -29,7 +29,7 @@ public class SetCommand extends IndexCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskIndexOutOfBoundsException {
-        if (index < tasks.size() && index > 0) {
+        if (index < tasks.size() && index >= 0) {
             Task task = tasks.get(index);
             task.setPriority(priority);
             storage.updateInFile(tasks);
