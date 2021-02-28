@@ -7,7 +7,7 @@ items!
 
 ## Quick Start
 * Ensure you have Java `11` or above installed in your computer.
-* Download the latest `ronald.jar` [here](https://github.com/natosy/ip/releases).
+* Download the latest `ronald.jar` [here](https://github.com/natosy/ip/releases/tag/A-Release).
 * Copy the file to the folder you want to use as the home folder for Ronald.
 * Double-click the file to start the app. The GUI should appear in a few seconds.
 
