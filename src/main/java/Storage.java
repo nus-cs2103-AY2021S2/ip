@@ -33,13 +33,13 @@ public class Storage {
             }
         }
         fw.close();
-    }*/
+    }
 
     public static void loadTasks(TaskList list, File f) throws IOException {
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
-            s =     s.trim();
+            s = s.trim();
 
             String[] strArray = s.split("\\|", 4);
 
@@ -72,4 +72,5 @@ public class Storage {
             }
         }
     }
+    */
 }
