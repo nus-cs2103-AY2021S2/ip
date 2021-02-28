@@ -1,14 +1,33 @@
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class TaskList {
     private ArrayList<Task> tasks;
+
     /**
      * Constructor method.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
+
+    /**
+     * Constructor method
+     * @param task ArrayList<Task>
+     */
+    public TaskList(ArrayList<Task> task) {
+        this.tasks = task;
+    }
+
+    /**
+     * Method to get TaskList
+     * @return the ArrayList<Task> of TaskList
+     */
+    public ArrayList<Task> getTaskList() {
+        return tasks;
+    }
+
+
     /**
      * Method to get the Task
      * @param index of the Task in the TaskList
@@ -57,3 +76,5 @@ public class TaskList {
         return tasks.size();
     }
 }
+
+

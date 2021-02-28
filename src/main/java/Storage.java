@@ -21,9 +21,15 @@ public class Storage {
         }
     }
 
-    /*public static void saveTasks(TaskList list, File f) throws IOException {
-        FileWriter fw = new FileWriter(f);
-        for (Task temp : list) {
+    // @@wei-yutong reused with modifications
+    public void saveTasks(TaskList list) throws IOException {
+        FileWriter fw = new FileWriter(this.file);
+        ArrayList<Task> copied = new ArrayList<>();
+        for (int i = 0; i < list.numOfTasks(); i++) {
+            Task added = list.getTask(i);
+            copied.add(added);
+        }
+        for (Task temp : copied) {
             if (temp instanceof Deadline) {
                 fw.write("D|" + temp.getStatusIcon() + "|" + temp.getDescription().trim() + "|"+ ((Deadline) temp).getDateString() + "\n");
             } else if (temp instanceof Event) {
@@ -35,8 +41,10 @@ public class Storage {
         fw.close();
     }
 
-    public static void loadTasks(TaskList list, File f) throws IOException {
-        Scanner sc = new Scanner(f);
+    // @@wei-yutong reused with modifications
+    public ArrayList<Task> loadTasks() throws IOException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner sc = new Scanner(this.file);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
             s = s.trim();
@@ -52,7 +60,7 @@ public class Storage {
                 } else if (strArray[1].trim().equals("[Incompleted]")) {
                     deadline.isDone = false;
                 }
-                list.addTask(deadline);
+                tasks.add(deadline);
             } else if (strArray[0].trim().equals("E")) {
                 Event event = new Event(strArray[2].trim(), strArray[3].trim());
                 if (strArray[1].trim().equals("[Done]")) {
@@ -60,17 +68,17 @@ public class Storage {
                 } else if (strArray[1].trim().equals("[Incompleted]")) {
                     event.isDone = false;
                 }
-                list.addTask(event);
+                tasks.add(event);
             } else {
-                ToDo todo = new ToDo(strArray[2].trim());
+                ToDo todo = new ToDo(strArray[2].trim(),"");
                 if (strArray[1].trim().equals("[Done]")) {
                     todo.isDone = true;
                 } else if (strArray[1].trim().equals("[Incompleted]")) {
                     todo.isDone = false;
                 }
-                list.addTask(todo);
+                tasks.add(todo);
             }
         }
+        return tasks;
     }
-    */
 }

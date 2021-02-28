@@ -1,15 +1,5 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.io.IOException;
-import java.io.File;
-import java.io.FileWriter;
 
 /**
  * Main class.
@@ -29,7 +19,11 @@ public class Duke {
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList();
+        try {
+            tasks = new TaskList(storage.loadTasks());
+        } catch (IOException e) {
+            tasks = new TaskList();
+        }
     }
 
     /*public void run() {
@@ -65,8 +59,9 @@ public class Duke {
     /**
      * Method to run Duke
      */
-    public void run() {
+    public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
+        storage.loadTasks();
         ui.reply();
         Parser parser = new Parser(tasks, ui);
         while (true) {
@@ -77,6 +72,7 @@ public class Duke {
                 break;
             }
         }
+        storage.saveTasks(tasks);
         System.exit(0);
     }
 

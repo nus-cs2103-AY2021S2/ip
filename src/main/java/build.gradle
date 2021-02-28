@@ -28,11 +28,20 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+
+}
 test {
     useJUnitPlatform()
 }
 
 dependencies {
+    compile group: 'com.joestelmach', name: 'natty', version: '0.6'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     String javaFxVersion = '11'
@@ -51,14 +60,14 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-
-run {
-    standardInput = System.in
+shadowJar {
+    archiveBaseName = "duke"
+    archiveClassifier = null
 }
 
-shadowJar {
-    archiveBaseName = "Duke"
-    archiveClassifier = null
+run {
+    enableAssertions = true
+    standardInput = System.in
 }
 
 application {
