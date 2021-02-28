@@ -16,7 +16,7 @@ public class TaskListTest {
     TaskList tl = new TaskList(list);
 
     @Test
-    void listAllTasks() {
+    void listAllTasks_taskList_success() {
         String correctString = "1.[T][ ] buy a car\n"
                 + "2.[D][ ] finish iP(by: Aug 8 2021 02:14PM)\n"
                 + "3.[E][ ] casting(at: Jan 27 2021 04:30PM-05:00PM)\n";
@@ -24,12 +24,12 @@ public class TaskListTest {
     }
 
     @Test
-    void getList() {
+    void getList_taskList_success() {
         assertEquals(list, tl.getList());
     }
 
     @Test
-    void makeDone() {
+    void makeDone_task_success() {
         Event e = new Event("casting", LocalDate.of(2021, Month.JANUARY, 27),
                 LocalTime.of(16, 30), LocalTime.of(17, 0));
         e.isDone = true;

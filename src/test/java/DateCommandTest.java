@@ -13,7 +13,7 @@ public class DateCommandTest {
     DateCommand command = new DateCommand(fullCommand, typeOfCommand);
 
     @Test
-    void execute() throws DukeException {
+    void execute_dateCommand_success() throws DukeException {
         List<Task> list = List.of(new ToDo("buy a car"),
                 new Deadline("finish iP", LocalDate.of(2021, Month.AUGUST, 8),
                         LocalTime.of(14, 14)),
