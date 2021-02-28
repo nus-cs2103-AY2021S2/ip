@@ -3,7 +3,7 @@
 Welcome to Ronald! Ronald is a task list application which helps you to keep track of `todo`, `deadline` and `event`
 items!
 
-<img src="docs/Ui.png" width="200px">
+<img src="docs/Ui.png" width="1000px">
 
 ## Quick Start
 * Ensure you have Java `11` or above installed in your computer.
