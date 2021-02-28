@@ -55,6 +55,8 @@ public class ToDoCommand extends StoringCommand {
      * @throws DukeIllegalArgumentException If the description is incorrect.
      */
     private String handleToDo(String description) throws DukeIllegalArgumentException {
+
+
         assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
         if (description.matches("\\s*")) {
             throw new DukeIllegalArgumentException(

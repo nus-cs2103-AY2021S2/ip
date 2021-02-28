@@ -53,7 +53,9 @@ public class DoneCommand extends Command {
      * @throws DukeIllegalArgumentException If index is invalid.
      */
     private String handleDone(int index) throws DukeIllegalArgumentException {
+
         assert duke != null : Message.ERR_DUKE_NOT_INIT.toString();
+
         if (index < 1 || index > duke.getNumTask()) {
             throw new DukeIllegalArgumentException("Task index out of bound!");
         }
