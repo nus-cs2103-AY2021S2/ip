@@ -10,13 +10,14 @@ import seashell.Seashell;
 import java.io.IOException;
 
 public class Main extends Application {
-    /**
-     * Runs the main program
-     * @param args
-     */
+
     private Seashell seashell = new Seashell();
     private Image seashellImage = new Image(this.getClass().getResourceAsStream("/images/DaSeashell.png"));
 
+    /**
+     * Load the MainWindow fxml, set the title and start the application
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

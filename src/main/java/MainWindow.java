@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image seashellImage = new Image(this.getClass().getResourceAsStream("/images/DaSeashell.png"));
 
+    /**
+     * Initialize scroll pane and show welcome message
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
