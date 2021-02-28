@@ -1,7 +1,15 @@
-# User Guide
+# Ronald User Guide
 
-Welcome to Donald! Donald is a task list application which helps you to keep track of `todo`, `deadline` and `event`
+Welcome to Ronald! Ronald is a task list application which helps you to keep track of `todo`, `deadline` and `event`
 items!
+
+<img src="docs/Ui.png" width="200px">
+
+## Quick Start
+* Ensure you have Java `11` or above installed in your computer.
+* Download the latest `ronald.jar` [here](https://github.com/natosy/ip/releases).
+* Copy the file to the folder you want to use as the home folder for Ronald.
+* Double-click the file to start the app. The GUI should appear in a few seconds.
 
 ## Feature List
 
@@ -160,9 +168,7 @@ We will be closing shortly...
 
 ## Credits
 
-__________
-
-* The GUI of Donald was created with the help
+* The GUI of Ronald was created with the help
   of [this JavaFX tutorial](https://se-education.org/guides/tutorials/javaFx.html)
 * The McDonald's logo was retrieved from [this link](https://www.logo.wine/logo/McDonald%27s)
 * Ronald's Picture was made with photoshop combining [this McSpicy](https://www.mcdonalds.com.sg/food-menu/mcspicy/)
