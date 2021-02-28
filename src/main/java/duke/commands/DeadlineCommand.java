@@ -50,15 +50,6 @@ public class DeadlineCommand extends StoringCommand {
         return handleDeadline(description, time);
     }
 
-    /**
-     * Handles the deadline operation.
-     * Creates a new deadline task and store it in Duke.
-     *
-     * @param description Description of the deadline.
-     * @param time Time of deadline.
-     * @return String prompt for the action.
-     * @throws DukeIllegalArgumentException If the command parameters are incorrect.
-     */
     private String handleDeadline(String description, String time)
             throws DukeIllegalArgumentException {
         if (description.matches("\\s*")) {
@@ -69,8 +60,10 @@ public class DeadlineCommand extends StoringCommand {
             throw new DukeIllegalArgumentException(
                     "The time of deadline cannot be empty!");
         }
+
         assert description.length() > 0 : "Description is empty!";
         assert time.length() > 0 : "Time is empty!";
+
         ITask task = Deadline.getDeadline(description, time);
         storeTask(task);
         String output = "Got it. I've added this task:\n\t" + task.toString()

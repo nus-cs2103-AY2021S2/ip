@@ -22,8 +22,8 @@ public enum SortType {
         } else if (t1.isEmpty() && t2.isPresent()) {
             return -1;
         }
-        assert t1.isPresent() && t2.isPresent();
 
+        assert t1.isPresent() && t2.isPresent();
         return t1.get().compareTo(t2.get());
     }),
     DESCRIPTION((o1, o2) -> {
