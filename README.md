@@ -3,7 +3,9 @@
   <h1 align="center">Steve</h1>
 </p>
 
-[![CI Status](https://github.com/tjtanjin/ip/workflows/Java%20CI/badge.svg)](https://github.com/tjtanjin/ip/actions)
+<p align="center">
+  <a href="https://github.com/tjtanjin/ip/actions"> <img src="https://github.com/tjtanjin/ip/workflows/Java%20CI/badge.svg" /> </a>
+</p>
 
 ## Table of Contents
 * [Introduction](#introduction)
