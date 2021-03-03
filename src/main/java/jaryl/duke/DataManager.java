@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * DataManager handles reading/writing data from/to local disk storage
+ * DataManager handles reading/writing data from/to local disk
  */
 public class DataManager {
     private String filePath;
