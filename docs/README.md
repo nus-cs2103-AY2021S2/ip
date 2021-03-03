@@ -96,7 +96,7 @@ Here are the tasks in your list:
 1. [T][_] Buy book
 2. [D][_] Do ST2334 HW | 2021-02-22 10:00
 3. [E][_] CCA party | 2021-02-22 10:00 ~ 2021-02-22 13:00
-``
+```
 ### `find` - Find tasks with a keyword
 
 Find events that matched the given keyword.
