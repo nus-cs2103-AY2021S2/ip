@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * DataManager handles reading/writing data from/to local disk storage
+ * DataManager handles reading/writing data from/to local disk
  */
 public class DataManager {
     private String filePath;
@@ -24,7 +24,7 @@ public class DataManager {
     }
 
     /**
-     * Handles the creation and writing of data to file on local disk storage
+     * Handles the creation and writing of data to file on local disk
      * @param tasksList list of tasks
      */
     public void writeToFile(ArrayList<Task> tasksList) {

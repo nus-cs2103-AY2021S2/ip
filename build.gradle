@@ -49,3 +49,5 @@ checkstyle {
 run {
     standardInput = System.in
 }
+
+// fix untagged Gradle task
