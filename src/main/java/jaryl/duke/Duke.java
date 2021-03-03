@@ -48,7 +48,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Entry point into Duke chatbot
+     * Entry point into Duke chatbot application
      * @param stage the primary stage for Duke
      */
     @Override
