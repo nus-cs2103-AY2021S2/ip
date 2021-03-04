@@ -4,7 +4,7 @@ Hi I'm Chip the Squirrel, a personal assistant chatbot to help you keep track of
 ![chip](./Ui.png)
 
 # Table of Contents
-- [Chip the Squirrel User Guide](#chip-the-squirrel-user-guide)- 
+- [Chip the Squirrel User Guide](#chip-the-squirrel-user-guide)
 - [Table of Contents](#table-of-contents)
 - [Features](#features)
     - [Command Format](#command-format)
@@ -41,19 +41,19 @@ We squirrels are smart creatures!
 
 ## Command Format
 
-Words in `UPPER_CASE` are parameters to be supplied by the user.
-`(Round Brackets)` are used to denote optional parameters.
+Words in `UPPER_CASE` are parameters to be supplied by the user.  
+`(Round Brackets)` are used to denote optional parameters.  
 `...` is used to denote that one or more parameters are accepted.
 
 ## Seeking Help
 
 The help command helps you remember what each command does. Help is always a 'help' away!
 
-### `help (COMMAND)` - get information about syntax
+### `help (COMMAND)`
 
 Typing `help` will display the commands that are available. Typing help followed by the name of the command will display
-more info on how the command can be used.
-(COMMAND) should be a valid command.
+more info on how the command can be used and its syntax.  
+(COMMAND) needs to be a valid command.
 
 Example of usage:
 
@@ -67,7 +67,7 @@ Expected outcome:
 
 The bye command quits the application. Don't worry I'll remember all your tasks the next time you come back!
 
-### `bye` - quits the application
+### `bye`
 
 Typing `bye` will quit the application.
 
@@ -83,9 +83,9 @@ Application quits.
 
 Add a todo and I'll remember it for you!
 
-### `todo DESCRIPTION` - Add a todo
+### `todo DESCRIPTION`
 
-Typing `todo` followed by a description adds a todo to your list of tasks.
+Typing `todo` followed by a description adds a todo to your list of tasks.  
 DESCRIPTION can be made out of one or many words.
 
 Example of usage:
@@ -100,12 +100,12 @@ Expected outcome:
 
 Add a deadline and I'll remember it for you!
 
-### `deadline DESCRIPTION /by DATE (TIME)` - Add a deadline
+### `deadline DESCRIPTION /by DATE (TIME)`
 
-Typing `deadline` followed by a description, date and optional time field adds a deadline to your list of tasks.
-DESCRIPTION can be made out of one or many words.
-DATE should be in yyyy-mm-dd format
-(TIME) is optional and should be in hh:mm format
+Typing `deadline` followed by a description, date and optional time field adds a deadline to your list of tasks.  
+DESCRIPTION can be made out of one or many words.  
+DATE should be in yyyy-mm-dd format.  
+(TIME) is optional and should be in hh:mm format.
 
 Example of usage:
 
@@ -119,12 +119,12 @@ Expected outcome:
 
 Add an event and I'll remember it for you!
 
-### `event DESCRIPTION /at DATE (TIME)` - Add an  event
+### `event DESCRIPTION /at DATE (TIME)`
 
-Typing `event` followed by a description, date and optional time field adds an event to your list of tasks.
-DESCRIPTION can be made out of one or many words.
-DATE should be in yyyy-mm-dd format
-(TIME) is optional and should be in hh:mm format
+Typing `event` followed by a description, date and optional time field adds an event to your list of tasks.  
+DESCRIPTION can be made out of one or many words.  
+DATE should be in yyyy-mm-dd format.  
+(TIME) is optional and should be in hh:mm format.
 
 Example of usage:
 
@@ -138,7 +138,7 @@ Expected outcome:
 
 I can list out your task for you!
 
-### `list` - Lists out all tasks
+### `list`
 
 Displays a list of all tasks.
 
@@ -154,10 +154,11 @@ Expected outcome:
 
 You can let me know what tasks you have completed!
 
-### `done TASK_NUMBER` - Describe action
+### `done TASK_NUMBER`
 
-Typing `done` followed by the task number marks the task as done. A `[X]` signifies that a task has been completed. If
-you are unsure of the task number, you can list out all tasks using the `list` command.
+Typing `done` followed by the task number marks the task as done.  
+A `[X]` signifies that a task has been completed.  
+If you are unsure of the task number, you can list out all tasks using the `list` command.
 
 Example of usage:
 
@@ -171,10 +172,10 @@ Expected outcome:
 
 Let me know if you would like a task to be deleted forever. Don't worry any secrets are safe with me!
 
-### `delete TASK_NUMBER` - Describe action
+### `delete TASK_NUMBER`
 
-Typing `delete` followed by the task number deletes the task. If you are unsure of the task number, you can list out all
-tasks using the `list` command.
+Typing `delete` followed by the task number deletes the task.  
+If you are unsure of the task number, you can list out all tasks using the `list` command.
 
 Example of usage:
 
@@ -188,10 +189,12 @@ Expected outcome:
 
 Let me know what you are looking for!
 
-### `find SEARCH_PARAMETERS...` - Describe action
+### `find SEARCH_PARAMETERS...`
 
-You can search for a task using the find command. One or more search parameters are accepted. The program will attempt
-to find all tasks that contain any of the search parameters. Search parameters are case-insensitive.
+You can search for a task using the find command.  
+One or more search parameters are accepted.  
+The program will attempt to find all tasks that contain any of the search parameters.  
+Search parameters are case-insensitive.
 
 Example of usage:
 
