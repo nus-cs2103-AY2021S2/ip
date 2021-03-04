@@ -14,7 +14,7 @@ Adds a task of todo type into your task list.
 Example of usage: 
 
 ![todo fork my TP](./todo.png "todo command usage")
-##
+
 ### Feature 2: `event`
 
 ## Usage
