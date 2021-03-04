@@ -1,0 +1,14 @@
+paw
+todo rollover
+event dog festival /at 2021-020-10
+event dog festival /at 2021-02-10
+deadline finish doggo treats /by 2021-03-11
+shake
+done 1
+todo
+done 3
+find dog
+delete
+delete 2
+list
+bye
