@@ -5,7 +5,7 @@ public class ToDo extends Task {
      * @param description User input description of ToDo
      * @param tag User input tag for the Event
      */
-    public ToDo(String description,String tag) {
+    public ToDo(String description, String tag) {
         super(description);
         this.tag = tag;
     }

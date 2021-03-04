@@ -60,8 +60,8 @@ public class TaskList {
      */
     public void checkForDuplicate() {
         ArrayList<Task> list = new ArrayList<>();
-        for (Task check: tasks ) {
-            if(!list.contains(check)) {
+        for (Task check: tasks) {
+            if (!list.contains(check)) {
                 list.add(check);
             }
         }

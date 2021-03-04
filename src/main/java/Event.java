@@ -1,8 +1,9 @@
 public class Event extends Task {
 
     protected String datetime;
+
     /**
-     * Constructor method.
+     * Constructor method
      * @param description User input description of Event
      * @param datetime Date and time of the Event
      */
@@ -10,6 +11,7 @@ public class Event extends Task {
         super(description);
         this.datetime = datetime;
     }
+
     /**
      * Method to get the datetime of the Event
      * @return a String object of the datetime of the Event
@@ -28,3 +30,5 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + datetime + ")";
     }
 }
+
+

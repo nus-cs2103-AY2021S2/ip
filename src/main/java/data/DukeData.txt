@@ -1,4 +1,0 @@
-D|[Done]|return|2000-10-20
-T|[Done]|run
-E|[Incompleted]|project meeting|Mon 2-5pm
-T|[Incompleted]|run

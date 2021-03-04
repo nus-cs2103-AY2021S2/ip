@@ -7,6 +7,7 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
     private boolean isEnd;
+
     /**
      * Constructor method
      * @param tasklist which contains the Task objects
@@ -43,11 +44,12 @@ public class Parser {
                 int size = taskList.numOfTasks();
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= size; i++) {
-                    System.out.println(i + ". " + taskList.getTask(i - 1).toString());
+                    System.out.println(i + ". "
+                            + taskList.getTask(i - 1).toString());
                 }
             } else if (command.contains("todo")) {
                 String[] save = command.split(" ");
-                ToDo t = new ToDo("","");
+                ToDo t = new ToDo("", "");
                 if (save.length > 2) {
                     t.setDescription(save[1]);
                     t.setTag(save[2]);
@@ -67,7 +69,7 @@ public class Parser {
             } else if (command.contains("deadline")) {
                 String[] input = command.split("/by ");
                 input[0] = input[0].replaceAll("deadline", "");
-                LocalDate date =LocalDate.parse(input[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate date = LocalDate.parse(input[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 Deadline d = new Deadline(input[0], date);
                 taskList.addTask(d);
                 taskList.checkForDuplicate();
@@ -77,8 +79,8 @@ public class Parser {
                 ui.print("Now you have " + numOfTask.toString() + " tasks in the list.");
             } else if (command.contains("event")) {
                 String[] info = command.split("/at");
-                info[0] = info[0].replaceAll("event","");
-                Event e = new Event(info[0],info[1]);
+                info[0] = info[0].replaceAll("event", "");
+                Event e = new Event(info[0], info[1]);
                 taskList.addTask(e);
                 taskList.checkForDuplicate();
                 ui.print("Got it. I've added this task: ");
