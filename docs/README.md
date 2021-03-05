@@ -58,6 +58,8 @@ Example of usage:
 
 `bye`
 
+Note: The file is only saved if you use the `bye` command.
+
 ### `todo` - Add todo Command
 
 Add a todo task with given description.
@@ -74,7 +76,7 @@ Expected outcome:
 
 ```
 Got it. I've added this task:
-[T][✘] sample task
+[T][ ] sample task
 Now your have 7 tasks in the list.
 ```
 
@@ -94,7 +96,7 @@ Expected outcome:
 
 ```
 Got it. I've added this task:
-[D][✘] sample deadline (by: Sep 30 2020)
+[D][ ] sample deadline (by: Sep 30 2020)
 Now your have 8 tasks in the list.
 ```
 
@@ -115,7 +117,7 @@ Expected outcome 1:
 
 ```
 Got it. I've added this task:
-[E][✘] sample event (at: 12:00 PM   Oct 1 2020)
+[E][ ] sample event (at: 12:00 PM   Oct 1 2020)
 Now your have 9 tasks in the list.
 ```
 
@@ -160,8 +162,7 @@ Nice! I've marked this task as done:
 
 ### `find` - Find Filter Command
 
-Filter tasks that contains the given substring. The end date should not occur
-before the start date.
+Filter tasks that contains the given substring.
 
 Format:
 
@@ -176,10 +177,10 @@ Expected outcome:
 ```
 Here are the tasks containing 'cs' in your list:
 
-2.[D][✓] cs2102 tutorial 1 (by: Sep 4 2020 repeat every 1 days)
+2.[D][✘] cs2102 tutorial 1 (by: Sep 4 2020 repeat every 1 days)
 4.[D][✘] cs2101 email (by: Sep 14 2020)
 5.[E][✘] cs2103 project meeting (at: 2020-09-30 12:00/2020-10-01 12:00)
-6.[E][✓] cs2102 project meeting (at: 07:00 PM   Oct 1 2020 repeat every 3 days)
+6.[E][✘] cs2102 project meeting (at: 07:00 PM   Oct 1 2020 repeat every 3 days)
 ```
 
 ### `Archive` - Done Command
