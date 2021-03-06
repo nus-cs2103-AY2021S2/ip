@@ -27,13 +27,13 @@ List all the tasks (saved and recently added tasks) by typing "list"
 
 Example of usage:
 
-list
+`list`
 
 Expected outcome:
 
-Here are the tasks in your list:
-1.[T][ ] eat breakfast later  
-2.[D][ ] return book (by: 2019-12-02 23:59)
+`Here are the tasks in your list:`</br>
+`1.[T][ ] eat breakfast later`</br>
+`2.[D][ ] return book (by: 2019-12-02 23:59)`</br>
 
 ### Feature 2 (Add)
 
@@ -46,15 +46,13 @@ and it can be of any length
 
 Example of usage:
 
-todo eat breakfast later
+`todo eat breakfast later`
 
 Expected outcome:
 
-Got it. I've added this task:
-
-[T][ ] eat breakfast later
-
-Now you have 1 tasks in the list.
+`Got it. I've added this task:`</br>
+`[T][ ] eat breakfast later`</br>
+`Now you have 1 tasks in the list.`</br>
 
 ### DEADLINE
 
@@ -65,15 +63,13 @@ this form DD/MM/YYYY and it allows to have single digit for day and month
 
 Example of usage:
 
-deadline return book /by 2/12/2019 2359
+`deadline return book /by 2/12/2019 2359`
 
 Expected outcome:
 
-Got it. I've added this task:
-
-[D][ ] return book (by: 2019-12-02 23:59)
-
-Now you have 1 tasks in the list.
+`Got it. I've added this task:`</br>
+`[D][ ] return book (by: 2019-12-02 23:59)`</br>
+`Now you have 1 tasks in the list.`</br>
 
 ### EVENT
 
@@ -84,15 +80,13 @@ in 24 hours time format (eg. 1800)
 
 Example of usage:
 
-event project meeting /at 18/10/2015 1000-1200
+`event project meeting /at 18/10/2015 1000-1200`
 
 Expected outcome:
 
-Got it. I've added this task:
-
-[E][ ] project meeting (at: 2015-10-18 10:00-12:00)
-
-Now you have 1 tasks in the list.
+`Got it. I've added this task:`</br>
+`[E][ ] project meeting (at: 2015-10-18 10:00-12:00)`</br>
+`Now you have 1 tasks in the list.`</br>
 
 ### Feature 3 (Delete)
 
@@ -102,15 +96,13 @@ first task of the TaskList.
 
 Example of usage:
 
-delete 1
+`delete 1`
 
 Expected outcome:
 
-Noted. I've removed this task:
-
-[T][X] eat breakfast later
-
-Now you have 0 tasks in the list.
+`Noted. I've removed this task:`</br>
+`[T][X] eat breakfast later`</br>
+`Now you have 0 tasks in the list.`</br>
 
 ### Feature 4 (Find)
 
@@ -119,12 +111,12 @@ return output task related to the keyword "books".
 
 Example of usage:
 
-find eat
+`find eat`
 
 Expected outcome:
 
-Task(s) related to the keyword :
-1.[T][X] eat breakfast later
+`Task(s) related to the keyword :`</br>
+`1.[T][X] eat breakfast later`</br>
 
 ### Feature 5 (Done)
 
@@ -133,10 +125,9 @@ starting to mark task. The example below will mark the first task of the TaskLis
 
 Example of usage:
 
-done 1
+`done 1`
 
 Expected outcome:
 
-Nice! I've marked this task as done:
-
-[T][X] eat breakfast later
+`Nice! I've marked this task as done:`</br>
+`[T][X] eat breakfast later`</br>
