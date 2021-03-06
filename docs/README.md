@@ -107,7 +107,8 @@ Expected outcome:
 ### Feature 4 (Find)
 
 Find all the tasks related to the keyword provided by specifying the keyword after "find". The following example will
-return output task related to the keyword "books".
+return output task related to the keyword. The keyword provided should not contain any spaces.
+This is an example of an invalid command: `find eat breakfast`. 
 
 Example of usage:
 
