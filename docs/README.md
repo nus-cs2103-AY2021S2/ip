@@ -35,11 +35,11 @@ Here are the tasks in your list:
 1.[T][ ] eat breakfast later  
 2.[D][ ] return book (by: 2019-12-02 23:59)
 
-### Feature 2 (**Add**)
+### Feature 2 (Add)
 
 Task can be inserted in the following manners:
 
-1. **TODO**
+### TODO
 
 Insert a todo by simply providing a **DESCRIPTION** after the keyword todo. The description can have spaces in between,
 and it can be of any length
@@ -56,7 +56,7 @@ Got it. I've added this task:
 
 Now you have 1 tasks in the list.
 
-2. **DEADLINE**
+### DEADLINE
 
 Insert a deadline by providing a **DESCRIPTION** after the keyword "deadline", followed by **"/by"** with a space after
 the description. For deadlines, it is compulsory to add the **DUE DATE** and **TIME** of deadline. The date must be of
@@ -75,7 +75,7 @@ Got it. I've added this task:
 
 Now you have 1 tasks in the list.
 
-3. **EVENT**
+### EVENT
 
 Insert an event by providing a description after the keyword "event", followed by **"/at"** with a space after the
 description. For events, it is compulsory to add the **DUE DATE**, **EVENT START TIME** and **EVENT END TIME**. The date
@@ -94,7 +94,7 @@ Got it. I've added this task:
 
 Now you have 1 tasks in the list.
 
-### Feature 3 (**Delete**)
+### Feature 3 (Delete)
 
 Task can be deleted by specifying the index of the task in the TaskList after the keyword "delete". It is recommended
 for users to check the index of tasks using "list" before starting to delete task. The example below will delete the
@@ -112,7 +112,7 @@ Noted. I've removed this task:
 
 Now you have 0 tasks in the list.
 
-### Feature 4 (**Find**)
+### Feature 4 (Find)
 
 Find all the tasks related to the keyword provided by specifying the keyword after "find". The following example will
 return output task related to the keyword "books".
@@ -126,7 +126,7 @@ Expected outcome:
 Task(s) related to the keyword :
 1.[T][X] eat breakfast later
 
-### Feature 5 (**Done**)
+### Feature 5 (Done)
 
 Mark a task of the specified index as done. It is recommended for users to check the index of tasks using "list" before
 starting to mark task. The example below will mark the first task of the TaskList as done represented as [X].
