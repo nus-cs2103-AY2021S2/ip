@@ -8,7 +8,7 @@ via Graphical User Interface (GUI).
 ### WARNING!
 
 Please be careful when providing inputs as the program will terminate once an invalid input is given. The program fails
-if nothing happens after you typed the input and click enter. You are required to restart the program once the program
+if it throws an error message after you typed the input and click enter. You are required to restart the program once the program
 fails!!
 
 ## FEATURES
