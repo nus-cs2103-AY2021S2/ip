@@ -11,7 +11,7 @@ Features available include:
 4. List out the existing tasks.
 5. Reschedule an event.
 6. Find the list of tasks using keywords.
-### Feature 1: Add a task
+### Add a task
 #### Usage:
 
 `todo` - Add a todo task into the task list.</br>
@@ -33,7 +33,7 @@ T, E, D in the first [ ] represents todo, event, and deadline.</br>
 [ ] represents an undone task, [X] represents a done task.
 
 
-### Feature 2: Delete a task
+### Delete a task
 
 #### Usage:
 
@@ -47,7 +47,7 @@ Expected outcome:</br>
 
 The task with index 2 is deleted from the task list.
 
-### Feature 3: Mark a task as done
+### Mark a task as done
 
 #### Usage:
 
@@ -63,7 +63,7 @@ The task with index 2 is deleted from the task list.</br>
 The second [ ] of the task is filled with a 'X'.
 
 
-### Feature 4: List out the existing tasks
+### List out the existing tasks
 
 #### Usage:
 
@@ -77,7 +77,7 @@ Expected outcome:
 
 All the tasks in the task list are displayed in order.
 
-### Feature 5: Reschedule an event
+### Reschedule an event
 
 #### Usage:
 
@@ -91,7 +91,7 @@ Expected outcome:
 
 The task with index 2 is rescheduled to Dec 02 2019 2-4pm.
 
-### Feature 6: Find the list of tasks using keywords
+### Find the list of tasks using keywords
 
 #### Usage:
 
