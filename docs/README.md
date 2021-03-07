@@ -14,7 +14,7 @@ todo, deadline, event {some task} - creates the respective task, date in yyyy-MM
 delete {index} - deletes the respective task
 
 find {keyword} {search type (optional)} - retrieves matching task according to keyword 
-and optional search parameter (p, pi, f)
+and optional search parameter (p [default, partial search case sensitive], pi [partial case insensitive], f [full exact search])
 
 done {index} - marks task as done
 
@@ -65,4 +65,11 @@ Now you have 1 tasks in the list
 `list`
 
 Here are the tasks in your list:
+1. [D][] return book (by: Jun 20 2019)
+
+### Finding a task (case insensitive search)
+
+`find BOOK pi`
+
+Here are the matching tasks in your list:
 1. [D][] return book (by: Jun 20 2019)
