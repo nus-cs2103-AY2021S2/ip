@@ -9,7 +9,7 @@ done are marked as done with a cross.
 #### Commands
 list - lists all existing tasks
 
-todo, deadline, event {some task} - creates the respective task
+todo, deadline, event {some task} - creates the respective task, date in yyyy-MM-dd
 
 delete {index} - deletes the respective task
 
@@ -53,4 +53,16 @@ Noted. I've removed this task:
     1.[T][X] Read book
 Now you have 0 tasks in your list.
 
+### Creating a deadline
 
+`deadline return book /by 2019-06-20`
+
+Got it. I've added this task: [D][] return book /by 2019-06-20
+Now you have 1 tasks in the list
+
+### Listing the tasks
+
+`list`
+
+Here are the tasks in your list:
+1. [D][] return book (by: Jun 20 2019)
