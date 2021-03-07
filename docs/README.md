@@ -4,7 +4,7 @@ Here is the user manual! Have fun!
 ## Features 
 | Commands | Usage |
 | :--------: |:-----: |
-| `todo` [description]    | Adds todo task to the list |
+| `todo` [description] | Adds todo task to the list |
 | `deadline` [description] /by[dd/MM/yyyy HHmm] | Adds deadline task to the list |
 | `event` [description] /at[dd/MM/yyyy HHmm] | Adds event task to the list |
 | `list` | Lists all the tasks in chronological order |
