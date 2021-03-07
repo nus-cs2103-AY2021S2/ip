@@ -1,7 +1,103 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+____________________________________________________________________________
+☹ OOPS!!! There is no saved file of the tasks list in this directory.
+____________________________________________________________________________
+____________________________________________________________________________
+Hello! I'm Duke
+What can I do for you?
+____________________________________________________________________________
+____________________________________________________________________________
+Got it. I've added this task:
+  [T][ ] go through cs2103 weekly topics
+Now you have 1 task in the list.
+____________________________________________________________________________
+____________________________________________________________________________
+Got it. I've added this task:
+  [D][ ] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+Now you have 2 tasks in the list.
+____________________________________________________________________________
+____________________________________________________________________________
+Got it. I've added this task:
+  [D][ ] cs2103 week 2 project (by: Jan 21 2021)
+Now you have 3 tasks in the list.
+____________________________________________________________________________
+____________________________________________________________________________
+Nice! I've marked this task as done:
+  [T][X] go through cs2103 weekly topics
+____________________________________________________________________________
+____________________________________________________________________________
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+List of recognised user commands:
+  1. todo - adds a todo (E.g. todo borrow book)
+  2. deadline - adds a deadline (E.g. deadline return book /by 2021-02-04)
+  3. event - adds an event (E.g. event project meeting /at 2021-03-05)
+  4. delete - removes a task from the lists of task (E.g. delete 2)
+  5. done - marks a task as done in the list of tasks (E.g. done 2)
+  6. list - displays the list of tasks
+  7. bye - terminates Duke ☹
+____________________________________________________________________________
+____________________________________________________________________________
+Nice! I've marked this task as done:
+  [D][X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+____________________________________________________________________________
+____________________________________________________________________________
+Here are the tasks in your list:
+  1. [T][X] go through cs2103 weekly topics
+  2. [D][X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+  3. [D][ ] cs2103 week 2 project (by: Jan 21 2021)
+____________________________________________________________________________
+____________________________________________________________________________
+Got it. I've added this task:
+  [E][ ] cs2103 lecture (at: Jan 22 2021)
+Now you have 4 tasks in the list.
+____________________________________________________________________________
+____________________________________________________________________________
+Got it. I've added this task:
+  [E][ ] cs2103 tutorial (at: Jan 27 2021)
+Now you have 5 tasks in the list.
+____________________________________________________________________________
+____________________________________________________________________________
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+List of recognised user commands:
+  1. todo - adds a todo (E.g. todo borrow book)
+  2. deadline - adds a deadline (E.g. deadline return book /by 2021-02-04)
+  3. event - adds an event (E.g. event project meeting /at 2021-03-05)
+  4. delete - removes a task from the lists of task (E.g. delete 2)
+  5. done - marks a task as done in the list of tasks (E.g. done 2)
+  6. list - displays the list of tasks
+  7. bye - terminates Duke ☹
+____________________________________________________________________________
+____________________________________________________________________________
+Here are the tasks in your list:
+  1. [T][X] go through cs2103 weekly topics
+  2. [D][X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+  3. [D][ ] cs2103 week 2 project (by: Jan 21 2021)
+  4. [E][ ] cs2103 lecture (at: Jan 22 2021)
+  5. [E][ ] cs2103 tutorial (at: Jan 27 2021)
+____________________________________________________________________________
+____________________________________________________________________________
+☹ OOPS!!! Task 0 is not in the task list!
+____________________________________________________________________________
+____________________________________________________________________________
+Noted. I've removed this task:
+  [D][ ] cs2103 week 2 project (by: Jan 21 2021)
+Now you have 4 tasks in the list.
+____________________________________________________________________________
+____________________________________________________________________________
+Nice! I've marked this task as done:
+  [E][X] cs2103 lecture (at: Jan 22 2021)
+____________________________________________________________________________
+____________________________________________________________________________
+Here are the tasks in your list:
+  1. [T][X] go through cs2103 weekly topics
+  2. [D][X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+  3. [E][X] cs2103 lecture (at: Jan 22 2021)
+  4. [E][ ] cs2103 tutorial (at: Jan 27 2021)
+____________________________________________________________________________
+____________________________________________________________________________
+Here are the matching tasks in your list:
+  1. [D][X] cs2103 week 2 post-lecture quiz (by: Jan 21 2021)
+  2. [E][X] cs2103 lecture (at: Jan 22 2021)
+____________________________________________________________________________
+____________________________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________________________
