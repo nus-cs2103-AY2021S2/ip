@@ -1,5 +1,6 @@
 # User Guide
 Here is the user manual! Have fun!
+
 ## Features 
 | Commands | Usage |
 | :--------: |:----------: |
