@@ -1,95 +1,75 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import Duke.*;
+import DukeException.DukeException;
+import Parser.Parser;
+import Storage.Storage;
+import Ui.Ui;
+
 
 public class Duke {
+    public static final String LOG_PATH = "./duke.txt";
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    /**
-     * main method to run the program
-     *
-     * @param args command line arguments taken in
-     */
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Hello! I'm Duke\n"+ "What can I do for you?");
-        ArrayList<Task> items = new ArrayList<>();
+    public Duke(String filepath) {
+        this.storage = new Storage(filepath);
+        this.tasks = new TaskList(this.storage);
+        this.ui = new Ui();
+    }
 
-        while (true) {
-            String input = sc.nextLine();
-            try {
-                errorHandling(input);
-                if (input.equals("bye")) {
-                    bye();
-                    break;
-                } else if (input.contains("done")) {
-                    System.out.println("Nice! I've marked this task as done: ");
-
-                    int taskNum = Integer.parseInt(input.substring(5));
-                    String name = items.get(taskNum - 1).getDescription();
-
-                    Task type = items.get(taskNum - 1);
-                    items.remove(taskNum - 1);
-                    if (type instanceof Todo) {
-                        Todo markDone = new Todo(name, true);
-                        items.add(taskNum - 1, markDone);
-                        System.out.println(markDone);
-                    } else if (type instanceof Deadline) {
-                        Deadline markDone = new Deadline(name, true);
-                        items.add(taskNum - 1, markDone);
-                        System.out.println(markDone);
-                    } else {
-                        Event markDone = new Event(name, true);
-                        items.add(taskNum - 1, markDone);
-                        System.out.println(markDone);
-                    }
-
-                } else if (input.equals("list")) {
-                    int n = 1;
-                    System.out.println("Here are the tasks in your list:");
-                    for (Task item : items) {
-                        System.out.println(n + ". " + item);
-                        n++;
-                    }
-
-                } else if (input.length() >= 8 && input.substring(0,8).equals("deadline")) {
-                    items.add(new Deadline(input.substring(8)));
-                } else if (input.length() >= 4 && input.substring(0,4).equals("todo")) {
-                    items.add(new Todo(input.substring(4)));
-                } else if (input.length() >= 5 && input.substring(0,5).equals("event")) {
-                    items.add(new Event(input.substring(5)));
-                } else if (input.length() >= 6 && input.substring(0,6).equals("delete")) {
-                    int taskToDelete = Integer.parseInt(input.substring(7));
-                    Task toRemove = items.get(taskToDelete - 1);
-                    items.remove(taskToDelete - 1);
-                    System.out.println("Noted. I've removed this task:\n  "
-                                       + toRemove + "\nNow you have " + items.size() + " tasks in the list.");
-
-                } else {
-                    items.add(new Task(input));
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+    public static void main(String[] args) throws DukeException {
+        try {
+            new Duke(LOG_PATH).run();
+        } catch (DukeException e) {
+            throw new DukeException("unable to load file, probably wrong format.");
         }
     }
 
-    /**
-     * prints Goodbye message.
-     */
-    public static void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    private void process(Parser p) {
+
+        switch (p.getCommand()) {
+            case "delete":
+                this.tasks.remove(p.getTaskNum());
+                ui.printTaskRemovedMessage((p.getTaskNum()));
+                break;
+            case "done":
+                Task done = this.tasks.get(p.getTaskNum());
+                done.markDone();
+                this.tasks.set(p.getTaskNum(), done);
+                ui.printDoneMessage((done));
+                break;
+            case "add":
+                this.tasks.add(p.getTask());
+                ui.printTaskAddedMessage(p.getTask(), this.tasks.getSize());
+                break;
+            case "set":
+                this.tasks.set(p.getTaskNum(), p.getTask());
+                break;
+            case "list":
+                ui.printList(this.tasks);
+                break;
+            default:
+        }
     }
 
-    public static void errorHandling(String input) throws DukeException {
-        if (input.length() == 4 && input.equals("todo")) {
-            throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
-        } else if (input.length() == 8 && input.equals("deadline")) {
-            throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-        } else if (input.length() == 5 && input.equals("event")) {
-            throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
-        } else if (input.length() >= 4 && input.substring(0,4).equals("blah")) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } else if (input.isBlank()) {
-            throw new DukeException(" ☹ OOPS!!! A Task cannot be empty.");
-        } else {}
+    public void run() throws DukeException {
+        Ui.printGreeting();
+
+        while (true) {
+            String userInput = ui.getUserInput();
+            Parser p;
+
+            try {
+                p = Parser.parse(userInput);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+            if (p.getCommand().equals("bye")) {
+                break;
+            }
+            this.process(p);
+        }
+        Ui.printGoodbye();
     }
 }
