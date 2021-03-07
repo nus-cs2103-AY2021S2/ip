@@ -1,12 +1,18 @@
+package Duke;
+
+import java.time.format.DateTimeFormatter;
+
 public class Todo extends Task {
+
     public Todo(String description) {
         super(description);
     }
 
-    public Todo(String description, boolean b) {
-        super(description, b);
+    @Override
+    public String encode() {
+        return "T|" + super.encode();
     }
-
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
