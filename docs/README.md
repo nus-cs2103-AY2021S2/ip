@@ -11,7 +11,9 @@ Features available include:
 4. List out the existing tasks.
 5. Reschedule an event.
 6. Find the list of tasks using keywords.
+
 ### Add a task
+
 #### Usage:
 
 `todo` - Add a todo task into the task list.</br>
