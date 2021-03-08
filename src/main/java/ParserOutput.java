@@ -1,3 +1,4 @@
+
 public class ParserOutput {
     private boolean bye;
     private Task task;
