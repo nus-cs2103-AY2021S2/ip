@@ -11,49 +11,49 @@ following types of tasks:
 * Events: Tasks which are held on a specified date.
 
 ## Features
-1. [**Create:**](#create) adds a task into the task list.
+1. **Create:** adds a task into the task list.
     ```
    todo <description>
    deadline <description> /by <date>
    event <description> /at <date>
    ```
-1. [**Read:**](#read) shows the tasks in the task list.
+1. **Read:** shows the tasks in the task list.
     ```
    list
    ```
-1. [**Update:**](#update) edits a task in the task list.
+1. **Update:** edits a task in the task list.
     ```
    edit <index> /desc <description>
    edit <index> /date <date>
    ```
-1. [**Delete:**](#delete) removes a task from the task list.
+1. **Delete:** removes a task from the task list.
     ```
    delete <index>
    ```
-1. [**Exit:**](#exit) terminates Chadbot.
+1. **Exit:** terminates Chadbot.
     ```
    bye
    ```
-1. [**Search:**](#search) finds a list of tasks associated with a date or containing a keyword.
+1. **Search:** finds a list of tasks associated with a date or containing a keyword.
     ```
    list <date>
    find <keyword>
    ```
-1. [**Mark:**](#mark) marks a task in the task list as done.
+1. **Mark:** marks a task in the task list as done.
     ```
    done <index>
    ```
-1. [**Arrange:**](#arrange) sorts the list of tasks into the specified ordering.
+1. **Arrange:** sorts the list of tasks into the specified ordering.
     ```
    sort
    sort /by type
    sort /by date
    ```
-1. [**Stats:**](#stats) shows the tally of to-dos, deadlines, and events in the task list.
+1. **Stats:** shows the tally of to-dos, deadlines, and events in the task list.
     ```
    stats
    ```
-1. [**Help:**](#help) displays a help page containing commands supported by Chadbot.
+1. **Help:** displays a help page containing commands supported by Chadbot.
     ```
    help
    help /more
