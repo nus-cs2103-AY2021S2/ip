@@ -11,16 +11,21 @@ public class Task {
         return this.done;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setDone(boolean bool){
         this.done = bool;
     }
 
     @Override
     public String toString() {
-        if (done){
-            return  "[X]    " + name;
-        }else{
-            return  "[ ]    " + name;
+        if (done) {
+            return "[X]    " + name;
+        } else {
+            return "[ ]    " + name;
         }
     }
+
 }
