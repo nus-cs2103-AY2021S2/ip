@@ -22,4 +22,4 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    |____/ \__,_|_|\_\___|
    ```
    
-   ![Ui](docs/images/Ui.png)
+   ![Ui](docs/Ui.png)
