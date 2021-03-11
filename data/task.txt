@@ -1,0 +1,5 @@
+D | X | stuff | by: 23-2-2021 1630
+E | O | thingy | from: 14-2-2021 1800 | to: 15-3-2021 1800
+T | O | submit 
+D | X | assignment | by: 22-7-2021 0900
+E | O | bday party | from: 25-12-2021 1800 | to: 25-12-2021 2359

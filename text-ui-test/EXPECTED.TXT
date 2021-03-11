@@ -1,7 +1,37 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm duke
+How can I help you sir/maam?
+DukeException: Please describe the nature of your task sir/maam.
+Understood. I have added this task to the list:
+  [T][ ] read book
+Now you have 1 tasks in the list.
+DukeException: Please describe the nature of your task sir/maam.
+DukeException: Please specify the deadline for this task using /by.
+Understood. I have added this task to the list:
+  [D][ ] return book (by: Sunday)
+Now you have 2 tasks in the list.
+DukeException: Please describe the nature of your task sir/maam.
+DukeException: Please specify the date of this event using /at.
+Understood. I have added this task to the list:
+  [E][ ] project meeting (at: 6th August 2pm - 4pm)
+Now you have 3 tasks in the list.
+Here are the tasks you requested to see sir/maam:
+1.[T][ ] read book
+2.[D][ ] return book (by: Sunday)
+3.[E][ ] project meeting (at: 6th August 2pm - 4pm)
+DukeException: I apologise but I must ask you to specify the task you have conquered.
+DukeException: I apologise but there is no such index in your list of tasks sir/maam.
+Well done. I have checked off this task. You are one step closer to victory after conquering:
+  [D][X] return book (by: Sunday)
+Here are the tasks you requested to see sir/maam:
+1.[T][ ] read book
+2.[D][X] return book (by: Sunday)
+3.[E][ ] project meeting (at: 6th August 2pm - 4pm)
+DukeException: I am unable to comprehend what you have just said. I deeply regret my insufficiency.
+DukeException: I am incapable of deleting something that does not exist sir/maam.
+Understood. I shall remove this task off the list for you. I hope you are pleased.
+  [T][ ] read book
+You now have 2 tasks left on the list.
+Here are the tasks you requested to see sir/maam:
+1.[D][X] return book (by: Sunday)
+2.[E][ ] project meeting (at: 6th August 2pm - 4pm)
+Farewell sir/maam. Hope to see you again soon.
