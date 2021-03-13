@@ -26,7 +26,7 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java 11 or above installed in your Computer.
 
-1. Download the latest duke.jar from [here](www.github.com/tsh22/ip/releases).
+1. Download the latest duke.jar from [here](https://github.com/tsh22/ip/releases).
 
 1. Copy the file to the folder you want to use as the home folder for your Duke.
 
