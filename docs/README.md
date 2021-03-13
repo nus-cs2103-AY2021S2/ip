@@ -20,7 +20,7 @@ Duke is a desktop app for managing tasks (todo, events, deadlines), optimized fo
 while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact
 management tasks done faster than traditional GUI apps.
 
-##Quick Start
+## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.
 
 1. Download the latest duke.jar from [here](https://github.com/tsh22/ip/releases).
@@ -35,7 +35,7 @@ management tasks done faster than traditional GUI apps.
 
 ## Features
 
-###Notes about the command format:
+### Notes about the command format:
 * Words in UPPER_CASE are the parameters to be supplied by the user.
 
 * Commands are case-insensitive.
@@ -43,7 +43,7 @@ management tasks done faster than traditional GUI apps.
    * E.g. TODO will match todo.
 * All fields specified in UPPER_CASE must be provided for the command to be valid.
 
-###Adding a Todo task: `todo`
+### Adding a Todo task: `todo`
 Adds a todo task to the task list.
 
 Format: `todo DESCRIPTION`
@@ -52,7 +52,7 @@ Examples:
 * `todo read book`
 * `TODO have a meal`
 
-###Adding a Deadline task: `deadline`
+### Adding a Deadline task: `deadline`
 Adds a deadline task to the task list.
 
 Format: `deadline DESCRIPTION /by DATE`
@@ -62,7 +62,7 @@ Examples:
 * `deadline return book /by 2021-10-10`
 * `Deadline do homework /by 2021-10-12`
 
-###Adding an Event task: `event`
+### Adding an Event task: `event`
 Adds an event task to the task list.
 
 Format: `event DESCRIPTION /at DATE`
@@ -72,7 +72,7 @@ Examples:
 * `event return book /at 2021-10-10`
 * `EVENT do homework /at 2021-10-12`
 
-###Updating a task description: `update`
+### Updating a task description: `update`
 Updates the description of an existing task in the task list.
 
 Format: `update NUMBER DESCRIPTION`
@@ -82,7 +82,7 @@ Examples:
 * `update 2 return book`
 * `update 6 do homework`
 
-###Find a task using keywords: `find`
+### Find a task using keywords: `find`
 Finds an existing task that matches the keyword(s).
 
 Format: `find KEYWORD`
@@ -93,12 +93,12 @@ Examples:
 * `find return book`
 * `find book`
 
-###Lists all current tasks: `list`
+### Lists all current tasks: `list`
 Lists all existing tasks in the task list.
 
 Format: `list`
 
-###Mark a task as done: `done`
+### Mark a task as done: `done`
 Marks one of the tasks as done.
 
 Format: `done NUMBER`
@@ -108,7 +108,7 @@ Examples:
 * `done 3`
 * `DONE 2`
 
-###Delete an existing task: `delete`
+### Delete an existing task: `delete`
 Deletes an existing task in the task list.
 
 Format: `delete NUMBER`
@@ -118,15 +118,17 @@ Examples:
 * `delete 3 `
 * `Delete 1`
 
-###Exiting: `bye`
+### Exiting: `bye`
 Ends the program and closes the window.
 
 Format: `bye`
 
-###Saving the data
+### Saving the data
 Duke data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-##Command Summary
+## Command Summary
+
+
 Action | Format, Examples 
 ------ | ----------------
 todo | `todo DESCRIPTION` e.g. `todo read book`, `TODO have a meal`
