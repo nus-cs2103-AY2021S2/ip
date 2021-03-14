@@ -114,11 +114,6 @@ Got it! Added:
 Now you have 6 items in your list
 ```
 
-#### Note:
-
-Task description must be two words. If your task description is one word, then type `-` in place of first word, and the
-description in place of the second one. For example: `todo - run`.
-
 ### Feature 3
 
 add deadline task
@@ -141,12 +136,9 @@ Now you have 7 items in your list
 
 #### Note:
 
-1. Task description must be two words. If your task description is one word, then type `-` in place of first word, and
-   the description in place of the second one. For example: `deadline - lab /by 2021-03-15 18:00:00`.
+1. Also you may not key in the time, and the task would still be added.
 
-2. Also you may not key in the time, and the task would still be added.
-
-3. Time is in 24-hour format.
+2. Time is in 24-hour format.
 
 ### Feature 4
 
@@ -170,12 +162,9 @@ Now you have 8 items in your list
 
 #### Note:
 
-1. Task description must be two words. If your task description is one word, then type `-` in place of first word, and
-   the description in place of the second one. For example: `event - meeting /at 2021-03-15 18:00:00`.
+1. Also you may not key in the time, and the task would still be added.
 
-2. Also you may not key in the time, and the task would still be added.
-
-3. Time is in 24-hour format.
+2. Time is in 24-hour format.
 
 ### Feature 5
 
