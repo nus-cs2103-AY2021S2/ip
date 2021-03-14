@@ -17,7 +17,9 @@ public class Todo extends Task {
 
     @Override
     public Task copy() {
-        return new Todo(this.description, this.taskType);
+        Todo taskCopy = new Todo(this.description, this.taskType);
+        taskCopy.isDone = this.isDone;
+        return taskCopy;
     }
 
     @Override
