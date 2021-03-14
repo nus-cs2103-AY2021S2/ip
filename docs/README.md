@@ -25,7 +25,28 @@ in that you can key in anything, search for them using keywords, and be able to 
 3. Open and enter in your terminal the following command: `java -jar duke.jar`. Alternatively, you could simply double
    click the jar file.
 
-## Basic Features
+## List of Features
+1. Get list of all tasks
+2. Save Entries
+3. Add todo task
+4. Add deadline task
+5. Add event task
+6. Mark a task as done.
+7. Delete a certain task.
+8. Find a tasks matching keyword.
+9. Get reminders.
+10. Add notes.
+11. Delete a certain note.
+12. Find Notes.
+13. Get List of Notes.
+14. Exit Duke.
+
+**Note:** Given the nature of the chatbot, the above features are divided into three categories:
+1. Main Features: Which deal with the chatbot basic functions that are not directly related to tasks or notes.
+2. Task Features: Which deal with the tasks.
+3. Note Features: Which deal with notes.
+
+## Main Features
 
 ### Feature 1
 
