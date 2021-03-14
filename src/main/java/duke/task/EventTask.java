@@ -23,13 +23,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         String taskRepresent = "";
-        if(getSizeOfCommand() > 5) {
-            taskRepresent = getName() + " (" + super.divideCommand[3].substring(1)
-                    + ": " + getDateFormat();
-        } else{
-            taskRepresent = getName() + " (" + super.divideCommand[2].substring(1)
-                    + ": " + getDateFormat();
-        }
+        taskRepresent = getName() + " (at: " + getDateFormat();
         taskRepresent += getTime() == null ? ")"
                 : " " + getTimeFormat() + ")";
         if (this.isDone()) {

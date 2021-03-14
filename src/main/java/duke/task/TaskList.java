@@ -52,14 +52,7 @@ public class TaskList {
         TaskList matches = new TaskList();
         for (Task t : Tasks) {
             String task = t.getTaskName();
-            String[] taskName = task.split(" ");
-            if (keyword.equals(taskName[0]) || keyword.equals(taskName[1])
-                    || keyword.equals(taskName[2])) {
-                matches.silentAdd(t);
-            } else if (taskName[0].contains(keyword) || taskName[1].contains(keyword)
-                    || taskName[2].contains(keyword)) {
-                matches.silentAdd(t);
-            } else if (task.contains(keyword)) {
+            if (task.contains(keyword)) {
                 matches.silentAdd(t);
             }
         }
