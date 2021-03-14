@@ -98,7 +98,12 @@ public class Parser {
 
             return new DeleteCommand(Integer.parseInt(processedInput[1]));
         case FIND:
-            return new FindCommand(processedInput[1]);
+            String[] processFind = input.split("find ");
+            if (processFind.length <= 1) {
+                throw new AntonioException("Please enter something to find");
+            }
+            String key = processFind[1];
+            return new FindCommand(key);
         default:
             throw new AntonioException("Invalid command. Please enter a valid one");
         }
