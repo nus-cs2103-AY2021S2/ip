@@ -11,6 +11,7 @@ public class Task {
     String task;
     boolean done = false;
     String[] divideCommand;
+    boolean hasTime = false;
 
     Task(String task) {
         this.task = task;
@@ -57,8 +58,16 @@ public class Task {
      * @return just the task name
      */
     public String getName() {
-        return divideCommand[1].equals("-") ? divideCommand[2]
-                : divideCommand[1] + " " + divideCommand[2];
+        String result = "";
+        if (getSizeOfCommand() > 2 &&
+                (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
+            result += divideCommand[1];
+        } else if (getSizeOfCommand() == 2) {
+            result += divideCommand[1];
+        } else {
+            result += divideCommand[1] + " " + divideCommand[2];
+        }
+        return result;
     }
 
     /**
@@ -68,7 +77,24 @@ public class Task {
      * @return the date of the task
      */
     public LocalDate getDate() {
-        String StringDate = divideCommand[4];
+        String StringDate = "";
+        if (getSizeOfCommand() == 6 &&
+                (divideCommand[3].equals("/at") || divideCommand[3].equals("/by"))) {
+            StringDate += divideCommand[4];
+            hasTime = true;
+        } else if (getSizeOfCommand() == 5 &&
+                (divideCommand[3].equals("/at") || divideCommand[3].equals("/by"))) {
+            StringDate += divideCommand[4];
+            hasTime = false;
+        } else if (getSizeOfCommand() == 5 &&
+                (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
+            StringDate += divideCommand[3];
+            hasTime = true;
+        } else if (getSizeOfCommand() == 4 &&
+                (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
+            StringDate += divideCommand[3];
+            hasTime = false;
+        }
         return LocalDate.parse(StringDate);
     }
 
@@ -96,8 +122,14 @@ public class Task {
      * @return
      */
     public LocalTime getTime() {
-        if (getSizeOfCommand() > 5) {
-            String StringTime = divideCommand[5];
+        String StringTime = "";
+        if (hasTime) {
+            if (getSizeOfCommand() == 6) {
+                StringTime += divideCommand[5];
+            } else if (getSizeOfCommand() == 5 &&
+                    (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
+                StringTime += divideCommand[4];
+            }
             return LocalTime.parse(StringTime);
         } else {
             return null;

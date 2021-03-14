@@ -14,6 +14,14 @@ public class TodoTask extends Task {
         divideCommand = task.split(" ");
     }
 
+    public String getName(){
+        if(getSizeOfCommand() == 2){
+            return divideCommand[1];
+        }else{
+            return divideCommand[1] + " " + divideCommand[2];
+        }
+    }
+
     /**
      * String representation of todoTask
      *

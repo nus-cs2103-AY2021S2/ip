@@ -1,1 +1,10 @@
 todo read books notDone
+todo go gym done
+todo run notDone
+deadline assignment /by 2021-03-12 done
+deadline assignment /by 2021-01-12 23:00:00 notDone
+deadline do assignment /by 2021-03-12 notDone
+deadline do assignment /by 2021-03-12 23:00:00 notDone
+event meeting /at 2021-03-12 notDone
+event meeting /at 2021-03-12 23:00:00 notDone
+event attend meeting /at 2021-03-15 23:00:00 notDone
