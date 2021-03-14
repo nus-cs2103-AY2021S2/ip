@@ -81,7 +81,7 @@ DATE TIME only permits the format `dd/MM/yyyy HHmm`
 [TIP] <br />
 DATE TIME only permits the format `dd/MM/yyyy HHmm`
 
-### Searching for tasks: `delete`
+### Deleting a task: `delete`
 + Format: `delete INDEX`
 + Example: `delete 2`
 + Effect: Deletes task 2
@@ -89,7 +89,7 @@ DATE TIME only permits the format `dd/MM/yyyy HHmm`
 [TIP] <br />
 Index has to be within the valid range, depending on how many tasks there are in the list. <br />
 
-### Deleting a task : `update`
+### Updating a task : `update`
 + Format: `update INDEX TASK_TYPE_COMMAND`
 + Example: `update 2 deadline Science Homework /by 02/04/2021 1800`
 + Effect: Updates task 2 as a deadline with description "Science Homework" to be done by 2 April 2021 at 1800 hrs
