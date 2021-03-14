@@ -16,7 +16,7 @@ import javafx.util.Duration;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
     private final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
