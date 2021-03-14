@@ -21,7 +21,9 @@ in that you can key in anything, search for them using keywords, and be able to 
 ## Setting Up
 
 1. Download the latest jar file version
-2. Open and enter in your terminal the following command: `java -jar duke.jar`
+2. You need atleast Java 11 to run Duke.   
+3. Open and enter in your terminal the following command: `java -jar duke.jar`. Alternatively, you could simply double
+   click the jar file.
 
 ## Basic Features
 
