@@ -21,7 +21,7 @@ in that you can key in anything, search for them using keywords, and be able to 
 ## Setting Up
 
 1. Download the latest jar file version
-2. You need atleast Java 11 to run Duke.   
+2. You need atleast Java 11 to run Duke.
 3. Open and enter in your terminal the following command: `java -jar duke.jar`. Alternatively, you could simply double
    click the jar file.
 
@@ -116,6 +116,10 @@ Got it! Added:
 Now you have 6 items in your list
 ```
 
+#### Note:
+
+Task description is at max 2 words.
+
 ### Feature 3
 
 add deadline task
@@ -138,9 +142,11 @@ Now you have 7 items in your list
 
 #### Note:
 
-1. Also you may not key in the time, and the task would still be added.
+1. Task description is at max 2 words.
 
-2. Time is in 24-hour format.
+2. Also you may not key in the time, and the task would still be added.
+
+3. Time is in 24-hour format.
 
 ### Feature 4
 
@@ -164,9 +170,11 @@ Now you have 8 items in your list
 
 #### Note:
 
-1. Also you may not key in the time, and the task would still be added.
+1. Task description is at max 2 words.
 
-2. Time is in 24-hour format.
+2. Also you may not key in the time, and the task would still be added.
+
+3. Time is in 24-hour format.
 
 ### Feature 5
 
