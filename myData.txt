@@ -1,0 +1,10 @@
+[T][X][i] eat
+ chicken
+[D][X][i] hw (by: 2021-01-01)
+ 2103 tp
+[E][ ][ ] bbq (at: ecp)
+null
+[D][ ][ ] hw (by: 2021-03-03)
+null
+[E][ ][ ] dinner (at: orchard road)
+null
