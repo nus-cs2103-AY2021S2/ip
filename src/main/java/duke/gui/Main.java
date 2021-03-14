@@ -24,7 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setTitle("Duke");
-            stage.getIcons().add(new Image("/images/Duke.png"));
+            stage.getIcons().add(new Image("/images/Logo.png"));
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
