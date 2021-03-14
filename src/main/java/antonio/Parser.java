@@ -105,7 +105,7 @@ public class Parser {
     }
 
     private static boolean isValidNumericalValue(String s) {
-        return !s.matches("[0-9]+");
+        return !s.matches("[1-9]+");
     }
 
     private static AddDeadline processDeadline(String input) throws Exception {
