@@ -65,6 +65,10 @@ public class Parser {
             }
             return new DoneCommand(Integer.parseInt(processedInput[1]));
         case TODO:
+            String[] processTodo = input.split("todo ");
+            if (processTodo.length <= 1) {
+                throw new AntonioException("Please enter something as a task description");
+            }
             return new AddToDo("todo", description.replaceAll("todo ", ""));
         case EVENT:
             try {
