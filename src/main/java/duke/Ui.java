@@ -15,7 +15,7 @@ public class Ui {
 
         if (tasks.size() > 0) {
             msg = String.format("Here's the current state of your to-do list:\n%s",
-                    displayList(tasks));
+                    displayListNumbered(tasks));
         } else {
             msg = "Your to-do list is empty! Congratulations!";
         }
@@ -95,7 +95,26 @@ public class Ui {
     }
 
     /**
-     * Returns the contents of a TaskList in a neat format.
+     * Returns the contents of a TaskList in a neat format, with tasks numbered from 1.
+     * @param tasks TaskList containing the tasks to be displayed.
+     * @return String summarizing all the tasks in the TaskList.
+     */
+    private String displayListNumbered(TaskList tasks) {
+        String output;
+
+        assert (tasks.size() > 0) : " Calling displayListNumbered() on an empty list";
+
+        StringBuilder items = new StringBuilder();
+        for (int i = 1; i <= tasks.size(); i++) {
+            items.append(String.valueOf(i) + ". " + tasks.get(i).toString() + "\n");
+        }
+
+        output = items.toString().trim();
+        return output;
+    }
+
+    /**
+     * Returns the contents of a TaskList in a neat format, with tasks not numbered.
      * @param tasks TaskList containing the tasks to be displayed.
      * @return String summarizing all the tasks in the TaskList.
      */
@@ -106,7 +125,7 @@ public class Ui {
 
         StringBuilder items = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
-            items.append(String.valueOf(i) + ". " + tasks.get(i).toString() + "\n");
+            items.append("- " + tasks.get(i).toString() + "\n");
         }
 
         output = items.toString().trim();
