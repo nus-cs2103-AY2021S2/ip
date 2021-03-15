@@ -65,8 +65,8 @@ public class Event extends Task {
         String formatStr = "Please input with this format:\n" +
                 "event [name] /at [end date/time]-[start date/time]\n" +
                 "* start and end date/time should be written as dd/MM/yyyy HH:mm\n" +
-                "* i.e. 2019/03/19 22:00-2019/03/19 23:00\n" +
-                "* i.e. 2019/03/19 22:00 - 2019/03/19 23:00";
+                "* i.e. 19/03/2019 22:00-19/03/2019 23:00\n" +
+                "* i.e. 19/03/2019 22:00 - 19/03/2019 23:00";
         
         try {
             checkWrongCommand(str);
