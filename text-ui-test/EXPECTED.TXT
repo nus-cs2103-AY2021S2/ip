@@ -5,3 +5,48 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Greetings and salutations! I am Duke, a helpful chatbot.
+Please enter your command(s).
+Available commands: todo (task), deadline (task) /by (time), event (task) /at (time)
+To view the list of tasks, enter the command 'list'.
+To exit, enter the command 'bye'.
+The list of tasks is empty!
+Got it. I've added this task:
+[T][?] Task 1
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+[D][?] Task 2  (by: Time 1)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+[E][?] Task 3  (at: Time 2)
+Now you have 3 tasks in the list.
+☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! The description of a deadline cannot be empty.
+☹ OOPS!!! The description of a event cannot be empty.
+☹ OOPS!!! The format for a deadline task should be 'deadline (task) /by (time)'
+☹ OOPS!!! The format for an event task should be 'event (task) /at (time)'
+☹ OOPS!!! I'm sorry, but I don't know what 'blah' means :-(
+1. [T][?] Task 1
+2. [D][?] Task 2  (by: Time 1)
+3. [E][?] Task 3  (at: Time 2)
+
+Sweet! I've marked this task as done:
+[T][?] Task 1
+Sweet! I've marked this task as done:
+[D][?] Task 2  (by: Time 1)
+Sweet! I've marked this task as done:
+[E][?] Task 3  (at: Time 2)
+Array index is out of bounds, the current number of elements in the list is 3.
+Number format exception, enter a number from 1-100!
+1. [T][?] Task 1
+2. [D][?] Task 2  (by: Time 1)
+3. [E][?] Task 3  (at: Time 2)
+
+Noted. I've removed this task:
+[E][?] Task 3  (at: Time 2)
+Array index is out of bounds, the current number of elements in the list is 2.
+Number format exception, enter a number from 1-100!
+1. [T][?] Task 1
+2. [D][?] Task 2  (by: Time 1)
+
+Farewell. Hope that you will visit again soon!

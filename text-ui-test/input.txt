@@ -1,0 +1,22 @@
+list
+todo Task 1
+deadline Task 2 /by Time 1
+event Task 3 /at Time 2
+todo
+deadline
+event
+deadline wrong
+event wrong
+blah
+list
+done 1
+done 2
+done 3
+done 4
+done wrong
+list
+delete 3
+delete 3
+delete wrong
+list
+bye
