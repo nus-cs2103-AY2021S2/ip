@@ -16,9 +16,9 @@ public class Task {
 
     Task(String task) {
         this.task = task;
-        if (task.split(" ")[0].equals("add")) {
+        if (task.split(" ")[0].equalsIgnoreCase("add")) {
             divideCommand = task.split(" ");
-        } else if (!task.split(" ")[0].equals("todo")) {
+        } else if (!task.split(" ")[0].equalsIgnoreCase("todo")) {
             divideCommand = task.split("/");
             taskPart = divideCommand[0].split(" ");
             datePart = divideCommand[1].split(" ");
