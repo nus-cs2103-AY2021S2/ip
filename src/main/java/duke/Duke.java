@@ -63,6 +63,8 @@ public class Duke {
                 result = "Oops!!! Invalid Input :(";
             }
         }
+        storage.saveTask(taskList);
+        notesStorage.saveTask(noteList);
         return result;
     }
 
