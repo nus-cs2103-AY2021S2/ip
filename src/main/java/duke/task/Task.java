@@ -111,18 +111,6 @@ public class Task {
      */
     public LocalTime getTime() {
         String StringTime = "";
-        /**
-         if (hasTime) {
-         if (getSizeOfCommand() == 6) {
-         StringTime += divideCommand[5];
-         } else if (getSizeOfCommand() == 5 &&
-         (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
-         StringTime += divideCommand[4];
-         }
-         return LocalTime.parse(StringTime);
-         } else {
-         return null;
-         }**/
         if (datePart.length > 2) {
             StringTime = datePart[2];
             return LocalTime.parse(StringTime);
