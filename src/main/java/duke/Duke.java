@@ -111,9 +111,8 @@ public class Duke {
      */
     public String getDeadline(String command) {
         String result = "";
-        String[] divide = command.split(" ");
-        if (!command.contains("/") || command.endsWith("/by")
-                || divide.length < 4) {
+        String[] divide = command.split("/");
+        if (divide.length == 1) {
             result = "Oops!!! Incomplete command :(";
         } else {
             result = taskList.addTask(new DeadlineTask(command));
@@ -129,9 +128,8 @@ public class Duke {
      */
     public String getEvent(String command) {
         String result = "";
-        String[] divide = command.split(" ");
-        if (!command.contains("/") || command.endsWith("/at")
-                || divide.length < 4) {
+        String[] divide = command.split("/");
+        if (divide.length == 1) {
             result = "Oops!!! Incomplete command :(";
         } else {
             result = taskList.addTask(new EventTask(command));
