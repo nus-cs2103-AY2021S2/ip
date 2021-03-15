@@ -68,7 +68,7 @@ public class Deadline extends Task {
             checkNoBy(parameterStr);
             checkNoSpaceAroundBy(parameterStr);
             
-            String[] parameters = str.split(" /by ");
+            String[] parameters = parameterStr.split(" /by ");
             checkNoEnd(parameters);
             checkDuplicateBy(parameters);
             

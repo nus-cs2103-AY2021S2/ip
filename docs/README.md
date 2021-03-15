@@ -16,17 +16,23 @@ Adds a task to Chat's list of tasks. Type of task needs to be specified.
 
 #### To add deadline task: `deadline`
 * Command: `deadline [name of deadline task] /by [date]`
-    * Date should be written as: **dd/MM/YYYY HH:MM**
+    * Date should be written as: **dd/MM/yyyy HH:mm**
 * Example: `deadline submit paper /by 20/01/2021 23:59`
 
 #### To add event task: `event`
 * Command: `event [name of event task] /at [start date] - [end date]`
-    * Start and end date should be written as: **dd/MM/YYYY HH:MM**
+    * Start and end date should be written as: **dd/MM/yyyy HH:mm**
 * Example: `event camp /at 20/01/2021 11:00 - 22/01/2021 12:00`
   
 Expected outcome: 
 * Chat will respond with message that task has been added successfully.
 * Task will also be reflected on Chat's list which can be viewed by `list`.
+
+      If start and end date are of the same day, event will be displayed with only one date.
+      i.e. event meeting /at 20/01/2021 12:00 - 20/01/2021 14:00
+      
+      Expected display: 
+        E[] meeting (at 20 Jan 2021, 12:00PM - 2:00PM)
 
 Error:
 ChatException will be thrown if format of command is incorrect.
@@ -84,7 +90,7 @@ Example: `find t/T n/read d/20 Mar,21 Mar`
     * `[is completed]` = _T_ or _F_
     * _T_ for completed, _F_ for not completed yet.
 * `d/[dates]`
-    * date should be written as dd MMM YYYY, dd MMM or MMM YYYY.
+    * date should be written as dd MMM yyyy, dd MMM or MMM yyyy.
     * `[dates]` can include just one date (start/end) or both start and end dates.
         * dates should be separated with `,` if both start and end dates are entered.
     
