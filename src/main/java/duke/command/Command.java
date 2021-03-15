@@ -74,7 +74,7 @@ public class Command {
         } else if (commandName.equals("")) {
             output = "Please enter something!\n";
         } else if (commandName.equals("help")) {
-            executeHelp();
+            output = executeHelp();
         } else {
             output = "OOPS!!! I'm sorry, but I don't know what that means :-( \n\n";
             output += "Enter 'help' to see all the commands.";
@@ -129,28 +129,20 @@ public class Command {
      */
     public String executeDone(ArrayList<Task> tList, TaskList tasks) {
         String output = "";
+        int index = Integer.parseInt(commandName.split(" ")[1]);
+        if (index > tList.size()) {
+            return "OOPS!!! The index you entered is out of bound. \nTo view all the tasks, enter `list` :)";
+        }
+        if (tList.get(index - 1).getStatus()) {
+            return "This task is already done!";
+        }
         try {
-            int index = Integer.parseInt(commandName.split(" ")[1]);
-            if (index > tList.size()) {
-                return "Sorry, the index you entered is out of bound. \nTo view all the tasks, enter `list` :)";
-            }
-            if (tList.get(index - 1).getStatus()) {
-                return "This task is already done!";
-            }
             tList.get(index - 1).markAsDone();
             output = "Nice! I've marked this task as done:\n";
             output += tList.get(index - 1).toString() + "\n";
             Task currTask = tList.get(index - 1);
             tasks.setTasks(tList);
-            String oldTask = null;
-            if (currTask instanceof ToDo) {
-                oldTask = "T | 0 | " + currTask.getName();
-            } else if (currTask instanceof Deadline) {
-                oldTask = "D | 0 | " + currTask.getName();
-            } else {
-                assert currTask instanceof Event;
-                oldTask = "E | 0 | " + currTask.getName();
-            }
+            String oldTask = formatTask(currTask);
             BufferedReader reader = new BufferedReader(new FileReader(dataPath));
             String oldContent = "";
             String line = reader.readLine();
@@ -158,26 +150,57 @@ public class Command {
                 oldContent = oldContent + line + System.lineSeparator();
                 line = reader.readLine();
             }
-            String newContent = null;
-            if (currTask instanceof ToDo) {
-                newContent = oldContent.replace(oldTask, "T | 1 | " + currTask.getName());
-            } else if (currTask instanceof Deadline) {
-                newContent = oldContent.replace(oldTask, "D | 1 | " + currTask.getName());
-            } else {
-                assert currTask instanceof Event;
-                newContent = oldContent.replace(oldTask, "E | 1 | " + currTask.getName());
-            }
+            String newContent = markDone(currTask, oldContent, oldTask);
             FileWriter writer = new FileWriter(dataPath);
             writer.write(newContent);
             reader.close();
             writer.close();
-
         } catch (IOException e) {
             output += e.getMessage();
         } catch (NumberFormatException e) {
             output += "Please enter a valid number!";
         }
         return output;
+    }
+
+    /**
+     * Formats a task according to its type.
+     *
+     * @param currTask the task to be marked done.
+     * @return the formatted task.
+     */
+    public String formatTask(Task currTask) {
+        String oldTask;
+        if (currTask instanceof ToDo) {
+            oldTask = "T | 0 | " + currTask.getName();
+        } else if (currTask instanceof Deadline) {
+            oldTask = "D | 0 | " + currTask.getName();
+        } else {
+            assert currTask instanceof Event;
+            oldTask = "E | 0 | " + currTask.getName();
+        }
+        return oldTask;
+    }
+
+    /**
+     * Changes the status of a task from 0 to 1.
+     *
+     * @param currTask the task to be marked done.
+     * @param oldContent the old content in the data file.
+     * @param oldTask the old content of the specific task.
+     * @return empty string if task added successfully.
+     */
+    public String markDone(Task currTask, String oldContent, String oldTask) {
+        String newContent;
+        if (currTask instanceof ToDo) {
+            newContent = oldContent.replace(oldTask, "T | 1 | " + currTask.getName());
+        } else if (currTask instanceof Deadline) {
+            newContent = oldContent.replace(oldTask, "D | 1 | " + currTask.getName());
+        } else {
+            assert currTask instanceof Event;
+            newContent = oldContent.replace(oldTask, "E | 1 | " + currTask.getName());
+        }
+        return newContent;
     }
 
     /**
@@ -192,7 +215,7 @@ public class Command {
         try {
             int index = Integer.parseInt(commandName.split(" ")[1]);
             if (index > tList.size()) {
-                return "Sorry, the index you entered is out of bound. \nTo view all the tasks, enter `list` :)";
+                return "OOPS!!! The index you entered is out of bound. \nTo view all the tasks, enter `list` :)";
             }
             output = "Noted. I've removed this task:\n";
             output += tList.get(index - 1).toString() + "\n";
@@ -249,29 +272,43 @@ public class Command {
      */
     public String executeToDo(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
-        if (commandName.length() <= todoLength) {
-            output = "Please enter the task name!";
+        int spaceIndex = commandName.indexOf(" ");
+        if (commandName.length() <= todoLength
+                || commandName.substring(spaceIndex).trim().equals("")) {
+            output = "OOPS!!! Task name cannot be empty";
             return output;
         }
         int end = commandName.indexOf(" ");
         String name = commandName.substring(end + 1);
+        Task newTask = new ToDo(name);
+        if (findExact(tList, newTask) != null) {
+            output = "OOPS!!! This Task has already existed. \n";
+            return output + findExact(tList, newTask).toString();
+        }
+        tList.add(newTask);
+        output = tList.get(tList.size() - 1).addTask(tList.size());
+        output += writeFile("T | 0 | " + name + "\n");
+        tasks.setTasks(tList);
+        return output;
+    }
+
+    /**
+     * Adds a task into the date file.
+     *
+     * @param task the task to be added.
+     * @return empty string if task added successfully.
+     */
+    public String writeFile(String task) {
         try {
-            Task newTask = new ToDo(name);
-            if (findExact(tList, newTask) != null) {
-                output = "Sorry:( This Task has already existed. \n";
-                return output + findExact(tList, newTask).toString();
-            }
-            tList.add(newTask);
-            output = tList.get(tList.size() - 1).addTask(tList.size());
             BufferedWriter writer = new BufferedWriter(
                     new FileWriter(dataPath, true));
-            writer.write("T | 0 | " + name + "\n");
+            writer.write(task);
             writer.close();
-            tasks.setTasks(tList);
+            return "";
         } catch (IOException e) {
-            output += e.getMessage();
+            return e.getMessage();
         }
-        return output;
+
     }
 
     /**
@@ -285,41 +322,46 @@ public class Command {
      */
     public String executeDeadline(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
-        if (commandName.length() <= deadlineLength) {
-            output = "Please enter the task name!";
-            return output;
-        }
         try {
-            int end1 = commandName.indexOf(" ");
-            int end = commandName.indexOf("/");
-            if (commandName.substring(end1, end).trim().equals("")) {
-                return "Sorry:( Deadline name cannot be empty";
+            int spaceIndex = commandName.indexOf(" ");
+            int slashIndex = commandName.indexOf("/");
+            String taskName = "";
+            String taskDate = "";
+            if (commandName.length() <= deadlineLength
+                    || commandName.substring(spaceIndex, slashIndex).trim().equals("")) {
+                return "OOPS!!! Deadline name cannot be empty";
             }
-            String subString1 = commandName.substring(end1 + 1, end - 1);
-            String subString2 = commandName.substring(end + 4);
-            int year = Integer.valueOf(subString2.substring(0, 4));
-            int mon = Integer.valueOf(subString2.substring(5, 7));
-            int day = Integer.valueOf(subString2.substring(8));
-            Task newTask = new Deadline(subString1, LocalDate.of(year, mon, day));
+            Task newTask = getTaskFromCommand("Deadline", spaceIndex, slashIndex, taskName, taskDate);
             if (findExact(tList, newTask) != null) {
-                output = "Sorry:( This Task has already existed. \n";
+                output = "OOPS!!! This Task has already existed. \n";
                 return output + findExact(tList, newTask).toString();
             }
             tList.add(newTask);
             output = tList.get(tList.size() - 1).addTask(tList.size());
-            BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(dataPath, true));
-            writer.write("D | 0 | " + subString1 + " | " + subString2 + "\n");
-            writer.close();
+            output += writeFile("D | 0 | " + taskName + " | " + taskDate + "\n");
             tasks.setTasks(tList);
-        } catch (DukeException e) {
-            output += e.getMessage();
-        } catch (StringIndexOutOfBoundsException | IOException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             output += "OOPS!!! The due date of a deadline "
                     + "cannot be empty. (Format: /by + date[YYYY-MM-DD])";
         }
         return output;
     }
+
+    public Task getTaskFromCommand(String type, int spaceIndex, int slashIndex, String taskName, String taskDate) {
+        taskName = commandName.substring(spaceIndex + 1, slashIndex - 1);
+        taskDate = commandName.substring(slashIndex + 4);
+        int year = Integer.valueOf(taskDate.substring(0, 4));
+        int mon = Integer.valueOf(taskDate.substring(5, 7));
+        int day = Integer.valueOf(taskDate.substring(8));
+        Task newTask;
+        if (type.equals("Deadline")) {
+            newTask = new Deadline(taskName, LocalDate.of(year, mon, day));
+        } else {
+            newTask = new Event(taskName, LocalDate.of(year, mon, day));
+        }
+        return newTask;
+    }
+
 
     /**
      * Adds a event task into the task list.
@@ -332,37 +374,25 @@ public class Command {
      */
     public String executeEvent(ArrayList<Task> tList, TaskList tasks) throws DukeException {
         String output = "";
-        if (commandName.length() <= eventLength) {
-            output = "Please enter the task name!";
-            return output;
-        }
-
         try {
-            int end1 = commandName.indexOf(" ");
-            int end = commandName.indexOf("/");
-            if (commandName.substring(end1, end).trim().equals("")) {
-                return "Sorry:( Event name cannot be empty";
+            int spaceIndex = commandName.indexOf(" ");
+            int slashIndex = commandName.indexOf("/");
+            if (commandName.length() <= eventLength
+                    || commandName.substring(spaceIndex, slashIndex).trim().equals("")) {
+                return "OOPS!!! Event name cannot be empty";
             }
-            String subString1 = commandName.substring(end1 + 1, end - 1);
-            String subString2 = commandName.substring(end + 4);
-            int year = Integer.valueOf(subString2.substring(0, 4));
-            int mon = Integer.valueOf(subString2.substring(5, 7));
-            int day = Integer.valueOf(subString2.substring(8));
-            Task newTask = new Event(subString1, LocalDate.of(year, mon, day));
+            String taskName = "";
+            String taskDate = "";
+            Task newTask = getTaskFromCommand("Event", spaceIndex, slashIndex, taskName, taskDate);
             if (findExact(tList, newTask) != null) {
-                output = "Sorry:( This Task has already existed. \n";
+                output = "OOPS!!! This Task has already existed. \n";
                 return output + findExact(tList, newTask).toString();
             }
             tList.add(newTask);
             output = tList.get(tList.size() - 1).addTask(tList.size());
-            BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(dataPath, true));
-            writer.write("E | 0 | " + subString1 + " | " + subString2 + "\n");
-            writer.close();
+            output += writeFile("E | 0 | " + taskName + " | " + taskDate + "\n");
             tasks.setTasks(tList);
-        } catch (DukeException e) {
-            output += e.getMessage();
-        } catch (StringIndexOutOfBoundsException | IOException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             output += "OOPS!!! The start and end date of "
                     + "an event cannot be empty.(Format: /at + duration[YYYY-MM-DD])";
         }
