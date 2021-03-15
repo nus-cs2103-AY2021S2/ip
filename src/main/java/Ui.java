@@ -169,7 +169,7 @@ public class Ui {
     }
 
     public static String foundMatchingTasks() {
-        return LINE + " Sorry, there are no matching tasks :(\n";
+        return LINE + " Your matching tasks are as follows:\n";
     }
 
     public static String getReminders() {

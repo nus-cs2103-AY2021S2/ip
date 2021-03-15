@@ -113,7 +113,7 @@ public class TaskList {
             }
         }
         if (result.equals("")) {
-            return Ui.foundMatchingTasks();
+            return Ui.foundNoMatchingTasks();
         } else {
             return Ui.foundMatchingTasks() + result + Ui.lineGetter();
             //can try make this better
