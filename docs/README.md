@@ -403,7 +403,7 @@ The size of the list depends on the number of matches
 
 Remember to key in the commands in the exact format provided. Especially for date and time.
 
-### The data is not saving
+### The data is not saving:
 
 Duke saves all your entries automatically, however in rare cases, there might be storage problems. This would most
 likely happen if you enter the commands in the wrong format and somehow the task is added in the list of tasks but not
