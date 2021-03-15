@@ -27,6 +27,7 @@ public class TaskParser {
         LocalDate datetime;
         boolean isDone = false;
 
+        // For parsing tasks from save data.
         if (fullTaskString.startsWith("[isDone]")) {
             parsableTaskString = fullTaskString.split("\\[isDone]", SPLIT_LIMIT)[1].trim();
             isDone = true;
@@ -69,7 +70,7 @@ public class TaskParser {
             taskParts = taskTail.split(" /by ");
 
             if (taskParts.length != NUM_REQUIRED_TIMED_TASK_PARTS) {
-                throw new DukeException("Oops! Usage: event [desc] /on [date]");
+                throw new DukeException("Oops! Usage: deadline [desc] /by [date]");
             }
 
             description = taskParts[0];
