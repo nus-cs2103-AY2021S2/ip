@@ -74,20 +74,29 @@ public class Command {
         } else if (commandName.equals("")) {
             output = "Please enter something!\n";
         } else if (commandName.equals("help")) {
-            output = "Duke User Guide: \n";
-            output += "1. `list` - List all the tasks \n";
-            output += "2. `todo` - Create a ToDO task \n (e.g. `todo CS2103 ip`) \n";
-            output += "3. `deadline` - Create a Deadline task \n (e.g. `deadline CS2103 Quiz /by 2021-02-19`) \n";
-            output += "4. `event` - Create an Event task \n (e.g. `event CS2103 Lecture /at 2021-02-19`) \n";
-            output += "5. `done` - Mark a task as done \n (e.g. `done 3`) \n";
-            output += "6. `delete` - Delete a task \n (e.g. `delete 3`) \n";
-            output += "7. `find` - Find a task \n (e.g. `find CS2103`) \n";
-            output += "8. `bye` - Quit the program \n";
+            executeHelp();
         } else {
             output = "OOPS!!! I'm sorry, but I don't know what that means :-( \n\n";
             output += "Enter 'help' to see all the commands.";
         }
         assert output != "" : "output is null";
+        return output;
+    }
+    /**
+     * Returns all the available commands.
+     *
+     * @return all the available commands with an example for user reference.
+     */
+    public String executeHelp() {
+        String output = "Duke User Guide: \n";
+        output += "1. `list` - List all the tasks \n";
+        output += "2. `todo` - Create a ToDO task \n (e.g. `todo CS2103 ip`) \n";
+        output += "3. `deadline` - Create a Deadline task \n (e.g. `deadline CS2103 Quiz /by 2021-02-19`) \n";
+        output += "4. `event` - Create an Event task \n (e.g. `event CS2103 Lecture /at 2021-02-19`) \n";
+        output += "5. `done` - Mark a task as done \n (e.g. `done 3`) \n";
+        output += "6. `delete` - Delete a task \n (e.g. `delete 3`) \n";
+        output += "7. `find` - Find a task \n (e.g. `find CS2103`) \n";
+        output += "8. `bye` - Quit the program \n";
         return output;
     }
 
@@ -283,6 +292,9 @@ public class Command {
         try {
             int end1 = commandName.indexOf(" ");
             int end = commandName.indexOf("/");
+            if (commandName.substring(end1, end).trim().equals("")) {
+                return "Sorry:( Deadline name cannot be empty";
+            }
             String subString1 = commandName.substring(end1 + 1, end - 1);
             String subString2 = commandName.substring(end + 4);
             int year = Integer.valueOf(subString2.substring(0, 4));
@@ -324,9 +336,13 @@ public class Command {
             output = "Please enter the task name!";
             return output;
         }
+
         try {
             int end1 = commandName.indexOf(" ");
             int end = commandName.indexOf("/");
+            if (commandName.substring(end1, end).trim().equals("")) {
+                return "Sorry:( Event name cannot be empty";
+            }
             String subString1 = commandName.substring(end1 + 1, end - 1);
             String subString2 = commandName.substring(end + 4);
             int year = Integer.valueOf(subString2.substring(0, 4));

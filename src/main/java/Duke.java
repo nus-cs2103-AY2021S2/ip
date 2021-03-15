@@ -74,11 +74,10 @@ public class Duke extends Application {
         return output;
     }
 
-    @Override
-    public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
+    /**
+     * Setting up required components
+     */
+    public AnchorPane setup(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -93,8 +92,13 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
+        return mainLayout;
+    }
 
-        //Step 2. Formatting the window to look as expected
+    /**
+     * Formatting the window to look as expected
+     */
+    public void formatWindow(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -123,8 +127,12 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
-        //Step 3. Add functionality to handle user input.
+    /**
+     * Add functionality to handle user input.
+     */
+    public void handleInput() {
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -134,6 +142,18 @@ public class Duke extends Application {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
+    }
+
+    @Override
+    public void start(Stage stage) {
+        //Step 1. Setting up required components
+        AnchorPane mainLayout = setup(stage);
+
+        //Step 2. Formatting the window to look as expected
+        formatWindow(stage, mainLayout);
+
+        //Step 3. Add functionality to handle user input.
+        handleInput();
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
