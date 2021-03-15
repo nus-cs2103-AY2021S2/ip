@@ -1,11 +1,11 @@
 package duke;
 
-import javafx.application.Application;
-
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import javafx.application.Application;
 
 
 /**
@@ -89,48 +89,32 @@ public class Duke {
         String str = wholeInput;
         String[] parts = str.split(" ");
         String s = parts[0];
-        String rest;
         switch (s){
             case "todo":
-                rest = str.substring(4);
-                return parser.parseTodoCommand(rest,taskList,ui,database);
+                return parser.parseTodoCommand(str,taskList,ui,database);
 
             case "deadline":
-                rest = str.substring(8);
-                return parser.parseDeadlineCommand(rest,taskList,ui,database, deadlineTasks);
+                return parser.parseDeadlineCommand(str,taskList,ui,database, deadlineTasks);
 
             case "reminder":
-                rest = str.substring(8);
-                if(!rest.isEmpty()){
-                    return "Please do not type other chars after reminder";
-                }
-                return parser.parseReminderCommand(deadlineTasks,ui);
+                return parser.parseReminderCommand(str, deadlineTasks,ui);
             case "event":
-                rest = str.substring(5);
-                return parser.parseEventCommand(rest, taskList, ui, database);
+                return parser.parseEventCommand(str, taskList, ui, database);
 
             case "list":
-                rest = str.substring(4);
-                if(!rest.isEmpty()){
-                    return "Please do not type other chars after list";
-                }
-                return parser.parseListCommand(taskList, ui);
+                return parser.parseListCommand(str, taskList, ui);
 
             case "bye":
                 return parser.parseByeCommand(ui);
 
             case "done":
-                rest = str.substring(4);
-
-                return parser.parseDoneCommand(rest,taskList,ui,database);
+                return parser.parseDoneCommand(str,taskList,ui,database);
 
             case "delete":
-                rest = str.substring(6);
-                return parser.parseDeleteCommand(rest, taskList, ui, database);
+                return parser.parseDeleteCommand(str, taskList, ui, database);
 
             case "find":
-                rest = str.substring(4);
-                return parser.parseFindCommand(rest, taskList,ui);
+                return parser.parseFindCommand(str, taskList,ui);
 
             default:
                 return parser.parseDefault(ui);
