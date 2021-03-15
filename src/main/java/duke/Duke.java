@@ -92,11 +92,49 @@ public class Duke {
         } else if (TaskType.equals("todo")) {
             result = taskList.addTask(new TodoTask(command));
         } else if (TaskType.equals("deadline")) {
-            result = taskList.addTask(new DeadlineTask(command));
+            result = getDeadline(command);
         } else if (TaskType.equals("event")) {
-            result = taskList.addTask(new EventTask(command));
+            result = getEvent(command);
         } else if (TaskType.equals("add")) {
             result = noteList.addTask(new Notes(command));
+        } else {
+            result = "Oops!!! Invalid Input :(";
+        }
+        return result;
+    }
+
+    /**
+     * This method ensures that deadline is input in the correct format
+     *
+     * @param command
+     * @return
+     */
+    public String getDeadline(String command) {
+        String result = "";
+        String[] divide = command.split(" ");
+        if (!command.contains("/") || command.endsWith("/by")
+                || divide.length < 4) {
+            result = "Oops!!! Incomplete command :(";
+        } else {
+            result = taskList.addTask(new DeadlineTask(command));
+        }
+        return result;
+    }
+
+    /**
+     * This method ensures that the event is input in the correct format
+     *
+     * @param command
+     * @return
+     */
+    public String getEvent(String command) {
+        String result = "";
+        String[] divide = command.split(" ");
+        if (!command.contains("/") || command.endsWith("/at")
+                || divide.length < 4) {
+            result = "Oops!!! Incomplete command :(";
+        } else {
+            result = taskList.addTask(new EventTask(command));
         }
         return result;
     }

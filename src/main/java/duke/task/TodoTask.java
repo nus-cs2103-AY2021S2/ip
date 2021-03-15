@@ -14,10 +14,10 @@ public class TodoTask extends Task {
         divideCommand = task.split(" ");
     }
 
-    public String getName(){
-        if(getSizeOfCommand() == 2){
+    public String getName() {
+        if (getSizeOfCommand() == 2) {
             return divideCommand[1];
-        }else{
+        } else {
             return divideCommand[1] + " " + divideCommand[2];
         }
     }

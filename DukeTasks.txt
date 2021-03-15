@@ -11,4 +11,8 @@ event attend meeting /at 2021-03-15 23:00:00 notDone
 todo run notDone
 todo go run done
 todo run notDone
-todo play notDone
+todo play done
+event meeting /at 2021-03-13 done
+deadline hw /by 2021-03-12 notDone
+deadline do hw /by 2021-03-12 23:00:00 notDone
+event meeting /at 2021-03-12 notDone
