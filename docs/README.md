@@ -140,10 +140,6 @@ Got it! Added:
 Now you have 6 items in your list
 ```
 
-#### Note:
-
-Task description is at max 2 words.
-
 ### Feature 3
 
 add deadline task
@@ -166,11 +162,9 @@ Now you have 7 items in your list
 
 #### Note:
 
-1. Task description is at max 2 words.
+1. You may not key in the time, and the task would still be added.
 
-2. Also you may not key in the time, and the task would still be added.
-
-3. Time is in 24-hour format.
+2. Time is in 24-hour format.
 
 ### Feature 4
 
@@ -194,11 +188,9 @@ Now you have 8 items in your list
 
 #### Note:
 
-1. Task description is at max 2 words.
+1. You may not key in the time, and the task would still be added.
 
-2. Also you may not key in the time, and the task would still be added.
-
-3. Time is in 24-hour format.
+2. Time is in 24-hour format.
 
 ### Feature 5
 
