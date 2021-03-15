@@ -16,12 +16,12 @@ public class TodoTask extends Task {
 
 
     public String getName() {
-       String result = "";
-        for(int i = 1; i < divideCommand.length; i++){
+        String result = "";
+        for (int i = 1; i < divideCommand.length; i++) {
             result += i == divideCommand.length - 1
                     ? divideCommand[i] : divideCommand[i] + " ";
         }
-       return result;
+        return result;
     }
 
     /**
