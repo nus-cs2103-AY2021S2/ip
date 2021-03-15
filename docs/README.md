@@ -20,9 +20,10 @@ in that you can key in anything, search for them using keywords, and be able to 
 
 ## Setting Up
 
-1. Download the latest jar file version
-2. You need atleast Java 11 to run Duke.
-3. Open and enter in your terminal the following command: `java -jar duke.jar`. Alternatively, you could simply double
+1. Create a new folder in your PC.
+2. Download the latest jar file version into that folder.
+3. You need atleast Java 11 to run Duke.
+4. Open and enter in your terminal the following command: `java -jar duke.jar`. Alternatively, you could simply double
    click the jar file.
 
 ## List of Features
@@ -400,15 +401,16 @@ The size of the list depends on the number of matches
 
 ### Reminder:
 
-1. After working on duke, make sure to key in the **exit** command (`bye` or `exit`) or **save** command (`save`) in
-   order to **save** your entries.
-2. Remember to key in the commands in the exact format provided. Especially for date and time.
+Remember to key in the commands in the exact format provided. Especially for date and time.
 
 ### The data is not saving
 
-This would most likely happen if you enter the commands in the wrong format and somehow the task is added in the list of
-tasks but not stored. Hence, Duke may not be able to save tasks afterwards. When this happens, you remove all the contents
-from the storage files, and start Duke again. Then it will run properly again.
+Duke saves all your entries automatically, however in rare cases, there might be storage problems. This would most
+likely happen if you enter the commands in the wrong format and somehow the task is added in the list of tasks but not
+stored. Hence, Duke may not be able to save tasks afterwards. When this happens, you remove all the contents from the
+storage files namely DukeTasks.txt and DukeNotes.txt, and start Duke again. The storage files should be created in the
+same folder in which Duke was downloaded. Then it should run properly again. It is also worth noting that exiting duke
+using the `bye` or `exit` command is the safest way, in order to ensure that there are no discrepancies in storage.
 
 ## Hope you have a wonderful time using Duke!
 
