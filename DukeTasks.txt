@@ -7,5 +7,3 @@ todo run notDone
 todo go to the park notDone
 todo run notDone
 todo run notDone
-todo run notDone
-deadline assign /by 2021-03-12 notDone
