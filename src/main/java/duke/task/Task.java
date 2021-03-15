@@ -13,7 +13,6 @@ public class Task {
     String[] divideCommand;
     String[] taskPart;
     String[] datePart;
-    boolean hasTime = false;
 
     Task(String task) {
         this.task = task;
