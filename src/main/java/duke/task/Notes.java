@@ -5,8 +5,6 @@ package duke.task;
  * This class extends Task so that they can be added to a taskList
  */
 public class Notes extends Task {
-    String note;
-
     /**
      * Constructor for Notes
      *
@@ -14,11 +12,8 @@ public class Notes extends Task {
      */
     public Notes(String task) {
         super(task);
-        note = "";
-        for (int i = 1; i < super.divideCommand.length; i++) {
-            note += i == super.divideCommand.length - 1
-                    ? super.divideCommand[i] : super.divideCommand[i] + " ";
-        }
+        divideCommand = task.split(" ");
+
     }
 
     /**
@@ -27,11 +22,16 @@ public class Notes extends Task {
      * @return
      */
     public String getNote() {
+        String note = "";
+        for (int i = 1; i < divideCommand.length; i++) {
+            note += i == divideCommand.length - 1
+                    ? divideCommand[i] : divideCommand[i] + " ";
+        }
         return note;
     }
 
     @Override
     public String toString() {
-        return note;
+        return getNote();
     }
 }

@@ -11,11 +11,19 @@ public class Task {
     String task;
     boolean done = false;
     String[] divideCommand;
+    String[] taskPart;
+    String[] datePart;
     boolean hasTime = false;
 
     Task(String task) {
         this.task = task;
-        divideCommand = task.split(" ");
+        if (task.split(" ")[0].equals("add")) {
+            divideCommand = task.split(" ");
+        } else if (!task.split(" ")[0].equals("todo")) {
+            divideCommand = task.split("/");
+            taskPart = divideCommand[0].split(" ");
+            datePart = divideCommand[1].split(" ");
+        }
     }
 
     /**
@@ -24,7 +32,7 @@ public class Task {
      * @return
      */
     public String getType() {
-        return divideCommand[0];
+        return task.split(" ")[0];
     }
 
     /**
@@ -59,13 +67,9 @@ public class Task {
      */
     public String getName() {
         String result = "";
-        if (getSizeOfCommand() > 2 &&
-                (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
-            result += divideCommand[1];
-        } else if (getSizeOfCommand() == 2) {
-            result += divideCommand[1];
-        } else {
-            result += divideCommand[1] + " " + divideCommand[2];
+        for (int i = 1; i < taskPart.length; i++) {
+            result += i == taskPart.length - 1
+                    ? taskPart[i] : taskPart[i] + " ";
         }
         return result;
     }
@@ -78,23 +82,7 @@ public class Task {
      */
     public LocalDate getDate() {
         String StringDate = "";
-        if (getSizeOfCommand() == 6 &&
-                (divideCommand[3].equals("/at") || divideCommand[3].equals("/by"))) {
-            StringDate += divideCommand[4];
-            hasTime = true;
-        } else if (getSizeOfCommand() == 5 &&
-                (divideCommand[3].equals("/at") || divideCommand[3].equals("/by"))) {
-            StringDate += divideCommand[4];
-            hasTime = false;
-        } else if (getSizeOfCommand() == 5 &&
-                (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
-            StringDate += divideCommand[3];
-            hasTime = true;
-        } else if (getSizeOfCommand() == 4 &&
-                (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
-            StringDate += divideCommand[3];
-            hasTime = false;
-        }
+        StringDate = datePart[1];
         return LocalDate.parse(StringDate);
     }
 
@@ -123,13 +111,20 @@ public class Task {
      */
     public LocalTime getTime() {
         String StringTime = "";
-        if (hasTime) {
-            if (getSizeOfCommand() == 6) {
-                StringTime += divideCommand[5];
-            } else if (getSizeOfCommand() == 5 &&
-                    (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
-                StringTime += divideCommand[4];
-            }
+        /**
+         if (hasTime) {
+         if (getSizeOfCommand() == 6) {
+         StringTime += divideCommand[5];
+         } else if (getSizeOfCommand() == 5 &&
+         (divideCommand[2].equals("/at") || divideCommand[2].equals("/by"))) {
+         StringTime += divideCommand[4];
+         }
+         return LocalTime.parse(StringTime);
+         } else {
+         return null;
+         }**/
+        if (datePart.length > 2) {
+            StringTime = datePart[2];
             return LocalTime.parse(StringTime);
         } else {
             return null;
