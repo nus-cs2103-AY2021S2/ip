@@ -1,0 +1,39 @@
+todo     eat later
+deadline     eat     mee siam   /  2021-01-23 20:21
+event    go to buffet   /    2020-12-23 23:23
+list
+done 1
+done 2
+find eat
+find nothign
+find
+find
+done
+delete
+done
+list
+done 4
+done sdfs
+todo
+deadline
+deadline sdf
+deadline sdf /
+deadline sdf / 2020-43-43
+deadline sdf / 2020-43-43 24:24
+deadline sdf / 2020-43-43  24:24
+event
+event sdf
+event sdf /
+event sdf / 2020-43-43
+event sdf / 2020-43-43 24:24
+event sdf / 2020-43-43  24:24
+delete 1
+delete 1
+delete 1
+delete
+delete 0
+done 0
+todo chill
+deadline dsfgf/fg
+event dsf/hwef
+bye
