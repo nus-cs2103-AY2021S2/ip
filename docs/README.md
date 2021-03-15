@@ -400,8 +400,15 @@ The size of the list depends on the number of matches
 
 ### Reminder:
 
-After working on duke, make sure to key in the **exit** command (`bye` or `exit`) or **save** command (`save`) in order
-to **save** your entries.
+1. After working on duke, make sure to key in the **exit** command (`bye` or `exit`) or **save** command (`save`) in
+   order to **save** your entries.
+2. Remember to key in the commands in the exact format provided. Especially for date and time.
+
+### The data is not saving
+
+This would most likely happen if you enter the commands in the wrong format and somehow the task is added in the list of
+tasks but not stored. Hence, Duke may not be able to save tasks afterwards. When this happens, you remove all the contents
+from the storage files, and start Duke again. Then it will run properly again.
 
 ## Hope you have a wonderful time using Duke!
 
