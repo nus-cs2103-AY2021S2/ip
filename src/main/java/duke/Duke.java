@@ -92,15 +92,15 @@ public class Duke {
         String TaskType = p.getTaskType().toLowerCase();
         String result = "";
         if (TaskType.equals("done")) {
-            result = isInt(p.getIndex())
+            result = validIndex(p.getIndex())
                     ? taskList.markAsDone(Integer.parseInt(p.getIndex()))
                     : "Invalid Index!";
         } else if (TaskType.equals("delete") || TaskType.equals("remove")) {
-            result = isInt(p.getIndex())
+            result = validIndex(p.getIndex())
                     ? taskList.DeleteTask(Integer.parseInt(p.getIndex()))
                     : "Invalid Index!";
         } else if (TaskType.equals("delete-note") || TaskType.equals("remove-note")) {
-            result = isInt(p.getIndex())
+            result = validIndex(p.getIndex())
                     ? noteList.DeleteTask(Integer.parseInt(p.getIndex()))
                     : "Invalid Index!";
         } else if (TaskType.equals("find") || TaskType.equals("search")) {
@@ -210,15 +210,19 @@ public class Duke {
     }
 
     /**
-     * Check if a command is a valid int
+     * Check if the string is a valid index
      *
      * @param input
      * @return
      */
-    public boolean isInt(String input) {
+    public boolean validIndex(String input) {
         try {
-            Integer.parseInt(input);
-            return true;
+            int index = Integer.parseInt(input);
+            if(index <= 0){
+                return false;
+            }else {
+                return true;
+            }
         } catch (Exception e) {
             return false;
         }

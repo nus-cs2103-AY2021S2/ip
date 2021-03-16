@@ -3,7 +3,6 @@ deadline assignment /by 2021-03-15 23:00:00 done
 deadline finish assignment 1 /by 2021-04-12 notDone
 event attend John? Wedding /at 2021-01-12 16:00:00 notDone
 todo run notDone
-todo run notDone
 todo go to the park notDone
 todo run notDone
 todo run notDone
