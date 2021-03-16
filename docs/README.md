@@ -3,7 +3,7 @@
 **Duke** is a desktop application to help users keep track of tasks, and make notes. It functions using a GUI (Graphical
 User Interface) to help those potential users be at ease while using Duke.
 
-## Basic Info
+### Basic Info
 
 **Duke** allows the user to key in three types of tasks: **todo**, **deadlines** and **events**, and also be able to
 manipulate them.
@@ -18,7 +18,7 @@ manipulate them.
 Duke also allows the user to keep track of **notes**, which are separately stored compared to tasks. Notes are flexible
 in that you can key in anything, search for them using keywords, and be able to delete them if you know their index.
 
-## Setting Up
+### Setting Up
 
 1. Create a new folder in your PC.
 2. Download the latest jar file version into that folder.
@@ -26,7 +26,7 @@ in that you can key in anything, search for them using keywords, and be able to 
 4. Open and enter in your terminal the following command: `java -jar duke.jar`. Alternatively, you could simply double
    click the jar file.
 
-## List of Features
+### List of Features
 
 1. Get list of all tasks
 2. Save Entries
@@ -49,17 +49,17 @@ in that you can key in anything, search for them using keywords, and be able to 
 2. Task Features: Which deal with the tasks.
 3. Note Features: Which deal with the notes.
 
-# Duke Features
+## Duke Features
 
-## Main Features
+### Main Features
 
-### Feature 1
+#### Feature 1
 
 Save entries
 
-### Usage
+#### Usage
 
-### `save` - key in `save`
+#### `save` - key in `save`
 
 Saves all the data entered so far
 
@@ -73,13 +73,13 @@ Expected outcome:
 Your entries have been saved :)
 ```
 
-### Feature 2
+#### Feature 2
 
 Exit Duke
 
-### Usage
+#### Usage
 
-### `bye` or `exit` - key in `bye` or `exit`
+#### `bye` or `exit` - key in `bye` or `exit`
 
 Saves all the data and exits duke
 
@@ -94,15 +94,15 @@ Goodbye for now.
 Hope to see you soon!
 ```
 
-## Task Features
+### Task Features
 
-### Feature 1
+#### Feature 1
 
 Get the list of tasks
 
-### Usage
+#### Usage
 
-### `list` - key in `list`
+#### `list` - key in `list`
 
 Returns the list of tasks
 
@@ -122,13 +122,13 @@ Contents:
 
 Returns the list of all the tasks and they are numbered starting from 1.
 
-### Feature 2
+#### Feature 2
 
 add todo task
 
-### Usage
+#### Usage
 
-### `todo` - key in `todo <task description>`
+#### `todo` - key in `todo <task description>`
 
 Example of Usage:
 
@@ -142,13 +142,13 @@ Got it! Added:
 Now you have 6 items in your list
 ```
 
-### Feature 3
+#### Feature 3
 
 add deadline task
 
-### Usage
+#### Usage
 
-### `deadline` - key in `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+#### `deadline` - key in `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
 
 Example of Usage:
 
@@ -162,19 +162,19 @@ Got it! Added:
 Now you have 7 items in your list
 ```
 
-#### Note:
+##### Note:
 
 1. You may not key in the time, and the task would still be added.
 
 2. Time is in 24-hour format.
 
-### Feature 4
+#### Feature 4
 
 add event task
 
-### Usage
+#### Usage
 
-### `event` - key in `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+#### `event` - key in `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
 
 Example of Usage:
 
@@ -188,19 +188,19 @@ Got it! Added:
 Now you have 8 items in your list
 ```
 
-#### Note:
+##### Note:
 
 1. You may not key in the time, and the task would still be added.
 
 2. Time is in 24-hour format.
 
-### Feature 5
+#### Feature 5
 
 Mark a task as done
 
-### Usage
+#### Usage
 
-### `done` - key in `done <index>`
+#### `done` - key in `done <index>`
 
 Example of Usage:
 
@@ -215,13 +215,13 @@ Task 6 is complete:
 
 Similar output is expected for other type of tasks
 
-### Feature 6
+#### Feature 6
 
 Remove a task
 
-### Usage
+#### Usage
 
-### `delete` or `remove` - key in `delete <index>` or `remove <index>`
+#### `delete` or `remove` - key in `delete <index>` or `remove <index>`
 
 Example of Usage:
 
@@ -237,13 +237,13 @@ Now you have 6 items in your list
 
 Similar output is expected for other type of tasks
 
-### Feature 7
+#### Feature 7
 
 Find matching tasks based on keyword
 
-### Usage
+#### Usage
 
-### `find` or `search` - key in `find <keyword>` or `search <keyword>`
+#### `find` or `search` - key in `find <keyword>` or `search <keyword>`
 
 Example of Usage:
 
@@ -260,13 +260,13 @@ Contents:
 
 The output depends on the number of matching tasks found
 
-### Feature 8
+#### Feature 8
 
 Get tasks that are currently due
 
-### Usage
+#### Usage
 
-### `dues` or `reminders` - key in `dues` or `reminders`
+#### `dues` or `reminders` - key in `dues` or `reminders`
 
 Example of Usage:
 
@@ -285,17 +285,17 @@ Contents:
 
 The output depends on the number of matching tasks found
 
-## Note Features
+### Note Features
 
-### Feature 1
+#### Feature 1
 
 Get the list of notes
 
-### Usage
+#### Usage
 
-### `notes` - key in `notes`
+#### `notes` - key in `notes`
 
-Returns the list of tasks
+Returns the list of notes
 
 Example of usage:
 
@@ -313,13 +313,13 @@ Contents:
 
 Returns the list of all the notes and they are numbered starting from 1.
 
-### Feature 2
+#### Feature 2
 
 add note
 
-### Usage
+#### Usage
 
-### `add` - key in `add <note description>`
+#### `add` - key in `add <note description>`
 
 Example of Usage:
 
@@ -333,13 +333,13 @@ play video games
 Now you have 6 items in your list
 ```
 
-### Feature 3
+#### Feature 3
 
 Remove a note
 
-### Usage
+#### Usage
 
-### `delete-note` or `remove-note` - key in `delete-note <index>` or `remove-note <index>`
+#### `delete-note` or `remove-note` - key in `delete-note <index>` or `remove-note <index>`
 
 Example of Usage:
 
@@ -353,13 +353,13 @@ play video games
 Now you have 5 items in your list
 ```
 
-### Feature 4
+#### Feature 4
 
 Find matching notes based on keyword
 
-### Usage
+#### Usage
 
-### `find-note` or `search-note` - key in `find-note <keyword>` or `search-note <keyword>`
+#### `find-note` or `search-note` - key in `find-note <keyword>` or `search-note <keyword>`
 
 Example of Usage:
 
@@ -376,7 +376,7 @@ Contents:
 
 The size of the list depends on the number of matches
 
-## Summary of features:
+### Summary of features:
 
 1. Save entries - `save`
 2. Exit duke - `bye` or `exit`
@@ -393,11 +393,11 @@ The size of the list depends on the number of matches
 13. Delete a note - `delete-note <index>` or `remove-note <index>`
 14. Find notes based on keyword - `find-note <keyword>` or `search-note <keyword>`
 
-### Reminder:
+#### Reminder:
 
 Remember to key in the commands in the exact format provided. Especially for date and time.
 
-### The data is not saving:
+#### The data is not saving:
 
 Duke saves all your entries automatically, however in rare cases, there might be storage problems. This would most
 likely happen if you enter the commands in the wrong format and somehow the task is added in the list of tasks but not
