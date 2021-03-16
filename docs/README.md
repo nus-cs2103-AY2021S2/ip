@@ -47,7 +47,9 @@ in that you can key in anything, search for them using keywords, and be able to 
 
 1. Main Features: Which deal with the chatbot basic functions that are not directly related to tasks or notes.
 2. Task Features: Which deal with the tasks.
-3. Note Features: Which deal with notes.
+3. Note Features: Which deal with the notes.
+
+# Duke Features
 
 ## Main Features
 
