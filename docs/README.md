@@ -103,13 +103,8 @@ Format: `deadline <TASK DESCRIPTION> /by <YYYY-MM-DD HH:mm>`
 * The deadline date and time has to be after current time
 
 Examples:
-<<<<<<< HEAD
 * `deadline birthday /by 2021-06-21 00:00`
 * `deadline project submission /by 2021-02-21 23:59`
-=======
-* `deadline birthday /by <2021-06-21 00:00>`
-* `deadline assignment submission /by <2021-02-21 23:59>`
->>>>>>> b7732c2f3d4846df53c5eaf8565a94613b2fd927
 
 ### Adding an event: `event`
 
