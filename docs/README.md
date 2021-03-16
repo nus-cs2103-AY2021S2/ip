@@ -57,9 +57,9 @@ in that you can key in anything, search for them using keywords, and be able to 
 
 Save entries
 
-#### Usage
+##### Usage
 
-#### `save` - key in `save`
+##### `save` - key in `save`
 
 Saves all the data entered so far
 
@@ -77,9 +77,9 @@ Your entries have been saved :)
 
 Exit Duke
 
-#### Usage
+##### Usage
 
-#### `bye` or `exit` - key in `bye` or `exit`
+##### `bye` or `exit` - key in `bye` or `exit`
 
 Saves all the data and exits duke
 
@@ -100,9 +100,9 @@ Hope to see you soon!
 
 Get the list of tasks
 
-#### Usage
+##### Usage
 
-#### `list` - key in `list`
+##### `list` - key in `list`
 
 Returns the list of tasks
 
@@ -114,10 +114,9 @@ Expected outcome:
 
 ```
 Contents:
-1. <task>
-2. <task>
-    -
-    -
+1. [D][-] hw (by: Mar 18 2021) 
+2. [E][-] meeting (at: Mar 22 2021 04:00PM)
+3. [T][X] run
 ```
 
 Returns the list of all the tasks and they are numbered starting from 1.
@@ -126,9 +125,9 @@ Returns the list of all the tasks and they are numbered starting from 1.
 
 add todo task
 
-#### Usage
+##### Usage
 
-#### `todo` - key in `todo <task description>`
+##### `todo` - key in `todo <task description>`
 
 Example of Usage:
 
@@ -146,9 +145,9 @@ Now you have 6 items in your list
 
 add deadline task
 
-#### Usage
+##### Usage
 
-#### `deadline` - key in `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+##### `deadline` - key in `deadline <task description> /by <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
 
 Example of Usage:
 
@@ -172,9 +171,9 @@ Now you have 7 items in your list
 
 add event task
 
-#### Usage
+##### Usage
 
-#### `event` - key in `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
+##### `event` - key in `event <task description> /at <Date: Format(yyyy-mm-dd)> <Time: Format(hh:mm:ss)>`
 
 Example of Usage:
 
@@ -198,9 +197,9 @@ Now you have 8 items in your list
 
 Mark a task as done
 
-#### Usage
+##### Usage
 
-#### `done` - key in `done <index>`
+##### `done` - key in `done <index>`
 
 Index must be greater than 0
 
@@ -221,9 +220,9 @@ Similar output is expected for other type of tasks
 
 Remove a task
 
-#### Usage
+##### Usage
 
-#### `delete` or `remove` - key in `delete <index>` or `remove <index>`
+##### `delete` or `remove` - key in `delete <index>` or `remove <index>`
 
 Index must be greater than 0
 
@@ -245,9 +244,9 @@ Similar output is expected for other type of tasks
 
 Find matching tasks based on keyword
 
-#### Usage
+##### Usage
 
-#### `find` or `search` - key in `find <keyword>` or `search <keyword>`
+##### `find` or `search` - key in `find <keyword>` or `search <keyword>`
 
 Example of Usage:
 
@@ -258,8 +257,8 @@ Expected outcome:
 ```
 We have found the following 2 item(s)
 Contents:
-1. <task>
-2. <task>
+1. [E][X] meeting (at: Mar 18 2021) 
+2. [E][-] meeting (at: Mar 22 2021 04:00PM)
 ```
 
 The output depends on the number of matching tasks found
@@ -268,9 +267,9 @@ The output depends on the number of matching tasks found
 
 Get tasks that are currently due
 
-#### Usage
+##### Usage
 
-#### `dues` or `reminders` - key in `dues` or `reminders`
+##### `dues` or `reminders` - key in `dues` or `reminders`
 
 Example of Usage:
 
@@ -281,10 +280,8 @@ Expected outcome:
 ```
 These are the due tasks
 Contents:
-1. <task>
-2. <task>
-    -
-    -
+1. [D][-] hw (by: Mar 18 2021) 
+2. [E][-] meeting (at: Mar 22 2021 04:00PM)
 ```
 
 The output depends on the number of matching tasks found
@@ -295,9 +292,9 @@ The output depends on the number of matching tasks found
 
 Get the list of notes
 
-#### Usage
+##### Usage
 
-#### `notes` - key in `notes`
+##### `notes` - key in `notes`
 
 Returns the list of notes
 
@@ -309,10 +306,8 @@ Expected outcome:
 
 ```
 Contents:
-1. <task>
-2. <task>
-    -
-    -
+1. watch movies
+2. play video games
 ```
 
 Returns the list of all the notes and they are numbered starting from 1.
@@ -321,9 +316,9 @@ Returns the list of all the notes and they are numbered starting from 1.
 
 add note
 
-#### Usage
+##### Usage
 
-#### `add` - key in `add <note description>`
+##### `add` - key in `add <note description>`
 
 Example of Usage:
 
@@ -341,9 +336,9 @@ Now you have 6 items in your list
 
 Remove a note
 
-#### Usage
+##### Usage
 
-#### `delete-note` or `remove-note` - key in `delete-note <index>` or `remove-note <index>`
+##### `delete-note` or `remove-note` - key in `delete-note <index>` or `remove-note <index>`
 
 Index must be greater than 0
 
@@ -363,9 +358,9 @@ Now you have 5 items in your list
 
 Find matching notes based on keyword
 
-#### Usage
+##### Usage
 
-#### `find-note` or `search-note` - key in `find-note <keyword>` or `search-note <keyword>`
+##### `find-note` or `search-note` - key in `find-note <keyword>` or `search-note <keyword>`
 
 Example of Usage:
 
@@ -376,8 +371,8 @@ Expected outcome:
 ```
 We have found the following 2 item(s)
 Contents:
-1. <note>
-2. <note>
+1. watch movies
+2. go to the movie theatre
 ```
 
 The size of the list depends on the number of matches
