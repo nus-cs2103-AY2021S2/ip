@@ -89,8 +89,8 @@ Format: `todo <TASK DESCRIPTION>`
 * Description cannot be empty
 
 Examples:
-* `deadline birthday /by <2021-06-21 00:00>`
-* `deadline project submission /by <2021-02-21 23:59>`
+* `todo readings`
+* `todo clean room`
 
 ### Adding a deadline: `deadline`
 
@@ -103,8 +103,13 @@ Format: `deadline <TASK DESCRIPTION> /by <YYYY-MM-DD HH:mm>`
 * The deadline date and time has to be after current time
 
 Examples:
+<<<<<<< HEAD
 * `deadline birthday /by 2021-06-21 00:00`
 * `deadline project submission /by 2021-02-21 23:59`
+=======
+* `deadline birthday /by <2021-06-21 00:00>`
+* `deadline assignment submission /by <2021-02-21 23:59>`
+>>>>>>> b7732c2f3d4846df53c5eaf8565a94613b2fd927
 
 ### Adding an event: `event`
 
@@ -133,7 +138,7 @@ Format: `done <TASK NUMBER>`
 
 Examples:
 * `done 1` completes the 1st task in the task list returned after the `list` command.
-* `find Betsy` followed by `done 1` does NOT complete the 1st task in the results of the `find` command but rather completes the 1st task like in the previous example.
+* `find assignment` followed by `done 1` does NOT complete the 1st task in the results of the `find` command but rather completes the 1st task like in the previous example.
 
 ### Deleting a task : `delete`
 
@@ -147,7 +152,7 @@ Format: `delete <TASK NUMBER>`
 
 Examples:
 * `delete 1` deletes the 1st task in the task list returned after the `list` command.
-* `find Betsy` followed by `delete 1` does NOT delete the 1st task in the results of the `find` command but rather deletes the 1st task like in the previous example.
+* `find assignment` followed by `delete 1` does NOT delete the 1st task in the results of the `find` command but rather deletes the 1st task like in the previous example.
 
 ### Locating tasks by name: `find`
 
@@ -160,15 +165,15 @@ Format: `find <SEARCH TERM> [, <MORE SEARCH TERMS>]`
 * Only the name is searched.
 * Partial words will be matched e.g. `pro` will match `project`
 * Tasks matching at least one search term will be returned (i.e. `OR` search).
-  e.g. `Hans, Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `project, homework` will return `CS1010 Project`, `GER homework`
 
 Examples:
 * `find sub` returns `submit` and `submission`
-* `find alex, david` returns `Alex Yeoh`, `David Li`<br>
+* `find webinar, lecture` returns `AI Webinar`, `Lecture presentation`<br>
 
 ### Exiting the program : `bye`
 
-Exits the program in about 1 second after displaying a goodbye message.
+Exits the program about 1 second after displaying a goodbye message.
 
 Format: `bye`
 
@@ -182,7 +187,7 @@ Olaf tasks are saved as a .txt file `[JAR file location]/data/olaf.txt`. Advance
 editing that data file but please follow expected saving format to avoid application crashes.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Olaf will will not work as expected at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
