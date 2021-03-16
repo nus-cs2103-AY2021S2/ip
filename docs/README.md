@@ -103,8 +103,8 @@ Format: `deadline <TASK DESCRIPTION> /by <YYYY-MM-DD HH:mm>`
 * The deadline date and time has to be after current time
 
 Examples:
-* `deadline birthday /by <2021-06-21 00:00>`
-* `deadline project submission /by <2021-02-21 23:59>`
+* `deadline birthday /by 2021-06-21 00:00`
+* `deadline project submission /by 2021-02-21 23:59`
 
 ### Adding an event: `event`
 
@@ -118,8 +118,8 @@ Format: `event <TASK DESCRIPTION> /at <YYYY-MM-DD HH:mm> to <YYYY-MM-DD HH:mm>`
 * When loading existing event task from storage, it will be marked as done if the event is already over.
 
 Examples:
-* `event new year's eve /at <2021-12-31 00:00> to <2022-01-01 00:00>`
-* `event webinar /at <2021-02-20 13:00> to <2021-02-20 15:30>`
+* `event new year's eve /at 2021-12-31 00:00 to 2022-01-01 00:00`
+* `event webinar /at 2021-02-20 13:00 to 2021-02-20 15:30`
 
 ### Completing a task : `done`
 
