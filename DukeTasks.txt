@@ -9,3 +9,7 @@ todo run notDone
 todo run notDone
 todo run notDone
 deadline attend meeting /by 2021-03-12 done
+deadline sadas asdasd /by 2021-03-12 23:00:00 notDone
+event sadas asdas /at 2021-03-12 23:00:00 notDone
+event asd asd /at 2021-03-12 notDone
+deadline asd asd /by 2021-03-12 notDone

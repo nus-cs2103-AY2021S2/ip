@@ -6,6 +6,9 @@ import duke.register.Storage;
 import duke.task.*;
 import javafx.application.Application;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * The class where duke is initialized and then launch GUI
  */
@@ -89,11 +92,17 @@ public class Duke {
         String TaskType = p.getTaskType().toLowerCase();
         String result = "";
         if (TaskType.equals("done")) {
-            result = taskList.markAsDone(Integer.parseInt(p.getIndex()));
+            result = isInt(p.getIndex())
+                    ? taskList.markAsDone(Integer.parseInt(p.getIndex()))
+                    : "Invalid Index!";
         } else if (TaskType.equals("delete") || TaskType.equals("remove")) {
-            result = taskList.DeleteTask(Integer.parseInt(p.getIndex()));
+            result = isInt(p.getIndex())
+                    ? taskList.DeleteTask(Integer.parseInt(p.getIndex()))
+                    : "Invalid Index!";
         } else if (TaskType.equals("delete-note") || TaskType.equals("remove-note")) {
-            result = noteList.DeleteTask(Integer.parseInt(p.getIndex()));
+            result = isInt(p.getIndex())
+                    ? noteList.DeleteTask(Integer.parseInt(p.getIndex()))
+                    : "Invalid Index!";
         } else if (TaskType.equals("find") || TaskType.equals("search")) {
             result = taskList.findTask(p.getTaskName());
         } else if (TaskType.equals("find-note") || TaskType.equals("search-note")) {
@@ -126,6 +135,10 @@ public class Duke {
         } else if (divide[1].split(" ").length == 1
                 || divide[1].split(" ").length > 3) {
             result = "Oops!!! Invalid Input :(";
+        } else if (!isDate(divide[1].split(" ")[1])
+                || (divide[1].split(" ").length > 2
+                && !isTime(divide[1].split(" ")[2]))) {
+            result = "Oops!!! Invalid Date/Time :(";
         } else {
             result = taskList.addTask(new DeadlineTask(command));
         }
@@ -146,6 +159,10 @@ public class Duke {
         } else if (divide[1].split(" ").length == 1
                 || divide[1].split(" ").length > 3) {
             result = "Oops!!! Invalid Input :(";
+        } else if (!isDate(divide[1].split(" ")[1])
+                || (divide[1].split(" ").length > 2
+                && !isTime(divide[1].split(" ")[2]))) {
+            result = "Oops!!! Invalid Date/Time :(";
         } else {
             result = taskList.addTask(new EventTask(command));
         }
@@ -160,5 +177,50 @@ public class Duke {
      */
     public String getResponse(String input) {
         return processGUI(input);
+    }
+
+    /**
+     * Checks if date format is correct
+     *
+     * @param date
+     * @return
+     */
+    public boolean isDate(String date) {
+        try {
+            LocalDate.parse(date);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if time format is correct
+     *
+     * @param time
+     * @return
+     */
+    public boolean isTime(String time) {
+        try {
+            LocalTime.parse(time);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Check if a command is a valid int
+     *
+     * @param input
+     * @return
+     */
+    public boolean isInt(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
