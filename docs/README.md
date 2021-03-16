@@ -202,6 +202,8 @@ Mark a task as done
 
 #### `done` - key in `done <index>`
 
+Index must be greater than 0
+
 Example of Usage:
 
 `done 6`
@@ -222,6 +224,8 @@ Remove a task
 #### Usage
 
 #### `delete` or `remove` - key in `delete <index>` or `remove <index>`
+
+Index must be greater than 0
 
 Example of Usage:
 
@@ -341,6 +345,8 @@ Remove a note
 
 #### `delete-note` or `remove-note` - key in `delete-note <index>` or `remove-note <index>`
 
+Index must be greater than 0
+
 Example of Usage:
 
 `delete-note 6` or `remove-note 6`
@@ -395,7 +401,8 @@ The size of the list depends on the number of matches
 
 #### Reminder:
 
-Remember to key in the commands in the exact format provided. Especially for date and time.
+- Remember to key in the commands in the exact format provided. Especially for date and time.
+- For commands where you need to key in index, make sure that index is always greater than 0.
 
 #### The data is not saving:
 
