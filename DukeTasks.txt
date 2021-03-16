@@ -8,4 +8,4 @@ todo go to the park notDone
 todo run notDone
 todo run notDone
 todo run notDone
-deadline attend meeting /by 2021-03-12 notDone
+deadline attend meeting /by 2021-03-12 done

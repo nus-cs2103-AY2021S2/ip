@@ -123,6 +123,9 @@ public class Duke {
         String[] divide = command.split("/");
         if (divide.length == 1 || divide[0].split(" ").length == 1) {
             result = "Oops!!! Incomplete command :(";
+        } else if (divide[1].split(" ").length == 1
+                || divide[1].split(" ").length > 3) {
+            result = "Oops!!! Invalid Input :(";
         } else {
             result = taskList.addTask(new DeadlineTask(command));
         }
@@ -140,6 +143,9 @@ public class Duke {
         String[] divide = command.split("/");
         if (divide.length == 1 || divide[0].split(" ").length == 1) {
             result = "Oops!!! Incomplete command :(";
+        } else if (divide[1].split(" ").length == 1
+                || divide[1].split(" ").length > 3) {
+            result = "Oops!!! Invalid Input :(";
         } else {
             result = taskList.addTask(new EventTask(command));
         }
