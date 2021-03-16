@@ -394,19 +394,20 @@ The size of the list depends on the number of matches
 13. Delete a note - `delete-note <index>` or `remove-note <index>`
 14. Find notes based on keyword - `find-note <keyword>` or `search-note <keyword>`
 
-#### Reminder:
+#### Note:
 
 - Remember to key in the commands in the exact format provided. Especially for date and time.
 - For commands where you need to key in index, make sure that index is always greater than 0.
 
-#### The data is not saving:
+#### Storage Issue:
 
-Duke saves all your entries automatically, however in rare cases, there might be storage problems. This would most
-likely happen if you enter the commands in the wrong format and somehow the task is added in the list of tasks but not
-stored. Hence, Duke may not be able to save tasks afterwards. When this happens, remove all the contents from the
-storage files namely DukeTasks.txt and DukeNotes.txt, and start Duke again. The storage files should be created in the
-same folder in which Duke was downloaded. Then it should run properly again. It is also worth noting that exiting duke
-using the `bye` or `exit` command is the safest way, in order to ensure that there are no discrepancies in storage.
+Duke saves all your entries automatically, and so the chances of storage errors are remote. However in rare cases, there
+might be storage problems. This would most likely happen if you enter the commands in the wrong format and somehow the
+task is added in the list of tasks but not stored. Hence, Duke may not be able to save tasks afterwards. When this
+happens, remove all the contents from the storage files namely DukeTasks.txt and DukeNotes.txt, and start Duke again.
+The storage files should be created in the same folder in which Duke was downloaded. Then it should run properly again.
+It is also worth noting that exiting duke using the `bye` or `exit` command is the safest way, in order to ensure that
+there are no discrepancies in storage.
 
 ## Hope you have a wonderful time using Duke!
 
