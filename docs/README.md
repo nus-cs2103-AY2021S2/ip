@@ -404,8 +404,8 @@ The size of the list depends on the number of matches
 Duke saves all your entries automatically, and so the chances of storage errors are remote. However in rare cases, there
 might be storage problems. This would most likely happen if you enter the commands in the wrong format and somehow the
 task is added in the list of tasks but not stored. Hence, Duke may not be able to save tasks afterwards. When this
-happens, remove all the contents from the storage files namely DukeTasks.txt and DukeNotes.txt, and start Duke again.
-The storage files should be created in the same folder in which Duke was downloaded. Then it should run properly again.
+happens, remove all the contents from the storage files namely _DukeTasks.txt_ and _DukeNotes.txt_, and start Duke
+again. The storage files are created in the same folder in which Duke was downloaded. Then it should run properly again.
 It is also worth noting that exiting duke using the `bye` or `exit` command is the safest way, in order to ensure that
 there are no discrepancies in storage.
 
