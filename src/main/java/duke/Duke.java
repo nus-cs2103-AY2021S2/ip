@@ -218,9 +218,9 @@ public class Duke {
     public boolean validIndex(String input) {
         try {
             int index = Integer.parseInt(input);
-            if(index <= 0){
+            if (index <= 0) {
                 return false;
-            }else {
+            } else {
                 return true;
             }
         } catch (Exception e) {
