@@ -29,8 +29,15 @@ import duke.tasks.TaskList;
 public class Parser {
     protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
             + "[dd-MM-yy HHmm]");
-    private static final Pattern REGEX_CHECK_NUMBER = Pattern.compile("^[0-9]$");
+    private static final Pattern REGEX_CHECK_NUMBER = Pattern.compile("^[0-9]+$");
     private static final String INVALID_TASK_MSG = "Please input a valid task description!";
+    private static final String MISSING_TASK_DATE = "Please input a valid task date in the following format: "
+            + "'%s DESCRIPTION /%s DATE TIME'!";
+    private static final String EMPTY_FIND_ARGUMENT = "Please pass a word after the 'find' command!";
+    private static final String MISSING_INDEX_ARGUMENT = "Please pass an index after the '%s' command!";
+    private static final String EXCEED_LIST_RANGE = "Please input an index from 1 to %d!";
+    private static final String EMPTY_TASKLIST_DONE = "You have already done all tasks!";
+    private static final String EMPTY_TASKLIST_DELETE = "There are no tasks to delete!";
 
     private TaskList taskList;
     private Storage storage;
@@ -97,7 +104,7 @@ public class Parser {
     }
 
     private Command prepareToDo(String[] commandAndInput) throws EmptyArgumentException {
-        if (commandAndInput.length == 1) {
+        if (insufficientArgumentFromUser(commandAndInput)) {
             throw new EmptyArgumentException(INVALID_TASK_MSG);
         }
 
@@ -107,21 +114,25 @@ public class Parser {
     }
 
     private Command prepareDeadline(String[] commandAndInput) throws EmptyArgumentException, InvalidDateTimeException {
-        if (commandAndInput.length == 1) {
+        if (insufficientArgumentFromUser(commandAndInput)) {
             throw new EmptyArgumentException(INVALID_TASK_MSG);
         }
 
         assert commandAndInput.length == 2;
 
         String description = commandAndInput[1];
-        String[] taskInputAndDate = description.split("/", 2);
+        String[] taskInputAndDate = description.split("/by ", 2);
+
+        if (insufficientArgumentFromUser(taskInputAndDate)) {
+            throw new EmptyArgumentException(String.format(MISSING_TASK_DATE, "deadline", "by"));
+        }
 
         assert taskInputAndDate.length == 2;
 
         trimInputsInArray(taskInputAndDate);
 
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
+            LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1], FORMATTER);
             return new DeadlineCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
@@ -129,21 +140,25 @@ public class Parser {
     }
 
     private Command prepareEvent(String[] commandAndInput) throws EmptyArgumentException, InvalidDateTimeException {
-        if (commandAndInput.length == 1) {
+        if (insufficientArgumentFromUser(commandAndInput)) {
             throw new EmptyArgumentException(INVALID_TASK_MSG);
         }
 
         assert commandAndInput.length == 2;
 
         String description = commandAndInput[1];
-        String[] taskInputAndDate = description.split("/", 2);
+        String[] taskInputAndDate = description.split("/at ", 2);
+
+        if (insufficientArgumentFromUser(taskInputAndDate)) {
+            throw new EmptyArgumentException(String.format(MISSING_TASK_DATE, "event", "at"));
+        }
 
         assert taskInputAndDate.length == 2;
 
         trimInputsInArray(taskInputAndDate);
 
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), FORMATTER);
+            LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1], FORMATTER);
             return new EventCommand(this.taskList, this.storage, taskInputAndDate[0], dateTime);
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();
@@ -151,8 +166,8 @@ public class Parser {
     }
 
     private Command prepareFind(String[] commandAndInput) throws EmptyArgumentException, EmptyListException {
-        if (commandAndInput.length == 1) {
-            throw new EmptyArgumentException("Please pass a word after the 'find' command!");
+        if (insufficientArgumentFromUser(commandAndInput)) {
+            throw new EmptyArgumentException(EMPTY_FIND_ARGUMENT);
         }
 
         if (this.taskList.isEmpty()) {
@@ -165,8 +180,8 @@ public class Parser {
     }
 
     private Command prepareDone(String[] commandAndInput) throws InvalidIndexInputException, EmptyArgumentException {
-        if (commandAndInput.length == 1) {
-            throw new EmptyArgumentException("Please pass an index after the 'done' command!");
+        if (insufficientArgumentFromUser(commandAndInput)) {
+            throw new EmptyArgumentException(String.format(MISSING_INDEX_ARGUMENT, "done"));
         }
 
         assert commandAndInput.length == 2;
@@ -174,18 +189,17 @@ public class Parser {
         int position = calcListPos(commandAndInput);
 
         if (this.taskList.isEmpty()) {
-            throw new InvalidIndexInputException("You have already done all tasks!");
+            throw new InvalidIndexInputException(EMPTY_TASKLIST_DONE);
         } else if (position >= this.taskList.getList().size() || position < 0) {
-            throw new InvalidIndexInputException("Please input an index from 1 to "
-                    + this.taskList.getList().size() + "!");
+            throw new InvalidIndexInputException(String.format(EXCEED_LIST_RANGE, this.taskList.getList().size()));
         }
 
         return new DoneCommand(this.taskList, this.storage, position);
     }
 
     private Command prepareDelete(String[] commandAndInput) throws InvalidIndexInputException, EmptyArgumentException {
-        if (commandAndInput.length == 1) {
-            throw new EmptyArgumentException("Please pass an index after the 'delete' command!");
+        if (insufficientArgumentFromUser(commandAndInput)) {
+            throw new EmptyArgumentException(String.format(MISSING_INDEX_ARGUMENT, "delete"));
         }
 
         assert commandAndInput.length == 2;
@@ -193,10 +207,9 @@ public class Parser {
         int position = calcListPos(commandAndInput);
 
         if (this.taskList.isEmpty()) {
-            throw new InvalidIndexInputException("There are no tasks to delete!");
+            throw new InvalidIndexInputException(EMPTY_TASKLIST_DELETE);
         } else if (position >= this.taskList.getList().size() || position < 0) {
-            throw new InvalidIndexInputException("Please input an index from 1 to "
-                    + this.taskList.getList().size() + "!");
+            throw new InvalidIndexInputException(String.format(EXCEED_LIST_RANGE, this.taskList.getList().size()));
         }
 
         return new DeleteCommand(this.taskList, this.storage, position);
@@ -244,5 +257,9 @@ public class Parser {
         }
 
         return Integer.parseInt(taskIndex) - 1;
+    }
+
+    private boolean insufficientArgumentFromUser(String[] commandAndInput) {
+        return commandAndInput.length == 1 || (commandAndInput.length == 2 && commandAndInput[1].equals(""));
     }
 }
