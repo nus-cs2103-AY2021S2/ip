@@ -128,14 +128,14 @@ public class Parser {
             description = input.split(" /by ")[0].split("deadline ")[1];
         } catch (Exception e) {
             throw new AntonioException("\nPlease enter a valid format:\n'deadline <description> /by "
-                    + "YYYY-MM-DD TIME'");
+                    + "YYYY-MM-DD HHMM'");
         }
 
         try {
             validateTimeInput(time);
         } catch (Exception e) {
             throw new AntonioException(e.getMessage() + "\nPlease enter a valid format:\n'deadline <description> /by "
-                    + "YYYY-MM-DD TIME'");
+                    + "YYYY-MM-DD HHMM'");
         }
 
         return new AddDeadline("deadline", description, deadline, Integer.toString(time));
@@ -187,8 +187,8 @@ public class Parser {
             startTime = startData[1];
             endTime = endData[1];
         } catch (Exception e) {
-            throw new AntonioException("\nPlease enter a valid format:\n'deadline <description> /by "
-                    + "YYYY-MM-DD TIME'");
+            throw new AntonioException("\nPlease enter a valid format:\n'event [DESCRIPTION] /at YYYY-MM-DD HHMM"
+                    + " /to YYYY-MM-DD HHMM'");
         }
 
         int startTimeCheck = Integer.parseInt(startTime);
@@ -197,8 +197,8 @@ public class Parser {
         try {
             validateDurationInput(startTimeCheck, endTimeCheck);
         } catch (Exception e) {
-            throw new AntonioException(e.getMessage() + "\nPlease enter a valid format:\n'deadline <description> /by "
-                    + "YYYY-MM-DD TIME'");
+            throw new AntonioException(e.getMessage() + "\nPlease enter a valid format:\n'event [DESCRIPTION] "
+                    + "/at YYYY-MM-DD HHMM /to YYYY-MM-DD HHMM'");
         }
 
         return new AddEvent("event", description, startDate, startTime, endDate, endTime);
