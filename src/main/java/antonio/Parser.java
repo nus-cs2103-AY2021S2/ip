@@ -127,14 +127,14 @@ public class Parser {
             deadline = LocalDate.parse(dateTime[0]);
             description = input.split(" /by ")[0].split("deadline ")[1];
         } catch (Exception e) {
-            throw new AntonioException("\nPlease enter a valid format:\n'deadline <description> /by "
+            throw new AntonioException("\nPlease enter a valid format:\n'deadline [DESCRIPTION] /by "
                     + "YYYY-MM-DD HHMM'");
         }
 
         try {
             validateTimeInput(time);
         } catch (Exception e) {
-            throw new AntonioException(e.getMessage() + "\nPlease enter a valid format:\n'deadline <description> /by "
+            throw new AntonioException(e.getMessage() + "\nPlease enter a valid format:\n'deadline [DESCRIPTION] /by "
                     + "YYYY-MM-DD HHMM'");
         }
 
