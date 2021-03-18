@@ -41,16 +41,6 @@ public class Events extends Task {
     }
 
     /**
-     * Returns String of error message for empty description
-     *
-     * @return String of error message for empty description
-     */
-    @Override
-    public String getEmptyDescError() {
-        return "Oops! Description of event " + super.getEmptyDescError();
-    }
-
-    /**
      * Formats data for saving into text file.
      *
      * @return E | isDone | description | at

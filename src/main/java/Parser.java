@@ -1,3 +1,4 @@
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,43 +71,39 @@ public class Parser {
                     result.add(date);
 
                     break;
-                case "todo":
                 case "find":
+                case "todo":
                     description = details;
                     result.add(description);
                     break;
                 case "deadline":
-                    String[] arrOfInputD = details.split(" /by ");
-                    description = arrOfInputD[0];
-                    date = arrOfInputD[1];
-
-                    result.add(description);
-                    result.add(date);
+                    splitArguments(details, " /by ", result);
                     break;
                 case "event":
-                    String[] arrOfInputE = details.split(" /at ");
-                    description = arrOfInputE[0];
-                    date = arrOfInputE[1];
-
-                    result.add(description);
-                    result.add(date);
+                    splitArguments(details, " /at ", result);
                     break;
                 default:
+                    result.add("idkError");
                     break;
                 }
                 break;
             } catch (ArrayIndexOutOfBoundsException e) {
-                if (command.equals("todo") || command.equals("deadline") || command.equals("event")
-                        || command.equals("done") || command.equals("delete") || command.equals("edit")) {
-                    result.add("emptyDescError");
-                } else {
-                    result.add("idkError");
-                }
+                final String EMPTY_DESC_ERROR = "emptyDescError";
+                result.add(EMPTY_DESC_ERROR);
             }
         }
         assert(result.size() > 0);
 
         return result;
+    }
+
+    public void splitArguments(String details, String regex, ArrayList<String> result) {
+        String[] arrOfInput = details.split(regex);
+        String description = arrOfInput[0];
+        String date = arrOfInput[1];
+
+        result.add(description);
+        result.add(date);
     }
 
 }

@@ -8,7 +8,7 @@ public class Ui {
     public Ui() { }
 
     /**
-     * Prints Elly logo and introduction message.
+     * Prints introduction message.
      */
     public static String printIntro() {
         return "Hello, fellow adventurer!\n"
@@ -86,10 +86,35 @@ public class Ui {
 
     /**
      * Prints error message that description cannot be empty.
-     * @param task task type.
+     * @param command command type.
      */
-    public String printEmptyDescError(String task) {
-        return "Oops! Description of " + task + " cannot be empty.";
+    public String printEmptyDescError(String command) {
+//        return "Oops! Description of " + task + " cannot be empty.";
+        switch (command) {
+        case ("todo"):
+            return "Oops! Description of todo cannot be empty."
+                    + "\nFormat: todo DESCRIPTION";
+        case ("deadline"):
+            return "Oops! Description of deadline cannot be empty."
+                + "\nFormat: deadline DESCRIPTION /by YYYY-MM-DD";
+        case ("event"):
+            return "Oops! Description of event cannot be empty."
+                + "\nFormat: event DESCRIPTION /at YYYY-MM-DD";
+        case ("edit"):
+            return "Oops! Description cannot be empty."
+                    + "\nFormat: edit INDEX [/desc DESCRIPTION] [/date YYYY-MM-DD]";
+        case ("done"):
+            return "Oops! Please enter the task index."
+                    + "\nFormat: done INDEX";
+        case ("delete"):
+            return "Oops! Please enter the task index."
+                    + "\nFormat: delete INDEX";
+        case ("find"):
+            return "Oops! Please enter the search keyword."
+                    + "\nFormat: find KEYWORD";
+        default:
+            return "Oops! Description cannot be empty.";
+        }
     }
 
     /**

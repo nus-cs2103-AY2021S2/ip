@@ -37,15 +37,6 @@ public class Deadlines extends Task{
     }
 
     /**
-     * Returns String of error message for empty description
-     * @return String of error message for empty description
-     */
-    @Override
-    public String getEmptyDescError() {
-        return "Oops! Description of deadline " + super.getEmptyDescError();
-    }
-
-    /**
      * Formats data for saving into text file.
      * @return D | isDone | description | by
      */

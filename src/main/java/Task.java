@@ -44,15 +44,6 @@ public class Task {
     }
 
     /**
-     * Returns String of error message for empty description
-     *
-     * @return String of error message for empty description
-     */
-    public String getEmptyDescError() {
-        return "cannot be empty.";
-    }
-
-    /**
      * Formats data for saving into text file.
      *
      * @return isDone | description
