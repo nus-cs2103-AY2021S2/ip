@@ -34,7 +34,7 @@ public abstract class Task {
      * @return String for task date and timing.
      */
     public String formatTime(LocalDateTime dateTime) {
-        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"));
     }
 
     /**
