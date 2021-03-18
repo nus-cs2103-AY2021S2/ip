@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exception where command does not exist for Duke.
+ */
 public class DukeWrongCommandException extends DukeException {
     private String command;
 

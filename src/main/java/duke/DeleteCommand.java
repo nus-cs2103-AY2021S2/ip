@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Delete command for Duke.
+ */
 public class DeleteCommand extends Command {
     private int taskNum;
 

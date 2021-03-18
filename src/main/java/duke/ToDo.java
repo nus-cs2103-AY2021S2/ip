@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * A subtype of task, to-do.
+ */
 public class ToDo extends Task {
     /**
      * Constructs new to-do task.

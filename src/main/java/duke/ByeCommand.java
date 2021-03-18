@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exit command for Duke.
+ */
 public class ByeCommand extends Command {
 
     /**

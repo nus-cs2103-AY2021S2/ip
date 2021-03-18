@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+/**
+ * Storage class for Duke.
+ */
 public class Storage {
     private static final String FILE_NAME = ".data.txt";
 

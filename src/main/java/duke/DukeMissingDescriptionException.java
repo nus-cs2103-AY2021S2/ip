@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exception of missing description of commands for Duke.
+ */
 public class DukeMissingDescriptionException extends DukeException {
     private String command;
 

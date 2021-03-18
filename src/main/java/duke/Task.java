@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Tasks to be recorded down for Duke.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;

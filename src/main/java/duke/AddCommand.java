@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Add task command for Duke.
+ */
 public class AddCommand extends Command {
     private String taskType;
     private String taskInfo;

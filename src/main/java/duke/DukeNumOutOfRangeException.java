@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exceptions of input numbers out of number range for Duke.
+ */
 public class DukeNumOutOfRangeException extends DukeException {
     private final String message = "'done/delete' cmd num input is out of range!\n"
             + "Range to be within N (num of task in list).\n"

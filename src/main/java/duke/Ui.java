@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Response from Duke are stored here (output for Duke).
+ */
 public class Ui {
     private static final String HELP = "These are the formats for Duke commands:\n"
             + "- help\n"

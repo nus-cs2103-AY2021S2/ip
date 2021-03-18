@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDateTime;
 
+/**
+ * A subtype of task, Event.
+ */
 public class Event extends Task {
     protected LocalDateTime start;
     protected LocalDateTime end;

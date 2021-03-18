@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command to ask Duke for help.
+ */
 public class HelpCommand extends Command {
 
     /**

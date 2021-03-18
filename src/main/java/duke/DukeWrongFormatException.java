@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exception where formatting of commands for Duke is wrong.
+ */
 public class DukeWrongFormatException extends DukeException {
     private String command;
 

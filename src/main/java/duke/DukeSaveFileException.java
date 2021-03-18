@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exception where Duke was unable to save file.
+ */
 public class DukeSaveFileException extends DukeException {
 
     /**

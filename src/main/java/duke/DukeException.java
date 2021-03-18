@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Exceptions created by Duke are under this class.
+ */
 public class DukeException extends Exception {
     protected static final String HELP_MSG = "Please check format/command via 'help'.\n";
 

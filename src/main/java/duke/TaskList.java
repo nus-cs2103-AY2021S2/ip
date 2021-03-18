@@ -4,6 +4,9 @@ import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Class to store Tasks in a list.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 

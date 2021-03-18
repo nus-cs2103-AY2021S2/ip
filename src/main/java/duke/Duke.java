@@ -3,6 +3,9 @@ package duke;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+/**
+ * Duke class, the main chatting bot of the application.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;

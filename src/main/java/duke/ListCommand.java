@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Command for duke to list out all the tasks.
+ */
 public class ListCommand extends Command {
 
     /**

@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A sub-type of Task, deadline.
+ */
 public class Deadline extends Task {
     protected LocalDateTime deadline;
 

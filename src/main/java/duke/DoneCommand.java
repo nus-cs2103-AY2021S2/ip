@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Done command for Duke.
+ */
 public class DoneCommand extends Command {
     private int taskNum;
 
