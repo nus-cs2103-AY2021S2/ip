@@ -40,15 +40,16 @@ public class Events extends Task {
         super.editTask(newDescription);
     }
 
-    /**
-     * Returns String of error message for empty description
-     *
-     * @return String of error message for empty description
-     */
-    @Override
-    public String getEmptyDescError() {
-        return "Oops! Description of event " + super.getEmptyDescError();
-    }
+//    /**
+//     * Returns String of error message for empty description
+//     *
+//     * @return String of error message for empty description
+//     */
+//    @Override
+//    public static String getEmptyDescError() {
+//        return "Oops! Description of event cannot be empty."
+//                + "\nFormat: event DESCRIPTION /at YYYY-MM-DD";
+//    }
 
     /**
      * Formats data for saving into text file.

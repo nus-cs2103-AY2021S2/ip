@@ -34,6 +34,9 @@ public class Duke {
         String description, date;
         int taskIndex;
 
+        final String EMPTY_DESC_ERROR = "emptyDescError";
+        final String BLANK = "";
+
         switch (command) {
         case "bye":
             return ui.printBye();
@@ -60,14 +63,26 @@ public class Duke {
             description = result.get(1);
             return taskList.addTodo(description);
         case "deadline":
-            assert(result.get(1) != null && result.get(2) != null);
+            assert(result.get(1) != null);
             description = result.get(1);
-            date = result.get(2);
+
+            if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                date = BLANK;
+            } else {
+                assert(result.get(2) != null);
+                date = result.get(2);
+            }
             return taskList.addDeadline(description, date);
         case "event":
-            assert(result.get(1) != null && result.get(2) != null);
+            assert(result.get(1) != null);
             description = result.get(1);
-            date = result.get(2);
+
+            if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                date = BLANK;
+            } else {
+                assert(result.get(2) != null);
+                date = result.get(2);
+            }
             return taskList.addEvent(description, date);
         case "find":
             assert(result.get(1) != null);

@@ -31,15 +31,15 @@ public class ToDos extends Task {
         super.editTask(newDescription);
     }
 
-    /**
-     * Returns String of error message for empty description
-     *
-     * @return String of error message for empty description
-     */
-    @Override
-    public String getEmptyDescError() {
-        return "Oops! Description of todo " + super.getEmptyDescError();
-    }
+//    /**
+//     * Returns String of error message for empty description
+//     *
+//     * @return String of error message for empty description
+//     */
+//    @Override
+//    public static String getEmptyDescError() {
+//        return "Oops! Description of todo cannot be empty";
+//    }
 
     /**
      * Formats data for saving into text file.

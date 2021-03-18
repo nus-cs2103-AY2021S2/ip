@@ -14,6 +14,8 @@ public class TaskList {
     public Storage storage;
     public Ui ui;
 
+    final String EMPTY_DESC_ERROR = "emptyDescError";
+
     public TaskList(Storage storage, Ui ui) {
         tasks = new ArrayList<>();
         this.storage = storage;
@@ -142,7 +144,7 @@ public class TaskList {
     public String addTodo(String description) throws IOException {
         String response;
 
-        if (description.equals("emptyDescError")) {
+        if (description.equals(EMPTY_DESC_ERROR)) {
             response = ui.printEmptyDescError("todo");
         } else {
             ToDos todo = new ToDos(description);
@@ -169,7 +171,7 @@ public class TaskList {
     public String addDeadline(String description, String date) throws IOException {
         String response;
 
-        if (description.equals("emptyDescError")) {
+        if (description.equals(EMPTY_DESC_ERROR)) {
             response = ui.printEmptyDescError("deadline");
         } else {
             LocalDate localDate;
@@ -203,7 +205,7 @@ public class TaskList {
     public String addEvent(String description, String date) throws IOException {
         String response;
 
-        if (description.equals("emptyDescError")) {
+        if (description.equals(EMPTY_DESC_ERROR)) {
             response = ui.printEmptyDescError("event");
         } else {
             try {
@@ -231,12 +233,16 @@ public class TaskList {
      * @param description keyword
      */
     public String findTasks(String description) {
-        ArrayList<Task> filteredTasks = new ArrayList<>();
-        for (Task t : tasks) {
-            if (t.description.contains(description)) {
-                filteredTasks.add(t);
+        if (description.equals(EMPTY_DESC_ERROR)) {
+            return ui.printEmptyDescError("find");
+        } else {
+            ArrayList<Task> filteredTasks = new ArrayList<>();
+            for (Task t : tasks) {
+                if (t.description.contains(description)) {
+                    filteredTasks.add(t);
+                }
             }
+            return ui.printList(filteredTasks, -1);
         }
-        return ui.printList(filteredTasks, -1);
     }
 }
