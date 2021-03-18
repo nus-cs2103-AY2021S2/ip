@@ -36,16 +36,6 @@ public class Deadlines extends Task{
         super.editTask(newDescription);
     }
 
-//    /**
-//     * Returns String of error message for empty description
-//     * @return String of error message for empty description
-//     */
-//    @Override
-//    public static String getEmptyDescError() {
-//        return "Oops! Description of deadline cannot be empty."
-//                + "\nFormat: deadline DESCRIPTION /by YYYY-MM-DD";
-//    }
-
     /**
      * Formats data for saving into text file.
      * @return D | isDone | description | by

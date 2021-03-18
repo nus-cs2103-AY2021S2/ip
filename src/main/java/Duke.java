@@ -42,54 +42,70 @@ public class Duke {
             return ui.printBye();
         case "list":
             return taskList.listTask();
-        case "done":
-            assert(result.get(1) != null);
-            taskIndex = Integer.parseInt(result.get(1));
-            return taskList.doneTask(taskIndex);
-        case "delete":
-            assert(result.get(1) != null);
-            taskIndex = Integer.parseInt(result.get(1));
-            return taskList.deleteTask(taskIndex);
-        case "edit":
-            taskIndex = Integer.parseInt(result.get(1));
-            boolean hasDescription, hasDate;
-            hasDescription = Integer.parseInt(result.get(2)) == 1;
-            description = result.get(3);
-            hasDate = Integer.parseInt(result.get(4)) == 1;
-            date = result.get(5);
-            return taskList.editTask(taskIndex, hasDescription, hasDate, description, date);
-        case "todo":
-            assert(result.get(1) != null);
-            description = result.get(1);
-            return taskList.addTodo(description);
-        case "deadline":
-            assert(result.get(1) != null);
-            description = result.get(1);
-
-            if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                date = BLANK;
-            } else {
-                assert(result.get(2) != null);
-                date = result.get(2);
-            }
-            return taskList.addDeadline(description, date);
-        case "event":
-            assert(result.get(1) != null);
-            description = result.get(1);
-
-            if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                date = BLANK;
-            } else {
-                assert(result.get(2) != null);
-                date = result.get(2);
-            }
-            return taskList.addEvent(description, date);
-        case "find":
-            assert(result.get(1) != null);
-            description = result.get(1);
-            return taskList.findTasks(description);
         default:
-            return ui.printIdkError();
+            assert (result.get(1) != null);
+            switch (command) {
+            case "done":
+                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                    return taskList.printEmptyDescError(command);
+                } else {
+                    taskIndex = Integer.parseInt(result.get(1));
+                    return taskList.doneTask(taskIndex);
+                }
+            case "delete":
+                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                    return taskList.printEmptyDescError(command);
+                } else {
+                    taskIndex = Integer.parseInt(result.get(1));
+                    return taskList.deleteTask(taskIndex);
+                }
+            case "edit":
+                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                    return taskList.printEmptyDescError(command);
+                } else {
+                    taskIndex = Integer.parseInt(result.get(1));
+                    boolean hasDescription, hasDate;
+                    hasDescription = Integer.parseInt(result.get(2)) == 1;
+                    description = result.get(3);
+                    hasDate = Integer.parseInt(result.get(4)) == 1;
+                    date = result.get(5);
+                    return taskList.editTask(taskIndex, hasDescription, hasDate, description, date);
+                }
+            case "todo":
+                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                    return taskList.printEmptyDescError(command);
+                } else {
+                    description = result.get(1);
+                    return taskList.addTodo(description);
+                }
+            case "deadline":
+                description = result.get(1);
+                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                    return taskList.printEmptyDescError(command);
+                } else {
+                    assert (result.get(2) != null);
+                    date = result.get(2);
+                    return taskList.addDeadline(description, date);
+                }
+            case "event":
+                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                    return taskList.printEmptyDescError(command);
+                } else {
+                    assert (result.get(2) != null);
+                    description = result.get(1);
+                    date = result.get(2);
+                    return taskList.addEvent(description, date);
+                }
+            case "find":
+                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                    return taskList.printEmptyDescError(command);
+                } else {
+                    description = result.get(1);
+                    return taskList.findTasks(description);
+                }
+            default:
+                return ui.printIdkError();
+            }
         }
 
     }

@@ -109,6 +109,9 @@ public class Ui {
         case ("delete"):
             return "Oops! Please enter the task index."
                     + "\nFormat: delete INDEX";
+        case ("find"):
+            return "Oops! Please enter the search keyword."
+                    + "\nFormat: find KEYWORD";
         default:
             return "Oops! Description cannot be empty.";
         }

@@ -43,15 +43,6 @@ public class Task {
         this.description = newDescription;
     }
 
-//    /**
-//     * Returns String of error message for empty description
-//     *
-//     * @return String of error message for empty description
-//     */
-//    public static String getEmptyDescError() {
-//        return "cannot be empty.";
-//    }
-
     /**
      * Formats data for saving into text file.
      *

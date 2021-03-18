@@ -14,8 +14,6 @@ public class TaskList {
     public Storage storage;
     public Ui ui;
 
-    final String EMPTY_DESC_ERROR = "emptyDescError";
-
     public TaskList(Storage storage, Ui ui) {
         tasks = new ArrayList<>();
         this.storage = storage;
@@ -144,17 +142,14 @@ public class TaskList {
     public String addTodo(String description) throws IOException {
         String response;
 
-        if (description.equals(EMPTY_DESC_ERROR)) {
-            response = ui.printEmptyDescError("todo");
-        } else {
-            ToDos todo = new ToDos(description);
-            tasks.add(todo);
-            response = ui.printAdd(tasks, storage.numTasks);
-            storage.addToFile(todo.formatData());
+        ToDos todo = new ToDos(description);
+        tasks.add(todo);
+        response = ui.printAdd(tasks, storage.numTasks);
+        storage.addToFile(todo.formatData());
 
-            storage.numTasks++;
-            response += ui.printNumTasks(storage.numTasks);
-        }
+        storage.numTasks++;
+        response += ui.printNumTasks(storage.numTasks);
+
         return response;
     }
 
@@ -171,23 +166,19 @@ public class TaskList {
     public String addDeadline(String description, String date) throws IOException {
         String response;
 
-        if (description.equals(EMPTY_DESC_ERROR)) {
-            response = ui.printEmptyDescError("deadline");
-        } else {
-            LocalDate localDate;
-            try {
-                localDate = LocalDate.parse(date);
-                Deadlines deadline = new Deadlines(description, localDate);
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(date);
+            Deadlines deadline = new Deadlines(description, localDate);
 
-                tasks.add(deadline);
-                response = ui.printAdd(tasks, storage.numTasks);
-                storage.addToFile(deadline.formatData());
+            tasks.add(deadline);
+            response = ui.printAdd(tasks, storage.numTasks);
+            storage.addToFile(deadline.formatData());
 
-                storage.numTasks++;
-                response += ui.printNumTasks(storage.numTasks);
-            } catch (DateTimeParseException e) {
-                response = ui.printDateError();
-            }
+            storage.numTasks++;
+            response += ui.printNumTasks(storage.numTasks);
+        } catch (DateTimeParseException e) {
+            response = ui.printDateError();
         }
         return response;
     }
@@ -204,23 +195,18 @@ public class TaskList {
      */
     public String addEvent(String description, String date) throws IOException {
         String response;
+        try {
+            LocalDate localDate = LocalDate.parse(date);
+            Events event = new Events(description, localDate);
 
-        if (description.equals(EMPTY_DESC_ERROR)) {
-            response = ui.printEmptyDescError("event");
-        } else {
-            try {
-                LocalDate localDate = LocalDate.parse(date);
-                Events event = new Events(description, localDate);
+            tasks.add(event);
+            response = ui.printAdd(tasks, storage.numTasks);
+            storage.addToFile(event.formatData());
 
-                tasks.add(event);
-                response = ui.printAdd(tasks, storage.numTasks);
-                storage.addToFile(event.formatData());
-
-                storage.numTasks++;
-                response += ui.printNumTasks(storage.numTasks);
-            } catch (DateTimeParseException e) {
-                response = ui.printDateError();
-            }
+            storage.numTasks++;
+            response += ui.printNumTasks(storage.numTasks);
+        } catch (DateTimeParseException e) {
+            response = ui.printDateError();
         }
         return response;
     }
@@ -233,16 +219,16 @@ public class TaskList {
      * @param description keyword
      */
     public String findTasks(String description) {
-        if (description.equals(EMPTY_DESC_ERROR)) {
-            return ui.printEmptyDescError("find");
-        } else {
-            ArrayList<Task> filteredTasks = new ArrayList<>();
-            for (Task t : tasks) {
-                if (t.description.contains(description)) {
-                    filteredTasks.add(t);
-                }
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.contains(description)) {
+                filteredTasks.add(t);
             }
-            return ui.printList(filteredTasks, -1);
         }
+        return ui.printList(filteredTasks, -1);
+    }
+
+    public String printEmptyDescError(String command) {
+        return ui.printEmptyDescError(command);
     }
 }
