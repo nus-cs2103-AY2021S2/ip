@@ -9,20 +9,29 @@ import org.junit.jupiter.api.Test;
  */
 public class TestUi {
 
+    /**
+     * Tests greeting.
+     */
     @Test
-    public void TestGreeting() {
+    public void testGreeting() {
         String greeting = "Hello! I'm Duke\n" + "What can I do for you?\n";
         assertEquals(new Ui().printGreeting(), greeting);
     }
 
+    /**
+     * Tests exit message.
+     */
     @Test
-    public void TestByeMessage() {
+    public void testByeMessage() {
         String byeMessage = "Bye. Hope to see you again soon!\n";
         assertEquals(new Ui().printBye(), byeMessage);
     }
 
+    /**
+     * Tests error message.
+     */
     @Test
-    public void TestPrintError() {
+    public void testPrintError() {
         String error = "error";
         assertEquals(new Ui().printError(error), error);
     }
