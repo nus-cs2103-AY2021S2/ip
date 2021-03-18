@@ -8,7 +8,7 @@ public class Ui {
     public Ui() { }
 
     /**
-     * Prints Elly logo and introduction message.
+     * Prints introduction message.
      */
     public static String printIntro() {
         return "Hello, fellow adventurer!\n"

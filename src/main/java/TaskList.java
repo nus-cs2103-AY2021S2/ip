@@ -30,10 +30,11 @@ public class TaskList {
     /**
      * Marks task as done by modifying task arraylist and file data.
      *
-     * @param taskIndex arraylist index of the selected task.
+     * @param taskIndexString String of arraylist index of the selected task.
      * @throws IOException for modifying data.
      */
-    public String doneTask(int taskIndex) throws IOException {
+    public String doneTask(String taskIndexString) throws IOException {
+        int taskIndex = Integer.parseInt(taskIndexString);
         assert(taskIndex >= 0 && taskIndex < tasks.size());
 
         String before = tasks.get(taskIndex).formatData();
@@ -50,10 +51,11 @@ public class TaskList {
      * Deletes task by removing from task list and file data.
      * Decrements number of tasks.
      *
-     * @param taskIndex arraylist index of the selected task.
+     * @param taskIndexString String of arraylist index of the selected task.
      * @throws IOException for deleting from file.
      */
-    public String deleteTask(int taskIndex) throws IOException {
+    public String deleteTask(String taskIndexString) throws IOException {
+        int taskIndex = Integer.parseInt(taskIndexString);
         assert(taskIndex >= 0 && taskIndex < tasks.size());
 
         String response;
@@ -71,8 +73,10 @@ public class TaskList {
         return response;
     }
 
-    public String editTask(int taskIndex, boolean hasDescription, boolean hasDate,
+    public String editTask(String taskIndexString, boolean hasDescription, boolean hasDate,
                            String newDescription, String newDate) throws IOException {
+        int taskIndex = Integer.parseInt(taskIndexString);
+
         String response = "";
 
         Task task = tasks.get(taskIndex);
@@ -216,12 +220,12 @@ public class TaskList {
      * whose descriptions contain the specified keyword.
      * Prints the filtered list of tasks.
      *
-     * @param description keyword
+     * @param keyword keyword
      */
-    public String findTasks(String description) {
+    public String findTasks(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task t : tasks) {
-            if (t.description.contains(description)) {
+            if (t.description.contains(keyword)) {
                 filteredTasks.add(t);
             }
         }

@@ -83,19 +83,13 @@ public class Parser {
                     splitArguments(details, " /at ", result);
                     break;
                 default:
+                    result.add("idkError");
                     break;
                 }
                 break;
             } catch (ArrayIndexOutOfBoundsException e) {
                 final String EMPTY_DESC_ERROR = "emptyDescError";
-
-                if (command.equals("todo") || command.equals("deadline") || command.equals("event")
-                        || command.equals("done") || command.equals("delete") || command.equals("edit")
-                        || command.equals("find")) {
-                    result.add(EMPTY_DESC_ERROR);
-                } else {
-                    result.add("idkError");
-                }
+                result.add(EMPTY_DESC_ERROR);
             }
         }
         assert(result.size() > 0);

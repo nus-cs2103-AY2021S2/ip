@@ -31,11 +31,10 @@ public class Duke {
 
         String command = result.get(0);
 
-        String description, date;
+        String firstArg, date;
         int taskIndex;
 
         final String EMPTY_DESC_ERROR = "emptyDescError";
-        final String BLANK = "";
 
         switch (command) {
         case "bye":
@@ -44,67 +43,37 @@ public class Duke {
             return taskList.listTask();
         default:
             assert (result.get(1) != null);
-            switch (command) {
-            case "done":
-                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                    return taskList.printEmptyDescError(command);
-                } else {
-                    taskIndex = Integer.parseInt(result.get(1));
-                    return taskList.doneTask(taskIndex);
-                }
-            case "delete":
-                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                    return taskList.printEmptyDescError(command);
-                } else {
-                    taskIndex = Integer.parseInt(result.get(1));
-                    return taskList.deleteTask(taskIndex);
-                }
-            case "edit":
-                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                    return taskList.printEmptyDescError(command);
-                } else {
-                    taskIndex = Integer.parseInt(result.get(1));
+            if (result.get(1).equals(EMPTY_DESC_ERROR)) {
+                return taskList.printEmptyDescError(command);
+            } else {
+                firstArg = result.get(1);
+                switch (command) {
+                case "done":
+                    return taskList.doneTask(firstArg);
+                case "delete":
+                    return taskList.deleteTask(firstArg);
+                case "edit":
                     boolean hasDescription, hasDate;
                     hasDescription = Integer.parseInt(result.get(2)) == 1;
-                    description = result.get(3);
+                    String description = result.get(3);
                     hasDate = Integer.parseInt(result.get(4)) == 1;
                     date = result.get(5);
-                    return taskList.editTask(taskIndex, hasDescription, hasDate, description, date);
-                }
-            case "todo":
-                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                    return taskList.printEmptyDescError(command);
-                } else {
-                    description = result.get(1);
-                    return taskList.addTodo(description);
-                }
-            case "deadline":
-                description = result.get(1);
-                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                    return taskList.printEmptyDescError(command);
-                } else {
+                    return taskList.editTask(firstArg, hasDescription, hasDate, description, date);
+                case "todo":
+                    return taskList.addTodo(firstArg);
+                case "deadline":
                     assert (result.get(2) != null);
                     date = result.get(2);
-                    return taskList.addDeadline(description, date);
-                }
-            case "event":
-                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                    return taskList.printEmptyDescError(command);
-                } else {
+                    return taskList.addDeadline(firstArg, date);
+                case "event":
                     assert (result.get(2) != null);
-                    description = result.get(1);
                     date = result.get(2);
-                    return taskList.addEvent(description, date);
+                    return taskList.addEvent(firstArg, date);
+                case "find":
+                    return taskList.findTasks(firstArg);
+                default:
+                    return ui.printIdkError();
                 }
-            case "find":
-                if (result.get(1).equals(EMPTY_DESC_ERROR)) {
-                    return taskList.printEmptyDescError(command);
-                } else {
-                    description = result.get(1);
-                    return taskList.findTasks(description);
-                }
-            default:
-                return ui.printIdkError();
             }
         }
 
