@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-
+/**
+ * Test class for task list class.
+ */
 public class TaskListTest {
 
     @Test
