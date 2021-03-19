@@ -66,7 +66,7 @@ All Tasks:
 ## `Complete`
 
 ### Usage
-`complete` *Todo* *Task Description*
+`complete` *Task Type* *Task Description*
 
 ### Action
 Finds and marks the desired task complete.
