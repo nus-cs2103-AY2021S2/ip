@@ -46,44 +46,50 @@ public class Storage {
         Scanner myReader = new Scanner(myObj);
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
-            Character type = data.charAt(0);
-            boolean isDone = false;
-            if (data.charAt(4) == '1') {
-                isDone = true;
-            }
-            data = data.substring(8);
-            int mid = data.indexOf("|");
-            String name;
-            String date;
-            int year = -999;
-            int mon = -999;
-            int day = -999;
-            if (mid > 0) {
-                name = data.substring(0, mid - 1);
-                date = data.substring(mid + 2);
-                year = Integer.valueOf(date.substring(0, 4));
-                mon = Integer.valueOf(date.substring(5, 7));
-                day = Integer.valueOf(date.substring(8));
-            } else {
-                name = data;
-            }
-            if (type == 'T') {
-                tasks.add(new ToDo(name, isDone));
-            } else if (type == 'D') {
-                LocalDate d = LocalDate.of(year, mon, day);
-                tasks.add(new Deadline(name, d, isDone));
-            } else {
-                assert type == 'E';
-                LocalDate d = LocalDate.of(year, mon, day);
-                tasks.add(new Event(name, d, isDone));
-            }
+            tasks = addTask(tasks, data);
         }
         myReader.close();
         return tasks;
     }
 
-    public void addTask(Task task) {
-
+    /**
+     * Adds tasks into the task list.
+     *
+     * @return an arraylist of tasks.
+     */
+    public ArrayList<Task> addTask(ArrayList<Task> tasks, String data) {
+        Character type = data.charAt(0);
+        boolean isDone = false;
+        if (data.charAt(4) == '1') {
+            isDone = true;
+        }
+        data = data.substring(8);
+        int mid = data.indexOf("|");
+        String name;
+        String date;
+        int year = -999;
+        int mon = -999;
+        int day = -999;
+        if (mid > 0) {
+            name = data.substring(0, mid - 1);
+            date = data.substring(mid + 2);
+            year = Integer.valueOf(date.substring(0, 4));
+            mon = Integer.valueOf(date.substring(5, 7));
+            day = Integer.valueOf(date.substring(8));
+        } else {
+            name = data;
+        }
+        if (type == 'T') {
+            tasks.add(new ToDo(name, isDone));
+        } else if (type == 'D') {
+            LocalDate d = LocalDate.of(year, mon, day);
+            tasks.add(new Deadline(name, d, isDone));
+        } else {
+            assert type == 'E';
+            LocalDate d = LocalDate.of(year, mon, day);
+            tasks.add(new Event(name, d, isDone));
+        }
+        return tasks;
     }
 
 }

@@ -163,6 +163,7 @@ public class Command {
         return output;
     }
 
+
     /**
      * Formats a task according to its type.
      *
@@ -437,14 +438,5 @@ public class Command {
             allTaskCounter++;
         }
         return output;
-    }
-
-    /**
-     * Decides if this is the end of program.
-     *
-     * @return true if command is bye.
-     */
-    public boolean isExit() {
-        return (commandName.equals("bye"));
     }
 }
