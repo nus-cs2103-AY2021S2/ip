@@ -26,6 +26,7 @@ public class TaskList {
      * Traverses the task list to mark a particular task complete.
      *
      * @param task A task to be marked as complete.
+     * @return a string representing the result of the execution of the complete method
      */
     public static String completeTask(Task task) {
         for (Task t: taskList) {
@@ -41,6 +42,7 @@ public class TaskList {
      * Traverses the task list to remove a particular task.
      *
      * @param task A task to be removed.
+     * @return a string representing the result of the execution of the remove method
      */
     public static void removeTask(Task task) {
         for (Task t: taskList) {
@@ -51,6 +53,12 @@ public class TaskList {
         }
     }
 
+    /*
+     * Traverses the task list to check if a particular task exists.
+     *
+     * @param task A task to be removed.
+     * @return true or false.
+     */
     public static boolean contains(Task task) {
         for (Task t: taskList) {
             if (t.equals(task)) {
