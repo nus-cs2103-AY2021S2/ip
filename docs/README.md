@@ -66,13 +66,15 @@ All Tasks:
 ## `Complete`
 
 ### Usage
-`complete` *Task Type* *Task Description*
+`complete` *Todo* *Task Description*
 
 ### Action
 Finds and marks the desired task complete.
 
 ### Example of usage: 
-`complete` *todo* *buy groceries*
+`complete` *todo buy groceries*  
+`complete` *deadline* *return library book/by 14.02.2021 14:00*  
+`complete` *event* *Marcus's birthday party/from 14.02.2021 18:00 to 14.02.2021 23:30*
 
 ### Expected outcome:
 Task marked complete!
@@ -87,6 +89,8 @@ Finds and removes the desired task from the task list.
 
 ### Example of usage: 
 `remove` *todo buy groceries*
+`remove` *deadline* *return library book/by 14.02.2021 14:00*  
+`remove` *event* *Marcus's birthday party/from 14.02.2021 18:00 to 14.02.2021 23:30*
 
 ### Expected outcome:
 Task removed.

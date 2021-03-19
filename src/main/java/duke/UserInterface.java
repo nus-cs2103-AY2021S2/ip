@@ -64,10 +64,14 @@ public class UserInterface {
                 "[4] Event <Description of Task>/from <DD.MM.YYYY HH:MM> to <DD.MM.YYYY HH:MM>\n" +
                 "[5] List\n" +
                 "[6] Find <Key Word>\n" +
-                "[7] Complete <Task Type> <Description>\n" +
-                "[8] Remove <Task Type> <Description>\n" +
-                "[9] Help\n" +
-                "[10] Bye";
+                "[7] Complete Todo <Description>\n" +
+                "[8] Complete Deadline <Description>/by <DD.MM.YYYY HH:MM>\n" +
+                "[9] Complete Event <Description>/from <DD.MM.YYYY HH:MM> to <DD.MM.YYYY HH:MM>\n" +
+                "[10] Remove Todo <Description>\n" +
+                "[11] Remove Deadline <Description>/by <DD.MM.YYYY HH:MM>\n" +
+                "[12] Remove Event <Description>/from <DD.MM.YYYY HH:MM> to <DD.MM.YYYY HH:MM>\n" +
+                "[13] Help\n" +
+                "[14] Bye";
         return help;
     }
 
