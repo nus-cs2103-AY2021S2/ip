@@ -28,81 +28,33 @@ public class Parser {
      */
     public String process(String command) throws IOException {
         assert !command.equals("");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("'by' dd.MM.yyyy HH:mm");
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("'from' dd.MM.yyyy HH:mm ");
-        SimpleDateFormat dateFormat3 = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         String[] userInput = command.split(" ", 2);
-        if (userInput[0].toLowerCase().equals(Command.TODO.toString())) {
-            ToDo newToDo = new ToDo(userInput[1]);
-            if (TaskList.contains(newToDo)) {
-                return "This task already exists!";
-            }
-            TaskList.taskList.add(newToDo);
-            return UI.addedTask();
-        } else if (userInput[0].toLowerCase().equals(Command.HELLO.toString())) {
+        String commandHeader = userInput[0].toLowerCase();
+        if (commandHeader.equals(Command.TODO.toString())) {
+            String description =  userInput[1];
+            return processTodo(description);
+        } else if (commandHeader.equals(Command.HELLO.toString())) {
             return "Please enter a command.";
-        } else if (userInput[0].toLowerCase().equals(Command.HELP.toString())) {
+        } else if (commandHeader.equals(Command.HELP.toString())) {
             return UI.helpMenu();
-        } else if (userInput[0].toLowerCase().equals(Command.DEADLINE.toString())) {
+        } else if (commandHeader.equals(Command.DEADLINE.toString())) {
             String[] details = userInput[1].split("/", 2);
-            try {
-                Date by = dateFormat.parse(details[1]);
-                Deadline newDeadline = new Deadline(details[0], by);
-                if (TaskList.contains(newDeadline)) {
-                    return "This task already exists!";
-                }
-                TaskList.taskList.add(newDeadline);
-                return UI.addedTask();
-            } catch (ParseException e) {
-                System.out.println("Please type the date in the format \"by dd.mm.yyyy hh:mm\"!");
-            }
-        } else if (userInput[0].toLowerCase().equals(Command.EVENT.toString())) {
+            return processDeadline(details);
+        } else if (commandHeader.equals(Command.EVENT.toString())) {
             String[] details = userInput[1].split("/", 2);
-            String[] timings = details[1].split("to ", 2);
-            try {
-                Date start = dateFormat2.parse(timings[0]);
-                Date end = dateFormat3.parse(timings[1]);
-                Event newEvent = new Event(details[0], start, end);
-                if (TaskList.contains(newEvent)) {
-                    return "This task already exists!";
-                }
-                TaskList.taskList.add(newEvent);
-                return UI.addedTask();
-            } catch (ParseException e){
-                System.out.println("Please type the date in the format \"from dd.mm.yyyy hh:mm to dd.mm.yyyy hh:mm\"!");
-            }
-        } else if (userInput[0].toLowerCase().equals(Command.LIST.toString())) {
+            return processEvent(details);
+        } else if (commandHeader.equals(Command.LIST.toString())) {
             return UI.listTasks();
-        } else if (userInput[0].toLowerCase().equals(Command.FIND.toString())) {
+        } else if (commandHeader.equals(Command.FIND.toString())) {
             List<Task> foundTasks = TaskList.find(userInput[1]);
             return UI.listTasks(foundTasks);
-        } else if (userInput[0].toLowerCase().equals(Command.REMOVE.toString())) {
+        } else if (commandHeader.equals(Command.REMOVE.toString())) {
             String[] details = userInput[1].split(" ", 2);
-            if (details[0].toLowerCase().equals(Command.TODO.toString())) {
-                TaskList.removeTask(new ToDo(details[1]));
-                return "Task removed.\n";
-            } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())) {
-                String description = details[1].split("/", 2)[0];
-                TaskList.removeTask(new Deadline(description, new Date()));
-                return "Task removed.\n";
-            } else if (details[0].toLowerCase().equals(Command.EVENT.toString())) {
-                String description = details[1].split("/", 2)[0];
-                TaskList.removeTask(new Event(description, new Date(), new Date()));
-                return "Task removed.\n";
-            }
-            return "Please enter a valid task.\n";
-        } else if (userInput[0].toLowerCase().equals(Command.COMPLETE.toString())) {
+            return processRemove(details);
+        } else if (commandHeader.equals(Command.COMPLETE.toString())) {
             String[] details = userInput[1].split(" ", 2);
-            if (details[0].toLowerCase().equals(Command.TODO.toString())) {
-                return TaskList.completeTask(new ToDo(details[1]));
-            } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())) {
-                String description = details[1].split("/", 2)[0];
-                return TaskList.completeTask(new Deadline(description, new Date()));
-            } else if (details[0].toLowerCase().equals(Command.EVENT.toString())) {
-                String description = details[1].split("/", 2)[0];
-                return TaskList.completeTask(new Event(description, new Date(), new Date()));
-            }
-        } else if (userInput[0].toLowerCase().equals(Command.BYE.toString())) {
+            return processComplete(details);
+        } else if (commandHeader.equals(Command.BYE.toString())) {
             this.storage.exportTasks();
             System.exit(0);
         } else {
@@ -114,5 +66,110 @@ public class Parser {
             }
         }
         return "Please enter a valid command.\n";
+    }
+
+    /*
+     * Processes commands with prefix todo
+     *
+     * @param description description of the todo task
+     * @return string detailing the outcome of the execution the command
+     */
+    public String processTodo(String description) {
+        ToDo newToDo = new ToDo(description);
+        if (TaskList.contains(newToDo)) {
+            return "This task already exists!";
+        }
+        TaskList.taskList.add(newToDo);
+        return UI.addedTask();
+    }
+
+    /*
+     * Processes commands with prefix deadline
+     *
+     * @param description description of the deadline task
+     * @return string detailing the outcome of the execution the command
+     */
+    public String processDeadline(String[] details) {
+        String result = "";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("'by' dd.MM.yyyy HH:mm");
+        try {
+            Date by = dateFormat.parse(details[1]);
+            Deadline newDeadline = new Deadline(details[0], by);
+            if (TaskList.contains(newDeadline)) {
+                result = "This task already exists!";
+            }
+            TaskList.taskList.add(newDeadline);
+            return UI.addedTask();
+        } catch (ParseException e) {
+            System.out.println("Please type the date in the format \"by dd.mm.yyyy hh:mm\"!");
+        }
+        return result;
+    }
+
+    /*
+     * Processes commands with prefix event
+     *
+     * @param description description of the event task
+     * @return string detailing the outcome of the execution the command
+     */
+    public String processEvent(String[] details) {
+        String result = "";
+        SimpleDateFormat startDateFormat = new SimpleDateFormat("'from' dd.MM.yyyy HH:mm ");
+        SimpleDateFormat endDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        String[] timings = details[1].split("to ", 2);
+        try {
+            Date start = startDateFormat.parse(timings[0]);
+            Date end = endDateFormat.parse(timings[1]);
+            Event newEvent = new Event(details[0], start, end);
+            if (TaskList.contains(newEvent)) {
+                result = "This task already exists!";
+            }
+            TaskList.taskList.add(newEvent);
+            return UI.addedTask();
+        } catch (ParseException e){
+            System.out.println("Please type the date in the format \"from dd.mm.yyyy hh:mm to dd.mm.yyyy hh:mm\"!");
+        }
+        return result;
+    }
+
+    /*
+     * Processes commands with prefix remove
+     *
+     * @param description description of the remove task
+     * @return string detailing the outcome of the execution the command
+     */
+    public String processRemove(String[] details) {
+        if (details[0].toLowerCase().equals(Command.TODO.toString())) {
+            TaskList.removeTask(new ToDo(details[1]));
+            return "Task removed.\n";
+        } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())) {
+            String description = details[1].split("/", 2)[0];
+            TaskList.removeTask(new Deadline(description, new Date()));
+            return "Task removed.\n";
+        } else if (details[0].toLowerCase().equals(Command.EVENT.toString())) {
+            String description = details[1].split("/", 2)[0];
+            TaskList.removeTask(new Event(description, new Date(), new Date()));
+            return "Task removed.\n";
+        }
+        return "Please enter a valid task.\n";
+    }
+
+    /*
+     * Processes commands with prefix complete
+     *
+     * @param description description of the complete task
+     * @return string detailing the outcome of the execution the command
+     */
+    public String processComplete(String[] details) {
+        if (details[0].toLowerCase().equals(Command.TODO.toString())) {
+            return TaskList.completeTask(new ToDo(details[1]));
+        } else if (details[0].toLowerCase().equals(Command.DEADLINE.toString())) {
+            String description = details[1].split("/", 2)[0];
+            return TaskList.completeTask(new Deadline(description, new Date()));
+        } else if (details[0].toLowerCase().equals(Command.EVENT.toString())) {
+            String description = details[1].split("/", 2)[0];
+            return TaskList.completeTask(new Event(description, new Date(), new Date()));
+        }
+        return "Please enter a valid task.\n";
     }
 }
