@@ -52,6 +52,12 @@ shadowJar {
     archiveClassifier = null
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'Launcher'
+    }
+}
+
 checkstyle {
     toolVersion = '8.29'
 }

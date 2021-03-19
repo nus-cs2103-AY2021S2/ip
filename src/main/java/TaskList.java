@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 import exception.DukeInvalidArgumentsException;
@@ -18,6 +20,12 @@ public class TaskList {
         if (!input.containsKey("at")) {
             throw new DukeInvalidArgumentsException("event", "The date for an event cannot be empty");
         }
+        try {
+            LocalDateTime.parse(input.get("at"), DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        } catch (Exception e) {
+            throw new DukeInvalidArgumentsException("event",
+                    "The date argument is in an invalid format. Date format should be d/M/yyyy HHmm");
+        }
         return addTaskAndReturnMessage(new EventTask(input.get("info"), input.get("at")));
     }
 
@@ -27,6 +35,12 @@ public class TaskList {
         }
         if (!input.containsKey("by")) {
             throw new DukeInvalidArgumentsException("deadline", "The date for a deadline cannot be empty");
+        }
+        try {
+            LocalDateTime.parse(input.get("by"), DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        } catch (Exception e) {
+            throw new DukeInvalidArgumentsException("deadline",
+                    "The date argument is in an invalid format. Date format should be d/M/yyyy HHmm");
         }
         return addTaskAndReturnMessage(new DeadlineTask(input.get("info"), input.get("by")));
     }
@@ -43,17 +57,38 @@ public class TaskList {
         for (int i = 0; i < storage.tasks.size(); i++) {
             output += String.format("%d.%s\n", i + 1, storage.tasks.get(i));
         }
+        if (output.isEmpty()) {
+            return "You have no tasks.";
+        }
         return output.substring(0, output.length() - 1);
     }
 
-    protected String executeDelete(HashMap<String, String> tokenizedInput) {
-        // TODO: Add Exception for out of range deletion
-        Task t = storage.tasks.remove(Integer.parseInt(tokenizedInput.get("info")) - 1);
+    protected String executeDelete(HashMap<String, String> tokenizedInput) throws DukeInvalidArgumentsException {
+        int index = -1;
+        try {
+            index = Integer.parseInt(tokenizedInput.get("info"));
+        } catch (Exception e) {
+            throw new DukeInvalidArgumentsException("delete", "input index is not an integer");
+        }
+        if (index < 0 || index > storage.tasks.size()) {
+            throw new DukeInvalidArgumentsException("delete", "input index is not a valid index");
+        }
+
+        Task t = storage.tasks.remove(index - 1);
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.",
                 t.toString(), storage.tasks.size());
     }
 
-    protected String executeDone(HashMap<String, String> tokenizedInput) {
+    protected String executeDone(HashMap<String, String> tokenizedInput) throws DukeInvalidArgumentsException {
+        int index = -1;
+        try {
+            index = Integer.parseInt(tokenizedInput.get("info"));
+        } catch (Exception e) {
+            throw new DukeInvalidArgumentsException("done", "input index is not an integer");
+        }
+        if (index < 0 || index > storage.tasks.size()) {
+            throw new DukeInvalidArgumentsException("done", "input index is not a valid index");
+        }
         // TODO: Add Exception for out of range done
         Task t = storage.tasks.get(Integer.parseInt(tokenizedInput.get("info")) - 1);
         t.setTaskAsDone();
@@ -86,7 +121,7 @@ public class TaskList {
             e.printStackTrace();
         }
 
-        return String.format("Got it. I've added this task:\n  [E][X] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.", t.toString(),
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", t.toString(),
                 storage.tasks.size());
     }
 }
