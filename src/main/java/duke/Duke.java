@@ -1,8 +1,8 @@
 package duke;
 
-import duke.system.Parser;
-import duke.system.view.Gui;
-import duke.task.TaskList;
+import duke.controller.Parser;
+import duke.view.Gui;
+import duke.model.task.TaskList;
 import javafx.application.Application;
 
 public class Duke {

@@ -1,4 +1,4 @@
-package duke.system.exception;
+package duke.model.exception;
 
 public abstract class DukeException extends Exception {
 

@@ -1,7 +1,7 @@
-package duke.system.view;
+package duke.view;
 
 import duke.Duke;
-import duke.task.TaskList;
+import duke.model.task.TaskList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;

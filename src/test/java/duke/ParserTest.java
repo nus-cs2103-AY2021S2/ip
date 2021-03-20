@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.system.Parser;
-import duke.task.TaskList;
+import duke.controller.Parser;
+import duke.model.task.TaskList;
 
 public class ParserTest {
     @Test

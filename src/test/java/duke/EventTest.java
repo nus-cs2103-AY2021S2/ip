@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Event;
+import duke.model.task.Event;
 
 public class EventTest {
     @Test

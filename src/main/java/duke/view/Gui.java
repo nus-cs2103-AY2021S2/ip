@@ -1,4 +1,4 @@
-package duke.system.view;
+package duke.view;
 
 import java.io.IOException;
 

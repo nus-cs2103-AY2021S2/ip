@@ -1,12 +1,12 @@
-package duke.system;
+package duke.controller;
 
 import duke.Helper;
-import duke.system.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ListItem;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.model.exception.DukeException;
+import duke.model.task.Deadline;
+import duke.model.task.Event;
+import duke.model.task.ListItem;
+import duke.model.task.TaskList;
+import duke.model.task.Todo;
 
 /**
  * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,

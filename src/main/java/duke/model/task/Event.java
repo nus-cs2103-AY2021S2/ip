@@ -1,4 +1,4 @@
-package duke.task;
+package duke.model.task;
 
 public class Event extends ListItem {
     private final String date;

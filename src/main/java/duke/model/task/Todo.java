@@ -1,4 +1,4 @@
-package duke.task;
+package duke.model.task;
 
 /**
  * Represents the Todo type task that does not have a due date
