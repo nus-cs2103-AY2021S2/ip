@@ -96,33 +96,21 @@ public class TaskList {
             }
             break;
         case "D":
-            String deadlineFinalDescription = task.description;
-            LocalDate deadlineLocalDate;
-
-            if (hasDescription) {
-                deadlineFinalDescription = newDescription;
-            }
-
-            if (hasDate) {
-                deadlineLocalDate = LocalDate.parse(newDate);
-                tasks.set(taskIndex, new Deadlines(deadlineFinalDescription, deadlineLocalDate));
-            } else {
-                task.editTask(deadlineFinalDescription);
-            }
-            break;
         case "E":
-            String eventFinalDescription = task.description;
-            LocalDate eventLocalDate;
+            String finalDescription = task.description;
+            LocalDate localDate;
 
             if (hasDescription) {
-                eventFinalDescription = newDescription;
+                finalDescription = newDescription;
             }
 
             if (hasDate) {
-                eventLocalDate = LocalDate.parse(newDate);
-                tasks.set(taskIndex, new Events(eventFinalDescription, eventLocalDate));
+                localDate = LocalDate.parse(newDate);
+                tasks.set(taskIndex, type.equals("D")
+                    ? new Deadlines(finalDescription, localDate)
+                    : new Events(finalDescription, localDate));
             } else {
-                task.editTask(eventFinalDescription);
+                task.editTask(finalDescription);
             }
             break;
         }
