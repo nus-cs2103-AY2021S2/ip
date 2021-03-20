@@ -77,10 +77,10 @@ public class Parser {
                     result.add(description);
                     break;
                 case "deadline":
-                    splitArguments(details, " /by ", result);
+                    splitArgumentsByRegex(details, " /by ", result);
                     break;
                 case "event":
-                    splitArguments(details, " /at ", result);
+                    splitArgumentsByRegex(details, " /at ", result);
                     break;
                 default:
                     result.add("idkError");
@@ -97,7 +97,7 @@ public class Parser {
         return result;
     }
 
-    public void splitArguments(String details, String regex, ArrayList<String> result) {
+    public void splitArgumentsByRegex(String details, String regex, ArrayList<String> result) {
         String[] arrOfInput = details.split(regex);
         String description = arrOfInput[0];
         String date = arrOfInput[1];

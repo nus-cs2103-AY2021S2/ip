@@ -11,7 +11,7 @@
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
-    <VBox alignment="TOP_RIGHT" prefHeight="56.0" prefWidth="279.0"
+    <VBox alignment="TOP_RIGHT" prefWidth="279.0"
           style="-fx-background-color: #FAEDBE#FAEDBE #FAEDBE#FAEDBE;">
         <Label fx:id="nameLabel" text="Name" textFill="#e4b612" wrapText="true">
             <padding>
