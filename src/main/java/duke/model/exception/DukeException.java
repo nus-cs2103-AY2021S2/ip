@@ -23,4 +23,10 @@ public abstract class DukeException extends Exception {
             super("IO Error!");
         }
     }
+
+    public static class TaskNotExistException extends DukeException {
+        public TaskNotExistException() {
+            super("Task failed to be created! Please try again");
+        }
+    }
 }

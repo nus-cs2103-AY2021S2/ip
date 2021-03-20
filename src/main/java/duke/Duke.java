@@ -1,6 +1,8 @@
 package duke;
 
+import duke.controller.ListController;
 import duke.controller.Parser;
+import duke.controller.UIController;
 import duke.view.Gui;
 import duke.model.task.TaskList;
 import javafx.application.Application;
@@ -8,6 +10,8 @@ import javafx.application.Application;
 public class Duke {
     private TaskList tasks;
     private Parser in;
+    private final UIController uiController;
+    private final ListController listController;
 
     /**
      * Initiate Duke with default Parser and TaskList for it to function
@@ -15,16 +19,16 @@ public class Duke {
     public Duke() {
         in = new Parser();
         tasks = new TaskList();
+        uiController = new UIController(this, tasks);
+        listController = new ListController(tasks);
     }
 
-    /**
-     * Get response for the user input
-     *
-     * @return the string to be displayed on the GUI
-     */
-    public String getResponse(String input, TaskList tasks) {
-        in = new Parser(input);
-        return in.print(tasks);
+    public UIController getUiController() {
+        return uiController;
+    }
+
+    public ListController getListController() {
+        return listController;
     }
 
     /**
