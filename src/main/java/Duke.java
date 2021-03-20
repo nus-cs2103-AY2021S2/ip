@@ -63,7 +63,7 @@ public class Duke extends Application {
         String output = "";
         try {
             output += ui.showLine();
-            Command c = Parser.parse(fullCommand);
+            Command c = Parser.parse(fullCommand.trim());
             output += c.execute(tasks, storage);
         } catch (DukeException | IOException e) {
             output += ui.showError(e.getMessage());
