@@ -102,7 +102,7 @@ public class Ui {
     private String displayListNumbered(TaskList tasks) {
         String output;
 
-        assert (tasks.size() > 0) : " Calling displayListNumbered() on an empty list";
+        assert (tasks.size() > 0) : "Calling displayListNumbered() on an empty list";
 
         StringBuilder items = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
@@ -121,7 +121,7 @@ public class Ui {
     private String displayList(TaskList tasks) {
         String output;
 
-        assert (tasks.size() > 0) : " Calling displayList() on an empty list";
+        assert (tasks.size() > 0) : "Calling displayList() on an empty list";
 
         StringBuilder items = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
