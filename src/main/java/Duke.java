@@ -49,7 +49,6 @@ public class Duke extends Application {
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -65,13 +64,14 @@ public class Duke extends Application {
         try {
             output += ui.showLine();
             Command c = Parser.parse(fullCommand);
-            output += c.execute(tasks);
-        } catch (IOException | DukeException e) {
+            output += c.execute(tasks, storage);
+        } catch (DukeException | IOException e) {
             output += ui.showError(e.getMessage());
         } finally {
             output += ui.showLine();
         }
         return output;
+
     }
 
     /**

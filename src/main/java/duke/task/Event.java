@@ -50,6 +50,10 @@ public class Event extends Task {
         }
     }
 
+    public Character getType() {
+        return 'E';
+    }
+
     /**
      * Overrides toString method.
      *

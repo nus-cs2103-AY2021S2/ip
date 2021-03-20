@@ -1,3 +1,1 @@
-T | 1 | join sports club
-D | 1 | CS2103 Quiz | 2021-02-19
-D | 1 | CS2103 Quizz | 2021-02-19
+T | 1 | join sports clubD | 1 | CS2103 Quiz

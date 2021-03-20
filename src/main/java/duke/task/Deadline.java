@@ -34,6 +34,9 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
 
+    public Character getType() {
+        return 'D';
+    }
     /**
      * Adds a deadline to taskList.
      *

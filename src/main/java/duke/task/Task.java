@@ -15,6 +15,10 @@ public class Task {
         this.name = name;
     }
 
+    public Character getType() {
+        return null;
+    }
+
     /**
      * Gets the name of a task.
      */

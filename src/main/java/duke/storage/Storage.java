@@ -1,6 +1,7 @@
 package duke.storage;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,7 +38,6 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         File myObj = new File(filePath);
         if (Files.notExists(Path.of("data/"))) {
-            System.out.println("no such file");
             Files.createDirectories(Paths.get("data/"));
         }
         if (!myObj.exists()) {
@@ -46,7 +46,7 @@ public class Storage {
         Scanner myReader = new Scanner(myObj);
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
-            tasks = addTask(tasks, data);
+            tasks = addTaskFromFile(tasks, data);
         }
         myReader.close();
         return tasks;
@@ -57,39 +57,51 @@ public class Storage {
      *
      * @return an arraylist of tasks.
      */
-    public ArrayList<Task> addTask(ArrayList<Task> tasks, String data) {
-        Character type = data.charAt(0);
+    public ArrayList<Task> addTaskFromFile(ArrayList<Task> tasks, String taskToAdd) {
+        Character type = taskToAdd.charAt(0);
         boolean isDone = false;
-        if (data.charAt(4) == '1') {
+        if (taskToAdd.charAt(4) == '1') {
             isDone = true;
         }
-        data = data.substring(8);
-        int mid = data.indexOf("|");
-        String name;
-        String date;
-        int year = -999;
-        int mon = -999;
-        int day = -999;
-        if (mid > 0) {
-            name = data.substring(0, mid - 1);
-            date = data.substring(mid + 2);
-            year = Integer.valueOf(date.substring(0, 4));
-            mon = Integer.valueOf(date.substring(5, 7));
-            day = Integer.valueOf(date.substring(8));
-        } else {
-            name = data;
-        }
+        String taskWithoutTypeAndStatus = taskToAdd.substring(8);
         if (type == 'T') {
-            tasks.add(new ToDo(name, isDone));
-        } else if (type == 'D') {
-            LocalDate d = LocalDate.of(year, mon, day);
-            tasks.add(new Deadline(name, d, isDone));
+            tasks.add(new ToDo(taskWithoutTypeAndStatus, isDone));
         } else {
-            assert type == 'E';
-            LocalDate d = LocalDate.of(year, mon, day);
-            tasks.add(new Event(name, d, isDone));
+            int indexOfDivider = taskWithoutTypeAndStatus.indexOf("|");
+            String name = taskWithoutTypeAndStatus.substring(0, indexOfDivider - 1);
+            String dateString = taskWithoutTypeAndStatus.substring(indexOfDivider + 2);
+            int year = Integer.valueOf(dateString.substring(0, 4));
+            int mon = Integer.valueOf(dateString.substring(5, 7));
+            int day = Integer.valueOf(dateString.substring(8));
+            LocalDate date = LocalDate.of(year, mon, day);
+            if (type == 'D') {
+                tasks.add(new Deadline(name, date, isDone));
+            } else {
+                assert type == 'E';
+                tasks.add(new Event(name, date, isDone));
+            }
         }
         return tasks;
+    }
+
+
+
+    public void saveTasksToFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter writer = new FileWriter(filePath);
+        String tasksToPutInFile = "";
+        for(Task task : tasks) {
+            Character taskType = task.getType();
+            Boolean taskStatus = task.getStatus();
+            String taskName = task.getName();
+            if(taskStatus) {
+                tasksToPutInFile += taskType + " | 1 | " + taskName;
+            } else {
+                tasksToPutInFile += taskType + " | 0 | " + taskName;
+            }
+
+        }
+        writer.write(tasksToPutInFile);
+        writer.close();
     }
 
 }

@@ -24,6 +24,9 @@ public class ToDo extends Task {
         super(name);
         this.isDone = isDone;
     }
+    public Character getType() {
+        return 'T';
+    }
 
     /**
      * Adds a todo to taskList.
