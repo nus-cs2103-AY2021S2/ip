@@ -37,6 +37,10 @@ public class Deadline extends Task {
     public Character getType() {
         return 'D';
     }
+
+    public LocalDate getDate() {
+        return doneBy;
+    }
     /**
      * Adds a deadline to taskList.
      *

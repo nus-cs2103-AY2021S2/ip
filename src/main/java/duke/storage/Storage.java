@@ -93,10 +93,16 @@ public class Storage {
             Character taskType = task.getType();
             Boolean taskStatus = task.getStatus();
             String taskName = task.getName();
+            LocalDate date = task.getDate();
             if(taskStatus) {
                 tasksToPutInFile += taskType + " | 1 | " + taskName;
             } else {
                 tasksToPutInFile += taskType + " | 0 | " + taskName;
+            }
+            if (taskType != 'T') {
+                tasksToPutInFile += " | " + date + "\n";
+            } else {
+                tasksToPutInFile += "\n";
             }
 
         }

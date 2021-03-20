@@ -1,4 +1,6 @@
 package duke.task;
+import java.time.LocalDate;
+
 import duke.dukeexception.DukeException;
 
 public class Task {
@@ -33,6 +35,9 @@ public class Task {
         return isDone;
     }
 
+    public LocalDate getDate() {
+        return null;
+    }
     /**
      * Sets the status of the current task to completed.
      */

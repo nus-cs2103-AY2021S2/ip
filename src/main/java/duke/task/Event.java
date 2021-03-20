@@ -33,7 +33,9 @@ public class Event extends Task {
         this.at = at;
         this.isDone = isDone;
     }
-
+    public LocalDate getDate() {
+        return at;
+    }
     /**
      * Adds a event to taskList.
      *
