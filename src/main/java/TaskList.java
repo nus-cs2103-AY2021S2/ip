@@ -13,6 +13,12 @@ public class TaskList {
         this.storage = storage;
     }
 
+    /**
+     * Event task command executor
+     * @param input tokenized hashmap of inputs
+     * @return Output string of the command
+     * @throws DukeInvalidArgumentsException when the input has invalid arguments
+     */
     protected String executeEvent(HashMap<String, String> input) throws DukeInvalidArgumentsException {
         if (!input.containsKey("info")) {
             throw new DukeInvalidArgumentsException("event", "The description of an event cannot be empty");
@@ -29,6 +35,12 @@ public class TaskList {
         return addTaskAndReturnMessage(new EventTask(input.get("info"), input.get("at")));
     }
 
+    /**
+     * Deadline task command executor
+     * @param input tokenized hashmap of inputs
+     * @return Output string of the command
+     * @throws DukeInvalidArgumentsException when the input has invalid arguments
+     */
     protected String executeDeadline(HashMap<String, String> input) throws DukeInvalidArgumentsException {
         if (!input.containsKey("info")) {
             throw new DukeInvalidArgumentsException("deadline", "The description of a deadline cannot be empty");
@@ -45,6 +57,12 @@ public class TaskList {
         return addTaskAndReturnMessage(new DeadlineTask(input.get("info"), input.get("by")));
     }
 
+    /**
+     * Todo task command executor
+     * @param input tokenized hashmap of inputs
+     * @return Output string of the command
+     * @throws DukeInvalidArgumentsException when the input has invalid arguments
+     */
     protected String executeTodo(HashMap<String, String> input) throws DukeInvalidArgumentsException {
         if (!input.containsKey("info")) {
             throw new DukeInvalidArgumentsException("todo", "The description of a todo cannot be empty");
@@ -52,17 +70,29 @@ public class TaskList {
         return addTaskAndReturnMessage(new TodoTask(input.get("info")));
     }
 
+    /**
+     * List command executor
+     * @return Output string of the command
+     */
     protected String executeList() {
         String output = "";
+
         for (int i = 0; i < storage.tasks.size(); i++) {
             output += String.format("%d.%s\n", i + 1, storage.tasks.get(i));
         }
+
         if (output.isEmpty()) {
             return "You have no tasks.";
         }
         return output.substring(0, output.length() - 1);
     }
 
+    /**
+     * Delete command executor
+     * @param tokenizedInput tokenized hashmap of inputs
+     * @return Output string of the command
+     * @throws DukeInvalidArgumentsException when the input has invalid arguments
+     */
     protected String executeDelete(HashMap<String, String> tokenizedInput) throws DukeInvalidArgumentsException {
         int index = -1;
         try {
@@ -79,6 +109,12 @@ public class TaskList {
                 t.toString(), storage.tasks.size());
     }
 
+    /**
+     * Done command executor
+     * @param tokenizedInput tokenized hashmap of inputs
+     * @return Output string of the command
+     * @throws DukeInvalidArgumentsException when the input has invalid arguments
+     */
     protected String executeDone(HashMap<String, String> tokenizedInput) throws DukeInvalidArgumentsException {
         int index = -1;
         try {
@@ -95,6 +131,11 @@ public class TaskList {
         return "Nice! I've marked this task as done:\n  " + t.toString();
     }
 
+    /**
+     * Find command executor
+     * @param tokenizedInput tokenized hashmap of inputs
+     * @return Output string of the command
+     */
     protected String executeFind(HashMap<String, String> tokenizedInput) {
         String searchString = tokenizedInput.get("info");
         String output = "Here are the matching tasks in your list:\n";
@@ -106,12 +147,22 @@ public class TaskList {
         return output.substring(0, output.length() - 1);
     }
 
+    /**
+     * Internal function used for formatting output string and adding task to storage.
+     * @param task Task to be added
+     * @return The output string formatted for the task
+     */
     protected String addTaskAndReturnMessage(Task task) {
         storage.tasks.add(task);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task.toString(),
                 storage.tasks.size());
     }
 
+    /**
+     * Archive task command executor
+     * @param tokenizedInput tokenized hashmap of inputs
+     * @return Output string of the command
+     */
     public String executeArchive(HashMap<String, String> tokenizedInput) {
         Task t = storage.tasks.remove(Integer.parseInt(tokenizedInput.get("info")) - 1);
         t.setArchived(true);
@@ -121,7 +172,7 @@ public class TaskList {
             e.printStackTrace();
         }
 
-        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", t.toString(),
+        return String.format("Got it. I've archived this task:\n  %s\nNow you have %d tasks in the list.", t.toString(),
                 storage.tasks.size());
     }
 }

@@ -39,10 +39,18 @@ public class Task {
         done = true;
     }
 
+    /**
+     * Returns the archived state of a task
+     * @return whether a task is archived
+     */
     public boolean isArchived() {
         return archived;
     }
 
+    /**
+     * Sets the archived state of a task
+     * @param archived archive state
+     */
     public void setArchived(boolean archived) {
         this.archived = archived;
     }

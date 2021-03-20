@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 
 import exception.DukeException;
@@ -13,10 +18,9 @@ public class Duke extends Application {
     protected static TaskList taskList = new TaskList(storage);
 
     /**
-     * Entry point for program
-     * 
-     * @param args
-     *                 command line arguments
+     * Entry point for CLI program
+     *
+     * @param args command line arguments
      */
     public static void main(String[] args) {
 
@@ -39,6 +43,11 @@ public class Duke extends Application {
     MainWindow window = new MainWindow();
     Thread t;
 
+    /**
+     * Entry point for CLI program
+     *
+     * @param primaryStage javafx GUI stage
+     */
     @Override
     public void start(Stage primaryStage) {
 
@@ -62,6 +71,10 @@ public class Duke extends Application {
         t.start();
     }
 
+    /**
+     * Exit for GUI
+     * Function used for cleanup purposes only
+     */
     @Override
     public void stop() {
         t.stop();

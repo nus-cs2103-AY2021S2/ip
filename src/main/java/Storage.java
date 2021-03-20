@@ -72,6 +72,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Archives a task to file
+     *
+     * @param t the task to be archived
+     * @throws IOException when file cannot be created
+     */
     public void archiveTask(Task t) throws IOException {
         File file = new File(archiveFile);
         if (!file.exists()) {
