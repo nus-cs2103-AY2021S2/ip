@@ -29,12 +29,6 @@ public class TaskList {
         return this.tasks;
     }
 
-    /**
-     * Gets the count current tasks.
-     */
-    public int getTaskCount() {
-        return this.tasks.size();
-    }
 
     /**
      * Sets the status of the current task to completed.

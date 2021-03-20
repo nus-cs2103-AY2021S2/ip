@@ -10,13 +10,15 @@ import duke.command.HelpCommand;
 import duke.command.IncorrectCommand;
 import duke.command.ListCommand;
 import duke.dukeexception.DukeException;
-import duke.ui.Ui;
 
 public class Parser {
     /**
-     * Class constructor.
+     * Transforms a String command to a Command object.
      *
      * @param fullCommand the commands input by user.
+     *
+     * @return the transformed Command object.
+     *
      * @throws DukeException If an input or output exception occurred
      */
     public static Command parse(String fullCommand) throws DukeException {
@@ -38,7 +40,7 @@ public class Parser {
         } else if (fullCommand.equals("help")) {
             return new HelpCommand();
         } else {
-           return new IncorrectCommand();
+            return new IncorrectCommand();
         }
     }
 }

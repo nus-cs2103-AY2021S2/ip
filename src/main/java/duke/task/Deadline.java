@@ -12,10 +12,12 @@ import duke.dukeexception.DukeException;
  * @author Ni Jiaying
  */
 public class Deadline extends Task {
+    private static String deadlineFormat = "Format: deadline + name + /by + date[YYYY-MM-DD])";
     /**
      * Date of the deadline
      */
     protected LocalDate doneBy;
+
 
     /**
      * Class constructor specifying deadline name and due date.
@@ -34,13 +36,27 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Gets the format of a deadline.
+     */
+    public static String getDeadlineFormat() {
+        return deadlineFormat;
+    }
+
+    /**
+     * Gets the type of a task.
+     */
     public Character getType() {
         return 'D';
     }
 
+    /**
+     * Gets the date of a task.
+     */
     public LocalDate getDate() {
         return doneBy;
     }
+
     /**
      * Adds a deadline to taskList.
      *

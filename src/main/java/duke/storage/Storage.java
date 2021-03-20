@@ -55,6 +55,9 @@ public class Storage {
     /**
      * Adds tasks into the task list.
      *
+     * @param tasks a list of tasks.
+     * @param taskToAdd the list to be added into the task list.
+     *
      * @return an arraylist of tasks.
      */
     public ArrayList<Task> addTaskFromFile(ArrayList<Task> tasks, String taskToAdd) {
@@ -84,17 +87,22 @@ public class Storage {
         return tasks;
     }
 
-
-
+    /**
+     * Adds tasks in taskList into the datafile.
+     *
+     * @param tasks a list of tasks.
+     *
+     * @throws IOException If an input or output exception occurred
+     */
     public void saveTasksToFile(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath);
         String tasksToPutInFile = "";
-        for(Task task : tasks) {
+        for (Task task : tasks) {
             Character taskType = task.getType();
             Boolean taskStatus = task.getStatus();
             String taskName = task.getName();
             LocalDate date = task.getDate();
-            if(taskStatus) {
+            if (taskStatus) {
                 tasksToPutInFile += taskType + " | 1 | " + taskName;
             } else {
                 tasksToPutInFile += taskType + " | 0 | " + taskName;
@@ -104,10 +112,8 @@ public class Storage {
             } else {
                 tasksToPutInFile += "\n";
             }
-
         }
         writer.write(tasksToPutInFile);
         writer.close();
     }
-
 }

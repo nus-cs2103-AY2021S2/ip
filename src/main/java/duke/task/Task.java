@@ -17,6 +17,9 @@ public class Task {
         this.name = name;
     }
 
+    /**
+     * Gets the type of a task.
+     */
     public Character getType() {
         return null;
     }
@@ -35,9 +38,13 @@ public class Task {
         return isDone;
     }
 
+    /**
+     * Gets the date of a task.
+     */
     public LocalDate getDate() {
         return null;
     }
+
     /**
      * Sets the status of the current task to completed.
      */
@@ -52,7 +59,7 @@ public class Task {
      * @throws DukeException  If an input or output
      *                      exception occurred
      */
-    public String addTask(int count) throws DukeException, DukeException, DukeException {
+    public String addTask(int count) throws DukeException {
         String output = "";
         if (this.name.equals("todo")) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");

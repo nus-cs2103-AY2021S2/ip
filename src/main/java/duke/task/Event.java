@@ -12,9 +12,7 @@ import duke.dukeexception.DukeException;
  * @author Ni Jiaying
  */
 public class Event extends Task {
-    /**
-     * Event time
-     */
+    private static String eventFormat = "Format: event + name + /at + date[YYYY-MM-DD]";
     protected LocalDate at;
 
     /**
@@ -33,9 +31,14 @@ public class Event extends Task {
         this.at = at;
         this.isDone = isDone;
     }
+
+    /**
+     * Gets the date of a task.
+     */
     public LocalDate getDate() {
         return at;
     }
+
     /**
      * Adds a event to taskList.
      *
@@ -52,8 +55,18 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Gets the type of a task.
+     */
     public Character getType() {
         return 'E';
+    }
+
+    /**
+     * Gets the format of an event.
+     */
+    public static String getEventFormat() {
+        return eventFormat;
     }
 
     /**

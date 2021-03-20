@@ -1,17 +1,6 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 public class Ui {
-    /**
-     * Prompts the user to enter a command.
-     */
-    public static String readCommand() {
-        System.out.println("Enter a command:");
-        Scanner in = new Scanner(System.in);
-        String commands = in.nextLine();
-        return commands;
-    }
 
     /**
      * Displays default welcome message to users.
@@ -30,12 +19,6 @@ public class Ui {
         return welcomeMessage;
     }
 
-    /**
-     * Displays default goodbye message to users.
-     */
-    public static String showGoodbyeMessage() {
-        return "Bye!";
-    }
 
     public static String showNewLine() {
         return "\n";
