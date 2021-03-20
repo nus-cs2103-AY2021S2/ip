@@ -1,6 +1,7 @@
 package duke.controller;
 
 import duke.Helper;
+import duke.model.Command;
 import duke.model.exception.DukeException;
 import duke.model.task.Deadline;
 import duke.model.task.Event;
@@ -21,19 +22,6 @@ public class Parser {
     private final String command;
     private final String argument;
     private final String optionalArgument;
-
-    enum PredefinedCommand {
-        LIST,
-        BYE,
-        DONE,
-        TODO,
-        DEADLINE,
-        EVENT,
-        ERROR,
-        DELETE,
-        FIND,
-        TAG
-    }
 
     /**
      * Constructor method that initiates with empty/ null values
@@ -105,7 +93,7 @@ public class Parser {
                 // try parsing the command first by finding the equivalent in Enum PredefinedCommand,
                 // else throw exception
                 try {
-                    tempCommand = String.valueOf(PredefinedCommand.valueOf(result[0].toUpperCase())).toLowerCase();
+                    tempCommand = String.valueOf(Command.valueOf(result[0].toUpperCase())).toLowerCase();
                 } catch (IllegalArgumentException ex) {
                     throw new DukeException.UnknownCommandException();
                 }
@@ -143,7 +131,7 @@ public class Parser {
      * @return a string to be printed to the console by UI
      */
     public String print(TaskList inputList) {
-        PredefinedCommand switchVal = PredefinedCommand.valueOf(this.command.toUpperCase());
+        Command switchVal = Command.valueOf(this.command.toUpperCase());
         switch (switchVal) {
         case BYE:
             return "Bye. Hope to see you again soon!";
