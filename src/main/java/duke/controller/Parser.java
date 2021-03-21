@@ -17,7 +17,7 @@ import duke.model.task.TaskList;
 public class Parser {
     private final Command command;
     private final String argument;
-    private final String optionalArgument;
+    private final String optionalArgument; // mainly used for Command.TAG, DEADLINE or EVENT
 
     /**
      * Public constructor method that initiates with empty/ null values, used for starting Duke when App launches
@@ -52,7 +52,7 @@ public class Parser {
         try {
             return parseWithFormatCheck(in, tasks);
         } catch (DukeException ex) {
-            return new Parser(Command.ERROR, ex.getMessage(), "");
+            return new Parser(Command.ERROR, ex.getMessage(), null);
         }
     }
 
@@ -76,7 +76,7 @@ public class Parser {
             if (result.length <= 1) { // if `todo` and `find` doesnt have any text follow
                 throw new DukeException.NoArgumentOrWrongFormatException(result[0]);
             } else {
-                tempArg = result[1];
+                tempArg = in.substring(5); // `todo ` and `find ` takes 5 character spaces
             }
             break;
         case "done":
@@ -86,7 +86,8 @@ public class Parser {
             // first check if the argument is an integer to be used as index, then check if it falls within valid range
             if (!Helper.isInteger(indexOfItemAsString)) {
                 throw new DukeException.NoArgumentOrWrongFormatException(result[0]);
-            } else if (ListController.checkValidIndexForListOperation(Command.valueOf(result[0]), tempArg, tasks)) {
+            } else if (!ListController.checkValidIndexForListOperation
+                    (Command.valueOf(result[0].toUpperCase()), tempArg, tasks)) {
                 throw new DukeException.IndexOutOfListSizeException();
             } else {
                 tempCommand = result[0];
@@ -99,14 +100,15 @@ public class Parser {
             String firstParam = in.substring(max);
             tempCommand = result[0];
             tempOptArg = firstParam.substring(4);
-            tempArg = in.substring(in.indexOf(" "), max - 1);
+            tempArg = in.substring(in.indexOf(" ") + 1, max - 1);
             break;
         case "tag":
             tempCommand = result[0];
             // first check if the argument is an integer to be used as index, then check if it falls within valid range
             if (!Helper.isInteger(result[1])) {
                 throw new DukeException.NoArgumentOrWrongFormatException(result[0]);
-            } else if (ListController.checkValidIndexForListOperation(Command.valueOf(result[0]), result[1], tasks)) {
+            } else if (!ListController.checkValidIndexForListOperation
+                    (Command.valueOf(result[0].toUpperCase()), result[1], tasks)) {
                 throw new DukeException.IndexOutOfListSizeException();
             } else {
                 tempArg = result[1];
