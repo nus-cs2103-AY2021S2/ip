@@ -56,21 +56,21 @@ public class StorageController {
                         tagList = Arrays.stream(result[3].substring(1)
                                 .split("#")).sorted().collect(Collectors.toList());
                     }
-                    importedList.add(new Todo(result[2], result[1] == "1", tagList));
+                    importedList.add(new Todo(result[2], Boolean.parseBoolean(result[1]), tagList));
                     break;
                 case "D":
                     if (result.length == 5) {
                         tagList = Arrays.stream(result[4].substring(1)
                                 .split("#")).sorted().collect(Collectors.toList());
                     }
-                    importedList.add(new Deadline(result[2], result[3], result[1] == "1", tagList));
+                    importedList.add(new Deadline(result[2], result[3], Boolean.parseBoolean(result[1]), tagList));
                     break;
                 case "E":
                     if (result.length == 5) {
                         tagList = Arrays.stream(result[4].substring(1)
                                 .split("#")).sorted().collect(Collectors.toList());
                     }
-                    importedList.add(new Event(result[2], result[3], result[1] == "1", tagList));
+                    importedList.add(new Event(result[2], result[3], Boolean.parseBoolean(result[1]), tagList));
                     break;
                 default:
                     break;
