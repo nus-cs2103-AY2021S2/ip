@@ -3,6 +3,7 @@ package duke.model.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Optional;
 
 /**
  * Represents the deadline type task that has a deadline date and an optional parsedDate
@@ -10,8 +11,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends ListItem {
     private final String date;
-    private LocalDate parsedDate;
-    private boolean isDateParsable;
+    private Optional<LocalDate> parsedDate;
 
     /**
      * Constructor for Deadline that was not provided the task done status
@@ -22,17 +22,11 @@ public class Deadline extends ListItem {
     public Deadline(String task, String inputDate) {
         super(task);
         this.date = inputDate;
-        this.parsedDate = parseDate(inputDate);
-        if (this.parsedDate == null) {
-            this.isDateParsable = false;
-        } else {
-            this.isDateParsable = true;
-        }
+        this.parsedDate = Optional.ofNullable(parseDate(inputDate));
     }
 
     /**
      * the overloaded constructor that allows taking the status of the task
-     *
      * @param task      takes in string and pass to parent's constructor as the task name
      * @param inputDate date entered as the deadline
      * @param isDone    the status of the task
@@ -40,31 +34,25 @@ public class Deadline extends ListItem {
     public Deadline(String task, String inputDate, boolean isDone) {
         super(task, isDone);
         this.date = inputDate;
-        this.parsedDate = parseDate(inputDate);
-        if (this.parsedDate == null) {
-            this.isDateParsable = false;
-        } else {
-            this.isDateParsable = true;
-        }
+        this.parsedDate = Optional.ofNullable(parseDate(inputDate));
     }
 
     /**
      * Changes the task's status to be done
-     *
      * @return the task to replace the old one in the list or to be used later
      */
     @Override
     public ListItem markAsDone() {
-        return new Deadline(super.getTask(), (parsedDate == null
-                ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))), true);
+        return new Deadline(super.getTask(), (parsedDate.isEmpty()
+                ? this.date : parsedDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"))), true);
     }
 
     @Override
     public String toString() {
         return "[D]" + (super.isDone() == true ? "[X] " : "[ ] ") + super.getTask()
                 + " (by: "
-                + (parsedDate == null
-                ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")"
+                + (parsedDate.isEmpty()
+                ? this.date : parsedDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")"
                 + super.printTags();
     }
 
@@ -72,12 +60,11 @@ public class Deadline extends ListItem {
      * @return either the provided date or a parsed date to be printed
      */
     public String getDate() {
-        return "|" + (parsedDate == null ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return "|" + (parsedDate.isEmpty() ? this.date : parsedDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     /**
      * Check whether the date provide by the user is parsable and store it accordingly
-     *
      * @param input the date given by the user
      * @return either a null or LocalDate that has a parsed date
      */
