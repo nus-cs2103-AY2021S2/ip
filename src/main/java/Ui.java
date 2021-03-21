@@ -150,6 +150,9 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Message to be printed when a tag has been added to a task.
+     */
     public static String outputMessageTag(Task toTag, String description) {
         return "The following tag: (" + description + ") has been added to the follwing task:" + toTag;
     }

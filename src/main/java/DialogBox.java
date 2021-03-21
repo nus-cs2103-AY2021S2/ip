@@ -29,7 +29,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isLuna) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -44,6 +44,9 @@ public class DialogBox extends HBox {
         Circle circle = new Circle(50, 50, 40);
         displayPicture.setClip(circle);
         gui();
+        if (isLuna) {
+            lunaGui();
+        }
     }
 
     /**
@@ -56,38 +59,52 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, false);
         db.setUserAlignment();
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, true);
         db.flip();
         db.setLunaAlignment();
         return db;
     }
 
+    /**
+     * Sets the gui style for both the user and Luna.
+     */
     public void gui() {
         dialog.setStyle("-fx-padding: 15.0;"
                 + "-fx-border-width: 0");
 
+        dialog.setBackground(new Background(new BackgroundFill(Color.POWDERBLUE, new CornerRadii(15.0),
+                Insets.EMPTY)));
+    }
+
+    /**
+     * Sets the gui style for error messages that Luna wants to display.
+     */
+    public void lunaGui() {
         if (dialog.getText().contains(Ui.invalidTaskFormatBasicExceptionMessage())
                 || dialog.getText().contains(Ui.invalidKeywordExceptionMessage())
                 || dialog.getText().contains(Ui.invalidNumberExceptionMessage())) {
             dialog.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(15.0),
-                Insets.EMPTY)));
-        } else {
-            dialog.setBackground(new Background(new BackgroundFill(Color.POWDERBLUE, new CornerRadii(15.0),
                     Insets.EMPTY)));
         }
     }
 
+    /**
+     * Aligns the user dialog box.
+     */
     public void setUserAlignment() {
         this.setAlignment(Pos.CENTER_RIGHT);
     }
 
+    /**
+     * Aligns Luna's dialog box.
+     */
     public void setLunaAlignment() {
-        dialog.setAlignment(Pos.CENTER_LEFT);
+        this.setAlignment(Pos.CENTER_LEFT);
     }
 }

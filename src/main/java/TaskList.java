@@ -45,6 +45,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Parses Tasks entered by the user.
+     * @param task The type of task.
+     * @param description The description of the task.
+     * @param date The date of the task.
+     * @param time The time of the task.
+     * @param tag The tag of the task.
+     * @return Success/Failure of processing the task.
+     */
     static String processTaskOutput(String task, String description, LocalDate date, LocalTime time, String tag) {
         Task toAdd;
         switch (task) {
