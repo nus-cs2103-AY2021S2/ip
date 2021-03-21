@@ -44,7 +44,8 @@ public class Parser {
      * public method that allows other controller to create new Parser
      * to parse content with <code>parseWithFormatCHeck</code>, if any exception is caught,
      * error details will be used for creating the Parser instead of parsed content of user's provided input
-     * @param in String to be parsed
+     *
+     * @param in    String to be parsed
      * @param tasks current status of TaskList
      * @return a new Parser
      */
@@ -59,7 +60,8 @@ public class Parser {
     /**
      * parse the string with different format check and throw exception accordingly
      * if format is valid, set the value accordingly and call the private constructor of<code>Parser</code>
-     * @param in String to be parsed
+     *
+     * @param in    String to be parsed
      * @param tasks current status of TaskList
      * @return a new Parser created with private constructor
      * @throws DukeException when there are invalid index, invalid or wrong argumennts or unknown command
@@ -104,12 +106,16 @@ public class Parser {
             break;
         case "tag":
             tempCommand = result[0];
-            // first check if the argument is an integer to be used as index, then check if it falls within valid range
-            if (!Helper.isInteger(result[1])) {
+            // first check if the argument is an integer to be used as index and has enough arguments,
+            // then check if it falls within valid range
+            // finally check if the tag includes a # also
+            if (!Helper.isInteger(result[1]) || result.length != 3) {
                 throw new DukeException.NoArgumentOrWrongFormatException(result[0]);
             } else if (!ListController.checkValidIndexForListOperation
                     (Command.valueOf(result[0].toUpperCase()), result[1], tasks)) {
                 throw new DukeException.IndexOutOfListSizeException();
+            } else if (result[2].contains("#")) {
+                throw new DukeException.HashTagInTagArgumentException();
             } else {
                 tempArg = result[1];
             }
@@ -129,8 +135,9 @@ public class Parser {
 
     /**
      * Used for checking deadline and event's format: <code>/by </code> and <code>/at </code>
+     *
      * @param input String used to check if /by or /at exists and match <code>type</code>
-     * @param type <code>deadline</code> or <code>event</code>
+     * @param type  <code>deadline</code> or <code>event</code>
      * @return a boolean showing it fulfills the format or not
      * @throws DukeException.NoArgumentOrWrongFormatException informs user invalid format
      */
@@ -151,6 +158,7 @@ public class Parser {
 
     /**
      * Getter method
+     *
      * @return the private variable command
      */
     public Command getCommand() {
@@ -159,6 +167,7 @@ public class Parser {
 
     /**
      * Getter method
+     *
      * @return the private variable argument
      */
     public String getArgument() {
@@ -167,6 +176,7 @@ public class Parser {
 
     /**
      * Getter method
+     *
      * @return the private variable optionalArgument
      */
     public String getOptionalArgument() {

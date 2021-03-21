@@ -84,6 +84,15 @@ public abstract class ListItem {
         return tagList.stream().map((x) -> " #" + x).collect(Collectors.joining());
     }
 
+
+    /**
+     * Print all the tags associated using stream specifically for IO
+     * @return the string concatenated all the tags
+     */
+    public String printTagsForIO() {
+        return tagList.stream().map((x) -> "#" + x).collect(Collectors.joining());
+    }
+
     /**
      * Print the date related to the task if applicable
      * @return

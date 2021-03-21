@@ -18,7 +18,7 @@ public class ModelForTest {
     static final ListItem[] TASK_ARRAY_FOR_TEST = {TASK_FOR_TEST};
     static final TaskList TASKLIST_NOT_EMPTY = new TaskList(Arrays.asList(TASK_ARRAY_FOR_TEST));
     static final UiController UI_CONTROLLER_FOR_TEST = new UiController(DUKE_FOR_TEST, TASKLIST_NOT_EMPTY);
-    static final ListController LIST_CONTROLLER_FOR_TEST = new ListController(TASKLIST_NOT_EMPTY);
+    static final ListController LIST_CONTROLLER_FOR_TEST = new ListController(DUKE_FOR_TEST, TASKLIST_NOT_EMPTY);
 
     static final Parser PARSER_DEADLINE =
             Parser.createParser("deadline return book /by Sunday", TASKLIST_NOT_EMPTY);

@@ -3,6 +3,7 @@ package duke.model.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Optional;
 
 import duke.model.exception.DukeException;
@@ -36,6 +37,19 @@ public class Deadline extends ListItem {
      */
     public Deadline(String task, String inputDate, boolean isDone) {
         super(task, isDone);
+        this.date = inputDate;
+        this.parsedDate = Optional.ofNullable(parseDate(inputDate));
+    }
+
+    /**
+     * the overloaded constructor that allows taking both the status of the task and tags (for loading from file)
+     * @param task      takes in string and pass to parent's constructor as the task name
+     * @param inputDate date entered as the deadline
+     * @param isDone    the status of the task
+     * @param inputTagList the list containing all the tags
+     */
+    public Deadline(String task, String inputDate, boolean isDone, List<String> inputTagList) {
+        super(task, isDone, inputTagList);
         this.date = inputDate;
         this.parsedDate = Optional.ofNullable(parseDate(inputDate));
     }

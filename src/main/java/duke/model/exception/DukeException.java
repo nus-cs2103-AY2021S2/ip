@@ -32,6 +32,14 @@ public abstract class DukeException extends Exception {
         }
     }
 
+    public static class HashTagInTagArgumentException extends DukeException {
+        public static final String HASH_TAG_MSG = "OOPS!!! Please do not include # within the tag name you provided! "
+                + "As it is not needed!";
+        public HashTagInTagArgumentException() {
+            super(HASH_TAG_MSG);
+        }
+    }
+
     public static class InputOutputErrorException extends DukeException {
         public InputOutputErrorException() {
             super("IO Error!");

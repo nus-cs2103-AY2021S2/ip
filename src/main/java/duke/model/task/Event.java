@@ -1,5 +1,7 @@
 package duke.model.task;
 
+import java.util.List;
+
 public class Event extends ListItem {
     private final String date;
 
@@ -21,6 +23,17 @@ public class Event extends ListItem {
      */
     public Event(String task, String inputDate, boolean isDone) {
         super(task, isDone);
+        this.date = inputDate;
+    }
+
+    /**
+     * the overloaded constructor for Event specifically for loading from file
+     * @param task takes in string and pass to parent's constructor
+     * @param inputDate takes in user's input date
+     * @param isDone the status of the task
+     */
+    public Event(String task, String inputDate, boolean isDone, List<String> inputTagList) {
+        super(task, isDone, inputTagList);
         this.date = inputDate;
     }
 

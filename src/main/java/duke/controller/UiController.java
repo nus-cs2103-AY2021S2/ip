@@ -3,6 +3,7 @@ package duke.controller;
 import java.util.Optional;
 
 import duke.Duke;
+import duke.model.exception.DukeException;
 import duke.model.task.ListItem;
 import duke.model.task.TaskList;
 import duke.view.Window;
@@ -45,7 +46,13 @@ public class UiController {
     public void updateUiDialog(String input, Window window) {
         Parser parserForNewInput = Parser.createParser(input, tasks);
         Optional<? extends ListItem> optionalTask = duke.getListController().operateListByCommand(parserForNewInput);
-        String textToUse = this.generateTextForUpdate(parserForNewInput, optionalTask);
+        String textToUse = null;
+        try {
+            duke.getStorageController().writeNewListToLocal();
+            textToUse = this.generateTextForUpdate(parserForNewInput, optionalTask);
+        } catch (DukeException.InputOutputErrorException e) {
+            textToUse = e.getMessage();
+        }
         window.updateDialogContainer(input, textToUse);
     }
 

@@ -3,6 +3,7 @@ package duke.controller;
 import java.util.Arrays;
 import java.util.Optional;
 
+import duke.Duke;
 import duke.model.Command;
 import duke.model.task.Deadline;
 import duke.model.task.Event;
@@ -16,23 +17,26 @@ import duke.model.task.Todo;
  * <code>tasks</code> stores the TaskList that Duke is current using in order to perform action
  */
 public class ListController {
+    private Duke duke;
     private TaskList tasks;
 
     /**
      * standard constructor that takes in Duke's TaskList and store for later use
      * @param list TaskList from Duke
      */
-    public ListController(TaskList list) {
+    public ListController(Duke duke, TaskList list) {
         this.tasks = list;
+        this.duke = duke;
     }
 
     /**
      * Check if the command that will perform operations on TaskList has a valid index
-     * @param command take in for checking if the current command requires a valid index first
-     *                (e.g. LIST or FIND would not require)
+     *
+     * @param command  take in for checking if the current command requires a valid index first
+     *                 (e.g. LIST or FIND would not require)
      * @param argument the argument that user provides - if the command is one of the command that requires valid index,
      *                 then this should be an integer in a string form for Integer.parseInt
-     * @param list TaskList for checking the size to know if index is valid
+     * @param list     TaskList for checking the size to know if index is valid
      * @return a boolean
      */
     public static boolean checkValidIndexForListOperation(Command command, String argument, TaskList list) {
@@ -55,6 +59,7 @@ public class ListController {
 
     /**
      * Take in a Parser and operate on Duke's TaskList accordingly depending on Command
+     *
      * @param inputParser - used for extracting argument, optionalArgument and command to decide what operation to be
      *                    performed on TaskList
      * @return an optional ListItem (Todo/Event/Deadline) for showing user with UIController
@@ -97,6 +102,18 @@ public class ListController {
             }
         } else {
             return Optional.empty();
+        }
+    }
+
+    /**
+     * print the current list as string for saving to local file
+     * @return a concatenated string
+     */
+    public String printListAsStringForIO() {
+        if (tasks.getListItems().size() == 0) {
+            return "";
+        } else {
+            return tasks.toString();
         }
     }
 }

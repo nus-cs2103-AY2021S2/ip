@@ -114,6 +114,8 @@ Nice! I've marked this task as done:
 ### <a name="tag">`tag` - Tagging a task</a>
 Creates a tag and associate the tag with the task
 
+- only "1 word" tag is allowed at once, e.g. `tag 1 two worded tag` does not work
+
 Format: `tag INDEX TAG`
 ```
 tag 1 java
@@ -124,7 +126,8 @@ Nice! I've marked task 1 with the tag: #java
 ### <a name="find">`find` - Finding a task by name or tag</a>
 Finds a task which contains the given word in the name or associate with the tag
 
-(Find by tag requires exact tag name, i.e. the item `[T][] submit ip jar #assignment` 
+(Find by tag requires exact tag name, and cannot find by tag and task name at the same time 
+i.e. the item `[T][] submit ip jar #assignment` 
 would require `find #assignment` but `find #assign` or `find smth #assign` won't work)
 
 Format: `find KEYWORD|#TAG`

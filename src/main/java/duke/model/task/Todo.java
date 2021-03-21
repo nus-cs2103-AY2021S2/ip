@@ -1,5 +1,7 @@
 package duke.model.task;
 
+import java.util.List;
+
 /**
  * Represents the Todo type task that does not have a due date
  */
@@ -18,6 +20,14 @@ public class Todo extends ListItem {
     public Todo(String task, boolean isDone) {
         super(task, isDone);
     }
+
+    /**
+     * the overloaded constructor that allows taking both the status of the task and the tag list
+     */
+    public Todo(String task, boolean isDone, List<String> inputTagList) {
+        super(task, isDone, inputTagList);
+    }
+
 
     @Override
     public ListItem markAsDone() {

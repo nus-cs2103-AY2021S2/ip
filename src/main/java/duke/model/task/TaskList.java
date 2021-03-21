@@ -100,8 +100,10 @@ public class TaskList {
         String initStr = "";
         for (int i = 0; i < this.listItems.size(); i++) {
             ListItem tempItem = this.listItems.get(i);
-            initStr = initStr + (tempItem.getClass().getName().charAt(0)
-                    + "|" + tempItem.isDone() + "|" + tempItem.getTask() + tempItem.getDate() + "\n");
+            System.out.println(tempItem.getClass().getSimpleName());
+            initStr = initStr + (tempItem.getClass().getSimpleName().charAt(0)
+                    + "|" + tempItem.isDone() + "|" + tempItem.getTask() + tempItem.getDate() + "|"
+                    + tempItem.printTagsForIO() + "\n");
         }
         return initStr;
     }
