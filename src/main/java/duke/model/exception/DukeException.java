@@ -10,14 +10,16 @@ public abstract class DukeException extends Exception {
     }
 
     public static class NoArgumentOrWrongFormatException extends DukeException {
+        public static final String WRONG_FORMAT_MSG = "OOPS!!! The argument of the command %s cannot be empty or is in wrong format.";
         public NoArgumentOrWrongFormatException(String itemClass) {
-            super("OOPS!!! The argument of the command " + itemClass + " cannot be empty or is in wrong format.");
+            super(String.format(WRONG_FORMAT_MSG, itemClass));
         }
     }
 
     public static class UnknownCommandException extends DukeException {
+        public static final String UNKNOWN_COMMAND_MSG = "OOPS!!! I'm sorry, but I don't know what that means :-(";
         public UnknownCommandException() {
-            super("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            super(UNKNOWN_COMMAND_MSG);
         }
     }
 

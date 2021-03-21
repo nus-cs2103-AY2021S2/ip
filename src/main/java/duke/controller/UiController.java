@@ -13,14 +13,15 @@ import duke.view.Window;
  */
 public class UiController {
     // list of predefined string to show users
-    private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
-    private static final String MESSAGE_DELETE = "Noted. I've removed this task: %s\nNow you have %d tasks in the list";
-    private static final String MESSAGE_DONE = "Nice! I've marked this task as done: \n";
-    private static final String MESSAGE_FIND = "Here are the tasks in your list that fulfills your requirement:";
-    private static final String MESSAGE_LIST = "Here are the tasks in your list:";
-    private static final String MESSAGE_LIST_IF_EMPTY = "You currently do not have anything in the list!";
-    private static final String MESSAGE_TASK_NOT_FOUND = "Error, task cannot be found";
-    private static final String MESSAGE_TAG = "Nice! I've marked task %s with the tag: \n#%s";
+    public static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
+    public static final String MESSAGE_DELETE = "Noted. I've removed this task: %s\nNow you have %d tasks in the list";
+    public static final String MESSAGE_DONE = "Nice! I've marked this task as done: \n";
+    public static final String MESSAGE_FIND = "Here are the tasks in your list that fulfills your requirement:";
+    public static final String MESSAGE_LIST = "Here are the tasks in your list:";
+    public static final String MESSAGE_LIST_IF_EMPTY = "You currently do not have anything in the list!";
+    public static final String MESSAGE_TASK_NOT_FOUND = "Error, task cannot be found";
+    public static final String MESSAGE_TAG = "Nice! I've marked task %s with the tag: \n#%s";
+    public static final String MESSAGE_PREDEFINED_FOR_TASKS = "Got it. I've added this task: \n%s\nNow you have %d tasks in the list";
 
     private TaskList tasks;
     private Duke duke;
@@ -31,7 +32,7 @@ public class UiController {
      */
     public UiController(Duke inputDuke, TaskList inputTaskList) {
         this.duke = inputDuke;
-        this.tasks = inputDuke.getTasks();
+        this.tasks = inputTaskList;
     }
 
     /**
@@ -100,7 +101,6 @@ public class UiController {
      * @return the predefined string
      */
     public String printPredefinedMessage(String typeOfTask, TaskList inputList) {
-        return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have "
-                + inputList.getListItems().size() + " tasks in the list";
+        return String.format(MESSAGE_PREDEFINED_FOR_TASKS, typeOfTask, inputList.getListItems().size());
     }
 }
