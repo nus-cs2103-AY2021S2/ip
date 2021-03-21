@@ -10,7 +10,8 @@ public abstract class DukeException extends Exception {
     }
 
     public static class NoArgumentOrWrongFormatException extends DukeException {
-        public static final String WRONG_FORMAT_MSG = "OOPS!!! The argument of the command %s cannot be empty or is in wrong format.";
+        public static final String WRONG_FORMAT_MSG =
+                "OOPS!!! The argument of the command %s cannot be empty or is in wrong format.";
         public NoArgumentOrWrongFormatException(String itemClass) {
             super(String.format(WRONG_FORMAT_MSG, itemClass));
         }

@@ -21,7 +21,8 @@ public class UiController {
     public static final String MESSAGE_LIST_IF_EMPTY = "You currently do not have anything in the list!";
     public static final String MESSAGE_TASK_NOT_FOUND = "Error, task cannot be found";
     public static final String MESSAGE_TAG = "Nice! I've marked task %s with the tag: \n#%s";
-    public static final String MESSAGE_PREDEFINED_FOR_TASKS = "Got it. I've added this task: \n%s\nNow you have %d tasks in the list";
+    public static final String MESSAGE_PREDEFINED_FOR_TASKS = "Got it. I've added this task: "
+            + "\n%s\nNow you have %d tasks in the list";
 
     private TaskList tasks;
     private Duke duke;

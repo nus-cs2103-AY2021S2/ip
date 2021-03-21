@@ -2,11 +2,10 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.controller.Parser;
-import duke.controller.UiController;
-import duke.model.Command;
-import duke.model.exception.DukeException;
 import org.junit.jupiter.api.Test;
+
+import duke.controller.UiController;
+import duke.model.exception.DukeException;
 
 public class UiControllerTest {
     @Test
@@ -28,7 +27,8 @@ public class UiControllerTest {
                 ModelForTest.UI_CONTROLLER_FOR_TEST.generateTextForUpdate
                 (ModelForTest.PARSER_LIST, ModelForTest.PARSER_LIST_TASK));
         assertEquals(String.format(UiController.MESSAGE_PREDEFINED_FOR_TASKS,
-                ModelForTest.PARSER_TODO_TASK.get().toString(), 1), ModelForTest.UI_CONTROLLER_FOR_TEST.generateTextForUpdate
+                ModelForTest.PARSER_TODO_TASK.get().toString(), 1),
+                ModelForTest.UI_CONTROLLER_FOR_TEST.generateTextForUpdate
                 (ModelForTest.PARSER_TODO, ModelForTest.PARSER_TODO_TASK));
     }
 }
