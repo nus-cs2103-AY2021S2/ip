@@ -1,4 +1,4 @@
-# Duke project template
+# Individual project template
 
 This is a project template for a greenfield Java project. It's named after the Disney character _Olaf_.
 
