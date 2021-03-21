@@ -1,26 +1,23 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UiTest {
-    private static final String SPACE = "     ";
-    private static final String LINE = "\n     <<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>\n";
+import org.junit.jupiter.api.Test;
 
+public class UiTest {
     @Test
-    public void CorrectTaskFormat_TypesOfTasks_FormatOfTask() {
+    public void correctTaskFormat_typesOfTasks_formatOfTask() {
         assertEquals("todo *description of task*", Ui.correctTaskFormat("todo"));
     }
 
     @Test
-    public void InvalidNumberExceptionMessage_CorrectMessageOutput() {
-        assertEquals(LINE + SPACE + "ERROR! D: Please give a number greater than zero and smaller than the total number of tasks" + LINE,
+    public void invalidNumberExceptionMessage_correctMessageOutput() {
+        assertEquals("ERROR! D: Give a number greater than zero and smaller than the total number of tasks.\n",
                 Ui.invalidNumberExceptionMessage());
     }
 
     @Test
-    public void InvalidKeywordExceptionMessage_CorrectMessageOutput() {
-        assertEquals(LINE + SPACE + "The supported keywords are: todo, deadline, event, done, list, delete, bye only." + LINE,
-                Ui.invalidKeywordExceptionMessage());
+    public void invalidKeywordExceptionMessage_correctMessageOutput() {
+        assertEquals("ERROR! D: The supported keywords are: todo, deadline, event, done, list, delete, bye, tag only."
+                + "\n", Ui.invalidKeywordExceptionMessage());
     }
 
 }

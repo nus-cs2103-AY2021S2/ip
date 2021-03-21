@@ -160,7 +160,7 @@ public class Parser {
 
     static String processTag() throws InvalidTaskFormatException, InvalidNumberException {
         checkSplLength(splitArray, 2, "tag");
-        String[] splitIndexAndDescription = splitArray[1].split(" ");
+        String[] splitIndexAndDescription = splitArray[1].split(" ", 2);
         checkSplLength(splitIndexAndDescription, 2, "tag");
         isInt(splitIndexAndDescription[0]);
         int index = Integer.parseInt(splitIndexAndDescription[0]);

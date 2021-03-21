@@ -16,7 +16,7 @@ public class Ui {
      * @return The error message string.
      */
     public static String invalidNumberExceptionMessage() {
-        return "ERROR! D: Give a number greater than zero and smaller than the total number of tasks\n";
+        return "ERROR! D: Give a number greater than zero and smaller than the total number of tasks.\n";
     }
 
     /**

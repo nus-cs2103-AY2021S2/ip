@@ -19,39 +19,42 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Luna luna;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user2.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/luna.jpg"));
+    private Image lunaImage = new Image(this.getClass().getResourceAsStream("/images/luna.jpg"));
 
+    /**
+     * Initialises fxml.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         initializeGreeting();
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setLuna(Luna l) {
+        luna = l;
     }
 
     /**
      * Initialises a greeting dialogBox.
      */
     public void initializeGreeting() {
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.greet(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getLunaDialog(Ui.greet(), lunaImage));
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Luna's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = luna.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getLunaDialog(response, lunaImage)
         );
 
         if (response.equals(Ui.outputMessageBye())) {

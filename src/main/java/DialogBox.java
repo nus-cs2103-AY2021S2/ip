@@ -64,7 +64,7 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getLunaDialog(String text, Image img) {
         var db = new DialogBox(text, img, true);
         db.flip();
         db.setLunaAlignment();
@@ -98,13 +98,13 @@ public class DialogBox extends HBox {
      * Aligns the user dialog box.
      */
     public void setUserAlignment() {
-        this.setAlignment(Pos.CENTER_RIGHT);
+        this.setAlignment(Pos.TOP_RIGHT);
     }
 
     /**
      * Aligns Luna's dialog box.
      */
     public void setLunaAlignment() {
-        this.setAlignment(Pos.CENTER_LEFT);
+        this.setAlignment(Pos.TOP_LEFT);
     }
 }
