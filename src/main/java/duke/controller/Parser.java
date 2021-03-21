@@ -1,5 +1,6 @@
 package duke.controller;
 
+import duke.Duke;
 import duke.Helper;
 import duke.model.Command;
 import duke.model.exception.DukeException;
@@ -8,6 +9,8 @@ import duke.model.task.Event;
 import duke.model.task.ListItem;
 import duke.model.task.TaskList;
 import duke.model.task.Todo;
+
+import java.util.List;
 
 /**
  * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,
@@ -28,7 +31,7 @@ public class Parser {
      */
     public Parser() {
         this.command = Command.ERROR;
-        this.optionalArgument = null;
+        this.optionalArgument = "";
         this.argument = "";
     }
 
@@ -38,7 +41,7 @@ public class Parser {
      * @throws DukeException.UnknownCommandException if unknown command entered
      * @throws DukeException.NoDescriptionException  if required no. of arg is not met
      */
-    private Parser(String in) {
+    private Parser(String in, TaskList tasks) {
         String tempDate = null;
         String tempCommand = "";
         String[] result = in.split("\\s");
@@ -62,6 +65,8 @@ public class Parser {
                     tempArg = indexOfItemAsString;
                     if (!Helper.isInteger(indexOfItemAsString)) {
                         throw new DukeException.NoDescriptionException(result[0]);
+                    } else if (ListController.checkValidIndexForListOperation(this, tasks)) {
+                        throw new DukeException.IndexOutOfListSizeException();
                     } else {
                         tempCommand = result[0];
                     }
@@ -103,17 +108,24 @@ public class Parser {
             tempCommand = "error";
             tempArg = ex.getMessage();
         }
-        this.command = Command.valueOf(tempCommand.toUpperCase());;
+        this.command = Command.valueOf(tempCommand.toUpperCase());
         this.argument = tempArg;
         this.optionalArgument = tempDate;
     }
 
-    public static Parser createParser(String in) {
-        return new Parser(in);
+    private Parser(Command command, String argument, String optionalArgument) {
+        this.command = command;
+        this.optionalArgument = optionalArgument;
+        this.argument = argument;
+    }
+
+    public static Parser createParser(String in, TaskList tasks) {
+        return new Parser(in, tasks);
     }
 
     /**
      * Getter method
+     *
      * @return the private variable command
      */
     public Command getCommand() {

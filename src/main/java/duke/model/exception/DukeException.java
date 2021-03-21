@@ -24,9 +24,10 @@ public abstract class DukeException extends Exception {
         }
     }
 
-    public static class TaskNotExistException extends DukeException {
-        public TaskNotExistException() {
-            super("Task failed to be created! Please try again");
+    public static class IndexOutOfListSizeException extends DukeException {
+        public IndexOutOfListSizeException() {
+            super("OOPS!!! Input index is either smaller than 1 or out of the task list's size! " +
+                    "Please try again with a different number within the range!");
         }
     }
 }

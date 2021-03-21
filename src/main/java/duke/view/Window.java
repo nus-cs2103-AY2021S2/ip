@@ -33,8 +33,6 @@ public class Window extends AnchorPane {
 
     private TaskList tasks;
 
-    private boolean isFinished;
-
     /**
      * initialise new <code>tasklist</code> and set the <code>scrollPane</code> property to work properly for GUI
      */
@@ -58,13 +56,15 @@ public class Window extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input, tasks);
+        duke.getUiController().updateUIDialog(input, this);
+    }
+
+    public void updateDialogContainer(String input, String response) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-
         if (response == "Bye. Hope to see you again soon!") {
             this.userInput.setVisible(false);
             this.sendButton.setVisible(false);

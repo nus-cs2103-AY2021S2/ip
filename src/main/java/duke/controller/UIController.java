@@ -2,7 +2,6 @@ package duke.controller;
 
 import duke.Duke;
 import duke.model.Command;
-import duke.model.exception.DukeException;
 import duke.model.task.*;
 import duke.view.Window;
 
@@ -18,9 +17,8 @@ public class UIController {
     }
 
     public void updateUIDialog(String input, Window window) {
-        Parser parserForNewInput = Parser.createParser(input);
-        Optional<? extends ListItem> optionalTask =
-                duke.getListController().operateListByCommand(parserForNewInput);
+        Parser parserForNewInput = Parser.createParser(input, tasks);
+        Optional<? extends ListItem> optionalTask = duke.getListController().operateListByCommand(parserForNewInput);
         String textToUse = this.generateTextForUpdate(parserForNewInput, optionalTask);
         window.updateDialogContainer(input, textToUse);
     }
@@ -36,17 +34,17 @@ public class UIController {
                 }
                 return initStr;
             case DONE:
-                return "Nice! I've marked this task as done: \n"
-                        + task.map(t -> t.toString());
+                return task.map(x -> "Nice! I've marked this task as done: \n" + x.toString()).
+                        orElse("Error, task cannot be found");
             case EVENT:
             case DEADLINE:
             case TODO:
-                String temp = task.map(Object::toString).get();
+                String temp = task.map(ListItem::toString).get();
                 return printPredefinedMessage(temp, tasks);
             case ERROR:
                 return inputParser.getArgument();
             case DELETE:
-                return "Noted. I've removed this task: " + task.map(t -> t.toString())
+                return "Noted. I've removed this task: " + task.map(ListItem::toString).get()
                         + "\nNow you have " + tasks.getListItems().size() + " tasks in the list";
             case FIND:
                 String matchedStr = "Here are the tasks in your list that fulfills your requirement:";
