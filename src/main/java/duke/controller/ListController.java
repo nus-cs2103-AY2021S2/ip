@@ -8,17 +8,17 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public class ListController {
-    private TaskList list;
+    private TaskList tasks;
 
     public ListController(TaskList list) {
-        this.list = list;
+        this.tasks = list;
     }
 
-    public static boolean checkValidIndexForListOperation(Parser inputParser, TaskList list) {
+    public static boolean checkValidIndexForListOperation(Command command, String argument, TaskList list) {
         Command[] commandList = {Command.DONE, Command.DELETE, Command.TAG};
-        boolean commandRequiresIndexCheck = Arrays.asList(commandList).contains(inputParser.getCommand());
+        boolean commandRequiresIndexCheck = Arrays.asList(commandList).contains(command);
         if (commandRequiresIndexCheck) {
-            int index = Integer.parseInt(inputParser.getArgument());
+            int index = Integer.parseInt(argument);
             int listSize = list.getListItems().size();
             if (index <= listSize) {
                 return true;
@@ -33,34 +33,34 @@ public class ListController {
         String argument = inputParser.getArgument();
         String optionalArgument = inputParser.getOptionalArgument();
         Command command = inputParser.getCommand();
-        boolean isValidIndex = this.checkValidIndexForListOperation(inputParser, this.list);
+        boolean isValidIndex = checkValidIndexForListOperation(command, argument, this.tasks);
         if (isValidIndex) {
             switch (command) {
                 case DONE:
                     index = Integer.parseInt(argument);
-                    list.markItemAsDone(index);
-                    return Optional.of(list.getListItems().get(index - 1));
+                    tasks.markItemAsDone(index);
+                    return Optional.of(tasks.getListItems().get(index - 1));
                 case EVENT:
                     Event newEvent = new Event(argument, optionalArgument);
-                    list.addCommandMutable(newEvent);
+                    tasks.addCommandMutable(newEvent);
                     return Optional.of(newEvent);
                 case DEADLINE:
                     Deadline newDeadline = new Deadline(argument, optionalArgument);
-                    list.addCommandMutable(newDeadline);
+                    tasks.addCommandMutable(newDeadline);
                     return Optional.of(newDeadline);
                 case TODO:
                     Todo newTodo = new Todo(argument);
-                    list.addCommandMutable(newTodo);
+                    tasks.addCommandMutable(newTodo);
                     return Optional.of(newTodo);
                 case DELETE:
                     index = Integer.parseInt(argument);
-                    ListItem deletedItem = list.getListItems().get(index - 1);
-                    list.deleteCommandMutable(index);
+                    ListItem deletedItem = tasks.getListItems().get(index - 1);
+                    tasks.deleteCommandMutable(index);
                     return Optional.of(deletedItem);
                 case TAG:
                     index = Integer.parseInt(argument);
-                    list.updateItemTag(index, optionalArgument);
-                    return Optional.of(list.getListItems().get(index - 1));
+                    tasks.updateItemTag(index, optionalArgument);
+                    return Optional.of(tasks.getListItems().get(index - 1));
                 default:
                     return Optional.empty();
             }

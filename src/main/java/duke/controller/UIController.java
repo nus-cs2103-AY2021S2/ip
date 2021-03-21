@@ -1,8 +1,8 @@
 package duke.controller;
 
 import duke.Duke;
-import duke.model.Command;
-import duke.model.task.*;
+import duke.model.task.ListItem;
+import duke.model.task.TaskList;
 import duke.view.Window;
 
 import java.util.Optional;
@@ -13,7 +13,7 @@ public class UIController {
 
     public UIController(Duke inputDuke, TaskList inputTaskList) {
         this.duke = inputDuke;
-        this.tasks = inputTaskList;
+        this.tasks = inputDuke.getTasks();
     }
 
     public void updateUIDialog(String input, Window window) {

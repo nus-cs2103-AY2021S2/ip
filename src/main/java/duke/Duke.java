@@ -31,6 +31,11 @@ public class Duke {
         return listController;
     }
 
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+
     /**
      * Initiate the GUI interface
      */
