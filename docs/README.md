@@ -123,6 +123,9 @@ Nice! I've marked task 1 with the tag: #java
 ### <a name="find">`find` - Finding a task by name or tag</a>
 Finds a task which contains the given word in the name or associate with the tag
 
+(Find by tag requires exact tag name, i.e. the item `[T][] submit ip jar #assignment` 
+would require `find #assignment` but `find #assign` won't work)
+
 Format: `find KEYWORD|#TAG`
 ```
 find #java

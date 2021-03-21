@@ -56,7 +56,7 @@ public class Window extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        duke.getUiController().updateUIDialog(input, this);
+        duke.getUiController().updateUiDialog(input, this);
     }
 
     public void updateDialogContainer(String input, String response) {

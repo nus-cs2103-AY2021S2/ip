@@ -2,15 +2,15 @@ package duke;
 
 import duke.controller.ListController;
 import duke.controller.Parser;
-import duke.controller.UIController;
-import duke.view.Gui;
+import duke.controller.UiController;
 import duke.model.task.TaskList;
+import duke.view.Gui;
 import javafx.application.Application;
 
 public class Duke {
     private TaskList tasks;
     private Parser in;
-    private final UIController uiController;
+    private final UiController uiController;
     private final ListController listController;
 
     /**
@@ -19,11 +19,11 @@ public class Duke {
     public Duke() {
         in = new Parser();
         tasks = new TaskList();
-        uiController = new UIController(this, tasks);
+        uiController = new UiController(this, tasks);
         listController = new ListController(tasks);
     }
 
-    public UIController getUiController() {
+    public UiController getUiController() {
         return uiController;
     }
 

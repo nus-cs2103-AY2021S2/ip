@@ -1,16 +1,9 @@
 package duke.controller;
 
-import duke.Duke;
 import duke.Helper;
 import duke.model.Command;
 import duke.model.exception.DukeException;
-import duke.model.task.Deadline;
-import duke.model.task.Event;
-import duke.model.task.ListItem;
 import duke.model.task.TaskList;
-import duke.model.task.Todo;
-
-import java.util.List;
 
 /**
  * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,
@@ -61,67 +54,69 @@ public class Parser {
         String[] result = in.split("\\s");
         String tempArg = "";
         switch (result[0].toLowerCase()) {
-            case "find":
-            case "todo": // both only need a name in a form of string therefore grouped
+        case "find":
+        case "todo": // both only need a name in a form of string therefore grouped
+            tempCommand = result[0];
+            if (result.length <= 1) {
+                throw new DukeException.NoDescriptionException(result[0]);
+            } else {
+                tempArg = result[1];
+            }
+            break;
+        case "done":
+        case "delete": // both requires an index of the item
+            String indexOfItemAsString = in.substring(in.indexOf(" ") + 1);
+            tempArg = indexOfItemAsString;
+            if (!Helper.isInteger(indexOfItemAsString)) {
+                throw new DukeException.NoDescriptionException(result[0]);
+            } else if (ListController.checkValidIndexForListOperation(Command.valueOf(result[0]), tempArg, tasks)) {
+                throw new DukeException.IndexOutOfListSizeException();
+            } else {
                 tempCommand = result[0];
-                if (result.length <= 1) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else {
-                    tempArg = result[1];
-                }
-                break;
-            case "done":
-            case "delete": // both requires an index of the item
-                String indexOfItemAsString = in.substring(in.indexOf(" ") + 1);
-                tempArg = indexOfItemAsString;
-                if (!Helper.isInteger(indexOfItemAsString)) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else if (ListController.checkValidIndexForListOperation(Command.valueOf(result[0]), tempArg, tasks)) {
-                    throw new DukeException.IndexOutOfListSizeException();
-                } else {
-                    tempCommand = result[0];
-                }
-                break;
-            case "deadline":
-            case "event": // both requires an extra string (date)
-                checkDeadlineAndEventFormat(in, result[0]);
-                int max = Math.max(in.indexOf("/by "), in.indexOf("/at "));
-                String firstParam = in.substring(max);
-                tempCommand = result[0];
-                tempDate = firstParam.substring(4);
-                tempArg = in.substring(in.indexOf(" "), max - 1);
-                break;
-            case "tag":
-                tempCommand = result[0];
-                if (!Helper.isInteger(result[1])) {
-                    throw new DukeException.NoDescriptionException(result[0]);
-                } else if (ListController.checkValidIndexForListOperation(Command.valueOf(result[0]), result[1], tasks)) {
-                    throw new DukeException.IndexOutOfListSizeException();
-                } else {
-                    tempArg = result[1];
-                }
-                tempDate = result[2];
-                break;
-            default:
-                // try parsing the command first by finding the equivalent in Enum PredefinedCommand,
-                // else throw exception
-                try {
-                    tempCommand = String.valueOf(Command.valueOf(result[0].toUpperCase())).toLowerCase();
-                } catch (IllegalArgumentException ex) {
-                    throw new DukeException.UnknownCommandException();
-                }
-                break;
+            }
+            break;
+        case "deadline":
+        case "event": // both requires an extra string (date)
+            checkDeadlineAndEventFormat(in, result[0]);
+            int max = Math.max(in.indexOf("/by "), in.indexOf("/at "));
+            String firstParam = in.substring(max);
+            tempCommand = result[0];
+            tempDate = firstParam.substring(4);
+            tempArg = in.substring(in.indexOf(" "), max - 1);
+            break;
+        case "tag":
+            tempCommand = result[0];
+            if (!Helper.isInteger(result[1])) {
+                throw new DukeException.NoDescriptionException(result[0]);
+            } else if (ListController.checkValidIndexForListOperation(Command.valueOf(result[0]), result[1], tasks)) {
+                throw new DukeException.IndexOutOfListSizeException();
+            } else {
+                tempArg = result[1];
+            }
+            tempDate = result[2];
+            break;
+        default:
+            // try parsing the command first by finding the equivalent in Enum PredefinedCommand,
+            // else throw exception
+            try {
+                tempCommand = String.valueOf(Command.valueOf(result[0].toUpperCase())).toLowerCase();
+            } catch (IllegalArgumentException ex) {
+                throw new DukeException.UnknownCommandException();
+            }
+            break;
         }
         return new Parser(Command.valueOf(tempCommand.toUpperCase()), tempArg, tempDate);
     }
 
-    private static boolean checkDeadlineAndEventFormat(String firstParam, String result) throws DukeException.NoDescriptionException {
+    private static boolean checkDeadlineAndEventFormat(String firstParam, String result)
+            throws DukeException.NoDescriptionException {
         int dateIndex = Math.max(firstParam.indexOf("/by "), firstParam.indexOf("/at "));
         if (dateIndex == -1) {
             throw new DukeException.NoDescriptionException(result);
         } else {
             String prefix = firstParam.substring(dateIndex, dateIndex + 4);
-            if ((prefix.equals("/at ") && result.equals("deadline")) || (prefix.equals("/by ") && result.equals("event"))) {
+            if ((prefix.equals("/at ") && result.equals("deadline"))
+                    || (prefix.equals("/by ") && result.equals("event"))) {
                 throw new DukeException.NoDescriptionException(result);
             }
         }
