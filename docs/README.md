@@ -2,10 +2,6 @@
 # User Guide
 Duke is an interactive chatbot that stores your task
 
-## A Screenshot of Duke 
-
-![image](ui.png)
-
 ## Features
 `Below are the basic features of Duke.`
 
