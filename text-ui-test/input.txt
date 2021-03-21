@@ -1,0 +1,16 @@
+todo borrow book
+todo read book
+deadline return book /by 2021-02-10
+event project meeting /at 2021-05-12
+list
+done 2
+done 4
+list
+todo
+done 7
+delete 7
+deadline washing
+event cleaning
+date 2
+date 4
+bye

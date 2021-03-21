@@ -1,0 +1,7 @@
+T | 1 | borrow book
+T | 1 | read book
+D | 0 | return book | 2021-03-15
+E | 0 | attend project meeting | 2021-04-28
+T | 1 | do homework
+T | 0 | cleaning house
+D | 0 | submit the final version | 2021-02-19
