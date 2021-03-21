@@ -22,7 +22,7 @@ public class Duke {
     public Duke() {
         in = new Parser();
         tasks = new TaskList();
-        storageController = new StorageController(this, "data/duke.txt");
+        storageController = new StorageController(this, "dukeData.txt");
         try {
             tasks = new TaskList(storageController.loadData());
         } catch (DukeException.InputOutputErrorException e) {
