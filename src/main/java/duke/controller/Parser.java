@@ -68,7 +68,7 @@ public class Parser {
         String tempOptArg = null;
         String tempCommand = "";
         String[] result = in.split("\\s");
-        String tempArg = "";
+        String tempArg = null;
         switch (result[0].toLowerCase()) {
         case "find":
         case "todo": // both only need a name in a form of string therefore grouped

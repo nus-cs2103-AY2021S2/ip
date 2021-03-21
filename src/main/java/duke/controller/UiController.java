@@ -15,6 +15,16 @@ public class UiController {
     private TaskList tasks;
     private Duke duke;
 
+    // list of predefined string to show users
+    private final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
+    private final String MESSAGE_LIST = "Here are the tasks in your list:";
+    private final String MESSAGE_LIST_IF_EMPTY = "You currently do not have anything in the list!";
+    private final String MESSAGE_DONE = "Nice! I've marked this task as done: \n";
+    private final String MESSAGE_TASK_NOT_FOUND = "Error, task cannot be found";
+    private final String MESSAGE_DELETE = "Noted. I've removed this task: %s \nNow you have %d tasks in the list";
+    private final String MESSAGE_FIND = "Here are the tasks in your list that fulfills your requirement:";
+    private final String MESSAGE_TAG = "Nice! I've marked task %s with the tag: \n#%s";
+
     /**
      * Constructor, takes in Duke and TaskList
      * @param inputDuke
@@ -48,16 +58,19 @@ public class UiController {
     public String generateTextForUpdate(Parser inputParser, Optional<? extends ListItem> task) {
         switch (inputParser.getCommand()) {
         case BYE:
-            return "Bye. Hope to see you again soon!";
+            return MESSAGE_BYE;
         case LIST:
-            String initStr = "Here are the tasks in your list:";
+            String strBuilder = MESSAGE_LIST;
             for (int i = 0; i < tasks.getListItems().size(); i++) {
-                initStr += "\n" + ((i + 1) + "." + tasks.getListItems().get(i));
+                strBuilder += "\n" + ((i + 1) + "." + tasks.getListItems().get(i));
             }
-            return initStr;
+            if (tasks.getListItems().size() == 0) {
+                return MESSAGE_LIST_IF_EMPTY;
+            }else {
+                return strBuilder;
+            }
         case DONE:
-            return task.map(x -> "Nice! I've marked this task as done: \n" + x.toString())
-                    .orElse("Error, task cannot be found");
+            return task.map(x -> MESSAGE_DONE + x.toString()).orElse(MESSAGE_TASK_NOT_FOUND);
         case EVENT:
         case DEADLINE:
         case TODO:
@@ -66,25 +79,23 @@ public class UiController {
         case ERROR:
             return inputParser.getArgument();
         case DELETE:
-            return "Noted. I've removed this task: " + task.map(ListItem::toString).get()
-                    + "\nNow you have " + tasks.getListItems().size() + " tasks in the list";
+            return String.format(MESSAGE_DELETE, task.map(ListItem::toString).get(), tasks.getListItems().size());
         case FIND:
-            String matchedStr = "Here are the tasks in your list that fulfills your requirement:";
+            String matchedStrBuilder = MESSAGE_FIND;
             TaskList tempList = tasks.findMatchingItems(inputParser.getArgument());
             for (int i = 0; i < tempList.getListItems().size(); i++) {
-                matchedStr += "\n" + ((i + 1) + "." + tempList.getListItems().get(i));
+                matchedStrBuilder += "\n" + ((i + 1) + "." + tempList.getListItems().get(i));
             }
-            return matchedStr;
+            return matchedStrBuilder;
         case TAG:
-            return "Nice! I've marked task " + inputParser.getArgument() + " with the tag: \n#"
-                    + inputParser.getOptionalArgument();
+            return String.format(MESSAGE_TAG, inputParser.getArgument(), inputParser.getOptionalArgument());
         default:
             return "";
         }
     }
 
     /**
-     * creates a standardised string that is common for similar commands to be printed
+     * creates a standardised string that is common for tasks-related commands to be printed
      * @param typeOfTask
      * @param inputList  - to get the size of the list
      * @return the predefined string
