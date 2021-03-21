@@ -24,6 +24,14 @@ public abstract class DukeException extends Exception {
         }
     }
 
+    public static class DeadlineEarlierThanNowException extends DukeException {
+        public static final String TOO_EARLY_MSG = "OOPS!!! The date you've entered is earlier than today! Seems "
+                + "like this is wrong!";
+        public DeadlineEarlierThanNowException() {
+            super(TOO_EARLY_MSG);
+        }
+    }
+
     public static class InputOutputErrorException extends DukeException {
         public InputOutputErrorException() {
             super("IO Error!");

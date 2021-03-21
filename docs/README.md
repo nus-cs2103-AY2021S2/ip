@@ -30,7 +30,7 @@ Duke is a chat bot app that helps you to organise your tasks in a CLI manner wit
 
 Commands are presented in the format: `command ARGS`
 
-- `command` cases do not matter (both lowercases and uppercases works fine)
+- `command` cases do not matter (both lowercase and uppercase works fine)
 - Words in `[brackets]` are optional and may not be required
 - Words with a `bar|seperating` indicate one of the option should be used and only one is needed
 - Words in `UPPERCASE` are arguments to be supplied by the user
@@ -60,6 +60,7 @@ Adds a deadline task that needs to be done before the due date.
 
 Format: `deadline TASK_NAME /by DATE`
 
+- `DATE` can be either in `dd MMM uuuu` format or normal string
 ```
 deadline submit ip jar /by 19-2-2021
 
@@ -124,7 +125,7 @@ Nice! I've marked task 1 with the tag: #java
 Finds a task which contains the given word in the name or associate with the tag
 
 (Find by tag requires exact tag name, i.e. the item `[T][] submit ip jar #assignment` 
-would require `find #assignment` but `find #assign` won't work)
+would require `find #assignment` but `find #assign` or `find smth #assign` won't work)
 
 Format: `find KEYWORD|#TAG`
 ```

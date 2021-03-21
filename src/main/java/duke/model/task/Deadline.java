@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+import duke.model.exception.DukeException;
+
 /**
  * Represents the deadline type task that has a deadline date and an optional parsedDate
  * if provided date string is parsable
@@ -15,6 +17,7 @@ public class Deadline extends ListItem {
 
     /**
      * Constructor for Deadline that was not provided the task done status
+     *
      * @param task      takes in a string and pass to parent's constructor as task name
      * @param inputDate the deadline input by user
      */
@@ -26,6 +29,7 @@ public class Deadline extends ListItem {
 
     /**
      * the overloaded constructor that allows taking the status of the task
+     *
      * @param task      takes in string and pass to parent's constructor as the task name
      * @param inputDate date entered as the deadline
      * @param isDone    the status of the task
@@ -38,6 +42,7 @@ public class Deadline extends ListItem {
 
     /**
      * Changes the task's status to be done
+     *
      * @return the task to replace the old one in the list or to be used later
      */
     @Override
@@ -56,7 +61,7 @@ public class Deadline extends ListItem {
         return "[D]" + (super.isDone() == true ? "[X] " : "[ ] ") + super.getTask()
                 + " (by: "
                 + (parsedDate.isEmpty()
-                ? this.date : parsedDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")"
+                ? this.date : parsedDate.get().format(DateTimeFormatter.ofPattern("dd MMM uuuu"))) + ")"
                 + super.printTags();
     }
 
@@ -65,22 +70,38 @@ public class Deadline extends ListItem {
      */
     public String getDate() {
         return "|" + (parsedDate.isEmpty() ? this.date
-                : parsedDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                : parsedDate.get().format(DateTimeFormatter.ofPattern("dd MMM uuuu")));
     }
 
     /**
      * Check whether the date provide by the user is parsable and store it accordingly
+     *
      * @param input the date given by the user
      * @return either a null or LocalDate that has a parsed date
      */
     public LocalDate parseDate(String input) {
         try {
-            LocalDate parsedDate = LocalDate.parse(input);
+            LocalDate parsedDate = LocalDate.parse(input, DateTimeFormatter.ofPattern("dd MMM uuuu"));
             // check the deadline is not before the moment this is created
-            assert parsedDate.isAfter(LocalDate.now());
-            return LocalDate.parse(input);
+            return parsedDate;
         } catch (DateTimeParseException ex) {
             return null;
+        }
+    }
+
+    /**
+     * check if the provided parsable date is actually after today
+     * @throws DukeException.DeadlineEarlierThanNowException
+     */
+    public boolean isValidDateLaterThanToday() throws DukeException.DeadlineEarlierThanNowException {
+        if (this.parsedDate.isPresent()) {
+            if (!parsedDate.get().isAfter(LocalDate.now())) {
+                throw new DukeException.DeadlineEarlierThanNowException();
+            } else {
+                return false;
+            }
+        } else {
+            return true;
         }
     }
 }
