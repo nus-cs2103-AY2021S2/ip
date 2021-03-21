@@ -131,7 +131,7 @@ Here are the tasks in your list that fulfils your requirement:
 1. [T][ ] submit ip jar
 ```
 
-### <a name="delete">`delete` - Tagging a task</a>
+### <a name="delete">`delete` - Deleting a task</a>
 Deletes the specific task using its index
 
 Format: `delete INDEX`
