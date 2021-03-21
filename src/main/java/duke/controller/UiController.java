@@ -7,15 +7,30 @@ import duke.model.task.ListItem;
 import duke.model.task.TaskList;
 import duke.view.Window;
 
+/**
+ * Controller responsible for UI-related logic, controlling what content to be displayed
+ * Has access to Duke to interact with other controller
+ */
 public class UiController {
     private TaskList tasks;
     private Duke duke;
 
+    /**
+     * Constructor, takes in Duke and TaskList
+     * @param inputDuke
+     * @param inputTaskList
+     */
     public UiController(Duke inputDuke, TaskList inputTaskList) {
         this.duke = inputDuke;
         this.tasks = inputDuke.getTasks();
     }
 
+    /**
+     * update UI with <code>Window</code> and <code>DialogBox</code> in view
+     * takes in user input and interact with different controller to decide what to show on UI
+     * @param input user's input
+     * @param window
+     */
     public void updateUiDialog(String input, Window window) {
         Parser parserForNewInput = Parser.createParser(input, tasks);
         Optional<? extends ListItem> optionalTask = duke.getListController().operateListByCommand(parserForNewInput);
@@ -23,6 +38,13 @@ public class UiController {
         window.updateDialogContainer(input, textToUse);
     }
 
+    /**
+     * Generate a String based on the <code>ListItem</code> operating on and what user input is
+     * to be showed on UI
+     * @param inputParser for extracting command, optionalArgument and argument
+     * @param task the optional item that associates with the current command
+     * @return a string to be showed to user
+     */
     public String generateTextForUpdate(Parser inputParser, Optional<? extends ListItem> task) {
         switch (inputParser.getCommand()) {
         case BYE:
@@ -62,11 +84,10 @@ public class UiController {
     }
 
     /**
-     * creates a standardised string that is common for all the tasks type to be printed
-     *
+     * creates a standardised string that is common for similar commands to be printed
      * @param typeOfTask
      * @param inputList  - to get the size of the list
-     * @return a string to be printed by UI
+     * @return the predefined string
      */
     public String printPredefinedMessage(String typeOfTask, TaskList inputList) {
         return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have "

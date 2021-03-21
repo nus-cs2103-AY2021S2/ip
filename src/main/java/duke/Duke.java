@@ -14,7 +14,7 @@ public class Duke {
     private final ListController listController;
 
     /**
-     * Initiate Duke with default Parser and TaskList for it to function
+     * Initiate Duke with default Parser, TaskList and Controllers for it to function
      */
     public Duke() {
         in = new Parser();

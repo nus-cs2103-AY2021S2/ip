@@ -11,17 +11,22 @@ import java.util.stream.Collectors;
 public class TaskList {
     private List<ListItem> listItems;
 
+    /**
+     * Constructor that initiates a new empty list
+     */
     public TaskList() {
         this.listItems = new ArrayList<>();
     }
 
+    /**
+     * Overloaded Constructor that takes in a list
+     */
     public TaskList(List<ListItem> inputList) {
         this.listItems = new ArrayList<ListItem>(inputList);
     }
 
     /**
      * Immutable way to add the new task by returning a new list
-     *
      * @param task the task to be added to the list
      */
     public TaskList addCommand(ListItem task) {
@@ -32,7 +37,6 @@ public class TaskList {
 
     /**
      * Mutable way to add the new task by modifying the list
-     *
      * @param task the task to be added to the list
      */
     public void addCommandMutable(ListItem task) {
@@ -68,7 +72,6 @@ public class TaskList {
 
     /**
      * Mutable way to delete the task by directly removing item in the list
-     *
      * @param index the index of the item to be changed
      */
     public void deleteCommandMutable(int index) {
@@ -79,7 +82,6 @@ public class TaskList {
 
     /**
      * Look for all items that contains the <code>keyword</code> and return the list
-     *
      * @param keyword the keyword to be searched through the TaskList, in SQL LIKE syntax
      */
     public TaskList findMatchingItems(String keyword) {

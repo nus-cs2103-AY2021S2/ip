@@ -50,8 +50,7 @@ public class Window extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Collects user input and calls function to update the UI
      */
     @FXML
     private void handleUserInput() {
@@ -59,6 +58,10 @@ public class Window extends AnchorPane {
         duke.getUiController().updateUiDialog(input, this);
     }
 
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
     public void updateDialogContainer(String input, String response) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

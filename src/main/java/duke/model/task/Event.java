@@ -39,6 +39,9 @@ public class Event extends ListItem {
                 + super.getTask() + " (at: " + date + ")" + super.printTags();
     }
 
+    /**
+     * @return the
+     */
     public String getDate() {
         return "|" + date;
     }

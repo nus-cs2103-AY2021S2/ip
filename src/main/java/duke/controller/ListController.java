@@ -10,27 +10,55 @@ import duke.model.task.ListItem;
 import duke.model.task.TaskList;
 import duke.model.task.Todo;
 
+/**
+ * Controller responsible for providing Duke the ability to operate on the TaskList the application is using
+ * dealing with the logic associates with TaskList
+ * <code>tasks</code> stores the TaskList that Duke is current using in order to perform action
+ */
 public class ListController {
     private TaskList tasks;
 
+    /**
+     * standard constructor that takes in Duke's TaskList and store for later use
+     * @param list TaskList from Duke
+     */
     public ListController(TaskList list) {
         this.tasks = list;
     }
 
+    /**
+     * Check if the command that will perform operations on TaskList has a valid index
+     * @param command take in for checking if the current command requires a valid index first
+     *                (e.g. LIST or FIND would not require)
+     * @param argument the argument that user provides - if the command is one of the command that requires valid index,
+     *                 then this should be an integer in a string form for Integer.parseInt
+     * @param list TaskList for checking the size to know if index is valid
+     * @return a boolean
+     */
     public static boolean checkValidIndexForListOperation(Command command, String argument, TaskList list) {
         Command[] commandList = {Command.DONE, Command.DELETE, Command.TAG};
         boolean commandRequiresIndexCheck = Arrays.asList(commandList).contains(command);
         if (commandRequiresIndexCheck) {
-            int index = Integer.parseInt(argument);
-            int listSize = list.getListItems().size();
-            if (index <= listSize) {
-                return true;
+            try {
+                int index = Integer.parseInt(argument);
+                int listSize = list.getListItems().size();
+                if (index <= listSize) {
+                    return true;
+                }
+                return false;
+            } catch (NumberFormatException ex) {
+                return false;
             }
-            return false;
         }
         return true;
     }
 
+    /**
+     * Take in a Parser and operate on Duke's TaskList accordingly depending on Command
+     * @param inputParser - used for extracting argument, optionalArgument and command to decide what operation to be
+     *                    performed on TaskList
+     * @return an optional ListItem (Todo/Event/Deadline) for showing user with UIController
+     */
     public Optional<? extends ListItem> operateListByCommand(Parser inputParser) {
         int index = -1;
         String argument = inputParser.getArgument();

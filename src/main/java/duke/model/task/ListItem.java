@@ -69,9 +69,8 @@ public abstract class ListItem {
 
     /**
      * Check if any tasks in the list is associate with the tag that the user provided
-     *
      * @param inputTag the tag name that user wants to find
-     * @return
+     * @return boolean flag
      */
     public boolean containTag(String inputTag) {
         return tagList.contains(inputTag);
@@ -79,13 +78,16 @@ public abstract class ListItem {
 
     /**
      * Print all the tags associated using stream
-     *
      * @return the string concatenated all the tags
      */
     public String printTags() {
         return tagList.stream().map((x) -> " #" + x).collect(Collectors.joining());
     }
 
+    /**
+     * Print the date related to the task if applicable
+     * @return
+     */
     public abstract String getDate();
 
     @Override

@@ -54,14 +54,15 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * @param text
-     * @param img
-     * @return
+     * Generate user dialog with the parameter <code>text</code> and <code>img</code>
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Generate duke dialog with the parameter <code>text</code> and <code>img</code>
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

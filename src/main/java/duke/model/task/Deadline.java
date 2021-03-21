@@ -15,7 +15,6 @@ public class Deadline extends ListItem {
 
     /**
      * Constructor for Deadline that was not provided the task done status
-     *
      * @param task      takes in a string and pass to parent's constructor as task name
      * @param inputDate the deadline input by user
      */
@@ -47,6 +46,11 @@ public class Deadline extends ListItem {
                 ? this.date : parsedDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"))), true);
     }
 
+    /**
+     * print <code>Deadline</code> in specific format `[D][ ] taskName (by: DATE)`
+     * DATE is chosen between <code>date</code> and <code>parsedDate</code>
+     * depending on whether the parsedDate is empty or not
+     */
     @Override
     public String toString() {
         return "[D]" + (super.isDone() == true ? "[X] " : "[ ] ") + super.getTask()
@@ -60,7 +64,8 @@ public class Deadline extends ListItem {
      * @return either the provided date or a parsed date to be printed
      */
     public String getDate() {
-        return "|" + (parsedDate.isEmpty() ? this.date : parsedDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return "|" + (parsedDate.isEmpty() ? this.date
+                : parsedDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     /**

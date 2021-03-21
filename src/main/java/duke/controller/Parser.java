@@ -6,9 +6,9 @@ import duke.model.exception.DukeException;
 import duke.model.task.TaskList;
 
 /**
- * Represents a parser that takes in the entered <code>command</code> by the user and filtered by the enum,
- * then return the parsed <code>command</code>, <code>argument</code> and <code>date</code>
- * <code>print</code> the output and add the parsed item to the list if needed
+ * Represents a parser that takes in input by the user which is filtered by the enum <code>Command</code>,
+ * then store the parsed <code>command</code>, <code>argument</code> and <code>optionalArgument</code>
+ * for ListController and UIController to interact
  *
  * <code>command</code> stores the command that extracts from the string passing into the constructor
  * <code>argument</code> stores the first argument for the command e.g. index number for DONE
@@ -20,7 +20,7 @@ public class Parser {
     private final String optionalArgument;
 
     /**
-     * Constructor method that initiates with empty/ null values
+     * Public constructor method that initiates with empty/ null values, used for starting Duke when App launches
      */
     public Parser() {
         this.command = Command.ERROR;
@@ -29,10 +29,10 @@ public class Parser {
     }
 
     /**
-     * @param in - a string that will be parsed and stored as
-     *           <code>command</code>, <code>argument</code> and <code>optionalArgument</code> accordingly
-     * @throws DukeException.UnknownCommandException if unknown command entered
-     * @throws DukeException.NoDescriptionException  if required no. of arg is not met
+     * Private constructor that creates a <code>Parser</code> with the correct <code>command</code>,
+     * <code>argument</code> and <code>optionalArgument</code>
+     * once the format checks and parsing are completed with <code>parseWithFormatCheck</code>
+     * so that it would not be called by any other class explicitly specifying any properties with private
      */
     private Parser(Command command, String argument, String optionalArgument) {
         this.command = command;
@@ -40,6 +40,14 @@ public class Parser {
         this.optionalArgument = optionalArgument;
     }
 
+    /**
+     * public method that allows other controller to create new Parser
+     * to parse content with <code>parseWithFormatCHeck</code>, if any exception is caught,
+     * error details will be used for creating the Parser instead of parsed content of user's provided input
+     * @param in String to be parsed
+     * @param tasks current status of TaskList
+     * @return a new Parser
+     */
     public static Parser createParser(String in, TaskList tasks) {
         try {
             return parseWithFormatCheck(in, tasks);
@@ -48,8 +56,16 @@ public class Parser {
         }
     }
 
+    /**
+     * parse the string with different format check and throw exception accordingly
+     * if format is valid, set the value accordingly and call the private constructor of<code>Parser</code>
+     * @param in String to be parsed
+     * @param tasks current status of TaskList
+     * @return a new Parser created with private constructor
+     * @throws DukeException when there are invalid index, invalid or wrong argumennts or unknown command
+     */
     private static Parser parseWithFormatCheck(String in, TaskList tasks) throws DukeException {
-        String tempDate = null;
+        String tempOptArg = null;
         String tempCommand = "";
         String[] result = in.split("\\s");
         String tempArg = "";
@@ -57,8 +73,8 @@ public class Parser {
         case "find":
         case "todo": // both only need a name in a form of string therefore grouped
             tempCommand = result[0];
-            if (result.length <= 1) {
-                throw new DukeException.NoDescriptionException(result[0]);
+            if (result.length <= 1) { // if `todo` and `find` doesnt have any text follow
+                throw new DukeException.NoArgumentOrWrongFormatException(result[0]);
             } else {
                 tempArg = result[1];
             }
@@ -67,8 +83,9 @@ public class Parser {
         case "delete": // both requires an index of the item
             String indexOfItemAsString = in.substring(in.indexOf(" ") + 1);
             tempArg = indexOfItemAsString;
+            // first check if the argument is an integer to be used as index, then check if it falls within valid range
             if (!Helper.isInteger(indexOfItemAsString)) {
-                throw new DukeException.NoDescriptionException(result[0]);
+                throw new DukeException.NoArgumentOrWrongFormatException(result[0]);
             } else if (ListController.checkValidIndexForListOperation(Command.valueOf(result[0]), tempArg, tasks)) {
                 throw new DukeException.IndexOutOfListSizeException();
             } else {
@@ -77,27 +94,27 @@ public class Parser {
             break;
         case "deadline":
         case "event": // both requires an extra string (date)
-            checkDeadlineAndEventFormat(in, result[0]);
-            int max = Math.max(in.indexOf("/by "), in.indexOf("/at "));
+            checkDeadlineAndEventFormat(in, result[0]); // checks if the input fulfills the specific format check
+            int max = Math.max(in.indexOf("/by "), in.indexOf("/at ")); // find the index of /by or /at to extract text
             String firstParam = in.substring(max);
             tempCommand = result[0];
-            tempDate = firstParam.substring(4);
+            tempOptArg = firstParam.substring(4);
             tempArg = in.substring(in.indexOf(" "), max - 1);
             break;
         case "tag":
             tempCommand = result[0];
+            // first check if the argument is an integer to be used as index, then check if it falls within valid range
             if (!Helper.isInteger(result[1])) {
-                throw new DukeException.NoDescriptionException(result[0]);
+                throw new DukeException.NoArgumentOrWrongFormatException(result[0]);
             } else if (ListController.checkValidIndexForListOperation(Command.valueOf(result[0]), result[1], tasks)) {
                 throw new DukeException.IndexOutOfListSizeException();
             } else {
                 tempArg = result[1];
             }
-            tempDate = result[2];
+            tempOptArg = result[2];
             break;
         default:
-            // try parsing the command first by finding the equivalent in Enum PredefinedCommand,
-            // else throw exception
+            // try parsing the command first by finding the equivalent in Enum PredefinedCommand else throw exception
             try {
                 tempCommand = String.valueOf(Command.valueOf(result[0].toUpperCase())).toLowerCase();
             } catch (IllegalArgumentException ex) {
@@ -105,19 +122,26 @@ public class Parser {
             }
             break;
         }
-        return new Parser(Command.valueOf(tempCommand.toUpperCase()), tempArg, tempDate);
+        return new Parser(Command.valueOf(tempCommand.toUpperCase()), tempArg, tempOptArg);
     }
 
-    private static boolean checkDeadlineAndEventFormat(String firstParam, String result)
-            throws DukeException.NoDescriptionException {
-        int dateIndex = Math.max(firstParam.indexOf("/by "), firstParam.indexOf("/at "));
-        if (dateIndex == -1) {
-            throw new DukeException.NoDescriptionException(result);
+    /**
+     * Used for checking deadline and event's format: <code>/by </code> and <code>/at </code>
+     * @param input String used to check if /by or /at exists and match <code>type</code>
+     * @param type <code>deadline</code> or <code>event</code>
+     * @return a boolean showing it fulfills the format or not
+     * @throws DukeException.NoArgumentOrWrongFormatException informs user invalid format
+     */
+    private static boolean checkDeadlineAndEventFormat(String input, String type)
+            throws DukeException.NoArgumentOrWrongFormatException {
+        int prefixIndex = Math.max(input.indexOf("/by "), input.indexOf("/at "));
+        if (prefixIndex == -1) {
+            throw new DukeException.NoArgumentOrWrongFormatException(type);
         } else {
-            String prefix = firstParam.substring(dateIndex, dateIndex + 4);
-            if ((prefix.equals("/at ") && result.equals("deadline"))
-                    || (prefix.equals("/by ") && result.equals("event"))) {
-                throw new DukeException.NoDescriptionException(result);
+            String prefix = input.substring(prefixIndex, prefixIndex + 4);
+            if ((prefix.equals("/at ") && type.equals("deadline"))
+                    || (prefix.equals("/by ") && type.equals("event"))) {
+                throw new DukeException.NoArgumentOrWrongFormatException(type);
             }
         }
         return true;
@@ -125,27 +149,25 @@ public class Parser {
 
     /**
      * Getter method
-     *
      * @return the private variable command
      */
     public Command getCommand() {
         return this.command;
     }
 
+    /**
+     * Getter method
+     * @return the private variable argument
+     */
     public String getArgument() {
         return argument;
     }
 
-    public String getOptionalArgument() {
-        return optionalArgument;
-    }
-
     /**
      * Getter method
-     *
-     * @return the private variable argument
+     * @return the private variable optionalArgument
      */
-    public String getDate() {
-        return this.argument;
+    public String getOptionalArgument() {
+        return optionalArgument;
     }
 }
