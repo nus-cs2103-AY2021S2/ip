@@ -1,18 +1,24 @@
+import duke.Deadline;
+import duke.Event;
+import duke.TaskList;
+import duke.ToDo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class TaskListTest {
     TaskList taskList = new TaskList();
-    ToDo todo = new ToDo("run");
+    ToDo todo = new ToDo("read book", "");
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDate date = LocalDate.parse("2/12/2019",formatter);
+    LocalDate date = LocalDate.parse("2/12/2019", formatter);
     Deadline deadline = new Deadline("return book", date);
-    Event event = new Event("event project meeting", "Mon 2-4pm") ;
+    Event event = new Event("event project meeting", "Mon 2-4pm");
+
 
     @Test
-    public void testNumOfTask() {
+    public void numOfTask() {
         taskList.addTask(todo);
         taskList.addTask(deadline);
         taskList.addTask(event);
