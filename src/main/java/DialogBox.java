@@ -1,63 +1,93 @@
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
+/**
+ * An example of a custom control using FXML.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 public class DialogBox extends HBox {
+    @FXML
+    private Label dialog;
+    @FXML
+    private ImageView displayPicture;
+
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setText(text);
+        displayPicture.setImage(img);
+        Circle circle = new Circle(50, 50, 40);
+        displayPicture.setClip(circle);
+        gui();
+    }
 
     /**
-     * Represents the output dialog box.
-     * @param l The text to be displayed.
-     * @param c Circle with the image to be displayed.
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    public DialogBox(Label l, Circle c, String who) {
-        Rectangle r = new Rectangle(200, 200, 500, 80);
-        r.setFill(Color.POWDERBLUE);
-        r.setArcWidth(30.0);
-        r.setArcHeight(20.0);
-
-        StackPane sp = new StackPane(r, l);
-        HBox hb;
-        if (who.equals("d")) {
-            if (l.getText().equals(Ui.invalidKeywordExceptionMessage())) {
-                r.setFill(Color.YELLOW);
-            }
-
-            if (l.getText().contains(Ui.invalidTaskFormatBasicExceptionMessage())) {
-                r.setFill(Color.RED);
-            }
-            hb = new HBox(c, sp);
-        } else {
-            hb = new HBox(sp, c);
-        }
-        hb.setPadding(new Insets(15, 0, 15, 0));
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(hb);
-    }
-
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, Circle c) {
-        //l.setPadding(new Insets(30, 20, 30, 20));
-        return new DialogBox(l, c, "u");
-    }
-
-    public static DialogBox getDukeDialog(Label l, Circle c) {
-        //l.setPadding(new Insets(30, 20, 30, 20));
-        var db = new DialogBox(l, c, "d");
-        db.flip();
+    public static DialogBox getUserDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.setUserAlignment();
         return db;
+    }
+
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        db.setLunaAlignment();
+        return db;
+    }
+
+    public void gui() {
+        dialog.setStyle("-fx-padding: 15.0;"
+                + "-fx-border-width: 0");
+
+        if (dialog.getText().contains(Ui.invalidTaskFormatBasicExceptionMessage())
+                || dialog.getText().contains(Ui.invalidKeywordExceptionMessage())
+                || dialog.getText().contains(Ui.invalidNumberExceptionMessage())) {
+            dialog.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(15.0),
+                Insets.EMPTY)));
+        } else {
+            dialog.setBackground(new Background(new BackgroundFill(Color.POWDERBLUE, new CornerRadii(15.0),
+                    Insets.EMPTY)));
+        }
+    }
+
+    public void setUserAlignment() {
+        this.setAlignment(Pos.CENTER_RIGHT);
+    }
+
+    public void setLunaAlignment() {
+        dialog.setAlignment(Pos.CENTER_LEFT);
     }
 }

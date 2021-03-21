@@ -124,7 +124,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String outputLine =  "[" + this.getInitial() + "]" + this.statusIcon() + description;
+        String outputLine = "[" + this.getInitial() + "]" + this.statusIcon() + description;
         if (this.getIsTagged()) {
             outputLine += " (Tag: " + this.tag + ")";
         }

@@ -49,11 +49,11 @@
 1. Example of usage: `find work`
 
 
-### **Tagging an existing task: tag**
+### **Tagging an existing task: `tag`**
 
 #### Adds a `tag` to the intended task.
-1. Format: `tag INDEX_OF_TASK_IN_LIST`
-1. Example of usage: `tag 5`
+1. Format: `tag INDEX_OF_TASK_IN_LIST DESCRIPTION_OF_TAG`
+1. Example of usage: `tag 5 work`
 
 
 ### **Finding a task which has a tag of specific keywords: `tagged`**

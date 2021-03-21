@@ -69,7 +69,7 @@ public class Parser {
     static void isInt(String s) throws InvalidNumberException {
         try {
             int x = Integer.parseInt(s);
-            if (x > TaskList.getCount()) {
+            if (x > TaskList.getCount() || x < 1) {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
@@ -127,7 +127,7 @@ public class Parser {
         try {
             date = LocalDate.parse(splitDateAndTime[0]);
             time = LocalTime.parse(splitDateAndTime[1]);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new InvalidTaskFormatException(Ui.invalidTaskFormatExceptionMessage(task));
         }
 
@@ -158,10 +158,11 @@ public class Parser {
         return TaskList.processTaggedOutput(description);
     }
 
-    static String processTag() throws InvalidTaskFormatException {
+    static String processTag() throws InvalidTaskFormatException, InvalidNumberException {
         checkSplLength(splitArray, 2, "tag");
         String[] splitIndexAndDescription = splitArray[1].split(" ");
         checkSplLength(splitIndexAndDescription, 2, "tag");
+        isInt(splitIndexAndDescription[0]);
         int index = Integer.parseInt(splitIndexAndDescription[0]);
         String description = splitIndexAndDescription[1];
         return TaskList.processTagOutput(index, description);
