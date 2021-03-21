@@ -12,19 +12,18 @@ import duke.view.Window;
  * Has access to Duke to interact with other controller
  */
 public class UiController {
+    // list of predefined string to show users
+    private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
+    private static final String MESSAGE_DELETE = "Noted. I've removed this task: %s\nNow you have %d tasks in the list";
+    private static final String MESSAGE_DONE = "Nice! I've marked this task as done: \n";
+    private static final String MESSAGE_FIND = "Here are the tasks in your list that fulfills your requirement:";
+    private static final String MESSAGE_LIST = "Here are the tasks in your list:";
+    private static final String MESSAGE_LIST_IF_EMPTY = "You currently do not have anything in the list!";
+    private static final String MESSAGE_TASK_NOT_FOUND = "Error, task cannot be found";
+    private static final String MESSAGE_TAG = "Nice! I've marked task %s with the tag: \n#%s";
+
     private TaskList tasks;
     private Duke duke;
-
-    // list of predefined string to show users
-    private final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
-    private final String MESSAGE_LIST = "Here are the tasks in your list:";
-    private final String MESSAGE_LIST_IF_EMPTY = "You currently do not have anything in the list!";
-    private final String MESSAGE_DONE = "Nice! I've marked this task as done: \n";
-    private final String MESSAGE_TASK_NOT_FOUND = "Error, task cannot be found";
-    private final String MESSAGE_DELETE = "Noted. I've removed this task: %s \nNow you have %d tasks in the list";
-    private final String MESSAGE_FIND = "Here are the tasks in your list that fulfills your requirement:";
-    private final String MESSAGE_TAG = "Nice! I've marked task %s with the tag: \n#%s";
-
     /**
      * Constructor, takes in Duke and TaskList
      * @param inputDuke
@@ -66,7 +65,7 @@ public class UiController {
             }
             if (tasks.getListItems().size() == 0) {
                 return MESSAGE_LIST_IF_EMPTY;
-            }else {
+            } else {
                 return strBuilder;
             }
         case DONE:
