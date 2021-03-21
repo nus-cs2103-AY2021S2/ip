@@ -89,7 +89,7 @@ public class DialogBox extends HBox {
         if (dialog.getText().contains(Ui.invalidTaskFormatBasicExceptionMessage())
                 || dialog.getText().contains(Ui.invalidKeywordExceptionMessage())
                 || dialog.getText().contains(Ui.invalidNumberExceptionMessage())) {
-            dialog.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(15.0),
+            dialog.setBackground(new Background(new BackgroundFill(Color.RED, new CornerRadii(15.0),
                     Insets.EMPTY)));
         }
     }

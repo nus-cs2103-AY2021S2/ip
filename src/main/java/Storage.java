@@ -71,7 +71,6 @@ public class Storage {
                 String description = t.getDescription();
                 String tag = "";
                 if (t.getIsTagged()) {
-                    System.out.println("yes");
                     tag = t.getTag();
                 }
 
