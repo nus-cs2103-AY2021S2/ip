@@ -1,0 +1,4 @@
+T|false|buy tomato
+D|false|return book|2020-06-06
+T|true|eat fruits
+E|false|sing a song|2020-05-09
