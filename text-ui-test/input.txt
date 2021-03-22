@@ -1,0 +1,17 @@
+deadline give you up /by never gonna
+deadline let you down /by never gonna
+event rick /at astley
+todo find better test cases
+list
+done 2
+done 4
+list
+done 1
+list
+done
+list
+todo
+deadline death /at NUS
+event graduation /by never
+bye
+
