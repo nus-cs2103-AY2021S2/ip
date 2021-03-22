@@ -1,8 +1,8 @@
 package seashell.command;
 
-import seashell.storage.SaveHandler;
-import seashell.exception.SeashellException;
 import seashell.TaskList;
+import seashell.exception.SeashellException;
+import seashell.storage.SaveHandler;
 
 public class ClearCommand implements Command {
     @Override

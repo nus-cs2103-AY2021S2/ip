@@ -1,8 +1,8 @@
 package seashell.command;
 
-import seashell.storage.SaveHandler;
 import javafx.application.Platform;
 import seashell.TaskList;
+import seashell.storage.SaveHandler;
 
 public class ExitCommand implements Command {
 

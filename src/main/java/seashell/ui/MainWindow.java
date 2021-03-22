@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import seashell.Seashell;
 import seashell.exception.SeashellException;
-import seashell.ui.Ui;
 
 /**
  * Controller for seashell.ui.MainWindow. Provides the layout for the other controls.

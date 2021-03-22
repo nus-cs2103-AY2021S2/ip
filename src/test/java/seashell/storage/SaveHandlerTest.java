@@ -6,14 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import seashell.TaskList;
 import seashell.task.Deadline;
 import seashell.task.Event;
 import seashell.task.Task;
 import seashell.task.Todo;
 
 
-public class SaveHandler {
+public class SaveHandlerTest {
     public static final String DIR_PATH = "data";
     public static final String FILE_PATH = DIR_PATH + "/saveFile.txt";
 
@@ -77,11 +76,11 @@ public class SaveHandler {
      * Update save file with the specified task list
      * @param taskList to replace current task list
      */
-    public void updateSaveFile(TaskList taskList) {
+    public void updateSaveFile(ArrayList<Task> taskList) {
         try {
             clearSaveFile();
             FileWriter fileWriter = new FileWriter(FILE_PATH, true);
-            for (Task t : taskList.getTaskList()) {
+            for (Task t : taskList) {
                 fileWriter.write(t.getSaveText() + "\n");
             }
             fileWriter.close();
@@ -108,7 +107,7 @@ public class SaveHandler {
         if (saveText.startsWith("T | ")) {
             String taskName = saveText.substring(8);
             Todo todoTask = new Todo(taskName);
-            if (saveText.charAt(4) == '1') {
+            if (saveText.substring(4, 5).equals("1")) {
                 todoTask = todoTask.setDone();
             }
             return todoTask;

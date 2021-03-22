@@ -1,16 +1,25 @@
 package seashell.command;
 
-import seashell.storage.SaveHandler;
-import seashell.TaskList;
-import seashell.task.*;
-
 import static java.util.Objects.requireNonNull;
+
+import seashell.TaskList;
+import seashell.storage.SaveHandler;
+import seashell.task.Deadline;
+import seashell.task.Event;
+import seashell.task.TaskType;
+import seashell.task.Todo;
+
 
 public class AddCommand implements Command {
     private TaskType taskType;
     private String taskName;
     private String dateTime;
 
+    /**
+     * Creates a new instance of AddCommand, with the specified task type and task name
+     * @param taskType
+     * @param taskName
+     */
     public AddCommand(TaskType taskType, String taskName) {
         requireNonNull(taskType, taskName);
         this.taskType = taskType;
@@ -18,6 +27,11 @@ public class AddCommand implements Command {
         this.dateTime = "";
     }
 
+    /**
+     * Creates a new instance of AddCommand, with the specified task type, task name and date time
+     * @param taskType
+     * @param taskName
+     */
     public AddCommand(TaskType taskType, String taskName, String dateTime) {
         this.taskType = taskType;
         this.taskName = taskName;

@@ -1,15 +1,16 @@
 package seashell.command;
 
-import seashell.storage.SaveHandler;
-import seashell.exception.SeashellException;
+import java.util.ArrayList;
+
 import seashell.TaskList;
+import seashell.exception.SeashellException;
+import seashell.storage.SaveHandler;
 import seashell.task.Task;
 
-import java.util.ArrayList;
 
 public class FindCommand implements Command {
 
-    private String toFind;
+    private final String toFind;
 
     public FindCommand(String toFind) {
         this.toFind = toFind;
@@ -28,7 +29,7 @@ public class FindCommand implements Command {
             throw new SeashellException("OOPS!!! Task list is already empty!");
         } else {
             ArrayList<Task> foundList = new ArrayList<>();
-            for (Task t : taskList.taskList) {
+            for (Task t : taskList.getTaskList()) {
                 if (t.getName().contains(toFind)) {
                     foundList.add(t);
                 }
@@ -37,10 +38,9 @@ public class FindCommand implements Command {
                 throw new SeashellException("No tasks with the keyword " + toFind + " was found!");
             } else {
                 TaskList foundTaskList = new TaskList(foundList);
-                StringBuilder sb = new StringBuilder();
-                sb.append("Here are the matching tasks in your list:\n");
-                sb.append(new ListCommand().execute(foundTaskList, saveHandler));
-                return sb.toString();
+                String sb = "Here are the matching tasks in your list:\n"
+                        + new ListCommand().execute(foundTaskList, saveHandler);
+                return sb;
             }
         }
     }

@@ -1,11 +1,26 @@
 package seashell.parser;
 
+import seashell.command.AddCommand;
+import seashell.command.ClearCommand;
+import seashell.command.Command;
+import seashell.command.DeleteCommand;
+import seashell.command.DoneCommand;
+import seashell.command.ExitCommand;
+import seashell.command.FindCommand;
+import seashell.command.HelpCommand;
+import seashell.command.ListCommand;
 import seashell.exception.SeashellException;
-import seashell.command.*;
 import seashell.task.TaskType;
 
 public class Parser {
 
+    /**
+     * Takes the user input as a string and parses it into a command object that represents the command, so that
+     * Seashell can execute it
+     * @param input from user
+     * @return Command object representing user input
+     * @throws SeashellException if command is not recognised
+     */
     public static Command parse(String input) throws SeashellException {
         assert !input.isEmpty();
         if (input.stripTrailing().equals("bye")) {
@@ -59,7 +74,7 @@ public class Parser {
         String taskName = input.substring(8).stripLeading();
         if (taskName.equals("")) {
             throw new SeashellException("OOPS!!! The description of a task cannot be empty.");
-        } else if (input.indexOf("/by") == -1) {
+        } else if (!input.contains("/by")) {
             throw new SeashellException("OOPS!!! The syntax of adding a deadline should be [name] /by [yyyy-mm-dd]");
         } else {
             taskName = input.substring(8, input.indexOf("/by") - 1).stripLeading();
@@ -72,7 +87,7 @@ public class Parser {
         String taskName = input.substring(5).stripLeading();
         if (taskName.equals("")) {
             throw new SeashellException("OOPS!!! The description of a task cannot be empty.");
-        } else if (input.indexOf("/at") == -1) {
+        } else if (!input.contains("/at")) {
             throw new SeashellException("OOPS!!! The syntax of adding an event should be [name] /at [yyyy-mm-dd]");
         } else {
             taskName = input.substring(5, input.indexOf("/at") - 1).stripLeading();

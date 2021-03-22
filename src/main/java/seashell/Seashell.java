@@ -5,13 +5,11 @@ import seashell.command.Command;
 import seashell.exception.SeashellException;
 import seashell.parser.Parser;
 import seashell.storage.SaveHandler;
-import seashell.ui.Ui;
 
 public class Seashell {
 
-    public TaskList taskListObj;
     public final SaveHandler saveHandler;
-    private final Ui ui;
+    private TaskList taskListObj;
 
     /**
      * Create a new Seashell instance
@@ -19,7 +17,6 @@ public class Seashell {
     public Seashell() {
         this.saveHandler = new SaveHandler();
         this.taskListObj = new TaskList(this.saveHandler.loadSave());
-        this.ui = new Ui();
     }
 
     /**
@@ -27,10 +24,16 @@ public class Seashell {
      * @param input command input by user
      * @return response to user input from Seashell
      */
-    public String getResponse(String input) throws SeashellException {
-        Command command = Parser.parse(input);
-        String response = command.execute(this.taskListObj, this.saveHandler);
-        return response;
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            String response = command.execute(this.taskListObj, this.saveHandler);
+            return response;
+        } catch (SeashellException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return e.getMessage();
+        }
     }
 
     /**

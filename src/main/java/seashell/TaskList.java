@@ -1,11 +1,12 @@
 package seashell;
 
-import seashell.task.Task;
-
 import java.util.ArrayList;
 
+import seashell.task.Task;
+
+
 public class TaskList {
-    public ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -13,6 +14,10 @@ public class TaskList {
 
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
     }
 
     public void add(Task task) {

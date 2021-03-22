@@ -1,8 +1,8 @@
 package seashell.command;
 
-import seashell.storage.SaveHandler;
-import seashell.exception.SeashellException;
 import seashell.TaskList;
+import seashell.exception.SeashellException;
+import seashell.storage.SaveHandler;
 import seashell.task.Task;
 
 public class DeleteCommand implements Command {
@@ -18,7 +18,7 @@ public class DeleteCommand implements Command {
             throw new SeashellException("OOPS!!! Task index is out of bounds!");
         } else {
             Task toRemove = taskList.remove(index - 1);
-            saveHandler.updateSaveFile(taskList.taskList);
+            saveHandler.updateSaveFile(taskList);
             return "Noted. I have removed " + toRemove + "\n You now have "
                     + taskList.size() + "items in the task list";
         }

@@ -7,11 +7,22 @@ public class Deadline extends Task {
 
     protected LocalDate by;
 
+    /**
+     * Creates a new instance of Deadline object with the specified name and date time
+     * @param name
+     * @param by
+     */
     public Deadline(String name, String by) {
         super(name);
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * Creates a new instance of Deadline object with the specified name, date time and whether it is done
+     * @param name
+     * @param by
+     * @param isDone
+     */
     public Deadline(String name, LocalDate by, boolean isDone) {
         super(name, isDone);
         this.by = by;

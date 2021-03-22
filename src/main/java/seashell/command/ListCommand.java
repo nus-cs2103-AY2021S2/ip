@@ -1,8 +1,8 @@
 package seashell.command;
 
-import seashell.storage.SaveHandler;
-import seashell.exception.SeashellException;
 import seashell.TaskList;
+import seashell.exception.SeashellException;
+import seashell.storage.SaveHandler;
 import seashell.task.Task;
 
 public class ListCommand implements Command {
@@ -15,7 +15,7 @@ public class ListCommand implements Command {
             StringBuilder sb = new StringBuilder();
             for (int i = 1; i <= taskList.size(); i++) {
                 Task t = taskList.get(i - 1);
-                sb.append(i + ". " + t + "\n");
+                sb.append(i).append(". ").append(t).append("\n");
             }
             return sb.toString();
         }

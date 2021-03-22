@@ -1,7 +1,7 @@
 package seashell.command;
 
-import seashell.storage.SaveHandler;
 import seashell.TaskList;
+import seashell.storage.SaveHandler;
 import seashell.ui.Ui;
 
 public class HelpCommand implements Command {

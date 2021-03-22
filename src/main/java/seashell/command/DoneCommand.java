@@ -1,9 +1,9 @@
 package seashell.command;
 
-import seashell.storage.SaveHandler;
-import seashell.exception.SeashellException;
-import seashell.task.Task;
 import seashell.TaskList;
+import seashell.exception.SeashellException;
+import seashell.storage.SaveHandler;
+import seashell.task.Task;
 
 public class DoneCommand implements Command {
 
@@ -20,7 +20,7 @@ public class DoneCommand implements Command {
         } else {
             Task updated = taskList.get(index - 1).setDone();
             taskList.set(index - 1, updated);
-            saveHandler.updateSaveFile(taskList.taskList);
+            saveHandler.updateSaveFile(taskList);
             return "Nice! I've marked this task as done: \n" + updated;
         }
     }
