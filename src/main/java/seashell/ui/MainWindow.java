@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import seashell.Seashell;
+import seashell.exception.SeashellException;
 import seashell.ui.Ui;
 
 /**
@@ -48,7 +49,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws SeashellException {
         String input = userInput.getText();
         String response = seashell.getResponse(input);
         dialogContainer.getChildren().addAll(

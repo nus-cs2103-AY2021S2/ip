@@ -4,8 +4,6 @@ import seashell.storage.SaveHandler;
 import seashell.exception.SeashellException;
 import seashell.TaskList;
 
-import java.util.ArrayList;
-
 public class ClearCommand implements Command {
     @Override
     public String execute(TaskList taskList, SaveHandler saveHandler) throws SeashellException {
@@ -21,5 +19,11 @@ public class ClearCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || other instanceof ClearCommand;
     }
 }

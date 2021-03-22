@@ -11,6 +11,10 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
+
     public void add(Task task) {
         this.taskList.add(task);
     }
@@ -39,4 +43,10 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof TaskList
+                && this.taskList.equals(((TaskList) other).taskList));
+    }
 }

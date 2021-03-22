@@ -16,4 +16,10 @@ public class ExitCommand implements Command {
     public boolean isExit() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || other instanceof ExitCommand;
+    }
 }

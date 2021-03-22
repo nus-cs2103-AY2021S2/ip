@@ -29,4 +29,11 @@ public class DoneCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof DoneCommand
+                && this.index == (((DoneCommand) other).index));
+    }
 }

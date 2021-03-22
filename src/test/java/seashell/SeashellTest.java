@@ -7,7 +7,7 @@ import seashell.parser.Parser;
 import seashell.storage.SaveHandler;
 import seashell.ui.Ui;
 
-public class Seashell {
+public class SeashellTest {
 
     public TaskList taskListObj;
     public final SaveHandler saveHandler;
@@ -16,9 +16,15 @@ public class Seashell {
     /**
      * Create a new Seashell instance
      */
-    public Seashell() {
+    public SeashellTest() {
         this.saveHandler = new SaveHandler();
-        this.taskListObj = new TaskList(this.saveHandler.loadSave());
+        this.taskListObj = new TaskList();
+        this.ui = new Ui();
+    }
+
+    public SeashellTest(TaskList tasklist) {
+        this.saveHandler = new SaveHandler();
+        this.taskListObj = tasklist;
         this.ui = new Ui();
     }
 

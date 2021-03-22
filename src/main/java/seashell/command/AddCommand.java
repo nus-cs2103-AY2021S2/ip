@@ -1,9 +1,10 @@
 package seashell.command;
 
 import seashell.storage.SaveHandler;
-import seashell.exception.SeashellException;
 import seashell.TaskList;
 import seashell.task.*;
+
+import static java.util.Objects.requireNonNull;
 
 public class AddCommand implements Command {
     private TaskType taskType;
@@ -11,9 +12,10 @@ public class AddCommand implements Command {
     private String dateTime;
 
     public AddCommand(TaskType taskType, String taskName) {
+        requireNonNull(taskType, taskName);
         this.taskType = taskType;
         this.taskName = taskName;
-        this.dateTime = null;
+        this.dateTime = "";
     }
 
     public AddCommand(TaskType taskType, String taskName, String dateTime) {
@@ -24,7 +26,7 @@ public class AddCommand implements Command {
 
 
     @Override
-    public String execute(TaskList taskList, SaveHandler saveHandler) throws SeashellException {
+    public String execute(TaskList taskList, SaveHandler saveHandler) {
         StringBuilder sb = new StringBuilder();
         if (this.taskType.equals(TaskType.TODO)) {
             Todo newTask = new Todo(taskName);
@@ -49,5 +51,14 @@ public class AddCommand implements Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof AddCommand
+                && this.taskType.equals(((AddCommand) other).taskType)
+                && this.taskName.equals(((AddCommand) other).taskName)
+                && this.dateTime.equals(((AddCommand) other).dateTime));
     }
 }

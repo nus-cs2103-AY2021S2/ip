@@ -15,4 +15,10 @@ public class HelpCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || other instanceof HelpCommand;
+    }
 }
