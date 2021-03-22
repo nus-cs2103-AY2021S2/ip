@@ -1,7 +1,10 @@
 package Parser;
 
-import Duke.*;
-import DukeException.DukeException;
+import duke.Deadline;
+import duke.Event;
+import duke.Task;
+import duke.Todo;
+import dukeException.DukeException;
 
 public class Parser {
     private Task task;
@@ -45,7 +48,7 @@ public class Parser {
     }
 
     public static Parser parse(String userInput) throws DukeException {
-        try {
+
             String[] input = userInput.split(" ");
             String commandWord = input[0];
             String taskContent = "";
@@ -73,25 +76,50 @@ public class Parser {
                     taskTime.append(input[j]);
                 }
             } else {
-                taskNumber = Integer.parseInt(input[1]);
+                if (commandWord.equals("delete")) {
+                    try {
+                        taskNumber = Integer.parseInt(input[1]);
+                    } catch (Exception e) {
+                    throw new DukeException("Wrong format, please type in an Integer index!");
+                    }
+                } else {
+                    taskContent = input[1];
+                }
             }
+
             if (commandWord.equals("bye")) {
                 return new Parser(commandWord);
             } else {
-                return switch (commandWord) {
-                    case "list" -> new Parser("list");
-                    case "done" -> new Parser(taskNumber, "done");
-                    case "delete" -> new Parser(taskNumber, "delete");
-                    case "todo" -> new Parser(new Todo(taskContent), "add");
-                    case "deadline" -> new Parser(new Deadline(taskContent, taskTime.toString()), "add");
-                    case "event" -> new Parser(new Event(taskContent, taskTime.toString()), "add");
-                    case "find" -> new Parser(commandWord, "set");
-                    default -> throw new DukeException("I'm sorry, but I don't know what that means :-(");
-                };
+                if (commandWord.equals("todo")) {
+                    if (taskContent.equals(" ") || taskContent.equals("")) {
+                        throw new DukeException("todo cannot be empty.");
+                    } else {
+                        return new Parser(new Todo(taskContent), "add");
+                    }
+                } else {
+                    try {
+                        switch (commandWord) {
+                            case "list":
+                                return new Parser("list");
+                            case "done":
+                                return new Parser(taskNumber, "done");
+                            case "delete":
+                                return new Parser(taskNumber, "delete");
+                            case "deadline":
+                                return new Parser(new Deadline(taskContent, taskTime.toString()), "add");
+                            case "event":
+                                return new Parser(new Event(taskContent, taskTime.toString()), "add");
+                            case "find":
+                                return new Parser(commandWord, taskContent);
+                            default:
+                                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                        }
+                    } catch (Exception e) {
+                        throw new DukeException("too little information, please type /help for assistance!");
+                    }
+                }
             }
-        } catch (Exception e) {
-            throw new DukeException("Don't be lazy. Tell me more details.");
-        }
+
     }
 
 }

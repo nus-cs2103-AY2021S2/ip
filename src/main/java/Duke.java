@@ -1,5 +1,5 @@
-import Duke.*;
-import DukeException.DukeException;
+import duke.*;
+import dukeException.DukeException;
 import Parser.Parser;
 import Storage.Storage;
 import Ui.Ui;
@@ -25,13 +25,17 @@ public class Duke {
         }
     }
 
-    private void process(Parser p) {
+    private void process(Parser p) throws DukeException {
 
         switch (p.getCommand()) {
             case "delete":
-                this.tasks.remove(p.getTaskNum());
-                ui.printTaskRemovedMessage((p.getTaskNum()));
-                break;
+                if (this.tasks.isEmpty() || this.tasks.getSize() <= p.getTaskNum()) {
+                    ui.printNoTaskMessage();
+                } else {
+                    this.tasks.remove(p.getTaskNum());
+                    ui.printTaskRemovedMessage((p.getTaskNum()));
+                    break;
+                }
             case "done":
                 Task done = this.tasks.get(p.getTaskNum());
                 done.markDone();
@@ -42,8 +46,8 @@ public class Duke {
                 this.tasks.add(p.getTask());
                 ui.printTaskAddedMessage(p.getTask(), this.tasks.getSize());
                 break;
-            case "set":
-                this.tasks.set(p.getTaskNum(), p.getTask());
+            case "find":
+                ui.printFilteredList(this.tasks.filterTasks(p.getSearchWord()));
                 break;
             case "list":
                 ui.printList(this.tasks);

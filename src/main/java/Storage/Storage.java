@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import Duke.*;
+import duke.*;
 
 public class Storage {
     private ArrayList<String> listOfTasks;
