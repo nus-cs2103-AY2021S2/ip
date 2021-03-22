@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import seashell.TaskList;
 import seashell.task.Deadline;
 import seashell.task.Event;
 import seashell.task.Task;
@@ -13,7 +14,7 @@ import seashell.task.Todo;
 
 
 public class SaveHandlerTest {
-    public static final String DIR_PATH = "data";
+    public static final String DIR_PATH = "testData";
     public static final String FILE_PATH = DIR_PATH + "/saveFile.txt";
 
     /**
@@ -58,29 +59,14 @@ public class SaveHandlerTest {
     }
 
     /**
-     * Add a task to the save file
-     * @param task to be added
-     */
-    public void addTaskToSaveFile(Task task) {
-        try {
-            FileWriter fileWriter = new FileWriter(FILE_PATH, true);
-            fileWriter.write(task.getSaveText() + "\n");
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Error while trying to write to save file");
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Update save file with the specified task list
      * @param taskList to replace current task list
      */
-    public void updateSaveFile(ArrayList<Task> taskList) {
+    public void updateSaveFile(TaskList taskList) {
         try {
             clearSaveFile();
             FileWriter fileWriter = new FileWriter(FILE_PATH, true);
-            for (Task t : taskList) {
+            for (Task t : taskList.getTaskList()) {
                 fileWriter.write(t.getSaveText() + "\n");
             }
             fileWriter.close();

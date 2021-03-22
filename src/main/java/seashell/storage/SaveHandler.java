@@ -59,21 +59,6 @@ public class SaveHandler {
     }
 
     /**
-     * Add a task to the save file
-     * @param task to be added
-     */
-    public void addTaskToSaveFile(Task task) {
-        try {
-            FileWriter fileWriter = new FileWriter(FILE_PATH, true);
-            fileWriter.write(task.getSaveText() + "\n");
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Error while trying to write to save file");
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Update save file with the specified task list
      * @param taskList to replace current task list
      */

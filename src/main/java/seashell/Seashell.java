@@ -12,7 +12,7 @@ public class Seashell {
     private TaskList taskListObj;
 
     /**
-     * Create a new Seashell instance
+     * Create a new Seashell instance with task list loaded from save file
      */
     public Seashell() {
         this.saveHandler = new SaveHandler();
@@ -27,7 +27,8 @@ public class Seashell {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-            String response = command.execute(this.taskListObj, this.saveHandler);
+            String response = command.execute(this.taskListObj);
+            this.saveHandler.updateSaveFile(this.taskListObj);
             return response;
         } catch (SeashellException e) {
             System.out.println(e.getMessage());

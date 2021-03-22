@@ -1,10 +1,11 @@
 package seashell.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seashell.SeashellTest;
+import seashell.SeashellStub;
 import seashell.TaskList;
 import seashell.exception.SeashellException;
 import seashell.task.Deadline;
@@ -24,18 +25,18 @@ public class ClearCommandTest {
         taskList.add(deadline);
         taskList.add(event);
 
-        SeashellTest seashellTest = new SeashellTest(taskList);
-        String output = seashellTest.getResponse("clear");
+        SeashellStub seashellStub = new SeashellStub(taskList);
+        String output = seashellStub.getResponse("clear");
 
         assertEquals("Task list has been cleared!", output);
-        assertEquals(new TaskList(), seashellTest.getTaskList());
+        assertEquals(new TaskList(), seashellStub.getTaskList());
     }
 
     @Test
     public void execute_clearList_unsuccessful() {
-        SeashellTest seashellTest = new SeashellTest();
-        String seashellExceptionMessage = seashellTest.getResponse("clear");
-        String expected = "OOPS!!! Task list is already empty!";
-        assertEquals(expected, seashellExceptionMessage);
+        SeashellStub seashellStub = new SeashellStub();
+        Command command = new ListCommand();
+        TaskList emptyTaskList = new TaskList();
+        assertThrows(SeashellException.class, () -> command.execute(emptyTaskList));
     }
 }

@@ -3,7 +3,6 @@ package seashell.command;
 import static java.util.Objects.requireNonNull;
 
 import seashell.TaskList;
-import seashell.storage.SaveHandler;
 import seashell.task.Deadline;
 import seashell.task.Event;
 import seashell.task.TaskType;
@@ -40,25 +39,22 @@ public class AddCommand implements Command {
 
 
     @Override
-    public String execute(TaskList taskList, SaveHandler saveHandler) {
+    public String execute(TaskList taskList) {
         StringBuilder sb = new StringBuilder();
         if (this.taskType.equals(TaskType.TODO)) {
             Todo newTask = new Todo(taskName);
             taskList.add(newTask);
-            saveHandler.addTaskToSaveFile(newTask);
-            sb.append("Added " + newTask + " to the task list!\n");
+            sb.append("Added ").append(newTask).append(" to the task list!\n");
         } else if (this.taskType.equals(TaskType.DEADLINE)) {
             Deadline newTask = new Deadline(taskName, this.dateTime);
             taskList.add(newTask);
-            saveHandler.addTaskToSaveFile(newTask);
-            sb.append("Added " + newTask + " to the task list!\n");
+            sb.append("Added ").append(newTask).append(" to the task list!\n");
         } else {
             Event newTask = new Event(taskName, this.dateTime);
             taskList.add(newTask);
-            saveHandler.addTaskToSaveFile(newTask);
-            sb.append("Added " + newTask + " to the task list!\n");
+            sb.append("Added ").append(newTask).append(" to the task list!\n");
         }
-        sb.append("You now have " + taskList.size() + " items in the task list");
+        sb.append("You now have ").append(taskList.size()).append(" items in the task list");
         return sb.toString();
     }
 

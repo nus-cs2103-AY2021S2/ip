@@ -1,13 +1,12 @@
 package seashell.command;
 
 import seashell.TaskList;
-import seashell.storage.SaveHandler;
 import seashell.ui.Ui;
 
 public class HelpCommand implements Command {
 
     @Override
-    public String execute(TaskList taskList, SaveHandler saveHandler) {
+    public String execute(TaskList taskList) {
         return Ui.HELP_TEXT;
     }
 

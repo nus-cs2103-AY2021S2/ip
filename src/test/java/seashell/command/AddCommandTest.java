@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seashell.SeashellTest;
+import seashell.SeashellStub;
 import seashell.TaskList;
 import seashell.task.Deadline;
 import seashell.task.Event;
@@ -25,8 +25,8 @@ public class AddCommandTest {
         TaskList taskList = new TaskList();
         taskList.add(task);
 
-        SeashellTest seashellTest = new SeashellTest();
-        String output = seashellTest.getResponse("todo test");
+        SeashellStub seashellStub = new SeashellStub();
+        String output = seashellStub.getResponse("todo test");
 
         String sb = "Added " + task + " to the task list!\n"
                 + "You now have " + taskList.size() + " items in the task list";
@@ -39,8 +39,8 @@ public class AddCommandTest {
         TaskList taskList = new TaskList();
         taskList.add(deadline);
 
-        SeashellTest seashellTest = new SeashellTest();
-        String output = seashellTest.getResponse("deadline test /by 2021-03-01");
+        SeashellStub seashellStub = new SeashellStub();
+        String output = seashellStub.getResponse("deadline test /by 2021-03-01");
 
         String sb = "Added " + deadline + " to the task list!\n"
                 + "You now have " + taskList.size() + " items in the task list";
@@ -53,8 +53,8 @@ public class AddCommandTest {
         TaskList taskList = new TaskList();
         taskList.add(event);
 
-        SeashellTest seashellTest = new SeashellTest();
-        String output = seashellTest.getResponse("event test /at 2021-03-01");
+        SeashellStub seashellStub = new SeashellStub();
+        String output = seashellStub.getResponse("event test /at 2021-03-01");
 
         String sb = "Added " + event + " to the task list!\n"
                 + "You now have " + taskList.size() + " items in the task list";

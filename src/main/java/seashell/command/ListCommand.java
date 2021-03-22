@@ -2,13 +2,12 @@ package seashell.command;
 
 import seashell.TaskList;
 import seashell.exception.SeashellException;
-import seashell.storage.SaveHandler;
 import seashell.task.Task;
 
 public class ListCommand implements Command {
 
     @Override
-    public String execute(TaskList taskList, SaveHandler saveHandler) throws SeashellException {
+    public String execute(TaskList taskList) throws SeashellException {
         if (taskList.isEmpty()) {
             throw new SeashellException("OOPS!!! Task list is currently still empty!");
         } else {

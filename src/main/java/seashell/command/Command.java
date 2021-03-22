@@ -9,7 +9,7 @@ public interface Command {
     /**
      * Executes the command and returns the result.
      */
-    String execute(TaskList taskList, SaveHandler saveHandler) throws SeashellException;
+    String execute(TaskList taskList) throws SeashellException;
 
     boolean isExit();
 }
