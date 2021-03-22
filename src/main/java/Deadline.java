@@ -17,7 +17,7 @@ public class Deadline extends Task {
      * @param task Name of the Deadline Task.
      * @param by Date the Deadline is due by.
      */
-    public Deadline(String task, String by) {
+    public Deadline(String task, String by) throws DukeException {
         super(task);
         by = by.replaceFirst(" ", "");
         this.by = LocalDate.parse(by);
@@ -30,7 +30,7 @@ public class Deadline extends Task {
      * @param by Date that the Deadline is due by.
      * @param isDone If the Deadline is done or not.
      */
-    public Deadline(String task, boolean isDone, String by) {
+    public Deadline(String task, boolean isDone, String by) throws DukeException {
         super(task, isDone);
         this.type = 'D';
         by = by.replaceFirst(" ", "");

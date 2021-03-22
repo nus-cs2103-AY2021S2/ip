@@ -17,7 +17,7 @@ public class Event extends Task {
      * @param task Name of the Event Task.
      * @param at Date of the Event Task.
      */
-    public Event(String task, String at) {
+    public Event(String task, String at) throws DukeException {
         super(task);
         at = at.replaceFirst(" ", "");
         this.at = LocalDate.parse(at);
@@ -30,7 +30,7 @@ public class Event extends Task {
      * @param at Date of the Event.
      * @param isDone If the Event is done or not.
      */
-    public Event(String task, boolean isDone, String at) {
+    public Event(String task, boolean isDone, String at) throws DukeException {
         super(task, isDone);
         this.type = 'E';
         at = at.replaceFirst(" ", "");

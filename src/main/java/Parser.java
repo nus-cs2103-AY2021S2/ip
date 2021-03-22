@@ -83,6 +83,8 @@ public class Parser {
                 }
             } catch (DukeException | InterruptedException E) {
                 return new Result(E.getMessage());
+            } catch (ArrayIndexOutOfBoundsException E) {
+                return new Result("Input cannot be empty.");
             }
             return result;
     }

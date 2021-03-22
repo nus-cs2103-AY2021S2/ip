@@ -11,7 +11,7 @@ public class ToDo extends Task{
      * Constructor to create a ToDo Task.
      * @param task Name of the ToDo Task.
      */
-    public ToDo(String task) {
+    public ToDo(String task) throws DukeException {
         super(task);
         this.type = 'T';
     }
@@ -21,7 +21,7 @@ public class ToDo extends Task{
      * @param task Name of the Todo Task.
      * @param isDone If the Todo Task is done or not.
      */
-    public ToDo(String task, boolean isDone) {
+    public ToDo(String task, boolean isDone) throws DukeException {
         super(task, isDone);
         this.type = 'T';
     }

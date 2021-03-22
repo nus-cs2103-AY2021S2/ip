@@ -10,16 +10,24 @@ public class Task {
     private boolean isDone;
     private char type;
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-        this.type = 0;
+    public Task(String description, boolean isDone) throws DukeException {
+        if (description.trim().isEmpty()) {
+            throw new DukeException("Task cannot be empty.");
+        } else {
+            this.description = description;
+            this.isDone = isDone;
+            this.type = 0;
+        }
     }
 
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-        this.type = 0;
+    public Task(String description) throws DukeException {
+        if (description.trim().isEmpty()) {
+            throw new DukeException("Task cannot be empty.");
+        } else {
+            this.description = description;
+            this.isDone = false;
+            this.type = 0;
+        }
     }
 
     public String getStatusIcon() {

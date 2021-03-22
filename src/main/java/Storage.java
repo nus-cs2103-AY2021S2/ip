@@ -76,7 +76,7 @@ public class Storage {
                     break;
                 }
             }
-        } catch (IOException E) {
+        } catch (IOException | DukeException E) {
             System.out.println(E.getMessage() + "IO Exception.");
         }
     }
