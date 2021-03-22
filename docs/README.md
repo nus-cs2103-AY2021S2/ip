@@ -1,12 +1,13 @@
 # User Guide
 This is a simple user guide.
 
-![Ui](docs/ui.png)
+![Ui](Ui.png)
 
 ##Acknowledgements
+
 Gui Inspired by https://github.com/sc-arecrow/ip.
 
-## Features 
+## Features
 
 ### Feature 1
 `/help` : generates a list of commands with correct formatting for new user.
