@@ -1,23 +1,41 @@
-# duke project template
+# User Guide
+This is a simple user guide.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+![Ui](docs/ui.png)
 
-## Setting up in Intellij
+##Acknowledgements
+Gui Inspired by https://github.com/sc-arecrow/ip.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Features
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/duke.java` file, right-click it, and choose `Run duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Feature 1
+`/help` : generates a list of commands with correct formatting for new user.
+### Feature 2
+`todo description` : adds a todo task to the list with description.
+
+Example : `todo something`
+### Feature 3
+`deadline name /by yyyy-m-dd` : adds a deadline task to the list with given format.
+
+Example : `deadline Project2 /by 2012-1-23`
+### Feature 4
+`event name /at yyyy-m-dd` : adds an event task to the list with given format.
+
+Example : `event Project2 /at 2012-1-23`
+### Feature 5
+`delete index` : deletes a task in the list at the given index.
+
+Example : `delete 2`
+### Feature 6
+`list` : generates a list of tasks, if it exists.
+
+Example : `list`
+### Feature 7
+`find keyword` : generates a list of tasks with given keyword as filter.
+
+Example : `find cs2103`
+
+
+
+
+
