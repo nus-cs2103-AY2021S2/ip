@@ -18,6 +18,9 @@ public class SeashellStub {
         this.taskListObj = new TaskList();
     }
 
+    /**
+     * Create a new Seashell instance with specified task list
+     */
     public SeashellStub(TaskList tasklist) {
         this.saveHandlerTest = new SaveHandlerTest();
         this.taskListObj = tasklist;

@@ -2,7 +2,6 @@ package seashell.command;
 
 import seashell.TaskList;
 import seashell.exception.SeashellException;
-import seashell.storage.SaveHandler;
 
 public interface Command {
 

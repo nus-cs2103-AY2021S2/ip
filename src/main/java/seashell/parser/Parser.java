@@ -80,7 +80,8 @@ public class Parser {
             taskName = input.substring(8, input.indexOf("/by") - 1).stripLeading();
             String by = input.substring(input.indexOf("/by") + 4);
             if (!DateValidator.isValid(by)) {
-                throw new SeashellException("OOPS!!! The syntax of adding a deadline should be [name] /by [yyyy-mm-dd]");
+                throw new SeashellException("OOPS!!! The syntax of adding a deadline should be "
+                        + "[name] /by [yyyy-mm-dd]");
             }
             return new AddCommand(TaskType.DEADLINE, taskName, by);
         }
