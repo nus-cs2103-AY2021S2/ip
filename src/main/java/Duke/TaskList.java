@@ -2,6 +2,8 @@ package Duke;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import DukeException.DukeException;
 import Storage.Storage;
 
 public class TaskList {
@@ -40,10 +42,17 @@ public class TaskList {
         return task;
     }
 
-    public Task get(int taskNumber) {
-        return this.tasks.get(taskNumber - 1);
+    public Task get(int taskNumber) throws DukeException {
+        try {
+            return this.tasks.get(taskNumber - 1);
+        } catch (Exception e) {
+            throw new DukeException("The index is out of range.");
+        }
     }
 
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
+    }
     public void add(Task task) {
         this.storage.add(task);
         this.tasks.add(task);
@@ -58,6 +67,16 @@ public class TaskList {
     public void set(int index, Task task) {
         this.storage.set(index, task);
         this.tasks.set(index - 1, task);
+    }
+
+    public List<Task> filterTasks(String searchWord) {
+        List<Task> filtered = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getDescription().contains(searchWord)) {
+                filtered.add(tasks.get(i));
+            }
+        }
+        return filtered;
     }
 
     public int getSize() {

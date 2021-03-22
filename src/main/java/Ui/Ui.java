@@ -1,6 +1,9 @@
 package Ui;
 
 import Duke.*;
+import DukeException.DukeException;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -31,9 +34,21 @@ public class Ui {
         System.out.println("\nGoodbye! Have a nice day!\n");
     }
 
-    public static void printList(TaskList tasks) {
+    public static void printList(TaskList tasks) throws DukeException {
         for (int i = 1; i <= tasks.getSize(); i++) {
             System.out.println(i + ". " + tasks.get(i).toString());
+        }
+    }
+
+    public void printFilteredList(List<Task> tasks) {
+
+        if (!tasks.isEmpty()) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(tasks.get(i).toString());
+            }
+        } else {
+            System.out.println("Sorry, there is no task with matching keywords.");
         }
     }
 
@@ -50,4 +65,7 @@ public class Ui {
         System.out.println("I have removed item " + index + ". Welcome.");
     }
 
+    public void printNoTaskMessage() {
+        System.out.println("It seems like there's no such task in your list:(");
+    }
 }
