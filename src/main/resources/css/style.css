@@ -1,0 +1,16 @@
+.dialog-container {
+    -fx-background-image:url('../images/seaside_background.png');
+    -fx-background-position: center;
+}
+
+.send-button {
+    -fx-background-color: aqua;
+    -fx-font-size:15px;
+    -fx-text-fill: #00000;
+    -fx-border-width: 2px;
+    -fx-border-color: #800000;
+}
+
+.send-button:hover {
+    -fx-background-color: #ff531a;
+}

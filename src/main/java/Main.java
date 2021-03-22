@@ -27,7 +27,6 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setSeashell(seashell);
-            VBox dialogContainer = new VBox();
             stage.setTitle("Seashell, the task manager for you!");
             stage.setResizable(false);
             stage.show();
