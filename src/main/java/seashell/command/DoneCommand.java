@@ -1,7 +1,7 @@
 package seashell.command;
 
-import seashell.SaveHandler;
-import seashell.SeashellException;
+import seashell.storage.SaveHandler;
+import seashell.exception.SeashellException;
 import seashell.task.Task;
 import seashell.TaskList;
 

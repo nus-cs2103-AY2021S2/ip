@@ -1,4 +1,4 @@
-package seashell;
+package seashell.ui;
 
 public class Ui {
     public static final String HELP_TEXT = "Welcome to Seashells! Here is a list of commands you can do and its descriptions:"

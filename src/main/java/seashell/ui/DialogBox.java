@@ -1,3 +1,5 @@
+package seashell.ui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -52,7 +54,7 @@ public class DialogBox extends HBox {
      * Create a dialog box in GUI app consisting of an image and input text
      * @param text input from user
      * @param img image of user
-     * @return DialogBox consisting of input from user and user image
+     * @return seashell.ui.DialogBox consisting of input from user and user image
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
@@ -63,7 +65,7 @@ public class DialogBox extends HBox {
      * horizontally
      * @param text response from program
      * @param img image of program
-     * @return DialogBox consisting of response text from program and program image
+     * @return seashell.ui.DialogBox consisting of response text from program and program image
      */
     public static DialogBox getSeashellDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);

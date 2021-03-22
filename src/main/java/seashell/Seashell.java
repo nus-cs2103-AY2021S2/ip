@@ -2,6 +2,10 @@ package seashell;
 
 import javafx.scene.control.Label;
 import seashell.command.Command;
+import seashell.exception.SeashellException;
+import seashell.parser.Parser;
+import seashell.storage.SaveHandler;
+import seashell.ui.Ui;
 
 public class Seashell {
 

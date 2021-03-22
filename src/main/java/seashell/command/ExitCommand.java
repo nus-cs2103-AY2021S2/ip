@@ -1,6 +1,6 @@
 package seashell.command;
 
-import seashell.SaveHandler;
+import seashell.storage.SaveHandler;
 import javafx.application.Platform;
 import seashell.TaskList;
 

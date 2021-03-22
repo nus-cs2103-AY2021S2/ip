@@ -1,4 +1,4 @@
-package seashell;
+package seashell.storage;
 
 import seashell.task.Deadline;
 import seashell.task.Event;

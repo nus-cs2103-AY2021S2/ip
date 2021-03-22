@@ -1,11 +1,12 @@
-package seashell;
+package seashell.parser;
 
+import seashell.exception.SeashellException;
 import seashell.command.*;
 import seashell.task.TaskType;
 
 public class Parser {
 
-    protected static Command parse(String input) throws SeashellException {
+    public static Command parse(String input) throws SeashellException {
         assert !input.isEmpty();
         if (input.stripTrailing().equals("bye")) {
             return new ExitCommand();
