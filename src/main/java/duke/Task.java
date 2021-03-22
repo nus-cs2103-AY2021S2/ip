@@ -5,11 +5,20 @@ public class Task {
     protected boolean isDone;
     protected String dateTime;
 
+    /**
+     * Constructor which creates a task object with a description of task.
+     * @param description A description describing details of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * An overloaded constructor which creates a task object with a description of task and date/time information.
+     * @param description
+     * @param dateTime
+     */
     public Task(String description, String dateTime) {
         this.description = description;
         this.dateTime = dateTime;
@@ -26,14 +35,19 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * An encode method which encodes user raw input to storage format.
+     * @return A processed string of input to be stored in file.
+     */
     public String encode() {
         if (isDone) {
-            return "X|" + this.description ;
+            return "X|" + this.description;
         } else {
-            return " |" + this.description ;
+            return " |" + this.description;
         }
     }
 
+    @Override
     public String toString() {
         return "[" + getDoneStatus() + "]" + getDescription();
 

@@ -3,14 +3,18 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
-import dukeException.DukeException;
-import Storage.Storage;
+import dukeexception.DukeException;
+import storage.Storage;
 
 public class TaskList {
-    private final Storage storage;
-    private final List<Task> tasks;
+    private Storage storage;
+    private List<Task> tasks;
     private int numOfTasks;
 
+    /**
+     * Constructor for a task list object with a storage for the list of tasks to be stored.
+     * @param storage A storage for the list of tasks to be stored.
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = new ArrayList<>();
@@ -53,26 +57,46 @@ public class TaskList {
     public boolean isEmpty() {
         return this.tasks.isEmpty();
     }
+
+    /**
+     * An add method for the task to be added to the list.
+     * @param task The task to be added to the list.
+     */
     public void add(Task task) {
         this.storage.add(task);
         this.tasks.add(task);
         this.numOfTasks = this.tasks.size();
     }
+
+    /**
+     * A remove method for the task to be added to the list.
+     * @param index The Index of corresponding task to be removed from the list.
+     */
     public void remove(int index) {
         this.storage.remove(index);
         this.tasks.remove(index - 1);
         this.numOfTasks = this.tasks.size();
     }
 
+    /**
+     * A set method with index and a task object.
+     * @param index The index of a corresponding task to be replaced.
+     * @param task The new task set to replace an old task.
+     */
     public void set(int index, Task task) {
         this.storage.set(index, task);
         this.tasks.set(index - 1, task);
     }
 
+    /**
+     * Method which creates a List of filtered tasks according to the search word.
+     * @param searchWord A search word use as a keyword filter for tasks.
+     * @return A list of filtered tasks with corresponding search word.
+     */
     public List<Task> filterTasks(String searchWord) {
         List<Task> filtered = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
-            if(tasks.get(i).getDescription().contains(searchWord)) {
+            if (tasks.get(i).getDescription().contains(searchWord)) {
                 filtered.add(tasks.get(i));
             }
         }
