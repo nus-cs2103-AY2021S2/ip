@@ -119,11 +119,13 @@ public class Ui {
     /**
      * Method which prints sample input format for user.
      */
-    public static void printHelpMessage() {
-        System.out.println("*todo task*              ===> todo something");
-        System.out.println("*delete task at index*   ===> delete 1");
-        System.out.println("*list tasks*             ===> list");
-        System.out.println("*deadline task*          ===> dateline name /by 2011-1-23");
-        System.out.println("*event task*             ===> event name /at 2011-1-23");
+    public static String printHelpMessage() {
+        String res = "todo task\ntodo something\n \n -------------------------\n"
+                     + "delete task at index\ndelete 1\n\n -------------------------\n"
+                     + "list tasks\nlist\n\n -------------------------\n"
+                     + "deadline task\ndateline name /by 2011-1-23\n\n -------------------------\n"
+                     + "event task\nevent name /at 2011-1-23\n -------------------------\n";
+
+        return res;
     }
 }
