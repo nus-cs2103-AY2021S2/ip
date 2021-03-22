@@ -13,15 +13,14 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskListObj, SaveHandler saveHandler) throws SeashellException {
-        if (taskListObj.taskList.size() < index) {
+    public String execute(TaskList taskList, SaveHandler saveHandler) throws SeashellException {
+        if (taskList.size() < index) {
             throw new SeashellException("OOPS!!! Task index is out of bounds!");
         } else {
-            Task toRemove = taskListObj.taskList.remove(index - 1);
-            // taskListObj = new TaskList(taskListObj.taskList);
-            saveHandler.updateSaveFile(taskListObj.taskList);
+            Task toRemove = taskList.remove(index - 1);
+            saveHandler.updateSaveFile(taskList.taskList);
             return "Noted. I have removed " + toRemove + "\n You now have "
-                    + taskListObj.taskList.size() + "items in the task list";
+                    + taskList.size() + "items in the task list";
         }
     }
 

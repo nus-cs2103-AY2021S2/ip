@@ -17,18 +17,18 @@ public class FindCommand implements Command {
 
     /**
      * Finds task that contain some keyword specified by user
-     * @param taskListObj the task list to search
+     * @param taskList the task list to search
      * @param saveHandler save handler to save changes to the save file
      * @return String output of the program
      * @throws SeashellException if task list is empty or no task containing keyword was found
      */
     @Override
-    public String execute(TaskList taskListObj, SaveHandler saveHandler) throws SeashellException {
-        if (taskListObj.taskList.isEmpty()) {
+    public String execute(TaskList taskList, SaveHandler saveHandler) throws SeashellException {
+        if (taskList.isEmpty()) {
             throw new SeashellException("OOPS!!! Task list is already empty!");
         } else {
             ArrayList<Task> foundList = new ArrayList<>();
-            for (Task t : taskListObj.taskList) {
+            for (Task t : taskList.taskList) {
                 if (t.getName().contains(toFind)) {
                     foundList.add(t);
                 }

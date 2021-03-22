@@ -7,7 +7,7 @@ import seashell.TaskList;
 public class ExitCommand implements Command {
 
     @Override
-    public String execute(TaskList taskListObj, SaveHandler saveHandler) {
+    public String execute(TaskList taskList, SaveHandler saveHandler) {
         Platform.exit();
         return "Bye. Hope to see you again soon!";
     }

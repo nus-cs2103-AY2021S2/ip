@@ -7,7 +7,7 @@ import seashell.ui.Ui;
 public class HelpCommand implements Command {
 
     @Override
-    public String execute(TaskList taskListObj, SaveHandler saveHandler) {
+    public String execute(TaskList taskList, SaveHandler saveHandler) {
         return Ui.HELP_TEXT;
     }
 

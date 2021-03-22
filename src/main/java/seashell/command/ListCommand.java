@@ -8,13 +8,13 @@ import seashell.task.Task;
 public class ListCommand implements Command {
 
     @Override
-    public String execute(TaskList taskListObj, SaveHandler saveHandler) throws SeashellException {
-        if (taskListObj.taskList.isEmpty()) {
+    public String execute(TaskList taskList, SaveHandler saveHandler) throws SeashellException {
+        if (taskList.isEmpty()) {
             throw new SeashellException("OOPS!!! Task list is currently still empty!");
         } else {
             StringBuilder sb = new StringBuilder();
-            for (int i = 1; i <= taskListObj.taskList.size(); i++) {
-                Task t = taskListObj.taskList.get(i - 1);
+            for (int i = 1; i <= taskList.size(); i++) {
+                Task t = taskList.get(i - 1);
                 sb.append(i + ". " + t + "\n");
             }
             return sb.toString();

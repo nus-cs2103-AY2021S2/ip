@@ -14,14 +14,13 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskListObj, SaveHandler saveHandler) throws SeashellException {
-        if (taskListObj.taskList.size() < index) {
+    public String execute(TaskList taskList, SaveHandler saveHandler) throws SeashellException {
+        if (taskList.size() < index) {
             throw new SeashellException("OOPS!!! Task index is out of bounds!");
         } else {
-            Task updated = taskListObj.taskList.get(index - 1).setDone();
-            taskListObj.taskList.set(index - 1, updated);
-//            taskListObj = new TaskList(taskListObj.taskList);
-            saveHandler.updateSaveFile(taskListObj.taskList);
+            Task updated = taskList.get(index - 1).setDone();
+            taskList.set(index - 1, updated);
+            saveHandler.updateSaveFile(taskList.taskList);
             return "Nice! I've marked this task as done: \n" + updated;
         }
     }
