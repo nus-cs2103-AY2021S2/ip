@@ -20,17 +20,20 @@ public class TaskList {
         this.tasks = new ArrayList<>();
         ArrayList<String> storedData = this.storage.load();
         for (String s : storedData) {
-            this.tasks.add(loadData(s));
+            this.tasks.add(decode(s));
         }
         this.numOfTasks = this.tasks.size();
     }
 
-    private Task loadData(String data) {
+    /**
+     * Method which decodes stored data from duke.txt into list of tasks for the running of program.
+     * @param data The string of data stored in duke.txt.
+     * @return The decoded task from the data.
+     */
+    private Task decode(String data) {
         String[] dataArray = data.split("\\|");
-
-        //System.out.println(dataArray.length + " " + dataArray[0] + dataArray[1]);
-
         Task task;
+
 
         if (dataArray[0].equals("T")) {
             task = new Todo(dataArray[2]);
@@ -54,6 +57,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method which checks if the list is empty.
+     * @return True if list is empty.
+     *         False otherwise.
+     */
     public boolean isEmpty() {
         return this.tasks.isEmpty();
     }
@@ -103,6 +111,10 @@ public class TaskList {
         return filtered;
     }
 
+    /**
+     * Method which retrieves the number of tasks.
+     * @return The number of tasks in the list of tasks.
+     */
     public int getSize() {
         return this.numOfTasks;
     }

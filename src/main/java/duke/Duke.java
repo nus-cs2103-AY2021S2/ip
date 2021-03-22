@@ -21,21 +21,6 @@ public class Duke {
         this.ui = new Ui();
     }
 
-    /*
-     * This is the main method which starts the duke chat.
-     * @param args Takes in command line arguments to be processed.
-     * @throws DukeException Throws exceptions if existing file is of wrong format.
-     */
-    /*
-    public static void main(String[] args) throws DukeException {
-        try {
-            new Duke(LOG_PATH).run();
-        } catch (DukeException e) {
-            throw new DukeException("unable to load file, probably wrong format.");
-        }
-    }
-    */
-
     /**
      * A process method with a parser object.
      * @param p The parser object with parsed information.
@@ -65,33 +50,6 @@ public class Duke {
         default:
             return "";
         }
-    }
-
-    /**
-     * Run method which starts the program with a greeting message.
-     * @throws DukeException Throws DukeException if any input is invalid.
-     */
-    public void run() throws DukeException {
-
-        while (true) {
-            String userInput = ui.getUserInput();
-            Parser p;
-
-            try {
-                p = Parser.parse(userInput);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                continue;
-            }
-            if (p.getCommand().equals("bye")) {
-                break;
-            }
-            if (p.getCommand().equals("/help")) {
-                Ui.printHelpMessage();
-            }
-            this.process(p);
-        }
-        Ui.printGoodbye();
     }
 
     /**
