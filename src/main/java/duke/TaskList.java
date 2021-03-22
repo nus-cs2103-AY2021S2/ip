@@ -1,9 +1,9 @@
-package Duke;
+package duke;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import DukeException.DukeException;
+import dukeException.DukeException;
 import Storage.Storage;
 
 public class TaskList {

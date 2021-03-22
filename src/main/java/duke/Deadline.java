@@ -1,16 +1,26 @@
-package Duke;
+package duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
+/**
+ * Class representing a deadline task.
+ */
 public class Deadline extends Task {
     private final LocalDate deadLine;
 
+    /**
+     * Constructor for a deadline with description and a deadline.
+     *
+     * @param description
+     * @param deadLine
+     */
     public Deadline(String description, String deadLine) {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
         this.deadLine = LocalDate.parse(deadLine.trim(), formatter);
     }
+
 
     @Override
     public String encode() {

@@ -1,5 +1,5 @@
-import Duke.*;
-import DukeException.DukeException;
+import duke.*;
+import dukeException.DukeException;
 import Parser.Parser;
 import Storage.Storage;
 import Ui.Ui;

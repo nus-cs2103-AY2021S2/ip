@@ -1,7 +1,10 @@
 package Parser;
 
-import Duke.*;
-import DukeException.DukeException;
+import duke.Deadline;
+import duke.Event;
+import duke.Task;
+import duke.Todo;
+import dukeException.DukeException;
 
 public class Parser {
     private Task task;
@@ -95,15 +98,22 @@ public class Parser {
                     }
                 } else {
                     try {
-                        return switch (commandWord) {
-                            case "list" -> new Parser("list");
-                            case "done" -> new Parser(taskNumber, "done");
-                            case "delete" -> new Parser(taskNumber, "delete");
-                            case "deadline" -> new Parser(new Deadline(taskContent, taskTime.toString()), "add");
-                            case "event" -> new Parser(new Event(taskContent, taskTime.toString()), "add");
-                            case "find" -> new Parser(commandWord, taskContent);
-                            default -> throw new DukeException("I'm sorry, but I don't know what that means :-(");
-                        };
+                        switch (commandWord) {
+                            case "list":
+                                return new Parser("list");
+                            case "done":
+                                return new Parser(taskNumber, "done");
+                            case "delete":
+                                return new Parser(taskNumber, "delete");
+                            case "deadline":
+                                return new Parser(new Deadline(taskContent, taskTime.toString()), "add");
+                            case "event":
+                                return new Parser(new Event(taskContent, taskTime.toString()), "add");
+                            case "find":
+                                return new Parser(commandWord, taskContent);
+                            default:
+                                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                        }
                     } catch (Exception e) {
                         throw new DukeException("too little information, please type /help for assistance!");
                     }

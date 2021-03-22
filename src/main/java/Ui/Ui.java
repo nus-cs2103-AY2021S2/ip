@@ -1,7 +1,7 @@
 package Ui;
 
-import Duke.*;
-import DukeException.DukeException;
+import duke.*;
+import dukeException.DukeException;
 
 import java.util.List;
 import java.util.Scanner;
