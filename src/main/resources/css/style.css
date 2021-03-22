@@ -6,7 +6,6 @@
 .send-button {
     -fx-background-color: aqua;
     -fx-font-size:15px;
-    -fx-text-fill: #00000;
     -fx-border-width: 2px;
     -fx-border-color: #800000;
 }
