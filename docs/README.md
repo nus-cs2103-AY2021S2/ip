@@ -35,7 +35,7 @@ Example of usage: `todo read book`
 Expected outcome:
 ```
 Got it. I've added this task:
-  [T][ ] read book
+  [T][✘] read book
 Now you have 1 task in the list
 ```
 
@@ -121,7 +121,7 @@ Example of usage: `find book`
 Expected outcome:
 ````
 Here are the matching tasks in your list:
-1. [T][ ] read book
+1. [T][✘] read book
 2. [D][✘] return books (by: Feb 27 2021)
 ````
 
