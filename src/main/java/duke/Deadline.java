@@ -12,8 +12,8 @@ public class Deadline extends Task {
     /**
      * Constructor for a deadline with description and a deadline.
      *
-     * @param description
-     * @param deadLine
+     * @param description A string of description describing the type of dateline.
+     * @param deadLine The due date of the dateline.
      */
     public Deadline(String description, String deadLine) {
         super(description);

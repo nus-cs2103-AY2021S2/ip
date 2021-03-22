@@ -16,8 +16,8 @@ public class Task {
 
     /**
      * An overloaded constructor which creates a task object with a description of task and date/time information.
-     * @param description
-     * @param dateTime
+     * @param description A description describing details of the task.
+     * @param dateTime The date of the task.
      */
     public Task(String description, String dateTime) {
         this.description = description;
