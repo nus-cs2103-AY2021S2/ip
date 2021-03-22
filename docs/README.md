@@ -1,7 +1,10 @@
 # User Guide
 This is a simple user guide.
 
-![ui](docs/ui.png)
+![Ui](docs/ui.png)
+
+##Acknowledgements
+Gui Inspired by https://github.com/sc-arecrow/ip.
 
 ## Features 
 
@@ -31,6 +34,7 @@ Example : `list`
 `find keyword` : generates a list of tasks with given keyword as filter.
 
 Example : `find cs2103`
+
 
 
 
