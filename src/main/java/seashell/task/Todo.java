@@ -6,10 +6,13 @@ public class Todo extends Task {
         super(name);
     }
 
+    public Todo(String name, boolean isDone) {
+        super(name, isDone);
+    }
+
     @Override
     public Todo setDone() {
-        Todo doneTask = new Todo(this.getName());
-        doneTask.setDone();
+        Todo doneTask = new Todo(this.getName(), true);
         return doneTask;
     }
 
