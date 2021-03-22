@@ -1,20 +1,36 @@
 # User Guide
+This is a simple user guide.
+
+![ui](docs/ui.png)
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Feature 1
+`/help` : generates a list of commands with correct formatting for new user.
+### Feature 2
+`todo description` : adds a todo task to the list with description.
 
-## Usage
+Example : `todo something`
+### Feature 3
+`deadline name /by yyyy-m-dd` : adds a deadline task to the list with given format.
 
-### `Keyword` - Describe action
+Example : `deadline Project2 /by 2012-1-23`
+### Feature 4
+`event name /at yyyy-m-dd` : adds an event task to the list with given format.
 
-Describe action and its outcome.
+Example : `event Project2 /at 2012-1-23`
+### Feature 5
+`delete index` : deletes a task in the list at the given index.
 
-Example of usage: 
+Example : `delete 2`
+### Feature 6
+`list` : generates a list of tasks, if it exists.
 
-`keyword (optional arguments)`
+Example : `list`
+### Feature 7
+`find keyword` : generates a list of tasks with given keyword as filter.
 
-Expected outcome:
+Example : `find cs2103`
 
-`outcome`
+
+
