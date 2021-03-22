@@ -88,7 +88,7 @@ public class Parser {
                     count++;
                 } else {
                     if (i + 1 == input.length) {
-                        if (commandWord.equals("deadline")) {
+                        if (commandWord.equals("deadline") || commandWord.equals("event")) {
                             throw new DukeException("DeadLine for" + input[0] + "cannot be empty.");
                         } else {
                             throw new DukeException("Event for" + input[0] + "cannot be empty.");
@@ -101,7 +101,7 @@ public class Parser {
                 taskTime.append(input[j]);
             }
         } else {
-            if (commandWord.equals("delete")) {
+            if (commandWord.equals("delete") || commandWord.equals("done")) {
                 try {
                     taskNumber = Integer.parseInt(input[1]);
                 } catch (Exception e) {
@@ -112,7 +112,7 @@ public class Parser {
             }
         }
 
-        if (commandWord.equals("bye")) {
+        if (commandWord.equals("bye") || commandWord.equals("/help")) {
             return new Parser(commandWord);
         } else {
             if (commandWord.equals("todo")) {

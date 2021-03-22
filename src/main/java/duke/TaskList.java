@@ -7,8 +7,8 @@ import dukeexception.DukeException;
 import storage.Storage;
 
 public class TaskList {
-    private final Storage storage;
-    private final List<Task> tasks;
+    private Storage storage;
+    private List<Task> tasks;
     private int numOfTasks;
 
     /**

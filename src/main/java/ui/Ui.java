@@ -23,15 +23,16 @@ public class Ui {
     /**
      * Method which prints a greeting message.
      */
-    public static void printGreeting() {
+    public String printGreeting() {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        System.out.println("Greetings! I am Duke! How may I assist you?\n");
+        String merge1 = "Hello from\n" + logo + "\n" + "Greetings! I am duke.Duke! How may I assist you?\n";
+
+        return merge1;
     }
 
     /**
@@ -44,64 +45,85 @@ public class Ui {
     /**
      * Static method which prints the list of tasks.
      * @param tasks A task list containing list of tasks to be printed.
+     * @return Response.
      * @throws DukeException Throws an exception if task list is empty.
      */
-    public static void printList(TaskList tasks) throws DukeException {
-        try {
+    public static String printList(TaskList tasks) throws DukeException {
+        String res = "";
+        if (tasks.getSize() == 0) {
+            res = "It seems like there is no tasks in the list.";
+        } else {
             for (int i = 1; i <= tasks.getSize(); i++) {
-                System.out.println(i + ". " + tasks.get(i).toString());
+                res = res + i + ". " + tasks.get(i).toString() + "\n";
             }
-        } catch (Exception e) {
-            throw new DukeException("There is 0 task in the list.");
         }
+        return res;
     }
 
     /**
      * Method which prints a filtered list with a specific filter.
      * @param tasks List of filtered tasks to be printed.
+     * @return Response.
      */
-    public void printFilteredList(List<Task> tasks) {
+    public String printFilteredList(List<Task> tasks) {
 
         if (!tasks.isEmpty()) {
-            System.out.println("Here are the matching tasks in your list:");
+            String res = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(tasks.get(i).toString());
+                res = res + tasks.get(i).toString() + "\n";
             }
+            return res;
         } else {
-            System.out.println("Sorry, there is no task with matching keywords.");
+            return "Sorry, there is no task with matching keywords.";
         }
     }
 
     /**
      * Method which prints done message for the task that has been marked done.
-     * @param task
+     * @param task This task.
+     * @return Response.
      */
-    public void printDoneMessage(Task task) {
-        System.out.println("Alright, I will mark this as done.\n" + task.toString());
+    public String printDoneMessage(Task task) {
+        return "Alright, I will mark this as done.\n" + task.toString();
     }
 
     /**
      * Method which prints A task added prompt to confirm task is been added to the list.
      * @param task The task that is added to the list.
      * @param count The number of tasks in the current task list.
+     * @return Response.
      */
-    public void printTaskAddedMessage(Task task, int count) {
-        System.out.println("Got it. I have added this task: \n" + task.getDescription()
-                            + ". \n Now you have " + count + " items in your list.");
+    public String printTaskAddedMessage(Task task, int count) {
+        return "Got it. I have added this task: \n" + task.getDescription()
+                            + ". \n Now you have " + count + " items in your list.";
+
     }
 
     /**
      * Method which prints a task that is removed from the list.
      * @param index The index of corresponding task to be removed from the list.
+     * @return Response.
      */
-    public void printTaskRemovedMessage(int index) {
-        System.out.println("I have removed item " + index + ". Welcome.");
+    public String printTaskRemovedMessage(int index) {
+        return "I have removed item " + index + ". Welcome.";
     }
 
     /**
      * Method which prints a message when there is no task in the list.
+     * @return Response.
      */
-    public void printNoTaskMessage() {
-        System.out.println("It seems like there's no such task in your list:(");
+    public String printNoTaskMessage() {
+        return "It seems like there's no such task in your list:(";
+    }
+
+    /**
+     * Method which prints sample input format for user.
+     */
+    public static void printHelpMessage() {
+        System.out.println("*todo task*              ===> todo something");
+        System.out.println("*delete task at index*   ===> delete 1");
+        System.out.println("*list tasks*             ===> list");
+        System.out.println("*deadline task*          ===> dateline name /by 2011-1-23");
+        System.out.println("*event task*             ===> event name /at 2011-1-23");
     }
 }
