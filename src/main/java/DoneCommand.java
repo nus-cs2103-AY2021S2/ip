@@ -12,6 +12,10 @@ public class DoneCommand extends Command{
         this.value = value;
     }
 
+    /**
+     * Method that returns
+     * the result of the task to mark as done.
+     */
     public Result execute() throws DukeException {
         String output = "";
         if (value <= 0 || value > tasks.getStorage().size()) {

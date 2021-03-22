@@ -1,3 +1,7 @@
+/**
+ * Class that stores the result of the command
+ * that is to be outputted.
+ */
 public class Result {
 
     public String output;

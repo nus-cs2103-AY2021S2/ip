@@ -13,6 +13,10 @@ public class ListCommand {
         this.tasks = tasks;
     }
 
+    /**
+     * Method that iterates through the list of tasks and returns
+     * the result which is all existing tasks in the list.
+     */
     public Result execute() {
         String output = "";
         ArrayList<Task> storage = tasks.getStorage();

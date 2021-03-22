@@ -13,6 +13,10 @@ public class ClearCommand {
         this.tasks = tasks;
     }
 
+    /**
+     * Method that clears the list of tasks and returns
+     * the result of an empty task list.
+     */
     public Result execute() {
         ArrayList<Task> storage = tasks.getStorage();
         Set<Task> setOfTasks = tasks.getDuplicateChecker();

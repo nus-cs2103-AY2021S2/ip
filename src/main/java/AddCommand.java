@@ -12,6 +12,10 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Method that adds a task to the current list of tasks and returns
+     * the result of task that has been added.
+     */
     public Result execute() {
         String output = "";
         boolean hasDuplicate = tasks.checkForDuplicate(this.tasks.getDuplicateChecker(), task);
