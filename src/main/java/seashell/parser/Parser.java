@@ -79,6 +79,9 @@ public class Parser {
         } else {
             taskName = input.substring(8, input.indexOf("/by") - 1).stripLeading();
             String by = input.substring(input.indexOf("/by") + 4);
+            if (!DateValidator.isValid(by)) {
+                throw new SeashellException("OOPS!!! The syntax of adding a deadline should be [name] /by [yyyy-mm-dd]");
+            }
             return new AddCommand(TaskType.DEADLINE, taskName, by);
         }
     }
@@ -92,6 +95,9 @@ public class Parser {
         } else {
             taskName = input.substring(5, input.indexOf("/at") - 1).stripLeading();
             String at = input.substring(input.indexOf("/at") + 4);
+            if (!DateValidator.isValid(at)) {
+                throw new SeashellException("OOPS!!! The syntax of adding an event should be [name] /by [yyyy-mm-dd]");
+            }
             return new AddCommand(TaskType.EVENT, taskName, at);
         }
     }
