@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import parser.Parser;
+import ui.Ui;
 
 /**
  * Represents the main window component of the GUI.
@@ -74,9 +75,13 @@ public class MainWindow extends AnchorPane {
 
             boolean isException = false;
             try {
-                response = duke.process(Parser.parse(input));
+                if (input.contains("/help")) {
+                    response = Ui.printHelpMessage();
+                } else {
+                    response = duke.process(Parser.parse(input));
+                }
             } catch (DukeException e) {
-                response = "invalid input";
+                response = "invalid input, please use /help for clarifications";
                 isException = true;
             }
 
