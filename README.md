@@ -1,9 +1,10 @@
 # User Guide
 This is a simple user guide.
 
-![Ui](docs/ui.png)
+![Ui](docs/Ui.png)
 
 ##Acknowledgements
+
 Gui Inspired by https://github.com/sc-arecrow/ip.
 
 ## Features
