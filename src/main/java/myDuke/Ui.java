@@ -74,10 +74,10 @@ public class Ui {
     public String showLoadingErrorStr() {
         return ("I cannot find ur input file sia, could be becuz " +
                 "1) u never create file because u r new user, in that case, just continue using this program and i "
-                        + "will create the folder and save file for u in the directory [root]/data "
-                        + "2) ur saveFile.txt is not in the correct directory, pls input bye and shift the file to"
-                        + "[root]/data 3) ur input file is not named saveFile.txt, pls input 'bye' and rename "
-                        + "ur input file");
+                + "will create the folder and save file for u in the directory [root]/data "
+                + "2) ur saveFile.txt is not in the correct directory, pls input bye and shift the file to"
+                + "[root]/data 3) ur input file is not named saveFile.txt, pls input 'bye' and rename "
+                + "ur input file");
     }
 
     public void askForUserInput() {
@@ -112,6 +112,14 @@ public class Ui {
 
     String showListEmptyMsgStr() {
         return ("eh list is empty leh.");
+    }
+
+    void showFindEmptyMsg() {
+        print("Paikia Bot: eh your find keyword return no result leh.");
+    }
+
+    String showFindEmptyMsgStr() {
+        return ("eh your find keyword return no result leh.");
     }
 
     void printDoneTaskAlert(String completedTask) {
@@ -218,12 +226,12 @@ public class Ui {
         print("Paikia Bot: dis is your search result for '" + keyword + "'", tasksArr);
     }
 
-    String printSearchResultListStr(String keyword, String[] tasksArr) {
+    String printSearchResultListStr(String keyword, List<String> tasksArr) {
         String str = "";
         for (String s : tasksArr) {
-            str += s + ", ";
+            str += s + "\n";
         }
-        return ("Paikia Bot: dis is your search result for '" + keyword + "': " + str);
+        return ("Paikia Bot: dis is your search result for '" + keyword + "': \n" + str);
     }
 
     void showSortedMsg() {
