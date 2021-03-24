@@ -92,11 +92,15 @@ public class MyDuke {
      * @throws NoDateException If inputArr[1] is missing a "/", which is used before date inputs,
      * indicating that the date information is missing in the input.
      */
-    static void eventChecker(String[] inputArr) throws NoEventException, NoDateException {
+    static void eventChecker(String[] inputArr) throws NoEventException, NoDateException, WrongCommandException {
         if (inputArr.length == 1) {
             throw new NoEventException(
                     "Paikia Bot: you want to add what event task, limpeh need more information ah. "
                             + "input 'event <info> /YYYY-MM-DD. eg, event bookfest /at 2020-08-24");
+        } else if (!inputArr[1].contains("/at")) {
+            throw new WrongCommandException(
+                    "Paikia Bot: eh ur slash command is wrong la. event need do /at "
+                            + "eg, event bookfest /at 2020-08-24");
         } else if (inputArr[1].split("/", 2).length == 1) {
             throw new NoDateException(
                     "Paikia Bot: i dun see any date inputs leh. to add date input, use '/YYYY-MM-DD'. "
@@ -112,11 +116,15 @@ public class MyDuke {
      * @throws NoDateException If inputArr[1] is missing a "/", which is used before date inputs,
      * indicating that the date information is missing in the input.
      */
-    static void deadlineChecker(String[] inputArr) throws NoDeadlineException, NoDateException {
+    static void deadlineChecker(String[] inputArr) throws NoDeadlineException, NoDateException, WrongCommandException {
         if (inputArr.length == 1) {
             throw new NoDeadlineException(
                     "Paikia Bot: you want to add what deadline task, limpeh need more information ah. "
                             + "input 'deadline <info> <date>. eg, deadline return book /by 2020-01-01");
+        } else if (!inputArr[1].contains("/at")) {
+            throw new WrongCommandException(
+                    "Paikia Bot: eh ur slash command is wrong la. deadline need do /by "
+                            + "eg, deadline return book /by 2020-01-01");
         } else if (inputArr[1].split("/", 2).length == 1) {
             throw new NoDateException(
                     "Paikia Bot: i dun see any date inputs leh. to add date input, use '/YYYY-MM-DD'. "
@@ -131,6 +139,13 @@ public class MyDuke {
         }
     }
 
+    static void sortChecker(String[] inputArr) throws RedundantArgException {
+        if (inputArr.length > 1) {
+            throw new RedundantArgException(
+                    "Paikia Bot: your sort command input wrong lah. if u want me to help u sort"
+                            + ", just type one word 'sort'");
+        }
+    }
 
     public String getResponse(String input) {
         ui.askForUserInput();

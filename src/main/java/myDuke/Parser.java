@@ -129,7 +129,9 @@ public class Parser {
                 ui.printErrorMsg(e.getMessage());
             } catch (NoDateException e) {
                 ui.printErrorMsg(e.getMessage());
-            } catch (DateTimeParseException e) {
+            } catch (WrongCommandException e) {
+                ui.printErrorMsg(e.getMessage());
+            }catch (DateTimeParseException e) {
                 ui.printErrorMsg(new String[]{
                         "Paikia Bot: oi your date input got format error cannot parse sial: "
                                 + getParsedInput()[1].split("/", 2)[1],
@@ -145,6 +147,8 @@ public class Parser {
                 tasks.addTask(deadline);
                 ui.printAddedDeadlineAlert(deadline.toString(), tasks.getTaskList().size());
             } catch (NoDeadlineException e) {
+                ui.printErrorMsg(e.getMessage());
+            } catch (WrongCommandException e) {
                 ui.printErrorMsg(e.getMessage());
             } catch (NoDateException e) {
                 ui.printErrorMsg(e.getMessage());
@@ -208,7 +212,7 @@ public class Parser {
 
                 return ui.printTasksInListStr(tempArr);
             }
-            case "done":
+        case "done":
             try {
                 MyDuke.indexChecker(getParsedInput());
                 int ref = Integer.parseInt(getParsedInput()[1]);
@@ -259,7 +263,9 @@ public class Parser {
                 return ui.printErrorMsgStr(e.getMessage());
             } catch (NoDateException e) {
                 return ui.printErrorMsgStr(e.getMessage());
-            } catch (DateTimeParseException e) {
+            } catch (WrongCommandException e) {
+                return ui.printErrorMsgStr(e.getMessage());
+            }catch (DateTimeParseException e) {
                 return ui.printErrorMsgStr(new String[]{
                         "Paikia Bot: oi your date input got format error cannot parse sial: "
                                 + getParsedInput()[1].split("/", 2)[1],
@@ -275,9 +281,11 @@ public class Parser {
                 return ui.printAddedDeadlineAlertStr(deadline.toString(), tasks.getTaskList().size());
             } catch (NoDeadlineException e) {
                 return ui.printErrorMsgStr(e.getMessage());
+            } catch (WrongCommandException e) {
+                return ui.printErrorMsgStr(e.getMessage());
             } catch (NoDateException e) {
                 return ui.printErrorMsgStr(e.getMessage());
-            } catch (DateTimeParseException e) {
+            }catch (DateTimeParseException e) {
                 return ui.printErrorMsgStr(new String[]{
                         "oi your date input got format error cannot parse sial: "
                                 + getParsedInput()[1].split("/", 2)[1],
@@ -295,12 +303,12 @@ public class Parser {
                     }
                 }
                 int searchResultCounter = 1;
-                String[] tempSearchResultArr = new String[100];
+                List<String> tempSearchResultArr = new ArrayList<>();
                 if (searchResultList.isEmpty()) { // improved implementation in case list is empty, gives a clear output
-                    return ui.showListEmptyMsgStr();
+                    return ui.showFindEmptyMsgStr();
                 } else {
                     for (Task t : searchResultList) { // changed String s to Task t
-                        tempSearchResultArr[searchResultCounter - 1] = searchResultCounter + ". " + t.toString();
+                        tempSearchResultArr.add(searchResultCounter + ". " + t.toString());
                         searchResultCounter++;
                     }
                     return ui.printSearchResultListStr(keyword, tempSearchResultArr);
@@ -317,8 +325,13 @@ public class Parser {
             }
             return ui.showByeMsgStr();
         case "sort":
-            Collections.sort(tasks.taskList, new TaskListComparator());
-            return ui.showSortedMsgStr();
+            try {
+                MyDuke.sortChecker(getParsedInput());
+                Collections.sort(tasks.taskList, new TaskListComparator());
+                return ui.showSortedMsgStr();
+            } catch (RedundantArgException e) {
+                return ui.printErrorMsgStr(e.getMessage());
+            }
         default:
             return ui.showInputErrorStr();
         }
