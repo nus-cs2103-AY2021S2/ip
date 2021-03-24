@@ -1,0 +1,26 @@
+list
+todo dishes
+deadline another submission /by June 6th
+deadline another submission /by 2020-06-06
+event play table tennis /at 2020-03-04
+list
+done
+done 0
+done 4
+done 2
+list
+todo
+deadline
+deadline return another submission
+event
+event another play basketball
+lmao
+list
+delete
+delete 0
+delete 10
+delete 1
+list
+find play
+find table tennis
+bye

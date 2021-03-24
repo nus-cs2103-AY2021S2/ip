@@ -15,3 +15,6 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+.classpath
+.project
+.settings/org.eclipse.buildship.core.prefs

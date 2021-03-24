@@ -1,7 +1,159 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+____________________________________________________________
+Pai Kia Bot: Eh harlo! Call me Pai Kia Bot.
+____________________________________________________________
+____________________________________________________________
+Pai Kia Bot: Got ur input file, baik la
+____________________________________________________________
+____________________________________________________________
+Pai Kia Bot: how u want me to help u?
+____________________________________________________________
+You: list
+____________________________________________________________
+1. [T][ ] dishes
+2. [D][X] submission (JUN 06 2020)
+3. [E][ ] play soccer (MAR 04 2020)
+4. [T][X] dishes
+5. [D][ ] another submission (JUN 06 2020)
+6. [E][ ] play table tennis(MAR 04 2020)
+____________________________________________________________
+You: todo dishes
+____________________________________________________________
+Paikia Bot: ok i just help u added this todo -- [T][ ] dishes
+Paikia Bot: now u got 7 item(s) in your list ah
+____________________________________________________________
+You: deadline another submission /by June 6th
+____________________________________________________________
+Paikia Bot: oi your date input got format error cannot parse sial: by June 6th
+Paikia Bot: the format should be liddis: yyyy-mm-dd, eg. 2020-03-02
+____________________________________________________________
+You: deadline another submission /by 2020-06-06
+____________________________________________________________
+Paikia Bot: ok i just help u added this event -- [D][ ] another submission (JUN 06 2020)
+Paikia Bot: now u got 8 item(s) in your list ah
+____________________________________________________________
+You: event play table tennis /at 2020-03-04
+____________________________________________________________
+Paikia Bot: ok i just help u added this event -- [E][ ] play table tennis (MAR 04 2020)
+Paikia Bot: now u got 9 item(s) in your list ah
+____________________________________________________________
+You: list
+____________________________________________________________
+1. [T][ ] dishes
+2. [D][X] submission (JUN 06 2020)
+3. [E][ ] play soccer (MAR 04 2020)
+4. [T][X] dishes
+5. [D][ ] another submission (JUN 06 2020)
+6. [E][ ] play table tennis(MAR 04 2020)
+7. [T][ ] dishes
+8. [D][ ] another submission (JUN 06 2020)
+9. [E][ ] play table tennis (MAR 04 2020)
+____________________________________________________________
+You: done
+____________________________________________________________
+Paikia Bot: you done what task, limpeh need more information ah. input 'done <task number>'. eg, done 3
+____________________________________________________________
+You: done 0
+____________________________________________________________
+Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah
+____________________________________________________________
+You: done 4
+____________________________________________________________
+Paikia Bot: ok i just help u checked this task as done -- [T][X] dishes
+____________________________________________________________
+You: done 2
+____________________________________________________________
+Paikia Bot: ok i just help u checked this task as done -- [D][X] submission (JUN 06 2020)
+____________________________________________________________
+You: list
+____________________________________________________________
+1. [T][ ] dishes
+2. [D][X] submission (JUN 06 2020)
+3. [E][ ] play soccer (MAR 04 2020)
+4. [T][X] dishes
+5. [D][ ] another submission (JUN 06 2020)
+6. [E][ ] play table tennis(MAR 04 2020)
+7. [T][ ] dishes
+8. [D][ ] another submission (JUN 06 2020)
+9. [E][ ] play table tennis (MAR 04 2020)
+____________________________________________________________
+You: todo
+____________________________________________________________
+Paikia Bot: you want to add what todo task, limpeh need more information ah. input 'todo <info>. eg, todo read book
+____________________________________________________________
+You: deadline
+____________________________________________________________
+Paikia Bot: you want to add what deadline task, limpeh need more information ah. input 'deadline <info> <date>. eg, deadline return book /by 2020-01-01
+____________________________________________________________
+You: deadline return another submission
+____________________________________________________________
+Paikia Bot: i dun see any date inputs leh. to add date input, use '/YYYY-MM-DD'. eg, deadline return book /by 2020-01-01
+____________________________________________________________
+You: event
+____________________________________________________________
+Paikia Bot: you want to add what event task, limpeh need more information ah. input 'event <info> /YYYY-MM-DD. eg, event bookfest /at 2020-08-24
+____________________________________________________________
+You: event another play basketball
+____________________________________________________________
+Paikia Bot: i dun see any date inputs leh. to add date input, use '/YYYY-MM-DD'. eg, event bookfest /at 2020-08-24
+____________________________________________________________
+You: lmao
+____________________________________________________________
+Paikia Bot: wrong input format leh, can try again onot?
+____________________________________________________________
+You: list
+____________________________________________________________
+1. [T][ ] dishes
+2. [D][X] submission (JUN 06 2020)
+3. [E][ ] play soccer (MAR 04 2020)
+4. [T][X] dishes
+5. [D][ ] another submission (JUN 06 2020)
+6. [E][ ] play table tennis(MAR 04 2020)
+7. [T][ ] dishes
+8. [D][ ] another submission (JUN 06 2020)
+9. [E][ ] play table tennis (MAR 04 2020)
+____________________________________________________________
+You: delete
+____________________________________________________________
+Paikia Bot: you done what task, limpeh need more information ah. input 'done <task number>'. eg, done 3
+____________________________________________________________
+You: delete 0
+____________________________________________________________
+Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah
+____________________________________________________________
+You: delete 10
+____________________________________________________________
+Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah
+____________________________________________________________
+You: delete 1
+____________________________________________________________
+Paikia Bot: the number that you inputted is invalid leh (more than the total number of tasks or less than 1), try again pls ah
+____________________________________________________________
+You: list
+____________________________________________________________
+1. [T][ ] dishes
+2. [D][X] submission (JUN 06 2020)
+3. [E][ ] play soccer (MAR 04 2020)
+4. [T][X] dishes
+5. [D][ ] another submission (JUN 06 2020)
+6. [E][ ] play table tennis(MAR 04 2020)
+7. [T][ ] dishes
+8. [D][ ] another submission (JUN 06 2020)
+9. [E][ ] play table tennis (MAR 04 2020)
+____________________________________________________________
+You: find play
+____________________________________________________________
+Paikia Bot: dis is your search result for 'play'
+1. [E][ ] play soccer (MAR 04 2020)
+2. [E][ ] play table tennis(MAR 04 2020)
+3. [E][ ] play table tennis (MAR 04 2020)
+____________________________________________________________
+You: find table tennis
+____________________________________________________________
+Paikia Bot: dis is your search result for 'table tennis'
+1. [E][ ] play table tennis(MAR 04 2020)
+2. [E][ ] play table tennis (MAR 04 2020)
+____________________________________________________________
+You: bye
+____________________________________________________________
+Pai Kia Bot: Leave so soon ah? Ok can limpeh help u save your list in [root]/data as saveFile.txt, i go sleep first
+____________________________________________________________
