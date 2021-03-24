@@ -1,8 +1,6 @@
 
 public class Parser {
 
-    public Parser() {
-    }
 
     // entirely for parsing uer input
 
@@ -69,6 +67,8 @@ public class Parser {
                 case "delete":
                     return ParserOutput.removeOutput(Integer.parseInt(input[1]));
 
+                case "find":
+                    return ParserOutput.findOutput(input[1]);
                 default:
                     throw new NotFoundException();
             }

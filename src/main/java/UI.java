@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.TreeSet;
+import java.util.List;
 
 public class UI {
     private static final String H_RULE = "────────────────────────────────────────────────────────────────────";
@@ -45,11 +47,16 @@ public class UI {
     }
 
     public void printAdded(Task task, int count) {
-        System.out.println("Added " + task.getName() + ". \nYou now have " + count + " items in your list.");
+        System.out.println("Added" + task.getName() + ". \nYou now have " + count + " items in your list.");
     }
 
     public void printRemoved(int index) {
         System.out.println("I have removed item " + index + ".");
     }
 
+    public void printFind(List<Task> tasks, String str){
+        for (Task t : tasks){
+            System.out.println(t);
+        }
+    }
 }

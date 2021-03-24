@@ -4,6 +4,7 @@ public class ParserOutput {
     private Task task;
     private int index;
     private int action;
+    private String searchString;
 
     private ParserOutput(boolean bye, Task task, int action, int index) {
         this.bye = bye;
@@ -11,6 +12,14 @@ public class ParserOutput {
         this.action = action;
         this.index = index;
     }
+    private ParserOutput(boolean bye, Task task, int action, int index, String searchString) {
+        this.bye = bye;
+        this.task = task;
+        this.action = action;
+        this.index = index;
+        this.searchString = searchString;
+    }
+
 
     public static ParserOutput byeOutput() {
         return new ParserOutput(true, null, 0, 0);
@@ -28,8 +37,8 @@ public class ParserOutput {
         return new ParserOutput(false, task, 3, 0);
     }
 
-    public static ParserOutput setOutput(Task task, int index) {
-        return new ParserOutput(false, task, 4, index);
+    public static ParserOutput findOutput(String str) {
+        return new ParserOutput(false, null, 4, 0, str);
     }
 
     public static ParserOutput listOutput() {
@@ -50,5 +59,9 @@ public class ParserOutput {
 
     public Task getTask() {
         return task;
+    }
+
+    public String getSearchString(){
+        return searchString;
     }
 }

@@ -2,6 +2,7 @@
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import  java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class Duke {
         this.count= 0;
         this.ui = new UI();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
 
 
@@ -68,8 +69,9 @@ public class Duke {
                 this.taskList.add(parserOutput.getTask());
                 ui.printAdded(parserOutput.getTask(), this.taskList.getSize());
                 break;
-            case 4: //set
-                this.taskList.set(parserOutput.getIndex(), parserOutput.getTask());
+            case 4: //find
+                List<Task> results = this.taskList.find((parserOutput.getSearchString()));
+                ui.printFind(results, parserOutput.getSearchString());
                 break;
             case 5: //list
                 ui.printList(this.taskList);
@@ -78,8 +80,8 @@ public class Duke {
                 throw new DukeException("action not found");
         }
     }
-    public int run() {
-        UI.printHello();
+    public int run() throws DukeException {
+        ui.printHello();
         while(true){
             String userInput = ui.getInputFromUser();
             ParserOutput parserOutput = null;
@@ -90,12 +92,13 @@ public class Duke {
                 continue;
             }
             UI.printHRule();
-            if (ParserOutput.byeOutput().isBye()) {
+            if (parserOutput.isBye()) {
                 break;
             }
-            UI.printHRule();
+            this.readParse(parserOutput);
+            ui.printHRule();
         }
-        UI.printGoodbye();
+        ui.printGoodbye();
         return 0;
     }
 }

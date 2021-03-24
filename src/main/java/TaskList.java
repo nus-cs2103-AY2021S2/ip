@@ -61,6 +61,16 @@ public class TaskList {
         this.count++;
     }
 
+    public List<Task> find (String str){
+        List<Task>results = new ArrayList<>();
+        for (Task t : tasks){
+            if(t.getName().contains(str)){
+                results.add(t);
+            }
+        }
+        return results;
+    }
+
     public int getSize() {
         return this.count;
     }
