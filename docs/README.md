@@ -149,7 +149,7 @@ Expected outcome:
 `Ok can limpeh help u sort your list according to alphabetical order liao`
 
 ### `bye` - Saves tasks to storage
-Saves all tasks in MyDuke to local storage. You may now close the app.
+Saves all tasks in MyDuke to local storage (but does not exits the app). You may now exit the application.
 
 _input: bye_
 
