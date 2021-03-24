@@ -1,0 +1,137 @@
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+/**
+ * Records the list of Tasks that is to be done.
+ */
+public class TaskList {
+    private static final ArrayList<Task> storage = new ArrayList<>();
+    private static int count = 0;
+
+    /**
+     * Getter that returns the number of tasks in the Array List.
+     * @return The variable count.
+     */
+    static int getCount() {
+        return count;
+    }
+
+    /**
+     * Getter that returns the Array List of tasks.
+     * @return The variable storage.
+     */
+    static ArrayList<Task> getStorage() {
+        return storage;
+    }
+
+    /**
+     * Checks if the folder and file to store the data are present.
+     * Creates the folder and/or the file in case they are not there.
+     */
+    static void checkFileFolderSpecifications() {
+        try {
+            File dir = new File("./data");
+            dir.mkdir();
+            File f = new File("./data/tasks.txt");
+            if (!f.createNewFile()) {
+                count = Storage.uploadFromHardDrive();
+            }
+
+        } catch (IOException e) {
+            System.out.println("error in making folder/file");
+        }
+    }
+
+    /**
+     * Parses Tasks entered by the user.
+     * @param task The type of task.
+     * @param description The description of the task.
+     * @param date The date of the task.
+     * @param time The time of the task.
+     * @param tag The tag of the task.
+     * @return Success/Failure of processing the task.
+     */
+    static String processTaskOutput(String task, String description, LocalDate date, LocalTime time, String tag) {
+        Task toAdd;
+        switch (task) {
+        case "todo":
+            toAdd = new Todo(description);
+            break;
+        case "deadline":
+            toAdd = new Deadline(description, date, time);
+            break;
+        case "event":
+            toAdd = new Event(description, date, time);
+            break;
+        default:
+            return "Error in Task processing.";
+        }
+
+        if (tag != null) {
+            toAdd.addTag(tag);
+        }
+        storage.add(toAdd);
+        count++;
+        return Ui.outputMessageTask(task, storage.get(count - 1));
+    }
+
+    /**
+     * Process the done command by updating the Task to reflect that it has been completed.
+     * It also prints an output message.
+     * @param doneWithIndexNumber The index number of the Task which has been done by the user.
+     */
+    static String processDoneOutput(int doneWithIndexNumber) {
+        Task current = storage.get(doneWithIndexNumber - 1);
+        current.finished();
+        return Ui.outputMessageDone(current);
+    }
+
+    /**
+     * Prints the output message for a list of all the tasks which contain the keyword.
+     * @param description Contains the keywords that are being searched for in the array.
+     */
+    static String processFindOutput(String description) {
+        return Ui.outputMessageFind(storage, description);
+    }
+
+    /**
+     * Prints the output message for a list of all the tasks to be printed out.
+     */
+    static String processListOutput() {
+        return Ui.outputMessageList(storage, count);
+    }
+
+    static String processTaggedOutput(String description) {
+        return Ui.outputMessageTagged(storage, description);
+    }
+
+    /**
+     * Deletes the n-numbered Task from the task list, where n is the number given by the user.
+     * @param deleteThisIndexNumber The index number of the Task which the user wants to delete.
+     */
+    static String processDeleteOutput(int deleteThisIndexNumber) {
+        Task toDelete = storage.get(deleteThisIndexNumber - 1);
+        storage.remove(deleteThisIndexNumber - 1);
+        count--;
+        return Ui.outputMessageDelete(toDelete);
+    }
+
+    static String processTagOutput(int index, String description) {
+        Task toTag = storage.get(index - 1);
+        toTag.addTag(description);
+        return Ui.outputMessageTag(toTag, description);
+    }
+
+    /**
+     * Stores the task list once the user wants to leave the program.
+     * Prints an output message as well.
+     */
+    static String processBye() {
+        Storage.uploadToHardDrive();
+        return Ui.outputMessageBye();
+    }
+
+}
