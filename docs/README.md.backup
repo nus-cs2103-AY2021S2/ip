@@ -42,7 +42,7 @@ Example of usage:
 
 Expected outcome:
 
-`____________________________________________`
+`_______________________________________________________`
 
 ` Added deadline sign consent form.`
 
@@ -50,7 +50,7 @@ Expected outcome:
 
 `You now have 4 items in the list`
 
-`____________________________________________`
+`_______________________________________________________`
 
 ### `event` - Add a task with date (e.g. 2019-10-15) attached to it
 
@@ -60,7 +60,7 @@ Example of usage:
 
 Expected outcome:
 
-`____________________________________________`
+`_______________________________________________________`
 
 `Added event project meeting.`
 
@@ -68,7 +68,7 @@ Expected outcome:
 
 `Now you have 5 tasks in the list`
 
-`____________________________________________`
+`_______________________________________________________`
 
 ### `delete` - Delete a task from the list
 
@@ -113,6 +113,20 @@ Expected outcome:
 
 
 `    ______________________________________________________`
+
+### `find` - Find a task from the list
+
+Example of usage:
+
+`find code`
+
+Expected outcome:
+
+`_______________________________________________________`
+ 
+`[T][X] write some code`
+`_______________________________________________________`
+
 
 ## Usage
 
