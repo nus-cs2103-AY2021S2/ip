@@ -1,0 +1,13 @@
+todo borrow book
+list
+deadline return book /by Sunday
+deadline do homework /by Monday
+done 3
+event attend meeting /at 6:45pm
+todo make coffee
+todo clean room
+done 5
+list
+delete 5
+list
+bye
