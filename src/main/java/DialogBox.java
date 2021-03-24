@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +22,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a new DialogBox
+     *
+     * @param text as output String
+     * @param img as output Image
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
