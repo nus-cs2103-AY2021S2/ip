@@ -1,11 +1,8 @@
 
 public class Parser {
 
-
-    // entirely for parsing uer input
-
     public static ParserOutput parse(String raw_in) throws DescriptionException, TimeException, NotFoundException {
-        String joined = "";
+        String reconnected= "";
         String timing = "";
         String[] input = raw_in.split(" ");
         if (raw_in.equals("bye")) {
@@ -20,16 +17,16 @@ public class Parser {
 
 
                 case "todo":
-                    for (int i = 1; i < input.length; i++) {
-                        joined = joined + " " + input[i];
+                    for (String str: input) {
+                        reconnected = reconnected + " " + str;
                     }
 
-                    return ParserOutput.addOutput(new Todo(joined));
+                    return ParserOutput.addOutput(new Todo(reconnected));
 
                 case "deadline":
                     int seq = 0;
                     while (!input[seq].equals("/by")) {
-                        joined = joined + " " + input[seq];
+                        reconnected = reconnected + " " + input[seq];
                         seq++;
                         if (seq == input.length) {
                             throw new DescriptionException(input[0]);
@@ -43,12 +40,12 @@ public class Parser {
                     for (int i = seq + 1; i < input.length; i++) {
                         timing = timing + " " + input[i];
                     }
-                    return ParserOutput.addOutput(new Deadline(joined, timing.trim()));
+                    return ParserOutput.addOutput(new Deadline(reconnected, timing.trim()));
 
                 case "event":
                     int seq2 = 0;
                     while (!input[seq2].equals("/at")) {
-                        joined = joined + " " + input[seq2];
+                        reconnected = reconnected + " " + input[seq2];
                         seq2++;
                         if (seq2 == input.length) {
                             throw new DescriptionException(input[0]);
@@ -62,7 +59,7 @@ public class Parser {
                     for (int i = seq2 + 1; i < input.length; i++) {
                         timing = timing + " " + input[i];
                     }
-                    return ParserOutput.addOutput(new Event(joined, timing.trim()));
+                    return ParserOutput.addOutput(new Event(reconnected, timing.trim()));
 
                 case "delete":
                     return ParserOutput.removeOutput(Integer.parseInt(input[1]));

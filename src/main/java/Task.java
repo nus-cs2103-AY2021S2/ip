@@ -8,9 +8,6 @@ public class Task {
         this.done = false;
     }
 
-    public boolean getDone(){
-        return this.done;
-    }
 
     public String getName() {
         return name;
@@ -18,6 +15,10 @@ public class Task {
 
     public void setDone(boolean bool){
         this.done = bool;
+    }
+
+    public boolean isDone(){
+        return this.done;
     }
 
     @Override

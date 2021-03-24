@@ -21,26 +21,7 @@ public class ParserTest {
         assertEquals(out.getAction(), 3);
     }
 
-    @DisplayName("Test if parser creates Todo object when todo is added. ")
-    @Test
-    public void addTodoTest() throws DukeException {
-        ParserOutput out = Parser.parse("todo do something");
-        assertThat(out.getTask(), instanceOf(Todo.class));
-    }
 
-    @DisplayName("Test if parser creates Event object when todo is added. ")
-    @Test
-    public void addEventTest() throws DukeException {
-        ParserOutput out = Parser.parse("event do something /at 2021-1-11");
-        assertThat(out.getTask(), instanceOf(Event.class));
-    }
-
-    @DisplayName("Test if parser creates Deadline object when todo is added. ")
-    @Test
-    public void addDeadlineTest() throws DukeException {
-        ParserOutput out = Parser.parse("deadline abc /by 2021-1-11");
-        assertThat(out.getTask(), instanceOf(Deadline.class));
-    }
 
     @DisplayName("Test for delete. ")
     @Test

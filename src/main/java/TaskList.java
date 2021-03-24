@@ -11,34 +11,8 @@ public class TaskList {
         this.storage = storage;
         this.tasks = new ArrayList<>();
 
-        ArrayList<String> storageStrings = this.storage.readStorage();
-        for (String s : storageStrings) {
-            this.tasks.add(parseStorageString(s));
-        }
-
-        this.count = this.tasks.size();
     }
 
-    private Task parseStorageString(String storageString) {
-        String[] splitStorageString = storageString.split("\\|");
-        for (String s : splitStorageString) {
-            System.out.println(s);
-        }
-        Task task;
-        if (splitStorageString[0].equals("T")) {
-            task = new Todo(splitStorageString[2]);
-        } else if (splitStorageString[0].equals("D")) {
-            task = new Deadline(splitStorageString[2], splitStorageString[3]);
-        } else {
-            task = new Event(splitStorageString[2], splitStorageString[3]);
-        }
-
-        if (splitStorageString[1].equals("Y")) {
-            task.setDone(true);
-        }
-
-        return task;
-    }
 
     public Task get(int index) {
         return this.tasks.get(index - 1);
@@ -71,7 +45,7 @@ public class TaskList {
         return results;
     }
 
-    public int getSize() {
+    public int getCount() {
         return this.count;
     }
 
