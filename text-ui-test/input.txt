@@ -1,0 +1,7 @@
+todo homework1
+event lecture 1 (10.00am tmr)
+deadline OP1cs2101 (16 Feb)
+
+done 1
+done 2
+done 3
