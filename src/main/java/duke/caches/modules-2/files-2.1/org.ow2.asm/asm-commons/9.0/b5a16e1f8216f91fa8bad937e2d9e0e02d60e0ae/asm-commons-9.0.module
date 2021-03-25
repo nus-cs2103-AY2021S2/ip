@@ -1,0 +1,147 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.ow2.asm",
+    "module": "asm-commons",
+    "version": "9.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.3",
+      "buildId": "7xsxxpsw5bhtfa7xsz5fastuvy"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.0"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-tree",
+          "version": {
+            "requires": "9.0"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-analysis",
+          "version": {
+            "requires": "9.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "asm-commons-9.0.jar",
+          "url": "asm-commons-9.0.jar",
+          "size": 71646,
+          "sha512": "ecf3ad59944e9e8192b91c80e2c9921853ded3c17c8ab08c7726a8c61e34ca7ea3c9924e0b80a5d6d240844dea91092eeabb47bad37623959595887c2bb3b8f3",
+          "sha256": "1b9090acb7e67bd4ed2f2cfb002063316d79cecace237bd07cc4f7f1b302092f",
+          "sha1": "5a34a3a9ac44f362f35d1b27932380b0031a3334",
+          "md5": "e84f4f465fe607932af0d9ca4b31bce5"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.0"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-tree",
+          "version": {
+            "requires": "9.0"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-analysis",
+          "version": {
+            "requires": "9.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "asm-commons-9.0.jar",
+          "url": "asm-commons-9.0.jar",
+          "size": 71646,
+          "sha512": "ecf3ad59944e9e8192b91c80e2c9921853ded3c17c8ab08c7726a8c61e34ca7ea3c9924e0b80a5d6d240844dea91092eeabb47bad37623959595887c2bb3b8f3",
+          "sha256": "1b9090acb7e67bd4ed2f2cfb002063316d79cecace237bd07cc4f7f1b302092f",
+          "sha1": "5a34a3a9ac44f362f35d1b27932380b0031a3334",
+          "md5": "e84f4f465fe607932af0d9ca4b31bce5"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "asm-commons-9.0-javadoc.jar",
+          "url": "asm-commons-9.0-javadoc.jar",
+          "size": 137342,
+          "sha512": "0e25be3f62bc4cec34976d03c7384a369b86d4505cad709f800dd738f845b2ce23d2a0a13fa50b84382dff372434c9398b20a9171bd993e6c202dcdb858c7cfc",
+          "sha256": "b9f929932df93371bf048501d164ac2b4aa6f0d4cad7d28ca8299855d91ab0aa",
+          "sha1": "5cc23a0d42f2c52028ff1fb4c1e24a5179308ddc",
+          "md5": "5ddf405be1c15817f910194ed045aaaf"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "asm-commons-9.0-sources.jar",
+          "url": "asm-commons-9.0-sources.jar",
+          "size": 81736,
+          "sha512": "29876c5cd8b899fef6b1fe33d2e2715f6249cc9be051c5aa7849e8e04c32355b7d24b331440c83210d0a26a9e375d807ce58527db2f70749c163b5ff479a3160",
+          "sha256": "7ced1227cc5e9d9762a930e19f8708591c5ef458bcdebdebd7e934fbb1b1adf3",
+          "sha1": "e05dba04ed16700761c397b6d665de383478c929",
+          "md5": "2744216b7c212c53fcef582a505df1fe"
+        }
+      ]
+    }
+  ]
+}

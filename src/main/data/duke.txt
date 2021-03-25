@@ -1,0 +1,3 @@
+[T][X] buy groceries
+[D][] submit IP/by Thu Jan 14 14:00:00 SGT 2021
+[E][] John birthday/from Thu Jan 14 18:00:00 SGT 2021 to Thu Jan 14 21:00:00 SGT 2021

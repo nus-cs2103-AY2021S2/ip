@@ -1,0 +1,119 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.ow2.asm",
+    "module": "asm-tree",
+    "version": "9.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.3",
+      "buildId": "7xsxxpsw5bhtfa7xsz5fastuvy"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "asm-tree-9.0.jar",
+          "url": "asm-tree-9.0.jar",
+          "size": 52673,
+          "sha512": "8a28530674086ad5cd6da8ae9073793b113203c0a49e6255e72064687fe0e58f0b2377eb27d67c28d8e3f9b4c3885fc7184f8ed6988788bcd69e15b0def3a029",
+          "sha256": "e2c25f332eb95861883a8568e45aac5e77d140d0fe961ae8eb9a474ec876e00d",
+          "sha1": "9df939f25c556b0c7efe00701d47e77a49837f24",
+          "md5": "3798070ed795cf4aa7efd7f63feec2a2"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "asm-tree-9.0.jar",
+          "url": "asm-tree-9.0.jar",
+          "size": 52673,
+          "sha512": "8a28530674086ad5cd6da8ae9073793b113203c0a49e6255e72064687fe0e58f0b2377eb27d67c28d8e3f9b4c3885fc7184f8ed6988788bcd69e15b0def3a029",
+          "sha256": "e2c25f332eb95861883a8568e45aac5e77d140d0fe961ae8eb9a474ec876e00d",
+          "sha1": "9df939f25c556b0c7efe00701d47e77a49837f24",
+          "md5": "3798070ed795cf4aa7efd7f63feec2a2"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "asm-tree-9.0-javadoc.jar",
+          "url": "asm-tree-9.0-javadoc.jar",
+          "size": 158391,
+          "sha512": "38653a36f8a01fb41ea5aa37e0e387d514182fe6e06f25a44f460f3e2609a6d2cb4d38a9edf8ab0221c3cbd498cf8b74aa6c3c74454e2557c451e0d63c887f12",
+          "sha256": "9a35ebbec75750cb8e7de8106ad06a71c380021a990525e2f315919115195129",
+          "sha1": "dd6c209f8f65664738e18e168cf0d5989246e698",
+          "md5": "694dd0e621f5d0857672c8bbce55f768"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "asm-tree-9.0-sources.jar",
+          "url": "asm-tree-9.0-sources.jar",
+          "size": 75895,
+          "sha512": "d35c91cc0416ced57d57246dc60ff9c5fe4f6cb9c0580a36e8cddd1e3fab6e66bcf439148b80f0c084304721e984483a5591ea5a9a27246730e6fba7ce9a236f",
+          "sha256": "e75b132b75a861dcbb8aa75b98783b863310fb2e3e3d28394c22063db5ec7432",
+          "sha1": "ef07227f641685b6473fd0fbb4931afd6539df1a",
+          "md5": "9266c94f4f4dc8c8dc42f09377fb4b0d"
+        }
+      ]
+    }
+  ]
+}
