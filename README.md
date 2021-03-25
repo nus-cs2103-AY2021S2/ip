@@ -1,23 +1,13 @@
-# Duke project template
+# Kiwi Chat Bot
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This repo is for a task managing application that uses JavaFX to provide a friendly user interface. It helps keep track of tasks done and allows adding, editing, searching of tasks.
 
-## Setting up in Intellij
+## How to try this app out 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+The latest jar file can be downloaded from this releases of this repo, [also found at this link](https://github.com/pPris/ip/releases/tag/v1.0).
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Open a command prompt from the folder containing the jar file on your computer. The jar file can be run using `java -jar duke.jar`
+
+## Acknowledgements
+
+This project is based on a project template for a greenfield Java project, called Duke. It was forked from this repo https://github.com/nus-cs2103-AY2021S2/ip, created by module coordinators and other contributors for CS2103T.
