@@ -1,0 +1,12 @@
+level 7
+save after every change by updating only the specific change, instead of overwriting entire file?
+
+prevent user from not using ;;
+offer to correct it to ;
+
+parsing and unparsing assumes that the file was parsed corrrectly
+--> need to throw exceptions in case it wasn't
+    --> i.e. data corrupted
+
+
+    create tests that check tasks.txt

@@ -1,0 +1,48 @@
+ ______
+/______\ Kiwi's
+|______|     Inn
+####################
+    ______________________________________________
+      Welcome, traveller. I'm Kiwi.
+      What would you like to do today?
+    ______________________________________________
+    ______________________________________________
+      Your tasks:
+
+      You have 0 tasks. 
+    ______________________________________________
+    ______________________________________________
+      Success. I've added this task:
+        [E][ ] 2101 meeting (at: 30 Jun 6PM)
+    ______________________________________________
+    ______________________________________________
+      Oops, error occurred in saving the file.
+      C:\Users\ppris\OneDrive\everything uni related\modules\cs2103T\ip\text-ui-test\src\data\tasks.txt (The system cannot find the path specified)
+    ______________________________________________
+    ______________________________________________
+      Success. I've added this task:
+        [T][ ] cycling
+    ______________________________________________
+    ______________________________________________
+      Oops, error occurred in saving the file.
+      C:\Users\ppris\OneDrive\everything uni related\modules\cs2103T\ip\text-ui-test\src\data\tasks.txt (The system cannot find the path specified)
+    ______________________________________________
+    ______________________________________________
+      Success. I've added this task:
+        [D][ ] drawing (by: 28 Feb 7AM)
+    ______________________________________________
+    ______________________________________________
+      Oops, error occurred in saving the file.
+      C:\Users\ppris\OneDrive\everything uni related\modules\cs2103T\ip\text-ui-test\src\data\tasks.txt (The system cannot find the path specified)
+    ______________________________________________
+    ______________________________________________
+      Success. I've added this task:
+        [E][ ] 2101 meeting (at: 30 Jun 8AM)
+    ______________________________________________
+    ______________________________________________
+      Oops, error occurred in saving the file.
+      C:\Users\ppris\OneDrive\everything uni related\modules\cs2103T\ip\text-ui-test\src\data\tasks.txt (The system cannot find the path specified)
+    ______________________________________________
+    ______________________________________________
+      Bye. See you again soon!
+    ______________________________________________

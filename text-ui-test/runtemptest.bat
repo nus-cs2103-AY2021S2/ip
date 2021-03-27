@@ -1,4 +1,5 @@
 @ECHO OFF
+REM THIS FILE IS CREATED FOR TEMPORARY TESTING PURPOSES WHILE DOING A LEVEL
 
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
@@ -14,15 +15,8 @@ IF ERRORLEVEL 1 (
 )
 REM no error here, errorlevel == 0
 
-REM REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-REM java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
-REM
-REM REM compare the output to the expected output
-REM FC ACTUAL.TXT EXPECTED.TXT
-REM
-REM java -classpath ..\bin Duke < scratch.txt
+REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
+java -classpath ..\bin Duke < scratch.txt
 
-REM test files for current usage
-REM includes saving bugs
-java -classpath ..\bin Duke < inputL8.txt > outputL8.txt
-FC outputL8.txt expectedL8.txt
+REM compare the output to the expected output
+REM FC ACTUAL.TXT EXPECTED.TXT
