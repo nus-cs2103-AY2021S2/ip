@@ -1,4 +1,5 @@
 T|[Done]|Run|null
 T|[Incompleted]|Carnival|null
-E|[Incompleted]| game release | Mon 2-4pm
+E|[Incompleted]|game release|Mon 2-4pm
 D|[Incompleted]|submit file|2020-02-21
+T|[Incompleted]|run|null
