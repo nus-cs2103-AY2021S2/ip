@@ -1,0 +1,25 @@
+come and catch me
+todo play catching
+deadline read book /by sunday 3pm
+event swimming class /from monday 4-6pm
+event swimming class /from 2020-03-03 /to 2020-03-03
+list
+done 1
+list
+done 1
+list
+done 2
+list
+delete 1
+list
+delete 2
+list
+delete 1
+todo final one
+todo really meh
+find final
+list
+delete 1
+delete 1
+list
+bye

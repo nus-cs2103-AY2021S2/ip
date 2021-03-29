@@ -1,0 +1,4 @@
+.background {
+    -fx-background-image:url('../images/mcsky.png');
+    -fx-background-size: cover;
+}
