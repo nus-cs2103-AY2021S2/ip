@@ -1,0 +1,45 @@
+usage
+test
+todo
+todo read book
+list
+deadline
+deadline /by June 6th
+deadline return book
+deadline return book /at June 6th
+deadline return book /by June 6th
+list
+event
+event /at Aug 6th 2-4pm
+event project meeting
+event project meeting /by Aug 6th 2-4pm
+event project meeting /at Aug 6th 2-4pm
+list
+todo join sports club
+list
+done 1
+done 10
+done 4
+done 2
+done 4
+list
+todo borrow book
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+deadline do homework /by no idea :-p
+list
+delete
+delete test
+delete 8
+delete 6
+delete 6
+list
+bye
+test
+bye
+N
+bye
+
+
+bye
+Y

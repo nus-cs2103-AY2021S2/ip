@@ -1,7 +1,89 @@
-Hello from
+____________________________________________________________
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
+____________________________________________________________
+>> Hey, hello there! I'm Duke, your personal chat bot.
+>> To know more about what I can do, type 'usage'.
+>> Sooooo... Is there anything I can do for you today?
+<< >> Hey! These are the commands available:
+>> 	- usage
+>> 	- list
+>> 	- todo <task_description>
+>> 	- deadline <task_description> /by <date_time>
+>> 	- event <task_description> /at <date_time>
+>> 	- done <task_number>
+>> 	- delete <task_number>
+>> 	- bye
+<< >> Oh no... I'm not trained with these commands yet...
+<< >> Oh no... I need a description of your task...
+<< >> Got it, I have added the task 'read book' to your collection.
+<< >> You got a total of 1 task(s).
+>> 	1. [T][ ] read book
+<< >> Oh no... I need a description of your task...
+<< >> Oh no... I need a description of your task...
+<< >> Oh no... I need to know when your task ends...
+<< >> Oh no... You're confusing me with parameters from other commands...
+<< >> Got it, I have added the task 'return book' to your collection.
+<< >> You got a total of 2 task(s).
+>> 	1. [T][ ] read book
+>> 	2. [D][ ] return book (by: June 6th)
+<< >> Oh no... I need a description of your task...
+<< >> Oh no... I need a description of your task...
+<< >> Oh no... I need to know the time period of your event...
+<< >> Oh no... You're confusing me with parameters from other commands...
+<< >> Got it, I have added the task 'project meeting' to your collection.
+<< >> You got a total of 3 task(s).
+>> 	1. [T][ ] read book
+>> 	2. [D][ ] return book (by: June 6th)
+>> 	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+<< >> Got it, I have added the task 'join sports club' to your collection.
+<< >> You got a total of 4 task(s).
+>> 	1. [T][ ] read book
+>> 	2. [D][ ] return book (by: June 6th)
+>> 	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+>> 	4. [T][ ] join sports club
+<< >> Task 'read book' is marked as done.
+<< >> Oh no... I don't think there is such a task...
+<< >> Task 'join sports club' is marked as done.
+<< >> Task 'return book' is marked as done.
+<< >> Oh no... Task had already been marked as done...
+<< >> You got a total of 4 task(s).
+>> 	1. [T][*] read book
+>> 	2. [D][*] return book (by: June 6th)
+>> 	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+>> 	4. [T][*] join sports club
+<< >> Got it, I have added the task 'borrow book' to your collection.
+<< >> Got it, I have added the task 'return book' to your collection.
+<< >> Got it, I have added the task 'project meeting' to your collection.
+<< >> Got it, I have added the task 'do homework' to your collection.
+<< >> You got a total of 8 task(s).
+>> 	1. [T][*] read book
+>> 	2. [D][*] return book (by: June 6th)
+>> 	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+>> 	4. [T][*] join sports club
+>> 	5. [T][ ] borrow book
+>> 	6. [D][ ] return book (by: Sunday)
+>> 	7. [E][ ] project meeting (at: Mon 2-4pm)
+>> 	8. [D][ ] do homework (by: no idea :-p)
+<< >> Oh no... I don't think there is such a task...
+<< >> Oh no... I need a task number...
+<< >> Task 'do homework' has been deleted.
+<< >> Task 'return book' has been deleted.
+<< >> Task 'project meeting' has been deleted.
+<< >> You got a total of 5 task(s).
+>> 	1. [T][*] read book
+>> 	2. [D][*] return book (by: June 6th)
+>> 	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+>> 	4. [T][*] join sports club
+>> 	5. [T][ ] borrow book
+<< >> Are you sure? (Y/N)
+<< >> Hmm... alright I'll stay.
+<< >> Are you sure? (Y/N)
+<< >> Hmm... alright I'll stay.
+<< >> Are you sure? (Y/N)
+<< >> Hmm... alright I'll stay.
+<< << >> Are you sure? (Y/N)
+<< >> Alright, take care. I hope to see you again soon!

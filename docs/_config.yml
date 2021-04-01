@@ -1,0 +1,15 @@
+remote_theme: pmarsceill/just-the-docs
+
+# Site settings
+title: User Guide
+description: User Guide for Quackers
+baseurl: "/ip"
+url: "https://deyixtan.github.io"
+logo: "AppIcon.png"
+search_enabled: false
+heading_anchors: true
+aux_links:
+  "ip on GitHub":
+    - "//github.com/deyixtan/ip"
+aux_links_new_tab: false
+color_scheme: dark

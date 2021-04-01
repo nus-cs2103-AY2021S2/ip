@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="400.0" style="-fx-background-color: #708090;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox prefHeight="200.0" prefWidth="291.0" HBox.hgrow="SOMETIMES">
+         <children>
+            <PieChart fx:id="dialog" minHeight="-Infinity" prefWidth="291.0" style="-fx-background-radius: 10px; -fx-background-color: #c0c0c0; -fx-border-color: #c0c0c0; -fx-border-radius: 10px; -fx-border-width: 10px;" />
+         </children>
+      </VBox>
+  </children>
+  <padding>
+    <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+  </padding>
+</fx:root>
