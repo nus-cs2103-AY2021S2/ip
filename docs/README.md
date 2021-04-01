@@ -7,7 +7,7 @@ A todo task manager bot to record and store list of tasks.
 
 ![image](./images/MrDestructoid.png)
 
-<sub>Image Source: MrDestructoid (Twitch Emote)<sub> 
+<sub>*Image Source: MrDestructoid (Twitch Emote)*<sub> 
 
 # Features
 Below are the features currently implemented:
