@@ -1,5 +1,18 @@
 # User Guide
 
+* [Introduction](#introduction-to-zeke)
+* [Get Started](#get-started)
+* [Features](#features)
+    * [At a glance](#at-a-glance)
+    * [Add Tasks](#add-tasks)
+    * [Delete Tasks](#delete-tasks)
+    * [List All Tasks](#list-all-tasks)
+    * [Mark tasks as completed](#mark-tasks-as-completed)
+    * [Search for tasks`](#search-for-tasks)
+    * [Display help menu](#display-help-menu)
+    * [Display statistics](#display-statistics)
+    * [Exit the application](#exit-the-application)
+
 ## Introduction to Zeke
 Zeke is a Personal Assistant Chatbot that helps you keep track of various tasks.
 This application makes use of a Command-Line Interface (CLI) which processes commands in the form of lines of text.
@@ -161,7 +174,7 @@ Expected outcome:
 
 <br>
 
-## Display a help menu
+## Display help menu
 Users can see the help menu for list of available commands
 
 ## Usage
