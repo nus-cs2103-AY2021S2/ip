@@ -10,8 +10,8 @@ A todo task manager bot to record and store list of tasks.
 <sub>*Image Source: MrDestructoid (Twitch Emote)*<sub> 
 
 [Download Jar](https://github.com/mechastriker3/ip/releases/download/v0.3/bob.jar) | 
-[Download Zip](https://github.com/mechastriker3/ip/archive/refs/tags/v0.3.zip) | 
-[Download Tar](https://github.com/mechastriker3/ip/archive/refs/tags/v0.3.tar.gz)
+[comment]: <> ([Download Zip](https://github.com/mechastriker3/ip/archive/refs/tags/v0.3.zip)) 
+[comment]: <> ([Download Tar](https://github.com/mechastriker3/ip/archive/refs/tags/v0.3.tar.gz))
 
 # Features
 Below are the features currently implemented:
