@@ -8,7 +8,7 @@
     * [Delete Tasks](#delete-tasks)
     * [List All Tasks](#list-all-tasks)
     * [Mark tasks as completed](#mark-tasks-as-completed)
-    * [Search for tasks`](#search-for-tasks)
+    * [Search for tasks](#search-for-tasks)
     * [Display help menu](#display-help-menu)
     * [Display statistics](#display-statistics)
     * [Exit the application](#exit-the-application)
