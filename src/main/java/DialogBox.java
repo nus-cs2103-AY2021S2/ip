@@ -33,8 +33,8 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(Label l) {
-        var db = new DialogBox(l);
-        db.flip();
-        return db;
+        var dialog = new DialogBox(l);
+        dialog.flip();
+        return dialog;
     }
 } 

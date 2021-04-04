@@ -1,8 +1,6 @@
 
-import  java.util.Scanner;
 import java.util.List;
-import java.io.File;
-import java.io.IOException;
+
 
 
 import javafx.application.Application;
@@ -12,8 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 public class Duke extends Application {
 
@@ -103,7 +100,8 @@ public class Duke extends Application {
             case 5: //list
                 return ui.printList(this.taskList);
             default:
-                return "Sorry, could you repeat please? ";
+                return("action not found");
+
         }
     }
 
@@ -170,12 +168,6 @@ public class Duke extends Application {
         dialogueContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
