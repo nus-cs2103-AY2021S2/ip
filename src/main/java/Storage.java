@@ -6,12 +6,26 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
 
 public class Storage {
     private ArrayList<String> itemList;
     private String path;
 
     public Storage (String path) {
+        File logFile = new File(path);
+        try {
+            if (logFile.isFile()) {
+                Scanner logs = new Scanner(logFile);
+                logs.close();
+            } else {
+                logFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("no file created " + e);
+        }
+
         this.path = path;
         try {
             this.itemList = new ArrayList<>(Files.readAllLines(Paths.get(path)));

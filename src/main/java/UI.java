@@ -3,7 +3,7 @@ import java.util.TreeSet;
 import java.util.List;
 
 public class UI {
-    private static final String H_RULE = "────────────────────────────────────────────────────────────────────";
+    private static final String line = "────────────────────────────────────────────────────────────────────";
     private Scanner sc;
     private String raw_in;
     private String[] input;
@@ -17,46 +17,63 @@ public class UI {
         return raw_in;
     }
 
-    public static void printHello() {
+    public static String printHello() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        System.out.println("Greetings! I am Duke! How may I assist you?\n" + H_RULE);
+        String str = "Hello from\n" + logo +"Greetings! I am Duke! How may I assist you?\n" + line;
+        System.out.println(str);
+        return str;
     }
 
-    public static void printGoodbye() {
-        System.out.println("\nGoodbye! Have a nice day!\n");
+    public static String printGoodbye() {
+        System.out.println("\nGoodbye\n");
+        return "\n Goodbye \n";
     }
 
-    public static void printList(TaskList tasks) {
-        for (int i = 1; i <= tasks.getSize(); i++) {
+    public static String printList(TaskList tasks) {
+        String str ="";
+
+        for (int i = 1; i <= tasks.getCount(); i++) {
             System.out.println(i + ". " + tasks.get(i).toString());
+            str = str + i + "." + tasks.get(i).toString() + "\n";
         }
+        return str;
     }
 
-    public static void printHRule() {
-        System.out.println(H_RULE);
+    public static void printline() {
+        System.out.println(line);
     }
 
-    public void printDone(Task task) {
-        System.out.println("Alright, I will mark this as done.\n" + task.toString());
+    public String printDone(Task task) {
+        String str = "Alright, I will mark this as done.\n" + task.toString();
+        System.out.println(str);
+        return str;
+
     }
 
-    public void printAdded(Task task, int count) {
-        System.out.println("Added" + task.getName() + ". \nYou now have " + count + " items in your list.");
+    public String printAdded(Task task, int count) {
+        String str ="Added" + task.getName() + ". \nYou now have " + count + " items in your list.";
+        System.out.println(str);
+        return str;
     }
 
-    public void printRemoved(int index) {
-        System.out.println("I have removed item " + index + ".");
+    public String printRemoved(int index) {
+        String str ="I have removed item " + index + ".";
+        System.out.println(str);
+        return str;
     }
 
-    public void printFind(List<Task> tasks, String str){
+    public String printFind(List<Task> tasks){
+        String str = "";
         for (Task t : tasks){
             System.out.println(t);
+            str = str + t.toString() + "\n";
         }
+        return str;
+
     }
 }
