@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 
 public class Duke extends Application {
 
-    private Storage storage;
     private UI ui;
     private TaskList taskList;
 
