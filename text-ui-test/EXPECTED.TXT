@@ -1,7 +1,60 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello there! I'm duke, always here for you!
+   How can I help you today?
+___
+   Got it! I've added this task:
+      [T][ ] buy eggs
+   Now you have 1 tasks in the list
+___
+___
+   Got it! I've added this task:
+      [T][ ] buy milk
+   Now you have 2 tasks in the list
+___
+___
+   Got it! I've added this task:
+      [D][ ] bake cake (by: 23rd Jan)
+   Now you have 3 tasks in the list
+___
+___
+   Got it! I've added this task:
+      [D][ ] deliver cake (by: 24th Jan 2359)
+   Now you have 4 tasks in the list
+___
+___
+   Got it! I've added this task:
+      [E][ ] birthday party! (at: 24th Jan)
+   Now you have 5 tasks in the list
+___
+___
+   Got it! I've added this task:
+      [E][ ] celebrate (at: always!)
+   Now you have 6 tasks in the list
+___
+___
+   1. [T][ ] buy eggs
+   2. [T][ ] buy milk
+   3. [D][ ] bake cake (by: 23rd Jan)
+   4. [D][ ] deliver cake (by: 24th Jan 2359)
+   5. [E][ ] birthday party! (at: 24th Jan)
+   6. [E][ ] celebrate (at: always!)
+___
+___
+   Nice! I've marked this task as done:
+      [T][x] buy eggs
+___
+___
+   Nice! I've marked this task as done:
+      [T][x] buy milk
+___
+___
+   1. [T][x] buy eggs
+   2. [T][x] buy milk
+   3. [D][ ] bake cake (by: 23rd Jan)
+   4. [D][ ] deliver cake (by: 24th Jan 2359)
+   5. [E][ ] birthday party! (at: 24th Jan)
+   6. [E][ ] celebrate (at: always!)
+___
+___
+   Bye! Hope to see you again! :)
+___
 
