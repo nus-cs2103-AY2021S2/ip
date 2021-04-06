@@ -1,0 +1,4 @@
+T||borrow book
+E||meet friend | wed 2pm
+D|X|return book |2020-08-25
+T||hello world
