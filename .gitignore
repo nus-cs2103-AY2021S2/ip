@@ -15,3 +15,22 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/Test_1/ACTUAL_OK_1.TXT
+text-ui-test/Test_2/ACTUAL_ERR_2.TXT
+text-ui-test/Test_2/ACTUAL_OK_2.TXT
+text-ui-test/Test_3/ACTUAL_ERR_3.TXT
+text-ui-test/Test_3/ACTUAL_OK_3.TXT
+text-ui-test/Test_4/ACTUAL_ERR_4.TXT
+text-ui-test/Test_4/ACTUAL_OK_4.TXT
+text-ui-test/Test_5/ACTUAL_ERR_5.TXT
+text-ui-test/Test_5/ACTUAL_OK_5.TXT
+text-ui-test/Test_6/ACTUAL_OK_6.TXT
+text-ui-test/Test_7/ACTUAL_ERR_7.TXT
+text-ui-test/Test_7/ACTUAL_OK_7.TXT
+text-ui-test/Test_8/ACTUAL_ERR_8.TXT
+text-ui-test/Test_8/ACTUAL_OK_8.TXT
+text-ui-test/Test_1/tasks.txt
+src/main/java/tasks.txt
+text-ui-test/Test_5/tasks.txt
+text-ui-test/runtest.sh
+tasks.txt
