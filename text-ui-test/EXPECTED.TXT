@@ -5,3 +5,21 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Got it. I've added this task:
+todo meet friends
+you now have 1 tasks in the list
+Got it. I've added this task:
+deadline do 2103 by 123
+you now have 2 tasks in the list
+Got it. I've added this task:
+event lecture at 456
+you now have 3 tasks in the list
+1[T][ ]    todo meet friends
+2[D][ ]    deadline do 2103 (by:123)
+3[E][ ]    event lecture (at:456)
+Nice! I've marked this Task as done:
+1[T][X]    todo meet friends
+1[T][X]    todo meet friends
+2[D][ ]    deadline do 2103 (by:123)
+3[E][ ]    event lecture (at:456)
+Bye. Hope to see you again
