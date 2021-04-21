@@ -1,20 +1,231 @@
 # User Guide
 
+Welcome to Duke, an easy to use Task Manger
+
 ## Features 
 
 ### Feature 1 
-Description of feature.
+Adding of tasks. There are 3 kinds of tasks that can be added - todo tasks, event tasks and deadline tasks.
+
+Deadline tasks are tasks are tasks with a certain deadline.
+Event tasks are tasks which are happening on a certain date
+Todo tasks are tasks which are to be completed
 
 ## Usage
+You can add tasks to Duke to keep track of the tasks that you have to complete.
 
-### `Keyword` - Describe action
+#### Command Syntax:
+To add a todo task, type the command in the following format:
+<br>
+todo *task_description*
 
-Describe action and its outcome.
+To add a deadline task, type the command in the following format:
+<br>
+deadline *task_description* /by *deadline*
 
-Example of usage: 
+To add a event task, type the command in the following format:
+<br>
+event *task_description* /at *date*
 
-`keyword (optional arguments)`
+#### Examples of usage: 
 
-Expected outcome:
+todo dishes
+<br>
+deadline ip /by 2021-02-19
+<br>
+event dinner /at 2021-02-12
 
-`outcome`
+#### Expected outcome:
+
+For Todo Task:
+Got it. I've added this task:
+ <br>
+ [T][] dishes
+ <br>
+ Priority:Unassigned 
+ <br>
+Now you have 2 tasks in the list
+
+For Deadline Task:
+
+Got it. I've added this task:
+ <br>
+ [D][] ip (by: 19-02-2021) 
+ <br>
+ Priority:Unassigned
+ <br>
+Now you have 2 tasks in the list
+
+For Event Task:
+
+Got it. I've added this task:
+ <br>
+ [E][] dinner (at: 2021-02-12)
+ <br>
+ Priority:Unassigned
+ <br>
+Now you have 2 tasks in the list
+
+
+
+### Feature 2 
+List tasks in Duke
+
+## Usage
+To view what tasks need to be done
+
+#### Command Syntax:
+To list tasks, type the command in the following format:
+<br>
+list
+
+list command will return a list of tasks stored in Duke
+
+#### Example of usage: 
+list
+
+#### Expected outcome:
+Here are the tasks in your list:
+  <br>
+  1.[D][] ip (by: 19-02-2021) 
+  <br>
+  Priority:Unassigned
+
+### Feature 3
+Checking of tasks that contain the date typed in 
+
+## Usage
+Used to check if there are any event tasks on a particular date or any deadline tasks with deadlines on a particular date
+
+#### Command Syntax:
+To check tasks with a certain date, type the command in the following format:
+<br>
+check *date*
+
+It will return a list of tasks which contain that date
+
+#### Example of usage: 
+check 2020-02-19
+
+#### Expected outcome:
+Here are the tasks due on the date:
+   <br>
+   [D][] ip (by: 19-02-2021) 
+   <br>
+   Priority:Unassigned
+
+
+### Feature 4
+Delete a task
+
+## Usage
+Delete a task from duke
+
+#### Command Syntax:
+To delete a task, type the command in the following format:
+<br>
+delete *task_number*
+
+This will delete the task from duke
+
+#### Example of usage: 
+delete 1
+
+#### Expected outcome:
+Noted. I've removed this task:
+   <br>
+   [D][] ip (by: 19-02-2021) 
+   <br>
+   Priority:Unassigned
+
+
+### Feature 5
+Mark a task as done
+
+## Usage
+To mark a task as done so that user can keep track of tasks easier
+
+#### Command Syntax:
+To mark a task as done, type the command in the following format:
+<br>
+done *task_number*
+
+This will mark the task in duke with a cross to indicate it is done.
+
+#### Example of usage: 
+done 1
+
+#### Expected outcome:
+Nice! I've marked this task as done:
+   <br>
+   [D][X] ip (by: 19-02-2021) 
+   <br>
+   Priority:Unassigned
+
+
+### Feature 6
+Find a task with keyword
+
+## Usage
+To find a task that contains a particular keyword
+
+#### Command Syntax:
+To find a task, type the command in the following format:
+<br>
+find *word*
+
+It will return a list of tasks which contain that date.
+
+#### Example of usage: 
+find ip
+
+#### Expected outcome:
+Here are the matching tasks in your list:
+   <br>
+   1.[D][X] ip (by: 19-02-2021) 
+   <br>
+   Priority:Unassigned
+
+
+### Feature 7
+Assign a priority to a task. There are 3 priority levels: high, medium, low
+
+## Usage
+User can assign priority to tasks to see what should be completed first
+
+#### Command Syntax:
+To assign a priority to a task, type the command in the following format:
+<br>
+priority *task number* *priority level*
+
+It assigns the task with a priority
+
+#### Example of usage: 
+priority 2 high
+
+#### Expected outcome:
+The following task priority has been changed!
+   <br>
+   [D][X] ip (by: 19-02-2021) 
+   <br>
+   Priority: High
+
+
+### Feature 8
+Exit Duke
+
+## Usage
+Used to exit the Duke program
+
+#### Command Syntax:
+bye
+
+Duke program exits
+
+#### Example of usage: 
+bye
+
+#### Expected outcome:
+Duke program exits
+
+
