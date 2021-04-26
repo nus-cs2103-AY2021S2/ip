@@ -1,0 +1,12 @@
+[T][ ] ad book
+[D][X] turn book (((by: 2021-06-20)
+[E][ ] oject meeting (((at: 2020-04-20)
+[D][ ] eturn book ((by: 2021-06-20)
+[E][ ] roject meeting ((at: 2020-04-20)
+[T][ ] oin sports club
+[T][ ] orrow book
+[T][ ] read book
+[D][ ] return book (by: 2021-06-20)
+[E][ ] project meeting (at: 2020-04-20)
+[T][ ] join sports club
+[T][ ] borrow book
