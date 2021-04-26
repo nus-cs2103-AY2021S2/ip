@@ -1,7 +1,82 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Welcome! I'm Vergil!
+How may I help you?
+
+>>> Added 'make coffee' as a ToDo task.
+
+>>> Added 'this project' as a deadline task by 'midnight'.
+
+>>> Added 'bro's wedding' as an event task at 'summer vacation'.
+
+>>> 1. [T][ ] make coffee
+2. [D][ ] this project (by: midnight)
+3. [E][ ] bro's wedding (at: summer vacation)
+
+>>> Sweet! Task completed:
+   [T][X] make coffee
+
+>>> 1. [T][X] make coffee
+2. [D][ ] this project (by: midnight)
+3. [E][ ] bro's wedding (at: summer vacation)
+
+>>> Added 'drink coffee' as a ToDo task.
+
+>>> Sweet! Task completed:
+   [D][X] this project (by: midnight)
+
+>>> Sweet! Task completed:
+   [E][X] bro's wedding (at: summer vacation)
+
+>>> 1. [T][X] make coffee
+2. [D][X] this project (by: midnight)
+3. [E][X] bro's wedding (at: summer vacation)
+4. [T][ ] drink coffee
+
+>>> Sweet! Task completed:
+   [T][X] drink coffee
+
+>>> 1. [T][X] make coffee
+2. [D][X] this project (by: midnight)
+3. [E][X] bro's wedding (at: summer vacation)
+4. [T][X] drink coffee
+
+>>> Sorry! There is no task with the given number in the list.
+
+>>> Sorry! 'todo' commands should be typed as follows: todo <description>
+
+>>> Sorry! 'deadline' commands should be typed as follows: deadline <description> /by <time>
+
+>>> Sorry! 'event' commands should be typed as follows: event <description> /at <time>
+
+>>> 1. [T][X] make coffee
+2. [D][X] this project (by: midnight)
+3. [E][X] bro's wedding (at: summer vacation)
+4. [T][X] drink coffee
+
+>>> Sorry! 'delete' commands should be typed as follows: delete <task number in list>
+
+>>> Sorry! 'delete' commands should be typed as follows: delete <task number in list>
+
+>>> Acknowledged. Task deleted:
+   [T][X] make coffee
+
+>>> Sorry! There is no task with the given number in the list.
+
+>>> Sorry! There is no task with the given number in the list.
+
+>>> 1. [D][X] this project (by: midnight)
+2. [E][X] bro's wedding (at: summer vacation)
+3. [T][X] drink coffee
+
+>>> Acknowledged. Task deleted:
+   [D][X] this project (by: midnight)
+
+>>> Acknowledged. Task deleted:
+   [E][X] bro's wedding (at: summer vacation)
+
+>>> Acknowledged. Task deleted:
+   [T][X] drink coffee
+
+>>> Sorry! There is no task with the given number in the list.
+
+>>> Bye. See you soon!
 

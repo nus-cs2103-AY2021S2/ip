@@ -15,3 +15,8 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+src/Sandbox.java
+data/vergil_list.sav
+backup/VergilBkp.java
+archive.zip
+src/META-INF/MANIFEST.MF
