@@ -1,0 +1,75 @@
+
+apple
+banana rolls
+list
+done 1
+ todo
+todo
+todobuy groceries
+todo 
+todo       
+todo buy groceries
+deadline
+deadlineeat an apple
+deadline 
+deadline     
+deadline eat an apple
+deadline eat an apple /by
+deadline /by
+deadline /by 
+deadline /by night
+deadline eat an apple /by 
+deadline eat an apple /by /by
+deadline eat an apple /by /by night
+deadline eat an apple /by night /by
+deadline eat an apple /by night
+deadline eat an apple /by 30/01/2021 23:59
+event
+eventfinal exam
+event 
+event       
+event final exam
+event final exam /at
+event final exam /at 
+event /at
+event /at 
+event /at Mon
+event final exam /at Mon
+event final exam /at Mon 2
+event final exam /at Mon 2-
+event final exam /at /at
+event final exam /at /at 
+event final exam /at /at Mon 2-5
+event final exam /at Mon 2-5 /at
+event final exam /at Mon 2-5
+event final exam /at 01/02/2021 11:00 - 01/02/2021 02:00
+event final exam /at 01/02/2021 11:00 - 01/02/2021 12:00
+event camp /at 01/02/2021 11:00 - 02/02/2021 12:00
+delete 4
+list
+done
+done1
+done 9
+done -1
+done str
+done 1
+list
+done 2
+list
+done 3
+list
+done 1
+delete
+delete1
+delete -1 
+delete 9
+list
+delete 1
+list
+todo finish hw
+list
+delete 2
+list
+delete 2
+list
+bye

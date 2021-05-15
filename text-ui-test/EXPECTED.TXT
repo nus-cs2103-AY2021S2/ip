@@ -1,7 +1,527 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+(=^. .^=)
+Mew! I'm Chat the Cat
+What can I do for you?
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Sorry this instruction does not exist!
+Please choose from the following: todo, deadline, event, done, list, bye
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Sorry this instruction does not exist!
+Please choose from the following: todo, deadline, event, done, list, bye
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Sorry this instruction does not exist!
+Please choose from the following: todo, deadline, event, done, list, bye
+____________________________________________________________
+____________________________________________________________
+ * list *
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: List is empty or index is out of bounds
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Sorry this instruction does not exist!
+Please choose from the following: todo, deadline, event, done, list, bye
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: todo name missing
+Please input with this format:
+todo [name]
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: no spacing after todo
+Please input with this format:
+todo [name]
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: todo name missing
+Please input with this format:
+todo [name]
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: todo name missing
+Please input with this format:
+todo [name]
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've added this task:
+[T][ ] buy groceries
 
+** Now you have 1 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: deadline name and end date/time missing
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: no spacing after deadline
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: deadline name and end date/time missing
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: deadline name and end date/time missing
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: /by missing
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: missing spaces before or after /by
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: deadline name missing
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: deadline name missing
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: deadline name missing
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: missing end date/time
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: not allowed to have more than 1 ' /by '
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: not allowed to have more than 1 ' /by '
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: not allowed to have more than 1 ' /by '
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: End date/time is of wrong format
+Please input with this format:
+deadline [name] /by [end date/time]
+* end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 19/03/2019 23:55
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've added this task:
+[D][ ] eat an apple (by: 30 Jan 2021, 11:59PM)
+
+** Now you have 2 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: event name, start and end date/time missing
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: no spacing after event
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: event name, start and end date/time missing
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: event name, start and end date/time missing
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: /at missing
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: missing spaces before or after /at
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: missing start and end date/time
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: event name missing
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: event name missing
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: event name missing
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: missing '-'
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: missing '-'
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: missing start or end date/time
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: not allowed to have more than 1 ' /at '
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: not allowed to have more than 1 ' /at '
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: not allowed to have more than 1 ' /at '
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: not allowed to have more than 1 ' /at '
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Start or end date/time is of wrong format
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Start date/time is after end date/time
+Please input with this format:
+event [name] /at [end date/time]-[start date/time]
+* start and end date/time should be written as dd/MM/yyyy HH:mm
+* i.e. 2019/03/19 22:00-2019/03/19 23:00
+* i.e. 2019/03/19 22:00 - 2019/03/19 23:00
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've added this task:
+[E][ ] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+
+** Now you have 3 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've added this task:
+[E][ ] camp (at: 1 Feb 2021, 11:00AM - 2 Feb 2021, 12:00PM)
+
+** Now you have 4 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've removed this task:
+[E][ ] camp (at: 1 Feb 2021, 11:00AM - 2 Feb 2021, 12:00PM)
+
+** Now you have 3 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [T][ ] buy groceries
+2. [D][ ] eat an apple (by: 30 Jan 2021, 11:59PM)
+3. [E][ ] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Missing index
+Please input with this format:
+done [index]
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Missing space before index
+Please input with this format:
+done [index]
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: List is empty or index is out of bounds
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: List is empty or index is out of bounds
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Index should be an integer
+Please input with this format:
+done [index]
+____________________________________________________________
+____________________________________________________________
+\(=^> <^=)/
+Mew! I've marked this task as done:
+[T][X] buy groceries
+
+* Good job, you deserve a kit-kat *
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [T][X] buy groceries
+2. [D][ ] eat an apple (by: 30 Jan 2021, 11:59PM)
+3. [E][ ] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+____________________________________________________________
+____________________________________________________________
+\(=^> <^=)/
+Mew! I've marked this task as done:
+[D][X] eat an apple (by: 30 Jan 2021, 11:59PM)
+
+* Good job, you deserve a kit-kat *
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [T][X] buy groceries
+2. [D][X] eat an apple (by: 30 Jan 2021, 11:59PM)
+3. [E][ ] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+____________________________________________________________
+____________________________________________________________
+\(=^> <^=)/
+Mew! I've marked this task as done:
+[E][X] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+
+* Good job, you deserve a kit-kat *
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [T][X] buy groceries
+2. [D][X] eat an apple (by: 30 Jan 2021, 11:59PM)
+3. [E][X] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Task already completed
+[T][X] buy groceries
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Missing index
+Please input with this format:
+delete [index]
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: Missing space before index
+Please input with this format:
+delete [index]
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: List is empty or index is out of bounds
+____________________________________________________________
+____________________________________________________________
+(=^> <^=)'''
+ChatException: List is empty or index is out of bounds
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [T][X] buy groceries
+2. [D][X] eat an apple (by: 30 Jan 2021, 11:59PM)
+3. [E][X] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've removed this task:
+[T][X] buy groceries
+
+** Now you have 2 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [D][X] eat an apple (by: 30 Jan 2021, 11:59PM)
+2. [E][X] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've added this task:
+[T][ ] finish hw
+
+** Now you have 3 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [D][X] eat an apple (by: 30 Jan 2021, 11:59PM)
+2. [E][X] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+3. [T][ ] finish hw
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've removed this task:
+[E][X] final exam (at: 1 Feb 2021, 11:00AM - 12:00PM)
+
+** Now you have 2 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [D][X] eat an apple (by: 30 Jan 2021, 11:59PM)
+2. [T][ ] finish hw
+____________________________________________________________
+____________________________________________________________
+(=^. .^=)~~
+Mew! I've removed this task:
+[T][ ] finish hw
+
+** Now you have 1 tasks in the list **
+____________________________________________________________
+____________________________________________________________
+ * list *
+1. [D][X] eat an apple (by: 30 Jan 2021, 11:59PM)
+____________________________________________________________
+____________________________________________________________
+*** Goodbye *** (=^. .^=*)
+____________________________________________________________
