@@ -15,3 +15,11 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+/src/main/java/ChatBot.class
+/src/main/java/Duke.class
+/src/main/java/*.class
+/src/main/java/data/list.txt
+/text-ui-test/ACTUAL.TXT
+/src/main/java/duke/*.class
+/hs_err_pid12651.log
+/hs_err_pid12880.log
