@@ -13,7 +13,14 @@ Duke is a task manager. Duke can record your tasks in your daliy life. With Duke
 - Delete a task
 - Finds tasks
 - Sorts tasks
-- Exit Duke
+- Exit Duke </br>
+
+
+User guide could be found 
+<a href="https://yufeng0930.github.io/Duke/">here</a>.
+
+
+---
 
 ## Setting up in Intellij
 
