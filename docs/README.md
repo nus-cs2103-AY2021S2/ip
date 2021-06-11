@@ -1,6 +1,6 @@
-# Duke project template
+# Duke project
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a project named after the Java mascot Duke. Given below are instructions on how to use the interactive Duke bot.
 
 # User Guide
 ## Setting up in Intellij
