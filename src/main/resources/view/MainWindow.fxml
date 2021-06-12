@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+    <children>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="388.0" styleClass="background" stylesheets="@/css/duke.css" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="390.0" style="-fx-border-width: 10;" stylesheets="@/css/duke.css">
+                    <children>
+                        <BorderPane prefHeight="76.0" prefWidth="396.0">
+                            <center>
+                                <BorderPane prefHeight="68.0" prefWidth="380.0" style="-fx-background-color: #4285F4; -fx-background-radius: 20; -fx-border-width: 5; -fx-border-color: #000080; -fx-border-radius: 20;" styleClass="header-section" BorderPane.alignment="CENTER">
+                                    <effect>
+                                        <Blend />
+                                    </effect>
+                                    <left>
+                                        <ImageView fitHeight="80" fitWidth="85" style="-fx-translate-x: 64; -fx-scale-x: 0.9; -fx-scale-y: 0.9;">
+                                            <image>
+                                                <Image url="@/images/icon.png" />
+                                            </image>
+                                        </ImageView>
+                                    </left>
+                                    <BorderPane.margin>
+                                        <Insets left="10.0" right="10.0" top="2.5" />
+                                    </BorderPane.margin>
+                                    <center>
+                                        <Label id="header-text" alignment="CENTER" prefHeight="77.0" prefWidth="205.0" text="B.O.B" textFill="WHITE" BorderPane.alignment="CENTER">
+                                            <font>
+                                                <Font name="Bombardier" size="66" />
+                                            </font>
+                                            <BorderPane.margin>
+                                                <Insets left="2.0" />
+                                            </BorderPane.margin>
+                                        </Label>
+                                    </center>
+                                </BorderPane>
+                            </center>
+                            <VBox.margin>
+                                <Insets top="2.5" />
+                            </VBox.margin>
+                        </BorderPane>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+        <Button fx:id="sendButton" layoutX="315.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="53.0" prefWidth="74.0" text="Send">
+            <font>
+                <Font name="Bombardier" size="17.0" />
+            </font>
+        </Button>
+        <TextField fx:id="userInput" layoutY="554.0" onAction="#handleUserInput" prefHeight="53.0" prefWidth="315.0" promptText="Write a message here..." styleClass="textField" stylesheets="@/css/duke.css" AnchorPane.bottomAnchor="-2.0">
+            <font>
+                <Font size="15.0" />
+            </font></TextField>
+    </children>
+</AnchorPane>
