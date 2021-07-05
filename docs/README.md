@@ -2,19 +2,46 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Add a task
+Add a task, including the ability to specify if it's an event, deadline, or a todo
 
-## Usage
+Format: `TASK_TYPE DESC [DATE]`
 
-### `Keyword` - Describe action
+Following is the format for the commands to add different kinds of tasks.
+```
+todo DESC
+deadline DESC /by DATE
+event DESC /at DATE
+```
 
-Describe action and its outcome.
+`DATE` should be in the format `YYYY-MM-DD`. By default, a newly created task is not done yet. 
 
-Example of usage: 
+### List all tasks
+List all current tasks, displaying their descriptions and date (if any)
 
-`keyword (optional arguments)`
+Format: `list`
 
-Expected outcome:
+### Delete a task
+Delete a task by their displayed index
 
-`outcome`
+Format: `delete INDEX`
+
+### Mark a task as done
+Mark a task as done by their displayed index
+
+Format: `done INDEX`
+
+### Find a task
+Find a task by a keyword in description
+
+Format: `find KEYWORD`
+
+### Undo an action
+Restore the task list to the state prior to the last change.
+
+Format: `undo`
+
+### Redo an undo
+Restore the task list to the state prior to an undo action.
+
+Format: `redo`
