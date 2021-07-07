@@ -1,0 +1,4 @@
+Todo`true`water the plants
+Deadline`true`cs2103 assignment `2021-02-17
+Event`false`cry `2021-02-18
+Todo`true`pick up my kids

@@ -1,0 +1,7 @@
+todo buy milk
+deadline do essay /by tomorrow
+event go party /at Thursday evening
+done 1
+list
+todo
+bye
