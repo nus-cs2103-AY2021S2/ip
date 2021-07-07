@@ -1,0 +1,6 @@
+task 1
+todo task 2
+deadline task 3 /by sunday
+list
+done 1
+list
