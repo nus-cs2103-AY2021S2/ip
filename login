@@ -1,2 +1,1 @@
-username: jx
-password: 12345
+key: 1qaz2wsx3edc4rfv
