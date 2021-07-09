@@ -9,6 +9,6 @@ jobs:
       - name: GitHub Project Automation+
         uses: alex-page/github-project-automation-plus@v0.3.0
         with:
-          project: ODECOLOG
+          project: iP
           column: To do
           repo-token: ${{ secrets.IP_TOKEN }}
