@@ -1,0 +1,11 @@
+list
+blah
+todo test 1
+todo test 2
+list
+done 2
+list
+deadline iPWeek2 /by 21/1 2359
+event someLecture /at tmr morning
+list
+bye

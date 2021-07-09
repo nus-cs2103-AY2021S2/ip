@@ -1,0 +1,3 @@
+mode: auto
+branchName: 'feature/issue-${issue.number}-${repository.name}'
+autoCloseIssue: true
