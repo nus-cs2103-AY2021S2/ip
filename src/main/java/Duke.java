@@ -1,10 +1,20 @@
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    protected static final String PATH = "data/tasks.txt";
+
+    protected Parser parser;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
+
+    /**
+     * Creates a new instance of Duke.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(PATH);
+        storage.checkFileExistence();
+        tasks = new TaskList(storage.loadTasks());
+        parser = new Parser(storage, tasks, ui);
     }
 }
