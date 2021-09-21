@@ -1,6 +1,8 @@
 # User Guide
+
 Henchman is your loyal Task Manager application built using Java 11.
 Henchman can help track all your tasks and their deadlines, so feel free to order him around. Go on to the **Features** section to test out the commands! 
+
 ---
 ## Features 
 Note: All commands are case insensitive.
