@@ -12,6 +12,6 @@ public class ResponePrinter {
      * The print function is used to print the respone message generated in the required format.
      */
     public void print() {
-        System.out.println(LINESEPARATOR + msg + LINESEPARATOR);
+        System.out.println(LINESEPARATOR + msg + "\n" + LINESEPARATOR);
     }
 }
