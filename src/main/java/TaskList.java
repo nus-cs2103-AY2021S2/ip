@@ -12,17 +12,23 @@ public class TaskList {
         this.tasks.add(new Task((description)));
     }
 
-    public String getTaskList() {
-        StringBuffer result = new StringBuffer();
-        for (int i = 1; i <= tasks.size(); i++) {
-            result.append(i);
-            result.append(". ");
-            result.append(tasks.get(i-1).toString());
-            if (i != tasks.size()) {
-                result.append("\n");
-            }
-        }
-        return result.toString();
+    public void completeTask(int i) {
+        tasks.get(i).markAsDone();
     }
+
+    public Task getTask(int i) {
+        return this.tasks.get(i);
+    }
+
+    public int getTotalTasks() {
+        return tasks.size();
+    }
+
+    @Override
+    public String toString(){
+        return Templates.taskListMsg(this.tasks);
+    }
+
+
 
 }
