@@ -1,23 +1,15 @@
-# Duke project template
+# User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Welcome to `DukeBot` user guide. 
 
-## Setting up in Intellij
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+DukeBot is a chat bot that can help you to organise your tasks and schedule.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Quick Start
+
+1. Ensure that you have Java `11` or above installed.
+2. Download the latest `duke.jar` from [here](https://github.com/Andrewzhang217/ip/releases/tag/v0.2)
+3. Copy the file to the folder you want to use as the home folder for your AddressBook.
+4. Start the jar file from a terminal using `java -jar duke.jar`. The GUI should appear in a few seconds.
+5. Type in a command in the command box to execute it. Type `help` to see all the commands available.
+

@@ -13,5 +13,16 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/text-duke.ui-test/ACTUAL.txt
+text-duke.ui-test/EXPECTED-UNIX.TXT
+*.class
+src/main/java/duke.data/duke.txt
+
+junit-jupiter-5.4.2.jar
+junit-jupiter-api-5.4.2.jar
+junit-jupiter-engine-5.4.2.jar
+junit-jupiter-params-5.4.2.jar
+junit-platform-commons-1.4.2.jar
+junit-platform-engine-1.4.2.jar
+opentest4j-1.1.1.jar
+*.txt
