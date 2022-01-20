@@ -40,6 +40,11 @@ public final class Templates {
         return "Nice! I've marked this task as done: \n  " + description;
     }
 
+    public static String deleteTaskMsg(String description, int totalTask) {
+        return String.format("Noted. I've removed this task: \n  %s\nNow you have %d tasks in the list.",
+                description, totalTask);
+    }
+
     public static String addTaskMsg(String description, int totalTask) {
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
                 description, totalTask);

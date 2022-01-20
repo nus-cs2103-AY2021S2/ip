@@ -23,6 +23,11 @@ public class TaskList {
         return tasks.size() - 1;
     }
 
+    public int deleteTask(int task) {
+        tasks.remove(task);
+        return tasks.size() - 1;
+    }
+
     public void completeTask(int i) {
         tasks.get(i).markAsDone();
     }

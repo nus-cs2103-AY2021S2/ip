@@ -58,6 +58,18 @@ public class Duke {
                             new ResponePrinter(Templates.completeTaskMsg(taskList.getTask(taskId).toString())).print();
                         }
                         break;
+                    case "delete":
+                        formatInputTxt = inputTxt.split(" ");
+                        taskId = Integer.parseInt(formatInputTxt[1]) - 1;
+                        if (taskId > taskList.getTotalTasks() || taskId < 0) {
+                            throw new DukeException(Templates.invalidTaskIdMsg);
+                        } else {
+                            Task task = taskList.getTask(taskId);
+                            int totalTask = taskList.deleteTask(taskId);
+                            new ResponePrinter(Templates.deleteTaskMsg(task.toString(), totalTask + 1)).print();
+
+                        }
+                        break;
                     default:
                         throw new DukeException(Templates.invalidCommandMsg);
                 }
