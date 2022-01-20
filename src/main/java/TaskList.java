@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     public boolean isDone (int i) {
-        return tasks.get(i).isDone;
+        return tasks.get(i).getIsDone();
     }
 
     public void completeTask(int i) {
