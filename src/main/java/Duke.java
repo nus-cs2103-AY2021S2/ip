@@ -16,10 +16,10 @@ public class Duke {
         // Print Welcome Message
         new ResponePrinter(Templates.greetingMsg).print();
 
-        while (status) {
+        while (status || sc.hasNext()) {
             inputTxt = sc.nextLine();
             try {
-                if (inputTxt.equals("") || inputTxt.equals("\n"))
+                if (inputTxt.isEmpty())
                     throw new DukeException(Templates.emptyInputMsg);
                 command = inputTxt.split(" ")[0].toLowerCase();
                 switch (command) {
@@ -31,20 +31,26 @@ public class Duke {
                         break;
                     case "todo":
                         description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
+                        if (description.isEmpty())
+                            throw new DukeException(Templates.emptyInputMsg);
                         taskId = taskList.addToDo(description);
                         new ResponePrinter(Templates.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1)).print();
                         break;
                     case "deadline":
-                        formatInputTxt = inputTxt.split("/");
+                        formatInputTxt = inputTxt.split(" /by ");
                         description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim();
-                        due = formatInputTxt[1].substring(formatInputTxt[1].indexOf(' ')).trim();
+                        due = formatInputTxt[1].trim();
+                        if (description.isEmpty() || due.isEmpty())
+                            throw new DukeException(Templates.invalidFormatMsg);
                         taskId = taskList.addDeadline(description, due);
                         new ResponePrinter(Templates.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1)).print();
                         break;
                     case "event":
-                        formatInputTxt = inputTxt.split("/");
+                        formatInputTxt = inputTxt.split(" /at ");
                         description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim();
-                        due = formatInputTxt[1].substring(formatInputTxt[1].indexOf(' ')).trim();
+                        due = formatInputTxt[1].trim();
+                        if (description.isEmpty() || due.isEmpty())
+                            throw new DukeException(Templates.invalidFormatMsg);
                         taskId = taskList.addEvent(description, due);
                         new ResponePrinter(Templates.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1)).print();
                         break;
@@ -79,7 +85,7 @@ public class Duke {
                 new ResponePrinter(Templates.invalidTaskInputMsg).print();
             } catch (IllegalArgumentException e) {
                 new ResponePrinter(Templates.invalidCommandMsg).print();
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException|StringIndexOutOfBoundsException e) {
                 new ResponePrinter(Templates.invalidFormatMsg).print();
             }
         }
