@@ -16,32 +16,33 @@ public class Duke {
         // Print Welcome Message
         new ResponePrinter(Templates.greetingMsg).print();
 
-        while (status || sc.hasNext()) {
+        while (status && sc.hasNext()) {
             inputTxt = sc.nextLine();
             try {
                 if (inputTxt.isEmpty())
                     throw new DukeException(Templates.emptyInputMsg);
-                command = inputTxt.split(" ")[0].toLowerCase();
-                switch (command) {
-                    case "bye":
+                command = inputTxt.split(" ")[0].toUpperCase();
+
+                Action action = Action.valueOf(command);
+                switch (action) {
+                    case EXIT:
                         status = false;
                         break;
-                    case "list":
+                    case LIST:
                         if (taskList.isEmpty()) {
                             new ResponePrinter(Templates.noTaskMsg).print();
                         } else {
                             new ResponePrinter(taskList.toString()).print();
                         }
-
                         break;
-                    case "todo":
+                    case TODO:
                         description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
                         if (description.isEmpty())
                             throw new DukeException(Templates.emptyInputMsg);
                         taskId = taskList.addToDo(description);
                         new ResponePrinter(Templates.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1)).print();
                         break;
-                    case "deadline":
+                    case DEADLINE:
                         formatInputTxt = inputTxt.split(" /by ");
                         description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim();
                         due = formatInputTxt[1].trim();
@@ -50,7 +51,7 @@ public class Duke {
                         taskId = taskList.addDeadline(description, due);
                         new ResponePrinter(Templates.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1)).print();
                         break;
-                    case "event":
+                    case EVENT:
                         formatInputTxt = inputTxt.split(" /at ");
                         description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim();
                         due = formatInputTxt[1].trim();
@@ -59,7 +60,7 @@ public class Duke {
                         taskId = taskList.addEvent(description, due);
                         new ResponePrinter(Templates.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1)).print();
                         break;
-                    case "done":
+                    case DONE:
                         formatInputTxt = inputTxt.split(" ");
                         taskId = Integer.parseInt(formatInputTxt[1]) - 1;
                         if (taskList.isDone(taskId)) {
@@ -72,7 +73,7 @@ public class Duke {
                             new ResponePrinter(Templates.completeTaskMsg(taskList.getTask(taskId).toString())).print();
                         }
                         break;
-                    case "delete":
+                    case DELETE:
                         formatInputTxt = inputTxt.split(" ");
                         taskId = Integer.parseInt(formatInputTxt[1]) - 1;
                         if (taskId > taskList.getTotalTasks() || taskId < 0) {
@@ -90,10 +91,12 @@ public class Duke {
                 new ResponePrinter(e.getMessage()).print();
             } catch (NumberFormatException e) {
                 new ResponePrinter(Templates.invalidTaskInputMsg).print();
-            } catch (IllegalArgumentException e) {
-                new ResponePrinter(Templates.invalidCommandMsg).print();
             } catch (ArrayIndexOutOfBoundsException|StringIndexOutOfBoundsException e) {
                 new ResponePrinter(Templates.invalidFormatMsg).print();
+            } catch (IllegalArgumentException e) {
+                new ResponePrinter(Templates.invalidTaskIdMsg).print();
+            } catch (IndexOutOfBoundsException e) {
+                new ResponePrinter(Templates.invalidTaskIdMsg).print();
             }
         }
 
