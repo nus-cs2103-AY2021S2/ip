@@ -1,7 +1,8 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         // Constant Declarations
         final Scanner sc = new Scanner(System.in);
 
@@ -15,16 +16,13 @@ public class Duke {
         // Print Welcome Message
         new ResponePrinter(Templates.greetingMsg).print();
 
-        while(status) {
+        while (status) {
             inputTxt = sc.nextLine();
-
-            if (inputTxt.equals("")) {
-                new ResponePrinter(Templates.emptyInputMsg).print();
-            } else {
-
-                  command = inputTxt.split(" ")[0];
-
-                switch(command) {
+            try {
+                if (inputTxt.equals("") || inputTxt.equals("\n"))
+                    throw new DukeException(Templates.emptyInputMsg);
+                command = inputTxt.split(" ")[0].toLowerCase();
+                switch (command) {
                     case "bye":
                         status = false;
                         break;
@@ -54,20 +52,27 @@ public class Duke {
                         formatInputTxt = inputTxt.split(" ");
                         taskId = Integer.parseInt(formatInputTxt[1]) - 1;
                         if (taskId > taskList.getTotalTasks() || taskId < 0) {
-                            new ResponePrinter(Templates.invalidDoneMsg).print();
+                            throw new DukeException(Templates.invalidTaskIdMsg);
                         } else {
                             taskList.completeTask(taskId);
                             new ResponePrinter(Templates.completeTaskMsg(taskList.getTask(taskId).toString())).print();
                         }
                         break;
                     default:
-                        new ResponePrinter(Templates.invalidCommandMsg).print();
-                        break;
+                        throw new DukeException(Templates.invalidCommandMsg);
                 }
+            } catch (DukeException e) {
+                new ResponePrinter(e.getMessage()).print();
+            } catch (NumberFormatException e) {
+                new ResponePrinter(Templates.invalidTaskInputMsg).print();
+            } catch (IllegalArgumentException e) {
+                new ResponePrinter(Templates.invalidCommandMsg).print();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                new ResponePrinter(Templates.invalidFormatMsg).print();
             }
         }
 
-        // Print Exiting Message
-        new ResponePrinter(Templates.exitMsg).print();
-    }
+            // Print Exiting Message
+            new ResponePrinter(Templates.exitMsg).print();
+        }
 }
