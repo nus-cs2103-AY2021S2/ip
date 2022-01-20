@@ -28,6 +28,10 @@ public class TaskList {
         return tasks.size() - 1;
     }
 
+    public boolean isDone (int i) {
+        return tasks.get(i).isDone;
+    }
+
     public void completeTask(int i) {
         tasks.get(i).markAsDone();
     }
@@ -39,6 +43,8 @@ public class TaskList {
     public int getTotalTasks() {
         return tasks.size();
     }
+
+    public boolean isEmpty() { return tasks.size() == 0; }
 
     @Override
     public String toString(){

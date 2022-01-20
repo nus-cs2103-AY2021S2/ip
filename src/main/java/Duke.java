@@ -27,7 +27,12 @@ public class Duke {
                         status = false;
                         break;
                     case "list":
-                        new ResponePrinter(taskList.toString()).print();
+                        if (taskList.isEmpty()) {
+                            new ResponePrinter(Templates.noTaskMsg).print();
+                        } else {
+                            new ResponePrinter(taskList.toString()).print();
+                        }
+
                         break;
                     case "todo":
                         description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
@@ -57,7 +62,10 @@ public class Duke {
                     case "done":
                         formatInputTxt = inputTxt.split(" ");
                         taskId = Integer.parseInt(formatInputTxt[1]) - 1;
-                        if (taskId > taskList.getTotalTasks() || taskId < 0) {
+                        if (taskList.isDone(taskId)) {
+                            new ResponePrinter(Templates.taskAlreadyDoneMsg).print();
+                        }
+                        else if (taskId > taskList.getTotalTasks() || taskId < 0) {
                             throw new DukeException(Templates.invalidTaskIdMsg);
                         } else {
                             taskList.completeTask(taskId);
@@ -73,7 +81,6 @@ public class Duke {
                             Task task = taskList.getTask(taskId);
                             int totalTask = taskList.deleteTask(taskId);
                             new ResponePrinter(Templates.deleteTaskMsg(task.toString(), totalTask + 1)).print();
-
                         }
                         break;
                     default:

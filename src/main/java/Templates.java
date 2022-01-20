@@ -25,6 +25,10 @@ public final class Templates {
 
     public static final String invalidFormatMsg = "☹ OOPS!!! I'm sorry, your formatting for your message isn't right!";
 
+    public static final String taskAlreadyDoneMsg = "☹ OOPS!!! Task already completed!";
+
+    public static final String noTaskMsg = "☹ OOPS!!! No task exists!";
+
     public static String taskListMsg(ArrayList<Task> tasks) {
         StringBuffer result = new StringBuffer("Here are the tasks in your list: \n");
         for (int i = 1; i <= tasks.size(); i++) {
