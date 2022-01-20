@@ -17,16 +17,12 @@ public final class Templates {
 
     public static final  String invalidDoneMsg = "Tasks not found! Please select an task in range.";
 
+    public static final String invalidCommandMsg = "Command not found!";
+
     public static String taskListMsg(ArrayList<Task> tasks) {
         StringBuffer result = new StringBuffer("Here are the tasks in your list: \n");
-        Task curr;
         for (int i = 1; i <= tasks.size(); i++) {
-            curr = tasks.get(i-1);
-            result.append(i);
-            result.append(". [");
-            result.append(curr.getStatusIcon());
-            result.append("] ");
-            result.append(curr);
+            result.append(String.format("%d.%s", i, tasks.get(i-1)));
             if (i != tasks.size()) {
                 result.append("\n");
             }
@@ -35,11 +31,12 @@ public final class Templates {
     }
 
     public static String completeTaskMsg(String description) {
-        return "Nice! I've marked this task as done: \n" + "[X] " + description;
+        return "Nice! I've marked this task as done: \n  " + description;
     }
 
-    public static String addTaskMsg(String description) {
-        return  "added: " + description;
+    public static String addTaskMsg(String description, int totalTask) {
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.",
+                description, totalTask);
     }
 
 }

@@ -7,9 +7,9 @@ public class Duke {
 
         // Variable Declarations
         TaskList taskList = new TaskList();
-        String inputTxt;
         String[] formatInputTxt;
-        String command;
+        String inputTxt, command, description, due;
+        int taskId;
         boolean status = true;
 
         // Print Welcome Message
@@ -21,8 +21,9 @@ public class Duke {
             if (inputTxt.equals("")) {
                 new ResponePrinter(Templates.emptyInputMsg).print();
             } else {
-                formatInputTxt = inputTxt.split(" ");
-                command = formatInputTxt[0];
+
+                  command = inputTxt.split(" ")[0];
+
                 switch(command) {
                     case "bye":
                         status = false;
@@ -30,8 +31,28 @@ public class Duke {
                     case "list":
                         new ResponePrinter(taskList.toString()).print();
                         break;
+                    case "todo":
+                        description = inputTxt.substring(inputTxt.indexOf(' ')).trim();
+                        taskId = taskList.addToDo(description);
+                        new ResponePrinter(Templates.addTaskMsg((taskList.getTask(taskId)).toString(), taskId + 1)).print();
+                        break;
+                    case "deadline":
+                        formatInputTxt = inputTxt.split("/");
+                        description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim();
+                        due = formatInputTxt[1].substring(formatInputTxt[1].indexOf(' ')).trim();
+                        taskId = taskList.addDeadline(description, due);
+                        new ResponePrinter(Templates.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1)).print();
+                        break;
+                    case "event":
+                        formatInputTxt = inputTxt.split("/");
+                        description = formatInputTxt[0].substring(formatInputTxt[0].indexOf(' ')).trim();
+                        due = formatInputTxt[1].substring(formatInputTxt[1].indexOf(' ')).trim();
+                        taskId = taskList.addEvent(description, due);
+                        new ResponePrinter(Templates.addTaskMsg(taskList.getTask(taskId).toString(), taskId + 1)).print();
+                        break;
                     case "done":
-                        int taskId = Integer.parseInt(formatInputTxt[1]) - 1;
+                        formatInputTxt = inputTxt.split(" ");
+                        taskId = Integer.parseInt(formatInputTxt[1]) - 1;
                         if (taskId > taskList.getTotalTasks() || taskId < 0) {
                             new ResponePrinter(Templates.invalidDoneMsg).print();
                         } else {
@@ -40,8 +61,7 @@ public class Duke {
                         }
                         break;
                     default:
-                        taskList.addTask(inputTxt);
-                        new ResponePrinter(Templates.addTaskMsg(inputTxt)).print();
+                        new ResponePrinter(Templates.invalidCommandMsg).print();
                         break;
                 }
             }
