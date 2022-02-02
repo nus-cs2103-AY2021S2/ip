@@ -4,7 +4,8 @@ ChaeLisa is a task management application made for people who like command line 
 ChaeLisa allows people to execute task rapidly when they are familiar with the syntax of command line.
 
 The application has designed theme for BLACKPINK's fans.
-![UI](Screenshot ChaeLisa.jpg)
+
+![UI](Screenshot%20ChaeLisa.jpg)
 
 ## Basic functions of the application:
   * Add todo, deadline, event to the system.
