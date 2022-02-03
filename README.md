@@ -1,23 +1,16 @@
-# Duke project template
+# Individual Software Engineering Project: ChaeLisa
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+ChaeLisa is a task management application made for people who like command line interface to keep track of their tasks everyday.
+ChaeLisa allows people to execute task rapidly when they are familiar with the syntax of command line.
 
-## Setting up in Intellij
+The application has designed theme for BLACKPINK's fans.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+![UI](Screenshot%20ChaeLisa.jpg)
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Basic functions of the application:
+  * Add todo, deadline, event to the system.
+  * List all tasks (todos/deadlines/events) in the system.
+  * List, find tasks based on given criteria. 
+  * Manage tasks (delete/mark as done).
+
+For more information about the app, please refers to this [User Guide](https://eriksen2411.github.io/ip/).

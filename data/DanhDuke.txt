@@ -1,0 +1,10 @@
+[T][X] do 2103 individual project
+[D][X] 3230 assignment (by: 2021-03-03 00:00)
+[T][X] cny relax
+[D][X] gf's birthday  (by: 2021-02-02 00:00)
+[T][  ] homework
+[D][  ] ip  (by: 2021-02-18 23:59)
+[D][  ] birthday  (by: 2021-02-18 00:00)
+[T][  ] 234
+[D][  ]  (by: 2022-12-02 00:00)
+[E][X] birthday  (at: 2021-02-18 00:00)
