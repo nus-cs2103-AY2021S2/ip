@@ -1,0 +1,8 @@
+E | 0 | read | 2019-01-01 | by
+D | 0 | read | 2020-01-01 | by
+E | 0 | read a book  | 2021-01-01 | by
+T | 1 | eat a phone
+T | 0 | eat a cow
+T | 0 | xyz
+T | 0 | eat a chicken
+D | 0 | xyz | 2021-02-15 | by
