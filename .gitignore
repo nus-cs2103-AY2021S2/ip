@@ -13,5 +13,12 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# old tests
 /text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/EXPECTED-UNIX.TXT
+
+# Duke save data
+savedata.txt
+
+# jar production artifacts
+src/main/java/META-INF/
