@@ -1,0 +1,27 @@
+todo borrow book
+todo
+deadline return book /by Sunday
+deadline
+deadline huh?
+deadline huh /at this time
+event project meeting /at Mon 2-4pm
+event
+event huh?
+event huh /by this time
+list
+done 2
+done
+done a
+done 10
+done -1
+delete 3
+delete 1
+delete
+delete a
+delete 100
+delete -10
+list
+done 1
+blah
+hellooo
+bye
