@@ -5,3 +5,82 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm a bot called Duke. Beep boop. 
+What do you want?
+
+    _______________________________________
+    
+    _______________________________________
+    
+    _______________________________________
+    Command not recognised.
+    _______________________________________
+    
+duke.DukeException: The description of a todo cannot be empty.
+    _______________________________________
+    Got it. I've added this task:
+    [T][ ] borrow book
+    Now you have 1 tasks in the list.
+    _______________________________________
+    
+    _______________________________________
+    1: [T][ ] borrow book
+    _______________________________________
+    
+duke.DukeException: The description of a deadline cannot be empty.
+duke.DukeException: Date is not in the correct format
+    _______________________________________
+    Got it. I've added this task:
+    [D][ ] return book (by: Dec 11 2020)
+    Now you have 2 tasks in the list.
+    _______________________________________
+    
+duke.DukeException: The description of a event cannot be empty.
+duke.DukeException: Date is not in the correct format
+    _______________________________________
+    Got it. I've added this task:
+    [E][ ] project meeting (at: 01 Jan 2021)
+    Now you have 3 tasks in the list.
+    _______________________________________
+    
+    _______________________________________
+    1: [T][ ] borrow book
+    2: [D][ ] return book (by: Dec 11 2020)
+    3: [E][ ] project meeting (at: 01 Jan 2021)
+    _______________________________________
+    
+duke.DukeException: The description of a done cannot be empty.
+    _______________________________________
+    Nice! I've marked this task as done:
+      [D][X] return book (by: Dec 11 2020)
+    _______________________________________
+    
+    _______________________________________
+    1: [T][ ] borrow book
+    2: [D][X] return book (by: Dec 11 2020)
+    3: [E][ ] project meeting (at: 01 Jan 2021)
+    _______________________________________
+    
+duke.DukeException: The description of a find cannot be empty.
+    _______________________________________
+    Here are the matching tasks in your list:
+      [T][ ] borrow book
+      [D][X] return book (by: Dec 11 2020)
+    _______________________________________
+    
+duke.DukeException: A number must be provided.
+    _______________________________________
+    Noted. I have removed this task:
+    [E][ ] project meeting (at: 01 Jan 2021)
+    Now you have 2 tasks in the list.
+    _______________________________________
+    
+    _______________________________________
+    1: [T][ ] borrow book
+    2: [D][X] return book (by: Dec 11 2020)
+    _______________________________________
+    
+    _______________________________________
+    BYE AND HAVE A GOOD DAY. Beep boop.
+    _______________________________________
+    
