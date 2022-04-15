@@ -1,7 +1,56 @@
 Hello from
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
+
+Duke: What can I do for you?
+
+Got it. I've added this task:
+[T][ ] 1.finish duke level 5
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+[T][ ] 2.learn chess
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+
+[T][ ] 1.finish duke level 5
+[T][ ] 2.learn chess
+Got it. I've added this task:
+[D][ ] 3.ma1101r homework (tommorow)
+Now you have 3 tasks in the list.
+Nice! I've marked this task as done:
+
+[T][X] 1.finish duke level 5
+Got it. I've added this task:
+[D][ ] 4.ma1100 tutorial (today)
+Now you have 4 tasks in the list.
+Here are the tasks in your list:
+
+[T][X] 1.finish duke level 5
+[T][ ] 2.learn chess
+[D][ ] 3.ma1101r homework (tommorow)
+[D][ ] 4.ma1100 tutorial (today)
+Got it. I've added this task:
+[E][ ] 5.dinner date (satuday 7pm - 9pm)
+Now you have 5 tasks in the list.
+Here are the tasks in your list:
+
+[T][X] 1.finish duke level 5
+[T][ ] 2.learn chess
+[D][ ] 3.ma1101r homework (tommorow)
+[D][ ] 4.ma1100 tutorial (today)
+[E][ ] 5.dinner date (satuday 7pm - 9pm)
+Nice! I've marked this task as done:
+
+[D][X] 3.ma1101r homework (tommorow)
+Here are the tasks in your list:
+
+[T][X] 1.finish duke level 5
+[T][ ] 2.learn chess
+[D][X] 3.ma1101r homework (tommorow)
+[D][ ] 4.ma1100 tutorial (today)
+[E][ ] 5.dinner date (satuday 7pm - 9pm)
+Duke: Bye. Hope to see you again soon!
 
