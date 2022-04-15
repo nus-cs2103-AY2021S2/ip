@@ -1,7 +1,33 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Kelbot
+What can I do for you?
+Okay! I have added:
+[T][ ] read book
+Now there are 1 tasks on the list
+Okay! I have added:
+[D][ ] return book (by: June 6th)
+Now there are 2 tasks on the list
+Well done! You have completed this task!
+[T][X] read book
+Okay! I have added:
+[E][ ] project meeting (at: Aug 6th 2-4pm)
+Now there are 3 tasks on the list
+Okay! I have added:
+[T][ ] join sports club
+Now there are 4 tasks on the list
+Well done! You have completed this task!
+[T][X] join sports club
+Okay! I have added:
+[T][ ] borrow book
+Now there are 5 tasks on the list
+1.[T][X] read book
+2.[D][ ] return book (by: June 6th)
+3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+4.[T][X] join sports club
+5.[T][ ] borrow book
+Okay! I have added:
+[D][ ] return book (by: Sunday)
+Now there are 6 tasks on the list
+Okay! I have added:
+[E][ ] project meeting (at: Mon 2-4pm)
+Now there are 7 tasks on the list
+Bye le Bye!
