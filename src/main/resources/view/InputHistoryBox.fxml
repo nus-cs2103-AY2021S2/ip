@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root prefWidth="286.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <Label fx:id="dialog" wrapText="true" >
+        <padding>
+            <Insets top="7.0" bottom="7.0" left="8.0" right="8.0" />
+        </padding>
+    </Label>
+</fx:root>
