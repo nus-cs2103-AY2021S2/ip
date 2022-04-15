@@ -1,0 +1,12 @@
+.anchor {
+    -fx-background-image:url('../images/Background.png');
+    -fx-background-size: 400 8000;
+    -fx-background-position: left top, left top;
+    -fx-background-repeat: stretch;
+    -fx-background-attachment: fixed;
+}
+
+.speech-bubble {
+    -fx-background-color: #cff7fa;
+    -fx-background-radius: 17px;
+}
