@@ -5,3 +5,29 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+How can I help?
+
+added: [T][NOTCOMPLETED] borrow book
+you have 1 tasks in your list
+
+added: [D][NOTCOMPLETED] return book  (by: June 6th)
+you have 2 tasks in your list
+
+added: [E][NOTCOMPLETED] project meeting  (at: Mon 2-4pm)
+you have 3 tasks in your list
+
+Here are your tasks!
+1.[T][NOTCOMPLETED] borrow book
+2.[D][NOTCOMPLETED] return book  (by: June 6th)
+3.[E][NOTCOMPLETED] project meeting  (at: Mon 2-4pm)
+
+Nice! I've marked this task as done:
+[D][COMPLETED] return book  (by: June 6th)
+
+Here are your tasks!
+1.[T][NOTCOMPLETED] borrow book
+2.[D][COMPLETED] return book  (by: June 6th)
+3.[E][NOTCOMPLETED] project meeting  (at: Mon 2-4pm)
+
+Bye. Hope to see you soon!
+
