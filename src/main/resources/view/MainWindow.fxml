@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
+        <Button fx:id="sendButton" alignment="CENTER" graphicTextGap="0.0" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" textAlignment="CENTER" textFill="#525252" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="0.6666666666666643" AnchorPane.leftAnchor="324.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="558.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <effect>
+            <Lighting diffuseConstant="1.16" specularConstant="0.13" specularExponent="0.0" surfaceScale="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant azimuth="0.0" elevation="90.0">
+                     <color>
+                        <Color red="0.6271929740905762" green="0.42054837942123413" blue="0.2729451060295105" opacity="0.9900000095367432" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" styleClass="background" stylesheets="@style.css" vvalue="1.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="384.0" styleClass="background" stylesheets="@style.css" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

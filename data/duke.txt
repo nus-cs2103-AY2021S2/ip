@@ -1,0 +1,5 @@
+T # 0 # buy dog
+E # 0 # see sloth  # 2021-02-07 1400-1600
+T # 1 # buy mannequin
+D # 1 # quiz  # 2021-02-07 1500
+T # 1 # buy sloth

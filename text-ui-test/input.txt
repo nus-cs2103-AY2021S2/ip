@@ -1,0 +1,11 @@
+todo get a goldendoodle 
+deadline get present for ethel /by 2021-01-26 1400
+list
+event ethel's birthday party /at 2021-01-26 2000-0000
+done 2
+list
+todo get a manicure 
+date 2021-01-26
+delete 2
+list
+bye
