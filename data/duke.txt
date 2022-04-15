@@ -1,0 +1,5 @@
+todo |   |   | buy eggs
+deadline | X | school | submit assignment | 21/02/2021 0600
+todo | X |   | buy coffee beans
+event |   |   | dinner party | Botanic Gardens
+deadline |   |   | reply karen's email | 21/02/2021 0000
