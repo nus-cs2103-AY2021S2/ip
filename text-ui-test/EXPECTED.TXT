@@ -1,7 +1,28 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+duchess: Hello, duchess here. What can i do for you?
+duchess: Great! I have added:
+[T] [ ] Workout
+U have 1 tasks in the list now :)
+duchess: When will this event be?
+duchess: Great! I have added:
+[E] [ ] Meeting (at: Monday 2-4pm)
+U have 2 tasks in the list now :)
+Here are the tasks in your list:
+1. [T] [ ] Workout
+2. [E] [ ] Meeting (at: Monday 2-4pm)
+duchess: When does this have to be done by?
+duchess: Great! I have added:
+[D] [ ] Homework (by: Saturday)
+U have 3 tasks in the list now :)
+duchess: Woohoo I've checked off this task:
+[T] [X] Workout
+Here are the tasks in your list:
+1. [T] [X] Workout
+2. [E] [ ] Meeting (at: Monday 2-4pm)
+3. [D] [ ] Homework (by: Saturday)
+duchess: As requested, i have removed this task:
+[E] [ ] Meeting (at: Monday 2-4pm)
+U have 2 tasks in the list now :)
+Here are the tasks in your list:
+1. [T] [X] Workout
+2. [D] [ ] Homework (by: Saturday)
+duchess: Bye, Have an awesome day!
