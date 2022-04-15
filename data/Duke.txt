@@ -1,0 +1,6 @@
+T | 1 | read book
+E | 0 | project meeting|    Feb 15 2021 1:00pm
+D | 0 | ip week 6|   Feb 19 2021
+T | 0 | return book
+T | 1 | eat
+D | 0 | assignment 1| Feb 17 2021 6:00pm
