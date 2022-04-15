@@ -1,0 +1,12 @@
+deadline CS2103 project/by Thursday
+todo read new book
+list
+done 2
+deadline return borrowed book /by Sunday 2359
+event go to school /Monday 10am
+list
+done 1
+list
+done 3
+list
+bye
