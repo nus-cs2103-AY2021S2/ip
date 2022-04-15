@@ -15,3 +15,11 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/data/dukeData.txt
+
+# .class files in java folder
+/src/main/java/*.class
+/src/main/java/docs
+
+/.vscode
+/data
