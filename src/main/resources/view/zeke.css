@@ -1,0 +1,35 @@
+.dialog-container {
+    -fx-background-image:url('../images/background.jpg');
+    -fx-background-position: center;
+}
+
+.message-box {
+    -fx-background-color: #ffc34d;
+    -fx-background-radius: 15px;
+}
+
+.dialog {
+    -fx-font-family: Georgia, serif;
+    -fx-font-size: 12px;
+}
+
+.send-button {
+    -fx-background-color: #ff8c66;
+    -fx-font-size:15px;
+    -fx-text-fill: #ffffff;
+    -fx-border-width: 2px;
+    -fx-border-color: #800000;
+}
+
+.send-button:hover {
+    -fx-background-color: #ff531a;
+}
+
+
+
+
+
+
+
+
+
