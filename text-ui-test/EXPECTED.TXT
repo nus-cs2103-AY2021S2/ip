@@ -1,7 +1,176 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+           ___  _           ,_,
+         |  _  | |   ___   / /
+         | | | | |  / _ \ =; ;=,
+         | |_| | |_| |_| \ | |
+          \___/\___/---;_| |_|
 
+ --*---*---*---*---*---*---*---*---*---*--
+  Hey there, Olaf here!
+  What will we be doing today?
+ --*---*---*---*---*---*---*---*---*---*--
+  Hmm sorry I don't understand :(
+
+  Please use the following to update me:
+
+    todo <task description>
+      \_ adds a task to be done
+    deadline <task description> /by <DD-MM-YYYY>
+      \_ adds a deadline
+    event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>
+      \_ adds an event
+    list
+      \_ lists all tasks, deadlines and events
+    done <task number>
+      \_ marks a task as done
+    delete <task number>
+      \_ deletes a task from the list
+    bye
+      \_ exists this application
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! Please add a task description as follows:
+
+  todo <task description>
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! Please add a deadline using
+  the 24-hour time format as follows:
+
+  deadline <task description> /by <DD-MM-YYYY HHMM>
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! Please add an event using
+  the 24-hour time format as follows:
+
+  event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! Please state the task number to mark as done:
+
+  done <task number>
+
+  Type 'list' to view all tasks
+  and their respective numbers
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! Please state the task number to delete:
+
+  delete <task number>
+
+  Type 'list' to view all tasks
+  and their respective numbers
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  You don't have any tasks yet :)
+  Type 'help' to see how you can add a task
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Okie added new task:
+
+  1. [T][ ] hi
+
+  Total 1 tasks, only 1 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! No such task found...
+  Please state the task number to mark as done:
+
+  done <task number>
+
+  Type 'list' to view all tasks
+  and their respective numbers
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! No such task found...
+  Please state the task number to delete:
+
+  done <task number>
+
+  Type 'list' to view all tasks
+  and their respective numbers
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Okie added new task:
+
+  2. [E][ ] test  (at:  idk...)
+
+  Total 2 tasks, only 2 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Okie added new task:
+
+  3. [D][ ] submit  (by:  ytd!)
+
+  Total 3 tasks, only 3 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Here are all the tasks in your list:
+
+  1. [T][ ] hi
+  2. [E][ ] test  (at:  idk...)
+  3. [D][ ] submit  (by:  ytd!)
+
+  Only 3 tasks left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Great job! You're done with:
+
+  2. [E][X] test  (at:  idk...)
+
+  Now 2 tasks are left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! No such task found...
+
+  There are only 3 tasks in your list.
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Okie added new task:
+
+  4. [T][ ] tutorial
+
+  Total 4 tasks, only 3 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! No such task found...
+
+  There are only 4 tasks in your list.
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Great job! You're done with:
+
+  3. [D][X] submit  (by:  ytd!)
+
+  Now 2 tasks are left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Here are all the tasks in your list:
+
+  1. [T][ ] hi
+  2. [E][X] test  (at:  idk...)
+  3. [D][X] submit  (by:  ytd!)
+  4. [T][ ] tutorial
+
+  Only 2 tasks left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Please use the following to update me:
+
+    todo <task description>
+      \_ adds a task to be done
+    deadline <task description> /by <DD-MM-YYYY>
+      \_ adds a deadline
+    event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>
+      \_ adds an event
+    list
+      \_ lists all tasks, deadlines and events
+    done <task number>
+      \_ marks a task as done
+    delete <task number>
+      \_ deletes a task from the list
+    bye
+      \_ exists this application
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Aww hope to see you soon, goodbye!
+ --*---*---*---*---*---*---*---*---*---*--
