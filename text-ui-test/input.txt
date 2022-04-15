@@ -1,0 +1,24 @@
+todo CS2103 IP Level-1
+todo CS2103 IP Level-2
+todo CS2103 IP Level-3
+todo CS2103 IP Level-4
+todo CS2103 IP A-TextUiTesting
+todo CS2103 IP Level-5
+todo CS2103 IP Level-6
+todo CS2103 IP A-Enums
+deadline CS2103 /by Thursday 23:59
+event cry /at home
+list
+done 1
+delete 1
+done 1
+delete 1
+done 1
+delete 1
+done 1
+delete 1
+done 1
+delete 1
+done 1
+delete 1
+list
