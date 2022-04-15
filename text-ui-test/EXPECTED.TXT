@@ -1,7 +1,63 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+----------------------------------------------------------------------------------------
+Hello! I'm Jay!
+What is your name!
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+Hi Gordon!
+What can I do for you?
+----------------------------------------------------------------------------------------
+Gordon: DukeException: OOPS!!! The description of a todo cannot be empty.
+Gordon: ----------------------------------------------------------------------------------------
+Got it. I've added this task:
+    [T][ ] borrow book
+Now you have 1 tasks in the list.
+----------------------------------------------------------------------------------------
+Gordon: DukeException: OOPS!!! The description of a deadline cannot be empty.
+Gordon: DukeException: OOPS!!! The date information of a deadline cannot be empty.
+Gordon: ----------------------------------------------------------------------------------------
+Got it. I've added this task:
+    [D][ ] return book (by: Sunday)
+Now you have 2 tasks in the list.
+----------------------------------------------------------------------------------------
+Gordon: DukeException: OOPS!!! The description of an event cannot be empty.
+Gordon: DukeException: OOPS!!! The date information of an event cannot be empty.
+Gordon: ----------------------------------------------------------------------------------------
+Got it. I've added this task:
+    [E][ ] project meeting (at: Mon 2-4pm)
+Now you have 3 tasks in the list.
+----------------------------------------------------------------------------------------
+Gordon: ----------------------------------------------------------------------------------------
+Here are the tasks in your list:
+1. [T][ ] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (at: Mon 2-4pm)
+----------------------------------------------------------------------------------------
+Gordon: ----------------------------------------------------------------------------------------
+Nice! I've marked this task as done:
+[T][-] borrow book
+----------------------------------------------------------------------------------------
+Gordon: ----------------------------------------------------------------------------------------
+Nice! I've marked this task as done:
+[E][-] project meeting (at: Mon 2-4pm)
+----------------------------------------------------------------------------------------
+Gordon: ----------------------------------------------------------------------------------------
+Here are the tasks in your list:
+1. [T][-] borrow book
+2. [D][ ] return book (by: Sunday)
+3. [E][-] project meeting (at: Mon 2-4pm)
+----------------------------------------------------------------------------------------
+Gordon: ----------------------------------------------------------------------------------------
+Noted. I've removed this task:
+    [E][-] project meeting (at: Mon 2-4pm)
+Now you have 2 tasks in the list.
+----------------------------------------------------------------------------------------
+Gordon: DukeException: Item number selected is out of range.
+Gordon: ----------------------------------------------------------------------------------------
+Here are the tasks in your list:
+1. [T][-] borrow book
+2. [D][ ] return book (by: Sunday)
+----------------------------------------------------------------------------------------
+Gordon: DukeException: OOPS!!! I'm sorry, but I don't know what that means :-(
+Gordon: ----------------------------------------------------------------------------------------
+Bye Gordon! Hope to see you again soon!
+----------------------------------------------------------------------------------------
