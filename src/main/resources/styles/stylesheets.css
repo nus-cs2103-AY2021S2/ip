@@ -1,0 +1,9 @@
+.dialog {
+    -fx-background-radius: 10px;
+    -fx-padding: 8 12 8 12;
+}
+
+.dialog-container {
+    -fx-background-image: url('../images/Background.png');
+    -fx-background-position: center;
+}
