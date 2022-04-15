@@ -1,7 +1,49 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+		Hello! I'm Duke
+		What can I do for you?
 
+		Okay I have added this task:
+			[T][] borrow book
+		Now you have 1 tasks in the list
+
+		Okay I have added this task:
+			[D][] return book (by: June 6th)
+		Now you have 2 tasks in the list
+
+		Here are the tasks in your list:
+		1. [T][] borrow book
+		2. [D][] return book (by: June 6th)
+
+		Sorry I do not understand that!
+		Okay I have added this task:
+			[E][] project meeting (by: Aug 10th 2-4 pm)
+		Now you have 3 tasks in the list
+
+		Okay I have added this task:
+			[T][] go for cca
+		Now you have 4 tasks in the list
+
+		Okay I have added this task:
+			[T][] borrow book
+		Now you have 5 tasks in the list
+
+		Here are the tasks in your list:
+		1. [T][] borrow book
+		2. [D][] return book (by: June 6th)
+		3. [E][] project meeting (by: Aug 10th 2-4 pm)
+		4. [T][] go for cca
+		5. [T][] borrow book
+
+		Okay! I've marked this task as done:
+		[T][X] go for cca
+
+		Okay! I've marked this task as done:
+		[T][X] borrow book
+
+		Here are the tasks in your list:
+		1. [T][X] borrow book
+		2. [D][] return book (by: June 6th)
+		3. [E][] project meeting (by: Aug 10th 2-4 pm)
+		4. [T][X] go for cca
+		5. [T][] borrow book
+
+		See you again soon!

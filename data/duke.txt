@@ -1,0 +1,3 @@
+D, 0, finish ME4102 project, end of the week
+E, 0, play football, Friday
+D, 0, ME3103 report, 2020-02-19
