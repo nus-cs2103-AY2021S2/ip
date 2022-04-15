@@ -1,0 +1,11 @@
+todo borrow book
+list
+event dance /at Kallang CC from 2-4pm
+deadline 2103 project /by Sunday
+deadline 2102 project / by Sunday
+done 2
+done
+delete 3
+list
+delete 3
+bye
