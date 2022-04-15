@@ -1,0 +1,6 @@
+[T][X] call mom
+[E][ ] party (at: 2021-02-24)
+[D][ ] swe hw (by: 2021-02-22)
+[T][ ] sleep
+[E][ ] buy shoes (at: 2021-02-21)
+[D][ ] watch movie (by: 2021-02-22)
