@@ -1,0 +1,43 @@
+.scrollPane .scroll-bar {
+    -fx-background-color: #ffffff;
+    -fx-border-color: derive(gray,80%);
+    -fx-border-width: 0px 0px 0px 1px;
+    -fx-font-size: 5px;
+}
+
+.scrollPane .scroll-bar:vertical .thumb {
+    -fx-background-color: #ffe27a;
+    -fx-background-radius: 50px;
+}
+
+.scrollPane .scroll-bar:vertical .track {
+    -fx-background-color: #ffffff;
+    /*-fx-border-color: derive(gray,80%);*/
+}
+
+.scrollPane .scroll-bar:vertical *.increment-button,
+.scrollPane .scroll-bar:vertical *.decrement-button {
+    /*-fx-background-color: #ffe27a;*/
+    -fx-background-color: transparent;
+    /*-fx-background-color: #ffffff;*/
+    /*-fx-padding: 8px;*/
+    -fx-background-radius: 5px;
+    -fx-border-color: transparent;
+}
+
+.scrollPane .scroll-bar:vertical *.increment-arrow,
+.scrollPane .scroll-bar:vertical *.decrement-arrow {
+    /*-fx-background-color: #727272;*/
+    -fx-background-color:transparent;
+    -fx-shadow: none;
+    /*-fx-padding: 5px;*/
+    /*-fx-border-color: derive(gray,80%);*/
+}
+
+#userName {
+    -fx-text-fill: #727272;
+}
+
+#tabbyName {
+    -fx-text-fill: #e38e3f;
+}
