@@ -1,0 +1,20 @@
+todo read book
+deadline return book /by 2/05/1997 1600
+snooze 2 /at 04/08/1997 1200
+event project meeting /at 04/08/1997 1200
+todo join sports club
+todo borrow book
+done 1
+done 4
+list
+deadline return book /by 04/08/1997 1200
+event project meeting /at 04/08/1997 1200
+list
+delete 3
+list
+blah
+todo
+deadline
+event
+deadline nice
+event not nice
