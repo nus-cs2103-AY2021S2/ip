@@ -1,0 +1,4 @@
+1 deadline UserGuide /by 17/12/2021
+1 event tP meeting /at 10-11pm
+0 event band prac /at studio
+0 todo get a job
