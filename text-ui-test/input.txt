@@ -1,0 +1,26 @@
+list
+todo borrow book
+deadline return book /by 2020-11-01T10:15:30
+event project meeting /at 2020-11-01T10:15:30 /to 2020-11-01T10:20:30
+done 2
+todo borrow other book
+list
+delete 1
+list
+
+dummyCommand
+todo
+deadline
+deadline a /by
+event
+event /at
+event /at /to
+event a /at
+event a /at 2020-11-01T10:15:30 /to
+event a /at /to 2020-11-01T10:15:30
+event a /at 2020-11-01T10:15:30 /to 2020-11-01T10:15:00
+done a
+delete
+delete a
+list
+bye
