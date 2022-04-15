@@ -1,0 +1,7 @@
+asdf
+event Gym with the boys /at 2pm
+deadline Finish 2103 iP /by Thu
+done 2
+todo Make CS2040 TA Slides
+list
+bye
