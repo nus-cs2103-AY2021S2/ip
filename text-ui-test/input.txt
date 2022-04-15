@@ -1,0 +1,14 @@
+todo read book
+EVENT dinner with Luna /at Friday 5pm
+deadline homework 2
+deadline homework 2 /by Sunday
+list
+done 1
+done 2
+done 3
+Done 4
+list
+delete 1
+list
+delete 3
+bye
