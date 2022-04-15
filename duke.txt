@@ -1,0 +1,4 @@
+E / true / attend wedding / coming sunday
+D / true / return book / 2021-01-22
+T / false / walk cat
+T / true / walk dog
